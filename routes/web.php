@@ -18,7 +18,7 @@ use App\myuser;
 use App\profile;
 
 Route::get('/', function(){
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/about-us',function(){

@@ -1,0 +1,29 @@
+.help{
+    direction: rtl;
+    padding: 0 20px;
+    line-height: 1.618;
+}
+ol{
+    list-style: inherit;
+    list-style-type: decimal !important;
+}
+ul{
+    padding: 0 15px;
+    list-style: inherit;
+
+}
+.help .title_list_help{
+    margin: 30px auto;
+    font-size: 16px;
+    font-weight: 800;
+}
+.help .title_list_help ol{
+    margin: 25px 15px;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 15px 30px;
+    box-shadow: 0 0 9px rgba(0,0,0,.075);
+}
+.help .title_list_help li{
+    padding: 6px 0;
+}
