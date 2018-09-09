@@ -22,7 +22,7 @@
 </div>
 <body>
 <div id="app">
-    <login-com ></login-com>
+    <login-com></login-com>
 </div>
 </body>
 <script src="{{asset('assets/cdn/axios.js')}}"></script>

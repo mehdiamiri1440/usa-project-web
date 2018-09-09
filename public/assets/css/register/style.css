@@ -519,7 +519,7 @@ button {
     #step1 .content_section , #step2 .content_section {
         padding: 60px 15px 15px;
     }
-    .main-form {
+    main {
         height: inherit;
     }
     .input-forms > div {
@@ -529,16 +529,19 @@ button {
     .input-forms  .radio_btn {
         float: right;
     }
-    .main-form {
+    main {
         width: 80%;
     }
 }
 @media screen and (max-width: 650px) {
-   .dots-step{
+     .dots-step{
        display: none;
-   }
+     }
     .content_section {
         padding: 0;
+    }
+    main {
+        width: 95%;
     }
 
 }

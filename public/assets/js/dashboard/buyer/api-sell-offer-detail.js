@@ -21,7 +21,15 @@ var vm = new Vue({
             })
             .then(function(response){
                 if(response.data.status == true){
-                    window.location = '/dashboard/my-buyAds';
+                    self.popUpMsg = 'جهت تسهیل در ادامه ی فرآیند خرید شما کارشناسان اینکوباک برای هماهنگی های اولیه ی معامله با شما تماس خواهند گرفت.';
+                    
+                    $('#myModal').modal('show');
+                    $('#myModal').on('shown.bs.modal',function(e){
+                            $('#close-btn').on('click',function(e){
+                                $('#myModal').modal('hide');
+                                window.location = '/dashboard/my-buyAds';
+                            });
+                    });                  
                 }
             })
             .catch(function(err){
@@ -31,12 +39,22 @@ var vm = new Vue({
             });
         },
         rejectBuy:function(id){
+            var self = this;
+            
             axios.post('/reject_sell_offer_by_id',{
                 'sell_offer_id' : id,
             })
             .then(function(response){
                 if(response.data.status == true){
-                    window.location = '/dashboard/my-buyAds';
+                    self.popUpMsg = 'شما این پیشنهاد را رد کرده اید.در صورت تغییر تصمیمتان با ما تماس بگیرید.';
+                    console.log(self.popUpMsg);
+                    $('#myModal').modal('show');
+                    $('#myModal').on('shown.bs.modal',function(e){
+                            $('#close-btn').on('click',function(e){
+                                $('#myModal').modal('hide');
+                                window.location = '/dashboard/my-buyAds';
+                            });
+                    });
                 }
             })
             .catch(function(err){

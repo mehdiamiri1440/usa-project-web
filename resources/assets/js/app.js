@@ -16,9 +16,12 @@ window.Vue = require('vue');
  */
 
 import loginCom from './components/login/Login.vue';
+import headerDash from './components/dashboard/header.vue';
+
 const app = new Vue({
     el: '#app',
     components:{
-        loginCom
+        loginCom,
+        headerDash
     }
 });

@@ -45,7 +45,7 @@
     "classnames": "^2.2.5",
     "form-data": "^2.3.1",
     "history": "^4.7.2",
-    "jquery": "^3.1.1",
+    "jquery": "^3.3.1",
     "jss": "^9.5.1",
     "jss-nested": "^6.0.1",
     "jss-preset-default": "^4.1.0",

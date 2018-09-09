@@ -93,7 +93,7 @@ input[type="text"],input[type="password"],input[type="email"]{
     position: absolute;
     overflow: hidden;
 }
-main{
+#main{
     top: 50%;
     right: 50%;
     z-index: 9999;
@@ -355,7 +355,7 @@ button {
 }
 
 @media screen and (max-width: 768px) {
-    main {
+      main {
         width: 80%;
     }
 
@@ -364,19 +364,21 @@ button {
     .content_section {
         padding: 15px 30px;
     }
-
+    main {
+        width: 60%;
+    }
 }
 @media screen and (max-width: 300px) {
     .content_section {
         padding: 15px;
     }
-    main {
+      main {
         width: 80%;
     }
 
 }
 @media screen and (max-width: 500px) {
-    main{
+      main {
         width: 90%;
     }
 }
