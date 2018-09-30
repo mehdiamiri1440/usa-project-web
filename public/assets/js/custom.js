@@ -3,7 +3,6 @@ function dropdown() {
 }
 function toggle_header() {
     var menu_but = $(".clouse_menu");
-    var menu_but_icon = $(".clouse_menu i");
     var profile = $(".profile");
     var header_menu = $(".header-menu span");
     var header_menu_a = $(".header-menu a");
@@ -13,12 +12,13 @@ function toggle_header() {
     var little_main_header = $(".main-header");
     var main = $("#main");
     var next_move = "shrink";
+     var menu_but_icon = $(".clouse_menu i");
     menu_but.click(function () {
+        menu_but_icon.toggleClass("fa-angle-left  fa-angle-right",200);
         if (next_move == "expand") {
             $(this).css({
                 width : "30%"
             });
-            menu_but_icon.switchClass("fa-angle-left"," fa-angle-right",200);
             profile.fadeIn();
             copy_right.css('display','block');
             logo.fadeIn();
@@ -34,7 +34,6 @@ function toggle_header() {
             $(this).css({
                 width : "100%"
             });
-            menu_but_icon.switchClass("fa-angle-right"," fa-angle-left",200);
             profile.css('display','none');
             header_menu.css('display','none');
             copy_right.css('display','none');

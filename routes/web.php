@@ -194,9 +194,12 @@ Route::group(['middleware' => [login::class]],function(){
     
     Route::group(['prefix' => 'dashboard'],function(){
        Route::get('/profile/basic',function(){
-            if(session('is_seller')){
+           if(session('is_seller')){
+               return view('layout.seller-dashboard');
+           }
+       /*     if(session('is_seller')){
                 return view('dashboard.seller.profile.profile_basic');
-            }
+            }*/
             else if(session('is_buyer')){
                 return view('dashboard.buyer.profile.profile_basic');
             }

@@ -1,5 +1,5 @@
 <template>
-    <main id=" main">
+    <main id="main">
         <div class="main-form">
             <div class="left-section col-sm-8">
                 <!--<a href="{{url('/')}}">-->
@@ -35,7 +35,7 @@
                         <button class="danger_border_but" type="button" @click="gotToRegister">ثبت نام در سامانه
                         </button>
                            <!--<button class="danger_border_but" type="button" @click="gotToRegister">ثبت نام در سامانه-->
-                    </button>
+                    <!--</button>-->
                     </div>
                 </div>
             </div>

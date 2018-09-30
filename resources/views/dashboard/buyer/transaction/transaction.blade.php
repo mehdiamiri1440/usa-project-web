@@ -242,7 +242,7 @@
                     @{{msg}}
             </div>
         </div>
-            
+
         </div>
         <!--end part 3-->
         <div id="step4" v-if="currentStep == 4">

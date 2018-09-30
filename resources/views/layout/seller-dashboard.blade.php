@@ -9,8 +9,8 @@
         <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
         <script src="{{asset('assets/js/jquery.easing.min.js')}}"></script>
         <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-        {{--<script src="{{asset('assets/cdn/vue.js')}}"></script>--}}
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/fontiran.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/imageuploadify.min.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap-theme.min.css')}}">
@@ -55,30 +55,42 @@
     <body>
     <div id="app">
 
-
         <header-dash
                 logo="{{asset('assets/img/logo-incobac.png')}}"
                 storage="{{asset('storage/')}}"
                 defultimg="{{asset('assets/img/user-defult.png')}}"
-                profileroute=""
-
-
+                transactroute="{{route('my-terminated-transaction-list')}}"
+                mytrans="{{route('my-transaction-list')}}"
+                selregpro="{{route('seller-register-product')}}"
+                byadreq="{{route('seller-buyAd-requests')}}"
+                profilebasic="{{route('profile_basic')}}"
+                logout="{{route('logout')}}"
+                routehome="{{url('/')}}"
+                loading="{{asset('assets/img/gif/prload.gif')}}"
+                guide="{{url('dashboard/guide')}}"
         ></header-dash>
+        @section('main_content')
+            <main id="main">
+            <router-view
+                    storage="{{asset('storage/')}}"
+                    defultimg="{{asset('assets/img/user-defult.png')}}"
+                    loading="{{asset('assets/img/gif/loading.gif')}}"
+            ></router-view>
+            </main>
+            @show
 
-        @yield('main_content')
-                <!--      end of scope  -->
+{{--        @yield('main_content')--}}
+
     </div>
 
     @yield('body_script_tags')
-{{--    <script src="{{asset('assets/js/custom.js')}}"></script>--}}
+    <script src="{{asset('assets/js/custom.js')}}"></script>
     <script src="{{asset('js/app.js')}}"></script>
     <script>
-
 
         function checkProfileConfirmation(event) {
             event.preventDefault();
             var e = event.currentTarget;
-
             var url = $(e).attr('href');
 
             axios.post('/user/profile_info', {

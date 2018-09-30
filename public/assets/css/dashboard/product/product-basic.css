@@ -157,7 +157,7 @@
     height: 3px;
     width: 100%;
 }
-.sub-header a.active {
+.sub-header a.active::after {
     content: " ";
     position: absolute;
     bottom: 0;

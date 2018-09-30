@@ -277,8 +277,8 @@ a {
 
 .dropdown dd,
 .dropdown dt {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 
 .dropdown ul {
@@ -355,7 +355,7 @@ button {
 }
 
 @media screen and (max-width: 768px) {
-      main {
+    main {
         width: 80%;
     }
 
@@ -372,13 +372,13 @@ button {
     .content_section {
         padding: 15px;
     }
-      main {
+    main {
         width: 80%;
     }
 
 }
 @media screen and (max-width: 500px) {
-      main {
+    main {
         width: 90%;
     }
 }
