@@ -2,8 +2,8 @@
   <div>
       <div class="header-menu">
           <ul class="list-unstyled">
-              <li class="list-item ">
-                  <router-link :to="{ name : 'profileBasic' }">
+              <li class="list-item" >
+                  <router-link  :to="{ name : 'profileBasic' }">
                       <span>ویرایش پروفایل</span>
                   </router-link>
               </li>

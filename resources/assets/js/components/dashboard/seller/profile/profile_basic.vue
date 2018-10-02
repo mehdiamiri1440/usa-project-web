@@ -682,6 +682,7 @@
                         url: 'profileBasic'
                     }
                 ]
+
             }
         },
         methods: {

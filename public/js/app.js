@@ -45096,7 +45096,7 @@ var render = function() {
       _c("ul", { staticClass: "list-unstyled" }, [
         _c(
           "li",
-          { staticClass: "list-item " },
+          { staticClass: "list-item" },
           [
             _c("router-link", { attrs: { to: { name: "profileBasic" } } }, [
               _c("span", [_vm._v("ویرایش پروفایل")])
@@ -48552,6 +48552,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 message: 'اطلاعات پایه',
                 url: 'profileBasic'
             }]
+
         };
     },
     methods: {
@@ -50299,8 +50300,8 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_my_sell_offers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_my_sell_offers_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_product_product_basic_vue__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_product_product_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_product_product_basic_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_buyer_transaction_my_transactions_vue__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_buyer_transaction_my_transactions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_dashboard_buyer_transaction_my_transactions_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_my_transactions_vue__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_my_transactions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_my_transactions_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_terminated_transactions_vue__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_terminated_transactions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_terminated_transactions_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_guide_vue__ = __webpack_require__(113);
@@ -50350,7 +50351,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
     }, {
         path: '/transaction-list',
         name: 'myTransactions',
-        component: __WEBPACK_IMPORTED_MODULE_8__components_dashboard_buyer_transaction_my_transactions_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_my_transactions_vue___default.a
     }, {
         path: '/my-terminated-transactions',
         name: 'myTerminatedTransactions',
@@ -55042,7 +55043,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-33a16fe0"
+var __vue_scopeId__ = "data-v-53aab79a"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -55053,7 +55054,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\dashboard\\buyer\\transaction\\my-transactions.vue"
+Component.options.__file = "resources\\assets\\js\\components\\dashboard\\seller\\transaction\\my-transactions.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -55062,9 +55063,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-33a16fe0", Component.options)
+    hotAPI.createRecord("data-v-53aab79a", Component.options)
   } else {
-    hotAPI.reload("data-v-33a16fe0", Component.options)
+    hotAPI.reload("data-v-53aab79a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -55085,13 +55086,13 @@ var content = __webpack_require__(105);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("0b71c8cd", content, false, {});
+var update = __webpack_require__(4)("7365f59d", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-33a16fe0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./my-transactions.vue", function() {
-     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-33a16fe0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./my-transactions.vue");
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-53aab79a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./my-transactions.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-53aab79a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./my-transactions.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -55109,7 +55110,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-post img[data-v-33a16fe0] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-33a16fe0] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-33a16fe0] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-33a16fe0] {\n    display: block;\n}\n.main-content[data-v-33a16fe0] {\n    padding: 60px 15px;\n}\n\n\n\n/*end main content style */\n/*custom cods*/\n.green-sbot[data-v-33a16fe0] {\n    display: block;\n    color: #28a745;\n    padding: 10px 0;\n    border-radius: 3px;\n    text-align: center;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    border: 2px solid;\n}\n.number[data-v-33a16fe0],.date[data-v-33a16fe0],.subject[data-v-33a16fe0]{\n    padding: 8px 15px;\n}\n#icon-pro svg[data-v-33a16fe0]{\n    height: 150px;\n}\n.main-content ul[data-v-33a16fe0] {\n    margin-top: 0;\n    text-align: center;\n}\n.list-group-item[data-v-33a16fe0]{\n    padding: 15px 0;\n}\n.main-content  .title-list[data-v-33a16fe0]  {\n    overflow: hidden;\n    padding: 15px 0;\n    background: #313942;\n    color: #fff;\n    text-align: center;\n}\n.main-content  p[data-v-33a16fe0] {\n    float: right;\n    text-align: center;\n}\n@media screen and (max-width: 992px) {\n.show-header button[data-v-33a16fe0] {\n        display: block;\n}\n.kind_user > div[data-v-33a16fe0], .kind_activity > div[data-v-33a16fe0] {\n        float: none;\n}\n.img-profile .submit[data-v-33a16fe0] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-33a16fe0] {\n        width: 40%;\n        padding: 12px 0;\n}\n}\n@media screen and (max-width: 555px) {\n.main-content ul p[data-v-33a16fe0] {\n        font-size: 11px;\n        padding: 0;\n}\n.main-content .subject [data-v-33a16fe0],.main-content p[data-v-33a16fe0] {\n        padding: 0;\n}\n.main-content[data-v-33a16fe0] {\n        padding: 60px 5px;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-33a16fe0] {\n        font-size: 10px;\n}\n}\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-post img[data-v-53aab79a] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-53aab79a] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-53aab79a] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-53aab79a] {\n    display: block;\n}\n.main-content[data-v-53aab79a] {\n    padding: 60px 15px;\n}\n\n\n\n/*end main content style */\n/*custom cods*/\n.green-sbot[data-v-53aab79a] {\n    display: block;\n    color: #28a745;\n    padding: 10px 0;\n    border-radius: 3px;\n    text-align: center;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    border: 2px solid;\n}\n.number[data-v-53aab79a],.date[data-v-53aab79a],.subject[data-v-53aab79a]{\n    padding: 8px 15px;\n}\n#icon-pro svg[data-v-53aab79a]{\n    height: 150px;\n}\n.main-content ul[data-v-53aab79a] {\n    margin-top: 0;\n    text-align: center;\n}\n.list-group-item[data-v-53aab79a]{\n    padding: 15px 0;\n}\n.main-content  .title-list[data-v-53aab79a]  {\n    overflow: hidden;\n    padding: 15px 0;\n    background: #313942;\n    color: #fff;\n    text-align: center;\n}\n.main-content  p[data-v-53aab79a] {\n    float: right;\n    text-align: center;\n}\n@media screen and (max-width: 992px) {\n.show-header button[data-v-53aab79a] {\n        display: block;\n}\n.kind_user > div[data-v-53aab79a], .kind_activity > div[data-v-53aab79a] {\n        float: none;\n}\n.img-profile .submit[data-v-53aab79a] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-53aab79a] {\n        width: 40%;\n        padding: 12px 0;\n}\n}\n@media screen and (max-width: 555px) {\n.main-content ul p[data-v-53aab79a] {\n        font-size: 11px;\n        padding: 0;\n}\n.main-content .subject [data-v-53aab79a],.main-content p[data-v-53aab79a] {\n        padding: 0;\n}\n.main-content[data-v-53aab79a] {\n        padding: 60px 5px;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-53aab79a] {\n        font-size: 10px;\n}\n}\n\n\n\n\n", ""]);
 
 // exports
 
@@ -55435,7 +55436,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-33a16fe0", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-53aab79a", module.exports)
   }
 }
 

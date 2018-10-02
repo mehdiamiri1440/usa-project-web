@@ -10,7 +10,7 @@ import profileContract from '../components/dashboard/seller/profile/profile_cont
 import buyAdRequests from '../components/dashboard/seller/request/buyAd-requests.vue'
 import mySellOffers from '../components/dashboard/seller/request/my-sell-offers.vue'
 import registerProduct from '../components/dashboard/seller/product/product-basic.vue'
-import myTransactions from '../components/dashboard/buyer/transaction/my-transactions.vue';
+import myTransactions from '../components/dashboard/seller/transaction/my-transactions.vue';
 import myTerminatedTransactions from '../components/dashboard/seller/transaction/my-terminated-transactions.vue';
 import guide from '../components/dashboard/seller/guide.vue';
 Vue.use(Router);
