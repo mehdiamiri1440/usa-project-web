@@ -21,6 +21,9 @@ export default new Router({
             path: '/',
             name: 'profileBasic',
             component: profileBasic,
+            params:{
+                active : 1
+            }
         }
         , {
             path: '/complementry',

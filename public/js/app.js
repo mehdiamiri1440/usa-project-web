@@ -45080,7 +45080,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['profilebasic', 'byadreq', 'selregpro', 'transactroute', 'mytrans', 'guide']
+    props: ['profilebasic', 'byadreq', 'selregpro', 'transactroute', 'mytrans', 'guide'],
+    data: function data() {
+        return {
+            active_el: 1
+        };
+    },
+
+    methods: {
+        activate: function activate(el) {
+            this.active_el = el;
+        }
+    }
 });
 
 /***/ }),
@@ -45096,7 +45107,15 @@ var render = function() {
       _c("ul", { staticClass: "list-unstyled" }, [
         _c(
           "li",
-          { staticClass: "list-item" },
+          {
+            staticClass: "list-item",
+            class: { active: _vm.active_el == 1 },
+            on: {
+              click: function($event) {
+                _vm.activate(1)
+              }
+            }
+          },
           [
             _c("router-link", { attrs: { to: { name: "profileBasic" } } }, [
               _c("span", [_vm._v("ویرایش پروفایل")])
@@ -45107,7 +45126,15 @@ var render = function() {
         _vm._v(" "),
         _c(
           "li",
-          { staticClass: "list-item " },
+          {
+            staticClass: "list-item ",
+            class: { active: _vm.active_el == 2 },
+            on: {
+              click: function($event) {
+                _vm.activate(2)
+              }
+            }
+          },
           [
             _c("router-link", { attrs: { to: { name: "buyAdRequests" } } }, [
               _c("span", [_vm._v("درخواست ها")])
@@ -45118,7 +45145,15 @@ var render = function() {
         _vm._v(" "),
         _c(
           "li",
-          { staticClass: "list-item " },
+          {
+            staticClass: "list-item ",
+            class: { active: _vm.active_el == 3 },
+            on: {
+              click: function($event) {
+                _vm.activate(3)
+              }
+            }
+          },
           [
             _c("router-link", { attrs: { to: { name: "registerProduct" } } }, [
               _c("span", [_vm._v("ثبت محصول ")])
@@ -45129,7 +45164,15 @@ var render = function() {
         _vm._v(" "),
         _c(
           "li",
-          { staticClass: "list-item " },
+          {
+            staticClass: "list-item ",
+            class: { active: _vm.active_el == 4 },
+            on: {
+              click: function($event) {
+                _vm.activate(4)
+              }
+            }
+          },
           [
             _c("router-link", { attrs: { to: { name: "myTransactions" } } }, [
               _c("span", [_vm._v("تراکنش های جاری")])
@@ -45140,7 +45183,15 @@ var render = function() {
         _vm._v(" "),
         _c(
           "li",
-          { staticClass: "list-item " },
+          {
+            staticClass: "list-item ",
+            class: { active: _vm.active_el == 5 },
+            on: {
+              click: function($event) {
+                _vm.activate(5)
+              }
+            }
+          },
           [
             _c(
               "router-link",
@@ -45153,7 +45204,15 @@ var render = function() {
         _vm._v(" "),
         _c(
           "li",
-          { staticClass: "list-item " },
+          {
+            staticClass: "list-item ",
+            class: { active: _vm.active_el == 6 },
+            on: {
+              click: function($event) {
+                _vm.activate(6)
+              }
+            }
+          },
           [
             _c("router-link", { attrs: { to: { name: "guide" } } }, [
               _c("span", [_vm._v("راهنما")])
@@ -50327,7 +50386,10 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
     routes: [{
         path: '/',
         name: 'profileBasic',
-        component: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue___default.a,
+        params: {
+            active: 1
+        }
     }, {
         path: '/complementry',
         name: 'compelementry',
