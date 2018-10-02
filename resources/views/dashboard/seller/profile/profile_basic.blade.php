@@ -30,15 +30,15 @@
 
 @section('main_content')
 
-   {{--     <profile-base
+        <profile-base
                 storage="{{asset('storage/')}}"
                 defultimg="{{asset('assets/img/user-defult.png')}}"
-                ></profile-base>--}}
+                ></profile-base>
         {{--<router-view--}}
                 {{--storage="{{asset('storage/')}}"--}}
                 {{--defultimg="{{asset('assets/img/user-defult.png')}}"--}}
                 {{--></router-view>--}}
-    </main>
+
 @endsection
 
 @section('body_script_tags')

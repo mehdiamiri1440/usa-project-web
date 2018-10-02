@@ -22,7 +22,7 @@ import headerDash from './components/dashboard/header.vue';
 import buyAdRequestDetail from './components/dashboard/seller/request/buyAd-requests-detail.vue';
 import productBasic from './components/dashboard/seller/product/product-basic.vue';
 import mySellOffers from './components/dashboard/seller/request/my-sell-offers.vue';
-
+import profileBasic from './components/dashboard/seller/profile/profile_basic.vue'
 
 import transitionSeller from './components/dashboard/buyer/transaction/transaction.vue';
 import router from './router'
@@ -81,7 +81,7 @@ const app = new Vue({
     el: '#app',
     router,
     components:{
-        // profile,
+        profileBasic,
         loginCom,
         headerDash,
         // buyAdRequest,

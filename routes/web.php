@@ -193,7 +193,7 @@ Route::group(['middleware' => [login::class]],function(){
 //	})->where('name', '[A-Za-z]+');
     
     Route::group(['prefix' => 'dashboard'],function(){
-       Route::get('/profile/basic',function(){
+       Route::get('/',function(){
            if(session('is_seller')){
                return view('layout.seller-dashboard');
            }

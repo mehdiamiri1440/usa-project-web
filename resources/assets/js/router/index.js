@@ -16,52 +16,50 @@ import guide from '../components/dashboard/seller/guide.vue';
 Vue.use(Router);
 
 export default new Router({
-    mode: 'abstract',
     routes: [
         {
-            path: '/dashboard/profile/basic',
+            path: '/',
             name: 'profileBasic',
             component: profileBasic,
         }
         , {
-            path: '/dashboard/profile/complementry',
+            path: '/complementry',
             name: 'compelementry',
             component: compelementry,
         },{
-            path: '/dashboard/profile/profile_contract',
+            path: '/profile_contract',
             name: 'profileContract',
             component: profileContract,
         },{
-            path: '/dashboard/buyAd-requests',
+            path: '/buyAd-requests',
             name: 'buyAdRequests',
             component: buyAdRequests,
         }
         , {
-            path: '/dashboard/my-sell-offers',
+            path: '/my-sell-offers',
             name: 'mySellOffers',
             component: mySellOffers,
         }
         , {
-            path: '/dashboard/register-product',
+            path: '/register-product',
             name: 'registerProduct',
             component: registerProduct,
         }
         , {
-            path: '/dashboard/transaction-list',
+            path: '/transaction-list',
             name: 'myTransactions',
             component: myTransactions,
         }
         , {
-            path: '/dashboard/my-terminated-transactions',
+            path: '/my-terminated-transactions',
             name: 'myTerminatedTransactions',
             component: myTerminatedTransactions,
         }
         , {
-            path: '/dashboard/guide',
+            path: '/guide',
             name: 'guide',
             component: guide,
         }
 
     ],
-
 })
