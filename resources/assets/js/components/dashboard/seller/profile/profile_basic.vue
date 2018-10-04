@@ -671,18 +671,17 @@
                 items: [
                     {
                         message: 'قرارداد',
-                        url: 'profileContract'
+                        url: 'profileContract',
                     },
                     {
                         message: ' اطلاعات تکمیلی',
-                        url: 'compelementry'
+                        url: 'compelementry',
                     },
                     {
                         message: 'اطلاعات پایه',
-                        url: 'profileBasic'
+                        url: 'profileBasic',
                     }
-                ]
-
+                ],
             }
         },
         methods: {
@@ -694,10 +693,7 @@
                 ;
             },
             RegisterBasicProfileInfo: function () {
-
-
                 eventBus.$emit('submitingEvent', true);
-
                 this.errors = '';
                 var self = this;
 
@@ -756,7 +752,7 @@
         },
         mounted() {
             this.init();
-
+            eventBus.$emit('subHeader', this.items);
             function show_image_preview(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
@@ -780,13 +776,13 @@
                     icon_profile.css('display', 'none');
                 }
             }
-            eventBus.$emit('subHeader', this.items);
+
             image_checked();
             $("#imgInp").change(function () {
                 show_image_preview(this);
             })
 
-        },
+        }
     }
 
 </script>

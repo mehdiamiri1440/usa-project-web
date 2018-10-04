@@ -12,6 +12,7 @@ import mySellOffers from '../components/dashboard/seller/request/my-sell-offers.
 import registerProduct from '../components/dashboard/seller/product/product-basic.vue'
 import myTransactions from '../components/dashboard/seller/transaction/my-transactions.vue';
 import myTerminatedTransactions from '../components/dashboard/seller/transaction/my-terminated-transactions.vue';
+import transactionDetail from '../components/dashboard/seller/transaction/transaction.vue';
 import guide from '../components/dashboard/seller/guide.vue';
 Vue.use(Router);
 
@@ -57,6 +58,11 @@ export default new Router({
             path: '/my-terminated-transactions',
             name: 'myTerminatedTransactions',
             component: myTerminatedTransactions,
+        }
+        ,{
+            path: '/transaction-detail/:id',
+            name: 'transactionDetail',
+            component: transactionDetail,
         }
         , {
             path: '/guide',

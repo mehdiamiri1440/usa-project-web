@@ -599,6 +599,20 @@
                 certificateFiles: [],
                 errors: '',
                 popUpMsg: '',
+                items: [
+                    {
+                        message: 'قرارداد',
+                        url: 'profileContract',
+                    },
+                    {
+                        message: ' اطلاعات تکمیلی',
+                        url: 'compelementry',
+                    },
+                    {
+                        message: 'اطلاعات پایه',
+                        url: 'profileBasic',
+                    }
+                ],
             }
         },
         methods: {
@@ -690,7 +704,7 @@
         },
         mounted() {
             this.init();
-            this.currentUser;
+            eventBus.$emit('subHeader', this.items);
             $('input[type="file"]').imageuploadify();
         },
     }

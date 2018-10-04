@@ -2,7 +2,7 @@
     /*start style main header*/
     #main {
         margin-right: 250px;
-        margin-top: 112px;
+        margin-top: 65px;
         background: #eff3f6;
     }
 
@@ -110,7 +110,16 @@
         width: 100%;
         display: inline-block;
     }
-
+    .font-big {
+        font-size: 23px;
+        position: relative;
+        top: 3px;
+    }
+    .name-header-profile {
+        position: relative;
+        top: 18px;
+        left: 10px;
+    }
     /*end style main header*/
 
     /*start style sub-header*/
@@ -146,6 +155,19 @@
     }
 
     .sub-header a:hover::after {
+        content: " ";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: #28a745;
+        height: 3px;
+        width: 100%;
+    }
+    .sub-header a.router-link-exact-active {
+        color: #313942;
+    }
+
+    .sub-header a.router-link-exact-active::after {
         content: " ";
         position: absolute;
         bottom: 0;
@@ -291,7 +313,7 @@
             </section>
         </section>
         <headerTop
-                @clicked="name = $event"
+
                 :photoLink="currentUser.profile.profile_photo"
                 :storage="storage"
                 :def="defultimg"

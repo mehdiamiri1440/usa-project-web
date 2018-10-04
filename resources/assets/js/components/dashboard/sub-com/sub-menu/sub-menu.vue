@@ -4,13 +4,12 @@
       <!--      <li class="list-item"><a href="#" onClick="checkProfile(event)">
                 قرارداد </a>
             </li>-->
-            <li class="list-item" v-for="item in items">
+            <li class="list-item" v-for="item in items" :class="item.active">
                 <router-link :to="{ name : item.url }">
                     {{ item.message }}
                 </router-link>
             </li>
         </ul>
-
 
     </div>
 </template>

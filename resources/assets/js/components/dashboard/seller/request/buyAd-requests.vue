@@ -1,3 +1,9 @@
+
+<style>
+    .main-content {
+        padding: 90px 35px;
+    }
+</style>
 <template>
     <div>
         <section class="main-content col-xs-12" v-if="buyAds.length != 0">

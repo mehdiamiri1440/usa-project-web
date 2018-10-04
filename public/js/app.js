@@ -174,6 +174,103 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 /* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "eventBus", function() { return eventBus; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dashboard_header_vue__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dashboard_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_dashboard_header_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_request_buyAd_requests_detail_vue__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_request_buyAd_requests_detail_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_request_buyAd_requests_detail_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_transaction_transaction_vue__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_transaction_transaction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_transaction_transaction_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__router__ = __webpack_require__(90);
+
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
+
+__webpack_require__(18);
+__webpack_require__(42);
+
+window.Vue = __webpack_require__(13);
+
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+
+
+
+
+
+
+
+
+
+
+
+Vue.component('step1', {
+    template: '#step1',
+    props: ['currentStep', 'step1']
+});
+Vue.component('step2', {
+    template: '#step2',
+    props: ['currentStep', 'step2']
+});
+Vue.component('step3', {
+    template: '#step3',
+    props: ['currentStep', 'step1', 'step2']
+});
+Vue.component('step4', {
+    template: '#step3',
+    props: ['currentStep', 'step1', 'step2']
+});
+Vue.component('step1S1', {
+    template: '#step1S1'
+});
+
+Vue.component('step1S2', {
+    template: '#step1S2'
+});
+
+Vue.component('step1S3', {
+    template: '#step1S3'
+});
+
+var eventBus = new Vue();
+
+var app = new Vue({
+    el: '#app',
+    router: __WEBPACK_IMPORTED_MODULE_7__router__["a" /* default */],
+    components: {
+        profileBasic: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue___default.a,
+        loginCom: __WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue___default.a,
+        headerDash: __WEBPACK_IMPORTED_MODULE_1__components_dashboard_header_vue___default.a,
+        // buyAdRequest,
+        buyAdRequestDetail: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_request_buyAd_requests_detail_vue___default.a,
+        productBasic: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue___default.a,
+        mySellOffers: __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue___default.a,
+        // myTransactions,
+        // myTerminatedTransactions,
+        transitionSeller: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_transaction_transaction_vue___default.a
+    }
+});
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -481,103 +578,6 @@ module.exports = {
   trim: trim
 };
 
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "eventBus", function() { return eventBus; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dashboard_header_vue__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dashboard_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_dashboard_header_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_request_buyAd_requests_detail_vue__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_request_buyAd_requests_detail_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_request_buyAd_requests_detail_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_transaction_transaction_vue__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_transaction_transaction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_transaction_transaction_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__router__ = __webpack_require__(88);
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-__webpack_require__(18);
-__webpack_require__(42);
-
-window.Vue = __webpack_require__(13);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-
-
-
-
-
-
-
-
-
-
-Vue.component('step1', {
-    template: '#step1',
-    props: ['currentStep', 'step1']
-});
-Vue.component('step2', {
-    template: '#step2',
-    props: ['currentStep', 'step2']
-});
-Vue.component('step3', {
-    template: '#step3',
-    props: ['currentStep', 'step1', 'step2']
-});
-Vue.component('step4', {
-    template: '#step3',
-    props: ['currentStep', 'step1', 'step2']
-});
-Vue.component('step1S1', {
-    template: '#step1S1'
-});
-
-Vue.component('step1S2', {
-    template: '#step1S2'
-});
-
-Vue.component('step1S3', {
-    template: '#step1S3'
-});
-
-var eventBus = new Vue();
-
-var app = new Vue({
-    el: '#app',
-    router: __WEBPACK_IMPORTED_MODULE_7__router__["a" /* default */],
-    components: {
-        profileBasic: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue___default.a,
-        loginCom: __WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue___default.a,
-        headerDash: __WEBPACK_IMPORTED_MODULE_1__components_dashboard_header_vue___default.a,
-        // buyAdRequest,
-        buyAdRequestDetail: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_request_buyAd_requests_detail_vue___default.a,
-        productBasic: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue___default.a,
-        mySellOffers: __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue___default.a,
-        // myTransactions,
-        // myTerminatedTransactions,
-        transitionSeller: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_transaction_transaction_vue___default.a
-    }
-});
 
 /***/ }),
 /* 3 */
@@ -923,7 +923,7 @@ module.exports = g;
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 var normalizeHeaderName = __webpack_require__(27);
 
 var DEFAULT_CONTENT_TYPE = {
@@ -1231,7 +1231,7 @@ process.umask = function() { return 0; };
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 var settle = __webpack_require__(28);
 var buildURL = __webpack_require__(30);
 var parseHeaders = __webpack_require__(31);
@@ -12447,13 +12447,13 @@ module.exports = Vue;
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(73)
+  __webpack_require__(75)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(75)
+var __vue_script__ = __webpack_require__(77)
 /* template */
-var __vue_template__ = __webpack_require__(76)
+var __vue_template__ = __webpack_require__(78)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -12498,19 +12498,19 @@ module.exports = Component.exports
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(77)
+  __webpack_require__(79)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(79)
+var __vue_script__ = __webpack_require__(81)
 /* template */
-var __vue_template__ = __webpack_require__(80)
+var __vue_template__ = __webpack_require__(82)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-5832c1ec"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -12549,13 +12549,13 @@ module.exports = Component.exports
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(81)
+  __webpack_require__(83)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(83)
+var __vue_script__ = __webpack_require__(85)
 /* template */
-var __vue_template__ = __webpack_require__(84)
+var __vue_template__ = __webpack_require__(86)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -12597,8 +12597,8 @@ module.exports = Component.exports
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(2);
-module.exports = __webpack_require__(118);
+__webpack_require__(1);
+module.exports = __webpack_require__(125);
 
 
 /***/ }),
@@ -42561,7 +42561,7 @@ module.exports = __webpack_require__(24);
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 var bind = __webpack_require__(7);
 var Axios = __webpack_require__(26);
 var defaults = __webpack_require__(6);
@@ -42648,7 +42648,7 @@ function isSlowBuffer (obj) {
 
 
 var defaults = __webpack_require__(6);
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 var InterceptorManager = __webpack_require__(35);
 var dispatchRequest = __webpack_require__(36);
 var isAbsoluteURL = __webpack_require__(38);
@@ -42740,7 +42740,7 @@ module.exports = Axios;
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -42820,7 +42820,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -42895,7 +42895,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 /**
  * Parse headers into an object
@@ -42939,7 +42939,7 @@ module.exports = function parseHeaders(headers) {
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -43057,7 +43057,7 @@ module.exports = btoa;
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -43117,7 +43117,7 @@ module.exports = (
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -43176,7 +43176,7 @@ module.exports = InterceptorManager;
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 var transformData = __webpack_require__(37);
 var isCancel = __webpack_require__(11);
 var defaults = __webpack_require__(6);
@@ -43262,7 +43262,7 @@ module.exports = function dispatchRequest(config) {
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 /**
  * Transform the data for a request or a response
@@ -44245,7 +44245,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(54)
 /* template */
-var __vue_template__ = __webpack_require__(69)
+var __vue_template__ = __webpack_require__(71)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -44318,7 +44318,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n/*start style main header*/\n#main {\n    margin-right: 250px;\n    margin-top: 112px;\n    background: #eff3f6;\n}\n#main.little-main {\n    margin-right: 80px;\n}\n.main-header {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n    border-bottom: 2px solid #e6e6e6;\n}\n.image-header-profile {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.profile-menu-header {\n    float: left;\n}\n.right-menu-header {\n\n    padding: 16px;\n}\n.right-menu-header, .content-header {\n    float: right;\n}\n.profile-menu-header {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header a {\n    position: relative;\n}\n.profile-menu-header i {\n    position: absolute;\n\n    left: -75px;\n\n    top: 18px;\n\n    font-size: 20px;\n}\n.content-header {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a, .profile-menu-header a {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a {\n    font-size: 30px;\n}\n.right-menu-header a:hover, .profile-menu-header a:hover {\n    color: #2e353e;\n}\n.name-header-profile {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li {\n    margin: 5px;\n}\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n}\n\n/*end style main header*/\n\n/*start style sub-header*/\n.sub-header {\n    position: absolute;\n    left: 0;\n    background: #eff3f6;\n    bottom: -48px;\n    right: 0;\n    text-align: center;\n}\n.sub-header ul {\n    text-align: center;\n}\n.sub-header a {\n    padding: 16px;\n\n    display: inline-block;\n\n    color: #808c9b;\n\n    font-weight: bold;\n\n    font-size: 14px;\n\n    position: relative;\n}\n.sub-header a:hover {\n    color: #313942;\n}\n.sub-header a:hover::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n\n/*end style sub-header*/\n", ""]);
+exports.push([module.i, "\n/*start style main header*/\n#main {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n#main.little-main {\n    margin-right: 80px;\n}\n.main-header {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n    border-bottom: 2px solid #e6e6e6;\n}\n.image-header-profile {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.profile-menu-header {\n    float: left;\n}\n.right-menu-header {\n\n    padding: 16px;\n}\n.right-menu-header, .content-header {\n    float: right;\n}\n.profile-menu-header {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header a {\n    position: relative;\n}\n.profile-menu-header i {\n    position: absolute;\n\n    left: -75px;\n\n    top: 18px;\n\n    font-size: 20px;\n}\n.content-header {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a, .profile-menu-header a {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a {\n    font-size: 30px;\n}\n.right-menu-header a:hover, .profile-menu-header a:hover {\n    color: #2e353e;\n}\n.name-header-profile {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li {\n    margin: 5px;\n}\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n}\n.font-big {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.name-header-profile {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n/*end style main header*/\n\n/*start style sub-header*/\n.sub-header {\n    position: absolute;\n    left: 0;\n    background: #eff3f6;\n    bottom: -48px;\n    right: 0;\n    text-align: center;\n}\n.sub-header ul {\n    text-align: center;\n}\n.sub-header a {\n    padding: 16px;\n\n    display: inline-block;\n\n    color: #808c9b;\n\n    font-weight: bold;\n\n    font-size: 14px;\n\n    position: relative;\n}\n.sub-header a:hover {\n    color: #313942;\n}\n.sub-header a:hover::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.sub-header a.router-link-exact-active {\n    color: #313942;\n}\n.sub-header a.router-link-exact-active::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n\n/*end style sub-header*/\n", ""]);
 
 // exports
 
@@ -44362,13 +44362,35 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sub_com_profile_info_vue__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sub_com_profile_info_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__sub_com_profile_info_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -44983,15 +45005,19 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(61)
+}
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(61)
+var __vue_script__ = __webpack_require__(63)
 /* template */
-var __vue_template__ = __webpack_require__(62)
+var __vue_template__ = __webpack_require__(64)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -45027,10 +45053,51 @@ module.exports = Component.exports
 
 /***/ }),
 /* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(62);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("4b3967dc", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4e6e8753\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header-menu-list.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4e6e8753\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header-menu-list.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.sub-header a.router-link-exact-active {\n    color: #313942;\n}\n.sub-header a.router-link-exact-active::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.header-menu a.router-link-exact-active::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu  a.router-link-exact-active {\n    color: #fff;\n    background: #637484;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 63 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(1);
 //
 //
 //
@@ -45078,6 +45145,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['profilebasic', 'byadreq', 'selregpro', 'transactroute', 'mytrans', 'guide'],
@@ -45091,11 +45193,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         activate: function activate(el) {
             this.active_el = el;
         }
+    },
+    created: function created() {
+        var _this = this;
+
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('active', function (event) {
+            _this.active_el = event;
+        });
     }
 });
 
 /***/ }),
-/* 62 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -45107,15 +45216,7 @@ var render = function() {
       _c("ul", { staticClass: "list-unstyled" }, [
         _c(
           "li",
-          {
-            staticClass: "list-item",
-            class: { active: _vm.active_el == 1 },
-            on: {
-              click: function($event) {
-                _vm.activate(1)
-              }
-            }
-          },
+          { staticClass: "list-item" },
           [
             _c("router-link", { attrs: { to: { name: "profileBasic" } } }, [
               _c("span", [_vm._v("ویرایش پروفایل")])
@@ -45126,15 +45227,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "li",
-          {
-            staticClass: "list-item ",
-            class: { active: _vm.active_el == 2 },
-            on: {
-              click: function($event) {
-                _vm.activate(2)
-              }
-            }
-          },
+          { staticClass: "list-item  " },
           [
             _c("router-link", { attrs: { to: { name: "buyAdRequests" } } }, [
               _c("span", [_vm._v("درخواست ها")])
@@ -45145,15 +45238,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "li",
-          {
-            staticClass: "list-item ",
-            class: { active: _vm.active_el == 3 },
-            on: {
-              click: function($event) {
-                _vm.activate(3)
-              }
-            }
-          },
+          { staticClass: "list-item  " },
           [
             _c("router-link", { attrs: { to: { name: "registerProduct" } } }, [
               _c("span", [_vm._v("ثبت محصول ")])
@@ -45164,15 +45249,20 @@ var render = function() {
         _vm._v(" "),
         _c(
           "li",
-          {
-            staticClass: "list-item ",
-            class: { active: _vm.active_el == 4 },
-            on: {
-              click: function($event) {
-                _vm.activate(4)
-              }
-            }
-          },
+          { staticClass: "list-item  " },
+          [
+            _c(
+              "router-link",
+              { attrs: { to: { name: "transactionDetail" } } },
+              [_c("span", [_vm._v("ثبت محصول ")])]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "list-item  " },
           [
             _c("router-link", { attrs: { to: { name: "myTransactions" } } }, [
               _c("span", [_vm._v("تراکنش های جاری")])
@@ -45183,15 +45273,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "li",
-          {
-            staticClass: "list-item ",
-            class: { active: _vm.active_el == 5 },
-            on: {
-              click: function($event) {
-                _vm.activate(5)
-              }
-            }
-          },
+          { staticClass: "list-item  " },
           [
             _c(
               "router-link",
@@ -45204,15 +45286,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "li",
-          {
-            staticClass: "list-item ",
-            class: { active: _vm.active_el == 6 },
-            on: {
-              click: function($event) {
-                _vm.activate(6)
-              }
-            }
-          },
+          { staticClass: "list-item  " },
           [
             _c("router-link", { attrs: { to: { name: "guide" } } }, [
               _c("span", [_vm._v("راهنما")])
@@ -45250,15 +45324,15 @@ if (false) {
 }
 
 /***/ }),
-/* 63 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(64)
+var __vue_script__ = __webpack_require__(66)
 /* template */
-var __vue_template__ = __webpack_require__(68)
+var __vue_template__ = __webpack_require__(70)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -45297,12 +45371,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 64 */
+/* 66 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue__);
 //
 //
@@ -45353,15 +45427,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 65 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(66)
+var __vue_script__ = __webpack_require__(68)
 /* template */
-var __vue_template__ = __webpack_require__(67)
+var __vue_template__ = __webpack_require__(69)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -45400,13 +45474,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 66 */
+/* 68 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(2);
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(1);
 //
 //
 //
@@ -45440,7 +45513,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 67 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -45454,7 +45527,7 @@ var render = function() {
       _vm._l(_vm.items, function(item) {
         return _c(
           "li",
-          { staticClass: "list-item" },
+          { staticClass: "list-item", class: item.active },
           [
             _c("router-link", { attrs: { to: { name: item.url } } }, [
               _vm._v(
@@ -45479,7 +45552,7 @@ if (false) {
 }
 
 /***/ }),
-/* 68 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -45533,8 +45606,6 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "right-menu-header" }, [
           _c("ul", { staticClass: "list-inline" }, [
-            _vm._m(2),
-            _vm._v(" "),
             _c("li", [
               _c("a", { attrs: { href: _vm.routeHome } }, [
                 _c("i", {
@@ -45570,16 +45641,6 @@ var staticRenderFns = [
       _vm._v(" | "),
       _c("span", [_vm._v(" بازارگاه آنلاین کشاورزی")])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fa fa-bars", attrs: { "aria-hidden": "true" } })
-      ])
-    ])
   }
 ]
 render._withStripped = true
@@ -45592,7 +45653,7 @@ if (false) {
 }
 
 /***/ }),
-/* 69 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -45797,11 +45858,6 @@ var render = function() {
           out: _vm.logout,
           routeHome: _vm.routehome,
           profilebasic: _vm.profilebasic
-        },
-        on: {
-          clicked: function($event) {
-            _vm.name = $event
-          }
         }
       })
     ],
@@ -45893,15 +45949,15 @@ if (false) {
 }
 
 /***/ }),
-/* 70 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(71)
+var __vue_script__ = __webpack_require__(73)
 /* template */
-var __vue_template__ = __webpack_require__(72)
+var __vue_template__ = __webpack_require__(74)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -45940,7 +45996,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 71 */
+/* 73 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46170,7 +46226,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 72 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46241,13 +46297,13 @@ if (false) {
 }
 
 /***/ }),
-/* 73 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(74);
+var content = __webpack_require__(76);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -46267,7 +46323,7 @@ if(false) {
 }
 
 /***/ }),
-/* 74 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -46281,12 +46337,12 @@ exports.push([module.i, "\n.image_company[data-v-4579f065] {\n    margin: 15px a
 
 
 /***/ }),
-/* 75 */
+/* 77 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(1);
 //
 //
 //
@@ -46851,7 +46907,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 76 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -47422,23 +47478,23 @@ if (false) {
 }
 
 /***/ }),
-/* 77 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(78);
+var content = __webpack_require__(80);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("8877914c", content, false, {});
+var update = __webpack_require__(4)("66b5dcbd", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5832c1ec\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./my-sell-offers.vue", function() {
-     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5832c1ec\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./my-sell-offers.vue");
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5832c1ec\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./my-sell-offers.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5832c1ec\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./my-sell-offers.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -47448,7 +47504,7 @@ if(false) {
 }
 
 /***/ }),
-/* 78 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -47456,17 +47512,18 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n/*start main content style */\n.main-content .list-group-item > div {\n    float: right;\n}\n.image-content-post img {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i {\n    display: block;\n}\n.main-content {\n    padding: 60px 100px;\n}\n.kind_user > div, .kind_activity > div {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input, .kind_activity input {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i, .kind_activity input:checked + i {\n    color: #28a745;\n    border: none;\n    padding: 4px;\n}\n.kind_user i, .kind_activity i {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border-radius: 50%;\n    padding: 2px;\n    font-size: 14px;\n    border: 2px solid;\n}\n.list-title, .needs {\n    float: right;\n    margin: 10px 30px;\n    font-weight: bold;\n}\n.main-content li {\n    position: relative;\n    overflow: hidden;\n}\n.list-time, .detail-success, .detail-error, .detail-stand {\n    float: left;\n}\n.detail-success {\n    padding: 10px 30px;\n    width: 100%;\n    background: #28a745;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.detail-stand {\n    padding: 10px 30px;\n    width: 100%;\n    background: #7c7c7c;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.detail-error {\n    padding: 10px 30px;\n    width: 100%;\n    background: #e41c38;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.list-time {\n    margin: 11px 15px;\n}\n@media screen and (max-width: 992px) {\n.show-header button {\n        display: block;\n}\n.kind_user > div, .kind_activity > div {\n        float: none;\n}\n.img-profile .submit {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label {\n        width: 40%;\n        padding: 12px 0;\n}\n}\n@media screen and (max-width: 768px) {\n.main-content {\n        padding: 60px 15px;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a {\n        font-size: 10px;\n}\n}\n", ""]);
+exports.push([module.i, "\n/*start main content style */\n.main-content .list-group-item > div[data-v-5832c1ec] {\n    float: right;\n}\n.image-content-post img[data-v-5832c1ec] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-5832c1ec] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-5832c1ec] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-5832c1ec] {\n    display: block;\n}\n.list-title[data-v-5832c1ec], .needs[data-v-5832c1ec] {\n    float: right;\n    margin: 10px 30px;\n    font-weight: bold;\n}\n.main-content li[data-v-5832c1ec] {\n    position: relative;\n    overflow: hidden;\n}\n.list-time[data-v-5832c1ec], .detail-success[data-v-5832c1ec], .detail-error[data-v-5832c1ec], .detail-stand[data-v-5832c1ec] {\n    float: left;\n}\n.detail-success[data-v-5832c1ec] {\n    padding: 10px 30px;\n    width: 100%;\n    background: #28a745;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.detail-stand[data-v-5832c1ec] {\n    padding: 10px 30px;\n    width: 100%;\n    background: #7c7c7c;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.detail-error[data-v-5832c1ec] {\n    padding: 10px 30px;\n    width: 100%;\n    background: #e41c38;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.main-content .list-group-item .status[data-v-5832c1ec] {\n    padding: 0;\n}\n.main-content[data-v-5832c1ec] {\n    padding: 90px 35px;\n}\n.list-time[data-v-5832c1ec] {\n    margin: 11px 15px;\n    text-align: center;\n    width:100%;\n}\n@media screen and (max-width: 992px) {\n.show-header button[data-v-5832c1ec] {\n        display: block;\n}\n.kind_user > div[data-v-5832c1ec], .kind_activity > div[data-v-5832c1ec] {\n        float: none;\n}\n.img-profile .submit[data-v-5832c1ec] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-5832c1ec] {\n        width: 40%;\n        padding: 12px 0;\n}\n}\n@media screen and (max-width: 768px) {\n.main-content[data-v-5832c1ec] {\n        padding: 60px 15px;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-5832c1ec] {\n        font-size: 10px;\n}\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 79 */
+/* 81 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(1);
 //
 //
 //
@@ -47664,44 +47721,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['loading'],
@@ -47713,7 +47733,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             sellOffers: '',
             popUpMsg: '',
-            load: false
+            load: false,
+            items: [{
+                message: 'پیشنهادات من',
+                url: 'mySellOffers'
+            }, {
+                message: 'درخواست های جدید',
+                url: 'buyAdRequests'
+            }]
         };
     },
     methods: {
@@ -47730,11 +47757,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.init();
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
     }
 });
 
 /***/ }),
-/* 80 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -47894,13 +47922,13 @@ if (false) {
 }
 
 /***/ }),
-/* 81 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(82);
+var content = __webpack_require__(84);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -47920,7 +47948,7 @@ if(false) {
 }
 
 /***/ }),
-/* 82 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -47934,12 +47962,12 @@ exports.push([module.i, "\n\n/*start style main header*/\n#main[data-v-aa533232]
 
 
 /***/ }),
-/* 83 */
+/* 85 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(1);
 //
 //
 //
@@ -48611,7 +48639,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 message: 'اطلاعات پایه',
                 url: 'profileBasic'
             }]
-
         };
     },
     methods: {
@@ -48624,9 +48651,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         RegisterBasicProfileInfo: function RegisterBasicProfileInfo() {
-
             __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', true);
-
             this.errors = '';
             var self = this;
 
@@ -48681,7 +48706,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.init();
-
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
         function show_image_preview(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -48704,7 +48729,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 icon_profile.css('display', 'none');
             }
         }
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+
         image_checked();
         $("#imgInp").change(function () {
             show_image_preview(this);
@@ -48713,7 +48738,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 84 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49149,15 +49174,15 @@ if (false) {
 }
 
 /***/ }),
-/* 85 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(86)
+var __vue_script__ = __webpack_require__(88)
 /* template */
-var __vue_template__ = __webpack_require__(87)
+var __vue_template__ = __webpack_require__(89)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49196,7 +49221,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 86 */
+/* 88 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49542,7 +49567,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 87 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50340,37 +50365,40 @@ if (false) {
 }
 
 /***/ }),
-/* 88 */
+/* 90 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(91);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_profile_profile_complete_vue__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_profile_profile_complete_vue__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_profile_profile_complete_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_profile_profile_complete_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_contract_vue__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_contract_vue__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_contract_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_contract_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_buyAd_requests_vue__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_buyAd_requests_vue__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_buyAd_requests_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_buyAd_requests_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_my_sell_offers_vue__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_my_sell_offers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_my_sell_offers_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_product_product_basic_vue__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_product_product_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_product_product_basic_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_my_transactions_vue__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_my_transactions_vue__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_my_transactions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_my_transactions_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_terminated_transactions_vue__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_terminated_transactions_vue__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_terminated_transactions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_terminated_transactions_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_guide_vue__ = __webpack_require__(113);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_guide_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_guide_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_transaction_vue__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_transaction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_transaction_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_guide_vue__ = __webpack_require__(120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_guide_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_guide_vue__);
 
 
 
 // components
 
 // profile components
+
 
 
 
@@ -50419,14 +50447,18 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         name: 'myTerminatedTransactions',
         component: __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_terminated_transactions_vue___default.a
     }, {
+        path: '/transaction-detail/:id',
+        name: 'transactionDetail',
+        component: __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_transaction_vue___default.a
+    }, {
         path: '/guide',
         name: 'guide',
-        component: __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_guide_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_guide_vue___default.a
     }]
 }));
 
 /***/ }),
-/* 89 */
+/* 91 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -53056,19 +53088,19 @@ if (inBrowser && window.Vue) {
 
 
 /***/ }),
-/* 90 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(91)
+  __webpack_require__(93)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(93)
+var __vue_script__ = __webpack_require__(95)
 /* template */
-var __vue_template__ = __webpack_require__(94)
+var __vue_template__ = __webpack_require__(96)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -53107,13 +53139,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 91 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(92);
+var content = __webpack_require__(94);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -53133,7 +53165,7 @@ if(false) {
 }
 
 /***/ }),
-/* 92 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -53147,12 +53179,12 @@ exports.push([module.i, "\n\n\n/*start style main header*/\n#main[data-v-0c89989
 
 
 /***/ }),
-/* 93 */
+/* 95 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(1);
 //
 //
 //
@@ -53747,7 +53779,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             relatedFiles: [],
             certificateFiles: [],
             errors: '',
-            popUpMsg: ''
+            popUpMsg: '',
+            items: [{
+                message: 'قرارداد',
+                url: 'profileContract'
+            }, {
+                message: ' اطلاعات تکمیلی',
+                url: 'compelementry'
+            }, {
+                message: 'اطلاعات پایه',
+                url: 'profileBasic'
+            }]
         };
     },
     methods: {
@@ -53838,7 +53880,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.init();
-        this.currentUser;
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
         $('input[type="file"]').imageuploadify();
     }
 });
@@ -53848,7 +53890,7 @@ function call_api(route, data, call_back) {
 }
 
 /***/ }),
-/* 94 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -54009,19 +54051,19 @@ if (false) {
 }
 
 /***/ }),
-/* 95 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(96)
+  __webpack_require__(98)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(98)
+var __vue_script__ = __webpack_require__(100)
 /* template */
-var __vue_template__ = __webpack_require__(99)
+var __vue_template__ = __webpack_require__(101)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -54060,13 +54102,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 96 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(97);
+var content = __webpack_require__(99);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -54086,7 +54128,7 @@ if(false) {
 }
 
 /***/ }),
-/* 97 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -54100,12 +54142,99 @@ exports.push([module.i, "\n.col-xs-1[data-v-5d38382e],\n.col-xs-2[data-v-5d38382
 
 
 /***/ }),
-/* 98 */
+/* 100 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(1);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -54668,7 +54797,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             errors: '',
             popUpMsg: '',
             submiting: false,
-            contractConfirmed: false
+            contractConfirmed: false, items: [{
+                message: 'قرارداد',
+                url: 'profileContract'
+            }, {
+                message: ' اطلاعات تکمیلی',
+                url: 'compelementry'
+            }, {
+                message: 'اطلاعات پایه',
+                url: 'profileBasic'
+            }]
         };
     },
 
@@ -54715,11 +54853,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.init();
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
     }
 });
 
 /***/ }),
-/* 99 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -54742,7 +54881,6 @@ var render = function() {
                     attrs: { href: "#" },
                     on: {
                       click: function($event) {
-                        $event.preventDefault()
                         _vm.goToNextPage()
                       }
                     }
@@ -54757,7 +54895,6 @@ var render = function() {
                     attrs: { href: "#" },
                     on: {
                       click: function($event) {
-                        $event.preventDefault()
                         _vm.goToPrePage()
                       }
                     }
@@ -54789,21 +54926,603 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("h2", [_vm._v("عنوان قرارداد")]),
+          _c("h2", [_vm._v("قرارداد همکاری در فروش")]),
           _vm._v(" "),
           _vm.pageStep == 1
             ? _c("p", { attrs: { id: "step1S1" } }, [
-                _vm._v(
-                  "\n                    شرح: این مبلغ صرفا جهت انجام به موقع آماده سازی محصولات از فروشنده دریافت شده و پس از پایان فرایند\n                    خرید و تایید نهایی خریدار به فروشنده پرداخت خواهد شد. شرح: این مبلغ صرفا جهت انجام به موقع آماده\n                    سازی محصولات از فروشنده دریافت شده و پس از پایان فرایند خرید و تایید نهایی خرasdsafsdfdsvdsvsdvdاهد شد. شرح: این مبلغ صرفا جهت انجام به\n                    موقع آماده سازی محصولات از فروشنده دریافت شده و پس از پایان فرایند خرید و تایید نهایی خریدار به\n                    فروشنده پرداخت خواهد شد.\n                "
-                )
+                _vm._m(0),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "1-1 طرف اول: شرکت سهامی خاص فناوران توسعه تجارت ارم  به شماره ثبت 49223  به آدرس شیراز-میدان ارم- ساختمان مدیریت دانشگاه شیراز-طبقه نهم و کدپستی 7194684334 و شماره تماس 02171053525 که از این پس اینکوباک نامیده می شود."
+                  )
+                ]),
+                _c("br"),
+                _vm._v(" "),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(1),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "2-1  تنظیم همکاری و روابط قراردادی طرفین در خصوص همکاری اینکوباک با فروشنده جهت فروش کالا و محصولات خود از طریق ارائه این محصولات در وبسایت ایجاد شده توسط اینکوباک به نشانی incobac.com .بدیهی است با توجه به اینکه مالکیت محصولات ارائه شده در سایت متعلق به اینکوباک نبوده و اینکوباک صرفاً ارائه دهنده بستر اینترنتی جهت فروش محصولات فوق می باشد لذا مسئولیت کلیه اوصاف محصول اعم از نوع، بسته بندی، قیمت و هرگونه اطلاعات ذکر شده در رابطه با محصول بر عهده فروشنده است."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "2-2 اینکوباک بر اساس اطلاعات ذکر شده در سایت اقدام به صدور فاکتور برای طرفین می نماید که این فاکتور در اختیار طرفین قرار می گیرد و مبنای رسیدگی به کلیه اختلافات حاصله  قرارداد حاضر و فاکتور مذکور می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "2-3  با توجه به شرایط خاص هر معامله، هزینه های مربوط به حمل و نقل و بیمه کالاهای مورد معامله ممکن است بر عهده خریدار یا فروشنده قرار گیرد که این امر در قرارداد حاضر قید و مورد تایید طرف متعهد قرار می گیرد در هر صورت اینکوباک نسبت به هزینه های فوق الذکر از خود سلب مسئولیت می‌نماید."
+                  )
+                ]),
+                _c("br"),
+                _c("br")
               ])
             : _vm._e(),
           _vm._v(" "),
           _vm.pageStep == 2
             ? _c("p", { attrs: { id: "step1S2" } }, [
-                _vm._v(
-                  "\n                    شرح: این مبلغ صرفا جهت انجام به موقع آماده سازی محصولات از فروشنده دریافت شده و پس از پایان فرایند\n                    خرید و تایید نهایی خریدار به فروشنده پرداخت خواهد شد. شرح: این مبلغ صرفا جهت انجام به موقع آماده\n                    سازی محصولات از فروشنده دریافت شده و پس از پایان فرایند خرید و تایید نهایی خریدار به فروشنده پرداخت\n                    خواهد شد. شرح: این مبلغ صرفا جهت انجام به موقع آماده سازی محصولات از فروشنده دریافت شده و پس از\n                    پایان فرایند خرید و تایید نهایی خریدار به فروشنده پرداخت خواهد شد. شرح: این مبلغ صرفا جهت انجام به\n                    موقع آماده سازی محصولات از فروشنده دریافت شده و پس از پایان فرایند خرید و تایید نهایی خریدار به\n                    فروشنده پرداخت خواهد شد.\n                "
-                )
+                _vm._m(2),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "3-1 خریدار و فروشنده با پذیرش قرارداد حاضر می توانند از بستر اینترنتی ارائه شده توسط طرف اول (پلتفرم اینکوباک) جهت سفارش و ارائه محصولات استفاده نمایند."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "3-2 خریدار درخواست خود را از طریق سفارش کالا به صورت الکترونیکی برای اینکوباک ارسال و اینکوباک تقاضای خرید خریدار را از طریق ایمیل یا seller center به فروشندگان مرتبط اعلام می نماید."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "3-3 چنانچه فروشنده قادر به تامین سفارش خریدار باشد پاسخ خود را با ذکر اوصاف و پیوست تصاویر محصولات ، برای خریدار ارسال می نماید."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "3-4 چنانچه خریدار پیشنهاد فروشنده را در پنل کاربری خویش پذیرفت، اپراتور های اینکوباک اقدام به برقراری تماس تلفنی و انجام هماهنگی های نهایی  با طرفین نموده و در صورت حصول توافق، متن قرارداد را برای طرفین ارسال می نمایند که ملاک زمانی انعقاد قراداد، زمان تایید الکترونیکی متن قرارداد ارسالی برای طرفین( خریدار و فروشنده) می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "3-5 پس از تایید قرارداد توسط طرفین فاکتور پیش پرداخت توسط اینکوباک صادر گردیده و خریدار بایستی ظرف مدت .یک روز نسبت به پرداخت آن اقدام نماید.\n                    "
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "3-6  در صورت تادیه پیش پرداخت توسط خریدار، فروشنده بایستی ظرف مهلتی که در قرارداد حاضر قید می گردد کالای سفارش داده شده را تهیه و جهت ارسال به متصدی حمل و نقل تسلیم نماید."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "3-7 قبل از تسلیم کالا به متصدی حمل و نقل و انجام عملیات بارگیری، بازرس اینکوباک در محل بارگیری حضور می یابد و کالای سفارش داده شده را از جهت انطباق با مفاد قرارداد حاضر مورد بررسی قرار می دهد.(تعیین موارد و اوصافی که در هر سفارش بایستی توسط بازرس اینکوباک مورد بررسی و تایید قرار گیرد به پیوست قرارداد حاضر در اختیار خریدار و فروشنده قرار خواهد گرفت). بدیهی است که بازرس اینکوباک صرفاً نسبت به بررسی این اوصاف مسئولیت داشته و سایر اوصاف و موارد از حیطه مسئولیت بازرس اینکوباک خارج می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.pageStep == 3
+            ? _c("p", { attrs: { id: "step1S3" } }, [
+                _c("span", [
+                  _vm._v(
+                    "3-8 در صورت تأیید محصولات توسط بازرس، این امر تلفناً به اطلاع خریدار رسیده و فاکتور نهایی قراداد توسط اینکوباک صادر می گردد و خریدار بایستی ظرف مدت 2 ساعت از اتمام بارگیری نسبت به تسویه مبلغ باقی مانده قراداد اقدام نماید که در این صورت محصولات تحویل متصدی حمل و نقل می‌گردد و پس از گذشت یک هفته از پایان تراکنش، اینکوباک پس از کسر کمیسیون خود از معامله ، ثمن معامله را به حساب فروشنده واریز خواهد کرد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "3-9 دیهی است با توجه به عدم مالکیت اینکوباک بر محصولات ارائه شده در بستر اینترنتی، فروش کالا به خریدار  توسط فروشنده انجام می پذیرد و اینکوباک صرفا زیرساخت انجام فروش را فراهم می نماید لذا در صورت صدور فاکتور در وجه اینکوباک و اظهار نمودن آن در گزارشات مالیاتی مراتب مورد تایید این شرکت نبوده و همچنین این شرکت هیچگونه مسئولیتی بر عهده نخواهد داشت و مسئولیت خسارت وارده احتمالی بر عهده متخلف از این بند خواهد بود."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(3),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "بر اساس شرایط این قرارداد فروشنده موظف به انجام امور ذیل می باشد:"
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "4-1  مسئولیت تعیین و درج قیمت کالا ، تولید و درج اطلاعات محصول اعم از کلیه اطلاعات کمی و کیفی محصول و به‌روزرسانی میزان موجودی محصول در وبسایت اینکوباک بر عهده فروشنده می باشد. قیمت‌های مندرج بر روی , وبسایت اینکوباک می‌بایست رقابتی و حداقل برابر با قیمت کالاهای همانند در سایر فروشگاه ها اعم از اینترنتی و غیر اینترنتی باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "تبصره: اینکوباک زیرساخت و ابزار ساخت محتوا را به صورت رایگان در اختیار فروشندگان قرار می دهد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "4-2 فروشنده تضمین می‌نماید که تمامی کالاهای تحویلی به خریدار مطابق قوانین جمهوری اسلامی ایران تولید شده و یا از مبادی رسمی کشور وارد گردیده است. همچنین کالاها سالم و مطابق با توصیفات اعلام شده از کلیه ابعاد کمی و کیفی می باشد و چنانچه در هر مرحله از عملیات فروش خلاف موارد فوق اثبات گردید، اینکوباک می تواند راساٌ نسبت به لغو سفارش اقدام نماید و چنانچه در این خصوص  خسارتی به اینکوباک یا خریدار وارد گردد فروشنده متعهد به جبران خسارت خواهد بود."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "4-3 فروشنده اعلام می دارد که مالک کالا بوده و کالا معارض ندارد و حقوق مالکیت صنعتی و تجاری در صورت وجود، مالکیت معنوی و سایر حقوق قانونی و عرفی کالا متعلق به اوست یا حق بهره برداری از این حقوق و عرضه کالای مربوطه را دارد و مطابق قوانین جمهوری اسلامی ایران مجاز به فعالیت میباشد و چنانچه در هر مرحله از عملیات فروش خلاف موارد فوق اثبات گردید، اینکوباک می تواند راساٌ نسبت به لغو سفارش اقدام نماید و چنانچه در این خصوص  خسارتی به اینکوباک یا خریدار وارد گردد فروشنده متعهد به جبران خسارت خواهد بود."
+                  )
+                ]),
+                _c("br"),
+                _c("br")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.pageStep == 4
+            ? _c("p", { attrs: { id: "step1S4" } }, [
+                _c("span", [
+                  _vm._v(
+                    "4-4 فروشنده تعهد می‌نماید که در صورت اعمال هرگونه تغییر در اطلاعات کالا اعم از نوع، بهای کالا ،عدم موجودی کالا، توقف تولید یا عرضه محصول و همچنین تخفیف‌های ارائه شده به سایر خریداران ظرف مدت یک روزاطلاعات کالا را در سامانه اینکوباک به روز نماید در غیر این صورت مسئولیت کلیه خسارات وارده به اینکوباک و خریدار بر عهده فروشنده است."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "4-5 فروشنده موظف است در زمان تعیین شده در قرارداد حاضر، کالای سفارش داده شده را تامین نماید و در زمان مشخص شده کالای سفارش داده شده را جهت تحویل به خریدار به متصدی حمل و نقل قانونی تحویل نماید . در صورت عدم تامین کالا و یا تامین ناقص در مدت زمان تعهد شده،  فروشنده بایستی به ازای هر روز تاخیر  2 درصد از مبلغ کل معامله را به عنوان جریمه تاخیر در تاًمین به اینکوباک پرداخت نماید. و چنانچه عدم تاًمین کالا و یا تامین ناقص بیش از 2 روز تقویمی به طول بیانجامد اینکوباک می تواند راساً نسبت به لغو معامله  اقدام نماید. که در این حالت فروشنده موظف به پرداخت 5 درصد از مبلغ کل معامله، به انضمام 4 درصد از مبلغ کل معامله پیش بینی شده در صدر بند (جمعاً 9 درصد از مبلغ کل معامله) به عنوان جریمه عدم تاًمین به اینکوباک پرداخت نماید و همچنین مسئول کلیه خسارات ناشی از عدم تاًمین و یا تامین ناقص کالا که برای اینکوباک یا خریدار ایجاد گردد می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "4-6 فروشنده تضمین می نماید که کلیه اوصاف کمی و کیفی محصولات تامین شده کاملا مطابق با اظهارات درج شده توسط ایشان در سامانه اینکوباک میباشد که تمامی این اظهارات در قرارداد حاضر منعکس می گردد. با توجه به تعبیه نظام بازرسی توسط اینکوباک قبل از ارسال کالا و تحویل به متصدی حمل و نقل چنانچه عدم تطابق محموله با اطلاعات مندرج در سایت، مربوط به امور و اوصافی باشد که بایستی توسط بازرس اینکوباک بررسی گردد(شرح دقیق این اوصاف متناسب با  هرمعامله و به‌صورت احصایی در قرارداد مربوط به آن معامله قید میگردد) اینکوباک و فروشنده مشترکاً در قبال خریدار مسئول می‌باشند که میزان مسوولیت هر یک بر اساس حدود  قصور یا تقصیر آنها توسط مرجع داوری پیش بینی شده در  قرارداد حاضر تعیین می گردد. در غیر اینصورت مسئولیت عدم تطابق کالا بر عهده فروشنده می باشد و چنانچه این امر منجر به ورود هر گونه خسارتی به اینکوباک یا خریدار گردد فروشنده متعهد به جبران خسارت خواهد بود."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    " تبصره: در صورتی که فروشنده نسبت به آماده کردن محصول اقدام کرده باشد ولی نتواند در موعد مقرر نسب به تحویل آن اقدام کند  و  یا در صورتی که محصول آماده شده توسط فروشنده فاقد استانداردهای تعیین شده از سمت خریدار باشد،تصمیم درباره ی لغو یا ادامه معامله، و یا خرید تمام و یا بخشی از محصولات و شرایط مربوط به آن بر عهده اینکوباک و خریدار می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.pageStep == 5
+            ? _c("p", { attrs: { id: "step1S5" } }, [
+                _c("span", [
+                  _vm._v(
+                    "4-7 مسؤلیت تحویل کالای سفارش داده شده به متصدی حمل و نقل بر عهده ی فروشنده می باشد. فروشنده موظف است کالا را به شیوه بسته بندی صحیح . در شرایط استاندارد بارگیری به مقصد حمل و نقل قانونی تحویل داده و همچنین کالا را از طریق وسیله ی حمل ونقل دارای شرایط مناسب جهت حفظ سلامت کالا برای خریدار ارسال نماید مگر آنکه متصدی حمل و نقل توسط خریدار تعیین گردد که در این صورت فروشنده صرفا نسبت به انتخاب وسیله و متصدی حمل و نقل مسئولیتی ندارد. چنانچه از جهت عدم رعایت این بند خسارتی حاصل گردد فروشنده مسئول جبران کلیه ی خسارات ایجاد شده می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "  تبصره- چنانچه در طی حمل کالا خسارتی برای محموله ایجاد گردد موجب مسئولیت متصدی حمل و نقل طبق مقررات مربوطه در این زمینه می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "تبصره - هزینه های مربوط به حمل و نقل و بیمه محموله ارسالی بر حسب مورد بر عهده خریدار و یا فروشنده می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(4),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "خریدار متعهد می باشد پس از تامین بار توسط فروشنده جهت بارگیری  و تایید نهایی بازرس اینکوباک ، نسبت به تسویه حساب و پرداخت مبلغ فاکتور نهایی  قراداد، حداکثر ظرف مدت 2 ساعت اقدام نماید.  و چنانچه نسبت  به تسویه حساب در زمان مقرر اقدام ننماید ، مبلغ پانصد هزار تومان به انضمام 5 درصد از مبلغ کل معامله  از پیش پرداخت واریزی توسط خریدار به عنوان جریمه  لغو معامله کسر و مابقی مبلغ پیش پرداخت به وی مسترد می گردد. همچنین چنانچه در این خصوص خسارتی به اینکوباک یا فروشنده وارد گردد خریدار متعهد به جبران خسارت خواهد بود که مبلغ خسارت ایجاد شده به انضمام مبالغ جریمه فوق، از پیش پرداخت واریزی توسط خریدار کسر و مابقی به وی مسترد می گردد و تا تعیین تکلیف نهایی در خصوص خسارت مورد ادعا و اجرای رای"
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(5),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    " بر اساس این قرارداد اینکوباک متعهد به انجام امور ذیل می باشد. "
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "6-1 اینکوباک بخشی از سایت اینترنتی خود به نام incobac.com  را برای معرفی و ارائه کالا های فروشنده اختصاص می دهد و آموزش های لازم را به فروشنده جهت بروزرسانی لیست کالاها، موجودی آنها و درج قیمت ارائه خواهد داد به نحوی که تغییراتی که در اثر فروش کالا در مقدار کالا ایجاد می گردد و همچنین مشخصات سفارش در هر لحظه برای فروشنده از طریق الکترونیکی قابل مشاهده خواهد بود."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "6-2 اینکوباک خدمات بازرسی محصولات را از طریق ارائه کارشناس کیفیت محصول قبل از بارگیری کالا جهت انطباق کالای ارسالی با شرایط قید شده در قراداد  ارائه می‌نماید. لیست آیتم ها و اوصاف و شرایطی که بایستی توسط بازرس اینکوباک مورد بررسی قرار گیرد به صورت احصایی و متناسب با هر معامله در قرارداد مربوط به آن معامله قید می‌گردد."
+                  )
+                ]),
+                _c("br"),
+                _c("br")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.pageStep == 6
+            ? _c("p", { attrs: { id: "step1S6" } }, [
+                _c("span", [
+                  _vm._v(
+                    "6-3  اینکوباک نسبت به تطابق اوصاف  ذکر شده در بند فوق مشترکاً همراه با فروشنده مطابق بند 6-4 مسئول می باشد و نسبت به سایر اوصاف و شرایط هیچ گونه مسئولیتی نداشته و چنانچه خسارتی حادث گردد فروشنده مسئول می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "6-4 اینکوباک موظف به مدیریت و انتخاب فضا و ظاهر وب سایت می باشد"
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "6-5 اینکوباک متعهد می گردد جهت مدیریت موجودی و بهای کالا در سایت اینکوباک پنل نرم افزاری seller center را در اختیار فروشنده قرار دهد و همچنین آموزش های مربوطه را به فروشنده ارائه نماید ."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "6-6  اینکوباک در خصوص حمل و نقل کالا هیچ گونه وظیفه و تعهدی ندارد. نظام مسئولیت در خصوص حمل و نقل کالا مطابق بند 8-4 قرارداد حاظر می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(6),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "7-1 کمیسیون اینکوباک معادل ریالی و درصدی معین از مبلغ کل معامله است که در پیوست قرارداد می باشد. کمیسیون پیش از احتساب مالیات بر ارزش افزوده کالا محاسبه می گردد.  "
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "7-2مبلغ کمیسیون اینکوباک مشمول قانون مالیات بر ارزش افزوده می باشد که مبلغ آن به صورت حساب های اضافه واریز شده و دریافت می گردد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "7-3 مفروض است که کلیه قیمتهای ارائه شده توسط فروشنده بر روی وب‌سایت اینکوباک شامل مالیات بر ارزش افزوده بوده (در صورت عدم معافیت کالا) که مبلغ آن توسط خریدار نهایی پرداخت می گردد. بدیهی است اینکوباک هیچ گونه مسئولیتی در قبال مالیات بر ارزش افزوده کالای فروش رفته نداشته و فروشنده مستقیما مسئول ثبت و پرداخت مالیات بر ارزش افزوده کالای فروش رفته به سازمان امور مالیاتی کشور می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.pageStep == 7
+            ? _c("p", { attrs: { id: "step1S7" } }, [
+                _c("span", [
+                  _vm._v(
+                    "7-4مسئولیت دریافت وجه سفارشات از خریداران بر عهده اینکوباک می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "7-5 اینکوباک طی هفت روز کاری بهای محصولات فروش رفته را (به غیر از سفارشات عودت داده شده یا سفارشات مورد شکایت و بررسی) که از خریدار دریافت کرده پس از کسر کمیسون  و سایر هزینه ها و مبالغ ذکر شده در قرارداد و پس از محاسبه به فروشنده پرداخت خواهد نمود"
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "تبصره: منظور از روز کاری هر روز هفته به استثنای جمعه و تعطیلات رسمی جمهوری اسلامی ایران از ساعت ۸ الی ۱7 می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(7),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "8-1این قرارداد از تاریخ تایید الکترونیکی(درج شده در قرارداد) به مدت یک سال شمسی( ۳۶۵ روز تقویمی ) اعتبار دارد و در موارد فورس ماژور به مدت آن اضافه میگردد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "8-2 پس از خاتمه قرارداد، تمدید قرارداد و ادامه همکاری طرفین و نحوه و شرایط آن نیاز به توافق مجدد طرفین قرارداد دارد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "8-3 تاریخ موثر شدن و شروع قرارداد از تاریخ تایید الکترونیکی قرارداد توسط فروشنده می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(8),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "9-1 چنانچه معامله میان خریدار و فروشنده به عللی از علل قانونی منجر به فسخ گردد، اینکوباک مستحق دریافت کمیسیون مقرر برای آن معامله می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.pageStep == 8
+            ? _c("p", { attrs: { id: "step1S8" } }, [
+                _vm._m(9),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "علاوه بر ضمانت اجرا های پیش بینی شده نسبت به برخی از تعهدات طرفین این قرارداد، چنانچه نسبت به سایر تعهدات موضوع این قرارداد هر یک از طرفین تخلفی از انجام تعهد خویش داشته باشد و در نتیجه این تخلف ضرری به منافع طرف مقابل، طرف متخلف و مقصر، متعهد به پرداخت خسارت به طرف مقابل می باشد که مطالبه خسارت و تعیین میزان آن در مرجع داوری این قرارداد به عمل می آید."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(10),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "11-1طرفین اعلام  میدارند کلیه  تاییدیه ها و قبول الکترونیکی به منزله تایید و قبول حضوری و شخصی می باشد و به استناد آن تعهدات انجام می پذیرد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "11-2طرفین اعلام می دارند این قرارداد هرگونه توافق یا ترتیبات شفاهی یا کتبی مغایر با قرارداد حاضر را که ممکن است در گذشته بین طرفین واقع شده باشد نسخ می نماید."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "11-3 هیچ یک از مواد یا مفاد قرارداد حاضر به معنای شراکت یا وجود رابطه کارگر و کارفرمایی فی‌مابین فروشنده و اینکوباک نبوده و نخواهد بود."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "11-4 هیچ گونه تغییری در این توافقنامه معتبر نیست مگر با توافق کتبی یا الکترونیکی طرفین قرارداد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "11-5 طرفین اعلام می دارند مالکیت نرم افزار seller center متعلق به اینکوباک است."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(11),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "12-1 مالکیت سورس کدها و پلتفرم اینکوباک متعلق به اینکوباک می باشد و طرف دوم صرفاً اجازه بهره برداری از این پلتفرم را مطابق مفاد این قرارداد و سطح دسترسی اجازه داده شده توسط این قرارداد دارا می باشد. "
+                  )
+                ]),
+                _c("br"),
+                _c("br")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.pageStep == 9
+            ? _c("p", { attrs: { id: "step1S9" } }, [
+                _c("span", [
+                  _vm._v(
+                    "12-2 مالکیت داده های تحصیل شده از طریق پلتفرم اینکوباک،تحلیل این داده ها، فروش نتایج تحلیل داده و استفاده پژوهشی و هرگونه استفاده دیگر از آنها با رعایت محرمانگی و عدم افشای اسرار صرفاً به اینکوباک تعلق داشته و طرف دوم هیچگونه حقی در این زمینه نخواهد داشت."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(12),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "13-1 اطلاعات مربوط به این قرارداد، اسرار محرمانه تلقی می گردد لذا طرفین تضمین خواهند نمود که خود و اشخاص مرتبط با آنان اشخاص ذیربط آنها در تمام مدت این قرارداد و  پس از اتمام آن اقدامات معمول جهت محرمانه نگاه داشتن تمام اطلاعات محرمانه ای که وی یا آنان ممکن است در ارتباط با هر کدام از طرف دیگر به دست آورند محرمانه تلقی خواهند کرد و جز در راستای مقاصد قراردادی از چنین اطلاعاتی استفاده نخواهند کرد و آنها را افشا نخواهند نمود."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "13-2 طرفین باید تضمین نمایند که هر کدام از کارکنان، ماموران، مدیران عامل آنان یا اشخاص مرتبط با آنها که به موجب این قرارداد به اطلاعات محرمانه دسترسی دارند از طبیعت محرمانه این اطلاعات مطلع هستند و لازم است تا از شروط طرفین قرارداد پیروی نمایند بنابراین طرفی که اطلاعات را دریافت می نماید مسئول است که تضمین نماید تعهد رعایت محرمانگی و عدم استفاده مندرج در این ماده را به دقت رعایت می‌کند و در مقابل فعل یا ترک فعل کارکنان نمایندگان یا عوامل خود کاملا مسئول فرض می گردد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "13-3 هرگونه افشا و انتشار بدون مجوز این اطلاعات قابل تعقیب کیفری در مراجع قانونی و مطالبه خسارت در مرجع داوری این قرارداد است.  مبلغ خسارت مذکور طی داوری تعیین خواهد شد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "تبصره: اطلاعاتی که در اختیار عموم قرار دارند جزو اطلاعات محرمانه محسوب نمی گردد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(13),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "14-1 منظور از فورس ماژور در این قرارداد هرگونه حادثه و پیشامد غیرقابل پیش بینی، غیر قابل دفع و خارج از اراده و کنترل طرفین است. اعم از جنگ، بلایای طبیعی، آتش‌سوزی، اعتصاب ، تغییر قوانین و مقررات یا تعطیلی ادارات و نهادهای دولتی برای مدت بیش از یک هفته که به واسطه آن طرفی که در چنین شرایطی قرار گرفته است نمی تواند تمام یا بخشی از تعهدات خود، موضوع این قرارداد یاد قوانین مرتبط را ایفا نماید."
+                  )
+                ]),
+                _c("br"),
+                _c("br")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.pageStep == 10
+            ? _c("p", { attrs: { id: "step1S10" } }, [
+                _c("span", [
+                  _vm._v(
+                    "14-2 متعهد در صورتی از ایفای تعهدات در اثر فورس ماژور معاف می گردد که حداکثر تا  1روز پس از اطلاع از چنین وضعیتی مراتب را به اطلاع طرف دیگر رسانیده باشد.\n                    "
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(14),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "هرگونه اطلاعیه یا ابلاغیه ای که قرار باشد طبق این قرارداد ابلاغ و تحویل گردد بایستی از طریق وبسایت اینکوباک یا call center انجام پذیرد و خطاب به طرف مرتبط صورت گیرد و تصریح شود که اطلاعیه یا مکاتبه موضوع این قرارداد است .طرفین می توانند به وسیله اطلاعیه نشانی خود را تغییر دهند تا تمام اطلاعیه های آتی برای آنان به نشانی جدید ارسال گردد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(15),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    " کلیه اختلافات و دعاوی ناشی از این قرارداد و یا راجع به آن از جمله انعقاد، اعتبار، فسخ ،تفسیر یا اجرای آن به مرکز داوری اتاق بازرگانی صنایع معادن و کشاورزی شیراز ارجاع می گردد. که مطابق با قانون اساسنامه و آیین داوری آن مرکز با رای یک یا سه نفر داور به صورت قطعی و لازم الاجرا حل و فصل می گردد. داور/ان علاوه بر مقررات حاکم عرف تجارتی ذیربط را نیز مراعات خواهند نمود. شرط داوری حاضر موافقتنامه مستقل از قرارداد اصلی تلقی می‌شود و در هر حال لازم الاجرا است."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(16),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "قرارداد حاضر در16 ماده و پیوست های آن (اجزای لاینفک قرارداد) در یک نسخه الکترونیکی تهیه و تنظیم گردیده است و در راستای تایید مفاد آن به تایید الکترونیکی طرف دوم (که به منزله قبول و تایید و امضای حضوری وی می باشد) رسید."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    " بنا به مراتب فوق طرفین قرارداد حاضر را از تاریخ درج شده در آن اجرایی نمودند. تمام/"
+                  )
+                ]),
+                _c("br"),
+                _c("br")
               ])
             : _vm._e()
         ])
@@ -54811,7 +55530,114 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v(" ماده 1 :طرفین قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 2 :موضوع قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _c("b", [_vm._v("ماده 3 :مکانیسم اجرایی عملیات خرید و فروش")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده4 : تعهدات و تضمینات فروشنده")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 5: تعهدات خریدار")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده6: تعهدات اینکوباک")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 7 :کمیسیون")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 8 :مدت و تمدید قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 9: فسخ قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 10: خسارات قراردادی")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده11:مشترکات")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 12: حقوق مالکیت فکری")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _c("b", [_vm._v("ماده 13: محرمانگی و عدم افشای اسرار")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 14:فورس ماژور")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 15: ابلاغات")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 16:حل وفصل اختلافات و داوری")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 17: نسخ قرارداد")])])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -54822,19 +55648,23 @@ if (false) {
 }
 
 /***/ }),
-/* 100 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(103)
+}
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(101)
+var __vue_script__ = __webpack_require__(105)
 /* template */
-var __vue_template__ = __webpack_require__(102)
+var __vue_template__ = __webpack_require__(106)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -54869,12 +55699,58 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 101 */
+/* 103 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(104);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("27a1db24", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-52836c63\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./buyAd-requests.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-52836c63\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./buyAd-requests.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 104 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.main-content {\n    padding: 90px 35px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 105 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(1);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -54965,7 +55841,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 102 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -55087,19 +55963,19 @@ if (false) {
 }
 
 /***/ }),
-/* 103 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(104)
+  __webpack_require__(108)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(106)
+var __vue_script__ = __webpack_require__(110)
 /* template */
-var __vue_template__ = __webpack_require__(107)
+var __vue_template__ = __webpack_require__(111)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -55138,13 +56014,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 104 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(105);
+var content = __webpack_require__(109);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -55164,7 +56040,7 @@ if(false) {
 }
 
 /***/ }),
-/* 105 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -55178,12 +56054,27 @@ exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-pos
 
 
 /***/ }),
-/* 106 */
+/* 110 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(1);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -55387,7 +56278,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 107 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -55409,16 +56300,17 @@ var render = function() {
                   { staticClass: "list-group-item content-list col-xs-12" },
                   [
                     _c(
-                      "a",
+                      "router-link",
                       {
                         attrs: {
-                          href: _vm.trans + "/" + transaction.transaction_id
+                          to:
+                            "/transaction-detail/" + transaction.transaction_id
                         }
                       },
                       [
                         _c("p", { staticClass: "number col-xs-2" }, [
                           _vm._v(
-                            "\n                           " +
+                            "\n                          " +
                               _vm._s(transaction.transaction_id) +
                               "\n                      "
                           )
@@ -55432,7 +56324,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                           " +
+                              "\n                          " +
                                 _vm._s(transaction.deal_formation_date) +
                                 "\n                      "
                             )
@@ -55441,7 +56333,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("p", { staticClass: "subject col-xs-5" }, [
                           _vm._v(
-                            "\n                           " +
+                            "\n                          " +
                               _vm._s(transaction.product_name) +
                               "\n                      "
                           )
@@ -55454,7 +56346,8 @@ var render = function() {
                         ])
                       ]
                     )
-                  ]
+                  ],
+                  1
                 )
               })
             ],
@@ -55503,19 +56396,19 @@ if (false) {
 }
 
 /***/ }),
-/* 108 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(109)
+  __webpack_require__(113)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(111)
+var __vue_script__ = __webpack_require__(115)
 /* template */
-var __vue_template__ = __webpack_require__(112)
+var __vue_template__ = __webpack_require__(116)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -55554,13 +56447,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 109 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(110);
+var content = __webpack_require__(114);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -55580,7 +56473,7 @@ if(false) {
 }
 
 /***/ }),
-/* 110 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -55594,12 +56487,12 @@ exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-pos
 
 
 /***/ }),
-/* 111 */
+/* 115 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(1);
 //
 //
 //
@@ -55807,7 +56700,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 112 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -55910,19 +56803,2059 @@ if (false) {
 }
 
 /***/ }),
-/* 113 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(114)
+  __webpack_require__(135)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(116)
+var __vue_script__ = __webpack_require__(118)
 /* template */
-var __vue_template__ = __webpack_require__(117)
+var __vue_template__ = __webpack_require__(119)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\dashboard\\seller\\transaction\\transaction.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2a4784a2", Component.options)
+  } else {
+    hotAPI.reload("data-v-2a4784a2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 118 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: ['trans', 'loading'],
+    data: function data() {
+        return {
+            currentStep: 1,
+            pageStep: 1,
+            transactionId: this.$route.params.id,
+            popUpMsg: '',
+            transactionInfo: '',
+            msg: '',
+            step1: {},
+            step2: {},
+            step3: {},
+            step4: {},
+            submiting: false
+
+        };
+    },
+    methods: {
+
+        init: function init() {
+            var self = this;
+            var transaction_id = this.$route.params.id;
+            this.transactionId = transaction_id;
+
+            axios.post('/dashboard/get_transaction_info', {
+                transaction_id: transaction_id
+            }).then(function (response) {
+                self.currentStep = response.data.step;
+                self.transactionInfo = response.data.transaction_info;
+                self.msg = response.data.msg;
+            }).catch(function (err) {
+                if (err.response.status == 404) {
+                    window.location.href = '/404';
+                }
+            });
+        },
+        confirmContract: function confirmContract() {
+            var self = this;
+
+            axios.post('/action', {
+                transaction_id: self.transactionId,
+                action_id: 2
+            }).then(function (response) {
+                self.init();
+            });
+        },
+        goToStep: function goToStep(step) {
+            this.currentStep = step;
+        },
+        goToNextPage: function goToNextPage() {
+            if (this.pageStep < 11) {
+                this.pageStep++;
+            }
+        },
+        goToPrePage: function goToPrePage() {
+            if (this.pageStep < 1) {
+                this.pageStep = 1;
+            } else if (this.pageStep > 1) {
+                this.pageStep--;
+            }
+        }
+    },
+    mounted: function mounted() {
+        this.init();
+    }
+});
+
+/***/ }),
+/* 119 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.transactionInfo
+      ? _c("section", { staticClass: "main-content col-xs-12" }, [
+          _vm.currentStep == 1
+            ? _c("div", { attrs: { id: "step1" } }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _vm.msg == ""
+                  ? _c("div", [
+                      _c("div", { staticClass: "contents col-xs-12" }, [
+                        _c("div", { staticClass: "content-show" }, [
+                          _c("div", { staticClass: "buttons " }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "main_buttons col-xs-12 col-sm-8 col-md-9"
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "default_btn",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        _vm.goToNextPage()
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("صفحه بعد")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "default_btn",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        _vm.goToPrePage()
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("صفحه قبل")]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "continue_but col-xs-12 col-sm-4 col-md-3"
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "green-bot",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.confirmContract($event)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("تایید قرارداد")]
+                                )
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("h2", [_vm._v(" قرارداد همکاری در فروش")]),
+                          _vm._v(" "),
+                          _vm.pageStep == 1
+                            ? _c("p", { attrs: { id: "step1S1" } }, [
+                                _c("span", [
+                                  _vm._v(
+                                    "با هدف تنظیم روابط اطراف قرارداد، قرارداد حاضر ذیل ماده ۱۰ قانون مدنی و به نحو لازم و با حاکم قرار دادن اصل حسن نیت بین طرفین منعقد می گردد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(1),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [_vm._v("1-1طرف اول")]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [_vm._v("1-2طرف دوم")]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(2),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "2-1  تنظیم همکاری و روابط قراردادی طرفین در خصوص همکاری اینکوباک با فروشنده جهت فروش کالا و محصولات خود از طریق ارائه این محصولات در وبسایت ایجاد شده توسط اینکوباک به نشانی incobac.com .بدیهی است با توجه به اینکه مالکیت محصولات ارائه شده در سایت متعلق به اینکوباک نبوده و اینکوباک صرفاً ارائه دهنده بستر اینترنتی جهت فروش محصولات فوق می باشد لذا مسئولیت کلیه اوصاف محصول اعم از نوع، بسته بندی، قیمت و هرگونه اطلاعات ذکر شده در رابطه با محصول بر عهده فروشنده است."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "2-2 اینکوباک بر اساس اطلاعات ذکر شده در سایت اقدام به صدور فاکتور برای طرفین می نماید که این فاکتور در اختیار طرفین قرار می گیرد و مبنای رسیدگی به کلیه اختلافات حاصله  قرارداد حاضر و فاکتور مذکور می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "2-3  با توجه به شرایط خاص هر معامله، هزینه های مربوط به حمل و نقل و بیمه کالاهای مورد معامله ممکن است بر عهده خریدار یا فروشنده قرار گیرد که این امر در قرارداد حاضر قید و مورد تایید طرف متعهد قرار می گیرد در هر صورت اینکوباک نسبت به هزینه های فوق الذکر از خود سلب مسئولیت می‌نماید."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 2
+                            ? _c("p", { attrs: { id: "step1S2" } }, [
+                                _vm._m(3),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "3-1 خریدار و فروشنده با پذیرش قرارداد حاضر می توانند از بستر اینترنتی ارائه شده توسط طرف اول (پلتفرم اینکوباک) جهت سفارش و ارائه محصولات استفاده نمایند."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "3-2 خریدار درخواست خود را از طریق سفارش کالا به صورت الکترونیکی برای اینکوباک ارسال و اینکوباک تقاضای خرید خریدار را از طریق ایمیل یا seller center به فروشندگان مرتبط اعلام می نماید."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "3-3 چنانچه فروشنده قادر به تامین سفارش خریدار باشد پاسخ خود را با ذکر اوصاف و پیوست تصاویر محصولات ، برای خریدار ارسال می نماید."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "3-4 چنانچه خریدار پیشنهاد فروشنده را در پنل کاربری خویش پذیرفت، اپراتور های اینکوباک اقدام به برقراری تماس تلفنی و انجام هماهنگی های نهایی  با طرفین نموده و در صورت حصول توافق، متن قرارداد را برای طرفین ارسال می نمایند که ملاک زمانی انعقاد قراداد، زمان تایید الکترونیکی متن قرارداد ارسالی برای طرفین( خریدار و فروشنده) می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "3-5 پس از تایید قرارداد توسط طرفین فاکتور پیش پرداخت توسط اینکوباک صادر گردیده و خریدار بایستی ظرف مدت .یک روز نسبت به پرداخت آن اقدام نماید.\n                    "
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "3-6  در صورت تادیه پیش پرداخت توسط خریدار، فروشنده بایستی ظرف مهلتی که در قرارداد حاضر قید می گردد کالای سفارش داده شده را تهیه و جهت ارسال به متصدی حمل و نقل تسلیم نماید."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "3-7 قبل از تسلیم کالا به متصدی حمل و نقل و انجام عملیات بارگیری، بازرس اینکوباک در محل بارگیری حضور می یابد و کالای سفارش داده شده را از جهت انطباق با مفاد قرارداد حاضر مورد بررسی قرار می دهد.(تعیین موارد و اوصافی که در هر سفارش بایستی توسط بازرس اینکوباک مورد بررسی و تایید قرار گیرد به پیوست قرارداد حاضر در اختیار خریدار و فروشنده قرار خواهد گرفت). بدیهی است که بازرس اینکوباک صرفاً نسبت به بررسی این اوصاف مسئولیت داشته و سایر اوصاف و موارد از حیطه مسئولیت بازرس اینکوباک خارج می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 3
+                            ? _c("p", { attrs: { id: "step1S3" } }, [
+                                _c("span", [
+                                  _vm._v(
+                                    "3-8 در صورت تأیید محصولات توسط بازرس، این امر تلفناً به اطلاع خریدار رسیده و فاکتور نهایی قراداد توسط اینکوباک صادر می گردد و خریدار بایستی ظرف مدت 2 ساعت از اتمام بارگیری نسبت به تسویه مبلغ باقی مانده قراداد اقدام نماید که در این صورت محصولات تحویل متصدی حمل و نقل می‌گردد و پس از گذشت یک هفته از پایان تراکنش، اینکوباک پس از کسر کمیسیون خود از معامله ، ثمن معامله را به حساب فروشنده واریز خواهد کرد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "3-9 دیهی است با توجه به عدم مالکیت اینکوباک بر محصولات ارائه شده در بستر اینترنتی، فروش کالا به خریدار  توسط فروشنده انجام می پذیرد و اینکوباک صرفا زیرساخت انجام فروش را فراهم می نماید لذا در صورت صدور فاکتور در وجه اینکوباک و اظهار نمودن آن در گزارشات مالیاتی مراتب مورد تایید این شرکت نبوده و همچنین این شرکت هیچگونه مسئولیتی بر عهده نخواهد داشت و مسئولیت خسارت وارده احتمالی بر عهده متخلف از این بند خواهد بود."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(4),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "بر اساس شرایط این قرارداد فروشنده موظف به انجام امور ذیل می باشد:"
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "4-1  مسئولیت تعیین و درج قیمت کالا ، تولید و درج اطلاعات محصول اعم از کلیه اطلاعات کمی و کیفی محصول و به‌روزرسانی میزان موجودی محصول در وبسایت اینکوباک بر عهده فروشنده می باشد. قیمت‌های مندرج بر روی , وبسایت اینکوباک می‌بایست رقابتی و حداقل برابر با قیمت کالاهای همانند در سایر فروشگاه ها اعم از اینترنتی و غیر اینترنتی باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "تبصره: اینکوباک زیرساخت و ابزار ساخت محتوا را به صورت رایگان در اختیار فروشندگان قرار می دهد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "4-2 فروشنده تضمین می‌نماید که تمامی کالاهای تحویلی به خریدار مطابق قوانین جمهوری اسلامی ایران تولید شده و یا از مبادی رسمی کشور وارد گردیده است. همچنین کالاها سالم و مطابق با توصیفات اعلام شده از کلیه ابعاد کمی و کیفی می باشد و چنانچه در هر مرحله از عملیات فروش خلاف موارد فوق اثبات گردید، اینکوباک می تواند راساٌ نسبت به لغو سفارش اقدام نماید و چنانچه در این خصوص  خسارتی به اینکوباک یا خریدار وارد گردد فروشنده متعهد به جبران خسارت خواهد بود."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "4-3 فروشنده اعلام می دارد که مالک کالا بوده و کالا معارض ندارد و حقوق مالکیت صنعتی و تجاری در صورت وجود، مالکیت معنوی و سایر حقوق قانونی و عرفی کالا متعلق به اوست یا حق بهره برداری از این حقوق و عرضه کالای مربوطه را دارد و مطابق قوانین جمهوری اسلامی ایران مجاز به فعالیت میباشد و چنانچه در هر مرحله از عملیات فروش خلاف موارد فوق اثبات گردید، اینکوباک می تواند راساٌ نسبت به لغو سفارش اقدام نماید و چنانچه در این خصوص  خسارتی به اینکوباک یا خریدار وارد گردد فروشنده متعهد به جبران خسارت خواهد بود."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 4
+                            ? _c("p", { attrs: { id: "step1S4" } }, [
+                                _c("span", [
+                                  _vm._v(
+                                    "4-4 فروشنده تعهد می‌نماید که در صورت اعمال هرگونه تغییر در اطلاعات کالا اعم از نوع، بهای کالا ،عدم موجودی کالا، توقف تولید یا عرضه محصول و همچنین تخفیف‌های ارائه شده به سایر خریداران ظرف مدت یک روزاطلاعات کالا را در سامانه اینکوباک به روز نماید در غیر این صورت مسئولیت کلیه خسارات وارده به اینکوباک و خریدار بر عهده فروشنده است."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "4-5 فروشنده موظف است در زمان تعیین شده در قرارداد حاضر، کالای سفارش داده شده را تامین نماید و در زمان مشخص شده کالای سفارش داده شده را جهت تحویل به خریدار به متصدی حمل و نقل قانونی تحویل نماید . در صورت عدم تامین کالا و یا تامین ناقص در مدت زمان تعهد شده،  فروشنده بایستی به ازای هر روز تاخیر  2 درصد از مبلغ کل معامله را به عنوان جریمه تاخیر در تاًمین به اینکوباک پرداخت نماید. و چنانچه عدم تاًمین کالا و یا تامین ناقص بیش از 2 روز تقویمی به طول بیانجامد اینکوباک می تواند راساً نسبت به لغو معامله  اقدام نماید. که در این حالت فروشنده موظف به پرداخت 5 درصد از مبلغ کل معامله، به انضمام 4 درصد از مبلغ کل معامله پیش بینی شده در صدر بند (جمعاً 9 درصد از مبلغ کل معامله) به عنوان جریمه عدم تاًمین به اینکوباک پرداخت نماید و همچنین مسئول کلیه خسارات ناشی از عدم تاًمین و یا تامین ناقص کالا که برای اینکوباک یا خریدار ایجاد گردد می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "4-6 فروشنده تضمین می نماید که کلیه اوصاف کمی و کیفی محصولات تامین شده کاملا مطابق با اظهارات درج شده توسط ایشان در سامانه اینکوباک میباشد که تمامی این اظهارات در قرارداد حاضر منعکس می گردد. با توجه به تعبیه نظام بازرسی توسط اینکوباک قبل از ارسال کالا و تحویل به متصدی حمل و نقل چنانچه عدم تطابق محموله با اطلاعات مندرج در سایت، مربوط به امور و اوصافی باشد که بایستی توسط بازرس اینکوباک بررسی گردد(شرح دقیق این اوصاف متناسب با  هرمعامله و به‌صورت احصایی در قرارداد مربوط به آن معامله قید میگردد) اینکوباک و فروشنده مشترکاً در قبال خریدار مسئول می‌باشند که میزان مسوولیت هر یک بر اساس حدود  قصور یا تقصیر آنها توسط مرجع داوری پیش بینی شده در  قرارداد حاضر تعیین می گردد. در غیر اینصورت مسئولیت عدم تطابق کالا بر عهده فروشنده می باشد و چنانچه این امر منجر به ورود هر گونه خسارتی به اینکوباک یا خریدار گردد فروشنده متعهد به جبران خسارت خواهد بود."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    " تبصره: در صورتی که فروشنده نسبت به آماده کردن محصول اقدام کرده باشد ولی نتواند در موعد مقرر نسب به تحویل آن اقدام کند  و  یا در صورتی که محصول آماده شده توسط فروشنده فاقد استانداردهای تعیین شده از سمت خریدار باشد،تصمیم درباره ی لغو یا ادامه معامله، و یا خرید تمام و یا بخشی از محصولات و شرایط مربوط به آن بر عهده اینکوباک و خریدار می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 5
+                            ? _c("p", { attrs: { id: "step1S5" } }, [
+                                _c("span", [
+                                  _vm._v(
+                                    "4-7 مسؤلیت تحویل کالای سفارش داده شده به متصدی حمل و نقل بر عهده ی فروشنده می باشد. فروشنده موظف است کالا را به شیوه بسته بندی صحیح . در شرایط استاندارد بارگیری به مقصد حمل و نقل قانونی تحویل داده و همچنین کالا را از طریق وسیله ی حمل ونقل دارای شرایط مناسب جهت حفظ سلامت کالا برای خریدار ارسال نماید مگر آنکه متصدی حمل و نقل توسط خریدار تعیین گردد که در این صورت فروشنده صرفا نسبت به انتخاب وسیله و متصدی حمل و نقل مسئولیتی ندارد. چنانچه از جهت عدم رعایت این بند خسارتی حاصل گردد فروشنده مسئول جبران کلیه ی خسارات ایجاد شده می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "  تبصره- چنانچه در طی حمل کالا خسارتی برای محموله ایجاد گردد موجب مسئولیت متصدی حمل و نقل طبق مقررات مربوطه در این زمینه می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "تبصره - هزینه های مربوط به حمل و نقل و بیمه محموله ارسالی بر حسب مورد بر عهده خریدار و یا فروشنده می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(5),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "خریدار متعهد می باشد پس از تامین بار توسط فروشنده جهت بارگیری  و تایید نهایی بازرس اینکوباک ، نسبت به تسویه حساب و پرداخت مبلغ فاکتور نهایی  قراداد، حداکثر ظرف مدت 2 ساعت اقدام نماید.  و چنانچه نسبت  به تسویه حساب در زمان مقرر اقدام ننماید ، مبلغ پانصد هزار تومان به انضمام 5 درصد از مبلغ کل معامله  از پیش پرداخت واریزی توسط خریدار به عنوان جریمه  لغو معامله کسر و مابقی مبلغ پیش پرداخت به وی مسترد می گردد. همچنین چنانچه در این خصوص خسارتی به اینکوباک یا فروشنده وارد گردد خریدار متعهد به جبران خسارت خواهد بود که مبلغ خسارت ایجاد شده به انضمام مبالغ جریمه فوق، از پیش پرداخت واریزی توسط خریدار کسر و مابقی به وی مسترد می گردد و تا تعیین تکلیف نهایی در خصوص خسارت مورد ادعا و اجرای رای"
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(6),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    " بر اساس این قرارداد اینکوباک متعهد به انجام امور ذیل می باشد. "
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "6-1 اینکوباک بخشی از سایت اینترنتی خود به نام incobac.com  را برای معرفی و ارائه کالا های فروشنده اختصاص می دهد و آموزش های لازم را به فروشنده جهت بروزرسانی لیست کالاها، موجودی آنها و درج قیمت ارائه خواهد داد به نحوی که تغییراتی که در اثر فروش کالا در مقدار کالا ایجاد می گردد و همچنین مشخصات سفارش در هر لحظه برای فروشنده از طریق الکترونیکی قابل مشاهده خواهد بود."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "6-2 اینکوباک خدمات بازرسی محصولات را از طریق ارائه کارشناس کیفیت محصول قبل از بارگیری کالا جهت انطباق کالای ارسالی با شرایط قید شده در قراداد  ارائه می‌نماید. لیست آیتم ها و اوصاف و شرایطی که بایستی توسط بازرس اینکوباک مورد بررسی قرار گیرد به صورت احصایی و متناسب با هر معامله در قرارداد مربوط به آن معامله قید می‌گردد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 6
+                            ? _c("p", { attrs: { id: "step1S6" } }, [
+                                _c("span", [
+                                  _vm._v(
+                                    "6-3  اینکوباک نسبت به تطابق اوصاف  ذکر شده در بند فوق مشترکاً همراه با فروشنده مطابق بند 6-4 مسئول می باشد و نسبت به سایر اوصاف و شرایط هیچ گونه مسئولیتی نداشته و چنانچه خسارتی حادث گردد فروشنده مسئول می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "6-4 اینکوباک موظف به مدیریت و انتخاب فضا و ظاهر وب سایت می باشد"
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "6-5 اینکوباک متعهد می گردد جهت مدیریت موجودی و بهای کالا در سایت اینکوباک پنل نرم افزاری seller center را در اختیار فروشنده قرار دهد و همچنین آموزش های مربوطه را به فروشنده ارائه نماید ."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "6-6  اینکوباک در خصوص حمل و نقل کالا هیچ گونه وظیفه و تعهدی ندارد. نظام مسئولیت در خصوص حمل و نقل کالا مطابق بند 8-4 قرارداد حاظر می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(7),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "7-1 کمیسیون اینکوباک معادل ریالی و درصدی معین از مبلغ کل معامله است که در پیوست قرارداد می باشد. کمیسیون پیش از احتساب مالیات بر ارزش افزوده کالا محاسبه می گردد.  "
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "7-2مبلغ کمیسیون اینکوباک مشمول قانون مالیات بر ارزش افزوده می باشد که مبلغ آن به صورت حساب های اضافه واریز شده و دریافت می گردد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "7-3 مفروض است که کلیه قیمتهای ارائه شده توسط فروشنده بر روی وب‌سایت اینکوباک شامل مالیات بر ارزش افزوده بوده (در صورت عدم معافیت کالا) که مبلغ آن توسط خریدار نهایی پرداخت می گردد. بدیهی است اینکوباک هیچ گونه مسئولیتی در قبال مالیات بر ارزش افزوده کالای فروش رفته نداشته و فروشنده مستقیما مسئول ثبت و پرداخت مالیات بر ارزش افزوده کالای فروش رفته به سازمان امور مالیاتی کشور می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 7
+                            ? _c("p", { attrs: { id: "step1S7" } }, [
+                                _c("span", [
+                                  _vm._v(
+                                    "7-4مسئولیت دریافت وجه سفارشات از خریداران بر عهده اینکوباک می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "7-5 اینکوباک طی هفت روز کاری بهای محصولات فروش رفته را (به غیر از سفارشات عودت داده شده یا سفارشات مورد شکایت و بررسی) که از خریدار دریافت کرده پس از کسر کمیسون  و سایر هزینه ها و مبالغ ذکر شده در قرارداد و پس از محاسبه به فروشنده پرداخت خواهد نمود"
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "تبصره: منظور از روز کاری هر روز هفته به استثنای جمعه و تعطیلات رسمی جمهوری اسلامی ایران از ساعت ۸ الی ۱7 می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(8),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "8-1این قرارداد از تاریخ تایید الکترونیکی(درج شده در قرارداد) به مدت یک سال شمسی( ۳۶۵ روز تقویمی ) اعتبار دارد و در موارد فورس ماژور به مدت آن اضافه میگردد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "8-2 پس از خاتمه قرارداد، تمدید قرارداد و ادامه همکاری طرفین و نحوه و شرایط آن نیاز به توافق مجدد طرفین قرارداد دارد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "8-3 تاریخ موثر شدن و شروع قرارداد از تاریخ تایید الکترونیکی قرارداد توسط فروشنده می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(9),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "9-1 چنانچه معامله میان خریدار و فروشنده به عللی از علل قانونی منجر به فسخ گردد، اینکوباک مستحق دریافت کمیسیون مقرر برای آن معامله می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 8
+                            ? _c("p", { attrs: { id: "step1S8" } }, [
+                                _vm._m(10),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "علاوه بر ضمانت اجرا های پیش بینی شده نسبت به برخی از تعهدات طرفین این قرارداد، چنانچه نسبت به سایر تعهدات موضوع این قرارداد هر یک از طرفین تخلفی از انجام تعهد خویش داشته باشد و در نتیجه این تخلف ضرری به منافع طرف مقابل، طرف متخلف و مقصر، متعهد به پرداخت خسارت به طرف مقابل می باشد که مطالبه خسارت و تعیین میزان آن در مرجع داوری این قرارداد به عمل می آید."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(11),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "11-1طرفین اعلام  میدارند کلیه  تاییدیه ها و قبول الکترونیکی به منزله تایید و قبول حضوری و شخصی می باشد و به استناد آن تعهدات انجام می پذیرد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "11-2طرفین اعلام می دارند این قرارداد هرگونه توافق یا ترتیبات شفاهی یا کتبی مغایر با قرارداد حاضر را که ممکن است در گذشته بین طرفین واقع شده باشد نسخ می نماید."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "11-3 هیچ یک از مواد یا مفاد قرارداد حاضر به معنای شراکت یا وجود رابطه کارگر و کارفرمایی فی‌مابین فروشنده و اینکوباک نبوده و نخواهد بود."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "11-4 هیچ گونه تغییری در این توافقنامه معتبر نیست مگر با توافق کتبی یا الکترونیکی طرفین قرارداد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "11-5 طرفین اعلام می دارند مالکیت نرم افزار seller center متعلق به اینکوباک است."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(12),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "12-1 مالکیت سورس کدها و پلتفرم اینکوباک متعلق به اینکوباک می باشد و طرف دوم صرفاً اجازه بهره برداری از این پلتفرم را مطابق مفاد این قرارداد و سطح دسترسی اجازه داده شده توسط این قرارداد دارا می باشد. "
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 9
+                            ? _c("p", { attrs: { id: "step1S9" } }, [
+                                _c("span", [
+                                  _vm._v(
+                                    "12-2 مالکیت داده های تحصیل شده از طریق پلتفرم اینکوباک،تحلیل این داده ها، فروش نتایج تحلیل داده و استفاده پژوهشی و هرگونه استفاده دیگر از آنها با رعایت محرمانگی و عدم افشای اسرار صرفاً به اینکوباک تعلق داشته و طرف دوم هیچگونه حقی در این زمینه نخواهد داشت."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(13),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "13-1 اطلاعات مربوط به این قرارداد، اسرار محرمانه تلقی می گردد لذا طرفین تضمین خواهند نمود که خود و اشخاص مرتبط با آنان اشخاص ذیربط آنها در تمام مدت این قرارداد و  پس از اتمام آن اقدامات معمول جهت محرمانه نگاه داشتن تمام اطلاعات محرمانه ای که وی یا آنان ممکن است در ارتباط با هر کدام از طرف دیگر به دست آورند محرمانه تلقی خواهند کرد و جز در راستای مقاصد قراردادی از چنین اطلاعاتی استفاده نخواهند کرد و آنها را افشا نخواهند نمود."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "13-2 طرفین باید تضمین نمایند که هر کدام از کارکنان، ماموران، مدیران عامل آنان یا اشخاص مرتبط با آنها که به موجب این قرارداد به اطلاعات محرمانه دسترسی دارند از طبیعت محرمانه این اطلاعات مطلع هستند و لازم است تا از شروط طرفین قرارداد پیروی نمایند بنابراین طرفی که اطلاعات را دریافت می نماید مسئول است که تضمین نماید تعهد رعایت محرمانگی و عدم استفاده مندرج در این ماده را به دقت رعایت می‌کند و در مقابل فعل یا ترک فعل کارکنان نمایندگان یا عوامل خود کاملا مسئول فرض می گردد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "13-3 هرگونه افشا و انتشار بدون مجوز این اطلاعات قابل تعقیب کیفری در مراجع قانونی و مطالبه خسارت در مرجع داوری این قرارداد است.  مبلغ خسارت مذکور طی داوری تعیین خواهد شد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "تبصره: اطلاعاتی که در اختیار عموم قرار دارند جزو اطلاعات محرمانه محسوب نمی گردد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(14),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "14-1 منظور از فورس ماژور در این قرارداد هرگونه حادثه و پیشامد غیرقابل پیش بینی، غیر قابل دفع و خارج از اراده و کنترل طرفین است. اعم از جنگ، بلایای طبیعی، آتش‌سوزی، اعتصاب ، تغییر قوانین و مقررات یا تعطیلی ادارات و نهادهای دولتی برای مدت بیش از یک هفته که به واسطه آن طرفی که در چنین شرایطی قرار گرفته است نمی تواند تمام یا بخشی از تعهدات خود، موضوع این قرارداد یاد قوانین مرتبط را ایفا نماید."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 10
+                            ? _c("p", { attrs: { id: "step1S10" } }, [
+                                _c("span", [
+                                  _vm._v(
+                                    "14-2 متعهد در صورتی از ایفای تعهدات در اثر فورس ماژور معاف می گردد که حداکثر تا  1روز پس از اطلاع از چنین وضعیتی مراتب را به اطلاع طرف دیگر رسانیده باشد.\n                    "
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(15),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "هرگونه اطلاعیه یا ابلاغیه ای که قرار باشد طبق این قرارداد ابلاغ و تحویل گردد بایستی از طریق وبسایت اینکوباک یا call center انجام پذیرد و خطاب به طرف مرتبط صورت گیرد و تصریح شود که اطلاعیه یا مکاتبه موضوع این قرارداد است .طرفین می توانند به وسیله اطلاعیه نشانی خود را تغییر دهند تا تمام اطلاعیه های آتی برای آنان به نشانی جدید ارسال گردد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(16),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    " کلیه اختلافات و دعاوی ناشی از این قرارداد و یا راجع به آن از جمله انعقاد، اعتبار، فسخ ،تفسیر یا اجرای آن به مرکز داوری اتاق بازرگانی صنایع معادن و کشاورزی شیراز ارجاع می گردد. که مطابق با قانون اساسنامه و آیین داوری آن مرکز با رای یک یا سه نفر داور به صورت قطعی و لازم الاجرا حل و فصل می گردد. داور/ان علاوه بر مقررات حاکم عرف تجارتی ذیربط را نیز مراعات خواهند نمود. شرط داوری حاضر موافقتنامه مستقل از قرارداد اصلی تلقی می‌شود و در هر حال لازم الاجرا است."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(17),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "قرارداد حاضر در16 ماده و پیوست های آن (اجزای لاینفک قرارداد) در یک نسخه الکترونیکی تهیه و تنظیم گردیده است و در راستای تایید مفاد آن به تایید الکترونیکی طرف دوم (که به منزله قبول و تایید و امضای حضوری وی می باشد) رسید."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    " بنا به مراتب فوق طرفین قرارداد حاضر را از تاریخ درج شده در آن اجرایی نمودند. تمام/"
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 11
+                            ? _c("p", { attrs: { id: "step1S11" } }, [
+                                _vm._m(18),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _c("b", [
+                                    _vm._v("مهلت بارگیری محصول تا تاریخ "),
+                                    _c("span", { staticClass: "text-danger" }, [
+                                      _vm._v(
+                                        "@" +
+                                          _vm._s(
+                                            _vm.transactionInfo
+                                              .loading_dead_line
+                                          )
+                                      )
+                                    ]),
+                                    _vm._v(" خواهد بود.")
+                                  ])
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _c("b", [
+                                    _vm._v("ردصد کمسیون اینکوباک برابر "),
+                                    _c("span", { staticClass: "text-danger" }, [
+                                      _vm._v(
+                                        "@" +
+                                          _vm._s(
+                                            _vm.transactionInfo
+                                              .commission_persentage
+                                          )
+                                      )
+                                    ]),
+                                    _vm._v(" است.")
+                                  ])
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [_vm._v("توضیحات:")]),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "@" +
+                                      _vm._s(_vm.transactionInfo.admin_notes)
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e()
+                        ])
+                      ])
+                    ])
+                  : _c("div", { staticClass: "alert-message" }, [
+                      _vm._v(
+                        "\n                @" +
+                          _vm._s(_vm.msg) +
+                          "\n            "
+                      )
+                    ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.currentStep == 2
+            ? _c("div", { attrs: { id: "step2" } }, [
+                _vm._m(19),
+                _vm._v(" "),
+                _vm.msg == ""
+                  ? _c("div", { staticClass: "alert-message" }, [
+                      _c("div", { staticClass: "alert-danger col-xs-12" }, [
+                        _vm._v(
+                          "\n                    بارگیری محصول را با شرایط زیر انجام دهید\n                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "contents col-xs-12" }, [
+                        _c("div", { staticClass: "content-show" }, [
+                          _c("p", { staticClass: "title-p" }, [
+                            _vm._v("توضیحات اینکوباک")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "p",
+                            { staticStyle: { "white-space": "pre-wrap" } },
+                            [
+                              _vm._v(
+                                "\n                            @" +
+                                  _vm._s(_vm.transactionInfo.admin_notes) +
+                                  "\n                        "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "title-p" }, [
+                            _vm._v("توضیحات خریدار")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "p",
+                            { staticStyle: { "white-space": "pre-wrap" } },
+                            [
+                              _vm._v(
+                                "\n                            @" +
+                                  _vm._s(_vm.transactionInfo.description) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
+                        ])
+                      ])
+                    ])
+                  : _c("div", { staticClass: "alert-message" }, [
+                      _vm._v(
+                        "\n                @" +
+                          _vm._s(_vm.msg) +
+                          "\n            "
+                      )
+                    ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.currentStep == 3
+            ? _c("div", { attrs: { id: "step3" } }, [
+                _vm._m(20),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-right alert-message" }, [
+                  _vm._v(
+                    "\n                لطفا منتظر پرداخت طلبتان از سمت ما باشید.\n            "
+                  )
+                ])
+              ])
+            : _vm._e()
+        ])
+      : _c("div", { staticClass: "loading_images  col-xs-12" })
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("nav", { staticClass: "main-content-nav col-xs-12" }, [
+      _c("ul", { staticClass: "list-inline" }, [
+        _c("li", { staticClass: "list-item " }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v(" تسویه حساب ")])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "list-item " }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("بارگیری محصول")])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "list-item active" }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("تایید مفاد قرارداد ")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 1 :طرفین قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 2 :موضوع قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _c("b", [_vm._v("ماده 3 :مکانیسم اجرایی عملیات خرید و فروش")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده4 : تعهدات و تضمینات فروشنده")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 5: تعهدات خریدار")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده6: تعهدات اینکوباک")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 7 :کمیسیون")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 8 :مدت و تمدید قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 9: فسخ قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 10: خسارات قراردادی")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده11:مشترکات")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 12: حقوق مالکیت فکری")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _c("b", [_vm._v("ماده 13: محرمانگی و عدم افشای اسرار")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 14:فورس ماژور")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 15: ابلاغات")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 16:حل وفصل اختلافات و داوری")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 17: نسخ قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("الحاقیه")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("nav", { staticClass: "main-content-nav col-xs-12" }, [
+      _c("ul", { staticClass: "list-inline" }, [
+        _c("li", { staticClass: "list-item " }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v(" تسویه حساب ")])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "list-item active" }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("بارگیری محصول")])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "list-item" }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("تایید مفاد قرارداد ")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("nav", { staticClass: "main-content-nav col-xs-12" }, [
+      _c("ul", { staticClass: "list-inline" }, [
+        _c("li", { staticClass: "list-item active" }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v(" تسویه حساب ")])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "list-item " }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("بارگیری محصول")])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "list-item" }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("تایید مفاد قرارداد ")])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2a4784a2", module.exports)
+  }
+}
+
+/***/ }),
+/* 120 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(121)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(123)
+/* template */
+var __vue_template__ = __webpack_require__(124)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -55961,13 +58894,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 114 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(115);
+var content = __webpack_require__(122);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -55987,7 +58920,7 @@ if(false) {
 }
 
 /***/ }),
-/* 115 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -56001,12 +58934,12 @@ exports.push([module.i, "\n.help[data-v-6335f13e] {\n    direction: rtl;\n    pa
 
 
 /***/ }),
-/* 116 */
+/* 123 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(1);
 //
 //
 //
@@ -56106,7 +59039,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 117 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -56192,10 +59125,59 @@ if (false) {
 }
 
 /***/ }),
-/* 118 */
+/* 125 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 126 */,
+/* 127 */,
+/* 128 */,
+/* 129 */,
+/* 130 */,
+/* 131 */,
+/* 132 */,
+/* 133 */,
+/* 134 */,
+/* 135 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(136);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("553bc9f0", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2a4784a2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./transaction.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2a4784a2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./transaction.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 136 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.col-xs-1,\n.col-xs-2,\n.col-xs-3,\n.col-xs-4,\n.col-xs-5,\n.col-xs-6,\n.col-xs-7,\n.col-xs-8,\n.col-xs-9,\n.col-xs-10,\n.col-xs-11,\n.col-xs-12,\n.col-sm-1,\n.col-sm-2,\n.col-sm-3,\n.col-sm-4,\n.col-sm-5,\n.col-sm-6,\n.col-sm-7,\n.col-sm-8,\n.col-sm-9,\n.col-sm-10,\n.col-sm-11,\n.col-sm-12,\n.col-md-1,\n.col-md-2,\n.col-md-3,\n.col-md-4,\n.col-md-5,\n.col-md-6,\n.col-md-7,\n.col-md-8,\n.col-md-9,\n.col-md-10,\n.col-md-11,\n.col-md-12,\n.col-lg-1,\n.col-lg-2,\n.col-lg-3,\n.col-lg-4,\n.col-lg-5,\n.col-lg-6,\n.col-lg-7,\n.col-lg-8,\n.col-lg-9,\n.col-lg-10,\n.col-lg-11,\n.col-lg-12{\n    float: right;\n}\n\n\n/*start style main header*/\n#main {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n#main.little-main {\n    margin-right: 80px;\n}\n.main-header {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n    border-bottom: 2px solid #e6e6e6;\n}\n.image-header-profile {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.profile-menu-header {\n    float: left;\n}\n.right-menu-header {\n\n    padding: 16px;\n}\n.right-menu-header, .content-header {\n    float: right;\n}\n.profile-menu-header {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header a {\n    position: relative;\n}\n.profile-menu-header i {\n    position: absolute;\n\n    left: -75px;\n\n    top: 18px;\n\n    font-size: 20px;\n}\n.content-header {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a, .profile-menu-header a {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a {\n    font-size: 30px;\n}\n.right-menu-header a:hover, .profile-menu-header a:hover {\n    color: #2e353e;\n}\n.name-header-profile {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li {\n    margin: 5px;\n}\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n}\n\n/*end style main header*/\n\n/*start style sub-header*/\n.sub-header {\n    position: absolute;\n    left: 0;\n    background: #eff3f6;\n    bottom: -48px;\n    right: 0;\n    text-align: center;\n}\n.sub-header ul {\n    text-align: center;\n}\n.sub-header a {\n    padding: 16px;\n\n    display: inline-block;\n\n    color: #808c9b;\n\n    font-weight: bold;\n\n    font-size: 14px;\n\n    position: relative;\n}\n.sub-header a:hover {\n    color: #313942;\n}\n.sub-header a:hover::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n\n/*end style sub-header*/\n/*start main content style */\n.image-content-post {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i {\n    display: block;\n}\n.content-item {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content {\n    padding: 60px 15px;\n}\n.header-lable {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot:focus,.gray-bot:focus {\n    color: #fff;\n}\n.default_btn{\n    margin: 15px 0;\n    display: inline-block;\n    background: #eee;\n    color: #444;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot {\n    margin: 15px 0;\n    display: inline-block;\n    background: #85888d;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.default_btn:hover {\n    color: #444;\n    background: #ddd;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot:hover {\n    color: #fff;\n    background: #72757a;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco:hover {\n    color: #fff;\n}\n.font-big {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header {\n    width: 80px;\n}\n.little-main-header {\n    right: 80px;\n}\n.background_mob_sec {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user, .kind_activity {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div, .kind_activity > div {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input, .kind_activity input {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i, .kind_activity input:checked + i {\n    color: #28a745;\n}\n.kind_user i, .kind_activity i {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border: 2px solid;\n    border-radius: 50%;\n    padding: 3px 2px;\n    font-size: 14px;\n}\n.user-form {\n    padding: 0;\n}\n.alert-message{\n    padding: 20px;\n\n    text-align: right;\n}\n.user-form input[type=\"text\"] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.user-form input[type=\"button\"] {\n    width: 100%;\n}\n.user-form input[type=\"text\"]:focus {\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile {\n    float: right;\n}\n#icon-pro {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg {\n    height: 150px;\n}\n.main-content-nav {\n    margin: 20px auto;\n\n    width: 80%;\n\n    float: none;\n}\n.main-content-nav ul {\n    text-align: center;\n    margin-right: -25px;\n}\n.main-content-nav li {\n    padding: 14px 50px;\n    position: relative;\n    background: #fbfbfb;\n    font-size: 18px;\n}\n.main-content-nav li a{\n    color: #999;\n}\n.main-content-nav li.active a{\n    color: #333;\n}\n.main-content-nav li:after {\n    content: \"\";\n    position: absolute;\n    right: 0;\n    bottom: 0;\n    width: 0;\n    height: 0;\n    border-right: 20px solid #fff;\n    border-top: 26px solid transparent;\n    border-bottom: 20px solid transparent;\n}\n.main-content-nav li:before {\n    content: \"\";\n    position: absolute;\n    left: -20px;\n    bottom: 0;\n    width: 0;\n    height: 0;\n    border-right: 20px solid #fbfbfb;\n    border-top: 26px solid transparent;\n    border-bottom: 20px solid transparent;\n    z-index: 1;\n}\n.main-content-nav li.active {\n    background: #f7f7f7;\n    color: #333;\n}\n.main-content-nav li.active:before {\n    border-right-color: #f7f7f7;\n}\n#main .contents,#main .alert-danger{\n    text-align: center;\n    background: #f7f7f7;\n\n    width: 80%;\n\n    margin: 0 auto;\n\n    float: none;\n\n    overflow: hidden;\n\n    border-radius: 3px;\n\n    line-height: 1.618;\n\n    direction: rtl;\n}\n#main .alert-danger{\n    font-size: 18px;\n    background: #e41c38;\n    padding: 15px;\n    margin: 0 auto 20pxauto;\n    color: #fff;\n}\n.title-p{\n    margin: 10px auto 15px;\n\n    font-size: 16px;\n\n    font-weight: bold;\n}\n#main .contents p{\n    text-align: right;\n}\n#main .contents h2{\n    margin: 20px auto;\n}\n#main .continue_but{\n    float: right;\n}\n#main .main_buttons{\n    float: right;\n}\n#step1 .main_buttons{\n    text-align: right;\n}\n/*part 2*/\n.main-content-texts{\n    background: #fff;\n\n    border-radius: 3px;\n}\n.header-contents{\n    background: #fff;\n    margin: 15px auto;\n    border-radius: 3px;\n    padding: 10px;\n    text-align: left;\n}\n.header-contents .title-contents{\n    text-align: right;\n}\n.contents h2{\n    font-size: 22px;\n}\n.description-text{\n    font-size: 12px;\n    padding: 5px 0;\n    border-top:1px solid #ddd;\n}\n.services td {\n    color: #00d613;\n}\n.pre-pay td {\n    color: #e41c38;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header {\n        display: none;\n}\n.right-header.mobile-header {\n        display: block;\n        right: -300px;\n}\n.main-header, .little-main-header {\n        right: 0 !important;\n}\n#main, #main.little-main {\n        margin-right: 0 !important;\n}\n.post-contents-table {\n        width: 100%;\n}\n.copy-right {\n        display: none;\n}\n.clouse_menu {\n        display: none;\n}\n.clouse_menu_mob {\n        display: block;\n}\n.show-header button {\n        display: block;\n}\n.kind_user > div, .kind_activity > div {\n        float: none;\n}\n.img-profile .submit {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post, .contents-post {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n#main .contents,#main .alert-danger{\n\n        width: 100%;\n}\n#main .alert-danger{\n        font-size: 14px;\n}\n.name-header-profile {\n        display: none;\n}\n.profile-menu-header {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a {\n        font-size: 10px;\n}\n.sub-header {\n\n        bottom: -44px;\n}\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

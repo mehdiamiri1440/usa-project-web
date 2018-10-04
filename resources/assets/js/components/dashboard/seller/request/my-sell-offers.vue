@@ -1,4 +1,4 @@
-<style >
+<style scoped >
     /*start main content style */
     .main-content .list-group-item > div {
         float: right;
@@ -31,50 +31,6 @@
         display: block;
     }
 
-    .main-content {
-        padding: 60px 100px;
-    }
-
-
-    .kind_user > div, .kind_activity > div {
-        float: right;
-        overflow: hidden;
-        padding: 10px;
-        font-size: 15px;
-    }
-
-    .kind_user input, .kind_activity input {
-        cursor: pointer;
-        width: 23px;
-        height: 23px;
-        float: right;
-        position: absolute;
-        top: 2px;
-        right: 65px;
-        opacity: 0;
-    }
-
-    .kind_user input:checked + i, .kind_activity input:checked + i {
-        color: #28a745;
-        border: none;
-        padding: 4px;
-    }
-
-    .kind_user i, .kind_activity i {
-        background: none;
-        width: 23px;
-        height: 23px;
-        display: block;
-        position: absolute;
-        top: 4px;
-        right: 65px;
-        z-index: -1;
-        color: #808c9c;
-        border-radius: 50%;
-        padding: 2px;
-        font-size: 14px;
-        border: 2px solid;
-    }
 
     .list-title, .needs {
         float: right;
@@ -120,11 +76,17 @@
         border-radius: 5px;
         font-size: 13px;
     }
-
-
+    .main-content .list-group-item .status {
+        padding: 0;
+    }
+    .main-content {
+        padding: 90px 35px;
+    }
 
     .list-time {
         margin: 11px 15px;
+        text-align: center;
+        width:100%;
     }
 
     @media screen and (max-width: 992px) {
@@ -234,6 +196,7 @@
 </template>
 
 <script>
+    import {eventBus} from "../../../../app";
     export default {
         props: [
             'loading'
@@ -247,6 +210,16 @@
                 sellOffers: '',
                 popUpMsg: '',
                 load: false,
+                items: [
+                    {
+                        message: 'پیشنهادات من',
+                        url: 'mySellOffers'
+                    },
+                    {
+                        message: 'درخواست های جدید',
+                        url: 'buyAdRequests'
+                    }
+                ]
             }
         },
         methods: {
@@ -264,6 +237,7 @@
         },
         mounted() {
             this.init();
+            eventBus.$emit('subHeader', this.items);
         },
     }
 </script>

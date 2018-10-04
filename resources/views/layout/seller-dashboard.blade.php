@@ -75,7 +75,10 @@
                     storage="{{asset('storage/')}}"
                     defultimg="{{asset('assets/img/user-defult.png')}}"
                     loading="{{asset('assets/img/gif/loading.gif')}}"
+                    trans="{{url('dashboard/transaction-detail')}}"
+                    transRep="{{url('dashboard/transaction-report')}}"
             ></router-view>
+
             </main>
             @show
 
