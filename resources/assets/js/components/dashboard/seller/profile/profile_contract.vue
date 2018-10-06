@@ -531,7 +531,7 @@
                         <span><b> ماده 1 :طرفین قرارداد</b></span><br/><br/>
 
                         <span>1-1 طرف اول: شرکت سهامی خاص فناوران توسعه تجارت ارم  به شماره ثبت 49223  به آدرس شیراز-میدان ارم- ساختمان مدیریت دانشگاه شیراز-طبقه نهم و کدپستی 7194684334 و شماره تماس 02171053525 که از این پس اینکوباک نامیده می شود.</span><br/>
-                        <!--<span>1-2 طرف دوم: هر شخص حقیقی یا حقوقی به نام @{{currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name}} به شماره ثبت /جواز کسب @{{currentUser.profile.company_register_code}} و   به آدرس @{{currentUser.profile.address}} و کدپستی @{{currentUser.profile.postal_code}} و شماره تماس {{currentUser.profile.public_phone}} که از این به بعد فروشنده نامیده می شود.</span>-->
+                        <span>1-2 طرف دوم: هر شخص حقیقی یا حقوقی به نام {{currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name}} به شماره ثبت /جواز کسب {{currentUser.profile.company_register_code}} و   به آدرس {{currentUser.profile.address}} و کدپستی {{currentUser.profile.postal_code}} و شماره تماس {{currentUser.profile.public_phone}} که از این به بعد فروشنده نامیده می شود.</span>
                         <br/><br/>
                         <span><b>ماده 2 :موضوع قرارداد</b></span><br/><br/>
                         <span>2-1  تنظیم همکاری و روابط قراردادی طرفین در خصوص همکاری اینکوباک با فروشنده جهت فروش کالا و محصولات خود از طریق ارائه این محصولات در وبسایت ایجاد شده توسط اینکوباک به نشانی incobac.com .بدیهی است با توجه به اینکه مالکیت محصولات ارائه شده در سایت متعلق به اینکوباک نبوده و اینکوباک صرفاً ارائه دهنده بستر اینترنتی جهت فروش محصولات فوق می باشد لذا مسئولیت کلیه اوصاف محصول اعم از نوع، بسته بندی، قیمت و هرگونه اطلاعات ذکر شده در رابطه با محصول بر عهده فروشنده است.</span><br/><br/>
@@ -641,27 +641,29 @@
 <script>
     import {eventBus} from '../../../../app';
     export default {
-        data(){
-            return{
-                pageStep:1,
-                errors:'',
-                popUpMsg:'',
-                submiting:false,
-                contractConfirmed:false,  items: [
-                    {
-                        message: 'قرارداد',
-                        url: 'profileContract',
-                    },
-                    {
-                        message: ' اطلاعات تکمیلی',
-                        url: 'compelementry',
-                    },
-                    {
-                        message: 'اطلاعات پایه',
-                        url: 'profileBasic',
-                    }
-                ],
-            }
+        data:function(){
+          return{
+              pageStep:1,
+              errors:'',
+              popUpMsg:'',
+              submiting:false,
+              contractConfirmed:false,
+              currentUser:'',
+              items: [
+                  {
+                      message: 'قرارداد',
+                      url: 'profileContract',
+                  },
+                  {
+                      message: ' اطلاعات تکمیلی',
+                      url: 'compelementry',
+                  },
+                  {
+                      message: 'اطلاعات پایه',
+                      url: 'profileBasic',
+                  }
+              ],
+          }
         },
         methods:{
             init:function(){
@@ -669,6 +671,7 @@
 
                 axios.post('/user/profile_info')
                     .then(function(response){
+                        self.currentUser = response.data;
                         self.contractConfirmed = response.data.user_info.contract_confirmed;
                     });
             },
@@ -696,7 +699,7 @@
                 }
             },
             goToNextPage: function(){
-                if (this.pageStep < 3){
+                if (this.pageStep < 10){
                     this.pageStep++;
                 }
             },
@@ -713,10 +716,6 @@
             eventBus.$emit('subHeader', this.items);
         },
     }
-
-
-
-
 
 </script>
 

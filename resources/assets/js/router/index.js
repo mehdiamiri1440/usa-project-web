@@ -13,6 +13,7 @@ import registerProduct from '../components/dashboard/seller/product/product-basi
 import myTransactions from '../components/dashboard/seller/transaction/my-transactions.vue';
 import myTerminatedTransactions from '../components/dashboard/seller/transaction/my-terminated-transactions.vue';
 import transactionDetail from '../components/dashboard/seller/transaction/transaction.vue';
+import transactionReport from '../components/dashboard/seller/transaction/transactionReport';
 import guide from '../components/dashboard/seller/guide.vue';
 Vue.use(Router);
 
@@ -55,7 +56,7 @@ export default new Router({
             component: myTransactions,
         }
         , {
-            path: '/my-terminated-transactions',
+            path: '/terminated-transaction-list',
             name: 'myTerminatedTransactions',
             component: myTerminatedTransactions,
         }
@@ -63,6 +64,11 @@ export default new Router({
             path: '/transaction-detail/:id',
             name: 'transactionDetail',
             component: transactionDetail,
+        }
+        ,{
+            path: '/transaction-report/:id',
+            name: 'transactionReport',
+            component: transactionReport,
         }
         , {
             path: '/guide',

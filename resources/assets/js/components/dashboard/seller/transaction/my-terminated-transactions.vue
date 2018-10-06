@@ -143,7 +143,7 @@
                 <!--end title list -->
 
                 <li class="list-group-item content-list col-xs-12" v-for="transaction in transactions">
-                    <a :href="trans + '/' + transaction.transaction_id">
+                    <router-link :to="'/transaction-report/' + transaction.transaction_id">
                         <p class="number col-xs-2">
 
                             {{transaction.transaction_id}}
@@ -156,7 +156,7 @@
 
                             {{transaction.product_name}}
                         </p>
-                    </a>
+                    </router-link>
                 </li>
 
             </ul>

@@ -32,7 +32,7 @@
       <div class="header-menu">
           <ul class="list-unstyled">
               <li class="list-item" >
-                  <router-link  :to="{ name : 'profileBasic' }">
+                  <router-link  :to="{ name : 'profileBasic' }" >
                       <span>ویرایش پروفایل</span>
                   </router-link>
               </li>
@@ -45,11 +45,6 @@
 
               <li class="list-item  ">
                   <router-link :to="{ name : 'registerProduct' }">
-                      <span>ثبت محصول </span>
-                  </router-link>
-              </li>
-              <li class="list-item  ">
-                  <router-link :to="{ name : 'transactionDetail' }">
                       <span>ثبت محصول </span>
                   </router-link>
               </li>

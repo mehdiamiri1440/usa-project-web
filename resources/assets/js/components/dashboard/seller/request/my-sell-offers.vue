@@ -185,11 +185,11 @@
                 </li>
             </ul>
         </section>
-        <section class="main-content col-xs-12" v-if="sellOffers.length == 0 && !load">
+        <section class="main-content col-xs-12" v-if="sellOffers.length == 0 && !loading">
             <h4 dir="rtl" class="text-center">پیشنهاد خریدی ثبت نکرده اید.</h4>
         </section>
-        <div class="loading_images  col-xs-12" v-show="load">
-            <img :src="loading" style="width:200px;height:200px">
+        <div class="loading_images  col-xs-12" v-show="loading">
+            <img :src="loader" style="width:200px;height:200px">
         </div>
     </div>
 
@@ -199,7 +199,7 @@
     import {eventBus} from "../../../../app";
     export default {
         props: [
-            'loading'
+            'loader'
         ],
         data: function () {
             return {
@@ -209,7 +209,7 @@
                 },
                 sellOffers: '',
                 popUpMsg: '',
-                load: false,
+                loading: false,
                 items: [
                     {
                         message: 'پیشنهادات من',
@@ -224,14 +224,14 @@
         },
         methods: {
             init: function () {
-                this.load = true;
+                this.loading = true;
 
                 var self = this;
 
                 axios.post('/get_my_sell_offer_list')
                     .then(function (response) {
                         self.sellOffers = response.data.sell_offers;
-                        self.load = false;
+                        self.loading = false;
                     });
             },
         },

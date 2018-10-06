@@ -817,17 +817,17 @@
                             </p>
                             <p id="step1S11" v-if="pageStep == 11">
                                 <span><b>الحاقیه</b></span><br/><br/>
-                                <span><b>مهلت بارگیری محصول تا تاریخ <span class="text-danger">@{{transactionInfo.loading_dead_line}}</span> خواهد بود.</b></span><br/><br/>
-                                <span><b>ردصد کمسیون اینکوباک برابر <span class="text-danger">@{{transactionInfo.commission_persentage}}</span> است.</b></span><br/><br/>
+                                <span><b>مهلت بارگیری محصول تا تاریخ <span class="text-danger">{{transactionInfo.loading_dead_line}}</span> خواهد بود.</b></span><br/><br/>
+                                <span><b>ردصد کمسیون اینکوباک برابر <span class="text-danger">{{transactionInfo.commission_persentage}}</span> است.</b></span><br/><br/>
                                 <span>توضیحات:</span><br/>
-                                <span>@{{transactionInfo.admin_notes}}</span><br/><br/>
+                                <span>{{transactionInfo.admin_notes}}</span><br/><br/>
 
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="alert-message" v-else>
-                    @{{msg}}
+                    {{msg}}
                 </div>
             </div>
 
@@ -853,17 +853,17 @@
                         <div class="content-show">
                             <p class="title-p">توضیحات اینکوباک</p>
                             <p  style="white-space:pre-wrap">
-                                @{{transactionInfo.admin_notes}}
+                                {{transactionInfo.admin_notes}}
                             </p>
                             <p class="title-p">توضیحات خریدار</p>
                             <p  style="white-space:pre-wrap">
-                                @{{transactionInfo.description}}
+                                {{transactionInfo.description}}
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="alert-message" v-else>
-                    @{{msg}}
+                    {{msg}}
                 </div>
                 <!--end part 2-->
             </div>
@@ -897,13 +897,15 @@
 </template>
 
 <script>
+        import {eventBus} from "../../../../app";
 
-    export default {
+        export default {
 
         props: [
             'trans',
-            'loading'
-        ],
+            'loading',
+
+            ],
         data: function () {
             return {
                 currentStep: 1,
@@ -925,6 +927,12 @@
 
                 },
                 submiting:false,
+                items: [
+                    {
+                        message: 'لیست تراکنش ها',
+                        url: 'transactionDetail'
+                    }
+                ]
 
             }
         },
@@ -977,6 +985,7 @@
             }
         },
         mounted: function () {
+            eventBus.$emit('subHeader', this.items);
             this.init();
         }
     }
