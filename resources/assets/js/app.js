@@ -23,7 +23,6 @@ import buyAdRequestDetail from './components/dashboard/seller/request/buyAd-requ
 import productBasic from './components/dashboard/seller/product/product-basic.vue';
 import mySellOffers from './components/dashboard/seller/request/my-sell-offers.vue';
 import profileBasic from './components/dashboard/seller/profile/profile_basic.vue'
-
 import transitionSeller from './components/dashboard/buyer/transaction/transaction.vue';
 import router from './router'
 
