@@ -343,6 +343,100 @@
     .loader-wrapper{
         display:none;
     }
+    @media screen and (max-width: 992px) {
+        .right-header.desktop-header {
+            display: none;
+        }
+
+        .right-header.mobile-header {
+            display: block;
+            right: -300px;
+        }
+
+        .main-header, .little-main-header {
+            right: 0 !important;
+        }
+
+        #main, #main.little-main {
+            margin-right: 0 !important;
+        }
+
+        .post-contents-table {
+            width: 100%;
+        }
+
+        .copy-right {
+            display: none;
+        }
+
+        .clouse_menu {
+            display: none;
+        }
+
+        .clouse_menu_mob {
+            display: block;
+        }
+
+        .show-header button {
+            display: block;
+        }
+
+        .kind_user > div, .kind_activity > div {
+            float: none;
+
+        }
+
+        .img-profile .submit {
+            position: relative;
+            width: 100%;
+            margin: 25px auto;
+
+        }
+
+        .img-profile .submit label {
+            width: 40%;
+            padding: 12px 0;
+        }
+
+        .img-profile {
+            float: none;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .image-content-post, .contents-post {
+            width: 100%;
+            float: none;
+            margin: 10px 0;
+            padding: 0;
+        }
+
+        .name-header-profile {
+            display: none;
+        }
+
+        .profile-menu-header {
+            padding: 7px;
+            padding-left: 36px;
+        }
+    }
+
+    @media screen and (max-width: 555px) {
+        .content-header {
+            display: none;
+        }
+
+    }
+
+    @media screen and (max-width: 345px) {
+        .sub-header a {
+            font-size: 12px !important;
+            padding: 16px 13px !important;
+        }
+        .sub-header {
+            bottom: -44px;
+        }
+    }
 
     /*end loader*/
 </style>

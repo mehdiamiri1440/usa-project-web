@@ -104,7 +104,7 @@
             }
         },watch:{
             $route (){
-               if (this.subIsActive('/complementry')  || this.subIsActive('/profile_contract') || this.subIsActive('/*')){
+               if (this.subIsActive('/complementry')  || this.subIsActive('/profile_contract') ){
                    this.active_el = 1
                }else if(this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests') ){
                    this.active_el = 2
@@ -116,7 +116,10 @@
                    this.active_el = 5
                }else if(this.subIsActive('/guide')){
                    this.active_el = 6
+               }else{
+                   this.active_el = 1
                }
+               console.log(this.active_el);
             }
         },mounted:function(){
             if (this.subIsActive('/complementry')  || this.subIsActive('/profile_contract') || this.subIsActive('/*')){

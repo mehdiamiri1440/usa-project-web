@@ -23,29 +23,11 @@
         height: 85px;
     }
 
-    .rules-check {
-        font-weight: 800;
-    }
-
-    .rules-check {
-        font-weight: 800;
-    }
 
     .main-content {
         padding: 60px 100px;
         direction: rtl;
     }
-
-    .header-lable {
-        display: block;
-        margin: 13px;
-        padding: 0;
-    }
-
-    .content-lable {
-        font-weight: 400;
-    }
-
     .roules-check-inside {
         color: #28a745;
     }
@@ -75,23 +57,8 @@
 
     }
 
-    .botton-inco {
-        margin: 15px 7px;
-        display: inline-block;
-        color: #313a43;
-        padding: 8px 35px;
-        border-radius: 3px;
-        text-align: center;
-    }
-
-    .botton-inco:hover {
-        color: #fff;
-    }
-
-    .font-big {
-        font-size: 23px;
-        position: relative;
-        top: 3px;
+    #main.little-main {
+        margin-right: 80px;
     }
 
     .little_header {
@@ -100,17 +67,6 @@
 
     .little-main-header {
         right: 80px;
-    }
-
-    .background_mob_sec {
-        position: fixed;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        top: 0;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: -1;
-        display: none;
     }
 
     .rules {
@@ -157,110 +113,6 @@
         font-size: 14px;
     }
 
-    @media screen and (max-width: 992px) {
-        .right-header.desktop-header {
-            display: none;
-        }
-
-        .right-header.mobile-header {
-            display: block;
-            right: -300px;
-        }
-
-        .main-header, .little-main-header {
-            right: 0 !important;
-        }
-
-        #main, #main.little-main {
-            margin-right: 0 !important;
-        }
-
-        .post-contents-table {
-            width: 100%;
-        }
-
-        .copy-right {
-            display: none;
-        }
-
-        .clouse_menu {
-            display: none;
-        }
-
-        .clouse_menu_mob {
-            display: block;
-        }
-
-        .show-header button {
-            display: block;
-        }
-
-        .kind_user > div, .kind_activity > div {
-            float: none;
-
-        }
-
-        .img-profile .submit {
-            position: relative;
-            width: 100%;
-            margin: 25px auto;
-
-        }
-
-        .img-profile .submit label {
-            width: 40%;
-            padding: 12px 0;
-        }
-
-        .img-profile {
-            float: none;
-        }
-    }
-
-    @media screen and (max-width: 992px) {
-        .main-content {
-            padding: 60px 15px;
-            direction: rtl;
-        }
-    }
-
-    @media screen and (max-width: 768px) {
-        .image-content-post, .contents-post {
-            width: 100%;
-            float: none;
-            margin: 10px 0;
-            padding: 0;
-        }
-
-        .name-header-profile {
-            display: none;
-        }
-
-        .profile-menu-header {
-            padding: 7px;
-            padding-left: 36px;
-        }
-    }
-
-    @media screen and (max-width: 555px) {
-        .content-header {
-            display: none;
-        }
-
-    }
-
-    @media screen and (max-width: 345px) {
-        .sub-header a {
-            font-size: 10px;
-
-        }
-
-        .sub-header {
-
-            bottom: -44px;
-
-        }
-    }
 </style>
 <template>
     <div>

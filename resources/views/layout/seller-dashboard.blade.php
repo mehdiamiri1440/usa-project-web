@@ -16,7 +16,7 @@
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap-theme.min.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/blurry.load.css')}}">
-{{--        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/dashboard/master/style.css')}}">--}}
+
         <script src="{{asset('assets/cdn/axios.js')}}"></script>
 
         @yield('header_links')
