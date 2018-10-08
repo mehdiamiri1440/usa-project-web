@@ -8,6 +8,7 @@ import profileBasic from '../components/dashboard/seller/profile/profile_basic.v
 import compelementry from '../components/dashboard/seller/profile/profile_complete.vue'
 import profileContract from '../components/dashboard/seller/profile/profile_contract.vue'
 import buyAdRequests from '../components/dashboard/seller/request/buyAd-requests.vue'
+import buyAdRequestsDetail from '../components/dashboard/seller/request/buyAd-requests-detail.vue'
 import mySellOffers from '../components/dashboard/seller/request/my-sell-offers.vue'
 import registerProduct from '../components/dashboard/seller/product/product-basic.vue'
 import myTransactions from '../components/dashboard/seller/transaction/my-transactions.vue';
@@ -39,6 +40,10 @@ export default new Router({
             path: '/buyAd-requests',
             name: 'buyAdRequests',
             component: buyAdRequests,
+        },{
+            path: '/buyAd-request-detail/:id',
+            name: 'buyAdRequestsDetail',
+            component: buyAdRequestsDetail,
         }
         , {
             path: '/my-sell-offers',

@@ -493,17 +493,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dashboard_header_vue__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dashboard_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_dashboard_header_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_request_buyAd_requests_detail_vue__ = __webpack_require__(76);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_request_buyAd_requests_detail_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_request_buyAd_requests_detail_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_transaction_transaction_vue__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_transaction_transaction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_transaction_transaction_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__router__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_product_product_basic_vue__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_product_product_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_product_product_basic_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_request_my_sell_offers_vue__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_request_my_sell_offers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_request_my_sell_offers_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_basic_vue__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_basic_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_buyer_transaction_transaction_vue__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_buyer_transaction_transaction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_dashboard_buyer_transaction_transaction_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__router__ = __webpack_require__(94);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -524,7 +522,7 @@ window.Vue = __webpack_require__(13);
 
 
 
-
+// import buyAdRequestDetail from './components/dashboard/seller/request/buyAd-requests-detail.vue';
 
 
 
@@ -563,18 +561,18 @@ var eventBus = new Vue();
 
 var app = new Vue({
     el: '#app',
-    router: __WEBPACK_IMPORTED_MODULE_7__router__["a" /* default */],
+    router: __WEBPACK_IMPORTED_MODULE_6__router__["a" /* default */],
     components: {
-        profileBasic: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue___default.a,
+        profileBasic: __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_basic_vue___default.a,
         loginCom: __WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue___default.a,
         headerDash: __WEBPACK_IMPORTED_MODULE_1__components_dashboard_header_vue___default.a,
         // buyAdRequest,
-        buyAdRequestDetail: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_request_buyAd_requests_detail_vue___default.a,
-        productBasic: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue___default.a,
-        mySellOffers: __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue___default.a,
+        // buyAdRequestDetail,
+        productBasic: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_product_product_basic_vue___default.a,
+        mySellOffers: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_request_my_sell_offers_vue___default.a,
         // myTransactions,
         // myTerminatedTransactions,
-        transitionSeller: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_transaction_transaction_vue___default.a
+        transitionSeller: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_buyer_transaction_transaction_vue___default.a
     }
 });
 
@@ -46614,17 +46612,21 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(148)
+}
 var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(77)
 /* template */
-var __vue_template__ = __webpack_require__(78)
+var __vue_template__ = __webpack_require__(150)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-636d622b"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -46662,6 +46664,475 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -46887,77 +47358,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 78 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("section", { staticClass: "main-content col-xs-12" }, [
-        _c("div", { staticClass: "contents col-xs-12" }, [
-          _c("div", { staticClass: "info-contents col-xs-12" }, [
-            _c("div", { staticClass: "top-contentas  col-xs-12" }, [
-              _c("div", { staticClass: "main-article-content col-md-7" }, [
-                _c("br"),
-                _vm._v(" "),
-                _c("table", { staticClass: "table table-striped" }, [
-                  _c("tr", [
-                    _c("td", [
-                      _vm._v("قیمت واحد"),
-                      _c("span", {}, [_vm._v("(هر کیلو به تومان)")]),
-                      _vm._v(" :")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [_c("td", [_vm._v(" محل تحویل کالا:")])]),
-                  _vm._v(" "),
-                  _c("tr", [_c("td", [_vm._v(" میزان نیازمندی")])]),
-                  _vm._v(" "),
-                  _c("tr", [_c("td", [_vm._v(" زمان ثبت درخواست:")])])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "image-article-content col-md-5" }, [
-                _c("div", { staticClass: "main-image col-xs-12" }),
-                _vm._v(" "),
-                _c("div", { staticClass: "owl-carousel col-xs-12" })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "bottom-contents  col-xs-12" }, [
-              _c("form", [
-                _c("label", { staticClass: "header-lable" }, [
-                  _vm._v(
-                    "تمامی موارد خواسته شده را وارد کرده و برای خریدار ارسال\r\n                            نمایید."
-                  )
-                ])
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-636d622b", module.exports)
-  }
-}
-
-/***/ }),
+/* 78 */,
 /* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -50824,26 +51225,29 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_contract_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_contract_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_buyAd_requests_vue__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_buyAd_requests_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_buyAd_requests_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_my_sell_offers_vue__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_my_sell_offers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_my_sell_offers_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_product_product_basic_vue__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_product_product_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_product_product_basic_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_my_transactions_vue__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_my_transactions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_my_transactions_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_terminated_transactions_vue__ = __webpack_require__(116);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_terminated_transactions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_terminated_transactions_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_transaction_vue__ = __webpack_require__(121);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_transaction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_transaction_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transactionReport__ = __webpack_require__(126);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transactionReport___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transactionReport__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_guide_vue__ = __webpack_require__(133);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_guide_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_guide_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_buyAd_requests_detail_vue__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_buyAd_requests_detail_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_buyAd_requests_detail_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_request_my_sell_offers_vue__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_request_my_sell_offers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_request_my_sell_offers_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_product_product_basic_vue__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_product_product_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_product_product_basic_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_transactions_vue__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_transactions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_transactions_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_my_terminated_transactions_vue__ = __webpack_require__(116);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_my_terminated_transactions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_my_terminated_transactions_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transaction_vue__ = __webpack_require__(121);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transaction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transaction_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_transaction_transactionReport__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_transaction_transactionReport___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_transaction_transactionReport__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_dashboard_seller_guide_vue__ = __webpack_require__(133);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_dashboard_seller_guide_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_dashboard_seller_guide_vue__);
 
 
 
 // components
 
 // profile components
+
 
 
 
@@ -50878,33 +51282,37 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         name: 'buyAdRequests',
         component: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_buyAd_requests_vue___default.a
     }, {
+        path: '/buyAd-request-detail/:id',
+        name: 'buyAdRequestsDetail',
+        component: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_buyAd_requests_detail_vue___default.a
+    }, {
         path: '/my-sell-offers',
         name: 'mySellOffers',
-        component: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_my_sell_offers_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_request_my_sell_offers_vue___default.a
     }, {
         path: '/register-product',
         name: 'registerProduct',
-        component: __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_product_product_basic_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_product_product_basic_vue___default.a
     }, {
         path: '/transaction-list',
         name: 'myTransactions',
-        component: __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_my_transactions_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_transactions_vue___default.a
     }, {
         path: '/terminated-transaction-list',
         name: 'myTerminatedTransactions',
-        component: __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_terminated_transactions_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_my_terminated_transactions_vue___default.a
     }, {
         path: '/transaction-detail/:id',
         name: 'transactionDetail',
-        component: __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_transaction_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transaction_vue___default.a
     }, {
         path: '/transaction-report/:id',
         name: 'transactionReport',
-        component: __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transactionReport___default.a
+        component: __WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_transaction_transactionReport___default.a
     }, {
         path: '/guide',
         name: 'guide',
-        component: __WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_guide_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_13__components_dashboard_seller_guide_vue___default.a
     }]
 }));
 
@@ -56206,7 +56614,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.main-content {\n    padding: 90px 35px;\n}\n", ""]);
+exports.push([module.i, "\n.main-content {\n    padding: 90px 35px;\n}\n.list-title, .needs,.list-time {\n    float: right;\n    text-align: center;\n    line-height: 1.618;\n    font-weight: bold;\n    padding-top: 5px;\n}\n.list-group-item {\n    border: 1px solid #ddd;\n}\n.detail-success {\n    padding: 8px 0;\n    width: 100%;\n    background: #28a745;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.main-content > ul {\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 10px #e1e1e1 ;\n            box-shadow: 0 0 10px #e1e1e1 ;\n    overflow: hidden;\n}\n.main-content .list-group-item p {\n    text-align: center;\n}\n#main.little-main {\n    margin-right: 80px;\n}\n@media screen and (max-width: 992px) {\n.list-title, .needs,.list-time {\n       padding: 15px;\n}\n}\n\n\n", ""]);
 
 // exports
 
@@ -56270,10 +56678,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ["byadd", "loader", "storage", "defultimg"],
+    props: ["loader", "storage", "defultimg"],
     data: function data() {
         return {
             currentUser: {
@@ -56328,66 +56772,71 @@ var render = function() {
           { staticClass: "main-content col-xs-12" },
           _vm._l(_vm.buyAds, function(buyAd) {
             return _c("ul", { staticClass: "list-unstyled" }, [
-              _c("li", { staticClass: "list-group-item" }, [
-                _c("p", { staticClass: "list-title col-sm-3" }, [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(buyAd.category_name) +
-                      "\n                        "
-                  ),
-                  _c("span", [_vm._v(" | ")]),
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(buyAd.subcategory_name) +
-                      "\n                        "
-                  ),
-                  _c("span", [_vm._v(" | ")]),
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(buyAd.name) +
-                      "\n                    "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "needs col-sm-4" }, [
-                  _c("span", { staticClass: "static-content" }, [
+              _c(
+                "li",
+                { staticClass: "list-group-item  col-xs-12" },
+                [
+                  _c("p", { staticClass: "list-title col-sm-3 col-xs-12" }, [
                     _vm._v(
-                      "\n                        میزان نیازمندی :\n                    "
+                      "\n                        " +
+                        _vm._s(buyAd.category_name) +
+                        "\n                        "
+                    ),
+                    _c("span", [_vm._v(" | ")]),
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(buyAd.subcategory_name) +
+                        "\n                        "
+                    ),
+                    _c("span", [_vm._v(" | ")]),
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(buyAd.name) +
+                        "\n                    "
                     )
                   ]),
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(buyAd.requirement_amount) +
-                      "\n\n                        "
-                  ),
-                  _c("span", { staticClass: "static-content" }, [
-                    _vm._v("\nکیلوگرم\n                    ")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "list-time col-sm-2" }, [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(buyAd.register_date) +
-                      "\n                    "
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "col-sm-3",
-                    attrs: { href: _vm.byadd + "/" + buyAd.id }
-                  },
-                  [
-                    _c("p", { staticClass: "detail-success" }, [
+                  _vm._v(" "),
+                  _c("p", { staticClass: "needs col-sm-4 col-xs-12" }, [
+                    _c("span", { staticClass: "static-content" }, [
                       _vm._v(
-                        "\n                            مشاهده ی جزییات\n                        "
+                        "\n                        میزان نیازمندی :\n                    "
                       )
+                    ]),
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(buyAd.requirement_amount) +
+                        "\n\n                        "
+                    ),
+                    _c("span", { staticClass: "static-content" }, [
+                      _vm._v("\nکیلوگرم\n                    ")
                     ])
-                  ]
-                )
-              ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "list-time col-sm-2 col-xs-12" }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(buyAd.register_date) +
+                        "\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "col-sm-3 col-xs-12",
+                      attrs: { to: "/buyAd-request-detail/" + buyAd.id }
+                    },
+                    [
+                      _c("p", { staticClass: "detail-success" }, [
+                        _vm._v(
+                          "\n                                مشاهده ی جزییات\n                            "
+                        )
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
             ])
           })
         )
@@ -61331,6 +61780,347 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 139 */,
+/* 140 */,
+/* 141 */,
+/* 142 */,
+/* 143 */,
+/* 144 */,
+/* 145 */,
+/* 146 */,
+/* 147 */,
+/* 148 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(149);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("14922b92", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-636d622b\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./buyAd-requests-detail.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-636d622b\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./buyAd-requests-detail.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 149 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n/*custom cods*/\n.green-bot[data-v-636d622b] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.black-bot[data-v-636d622b] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #313a43;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.black-bot[data-v-636d622b]:hover {\n\n    background: #283039;\n    color: #fff;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-636d622b]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-636d622b] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-636d622b]:hover {\n    color: #fff;\n}\n.font-big[data-v-636d622b] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-636d622b] {\n    width: 80px;\n}\n.little-main-header[data-v-636d622b] {\n    right: 80px;\n}\n.background_mob_sec[data-v-636d622b] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.contents[data-v-636d622b] {\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 10px #e1e1e1;\n            box-shadow: 0 0 10px #e1e1e1;\n    padding: 15px ;\n    margin-top: 50px;\n}\n.user-info[data-v-636d622b]{\n    border-bottom: 2px solid #eff3f6;\n    padding: 0 0 10px;\n}\n.user_image[data-v-636d622b] {\n    overflow: hidden;\n    width: 85px;\n    height: 85px;\n    border-radius: 50%;\n    padding: 0;\n    float: right;\n    text-align: center;\n}\n.user_image img[data-v-636d622b]{\n    height: 100%;\n}\n.info-contents[data-v-636d622b]{\n    padding: 0;\n}\n.image-article-content[data-v-636d622b]{\n    padding-right: 0;\n}\n.main-article-content[data-v-636d622b]{\n    padding-left: 0;\n    margin-bottom: 25px;\n}\n.main-image[data-v-636d622b]{\n    margin-bottom: 7px;\n    padding: 0;\n}\n.main-article-content a[data-v-636d622b]{\n    font-size: 24px;\n    margin-bottom: 20px;\n    display: inline-block;\n    color: #666;\n}\n.main-image img[data-v-636d622b]{\n    border-radius: 3px;\n}\n.image_company[data-v-636d622b]{\n    margin: 15px auto ;\n}\n.top-contentas[data-v-636d622b]{\n    padding: 0;\n    padding-bottom: 10px;\n    margin-bottom: 10px;\n    border-bottom:2px solid #ddd;\n}\n.bottom-contents[data-v-636d622b]{\n    padding: 0;\n    padding-top: 10px;\n    margin-top: 10px;\n}\n.fields[data-v-636d622b]{\n    margin: 7px auto;\n    padding: 0;\n}\n.fields > div[data-v-636d622b]{\n    float: right;\n}\n.fields  div textarea[data-v-636d622b]{\n    height: 110px;\n    max-height: 110px;\n    min-height: 110px;\n    max-width: 100%;\n    min-width: 100%;\n}\n.fields .green-bot[data-v-636d622b],.fields .black-bot[data-v-636d622b]{\n    width: 100%;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header[data-v-636d622b] {\n        display: none;\n}\n.actions[data-v-636d622b]{\n        direction: ltr;\n        margin-top: 20px;\n}\n.right-header.mobile-header[data-v-636d622b] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-636d622b], .little-main-header[data-v-636d622b] {\n        right: 0 !important;\n}\n#main[data-v-636d622b], #main.little-main[data-v-636d622b] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-636d622b] {\n        width: 100%;\n}\n.copy-right[data-v-636d622b] {\n        display: none;\n}\n.clouse_menu[data-v-636d622b] {\n        display: none;\n}\n.clouse_menu_mob[data-v-636d622b] {\n        display: block;\n}\n.show-header button[data-v-636d622b] {\n        display: block;\n}\n.kind_user > div[data-v-636d622b], .kind_activity > div[data-v-636d622b] {\n        float: none;\n}\n.img-profile .submit[data-v-636d622b] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-636d622b] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-636d622b] {\n        float: none;\n}\n}\n\n/*custom style callander*/\n#bd-main-first-date-id[data-v-636d622b] {\n    top: 37px;\n    border: none;\n    border-radius: 3px;\n    padding: 10px;\n    left: 0;\n    z-index: 1;\n}\n.bd-dropdown[data-v-636d622b]{\n    position: relative;\n}\n.first-date-id[data-v-636d622b]{\n    font-family: iranyekan, sans-serif;\n}\nselect#bd-month-first-date-id option[data-v-636d622b] {\n    direction: rtl;\n    text-indent:5px;\n}\n#bd-main-first-date-id input[data-v-636d622b], #bd-main-first-date-id select[data-v-636d622b] {\n    padding: 0 0;\n    font-size: 16px;\n    color: #222;\n    text-align: center;\n}\n#bd-year-first-date-id[data-v-636d622b] {\n    background: none;\n    direction: ltr;\n}\n#bd-month-first-date-id[data-v-636d622b] {\n    background: none;\n    top: 0;\n    direction: ltr;\n}\n#bd-prev-first-date-id[data-v-636d622b] {\n    font-family: \"FontAwesome\", sans-serif;\n    font-size: 41px;\n    text-align: center;\n    position: absolute;\n    left: -80px;\n    bottom: 110px;\n    padding: 0;\n    width: 55px;\n    height: 55px;\n    padding-right: 6px;\n    border-radius: 50%;\n    background: rgba(0,0,0,0.3);\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    color: #fff;\n}\n#bd-next-first-date-id[data-v-636d622b] {\n    font-family: \"FontAwesome\", sans-serif;\n    font-size: 41px;\n    text-align: center;\n    position: absolute;\n    right: -80px;\n    bottom: 110px;\n    padding: 0;\n    padding-left: 6px;\n    width: 55px;\n    height: 55px;\n    border-radius: 50%;\n    background: rgba(0,0,0,0.3);\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    color: #fff;\n}\n#bd-next-first-date-id[data-v-636d622b]:hover,#bd-prev-first-date-id[data-v-636d622b]:hover{\n    background: rgba(0,0,0,0.7);\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.bd-table thead tr[data-v-636d622b], .bd-goto-today[data-v-636d622b] {\n    background: #28a745;\n}\n.bd-dropdown[data-v-636d622b]{\n    width: 50%;\n}\n.date span[data-v-636d622b]:hover,.tags span[data-v-636d622b]:hover ,.time span[data-v-636d622b]:hover{\n    cursor: pointer;\n}\n.bd-calendar[data-v-636d622b], .bd-title[data-v-636d622b] {\n    margin: 0;\n    overflow: hidden;\n}\n#bd-main-end-date-id[data-v-636d622b] {\n    top: 37px;\n    border: none;\n    border-radius: 3px;\n    padding: 10px;\n    left: 0;\n}\n.bd-dropdown[data-v-636d622b]{\n    position: relative;\n}\n.end-date-id[data-v-636d622b]{\n    font-family: iranyekan, sans-serif;\n}\nselect#bd-month-end-date-id option[data-v-636d622b] {\n    direction: rtl;\n    text-indent:5px;\n}\n#bd-main-end-date-id input[data-v-636d622b], #bd-main-end-date-id select[data-v-636d622b] {\n    padding: 0 0;\n    font-size: 16px;\n    color: #222;\n    text-align: center;\n}\n#bd-year-end-date-id[data-v-636d622b] {\n    background: none;\n    direction: ltr;\n}\n#bd-month-end-date-id[data-v-636d622b] {\n    background: none;\n    top: 0;\n    direction: ltr;\n}\n#bd-prev-end-date-id[data-v-636d622b] {\n    font-family: \"FontAwesome\", sans-serif;\n    font-size: 41px;\n    text-align: center;\n    position: absolute;\n    left: -80px;\n    bottom: 110px;\n    padding: 0;\n    width: 55px;\n    height: 55px;\n    padding-right: 6px;\n    border-radius: 50%;\n    background: rgba(0,0,0,0.3);\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    color: #fff;\n}\n#bd-next-end-date-id[data-v-636d622b] {\n    font-family: \"FontAwesome\", sans-serif;\n    font-size: 41px;\n    text-align: center;\n    position: absolute;\n    right: -80px;\n    bottom: 110px;\n    padding: 0;\n    padding-left: 6px;\n    width: 55px;\n    height: 55px;\n    border-radius: 50%;\n    background: rgba(0,0,0,0.3);\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    color: #fff;\n}\n#bd-next-end-date-id[data-v-636d622b]:hover,#bd-prev-end-date-id[data-v-636d622b]:hover{\n    background: rgba(0,0,0,0.7);\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.bd-table thead tr[data-v-636d622b], .bd-goto-today[data-v-636d622b] {\n    background: #28a745;\n}\n.bd-dropdown[data-v-636d622b]{\n    width: 50%;\n}\n.date span[data-v-636d622b]:hover,.tags span[data-v-636d622b]:hover ,.time span[data-v-636d622b]:hover{\n    cursor: pointer;\n}\n.bd-calendar[data-v-636d622b], .bd-title[data-v-636d622b] {\n    margin: 0;\n    overflow: hidden;\n}\n.owl-carousel[data-v-636d622b]{\n    direction: ltr !important;\n}\n@media screen and (max-width: 768px) {\n.fields > div[data-v-636d622b]{\n        float: none;\n}\n.image-content-post[data-v-636d622b], .contents-post[data-v-636d622b] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.main-content[data-v-636d622b] {\n        padding: 60px 15px;\n}\n.name-header-profile[data-v-636d622b] {\n        display: none;\n}\n.profile-menu-header[data-v-636d622b] {\n        padding: 7px;\n        padding-left: 36px;\n}\n#bd-prev-end-date-id[data-v-636d622b], #bd-prev-first-date-id[data-v-636d622b]  {\n        left: 0;\n        bottom: inherit;\n        top:-55px;\n}\n#bd-next-end-date-id [data-v-636d622b], #bd-next-first-date-id[data-v-636d622b]{\n        right: 0;\n        bottom: inherit;\n        top:-55px;\n}\n.imageuploadify-message[data-v-636d622b]{\n        display: none !important;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-636d622b] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-636d622b] {\n        font-size: 10px;\n}\n.sub-header[data-v-636d622b] {\n        bottom: -44px;\n}\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 150 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("section", { staticClass: "main-content col-xs-12" }, [
+      _c("div", { staticClass: "contents col-xs-12" }, [
+        _c("div", { staticClass: "info-contents col-xs-12" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "bottom-contents  col-xs-12" }, [
+            _c("form", [
+              _c("label", { staticClass: "header-lable" }, [
+                _vm._v(
+                  "تمامی موارد خواسته شده را وارد کرده و برای خریدار ارسال\r\n                            نمایید."
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "fields col-xs-12" }, [
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _c("label", { staticClass: "content-lable" }, [
+                    _vm._v(
+                      "\r\n                                    محل تحویل\r\n                                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.sellOffer.deliver_at,
+                        expression: "sellOffer.deliver_at"
+                      }
+                    ],
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.sellOffer.deliver_at },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.sellOffer,
+                          "deliver_at",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.deliver_at
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.deliver_at[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _c("label", { staticClass: "content-lable" }, [
+                    _vm._v(
+                      "\r\n                                    قیمت پیشنهادی به ازای هر کیلو به تومان\r\n                                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.sellOffer.price,
+                        expression: "sellOffer.price"
+                      }
+                    ],
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.sellOffer.price },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.sellOffer, "price", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.price
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.price[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _c("label", { staticClass: "content-lable" }, [
+                    _vm._v(
+                      "\r\n                                    تاریخ موجودی\r\n                                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    ref: "validDateFrom",
+                    attrs: {
+                      readonly: "true",
+                      type: "text",
+                      id: "first-date-id"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.valid_date_to
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.valid_date_to[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _c("label", { staticClass: "content-lable" }, [
+                    _vm._v(
+                      "\r\n                                    انتهای تاریخ موجودی\r\n                                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    ref: "validDateTo",
+                    attrs: { readonly: "true", type: "text", id: "end-date-id" }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.valid_date_from
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.valid_date_from[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-xs-12" }, [
+                  _c("label", { staticClass: "content-lable" }, [
+                    _vm._v(
+                      "\r\n                                    توضیحات:\r\n                                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.sellOffer.description,
+                        expression: "sellOffer.description"
+                      }
+                    ],
+                    attrs: { placeholder: "" },
+                    domProps: { value: _vm.sellOffer.description },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.sellOffer,
+                          "description",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.description
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.description[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "image_company col-xs-12" }, [
+                  _c("label", { staticClass: "content-lable" }, [
+                    _vm._v(
+                      "\r\n                                    تصاویر:\r\n                                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    ref: "sellOfferFiles",
+                    attrs: { type: "file", multiple: "", accept: "image/*" },
+                    on: {
+                      change: function($event) {
+                        _vm.handleSellOfferFileUpload()
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.photos_count
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.photos_count[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "col-xs-12 green-bot",
+                      attrs: { type: "button" },
+                      on: { click: _vm.submitSellOffer }
+                    },
+                    [_vm._v("تایید\r\n                                ")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-sm-6" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "black-bot col-xs-12 col-xs-6",
+                        attrs: { to: { name: "buyAdRequests" } }
+                      },
+                      [
+                        _vm._v(
+                          "بازگشت\r\n                                    به صفحه قبل"
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "top-contentas  col-xs-12" }, [
+      _c("div", { staticClass: "main-article-content col-md-7" }, [
+        _c("h3", [
+          _vm._v(
+            "\r\n                          خشکبار | انجیر |\r\n                          "
+          )
+        ]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("table", { staticClass: "table table-striped" }, [
+          _c("tr", [
+            _c("td", [
+              _vm._v("قیمت واحد"),
+              _c("span", {}, [_vm._v("(هر کیلو به تومان)")]),
+              _vm._v(" :")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [_c("td", [_vm._v(" محل تحویل کالا:")])]),
+          _vm._v(" "),
+          _c("tr", [_c("td", [_vm._v(" میزان نیازمندی")])]),
+          _vm._v(" "),
+          _c("tr", [_c("td", [_vm._v(" زمان ثبت درخواست:")])])
+        ]),
+        _vm._v(" "),
+        _c("p", [_vm._v("توضیحات: "), _c("span", [_vm._v(" خوب باشه")])])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "image-article-content col-md-5" }, [
+        _c("div", { staticClass: "main-image col-xs-12" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "owl-carousel col-xs-12" })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-636d622b", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

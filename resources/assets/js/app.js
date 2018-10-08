@@ -19,7 +19,7 @@ window.Vue = require('vue');
 
 import loginCom from './components/login/Login.vue';
 import headerDash from './components/dashboard/header.vue';
-import buyAdRequestDetail from './components/dashboard/seller/request/buyAd-requests-detail.vue';
+// import buyAdRequestDetail from './components/dashboard/seller/request/buyAd-requests-detail.vue';
 import productBasic from './components/dashboard/seller/product/product-basic.vue';
 import mySellOffers from './components/dashboard/seller/request/my-sell-offers.vue';
 import profileBasic from './components/dashboard/seller/profile/profile_basic.vue'
@@ -84,7 +84,7 @@ const app = new Vue({
         loginCom,
         headerDash,
         // buyAdRequest,
-        buyAdRequestDetail,
+        // buyAdRequestDetail,
         productBasic,
         mySellOffers,
         // myTransactions,
