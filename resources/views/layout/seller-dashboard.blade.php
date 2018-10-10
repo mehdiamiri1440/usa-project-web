@@ -9,13 +9,16 @@
         <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
         <script src="{{asset('assets/js/jquery.easing.min.js')}}"></script>
         <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('assets/js/kamadatepicker.js')}}"></script>
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/fontiran.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/imageuploadify.min.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap-theme.min.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
-        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/blurry.load.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/kamadatepicker.min.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
 
         <script src="{{asset('assets/cdn/axios.js')}}"></script>
 
@@ -72,11 +75,11 @@
         @section('main_content')
             <main id="main">
             <router-view
-                    storage="{{asset('storage/')}}"
-                    defultimg="{{asset('assets/img/user-defult.png')}}"
                     loading="{{asset('assets/img/gif/loading.gif')}}"
                     trans="{{url('dashboard/transaction-detail')}}"
                     transRep="{{url('dashboard/transaction-report')}}"
+                    str="{{asset('storage/')}}"
+                    defimgitem="{{asset('/assets/img/product.jpg')}}"
             ></router-view>
 
             </main>

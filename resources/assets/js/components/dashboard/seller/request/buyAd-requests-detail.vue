@@ -1,4 +1,52 @@
 <style scoped>
+
+
+    /*start main content style */
+
+
+    .image-content-post img {
+        border-radius: 3px;
+        transition: 200ms;
+        filter: grayscale(30%);
+    }
+
+    .image-content-post a:hover img {
+        filter: grayscale(0);
+        transition: 200ms;
+    }
+
+    .image-content-post i {
+        display: none;
+        position: absolute;
+        top: 46%;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 35px;
+        color: #fff;
+        z-index: 1;
+
+    }
+
+    .image-content-post a:hover i {
+        display: block;
+    }
+
+    .main-content {
+        direction: rtl;
+        padding: 60px 100px;
+    }
+
+    .header-lable {
+        display: block;
+        margin: 13px;
+        padding: 0;
+    }
+    .content-lable{
+        font-weight:400 ;
+    }
+
+    /*end main content style */
     /*custom cods*/
     .green-bot {
         margin: 15px 0;
@@ -37,24 +85,7 @@
 
     }
 
-    .botton-inco {
-        margin: 15px 7px;
-        display: inline-block;
-        color: #313a43;
-        padding: 8px 35px;
-        border-radius: 3px;
-        text-align: center;
-    }
 
-    .botton-inco:hover {
-        color: #fff;
-    }
-
-    .font-big {
-        font-size: 23px;
-        position: relative;
-        top: 3px;
-    }
 
     .little_header {
         width: 80px;
@@ -64,35 +95,12 @@
         right: 80px;
     }
 
-    .background_mob_sec {
-        position: fixed;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        top: 0;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: -1;
-        display: none;
-    }
 
     .contents {
         border-radius: 3px;
         box-shadow: 0 0 10px #e1e1e1;
         padding: 15px ;
         margin-top: 50px;
-    }
-    .user-info{
-        border-bottom: 2px solid #eff3f6;
-        padding: 0 0 10px;
-    }
-    .user_image {
-        overflow: hidden;
-        width: 85px;
-        height: 85px;
-        border-radius: 50%;
-        padding: 0;
-        float: right;
-        text-align: center;
     }
     .user_image img{
         height: 100%;
@@ -150,10 +158,9 @@
         max-width: 100%;
         min-width: 100%;
     }
-    .fields .green-bot,.fields .black-bot{
+    .fields .green-bot,.fields .black-bot {
         width: 100%;
     }
-
 
     @media screen and (max-width: 992px) {
         .right-header.desktop-header {
@@ -218,187 +225,7 @@
         }
     }
 
-    /*custom style callander*/
-    #bd-main-first-date-id {
-        top: 37px;
-        border: none;
-        border-radius: 3px;
-        padding: 10px;
-        left: 0;
-        z-index: 1;
-    }
-    .bd-dropdown{
-        position: relative;
 
-    }
-    .first-date-id{
-        font-family: iranyekan, sans-serif;
-    }
-    select#bd-month-first-date-id option {
-        direction: rtl;
-        text-indent:5px;
-    }
-    #bd-main-first-date-id input, #bd-main-first-date-id select {
-        padding: 0 0;
-        font-size: 16px;
-        color: #222;
-        text-align: center;
-    }
-
-    #bd-year-first-date-id {
-        background: none;
-        direction: ltr;
-    }
-
-    #bd-month-first-date-id {
-        background: none;
-        top: 0;
-        direction: ltr;
-    }
-
-    #bd-prev-first-date-id {
-        font-family: "FontAwesome", sans-serif;
-        font-size: 41px;
-        text-align: center;
-        position: absolute;
-        left: -80px;
-        bottom: 110px;
-        padding: 0;
-        width: 55px;
-        height: 55px;
-        padding-right: 6px;
-        border-radius: 50%;
-        background: rgba(0,0,0,0.3);
-        transition: 300ms;
-        color: #fff;
-
-    }
-
-    #bd-next-first-date-id {
-        font-family: "FontAwesome", sans-serif;
-        font-size: 41px;
-        text-align: center;
-        position: absolute;
-        right: -80px;
-        bottom: 110px;
-        padding: 0;
-        padding-left: 6px;
-        width: 55px;
-        height: 55px;
-        border-radius: 50%;
-        background: rgba(0,0,0,0.3);
-        transition: 300ms;
-        color: #fff;
-    }
-    #bd-next-first-date-id:hover,#bd-prev-first-date-id:hover{
-        background: rgba(0,0,0,0.7);
-        transition: 300ms;
-    }
-
-    .bd-table thead tr, .bd-goto-today {
-        background: #28a745;
-    }
-    .bd-dropdown{
-        width: 50%;
-    }
-
-    .date span:hover,.tags span:hover ,.time span:hover{
-        cursor: pointer;
-    }
-    .bd-calendar, .bd-title {
-        margin: 0;
-        overflow: hidden;
-    }
-
-    #bd-main-end-date-id {
-        top: 37px;
-        border: none;
-        border-radius: 3px;
-        padding: 10px;
-        left: 0;
-    }
-    .bd-dropdown{
-        position: relative;
-
-    }
-    .end-date-id{
-        font-family: iranyekan, sans-serif;
-    }
-    select#bd-month-end-date-id option {
-        direction: rtl;
-        text-indent:5px;
-    }
-    #bd-main-end-date-id input, #bd-main-end-date-id select {
-        padding: 0 0;
-        font-size: 16px;
-        color: #222;
-        text-align: center;
-    }
-
-    #bd-year-end-date-id {
-        background: none;
-        direction: ltr;
-    }
-
-    #bd-month-end-date-id {
-        background: none;
-        top: 0;
-        direction: ltr;
-    }
-
-    #bd-prev-end-date-id {
-        font-family: "FontAwesome", sans-serif;
-        font-size: 41px;
-        text-align: center;
-        position: absolute;
-        left: -80px;
-        bottom: 110px;
-        padding: 0;
-        width: 55px;
-        height: 55px;
-        padding-right: 6px;
-        border-radius: 50%;
-        background: rgba(0,0,0,0.3);
-        transition: 300ms;
-        color: #fff;
-
-    }
-
-    #bd-next-end-date-id {
-        font-family: "FontAwesome", sans-serif;
-        font-size: 41px;
-        text-align: center;
-        position: absolute;
-        right: -80px;
-        bottom: 110px;
-        padding: 0;
-        padding-left: 6px;
-        width: 55px;
-        height: 55px;
-        border-radius: 50%;
-        background: rgba(0,0,0,0.3);
-        transition: 300ms;
-        color: #fff;
-    }
-    #bd-next-end-date-id:hover,#bd-prev-end-date-id:hover{
-        background: rgba(0,0,0,0.7);
-        transition: 300ms;
-    }
-
-    .bd-table thead tr, .bd-goto-today {
-        background: #28a745;
-    }
-    .bd-dropdown{
-        width: 50%;
-    }
-
-    .date span:hover,.tags span:hover ,.time span:hover{
-        cursor: pointer;
-    }
-    .bd-calendar, .bd-title {
-        margin: 0;
-        overflow: hidden;
-    }
     .owl-carousel{
         direction: ltr !important;
     }
@@ -462,58 +289,177 @@
             bottom: -44px;
         }
     }
+
 </style>
 
 
 <template>
 <div>
+
     <section class="main-content col-xs-12">
+        <div class="contents col-xs-12">
+            <div class="info-contents col-xs-12">
+                <div class="top-contentas  col-xs-12">
+                    <div class="main-article-content col-md-7">
+                        <h3>
+                            <!--{{$buyAd->category_name . ' | ' . $buyAd->subcategory_name . ' | ' .$buyAd->name}}-->
+                            خشکبار | انجیر |
+                        </h3>
+                        <br/>
+                        <table class="table table-striped">
+                          <tbody>
+                          <tr>
+                              <td>قیمت واحد<span class="">(هر کیلو به تومان)</span> :</td>
+                              <!--<td> {{$buyAd->price or "-" }} تومان</td>-->
+                              <td>  - تومان</td>
+                          </tr>
+                          <tr>
+                              <td> محل تحویل کالا:</td>
+                              <!--<td>{{$buyAd->address}}</td>-->
+                          </tr>
+                          <tr>
+                              <td> میزان نیازمندی</td>
+                              <!--<td>{{$buyAd->requirement_amount}} کیلوگرم</td>-->
+                              <td>32 کیلوگرم</td>
+                          </tr>
+                          <tr>
+                              <td> زمان ثبت درخواست:</td>
+                              <!--<td>{{$buyAd->register_date}}</td>-->
+                              <td>۳۰ مرداد , ۱۳۹۷</td>
+                          </tr>
+                          </tbody>
+                        </table>
+                        <p>توضیحات: <span>خوب باشه</span></p>
+                        <!--<p>توضیحات: <span>{{$buyAd->description}}</span></p>-->
+                    </div>
+                    <div class="image-article-content col-md-5">
+                        <div class="main-image col-xs-12">
+                         <!--   @if(sizeof($buyAd->photos) > 0)
+                            <a  href="{{url('storage/'.($buyAd->photos ? $buyAd->photos[0] : ''))}}"><img src="{{url('storage/'.($buyAd->photos ? $buyAd->photos[0] : ''))}}" alt=""></a>
+                            @else-->
+                            <a :href="defimgitem"><img :src="defimgitem"></a>
+                            <!--@endif-->
+                        </div>
+                        <div class="owl-carousel col-xs-12">
+                            <!--@foreach($buyAd->photos as $photo)-->
+                            <!--<a href="{{url('storage/'.$photo)}}"><img src="{{url('storage/'.$photo)}}" alt=""></a>-->
+                            <!--@endforeach-->
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-contents  col-xs-12">
+                    <form>
+                        <label class="header-lable">تمامی موارد خواسته شده را وارد کرده و برای خریدار ارسال نمایید.</label>
+                        <div class="fields col-xs-12">
+                            <!--<input type="hidden" value="{{$buyAd->id}}" ref="buyAdId">-->
+                            <div class="col-sm-6">
+                                <label class="content-lable">
+                                    محل تحویل
+                                </label>
+                                <input type="text" v-model="sellOffer.deliver_at" >
+                                <span v-if="errors.deliver_at" class="text-danger" >{{ errors.deliver_at[0] }}</span>
+                            </div>
+                            <div class="col-sm-6">
+
+                                <label class="content-lable">
+                                    قیمت پیشنهادی به ازای هر کیلو به تومان
+                                </label>
+                                <input type="text" v-model="sellOffer.price"  >
+                                <span v-if="errors.price" class="text-danger" >{{ errors.price[0] }}</span>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="content-lable">
+                                    تاریخ موجودی
+                                </label>
+                                <input readonly="true" type="text" id="first-date-id" ref="validDateFrom">
+                                <span v-if="errors.valid_date_to" class="text-danger" >{{ errors.valid_date_to[0] }}</span>
+                            </div>
+                            <div class="col-sm-6">
+
+                                <label class="content-lable">
+                                    انتهای تاریخ موجودی
+                                </label>
+                                <input readonly="true" type="text" id="end-date-id" ref="validDateTo">
+                                <span v-if="errors.valid_date_from" class="text-danger" >{{ errors.valid_date_from[0] }}</span>
+                            </div>
+                            <div class="col-xs-12">
+
+                                <label class="content-lable">
+                                    توضیحات:
+                                </label>
+                                <textarea placeholder="" v-model="sellOffer.description"></textarea>
+                                <span v-if="errors.description" class="text-danger" >{{ errors.description[0] }}</span>
+                            </div>
+                            <div class="image_company col-xs-12">
+
+                                <label class="content-lable">
+                                    تصاویر:
+                                </label>
+                                <input type="file" ref="sellOfferFiles" multiple accept="image/*" @change="handleSellOfferFileUpload()">
+                                <span v-if="errors.photos_count" class="text-danger" >{{ errors.photos_count[0] }}</span>
+                            </div>
+                            <div class="col-sm-6">
+                                <button type="button" class="col-xs-12 green-bot" @click="submitSellOffer">تایید</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <!--<a href="{{route('seller-buyAd-requests')}}" class="black-bot col-xs-12 col-xs-6">بازگشت به صفحه قبل</a>-->
+                                <a href="#" class="black-bot col-xs-12 col-xs-6">بازگشت به صفحه قبل</a>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+<!--    <section class="main-content col-xs-12">
         <div class="contents col-xs-12">
             <div class="info-contents col-xs-12">
                 <div class="top-contentas  col-xs-12">
                     <div class="main-article-content col-md-7">
                       <h3>
                           خشکبار | انجیر |
-                          <!--{{$buyAd->category_name . ' | ' . $buyAd->subcategory_name . ' | ' .$buyAd->name}}-->
+                          &lt;!&ndash;{{$buyAd->category_name . ' | ' . $buyAd->subcategory_name . ' | ' .$buyAd->name}}&ndash;&gt;
                         </h3>
                         <br/>
                         <table class="table table-striped">
                             <tr>
                                 <td>قیمت واحد<span class="">(هر کیلو به تومان)</span> :</td>
-                             <!--   <td> {{$buyAd->price or "-" }} تومان</td>-->
+                             &lt;!&ndash;   <td> {{$buyAd->price or "-" }} تومان</td>&ndash;&gt;
                             </tr>
                             <tr>
                                 <td> محل تحویل کالا:</td>
-                       <!--         <td>{{$buyAd->address}}</td>-->
+                       &lt;!&ndash;         <td>{{$buyAd->address}}</td>&ndash;&gt;
                             </tr>
                             <tr>
                                 <td> میزان نیازمندی</td>
-                                <!--<td>{{$buyAd->requirement_amount}} کیلوگرم</td>-->
+                                &lt;!&ndash;<td>{{$buyAd->requirement_amount}} کیلوگرم</td>&ndash;&gt;
                             </tr>
                             <tr>
                                 <td> زمان ثبت درخواست:</td>
-                                <!--<td>{{$buyAd->register_date}}</td>-->
+                                &lt;!&ndash;<td>{{$buyAd->register_date}}</td>&ndash;&gt;
                             </tr>
                         </table>
-                        <!--<p>توضیحات: <span>{{$buyAd->description}}</span></p>-->
+                        &lt;!&ndash;<p>توضیحات: <span>{{$buyAd->description}}</span></p>&ndash;&gt;
                         <p>توضیحات: <span> خوب باشه</span></p>
                     </div>
                     <div class="image-article-content col-md-5">
                         <div class="main-image col-xs-12">
-                            <!--@if(sizeof($buyAd->photos) > 0)
+                            &lt;!&ndash;@if(sizeof($buyAd->photos) > 0)
                             <a href="{{url('storage/'.($buyAd->photos ? $buyAd->photos[0] : ''))}}"><img
                                     src="{{url('storage/'.($buyAd->photos ? $buyAd->photos[0] : ''))}}"
                                     alt=""></a>
                             @else
                             <a href="{{asset('assets/img/product.jpg')}}"><img
                                     src="{{asset('assets/img/product.jpg')}}"></a>
-                            @endif-->
+                            @endif&ndash;&gt;
                         </div>
                         <div class="owl-carousel col-xs-12">
-                        <!--    @foreach($buyAd->photos as $photo)
+                        &lt;!&ndash;    @foreach($buyAd->photos as $photo)
                             <a href="{{url('storage/'.$photo)}}"><img src="{{url('storage/'.$photo)}}"
                                                                       alt=""></a>
-                            @endforeach-->
+                            @endforeach&ndash;&gt;
                         </div>
                     </div>
                 </div>
@@ -522,7 +468,7 @@
                         <label class="header-lable">تمامی موارد خواسته شده را وارد کرده و برای خریدار ارسال
                             نمایید.</label>
                        <div class="fields col-xs-12">
-                            <!--<input type="hidden" value="{{$buyAd->id}}" ref="buyAdId">-->
+                            &lt;!&ndash;<input type="hidden" value="{{$buyAd->id}}" ref="buyAdId">&ndash;&gt;
                             <div class="col-sm-6">
                                 <label class="content-lable">
                                     محل تحویل
@@ -589,13 +535,19 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
 
 </div>
 </template>
 
 <script>
+
+    import {eventBus} from "../../../../app";
+
     export default {
+        props:[
+            'defimgitem'
+        ],
         data:function(){
           return{
               currentUser:{
@@ -618,6 +570,12 @@
               sellOfferFiles:[],
               errors:[],
               popUpMsg:'',
+              items: [
+                  {
+                      message: 'درخواست من ',
+                      url: '#'
+                  }
+              ]
           }
         },
         methods:{
@@ -698,6 +656,14 @@
         },
         mounted(){
             this.init();
+            kamaDatepicker('first-date-id', { forceFarsiDigits: true,markHolidays:true,gotoToday:true,markToday:true });
+            kamaDatepicker('end-date-id', { forceFarsiDigits: true,markHolidays:true,gotoToday:true,markToday:true });
+            $(".main-image").magnificPopup({
+                delegate: 'a',
+                type: 'image'
+            });
+            $('input[type="file"]').imageuploadify();
+            eventBus.$emit('subHeader', this.items);
         },
     }
 </script>

@@ -7,6 +7,7 @@
 
 require('./bootstrap');
 require('./imageuploadify.min');
+require('./jquery.magnific-popup.min');
 
 window.Vue = require('vue');
 
@@ -83,12 +84,8 @@ const app = new Vue({
         profileBasic,
         loginCom,
         headerDash,
-        // buyAdRequest,
-        // buyAdRequestDetail,
         productBasic,
         mySellOffers,
-        // myTransactions,
-        // myTerminatedTransactions,
         transitionSeller
     }
 });

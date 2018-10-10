@@ -40,6 +40,7 @@ export default new Router({
             path: '/buyAd-requests',
             name: 'buyAdRequests',
             component: buyAdRequests,
+            props: true
         },{
             path: '/buyAd-request-detail/:id',
             name: 'buyAdRequestsDetail',

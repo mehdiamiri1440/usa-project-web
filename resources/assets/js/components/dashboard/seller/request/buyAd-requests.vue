@@ -84,6 +84,7 @@
             <img :src="loader" style="width:200px;height:200px">
         </section>
     </div>
+    <!--<h1>{{this.storage}}</h1>-->
 </template>
 
 <script>
