@@ -58,7 +58,7 @@
     <body>
     <div id="app">
 
-        <header-dash
+        <header-dash-seller
                 logo="{{asset('assets/img/logo-incobac.png')}}"
                 storage="{{asset('storage/')}}"
                 defultimg="{{asset('assets/img/user-defult.png')}}"
@@ -71,7 +71,7 @@
                 routehome="{{url('/')}}"
                 loading="{{asset('assets/img/gif/prload.gif')}}"
                 guide="{{url('dashboard/guide')}}"
-        ></header-dash>
+        ></header-dash-seller>
         @section('main_content')
             <main id="main">
             <router-view

@@ -76,7 +76,7 @@
 </template>
 
 <script>
-    import {eventBus} from "../../../app";
+    import {eventBus} from "../../../../../app";
     export default{
         props: [
             'profilebasic',

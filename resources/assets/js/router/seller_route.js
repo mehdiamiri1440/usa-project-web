@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import routerSeller from 'vue-router'
 
 // components
 
@@ -16,9 +16,9 @@ import myTerminatedTransactions from '../components/dashboard/seller/transaction
 import transactionDetail from '../components/dashboard/seller/transaction/transaction.vue';
 import transactionReport from '../components/dashboard/seller/transaction/transactionReport';
 import guide from '../components/dashboard/seller/guide.vue';
-Vue.use(Router);
+Vue.use(routerSeller);
 
-export default new Router({
+export default new routerSeller({
     routes: [
         {
             path: '/',

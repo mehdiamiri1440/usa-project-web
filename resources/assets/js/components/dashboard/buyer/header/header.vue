@@ -574,22 +574,19 @@
             </section>
         </section>
         <headerTop
-
                 :photoLink="currentUser.profile.profile_photo"
                 :storage="storage"
                 :def="defultimg"
                 :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
                 :out="logout"
                 :routeHome="routehome"
-                :profilebasic="profilebasic"
-
         ></headerTop>
     </div>
 
 </template>
 
 <script>
-    import {eventBus} from '../../app';
+    import {eventBus} from '../../../../app';
     import profileinfo from './sub-com/profile_info.vue'
     import headerMenuList from './sub-com/header-menu-list.vue'
     import headerTop from './sub-com/header-top.vue'
