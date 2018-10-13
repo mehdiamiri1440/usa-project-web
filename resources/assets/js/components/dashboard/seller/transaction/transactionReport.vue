@@ -477,6 +477,7 @@
 
     #main .main_buttons{
         float: right;
+        text-align: center;
     }
 
 
@@ -790,6 +791,8 @@
 </template>
 
 <script>
+    import {eventBus} from "../../../../app";
+
     export default {
         data:function() {
            return{
@@ -798,6 +801,12 @@
                transactionId : '',
                popUpMsg:'',
                transactionInfo:'',
+               items: [
+                   {
+                       message: 'لیست تراکنش ها',
+                       url: 'registerProduct'
+                   },
+               ]
            }
         },
         methods:{
@@ -828,6 +837,7 @@
         },
         mounted:function(){
             this.init();
+            eventBus.$emit('subHeader', this.items);
         }
     }
 </script>

@@ -12,7 +12,7 @@
         height: 3px;
         width: 100%;
     }
-    .header-menu a.router-link-exact-active::before {
+    .header-menu a.router-link-exact-active::before,a.active::before {
         content: " ";
         height: 100%;
         width: 2px;
@@ -22,45 +22,46 @@
         top: 0;
         display: block;
     }
-    .header-menu  a.router-link-exact-active {
+    .header-menu  a.router-link-exact-active,a.active {
         color: #fff;
         background: #637484;
     }
+
 </style>
 <template>
   <div>
       <div class="header-menu">
           <ul class="list-unstyled">
               <li class="list-item" >
-                  <router-link  :to="{ name : 'profileBasic' }" >
+                  <router-link :class="{'active' : this.active_el === 1}" :to="{ name : 'profileBasic' }">
                       <span>ویرایش پروفایل</span>
                   </router-link>
               </li>
 
               <li class="list-item  ">
-                  <router-link :to="{ name : 'buyAdRequests' }">
+                  <router-link :class="{'active' : this.active_el === 2}" :to="{ name : 'buyAdRequests' }">
                       <span>درخواست ها</span>
                   </router-link>
               </li>
 
               <li class="list-item  ">
-                  <router-link :to="{ name : 'registerProduct' }">
+                  <router-link :class="{'active' : this.active_el === 3}" :to="{ name : 'registerProduct' }">
                       <span>ثبت محصول </span>
                   </router-link>
               </li>
               <li class="list-item  ">
-                  <router-link :to="{ name : 'myTransactions' }">
+                  <router-link :class="{'active' : this.active_el === 4}" :to="{ name : 'myTransactions' }">
                       <span>تراکنش های جاری</span>
                   </router-link>
               </li>
 
               <li class="list-item  ">
-                  <router-link :to="{ name : 'myTerminatedTransactions' }">
+                  <router-link :class="{'active' : this.active_el === 5}" :to="{ name : 'myTerminatedTransactions' }">
                       <span>تراکنش های انجام شده</span>
                   </router-link>
               </li>
               <li class="list-item  ">
-                  <router-link :to="{ name : 'guide' }">
+                  <router-link :class="{'active' : this.active_el === 6}" :to="{ name : 'guide' }">
                       <span>راهنما</span>
                   </router-link>
               </li>
@@ -87,18 +88,60 @@
         ],
         data(){
             return{
-                active_el:1
+                active_el:0
             }
         },
         methods:{
-            activate:function(el){
+           /* activate:function(el){
                 this.active_el = el;
+            }*/
+            subIsActive(input) {
+                const paths = Array.isArray(input) ? input : [input];
+                return paths.some(path => {
+                    return this.$route.path.indexOf(path) === 0 // current path starts with this path string
+                });
+
+            }
+        },watch:{
+            $route (){
+               if (this.subIsActive('/complementry')  || this.subIsActive('/profile_contract') ){
+                   this.active_el = 1
+               }else if(this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests') ){
+                   this.active_el = 2
+               }else if(this.subIsActive('/register-product')){
+                   this.active_el = 3
+               }else if(this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')){
+                   this.active_el = 4
+               }else if(this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/*')){
+                   this.active_el = 5
+               }else if(this.subIsActive('/guide')){
+                   this.active_el = 6
+               }else{
+                   this.active_el = 1
+               }
+               console.log(this.active_el);
+            }
+        },mounted:function(){
+            if (this.subIsActive('/complementry')  || this.subIsActive('/profile_contract') || this.subIsActive('/*')){
+                this.active_el = 1
+            }else if(this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests') ){
+                this.active_el = 2
+            }else if(this.subIsActive('/register-product')){
+                this.active_el = 3
+            }else if(this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')){
+                this.active_el = 4
+            }else if(this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/*')){
+                this.active_el = 5
+            }else if(this.subIsActive('/guide')){
+                this.active_el = 6
             }
         },
         created() {
             eventBus.$on('active', (event) => {
                 this.active_el = event;
             });
-        }
+        },
+
+
     }
 </script>

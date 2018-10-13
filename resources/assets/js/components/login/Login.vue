@@ -65,7 +65,7 @@
                         })
                         .then(function (response) {
                             if (response.data.status == true) {
-                                window.location.href = '/dashboard/profile/basic';
+                                window.location.href = '/dashboard/';
                             }
                             else {
                                 self.showMsg = true;

@@ -531,7 +531,6 @@ window.Vue = __webpack_require__(13);
 
 
 
-
 Vue.component('step1', {
     template: '#step1',
     props: ['currentStep', 'step1']
@@ -43941,7 +43940,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 password: this.password
             }).then(function (response) {
                 if (response.data.status == true) {
-                    window.location.href = '/dashboard/profile/basic';
+                    window.location.href = '/dashboard/';
                 } else {
                     self.showMsg = true;
                     self.errors = [];
@@ -44318,7 +44317,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n/*start style main header*/\n#main {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n#main.little-main {\n    margin-right: 80px;\n}\n.main-header {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n    border-bottom: 2px solid #e6e6e6;\n}\n.image-header-profile {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.profile-menu-header {\n    float: left;\n}\n.right-menu-header {\n\n    padding: 16px;\n}\n.right-menu-header, .content-header {\n    float: right;\n}\n.profile-menu-header {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header a {\n    position: relative;\n}\n.profile-menu-header i {\n    position: absolute;\n\n    left: -75px;\n\n    top: 18px;\n\n    font-size: 20px;\n}\n.content-header {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a, .profile-menu-header a {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a {\n    font-size: 30px;\n}\n.right-menu-header a:hover, .profile-menu-header a:hover {\n    color: #2e353e;\n}\n.name-header-profile {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li {\n    margin: 5px;\n}\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n}\n.font-big {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.name-header-profile {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n/*end style main header*/\n\n/*start style sub-header*/\n.sub-header {\n    position: absolute;\n    left: 0;\n    background: #eff3f6;\n    bottom: -48px;\n    right: 0;\n    text-align: center;\n}\n.sub-header ul {\n    text-align: center;\n}\n.sub-header a {\n    padding: 16px;\n\n    display: inline-block;\n\n    color: #808c9b;\n\n    font-weight: bold;\n\n    font-size: 14px;\n\n    position: relative;\n}\n.sub-header a:hover {\n    color: #313942;\n}\n.sub-header a:hover::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.sub-header a.router-link-exact-active {\n    color: #313942;\n}\n.sub-header a.router-link-exact-active::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n\n/*end style sub-header*/\n", ""]);
+exports.push([module.i, "\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    vertical-align: baseline;\n}\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, menu, nav, section {\n    display: block;\n}\nbody {\n    line-height: 1.1;\n    font-family: IRANSans, sans-serif;\n    font-size: 14px;\n}\nol, ul {\n    list-style: none;\n}\nblockquote, q {\n    quotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n    content: none;\n}\ntable {\n    border-collapse: collapse;\n    border-spacing: 0;\n}\nimg, svg {\n    width: 100%;\n}\na, a:hover, a:visited, a:focus, a:active {\n    text-decoration: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\nth, td {\n    padding: 7px;\n    text-align: right;\n}\n\n/*start style right header*/\n.logo {\n    height: 64px;\n\n    display: block;\n\n    float: right;\n\n    width: 70%;\n}\n.logo_hide {\n    display: none;\n}\n.logo a {\n    display: inline-block;\n    margin-top: -11px;\n    height: 75px;\n    padding: 0 10px;\n}\n.right-header {\n    width: 250px;\n    right: 0;\n    bottom: 0;\n    position: fixed;\n    top: 0;\n    overflow: hidden;\n    z-index: 9;\n}\n.little_header {\n    width: 80px;\n}\n.right-header.mobile-header {\n    display: none;\n    -webkit-box-shadow: 0 0 20px;\n            box-shadow: 0 0 20px;\n}\n.right-header > header {\n    overflow: hidden;\n    background: #fff;\n}\n.clouse_menu, .clouse_menu_mob {\n    float: left;\n    width: 30%;\n    border: none;\n    background: none;\n    font-size: 35px;\n    top: 0;\n    position: relative;\n    padding: 11px;\n}\n.clouse_menu_mob {\n    display: none;\n}\n.main-right-header {\n    background: #313a43;\n    height: 100%;\n    text-align: right;\n    color: #fff;\n    position: relative;\n}\n.show-header button {\n    float: right;\n    border: none;\n    background: none;\n    font-size: 25px;\n    padding: 19px 30px 19px 24px;\n    display: none;\n}\n.profile {\n    padding: 20px 20px 10px;\n    border-bottom: 2px solid #2e353e;\n}\n.profile-img {\n    overflow: hidden;\n    border-radius: 50%;\n    height: 85px;\n    width: 85px;\n    margin: 0 auto;\n    margin-left: 10px;\n    border: 2px solid #fff;\n    float: right;\n}\n.profile-img img {\n    height: 100%;\n}\n.profile-content {\n    float: right;\n    padding-top: 15px;\n}\n.profile-name {\n    margin: 8px 0;\n    font-size: 17px;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.header-menu a {\n    color: #b1b1b1;\n    padding: 10px 20px;\n    display: inline-block;\n    position: relative;\n    width: 100%;\n}\n.header-menu {\n    padding: 10px 0;\n}\n.header-menu a:hover {\n    color: #fff;\n    background: #637484;\n}\n.header-menu a:hover::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu li.active a {\n    color: #fff;\n    background: #637484;\n}\n.header-menu li.active a:before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.copy-right {\n    text-align: center;\n    font-size: 12px;\n    font-weight: 200;\n    line-height: 1.3em;\n    padding: 20px;\n    position: absolute;\n    bottom: 76px;\n}\nlabel {\n    display: block;\n    margin: 9px auto;\n}\ninput[type=\"text\"], select, input[type=\"button\"], textarea {\n    width: 100% !important;\n}\ninput[type=\"text\"], select, textarea {\n    background: #eff3f6;\n    border: 1px solid #cfcfcf;\n    border-radius: 3px;\n    width: 100% !important;\n}\ninput[type=\"text\"], textarea {\n    padding: 13px 15px;\n    width: 100% !important;\n}\nselect {\n    padding: 7px 15px;\n}\n.image-header-profile img {\n    height: 100%;\n}\n.right-menu-header {\n    position: relative;\n}\n.right-menu-header li ul a {\n    font-size: 14px;\n    width: 100%;\n    display: inline-block;\n}\n.right-menu-header li ul li {\n\n    margin: 5px;\n}\n.icon-header-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    right: 75px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n\n/*end style right header*/\n\n\n\n/*loader*/\n.loader-display{\n    position: fixed;\n    z-index: 10;\n    top:0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0,0,0,0.5);\n    display: block;\n}\n.main-loader{\n    position: absolute;\n\n    top: 35%;\n\n    text-align: center;\n\n    display: block;\n\n    width: 100%;\n\n    color: #fff;\n\n    font-size: 23px;\n}\n.main-loader img{\n    width: 100px;\n\n    background: #fff;\n\n    border-radius: 50px;\n\n    height: 100px;\n\n    display: inline-block;\n\n    margin: 0 auto 22px;\n}\n.loader-wrapper{\n    display:none;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header {\n        display: none;\n}\n.right-header.mobile-header {\n        display: block;\n        right: -300px;\n}\n.main-header, .little-main-header {\n        right: 0 !important;\n}\n#main, #main.little-main {\n        margin-right: 0 !important;\n}\n.post-contents-table {\n        width: 100%;\n}\n.copy-right {\n        display: none;\n}\n.clouse_menu {\n        display: none;\n}\n.clouse_menu_mob {\n        display: block;\n}\n.show-header button {\n        display: block;\n}\n.kind_user > div, .kind_activity > div {\n        float: none;\n}\n.img-profile .submit {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post, .contents-post {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.name-header-profile {\n        display: none;\n}\n.profile-menu-header {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a {\n        font-size: 12px !important;\n        padding: 16px 13px !important;\n}\n.sub-header {\n        bottom: -44px;\n}\n}\n\n/*end loader*/\n", ""]);
 
 // exports
 
@@ -44698,6 +44697,268 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -44795,11 +45056,101 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return num.toString().replace(/[۰-۹]/g, function (w) {
                 return numDic[w];
             });
+        },
+        toggle_header: function toggle_header() {
+            var menu_but = $(".clouse_menu");
+            var menu_but_icon = $(".clouse_menu i");
+            var profile = $(".profile");
+            var header_menu = $(".header-menu span");
+            var header_menu_a = $(".header-menu a");
+            var logo = $(".logo");
+            var copy_right = $(".copy-right");
+            var right_header_desk = $(".right-header.desktop-header");
+            var little_main_header = $(".main-header");
+            var main = $("#main");
+            var next_move = "shrink";
+            menu_but.click(function () {
+                if (next_move == "expand") {
+                    $(this).css({
+                        width: "30%"
+                    });
+                    menu_but_icon.addClass('fa-angle-left', 200).removeClass('fa-angle-right');
+                    // menu_but_icon.switchClass("fa-angle-left"," fa-angle-right",200);
+                    profile.fadeIn();
+                    copy_right.css('display', 'block');
+                    logo.fadeIn();
+                    header_menu.css('display', 'inline');
+                    header_menu_a.css({
+                        "text-align": "right"
+                    });
+                    right_header_desk.removeClass("little_header", 200);
+                    little_main_header.removeClass("little-main-header", 200);
+                    main.removeClass("little-main", 200);
+                    next_move = "shrink";
+                } else {
+                    $(this).css({
+                        width: "100%"
+                    });
+                    menu_but_icon.addClass('fa-angle-right', 200).removeClass('fa-angle-left', 200);
+                    // menu_but_icon.switchClass("fa-angle-right"," fa-angle-left",200);
+                    profile.css('display', 'none');
+                    header_menu.css('display', 'none');
+                    copy_right.css('display', 'none');
+                    logo.css('display', 'none');
+                    header_menu_a.css({
+                        "text-align": "center"
+                    });
+                    right_header_desk.addClass("little_header", 200);
+                    little_main_header.addClass("little-main-header", 200);
+                    main.addClass("little-main", 200);
+                    next_move = "expand";
+                }
+            });
+        },
+        toggle_show_header: function toggle_show_header() {
+            var el = $('.show-header button');
+            var el_clouse = $('.clouse_menu_mob');
+            var flag = true;
+            var right_header = $(".right-header.mobile-header");
+            var back = $(".background_mob_sec");
+            el.on('click', function () {
+                if (flag == true) {
+                    console.log('flag = true');
+                    right_header.animate({
+                        right: '0'
+                    }, 300);
+                    back.fadeIn();
+
+                    flag = false;
+                } else {
+                    right_header.animate({
+                        right: '-300px'
+                    }, 300);
+
+                    flag = true;
+                }
+            });
+            el_clouse.on('click', function () {
+                if (flag == true) {
+                    right_header.animate({
+                        right: '0'
+                    }, 300);
+                    flag = false;
+                } else {
+                    right_header.animate({
+                        right: '-300px'
+
+                    }, 300);
+                    back.fadeOut();
+                    flag = true;
+                }
+            });
         }
     },
     mounted: function mounted() {
         this.init();
-        console.log(this.items);
+        this.toggle_header();
+        this.toggle_show_header();
     },
     created: function created() {
         var _this2 = this;
@@ -45086,7 +45437,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.sub-header a.router-link-exact-active {\n    color: #313942;\n}\n.sub-header a.router-link-exact-active::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.header-menu a.router-link-exact-active::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu  a.router-link-exact-active {\n    color: #fff;\n    background: #637484;\n}\n", ""]);
+exports.push([module.i, "\n.sub-header a.router-link-exact-active {\n    color: #313942;\n}\n.sub-header a.router-link-exact-active::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.header-menu a.router-link-exact-active::before,a.active::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu  a.router-link-exact-active,a.active {\n    color: #fff;\n    background: #637484;\n}\n\n", ""]);
 
 // exports
 
@@ -45174,26 +45525,68 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['profilebasic', 'byadreq', 'selregpro', 'transactroute', 'mytrans', 'guide'],
     data: function data() {
         return {
-            active_el: 1
+            active_el: 0
         };
     },
 
     methods: {
-        activate: function activate(el) {
-            this.active_el = el;
+        /* activate:function(el){
+             this.active_el = el;
+         }*/
+        subIsActive: function subIsActive(input) {
+            var _this = this;
+
+            var paths = Array.isArray(input) ? input : [input];
+            return paths.some(function (path) {
+                return _this.$route.path.indexOf(path) === 0; // current path starts with this path string
+            });
+        }
+    }, watch: {
+        $route: function $route() {
+            if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract')) {
+                this.active_el = 1;
+            } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests')) {
+                this.active_el = 2;
+            } else if (this.subIsActive('/register-product')) {
+                this.active_el = 3;
+            } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')) {
+                this.active_el = 4;
+            } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/*')) {
+                this.active_el = 5;
+            } else if (this.subIsActive('/guide')) {
+                this.active_el = 6;
+            } else {
+                this.active_el = 1;
+            }
+            console.log(this.active_el);
+        }
+    }, mounted: function mounted() {
+        if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract') || this.subIsActive('/*')) {
+            this.active_el = 1;
+        } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests')) {
+            this.active_el = 2;
+        } else if (this.subIsActive('/register-product')) {
+            this.active_el = 3;
+        } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')) {
+            this.active_el = 4;
+        } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/*')) {
+            this.active_el = 5;
+        } else if (this.subIsActive('/guide')) {
+            this.active_el = 6;
         }
     },
     created: function created() {
-        var _this = this;
+        var _this2 = this;
 
         __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('active', function (event) {
-            _this.active_el = event;
+            _this2.active_el = event;
         });
     }
 });
@@ -45213,42 +45606,14 @@ var render = function() {
           "li",
           { staticClass: "list-item" },
           [
-            _c("router-link", { attrs: { to: { name: "profileBasic" } } }, [
-              _c("span", [_vm._v("ویرایش پروفایل")])
-            ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          { staticClass: "list-item  " },
-          [
-            _c("router-link", { attrs: { to: { name: "buyAdRequests" } } }, [
-              _c("span", [_vm._v("درخواست ها")])
-            ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          { staticClass: "list-item  " },
-          [
-            _c("router-link", { attrs: { to: { name: "registerProduct" } } }, [
-              _c("span", [_vm._v("ثبت محصول ")])
-            ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          { staticClass: "list-item  " },
-          [
-            _c("router-link", { attrs: { to: { name: "myTransactions" } } }, [
-              _c("span", [_vm._v("تراکنش های جاری")])
-            ])
+            _c(
+              "router-link",
+              {
+                class: { active: this.active_el === 1 },
+                attrs: { to: { name: "profileBasic" } }
+              },
+              [_c("span", [_vm._v("ویرایش پروفایل")])]
+            )
           ],
           1
         ),
@@ -45259,7 +45624,58 @@ var render = function() {
           [
             _c(
               "router-link",
-              { attrs: { to: { name: "myTerminatedTransactions" } } },
+              {
+                class: { active: this.active_el === 2 },
+                attrs: { to: { name: "buyAdRequests" } }
+              },
+              [_c("span", [_vm._v("درخواست ها")])]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "list-item  " },
+          [
+            _c(
+              "router-link",
+              {
+                class: { active: this.active_el === 3 },
+                attrs: { to: { name: "registerProduct" } }
+              },
+              [_c("span", [_vm._v("ثبت محصول ")])]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "list-item  " },
+          [
+            _c(
+              "router-link",
+              {
+                class: { active: this.active_el === 4 },
+                attrs: { to: { name: "myTransactions" } }
+              },
+              [_c("span", [_vm._v("تراکنش های جاری")])]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "list-item  " },
+          [
+            _c(
+              "router-link",
+              {
+                class: { active: this.active_el === 5 },
+                attrs: { to: { name: "myTerminatedTransactions" } }
+              },
               [_c("span", [_vm._v("تراکنش های انجام شده")])]
             )
           ],
@@ -45270,9 +45686,14 @@ var render = function() {
           "li",
           { staticClass: "list-item  " },
           [
-            _c("router-link", { attrs: { to: { name: "guide" } } }, [
-              _c("span", [_vm._v("راهنما")])
-            ])
+            _c(
+              "router-link",
+              {
+                class: { active: this.active_el === 6 },
+                attrs: { to: { name: "guide" } }
+              },
+              [_c("span", [_vm._v("راهنما")])]
+            )
           ],
           1
         )
@@ -45310,6 +45731,10 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(144)
+}
 var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(66)
@@ -45318,7 +45743,7 @@ var __vue_template__ = __webpack_require__(70)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -45399,6 +45824,119 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -45413,6 +45951,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(146)
+}
 var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(68)
@@ -45421,7 +45963,7 @@ var __vue_template__ = __webpack_require__(69)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -45462,6 +46004,63 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -46313,7 +46912,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.image_company[data-v-df66e9dc] {\n    margin: 15px auto;\n}\n.sub-des[data-v-df66e9dc] {\n    font-size: 11px;\n}\n.company_des > div[data-v-df66e9dc] {\n    float: right;\n    margin-bottom: 10px;\n}\n.text-danger[data-v-df66e9dc] {\n    display: inline-block;\n    padding: 4px 0;\n}\n.company_des > div.col-sm-6[data-v-df66e9dc] {\n    height: 85px;\n}\n.rules-check[data-v-df66e9dc] {\n    font-weight: 800;\n}\n.rules-check[data-v-df66e9dc] {\n    font-weight: 800;\n}\n.main-content[data-v-df66e9dc] {\n    padding: 60px 100px;\n    direction: rtl;\n}\n.header-lable[data-v-df66e9dc] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n.content-lable[data-v-df66e9dc] {\n    font-weight: 400;\n}\n.roules-check-inside[data-v-df66e9dc] {\n    color: #28a745;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-df66e9dc] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.width-full[data-v-df66e9dc] {\n    width: 100%;\n}\n.green-bot[data-v-df66e9dc]:hover {\n    color: #fff;\n    background: #29A045;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-df66e9dc] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-df66e9dc]:hover {\n    color: #fff;\n}\n.font-big[data-v-df66e9dc] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-df66e9dc] {\n    width: 80px;\n}\n.little-main-header[data-v-df66e9dc] {\n    right: 80px;\n}\n.background_mob_sec[data-v-df66e9dc] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.rules[data-v-df66e9dc] {\n    margin: 7px 0;\n    padding-bottom: 10px;\n}\n.rules > div[data-v-df66e9dc], .kind_activity > div[data-v-df66e9dc] {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.rules input[data-v-df66e9dc] {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: -5px;\n    right: 217px;\n    opacity: 0;\n}\n.rules input:checked + i[data-v-df66e9dc] {\n    background: #28a745;\n    color: #fff;\n    padding: 4px;\n}\n.rules i[data-v-df66e9dc] {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: -5px;\n    right: 217px;\n    z-index: -1;\n    color: #808c9c;\n    border-radius: 50%;\n    padding: 3px 2px;\n    font-size: 14px;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header[data-v-df66e9dc] {\n        display: none;\n}\n.right-header.mobile-header[data-v-df66e9dc] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-df66e9dc], .little-main-header[data-v-df66e9dc] {\n        right: 0 !important;\n}\n#main[data-v-df66e9dc], #main.little-main[data-v-df66e9dc] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-df66e9dc] {\n        width: 100%;\n}\n.copy-right[data-v-df66e9dc] {\n        display: none;\n}\n.clouse_menu[data-v-df66e9dc] {\n        display: none;\n}\n.clouse_menu_mob[data-v-df66e9dc] {\n        display: block;\n}\n.show-header button[data-v-df66e9dc] {\n        display: block;\n}\n.kind_user > div[data-v-df66e9dc], .kind_activity > div[data-v-df66e9dc] {\n        float: none;\n}\n.img-profile .submit[data-v-df66e9dc] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-df66e9dc] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-df66e9dc] {\n        float: none;\n}\n}\n@media screen and (max-width: 992px) {\n.main-content[data-v-df66e9dc] {\n        padding: 60px 15px;\n        direction: rtl;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-df66e9dc], .contents-post[data-v-df66e9dc] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.name-header-profile[data-v-df66e9dc] {\n        display: none;\n}\n.profile-menu-header[data-v-df66e9dc] {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-df66e9dc] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-df66e9dc] {\n        font-size: 10px;\n}\n.sub-header[data-v-df66e9dc] {\n\n        bottom: -44px;\n}\n}\n", ""]);
+exports.push([module.i, "\n.image_company[data-v-df66e9dc] {\n    margin: 15px auto;\n}\n.sub-des[data-v-df66e9dc] {\n    font-size: 11px;\n}\n.company_des > div[data-v-df66e9dc] {\n    float: right;\n    margin-bottom: 10px;\n}\n.text-danger[data-v-df66e9dc] {\n    display: inline-block;\n    padding: 4px 0;\n}\n.company_des > div.col-sm-6[data-v-df66e9dc] {\n    height: 85px;\n}\n.main-content[data-v-df66e9dc] {\n    padding: 60px 100px;\n    direction: rtl;\n}\n.roules-check-inside[data-v-df66e9dc] {\n    color: #28a745;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-df66e9dc] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.width-full[data-v-df66e9dc] {\n    width: 100%;\n}\n.green-bot[data-v-df66e9dc]:hover {\n    color: #fff;\n    background: #29A045;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n#main.little-main[data-v-df66e9dc] {\n    margin-right: 80px;\n}\n.little_header[data-v-df66e9dc] {\n    width: 80px;\n}\n.little-main-header[data-v-df66e9dc] {\n    right: 80px;\n}\n.rules[data-v-df66e9dc] {\n    margin: 7px 0;\n    padding-bottom: 10px;\n}\n.rules > div[data-v-df66e9dc], .kind_activity > div[data-v-df66e9dc] {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.rules input[data-v-df66e9dc] {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: -5px;\n    right: 217px;\n    opacity: 0;\n}\n.rules input:checked + i[data-v-df66e9dc] {\n    background: #28a745;\n    color: #fff;\n    padding: 4px;\n}\n.rules i[data-v-df66e9dc] {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: -5px;\n    right: 217px;\n    z-index: -1;\n    color: #808c9c;\n    border-radius: 50%;\n    padding: 3px 2px;\n    font-size: 14px;\n}\n\n", ""]);
 
 // exports
 
@@ -46325,154 +46924,6 @@ exports.push([module.i, "\n.image_company[data-v-df66e9dc] {\n    margin: 15px a
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -47494,7 +47945,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n/*start main content style */\n.main-content .list-group-item > div[data-v-67b37cdf] {\n    float: right;\n}\n.image-content-post img[data-v-67b37cdf] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-67b37cdf] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-67b37cdf] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-67b37cdf] {\n    display: block;\n}\n.list-title[data-v-67b37cdf], .needs[data-v-67b37cdf] {\n    float: right;\n    margin: 10px 30px;\n    font-weight: bold;\n}\n.main-content li[data-v-67b37cdf] {\n    position: relative;\n    overflow: hidden;\n}\n.list-time[data-v-67b37cdf], .detail-success[data-v-67b37cdf], .detail-error[data-v-67b37cdf], .detail-stand[data-v-67b37cdf] {\n    float: left;\n}\n.detail-success[data-v-67b37cdf] {\n    padding: 10px 30px;\n    width: 100%;\n    background: #28a745;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.detail-stand[data-v-67b37cdf] {\n    padding: 10px 30px;\n    width: 100%;\n    background: #7c7c7c;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.detail-error[data-v-67b37cdf] {\n    padding: 10px 30px;\n    width: 100%;\n    background: #e41c38;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.main-content .list-group-item .status[data-v-67b37cdf] {\n    padding: 0;\n}\n.main-content[data-v-67b37cdf] {\n    padding: 90px 35px;\n}\n.list-time[data-v-67b37cdf] {\n    margin: 11px 15px;\n    text-align: center;\n    width:100%;\n}\n@media screen and (max-width: 992px) {\n.show-header button[data-v-67b37cdf] {\n        display: block;\n}\n.kind_user > div[data-v-67b37cdf], .kind_activity > div[data-v-67b37cdf] {\n        float: none;\n}\n.img-profile .submit[data-v-67b37cdf] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-67b37cdf] {\n        width: 40%;\n        padding: 12px 0;\n}\n}\n@media screen and (max-width: 768px) {\n.main-content[data-v-67b37cdf] {\n        padding: 60px 15px;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-67b37cdf] {\n        font-size: 10px;\n}\n}\n", ""]);
+exports.push([module.i, "\n/*start main content style */\n.main-content li[data-v-67b37cdf] {\n    position: relative;\n    overflow: hidden;\n}\n.main-content .list-group-item > div[data-v-67b37cdf] {\n    float: right;\n}\n.main-content .list-group-item p[data-v-67b37cdf] {\n    text-align: center;\n}\n.main-content[data-v-67b37cdf] {\n    padding: 90px 35px;\n}\n.main-content ul[data-v-67b37cdf] {\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 10px #e1e1e1;\n            box-shadow: 0 0 10px #e1e1e1;\n}\n.list-title[data-v-67b37cdf], .needs[data-v-67b37cdf] {\n    float: right;\n    text-align: center;\n    line-height: 1.618;\n    font-weight: bold;\n}\n.detail-error[data-v-67b37cdf] {\n    padding: 10px 30px;\n    width: 100%;\n    background: #e41c38;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.detail-stand[data-v-67b37cdf] {\n    padding: 10px 0;\n    width: 100%;\n    background: #7c7c7c;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.detail-success[data-v-67b37cdf] {\n    padding: 8px 0;\n    width: 100%;\n    background: #28a745;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.main-content .list-group-item .status[data-v-67b37cdf] {\n    padding: 0;\n}\n@media screen and (max-width: 768px) {\n.list-group-item > div[data-v-67b37cdf] {\n        padding: 7px 0;\n}\n}\n", ""]);
 
 // exports
 
@@ -47506,75 +47957,6 @@ exports.push([module.i, "\n/*start main content style */\n.main-content .list-gr
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -47759,7 +48141,7 @@ var render = function() {
             { staticClass: "list-unstyled" },
             _vm._l(_vm.sellOffers, function(sellOffer) {
               return _c("li", { staticClass: "list-group-item" }, [
-                _c("div", { staticClass: "col-sm-3" }, [
+                _c("div", { staticClass: "col-sm-3 col-xs-12" }, [
                   _c("p", { staticClass: "list-title" }, [
                     _vm._v(
                       "\n                            " +
@@ -47781,7 +48163,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-2" }, [
+                _c("div", { staticClass: "col-sm-2 col-xs-3" }, [
                   _c("p", { staticClass: "needs" }, [
                     _c("span", { staticClass: "static-content" }, [
                       _vm._v(
@@ -47796,7 +48178,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-2" }, [
+                _c("div", { staticClass: "col-sm-2 col-xs-3" }, [
                   _c("p", { staticClass: "needs" }, [
                     _c("span", { staticClass: "static-content" }, [
                       _vm._v(
@@ -47814,7 +48196,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-3" }, [
+                _c("div", { staticClass: "col-sm-3 col-xs-6" }, [
                   _c("p", { staticClass: "list-time" }, [
                     _vm._v(
                       "\n                            " +
@@ -47826,7 +48208,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-2 status" }, [
+                _c("div", { staticClass: "col-sm-2 status col-xs-12" }, [
                   sellOffer.status == "در حال بررسی"
                     ? _c("p", { staticClass: "detail-stand" }, [
                         _vm._v(
@@ -54947,7 +55329,7 @@ var render = function() {
                       " و کدپستی " +
                       _vm._s(_vm.currentUser.profile.postal_code) +
                       " و شماره تماس " +
-                      _vm._s(_vm.currentUser.profile.public_phone) +
+                      _vm._s(this.currentUser.profile.public_phone) +
                       " که از این به بعد فروشنده نامیده می شود."
                   )
                 ]),
@@ -56901,7 +57283,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.col-xs-1,\n.col-xs-2,\n.col-xs-3,\n.col-xs-4,\n.col-xs-5,\n.col-xs-6,\n.col-xs-7,\n.col-xs-8,\n.col-xs-9,\n.col-xs-10,\n.col-xs-11,\n.col-xs-12,\n.col-sm-1,\n.col-sm-2,\n.col-sm-3,\n.col-sm-4,\n.col-sm-5,\n.col-sm-6,\n.col-sm-7,\n.col-sm-8,\n.col-sm-9,\n.col-sm-10,\n.col-sm-11,\n.col-sm-12,\n.col-md-1,\n.col-md-2,\n.col-md-3,\n.col-md-4,\n.col-md-5,\n.col-md-6,\n.col-md-7,\n.col-md-8,\n.col-md-9,\n.col-md-10,\n.col-md-11,\n.col-md-12,\n.col-lg-1,\n.col-lg-2,\n.col-lg-3,\n.col-lg-4,\n.col-lg-5,\n.col-lg-6,\n.col-lg-7,\n.col-lg-8,\n.col-lg-9,\n.col-lg-10,\n.col-lg-11,\n.col-lg-12{\n    float: right;\n}\n\n\n/*start style main header*/\n#main {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n#main.little-main {\n    margin-right: 80px;\n}\n.main-header {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n    border-bottom: 2px solid #e6e6e6;\n}\n.image-header-profile {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.profile-menu-header {\n    float: left;\n}\n.right-menu-header {\n\n    padding: 16px;\n}\n.right-menu-header, .content-header {\n    float: right;\n}\n.profile-menu-header {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header a {\n    position: relative;\n}\n.profile-menu-header i {\n    position: absolute;\n\n    left: -75px;\n\n    top: 18px;\n\n    font-size: 20px;\n}\n.content-header {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a, .profile-menu-header a {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a {\n    font-size: 30px;\n}\n.right-menu-header a:hover, .profile-menu-header a:hover {\n    color: #2e353e;\n}\n.name-header-profile {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li {\n    margin: 5px;\n}\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n}\n\n/*end style main header*/\n\n/*start style sub-header*/\n.sub-header {\n    position: absolute;\n    left: 0;\n    background: #eff3f6;\n    bottom: -48px;\n    right: 0;\n    text-align: center;\n}\n.sub-header ul {\n    text-align: center;\n}\n.sub-header a {\n    padding: 16px;\n\n    display: inline-block;\n\n    color: #808c9b;\n\n    font-weight: bold;\n\n    font-size: 14px;\n\n    position: relative;\n}\n.sub-header a:hover {\n    color: #313942;\n}\n.sub-header a:hover::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n\n/*end style sub-header*/\n/*start main content style */\n.image-content-post {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i {\n    display: block;\n}\n.content-item {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content {\n    padding: 60px 15px;\n}\n.header-lable {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot:focus,.gray-bot:focus {\n    color: #fff;\n}\n.default_btn{\n    margin: 15px 0;\n    display: inline-block;\n    background: #eee;\n    color: #444;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot {\n    margin: 15px 0;\n    display: inline-block;\n    background: #85888d;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.default_btn:hover {\n    color: #444;\n    background: #ddd;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot:hover {\n    color: #fff;\n    background: #72757a;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco:hover {\n    color: #fff;\n}\n.font-big {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header {\n    width: 80px;\n}\n.little-main-header {\n    right: 80px;\n}\n.background_mob_sec {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user, .kind_activity {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div, .kind_activity > div {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input, .kind_activity input {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i, .kind_activity input:checked + i {\n    color: #28a745;\n}\n.kind_user i, .kind_activity i {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border: 2px solid;\n    border-radius: 50%;\n    padding: 3px 2px;\n    font-size: 14px;\n}\n.user-form {\n    padding: 0;\n}\n.alert-message{\n    padding: 20px;\n\n    text-align: right;\n}\n.user-form input[type=\"text\"] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.user-form input[type=\"button\"] {\n    width: 100%;\n}\n.user-form input[type=\"text\"]:focus {\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile {\n    float: right;\n}\n#icon-pro {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg {\n    height: 150px;\n}\n.main-content-nav {\n    margin: 20px auto;\n\n    width: 80%;\n\n    float: none;\n}\n.main-content-nav ul {\n    text-align: center;\n    margin-right: -25px;\n}\n.main-content-nav li {\n    padding: 14px 50px;\n    position: relative;\n    background: #fbfbfb;\n    font-size: 18px;\n}\n.main-content-nav li a{\n    color: #999;\n}\n.main-content-nav li.active a{\n    color: #333;\n}\n.main-content-nav li:after {\n    content: \"\";\n    position: absolute;\n    right: 0;\n    bottom: 0;\n    width: 0;\n    height: 0;\n    border-right: 20px solid #fff;\n    border-top: 26px solid transparent;\n    border-bottom: 20px solid transparent;\n}\n.main-content-nav li:before {\n    content: \"\";\n    position: absolute;\n    left: -20px;\n    bottom: 0;\n    width: 0;\n    height: 0;\n    border-right: 20px solid #fbfbfb;\n    border-top: 26px solid transparent;\n    border-bottom: 20px solid transparent;\n    z-index: 1;\n}\n.main-content-nav li.active {\n    background: #f7f7f7;\n    color: #333;\n}\n.main-content-nav li.active:before {\n    border-right-color: #f7f7f7;\n}\n#main .contents,#main .alert-danger{\n    text-align: center;\n    background: #f7f7f7;\n\n    width: 80%;\n\n    margin: 0 auto;\n\n    float: none;\n\n    overflow: hidden;\n\n    border-radius: 3px;\n\n    line-height: 1.618;\n\n    direction: rtl;\n}\n#main .alert-danger{\n    font-size: 18px;\n    background: #e41c38;\n    padding: 15px;\n    margin: 0 auto 20pxauto;\n    color: #fff;\n}\n.title-p{\n    margin: 10px auto 15px;\n\n    font-size: 16px;\n\n    font-weight: bold;\n}\n#main .contents p{\n    text-align: right;\n}\n#main .contents h2{\n    margin: 20px auto;\n}\n#main .continue_but{\n    float: right;\n}\n#main .main_buttons{\n    float: right;\n}\n#step1 .main_buttons{\n    text-align: right;\n}\n/*part 2*/\n.main-content-texts{\n    background: #fff;\n\n    border-radius: 3px;\n}\n.header-contents{\n    background: #fff;\n    margin: 15px auto;\n    border-radius: 3px;\n    padding: 10px;\n    text-align: left;\n}\n.header-contents .title-contents{\n    text-align: right;\n}\n.contents h2{\n    font-size: 22px;\n}\n.description-text{\n    font-size: 12px;\n    padding: 5px 0;\n    border-top:1px solid #ddd;\n}\n.services td {\n    color: #00d613;\n}\n.pre-pay td {\n    color: #e41c38;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header {\n        display: none;\n}\n.right-header.mobile-header {\n        display: block;\n        right: -300px;\n}\n.main-header, .little-main-header {\n        right: 0 !important;\n}\n#main, #main.little-main {\n        margin-right: 0 !important;\n}\n.post-contents-table {\n        width: 100%;\n}\n.copy-right {\n        display: none;\n}\n.clouse_menu {\n        display: none;\n}\n.clouse_menu_mob {\n        display: block;\n}\n.show-header button {\n        display: block;\n}\n.kind_user > div, .kind_activity > div {\n        float: none;\n}\n.img-profile .submit {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post, .contents-post {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n#main .contents,#main .alert-danger{\n\n        width: 100%;\n}\n#main .alert-danger{\n        font-size: 14px;\n}\n.name-header-profile {\n        display: none;\n}\n.profile-menu-header {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a {\n        font-size: 10px;\n}\n.sub-header {\n\n        bottom: -44px;\n}\n}\n", ""]);
+exports.push([module.i, "\n.col-xs-12,\n.col-sm-4,\n.col-sm-8,\n.col-md-3,\n.col-md-9\n{\n    float: right;\n}\n\n\n\n/*start main content style */\n.image-content-post {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i {\n    display: block;\n}\n.content-item {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content {\n    padding: 60px 15px;\n}\n.header-lable {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot:focus,.gray-bot:focus {\n    color: #fff;\n}\n.default_btn{\n    margin: 15px 0;\n    display: inline-block;\n    background: #eee;\n    color: #444;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot {\n    margin: 15px 0;\n    display: inline-block;\n    background: #85888d;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.default_btn:hover {\n    color: #444;\n    background: #ddd;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot:hover {\n    color: #fff;\n    background: #72757a;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco:hover {\n    color: #fff;\n}\n.font-big {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header {\n    width: 80px;\n}\n.little-main-header {\n    right: 80px;\n}\n.background_mob_sec {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user, .kind_activity {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div, .kind_activity > div {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input, .kind_activity input {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i, .kind_activity input:checked + i {\n    color: #28a745;\n}\n.kind_user i, .kind_activity i {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border: 2px solid;\n    border-radius: 50%;\n    padding: 3px 2px;\n    font-size: 14px;\n}\n.user-form {\n    padding: 0;\n}\n.alert-message{\n    padding: 20px;\n\n    text-align: right;\n}\n.user-form input[type=\"text\"] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.user-form input[type=\"button\"] {\n    width: 100%;\n}\n.user-form input[type=\"text\"]:focus {\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile {\n    float: right;\n}\n#icon-pro {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg {\n    height: 150px;\n}\n.main-content-nav {\n    margin: 20px auto;\n\n    width: 80%;\n\n    float: none;\n}\n.main-content-nav ul {\n    text-align: center;\n    margin-right: -25px;\n}\n.main-content-nav li {\n    padding: 14px 50px;\n    position: relative;\n    background: #fbfbfb;\n    font-size: 18px;\n}\n.main-content-nav li a{\n    color: #999;\n}\n.main-content-nav li.active a{\n    color: #333;\n}\n.main-content-nav li:after {\n    content: \"\";\n    position: absolute;\n    right: 0;\n    bottom: 0;\n    width: 0;\n    height: 0;\n    border-right: 20px solid #fff;\n    border-top: 26px solid transparent;\n    border-bottom: 20px solid transparent;\n}\n.main-content-nav li:before {\n    content: \"\";\n    position: absolute;\n    left: -20px;\n    bottom: 0;\n    width: 0;\n    height: 0;\n    border-right: 20px solid #fbfbfb;\n    border-top: 26px solid transparent;\n    border-bottom: 20px solid transparent;\n    z-index: 1;\n}\n.main-content-nav li.active {\n    background: #f7f7f7;\n    color: #333;\n}\n.main-content-nav li.active:before {\n    border-right-color: #f7f7f7;\n}\n#main .contents,#main .alert-danger{\n    text-align: center;\n    background: #f7f7f7;\n\n    width: 80%;\n\n    margin: 0 auto;\n\n    float: none;\n\n    overflow: hidden;\n\n    border-radius: 3px;\n\n    line-height: 1.618;\n\n    direction: rtl;\n}\n#main .alert-danger{\n    font-size: 18px;\n    background: #e41c38;\n    padding: 15px;\n    margin: 0 auto 20pxauto;\n    color: #fff;\n}\n.title-p{\n    margin: 10px auto 15px;\n\n    font-size: 16px;\n\n    font-weight: bold;\n}\n#main .contents p{\n    text-align: right;\n}\n#main .contents h2{\n    margin: 20px auto;\n}\n#main .continue_but{\n    float: right;\n}\n#main .main_buttons{\n    float: right;\n}\n#step1 .main_buttons{\n    text-align: right;\n}\n/*part 2*/\n.main-content-texts{\n    background: #fff;\n\n    border-radius: 3px;\n}\n.header-contents{\n    background: #fff;\n    margin: 15px auto;\n    border-radius: 3px;\n    padding: 10px;\n    text-align: left;\n}\n.header-contents .title-contents{\n    text-align: right;\n}\n.contents h2{\n    font-size: 22px;\n}\n.description-text{\n    font-size: 12px;\n    padding: 5px 0;\n    border-top:1px solid #ddd;\n}\n.services td {\n    color: #00d613;\n}\n.pre-pay td {\n    color: #e41c38;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header {\n        display: none;\n}\n.right-header.mobile-header {\n        display: block;\n        right: -300px;\n}\n.main-header, .little-main-header {\n        right: 0 !important;\n}\n#main, #main.little-main {\n        margin-right: 0 !important;\n}\n.post-contents-table {\n        width: 100%;\n}\n.copy-right {\n        display: none;\n}\n.clouse_menu {\n        display: none;\n}\n.clouse_menu_mob {\n        display: block;\n}\n.show-header button {\n        display: block;\n}\n.kind_user > div, .kind_activity > div {\n        float: none;\n}\n.img-profile .submit {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post, .contents-post {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n#main .contents,#main .alert-danger{\n\n        width: 100%;\n}\n#main .alert-danger{\n        font-size: 14px;\n}\n.name-header-profile {\n        display: none;\n}\n.profile-menu-header {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a {\n        font-size: 10px;\n}\n.sub-header {\n\n        bottom: -44px;\n}\n}\n", ""]);
 
 // exports
 
@@ -56913,204 +57295,6 @@ exports.push([module.i, "\n.col-xs-1,\n.col-xs-2,\n.col-xs-3,\n.col-xs-4,\n.col-
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -58985,7 +59169,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.col-xs-1[data-v-013238a3],\n.col-xs-2[data-v-013238a3],\n.col-xs-3[data-v-013238a3],\n.col-xs-4[data-v-013238a3],\n.col-xs-5[data-v-013238a3],\n.col-xs-6[data-v-013238a3],\n.col-xs-7[data-v-013238a3],\n.col-xs-8[data-v-013238a3],\n.col-xs-9[data-v-013238a3],\n.col-xs-10[data-v-013238a3],\n.col-xs-11[data-v-013238a3],\n.col-xs-12[data-v-013238a3],\n.col-sm-1[data-v-013238a3],\n.col-sm-2[data-v-013238a3],\n.col-sm-3[data-v-013238a3],\n.col-sm-4[data-v-013238a3],\n.col-sm-5[data-v-013238a3],\n.col-sm-6[data-v-013238a3],\n.col-sm-7[data-v-013238a3],\n.col-sm-8[data-v-013238a3],\n.col-sm-9[data-v-013238a3],\n.col-sm-10[data-v-013238a3],\n.col-sm-11[data-v-013238a3],\n.col-sm-12[data-v-013238a3],\n.col-md-1[data-v-013238a3],\n.col-md-2[data-v-013238a3],\n.col-md-3[data-v-013238a3],\n.col-md-4[data-v-013238a3],\n.col-md-5[data-v-013238a3],\n.col-md-6[data-v-013238a3],\n.col-md-7[data-v-013238a3],\n.col-md-8[data-v-013238a3],\n.col-md-9[data-v-013238a3],\n.col-md-10[data-v-013238a3],\n.col-md-11[data-v-013238a3],\n.col-md-12[data-v-013238a3],\n.col-lg-1[data-v-013238a3],\n.col-lg-2[data-v-013238a3],\n.col-lg-3[data-v-013238a3],\n.col-lg-4[data-v-013238a3],\n.col-lg-5[data-v-013238a3],\n.col-lg-6[data-v-013238a3],\n.col-lg-7[data-v-013238a3],\n.col-lg-8[data-v-013238a3],\n.col-lg-9[data-v-013238a3],\n.col-lg-10[data-v-013238a3],\n.col-lg-11[data-v-013238a3],\n.col-lg-12[data-v-013238a3]{\n    float: right;\n}\n/*start style main header*/\n#main[data-v-013238a3] {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n#main.little-main[data-v-013238a3] {\n    margin-right: 80px;\n}\n.main-header[data-v-013238a3] {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n    border-bottom: 2px solid #e6e6e6;\n}\n.image-header-profile[data-v-013238a3] {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.profile-menu-header[data-v-013238a3] {\n    float: left;\n}\n.right-menu-header[data-v-013238a3] {\n\n    padding: 16px;\n}\n.right-menu-header[data-v-013238a3], .content-header[data-v-013238a3] {\n    float: right;\n}\n.profile-menu-header[data-v-013238a3] {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header a[data-v-013238a3] {\n    position: relative;\n}\n.profile-menu-header i[data-v-013238a3] {\n    position: absolute;\n\n    left: -75px;\n\n    top: 18px;\n\n    font-size: 20px;\n}\n.content-header[data-v-013238a3] {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a[data-v-013238a3], .profile-menu-header a[data-v-013238a3] {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a[data-v-013238a3] {\n    font-size: 30px;\n}\n.right-menu-header a[data-v-013238a3]:hover, .profile-menu-header a[data-v-013238a3]:hover {\n    color: #2e353e;\n}\n.name-header-profile[data-v-013238a3] {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list[data-v-013238a3] {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li[data-v-013238a3] {\n    margin: 5px;\n}\n.profile-list a[data-v-013238a3] {\n    width: 100%;\n    display: inline-block;\n}\n\n/*end style main header*/\n\n/*start style sub-header*/\n.sub-header[data-v-013238a3] {\n    position: absolute;\n    left: 0;\n    background: #eff3f6;\n    bottom: -48px;\n    right: 0;\n    text-align: center;\n}\n.sub-header ul[data-v-013238a3] {\n    text-align: center;\n}\n.sub-header a[data-v-013238a3] {\n    padding: 16px;\n\n    display: inline-block;\n\n    color: #808c9b;\n\n    font-weight: bold;\n\n    font-size: 14px;\n\n    position: relative;\n}\n.sub-header a[data-v-013238a3]:hover {\n    color: #313942;\n}\n.sub-header a[data-v-013238a3]:hover::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n\n/*end style sub-header*/\n/*start main content style */\n.image-content-post[data-v-013238a3] {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img[data-v-013238a3] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-013238a3] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-013238a3] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-013238a3] {\n    display: block;\n}\n.content-item[data-v-013238a3] {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content[data-v-013238a3] {\n    padding: 60px 15px;\n}\n.header-lable[data-v-013238a3] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-013238a3] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-text[data-v-013238a3] {\n    color: #28a745;\n}\n.green-bot[data-v-013238a3]:focus,.gray-bot[data-v-013238a3]:focus {\n    color: #fff;\n}\n.default_btn[data-v-013238a3]{\n    margin: 15px 0;\n    display: inline-block;\n    background: #eee;\n    color: #444;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot[data-v-013238a3] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #85888d;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.default_btn[data-v-013238a3]:hover {\n    color: #444;\n    background: #ddd;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-013238a3]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot[data-v-013238a3]:hover {\n    color: #fff;\n    background: #72757a;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-013238a3] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-013238a3]:hover {\n    color: #fff;\n}\n.font-big[data-v-013238a3] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-013238a3] {\n    width: 80px;\n}\n.little-main-header[data-v-013238a3] {\n    right: 80px;\n}\n.background_mob_sec[data-v-013238a3] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user[data-v-013238a3], .kind_activity[data-v-013238a3] {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div[data-v-013238a3], .kind_activity > div[data-v-013238a3] {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input[data-v-013238a3], .kind_activity input[data-v-013238a3] {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i[data-v-013238a3], .kind_activity input:checked + i[data-v-013238a3] {\n    color: #28a745;\n}\n.kind_user i[data-v-013238a3], .kind_activity i[data-v-013238a3] {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border: 2px solid;\n    border-radius: 50%;\n    padding: 3px 2px;\n    font-size: 14px;\n}\n.user-form[data-v-013238a3] {\n    padding: 0;\n}\n.user-form input[type=\"text\"][data-v-013238a3] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.user-form input[type=\"button\"][data-v-013238a3] {\n    width: 100%;\n}\n.user-form input[type=\"text\"][data-v-013238a3]:focus {\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile[data-v-013238a3] {\n    float: right;\n}\n#icon-pro[data-v-013238a3] {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg[data-v-013238a3] {\n    height: 150px;\n}\n#main .contents[data-v-013238a3]{\n    text-align: center;\n\n    background: #f7f7f7;\n\n    width: 80%;\n\n    margin: 15px  auto;\n\n    float: none;\n\n    overflow: hidden;\n\n    border-radius: 3px;\n\n    line-height: 1.618;\n\n    direction: rtl;\n}\n#main .contents p[data-v-013238a3]{\n    text-align: right;\n}\n#main .contents h2[data-v-013238a3]{\n    margin: 20px auto;\n}\n.factor-title[data-v-013238a3]{\n    overflow: hidden;\n\n    padding: 15px 0;\n\n    border-bottom: 1px solid #bbb;\n}\n.contents-detail[data-v-013238a3]{\n    margin: 20px auto;\n    padding: 0;\n}\n.contents-detail > div[data-v-013238a3]{\n    padding: 0;\n}\n#main .main_buttons[data-v-013238a3]{\n    float: right;\n}\n\n\n/*part 2*/\n.main-content-texts[data-v-013238a3]{\n    background: #fff;\n\n    border-radius: 3px;\n}\n.header-contents[data-v-013238a3]{\n    background: #fff;\n    margin: 15px auto;\n    border-radius: 3px;\n    padding: 10px;\n    text-align: left;\n}\n.header-contents .title-contents[data-v-013238a3]{\n    text-align: right;\n}\n.contents h2[data-v-013238a3]{\n    font-size: 22px;\n}\n.description-text[data-v-013238a3]{\n    font-size: 12px;\n    padding: 5px 0;\n    border-top:1px solid #ddd;\n}\n.services td[data-v-013238a3] {\n    color: #00d613;\n}\n.pre-pay td[data-v-013238a3] {\n    color: #e41c38;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header[data-v-013238a3] {\n        display: none;\n}\n.right-header.mobile-header[data-v-013238a3] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-013238a3], .little-main-header[data-v-013238a3] {\n        right: 0 !important;\n}\n#main[data-v-013238a3], #main.little-main[data-v-013238a3] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-013238a3] {\n        width: 100%;\n}\n.copy-right[data-v-013238a3] {\n        display: none;\n}\n.clouse_menu[data-v-013238a3] {\n        display: none;\n}\n.clouse_menu_mob[data-v-013238a3] {\n        display: block;\n}\n.show-header button[data-v-013238a3] {\n        display: block;\n}\n.kind_user > div[data-v-013238a3], .kind_activity > div[data-v-013238a3] {\n        float: none;\n}\n.img-profile .submit[data-v-013238a3] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-013238a3] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-013238a3] {\n        float: none;\n}\n}\n#tex_rate[data-v-013238a3]{\n    margin: 10px auto;\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-013238a3], .contents-post[data-v-013238a3] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.name-header-profile[data-v-013238a3] {\n        display: none;\n}\n.profile-menu-header[data-v-013238a3] {\n        padding: 7px;\n        padding-left: 36px;\n}\n#main .contents[data-v-013238a3] {\n        width: 100%;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-013238a3] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-013238a3] {\n        font-size: 10px;\n}\n.sub-header[data-v-013238a3] {\n\n        bottom: -44px;\n}\n}\n", ""]);
+exports.push([module.i, "\n.col-xs-1[data-v-013238a3],\n.col-xs-2[data-v-013238a3],\n.col-xs-3[data-v-013238a3],\n.col-xs-4[data-v-013238a3],\n.col-xs-5[data-v-013238a3],\n.col-xs-6[data-v-013238a3],\n.col-xs-7[data-v-013238a3],\n.col-xs-8[data-v-013238a3],\n.col-xs-9[data-v-013238a3],\n.col-xs-10[data-v-013238a3],\n.col-xs-11[data-v-013238a3],\n.col-xs-12[data-v-013238a3],\n.col-sm-1[data-v-013238a3],\n.col-sm-2[data-v-013238a3],\n.col-sm-3[data-v-013238a3],\n.col-sm-4[data-v-013238a3],\n.col-sm-5[data-v-013238a3],\n.col-sm-6[data-v-013238a3],\n.col-sm-7[data-v-013238a3],\n.col-sm-8[data-v-013238a3],\n.col-sm-9[data-v-013238a3],\n.col-sm-10[data-v-013238a3],\n.col-sm-11[data-v-013238a3],\n.col-sm-12[data-v-013238a3],\n.col-md-1[data-v-013238a3],\n.col-md-2[data-v-013238a3],\n.col-md-3[data-v-013238a3],\n.col-md-4[data-v-013238a3],\n.col-md-5[data-v-013238a3],\n.col-md-6[data-v-013238a3],\n.col-md-7[data-v-013238a3],\n.col-md-8[data-v-013238a3],\n.col-md-9[data-v-013238a3],\n.col-md-10[data-v-013238a3],\n.col-md-11[data-v-013238a3],\n.col-md-12[data-v-013238a3],\n.col-lg-1[data-v-013238a3],\n.col-lg-2[data-v-013238a3],\n.col-lg-3[data-v-013238a3],\n.col-lg-4[data-v-013238a3],\n.col-lg-5[data-v-013238a3],\n.col-lg-6[data-v-013238a3],\n.col-lg-7[data-v-013238a3],\n.col-lg-8[data-v-013238a3],\n.col-lg-9[data-v-013238a3],\n.col-lg-10[data-v-013238a3],\n.col-lg-11[data-v-013238a3],\n.col-lg-12[data-v-013238a3]{\n    float: right;\n}\n/*start style main header*/\n#main[data-v-013238a3] {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n#main.little-main[data-v-013238a3] {\n    margin-right: 80px;\n}\n.main-header[data-v-013238a3] {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n    border-bottom: 2px solid #e6e6e6;\n}\n.image-header-profile[data-v-013238a3] {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.profile-menu-header[data-v-013238a3] {\n    float: left;\n}\n.right-menu-header[data-v-013238a3] {\n\n    padding: 16px;\n}\n.right-menu-header[data-v-013238a3], .content-header[data-v-013238a3] {\n    float: right;\n}\n.profile-menu-header[data-v-013238a3] {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header a[data-v-013238a3] {\n    position: relative;\n}\n.profile-menu-header i[data-v-013238a3] {\n    position: absolute;\n\n    left: -75px;\n\n    top: 18px;\n\n    font-size: 20px;\n}\n.content-header[data-v-013238a3] {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a[data-v-013238a3], .profile-menu-header a[data-v-013238a3] {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a[data-v-013238a3] {\n    font-size: 30px;\n}\n.right-menu-header a[data-v-013238a3]:hover, .profile-menu-header a[data-v-013238a3]:hover {\n    color: #2e353e;\n}\n.name-header-profile[data-v-013238a3] {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list[data-v-013238a3] {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li[data-v-013238a3] {\n    margin: 5px;\n}\n.profile-list a[data-v-013238a3] {\n    width: 100%;\n    display: inline-block;\n}\n\n/*end style main header*/\n\n/*start style sub-header*/\n.sub-header[data-v-013238a3] {\n    position: absolute;\n    left: 0;\n    background: #eff3f6;\n    bottom: -48px;\n    right: 0;\n    text-align: center;\n}\n.sub-header ul[data-v-013238a3] {\n    text-align: center;\n}\n.sub-header a[data-v-013238a3] {\n    padding: 16px;\n\n    display: inline-block;\n\n    color: #808c9b;\n\n    font-weight: bold;\n\n    font-size: 14px;\n\n    position: relative;\n}\n.sub-header a[data-v-013238a3]:hover {\n    color: #313942;\n}\n.sub-header a[data-v-013238a3]:hover::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n\n/*end style sub-header*/\n/*start main content style */\n.image-content-post[data-v-013238a3] {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img[data-v-013238a3] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-013238a3] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-013238a3] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-013238a3] {\n    display: block;\n}\n.content-item[data-v-013238a3] {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content[data-v-013238a3] {\n    padding: 60px 15px;\n}\n.header-lable[data-v-013238a3] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-013238a3] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-text[data-v-013238a3] {\n    color: #28a745;\n}\n.green-bot[data-v-013238a3]:focus,.gray-bot[data-v-013238a3]:focus {\n    color: #fff;\n}\n.default_btn[data-v-013238a3]{\n    margin: 15px 0;\n    display: inline-block;\n    background: #eee;\n    color: #444;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot[data-v-013238a3] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #85888d;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.default_btn[data-v-013238a3]:hover {\n    color: #444;\n    background: #ddd;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-013238a3]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot[data-v-013238a3]:hover {\n    color: #fff;\n    background: #72757a;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-013238a3] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-013238a3]:hover {\n    color: #fff;\n}\n.font-big[data-v-013238a3] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-013238a3] {\n    width: 80px;\n}\n.little-main-header[data-v-013238a3] {\n    right: 80px;\n}\n.background_mob_sec[data-v-013238a3] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user[data-v-013238a3], .kind_activity[data-v-013238a3] {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div[data-v-013238a3], .kind_activity > div[data-v-013238a3] {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input[data-v-013238a3], .kind_activity input[data-v-013238a3] {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i[data-v-013238a3], .kind_activity input:checked + i[data-v-013238a3] {\n    color: #28a745;\n}\n.kind_user i[data-v-013238a3], .kind_activity i[data-v-013238a3] {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border: 2px solid;\n    border-radius: 50%;\n    padding: 3px 2px;\n    font-size: 14px;\n}\n.user-form[data-v-013238a3] {\n    padding: 0;\n}\n.user-form input[type=\"text\"][data-v-013238a3] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.user-form input[type=\"button\"][data-v-013238a3] {\n    width: 100%;\n}\n.user-form input[type=\"text\"][data-v-013238a3]:focus {\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile[data-v-013238a3] {\n    float: right;\n}\n#icon-pro[data-v-013238a3] {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg[data-v-013238a3] {\n    height: 150px;\n}\n#main .contents[data-v-013238a3]{\n    text-align: center;\n\n    background: #f7f7f7;\n\n    width: 80%;\n\n    margin: 15px  auto;\n\n    float: none;\n\n    overflow: hidden;\n\n    border-radius: 3px;\n\n    line-height: 1.618;\n\n    direction: rtl;\n}\n#main .contents p[data-v-013238a3]{\n    text-align: right;\n}\n#main .contents h2[data-v-013238a3]{\n    margin: 20px auto;\n}\n.factor-title[data-v-013238a3]{\n    overflow: hidden;\n\n    padding: 15px 0;\n\n    border-bottom: 1px solid #bbb;\n}\n.contents-detail[data-v-013238a3]{\n    margin: 20px auto;\n    padding: 0;\n}\n.contents-detail > div[data-v-013238a3]{\n    padding: 0;\n}\n#main .main_buttons[data-v-013238a3]{\n    float: right;\n    text-align: center;\n}\n\n\n/*part 2*/\n.main-content-texts[data-v-013238a3]{\n    background: #fff;\n\n    border-radius: 3px;\n}\n.header-contents[data-v-013238a3]{\n    background: #fff;\n    margin: 15px auto;\n    border-radius: 3px;\n    padding: 10px;\n    text-align: left;\n}\n.header-contents .title-contents[data-v-013238a3]{\n    text-align: right;\n}\n.contents h2[data-v-013238a3]{\n    font-size: 22px;\n}\n.description-text[data-v-013238a3]{\n    font-size: 12px;\n    padding: 5px 0;\n    border-top:1px solid #ddd;\n}\n.services td[data-v-013238a3] {\n    color: #00d613;\n}\n.pre-pay td[data-v-013238a3] {\n    color: #e41c38;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header[data-v-013238a3] {\n        display: none;\n}\n.right-header.mobile-header[data-v-013238a3] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-013238a3], .little-main-header[data-v-013238a3] {\n        right: 0 !important;\n}\n#main[data-v-013238a3], #main.little-main[data-v-013238a3] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-013238a3] {\n        width: 100%;\n}\n.copy-right[data-v-013238a3] {\n        display: none;\n}\n.clouse_menu[data-v-013238a3] {\n        display: none;\n}\n.clouse_menu_mob[data-v-013238a3] {\n        display: block;\n}\n.show-header button[data-v-013238a3] {\n        display: block;\n}\n.kind_user > div[data-v-013238a3], .kind_activity > div[data-v-013238a3] {\n        float: none;\n}\n.img-profile .submit[data-v-013238a3] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-013238a3] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-013238a3] {\n        float: none;\n}\n}\n#tex_rate[data-v-013238a3]{\n    margin: 10px auto;\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-013238a3], .contents-post[data-v-013238a3] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.name-header-profile[data-v-013238a3] {\n        display: none;\n}\n.profile-menu-header[data-v-013238a3] {\n        padding: 7px;\n        padding-left: 36px;\n}\n#main .contents[data-v-013238a3] {\n        width: 100%;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-013238a3] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-013238a3] {\n        font-size: 10px;\n}\n.sub-header[data-v-013238a3] {\n\n        bottom: -44px;\n}\n}\n", ""]);
 
 // exports
 
@@ -59025,7 +59209,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -59036,6 +59220,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
 //
 //
 //
@@ -59828,6 +60014,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
@@ -59835,7 +60023,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             pageStep: 1,
             transactionId: '',
             popUpMsg: '',
-            transactionInfo: ''
+            transactionInfo: '',
+            items: [{
+                message: 'لیست تراکنش ها',
+                url: 'registerProduct'
+            }]
         };
     },
     methods: {
@@ -59865,6 +60057,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.init();
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
     }
 });
 
@@ -61058,6 +61251,95 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 135 */,
+/* 136 */,
+/* 137 */,
+/* 138 */,
+/* 139 */,
+/* 140 */,
+/* 141 */,
+/* 142 */,
+/* 143 */,
+/* 144 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(145);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("f1f89798", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-349d7002\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header-top.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-349d7002\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header-top.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 145 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n#main {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n.main-header {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n}\n.little-main-header {\n    right: 80px;\n}\n.image-header-profile {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.image-header-profile  img{\n    height: 100%;\n}\n.profile-menu-header {\n    float: left;\n}\n.right-menu-header {\n\n    padding: 16px;\n}\n.right-menu-header, .content-header {\n    float: right;\n}\n.profile-menu-header {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header i {\n    position: absolute;\n\n    left: -90px;\n\n    top: 0px;\n\n    font-size: 20px;\n}\n.content-header {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a, .profile-menu-header a {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a {\n    font-size: 30px;\n}\n.right-menu-header a:hover, .profile-menu-header a:hover {\n    color: #2e353e;\n}\n.profile-menu-header a {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li {\n    margin: 5px;\n}\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n}\n.font-big {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 146 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(147);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("1a743800", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-57843a52\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./sub-menu.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-57843a52\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./sub-menu.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 147 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n/*start style sub-header*/\n.sub-header {\n    position: absolute;\n    left: 0;\n    background: #eff3f6;\n    top: 63px;\n    right: 0;\n    text-align: center;\n    border-bottom: 1px solid #e6e6e6;\n    border-top: 1px solid #e6e6e6;\n}\n.sub-header ul {\n    text-align: center;\n}\n.sub-header a {\n    padding: 16px;\n\n    display: inline-block;\n\n    color: #808c9b;\n\n    font-weight: bold;\n\n    font-size: 14px;\n\n    position: relative;\n}\n.sub-header a:hover {\n    color: #313942;\n}\n.sub-header a:hover::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.sub-header a.active {\n    color: #313942;\n}\n.sub-header a.active::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n/*end style sub-header*/\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);
