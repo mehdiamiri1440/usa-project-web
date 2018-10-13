@@ -107,7 +107,7 @@ input[type="text"],input[type="password"],input[type="email"]{
     border-radius: 3px;
     color: #fff;
     padding: 12px;
-    margin: 45px auto 5px;
+    margin: 20px auto 5px;
 }
 .danger_border_but{
     width: 100%;

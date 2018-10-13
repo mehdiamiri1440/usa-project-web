@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 20);
+/******/ 	return __webpack_require__(__webpack_require__.s = 21);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -489,22 +489,24 @@ function applyToTag (styleElement, obj) {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "eventBus", function() { return eventBus; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dashboard_seller_header_header_vue__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dashboard_seller_header_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_dashboard_seller_header_header_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_buyer_header_header_vue__ = __webpack_require__(79);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_buyer_header_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_dashboard_buyer_header_header_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_transaction_transaction_vue__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_transaction_transaction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_transaction_transaction_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__router_seller_route__ = __webpack_require__(120);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__router_buyer_route__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_register_register_vue__ = __webpack_require__(236);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_register_register_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_register_register_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_header_header_vue__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_header_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_header_header_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_buyer_header_header_vue__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_buyer_header_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_dashboard_buyer_header_header_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_product_product_basic_vue__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_product_product_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_product_product_basic_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_my_sell_offers_vue__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_my_sell_offers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_my_sell_offers_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_profile_profile_basic_vue__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_profile_profile_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_profile_profile_basic_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_transaction_transaction_vue__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_transaction_transaction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_transaction_transaction_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__router_seller_route__ = __webpack_require__(120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__router_buyer_route__ = __webpack_require__(163);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -512,9 +514,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(21);
-__webpack_require__(44);
+__webpack_require__(22);
 __webpack_require__(45);
+__webpack_require__(46);
 
 window.Vue = __webpack_require__(7);
 
@@ -523,6 +525,7 @@ window.Vue = __webpack_require__(7);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
 
 
 
@@ -566,16 +569,17 @@ var eventBus = new Vue();
 
 var app = new Vue({
     el: '#app',
-    router: __WEBPACK_IMPORTED_MODULE_7__router_seller_route__["a" /* default */],
-    routerB: __WEBPACK_IMPORTED_MODULE_8__router_buyer_route__["a" /* default */],
+    router: __WEBPACK_IMPORTED_MODULE_8__router_seller_route__["a" /* default */],
+    routerB: __WEBPACK_IMPORTED_MODULE_9__router_buyer_route__["a" /* default */],
     components: {
-        profileBasic: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue___default.a,
-        loginCom: __WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue___default.a,
-        headerDashSeller: __WEBPACK_IMPORTED_MODULE_1__components_dashboard_seller_header_header_vue___default.a,
-        headerDashBuyer: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_buyer_header_header_vue___default.a,
-        productBasic: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue___default.a,
-        mySellOffers: __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue___default.a,
-        transitionSeller: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_transaction_transaction_vue___default.a
+        profileBasic: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_profile_profile_basic_vue___default.a,
+        loginComponent: __WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue___default.a,
+        registerComponent: __WEBPACK_IMPORTED_MODULE_1__components_register_register_vue___default.a,
+        headerDashSeller: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_header_header_vue___default.a,
+        headerDashBuyer: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_buyer_header_header_vue___default.a,
+        productBasic: __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_product_product_basic_vue___default.a,
+        mySellOffers: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_my_sell_offers_vue___default.a,
+        transitionSeller: __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_transaction_transaction_vue___default.a
     }
 });
 
@@ -587,7 +591,7 @@ var app = new Vue({
 
 
 var bind = __webpack_require__(9);
-var isBuffer = __webpack_require__(27);
+var isBuffer = __webpack_require__(28);
 
 /*global toString:true*/
 
@@ -924,7 +928,7 @@ module.exports = g;
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(4);
-var normalizeHeaderName = __webpack_require__(29);
+var normalizeHeaderName = __webpack_require__(30);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -11980,7 +11984,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(46).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(47).setImmediate))
 
 /***/ }),
 /* 8 */
@@ -22569,12 +22573,12 @@ process.umask = function() { return 0; };
 
 
 var utils = __webpack_require__(4);
-var settle = __webpack_require__(30);
-var buildURL = __webpack_require__(32);
-var parseHeaders = __webpack_require__(33);
-var isURLSameOrigin = __webpack_require__(34);
+var settle = __webpack_require__(31);
+var buildURL = __webpack_require__(33);
+var parseHeaders = __webpack_require__(34);
+var isURLSameOrigin = __webpack_require__(35);
 var createError = __webpack_require__(12);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(35);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(36);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -22671,7 +22675,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(36);
+      var cookies = __webpack_require__(37);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -22755,7 +22759,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(31);
+var enhanceError = __webpack_require__(32);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -22816,6 +22820,53 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(49)
+/* template */
+var __vue_template__ = __webpack_require__(52)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\login\\Login.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3ebf3ee2", Component.options)
+  } else {
+    hotAPI.reload("data-v-3ebf3ee2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(104)
@@ -22863,7 +22914,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -22914,7 +22965,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -22965,7 +23016,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -23016,7 +23067,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25646,7 +25697,7 @@ if (inBrowser && window.Vue) {
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(3);
@@ -25654,11 +25705,11 @@ module.exports = __webpack_require__(226);
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(22);
+window._ = __webpack_require__(23);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -25669,7 +25720,7 @@ window._ = __webpack_require__(22);
 try {
   window.$ = window.jQuery = __webpack_require__(8);
 
-  __webpack_require__(24);
+  __webpack_require__(25);
 } catch (e) {}
 
 /**
@@ -25678,7 +25729,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(25);
+window.axios = __webpack_require__(26);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -25714,7 +25765,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -42816,10 +42867,10 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(23)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(24)(module)))
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -42847,7 +42898,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports) {
 
 /*!
@@ -45230,13 +45281,13 @@ if (typeof jQuery === 'undefined') {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(26);
+module.exports = __webpack_require__(27);
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45244,7 +45295,7 @@ module.exports = __webpack_require__(26);
 
 var utils = __webpack_require__(4);
 var bind = __webpack_require__(9);
-var Axios = __webpack_require__(28);
+var Axios = __webpack_require__(29);
 var defaults = __webpack_require__(6);
 
 /**
@@ -45279,14 +45330,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(14);
-axios.CancelToken = __webpack_require__(42);
+axios.CancelToken = __webpack_require__(43);
 axios.isCancel = __webpack_require__(13);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(43);
+axios.spread = __webpack_require__(44);
 
 module.exports = axios;
 
@@ -45295,7 +45346,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports) {
 
 /*!
@@ -45322,7 +45373,7 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45330,10 +45381,10 @@ function isSlowBuffer (obj) {
 
 var defaults = __webpack_require__(6);
 var utils = __webpack_require__(4);
-var InterceptorManager = __webpack_require__(37);
-var dispatchRequest = __webpack_require__(38);
-var isAbsoluteURL = __webpack_require__(40);
-var combineURLs = __webpack_require__(41);
+var InterceptorManager = __webpack_require__(38);
+var dispatchRequest = __webpack_require__(39);
+var isAbsoluteURL = __webpack_require__(41);
+var combineURLs = __webpack_require__(42);
 
 /**
  * Create a new instance of Axios
@@ -45415,7 +45466,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45434,7 +45485,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45467,7 +45518,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45495,7 +45546,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45570,7 +45621,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45614,7 +45665,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45689,7 +45740,7 @@ module.exports = (
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45732,7 +45783,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45792,7 +45843,7 @@ module.exports = (
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45851,14 +45902,14 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(4);
-var transformData = __webpack_require__(39);
+var transformData = __webpack_require__(40);
 var isCancel = __webpack_require__(13);
 var defaults = __webpack_require__(6);
 
@@ -45937,7 +45988,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45964,7 +46015,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45985,7 +46036,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46006,7 +46057,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46070,7 +46121,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46104,7 +46155,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports) {
 
 ;(function ($, window, document, undefined) {
@@ -46242,7 +46293,7 @@ module.exports = function spread(callback) {
 })(jQuery, window, document);
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -46625,7 +46676,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var apply = Function.prototype.apply;
@@ -46678,7 +46729,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(47);
+__webpack_require__(48);
 // On some exotic environments, it's not clear which object `setimmeidate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -46692,7 +46743,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -46885,53 +46936,6 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(10)))
 
 /***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(49)
-/* template */
-var __vue_template__ = __webpack_require__(52)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\login\\Login.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3ebf3ee2", Component.options)
-  } else {
-    hotAPI.reload("data-v-3ebf3ee2", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
 /* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -46988,6 +46992,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['logo', 'homeUrl'],
     data: function data() {
         return {
             phone: '',
@@ -47148,6 +47153,10 @@ var render = function() {
       { staticClass: "main-form" },
       [
         _c("div", { staticClass: "left-section col-sm-8" }, [
+          _c("a", { attrs: { href: _vm.homeUrl } }, [
+            _c("h1", [_c("img", { attrs: { src: _vm.logo } })])
+          ]),
+          _vm._v(" "),
           _c("div", { attrs: { id: "app" } }, [
             _vm._m(0),
             _vm._v(" "),
@@ -56522,8 +56531,8 @@ if (false) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_profile_profile_complete_vue__ = __webpack_require__(121);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_profile_profile_complete_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_profile_profile_complete_vue__);
@@ -56533,15 +56542,15 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_buyAd_requests_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_buyAd_requests_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_buyAd_requests_detail_vue__ = __webpack_require__(136);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_buyAd_requests_detail_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_buyAd_requests_detail_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_request_my_sell_offers_vue__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_request_my_sell_offers_vue__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_request_my_sell_offers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_request_my_sell_offers_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_product_product_basic_vue__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_product_product_basic_vue__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_product_product_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_product_product_basic_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_transactions_vue__ = __webpack_require__(141);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_transactions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_transactions_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_my_terminated_transactions_vue__ = __webpack_require__(146);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_my_terminated_transactions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_my_terminated_transactions_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transaction_vue__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transaction_vue__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transaction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transaction_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_transaction_transactionReport__ = __webpack_require__(151);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_transaction_transactionReport___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_transaction_transactionReport__);
@@ -63633,7 +63642,7 @@ if (false) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_buyer_profile_profile_basic_vue__ = __webpack_require__(164);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_buyer_profile_profile_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_dashboard_buyer_profile_profile_basic_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_buyer_profile_profile_complete_vue__ = __webpack_require__(169);
@@ -75440,6 +75449,1933 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(237)
+/* template */
+var __vue_template__ = __webpack_require__(238)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\register\\register.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5abd7116", Component.options)
+  } else {
+    hotAPI.reload("data-v-5abd7116", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 237 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            currentStep: 1,
+            step1: {
+                phone: ''
+            },
+            step2: {
+                verification_code: '',
+                reSendCode: false
+            },
+            step3: {
+                first_name: '',
+                last_name: '',
+                password: '',
+                re_password: '',
+                user_name: '',
+                sex: 'آقا',
+                province: '',
+                city: '',
+                national_code: '',
+                provinceList: '',
+                cityList: ''
+            },
+            step4: {
+                activity_type: 0,
+                rules: 0,
+                categoryList: '',
+                categoryId: ''
+            },
+            errors: {
+                first_name: [],
+                last_name: [],
+                province: [],
+                city: [],
+                user_name: [],
+                national_code: [],
+                password: [],
+                password_conf: [],
+                sex: [],
+                verification_code: [],
+                phone: [],
+                category_id: []
+            },
+            errorFlag: false,
+            userNameUnique: true,
+            nationalCodeUnique: true,
+            popUpMsg: ''
+        };
+    },
+    ready: function ready() {
+        console.log('ready');
+    },
+    methods: {
+        goToStep: function goToStep(step) {
+            this.currentStep = step;
+        },
+        send_verification_code: function send_verification_code() {
+            this.step2.reSendCode = false;
+
+            var self = this;
+            axios.post("/send_verification_code", {
+                phone: this.toLatinNumbers(this.step1.phone)
+            }).then(function (response) {
+                self.goToStep(2);
+
+                self.step2.verification_code = '';
+                self.errors.verification_code = [];
+
+                setTimeout(function () {
+                    self.step2.reSendCode = true;
+                }, 60000);
+            }).catch(function (err) {
+                self.errors.phone = err.response.data.errors.phone;
+            });
+        },
+        verify_code: function verify_code() {
+            var self = this;
+
+            axios.post('/verify_code', {
+                verification_code: this.toLatinNumbers(this.step2.verification_code)
+            }).then(function (response) {
+
+                if (response.data.status == true) {
+                    self.goToStep(3);
+                    self.getProvinceList();
+                } else if (response.data.status == false) {
+                    self.goToStep(2);
+                    self.errors.verification_code = [];
+                    self.errors.verification_code.push('کد وارد شده درست نیست');
+                }
+            }).catch(function (error) {
+                self.goToStep(2);
+                self.errors.verification_code = [];
+                self.errors.verification_code.push('وارد کردن کد الزامی است.');
+            });
+        },
+        register_details: function register_details() {
+            this.errorFlag = false;
+
+            this.checkStep3();
+
+            if (this.errorFlag == false && this.userNameUnique == true && this.nationalCodeUnique == true) {
+                this.goToStep(4);
+                this.getCategory();
+            }
+        },
+        submitForm: function submitForm() {
+            var self = this;
+
+            this.errorFlag = false;
+
+            this.checkStep4();
+
+            if (this.step4.rules != 1) {
+                this.popUpMsg = 'پذیرش قوانین ثبت آگهی الزامی است.';
+
+                $('#myModal').modal('show');
+                return;
+            }
+
+            var object = {
+                phone: this.step1.phone,
+                first_name: this.step3.first_name,
+                last_name: this.step3.last_name,
+                password: this.step3.password,
+                user_name: this.step3.user_name,
+                sex: this.step3.sex,
+                province: this.step3.province,
+                city: this.step3.city,
+                activity_type: this.step4.activity_type,
+                national_code: this.toLatinNumbers(this.step3.national_code),
+                category_id: this.step4.categoryId
+            };
+
+            if (this.errorFlag == false) {
+                axios.post('api/v1/users', object).then(function (response) {
+                    if (response.status == 201) {
+
+                        self.popUpMsg = 'ثبت نام با موفقیت انجام شد.در حال انتقال به صفحه ی ورود...';
+
+                        $('#myModal').modal('show');
+
+                        setTimeout(function () {
+                            window.location.href = '/login';
+                        }, 3000);
+                    }
+                }).catch(function (err) {});
+            }
+        },
+        setCategoryId: function setCategoryId(e) {
+            e.preventDefault();
+
+            this.step4.categoryId = $(e.target).val();
+        },
+        checkStep3: function checkStep3() {
+            this.userNameValidator(this.step3.user_name);
+            this.firstNameValidator(this.step3.first_name);
+            this.lastNameValidator(this.step3.last_name);
+            this.provinceValidator(this.step3.province);
+            this.cityValidator(this.step3.city);
+            this.nationalCodeValidator(this.step3.national_code);
+            this.passwordValidator(this.step3.password, this.step3.re_password);
+            this.sexValidator(this.step3.sex);
+        },
+        checkStep4: function checkStep4() {
+            this.categoryIdValidator(this.step4.categoryId);
+        },
+        firstNameValidator: function firstNameValidator(name) {
+            this.errors.first_name = [];
+
+            if (name === '') {
+                this.errors.first_name.push('فیلد الزامی است');
+                this.errorFlag = true;
+            }
+            if (!this.validateRegx(name, /^[\u0600-\u06FF\s]+$/)) {
+                this.errors.first_name.push('فیلد باید فارسی باشد');
+                this.errorFlag = true;
+            }
+        },
+        lastNameValidator: function lastNameValidator(name) {
+            this.errors.last_name = [];
+
+            if (name === '') {
+                this.errors.last_name.push('فیلد الزامی است');
+                this.errorFlag = true;
+            }
+            if (!this.validateRegx(name, /^[\u0600-\u06FF\s]+$/)) {
+                this.errors.last_name.push('فیلد باید فارسی باشد');
+                this.errorFlag = true;
+            }
+        },
+        provinceValidator: function provinceValidator(province) {
+            this.errors.province = [];
+
+            if (province === '') {
+                this.errors.province.push('فیلد استان الزامی است');
+                this.errorFlag = true;
+            }
+            if (!this.validateRegx(province, /^[\u0600-\u06FF\s]+$/)) {
+                this.errors.province.push('استان باید فارسی باشد');
+                this.errorFlag = true;
+            }
+        },
+        cityValidator: function cityValidator(city) {
+            this.errors.city = [];
+
+            if (city === '') {
+                this.errors.city.push('فیلد شهر الزامی است');
+                this.errorFlag = true;
+            }
+            if (!this.validateRegx(city, /^[\u0600-\u06FF\s]+$/)) {
+                this.errors.city.push('شهر باید فارسی باشد');
+                this.errorFlag = true;
+            }
+        },
+        userNameValidator: function userNameValidator(userName) {
+            if (this.userNameUnique == true) {
+                this.errors.user_name = [];
+            }
+
+            if (userName == '') {
+                this.errors.user_name.push('نام کاربری الزامی است');
+
+                this.errorFlag = true;
+            }
+            if (!this.validateRegx(userName, /^\w+$/)) {
+                this.errors.user_name.push(' شامل حروف غیر مجاز است');
+                this.errorFlag = true;
+            }
+        },
+        nationalCodeValidator: function nationalCodeValidator(code) {
+            code = this.toLatinNumbers(code);
+
+            if (this.nationalCodeUnique == true) {
+                this.errors.national_code = [];
+            }
+
+            if (code === '') {
+                this.errors.national_code.push('کد ملی الزامی است');
+                this.errorFlag = true;
+            }
+            if (!this.isIrNationalCode(code)) {
+                this.errors.national_code.push('کد ملی معتبر نیست');
+                this.errorFlag = true;
+            }
+        },
+        isIrNationalCode: function isIrNationalCode(input) {
+            if (!/^\d{10}$/.test(input)) {
+                return false;
+            }
+
+            var check = parseInt(input[9]);
+            var sum = [0, 1, 2, 3, 4, 5, 6, 7, 8].map(function (x) {
+                return parseInt(input[x]) * (10 - x);
+            }).reduce(function (x, y) {
+                return x + y;
+            }) % 11;
+
+            return sum < 2 && check == sum || sum >= 2 && check + sum == 11;
+        },
+        passwordValidator: function passwordValidator(pass, passConf) {
+            this.errors.password = [];
+            this.errors.password_conf = [];
+
+            if (pass === '') {
+                this.errors.password.push('رمز عبور الزامی است');
+                this.errorFlag = true;
+            }
+            if (pass.length < 8) {
+                this.errors.password.push('رمز عبور حداقل ۸ کاراکتر باشد');
+                this.errorFlag = true;
+            }
+            if (passConf === '') {
+                this.errors.password_conf.push('تکرار رمز عبور الزامی است');
+                this.errorFlag = true;
+            }
+            if (passConf != pass) {
+                this.errors.password_conf.push('رمز عبور مطابقت ندارد');
+                this.errorFlag = true;
+            }
+        },
+        sexValidator: function sexValidator(sex) {
+            this.errors.sex = [];
+
+            if (sex === '') {
+                this.errors.sex.push('جنسیت الرامی است');
+                this.errorFlag = true;
+            }
+        },
+        categoryIdValidator: function categoryIdValidator(categoryId) {
+            this.errors.category_id = [];
+            console.log('test : ' + categoryId);
+            if (categoryId === '') {
+                this.errors.category_id.push('انتخاب حوزه ی فعالیت الزامی است.');
+                this.errorFlag = true;
+            }
+        },
+        validateRegx: function validateRegx(input, regx) {
+            return regx.test(input);
+        },
+        getCategory: function getCategory() {
+            var _this = this;
+
+            axios.post('/get_category_list').then(function (response) {
+                return _this.step4.categoryList = response.data.categories;
+            });
+        },
+        getCategoryId: function getCategoryId(categoryId) {
+            this.step4.categoryId = categoryId;
+        },
+        getProvinceList: function getProvinceList() {
+            var _this2 = this;
+
+            axios.post('/location/get_location_info').then(function (response) {
+                return _this2.step3.provinceList = response.data.provinces;
+            });
+        },
+        getCityList: function getCityList(provinceId) {
+            var _this3 = this;
+
+            axios.post('/location/get_location_info', {
+                province_id: provinceId
+            }).then(function (response) {
+                return _this3.step3.cityList = response.data.cities;
+            });
+        },
+        setProvinceName: function setProvinceName(e) {
+            e.preventDefault();
+
+            this.step3.province = $(e.target).val();
+
+            var provinceId = '';
+
+            for (var i = 0; i < this.step3.provinceList.length; i++) {
+                if (this.step3.province == this.step3.provinceList[i].province_name) {
+                    provinceId = this.step3.provinceList[i].id;
+                    break;
+                }
+            }
+
+            this.getCityList(provinceId);
+        },
+        setCityName: function setCityName(e) {
+            e.preventDefault();
+
+            this.step3.city = $(e.target).val();
+        },
+        toLatinNumbers: function toLatinNumbers(num) {
+            if (num == null) {
+                return '';
+            }
+            var numDic = {
+                '۰': '0',
+                '۱': '1',
+                '۲': '2',
+                '۳': '3',
+                '۴': '4',
+                '۵': '5',
+                '۶': '6',
+                '۷': '7',
+                '۸': '8',
+                '۹': '9'
+            };
+
+            return num.toString().replace(/[۰-۹]/g, function (w) {
+                return numDic[w];
+            });
+        }
+    },
+    watch: {
+        'step3.user_name': function step3User_name() {
+            var self = this;
+            if (this.step3.user_name.length > 0) {
+                axios.post('user/is_user_name_unique', {
+                    user_name: this.step3.user_name
+                }).then(function (response) {
+                    if (response.data.status == true) {
+                        self.errors.user_name = [];
+                        self.userNameUnique = true;
+                    }
+                }).catch(function (err) {
+                    self.errors.user_name = [];
+                    self.errors.user_name.push('نام کاربری قبلا گرفته شده');
+
+                    self.errorFlag = true;
+                    self.userNameUnique = false;
+                });
+            }
+        },
+        'step3.national_code': function step3National_code() {
+            var self = this;
+
+            this.step3.national_code = this.toLatinNumbers(this.step3.national_code);
+
+            if (this.step3.national_code.length > 0 && this.step3.national_code < 10) {
+                this.errors.national_code = [];
+                this.errors.national_code.push('کد ملی ۱۰ رقمی است');
+
+                this.errorFlag = true;
+            } else if (this.step3.national_code.length == 10) {
+                axios.post('user/is_national_code_unique', {
+                    national_code: this.toLatinNumbers(this.step3.national_code)
+                }).then(function (response) {
+                    if (response.data.status == true) {
+                        self.errors.national_code = [];
+                        self.nationalCodeUnique = true;
+                    }
+                }).catch(function (err) {
+                    self.errors.national_code = [];
+                    self.errors.national_code.push('کد ملی قبلا گرفته شده');
+
+                    self.errorFlag = true;
+                    self.nationalCodeUnique = false;
+                });
+            }
+        }
+    }
+});
+
+/***/ }),
+/* 238 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "container" }, [
+      _c(
+        "div",
+        {
+          ref: "myModal",
+          staticClass: "modal fade",
+          attrs: {
+            id: "myModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "myModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-dialog" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "main_popup_content" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("p", { staticClass: "main_par" }, [
+                  _vm._v(
+                    "\r\n                            " +
+                      _vm._s(_vm.popUpMsg) +
+                      "\r\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: " green-bot ",
+                    attrs: { "data-dismiss": "modal" }
+                  },
+                  [
+                    _vm._v(
+                      "\r\n                            متوجه شدم\r\n                        "
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("main", { attrs: { id: "main" } }, [
+      _c("div", { staticClass: "main-form" }, [
+        _c("div", { staticClass: "left-section col-xs-8" }, [
+          _c("h1", [_vm._v("ثبت نام در سامانه ")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.currentStep == 1,
+                  expression: "currentStep == 1"
+                }
+              ],
+              attrs: { id: "step1" }
+            },
+            [
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "content_section" }, [
+                  _c("label", { staticClass: "col-xs-12" }, [
+                    _vm._v(
+                      "\r\n                                لطفا شماره موبایل خود را وارد کنید\r\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-12 input_contents" }, [
+                    _c("span", { staticClass: "after_icon numbers" }),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.step1.phone,
+                          expression: "step1.phone"
+                        }
+                      ],
+                      staticClass: "pad number",
+                      attrs: {
+                        type: "text",
+                        name: "name",
+                        placeholder: "09123456789"
+                      },
+                      domProps: { value: _vm.step1.phone },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.step1, "phone", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "sub-des col-xs-12" }, [
+                    _vm._v(
+                      "\r\n                               پس از وارد کردن شماره موبایل ما یک کد برای شما ارسال میکنیم تا از صحت شماره وارد شده اطمینان حاصل کنیم\r\n                           "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm.errors.phone
+                    ? _c("span", { staticClass: "error_msg" }, [
+                        _vm._v(
+                          "\r\n                                    " +
+                            _vm._s(_vm.errors.phone[0]) +
+                            "\r\n                            "
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-xs-12" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "green_but",
+                        attrs: { type: "button" },
+                        on: { click: _vm.send_verification_code }
+                      },
+                      [
+                        _vm._v(
+                          "ارسال پیام کوتاه\r\n                            "
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(2)
+              ]
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.currentStep == 2,
+                  expression: "currentStep == 2"
+                }
+              ],
+              attrs: { id: "step2" }
+            },
+            [
+              [
+                _c("ul", { staticClass: "header_list list-inline" }, [
+                  _c(
+                    "li",
+                    {
+                      staticClass: "back_step",
+                      on: {
+                        click: function($event) {
+                          _vm.goToStep(1)
+                        }
+                      }
+                    },
+                    [_vm._v("ثبت موبایل")]
+                  ),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "active" }, [_vm._v("تایید موبایل")]),
+                  _vm._v(" "),
+                  _c("li", [_vm._v("ثبت مشخصات فردی")]),
+                  _vm._v(" "),
+                  _c("li", [_vm._v(" ثبت نهایی")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "content_section" }, [
+                  _c("label", { staticClass: "col-xs-12" }, [
+                    _vm._v(
+                      "\r\n                                کد ارسال شده به تلفن همراهتان را وارد کنید.\r\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-xs-12 input_contents" }, [
+                    _c("span", { staticClass: "after_icon search-icon" }),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.step2.verification_code,
+                          expression: "step2.verification_code"
+                        }
+                      ],
+                      staticClass: "pad ",
+                      attrs: {
+                        type: "text",
+                        name: "name",
+                        placeholder: "0101"
+                      },
+                      domProps: { value: _vm.step2.verification_code },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.step2,
+                            "verification_code",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm.errors.verification_code
+                    ? _c("span", { staticClass: "error_msg" }, [
+                        _vm._v(
+                          "\r\n                                    " +
+                            _vm._s(_vm.errors.verification_code[0]) +
+                            "\r\n                            "
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "bouttons col-xs-12" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: " green_but",
+                        attrs: { type: "button" },
+                        on: { click: _vm.verify_code }
+                      },
+                      [_vm._v(" بررسی کد")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "danger_border_but",
+                        attrs: {
+                          type: "button",
+                          disabled: _vm.step2.reSendCode == false
+                        },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.goToStep(1)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          " کد را دریافت\r\n                                    نکردم\r\n                                "
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "dots-step" }, [
+                  _c("span", {
+                    staticClass: "dots active back_step",
+                    on: {
+                      click: function($event) {
+                        _vm.goToStep(1)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "dots active" }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "dots" }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "dots" })
+                ])
+              ]
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.currentStep == 3,
+                  expression: "currentStep == 3"
+                }
+              ],
+              attrs: { id: "step3" }
+            },
+            [
+              [
+                _c("ul", { staticClass: "header_list list-inline" }, [
+                  _c(
+                    "li",
+                    {
+                      staticClass: "back_step",
+                      on: {
+                        click: function($event) {
+                          _vm.goToStep(1)
+                        }
+                      }
+                    },
+                    [_vm._v("ثبت موبایل")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass: "back_step",
+                      on: {
+                        click: function($event) {
+                          _vm.goToStep(2)
+                        }
+                      }
+                    },
+                    [_vm._v("تایید موبایل")]
+                  ),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "active" }, [
+                    _vm._v("ثبت مشخصات فردی")
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [_vm._v(" ثبت نهایی")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-forms content_section" }, [
+                  _c("label", { staticClass: "col-xs-12" }, [
+                    _vm._v(
+                      "\r\n                                جنسیت\r\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-xs-6 radio_btn" }, [
+                    _c("div", { staticClass: "radio-wrapper" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.step3.sex,
+                            expression: "step3.sex"
+                          }
+                        ],
+                        attrs: { type: "radio", name: "sex", value: "خانم" },
+                        domProps: { checked: _vm._q(_vm.step3.sex, "خانم") },
+                        on: {
+                          change: function($event) {
+                            _vm.$set(_vm.step3, "sex", "خانم")
+                          }
+                        }
+                      }),
+                      _vm._v("خانم\r\n                                    "),
+                      _c("i", { staticClass: "fa fa-check" })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-xs-6 radio_btn" }, [
+                    _c("div", { staticClass: "radio-wrapper" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.step3.sex,
+                            expression: "step3.sex"
+                          }
+                        ],
+                        attrs: { type: "radio", sname: "sex", value: "آقا" },
+                        domProps: { checked: _vm._q(_vm.step3.sex, "آقا") },
+                        on: {
+                          change: function($event) {
+                            _vm.$set(_vm.step3, "sex", "آقا")
+                          }
+                        }
+                      }),
+                      _vm._v("آقا\r\n                                    "),
+                      _c("i", { staticClass: "fa fa-check" })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "col-xs-12" }, [
+                    _vm._v(
+                      "\r\n                                اطلاعات شخصی خود را وارد کنید. "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-6" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.step3.first_name,
+                          expression: "step3.first_name"
+                        }
+                      ],
+                      attrs: { type: "text", name: "city", placeholder: "نام" },
+                      domProps: { value: _vm.step3.first_name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.step3, "first_name", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.first_name
+                      ? _c("span", { staticClass: "error_msg" }, [
+                          _vm._v(
+                            "\r\n                                    " +
+                              _vm._s(_vm.errors.first_name[0]) +
+                              "\r\n                                "
+                          )
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-6" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.step3.last_name,
+                          expression: "step3.last_name"
+                        }
+                      ],
+                      attrs: {
+                        type: "text",
+                        name: "city",
+                        placeholder: "نام خانوادگی"
+                      },
+                      domProps: { value: _vm.step3.last_name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.step3, "last_name", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.last_name
+                      ? _c("span", { staticClass: "error_msg" }, [
+                          _vm._v(
+                            "\r\n                                    " +
+                              _vm._s(_vm.errors.last_name[0]) +
+                              "\r\n                                "
+                          )
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-6 input_contents" }, [
+                    _c("span", { staticClass: "after_icon search-icon" }),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.step3.user_name,
+                          expression: "step3.user_name"
+                        }
+                      ],
+                      staticClass: "pad",
+                      attrs: {
+                        type: "text",
+                        name: "city",
+                        placeholder: "نام کاربری به انگلیسی"
+                      },
+                      domProps: { value: _vm.step3.user_name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.step3, "user_name", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.user_name
+                      ? _c("span", { staticClass: "error_msg" }, [
+                          _vm._v(
+                            "\r\n                                    " +
+                              _vm._s(_vm.errors.user_name[0]) +
+                              "\r\n                                "
+                          )
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-6" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.step3.national_code,
+                          expression: "step3.national_code"
+                        }
+                      ],
+                      attrs: {
+                        type: "text",
+                        name: "city",
+                        placeholder: "کد ملی"
+                      },
+                      domProps: { value: _vm.step3.national_code },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.step3,
+                            "national_code",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.national_code
+                      ? _c("span", { staticClass: "error_msg" }, [
+                          _vm._v(
+                            "\r\n                                    " +
+                              _vm._s(_vm.errors.national_code[0]) +
+                              "\r\n                                "
+                          )
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-6" }, [
+                    _c(
+                      "select",
+                      {
+                        on: {
+                          change: function($event) {
+                            _vm.setProvinceName($event)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { selected: "", disabled: "" } },
+                          [_vm._v("استان را انتخاب کنید")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.step3.provinceList, function(province) {
+                          return _c(
+                            "option",
+                            { domProps: { value: province.province_name } },
+                            [
+                              _vm._v(
+                                "\r\n                                        " +
+                                  _vm._s(province.province_name) +
+                                  "\r\n                                    "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _vm.errors.province
+                      ? _c("span", { staticClass: "error_msg" }, [
+                          _vm._v(
+                            "\r\n                                    " +
+                              _vm._s(_vm.errors.province[0]) +
+                              "\r\n                                "
+                          )
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-6" }, [
+                    _c(
+                      "select",
+                      {
+                        on: {
+                          change: function($event) {
+                            _vm.setCityName($event)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { selected: "", disabled: "" } },
+                          [_vm._v("شهر را انتخاب کنید")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.step3.cityList, function(city) {
+                          return _c(
+                            "option",
+                            { domProps: { value: city.city_name } },
+                            [_vm._v(_vm._s(city.city_name))]
+                          )
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _vm.errors.city
+                      ? _c("span", { staticClass: "error_msg" }, [
+                          _vm._v(
+                            "\r\n                                    " +
+                              _vm._s(_vm.errors.city[0]) +
+                              "\r\n                                "
+                          )
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-6" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.step3.password,
+                          expression: "step3.password"
+                        }
+                      ],
+                      attrs: {
+                        type: "password",
+                        name: "city",
+                        placeholder: "رمز عبور"
+                      },
+                      domProps: { value: _vm.step3.password },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.step3, "password", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.password
+                      ? _c("span", { staticClass: "error_msg" }, [
+                          _vm._v(
+                            "\r\n                                    " +
+                              _vm._s(_vm.errors.password[0]) +
+                              "\r\n                                "
+                          )
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-6" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.step3.re_password,
+                          expression: "step3.re_password"
+                        }
+                      ],
+                      attrs: {
+                        type: "password",
+                        name: "city",
+                        placeholder: "تکرار رمز عبور"
+                      },
+                      domProps: { value: _vm.step3.re_password },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.step3,
+                            "re_password",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.password_conf
+                      ? _c("span", { staticClass: "error_msg" }, [
+                          _vm._v(
+                            "\r\n                                    " +
+                              _vm._s(_vm.errors.password_conf[0]) +
+                              "\r\n                                "
+                          )
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "buttons col-xs-12" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "green_but",
+                        attrs: { type: "button" },
+                        on: { click: _vm.register_details }
+                      },
+                      [_vm._v("ثبت مشخصات")]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "dots-step" }, [
+                  _c("span", {
+                    staticClass: "dots active back_step",
+                    on: {
+                      click: function($event) {
+                        _vm.goToStep(1)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span", {
+                    staticClass: "dots active back_step",
+                    on: {
+                      click: function($event) {
+                        _vm.goToStep(2)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "dots active" }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "dots" })
+                ])
+              ]
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.currentStep == 4,
+                  expression: "currentStep == 4"
+                }
+              ],
+              attrs: { id: "step4" }
+            },
+            [
+              [
+                _c("ul", { staticClass: "header_list list-inline" }, [
+                  _c(
+                    "li",
+                    {
+                      staticClass: "back_step",
+                      on: {
+                        click: function($event) {
+                          _vm.goToStep(1)
+                        }
+                      }
+                    },
+                    [_vm._v("ثبت موبایل")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass: "back_step",
+                      on: {
+                        click: function($event) {
+                          _vm.goToStep(2)
+                        }
+                      }
+                    },
+                    [_vm._v("تایید موبایل")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass: "back_step",
+                      on: {
+                        click: function($event) {
+                          _vm.goToStep(3)
+                        }
+                      }
+                    },
+                    [_vm._v("ثبت مشخصات فردی")]
+                  ),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "active" }, [_vm._v(" ثبت نهایی")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "content_section " }, [
+                  _c("label", { staticClass: "col-xs-12" }, [
+                    _vm._v(
+                      "\r\n                                نوع فعالیت\r\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-xs-6" }, [
+                    _c("div", { staticClass: "radio-wrapper" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.step4.activity_type,
+                            expression: "step4.activity_type"
+                          }
+                        ],
+                        attrs: { type: "radio", name: "kind", value: "1" },
+                        domProps: {
+                          checked: _vm._q(_vm.step4.activity_type, "1")
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.$set(_vm.step4, "activity_type", "1")
+                          }
+                        }
+                      }),
+                      _vm._v("خریدار\r\n                                    "),
+                      _c("i", { staticClass: "fa fa-check" })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-xs-6" }, [
+                    _c("div", { staticClass: "radio-wrapper" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.step4.activity_type,
+                            expression: "step4.activity_type"
+                          }
+                        ],
+                        attrs: { type: "radio", name: "kind", value: "0" },
+                        domProps: {
+                          checked: _vm._q(_vm.step4.activity_type, "0")
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.$set(_vm.step4, "activity_type", "0")
+                          }
+                        }
+                      }),
+                      _vm._v("فروشنده\r\n                                    "),
+                      _c("i", { staticClass: "fa fa-check" })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-xs-12" }, [
+                    _c("label", [
+                      _vm._v(
+                        "\r\n                                    حوزه فعالیت خود را مشخص کنید. "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        on: {
+                          change: function($event) {
+                            _vm.setCategoryId($event)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { disabled: "", selected: "" } },
+                          [
+                            _vm._v(
+                              "\r\n                                        انتخاب کنید\r\n                                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.step4.categoryList, function(category) {
+                          return _c(
+                            "option",
+                            { domProps: { value: category.id } },
+                            [
+                              _vm._v(
+                                "\r\n                                        " +
+                                  _vm._s(category.category_name) +
+                                  "\r\n                                    "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _vm.errors.category_id
+                      ? _c("span", { staticClass: "error_msg" }, [
+                          _vm._v(
+                            "\r\n                                    " +
+                              _vm._s(_vm.errors.category_id[0]) +
+                              "\r\n                                "
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("label", [
+                      _vm._v(
+                        "\r\n                                    قوانین\r\n                                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("textarea", { attrs: { disabled: "" } }, [
+                      _vm._v(
+                        "اینکوباک، بستر تجاری آنلاین است که از طریق آن هر کاربر ثبت شده می تواند برای برقراری و حفظ، توسعه کسب و کار با دیگر تولید کنندگان و خریداران همکاری کند. شرایط و مقررات تشکیل شده در این صفحه مشخص می کند که چگونه باید وب سایت و خدمات مورد استفاده قرار گیرد و نهایتا روابط فی مابین اینکوباک و کاربران (ثبت شده یا ثبت نشده) آن را تنظیم میکند. لطفاً شرایط و مقررات حاضر را به دقت مطالعه کنید و در صورتی که قوانین وب سایت برای شما قابل قبول نیست استفاده خود را از وب سایت و یا خدمات اینکوباک به هر نحو متوقف کنید.\r\nدر استفاده از خدمات وب سایت اینکوباک فرض بر این است که عملاً این شرایط و مقررات و تغییرات بعدی آن را پذیرفته اید، در این صورت هیچ ادعایی ناشی از استفاده مداوم شما از این سایت و ادعای عدم مطالعه یا آگاهی شما از این مقررات و تغییرات بعدی آن مسموع نخواهد بود.\r\nشرایط درج آگهی در سامانه اینکوباک:\r\n● آگهی ها باید زیر مجموعه حوزه کشاورزی و دسته بندی های موجود در وبسایت باشند.\r\n● عدم مغایرت با قوانین جمهوری اسلامی ایران، ناقض حریم خصوصی افراد ، هرگونه توهین به ادیان رسمی کشور، آداب، رسوم، قومیت‌ها، لهجه‌ها و گویش‌های مختلف.\r\n● عدم درج کالاهای ممنوعه مانند : ماریجوانا و مواد مخدر گیاهی و یا بذر و دانه آنها.\r\n● عدم درخواست کمک‌های نقدی یا پیش‌پرداخت برای معامله‌های از راه دور ، درج شماره حساب در متن آگهی.\r\n● نبود جملات نادرست از نظر املائی یا نگارشی در آگهی.\r\nبه منظور بهبود فرآیند تأیید و انتشار آگهی‌ها، سامانه اینکوباک ممکن است در مواردی بر اساس قوانین، متن یا آگهی شما را به طور جزئی تغییر دهد.\r\nمسئولیت استفاده از آگهی‌های این سایت بر عهده شماست و اینکوباک هیچ تعهدى در قبال خسارات مستقیم، اتفاقى، تبعى، غیرمستقیم و کیفرى، ناشى از دسترسى و استفاده شما از این سایت را ندارد.\r\nاینکوباک هیچ قرارداد، تعهدنامه یا سندی را با آگهی‌دهندگان حقیقی یا حقوقی منعقد نمی‌کند. کاربران اینکوباک در هر لحظه قادر به ویرایش آگهی خود هستند، بنابراین اینکوباک، هیچ‌گونه مسئولیتی را در قبال هر نوع آگهی درج شده در سایت نمی‌پذیرد و صرفاً مطالب درج شده توسط کاربران را نمایش می‌دهد.\r\nمسئولیت استفاده از هرگونه متن، پیام، توضیح، اطلاعات، عکس، مشخصات تماس و موارد مشابه که به اینکوباک ارسال می‌شود یا در آن قرار می‌گیرد، شامل بازتولید، افشاء، مخابره، نشر و پخش آن بر عهده فرستنده اطلاعات است.\r\n                        "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "rules col-sm-12" }, [
+                      _vm._v("\r\n                                    با "),
+                      _c("span", { staticClass: "roules-check-inside" }, [
+                        _vm._v("قوانین و شرایط")
+                      ]),
+                      _vm._v("\r\n                                    موافقم"),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.step4.rules,
+                            expression: "step4.rules"
+                          }
+                        ],
+                        attrs: { type: "checkbox", value: "1" },
+                        domProps: {
+                          checked: Array.isArray(_vm.step4.rules)
+                            ? _vm._i(_vm.step4.rules, "1") > -1
+                            : _vm.step4.rules
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.step4.rules,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "1",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.step4,
+                                    "rules",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.step4,
+                                    "rules",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(_vm.step4, "rules", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("i", { staticClass: "fa fa-check" })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "buttons" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "green_but",
+                          attrs: { type: "button" },
+                          on: { click: _vm.submitForm }
+                        },
+                        [_vm._v("ثبت نهایی")]
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "dots-step" }, [
+                  _c("span", {
+                    staticClass: "dots active back_step",
+                    on: {
+                      click: function($event) {
+                        _vm.goToStep(1)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span", {
+                    staticClass: "dots active back_step",
+                    on: {
+                      click: function($event) {
+                        _vm.goToStep(2)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span", {
+                    staticClass: "dots active back_step",
+                    on: {
+                      click: function($event) {
+                        _vm.goToStep(3)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "dots active" })
+                ])
+              ]
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(3)
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "#", "data-dismiss": "modal" } }, [
+      _c("i", { staticClass: "fa fa-close" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", { staticClass: "header_list list-inline" }, [
+      _c("li", { staticClass: "active" }, [_vm._v("ثبت موبایل")]),
+      _vm._v(" "),
+      _c("li", [_vm._v("تایید موبایل")]),
+      _vm._v(" "),
+      _c("li", [_vm._v("ثبت مشخصات فردی")]),
+      _vm._v(" "),
+      _c("li", [_vm._v(" ثبت نهایی")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "dots-step" }, [
+      _c("span", { staticClass: "dots active" }),
+      _vm._v(" "),
+      _c("span", { staticClass: "dots" }),
+      _vm._v(" "),
+      _c("span", { staticClass: "dots" }),
+      _vm._v(" "),
+      _c("span", { staticClass: "dots" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-4 right-section" }, [
+      _c("h1", [
+        _vm._v("\r\n                    اینکوباک\r\n                ")
+      ]),
+      _vm._v(" "),
+      _c("ul", [
+        _c("li", [
+          _vm._v(
+            "\r\n                        فرصت های جدیدی را خلق کنید.\r\n                    "
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _vm._v(
+            "\r\n                        در زمان و هزینه صرفه جویی کنید.\r\n                    "
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _vm._v(
+            "\r\n                        با شرکای  قابل اعتماد ارتباط برقرار کنید.\r\n                    "
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _vm._v(
+            "\r\n                        بیشتر از یک سایت خدمات بگیرید.\r\n                    "
+          )
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5abd7116", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

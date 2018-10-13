@@ -2,9 +2,9 @@
     <main id="main">
         <div class="main-form">
             <div class="left-section col-sm-8">
-                <!--<a href="{{url('/')}}">-->
-                <!--<h1><img src="{{asset('assets/img/logo-incobac.png')}}"></h1>-->
-                <!--</a>-->
+                <a :href="homeUrl">
+                <h1><img :src="logo"></h1>
+                </a>
                 <div id="app">
                     <ul class="header_list list-inline">
                         <li class="active"> ورود به سامانه</li>
@@ -47,6 +47,10 @@
 <script>
     import RightSection from './RightSection.vue'
     export default{
+        props:[
+          'logo',
+          'homeUrl'
+        ],
         data: function () {
             return {
                 phone: '',

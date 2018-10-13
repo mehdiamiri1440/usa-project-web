@@ -22,7 +22,7 @@
 </div>
 <body>
 <div id="app">
-    <login-com></login-com>
+    <login-component logo="{{asset('assets/img/logo-incobac.png')}}" homeUrl="{{url('/')}}"></login-component>
 </div>
 </body>
 <script src="{{asset('assets/cdn/axios.js')}}"></script>
