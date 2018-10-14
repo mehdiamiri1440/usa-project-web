@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use http\Env\Response;
 use \Illuminate\Http\Request;
 use App\Http\Library\date_convertor;
 use App\product;
@@ -727,9 +728,13 @@ class buyAd_controller extends Controller
             $buyAd['subcategory_name'] = $category_array['subcategory_name'];
             $buyAd['photos'] = $this->get_file_path_array($related_media_records);
             
-            return view('dashboard.seller.request.buyAd-request-detail',[
+         /*   return view('dashboard.seller.request.buyAd-request-detail',[
                'buyAd' => $buyAd, 
-            ]);         
+            ]); */
+         return response()->json([
+             'status' => true,
+             'buyAd' => $buyAd
+         ]);
         }
         else{
             return response()->json([

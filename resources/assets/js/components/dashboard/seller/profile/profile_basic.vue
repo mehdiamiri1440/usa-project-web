@@ -29,9 +29,11 @@
         border-radius: 50%;
         float: left;
     }
-    .image-header-profile  img{
+
+    .image-header-profile img {
         height: 100%;
     }
+
     .profile-menu-header {
         float: left;
     }
@@ -157,9 +159,11 @@
         height: 3px;
         width: 100%;
     }
+
     .sub-header a.active {
         color: #313942;
     }
+
     .sub-header a.active::after {
         content: " ";
         position: absolute;
@@ -169,6 +173,7 @@
         height: 3px;
         width: 100%;
     }
+
     /*end style sub-header*/
     /*start main content style */
     .image-content-post {
@@ -251,7 +256,7 @@
     .img-profile .submit label {
         background: #28a745;
         color: #fff;
-        padding: 12px  0;
+        padding: 12px 0;
         font-size: 13px;
         font-weight: 400;
         border-radius: 5px;
@@ -280,8 +285,9 @@
         margin: 13px;
         padding: 0;
     }
-    .content-lable{
-        font-weight:400 ;
+
+    .content-lable {
+        font-weight: 400;
     }
 
     /*end main content style */
@@ -294,7 +300,7 @@
         padding: 10px 35px;
         border-radius: 3px;
         text-align: center;
-        border:none;
+        border: none;
         transition: 300ms;
     }
 
@@ -389,10 +395,12 @@
         font-size: 14px;
         border: 2px solid;
     }
-    .user-form{
+
+    .user-form {
         padding: 0;
     }
-    input[type="text"],select {
+
+    input[type="text"], select {
         width: 100%;
         border: 1px solid #e9e9e9;
         padding: 15px 20px;
@@ -400,7 +408,8 @@
         border-radius: 4px;
         transition: 300ms;
     }
-    textarea{
+
+    textarea {
         height: 120px;
         max-width: 100%
     }
@@ -415,27 +424,32 @@
         transition: 500ms;
 
     }
-    .img-profile{
+
+    .img-profile {
         float: right;
         padding-top: 90px;
     }
+
     #icon-pro {
         width: 150px;
         height: 150px;
         display: inline-block;
     }
-    #icon-pro svg{
+
+    #icon-pro svg {
         height: 150px;
     }
 
-    .col-sm-6{
+    .col-sm-6 {
         height: 120px;
         float: right;
     }
+
     @media screen and (max-width: 992px) {
-        .img-profile{
+        .img-profile {
             padding-top: 20px;
         }
+
         .right-header.desktop-header {
             display: none;
         }
@@ -472,17 +486,20 @@
         .show-header button {
             display: block;
         }
+
         .img-profile .submit {
             position: relative;
             width: 100%;
             margin: 25px auto;
 
         }
+
         .img-profile .submit label {
             width: 40%;
             padding: 12px 0;
         }
-        .img-profile{
+
+        .img-profile {
             float: none;
         }
     }
@@ -494,7 +511,8 @@
             margin: 10px 0;
             padding: 0;
         }
-        .col-sm-6{
+
+        .col-sm-6 {
             float: none;
         }
 
@@ -556,12 +574,12 @@
                         نوع کاربری
                     </label>
                     <div class=" col-xs-6 col-md-4">
-                        حقیقی <input onclick="disable_form(this);" type="radio" name="kind_user" value="0"
+                        حقیقی <input @click="disable_form()" type="radio" name="kind_user" value="0"
                                      v-model="currentUser.profile.is_company">
                         <i class="fa fa-check"></i>
                     </div>
                     <div class=" col-xs-6 col-md-4">
-                        حقوقی <input onclick="enable_form(this);" type="radio" name="kind_user" value="1"
+                        حقوقی <input @click="enable_form()" type="radio" name="kind_user" value="1"
                                      v-model="currentUser.profile.is_company">
                         <i class="fa fa-check"></i>
                     </div>
@@ -749,10 +767,26 @@
                         return numDic[w];
                     });
             },
+            disable_form: function () {
+                var feild_co_num = $("#co-num");
+                var feild_co = $("#company");
+                this.currentUser.profile.company_register_code = null;
+                this.currentUser.profile.company_name = null;
+                feild_co_num.attr('disabled', true);
+                feild_co.attr('disabled', true);
+            },
+            enable_form: function () {
+                var feild_co_num = $("#co-num");
+                var feild_co = $("#company");
+                feild_co.val('');
+                feild_co_num.prop('disabled', false);
+                feild_co.prop('disabled', false);
+            }
         },
         mounted() {
             this.init();
             eventBus.$emit('subHeader', this.items);
+
             function show_image_preview(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
@@ -781,7 +815,6 @@
             $("#imgInp").change(function () {
                 show_image_preview(this);
             })
-
         }
     }
 
