@@ -26,10 +26,6 @@
     .image-header-profile  img{
         height: 100%;
     }
-    .profile-menu-header {
-        float: left;
-    }
-
     .right-menu-header {
 
         padding: 16px;
@@ -133,7 +129,7 @@
                 </a>
                 <div class="profile-list">
                     <ul class="list-unstyled">
-                        <li class="list-item"><a :href="profilebasic">پروفایل</a></li>
+                        <li class="list-item"><a href="/dashboard/">پروفایل</a></li>
                         <li class="list-item"><a :href="out">خروج</a></li>
                     </ul>
                 </div>
@@ -155,7 +151,6 @@
     export default {
         props: [
             'photoLink',
-            'profilebasic',
             'storage',
             'def',
             'username',

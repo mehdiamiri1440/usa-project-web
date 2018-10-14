@@ -66,7 +66,6 @@
                 mytrans="{{route('my-transaction-list')}}"
                 selregpro="{{route('seller-register-product')}}"
                 byadreq="{{route('seller-buyAd-requests')}}"
-                profilebasic="{{route('profile_basic')}}"
                 logout="{{route('logout')}}"
                 routehome="{{url('/')}}"
                 loading="{{asset('assets/img/gif/prload.gif')}}"
@@ -75,6 +74,7 @@
         @section('main_content')
             <main id="main">
             <router-view
+                    pagenotfoundimage = "{{url('index/images/def404.png')}}"
                     loading="{{asset('assets/img/gif/loading.gif')}}"
                     trans="{{url('dashboard/transaction-detail')}}"
                     transRep="{{url('dashboard/transaction-report')}}"

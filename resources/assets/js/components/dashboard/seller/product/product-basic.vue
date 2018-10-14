@@ -330,18 +330,21 @@
                 }
                 else {
                     let formData = this.getProductFormFields();
-
                     axios.post('/user/add_product', formData)
                         .then(function (response) {
                             if (response.status == 201) {
                                 self.disableSubmit = true;
-
                                 self.popUpMsg = 'محصول شما با موفقیت ثبت شد';
+<<<<<<< HEAD
                                 $('#myModal').modal('show');
+=======
+>>>>>>> 3b498c119bc745e4eb1c32b34f800a536f4efbb9
                                 eventBus.$emit('submitSuccess', self.popUpMsg);
                                 eventBus.$emit('submitingEvent', false);
+                                $('#myModal').modal('show');
                                 setTimeout(function () {
                                     location.reload(true);
+                                    eventBus.$emit('submitingEvent', false);
                                 }, 3000)
                             }
                         })

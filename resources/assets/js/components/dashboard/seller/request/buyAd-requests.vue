@@ -29,6 +29,7 @@
     }
     .main-content .list-group-item p {
         text-align: center;
+        direction: rtl;
     }
     #main.little-main {
         margin-right: 80px;

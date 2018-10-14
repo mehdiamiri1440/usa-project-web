@@ -537,34 +537,6 @@ window.Vue = __webpack_require__(13);
 
 
 
-Vue.component('step1', {
-    template: '#step1',
-    props: ['currentStep', 'step1']
-});
-Vue.component('step2', {
-    template: '#step2',
-    props: ['currentStep', 'step2']
-});
-Vue.component('step3', {
-    template: '#step3',
-    props: ['currentStep', 'step1', 'step2']
-});
-Vue.component('step4', {
-    template: '#step3',
-    props: ['currentStep', 'step1', 'step2']
-});
-Vue.component('step1S1', {
-    template: '#step1S1'
-});
-
-Vue.component('step1S2', {
-    template: '#step1S2'
-});
-
-Vue.component('step1S3', {
-    template: '#step1S3'
-});
-
 var eventBus = new Vue();
 
 var app = new Vue({
@@ -45051,425 +45023,9 @@ exports.push([module.i, "\n.image_company[data-v-df66e9dc] {\n    margin: 15px a
 
 /***/ }),
 /* 77 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            currentUser: {
-                profile: '',
-                user_info: ''
-            },
-            product: {
-                product_name: '',
-                stock: '',
-                min_sale_price: '',
-                max_sale_price: '',
-                min_sale_amount: '',
-                description: '',
-                address: '',
-                category_id: '',
-                city_id: '',
-                rules: false
-            },
-            productFields: ['product_name', 'stock', 'min_sale_price', 'max_sale_price', 'min_sale_amount', 'description', 'address', 'category_id', 'city_id'],
-            categoryList: '',
-            SubCategoryList: '',
-            categorySelected: '',
-            provinces: '',
-            cities: '',
-            productFiles: [],
-            popUpMsg: '',
-            errors: '',
-            disableSubmit: false,
-            items: [{
-                message: ' ثبت محصول',
-                url: 'registerProduct'
-            }]
-        };
-    },
-    methods: {
-        init: function init() {
-            var _this = this;
-
-            axios.post('/user/profile_info').then(function (response) {
-                return _this.currentUser = response.data;
-            });
-            axios.post('/get_category_list').then(function (response) {
-                return _this.categoryList = response.data.categories;
-            });
-            axios.post('/location/get_location_info').then(function (response) {
-                return _this.provinces = response.data.provinces;
-            });
-        },
-        loadSubCategoryList: function loadSubCategoryList(e) {
-            var _this2 = this;
-
-            e.preventDefault();
-            var categoryId = $(e.target).val();
-
-            axios.post('/get_category_list', {
-                parent_id: categoryId
-            }).then(function (response) {
-                return _this2.SubCategoryList = response.data.categories;
-            });
-        },
-        loadCityList: function loadCityList(e) {
-            var _this3 = this;
-
-            e.preventDefault();
-            var provinceId = $(e.target).val();
-
-            axios.post('/location/get_location_info', {
-                province_id: provinceId
-            }).then(function (response) {
-                return _this3.cities = response.data.cities;
-            });
-        },
-        submitProduct: function submitProduct() {
-            __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', true);
-            var self = this;
-
-            if (this.product.rules != true) {
-                this.popUpMsg = 'موافقت با قوانین ثبت آگهی الزامی است';
-                __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitSuccess', this.popUpMsg);
-                __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', false);
-                $('#myModal').modal('show');
-            } else {
-                var formData = this.getProductFormFields();
-
-                axios.post('/user/add_product', formData).then(function (response) {
-                    if (response.status == 201) {
-                        self.disableSubmit = true;
-
-                        self.popUpMsg = 'محصول شما با موفقیت ثبت شد';
-                        $('#myModal').modal('show');
-                        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitSuccess', self.popUpMsg);
-                        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', false);
-                        setTimeout(function () {
-                            location.reload(true);
-                        }, 3000);
-                    }
-                }).catch(function (err) {
-                    self.errors = [];
-                    self.errors = err.response.data.errors;
-                    __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', false);
-                });
-            }
-        },
-        getProductFormFields: function getProductFormFields() {
-            var formData = new FormData();
-            var cnt = this.productFields.length;
-
-            for (var i = 0; i < cnt; i++) {
-                formData.append(this.productFields[i], this.toLatinNumbers(this.product[this.productFields[i]]));
-            }
-
-            for (var i = 0; i < this.productFiles.length; i++) {
-                var file = this.productFiles[i];
-                formData.append('image_' + i, file);
-            }
-            formData.append('images_count', this.productFiles.length);
-
-            return formData;
-        },
-        setCategoryId: function setCategoryId(e) {
-            e.preventDefault();
-            var categoryId = $(e.target).val();
-
-            this.product.category_id = categoryId;
-        },
-        setCityId: function setCityId(e) {
-            e.preventDefault();
-            var cityId = $(e.target).val();
-
-            this.product.city_id = cityId;
-        },
-        handleProductFilesUpload: function handleProductFilesUpload() {
-            var uploadedFiles = this.$refs.productFiles.files;
-            /*
-              Adds the uploaded file to the files array
-            */
-            for (var i = 0; i < uploadedFiles.length; i++) {
-                this.productFiles.push(uploadedFiles[i]);
-            }
-        },
-        toLatinNumbers: function toLatinNumbers(num) {
-            var numDic = {
-                '۰': '0',
-                '۱': '1',
-                '۲': '2',
-                '۳': '3',
-                '۴': '4',
-                '۵': '5',
-                '۶': '6',
-                '۷': '7',
-                '۸': '8',
-                '۹': '9'
-            };
-
-            return num.toString().replace(/[۰-۹]/g, function (w) {
-                return numDic[w];
-            });
-        }
-    },
-    mounted: function mounted() {
-        this.init();
-        $('input[type="file"]').imageuploadify();
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
-    }
-});
+throw new Error("Module build failed: SyntaxError: Unexpected token (338:0)\n\n\u001b[0m \u001b[90m 336 | \u001b[39m                                self\u001b[33m.\u001b[39mdisableSubmit \u001b[33m=\u001b[39m \u001b[36mtrue\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 337 | \u001b[39m                                self\u001b[33m.\u001b[39mpopUpMsg \u001b[33m=\u001b[39m \u001b[32m'محصول شما با موفقیت ثبت شد'\u001b[39m\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 338 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\n \u001b[90m     | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 339 | \u001b[39m                                $(\u001b[32m'#myModal'\u001b[39m)\u001b[33m.\u001b[39mmodal(\u001b[32m'show'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 340 | \u001b[39m\u001b[33m===\u001b[39m\u001b[33m===\u001b[39m\u001b[33m=\u001b[39m\n \u001b[90m 341 | \u001b[39m\u001b[33m>>>\u001b[39m\u001b[33m>>>\u001b[39m\u001b[33m>\u001b[39m \u001b[35m3\u001b[39mb498c119bc745e4eb1c32b34f800a536f4efbb9\u001b[0m\n");
 
 /***/ }),
 /* 78 */
@@ -46452,7 +46008,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n/*start style main header*/\n#main[data-v-14adfcd8] {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n#main.little-main[data-v-14adfcd8] {\n    margin-right: 80px;\n}\n.main-header[data-v-14adfcd8] {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n    border-bottom: 2px solid #e6e6e6;\n}\n.image-header-profile[data-v-14adfcd8] {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.image-header-profile  img[data-v-14adfcd8]{\n    height: 100%;\n}\n.profile-menu-header[data-v-14adfcd8] {\n    float: left;\n}\n.right-menu-header[data-v-14adfcd8] {\n\n    padding: 16px;\n}\n.right-menu-header[data-v-14adfcd8], .content-header[data-v-14adfcd8] {\n    float: right;\n}\n.profile-menu-header[data-v-14adfcd8] {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header a[data-v-14adfcd8] {\n    position: relative;\n}\n.profile-menu-header i[data-v-14adfcd8] {\n    position: absolute;\n\n    left: -75px;\n\n    top: 18px;\n\n    font-size: 20px;\n}\n.content-header[data-v-14adfcd8] {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a[data-v-14adfcd8], .profile-menu-header a[data-v-14adfcd8] {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a[data-v-14adfcd8] {\n    font-size: 30px;\n}\n.right-menu-header a[data-v-14adfcd8]:hover, .profile-menu-header a[data-v-14adfcd8]:hover {\n    color: #2e353e;\n}\n.name-header-profile[data-v-14adfcd8] {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list[data-v-14adfcd8] {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li[data-v-14adfcd8] {\n    margin: 5px;\n}\n.profile-list a[data-v-14adfcd8] {\n    width: 100%;\n    display: inline-block;\n}\n\n/*end style main header*/\n\n/*start style sub-header*/\n.sub-header[data-v-14adfcd8] {\n    position: absolute;\n    left: 0;\n    background: #eff3f6;\n    top: 63px;\n    right: 0;\n    text-align: center;\n}\n.sub-header ul[data-v-14adfcd8] {\n    text-align: center;\n}\n.sub-header a[data-v-14adfcd8] {\n    padding: 16px;\n\n    display: inline-block;\n\n    color: #808c9b;\n\n    font-weight: bold;\n\n    font-size: 14px;\n\n    position: relative;\n}\n.sub-header a[data-v-14adfcd8]:hover {\n    color: #313942;\n}\n.sub-header a[data-v-14adfcd8]:hover::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.sub-header a.active[data-v-14adfcd8] {\n    color: #313942;\n}\n.sub-header a.active[data-v-14adfcd8]::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n/*end style sub-header*/\n/*start main content style */\n.image-content-post[data-v-14adfcd8] {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img[data-v-14adfcd8] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-14adfcd8] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-14adfcd8] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-14adfcd8] {\n    display: block;\n}\n.content-item[data-v-14adfcd8] {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content[data-v-14adfcd8] {\n    padding: 60px 15px;\n}\n.img-profile[data-v-14adfcd8] {\n    text-align: center;\n}\n.img-profile .image-input img[data-v-14adfcd8] {\n    width: 150px;\n    height: 150px;\n    overflow: hidden;\n    border-radius: 50%;\n    display: none;\n}\n.img-profile i[data-v-14adfcd8] {\n    font-size: 150px;\n    color: #4b4b4b;\n}\n.img-profile .submit[data-v-14adfcd8] {\n    position: relative;\n    width: 80%;\n    margin: 25px auto;\n}\n.img-profile .submit input[data-v-14adfcd8] {\n    opacity: 0;\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    left: 10px;\n    right: 0;\n}\n.img-profile .submit label[data-v-14adfcd8] {\n    background: #28a745;\n    color: #fff;\n    padding: 12px  0;\n    font-size: 13px;\n    font-weight: 400;\n    border-radius: 5px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    width: 100%;\n}\n.img-profile .submit input:hover + label[data-v-14adfcd8] {\n    background: #29d44d;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.img-profile .submit input[data-v-14adfcd8]:hover {\n    cursor: pointer\n}\n.main-profile[data-v-14adfcd8] {\n    border-right: 1px solid #eff3f6;\n    text-align: right;\n    direction: rtl;\n    overflow: hidden;\n}\n.header-lable[data-v-14adfcd8] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n.content-lable[data-v-14adfcd8]{\n    font-weight:400 ;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-14adfcd8] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border:none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-14adfcd8]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-14adfcd8] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-14adfcd8]:hover {\n    color: #fff;\n}\n.font-big[data-v-14adfcd8] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-14adfcd8] {\n    width: 80px;\n}\n.little-main-header[data-v-14adfcd8] {\n    right: 80px;\n}\n.background_mob_sec[data-v-14adfcd8] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user[data-v-14adfcd8], .kind_activity[data-v-14adfcd8] {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div[data-v-14adfcd8], .kind_activity > div[data-v-14adfcd8] {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input[data-v-14adfcd8], .kind_activity input[data-v-14adfcd8] {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i[data-v-14adfcd8], .kind_activity input:checked + i[data-v-14adfcd8] {\n    background: #28a745;\n    color: #fff;\n    border: none;\n    padding: 4px;\n}\n.kind_user i[data-v-14adfcd8], .kind_activity i[data-v-14adfcd8] {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border-radius: 50%;\n    padding: 2px;\n    font-size: 14px;\n    border: 2px solid;\n}\n.user-form[data-v-14adfcd8]{\n    padding: 0;\n}\ninput[type=\"text\"][data-v-14adfcd8],select[data-v-14adfcd8] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\ntextarea[data-v-14adfcd8]{\n    height: 120px;\n    max-width: 100%\n}\n.user-form input[type=\"button\"][data-v-14adfcd8] {\n    width: 100%;\n}\n.user-form input[type=\"text\"][data-v-14adfcd8]:focus {\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile[data-v-14adfcd8]{\n    float: right;\n    padding-top: 90px;\n}\n#icon-pro[data-v-14adfcd8] {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg[data-v-14adfcd8]{\n    height: 150px;\n}\n.col-sm-6[data-v-14adfcd8]{\n    height: 120px;\n    float: right;\n}\n@media screen and (max-width: 992px) {\n.img-profile[data-v-14adfcd8]{\n        padding-top: 20px;\n}\n.right-header.desktop-header[data-v-14adfcd8] {\n        display: none;\n}\n.right-header.mobile-header[data-v-14adfcd8] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-14adfcd8], .little-main-header[data-v-14adfcd8] {\n        right: 0 !important;\n}\n#main[data-v-14adfcd8], #main.little-main[data-v-14adfcd8] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-14adfcd8] {\n        width: 100%;\n}\n.copy-right[data-v-14adfcd8] {\n        display: none;\n}\n.clouse_menu[data-v-14adfcd8] {\n        display: none;\n}\n.clouse_menu_mob[data-v-14adfcd8] {\n        display: block;\n}\n.show-header button[data-v-14adfcd8] {\n        display: block;\n}\n.img-profile .submit[data-v-14adfcd8] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-14adfcd8] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-14adfcd8]{\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-14adfcd8], .contents-post[data-v-14adfcd8] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.col-sm-6[data-v-14adfcd8]{\n        float: none;\n}\n.name-header-profile[data-v-14adfcd8] {\n        display: none;\n}\n.profile-menu-header[data-v-14adfcd8] {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-14adfcd8] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-14adfcd8] {\n        font-size: 10px;\n}\n.sub-header[data-v-14adfcd8] {\n\n        bottom: -44px;\n}\n}\n", ""]);
+exports.push([module.i, "\n\n/*start style main header*/\n#main[data-v-14adfcd8] {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n#main.little-main[data-v-14adfcd8] {\n    margin-right: 80px;\n}\n.main-header[data-v-14adfcd8] {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n    border-bottom: 2px solid #e6e6e6;\n}\n.image-header-profile[data-v-14adfcd8] {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.image-header-profile img[data-v-14adfcd8] {\n    height: 100%;\n}\n.profile-menu-header[data-v-14adfcd8] {\n    float: left;\n}\n.right-menu-header[data-v-14adfcd8] {\n\n    padding: 16px;\n}\n.right-menu-header[data-v-14adfcd8], .content-header[data-v-14adfcd8] {\n    float: right;\n}\n.profile-menu-header[data-v-14adfcd8] {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header a[data-v-14adfcd8] {\n    position: relative;\n}\n.profile-menu-header i[data-v-14adfcd8] {\n    position: absolute;\n\n    left: -75px;\n\n    top: 18px;\n\n    font-size: 20px;\n}\n.content-header[data-v-14adfcd8] {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a[data-v-14adfcd8], .profile-menu-header a[data-v-14adfcd8] {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a[data-v-14adfcd8] {\n    font-size: 30px;\n}\n.right-menu-header a[data-v-14adfcd8]:hover, .profile-menu-header a[data-v-14adfcd8]:hover {\n    color: #2e353e;\n}\n.name-header-profile[data-v-14adfcd8] {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list[data-v-14adfcd8] {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li[data-v-14adfcd8] {\n    margin: 5px;\n}\n.profile-list a[data-v-14adfcd8] {\n    width: 100%;\n    display: inline-block;\n}\n\n/*end style main header*/\n\n/*start style sub-header*/\n.sub-header[data-v-14adfcd8] {\n    position: absolute;\n    left: 0;\n    background: #eff3f6;\n    top: 63px;\n    right: 0;\n    text-align: center;\n}\n.sub-header ul[data-v-14adfcd8] {\n    text-align: center;\n}\n.sub-header a[data-v-14adfcd8] {\n    padding: 16px;\n\n    display: inline-block;\n\n    color: #808c9b;\n\n    font-weight: bold;\n\n    font-size: 14px;\n\n    position: relative;\n}\n.sub-header a[data-v-14adfcd8]:hover {\n    color: #313942;\n}\n.sub-header a[data-v-14adfcd8]:hover::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.sub-header a.active[data-v-14adfcd8] {\n    color: #313942;\n}\n.sub-header a.active[data-v-14adfcd8]::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n\n/*end style sub-header*/\n/*start main content style */\n.image-content-post[data-v-14adfcd8] {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img[data-v-14adfcd8] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-14adfcd8] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-14adfcd8] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-14adfcd8] {\n    display: block;\n}\n.content-item[data-v-14adfcd8] {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content[data-v-14adfcd8] {\n    padding: 60px 15px;\n}\n.img-profile[data-v-14adfcd8] {\n    text-align: center;\n}\n.img-profile .image-input img[data-v-14adfcd8] {\n    width: 150px;\n    height: 150px;\n    overflow: hidden;\n    border-radius: 50%;\n    display: none;\n}\n.img-profile i[data-v-14adfcd8] {\n    font-size: 150px;\n    color: #4b4b4b;\n}\n.img-profile .submit[data-v-14adfcd8] {\n    position: relative;\n    width: 80%;\n    margin: 25px auto;\n}\n.img-profile .submit input[data-v-14adfcd8] {\n    opacity: 0;\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    left: 10px;\n    right: 0;\n}\n.img-profile .submit label[data-v-14adfcd8] {\n    background: #28a745;\n    color: #fff;\n    padding: 12px 0;\n    font-size: 13px;\n    font-weight: 400;\n    border-radius: 5px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    width: 100%;\n}\n.img-profile .submit input:hover + label[data-v-14adfcd8] {\n    background: #29d44d;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.img-profile .submit input[data-v-14adfcd8]:hover {\n    cursor: pointer\n}\n.main-profile[data-v-14adfcd8] {\n    border-right: 1px solid #eff3f6;\n    text-align: right;\n    direction: rtl;\n    overflow: hidden;\n}\n.header-lable[data-v-14adfcd8] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n.content-lable[data-v-14adfcd8] {\n    font-weight: 400;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-14adfcd8] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-14adfcd8]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-14adfcd8] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-14adfcd8]:hover {\n    color: #fff;\n}\n.font-big[data-v-14adfcd8] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-14adfcd8] {\n    width: 80px;\n}\n.little-main-header[data-v-14adfcd8] {\n    right: 80px;\n}\n.background_mob_sec[data-v-14adfcd8] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user[data-v-14adfcd8], .kind_activity[data-v-14adfcd8] {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div[data-v-14adfcd8], .kind_activity > div[data-v-14adfcd8] {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input[data-v-14adfcd8], .kind_activity input[data-v-14adfcd8] {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i[data-v-14adfcd8], .kind_activity input:checked + i[data-v-14adfcd8] {\n    background: #28a745;\n    color: #fff;\n    border: none;\n    padding: 4px;\n}\n.kind_user i[data-v-14adfcd8], .kind_activity i[data-v-14adfcd8] {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border-radius: 50%;\n    padding: 2px;\n    font-size: 14px;\n    border: 2px solid;\n}\n.user-form[data-v-14adfcd8] {\n    padding: 0;\n}\ninput[type=\"text\"][data-v-14adfcd8], select[data-v-14adfcd8] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\ntextarea[data-v-14adfcd8] {\n    height: 120px;\n    max-width: 100%\n}\n.user-form input[type=\"button\"][data-v-14adfcd8] {\n    width: 100%;\n}\n.user-form input[type=\"text\"][data-v-14adfcd8]:focus {\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile[data-v-14adfcd8] {\n    float: right;\n    padding-top: 90px;\n}\n#icon-pro[data-v-14adfcd8] {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg[data-v-14adfcd8] {\n    height: 150px;\n}\n.col-sm-6[data-v-14adfcd8] {\n    height: 120px;\n    float: right;\n}\n@media screen and (max-width: 992px) {\n.img-profile[data-v-14adfcd8] {\n        padding-top: 20px;\n}\n.right-header.desktop-header[data-v-14adfcd8] {\n        display: none;\n}\n.right-header.mobile-header[data-v-14adfcd8] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-14adfcd8], .little-main-header[data-v-14adfcd8] {\n        right: 0 !important;\n}\n#main[data-v-14adfcd8], #main.little-main[data-v-14adfcd8] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-14adfcd8] {\n        width: 100%;\n}\n.copy-right[data-v-14adfcd8] {\n        display: none;\n}\n.clouse_menu[data-v-14adfcd8] {\n        display: none;\n}\n.clouse_menu_mob[data-v-14adfcd8] {\n        display: block;\n}\n.show-header button[data-v-14adfcd8] {\n        display: block;\n}\n.img-profile .submit[data-v-14adfcd8] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-14adfcd8] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-14adfcd8] {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-14adfcd8], .contents-post[data-v-14adfcd8] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.col-sm-6[data-v-14adfcd8] {\n        float: none;\n}\n.name-header-profile[data-v-14adfcd8] {\n        display: none;\n}\n.profile-menu-header[data-v-14adfcd8] {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-14adfcd8] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-14adfcd8] {\n        font-size: 10px;\n}\n.sub-header[data-v-14adfcd8] {\n\n        bottom: -44px;\n}\n}\n", ""]);
 
 // exports
 
@@ -46464,6 +46020,24 @@ exports.push([module.i, "\n\n/*start style main header*/\n#main[data-v-14adfcd8]
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -47198,11 +46772,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return num.toString().replace(/[۰-۹]/g, function (w) {
                 return numDic[w];
             });
+        },
+        disable_form: function disable_form() {
+            var feild_co_num = $("#co-num");
+            var feild_co = $("#company");
+            this.currentUser.profile.company_register_code = null;
+            this.currentUser.profile.company_name = null;
+            feild_co_num.attr('disabled', true);
+            feild_co.attr('disabled', true);
+        },
+        enable_form: function enable_form() {
+            var feild_co_num = $("#co-num");
+            var feild_co = $("#company");
+            feild_co.val('');
+            feild_co_num.prop('disabled', false);
+            feild_co.prop('disabled', false);
         }
     },
     mounted: function mounted() {
         this.init();
         __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+
         function show_image_preview(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -47305,16 +46895,14 @@ var render = function() {
                     expression: "currentUser.profile.is_company"
                   }
                 ],
-                attrs: {
-                  onclick: "disable_form(this);",
-                  type: "radio",
-                  name: "kind_user",
-                  value: "0"
-                },
+                attrs: { type: "radio", name: "kind_user", value: "0" },
                 domProps: {
                   checked: _vm._q(_vm.currentUser.profile.is_company, "0")
                 },
                 on: {
+                  click: function($event) {
+                    _vm.disable_form()
+                  },
                   change: function($event) {
                     _vm.$set(_vm.currentUser.profile, "is_company", "0")
                   }
@@ -47335,16 +46923,14 @@ var render = function() {
                     expression: "currentUser.profile.is_company"
                   }
                 ],
-                attrs: {
-                  onclick: "enable_form(this);",
-                  type: "radio",
-                  name: "kind_user",
-                  value: "1"
-                },
+                attrs: { type: "radio", name: "kind_user", value: "1" },
                 domProps: {
                   checked: _vm._q(_vm.currentUser.profile.is_company, "1")
                 },
                 on: {
+                  click: function($event) {
+                    _vm.enable_form()
+                  },
                   change: function($event) {
                     _vm.$set(_vm.currentUser.profile, "is_company", "1")
                   }
@@ -54813,7 +54399,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.main-content {\n    padding: 90px 35px;\n}\n.list-title, .needs,.list-time {\n    float: right;\n    text-align: center;\n    line-height: 1.618;\n    font-weight: bold;\n    padding-top: 5px;\n}\n.list-group-item {\n    border: 1px solid #ddd;\n}\n.detail-success {\n    padding: 8px 0;\n    width: 100%;\n    background: #28a745;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.main-content > ul {\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 10px #e1e1e1 ;\n            box-shadow: 0 0 10px #e1e1e1 ;\n    overflow: hidden;\n}\n.main-content .list-group-item p {\n    text-align: center;\n}\n#main.little-main {\n    margin-right: 80px;\n}\n@media screen and (max-width: 992px) {\n.list-title, .needs,.list-time {\n       padding: 15px;\n}\n}\n\n\n", ""]);
+exports.push([module.i, "\n.main-content {\n    padding: 90px 35px;\n}\n.list-title, .needs,.list-time {\n    float: right;\n    text-align: center;\n    line-height: 1.618;\n    font-weight: bold;\n    padding-top: 5px;\n}\n.list-group-item {\n    border: 1px solid #ddd;\n}\n.detail-success {\n    padding: 8px 0;\n    width: 100%;\n    background: #28a745;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.main-content > ul {\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 10px #e1e1e1 ;\n            box-shadow: 0 0 10px #e1e1e1 ;\n    overflow: hidden;\n}\n.main-content .list-group-item p {\n    text-align: center;\n    direction: rtl;\n}\n#main.little-main {\n    margin-right: 80px;\n}\n@media screen and (max-width: 992px) {\n.list-title, .needs,.list-time {\n       padding: 15px;\n}\n}\n\n\n", ""]);
 
 // exports
 
@@ -54825,6 +54411,7 @@ exports.push([module.i, "\n.main-content {\n    padding: 90px 35px;\n}\n.list-ti
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
 //
 //
 //
@@ -60463,7 +60050,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    vertical-align: baseline;\n}\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, menu, nav, section {\n    display: block;\n}\nbody {\n    line-height: 1.1;\n    font-family: IRANSans, sans-serif;\n    font-size: 14px;\n}\nol, ul {\n    list-style: none;\n}\nblockquote, q {\n    quotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n    content: none;\n}\ntable {\n    border-collapse: collapse;\n    border-spacing: 0;\n}\nimg, svg {\n    width: 100%;\n}\na, a:hover, a:visited, a:focus, a:active {\n    text-decoration: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\nth, td {\n    padding: 7px;\n    text-align: right;\n}\n\n/*start style right header*/\n.logo {\n    height: 64px;\n\n    display: block;\n\n    float: right;\n\n    width: 70%;\n}\n.logo_hide {\n    display: none;\n}\n.logo a {\n    display: inline-block;\n    margin-top: -11px;\n    height: 75px;\n    padding: 0 10px;\n}\n.right-header {\n    width: 250px;\n    right: 0;\n    bottom: 0;\n    position: fixed;\n    top: 0;\n    overflow: hidden;\n    z-index: 9;\n}\n.little_header {\n    width: 80px;\n}\n.right-header.mobile-header {\n    display: none;\n    -webkit-box-shadow: 0 0 20px;\n            box-shadow: 0 0 20px;\n}\n.right-header > header {\n    overflow: hidden;\n    background: #fff;\n}\n.clouse_menu, .clouse_menu_mob {\n    float: left;\n    width: 30%;\n    border: none;\n    background: none;\n    font-size: 35px;\n    top: 0;\n    position: relative;\n    padding: 11px;\n}\n.clouse_menu_mob {\n    display: none;\n}\n.main-right-header {\n    background: #313a43;\n    height: 100%;\n    text-align: right;\n    color: #fff;\n    position: relative;\n}\n.show-header button {\n    float: right;\n    border: none;\n    background: none;\n    font-size: 25px;\n    padding: 19px 30px 19px 24px;\n    display: none;\n}\n.profile {\n    padding: 20px 20px 10px;\n    border-bottom: 2px solid #2e353e;\n}\n.profile-img {\n    overflow: hidden;\n    border-radius: 50%;\n    height: 85px;\n    width: 85px;\n    margin: 0 auto;\n    margin-left: 10px;\n    border: 2px solid #fff;\n    float: right;\n}\n.profile-img img {\n    height: 100%;\n}\n.profile-content {\n    float: right;\n    padding-top: 15px;\n}\n.profile-name {\n    margin: 8px 0;\n    font-size: 17px;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.header-menu a {\n    color: #b1b1b1;\n    padding: 10px 20px;\n    display: inline-block;\n    position: relative;\n    width: 100%;\n}\n.header-menu {\n    padding: 10px 0;\n}\n.header-menu a:hover {\n    color: #fff;\n    background: #637484;\n}\n.header-menu a:hover::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu li.active a {\n    color: #fff;\n    background: #637484;\n}\n.header-menu li.active a:before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.copy-right {\n    text-align: center;\n    font-size: 12px;\n    font-weight: 200;\n    line-height: 1.3em;\n    padding: 20px;\n    position: absolute;\n    bottom: 76px;\n}\nlabel {\n    display: block;\n    margin: 9px auto;\n}\ninput[type=\"text\"], select, input[type=\"button\"], textarea {\n    width: 100% !important;\n}\ninput[type=\"text\"], select, textarea {\n    background: #eff3f6;\n    border: 1px solid #cfcfcf;\n    border-radius: 3px;\n    width: 100% !important;\n}\ninput[type=\"text\"], textarea {\n    padding: 13px 15px;\n    width: 100% !important;\n}\nselect {\n    padding: 7px 15px;\n}\n.image-header-profile img {\n    height: 100%;\n}\n.right-menu-header {\n    position: relative;\n}\n.right-menu-header li ul a {\n    font-size: 14px;\n    width: 100%;\n    display: inline-block;\n}\n.right-menu-header li ul li {\n\n    margin: 5px;\n}\n.icon-header-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    right: 75px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n\n/*end style right header*/\n\n\n\n/*loader*/\n.loader-display{\n    position: fixed;\n    z-index: 10;\n    top:0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0,0,0,0.5);\n    display: block;\n}\n.main-loader{\n    position: absolute;\n\n    top: 35%;\n\n    text-align: center;\n\n    display: block;\n\n    width: 100%;\n\n    color: #fff;\n\n    font-size: 23px;\n}\n.main-loader img{\n    width: 100px;\n\n    background: #fff;\n\n    border-radius: 50px;\n\n    height: 100px;\n\n    display: inline-block;\n\n    margin: 0 auto 22px;\n}\n.loader-wrapper{\n    display:none;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header {\n        display: none;\n}\n.right-header.mobile-header {\n        display: block;\n        right: -300px;\n}\n.main-header, .little-main-header {\n        right: 0 !important;\n}\n#main, #main.little-main {\n        margin-right: 0 !important;\n}\n.post-contents-table {\n        width: 100%;\n}\n.copy-right {\n        display: none;\n}\n.clouse_menu {\n        display: none;\n}\n.clouse_menu_mob {\n        display: block;\n}\n.show-header button {\n        display: block;\n}\n.kind_user > div, .kind_activity > div {\n        float: none;\n}\n.img-profile .submit {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post, .contents-post {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.name-header-profile {\n        display: none;\n}\n.profile-menu-header {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a {\n        font-size: 12px !important;\n        padding: 16px 13px !important;\n}\n.sub-header {\n        bottom: -44px;\n}\n}\n\n/*end loader*/\n", ""]);
+exports.push([module.i, "\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    vertical-align: baseline;\n}\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, menu, nav, section {\n    display: block;\n}\nbody {\n    line-height: 1.1;\n    font-family: IRANSans, sans-serif;\n    font-size: 14px;\n}\nol, ul {\n    list-style: none;\n}\nblockquote, q {\n    quotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n    content: none;\n}\ntable {\n    border-collapse: collapse;\n    border-spacing: 0;\n}\nimg, svg {\n    width: 100%;\n}\na, a:hover, a:visited, a:focus, a:active {\n    text-decoration: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\nth, td {\n    padding: 7px;\n    text-align: right;\n}\n\n/*start style right header*/\n.logo {\n    height: 64px;\n\n    display: block;\n\n    float: right;\n\n    width: 70%;\n}\n#main {\n    background: #fff !important;\n}\n.profile-menu-header {\n    float: left;\n}\n.logo_hide {\n    display: none;\n}\n.logo a {\n    display: inline-block;\n    margin-top: -11px;\n    height: 75px;\n    padding: 0 10px;\n}\n.right-header {\n    width: 250px;\n    right: 0;\n    bottom: 0;\n    position: fixed;\n    top: 0;\n    overflow: hidden;\n    z-index: 9;\n}\n.little_header {\n    width: 80px;\n}\n.right-header.mobile-header {\n    display: none;\n    -webkit-box-shadow: 0 0 20px;\n            box-shadow: 0 0 20px;\n}\n.right-header > header {\n    overflow: hidden;\n    background: #fff;\n}\n.clouse_menu, .clouse_menu_mob {\n    float: left;\n    width: 30%;\n    border: none;\n    background: none;\n    font-size: 35px;\n    top: 0;\n    position: relative;\n    padding: 11px;\n}\n.clouse_menu_mob {\n    display: none;\n}\n.main-right-header {\n    background: #313a43;\n    height: 100%;\n    text-align: right;\n    color: #fff;\n    position: relative;\n}\n.show-header button {\n    float: right;\n    border: none;\n    background: none;\n    font-size: 25px;\n    padding: 19px 30px 19px 24px;\n    display: none;\n}\n.profile {\n    padding: 20px 20px 10px;\n    border-bottom: 2px solid #2e353e;\n}\n.profile-img {\n    overflow: hidden;\n    border-radius: 50%;\n    height: 85px;\n    width: 85px;\n    margin: 0 auto;\n    margin-left: 10px;\n    border: 2px solid #fff;\n    float: right;\n}\n.profile-img img {\n    height: 100%;\n}\n.profile-content {\n    float: right;\n    padding-top: 15px;\n}\n.profile-name {\n    margin: 8px 0;\n    font-size: 17px;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.header-menu a {\n    color: #b1b1b1;\n    padding: 10px 20px;\n    display: inline-block;\n    position: relative;\n    width: 100%;\n}\n.header-menu {\n    padding: 10px 0;\n}\n.header-menu a:hover {\n    color: #fff;\n    background: #637484;\n}\n.header-menu a:hover::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu li.active a {\n    color: #fff;\n    background: #637484;\n}\n.header-menu li.active a:before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.copy-right {\n    text-align: center;\n    font-size: 12px;\n    font-weight: 200;\n    line-height: 1.3em;\n    padding: 20px;\n    position: absolute;\n    bottom: 76px;\n}\nlabel {\n    display: block;\n    margin: 9px auto;\n}\ninput[type=\"text\"], select, input[type=\"button\"], textarea {\n    width: 100% !important;\n}\ninput[type=\"text\"], select, textarea {\n    background: #eff3f6;\n    border: 1px solid #cfcfcf;\n    border-radius: 3px;\n    width: 100% !important;\n}\ninput[type=\"text\"], textarea {\n    padding: 13px 15px;\n    width: 100% !important;\n}\nselect {\n    padding: 7px 15px;\n}\n.image-header-profile img {\n    height: 100%;\n}\n.right-menu-header {\n    position: relative;\n}\n.right-menu-header li ul a {\n    font-size: 14px;\n    width: 100%;\n    display: inline-block;\n}\n.right-menu-header li ul li {\n\n    margin: 5px;\n}\n.icon-header-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    right: 75px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n\n/*end style right header*/\n\n/*custom*/\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n    color: #3c3c3c;\n}\n\n/*loader*/\n.loader-display {\n    position: fixed;\n    z-index: 10;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0, 0, 0, 0.5);\n    display: block;\n}\n.main-loader {\n    position: absolute;\n\n    top: 35%;\n\n    text-align: center;\n\n    display: block;\n\n    width: 100%;\n\n    color: #fff;\n\n    font-size: 23px;\n}\n.main-loader img {\n    width: 100px;\n\n    background: #fff;\n\n    border-radius: 50px;\n\n    height: 100px;\n\n    display: inline-block;\n\n    margin: 0 auto 22px;\n}\n.loader-wrapper {\n    display: none;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header {\n        display: none;\n}\n.right-header.mobile-header {\n        display: block;\n        right: -300px;\n}\n.main-header, .little-main-header {\n        right: 0 !important;\n}\n#main, #main.little-main {\n        margin-right: 0 !important;\n}\n.post-contents-table {\n        width: 100%;\n}\n.copy-right {\n        display: none;\n}\n.clouse_menu {\n        display: none;\n}\n.clouse_menu_mob {\n        display: block;\n}\n.show-header button {\n        display: block;\n}\n.kind_user > div, .kind_activity > div {\n        float: none;\n}\n.img-profile .submit {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post, .contents-post {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.name-header-profile {\n        display: none;\n}\n.profile-menu-header {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a {\n        font-size: 12px !important;\n        padding: 16px 13px !important;\n}\n.sub-header {\n        bottom: -44px;\n}\n}\n\n/*end loader*/\n", ""]);
 
 // exports
 
@@ -61068,6 +60655,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -61080,7 +60679,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         headerMenuList: __WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue___default.a,
         headerTop: __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue___default.a
     },
-    props: ['defultimg', 'logo', 'loading', 'storage', 'transactroute', 'mytrans', 'selregpro', 'byadreq', 'profilebasic', 'logout', 'routehome', 'guide'],
+    props: ['defultimg', 'logo', 'loading', 'storage', 'transactroute', 'mytrans', 'selregpro', 'byadreq', 'logout', 'routehome', 'guide'],
     data: function data() {
         return {
             currentUser: {
@@ -61927,7 +61526,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n#main {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n.main-header {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n}\n.little-main-header {\n    right: 80px;\n}\n.image-header-profile {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.image-header-profile  img{\n    height: 100%;\n}\n.profile-menu-header {\n    float: left;\n}\n.right-menu-header {\n\n    padding: 16px;\n}\n.right-menu-header, .content-header {\n    float: right;\n}\n.profile-menu-header {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header i {\n    position: absolute;\n\n    left: -90px;\n\n    top: 0px;\n\n    font-size: 20px;\n}\n.content-header {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a, .profile-menu-header a {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a {\n    font-size: 30px;\n}\n.right-menu-header a:hover, .profile-menu-header a:hover {\n    color: #2e353e;\n}\n.profile-menu-header a {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li {\n    margin: 5px;\n}\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n}\n.font-big {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n", ""]);
+exports.push([module.i, "\n#main {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n.main-header {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n}\n.little-main-header {\n    right: 80px;\n}\n.image-header-profile {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.image-header-profile  img{\n    height: 100%;\n}\n.right-menu-header {\n\n    padding: 16px;\n}\n.right-menu-header, .content-header {\n    float: right;\n}\n.profile-menu-header {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header i {\n    position: absolute;\n\n    left: -90px;\n\n    top: 0px;\n\n    font-size: 20px;\n}\n.content-header {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a, .profile-menu-header a {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a {\n    font-size: 30px;\n}\n.right-menu-header a:hover, .profile-menu-header a:hover {\n    color: #2e353e;\n}\n.profile-menu-header a {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li {\n    margin: 5px;\n}\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n}\n.font-big {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n", ""]);
 
 // exports
 
@@ -62088,14 +61687,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['photoLink', 'profilebasic', 'storage', 'def', 'username', 'out', 'routeHome'],
+    props: ['photoLink', 'storage', 'def', 'username', 'out', 'routeHome'],
     components: {
         subMenu: __WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue___default.a
     }
@@ -62367,11 +61962,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "profile-list" }, [
             _c("ul", { staticClass: "list-unstyled" }, [
-              _c("li", { staticClass: "list-item" }, [
-                _c("a", { attrs: { href: _vm.profilebasic } }, [
-                  _vm._v("پروفایل")
-                ])
-              ]),
+              _vm._m(2),
               _vm._v(" "),
               _c("li", { staticClass: "list-item" }, [
                 _c("a", { attrs: { href: _vm.out } }, [_vm._v("خروج")])
@@ -62416,6 +62007,14 @@ var staticRenderFns = [
       _c("span", { staticClass: "font-big" }, [_vm._v("اینکوباک  ")]),
       _vm._v(" | "),
       _c("span", [_vm._v(" بازارگاه آنلاین کشاورزی")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "list-item" }, [
+      _c("a", { attrs: { href: "/dashboard/" } }, [_vm._v("پروفایل")])
     ])
   }
 ]
@@ -62557,7 +62156,6 @@ var render = function() {
             _vm._v(" "),
             _c("header-menu-list", {
               attrs: {
-                profilebasic: _vm.profilebasic,
                 byadreq: _vm.byadreq,
                 selregpro: _vm.selregpro,
                 transactroute: _vm.transactroute,
@@ -62609,7 +62207,6 @@ var render = function() {
             _vm._v(" "),
             _c("header-menu-list", {
               attrs: {
-                profilebasic: _vm.profilebasic,
                 byadreq: _vm.byadreq,
                 selregpro: _vm.selregpro,
                 transactroute: _vm.transactroute,
@@ -65101,6 +64698,8 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_transaction_transactionReport___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_transaction_transactionReport__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_dashboard_seller_guide_vue__ = __webpack_require__(129);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_dashboard_seller_guide_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_dashboard_seller_guide_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_dashboard_page_not_found_vue__ = __webpack_require__(266);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_dashboard_page_not_found_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_dashboard_page_not_found_vue__);
 
 
 
@@ -65119,10 +64718,16 @@ if (false) {
 
 
 
+
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     routes: [{
+        path: '*',
+        name: 'pageNotFound',
+        component: __WEBPACK_IMPORTED_MODULE_14__components_dashboard_page_not_found_vue___default.a
+
+    }, {
         path: '/',
         name: 'profileBasic',
         component: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue___default.a,
@@ -77395,6 +77000,279 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-658de808", module.exports)
+  }
+}
+
+/***/ }),
+/* 266 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(267)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(269)
+/* template */
+var __vue_template__ = __webpack_require__(270)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-3da413bc"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/page-not-found.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3da413bc", Component.options)
+  } else {
+    hotAPI.reload("data-v-3da413bc", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 267 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(268);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("42156f5d", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3da413bc\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./page-not-found.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3da413bc\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./page-not-found.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 268 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n#page_not_found[data-v-3da413bc]{\n    width: 450px;\n    margin: 0 auto;\n    display: block;\n}\n.green-bot[data-v-3da413bc] {\n    margin:0 !important;\n    display: inline-block;\n    background: #28a745;\n    color: #f5f5f5;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border:none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-3da413bc]:hover {\n    color: #fff;\n    background: #11a028;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-3da413bc] {\n    display: inline-block;\n    background: #313a43;\n    color: #f5f5f5;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border:none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-3da413bc]:hover {\n    color: #fff;\n    background: #283743;\n}\n.buttons[data-v-3da413bc]{\n    width: 55%;\n    margin: 0 auto;\n    text-align: center;\n}\n.buttons div[data-v-3da413bc]{\n    width: 50%;\n    padding: 0 15px;\n    float: right;\n}\n.buttons div a[data-v-3da413bc]{\n    width: 100%;\n}\n@media screen and (max-width: 992px) {\n.buttons[data-v-3da413bc]{\n        width: 55%;\n        margin: 0 auto;\n        text-align: center;\n}\n.buttons div[data-v-3da413bc]{\n        width: 100%;\n        padding: 0 15px;\n        float: right;\n}\n.green-bot[data-v-3da413bc] {\n        margin:15px auto !important;\n}\n}\n@media screen and (max-width: 768px) {\n.buttons[data-v-3da413bc] {\n        width: 50%;\n        margin: 0 auto;\n        text-align: center;\n}\n#page_not_found[data-v-3da413bc] {\n        width: 55%;\n}\n}\n@media screen and (max-width: 500px) {\n.buttons[data-v-3da413bc] {\n        width: 70%;\n        margin: 0 auto;\n        text-align: center;\n}\n#page_not_found[data-v-3da413bc] {\n        width: 80%;\n}\n}\n@media screen and (max-width: 380px) {\n.buttons[data-v-3da413bc] {\n        width: 100%;\n        margin: 0 auto;\n        text-align: center;\n}\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 269 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['pagenotfoundimage']
+});
+
+/***/ }),
+/* 270 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container-fluid" }, [
+    _c("div", { staticClass: "container" }, [
+      _c("img", {
+        attrs: { id: "page_not_found", src: _vm.pagenotfoundimage }
+      }),
+      _vm._v(" "),
+      _vm._m(0)
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "buttons" }, [
+      _c("div", [
+        _c("a", { staticClass: "green-bot", attrs: { href: "/" } }, [
+          _vm._v("\n                    صفحه نخست\n                ")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c(
+          "a",
+          {
+            staticClass: "botton-inco",
+            attrs: { href: "javascript:history.back()" }
+          },
+          [_vm._v("\n                    بازگشت به صفحه قبل\n                ")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3da413bc", module.exports)
   }
 }
 

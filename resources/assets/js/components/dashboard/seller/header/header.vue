@@ -72,7 +72,12 @@
 
         width: 70%;
     }
-
+    #main {
+        background: #fff !important;
+    }
+    .profile-menu-header {
+        float: left;
+    }
     .logo_hide {
         display: none;
     }
@@ -297,21 +302,27 @@
 
     /*end style right header*/
 
-
+    /*custom*/
+    .profile-list a {
+        width: 100%;
+        display: inline-block;
+        color: #3c3c3c;
+    }
 
     /*loader*/
 
-    .loader-display{
+    .loader-display {
         position: fixed;
         z-index: 10;
-        top:0;
+        top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0,0,0,0.5);
+        background: rgba(0, 0, 0, 0.5);
         display: block;
     }
-    .main-loader{
+
+    .main-loader {
         position: absolute;
 
         top: 35%;
@@ -326,7 +337,8 @@
 
         font-size: 23px;
     }
-    .main-loader img{
+
+    .main-loader img {
         width: 100px;
 
         background: #fff;
@@ -340,9 +352,10 @@
         margin: 0 auto 22px;
     }
 
-    .loader-wrapper{
-        display:none;
+    .loader-wrapper {
+        display: none;
     }
+
     @media screen and (max-width: 992px) {
         .right-header.desktop-header {
             display: none;
@@ -433,6 +446,7 @@
             font-size: 12px !important;
             padding: 16px 13px !important;
         }
+
         .sub-header {
             bottom: -44px;
         }
@@ -517,7 +531,6 @@
                 </profileinfo>
 
                 <header-menu-list
-                        :profilebasic="profilebasic"
                         :byadreq="byadreq"
                         :selregpro="selregpro"
                         :transactroute="transactroute"
@@ -561,7 +574,6 @@
                 </profileinfo>
 
                 <header-menu-list
-                        :profilebasic="profilebasic"
                         :byadreq="byadreq"
                         :selregpro="selregpro"
                         :transactroute="transactroute"
@@ -606,7 +618,6 @@
             'mytrans',
             'selregpro',
             'byadreq',
-            'profilebasic',
             'logout',
             'routehome',
             'guide'

@@ -17,7 +17,7 @@
        <style>
            body,html{
                 background-image : url("{{asset('images/login_back_03.jpg')}}");
-                height: 100%; 
+                height: 100%;
                 background-position: center;
                 background-repeat: no-repeat;
                 background-size: cover;

@@ -16,11 +16,18 @@ import myTerminatedTransactions from '../components/dashboard/seller/transaction
 import transactionDetail from '../components/dashboard/seller/transaction/transaction.vue';
 import transactionReport from '../components/dashboard/seller/transaction/transactionReport';
 import guide from '../components/dashboard/seller/guide.vue';
+import NotFound from '../components/dashboard/page-not-found.vue';
 Vue.use(routerSeller);
 
 export default new routerSeller({
     routes: [
         {
+            path: '*',
+            name: 'pageNotFound',
+            component: NotFound
+
+        }
+        , {
             path: '/',
             name: 'profileBasic',
             component: profileBasic,
@@ -32,16 +39,19 @@ export default new routerSeller({
             path: '/complementry',
             name: 'compelementry',
             component: compelementry,
-        },{
+        }
+        , {
             path: '/profile_contract',
             name: 'profileContract',
             component: profileContract,
-        },{
+        }
+        , {
             path: '/buyAd-requests',
             name: 'buyAdRequests',
             component: buyAdRequests,
             props: true
-        },{
+        }
+        , {
             path: '/buyAd-request-detail/:id',
             name: 'buyAdRequestsDetail',
             component: buyAdRequestsDetail,
@@ -66,12 +76,12 @@ export default new routerSeller({
             name: 'myTerminatedTransactions',
             component: myTerminatedTransactions,
         }
-        ,{
+        , {
             path: '/transaction-detail/:id',
             name: 'transactionDetail',
             component: transactionDetail,
         }
-        ,{
+        , {
             path: '/transaction-report/:id',
             name: 'transactionReport',
             component: transactionReport,
