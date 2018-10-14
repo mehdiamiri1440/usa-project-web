@@ -491,19 +491,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "eventBus", function() { return eventBus; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dashboard_header_vue__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dashboard_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_dashboard_header_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_request_buyAd_requests_detail_vue__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_request_buyAd_requests_detail_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_request_buyAd_requests_detail_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dashboard_seller_header_header_vue__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dashboard_seller_header_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_dashboard_seller_header_header_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_buyer_header_header_vue__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_buyer_header_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_dashboard_buyer_header_header_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_transaction_transaction_vue__ = __webpack_require__(87);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_transaction_transaction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_transaction_transaction_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__router__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_transaction_transaction_vue__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_transaction_transaction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_transaction_transaction_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__router_seller_route__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__router_buyer_route__ = __webpack_require__(203);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -513,6 +514,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 __webpack_require__(18);
 __webpack_require__(42);
+__webpack_require__(148);
 
 window.Vue = __webpack_require__(13);
 
@@ -521,6 +523,7 @@ window.Vue = __webpack_require__(13);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
 
 
 
@@ -563,18 +566,16 @@ var eventBus = new Vue();
 
 var app = new Vue({
     el: '#app',
-    router: __WEBPACK_IMPORTED_MODULE_7__router__["a" /* default */],
+    router: __WEBPACK_IMPORTED_MODULE_7__router_seller_route__["a" /* default */],
+    routerB: __WEBPACK_IMPORTED_MODULE_8__router_buyer_route__["a" /* default */],
     components: {
         profileBasic: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue___default.a,
         loginCom: __WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue___default.a,
-        headerDash: __WEBPACK_IMPORTED_MODULE_1__components_dashboard_header_vue___default.a,
-        // buyAdRequest,
-        buyAdRequestDetail: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_request_buyAd_requests_detail_vue___default.a,
+        headerDashSeller: __WEBPACK_IMPORTED_MODULE_1__components_dashboard_seller_header_header_vue___default.a,
+        headerDashBuyer: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_buyer_header_header_vue___default.a,
         productBasic: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_product_product_basic_vue___default.a,
         mySellOffers: __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_request_my_sell_offers_vue___default.a,
-        // myTransactions,
-        // myTerminatedTransactions,
-        transitionSeller: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_transaction_transaction_vue___default.a
+        transitionSeller: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_transaction_transaction_vue___default.a
     }
 });
 
@@ -44232,97 +44233,9 @@ if (false) {
 }
 
 /***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(51)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(54)
-/* template */
-var __vue_template__ = __webpack_require__(71)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/dashboard/header.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3def6702", Component.options)
-  } else {
-    hotAPI.reload("data-v-3def6702", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(52);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("0f03d974", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3def6702\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3def6702\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    vertical-align: baseline;\n}\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, menu, nav, section {\n    display: block;\n}\nbody {\n    line-height: 1.1;\n    font-family: IRANSans, sans-serif;\n    font-size: 14px;\n}\nol, ul {\n    list-style: none;\n}\nblockquote, q {\n    quotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n    content: none;\n}\ntable {\n    border-collapse: collapse;\n    border-spacing: 0;\n}\nimg, svg {\n    width: 100%;\n}\na, a:hover, a:visited, a:focus, a:active {\n    text-decoration: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\nth, td {\n    padding: 7px;\n    text-align: right;\n}\n\n/*start style right header*/\n.logo {\n    height: 64px;\n\n    display: block;\n\n    float: right;\n\n    width: 70%;\n}\n.logo_hide {\n    display: none;\n}\n.logo a {\n    display: inline-block;\n    margin-top: -11px;\n    height: 75px;\n    padding: 0 10px;\n}\n.right-header {\n    width: 250px;\n    right: 0;\n    bottom: 0;\n    position: fixed;\n    top: 0;\n    overflow: hidden;\n    z-index: 9;\n}\n.little_header {\n    width: 80px;\n}\n.right-header.mobile-header {\n    display: none;\n    -webkit-box-shadow: 0 0 20px;\n            box-shadow: 0 0 20px;\n}\n.right-header > header {\n    overflow: hidden;\n    background: #fff;\n}\n.clouse_menu, .clouse_menu_mob {\n    float: left;\n    width: 30%;\n    border: none;\n    background: none;\n    font-size: 35px;\n    top: 0;\n    position: relative;\n    padding: 11px;\n}\n.clouse_menu_mob {\n    display: none;\n}\n.main-right-header {\n    background: #313a43;\n    height: 100%;\n    text-align: right;\n    color: #fff;\n    position: relative;\n}\n.show-header button {\n    float: right;\n    border: none;\n    background: none;\n    font-size: 25px;\n    padding: 19px 30px 19px 24px;\n    display: none;\n}\n.profile {\n    padding: 20px 20px 10px;\n    border-bottom: 2px solid #2e353e;\n}\n.profile-img {\n    overflow: hidden;\n    border-radius: 50%;\n    height: 85px;\n    width: 85px;\n    margin: 0 auto;\n    margin-left: 10px;\n    border: 2px solid #fff;\n    float: right;\n}\n.profile-img img {\n    height: 100%;\n}\n.profile-content {\n    float: right;\n    padding-top: 15px;\n}\n.profile-name {\n    margin: 8px 0;\n    font-size: 17px;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.header-menu a {\n    color: #b1b1b1;\n    padding: 10px 20px;\n    display: inline-block;\n    position: relative;\n    width: 100%;\n}\n.header-menu {\n    padding: 10px 0;\n}\n.header-menu a:hover {\n    color: #fff;\n    background: #637484;\n}\n.header-menu a:hover::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu li.active a {\n    color: #fff;\n    background: #637484;\n}\n.header-menu li.active a:before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.copy-right {\n    text-align: center;\n    font-size: 12px;\n    font-weight: 200;\n    line-height: 1.3em;\n    padding: 20px;\n    position: absolute;\n    bottom: 76px;\n}\nlabel {\n    display: block;\n    margin: 9px auto;\n}\ninput[type=\"text\"], select, input[type=\"button\"], textarea {\n    width: 100% !important;\n}\ninput[type=\"text\"], select, textarea {\n    background: #eff3f6;\n    border: 1px solid #cfcfcf;\n    border-radius: 3px;\n    width: 100% !important;\n}\ninput[type=\"text\"], textarea {\n    padding: 13px 15px;\n    width: 100% !important;\n}\nselect {\n    padding: 7px 15px;\n}\n.image-header-profile img {\n    height: 100%;\n}\n.right-menu-header {\n    position: relative;\n}\n.right-menu-header li ul a {\n    font-size: 14px;\n    width: 100%;\n    display: inline-block;\n}\n.right-menu-header li ul li {\n\n    margin: 5px;\n}\n.icon-header-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    right: 75px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n\n/*end style right header*/\n\n\n\n/*loader*/\n.loader-display{\n    position: fixed;\n    z-index: 10;\n    top:0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0,0,0,0.5);\n    display: block;\n}\n.main-loader{\n    position: absolute;\n\n    top: 35%;\n\n    text-align: center;\n\n    display: block;\n\n    width: 100%;\n\n    color: #fff;\n\n    font-size: 23px;\n}\n.main-loader img{\n    width: 100px;\n\n    background: #fff;\n\n    border-radius: 50px;\n\n    height: 100px;\n\n    display: inline-block;\n\n    margin: 0 auto 22px;\n}\n.loader-wrapper{\n    display:none;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header {\n        display: none;\n}\n.right-header.mobile-header {\n        display: block;\n        right: -300px;\n}\n.main-header, .little-main-header {\n        right: 0 !important;\n}\n#main, #main.little-main {\n        margin-right: 0 !important;\n}\n.post-contents-table {\n        width: 100%;\n}\n.copy-right {\n        display: none;\n}\n.clouse_menu {\n        display: none;\n}\n.clouse_menu_mob {\n        display: block;\n}\n.show-header button {\n        display: block;\n}\n.kind_user > div, .kind_activity > div {\n        float: none;\n}\n.img-profile .submit {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post, .contents-post {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.name-header-profile {\n        display: none;\n}\n.profile-menu-header {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a {\n        font-size: 12px !important;\n        padding: 16px 13px !important;\n}\n.sub-header {\n        bottom: -44px;\n}\n}\n\n/*end loader*/\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 50 */,
+/* 51 */,
+/* 52 */,
 /* 53 */
 /***/ (function(module, exports) {
 
@@ -44356,2195 +44269,43 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 54 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sub_com_profile_info_vue__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sub_com_profile_info_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__sub_com_profile_info_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    components: {
-        profileinfo: __WEBPACK_IMPORTED_MODULE_1__sub_com_profile_info_vue___default.a,
-        headerMenuList: __WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue___default.a,
-        headerTop: __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue___default.a
-    },
-    props: ['defultimg', 'logo', 'loading', 'storage', 'transactroute', 'mytrans', 'selregpro', 'byadreq', 'profilebasic', 'logout', 'routehome', 'guide'],
-    data: function data() {
-        return {
-            currentUser: {
-                profile: {
-                    is_company: '',
-                    company_name: '',
-                    company_register_code: '',
-                    address: '',
-                    public_phone: '',
-                    profile_photo: this.storage + '',
-                    postal_code: '',
-                    shaba_code: ''
-                },
-                user_info: ''
-            },
-            profileBasicFields: ['is_company', 'company_name', 'company_register_code', 'public_phone', 'address', 'postal_code', 'shaba_code'],
-            profilePhoto: '',
-            errors: '',
-            popUpMsg: '',
-            submiting: false
-
-        };
-    },
-    methods: {
-
-        init: function init() {
-            var _this = this;
-
-            this.isLoaded = true;
-            axios.post('/user/profile_info').then(function (response) {
-                return _this.currentUser = response.data;
-            });
-        },
-        RegisterBasicProfileInfo: function RegisterBasicProfileInfo() {
-            this.submiting = true;
-            this.errors = '';
-            var self = this;
-
-            var data = new FormData();
-
-            for (var i = 0, cnt = this.profileBasicFields.length; i < cnt; i++) {
-                if (this.currentUser.profile[this.profileBasicFields[i]] != null) {
-                    data.append(this.profileBasicFields[i], this.toLatinNumbers(this.currentUser.profile[this.profileBasicFields[i]]));
-                }
-            }
-
-            var profilePhoto = this.$refs.profilePhoto.files[0];
-            if (profilePhoto) {
-                data.append('profile_photo', profilePhoto);
-            }
-
-            axios.post('/user/profile_modification', data).then(function (response) {
-                if (response.status == 200) {
-                    self.submiting = false;
-                    self.popUpMsg = 'تغییرات با موفقیت اعمال شد';
-
-                    $('#myModal').modal('show');
-                }
-                self.submiting = false;
-            }).catch(function (err) {
-                self.errors = '';
-                self.errors = err.response.data.errors;
-                self.submiting = false;
-            });
-        },
-        toLatinNumbers: function toLatinNumbers(num) {
-            if (num == null) {
-                return null;
-            }
-            var numDic = {
-                '۰': '0',
-                '۱': '1',
-                '۲': '2',
-                '۳': '3',
-                '۴': '4',
-                '۵': '5',
-                '۶': '6',
-                '۷': '7',
-                '۸': '8',
-                '۹': '9'
-            };
-
-            return num.toString().replace(/[۰-۹]/g, function (w) {
-                return numDic[w];
-            });
-        },
-        toggle_header: function toggle_header() {
-            var menu_but = $(".clouse_menu");
-            var menu_but_icon = $(".clouse_menu i");
-            var profile = $(".profile");
-            var header_menu = $(".header-menu span");
-            var header_menu_a = $(".header-menu a");
-            var logo = $(".logo");
-            var copy_right = $(".copy-right");
-            var right_header_desk = $(".right-header.desktop-header");
-            var little_main_header = $(".main-header");
-            var main = $("#main");
-            var next_move = "shrink";
-            menu_but.click(function () {
-                if (next_move == "expand") {
-                    $(this).css({
-                        width: "30%"
-                    });
-                    menu_but_icon.addClass('fa-angle-left', 200).removeClass('fa-angle-right');
-                    // menu_but_icon.switchClass("fa-angle-left"," fa-angle-right",200);
-                    profile.fadeIn();
-                    copy_right.css('display', 'block');
-                    logo.fadeIn();
-                    header_menu.css('display', 'inline');
-                    header_menu_a.css({
-                        "text-align": "right"
-                    });
-                    right_header_desk.removeClass("little_header", 200);
-                    little_main_header.removeClass("little-main-header", 200);
-                    main.removeClass("little-main", 200);
-                    next_move = "shrink";
-                } else {
-                    $(this).css({
-                        width: "100%"
-                    });
-                    menu_but_icon.addClass('fa-angle-right', 200).removeClass('fa-angle-left', 200);
-                    // menu_but_icon.switchClass("fa-angle-right"," fa-angle-left",200);
-                    profile.css('display', 'none');
-                    header_menu.css('display', 'none');
-                    copy_right.css('display', 'none');
-                    logo.css('display', 'none');
-                    header_menu_a.css({
-                        "text-align": "center"
-                    });
-                    right_header_desk.addClass("little_header", 200);
-                    little_main_header.addClass("little-main-header", 200);
-                    main.addClass("little-main", 200);
-                    next_move = "expand";
-                }
-            });
-        },
-        toggle_show_header: function toggle_show_header() {
-            var el = $('.show-header button');
-            var el_clouse = $('.clouse_menu_mob');
-            var flag = true;
-            var right_header = $(".right-header.mobile-header");
-            var back = $(".background_mob_sec");
-            el.on('click', function () {
-                if (flag == true) {
-                    console.log('flag = true');
-                    right_header.animate({
-                        right: '0'
-                    }, 300);
-                    back.fadeIn();
-
-                    flag = false;
-                } else {
-                    right_header.animate({
-                        right: '-300px'
-                    }, 300);
-
-                    flag = true;
-                }
-            });
-            el_clouse.on('click', function () {
-                if (flag == true) {
-                    right_header.animate({
-                        right: '0'
-                    }, 300);
-                    flag = false;
-                } else {
-                    right_header.animate({
-                        right: '-300px'
-
-                    }, 300);
-                    back.fadeOut();
-                    flag = true;
-                }
-            });
-        }
-    },
-    mounted: function mounted() {
-        this.init();
-        this.toggle_header();
-        this.toggle_show_header();
-    },
-    created: function created() {
-        var _this2 = this;
-
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('submitingEvent', function (event) {
-            _this2.submiting = event;
-        });
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('submitSuccess', function (event) {
-            _this2.popUpMsg = event;
-        });
-    }
-});
-
-/***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(56)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(58)
-/* template */
-var __vue_template__ = __webpack_require__(59)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/dashboard/sub-com/profile_info.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7699aa9e", Component.options)
-  } else {
-    hotAPI.reload("data-v-7699aa9e", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(57);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("72ea5794", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7699aa9e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./profile_info.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7699aa9e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./profile_info.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 57 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.green-bot {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot:focus,.gray-bot:focus {\n    color: #fff;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 58 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['photoLink', 'storage', 'def', 'username', 'usercity', 'userprof']
-
-});
-
-/***/ }),
-/* 59 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "profile" }, [
-      _vm.photoLink != null
-        ? _c("div", { staticClass: "profile-img" }, [
-            _c("img", { attrs: { src: _vm.storage + "/" + _vm.photoLink } })
-          ])
-        : _c("div", { staticClass: "profile-img" }, [
-            _c("img", { attrs: { src: _vm.def } })
-          ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profile-content" }, [
-        _c("div", { staticClass: "profile-name" }, [
-          _vm._v("\n                " + _vm._s(_vm.username) + "\n            ")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "profile-city" }, [
-          _vm._v("\n                " + _vm._s(_vm.usercity) + "\n            ")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("a", { staticClass: "green-bot", attrs: { href: _vm.userprof } }, [
-        _vm._v("\n            نمایش پروفایل من\n        ")
-      ])
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7699aa9e", module.exports)
-  }
-}
-
-/***/ }),
-/* 60 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(61)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(63)
-/* template */
-var __vue_template__ = __webpack_require__(64)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/dashboard/sub-com/header-menu-list.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-228697b9", Component.options)
-  } else {
-    hotAPI.reload("data-v-228697b9", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 61 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(62);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("6ccb458e", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-228697b9\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header-menu-list.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-228697b9\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header-menu-list.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 62 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.sub-header a.router-link-exact-active {\n    color: #313942;\n}\n.sub-header a.router-link-exact-active::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.header-menu a.router-link-exact-active::before,a.active::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu  a.router-link-exact-active,a.active {\n    color: #fff;\n    background: #637484;\n}\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 63 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['profilebasic', 'byadreq', 'selregpro', 'transactroute', 'mytrans', 'guide'],
-    data: function data() {
-        return {
-            active_el: 0
-        };
-    },
-
-    methods: {
-        /* activate:function(el){
-             this.active_el = el;
-         }*/
-        subIsActive: function subIsActive(input) {
-            var _this = this;
-
-            var paths = Array.isArray(input) ? input : [input];
-            return paths.some(function (path) {
-                return _this.$route.path.indexOf(path) === 0; // current path starts with this path string
-            });
-        }
-    }, watch: {
-        $route: function $route() {
-            if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract')) {
-                this.active_el = 1;
-            } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests')) {
-                this.active_el = 2;
-            } else if (this.subIsActive('/register-product')) {
-                this.active_el = 3;
-            } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')) {
-                this.active_el = 4;
-            } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/*')) {
-                this.active_el = 5;
-            } else if (this.subIsActive('/guide')) {
-                this.active_el = 6;
-            } else {
-                this.active_el = 1;
-            }
-            console.log(this.active_el);
-        }
-    }, mounted: function mounted() {
-        if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract') || this.subIsActive('/*')) {
-            this.active_el = 1;
-        } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests')) {
-            this.active_el = 2;
-        } else if (this.subIsActive('/register-product')) {
-            this.active_el = 3;
-        } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')) {
-            this.active_el = 4;
-        } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/*')) {
-            this.active_el = 5;
-        } else if (this.subIsActive('/guide')) {
-            this.active_el = 6;
-        }
-    },
-    created: function created() {
-        var _this2 = this;
-
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('active', function (event) {
-            _this2.active_el = event;
-        });
-    }
-});
-
-/***/ }),
-/* 64 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "header-menu" }, [
-      _c("ul", { staticClass: "list-unstyled" }, [
-        _c(
-          "li",
-          { staticClass: "list-item" },
-          [
-            _c(
-              "router-link",
-              {
-                class: { active: this.active_el === 1 },
-                attrs: { to: { name: "profileBasic" } }
-              },
-              [_c("span", [_vm._v("ویرایش پروفایل")])]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          { staticClass: "list-item  " },
-          [
-            _c(
-              "router-link",
-              {
-                class: { active: this.active_el === 2 },
-                attrs: { to: { name: "buyAdRequests" } }
-              },
-              [_c("span", [_vm._v("درخواست ها")])]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          { staticClass: "list-item  " },
-          [
-            _c(
-              "router-link",
-              {
-                class: { active: this.active_el === 3 },
-                attrs: { to: { name: "registerProduct" } }
-              },
-              [_c("span", [_vm._v("ثبت محصول ")])]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          { staticClass: "list-item  " },
-          [
-            _c(
-              "router-link",
-              {
-                class: { active: this.active_el === 4 },
-                attrs: { to: { name: "myTransactions" } }
-              },
-              [_c("span", [_vm._v("تراکنش های جاری")])]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          { staticClass: "list-item  " },
-          [
-            _c(
-              "router-link",
-              {
-                class: { active: this.active_el === 5 },
-                attrs: { to: { name: "myTerminatedTransactions" } }
-              },
-              [_c("span", [_vm._v("تراکنش های انجام شده")])]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          { staticClass: "list-item  " },
-          [
-            _c(
-              "router-link",
-              {
-                class: { active: this.active_el === 6 },
-                attrs: { to: { name: "guide" } }
-              },
-              [_c("span", [_vm._v("راهنما")])]
-            )
-          ],
-          1
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _vm._m(0)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "copy-right" }, [
-      _c("p", [
-        _vm._v(
-          "\n            تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.\n        "
-        )
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-228697b9", module.exports)
-  }
-}
-
-/***/ }),
-/* 65 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(144)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(66)
-/* template */
-var __vue_template__ = __webpack_require__(70)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/dashboard/sub-com/header-top.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-349d7002", Component.options)
-  } else {
-    hotAPI.reload("data-v-349d7002", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 66 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue__ = __webpack_require__(67);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['photoLink', 'profilebasic', 'storage', 'def', 'username', 'out', 'routeHome'],
-    components: {
-        subMenu: __WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue___default.a
-    }
-});
-
-/***/ }),
-/* 67 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(146)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(68)
-/* template */
-var __vue_template__ = __webpack_require__(69)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/dashboard/sub-com/sub-menu/sub-menu.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-57843a52", Component.options)
-  } else {
-    hotAPI.reload("data-v-57843a52", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 68 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            items: []
-        };
-    },
-    created: function created() {
-        var _this = this;
-
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('subHeader', function (event) {
-            _this.items = event;
-        });
-    }
-});
-
-/***/ }),
-/* 69 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "sub-header" }, [
-    _c(
-      "ul",
-      { staticClass: "list-inline" },
-      _vm._l(_vm.items, function(item) {
-        return _c(
-          "li",
-          { staticClass: "list-item", class: item.active },
-          [
-            _c("router-link", { attrs: { to: { name: item.url } } }, [
-              _vm._v(
-                "\n                " + _vm._s(item.message) + "\n            "
-              )
-            ])
-          ],
-          1
-        )
-      })
-    )
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-57843a52", module.exports)
-  }
-}
-
-/***/ }),
-/* 70 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "header",
-      { staticClass: "main-header", attrs: { id: "header" } },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _c("div", { staticClass: "profile-menu-header" }, [
-          _c("a", { attrs: { href: "#", onclick: "dropdown()" } }, [
-            _vm.photoLink != null
-              ? _c("div", { staticClass: "image-header-profile" }, [
-                  _c("img", {
-                    attrs: { src: _vm.storage + "/" + _vm.photoLink }
-                  })
-                ])
-              : _c("div", { staticClass: "image-header-profile" }, [
-                  _c("img", { attrs: { src: _vm.def } })
-                ]),
-            _vm._v(" "),
-            _c("i", {
-              staticClass: "fa fa-angle-down",
-              attrs: { "aria-hidden": "true" }
-            }),
-            _vm._v(
-              "\n                " + _vm._s(_vm.username) + "\n            "
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "profile-list" }, [
-            _c("ul", { staticClass: "list-unstyled" }, [
-              _c("li", { staticClass: "list-item" }, [
-                _c("a", { attrs: { href: _vm.profilebasic } }, [
-                  _vm._v("پروفایل")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "list-item" }, [
-                _c("a", { attrs: { href: _vm.out } }, [_vm._v("خروج")])
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "right-menu-header" }, [
-          _c("ul", { staticClass: "list-inline" }, [
-            _c("li", [
-              _c("a", { attrs: { href: _vm.routeHome } }, [
-                _c("i", {
-                  staticClass: "fa fa-home",
-                  attrs: { "aria-hidden": "true" }
-                })
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("subMenu")
-      ],
-      1
-    )
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "show-header" }, [
-      _c("button", { staticClass: "fa fa-angle-left" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content-header" }, [
-      _c("span", { staticClass: "font-big" }, [_vm._v("اینکوباک  ")]),
-      _vm._v(" | "),
-      _c("span", [_vm._v(" بازارگاه آنلاین کشاورزی")])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-349d7002", module.exports)
-  }
-}
-
-/***/ }),
-/* 71 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("div", { staticClass: "container" }, [
-        _c(
-          "div",
-          {
-            ref: "myModal",
-            staticClass: "modal fade",
-            attrs: {
-              id: "myModal",
-              tabindex: "-1",
-              role: "dialog",
-              "aria-labelledby": "myModalLabel",
-              "aria-hidden": "true"
-            }
-          },
-          [
-            _c("div", { staticClass: "modal-dialog" }, [
-              _c("div", { staticClass: "modal-content" }, [
-                _c("div", { staticClass: "main_popup_content" }, [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "main_par" }, [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(_vm.popUpMsg) +
-                        "\n                        "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn green-bot ",
-                      attrs: { "data-dismiss": "modal" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                            متوجه شدم\n                        "
-                      )
-                    ]
-                  )
-                ])
-              ])
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "container" }, [
-        _c(
-          "div",
-          {
-            ref: "myModal",
-            staticClass: "modal fade",
-            attrs: {
-              id: "myModal-1",
-              tabindex: "-1",
-              role: "dialog",
-              "aria-labelledby": "myModalLabel",
-              "aria-hidden": "true"
-            }
-          },
-          [_vm._m(1)]
-        )
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          class: {
-            "loader-wrapper": !_vm.submiting,
-            "loader-display": _vm.submiting
-          }
-        },
-        [
-          _c("div", { staticClass: "main-loader" }, [
-            _c("img", { attrs: { src: _vm.loading } }),
-            _vm._v(" "),
-            _c("p", { attrs: { dir: "rtl" } }, [_vm._v("کمی صبر کنید...")])
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("section", { staticClass: "right-header mobile-header" }, [
-        _c("header", { staticClass: "header-right-header" }, [
-          _vm._m(2),
-          _vm._v(" "),
-          _vm._m(3),
-          _vm._v(" "),
-          _c("h1", { staticClass: "logo" }, [
-            _c("a", { attrs: { href: "/" } }, [
-              _c("img", { attrs: { src: _vm.logo, alt: "incoboc" } })
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "section",
-          { staticClass: "main-right-header" },
-          [
-            _c("profileinfo", {
-              attrs: {
-                photoLink: _vm.currentUser.profile.profile_photo,
-                storage: _vm.storage,
-                def: _vm.defultimg,
-                username:
-                  _vm.currentUser.user_info.first_name +
-                  " " +
-                  _vm.currentUser.user_info.last_name,
-                usercity:
-                  _vm.currentUser.user_info.province +
-                  " - " +
-                  _vm.currentUser.user_info.city,
-                userprof: _vm.currentUser.user_info.user_name
-              }
-            }),
-            _vm._v(" "),
-            _c("header-menu-list", {
-              attrs: {
-                profilebasic: _vm.profilebasic,
-                byadreq: _vm.byadreq,
-                selregpro: _vm.selregpro,
-                transactroute: _vm.transactroute,
-                mytrans: _vm.mytrans
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "copy-right" })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "background_mob_sec" })
-      ]),
-      _vm._v(" "),
-      _c("section", { staticClass: "right-header desktop-header" }, [
-        _c("header", { staticClass: "header-right-header" }, [
-          _vm._m(4),
-          _vm._v(" "),
-          _vm._m(5),
-          _vm._v(" "),
-          _c("h1", { staticClass: "logo" }, [
-            _c("a", { attrs: { href: "/" } }, [
-              _c("img", { attrs: { src: _vm.logo, alt: "incoboc" } })
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "section",
-          { staticClass: "main-right-header" },
-          [
-            _c("profileinfo", {
-              attrs: {
-                photoLink: _vm.currentUser.profile.profile_photo,
-                storage: _vm.storage,
-                def: _vm.defultimg,
-                username:
-                  _vm.currentUser.user_info.first_name +
-                  " " +
-                  _vm.currentUser.user_info.last_name,
-                usercity:
-                  _vm.currentUser.user_info.province +
-                  " - " +
-                  _vm.currentUser.user_info.city,
-                userprof: _vm.currentUser.user_info.user_name
-              }
-            }),
-            _vm._v(" "),
-            _c("header-menu-list", {
-              attrs: {
-                profilebasic: _vm.profilebasic,
-                byadreq: _vm.byadreq,
-                selregpro: _vm.selregpro,
-                transactroute: _vm.transactroute,
-                mytrans: _vm.mytrans,
-                guide: _vm.guide
-              }
-            })
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("headerTop", {
-        attrs: {
-          photoLink: _vm.currentUser.profile.profile_photo,
-          storage: _vm.storage,
-          def: _vm.defultimg,
-          username:
-            _vm.currentUser.user_info.first_name +
-            " " +
-            _vm.currentUser.user_info.last_name,
-          out: _vm.logout,
-          routeHome: _vm.routehome,
-          profilebasic: _vm.profilebasic
-        }
-      })
-    ],
-    1
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "#", "data-dismiss": "modal" } }, [
-      _c("i", { staticClass: "fa fa-close" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-dialog" }, [
-      _c("div", { staticClass: "modal-content" }, [
-        _c("div", { staticClass: "main_popup_content" }, [
-          _c("a", { attrs: { href: "#", "data-dismiss": "modal" } }, [
-            _c("i", { staticClass: "fa fa-close" })
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "main_par", attrs: { id: "popUpMsg" } }, [
-            _vm._v(
-              "\n                            ابتدا پروفایل خود را کامل کنید.سپس منتظر تایید اطلاعات خود از سمت کارشناسان اینکوباک\n                            باشید.\n                        "
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn green-bot ",
-              attrs: { "data-dismiss": "modal" }
-            },
-            [
-              _vm._v(
-                "\n                            متوجه شدم\n                        "
-              )
-            ]
-          )
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "clouse_menu_mob" }, [
-      _c("i", { staticClass: "fa fa-angle-right" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "clouse_menu" }, [
-      _c("i", { staticClass: "fa fa-angle-right" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "clouse_menu_mob" }, [
-      _c("i", { staticClass: "fa fa-angle-right" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "clouse_menu" }, [
-      _c("i", { staticClass: "fa fa-angle-right" })
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-3def6702", module.exports)
-  }
-}
-
-/***/ }),
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */,
 /* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(200)
+}
 var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(73)
 /* template */
-var __vue_template__ = __webpack_require__(74)
+var __vue_template__ = __webpack_require__(202)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-1944ffd8"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -46582,6 +44343,422 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -46710,7 +44887,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['defimgitem'],
     data: function data() {
         return {
             currentUser: {
@@ -46728,7 +44909,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             sellOfferFields: ['price', 'deliver_at', 'description'],
             sellOfferFiles: [],
             errors: [],
-            popUpMsg: ''
+            popUpMsg: '',
+            items: [{
+                message: 'درخواست من ',
+                url: '#'
+            }]
         };
     },
     methods: {
@@ -46803,81 +44988,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.init();
+        kamaDatepicker('first-date-id', { forceFarsiDigits: true, markHolidays: true, gotoToday: true, markToday: true });
+        kamaDatepicker('end-date-id', { forceFarsiDigits: true, markHolidays: true, gotoToday: true, markToday: true });
+        $(".main-image").magnificPopup({
+            delegate: 'a',
+            type: 'image'
+        });
+        $('input[type="file"]').imageuploadify();
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
     }
 });
 
 /***/ }),
-/* 74 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("section", { staticClass: "main-content col-xs-12" }, [
-        _c("div", { staticClass: "contents col-xs-12" }, [
-          _c("div", { staticClass: "info-contents col-xs-12" }, [
-            _c("div", { staticClass: "top-contentas  col-xs-12" }, [
-              _c("div", { staticClass: "main-article-content col-md-7" }, [
-                _c("br"),
-                _vm._v(" "),
-                _c("table", { staticClass: "table table-striped" }, [
-                  _c("tr", [
-                    _c("td", [
-                      _vm._v("قیمت واحد"),
-                      _c("span", {}, [_vm._v("(هر کیلو به تومان)")]),
-                      _vm._v(" :")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [_c("td", [_vm._v(" محل تحویل کالا:")])]),
-                  _vm._v(" "),
-                  _c("tr", [_c("td", [_vm._v(" میزان نیازمندی")])]),
-                  _vm._v(" "),
-                  _c("tr", [_c("td", [_vm._v(" زمان ثبت درخواست:")])])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "image-article-content col-md-5" }, [
-                _c("div", { staticClass: "main-image col-xs-12" }),
-                _vm._v(" "),
-                _c("div", { staticClass: "owl-carousel col-xs-12" })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "bottom-contents  col-xs-12" }, [
-              _c("form", [
-                _c("label", { staticClass: "header-lable" }, [
-                  _vm._v(
-                    "تمامی موارد خواسته شده را وارد کرده و برای خریدار ارسال\n                            نمایید."
-                  )
-                ])
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1944ffd8", module.exports)
-  }
-}
-
-/***/ }),
+/* 74 */,
 /* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -47263,7 +45386,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                         self.popUpMsg = 'محصول شما با موفقیت ثبت شد';
                         $('#myModal').modal('show');
-                        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitSuccess', this.popUpMsg);
+                        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitSuccess', self.popUpMsg);
                         __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', false);
                         setTimeout(function () {
                             location.reload(true);
@@ -49542,6 +47665,10 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(249)
+}
 var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(88)
@@ -49550,7 +47677,7 @@ var __vue_template__ = __webpack_require__(89)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -49590,6 +47717,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
 //
 //
 //
@@ -49842,33 +47970,489 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+
     props: ['trans', 'loading'],
     data: function data() {
         return {
             currentStep: 1,
             pageStep: 1,
-            transactionId: '',
+            transactionId: this.$route.params.id,
             popUpMsg: '',
             transactionInfo: '',
             msg: '',
             step1: {},
             step2: {},
             step3: {},
-            step4: {}
+            step4: {},
+            submiting: false,
+            items: [{
+                message: 'لیست تراکنش ها',
+                url: 'transactionDetail'
+            }]
 
         };
     },
     methods: {
-        init: function init() {
 
+        init: function init() {
             var self = this;
-            self.transactionId = self.trans;
+            var transaction_id = this.$route.params.id;
+            this.transactionId = transaction_id;
 
             axios.post('/dashboard/get_transaction_info', {
-                transaction_id: self.trans
+                transaction_id: transaction_id
             }).then(function (response) {
                 self.currentStep = response.data.step;
                 self.transactionInfo = response.data.transaction_info;
@@ -49884,36 +48468,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post('/action', {
                 transaction_id: self.transactionId,
-                action_id: 3
+                action_id: 2
             }).then(function (response) {
                 self.init();
-            });
-        },
-        payPrepayment: function payPrepayment() {
-            var self = this;
-
-            axios.post('/action', {
-                transaction_id: self.transactionId,
-                action_id: 5
-            }).then(function (response) {
-                window.location.href = '/payment';
-            });
-        },
-        finalPayment: function finalPayment() {
-            var self = this;
-
-            axios.post('/action', {
-                transaction_id: self.transactionId,
-                action_id: 7
-            }).then(function (response) {
-                window.location.href = '/payment';
             });
         },
         goToStep: function goToStep(step) {
             this.currentStep = step;
         },
         goToNextPage: function goToNextPage() {
-            if (this.pageStep < 3) {
+            if (this.pageStep < 11) {
                 this.pageStep++;
             }
         },
@@ -49926,6 +48490,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
         this.init();
     }
 });
@@ -49943,131 +48508,735 @@ var render = function() {
       ? _c("section", { staticClass: "main-content col-xs-12" }, [
           _vm.currentStep == 1
             ? _c("div", { attrs: { id: "step1" } }, [
-                _c("nav", { staticClass: "main-content-nav col-xs-12" }, [
-                  _c("ul", { staticClass: "list-inline" }, [
-                    _vm._m(0),
-                    _vm._v(" "),
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _vm._m(2),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-item active" }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.goToStep(1)
-                            }
-                          }
-                        },
-                        [_vm._v("تایید مفاد قرارداد ")]
-                      )
-                    ])
-                  ])
-                ]),
+                _vm._m(0),
                 _vm._v(" "),
                 _vm.msg == ""
-                  ? _c("div", { staticClass: "contents col-xs-12" }, [
-                      _c("div", { staticClass: "content-show" }, [
-                        _c("div", { staticClass: "buttons " }, [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "main_buttons col-xs-12 col-sm-8 col-md-9"
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "default_btn",
-                                  attrs: { href: "#" },
-                                  on: {
-                                    click: function($event) {
-                                      $event.preventDefault()
-                                      _vm.goToNextPage()
+                  ? _c("div", [
+                      _c("div", { staticClass: "contents col-xs-12" }, [
+                        _c("div", { staticClass: "content-show" }, [
+                          _c("div", { staticClass: "buttons " }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "main_buttons col-xs-12 col-sm-8 col-md-9"
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "default_btn",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        _vm.goToNextPage()
+                                      }
                                     }
-                                  }
-                                },
-                                [_vm._v("صفحه بعد")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "default_btn",
-                                  attrs: { href: "#" },
-                                  on: {
-                                    click: function($event) {
-                                      $event.preventDefault()
-                                      _vm.goToPrePage()
+                                  },
+                                  [_vm._v("صفحه بعد")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "default_btn",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        _vm.goToPrePage()
+                                      }
                                     }
-                                  }
-                                },
-                                [_vm._v("صفحه قبل")]
-                              )
-                            ]
-                          ),
+                                  },
+                                  [_vm._v("صفحه قبل")]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "continue_but col-xs-12 col-sm-4 col-md-3"
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "green-bot",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.confirmContract($event)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("تایید قرارداد")]
+                                )
+                              ]
+                            )
+                          ]),
                           _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "continue_but col-xs-12 col-sm-4 col-md-3"
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "green-bot",
-                                  attrs: { href: "#" },
-                                  on: {
-                                    click: function($event) {
-                                      $event.preventDefault()
-                                      return _vm.confirmContract($event)
-                                    }
-                                  }
-                                },
-                                [_vm._v("تایید قرارداد")]
-                              )
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("h2", [_vm._v("عنوان قرارداد")]),
-                        _vm._v(" "),
-                        _vm.pageStep == 1
-                          ? _c("p", { attrs: { id: "step1S1" } }, [
-                              _vm._v(
-                                "\n                        شرح: این مبلغ صرفا جهت انجام به موقع آماده سازی محصولات از فروشنده دریافت شده و پس از پایان فرایند\n                        خرید و تایید نهایی خریدار به فروشنده پرداخت خواهد شد. شرح: این مبلغ صرفا جهت انجام به موقع آماده\n                        سازی محصولات از فروشنده دریافت شده و پس از پایان فرایند خرید و تایید نهایی خرasdsafsdfdsvdsvsdvdاهد شد. شرح: این مبلغ صرفا جهت انجام به\n                        موقع آماده سازی محصولات از فروشنده دریافت شده و پس از پایان فرایند خرید و تایید نهایی خریدار به\n                        فروشنده پرداخت خواهد شد.\n                    "
-                              )
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.pageStep == 2
-                          ? _c("p", { attrs: { id: "step1S2" } }, [
-                              _vm._v(
-                                "\n                        شرح: این مبلغ صرفا جهت انجام به موقع آماده سازی محصولات از فروشنده دریافت شده و پس از پایان فرایند\n                        خرید و تایید نهایی خریدار به فروشنده پرداخت خواهد شد. شرح: این مبلغ صرفا جهت انجام به موقع آماده\n                        سازی محصولات از فروشنده دریافت شده و پس از پایان فرایند خرید و تایید نهایی خریدار به فروشنده پرداخت\n                        خواهد شد. شرح: این مبلغ صرفا جهت انجام به موقع آماده سازی محصولات از فروشنده دریافت شده و پس از\n                        پایان فرایند خرید و تایید نهایی خریدار به فروشنده پرداخت خواهد شد. شرح: این مبلغ صرفا جهت انجام به\n                        موقع آماده سازی محصولات از فروشنده دریافت شده و پس از پایان فرایند خرید و تایید نهایی خریدار به\n                        فروشنده پرداخت خواهد شد.\n                    "
-                              )
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.pageStep == 3
-                          ? _c("p", { attrs: { id: "step1S3" } }, [
-                              _vm._v(
-                                "\n                        " +
-                                  _vm._s(
-                                    _vm.transactionInfo.loading_dead_line +
-                                      " " +
-                                      _vm.transactionInfo.admin_notes
-                                  ) +
-                                  "\n                    "
-                              )
-                            ])
-                          : _vm._e()
+                          _c("h2", [_vm._v(" قرارداد همکاری در فروش")]),
+                          _vm._v(" "),
+                          _vm.pageStep == 1
+                            ? _c("p", { attrs: { id: "step1S1" } }, [
+                                _c("span", [
+                                  _vm._v(
+                                    "با هدف تنظیم روابط اطراف قرارداد، قرارداد حاضر ذیل ماده ۱۰ قانون مدنی و به نحو لازم و با حاکم قرار دادن اصل حسن نیت بین طرفین منعقد می گردد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(1),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [_vm._v("1-1طرف اول")]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [_vm._v("1-2طرف دوم")]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(2),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "2-1  تنظیم همکاری و روابط قراردادی طرفین در خصوص همکاری اینکوباک با فروشنده جهت فروش کالا و محصولات خود از طریق ارائه این محصولات در وبسایت ایجاد شده توسط اینکوباک به نشانی incobac.com .بدیهی است با توجه به اینکه مالکیت محصولات ارائه شده در سایت متعلق به اینکوباک نبوده و اینکوباک صرفاً ارائه دهنده بستر اینترنتی جهت فروش محصولات فوق می باشد لذا مسئولیت کلیه اوصاف محصول اعم از نوع، بسته بندی، قیمت و هرگونه اطلاعات ذکر شده در رابطه با محصول بر عهده فروشنده است."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "2-2 اینکوباک بر اساس اطلاعات ذکر شده در سایت اقدام به صدور فاکتور برای طرفین می نماید که این فاکتور در اختیار طرفین قرار می گیرد و مبنای رسیدگی به کلیه اختلافات حاصله  قرارداد حاضر و فاکتور مذکور می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "2-3  با توجه به شرایط خاص هر معامله، هزینه های مربوط به حمل و نقل و بیمه کالاهای مورد معامله ممکن است بر عهده خریدار یا فروشنده قرار گیرد که این امر در قرارداد حاضر قید و مورد تایید طرف متعهد قرار می گیرد در هر صورت اینکوباک نسبت به هزینه های فوق الذکر از خود سلب مسئولیت می‌نماید."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 2
+                            ? _c("p", { attrs: { id: "step1S2" } }, [
+                                _vm._m(3),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "3-1 خریدار و فروشنده با پذیرش قرارداد حاضر می توانند از بستر اینترنتی ارائه شده توسط طرف اول (پلتفرم اینکوباک) جهت سفارش و ارائه محصولات استفاده نمایند."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "3-2 خریدار درخواست خود را از طریق سفارش کالا به صورت الکترونیکی برای اینکوباک ارسال و اینکوباک تقاضای خرید خریدار را از طریق ایمیل یا seller center به فروشندگان مرتبط اعلام می نماید."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "3-3 چنانچه فروشنده قادر به تامین سفارش خریدار باشد پاسخ خود را با ذکر اوصاف و پیوست تصاویر محصولات ، برای خریدار ارسال می نماید."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "3-4 چنانچه خریدار پیشنهاد فروشنده را در پنل کاربری خویش پذیرفت، اپراتور های اینکوباک اقدام به برقراری تماس تلفنی و انجام هماهنگی های نهایی  با طرفین نموده و در صورت حصول توافق، متن قرارداد را برای طرفین ارسال می نمایند که ملاک زمانی انعقاد قراداد، زمان تایید الکترونیکی متن قرارداد ارسالی برای طرفین( خریدار و فروشنده) می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "3-5 پس از تایید قرارداد توسط طرفین فاکتور پیش پرداخت توسط اینکوباک صادر گردیده و خریدار بایستی ظرف مدت .یک روز نسبت به پرداخت آن اقدام نماید.\n                    "
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "3-6  در صورت تادیه پیش پرداخت توسط خریدار، فروشنده بایستی ظرف مهلتی که در قرارداد حاضر قید می گردد کالای سفارش داده شده را تهیه و جهت ارسال به متصدی حمل و نقل تسلیم نماید."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "3-7 قبل از تسلیم کالا به متصدی حمل و نقل و انجام عملیات بارگیری، بازرس اینکوباک در محل بارگیری حضور می یابد و کالای سفارش داده شده را از جهت انطباق با مفاد قرارداد حاضر مورد بررسی قرار می دهد.(تعیین موارد و اوصافی که در هر سفارش بایستی توسط بازرس اینکوباک مورد بررسی و تایید قرار گیرد به پیوست قرارداد حاضر در اختیار خریدار و فروشنده قرار خواهد گرفت). بدیهی است که بازرس اینکوباک صرفاً نسبت به بررسی این اوصاف مسئولیت داشته و سایر اوصاف و موارد از حیطه مسئولیت بازرس اینکوباک خارج می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 3
+                            ? _c("p", { attrs: { id: "step1S3" } }, [
+                                _c("span", [
+                                  _vm._v(
+                                    "3-8 در صورت تأیید محصولات توسط بازرس، این امر تلفناً به اطلاع خریدار رسیده و فاکتور نهایی قراداد توسط اینکوباک صادر می گردد و خریدار بایستی ظرف مدت 2 ساعت از اتمام بارگیری نسبت به تسویه مبلغ باقی مانده قراداد اقدام نماید که در این صورت محصولات تحویل متصدی حمل و نقل می‌گردد و پس از گذشت یک هفته از پایان تراکنش، اینکوباک پس از کسر کمیسیون خود از معامله ، ثمن معامله را به حساب فروشنده واریز خواهد کرد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "3-9 دیهی است با توجه به عدم مالکیت اینکوباک بر محصولات ارائه شده در بستر اینترنتی، فروش کالا به خریدار  توسط فروشنده انجام می پذیرد و اینکوباک صرفا زیرساخت انجام فروش را فراهم می نماید لذا در صورت صدور فاکتور در وجه اینکوباک و اظهار نمودن آن در گزارشات مالیاتی مراتب مورد تایید این شرکت نبوده و همچنین این شرکت هیچگونه مسئولیتی بر عهده نخواهد داشت و مسئولیت خسارت وارده احتمالی بر عهده متخلف از این بند خواهد بود."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(4),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "بر اساس شرایط این قرارداد فروشنده موظف به انجام امور ذیل می باشد:"
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "4-1  مسئولیت تعیین و درج قیمت کالا ، تولید و درج اطلاعات محصول اعم از کلیه اطلاعات کمی و کیفی محصول و به‌روزرسانی میزان موجودی محصول در وبسایت اینکوباک بر عهده فروشنده می باشد. قیمت‌های مندرج بر روی , وبسایت اینکوباک می‌بایست رقابتی و حداقل برابر با قیمت کالاهای همانند در سایر فروشگاه ها اعم از اینترنتی و غیر اینترنتی باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "تبصره: اینکوباک زیرساخت و ابزار ساخت محتوا را به صورت رایگان در اختیار فروشندگان قرار می دهد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "4-2 فروشنده تضمین می‌نماید که تمامی کالاهای تحویلی به خریدار مطابق قوانین جمهوری اسلامی ایران تولید شده و یا از مبادی رسمی کشور وارد گردیده است. همچنین کالاها سالم و مطابق با توصیفات اعلام شده از کلیه ابعاد کمی و کیفی می باشد و چنانچه در هر مرحله از عملیات فروش خلاف موارد فوق اثبات گردید، اینکوباک می تواند راساٌ نسبت به لغو سفارش اقدام نماید و چنانچه در این خصوص  خسارتی به اینکوباک یا خریدار وارد گردد فروشنده متعهد به جبران خسارت خواهد بود."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "4-3 فروشنده اعلام می دارد که مالک کالا بوده و کالا معارض ندارد و حقوق مالکیت صنعتی و تجاری در صورت وجود، مالکیت معنوی و سایر حقوق قانونی و عرفی کالا متعلق به اوست یا حق بهره برداری از این حقوق و عرضه کالای مربوطه را دارد و مطابق قوانین جمهوری اسلامی ایران مجاز به فعالیت میباشد و چنانچه در هر مرحله از عملیات فروش خلاف موارد فوق اثبات گردید، اینکوباک می تواند راساٌ نسبت به لغو سفارش اقدام نماید و چنانچه در این خصوص  خسارتی به اینکوباک یا خریدار وارد گردد فروشنده متعهد به جبران خسارت خواهد بود."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 4
+                            ? _c("p", { attrs: { id: "step1S4" } }, [
+                                _c("span", [
+                                  _vm._v(
+                                    "4-4 فروشنده تعهد می‌نماید که در صورت اعمال هرگونه تغییر در اطلاعات کالا اعم از نوع، بهای کالا ،عدم موجودی کالا، توقف تولید یا عرضه محصول و همچنین تخفیف‌های ارائه شده به سایر خریداران ظرف مدت یک روزاطلاعات کالا را در سامانه اینکوباک به روز نماید در غیر این صورت مسئولیت کلیه خسارات وارده به اینکوباک و خریدار بر عهده فروشنده است."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "4-5 فروشنده موظف است در زمان تعیین شده در قرارداد حاضر، کالای سفارش داده شده را تامین نماید و در زمان مشخص شده کالای سفارش داده شده را جهت تحویل به خریدار به متصدی حمل و نقل قانونی تحویل نماید . در صورت عدم تامین کالا و یا تامین ناقص در مدت زمان تعهد شده،  فروشنده بایستی به ازای هر روز تاخیر  2 درصد از مبلغ کل معامله را به عنوان جریمه تاخیر در تاًمین به اینکوباک پرداخت نماید. و چنانچه عدم تاًمین کالا و یا تامین ناقص بیش از 2 روز تقویمی به طول بیانجامد اینکوباک می تواند راساً نسبت به لغو معامله  اقدام نماید. که در این حالت فروشنده موظف به پرداخت 5 درصد از مبلغ کل معامله، به انضمام 4 درصد از مبلغ کل معامله پیش بینی شده در صدر بند (جمعاً 9 درصد از مبلغ کل معامله) به عنوان جریمه عدم تاًمین به اینکوباک پرداخت نماید و همچنین مسئول کلیه خسارات ناشی از عدم تاًمین و یا تامین ناقص کالا که برای اینکوباک یا خریدار ایجاد گردد می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "4-6 فروشنده تضمین می نماید که کلیه اوصاف کمی و کیفی محصولات تامین شده کاملا مطابق با اظهارات درج شده توسط ایشان در سامانه اینکوباک میباشد که تمامی این اظهارات در قرارداد حاضر منعکس می گردد. با توجه به تعبیه نظام بازرسی توسط اینکوباک قبل از ارسال کالا و تحویل به متصدی حمل و نقل چنانچه عدم تطابق محموله با اطلاعات مندرج در سایت، مربوط به امور و اوصافی باشد که بایستی توسط بازرس اینکوباک بررسی گردد(شرح دقیق این اوصاف متناسب با  هرمعامله و به‌صورت احصایی در قرارداد مربوط به آن معامله قید میگردد) اینکوباک و فروشنده مشترکاً در قبال خریدار مسئول می‌باشند که میزان مسوولیت هر یک بر اساس حدود  قصور یا تقصیر آنها توسط مرجع داوری پیش بینی شده در  قرارداد حاضر تعیین می گردد. در غیر اینصورت مسئولیت عدم تطابق کالا بر عهده فروشنده می باشد و چنانچه این امر منجر به ورود هر گونه خسارتی به اینکوباک یا خریدار گردد فروشنده متعهد به جبران خسارت خواهد بود."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    " تبصره: در صورتی که فروشنده نسبت به آماده کردن محصول اقدام کرده باشد ولی نتواند در موعد مقرر نسب به تحویل آن اقدام کند  و  یا در صورتی که محصول آماده شده توسط فروشنده فاقد استانداردهای تعیین شده از سمت خریدار باشد،تصمیم درباره ی لغو یا ادامه معامله، و یا خرید تمام و یا بخشی از محصولات و شرایط مربوط به آن بر عهده اینکوباک و خریدار می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 5
+                            ? _c("p", { attrs: { id: "step1S5" } }, [
+                                _c("span", [
+                                  _vm._v(
+                                    "4-7 مسؤلیت تحویل کالای سفارش داده شده به متصدی حمل و نقل بر عهده ی فروشنده می باشد. فروشنده موظف است کالا را به شیوه بسته بندی صحیح . در شرایط استاندارد بارگیری به مقصد حمل و نقل قانونی تحویل داده و همچنین کالا را از طریق وسیله ی حمل ونقل دارای شرایط مناسب جهت حفظ سلامت کالا برای خریدار ارسال نماید مگر آنکه متصدی حمل و نقل توسط خریدار تعیین گردد که در این صورت فروشنده صرفا نسبت به انتخاب وسیله و متصدی حمل و نقل مسئولیتی ندارد. چنانچه از جهت عدم رعایت این بند خسارتی حاصل گردد فروشنده مسئول جبران کلیه ی خسارات ایجاد شده می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "  تبصره- چنانچه در طی حمل کالا خسارتی برای محموله ایجاد گردد موجب مسئولیت متصدی حمل و نقل طبق مقررات مربوطه در این زمینه می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "تبصره - هزینه های مربوط به حمل و نقل و بیمه محموله ارسالی بر حسب مورد بر عهده خریدار و یا فروشنده می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(5),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "خریدار متعهد می باشد پس از تامین بار توسط فروشنده جهت بارگیری  و تایید نهایی بازرس اینکوباک ، نسبت به تسویه حساب و پرداخت مبلغ فاکتور نهایی  قراداد، حداکثر ظرف مدت 2 ساعت اقدام نماید.  و چنانچه نسبت  به تسویه حساب در زمان مقرر اقدام ننماید ، مبلغ پانصد هزار تومان به انضمام 5 درصد از مبلغ کل معامله  از پیش پرداخت واریزی توسط خریدار به عنوان جریمه  لغو معامله کسر و مابقی مبلغ پیش پرداخت به وی مسترد می گردد. همچنین چنانچه در این خصوص خسارتی به اینکوباک یا فروشنده وارد گردد خریدار متعهد به جبران خسارت خواهد بود که مبلغ خسارت ایجاد شده به انضمام مبالغ جریمه فوق، از پیش پرداخت واریزی توسط خریدار کسر و مابقی به وی مسترد می گردد و تا تعیین تکلیف نهایی در خصوص خسارت مورد ادعا و اجرای رای"
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(6),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    " بر اساس این قرارداد اینکوباک متعهد به انجام امور ذیل می باشد. "
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "6-1 اینکوباک بخشی از سایت اینترنتی خود به نام incobac.com  را برای معرفی و ارائه کالا های فروشنده اختصاص می دهد و آموزش های لازم را به فروشنده جهت بروزرسانی لیست کالاها، موجودی آنها و درج قیمت ارائه خواهد داد به نحوی که تغییراتی که در اثر فروش کالا در مقدار کالا ایجاد می گردد و همچنین مشخصات سفارش در هر لحظه برای فروشنده از طریق الکترونیکی قابل مشاهده خواهد بود."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "6-2 اینکوباک خدمات بازرسی محصولات را از طریق ارائه کارشناس کیفیت محصول قبل از بارگیری کالا جهت انطباق کالای ارسالی با شرایط قید شده در قراداد  ارائه می‌نماید. لیست آیتم ها و اوصاف و شرایطی که بایستی توسط بازرس اینکوباک مورد بررسی قرار گیرد به صورت احصایی و متناسب با هر معامله در قرارداد مربوط به آن معامله قید می‌گردد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 6
+                            ? _c("p", { attrs: { id: "step1S6" } }, [
+                                _c("span", [
+                                  _vm._v(
+                                    "6-3  اینکوباک نسبت به تطابق اوصاف  ذکر شده در بند فوق مشترکاً همراه با فروشنده مطابق بند 6-4 مسئول می باشد و نسبت به سایر اوصاف و شرایط هیچ گونه مسئولیتی نداشته و چنانچه خسارتی حادث گردد فروشنده مسئول می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "6-4 اینکوباک موظف به مدیریت و انتخاب فضا و ظاهر وب سایت می باشد"
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "6-5 اینکوباک متعهد می گردد جهت مدیریت موجودی و بهای کالا در سایت اینکوباک پنل نرم افزاری seller center را در اختیار فروشنده قرار دهد و همچنین آموزش های مربوطه را به فروشنده ارائه نماید ."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "6-6  اینکوباک در خصوص حمل و نقل کالا هیچ گونه وظیفه و تعهدی ندارد. نظام مسئولیت در خصوص حمل و نقل کالا مطابق بند 8-4 قرارداد حاظر می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(7),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "7-1 کمیسیون اینکوباک معادل ریالی و درصدی معین از مبلغ کل معامله است که در پیوست قرارداد می باشد. کمیسیون پیش از احتساب مالیات بر ارزش افزوده کالا محاسبه می گردد.  "
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "7-2مبلغ کمیسیون اینکوباک مشمول قانون مالیات بر ارزش افزوده می باشد که مبلغ آن به صورت حساب های اضافه واریز شده و دریافت می گردد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "7-3 مفروض است که کلیه قیمتهای ارائه شده توسط فروشنده بر روی وب‌سایت اینکوباک شامل مالیات بر ارزش افزوده بوده (در صورت عدم معافیت کالا) که مبلغ آن توسط خریدار نهایی پرداخت می گردد. بدیهی است اینکوباک هیچ گونه مسئولیتی در قبال مالیات بر ارزش افزوده کالای فروش رفته نداشته و فروشنده مستقیما مسئول ثبت و پرداخت مالیات بر ارزش افزوده کالای فروش رفته به سازمان امور مالیاتی کشور می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 7
+                            ? _c("p", { attrs: { id: "step1S7" } }, [
+                                _c("span", [
+                                  _vm._v(
+                                    "7-4مسئولیت دریافت وجه سفارشات از خریداران بر عهده اینکوباک می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "7-5 اینکوباک طی هفت روز کاری بهای محصولات فروش رفته را (به غیر از سفارشات عودت داده شده یا سفارشات مورد شکایت و بررسی) که از خریدار دریافت کرده پس از کسر کمیسون  و سایر هزینه ها و مبالغ ذکر شده در قرارداد و پس از محاسبه به فروشنده پرداخت خواهد نمود"
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "تبصره: منظور از روز کاری هر روز هفته به استثنای جمعه و تعطیلات رسمی جمهوری اسلامی ایران از ساعت ۸ الی ۱7 می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(8),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "8-1این قرارداد از تاریخ تایید الکترونیکی(درج شده در قرارداد) به مدت یک سال شمسی( ۳۶۵ روز تقویمی ) اعتبار دارد و در موارد فورس ماژور به مدت آن اضافه میگردد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "8-2 پس از خاتمه قرارداد، تمدید قرارداد و ادامه همکاری طرفین و نحوه و شرایط آن نیاز به توافق مجدد طرفین قرارداد دارد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "8-3 تاریخ موثر شدن و شروع قرارداد از تاریخ تایید الکترونیکی قرارداد توسط فروشنده می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(9),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "9-1 چنانچه معامله میان خریدار و فروشنده به عللی از علل قانونی منجر به فسخ گردد، اینکوباک مستحق دریافت کمیسیون مقرر برای آن معامله می باشد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 8
+                            ? _c("p", { attrs: { id: "step1S8" } }, [
+                                _vm._m(10),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "علاوه بر ضمانت اجرا های پیش بینی شده نسبت به برخی از تعهدات طرفین این قرارداد، چنانچه نسبت به سایر تعهدات موضوع این قرارداد هر یک از طرفین تخلفی از انجام تعهد خویش داشته باشد و در نتیجه این تخلف ضرری به منافع طرف مقابل، طرف متخلف و مقصر، متعهد به پرداخت خسارت به طرف مقابل می باشد که مطالبه خسارت و تعیین میزان آن در مرجع داوری این قرارداد به عمل می آید."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(11),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "11-1طرفین اعلام  میدارند کلیه  تاییدیه ها و قبول الکترونیکی به منزله تایید و قبول حضوری و شخصی می باشد و به استناد آن تعهدات انجام می پذیرد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "11-2طرفین اعلام می دارند این قرارداد هرگونه توافق یا ترتیبات شفاهی یا کتبی مغایر با قرارداد حاضر را که ممکن است در گذشته بین طرفین واقع شده باشد نسخ می نماید."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "11-3 هیچ یک از مواد یا مفاد قرارداد حاضر به معنای شراکت یا وجود رابطه کارگر و کارفرمایی فی‌مابین فروشنده و اینکوباک نبوده و نخواهد بود."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "11-4 هیچ گونه تغییری در این توافقنامه معتبر نیست مگر با توافق کتبی یا الکترونیکی طرفین قرارداد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "11-5 طرفین اعلام می دارند مالکیت نرم افزار seller center متعلق به اینکوباک است."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(12),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "12-1 مالکیت سورس کدها و پلتفرم اینکوباک متعلق به اینکوباک می باشد و طرف دوم صرفاً اجازه بهره برداری از این پلتفرم را مطابق مفاد این قرارداد و سطح دسترسی اجازه داده شده توسط این قرارداد دارا می باشد. "
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 9
+                            ? _c("p", { attrs: { id: "step1S9" } }, [
+                                _c("span", [
+                                  _vm._v(
+                                    "12-2 مالکیت داده های تحصیل شده از طریق پلتفرم اینکوباک،تحلیل این داده ها، فروش نتایج تحلیل داده و استفاده پژوهشی و هرگونه استفاده دیگر از آنها با رعایت محرمانگی و عدم افشای اسرار صرفاً به اینکوباک تعلق داشته و طرف دوم هیچگونه حقی در این زمینه نخواهد داشت."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(13),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "13-1 اطلاعات مربوط به این قرارداد، اسرار محرمانه تلقی می گردد لذا طرفین تضمین خواهند نمود که خود و اشخاص مرتبط با آنان اشخاص ذیربط آنها در تمام مدت این قرارداد و  پس از اتمام آن اقدامات معمول جهت محرمانه نگاه داشتن تمام اطلاعات محرمانه ای که وی یا آنان ممکن است در ارتباط با هر کدام از طرف دیگر به دست آورند محرمانه تلقی خواهند کرد و جز در راستای مقاصد قراردادی از چنین اطلاعاتی استفاده نخواهند کرد و آنها را افشا نخواهند نمود."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "13-2 طرفین باید تضمین نمایند که هر کدام از کارکنان، ماموران، مدیران عامل آنان یا اشخاص مرتبط با آنها که به موجب این قرارداد به اطلاعات محرمانه دسترسی دارند از طبیعت محرمانه این اطلاعات مطلع هستند و لازم است تا از شروط طرفین قرارداد پیروی نمایند بنابراین طرفی که اطلاعات را دریافت می نماید مسئول است که تضمین نماید تعهد رعایت محرمانگی و عدم استفاده مندرج در این ماده را به دقت رعایت می‌کند و در مقابل فعل یا ترک فعل کارکنان نمایندگان یا عوامل خود کاملا مسئول فرض می گردد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "13-3 هرگونه افشا و انتشار بدون مجوز این اطلاعات قابل تعقیب کیفری در مراجع قانونی و مطالبه خسارت در مرجع داوری این قرارداد است.  مبلغ خسارت مذکور طی داوری تعیین خواهد شد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "تبصره: اطلاعاتی که در اختیار عموم قرار دارند جزو اطلاعات محرمانه محسوب نمی گردد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(14),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "14-1 منظور از فورس ماژور در این قرارداد هرگونه حادثه و پیشامد غیرقابل پیش بینی، غیر قابل دفع و خارج از اراده و کنترل طرفین است. اعم از جنگ، بلایای طبیعی، آتش‌سوزی، اعتصاب ، تغییر قوانین و مقررات یا تعطیلی ادارات و نهادهای دولتی برای مدت بیش از یک هفته که به واسطه آن طرفی که در چنین شرایطی قرار گرفته است نمی تواند تمام یا بخشی از تعهدات خود، موضوع این قرارداد یاد قوانین مرتبط را ایفا نماید."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 10
+                            ? _c("p", { attrs: { id: "step1S10" } }, [
+                                _c("span", [
+                                  _vm._v(
+                                    "14-2 متعهد در صورتی از ایفای تعهدات در اثر فورس ماژور معاف می گردد که حداکثر تا  1روز پس از اطلاع از چنین وضعیتی مراتب را به اطلاع طرف دیگر رسانیده باشد.\n                    "
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(15),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "هرگونه اطلاعیه یا ابلاغیه ای که قرار باشد طبق این قرارداد ابلاغ و تحویل گردد بایستی از طریق وبسایت اینکوباک یا call center انجام پذیرد و خطاب به طرف مرتبط صورت گیرد و تصریح شود که اطلاعیه یا مکاتبه موضوع این قرارداد است .طرفین می توانند به وسیله اطلاعیه نشانی خود را تغییر دهند تا تمام اطلاعیه های آتی برای آنان به نشانی جدید ارسال گردد."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(16),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    " کلیه اختلافات و دعاوی ناشی از این قرارداد و یا راجع به آن از جمله انعقاد، اعتبار، فسخ ،تفسیر یا اجرای آن به مرکز داوری اتاق بازرگانی صنایع معادن و کشاورزی شیراز ارجاع می گردد. که مطابق با قانون اساسنامه و آیین داوری آن مرکز با رای یک یا سه نفر داور به صورت قطعی و لازم الاجرا حل و فصل می گردد. داور/ان علاوه بر مقررات حاکم عرف تجارتی ذیربط را نیز مراعات خواهند نمود. شرط داوری حاضر موافقتنامه مستقل از قرارداد اصلی تلقی می‌شود و در هر حال لازم الاجرا است."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _vm._m(17),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    "قرارداد حاضر در16 ماده و پیوست های آن (اجزای لاینفک قرارداد) در یک نسخه الکترونیکی تهیه و تنظیم گردیده است و در راستای تایید مفاد آن به تایید الکترونیکی طرف دوم (که به منزله قبول و تایید و امضای حضوری وی می باشد) رسید."
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    " بنا به مراتب فوق طرفین قرارداد حاضر را از تاریخ درج شده در آن اجرایی نمودند. تمام/"
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pageStep == 11
+                            ? _c("p", { attrs: { id: "step1S11" } }, [
+                                _vm._m(18),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _c("b", [
+                                    _vm._v("مهلت بارگیری محصول تا تاریخ "),
+                                    _c("span", { staticClass: "text-danger" }, [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.transactionInfo.loading_dead_line
+                                        )
+                                      )
+                                    ]),
+                                    _vm._v(" خواهد بود.")
+                                  ])
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _c("b", [
+                                    _vm._v("ردصد کمسیون اینکوباک برابر "),
+                                    _c("span", { staticClass: "text-danger" }, [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.transactionInfo
+                                            .commission_persentage
+                                        )
+                                      )
+                                    ]),
+                                    _vm._v(" است.")
+                                  ])
+                                ]),
+                                _c("br"),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [_vm._v("توضیحات:")]),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    _vm._s(_vm.transactionInfo.admin_notes)
+                                  )
+                                ]),
+                                _c("br"),
+                                _c("br")
+                              ])
+                            : _vm._e()
+                        ])
                       ])
                     ])
                   : _c("div", { staticClass: "alert-message" }, [
@@ -50082,581 +49251,75 @@ var render = function() {
           _vm._v(" "),
           _vm.currentStep == 2
             ? _c("div", { attrs: { id: "step2" } }, [
-                _c("nav", { staticClass: "main-content-nav col-xs-12" }, [
-                  _c("ul", { staticClass: "list-inline" }, [
-                    _vm._m(3),
-                    _vm._v(" "),
-                    _vm._m(4),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-item active" }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.goToStep(2)
-                            }
-                          }
-                        },
-                        [_vm._v(" پرداخت ودیعه")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-item " }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.goToStep(1)
-                            }
-                          }
-                        },
-                        [_vm._v("تایید مفاد قرارداد ")]
-                      )
-                    ])
-                  ])
-                ]),
+                _vm._m(19),
                 _vm._v(" "),
-                _c("div", { staticClass: "contents col-xs-12" }, [
-                  _vm.msg == ""
-                    ? _c("div", { staticClass: "content-show" }, [
-                        _c(
-                          "div",
-                          { staticClass: "header-contents col-xs-12" },
-                          [
-                            _c(
-                              "div",
-                              {
-                                staticClass: "title-contents col-xs-12 col-sm-4"
-                              },
-                              [
-                                _vm._v(
-                                  "\n                            فاکتور پرداخت نهایی\n                        "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "content col-xs-12 col-sm-8" },
-                              [
-                                _c("div", { staticClass: "col-xs-6" }, [
-                                  _vm._v(
-                                    "\n                                شماره سریال: "
-                                  ),
-                                  _c("span", [
-                                    _vm._v(_vm._s(_vm.transactionId))
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "col-xs-6" }, [
-                                  _vm._v(
-                                    "\n                                تاریخ صدور: "
-                                  ),
-                                  _c("span", [
-                                    _vm._v(
-                                      _vm._s(_vm.transactionInfo.issue_date)
-                                    )
-                                  ])
-                                ])
-                              ]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "main-content-texts col-xs-12" },
-                          [
-                            _c("h2", [
-                              _vm._v("\n                            عنوان: "),
-                              _c("span", [
-                                _vm._v(_vm._s(_vm.transactionInfo.product_name))
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "right-side-main-texts col-xs-12 col-sm-6"
-                              },
-                              [
-                                _c(
-                                  "table",
-                                  { staticClass: "table table-striped " },
-                                  [
-                                    _c("tbody", [
-                                      _c("tr", [
-                                        _c("td", [_vm._v("میزان درخواست:")]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _vm._v(
-                                            " " +
-                                              _vm._s(
-                                                _vm.transactionInfo.quantity
-                                              ) +
-                                              " کیلو گرم"
-                                          )
-                                        ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("tr", [
-                                        _c("td", [_vm._v("مبلغ کل (تقریبی):")]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _vm._v(
-                                            " " +
-                                              _vm._s(
-                                                _vm.transactionInfo.quantity *
-                                                  _vm.transactionInfo.unit_price
-                                              ) +
-                                              " تومان"
-                                          )
-                                        ])
-                                      ])
-                                    ])
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "left-side-main-texts col-xs-12 col-sm-6 "
-                              },
-                              [
-                                _c(
-                                  "table",
-                                  { staticClass: "table table-striped " },
-                                  [
-                                    _c("tbody", [
-                                      _c("tr", [
-                                        _c("td", [_vm._v(" قیمت واحد:")]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _vm._v(
-                                            " " +
-                                              _vm._s(
-                                                _vm.transactionInfo.unit_price
-                                              ) +
-                                              " تومان"
-                                          )
-                                        ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("tr", [
-                                        _c("td", [_vm._v("مبلغ پیش پرداخت:")]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _vm._v(
-                                            _vm._s(
-                                              _vm.transactionInfo.amount_to_pay
-                                            ) + " تومان"
-                                          )
-                                        ])
-                                      ])
-                                    ])
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "p",
-                              { staticClass: "description-text col-xs-12" },
-                              [
-                                _vm._v(
-                                  "\n                            مبلغ پیش پرداخت 20 درصد از حجم کل تراکنش بوده و پس از پرداخت این مبلغ، فرایند آماده سازی بار\n                            توسط تامین کننده و بازرسی و نظارت آغاز خواهد شد.\n                        "
-                                )
-                              ]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "buttons" }, [
-                          _c("div", { staticClass: "main_buttons col-xs-12" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "green-bot",
-                                attrs: { href: "#" },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    return _vm.payPrepayment($event)
-                                  }
-                                }
-                              },
-                              [_vm._v("پرداخت آنلاین")]
-                            )
-                          ])
-                        ])
-                      ])
-                    : _c("div", { staticClass: "alert-message" }, [
+                _vm.msg == ""
+                  ? _c("div", { staticClass: "alert-message" }, [
+                      _c("div", { staticClass: "alert-danger col-xs-12" }, [
                         _vm._v(
-                          "\n                    " +
-                            _vm._s(_vm.msg) +
-                            "\n                "
+                          "\n                    بارگیری محصول را با شرایط زیر انجام دهید\n                "
                         )
-                      ])
-                ])
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.currentStep == 3
-            ? _c("div", { attrs: { id: "step3" } }, [
-                _c("nav", { staticClass: "main-content-nav col-xs-12" }, [
-                  _c("ul", { staticClass: "list-inline" }, [
-                    _vm._m(5),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-item active" }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.goToStep(3)
-                            }
-                          }
-                        },
-                        [_vm._v(" تسویه حساب ")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-item " }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.goToStep(2)
-                            }
-                          }
-                        },
-                        [_vm._v(" پرداخت ودیعه")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-item " }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.goToStep(1)
-                            }
-                          }
-                        },
-                        [_vm._v("تایید مفاد قرارداد ")]
-                      )
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "contents col-xs-12" }, [
-                  _vm.msg == ""
-                    ? _c("div", { staticClass: "content-show" }, [
-                        _c(
-                          "div",
-                          { staticClass: "header-contents col-xs-12" },
-                          [
-                            _c(
-                              "div",
-                              {
-                                staticClass: "title-contents col-xs-12 col-sm-4"
-                              },
-                              [
-                                _vm._v(
-                                  "\n                            فاکتور پرداخت نهایی\n                        "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "content col-xs-12 col-sm-8" },
-                              [
-                                _c("div", { staticClass: "col-xs-6" }, [
-                                  _vm._v(
-                                    "\n                                شماره سریال: "
-                                  ),
-                                  _c("span", [
-                                    _vm._v(_vm._s(_vm.transactionId))
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "col-xs-6" }, [
-                                  _vm._v(
-                                    "\n                                تاریخ صدور: "
-                                  ),
-                                  _c("span", [
-                                    _vm._v(
-                                      _vm._s(_vm.transactionInfo.issue_date)
-                                    )
-                                  ])
-                                ])
-                              ]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "main-content-texts col-xs-12" },
-                          [
-                            _c("h2", [
-                              _vm._v("\n                            عنوان: "),
-                              _c("span", [
-                                _vm._v(_vm._s(_vm.transactionInfo.product_name))
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "right-side-main-texts col-xs-12 col-sm-6"
-                              },
-                              [
-                                _c(
-                                  "table",
-                                  { staticClass: "table table-striped " },
-                                  [
-                                    _c("tbody", [
-                                      _c("tr", [
-                                        _c("td", [_vm._v("میزان درخواست:")]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _vm._v(
-                                            " " +
-                                              _vm._s(
-                                                _vm.transactionInfo.quantity
-                                              ) +
-                                              " کیلو گرم"
-                                          )
-                                        ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("tr", [
-                                        _c("td", [_vm._v("مبلغ کل :")]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _vm._v(
-                                            " " +
-                                              _vm._s(
-                                                _vm.transactionInfo.quantity *
-                                                  _vm.transactionInfo.unit_price
-                                              ) +
-                                              " تومان"
-                                          )
-                                        ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("tr", { staticClass: "services" }, [
-                                        _c("td", [_vm._v("هزینه خدمات:")]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _vm._v(
-                                            " " +
-                                              _vm._s(
-                                                _vm.transactionInfo
-                                                  .inspection_price
-                                              ) +
-                                              " تومان"
-                                          )
-                                        ])
-                                      ])
-                                    ])
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "left-side-main-texts col-xs-12 col-sm-6 "
-                              },
-                              [
-                                _c(
-                                  "table",
-                                  { staticClass: "table table-striped" },
-                                  [
-                                    _c("tbody", [
-                                      _c("tr", [
-                                        _c("td", [_vm._v(" قیمت واحد:")]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _vm._v(
-                                            " " +
-                                              _vm._s(
-                                                _vm.transactionInfo.unit_price
-                                              ) +
-                                              " تومان"
-                                          )
-                                        ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _vm._m(6),
-                                      _vm._v(" "),
-                                      _c("tr", [
-                                        _c("td", [
-                                          _vm._v(" مبلغ قابل پرداخت:")
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _vm._v(
-                                            " " +
-                                              _vm._s(
-                                                _vm.transactionInfo
-                                                  .amount_to_pay
-                                              ) +
-                                              " تومان"
-                                          )
-                                        ])
-                                      ])
-                                    ])
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "p",
-                              { staticClass: "description-text col-xs-12" },
-                              [
-                                _vm._v(
-                                  "\n                            مبلغ پیش پرداخت 20 درصد از حجم کل تراکنش بوده و پس از پرداخت این مبلغ، فرایند آماده سازی بار\n                            توسط\n                            تامین کننده و بازرسی و نظارت آغاز خواهد شد.\n                        "
-                                )
-                              ]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "buttons" }, [
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "contents col-xs-12" }, [
+                        _c("div", { staticClass: "content-show" }, [
+                          _c("p", { staticClass: "title-p" }, [
+                            _vm._v("توضیحات اینکوباک")
+                          ]),
+                          _vm._v(" "),
                           _c(
-                            "div",
-                            { staticClass: "main_buttons col-xs-12 " },
+                            "p",
+                            { staticStyle: { "white-space": "pre-wrap" } },
                             [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "green-bot",
-                                  attrs: { href: "#" },
-                                  on: {
-                                    click: function($event) {
-                                      $event.preventDefault()
-                                      return _vm.finalPayment($event)
-                                    }
-                                  }
-                                },
-                                [_vm._v("پرداخت آنلاین")]
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(_vm.transactionInfo.admin_notes) +
+                                  "\n                        "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "title-p" }, [
+                            _vm._v("توضیحات خریدار")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "p",
+                            { staticStyle: { "white-space": "pre-wrap" } },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(_vm.transactionInfo.description) +
+                                  "\n                        "
                               )
                             ]
                           )
                         ])
                       ])
-                    : _c("div", { staticClass: "alert-message" }, [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(_vm.msg) +
-                            "\n\n                "
-                        )
-                      ])
-                ])
+                    ])
+                  : _c("div", { staticClass: "alert-message" }, [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(_vm.msg) +
+                          "\n            "
+                      )
+                    ])
               ])
             : _vm._e(),
           _vm._v(" "),
-          _vm.currentStep == 4
-            ? _c("div", { attrs: { id: "step4" } }, [
-                _c("nav", { staticClass: "main-content-nav col-xs-12" }, [
-                  _c("ul", { staticClass: "list-inline" }, [
-                    _c("li", { staticClass: "list-item active" }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.goToStep(4)
-                            }
-                          }
-                        },
-                        [_vm._v("نظر سنجی")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-item " }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.goToStep(3)
-                            }
-                          }
-                        },
-                        [_vm._v(" تسویه حساب ")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-item " }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.goToStep(2)
-                            }
-                          }
-                        },
-                        [_vm._v(" پرداخت ودیعه")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-item " }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.goToStep(1)
-                            }
-                          }
-                        },
-                        [_vm._v("تایید مفاد قرارداد ")]
-                      )
-                    ])
-                  ])
+          _vm.currentStep == 3
+            ? _c("div", { attrs: { id: "step3" } }, [
+                _vm._m(20),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-right alert-message" }, [
+                  _vm._v(
+                    "\n                لطفا منتظر پرداخت طلبتان از سمت ما باشید.\n            "
+                  )
                 ])
               ])
             : _vm._e()
         ])
-      : _c("div", { staticClass: "loading_images  col-xs-12" }),
-    _vm._v(" "),
-    _c("p")
+      : _c("div", { staticClass: "loading_images  col-xs-12" })
   ])
 }
 var staticRenderFns = [
@@ -50664,58 +49327,172 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "list-item" }, [
-      _c("a", { attrs: { href: "#" } }, [_vm._v("نظر سنجی")])
+    return _c("nav", { staticClass: "main-content-nav col-xs-12" }, [
+      _c("ul", { staticClass: "list-inline" }, [
+        _c("li", { staticClass: "list-item " }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v(" تسویه حساب ")])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "list-item " }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("بارگیری محصول")])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "list-item active" }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("تایید مفاد قرارداد ")])
+        ])
+      ])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "list-item " }, [
-      _c("a", { attrs: { href: "#" } }, [_vm._v(" تسویه حساب ")])
+    return _c("span", [_c("b", [_vm._v("ماده 1 :طرفین قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 2 :موضوع قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _c("b", [_vm._v("ماده 3 :مکانیسم اجرایی عملیات خرید و فروش")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "list-item " }, [
-      _c("a", { attrs: { href: "#" } }, [_vm._v(" پرداخت ودیعه")])
+    return _c("span", [_c("b", [_vm._v("ماده4 : تعهدات و تضمینات فروشنده")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 5: تعهدات خریدار")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده6: تعهدات اینکوباک")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 7 :کمیسیون")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 8 :مدت و تمدید قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 9: فسخ قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 10: خسارات قراردادی")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده11:مشترکات")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 12: حقوق مالکیت فکری")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _c("b", [_vm._v("ماده 13: محرمانگی و عدم افشای اسرار")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "list-item" }, [
-      _c("a", { attrs: { href: "#" } }, [_vm._v("نظر سنجی")])
+    return _c("span", [_c("b", [_vm._v("ماده 14:فورس ماژور")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 15: ابلاغات")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 16:حل وفصل اختلافات و داوری")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 17: نسخ قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("الحاقیه")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("nav", { staticClass: "main-content-nav col-xs-12" }, [
+      _c("ul", { staticClass: "list-inline" }, [
+        _c("li", { staticClass: "list-item " }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v(" تسویه حساب ")])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "list-item active" }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("بارگیری محصول")])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "list-item" }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("تایید مفاد قرارداد ")])
+        ])
+      ])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "list-item " }, [
-      _c("a", { attrs: { href: "#" } }, [_vm._v(" تسویه حساب ")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "list-item" }, [
-      _c("a", { attrs: { href: "#" } }, [_vm._v("نظر سنجی")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", { staticClass: "pre-pay" }, [
-      _c("td", [_vm._v("مبلغ پیش پرداخت:")]),
-      _vm._v(" "),
-      _c("td", [_vm._v("20،000،000 تومان")])
+    return _c("nav", { staticClass: "main-content-nav col-xs-12" }, [
+      _c("ul", { staticClass: "list-inline" }, [
+        _c("li", { staticClass: "list-item active" }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v(" تسویه حساب ")])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "list-item " }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("بارگیری محصول")])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "list-item" }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("تایید مفاد قرارداد ")])
+        ])
+      ])
     ])
   }
 ]
@@ -50729,106 +49506,7 @@ if (false) {
 }
 
 /***/ }),
-/* 90 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_profile_profile_complete_vue__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_profile_profile_complete_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_profile_profile_complete_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_contract_vue__ = __webpack_require__(97);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_contract_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_contract_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_buyAd_requests_vue__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_buyAd_requests_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_buyAd_requests_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_my_sell_offers_vue__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_my_sell_offers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_my_sell_offers_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_product_product_basic_vue__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_product_product_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_product_product_basic_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_my_transactions_vue__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_my_transactions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_my_transactions_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_terminated_transactions_vue__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_terminated_transactions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_terminated_transactions_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_transaction_vue__ = __webpack_require__(117);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_transaction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_transaction_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transactionReport__ = __webpack_require__(122);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transactionReport___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transactionReport__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_guide_vue__ = __webpack_require__(129);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_guide_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_guide_vue__);
-
-
-
-// components
-
-// profile components
-
-
-
-
-
-
-
-
-
-
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
-
-/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
-    routes: [{
-        path: '/',
-        name: 'profileBasic',
-        component: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue___default.a,
-        params: {
-            active: 1
-        }
-    }, {
-        path: '/complementry',
-        name: 'compelementry',
-        component: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_profile_profile_complete_vue___default.a
-    }, {
-        path: '/profile_contract',
-        name: 'profileContract',
-        component: __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_contract_vue___default.a
-    }, {
-        path: '/buyAd-requests',
-        name: 'buyAdRequests',
-        component: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_buyAd_requests_vue___default.a
-    }, {
-        path: '/my-sell-offers',
-        name: 'mySellOffers',
-        component: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_my_sell_offers_vue___default.a
-    }, {
-        path: '/register-product',
-        name: 'registerProduct',
-        component: __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_product_product_basic_vue___default.a
-    }, {
-        path: '/transaction-list',
-        name: 'myTransactions',
-        component: __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_my_transactions_vue___default.a
-    }, {
-        path: '/terminated-transaction-list',
-        name: 'myTerminatedTransactions',
-        component: __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_terminated_transactions_vue___default.a
-    }, {
-        path: '/transaction-detail/:id',
-        name: 'transactionDetail',
-        component: __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_transaction_vue___default.a
-    }, {
-        path: '/transaction-report/:id',
-        name: 'transactionReport',
-        component: __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transactionReport___default.a
-    }, {
-        path: '/guide',
-        name: 'guide',
-        component: __WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_guide_vue___default.a
-    }]
-}));
-
-/***/ }),
+/* 90 */,
 /* 91 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -56126,7 +54804,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.main-content {\n    padding: 90px 35px;\n}\n", ""]);
+exports.push([module.i, "\n.main-content {\n    padding: 90px 35px;\n}\n.list-title, .needs,.list-time {\n    float: right;\n    text-align: center;\n    line-height: 1.618;\n    font-weight: bold;\n    padding-top: 5px;\n}\n.list-group-item {\n    border: 1px solid #ddd;\n}\n.detail-success {\n    padding: 8px 0;\n    width: 100%;\n    background: #28a745;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.main-content > ul {\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 10px #e1e1e1 ;\n            box-shadow: 0 0 10px #e1e1e1 ;\n    overflow: hidden;\n}\n.main-content .list-group-item p {\n    text-align: center;\n}\n#main.little-main {\n    margin-right: 80px;\n}\n@media screen and (max-width: 992px) {\n.list-title, .needs,.list-time {\n       padding: 15px;\n}\n}\n\n\n", ""]);
 
 // exports
 
@@ -56190,10 +54868,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ["byadd", "loader", "storage", "defultimg"],
+    props: ["loader", "storage", "defultimg"],
     data: function data() {
         return {
             currentUser: {
@@ -56248,66 +54963,71 @@ var render = function() {
           { staticClass: "main-content col-xs-12" },
           _vm._l(_vm.buyAds, function(buyAd) {
             return _c("ul", { staticClass: "list-unstyled" }, [
-              _c("li", { staticClass: "list-group-item" }, [
-                _c("p", { staticClass: "list-title col-sm-3" }, [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(buyAd.category_name) +
-                      "\n                        "
-                  ),
-                  _c("span", [_vm._v(" | ")]),
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(buyAd.subcategory_name) +
-                      "\n                        "
-                  ),
-                  _c("span", [_vm._v(" | ")]),
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(buyAd.name) +
-                      "\n                    "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "needs col-sm-4" }, [
-                  _c("span", { staticClass: "static-content" }, [
+              _c(
+                "li",
+                { staticClass: "list-group-item  col-xs-12" },
+                [
+                  _c("p", { staticClass: "list-title col-sm-3 col-xs-12" }, [
                     _vm._v(
-                      "\n                        میزان نیازمندی :\n                    "
+                      "\n                        " +
+                        _vm._s(buyAd.category_name) +
+                        "\n                        "
+                    ),
+                    _c("span", [_vm._v(" | ")]),
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(buyAd.subcategory_name) +
+                        "\n                        "
+                    ),
+                    _c("span", [_vm._v(" | ")]),
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(buyAd.name) +
+                        "\n                    "
                     )
                   ]),
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(buyAd.requirement_amount) +
-                      "\n\n                        "
-                  ),
-                  _c("span", { staticClass: "static-content" }, [
-                    _vm._v("\nکیلوگرم\n                    ")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "list-time col-sm-2" }, [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(buyAd.register_date) +
-                      "\n                    "
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "col-sm-3",
-                    attrs: { href: _vm.byadd + "/" + buyAd.id }
-                  },
-                  [
-                    _c("p", { staticClass: "detail-success" }, [
+                  _vm._v(" "),
+                  _c("p", { staticClass: "needs col-sm-4 col-xs-12" }, [
+                    _c("span", { staticClass: "static-content" }, [
                       _vm._v(
-                        "\n                            مشاهده ی جزییات\n                        "
+                        "\n                        میزان نیازمندی :\n                    "
                       )
+                    ]),
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(buyAd.requirement_amount) +
+                        "\n\n                        "
+                    ),
+                    _c("span", { staticClass: "static-content" }, [
+                      _vm._v("\nکیلوگرم\n                    ")
                     ])
-                  ]
-                )
-              ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "list-time col-sm-2 col-xs-12" }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(buyAd.register_date) +
+                        "\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "col-sm-3 col-xs-12",
+                      attrs: { to: "/buyAd-request-detail/" + buyAd.id }
+                    },
+                    [
+                      _c("p", { staticClass: "detail-success" }, [
+                        _vm._v(
+                          "\n                                مشاهده ی جزییات\n                            "
+                        )
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
             ])
           })
         )
@@ -61262,23 +59982,461 @@ if (false) {
 /* 141 */,
 /* 142 */,
 /* 143 */,
-/* 144 */
+/* 144 */,
+/* 145 */,
+/* 146 */,
+/* 147 */,
+/* 148 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/*! Magnific Popup - v1.1.0 - 2016-02-20
+* http://dimsemenov.com/plugins/magnific-popup/
+* Copyright (c) 2016 Dmitry Semenov; */
+!function (a) {
+   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(21)], __WEBPACK_AMD_DEFINE_FACTORY__ = (a),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : a("object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? require("jquery") : window.jQuery || window.Zepto);
+}(function (a) {
+  var b,
+      c,
+      d,
+      e,
+      f,
+      g,
+      h = "Close",
+      i = "BeforeClose",
+      j = "AfterClose",
+      k = "BeforeAppend",
+      l = "MarkupParse",
+      m = "Open",
+      n = "Change",
+      o = "mfp",
+      p = "." + o,
+      q = "mfp-ready",
+      r = "mfp-removing",
+      s = "mfp-prevent-close",
+      t = function t() {},
+      u = !!window.jQuery,
+      v = a(window),
+      w = function w(a, c) {
+    b.ev.on(o + a + p, c);
+  },
+      x = function x(b, c, d, e) {
+    var f = document.createElement("div");return f.className = "mfp-" + b, d && (f.innerHTML = d), e ? c && c.appendChild(f) : (f = a(f), c && f.appendTo(c)), f;
+  },
+      y = function y(c, d) {
+    b.ev.triggerHandler(o + c, d), b.st.callbacks && (c = c.charAt(0).toLowerCase() + c.slice(1), b.st.callbacks[c] && b.st.callbacks[c].apply(b, a.isArray(d) ? d : [d]));
+  },
+      z = function z(c) {
+    return c === g && b.currTemplate.closeBtn || (b.currTemplate.closeBtn = a(b.st.closeMarkup.replace("%title%", b.st.tClose)), g = c), b.currTemplate.closeBtn;
+  },
+      A = function A() {
+    a.magnificPopup.instance || (b = new t(), b.init(), a.magnificPopup.instance = b);
+  },
+      B = function B() {
+    var a = document.createElement("p").style,
+        b = ["ms", "O", "Moz", "Webkit"];if (void 0 !== a.transition) return !0;for (; b.length;) {
+      if (b.pop() + "Transition" in a) return !0;
+    }return !1;
+  };t.prototype = { constructor: t, init: function init() {
+      var c = navigator.appVersion;b.isLowIE = b.isIE8 = document.all && !document.addEventListener, b.isAndroid = /android/gi.test(c), b.isIOS = /iphone|ipad|ipod/gi.test(c), b.supportsTransition = B(), b.probablyMobile = b.isAndroid || b.isIOS || /(Opera Mini)|Kindle|webOS|BlackBerry|(Opera Mobi)|(Windows Phone)|IEMobile/i.test(navigator.userAgent), d = a(document), b.popupsCache = {};
+    }, open: function open(c) {
+      var e;if (c.isObj === !1) {
+        b.items = c.items.toArray(), b.index = 0;var g,
+            h = c.items;for (e = 0; e < h.length; e++) {
+          if (g = h[e], g.parsed && (g = g.el[0]), g === c.el[0]) {
+            b.index = e;break;
+          }
+        }
+      } else b.items = a.isArray(c.items) ? c.items : [c.items], b.index = c.index || 0;if (b.isOpen) return void b.updateItemHTML();b.types = [], f = "", c.mainEl && c.mainEl.length ? b.ev = c.mainEl.eq(0) : b.ev = d, c.key ? (b.popupsCache[c.key] || (b.popupsCache[c.key] = {}), b.currTemplate = b.popupsCache[c.key]) : b.currTemplate = {}, b.st = a.extend(!0, {}, a.magnificPopup.defaults, c), b.fixedContentPos = "auto" === b.st.fixedContentPos ? !b.probablyMobile : b.st.fixedContentPos, b.st.modal && (b.st.closeOnContentClick = !1, b.st.closeOnBgClick = !1, b.st.showCloseBtn = !1, b.st.enableEscapeKey = !1), b.bgOverlay || (b.bgOverlay = x("bg").on("click" + p, function () {
+        b.close();
+      }), b.wrap = x("wrap").attr("tabindex", -1).on("click" + p, function (a) {
+        b._checkIfClose(a.target) && b.close();
+      }), b.container = x("container", b.wrap)), b.contentContainer = x("content"), b.st.preloader && (b.preloader = x("preloader", b.container, b.st.tLoading));var i = a.magnificPopup.modules;for (e = 0; e < i.length; e++) {
+        var j = i[e];j = j.charAt(0).toUpperCase() + j.slice(1), b["init" + j].call(b);
+      }y("BeforeOpen"), b.st.showCloseBtn && (b.st.closeBtnInside ? (w(l, function (a, b, c, d) {
+        c.close_replaceWith = z(d.type);
+      }), f += " mfp-close-btn-in") : b.wrap.append(z())), b.st.alignTop && (f += " mfp-align-top"), b.fixedContentPos ? b.wrap.css({ overflow: b.st.overflowY, overflowX: "hidden", overflowY: b.st.overflowY }) : b.wrap.css({ top: v.scrollTop(), position: "absolute" }), (b.st.fixedBgPos === !1 || "auto" === b.st.fixedBgPos && !b.fixedContentPos) && b.bgOverlay.css({ height: d.height(), position: "absolute" }), b.st.enableEscapeKey && d.on("keyup" + p, function (a) {
+        27 === a.keyCode && b.close();
+      }), v.on("resize" + p, function () {
+        b.updateSize();
+      }), b.st.closeOnContentClick || (f += " mfp-auto-cursor"), f && b.wrap.addClass(f);var k = b.wH = v.height(),
+          n = {};if (b.fixedContentPos && b._hasScrollBar(k)) {
+        var o = b._getScrollbarSize();o && (n.marginRight = o);
+      }b.fixedContentPos && (b.isIE7 ? a("body, html").css("overflow", "hidden") : n.overflow = "hidden");var r = b.st.mainClass;return b.isIE7 && (r += " mfp-ie7"), r && b._addClassToMFP(r), b.updateItemHTML(), y("BuildControls"), a("html").css(n), b.bgOverlay.add(b.wrap).prependTo(b.st.prependTo || a(document.body)), b._lastFocusedEl = document.activeElement, setTimeout(function () {
+        b.content ? (b._addClassToMFP(q), b._setFocus()) : b.bgOverlay.addClass(q), d.on("focusin" + p, b._onFocusIn);
+      }, 16), b.isOpen = !0, b.updateSize(k), y(m), c;
+    }, close: function close() {
+      b.isOpen && (y(i), b.isOpen = !1, b.st.removalDelay && !b.isLowIE && b.supportsTransition ? (b._addClassToMFP(r), setTimeout(function () {
+        b._close();
+      }, b.st.removalDelay)) : b._close());
+    }, _close: function _close() {
+      y(h);var c = r + " " + q + " ";if (b.bgOverlay.detach(), b.wrap.detach(), b.container.empty(), b.st.mainClass && (c += b.st.mainClass + " "), b._removeClassFromMFP(c), b.fixedContentPos) {
+        var e = { marginRight: "" };b.isIE7 ? a("body, html").css("overflow", "") : e.overflow = "", a("html").css(e);
+      }d.off("keyup" + p + " focusin" + p), b.ev.off(p), b.wrap.attr("class", "mfp-wrap").removeAttr("style"), b.bgOverlay.attr("class", "mfp-bg"), b.container.attr("class", "mfp-container"), !b.st.showCloseBtn || b.st.closeBtnInside && b.currTemplate[b.currItem.type] !== !0 || b.currTemplate.closeBtn && b.currTemplate.closeBtn.detach(), b.st.autoFocusLast && b._lastFocusedEl && a(b._lastFocusedEl).focus(), b.currItem = null, b.content = null, b.currTemplate = null, b.prevHeight = 0, y(j);
+    }, updateSize: function updateSize(a) {
+      if (b.isIOS) {
+        var c = document.documentElement.clientWidth / window.innerWidth,
+            d = window.innerHeight * c;b.wrap.css("height", d), b.wH = d;
+      } else b.wH = a || v.height();b.fixedContentPos || b.wrap.css("height", b.wH), y("Resize");
+    }, updateItemHTML: function updateItemHTML() {
+      var c = b.items[b.index];b.contentContainer.detach(), b.content && b.content.detach(), c.parsed || (c = b.parseEl(b.index));var d = c.type;if (y("BeforeChange", [b.currItem ? b.currItem.type : "", d]), b.currItem = c, !b.currTemplate[d]) {
+        var f = b.st[d] ? b.st[d].markup : !1;y("FirstMarkupParse", f), f ? b.currTemplate[d] = a(f) : b.currTemplate[d] = !0;
+      }e && e !== c.type && b.container.removeClass("mfp-" + e + "-holder");var g = b["get" + d.charAt(0).toUpperCase() + d.slice(1)](c, b.currTemplate[d]);b.appendContent(g, d), c.preloaded = !0, y(n, c), e = c.type, b.container.prepend(b.contentContainer), y("AfterChange");
+    }, appendContent: function appendContent(a, c) {
+      b.content = a, a ? b.st.showCloseBtn && b.st.closeBtnInside && b.currTemplate[c] === !0 ? b.content.find(".mfp-close").length || b.content.append(z()) : b.content = a : b.content = "", y(k), b.container.addClass("mfp-" + c + "-holder"), b.contentContainer.append(b.content);
+    }, parseEl: function parseEl(c) {
+      var d,
+          e = b.items[c];if (e.tagName ? e = { el: a(e) } : (d = e.type, e = { data: e, src: e.src }), e.el) {
+        for (var f = b.types, g = 0; g < f.length; g++) {
+          if (e.el.hasClass("mfp-" + f[g])) {
+            d = f[g];break;
+          }
+        }e.src = e.el.attr("data-mfp-src"), e.src || (e.src = e.el.attr("href"));
+      }return e.type = d || b.st.type || "inline", e.index = c, e.parsed = !0, b.items[c] = e, y("ElementParse", e), b.items[c];
+    }, addGroup: function addGroup(a, c) {
+      var d = function d(_d) {
+        _d.mfpEl = this, b._openClick(_d, a, c);
+      };c || (c = {});var e = "click.magnificPopup";c.mainEl = a, c.items ? (c.isObj = !0, a.off(e).on(e, d)) : (c.isObj = !1, c.delegate ? a.off(e).on(e, c.delegate, d) : (c.items = a, a.off(e).on(e, d)));
+    }, _openClick: function _openClick(c, d, e) {
+      var f = void 0 !== e.midClick ? e.midClick : a.magnificPopup.defaults.midClick;if (f || !(2 === c.which || c.ctrlKey || c.metaKey || c.altKey || c.shiftKey)) {
+        var g = void 0 !== e.disableOn ? e.disableOn : a.magnificPopup.defaults.disableOn;if (g) if (a.isFunction(g)) {
+          if (!g.call(b)) return !0;
+        } else if (v.width() < g) return !0;c.type && (c.preventDefault(), b.isOpen && c.stopPropagation()), e.el = a(c.mfpEl), e.delegate && (e.items = d.find(e.delegate)), b.open(e);
+      }
+    }, updateStatus: function updateStatus(a, d) {
+      if (b.preloader) {
+        c !== a && b.container.removeClass("mfp-s-" + c), d || "loading" !== a || (d = b.st.tLoading);var e = { status: a, text: d };y("UpdateStatus", e), a = e.status, d = e.text, b.preloader.html(d), b.preloader.find("a").on("click", function (a) {
+          a.stopImmediatePropagation();
+        }), b.container.addClass("mfp-s-" + a), c = a;
+      }
+    }, _checkIfClose: function _checkIfClose(c) {
+      if (!a(c).hasClass(s)) {
+        var d = b.st.closeOnContentClick,
+            e = b.st.closeOnBgClick;if (d && e) return !0;if (!b.content || a(c).hasClass("mfp-close") || b.preloader && c === b.preloader[0]) return !0;if (c === b.content[0] || a.contains(b.content[0], c)) {
+          if (d) return !0;
+        } else if (e && a.contains(document, c)) return !0;return !1;
+      }
+    }, _addClassToMFP: function _addClassToMFP(a) {
+      b.bgOverlay.addClass(a), b.wrap.addClass(a);
+    }, _removeClassFromMFP: function _removeClassFromMFP(a) {
+      this.bgOverlay.removeClass(a), b.wrap.removeClass(a);
+    }, _hasScrollBar: function _hasScrollBar(a) {
+      return (b.isIE7 ? d.height() : document.body.scrollHeight) > (a || v.height());
+    }, _setFocus: function _setFocus() {
+      (b.st.focus ? b.content.find(b.st.focus).eq(0) : b.wrap).focus();
+    }, _onFocusIn: function _onFocusIn(c) {
+      return c.target === b.wrap[0] || a.contains(b.wrap[0], c.target) ? void 0 : (b._setFocus(), !1);
+    }, _parseMarkup: function _parseMarkup(b, c, d) {
+      var e;d.data && (c = a.extend(d.data, c)), y(l, [b, c, d]), a.each(c, function (c, d) {
+        if (void 0 === d || d === !1) return !0;if (e = c.split("_"), e.length > 1) {
+          var f = b.find(p + "-" + e[0]);if (f.length > 0) {
+            var g = e[1];"replaceWith" === g ? f[0] !== d[0] && f.replaceWith(d) : "img" === g ? f.is("img") ? f.attr("src", d) : f.replaceWith(a("<img>").attr("src", d).attr("class", f.attr("class"))) : f.attr(e[1], d);
+          }
+        } else b.find(p + "-" + c).html(d);
+      });
+    }, _getScrollbarSize: function _getScrollbarSize() {
+      if (void 0 === b.scrollbarSize) {
+        var a = document.createElement("div");a.style.cssText = "width: 99px; height: 99px; overflow: scroll; position: absolute; top: -9999px;", document.body.appendChild(a), b.scrollbarSize = a.offsetWidth - a.clientWidth, document.body.removeChild(a);
+      }return b.scrollbarSize;
+    } }, a.magnificPopup = { instance: null, proto: t.prototype, modules: [], open: function open(b, c) {
+      return A(), b = b ? a.extend(!0, {}, b) : {}, b.isObj = !0, b.index = c || 0, this.instance.open(b);
+    }, close: function close() {
+      return a.magnificPopup.instance && a.magnificPopup.instance.close();
+    }, registerModule: function registerModule(b, c) {
+      c.options && (a.magnificPopup.defaults[b] = c.options), a.extend(this.proto, c.proto), this.modules.push(b);
+    }, defaults: { disableOn: 0, key: null, midClick: !1, mainClass: "", preloader: !0, focus: "", closeOnContentClick: !1, closeOnBgClick: !0, closeBtnInside: !0, showCloseBtn: !0, enableEscapeKey: !0, modal: !1, alignTop: !1, removalDelay: 0, prependTo: null, fixedContentPos: "auto", fixedBgPos: "auto", overflowY: "auto", closeMarkup: '<button title="%title%" type="button" class="mfp-close">&#215;</button>', tClose: "Close (Esc)", tLoading: "Loading...", autoFocusLast: !0 } }, a.fn.magnificPopup = function (c) {
+    A();var d = a(this);if ("string" == typeof c) {
+      if ("open" === c) {
+        var e,
+            f = u ? d.data("magnificPopup") : d[0].magnificPopup,
+            g = parseInt(arguments[1], 10) || 0;f.items ? e = f.items[g] : (e = d, f.delegate && (e = e.find(f.delegate)), e = e.eq(g)), b._openClick({ mfpEl: e }, d, f);
+      } else b.isOpen && b[c].apply(b, Array.prototype.slice.call(arguments, 1));
+    } else c = a.extend(!0, {}, c), u ? d.data("magnificPopup", c) : d[0].magnificPopup = c, b.addGroup(d, c);return d;
+  };var C,
+      D,
+      E,
+      F = "inline",
+      G = function G() {
+    E && (D.after(E.addClass(C)).detach(), E = null);
+  };a.magnificPopup.registerModule(F, { options: { hiddenClass: "hide", markup: "", tNotFound: "Content not found" }, proto: { initInline: function initInline() {
+        b.types.push(F), w(h + "." + F, function () {
+          G();
+        });
+      }, getInline: function getInline(c, d) {
+        if (G(), c.src) {
+          var e = b.st.inline,
+              f = a(c.src);if (f.length) {
+            var g = f[0].parentNode;g && g.tagName && (D || (C = e.hiddenClass, D = x(C), C = "mfp-" + C), E = f.after(D).detach().removeClass(C)), b.updateStatus("ready");
+          } else b.updateStatus("error", e.tNotFound), f = a("<div>");return c.inlineElement = f, f;
+        }return b.updateStatus("ready"), b._parseMarkup(d, {}, c), d;
+      } } });var H,
+      I = "ajax",
+      J = function J() {
+    H && a(document.body).removeClass(H);
+  },
+      K = function K() {
+    J(), b.req && b.req.abort();
+  };a.magnificPopup.registerModule(I, { options: { settings: null, cursor: "mfp-ajax-cur", tError: '<a href="%url%">The content</a> could not be loaded.' }, proto: { initAjax: function initAjax() {
+        b.types.push(I), H = b.st.ajax.cursor, w(h + "." + I, K), w("BeforeChange." + I, K);
+      }, getAjax: function getAjax(c) {
+        H && a(document.body).addClass(H), b.updateStatus("loading");var d = a.extend({ url: c.src, success: function success(d, e, f) {
+            var g = { data: d, xhr: f };y("ParseAjax", g), b.appendContent(a(g.data), I), c.finished = !0, J(), b._setFocus(), setTimeout(function () {
+              b.wrap.addClass(q);
+            }, 16), b.updateStatus("ready"), y("AjaxContentAdded");
+          }, error: function error() {
+            J(), c.finished = c.loadError = !0, b.updateStatus("error", b.st.ajax.tError.replace("%url%", c.src));
+          } }, b.st.ajax.settings);return b.req = a.ajax(d), "";
+      } } });var L,
+      M = function M(c) {
+    if (c.data && void 0 !== c.data.title) return c.data.title;var d = b.st.image.titleSrc;if (d) {
+      if (a.isFunction(d)) return d.call(b, c);if (c.el) return c.el.attr(d) || "";
+    }return "";
+  };a.magnificPopup.registerModule("image", { options: { markup: '<div class="mfp-figure"><div class="mfp-close"></div><figure><div class="mfp-img"></div><figcaption><div class="mfp-bottom-bar"><div class="mfp-title"></div><div class="mfp-counter"></div></div></figcaption></figure></div>', cursor: "mfp-zoom-out-cur", titleSrc: "title", verticalFit: !0, tError: '<a href="%url%">The image</a> could not be loaded.' }, proto: { initImage: function initImage() {
+        var c = b.st.image,
+            d = ".image";b.types.push("image"), w(m + d, function () {
+          "image" === b.currItem.type && c.cursor && a(document.body).addClass(c.cursor);
+        }), w(h + d, function () {
+          c.cursor && a(document.body).removeClass(c.cursor), v.off("resize" + p);
+        }), w("Resize" + d, b.resizeImage), b.isLowIE && w("AfterChange", b.resizeImage);
+      }, resizeImage: function resizeImage() {
+        var a = b.currItem;if (a && a.img && b.st.image.verticalFit) {
+          var c = 0;b.isLowIE && (c = parseInt(a.img.css("padding-top"), 10) + parseInt(a.img.css("padding-bottom"), 10)), a.img.css("max-height", b.wH - c);
+        }
+      }, _onImageHasSize: function _onImageHasSize(a) {
+        a.img && (a.hasSize = !0, L && clearInterval(L), a.isCheckingImgSize = !1, y("ImageHasSize", a), a.imgHidden && (b.content && b.content.removeClass("mfp-loading"), a.imgHidden = !1));
+      }, findImageSize: function findImageSize(a) {
+        var c = 0,
+            d = a.img[0],
+            e = function e(f) {
+          L && clearInterval(L), L = setInterval(function () {
+            return d.naturalWidth > 0 ? void b._onImageHasSize(a) : (c > 200 && clearInterval(L), c++, void (3 === c ? e(10) : 40 === c ? e(50) : 100 === c && e(500)));
+          }, f);
+        };e(1);
+      }, getImage: function getImage(c, d) {
+        var e = 0,
+            f = function f() {
+          c && (c.img[0].complete ? (c.img.off(".mfploader"), c === b.currItem && (b._onImageHasSize(c), b.updateStatus("ready")), c.hasSize = !0, c.loaded = !0, y("ImageLoadComplete")) : (e++, 200 > e ? setTimeout(f, 100) : g()));
+        },
+            g = function g() {
+          c && (c.img.off(".mfploader"), c === b.currItem && (b._onImageHasSize(c), b.updateStatus("error", h.tError.replace("%url%", c.src))), c.hasSize = !0, c.loaded = !0, c.loadError = !0);
+        },
+            h = b.st.image,
+            i = d.find(".mfp-img");if (i.length) {
+          var j = document.createElement("img");j.className = "mfp-img", c.el && c.el.find("img").length && (j.alt = c.el.find("img").attr("alt")), c.img = a(j).on("load.mfploader", f).on("error.mfploader", g), j.src = c.src, i.is("img") && (c.img = c.img.clone()), j = c.img[0], j.naturalWidth > 0 ? c.hasSize = !0 : j.width || (c.hasSize = !1);
+        }return b._parseMarkup(d, { title: M(c), img_replaceWith: c.img }, c), b.resizeImage(), c.hasSize ? (L && clearInterval(L), c.loadError ? (d.addClass("mfp-loading"), b.updateStatus("error", h.tError.replace("%url%", c.src))) : (d.removeClass("mfp-loading"), b.updateStatus("ready")), d) : (b.updateStatus("loading"), c.loading = !0, c.hasSize || (c.imgHidden = !0, d.addClass("mfp-loading"), b.findImageSize(c)), d);
+      } } });var N,
+      O = function O() {
+    return void 0 === N && (N = void 0 !== document.createElement("p").style.MozTransform), N;
+  };a.magnificPopup.registerModule("zoom", { options: { enabled: !1, easing: "ease-in-out", duration: 300, opener: function opener(a) {
+        return a.is("img") ? a : a.find("img");
+      } }, proto: { initZoom: function initZoom() {
+        var a,
+            c = b.st.zoom,
+            d = ".zoom";if (c.enabled && b.supportsTransition) {
+          var e,
+              f,
+              g = c.duration,
+              j = function j(a) {
+            var b = a.clone().removeAttr("style").removeAttr("class").addClass("mfp-animated-image"),
+                d = "all " + c.duration / 1e3 + "s " + c.easing,
+                e = { position: "fixed", zIndex: 9999, left: 0, top: 0, "-webkit-backface-visibility": "hidden" },
+                f = "transition";return e["-webkit-" + f] = e["-moz-" + f] = e["-o-" + f] = e[f] = d, b.css(e), b;
+          },
+              k = function k() {
+            b.content.css("visibility", "visible");
+          };w("BuildControls" + d, function () {
+            if (b._allowZoom()) {
+              if (clearTimeout(e), b.content.css("visibility", "hidden"), a = b._getItemToZoom(), !a) return void k();f = j(a), f.css(b._getOffset()), b.wrap.append(f), e = setTimeout(function () {
+                f.css(b._getOffset(!0)), e = setTimeout(function () {
+                  k(), setTimeout(function () {
+                    f.remove(), a = f = null, y("ZoomAnimationEnded");
+                  }, 16);
+                }, g);
+              }, 16);
+            }
+          }), w(i + d, function () {
+            if (b._allowZoom()) {
+              if (clearTimeout(e), b.st.removalDelay = g, !a) {
+                if (a = b._getItemToZoom(), !a) return;f = j(a);
+              }f.css(b._getOffset(!0)), b.wrap.append(f), b.content.css("visibility", "hidden"), setTimeout(function () {
+                f.css(b._getOffset());
+              }, 16);
+            }
+          }), w(h + d, function () {
+            b._allowZoom() && (k(), f && f.remove(), a = null);
+          });
+        }
+      }, _allowZoom: function _allowZoom() {
+        return "image" === b.currItem.type;
+      }, _getItemToZoom: function _getItemToZoom() {
+        return b.currItem.hasSize ? b.currItem.img : !1;
+      }, _getOffset: function _getOffset(c) {
+        var d;d = c ? b.currItem.img : b.st.zoom.opener(b.currItem.el || b.currItem);var e = d.offset(),
+            f = parseInt(d.css("padding-top"), 10),
+            g = parseInt(d.css("padding-bottom"), 10);e.top -= a(window).scrollTop() - f;var h = { width: d.width(), height: (u ? d.innerHeight() : d[0].offsetHeight) - g - f };return O() ? h["-moz-transform"] = h.transform = "translate(" + e.left + "px," + e.top + "px)" : (h.left = e.left, h.top = e.top), h;
+      } } });var P = "iframe",
+      Q = "//about:blank",
+      R = function R(a) {
+    if (b.currTemplate[P]) {
+      var c = b.currTemplate[P].find("iframe");c.length && (a || (c[0].src = Q), b.isIE8 && c.css("display", a ? "block" : "none"));
+    }
+  };a.magnificPopup.registerModule(P, { options: { markup: '<div class="mfp-iframe-scaler"><div class="mfp-close"></div><iframe class="mfp-iframe" src="//about:blank" frameborder="0" allowfullscreen></iframe></div>', srcAction: "iframe_src", patterns: { youtube: { index: "youtube.com", id: "v=", src: "//www.youtube.com/embed/%id%?autoplay=1" }, vimeo: { index: "vimeo.com/", id: "/", src: "//player.vimeo.com/video/%id%?autoplay=1" }, gmaps: { index: "//maps.google.", src: "%id%&output=embed" } } }, proto: { initIframe: function initIframe() {
+        b.types.push(P), w("BeforeChange", function (a, b, c) {
+          b !== c && (b === P ? R() : c === P && R(!0));
+        }), w(h + "." + P, function () {
+          R();
+        });
+      }, getIframe: function getIframe(c, d) {
+        var e = c.src,
+            f = b.st.iframe;a.each(f.patterns, function () {
+          return e.indexOf(this.index) > -1 ? (this.id && (e = "string" == typeof this.id ? e.substr(e.lastIndexOf(this.id) + this.id.length, e.length) : this.id.call(this, e)), e = this.src.replace("%id%", e), !1) : void 0;
+        });var g = {};return f.srcAction && (g[f.srcAction] = e), b._parseMarkup(d, g, c), b.updateStatus("ready"), d;
+      } } });var S = function S(a) {
+    var c = b.items.length;return a > c - 1 ? a - c : 0 > a ? c + a : a;
+  },
+      T = function T(a, b, c) {
+    return a.replace(/%curr%/gi, b + 1).replace(/%total%/gi, c);
+  };a.magnificPopup.registerModule("gallery", { options: { enabled: !1, arrowMarkup: '<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"></button>', preload: [0, 2], navigateByImgClick: !0, arrows: !0, tPrev: "Previous (Left arrow key)", tNext: "Next (Right arrow key)", tCounter: "%curr% of %total%" }, proto: { initGallery: function initGallery() {
+        var c = b.st.gallery,
+            e = ".mfp-gallery";return b.direction = !0, c && c.enabled ? (f += " mfp-gallery", w(m + e, function () {
+          c.navigateByImgClick && b.wrap.on("click" + e, ".mfp-img", function () {
+            return b.items.length > 1 ? (b.next(), !1) : void 0;
+          }), d.on("keydown" + e, function (a) {
+            37 === a.keyCode ? b.prev() : 39 === a.keyCode && b.next();
+          });
+        }), w("UpdateStatus" + e, function (a, c) {
+          c.text && (c.text = T(c.text, b.currItem.index, b.items.length));
+        }), w(l + e, function (a, d, e, f) {
+          var g = b.items.length;e.counter = g > 1 ? T(c.tCounter, f.index, g) : "";
+        }), w("BuildControls" + e, function () {
+          if (b.items.length > 1 && c.arrows && !b.arrowLeft) {
+            var d = c.arrowMarkup,
+                e = b.arrowLeft = a(d.replace(/%title%/gi, c.tPrev).replace(/%dir%/gi, "left")).addClass(s),
+                f = b.arrowRight = a(d.replace(/%title%/gi, c.tNext).replace(/%dir%/gi, "right")).addClass(s);e.click(function () {
+              b.prev();
+            }), f.click(function () {
+              b.next();
+            }), b.container.append(e.add(f));
+          }
+        }), w(n + e, function () {
+          b._preloadTimeout && clearTimeout(b._preloadTimeout), b._preloadTimeout = setTimeout(function () {
+            b.preloadNearbyImages(), b._preloadTimeout = null;
+          }, 16);
+        }), void w(h + e, function () {
+          d.off(e), b.wrap.off("click" + e), b.arrowRight = b.arrowLeft = null;
+        })) : !1;
+      }, next: function next() {
+        b.direction = !0, b.index = S(b.index + 1), b.updateItemHTML();
+      }, prev: function prev() {
+        b.direction = !1, b.index = S(b.index - 1), b.updateItemHTML();
+      }, goTo: function goTo(a) {
+        b.direction = a >= b.index, b.index = a, b.updateItemHTML();
+      }, preloadNearbyImages: function preloadNearbyImages() {
+        var a,
+            c = b.st.gallery.preload,
+            d = Math.min(c[0], b.items.length),
+            e = Math.min(c[1], b.items.length);for (a = 1; a <= (b.direction ? e : d); a++) {
+          b._preloadItem(b.index + a);
+        }for (a = 1; a <= (b.direction ? d : e); a++) {
+          b._preloadItem(b.index - a);
+        }
+      }, _preloadItem: function _preloadItem(c) {
+        if (c = S(c), !b.items[c].preloaded) {
+          var d = b.items[c];d.parsed || (d = b.parseEl(c)), y("LazyLoad", d), "image" === d.type && (d.img = a('<img class="mfp-img" />').on("load.mfploader", function () {
+            d.hasSize = !0;
+          }).on("error.mfploader", function () {
+            d.hasSize = !0, d.loadError = !0, y("LazyLoadError", d);
+          }).attr("src", d.src)), d.preloaded = !0;
+        }
+      } } });var U = "retina";a.magnificPopup.registerModule(U, { options: { replaceSrc: function replaceSrc(a) {
+        return a.src.replace(/\.\w+$/, function (a) {
+          return "@2x" + a;
+        });
+      }, ratio: 1 }, proto: { initRetina: function initRetina() {
+        if (window.devicePixelRatio > 1) {
+          var a = b.st.retina,
+              c = a.ratio;c = isNaN(c) ? c() : c, c > 1 && (w("ImageHasSize." + U, function (a, b) {
+            b.img.css({ "max-width": b.img[0].naturalWidth / c, width: "100%" });
+          }), w("ElementParse." + U, function (b, d) {
+            d.src = a.replaceSrc(d, c);
+          }));
+        }
+      } } }), A();
+});
+
+/***/ }),
+/* 149 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(150)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(152)
+/* template */
+var __vue_template__ = __webpack_require__(173)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/seller/header/header.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-da09459e", Component.options)
+  } else {
+    hotAPI.reload("data-v-da09459e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(145);
+var content = __webpack_require__(151);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("f1f89798", content, false, {});
+var update = __webpack_require__(2)("1a57cf3a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-349d7002\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header-top.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-349d7002\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header-top.vue");
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-da09459e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-da09459e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -61288,7 +60446,1471 @@ if(false) {
 }
 
 /***/ }),
-/* 145 */
+/* 151 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    vertical-align: baseline;\n}\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, menu, nav, section {\n    display: block;\n}\nbody {\n    line-height: 1.1;\n    font-family: IRANSans, sans-serif;\n    font-size: 14px;\n}\nol, ul {\n    list-style: none;\n}\nblockquote, q {\n    quotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n    content: none;\n}\ntable {\n    border-collapse: collapse;\n    border-spacing: 0;\n}\nimg, svg {\n    width: 100%;\n}\na, a:hover, a:visited, a:focus, a:active {\n    text-decoration: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\nth, td {\n    padding: 7px;\n    text-align: right;\n}\n\n/*start style right header*/\n.logo {\n    height: 64px;\n\n    display: block;\n\n    float: right;\n\n    width: 70%;\n}\n.logo_hide {\n    display: none;\n}\n.logo a {\n    display: inline-block;\n    margin-top: -11px;\n    height: 75px;\n    padding: 0 10px;\n}\n.right-header {\n    width: 250px;\n    right: 0;\n    bottom: 0;\n    position: fixed;\n    top: 0;\n    overflow: hidden;\n    z-index: 9;\n}\n.little_header {\n    width: 80px;\n}\n.right-header.mobile-header {\n    display: none;\n    -webkit-box-shadow: 0 0 20px;\n            box-shadow: 0 0 20px;\n}\n.right-header > header {\n    overflow: hidden;\n    background: #fff;\n}\n.clouse_menu, .clouse_menu_mob {\n    float: left;\n    width: 30%;\n    border: none;\n    background: none;\n    font-size: 35px;\n    top: 0;\n    position: relative;\n    padding: 11px;\n}\n.clouse_menu_mob {\n    display: none;\n}\n.main-right-header {\n    background: #313a43;\n    height: 100%;\n    text-align: right;\n    color: #fff;\n    position: relative;\n}\n.show-header button {\n    float: right;\n    border: none;\n    background: none;\n    font-size: 25px;\n    padding: 19px 30px 19px 24px;\n    display: none;\n}\n.profile {\n    padding: 20px 20px 10px;\n    border-bottom: 2px solid #2e353e;\n}\n.profile-img {\n    overflow: hidden;\n    border-radius: 50%;\n    height: 85px;\n    width: 85px;\n    margin: 0 auto;\n    margin-left: 10px;\n    border: 2px solid #fff;\n    float: right;\n}\n.profile-img img {\n    height: 100%;\n}\n.profile-content {\n    float: right;\n    padding-top: 15px;\n}\n.profile-name {\n    margin: 8px 0;\n    font-size: 17px;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.header-menu a {\n    color: #b1b1b1;\n    padding: 10px 20px;\n    display: inline-block;\n    position: relative;\n    width: 100%;\n}\n.header-menu {\n    padding: 10px 0;\n}\n.header-menu a:hover {\n    color: #fff;\n    background: #637484;\n}\n.header-menu a:hover::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu li.active a {\n    color: #fff;\n    background: #637484;\n}\n.header-menu li.active a:before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.copy-right {\n    text-align: center;\n    font-size: 12px;\n    font-weight: 200;\n    line-height: 1.3em;\n    padding: 20px;\n    position: absolute;\n    bottom: 76px;\n}\nlabel {\n    display: block;\n    margin: 9px auto;\n}\ninput[type=\"text\"], select, input[type=\"button\"], textarea {\n    width: 100% !important;\n}\ninput[type=\"text\"], select, textarea {\n    background: #eff3f6;\n    border: 1px solid #cfcfcf;\n    border-radius: 3px;\n    width: 100% !important;\n}\ninput[type=\"text\"], textarea {\n    padding: 13px 15px;\n    width: 100% !important;\n}\nselect {\n    padding: 7px 15px;\n}\n.image-header-profile img {\n    height: 100%;\n}\n.right-menu-header {\n    position: relative;\n}\n.right-menu-header li ul a {\n    font-size: 14px;\n    width: 100%;\n    display: inline-block;\n}\n.right-menu-header li ul li {\n\n    margin: 5px;\n}\n.icon-header-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    right: 75px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n\n/*end style right header*/\n\n\n\n/*loader*/\n.loader-display{\n    position: fixed;\n    z-index: 10;\n    top:0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0,0,0,0.5);\n    display: block;\n}\n.main-loader{\n    position: absolute;\n\n    top: 35%;\n\n    text-align: center;\n\n    display: block;\n\n    width: 100%;\n\n    color: #fff;\n\n    font-size: 23px;\n}\n.main-loader img{\n    width: 100px;\n\n    background: #fff;\n\n    border-radius: 50px;\n\n    height: 100px;\n\n    display: inline-block;\n\n    margin: 0 auto 22px;\n}\n.loader-wrapper{\n    display:none;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header {\n        display: none;\n}\n.right-header.mobile-header {\n        display: block;\n        right: -300px;\n}\n.main-header, .little-main-header {\n        right: 0 !important;\n}\n#main, #main.little-main {\n        margin-right: 0 !important;\n}\n.post-contents-table {\n        width: 100%;\n}\n.copy-right {\n        display: none;\n}\n.clouse_menu {\n        display: none;\n}\n.clouse_menu_mob {\n        display: block;\n}\n.show-header button {\n        display: block;\n}\n.kind_user > div, .kind_activity > div {\n        float: none;\n}\n.img-profile .submit {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post, .contents-post {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.name-header-profile {\n        display: none;\n}\n.profile-menu-header {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a {\n        font-size: 12px !important;\n        padding: 16px 13px !important;\n}\n.sub-header {\n        bottom: -44px;\n}\n}\n\n/*end loader*/\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 152 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sub_com_profile_info_vue__ = __webpack_require__(153);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sub_com_profile_info_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__sub_com_profile_info_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue__ = __webpack_require__(158);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        profileinfo: __WEBPACK_IMPORTED_MODULE_1__sub_com_profile_info_vue___default.a,
+        headerMenuList: __WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue___default.a,
+        headerTop: __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue___default.a
+    },
+    props: ['defultimg', 'logo', 'loading', 'storage', 'transactroute', 'mytrans', 'selregpro', 'byadreq', 'profilebasic', 'logout', 'routehome', 'guide'],
+    data: function data() {
+        return {
+            currentUser: {
+                profile: {
+                    is_company: '',
+                    company_name: '',
+                    company_register_code: '',
+                    address: '',
+                    public_phone: '',
+                    profile_photo: this.storage + '',
+                    postal_code: '',
+                    shaba_code: ''
+                },
+                user_info: ''
+            },
+            profileBasicFields: ['is_company', 'company_name', 'company_register_code', 'public_phone', 'address', 'postal_code', 'shaba_code'],
+            profilePhoto: '',
+            errors: '',
+            popUpMsg: '',
+            submiting: false
+
+        };
+    },
+    methods: {
+
+        init: function init() {
+            var _this = this;
+
+            this.isLoaded = true;
+            axios.post('/user/profile_info').then(function (response) {
+                return _this.currentUser = response.data;
+            });
+        },
+        RegisterBasicProfileInfo: function RegisterBasicProfileInfo() {
+            this.submiting = true;
+            this.errors = '';
+            var self = this;
+
+            var data = new FormData();
+
+            for (var i = 0, cnt = this.profileBasicFields.length; i < cnt; i++) {
+                if (this.currentUser.profile[this.profileBasicFields[i]] != null) {
+                    data.append(this.profileBasicFields[i], this.toLatinNumbers(this.currentUser.profile[this.profileBasicFields[i]]));
+                }
+            }
+
+            var profilePhoto = this.$refs.profilePhoto.files[0];
+            if (profilePhoto) {
+                data.append('profile_photo', profilePhoto);
+            }
+
+            axios.post('/user/profile_modification', data).then(function (response) {
+                if (response.status == 200) {
+                    self.submiting = false;
+                    self.popUpMsg = 'تغییرات با موفقیت اعمال شد';
+
+                    $('#myModal').modal('show');
+                }
+                self.submiting = false;
+            }).catch(function (err) {
+                self.errors = '';
+                self.errors = err.response.data.errors;
+                self.submiting = false;
+            });
+        },
+        toLatinNumbers: function toLatinNumbers(num) {
+            if (num == null) {
+                return null;
+            }
+            var numDic = {
+                '۰': '0',
+                '۱': '1',
+                '۲': '2',
+                '۳': '3',
+                '۴': '4',
+                '۵': '5',
+                '۶': '6',
+                '۷': '7',
+                '۸': '8',
+                '۹': '9'
+            };
+
+            return num.toString().replace(/[۰-۹]/g, function (w) {
+                return numDic[w];
+            });
+        },
+        toggle_header: function toggle_header() {
+            var menu_but = $(".clouse_menu");
+            var menu_but_icon = $(".clouse_menu i");
+            var profile = $(".profile");
+            var header_menu = $(".header-menu span");
+            var header_menu_a = $(".header-menu a");
+            var logo = $(".logo");
+            var copy_right = $(".copy-right");
+            var right_header_desk = $(".right-header.desktop-header");
+            var little_main_header = $(".main-header");
+            var main = $("#main");
+            var next_move = "shrink";
+            menu_but.click(function () {
+                if (next_move == "expand") {
+                    $(this).css({
+                        width: "30%"
+                    });
+                    menu_but_icon.addClass('fa-angle-left', 200).removeClass('fa-angle-right');
+                    // menu_but_icon.switchClass("fa-angle-left"," fa-angle-right",200);
+                    profile.fadeIn();
+                    copy_right.css('display', 'block');
+                    logo.fadeIn();
+                    header_menu.css('display', 'inline');
+                    header_menu_a.css({
+                        "text-align": "right"
+                    });
+                    right_header_desk.removeClass("little_header", 200);
+                    little_main_header.removeClass("little-main-header", 200);
+                    main.removeClass("little-main", 200);
+                    next_move = "shrink";
+                } else {
+                    $(this).css({
+                        width: "100%"
+                    });
+                    menu_but_icon.addClass('fa-angle-right', 200).removeClass('fa-angle-left', 200);
+                    // menu_but_icon.switchClass("fa-angle-right"," fa-angle-left",200);
+                    profile.css('display', 'none');
+                    header_menu.css('display', 'none');
+                    copy_right.css('display', 'none');
+                    logo.css('display', 'none');
+                    header_menu_a.css({
+                        "text-align": "center"
+                    });
+                    right_header_desk.addClass("little_header", 200);
+                    little_main_header.addClass("little-main-header", 200);
+                    main.addClass("little-main", 200);
+                    next_move = "expand";
+                }
+            });
+        },
+        toggle_show_header: function toggle_show_header() {
+            var el = $('.show-header button');
+            var el_clouse = $('.clouse_menu_mob');
+            var flag = true;
+            var right_header = $(".right-header.mobile-header");
+            var back = $(".background_mob_sec");
+            el.on('click', function () {
+                if (flag == true) {
+                    console.log('flag = true');
+                    right_header.animate({
+                        right: '0'
+                    }, 300);
+                    back.fadeIn();
+
+                    flag = false;
+                } else {
+                    right_header.animate({
+                        right: '-300px'
+                    }, 300);
+
+                    flag = true;
+                }
+            });
+            el_clouse.on('click', function () {
+                if (flag == true) {
+                    right_header.animate({
+                        right: '0'
+                    }, 300);
+                    flag = false;
+                } else {
+                    right_header.animate({
+                        right: '-300px'
+
+                    }, 300);
+                    back.fadeOut();
+                    flag = true;
+                }
+            });
+        }
+    },
+    mounted: function mounted() {
+        this.init();
+        this.toggle_header();
+        this.toggle_show_header();
+    },
+    created: function created() {
+        var _this2 = this;
+
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('submitingEvent', function (event) {
+            _this2.submiting = event;
+        });
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('submitSuccess', function (event) {
+            _this2.popUpMsg = event;
+        });
+    }
+});
+
+/***/ }),
+/* 153 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(154)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(156)
+/* template */
+var __vue_template__ = __webpack_require__(157)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/seller/header/sub-com/profile_info.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7acbc83a", Component.options)
+  } else {
+    hotAPI.reload("data-v-7acbc83a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 154 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(155);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("554389ee", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../../node_modules/css-loader/index.js!../../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7acbc83a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./profile_info.vue", function() {
+     var newContent = require("!!../../../../../../../../node_modules/css-loader/index.js!../../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7acbc83a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./profile_info.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 155 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.green-bot {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot:focus,.gray-bot:focus {\n    color: #fff;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 156 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['photoLink', 'storage', 'def', 'username', 'usercity', 'userprof']
+
+});
+
+/***/ }),
+/* 157 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "profile" }, [
+      _vm.photoLink != null
+        ? _c("div", { staticClass: "profile-img" }, [
+            _c("img", { attrs: { src: _vm.storage + "/" + _vm.photoLink } })
+          ])
+        : _c("div", { staticClass: "profile-img" }, [
+            _c("img", { attrs: { src: _vm.def } })
+          ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "profile-content" }, [
+        _c("div", { staticClass: "profile-name" }, [
+          _vm._v("\n                " + _vm._s(_vm.username) + "\n            ")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "profile-city" }, [
+          _vm._v("\n                " + _vm._s(_vm.usercity) + "\n            ")
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "green-bot",
+          attrs: { href: "/profile/" + _vm.userprof }
+        },
+        [_vm._v("\n            نمایش پروفایل من\n        ")]
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7acbc83a", module.exports)
+  }
+}
+
+/***/ }),
+/* 158 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(159)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(161)
+/* template */
+var __vue_template__ = __webpack_require__(162)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/seller/header/sub-com/header-menu-list.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-044d9feb", Component.options)
+  } else {
+    hotAPI.reload("data-v-044d9feb", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 159 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(160);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("312012ea", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../../node_modules/css-loader/index.js!../../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-044d9feb\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header-menu-list.vue", function() {
+     var newContent = require("!!../../../../../../../../node_modules/css-loader/index.js!../../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-044d9feb\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header-menu-list.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 160 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.sub-header a.router-link-exact-active {\n    color: #313942;\n}\n.sub-header a.router-link-exact-active::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.header-menu a.router-link-exact-active::before,a.active::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu  a.router-link-exact-active,a.active {\n    color: #fff;\n    background: #637484;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 161 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['profilebasic', 'byadreq', 'selregpro', 'transactroute', 'mytrans', 'guide'],
+    data: function data() {
+        return {
+            active_el: 0
+        };
+    },
+
+    methods: {
+        /* activate:function(el){
+             this.active_el = el;
+         }*/
+        subIsActive: function subIsActive(input) {
+            var _this = this;
+
+            var paths = Array.isArray(input) ? input : [input];
+            return paths.some(function (path) {
+                return _this.$route.path.indexOf(path) === 0; // current path starts with this path string
+            });
+        }
+    }, watch: {
+        $route: function $route() {
+            if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract')) {
+                this.active_el = 1;
+            } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests')) {
+                this.active_el = 2;
+            } else if (this.subIsActive('/register-product')) {
+                this.active_el = 3;
+            } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')) {
+                this.active_el = 4;
+            } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/*')) {
+                this.active_el = 5;
+            } else if (this.subIsActive('/guide')) {
+                this.active_el = 6;
+            } else {
+                this.active_el = 1;
+            }
+            console.log(this.active_el);
+        }
+    }, mounted: function mounted() {
+        if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract') || this.subIsActive('/*')) {
+            this.active_el = 1;
+        } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests')) {
+            this.active_el = 2;
+        } else if (this.subIsActive('/register-product')) {
+            this.active_el = 3;
+        } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')) {
+            this.active_el = 4;
+        } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/*')) {
+            this.active_el = 5;
+        } else if (this.subIsActive('/guide')) {
+            this.active_el = 6;
+        }
+    },
+    created: function created() {
+        var _this2 = this;
+
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('active', function (event) {
+            _this2.active_el = event;
+        });
+    }
+});
+
+/***/ }),
+/* 162 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "header-menu" }, [
+      _c("ul", { staticClass: "list-unstyled" }, [
+        _c(
+          "li",
+          { staticClass: "list-item" },
+          [
+            _c(
+              "router-link",
+              {
+                class: { active: this.active_el === 1 },
+                attrs: { to: { name: "profileBasic" } }
+              },
+              [_c("span", [_vm._v("ویرایش پروفایل")])]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "list-item  " },
+          [
+            _c(
+              "router-link",
+              {
+                class: { active: this.active_el === 2 },
+                attrs: { to: { name: "buyAdRequests" } }
+              },
+              [_c("span", [_vm._v("درخواست ها")])]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "list-item  " },
+          [
+            _c(
+              "router-link",
+              {
+                class: { active: this.active_el === 3 },
+                attrs: { to: { name: "registerProduct" } }
+              },
+              [_c("span", [_vm._v("ثبت محصول ")])]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "list-item  " },
+          [
+            _c(
+              "router-link",
+              {
+                class: { active: this.active_el === 4 },
+                attrs: { to: { name: "myTransactions" } }
+              },
+              [_c("span", [_vm._v("تراکنش های جاری")])]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "list-item  " },
+          [
+            _c(
+              "router-link",
+              {
+                class: { active: this.active_el === 5 },
+                attrs: { to: { name: "myTerminatedTransactions" } }
+              },
+              [_c("span", [_vm._v("تراکنش های انجام شده")])]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "list-item  " },
+          [
+            _c(
+              "router-link",
+              {
+                class: { active: this.active_el === 6 },
+                attrs: { to: { name: "guide" } }
+              },
+              [_c("span", [_vm._v("راهنما")])]
+            )
+          ],
+          1
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "copy-right" }, [
+      _c("p", [
+        _vm._v(
+          "\n            تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.\n        "
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-044d9feb", module.exports)
+  }
+}
+
+/***/ }),
+/* 163 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(164)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(166)
+/* template */
+var __vue_template__ = __webpack_require__(172)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/seller/header/sub-com/header-top.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ccd9f498", Component.options)
+  } else {
+    hotAPI.reload("data-v-ccd9f498", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 164 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(165);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("627ff561", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../../node_modules/css-loader/index.js!../../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-ccd9f498\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header-top.vue", function() {
+     var newContent = require("!!../../../../../../../../node_modules/css-loader/index.js!../../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-ccd9f498\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header-top.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -61302,23 +61924,243 @@ exports.push([module.i, "\n#main {\n    margin-right: 250px;\n    margin-top: 65
 
 
 /***/ }),
-/* 146 */
+/* 166 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['photoLink', 'profilebasic', 'storage', 'def', 'username', 'out', 'routeHome'],
+    components: {
+        subMenu: __WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue___default.a
+    }
+});
+
+/***/ }),
+/* 167 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(168)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(170)
+/* template */
+var __vue_template__ = __webpack_require__(171)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/seller/header/sub-com/sub-menu/sub-menu.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-a2c38f40", Component.options)
+  } else {
+    hotAPI.reload("data-v-a2c38f40", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(147);
+var content = __webpack_require__(169);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("1a743800", content, false, {});
+var update = __webpack_require__(2)("c78f25a0", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-57843a52\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./sub-menu.vue", function() {
-     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-57843a52\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./sub-menu.vue");
+   module.hot.accept("!!../../../../../../../../../node_modules/css-loader/index.js!../../../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a2c38f40\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./sub-menu.vue", function() {
+     var newContent = require("!!../../../../../../../../../node_modules/css-loader/index.js!../../../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a2c38f40\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./sub-menu.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -61328,7 +62170,7 @@ if(false) {
 }
 
 /***/ }),
-/* 147 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -61340,6 +62182,13300 @@ exports.push([module.i, "\n\n/*start style sub-header*/\n.sub-header {\n    posi
 
 // exports
 
+
+/***/ }),
+/* 170 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            items: []
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('subHeader', function (event) {
+            _this.items = event;
+        });
+    }
+});
+
+/***/ }),
+/* 171 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "sub-header" }, [
+    _c(
+      "ul",
+      { staticClass: "list-inline" },
+      _vm._l(_vm.items, function(item) {
+        return _c(
+          "li",
+          { staticClass: "list-item", class: item.active },
+          [
+            _c("router-link", { attrs: { to: { name: item.url } } }, [
+              _vm._v(
+                "\n                " + _vm._s(item.message) + "\n            "
+              )
+            ])
+          ],
+          1
+        )
+      })
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-a2c38f40", module.exports)
+  }
+}
+
+/***/ }),
+/* 172 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "header",
+      { staticClass: "main-header", attrs: { id: "header" } },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", { staticClass: "profile-menu-header" }, [
+          _c("a", { attrs: { href: "#", onclick: "dropdown()" } }, [
+            _vm.photoLink != null
+              ? _c("div", { staticClass: "image-header-profile" }, [
+                  _c("img", {
+                    attrs: { src: _vm.storage + "/" + _vm.photoLink }
+                  })
+                ])
+              : _c("div", { staticClass: "image-header-profile" }, [
+                  _c("img", { attrs: { src: _vm.def } })
+                ]),
+            _vm._v(" "),
+            _c("i", {
+              staticClass: "fa fa-angle-down",
+              attrs: { "aria-hidden": "true" }
+            }),
+            _vm._v(
+              "\n                " + _vm._s(_vm.username) + "\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "profile-list" }, [
+            _c("ul", { staticClass: "list-unstyled" }, [
+              _c("li", { staticClass: "list-item" }, [
+                _c("a", { attrs: { href: _vm.profilebasic } }, [
+                  _vm._v("پروفایل")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "list-item" }, [
+                _c("a", { attrs: { href: _vm.out } }, [_vm._v("خروج")])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "right-menu-header" }, [
+          _c("ul", { staticClass: "list-inline" }, [
+            _c("li", [
+              _c("a", { attrs: { href: _vm.routeHome } }, [
+                _c("i", {
+                  staticClass: "fa fa-home",
+                  attrs: { "aria-hidden": "true" }
+                })
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("subMenu")
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "show-header" }, [
+      _c("button", { staticClass: "fa fa-angle-left" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content-header" }, [
+      _c("span", { staticClass: "font-big" }, [_vm._v("اینکوباک  ")]),
+      _vm._v(" | "),
+      _c("span", [_vm._v(" بازارگاه آنلاین کشاورزی")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-ccd9f498", module.exports)
+  }
+}
+
+/***/ }),
+/* 173 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "container" }, [
+        _c(
+          "div",
+          {
+            ref: "myModal",
+            staticClass: "modal fade",
+            attrs: {
+              id: "myModal",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "myModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c("div", { staticClass: "modal-dialog" }, [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "main_popup_content" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "main_par" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.popUpMsg) +
+                        "\n                        "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn green-bot ",
+                      attrs: { "data-dismiss": "modal" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            متوجه شدم\n                        "
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c(
+          "div",
+          {
+            ref: "myModal",
+            staticClass: "modal fade",
+            attrs: {
+              id: "myModal-1",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "myModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [_vm._m(1)]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          class: {
+            "loader-wrapper": !_vm.submiting,
+            "loader-display": _vm.submiting
+          }
+        },
+        [
+          _c("div", { staticClass: "main-loader" }, [
+            _c("img", { attrs: { src: _vm.loading } }),
+            _vm._v(" "),
+            _c("p", { attrs: { dir: "rtl" } }, [_vm._v("کمی صبر کنید...")])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("section", { staticClass: "right-header mobile-header" }, [
+        _c("header", { staticClass: "header-right-header" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _vm._m(3),
+          _vm._v(" "),
+          _c("h1", { staticClass: "logo" }, [
+            _c("a", { attrs: { href: "/" } }, [
+              _c("img", { attrs: { src: _vm.logo, alt: "incoboc" } })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "section",
+          { staticClass: "main-right-header" },
+          [
+            _c("profileinfo", {
+              attrs: {
+                photoLink: _vm.currentUser.profile.profile_photo,
+                storage: _vm.storage,
+                def: _vm.defultimg,
+                username:
+                  _vm.currentUser.user_info.first_name +
+                  " " +
+                  _vm.currentUser.user_info.last_name,
+                usercity:
+                  _vm.currentUser.user_info.province +
+                  " - " +
+                  _vm.currentUser.user_info.city,
+                userprof: _vm.currentUser.user_info.user_name
+              }
+            }),
+            _vm._v(" "),
+            _c("header-menu-list", {
+              attrs: {
+                profilebasic: _vm.profilebasic,
+                byadreq: _vm.byadreq,
+                selregpro: _vm.selregpro,
+                transactroute: _vm.transactroute,
+                mytrans: _vm.mytrans
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "copy-right" })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "background_mob_sec" })
+      ]),
+      _vm._v(" "),
+      _c("section", { staticClass: "right-header desktop-header" }, [
+        _c("header", { staticClass: "header-right-header" }, [
+          _vm._m(4),
+          _vm._v(" "),
+          _vm._m(5),
+          _vm._v(" "),
+          _c("h1", { staticClass: "logo" }, [
+            _c("a", { attrs: { href: "/" } }, [
+              _c("img", { attrs: { src: _vm.logo, alt: "incoboc" } })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "section",
+          { staticClass: "main-right-header" },
+          [
+            _c("profileinfo", {
+              attrs: {
+                photoLink: _vm.currentUser.profile.profile_photo,
+                storage: _vm.storage,
+                def: _vm.defultimg,
+                username:
+                  _vm.currentUser.user_info.first_name +
+                  " " +
+                  _vm.currentUser.user_info.last_name,
+                usercity:
+                  _vm.currentUser.user_info.province +
+                  " - " +
+                  _vm.currentUser.user_info.city,
+                userprof: _vm.currentUser.user_info.user_name
+              }
+            }),
+            _vm._v(" "),
+            _c("header-menu-list", {
+              attrs: {
+                profilebasic: _vm.profilebasic,
+                byadreq: _vm.byadreq,
+                selregpro: _vm.selregpro,
+                transactroute: _vm.transactroute,
+                mytrans: _vm.mytrans,
+                guide: _vm.guide
+              }
+            })
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("headerTop", {
+        attrs: {
+          photoLink: _vm.currentUser.profile.profile_photo,
+          storage: _vm.storage,
+          def: _vm.defultimg,
+          username:
+            _vm.currentUser.user_info.first_name +
+            " " +
+            _vm.currentUser.user_info.last_name,
+          out: _vm.logout,
+          routeHome: _vm.routehome
+        }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "#", "data-dismiss": "modal" } }, [
+      _c("i", { staticClass: "fa fa-close" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-dialog" }, [
+      _c("div", { staticClass: "modal-content" }, [
+        _c("div", { staticClass: "main_popup_content" }, [
+          _c("a", { attrs: { href: "#", "data-dismiss": "modal" } }, [
+            _c("i", { staticClass: "fa fa-close" })
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "main_par", attrs: { id: "popUpMsg" } }, [
+            _vm._v(
+              "\n                            ابتدا پروفایل خود را کامل کنید.سپس منتظر تایید اطلاعات خود از سمت کارشناسان اینکوباک\n                            باشید.\n                        "
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn green-bot ",
+              attrs: { "data-dismiss": "modal" }
+            },
+            [
+              _vm._v(
+                "\n                            متوجه شدم\n                        "
+              )
+            ]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "clouse_menu_mob" }, [
+      _c("i", { staticClass: "fa fa-angle-right" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "clouse_menu" }, [
+      _c("i", { staticClass: "fa fa-angle-right" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "clouse_menu_mob" }, [
+      _c("i", { staticClass: "fa fa-angle-right" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "clouse_menu" }, [
+      _c("i", { staticClass: "fa fa-angle-right" })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-da09459e", module.exports)
+  }
+}
+
+/***/ }),
+/* 174 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(175)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(177)
+/* template */
+var __vue_template__ = __webpack_require__(198)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/buyer/header/header.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-68dff671", Component.options)
+  } else {
+    hotAPI.reload("data-v-68dff671", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 175 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(176);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("35a128e3", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68dff671\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68dff671\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 176 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    vertical-align: baseline;\n}\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, menu, nav, section {\n    display: block;\n}\nbody {\n    line-height: 1.1;\n    font-family: IRANSans, sans-serif;\n    font-size: 14px;\n}\nol, ul {\n    list-style: none;\n}\nblockquote, q {\n    quotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n    content: none;\n}\ntable {\n    border-collapse: collapse;\n    border-spacing: 0;\n}\nimg, svg {\n    width: 100%;\n}\na, a:hover, a:visited, a:focus, a:active {\n    text-decoration: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\nth, td {\n    padding: 7px;\n    text-align: right;\n}\n\n/*start style right header*/\n.logo {\n    height: 64px;\n\n    display: block;\n\n    float: right;\n\n    width: 70%;\n}\n.logo_hide {\n    display: none;\n}\n.logo a {\n    display: inline-block;\n    margin-top: -11px;\n    height: 75px;\n    padding: 0 10px;\n}\n.right-header {\n    width: 250px;\n    right: 0;\n    bottom: 0;\n    position: fixed;\n    top: 0;\n    overflow: hidden;\n    z-index: 9;\n}\n.little_header {\n    width: 80px;\n}\n.right-header.mobile-header {\n    display: none;\n    -webkit-box-shadow: 0 0 20px;\n            box-shadow: 0 0 20px;\n}\n.right-header > header {\n    overflow: hidden;\n    background: #fff;\n}\n.clouse_menu, .clouse_menu_mob {\n    float: left;\n    width: 30%;\n    border: none;\n    background: none;\n    font-size: 35px;\n    top: 0;\n    position: relative;\n    padding: 11px;\n}\n.clouse_menu_mob {\n    display: none;\n}\n.main-right-header {\n    background: #313a43;\n    height: 100%;\n    text-align: right;\n    color: #fff;\n    position: relative;\n}\n.show-header button {\n    float: right;\n    border: none;\n    background: none;\n    font-size: 25px;\n    padding: 19px 30px 19px 24px;\n    display: none;\n}\n.profile {\n    padding: 20px 20px 10px;\n    border-bottom: 2px solid #2e353e;\n}\n.profile-img {\n    overflow: hidden;\n    border-radius: 50%;\n    height: 85px;\n    width: 85px;\n    margin: 0 auto;\n    margin-left: 10px;\n    border: 2px solid #fff;\n    float: right;\n}\n.profile-img img {\n    height: 100%;\n}\n.profile-content {\n    float: right;\n    padding-top: 15px;\n}\n.profile-name {\n    margin: 8px 0;\n    font-size: 17px;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.header-menu a {\n    color: #b1b1b1;\n    padding: 10px 20px;\n    display: inline-block;\n    position: relative;\n    width: 100%;\n}\n.header-menu {\n    padding: 10px 0;\n}\n.header-menu a:hover {\n    color: #fff;\n    background: #637484;\n}\n.header-menu a:hover::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu li.active a {\n    color: #fff;\n    background: #637484;\n}\n.header-menu li.active a:before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.copy-right {\n    text-align: center;\n    font-size: 12px;\n    font-weight: 200;\n    line-height: 1.3em;\n    padding: 20px;\n    position: absolute;\n    bottom: 76px;\n}\nlabel {\n    display: block;\n    margin: 9px auto;\n}\ninput[type=\"text\"], select, input[type=\"button\"], textarea {\n    width: 100% !important;\n}\ninput[type=\"text\"], select, textarea {\n    background: #eff3f6;\n    border: 1px solid #cfcfcf;\n    border-radius: 3px;\n    width: 100% !important;\n}\ninput[type=\"text\"], textarea {\n    padding: 13px 15px;\n    width: 100% !important;\n}\nselect {\n    padding: 7px 15px;\n}\n.image-header-profile img {\n    height: 100%;\n}\n.right-menu-header {\n    position: relative;\n}\n.right-menu-header li ul a {\n    font-size: 14px;\n    width: 100%;\n    display: inline-block;\n}\n.right-menu-header li ul li {\n\n    margin: 5px;\n}\n.icon-header-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    right: 75px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n\n/*end style right header*/\n\n\n\n/*loader*/\n.loader-display{\n    position: fixed;\n    z-index: 10;\n    top:0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0,0,0,0.5);\n    display: block;\n}\n.main-loader{\n    position: absolute;\n\n    top: 35%;\n\n    text-align: center;\n\n    display: block;\n\n    width: 100%;\n\n    color: #fff;\n\n    font-size: 23px;\n}\n.main-loader img{\n    width: 100px;\n\n    background: #fff;\n\n    border-radius: 50px;\n\n    height: 100px;\n\n    display: inline-block;\n\n    margin: 0 auto 22px;\n}\n.loader-wrapper{\n    display:none;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header {\n        display: none;\n}\n.right-header.mobile-header {\n        display: block;\n        right: -300px;\n}\n.main-header, .little-main-header {\n        right: 0 !important;\n}\n#main, #main.little-main {\n        margin-right: 0 !important;\n}\n.post-contents-table {\n        width: 100%;\n}\n.copy-right {\n        display: none;\n}\n.clouse_menu {\n        display: none;\n}\n.clouse_menu_mob {\n        display: block;\n}\n.show-header button {\n        display: block;\n}\n.kind_user > div, .kind_activity > div {\n        float: none;\n}\n.img-profile .submit {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post, .contents-post {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.name-header-profile {\n        display: none;\n}\n.profile-menu-header {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a {\n        font-size: 12px !important;\n        padding: 16px 13px !important;\n}\n.sub-header {\n        bottom: -44px;\n}\n}\n\n/*end loader*/\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 177 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sub_com_profile_info_vue__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sub_com_profile_info_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__sub_com_profile_info_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue__ = __webpack_require__(183);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        profileinfo: __WEBPACK_IMPORTED_MODULE_1__sub_com_profile_info_vue___default.a,
+        headerMenuList: __WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue___default.a,
+        headerTop: __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue___default.a
+    },
+    props: ['defultimg', 'logo', 'loading', 'storage', 'transactroute', 'mytrans', 'selregpro', 'byadreq', 'profilebasic', 'logout', 'routehome', 'guide'],
+    data: function data() {
+        return {
+            currentUser: {
+                profile: {
+                    is_company: '',
+                    company_name: '',
+                    company_register_code: '',
+                    address: '',
+                    public_phone: '',
+                    profile_photo: this.storage + '',
+                    postal_code: '',
+                    shaba_code: ''
+                },
+                user_info: ''
+            },
+            profileBasicFields: ['is_company', 'company_name', 'company_register_code', 'public_phone', 'address', 'postal_code', 'shaba_code'],
+            profilePhoto: '',
+            errors: '',
+            popUpMsg: '',
+            submiting: false
+
+        };
+    },
+    methods: {
+
+        init: function init() {
+            var _this = this;
+
+            this.isLoaded = true;
+            axios.post('/user/profile_info').then(function (response) {
+                return _this.currentUser = response.data;
+            });
+        },
+        RegisterBasicProfileInfo: function RegisterBasicProfileInfo() {
+            this.submiting = true;
+            this.errors = '';
+            var self = this;
+
+            var data = new FormData();
+
+            for (var i = 0, cnt = this.profileBasicFields.length; i < cnt; i++) {
+                if (this.currentUser.profile[this.profileBasicFields[i]] != null) {
+                    data.append(this.profileBasicFields[i], this.toLatinNumbers(this.currentUser.profile[this.profileBasicFields[i]]));
+                }
+            }
+
+            var profilePhoto = this.$refs.profilePhoto.files[0];
+            if (profilePhoto) {
+                data.append('profile_photo', profilePhoto);
+            }
+
+            axios.post('/user/profile_modification', data).then(function (response) {
+                if (response.status == 200) {
+                    self.submiting = false;
+                    self.popUpMsg = 'تغییرات با موفقیت اعمال شد';
+
+                    $('#myModal').modal('show');
+                }
+                self.submiting = false;
+            }).catch(function (err) {
+                self.errors = '';
+                self.errors = err.response.data.errors;
+                self.submiting = false;
+            });
+        },
+        toLatinNumbers: function toLatinNumbers(num) {
+            if (num == null) {
+                return null;
+            }
+            var numDic = {
+                '۰': '0',
+                '۱': '1',
+                '۲': '2',
+                '۳': '3',
+                '۴': '4',
+                '۵': '5',
+                '۶': '6',
+                '۷': '7',
+                '۸': '8',
+                '۹': '9'
+            };
+
+            return num.toString().replace(/[۰-۹]/g, function (w) {
+                return numDic[w];
+            });
+        },
+        toggle_header: function toggle_header() {
+            var menu_but = $(".clouse_menu");
+            var menu_but_icon = $(".clouse_menu i");
+            var profile = $(".profile");
+            var header_menu = $(".header-menu span");
+            var header_menu_a = $(".header-menu a");
+            var logo = $(".logo");
+            var copy_right = $(".copy-right");
+            var right_header_desk = $(".right-header.desktop-header");
+            var little_main_header = $(".main-header");
+            var main = $("#main");
+            var next_move = "shrink";
+            menu_but.click(function () {
+                if (next_move == "expand") {
+                    $(this).css({
+                        width: "30%"
+                    });
+                    menu_but_icon.addClass('fa-angle-left', 200).removeClass('fa-angle-right');
+                    // menu_but_icon.switchClass("fa-angle-left"," fa-angle-right",200);
+                    profile.fadeIn();
+                    copy_right.css('display', 'block');
+                    logo.fadeIn();
+                    header_menu.css('display', 'inline');
+                    header_menu_a.css({
+                        "text-align": "right"
+                    });
+                    right_header_desk.removeClass("little_header", 200);
+                    little_main_header.removeClass("little-main-header", 200);
+                    main.removeClass("little-main", 200);
+                    next_move = "shrink";
+                } else {
+                    $(this).css({
+                        width: "100%"
+                    });
+                    menu_but_icon.addClass('fa-angle-right', 200).removeClass('fa-angle-left', 200);
+                    // menu_but_icon.switchClass("fa-angle-right"," fa-angle-left",200);
+                    profile.css('display', 'none');
+                    header_menu.css('display', 'none');
+                    copy_right.css('display', 'none');
+                    logo.css('display', 'none');
+                    header_menu_a.css({
+                        "text-align": "center"
+                    });
+                    right_header_desk.addClass("little_header", 200);
+                    little_main_header.addClass("little-main-header", 200);
+                    main.addClass("little-main", 200);
+                    next_move = "expand";
+                }
+            });
+        },
+        toggle_show_header: function toggle_show_header() {
+            var el = $('.show-header button');
+            var el_clouse = $('.clouse_menu_mob');
+            var flag = true;
+            var right_header = $(".right-header.mobile-header");
+            var back = $(".background_mob_sec");
+            el.on('click', function () {
+                if (flag == true) {
+                    console.log('flag = true');
+                    right_header.animate({
+                        right: '0'
+                    }, 300);
+                    back.fadeIn();
+
+                    flag = false;
+                } else {
+                    right_header.animate({
+                        right: '-300px'
+                    }, 300);
+
+                    flag = true;
+                }
+            });
+            el_clouse.on('click', function () {
+                if (flag == true) {
+                    right_header.animate({
+                        right: '0'
+                    }, 300);
+                    flag = false;
+                } else {
+                    right_header.animate({
+                        right: '-300px'
+
+                    }, 300);
+                    back.fadeOut();
+                    flag = true;
+                }
+            });
+        }
+    },
+    mounted: function mounted() {
+        this.init();
+        this.toggle_header();
+        this.toggle_show_header();
+    },
+    created: function created() {
+        var _this2 = this;
+
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('submitingEvent', function (event) {
+            _this2.submiting = event;
+        });
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('submitSuccess', function (event) {
+            _this2.popUpMsg = event;
+        });
+    }
+});
+
+/***/ }),
+/* 178 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(179)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(181)
+/* template */
+var __vue_template__ = __webpack_require__(182)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/buyer/header/sub-com/profile_info.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-12d98523", Component.options)
+  } else {
+    hotAPI.reload("data-v-12d98523", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 179 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(180);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("05d62a16", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../../node_modules/css-loader/index.js!../../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-12d98523\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./profile_info.vue", function() {
+     var newContent = require("!!../../../../../../../../node_modules/css-loader/index.js!../../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-12d98523\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./profile_info.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 180 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.green-bot {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot:focus,.gray-bot:focus {\n    color: #fff;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 181 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['photoLink', 'storage', 'def', 'username', 'usercity', 'userprof']
+
+});
+
+/***/ }),
+/* 182 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "profile" }, [
+      _vm.photoLink != null
+        ? _c("div", { staticClass: "profile-img" }, [
+            _c("img", { attrs: { src: _vm.storage + "/" + _vm.photoLink } })
+          ])
+        : _c("div", { staticClass: "profile-img" }, [
+            _c("img", { attrs: { src: _vm.def } })
+          ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "profile-content" }, [
+        _c("div", { staticClass: "profile-name" }, [
+          _vm._v("\n                " + _vm._s(_vm.username) + "\n            ")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "profile-city" }, [
+          _vm._v("\n                " + _vm._s(_vm.usercity) + "\n            ")
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "green-bot",
+          attrs: { href: "/profile/" + _vm.userprof }
+        },
+        [_vm._v("\n            نمایش پروفایل من\n        ")]
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-12d98523", module.exports)
+  }
+}
+
+/***/ }),
+/* 183 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(184)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(186)
+/* template */
+var __vue_template__ = __webpack_require__(187)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/buyer/header/sub-com/header-menu-list.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2f932daa", Component.options)
+  } else {
+    hotAPI.reload("data-v-2f932daa", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 184 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(185);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("a7431cee", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../../node_modules/css-loader/index.js!../../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2f932daa\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header-menu-list.vue", function() {
+     var newContent = require("!!../../../../../../../../node_modules/css-loader/index.js!../../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2f932daa\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header-menu-list.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.sub-header a.router-link-exact-active {\n    color: #313942;\n}\n.sub-header a.router-link-exact-active::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.header-menu a.router-link-exact-active::before,a.active::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu  a.router-link-exact-active,a.active {\n    color: #fff;\n    background: #637484;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 186 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['profilebasic', 'byadreq', 'selregpro', 'transactroute', 'mytrans', 'guide'],
+    data: function data() {
+        return {
+            active_el: 0
+        };
+    },
+
+    methods: {
+        /* activate:function(el){
+             this.active_el = el;
+         }*/
+        subIsActive: function subIsActive(input) {
+            var _this = this;
+
+            var paths = Array.isArray(input) ? input : [input];
+            return paths.some(function (path) {
+                return _this.$route.path.indexOf(path) === 0; // current path starts with this path string
+            });
+        }
+    }, watch: {
+        $route: function $route() {
+            if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract')) {
+                this.active_el = 1;
+            } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests')) {
+                this.active_el = 2;
+            } else if (this.subIsActive('/register-product')) {
+                this.active_el = 3;
+            } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')) {
+                this.active_el = 4;
+            } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/*')) {
+                this.active_el = 5;
+            } else if (this.subIsActive('/guide')) {
+                this.active_el = 6;
+            } else {
+                this.active_el = 1;
+            }
+            console.log(this.active_el);
+        }
+    }, mounted: function mounted() {
+        if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract') || this.subIsActive('/*')) {
+            this.active_el = 1;
+        } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests')) {
+            this.active_el = 2;
+        } else if (this.subIsActive('/register-product')) {
+            this.active_el = 3;
+        } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')) {
+            this.active_el = 4;
+        } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/*')) {
+            this.active_el = 5;
+        } else if (this.subIsActive('/guide')) {
+            this.active_el = 6;
+        }
+    },
+    created: function created() {
+        var _this2 = this;
+
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('active', function (event) {
+            _this2.active_el = event;
+        });
+    }
+});
+
+/***/ }),
+/* 187 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "header-menu" }, [
+      _c("ul", { staticClass: "list-unstyled" }, [
+        _c(
+          "li",
+          { staticClass: "list-item" },
+          [
+            _c(
+              "router-link",
+              {
+                class: { active: this.active_el === 1 },
+                attrs: { to: { name: "profileBasic" } }
+              },
+              [_c("span", [_vm._v("ویرایش پروفایل")])]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "list-item  " },
+          [
+            _c(
+              "router-link",
+              {
+                class: { active: this.active_el === 2 },
+                attrs: { to: { name: "buyAdRequests" } }
+              },
+              [_c("span", [_vm._v("درخواست ها")])]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "list-item  " },
+          [
+            _c(
+              "router-link",
+              {
+                class: { active: this.active_el === 3 },
+                attrs: { to: { name: "registerProduct" } }
+              },
+              [_c("span", [_vm._v("ثبت محصول ")])]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "list-item  " },
+          [
+            _c(
+              "router-link",
+              {
+                class: { active: this.active_el === 4 },
+                attrs: { to: { name: "myTransactions" } }
+              },
+              [_c("span", [_vm._v("تراکنش های جاری")])]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "list-item  " },
+          [
+            _c(
+              "router-link",
+              {
+                class: { active: this.active_el === 5 },
+                attrs: { to: { name: "myTerminatedTransactions" } }
+              },
+              [_c("span", [_vm._v("تراکنش های انجام شده")])]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "list-item  " },
+          [
+            _c(
+              "router-link",
+              {
+                class: { active: this.active_el === 6 },
+                attrs: { to: { name: "guide" } }
+              },
+              [_c("span", [_vm._v("راهنما")])]
+            )
+          ],
+          1
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "copy-right" }, [
+      _c("p", [
+        _vm._v(
+          "\n            تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.\n        "
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2f932daa", module.exports)
+  }
+}
+
+/***/ }),
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(189)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(191)
+/* template */
+var __vue_template__ = __webpack_require__(197)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/buyer/header/sub-com/header-top.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-adc88218", Component.options)
+  } else {
+    hotAPI.reload("data-v-adc88218", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 189 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(190);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("f74b8fa0", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../../node_modules/css-loader/index.js!../../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-adc88218\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header-top.vue", function() {
+     var newContent = require("!!../../../../../../../../node_modules/css-loader/index.js!../../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-adc88218\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./header-top.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 190 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n#main {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n.main-header {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n}\n.little-main-header {\n    right: 80px;\n}\n.image-header-profile {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.image-header-profile  img{\n    height: 100%;\n}\n.profile-menu-header {\n    float: left;\n}\n.right-menu-header {\n\n    padding: 16px;\n}\n.right-menu-header, .content-header {\n    float: right;\n}\n.profile-menu-header {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header i {\n    position: absolute;\n\n    left: -90px;\n\n    top: 0px;\n\n    font-size: 20px;\n}\n.content-header {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a, .profile-menu-header a {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a {\n    font-size: 30px;\n}\n.right-menu-header a:hover, .profile-menu-header a:hover {\n    color: #2e353e;\n}\n.profile-menu-header a {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li {\n    margin: 5px;\n}\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n}\n.font-big {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 191 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['photoLink', 'profilebasic', 'storage', 'def', 'username', 'out', 'routeHome'],
+    components: {
+        subMenu: __WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue___default.a
+    }
+});
+
+/***/ }),
+/* 192 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(193)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(195)
+/* template */
+var __vue_template__ = __webpack_require__(196)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/buyer/header/sub-com/sub-menu/sub-menu.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-47ce9720", Component.options)
+  } else {
+    hotAPI.reload("data-v-47ce9720", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 193 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(194);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("0f931fcc", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../../../node_modules/css-loader/index.js!../../../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-47ce9720\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./sub-menu.vue", function() {
+     var newContent = require("!!../../../../../../../../../node_modules/css-loader/index.js!../../../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-47ce9720\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./sub-menu.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 194 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n/*start style sub-header*/\n.sub-header {\n    position: absolute;\n    left: 0;\n    background: #eff3f6;\n    top: 63px;\n    right: 0;\n    text-align: center;\n    border-bottom: 1px solid #e6e6e6;\n    border-top: 1px solid #e6e6e6;\n}\n.sub-header ul {\n    text-align: center;\n}\n.sub-header a {\n    padding: 16px;\n\n    display: inline-block;\n\n    color: #808c9b;\n\n    font-weight: bold;\n\n    font-size: 14px;\n\n    position: relative;\n}\n.sub-header a:hover {\n    color: #313942;\n}\n.sub-header a:hover::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.sub-header a.active {\n    color: #313942;\n}\n.sub-header a.active::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n/*end style sub-header*/\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 195 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            items: []
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('subHeader', function (event) {
+            _this.items = event;
+        });
+    }
+});
+
+/***/ }),
+/* 196 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "sub-header" }, [
+    _c(
+      "ul",
+      { staticClass: "list-inline" },
+      _vm._l(_vm.items, function(item) {
+        return _c(
+          "li",
+          { staticClass: "list-item", class: item.active },
+          [
+            _c("router-link", { attrs: { to: { name: item.url } } }, [
+              _vm._v(
+                "\n                " + _vm._s(item.message) + "\n            "
+              )
+            ])
+          ],
+          1
+        )
+      })
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-47ce9720", module.exports)
+  }
+}
+
+/***/ }),
+/* 197 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "header",
+      { staticClass: "main-header", attrs: { id: "header" } },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", { staticClass: "profile-menu-header" }, [
+          _c("a", { attrs: { href: "#", onclick: "dropdown()" } }, [
+            _vm.photoLink != null
+              ? _c("div", { staticClass: "image-header-profile" }, [
+                  _c("img", {
+                    attrs: { src: _vm.storage + "/" + _vm.photoLink }
+                  })
+                ])
+              : _c("div", { staticClass: "image-header-profile" }, [
+                  _c("img", { attrs: { src: _vm.def } })
+                ]),
+            _vm._v(" "),
+            _c("i", {
+              staticClass: "fa fa-angle-down",
+              attrs: { "aria-hidden": "true" }
+            }),
+            _vm._v(
+              "\n                " + _vm._s(_vm.username) + "\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "profile-list" }, [
+            _c("ul", { staticClass: "list-unstyled" }, [
+              _c("li", { staticClass: "list-item" }, [
+                _c("a", { attrs: { href: _vm.profilebasic } }, [
+                  _vm._v("پروفایل")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "list-item" }, [
+                _c("a", { attrs: { href: _vm.out } }, [_vm._v("خروج")])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "right-menu-header" }, [
+          _c("ul", { staticClass: "list-inline" }, [
+            _c("li", [
+              _c("a", { attrs: { href: _vm.routeHome } }, [
+                _c("i", {
+                  staticClass: "fa fa-home",
+                  attrs: { "aria-hidden": "true" }
+                })
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("subMenu")
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "show-header" }, [
+      _c("button", { staticClass: "fa fa-angle-left" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content-header" }, [
+      _c("span", { staticClass: "font-big" }, [_vm._v("اینکوباک  ")]),
+      _vm._v(" | "),
+      _c("span", [_vm._v(" بازارگاه آنلاین کشاورزی")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-adc88218", module.exports)
+  }
+}
+
+/***/ }),
+/* 198 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "container" }, [
+        _c(
+          "div",
+          {
+            ref: "myModal",
+            staticClass: "modal fade",
+            attrs: {
+              id: "myModal",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "myModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c("div", { staticClass: "modal-dialog" }, [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "main_popup_content" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "main_par" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.popUpMsg) +
+                        "\n                        "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn green-bot ",
+                      attrs: { "data-dismiss": "modal" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            متوجه شدم\n                        "
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c(
+          "div",
+          {
+            ref: "myModal",
+            staticClass: "modal fade",
+            attrs: {
+              id: "myModal-1",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "myModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [_vm._m(1)]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          class: {
+            "loader-wrapper": !_vm.submiting,
+            "loader-display": _vm.submiting
+          }
+        },
+        [
+          _c("div", { staticClass: "main-loader" }, [
+            _c("img", { attrs: { src: _vm.loading } }),
+            _vm._v(" "),
+            _c("p", { attrs: { dir: "rtl" } }, [_vm._v("کمی صبر کنید...")])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("section", { staticClass: "right-header mobile-header" }, [
+        _c("header", { staticClass: "header-right-header" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _vm._m(3),
+          _vm._v(" "),
+          _c("h1", { staticClass: "logo" }, [
+            _c("a", { attrs: { href: "/" } }, [
+              _c("img", { attrs: { src: _vm.logo, alt: "incoboc" } })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "section",
+          { staticClass: "main-right-header" },
+          [
+            _c("profileinfo", {
+              attrs: {
+                photoLink: _vm.currentUser.profile.profile_photo,
+                storage: _vm.storage,
+                def: _vm.defultimg,
+                username:
+                  _vm.currentUser.user_info.first_name +
+                  " " +
+                  _vm.currentUser.user_info.last_name,
+                usercity:
+                  _vm.currentUser.user_info.province +
+                  " - " +
+                  _vm.currentUser.user_info.city,
+                userprof: _vm.currentUser.user_info.user_name
+              }
+            }),
+            _vm._v(" "),
+            _c("header-menu-list", {
+              attrs: {
+                profilebasic: _vm.profilebasic,
+                byadreq: _vm.byadreq,
+                selregpro: _vm.selregpro,
+                transactroute: _vm.transactroute,
+                mytrans: _vm.mytrans
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "copy-right" })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "background_mob_sec" })
+      ]),
+      _vm._v(" "),
+      _c("section", { staticClass: "right-header desktop-header" }, [
+        _c("header", { staticClass: "header-right-header" }, [
+          _vm._m(4),
+          _vm._v(" "),
+          _vm._m(5),
+          _vm._v(" "),
+          _c("h1", { staticClass: "logo" }, [
+            _c("a", { attrs: { href: "/" } }, [
+              _c("img", { attrs: { src: _vm.logo, alt: "incoboc" } })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "section",
+          { staticClass: "main-right-header" },
+          [
+            _c("profileinfo", {
+              attrs: {
+                photoLink: _vm.currentUser.profile.profile_photo,
+                storage: _vm.storage,
+                def: _vm.defultimg,
+                username:
+                  _vm.currentUser.user_info.first_name +
+                  " " +
+                  _vm.currentUser.user_info.last_name,
+                usercity:
+                  _vm.currentUser.user_info.province +
+                  " - " +
+                  _vm.currentUser.user_info.city,
+                userprof: _vm.currentUser.user_info.user_name
+              }
+            }),
+            _vm._v(" "),
+            _c("header-menu-list", {
+              attrs: {
+                profilebasic: _vm.profilebasic,
+                byadreq: _vm.byadreq,
+                selregpro: _vm.selregpro,
+                transactroute: _vm.transactroute,
+                mytrans: _vm.mytrans,
+                guide: _vm.guide
+              }
+            })
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("headerTop", {
+        attrs: {
+          photoLink: _vm.currentUser.profile.profile_photo,
+          storage: _vm.storage,
+          def: _vm.defultimg,
+          username:
+            _vm.currentUser.user_info.first_name +
+            " " +
+            _vm.currentUser.user_info.last_name,
+          out: _vm.logout,
+          routeHome: _vm.routehome
+        }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "#", "data-dismiss": "modal" } }, [
+      _c("i", { staticClass: "fa fa-close" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-dialog" }, [
+      _c("div", { staticClass: "modal-content" }, [
+        _c("div", { staticClass: "main_popup_content" }, [
+          _c("a", { attrs: { href: "#", "data-dismiss": "modal" } }, [
+            _c("i", { staticClass: "fa fa-close" })
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "main_par", attrs: { id: "popUpMsg" } }, [
+            _vm._v(
+              "\n                            ابتدا پروفایل خود را کامل کنید.سپس منتظر تایید اطلاعات خود از سمت کارشناسان اینکوباک\n                            باشید.\n                        "
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn green-bot ",
+              attrs: { "data-dismiss": "modal" }
+            },
+            [
+              _vm._v(
+                "\n                            متوجه شدم\n                        "
+              )
+            ]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "clouse_menu_mob" }, [
+      _c("i", { staticClass: "fa fa-angle-right" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "clouse_menu" }, [
+      _c("i", { staticClass: "fa fa-angle-right" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "clouse_menu_mob" }, [
+      _c("i", { staticClass: "fa fa-angle-right" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "clouse_menu" }, [
+      _c("i", { staticClass: "fa fa-angle-right" })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-68dff671", module.exports)
+  }
+}
+
+/***/ }),
+/* 199 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_profile_profile_complete_vue__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_profile_profile_complete_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_profile_profile_complete_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_contract_vue__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_contract_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_contract_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_buyAd_requests_vue__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_buyAd_requests_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_buyAd_requests_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_buyAd_requests_detail_vue__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_buyAd_requests_detail_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_buyAd_requests_detail_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_request_my_sell_offers_vue__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_request_my_sell_offers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_request_my_sell_offers_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_product_product_basic_vue__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_product_product_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_product_product_basic_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_transactions_vue__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_transactions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_transactions_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_my_terminated_transactions_vue__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_my_terminated_transactions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_my_terminated_transactions_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transaction_vue__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transaction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transaction_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_transaction_transactionReport__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_transaction_transactionReport___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_transaction_transactionReport__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_dashboard_seller_guide_vue__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_dashboard_seller_guide_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_dashboard_seller_guide_vue__);
+
+
+
+// components
+
+// profile components
+
+
+
+
+
+
+
+
+
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
+    routes: [{
+        path: '/',
+        name: 'profileBasic',
+        component: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue___default.a,
+        params: {
+            active: 1
+        }
+    }, {
+        path: '/complementry',
+        name: 'compelementry',
+        component: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_profile_profile_complete_vue___default.a
+    }, {
+        path: '/profile_contract',
+        name: 'profileContract',
+        component: __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_contract_vue___default.a
+    }, {
+        path: '/buyAd-requests',
+        name: 'buyAdRequests',
+        component: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_buyAd_requests_vue___default.a,
+        props: true
+    }, {
+        path: '/buyAd-request-detail/:id',
+        name: 'buyAdRequestsDetail',
+        component: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_buyAd_requests_detail_vue___default.a
+    }, {
+        path: '/my-sell-offers',
+        name: 'mySellOffers',
+        component: __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_request_my_sell_offers_vue___default.a
+    }, {
+        path: '/register-product',
+        name: 'registerProduct',
+        component: __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_product_product_basic_vue___default.a
+    }, {
+        path: '/transaction-list',
+        name: 'myTransactions',
+        component: __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_transaction_my_transactions_vue___default.a
+    }, {
+        path: '/terminated-transaction-list',
+        name: 'myTerminatedTransactions',
+        component: __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_my_terminated_transactions_vue___default.a
+    }, {
+        path: '/transaction-detail/:id',
+        name: 'transactionDetail',
+        component: __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transaction_vue___default.a
+    }, {
+        path: '/transaction-report/:id',
+        name: 'transactionReport',
+        component: __WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_transaction_transactionReport___default.a
+    }, {
+        path: '/guide',
+        name: 'guide',
+        component: __WEBPACK_IMPORTED_MODULE_13__components_dashboard_seller_guide_vue___default.a
+    }]
+}));
+
+/***/ }),
+/* 200 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(201);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("3e4b681a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1944ffd8\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./buyAd-requests-detail.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1944ffd8\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./buyAd-requests-detail.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 201 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-post img[data-v-1944ffd8] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-1944ffd8] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-1944ffd8] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-1944ffd8] {\n    display: block;\n}\n.main-content[data-v-1944ffd8] {\n    direction: rtl;\n    padding: 60px 100px;\n}\n.header-lable[data-v-1944ffd8] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n.content-lable[data-v-1944ffd8]{\n    font-weight:400 ;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-1944ffd8] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.black-bot[data-v-1944ffd8] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #313a43;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.black-bot[data-v-1944ffd8]:hover {\n\n    background: #283039;\n    color: #fff;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-1944ffd8]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.little_header[data-v-1944ffd8] {\n    width: 80px;\n}\n.little-main-header[data-v-1944ffd8] {\n    right: 80px;\n}\n.contents[data-v-1944ffd8] {\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 10px #e1e1e1;\n            box-shadow: 0 0 10px #e1e1e1;\n    padding: 15px ;\n    margin-top: 50px;\n}\n.user_image img[data-v-1944ffd8]{\n    height: 100%;\n}\n.info-contents[data-v-1944ffd8]{\n    padding: 0;\n}\n.image-article-content[data-v-1944ffd8]{\n    padding-right: 0;\n}\n.main-article-content[data-v-1944ffd8]{\n    padding-left: 0;\n    margin-bottom: 25px;\n}\n.main-image[data-v-1944ffd8]{\n    margin-bottom: 7px;\n    padding: 0;\n}\n.main-article-content a[data-v-1944ffd8]{\n    font-size: 24px;\n    margin-bottom: 20px;\n    display: inline-block;\n    color: #666;\n}\n.main-image img[data-v-1944ffd8]{\n    border-radius: 3px;\n}\n.image_company[data-v-1944ffd8]{\n    margin: 15px auto ;\n}\n.top-contentas[data-v-1944ffd8]{\n    padding: 0;\n    padding-bottom: 10px;\n    margin-bottom: 10px;\n    border-bottom:2px solid #ddd;\n}\n.bottom-contents[data-v-1944ffd8]{\n    padding: 0;\n    padding-top: 10px;\n    margin-top: 10px;\n}\n.fields[data-v-1944ffd8]{\n    margin: 7px auto;\n    padding: 0;\n}\n.fields > div[data-v-1944ffd8]{\n    float: right;\n}\n.fields  div textarea[data-v-1944ffd8]{\n    height: 110px;\n    max-height: 110px;\n    min-height: 110px;\n    max-width: 100%;\n    min-width: 100%;\n}\n.fields .green-bot[data-v-1944ffd8],.fields .black-bot[data-v-1944ffd8] {\n    width: 100%;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header[data-v-1944ffd8] {\n        display: none;\n}\n.actions[data-v-1944ffd8]{\n        direction: ltr;\n        margin-top: 20px;\n}\n.right-header.mobile-header[data-v-1944ffd8] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-1944ffd8], .little-main-header[data-v-1944ffd8] {\n        right: 0 !important;\n}\n#main[data-v-1944ffd8], #main.little-main[data-v-1944ffd8] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-1944ffd8] {\n        width: 100%;\n}\n.copy-right[data-v-1944ffd8] {\n        display: none;\n}\n.clouse_menu[data-v-1944ffd8] {\n        display: none;\n}\n.clouse_menu_mob[data-v-1944ffd8] {\n        display: block;\n}\n.show-header button[data-v-1944ffd8] {\n        display: block;\n}\n.kind_user > div[data-v-1944ffd8], .kind_activity > div[data-v-1944ffd8] {\n        float: none;\n}\n.img-profile .submit[data-v-1944ffd8] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-1944ffd8] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-1944ffd8] {\n        float: none;\n}\n}\n.owl-carousel[data-v-1944ffd8]{\n    direction: ltr !important;\n}\n@media screen and (max-width: 768px) {\n.fields > div[data-v-1944ffd8]{\n        float: none;\n}\n.image-content-post[data-v-1944ffd8], .contents-post[data-v-1944ffd8] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.main-content[data-v-1944ffd8] {\n        padding: 60px 15px;\n}\n.name-header-profile[data-v-1944ffd8] {\n        display: none;\n}\n.profile-menu-header[data-v-1944ffd8] {\n        padding: 7px;\n        padding-left: 36px;\n}\n#bd-prev-end-date-id[data-v-1944ffd8], #bd-prev-first-date-id[data-v-1944ffd8]  {\n        left: 0;\n        bottom: inherit;\n        top:-55px;\n}\n#bd-next-end-date-id [data-v-1944ffd8], #bd-next-first-date-id[data-v-1944ffd8]{\n        right: 0;\n        bottom: inherit;\n        top:-55px;\n}\n.imageuploadify-message[data-v-1944ffd8]{\n        display: none !important;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-1944ffd8] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-1944ffd8] {\n        font-size: 10px;\n}\n.sub-header[data-v-1944ffd8] {\n        bottom: -44px;\n}\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 202 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("section", { staticClass: "main-content col-xs-12" }, [
+      _c("div", { staticClass: "contents col-xs-12" }, [
+        _c("div", { staticClass: "info-contents col-xs-12" }, [
+          _c("div", { staticClass: "top-contentas  col-xs-12" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "image-article-content col-md-5" }, [
+              _c("div", { staticClass: "main-image col-xs-12" }, [
+                _c("a", { attrs: { href: _vm.defimgitem } }, [
+                  _c("img", { attrs: { src: _vm.defimgitem } })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "owl-carousel col-xs-12" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "bottom-contents  col-xs-12" }, [
+            _c("form", [
+              _c("label", { staticClass: "header-lable" }, [
+                _vm._v(
+                  "تمامی موارد خواسته شده را وارد کرده و برای خریدار ارسال نمایید."
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "fields col-xs-12" }, [
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _c("label", { staticClass: "content-lable" }, [
+                    _vm._v(
+                      "\n                                    محل تحویل\n                                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.sellOffer.deliver_at,
+                        expression: "sellOffer.deliver_at"
+                      }
+                    ],
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.sellOffer.deliver_at },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.sellOffer,
+                          "deliver_at",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.deliver_at
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.deliver_at[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _c("label", { staticClass: "content-lable" }, [
+                    _vm._v(
+                      "\n                                    قیمت پیشنهادی به ازای هر کیلو به تومان\n                                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.sellOffer.price,
+                        expression: "sellOffer.price"
+                      }
+                    ],
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.sellOffer.price },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.sellOffer, "price", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.price
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.price[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _c("label", { staticClass: "content-lable" }, [
+                    _vm._v(
+                      "\n                                    تاریخ موجودی\n                                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    ref: "validDateFrom",
+                    attrs: {
+                      readonly: "true",
+                      type: "text",
+                      id: "first-date-id"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.valid_date_to
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.valid_date_to[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _c("label", { staticClass: "content-lable" }, [
+                    _vm._v(
+                      "\n                                    انتهای تاریخ موجودی\n                                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    ref: "validDateTo",
+                    attrs: { readonly: "true", type: "text", id: "end-date-id" }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.valid_date_from
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.valid_date_from[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-xs-12" }, [
+                  _c("label", { staticClass: "content-lable" }, [
+                    _vm._v(
+                      "\n                                    توضیحات:\n                                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.sellOffer.description,
+                        expression: "sellOffer.description"
+                      }
+                    ],
+                    attrs: { placeholder: "" },
+                    domProps: { value: _vm.sellOffer.description },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.sellOffer,
+                          "description",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.description
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.description[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "image_company col-xs-12" }, [
+                  _c("label", { staticClass: "content-lable" }, [
+                    _vm._v(
+                      "\n                                    تصاویر:\n                                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    ref: "sellOfferFiles",
+                    attrs: { type: "file", multiple: "", accept: "image/*" },
+                    on: {
+                      change: function($event) {
+                        _vm.handleSellOfferFileUpload()
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.photos_count
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.photos_count[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "col-xs-12 green-bot",
+                      attrs: { type: "button" },
+                      on: { click: _vm.submitSellOffer }
+                    },
+                    [_vm._v("تایید")]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(1)
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "main-article-content col-md-7" }, [
+      _c("h3", [
+        _vm._v(
+          "\n                            خشکبار | انجیر |\n                        "
+        )
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("table", { staticClass: "table table-striped" }, [
+        _c("tbody", [
+          _c("tr", [
+            _c("td", [
+              _vm._v("قیمت واحد"),
+              _c("span", {}, [_vm._v("(هر کیلو به تومان)")]),
+              _vm._v(" :")
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v("  - تومان")])
+          ]),
+          _vm._v(" "),
+          _c("tr", [_c("td", [_vm._v(" محل تحویل کالا:")])]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v(" میزان نیازمندی")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("32 کیلوگرم")])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v(" زمان ثبت درخواست:")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("۳۰ مرداد , ۱۳۹۷")])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("p", [_vm._v("توضیحات: "), _c("span", [_vm._v("خوب باشه")])])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-6" }, [
+      _c(
+        "a",
+        {
+          staticClass: "black-bot col-xs-12 col-xs-6",
+          attrs: { href: "javascript:history.back()" }
+        },
+        [_vm._v("بازگشت به صفحه قبل")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1944ffd8", module.exports)
+  }
+}
+
+/***/ }),
+/* 203 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_buyer_profile_profile_basic_vue__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_buyer_profile_profile_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_dashboard_buyer_profile_profile_basic_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_buyer_profile_profile_complete_vue__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_buyer_profile_profile_complete_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_dashboard_buyer_profile_profile_complete_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_buyer_profile_profile_contract_vue__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_buyer_profile_profile_contract_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_dashboard_buyer_profile_profile_contract_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_buyer_request_buyAd_requests_vue__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_buyer_request_buyAd_requests_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_dashboard_buyer_request_buyAd_requests_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_request_buyAd_requests_detail_vue__ = __webpack_require__(224);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_request_buyAd_requests_detail_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_request_buyAd_requests_detail_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_buyer_request_my_sell_offers_vue__ = __webpack_require__(229);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_buyer_request_my_sell_offers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_dashboard_buyer_request_my_sell_offers_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_buyer_product_product_basic_vue__ = __webpack_require__(234);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_buyer_product_product_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_dashboard_buyer_product_product_basic_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_dashboard_buyer_transaction_my_transactions_vue__ = __webpack_require__(239);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_dashboard_buyer_transaction_my_transactions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_dashboard_buyer_transaction_my_transactions_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_dashboard_buyer_transaction_my_terminated_transactions_vue__ = __webpack_require__(244);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_dashboard_buyer_transaction_my_terminated_transactions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_dashboard_buyer_transaction_my_terminated_transactions_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_dashboard_buyer_transaction_transaction_vue__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_dashboard_buyer_transaction_transaction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_dashboard_buyer_transaction_transaction_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_dashboard_buyer_transaction_transactionReport__ = __webpack_require__(251);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_dashboard_buyer_transaction_transactionReport___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_dashboard_buyer_transaction_transactionReport__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_dashboard_buyer_guide_vue__ = __webpack_require__(258);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_dashboard_buyer_guide_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_dashboard_buyer_guide_vue__);
+
+
+
+// components
+
+// profile components
+
+
+
+
+
+
+
+
+
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
+    routes: [{
+        path: '/',
+        name: 'profileBasic',
+        component: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_buyer_profile_profile_basic_vue___default.a,
+        params: {
+            active: 1
+        }
+    }, {
+        path: '/complementry',
+        name: 'compelementry',
+        component: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_buyer_profile_profile_complete_vue___default.a
+    }, {
+        path: '/profile_contract',
+        name: 'profileContract',
+        component: __WEBPACK_IMPORTED_MODULE_4__components_dashboard_buyer_profile_profile_contract_vue___default.a
+    }, {
+        path: '/buyAd-requests',
+        name: 'buyAdRequests',
+        component: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_buyer_request_buyAd_requests_vue___default.a,
+        props: true
+    }, {
+        path: '/buyAd-request-detail/:id',
+        name: 'buyAdRequestsDetail',
+        component: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_request_buyAd_requests_detail_vue___default.a
+    }, {
+        path: '/my-sell-offers',
+        name: 'mySellOffers',
+        component: __WEBPACK_IMPORTED_MODULE_7__components_dashboard_buyer_request_my_sell_offers_vue___default.a
+    }, {
+        path: '/register-product',
+        name: 'registerProduct',
+        component: __WEBPACK_IMPORTED_MODULE_8__components_dashboard_buyer_product_product_basic_vue___default.a
+    }, {
+        path: '/transaction-list',
+        name: 'myTransactions',
+        component: __WEBPACK_IMPORTED_MODULE_9__components_dashboard_buyer_transaction_my_transactions_vue___default.a
+    }, {
+        path: '/terminated-transaction-list',
+        name: 'myTerminatedTransactions',
+        component: __WEBPACK_IMPORTED_MODULE_10__components_dashboard_buyer_transaction_my_terminated_transactions_vue___default.a
+    }, {
+        path: '/transaction-detail/:id',
+        name: 'transactionDetail',
+        component: __WEBPACK_IMPORTED_MODULE_11__components_dashboard_buyer_transaction_transaction_vue___default.a
+    }, {
+        path: '/transaction-report/:id',
+        name: 'transactionReport',
+        component: __WEBPACK_IMPORTED_MODULE_12__components_dashboard_buyer_transaction_transactionReport___default.a
+    }, {
+        path: '/guide',
+        name: 'guide',
+        component: __WEBPACK_IMPORTED_MODULE_13__components_dashboard_buyer_guide_vue___default.a
+    }]
+}));
+
+/***/ }),
+/* 204 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(205)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(207)
+/* template */
+var __vue_template__ = __webpack_require__(208)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-c1ff4a58"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/buyer/profile/profile_basic.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c1ff4a58", Component.options)
+  } else {
+    hotAPI.reload("data-v-c1ff4a58", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 205 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(206);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("f9ea4c9c", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c1ff4a58\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./profile_basic.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c1ff4a58\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./profile_basic.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 206 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n/*start style main header*/\n#main[data-v-c1ff4a58] {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n#main.little-main[data-v-c1ff4a58] {\n    margin-right: 80px;\n}\n.main-header[data-v-c1ff4a58] {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n    border-bottom: 2px solid #e6e6e6;\n}\n.image-header-profile[data-v-c1ff4a58] {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.image-header-profile  img[data-v-c1ff4a58]{\n    height: 100%;\n}\n.profile-menu-header[data-v-c1ff4a58] {\n    float: left;\n}\n.right-menu-header[data-v-c1ff4a58] {\n\n    padding: 16px;\n}\n.right-menu-header[data-v-c1ff4a58], .content-header[data-v-c1ff4a58] {\n    float: right;\n}\n.profile-menu-header[data-v-c1ff4a58] {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header a[data-v-c1ff4a58] {\n    position: relative;\n}\n.profile-menu-header i[data-v-c1ff4a58] {\n    position: absolute;\n\n    left: -75px;\n\n    top: 18px;\n\n    font-size: 20px;\n}\n.content-header[data-v-c1ff4a58] {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a[data-v-c1ff4a58], .profile-menu-header a[data-v-c1ff4a58] {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a[data-v-c1ff4a58] {\n    font-size: 30px;\n}\n.right-menu-header a[data-v-c1ff4a58]:hover, .profile-menu-header a[data-v-c1ff4a58]:hover {\n    color: #2e353e;\n}\n.name-header-profile[data-v-c1ff4a58] {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list[data-v-c1ff4a58] {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li[data-v-c1ff4a58] {\n    margin: 5px;\n}\n.profile-list a[data-v-c1ff4a58] {\n    width: 100%;\n    display: inline-block;\n}\n\n/*end style main header*/\n\n/*start style sub-header*/\n.sub-header[data-v-c1ff4a58] {\n    position: absolute;\n    left: 0;\n    background: #eff3f6;\n    top: 63px;\n    right: 0;\n    text-align: center;\n}\n.sub-header ul[data-v-c1ff4a58] {\n    text-align: center;\n}\n.sub-header a[data-v-c1ff4a58] {\n    padding: 16px;\n\n    display: inline-block;\n\n    color: #808c9b;\n\n    font-weight: bold;\n\n    font-size: 14px;\n\n    position: relative;\n}\n.sub-header a[data-v-c1ff4a58]:hover {\n    color: #313942;\n}\n.sub-header a[data-v-c1ff4a58]:hover::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.sub-header a.active[data-v-c1ff4a58] {\n    color: #313942;\n}\n.sub-header a.active[data-v-c1ff4a58]::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n/*end style sub-header*/\n/*start main content style */\n.image-content-post[data-v-c1ff4a58] {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img[data-v-c1ff4a58] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-c1ff4a58] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-c1ff4a58] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-c1ff4a58] {\n    display: block;\n}\n.content-item[data-v-c1ff4a58] {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content[data-v-c1ff4a58] {\n    padding: 60px 15px;\n}\n.img-profile[data-v-c1ff4a58] {\n    text-align: center;\n}\n.img-profile .image-input img[data-v-c1ff4a58] {\n    width: 150px;\n    height: 150px;\n    overflow: hidden;\n    border-radius: 50%;\n    display: none;\n}\n.img-profile i[data-v-c1ff4a58] {\n    font-size: 150px;\n    color: #4b4b4b;\n}\n.img-profile .submit[data-v-c1ff4a58] {\n    position: relative;\n    width: 80%;\n    margin: 25px auto;\n}\n.img-profile .submit input[data-v-c1ff4a58] {\n    opacity: 0;\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    left: 10px;\n    right: 0;\n}\n.img-profile .submit label[data-v-c1ff4a58] {\n    background: #28a745;\n    color: #fff;\n    padding: 12px  0;\n    font-size: 13px;\n    font-weight: 400;\n    border-radius: 5px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    width: 100%;\n}\n.img-profile .submit input:hover + label[data-v-c1ff4a58] {\n    background: #29d44d;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.img-profile .submit input[data-v-c1ff4a58]:hover {\n    cursor: pointer\n}\n.main-profile[data-v-c1ff4a58] {\n    border-right: 1px solid #eff3f6;\n    text-align: right;\n    direction: rtl;\n    overflow: hidden;\n}\n.header-lable[data-v-c1ff4a58] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n.content-lable[data-v-c1ff4a58]{\n    font-weight:400 ;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-c1ff4a58] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border:none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-c1ff4a58]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-c1ff4a58] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-c1ff4a58]:hover {\n    color: #fff;\n}\n.font-big[data-v-c1ff4a58] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-c1ff4a58] {\n    width: 80px;\n}\n.little-main-header[data-v-c1ff4a58] {\n    right: 80px;\n}\n.background_mob_sec[data-v-c1ff4a58] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user[data-v-c1ff4a58], .kind_activity[data-v-c1ff4a58] {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div[data-v-c1ff4a58], .kind_activity > div[data-v-c1ff4a58] {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input[data-v-c1ff4a58], .kind_activity input[data-v-c1ff4a58] {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i[data-v-c1ff4a58], .kind_activity input:checked + i[data-v-c1ff4a58] {\n    background: #28a745;\n    color: #fff;\n    border: none;\n    padding: 4px;\n}\n.kind_user i[data-v-c1ff4a58], .kind_activity i[data-v-c1ff4a58] {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border-radius: 50%;\n    padding: 2px;\n    font-size: 14px;\n    border: 2px solid;\n}\n.user-form[data-v-c1ff4a58]{\n    padding: 0;\n}\ninput[type=\"text\"][data-v-c1ff4a58],select[data-v-c1ff4a58] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\ntextarea[data-v-c1ff4a58]{\n    height: 120px;\n    max-width: 100%\n}\n.user-form input[type=\"button\"][data-v-c1ff4a58] {\n    width: 100%;\n}\n.user-form input[type=\"text\"][data-v-c1ff4a58]:focus {\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile[data-v-c1ff4a58]{\n    float: right;\n    padding-top: 90px;\n}\n#icon-pro[data-v-c1ff4a58] {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg[data-v-c1ff4a58]{\n    height: 150px;\n}\n.col-sm-6[data-v-c1ff4a58]{\n    height: 120px;\n    float: right;\n}\n@media screen and (max-width: 992px) {\n.img-profile[data-v-c1ff4a58]{\n        padding-top: 20px;\n}\n.right-header.desktop-header[data-v-c1ff4a58] {\n        display: none;\n}\n.right-header.mobile-header[data-v-c1ff4a58] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-c1ff4a58], .little-main-header[data-v-c1ff4a58] {\n        right: 0 !important;\n}\n#main[data-v-c1ff4a58], #main.little-main[data-v-c1ff4a58] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-c1ff4a58] {\n        width: 100%;\n}\n.copy-right[data-v-c1ff4a58] {\n        display: none;\n}\n.clouse_menu[data-v-c1ff4a58] {\n        display: none;\n}\n.clouse_menu_mob[data-v-c1ff4a58] {\n        display: block;\n}\n.show-header button[data-v-c1ff4a58] {\n        display: block;\n}\n.img-profile .submit[data-v-c1ff4a58] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-c1ff4a58] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-c1ff4a58]{\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-c1ff4a58], .contents-post[data-v-c1ff4a58] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.col-sm-6[data-v-c1ff4a58]{\n        float: none;\n}\n.name-header-profile[data-v-c1ff4a58] {\n        display: none;\n}\n.profile-menu-header[data-v-c1ff4a58] {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-c1ff4a58] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-c1ff4a58] {\n        font-size: 10px;\n}\n.sub-header[data-v-c1ff4a58] {\n\n        bottom: -44px;\n}\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 207 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['storage', 'defultimg'],
+    data: function data() {
+        return {
+            currentUser: {
+                profile: {
+                    is_company: '',
+                    company_name: '',
+                    company_register_code: '',
+                    address: '',
+                    public_phone: '',
+                    profile_photo: ''
+                },
+                user_info: ''
+            },
+            profileBasicFields: ['is_company', 'company_name', 'company_register_code', 'public_phone', 'address'],
+            profilePhoto: '',
+            errors: '',
+            popUpMsg: '',
+            items: [{
+                message: 'قرارداد',
+                url: 'profileContract'
+            }, {
+                message: ' اطلاعات تکمیلی',
+                url: 'compelementry'
+            }, {
+                message: 'اطلاعات پایه',
+                url: 'profileBasic'
+            }]
+        };
+    },
+    methods: {
+        init: function init() {
+            var _this = this;
+
+            this.isLoaded = true;
+            axios.post('/user/profile_info').then(function (response) {
+                return _this.currentUser = response.data;
+            });
+        },
+        RegisterBasicProfileInfo: function RegisterBasicProfileInfo() {
+            __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', true);
+            this.errors = '';
+            var self = this;
+
+            var data = new FormData();
+
+            for (var i = 0, cnt = this.profileBasicFields.length; i < cnt; i++) {
+                if (this.currentUser.profile[this.profileBasicFields[i]] != null) {
+                    data.append(this.profileBasicFields[i], this.toLatinNumbers(this.currentUser.profile[this.profileBasicFields[i]]));
+                }
+            }
+
+            var profilePhoto = this.$refs.profilePhoto.files[0];
+            if (profilePhoto) {
+                data.append('profile_photo', profilePhoto);
+            }
+
+            axios.post('/user/profile_modification', data).then(function (response) {
+                if (response.status == 200) {
+                    __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', false);
+                    self.popUpMsg = 'تغییرات با موفقیت اعمال شد';
+                    __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitSuccess', self.popUpMsg);
+                    $('#myModal').modal('show');
+                }
+                self.submiting = false;
+            }).catch(function (err) {
+                self.errors = '';
+                self.errors = err.response.data.errors;
+                __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', false);
+            });
+        },
+        toLatinNumbers: function toLatinNumbers(num) {
+            if (num == null) {
+                return null;
+            }
+            var numDic = {
+                '۰': '0',
+                '۱': '1',
+                '۲': '2',
+                '۳': '3',
+                '۴': '4',
+                '۵': '5',
+                '۶': '6',
+                '۷': '7',
+                '۸': '8',
+                '۹': '9'
+            };
+
+            return num.toString().replace(/[۰-۹]/g, function (w) {
+                return numDic[w];
+            });
+        }
+    },
+    mounted: function mounted() {
+        this.init();
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+        function show_image_preview(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                var image = $('#blah');
+                var icon_profile = $('#icon-pro');
+                reader.onload = function (e) {
+                    image.attr('src', e.target.result);
+                    image.css('display', 'inline');
+                    icon_profile.css('display', 'none');
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function image_checked() {
+            var image = $('#blah');
+            var icon_profile = $('#icon-pro');
+            if (image.attr('src') != "") {
+                image.css('display', 'inline');
+                icon_profile.css('display', 'none');
+            }
+        }
+
+        image_checked();
+        $("#imgInp").change(function () {
+            show_image_preview(this);
+        });
+    }
+});
+
+/***/ }),
+/* 208 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("section", { staticClass: "main-content col-xs-12" }, [
+    _c(
+      "form",
+      {
+        attrs: { action: "#", method: "post", enctype: "multipart/form-data" }
+      },
+      [
+        _c("div", { staticClass: "img-profile col-md-3" }, [
+          _c("div", { staticClass: "image-input" }, [
+            _vm.currentUser.profile.profile_photo
+              ? _c("div", [
+                  _c("img", {
+                    attrs: {
+                      src:
+                        _vm.storage +
+                        "/" +
+                        _vm.currentUser.profile.profile_photo,
+                      id: "blah",
+                      alt: "تصویر پروفایل"
+                    }
+                  })
+                ])
+              : _c("div", [
+                  _c("img", {
+                    attrs: { src: _vm.defultimg, align: "تصویر پروفایل" }
+                  })
+                ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "submit" }, [
+              _c("input", {
+                ref: "profilePhoto",
+                attrs: { type: "file", id: "imgInp" }
+              }),
+              _vm._v(" "),
+              _c("label", [_vm._v("ویرایش تصویر")]),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _vm.errors.profile_photo
+                ? _c("span", { staticClass: "text-danger tex-left" }, [
+                    _vm._v(_vm._s(_vm.errors.profile_photo[0]))
+                  ])
+                : _vm._e()
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "main-profile col-md-9" }, [
+          _c("div", { staticClass: "kind_user col-xs-12" }, [
+            _c("label", { staticClass: "header-lable " }, [
+              _vm._v("\n                    نوع کاربری\n                ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: " col-xs-6 col-md-4" }, [
+              _vm._v("\n                    حقیقی "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.currentUser.profile.is_company,
+                    expression: "currentUser.profile.is_company"
+                  }
+                ],
+                attrs: {
+                  onclick: "disable_form(this);",
+                  type: "radio",
+                  name: "kind_user",
+                  value: "0"
+                },
+                domProps: {
+                  checked: _vm._q(_vm.currentUser.profile.is_company, "0")
+                },
+                on: {
+                  change: function($event) {
+                    _vm.$set(_vm.currentUser.profile, "is_company", "0")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fa fa-check" })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: " col-xs-6 col-md-4" }, [
+              _vm._v("\n                    حقوقی "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.currentUser.profile.is_company,
+                    expression: "currentUser.profile.is_company"
+                  }
+                ],
+                attrs: {
+                  onclick: "enable_form(this);",
+                  type: "radio",
+                  name: "kind_user",
+                  value: "1"
+                },
+                domProps: {
+                  checked: _vm._q(_vm.currentUser.profile.is_company, "1")
+                },
+                on: {
+                  change: function($event) {
+                    _vm.$set(_vm.currentUser.profile, "is_company", "1")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fa fa-check" })
+            ]),
+            _vm._v(" "),
+            _vm.errors.is_company
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v("@" + _vm._s(_vm.errors.is_company[0]))
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "user-form col-xs-12" }, [
+            _c("label", { staticClass: "header-lable" }, [
+              _vm._v("\n                    مشخصات کاربری\n                ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-6" }, [
+              _c(
+                "label",
+                { staticClass: "content-lable", attrs: { for: "co-num" } },
+                [
+                  _vm._v(
+                    "\n                        شماره ثبت شرکت:\n                    "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.currentUser.profile.company_register_code,
+                    expression: "currentUser.profile.company_register_code"
+                  }
+                ],
+                attrs: {
+                  type: "text",
+                  id: "co-num",
+                  name: "company-number",
+                  placeholder: "شماره ثبت شرکت",
+                  disabled: "disabled"
+                },
+                domProps: {
+                  value: _vm.currentUser.profile.company_register_code
+                },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.currentUser.profile,
+                      "company_register_code",
+                      $event.target.value
+                    )
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.company_register_code
+                ? _c("span", { staticClass: "text-danger" }, [
+                    _vm._v(_vm._s(_vm.errors.company_register_code[0]))
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-6" }, [
+              _c(
+                "label",
+                { staticClass: "content-lable", attrs: { for: "company" } },
+                [
+                  _vm._v(
+                    "\n                        نام شرکت:\n                    "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.currentUser.profile.company_name,
+                    expression: "currentUser.profile.company_name"
+                  }
+                ],
+                attrs: {
+                  type: "text",
+                  id: "company",
+                  name: "company",
+                  placeholder: "نام شرکت",
+                  disabled: ""
+                },
+                domProps: { value: _vm.currentUser.profile.company_name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.currentUser.profile,
+                      "company_name",
+                      $event.target.value
+                    )
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.company_name
+                ? _c("span", { staticClass: "text-danger" }, [
+                    _vm._v(_vm._s(_vm.errors.company_name[0]))
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-6" }, [
+              _c(
+                "label",
+                { staticClass: "content-lable", attrs: { for: "company" } },
+                [
+                  _vm._v(
+                    "\n                        شماره تماس:\n                    "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.currentUser.profile.public_phone,
+                    expression: "currentUser.profile.public_phone"
+                  }
+                ],
+                attrs: { type: "text", name: "tel", placeholder: "شماره تماس" },
+                domProps: { value: _vm.currentUser.profile.public_phone },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.currentUser.profile,
+                      "public_phone",
+                      $event.target.value
+                    )
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.public_phone
+                ? _c("span", { staticClass: "text-danger" }, [
+                    _vm._v(_vm._s(_vm.errors.public_phone[0]))
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-6" }, [
+              _c(
+                "label",
+                { staticClass: "content-lable", attrs: { for: "company" } },
+                [
+                  _vm._v(
+                    "\n                        آدرس:\n                    "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.currentUser.profile.address,
+                    expression: "currentUser.profile.address"
+                  }
+                ],
+                attrs: { type: "text", name: "address", placeholder: "آدرس" },
+                domProps: { value: _vm.currentUser.profile.address },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.currentUser.profile,
+                      "address",
+                      $event.target.value
+                    )
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.address
+                ? _c("span", { staticClass: "text-danger" }, [
+                    _vm._v(_vm._s(_vm.errors.address[0]))
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-6" }, [
+              _c(
+                "label",
+                { staticClass: "content-lable", attrs: { for: "company" } },
+                [
+                  _vm._v(
+                    "\n                        کد پستی:\n                    "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.currentUser.profile.postal_code,
+                    expression: "currentUser.profile.postal_code"
+                  }
+                ],
+                attrs: {
+                  type: "text",
+                  name: "address",
+                  placeholder: "کد پستی"
+                },
+                domProps: { value: _vm.currentUser.profile.postal_code },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.currentUser.profile,
+                      "postal_code",
+                      $event.target.value
+                    )
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.postal_code
+                ? _c("span", { staticClass: "text-danger" }, [
+                    _vm._v("@" + _vm._s(_vm.errors.postal_code[0]))
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-6" }, [
+              _c(
+                "label",
+                { staticClass: "content-lable", attrs: { for: "company" } },
+                [
+                  _vm._v(
+                    "\n                        شماره شبا:\n                    "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.currentUser.profile.shaba_code,
+                    expression: "currentUser.profile.shaba_code"
+                  }
+                ],
+                attrs: {
+                  type: "text",
+                  name: "address",
+                  placeholder: "شماره شبا"
+                },
+                domProps: { value: _vm.currentUser.profile.shaba_code },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.currentUser.profile,
+                      "shaba_code",
+                      $event.target.value
+                    )
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.shaba_code
+                ? _c("span", { staticClass: "text-danger" }, [
+                    _vm._v("@" + _vm._s(_vm.errors.shaba_code[0]))
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-xs-12" }, [
+              _c("input", {
+                staticClass: "green-bot",
+                attrs: { type: "button", name: "submit", value: "ثبت تغییرات" },
+                on: { click: _vm.RegisterBasicProfileInfo }
+              })
+            ])
+          ])
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-c1ff4a58", module.exports)
+  }
+}
+
+/***/ }),
+/* 209 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(210)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(212)
+/* template */
+var __vue_template__ = __webpack_require__(213)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-aabafcfa"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/buyer/profile/profile_complete.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-aabafcfa", Component.options)
+  } else {
+    hotAPI.reload("data-v-aabafcfa", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 210 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(211);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("3b90488e", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-aabafcfa\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./profile_complete.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-aabafcfa\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./profile_complete.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 211 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n/*start style main header*/\n#main[data-v-aabafcfa] {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #fff;\n    padding: 0 50px;\n    overflow: hidden;\n}\n#main label[data-v-aabafcfa] {\n    display: block;\n    text-align: right;\n    direction: rtl;\n    margin: 15px auto;\n    font-weight: 400;\n}\n#main label span[data-v-aabafcfa] {\n    color: #4a4e57;\n    font-size:12px;\n}\n#main textarea[data-v-aabafcfa] {\n    width: 100% !important;\n    border: none;\n    border-radius: 3px;\n    background: #eff3f6;\n    height: 180px;\n    direction: rtl;\n    padding: 15px;\n    line-height: 20px;\n}\n#main.little-main[data-v-aabafcfa] {\n    margin-right: 80px;\n}\n.main-header[data-v-aabafcfa] {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n    border-bottom: 2px solid #e6e6e6;\n}\n.image-header-profile[data-v-aabafcfa] {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.image-header-profile  img[data-v-aabafcfa]{\n    height: 100%;\n}\n.profile-menu-header[data-v-aabafcfa] {\n    float: left;\n}\n.right-menu-header[data-v-aabafcfa] {\n\n    padding: 16px;\n}\n.right-menu-header[data-v-aabafcfa], .content-header[data-v-aabafcfa] {\n    float: right;\n}\n.profile-menu-header[data-v-aabafcfa] {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header a[data-v-aabafcfa] {\n    position: relative;\n}\n.profile-menu-header i[data-v-aabafcfa] {\n    position: absolute;\n\n    left: -75px;\n\n    top: 18px;\n\n    font-size: 20px;\n}\n.content-header[data-v-aabafcfa] {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a[data-v-aabafcfa], .profile-menu-header a[data-v-aabafcfa] {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a[data-v-aabafcfa] {\n    font-size: 30px;\n}\n.right-menu-header a[data-v-aabafcfa]:hover, .profile-menu-header a[data-v-aabafcfa]:hover {\n    color: #2e353e;\n}\n.name-header-profile[data-v-aabafcfa] {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list[data-v-aabafcfa] {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li[data-v-aabafcfa] {\n    margin: 5px;\n}\n.profile-list a[data-v-aabafcfa] {\n    width: 100%;\n    display: inline-block;\n}\n\n/*end style main header*/\n\n/*start style sub-header*/\n.sub-header[data-v-aabafcfa] {\n    position: absolute;\n    left: 0;\n    background: #eff3f6;\n    top: 63px;\n    right: 0;\n    text-align: center;\n}\n.sub-header ul[data-v-aabafcfa] {\n    text-align: center;\n}\n.sub-header a[data-v-aabafcfa] {\n    padding: 16px;\n\n    display: inline-block;\n\n    color: #808c9b;\n\n    font-weight: bold;\n\n    font-size: 14px;\n\n    position: relative;\n}\n.sub-header a[data-v-aabafcfa]:hover {\n    color: #313942;\n}\n.sub-header a[data-v-aabafcfa]:hover::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.sub-header a.active[data-v-aabafcfa] {\n    color: #313942;\n}\n.sub-header a.active[data-v-aabafcfa]::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n/*end style sub-header*/\n/*start main content style */\n.image-content-post[data-v-aabafcfa] {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img[data-v-aabafcfa] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-aabafcfa] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-aabafcfa] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-aabafcfa] {\n    display: block;\n}\n.content-item[data-v-aabafcfa] {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content[data-v-aabafcfa] {\n    padding: 60px 15px;\n}\n.header-lable[data-v-aabafcfa] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n.content-lable[data-v-aabafcfa]{\n    font-weight:400 ;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-aabafcfa] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    width: 100%;\n}\n.green-bot[data-v-aabafcfa]:hover {\n    color: #fff;\n    background: #249741;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-aabafcfa] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-aabafcfa]:hover {\n    color: #fff;\n}\n.font-big[data-v-aabafcfa] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-aabafcfa] {\n    width: 80px;\n}\n.little-main-header[data-v-aabafcfa] {\n    right: 80px;\n}\n.background_mob_sec[data-v-aabafcfa] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user[data-v-aabafcfa], .kind_activity[data-v-aabafcfa] {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div[data-v-aabafcfa], .kind_activity > div[data-v-aabafcfa] {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input[data-v-aabafcfa], .kind_activity input[data-v-aabafcfa] {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i[data-v-aabafcfa], .kind_activity input:checked + i[data-v-aabafcfa] {\n    color: #28a745;\n    border: none;\n    padding: 4px;\n}\n.kind_user i[data-v-aabafcfa], .kind_activity i[data-v-aabafcfa] {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border-radius: 50%;\n    padding: 2px;\n    font-size: 14px;\n    border: 2px solid;\n}\n.user-form[data-v-aabafcfa] {\n    padding: 0;\n}\n.user-form input[type=\"text\"][data-v-aabafcfa] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.user-form input[type=\"button\"][data-v-aabafcfa] {\n    width: 100%;\n}\n.user-form input[type=\"text\"][data-v-aabafcfa]:focus {\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile[data-v-aabafcfa] {\n    float: right;\n}\n#icon-pro[data-v-aabafcfa] {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg[data-v-aabafcfa] {\n    height: 150px;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header[data-v-aabafcfa] {\n        display: none;\n}\n.right-header.mobile-header[data-v-aabafcfa] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-aabafcfa], .little-main-header[data-v-aabafcfa] {\n        right: 0 !important;\n}\n#main[data-v-aabafcfa], #main.little-main[data-v-aabafcfa] {\n        margin-right: 0 !important;\n        padding: 0 20px;\n}\n.post-contents-table[data-v-aabafcfa] {\n        width: 100%;\n}\n.copy-right[data-v-aabafcfa] {\n        display: none;\n}\n.clouse_menu[data-v-aabafcfa] {\n        display: none;\n}\n.clouse_menu_mob[data-v-aabafcfa] {\n        display: block;\n}\n.show-header button[data-v-aabafcfa] {\n        display: block;\n}\n.kind_user > div[data-v-aabafcfa], .kind_activity > div[data-v-aabafcfa] {\n        float: none;\n}\n.img-profile .submit[data-v-aabafcfa] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-aabafcfa] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-aabafcfa] {\n        float: none;\n}\n}\n.company_des[data-v-aabafcfa],.image_company[data-v-aabafcfa],.image_certif[data-v-aabafcfa]{\n    margin: 40px auto;\n}\n.images-content[data-v-aabafcfa]{\n    height: 215px;\n\n    overflow-y: scroll;\n}\n.images-content .image-item[data-v-aabafcfa]{\n    padding: 5px;\n    position: relative;\n}\n.images-content .image-item a[data-v-aabafcfa]{\n    position: absolute;\n    width: 20px;\n    height: 20px;\n    left: 0;\n    top: 0;\n    background: red;\n    color: #fff;\n    border-radius: 50px;\n    text-align: center;\n    padding-top: 2px;\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-aabafcfa], .contents-post[data-v-aabafcfa] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.name-header-profile[data-v-aabafcfa] {\n        display: none;\n}\n.profile-menu-header[data-v-aabafcfa] {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-aabafcfa] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-aabafcfa] {\n        font-size: 10px;\n}\n#main[data-v-aabafcfa], #main.little-main[data-v-aabafcfa] {\n        margin-right: 0 !important;\n        padding: 0 5px;\n}\n.sub-header[data-v-aabafcfa] {\n        bottom: -44px;\n}\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 212 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            currentUser: {
+                profile: '',
+                user_info: ''
+            },
+            profileComplementaryFields: ['is_company', 'company_name', 'company_register_code', 'public_phone', 'description'],
+            relatedFiles: [],
+            certificateFiles: [],
+            errors: '',
+            popUpMsg: '',
+            items: [{
+                message: 'قرارداد',
+                url: 'profileContract'
+            }, {
+                message: ' اطلاعات تکمیلی',
+                url: 'compelementry'
+            }, {
+                message: 'اطلاعات پایه',
+                url: 'profileBasic'
+            }]
+        };
+    },
+    methods: {
+        init: function init() {
+            var _this = this;
+
+            axios.post('/user/profile_info').then(function (response) {
+                return _this.currentUser = response.data;
+            });
+        },
+        RegisterComplementaryProfileInfo: function RegisterComplementaryProfileInfo() {
+
+            __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', true);
+            if (this.currentUser.profile.is_company == null || this.currentUser.profile.public_phone == null) {
+                this.popUpMsg = 'ابتدا اطلاعات پایه را تکمیل کنید.';
+                __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitSuccess', this.popUpMsg);
+                $('#myModal').modal('show');
+                return;
+            }
+
+            this.errors = '';
+            var self = this;
+
+            var formData = new FormData();
+            var cnt = this.profileComplementaryFields.length;
+
+            for (var i = 0; i < cnt; i++) {
+                if (this.profileComplementaryFields[i] == 'description' && (this.currentUser.profile['description'] == null || this.currentUser.profile['description'] == '')) {
+                    continue;
+                }
+                formData.append(this.profileComplementaryFields[i], this.currentUser.profile[this.profileComplementaryFields[i]]);
+            }
+
+            for (var i = 0; i < this.relatedFiles.length; i++) {
+                var file = this.relatedFiles[i];
+                formData.append('related_' + i, file);
+            }
+
+            for (var i = 0; i < this.certificateFiles.length; i++) {
+                var _file = this.certificateFiles[i];
+                formData.append('certificate_' + i, _file);
+            }
+
+            formData.append('related_image_count', this.relatedFiles.length);
+            formData.append('certificate_image_count', this.certificateFiles.length);
+
+            axios.post('/user/profile_modification', formData, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/json'
+                }
+            }).then(function (response) {
+                if (response.status == 200) {
+
+                    __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', false);
+                    self.popUpMsg = 'تغییرات با موفقیت انجام شد.';
+                    __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitSuccess', self.popUpMsg);
+
+                    $('#myModal').modal('show');
+                } else if (response.status == 302) {
+                    window.location.href = '/login';
+                }
+            }).catch(function (err) {
+                self.errors = '';
+                self.errors = err.response.data.errors;
+                __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', false);
+            });
+        },
+        handleRelatedFilesUpload: function handleRelatedFilesUpload() {
+            var uploadedFiles = this.$refs.relatedFiles.files;
+            console.log(uploadedFiles);
+            /*
+              Adds the uploaded file to the files array
+            */
+            for (var i = 0; i < uploadedFiles.length; i++) {
+                this.relatedFiles.push(uploadedFiles[i]);
+            }
+        },
+        handleCertificateFilesUpload: function handleCertificateFilesUpload() {
+            var uploadedFiles = this.$refs.certificateFiles.files;
+            /*
+             Adds the uploaded file to the files array
+             */
+            for (var i = 0; i < uploadedFiles.length; i++) {
+                this.certificateFiles.push(uploadedFiles[i]);
+            }
+        }
+    },
+    mounted: function mounted() {
+        this.init();
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+        $('input[type="file"]').imageuploadify();
+    }
+});
+
+function call_api(route, data, call_back) {
+    axios.post(route, data).then(call_back);
+}
+
+/***/ }),
+/* 213 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("section", { staticClass: "main-content col-xs-12" }, [
+    _c(
+      "form",
+      {
+        attrs: { action: "#", method: "post", enctype: "multipart/form-data" }
+      },
+      [
+        _c("div", { staticClass: "company_des col-xs-12" }, [
+          _c("label", [
+            _vm._v("\n                شرح فعالیت من | شرکت:\n            ")
+          ]),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.currentUser.profile.description,
+                expression: "currentUser.profile.description"
+              }
+            ],
+            attrs: { name: "company_name" },
+            domProps: { value: _vm.currentUser.profile.description },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(
+                  _vm.currentUser.profile,
+                  "description",
+                  $event.target.value
+                )
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm.errors.description
+            ? _c("span", { staticClass: "text-danger" }, [
+                _vm._v("@" + _vm._s(_vm.errors.description[0]))
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "image_company col-xs-12 " }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xs-12 col-sm-6" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("input", {
+              ref: "relatedFiles",
+              attrs: {
+                type: "file",
+                id: "file",
+                multiple: "",
+                accept: "image/*"
+              },
+              on: {
+                change: function($event) {
+                  _vm.handleRelatedFilesUpload()
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "image_certif  col-xs-12" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xs-12 col-sm-6" }, [
+            _vm._m(3),
+            _vm._v(" "),
+            _c("input", {
+              ref: "certificateFiles",
+              attrs: { type: "file", multiple: "", accept: "image/*" },
+              on: {
+                change: function($event) {
+                  _vm.handleCertificateFilesUpload()
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "green-bot",
+          attrs: { value: "ثبت تغییرات", type: "button" },
+          on: { click: _vm.RegisterComplementaryProfileInfo }
+        })
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-xs-12 col-sm-6" }, [
+      _c("label", [
+        _vm._v("\n                    تصاویر مربوطه "),
+        _c("span", [_vm._v("(محصولات | شرکت | کارکنان)")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "images-content col-xs-12" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _vm._v("\n                    افزودن تصاویر مربوطه "),
+      _c("span", [_vm._v("(محصولات | شرکت | کارکنان)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-xs-12 col-sm-6" }, [
+      _c("label", [
+        _vm._v("\n                    تصاویر مربوطه "),
+        _c("span", [_vm._v("(محصولات | شرکت | کارکنان)")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "images-content col-xs-12" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _vm._v("\n                    گواهی های مربوطه "),
+      _c("span", [_vm._v("(گواهی های ثبت شرکت | گواهی های استاندارد محصول)")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-aabafcfa", module.exports)
+  }
+}
+
+/***/ }),
+/* 214 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(215)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(217)
+/* template */
+var __vue_template__ = __webpack_require__(218)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-6f7cccdc"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/buyer/profile/profile_contract.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6f7cccdc", Component.options)
+  } else {
+    hotAPI.reload("data-v-6f7cccdc", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 215 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(216);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("13debe22", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6f7cccdc\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./profile_contract.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6f7cccdc\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./profile_contract.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 216 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.col-xs-1[data-v-6f7cccdc],\n.col-xs-2[data-v-6f7cccdc],\n.col-xs-3[data-v-6f7cccdc],\n.col-xs-4[data-v-6f7cccdc],\n.col-xs-5[data-v-6f7cccdc],\n.col-xs-6[data-v-6f7cccdc],\n.col-xs-7[data-v-6f7cccdc],\n.col-xs-8[data-v-6f7cccdc],\n.col-xs-9[data-v-6f7cccdc],\n.col-xs-10[data-v-6f7cccdc],\n.col-xs-11[data-v-6f7cccdc],\n.col-xs-12[data-v-6f7cccdc],\n.col-sm-1[data-v-6f7cccdc],\n.col-sm-2[data-v-6f7cccdc],\n.col-sm-3[data-v-6f7cccdc],\n.col-sm-4[data-v-6f7cccdc],\n.col-sm-5[data-v-6f7cccdc],\n.col-sm-6[data-v-6f7cccdc],\n.col-sm-7[data-v-6f7cccdc],\n.col-sm-8[data-v-6f7cccdc],\n.col-sm-9[data-v-6f7cccdc],\n.col-sm-10[data-v-6f7cccdc],\n.col-sm-11[data-v-6f7cccdc],\n.col-sm-12[data-v-6f7cccdc],\n.col-md-1[data-v-6f7cccdc],\n.col-md-2[data-v-6f7cccdc],\n.col-md-3[data-v-6f7cccdc],\n.col-md-4[data-v-6f7cccdc],\n.col-md-5[data-v-6f7cccdc],\n.col-md-6[data-v-6f7cccdc],\n.col-md-7[data-v-6f7cccdc],\n.col-md-8[data-v-6f7cccdc],\n.col-md-9[data-v-6f7cccdc],\n.col-md-10[data-v-6f7cccdc],\n.col-md-11[data-v-6f7cccdc],\n.col-md-12[data-v-6f7cccdc],\n.col-lg-1[data-v-6f7cccdc],\n.col-lg-2[data-v-6f7cccdc],\n.col-lg-3[data-v-6f7cccdc],\n.col-lg-4[data-v-6f7cccdc],\n.col-lg-5[data-v-6f7cccdc],\n.col-lg-6[data-v-6f7cccdc],\n.col-lg-7[data-v-6f7cccdc],\n.col-lg-8[data-v-6f7cccdc],\n.col-lg-9[data-v-6f7cccdc],\n.col-lg-10[data-v-6f7cccdc],\n.col-lg-11[data-v-6f7cccdc],\n.col-lg-12[data-v-6f7cccdc]{\n    float: right;\n}\n\n/*start main content style */\n.image-content-post[data-v-6f7cccdc] {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img[data-v-6f7cccdc] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-6f7cccdc] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-6f7cccdc] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-6f7cccdc] {\n    display: block;\n}\n.content-item[data-v-6f7cccdc] {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content[data-v-6f7cccdc] {\n    padding: 60px 15px;\n}\n.header-lable[data-v-6f7cccdc] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-6f7cccdc] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-6f7cccdc]:focus,.gray-bot[data-v-6f7cccdc]:focus {\n    color: #fff;\n}\n.default_btn[data-v-6f7cccdc]{\n    margin: 15px 0;\n    display: inline-block;\n    background: #eee;\n    color: #444;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot[data-v-6f7cccdc] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #85888d;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.default_btn[data-v-6f7cccdc]:hover {\n    color: #444;\n    background: #ddd;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-6f7cccdc]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot[data-v-6f7cccdc]:hover {\n    color: #fff;\n    background: #72757a;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-6f7cccdc] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-6f7cccdc]:hover {\n    color: #fff;\n}\n.font-big[data-v-6f7cccdc] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-6f7cccdc] {\n    width: 80px;\n}\n.little-main-header[data-v-6f7cccdc] {\n    right: 80px;\n}\n.background_mob_sec[data-v-6f7cccdc] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user[data-v-6f7cccdc], .kind_activity[data-v-6f7cccdc] {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div[data-v-6f7cccdc], .kind_activity > div[data-v-6f7cccdc] {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input[data-v-6f7cccdc], .kind_activity input[data-v-6f7cccdc] {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i[data-v-6f7cccdc], .kind_activity input:checked + i[data-v-6f7cccdc] {\n    color: #28a745;\n    border: none;\n    padding: 4px;\n}\n.kind_user i[data-v-6f7cccdc], .kind_activity i[data-v-6f7cccdc] {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border-radius: 50%;\n    padding: 2px;\n    font-size: 14px;\n    border: 2px solid;\n}\n.user-form[data-v-6f7cccdc] {\n    padding: 0;\n}\n.alert-message[data-v-6f7cccdc]{\n    padding: 20px;\n\n    text-align: right;\n}\n.user-form input[type=\"text\"][data-v-6f7cccdc] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.user-form input[type=\"button\"][data-v-6f7cccdc] {\n    width: 100%;\n}\n.user-form input[type=\"text\"][data-v-6f7cccdc]:focus {\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile[data-v-6f7cccdc] {\n    float: right;\n}\n#icon-pro[data-v-6f7cccdc] {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg[data-v-6f7cccdc] {\n    height: 150px;\n}\n.main-content-nav[data-v-6f7cccdc] {\n    margin: 20px auto;\n\n    width: 80%;\n\n    float: none;\n}\n.main-content-nav ul[data-v-6f7cccdc] {\n    text-align: center;\n    margin-right: -25px;\n}\n.main-content-nav li[data-v-6f7cccdc] {\n    padding: 14px 50px;\n    position: relative;\n    background: #fbfbfb;\n    font-size: 18px;\n}\n.main-content-nav li a[data-v-6f7cccdc]{\n    color: #999;\n}\n.main-content-nav li.active a[data-v-6f7cccdc]{\n    color: #333;\n}\n.main-content-nav li[data-v-6f7cccdc]:after {\n    content: \"\";\n    position: absolute;\n    right: 0;\n    bottom: 0;\n    width: 0;\n    height: 0;\n    border-right: 20px solid #fff;\n    border-top: 26px solid transparent;\n    border-bottom: 20px solid transparent;\n}\n.main-content-nav li[data-v-6f7cccdc]:before {\n    content: \"\";\n    position: absolute;\n    left: -20px;\n    bottom: 0;\n    width: 0;\n    height: 0;\n    border-right: 20px solid #fbfbfb;\n    border-top: 26px solid transparent;\n    border-bottom: 20px solid transparent;\n    z-index: 1;\n}\n.main-content-nav li.active[data-v-6f7cccdc] {\n    background: #f7f7f7;\n    color: #333;\n}\n.main-content-nav li.active[data-v-6f7cccdc]:before {\n    border-right-color: #f7f7f7;\n}\n#main .contents[data-v-6f7cccdc]{\n    text-align: center;\n\n    background: #f7f7f7;\n\n    width: 80%;\n\n    margin: 0 auto;\n\n    float: none;\n\n    overflow: hidden;\n\n    border-radius: 3px;\n\n    line-height: 1.618;\n\n    direction: rtl;\n}\n#main .contents p[data-v-6f7cccdc]{\n    text-align: right;\n}\n#main .contents h2[data-v-6f7cccdc]{\n    margin: 20px auto;\n}\n#main .continue_but[data-v-6f7cccdc]{\n    float: right;\n}\n#main .main_buttons[data-v-6f7cccdc]{\n    float: right;\n}\n#step1 .main_buttons[data-v-6f7cccdc]{\n    text-align: right;\n}\n/*part 2*/\n.main-content-texts[data-v-6f7cccdc]{\n    background: #fff;\n\n    border-radius: 3px;\n}\n.header-contents[data-v-6f7cccdc]{\n    background: #fff;\n    margin: 15px auto;\n    border-radius: 3px;\n    padding: 10px;\n    text-align: left;\n}\n.header-contents .title-contents[data-v-6f7cccdc]{\n    text-align: right;\n}\n.contents h2[data-v-6f7cccdc]{\n    font-size: 22px;\n}\n.description-text[data-v-6f7cccdc]{\n    font-size: 12px;\n    padding: 5px 0;\n    border-top:1px solid #ddd;\n}\n.services td[data-v-6f7cccdc] {\n    color: #00d613;\n}\n.pre-pay td[data-v-6f7cccdc] {\n    color: #e41c38;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header[data-v-6f7cccdc] {\n        display: none;\n}\n.right-header.mobile-header[data-v-6f7cccdc] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-6f7cccdc], .little-main-header[data-v-6f7cccdc] {\n        right: 0 !important;\n}\n#main[data-v-6f7cccdc], #main.little-main[data-v-6f7cccdc] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-6f7cccdc] {\n        width: 100%;\n}\n.copy-right[data-v-6f7cccdc] {\n        display: none;\n}\n.clouse_menu[data-v-6f7cccdc] {\n        display: none;\n}\n.clouse_menu_mob[data-v-6f7cccdc] {\n        display: block;\n}\n.show-header button[data-v-6f7cccdc] {\n        display: block;\n}\n.kind_user > div[data-v-6f7cccdc], .kind_activity > div[data-v-6f7cccdc] {\n        float: none;\n}\n.img-profile .submit[data-v-6f7cccdc] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-6f7cccdc] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-6f7cccdc] {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-6f7cccdc], .contents-post[data-v-6f7cccdc] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.name-header-profile[data-v-6f7cccdc] {\n        display: none;\n}\n.profile-menu-header[data-v-6f7cccdc] {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-6f7cccdc] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-6f7cccdc] {\n        font-size: 10px;\n}\n.sub-header[data-v-6f7cccdc] {\n\n        bottom: -44px;\n}\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 217 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            pageStep: 1,
+            errors: '',
+            popUpMsg: '',
+            submiting: false,
+            contractConfirmed: false,
+            currentUser: '',
+            items: [{
+                message: 'قرارداد',
+                url: 'profileContract'
+            }, {
+                message: ' اطلاعات تکمیلی',
+                url: 'compelementry'
+            }, {
+                message: 'اطلاعات پایه',
+                url: 'profileBasic'
+            }]
+        };
+    },
+    methods: {
+        init: function init() {
+            var self = this;
+
+            axios.post('/user/profile_info').then(function (response) {
+                self.currentUser = response.data;
+                self.contractConfirmed = response.data.user_info.contract_confirmed;
+            });
+        },
+        confirmContract: function confirmContract() {
+            var self = this;
+
+            if (this.contractConfirmed == false) {
+                axios.post('/confirm_initial_contract').then(function (response) {
+                    if (response.status == 200) {
+                        self.popUpMsg = 'تایید قرار داد با موفقیت انجام شد.';
+                        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitSuccess', self.popUpMsg);
+
+                        $('#myModal').modal('show');
+                    } else if (response.status == 500) {
+                        alert('failed');
+                    }
+                });
+            } else {
+                this.popUpMsg = 'شما قبلا این قرار داد را پذیرفته اید.';
+                __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitSuccess', self.popUpMsg);
+                $('#myModal').modal('show');
+            }
+        },
+        goToNextPage: function goToNextPage() {
+            if (this.pageStep < 10) {
+                this.pageStep++;
+            }
+        },
+        goToPrePage: function goToPrePage() {
+            if (this.pageStep < 1) {
+                this.pageStep = 1;
+            } else if (this.pageStep > 1) {
+                this.pageStep--;
+            }
+        }
+    },
+    mounted: function mounted() {
+        this.init();
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+    }
+});
+
+/***/ }),
+/* 218 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("section", { staticClass: "main-content col-xs-12" }, [
+    _c("div", { attrs: { id: "step1" } }, [
+      _c("div", { staticClass: "contents col-xs-12" }, [
+        _c("div", { staticClass: "content-show" }, [
+          _c("div", { staticClass: "buttons" }, [
+            _c(
+              "div",
+              { staticClass: "main_buttons col-xs-12 col-sm-8 col-md-9" },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "default_btn",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        _vm.goToNextPage()
+                      }
+                    }
+                  },
+                  [_vm._v("صفحه بعد")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "default_btn",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        _vm.goToPrePage()
+                      }
+                    }
+                  },
+                  [_vm._v("صفحه قبل")]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "continue_but col-xs-12 col-sm-4 col-md-3" },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "green-bot",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.confirmContract($event)
+                      }
+                    }
+                  },
+                  [_vm._v("تایید قرارداد")]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("h2", [_vm._v("قرارداد همکاری در فروش")]),
+          _vm._v(" "),
+          _vm.pageStep == 1
+            ? _c("p", { attrs: { id: "step1S1" } }, [
+                _vm._m(0),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "1-1 طرف اول: شرکت سهامی خاص فناوران توسعه تجارت ارم  به شماره ثبت 49223  به آدرس شیراز-میدان ارم- ساختمان مدیریت دانشگاه شیراز-طبقه نهم و کدپستی 7194684334 و شماره تماس 02171053525 که از این پس اینکوباک نامیده می شود."
+                  )
+                ]),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "1-2 طرف دوم: هر شخص حقیقی یا حقوقی به نام " +
+                      _vm._s(
+                        _vm.currentUser.user_info.first_name +
+                          " " +
+                          _vm.currentUser.user_info.last_name
+                      ) +
+                      " به شماره ثبت /جواز کسب " +
+                      _vm._s(_vm.currentUser.profile.company_register_code) +
+                      " و   به آدرس " +
+                      _vm._s(_vm.currentUser.profile.address) +
+                      " و کدپستی " +
+                      _vm._s(_vm.currentUser.profile.postal_code) +
+                      " و شماره تماس " +
+                      _vm._s(this.currentUser.profile.public_phone) +
+                      " که از این به بعد فروشنده نامیده می شود."
+                  )
+                ]),
+                _vm._v(" "),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(1),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "2-1  تنظیم همکاری و روابط قراردادی طرفین در خصوص همکاری اینکوباک با فروشنده جهت فروش کالا و محصولات خود از طریق ارائه این محصولات در وبسایت ایجاد شده توسط اینکوباک به نشانی incobac.com .بدیهی است با توجه به اینکه مالکیت محصولات ارائه شده در سایت متعلق به اینکوباک نبوده و اینکوباک صرفاً ارائه دهنده بستر اینترنتی جهت فروش محصولات فوق می باشد لذا مسئولیت کلیه اوصاف محصول اعم از نوع، بسته بندی، قیمت و هرگونه اطلاعات ذکر شده در رابطه با محصول بر عهده فروشنده است."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "2-2 اینکوباک بر اساس اطلاعات ذکر شده در سایت اقدام به صدور فاکتور برای طرفین می نماید که این فاکتور در اختیار طرفین قرار می گیرد و مبنای رسیدگی به کلیه اختلافات حاصله  قرارداد حاضر و فاکتور مذکور می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "2-3  با توجه به شرایط خاص هر معامله، هزینه های مربوط به حمل و نقل و بیمه کالاهای مورد معامله ممکن است بر عهده خریدار یا فروشنده قرار گیرد که این امر در قرارداد حاضر قید و مورد تایید طرف متعهد قرار می گیرد در هر صورت اینکوباک نسبت به هزینه های فوق الذکر از خود سلب مسئولیت می‌نماید."
+                  )
+                ]),
+                _c("br"),
+                _c("br")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.pageStep == 2
+            ? _c("p", { attrs: { id: "step1S2" } }, [
+                _vm._m(2),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "3-1 خریدار و فروشنده با پذیرش قرارداد حاضر می توانند از بستر اینترنتی ارائه شده توسط طرف اول (پلتفرم اینکوباک) جهت سفارش و ارائه محصولات استفاده نمایند."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "3-2 خریدار درخواست خود را از طریق سفارش کالا به صورت الکترونیکی برای اینکوباک ارسال و اینکوباک تقاضای خرید خریدار را از طریق ایمیل یا seller center به فروشندگان مرتبط اعلام می نماید."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "3-3 چنانچه فروشنده قادر به تامین سفارش خریدار باشد پاسخ خود را با ذکر اوصاف و پیوست تصاویر محصولات ، برای خریدار ارسال می نماید."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "3-4 چنانچه خریدار پیشنهاد فروشنده را در پنل کاربری خویش پذیرفت، اپراتور های اینکوباک اقدام به برقراری تماس تلفنی و انجام هماهنگی های نهایی  با طرفین نموده و در صورت حصول توافق، متن قرارداد را برای طرفین ارسال می نمایند که ملاک زمانی انعقاد قراداد، زمان تایید الکترونیکی متن قرارداد ارسالی برای طرفین( خریدار و فروشنده) می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "3-5 پس از تایید قرارداد توسط طرفین فاکتور پیش پرداخت توسط اینکوباک صادر گردیده و خریدار بایستی ظرف مدت .یک روز نسبت به پرداخت آن اقدام نماید.\n                    "
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "3-6  در صورت تادیه پیش پرداخت توسط خریدار، فروشنده بایستی ظرف مهلتی که در قرارداد حاضر قید می گردد کالای سفارش داده شده را تهیه و جهت ارسال به متصدی حمل و نقل تسلیم نماید."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "3-7 قبل از تسلیم کالا به متصدی حمل و نقل و انجام عملیات بارگیری، بازرس اینکوباک در محل بارگیری حضور می یابد و کالای سفارش داده شده را از جهت انطباق با مفاد قرارداد حاضر مورد بررسی قرار می دهد.(تعیین موارد و اوصافی که در هر سفارش بایستی توسط بازرس اینکوباک مورد بررسی و تایید قرار گیرد به پیوست قرارداد حاضر در اختیار خریدار و فروشنده قرار خواهد گرفت). بدیهی است که بازرس اینکوباک صرفاً نسبت به بررسی این اوصاف مسئولیت داشته و سایر اوصاف و موارد از حیطه مسئولیت بازرس اینکوباک خارج می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.pageStep == 3
+            ? _c("p", { attrs: { id: "step1S3" } }, [
+                _c("span", [
+                  _vm._v(
+                    "3-8 در صورت تأیید محصولات توسط بازرس، این امر تلفناً به اطلاع خریدار رسیده و فاکتور نهایی قراداد توسط اینکوباک صادر می گردد و خریدار بایستی ظرف مدت 2 ساعت از اتمام بارگیری نسبت به تسویه مبلغ باقی مانده قراداد اقدام نماید که در این صورت محصولات تحویل متصدی حمل و نقل می‌گردد و پس از گذشت یک هفته از پایان تراکنش، اینکوباک پس از کسر کمیسیون خود از معامله ، ثمن معامله را به حساب فروشنده واریز خواهد کرد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "3-9 دیهی است با توجه به عدم مالکیت اینکوباک بر محصولات ارائه شده در بستر اینترنتی، فروش کالا به خریدار  توسط فروشنده انجام می پذیرد و اینکوباک صرفا زیرساخت انجام فروش را فراهم می نماید لذا در صورت صدور فاکتور در وجه اینکوباک و اظهار نمودن آن در گزارشات مالیاتی مراتب مورد تایید این شرکت نبوده و همچنین این شرکت هیچگونه مسئولیتی بر عهده نخواهد داشت و مسئولیت خسارت وارده احتمالی بر عهده متخلف از این بند خواهد بود."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(3),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "بر اساس شرایط این قرارداد فروشنده موظف به انجام امور ذیل می باشد:"
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "4-1  مسئولیت تعیین و درج قیمت کالا ، تولید و درج اطلاعات محصول اعم از کلیه اطلاعات کمی و کیفی محصول و به‌روزرسانی میزان موجودی محصول در وبسایت اینکوباک بر عهده فروشنده می باشد. قیمت‌های مندرج بر روی , وبسایت اینکوباک می‌بایست رقابتی و حداقل برابر با قیمت کالاهای همانند در سایر فروشگاه ها اعم از اینترنتی و غیر اینترنتی باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "تبصره: اینکوباک زیرساخت و ابزار ساخت محتوا را به صورت رایگان در اختیار فروشندگان قرار می دهد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "4-2 فروشنده تضمین می‌نماید که تمامی کالاهای تحویلی به خریدار مطابق قوانین جمهوری اسلامی ایران تولید شده و یا از مبادی رسمی کشور وارد گردیده است. همچنین کالاها سالم و مطابق با توصیفات اعلام شده از کلیه ابعاد کمی و کیفی می باشد و چنانچه در هر مرحله از عملیات فروش خلاف موارد فوق اثبات گردید، اینکوباک می تواند راساٌ نسبت به لغو سفارش اقدام نماید و چنانچه در این خصوص  خسارتی به اینکوباک یا خریدار وارد گردد فروشنده متعهد به جبران خسارت خواهد بود."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "4-3 فروشنده اعلام می دارد که مالک کالا بوده و کالا معارض ندارد و حقوق مالکیت صنعتی و تجاری در صورت وجود، مالکیت معنوی و سایر حقوق قانونی و عرفی کالا متعلق به اوست یا حق بهره برداری از این حقوق و عرضه کالای مربوطه را دارد و مطابق قوانین جمهوری اسلامی ایران مجاز به فعالیت میباشد و چنانچه در هر مرحله از عملیات فروش خلاف موارد فوق اثبات گردید، اینکوباک می تواند راساٌ نسبت به لغو سفارش اقدام نماید و چنانچه در این خصوص  خسارتی به اینکوباک یا خریدار وارد گردد فروشنده متعهد به جبران خسارت خواهد بود."
+                  )
+                ]),
+                _c("br"),
+                _c("br")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.pageStep == 4
+            ? _c("p", { attrs: { id: "step1S4" } }, [
+                _c("span", [
+                  _vm._v(
+                    "4-4 فروشنده تعهد می‌نماید که در صورت اعمال هرگونه تغییر در اطلاعات کالا اعم از نوع، بهای کالا ،عدم موجودی کالا، توقف تولید یا عرضه محصول و همچنین تخفیف‌های ارائه شده به سایر خریداران ظرف مدت یک روزاطلاعات کالا را در سامانه اینکوباک به روز نماید در غیر این صورت مسئولیت کلیه خسارات وارده به اینکوباک و خریدار بر عهده فروشنده است."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "4-5 فروشنده موظف است در زمان تعیین شده در قرارداد حاضر، کالای سفارش داده شده را تامین نماید و در زمان مشخص شده کالای سفارش داده شده را جهت تحویل به خریدار به متصدی حمل و نقل قانونی تحویل نماید . در صورت عدم تامین کالا و یا تامین ناقص در مدت زمان تعهد شده،  فروشنده بایستی به ازای هر روز تاخیر  2 درصد از مبلغ کل معامله را به عنوان جریمه تاخیر در تاًمین به اینکوباک پرداخت نماید. و چنانچه عدم تاًمین کالا و یا تامین ناقص بیش از 2 روز تقویمی به طول بیانجامد اینکوباک می تواند راساً نسبت به لغو معامله  اقدام نماید. که در این حالت فروشنده موظف به پرداخت 5 درصد از مبلغ کل معامله، به انضمام 4 درصد از مبلغ کل معامله پیش بینی شده در صدر بند (جمعاً 9 درصد از مبلغ کل معامله) به عنوان جریمه عدم تاًمین به اینکوباک پرداخت نماید و همچنین مسئول کلیه خسارات ناشی از عدم تاًمین و یا تامین ناقص کالا که برای اینکوباک یا خریدار ایجاد گردد می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "4-6 فروشنده تضمین می نماید که کلیه اوصاف کمی و کیفی محصولات تامین شده کاملا مطابق با اظهارات درج شده توسط ایشان در سامانه اینکوباک میباشد که تمامی این اظهارات در قرارداد حاضر منعکس می گردد. با توجه به تعبیه نظام بازرسی توسط اینکوباک قبل از ارسال کالا و تحویل به متصدی حمل و نقل چنانچه عدم تطابق محموله با اطلاعات مندرج در سایت، مربوط به امور و اوصافی باشد که بایستی توسط بازرس اینکوباک بررسی گردد(شرح دقیق این اوصاف متناسب با  هرمعامله و به‌صورت احصایی در قرارداد مربوط به آن معامله قید میگردد) اینکوباک و فروشنده مشترکاً در قبال خریدار مسئول می‌باشند که میزان مسوولیت هر یک بر اساس حدود  قصور یا تقصیر آنها توسط مرجع داوری پیش بینی شده در  قرارداد حاضر تعیین می گردد. در غیر اینصورت مسئولیت عدم تطابق کالا بر عهده فروشنده می باشد و چنانچه این امر منجر به ورود هر گونه خسارتی به اینکوباک یا خریدار گردد فروشنده متعهد به جبران خسارت خواهد بود."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    " تبصره: در صورتی که فروشنده نسبت به آماده کردن محصول اقدام کرده باشد ولی نتواند در موعد مقرر نسب به تحویل آن اقدام کند  و  یا در صورتی که محصول آماده شده توسط فروشنده فاقد استانداردهای تعیین شده از سمت خریدار باشد،تصمیم درباره ی لغو یا ادامه معامله، و یا خرید تمام و یا بخشی از محصولات و شرایط مربوط به آن بر عهده اینکوباک و خریدار می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.pageStep == 5
+            ? _c("p", { attrs: { id: "step1S5" } }, [
+                _c("span", [
+                  _vm._v(
+                    "4-7 مسؤلیت تحویل کالای سفارش داده شده به متصدی حمل و نقل بر عهده ی فروشنده می باشد. فروشنده موظف است کالا را به شیوه بسته بندی صحیح . در شرایط استاندارد بارگیری به مقصد حمل و نقل قانونی تحویل داده و همچنین کالا را از طریق وسیله ی حمل ونقل دارای شرایط مناسب جهت حفظ سلامت کالا برای خریدار ارسال نماید مگر آنکه متصدی حمل و نقل توسط خریدار تعیین گردد که در این صورت فروشنده صرفا نسبت به انتخاب وسیله و متصدی حمل و نقل مسئولیتی ندارد. چنانچه از جهت عدم رعایت این بند خسارتی حاصل گردد فروشنده مسئول جبران کلیه ی خسارات ایجاد شده می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "  تبصره- چنانچه در طی حمل کالا خسارتی برای محموله ایجاد گردد موجب مسئولیت متصدی حمل و نقل طبق مقررات مربوطه در این زمینه می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "تبصره - هزینه های مربوط به حمل و نقل و بیمه محموله ارسالی بر حسب مورد بر عهده خریدار و یا فروشنده می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(4),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "خریدار متعهد می باشد پس از تامین بار توسط فروشنده جهت بارگیری  و تایید نهایی بازرس اینکوباک ، نسبت به تسویه حساب و پرداخت مبلغ فاکتور نهایی  قراداد، حداکثر ظرف مدت 2 ساعت اقدام نماید.  و چنانچه نسبت  به تسویه حساب در زمان مقرر اقدام ننماید ، مبلغ پانصد هزار تومان به انضمام 5 درصد از مبلغ کل معامله  از پیش پرداخت واریزی توسط خریدار به عنوان جریمه  لغو معامله کسر و مابقی مبلغ پیش پرداخت به وی مسترد می گردد. همچنین چنانچه در این خصوص خسارتی به اینکوباک یا فروشنده وارد گردد خریدار متعهد به جبران خسارت خواهد بود که مبلغ خسارت ایجاد شده به انضمام مبالغ جریمه فوق، از پیش پرداخت واریزی توسط خریدار کسر و مابقی به وی مسترد می گردد و تا تعیین تکلیف نهایی در خصوص خسارت مورد ادعا و اجرای رای"
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(5),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    " بر اساس این قرارداد اینکوباک متعهد به انجام امور ذیل می باشد. "
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "6-1 اینکوباک بخشی از سایت اینترنتی خود به نام incobac.com  را برای معرفی و ارائه کالا های فروشنده اختصاص می دهد و آموزش های لازم را به فروشنده جهت بروزرسانی لیست کالاها، موجودی آنها و درج قیمت ارائه خواهد داد به نحوی که تغییراتی که در اثر فروش کالا در مقدار کالا ایجاد می گردد و همچنین مشخصات سفارش در هر لحظه برای فروشنده از طریق الکترونیکی قابل مشاهده خواهد بود."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "6-2 اینکوباک خدمات بازرسی محصولات را از طریق ارائه کارشناس کیفیت محصول قبل از بارگیری کالا جهت انطباق کالای ارسالی با شرایط قید شده در قراداد  ارائه می‌نماید. لیست آیتم ها و اوصاف و شرایطی که بایستی توسط بازرس اینکوباک مورد بررسی قرار گیرد به صورت احصایی و متناسب با هر معامله در قرارداد مربوط به آن معامله قید می‌گردد."
+                  )
+                ]),
+                _c("br"),
+                _c("br")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.pageStep == 6
+            ? _c("p", { attrs: { id: "step1S6" } }, [
+                _c("span", [
+                  _vm._v(
+                    "6-3  اینکوباک نسبت به تطابق اوصاف  ذکر شده در بند فوق مشترکاً همراه با فروشنده مطابق بند 6-4 مسئول می باشد و نسبت به سایر اوصاف و شرایط هیچ گونه مسئولیتی نداشته و چنانچه خسارتی حادث گردد فروشنده مسئول می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "6-4 اینکوباک موظف به مدیریت و انتخاب فضا و ظاهر وب سایت می باشد"
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "6-5 اینکوباک متعهد می گردد جهت مدیریت موجودی و بهای کالا در سایت اینکوباک پنل نرم افزاری seller center را در اختیار فروشنده قرار دهد و همچنین آموزش های مربوطه را به فروشنده ارائه نماید ."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "6-6  اینکوباک در خصوص حمل و نقل کالا هیچ گونه وظیفه و تعهدی ندارد. نظام مسئولیت در خصوص حمل و نقل کالا مطابق بند 8-4 قرارداد حاظر می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(6),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "7-1 کمیسیون اینکوباک معادل ریالی و درصدی معین از مبلغ کل معامله است که در پیوست قرارداد می باشد. کمیسیون پیش از احتساب مالیات بر ارزش افزوده کالا محاسبه می گردد.  "
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "7-2مبلغ کمیسیون اینکوباک مشمول قانون مالیات بر ارزش افزوده می باشد که مبلغ آن به صورت حساب های اضافه واریز شده و دریافت می گردد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "7-3 مفروض است که کلیه قیمتهای ارائه شده توسط فروشنده بر روی وب‌سایت اینکوباک شامل مالیات بر ارزش افزوده بوده (در صورت عدم معافیت کالا) که مبلغ آن توسط خریدار نهایی پرداخت می گردد. بدیهی است اینکوباک هیچ گونه مسئولیتی در قبال مالیات بر ارزش افزوده کالای فروش رفته نداشته و فروشنده مستقیما مسئول ثبت و پرداخت مالیات بر ارزش افزوده کالای فروش رفته به سازمان امور مالیاتی کشور می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.pageStep == 7
+            ? _c("p", { attrs: { id: "step1S7" } }, [
+                _c("span", [
+                  _vm._v(
+                    "7-4مسئولیت دریافت وجه سفارشات از خریداران بر عهده اینکوباک می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "7-5 اینکوباک طی هفت روز کاری بهای محصولات فروش رفته را (به غیر از سفارشات عودت داده شده یا سفارشات مورد شکایت و بررسی) که از خریدار دریافت کرده پس از کسر کمیسون  و سایر هزینه ها و مبالغ ذکر شده در قرارداد و پس از محاسبه به فروشنده پرداخت خواهد نمود"
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "تبصره: منظور از روز کاری هر روز هفته به استثنای جمعه و تعطیلات رسمی جمهوری اسلامی ایران از ساعت ۸ الی ۱7 می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(7),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "8-1این قرارداد از تاریخ تایید الکترونیکی(درج شده در قرارداد) به مدت یک سال شمسی( ۳۶۵ روز تقویمی ) اعتبار دارد و در موارد فورس ماژور به مدت آن اضافه میگردد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "8-2 پس از خاتمه قرارداد، تمدید قرارداد و ادامه همکاری طرفین و نحوه و شرایط آن نیاز به توافق مجدد طرفین قرارداد دارد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "8-3 تاریخ موثر شدن و شروع قرارداد از تاریخ تایید الکترونیکی قرارداد توسط فروشنده می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(8),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "9-1 چنانچه معامله میان خریدار و فروشنده به عللی از علل قانونی منجر به فسخ گردد، اینکوباک مستحق دریافت کمیسیون مقرر برای آن معامله می باشد."
+                  )
+                ]),
+                _c("br"),
+                _c("br")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.pageStep == 8
+            ? _c("p", { attrs: { id: "step1S8" } }, [
+                _vm._m(9),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "علاوه بر ضمانت اجرا های پیش بینی شده نسبت به برخی از تعهدات طرفین این قرارداد، چنانچه نسبت به سایر تعهدات موضوع این قرارداد هر یک از طرفین تخلفی از انجام تعهد خویش داشته باشد و در نتیجه این تخلف ضرری به منافع طرف مقابل، طرف متخلف و مقصر، متعهد به پرداخت خسارت به طرف مقابل می باشد که مطالبه خسارت و تعیین میزان آن در مرجع داوری این قرارداد به عمل می آید."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(10),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "11-1طرفین اعلام  میدارند کلیه  تاییدیه ها و قبول الکترونیکی به منزله تایید و قبول حضوری و شخصی می باشد و به استناد آن تعهدات انجام می پذیرد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "11-2طرفین اعلام می دارند این قرارداد هرگونه توافق یا ترتیبات شفاهی یا کتبی مغایر با قرارداد حاضر را که ممکن است در گذشته بین طرفین واقع شده باشد نسخ می نماید."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "11-3 هیچ یک از مواد یا مفاد قرارداد حاضر به معنای شراکت یا وجود رابطه کارگر و کارفرمایی فی‌مابین فروشنده و اینکوباک نبوده و نخواهد بود."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "11-4 هیچ گونه تغییری در این توافقنامه معتبر نیست مگر با توافق کتبی یا الکترونیکی طرفین قرارداد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "11-5 طرفین اعلام می دارند مالکیت نرم افزار seller center متعلق به اینکوباک است."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(11),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "12-1 مالکیت سورس کدها و پلتفرم اینکوباک متعلق به اینکوباک می باشد و طرف دوم صرفاً اجازه بهره برداری از این پلتفرم را مطابق مفاد این قرارداد و سطح دسترسی اجازه داده شده توسط این قرارداد دارا می باشد. "
+                  )
+                ]),
+                _c("br"),
+                _c("br")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.pageStep == 9
+            ? _c("p", { attrs: { id: "step1S9" } }, [
+                _c("span", [
+                  _vm._v(
+                    "12-2 مالکیت داده های تحصیل شده از طریق پلتفرم اینکوباک،تحلیل این داده ها، فروش نتایج تحلیل داده و استفاده پژوهشی و هرگونه استفاده دیگر از آنها با رعایت محرمانگی و عدم افشای اسرار صرفاً به اینکوباک تعلق داشته و طرف دوم هیچگونه حقی در این زمینه نخواهد داشت."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(12),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "13-1 اطلاعات مربوط به این قرارداد، اسرار محرمانه تلقی می گردد لذا طرفین تضمین خواهند نمود که خود و اشخاص مرتبط با آنان اشخاص ذیربط آنها در تمام مدت این قرارداد و  پس از اتمام آن اقدامات معمول جهت محرمانه نگاه داشتن تمام اطلاعات محرمانه ای که وی یا آنان ممکن است در ارتباط با هر کدام از طرف دیگر به دست آورند محرمانه تلقی خواهند کرد و جز در راستای مقاصد قراردادی از چنین اطلاعاتی استفاده نخواهند کرد و آنها را افشا نخواهند نمود."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "13-2 طرفین باید تضمین نمایند که هر کدام از کارکنان، ماموران، مدیران عامل آنان یا اشخاص مرتبط با آنها که به موجب این قرارداد به اطلاعات محرمانه دسترسی دارند از طبیعت محرمانه این اطلاعات مطلع هستند و لازم است تا از شروط طرفین قرارداد پیروی نمایند بنابراین طرفی که اطلاعات را دریافت می نماید مسئول است که تضمین نماید تعهد رعایت محرمانگی و عدم استفاده مندرج در این ماده را به دقت رعایت می‌کند و در مقابل فعل یا ترک فعل کارکنان نمایندگان یا عوامل خود کاملا مسئول فرض می گردد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "13-3 هرگونه افشا و انتشار بدون مجوز این اطلاعات قابل تعقیب کیفری در مراجع قانونی و مطالبه خسارت در مرجع داوری این قرارداد است.  مبلغ خسارت مذکور طی داوری تعیین خواهد شد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "تبصره: اطلاعاتی که در اختیار عموم قرار دارند جزو اطلاعات محرمانه محسوب نمی گردد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(13),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "14-1 منظور از فورس ماژور در این قرارداد هرگونه حادثه و پیشامد غیرقابل پیش بینی، غیر قابل دفع و خارج از اراده و کنترل طرفین است. اعم از جنگ، بلایای طبیعی، آتش‌سوزی، اعتصاب ، تغییر قوانین و مقررات یا تعطیلی ادارات و نهادهای دولتی برای مدت بیش از یک هفته که به واسطه آن طرفی که در چنین شرایطی قرار گرفته است نمی تواند تمام یا بخشی از تعهدات خود، موضوع این قرارداد یاد قوانین مرتبط را ایفا نماید."
+                  )
+                ]),
+                _c("br"),
+                _c("br")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.pageStep == 10
+            ? _c("p", { attrs: { id: "step1S10" } }, [
+                _c("span", [
+                  _vm._v(
+                    "14-2 متعهد در صورتی از ایفای تعهدات در اثر فورس ماژور معاف می گردد که حداکثر تا  1روز پس از اطلاع از چنین وضعیتی مراتب را به اطلاع طرف دیگر رسانیده باشد.\n                    "
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(14),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "هرگونه اطلاعیه یا ابلاغیه ای که قرار باشد طبق این قرارداد ابلاغ و تحویل گردد بایستی از طریق وبسایت اینکوباک یا call center انجام پذیرد و خطاب به طرف مرتبط صورت گیرد و تصریح شود که اطلاعیه یا مکاتبه موضوع این قرارداد است .طرفین می توانند به وسیله اطلاعیه نشانی خود را تغییر دهند تا تمام اطلاعیه های آتی برای آنان به نشانی جدید ارسال گردد."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(15),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    " کلیه اختلافات و دعاوی ناشی از این قرارداد و یا راجع به آن از جمله انعقاد، اعتبار، فسخ ،تفسیر یا اجرای آن به مرکز داوری اتاق بازرگانی صنایع معادن و کشاورزی شیراز ارجاع می گردد. که مطابق با قانون اساسنامه و آیین داوری آن مرکز با رای یک یا سه نفر داور به صورت قطعی و لازم الاجرا حل و فصل می گردد. داور/ان علاوه بر مقررات حاکم عرف تجارتی ذیربط را نیز مراعات خواهند نمود. شرط داوری حاضر موافقتنامه مستقل از قرارداد اصلی تلقی می‌شود و در هر حال لازم الاجرا است."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(16),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "قرارداد حاضر در16 ماده و پیوست های آن (اجزای لاینفک قرارداد) در یک نسخه الکترونیکی تهیه و تنظیم گردیده است و در راستای تایید مفاد آن به تایید الکترونیکی طرف دوم (که به منزله قبول و تایید و امضای حضوری وی می باشد) رسید."
+                  )
+                ]),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    " بنا به مراتب فوق طرفین قرارداد حاضر را از تاریخ درج شده در آن اجرایی نمودند. تمام/"
+                  )
+                ]),
+                _c("br"),
+                _c("br")
+              ])
+            : _vm._e()
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v(" ماده 1 :طرفین قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 2 :موضوع قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _c("b", [_vm._v("ماده 3 :مکانیسم اجرایی عملیات خرید و فروش")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده4 : تعهدات و تضمینات فروشنده")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 5: تعهدات خریدار")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده6: تعهدات اینکوباک")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 7 :کمیسیون")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 8 :مدت و تمدید قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 9: فسخ قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 10: خسارات قراردادی")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده11:مشترکات")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 12: حقوق مالکیت فکری")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _c("b", [_vm._v("ماده 13: محرمانگی و عدم افشای اسرار")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 14:فورس ماژور")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 15: ابلاغات")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 16:حل وفصل اختلافات و داوری")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 17: نسخ قرارداد")])])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6f7cccdc", module.exports)
+  }
+}
+
+/***/ }),
+/* 219 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(220)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(222)
+/* template */
+var __vue_template__ = __webpack_require__(223)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/buyer/request/buyAd-requests.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-38d013d4", Component.options)
+  } else {
+    hotAPI.reload("data-v-38d013d4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 220 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(221);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("6dc7246c", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-38d013d4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./buyAd-requests.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-38d013d4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./buyAd-requests.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 221 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.main-content {\n    padding: 90px 35px;\n}\n.list-title, .needs,.list-time {\n    float: right;\n    text-align: center;\n    line-height: 1.618;\n    font-weight: bold;\n    padding-top: 5px;\n}\n.list-group-item {\n    border: 1px solid #ddd;\n}\n.detail-success {\n    padding: 8px 0;\n    width: 100%;\n    background: #28a745;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.main-content > ul {\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 10px #e1e1e1 ;\n            box-shadow: 0 0 10px #e1e1e1 ;\n    overflow: hidden;\n}\n.main-content .list-group-item p {\n    text-align: center;\n}\n#main.little-main {\n    margin-right: 80px;\n}\n@media screen and (max-width: 992px) {\n.list-title, .needs,.list-time {\n       padding: 15px;\n}\n}\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 222 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ["loader", "storage", "defultimg"],
+    data: function data() {
+        return {
+            currentUser: {
+                profile: '',
+                user_info: ''
+            },
+            buyAds: '',
+            popUpMsg: '',
+            loading: false,
+            items: [{
+                message: 'پیشنهادات من',
+                url: 'mySellOffers'
+            }, {
+                message: 'درخواست های جدید',
+                url: 'buyAdRequests'
+            }]
+        };
+    },
+
+    methods: {
+        init: function init() {
+            this.loading = true;
+
+            var self = this;
+
+            axios.post('/get_related_buyAds_list_to_the_seller').then(function (response) {
+                self.buyAds = response.data.buyAds;
+                self.loading = false;
+            });
+        }
+
+    },
+
+    mounted: function mounted() {
+        this.init();
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+    }
+});
+
+/***/ }),
+/* 223 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.buyAds.length != 0
+      ? _c(
+          "section",
+          { staticClass: "main-content col-xs-12" },
+          _vm._l(_vm.buyAds, function(buyAd) {
+            return _c("ul", { staticClass: "list-unstyled" }, [
+              _c(
+                "li",
+                { staticClass: "list-group-item  col-xs-12" },
+                [
+                  _c("p", { staticClass: "list-title col-sm-3 col-xs-12" }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(buyAd.category_name) +
+                        "\n                        "
+                    ),
+                    _c("span", [_vm._v(" | ")]),
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(buyAd.subcategory_name) +
+                        "\n                        "
+                    ),
+                    _c("span", [_vm._v(" | ")]),
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(buyAd.name) +
+                        "\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "needs col-sm-4 col-xs-12" }, [
+                    _c("span", { staticClass: "static-content" }, [
+                      _vm._v(
+                        "\n                        میزان نیازمندی :\n                    "
+                      )
+                    ]),
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(buyAd.requirement_amount) +
+                        "\n\n                        "
+                    ),
+                    _c("span", { staticClass: "static-content" }, [
+                      _vm._v("\nکیلوگرم\n                    ")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "list-time col-sm-2 col-xs-12" }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(buyAd.register_date) +
+                        "\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "col-sm-3 col-xs-12",
+                      attrs: { to: "/buyAd-request-detail/" + buyAd.id }
+                    },
+                    [
+                      _c("p", { staticClass: "detail-success" }, [
+                        _vm._v(
+                          "\n                                مشاهده ی جزییات\n                            "
+                        )
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ])
+          })
+        )
+      : _vm.buyAds.length == 0 && !_vm.loading
+        ? _c(
+            "section",
+            { staticClass: "main-content col-xs-12 loading_images" },
+            [
+              _c("h4", { staticClass: "text-center", attrs: { dir: "rtl" } }, [
+                _vm._v("درخواستی برای شما وجود ندارد.")
+              ])
+            ]
+          )
+        : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "section",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.loading,
+            expression: "loading"
+          }
+        ],
+        staticClass: "main-content col-xs-12 loading_images"
+      },
+      [
+        _c("img", {
+          staticStyle: { width: "200px", height: "200px" },
+          attrs: { src: _vm.loader }
+        })
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-38d013d4", module.exports)
+  }
+}
+
+/***/ }),
+/* 224 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(225)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(227)
+/* template */
+var __vue_template__ = __webpack_require__(228)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-574f1918"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/buyer/request/buyAd-requests-detail.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-574f1918", Component.options)
+  } else {
+    hotAPI.reload("data-v-574f1918", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 225 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(226);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("bc870806", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-574f1918\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./buyAd-requests-detail.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-574f1918\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./buyAd-requests-detail.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 226 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-post img[data-v-574f1918] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-574f1918] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-574f1918] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-574f1918] {\n    display: block;\n}\n.main-content[data-v-574f1918] {\n    direction: rtl;\n    padding: 60px 100px;\n}\n.header-lable[data-v-574f1918] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n.content-lable[data-v-574f1918]{\n    font-weight:400 ;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-574f1918] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.black-bot[data-v-574f1918] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #313a43;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.black-bot[data-v-574f1918]:hover {\n\n    background: #283039;\n    color: #fff;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-574f1918]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.little_header[data-v-574f1918] {\n    width: 80px;\n}\n.little-main-header[data-v-574f1918] {\n    right: 80px;\n}\n.contents[data-v-574f1918] {\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 10px #e1e1e1;\n            box-shadow: 0 0 10px #e1e1e1;\n    padding: 15px ;\n    margin-top: 50px;\n}\n.user_image img[data-v-574f1918]{\n    height: 100%;\n}\n.info-contents[data-v-574f1918]{\n    padding: 0;\n}\n.image-article-content[data-v-574f1918]{\n    padding-right: 0;\n}\n.main-article-content[data-v-574f1918]{\n    padding-left: 0;\n    margin-bottom: 25px;\n}\n.main-image[data-v-574f1918]{\n    margin-bottom: 7px;\n    padding: 0;\n}\n.main-article-content a[data-v-574f1918]{\n    font-size: 24px;\n    margin-bottom: 20px;\n    display: inline-block;\n    color: #666;\n}\n.main-image img[data-v-574f1918]{\n    border-radius: 3px;\n}\n.image_company[data-v-574f1918]{\n    margin: 15px auto ;\n}\n.top-contentas[data-v-574f1918]{\n    padding: 0;\n    padding-bottom: 10px;\n    margin-bottom: 10px;\n    border-bottom:2px solid #ddd;\n}\n.bottom-contents[data-v-574f1918]{\n    padding: 0;\n    padding-top: 10px;\n    margin-top: 10px;\n}\n.fields[data-v-574f1918]{\n    margin: 7px auto;\n    padding: 0;\n}\n.fields > div[data-v-574f1918]{\n    float: right;\n}\n.fields  div textarea[data-v-574f1918]{\n    height: 110px;\n    max-height: 110px;\n    min-height: 110px;\n    max-width: 100%;\n    min-width: 100%;\n}\n.fields .green-bot[data-v-574f1918],.fields .black-bot[data-v-574f1918] {\n    width: 100%;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header[data-v-574f1918] {\n        display: none;\n}\n.actions[data-v-574f1918]{\n        direction: ltr;\n        margin-top: 20px;\n}\n.right-header.mobile-header[data-v-574f1918] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-574f1918], .little-main-header[data-v-574f1918] {\n        right: 0 !important;\n}\n#main[data-v-574f1918], #main.little-main[data-v-574f1918] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-574f1918] {\n        width: 100%;\n}\n.copy-right[data-v-574f1918] {\n        display: none;\n}\n.clouse_menu[data-v-574f1918] {\n        display: none;\n}\n.clouse_menu_mob[data-v-574f1918] {\n        display: block;\n}\n.show-header button[data-v-574f1918] {\n        display: block;\n}\n.kind_user > div[data-v-574f1918], .kind_activity > div[data-v-574f1918] {\n        float: none;\n}\n.img-profile .submit[data-v-574f1918] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-574f1918] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-574f1918] {\n        float: none;\n}\n}\n.owl-carousel[data-v-574f1918]{\n    direction: ltr !important;\n}\n@media screen and (max-width: 768px) {\n.fields > div[data-v-574f1918]{\n        float: none;\n}\n.image-content-post[data-v-574f1918], .contents-post[data-v-574f1918] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.main-content[data-v-574f1918] {\n        padding: 60px 15px;\n}\n.name-header-profile[data-v-574f1918] {\n        display: none;\n}\n.profile-menu-header[data-v-574f1918] {\n        padding: 7px;\n        padding-left: 36px;\n}\n#bd-prev-end-date-id[data-v-574f1918], #bd-prev-first-date-id[data-v-574f1918]  {\n        left: 0;\n        bottom: inherit;\n        top:-55px;\n}\n#bd-next-end-date-id [data-v-574f1918], #bd-next-first-date-id[data-v-574f1918]{\n        right: 0;\n        bottom: inherit;\n        top:-55px;\n}\n.imageuploadify-message[data-v-574f1918]{\n        display: none !important;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-574f1918] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-574f1918] {\n        font-size: 10px;\n}\n.sub-header[data-v-574f1918] {\n        bottom: -44px;\n}\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 227 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['defimgitem'],
+    data: function data() {
+        return {
+            currentUser: {
+                profile: '',
+                user_info: ''
+            },
+            sellOffer: {
+                price: '',
+                deliver_at: '',
+                valid_date_from: '',
+                valid_date_to: '',
+                description: '',
+                buy_ad_id: ''
+            },
+            sellOfferFields: ['price', 'deliver_at', 'description'],
+            sellOfferFiles: [],
+            errors: [],
+            popUpMsg: '',
+            items: [{
+                message: 'درخواست من ',
+                url: '#'
+            }]
+        };
+    },
+    methods: {
+        init: function init() {},
+        submitSellOffer: function submitSellOffer() {
+            var self = this;
+
+            var formData = this.getSellOfferFormFields();
+
+            axios.post('/add_sell_offer', formData).then(function (response) {
+                if (response.status == 201) {
+                    window.location.href = '/dashboard/my-sell-offers';
+                }
+            }).catch(function (err) {
+                self.errors = '';
+                self.errors = err.response.data.errors;
+
+                if (err.response.data.msg) {
+                    self.popUpMsg = err.response.data.msg;
+
+                    $('#myModal').modal('show');
+                }
+            });
+        },
+        handleSellOfferFileUpload: function handleSellOfferFileUpload() {
+            var uploadedFiles = this.$refs.sellOfferFiles.files;
+            /*
+              Adds the uploaded file to the files array
+            */
+            for (var i = 0; i < uploadedFiles.length; i++) {
+                this.sellOfferFiles.push(uploadedFiles[i]);
+            }
+        },
+        getSellOfferFormFields: function getSellOfferFormFields() {
+            var formData = new FormData();
+            var cnt = this.sellOfferFields.length;
+
+            for (var i = 0; i < cnt; i++) {
+                formData.append(this.sellOfferFields[i], this.toLatinNumbers(this.sellOffer[this.sellOfferFields[i]]));
+            }
+
+            formData.append('valid_date_from', this.toLatinNumbers(this.$refs.validDateFrom.value));
+            formData.append('valid_date_to', this.toLatinNumbers(this.$refs.validDateTo.value));
+            formData.append('buy_ad_id', this.toLatinNumbers(this.$refs.buyAdId.value));
+
+            for (var i = 0; i < this.sellOfferFiles.length; i++) {
+                var file = this.sellOfferFiles[i];
+                formData.append('img_' + i, file);
+            }
+            formData.append('photos_count', this.sellOfferFiles.length);
+
+            return formData;
+        },
+        toLatinNumbers: function toLatinNumbers(num) {
+            var numDic = {
+                '۰': '0',
+                '۱': '1',
+                '۲': '2',
+                '۳': '3',
+                '۴': '4',
+                '۵': '5',
+                '۶': '6',
+                '۷': '7',
+                '۸': '8',
+                '۹': '9'
+            };
+
+            return num.toString().replace(/[۰-۹]/g, function (w) {
+                return numDic[w];
+            });
+        }
+    },
+    mounted: function mounted() {
+        this.init();
+        kamaDatepicker('first-date-id', { forceFarsiDigits: true, markHolidays: true, gotoToday: true, markToday: true });
+        kamaDatepicker('end-date-id', { forceFarsiDigits: true, markHolidays: true, gotoToday: true, markToday: true });
+        $(".main-image").magnificPopup({
+            delegate: 'a',
+            type: 'image'
+        });
+        $('input[type="file"]').imageuploadify();
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+    }
+});
+
+/***/ }),
+/* 228 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("section", { staticClass: "main-content col-xs-12" }, [
+      _c("div", { staticClass: "contents col-xs-12" }, [
+        _c("div", { staticClass: "info-contents col-xs-12" }, [
+          _c("div", { staticClass: "top-contentas  col-xs-12" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "image-article-content col-md-5" }, [
+              _c("div", { staticClass: "main-image col-xs-12" }, [
+                _c("a", { attrs: { href: _vm.defimgitem } }, [
+                  _c("img", { attrs: { src: _vm.defimgitem } })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "owl-carousel col-xs-12" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "bottom-contents  col-xs-12" }, [
+            _c("form", [
+              _c("label", { staticClass: "header-lable" }, [
+                _vm._v(
+                  "تمامی موارد خواسته شده را وارد کرده و برای خریدار ارسال نمایید."
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "fields col-xs-12" }, [
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _c("label", { staticClass: "content-lable" }, [
+                    _vm._v(
+                      "\n                                    محل تحویل\n                                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.sellOffer.deliver_at,
+                        expression: "sellOffer.deliver_at"
+                      }
+                    ],
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.sellOffer.deliver_at },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.sellOffer,
+                          "deliver_at",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.deliver_at
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.deliver_at[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _c("label", { staticClass: "content-lable" }, [
+                    _vm._v(
+                      "\n                                    قیمت پیشنهادی به ازای هر کیلو به تومان\n                                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.sellOffer.price,
+                        expression: "sellOffer.price"
+                      }
+                    ],
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.sellOffer.price },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.sellOffer, "price", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.price
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.price[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _c("label", { staticClass: "content-lable" }, [
+                    _vm._v(
+                      "\n                                    تاریخ موجودی\n                                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    ref: "validDateFrom",
+                    attrs: {
+                      readonly: "true",
+                      type: "text",
+                      id: "first-date-id"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.valid_date_to
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.valid_date_to[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _c("label", { staticClass: "content-lable" }, [
+                    _vm._v(
+                      "\n                                    انتهای تاریخ موجودی\n                                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    ref: "validDateTo",
+                    attrs: { readonly: "true", type: "text", id: "end-date-id" }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.valid_date_from
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.valid_date_from[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-xs-12" }, [
+                  _c("label", { staticClass: "content-lable" }, [
+                    _vm._v(
+                      "\n                                    توضیحات:\n                                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.sellOffer.description,
+                        expression: "sellOffer.description"
+                      }
+                    ],
+                    attrs: { placeholder: "" },
+                    domProps: { value: _vm.sellOffer.description },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.sellOffer,
+                          "description",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.description
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.description[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "image_company col-xs-12" }, [
+                  _c("label", { staticClass: "content-lable" }, [
+                    _vm._v(
+                      "\n                                    تصاویر:\n                                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    ref: "sellOfferFiles",
+                    attrs: { type: "file", multiple: "", accept: "image/*" },
+                    on: {
+                      change: function($event) {
+                        _vm.handleSellOfferFileUpload()
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.photos_count
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.photos_count[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "col-xs-12 green-bot",
+                      attrs: { type: "button" },
+                      on: { click: _vm.submitSellOffer }
+                    },
+                    [_vm._v("تایید")]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(1)
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "main-article-content col-md-7" }, [
+      _c("h3", [
+        _vm._v(
+          "\n                            خشکبار | انجیر |\n                        "
+        )
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("table", { staticClass: "table table-striped" }, [
+        _c("tbody", [
+          _c("tr", [
+            _c("td", [
+              _vm._v("قیمت واحد"),
+              _c("span", {}, [_vm._v("(هر کیلو به تومان)")]),
+              _vm._v(" :")
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v("  - تومان")])
+          ]),
+          _vm._v(" "),
+          _c("tr", [_c("td", [_vm._v(" محل تحویل کالا:")])]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v(" میزان نیازمندی")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("32 کیلوگرم")])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v(" زمان ثبت درخواست:")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("۳۰ مرداد , ۱۳۹۷")])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("p", [_vm._v("توضیحات: "), _c("span", [_vm._v("خوب باشه")])])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-6" }, [
+      _c(
+        "a",
+        {
+          staticClass: "black-bot col-xs-12 col-xs-6",
+          attrs: { href: "javascript:history.back()" }
+        },
+        [_vm._v("بازگشت به صفحه قبل")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-574f1918", module.exports)
+  }
+}
+
+/***/ }),
+/* 229 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(230)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(232)
+/* template */
+var __vue_template__ = __webpack_require__(233)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-2d7168c2"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/buyer/request/my-sell-offers.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2d7168c2", Component.options)
+  } else {
+    hotAPI.reload("data-v-2d7168c2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 230 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(231);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("409cd07d", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2d7168c2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./my-sell-offers.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2d7168c2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./my-sell-offers.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 231 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n/*start main content style */\n.main-content li[data-v-2d7168c2] {\n    position: relative;\n    overflow: hidden;\n}\n.main-content .list-group-item > div[data-v-2d7168c2] {\n    float: right;\n}\n.main-content .list-group-item p[data-v-2d7168c2] {\n    text-align: center;\n}\n.main-content[data-v-2d7168c2] {\n    padding: 90px 35px;\n}\n.main-content ul[data-v-2d7168c2] {\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 10px #e1e1e1;\n            box-shadow: 0 0 10px #e1e1e1;\n}\n.list-title[data-v-2d7168c2], .needs[data-v-2d7168c2] {\n    float: right;\n    text-align: center;\n    line-height: 1.618;\n    font-weight: bold;\n}\n.detail-error[data-v-2d7168c2] {\n    padding: 10px 30px;\n    width: 100%;\n    background: #e41c38;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.detail-stand[data-v-2d7168c2] {\n    padding: 10px 0;\n    width: 100%;\n    background: #7c7c7c;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.detail-success[data-v-2d7168c2] {\n    padding: 8px 0;\n    width: 100%;\n    background: #28a745;\n    color: #fff;\n    text-align: center;\n    border-radius: 5px;\n    font-size: 13px;\n}\n.main-content .list-group-item .status[data-v-2d7168c2] {\n    padding: 0;\n}\n@media screen and (max-width: 768px) {\n.list-group-item > div[data-v-2d7168c2] {\n        padding: 7px 0;\n}\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 232 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['loader'],
+    data: function data() {
+        return {
+            currentUser: {
+                profile: '',
+                user_info: ''
+            },
+            sellOffers: '',
+            popUpMsg: '',
+            loading: false,
+            items: [{
+                message: 'پیشنهادات من',
+                url: 'mySellOffers'
+            }, {
+                message: 'درخواست های جدید',
+                url: 'buyAdRequests'
+            }]
+        };
+    },
+    methods: {
+        init: function init() {
+            this.loading = true;
+
+            var self = this;
+
+            axios.post('/get_my_sell_offer_list').then(function (response) {
+                self.sellOffers = response.data.sell_offers;
+                self.loading = false;
+            });
+        }
+    },
+    mounted: function mounted() {
+        this.init();
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+    }
+});
+
+/***/ }),
+/* 233 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.sellOffers.length > 0
+      ? _c("section", { staticClass: "main-content col-xs-12" }, [
+          _c(
+            "ul",
+            { staticClass: "list-unstyled" },
+            _vm._l(_vm.sellOffers, function(sellOffer) {
+              return _c("li", { staticClass: "list-group-item" }, [
+                _c("div", { staticClass: "col-sm-3 col-xs-12" }, [
+                  _c("p", { staticClass: "list-title" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(sellOffer.category_name) +
+                        "\n                            "
+                    ),
+                    _c("span", [_vm._v(" | ")]),
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(sellOffer.subcategory_name) +
+                        "\n                            "
+                    ),
+                    _c("span", [_vm._v(" | ")]),
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(sellOffer.name) +
+                        "\n                        "
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-2 col-xs-3" }, [
+                  _c("p", { staticClass: "needs" }, [
+                    _c("span", { staticClass: "static-content" }, [
+                      _vm._v(
+                        "\n                        تحویل :\n                    "
+                      )
+                    ]),
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(sellOffer.deliver_at) +
+                        "\n                        "
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-2 col-xs-3" }, [
+                  _c("p", { staticClass: "needs" }, [
+                    _c("span", { staticClass: "static-content" }, [
+                      _vm._v(
+                        "\n                        قیمت :\n                    "
+                      )
+                    ]),
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(sellOffer.price) +
+                        "\n                            "
+                    ),
+                    _c("span", { staticClass: "static-content" }, [
+                      _vm._v("\nتومان\n                    ")
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-3 col-xs-6" }, [
+                  _c("p", { staticClass: "list-time" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(
+                          sellOffer.valid_from + " - " + sellOffer.valid_to
+                        ) +
+                        "\n                        "
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-2 status col-xs-12" }, [
+                  sellOffer.status == "در حال بررسی"
+                    ? _c("p", { staticClass: "detail-stand" }, [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(sellOffer.status) +
+                            "\n                        "
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  sellOffer.status == "تایید شده"
+                    ? _c("p", { staticClass: "detail-success" }, [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(sellOffer.status) +
+                            "\n                        "
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  sellOffer.status == "رد شده"
+                    ? _c("p", { staticClass: "detail-error" }, [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(sellOffer.status) +
+                            "\n                        "
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              ])
+            })
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.sellOffers.length == 0 && !_vm.loading
+      ? _c("section", { staticClass: "main-content col-xs-12" }, [
+          _c("h4", { staticClass: "text-center", attrs: { dir: "rtl" } }, [
+            _vm._v("پیشنهاد خریدی ثبت نکرده اید.")
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.loading,
+            expression: "loading"
+          }
+        ],
+        staticClass: "loading_images  col-xs-12"
+      },
+      [
+        _c("img", {
+          staticStyle: { width: "200px", height: "200px" },
+          attrs: { src: _vm.loader }
+        })
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2d7168c2", module.exports)
+  }
+}
+
+/***/ }),
+/* 234 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(235)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(237)
+/* template */
+var __vue_template__ = __webpack_require__(238)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-39a3e452"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/buyer/product/product-basic.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-39a3e452", Component.options)
+  } else {
+    hotAPI.reload("data-v-39a3e452", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 235 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(236);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("b00127c4", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-39a3e452\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./product-basic.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-39a3e452\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./product-basic.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 236 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.image_company[data-v-39a3e452] {\n    margin: 15px auto;\n}\n.sub-des[data-v-39a3e452] {\n    font-size: 11px;\n}\n.company_des > div[data-v-39a3e452] {\n    float: right;\n    margin-bottom: 10px;\n}\n.text-danger[data-v-39a3e452] {\n    display: inline-block;\n    padding: 4px 0;\n}\n.company_des > div.col-sm-6[data-v-39a3e452] {\n    height: 85px;\n}\n.main-content[data-v-39a3e452] {\n    padding: 60px 100px;\n    direction: rtl;\n}\n.roules-check-inside[data-v-39a3e452] {\n    color: #28a745;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-39a3e452] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.width-full[data-v-39a3e452] {\n    width: 100%;\n}\n.green-bot[data-v-39a3e452]:hover {\n    color: #fff;\n    background: #29A045;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n#main.little-main[data-v-39a3e452] {\n    margin-right: 80px;\n}\n.little_header[data-v-39a3e452] {\n    width: 80px;\n}\n.little-main-header[data-v-39a3e452] {\n    right: 80px;\n}\n.rules[data-v-39a3e452] {\n    margin: 7px 0;\n    padding-bottom: 10px;\n}\n.rules > div[data-v-39a3e452], .kind_activity > div[data-v-39a3e452] {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.rules input[data-v-39a3e452] {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: -5px;\n    right: 217px;\n    opacity: 0;\n}\n.rules input:checked + i[data-v-39a3e452] {\n    background: #28a745;\n    color: #fff;\n    padding: 4px;\n}\n.rules i[data-v-39a3e452] {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: -5px;\n    right: 217px;\n    z-index: -1;\n    color: #808c9c;\n    border-radius: 50%;\n    padding: 3px 2px;\n    font-size: 14px;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 237 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            currentUser: {
+                profile: '',
+                user_info: ''
+            },
+            product: {
+                product_name: '',
+                stock: '',
+                min_sale_price: '',
+                max_sale_price: '',
+                min_sale_amount: '',
+                description: '',
+                address: '',
+                category_id: '',
+                city_id: '',
+                rules: false
+            },
+            productFields: ['product_name', 'stock', 'min_sale_price', 'max_sale_price', 'min_sale_amount', 'description', 'address', 'category_id', 'city_id'],
+            categoryList: '',
+            SubCategoryList: '',
+            categorySelected: '',
+            provinces: '',
+            cities: '',
+            productFiles: [],
+            popUpMsg: '',
+            errors: '',
+            disableSubmit: false,
+            items: [{
+                message: ' ثبت محصول',
+                url: 'registerProduct'
+            }]
+        };
+    },
+    methods: {
+        init: function init() {
+            var _this = this;
+
+            axios.post('/user/profile_info').then(function (response) {
+                return _this.currentUser = response.data;
+            });
+            axios.post('/get_category_list').then(function (response) {
+                return _this.categoryList = response.data.categories;
+            });
+            axios.post('/location/get_location_info').then(function (response) {
+                return _this.provinces = response.data.provinces;
+            });
+        },
+        loadSubCategoryList: function loadSubCategoryList(e) {
+            var _this2 = this;
+
+            e.preventDefault();
+            var categoryId = $(e.target).val();
+
+            axios.post('/get_category_list', {
+                parent_id: categoryId
+            }).then(function (response) {
+                return _this2.SubCategoryList = response.data.categories;
+            });
+        },
+        loadCityList: function loadCityList(e) {
+            var _this3 = this;
+
+            e.preventDefault();
+            var provinceId = $(e.target).val();
+
+            axios.post('/location/get_location_info', {
+                province_id: provinceId
+            }).then(function (response) {
+                return _this3.cities = response.data.cities;
+            });
+        },
+        submitProduct: function submitProduct() {
+            __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', true);
+            var self = this;
+
+            if (this.product.rules != true) {
+                this.popUpMsg = 'موافقت با قوانین ثبت آگهی الزامی است';
+                __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitSuccess', this.popUpMsg);
+                __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', false);
+                $('#myModal').modal('show');
+            } else {
+                var formData = this.getProductFormFields();
+
+                axios.post('/user/add_product', formData).then(function (response) {
+                    if (response.status == 201) {
+                        self.disableSubmit = true;
+
+                        self.popUpMsg = 'محصول شما با موفقیت ثبت شد';
+                        $('#myModal').modal('show');
+                        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitSuccess', this.popUpMsg);
+                        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', false);
+                        setTimeout(function () {
+                            location.reload(true);
+                        }, 3000);
+                    }
+                }).catch(function (err) {
+                    self.errors = [];
+                    self.errors = err.response.data.errors;
+                    __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', false);
+                });
+            }
+        },
+        getProductFormFields: function getProductFormFields() {
+            var formData = new FormData();
+            var cnt = this.productFields.length;
+
+            for (var i = 0; i < cnt; i++) {
+                formData.append(this.productFields[i], this.toLatinNumbers(this.product[this.productFields[i]]));
+            }
+
+            for (var i = 0; i < this.productFiles.length; i++) {
+                var file = this.productFiles[i];
+                formData.append('image_' + i, file);
+            }
+            formData.append('images_count', this.productFiles.length);
+
+            return formData;
+        },
+        setCategoryId: function setCategoryId(e) {
+            e.preventDefault();
+            var categoryId = $(e.target).val();
+
+            this.product.category_id = categoryId;
+        },
+        setCityId: function setCityId(e) {
+            e.preventDefault();
+            var cityId = $(e.target).val();
+
+            this.product.city_id = cityId;
+        },
+        handleProductFilesUpload: function handleProductFilesUpload() {
+            var uploadedFiles = this.$refs.productFiles.files;
+            /*
+              Adds the uploaded file to the files array
+            */
+            for (var i = 0; i < uploadedFiles.length; i++) {
+                this.productFiles.push(uploadedFiles[i]);
+            }
+        },
+        toLatinNumbers: function toLatinNumbers(num) {
+            var numDic = {
+                '۰': '0',
+                '۱': '1',
+                '۲': '2',
+                '۳': '3',
+                '۴': '4',
+                '۵': '5',
+                '۶': '6',
+                '۷': '7',
+                '۸': '8',
+                '۹': '9'
+            };
+
+            return num.toString().replace(/[۰-۹]/g, function (w) {
+                return numDic[w];
+            });
+        }
+    },
+    mounted: function mounted() {
+        this.init();
+        $('input[type="file"]').imageuploadify();
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+    }
+});
+
+/***/ }),
+/* 238 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("section", { staticClass: "main-content col-xs-12" }, [
+      _c("form", [
+        _c("div", { staticClass: "company_des col-xs-12" }, [
+          _c("div", { staticClass: "col-xs-12 col-sm-6" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                staticClass: "profile_select",
+                on: {
+                  change: function($event) {
+                    _vm.loadSubCategoryList($event)
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { disabled: "", selected: "" } }, [
+                  _vm._v("لطفا انتخاب کنید")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.categoryList, function(category) {
+                  return _c("option", { domProps: { value: category.id } }, [
+                    _vm._v(
+                      " " +
+                        _vm._s(category.category_name) +
+                        "\n                        "
+                    )
+                  ])
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xs-12 col-sm-6" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                staticClass: "profile_select",
+                on: {
+                  change: function($event) {
+                    _vm.setCategoryId($event)
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { disabled: "", selected: "" } }, [
+                  _vm._v("لطفا انتخاب کنید")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.SubCategoryList, function(category) {
+                  return _c("option", { domProps: { value: category.id } }, [
+                    _vm._v(
+                      " " +
+                        _vm._s(category.category_name) +
+                        "\n                        "
+                    )
+                  ])
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _vm.errors.category_id
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(" " + _vm._s(_vm.errors.category_id[0]))
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xs-12 col-sm-6" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.product.stock,
+                  expression: "product.stock"
+                }
+              ],
+              attrs: { type: "text", placeholder: "موجودی" },
+              domProps: { value: _vm.product.stock },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.product, "stock", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.errors.stock
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(" " + _vm._s(_vm.errors.stock[0]))
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xs-12 col-sm-6" }, [
+            _vm._m(3),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.product.product_name,
+                  expression: "product.product_name"
+                }
+              ],
+              attrs: { type: "text", placeholder: "نوع محصول، نوع بذر و ..." },
+              domProps: { value: _vm.product.product_name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.product, "product_name", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.errors.product_name
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(" " + _vm._s(_vm.errors.product_name[0]))
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xs-12 col-sm-6" }, [
+            _vm._m(4),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.product.max_sale_price,
+                  expression: "product.max_sale_price"
+                }
+              ],
+              attrs: { type: "text", placeholder: "حداقل قیمت هر کیلو" },
+              domProps: { value: _vm.product.max_sale_price },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.product, "max_sale_price", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.errors.max_sale_price
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(" " + _vm._s(_vm.errors.min_sale_price[0]))
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xs-12 col-sm-6" }, [
+            _vm._m(5),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.product.min_sale_price,
+                  expression: "product.min_sale_price"
+                }
+              ],
+              attrs: { type: "text", placeholder: "حداکثر قیمت هر کیلو" },
+              domProps: { value: _vm.product.min_sale_price },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.product, "min_sale_price", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.errors.min_sale_price
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(" " + _vm._s(_vm.errors.max_sale_price[0]))
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xs-12 col-sm-6" }, [
+            _vm._m(6),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                staticClass: "profile_select",
+                on: {
+                  change: function($event) {
+                    _vm.loadCityList($event)
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { disabled: "", selected: "" } }, [
+                  _vm._v("لطفا انتخاب کنید")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.provinces, function(province) {
+                  return _c("option", { domProps: { value: province.id } }, [
+                    _vm._v(
+                      " " +
+                        _vm._s(province.province_name) +
+                        "\n                        "
+                    )
+                  ])
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xs-12 col-sm-6" }, [
+            _vm._m(7),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                staticClass: "profile_select",
+                on: {
+                  change: function($event) {
+                    _vm.setCityId($event)
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { disabled: "", selected: "" } }, [
+                  _vm._v("لطفا انتخاب کنید")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.cities, function(city) {
+                  return _c("option", { domProps: { value: city.id } }, [
+                    _vm._v(
+                      " " +
+                        _vm._s(city.city_name) +
+                        "\n                        "
+                    )
+                  ])
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _vm.errors.city_id
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(" " + _vm._s(_vm.errors.city_id[0]))
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xs-12 col-sm-6" }, [
+            _vm._m(8),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.product.min_sale_amount,
+                  expression: "product.min_sale_amount"
+                }
+              ],
+              attrs: {
+                type: "text",
+                placeholder: "حداقل میزان سفارش به کیلوگرم"
+              },
+              domProps: { value: _vm.product.min_sale_amount },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.product, "min_sale_amount", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.errors.stock
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(" " + _vm._s(_vm.errors.stock[0]))
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xs-12" }, [
+            _c("label", [
+              _vm._v("\n                        توضیحات\n                    ")
+            ]),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.product.description,
+                  expression: "product.description"
+                }
+              ],
+              attrs: { placeholder: "درباره ی محصولتان بنویسید..." },
+              domProps: { value: _vm.product.description },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.product, "description", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.errors.description
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(" " + _vm._s(_vm.errors.description[0]))
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "image_company col-xs-12" }, [
+            _vm._m(9),
+            _vm._v(" "),
+            _c("input", {
+              ref: "productFiles",
+              attrs: { type: "file", multiple: "", accept: "image/*" },
+              on: {
+                change: function($event) {
+                  _vm.handleProductFilesUpload()
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.errors.images_count
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(" " + _vm._s(_vm.errors.images_count[0]))
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.errors.image_0
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(" " + _vm._s(_vm.errors.image_0[0]))
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.errors.image_1
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(" " + _vm._s(_vm.errors.image_1[0]))
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.errors.image_2
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(" " + _vm._s(_vm.errors.image_2[0]))
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.errors.image_3
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(" " + _vm._s(_vm.errors.image_3[0]))
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.errors.image_4
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(" " + _vm._s(_vm.errors.image_4[0]))
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.errors.image_5
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(" " + _vm._s(_vm.errors.image_5[0]))
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "rules col-xs-12" }, [
+            _vm._v("\n                    با "),
+            _c("span", { staticClass: "roules-check-inside" }, [
+              _vm._v("قوانین و شرایط")
+            ]),
+            _vm._v("\n                    ثبت آگهی موافقم"),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.product.rules,
+                  expression: "product.rules"
+                }
+              ],
+              attrs: { type: "checkbox" },
+              domProps: {
+                checked: Array.isArray(_vm.product.rules)
+                  ? _vm._i(_vm.product.rules, null) > -1
+                  : _vm.product.rules
+              },
+              on: {
+                change: function($event) {
+                  var $$a = _vm.product.rules,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(_vm.product, "rules", $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.product,
+                          "rules",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(_vm.product, "rules", $$c)
+                  }
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("i", { staticClass: "fa fa-check" })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xs-12" }, [
+            _c("input", {
+              staticClass: "green-bot width-full",
+              attrs: {
+                value: "ثبت محصول",
+                type: "button",
+                disabled: _vm.disableSubmit == true
+              },
+              on: { click: _vm.submitProduct }
+            })
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+      _vm._v("دسته ی محصول\n                    ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+      _vm._v("زیر دسته ی محصول\n                    ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+      _vm._v(" موجودی "),
+      _c("span", { staticClass: "sub-des" }, [_vm._v("(کیلوگرم)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+      _vm._v("نوع محصول "),
+      _c("span", { staticClass: "sub-des" }, [_vm._v("(مثال:کله قوچی)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+      _vm._v("قیمت واحد از "),
+      _c("span", { staticClass: "sub-des" }, [_vm._v("(هر کیلو به تومان)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+      _vm._v("قیمت واحد تا "),
+      _c("span", { staticClass: "sub-des" }, [_vm._v("(هر کیلو به تومان)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+      _vm._v("استان مبدا\n                    ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+      _vm._v(" شهرمبدا\n                    ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+      _vm._v(" حداقل سفارش "),
+      _c("span", { staticClass: "sub-des" }, [_vm._v("(کیلوگرم)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+      _vm._v("تصاویر محصول\n                    ")
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-39a3e452", module.exports)
+  }
+}
+
+/***/ }),
+/* 239 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(240)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(242)
+/* template */
+var __vue_template__ = __webpack_require__(243)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-456a9772"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/buyer/transaction/my-transactions.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-456a9772", Component.options)
+  } else {
+    hotAPI.reload("data-v-456a9772", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 240 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(241);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("dfd30364", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-456a9772\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./my-transactions.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-456a9772\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./my-transactions.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 241 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-post img[data-v-456a9772] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-456a9772] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-456a9772] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-456a9772] {\n    display: block;\n}\n.main-content[data-v-456a9772] {\n    padding: 60px 15px;\n}\n\n\n\n/*end main content style */\n/*custom cods*/\n.green-sbot[data-v-456a9772] {\n    display: block;\n    color: #28a745;\n    padding: 10px 0;\n    border-radius: 3px;\n    text-align: center;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    border: 2px solid;\n}\n.number[data-v-456a9772],.date[data-v-456a9772],.subject[data-v-456a9772]{\n    padding: 8px 15px;\n}\n#icon-pro svg[data-v-456a9772]{\n    height: 150px;\n}\n.main-content ul[data-v-456a9772] {\n    margin-top: 0;\n    text-align: center;\n}\n.list-group-item[data-v-456a9772]{\n    padding: 15px 0;\n}\n.main-content  .title-list[data-v-456a9772]  {\n    overflow: hidden;\n    padding: 15px 0;\n    background: #313942;\n    color: #fff;\n    text-align: center;\n}\n.main-content  p[data-v-456a9772] {\n    float: right;\n    text-align: center;\n}\n@media screen and (max-width: 992px) {\n.show-header button[data-v-456a9772] {\n        display: block;\n}\n.kind_user > div[data-v-456a9772], .kind_activity > div[data-v-456a9772] {\n        float: none;\n}\n.img-profile .submit[data-v-456a9772] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-456a9772] {\n        width: 40%;\n        padding: 12px 0;\n}\n}\n@media screen and (max-width: 555px) {\n.main-content ul p[data-v-456a9772] {\n        font-size: 11px;\n        padding: 0;\n}\n.main-content .subject [data-v-456a9772],.main-content p[data-v-456a9772] {\n        padding: 0;\n}\n.main-content[data-v-456a9772] {\n        padding: 60px 5px;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-456a9772] {\n        font-size: 10px;\n}\n}\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 242 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['loading', 'trans'],
+    data: function data() {
+        return {
+            transactions: '',
+            isLoading: true,
+            items: [{
+                message: 'لیست تراکنش ها',
+                url: 'myTransactions'
+            }]
+        };
+    },
+    methods: {
+        init: function init() {
+            var self = this;
+
+            axios.post('/get_user_transaction_list').then(function (response) {
+                self.transactions = response.data.transactions;
+                self.isLoading = false;
+            }).catch(function (err) {
+                if (err.response.status == 404) {
+                    window.location.href = '/404';
+                }
+                self.isLoading = false;
+            });
+        }
+    },
+    mounted: function mounted() {
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+        this.init();
+    }
+});
+
+/***/ }),
+/* 243 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("section", { staticClass: "main-content col-xs-12" }, [
+      _vm.transactions.length != 0
+        ? _c(
+            "ul",
+            { staticClass: "list-unstyled" },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._l(_vm.transactions, function(transaction) {
+                return _c(
+                  "li",
+                  { staticClass: "list-group-item content-list col-xs-12" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        attrs: {
+                          to:
+                            "/transaction-detail/" + transaction.transaction_id
+                        }
+                      },
+                      [
+                        _c("p", { staticClass: "number col-xs-2" }, [
+                          _vm._v(
+                            "\n                          " +
+                              _vm._s(transaction.transaction_id) +
+                              "\n                      "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "p",
+                          {
+                            staticClass: "date col-xs-2",
+                            attrs: { dir: "rtl" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                          " +
+                                _vm._s(transaction.deal_formation_date) +
+                                "\n                      "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "subject col-xs-5" }, [
+                          _vm._v(
+                            "\n                          " +
+                              _vm._s(transaction.product_name) +
+                              "\n                      "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "col-xs-3" }, [
+                          _c("span", { staticClass: "green-sbot" }, [
+                            _vm._v(" " + _vm._s(transaction.short_status))
+                          ])
+                        ])
+                      ]
+                    )
+                  ],
+                  1
+                )
+              })
+            ],
+            2
+          )
+        : _vm.isLoading
+          ? _c("div", { staticClass: "loading_images  col-xs-12" }, [
+              _c("img", {
+                staticStyle: { width: "200px", height: "200px" },
+                attrs: { src: _vm.loading }
+              })
+            ])
+          : _c("div", { staticClass: "col-xs-12" }, [
+              _c("h4", { staticClass: "text-center", attrs: { dir: "rtl" } }, [
+                _vm._v("تراکنشی در این قسمت وجود ندارد.")
+              ])
+            ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "list-group-item title-list" }, [
+      _c("p", { staticClass: "title-list-text col-xs-2" }, [
+        _vm._v("   شماره تراکنش")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "time-show  col-xs-2" }, [_vm._v("تاریخ ")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "time-show col-xs-5" }, [_vm._v("موضوع فعالیت ")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "time-show  col-xs-3" }, [_vm._v(" وضعیت ")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-456a9772", module.exports)
+  }
+}
+
+/***/ }),
+/* 244 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(245)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(247)
+/* template */
+var __vue_template__ = __webpack_require__(248)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-8420d686"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/buyer/transaction/my-terminated-transactions.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8420d686", Component.options)
+  } else {
+    hotAPI.reload("data-v-8420d686", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 245 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(246);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("d1509d16", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8420d686\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./my-terminated-transactions.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8420d686\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./my-terminated-transactions.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 246 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-post img[data-v-8420d686] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-8420d686] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-8420d686] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-8420d686] {\n    display: block;\n}\n.main-content[data-v-8420d686] {\n    padding: 60px 15px;\n}\n\n\n\n/*end main content style */\n/*custom cods*/\n.green-sbot[data-v-8420d686] {\n    display: block;\n    color: #28a745;\n    padding: 10px 0;\n    border-radius: 3px;\n    text-align: center;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    border: 2px solid;\n}\n.number[data-v-8420d686],.date[data-v-8420d686],.subject[data-v-8420d686]{\n    padding: 8px 15px;\n}\n#icon-pro svg[data-v-8420d686]{\n    height: 150px;\n}\n.main-content ul[data-v-8420d686] {\n    margin-top: 0;\n    text-align: center;\n}\n.list-group-item[data-v-8420d686]{\n    padding: 15px 0;\n}\n.main-content  .title-list[data-v-8420d686]  {\n    overflow: hidden;\n    padding: 15px 0;\n    background: #313942;\n    color: #fff;\n    text-align: center;\n}\n.main-content  p[data-v-8420d686] {\n    float: right;\n    text-align: center;\n}\n@media screen and (max-width: 992px) {\n.show-header button[data-v-8420d686] {\n        display: block;\n}\n.kind_user > div[data-v-8420d686], .kind_activity > div[data-v-8420d686] {\n        float: none;\n}\n.img-profile .submit[data-v-8420d686] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-8420d686] {\n        width: 40%;\n        padding: 12px 0;\n}\n}\n@media screen and (max-width: 555px) {\n.main-content ul p[data-v-8420d686] {\n        font-size: 11px;\n        padding: 0;\n}\n.main-content .subject [data-v-8420d686],.main-content p[data-v-8420d686] {\n        padding: 0;\n}\n.main-content[data-v-8420d686] {\n        padding: 60px 5px;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-8420d686] {\n        font-size: 10px;\n}\n}\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 247 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['loading', 'trans'],
+    data: function data() {
+
+        return {
+            transactions: '',
+            isLoading: true,
+            items: [{
+                message: 'لیست تراکنش ها',
+                url: 'myTerminatedTransactions'
+            }]
+        };
+    },
+    methods: {
+        init: function init() {
+            var self = this;
+            axios.post('/get_terminated_transactions').then(function (response) {
+                self.transactions = response.data.transactions;
+                self.isLoading = false;
+            }).catch(function (err) {
+                if (err.response.status == 404) {
+                    window.location.href = '/404';
+                }
+            });
+        }
+    },
+    mounted: function mounted() {
+        this.init();
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+    }
+});
+
+/***/ }),
+/* 248 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("section", { staticClass: "main-content col-xs-12" }, [
+      _vm.transactions.length != 0
+        ? _c(
+            "ul",
+            { staticClass: "list-unstyled" },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._l(_vm.transactions, function(transaction) {
+                return _c(
+                  "li",
+                  { staticClass: "list-group-item content-list col-xs-12" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        attrs: {
+                          to:
+                            "/transaction-report/" + transaction.transaction_id
+                        }
+                      },
+                      [
+                        _c("p", { staticClass: "number col-xs-2" }, [
+                          _vm._v(
+                            "\n\n                        " +
+                              _vm._s(transaction.transaction_id) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "p",
+                          {
+                            staticClass: "date col-xs-2",
+                            attrs: { dir: "rtl" }
+                          },
+                          [
+                            _vm._v(
+                              "\n\n                        " +
+                                _vm._s(transaction.deal_formation_date) +
+                                "\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "subject col-xs-5" }, [
+                          _vm._v(
+                            "\n\n                        " +
+                              _vm._s(transaction.product_name) +
+                              "\n                    "
+                          )
+                        ])
+                      ]
+                    )
+                  ],
+                  1
+                )
+              })
+            ],
+            2
+          )
+        : _vm.isLoading
+          ? _c("div", { staticClass: "loading_images  col-xs-12" })
+          : _c("div", { staticClass: "col-xs-12" }, [
+              _c("h4", { staticClass: "text-center", attrs: { dir: "rtl" } }, [
+                _vm._v("تراکنشی در این قسمت وجود ندارد.")
+              ])
+            ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "list-group-item title-list" }, [
+      _c("p", { staticClass: "title-list-text col-xs-2" }, [
+        _vm._v("شماره تراکنش")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "time-show  col-xs-2" }, [_vm._v("تاریخ ")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "time-show col-xs-5" }, [_vm._v("موضوع فعالیت ")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-8420d686", module.exports)
+  }
+}
+
+/***/ }),
+/* 249 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(250);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("1cb3f7b3", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-66da4062\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./transaction.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-66da4062\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./transaction.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 250 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.col-xs-12,\n.col-sm-4,\n.col-sm-8,\n.col-md-3,\n.col-md-9\n{\n    float: right;\n}\n\n\n\n/*start main content style */\n.image-content-post {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i {\n    display: block;\n}\n.content-item {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content {\n    padding: 60px 15px;\n}\n.header-lable {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot:focus,.gray-bot:focus {\n    color: #fff;\n}\n.default_btn{\n    margin: 15px 0;\n    display: inline-block;\n    background: #eee;\n    color: #444;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot {\n    margin: 15px 0;\n    display: inline-block;\n    background: #85888d;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.default_btn:hover {\n    color: #444;\n    background: #ddd;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot:hover {\n    color: #fff;\n    background: #72757a;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco:hover {\n    color: #fff;\n}\n.font-big {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header {\n    width: 80px;\n}\n.little-main-header {\n    right: 80px;\n}\n.background_mob_sec {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user, .kind_activity {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div, .kind_activity > div {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input, .kind_activity input {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i, .kind_activity input:checked + i {\n    color: #28a745;\n}\n.kind_user i, .kind_activity i {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border: 2px solid;\n    border-radius: 50%;\n    padding: 3px 2px;\n    font-size: 14px;\n}\n.user-form {\n    padding: 0;\n}\n.alert-message{\n    padding: 20px;\n\n    text-align: right;\n}\n.user-form input[type=\"text\"] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.user-form input[type=\"button\"] {\n    width: 100%;\n}\n.user-form input[type=\"text\"]:focus {\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile {\n    float: right;\n}\n#icon-pro {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg {\n    height: 150px;\n}\n.main-content-nav {\n    margin: 20px auto;\n\n    width: 80%;\n\n    float: none;\n}\n.main-content-nav ul {\n    text-align: center;\n    margin-right: -25px;\n}\n.main-content-nav li {\n    padding: 14px 50px;\n    position: relative;\n    background: #fbfbfb;\n    font-size: 18px;\n}\n.main-content-nav li a{\n    color: #999;\n}\n.main-content-nav li.active a{\n    color: #333;\n}\n.main-content-nav li:after {\n    content: \"\";\n    position: absolute;\n    right: 0;\n    bottom: 0;\n    width: 0;\n    height: 0;\n    border-right: 20px solid #fff;\n    border-top: 26px solid transparent;\n    border-bottom: 20px solid transparent;\n}\n.main-content-nav li:before {\n    content: \"\";\n    position: absolute;\n    left: -20px;\n    bottom: 0;\n    width: 0;\n    height: 0;\n    border-right: 20px solid #fbfbfb;\n    border-top: 26px solid transparent;\n    border-bottom: 20px solid transparent;\n    z-index: 1;\n}\n.main-content-nav li.active {\n    background: #f7f7f7;\n    color: #333;\n}\n.main-content-nav li.active:before {\n    border-right-color: #f7f7f7;\n}\n#main .contents,#main .alert-danger{\n    text-align: center;\n    background: #f7f7f7;\n\n    width: 80%;\n\n    margin: 0 auto;\n\n    float: none;\n\n    overflow: hidden;\n\n    border-radius: 3px;\n\n    line-height: 1.618;\n\n    direction: rtl;\n}\n#main .alert-danger{\n    font-size: 18px;\n    background: #e41c38;\n    padding: 15px;\n    margin: 0 auto 20pxauto;\n    color: #fff;\n}\n.title-p{\n    margin: 10px auto 15px;\n\n    font-size: 16px;\n\n    font-weight: bold;\n}\n#main .contents p{\n    text-align: right;\n}\n#main .contents h2{\n    margin: 20px auto;\n}\n#main .continue_but{\n    float: right;\n}\n#main .main_buttons{\n    float: right;\n}\n#step1 .main_buttons{\n    text-align: right;\n}\n/*part 2*/\n.main-content-texts{\n    background: #fff;\n\n    border-radius: 3px;\n}\n.header-contents{\n    background: #fff;\n    margin: 15px auto;\n    border-radius: 3px;\n    padding: 10px;\n    text-align: left;\n}\n.header-contents .title-contents{\n    text-align: right;\n}\n.contents h2{\n    font-size: 22px;\n}\n.description-text{\n    font-size: 12px;\n    padding: 5px 0;\n    border-top:1px solid #ddd;\n}\n.services td {\n    color: #00d613;\n}\n.pre-pay td {\n    color: #e41c38;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header {\n        display: none;\n}\n.right-header.mobile-header {\n        display: block;\n        right: -300px;\n}\n.main-header, .little-main-header {\n        right: 0 !important;\n}\n#main, #main.little-main {\n        margin-right: 0 !important;\n}\n.post-contents-table {\n        width: 100%;\n}\n.copy-right {\n        display: none;\n}\n.clouse_menu {\n        display: none;\n}\n.clouse_menu_mob {\n        display: block;\n}\n.show-header button {\n        display: block;\n}\n.kind_user > div, .kind_activity > div {\n        float: none;\n}\n.img-profile .submit {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post, .contents-post {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n#main .contents,#main .alert-danger{\n\n        width: 100%;\n}\n#main .alert-danger{\n        font-size: 14px;\n}\n.name-header-profile {\n        display: none;\n}\n.profile-menu-header {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a {\n        font-size: 10px;\n}\n.sub-header {\n\n        bottom: -44px;\n}\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 251 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(252)
+  __webpack_require__(254)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(256)
+/* template */
+var __vue_template__ = __webpack_require__(257)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-3f3c51e3"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/buyer/transaction/transactionReport.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3f3c51e3", Component.options)
+  } else {
+    hotAPI.reload("data-v-3f3c51e3", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 252 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(253);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("96db6c54", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3f3c51e3\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./transactionReport.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3f3c51e3\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./transactionReport.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 253 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.col-xs-1[data-v-3f3c51e3],\n.col-xs-2[data-v-3f3c51e3],\n.col-xs-3[data-v-3f3c51e3],\n.col-xs-4[data-v-3f3c51e3],\n.col-xs-5[data-v-3f3c51e3],\n.col-xs-6[data-v-3f3c51e3],\n.col-xs-7[data-v-3f3c51e3],\n.col-xs-8[data-v-3f3c51e3],\n.col-xs-9[data-v-3f3c51e3],\n.col-xs-10[data-v-3f3c51e3],\n.col-xs-11[data-v-3f3c51e3],\n.col-xs-12[data-v-3f3c51e3],\n.col-sm-1[data-v-3f3c51e3],\n.col-sm-2[data-v-3f3c51e3],\n.col-sm-3[data-v-3f3c51e3],\n.col-sm-4[data-v-3f3c51e3],\n.col-sm-5[data-v-3f3c51e3],\n.col-sm-6[data-v-3f3c51e3],\n.col-sm-7[data-v-3f3c51e3],\n.col-sm-8[data-v-3f3c51e3],\n.col-sm-9[data-v-3f3c51e3],\n.col-sm-10[data-v-3f3c51e3],\n.col-sm-11[data-v-3f3c51e3],\n.col-sm-12[data-v-3f3c51e3],\n.col-md-1[data-v-3f3c51e3],\n.col-md-2[data-v-3f3c51e3],\n.col-md-3[data-v-3f3c51e3],\n.col-md-4[data-v-3f3c51e3],\n.col-md-5[data-v-3f3c51e3],\n.col-md-6[data-v-3f3c51e3],\n.col-md-7[data-v-3f3c51e3],\n.col-md-8[data-v-3f3c51e3],\n.col-md-9[data-v-3f3c51e3],\n.col-md-10[data-v-3f3c51e3],\n.col-md-11[data-v-3f3c51e3],\n.col-md-12[data-v-3f3c51e3],\n.col-lg-1[data-v-3f3c51e3],\n.col-lg-2[data-v-3f3c51e3],\n.col-lg-3[data-v-3f3c51e3],\n.col-lg-4[data-v-3f3c51e3],\n.col-lg-5[data-v-3f3c51e3],\n.col-lg-6[data-v-3f3c51e3],\n.col-lg-7[data-v-3f3c51e3],\n.col-lg-8[data-v-3f3c51e3],\n.col-lg-9[data-v-3f3c51e3],\n.col-lg-10[data-v-3f3c51e3],\n.col-lg-11[data-v-3f3c51e3],\n.col-lg-12[data-v-3f3c51e3]{\n    float: right;\n}\n/*start style main header*/\n#main[data-v-3f3c51e3] {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n#main.little-main[data-v-3f3c51e3] {\n    margin-right: 80px;\n}\n.main-header[data-v-3f3c51e3] {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n    border-bottom: 2px solid #e6e6e6;\n}\n.image-header-profile[data-v-3f3c51e3] {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.profile-menu-header[data-v-3f3c51e3] {\n    float: left;\n}\n.right-menu-header[data-v-3f3c51e3] {\n\n    padding: 16px;\n}\n.right-menu-header[data-v-3f3c51e3], .content-header[data-v-3f3c51e3] {\n    float: right;\n}\n.profile-menu-header[data-v-3f3c51e3] {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header a[data-v-3f3c51e3] {\n    position: relative;\n}\n.profile-menu-header i[data-v-3f3c51e3] {\n    position: absolute;\n\n    left: -75px;\n\n    top: 18px;\n\n    font-size: 20px;\n}\n.content-header[data-v-3f3c51e3] {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a[data-v-3f3c51e3], .profile-menu-header a[data-v-3f3c51e3] {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a[data-v-3f3c51e3] {\n    font-size: 30px;\n}\n.right-menu-header a[data-v-3f3c51e3]:hover, .profile-menu-header a[data-v-3f3c51e3]:hover {\n    color: #2e353e;\n}\n.name-header-profile[data-v-3f3c51e3] {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list[data-v-3f3c51e3] {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li[data-v-3f3c51e3] {\n    margin: 5px;\n}\n.profile-list a[data-v-3f3c51e3] {\n    width: 100%;\n    display: inline-block;\n}\n\n/*end style main header*/\n\n/*start style sub-header*/\n.sub-header[data-v-3f3c51e3] {\n    position: absolute;\n    left: 0;\n    background: #eff3f6;\n    bottom: -48px;\n    right: 0;\n    text-align: center;\n}\n.sub-header ul[data-v-3f3c51e3] {\n    text-align: center;\n}\n.sub-header a[data-v-3f3c51e3] {\n    padding: 16px;\n\n    display: inline-block;\n\n    color: #808c9b;\n\n    font-weight: bold;\n\n    font-size: 14px;\n\n    position: relative;\n}\n.sub-header a[data-v-3f3c51e3]:hover {\n    color: #313942;\n}\n.sub-header a[data-v-3f3c51e3]:hover::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n\n/*end style sub-header*/\n/*start main content style */\n.image-content-post[data-v-3f3c51e3] {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img[data-v-3f3c51e3] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-3f3c51e3] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-3f3c51e3] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-3f3c51e3] {\n    display: block;\n}\n.content-item[data-v-3f3c51e3] {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content[data-v-3f3c51e3] {\n    padding: 60px 15px;\n}\n.header-lable[data-v-3f3c51e3] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-3f3c51e3] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-text[data-v-3f3c51e3] {\n    color: #28a745;\n}\n.green-bot[data-v-3f3c51e3]:focus,.gray-bot[data-v-3f3c51e3]:focus {\n    color: #fff;\n}\n.default_btn[data-v-3f3c51e3]{\n    margin: 15px 0;\n    display: inline-block;\n    background: #eee;\n    color: #444;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot[data-v-3f3c51e3] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #85888d;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.default_btn[data-v-3f3c51e3]:hover {\n    color: #444;\n    background: #ddd;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-3f3c51e3]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot[data-v-3f3c51e3]:hover {\n    color: #fff;\n    background: #72757a;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-3f3c51e3] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-3f3c51e3]:hover {\n    color: #fff;\n}\n.font-big[data-v-3f3c51e3] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-3f3c51e3] {\n    width: 80px;\n}\n.little-main-header[data-v-3f3c51e3] {\n    right: 80px;\n}\n.background_mob_sec[data-v-3f3c51e3] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user[data-v-3f3c51e3], .kind_activity[data-v-3f3c51e3] {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div[data-v-3f3c51e3], .kind_activity > div[data-v-3f3c51e3] {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input[data-v-3f3c51e3], .kind_activity input[data-v-3f3c51e3] {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i[data-v-3f3c51e3], .kind_activity input:checked + i[data-v-3f3c51e3] {\n    color: #28a745;\n}\n.kind_user i[data-v-3f3c51e3], .kind_activity i[data-v-3f3c51e3] {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border: 2px solid;\n    border-radius: 50%;\n    padding: 3px 2px;\n    font-size: 14px;\n}\n.user-form[data-v-3f3c51e3] {\n    padding: 0;\n}\n.user-form input[type=\"text\"][data-v-3f3c51e3] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.user-form input[type=\"button\"][data-v-3f3c51e3] {\n    width: 100%;\n}\n.user-form input[type=\"text\"][data-v-3f3c51e3]:focus {\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile[data-v-3f3c51e3] {\n    float: right;\n}\n#icon-pro[data-v-3f3c51e3] {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg[data-v-3f3c51e3] {\n    height: 150px;\n}\n#main .contents[data-v-3f3c51e3]{\n    text-align: center;\n\n    background: #f7f7f7;\n\n    width: 80%;\n\n    margin: 15px  auto;\n\n    float: none;\n\n    overflow: hidden;\n\n    border-radius: 3px;\n\n    line-height: 1.618;\n\n    direction: rtl;\n}\n#main .contents p[data-v-3f3c51e3]{\n    text-align: right;\n}\n#main .contents h2[data-v-3f3c51e3]{\n    margin: 20px auto;\n}\n.factor-title[data-v-3f3c51e3]{\n    overflow: hidden;\n\n    padding: 15px 0;\n\n    border-bottom: 1px solid #bbb;\n}\n.contents-detail[data-v-3f3c51e3]{\n    margin: 20px auto;\n    padding: 0;\n}\n.contents-detail > div[data-v-3f3c51e3]{\n    padding: 0;\n}\n#main .main_buttons[data-v-3f3c51e3]{\n    float: right;\n    text-align: center;\n}\n\n\n/*part 2*/\n.main-content-texts[data-v-3f3c51e3]{\n    background: #fff;\n\n    border-radius: 3px;\n}\n.header-contents[data-v-3f3c51e3]{\n    background: #fff;\n    margin: 15px auto;\n    border-radius: 3px;\n    padding: 10px;\n    text-align: left;\n}\n.header-contents .title-contents[data-v-3f3c51e3]{\n    text-align: right;\n}\n.contents h2[data-v-3f3c51e3]{\n    font-size: 22px;\n}\n.description-text[data-v-3f3c51e3]{\n    font-size: 12px;\n    padding: 5px 0;\n    border-top:1px solid #ddd;\n}\n.services td[data-v-3f3c51e3] {\n    color: #00d613;\n}\n.pre-pay td[data-v-3f3c51e3] {\n    color: #e41c38;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header[data-v-3f3c51e3] {\n        display: none;\n}\n.right-header.mobile-header[data-v-3f3c51e3] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-3f3c51e3], .little-main-header[data-v-3f3c51e3] {\n        right: 0 !important;\n}\n#main[data-v-3f3c51e3], #main.little-main[data-v-3f3c51e3] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-3f3c51e3] {\n        width: 100%;\n}\n.copy-right[data-v-3f3c51e3] {\n        display: none;\n}\n.clouse_menu[data-v-3f3c51e3] {\n        display: none;\n}\n.clouse_menu_mob[data-v-3f3c51e3] {\n        display: block;\n}\n.show-header button[data-v-3f3c51e3] {\n        display: block;\n}\n.kind_user > div[data-v-3f3c51e3], .kind_activity > div[data-v-3f3c51e3] {\n        float: none;\n}\n.img-profile .submit[data-v-3f3c51e3] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-3f3c51e3] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-3f3c51e3] {\n        float: none;\n}\n}\n#tex_rate[data-v-3f3c51e3]{\n    margin: 10px auto;\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-3f3c51e3], .contents-post[data-v-3f3c51e3] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.name-header-profile[data-v-3f3c51e3] {\n        display: none;\n}\n.profile-menu-header[data-v-3f3c51e3] {\n        padding: 7px;\n        padding-left: 36px;\n}\n#main .contents[data-v-3f3c51e3] {\n        width: 100%;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-3f3c51e3] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-3f3c51e3] {\n        font-size: 10px;\n}\n.sub-header[data-v-3f3c51e3] {\n\n        bottom: -44px;\n}\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 254 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(255);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("7ac31896", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3f3c51e3\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./transactionReport.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3f3c51e3\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./transactionReport.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 255 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 256 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            currentStep: 1,
+            pageStep: 1,
+            transactionId: '',
+            popUpMsg: '',
+            transactionInfo: '',
+            items: [{
+                message: 'لیست تراکنش ها',
+                url: 'registerProduct'
+            }]
+        };
+    },
+    methods: {
+        init: function init() {
+            var self = this;
+            var transactionId = this.$route.params.id;
+            this.transactionId = transactionId;
+
+            axios.post('/get_terminated_transaction_info', {
+                transaction_id: this.transactionId
+            }).then(function (response) {
+                self.transactionInfo = response.data.transaction_info;
+            });
+        },
+        goToNextPage: function goToNextPage() {
+            if (this.pageStep < 11) {
+                this.pageStep++;
+            }
+        },
+        goToPrePage: function goToPrePage() {
+            if (this.pageStep < 1) {
+                this.pageStep = 1;
+            } else if (this.pageStep > 1) {
+                this.pageStep--;
+            }
+        }
+    },
+    mounted: function mounted() {
+        this.init();
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+    }
+});
+
+/***/ }),
+/* 257 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("section", { staticClass: "main-content col-xs-12" }, [
+    _vm.currentStep == 1
+      ? _c("div", { attrs: { id: "step1" } }, [
+          _c("div", { staticClass: "contents col-xs-12" }, [
+            _c("div", { staticClass: "buttons " }, [
+              _c("div", { staticClass: "main_buttons col-xs-12" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "default_btn",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.goToNextPage()
+                      }
+                    }
+                  },
+                  [_vm._v("صفحه بعد")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "default_btn",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.goToPrePage()
+                      }
+                    }
+                  },
+                  [_vm._v("صفحه قبل")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("h2", [_vm._v("عنوان قرارداد")]),
+            _vm._v(" "),
+            _vm.pageStep == 1
+              ? _c("p", { attrs: { id: "step1S1" } }, [
+                  _c("span", [
+                    _vm._v(
+                      "با هدف تنظیم روابط اطراف قرارداد، قرارداد حاضر ذیل ماده ۱۰ قانون مدنی و به نحو لازم و با حاکم قرار دادن اصل حسن نیت بین طرفین منعقد می گردد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm._m(0),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("1-1طرف اول")]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("1-2طرف دوم")]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "2-1  تنظیم همکاری و روابط قراردادی طرفین در خصوص همکاری اینکوباک با فروشنده جهت فروش کالا و محصولات خود از طریق ارائه این محصولات در وبسایت ایجاد شده توسط اینکوباک به نشانی incobac.com .بدیهی است با توجه به اینکه مالکیت محصولات ارائه شده در سایت متعلق به اینکوباک نبوده و اینکوباک صرفاً ارائه دهنده بستر اینترنتی جهت فروش محصولات فوق می باشد لذا مسئولیت کلیه اوصاف محصول اعم از نوع، بسته بندی، قیمت و هرگونه اطلاعات ذکر شده در رابطه با محصول بر عهده فروشنده است."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "2-2 اینکوباک بر اساس اطلاعات ذکر شده در سایت اقدام به صدور فاکتور برای طرفین می نماید که این فاکتور در اختیار طرفین قرار می گیرد و مبنای رسیدگی به کلیه اختلافات حاصله  قرارداد حاضر و فاکتور مذکور می باشد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "2-3  با توجه به شرایط خاص هر معامله، هزینه های مربوط به حمل و نقل و بیمه کالاهای مورد معامله ممکن است بر عهده خریدار یا فروشنده قرار گیرد که این امر در قرارداد حاضر قید و مورد تایید طرف متعهد قرار می گیرد در هر صورت اینکوباک نسبت به هزینه های فوق الذکر از خود سلب مسئولیت می‌نماید."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.pageStep == 2
+              ? _c("p", { attrs: { id: "step1S2" } }, [
+                  _vm._m(2),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "3-1 خریدار و فروشنده با پذیرش قرارداد حاضر می توانند از بستر اینترنتی ارائه شده توسط طرف اول (پلتفرم اینکوباک) جهت سفارش و ارائه محصولات استفاده نمایند."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "3-2 خریدار درخواست خود را از طریق سفارش کالا به صورت الکترونیکی برای اینکوباک ارسال و اینکوباک تقاضای خرید خریدار را از طریق ایمیل یا seller center به فروشندگان مرتبط اعلام می نماید."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "3-3 چنانچه فروشنده قادر به تامین سفارش خریدار باشد پاسخ خود را با ذکر اوصاف و پیوست تصاویر محصولات ، برای خریدار ارسال می نماید."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "3-4 چنانچه خریدار پیشنهاد فروشنده را در پنل کاربری خویش پذیرفت، اپراتور های اینکوباک اقدام به برقراری تماس تلفنی و انجام هماهنگی های نهایی  با طرفین نموده و در صورت حصول توافق، متن قرارداد را برای طرفین ارسال می نمایند که ملاک زمانی انعقاد قراداد، زمان تایید الکترونیکی متن قرارداد ارسالی برای طرفین( خریدار و فروشنده) می باشد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "3-5 پس از تایید قرارداد توسط طرفین فاکتور پیش پرداخت توسط اینکوباک صادر گردیده و خریدار بایستی ظرف مدت .یک روز نسبت به پرداخت آن اقدام نماید.\n                    "
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "3-6  در صورت تادیه پیش پرداخت توسط خریدار، فروشنده بایستی ظرف مهلتی که در قرارداد حاضر قید می گردد کالای سفارش داده شده را تهیه و جهت ارسال به متصدی حمل و نقل تسلیم نماید."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "3-7 قبل از تسلیم کالا به متصدی حمل و نقل و انجام عملیات بارگیری، بازرس اینکوباک در محل بارگیری حضور می یابد و کالای سفارش داده شده را از جهت انطباق با مفاد قرارداد حاضر مورد بررسی قرار می دهد.(تعیین موارد و اوصافی که در هر سفارش بایستی توسط بازرس اینکوباک مورد بررسی و تایید قرار گیرد به پیوست قرارداد حاضر در اختیار خریدار و فروشنده قرار خواهد گرفت). بدیهی است که بازرس اینکوباک صرفاً نسبت به بررسی این اوصاف مسئولیت داشته و سایر اوصاف و موارد از حیطه مسئولیت بازرس اینکوباک خارج می باشد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.pageStep == 3
+              ? _c("p", { attrs: { id: "step1S3" } }, [
+                  _c("span", [
+                    _vm._v(
+                      "3-8 در صورت تأیید محصولات توسط بازرس، این امر تلفناً به اطلاع خریدار رسیده و فاکتور نهایی قراداد توسط اینکوباک صادر می گردد و خریدار بایستی ظرف مدت 2 ساعت از اتمام بارگیری نسبت به تسویه مبلغ باقی مانده قراداد اقدام نماید که در این صورت محصولات تحویل متصدی حمل و نقل می‌گردد و پس از گذشت یک هفته از پایان تراکنش، اینکوباک پس از کسر کمیسیون خود از معامله ، ثمن معامله را به حساب فروشنده واریز خواهد کرد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "3-9 دیهی است با توجه به عدم مالکیت اینکوباک بر محصولات ارائه شده در بستر اینترنتی، فروش کالا به خریدار  توسط فروشنده انجام می پذیرد و اینکوباک صرفا زیرساخت انجام فروش را فراهم می نماید لذا در صورت صدور فاکتور در وجه اینکوباک و اظهار نمودن آن در گزارشات مالیاتی مراتب مورد تایید این شرکت نبوده و همچنین این شرکت هیچگونه مسئولیتی بر عهده نخواهد داشت و مسئولیت خسارت وارده احتمالی بر عهده متخلف از این بند خواهد بود."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm._m(3),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "بر اساس شرایط این قرارداد فروشنده موظف به انجام امور ذیل می باشد:"
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "4-1  مسئولیت تعیین و درج قیمت کالا ، تولید و درج اطلاعات محصول اعم از کلیه اطلاعات کمی و کیفی محصول و به‌روزرسانی میزان موجودی محصول در وبسایت اینکوباک بر عهده فروشنده می باشد. قیمت‌های مندرج بر روی , وبسایت اینکوباک می‌بایست رقابتی و حداقل برابر با قیمت کالاهای همانند در سایر فروشگاه ها اعم از اینترنتی و غیر اینترنتی باشد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "تبصره: اینکوباک زیرساخت و ابزار ساخت محتوا را به صورت رایگان در اختیار فروشندگان قرار می دهد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "4-2 فروشنده تضمین می‌نماید که تمامی کالاهای تحویلی به خریدار مطابق قوانین جمهوری اسلامی ایران تولید شده و یا از مبادی رسمی کشور وارد گردیده است. همچنین کالاها سالم و مطابق با توصیفات اعلام شده از کلیه ابعاد کمی و کیفی می باشد و چنانچه در هر مرحله از عملیات فروش خلاف موارد فوق اثبات گردید، اینکوباک می تواند راساٌ نسبت به لغو سفارش اقدام نماید و چنانچه در این خصوص  خسارتی به اینکوباک یا خریدار وارد گردد فروشنده متعهد به جبران خسارت خواهد بود."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "4-3 فروشنده اعلام می دارد که مالک کالا بوده و کالا معارض ندارد و حقوق مالکیت صنعتی و تجاری در صورت وجود، مالکیت معنوی و سایر حقوق قانونی و عرفی کالا متعلق به اوست یا حق بهره برداری از این حقوق و عرضه کالای مربوطه را دارد و مطابق قوانین جمهوری اسلامی ایران مجاز به فعالیت میباشد و چنانچه در هر مرحله از عملیات فروش خلاف موارد فوق اثبات گردید، اینکوباک می تواند راساٌ نسبت به لغو سفارش اقدام نماید و چنانچه در این خصوص  خسارتی به اینکوباک یا خریدار وارد گردد فروشنده متعهد به جبران خسارت خواهد بود."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.pageStep == 4
+              ? _c("p", { attrs: { id: "step1S4" } }, [
+                  _c("span", [
+                    _vm._v(
+                      "4-4 فروشنده تعهد می‌نماید که در صورت اعمال هرگونه تغییر در اطلاعات کالا اعم از نوع، بهای کالا ،عدم موجودی کالا، توقف تولید یا عرضه محصول و همچنین تخفیف‌های ارائه شده به سایر خریداران ظرف مدت یک روزاطلاعات کالا را در سامانه اینکوباک به روز نماید در غیر این صورت مسئولیت کلیه خسارات وارده به اینکوباک و خریدار بر عهده فروشنده است."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "4-5 فروشنده موظف است در زمان تعیین شده در قرارداد حاضر، کالای سفارش داده شده را تامین نماید و در زمان مشخص شده کالای سفارش داده شده را جهت تحویل به خریدار به متصدی حمل و نقل قانونی تحویل نماید . در صورت عدم تامین کالا و یا تامین ناقص در مدت زمان تعهد شده،  فروشنده بایستی به ازای هر روز تاخیر  2 درصد از مبلغ کل معامله را به عنوان جریمه تاخیر در تاًمین به اینکوباک پرداخت نماید. و چنانچه عدم تاًمین کالا و یا تامین ناقص بیش از 2 روز تقویمی به طول بیانجامد اینکوباک می تواند راساً نسبت به لغو معامله  اقدام نماید. که در این حالت فروشنده موظف به پرداخت 5 درصد از مبلغ کل معامله، به انضمام 4 درصد از مبلغ کل معامله پیش بینی شده در صدر بند (جمعاً 9 درصد از مبلغ کل معامله) به عنوان جریمه عدم تاًمین به اینکوباک پرداخت نماید و همچنین مسئول کلیه خسارات ناشی از عدم تاًمین و یا تامین ناقص کالا که برای اینکوباک یا خریدار ایجاد گردد می باشد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "4-6 فروشنده تضمین می نماید که کلیه اوصاف کمی و کیفی محصولات تامین شده کاملا مطابق با اظهارات درج شده توسط ایشان در سامانه اینکوباک میباشد که تمامی این اظهارات در قرارداد حاضر منعکس می گردد. با توجه به تعبیه نظام بازرسی توسط اینکوباک قبل از ارسال کالا و تحویل به متصدی حمل و نقل چنانچه عدم تطابق محموله با اطلاعات مندرج در سایت، مربوط به امور و اوصافی باشد که بایستی توسط بازرس اینکوباک بررسی گردد(شرح دقیق این اوصاف متناسب با  هرمعامله و به‌صورت احصایی در قرارداد مربوط به آن معامله قید میگردد) اینکوباک و فروشنده مشترکاً در قبال خریدار مسئول می‌باشند که میزان مسوولیت هر یک بر اساس حدود  قصور یا تقصیر آنها توسط مرجع داوری پیش بینی شده در  قرارداد حاضر تعیین می گردد. در غیر اینصورت مسئولیت عدم تطابق کالا بر عهده فروشنده می باشد و چنانچه این امر منجر به ورود هر گونه خسارتی به اینکوباک یا خریدار گردد فروشنده متعهد به جبران خسارت خواهد بود."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      " تبصره: در صورتی که فروشنده نسبت به آماده کردن محصول اقدام کرده باشد ولی نتواند در موعد مقرر نسب به تحویل آن اقدام کند  و  یا در صورتی که محصول آماده شده توسط فروشنده فاقد استانداردهای تعیین شده از سمت خریدار باشد،تصمیم درباره ی لغو یا ادامه معامله، و یا خرید تمام و یا بخشی از محصولات و شرایط مربوط به آن بر عهده اینکوباک و خریدار می باشد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.pageStep == 5
+              ? _c("p", { attrs: { id: "step1S5" } }, [
+                  _c("span", [
+                    _vm._v(
+                      "4-7 مسؤلیت تحویل کالای سفارش داده شده به متصدی حمل و نقل بر عهده ی فروشنده می باشد. فروشنده موظف است کالا را به شیوه بسته بندی صحیح . در شرایط استاندارد بارگیری به مقصد حمل و نقل قانونی تحویل داده و همچنین کالا را از طریق وسیله ی حمل ونقل دارای شرایط مناسب جهت حفظ سلامت کالا برای خریدار ارسال نماید مگر آنکه متصدی حمل و نقل توسط خریدار تعیین گردد که در این صورت فروشنده صرفا نسبت به انتخاب وسیله و متصدی حمل و نقل مسئولیتی ندارد. چنانچه از جهت عدم رعایت این بند خسارتی حاصل گردد فروشنده مسئول جبران کلیه ی خسارات ایجاد شده می باشد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "  تبصره- چنانچه در طی حمل کالا خسارتی برای محموله ایجاد گردد موجب مسئولیت متصدی حمل و نقل طبق مقررات مربوطه در این زمینه می باشد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "تبصره - هزینه های مربوط به حمل و نقل و بیمه محموله ارسالی بر حسب مورد بر عهده خریدار و یا فروشنده می باشد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm._m(4),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "خریدار متعهد می باشد پس از تامین بار توسط فروشنده جهت بارگیری  و تایید نهایی بازرس اینکوباک ، نسبت به تسویه حساب و پرداخت مبلغ فاکتور نهایی  قراداد، حداکثر ظرف مدت 2 ساعت اقدام نماید.  و چنانچه نسبت  به تسویه حساب در زمان مقرر اقدام ننماید ، مبلغ پانصد هزار تومان به انضمام 5 درصد از مبلغ کل معامله  از پیش پرداخت واریزی توسط خریدار به عنوان جریمه  لغو معامله کسر و مابقی مبلغ پیش پرداخت به وی مسترد می گردد. همچنین چنانچه در این خصوص خسارتی به اینکوباک یا فروشنده وارد گردد خریدار متعهد به جبران خسارت خواهد بود که مبلغ خسارت ایجاد شده به انضمام مبالغ جریمه فوق، از پیش پرداخت واریزی توسط خریدار کسر و مابقی به وی مسترد می گردد و تا تعیین تکلیف نهایی در خصوص خسارت مورد ادعا و اجرای رای"
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm._m(5),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      " بر اساس این قرارداد اینکوباک متعهد به انجام امور ذیل می باشد. "
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "6-1 اینکوباک بخشی از سایت اینترنتی خود به نام incobac.com  را برای معرفی و ارائه کالا های فروشنده اختصاص می دهد و آموزش های لازم را به فروشنده جهت بروزرسانی لیست کالاها، موجودی آنها و درج قیمت ارائه خواهد داد به نحوی که تغییراتی که در اثر فروش کالا در مقدار کالا ایجاد می گردد و همچنین مشخصات سفارش در هر لحظه برای فروشنده از طریق الکترونیکی قابل مشاهده خواهد بود."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "6-2 اینکوباک خدمات بازرسی محصولات را از طریق ارائه کارشناس کیفیت محصول قبل از بارگیری کالا جهت انطباق کالای ارسالی با شرایط قید شده در قراداد  ارائه می‌نماید. لیست آیتم ها و اوصاف و شرایطی که بایستی توسط بازرس اینکوباک مورد بررسی قرار گیرد به صورت احصایی و متناسب با هر معامله در قرارداد مربوط به آن معامله قید می‌گردد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.pageStep == 6
+              ? _c("p", { attrs: { id: "step1S6" } }, [
+                  _c("span", [
+                    _vm._v(
+                      "6-3  اینکوباک نسبت به تطابق اوصاف  ذکر شده در بند فوق مشترکاً همراه با فروشنده مطابق بند 6-4 مسئول می باشد و نسبت به سایر اوصاف و شرایط هیچ گونه مسئولیتی نداشته و چنانچه خسارتی حادث گردد فروشنده مسئول می باشد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "6-4 اینکوباک موظف به مدیریت و انتخاب فضا و ظاهر وب سایت می باشد"
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "6-5 اینکوباک متعهد می گردد جهت مدیریت موجودی و بهای کالا در سایت اینکوباک پنل نرم افزاری seller center را در اختیار فروشنده قرار دهد و همچنین آموزش های مربوطه را به فروشنده ارائه نماید ."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "6-6  اینکوباک در خصوص حمل و نقل کالا هیچ گونه وظیفه و تعهدی ندارد. نظام مسئولیت در خصوص حمل و نقل کالا مطابق بند 8-4 قرارداد حاظر می باشد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm._m(6),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "7-1 کمیسیون اینکوباک معادل ریالی و درصدی معین از مبلغ کل معامله است که در پیوست قرارداد می باشد. کمیسیون پیش از احتساب مالیات بر ارزش افزوده کالا محاسبه می گردد.  "
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "7-2مبلغ کمیسیون اینکوباک مشمول قانون مالیات بر ارزش افزوده می باشد که مبلغ آن به صورت حساب های اضافه واریز شده و دریافت می گردد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "7-3 مفروض است که کلیه قیمتهای ارائه شده توسط فروشنده بر روی وب‌سایت اینکوباک شامل مالیات بر ارزش افزوده بوده (در صورت عدم معافیت کالا) که مبلغ آن توسط خریدار نهایی پرداخت می گردد. بدیهی است اینکوباک هیچ گونه مسئولیتی در قبال مالیات بر ارزش افزوده کالای فروش رفته نداشته و فروشنده مستقیما مسئول ثبت و پرداخت مالیات بر ارزش افزوده کالای فروش رفته به سازمان امور مالیاتی کشور می باشد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.pageStep == 7
+              ? _c("p", { attrs: { id: "step1S7" } }, [
+                  _c("span", [
+                    _vm._v(
+                      "7-4مسئولیت دریافت وجه سفارشات از خریداران بر عهده اینکوباک می باشد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "7-5 اینکوباک طی هفت روز کاری بهای محصولات فروش رفته را (به غیر از سفارشات عودت داده شده یا سفارشات مورد شکایت و بررسی) که از خریدار دریافت کرده پس از کسر کمیسون  و سایر هزینه ها و مبالغ ذکر شده در قرارداد و پس از محاسبه به فروشنده پرداخت خواهد نمود"
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "تبصره: منظور از روز کاری هر روز هفته به استثنای جمعه و تعطیلات رسمی جمهوری اسلامی ایران از ساعت ۸ الی ۱7 می باشد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm._m(7),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "8-1این قرارداد از تاریخ تایید الکترونیکی(درج شده در قرارداد) به مدت یک سال شمسی( ۳۶۵ روز تقویمی ) اعتبار دارد و در موارد فورس ماژور به مدت آن اضافه میگردد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "8-2 پس از خاتمه قرارداد، تمدید قرارداد و ادامه همکاری طرفین و نحوه و شرایط آن نیاز به توافق مجدد طرفین قرارداد دارد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "8-3 تاریخ موثر شدن و شروع قرارداد از تاریخ تایید الکترونیکی قرارداد توسط فروشنده می باشد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm._m(8),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "9-1 چنانچه معامله میان خریدار و فروشنده به عللی از علل قانونی منجر به فسخ گردد، اینکوباک مستحق دریافت کمیسیون مقرر برای آن معامله می باشد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.pageStep == 8
+              ? _c("p", { attrs: { id: "step1S8" } }, [
+                  _vm._m(9),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "علاوه بر ضمانت اجرا های پیش بینی شده نسبت به برخی از تعهدات طرفین این قرارداد، چنانچه نسبت به سایر تعهدات موضوع این قرارداد هر یک از طرفین تخلفی از انجام تعهد خویش داشته باشد و در نتیجه این تخلف ضرری به منافع طرف مقابل، طرف متخلف و مقصر، متعهد به پرداخت خسارت به طرف مقابل می باشد که مطالبه خسارت و تعیین میزان آن در مرجع داوری این قرارداد به عمل می آید."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm._m(10),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "11-1طرفین اعلام  میدارند کلیه  تاییدیه ها و قبول الکترونیکی به منزله تایید و قبول حضوری و شخصی می باشد و به استناد آن تعهدات انجام می پذیرد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "11-2طرفین اعلام می دارند این قرارداد هرگونه توافق یا ترتیبات شفاهی یا کتبی مغایر با قرارداد حاضر را که ممکن است در گذشته بین طرفین واقع شده باشد نسخ می نماید."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "11-3 هیچ یک از مواد یا مفاد قرارداد حاضر به معنای شراکت یا وجود رابطه کارگر و کارفرمایی فی‌مابین فروشنده و اینکوباک نبوده و نخواهد بود."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "11-4 هیچ گونه تغییری در این توافقنامه معتبر نیست مگر با توافق کتبی یا الکترونیکی طرفین قرارداد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "11-5 طرفین اعلام می دارند مالکیت نرم افزار seller center متعلق به اینکوباک است."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm._m(11),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "12-1 مالکیت سورس کدها و پلتفرم اینکوباک متعلق به اینکوباک می باشد و طرف دوم صرفاً اجازه بهره برداری از این پلتفرم را مطابق مفاد این قرارداد و سطح دسترسی اجازه داده شده توسط این قرارداد دارا می باشد. "
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.pageStep == 9
+              ? _c("p", { attrs: { id: "step1S9" } }, [
+                  _c("span", [
+                    _vm._v(
+                      "12-2 مالکیت داده های تحصیل شده از طریق پلتفرم اینکوباک،تحلیل این داده ها، فروش نتایج تحلیل داده و استفاده پژوهشی و هرگونه استفاده دیگر از آنها با رعایت محرمانگی و عدم افشای اسرار صرفاً به اینکوباک تعلق داشته و طرف دوم هیچگونه حقی در این زمینه نخواهد داشت."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm._m(12),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "13-1 اطلاعات مربوط به این قرارداد، اسرار محرمانه تلقی می گردد لذا طرفین تضمین خواهند نمود که خود و اشخاص مرتبط با آنان اشخاص ذیربط آنها در تمام مدت این قرارداد و  پس از اتمام آن اقدامات معمول جهت محرمانه نگاه داشتن تمام اطلاعات محرمانه ای که وی یا آنان ممکن است در ارتباط با هر کدام از طرف دیگر به دست آورند محرمانه تلقی خواهند کرد و جز در راستای مقاصد قراردادی از چنین اطلاعاتی استفاده نخواهند کرد و آنها را افشا نخواهند نمود."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "13-2 طرفین باید تضمین نمایند که هر کدام از کارکنان، ماموران، مدیران عامل آنان یا اشخاص مرتبط با آنها که به موجب این قرارداد به اطلاعات محرمانه دسترسی دارند از طبیعت محرمانه این اطلاعات مطلع هستند و لازم است تا از شروط طرفین قرارداد پیروی نمایند بنابراین طرفی که اطلاعات را دریافت می نماید مسئول است که تضمین نماید تعهد رعایت محرمانگی و عدم استفاده مندرج در این ماده را به دقت رعایت می‌کند و در مقابل فعل یا ترک فعل کارکنان نمایندگان یا عوامل خود کاملا مسئول فرض می گردد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "13-3 هرگونه افشا و انتشار بدون مجوز این اطلاعات قابل تعقیب کیفری در مراجع قانونی و مطالبه خسارت در مرجع داوری این قرارداد است.  مبلغ خسارت مذکور طی داوری تعیین خواهد شد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "تبصره: اطلاعاتی که در اختیار عموم قرار دارند جزو اطلاعات محرمانه محسوب نمی گردد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm._m(13),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "14-1 منظور از فورس ماژور در این قرارداد هرگونه حادثه و پیشامد غیرقابل پیش بینی، غیر قابل دفع و خارج از اراده و کنترل طرفین است. اعم از جنگ، بلایای طبیعی، آتش‌سوزی، اعتصاب ، تغییر قوانین و مقررات یا تعطیلی ادارات و نهادهای دولتی برای مدت بیش از یک هفته که به واسطه آن طرفی که در چنین شرایطی قرار گرفته است نمی تواند تمام یا بخشی از تعهدات خود، موضوع این قرارداد یاد قوانین مرتبط را ایفا نماید."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.pageStep == 10
+              ? _c("p", { attrs: { id: "step1S10" } }, [
+                  _c("span", [
+                    _vm._v(
+                      "14-2 متعهد در صورتی از ایفای تعهدات در اثر فورس ماژور معاف می گردد که حداکثر تا  1روز پس از اطلاع از چنین وضعیتی مراتب را به اطلاع طرف دیگر رسانیده باشد. \n                    "
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm._m(14),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "هرگونه اطلاعیه یا ابلاغیه ای که قرار باشد طبق این قرارداد ابلاغ و تحویل گردد بایستی از طریق وبسایت اینکوباک یا call center انجام پذیرد و خطاب به طرف مرتبط صورت گیرد و تصریح شود که اطلاعیه یا مکاتبه موضوع این قرارداد است .طرفین می توانند به وسیله اطلاعیه نشانی خود را تغییر دهند تا تمام اطلاعیه های آتی برای آنان به نشانی جدید ارسال گردد."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm._m(15),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      " کلیه اختلافات و دعاوی ناشی از این قرارداد و یا راجع به آن از جمله انعقاد، اعتبار، فسخ ،تفسیر یا اجرای آن به مرکز داوری اتاق بازرگانی صنایع معادن و کشاورزی شیراز ارجاع می گردد. که مطابق با قانون اساسنامه و آیین داوری آن مرکز با رای یک یا سه نفر داور به صورت قطعی و لازم الاجرا حل و فصل می گردد. داور/ان علاوه بر مقررات حاکم عرف تجارتی ذیربط را نیز مراعات خواهند نمود. شرط داوری حاضر موافقتنامه مستقل از قرارداد اصلی تلقی می‌شود و در هر حال لازم الاجرا است."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm._m(16),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "قرارداد حاضر در16 ماده و پیوست های آن (اجزای لاینفک قرارداد) در یک نسخه الکترونیکی تهیه و تنظیم گردیده است و در راستای تایید مفاد آن به تایید الکترونیکی طرف دوم (که به منزله قبول و تایید و امضای حضوری وی می باشد) رسید."
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      " بنا به مراتب فوق طرفین قرارداد حاضر را از تاریخ درج شده در آن اجرایی نمودند. تمام/"
+                    )
+                  ]),
+                  _c("br"),
+                  _c("br")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.pageStep == 11
+              ? _c("p", { attrs: { id: "step1S11" } }, [
+                  _vm._m(17),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _c("b", [
+                      _vm._v("مهلت بارگیری محصول تا تاریخ "),
+                      _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.transactionInfo.loading_dead_line))
+                      ]),
+                      _vm._v(" خواهد بود.")
+                    ])
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [
+                    _c("b", [
+                      _vm._v("ردصد کمسیون اینکوباک برابر "),
+                      _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(
+                          _vm._s(_vm.transactionInfo.commission_persentage)
+                        )
+                      ]),
+                      _vm._v(" است.")
+                    ])
+                  ]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("توضیحات:")]),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(_vm._s(_vm.transactionInfo.admin_notes))]),
+                  _c("br"),
+                  _c("br")
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "factor-detail contents col-xs-12" }, [
+            _c("div", { staticClass: "factor-title" }, [
+              _c("div", { staticClass: "title-text col-xs-12 col-sm-4" }, [
+                _vm._v(
+                  "\n                    خلاصه گزارش مالی\n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "serial-number col-xs-12 col-sm-4" }, [
+                _vm._v("\n                    شماره سریال: "),
+                _c("span", [_vm._v(_vm._s(_vm.transactionInfo.id + 100000))])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "date-init col-xs-12 col-sm-4" }, [
+                _vm._v("\n                    تاریخ انعقاد: "),
+                _c("span", [
+                  _vm._v(_vm._s(_vm.transactionInfo.deal_formation_date))
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "contents-detail col-xs-12" }, [
+              _c("div", { staticClass: "  col-xs-12 col-sm-6" }, [
+                _c("table", { staticClass: "table table-striped" }, [
+                  _c("tr", [
+                    _c("td", [_vm._v("میزان فروش:")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        " " + _vm._s(_vm.transactionInfo.quantity) + " کیلو گرم"
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", [_vm._v("مبلغ  کل معامله:")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        " " +
+                          _vm._s(
+                            _vm.transactionInfo.unit_price *
+                              _vm.transactionInfo.quantity
+                          ) +
+                          " تومان"
+                      )
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-xs-12 col-sm-6" }, [
+                _c("table", { staticClass: "table table-striped" }, [
+                  _c("tr", [
+                    _c("td", [_vm._v(" قیمت واحد:")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(_vm._s(_vm.transactionInfo.unit_price) + " تومان")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", { staticClass: "green-text" }, [
+                    _c("td", [_vm._v("    مبلغ کل پس از کسر حق معامله:")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        " " +
+                          _vm._s(
+                            (1 -
+                              _vm.transactionInfo.commission_persentage *
+                                0.01) *
+                              _vm.transactionInfo.unit_price *
+                              _vm.transactionInfo.quantity
+                          ) +
+                          " تومان"
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 1 :طرفین قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 2 :موضوع قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _c("b", [_vm._v("ماده 3 :مکانیسم اجرایی عملیات خرید و فروش")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده4 : تعهدات و تضمینات فروشنده")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 5: تعهدات خریدار")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده6: تعهدات اینکوباک")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 7 :کمیسیون")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 8 :مدت و تمدید قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 9: فسخ قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 10: خسارات قراردادی")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده11:مشترکات")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 12: حقوق مالکیت فکری")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _c("b", [_vm._v("ماده 13: محرمانگی و عدم افشای اسرار")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 14:فورس ماژور")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 15: ابلاغات")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 16:حل وفصل اختلافات و داوری")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("ماده 17: نسخ قرارداد")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("b", [_vm._v("الحاقیه")])])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3f3c51e3", module.exports)
+  }
+}
+
+/***/ }),
+/* 258 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(259)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(261)
+/* template */
+var __vue_template__ = __webpack_require__(262)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-3897649e"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboard/buyer/guide.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3897649e", Component.options)
+  } else {
+    hotAPI.reload("data-v-3897649e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 259 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(260);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("1e877232", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3897649e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./guide.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3897649e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./guide.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 260 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.help[data-v-3897649e] {\n    direction: rtl;\n    padding: 0 20px;\n    line-height: 1.618;\n}\nol[data-v-3897649e] {\n    list-style: inherit;\n    list-style-type: decimal !important;\n}\nul[data-v-3897649e] {\n    padding: 0 15px;\n    list-style: inherit;\n}\n.help .title_list_help[data-v-3897649e] {\n    margin: 30px auto;\n    font-size: 16px;\n    font-weight: 800;\n}\n.help .title_list_help ol[data-v-3897649e] {\n    margin: 25px 15px;\n    font-size: 14px;\n    font-weight: 400;\n    padding: 15px 30px;\n    -webkit-box-shadow: 0 0 9px rgba(0, 0, 0, .075);\n            box-shadow: 0 0 9px rgba(0, 0, 0, .075);\n}\n.help .title_list_help li[data-v-3897649e] {\n    padding: 6px 0;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 261 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            items: [{
+                message: 'قوانین',
+                url: 'guide'
+            }]
+        };
+    }, mounted: function mounted() {
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+    }
+});
+
+/***/ }),
+/* 262 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "main-content col-xs-12" }, [
+      _c("div", { staticClass: "help" }, [
+        _c("ul", [
+          _c("li", { staticClass: "title_list_help" }, [
+            _vm._v(
+              "\n                کشاورزان و تامین کنندگان محترم، می توانید نسبت به فروش مستقیم و ثبت محصولات خود و طبق راهنمای زیر\n                اقدام کنید:\n                "
+            ),
+            _c("ol", { staticClass: "list-group" }, [
+              _c("li", [
+                _vm._v(
+                  "\n                        پروفایل خود را تکمیل کرده و منتظر تایید پروفایل خود از سوی کارشناسان اینکوباک باشید.\n                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _vm._v(
+                  "\n                        به قسمت ثبت محصول رفته و اطلاعات محصولات خود را بصورت کامل پر کنید. این محصولات بهمراه\n                        جزییات در صفحه پروفایل شخصی شما به خریداران نمایش داده می شود.\n                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _vm._v(
+                  "\n                        در صورت دریافت پیشنهاد خرید از سوی خریداران و داشتن آمادگی جهت تامین محصول، قیمت پیشنهادی،\n                        عکس محصولات و توضیحات مربوطه را به خریدار ارسال نمایید.\n                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _vm._v(
+                  "\n                        در صورت پذیرفته شدن پیشنهاد شما، کارشناسان اینکوباک جهت هماهنگی های اولیه با شما تماس خواهند\n                        گرفت.\n                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _vm._v(
+                  "\n                        درصورت ابراز آمادگی دوطرفه برای انجام معامله، در قسمت تراکنش های جاری، قراردادی مبنی بر\n                        نظرات دو طرف صادر خواهد شد.\n                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _vm._v(
+                  "\n                        معاملات مطابق با قرارداد پذیرفته شده و آنچه در پنل خود در بخش تراکش های جاری مشاهده می کنید،\n                        پیش خواهد رفت.\n                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _vm._v(
+                  "\n                        پس از انجام کامل معامله، در قسمت تراکنش های انجام شده، می توانید قرارداد پذیرفته شده و خلاصه\n                        فاکتورهای مربوطه را مشاهده کنید.\n                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _vm._v(
+                  "\n                        با تکمیل هرچه بهتر پروفایل خود می توانید نسبت به دیگر تامین کنندگان مزیت ایجاد کرده و اعتماد\n                        بیشتری به خریدار ببخشید.\n                    "
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3897649e", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

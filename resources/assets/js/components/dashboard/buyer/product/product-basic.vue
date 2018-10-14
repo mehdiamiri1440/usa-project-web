@@ -338,7 +338,7 @@
 
                                 self.popUpMsg = 'محصول شما با موفقیت ثبت شد';
                                 $('#myModal').modal('show');
-                                eventBus.$emit('submitSuccess', self.popUpMsg);
+                                eventBus.$emit('submitSuccess', this.popUpMsg);
                                 eventBus.$emit('submitingEvent', false);
                                 setTimeout(function () {
                                     location.reload(true);
