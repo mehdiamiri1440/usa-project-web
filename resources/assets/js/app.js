@@ -18,7 +18,8 @@ window.Vue = require('vue');
  */
 
 
-import loginCom from './components/login/Login.vue';
+import loginComponent from './components/login/Login.vue';
+import registerComponent from './components/register/register.vue';
 import headerDashSeller from './components/dashboard/seller/header/header.vue';
 import headerDashBuyer from './components/dashboard/buyer/header/header.vue';
 import productBasic from './components/dashboard/seller/product/product-basic.vue';
@@ -84,7 +85,8 @@ const app = new Vue({
     routerB,
     components:{
         profileBasic,
-        loginCom,
+        loginComponent,
+        registerComponent,
         headerDashSeller,
         headerDashBuyer,
         productBasic,
