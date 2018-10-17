@@ -50443,7 +50443,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.sub-header a.router-link-exact-active {\n    color: #313942;\n}\n.sub-header a.router-link-exact-active::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.header-menu a.router-link-exact-active::before,a.active::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu  a.router-link-exact-active,a.active {\n    color: #fff;\n    background: #637484;\n}\n\n", ""]);
+exports.push([module.i, "\n.sub-header a.router-link-exact-active {\n    color: #313942;\n}\n.sub-header a.router-link-exact-active::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.header-menu a.router-link-exact-active::before,a.active::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu  a.router-link-exact-active,a.active {\n    color: #fff;\n    background: #637484;\n}\n.header-menu i.fa{\n    margin: 5px;\n}\n\n", ""]);
 
 // exports
 
@@ -50455,6 +50455,15 @@ exports.push([module.i, "\n.sub-header a.router-link-exact-active {\n    color: 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -50618,7 +50627,14 @@ var render = function() {
                 class: { active: this.active_el === 1 },
                 attrs: { to: { name: "profileBasic" } }
               },
-              [_c("span", [_vm._v("ویرایش پروفایل")])]
+              [
+                _c("span", [_vm._v("ویرایش پروفایل")]),
+                _vm._v(" "),
+                _c("i", {
+                  staticClass: "fa fa-user",
+                  attrs: { "aria-hidden": "true" }
+                })
+              ]
             )
           ],
           1
@@ -50634,7 +50650,14 @@ var render = function() {
                 class: { active: this.active_el === 2 },
                 attrs: { to: { name: "buyAdRequests" } }
               },
-              [_c("span", [_vm._v("درخواست ها")])]
+              [
+                _c("span", [_vm._v("درخواست ها")]),
+                _vm._v(" "),
+                _c("i", {
+                  staticClass: "fa fa-list-alt ",
+                  attrs: { "aria-hidden": "true" }
+                })
+              ]
             )
           ],
           1
@@ -50650,7 +50673,14 @@ var render = function() {
                 class: { active: this.active_el === 3 },
                 attrs: { to: { name: "registerProduct" } }
               },
-              [_c("span", [_vm._v("ثبت محصول ")])]
+              [
+                _c("span", [_vm._v("ثبت محصول ")]),
+                _vm._v(" "),
+                _c("i", {
+                  staticClass: "fa fa-plus-square ",
+                  attrs: { "aria-hidden": "true" }
+                })
+              ]
             )
           ],
           1
@@ -50666,7 +50696,14 @@ var render = function() {
                 class: { active: this.active_el === 4 },
                 attrs: { to: { name: "myTransactions" } }
               },
-              [_c("span", [_vm._v("تراکنش های جاری")])]
+              [
+                _c("span", [_vm._v("تراکنش های جاری")]),
+                _vm._v(" "),
+                _c("i", {
+                  staticClass: "fa fa-list-ol ",
+                  attrs: { "aria-hidden": "true" }
+                })
+              ]
             )
           ],
           1
@@ -50682,7 +50719,14 @@ var render = function() {
                 class: { active: this.active_el === 5 },
                 attrs: { to: { name: "myTerminatedTransactions" } }
               },
-              [_c("span", [_vm._v("تراکنش های انجام شده")])]
+              [
+                _c("span", [_vm._v("تراکنش های انجام شده")]),
+                _vm._v(" "),
+                _c("i", {
+                  staticClass: "fa fa-th-list  ",
+                  attrs: { "aria-hidden": "true" }
+                })
+              ]
             )
           ],
           1
@@ -50698,7 +50742,14 @@ var render = function() {
                 class: { active: this.active_el === 6 },
                 attrs: { to: { name: "guide" } }
               },
-              [_c("span", [_vm._v("راهنما")])]
+              [
+                _c("span", [_vm._v("راهنما")]),
+                _vm._v(" "),
+                _c("i", {
+                  staticClass: "fa fa-question-circle  ",
+                  attrs: { "aria-hidden": "true" }
+                })
+              ]
             )
           ],
           1
@@ -58294,7 +58345,12 @@ var render = function() {
               ])
             : _vm._e()
         ])
-      : _c("div", { staticClass: "loading_images  col-xs-12" })
+      : _c("div", { staticClass: "loading_images  col-xs-12" }, [
+          _c("img", {
+            staticStyle: { width: "200px", height: "200px" },
+            attrs: { src: _vm.loading }
+          })
+        ])
   ])
 }
 var staticRenderFns = [

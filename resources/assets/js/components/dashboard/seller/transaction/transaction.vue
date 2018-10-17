@@ -692,7 +692,7 @@
             <!--end part 3-->
         </section>
         <div class="loading_images  col-xs-12" v-else>
-           <!--<img src="{{asset('assets/img/gif/loading.gif')}}" style="width:200px;height:200px">-->
+           <img :src="loading" style="width:200px;height:200px">
         </div>
 
     </div>
