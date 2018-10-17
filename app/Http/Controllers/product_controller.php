@@ -11,6 +11,7 @@ use App\category;
 use Carbon\Carbon;
 use App\product_statistics;
 use App\profile;
+use App\user_product;
 use DB;
 
 
@@ -593,6 +594,76 @@ class product_controller extends Controller
         }
         else return null;
         
+    }
+    
+    //public method
+    public function does_buyer_already_had_requested_the_product(Request $request)
+    {
+        if(session('is_buyer')){
+            $this->validate($request,[
+                'product_id' => 'required|integer|min:1', 
+            ]);
+            
+            $product_id = $request->product_id;
+            
+            $user_id = session('user_id');
+            
+            $user_record = myuser::find($user_id);
+            
+            $user_product_table_record = user_product::where('product_id',$product_id)
+                                                ->where('myuser_id',$user_id)
+                                                ->get()
+                                                ->first();
+            
+            if($user_product_table_record){ //user already had sent buy request for the product
+                return response()->json([
+                   'status' => true, 
+                ],200);
+            }
+            else {
+                return response()->json([
+                    'status' => false,
+                ],200);
+            }
+        }
+        else{
+            return response()->json([
+               'status' => true,
+               'msg' => 'Not Autorized!',    
+            ],404);
+        }
+    }
+    
+    //public method
+    public function register_buyer_request_for_the_product(Request $request)
+    {
+        if(session('is_buyer')){
+            $this->validate($request,[
+                'product_id' => 'required|integer|min:1', 
+            ]);
+            
+            $product_id = $request->product_id;
+            
+            $user_id = session('user_id');
+            
+            $user_product_record = new user_product();
+            
+            $user_product_record->myuser_id = $user_id;
+            $user_product_record->product_id = $product_id;
+            
+            $user_product_record->save();
+            
+            return response()->json([
+                'status' => true,
+                'msg' => 'record added!',
+            ],201);
+        }
+        else{
+            return response()->json([
+                'status' => false,
+                'msg' => 'Not Authorized!',
+            ],404);
+        }
     }
 	
 	

@@ -57,7 +57,7 @@ class user_controller extends Controller
 			'city' => 'required',
             'category_id' => 'required|integer|min:1',
             'activity_type' => 'required',
-            'national_code' => 'required|unique:myusers'
+            'national_code' => 'required|unique:myusers',
 		);
 		$this->validate($request,$rules);
 		

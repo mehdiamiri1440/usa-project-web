@@ -10,6 +10,7 @@ use App\category;
 use App\buyAd;
 use App\myuser;
 use App\factor;
+use App\profile;
 use Illuminate\Http\Request;
 
 class admin_transaction_controller extends Controller
@@ -26,6 +27,7 @@ class admin_transaction_controller extends Controller
     ];
     
     protected $waiting_for_transaction_termination_status = '0000000001111111';
+    protected $waiting_for_transaction_checkout_status = '0000000011111111';
     
     public function load_waiting_to_initiate_transactions_list()
     {
@@ -72,9 +74,26 @@ class admin_transaction_controller extends Controller
         $buyAd_user_info = myuser::find($buyAd->myuser_id);
         $sell_offer_user_info = myuser::find($sell_offer->myuser_id);
         
+        $sell_offer_user_profile_info = profile::where('myuser_id',$sell_offer->myuser_id)
+                                            ->where('confirmed',true)
+                                            ->get()
+                                            ->last();                                            
+                                            
+        
+        $prepayment_factor_record = null;
+        $payment_factor_record = null;
+        
         if($sell_offer->transaction_status == $this->waitig_for_factor_issuance_statuses['buyer']['payment']){
             $prepayment_factor_record = factor::where('sell_offer_id',$sell_offer->id)
                                                 ->where('type','prepayment')
+                                                ->get()
+                                                ->first()
+                                                ;
+        }
+        
+        if($sell_offer->transaction_status == $this->waiting_for_transaction_checkout_status){
+            $payment_factor_record = factor::where('sell_offer_id',$sell_offer->id)
+                                                ->where('type','payment')
                                                 ->get()
                                                 ->first()
                                                 ;
@@ -85,7 +104,9 @@ class admin_transaction_controller extends Controller
             'buyAd' => $buyAd,
             'sell_offer_user_info' => $sell_offer_user_info,
             'buyAd_user_info' => $buyAd_user_info,
-            'prepayment_factor' => $prepayment_factor_record,
+            'sell_offer_user_profile_info' => $sell_offer_user_profile_info,
+            'prepayment_factor' => $prepayment_factor_record ? $prepayment_factor_record : null, 
+            'payment_factor' => $payment_factor_record ? $payment_factor_record : null,
         ]);
     }
     
@@ -176,5 +197,22 @@ class admin_transaction_controller extends Controller
         ]);  
     }
     
+    //public method
+    public function load_waiting_for_checkout_transaction_list(Request $request)
+    {
+        $transactions = sell_offer::where('transaction_status',$this->waiting_for_transaction_checkout_status)
+                            ->get();
+        
+        $date_convertor_object = new date_convertor();
+        
+        $transactions->each(function($transaction) use($date_convertor_object){            
+            $transaction['date_from'] = $date_convertor_object->get_persian_date($transaction->valid_date_from);
+            $transaction['date_to'] = $date_convertor_object->get_persian_date($transaction->valid_date_to);
+        });
+        
+        return view('admin_panel.transactionCheckOutList',[
+           'sell_offers' => $transactions, 
+        ]);  
+    }
     
 }

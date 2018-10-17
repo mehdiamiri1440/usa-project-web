@@ -86,32 +86,32 @@ var app = new Vue({
         },
         send_verification_code:function(){
             this.step2.reSendCode = false;
-            
+
             var self = this;
             axios.post("/send_verification_code",{
                 phone : this.toLatinNumbers(this.step1.phone)
             })
-            .then(function(response){
-                self.goToStep(2);
-                
-                self.step2.verification_code = '';
-                self.errors.verification_code = []; 
-                
-                setTimeout(function(){
-                    self.step2.reSendCode = true;
-                },60000);
-            })
-            .catch(function(err){
-                self.errors.phone = err.response.data.errors.phone; 
-            });
+                .then(function(response){
+                    self.goToStep(2);
+
+                    self.step2.verification_code = '';
+                    self.errors.verification_code = [];
+
+                    setTimeout(function(){
+                        self.step2.reSendCode = true;
+                    },60000);
+                })
+                .catch(function(err){
+                    self.errors.phone = err.response.data.errors.phone;
+                });
         },
         verify_code:function(){
             var self = this;
-            
+
             axios.post('/verify_code',{
                 verification_code:this.toLatinNumbers(this.step2.verification_code)
             }).then(function (response){
-                
+
                 if (response.data.status == true){
                     self.goToStep(3);
                     self.getProvinceList();
@@ -125,33 +125,33 @@ var app = new Vue({
                 self.errors.verification_code = [];
                 self.errors.verification_code.push('وارد کردن کد الزامی است.');
             });
-            
+
         },
         register_details:function(){
             this.errorFlag = false;
-            
+
             this.checkStep3();
-            
+
             if(this.errorFlag == false && this.userNameUnique == true && this.nationalCodeUnique == true){
-                 this.goToStep(4);
-                 this.getCategory();
+                this.goToStep(4);
+                this.getCategory();
             }
         },
         submitForm:function(){
-           var self = this;
-            
-           this.errorFlag = false;
-            
-           this.checkStep4();
-           
-           if(this.step4.rules != 1){
-               this.popUpMsg = 'پذیرش قوانین ثبت آگهی الزامی است.';
-               
-               $('#myModal').modal('show');
-               return ;
-           }
-           
-           var object = {
+            var self = this;
+
+            this.errorFlag = false;
+
+            this.checkStep4();
+
+            if(this.step4.rules != 1){
+                this.popUpMsg = 'پذیرش قوانین ثبت آگهی الزامی است.';
+
+                $('#myModal').modal('show');
+                return ;
+            }
+
+            var object = {
                 phone:this.step1.phone,
                 first_name:this.step3.first_name,
                 last_name:this.step3.last_name,
@@ -164,30 +164,30 @@ var app = new Vue({
                 national_code:this.toLatinNumbers(this.step3.national_code),
                 category_id:this.step4.categoryId
             };
-            
+
             if(this.errorFlag == false){
-                 axios.post('api/v1/users',object)
+                axios.post('api/v1/users',object)
                     .then(function (response){
                         if(response.status == 201){
-                            
+
                             self.popUpMsg = 'ثبت نام با موفقیت انجام شد.در حال انتقال به صفحه ی ورود...';
-                            
+
                             $('#myModal').modal('show');
-                            
+
                             setTimeout(function(){
-                                window.location.href = '/login';   
+                                window.location.href = '/login';
                             },3000);
                         }
-                 })
-                .catch(function(err){
-                     
-                 });                
+                    })
+                    .catch(function(err){
+
+                    });
             }
         },
         setCategoryId:function(e){
             e.preventDefault();
-            
-            this.step4.categoryId = $(e.target).val();  
+
+            this.step4.categoryId = $(e.target).val();
         },
         checkStep3:function(){
             this.userNameValidator(this.step3.user_name);
@@ -200,11 +200,11 @@ var app = new Vue({
             this.sexValidator(this.step3.sex);
         },
         checkStep4:function(){
-            this.categoryIdValidator(this.step4.categoryId);  
+            this.categoryIdValidator(this.step4.categoryId);
         },
         firstNameValidator:function(name){
             this.errors.first_name = [];
-            
+
             if(name === ''){
                 this.errors.first_name.push('فیلد الزامی است');
                 this.errorFlag = true;
@@ -216,7 +216,7 @@ var app = new Vue({
         },
         lastNameValidator:function(name){
             this.errors.last_name = [];
-            
+
             if(name === ''){
                 this.errors.last_name.push('فیلد الزامی است');
                 this.errorFlag = true;
@@ -228,7 +228,7 @@ var app = new Vue({
         },
         provinceValidator:function(province){
             this.errors.province = [];
-            
+
             if(province === ''){
                 this.errors.province.push('فیلد استان الزامی است');
                 this.errorFlag = true;
@@ -240,7 +240,7 @@ var app = new Vue({
         },
         cityValidator:function(city){
             this.errors.city = [];
-            
+
             if(city === ''){
                 this.errors.city.push('فیلد شهر الزامی است');
                 this.errorFlag = true;
@@ -254,10 +254,10 @@ var app = new Vue({
             if(this.userNameUnique == true){
                 this.errors.user_name = [];
             }
-            
+
             if(userName == ''){
                 this.errors.user_name.push('نام کاربری الزامی است');
-                
+
                 this.errorFlag = true;
             }
             if( ! this.validateRegx(userName,/^\w+$/)){
@@ -267,11 +267,11 @@ var app = new Vue({
         },
         nationalCodeValidator:function(code){
             code = this.toLatinNumbers(code);
-            
+
             if(this.nationalCodeUnique == true){
                 this.errors.national_code = [];
             }
-            
+
             if(code === ''){
                 this.errors.national_code.push('کد ملی الزامی است');
                 this.errorFlag = true;
@@ -285,18 +285,18 @@ var app = new Vue({
             if (!/^\d{10}$/.test(input)){
                 return false;
             }
- 
+
             var check = parseInt(input[9]);
             var sum = [0, 1, 2, 3, 4, 5, 6, 7, 8]
                 .map(function (x) { return parseInt(input[x]) * (10 - x); })
                 .reduce(function (x, y) { return x + y; }) % 11;
- 
+
             return sum < 2 && check == sum || sum >= 2 && check + sum == 11;
         },
         passwordValidator:function(pass,passConf){
             this.errors.password = [];
             this.errors.password_conf = [];
-            
+
             if(pass === ''){
                 this.errors.password.push('رمز عبور الزامی است');
                 this.errorFlag = true;
@@ -316,7 +316,7 @@ var app = new Vue({
         },
         sexValidator:function(sex){
             this.errors.sex = [];
-            
+
             if(sex === ''){
                 this.errors.sex.push('جنسیت الرامی است');
                 this.errorFlag = true;
@@ -331,7 +331,7 @@ var app = new Vue({
             }
         },
         validateRegx:function(input,regx){
-            return regx.test(input);  
+            return regx.test(input);
         },
         getCategory:function(){
             axios.post('/get_category_list').then(response => (this.step4.categoryList = response.data.categories));
@@ -347,27 +347,27 @@ var app = new Vue({
             axios.post('/location/get_location_info',{
                 province_id : provinceId
             })
-            .then(response => (this.step3.cityList = response.data.cities));
+                .then(response => (this.step3.cityList = response.data.cities));
         },
         setProvinceName:function(e){
             e.preventDefault();
-            
+
             this.step3.province = $(e.target).val();
-            
+
             var provinceId = '';
-            
+
             for(var i = 0 ; i < this.step3.provinceList.length ; i++){
                 if(this.step3.province == this.step3.provinceList[i].province_name){
                     provinceId = this.step3.provinceList[i].id ;
                     break;
                 }
             }
-            
+
             this.getCityList(provinceId);
         },
         setCityName:function(e){
             e.preventDefault();
-            
+
             this.step3.city = $(e.target).val();
         },
         toLatinNumbers:function(num){
@@ -387,11 +387,11 @@ var app = new Vue({
                 '۹': '9',
             };
 
-            return num    
+            return num
                 .toString()
                 .replace(/[۰-۹]/g,function(w){
-                    return numDic[w]; 
-            });
+                    return numDic[w];
+                });
         },
     },
     watch:{
@@ -401,51 +401,51 @@ var app = new Vue({
                 axios.post('user/is_user_name_unique',{
                     user_name : this.step3.user_name,
                 })
-                .then(function(response){
-                    if(response.data.status == true){
+                    .then(function(response){
+                        if(response.data.status == true){
+                            self.errors.user_name = [];
+                            self.userNameUnique = true;
+                        }
+                    })
+                    .catch(function(err){
                         self.errors.user_name = [];
-                        self.userNameUnique = true;
-                    }
-                })
-                .catch(function(err){
-                    self.errors.user_name = [];
-                    self.errors.user_name.push('نام کاربری قبلا گرفته شده');
-                    
-                    self.errorFlag = true;
-                    self.userNameUnique = false;
-                });
-            }  
+                        self.errors.user_name.push('نام کاربری قبلا گرفته شده');
+
+                        self.errorFlag = true;
+                        self.userNameUnique = false;
+                    });
+            }
         },
         'step3.national_code':function(){
             var self = this;
-            
+
             this.step3.national_code = this.toLatinNumbers(this.step3.national_code);
-            
+
             if(this.step3.national_code.length > 0 && this.step3.national_code < 10){
                 this.errors.national_code = [];
                 this.errors.national_code.push('کد ملی ۱۰ رقمی است');
-                
+
                 this.errorFlag = true;
             }
             else if(this.step3.national_code.length == 10){
                 axios.post('user/is_national_code_unique',{
                     national_code: this.toLatinNumbers(this.step3.national_code),
                 })
-                .then(function(response){
-                    if(response.data.status == true){
+                    .then(function(response){
+                        if(response.data.status == true){
+                            self.errors.national_code = [];
+                            self.nationalCodeUnique = true;
+                        }
+                    })
+                    .catch(function(err){
                         self.errors.national_code = [];
-                        self.nationalCodeUnique = true;
-                    }                    
-                })
-                .catch(function(err){
-                    self.errors.national_code = [];
-                    self.errors.national_code.push('کد ملی قبلا گرفته شده');
-                    
-                    self.errorFlag = true;
-                    self.nationalCodeUnique = false;
-                });
+                        self.errors.national_code.push('کد ملی قبلا گرفته شده');
+
+                        self.errorFlag = true;
+                        self.nationalCodeUnique = false;
+                    });
             }
-            
+
         }
     }
 });
