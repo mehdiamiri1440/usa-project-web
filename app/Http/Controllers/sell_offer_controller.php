@@ -11,6 +11,7 @@ use App\category;
 use App\myuser;
 use App\profile;
 use Carbon\Carbon;
+use JWTAuth;
 
 class sell_offer_controller extends Controller
 {
@@ -229,6 +230,13 @@ class sell_offer_controller extends Controller
     //public method
     public function get_my_sell_offer_list()
     {
+//        $user = JWTAuth::parseToken()->authenticate();
+//        $userId = $user->id;
+//        
+//        return response()->json([
+//           'user_id' => $userId,
+//        ]);
+        
         $user_id = session('user_id');
         
         $sell_offers = sell_offer::where('myuser_id',$user_id)

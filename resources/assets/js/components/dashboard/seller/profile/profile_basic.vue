@@ -229,7 +229,6 @@
         height: 150px;
         overflow: hidden;
         border-radius: 50%;
-        display: none;
     }
 
     .img-profile i {
@@ -553,7 +552,7 @@
             <div class="img-profile col-md-3">
                 <div class="image-input">
                     <div v-if="currentUser.profile.profile_photo">
-                        <img :src="storage + '/' + currentUser.profile.profile_photo" id="blah"
+                        <img :src="str + '/' + currentUser.profile.profile_photo" id="blah"
                              alt="تصویر پروفایل">
                     </div>
                     <div v-else>
@@ -660,7 +659,7 @@
 
     export default {
         props: [
-            'storage',
+            'str',
             'defultimg'
         ],
         data: function () {
@@ -668,11 +667,13 @@
                 currentUser: {
                     profile: {
                         is_company: '',
-                        company_name: '',
-                        company_register_code: '',
-                        address: '',
-                        public_phone: '',
-                        profile_photo: '',
+                        company_name:'',
+                        company_register_code:'',
+                        address:'',
+                        public_phone:'',
+                        profile_photo:'',
+                        postal_code:'',
+                        shaba_code:'',
                     },
                     user_info: '',
                 },
@@ -682,6 +683,8 @@
                     'company_register_code',
                     'public_phone',
                     'address',
+                    'postal_code',
+                    'shaba_code',
                 ],
                 profilePhoto: '',
                 errors: '',
@@ -706,9 +709,7 @@
             init: function () {
                 this.isLoaded = true;
                 axios.post('/user/profile_info')
-                    .then(response => (this.currentUser = response.data)
-                    )
-                ;
+                    .then(response => (this.currentUser = response.data));
             },
             RegisterBasicProfileInfo: function () {
                 eventBus.$emit('submitingEvent', true);

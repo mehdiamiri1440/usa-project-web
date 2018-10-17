@@ -22,6 +22,8 @@ class profile_controller extends Controller
         'company_register_code',
         'public_phone',
         'address',
+        'postal_code',
+        'shaba_code',
     );
     
     protected $user_fields_exclude_array = [
@@ -60,6 +62,7 @@ class profile_controller extends Controller
                 $status = $this->change_user_profile_record($request,$profile_object,$last_confirmed_profile_record->id);
             }
             else{
+                $action = "Insert";
                 $action = "Insert";
                 $profile_object = new profile();
                 
@@ -126,7 +129,9 @@ class profile_controller extends Controller
             'human_resource_count' => 'regex:/^[0-9\x{06F0}-\x{06F9}]+$/u',
             'profile_photo' => 'image|mimes:png,jpg,jpeg|max:2000',
             'is_company' => 'required|boolean',
-            'public_phone' => 'required|regex:/^[0-9\x{06F0}-\x{06F9}]+$/u|min:11'
+            'public_phone' => 'required|regex:/^[0-9\x{06F0}-\x{06F9}]+$/u|min:11',
+            'postal_code' => 'required',
+            'shaba_code' => 'required',
         ];
         
         if($request->is_company)

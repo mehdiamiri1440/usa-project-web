@@ -648,7 +648,10 @@
               popUpMsg:'',
               submiting:false,
               contractConfirmed:false,
-              currentUser:'',
+              currentUser:{
+                  user_info:'',
+                  profile:''
+              },
               items: [
                   {
                       message: 'قرارداد',

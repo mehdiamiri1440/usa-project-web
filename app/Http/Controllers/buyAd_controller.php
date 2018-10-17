@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use http\Env\Response;
 use \Illuminate\Http\Request;
 use App\Http\Library\date_convertor;
 use App\product;
@@ -116,7 +115,7 @@ class buyAd_controller extends Controller
         
         foreach($this->buyAd_register_nullable_fields_array_with_validation_rules as $field_name => $validation_rules)
         {
-            if(!is_null($request->$field_name))
+            if($request->filled($field_name))
             {
                 $rules[$field_name] = $validation_rules;
             }
@@ -288,7 +287,7 @@ class buyAd_controller extends Controller
                 ->get($this->profile_info_sent_by_buy_ad_array)
                 ->last();
 			
-			$buyAd_related_data['photos'] = $buyAd_related_photos;
+			$buyAd_related_data['photos'] = $buyAd_related_photos ;
 			 
 			
 			$buyAd_parent_category_data =  $buyAd->category;
@@ -727,14 +726,12 @@ class buyAd_controller extends Controller
             $buyAd['category_name'] = $category_array['category_name'];
             $buyAd['subcategory_name'] = $category_array['subcategory_name'];
             $buyAd['photos'] = $this->get_file_path_array($related_media_records);
-            
-         /*   return view('dashboard.seller.request.buyAd-request-detail',[
-               'buyAd' => $buyAd, 
-            ]); */
-         return response()->json([
-             'status' => true,
-             'buyAd' => $buyAd
-         ]);
+
+            return response()->json([
+                'status' => true,
+                'buyAd' => $buyAd
+            ],200);
+
         }
         else{
             return response()->json([
