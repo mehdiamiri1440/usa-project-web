@@ -6,8 +6,7 @@ use \Illuminate\Http\Request;
 use App\services\v1\userService;
 use App\profile;
 use App\myuser;
-use JWTFactory;
-use JWTAuth;
+
 use Illuminate\Support\Facades\Auth;
 
 class user_controller extends Controller
@@ -33,21 +32,8 @@ class user_controller extends Controller
 		if($user)
 		{
 			$this->set_user_session($user);
-            //jwt
-            $token = JWTAuth::fromUser($user);
-//			$credentials = $request->only('phone', 'password');
-//            
-//            try {
-//                if (! $token = JWTAuth::attempt($credentials)) {
-//                    return response()->json(['error' => 'invalid_credentials'], 401);
-//                }
-//            }catch (JWTException $e) {
-//                return response()->json(['error' => 'could_not_create_token'], 500);
-//            }
-            //jwt end
 			 return response()->json([
 			 	'status' => TRUE,
-                'token' => $token,
 			 	'msg' => 'Login successfull'
 			 ],200);
 		}		
