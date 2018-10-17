@@ -726,10 +726,12 @@ class buyAd_controller extends Controller
             $buyAd['category_name'] = $category_array['category_name'];
             $buyAd['subcategory_name'] = $category_array['subcategory_name'];
             $buyAd['photos'] = $this->get_file_path_array($related_media_records);
-            
-            return view('dashboard.seller.request.buyAd-request-detail',[
-               'buyAd' => $buyAd, 
-            ]);         
+
+            return response()->json([
+                'status' => true,
+                'buyAd' => $buyAd
+            ],200);
+
         }
         else{
             return response()->json([

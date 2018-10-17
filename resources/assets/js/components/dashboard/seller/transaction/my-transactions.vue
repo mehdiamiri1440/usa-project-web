@@ -189,8 +189,10 @@
         ],
         data: function () {
             return {
-                transactions: '',
-                isLoading: true,
+                transactions:'',
+                isLoading:true,
+                popUpMsg:'',
+                submiting:false,
                 items: [
                     {
                         message: 'لیست تراکنش ها',

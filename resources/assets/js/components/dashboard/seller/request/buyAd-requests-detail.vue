@@ -302,43 +302,37 @@
                 <div class="top-contentas  col-xs-12">
                     <div class="main-article-content col-md-7">
                         <h3>
-                            <!--{{$buyAd->category_name . ' | ' . $buyAd->subcategory_name . ' | ' .$buyAd->name}}-->
-                            خشکبار | انجیر |
+                            {{buyAd.category_name + ' | ' + buyAd.subcategory_name  + ( buyAd.name != null ?  " | " + buyAd.name : "" ) }}
                         </h3>
                         <br/>
                         <table class="table table-striped">
                           <tbody>
                           <tr>
                               <td>قیمت واحد<span class="">(هر کیلو به تومان)</span> :</td>
-                              <!--<td> {{$buyAd->price or "-" }} تومان</td>-->
-                              <td>  - تومان</td>
+                              <td> {{buyAd.price !=  null ? buyAd.price + " تومان " : "-" }} </td>
                           </tr>
                           <tr>
                               <td> محل تحویل کالا:</td>
-                              <!--<td>{{$buyAd->address}}</td>-->
+                              <td>{{buyAd.address}}</td>
                           </tr>
                           <tr>
                               <td> میزان نیازمندی</td>
-                              <!--<td>{{$buyAd->requirement_amount}} کیلوگرم</td>-->
-                              <td>32 کیلوگرم</td>
+                              <td>{{buyAd.requirement_amount}} کیلوگرم</td>
                           </tr>
                           <tr>
                               <td> زمان ثبت درخواست:</td>
-                              <!--<td>{{$buyAd->register_date}}</td>-->
-                              <td>۳۰ مرداد , ۱۳۹۷</td>
+                              <td>{{buyAd.register_date}}</td>
                           </tr>
                           </tbody>
                         </table>
-                        <p>توضیحات: <span>خوب باشه</span></p>
-                        <!--<p>توضیحات: <span>{{$buyAd->description}}</span></p>-->
+                        <p>توضیحات: <span>{{buyAd.description}}</span></p>
                     </div>
                     <div class="image-article-content col-md-5">
                         <div class="main-image col-xs-12">
-                         <!--   @if(sizeof($buyAd->photos) > 0)
-                            <a  href="{{url('storage/'.($buyAd->photos ? $buyAd->photos[0] : ''))}}"><img src="{{url('storage/'.($buyAd->photos ? $buyAd->photos[0] : ''))}}" alt=""></a>
-                            @else-->
-                            <a :href="defimgitem"><img :src="defimgitem"></a>
-                            <!--@endif-->
+
+                            <a v-if="buyAd.photos[0] != null"  :href="str + '/' + buyAd.photos[0]"><img :src="str + '/' + buyAd.photos[0]" alt="photo"></a>
+                            <a v-else :href="defimgitem"><img :src="defimgitem"></a>
+
                         </div>
                         <div class="owl-carousel col-xs-12">
                             <!--@foreach($buyAd->photos as $photo)-->
@@ -351,7 +345,7 @@
                     <form>
                         <label class="header-lable">تمامی موارد خواسته شده را وارد کرده و برای خریدار ارسال نمایید.</label>
                         <div class="fields col-xs-12">
-                            <!--<input type="hidden" value="{{$buyAd->id}}" ref="buyAdId">-->
+                            <input type="hidden" :value="buyAd.id" ref="buyAdId">
                             <div class="col-sm-6">
                                 <label class="content-lable">
                                     محل تحویل
@@ -413,129 +407,6 @@
             </div>
         </div>
     </section>
-<!--    <section class="main-content col-xs-12">
-        <div class="contents col-xs-12">
-            <div class="info-contents col-xs-12">
-                <div class="top-contentas  col-xs-12">
-                    <div class="main-article-content col-md-7">
-                      <h3>
-                          خشکبار | انجیر |
-                          &lt;!&ndash;{{$buyAd->category_name . ' | ' . $buyAd->subcategory_name . ' | ' .$buyAd->name}}&ndash;&gt;
-                        </h3>
-                        <br/>
-                        <table class="table table-striped">
-                            <tr>
-                                <td>قیمت واحد<span class="">(هر کیلو به تومان)</span> :</td>
-                             &lt;!&ndash;   <td> {{$buyAd->price or "-" }} تومان</td>&ndash;&gt;
-                            </tr>
-                            <tr>
-                                <td> محل تحویل کالا:</td>
-                       &lt;!&ndash;         <td>{{$buyAd->address}}</td>&ndash;&gt;
-                            </tr>
-                            <tr>
-                                <td> میزان نیازمندی</td>
-                                &lt;!&ndash;<td>{{$buyAd->requirement_amount}} کیلوگرم</td>&ndash;&gt;
-                            </tr>
-                            <tr>
-                                <td> زمان ثبت درخواست:</td>
-                                &lt;!&ndash;<td>{{$buyAd->register_date}}</td>&ndash;&gt;
-                            </tr>
-                        </table>
-                        &lt;!&ndash;<p>توضیحات: <span>{{$buyAd->description}}</span></p>&ndash;&gt;
-                        <p>توضیحات: <span> خوب باشه</span></p>
-                    </div>
-                    <div class="image-article-content col-md-5">
-                        <div class="main-image col-xs-12">
-                            &lt;!&ndash;@if(sizeof($buyAd->photos) > 0)
-                            <a href="{{url('storage/'.($buyAd->photos ? $buyAd->photos[0] : ''))}}"><img
-                                    src="{{url('storage/'.($buyAd->photos ? $buyAd->photos[0] : ''))}}"
-                                    alt=""></a>
-                            @else
-                            <a href="{{asset('assets/img/product.jpg')}}"><img
-                                    src="{{asset('assets/img/product.jpg')}}"></a>
-                            @endif&ndash;&gt;
-                        </div>
-                        <div class="owl-carousel col-xs-12">
-                        &lt;!&ndash;    @foreach($buyAd->photos as $photo)
-                            <a href="{{url('storage/'.$photo)}}"><img src="{{url('storage/'.$photo)}}"
-                                                                      alt=""></a>
-                            @endforeach&ndash;&gt;
-                        </div>
-                    </div>
-                </div>
-                <div class="bottom-contents  col-xs-12">
-                    <form>
-                        <label class="header-lable">تمامی موارد خواسته شده را وارد کرده و برای خریدار ارسال
-                            نمایید.</label>
-                       <div class="fields col-xs-12">
-                            &lt;!&ndash;<input type="hidden" value="{{$buyAd->id}}" ref="buyAdId">&ndash;&gt;
-                            <div class="col-sm-6">
-                                <label class="content-lable">
-                                    محل تحویل
-                                </label>
-                                <input type="text" v-model="sellOffer.deliver_at">
-                                <span v-if="errors.deliver_at"
-                                      class="text-danger">{{ errors.deliver_at[0] }}</span>
-                            </div>
-                            <div class="col-sm-6">
-
-                                <label class="content-lable">
-                                    قیمت پیشنهادی به ازای هر کیلو به تومان
-                                </label>
-                                <input type="text" v-model="sellOffer.price">
-                                <span v-if="errors.price" class="text-danger">{{ errors.price[0] }}</span>
-                            </div>
-                            <div class="col-sm-6">
-                                <label class="content-lable">
-                                    تاریخ موجودی
-                                </label>
-                                <input readonly="true" type="text" id="first-date-id" ref="validDateFrom">
-                                <span v-if="errors.valid_date_to"
-                                      class="text-danger">{{ errors.valid_date_to[0] }}</span>
-                            </div>
-                            <div class="col-sm-6">
-
-                                <label class="content-lable">
-                                    انتهای تاریخ موجودی
-                                </label>
-                                <input readonly="true" type="text" id="end-date-id" ref="validDateTo">
-                                <span v-if="errors.valid_date_from" class="text-danger">{{ errors.valid_date_from[0] }}</span>
-                            </div>
-                            <div class="col-xs-12">
-
-                                <label class="content-lable">
-                                    توضیحات:
-                                </label>
-                                <textarea placeholder="" v-model="sellOffer.description"></textarea>
-                                <span v-if="errors.description"
-                                      class="text-danger">{{ errors.description[0] }}</span>
-                            </div>
-                            <div class="image_company col-xs-12">
-
-                                <label class="content-lable">
-                                    تصاویر:
-                                </label>
-                                <input type="file" ref="sellOfferFiles" multiple accept="image/*"
-                                       @change="handleSellOfferFileUpload()">
-                                <span v-if="errors.photos_count"
-                                      class="text-danger">{{ errors.photos_count[0] }}</span>
-                            </div>
-                            <div class="col-sm-6">
-                                <button type="button" class="col-xs-12 green-bot" @click="submitSellOffer">تایید
-                                </button>
-                            </div>
-                            <div class="col-sm-6">
-                                <router-link :to="{name : 'buyAdRequests'}" class="black-bot col-xs-12 col-xs-6">بازگشت
-                                    به صفحه قبل</router-link>
-                            </div>
-
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>-->
 
 </div>
 </template>
@@ -546,7 +417,8 @@
 
     export default {
         props:[
-            'defimgitem'
+            'defimgitem',
+            'str'
         ],
         data:function(){
           return{
@@ -570,6 +442,10 @@
               sellOfferFiles:[],
               errors:[],
               popUpMsg:'',
+              buyAd:{
+                  photos:'',
+              },
+              buyAdId: this.$route.params.id,
               items: [
                   {
                       message: 'درخواست من ',
@@ -580,6 +456,12 @@
         },
         methods:{
             init:function(){
+                 var self = this;
+                 axios.post('dashboard/buyAd-request-detail/' + this.buyAdId)
+                     .then(function (response) {
+                        self.buyAd = response.data.buyAd;
+                     });
+
 
             },
             submitSellOffer:function(){

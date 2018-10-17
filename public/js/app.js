@@ -60307,7 +60307,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             popUpMsg: '',
             submiting: false,
             contractConfirmed: false,
-            currentUser: '',
+            currentUser: {
+                user_info: '',
+                profile: ''
+            },
             items: [{
                 message: 'قرارداد',
                 url: 'profileContract'
@@ -62047,141 +62050,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['defimgitem'],
+    props: ['defimgitem', 'str'],
     data: function data() {
         return {
             currentUser: {
@@ -62200,6 +62074,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             sellOfferFiles: [],
             errors: [],
             popUpMsg: '',
+            buyAd: {
+                photos: ''
+            },
+            buyAdId: this.$route.params.id,
             items: [{
                 message: 'درخواست من ',
                 url: '#'
@@ -62207,7 +62085,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     methods: {
-        init: function init() {},
+        init: function init() {
+            var self = this;
+            axios.post('dashboard/buyAd-request-detail/' + this.buyAdId).then(function (response) {
+                self.buyAd = response.data.buyAd;
+            });
+        },
         submitSellOffer: function submitSellOffer() {
             var self = this;
 
@@ -62302,13 +62185,86 @@ var render = function() {
       _c("div", { staticClass: "contents col-xs-12" }, [
         _c("div", { staticClass: "info-contents col-xs-12" }, [
           _c("div", { staticClass: "top-contentas  col-xs-12" }, [
-            _vm._m(0),
+            _c("div", { staticClass: "main-article-content col-md-7" }, [
+              _c("h3", [
+                _vm._v(
+                  "\r\n                            " +
+                    _vm._s(
+                      _vm.buyAd.category_name +
+                        " | " +
+                        _vm.buyAd.subcategory_name +
+                        (_vm.buyAd.name != null ? " | " + _vm.buyAd.name : "")
+                    ) +
+                    "\r\n                        "
+                )
+              ]),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("table", { staticClass: "table table-striped" }, [
+                _c("tbody", [
+                  _c("tr", [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        " " +
+                          _vm._s(
+                            _vm.buyAd.price != null
+                              ? _vm.buyAd.price + " تومان "
+                              : "-"
+                          ) +
+                          " "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", [_vm._v(" محل تحویل کالا:")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(_vm.buyAd.address))])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", [_vm._v(" میزان نیازمندی")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(_vm._s(_vm.buyAd.requirement_amount) + " کیلوگرم")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", [_vm._v(" زمان ثبت درخواست:")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(_vm.buyAd.register_date))])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v("توضیحات: "),
+                _c("span", [_vm._v(_vm._s(_vm.buyAd.description))])
+              ])
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "image-article-content col-md-5" }, [
               _c("div", { staticClass: "main-image col-xs-12" }, [
-                _c("a", { attrs: { href: _vm.defimgitem } }, [
-                  _c("img", { attrs: { src: _vm.defimgitem } })
-                ])
+                _vm.buyAd.photos[0] != null
+                  ? _c(
+                      "a",
+                      { attrs: { href: _vm.str + "/" + _vm.buyAd.photos[0] } },
+                      [
+                        _c("img", {
+                          attrs: {
+                            src: _vm.str + "/" + _vm.buyAd.photos[0],
+                            alt: "photo"
+                          }
+                        })
+                      ]
+                    )
+                  : _c("a", { attrs: { href: _vm.defimgitem } }, [
+                      _c("img", { attrs: { src: _vm.defimgitem } })
+                    ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "owl-carousel col-xs-12" })
@@ -62324,6 +62280,12 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "fields col-xs-12" }, [
+                _c("input", {
+                  ref: "buyAdId",
+                  attrs: { type: "hidden" },
+                  domProps: { value: _vm.buyAd.id }
+                }),
+                _vm._v(" "),
                 _c("div", { staticClass: "col-sm-6" }, [
                   _c("label", { staticClass: "content-lable" }, [
                     _vm._v(
@@ -62529,44 +62491,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "main-article-content col-md-7" }, [
-      _c("h3", [
-        _vm._v(
-          "\r\n                            خشکبار | انجیر |\r\n                        "
-        )
-      ]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("table", { staticClass: "table table-striped" }, [
-        _c("tbody", [
-          _c("tr", [
-            _c("td", [
-              _vm._v("قیمت واحد"),
-              _c("span", {}, [_vm._v("(هر کیلو به تومان)")]),
-              _vm._v(" :")
-            ]),
-            _vm._v(" "),
-            _c("td", [_vm._v("  - تومان")])
-          ]),
-          _vm._v(" "),
-          _c("tr", [_c("td", [_vm._v(" محل تحویل کالا:")])]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", [_vm._v(" میزان نیازمندی")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("32 کیلوگرم")])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", [_vm._v(" زمان ثبت درخواست:")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("۳۰ مرداد , ۱۳۹۷")])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("p", [_vm._v("توضیحات: "), _c("span", [_vm._v("خوب باشه")])])
+    return _c("td", [
+      _vm._v("قیمت واحد"),
+      _c("span", {}, [_vm._v("(هر کیلو به تومان)")]),
+      _vm._v(" :")
     ])
   },
   function() {
@@ -62882,6 +62810,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             transactions: '',
             isLoading: true,
+            popUpMsg: '',
+            submiting: false,
             items: [{
                 message: 'لیست تراکنش ها',
                 url: 'myTransactions'

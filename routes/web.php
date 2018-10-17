@@ -228,7 +228,7 @@ Route::group(['middleware' => [login::class]],function(){
               else return abort(404);              
            })->name('seller-buyAd-requests');
 
-           Route::get('buyAd-request-detail/{id}',[
+           Route::post('buyAd-request-detail/{id}',[
               'uses' => 'buyAd_controller@get_seller_related_buyAd_by_id',
               'as' => 'get_seller_related_buyAd_by_id',
            ])->where('id', '[0-9]+');
