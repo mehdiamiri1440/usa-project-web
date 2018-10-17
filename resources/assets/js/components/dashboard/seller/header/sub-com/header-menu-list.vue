@@ -26,6 +26,9 @@
         color: #fff;
         background: #637484;
     }
+    .header-menu i.fa{
+        margin: 5px;
+    }
 
 </style>
 <template>
@@ -35,34 +38,40 @@
               <li class="list-item" >
                   <router-link :class="{'active' : this.active_el === 1}" :to="{ name : 'profileBasic' }">
                       <span>ویرایش پروفایل</span>
+                       <i class="fa fa-user" aria-hidden="true"></i>
                   </router-link>
               </li>
 
               <li class="list-item  ">
                   <router-link :class="{'active' : this.active_el === 2}" :to="{ name : 'buyAdRequests' }">
                       <span>درخواست ها</span>
+                       <i class="fa fa-list-alt " aria-hidden="true"></i>
                   </router-link>
               </li>
 
               <li class="list-item  ">
                   <router-link :class="{'active' : this.active_el === 3}" :to="{ name : 'registerProduct' }">
                       <span>ثبت محصول </span>
+                       <i class="fa fa-plus-square " aria-hidden="true"></i>
                   </router-link>
               </li>
               <li class="list-item  ">
                   <router-link :class="{'active' : this.active_el === 4}" :to="{ name : 'myTransactions' }">
                       <span>تراکنش های جاری</span>
+                       <i class="fa fa-list-ol " aria-hidden="true"></i>
                   </router-link>
               </li>
 
               <li class="list-item  ">
                   <router-link :class="{'active' : this.active_el === 5}" :to="{ name : 'myTerminatedTransactions' }">
                       <span>تراکنش های انجام شده</span>
+                       <i class="fa fa-th-list  " aria-hidden="true"></i>
                   </router-link>
               </li>
               <li class="list-item  ">
                   <router-link :class="{'active' : this.active_el === 6}" :to="{ name : 'guide' }">
                       <span>راهنما</span>
+                       <i class="fa fa-question-circle  " aria-hidden="true"></i>
                   </router-link>
               </li>
           </ul>
