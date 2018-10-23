@@ -299,7 +299,16 @@
         z-index: 999;
 
     }
-
+    .background_mob_sec {
+        position: fixed;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: -1;
+        display: none;
+    }
     /*end style right header*/
 
     /*custom*/
@@ -814,6 +823,7 @@
             this.init();
             this.toggle_header();
             this.toggle_show_header();
+
         },
         created() {
             eventBus.$on('submitingEvent', (event) => {

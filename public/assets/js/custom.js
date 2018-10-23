@@ -1,6 +1,11 @@
+
+var viz = false;
 function dropdown() {
-    $(".profile-list").toggle("fade");
+    $(".profile-list").fadeIn("slow", function(){
+        viz = true;
+    });
 }
+
 function toggle_header() {
     var menu_but = $(".clouse_menu");
     var profile = $(".profile");
@@ -85,10 +90,24 @@ function toggle_show_header() {
             back.fadeOut();
             flag = true;
         }
+    });
+    $(".background_mob_sec").on('click', function () {
+        console.log('back');
+            right_header.animate({
+            right:'-300px'
+
+        },300);
+        back.fadeOut();
+        flag = true;
     })
 
-
 }
+$(document).click(function() {
+    if (viz) {
+        $('.profile-list').fadeOut("slow");
+        viz = false;
+    }
+});
 $(document).ready(function () {
     toggle_header();
     toggle_show_header();

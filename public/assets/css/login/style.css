@@ -219,6 +219,10 @@ ul.header_list {
     font-size: 13px;
     color: #818d9b;
 }
+ul.header_list a{
+    font-size: 13px;
+    color: #818d9b;
+}
 ul.header_list li {
     padding: 10px 12px;
 }

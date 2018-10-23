@@ -46989,25 +46989,116 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['logo', 'homeUrl'],
     data: function data() {
         return {
-            phone: '',
-            password: '',
-            showMsg: false,
+            currentStep: 1,
             errors: [],
-            msg: ''
+            step1: {
+                phone: '',
+                password: '',
+                showMsg: false,
+                msg: ''
+            },
+            step2: {
+                phone: ''
+            },
+            step3: {
+                verification_code: '',
+                reSendCode: false
+            }
+
         };
     },
     methods: {
+        goToStep: function goToStep(step) {
+            this.currentStep = step;
+        },
         doLogin: function doLogin() {
             var self = this;
             axios.post("/dologin", {
-                phone: this.phone,
-                password: this.password
+                phone: this.step1.phone,
+                password: this.step1.password
             }).then(function (response) {
                 if (response.data.status == true) {
                     window.location.href = '/dashboard/';
@@ -47158,125 +47249,404 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { attrs: { id: "app" } }, [
-            _vm._m(0),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.currentStep == 1,
+                    expression: "currentStep == 1"
+                  }
+                ],
+                attrs: { id: "step1" }
+              },
+              [
+                [
+                  _c("div", [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "content_section" }, [
+                      _c(
+                        "p",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.step1.showMsg,
+                              expression: "step1.showMsg"
+                            }
+                          ],
+                          staticClass: "text-danger"
+                        },
+                        [_vm._v(_vm._s(_vm.step1.msg))]
+                      ),
+                      _vm._v(" "),
+                      _c("label", [
+                        _vm._v(
+                          "\n                                    شماره موبایل\n                                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input_contents" }, [
+                        _c("span", { staticClass: "after_icon numbers" }),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.step1.phone,
+                              expression: "step1.phone"
+                            }
+                          ],
+                          staticClass: "pad number",
+                          attrs: { type: "text", placeholder: "09*" },
+                          domProps: { value: _vm.step1.phone },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.step1, "phone", $event.target.value)
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _vm.errors.phone
+                        ? _c("span", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.errors.phone[0]))
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("label", [
+                        _vm._v(
+                          "\n                                    کلمه عبور\n                                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input_contents" }, [
+                        _c("span", { staticClass: "after_icon  unlock-alt " }),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.step1.password,
+                              expression: "step1.password"
+                            }
+                          ],
+                          staticClass: "pad number",
+                          attrs: { type: "password", placeholder: "کلمه عبور" },
+                          domProps: { value: _vm.step1.password },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.step1,
+                                "password",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _vm.errors.password
+                        ? _c("span", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.errors.password[0]))
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "forget_pass",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              _vm.goToStep(2)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "رمز عبور خود را فراموش کرده\n                                    ام!"
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "green_but",
+                          attrs: { type: "button" },
+                          on: { click: _vm.doLogin }
+                        },
+                        [
+                          _vm._v(
+                            "ورود به سامانه\n                                "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "danger_border_but",
+                          attrs: { type: "button" },
+                          on: { click: _vm.gotToRegister }
+                        },
+                        [
+                          _vm._v(
+                            "ثبت نام در\n                                    سامانه\n                                "
+                          )
+                        ]
+                      )
+                    ])
+                  ])
+                ]
+              ],
+              2
+            ),
             _vm._v(" "),
-            _c("div", { staticClass: "content_section" }, [
-              _c(
-                "p",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.showMsg,
-                      expression: "showMsg"
-                    }
-                  ],
-                  staticClass: "text-danger"
-                },
-                [_vm._v("@" + _vm._s(_vm.msg))]
-              ),
-              _vm._v(" "),
-              _c("label", [
-                _vm._v(
-                  "\n                        شماره موبایل\n                    "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input_contents" }, [
-                _c("span", { staticClass: "after_icon numbers" }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.phone,
-                      expression: "phone"
-                    }
-                  ],
-                  staticClass: "pad number",
-                  attrs: { type: "text", placeholder: "09*" },
-                  domProps: { value: _vm.phone },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.phone = $event.target.value
-                    }
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.currentStep == 2,
+                    expression: "currentStep == 2"
                   }
-                })
-              ]),
-              _vm._v(" "),
-              _vm.errors.phone
-                ? _c("span", { staticClass: "text-danger" }, [
-                    _vm._v("@" + _vm._s(_vm.errors.phone[0]))
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _c("label", [
-                _vm._v(
-                  "\n                        کلمه عبور\n                    "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input_contents" }, [
-                _c("span", { staticClass: "after_icon  unlock-alt " }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.password,
-                      expression: "password"
-                    }
-                  ],
-                  staticClass: "pad number",
-                  attrs: { type: "password", placeholder: "کلمه عبور" },
-                  domProps: { value: _vm.password },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                ],
+                attrs: { id: "step2" }
+              },
+              [
+                [
+                  _c("ul", { staticClass: "header_list list-inline" }, [
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              _vm.goToStep(1)
+                            }
+                          }
+                        },
+                        [_vm._v("ورود به سامانه")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "active" }, [
+                      _vm._v(" بازیابی کلمه عبور")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "content_section" }, [
+                    _c("label", [
+                      _vm._v(
+                        "\n                                لطفا شماره موبایل خود را وارد کنید\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input_contents" }, [
+                      _c("span", { staticClass: "after_icon numbers" }),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.step1.phone,
+                            expression: "step1.phone"
+                          }
+                        ],
+                        staticClass: "pad number",
+                        attrs: { type: "text", placeholder: "09*" },
+                        domProps: { value: _vm.step1.phone },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.step1, "phone", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm.errors.phone
+                      ? _c("span", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.phone[0]))
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.errors.phone
+                      ? _c("span", { staticClass: "error_msg" }, [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(_vm.errors.phone[0]) +
+                              "\n                        "
+                          )
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "dots-step" }, [
+                    _c("span", { staticClass: "dots active" }),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass: "dots",
+                      on: {
+                        click: function($event) {
+                          _vm.goToStep(3)
+                        }
                       }
-                      _vm.password = $event.target.value
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _vm.errors.password
-                ? _c("span", { staticClass: "text-danger" }, [
-                    _vm._v("@" + _vm._s(_vm.errors.password[0]))
+                    })
                   ])
-                : _vm._e(),
-              _vm._v(" "),
-              _c("a", { staticClass: "forget_pass", attrs: { href: "#" } }, [
-                _vm._v("رمز عبور خود را فراموش کرده ام!")
-              ]),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "green_but",
-                  attrs: { type: "button" },
-                  on: { click: _vm.doLogin }
-                },
-                [_vm._v("ورود به سامانه\n                    ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "danger_border_but",
-                  attrs: { type: "button" },
-                  on: { click: _vm.gotToRegister }
-                },
-                [_vm._v("ثبت نام در سامانه\n                    ")]
-              )
-            ])
+                ]
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.currentStep == 3,
+                    expression: "currentStep == 3"
+                  }
+                ],
+                attrs: { id: "step3" }
+              },
+              [
+                [
+                  _c("ul", { staticClass: "header_list list-inline" }, [
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              _vm.goToStep(1)
+                            }
+                          }
+                        },
+                        [_vm._v("ورود به سامانه")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "active" }, [
+                      _vm._v(" بازیابی کلمه عبور")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "content_section" }, [
+                    _c("label", [
+                      _vm._v(
+                        "\n                                کد ارسال شده به تلفن همراهتان را وارد کنید.\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: " input_contents" }, [
+                      _c("span", { staticClass: "after_icon search-icon" }),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.step2.verification_code,
+                            expression: "step2.verification_code"
+                          }
+                        ],
+                        staticClass: "pad ",
+                        attrs: {
+                          type: "text",
+                          name: "name",
+                          placeholder: "0101"
+                        },
+                        domProps: { value: _vm.step2.verification_code },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.step2,
+                              "verification_code",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm.errors.verification_code
+                      ? _c("span", { staticClass: "error_msg" }, [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(_vm.errors.verification_code[0]) +
+                              "\n                        "
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "bouttons col-xs-12" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "danger_border_but",
+                          attrs: {
+                            type: "button",
+                            disabled: _vm.step2.reSendCode == false
+                          },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.goToStep(2)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            " کد را دریافت\n                                    نکردم\n                                "
+                          )
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "dots-step" }, [
+                    _c("span", {
+                      staticClass: "dots active back_step",
+                      on: {
+                        click: function($event) {
+                          _vm.goToStep(2)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "dots active" })
+                  ])
+                ]
+              ],
+              2
+            )
           ])
         ]),
         _vm._v(" "),
@@ -49309,7 +49679,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    vertical-align: baseline;\n}\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, menu, nav, section {\n    display: block;\n}\nbody {\n    line-height: 1.1;\n    font-family: IRANSans, sans-serif;\n    font-size: 14px;\n}\nol, ul {\n    list-style: none;\n}\nblockquote, q {\n    quotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n    content: none;\n}\ntable {\n    border-collapse: collapse;\n    border-spacing: 0;\n}\nimg, svg {\n    width: 100%;\n}\na, a:hover, a:visited, a:focus, a:active {\n    text-decoration: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\nth, td {\n    padding: 7px;\n    text-align: right;\n}\n\n/*start style right header*/\n.logo {\n    height: 64px;\n\n    display: block;\n\n    float: right;\n\n    width: 70%;\n}\n#main {\n    background: #fff !important;\n}\n.profile-menu-header {\n    float: left;\n}\n.logo_hide {\n    display: none;\n}\n.logo a {\n    display: inline-block;\n    margin-top: -11px;\n    height: 75px;\n    padding: 0 10px;\n}\n.right-header {\n    width: 250px;\n    right: 0;\n    bottom: 0;\n    position: fixed;\n    top: 0;\n    overflow: hidden;\n    z-index: 9;\n}\n.little_header {\n    width: 80px;\n}\n.right-header.mobile-header {\n    display: none;\n    -webkit-box-shadow: 0 0 20px;\n            box-shadow: 0 0 20px;\n}\n.right-header > header {\n    overflow: hidden;\n    background: #fff;\n}\n.clouse_menu, .clouse_menu_mob {\n    float: left;\n    width: 30%;\n    border: none;\n    background: none;\n    font-size: 35px;\n    top: 0;\n    position: relative;\n    padding: 11px;\n}\n.clouse_menu_mob {\n    display: none;\n}\n.main-right-header {\n    background: #313a43;\n    height: 100%;\n    text-align: right;\n    color: #fff;\n    position: relative;\n}\n.show-header button {\n    float: right;\n    border: none;\n    background: none;\n    font-size: 25px;\n    padding: 19px 30px 19px 24px;\n    display: none;\n}\n.profile {\n    padding: 20px 20px 10px;\n    border-bottom: 2px solid #2e353e;\n}\n.profile-img {\n    overflow: hidden;\n    border-radius: 50%;\n    height: 85px;\n    width: 85px;\n    margin: 0 auto;\n    margin-left: 10px;\n    border: 2px solid #fff;\n    float: right;\n}\n.profile-img img {\n    height: 100%;\n}\n.profile-content {\n    float: right;\n    padding-top: 15px;\n}\n.profile-name {\n    margin: 8px 0;\n    font-size: 17px;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.header-menu a {\n    color: #b1b1b1;\n    padding: 10px 20px;\n    display: inline-block;\n    position: relative;\n    width: 100%;\n}\n.header-menu {\n    padding: 10px 0;\n}\n.header-menu a:hover {\n    color: #fff;\n    background: #637484;\n}\n.header-menu a:hover::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu li.active a {\n    color: #fff;\n    background: #637484;\n}\n.header-menu li.active a:before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.copy-right {\n    text-align: center;\n    font-size: 12px;\n    font-weight: 200;\n    line-height: 1.3em;\n    padding: 20px;\n    position: absolute;\n    bottom: 76px;\n}\nlabel {\n    display: block;\n    margin: 9px auto;\n}\ninput[type=\"text\"], select, input[type=\"button\"], textarea {\n    width: 100% !important;\n}\ninput[type=\"text\"], select, textarea {\n    background: #eff3f6;\n    border: 1px solid #cfcfcf;\n    border-radius: 3px;\n    width: 100% !important;\n}\ninput[type=\"text\"], textarea {\n    padding: 13px 15px;\n    width: 100% !important;\n}\nselect {\n    padding: 7px 15px;\n}\n.image-header-profile img {\n    height: 100%;\n}\n.right-menu-header {\n    position: relative;\n}\n.right-menu-header li ul a {\n    font-size: 14px;\n    width: 100%;\n    display: inline-block;\n}\n.right-menu-header li ul li {\n\n    margin: 5px;\n}\n.icon-header-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    right: 75px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n\n/*end style right header*/\n\n/*custom*/\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n    color: #3c3c3c;\n}\n\n/*loader*/\n.loader-display {\n    position: fixed;\n    z-index: 10;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0, 0, 0, 0.5);\n    display: block;\n}\n.main-loader {\n    position: absolute;\n\n    top: 35%;\n\n    text-align: center;\n\n    display: block;\n\n    width: 100%;\n\n    color: #fff;\n\n    font-size: 23px;\n}\n.main-loader img {\n    width: 100px;\n\n    background: #fff;\n\n    border-radius: 50px;\n\n    height: 100px;\n\n    display: inline-block;\n\n    margin: 0 auto 22px;\n}\n.loader-wrapper {\n    display: none;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header {\n        display: none;\n}\n.right-header.mobile-header {\n        display: block;\n        right: -300px;\n}\n.main-header, .little-main-header {\n        right: 0 !important;\n}\n#main, #main.little-main {\n        margin-right: 0 !important;\n}\n.post-contents-table {\n        width: 100%;\n}\n.copy-right {\n        display: none;\n}\n.clouse_menu {\n        display: none;\n}\n.clouse_menu_mob {\n        display: block;\n}\n.show-header button {\n        display: block;\n}\n.kind_user > div, .kind_activity > div {\n        float: none;\n}\n.img-profile .submit {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post, .contents-post {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.name-header-profile {\n        display: none;\n}\n.profile-menu-header {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a {\n        font-size: 12px !important;\n        padding: 16px 13px !important;\n}\n.sub-header {\n        bottom: -44px;\n}\n}\n\n/*end loader*/\n", ""]);
+exports.push([module.i, "\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    vertical-align: baseline;\n}\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, menu, nav, section {\n    display: block;\n}\nbody {\n    line-height: 1.1;\n    font-family: IRANSans, sans-serif;\n    font-size: 14px;\n}\nol, ul {\n    list-style: none;\n}\nblockquote, q {\n    quotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n    content: none;\n}\ntable {\n    border-collapse: collapse;\n    border-spacing: 0;\n}\nimg, svg {\n    width: 100%;\n}\na, a:hover, a:visited, a:focus, a:active {\n    text-decoration: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\nth, td {\n    padding: 7px;\n    text-align: right;\n}\n\n/*start style right header*/\n.logo {\n    height: 64px;\n\n    display: block;\n\n    float: right;\n\n    width: 70%;\n}\n#main {\n    background: #fff !important;\n}\n.profile-menu-header {\n    float: left;\n}\n.logo_hide {\n    display: none;\n}\n.logo a {\n    display: inline-block;\n    margin-top: -11px;\n    height: 75px;\n    padding: 0 10px;\n}\n.right-header {\n    width: 250px;\n    right: 0;\n    bottom: 0;\n    position: fixed;\n    top: 0;\n    overflow: hidden;\n    z-index: 9;\n}\n.little_header {\n    width: 80px;\n}\n.right-header.mobile-header {\n    display: none;\n    -webkit-box-shadow: 0 0 20px;\n            box-shadow: 0 0 20px;\n}\n.right-header > header {\n    overflow: hidden;\n    background: #fff;\n}\n.clouse_menu, .clouse_menu_mob {\n    float: left;\n    width: 30%;\n    border: none;\n    background: none;\n    font-size: 35px;\n    top: 0;\n    position: relative;\n    padding: 11px;\n}\n.clouse_menu_mob {\n    display: none;\n}\n.main-right-header {\n    background: #313a43;\n    height: 100%;\n    text-align: right;\n    color: #fff;\n    position: relative;\n}\n.show-header button {\n    float: right;\n    border: none;\n    background: none;\n    font-size: 25px;\n    padding: 19px 30px 19px 24px;\n    display: none;\n}\n.profile {\n    padding: 20px 20px 10px;\n    border-bottom: 2px solid #2e353e;\n}\n.profile-img {\n    overflow: hidden;\n    border-radius: 50%;\n    height: 85px;\n    width: 85px;\n    margin: 0 auto;\n    margin-left: 10px;\n    border: 2px solid #fff;\n    float: right;\n}\n.profile-img img {\n    height: 100%;\n}\n.profile-content {\n    float: right;\n    padding-top: 15px;\n}\n.profile-name {\n    margin: 8px 0;\n    font-size: 17px;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.header-menu a {\n    color: #b1b1b1;\n    padding: 10px 20px;\n    display: inline-block;\n    position: relative;\n    width: 100%;\n}\n.header-menu {\n    padding: 10px 0;\n}\n.header-menu a:hover {\n    color: #fff;\n    background: #637484;\n}\n.header-menu a:hover::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu li.active a {\n    color: #fff;\n    background: #637484;\n}\n.header-menu li.active a:before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.copy-right {\n    text-align: center;\n    font-size: 12px;\n    font-weight: 200;\n    line-height: 1.3em;\n    padding: 20px;\n    position: absolute;\n    bottom: 76px;\n}\nlabel {\n    display: block;\n    margin: 9px auto;\n}\ninput[type=\"text\"], select, input[type=\"button\"], textarea {\n    width: 100% !important;\n}\ninput[type=\"text\"], select, textarea {\n    background: #eff3f6;\n    border: 1px solid #cfcfcf;\n    border-radius: 3px;\n    width: 100% !important;\n}\ninput[type=\"text\"], textarea {\n    padding: 13px 15px;\n    width: 100% !important;\n}\nselect {\n    padding: 7px 15px;\n}\n.image-header-profile img {\n    height: 100%;\n}\n.right-menu-header {\n    position: relative;\n}\n.right-menu-header li ul a {\n    font-size: 14px;\n    width: 100%;\n    display: inline-block;\n}\n.right-menu-header li ul li {\n\n    margin: 5px;\n}\n.icon-header-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    right: 75px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.background_mob_sec {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n/*end style right header*/\n\n/*custom*/\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n    color: #3c3c3c;\n}\n\n/*loader*/\n.loader-display {\n    position: fixed;\n    z-index: 10;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0, 0, 0, 0.5);\n    display: block;\n}\n.main-loader {\n    position: absolute;\n\n    top: 35%;\n\n    text-align: center;\n\n    display: block;\n\n    width: 100%;\n\n    color: #fff;\n\n    font-size: 23px;\n}\n.main-loader img {\n    width: 100px;\n\n    background: #fff;\n\n    border-radius: 50px;\n\n    height: 100px;\n\n    display: inline-block;\n\n    margin: 0 auto 22px;\n}\n.loader-wrapper {\n    display: none;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header {\n        display: none;\n}\n.right-header.mobile-header {\n        display: block;\n        right: -300px;\n}\n.main-header, .little-main-header {\n        right: 0 !important;\n}\n#main, #main.little-main {\n        margin-right: 0 !important;\n}\n.post-contents-table {\n        width: 100%;\n}\n.copy-right {\n        display: none;\n}\n.clouse_menu {\n        display: none;\n}\n.clouse_menu_mob {\n        display: block;\n}\n.show-header button {\n        display: block;\n}\n.kind_user > div, .kind_activity > div {\n        float: none;\n}\n.img-profile .submit {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post, .contents-post {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.name-header-profile {\n        display: none;\n}\n.profile-menu-header {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a {\n        font-size: 12px !important;\n        padding: 16px 13px !important;\n}\n.sub-header {\n        bottom: -44px;\n}\n}\n\n/*end loader*/\n", ""]);
 
 // exports
 
@@ -49360,6 +49730,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -50869,7 +51248,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n#main {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n.main-header {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n}\n.little-main-header {\n    right: 80px;\n}\n.image-header-profile {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.image-header-profile  img{\n    height: 100%;\n}\n.right-menu-header {\n\n    padding: 16px;\n}\n.right-menu-header, .content-header {\n    float: right;\n}\n.profile-menu-header {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header i {\n    position: absolute;\n\n    left: -90px;\n\n    top: 0px;\n\n    font-size: 20px;\n}\n.content-header {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a, .profile-menu-header a {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a {\n    font-size: 30px;\n}\n.right-menu-header a:hover, .profile-menu-header a:hover {\n    color: #2e353e;\n}\n.profile-menu-header a {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li {\n    margin: 5px;\n}\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n}\n.font-big {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n", ""]);
+exports.push([module.i, "\n#main {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n.main-header {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n}\n.little-main-header {\n    right: 80px;\n}\n.image-header-profile {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.image-header-profile  img{\n    height: 100%;\n}\n.right-menu-header {\n\n    padding: 16px;\n}\n.right-menu-header, .content-header {\n    float: right;\n}\n.profile-menu-header {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header i {\n    position: absolute;\n\n    left: -90px;\n\n    top: 0px;\n\n    font-size: 20px;\n}\n.content-header {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a, .profile-menu-header a {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a {\n    font-size: 30px;\n}\n.right-menu-header a:hover, .profile-menu-header a:hover {\n    color: #2e353e;\n}\n.profile-menu-header > a {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li {\n    margin: 5px;\n}\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n}\n.font-big {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n", ""]);
 
 // exports
 
