@@ -5,7 +5,7 @@ function dropdown() {
 $(document).ready(function () {
     var slider_el = $(".owl-carousel");
     slider_el.owlCarousel({
-        loop:true,
+        loop:false,
         margin:10
     });
     slider_el.magnificPopup({

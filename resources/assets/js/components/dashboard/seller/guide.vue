@@ -1,4 +1,7 @@
 <style scoped>
+    .main-content{
+        padding: 60px 15px;
+    }
     .help {
         direction: rtl;
         padding: 0 20px;
