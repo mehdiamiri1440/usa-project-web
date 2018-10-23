@@ -245,18 +245,18 @@
         margin: 9px auto;
     }
 
-    input[type="text"], select, input[type="button"], textarea {
+    input[type="text"], select, input[type="button"], textarea,input[type="password"]  {
         width: 100% !important;
     }
 
-    input[type="text"], select, textarea {
+    input[type="text"], select, textarea,input[type="password"] {
         background: #eff3f6;
         border: 1px solid #cfcfcf;
         border-radius: 3px;
         width: 100% !important;
     }
 
-    input[type="text"], textarea {
+    input[type="text"], textarea ,input[type="password"] {
         padding: 13px 15px;
         width: 100% !important;
     }

@@ -399,7 +399,7 @@
         padding: 0;
     }
 
-    input[type="text"], select {
+    input[type="text"], select,input[type="password"] {
         width: 100%;
         border: 1px solid #e9e9e9;
         padding: 15px 20px;
@@ -418,7 +418,7 @@
 
     }
 
-    .user-form input[type="text"]:focus {
+    .user-form input[type="text"]:focus ,input[type="password"]:focus{
         border: 1px solid #28a745;
         transition: 500ms;
 
@@ -640,6 +640,20 @@
                         <input type="text" name="address" placeholder="شماره شبا"
                                v-model="currentUser.profile.shaba_code">
                         <span v-if="errors.shaba_code" class="text-danger">@{{ errors.shaba_code[0] }}</span>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="old-password" class="content-lable">
+                            کلمه عبور قدیمی:
+                        </label>
+                        <input id="old-password" type="password" placeholder="کلمه عبور قدیمی" >
+                        <!--<span class="text-danger">@{{ errors.postal_code[0] }}</span>-->
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="new-password" class="content-lable">
+                            کلمه عبور جدید:
+                        </label>
+                        <input id="new-password" type="password"  placeholder="کلمه عبور جدید">
+                        <!--<span   class="text-danger">@{{ errors.shaba_code[0] }}</span>-->
                     </div>
                     <div class="col-xs-12">
                         <input type="button" class="green-bot" name="submit" value="ثبت تغییرات"
