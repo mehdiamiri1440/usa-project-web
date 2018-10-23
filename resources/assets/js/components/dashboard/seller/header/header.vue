@@ -825,7 +825,7 @@
             this.toggle_show_header();
 
         },
-        created() {
+        created(){
             eventBus.$on('submitingEvent', (event) => {
                 this.submiting = event;
             });

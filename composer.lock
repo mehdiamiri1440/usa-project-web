@@ -959,6 +959,18 @@
         },
         {
             "name": "league/flysystem",
+<<<<<<< HEAD
+            "version": "1.0.47",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/flysystem.git",
+                "reference": "a11e4a75f256bdacf99d20780ce42d3b8272975c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a11e4a75f256bdacf99d20780ce42d3b8272975c",
+                "reference": "a11e4a75f256bdacf99d20780ce42d3b8272975c",
+=======
             "version": "1.0.48",
             "source": {
                 "type": "git",
@@ -969,6 +981,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a6ded5b2f6055e2db97b4b859fdfca2b952b78aa",
                 "reference": "a6ded5b2f6055e2db97b4b859fdfca2b952b78aa",
+>>>>>>> 94f8fb4c97289e292a3765c3f82c4b17788787fe
                 "shasum": ""
             },
             "require": {
@@ -1039,7 +1052,11 @@
                 "sftp",
                 "storage"
             ],
+<<<<<<< HEAD
+            "time": "2018-09-14T15:30:29+00:00"
+=======
             "time": "2018-10-15T13:53:10+00:00"
+>>>>>>> 94f8fb4c97289e292a3765c3f82c4b17788787fe
         },
         {
             "name": "monolog/monolog",
@@ -1220,6 +1237,18 @@
         },
         {
             "name": "nikic/php-parser",
+<<<<<<< HEAD
+            "version": "v4.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nikic/PHP-Parser.git",
+                "reference": "fa6ee28600d21d49b2b4e1006b48426cec8e579c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/fa6ee28600d21d49b2b4e1006b48426cec8e579c",
+                "reference": "fa6ee28600d21d49b2b4e1006b48426cec8e579c",
+=======
             "version": "v4.1.0",
             "source": {
                 "type": "git",
@@ -1230,6 +1259,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/d0230c5c77a7e3cfa69446febf340978540958c0",
                 "reference": "d0230c5c77a7e3cfa69446febf340978540958c0",
+>>>>>>> 94f8fb4c97289e292a3765c3f82c4b17788787fe
                 "shasum": ""
             },
             "require": {
@@ -1267,7 +1297,11 @@
                 "parser",
                 "php"
             ],
+<<<<<<< HEAD
+            "time": "2018-09-18T07:03:24+00:00"
+=======
             "time": "2018-10-10T09:24:14+00:00"
+>>>>>>> 94f8fb4c97289e292a3765c3f82c4b17788787fe
         },
         {
             "name": "paragonie/random_compat",
@@ -1557,6 +1591,18 @@
         },
         {
             "name": "psy/psysh",
+<<<<<<< HEAD
+            "version": "v0.9.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bobthecow/psysh.git",
+                "reference": "ed3c32c4304e1a678a6e0f9dc11dd2d927d89555"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/ed3c32c4304e1a678a6e0f9dc11dd2d927d89555",
+                "reference": "ed3c32c4304e1a678a6e0f9dc11dd2d927d89555",
+=======
             "version": "v0.9.9",
             "source": {
                 "type": "git",
@@ -1567,6 +1613,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/bobthecow/psysh/zipball/9aaf29575bb8293206bb0420c1e1c87ff2ffa94e",
                 "reference": "9aaf29575bb8293206bb0420c1e1c87ff2ffa94e",
+>>>>>>> 94f8fb4c97289e292a3765c3f82c4b17788787fe
                 "shasum": ""
             },
             "require": {
@@ -1627,7 +1674,11 @@
                 "interactive",
                 "shell"
             ],
+<<<<<<< HEAD
+            "time": "2018-09-05T11:40:09+00:00"
+=======
             "time": "2018-10-13T15:16:03+00:00"
+>>>>>>> 94f8fb4c97289e292a3765c3f82c4b17788787fe
         },
         {
             "name": "ramsey/uuid",

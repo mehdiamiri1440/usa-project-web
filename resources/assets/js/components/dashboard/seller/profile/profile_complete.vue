@@ -535,11 +535,11 @@
                         تصاویر مربوطه <span>(محصولات | شرکت | کارکنان)</span> </label>
 
                     <div class="row">
-                        <div class="images-content col-xs-12">
-                            <!--    <article class="image-item col-xs-4">
-                                           <a href="#"><i class="fa fa-close"></i></a>
-                                           <img src="{{asset('assets/img/back2.jpg')}}" alt="">
-                                       </article>-->
+                        <div class="images-content col-xs-12" v-for="photo in currentUser.certificates">
+                                <article class="image-item col-xs-4">
+                                       <a href="#"><i class="fa fa-close"></i></a>
+                                       <img :src=" str + '/' + photo" alt="">
+                                </article>
                         </div>
                     </div>
                 </div>
@@ -557,10 +557,10 @@
 
                     <div class="row">
                         <div class="images-content col-xs-12">
-                        <!--    <article class="image-item col-xs-4">
+                            <article class="image-item col-xs-4" v-for="photo in currentUser.relateds">
                                 <a href="#"><i class="fa fa-close"></i></a>
-                                <img src="{{asset('assets/img/back2.jpg')}}" alt="">
-                            </article>-->
+                                <img :src="str + '/' + photo" alt="">
+                            </article>
                         </div>
                     </div>
                 </div>
@@ -582,6 +582,9 @@
 <script>
     import {eventBus} from '../../../../app';
     export default {
+        props:[
+            'str'
+        ],
         data: function () {
             return{
                 currentUser: {
@@ -594,6 +597,8 @@
                     'company_register_code',
                     'public_phone',
                     'description',
+                    'postal_code',
+                    'shaba_code',
                 ],
                     relatedFiles: [],
                 certificateFiles: [],

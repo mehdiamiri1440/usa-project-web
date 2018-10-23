@@ -335,6 +335,7 @@
                             if (response.status == 201) {
                                 self.disableSubmit = true;
                                 self.popUpMsg = 'محصول شما با موفقیت ثبت شد';
+                                $('#myModal').modal('show');
                                 eventBus.$emit('submitSuccess', self.popUpMsg);
                                 eventBus.$emit('submitingEvent', false);
                                 $('#myModal').modal('show');
