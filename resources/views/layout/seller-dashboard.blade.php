@@ -90,7 +90,7 @@
     @yield('body_script_tags')
     <script src="{{asset('assets/js/custom.js')}}"></script>
     <script src="{{asset('js/app.js')}}"></script>
-    <script>
+{{--    <script>
         function checkProfileConfirmation(event) {
             event.preventDefault();
             var e = event.currentTarget;
@@ -108,7 +108,7 @@
                         }
                     });
         }
-    </script>
+    </script>--}}
 
     </body>
 

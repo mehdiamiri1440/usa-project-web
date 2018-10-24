@@ -57,15 +57,14 @@
                                 </label>
                                 <div class="input_contents">
                                     <span class="after_icon numbers"></span>
-                                    <input class="pad number" type="text" v-model="step1.phone"
+                                    <input class="pad number" type="text" v-model="step2.phone"
                                            placeholder="09*">
                                 </div>
-                                <span class="text-danger" v-if="errors.phone">{{errors.phone[0]}}</span>
-                                <span v-if="errors.phone" class="error_msg">
-                                    {{errors.phone[0]}}
-                            </span>
-                                <!--          <div class="col-xs-12"> <button class="green_but" type="button"  @click="send_verification_code">ارسال پیام کوتاه
-                                          </button></div>-->
+                                <span  v-if="step2.errors.phone" class="error_msg">                            {{step2.errors.phone[0]}}
+                                </span>
+
+                                          <div class="col-xs-12"> <button class="green_but" type="button"  @click="sendPhoneVerificationCode">ارسال پیام کوتاه
+                                          </button></div>
 
                             </div>
 
@@ -88,7 +87,7 @@
                                 </label>
                                 <div class=" input_contents">
                                     <span class="after_icon search-icon"></span>
-                                    <input class="pad " type="text" name="name" v-model="step2.verification_code"
+                                    <input class="pad " type="text" name="name" v-model="step3.verification_code"
                                            placeholder="0101">
                                 </div>
                                 <span v-if="errors.verification_code" class="error_msg">
@@ -96,7 +95,7 @@
                             </span>
 
                                 <div class="bouttons col-xs-12">
-                                    <!--<button class=" green_but" type="button" @click="verify_code"> بررسی کد</button>-->
+                                    <button class=" green_but" type="button" @click="verifyCode"> بررسی کد</button>
                                     <button class="danger_border_but" type="button" @click.prevent="goToStep(2)"
                                             :disabled="step2.reSendCode == false"> کد را دریافت
                                         نکردم
@@ -139,7 +138,8 @@
                     msg: ''
                 },
                 step2: {
-                    phone: ''
+                    phone: '',
+                    errors:[],
                 },
                 step3: {
                     verification_code: '',
@@ -179,7 +179,37 @@
             },
             gotToRegister: function () {
                 window.location.href = '/register';
-//                window.location.href = "{{route('register_page')}}";
+            },
+            sendPhoneVerificationCode: function(){
+                var self = this;
+                this.step2.errors = [];
+                
+                axios.post('/send_phone_verification_code_for_password_reset',{
+                    'phone' : this.step2.phone
+                })
+                .then(function(response){
+                    if(response.status == 200){
+                        self.goToStep(3);
+                    }
+                })
+                .catch(function(err){
+                        console.log(err.response.data.errors.phone);
+                        self.step2.errors.phone = err.response.data.errors.phone;
+                        console.log(self.step2.errors.phone);
+                });
+            },
+            verifyCode:function(){
+                
+                axios.post('/reset_password',{
+                    'phone' : this.step2.phone,
+                    'verification_code' : this.step3.verification_code,
+                })
+                .then(function(response){
+                    
+                })
+                .catch(function(err){
+                    
+                });
             }
         },
         created() {
@@ -189,8 +219,8 @@
                     self.doLogin();
                 }
             });
-        }
-        , components: {
+        },
+        components: {
             RightSection
         }
     }

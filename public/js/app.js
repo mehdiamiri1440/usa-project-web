@@ -47063,7 +47063,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -47081,7 +47080,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 msg: ''
             },
             step2: {
-                phone: ''
+                phone: '',
+                errors: []
             },
             step3: {
                 verification_code: '',
@@ -47118,7 +47118,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         gotToRegister: function gotToRegister() {
             window.location.href = '/register';
-            //                window.location.href = "{{route('register_page')}}";
+        },
+        sendPhoneVerificationCode: function sendPhoneVerificationCode() {
+            var self = this;
+            this.step2.errors = [];
+
+            axios.post('/send_phone_verification_code_for_password_reset', {
+                'phone': this.step2.phone
+            }).then(function (response) {
+                if (response.status == 200) {
+                    self.goToStep(3);
+                }
+            }).catch(function (err) {
+                console.log(err.response.data.errors.phone);
+                self.step2.errors.phone = err.response.data.errors.phone;
+                console.log(self.step2.errors.phone);
+            });
+        },
+        verifyCode: function verifyCode() {
+
+            axios.post('/reset_password', {
+                'phone': this.step2.phone,
+                'verification_code': this.step3.verification_code
+            }).then(function (response) {}).catch(function (err) {});
         }
     },
     created: function created() {
@@ -47129,6 +47151,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         });
     },
+
     components: {
         RightSection: __WEBPACK_IMPORTED_MODULE_0__RightSection_vue___default.a
     }
@@ -47467,39 +47490,49 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.step1.phone,
-                            expression: "step1.phone"
+                            value: _vm.step2.phone,
+                            expression: "step2.phone"
                           }
                         ],
                         staticClass: "pad number",
                         attrs: { type: "text", placeholder: "09*" },
-                        domProps: { value: _vm.step1.phone },
+                        domProps: { value: _vm.step2.phone },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.$set(_vm.step1, "phone", $event.target.value)
+                            _vm.$set(_vm.step2, "phone", $event.target.value)
                           }
                         }
                       })
                     ]),
                     _vm._v(" "),
-                    _vm.errors.phone
-                      ? _c("span", { staticClass: "text-danger" }, [
-                          _vm._v(_vm._s(_vm.errors.phone[0]))
+                    _vm.step2.errors.phone
+                      ? _c("span", { staticClass: "error_msg" }, [
+                          _vm._v(
+                            "                            " +
+                              _vm._s(_vm.step2.errors.phone[0]) +
+                              "\n                            "
+                          )
                         ])
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.errors.phone
-                      ? _c("span", { staticClass: "error_msg" }, [
+                    _c("div", { staticClass: "col-xs-12" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "green_but",
+                          attrs: { type: "button" },
+                          on: { click: _vm.sendPhoneVerificationCode }
+                        },
+                        [
                           _vm._v(
-                            "\n                                " +
-                              _vm._s(_vm.errors.phone[0]) +
-                              "\n                        "
+                            "ارسال پیام کوتاه\n                                      "
                           )
-                        ])
-                      : _vm._e()
+                        ]
+                      )
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "dots-step" }, [
@@ -47570,8 +47603,8 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.step2.verification_code,
-                            expression: "step2.verification_code"
+                            value: _vm.step3.verification_code,
+                            expression: "step3.verification_code"
                           }
                         ],
                         staticClass: "pad ",
@@ -47580,14 +47613,14 @@ var render = function() {
                           name: "name",
                           placeholder: "0101"
                         },
-                        domProps: { value: _vm.step2.verification_code },
+                        domProps: { value: _vm.step3.verification_code },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
                             _vm.$set(
-                              _vm.step2,
+                              _vm.step3,
                               "verification_code",
                               $event.target.value
                             )
@@ -47607,6 +47640,16 @@ var render = function() {
                       : _vm._e(),
                     _vm._v(" "),
                     _c("div", { staticClass: "bouttons col-xs-12" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: " green_but",
+                          attrs: { type: "button" },
+                          on: { click: _vm.verifyCode }
+                        },
+                        [_vm._v(" بررسی کد")]
+                      ),
+                      _vm._v(" "),
                       _c(
                         "button",
                         {
@@ -49673,7 +49716,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    vertical-align: baseline;\n}\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, menu, nav, section {\n    display: block;\n}\nbody {\n    line-height: 1.1;\n    font-family: IRANSans, sans-serif;\n    font-size: 14px;\n}\nol, ul {\n    list-style: none;\n}\nblockquote, q {\n    quotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n    content: none;\n}\ntable {\n    border-collapse: collapse;\n    border-spacing: 0;\n}\nimg, svg {\n    width: 100%;\n}\na, a:hover, a:visited, a:focus, a:active {\n    text-decoration: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\nth, td {\n    padding: 7px;\n    text-align: right;\n}\n\n/*start style right header*/\n.logo {\n    height: 64px;\n\n    display: block;\n\n    float: right;\n\n    width: 70%;\n}\n#main {\n    background: #fff !important;\n}\n.profile-menu-header {\n    float: left;\n}\n.logo_hide {\n    display: none;\n}\n.logo a {\n    display: inline-block;\n    margin-top: -11px;\n    height: 75px;\n    padding: 0 10px;\n}\n.right-header {\n    width: 250px;\n    right: 0;\n    bottom: 0;\n    position: fixed;\n    top: 0;\n    overflow: hidden;\n    z-index: 9;\n}\n.little_header {\n    width: 80px;\n}\n.right-header.mobile-header {\n    display: none;\n    -webkit-box-shadow: 0 0 20px;\n            box-shadow: 0 0 20px;\n}\n.right-header > header {\n    overflow: hidden;\n    background: #fff;\n}\n.clouse_menu, .clouse_menu_mob {\n    float: left;\n    width: 30%;\n    border: none;\n    background: none;\n    font-size: 35px;\n    top: 0;\n    position: relative;\n    padding: 11px;\n}\n.clouse_menu_mob {\n    display: none;\n}\n.main-right-header {\n    background: #313a43;\n    height: 100%;\n    text-align: right;\n    color: #fff;\n    position: relative;\n}\n.show-header button {\n    float: right;\n    border: none;\n    background: none;\n    font-size: 25px;\n    padding: 19px 30px 19px 24px;\n    display: none;\n}\n.profile {\n    padding: 20px 20px 10px;\n    border-bottom: 2px solid #2e353e;\n}\n.profile-img {\n    overflow: hidden;\n    border-radius: 50%;\n    height: 85px;\n    width: 85px;\n    margin: 0 auto;\n    margin-left: 10px;\n    border: 2px solid #fff;\n    float: right;\n}\n.profile-img img {\n    height: 100%;\n}\n.profile-content {\n    float: right;\n    padding-top: 15px;\n}\n.profile-name {\n    margin: 8px 0;\n    font-size: 17px;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.header-menu a {\n    color: #b1b1b1;\n    padding: 10px 20px;\n    display: inline-block;\n    position: relative;\n    width: 100%;\n}\n.header-menu {\n    padding: 10px 0;\n}\n.header-menu a:hover {\n    color: #fff;\n    background: #637484;\n}\n.header-menu a:hover::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu li.active a {\n    color: #fff;\n    background: #637484;\n}\n.header-menu li.active a:before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.copy-right {\n    text-align: center;\n    font-size: 12px;\n    font-weight: 200;\n    line-height: 1.3em;\n    padding: 20px;\n    position: absolute;\n    bottom: 76px;\n}\nlabel {\n    display: block;\n    margin: 9px auto;\n}\ninput[type=\"text\"], select, input[type=\"button\"], textarea,input[type=\"password\"]  {\n    width: 100% !important;\n}\ninput[type=\"text\"], select, textarea,input[type=\"password\"] {\n    background: #eff3f6;\n    border: 1px solid #cfcfcf;\n    border-radius: 3px;\n    width: 100% !important;\n}\ninput[type=\"text\"], textarea ,input[type=\"password\"] {\n    padding: 13px 15px;\n    width: 100% !important;\n}\nselect {\n    padding: 7px 15px;\n}\n.image-header-profile img {\n    height: 100%;\n}\n.right-menu-header {\n    position: relative;\n}\n.right-menu-header li ul a {\n    font-size: 14px;\n    width: 100%;\n    display: inline-block;\n}\n.right-menu-header li ul li {\n\n    margin: 5px;\n}\n.icon-header-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    right: 75px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.background_mob_sec {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n/*end style right header*/\n\n/*custom*/\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n    color: #3c3c3c;\n}\n\n/*loader*/\n.loader-display {\n    position: fixed;\n    z-index: 10;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0, 0, 0, 0.5);\n    display: block;\n}\n.main-loader {\n    position: absolute;\n\n    top: 35%;\n\n    text-align: center;\n\n    display: block;\n\n    width: 100%;\n\n    color: #fff;\n\n    font-size: 23px;\n}\n.main-loader img {\n    width: 100px;\n\n    background: #fff;\n\n    border-radius: 50px;\n\n    height: 100px;\n\n    display: inline-block;\n\n    margin: 0 auto 22px;\n}\n.loader-wrapper {\n    display: none;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header {\n        display: none;\n}\n.right-header.mobile-header {\n        display: block;\n        right: -300px;\n}\n.main-header, .little-main-header {\n        right: 0 !important;\n}\n#main, #main.little-main {\n        margin-right: 0 !important;\n}\n.post-contents-table {\n        width: 100%;\n}\n.copy-right {\n        display: none;\n}\n.clouse_menu {\n        display: none;\n}\n.clouse_menu_mob {\n        display: block;\n}\n.show-header button {\n        display: block;\n}\n.kind_user > div, .kind_activity > div {\n        float: none;\n}\n.img-profile .submit {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post, .contents-post {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.name-header-profile {\n        display: none;\n}\n.profile-menu-header {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a {\n        font-size: 12px !important;\n        padding: 16px 13px !important;\n}\n.sub-header {\n        bottom: -44px;\n}\n}\n\n/*end loader*/\n", ""]);
+exports.push([module.i, "\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    vertical-align: baseline;\n}\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, menu, nav, section {\n    display: block;\n}\nbody {\n    line-height: 1.1;\n    font-family: IRANSans, sans-serif;\n    font-size: 14px;\n}\nol, ul {\n    list-style: none;\n}\nblockquote, q {\n    quotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n    content: none;\n}\ntable {\n    border-collapse: collapse;\n    border-spacing: 0;\n}\nimg, svg {\n    width: 100%;\n}\na, a:hover, a:visited, a:focus, a:active {\n    text-decoration: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\nth, td {\n    padding: 7px;\n    text-align: right;\n}\n\n/*start style right header*/\n.logo {\n    height: 64px;\n\n    display: block;\n\n    float: right;\n\n    width: 70%;\n}\n#main {\n    background: #fff !important;\n}\n.profile-menu-header {\n    float: left;\n}\n.logo_hide {\n    display: none;\n}\n.logo a {\n    display: inline-block;\n    margin-top: -11px;\n    height: 75px;\n    padding: 0 10px;\n}\n.right-header {\n    width: 250px;\n    right: 0;\n    bottom: 0;\n    position: fixed;\n    top: 0;\n    overflow: hidden;\n    z-index: 9;\n}\n.little_header {\n    width: 80px;\n}\n.right-header.mobile-header {\n    display: none;\n    -webkit-box-shadow: 0 0 20px;\n            box-shadow: 0 0 20px;\n}\n.right-header > header {\n    overflow: hidden;\n    background: #fff;\n}\n.clouse_menu, .clouse_menu_mob {\n    float: left;\n    width: 30%;\n    border: none;\n    background: none;\n    font-size: 35px;\n    top: 0;\n    position: relative;\n    padding: 11px;\n}\n.clouse_menu_mob {\n    display: none;\n}\n.main-right-header {\n    background: #313a43;\n    height: 100%;\n    text-align: right;\n    color: #fff;\n    position: relative;\n}\n.show-header button {\n    float: right;\n    border: none;\n    background: none;\n    font-size: 25px;\n    padding: 19px 30px 19px 24px;\n    display: none;\n}\n.profile {\n    padding: 20px 20px 10px;\n    border-bottom: 2px solid #2e353e;\n}\n.profile-img {\n    overflow: hidden;\n    border-radius: 50%;\n    height: 85px;\n    width: 85px;\n    margin: 0 auto;\n    margin-left: 10px;\n    border: 2px solid #fff;\n    float: right;\n}\n.profile-img img {\n    height: 100%;\n}\n.profile-content {\n    float: right;\n    padding-top: 15px;\n}\n.profile-name {\n    margin: 8px 0;\n    font-size: 17px;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.header-menu a {\n    color: #b1b1b1;\n    padding: 10px 20px;\n    display: inline-block;\n    position: relative;\n    width: 100%;\n}\n.header-menu {\n    padding: 10px 0;\n}\n.header-menu a:hover {\n    color: #fff;\n    background: #637484;\n}\n.header-menu a:hover::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu li.active a {\n    color: #fff;\n    background: #637484;\n}\n.header-menu li.active a:before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.copy-right {\n    text-align: center;\n    font-size: 12px;\n    font-weight: 200;\n    line-height: 1.3em;\n    padding: 20px;\n    position: absolute;\n    bottom: 76px;\n}\nlabel {\n    display: block;\n    margin: 9px auto;\n}\ninput[type=\"text\"], select, input[type=\"button\"], textarea, input[type=\"password\"] {\n    width: 100% !important;\n}\ninput[type=\"text\"], select, textarea, input[type=\"password\"] {\n    background: #eff3f6;\n    border: 1px solid #cfcfcf;\n    border-radius: 3px;\n    width: 100% !important;\n}\ninput[type=\"text\"], textarea, input[type=\"password\"] {\n    padding: 13px 15px;\n    width: 100% !important;\n}\nselect {\n    padding: 7px 15px;\n}\n.image-header-profile img {\n    height: 100%;\n}\n.right-menu-header {\n    position: relative;\n}\n.right-menu-header li ul a {\n    font-size: 14px;\n    width: 100%;\n    display: inline-block;\n}\n.right-menu-header li ul li {\n\n    margin: 5px;\n}\n.icon-header-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    right: 75px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.background_mob_sec {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n\n/*end style right header*/\n\n/*custom*/\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n    color: #3c3c3c;\n}\n\n/*loader*/\n.loader-display {\n    position: fixed;\n    z-index: 10;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0, 0, 0, 0.5);\n    display: block;\n}\n.main-loader {\n    position: absolute;\n\n    top: 35%;\n\n    text-align: center;\n\n    display: block;\n\n    width: 100%;\n\n    color: #fff;\n\n    font-size: 23px;\n}\n.main-loader img {\n    width: 100px;\n\n    background: #fff;\n\n    border-radius: 50px;\n\n    height: 100px;\n\n    display: inline-block;\n\n    margin: 0 auto 22px;\n}\n.loader-wrapper {\n    display: none;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header {\n        display: none;\n}\n.right-header.mobile-header {\n        display: block;\n        right: -300px;\n}\n.main-header, .little-main-header {\n        right: 0 !important;\n}\n#main, #main.little-main {\n        margin-right: 0 !important;\n}\n.post-contents-table {\n        width: 100%;\n}\n.copy-right {\n        display: none;\n}\n.clouse_menu {\n        display: none;\n}\n.clouse_menu_mob {\n        display: block;\n}\n.show-header button {\n        display: block;\n}\n.kind_user > div, .kind_activity > div {\n        float: none;\n}\n.img-profile .submit {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post, .contents-post {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.name-header-profile {\n        display: none;\n}\n.profile-menu-header {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a {\n        font-size: 12px !important;\n        padding: 16px 13px !important;\n}\n.sub-header {\n        bottom: -44px;\n}\n}\n\n/*end loader*/\n", ""]);
 
 // exports
 
@@ -49724,6 +49767,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -65872,7 +65920,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.help[data-v-34e58b5e] {\n    direction: rtl;\n    padding: 0 20px;\n    line-height: 1.618;\n}\nol[data-v-34e58b5e] {\n    list-style: inherit;\n    list-style-type: decimal !important;\n}\nul[data-v-34e58b5e] {\n    padding: 0 15px;\n    list-style: inherit;\n}\n.help .title_list_help[data-v-34e58b5e] {\n    margin: 30px auto;\n    font-size: 16px;\n    font-weight: 800;\n}\n.help .title_list_help ol[data-v-34e58b5e] {\n    margin: 25px 15px;\n    font-size: 14px;\n    font-weight: 400;\n    padding: 15px 30px;\n    -webkit-box-shadow: 0 0 9px rgba(0, 0, 0, .075);\n            box-shadow: 0 0 9px rgba(0, 0, 0, .075);\n}\n.help .title_list_help li[data-v-34e58b5e] {\n    padding: 6px 0;\n}\n", ""]);
+exports.push([module.i, "\n.main-content[data-v-34e58b5e]{\n    padding: 60px 15px;\n}\n.help[data-v-34e58b5e] {\n    direction: rtl;\n    padding: 0 20px;\n    line-height: 1.618;\n}\nol[data-v-34e58b5e] {\n    list-style: inherit;\n    list-style-type: decimal !important;\n}\nul[data-v-34e58b5e] {\n    padding: 0 15px;\n    list-style: inherit;\n}\n.help .title_list_help[data-v-34e58b5e] {\n    margin: 30px auto;\n    font-size: 16px;\n    font-weight: 800;\n}\n.help .title_list_help ol[data-v-34e58b5e] {\n    margin: 25px 15px;\n    font-size: 14px;\n    font-weight: 400;\n    padding: 15px 30px;\n    -webkit-box-shadow: 0 0 9px rgba(0, 0, 0, .075);\n            box-shadow: 0 0 9px rgba(0, 0, 0, .075);\n}\n.help .title_list_help li[data-v-34e58b5e] {\n    padding: 6px 0;\n}\n", ""]);
 
 // exports
 
@@ -65884,6 +65932,9 @@ exports.push([module.i, "\n.help[data-v-34e58b5e] {\n    direction: rtl;\n    pa
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
 //
 //
 //

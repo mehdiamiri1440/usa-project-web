@@ -72,12 +72,15 @@
 
         width: 70%;
     }
+
     #main {
         background: #fff !important;
     }
+
     .profile-menu-header {
         float: left;
     }
+
     .logo_hide {
         display: none;
     }
@@ -245,18 +248,18 @@
         margin: 9px auto;
     }
 
-    input[type="text"], select, input[type="button"], textarea,input[type="password"]  {
+    input[type="text"], select, input[type="button"], textarea, input[type="password"] {
         width: 100% !important;
     }
 
-    input[type="text"], select, textarea,input[type="password"] {
+    input[type="text"], select, textarea, input[type="password"] {
         background: #eff3f6;
         border: 1px solid #cfcfcf;
         border-radius: 3px;
         width: 100% !important;
     }
 
-    input[type="text"], textarea ,input[type="password"] {
+    input[type="text"], textarea, input[type="password"] {
         padding: 13px 15px;
         width: 100% !important;
     }
@@ -299,6 +302,7 @@
         z-index: 999;
 
     }
+
     .background_mob_sec {
         position: fixed;
         right: 0;
@@ -309,6 +313,7 @@
         z-index: -1;
         display: none;
     }
+
     /*end style right header*/
 
     /*custom*/
@@ -817,15 +822,17 @@
                         flag = true;
                     }
                 })
-            }
+            },
+
         },
         mounted() {
             this.init();
             this.toggle_header();
             this.toggle_show_header();
 
+
         },
-        created(){
+        created() {
             eventBus.$on('submitingEvent', (event) => {
                 this.submiting = event;
             });
