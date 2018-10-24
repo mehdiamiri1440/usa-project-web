@@ -489,24 +489,26 @@ function applyToTag (styleElement, obj) {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "eventBus", function() { return eventBus; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_register_register_vue__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_register_register_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_register_register_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_header_header_vue__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_header_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_header_header_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_buyer_header_header_vue__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_buyer_header_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_dashboard_buyer_header_header_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_product_product_basic_vue__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_product_product_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_product_product_basic_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_my_sell_offers_vue__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_my_sell_offers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_my_sell_offers_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_profile_profile_basic_vue__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_profile_profile_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_profile_profile_basic_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_transaction_transaction_vue__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_transaction_transaction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_transaction_transaction_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__router_seller_route__ = __webpack_require__(123);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__router_buyer_route__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_login_Login_vue__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_login_Login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_login_Login_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_register_register_vue__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_register_register_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_register_register_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_header_header_vue__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_header_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_header_header_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_buyer_header_header_vue__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_buyer_header_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_dashboard_buyer_header_header_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_product_product_basic_vue__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_product_product_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_product_product_basic_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_my_sell_offers_vue__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_my_sell_offers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_my_sell_offers_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_profile_profile_basic_vue__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_profile_profile_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_profile_profile_basic_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_transaction_vue__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_transaction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_transaction_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__router_seller_route__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__router_buyer_route__ = __webpack_require__(171);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -526,6 +528,8 @@ window.Vue = __webpack_require__(7);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
+Vue.prototype.$http = __WEBPACK_IMPORTED_MODULE_0_axios___default.a;'\n';
 
 
 
@@ -565,21 +569,44 @@ Vue.component('step1S3', {
     template: '#step1S3'
 });
 
+function checkProfileConfermation() {
+    axios.post('/user/profile_info', {
+        confirmed: true
+    }).then(function (response) {
+        if (response.data.profile.confirmed == false) {
+
+            console.log("toye yek");
+            return false;
+            // $('#myModal-1').modal('show');
+        } else if (response.data.user_info.contract_confirmed == false) {
+            // $('#myModal-1').modal('show');
+            console.log("toye do");
+            return false;
+        } else {
+            console.log("toye se");
+            // window.location.href = url;
+            return true;
+        }
+    });
+}
+
+__WEBPACK_IMPORTED_MODULE_9__router_seller_route__["a" /* default */].beforeEach(function (to, from, next) {});
+
 var eventBus = new Vue();
 
 var app = new Vue({
     el: '#app',
-    router: __WEBPACK_IMPORTED_MODULE_8__router_seller_route__["a" /* default */],
-    routerB: __WEBPACK_IMPORTED_MODULE_9__router_buyer_route__["a" /* default */],
+    router: __WEBPACK_IMPORTED_MODULE_9__router_seller_route__["a" /* default */],
+    routerB: __WEBPACK_IMPORTED_MODULE_10__router_buyer_route__["a" /* default */],
     components: {
-        profileBasic: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_profile_profile_basic_vue___default.a,
-        loginComponent: __WEBPACK_IMPORTED_MODULE_0__components_login_Login_vue___default.a,
-        registerComponent: __WEBPACK_IMPORTED_MODULE_1__components_register_register_vue___default.a,
-        headerDashSeller: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_header_header_vue___default.a,
-        headerDashBuyer: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_buyer_header_header_vue___default.a,
-        productBasic: __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_product_product_basic_vue___default.a,
-        mySellOffers: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_request_my_sell_offers_vue___default.a,
-        transitionSeller: __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_transaction_transaction_vue___default.a
+        profileBasic: __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_profile_profile_basic_vue___default.a,
+        loginComponent: __WEBPACK_IMPORTED_MODULE_1__components_login_Login_vue___default.a,
+        registerComponent: __WEBPACK_IMPORTED_MODULE_2__components_register_register_vue___default.a,
+        headerDashSeller: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_header_header_vue___default.a,
+        headerDashBuyer: __WEBPACK_IMPORTED_MODULE_4__components_dashboard_buyer_header_header_vue___default.a,
+        productBasic: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_product_product_basic_vue___default.a,
+        mySellOffers: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_my_sell_offers_vue___default.a,
+        transitionSeller: __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_transaction_transaction_vue___default.a
     }
 });
 
@@ -50583,6 +50610,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('submitSuccess', function (event) {
             _this2.popUpMsg = event;
         });
+        var currentUrl = window.location.pathname;
+        console.log(currentUrl);
     }
 });
 
@@ -50864,7 +50893,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.sub-header a.router-link-exact-active {\n    color: #313942;\n}\n.sub-header a.router-link-exact-active::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.header-menu a.router-link-exact-active::before,a.active::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu  a.router-link-exact-active,a.active {\n    color: #fff;\n    background: #637484;\n}\n.header-menu i.fa{\n    margin: 5px;\n}\n\n", ""]);
+exports.push([module.i, "\n.sub-header a.router-link-exact-active {\n    color: #313942;\n}\n.sub-header a.router-link-exact-active::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.header-menu a.router-link-exact-active::before, a.active::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu a.router-link-exact-active, a.active {\n    color: #fff;\n    background: #637484;\n}\n.header-menu i.fa {\n    margin: 5px;\n}\n\n", ""]);
 
 // exports
 
@@ -50962,6 +50991,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -50976,6 +51009,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         /* activate:function(el){
              this.active_el = el;
          }*/
+
         subIsActive: function subIsActive(input) {
             var _this = this;
 
@@ -50987,9 +51021,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }, watch: {
         $route: function $route() {
             if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract')) {
-                this.active_el = 1;
+                // this.active_el = 1;
+                this.checkProfileConfirmation();
             } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests')) {
-                this.active_el = 2;
+                // this.active_el = 2
+                this.checkProfileConfirmation();
             } else if (this.subIsActive('/register-product')) {
                 this.active_el = 3;
             } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')) {
