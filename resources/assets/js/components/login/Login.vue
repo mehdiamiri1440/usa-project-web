@@ -13,7 +13,7 @@
                                     <li class="active"> ورود به سامانه</li>
                                 </ul>
                                 <div class="content_section">
-                                    <p class="text-danger" v-show="step1.showMsg">{{step1.msg}}</p>
+                                    <p class="text-danger" v-show="showMsg">{{step1.msg}}</p>
                                     <label>
                                         شماره موبایل
                                     </label>
@@ -57,11 +57,10 @@
                                 </label>
                                 <div class="input_contents">
                                     <span class="after_icon numbers"></span>
-                                    <input class="pad number" type="text" v-model="step2.phone"
+                                    <input class="pad number" type="text"  v-model="step2.phone"
                                            placeholder="09*">
                                 </div>
-                                <span  v-if="step2.errors.phone" class="error_msg">                            {{step2.errors.phone[0]}}
-                                </span>
+                                <span  v-if="errors" class="error_msg">{{errors[0]}} </span>
 
                                           <div class="col-xs-12"> <button class="green_but" type="button"  @click="sendPhoneVerificationCode">ارسال پیام کوتاه
                                           </button></div>
@@ -131,18 +130,19 @@
             return {
                 currentStep: 1,
                 errors: [],
+                showMsg: false,
                 step1: {
                     phone: '',
                     password: '',
-                    showMsg: false,
-                    msg: ''
+                    msg: '',
                 },
                 step2: {
                     phone: '',
-                    errors:[],
+                    msg: '',
                 },
                 step3: {
                     verification_code: '',
+                    msg: '',
                     reSendCode: false,
                 },
 
@@ -165,16 +165,15 @@
                         else {
                             self.showMsg = true;
                             self.errors = [];
-                            self.msg = response.data.msg;
+                            self.step1.msg = response.data.msg;
                         }
                     })
                     .catch(function (err) {
-                        console.log("err")
-//                            if (err.response.data.status == false) {
-//                                alert('teste man');
-//                            }
-//                            self.showMsg = true;
-//                            self.errors = err.response.data.errors;
+                        if(err.response.data.status == false){
+                            alert('teste man');
+                        }
+                        self.showMsg = true;
+                        self.errors = err.response.data.errors;
                     });
             },
             gotToRegister: function () {
@@ -182,7 +181,7 @@
             },
             sendPhoneVerificationCode: function(){
                 var self = this;
-                this.step2.errors = [];
+                this.errors = [];
                 
                 axios.post('/send_phone_verification_code_for_password_reset',{
                     'phone' : this.step2.phone
@@ -193,9 +192,9 @@
                     }
                 })
                 .catch(function(err){
-                        console.log(err.response.data.errors.phone);
-                        self.step2.errors.phone = err.response.data.errors.phone;
-                        console.log(self.step2.errors.phone);
+
+                        self.errors = err.response.data.errors.phone;
+                        console.log(self.errors);
                 });
             },
             verifyCode:function(){
@@ -205,10 +204,10 @@
                     'verification_code' : this.step3.verification_code,
                 })
                 .then(function(response){
-                    
+
                 })
                 .catch(function(err){
-                    
+
                 });
             }
         },
