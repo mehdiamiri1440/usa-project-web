@@ -449,7 +449,7 @@
               items: [
                   {
                       message: 'درخواست من ',
-                      url: '#'
+                      url: 'buyAdRequestsDetail'
                   }
               ]
           }

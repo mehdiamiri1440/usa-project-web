@@ -55,6 +55,9 @@ export default new routerSeller({
             path: '/buyAd-request-detail/:id',
             name: 'buyAdRequestsDetail',
             component: buyAdRequestsDetail,
+            params:{
+                active : 2
+            }
         }
         , {
             path: '/my-sell-offers',
@@ -80,11 +83,17 @@ export default new routerSeller({
             path: '/transaction-detail/:id',
             name: 'transactionDetail',
             component: transactionDetail,
+            params:{
+                active : 4
+            }
         }
         , {
             path: '/transaction-report/:id',
             name: 'transactionReport',
             component: transactionReport,
+            params:{
+                active : 5
+            }
         }
         , {
             path: '/guide',

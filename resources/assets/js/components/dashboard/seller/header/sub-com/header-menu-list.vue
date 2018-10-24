@@ -119,37 +119,38 @@
         }, watch: {
             $route() {
                 if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract')) {
-                    // this.active_el = 1;
-                    this.checkProfileConfirmation();
-                } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests')) {
-                    // this.active_el = 2
-                    this.checkProfileConfirmation();
+                    this.active_el = 1;
+                } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests') || this.subIsActive('/buyAd-request-detail/' + this.$route.params.id)) {
+                    this.active_el = 2
                 } else if (this.subIsActive('/register-product')) {
                     this.active_el = 3
-                } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')) {
+                } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/')|| this.subIsActive('/transaction-detail/'  + this.$route.params.id)) {
                     this.active_el = 4
-                } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/*')) {
+                } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/')|| this.subIsActive('/transaction-report/' + this.$route.params.id)) {
                     this.active_el = 5
                 } else if (this.subIsActive('/guide')) {
                     this.active_el = 6
-                } else {
+                } else{
                     this.active_el = 1
                 }
                 console.log(this.active_el);
             }
         }, mounted: function () {
-            if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract') || this.subIsActive('/*')) {
-                this.active_el = 1
-            } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests')) {
+            console.log(this.subIsActive('/transaction-report/*'));
+            if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract')) {
+                this.active_el = 1;
+            } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests') || this.subIsActive('/buyAd-request-detail/' + this.$route.params.id)) {
                 this.active_el = 2
             } else if (this.subIsActive('/register-product')) {
                 this.active_el = 3
-            } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')) {
+            } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/')|| this.subIsActive('/transaction-detail/'  + this.$route.params.id)) {
                 this.active_el = 4
-            } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/*')) {
+            } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/')|| this.subIsActive('/transaction-report/' + this.$route.params.id)) {
                 this.active_el = 5
             } else if (this.subIsActive('/guide')) {
                 this.active_el = 6
+            } else{
+                this.active_el = 1
             }
         },
         created() {

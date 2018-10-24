@@ -1,7 +1,6 @@
 
 var viz = false;
 function dropdown() {
-    $(this).preventDefault();
     $(".profile-list").fadeIn("slow", function(){
         viz = true;
     });

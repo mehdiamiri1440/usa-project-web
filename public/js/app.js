@@ -590,8 +590,6 @@ function checkProfileConfermation() {
     });
 }
 
-__WEBPACK_IMPORTED_MODULE_9__router_seller_route__["a" /* default */].beforeEach(function (to, from, next) {});
-
 var eventBus = new Vue();
 
 var app = new Vue({
@@ -50984,16 +50982,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }, watch: {
         $route: function $route() {
             if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract')) {
-                // this.active_el = 1;
-                this.checkProfileConfirmation();
-            } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests')) {
-                // this.active_el = 2
-                this.checkProfileConfirmation();
+                this.active_el = 1;
+            } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests') || this.subIsActive('/buyAd-request-detail/' + this.$route.params.id)) {
+                this.active_el = 2;
             } else if (this.subIsActive('/register-product')) {
                 this.active_el = 3;
-            } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')) {
+            } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/') || this.subIsActive('/transaction-detail/' + this.$route.params.id)) {
                 this.active_el = 4;
-            } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/*')) {
+            } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/') || this.subIsActive('/transaction-report/' + this.$route.params.id)) {
                 this.active_el = 5;
             } else if (this.subIsActive('/guide')) {
                 this.active_el = 6;
@@ -51003,18 +50999,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log(this.active_el);
         }
     }, mounted: function mounted() {
-        if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract') || this.subIsActive('/*')) {
+        console.log(this.subIsActive('/transaction-report/*'));
+        if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract')) {
             this.active_el = 1;
-        } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests')) {
+        } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests') || this.subIsActive('/buyAd-request-detail/' + this.$route.params.id)) {
             this.active_el = 2;
         } else if (this.subIsActive('/register-product')) {
             this.active_el = 3;
-        } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')) {
+        } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/') || this.subIsActive('/transaction-detail/' + this.$route.params.id)) {
             this.active_el = 4;
-        } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/*')) {
+        } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/') || this.subIsActive('/transaction-report/' + this.$route.params.id)) {
             this.active_el = 5;
         } else if (this.subIsActive('/guide')) {
             this.active_el = 6;
+        } else {
+            this.active_el = 1;
         }
     },
     created: function created() {
@@ -59108,7 +59107,10 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
     }, {
         path: '/buyAd-request-detail/:id',
         name: 'buyAdRequestsDetail',
-        component: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_buyAd_requests_detail_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_buyAd_requests_detail_vue___default.a,
+        params: {
+            active: 2
+        }
     }, {
         path: '/my-sell-offers',
         name: 'mySellOffers',
@@ -59128,11 +59130,17 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
     }, {
         path: '/transaction-detail/:id',
         name: 'transactionDetail',
-        component: __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transaction_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_transaction_vue___default.a,
+        params: {
+            active: 4
+        }
     }, {
         path: '/transaction-report/:id',
         name: 'transactionReport',
-        component: __WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_transaction_transactionReport___default.a
+        component: __WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_transaction_transactionReport___default.a,
+        params: {
+            active: 5
+        }
     }, {
         path: '/guide',
         name: 'guide',
@@ -62665,7 +62673,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             buyAdId: this.$route.params.id,
             items: [{
                 message: 'درخواست من ',
-                url: '#'
+                url: 'buyAdRequestsDetail'
             }]
         };
     },

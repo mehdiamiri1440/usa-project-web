@@ -105,10 +105,6 @@ function checkProfileConfermation(){
 }
 
 
-router.beforeEach((to, from, next) => {
-
-});
-
 export const eventBus = new Vue();
 
 const app = new Vue({
