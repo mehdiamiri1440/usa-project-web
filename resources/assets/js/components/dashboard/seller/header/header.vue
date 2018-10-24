@@ -839,7 +839,8 @@
             eventBus.$on('submitSuccess', (event) => {
                 this.popUpMsg = event;
             });
-
+            var currentUrl = window.location.pathname;
+            console.log(currentUrl);
 
         }
     }

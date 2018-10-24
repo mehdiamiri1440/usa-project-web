@@ -17,7 +17,9 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-
+import Axios from 'axios'
+Vue.prototype.$http = Axios;`
+`
 import loginComponent from './components/login/Login.vue';
 import registerComponent from './components/register/register.vue';
 import headerDashSeller from './components/dashboard/seller/header/header.vue';
@@ -76,6 +78,36 @@ Vue.component('step1S3', {
 
 
 
+
+function checkProfileConfermation(){
+    axios.post('/user/profile_info',{
+        confirmed : true
+    })
+        .then(function(response){
+            if(response.data.profile.confirmed == false){
+
+                console.log("toye yek");
+                return false;
+                // $('#myModal-1').modal('show');
+            }
+            else if(response.data.user_info.contract_confirmed == false){
+                // $('#myModal-1').modal('show');
+                console.log("toye do");
+                return false;
+            }
+            else{
+                console.log("toye se");
+                // window.location.href = url;
+                return true;
+            }
+
+        });
+}
+
+
+router.beforeEach((to, from, next) => {
+
+});
 
 export const eventBus = new Vue();
 
