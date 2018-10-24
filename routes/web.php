@@ -394,10 +394,19 @@ Route::group(['middleware' => [login::class]],function(){
 });
 
 
-
 Route::post('/get_buyAd_list_by_user_name',[
    'uses' => 'buyAd_controller@get_buyAd_list_by_user_name',
     'as' => 'get_buyAd_list_by_user_name'
+]);
+
+Route::post('/send_phone_verification_code_for_password_reset',[
+   'uses' => 'sms_controller@send_phone_verification_code_for_password_reset',
+   'as' => 'send_reset_password_verification_code'
+]);
+    
+Route::post('/reset_password',[
+    'uses' => 'user_controller@reset_password',
+    'as' => 'reset_password'
 ]);
 
 Route::get('/ads',function(){

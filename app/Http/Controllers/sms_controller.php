@@ -44,6 +44,49 @@ class sms_controller extends Controller
 		
 		
 	}
+    
+    public function send_phone_verification_code_for_password_reset(Request $request)
+    {
+        $rules = [
+			'phone' => ['required','regex:/^((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))$/u']
+		];
+		
+		$this->validate($request,$rules);
+        
+        $user_record = myuser::where('phone',$request->phone)
+                                ->get()
+                                ->first();
+        
+        if($user_record){
+            $random_number = $this->generate_random_number();
+		
+            try{
+                Smsir::sendVerification($random_number,$request->phone);
+
+                $this->set_generated_code_in_session($random_number);
+
+                return response()->json([
+                    'status' => TRUE,
+                    'msg' => 'verification code sent.'
+                ],200);
+            }
+            catch(\Exception $e){
+                return response()->json([
+                   'status' => FALSE,
+                   'msg' => 'ارتباط خود با اینترنت را بررسی کنید.',
+                   'descriptive_msg' => $e->getMessage(),
+                ],500);
+             }
+        }
+		else{
+            return response()->json([
+                'status' => false,
+                'msg' => 'phone number is not correct!',
+            ],500);
+        }
+		
+    }
+	
 	
 	protected function generate_random_number()
 	{
@@ -131,5 +174,27 @@ class sms_controller extends Controller
         $full_name = $user_record->first_name . ' ' . $user_record->last_name ; 
         
         return $prefix . ' ' . $full_name ;
+    }
+    
+    protected function generate_plain_text_password($password_len)
+    {
+        $result = "";
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGH0123456789";
+        $charArray = str_split($chars);
+        for($i = 0; $i < $password_len; $i++){
+            $randItem = array_rand($charArray);
+            $result .= "".$charArray[$randItem];
+        }
+        return $result;
+    }
+    
+    public function send_new_generated_password($password,$user_phone)
+    {
+        try{
+            Smsir::sendToCustomerClub('گذرواژه ی جدید' . "\n" . $password,$user_phone);
+        }
+        catch(\Exception $e){
+            //
+        }
     }
 }
