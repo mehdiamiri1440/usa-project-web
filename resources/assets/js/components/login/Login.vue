@@ -60,7 +60,7 @@
                                     <input class="pad number" type="text"  v-model="step2.phone"
                                            placeholder="09*">
                                 </div>
-                                <span  v-if="errors" class="error_msg">{{errors[0]}} </span>
+                                <span  class="text-danger" v-if="errors">{{errors[0]}} </span>
 
                                           <div class="col-xs-12"> <button class="green_but" type="button"  @click="sendPhoneVerificationCode">ارسال پیام کوتاه
                                           </button></div>
@@ -79,8 +79,8 @@
                                 <li><a href="#" @click="goToStep(1)">ورود به سامانه</a></li>
                                 <li class="active"> بازیابی کلمه عبور</li>
                             </ul>
-
                             <div class="content_section">
+                                <p class="text-danger" v-show="showMsg">{{step3.msg}}</p>
                                 <label>
                                     کد ارسال شده به تلفن همراهتان را وارد کنید.
                                 </label>
@@ -89,9 +89,9 @@
                                     <input class="pad " type="text" name="name" v-model="step3.verification_code"
                                            placeholder="0101">
                                 </div>
-                                <span v-if="errors.verification_code" class="error_msg">
+                                <span v-if="errors.verification_code" class="text-danger">
                                     {{errors.verification_code[0]}}
-                            </span>
+                                </span>
 
                                 <div class="bouttons col-xs-12">
                                     <button class=" green_but" type="button" @click="verifyCode"> بررسی کد</button>
@@ -121,7 +121,7 @@
 
     import RightSection from './RightSection.vue'
 
-    export default {
+    export default{
         props: [
             'logo',
             'homeUrl'
@@ -145,46 +145,43 @@
                     msg: '',
                     reSendCode: false,
                 },
-
             }
         },
         methods: {
             goToStep: function (step) {
                 this.currentStep = step;
             },
-            doLogin: function () {
+            doLogin: function (){
                 var self = this;
                 axios.post("/dologin", {
                     phone: this.step1.phone,
                     password: this.step1.password,
                 })
-                    .then(function (response) {
-                        if (response.data.status == true) {
-                            window.location.href = '/dashboard/';
-                        }
-                        else {
-                            self.showMsg = true;
-                            self.errors = [];
-                            self.step1.msg = response.data.msg;
-                        }
-                    })
-                    .catch(function (err) {
-                        if(err.response.data.status == false){
-                            alert('teste man');
-                        }
+                .then(function (response) {
+                    if (response.data.status == true) {
+                        window.location.href = '/dashboard/';
+                    }
+                    else {
                         self.showMsg = true;
-                        self.errors = err.response.data.errors;
-                    });
+                        self.errors = [];
+                        self.step1.msg = response.data.msg;
+                    }
+                })
+                .catch(function (err) {
+                    self.errors = [];
+                    self.showMsg = false;
+                    self.errors = err.response.data.errors;
+                });
             },
-            gotToRegister: function () {
+            gotToRegister: function (){
                 window.location.href = '/register';
             },
-            sendPhoneVerificationCode: function(){
+            sendPhoneVerificationCode:function(){
                 var self = this;
                 this.errors = [];
                 
                 axios.post('/send_phone_verification_code_for_password_reset',{
-                    'phone' : this.step2.phone
+                    'phone' : this.toLatinNumbers(this.step2.phone)
                 })
                 .then(function(response){
                     if(response.status == 200){
@@ -192,24 +189,55 @@
                     }
                 })
                 .catch(function(err){
-
                         self.errors = err.response.data.errors.phone;
-                        console.log(self.errors);
                 });
             },
             verifyCode:function(){
+                var self = this;
+                this.showMsg  = false;
                 
                 axios.post('/reset_password',{
-                    'phone' : this.step2.phone,
-                    'verification_code' : this.step3.verification_code,
+                    'phone' : this.toLatinNumbers(this.step2.phone),
+                    'verification_code' : this.toLatinNumbers(this.step3.verification_code),
                 })
                 .then(function(response){
-
+                    if(response.data.status == true){
+                        window.location.href = '/login';
+                    }
+                    else{
+                        self.errors = [];
+                        self.showMsg = true;
+                        self.step3.msg = 'کد اشتباه است یا منقضی شده';
+                    }
                 })
                 .catch(function(err){
-
+                    self.errors = [];
+                    self.errors = err.response.data.errors;
                 });
-            }
+            },
+            toLatinNumbers:function(num){
+                if(num == null){
+                    return '';
+                }
+                var numDic = {
+                    '۰': '0',
+                    '۱': '1',
+                    '۲': '2',
+                    '۳': '3',
+                    '۴': '4',
+                    '۵': '5',
+                    '۶': '6',
+                    '۷': '7',
+                    '۸': '8',
+                    '۹': '9',
+                };
+
+                return num
+                    .toString()
+                    .replace(/[۰-۹]/g,function(w){
+                        return numDic[w];
+                    });
+            },
         },
         created() {
             var self = this;
