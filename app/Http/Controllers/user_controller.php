@@ -169,8 +169,8 @@ class user_controller extends Controller
         else{
             return response()->json([
                 'status' => false,
-                'msg' => 'current password in not correct!' 
-            ],500);
+                'msg' => 'current password is not correct!' 
+            ],200);
         }
         
     }

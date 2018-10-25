@@ -5,6 +5,7 @@ import routerSeller from 'vue-router'
 
 // profile components
 import profileBasic from '../components/dashboard/seller/profile/profile_basic.vue'
+import password from '../components/dashboard/seller/profile/change_password.vue'
 import compelementry from '../components/dashboard/seller/profile/profile_complete.vue'
 import profileContract from '../components/dashboard/seller/profile/profile_contract.vue'
 import buyAdRequests from '../components/dashboard/seller/request/buyAd-requests.vue'
@@ -19,6 +20,9 @@ import guide from '../components/dashboard/seller/guide.vue';
 import NotFound from '../components/dashboard/page-not-found.vue';
 Vue.use(routerSeller);
 
+
+
+
 export default new routerSeller({
     routes: [
         {
@@ -26,6 +30,14 @@ export default new routerSeller({
             name: 'pageNotFound',
             component: NotFound
 
+        }
+        , {
+            path: '/password',
+            name: 'password',
+            component: password,
+            params:{
+                active : 1
+            }
         }
         , {
             path: '/',

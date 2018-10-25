@@ -18,8 +18,8 @@ window.Vue = require('vue');
  */
 
 import Axios from 'axios'
-Vue.prototype.$http = Axios;`
-`
+Vue.prototype.$http = Axios;
+
 import loginComponent from './components/login/Login.vue';
 import registerComponent from './components/register/register.vue';
 import headerDashSeller from './components/dashboard/seller/header/header.vue';
@@ -32,6 +32,19 @@ import router from './router/seller_route'
 import routerB from './router/buyer_route'
 
 
+router.push({
+    response(resp) {
+        // Check if the user is no longer signed in,
+        // if so then we need them to sign back in.
+        if (resp.status === 302) {
+            window.location.href = '/login';
+
+            return;
+        }
+
+        return resp;
+    }
+});
 
 
 Vue.component('step1', {
