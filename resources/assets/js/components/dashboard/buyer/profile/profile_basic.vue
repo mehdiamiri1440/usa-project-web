@@ -530,7 +530,8 @@
 </style>
 
 <template>
-    <section class="main-content col-xs-12">
+    <h1>hi babe</h1>
+ <!--   <section class="main-content col-xs-12">
         <form action="#" method="post" enctype="multipart/form-data">
             <div class="img-profile col-md-3">
                 <div class="image-input">
@@ -634,7 +635,7 @@
 
         </form>
     </section>
-
+-->
 </template>
 
 <script>

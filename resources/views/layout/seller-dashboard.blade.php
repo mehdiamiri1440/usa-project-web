@@ -74,6 +74,7 @@
         @section('main_content')
             <main id="main">
             <router-view
+                    name="seller"
                     pagenotfoundimage = "{{url('index/images/def404.png')}}"
                     loading="{{asset('assets/img/gif/loading.gif')}}"
                     trans="{{url('dashboard/transaction-detail')}}"

@@ -59123,12 +59123,50 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_dashboard_seller_guide_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_dashboard_seller_guide_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_dashboard_page_not_found_vue__ = __webpack_require__(171);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_dashboard_page_not_found_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_dashboard_page_not_found_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_dashboard_buyer_profile_profile_basic_vue__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_dashboard_buyer_profile_profile_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_dashboard_buyer_profile_profile_basic_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_dashboard_buyer_profile_profile_complete_vue__ = __webpack_require__(182);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_dashboard_buyer_profile_profile_complete_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17__components_dashboard_buyer_profile_profile_complete_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_dashboard_buyer_profile_profile_contract_vue__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_dashboard_buyer_profile_profile_contract_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18__components_dashboard_buyer_profile_profile_contract_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_dashboard_buyer_request_buyAd_requests_vue__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_dashboard_buyer_request_buyAd_requests_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19__components_dashboard_buyer_request_buyAd_requests_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_dashboard_buyer_request_buyAd_requests_detail_vue__ = __webpack_require__(197);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_dashboard_buyer_request_buyAd_requests_detail_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20__components_dashboard_buyer_request_buyAd_requests_detail_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_dashboard_buyer_request_my_sell_offers_vue__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_dashboard_buyer_request_my_sell_offers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21__components_dashboard_buyer_request_my_sell_offers_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_dashboard_buyer_product_product_basic_vue__ = __webpack_require__(207);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_dashboard_buyer_product_product_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_22__components_dashboard_buyer_product_product_basic_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_dashboard_buyer_transaction_my_transactions_vue__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_dashboard_buyer_transaction_my_transactions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_23__components_dashboard_buyer_transaction_my_transactions_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_dashboard_buyer_transaction_my_terminated_transactions_vue__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_dashboard_buyer_transaction_my_terminated_transactions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_24__components_dashboard_buyer_transaction_my_terminated_transactions_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_dashboard_buyer_transaction_transaction_vue__ = __webpack_require__(222);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_dashboard_buyer_transaction_transaction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_25__components_dashboard_buyer_transaction_transaction_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_dashboard_buyer_transaction_transactionReport__ = __webpack_require__(227);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_dashboard_buyer_transaction_transactionReport___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_26__components_dashboard_buyer_transaction_transactionReport__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_dashboard_buyer_guide_vue__ = __webpack_require__(234);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_dashboard_buyer_guide_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_27__components_dashboard_buyer_guide_vue__);
 
 
 
-// components
+// Seller Components
 
-// profile components
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Buyer Components
 
 
 
@@ -59149,76 +59187,117 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
     routes: [{
         path: '*',
         name: 'pageNotFound',
-        component: __WEBPACK_IMPORTED_MODULE_15__components_dashboard_page_not_found_vue___default.a
+        components: {
+            seller: __WEBPACK_IMPORTED_MODULE_15__components_dashboard_page_not_found_vue___default.a
+        }
 
     }, {
         path: '/password',
         name: 'password',
-        component: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_profile_forgat_password_vue___default.a,
+        components: {
+            seller: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_profile_forgat_password_vue___default.a,
+            buyer: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_profile_forgat_password_vue___default.a
+        },
         params: {
             active: 1
         }
     }, {
         path: '/',
         name: 'profileBasic',
-        component: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue___default.a,
+        components: {
+            seller: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_seller_profile_profile_basic_vue___default.a,
+            buyer: __WEBPACK_IMPORTED_MODULE_16__components_dashboard_buyer_profile_profile_basic_vue___default.a
+        },
         params: {
             active: 1
         }
     }, {
         path: '/complementry',
         name: 'compelementry',
-        component: __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_complete_vue___default.a
+        components: {
+            seller: __WEBPACK_IMPORTED_MODULE_4__components_dashboard_seller_profile_profile_complete_vue___default.a,
+            buyer: __WEBPACK_IMPORTED_MODULE_17__components_dashboard_buyer_profile_profile_complete_vue___default.a
+        }
     }, {
         path: '/profile_contract',
         name: 'profileContract',
-        component: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_contract_vue___default.a
+        components: {
+            seller: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_contract_vue___default.a,
+            buyer: __WEBPACK_IMPORTED_MODULE_18__components_dashboard_buyer_profile_profile_contract_vue___default.a
+        }
     }, {
         path: '/buyAd-requests',
         name: 'buyAdRequests',
-        component: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_buyAd_requests_vue___default.a,
+        components: {
+            seller: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_seller_request_buyAd_requests_vue___default.a,
+            buyer: __WEBPACK_IMPORTED_MODULE_19__components_dashboard_buyer_request_buyAd_requests_vue___default.a
+        },
         props: true
     }, {
         path: '/buyAd-request-detail/:id',
         name: 'buyAdRequestsDetail',
-        component: __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_request_buyAd_requests_detail_vue___default.a,
+        components: {
+            seller: __WEBPACK_IMPORTED_MODULE_7__components_dashboard_seller_request_buyAd_requests_detail_vue___default.a,
+            buyer: __WEBPACK_IMPORTED_MODULE_20__components_dashboard_buyer_request_buyAd_requests_detail_vue___default.a
+        },
         params: {
             active: 2
         }
     }, {
         path: '/my-sell-offers',
         name: 'mySellOffers',
-        component: __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_request_my_sell_offers_vue___default.a
+        components: {
+            seller: __WEBPACK_IMPORTED_MODULE_8__components_dashboard_seller_request_my_sell_offers_vue___default.a,
+            buyer: __WEBPACK_IMPORTED_MODULE_21__components_dashboard_buyer_request_my_sell_offers_vue___default.a
+        }
     }, {
         path: '/register-product',
         name: 'registerProduct',
-        component: __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_product_product_basic_vue___default.a
+        components: {
+            seller: __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_product_product_basic_vue___default.a,
+            buyer: __WEBPACK_IMPORTED_MODULE_22__components_dashboard_buyer_product_product_basic_vue___default.a
+        }
     }, {
         path: '/transaction-list',
         name: 'myTransactions',
-        component: __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_my_transactions_vue___default.a
+        components: {
+            seller: __WEBPACK_IMPORTED_MODULE_10__components_dashboard_seller_transaction_my_transactions_vue___default.a,
+            buyer: __WEBPACK_IMPORTED_MODULE_23__components_dashboard_buyer_transaction_my_transactions_vue___default.a
+        }
     }, {
         path: '/terminated-transaction-list',
         name: 'myTerminatedTransactions',
-        component: __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_my_terminated_transactions_vue___default.a
+        components: {
+            seller: __WEBPACK_IMPORTED_MODULE_11__components_dashboard_seller_transaction_my_terminated_transactions_vue___default.a,
+            buyer: __WEBPACK_IMPORTED_MODULE_24__components_dashboard_buyer_transaction_my_terminated_transactions_vue___default.a
+        }
     }, {
         path: '/transaction-detail/:id',
         name: 'transactionDetail',
-        component: __WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_transaction_transaction_vue___default.a,
+        components: {
+            seller: __WEBPACK_IMPORTED_MODULE_12__components_dashboard_seller_transaction_transaction_vue___default.a,
+            buyer: __WEBPACK_IMPORTED_MODULE_25__components_dashboard_buyer_transaction_transaction_vue___default.a
+        },
         params: {
             active: 4
         }
     }, {
         path: '/transaction-report/:id',
         name: 'transactionReport',
-        component: __WEBPACK_IMPORTED_MODULE_13__components_dashboard_seller_transaction_transactionReport___default.a,
+        components: {
+            seller: __WEBPACK_IMPORTED_MODULE_13__components_dashboard_seller_transaction_transactionReport___default.a,
+            buyer: __WEBPACK_IMPORTED_MODULE_26__components_dashboard_buyer_transaction_transactionReport___default.a
+        },
         params: {
             active: 5
         }
     }, {
         path: '/guide',
         name: 'guide',
-        component: __WEBPACK_IMPORTED_MODULE_14__components_dashboard_seller_guide_vue___default.a
+        components: {
+            seller: __WEBPACK_IMPORTED_MODULE_14__components_dashboard_seller_guide_vue___default.a,
+            buyer: __WEBPACK_IMPORTED_MODULE_27__components_dashboard_buyer_guide_vue___default.a
+        }
     }]
 }));
 
@@ -67470,10 +67549,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     routes: [{
         path: '/',
-        name: 'profileBasic',
-        component: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_buyer_profile_profile_basic_vue___default.a,
-        params: {
-            active: 1
+        // name: 'profileBasici',
+        components: {
+            a: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_buyer_profile_profile_basic_vue___default.a
         }
     }, {
         path: '/complementry',
@@ -68260,6 +68338,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -68398,423 +68477,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "main-content col-xs-12" }, [
-    _c(
-      "form",
-      {
-        attrs: { action: "#", method: "post", enctype: "multipart/form-data" }
-      },
-      [
-        _c("div", { staticClass: "img-profile col-md-3" }, [
-          _c("div", { staticClass: "image-input" }, [
-            _vm.currentUser.profile.profile_photo
-              ? _c("div", [
-                  _c("img", {
-                    attrs: {
-                      src:
-                        _vm.storage +
-                        "/" +
-                        _vm.currentUser.profile.profile_photo,
-                      id: "blah",
-                      alt: "تصویر پروفایل"
-                    }
-                  })
-                ])
-              : _c("div", [
-                  _c("img", {
-                    attrs: { src: _vm.defultimg, align: "تصویر پروفایل" }
-                  })
-                ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "submit" }, [
-              _c("input", {
-                ref: "profilePhoto",
-                attrs: { type: "file", id: "imgInp" }
-              }),
-              _vm._v(" "),
-              _c("label", [_vm._v("ویرایش تصویر")]),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _vm.errors.profile_photo
-                ? _c("span", { staticClass: "text-danger tex-left" }, [
-                    _vm._v(_vm._s(_vm.errors.profile_photo[0]))
-                  ])
-                : _vm._e()
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "main-profile col-md-9" }, [
-          _c("div", { staticClass: "kind_user col-xs-12" }, [
-            _c("label", { staticClass: "header-lable " }, [
-              _vm._v("\n                    نوع کاربری\n                ")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: " col-xs-6 col-md-4" }, [
-              _vm._v("\n                    حقیقی "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.currentUser.profile.is_company,
-                    expression: "currentUser.profile.is_company"
-                  }
-                ],
-                attrs: {
-                  onclick: "disable_form(this);",
-                  type: "radio",
-                  name: "kind_user",
-                  value: "0"
-                },
-                domProps: {
-                  checked: _vm._q(_vm.currentUser.profile.is_company, "0")
-                },
-                on: {
-                  change: function($event) {
-                    _vm.$set(_vm.currentUser.profile, "is_company", "0")
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("i", { staticClass: "fa fa-check" })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: " col-xs-6 col-md-4" }, [
-              _vm._v("\n                    حقوقی "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.currentUser.profile.is_company,
-                    expression: "currentUser.profile.is_company"
-                  }
-                ],
-                attrs: {
-                  onclick: "enable_form(this);",
-                  type: "radio",
-                  name: "kind_user",
-                  value: "1"
-                },
-                domProps: {
-                  checked: _vm._q(_vm.currentUser.profile.is_company, "1")
-                },
-                on: {
-                  change: function($event) {
-                    _vm.$set(_vm.currentUser.profile, "is_company", "1")
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("i", { staticClass: "fa fa-check" })
-            ]),
-            _vm._v(" "),
-            _vm.errors.is_company
-              ? _c("span", { staticClass: "text-danger" }, [
-                  _vm._v("@" + _vm._s(_vm.errors.is_company[0]))
-                ])
-              : _vm._e()
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "user-form col-xs-12" }, [
-            _c("label", { staticClass: "header-lable" }, [
-              _vm._v("\n                    مشخصات کاربری\n                ")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-6" }, [
-              _c(
-                "label",
-                { staticClass: "content-lable", attrs: { for: "co-num" } },
-                [
-                  _vm._v(
-                    "\n                        شماره ثبت شرکت:\n                    "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.currentUser.profile.company_register_code,
-                    expression: "currentUser.profile.company_register_code"
-                  }
-                ],
-                attrs: {
-                  type: "text",
-                  id: "co-num",
-                  name: "company-number",
-                  placeholder: "شماره ثبت شرکت",
-                  disabled: "disabled"
-                },
-                domProps: {
-                  value: _vm.currentUser.profile.company_register_code
-                },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.currentUser.profile,
-                      "company_register_code",
-                      $event.target.value
-                    )
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _vm.errors.company_register_code
-                ? _c("span", { staticClass: "text-danger" }, [
-                    _vm._v(_vm._s(_vm.errors.company_register_code[0]))
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-6" }, [
-              _c(
-                "label",
-                { staticClass: "content-lable", attrs: { for: "company" } },
-                [
-                  _vm._v(
-                    "\n                        نام شرکت:\n                    "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.currentUser.profile.company_name,
-                    expression: "currentUser.profile.company_name"
-                  }
-                ],
-                attrs: {
-                  type: "text",
-                  id: "company",
-                  name: "company",
-                  placeholder: "نام شرکت",
-                  disabled: ""
-                },
-                domProps: { value: _vm.currentUser.profile.company_name },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.currentUser.profile,
-                      "company_name",
-                      $event.target.value
-                    )
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _vm.errors.company_name
-                ? _c("span", { staticClass: "text-danger" }, [
-                    _vm._v(_vm._s(_vm.errors.company_name[0]))
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-6" }, [
-              _c(
-                "label",
-                { staticClass: "content-lable", attrs: { for: "company" } },
-                [
-                  _vm._v(
-                    "\n                        شماره تماس:\n                    "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.currentUser.profile.public_phone,
-                    expression: "currentUser.profile.public_phone"
-                  }
-                ],
-                attrs: { type: "text", name: "tel", placeholder: "شماره تماس" },
-                domProps: { value: _vm.currentUser.profile.public_phone },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.currentUser.profile,
-                      "public_phone",
-                      $event.target.value
-                    )
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _vm.errors.public_phone
-                ? _c("span", { staticClass: "text-danger" }, [
-                    _vm._v(_vm._s(_vm.errors.public_phone[0]))
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-6" }, [
-              _c(
-                "label",
-                { staticClass: "content-lable", attrs: { for: "company" } },
-                [
-                  _vm._v(
-                    "\n                        آدرس:\n                    "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.currentUser.profile.address,
-                    expression: "currentUser.profile.address"
-                  }
-                ],
-                attrs: { type: "text", name: "address", placeholder: "آدرس" },
-                domProps: { value: _vm.currentUser.profile.address },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.currentUser.profile,
-                      "address",
-                      $event.target.value
-                    )
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _vm.errors.address
-                ? _c("span", { staticClass: "text-danger" }, [
-                    _vm._v(_vm._s(_vm.errors.address[0]))
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-6" }, [
-              _c(
-                "label",
-                { staticClass: "content-lable", attrs: { for: "company" } },
-                [
-                  _vm._v(
-                    "\n                        کد پستی:\n                    "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.currentUser.profile.postal_code,
-                    expression: "currentUser.profile.postal_code"
-                  }
-                ],
-                attrs: {
-                  type: "text",
-                  name: "address",
-                  placeholder: "کد پستی"
-                },
-                domProps: { value: _vm.currentUser.profile.postal_code },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.currentUser.profile,
-                      "postal_code",
-                      $event.target.value
-                    )
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _vm.errors.postal_code
-                ? _c("span", { staticClass: "text-danger" }, [
-                    _vm._v("@" + _vm._s(_vm.errors.postal_code[0]))
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-6" }, [
-              _c(
-                "label",
-                { staticClass: "content-lable", attrs: { for: "company" } },
-                [
-                  _vm._v(
-                    "\n                        شماره شبا:\n                    "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.currentUser.profile.shaba_code,
-                    expression: "currentUser.profile.shaba_code"
-                  }
-                ],
-                attrs: {
-                  type: "text",
-                  name: "address",
-                  placeholder: "شماره شبا"
-                },
-                domProps: { value: _vm.currentUser.profile.shaba_code },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.currentUser.profile,
-                      "shaba_code",
-                      $event.target.value
-                    )
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _vm.errors.shaba_code
-                ? _c("span", { staticClass: "text-danger" }, [
-                    _vm._v("@" + _vm._s(_vm.errors.shaba_code[0]))
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-xs-12" }, [
-              _c("input", {
-                staticClass: "green-bot",
-                attrs: { type: "button", name: "submit", value: "ثبت تغییرات" },
-                on: { click: _vm.RegisterBasicProfileInfo }
-              })
-            ])
-          ])
-        ])
-      ]
-    )
-  ])
+  return _c("h1", [_vm._v("hi babe")])
 }
 var staticRenderFns = []
 render._withStripped = true

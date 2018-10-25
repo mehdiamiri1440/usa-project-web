@@ -4,7 +4,7 @@ import buyerRouter from 'vue-router'
 // components
 
 // profile components
-import profileBasic from '../components/dashboard/buyer/profile/profile_basic.vue'
+import profileBasici from '../components/dashboard/buyer/profile/profile_basic.vue'
 import compelementry from '../components/dashboard/buyer/profile/profile_complete.vue'
 import profileContract from '../components/dashboard/buyer/profile/profile_contract.vue'
 import buyAdRequests from '../components/dashboard/buyer/request/buyAd-requests.vue'
@@ -22,11 +22,10 @@ export default new buyerRouter({
     routes: [
         {
             path: '/',
-            name: 'profileBasic',
-            component: profileBasic,
-            params:{
-                active : 1
-            }
+            // name: 'profileBasici',
+            components: {
+                a: profileBasici,
+            },
         }
         , {
             path: '/complementry',

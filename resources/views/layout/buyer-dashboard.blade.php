@@ -65,7 +65,8 @@
     ></header-dash-buyer>
     {{--@section('main_content')--}}
         <main id="main">
-            <router-view
+          <router-view
+                    name="buyer"
                     loading="{{asset('assets/img/gif/loading.gif')}}"
                     trans="{{url('dashboard/transaction-detail')}}"
                     transRep="{{url('dashboard/transaction-report')}}"
