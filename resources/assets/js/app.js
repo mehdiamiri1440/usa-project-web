@@ -18,8 +18,8 @@ window.Vue = require('vue');
  */
 
 import Axios from 'axios'
-Vue.prototype.$http = Axios;`
-`
+Vue.prototype.$http = Axios;
+
 import loginComponent from './components/login/Login.vue';
 import registerComponent from './components/register/register.vue';
 import headerDashSeller from './components/dashboard/seller/header/header.vue';
@@ -28,8 +28,8 @@ import productBasic from './components/dashboard/seller/product/product-basic.vu
 import mySellOffers from './components/dashboard/seller/request/my-sell-offers.vue';
 import profileBasic from './components/dashboard/seller/profile/profile_basic.vue'
 import transitionSeller from './components/dashboard/seller/transaction/transaction.vue';
-import router from './router/seller_route'
-import routerB from './router/buyer_route'
+import router from './router/route'
+
 
 
 router.push({
@@ -123,7 +123,6 @@ export const eventBus = new Vue();
 const app = new Vue({
     el: '#app',
     router,
-    routerB,
     components:{
         profileBasic,
         loginComponent,

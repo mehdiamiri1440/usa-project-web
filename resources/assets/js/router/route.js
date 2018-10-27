@@ -2,6 +2,7 @@ import Vue from 'vue'
 import router from 'vue-router'
 
 
+
 // Seller Components
 import sellerProfileBasic from '../components/dashboard/seller/profile/profile_basic.vue'
 import sellerChangePassword from '../components/dashboard/seller/profile/forgat_password.vue'
@@ -17,6 +18,24 @@ import sellerTransactionDetail from '../components/dashboard/seller/transaction/
 import sellerTransactionReport from '../components/dashboard/seller/transaction/transactionReport';
 import sellerGuide from '../components/dashboard/seller/guide.vue';
 import sellerNotFound from '../components/dashboard/page-not-found.vue';
+
+// profile components
+import profileBasic from '../components/dashboard/seller/profile/profile_basic.vue'
+import password from '../components/dashboard/seller/profile/change_password.vue'
+import compelementry from '../components/dashboard/seller/profile/profile_complete.vue'
+import profileContract from '../components/dashboard/seller/profile/profile_contract.vue'
+import buyAdRequests from '../components/dashboard/seller/request/buyAd-requests.vue'
+import buyAdRequestsDetail from '../components/dashboard/seller/request/buyAd-requests-detail.vue'
+import mySellOffers from '../components/dashboard/seller/request/my-sell-offers.vue'
+import registerProduct from '../components/dashboard/seller/product/product-basic.vue'
+import myTransactions from '../components/dashboard/seller/transaction/my-transactions.vue';
+import myTerminatedTransactions from '../components/dashboard/seller/transaction/my-terminated-transactions.vue';
+import transactionDetail from '../components/dashboard/seller/transaction/transaction.vue';
+import transactionReport from '../components/dashboard/seller/transaction/transactionReport';
+import guide from '../components/dashboard/seller/guide.vue';
+import NotFound from '../components/dashboard/page-not-found.vue';
+Vue.use(routerSeller);
+
 
 
 // Buyer Components

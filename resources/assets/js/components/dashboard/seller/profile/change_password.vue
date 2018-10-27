@@ -554,34 +554,34 @@
                 <div class="user-form col-xs-12">
 
                     <label class="header-lable">
-                       بازیابی کلمه عبور
+                       تغییر کلمه عبور
                     </label>
 
 
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <label for="old-password" class="content-lable">
                             کلمه عبور فعلی:
                         </label>
-                        <input id="old-password" type="password" placeholder="کلمه عبور فعلی">
-                        <!--<span class="text-danger">@{{ errors.postal_code[0] }}</span>-->
+                        <input id="old-password" type="password" v-model="currentPassword" placeholder="کلمه عبور فعلی">
+                        <span class="text-danger" v-if="errors.current_password">{{ errors.current_password[0] }}</span>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <label for="new-password" class="content-lable">
                             کلمه عبور جدید:
                         </label>
-                        <input id="new-password" type="password" placeholder="کلمه عبور جدید">
-                        <!--<span   class="text-danger">@{{ errors.shaba_code[0] }}</span>-->
+                        <input id="new-password" type="password" v-model="newPassword" placeholder="کلمه عبور جدید">
+                        <span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <label for="repeat-new-password" class="content-lable">
                             تکرار کلمه عبور جدید:
                         </label>
-                        <input id="repeat-new-password" type="password" placeholder="کلمه عبور جدید">
-                        <!--<span   class="text-danger">@{{ errors.shaba_code[0] }}</span>-->
+                        <input id="repeat-new-password" type="password" v-model="newPasswordRepeat" placeholder="کلمه عبور جدید">
+                        <span class="text-danger" v-if="errors.password_repeat">{{ errors.password_repeat[0] }}</span>
                     </div>
                     <div class="col-xs-12">
-                        <input type="button" class="green-bot" name="submit" value="ثبت تغییرات"
-                               v-on:click="RegisterBasicProfileInfo">
+                        <input type="button" class="green-bot" name="submit" value="ارسال"
+                               v-on:click="changePassword">
                     </div>
 
                 </div>
@@ -592,6 +592,7 @@
 
 </template>
 
+
 <script>
     import {eventBus} from '../../../../app';
 
@@ -600,57 +601,84 @@
             'str',
             'defultimg'
         ],
-        data: function () {
+        data: function (){
             return {
-                errors: '',
+                errors:{
+                    current_password:[],
+                    password:[],
+                    passwordRepeat:[],
+                },
+                errorFlag: false,
                 popUpMsg: '',
                 items: [
                     {
-                        message: 'بازیابی کلمه عبور',
+                        message: 'تغییر کلمه عبور',
                         url: 'password',
                     }
                 ],
+                currentPassword:'',
+                newPassword:'',
+                newPasswordRepeat:'',
             }
         },
         methods: {
             init: function () {
-                this.isLoaded = true;
-                axios.post('/user/profile_info')
-                    .then(response => (this.currentUser = response.data));
+                
             },
-            RegisterBasicProfileInfo: function () {
-                eventBus.$emit('submitingEvent', true);
-                this.errors = '';
-                var self = this;
-
-                var data = new FormData();
-
-                for (var i = 0, cnt = this.profileBasicFields.length; i < cnt; i++) {
-                    if (this.currentUser.profile[this.profileBasicFields[i]] != null) {
-                        data.append(this.profileBasicFields[i], this.toLatinNumbers(this.currentUser.profile[this.profileBasicFields[i]]));
-                    }
-                }
-
-                let profilePhoto = this.$refs.profilePhoto.files[0];
-                if (profilePhoto) {
-                    data.append('profile_photo', profilePhoto);
-                }
-
-                axios.post('/user/profile_modification', data)
-                    .then(function (response) {
-                        if (response.status == 200) {
-                            eventBus.$emit('submitingEvent', false);
-                            self.popUpMsg = 'تغییرات با موفقیت اعمال شد';
-                            eventBus.$emit('submitSuccess', self.popUpMsg);
-                            $('#myModal').modal('show');
-                        }
-                        self.submiting = false;
+            changePassword: function(){
+                this.errorFlag = false;
+                this.passwordValidator(this.currentPassword,this.newPassword,this.newPasswordRepeat);
+                
+                if(this.errorFlag == false){
+                    //send Request
+                    var self  = this;
+                    axios.post('/change_password',{
+                        current_password: self.currentPassword,
+                        new_password: self.newPassword
                     })
-                    .catch(function (err) {
-                        self.errors = '';
-                        self.errors = err.response.data.errors;
-                        eventBus.$emit('submitingEvent', false);
+                    .then(function(response){
+                        if(response.data.status == true){
+                            //show modal password changed
+                            alert('password changed');
+                        }
+                        else if(response.data.status == false){
+                            self.errors.current_password.push('رمز عبور فعلی درست نیست');
+                        }
+                    })
+                    .catch(function(err){
+                        //failed for unknown reason try again later
+                        alert('test');
                     });
+                }
+                else{
+                    //
+                }
+            },
+            passwordValidator:function(currentPass,pass,passConf){
+                this.errors.password = [];
+                this.errors.password_repeat = [];
+                this.errors.current_password = [];
+                
+                if(currentPass === ''){
+                    this.errors.current_password.push('رمز عبور فعلی الزامی است');
+                    this.errorFlag = true;
+                }
+                if(pass === ''){
+                    this.errors.password.push('رمز عبور جدید الزامی است');
+                    this.errorFlag = true;
+                }
+                if(pass.length < 8){
+                    this.errors.password.push('رمز عبور حداقل ۸ کاراکتر باشد');
+                    this.errorFlag = true;
+                }
+                if(passConf === ''){
+                    this.errors.password_repeat.push('تکرار رمز عبور الزامی است');
+                    this.errorFlag = true;
+                }
+                if(passConf != pass){
+                    this.errors.password_repeat.push('رمز عبور مطابقت ندارد');
+                    this.errorFlag = true;
+                }
             },
             toLatinNumbers: function (num) {
                 if (num == null) {
@@ -675,54 +703,10 @@
                         return numDic[w];
                     });
             },
-            disable_form: function () {
-                var feild_co_num = $("#co-num");
-                var feild_co = $("#company");
-                this.currentUser.profile.company_register_code = null;
-                this.currentUser.profile.company_name = null;
-                feild_co_num.attr('disabled', true);
-                feild_co.attr('disabled', true);
-            },
-            enable_form: function () {
-                var feild_co_num = $("#co-num");
-                var feild_co = $("#company");
-                feild_co.val('');
-                feild_co_num.prop('disabled', false);
-                feild_co.prop('disabled', false);
-            }
         },
         mounted() {
             this.init();
             eventBus.$emit('subHeader', this.items);
-
-            function show_image_preview(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    var image = $('#blah');
-                    var icon_profile = $('#icon-pro');
-                    reader.onload = function (e) {
-                        image.attr('src', e.target.result);
-                        image.css('display', 'inline');
-                        icon_profile.css('display', 'none');
-                    };
-                    reader.readAsDataURL(input.files[0]);
-                }
-
-            }
-
-            function image_checked() {
-                var image = $('#blah');
-                var icon_profile = $('#icon-pro');
-                if (image.attr('src') != "") {
-                    image.css('display', 'inline');
-                    icon_profile.css('display', 'none');
-                }
-            }
-
-            image_checked();
-            $("#imgInp").change(function () {
-                show_image_preview(this);
-            })
         }
     }
 

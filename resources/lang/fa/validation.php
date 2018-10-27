@@ -121,5 +121,6 @@ return array(
         'product_name' => 'نوع محصول',
         'postal_code' => 'کد پستی',
         'shaba_code' => 'شماره شبا',
+        'verification_code' => 'کد'
     ),
 );

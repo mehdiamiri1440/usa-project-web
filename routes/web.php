@@ -391,6 +391,11 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'transaction_controller@get_user_in_progress_transaction_list',
         'as' => 'get_user_transaction_list'
     ]);
+    
+    Route::post('/change_password',[
+       'uses' => 'user_controller@change_password',
+       'as' => 'change_user_password'
+    ]);
 });
 
 

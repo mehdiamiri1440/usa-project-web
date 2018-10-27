@@ -169,8 +169,8 @@ class user_controller extends Controller
         else{
             return response()->json([
                 'status' => false,
-                'msg' => 'current password in not correct!' 
-            ],500);
+                'msg' => 'current password is not correct!' 
+            ],200);
         }
         
     }
@@ -191,7 +191,7 @@ class user_controller extends Controller
             $user_record = myuser::where('phone',$request->phone)
                                     ->get()
                                     ->first();
-//            try{
+            try{
                 $user_record->password = sha1($new_generated_password);
                 $user_record->save();
                 //send new password to user's phone
@@ -204,13 +204,13 @@ class user_controller extends Controller
                     'status' => true,
                     'msg' => 'password has been sent'
                 ],200);
-//            }
-//            catch(\Exception $e){
-//                return response()->json([
-//                    'status' => false,
-//                    'msg' => 'failed to change password or send SMS!',
-//                ],500);
-//            }
+            }
+            catch(\Exception $e){
+                return response()->json([
+                    'status' => false,
+                    'msg' => '',
+                ],500);
+            }
 		}
 		else{
 			return response()->json([
