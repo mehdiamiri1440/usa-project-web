@@ -28,7 +28,7 @@ import productBasic from './components/dashboard/seller/product/product-basic.vu
 import mySellOffers from './components/dashboard/seller/request/my-sell-offers.vue';
 import profileBasic from './components/dashboard/seller/profile/profile_basic.vue'
 import transitionSeller from './components/dashboard/seller/transaction/transaction.vue';
-import router from './router/route'
+import router from './router/dashboard_router'
 
 
 

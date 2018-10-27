@@ -5,7 +5,7 @@ import router from 'vue-router'
 
 // Seller Components
 import sellerProfileBasic from '../components/dashboard/seller/profile/profile_basic.vue'
-import sellerChangePassword from '../components/dashboard/seller/profile/forgat_password.vue'
+import sellerChangePassword from '../components/dashboard/seller/profile/change_password.vue'
 import sellerCompelementry from '../components/dashboard/seller/profile/profile_complete.vue'
 import sellerProfileContract from '../components/dashboard/seller/profile/profile_contract.vue'
 import sellerBuyAdRequests from '../components/dashboard/seller/request/buyAd-requests.vue'
@@ -20,7 +20,7 @@ import sellerGuide from '../components/dashboard/seller/guide.vue';
 import sellerNotFound from '../components/dashboard/page-not-found.vue';
 
 // profile components
-import profileBasic from '../components/dashboard/seller/profile/profile_basic.vue'
+/*import profileBasic from '../components/dashboard/seller/profile/profile_basic.vue'
 import password from '../components/dashboard/seller/profile/change_password.vue'
 import compelementry from '../components/dashboard/seller/profile/profile_complete.vue'
 import profileContract from '../components/dashboard/seller/profile/profile_contract.vue'
@@ -34,13 +34,13 @@ import transactionDetail from '../components/dashboard/seller/transaction/transa
 import transactionReport from '../components/dashboard/seller/transaction/transactionReport';
 import guide from '../components/dashboard/seller/guide.vue';
 import NotFound from '../components/dashboard/page-not-found.vue';
-Vue.use(routerSeller);
+Vue.use(routerSeller);*/
 
 
 
 // Buyer Components
 import buyerProfileBasic from '../components/dashboard/buyer/profile/profile_basic.vue'
-import buyerChangePassword from '../components/dashboard/seller/profile/forgat_password.vue'
+import buyerChangePassword from '../components/dashboard/seller/profile/change_password.vue'
 import buyerCompelementry from '../components/dashboard/buyer/profile/profile_complete.vue'
 import buyerProfileContract from '../components/dashboard/buyer/profile/profile_contract.vue'
 import buyerBuyAdRequests from '../components/dashboard/buyer/request/buyAd-requests.vue'
