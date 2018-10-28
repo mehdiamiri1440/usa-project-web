@@ -75,11 +75,11 @@
         font-size: 30px;
     }
 
-    .right-menu-header a:hover, .profile-menu-header a:hover {
+    .right-menu-header a:hover, .profile-menu-header > a:hover {
         color: #2e353e;
     }
 
-    .profile-menu-header a {
+    .profile-menu-header > a {
         position: relative;
         top: 18px;
         left: 10px;
