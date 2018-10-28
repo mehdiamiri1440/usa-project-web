@@ -86,7 +86,7 @@
             return {
                 items: [
                     {
-                        message: 'قوانین',
+                        message: 'راهنما',
                         url: 'guide'
                     },
                 ]

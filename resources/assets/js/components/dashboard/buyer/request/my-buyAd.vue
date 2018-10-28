@@ -314,6 +314,8 @@
 </template>
 
 <script>
+    import {eventBus} from "../../../../app";
+
     export default {
         props:[
           'loading_img',
@@ -329,6 +331,12 @@
                 popUpMsg:'',
                 loading:false,
                 submiting:false,
+                items: [
+                    {
+                        message: 'درخواست های خرید من ',
+                        url: 'myBuyAds'
+                    },
+                ]
             };
         },
         methods:{
@@ -349,6 +357,7 @@
         },
         mounted(){
             this.init();
+            eventBus.$emit('subHeader', this.items);
         },
     }
 </script>

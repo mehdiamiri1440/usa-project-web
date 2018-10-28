@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/kamadatepicker.min.css')}}">
-    {{--<link type="text/css" rel="stylesheet" href="{{asset('assets/css/custom.css')}}">--}}
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/dashboard/master/style.css')}}">
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
     @yield('header_links')
@@ -80,29 +80,7 @@
     {{--@show--}}
 
 </div>
-    {{--@yield('body_script_tags')--}}
-{{--<script src="{{asset('assets/js/custom.js')}}"></script>--}}
 <script src="{{asset('js/app.js')}}"></script>
-    <script>
-        function checkProfileConfirmation(event){
-            event.preventDefault();
-            var e = event.currentTarget;
-	
-            var url = $(e).attr('href');
-         
-            axios.post('/user/profile_info',{
-                confirmed : true
-            })
-            .then(function(response){
-                if(response.data.profile.confirmed == false){
-                    $('#myModal-1').modal('show');
-                }
-                else{
-                    window.location.href = url;
-                }
-            });
-        } 
-    </script>
 </body>
 
 </html>

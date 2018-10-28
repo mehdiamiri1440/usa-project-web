@@ -179,7 +179,7 @@
                 isLoading: true,
                 items: [
                     {
-                        message: 'لیست تراکنش ها',
+                        message: 'تراکنش های جاری',
                         url: 'myTransactions'
                     }
                 ]

@@ -140,8 +140,8 @@
                 <p class="time-show  col-xs-3"> مبلغ </p>
             </div>
             <!--end title list -->
-            <a v-for="factor in factors"
-               :href="'/factor-detail/' + factor.id"
+            <router-link v-for="factor in factors"
+               :to="'/factor-detail/' + factor.id"
                class="list-group-item list-group-item-action col-xs-12">
                 <p class="number col-xs-2">
                     {{factor.sell_offer_id + 100000}}
@@ -155,7 +155,7 @@
                 <p class="col-xs-3">
                     <span class="green-sbot" dir="rtl"> {{factor.amount_to_pay}} تومان</span>
                 </p>
-            </a>
+            </router-link>
         </div>
         <div class="loading_images  col-xs-12" v-else-if="isLoading">
             <img :src="loading_img" style="width:200px;height:200px">
@@ -166,6 +166,8 @@
     </section>
 </template>
 <script>
+    import {eventBus} from "../../../../app";
+
     export default {
         props:[
             'loading_img'
@@ -176,6 +178,12 @@
               isLoading:true,
               popUpMsg:'',
               submiting:false,
+              items: [
+                  {
+                      message: 'فاکتور های پرداخت شده',
+                      url: 'PayedFactorList'
+                  }
+              ]
           }
         },
         methods:{
@@ -197,6 +205,7 @@
         },
         mounted:function(){
             this.init();
+            eventBus.$emit('subHeader', this.items);
         }
     }
 </script>

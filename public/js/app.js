@@ -67266,7 +67266,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             items: [{
-                message: 'قوانین',
+                message: 'راهنما',
                 url: 'guide'
             }]
         };
@@ -71610,6 +71610,7 @@ exports.push([module.i, "\n#main[data-v-0669f83d] {\n    margin-right: 250px;\n 
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
 //
 //
 //
@@ -71926,6 +71927,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['loading_img', 'defimgitem'],
     data: function data() {
@@ -71937,7 +71940,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             buyAds: '',
             popUpMsg: '',
             loading: false,
-            submiting: false
+            submiting: false,
+            items: [{
+                message: 'درخواست های خرید من ',
+                url: 'myBuyAds'
+            }]
         };
     },
     methods: {
@@ -71960,6 +71967,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.init();
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
     }
 });
 
@@ -73421,7 +73429,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             transactions: '',
             isLoading: true,
             items: [{
-                message: 'لیست تراکنش ها',
+                message: 'تراکنش های جاری',
                 url: 'myTransactions'
             }]
         };
@@ -73662,6 +73670,7 @@ exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-pos
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
 //
 //
 //
@@ -73830,6 +73839,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['loading_img'],
     data: function data() {
@@ -73837,7 +73848,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             factors: '',
             isLoading: true,
             popUpMsg: '',
-            submiting: false
+            submiting: false,
+            items: [{
+                message: 'فاکتور های پرداخت شده',
+                url: 'PayedFactorList'
+            }]
         };
     },
     methods: {
@@ -73857,6 +73872,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.init();
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
     }
 });
 
@@ -73878,11 +73894,11 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.factors, function(factor) {
               return _c(
-                "a",
+                "router-link",
                 {
                   staticClass:
                     "list-group-item list-group-item-action col-xs-12",
-                  attrs: { href: "/factor-detail/" + factor.id }
+                  attrs: { to: "/factor-detail/" + factor.id }
                 },
                 [
                   _c("p", { staticClass: "number col-xs-2" }, [
@@ -74328,7 +74344,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             transactions: '',
             isLoading: true,
             items: [{
-                message: 'لیست تراکنش ها',
+                message: 'تراکنش های انجام شده',
                 url: 'myTerminatedTransactions'
             }]
         };
@@ -78897,7 +78913,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             items: [{
-                message: 'قوانین',
+                message: 'راهنما',
                 url: 'guide'
             }]
         };

@@ -184,7 +184,7 @@
                 isLoading: true,
                 items: [
                     {
-                        message: 'لیست تراکنش ها',
+                        message: 'تراکنش های انجام شده',
                         url: 'myTerminatedTransactions'
                     }
                 ]
