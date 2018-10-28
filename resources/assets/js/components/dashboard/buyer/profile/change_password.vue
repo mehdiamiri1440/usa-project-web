@@ -1,36 +1,10 @@
-<style scoped >
-
+<style scoped>
 
     /*start style main header*/
     #main {
         margin-right: 250px;
         margin-top: 65px;
-        background: #fff;
-        padding: 0 50px;
-        overflow: hidden;
-    }
-
-    #main label {
-        display: block;
-        text-align: right;
-        direction: rtl;
-        margin: 15px auto;
-        font-weight: 400;
-    }
-    #main label span {
-        color: #4a4e57;
-        font-size:12px;
-    }
-
-    #main textarea {
-        width: 100% !important;
-        border: none;
-        border-radius: 3px;
         background: #eff3f6;
-        height: 180px;
-        direction: rtl;
-        padding: 15px;
-        line-height: 20px;
     }
 
     #main.little-main {
@@ -55,9 +29,11 @@
         border-radius: 50%;
         float: left;
     }
-    .image-header-profile  img{
+
+    .image-header-profile img {
         height: 100%;
     }
+
     .profile-menu-header {
         float: left;
     }
@@ -183,9 +159,11 @@
         height: 3px;
         width: 100%;
     }
+
     .sub-header a.active {
         color: #313942;
     }
+
     .sub-header a.active::after {
         content: " ";
         position: absolute;
@@ -195,6 +173,7 @@
         height: 3px;
         width: 100%;
     }
+
     /*end style sub-header*/
     /*start main content style */
     .image-content-post {
@@ -241,13 +220,73 @@
         padding: 60px 15px;
     }
 
+    .img-profile {
+        text-align: center;
+    }
+
+    .img-profile .image-input img {
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    .img-profile i {
+        font-size: 150px;
+        color: #4b4b4b;
+
+    }
+
+    .img-profile .submit {
+        position: relative;
+        width: 80%;
+        margin: 25px auto;
+    }
+
+    .img-profile .submit input {
+        opacity: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 10px;
+        right: 0;
+    }
+
+    .img-profile .submit label {
+        background: #28a745;
+        color: #fff;
+        padding: 12px 0;
+        font-size: 13px;
+        font-weight: 400;
+        border-radius: 5px;
+        transition: 300ms;
+        width: 100%;
+    }
+
+    .img-profile .submit input:hover + label {
+        background: #29d44d;
+        transition: 300ms;
+    }
+
+    .img-profile .submit input:hover {
+        cursor: pointer
+    }
+
+    .main-profile {
+        border-right: 1px solid #eff3f6;
+        text-align: right;
+        direction: rtl;
+        overflow: hidden;
+    }
+
     .header-lable {
         display: block;
         margin: 13px;
         padding: 0;
     }
-    .content-lable{
-        font-weight:400 ;
+
+    .content-lable {
+        font-weight: 400;
     }
 
     /*end main content style */
@@ -262,12 +301,11 @@
         text-align: center;
         border: none;
         transition: 300ms;
-        width: 100%;
     }
 
     .green-bot:hover {
         color: #fff;
-        background: #249741;
+        background: #00d614;
         transition: 300ms;
 
     }
@@ -335,7 +373,8 @@
     }
 
     .kind_user input:checked + i, .kind_activity input:checked + i {
-        color: #28a745;
+        background: #28a745;
+        color: #fff;
         border: none;
         padding: 4px;
     }
@@ -360,7 +399,7 @@
         padding: 0;
     }
 
-    .user-form input[type="text"] {
+    input[type="text"], select, input[type="password"] {
         width: 100%;
         border: 1px solid #e9e9e9;
         padding: 15px 20px;
@@ -369,18 +408,25 @@
         transition: 300ms;
     }
 
+    textarea {
+        height: 120px;
+        max-width: 100%
+    }
+
     .user-form input[type="button"] {
         width: 100%;
 
     }
 
-    .user-form input[type="text"]:focus {
+    .user-form input[type="text"]:focus, input[type="password"]:focus {
         border: 1px solid #28a745;
         transition: 500ms;
+
     }
 
     .img-profile {
         float: right;
+        padding-top: 90px;
     }
 
     #icon-pro {
@@ -393,7 +439,16 @@
         height: 150px;
     }
 
+    .col-sm-6 {
+        height: 120px;
+        float: right;
+    }
+
     @media screen and (max-width: 992px) {
+        .img-profile {
+            padding-top: 20px;
+        }
+
         .right-header.desktop-header {
             display: none;
         }
@@ -409,7 +464,6 @@
 
         #main, #main.little-main {
             margin-right: 0 !important;
-            padding: 0 20px;
         }
 
         .post-contents-table {
@@ -432,11 +486,6 @@
             display: block;
         }
 
-        .kind_user > div, .kind_activity > div {
-            float: none;
-
-        }
-
         .img-profile .submit {
             position: relative;
             width: 100%;
@@ -453,36 +502,17 @@
             float: none;
         }
     }
-    .company_des,.image_company,.image_certif{
-        margin: 40px auto;
-    }
-    .images-content{
-        height: 215px;
 
-        overflow-y: scroll;
-    }
-    .images-content .image-item{
-        padding: 5px;
-        position: relative;
-    }
-    .images-content .image-item a{
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        left: 0;
-        top: 0;
-        background: red;
-        color: #fff;
-        border-radius: 50px;
-        text-align: center;
-        padding-top: 2px;
-    }
     @media screen and (max-width: 768px) {
         .image-content-post, .contents-post {
             width: 100%;
             float: none;
             margin: 10px 0;
             padding: 0;
+        }
+
+        .col-sm-6 {
+            float: none;
         }
 
         .name-header-profile {
@@ -493,7 +523,6 @@
             padding: 7px;
             padding-left: 36px;
         }
-
     }
 
     @media screen and (max-width: 555px) {
@@ -508,12 +537,11 @@
             font-size: 10px;
 
         }
-        #main, #main.little-main {
-            margin-right: 0 !important;
-            padding: 0 5px;
-        }
+
         .sub-header {
+
             bottom: -44px;
+
         }
     }
 </style>
@@ -521,206 +549,165 @@
 <template>
     <section class="main-content col-xs-12">
         <form action="#" method="post" enctype="multipart/form-data">
+            <div class="main-profile col-xs-12">
 
-            <div class="company_des col-xs-12">
-                <label>
-                    شرح فعالیت من | شرکت:
-                </label>
-                <textarea name="company_name" v-model="currentUser.profile.description"></textarea>
-                <span v-if="errors.description" class="text-danger">@{{ errors.description[0] }}</span>
-            </div>
-            <div class="image_company col-xs-12 ">
-                <div class="col-xs-12 col-sm-6">
-                    <label>
-                        تصاویر مربوطه <span>(محصولات | شرکت | کارکنان)</span> </label>
+                <div class="user-form col-xs-12">
 
-                    <div class="row">
-                        <div class="images-content col-xs-12" v-for="photo in currentUser.certificates">
-                            <article class="image-item col-xs-4">
-                                <a href="#"><i class="fa fa-close"></i></a>
-                                <img :src=" str + '/' + photo" alt="">
-                            </article>
-                        </div>
+                    <label class="header-lable">
+                       تغییر کلمه عبور
+                    </label>
+
+
+                    <div class="col-sm-12">
+                        <label for="old-password" class="content-lable">
+                            کلمه عبور فعلی:
+                        </label>
+                        <input id="old-password" type="password" v-model="currentPassword" placeholder="کلمه عبور فعلی">
+                        <span class="text-danger" v-if="errors.current_password">{{ errors.current_password[0] }}</span>
                     </div>
-                </div>
-                <div class="col-xs-12 col-sm-6">
-                    <label>
-                        افزودن تصاویر مربوطه <span>(محصولات | شرکت | کارکنان)</span> </label>
-                    <input type="file" ref="relatedFiles" id="file" multiple
-                           v-on:change="handleRelatedFilesUpload()" accept="image/*">
-                </div>
-            </div>
-            <div class="image_certif  col-xs-12">
-                <div class="col-xs-12 col-sm-6">
-                    <label>
-                        تصاویر مربوطه <span>(محصولات | شرکت | کارکنان)</span> </label>
-
-                    <div class="row">
-                        <div class="images-content col-xs-12">
-                            <article class="image-item col-xs-4" v-for="photo in currentUser.relateds">
-                                <a href="#"><i class="fa fa-close"></i></a>
-                                <img :src="str + '/' + photo" alt="">
-                            </article>
-                        </div>
+                    <div class="col-sm-12">
+                        <label for="new-password" class="content-lable">
+                            کلمه عبور جدید:
+                        </label>
+                        <input id="new-password" type="password" v-model="newPassword" placeholder="کلمه عبور جدید">
+                        <span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
                     </div>
-                </div>
-                <div class="col-xs-12 col-sm-6">
-                    <label>
-                        گواهی های مربوطه <span>(گواهی های ثبت شرکت | گواهی های استاندارد محصول)</span> </label>
+                    <div class="col-sm-12">
+                        <label for="repeat-new-password" class="content-lable">
+                            تکرار کلمه عبور جدید:
+                        </label>
+                        <input id="repeat-new-password" type="password" v-model="newPasswordRepeat" placeholder="کلمه عبور جدید">
+                        <span class="text-danger" v-if="errors.password_repeat">{{ errors.password_repeat[0] }}</span>
+                    </div>
+                    <div class="col-xs-12">
+                        <input type="button" class="green-bot" name="submit" value="ارسال"
+                               v-on:click="changePassword">
+                    </div>
 
-                    <input type="file" multiple ref="certificateFiles" v-on:change="handleCertificateFilesUpload()"
-                           accept="image/*">
                 </div>
             </div>
-            <input class="green-bot" value="ثبت تغییرات" type="button" @click="RegisterComplementaryProfileInfo">
+
         </form>
-
     </section>
 
 </template>
 
+
 <script>
     import {eventBus} from '../../../../app';
+
     export default {
-        props:[
-            'str'
+        props: [
+            'str',
+            'defultimg'
         ],
-        data: function () {
-            return{
-                currentUser: {
-                    profile: '',
-                    user_info: ''
+        data: function (){
+            return {
+                errors:{
+                    current_password:[],
+                    password:[],
+                    passwordRepeat:[],
                 },
-                profileComplementaryFields: [
-                    'is_company',
-                    'company_name',
-                    'company_register_code',
-                    'public_phone',
-                    'description',
-                    'postal_code',
-                    'shaba_code',
-                ],
-                relatedFiles: [],
-                certificateFiles: [],
-                errors: '',
+                errorFlag: false,
                 popUpMsg: '',
                 items: [
                     {
-                        message: 'قرارداد',
-                        url: 'profileContract',
-                    },
-                    {
-                        message: ' اطلاعات تکمیلی',
-                        url: 'compelementry',
-                    },
-                    {
-                        message: 'اطلاعات پایه',
-                        url: 'profileBasic',
+                        message: 'تغییر کلمه عبور',
+                        url: 'password',
                     }
                 ],
+                currentPassword:'',
+                newPassword:'',
+                newPasswordRepeat:'',
             }
         },
         methods: {
             init: function () {
-                axios.post('/user/profile_info')
-                    .then(response => (this.currentUser = response.data));
+                
             },
-            RegisterComplementaryProfileInfo: function () {
-
-
-                eventBus.$emit('submitingEvent',true);
-                if (this.currentUser.profile.is_company == null || this.currentUser.profile.public_phone == null) {
-                    this.popUpMsg = 'ابتدا اطلاعات پایه را تکمیل کنید.';
-                    eventBus.$emit('submitSuccess', this.popUpMsg);
-                    $('#myModal').modal('show');
-                    return;
-                }
-
-                this.errors = '';
-                var self = this;
-
-                let formData = new FormData();
-                var cnt = this.profileComplementaryFields.length;
-
-                for (var i = 0; i < cnt; i++) {
-                    if (this.profileComplementaryFields[i] == 'description' && (this.currentUser.profile['description'] == null || this.currentUser.profile['description'] == '')) {
-                        continue;
-                    }
-                    formData.append(this.profileComplementaryFields[i], this.currentUser.profile[this.profileComplementaryFields[i]]);
-                }
-
-                for (var i = 0; i < this.relatedFiles.length; i++) {
-                    let file = this.relatedFiles[i];
-                    formData.append('related_' + i, file);
-                }
-
-                for (var i = 0; i < this.certificateFiles.length; i++) {
-                    let file = this.certificateFiles[i];
-                    formData.append('certificate_' + i, file);
-                }
-
-                formData.append('related_image_count', this.relatedFiles.length);
-                formData.append('certificate_image_count', this.certificateFiles.length);
-
-                axios.post('/user/profile_modification', formData, {
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'Content-Type': 'application/json',
-                    }
-                })
-                    .then(function (response) {
-                        if (response.status == 200) {
-
-                            eventBus.$emit('submitingEvent',false);
-                            self.popUpMsg = 'تغییرات با موفقیت انجام شد.';
-                            eventBus.$emit('submitSuccess',self.popUpMsg);
-
-                            $('#myModal').modal('show');
+            changePassword: function(){
+                this.errorFlag = false;
+                this.passwordValidator(this.currentPassword,this.newPassword,this.newPasswordRepeat);
+                
+                if(this.errorFlag == false){
+                    //send Request
+                    var self  = this;
+                    axios.post('/change_password',{
+                        current_password: self.currentPassword,
+                        new_password: self.newPassword
+                    })
+                    .then(function(response){
+                        if(response.data.status == true){
+                            //show modal password changed
+                            alert('password changed');
                         }
-                        else if (response.status == 302) {
-                            window.location.href = '/login';
+                        else if(response.data.status == false){
+                            self.errors.current_password.push('رمز عبور فعلی درست نیست');
                         }
                     })
-                    .catch(function (err) {
-                        self.errors = '';
-                        self.errors = err.response.data.errors;
-                        eventBus.$emit('submitingEvent', false);
+                    .catch(function(err){
+                        //failed for unknown reason try again later
+                        alert('test');
                     });
-            },
-            handleRelatedFilesUpload() {
-                let uploadedFiles = this.$refs.relatedFiles.files;
-                console.log(uploadedFiles)
-                /*
-                  Adds the uploaded file to the files array
-                */
-                for (var i = 0; i < uploadedFiles.length; i++) {
-                    this.relatedFiles.push(uploadedFiles[i]);
+                }
+                else{
+                    //
                 }
             },
-            handleCertificateFilesUpload() {
-                let uploadedFiles = this.$refs.certificateFiles.files;
-                /*
-                 Adds the uploaded file to the files array
-                 */
-                for (var i = 0; i < uploadedFiles.length; i++) {
-                    this.certificateFiles.push(uploadedFiles[i]);
+            passwordValidator:function(currentPass,pass,passConf){
+                this.errors.password = [];
+                this.errors.password_repeat = [];
+                this.errors.current_password = [];
+                
+                if(currentPass === ''){
+                    this.errors.current_password.push('رمز عبور فعلی الزامی است');
+                    this.errorFlag = true;
                 }
+                if(pass === ''){
+                    this.errors.password.push('رمز عبور جدید الزامی است');
+                    this.errorFlag = true;
+                }
+                if(pass.length < 8){
+                    this.errors.password.push('رمز عبور حداقل ۸ کاراکتر باشد');
+                    this.errorFlag = true;
+                }
+                if(passConf === ''){
+                    this.errors.password_repeat.push('تکرار رمز عبور الزامی است');
+                    this.errorFlag = true;
+                }
+                if(passConf != pass){
+                    this.errors.password_repeat.push('رمز عبور مطابقت ندارد');
+                    this.errorFlag = true;
+                }
+            },
+            toLatinNumbers: function (num) {
+                if (num == null) {
+                    return null;
+                }
+                var numDic = {
+                    '۰': '0',
+                    '۱': '1',
+                    '۲': '2',
+                    '۳': '3',
+                    '۴': '4',
+                    '۵': '5',
+                    '۶': '6',
+                    '۷': '7',
+                    '۸': '8',
+                    '۹': '9',
+                };
+
+                return num
+                    .toString()
+                    .replace(/[۰-۹]/g, function (w) {
+                        return numDic[w];
+                    });
             },
         },
         mounted() {
             this.init();
             eventBus.$emit('subHeader', this.items);
-            $('input[type="file"]').imageuploadify();
-        },
+        }
     }
-
-    function call_api(route, data, call_back) {
-        axios.post(route, data)
-            .then(call_back);
-    }
-
-
-
 
 </script>
-

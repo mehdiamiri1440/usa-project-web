@@ -24,10 +24,7 @@ import loginComponent from './components/login/Login.vue';
 import registerComponent from './components/register/register.vue';
 import headerDashSeller from './components/dashboard/seller/header/header.vue';
 import headerDashBuyer from './components/dashboard/buyer/header/header.vue';
-import productBasic from './components/dashboard/seller/product/product-basic.vue';
-import mySellOffers from './components/dashboard/seller/request/my-sell-offers.vue';
 import profileBasic from './components/dashboard/seller/profile/profile_basic.vue'
-import transitionSeller from './components/dashboard/seller/transaction/transaction.vue';
 import router from './router/dashboard_router'
 
 
@@ -129,8 +126,5 @@ const app = new Vue({
         registerComponent,
         headerDashSeller,
         headerDashBuyer,
-        productBasic,
-        mySellOffers,
-        transitionSeller
     }
 });

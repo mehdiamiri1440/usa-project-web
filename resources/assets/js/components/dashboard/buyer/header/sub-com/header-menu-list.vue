@@ -38,30 +38,35 @@
                   </router-link>
               </li>
 
-              <li class="list-item  ">
-                  <router-link :class="{'active' : this.active_el === 2}" :to="{ name : 'buyAdRequests' }">
-                      <span>درخواست ها</span>
+              <li class="list-item" >
+                  <router-link :class="{'active' : this.active_el === 2}" :to="{ name : 'registerRequest' }">
+                      <span>ثبت درخواست جدید</span>
                   </router-link>
               </li>
 
-              <li class="list-item  ">
-                  <router-link :class="{'active' : this.active_el === 3}" :to="{ name : 'registerProduct' }">
-                      <span>ثبت محصول </span>
+              <li class="list-item" >
+                  <router-link :class="{'active' : this.active_el === 3}" :to="{ name : 'myBuyAds' }">
+                      <span>درخواست های من </span>
                   </router-link>
               </li>
-              <li class="list-item  ">
+              <li class="list-item" >
                   <router-link :class="{'active' : this.active_el === 4}" :to="{ name : 'myTransactions' }">
                       <span>تراکنش های جاری</span>
                   </router-link>
               </li>
-
-              <li class="list-item  ">
+              <li class="list-item" >
                   <router-link :class="{'active' : this.active_el === 5}" :to="{ name : 'myTerminatedTransactions' }">
                       <span>تراکنش های انجام شده</span>
                   </router-link>
               </li>
+              <li class="list-item" >
+                  <router-link :class="{'active' : this.active_el === 6}" :to="{ name : 'PayedFactorList' }">
+                      <span>فاکتور های پرداخت شده</span>
+                  </router-link>
+              </li>
+
               <li class="list-item  ">
-                  <router-link :class="{'active' : this.active_el === 6}" :to="{ name : 'guide' }">
+                  <router-link :class="{'active' : this.active_el === 7}" :to="{ name : 'guide' }">
                       <span>راهنما</span>
                   </router-link>
               </li>
@@ -106,34 +111,40 @@
             $route (){
                if (this.subIsActive('/complementry')  || this.subIsActive('/profile_contract') ){
                    this.active_el = 1
-               }else if(this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests') ){
+               }else if(this.subIsActive('/register-request')){
                    this.active_el = 2
-               }else if(this.subIsActive('/register-product')){
+               }else if(this.subIsActive('/my-buyAds') || this.subIsActive('/my-buyAds/*')){
                    this.active_el = 3
                }else if(this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')){
                    this.active_el = 4
                }else if(this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/*')){
                    this.active_el = 5
-               }else if(this.subIsActive('/guide')){
+               }else if(this.subIsActive('/payed-factor-list')){
                    this.active_el = 6
+               }else if(this.subIsActive('/guide')){
+                   this.active_el = 7
                }else{
                    this.active_el = 1
                }
                console.log(this.active_el);
             }
         },mounted:function(){
-            if (this.subIsActive('/complementry')  || this.subIsActive('/profile_contract') || this.subIsActive('/*')){
+            if (this.subIsActive('/complementry')  || this.subIsActive('/profile_contract') ){
                 this.active_el = 1
-            }else if(this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests') ){
+            }else if(this.subIsActive('/register-request')){
                 this.active_el = 2
             }else if(this.subIsActive('/register-product')){
                 this.active_el = 3
-            }else if(this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')){
+            }else if(this.subIsActive('/my-buyAds') || this.subIsActive('/my-buyAds/*')){
                 this.active_el = 4
-            }else if(this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/*')){
+            }else if(this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')){
                 this.active_el = 5
-            }else if(this.subIsActive('/guide')){
+            }else if(this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/*')){
                 this.active_el = 6
+            }else if(this.subIsActive('/guide')){
+                this.active_el = 7
+            }else{
+                this.active_el = 1
             }
         },
         created() {

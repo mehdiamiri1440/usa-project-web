@@ -155,20 +155,6 @@
                               <span class="green-sbot"> {{transaction.short_status}}</span>
                           </p>
                       </router-link>
-                   <!--   <a :href="trans + '/' + transaction.transaction_id">
-                          <p class="number col-xs-2">
-                               {{transaction.transaction_id}}
-                          </p>
-                          <p class="date col-xs-2" dir="rtl">
-                               {{transaction.deal_formation_date}}
-                          </p>
-                          <p class="subject col-xs-5">
-                               {{transaction.product_name}}
-                          </p>
-                          <p class="col-xs-3">
-                              <span class="green-sbot"> {{transaction.short_status}}</span>
-                          </p>
-                      </a>-->
                   </li>
               </ul>
               <div class="loading_images  col-xs-12" v-else-if="isLoading">

@@ -7,14 +7,16 @@
     <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.easing.min.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-    {{--<script src="{{asset('assets/cdn/vue.js')}}"></script>--}}
-    {{--<script src="{{asset('assets/js/blurry.load.js')}}"></script>--}}
+    <script src="{{asset('assets/js/kamadatepicker.js')}}"></script>
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/fontiran.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/imageuploadify.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap-theme.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
-{{--    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/blurry.load.css')}}">--}}
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/kamadatepicker.min.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/dashboard/master/style.css')}}">
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
     @yield('header_links')
@@ -67,7 +69,7 @@
         <main id="main">
           <router-view
                     name="buyer"
-                    loading="{{asset('assets/img/gif/loading.gif')}}"
+                    loading_img="{{asset('assets/img/gif/loading.gif')}}"
                     trans="{{url('dashboard/transaction-detail')}}"
                     transRep="{{url('dashboard/transaction-report')}}"
                     str="{{asset('storage/')}}"

@@ -642,28 +642,31 @@
     import {eventBus} from '../../../../app';
     export default {
         data:function(){
-          return{
-              pageStep:1,
-              errors:'',
-              popUpMsg:'',
-              submiting:false,
-              contractConfirmed:false,
-              currentUser:'',
-              items: [
-                  {
-                      message: 'قرارداد',
-                      url: 'profileContract',
-                  },
-                  {
-                      message: ' اطلاعات تکمیلی',
-                      url: 'compelementry',
-                  },
-                  {
-                      message: 'اطلاعات پایه',
-                      url: 'profileBasic',
-                  }
-              ],
-          }
+            return{
+                pageStep:1,
+                errors:'',
+                popUpMsg:'',
+                submiting:false,
+                contractConfirmed:false,
+                currentUser:{
+                    user_info:'',
+                    profile:''
+                },
+                items: [
+                    {
+                        message: 'قرارداد',
+                        url: 'profileContract',
+                    },
+                    {
+                        message: ' اطلاعات تکمیلی',
+                        url: 'compelementry',
+                    },
+                    {
+                        message: 'اطلاعات پایه',
+                        url: 'profileBasic',
+                    }
+                ],
+            }
         },
         methods:{
             init:function(){
