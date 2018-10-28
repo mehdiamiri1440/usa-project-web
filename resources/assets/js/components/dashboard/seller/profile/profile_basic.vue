@@ -1,7 +1,7 @@
 <style scoped>
 
     /*start style main header*/
-    #main {
+ /*   #main {
         margin-right: 250px;
         margin-top: 65px;
         background: #eff3f6;
@@ -9,7 +9,7 @@
 
     #main.little-main {
         margin-right: 80px;
-    }
+    }*/
 
     .main-header {
         height: 65px;

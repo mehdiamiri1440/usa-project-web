@@ -349,7 +349,9 @@
     </section>
 </template>
 <script>
+    import {eventBus} from '../../../../app';
   export default {
+
       data:function(){
           return {
               currentUser:{
@@ -388,6 +390,12 @@
               profileConfirmed:false,
               disableSubmit:false,
               submiting:false,
+              items: [
+                  {
+                      message: 'ثبت درخواست خرید',
+                      url: 'registerRequest'
+                  },
+              ]
           };
       },
       methods:{
@@ -494,6 +502,7 @@
       },
       mounted(){
           $('input[type="file"]').imageuploadify();
+          eventBus.$emit('subHeader', this.items);
           this.init();
       },
   }

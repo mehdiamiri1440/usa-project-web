@@ -1,3 +1,4 @@
+<!--
 <template>
     <section class="main-content col-xs-12">
         <div class="contents col-xs-12">
@@ -5,7 +6,7 @@
                 <div class="info_profile col-xs-12 col-sm-7">
                     <div class="user_image col-md-2">
                         <a href="#">
-                            {{--                        <img src="{{url('storage/'.$profile_photo)}}" alt="">--}}
+                            {{&#45;&#45;                        <img src="{{url('storage/'.$profile_photo)}}" alt="">&#45;&#45;}}
                             <img src="{{url('assets/img/user-defult.png')}}" alt="">
                         </a>
                     </div>
@@ -70,4 +71,4 @@
     export default {
 
     }
-</script>
+</script>-->

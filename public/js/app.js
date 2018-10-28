@@ -51175,7 +51175,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n#main {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n.main-header {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n}\n.little-main-header {\n    right: 80px;\n}\n.image-header-profile {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.image-header-profile  img{\n    height: 100%;\n}\n.profile-menu-header {\n    float: left;\n}\n.right-menu-header {\n\n    padding: 16px;\n}\n.right-menu-header, .content-header {\n    float: right;\n}\n.profile-menu-header {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header i {\n    position: absolute;\n\n    left: -90px;\n\n    top: 0px;\n\n    font-size: 20px;\n}\n.content-header {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a, .profile-menu-header a {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a {\n    font-size: 30px;\n}\n.right-menu-header a:hover, .profile-menu-header a:hover {\n    color: #2e353e;\n}\n.profile-menu-header a {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li {\n    margin: 5px;\n}\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n}\n.font-big {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n", ""]);
+exports.push([module.i, "\n#main {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n#main.little-main {\n    margin-right: 80px !important;\n}\n.main-header {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n}\n.little-main-header {\n    right: 80px;\n}\n.image-header-profile {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.image-header-profile  img{\n    height: 100%;\n}\n.profile-menu-header {\n    float: left;\n}\n.right-menu-header {\n\n    padding: 16px;\n}\n.right-menu-header, .content-header {\n    float: right;\n}\n.profile-menu-header {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header i {\n    position: absolute;\n\n    left: -90px;\n\n    top: 0px;\n\n    font-size: 20px;\n}\n.content-header {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a, .profile-menu-header a {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a {\n    font-size: 30px;\n}\n.right-menu-header a:hover, .profile-menu-header a:hover {\n    color: #2e353e;\n}\n.profile-menu-header a {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li {\n    margin: 5px;\n}\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n}\n.font-big {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n", ""]);
 
 // exports
 
@@ -51188,6 +51188,9 @@ exports.push([module.i, "\n#main {\n    margin-right: 250px;\n    margin-top: 65
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue__);
+//
+//
+//
 //
 //
 //
@@ -53414,7 +53417,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n/*start style main header*/\n#main[data-v-aa533232] {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n#main.little-main[data-v-aa533232] {\n    margin-right: 80px;\n}\n.main-header[data-v-aa533232] {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n    border-bottom: 2px solid #e6e6e6;\n}\n.image-header-profile[data-v-aa533232] {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.image-header-profile img[data-v-aa533232] {\n    height: 100%;\n}\n.profile-menu-header[data-v-aa533232] {\n    float: left;\n}\n.right-menu-header[data-v-aa533232] {\n\n    padding: 16px;\n}\n.right-menu-header[data-v-aa533232], .content-header[data-v-aa533232] {\n    float: right;\n}\n.profile-menu-header[data-v-aa533232] {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header a[data-v-aa533232] {\n    position: relative;\n}\n.profile-menu-header i[data-v-aa533232] {\n    position: absolute;\n\n    left: -75px;\n\n    top: 18px;\n\n    font-size: 20px;\n}\n.content-header[data-v-aa533232] {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a[data-v-aa533232], .profile-menu-header a[data-v-aa533232] {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a[data-v-aa533232] {\n    font-size: 30px;\n}\n.right-menu-header a[data-v-aa533232]:hover, .profile-menu-header a[data-v-aa533232]:hover {\n    color: #2e353e;\n}\n.name-header-profile[data-v-aa533232] {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list[data-v-aa533232] {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li[data-v-aa533232] {\n    margin: 5px;\n}\n.profile-list a[data-v-aa533232] {\n    width: 100%;\n    display: inline-block;\n}\n\n/*end style main header*/\n\n/*start style sub-header*/\n.sub-header[data-v-aa533232] {\n    position: absolute;\n    left: 0;\n    background: #eff3f6;\n    top: 63px;\n    right: 0;\n    text-align: center;\n}\n.sub-header ul[data-v-aa533232] {\n    text-align: center;\n}\n.sub-header a[data-v-aa533232] {\n    padding: 16px;\n\n    display: inline-block;\n\n    color: #808c9b;\n\n    font-weight: bold;\n\n    font-size: 14px;\n\n    position: relative;\n}\n.sub-header a[data-v-aa533232]:hover {\n    color: #313942;\n}\n.sub-header a[data-v-aa533232]:hover::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.sub-header a.active[data-v-aa533232] {\n    color: #313942;\n}\n.sub-header a.active[data-v-aa533232]::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n\n/*end style sub-header*/\n/*start main content style */\n.image-content-post[data-v-aa533232] {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img[data-v-aa533232] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-aa533232] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-aa533232] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-aa533232] {\n    display: block;\n}\n.content-item[data-v-aa533232] {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content[data-v-aa533232] {\n    padding: 60px 15px;\n}\n.img-profile[data-v-aa533232] {\n    text-align: center;\n}\n.img-profile .image-input img[data-v-aa533232] {\n    width: 150px;\n    height: 150px;\n    overflow: hidden;\n    border-radius: 50%;\n}\n.img-profile i[data-v-aa533232] {\n    font-size: 150px;\n    color: #4b4b4b;\n}\n.img-profile .submit[data-v-aa533232] {\n    position: relative;\n    width: 80%;\n    margin: 25px auto;\n}\n.img-profile .submit input[data-v-aa533232] {\n    opacity: 0;\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    left: 10px;\n    right: 0;\n}\n.img-profile .submit label[data-v-aa533232] {\n    background: #28a745;\n    color: #fff;\n    padding: 12px 0;\n    font-size: 13px;\n    font-weight: 400;\n    border-radius: 5px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    width: 100%;\n}\n.img-profile .submit input:hover + label[data-v-aa533232] {\n    background: #29d44d;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.img-profile .submit input[data-v-aa533232]:hover {\n    cursor: pointer\n}\n.main-profile[data-v-aa533232] {\n    border-right: 1px solid #eff3f6;\n    text-align: right;\n    direction: rtl;\n    overflow: hidden;\n}\n.header-lable[data-v-aa533232] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n.content-lable[data-v-aa533232] {\n    font-weight: 400;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-aa533232] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-aa533232]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-aa533232] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-aa533232]:hover {\n    color: #fff;\n}\n.font-big[data-v-aa533232] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-aa533232] {\n    width: 80px;\n}\n.little-main-header[data-v-aa533232] {\n    right: 80px;\n}\n.background_mob_sec[data-v-aa533232] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user[data-v-aa533232], .kind_activity[data-v-aa533232] {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div[data-v-aa533232], .kind_activity > div[data-v-aa533232] {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input[data-v-aa533232], .kind_activity input[data-v-aa533232] {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i[data-v-aa533232], .kind_activity input:checked + i[data-v-aa533232] {\n    background: #28a745;\n    color: #fff;\n    border: none;\n    padding: 4px;\n}\n.kind_user i[data-v-aa533232], .kind_activity i[data-v-aa533232] {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border-radius: 50%;\n    padding: 2px;\n    font-size: 14px;\n    border: 2px solid;\n}\n.user-form[data-v-aa533232] {\n    padding: 0;\n}\ninput[type=\"text\"][data-v-aa533232], select[data-v-aa533232],input[type=\"password\"][data-v-aa533232] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\ntextarea[data-v-aa533232] {\n    height: 120px;\n    max-width: 100%\n}\n.user-form input[type=\"button\"][data-v-aa533232] {\n    width: 100%;\n}\n.user-form input[type=\"text\"][data-v-aa533232]:focus ,input[type=\"password\"][data-v-aa533232]:focus{\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile[data-v-aa533232] {\n    float: right;\n    padding-top: 90px;\n}\n#icon-pro[data-v-aa533232] {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg[data-v-aa533232] {\n    height: 150px;\n}\n.col-sm-6[data-v-aa533232] {\n    height: 120px;\n    float: right;\n}\n@media screen and (max-width: 992px) {\n.img-profile[data-v-aa533232] {\n        padding-top: 20px;\n}\n.right-header.desktop-header[data-v-aa533232] {\n        display: none;\n}\n.right-header.mobile-header[data-v-aa533232] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-aa533232], .little-main-header[data-v-aa533232] {\n        right: 0 !important;\n}\n#main[data-v-aa533232], #main.little-main[data-v-aa533232] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-aa533232] {\n        width: 100%;\n}\n.copy-right[data-v-aa533232] {\n        display: none;\n}\n.clouse_menu[data-v-aa533232] {\n        display: none;\n}\n.clouse_menu_mob[data-v-aa533232] {\n        display: block;\n}\n.show-header button[data-v-aa533232] {\n        display: block;\n}\n.img-profile .submit[data-v-aa533232] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-aa533232] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-aa533232] {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-aa533232], .contents-post[data-v-aa533232] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.col-sm-6[data-v-aa533232] {\n        float: none;\n}\n.name-header-profile[data-v-aa533232] {\n        display: none;\n}\n.profile-menu-header[data-v-aa533232] {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-aa533232] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-aa533232] {\n        font-size: 10px;\n}\n.sub-header[data-v-aa533232] {\n\n        bottom: -44px;\n}\n}\n", ""]);
+exports.push([module.i, "\n\n   /*start style main header*/\n/*   #main {\n       margin-right: 250px;\n       margin-top: 65px;\n       background: #eff3f6;\n   }\n\n   #main.little-main {\n       margin-right: 80px;\n   }*/\n.main-header[data-v-aa533232] {\n       height: 65px;\n       position: fixed;\n       left: 0;\n       right: 250px;\n       top: 0;\n       background: #fff;\n       z-index: 5;\n       border-bottom: 2px solid #e6e6e6;\n}\n.image-header-profile[data-v-aa533232] {\n       width: 50px;\n       height: 50px;\n       overflow: hidden;\n       border-radius: 50%;\n       float: left;\n}\n.image-header-profile img[data-v-aa533232] {\n       height: 100%;\n}\n.profile-menu-header[data-v-aa533232] {\n       float: left;\n}\n.right-menu-header[data-v-aa533232] {\n\n       padding: 16px;\n}\n.right-menu-header[data-v-aa533232], .content-header[data-v-aa533232] {\n       float: right;\n}\n.profile-menu-header[data-v-aa533232] {\n       padding: 7px;\n       padding-left: 55px;\n}\n.profile-menu-header a[data-v-aa533232] {\n       position: relative;\n}\n.profile-menu-header i[data-v-aa533232] {\n       position: absolute;\n\n       left: -75px;\n\n       top: 18px;\n\n       font-size: 20px;\n}\n.content-header[data-v-aa533232] {\n       background: #28a745;\n       color: #fff;\n       height: 100%;\n       padding: 20px 20px 0;\n}\n.right-menu-header a[data-v-aa533232], .profile-menu-header a[data-v-aa533232] {\n       color: #7f8c9b;\n       margin: 5px;\n}\n.right-menu-header a[data-v-aa533232] {\n       font-size: 30px;\n}\n.right-menu-header a[data-v-aa533232]:hover, .profile-menu-header a[data-v-aa533232]:hover {\n       color: #2e353e;\n}\n.name-header-profile[data-v-aa533232] {\n       position: relative;\n       top: 18px;\n       left: 10px;\n}\n.profile-list[data-v-aa533232] {\n       position: absolute;\n       width: 165px;\n       background: #fff;\n       padding: 8px 10px;\n       border-radius: 3px;\n       -webkit-box-shadow: 0 0 3px #313a43;\n               box-shadow: 0 0 3px #313a43;\n       text-align: right;\n       left: 40px;\n       top: 65px;\n       display: none;\n       z-index: 999;\n}\n.profile-list li[data-v-aa533232] {\n       margin: 5px;\n}\n.profile-list a[data-v-aa533232] {\n       width: 100%;\n       display: inline-block;\n}\n\n   /*end style main header*/\n\n   /*start style sub-header*/\n.sub-header[data-v-aa533232] {\n       position: absolute;\n       left: 0;\n       background: #eff3f6;\n       top: 63px;\n       right: 0;\n       text-align: center;\n}\n.sub-header ul[data-v-aa533232] {\n       text-align: center;\n}\n.sub-header a[data-v-aa533232] {\n       padding: 16px;\n\n       display: inline-block;\n\n       color: #808c9b;\n\n       font-weight: bold;\n\n       font-size: 14px;\n\n       position: relative;\n}\n.sub-header a[data-v-aa533232]:hover {\n       color: #313942;\n}\n.sub-header a[data-v-aa533232]:hover::after {\n       content: \" \";\n       position: absolute;\n       bottom: 0;\n       left: 0;\n       background: #28a745;\n       height: 3px;\n       width: 100%;\n}\n.sub-header a.active[data-v-aa533232] {\n       color: #313942;\n}\n.sub-header a.active[data-v-aa533232]::after {\n       content: \" \";\n       position: absolute;\n       bottom: 0;\n       left: 0;\n       background: #28a745;\n       height: 3px;\n       width: 100%;\n}\n\n   /*end style sub-header*/\n   /*start main content style */\n.image-content-post[data-v-aa533232] {\n       width: 30%;\n       float: right;\n       position: relative;\n}\n.image-content-post img[data-v-aa533232] {\n       border-radius: 3px;\n       -webkit-transition: 200ms;\n       transition: 200ms;\n       -webkit-filter: grayscale(30%);\n               filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-aa533232] {\n       -webkit-filter: grayscale(0);\n               filter: grayscale(0);\n       -webkit-transition: 200ms;\n       transition: 200ms;\n}\n.image-content-post i[data-v-aa533232] {\n       display: none;\n       position: absolute;\n       top: 46%;\n       left: 0;\n       right: 0;\n       text-align: center;\n       font-size: 35px;\n       color: #fff;\n       z-index: 1;\n}\n.image-content-post a:hover i[data-v-aa533232] {\n       display: block;\n}\n.content-item[data-v-aa533232] {\n       overflow: hidden;\n       text-align: right;\n       direction: rtl;\n}\n.main-content[data-v-aa533232] {\n       padding: 60px 15px;\n}\n.img-profile[data-v-aa533232] {\n       text-align: center;\n}\n.img-profile .image-input img[data-v-aa533232] {\n       width: 150px;\n       height: 150px;\n       overflow: hidden;\n       border-radius: 50%;\n}\n.img-profile i[data-v-aa533232] {\n       font-size: 150px;\n       color: #4b4b4b;\n}\n.img-profile .submit[data-v-aa533232] {\n       position: relative;\n       width: 80%;\n       margin: 25px auto;\n}\n.img-profile .submit input[data-v-aa533232] {\n       opacity: 0;\n       position: absolute;\n       width: 100%;\n       height: 100%;\n       left: 10px;\n       right: 0;\n}\n.img-profile .submit label[data-v-aa533232] {\n       background: #28a745;\n       color: #fff;\n       padding: 12px 0;\n       font-size: 13px;\n       font-weight: 400;\n       border-radius: 5px;\n       -webkit-transition: 300ms;\n       transition: 300ms;\n       width: 100%;\n}\n.img-profile .submit input:hover + label[data-v-aa533232] {\n       background: #29d44d;\n       -webkit-transition: 300ms;\n       transition: 300ms;\n}\n.img-profile .submit input[data-v-aa533232]:hover {\n       cursor: pointer\n}\n.main-profile[data-v-aa533232] {\n       border-right: 1px solid #eff3f6;\n       text-align: right;\n       direction: rtl;\n       overflow: hidden;\n}\n.header-lable[data-v-aa533232] {\n       display: block;\n       margin: 13px;\n       padding: 0;\n}\n.content-lable[data-v-aa533232] {\n       font-weight: 400;\n}\n\n   /*end main content style */\n   /*custom cods*/\n.green-bot[data-v-aa533232] {\n       margin: 15px 0;\n       display: inline-block;\n       background: #28a745;\n       color: #fff;\n       padding: 10px 35px;\n       border-radius: 3px;\n       text-align: center;\n       border: none;\n       -webkit-transition: 300ms;\n       transition: 300ms;\n}\n.green-bot[data-v-aa533232]:hover {\n       color: #fff;\n       background: #00d614;\n       -webkit-transition: 300ms;\n       transition: 300ms;\n}\n.botton-inco[data-v-aa533232] {\n       margin: 15px 7px;\n       display: inline-block;\n       color: #313a43;\n       padding: 8px 35px;\n       border-radius: 3px;\n       text-align: center;\n}\n.botton-inco[data-v-aa533232]:hover {\n       color: #fff;\n}\n.font-big[data-v-aa533232] {\n       font-size: 23px;\n       position: relative;\n       top: 3px;\n}\n.little_header[data-v-aa533232] {\n       width: 80px;\n}\n.little-main-header[data-v-aa533232] {\n       right: 80px;\n}\n.background_mob_sec[data-v-aa533232] {\n       position: fixed;\n       right: 0;\n       left: 0;\n       bottom: 0;\n       top: 0;\n       background: rgba(0, 0, 0, 0.6);\n       z-index: -1;\n       display: none;\n}\n.kind_user[data-v-aa533232], .kind_activity[data-v-aa533232] {\n       margin: 7px 0;\n       border-bottom: 1px solid #eff3f6;\n       padding-bottom: 10px;\n}\n.kind_user > div[data-v-aa533232], .kind_activity > div[data-v-aa533232] {\n       float: right;\n       overflow: hidden;\n       padding: 10px;\n       font-size: 15px;\n}\n.kind_user input[data-v-aa533232], .kind_activity input[data-v-aa533232] {\n       cursor: pointer;\n       width: 23px;\n       height: 23px;\n       float: right;\n       position: absolute;\n       top: 2px;\n       right: 65px;\n       opacity: 0;\n}\n.kind_user input:checked + i[data-v-aa533232], .kind_activity input:checked + i[data-v-aa533232] {\n       background: #28a745;\n       color: #fff;\n       border: none;\n       padding: 4px;\n}\n.kind_user i[data-v-aa533232], .kind_activity i[data-v-aa533232] {\n       background: none;\n       width: 23px;\n       height: 23px;\n       display: block;\n       position: absolute;\n       top: 4px;\n       right: 65px;\n       z-index: -1;\n       color: #808c9c;\n       border-radius: 50%;\n       padding: 2px;\n       font-size: 14px;\n       border: 2px solid;\n}\n.user-form[data-v-aa533232] {\n       padding: 0;\n}\ninput[type=\"text\"][data-v-aa533232], select[data-v-aa533232],input[type=\"password\"][data-v-aa533232] {\n       width: 100%;\n       border: 1px solid #e9e9e9;\n       padding: 15px 20px;\n       margin: 7px auto;\n       border-radius: 4px;\n       -webkit-transition: 300ms;\n       transition: 300ms;\n}\ntextarea[data-v-aa533232] {\n       height: 120px;\n       max-width: 100%\n}\n.user-form input[type=\"button\"][data-v-aa533232] {\n       width: 100%;\n}\n.user-form input[type=\"text\"][data-v-aa533232]:focus ,input[type=\"password\"][data-v-aa533232]:focus{\n       border: 1px solid #28a745;\n       -webkit-transition: 500ms;\n       transition: 500ms;\n}\n.img-profile[data-v-aa533232] {\n       float: right;\n       padding-top: 90px;\n}\n#icon-pro[data-v-aa533232] {\n       width: 150px;\n       height: 150px;\n       display: inline-block;\n}\n#icon-pro svg[data-v-aa533232] {\n       height: 150px;\n}\n.col-sm-6[data-v-aa533232] {\n       height: 120px;\n       float: right;\n}\n@media screen and (max-width: 992px) {\n.img-profile[data-v-aa533232] {\n           padding-top: 20px;\n}\n.right-header.desktop-header[data-v-aa533232] {\n           display: none;\n}\n.right-header.mobile-header[data-v-aa533232] {\n           display: block;\n           right: -300px;\n}\n.main-header[data-v-aa533232], .little-main-header[data-v-aa533232] {\n           right: 0 !important;\n}\n#main[data-v-aa533232], #main.little-main[data-v-aa533232] {\n           margin-right: 0 !important;\n}\n.post-contents-table[data-v-aa533232] {\n           width: 100%;\n}\n.copy-right[data-v-aa533232] {\n           display: none;\n}\n.clouse_menu[data-v-aa533232] {\n           display: none;\n}\n.clouse_menu_mob[data-v-aa533232] {\n           display: block;\n}\n.show-header button[data-v-aa533232] {\n           display: block;\n}\n.img-profile .submit[data-v-aa533232] {\n           position: relative;\n           width: 100%;\n           margin: 25px auto;\n}\n.img-profile .submit label[data-v-aa533232] {\n           width: 40%;\n           padding: 12px 0;\n}\n.img-profile[data-v-aa533232] {\n           float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-aa533232], .contents-post[data-v-aa533232] {\n           width: 100%;\n           float: none;\n           margin: 10px 0;\n           padding: 0;\n}\n.col-sm-6[data-v-aa533232] {\n           float: none;\n}\n.name-header-profile[data-v-aa533232] {\n           display: none;\n}\n.profile-menu-header[data-v-aa533232] {\n           padding: 7px;\n           padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-aa533232] {\n           display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-aa533232] {\n           font-size: 10px;\n}\n.sub-header[data-v-aa533232] {\n\n           bottom: -44px;\n}\n}\n", ""]);
 
 // exports
 
@@ -67717,7 +67720,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n/*start style main header*/\n#main[data-v-d19368a6] {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n#main.little-main[data-v-d19368a6] {\n    margin-right: 80px;\n}\n.main-header[data-v-d19368a6] {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n    border-bottom: 2px solid #e6e6e6;\n}\n.image-header-profile[data-v-d19368a6] {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.image-header-profile img[data-v-d19368a6] {\n    height: 100%;\n}\n.profile-menu-header[data-v-d19368a6] {\n    float: left;\n}\n.right-menu-header[data-v-d19368a6] {\n\n    padding: 16px;\n}\n.right-menu-header[data-v-d19368a6], .content-header[data-v-d19368a6] {\n    float: right;\n}\n.profile-menu-header[data-v-d19368a6] {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header a[data-v-d19368a6] {\n    position: relative;\n}\n.profile-menu-header i[data-v-d19368a6] {\n    position: absolute;\n\n    left: -75px;\n\n    top: 18px;\n\n    font-size: 20px;\n}\n.content-header[data-v-d19368a6] {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a[data-v-d19368a6], .profile-menu-header a[data-v-d19368a6] {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a[data-v-d19368a6] {\n    font-size: 30px;\n}\n.right-menu-header a[data-v-d19368a6]:hover, .profile-menu-header a[data-v-d19368a6]:hover {\n    color: #2e353e;\n}\n.name-header-profile[data-v-d19368a6] {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list[data-v-d19368a6] {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li[data-v-d19368a6] {\n    margin: 5px;\n}\n.profile-list a[data-v-d19368a6] {\n    width: 100%;\n    display: inline-block;\n}\n\n/*end style main header*/\n\n/*start style sub-header*/\n.sub-header[data-v-d19368a6] {\n    position: absolute;\n    left: 0;\n    background: #eff3f6;\n    top: 63px;\n    right: 0;\n    text-align: center;\n}\n.sub-header ul[data-v-d19368a6] {\n    text-align: center;\n}\n.sub-header a[data-v-d19368a6] {\n    padding: 16px;\n\n    display: inline-block;\n\n    color: #808c9b;\n\n    font-weight: bold;\n\n    font-size: 14px;\n\n    position: relative;\n}\n.sub-header a[data-v-d19368a6]:hover {\n    color: #313942;\n}\n.sub-header a[data-v-d19368a6]:hover::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n.sub-header a.active[data-v-d19368a6] {\n    color: #313942;\n}\n.sub-header a.active[data-v-d19368a6]::after {\n    content: \" \";\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    background: #28a745;\n    height: 3px;\n    width: 100%;\n}\n\n/*end style sub-header*/\n/*start main content style */\n.image-content-post[data-v-d19368a6] {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img[data-v-d19368a6] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-d19368a6] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-d19368a6] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-d19368a6] {\n    display: block;\n}\n.content-item[data-v-d19368a6] {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content[data-v-d19368a6] {\n    padding: 60px 15px;\n}\n.img-profile[data-v-d19368a6] {\n    text-align: center;\n}\n.img-profile .image-input img[data-v-d19368a6] {\n    width: 150px;\n    height: 150px;\n    overflow: hidden;\n    border-radius: 50%;\n}\n.img-profile i[data-v-d19368a6] {\n    font-size: 150px;\n    color: #4b4b4b;\n}\n.img-profile .submit[data-v-d19368a6] {\n    position: relative;\n    width: 80%;\n    margin: 25px auto;\n}\n.img-profile .submit input[data-v-d19368a6] {\n    opacity: 0;\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    left: 10px;\n    right: 0;\n}\n.img-profile .submit label[data-v-d19368a6] {\n    background: #28a745;\n    color: #fff;\n    padding: 12px 0;\n    font-size: 13px;\n    font-weight: 400;\n    border-radius: 5px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    width: 100%;\n}\n.img-profile .submit input:hover + label[data-v-d19368a6] {\n    background: #29d44d;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.img-profile .submit input[data-v-d19368a6]:hover {\n    cursor: pointer\n}\n.main-profile[data-v-d19368a6] {\n    border-right: 1px solid #eff3f6;\n    text-align: right;\n    direction: rtl;\n    overflow: hidden;\n}\n.header-lable[data-v-d19368a6] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n.content-lable[data-v-d19368a6] {\n    font-weight: 400;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-d19368a6] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-d19368a6]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-d19368a6] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-d19368a6]:hover {\n    color: #fff;\n}\n.font-big[data-v-d19368a6] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-d19368a6] {\n    width: 80px;\n}\n.little-main-header[data-v-d19368a6] {\n    right: 80px;\n}\n.background_mob_sec[data-v-d19368a6] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user[data-v-d19368a6], .kind_activity[data-v-d19368a6] {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div[data-v-d19368a6], .kind_activity > div[data-v-d19368a6] {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input[data-v-d19368a6], .kind_activity input[data-v-d19368a6] {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i[data-v-d19368a6], .kind_activity input:checked + i[data-v-d19368a6] {\n    background: #28a745;\n    color: #fff;\n    border: none;\n    padding: 4px;\n}\n.kind_user i[data-v-d19368a6], .kind_activity i[data-v-d19368a6] {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border-radius: 50%;\n    padding: 2px;\n    font-size: 14px;\n    border: 2px solid;\n}\n.user-form[data-v-d19368a6] {\n    padding: 0;\n}\ninput[type=\"text\"][data-v-d19368a6], select[data-v-d19368a6],input[type=\"password\"][data-v-d19368a6] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\ntextarea[data-v-d19368a6] {\n    height: 120px;\n    max-width: 100%\n}\n.user-form input[type=\"button\"][data-v-d19368a6] {\n    width: 100%;\n}\n.user-form input[type=\"text\"][data-v-d19368a6]:focus ,input[type=\"password\"][data-v-d19368a6]:focus{\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile[data-v-d19368a6] {\n    float: right;\n    padding-top: 90px;\n}\n#icon-pro[data-v-d19368a6] {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg[data-v-d19368a6] {\n    height: 150px;\n}\n.col-sm-6[data-v-d19368a6] {\n    height: 120px;\n    float: right;\n}\n@media screen and (max-width: 992px) {\n.img-profile[data-v-d19368a6] {\n        padding-top: 20px;\n}\n.right-header.desktop-header[data-v-d19368a6] {\n        display: none;\n}\n.right-header.mobile-header[data-v-d19368a6] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-d19368a6], .little-main-header[data-v-d19368a6] {\n        right: 0 !important;\n}\n#main[data-v-d19368a6], #main.little-main[data-v-d19368a6] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-d19368a6] {\n        width: 100%;\n}\n.copy-right[data-v-d19368a6] {\n        display: none;\n}\n.clouse_menu[data-v-d19368a6] {\n        display: none;\n}\n.clouse_menu_mob[data-v-d19368a6] {\n        display: block;\n}\n.show-header button[data-v-d19368a6] {\n        display: block;\n}\n.img-profile .submit[data-v-d19368a6] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-d19368a6] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-d19368a6] {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-d19368a6], .contents-post[data-v-d19368a6] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.col-sm-6[data-v-d19368a6] {\n        float: none;\n}\n.name-header-profile[data-v-d19368a6] {\n        display: none;\n}\n.profile-menu-header[data-v-d19368a6] {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-d19368a6] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-d19368a6] {\n        font-size: 10px;\n}\n.sub-header[data-v-d19368a6] {\n\n        bottom: -44px;\n}\n}\n", ""]);
+exports.push([module.i, "\n/*start main content style */\n.image-content-post[data-v-d19368a6] {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img[data-v-d19368a6] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-d19368a6] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-d19368a6] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-d19368a6] {\n    display: block;\n}\n.content-item[data-v-d19368a6] {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content[data-v-d19368a6] {\n    padding: 60px 15px;\n}\n.img-profile[data-v-d19368a6] {\n    text-align: center;\n}\n.img-profile .image-input img[data-v-d19368a6] {\n    width: 150px;\n    height: 150px;\n    overflow: hidden;\n    border-radius: 50%;\n}\n.img-profile i[data-v-d19368a6] {\n    font-size: 150px;\n    color: #4b4b4b;\n}\n.img-profile .submit[data-v-d19368a6] {\n    position: relative;\n    width: 80%;\n    margin: 25px auto;\n}\n.img-profile .submit input[data-v-d19368a6] {\n    opacity: 0;\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    left: 10px;\n    right: 0;\n}\n.img-profile .submit label[data-v-d19368a6] {\n    background: #28a745;\n    color: #fff;\n    padding: 12px 0;\n    font-size: 13px;\n    font-weight: 400;\n    border-radius: 5px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    width: 100%;\n}\n.img-profile .submit input:hover + label[data-v-d19368a6] {\n    background: #29d44d;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.img-profile .submit input[data-v-d19368a6]:hover {\n    cursor: pointer\n}\n.main-profile[data-v-d19368a6] {\n    border-right: 1px solid #eff3f6;\n    text-align: right;\n    direction: rtl;\n    overflow: hidden;\n}\n.header-lable[data-v-d19368a6] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n.content-lable[data-v-d19368a6] {\n    font-weight: 400;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-d19368a6] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-d19368a6]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-d19368a6] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-d19368a6]:hover {\n    color: #fff;\n}\n.font-big[data-v-d19368a6] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-d19368a6] {\n    width: 80px;\n}\n.little-main-header[data-v-d19368a6] {\n    right: 80px;\n}\n.background_mob_sec[data-v-d19368a6] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user[data-v-d19368a6], .kind_activity[data-v-d19368a6] {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div[data-v-d19368a6], .kind_activity > div[data-v-d19368a6] {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input[data-v-d19368a6], .kind_activity input[data-v-d19368a6] {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i[data-v-d19368a6], .kind_activity input:checked + i[data-v-d19368a6] {\n    background: #28a745;\n    color: #fff;\n    border: none;\n    padding: 4px;\n}\n.kind_user i[data-v-d19368a6], .kind_activity i[data-v-d19368a6] {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border-radius: 50%;\n    padding: 2px;\n    font-size: 14px;\n    border: 2px solid;\n}\n.user-form[data-v-d19368a6] {\n    padding: 0;\n}\ninput[type=\"text\"][data-v-d19368a6], select[data-v-d19368a6],input[type=\"password\"][data-v-d19368a6] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\ntextarea[data-v-d19368a6] {\n    height: 120px;\n    max-width: 100%\n}\n.user-form input[type=\"button\"][data-v-d19368a6] {\n    width: 100%;\n}\n.user-form input[type=\"text\"][data-v-d19368a6]:focus ,input[type=\"password\"][data-v-d19368a6]:focus{\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile[data-v-d19368a6] {\n    float: right;\n    padding-top: 90px;\n}\n#icon-pro[data-v-d19368a6] {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg[data-v-d19368a6] {\n    height: 150px;\n}\n.col-sm-6[data-v-d19368a6] {\n    height: 120px;\n    float: right;\n}\n@media screen and (max-width: 992px) {\n.img-profile[data-v-d19368a6] {\n        padding-top: 20px;\n}\n.right-header.desktop-header[data-v-d19368a6] {\n        display: none;\n}\n.right-header.mobile-header[data-v-d19368a6] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-d19368a6], .little-main-header[data-v-d19368a6] {\n        right: 0 !important;\n}\n#main[data-v-d19368a6], #main.little-main[data-v-d19368a6] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-d19368a6] {\n        width: 100%;\n}\n.copy-right[data-v-d19368a6] {\n        display: none;\n}\n.clouse_menu[data-v-d19368a6] {\n        display: none;\n}\n.clouse_menu_mob[data-v-d19368a6] {\n        display: block;\n}\n.show-header button[data-v-d19368a6] {\n        display: block;\n}\n.img-profile .submit[data-v-d19368a6] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-d19368a6] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-d19368a6] {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-d19368a6], .contents-post[data-v-d19368a6] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.col-sm-6[data-v-d19368a6] {\n        float: none;\n}\n.name-header-profile[data-v-d19368a6] {\n        display: none;\n}\n.profile-menu-header[data-v-d19368a6] {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-d19368a6] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-d19368a6] {\n        font-size: 10px;\n}\n.sub-header[data-v-d19368a6] {\n\n        bottom: -44px;\n}\n}\n", ""]);
 
 // exports
 
@@ -67729,182 +67732,6 @@ exports.push([module.i, "\n\n/*start style main header*/\n#main[data-v-d19368a6]
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -72372,6 +72199,7 @@ exports.push([module.i, "\n.col-sm-6[data-v-2089683a] {\n    height: 120px;\n   
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -72725,7 +72553,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+
     data: function data() {
         var _buyAd;
 
@@ -72752,7 +72582,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             popUpMsg: '',
             profileConfirmed: false,
             disableSubmit: false,
-            submiting: false
+            submiting: false,
+            items: [{
+                message: 'ثبت درخواست خرید',
+                url: 'registerRequest'
+            }]
         };
     },
     methods: {
@@ -72861,6 +72695,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     mounted: function mounted() {
         $('input[type="file"]').imageuploadify();
+        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
         this.init();
     }
 });
@@ -73283,12 +73118,11 @@ if (false) {
 /* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(203)
+var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(204)
+var __vue_template__ = null
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -73307,115 +73141,12 @@ var Component = normalizeComponent(
 )
 Component.options.__file = "resources\\assets\\js\\components\\dashboard\\buyer\\request\\sell-offer-detail.vue"
 
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4cd44f10", Component.options)
-  } else {
-    hotAPI.reload("data-v-4cd44f10", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
 module.exports = Component.exports
 
 
 /***/ }),
-/* 203 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({});
-
-/***/ }),
-/* 204 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function(){},staticRenderFns:[]}
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-4cd44f10", module.exports)
-  }
-}
-
-/***/ }),
+/* 203 */,
+/* 204 */,
 /* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -74147,11 +73878,11 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.factors, function(factor) {
               return _c(
-                "router-link",
+                "a",
                 {
                   staticClass:
                     "list-group-item list-group-item-action col-xs-12",
-                  attrs: { to: "/factor-detail/" + factor.id }
+                  attrs: { href: "/factor-detail/" + factor.id }
                 },
                 [
                   _c("p", { staticClass: "number col-xs-2" }, [

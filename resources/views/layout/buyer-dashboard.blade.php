@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/kamadatepicker.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
+    {{--<link type="text/css" rel="stylesheet" href="{{asset('assets/css/custom.css')}}">--}}
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/dashboard/master/style.css')}}">
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
     @yield('header_links')
@@ -43,7 +43,7 @@
             overflow: auto;
         }
         .modal-open[style] {
-            padding-right: 0px !important;
+            padding-right: 0 !important;
         }
     </style>
 

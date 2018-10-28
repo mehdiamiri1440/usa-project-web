@@ -205,7 +205,7 @@ Route::group(['middleware' => [login::class]],function(){
                      return view('dashboard.seller.profile.profile_basic');
                  }*/
             else if(session('is_buyer')){
-                return view('dashboard.buyer.profile.profile_basic');
+                return view('layout.buyer-dashboard');
             }
         })->name('profile_basic');
         Route::get('/profile/complementary',function(){

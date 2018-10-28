@@ -4,6 +4,9 @@
         margin-top: 65px;
         background: #eff3f6;
     }
+    #main.little-main {
+        margin-right: 80px !important;
+    }
     .main-header {
         height: 65px;
         position: fixed;

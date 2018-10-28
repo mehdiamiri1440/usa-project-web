@@ -20,7 +20,6 @@
 
         <script src="{{asset('assets/cdn/axios.js')}}"></script>
 
-        @yield('header_links')
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{csrf_token()}}">
         <script>
@@ -86,28 +85,7 @@
 
     </div>
 
-    @yield('body_script_tags')
-    <script src="{{asset('assets/js/custom.js')}}"></script>
     <script src="{{asset('js/app.js')}}"></script>
-{{--    <script>
-        function checkProfileConfirmation(event) {
-            event.preventDefault();
-            var e = event.currentTarget;
-            var url = $(e).attr('href');
-
-            axios.post('/user/profile_info', {
-                        confirmed: true
-                    })
-                    .then(function (response) {
-                        if (response.data.profile.confirmed == false) {
-                            $('#myModal-1').modal('show');
-                        }
-                        else {
-                            window.location.href = url;
-                        }
-                    });
-        }
-    </script>--}}
 
     </body>
 
