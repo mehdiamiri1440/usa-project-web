@@ -84,7 +84,7 @@
             @show
 
     </div>
-
+    @yield('body_script_tags')
     <script src="{{asset('js/app.js')}}"></script>
 
     </body>

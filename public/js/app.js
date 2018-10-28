@@ -49236,7 +49236,7 @@ var render = function() {
                 { staticClass: "list-item" },
                 [
                   _c("router-link", { attrs: { to: { name: "password" } } }, [
-                    _vm._v("کلمه عبور")
+                    _vm._v("تغییر کلمه عبور")
                   ])
                 ],
                 1
@@ -51343,6 +51343,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -51624,6 +51625,17 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
+              _c(
+                "li",
+                { staticClass: "list-item" },
+                [
+                  _c("router-link", { attrs: { to: { name: "password" } } }, [
+                    _vm._v("تغییر کلمه عبور")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
               _c("li", { staticClass: "list-item" }, [
                 _c("a", { attrs: { href: _vm.out } }, [_vm._v("خروج")])
               ])
@@ -51633,6 +51645,8 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "right-menu-header" }, [
           _c("ul", { staticClass: "list-inline" }, [
+            _vm._m(2),
+            _vm._v(" "),
             _c("li", [
               _c("a", { attrs: { href: _vm.routeHome } }, [
                 _c("i", {
@@ -51667,6 +51681,16 @@ var staticRenderFns = [
       _c("span", { staticClass: "font-big" }, [_vm._v("اینکوباک  ")]),
       _vm._v(" | "),
       _c("span", [_vm._v(" بازارگاه آنلاین کشاورزی")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _c("i", { staticClass: "fa fa-bars", attrs: { "aria-hidden": "true" } })
+      ])
     ])
   }
 ]
@@ -53417,7 +53441,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n   /*start style main header*/\n/*   #main {\n       margin-right: 250px;\n       margin-top: 65px;\n       background: #eff3f6;\n   }\n\n   #main.little-main {\n       margin-right: 80px;\n   }*/\n.main-header[data-v-aa533232] {\n       height: 65px;\n       position: fixed;\n       left: 0;\n       right: 250px;\n       top: 0;\n       background: #fff;\n       z-index: 5;\n       border-bottom: 2px solid #e6e6e6;\n}\n.image-header-profile[data-v-aa533232] {\n       width: 50px;\n       height: 50px;\n       overflow: hidden;\n       border-radius: 50%;\n       float: left;\n}\n.image-header-profile img[data-v-aa533232] {\n       height: 100%;\n}\n.profile-menu-header[data-v-aa533232] {\n       float: left;\n}\n.right-menu-header[data-v-aa533232] {\n\n       padding: 16px;\n}\n.right-menu-header[data-v-aa533232], .content-header[data-v-aa533232] {\n       float: right;\n}\n.profile-menu-header[data-v-aa533232] {\n       padding: 7px;\n       padding-left: 55px;\n}\n.profile-menu-header a[data-v-aa533232] {\n       position: relative;\n}\n.profile-menu-header i[data-v-aa533232] {\n       position: absolute;\n\n       left: -75px;\n\n       top: 18px;\n\n       font-size: 20px;\n}\n.content-header[data-v-aa533232] {\n       background: #28a745;\n       color: #fff;\n       height: 100%;\n       padding: 20px 20px 0;\n}\n.right-menu-header a[data-v-aa533232], .profile-menu-header a[data-v-aa533232] {\n       color: #7f8c9b;\n       margin: 5px;\n}\n.right-menu-header a[data-v-aa533232] {\n       font-size: 30px;\n}\n.right-menu-header a[data-v-aa533232]:hover, .profile-menu-header a[data-v-aa533232]:hover {\n       color: #2e353e;\n}\n.name-header-profile[data-v-aa533232] {\n       position: relative;\n       top: 18px;\n       left: 10px;\n}\n.profile-list[data-v-aa533232] {\n       position: absolute;\n       width: 165px;\n       background: #fff;\n       padding: 8px 10px;\n       border-radius: 3px;\n       -webkit-box-shadow: 0 0 3px #313a43;\n               box-shadow: 0 0 3px #313a43;\n       text-align: right;\n       left: 40px;\n       top: 65px;\n       display: none;\n       z-index: 999;\n}\n.profile-list li[data-v-aa533232] {\n       margin: 5px;\n}\n.profile-list a[data-v-aa533232] {\n       width: 100%;\n       display: inline-block;\n}\n\n   /*end style main header*/\n\n   /*start style sub-header*/\n.sub-header[data-v-aa533232] {\n       position: absolute;\n       left: 0;\n       background: #eff3f6;\n       top: 63px;\n       right: 0;\n       text-align: center;\n}\n.sub-header ul[data-v-aa533232] {\n       text-align: center;\n}\n.sub-header a[data-v-aa533232] {\n       padding: 16px;\n\n       display: inline-block;\n\n       color: #808c9b;\n\n       font-weight: bold;\n\n       font-size: 14px;\n\n       position: relative;\n}\n.sub-header a[data-v-aa533232]:hover {\n       color: #313942;\n}\n.sub-header a[data-v-aa533232]:hover::after {\n       content: \" \";\n       position: absolute;\n       bottom: 0;\n       left: 0;\n       background: #28a745;\n       height: 3px;\n       width: 100%;\n}\n.sub-header a.active[data-v-aa533232] {\n       color: #313942;\n}\n.sub-header a.active[data-v-aa533232]::after {\n       content: \" \";\n       position: absolute;\n       bottom: 0;\n       left: 0;\n       background: #28a745;\n       height: 3px;\n       width: 100%;\n}\n\n   /*end style sub-header*/\n   /*start main content style */\n.image-content-post[data-v-aa533232] {\n       width: 30%;\n       float: right;\n       position: relative;\n}\n.image-content-post img[data-v-aa533232] {\n       border-radius: 3px;\n       -webkit-transition: 200ms;\n       transition: 200ms;\n       -webkit-filter: grayscale(30%);\n               filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-aa533232] {\n       -webkit-filter: grayscale(0);\n               filter: grayscale(0);\n       -webkit-transition: 200ms;\n       transition: 200ms;\n}\n.image-content-post i[data-v-aa533232] {\n       display: none;\n       position: absolute;\n       top: 46%;\n       left: 0;\n       right: 0;\n       text-align: center;\n       font-size: 35px;\n       color: #fff;\n       z-index: 1;\n}\n.image-content-post a:hover i[data-v-aa533232] {\n       display: block;\n}\n.content-item[data-v-aa533232] {\n       overflow: hidden;\n       text-align: right;\n       direction: rtl;\n}\n.main-content[data-v-aa533232] {\n       padding: 60px 15px;\n}\n.img-profile[data-v-aa533232] {\n       text-align: center;\n}\n.img-profile .image-input img[data-v-aa533232] {\n       width: 150px;\n       height: 150px;\n       overflow: hidden;\n       border-radius: 50%;\n}\n.img-profile i[data-v-aa533232] {\n       font-size: 150px;\n       color: #4b4b4b;\n}\n.img-profile .submit[data-v-aa533232] {\n       position: relative;\n       width: 80%;\n       margin: 25px auto;\n}\n.img-profile .submit input[data-v-aa533232] {\n       opacity: 0;\n       position: absolute;\n       width: 100%;\n       height: 100%;\n       left: 10px;\n       right: 0;\n}\n.img-profile .submit label[data-v-aa533232] {\n       background: #28a745;\n       color: #fff;\n       padding: 12px 0;\n       font-size: 13px;\n       font-weight: 400;\n       border-radius: 5px;\n       -webkit-transition: 300ms;\n       transition: 300ms;\n       width: 100%;\n}\n.img-profile .submit input:hover + label[data-v-aa533232] {\n       background: #29d44d;\n       -webkit-transition: 300ms;\n       transition: 300ms;\n}\n.img-profile .submit input[data-v-aa533232]:hover {\n       cursor: pointer\n}\n.main-profile[data-v-aa533232] {\n       border-right: 1px solid #eff3f6;\n       text-align: right;\n       direction: rtl;\n       overflow: hidden;\n}\n.header-lable[data-v-aa533232] {\n       display: block;\n       margin: 13px;\n       padding: 0;\n}\n.content-lable[data-v-aa533232] {\n       font-weight: 400;\n}\n\n   /*end main content style */\n   /*custom cods*/\n.green-bot[data-v-aa533232] {\n       margin: 15px 0;\n       display: inline-block;\n       background: #28a745;\n       color: #fff;\n       padding: 10px 35px;\n       border-radius: 3px;\n       text-align: center;\n       border: none;\n       -webkit-transition: 300ms;\n       transition: 300ms;\n}\n.green-bot[data-v-aa533232]:hover {\n       color: #fff;\n       background: #00d614;\n       -webkit-transition: 300ms;\n       transition: 300ms;\n}\n.botton-inco[data-v-aa533232] {\n       margin: 15px 7px;\n       display: inline-block;\n       color: #313a43;\n       padding: 8px 35px;\n       border-radius: 3px;\n       text-align: center;\n}\n.botton-inco[data-v-aa533232]:hover {\n       color: #fff;\n}\n.font-big[data-v-aa533232] {\n       font-size: 23px;\n       position: relative;\n       top: 3px;\n}\n.little_header[data-v-aa533232] {\n       width: 80px;\n}\n.little-main-header[data-v-aa533232] {\n       right: 80px;\n}\n.background_mob_sec[data-v-aa533232] {\n       position: fixed;\n       right: 0;\n       left: 0;\n       bottom: 0;\n       top: 0;\n       background: rgba(0, 0, 0, 0.6);\n       z-index: -1;\n       display: none;\n}\n.kind_user[data-v-aa533232], .kind_activity[data-v-aa533232] {\n       margin: 7px 0;\n       border-bottom: 1px solid #eff3f6;\n       padding-bottom: 10px;\n}\n.kind_user > div[data-v-aa533232], .kind_activity > div[data-v-aa533232] {\n       float: right;\n       overflow: hidden;\n       padding: 10px;\n       font-size: 15px;\n}\n.kind_user input[data-v-aa533232], .kind_activity input[data-v-aa533232] {\n       cursor: pointer;\n       width: 23px;\n       height: 23px;\n       float: right;\n       position: absolute;\n       top: 2px;\n       right: 65px;\n       opacity: 0;\n}\n.kind_user input:checked + i[data-v-aa533232], .kind_activity input:checked + i[data-v-aa533232] {\n       background: #28a745;\n       color: #fff;\n       border: none;\n       padding: 4px;\n}\n.kind_user i[data-v-aa533232], .kind_activity i[data-v-aa533232] {\n       background: none;\n       width: 23px;\n       height: 23px;\n       display: block;\n       position: absolute;\n       top: 4px;\n       right: 65px;\n       z-index: -1;\n       color: #808c9c;\n       border-radius: 50%;\n       padding: 2px;\n       font-size: 14px;\n       border: 2px solid;\n}\n.user-form[data-v-aa533232] {\n       padding: 0;\n}\ninput[type=\"text\"][data-v-aa533232], select[data-v-aa533232],input[type=\"password\"][data-v-aa533232] {\n       width: 100%;\n       border: 1px solid #e9e9e9;\n       padding: 15px 20px;\n       margin: 7px auto;\n       border-radius: 4px;\n       -webkit-transition: 300ms;\n       transition: 300ms;\n}\ntextarea[data-v-aa533232] {\n       height: 120px;\n       max-width: 100%\n}\n.user-form input[type=\"button\"][data-v-aa533232] {\n       width: 100%;\n}\n.user-form input[type=\"text\"][data-v-aa533232]:focus ,input[type=\"password\"][data-v-aa533232]:focus{\n       border: 1px solid #28a745;\n       -webkit-transition: 500ms;\n       transition: 500ms;\n}\n.img-profile[data-v-aa533232] {\n       float: right;\n       padding-top: 90px;\n}\n#icon-pro[data-v-aa533232] {\n       width: 150px;\n       height: 150px;\n       display: inline-block;\n}\n#icon-pro svg[data-v-aa533232] {\n       height: 150px;\n}\n.col-sm-6[data-v-aa533232] {\n       height: 120px;\n       float: right;\n}\n@media screen and (max-width: 992px) {\n.img-profile[data-v-aa533232] {\n           padding-top: 20px;\n}\n.right-header.desktop-header[data-v-aa533232] {\n           display: none;\n}\n.right-header.mobile-header[data-v-aa533232] {\n           display: block;\n           right: -300px;\n}\n.main-header[data-v-aa533232], .little-main-header[data-v-aa533232] {\n           right: 0 !important;\n}\n#main[data-v-aa533232], #main.little-main[data-v-aa533232] {\n           margin-right: 0 !important;\n}\n.post-contents-table[data-v-aa533232] {\n           width: 100%;\n}\n.copy-right[data-v-aa533232] {\n           display: none;\n}\n.clouse_menu[data-v-aa533232] {\n           display: none;\n}\n.clouse_menu_mob[data-v-aa533232] {\n           display: block;\n}\n.show-header button[data-v-aa533232] {\n           display: block;\n}\n.img-profile .submit[data-v-aa533232] {\n           position: relative;\n           width: 100%;\n           margin: 25px auto;\n}\n.img-profile .submit label[data-v-aa533232] {\n           width: 40%;\n           padding: 12px 0;\n}\n.img-profile[data-v-aa533232] {\n           float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-aa533232], .contents-post[data-v-aa533232] {\n           width: 100%;\n           float: none;\n           margin: 10px 0;\n           padding: 0;\n}\n.col-sm-6[data-v-aa533232] {\n           float: none;\n}\n.name-header-profile[data-v-aa533232] {\n           display: none;\n}\n.profile-menu-header[data-v-aa533232] {\n           padding: 7px;\n           padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-aa533232] {\n           display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-aa533232] {\n           font-size: 10px;\n}\n.sub-header[data-v-aa533232] {\n\n           bottom: -44px;\n}\n}\n", ""]);
+exports.push([module.i, "\n\n/*start main content style */\n.image-content-post[data-v-aa533232] {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img[data-v-aa533232] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-aa533232] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-aa533232] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-aa533232] {\n    display: block;\n}\n.content-item[data-v-aa533232] {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content[data-v-aa533232] {\n    padding: 60px 15px;\n}\n.img-profile[data-v-aa533232] {\n    text-align: center;\n}\n.img-profile .image-input img[data-v-aa533232] {\n    width: 150px;\n    height: 150px;\n    overflow: hidden;\n    border-radius: 50%;\n}\n.img-profile i[data-v-aa533232] {\n    font-size: 150px;\n    color: #4b4b4b;\n}\n.img-profile .submit[data-v-aa533232] {\n    position: relative;\n    width: 80%;\n    margin: 25px auto;\n}\n.img-profile .submit input[data-v-aa533232] {\n    opacity: 0;\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    left: 10px;\n    right: 0;\n}\n.img-profile .submit label[data-v-aa533232] {\n    background: #28a745;\n    color: #fff;\n    padding: 12px 0;\n    font-size: 13px;\n    font-weight: 400;\n    border-radius: 5px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    width: 100%;\n}\n.img-profile .submit input:hover + label[data-v-aa533232] {\n    background: #29d44d;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.img-profile .submit input[data-v-aa533232]:hover {\n    cursor: pointer\n}\n.main-profile[data-v-aa533232] {\n    border-right: 1px solid #eff3f6;\n    text-align: right;\n    direction: rtl;\n    overflow: hidden;\n}\n.header-lable[data-v-aa533232] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n.content-lable[data-v-aa533232] {\n    font-weight: 400;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-aa533232] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-aa533232]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-aa533232] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-aa533232]:hover {\n    color: #fff;\n}\n.font-big[data-v-aa533232] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-aa533232] {\n    width: 80px;\n}\n.little-main-header[data-v-aa533232] {\n    right: 80px;\n}\n.background_mob_sec[data-v-aa533232] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user[data-v-aa533232], .kind_activity[data-v-aa533232] {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div[data-v-aa533232], .kind_activity > div[data-v-aa533232] {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input[data-v-aa533232], .kind_activity input[data-v-aa533232] {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i[data-v-aa533232], .kind_activity input:checked + i[data-v-aa533232] {\n    background: #28a745;\n    color: #fff;\n    border: none;\n    padding: 4px;\n}\n.kind_user i[data-v-aa533232], .kind_activity i[data-v-aa533232] {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border-radius: 50%;\n    padding: 2px;\n    font-size: 14px;\n    border: 2px solid;\n}\n.user-form[data-v-aa533232] {\n    padding: 0;\n}\ninput[type=\"text\"][data-v-aa533232], select[data-v-aa533232],input[type=\"password\"][data-v-aa533232] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\ntextarea[data-v-aa533232] {\n    height: 120px;\n    max-width: 100%\n}\n.user-form input[type=\"button\"][data-v-aa533232] {\n    width: 100%;\n}\n.user-form input[type=\"text\"][data-v-aa533232]:focus ,input[type=\"password\"][data-v-aa533232]:focus{\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile[data-v-aa533232] {\n    float: right;\n    padding-top: 90px;\n}\n#icon-pro[data-v-aa533232] {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg[data-v-aa533232] {\n    height: 150px;\n}\n.col-sm-6[data-v-aa533232] {\n    height: 120px;\n    float: right;\n}\n@media screen and (max-width: 992px) {\n.img-profile[data-v-aa533232] {\n        padding-top: 20px;\n}\n.right-header.desktop-header[data-v-aa533232] {\n        display: none;\n}\n.right-header.mobile-header[data-v-aa533232] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-aa533232], .little-main-header[data-v-aa533232] {\n        right: 0 !important;\n}\n#main[data-v-aa533232], #main.little-main[data-v-aa533232] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-aa533232] {\n        width: 100%;\n}\n.copy-right[data-v-aa533232] {\n        display: none;\n}\n.clouse_menu[data-v-aa533232] {\n        display: none;\n}\n.clouse_menu_mob[data-v-aa533232] {\n        display: block;\n}\n.show-header button[data-v-aa533232] {\n        display: block;\n}\n.img-profile .submit[data-v-aa533232] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-aa533232] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-aa533232] {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-aa533232], .contents-post[data-v-aa533232] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.col-sm-6[data-v-aa533232] {\n        float: none;\n}\n.name-header-profile[data-v-aa533232] {\n        display: none;\n}\n.profile-menu-header[data-v-aa533232] {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-aa533232] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-aa533232] {\n        font-size: 10px;\n}\n.sub-header[data-v-aa533232] {\n\n        bottom: -44px;\n}\n}\n", ""]);
 
 // exports
 
@@ -53429,195 +53453,6 @@ exports.push([module.i, "\n\n   /*start style main header*/\n/*   #main {\n     
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -54654,10 +54489,6 @@ var render = function() {
                 : _vm._e()
             ]),
             _vm._v(" "),
-            _vm._m(0),
-            _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
             _c("div", { staticClass: "col-xs-12" }, [
               _c("input", {
                 staticClass: "green-bot",
@@ -54671,56 +54502,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-6" }, [
-      _c(
-        "label",
-        { staticClass: "content-lable", attrs: { for: "old-password" } },
-        [
-          _vm._v(
-            "\n                        کلمه عبور قدیمی:\n                    "
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c("input", {
-        attrs: {
-          id: "old-password",
-          type: "password",
-          placeholder: "کلمه عبور قدیمی"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-6" }, [
-      _c(
-        "label",
-        { staticClass: "content-lable", attrs: { for: "new-password" } },
-        [
-          _vm._v(
-            "\n                        کلمه عبور جدید:\n                    "
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c("input", {
-        attrs: {
-          id: "new-password",
-          type: "password",
-          placeholder: "کلمه عبور جدید"
-        }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -68212,20 +67994,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -68781,10 +68549,6 @@ var render = function() {
                 : _vm._e()
             ]),
             _vm._v(" "),
-            _vm._m(0),
-            _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
             _c("div", { staticClass: "col-xs-12" }, [
               _c("input", {
                 staticClass: "green-bot",
@@ -68798,56 +68562,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-6" }, [
-      _c(
-        "label",
-        { staticClass: "content-lable", attrs: { for: "old-password" } },
-        [
-          _vm._v(
-            "\n                        کلمه عبور قدیمی:\n                    "
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c("input", {
-        attrs: {
-          id: "old-password",
-          type: "password",
-          placeholder: "کلمه عبور قدیمی"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-6" }, [
-      _c(
-        "label",
-        { staticClass: "content-lable", attrs: { for: "new-password" } },
-        [
-          _vm._v(
-            "\n                        کلمه عبور جدید:\n                    "
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c("input", {
-        attrs: {
-          id: "new-password",
-          type: "password",
-          placeholder: "کلمه عبور جدید"
-        }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

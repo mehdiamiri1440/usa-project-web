@@ -465,20 +465,6 @@
                                v-model="currentUser.profile.shaba_code">
                         <span v-if="errors.shaba_code" class="text-danger">@{{ errors.shaba_code[0] }}</span>
                     </div>
-                    <div class="col-sm-6">
-                        <label for="old-password" class="content-lable">
-                            کلمه عبور قدیمی:
-                        </label>
-                        <input id="old-password" type="password" placeholder="کلمه عبور قدیمی" >
-                        <!--<span class="text-danger">@{{ errors.postal_code[0] }}</span>-->
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="new-password" class="content-lable">
-                            کلمه عبور جدید:
-                        </label>
-                        <input id="new-password" type="password"  placeholder="کلمه عبور جدید">
-                        <!--<span   class="text-danger">@{{ errors.shaba_code[0] }}</span>-->
-                    </div>
                     <div class="col-xs-12">
                         <input type="button" class="green-bot" name="submit" value="ثبت تغییرات"
                                v-on:click="RegisterBasicProfileInfo">

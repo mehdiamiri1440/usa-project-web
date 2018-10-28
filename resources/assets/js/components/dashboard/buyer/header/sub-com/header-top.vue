@@ -137,13 +137,14 @@
                 <div class="profile-list">
                     <ul class="list-unstyled">
                         <li class="list-item"><a :href="profilebasic">پروفایل</a></li>
+                        <li class="list-item"><router-link :to="{ name : 'password' }">تغییر کلمه عبور</router-link></li>
                         <li class="list-item"><a :href="out">خروج</a></li>
                     </ul>
                 </div>
             </div>
             <div class="right-menu-header">
                 <ul class="list-inline">
-                    <!--<li><a href="#"><i class="fa fa-bars" aria-hidden="true"></i></a></li>-->
+                    <li><a href="#"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
                     <li><a :href="routeHome"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                 </ul>
             </div>

@@ -65,8 +65,8 @@
             loading="{{asset('assets/img/gif/prload.gif')}}"
             guide="{{url('dashboard/guide')}}"
     ></header-dash-buyer>
-    {{--@section('main_content')--}}
-        <main id="main">
+    <main id="main">
+    @section('main_content')
           <router-view
                     name="buyer"
                     loading_img="{{asset('assets/img/gif/loading.gif')}}"
@@ -75,12 +75,12 @@
                     str="{{asset('storage/')}}"
                     defimgitem="{{asset('/assets/img/product.jpg')}}"
             ></router-view>
-
+    @show
         </main>
-    {{--@show--}}
-
 </div>
+    @yield('body_script_tags')
 <script src="{{asset('js/app.js')}}"></script>
+
 </body>
 
 </html>
