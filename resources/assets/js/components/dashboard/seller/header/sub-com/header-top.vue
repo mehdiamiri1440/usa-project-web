@@ -59,7 +59,7 @@
         padding: 20px 20px 0;
     }
 
-    .right-menu-header a, .profile-menu-header a {
+    .right-menu-header a, .profile-menu-header > a {
         color: #7f8c9b;
         margin: 5px;
     }
@@ -68,7 +68,7 @@
         font-size: 30px;
     }
 
-    .right-menu-header a:hover, .profile-menu-header a:hover {
+    .right-menu-header a:hover, .profile-menu-header > a:hover {
         color: #2e353e;
     }
 
