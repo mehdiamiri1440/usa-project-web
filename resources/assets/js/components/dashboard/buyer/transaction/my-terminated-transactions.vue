@@ -68,7 +68,7 @@
     }
     .list-group-item{
         padding: 0;
-    }+
+    }
     .list-group-item a {
         padding: 15px 0;
         display: block;

@@ -295,23 +295,32 @@
 
     }
 
+    .background_mob_sec {
+        position: fixed;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: -1;
+        display: none;
+    }
     /*end style right header*/
-
-
 
     /*loader*/
 
-    .loader-display{
+    .loader-display {
         position: fixed;
         z-index: 10;
-        top:0;
+        top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0,0,0,0.5);
+        background: rgba(0, 0, 0, 0.5);
         display: block;
     }
-    .main-loader{
+
+    .main-loader {
         position: absolute;
 
         top: 35%;
@@ -326,7 +335,8 @@
 
         font-size: 23px;
     }
-    .main-loader img{
+
+    .main-loader img {
         width: 100px;
 
         background: #fff;
@@ -340,9 +350,10 @@
         margin: 0 auto 22px;
     }
 
-    .loader-wrapper{
-        display:none;
+    .loader-wrapper {
+        display: none;
     }
+
     @media screen and (max-width: 992px) {
         .right-header.desktop-header {
             display: none;
@@ -433,6 +444,7 @@
             font-size: 12px !important;
             padding: 16px 13px !important;
         }
+
         .sub-header {
             bottom: -44px;
         }
@@ -765,6 +777,7 @@
                 var flag = true;
                 var right_header = $(".right-header.mobile-header");
                 var back = $(".background_mob_sec");
+                var el_clouse_links = $('.mobile-header .header-menu a');
                 el.on('click', function () {
                     if (flag == true) {
                         console.log('flag = true');
@@ -772,7 +785,6 @@
                             right: '0'
                         }, 300);
                         back.fadeIn();
-
                         flag = false;
                     } else {
                         right_header.animate({
@@ -796,8 +808,39 @@
                         back.fadeOut();
                         flag = true;
                     }
+                });
+                el_clouse_links.on('click', function () {
+                    if (flag == true) {
+                        right_header.animate({
+                            right: '0'
+                        }, 300);
+                        flag = false;
+                    } else {
+                        right_header.animate({
+                            right: '-300px'
+
+                        }, 300);
+                        back.fadeOut();
+                        flag = true;
+                    }
+                });
+                back.on('click',function () {
+                    if (flag == true) {
+                        right_header.animate({
+                            right: '0'
+                        }, 300);
+                        flag = false;
+                    } else {
+                        right_header.animate({
+                            right: '-300px'
+
+                        }, 300);
+                        back.fadeOut();
+                        flag = true;
+                    }
                 })
-            }
+            },
+
         },
         mounted() {
             this.init();

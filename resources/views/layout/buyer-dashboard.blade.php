@@ -79,7 +79,7 @@
         </main>
 </div>
     @yield('body_script_tags')
-<script src="{{asset('assets/js/custom.js')}}"></script>
+{{--<script src="{{asset('assets/js/custom.js')}}"></script>--}}
 <script src="{{asset('js/app.js')}}"></script>
 
 </body>

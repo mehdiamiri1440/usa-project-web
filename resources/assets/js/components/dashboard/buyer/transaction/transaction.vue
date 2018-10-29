@@ -511,7 +511,7 @@
                                 <a href="#" class="default_btn" @click.prevent="goToPrePage()">صفحه قبل</a>
                             </div>
                             <div class="continue_but col-xs-12 col-sm-4 col-md-3">
-                                <a href="#" @click.prevent="confirmContract" class="green-bot">تایید قرارداد</a>
+                                <a href="#" @click.prevent="confirmContract()" class="green-bot">تایید قرارداد</a>
                             </div>
 
                         </div>
@@ -874,7 +874,7 @@
                 submiting:false,
                 items: [
                     {
-                        message: 'لیست تراکنش ها',
+                        message: 'جزئیات تراکنش',
                         url: 'transactionDetail'
                     }
                 ]
@@ -882,7 +882,6 @@
             }
         },
         methods: {
-
             init:function(){
                 var self = this;
                 var transaction_id = this.$route.params.id;
@@ -912,6 +911,15 @@
                     .then(function(response){
                         self.init();
                     });
+            },
+            payPrepayment:function(){
+                var paymentUrl = '/payment/prepayment/' + this.transactionId;
+                window.location.href = paymentUrl;
+            },
+            finalPayment:function(){
+                var paymentUrl = '/payment/finalPayment/' + this.transactionId;
+
+                window.location.href = paymentUrl;
             },
             goToStep: function(step){
                 this.currentStep = step;

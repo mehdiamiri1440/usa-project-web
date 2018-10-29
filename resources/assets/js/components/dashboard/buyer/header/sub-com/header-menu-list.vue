@@ -26,7 +26,9 @@
         color: #fff;
         background: #637484;
     }
-
+    .header-menu i.fa {
+        margin: 5px;
+    }
 </style>
 <template>
   <div>
@@ -35,39 +37,46 @@
               <li class="list-item" >
                   <router-link :class="{'active' : this.active_el === 1}" :to="{ name : 'profileBasic' }">
                       <span>ویرایش پروفایل</span>
+                      <i class="fa fa-user" aria-hidden="true"></i>
                   </router-link>
               </li>
 
               <li class="list-item" >
                   <router-link :class="{'active' : this.active_el === 2}" :to="{ name : 'registerRequest' }">
                       <span>ثبت درخواست جدید</span>
+                      <i class="fa fa-plus-square " aria-hidden="true"></i>
                   </router-link>
               </li>
 
               <li class="list-item" >
                   <router-link :class="{'active' : this.active_el === 3}" :to="{ name : 'myBuyAds' }">
                       <span>درخواست های من </span>
+                      <i class="fa fa-list-alt " aria-hidden="true"></i>
                   </router-link>
               </li>
               <li class="list-item" >
                   <router-link :class="{'active' : this.active_el === 4}" :to="{ name : 'myTransactions' }">
                       <span>تراکنش های جاری</span>
+                      <i class="fa fa-list-ol " aria-hidden="true"></i>
                   </router-link>
               </li>
               <li class="list-item" >
                   <router-link :class="{'active' : this.active_el === 5}" :to="{ name : 'myTerminatedTransactions' }">
                       <span>تراکنش های انجام شده</span>
+                      <i class="fa fa-th-list  " aria-hidden="true"></i>
                   </router-link>
               </li>
               <li class="list-item" >
                   <router-link :class="{'active' : this.active_el === 6}" :to="{ name : 'PayedFactorList' }">
                       <span>فاکتور های پرداخت شده</span>
+                      <i class="fa fa-list-alt  " aria-hidden="true"></i>
                   </router-link>
               </li>
 
               <li class="list-item  ">
                   <router-link :class="{'active' : this.active_el === 7}" :to="{ name : 'guide' }">
                       <span>راهنما</span>
+                      <i class="fa fa-question-circle  " aria-hidden="true"></i>
                   </router-link>
               </li>
           </ul>
@@ -113,13 +122,13 @@
                    this.active_el = 1
                }else if(this.subIsActive('/register-request')){
                    this.active_el = 2
-               }else if(this.subIsActive('/my-buyAds') || this.subIsActive('/my-buyAds/*')){
+               }else if(this.subIsActive('/my-buyAds') || this.subIsActive('/sell-offer-detail/' + this.$route.params.id)){
                    this.active_el = 3
-               }else if(this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')){
+               }else if(this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/' + this.$route.params.id)){
                    this.active_el = 4
-               }else if(this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/*')){
+               }else if(this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/' + this.$route.params.id)){
                    this.active_el = 5
-               }else if(this.subIsActive('/payed-factor-list')){
+               }else if(this.subIsActive('/payed-factor-list') || this.subIsActive('/factor-detail/' + this.$route.params.id)){
                    this.active_el = 6
                }else if(this.subIsActive('/guide')){
                    this.active_el = 7
@@ -133,13 +142,13 @@
                 this.active_el = 1
             }else if(this.subIsActive('/register-request')){
                 this.active_el = 2
-            }else if(this.subIsActive('/register-product')){
+            }else if(this.subIsActive('/my-buyAds') || this.subIsActive('/sell-offer-detail/' + this.$route.params.id)){
                 this.active_el = 3
-            }else if(this.subIsActive('/my-buyAds') || this.subIsActive('/my-buyAds/*')){
+            }else if(this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/' + this.$route.params.id)){
                 this.active_el = 4
-            }else if(this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/*')){
+            }else if(this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/' + this.$route.params.id)){
                 this.active_el = 5
-            }else if(this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/*')){
+            }else if(this.subIsActive('/payed-factor-list') || this.subIsActive('/factor-detail/' + this.$route.params.id)){
                 this.active_el = 6
             }else if(this.subIsActive('/guide')){
                 this.active_el = 7

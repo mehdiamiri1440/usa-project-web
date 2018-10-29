@@ -144,7 +144,13 @@
             </div>
             <div class="right-menu-header">
                 <ul class="list-inline">
-                    <li><a href="#"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
+                    <li><a href="#" onclick="dropdownList()"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                        <div class="icon-header-list">
+                            <ul class="list-unstyled">
+                                <li class="list-item"><a href="/product-list">لیست محصولات</a></li>
+                            </ul>
+                        </div>
+                    </li>
                     <li><a :href="routeHome"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                 </ul>
             </div>

@@ -821,6 +821,37 @@
                         back.fadeOut();
                         flag = true;
                     }
+                });
+                var el_clouse_links = $('.mobile-header .header-menu a');
+                el_clouse_links.on('click', function () {
+                    if (flag == true) {
+                        right_header.animate({
+                            right: '0'
+                        }, 300);
+                        flag = false;
+                    } else {
+                        right_header.animate({
+                            right: '-300px'
+
+                        }, 300);
+                        back.fadeOut();
+                        flag = true;
+                    }
+                });
+                back.on('click',function () {
+                    if (flag == true) {
+                        right_header.animate({
+                            right: '0'
+                        }, 300);
+                        flag = false;
+                    } else {
+                        right_header.animate({
+                            right: '-300px'
+
+                        }, 300);
+                        back.fadeOut();
+                        flag = true;
+                    }
                 })
             },
 

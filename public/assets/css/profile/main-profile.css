@@ -110,6 +110,7 @@ th, td {
     text-align: right;
     padding: 28px 30px;
     font-size: 17px;
+    float: right;
 }
 
 .header-nav a {
@@ -455,6 +456,8 @@ th, td {
 }
 .logo{
     padding: 10px ;
+    text-align: right;
+    float: right;
 
 }
 .logo img{
