@@ -17,7 +17,6 @@
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/kamadatepicker.min.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
-
         <script src="{{asset('assets/cdn/axios.js')}}"></script>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -85,10 +84,20 @@
 
     </div>
     @yield('body_script_tags')
-
+    
     <script src="{{asset('assets/js/custom.js')}}"></script>
     <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('assets/js/idleTimer.js')}}"></script> 
+    <script>
+        $(document).ready(function(){
+            $(document).idleTimer(7200000);
+        });
 
+        $(document).on("idle.idleTimer", function(){
+         // function you want to fire when the user goes idle
+            window.location.href = '/login'
+        });    
+    </script>
     </body>
 
     </html>

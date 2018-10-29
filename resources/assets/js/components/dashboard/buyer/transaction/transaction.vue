@@ -906,7 +906,7 @@
 
                 axios.post('/action',{
                     transaction_id : self.transactionId,
-                    action_id : 2,
+                    action_id : 3,
                 })
                     .then(function(response){
                         self.init();

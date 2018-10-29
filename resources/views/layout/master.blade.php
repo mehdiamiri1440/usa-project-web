@@ -66,8 +66,17 @@
 @yield('main_content')
 </div>
     @yield('script_tags')
+    <script src="{{asset('assets/js/idleTimer.js')}}"></script> 
+    <script>
+        $(document).ready(function(){
+            $(document).idleTimer(7200000);
+        });
 
-
+        $(document).on("idle.idleTimer", function(){
+         // function you want to fire when the user goes idle
+            window.location.href = '/login'
+        });    
+    </script>
 </body>
 
 </html>
