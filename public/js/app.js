@@ -72278,11 +72278,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-
     data: function data() {
         var _buyAd;
 
         return {
+            errors: '',
             currentUser: {
                 profile: '',
                 user_info: ''
@@ -72301,15 +72301,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             categorySelected: '',
             cities: '',
             buyAdFiles: [],
-            errors: '',
             popUpMsg: '',
             profileConfirmed: false,
             disableSubmit: false,
-            submiting: false,
-            items: [{
-                message: 'ثبت درخواست خرید',
-                url: 'registerRequest'
-            }]
+            submiting: false
         };
     },
     methods: {
@@ -72341,7 +72336,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
             if (this.buyAd.rules != true) {
                 this.popUpMsg = 'ابتدا تیک با قوانین موافق هستم را بزنید.';
-
+                __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitSuccess', self.popUpMsg);
                 $('#myModal').modal('show');
             } else {
                 this.submiting = true;
@@ -72454,7 +72449,7 @@ var render = function() {
               _vm._v(" "),
               _vm._l(_vm.categoryList, function(category) {
                 return _c("option", { domProps: { value: category.id } }, [
-                  _vm._v("@" + _vm._s(category.category_name))
+                  _vm._v(_vm._s(category.category_name))
                 ])
               })
             ],
@@ -72482,7 +72477,7 @@ var render = function() {
               _vm._v(" "),
               _vm._l(_vm.SubCategoryList, function(category) {
                 return _c("option", { domProps: { value: category.id } }, [
-                  _vm._v("@" + _vm._s(category.category_name))
+                  _vm._v(_vm._s(category.category_name))
                 ])
               })
             ],
@@ -72522,7 +72517,7 @@ var render = function() {
           _vm._v(" "),
           _vm.errors.name
             ? _c("span", { staticClass: "text-danger" }, [
-                _vm._v("@" + _vm._s(_vm.errors.name[0]))
+                _vm._v(_vm._s(_vm.errors.name[0]))
               ])
             : _vm._e()
         ]),
@@ -72553,7 +72548,7 @@ var render = function() {
           _vm._v(" "),
           _vm.errors.pack_type
             ? _c("span", { staticClass: "text-danger" }, [
-                _vm._v("@" + _vm._s(_vm.errors.pack_type[0]))
+                _vm._v(_vm._s(_vm.errors.pack_type[0]))
               ])
             : _vm._e()
         ]),
@@ -72584,7 +72579,7 @@ var render = function() {
           _vm._v(" "),
           _vm.errors.requirement_amount
             ? _c("span", { staticClass: "text-danger" }, [
-                _vm._v("@" + _vm._s(_vm.errors.requirement_amount[0]))
+                _vm._v(_vm._s(_vm.errors.requirement_amount[0]))
               ])
             : _vm._e()
         ]),
@@ -72615,7 +72610,7 @@ var render = function() {
           _vm._v(" "),
           _vm.errors.price
             ? _c("span", { staticClass: "text-danger" }, [
-                _vm._v("@" + _vm._s(_vm.errors.price[0]))
+                _vm._v(_vm._s(_vm.errors.price[0]))
               ])
             : _vm._e()
         ]),
@@ -72646,7 +72641,7 @@ var render = function() {
           _vm._v(" "),
           _vm.errors.address
             ? _c("span", { staticClass: "text-danger" }, [
-                _vm._v("@" + _vm._s(_vm.errors.address[0]))
+                _vm._v(_vm._s(_vm.errors.address[0]))
               ])
             : _vm._e()
         ])
@@ -72678,7 +72673,7 @@ var render = function() {
         _vm._v(" "),
         _vm.errors.description
           ? _c("span", { staticClass: "text-danger" }, [
-              _vm._v("@" + _vm._s(_vm.errors.description[0]))
+              _vm._v(_vm._s(_vm.errors.description[0]))
             ])
           : _vm._e()
       ])
@@ -72955,7 +72950,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-post img[data-v-33a16fe0] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-33a16fe0] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-33a16fe0] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-33a16fe0] {\n    display: block;\n}\n.main-content[data-v-33a16fe0] {\n    padding: 60px 15px;\n}\n\n\n\n/*end main content style */\n/*custom cods*/\n.green-sbot[data-v-33a16fe0] {\n    display: block;\n    color: #28a745;\n    padding: 10px 0;\n    border-radius: 3px;\n    text-align: center;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    border: 2px solid;\n}\n.number[data-v-33a16fe0],.date[data-v-33a16fe0],.subject[data-v-33a16fe0]{\n    padding: 8px 15px;\n}\n#icon-pro svg[data-v-33a16fe0]{\n    height: 150px;\n}\n.main-content ul[data-v-33a16fe0] {\n    margin-top: 0;\n    text-align: center;\n}\n.list-group-item[data-v-33a16fe0]{\n    padding: 15px 0;\n}\n.main-content  .title-list[data-v-33a16fe0]  {\n    overflow: hidden;\n    padding: 15px 0;\n    background: #313942;\n    color: #fff;\n    text-align: center;\n}\n.main-content  p[data-v-33a16fe0] {\n    float: right;\n    text-align: center;\n}\n@media screen and (max-width: 992px) {\n.show-header button[data-v-33a16fe0] {\n        display: block;\n}\n.kind_user > div[data-v-33a16fe0], .kind_activity > div[data-v-33a16fe0] {\n        float: none;\n}\n.img-profile .submit[data-v-33a16fe0] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-33a16fe0] {\n        width: 40%;\n        padding: 12px 0;\n}\n}\n@media screen and (max-width: 555px) {\n.main-content ul p[data-v-33a16fe0] {\n        font-size: 11px;\n        padding: 0;\n}\n.main-content .subject [data-v-33a16fe0],.main-content p[data-v-33a16fe0] {\n        padding: 0;\n}\n.main-content[data-v-33a16fe0] {\n        padding: 60px 5px;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-33a16fe0] {\n        font-size: 10px;\n}\n}\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-post img[data-v-33a16fe0] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-33a16fe0] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-33a16fe0] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-33a16fe0] {\n    display: block;\n}\n.main-content[data-v-33a16fe0] {\n    padding: 60px 15px;\n}\n\n\n\n/*end main content style */\n/*custom cods*/\n.green-sbot[data-v-33a16fe0] {\n    display: block;\n    color: #28a745;\n    padding: 10px 0;\n    border-radius: 3px;\n    text-align: center;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    border: 2px solid;\n}\n.number[data-v-33a16fe0],.date[data-v-33a16fe0],.subject[data-v-33a16fe0]{\n    padding: 8px 15px;\n}\n#icon-pro svg[data-v-33a16fe0]{\n    height: 150px;\n}\n.main-content ul[data-v-33a16fe0] {\n    margin-top: 0;\n    text-align: center;\n}\n.list-group-item[data-v-33a16fe0]{\n    padding: 0;\n}\n.list-group-item a[data-v-33a16fe0]{\n    padding: 15px 0;\n    display: block;\n    overflow: hidden;\n}\n.main-content  .title-list[data-v-33a16fe0]  {\n    overflow: hidden;\n    padding: 15px 0;\n    background: #313942;\n    color: #fff;\n    text-align: center;\n}\n.main-content  p[data-v-33a16fe0] {\n    float: right;\n    text-align: center;\n}\n@media screen and (max-width: 992px) {\n.show-header button[data-v-33a16fe0] {\n        display: block;\n}\n.kind_user > div[data-v-33a16fe0], .kind_activity > div[data-v-33a16fe0] {\n        float: none;\n}\n.img-profile .submit[data-v-33a16fe0] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-33a16fe0] {\n        width: 40%;\n        padding: 12px 0;\n}\n}\n@media screen and (max-width: 555px) {\n.main-content ul p[data-v-33a16fe0] {\n        font-size: 11px;\n        padding: 0;\n}\n.main-content .subject [data-v-33a16fe0],.main-content p[data-v-33a16fe0] {\n        padding: 0;\n}\n.main-content[data-v-33a16fe0] {\n        padding: 60px 5px;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-33a16fe0] {\n        font-size: 10px;\n}\n}\n\n\n\n\n", ""]);
 
 // exports
 
@@ -72967,6 +72962,11 @@ exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-pos
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -73553,6 +73553,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -73609,49 +73611,59 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.factors, function(factor) {
               return _c(
-                "router-link",
-                {
-                  staticClass:
-                    "list-group-item list-group-item-action col-xs-12",
-                  attrs: { to: "/factor-detail/" + factor.id }
-                },
+                "div",
                 [
-                  _c("p", { staticClass: "number col-xs-2" }, [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(factor.sell_offer_id + 100000) +
-                        "\n            "
-                    )
-                  ]),
-                  _vm._v(" "),
                   _c(
-                    "p",
-                    { staticClass: "date col-xs-2", attrs: { dir: "rtl" } },
+                    "router-link",
+                    {
+                      staticClass:
+                        "list-group-item list-group-item-action col-xs-12",
+                      attrs: { to: "/factor-detail/" + factor.id }
+                    },
                     [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(factor.persian_date) +
-                          "\n            "
-                      )
+                      _c("p", { staticClass: "number col-xs-2" }, [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(factor.sell_offer_id + 100000) +
+                            "\n            "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        { staticClass: "date col-xs-2", attrs: { dir: "rtl" } },
+                        [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(factor.persian_date) +
+                              "\n            "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "subject col-xs-5" }, [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(factor.product_name) +
+                            "\n            "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "col-xs-3" }, [
+                        _c(
+                          "span",
+                          { staticClass: "green-sbot", attrs: { dir: "rtl" } },
+                          [
+                            _vm._v(
+                              " " + _vm._s(factor.amount_to_pay) + " تومان"
+                            )
+                          ]
+                        )
+                      ])
                     ]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "subject col-xs-5" }, [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(factor.product_name) +
-                        "\n            "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "col-xs-3" }, [
-                    _c(
-                      "span",
-                      { staticClass: "green-sbot", attrs: { dir: "rtl" } },
-                      [_vm._v(" " + _vm._s(factor.amount_to_pay) + " تومان")]
-                    )
-                  ])
-                ]
+                  )
+                ],
+                1
               )
             })
           ],
@@ -73865,7 +73877,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-post img[data-v-da5c60f8] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-da5c60f8] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-da5c60f8] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-da5c60f8] {\n    display: block;\n}\n.main-content[data-v-da5c60f8] {\n    padding: 60px 15px;\n}\n\n\n\n/*end main content style */\n/*custom cods*/\n.green-sbot[data-v-da5c60f8] {\n    display: block;\n    color: #28a745;\n    padding: 10px 0;\n    border-radius: 3px;\n    text-align: center;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    border: 2px solid;\n}\n.number[data-v-da5c60f8],.date[data-v-da5c60f8],.subject[data-v-da5c60f8]{\n    padding: 8px 15px;\n}\n#icon-pro svg[data-v-da5c60f8]{\n    height: 150px;\n}\n.main-content ul[data-v-da5c60f8] {\n    margin-top: 0;\n    text-align: center;\n}\n.list-group-item[data-v-da5c60f8]{\n    padding: 15px 0;\n}\n.main-content  .title-list[data-v-da5c60f8]  {\n    overflow: hidden;\n    padding: 15px 0;\n    background: #313942;\n    color: #fff;\n    text-align: center;\n}\n.main-content  p[data-v-da5c60f8] {\n    float: right;\n    text-align: center;\n}\n@media screen and (max-width: 992px) {\n.show-header button[data-v-da5c60f8] {\n        display: block;\n}\n.kind_user > div[data-v-da5c60f8], .kind_activity > div[data-v-da5c60f8] {\n        float: none;\n}\n.img-profile .submit[data-v-da5c60f8] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-da5c60f8] {\n        width: 40%;\n        padding: 12px 0;\n}\n}\n@media screen and (max-width: 555px) {\n.main-content ul p[data-v-da5c60f8] {\n        font-size: 11px;\n        padding: 0;\n}\n.main-content .subject [data-v-da5c60f8],.main-content p[data-v-da5c60f8] {\n        padding: 0;\n}\n.main-content[data-v-da5c60f8] {\n        padding: 60px 5px;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-da5c60f8] {\n        font-size: 10px;\n}\n}\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-post img[data-v-da5c60f8] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-da5c60f8] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-da5c60f8] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-da5c60f8] {\n    display: block;\n}\n.main-content[data-v-da5c60f8] {\n    padding: 60px 15px;\n}\n\n\n\n/*end main content style */\n/*custom cods*/\n.green-sbot[data-v-da5c60f8] {\n    display: block;\n    color: #28a745;\n    padding: 10px 0;\n    border-radius: 3px;\n    text-align: center;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    border: 2px solid;\n}\n.number[data-v-da5c60f8],.date[data-v-da5c60f8],.subject[data-v-da5c60f8]{\n    padding: 8px 15px;\n}\n#icon-pro svg[data-v-da5c60f8]{\n    height: 150px;\n}\n.main-content ul[data-v-da5c60f8] {\n    margin-top: 0;\n    text-align: center;\n}\n.list-group-item[data-v-da5c60f8]{\n    padding: 0;\n}\n+\n.list-group-item a[data-v-da5c60f8] {\n    padding: 15px 0;\n    display: block;\n    overflow: hidden;\n}\n.main-content  .title-list[data-v-da5c60f8]  {\n    overflow: hidden;\n    padding: 15px 0;\n    background: #313942;\n    color: #fff;\n    text-align: center;\n}\n.main-content  p[data-v-da5c60f8] {\n    float: right;\n    text-align: center;\n}\n@media screen and (max-width: 992px) {\n.show-header button[data-v-da5c60f8] {\n        display: block;\n}\n.kind_user > div[data-v-da5c60f8], .kind_activity > div[data-v-da5c60f8] {\n        float: none;\n}\n.img-profile .submit[data-v-da5c60f8] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-da5c60f8] {\n        width: 40%;\n        padding: 12px 0;\n}\n}\n@media screen and (max-width: 555px) {\n.main-content ul p[data-v-da5c60f8] {\n        font-size: 11px;\n        padding: 0;\n}\n.main-content .subject [data-v-da5c60f8],.main-content p[data-v-da5c60f8] {\n        padding: 0;\n}\n.main-content[data-v-da5c60f8] {\n        padding: 60px 5px;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-da5c60f8] {\n        font-size: 10px;\n}\n}\n\n\n\n\n", ""]);
 
 // exports
 
@@ -73877,6 +73889,11 @@ exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-pos
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+//
+//
+//
+//
+//
 //
 //
 //

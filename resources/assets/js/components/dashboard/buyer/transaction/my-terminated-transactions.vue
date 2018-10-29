@@ -67,7 +67,12 @@
         text-align: center;
     }
     .list-group-item{
+        padding: 0;
+    }+
+    .list-group-item a {
         padding: 15px 0;
+        display: block;
+        overflow: hidden;
     }
     .main-content  .title-list  {
         overflow: hidden;

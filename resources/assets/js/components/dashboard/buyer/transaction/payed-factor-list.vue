@@ -140,7 +140,8 @@
                 <p class="time-show  col-xs-3"> مبلغ </p>
             </div>
             <!--end title list -->
-            <router-link v-for="factor in factors"
+            <div  v-for="factor in factors">
+            <router-link
                :to="'/factor-detail/' + factor.id"
                class="list-group-item list-group-item-action col-xs-12">
                 <p class="number col-xs-2">
@@ -156,6 +157,7 @@
                     <span class="green-sbot" dir="rtl"> {{factor.amount_to_pay}} تومان</span>
                 </p>
             </router-link>
+            </div>
         </div>
         <div class="loading_images  col-xs-12" v-else-if="isLoading">
             <img :src="loading_img" style="width:200px;height:200px">
