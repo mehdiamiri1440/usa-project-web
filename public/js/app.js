@@ -608,6 +608,10 @@ var app = new Vue({
     }
 });
 
+$(window).on("load", function () {
+    console.log("window loaded");
+});
+
 /***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -71798,7 +71802,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post('/action', {
                 transaction_id: self.transactionId,
-                action_id: 2
+                action_id: 3
             }).then(function (response) {
                 self.init();
             });

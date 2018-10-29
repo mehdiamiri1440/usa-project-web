@@ -9,6 +9,7 @@ require('./bootstrap');
 require('./imageuploadify.min');
 require('./jquery.magnific-popup.min');
 
+
 window.Vue = require('vue');
 
 /**
@@ -87,8 +88,6 @@ Vue.component('step1S3', {
 });
 
 
-
-
 function checkProfileConfermation(){
     axios.post('/user/profile_info',{
         confirmed : true
@@ -128,3 +127,10 @@ const app = new Vue({
         headerDashBuyer,
     }
 });
+
+
+    $( window ).on( "load", function() {
+        console.log( "window loaded" );
+    });
+
+

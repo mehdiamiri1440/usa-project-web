@@ -257,8 +257,7 @@ myRouter.beforeEach((to,from,next) => {
                 }
 
             });
-              
-              
+      
       }
 });
 
