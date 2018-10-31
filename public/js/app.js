@@ -50341,7 +50341,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var el_clouse_links = $('.mobile-header .header-menu a');
             el.on('click', function () {
                 if (flag == true) {
-                    console.log('flag = true');
                     right_header.animate({
                         right: '0'
                     }, 300);
