@@ -383,10 +383,13 @@ th, td {
     top: 64px;
     z-index: 2;
 }
+
 .logo{
-    padding: 10px;
+    padding: 10px ;
+    text-align: right;
+    float: right;
 }
-.logo img {
+.logo img{
     width: 150px;
 }
 li.active a {

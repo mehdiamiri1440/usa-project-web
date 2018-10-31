@@ -393,50 +393,50 @@ class payment_controller extends Controller
             }
         }
     
-        protected function message($resultCode)
+    protected function message($resultCode)
+    {
+        switch ($resultCode) 
         {
-            switch ($resultCode) 
-            {
-                case 110:
-                        return " انصراف دارنده کارت";
-                    break;
-                case 120:
-                    return"   موجودی کافی نیست";
-                    break;
-                case 130:
-                case 131:
-                case 160:
-                    return"   اطلاعات کارت اشتباه است";
-                    break;
-                case 132:
-                case 133:
-                    return"   کارت مسدود یا منقضی می باشد";
-                    break;
-                case 140:
-                    return" زمان مورد نظر به پایان رسیده است";
-                    break;
-                case 200:
-                case 201:
-                case 202:
-                    return" مبلغ بیش از سقف مجاز";
-                    break;
-                case 166:
-                    return" بانک صادر کننده مجوز انجام  تراکنش را صادر نکرده";
-                    break;
-                case 150:
-                default:
-                    return " خطا بانک  $resultCode";
+            case 110:
+                    return " انصراف دارنده کارت";
                 break;
-            }
+            case 120:
+                return"   موجودی کافی نیست";
+                break;
+            case 130:
+            case 131:
+            case 160:
+                return"   اطلاعات کارت اشتباه است";
+                break;
+            case 132:
+            case 133:
+                return"   کارت مسدود یا منقضی می باشد";
+                break;
+            case 140:
+                return" زمان مورد نظر به پایان رسیده است";
+                break;
+            case 200:
+            case 201:
+            case 202:
+                return" مبلغ بیش از سقف مجاز";
+                break;
+            case 166:
+                return" بانک صادر کننده مجوز انجام  تراکنش را صادر نکرده";
+                break;
+            case 150:
+            default:
+                return " خطا بانک  $resultCode";
+            break;
         }
-    
-        protected function flush_global_session()
+    }
+
+    protected function flush_global_session()
+    {
+        foreach($this->session_values_to_be_flushed as $key => $value)
         {
-            foreach($this->session_values_to_be_flushed as $key => $value)
-            {
-                unset($_SESSION[$key]);
-            }
+            unset($_SESSION[$key]);
         }
+    }
     
     
 }

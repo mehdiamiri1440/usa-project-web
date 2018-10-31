@@ -272,16 +272,14 @@ Route::group(['middleware' => [login::class]],function(){
 
             Route::get('/transaction-detail/{id}',function($id){
                 if(session('is_buyer')){
-                    return view('dashboard.buyer.transaction.transaction',[
-                        'transaction_id' => $id,
-                    ]);
+                    return redirect()->back();
                 }
                 else if(session('is_seller')){
                     return view('dashboard.seller.transaction.transaction',[
                         'transaction_id' => $id,
                     ]);
                 }
-            });
+            })->name('show-transaction-detail');
 
             Route::get('/transaction-list',function(){
                 if(session('is_buyer')){

@@ -50461,7 +50461,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         headerMenuList: __WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue___default.a,
         headerTop: __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue___default.a
     },
-    props: ['defultimg', 'logo', 'loading', 'storage', 'transactroute', 'mytrans', 'selregpro', 'byadreq', 'logout', 'routehome', 'guide'],
+    props: ['defultimg', 'logo', 'loading', 'storage', 'transactroute', 'mytrans', 'selregpro', 'byadreq', 'profilebasic', 'logout', 'routehome', 'guide'],
     data: function data() {
         return {
             currentUser: {
@@ -50604,14 +50604,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var flag = true;
             var right_header = $(".right-header.mobile-header");
             var back = $(".background_mob_sec");
+            var el_clouse_links = $('.mobile-header .header-menu a');
             el.on('click', function () {
                 if (flag == true) {
-                    console.log('flag = true');
                     right_header.animate({
                         right: '0'
                     }, 300);
                     back.fadeIn();
-
                     flag = false;
                 } else {
                     right_header.animate({
@@ -50636,7 +50635,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     flag = true;
                 }
             });
-            var el_clouse_links = $('.mobile-header .header-menu a');
             el_clouse_links.on('click', function () {
                 if (flag == true) {
                     right_header.animate({
@@ -50683,8 +50681,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('submitSuccess', function (event) {
             _this2.popUpMsg = event;
         });
-        var currentUrl = window.location.pathname;
-        console.log(currentUrl);
     }
 });
 
@@ -54057,6 +54053,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -54401,19 +54400,14 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c("a", { attrs: { href: "#", onclick: "dropdownList()" } }, [
-        _c("i", { staticClass: "fa fa-bars", attrs: { "aria-hidden": "true" } })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "icon-header-list" }, [
-        _c("ul", { staticClass: "list-unstyled" }, [
-          _c("li", { staticClass: "list-item" }, [
-            _c("a", { attrs: { href: "/product-list" } }, [
-              _vm._v("لیست محصولات")
-            ])
-          ])
-        ])
-      ])
+      _c(
+        "a",
+        {
+          staticStyle: { "font-size": "17px" },
+          attrs: { href: "/product-list" }
+        },
+        [_vm._v("لیست محصولات ")]
+      )
     ])
   }
 ]
