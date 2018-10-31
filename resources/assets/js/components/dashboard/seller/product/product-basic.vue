@@ -342,7 +342,7 @@
                                 setTimeout(function () {
                                     location.reload(true);
                                     eventBus.$emit('submitingEvent', false);
-                                }, 3000)
+                                }, 3000);
                             }
                         })
                         .catch(function (err) {

@@ -417,14 +417,24 @@
               }
               else{
                   this.submiting = true;
-
+                  
+                  var self = this;
+                  
                   let formData = this.getBuyAdFormFields();
-
+                  
                   axios.post('/user/add_buyAd',formData)
                       .then(function(response){
                           if(response.status == 201){
                               self.disableSubmit = true;
-                              window.location.href = '/dashboard/my-buyAds';
+                              
+                              self.popUpMsg = 'درخواست شما با موفقیت ثبت شد';
+                              $('#myModal').modal('show');
+                              eventBus.$emit('submitSuccess', self.popUpMsg);
+                              eventBus.$emit('submitingEvent', false);
+                              
+                              setTimeout(function () {
+                                    location.reload(true);
+                                }, 3000);
                           }
                           self.submiting = false;
                       })
