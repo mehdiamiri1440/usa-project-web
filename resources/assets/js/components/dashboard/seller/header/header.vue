@@ -632,6 +632,7 @@
             'mytrans',
             'selregpro',
             'byadreq',
+            'profilebasic',
             'logout',
             'routehome',
             'guide'
@@ -790,14 +791,13 @@
                 var flag = true;
                 var right_header = $(".right-header.mobile-header");
                 var back = $(".background_mob_sec");
+                var el_clouse_links = $('.mobile-header .header-menu a');
                 el.on('click', function () {
                     if (flag == true) {
-                        console.log('flag = true');
                         right_header.animate({
                             right: '0'
                         }, 300);
                         back.fadeIn();
-
                         flag = false;
                     } else {
                         right_header.animate({
@@ -822,7 +822,6 @@
                         flag = true;
                     }
                 });
-                var el_clouse_links = $('.mobile-header .header-menu a');
                 el_clouse_links.on('click', function () {
                     if (flag == true) {
                         right_header.animate({
@@ -860,8 +859,6 @@
             this.init();
             this.toggle_header();
             this.toggle_show_header();
-
-
         },
         created() {
             eventBus.$on('submitingEvent', (event) => {
@@ -870,8 +867,7 @@
             eventBus.$on('submitSuccess', (event) => {
                 this.popUpMsg = event;
             });
-            var currentUrl = window.location.pathname;
-            console.log(currentUrl);
+
 
         }
     }
