@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fa">
-
 <head>
 
     <meta charset="UTF-8">
@@ -11,38 +10,6 @@
 
     <!-- site title -->
     <title>اینکوباک | بازارگاه کشاورزی</title>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118872652-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-118872652-1');
-
-        <?php if(isset($_SESSION['user_id'])) : ?>
-              gtag('set', {'user_id': $_SESSION['user_id']});
-        <?php endif; ?>
-    </script>
-    <script type="text/javascript">
-        window.heap = window.heap || [], heap.load = function (e, t) {
-            window.heap.appid = e, window.heap.config = t = t || {};
-            var r = t.forceSSL || "https:" === document.location.protocol, a = document.createElement("script");
-            a.type = "text/javascript", a.async = !0, a.src = (r ? "https:" : "http:") + "//cdn.heapanalytics.com/js/heap-" + e + ".js";
-            var n = document.getElementsByTagName("script")[0];
-            n.parentNode.insertBefore(a, n);
-            for (var o = function (e) {
-                return function () {
-                    heap.push([e].concat(Array.prototype.slice.call(arguments, 0)))
-                }
-            }, p = ["addEventProperties", "addUserProperties", "clearEventProperties", "identify", "resetIdentity", "removeEventProperty", "setEventProperties", "track", "unsetEventProperty"], c = 0; c < p.length; c++)heap[p[c]] = o(p[c])
-        };
-        heap.load("3940314777");
-    </script>
-
 
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="{{asset('index/css/bootstrap.min.css')}}">
@@ -59,10 +26,11 @@
 
     <!-- Magnific Popup css -->
     <link rel="stylesheet" href="{{asset('index/css/magnific-popup.css')}}">
-
+    <link rel="stylesheet" href="{{asset('index/css/particleNetwork.css')}}">
     <!-- Main css -->
     <link rel="stylesheet" href="{{asset('index/css/style.css')}}">
-
+    <script src="{{asset('assets/cdn/vue.js')}}"></script>
+    <script src="{{asset('assets/cdn/axios.js')}}"></script>
 
 </head>
 
@@ -83,7 +51,7 @@
 ============================== -->
 
 <div class="navbar navbar-fixed-top custom-navbar" role="navigation">
-    <div class="container">
+    <div class="container-fluid">
         <!-- navbar header -->
         <div class="navbar-header">
             @if(session('user_id'))
@@ -91,9 +59,9 @@
                     <div class="profile-menu-header"><a href="#" onclick="dropdown()">
                             <div class="image-header-profile">
                                 @if(session('profile_photo'))
-                                    <img src="{{'storage/'  . session('profile_photo')}}">
+                                    <img class="image-blur" src="{{'storage/'  . session('profile_photo')}}">
                                 @else
-                                    <img src="{{asset('assets/img/user-defult.png')}}">
+                                    <img class="image-blur" src="{{asset('assets/img/user-defult.png')}}">
                                 @endif
                             </div>
                             <i aria-hidden="true" class="fa fa-angle-down"></i>
@@ -113,12 +81,13 @@
                 <span class="icon icon-bar"></span>
                 <span class="icon icon-bar"></span>
             </button>
-            <p class="logo-des hidden-xs hidden-sm">
-                اینکوباک | بازارگاه آنلاین دنیای کشاورزی
-            </p>
             <a class="navbar-brand test" href="">
 
             </a>
+            <p class="logo-des hidden-xs hidden-sm">
+                اینکوباک | بازارگاه آنلاین دنیای کشاورزی
+            </p>
+
         </div>
 
         <div class="collapse navbar-collapse">
@@ -126,16 +95,16 @@
                 <li><a href="{{route('login_page')}}" class="smoothScroll">ورود/ثبت نام</a></li>
                 <li><a href="" class="smoothScroll">صفحه ی اصلی</a></li>
                 <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
-                <!--					<li><a href="" class="smoothScroll">قوانین و مقررات</a></li>-->
+                <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
                 <li><a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
                 @if(session('user_id'))
                     <li class="user-header-web">
                         <div class="profile-menu-header"><a href="#" onclick="dropdown()">
                                 <div class="image-header-profile">
                                     @if(session('profile_photo'))
-                                        <img src="{{'storage/'  . session('profile_photo')}}">
+                                        <img class="image-blur" src="{{'storage/'  . session('profile_photo')}}">
                                     @else
-                                        <img src="{{asset('assets/img/user-defult.png')}}">
+                                        <img class="image-blur" src="{{asset('assets/img/user-defult.png')}}">
                                     @endif
                                 </div>
                                 <i aria-hidden="true" class="fa fa-angle-down"></i> <span
@@ -161,14 +130,15 @@
 INTRO SECTION
 ============================== -->
 
+
 <section id="intro" class="parallax-section">
-    <div class="gradient-overlay"></div>
+    <div class="particle-network-animation"></div>
     <div class="container-fluid main_hero_section col-xs-12">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-sm-12">
-                    <h1 class="wow fadeIn main-logo" data-wow-delay="1s"><img
-                                src="{{asset('/index/images/logo_white.png')}}"></h1>
+                    <h1 class="wow fadeIn main-logo" data-wow-delay="1s"><img class="image-blur"
+                                                                              src="{{asset('/index/images/logo_white.png')}}"></h1>
                     <h2 class="wow fadeIn" data-wow-delay="1.2s">اینکوباک | سامانه آنلاین خرید و فروش محصولات
                         کشاورزی</h2>
                     <br/>
@@ -197,49 +167,46 @@ DETAIL SECTION
 <section id="detail" class="parallax-section">
     <div class="container">
         <div class="row">
-
-            <div class="wow fadeIn col-md-2 col-sm-6" data-wow-delay="0.9s">
+            <div class="wow fadeIn col-md-2 col-xs-6" data-wow-delay="0.9s">
                 <div class="detail-thumb">
-                    <img src="{{asset('index/images/1.png')}}" class="img-responsive">
+                    <img class="image-blur" src="{{asset('index/images/1.png')}}" class="img-responsive">
                     <h4>خرید و فروش بی واسطه</h4>
                 </div>
             </div>
 
-            <div class="wow fadeIn col-md-2 col-sm-6" data-wow-delay="0.9s">
+            <div class="wow fadeIn col-md-2 col-xs-6" data-wow-delay="0.9s">
                 <div class="detail-thumb">
-                    <img src="{{asset('index/images/2.png')}}" class="img-responsive">
+                    <img class="image-blur" src="{{asset('index/images/2.png')}}" class="img-responsive">
                     <h4>گسترش ارتباط تجاری</h4>
                 </div>
             </div>
 
-            <div class="wow fadeIn col-md-2 col-sm-6" data-wow-delay="0.9s">
+            <div class="wow fadeIn col-md-2 col-xs-6" data-wow-delay="0.9s">
                 <div class="detail-thumb">
-                    <img src="{{asset('index/images/3.png')}}" class="img-responsive">
+                    <img class="image-blur" src="{{asset('index/images/3.png')}}" class="img-responsive">
                     <h4>یافتن شرکای مطمئن</h4>
                 </div>
             </div>
 
 
-            <div class="wow fadeIn col-md-2 col-sm-6" data-wow-delay="0.9s">
+            <div class="wow fadeIn col-md-2 col-xs-6" data-wow-delay="0.9s">
                 <div class="detail-thumb">
-                    <img src="{{asset('index/images/4.png')}}" class="img-responsive">
+                    <img class="image-blur" src="{{asset('index/images/4.png')}}" class="img-responsive">
                     <h4>پرداخت مطمئن و آسوده</h4>
                 </div>
             </div>
-            <div class="wow fadeIn col-md-2 col-sm-6" data-wow-delay="0.9s">
+            <div class="wow fadeIn col-md-2 col-xs-6" data-wow-delay="0.9s">
                 <div class="detail-thumb">
-                    <img src="{{asset('index/images/4.png')}}" class="img-responsive">
-                    <h4>پرداخت مطمئن و آسوده</h4>
+                    <img class="image-blur" src="{{asset('index/images/5.png')}}" class="img-responsive">
+                    <h4>بازرسی و نظارت محصول</h4>
                 </div>
             </div>
-            <div class="wow fadeIn col-md-2 col-sm-6" data-wow-delay="0.9s">
+            <div class="wow fadeIn col-md-2 col-xs-6" data-wow-delay="0.9s">
                 <div class="detail-thumb">
-                    <img src="{{asset('index/images/4.png')}}" class="img-responsive">
-                    <h4>پرداخت مطمئن و آسوده</h4>
+                    <img class="image-blur" src="{{asset('index/images/6.png')}}" class="img-responsive">
+                    <h4>افزایش اعتماد و شفافیت</h4>
                 </div>
             </div>
-
-
         </div>
     </div>
 </section>
@@ -251,34 +218,57 @@ DETAIL SECTION
 <section id="request" class="parallax-section">
     <div class="container">
         <div class="row">
-            <h3>با ثبت درخواست خرید انواع صیفی و میوه، خشکبار، گیاهان دارویی و غلات بدون واسطه با تامین کنندگان به تجارت
-                بپردازید.</h3>
+            <h3 class="text-center">ثبت سفارش خرید یا ثبت محصول</h3>
             <div class=" wow fadeIn  col-sm-4" data-wow-delay="0.9s">
                 <div class="detail-thumb">
                     <div class="img-thumb">
-                        <img src="{{asset('assets/img/back2.jpg')}}">
+                        <div class="background-layout">
+
+                        </div>
+                        <img class="image-blur"  src="{{asset('assets/img/vegetable.jpg')}}">
                     </div>
-                    <a href="#" class="btn-incobac">یافتن شرکای مطمئن</a>
+                    @if(session('is_seller'))
+                        <a href="{{route('seller-register-product')}}" class="btn-incobac">سفارش / ثبت  صیفی</a>
+                    @elseif(session('is_buyer'))
+                        <a href="{{route('register_buyer_request')}}" class="btn-incobac">سفارش / ثبت  صیفی</a>
+                    @else
+                        <a href="{{route('login_page')}}" class="btn-incobac">سفارش / ثبت  صیفی</a>
+                    @endif
                 </div>
             </div>
 
             <div class="wow fadeIn  col-sm-4" data-wow-delay="0.9s">
                 <div class="detail-thumb">
                     <div class="img-thumb">
-                        <img src="{{asset('assets/img/back3.jpg')}}">
-                    </div>
-                        <a href="#" class="btn-incobac">یافتن شرکای مطمئن</a>
+                        <div class="background-layout">
 
+                        </div>
+                        <img class="image-blur" src="{{asset('assets/img/nuts-and-dried-fruits.jpg')}}">
+                    </div>
+                    @if(session('is_seller'))
+                        <a href="{{route('seller-register-product')}}" class="btn-incobac">سفارش / ثبت  خشکبار</a>
+                    @elseif(session('is_buyer'))
+                        <a href="{{route('register_buyer_request')}}" class="btn-incobac">سفارش / ثبت  خشکبار</a>
+                    @else
+                        <a href="{{route('login_page')}}" class="btn-incobac">سفارش / ثبت  خشکبار</a>
+                    @endif
                 </div>
             </div>
-
             <div class="wow fadeIn col-sm-4" data-wow-delay="0.9s">
                 <div class="detail-thumb">
                     <div class="img-thumb">
-                        <img src="{{asset('assets/img/back2.jpg')}}">
-                    </div>
-                        <a href="#" class="btn-incobac">یافتن شرکای مطمئن</a>
+                        <div class="background-layout">
 
+                        </div>
+                        <img class="image-blur" src="{{asset('assets/img/fruits.jpg')}}">
+                    </div>
+                    @if(session('is_seller'))
+                        <a href="{{route('seller-register-product')}}" class="btn-incobac">سفارش / ثبت  میوه</a>
+                    @elseif(session('is_buyer'))
+                        <a href="{{route('register_buyer_request')}}" class="btn-incobac">سفارش / ثبت   میوه</a>
+                    @else
+                        <a href="{{route('login_page')}}" class="btn-incobac">سفارش / ثبت  میوه</a>
+                    @endif
                 </div>
             </div>
 
@@ -297,7 +287,6 @@ FEATURE SECTION
             <div class="wow fadeInUp col-md-6 col-md-offset-0 col-sm-offset-1 col-sm-10" data-wow-delay="0.6s">
                 <h2>برخی از ویژگی های ما</h2>
                 <p> با اینکوباک به صورت <b style="color:green"> رایگان </b>از مزایای زیر بهره مند می شوید </p>
-
                 <div class="media">
                     <div class="media-body">
                         <h3 class="media-heading"> مدیریت خرید و فروش</h3>
@@ -316,7 +305,7 @@ FEATURE SECTION
             </div>
 
             <div class="wow fadeInUp col-md-5 col-sm-10" data-wow-delay="0.3s">
-                <img src="{{asset('index/images/new-feature-img.png')}}" class="img-responsive" alt="feature">
+                <img class="image-blur" src="{{asset('index/images/new-feature-img.png')}}" class="img-responsive" alt="feature">
             </div>
 
 
@@ -346,7 +335,7 @@ VIDEO SECTION
 {{--</section>--}}
 
 
-        <!-- =========================
+<!-- =========================
 TEAM SECTION
 ============================== -->
 
@@ -366,7 +355,7 @@ TEAM SECTION
 
 {{--<div class="item wow fadeInUp col-md-4 col-sm-4" data-wow-delay="0.9s">--}}
 {{--<div class="team-thumb">--}}
-{{--<img src="images/team-img1.jpg" class="img-responsive" alt="Team">--}}
+{{--<img class="image-blur" src="images/team-img1.jpg" class="img-responsive" alt="Team">--}}
 {{--<div class="team-overlay">--}}
 {{--<div class="team-item">--}}
 {{--<ul class="social-icon">--}}
@@ -389,7 +378,7 @@ TEAM SECTION
 
 {{--<div class="item wow fadeInUp col-md-4 col-sm-4" data-wow-delay="0.6s">--}}
 {{--<div class="team-thumb">--}}
-{{--<img src="images/team-img2.jpg" class="img-responsive" alt="Team">--}}
+{{--<img class="image-blur" src="images/team-img2.jpg" class="img-responsive" alt="Team">--}}
 {{--<div class="team-overlay">--}}
 {{--<div class="team-item">--}}
 {{--<ul class="social-icon">--}}
@@ -412,7 +401,7 @@ TEAM SECTION
 
 {{--<div class="item wow fadeInUp col-md-4 col-sm-4" data-wow-delay="0.9s">--}}
 {{--<div class="team-thumb">--}}
-{{--<img src="images/team-img3.jpg" class="img-responsive" alt="Team">--}}
+{{--<img class="image-blur" src="images/team-img3.jpg" class="img-responsive" alt="Team">--}}
 {{--<div class="team-overlay">--}}
 {{--<div class="team-item">--}}
 {{--<ul class="social-icon">--}}
@@ -435,7 +424,7 @@ TEAM SECTION
 
 {{--<div class="item wow fadeInUp col-md-4 col-sm-4" data-wow-delay="0.6s">--}}
 {{--<div class="team-thumb">--}}
-{{--<img src="images/team-img4.jpg" class="img-responsive" alt="Team">--}}
+{{--<img class="image-blur" src="images/team-img4.jpg" class="img-responsive" alt="Team">--}}
 {{--<div class="team-overlay">--}}
 {{--<div class="team-item">--}}
 {{--<ul class="social-icon">--}}
@@ -458,7 +447,7 @@ TEAM SECTION
 
 {{--<div class="item wow fadeInUp col-md-4 col-sm-4" data-wow-delay="0.6s">--}}
 {{--<div class="team-thumb">--}}
-{{--<img src="images/team-img5.jpg" class="img-responsive" alt="Team">--}}
+{{--<img class="image-blur" src="images/team-img5.jpg" class="img-responsive" alt="Team">--}}
 {{--<div class="team-overlay">--}}
 {{--<div class="team-item">--}}
 {{--<ul class="social-icon">--}}
@@ -481,7 +470,7 @@ TEAM SECTION
 
 {{--<div class="item wow fadeInUp col-md-4 col-sm-4" data-wow-delay="0.6s">--}}
 {{--<div class="team-thumb">--}}
-{{--<img src="images/team-img6.jpg" class="img-responsive" alt="Team">--}}
+{{--<img class="image-blur" src="images/team-img6.jpg" class="img-responsive" alt="Team">--}}
 {{--<div class="team-overlay">--}}
 {{--<div class="team-item">--}}
 {{--<ul class="social-icon">--}}
@@ -504,7 +493,7 @@ TEAM SECTION
 
 {{--<div class="item wow fadeInUp col-md-4 col-sm-4" data-wow-delay="0.6s">--}}
 {{--<div class="team-thumb">--}}
-{{--<img src="images/team-img7.jpg" class="img-responsive" alt="Team">--}}
+{{--<img class="image-blur" src="images/team-img7.jpg" class="img-responsive" alt="Team">--}}
 {{--<div class="team-overlay">--}}
 {{--<div class="team-item">--}}
 {{--<ul class="social-icon">--}}
@@ -532,31 +521,30 @@ TEAM SECTION
 {{--</section>--}}
 
 
-        <!-- =========================
+<!-- =========================
 TESTIMONIAL SECTION
 ============================== -->
 
 <section id="testimonial" class="parallax-section">
     <div class="overlay"></div>
-    <video autoplay muted loop id="video-bg">
-        <source src="{{asset('assets/video/testimonialsBg.mp4')}}" type="video/mp4">
-        Your browser does not support HTML5 video.
-    </video>
+    {{--<video autoplay muted loop id="video-bg">--}}
+    {{--<source src="{{asset('assets/video/testimonialsBg.mp4')}}" type="video/mp4">--}}
+    {{--Your browser does not support HTML5 video.--}}
+    {{--</video>--}}
     <div class="container">
         <div class="row">
-            <div class=" wow bounceIn col-md-6 col-sm-12">
+            <div class=" wow bounceIn col-sm-12">
                 <div class="section-title">
                     <h2>اهداف ما در اینکوباک</h2>
                     <p> اینکوباک، بازارگاه الکترونیکی بخش کشاورزی است که با هدف توسعه زیرساخت تجارت در این حوزه شروع به
                         فعالیت کرده است. اینکوباک در نظر دارد تا کشاورزان و تولیدکنندگان فعال و درستکار را به بازرگانان
-                        و خریدارن موفق متصل کند تا از این طریق گام موثری در حذف واسطه های خرید و فروش، توسعه صادرات،
-                        استاندارد سازی محصول بردارد.</p>
+                        و خریدارن موفق متصل کند تا از این طریق گام موثری در حذف واسطه های خرید و فروش، توسعه صادرات
+                        و استاندارد سازی محصول بردارد</p>
                     <br/>
                     <p>اینکوباک، به کشاورزان و تولیدکنندگان کمک می کند تا محصولات خود را به قیمت واقعی خود و بدون واسطه،
                         به افراد مطمئن بفروشند. همچنین به بازرگانان و خریداران کمک میکند تا بهترین محصولات و مطمئن ترین
                         افراد را شناسایی کنند. اینکوباک کمک میکند تا بیشتر دیده شوید، در زمان و هزینه ها صرفه جویی کنید
                         و فرصت های بیشتری خلق کنید.</p>
-                    <!--                        <h3>اینکوباک در گام اول خود، محصولاتی از قبیل غلات، حبوبات، خشکبار، ادویه و گیاهان دارویی را پوشش می دهد.</h3>-->
                 </div>
             </div>
         </div>
@@ -567,44 +555,25 @@ TESTIMONIAL SECTION
 <!-- =========================
 RECENT BLOG POSTS SECTION
 ============================== -->
-
 <section id="recent" class="parallax-section">
     <div class="container">
         <div class="row">
             <h2 style="margin: 10px auto 20px ">وبلاگ اینکوباک</h2>
             <div class=" wow fadeIn  col-sm-4 animated" data-wow-delay="0.9s"
-                 style="visibility: visible; animation-delay: 0.9s; animation-name: fadeIn;">
+                 style="visibility: visible; animation-delay: 0.9s; animation-name: fadeIn;" v-for="post in posts">
                 <div class="detail-thumb">
-                    <img src="http://localhost:8000/assets/img/back2.jpg">
-                    <h3>صادرات ایران به قطر</h3>
-                    <p>صادرات به قطر در ماه های اخیر صادرات ایران به قطر در بخش های مختلف با رشد چشمگیری رو به رو بوده
-                        است که دلیل آن بالا گرفتن اختلافات قطر با کشورهای عربی...</p>
-                    <a href="#" class="btn-incobac">بیشتر بخوانید ...</a>
-                </div>
-            </div>
-            <div class=" wow fadeIn  col-sm-4 animated" data-wow-delay="0.9s"
-                 style="visibility: visible; animation-delay: 0.9s; animation-name: fadeIn;">
-                <div class="detail-thumb">
-                    <img src="http://localhost:8000/assets/img/back2.jpg">
-                    <h3>صادرات ایران به قطر</h3>
-                    <p>صادرات به قطر در ماه های اخیر صادرات ایران به قطر در بخش های مختلف با رشد چشمگیری رو به رو بوده
-                        است که دلیل آن بالا گرفتن اختلافات قطر با کشورهای عربی...</p>
-                    <a href="#" class="btn-incobac">بیشتر بخوانید ...</a>
-                </div>
-            </div>
-            <div class=" wow fadeIn  col-sm-4 animated" data-wow-delay="0.9s"
-                 style="visibility: visible; animation-delay: 0.9s; animation-name: fadeIn;">
-                <div class="detail-thumb">
-                    <img src="http://localhost:8000/assets/img/back2.jpg">
-                    <h3>صادرات ایران به قطر</h3>
-                    <p>صادرات به قطر در ماه های اخیر صادرات ایران به قطر در بخش های مختلف با رشد چشمگیری رو به رو بوده
-                        است که دلیل آن بالا گرفتن اختلافات قطر با کشورهای عربی...</p>
-                    <a href="#" class="btn-incobac">بیشتر بخوانید ...</a>
+                    <div class="img-thumb">
+                        <img class="image-blur" :src="post.img_url">
+                    </div>
+                    <h3>@{{post.post_title}}</h3>
+                    <p v-html="post.post_content.substr(0,150) + '...'"></p>
+                    <a :href="post.guid" class="btn-incobac">بیشتر بخوانید ...</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 <!-- =========================
 FAQ SECTION
 ============================== -->
@@ -774,7 +743,6 @@ CONTACT SECTION
                     <h2>با ما در تماس باشید</h2>
                 </div>
             </div>
-
             <div class="wow fadeInUp col-md-6 col-sm-7" data-wow-delay="0.9s">
                 <div class="contact_detail">
                     <div class="section-title">
@@ -795,15 +763,15 @@ CONTACT SECTION
                 <div class="contact_detail">
                     <div class="addr">
                         <h3> آدرس</h3>
-                        <p>شیراز، میدان ارم، ساختمان مدیریت دانشگاه شیراز، برج نوآوری، طبقه ۹</p>
+                        <p>شیراز ، بلوار جمهوری اسلامی، ساختمان مدیریت دانشگاه شیراز، برج نوآوری ، طبقه نهم</p>
                     </div>
                     <div class="ph">
                         <h3>تماس با ما</h3>
-                        <p>021-7105-3525</p>
+                        <p>0713-646-0996 / 09178928245</p>
                     </div>
                     <div class="email">
                         <h3>ایمیل بفرستید</h3>
-                        <p>info@incobac.com</p>
+                        <p>s.radmanesh95@gmail.com</p>
                     </div>
                 </div>
             </div>
@@ -817,10 +785,19 @@ CONTACT SECTION
 FOOTER SECTION
 ============================== -->
 
+
 <footer>
     <div class="container">
         <div class="row">
+            <div class="col-xs-4">
+                <div>
+                    <img src="https://trustseal.enamad.ir/logo.aspx?id=100286&amp;p=yBEoWWMXqCeIkdjL" alt="" onclick="window.open(&quot;https://trustseal.enamad.ir/Verify.aspx?id=100286&amp;p=yBEoWWMXqCeIkdjL&quot;, &quot;Popup&quot;,&quot;toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30&quot;)" style="cursor:pointer" id="yBEoWWMXqCeIkdjL">
+                </div>
 
+                <!--    <img id='jxlzesgtjxlznbqergvjsizpjzpe' style='cursor:pointer' onclick='window.open("https://logo.samandehi.ir/Verify.aspx?id=1012397&p=rfthobpdrfthuiwkxlaopfvljyoe", "Popup","toolbar=no, scrollbars=no, location=no, statusbar=no, menubar=no, resizable=0, width=450, height=630, top=30")' alt='logo-samandehi' src='https://logo.samandehi.ir/logo.aspx?id=1012397&p=nbpdlymanbpdodrfqftibsiyyndt'/> -->
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-12 col-sm-12">
                 <p class="wow fadeInUp" data-wow-delay="0.6s">تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.</p>
 
@@ -861,6 +838,7 @@ FOOTER SECTION
 
 <script src="{{asset('index/js/jquery.js')}}"></script>
 <script src="{{asset('index/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('index/js/particleNetwork.js')}}"></script>
 <script src="{{asset('index/js/jquery.magnific-popup.min.js')}}"></script>
 <script src="{{asset('index/js/jquery.parallax.js')}}"></script>
 <script src="{{asset('index/js/owl.carousel.min.js')}}"></script>
@@ -868,24 +846,41 @@ FOOTER SECTION
 <script src="{{asset('index/js/wow.min.js')}}"></script>
 <script src="{{asset('index/js/custom.js')}}"></script>
 
+<!--
 <script>
-    $(document).ready(function () {
-        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-            (function (l, i, v, e, c, h, a, t) {
-                l['DenaLiveChatObject'] = h;
-                l[h] = l[h] || function () {
-                            (l[h].q = l[h].q || []).push(arguments)
-                        }, l[h].l = 1 * new Date(), l[h].b = e;
-                a = i.createElement(v),
-                        t = i.getElementsByTagName(v)[0];
-                a.async = 1;
-                a.src = e + c;
-                t.parentNode.insertBefore(a, t);
-            })(window, document, 'script', 'https://www.telegram.chat', '/chat/loader.js', 'dlc');
-            dlc('create', '6f1c98a9754b4b9f8862189db4ebc790', {"bottom": "0px", "right": "0px"});
+    window.addEventListener('load', function(){
+        var allimages= document.getElementsByTagName('img');
+        for (var i=0; i<allimages.length; i++) {
+            if (allimages[i].getAttribute('data-src')) {
+                allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
+            }
         }
-    });
+    }, false)
 </script>
+-->
 </body>
+
+<script>
+    var vm = new Vue({
+        el:'#recent',
+        data:{
+            posts:'',
+        },
+        methods:{
+            init:function(){
+                var self = this;
+                console.log('test');
+                axios.post('/get_wp_posts')
+                    .then(function(response){
+                        console.log(response.data);
+                        self.posts = response.data.posts;
+                    });
+            }
+        },
+        mounted:function(){
+            this.init();
+        }
+    })
+</script>
 
 </html>

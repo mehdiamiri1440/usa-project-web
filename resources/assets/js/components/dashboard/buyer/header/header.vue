@@ -780,7 +780,6 @@
                 var el_clouse_links = $('.mobile-header .header-menu a');
                 el.on('click', function () {
                     if (flag == true) {
-                        console.log('flag = true');
                         right_header.animate({
                             right: '0'
                         }, 300);
