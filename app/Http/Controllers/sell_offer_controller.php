@@ -195,11 +195,12 @@ class sell_offer_controller extends Controller
             ->get()
             ->last();
        
-        return view('dashboard.buyer.request.sell-offer-detail',[
+        return response()->json([
+            'status' => true,
             'sell_offer' => $sell_offer_record,
             'sell_offer_user_info' => $sell_offer_user_info,
             'profile_photo' => $sell_offer_profile_record ? $sell_offer_profile_record->profile_photo : '',
-        ]);
+        ],200);
     }
     
     protected function is_user_authorized_to_access_the_sell_offer(&$sell_offer_record)
