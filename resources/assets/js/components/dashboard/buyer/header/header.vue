@@ -183,7 +183,7 @@
 
     .header-menu a {
         color: #b1b1b1;
-        padding: 10px 20px;
+        padding: 5px 20px;
         display: inline-block;
         position: relative;
         width: 100%;
@@ -353,8 +353,17 @@
     .loader-wrapper {
         display: none;
     }
+    span.min{
+        display: none;
+    }
+    @media screen and (max-width: 994px) {
+        .content-header{
+            display: none;
+        }
+        .img-profile {
+            padding-top: 20px;
+        }
 
-    @media screen and (max-width: 992px) {
         .right-header.desktop-header {
             display: none;
         }
@@ -392,11 +401,6 @@
             display: block;
         }
 
-        .kind_user > div, .kind_activity > div {
-            float: none;
-
-        }
-
         .img-profile .submit {
             position: relative;
             width: 100%;
@@ -421,6 +425,12 @@
             margin: 10px 0;
             padding: 0;
         }
+        #step1 .main_buttons {
+            text-align: center !important;
+        }
+        .col-sm-6 {
+            float: none;
+        }
 
         .name-header-profile {
             display: none;
@@ -433,20 +443,38 @@
     }
 
     @media screen and (max-width: 555px) {
+        span.min{
+            display: inherit;
+        }
+        span.full{
+            display: none;
+        }
+        .right-menu-header {
+            padding: 6px;
+            border-right: 1px solid #eff3f6;
+        }
+        .profile-menu-header  .user_name{
+            display:none;
+        }
         .content-header {
             display: none;
+        }
+        .right-menu-header .green-bot {
+            padding: 10px 15px;
         }
 
     }
 
     @media screen and (max-width: 345px) {
         .sub-header a {
-            font-size: 12px !important;
-            padding: 16px 13px !important;
+            font-size: 10px;
+
         }
 
         .sub-header {
+
             bottom: -44px;
+
         }
     }
 
@@ -598,10 +626,10 @@
 </template>
 
 <script>
-    import {eventBus} from '../../../../app';
     import profileinfo from './sub-com/profile_info.vue'
     import headerMenuList from './sub-com/header-menu-list.vue'
     import headerTop from './sub-com/header-top.vue'
+    import {eventBus} from "../../../../router/dashboard_router";
 
     export default {
         components: {

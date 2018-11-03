@@ -1,9 +1,12 @@
-
 import Vue from 'vue'
-import router from 'vue-router'
+import Router from 'vue-router'
 
 
 
+require('../bootstrap');
+require('../imageuploadify.min');
+require('../jquery.magnific-popup.min');
+window.Vue = require('vue');
 // Seller Components
 import sellerProfileBasic from '../components/dashboard/seller/profile/profile_basic.vue'
 import sellerChangePassword from '../components/dashboard/seller/profile/change_password.vue'
@@ -22,7 +25,7 @@ import sellerNotFound from '../components/dashboard/page-not-found.vue';
 
 
 // Buyer Components
-import buyerProfileBasic from '../components/dashboard/buyer/profile/profile_basic.vue'
+ import buyerProfileBasic from '../components/dashboard/buyer/profile/profile_basic.vue'
 import buyerChangePassword from '../components/dashboard/seller/profile/change_password.vue'
 import buyerCompelementry from '../components/dashboard/buyer/profile/profile_complete.vue'
 import buyerProfileContract from '../components/dashboard/buyer/profile/profile_contract.vue'
@@ -40,9 +43,13 @@ import buyerTransactionReport from '../components/dashboard/buyer/transaction/tr
 import buyerGuide from '../components/dashboard/buyer/guide.vue';
 
 
-Vue.use(router);
 
-const myRouter =  new router({
+Vue.use(Router);
+
+export const eventBus = new Vue();
+
+const myRouter =  new Router({
+    base: process.env.BASE_URL,
     routes: [
         {
             path: '*',
@@ -81,7 +88,7 @@ const myRouter =  new router({
                 seller: sellerCompelementry,
                 buyer: buyerCompelementry,
             },
-        }, 
+        },
         {
             path: '/profile_contract',
             name: 'profileContract',
@@ -90,7 +97,7 @@ const myRouter =  new router({
                 buyer: buyerProfileContract,
             },
             beforeEnter: async (to, from, next) => {
-                
+
                 axios.post('/user/profile_info',{
                     confirmed : true
                 })
@@ -257,9 +264,12 @@ myRouter.beforeEach((to,from,next) => {
                 }
 
             });
-      
+
       }
 });
 
 
 export default myRouter;
+
+
+

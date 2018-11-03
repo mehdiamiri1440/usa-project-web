@@ -159,7 +159,17 @@
                 })
                 .then(function (response) {
                     if (response.data.status == true) {
-                        window.location.href = '/dashboard/';
+
+                         window.location.href = '/dashboard/';
+                       /* if (response.data.is_buyer == true){
+                            console.log('buyer');
+                            self.$router.push({ name: 'profileBasic'});
+                            console.log(self.$router.push({ name: 'profileBasic'}))
+                        }else if(response.data.is_seller == true){
+                            console.log('seller')
+                        }else{
+
+                        }*/
                     }
                     else {
                         self.showMsg = true;
@@ -179,7 +189,7 @@
             sendPhoneVerificationCode:function(){
                 var self = this;
                 this.errors = [];
-                
+
                 axios.post('/send_phone_verification_code_for_password_reset',{
                     'phone' : this.toLatinNumbers(this.step2.phone)
                 })
@@ -195,7 +205,7 @@
             verifyCode:function(){
                 var self = this;
                 this.showMsg  = false;
-                
+
                 axios.post('/reset_password',{
                     'phone' : this.toLatinNumbers(this.step2.phone),
                     'verification_code' : this.toLatinNumbers(this.step3.verification_code),

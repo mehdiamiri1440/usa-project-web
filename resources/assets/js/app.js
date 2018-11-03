@@ -1,32 +1,44 @@
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-require('./bootstrap');
-require('./imageuploadify.min');
-require('./jquery.magnific-popup.min');
 
 
-window.Vue = require('vue');
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
+import Vue from 'vue'
+import router from './router/dashboard_router'
 import Axios from 'axios'
 Vue.prototype.$http = Axios;
-
+Vue.config.productionTip = false;
 import loginComponent from './components/login/Login.vue';
 import registerComponent from './components/register/register.vue';
 import headerDashSeller from './components/dashboard/seller/header/header.vue';
 import headerDashBuyer from './components/dashboard/buyer/header/header.vue';
-import profileBasic from './components/dashboard/seller/profile/profile_basic.vue'
-import router from './router/dashboard_router'
+import AppSeller from './components/AppSeller'
+import AppBuyer from './components/AppBuyer'
+
+/*
+
+new Vue({
+    components:{
+        profileBasic,
+        loginComponent,
+        registerComponent,
+        headerDashSeller,
+        headerDashBuyer,
+    },
+    router,
+}).$mount('#app');
+
+*/
+
+ new Vue({
+    components:{
+        loginComponent,
+        registerComponent,
+        headerDashSeller,
+        headerDashBuyer,
+    },
+    router,
+}).$mount('#app');
+
+
 
 
 
@@ -114,7 +126,7 @@ function checkProfileConfermation(){
 }
 
 
-export const eventBus = new Vue();
+
 
 const app = new Vue({
     el: '#app',
@@ -132,5 +144,6 @@ const app = new Vue({
     $( window ).on( "load", function() {
         console.log( "window loaded" );
     });
+
 
 
