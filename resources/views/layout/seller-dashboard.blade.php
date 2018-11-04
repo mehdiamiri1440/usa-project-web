@@ -52,7 +52,7 @@
     </head>
 
     <body>
-    <div id="app">
+    <div id="appSeller">
 
         <header-dash-seller
                 logo="{{asset('assets/img/logo-incobac.png')}}"
@@ -67,7 +67,6 @@
                 loading="{{asset('assets/img/gif/prload.gif')}}"
                 guide="{{url('dashboard/guide')}}"
         ></header-dash-seller>
-        @section('main_content')
             <main id="main">
             <router-view
                     name="seller"
@@ -80,14 +79,13 @@
             ></router-view>
 
             </main>
-            @show
 
     </div>
     @yield('body_script_tags')
-    
+
     <script src="{{asset('assets/js/custom.js')}}"></script>
     <script src="{{asset('js/app.js')}}"></script>
-    <script src="{{asset('assets/js/idleTimer.js')}}"></script> 
+    <script src="{{asset('assets/js/idleTimer.js')}}"></script>
     <script>
         $(document).ready(function(){
             $(document).idleTimer(7200000);
@@ -96,7 +94,7 @@
         $(document).on("idle.idleTimer", function(){
          // function you want to fire when the user goes idle
             window.location.href = '/login'
-        });    
+        });
     </script>
     </body>
 

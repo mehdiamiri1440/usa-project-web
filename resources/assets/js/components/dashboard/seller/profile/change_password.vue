@@ -594,8 +594,7 @@
 
 
 <script>
-    import {eventBus} from '../../../../app';
-
+    import {eventBus} from "../../../../router/dashboard_router";
     export default {
         props: [
             'str',
@@ -623,12 +622,12 @@
         },
         methods: {
             init: function () {
-                
+
             },
             changePassword: function(){
                 this.errorFlag = false;
                 this.passwordValidator(this.currentPassword,this.newPassword,this.newPasswordRepeat);
-                
+
                 if(this.errorFlag == false){
                     //send Request
                     var self  = this;
@@ -658,7 +657,7 @@
                 this.errors.password = [];
                 this.errors.password_repeat = [];
                 this.errors.current_password = [];
-                
+
                 if(currentPass === ''){
                     this.errors.current_password.push('رمز عبور فعلی الزامی است');
                     this.errorFlag = true;

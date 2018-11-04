@@ -6,12 +6,12 @@ import router from './router/dashboard_router'
 import Axios from 'axios'
 Vue.prototype.$http = Axios;
 Vue.config.productionTip = false;
-import loginComponent from './components/login/Login.vue';
-import registerComponent from './components/register/register.vue';
-import headerDashSeller from './components/dashboard/seller/header/header.vue';
-import headerDashBuyer from './components/dashboard/buyer/header/header.vue';
 import AppSeller from './components/AppSeller'
 import AppBuyer from './components/AppBuyer'
+import loginComponent from './components/login/Login.vue';
+import registerComponent from './components/register/register.vue';
+
+
 
 /*
 
@@ -29,19 +29,19 @@ new Vue({
 */
 
  new Vue({
+     el:'#app',
     components:{
         loginComponent,
         registerComponent,
-        headerDashSeller,
-        headerDashBuyer,
     },
     router,
-}).$mount('#app');
+});
 
 
 
 
 
+/*
 router.push({
     response(resp) {
         // Check if the user is no longer signed in,
@@ -55,6 +55,7 @@ router.push({
         return resp;
     }
 });
+*/
 
 
 Vue.component('step1', {
@@ -99,6 +100,7 @@ Vue.component('step1S3', {
     template: '#step1S3'
 });
 
+/*
 
 function checkProfileConfermation(){
     axios.post('/user/profile_info',{
@@ -127,23 +129,24 @@ function checkProfileConfermation(){
 
 
 
-
-const app = new Vue({
+*/
+/* new Vue({
     el: '#app',
     router,
     components:{
-        profileBasic,
         loginComponent,
         registerComponent,
-        headerDashSeller,
+        'header-dash-seller' : headerDashSeller,
         headerDashBuyer,
     }
-});
+});*/
 
+/*
 
     $( window ).on( "load", function() {
         console.log( "window loaded" );
     });
+*/
 
 
 

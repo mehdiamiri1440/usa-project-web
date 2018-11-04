@@ -379,8 +379,7 @@
 </template>
 
 <script>
-    import {eventBus} from '../../../../app';
-
+    import {eventBus} from "../../../../router/dashboard_router";
     export default {
         props: [
             'str',
