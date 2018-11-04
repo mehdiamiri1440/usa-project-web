@@ -488,41 +488,30 @@ function applyToTag (styleElement, obj) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "eventBus", function() { return eventBus; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_login_Login_vue__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_login_Login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_login_Login_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_register_register_vue__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_register_register_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_register_register_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_header_header_vue__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_header_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_header_header_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_buyer_header_header_vue__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_dashboard_buyer_header_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_dashboard_buyer_header_header_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__router_dashboard_router__ = __webpack_require__(258);
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-__webpack_require__(21);
-__webpack_require__(44);
-__webpack_require__(45);
-
-window.Vue = __webpack_require__(7);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router_dashboard_router__ = __webpack_require__(258);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_login_Login_vue__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_login_Login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_login_Login_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_register_register_vue__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_register_register_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_register_register_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_header_header_vue__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_header_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_header_header_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_header_header_vue__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_header_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_header_header_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_AppSeller__ = __webpack_require__(291);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_AppSeller___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_AppSeller__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_AppBuyer__ = __webpack_require__(297);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_AppBuyer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_AppBuyer__);
 
 
-Vue.prototype.$http = __WEBPACK_IMPORTED_MODULE_0_axios___default.a;
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.$http = __WEBPACK_IMPORTED_MODULE_2_axios___default.a;
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.config.productionTip = false;
 
 
 
@@ -530,8 +519,32 @@ Vue.prototype.$http = __WEBPACK_IMPORTED_MODULE_0_axios___default.a;
 
 
 
+/*
 
-__WEBPACK_IMPORTED_MODULE_6__router_dashboard_router__["a" /* default */].push({
+new Vue({
+    components:{
+        profileBasic,
+        loginComponent,
+        registerComponent,
+        headerDashSeller,
+        headerDashBuyer,
+    },
+    router,
+}).$mount('#app');
+
+*/
+
+new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
+    components: {
+        loginComponent: __WEBPACK_IMPORTED_MODULE_3__components_login_Login_vue___default.a,
+        registerComponent: __WEBPACK_IMPORTED_MODULE_4__components_register_register_vue___default.a,
+        headerDashSeller: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_header_header_vue___default.a,
+        headerDashBuyer: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_header_header_vue___default.a
+    },
+    router: __WEBPACK_IMPORTED_MODULE_1__router_dashboard_router__["a" /* default */]
+}).$mount('#app');
+
+__WEBPACK_IMPORTED_MODULE_1__router_dashboard_router__["a" /* default */].push({
     response: function response(resp) {
         // Check if the user is no longer signed in,
         // if so then we need them to sign back in.
@@ -545,31 +558,31 @@ __WEBPACK_IMPORTED_MODULE_6__router_dashboard_router__["a" /* default */].push({
     }
 });
 
-Vue.component('step1', {
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('step1', {
     template: '#step1',
     props: ['currentStep', 'step1']
 });
-Vue.component('step2', {
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('step2', {
     template: '#step2',
     props: ['currentStep', 'step2']
 });
-Vue.component('step3', {
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('step3', {
     template: '#step3',
     props: ['currentStep', 'step1', 'step2']
 });
-Vue.component('step4', {
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('step4', {
     template: '#step3',
     props: ['currentStep', 'step1', 'step2']
 });
-Vue.component('step1S1', {
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('step1S1', {
     template: '#step1S1'
 });
 
-Vue.component('step1S2', {
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('step1S2', {
     template: '#step1S2'
 });
 
-Vue.component('step1S3', {
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('step1S3', {
     template: '#step1S3'
 });
 
@@ -594,17 +607,15 @@ function checkProfileConfermation() {
     });
 }
 
-var eventBus = new Vue();
-
-var app = new Vue({
+var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
-    router: __WEBPACK_IMPORTED_MODULE_6__router_dashboard_router__["a" /* default */],
+    router: __WEBPACK_IMPORTED_MODULE_1__router_dashboard_router__["a" /* default */],
     components: {
-        profileBasic: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_profile_profile_basic_vue___default.a,
-        loginComponent: __WEBPACK_IMPORTED_MODULE_1__components_login_Login_vue___default.a,
-        registerComponent: __WEBPACK_IMPORTED_MODULE_2__components_register_register_vue___default.a,
-        headerDashSeller: __WEBPACK_IMPORTED_MODULE_3__components_dashboard_seller_header_header_vue___default.a,
-        headerDashBuyer: __WEBPACK_IMPORTED_MODULE_4__components_dashboard_buyer_header_header_vue___default.a
+        profileBasic: profileBasic,
+        loginComponent: __WEBPACK_IMPORTED_MODULE_3__components_login_Login_vue___default.a,
+        registerComponent: __WEBPACK_IMPORTED_MODULE_4__components_register_register_vue___default.a,
+        headerDashSeller: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_seller_header_header_vue___default.a,
+        headerDashBuyer: __WEBPACK_IMPORTED_MODULE_6__components_dashboard_buyer_header_header_vue___default.a
     }
 });
 
@@ -47129,7 +47140,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 password: this.step1.password
             }).then(function (response) {
                 if (response.data.status == true) {
+
                     window.location.href = '/dashboard/';
+                    /* if (response.data.is_buyer == true){
+                         console.log('buyer');
+                         self.$router.push({ name: 'profileBasic'});
+                         console.log(self.$router.push({ name: 'profileBasic'}))
+                     }else if(response.data.is_seller == true){
+                         console.log('seller')
+                     }else{
+                      }*/
                 } else {
                     self.showMsg = true;
                     self.errors = [];
@@ -52288,7 +52308,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    vertical-align: baseline;\n}\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, menu, nav, section {\n    display: block;\n}\nbody {\n    line-height: 1.1;\n    font-family: IRANSans, sans-serif;\n    font-size: 14px;\n}\nol, ul {\n    list-style: none;\n}\nblockquote, q {\n    quotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n    content: none;\n}\ntable {\n    border-collapse: collapse;\n    border-spacing: 0;\n}\nimg, svg {\n    width: 100%;\n}\na, a:hover, a:visited, a:focus, a:active {\n    text-decoration: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\nth, td {\n    padding: 7px;\n    text-align: right;\n}\n\n/*start style right header*/\n.logo {\n    height: 64px;\n\n    display: block;\n\n    float: right;\n\n    width: 70%;\n}\n.logo_hide {\n    display: none;\n}\n.logo a {\n    display: inline-block;\n    margin-top: -11px;\n    height: 75px;\n    padding: 0 10px;\n}\n.right-header {\n    width: 250px;\n    right: 0;\n    bottom: 0;\n    position: fixed;\n    top: 0;\n    overflow: hidden;\n    z-index: 9;\n}\n.little_header {\n    width: 80px;\n}\n.right-header.mobile-header {\n    display: none;\n    -webkit-box-shadow: 0 0 20px;\n            box-shadow: 0 0 20px;\n}\n.right-header > header {\n    overflow: hidden;\n    background: #fff;\n}\n.clouse_menu, .clouse_menu_mob {\n    float: left;\n    width: 30%;\n    border: none;\n    background: none;\n    font-size: 35px;\n    top: 0;\n    position: relative;\n    padding: 11px;\n}\n.clouse_menu_mob {\n    display: none;\n}\n.main-right-header {\n    background: #313a43;\n    height: 100%;\n    text-align: right;\n    color: #fff;\n    position: relative;\n}\n.show-header button {\n    float: right;\n    border: none;\n    background: none;\n    font-size: 25px;\n    padding: 19px 30px 19px 24px;\n    display: none;\n}\n.profile {\n    padding: 20px 20px 10px;\n    border-bottom: 2px solid #2e353e;\n}\n.profile-img {\n    overflow: hidden;\n    border-radius: 50%;\n    height: 85px;\n    width: 85px;\n    margin: 0 auto;\n    margin-left: 10px;\n    border: 2px solid #fff;\n    float: right;\n}\n.profile-img img {\n    height: 100%;\n}\n.profile-content {\n    float: right;\n    padding-top: 15px;\n}\n.profile-name {\n    margin: 8px 0;\n    font-size: 17px;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.header-menu a {\n    color: #b1b1b1;\n    padding: 10px 20px;\n    display: inline-block;\n    position: relative;\n    width: 100%;\n}\n.header-menu {\n    padding: 10px 0;\n}\n.header-menu a:hover {\n    color: #fff;\n    background: #637484;\n}\n.header-menu a:hover::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu li.active a {\n    color: #fff;\n    background: #637484;\n}\n.header-menu li.active a:before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.copy-right {\n    text-align: center;\n    font-size: 12px;\n    font-weight: 200;\n    line-height: 1.3em;\n    padding: 20px;\n    position: absolute;\n    bottom: 76px;\n}\nlabel {\n    display: block;\n    margin: 9px auto;\n}\ninput[type=\"text\"], select, input[type=\"button\"], textarea {\n    width: 100% !important;\n}\ninput[type=\"text\"], select, textarea {\n    background: #eff3f6;\n    border: 1px solid #cfcfcf;\n    border-radius: 3px;\n    width: 100% !important;\n}\ninput[type=\"text\"], textarea {\n    padding: 13px 15px;\n    width: 100% !important;\n}\nselect {\n    padding: 7px 15px;\n}\n.image-header-profile img {\n    height: 100%;\n}\n.right-menu-header {\n    position: relative;\n}\n.right-menu-header li ul a {\n    font-size: 14px;\n    width: 100%;\n    display: inline-block;\n}\n.right-menu-header li ul li {\n\n    margin: 5px;\n}\n.icon-header-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    right: 75px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.background_mob_sec {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n/*end style right header*/\n\n/*loader*/\n.loader-display {\n    position: fixed;\n    z-index: 10;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0, 0, 0, 0.5);\n    display: block;\n}\n.main-loader {\n    position: absolute;\n\n    top: 35%;\n\n    text-align: center;\n\n    display: block;\n\n    width: 100%;\n\n    color: #fff;\n\n    font-size: 23px;\n}\n.main-loader img {\n    width: 100px;\n\n    background: #fff;\n\n    border-radius: 50px;\n\n    height: 100px;\n\n    display: inline-block;\n\n    margin: 0 auto 22px;\n}\n.loader-wrapper {\n    display: none;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header {\n        display: none;\n}\n.right-header.mobile-header {\n        display: block;\n        right: -300px;\n}\n.main-header, .little-main-header {\n        right: 0 !important;\n}\n#main, #main.little-main {\n        margin-right: 0 !important;\n}\n.post-contents-table {\n        width: 100%;\n}\n.copy-right {\n        display: none;\n}\n.clouse_menu {\n        display: none;\n}\n.clouse_menu_mob {\n        display: block;\n}\n.show-header button {\n        display: block;\n}\n.kind_user > div, .kind_activity > div {\n        float: none;\n}\n.img-profile .submit {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post, .contents-post {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.name-header-profile {\n        display: none;\n}\n.profile-menu-header {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a {\n        font-size: 12px !important;\n        padding: 16px 13px !important;\n}\n.sub-header {\n        bottom: -44px;\n}\n}\n\n/*end loader*/\n", ""]);
+exports.push([module.i, "\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    vertical-align: baseline;\n}\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, menu, nav, section {\n    display: block;\n}\nbody {\n    line-height: 1.1;\n    font-family: IRANSans, sans-serif;\n    font-size: 14px;\n}\nol, ul {\n    list-style: none;\n}\nblockquote, q {\n    quotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n    content: none;\n}\ntable {\n    border-collapse: collapse;\n    border-spacing: 0;\n}\nimg, svg {\n    width: 100%;\n}\na, a:hover, a:visited, a:focus, a:active {\n    text-decoration: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\nth, td {\n    padding: 7px;\n    text-align: right;\n}\n\n/*start style right header*/\n.logo {\n    height: 64px;\n\n    display: block;\n\n    float: right;\n\n    width: 70%;\n}\n.logo_hide {\n    display: none;\n}\n.logo a {\n    display: inline-block;\n    margin-top: -11px;\n    height: 75px;\n    padding: 0 10px;\n}\n.right-header {\n    width: 250px;\n    right: 0;\n    bottom: 0;\n    position: fixed;\n    top: 0;\n    overflow: hidden;\n    z-index: 9;\n}\n.little_header {\n    width: 80px;\n}\n.right-header.mobile-header {\n    display: none;\n    -webkit-box-shadow: 0 0 20px;\n            box-shadow: 0 0 20px;\n}\n.right-header > header {\n    overflow: hidden;\n    background: #fff;\n}\n.clouse_menu, .clouse_menu_mob {\n    float: left;\n    width: 30%;\n    border: none;\n    background: none;\n    font-size: 35px;\n    top: 0;\n    position: relative;\n    padding: 11px;\n}\n.clouse_menu_mob {\n    display: none;\n}\n.main-right-header {\n    background: #313a43;\n    height: 100%;\n    text-align: right;\n    color: #fff;\n    position: relative;\n}\n.show-header button {\n    float: right;\n    border: none;\n    background: none;\n    font-size: 25px;\n    padding: 19px 30px 19px 24px;\n    display: none;\n}\n.profile {\n    padding: 20px 20px 10px;\n    border-bottom: 2px solid #2e353e;\n}\n.profile-img {\n    overflow: hidden;\n    border-radius: 50%;\n    height: 85px;\n    width: 85px;\n    margin: 0 auto;\n    margin-left: 10px;\n    border: 2px solid #fff;\n    float: right;\n}\n.profile-img img {\n    height: 100%;\n}\n.profile-content {\n    float: right;\n    padding-top: 15px;\n}\n.profile-name {\n    margin: 8px 0;\n    font-size: 17px;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.profile-city {\n    font-size: 14px;\n    font-weight: 200;\n}\n.header-menu a {\n    color: #b1b1b1;\n    padding: 5px 20px;\n    display: inline-block;\n    position: relative;\n    width: 100%;\n}\n.header-menu {\n    padding: 10px 0;\n}\n.header-menu a:hover {\n    color: #fff;\n    background: #637484;\n}\n.header-menu a:hover::before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.header-menu li.active a {\n    color: #fff;\n    background: #637484;\n}\n.header-menu li.active a:before {\n    content: \" \";\n    height: 100%;\n    width: 2px;\n    background: #00d614;\n    position: absolute;\n    right: 0;\n    top: 0;\n    display: block;\n}\n.copy-right {\n    text-align: center;\n    font-size: 12px;\n    font-weight: 200;\n    line-height: 1.3em;\n    padding: 20px;\n    position: absolute;\n    bottom: 76px;\n}\nlabel {\n    display: block;\n    margin: 9px auto;\n}\ninput[type=\"text\"], select, input[type=\"button\"], textarea {\n    width: 100% !important;\n}\ninput[type=\"text\"], select, textarea {\n    background: #eff3f6;\n    border: 1px solid #cfcfcf;\n    border-radius: 3px;\n    width: 100% !important;\n}\ninput[type=\"text\"], textarea {\n    padding: 13px 15px;\n    width: 100% !important;\n}\nselect {\n    padding: 7px 15px;\n}\n.image-header-profile img {\n    height: 100%;\n}\n.right-menu-header {\n    position: relative;\n}\n.right-menu-header li ul a {\n    font-size: 14px;\n    width: 100%;\n    display: inline-block;\n}\n.right-menu-header li ul li {\n\n    margin: 5px;\n}\n.icon-header-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    right: 75px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.background_mob_sec {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n/*end style right header*/\n\n/*loader*/\n.loader-display {\n    position: fixed;\n    z-index: 10;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0, 0, 0, 0.5);\n    display: block;\n}\n.main-loader {\n    position: absolute;\n\n    top: 35%;\n\n    text-align: center;\n\n    display: block;\n\n    width: 100%;\n\n    color: #fff;\n\n    font-size: 23px;\n}\n.main-loader img {\n    width: 100px;\n\n    background: #fff;\n\n    border-radius: 50px;\n\n    height: 100px;\n\n    display: inline-block;\n\n    margin: 0 auto 22px;\n}\n.loader-wrapper {\n    display: none;\n}\nspan.min{\n    display: none;\n}\n@media screen and (max-width: 994px) {\n.content-header{\n        display: none;\n}\n.img-profile {\n        padding-top: 20px;\n}\n.right-header.desktop-header {\n        display: none;\n}\n.right-header.mobile-header {\n        display: block;\n        right: -300px;\n}\n.main-header, .little-main-header {\n        right: 0 !important;\n}\n#main, #main.little-main {\n        margin-right: 0 !important;\n}\n.post-contents-table {\n        width: 100%;\n}\n.copy-right {\n        display: none;\n}\n.clouse_menu {\n        display: none;\n}\n.clouse_menu_mob {\n        display: block;\n}\n.show-header button {\n        display: block;\n}\n.img-profile .submit {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post, .contents-post {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n#step1 .main_buttons {\n        text-align: center !important;\n}\n.col-sm-6 {\n        float: none;\n}\n.name-header-profile {\n        display: none;\n}\n.profile-menu-header {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\nspan.min{\n        display: inherit;\n}\nspan.full{\n        display: none;\n}\n.right-menu-header {\n        padding: 6px;\n        border-right: 1px solid #eff3f6;\n}\n.profile-menu-header  .user_name{\n        display:none;\n}\n.content-header {\n        display: none;\n}\n.right-menu-header .green-bot {\n        padding: 10px 15px;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a {\n        font-size: 10px;\n}\n.sub-header {\n\n        bottom: -44px;\n}\n}\n\n/*end loader*/\n", ""]);
 
 // exports
 
@@ -52299,13 +52319,41 @@ exports.push([module.i, "\nhtml, body, div, span, applet, object, iframe,\nh1, h
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sub_com_profile_info_vue__ = __webpack_require__(86);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sub_com_profile_info_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__sub_com_profile_info_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_com_profile_info_vue__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_com_profile_info_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__sub_com_profile_info_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sub_com_header_menu_list_vue__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sub_com_header_menu_list_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__sub_com_header_menu_list_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sub_com_header_top_vue__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sub_com_header_top_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__sub_com_header_top_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router_dashboard_router__ = __webpack_require__(258);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -52913,9 +52961,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
-        profileinfo: __WEBPACK_IMPORTED_MODULE_1__sub_com_profile_info_vue___default.a,
-        headerMenuList: __WEBPACK_IMPORTED_MODULE_2__sub_com_header_menu_list_vue___default.a,
-        headerTop: __WEBPACK_IMPORTED_MODULE_3__sub_com_header_top_vue___default.a
+        profileinfo: __WEBPACK_IMPORTED_MODULE_0__sub_com_profile_info_vue___default.a,
+        headerMenuList: __WEBPACK_IMPORTED_MODULE_1__sub_com_header_menu_list_vue___default.a,
+        headerTop: __WEBPACK_IMPORTED_MODULE_2__sub_com_header_top_vue___default.a
     },
     props: ['defultimg', 'logo', 'loading', 'storage', 'transactroute', 'mytrans', 'selregpro', 'byadreq', 'profilebasic', 'logout', 'routehome', 'guide'],
     data: function data() {
@@ -53131,10 +53179,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     created: function created() {
         var _this2 = this;
 
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('submitingEvent', function (event) {
+        __WEBPACK_IMPORTED_MODULE_3__router_dashboard_router__["b" /* eventBus */].$on('submitingEvent', function (event) {
             _this2.submiting = event;
         });
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('submitSuccess', function (event) {
+        __WEBPACK_IMPORTED_MODULE_3__router_dashboard_router__["b" /* eventBus */].$on('submitSuccess', function (event) {
             _this2.popUpMsg = event;
         });
     }
@@ -53429,7 +53477,7 @@ exports.push([module.i, "\n.sub-header a.router-link-exact-active {\n    color: 
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__ = __webpack_require__(258);
 //
 //
 //
@@ -53586,7 +53634,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     created: function created() {
         var _this2 = this;
 
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('active', function (event) {
+        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$on('active', function (event) {
             _this2.active_el = event;
         });
     }
@@ -53878,7 +53926,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n#main {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n#main.little-main {\n    margin-right: 80px !important;\n}\n.main-header {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n}\n.little-main-header {\n    right: 80px;\n}\n.image-header-profile {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.image-header-profile  img{\n    height: 100%;\n}\n.profile-menu-header {\n    float: left;\n}\n.right-menu-header {\n\n    padding: 16px;\n}\n.right-menu-header, .content-header {\n    float: right;\n}\n.profile-menu-header {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header i {\n    position: absolute;\n\n    left: -90px;\n\n    top: 0px;\n\n    font-size: 20px;\n}\n.content-header {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a, .profile-menu-header a {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a {\n    font-size: 30px;\n}\n.right-menu-header a:hover, .profile-menu-header > a:hover {\n    color: #2e353e;\n}\n.profile-menu-header > a {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li {\n    margin: 5px;\n}\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n}\n.font-big {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n", ""]);
+exports.push([module.i, "\n#main {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n#main.little-main {\n    margin-right: 80px !important;\n}\n.main-header {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n}\n.little-main-header {\n    right: 80px;\n}\n.image-header-profile {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.image-header-profile  img{\n    height: 100%;\n}\n.profile-menu-header {\n    float: left;\n}\n.right-menu-header {\n    padding: 6px 16px;\n}\n.right-menu-header, .content-header {\n    float: right;\n}\n.profile-menu-header {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header i {\n    position: absolute;\n\n    left: -90px;\n\n    top: 0px;\n\n    font-size: 20px;\n}\n.content-header {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a, .profile-menu-header a {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a {\n    font-size: 30px;\n}\n.right-menu-header a:hover, .profile-menu-header > a:hover {\n    color: #2e353e;\n}\n.profile-menu-header > a {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li {\n    margin: 5px;\n}\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n}\n.font-big {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.green-bot{\n    color: #fafafa !important;\n}\n.green-bot:hover{\n    color: #fff !important;\n    background: #00d614;\n}\ni.fa-home{\n    position: relative;\n    top: 5px;\n}\n\n", ""]);
 
 // exports
 
@@ -53891,6 +53939,17 @@ exports.push([module.i, "\n#main {\n    margin-right: 250px;\n    margin-top: 65
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__sub_menu_sub_menu_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -54162,7 +54221,7 @@ exports.push([module.i, "\n\n/*start style sub-header*/\n.sub-header {\n    posi
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__ = __webpack_require__(258);
 //
 //
 //
@@ -54246,7 +54305,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     created: function created() {
         var _this = this;
 
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$on('subHeader', function (event) {
+        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$on('subHeader', function (event) {
             _this.items = event;
         });
     }
@@ -54324,9 +54383,10 @@ var render = function() {
               staticClass: "fa fa-angle-down",
               attrs: { "aria-hidden": "true" }
             }),
-            _vm._v(
-              "\n                " + _vm._s(_vm.username) + "\n            "
-            )
+            _vm._v(" "),
+            _c("span", { staticClass: "user_name" }, [
+              _vm._v(_vm._s(_vm.username))
+            ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "profile-list" }, [
@@ -54403,10 +54463,20 @@ var staticRenderFns = [
       _c(
         "a",
         {
+          staticClass: "green-bot",
           staticStyle: { "font-size": "17px" },
           attrs: { href: "/product-list" }
         },
-        [_vm._v("لیست محصولات ")]
+        [
+          _c("span", { staticClass: "full" }, [_vm._v("لیست محصولات")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "min" }, [
+            _c("i", {
+              staticClass: "fa fa-bars",
+              attrs: { "aria-hidden": "true" }
+            })
+          ])
+        ]
       )
     ])
   }
@@ -56158,7 +56228,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n/*start main content style */\n.image-content-post[data-v-14adfcd8] {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img[data-v-14adfcd8] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-14adfcd8] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-14adfcd8] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-14adfcd8] {\n    display: block;\n}\n.content-item[data-v-14adfcd8] {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content[data-v-14adfcd8] {\n    padding: 60px 15px;\n}\n.img-profile[data-v-14adfcd8] {\n    text-align: center;\n}\n.img-profile .image-input img[data-v-14adfcd8] {\n    width: 150px;\n    height: 150px;\n    overflow: hidden;\n    border-radius: 50%;\n}\n.img-profile i[data-v-14adfcd8] {\n    font-size: 150px;\n    color: #4b4b4b;\n}\n.img-profile .submit[data-v-14adfcd8] {\n    position: relative;\n    width: 80%;\n    margin: 25px auto;\n}\n.img-profile .submit input[data-v-14adfcd8] {\n    opacity: 0;\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    left: 10px;\n    right: 0;\n}\n.img-profile .submit label[data-v-14adfcd8] {\n    background: #28a745;\n    color: #fff;\n    padding: 12px 0;\n    font-size: 13px;\n    font-weight: 400;\n    border-radius: 5px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    width: 100%;\n}\n.img-profile .submit input:hover + label[data-v-14adfcd8] {\n    background: #29d44d;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.img-profile .submit input[data-v-14adfcd8]:hover {\n    cursor: pointer\n}\n.main-profile[data-v-14adfcd8] {\n    border-right: 1px solid #eff3f6;\n    text-align: right;\n    direction: rtl;\n    overflow: hidden;\n}\n.header-lable[data-v-14adfcd8] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n.content-lable[data-v-14adfcd8] {\n    font-weight: 400;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-14adfcd8] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-14adfcd8]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-14adfcd8] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-14adfcd8]:hover {\n    color: #fff;\n}\n.font-big[data-v-14adfcd8] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-14adfcd8] {\n    width: 80px;\n}\n.little-main-header[data-v-14adfcd8] {\n    right: 80px;\n}\n.background_mob_sec[data-v-14adfcd8] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user[data-v-14adfcd8], .kind_activity[data-v-14adfcd8] {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div[data-v-14adfcd8], .kind_activity > div[data-v-14adfcd8] {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input[data-v-14adfcd8], .kind_activity input[data-v-14adfcd8] {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i[data-v-14adfcd8], .kind_activity input:checked + i[data-v-14adfcd8] {\n    background: #28a745;\n    color: #fff;\n    border: none;\n    padding: 4px;\n}\n.kind_user i[data-v-14adfcd8], .kind_activity i[data-v-14adfcd8] {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border-radius: 50%;\n    padding: 2px;\n    font-size: 14px;\n    border: 2px solid;\n}\n.user-form[data-v-14adfcd8] {\n    padding: 0;\n}\ninput[type=\"text\"][data-v-14adfcd8], select[data-v-14adfcd8],input[type=\"password\"][data-v-14adfcd8] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\ntextarea[data-v-14adfcd8] {\n    height: 120px;\n    max-width: 100%\n}\n.user-form input[type=\"button\"][data-v-14adfcd8] {\n    width: 100%;\n}\n.user-form input[type=\"text\"][data-v-14adfcd8]:focus ,input[type=\"password\"][data-v-14adfcd8]:focus{\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile[data-v-14adfcd8] {\n    float: right;\n    padding-top: 90px;\n}\n#icon-pro[data-v-14adfcd8] {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg[data-v-14adfcd8] {\n    height: 150px;\n}\n.col-sm-6[data-v-14adfcd8] {\n    height: 120px;\n    float: right;\n}\n@media screen and (max-width: 992px) {\n.img-profile[data-v-14adfcd8] {\n        padding-top: 20px;\n}\n.right-header.desktop-header[data-v-14adfcd8] {\n        display: none;\n}\n.right-header.mobile-header[data-v-14adfcd8] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-14adfcd8], .little-main-header[data-v-14adfcd8] {\n        right: 0 !important;\n}\n#main[data-v-14adfcd8], #main.little-main[data-v-14adfcd8] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-14adfcd8] {\n        width: 100%;\n}\n.copy-right[data-v-14adfcd8] {\n        display: none;\n}\n.clouse_menu[data-v-14adfcd8] {\n        display: none;\n}\n.clouse_menu_mob[data-v-14adfcd8] {\n        display: block;\n}\n.show-header button[data-v-14adfcd8] {\n        display: block;\n}\n.img-profile .submit[data-v-14adfcd8] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-14adfcd8] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-14adfcd8] {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-14adfcd8], .contents-post[data-v-14adfcd8] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.col-sm-6[data-v-14adfcd8] {\n        float: none;\n}\n.name-header-profile[data-v-14adfcd8] {\n        display: none;\n}\n.profile-menu-header[data-v-14adfcd8] {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-14adfcd8] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-14adfcd8] {\n        font-size: 10px;\n}\n.sub-header[data-v-14adfcd8] {\n\n        bottom: -44px;\n}\n}\n", ""]);
+exports.push([module.i, "\n\n/*start main content style */\n.image-content-post[data-v-14adfcd8] {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img[data-v-14adfcd8] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-14adfcd8] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-14adfcd8] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-14adfcd8] {\n    display: block;\n}\n.content-item[data-v-14adfcd8] {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content[data-v-14adfcd8] {\n    padding: 60px 15px;\n}\n.img-profile[data-v-14adfcd8] {\n    text-align: center;\n}\n.img-profile .image-input img[data-v-14adfcd8] {\n    width: 150px;\n    height: 150px;\n    overflow: hidden;\n    border-radius: 50%;\n}\n.img-profile i[data-v-14adfcd8] {\n    font-size: 150px;\n    color: #4b4b4b;\n}\n.img-profile .submit[data-v-14adfcd8] {\n    position: relative;\n    width: 80%;\n    margin: 25px auto;\n}\n.img-profile .submit input[data-v-14adfcd8] {\n    opacity: 0;\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    left: 10px;\n    right: 0;\n}\n.img-profile .submit label[data-v-14adfcd8] {\n    background: #28a745;\n    color: #fff;\n    padding: 12px 0;\n    font-size: 13px;\n    font-weight: 400;\n    border-radius: 5px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    width: 100%;\n}\n.img-profile .submit input:hover + label[data-v-14adfcd8] {\n    background: #29d44d;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.img-profile .submit input[data-v-14adfcd8]:hover {\n    cursor: pointer\n}\n.main-profile[data-v-14adfcd8] {\n    border-right: 1px solid #eff3f6;\n    text-align: right;\n    direction: rtl;\n    overflow: hidden;\n}\n.header-lable[data-v-14adfcd8] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n.content-lable[data-v-14adfcd8] {\n    font-weight: 400;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-14adfcd8] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-14adfcd8]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-14adfcd8] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-14adfcd8]:hover {\n    color: #fff;\n}\n.font-big[data-v-14adfcd8] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-14adfcd8] {\n    width: 80px;\n}\n.little-main-header[data-v-14adfcd8] {\n    right: 80px;\n}\n.background_mob_sec[data-v-14adfcd8] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user[data-v-14adfcd8], .kind_activity[data-v-14adfcd8] {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div[data-v-14adfcd8], .kind_activity > div[data-v-14adfcd8] {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input[data-v-14adfcd8], .kind_activity input[data-v-14adfcd8] {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i[data-v-14adfcd8], .kind_activity input:checked + i[data-v-14adfcd8] {\n    background: #28a745;\n    color: #fff;\n    border: none;\n    padding: 4px;\n}\n.kind_user i[data-v-14adfcd8], .kind_activity i[data-v-14adfcd8] {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border-radius: 50%;\n    padding: 2px;\n    font-size: 14px;\n    border: 2px solid;\n}\n.user-form[data-v-14adfcd8] {\n    padding: 0;\n}\ninput[type=\"text\"][data-v-14adfcd8], select[data-v-14adfcd8],input[type=\"password\"][data-v-14adfcd8] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\ntextarea[data-v-14adfcd8] {\n    height: 120px;\n    max-width: 100%\n}\n.user-form input[type=\"button\"][data-v-14adfcd8] {\n    width: 100%;\n}\n.user-form input[type=\"text\"][data-v-14adfcd8]:focus ,input[type=\"password\"][data-v-14adfcd8]:focus{\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile[data-v-14adfcd8] {\n    float: right;\n    padding-top: 90px;\n}\n#icon-pro[data-v-14adfcd8] {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg[data-v-14adfcd8] {\n    height: 150px;\n}\n.col-sm-6[data-v-14adfcd8] {\n    height: 120px;\n    float: right;\n}\n", ""]);
 
 // exports
 
@@ -56170,107 +56240,6 @@ exports.push([module.i, "\n\n/*start main content style */\n.image-content-post[
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -66418,7 +66387,7 @@ exports.push([module.i, "\n/*start main content style */\n.image-content-post[da
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__ = __webpack_require__(258);
 //
 //
 //
@@ -66945,7 +66914,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         RegisterBasicProfileInfo: function RegisterBasicProfileInfo() {
-            __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', true);
+            __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitingEvent', true);
             this.errors = '';
             var self = this;
 
@@ -66964,16 +66933,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post('/user/profile_modification', data).then(function (response) {
                 if (response.status == 200) {
-                    __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', false);
+                    __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitingEvent', false);
                     self.popUpMsg = 'تغییرات با موفقیت اعمال شد';
-                    __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitSuccess', self.popUpMsg);
+                    __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitSuccess', self.popUpMsg);
                     $('#myModal').modal('show');
                 }
                 self.submiting = false;
             }).catch(function (err) {
                 self.errors = '';
                 self.errors = err.response.data.errors;
-                __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', false);
+                __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitingEvent', false);
             });
         },
         toLatinNumbers: function toLatinNumbers(num) {
@@ -67015,7 +66984,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.init();
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('subHeader', this.items);
 
         function show_image_preview(input) {
             if (input.files && input.files[0]) {
@@ -67574,7 +67543,7 @@ exports.push([module.i, "\n\n\n/*start style main header*/\n#main[data-v-aabafcf
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__ = __webpack_require__(258);
 //
 //
 //
@@ -68193,10 +68162,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         RegisterComplementaryProfileInfo: function RegisterComplementaryProfileInfo() {
 
-            __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', true);
+            __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitingEvent', true);
             if (this.currentUser.profile.is_company == null || this.currentUser.profile.public_phone == null) {
                 this.popUpMsg = 'ابتدا اطلاعات پایه را تکمیل کنید.';
-                __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitSuccess', this.popUpMsg);
+                __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitSuccess', this.popUpMsg);
                 $('#myModal').modal('show');
                 return;
             }
@@ -68235,9 +68204,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 if (response.status == 200) {
 
-                    __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', false);
+                    __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitingEvent', false);
                     self.popUpMsg = 'تغییرات با موفقیت انجام شد.';
-                    __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitSuccess', self.popUpMsg);
+                    __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitSuccess', self.popUpMsg);
 
                     $('#myModal').modal('show');
                 } else if (response.status == 302) {
@@ -68246,7 +68215,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (err) {
                 self.errors = '';
                 self.errors = err.response.data.errors;
-                __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', false);
+                __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitingEvent', false);
             });
         },
         handleRelatedFilesUpload: function handleRelatedFilesUpload() {
@@ -68271,7 +68240,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.init();
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('subHeader', this.items);
         $('input[type="file"]').imageuploadify();
     }
 });
@@ -68567,7 +68536,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.col-xs-1[data-v-6f7cccdc],\n.col-xs-2[data-v-6f7cccdc],\n.col-xs-3[data-v-6f7cccdc],\n.col-xs-4[data-v-6f7cccdc],\n.col-xs-5[data-v-6f7cccdc],\n.col-xs-6[data-v-6f7cccdc],\n.col-xs-7[data-v-6f7cccdc],\n.col-xs-8[data-v-6f7cccdc],\n.col-xs-9[data-v-6f7cccdc],\n.col-xs-10[data-v-6f7cccdc],\n.col-xs-11[data-v-6f7cccdc],\n.col-xs-12[data-v-6f7cccdc],\n.col-sm-1[data-v-6f7cccdc],\n.col-sm-2[data-v-6f7cccdc],\n.col-sm-3[data-v-6f7cccdc],\n.col-sm-4[data-v-6f7cccdc],\n.col-sm-5[data-v-6f7cccdc],\n.col-sm-6[data-v-6f7cccdc],\n.col-sm-7[data-v-6f7cccdc],\n.col-sm-8[data-v-6f7cccdc],\n.col-sm-9[data-v-6f7cccdc],\n.col-sm-10[data-v-6f7cccdc],\n.col-sm-11[data-v-6f7cccdc],\n.col-sm-12[data-v-6f7cccdc],\n.col-md-1[data-v-6f7cccdc],\n.col-md-2[data-v-6f7cccdc],\n.col-md-3[data-v-6f7cccdc],\n.col-md-4[data-v-6f7cccdc],\n.col-md-5[data-v-6f7cccdc],\n.col-md-6[data-v-6f7cccdc],\n.col-md-7[data-v-6f7cccdc],\n.col-md-8[data-v-6f7cccdc],\n.col-md-9[data-v-6f7cccdc],\n.col-md-10[data-v-6f7cccdc],\n.col-md-11[data-v-6f7cccdc],\n.col-md-12[data-v-6f7cccdc],\n.col-lg-1[data-v-6f7cccdc],\n.col-lg-2[data-v-6f7cccdc],\n.col-lg-3[data-v-6f7cccdc],\n.col-lg-4[data-v-6f7cccdc],\n.col-lg-5[data-v-6f7cccdc],\n.col-lg-6[data-v-6f7cccdc],\n.col-lg-7[data-v-6f7cccdc],\n.col-lg-8[data-v-6f7cccdc],\n.col-lg-9[data-v-6f7cccdc],\n.col-lg-10[data-v-6f7cccdc],\n.col-lg-11[data-v-6f7cccdc],\n.col-lg-12[data-v-6f7cccdc]{\n    float: right;\n}\n\n/*start main content style */\n.image-content-post[data-v-6f7cccdc] {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img[data-v-6f7cccdc] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-6f7cccdc] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-6f7cccdc] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-6f7cccdc] {\n    display: block;\n}\n.content-item[data-v-6f7cccdc] {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content[data-v-6f7cccdc] {\n    padding: 60px 15px;\n}\n.header-lable[data-v-6f7cccdc] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-6f7cccdc] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-6f7cccdc]:focus,.gray-bot[data-v-6f7cccdc]:focus {\n    color: #fff;\n}\n.default_btn[data-v-6f7cccdc]{\n    margin: 15px 0;\n    display: inline-block;\n    background: #eee;\n    color: #444;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot[data-v-6f7cccdc] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #85888d;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.default_btn[data-v-6f7cccdc]:hover {\n    color: #444;\n    background: #ddd;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-6f7cccdc]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot[data-v-6f7cccdc]:hover {\n    color: #fff;\n    background: #72757a;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-6f7cccdc] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-6f7cccdc]:hover {\n    color: #fff;\n}\n.font-big[data-v-6f7cccdc] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-6f7cccdc] {\n    width: 80px;\n}\n.little-main-header[data-v-6f7cccdc] {\n    right: 80px;\n}\n.background_mob_sec[data-v-6f7cccdc] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user[data-v-6f7cccdc], .kind_activity[data-v-6f7cccdc] {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div[data-v-6f7cccdc], .kind_activity > div[data-v-6f7cccdc] {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input[data-v-6f7cccdc], .kind_activity input[data-v-6f7cccdc] {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i[data-v-6f7cccdc], .kind_activity input:checked + i[data-v-6f7cccdc] {\n    color: #28a745;\n    border: none;\n    padding: 4px;\n}\n.kind_user i[data-v-6f7cccdc], .kind_activity i[data-v-6f7cccdc] {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border-radius: 50%;\n    padding: 2px;\n    font-size: 14px;\n    border: 2px solid;\n}\n.user-form[data-v-6f7cccdc] {\n    padding: 0;\n}\n.alert-message[data-v-6f7cccdc]{\n    padding: 20px;\n\n    text-align: right;\n}\n.user-form input[type=\"text\"][data-v-6f7cccdc] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.user-form input[type=\"button\"][data-v-6f7cccdc] {\n    width: 100%;\n}\n.user-form input[type=\"text\"][data-v-6f7cccdc]:focus {\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile[data-v-6f7cccdc] {\n    float: right;\n}\n#icon-pro[data-v-6f7cccdc] {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg[data-v-6f7cccdc] {\n    height: 150px;\n}\n.main-content-nav[data-v-6f7cccdc] {\n    margin: 20px auto;\n\n    width: 80%;\n\n    float: none;\n}\n.main-content-nav ul[data-v-6f7cccdc] {\n    text-align: center;\n    margin-right: -25px;\n}\n.main-content-nav li[data-v-6f7cccdc] {\n    padding: 14px 50px;\n    position: relative;\n    background: #fbfbfb;\n    font-size: 18px;\n}\n.main-content-nav li a[data-v-6f7cccdc]{\n    color: #999;\n}\n.main-content-nav li.active a[data-v-6f7cccdc]{\n    color: #333;\n}\n.main-content-nav li[data-v-6f7cccdc]:after {\n    content: \"\";\n    position: absolute;\n    right: 0;\n    bottom: 0;\n    width: 0;\n    height: 0;\n    border-right: 20px solid #fff;\n    border-top: 26px solid transparent;\n    border-bottom: 20px solid transparent;\n}\n.main-content-nav li[data-v-6f7cccdc]:before {\n    content: \"\";\n    position: absolute;\n    left: -20px;\n    bottom: 0;\n    width: 0;\n    height: 0;\n    border-right: 20px solid #fbfbfb;\n    border-top: 26px solid transparent;\n    border-bottom: 20px solid transparent;\n    z-index: 1;\n}\n.main-content-nav li.active[data-v-6f7cccdc] {\n    background: #f7f7f7;\n    color: #333;\n}\n.main-content-nav li.active[data-v-6f7cccdc]:before {\n    border-right-color: #f7f7f7;\n}\n#main .contents[data-v-6f7cccdc]{\n    text-align: center;\n\n    background: #f7f7f7;\n\n    width: 80%;\n\n    margin: 0 auto;\n\n    float: none;\n\n    overflow: hidden;\n\n    border-radius: 3px;\n\n    line-height: 1.618;\n\n    direction: rtl;\n}\n#main .contents p[data-v-6f7cccdc]{\n    text-align: right;\n}\n#main .contents h2[data-v-6f7cccdc]{\n    margin: 20px auto;\n}\n#main .continue_but[data-v-6f7cccdc]{\n    float: right;\n}\n#main .main_buttons[data-v-6f7cccdc]{\n    float: right;\n}\n#step1 .main_buttons[data-v-6f7cccdc]{\n    text-align: right;\n}\n/*part 2*/\n.main-content-texts[data-v-6f7cccdc]{\n    background: #fff;\n\n    border-radius: 3px;\n}\n.header-contents[data-v-6f7cccdc]{\n    background: #fff;\n    margin: 15px auto;\n    border-radius: 3px;\n    padding: 10px;\n    text-align: left;\n}\n.header-contents .title-contents[data-v-6f7cccdc]{\n    text-align: right;\n}\n.contents h2[data-v-6f7cccdc]{\n    font-size: 22px;\n}\n.description-text[data-v-6f7cccdc]{\n    font-size: 12px;\n    padding: 5px 0;\n    border-top:1px solid #ddd;\n}\n.services td[data-v-6f7cccdc] {\n    color: #00d613;\n}\n.pre-pay td[data-v-6f7cccdc] {\n    color: #e41c38;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header[data-v-6f7cccdc] {\n        display: none;\n}\n.right-header.mobile-header[data-v-6f7cccdc] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-6f7cccdc], .little-main-header[data-v-6f7cccdc] {\n        right: 0 !important;\n}\n#main[data-v-6f7cccdc], #main.little-main[data-v-6f7cccdc] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-6f7cccdc] {\n        width: 100%;\n}\n.copy-right[data-v-6f7cccdc] {\n        display: none;\n}\n.clouse_menu[data-v-6f7cccdc] {\n        display: none;\n}\n.clouse_menu_mob[data-v-6f7cccdc] {\n        display: block;\n}\n.show-header button[data-v-6f7cccdc] {\n        display: block;\n}\n.kind_user > div[data-v-6f7cccdc], .kind_activity > div[data-v-6f7cccdc] {\n        float: none;\n}\n.img-profile .submit[data-v-6f7cccdc] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-6f7cccdc] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-6f7cccdc] {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-6f7cccdc], .contents-post[data-v-6f7cccdc] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.name-header-profile[data-v-6f7cccdc] {\n        display: none;\n}\n.profile-menu-header[data-v-6f7cccdc] {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-6f7cccdc] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-6f7cccdc] {\n        font-size: 10px;\n}\n.sub-header[data-v-6f7cccdc] {\n\n        bottom: -44px;\n}\n}\n", ""]);
+exports.push([module.i, "\n.col-xs-1[data-v-6f7cccdc],\n.col-xs-2[data-v-6f7cccdc],\n.col-xs-3[data-v-6f7cccdc],\n.col-xs-4[data-v-6f7cccdc],\n.col-xs-5[data-v-6f7cccdc],\n.col-xs-6[data-v-6f7cccdc],\n.col-xs-7[data-v-6f7cccdc],\n.col-xs-8[data-v-6f7cccdc],\n.col-xs-9[data-v-6f7cccdc],\n.col-xs-10[data-v-6f7cccdc],\n.col-xs-11[data-v-6f7cccdc],\n.col-xs-12[data-v-6f7cccdc],\n.col-sm-1[data-v-6f7cccdc],\n.col-sm-2[data-v-6f7cccdc],\n.col-sm-3[data-v-6f7cccdc],\n.col-sm-4[data-v-6f7cccdc],\n.col-sm-5[data-v-6f7cccdc],\n.col-sm-6[data-v-6f7cccdc],\n.col-sm-7[data-v-6f7cccdc],\n.col-sm-8[data-v-6f7cccdc],\n.col-sm-9[data-v-6f7cccdc],\n.col-sm-10[data-v-6f7cccdc],\n.col-sm-11[data-v-6f7cccdc],\n.col-sm-12[data-v-6f7cccdc],\n.col-md-1[data-v-6f7cccdc],\n.col-md-2[data-v-6f7cccdc],\n.col-md-3[data-v-6f7cccdc],\n.col-md-4[data-v-6f7cccdc],\n.col-md-5[data-v-6f7cccdc],\n.col-md-6[data-v-6f7cccdc],\n.col-md-7[data-v-6f7cccdc],\n.col-md-8[data-v-6f7cccdc],\n.col-md-9[data-v-6f7cccdc],\n.col-md-10[data-v-6f7cccdc],\n.col-md-11[data-v-6f7cccdc],\n.col-md-12[data-v-6f7cccdc],\n.col-lg-1[data-v-6f7cccdc],\n.col-lg-2[data-v-6f7cccdc],\n.col-lg-3[data-v-6f7cccdc],\n.col-lg-4[data-v-6f7cccdc],\n.col-lg-5[data-v-6f7cccdc],\n.col-lg-6[data-v-6f7cccdc],\n.col-lg-7[data-v-6f7cccdc],\n.col-lg-8[data-v-6f7cccdc],\n.col-lg-9[data-v-6f7cccdc],\n.col-lg-10[data-v-6f7cccdc],\n.col-lg-11[data-v-6f7cccdc],\n.col-lg-12[data-v-6f7cccdc]{\n    float: right;\n}\n\n/*start main content style */\n.image-content-post[data-v-6f7cccdc] {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img[data-v-6f7cccdc] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-6f7cccdc] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-6f7cccdc] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-6f7cccdc] {\n    display: block;\n}\n.content-item[data-v-6f7cccdc] {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content[data-v-6f7cccdc] {\n    padding: 60px 15px;\n}\n.header-lable[data-v-6f7cccdc] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-6f7cccdc] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-6f7cccdc]:focus,.gray-bot[data-v-6f7cccdc]:focus {\n    color: #fff;\n}\n.default_btn[data-v-6f7cccdc]{\n    margin: 15px 0;\n    display: inline-block;\n    background: #eee;\n    color: #444;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot[data-v-6f7cccdc] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #85888d;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.default_btn[data-v-6f7cccdc]:hover {\n    color: #444;\n    background: #ddd;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    cursor: pointer;\n}\n.green-bot[data-v-6f7cccdc]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.gray-bot[data-v-6f7cccdc]:hover {\n    color: #fff;\n    background: #72757a;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-6f7cccdc] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-6f7cccdc]:hover {\n    color: #fff;\n}\n.font-big[data-v-6f7cccdc] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-6f7cccdc] {\n    width: 80px;\n}\n.little-main-header[data-v-6f7cccdc] {\n    right: 80px;\n}\n.background_mob_sec[data-v-6f7cccdc] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.kind_user[data-v-6f7cccdc], .kind_activity[data-v-6f7cccdc] {\n    margin: 7px 0;\n    border-bottom: 1px solid #eff3f6;\n    padding-bottom: 10px;\n}\n.kind_user > div[data-v-6f7cccdc], .kind_activity > div[data-v-6f7cccdc] {\n    float: right;\n    overflow: hidden;\n    padding: 10px;\n    font-size: 15px;\n}\n.kind_user input[data-v-6f7cccdc], .kind_activity input[data-v-6f7cccdc] {\n    cursor: pointer;\n    width: 23px;\n    height: 23px;\n    float: right;\n    position: absolute;\n    top: 2px;\n    right: 65px;\n    opacity: 0;\n}\n.kind_user input:checked + i[data-v-6f7cccdc], .kind_activity input:checked + i[data-v-6f7cccdc] {\n    color: #28a745;\n    border: none;\n    padding: 4px;\n}\n.kind_user i[data-v-6f7cccdc], .kind_activity i[data-v-6f7cccdc] {\n    background: none;\n    width: 23px;\n    height: 23px;\n    display: block;\n    position: absolute;\n    top: 4px;\n    right: 65px;\n    z-index: -1;\n    color: #808c9c;\n    border-radius: 50%;\n    padding: 2px;\n    font-size: 14px;\n    border: 2px solid;\n}\n.user-form[data-v-6f7cccdc] {\n    padding: 0;\n}\n.alert-message[data-v-6f7cccdc]{\n    padding: 20px;\n\n    text-align: right;\n}\n.user-form input[type=\"text\"][data-v-6f7cccdc] {\n    width: 100%;\n    border: 1px solid #e9e9e9;\n    padding: 15px 20px;\n    margin: 7px auto;\n    border-radius: 4px;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.user-form input[type=\"button\"][data-v-6f7cccdc] {\n    width: 100%;\n}\n.user-form input[type=\"text\"][data-v-6f7cccdc]:focus {\n    border: 1px solid #28a745;\n    -webkit-transition: 500ms;\n    transition: 500ms;\n}\n.img-profile[data-v-6f7cccdc] {\n    float: right;\n}\n#icon-pro[data-v-6f7cccdc] {\n    width: 150px;\n    height: 150px;\n    display: inline-block;\n}\n#icon-pro svg[data-v-6f7cccdc] {\n    height: 150px;\n}\n.main-content-nav[data-v-6f7cccdc] {\n    margin: 20px auto;\n\n    width: 80%;\n\n    float: none;\n}\n.main-content-nav ul[data-v-6f7cccdc] {\n    text-align: center;\n    margin-right: -25px;\n}\n.main-content-nav li[data-v-6f7cccdc] {\n    padding: 14px 50px;\n    position: relative;\n    background: #fbfbfb;\n    font-size: 18px;\n}\n.main-content-nav li a[data-v-6f7cccdc]{\n    color: #999;\n}\n.main-content-nav li.active a[data-v-6f7cccdc]{\n    color: #333;\n}\n.main-content-nav li[data-v-6f7cccdc]:after {\n    content: \"\";\n    position: absolute;\n    right: 0;\n    bottom: 0;\n    width: 0;\n    height: 0;\n    border-right: 20px solid #fff;\n    border-top: 26px solid transparent;\n    border-bottom: 20px solid transparent;\n}\n.main-content-nav li[data-v-6f7cccdc]:before {\n    content: \"\";\n    position: absolute;\n    left: -20px;\n    bottom: 0;\n    width: 0;\n    height: 0;\n    border-right: 20px solid #fbfbfb;\n    border-top: 26px solid transparent;\n    border-bottom: 20px solid transparent;\n    z-index: 1;\n}\n.main-content-nav li.active[data-v-6f7cccdc] {\n    background: #f7f7f7;\n    color: #333;\n}\n.main-content-nav li.active[data-v-6f7cccdc]:before {\n    border-right-color: #f7f7f7;\n}\n#main .contents[data-v-6f7cccdc]{\n    text-align: center;\n\n    background: #f7f7f7;\n\n    width: 80%;\n\n    margin: 0 auto;\n\n    float: none;\n\n    overflow: hidden;\n\n    border-radius: 3px;\n\n    line-height: 1.618;\n\n    direction: rtl;\n}\n#main .contents p[data-v-6f7cccdc]{\n    text-align: right;\n}\n#main .contents h2[data-v-6f7cccdc]{\n    margin: 20px auto;\n}\n#main .continue_but[data-v-6f7cccdc]{\n    float: right;\n}\n#main .main_buttons[data-v-6f7cccdc]{\n    float: right;\n}\n#step1 .main_buttons[data-v-6f7cccdc]{\n    text-align: right;\n}\n/*part 2*/\n.main-content-texts[data-v-6f7cccdc]{\n    background: #fff;\n\n    border-radius: 3px;\n}\n.header-contents[data-v-6f7cccdc]{\n    background: #fff;\n    margin: 15px auto;\n    border-radius: 3px;\n    padding: 10px;\n    text-align: left;\n}\n.header-contents .title-contents[data-v-6f7cccdc]{\n    text-align: right;\n}\n.contents h2[data-v-6f7cccdc]{\n    font-size: 22px;\n}\n.description-text[data-v-6f7cccdc]{\n    font-size: 12px;\n    padding: 5px 0;\n    border-top:1px solid #ddd;\n}\n.services td[data-v-6f7cccdc] {\n    color: #00d613;\n}\n.pre-pay td[data-v-6f7cccdc] {\n    color: #e41c38;\n}\n@media screen and (max-width: 992px) {\n.right-header.desktop-header[data-v-6f7cccdc] {\n        display: none;\n}\n.right-header.mobile-header[data-v-6f7cccdc] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-6f7cccdc], .little-main-header[data-v-6f7cccdc] {\n        right: 0 !important;\n}\n#main[data-v-6f7cccdc], #main.little-main[data-v-6f7cccdc] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-6f7cccdc] {\n        width: 100%;\n}\n.copy-right[data-v-6f7cccdc] {\n        display: none;\n}\n.clouse_menu[data-v-6f7cccdc] {\n        display: none;\n}\n.clouse_menu_mob[data-v-6f7cccdc] {\n        display: block;\n}\n.show-header button[data-v-6f7cccdc] {\n        display: block;\n}\n.kind_user > div[data-v-6f7cccdc], .kind_activity > div[data-v-6f7cccdc] {\n        float: none;\n}\n.img-profile .submit[data-v-6f7cccdc] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-6f7cccdc] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-6f7cccdc] {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-6f7cccdc], .contents-post[data-v-6f7cccdc] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\n.name-header-profile[data-v-6f7cccdc] {\n        display: none;\n}\n.profile-menu-header[data-v-6f7cccdc] {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-6f7cccdc] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-6f7cccdc] {\n        font-size: 10px;\n}\n.sub-header[data-v-6f7cccdc] {\n\n        bottom: -44px;\n}\n}\n", ""]);
 
 // exports
 
@@ -68578,7 +68547,8 @@ exports.push([module.i, "\n.col-xs-1[data-v-6f7cccdc],\n.col-xs-2[data-v-6f7cccd
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__ = __webpack_require__(258);
+//
 //
 //
 //
@@ -69261,7 +69231,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 axios.post('/confirm_initial_contract').then(function (response) {
                     if (response.status == 200) {
                         self.popUpMsg = 'تایید قرار داد با موفقیت انجام شد.';
-                        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitSuccess', self.popUpMsg);
+                        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitSuccess', self.popUpMsg);
 
                         $('#myModal').modal('show');
                     } else if (response.status == 500) {
@@ -69270,7 +69240,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             } else {
                 this.popUpMsg = 'شما قبلا این قرار داد را پذیرفته اید.';
-                __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitSuccess', self.popUpMsg);
+                __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitSuccess', self.popUpMsg);
                 $('#myModal').modal('show');
             }
         },
@@ -69289,7 +69259,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.init();
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('subHeader', this.items);
     }
 });
 
@@ -69317,6 +69287,7 @@ var render = function() {
                     attrs: { href: "#" },
                     on: {
                       click: function($event) {
+                        $event.preventDefault()
                         _vm.goToNextPage()
                       }
                     }
@@ -69331,6 +69302,7 @@ var render = function() {
                     attrs: { href: "#" },
                     on: {
                       click: function($event) {
+                        $event.preventDefault()
                         _vm.goToPrePage()
                       }
                     }
@@ -70220,7 +70192,7 @@ exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-pos
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__ = __webpack_require__(258);
 //
 //
 //
@@ -70424,7 +70396,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('subHeader', this.items);
         this.init();
     }
 });
@@ -70644,7 +70616,7 @@ exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-pos
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__ = __webpack_require__(258);
 //
 //
 //
@@ -70852,7 +70824,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.init();
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('subHeader', this.items);
     }
 });
 
@@ -71058,7 +71030,7 @@ exports.push([module.i, "\n.col-xs-12,\n.col-sm-4,\n.col-sm-8,\n.col-md-3,\n.col
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__ = __webpack_require__(258);
 //
 //
 //
@@ -71982,7 +71954,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('subHeader', this.items);
         this.init();
     }
 });
@@ -72611,7 +72583,7 @@ var render = function() {
                               _vm._v(" "),
                               _c("span", [
                                 _vm._v(
-                                  "14-2 متعهد در صورتی از ایفای تعهدات در اثر فورس ماژور معاف می گردد که حداکثر تا  1 روز پس از اطلاع از چنین وضعیتی مراتب را ً به اطلاع طرف دیگر رسانیده باشد. \n                       "
+                                  "14-2 متعهد در صورتی از ایفای تعهدات در اثر فورس ماژور معاف می گردد که حداکثر تا  1 روز پس از اطلاع از چنین وضعیتی مراتب را ً به اطلاع طرف دیگر رسانیده باشد.\n                       "
                                 )
                               ]),
                               _c("br"),
@@ -73486,7 +73458,7 @@ exports.push([module.i, "\n.main-content[data-v-3897649e] {\n    padding: 60px 1
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__ = __webpack_require__(258);
 //
 //
 //
@@ -73579,7 +73551,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }]
         };
     }, mounted: function mounted() {
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('subHeader', this.items);
     }
 });
 
@@ -75461,6 +75433,7 @@ if (hadRuntime) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return eventBus; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(254);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue__ = __webpack_require__(7);
@@ -75533,6 +75506,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 
+__webpack_require__(21);
+__webpack_require__(44);
+__webpack_require__(45);
+window.Vue = __webpack_require__(7);
 // Seller Components
 
 
@@ -75569,7 +75546,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]);
 
+var eventBus = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a();
+
 var myRouter = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
+    base: Object({"NODE_ENV":"development"}).BASE_URL,
     routes: [{
         path: '*',
         name: 'pageNotFound',
@@ -75908,7 +75888,7 @@ exports.push([module.i, "\n#main[data-v-e6026694] {\n    margin-right: 250px;\n 
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__ = __webpack_require__(258);
 //
 //
 //
@@ -76265,7 +76245,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.init();
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('subHeader', this.items);
     }
 });
 
@@ -76505,7 +76485,7 @@ exports.push([module.i, "\n.col-sm-6[data-v-d93a989a] {\n    height: 120px;\n   
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__ = __webpack_require__(258);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -76887,7 +76867,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             popUpMsg: '',
             profileConfirmed: false,
             disableSubmit: false,
-            submiting: false
+            submiting: false,
+            items: [{
+                message: ' ثبت درخواست جدید',
+                url: 'registerRequest'
+            }]
         };
     },
     methods: {
@@ -76919,7 +76903,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
             if (this.buyAd.rules != true) {
                 this.popUpMsg = 'ابتدا تیک با قوانین موافق هستم را بزنید.';
-                __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitSuccess', self.popUpMsg);
+                __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitSuccess', self.popUpMsg);
                 $('#myModal').modal('show');
             } else {
                 this.submiting = true;
@@ -76934,8 +76918,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                         self.popUpMsg = 'درخواست شما با موفقیت ثبت شد';
                         $('#myModal').modal('show');
-                        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitSuccess', self.popUpMsg);
-                        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('submitingEvent', false);
+                        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitSuccess', self.popUpMsg);
+                        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitingEvent', false);
 
                         setTimeout(function () {
                             location.reload(true);
@@ -77006,8 +76990,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     mounted: function mounted() {
         $('input[type="file"]').imageuploadify();
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
         this.init();
+        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('subHeader', this.items);
     }
 });
 
@@ -77554,7 +77538,7 @@ exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-pos
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__ = __webpack_require__(258);
 //
 //
 //
@@ -77758,7 +77742,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.init();
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('subHeader', this.items);
     }
 });
 
@@ -77976,6 +77960,7 @@ exports.push([module.i, "\n.main-content[data-v-14d91cc0] {\n    padding: 60px 1
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__ = __webpack_require__(258);
 //
 //
 //
@@ -78522,6 +78507,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
@@ -78530,7 +78516,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             transactionId: '',
             popUpMsg: '',
             factorInfo: '',
-            submiting: false
+            submiting: false,
+            items: [{
+                message: ' جزئیات فاکتور',
+                url: 'buyerFactorDetail'
+            }]
         };
     },
     methods: {
@@ -78548,6 +78538,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.init();
+        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('subHeader', this.items);
     }
 });
 
@@ -78777,7 +78768,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__ = __webpack_require__(258);
 //
 //
 //
@@ -79583,7 +79574,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             transactionInfo: '',
             items: [{
                 message: 'لیست تراکنش ها',
-                url: 'registerProduct'
+                url: 'transactionReport'
             }]
         };
     },
@@ -79614,7 +79605,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.init();
-        __WEBPACK_IMPORTED_MODULE_0__app__["eventBus"].$emit('subHeader', this.items);
+        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('subHeader', this.items);
     }
 });
 
@@ -80218,7 +80209,7 @@ var render = function() {
               ? _c("p", { attrs: { id: "step1S10" } }, [
                   _c("span", [
                     _vm._v(
-                      "14-2 متعهد در صورتی از ایفای تعهدات در اثر فورس ماژور معاف می گردد که حداکثر تا  1روز پس از اطلاع از چنین وضعیتی مراتب را به اطلاع طرف دیگر رسانیده باشد. \n                    "
+                      "14-2 متعهد در صورتی از ایفای تعهدات در اثر فورس ماژور معاف می گردد که حداکثر تا  1روز پس از اطلاع از چنین وضعیتی مراتب را به اطلاع طرف دیگر رسانیده باشد.\n                    "
                     )
                   ]),
                   _c("br"),
@@ -80520,6 +80511,258 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-7b81c90c", module.exports)
   }
 }
+
+/***/ }),
+/* 291 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(292)
+  __webpack_require__(294)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(296)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-9795ce4e"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/AppSeller.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-9795ce4e", Component.options)
+  } else {
+    hotAPI.reload("data-v-9795ce4e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 292 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(293);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("0176311d", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-9795ce4e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AppSeller.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-9795ce4e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AppSeller.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 293 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n* {\n  -webkit-tap-highlight-color: rgba(66, 185, 131, 0.1);\n  margin: 0;\n  padding: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\na {\n  text-decoration: none;\n  color: inherit;\n}\nbody {\n  font-family: Helvetica, Arial, sans-serif;\n  font-size: 1.5vw;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n  background-color: #ebf4ec;\n  overflow-x: hidden;\n  width: 100%;\n  position: relative;\n}\n@media (min-width: 1000px) {\nbody {\n      font-size: 15px;\n}\n}\n@media (max-width: 780px) {\nbody {\n      font-size: 2vw;\n}\n}\n@media (max-width: 580px) {\nbody {\n      font-size: 3vw;\n}\n}\n#app {\n  padding-bottom: 10vmin;\n}\n.u-hover:hover {\n  color: #42b983 !important;\n  -webkit-transition: color 200ms ease !important;\n  transition: color 200ms ease !important;\n}\n.title {\n  line-height: 1;\n  font-size: 6vmin;\n  padding: 6vmin 0;\n  position: relative;\n  left: -0.1em;\n}\n.subtitle {\n  white-space: pre;\n  word-spacing: normal;\n  font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;\n  line-height: 1.5;\n  font-size: 110%;\n  padding: 0.25em 0.5em;\n  background-color: rgba(66, 185, 131, 0.2);\n  color: #2e815b;\n  border-radius: 5px;\n  display: inline-block;\n}\n.title--cover {\n  line-height: 1;\n  padding: 6vmin 0;\n  text-align: center;\n  background-color: #42b983;\n  color: #ffffff;\n  left: 0;\n}\n.nestedRoutes {\n  background-color: rgba(66, 185, 131, 0.2);\n  border-radius: 15px;\n  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.035);\n          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.035);\n  margin-bottom: 6vmin;\n  padding: 4vmin;\n}\n.nestedRoutes_title {\n  margin-bottom: 4vmin;\n  line-height: 1;\n  font-size: 200%;\n}\n.nestedRoutes_view {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n}\n.nestedRoutes_links {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n  margin-bottom: 4vmin;\n}\n.nestedRoutes_links a {\n  display: block;\n  text-transform: uppercase;\n  padding: 1em 2em;\n  margin-right: 1em;\n  background-color: #ffffff;\n  border-radius: 5px;\n  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.035);\n          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.035);\n  font-weight: bold;\n}\n.nestedRoutes_links a.router-link-exact-active {\n    background-color: #42b983;\n    color: #ffffff;\n    pointer-events: none;\n}\n.modal {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(13, 19, 24, 0.85);\n  z-index: 99999;\n  padding: 3vmax;\n  cursor: -webkit-zoom-out;\n  cursor: zoom-out;\n}\n.modal_conatiner {\n  max-width: 600px;\n  margin: 0 auto;\n  background-color: #ffffff;\n  border-radius: 15px;\n  cursor: auto;\n  overflow: hidden;\n}\n@media (min-width: 1000px) {\n.grid {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: flex-start;\n    -webkit-box-align: start;\n        -ms-flex-align: start;\n            align-items: flex-start;\n}\n.grid > div {\n      min-width: 48.5%;\n      margin-right: 3%;\n}\n.grid > div:last-child {\n        margin-right: 0;\n}\n}\n@media (max-width: 1000px) {\n.grid > div {\n    margin-bottom: 10%;\n}\n.grid > div:last-child {\n      margin-bottom: 0;\n}\n}\n.tweets {\n  position: relative;\n}\n.tweet {\n  padding: 6vmin 4vmin;\n  background-color: #ffffff;\n  border-radius: 15px;\n  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.035);\n          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.035);\n  margin-top: 3vmin;\n}\n.tweet:first-child {\n    margin-top: 0;\n}\n.tweet > a {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: flex-start;\n    -webkit-box-align: start;\n        -ms-flex-align: start;\n            align-items: flex-start;\n}\n.tweet--user > a {\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.tweet_avatar {\n  position: relative;\n  min-width: 5vw;\n  min-height: 5vw;\n  border-radius: 5%;\n  margin-right: 2em;\n}\n.tweet_avatar--circle {\n    border-radius: 50%;\n}\n.tweet_content {\n  position: relative;\n}\n.tweet_name {\n  font-weight: 900;\n  margin-bottom: 1rem;\n  font-size: 125%;\n  display: block;\n  line-height: 1;\n}\n.tweet_media {\n  width: 100%;\n  height: 20vmin;\n  min-height: 200px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  font-size: 150%;\n  text-transform: uppercase;\n  letter-spacing: 0.1em;\n  color: #ffffff;\n  border-radius: 5px;\n  margin-bottom: 1rem;\n}\n.tweet_media[data-color='blue'] {\n    background-color: blue;\n}\n.tweet_media[data-color='red'] {\n    background-color: red;\n}\n.tweet_media[data-color='pink'] {\n    background-color: pink;\n}\n.tweet_media[data-color='yellow'] {\n    background-color: yellow;\n}\n.tweet_text {\n  font-weight: 400;\n  letter-spacing: 0.02em;\n  line-height: 1.5;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 294 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(295);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("53341f97", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-9795ce4e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./AppSeller.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-9795ce4e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./AppSeller.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 295 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.header[data-v-9795ce4e] {\n  position: relative;\n  z-index: 99;\n  padding: 3vmax;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.header_logo[data-v-9795ce4e] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  margin-right: 2em;\n}\n.header_logo img[data-v-9795ce4e] {\n    position: relative;\n    top: 0.15em;\n    width: 3em;\n    height: 3em;\n    -webkit-transform: translateZ(0);\n            transform: translateZ(0);\n}\n.header_logo[data-v-9795ce4e]:hover {\n    opacity: 0.3;\n    -webkit-transition: opacity 200ms ease !important;\n    transition: opacity 200ms ease !important;\n}\n.header_links a[data-v-9795ce4e],\n.header_nav a[data-v-9795ce4e] {\n  margin-right: 0.7em;\n  text-decoration: none;\n  color: #2c3e50;\n  font-weight: bold;\n}\n.header_links a.router-link-exact-active[data-v-9795ce4e],\n  .header_nav a.router-link-exact-active[data-v-9795ce4e] {\n    color: #42b983;\n}\n.header_links a[data-v-9795ce4e]:after,\n  .header_nav a[data-v-9795ce4e]:after {\n    content: '|';\n    padding-left: 0.7em;\n    color: rgba(44, 62, 80, 0.2) !important;\n}\n.header_links a[data-v-9795ce4e]:last-child:after,\n  .header_nav a[data-v-9795ce4e]:last-child:after {\n    display: none;\n}\n.header_links[data-v-9795ce4e] {\n  margin-left: auto;\n}\n.app_view_default[data-v-9795ce4e] {\n  padding: 0 3vmax;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 296 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "app" } },
+    [
+      _c("div", { staticClass: "header" }, [
+        _c(
+          "div",
+          { staticClass: "header_nav" },
+          [
+            _c("router-link", { staticClass: "u-hover", attrs: { to: "/" } }, [
+              _vm._v("Home")
+            ]),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              { staticClass: "u-hover", attrs: { to: "/directAccess" } },
+              [_vm._v("DirectAccess")]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("router-view", {
+        staticClass: "app_view_default",
+        attrs: { name: "seller" }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-9795ce4e", module.exports)
+  }
+}
+
+/***/ }),
+/* 297 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(298)
+/* template */
+var __vue_template__ = null
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/AppBuyer.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3f2be449", Component.options)
+  } else {
+    hotAPI.reload("data-v-3f2be449", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 298 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dashboard_buyer_header_header_vue__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_dashboard_buyer_header_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_dashboard_buyer_header_header_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router_dashboard_router__ = __webpack_require__(258);
+//
+
+
+
+
+var app2 = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
+    el: '#appBuyer',
+    components: {
+        headerDashBuyer: __WEBPACK_IMPORTED_MODULE_1__components_dashboard_buyer_header_header_vue___default.a
+    },
+    router: __WEBPACK_IMPORTED_MODULE_2__router_dashboard_router__["a" /* default */]
+});
 
 /***/ })
 /******/ ]);

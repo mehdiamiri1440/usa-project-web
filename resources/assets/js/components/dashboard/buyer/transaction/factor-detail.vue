@@ -544,6 +544,7 @@
     </section>
 </template>
 <script>
+    import {eventBus} from "../../../../router/dashboard_router";
     export default {
         data:function() {
            return{
@@ -553,6 +554,12 @@
                popUpMsg:'',
                factorInfo:'',
                submiting:false,
+               items: [
+                   {
+                       message: ' جزئیات فاکتور',
+                       url: 'buyerFactorDetail'
+                   }
+               ]
            }
         },
         methods:{
@@ -571,6 +578,7 @@
         },
         mounted:function(){
             this.init();
+            eventBus.$emit('subHeader', this.items);
         }
     }
 </script>

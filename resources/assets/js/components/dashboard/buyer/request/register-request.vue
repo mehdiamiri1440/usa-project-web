@@ -349,7 +349,7 @@
     </section>
 </template>
 <script>
-    import {eventBus} from '../../../../app';
+    import {eventBus} from "../../../../router/dashboard_router";
   export default {
       data:function(){
           return {
@@ -389,6 +389,12 @@
               profileConfirmed:false,
               disableSubmit:false,
               submiting:false,
+              items: [
+                  {
+                      message: ' ثبت درخواست جدید',
+                      url: 'registerRequest'
+                  }
+              ]
           };
       },
       methods:{
@@ -505,8 +511,8 @@
       },
       mounted(){
           $('input[type="file"]').imageuploadify();
-          eventBus.$emit('subHeader', this.items);
           this.init();
+          eventBus.$emit('subHeader', this.items);
       },
   }
 </script>

@@ -49,9 +49,10 @@
 
 </head>
 <body>
+{{--
 <div id="app">
 
-    <header-dash-buyer
+  <header-dash-buyer
             logo="{{asset('assets/img/logo-incobac.png')}}"
             storage="{{asset('storage/')}}"
             defultimg="{{asset('assets/img/user-defult.png')}}"
@@ -67,25 +68,57 @@
     ></header-dash-buyer>
     <main id="main">
     @section('main_content')
-          <router-view
+ --}}{{--         <router-view
                     name="buyer"
                     loading_img="{{asset('assets/img/gif/loading.gif')}}"
                     trans="{{url('dashboard/transaction-detail')}}"
                     transRep="{{url('dashboard/transaction-report')}}"
                     str="{{asset('storage/')}}"
                     defimgitem="{{asset('/assets/img/product.jpg')}}"
-            ></router-view>
+            ></router-view>--}}{{--
+
+
+            <div class="header">
+                <div class="header_nav">
+                    <router-link to="/" class="u-hover">Home</router-link>
+                    <router-link to="/directAccess" class="u-hover">DirectAccess</router-link>
+                </div>
+            </div>
     @show
         </main>
+</div>--}}
+<div id="appBuyer">
+    <header-dash-buyer
+            logo="{{asset('assets/img/logo-incobac.png')}}"
+            storage="{{asset('storage/')}}"
+            defultimg="{{asset('assets/img/user-defult.png')}}"
+            transactroute="{{route('my-terminated-transaction-list')}}"
+            mytrans="{{route('my-transaction-list')}}"
+            selregpro="{{route('seller-register-product')}}"
+            byadreq="{{route('seller-buyAd-requests')}}"
+            profilebasic="{{route('profile_basic')}}"
+            logout="{{route('logout')}}"
+            routehome="{{url('/')}}"
+            loading="{{asset('assets/img/gif/prload.gif')}}"
+            guide="{{url('dashboard/guide')}}"
+    ></header-dash-buyer>
+    <main id="main">
+        <router-view
+                name="buyer"
+                loading_img="{{asset('assets/img/gif/loading.gif')}}"
+                trans="{{url('dashboard/transaction-detail')}}"
+                transRep="{{url('dashboard/transaction-report')}}"
+                str="{{asset('storage/')}}"
+                defimgitem="{{asset('/assets/img/product.jpg')}}"
+        ></router-view>
+    </main>
 </div>
     @yield('body_script_tags')
 
-{{--<script src="{{asset('assets/js/custom.js')}}"></script>--}}
-<script src="{{asset('js/app.js')}}"></script>
 
     <script src="{{asset('assets/js/custom.js')}}"></script>
     <script src="{{asset('js/app.js')}}"></script>
-    <script src="{{asset('assets/js/idleTimer.js')}}"></script> 
+    <script src="{{asset('assets/js/idleTimer.js')}}"></script>
     <script>
         $(document).ready(function(){
             $(document).idleTimer(7200000);
@@ -94,7 +127,7 @@
         $(document).on("idle.idleTimer", function(){
          // function you want to fire when the user goes idle
             window.location.href = '/login'
-        });    
+        });
     </script>
 
 </body>

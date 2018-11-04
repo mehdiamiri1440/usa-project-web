@@ -34,8 +34,7 @@
     }
 
     .right-menu-header {
-
-        padding: 16px;
+        padding: 6px 16px;
     }
 
     .right-menu-header, .content-header {
@@ -112,6 +111,18 @@
         position: relative;
         top: 3px;
     }
+    .green-bot{
+        color: #fafafa !important;
+    }
+    .green-bot:hover{
+        color: #fff !important;
+        background: #00d614;
+    }
+    i.fa-home{
+        position: relative;
+        top: 5px;
+    }
+
 </style>
 
 <template>
@@ -132,7 +143,7 @@
                         <img :src="def">
                     </div>
                     <i class="fa fa-angle-down" aria-hidden="true"></i>
-                    {{username}}
+                    <span class="user_name">{{username}}</span>
                 </a>
                 <div class="profile-list">
                     <ul class="list-unstyled">
@@ -152,7 +163,7 @@
                         </div>
                     </li>-->
                     <li>
-                        <a href="/product-list" style="font-size: 17px">لیست محصولات </a>
+                        <a class="green-bot" href="/product-list" style="font-size: 17px"> <span class="full">لیست محصولات</span> <span class="min"><i class="fa fa-bars" aria-hidden="true"></i></span> </a>
                     </li>
                     <li><a :href="routeHome"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                 </ul>
