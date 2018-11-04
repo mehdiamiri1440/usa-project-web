@@ -18,9 +18,6 @@ use Illuminate\Cookie\CookieJar;
 use App\myuser;
 use App\profile;
 
-Route::get('/w', function(){
-    return view('welcome');
-});
 
 Route::get('/', function(){
     return view('index');
@@ -43,6 +40,7 @@ Route::post('/dologin',[
 Route::get('/login',function(){
     return view('login');
 })->name('login_page');
+
 Route::get('/register',function(){
     return view('register');
 })->name('register_page');
@@ -167,6 +165,12 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'buyAd_controller@add_buyAd',
         'as' => 'add_buyAd'
     ]);
+    
+    Route::get('back-to-basic/{transaction_id}',function($transaction_id){
+        return view('back-to-basic',[
+           'transaction_id' => $transaction_id 
+        ]);
+    })->name('back-to-basic');
 
 //	Route::get('/dashboard/{name?}',function(){
 //
@@ -276,16 +280,14 @@ Route::group(['middleware' => [login::class]],function(){
 
             Route::get('/transaction-detail/{id}',function($id){
                 if(session('is_buyer')){
-                    return view('dashboard.buyer.transaction.transaction',[
-                        'transaction_id' => $id,
-                    ]);
+                    return redirect()->route('');
                 }
                 else if(session('is_seller')){
                     return view('dashboard.seller.transaction.transaction',[
                         'transaction_id' => $id,
                     ]);
                 }
-            });
+            })->name('show-transaction-detail');
 
             Route::get('/transaction-list',function(){
                 if(session('is_buyer')){

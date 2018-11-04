@@ -65546,12 +65546,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             } else {
                 this.submiting = true;
 
+                var self = this;
+
                 var formData = this.getBuyAdFormFields();
 
                 axios.post('/user/add_buyAd', formData).then(function (response) {
                     if (response.status == 201) {
                         self.disableSubmit = true;
-                        window.location.href = '/dashboard/my-buyAds';
+
+                        self.popUpMsg = 'درخواست شما با موفقیت ثبت شد';
+                        $('#myModal').modal('show');
+                        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitSuccess', self.popUpMsg);
+                        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitingEvent', false);
+
+                        setTimeout(function () {
+                            location.reload(true);
+                        }, 3000);
                     }
                     self.submiting = false;
                 }).catch(function (err) {

@@ -75,15 +75,15 @@
 
 
             <div class="content">
-                <a href="/"><h1 class="logo"><img src="{{asset('assets/img/logo-incobac.png')}}"></h1></a>
                 <div class="title m-b-md">
-                    باز گشت به وب سایت اینکوباک
+                    درحال بازگشت به اینکوباک...
                 </div>
 
             </div>
         </div>
         <script>
-             window.location.href = '/dashboard/';
+             var transactionId = "<?php echo $transaction_id; ?>";
+             window.location.href = '/dashboard/#/transaction-detail/' +  transactionId ;
         </script>
         <script src="{{asset('js/app.js')}}"></script>
     </body>
