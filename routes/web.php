@@ -257,7 +257,7 @@ Route::group(['middleware' => [login::class]],function(){
                 else return abort(404);
             })->name('buyer-my-buyAds');
 
-            Route::post('sell-offer-detail/{id}',[
+            Route::post('sell-offer-detail',[
                 'uses' => 'sell_offer_controller@get_sell_offer_by_id',
                 'as' => 'get_sell_offer_by_id'
             ])->where('id', '[0-9]+');
