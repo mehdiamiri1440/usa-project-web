@@ -339,7 +339,7 @@ class payment_controller extends Controller
                     //flush session
                     $this->flush_global_session();
 
-                    return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
+                    return redirect()->route('back-to-basic',['id' => $transaction_id]);
                 }else{
                     //flush session
                     $this->flush_global_session();

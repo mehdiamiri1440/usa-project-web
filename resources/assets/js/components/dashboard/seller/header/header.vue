@@ -612,7 +612,7 @@
 </template>
 
 <script>
-    import {eventBus} from '../../../../app';
+    import {eventBus} from "../../../../router/dashboard_router";
     import profileinfo from './sub-com/profile_info.vue'
     import headerMenuList from './sub-com/header-menu-list.vue'
     import headerTop from './sub-com/header-top.vue'

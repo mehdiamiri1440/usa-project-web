@@ -2,7 +2,7 @@
     <main id="main">
         <div class="main-form">
             <div class="left-section col-sm-8">
-                <a :href="homeUrl">
+                <a :href="homeurl">
                     <h1><img :src="logo"></h1>
                 </a>
                 <div id="app">
@@ -124,7 +124,7 @@
     export default{
         props: [
             'logo',
-            'homeUrl'
+            'homeurl'
         ],
         data: function () {
             return {
@@ -151,6 +151,7 @@
             goToStep: function (step) {
                 this.currentStep = step;
             },
+
             doLogin: function (){
                 var self = this;
                 axios.post("/dologin", {
@@ -159,7 +160,6 @@
                 })
                 .then(function (response) {
                     if (response.data.status == true) {
-
                          window.location.href = '/dashboard/';
                        /* if (response.data.is_buyer == true){
                             console.log('buyer');
@@ -172,6 +172,7 @@
                         }*/
                     }
                     else {
+
                         self.showMsg = true;
                         self.errors = [];
                         self.step1.msg = response.data.msg;

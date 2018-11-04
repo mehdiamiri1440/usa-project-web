@@ -13,6 +13,7 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap-theme.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/login/style.css')}}">
+    <script src="{{asset('assets/cdn/axios.js')}}"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
 

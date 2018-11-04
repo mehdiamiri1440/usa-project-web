@@ -163,6 +163,12 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'buyAd_controller@add_buyAd',
         'as' => 'add_buyAd'
     ]);
+    
+    Route::get('back-to-basic/{transaction_id}',function($transaction_id){
+        return view('back-to-basic',[
+           'transaction_id' => $transaction_id 
+        ]);
+    })
 
 //	Route::get('/dashboard/{name?}',function(){
 //
@@ -272,7 +278,7 @@ Route::group(['middleware' => [login::class]],function(){
 
             Route::get('/transaction-detail/{id}',function($id){
                 if(session('is_buyer')){
-                    return redirect()->back();
+                    return redirect()->route('');
                 }
                 else if(session('is_seller')){
                     return view('dashboard.seller.transaction.transaction',[
