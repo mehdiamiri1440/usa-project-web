@@ -18,6 +18,10 @@ use Illuminate\Cookie\CookieJar;
 use App\myuser;
 use App\profile;
 
+Route::get('/w', function(){
+    return view('welcome');
+});
+
 Route::get('/', function(){
     return view('index');
 });

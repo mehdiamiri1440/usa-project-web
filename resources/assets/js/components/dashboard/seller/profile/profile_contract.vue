@@ -519,8 +519,8 @@
                 <div class="content-show">
                     <div class="buttons">
                         <div class="main_buttons col-xs-12 col-sm-8 col-md-9">
-                            <a href="#" class="default_btn" @click ="goToNextPage()">صفحه بعد</a>
-                            <a href="#" class="default_btn" @click="goToPrePage()">صفحه قبل</a>
+                            <a href="#" class="default_btn" @click.prevent ="goToNextPage()">صفحه بعد</a>
+                            <a href="#" class="default_btn" @click.prevent="goToPrePage()">صفحه قبل</a>
                         </div>
                         <div class="continue_but col-xs-12 col-sm-4 col-md-3">
                             <a href="#" @click.prevent="confirmContract" class="green-bot">تایید قرارداد</a>
