@@ -60884,6 +60884,7 @@ var render = function() {
                     attrs: { href: "#" },
                     on: {
                       click: function($event) {
+                        $event.preventDefault()
                         _vm.goToNextPage()
                       }
                     }
@@ -60898,6 +60899,7 @@ var render = function() {
                     attrs: { href: "#" },
                     on: {
                       click: function($event) {
+                        $event.preventDefault()
                         _vm.goToPrePage()
                       }
                     }

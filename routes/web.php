@@ -18,6 +18,7 @@ use Illuminate\Cookie\CookieJar;
 use App\myuser;
 use App\profile;
 
+
 Route::get('/', function(){
     return view('index');
 });
@@ -39,6 +40,7 @@ Route::post('/dologin',[
 Route::get('/login',function(){
     return view('login');
 })->name('login_page');
+
 Route::get('/register',function(){
     return view('register');
 })->name('register_page');
@@ -168,7 +170,7 @@ Route::group(['middleware' => [login::class]],function(){
         return view('back-to-basic',[
            'transaction_id' => $transaction_id 
         ]);
-    })
+    })->name('back-to-basic');
 
 //	Route::get('/dashboard/{name?}',function(){
 //

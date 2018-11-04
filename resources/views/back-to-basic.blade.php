@@ -4,8 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
+        <title>بازگشت به وب سایت</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -17,7 +16,7 @@
                 color: #636b6f;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
-                height: 100vh;
+                height: 50vh;
                 margin: 0;
             }
 
@@ -46,7 +45,7 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 60px;
             }
 
             .links > a {
@@ -62,28 +61,30 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            .logo img{
+                width: 300px;
+            }
+            .logo {
+                margin: 0;
+                height: 120px;
+            }
         </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-        <div id="app">
-            <example-component></example-component>
-            </div>
+
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    درحال بازگشت به اینکوباک...
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
             </div>
         </div>
+        <script>
+             var transactionId = "<?php echo $transaction_id; ?>";
+             window.location.href = '/dashboard/#/transaction-detail/' +  transactionId ;
+        </script>
         <script src="{{asset('js/app.js')}}"></script>
     </body>
 </html>
