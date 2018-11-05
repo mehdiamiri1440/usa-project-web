@@ -147,7 +147,7 @@
                 </a>
                 <div class="profile-list">
                     <ul class="list-unstyled">
-                        <li class="list-item"><a :href="profilebasic">پروفایل</a></li>
+                        <li class="list-item"><router-link :to="{ name : 'profileBasic' }">پروفایل</router-link></li>
                         <li class="list-item"><router-link :to="{ name : 'password' }">تغییر کلمه عبور</router-link></li>
                         <li class="list-item"><a :href="out">خروج</a></li>
                     </ul>
