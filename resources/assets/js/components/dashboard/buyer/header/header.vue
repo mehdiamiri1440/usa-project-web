@@ -766,8 +766,7 @@
                         $(this).css({
                             width: "30%"
                         });
-                        menu_but_icon.addClass('fa-angle-left', 200).removeClass('fa-angle-right');
-                        // menu_but_icon.switchClass("fa-angle-left"," fa-angle-right",200);
+                        menu_but_icon.addClass('fa-angle-right', 200).removeClass('fa-angle-left');
                         profile.fadeIn();
                         copy_right.css('display', 'block');
                         logo.fadeIn();
@@ -783,7 +782,7 @@
                         $(this).css({
                             width: "100%"
                         });
-                        menu_but_icon.addClass('fa-angle-right', 200).removeClass('fa-angle-left', 200);
+                        menu_but_icon.addClass('fa-angle-left', 200).removeClass('fa-angle-right', 200);
                         // menu_but_icon.switchClass("fa-angle-right"," fa-angle-left",200);
                         profile.css('display', 'none');
                         header_menu.css('display', 'none');

@@ -306,7 +306,7 @@
                                      v-model="currentUser.profile.is_company">
                         <i class="fa fa-check"></i>
                     </div>
-                    <span v-if="errors.is_company" class="text-danger">@{{ errors.is_company[0] }}</span>
+                    <span v-if="errors.is_company" class="text-danger">{{ errors.is_company[0] }}</span>
                 </div>
                 <div class="user-form col-xs-12">
 
@@ -355,7 +355,7 @@
                         </label>
                         <input type="text" name="address" placeholder="کد پستی"
                                v-model="currentUser.profile.postal_code">
-                        <span v-if="errors.postal_code" class="text-danger">@{{ errors.postal_code[0] }}</span>
+                        <span v-if="errors.postal_code" class="text-danger">{{ errors.postal_code[0] }}</span>
                     </div>
                     <div class="col-sm-6">
                         <label for="company" class="content-lable">
@@ -363,7 +363,7 @@
                         </label>
                         <input type="text" name="address" placeholder="شماره شبا"
                                v-model="currentUser.profile.shaba_code">
-                        <span v-if="errors.shaba_code" class="text-danger">@{{ errors.shaba_code[0] }}</span>
+                        <span v-if="errors.shaba_code" class="text-danger">{{ errors.shaba_code[0] }}</span>
                     </div>
                     <div class="col-xs-12">
                         <input type="button" class="green-bot" name="submit" value="ثبت تغییرات"
