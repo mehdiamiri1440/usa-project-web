@@ -371,43 +371,41 @@
                 </div>
                      <div class="info-contents col-xs-12">
                           <div class="image-article-content  col-xs-12 col-md-5">
-                              <div class="main-image col-xs-12">git
-                                  <a  :href="str + sellOfferDetail.profile_photo[0]"><img :src="str + sellOfferDetail.profile_photo[0]" alt=""></a>
+                              <div class="main-image col-xs-12">
+                                  <a  :href="str + '/' + sellOfferDetail.sell_offer.photos[0]"><img :src="str + '/' + sellOfferDetail.sell_offer.photos[0]" alt=""></a>
                               </div>
-                           <!--   <div class="owl-carousel col-xs-12">
-                                  @foreach($sell_offer->photos as $photo)
-                                  <a href="{{url('storage/'.$photo)}}"><img src="{{url('storage/'.$photo)}}" alt=""></a>
-                                  @endforeach
-                              </div>-->
+                             <div class="owl-carousel col-xs-12">
+                                  <a v-for="photo in sellOfferDetail.sell_offer.photos" :href="str + '/' + photo"><img :src="str + '/' + photo" alt=""></a>
+                              </div>
                           </div>
-                       <!--   <div class="main-article-content col-xs-12 col-md-7">
-                              <table class="table table-striped">
+                     <div class="main-article-content col-xs-12 col-md-7">
+                             <table class="table table-striped">
+                                 <tr>
+                                     <td>قیمت واحد<span class="">(هر کیلو به تومان)</span> :</td>
+                                     <td> {{sellOfferDetail.sell_offer.price}} تومان</td>
+                                 </tr>
                                   <tr>
-                                      <td>قیمت واحد<span class="">(هر کیلو به تومان)</span> :</td>
-                                      <td> {{$sell_offer->price}} تومان</td>
-                                  </tr>
-                                  <tr>
-                                      <td>  محل تحویل کالا:</td>
-                                      <td> {{$sell_offer->deliver_at}}</td>
-                                  </tr>
+                                        <td>  محل تحویل کالا:</td>
+                                        <td> {{sellOfferDetail.sell_offer.deliver_at}}</td>
+                                    </tr>
 
-                                  <tr>
-                                      <td>  زمان موجودی:</td>
-                                      <td>{{$sell_offer->date_from . ' - ' . $sell_offer->date_to}}</td>
-                                  </tr>
-                              </table>
-                              <p>توضیحات: <span>{{$sell_offer->description}}</span></p>
-                              <div class="col-xs-12 actions">
-                                  <div v-show='{{$sell_offer->is_pending}}'>
-                                      <button type="button" class="green-bot" @click='{{"initiateBuy($sell_offer->id)"}}'>آغاز فرآیند خرید</button>
-                                      <button type="button" class="green-bot" @click='{{"rejectBuy($sell_offer->id)"}}'>رد این پیشنهاد</button>
-                                  </div>
-                                  <p class='text-success' v-show='{{$sell_offer->is_accepted}}'>شما قبلا این پیشنهاد را پذیرفته اید.منتظر ارتباط ما باشید.</p>
-                                  <p class='text-danger' v-show='{{$sell_offer->is_pending == 0 && $sell_offer->is_accepted == 0 }}'>شما قبلا این پیشنهاد را رد کرده اید.درصورت تغییر نظر با ما تماس بگیرید</p>
+                                    <tr>
+                                        <td>  زمان موجودی:</td>
+                                        <td>{{sellOfferDetail.sell_offer.date_from + ' - ' + sellOfferDetail.sell_offer.date_to}}</td>
+                                    </tr>
+                                </table>
+                                <p>توضیحات: <span>{{sellOfferDetail.sell_offer.description}}</span></p>
+                                    <div class="col-xs-12 actions">
+                                        <div v-show='sellOfferDetail.sell_offer.is_pending'>
+                                            <button type="button" class="green-bot" @click=initiateBuy(sellOfferDetail.sell_offer.id)>آغاز فرآیند خرید</button>
+                                            <button type="button" class="green-bot" @click=rejectBuy(sellOfferDetail.sell_offer.id)>رد این پیشنهاد</button>
+                                        </div>
+                                            <p class='text-success' v-show='sellOfferDetail.sell_offer.is_accepted'>شما قبلا این پیشنهاد را پذیرفته اید.منتظر ارتباط ما باشید.</p>
+                                            <p class='text-danger' v-show='sellOfferDetail.sell_offer.is_pending == 0 && sellOfferDetail.sell_offer.is_accepted == 0 '>شما قبلا این پیشنهاد را رد کرده اید.درصورت تغییر نظر با ما تماس بگیرید</p>
 
-                                  <a href="{{route('buyer-my-buyAds')}}" class="black-bot">بازگشت به صفحه قبل</a>
-                              </div>
-                          </div>-->
+                                            <a href="/dashboard/#/my-buyAds" class="black-bot">بازگشت به صفحه قبل</a>
+                                        </div>
+                          </div>
 
 
                       </div>
@@ -468,6 +466,7 @@
                 })
                 .then(function (response) {
                     self.sellOfferDetail = response.data;
+                    console.log(self.sellOfferDetail.sell_offer)
                 });
             },
         },

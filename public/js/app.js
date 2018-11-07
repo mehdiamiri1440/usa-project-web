@@ -66502,8 +66502,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
@@ -66551,6 +66549,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'sell_offer_id': this.$route.params.id
             }).then(function (response) {
                 self.sellOfferDetail = response.data;
+                console.log(self.sellOfferDetail.sell_offer);
             });
         }
     },
@@ -66637,22 +66636,185 @@ var render = function() {
             { staticClass: "image-article-content  col-xs-12 col-md-5" },
             [
               _c("div", { staticClass: "main-image col-xs-12" }, [
-                _vm._v("git\n                              "),
                 _c(
                   "a",
                   {
                     attrs: {
-                      href: _vm.str + _vm.sellOfferDetail.profile_photo[0]
+                      href:
+                        _vm.str + "/" + _vm.sellOfferDetail.sell_offer.photos[0]
                     }
                   },
                   [
                     _c("img", {
                       attrs: {
-                        src: _vm.str + _vm.sellOfferDetail.profile_photo[0],
+                        src:
+                          _vm.str +
+                          "/" +
+                          _vm.sellOfferDetail.sell_offer.photos[0],
                         alt: ""
                       }
                     })
                   ]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "owl-carousel col-xs-12" },
+                _vm._l(_vm.sellOfferDetail.sell_offer.photos, function(photo) {
+                  return _c("a", { attrs: { href: _vm.str + "/" + photo } }, [
+                    _c("img", {
+                      attrs: { src: _vm.str + "/" + photo, alt: "" }
+                    })
+                  ])
+                })
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "main-article-content col-xs-12 col-md-7" },
+            [
+              _c("table", { staticClass: "table table-striped" }, [
+                _c("tr", [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      " " +
+                        _vm._s(_vm.sellOfferDetail.sell_offer.price) +
+                        " تومان"
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("td", [_vm._v("  محل تحویل کالا:")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      " " + _vm._s(_vm.sellOfferDetail.sell_offer.deliver_at)
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("td", [_vm._v("  زمان موجودی:")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(
+                        _vm.sellOfferDetail.sell_offer.date_from +
+                          " - " +
+                          _vm.sellOfferDetail.sell_offer.date_to
+                      )
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v("توضیحات: "),
+                _c("span", [
+                  _vm._v(_vm._s(_vm.sellOfferDetail.sell_offer.description))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-xs-12 actions" }, [
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.sellOfferDetail.sell_offer.is_pending,
+                        expression: "sellOfferDetail.sell_offer.is_pending"
+                      }
+                    ]
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "green-bot",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            _vm.initiateBuy(_vm.sellOfferDetail.sell_offer.id)
+                          }
+                        }
+                      },
+                      [_vm._v("آغاز فرآیند خرید")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "green-bot",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            _vm.rejectBuy(_vm.sellOfferDetail.sell_offer.id)
+                          }
+                        }
+                      },
+                      [_vm._v("رد این پیشنهاد")]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.sellOfferDetail.sell_offer.is_accepted,
+                        expression: "sellOfferDetail.sell_offer.is_accepted"
+                      }
+                    ],
+                    staticClass: "text-success"
+                  },
+                  [
+                    _vm._v(
+                      "شما قبلا این پیشنهاد را پذیرفته اید.منتظر ارتباط ما باشید."
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value:
+                          _vm.sellOfferDetail.sell_offer.is_pending == 0 &&
+                          _vm.sellOfferDetail.sell_offer.is_accepted == 0,
+                        expression:
+                          "sellOfferDetail.sell_offer.is_pending == 0 && sellOfferDetail.sell_offer.is_accepted == 0 "
+                      }
+                    ],
+                    staticClass: "text-danger"
+                  },
+                  [
+                    _vm._v(
+                      "شما قبلا این پیشنهاد را رد کرده اید.درصورت تغییر نظر با ما تماس بگیرید"
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "black-bot",
+                    attrs: { href: "/dashboard/#/my-buyAds" }
+                  },
+                  [_vm._v("بازگشت به صفحه قبل")]
                 )
               ])
             ]
@@ -66662,7 +66824,18 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _vm._v("قیمت واحد"),
+      _c("span", {}, [_vm._v("(هر کیلو به تومان)")]),
+      _vm._v(" :")
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
