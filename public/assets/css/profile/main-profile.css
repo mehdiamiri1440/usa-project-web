@@ -96,7 +96,7 @@ th, td {
 }
 .image-header-profile img{
     height: 100%;
-   
+
 }
 
 .name-header-profile {
@@ -315,7 +315,12 @@ th, td {
     transition: 300ms;
     filter: grayscale(40%);
 }
-
+.main-image > div{
+    display: none;
+}
+.main-image > div:first-of-type{
+    display: block;
+}
 .user-contents {
     border-right: 2px solid #f0f3f6;
     text-align: right;
