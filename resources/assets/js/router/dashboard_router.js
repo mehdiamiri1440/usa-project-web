@@ -241,10 +241,10 @@ myRouter.beforeEach((to,from,next) => {
       switch(to.name){
           case 'profileBasic' :
               next();
+              break;
           case 'compelementry' :
               next();
-          case 'profileContract':
-              next();
+              break;
           default :
             axios.post('/user/profile_info',{
                     confirmed : true
@@ -253,6 +253,9 @@ myRouter.beforeEach((to,from,next) => {
                 if(response.data.profile.confirmed == false){
                     next(false);
                     $('#myModal-1').modal('show');
+                }
+                else if(to.name == 'profileContract'){
+                    next();
                 }
                 else if(response.data.user_info.contract_confirmed == false){
                     $('#myModal-1').modal('show');

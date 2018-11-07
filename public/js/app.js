@@ -790,10 +790,10 @@ myRouter.beforeEach(function (to, from, next) {
     switch (to.name) {
         case 'profileBasic':
             next();
+            break;
         case 'compelementry':
             next();
-        case 'profileContract':
-            next();
+            break;
         default:
             axios.post('/user/profile_info', {
                 confirmed: true
@@ -801,6 +801,8 @@ myRouter.beforeEach(function (to, from, next) {
                 if (response.data.profile.confirmed == false) {
                     next(false);
                     $('#myModal-1').modal('show');
+                } else if (to.name == 'profileContract') {
+                    next();
                 } else if (response.data.user_info.contract_confirmed == false) {
                     $('#myModal-1').modal('show');
                     next(false);
@@ -48670,7 +48672,7 @@ var render = function() {
             _vm._v(" "),
             _vm.errors.is_company
               ? _c("span", { staticClass: "text-danger" }, [
-                  _vm._v("@" + _vm._s(_vm.errors.is_company[0]))
+                  _vm._v(_vm._s(_vm.errors.is_company[0]))
                 ])
               : _vm._e()
           ]),
@@ -48908,7 +48910,7 @@ var render = function() {
               _vm._v(" "),
               _vm.errors.postal_code
                 ? _c("span", { staticClass: "text-danger" }, [
-                    _vm._v("@" + _vm._s(_vm.errors.postal_code[0]))
+                    _vm._v(_vm._s(_vm.errors.postal_code[0]))
                   ])
                 : _vm._e()
             ]),
@@ -48955,7 +48957,7 @@ var render = function() {
               _vm._v(" "),
               _vm.errors.shaba_code
                 ? _c("span", { staticClass: "text-danger" }, [
-                    _vm._v("@" + _vm._s(_vm.errors.shaba_code[0]))
+                    _vm._v(_vm._s(_vm.errors.shaba_code[0]))
                   ])
                 : _vm._e()
             ]),
@@ -61408,7 +61410,7 @@ var render = function() {
             _vm._v(" "),
             _vm.errors.is_company
               ? _c("span", { staticClass: "text-danger" }, [
-                  _vm._v("@" + _vm._s(_vm.errors.is_company[0]))
+                  _vm._v(_vm._s(_vm.errors.is_company[0]))
                 ])
               : _vm._e()
           ]),
@@ -61646,7 +61648,7 @@ var render = function() {
               _vm._v(" "),
               _vm.errors.postal_code
                 ? _c("span", { staticClass: "text-danger" }, [
-                    _vm._v("@" + _vm._s(_vm.errors.postal_code[0]))
+                    _vm._v(_vm._s(_vm.errors.postal_code[0]))
                   ])
                 : _vm._e()
             ]),
@@ -61693,7 +61695,7 @@ var render = function() {
               _vm._v(" "),
               _vm.errors.shaba_code
                 ? _c("span", { staticClass: "text-danger" }, [
-                    _vm._v("@" + _vm._s(_vm.errors.shaba_code[0]))
+                    _vm._v(_vm._s(_vm.errors.shaba_code[0]))
                   ])
                 : _vm._e()
             ]),
