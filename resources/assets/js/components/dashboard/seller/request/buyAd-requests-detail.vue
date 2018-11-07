@@ -457,12 +457,10 @@
         methods:{
             init:function(){
                  var self = this;
-                 axios.post('dashboard/buyAd-request-detail/' + this.buyAdId)
+                 axios.post('/dashboard/buyAd-request-detail/' + this.buyAdId)
                      .then(function (response) {
                         self.buyAd = response.data.buyAd;
                      });
-
-
             },
             submitSellOffer:function(){
                 var self = this;
@@ -472,7 +470,10 @@
                 axios.post('/add_sell_offer',formData)
                     .then(function(response){
                         if(response.status == 201){
-                            window.location.href = '/dashboard/my-sell-offers'
+                            self.popUpMsg = 'تغییرات با موفقیت اعمال شد';
+                            eventBus.$emit('submitSuccess', self.popUpMsg);
+                            $('#myModal').modal('show');
+                             window.location.href = '/dashboard/#/my-sell-offers'
                         }
                     })
                     .catch(function(err){
@@ -481,7 +482,7 @@
 
                         if(err.response.data.msg){
                             self.popUpMsg = err.response.data.msg;
-
+                            eventBus.$emit('submitSuccess', self.popUpMsg);
                             $('#myModal').modal('show');
                         }
                     });

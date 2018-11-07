@@ -47,7 +47,7 @@
 
         left: -90px;
 
-        top: 0px;
+        top: 0;
 
         font-size: 20px;
     }

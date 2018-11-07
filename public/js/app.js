@@ -722,7 +722,7 @@ var myRouter = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
         path: '/my-sell-offers',
         name: 'mySellOffers',
         components: {
-            buyer: __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_request_my_sell_offers_vue___default.a
+            seller: __WEBPACK_IMPORTED_MODULE_9__components_dashboard_seller_request_my_sell_offers_vue___default.a
         }
     }, {
         path: '/register-product',
@@ -53444,7 +53444,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         init: function init() {
             var self = this;
-            axios.post('dashboard/buyAd-request-detail/' + this.buyAdId).then(function (response) {
+            axios.post('/dashboard/buyAd-request-detail/' + this.buyAdId).then(function (response) {
                 self.buyAd = response.data.buyAd;
             });
         },
@@ -53455,7 +53455,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post('/add_sell_offer', formData).then(function (response) {
                 if (response.status == 201) {
-                    window.location.href = '/dashboard/my-sell-offers';
+                    self.popUpMsg = 'تغییرات با موفقیت اعمال شد';
+                    __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitSuccess', self.popUpMsg);
+                    $('#myModal').modal('show');
+                    window.location.href = '/dashboard/#/my-sell-offers';
                 }
             }).catch(function (err) {
                 self.errors = '';
@@ -53463,7 +53466,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 if (err.response.data.msg) {
                     self.popUpMsg = err.response.data.msg;
-
+                    __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitSuccess', self.popUpMsg);
                     $('#myModal').modal('show');
                 }
             });
@@ -54292,7 +54295,8 @@ var render = function() {
           attrs: { src: _vm.loader }
         })
       ]
-    )
+    ),
+    _vm._v("-->\n    ")
   ])
 }
 var staticRenderFns = []
@@ -75033,7 +75037,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n#main {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n.main-header {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n}\n.little-main-header {\n    right: 80px;\n}\n.image-header-profile {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.image-header-profile  img{\n    height: 100%;\n}\n.right-menu-header {\n\n    padding: 16px;\n}\n.right-menu-header, .content-header {\n    float: right;\n}\n.profile-menu-header {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header i {\n    position: absolute;\n\n    left: -90px;\n\n    top: 0px;\n\n    font-size: 20px;\n}\n.content-header {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a, .profile-menu-header > a {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a {\n    font-size: 30px;\n}\n.right-menu-header a:hover, .profile-menu-header > a:hover {\n    color: #2e353e;\n}\n.profile-menu-header > a {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li {\n    margin: 5px;\n}\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n}\n.font-big {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n", ""]);
+exports.push([module.i, "\n#main {\n    margin-right: 250px;\n    margin-top: 65px;\n    background: #eff3f6;\n}\n.main-header {\n    height: 65px;\n    position: fixed;\n    left: 0;\n    right: 250px;\n    top: 0;\n    background: #fff;\n    z-index: 5;\n}\n.little-main-header {\n    right: 80px;\n}\n.image-header-profile {\n    width: 50px;\n    height: 50px;\n    overflow: hidden;\n    border-radius: 50%;\n    float: left;\n}\n.image-header-profile  img{\n    height: 100%;\n}\n.right-menu-header {\n\n    padding: 16px;\n}\n.right-menu-header, .content-header {\n    float: right;\n}\n.profile-menu-header {\n    padding: 7px;\n    padding-left: 55px;\n}\n.profile-menu-header i {\n    position: absolute;\n\n    left: -90px;\n\n    top: 0;\n\n    font-size: 20px;\n}\n.content-header {\n    background: #28a745;\n    color: #fff;\n    height: 100%;\n    padding: 20px 20px 0;\n}\n.right-menu-header a, .profile-menu-header > a {\n    color: #7f8c9b;\n    margin: 5px;\n}\n.right-menu-header a {\n    font-size: 30px;\n}\n.right-menu-header a:hover, .profile-menu-header > a:hover {\n    color: #2e353e;\n}\n.profile-menu-header > a {\n    position: relative;\n    top: 18px;\n    left: 10px;\n}\n.profile-list {\n    position: absolute;\n    width: 165px;\n    background: #fff;\n    padding: 8px 10px;\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 3px #313a43;\n            box-shadow: 0 0 3px #313a43;\n    text-align: right;\n    left: 40px;\n    top: 65px;\n    display: none;\n    z-index: 999;\n}\n.profile-list li {\n    margin: 5px;\n}\n.profile-list a {\n    width: 100%;\n    display: inline-block;\n}\n.font-big {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n", ""]);
 
 // exports
 
