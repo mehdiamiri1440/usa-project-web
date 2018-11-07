@@ -110,8 +110,11 @@
                             <p>توضیحات: <span>@{{product.main.description}}</span></p>
                         </div>
                         <div class="image-article-content col-sm-5">
-                                 <popup v-if="product.photos[0]" v-for="photo in product.photos" base="{{url('storage')}}/"
-                                        :img="photo.file_path"></popup>
+                                 <popup v-if="product.photos[0]" v-for="photo in product.photos"
+                                        base="{{url('storage')}}/"
+                                        :img="photo.file_path"
+                                        :key="photo.id"
+                                 ></popup>
                         </div>
                     </div>
                     <div class="buy_details form-group  col-xs-12">
@@ -119,14 +122,14 @@
                         <div class="col-xs-12 col-sm-6">
                             <label for="company" class="content-lable">
                                 مقدار مورد نیاز (کیلوگرم):
-                            </label> 
+                            </label>
                             <input id="requirement-amount" placeholder="مقدار مورد نیاز" type="text"  class=" form-control">
                             <span class="text-danger" v-if="errors.requirement_amount">@{{errors.requirement_amount[0]}}</span>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <label for="company" class="content-lable">
                                 نوع بسته بندی:
-                            </label> 
+                            </label>
                             <input id="pack-type"  placeholder=" نوع بسته بندی" type="text"  class=" form-control">
                             <span class="text-danger" v-if="errors.pack_type">@{{errors.pack_type[0]}}</span>
                         </div>
@@ -142,7 +145,7 @@
                         <div class="col-xs-4">
                             <button @click="registerRequest($event)" type="submit" class="green_bot">ثبت درخواست</button>
                         </div>
-                        
+
                     </div>
                 </div>
             </article>

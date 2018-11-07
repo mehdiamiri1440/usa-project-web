@@ -49,44 +49,8 @@
 
 </head>
 <body>
-{{--
-<div id="app">
-
-  <header-dash-buyer
-            logo="{{asset('assets/img/logo-incobac.png')}}"
-            storage="{{asset('storage/')}}"
-            defultimg="{{asset('assets/img/user-defult.png')}}"
-            transactroute="{{route('my-terminated-transaction-list')}}"
-            mytrans="{{route('my-transaction-list')}}"
-            selregpro="{{route('seller-register-product')}}"
-            byadreq="{{route('seller-buyAd-requests')}}"
-            profilebasic="{{route('profile_basic')}}"
-            logout="{{route('logout')}}"
-            routehome="{{url('/')}}"
-            loading="{{asset('assets/img/gif/prload.gif')}}"
-            guide="{{url('dashboard/guide')}}"
-    ></header-dash-buyer>
-    <main id="main">
-    @section('main_content')
- --}}{{--         <router-view
-                    name="buyer"
-                    loading_img="{{asset('assets/img/gif/loading.gif')}}"
-                    trans="{{url('dashboard/transaction-detail')}}"
-                    transRep="{{url('dashboard/transaction-report')}}"
-                    str="{{asset('storage/')}}"
-                    defimgitem="{{asset('/assets/img/product.jpg')}}"
-            ></router-view>--}}{{--
-
-
-            <div class="header">
-                <div class="header_nav">
-                    <router-link to="/" class="u-hover">Home</router-link>
-                    <router-link to="/directAccess" class="u-hover">DirectAccess</router-link>
-                </div>
-            </div>
-    @show
-        </main>
-</div>--}}
+<div id="app"></div>
+<div id="appSeller"></div>
 <div id="appBuyer">
     <header-dash-buyer
             logo="{{asset('assets/img/logo-incobac.png')}}"

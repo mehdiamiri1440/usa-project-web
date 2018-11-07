@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('title') </title>
+    <meta name="csrf-token" content="{{csrf_token()}}">
+    <script>
+        window.Laravel = { csrfToken : '{{csrf_token()}}'}
+    </script>
     <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.easing.min.js')}}"></script>
@@ -16,6 +20,7 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
     <script src="{{asset('js/app.js')}}"></script>
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
+
     @yield('header_links')
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -43,7 +48,7 @@
             <div class="profile-list">
                 <ul class="list-unstyled">
                     <li class="list-item"><a href="{{route('profile_basic')}}">پروفایل</a></li>
-                    <li class="list-item"><router-link :to="{ name : 'password' }">تغییر کلمه عبور</router-link></li>
+                    <li class="list-item"><a href="/dashboard#/password">تغییر کلمه عبور</a></li>
                     <li class="list-item"><a href="{{route('logout')}}">خروج</a></li>
                 </ul>
             </div>
@@ -66,7 +71,7 @@
 @yield('main_content')
 </div>
     @yield('script_tags')
-    <script src="{{asset('assets/js/idleTimer.js')}}"></script> 
+    <script src="{{asset('assets/js/idleTimer.js')}}"></script>
     <script>
         $(document).ready(function(){
             $(document).idleTimer(7200000);
@@ -75,7 +80,7 @@
         $(document).on("idle.idleTimer", function(){
          // function you want to fire when the user goes idle
             window.location.href = '/login'
-        });    
+        });
     </script>
 </body>
 
