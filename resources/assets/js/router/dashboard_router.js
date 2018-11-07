@@ -163,7 +163,7 @@ const myRouter =  new Router({
             path: '/my-sell-offers',
             name: 'mySellOffers',
             components: {
-                buyer: sellerMySellOffers,
+                seller: sellerMySellOffers,
             },
         }
         , {

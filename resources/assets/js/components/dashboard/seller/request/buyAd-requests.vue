@@ -78,14 +78,12 @@
         </section>
         <section class="main-content col-xs-12 loading_images" v-else-if="buyAds.length == 0 && !loading">
             <h4 dir="rtl" class="text-center">درخواستی برای شما وجود ندارد.</h4>
-
         </section>
         <section class="main-content col-xs-12 loading_images" v-show="loading">
 
             <img :src="loader" style="width:200px;height:200px">
         </section>
     </div>
-    <!--<h1>{{this.storage}}</h1>-->
 </template>
 
 <script>

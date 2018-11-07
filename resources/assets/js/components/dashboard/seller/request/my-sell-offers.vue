@@ -116,12 +116,12 @@
                 </li>
             </ul>
         </section>
-        <section class="main-content col-xs-12" v-if="sellOffers.length == 0 && !loading">
+       <section class="main-content col-xs-12" v-if="sellOffers.length == 0 && !loading">
             <h4 dir="rtl" class="text-center">پیشنهاد خریدی ثبت نکرده اید.</h4>
         </section>
-        <div class="loading_images  col-xs-12" v-show="loading">
-            <img :src="loader" style="width:200px;height:200px">
-        </div>
+         <div class="loading_images  col-xs-12" v-show="loading">
+              <img :src="loader" style="width:200px;height:200px">
+          </div>-->
     </div>
 
 </template>
