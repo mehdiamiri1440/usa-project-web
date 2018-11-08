@@ -70,6 +70,7 @@ th, td {
 .profile-menu-header {
     padding: 11px;
     padding-left: 55px;
+    float: left;
 }
 
 .profile-menu-header a {

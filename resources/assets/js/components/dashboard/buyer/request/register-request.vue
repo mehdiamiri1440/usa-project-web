@@ -267,7 +267,7 @@
     <section class="main-content col-xs-12">
         <div class="company_des">
             <div clss="col-xs-12 min_cols">
-                <div class="col-sm-6">
+                <div class="col-xs-12 col-sm-6">
                     <label>
                         <span class="text-danger">*</span> دسته ی محصول
                     </label>
@@ -278,7 +278,7 @@
                         >{{category.category_name}}</option>
                     </select>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-xs-12 col-sm-6">
                     <label>
                         <span class="text-danger">*</span> نام محصول
                     </label>
@@ -290,32 +290,32 @@
                     </select>
                     <span v-if="errors.category_id" class="text-danger">فیلد دسته ی محصول الزامی است</span>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-xs-12 col-sm-6">
                     <label>
                         نوع محصول <span class="sub-des">(مثال:کله قوچی)</span> </label>
                     <input type="text" placeholder="نوع محصول" v-model="buyAd.name">
                     <span v-if="errors.name" class="text-danger" >{{ errors.name[0] }}</span>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-xs-12 col-sm-6">
                     <label>
                         <span class="text-danger">*</span> نوع بسته بندی
                     </label>
                     <input type="text" placeholder="نوع بسته بندی" v-model="buyAd.pack_type">
                     <span v-if="errors.pack_type" class="text-danger" >{{ errors.pack_type[0] }}</span>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-xs-12 col-sm-6">
                     <label>
                         <span class="text-danger">*</span> میزان نیازمندی <span class="sub-des">(کیلوگرم)</span> </label>
                     <input type="text" placeholder="میزان نیازمندی" v-model="buyAd.requirement_amount">
                     <span v-if="errors.requirement_amount" class="text-danger" >{{ errors.requirement_amount[0] }}</span>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-xs-12 col-sm-6">
                     <label>
                         قیمت <span class="sub-des">(هر کیلو به تومان)</span> </label>
                     <input type="text" placeholder="قیمت" v-model="buyAd.price">
                     <span v-if="errors.price" class="text-danger" >{{ errors.price[0] }}</span>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-xs-12 col-sm-6">
                     <label>
                         محل تحویل </label>
                     <input type="text" placeholder="محل تحویل" v-model="buyAd.address">
@@ -362,7 +362,6 @@
                   name:'',
                   requirement_amount:'',
                   price:'',
-                  pack_type:'',
                   description:'',
                   address:'',
                   pack_type:'',
@@ -423,21 +422,21 @@
               }
               else{
                   this.submiting = true;
-                  
+
                   var self = this;
-                  
+
                   let formData = this.getBuyAdFormFields();
-                  
+
                   axios.post('/user/add_buyAd',formData)
                       .then(function(response){
                           if(response.status == 201){
                               self.disableSubmit = true;
-                              
+
                               self.popUpMsg = 'درخواست شما با موفقیت ثبت شد';
                               $('#myModal').modal('show');
                               eventBus.$emit('submitSuccess', self.popUpMsg);
                               eventBus.$emit('submitingEvent', false);
-                              
+
                               setTimeout(function () {
                                     location.reload(true);
                                 }, 3000);

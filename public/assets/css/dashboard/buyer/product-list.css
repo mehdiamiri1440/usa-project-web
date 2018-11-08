@@ -70,6 +70,7 @@ th, td {
 .profile-menu-header {
     padding: 11px;
     padding-left: 55px;
+    float: left;
 }
 
 .profile-menu-header a {
@@ -428,18 +429,17 @@ li.active a::after {
     }
 }
 
-@media screen and (max-width: 670px) {
- .name-header-profile{
-     display: none;
- }
+@media screen and (max-width: 715px) {
+    .name-header-profile{
+        display: none;
+    }
     .profile-menu-header i {
         position: absolute;
         left: -75px;
-        top: 31px;
+        top: 22px;
         font-size: 20px;
     }
 }
-
 @media screen and (max-width: 555px) {
     .logo {
         padding: 20px 0;

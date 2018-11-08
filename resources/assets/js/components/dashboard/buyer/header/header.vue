@@ -266,6 +266,7 @@
 
     .right-menu-header {
         position: relative;
+        padding: 6px 16px;
     }
 
     .right-menu-header li ul a {
@@ -470,7 +471,12 @@
             font-size: 10px;
 
         }
-
+        .show-header button {
+            padding: 19px 26px 19px 19px;
+        }
+        .right-menu-header {
+            padding: 6px ;
+        }
         .sub-header {
 
             bottom: -44px;
