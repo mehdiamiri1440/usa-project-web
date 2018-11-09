@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap-theme.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/blurry.load.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
     <script src="{{asset('js/app.js')}}"></script>
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
@@ -32,6 +32,32 @@
     </style>
 </head>
 <body>
+
+<!-- Modal -->
+<div class="container">
+    <div class="modal fade" id="myModal" tabindex="-1" ref="myModal" role="dialog"
+         aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="main_popup_content">
+                    <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                    <p class="main_par">
+                        @{{popUpMsg}}
+                    </p>
+                    <button class="btn green_bot " data-dismiss="modal">
+                        متوجه شدم
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+</div>
+
+<!-- /.modal -->
+
+
+
 <div id="app">
     <header id="header" class="main-header">
         <div class="profile-menu-header ">

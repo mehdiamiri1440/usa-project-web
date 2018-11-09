@@ -140,7 +140,7 @@
                         <div class="hidden-xs col-sm-8">
                         </div>
                         <div class="col-xs-12 col-sm-4" >
-                            <button @click="registerRequest($event)" type="submit" style="border:none" class="green_bot">ثبت درخواست</button>
+                            <button @click="showm()" type="submit" style="border:none" class="green_bot">ثبت درخواست</button>
                         </div>
 
                     </div>
