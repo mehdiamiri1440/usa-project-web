@@ -74,6 +74,8 @@ var vm = new Vue({
         products:'',
         noProductMsgSignal:false,
         loading:false,
+        popUpMsg:'',
+        submiting:'',
     },
     methods:{
         init:function(){
