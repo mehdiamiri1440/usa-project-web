@@ -31,17 +31,12 @@
         display: block;
     }
 
-
-
     .main-content {
         padding: 60px 15px;
     }
 
-
-
     /*end main content style */
     /*custom cods*/
-
 
     .green-sbot {
         display: block;
@@ -54,11 +49,11 @@
 
     }
 
-    .number,.date,.subject{
+    .number, .date, .subject {
         padding: 8px 15px;
     }
 
-    #icon-pro svg{
+    #icon-pro svg {
         height: 150px;
     }
 
@@ -66,10 +61,18 @@
         margin-top: 0;
         text-align: center;
     }
-    .list-group-item{
+
+    .list-group {
+       float:left;
+        width: 100%;
+        box-shadow: 0 0 9px rgba(0, 0, 0, .075);
+    }
+
+    .list-group-item {
         padding: 15px 0;
     }
-    .main-content  .title-list  {
+
+    .main-content .title-list {
         overflow: hidden;
         padding: 15px 0;
         background: #313942;
@@ -77,7 +80,7 @@
         text-align: center;
     }
 
-    .main-content  p {
+    .main-content p {
         float: right;
         text-align: center;
     }
@@ -87,30 +90,36 @@
         .show-header button {
             display: block;
         }
+
         .kind_user > div, .kind_activity > div {
             float: none;
 
         }
+
         .img-profile .submit {
             position: relative;
             width: 100%;
             margin: 25px auto;
 
         }
+
         .img-profile .submit label {
             width: 40%;
             padding: 12px 0;
         }
     }
+
     @media screen and (max-width: 555px) {
 
         .main-content ul p {
             font-size: 11px;
             padding: 0;
         }
-        .main-content .subject ,.main-content p {
+
+        .main-content .subject, .main-content p {
             padding: 0;
         }
+
         .main-content {
             padding: 60px 5px;
 
@@ -122,8 +131,6 @@
             font-size: 10px;
         }
     }
-
-
 
 
 </style>
@@ -140,23 +147,23 @@
                 <p class="time-show  col-xs-3"> مبلغ </p>
             </div>
             <!--end title list -->
-            <div  v-for="factor in factors">
-            <router-link
-               :to="'/factor-detail/' + factor.id"
-               class="list-group-item list-group-item-action col-xs-12">
-                <p class="number col-xs-2">
-                    {{factor.sell_offer_id + 100000}}
-                </p>
-                <p class="date col-xs-2" dir="rtl">
-                    {{factor.persian_date}}
-                </p>
-                <p class="subject col-xs-5">
-                    {{factor.product_name}}
-                </p>
-                <p class="col-xs-3">
-                    <span class="green-sbot" dir="rtl"> {{factor.amount_to_pay}} تومان</span>
-                </p>
-            </router-link>
+            <div v-for="factor in factors">
+                <router-link
+                        :to="'/factor-detail/' + factor.id"
+                        class="list-group-item list-group-item-action col-xs-12">
+                    <p class="number col-xs-2">
+                        {{factor.sell_offer_id + 100000}}
+                    </p>
+                    <p class="date col-xs-2" dir="rtl">
+                        {{factor.persian_date}}
+                    </p>
+                    <p class="subject col-xs-5">
+                        {{factor.product_name}}
+                    </p>
+                    <p class="col-xs-3">
+                        <span class="green-sbot" dir="rtl"> {{factor.amount_to_pay}} تومان</span>
+                    </p>
+                </router-link>
             </div>
         </div>
         <div class="loading_images  col-xs-12" v-else-if="isLoading">
@@ -171,41 +178,41 @@
     import {eventBus} from "../../../../router/dashboard_router";
 
     export default {
-        props:[
+        props: [
             'loading_img'
         ],
-        data:function(){
-          return{
-              factors:'',
-              isLoading:true,
-              popUpMsg:'',
-              submiting:false,
-              items: [
-                  {
-                      message: 'فاکتور های پرداخت شده',
-                      url: 'PayedFactorList'
-                  }
-              ]
-          }
+        data: function () {
+            return {
+                factors: '',
+                isLoading: true,
+                popUpMsg: '',
+                submiting: false,
+                items: [
+                    {
+                        message: 'فاکتور های پرداخت شده',
+                        url: 'PayedFactorList'
+                    }
+                ]
+            }
         },
-        methods:{
-            init:function(){
+        methods: {
+            init: function () {
                 var self = this;
 
                 axios.post('/get_payed_factor_list')
-                    .then(function(response){
+                    .then(function (response) {
                         self.factors = response.data.factors;
                         self.isLoading = false;
                     })
-                    .catch(function(err){
-                        if(err.response.status == 404){
+                    .catch(function (err) {
+                        if (err.response.status == 404) {
                             window.location.href = '/404'
                         }
                         self.isLoading = false;
                     });
             },
         },
-        mounted:function(){
+        mounted: function () {
             this.init();
             eventBus.$emit('subHeader', this.items);
         }

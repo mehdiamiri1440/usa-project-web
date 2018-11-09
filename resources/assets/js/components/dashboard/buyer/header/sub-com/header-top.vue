@@ -33,9 +33,6 @@
         float: left;
     }
 
-    .right-menu-header {
-        padding: 6px 16px;
-    }
 
     .right-menu-header, .content-header {
         float: right;

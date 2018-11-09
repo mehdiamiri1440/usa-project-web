@@ -62,9 +62,11 @@
         height: 150px;
     }
 
-    .main-content ul {
+    .main-content > ul {
         margin-top: 0;
         text-align: center;
+        box-shadow: 0 0 9px rgba(0, 0, 0, .075);
+        padding: 0;
     }
     .list-group-item{
         padding: 0;
@@ -136,7 +138,7 @@
     <div>
         <section class="main-content col-xs-12">
 
-            <ul class="list-unstyled" v-if="transactions.length != 0">
+            <ul class="list-unstyled col-xs-12" v-if="transactions.length != 0">
                 <!--start title list -->
 
                 <li class="list-group-item title-list">

@@ -25,7 +25,7 @@
 
 
     .main-content {
-        padding: 60px 100px;
+        padding: 60px 15px;
         direction: rtl;
     }
     .roules-check-inside {

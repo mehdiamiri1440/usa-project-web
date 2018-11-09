@@ -119,14 +119,14 @@
                         <div class="col-xs-12 col-sm-6">
                             <label for="company" class="content-lable">
                                 مقدار مورد نیاز (کیلوگرم):
-                            </label> 
+                            </label>
                             <input id="requirement-amount" placeholder="مقدار مورد نیاز" type="text"  class=" form-control">
                             <span class="text-danger" v-if="errors.requirement_amount">@{{errors.requirement_amount[0]}}</span>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <label for="company" class="content-lable">
                                 نوع بسته بندی:
-                            </label> 
+                            </label>
                             <input id="pack-type"  placeholder=" نوع بسته بندی" type="text"  class=" form-control">
                             <span class="text-danger" v-if="errors.pack_type">@{{errors.pack_type[0]}}</span>
                         </div>
@@ -137,12 +137,12 @@
                             <textarea id="description"  rows="5" placeholder="ویژگی های لازم محصول را توضیح دهید..." class=" form-control"></textarea>
                             <span class="text-danger" v-if="errors.description">@{{errors.description[0]}}</span>
                         </div>
-                        <div class="col-xs-8">
+                        <div class="hidden-xs col-sm-8">
                         </div>
-                        <div class="col-xs-4">
-                            <button @click="registerRequest($event)" type="submit" class="green_bot">ثبت درخواست</button>
+                        <div class="col-xs-12 col-sm-4" >
+                            <button @click="registerRequest($event)" type="submit" style="border:none" class="green_bot">ثبت درخواست</button>
                         </div>
-                        
+
                     </div>
                 </div>
             </article>

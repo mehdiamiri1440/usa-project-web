@@ -1,10 +1,9 @@
 <style scoped>
-    .main-content{
+    .main-content {
         padding: 60px 15px;
     }
     .help {
         direction: rtl;
-        padding: 0 20px;
         line-height: 1.618;
     }
 
@@ -26,7 +25,7 @@
     }
 
     .help .title_list_help ol {
-        margin: 25px 15px;
+        margin: 25px 0;
         font-size: 14px;
         font-weight: 400;
         padding: 15px 30px;
@@ -36,6 +35,7 @@
     .help .title_list_help li {
         padding: 6px 0;
     }
+
 </style>
 <template>
     <section class="main-content col-xs-12">

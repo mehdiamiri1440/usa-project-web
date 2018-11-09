@@ -34,7 +34,7 @@
 <body>
 <div id="app">
     <header id="header" class="main-header">
-        <div class="profile-menu-header col-xs-3">
+        <div class="profile-menu-header ">
             <a href="#" onclick="dropdown()">
                 <div class="image-header-profile" v-if="currentUser.profile.profile_photo">
                     <img  :src=" '{{url('/storage/')}}/' + currentUser.profile.profile_photo">

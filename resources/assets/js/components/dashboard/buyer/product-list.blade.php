@@ -140,9 +140,9 @@
                             <textarea id="description"  rows="5" placeholder="ویژگی های لازم محصول را توضیح دهید..." class=" form-control"></textarea>
                             <span class="text-danger" v-if="errors.description">@{{errors.description[0]}}</span>
                         </div>
-                        <div class="col-xs-8">
+                        <div class="col-sm-8">
                         </div>
-                        <div class="col-xs-4">
+                        <div class=" col-xs-12 col-sm-4">
                             <button @click="registerRequest($event)" type="submit" class="green_bot">ثبت درخواست</button>
                         </div>
 

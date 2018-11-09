@@ -62,12 +62,20 @@
         height: 150px;
     }
 
-    .main-content ul {
+
+    .main-content > ul {
         margin-top: 0;
         text-align: center;
+        box-shadow: 0 0 9px rgba(0, 0, 0, .075);
+        padding: 0;
     }
     .list-group-item{
+        padding: 0;
+    }
+    .list-group-item a{
         padding: 15px 0;
+        display: block;
+        overflow: hidden;
     }
     .main-content  .title-list  {
         overflow: hidden;
