@@ -95,6 +95,10 @@ Route::post('/get_buy_ad_by_id',[
     'as' => 'get_buy_ad_by_id'
 ]);
 
+Route::get('product-list',function(){
+        return view('dashboard.buyer.product-list');
+})->name('product-list');
+
 Route::get('/product/{id?}',function(){
 
     if(session()->has('user_id'))
@@ -153,13 +157,6 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'product_controller@add_product',
         'as' => 'add_product'
     ]);
-
-    Route::get('product-list',function(){
-        if(session('is_buyer')){
-            return view('dashboard.buyer.product-list');
-        }
-        else return abort(404);
-    })->name('product-list');
 
     Route::post('/user/add_buyAd',[
         'uses' => 'buyAd_controller@add_buyAd',

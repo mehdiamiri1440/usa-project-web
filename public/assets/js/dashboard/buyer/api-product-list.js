@@ -216,15 +216,21 @@ var vm = new Vue({
             }
         },
         openRequestRegisterBox:function(e){
-            e.preventDefault;
-            var event =  $(e.target);
+            if(this.currentUser.profile){
+                e.preventDefault;
+                var event =  $(e.target);
+
+                this.errors = '';
+
+                var index = (event.parents('article').index() + 1);
+                var element =  $('article:nth-of-type(' + index + ') .buy_details');
+                element.slideToggle("125", "swing");
+                $('.buy_details').not(element).slideUp();
+            }
+            else{
+                alert('login first');
+            }
             
-            this.errors = '';
-            
-            var index = (event.parents('article').index() + 1);
-            var element =  $('article:nth-of-type(' + index + ') .buy_details');
-            element.slideToggle("125", "swing");
-            $('.buy_details').not(element).slideUp();
         },
         registerRequest:function(e){
             e.preventDefault;
