@@ -429,9 +429,6 @@
         #step1 .main_buttons {
             text-align: center !important;
         }
-        .col-sm-6 {
-            float: none;
-        }
 
         .name-header-profile {
             display: none;
