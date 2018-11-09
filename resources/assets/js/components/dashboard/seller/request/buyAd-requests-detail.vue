@@ -230,9 +230,6 @@
         direction: ltr !important;
     }
     @media screen and (max-width: 768px) {
-        .fields > div{
-            float: none;
-        }
         .image-content-post, .contents-post {
             width: 100%;
             float: none;
@@ -346,14 +343,14 @@
                         <label class="header-lable">تمامی موارد خواسته شده را وارد کرده و برای خریدار ارسال نمایید.</label>
                         <div class="fields col-xs-12">
                             <input type="hidden" :value="buyAd.id" ref="buyAdId">
-                            <div class="col-sm-6">
+                            <div class="col-xs-12 col-sm-6">
                                 <label class="content-lable">
                                     محل تحویل
                                 </label>
                                 <input type="text" v-model="sellOffer.deliver_at" >
                                 <span v-if="errors.deliver_at" class="text-danger" >{{ errors.deliver_at[0] }}</span>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-xs-12 col-sm-6">
 
                                 <label class="content-lable">
                                     قیمت پیشنهادی به ازای هر کیلو به تومان
@@ -361,14 +358,14 @@
                                 <input type="text" v-model="sellOffer.price"  >
                                 <span v-if="errors.price" class="text-danger" >{{ errors.price[0] }}</span>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-xs-12 col-sm-6">
                                 <label class="content-lable">
                                     تاریخ موجودی
                                 </label>
                                 <input readonly="true" type="text" id="first-date-id" ref="validDateFrom">
                                 <span v-if="errors.valid_date_to" class="text-danger" >{{ errors.valid_date_to[0] }}</span>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-xs-12 col-sm-6">
 
                                 <label class="content-lable">
                                     انتهای تاریخ موجودی

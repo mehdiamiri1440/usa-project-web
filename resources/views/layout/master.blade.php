@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap-theme.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/blurry.load.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
     <script src="{{asset('js/app.js')}}"></script>
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
@@ -29,10 +29,92 @@
             margin: 0 auto;
         }
 
+        /*loader*/
+
+        .loader-display {
+            position: fixed;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: block;
+        }
+
+        .main-loader {
+            position: absolute;
+
+            top: 35%;
+
+            text-align: center;
+
+            display: block;
+
+            width: 100%;
+
+            color: #fff;
+
+            font-size: 23px;
+        }
+
+        .main-loader img {
+            width: 100px;
+
+            background: #fff;
+
+            border-radius: 50px;
+
+            height: 100px;
+
+            display: inline-block;
+
+            margin: 0 auto 22px;
+        }
+
+        .loader-wrapper {
+            display: none;
+        }
+        span.min{
+            display: none;
+        }
     </style>
 </head>
 <body>
+
 <div id="app">
+    
+        <!-- Modal -->
+    <div class="container">
+        <div class="modal fade" id="myModal" tabindex="-1" ref="myModal" role="dialog"
+             aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="main_popup_content">
+                        <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                        <p class="main_par">
+                            @{{popUpMsg}}
+                        </p>
+                        <button class="btn green_bot " data-dismiss="modal">
+                            متوجه شدم
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+    </div>
+
+    <!-- /.modal -->
+    <!--loader-->
+
+    <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
+        <div class="main-loader">
+            <img v-bind:src="loading">
+            <p dir="rtl">کمی صبر کنید...</p>
+        </div>
+    </div>
+    <!--end loader-->
   
     <header id="header" class="main-header">
         <div class="profile-menu-header" v-if="currentUser.profile">

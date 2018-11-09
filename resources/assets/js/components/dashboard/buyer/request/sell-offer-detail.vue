@@ -348,7 +348,7 @@
             <div class="contents col-xs-12">
                 <div class="user-info col-xs-12">
                     <div class="info_profile col-xs-12 col-sm-7">
-                        <div class="user_image col-md-2">
+                        <div class="user_image col-xs-12 col-md-2">
                             <div v-if="currentUser.profile.profile_photo">
                                 <img :src="str + '/' + currentUser.profile.profile_photo" id="blah"
                                      alt="تصویر پروفایل">
@@ -357,7 +357,7 @@
                                 <img :src="defultimg" align="تصویر پروفایل">
                             </div>
                         </div>
-                        <div class="user_name col-sm-8">
+                        <div class="user_name col-xs-12 col-md-8">
                             <p>{{currentUser.user_info.first_name + ' ' +
                                 currentUser.user_info.last_name}}<span> - </span>{{currentUser.user_info.province + ' | ' + currentUser.user_info.city }}</p>
                         </div>

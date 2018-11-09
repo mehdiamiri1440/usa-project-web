@@ -58,6 +58,7 @@ var vm = new Vue({
         errors:'',
         popUpMsg:'',
         submiting:false,
+        loading:false,
     },
     methods:{
         init:function(){
@@ -201,7 +202,7 @@ var vm = new Vue({
               if(offset  > height - 3){ //3 pixels to buttom
                   if(this.searchText == '' && this.provinceId == '' && this.categoryId == '' && this.continueToLoadProducts){
                       this.productCountInPage += this.productCountInEachLoad ;
-                      
+
                         axios.post('user/get_product_list',{
                             from_record_number:0,
                             to_record_number:this.productCountInPage,
@@ -228,42 +229,43 @@ var vm = new Vue({
                 $('.buy_details').not(element).slideUp();
             }
             else{
-                alert('login first');
+                this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
+                $('#myModal').modal('show');
             }
-            
+
         },
         registerRequest:function(e){
             e.preventDefault;
             var event = $(e.target);
-            
+
             this.submiting = true;
-            
+
             this.errors = '';
-            
+
             var index = (event.parents('article').index() + 1);
             var productId =  $('article:nth-of-type(' + index + ') .buy_details input#product-id');
             var requirementAmount =  $('article:nth-of-type(' + index + ') .buy_details input#requirement-amount');
             var packType =  $('article:nth-of-type(' + index + ') .buy_details input#pack-type');
             var description =  $('article:nth-of-type(' + index + ') .buy_details textarea#description');
-            
+
             description = description.val();
             requirementAmount = this.toLatinNumbers(requirementAmount.val());
             packType = packType.val();
             productId = productId.val();
-            
+
             var product = this.getProductById(productId);
-        
+
             var request = {
                 requirement_amount:requirementAmount,
                 category_id:product.main.sub_category_id,
                 pack_type:packType,
                 description:description,
             };
-            
+
             if(product.main.product_name){
                 request.name = product.main.product_name;
             }
-            
+
             var self = this;
             //check if product_id there isn't in user product request list
             axios.post('/does_buyer_already_had_requested_the_produtct',{
@@ -277,24 +279,25 @@ var vm = new Vue({
                 }
                 else{
                     self.popUpMsg = 'شما قبلا درخواست خرید این محصول را ثبت کرده اید!';
+                    console.log(self.popUpMsg);
                     $('#myModal').modal('show');
-                    
+
                     self.submiting = false;
-                    
+
                     return false;
                 }
             });
-            
-            
+
+
         },
         RegisterBuyAdRequest:function(request,productId){
             var self = this;
-            
+
             axios.post('/user/add_buyAd',request)
                     .then(function(response){
                             self.popUpMsg = 'درخواست خرید شما ثبت شد!';
                             $('#myModal').modal('show');
-                            
+
                             axios.post('/register_buyer_request_for_the_product',{
                                 product_id:productId,
                             });
@@ -321,10 +324,10 @@ var vm = new Vue({
                 '۹': '9',
             };
 
-            return num    
+            return num
                 .toString()
                 .replace(/[۰-۹]/g,function(w){
-                    return numDic[w]; 
+                    return numDic[w];
             });
         },
         getProductById:function(productId){
@@ -334,12 +337,12 @@ var vm = new Vue({
                 }
                 else return false;
             });
-            
+
             return product[0];
         }
     },
     watch:{
-        
+
         searchText:function(){
             var self = this;
 
@@ -359,7 +362,7 @@ var vm = new Vue({
                             ){
                                 return true;
                             }
-                        
+
                         return false;
                     });
             });
@@ -376,6 +379,6 @@ var vm = new Vue({
     },
     mounted(){
       this.init();
-       
+
     },
 });

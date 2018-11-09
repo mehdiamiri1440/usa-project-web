@@ -335,9 +335,6 @@
             padding: 0;
         }
 
-        .col-sm-6 {
-            float: none;
-        }
 
         .name-header-profile {
             display: none;
@@ -414,7 +411,7 @@
                         مشخصات کاربری
                     </label>
 
-                    <div class="col-sm-6">
+                    <div class="col-xs-12 col-sm-6">
                         <label for="co-num" class="content-lable">
                             شماره ثبت شرکت:
                         </label>
@@ -423,7 +420,7 @@
                         <span v-if="errors.company_register_code" class="text-danger">{{ errors.company_register_code[0]
                             }}</span>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-xs-12 col-sm-6">
                         <label for="company" class="content-lable">
                             نام شرکت:
                         </label>
@@ -432,7 +429,7 @@
                         <span v-if="errors.company_name" class="text-danger">{{ errors.company_name[0] }}</span>
                     </div>
 
-                    <div class="col-sm-6">
+                    <div class="col-xs-12 col-sm-6">
 
                         <label for="company" class="content-lable">
                             شماره تماس:
@@ -441,7 +438,7 @@
                                v-model="currentUser.profile.public_phone">
                         <span v-if="errors.public_phone" class="text-danger">{{ errors.public_phone[0] }}</span>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-xs-12 col-sm-6">
 
                         <label for="company" class="content-lable">
                             آدرس:
@@ -449,7 +446,7 @@
                         <input type="text" name="address" placeholder="آدرس" v-model="currentUser.profile.address">
                         <span v-if="errors.address" class="text-danger">{{ errors.address[0] }}</span>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-xs-12 col-sm-6">
                         <label for="company" class="content-lable">
                             کد پستی:
                         </label>
@@ -457,7 +454,7 @@
                                v-model="currentUser.profile.postal_code">
                         <span v-if="errors.postal_code" class="text-danger">{{ errors.postal_code[0] }}</span>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-xs-12 col-sm-6">
                         <label for="company" class="content-lable">
                             شماره شبا:
                         </label>
