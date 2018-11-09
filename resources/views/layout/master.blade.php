@@ -29,6 +29,55 @@
             margin: 0 auto;
         }
 
+        /*loader*/
+
+        .loader-display {
+            position: fixed;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: block;
+        }
+
+        .main-loader {
+            position: absolute;
+
+            top: 35%;
+
+            text-align: center;
+
+            display: block;
+
+            width: 100%;
+
+            color: #fff;
+
+            font-size: 23px;
+        }
+
+        .main-loader img {
+            width: 100px;
+
+            background: #fff;
+
+            border-radius: 50px;
+
+            height: 100px;
+
+            display: inline-block;
+
+            margin: 0 auto 22px;
+        }
+
+        .loader-wrapper {
+            display: none;
+        }
+        span.min{
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -55,7 +104,15 @@
 </div>
 
 <!-- /.modal -->
+<!--loader-->
 
+<div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
+    <div class="main-loader">
+        <img v-bind:src="loading">
+        <p dir="rtl">کمی صبر کنید...</p>
+    </div>
+</div>
+<!--end loader-->
 
 
 <div id="app">
