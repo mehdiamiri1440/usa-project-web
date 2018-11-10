@@ -48650,20 +48650,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         $("#imgInp").change(function () {
             show_image_preview(this);
         });
-        $(".owl-carousel").owlCarousel({
-            loop: false,
-            margin: 10,
-            nav: true
-        });
-        /*   $(this.$el).parent().parent().parent().magnificPopup({
-               delegate: 'a',
-               type: 'image',
-               gallery: {
-                   enabled: true,
-                   navigateByImgClick: true,
-                   preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-               }
-           });*/
     }
 });
 
@@ -54255,6 +54241,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         this.init();
         __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('subHeader', this.items);
+        $(".owl-carousel").owlCarousel({
+            loop: false,
+            margin: 10,
+            nav: true
+        });
+        $(this.$el).parent().parent().parent().magnificPopup({
+            delegate: 'a',
+            type: 'image',
+            gallery: {
+                enabled: true,
+                navigateByImgClick: true,
+                preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
+            }
+        });
     }
 });
 
