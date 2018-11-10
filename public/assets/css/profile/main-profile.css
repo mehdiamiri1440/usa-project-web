@@ -467,6 +467,10 @@ th, td {
 .logo img{
     width: 150px;
 }
+.image-wrapper{
+    height: 356px;
+    overflow: hidden;
+}
 @media screen and (max-width: 992px) {
 
 

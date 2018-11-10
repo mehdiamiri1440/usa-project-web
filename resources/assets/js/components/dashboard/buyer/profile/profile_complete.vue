@@ -535,8 +535,8 @@
                         تصاویر مربوطه <span>(محصولات | شرکت | کارکنان)</span> </label>
 
                     <div class="row">
-                        <div class="images-content col-xs-12" v-for="photo in currentUser.certificates">
-                            <article class="image-item col-xs-4">
+                        <div class="images-content col-xs-12">
+                            <article class="image-item col-xs-4"  v-for="photo in currentUser.relateds">
                                 <a href="#"><i class="fa fa-close"></i></a>
                                 <img :src=" str + '/' + photo" alt="">
                             </article>
@@ -557,7 +557,7 @@
 
                     <div class="row">
                         <div class="images-content col-xs-12">
-                            <article class="image-item col-xs-4" v-for="photo in currentUser.relateds">
+                            <article class="image-item col-xs-4" v-for="photo in currentUser.certificates">
                                 <a href="#"><i class="fa fa-close"></i></a>
                                 <img :src="str + '/' + photo" alt="">
                             </article>
@@ -566,7 +566,8 @@
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <label>
-                        گواهی های مربوطه <span>(گواهی های ثبت شرکت | گواهی های استاندارد محصول)</span> </label>
+                        افزودن گواهی های مربوطه <span>(گواهی های ثبت شرکت | گواهی های استاندارد محصول)</span>
+                    </label>
 
                     <input type="file" multiple ref="certificateFiles" v-on:change="handleCertificateFilesUpload()"
                            accept="image/*">

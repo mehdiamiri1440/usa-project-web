@@ -158,7 +158,6 @@
                                     <popup v-if="product.photos[0]" v-for="photo in product.photos"
                                            base="{{url('storage')}}/" :img="photo.file_path">
                                     </popup>
-                                    {{--<a  href=""><img v-bind:src=" '{{url('storage')}}/' + product.photos[0].file_path" ></a>--}}
                                 </div>
                             </div>
                         </article>

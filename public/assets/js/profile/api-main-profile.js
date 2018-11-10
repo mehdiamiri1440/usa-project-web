@@ -6,7 +6,7 @@ var PopupImage =  {
         };
     },
     props:['img','base'],
-    template: '<div>' +
+    template: '<div class="image-wrapper">' +
     '<a   :href="base + img">'+
     '<img :src="base + img">'+
     '</a>'+
@@ -33,7 +33,7 @@ var OwlCarousel =  {
         };
     },
     props:['img','base'],
-    template: '<div>' +
+    template: '<div class="image-wrapper">' +
         '<a  :href="base + img">'+
             '<img :src="base + img">'+
         '</a>'+
