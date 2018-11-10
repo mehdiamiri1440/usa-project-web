@@ -636,21 +636,7 @@
             image_checked();
             $("#imgInp").change(function () {
                 show_image_preview(this);
-            });
-            $(".owl-carousel").owlCarousel({
-                loop:false,
-                margin:10,
-                nav:true
-            });
-         /*   $(this.$el).parent().parent().parent().magnificPopup({
-                delegate: 'a',
-                type: 'image',
-                gallery: {
-                    enabled: true,
-                    navigateByImgClick: true,
-                    preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-                }
-            });*/
+            })
 
         }
     }
