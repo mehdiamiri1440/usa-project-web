@@ -6,6 +6,7 @@ import Router from 'vue-router'
 require('../bootstrap');
 require('../imageuploadify.min');
 require('../jquery.magnific-popup.min');
+require('../owl.carousel.min.js');
 window.Vue = require('vue');
 // Seller Components
 import sellerProfileBasic from '../components/dashboard/seller/profile/profile_basic.vue'

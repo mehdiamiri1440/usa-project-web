@@ -4,8 +4,11 @@
 import Vue from 'vue'
 import router from './router/dashboard_router'
 import Axios from 'axios'
+
 Vue.prototype.$http = Axios;
 Vue.config.productionTip = false;
+
+
 import AppSeller from './components/AppSeller'
 import AppBuyer from './components/AppBuyer'
 import loginComponent from './components/login/Login.vue';
@@ -28,11 +31,15 @@ new Vue({
 
 */
 
+
+
+
  new Vue({
      el:'#app',
     components:{
         loginComponent,
         registerComponent,
+       
     },
     router,
 });

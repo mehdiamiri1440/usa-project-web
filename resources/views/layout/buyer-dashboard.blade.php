@@ -16,6 +16,7 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/kamadatepicker.min.css')}}">
+      <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/dashboard/master/style.css')}}">
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
@@ -80,6 +81,7 @@
     @yield('body_script_tags')
 
 
+    
     <script src="{{asset('assets/js/custom.js')}}"></script>
     <script src="{{asset('js/app.js')}}"></script>
     <script src="{{asset('assets/js/idleTimer.js')}}"></script>

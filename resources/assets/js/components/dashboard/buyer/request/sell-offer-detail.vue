@@ -374,9 +374,13 @@
                               <div class="main-image col-xs-12">
                                   <a  :href="str + '/' + sellOfferDetail.sell_offer.photos[0]"><img :src="str + '/' + sellOfferDetail.sell_offer.photos[0]" alt=""></a>
                               </div>
-                             <div class="owl-carousel col-xs-12">
-                                  <a v-for="photo in sellOfferDetail.sell_offer.photos" :href="str + '/' + photo"><img :src="str + '/' + photo" alt=""></a>
-                              </div>
+                               <div class="owl-carousel col-xs-12">
+                                <image-wrapper
+                                        v-for="photo in sellOfferDetail.sell_offer.photos"
+                                               :key="photo.id"
+                                        :img="str + '/' + photo">
+                                </image-wrapper>
+                            </div>
                           </div>
                      <div class="main-article-content col-xs-12 col-md-7">
                              <table class="table table-striped">
@@ -418,11 +422,47 @@
 <script>
     import {eventBus} from "../../../../router/dashboard_router";
 
+        
+var OwlCarousel =  {
+    data:function(){
+        return {
+            imgSrcs:'',
+        };
+    },
+    props:['img'],
+    template: '<div class="image-wrapper">' +
+        '<a  :href="img">'+
+            '<img :src="img">'+
+        '</a>'+
+    '</div>',
+    mounted: function(){
+        $(".owl-carousel").owlCarousel({
+            loop:false,
+            margin:10,
+            nav:false
+        });
+    
+        $(this.$el).parent().parent().parent().magnificPopup({
+        delegate: 'a',
+        type: 'image',
+            gallery: {
+                enabled: true,
+                navigateByImgClick: true,
+                preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+            }
+    });
+
+    }
+};
+    
     export default {
         props: [
             'str',
             'defultimg'
         ],
+        components:{
+              'image-wrapper' : OwlCarousel,
+        },
         data: function () {
             return {
                 currentUser: {
@@ -439,7 +479,9 @@
                     user_info: '',
                 },
                 sellOfferDetail: {
-                    sell_offer : '',
+                    sell_offer : {
+                        photos : ''
+                    },
                     sell_offer_user_info : '',
                     profile_photo : '',
                 },
@@ -473,6 +515,15 @@
         mounted() {
             this.init();
             eventBus.$emit('subHeader', this.items);
+         $('.main-image').magnificPopup({
+        delegate: 'a',
+        type: 'image',
+            gallery: {
+                enabled: true,
+                navigateByImgClick: true,
+                preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+            }
+    });
         },
     }
 </script>

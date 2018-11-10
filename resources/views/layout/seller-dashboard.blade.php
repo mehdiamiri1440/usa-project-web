@@ -8,6 +8,7 @@
         <script src="{{asset('assets/js/jquery.easing.min.js')}}"></script>
         <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('assets/js/kamadatepicker.js')}}"></script>
+        <script src="{{asset('assets/js/kamadatepicker.js')}}"></script>
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/fontiran.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/imageuploadify.min.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
@@ -16,6 +17,8 @@
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/kamadatepicker.min.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
+        
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
         <script src="{{asset('assets/cdn/axios.js')}}"></script>
 
