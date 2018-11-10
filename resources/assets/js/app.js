@@ -16,20 +16,6 @@ import registerComponent from './components/register/register.vue';
 
 
 
-/*
-
-new Vue({
-    components:{
-        profileBasic,
-        loginComponent,
-        registerComponent,
-        headerDashSeller,
-        headerDashBuyer,
-    },
-    router,
-}).$mount('#app');
-
-*/
 
 
 
@@ -48,7 +34,7 @@ new Vue({
 
 
 
-/*
+
 router.push({
     response(resp) {
         // Check if the user is no longer signed in,
@@ -62,7 +48,6 @@ router.push({
         return resp;
     }
 });
-*/
 
 
 Vue.component('step1', {
@@ -106,54 +91,6 @@ Vue.component('step1S2', {
 Vue.component('step1S3', {
     template: '#step1S3'
 });
-
-/*
-
-function checkProfileConfermation(){
-    axios.post('/user/profile_info',{
-        confirmed : true
-    })
-        .then(function(response){
-            if(response.data.profile.confirmed == false){
-
-                console.log("toye yek");
-                return false;
-                // $('#myModal-1').modal('show');
-            }
-            else if(response.data.user_info.contract_confirmed == false){
-                // $('#myModal-1').modal('show');
-                console.log("toye do");
-                return false;
-            }
-            else{
-                console.log("toye se");
-                // window.location.href = url;
-                return true;
-            }
-
-        });
-}
-
-
-
-*/
-/* new Vue({
-    el: '#app',
-    router,
-    components:{
-        loginComponent,
-        registerComponent,
-        'header-dash-seller' : headerDashSeller,
-        headerDashBuyer,
-    }
-});*/
-
-/*
-
-    $( window ).on( "load", function() {
-        console.log( "window loaded" );
-    });
-*/
 
 
 

@@ -52,15 +52,7 @@ export const eventBus = new Vue();
 const myRouter =  new Router({
     base: process.env.BASE_URL,
     routes: [
-        {
-            path: '*',
-            name: 'pageNotFound',
-            components: {
-                seller: sellerNotFound,
-            },
-
-        }
-        , {
+      {
             path: '/password',
             name: 'password',
             components: {

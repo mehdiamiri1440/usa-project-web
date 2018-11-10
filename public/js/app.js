@@ -606,13 +606,6 @@ var eventBus = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a();
 var myRouter = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
     base: Object({"NODE_ENV":"development"}).BASE_URL,
     routes: [{
-        path: '*',
-        name: 'pageNotFound',
-        components: {
-            seller: __WEBPACK_IMPORTED_MODULE_16__components_dashboard_page_not_found_vue___default.a
-        }
-
-    }, {
         path: '/password',
         name: 'password',
         components: {
@@ -23148,21 +23141,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.config.productionTip = false;
 
 
 
-/*
-
-new Vue({
-    components:{
-        profileBasic,
-        loginComponent,
-        registerComponent,
-        headerDashSeller,
-        headerDashBuyer,
-    },
-    router,
-}).$mount('#app');
-
-*/
-
 new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
     components: {
@@ -23173,9 +23151,8 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     router: __WEBPACK_IMPORTED_MODULE_1__router_dashboard_router__["a" /* default */]
 });
 
-/*
-router.push({
-    response(resp) {
+__WEBPACK_IMPORTED_MODULE_1__router_dashboard_router__["a" /* default */].push({
+    response: function response(resp) {
         // Check if the user is no longer signed in,
         // if so then we need them to sign back in.
         if (resp.status === 302) {
@@ -23187,7 +23164,6 @@ router.push({
         return resp;
     }
 });
-*/
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('step1', {
     template: '#step1',
@@ -23216,54 +23192,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('step1S2', {
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('step1S3', {
     template: '#step1S3'
 });
-
-/*
-
-function checkProfileConfermation(){
-    axios.post('/user/profile_info',{
-        confirmed : true
-    })
-        .then(function(response){
-            if(response.data.profile.confirmed == false){
-
-                console.log("toye yek");
-                return false;
-                // $('#myModal-1').modal('show');
-            }
-            else if(response.data.user_info.contract_confirmed == false){
-                // $('#myModal-1').modal('show');
-                console.log("toye do");
-                return false;
-            }
-            else{
-                console.log("toye se");
-                // window.location.href = url;
-                return true;
-            }
-
-        });
-}
-
-
-
-*/
-/* new Vue({
-    el: '#app',
-    router,
-    components:{
-        loginComponent,
-        registerComponent,
-        'header-dash-seller' : headerDashSeller,
-        headerDashBuyer,
-    }
-});*/
-
-/*
-
-    $( window ).on( "load", function() {
-        console.log( "window loaded" );
-    });
-*/
 
 /***/ }),
 /* 19 */
