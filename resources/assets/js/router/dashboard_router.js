@@ -259,7 +259,7 @@ myRouter.beforeEach((to,from,next) => {
                     next();
                 }
                 else if(response.data.user_info.contract_confirmed == false){
-                    $('#myModal-1').modal('show');
+                    $('#contractModalWrapper').modal('show');
                     next(false);
                 }
                 else{

@@ -805,7 +805,7 @@ myRouter.beforeEach(function (to, from, next) {
                 } else if (to.name == 'profileContract') {
                     next();
                 } else if (response.data.user_info.contract_confirmed == false) {
-                    $('#myModal-1').modal('show');
+                    $('#contractModalWrapper').modal('show');
                     next(false);
                 } else {
                     // window.location.href = url;
@@ -49765,8 +49765,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     new_password: self.newPassword
                 }).then(function (response) {
                     if (response.data.status == true) {
-                        //show modal password changed
-                        alert('password changed');
+
+                        self.popUpMsg = 'کلمه عبور با موفقیت تغییر یافت';
+                        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitSuccess', self.popUpMsg);
+                        $('#myModal').modal('show');
                     } else if (response.data.status == false) {
                         self.errors.current_password.push('رمز عبور فعلی درست نیست');
                     }
@@ -61435,7 +61437,7 @@ var render = function() {
                 ])
               : _c("div", [
                   _c("img", {
-                    attrs: { src: _vm.defultimg, align: "تصویر پروفایل" }
+                    attrs: { src: _vm.defultimg, align: "تصویر پیشفرض" }
                   })
                 ]),
             _vm._v(" "),
@@ -66186,7 +66188,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-post[data-v-7c3407c2] {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img[data-v-7c3407c2] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-7c3407c2] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-7c3407c2] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-7c3407c2] {\n    display: block;\n}\n.content-item[data-v-7c3407c2] {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content[data-v-7c3407c2] {\n    padding: 40px 100px 10px;\n}\n.header-lable[data-v-7c3407c2] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n.content-lable[data-v-7c3407c2]{\n    font-weight:400 ;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-7c3407c2] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.black-bot[data-v-7c3407c2] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #313a43;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.black-bot[data-v-7c3407c2]:hover {\n\n    background: #283039;\n    color: #fff;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-7c3407c2]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-7c3407c2] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-7c3407c2]:hover {\n    color: #fff;\n}\n.font-big[data-v-7c3407c2] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-7c3407c2] {\n    width: 80px;\n}\n.little-main-header[data-v-7c3407c2] {\n    right: 80px;\n}\n.background_mob_sec[data-v-7c3407c2] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.contents[data-v-7c3407c2] {\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 10px #e1e1e1;\n            box-shadow: 0 0 10px #e1e1e1;\n    padding: 15px 30px;\n    margin-top: 50px;\n}\n.user-info[data-v-7c3407c2]{\n    border-bottom: 2px solid #eff3f6;\n    padding: 0 0 10px;\n}\n.user_image[data-v-7c3407c2] {\n    overflow: hidden;\n    width: 85px;\n    height: 85px;\n    border-radius: 50%;\n    padding: 0;\n    float: right;\n    text-align: center;\n}\n.user_image img[data-v-7c3407c2]{\n    height: 100%;\n}\n.user_name[data-v-7c3407c2]{\n    direction: rtl;\n    padding: 32px 0;\n    text-align: right;\n}\n.info_profile[data-v-7c3407c2]{\n    float: right;\n}\n.profile_link[data-v-7c3407c2]{\n    direction: ltr;\n    padding-top: 7px;\n    padding-left: 0;\n}\n.profile_link .green-bot[data-v-7c3407c2]{\n    border-radius: 5px;\n}\n.info-contents[data-v-7c3407c2]{\n    padding: 30px 0;\n}\n.image-article-content[data-v-7c3407c2]{\n    padding: 0;\n    float: right;\n}\n.main-article-content[data-v-7c3407c2]{\n    padding: 0;\n    direction: rtl;\n}\n.owl-carousel[data-v-7c3407c2]{\n    direction: ltr;\n    padding-right: 15px;\n}\n.main-image[data-v-7c3407c2]{\n    margin-bottom: 7px;\n    padding-left: 15px;\n}\n.main-image img[data-v-7c3407c2]{\n    border-radius: 3px;\n}\n.actions[data-v-7c3407c2]{\n    direction: rtl;\n    margin-top: 120px;\n}\n.actions .black-bot[data-v-7c3407c2]{\n    float: left;\n}\n@media screen and (max-width: 992px) {\n.owl-carousel[data-v-7c3407c2] {\n        direction: ltr;\n        padding:0;\n}\n.image-article-conten[data-v-7c3407c2] {\n        padding: 0;\n        float: right;\n        margin: 0 auto 30px;\n}\n.main-image[data-v-7c3407c2] {\n        margin-bottom: 7px;\n        padding: 0;\n}\n.right-header.desktop-header[data-v-7c3407c2] {\n        display: none;\n}\n.actions[data-v-7c3407c2]{\n        margin-top: 20px;\n}\n.actions .black-bot[data-v-7c3407c2]{\n        float: left;\n}\n.right-header.mobile-header[data-v-7c3407c2] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-7c3407c2], .little-main-header[data-v-7c3407c2] {\n        right: 0 !important;\n}\n#main[data-v-7c3407c2], #main.little-main[data-v-7c3407c2] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-7c3407c2] {\n        width: 100%;\n}\n.copy-right[data-v-7c3407c2] {\n        display: none;\n}\n.clouse_menu[data-v-7c3407c2] {\n        display: none;\n}\n.clouse_menu_mob[data-v-7c3407c2] {\n        display: block;\n}\n.show-header button[data-v-7c3407c2] {\n        display: block;\n}\n.kind_user > div[data-v-7c3407c2], .kind_activity > div[data-v-7c3407c2] {\n        float: none;\n}\n.img-profile .submit[data-v-7c3407c2] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-7c3407c2] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-7c3407c2] {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-7c3407c2], .contents-post[data-v-7c3407c2] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\ntable[data-v-7c3407c2] {\n        border-collapse: collapse;\n        border-spacing: 0;\n        margin: 20px auto;\n}\n.user_image[data-v-7c3407c2] {\n        overflow: hidden;\n        width: 120px;\n        height: 120px;\n        border-radius: 50%;\n        float: none;\n        margin: 0 auto;\n}\n.profile_link[data-v-7c3407c2]{\n        padding: 10px;\n        text-align: center;\n}\n.main-content[data-v-7c3407c2] {\n        padding: 60px 15px;\n}\n.name-header-profile[data-v-7c3407c2] {\n        display: none;\n}\n.profile-menu-header[data-v-7c3407c2] {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 831px) {\n.user_name[data-v-7c3407c2]{\n        text-align: center;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-7c3407c2] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-7c3407c2] {\n        font-size: 10px;\n}\n.sub-header[data-v-7c3407c2] {\n\n        bottom: -44px;\n}\n}\n", ""]);
+exports.push([module.i, "\n\n\n/*start main content style */\n.image-content-post[data-v-7c3407c2] {\n    width: 30%;\n    float: right;\n    position: relative;\n}\n.image-content-post img[data-v-7c3407c2] {\n    border-radius: 3px;\n    -webkit-transition: 200ms;\n    transition: 200ms;\n    -webkit-filter: grayscale(30%);\n            filter: grayscale(30%);\n}\n.image-content-post a:hover img[data-v-7c3407c2] {\n    -webkit-filter: grayscale(0);\n            filter: grayscale(0);\n    -webkit-transition: 200ms;\n    transition: 200ms;\n}\n.image-content-post i[data-v-7c3407c2] {\n    display: none;\n    position: absolute;\n    top: 46%;\n    left: 0;\n    right: 0;\n    text-align: center;\n    font-size: 35px;\n    color: #fff;\n    z-index: 1;\n}\n.image-content-post a:hover i[data-v-7c3407c2] {\n    display: block;\n}\n.content-item[data-v-7c3407c2] {\n    overflow: hidden;\n    text-align: right;\n    direction: rtl;\n}\n.main-content[data-v-7c3407c2] {\n    padding: 40px 100px 10px;\n}\n.header-lable[data-v-7c3407c2] {\n    display: block;\n    margin: 13px;\n    padding: 0;\n}\n.content-lable[data-v-7c3407c2]{\n    font-weight:400 ;\n}\n\n/*end main content style */\n/*custom cods*/\n.green-bot[data-v-7c3407c2] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #28a745;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.black-bot[data-v-7c3407c2] {\n    margin: 15px 0;\n    display: inline-block;\n    background: #313a43;\n    color: #fff;\n    padding: 10px 35px;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.black-bot[data-v-7c3407c2]:hover {\n\n    background: #283039;\n    color: #fff;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.green-bot[data-v-7c3407c2]:hover {\n    color: #fff;\n    background: #00d614;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.botton-inco[data-v-7c3407c2] {\n    margin: 15px 7px;\n    display: inline-block;\n    color: #313a43;\n    padding: 8px 35px;\n    border-radius: 3px;\n    text-align: center;\n}\n.botton-inco[data-v-7c3407c2]:hover {\n    color: #fff;\n}\n.font-big[data-v-7c3407c2] {\n    font-size: 23px;\n    position: relative;\n    top: 3px;\n}\n.little_header[data-v-7c3407c2] {\n    width: 80px;\n}\n.little-main-header[data-v-7c3407c2] {\n    right: 80px;\n}\n.background_mob_sec[data-v-7c3407c2] {\n    position: fixed;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    top: 0;\n    background: rgba(0, 0, 0, 0.6);\n    z-index: -1;\n    display: none;\n}\n.contents[data-v-7c3407c2] {\n    border-radius: 3px;\n    -webkit-box-shadow: 0 0 10px #e1e1e1;\n            box-shadow: 0 0 10px #e1e1e1;\n    padding: 15px 30px;\n    margin-top: 50px;\n}\n.user-info[data-v-7c3407c2]{\n    border-bottom: 2px solid #eff3f6;\n    padding: 0 0 10px;\n}\n.user_image[data-v-7c3407c2] {\n    overflow: hidden;\n    width: 85px;\n    height: 85px;\n    border-radius: 50%;\n    padding: 0;\n    float: right;\n    text-align: center;\n}\n.user_image > .user_image img[data-v-7c3407c2]{\n    height: 100%;\n}\n.user_name[data-v-7c3407c2]{\n    direction: rtl;\n    padding: 32px 0;\n    text-align: right;\n}\n.info_profile[data-v-7c3407c2]{\n    float: right;\n}\n.profile_link[data-v-7c3407c2]{\n    direction: ltr;\n    padding-top: 7px;\n    padding-left: 0;\n}\n.profile_link .green-bot[data-v-7c3407c2]{\n    border-radius: 5px;\n}\n.info-contents[data-v-7c3407c2]{\n    padding: 30px 0;\n}\n.image-article-content[data-v-7c3407c2]{\n    padding: 0;\n    float: right;\n}\n.main-article-content[data-v-7c3407c2]{\n    padding: 0;\n    direction: rtl;\n}\n.owl-carousel[data-v-7c3407c2]{\n    direction: ltr;\n    padding-right: 15px;\n}\n.main-image[data-v-7c3407c2]{\n    margin-bottom: 7px;\n    padding-left: 15px;\n}\n.main-image img[data-v-7c3407c2]{\n    border-radius: 3px;\n}\n.actions[data-v-7c3407c2]{\n    direction: rtl;\n    margin-top: 120px;\n}\n.actions .black-bot[data-v-7c3407c2]{\n    float: left;\n}\n@media screen and (max-width: 992px) {\n.owl-carousel[data-v-7c3407c2] {\n        direction: ltr;\n        padding:0;\n}\n.image-article-conten[data-v-7c3407c2] {\n        padding: 0;\n        float: right;\n        margin: 0 auto 30px;\n}\n.main-image[data-v-7c3407c2] {\n        margin-bottom: 7px;\n        padding: 0;\n}\n.right-header.desktop-header[data-v-7c3407c2] {\n        display: none;\n}\n.actions[data-v-7c3407c2]{\n        margin-top: 20px;\n}\n.actions .black-bot[data-v-7c3407c2]{\n        float: left;\n}\n.right-header.mobile-header[data-v-7c3407c2] {\n        display: block;\n        right: -300px;\n}\n.main-header[data-v-7c3407c2], .little-main-header[data-v-7c3407c2] {\n        right: 0 !important;\n}\n#main[data-v-7c3407c2], #main.little-main[data-v-7c3407c2] {\n        margin-right: 0 !important;\n}\n.post-contents-table[data-v-7c3407c2] {\n        width: 100%;\n}\n.copy-right[data-v-7c3407c2] {\n        display: none;\n}\n.clouse_menu[data-v-7c3407c2] {\n        display: none;\n}\n.clouse_menu_mob[data-v-7c3407c2] {\n        display: block;\n}\n.show-header button[data-v-7c3407c2] {\n        display: block;\n}\n.kind_user > div[data-v-7c3407c2], .kind_activity > div[data-v-7c3407c2] {\n        float: none;\n}\n.img-profile .submit[data-v-7c3407c2] {\n        position: relative;\n        width: 100%;\n        margin: 25px auto;\n}\n.img-profile .submit label[data-v-7c3407c2] {\n        width: 40%;\n        padding: 12px 0;\n}\n.img-profile[data-v-7c3407c2] {\n        float: none;\n}\n}\n@media screen and (max-width: 768px) {\n.image-content-post[data-v-7c3407c2], .contents-post[data-v-7c3407c2] {\n        width: 100%;\n        float: none;\n        margin: 10px 0;\n        padding: 0;\n}\ntable[data-v-7c3407c2] {\n        border-collapse: collapse;\n        border-spacing: 0;\n        margin: 20px auto;\n}\n.user_image[data-v-7c3407c2] {\n        overflow: hidden;\n        width: 120px;\n        height: 120px;\n        border-radius: 50%;\n        float: none;\n        margin: 0 auto;\n}\n.profile_link[data-v-7c3407c2]{\n        padding: 10px;\n        text-align: center;\n}\n.main-content[data-v-7c3407c2] {\n        padding: 60px 15px;\n}\n.name-header-profile[data-v-7c3407c2] {\n        display: none;\n}\n.profile-menu-header[data-v-7c3407c2] {\n        padding: 7px;\n        padding-left: 36px;\n}\n}\n@media screen and (max-width: 831px) {\n.user_name[data-v-7c3407c2]{\n        text-align: center;\n}\n}\n@media screen and (max-width: 555px) {\n.content-header[data-v-7c3407c2] {\n        display: none;\n}\n}\n@media screen and (max-width: 345px) {\n.sub-header a[data-v-7c3407c2] {\n        font-size: 10px;\n}\n.sub-header[data-v-7c3407c2] {\n\n        bottom: -44px;\n}\n}\n", ""]);
 
 // exports
 
@@ -74420,6 +74422,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -74807,7 +74828,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "profile" }, [
-      _vm.photoLink != null
+      _vm.photoLink
         ? _c("div", { staticClass: "profile-img" }, [
             _c("img", { attrs: { src: _vm.storage + "/" + _vm.photoLink } })
           ])
@@ -75782,7 +75803,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "profile-menu-header" }, [
           _c("a", { attrs: { href: "#", onclick: "dropdown()" } }, [
-            _vm.photoLink != null
+            _vm.photoLink
               ? _c("div", { staticClass: "image-header-profile" }, [
                   _c("img", {
                     attrs: { src: _vm.storage + "/" + _vm.photoLink }
@@ -75915,9 +75936,9 @@ var render = function() {
                   _vm._v(" "),
                   _c("p", { staticClass: "main_par" }, [
                     _vm._v(
-                      "\n                            " +
+                      "\n                              " +
                         _vm._s(_vm.popUpMsg) +
-                        "\n                        "
+                        "\n                          "
                     )
                   ]),
                   _vm._v(" "),
@@ -75929,7 +75950,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                            متوجه شدم\n                        "
+                        "\n                              متوجه شدم\n                          "
                       )
                     ]
                   )
@@ -75958,6 +75979,24 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c(
+          "div",
+          {
+            ref: "myModal",
+            staticClass: "modal fade",
+            attrs: {
+              id: "contractModalWrapper",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "myModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [_vm._m(2)]
+        )
+      ]),
+      _vm._v(" "),
       _c(
         "div",
         {
@@ -75977,9 +76016,9 @@ var render = function() {
       _vm._v(" "),
       _c("section", { staticClass: "right-header mobile-header" }, [
         _c("header", { staticClass: "header-right-header" }, [
-          _vm._m(2),
-          _vm._v(" "),
           _vm._m(3),
+          _vm._v(" "),
+          _vm._m(4),
           _vm._v(" "),
           _c("h1", { staticClass: "logo" }, [
             _c("a", { attrs: { href: "/" } }, [
@@ -76028,9 +76067,9 @@ var render = function() {
       _vm._v(" "),
       _c("section", { staticClass: "right-header desktop-header" }, [
         _c("header", { staticClass: "header-right-header" }, [
-          _vm._m(4),
-          _vm._v(" "),
           _vm._m(5),
+          _vm._v(" "),
+          _vm._m(6),
           _vm._v(" "),
           _c("h1", { staticClass: "logo" }, [
             _c("a", { attrs: { href: "/" } }, [
@@ -76113,7 +76152,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", { staticClass: "main_par", attrs: { id: "popUpMsg" } }, [
             _vm._v(
-              "\n                            ابتدا پروفایل خود را کامل کنید.سپس منتظر تایید اطلاعات خود از سمت کارشناسان اینکوباک\n                            باشید.\n                        "
+              "\n                      لطفا پس از تکمیل اطلاعات پروفایل خود، منتظر تماس کارشناسان اینکوباک جهت تکمیل اطلاعات باشید. از شکیبایی شما سپاسگزاریم.\n                          "
             )
           ]),
           _vm._v(" "),
@@ -76125,7 +76164,40 @@ var staticRenderFns = [
             },
             [
               _vm._v(
-                "\n                            متوجه شدم\n                        "
+                "\n                              متوجه شدم\n                          "
+              )
+            ]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-dialog" }, [
+      _c("div", { staticClass: "modal-content" }, [
+        _c("div", { staticClass: "main_popup_content" }, [
+          _c("a", { attrs: { href: "#", "data-dismiss": "modal" } }, [
+            _c("i", { staticClass: "fa fa-close" })
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "main_par", attrs: { id: "contractModal" } }, [
+            _vm._v(
+              "\n                      \n  برای شروع استفاده از خدمات اینکوباک ابتدا در قسمت ویرایش پروفایل، قرارداد همکاری را مطالعه و تایید کنید.\n                        "
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn green-bot ",
+              attrs: { "data-dismiss": "modal" }
+            },
+            [
+              _vm._v(
+                "\n                              متوجه شدم\n                          "
               )
             ]
           )
@@ -76352,6 +76424,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sub_com_header_top_vue__ = __webpack_require__(233);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sub_com_header_top_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__sub_com_header_top_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router_dashboard_router__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -77369,7 +77460,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "profile" }, [
-      _vm.photoLink != null
+      _vm.photoLink
         ? _c("div", { staticClass: "profile-img" }, [
             _c("img", { attrs: { src: _vm.storage + "/" + _vm.photoLink } })
           ])
@@ -78394,7 +78485,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "profile-menu-header" }, [
           _c("a", { attrs: { href: "#", onclick: "dropdown()" } }, [
-            _vm.photoLink != null
+            _vm.photoLink
               ? _c("div", { staticClass: "image-header-profile" }, [
                   _c("img", {
                     attrs: { src: _vm.storage + "/" + _vm.photoLink }
@@ -78598,6 +78689,24 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c(
+          "div",
+          {
+            ref: "myModal",
+            staticClass: "modal fade",
+            attrs: {
+              id: "contractModalWrapper",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "myModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [_vm._m(2)]
+        )
+      ]),
+      _vm._v(" "),
       _c(
         "div",
         {
@@ -78617,9 +78726,9 @@ var render = function() {
       _vm._v(" "),
       _c("section", { staticClass: "right-header mobile-header" }, [
         _c("header", { staticClass: "header-right-header" }, [
-          _vm._m(2),
-          _vm._v(" "),
           _vm._m(3),
+          _vm._v(" "),
+          _vm._m(4),
           _vm._v(" "),
           _c("h1", { staticClass: "logo" }, [
             _c("a", { attrs: { href: "/" } }, [
@@ -78669,9 +78778,9 @@ var render = function() {
       _vm._v(" "),
       _c("section", { staticClass: "right-header desktop-header" }, [
         _c("header", { staticClass: "header-right-header" }, [
-          _vm._m(4),
-          _vm._v(" "),
           _vm._m(5),
+          _vm._v(" "),
+          _vm._m(6),
           _vm._v(" "),
           _c("h1", { staticClass: "logo" }, [
             _c("a", { attrs: { href: "/" } }, [
@@ -78755,7 +78864,40 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", { staticClass: "main_par", attrs: { id: "popUpMsg" } }, [
             _vm._v(
-              "\n                            ابتدا پروفایل خود را کامل کنید.سپس منتظر تایید اطلاعات خود از سمت کارشناسان اینکوباک\n                            باشید.\n                        "
+              "\n                    لطفا پس از تکمیل اطلاعات پروفایل خود، منتظر تماس کارشناسان اینکوباک جهت تکمیل اطلاعات باشید. از شکیبایی شما سپاسگزاریم.\n                        "
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn green-bot ",
+              attrs: { "data-dismiss": "modal" }
+            },
+            [
+              _vm._v(
+                "\n                            متوجه شدم\n                        "
+              )
+            ]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-dialog" }, [
+      _c("div", { staticClass: "modal-content" }, [
+        _c("div", { staticClass: "main_popup_content" }, [
+          _c("a", { attrs: { href: "#", "data-dismiss": "modal" } }, [
+            _c("i", { staticClass: "fa fa-close" })
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "main_par", attrs: { id: "contractModal" } }, [
+            _vm._v(
+              "\n                    \nبرای شروع استفاده از خدمات اینکوباک ابتدا در قسمت ویرایش پروفایل، قرارداد همکاری را مطالعه و تایید کنید.\n                      "
             )
           ]),
           _vm._v(" "),

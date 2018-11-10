@@ -513,10 +513,29 @@
                     <div class="modal-content">
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
-                            <p class="main_par" id="popUpMsg">
-                                ابتدا پروفایل خود را کامل کنید.سپس منتظر تایید اطلاعات خود از سمت کارشناسان اینکوباک
-                                باشید.
+                          <p class="main_par" id="popUpMsg">
+                        لطفا پس از تکمیل اطلاعات پروفایل خود، منتظر تماس کارشناسان اینکوباک جهت تکمیل اطلاعات باشید. از شکیبایی شما سپاسگزاریم.
                             </p>
+                            <button class="btn green-bot " data-dismiss="modal">
+                                متوجه شدم
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+        </div>
+         <div class="container">
+            <div class="modal fade" id="contractModalWrapper" tabindex="-1" ref="myModal" role="dialog"
+                 aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="main_popup_content">
+                            <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                          <p class="main_par" id="contractModal">
+                        
+    برای شروع استفاده از خدمات اینکوباک ابتدا در قسمت ویرایش پروفایل، قرارداد همکاری را مطالعه و تایید کنید.
+                          </p>
                             <button class="btn green-bot " data-dismiss="modal">
                                 متوجه شدم
                             </button>

@@ -377,7 +377,7 @@
                              alt="تصویر پروفایل">
                     </div>
                     <div v-else>
-                        <img :src="defultimg" align="تصویر پروفایل">
+                        <img :src="defultimg" align="تصویر پیشفرض">
                     </div>
                     <div class="submit">
                         <input type="file" id="imgInp" ref="profilePhoto">

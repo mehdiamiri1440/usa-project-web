@@ -75,6 +75,7 @@
                 transRep="{{url('dashboard/transaction-report')}}"
                 str="{{asset('storage/')}}"
                 defimgitem="{{asset('/assets/img/product.jpg')}}"
+                      defultimg="{{asset('assets/img/user-defult.png')}}"
         ></router-view>
     </main>
 </div>

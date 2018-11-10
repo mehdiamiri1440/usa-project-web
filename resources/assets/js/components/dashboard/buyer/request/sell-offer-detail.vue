@@ -150,7 +150,7 @@
         float: right;
         text-align: center;
     }
-    .user_image img{
+    .user_image > .user_image img{
         height: 100%;
     }
     .user_name{

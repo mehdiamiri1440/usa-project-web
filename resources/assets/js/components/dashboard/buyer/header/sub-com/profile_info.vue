@@ -17,7 +17,7 @@
 <template>
     <div>
         <div class="profile">
-            <div class="profile-img" v-if="photoLink != null">
+            <div class="profile-img" v-if="photoLink">
                 <img :src="storage + '/' + photoLink">
             </div>
             <div class="profile-img" v-else>
