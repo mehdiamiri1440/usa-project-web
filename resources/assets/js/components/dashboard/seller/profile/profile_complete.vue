@@ -532,7 +532,8 @@
             <div class="image_company col-xs-12 ">
                 <div class="col-xs-12 col-sm-6">
                     <label>
-                        تصاویر مربوطه <span>(محصولات | شرکت | کارکنان)</span> </label>
+                        تصاویر مربوطه <span>(محصولات | شرکت | کارکنان)</span>
+                    </label>
 
                     <div class="row">
                         <div class="images-content col-xs-12" >
@@ -553,7 +554,8 @@
             <div class="image_certif  col-xs-12">
                 <div class="col-xs-12 col-sm-6">
                     <label>
-                        گواهی های مربوطه <span>(گواهی های ثبت شرکت | گواهی های استاندارد محصول)</span> </label>
+                        تصاویر گواهی های مربوطه <span>(گواهی های ثبت شرکت | گواهی های استاندارد محصول)</span>
+                    </label>
 
                     <div class="row">
                         <div class="images-content col-xs-12">
