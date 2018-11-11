@@ -157,24 +157,9 @@ footer {
     background-color: #ffffff;
 }
 
-/*@media(min-width:768px){*/
-.test {
-    background-image: url(../images/logo_dark.png);
-    background-repeat: no-repeat;
-    background-size: 200px 75px;
-}
 
-/*}*/
-
-/*
-.custom-navbar .top-nav-collapse .test{
-	background-image: url(../images/logo_dark.png) ;
-	background-repeat: no-repeat;
-	background-size:150px 200px;
-}
-*/
 .custom-navbar .navbar-brand {
-    width: 210px;
+    width: 178px;
     text-align: center;
     margin: 0 auto;
     display: inline-block;
@@ -256,13 +241,6 @@ footer {
     border-color: transparent;
 }
 
-.top-nav-collapse .test {
-    background-image: url(../images/logo_dark.png);
-    background-repeat: no-repeat;
-    background-size: 200px 75px;
-    padding-left: 20%;
-}
-
 .ads {
     background-color: #46ae1b;
     border-radius: 50px;
@@ -275,6 +253,26 @@ footer {
     background-color: #4dc11d !important;
     border-radius: 50px;
     text-align: center;
+}
+
+@media (max-width: 1120px) {
+    .logo-des {
+       display: none;
+    }
+
+}
+@media (max-width: 880px) {
+   .navbar-brand{
+       padding: 0;
+       width: 150px;
+       background-size: 100%;
+   }
+    .top-nav-collapse .nav li a{
+        padding: 11px 5px;
+    }
+    .custom-navbar .nav li a {
+        padding: 11px 5px;
+    }
 }
 
 @media (min-width: 768px) {
@@ -292,7 +290,7 @@ footer {
     .test {
         background-image: url(../images/logo_dark.png);
         background-repeat: no-repeat;
-        background-size: 200px 75px;
+        background-size: 180px 75px;
         border-left: 10px;
     }
 }
@@ -1167,13 +1165,13 @@ footer p {
         margin: 0 auto;
     }
 
-    .custom-navbar .navbar-brand {
-        width: 60%;
-        padding: 0;
-        float: left;
-        margin: 0 auto;
-        background-position: 76%;
-    }
+    /*.custom-navbar .navbar-brand {*/
+        /*width: 60%;*/
+        /*padding: 0;*/
+        /*float: left;*/
+        /*margin: 0 auto;*/
+        /*background-position: 76%;*/
+    /*}*/
 
     .user-header-mobile {
         display: block;
