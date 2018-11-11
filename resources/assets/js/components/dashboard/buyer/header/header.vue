@@ -497,7 +497,7 @@
                             <p class="main_par">
                                 {{popUpMsg}}
                             </p>
-                            <button class="btn green-bot " data-dismiss="modal">
+                            <button class="btn green-bot " data-dismiss="modal" id="close-btn">
                                 متوجه شدم
                             </button>
                         </div>

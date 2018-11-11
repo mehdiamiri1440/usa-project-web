@@ -277,15 +277,16 @@
         <ul class="list-unstyled" v-if="buyAds" v-for="buyAd in buyAds">
             <!--start title list -->
             <li class="list-group-item title-list">
-      <span class="numbers">
-          {{buyAd.sell_offers.length}}
-      </span>
+                  <span class="numbers">
+                      {{buyAd.sell_offers.length}}
+                  </span>
                 <p class="title-list-text">{{buyAd.subcategory_name}}<span class="seperator"> | </span>{{buyAd.name}} </p>
                 <p class="time-show">{{buyAd.register_date}}</p>
             </li>
             <!--end title list -->
-            <div  v-for="sellOffer in buyAd.sell_offers">
-                <li class="list-group-item content-list">
+            
+            <div v-if="buyAd.sell_offers.length > 0">
+                <li  v-for="sellOffer in buyAd.sell_offers" class="list-group-item content-list">
                     <p class="price">
                         <span class="static-price">
                             قیمت:
@@ -299,6 +300,13 @@
                     <router-link :to="'/sell-offer-detail/' + sellOffer.id" class="show-detail green-bot">
                         جزئیات
                     </router-link>
+                </li>
+            </div>
+            <div v-else>
+                <li class="list-group-item content-list">
+                    <p class="text-center">
+                        تاکنون پیشنهاد فروشی برای این درخواست نیامده است
+                    </p>
                 </li>
             </div>
         </ul>
