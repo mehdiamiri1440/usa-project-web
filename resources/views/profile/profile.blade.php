@@ -68,10 +68,12 @@
                 </div>
                 <div class="sub-header col-xs-12">
                     <ul class="list-inline">
+                        @if(session('is_seller'))
                         <li class="list-item" :class="{'active':!profileDescription}"><a @click="
                             showProfileOwnerProducts($event)" href="">
                             محصولات من </a>
                         </li>
+                        @endif
                         <li class="list-item" :class="{'active':profileDescription}"><a @click="
                             showProfileOwnerDescription($event)" href="">
                             توضیحات من
