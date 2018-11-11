@@ -67234,7 +67234,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['loading', 'trans'],
+    props: ['loading_img', 'trans'],
     data: function data() {
         return {
             transactions: '',
@@ -67346,7 +67346,7 @@ var render = function() {
           ? _c("div", { staticClass: "loading_images  col-xs-12" }, [
               _c("img", {
                 staticStyle: { width: "200px", height: "200px" },
-                attrs: { src: _vm.loading }
+                attrs: { src: _vm.loading_img }
               })
             ])
           : _c("div", { staticClass: "col-xs-12" }, [
@@ -68860,7 +68860,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['loading', 'trans'],
+    props: ['loading_img', 'trans'],
     data: function data() {
 
         return {
@@ -68962,7 +68962,12 @@ var render = function() {
             2
           )
         : _vm.isLoading
-          ? _c("div", { staticClass: "loading_images  col-xs-12" })
+          ? _c("div", { staticClass: "loading_images  col-xs-12" }, [
+              _c("img", {
+                staticStyle: { width: "200px", height: "200px" },
+                attrs: { src: _vm.loading_img }
+              })
+            ])
           : _c("div", { staticClass: "col-xs-12" }, [
               _c("h4", { staticClass: "text-center", attrs: { dir: "rtl" } }, [
                 _vm._v("تراکنشی در این قسمت وجود ندارد.")

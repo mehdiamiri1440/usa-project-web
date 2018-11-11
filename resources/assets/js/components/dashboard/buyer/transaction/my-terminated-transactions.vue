@@ -169,7 +169,7 @@
             </ul>
 
             <div class="loading_images  col-xs-12" v-else-if="isLoading">
-                <!--<img :src="loading" style="width:200px;height:200px">-->
+                <img :src="loading_img" style="width:200px;height:200px">
             </div>
             <div class="col-xs-12" v-else>
                 <h4 class="text-center" dir="rtl">تراکنشی در این قسمت وجود ندارد.</h4>
@@ -181,7 +181,7 @@
     import {eventBus} from "../../../../router/dashboard_router";
     export default {
         props: [
-            'loading',
+            'loading_img',
             'trans'
         ],
         data: function () {
