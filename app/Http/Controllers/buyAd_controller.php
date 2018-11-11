@@ -621,7 +621,8 @@ class buyAd_controller extends Controller
     protected function get_buyAd_sell_offers($buyAd_id,$fields)
     {
         $sell_offers = sell_offer::where('buy_ad_id',$buyAd_id)
-//            ->where('is_pending',true)
+            ->where('is_pending',true)
+            ->where('confirmed',true)
             ->select($fields)
             ->get();
         
