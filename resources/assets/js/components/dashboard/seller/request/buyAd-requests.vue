@@ -76,12 +76,12 @@
                 </li>
             </ul>
         </section>
-        <section class="main-content col-xs-12 loading_images" v-else-if="buyAds.length == 0 && !loading">
+        <section class="main-content col-xs-12 loading_images" v-else-if="buyAds.length == 0 && !load">
             <h4 dir="rtl" class="text-center">درخواستی برای شما وجود ندارد.</h4>
         </section>
-        <section class="main-content col-xs-12 loading_images" v-show="loading">
+        <section class="main-content col-xs-12 loading_images" v-show="load">
 
-            <img :src="loader" style="width:200px;height:200px">
+            <img :src="loading" style="width:200px;height:200px">
         </section>
     </div>
 </template>
@@ -90,7 +90,7 @@
     import {eventBus} from "../../../../router/dashboard_router";
     export default {
         props: [
-            "loader",
+            "loading",
             "storage",
             "defultimg"
         ],
@@ -102,7 +102,7 @@
                 },
                 buyAds: '',
                 popUpMsg: '',
-                loading: false,
+                load: false,
                 items: [
                 {
                     message: 'پیشنهادات من',
@@ -118,14 +118,14 @@
         ,
         methods: {
             init: function () {
-                this.loading = true;
+                this.load = true;
 
                 var self = this;
 
                 axios.post('/get_related_buyAds_list_to_the_seller')
                     .then(function (response) {
                         self.buyAds = response.data.buyAds;
-                        self.loading = false;
+                        self.load = false;
                     });
             }
             ,
