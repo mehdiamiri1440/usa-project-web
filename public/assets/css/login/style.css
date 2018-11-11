@@ -123,11 +123,10 @@ input[type="text"],input[type="password"],input[type="email"]{
     margin: 8px 0 50px;
     display: inline-block;
 }
-.bouttons{
-    margin: 60px auto;
-}
+
 .input_contents{
     position: relative;
+    padding: 0;
 }
 input.pad{
     padding: 13px 47px 9px 15px;
@@ -195,8 +194,9 @@ input.pad{
 }
 
 .main-form {
+    min-width: 250px;
     margin: 0 auto;
-    height: 460px;
+    height: 550px;
     overflow: hidden;
     border-radius: 5px;
     background: #fff;
@@ -231,7 +231,7 @@ ul.header_list li.active {
     border-bottom:2px solid #28a745;
 }
 .content_section{
-    padding: 15px 66px;
+    padding: 40px 66px 0;
 }
 
 .dots-step{
