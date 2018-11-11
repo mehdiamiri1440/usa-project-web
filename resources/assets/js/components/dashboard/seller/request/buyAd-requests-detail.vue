@@ -439,6 +439,7 @@
               sellOfferFiles:[],
               errors:[],
               popUpMsg:'',
+              submiting:false,
               buyAd:{
                   photos:'',
               },
@@ -461,17 +462,20 @@
             },
             submitSellOffer:function(){
                 var self = this;
+                
+                this.submiting = true;
 
                 var formData = this.getSellOfferFormFields();
 
                 axios.post('/add_sell_offer',formData)
                     .then(function(response){
                         if(response.status == 201){
-                            self.popUpMsg = 'تغییرات با موفقیت اعمال شد';
+                            self.popUpMsg = 'پیشنهاد فروش شما ثبت شد.';
                             eventBus.$emit('submitSuccess', self.popUpMsg);
                             $('#myModal').modal('show');
                              window.location.href = '/dashboard/#/my-sell-offers'
                         }
+                        self.submiting = false;
                     })
                     .catch(function(err){
                         self.errors = '';
@@ -482,6 +486,7 @@
                             eventBus.$emit('submitSuccess', self.popUpMsg);
                             $('#myModal').modal('show');
                         }
+                        self.submiting = false;
                     });
             },
             handleSellOfferFileUpload:function(){

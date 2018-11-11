@@ -793,8 +793,8 @@ myRouter.beforeEach(function (to, from, next) {
                 confirmed: true
             }).then(function (response) {
                 if (response.data.profile.confirmed == false) {
-                    next(false);
                     $('#myModal-1').modal('show');
+                    next(false);
                 } else if (to.name == 'profileContract') {
                     next();
                 } else if (response.data.user_info.contract_confirmed == false) {
@@ -23149,20 +23149,6 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
     },
     router: __WEBPACK_IMPORTED_MODULE_1__router_dashboard_router__["a" /* default */]
-});
-
-__WEBPACK_IMPORTED_MODULE_1__router_dashboard_router__["a" /* default */].push({
-    response: function response(resp) {
-        // Check if the user is no longer signed in,
-        // if so then we need them to sign back in.
-        if (resp.status === 302) {
-            window.location.href = '/login';
-
-            return;
-        }
-
-        return resp;
-    }
 });
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('step1', {
@@ -53461,6 +53447,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             sellOfferFiles: [],
             errors: [],
             popUpMsg: '',
+            submiting: false,
             buyAd: {
                 photos: ''
             },
@@ -53481,15 +53468,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         submitSellOffer: function submitSellOffer() {
             var self = this;
 
+            this.submiting = true;
+
             var formData = this.getSellOfferFormFields();
 
             axios.post('/add_sell_offer', formData).then(function (response) {
                 if (response.status == 201) {
-                    self.popUpMsg = 'تغییرات با موفقیت اعمال شد';
+                    self.popUpMsg = 'پیشنهاد فروش شما ثبت شد.';
                     __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitSuccess', self.popUpMsg);
                     $('#myModal').modal('show');
                     window.location.href = '/dashboard/#/my-sell-offers';
                 }
+                self.submiting = false;
             }).catch(function (err) {
                 self.errors = '';
                 self.errors = err.response.data.errors;
@@ -53499,6 +53489,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitSuccess', self.popUpMsg);
                     $('#myModal').modal('show');
                 }
+                self.submiting = false;
             });
         },
         handleSellOfferFileUpload: function handleSellOfferFileUpload() {

@@ -244,8 +244,8 @@ myRouter.beforeEach((to,from,next) => {
                 })
             .then(function(response){
                 if(response.data.profile.confirmed == false){
-                    next(false);
                     $('#myModal-1').modal('show');
+                    next(false);
                 }
                 else if(to.name == 'profileContract'){
                     next();

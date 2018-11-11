@@ -33,23 +33,6 @@ import registerComponent from './components/register/register.vue';
 
 
 
-
-
-router.push({
-    response(resp) {
-        // Check if the user is no longer signed in,
-        // if so then we need them to sign back in.
-        if (resp.status === 302) {
-            window.location.href = '/login';
-
-            return;
-        }
-
-        return resp;
-    }
-});
-
-
 Vue.component('step1', {
     template: '#step1',
     props: [
