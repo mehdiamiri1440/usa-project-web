@@ -228,9 +228,9 @@ DETAIL SECTION
                         <img class="image-blur"  src="{{asset('assets/img/vegetable.jpg')}}">
                     </div>
                     @if(session('is_seller'))
-                        <a href="{{route('seller-register-product')}}" class="btn-incobac">سفارش / ثبت  صیفی</a>
+                        <a href="/dashboard/#/register-request" class="btn-incobac">سفارش / ثبت  صیفی</a>
                     @elseif(session('is_buyer'))
-                        <a href="{{route('register_buyer_request')}}" class="btn-incobac">سفارش / ثبت  صیفی</a>
+                        <a href="/dashboard/#/register-request" class="btn-incobac">سفارش / ثبت  صیفی</a>
                     @else
                         <a href="{{route('login_page')}}" class="btn-incobac">سفارش / ثبت  صیفی</a>
                     @endif
@@ -246,9 +246,9 @@ DETAIL SECTION
                         <img class="image-blur" src="{{asset('assets/img/nuts-and-dried-fruits.jpg')}}">
                     </div>
                     @if(session('is_seller'))
-                        <a href="{{route('seller-register-product')}}" class="btn-incobac">سفارش / ثبت  خشکبار</a>
+                        <a href="/dashboard/#/register-request" class="btn-incobac">سفارش / ثبت  خشکبار</a>
                     @elseif(session('is_buyer'))
-                        <a href="{{route('register_buyer_request')}}" class="btn-incobac">سفارش / ثبت  خشکبار</a>
+                        <a href="/dashboard/#/register-request" class="btn-incobac">سفارش / ثبت  خشکبار</a>
                     @else
                         <a href="{{route('login_page')}}" class="btn-incobac">سفارش / ثبت  خشکبار</a>
                     @endif
@@ -263,9 +263,9 @@ DETAIL SECTION
                         <img class="image-blur" src="{{asset('assets/img/fruits.jpg')}}">
                     </div>
                     @if(session('is_seller'))
-                        <a href="{{route('seller-register-product')}}" class="btn-incobac">سفارش / ثبت  میوه</a>
+                        <a href="/dashboard/#/register-request" class="btn-incobac">سفارش / ثبت  میوه</a>
                     @elseif(session('is_buyer'))
-                        <a href="{{route('register_buyer_request')}}" class="btn-incobac">سفارش / ثبت   میوه</a>
+                        <a href="/dashboard/#/register-request" class="btn-incobac">سفارش / ثبت  میوه</a>
                     @else
                         <a href="{{route('login_page')}}" class="btn-incobac">سفارش / ثبت  میوه</a>
                     @endif

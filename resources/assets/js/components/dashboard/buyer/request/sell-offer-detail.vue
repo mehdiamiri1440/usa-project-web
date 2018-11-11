@@ -1,4 +1,3 @@
-
 <style scoped>
 
     /*start main content style */
@@ -51,8 +50,9 @@
         margin: 13px;
         padding: 0;
     }
-    .content-lable{
-        font-weight:400 ;
+
+    .content-lable {
+        font-weight: 400;
     }
 
     /*end main content style */
@@ -67,7 +67,9 @@
         text-align: center;
         border: none;
         transition: 300ms;
+        width: 100%;
     }
+
     .black-bot {
         margin: 15px 0;
         display: inline-block;
@@ -79,6 +81,7 @@
         border: none;
         transition: 300ms;
     }
+
     .black-bot:hover {
 
         background: #283039;
@@ -137,10 +140,12 @@
         padding: 15px 30px;
         margin-top: 50px;
     }
-    .user-info{
+
+    .user-info {
         border-bottom: 2px solid #eff3f6;
         padding: 0 0 10px;
     }
+
     .user_image {
         overflow: hidden;
         width: 85px;
@@ -150,76 +155,98 @@
         float: right;
         text-align: center;
     }
-    .user_image > .user_image img{
+
+    .user_image > .user_image img {
         height: 100%;
     }
-    .user_name{
+
+    .user_name {
         direction: rtl;
         padding: 32px 0;
         text-align: right;
     }
-    .info_profile{
+
+    .info_profile {
         float: right;
     }
-    .profile_link{
+
+    .profile_link {
         direction: ltr;
         padding-top: 7px;
         padding-left: 0;
     }
-    .profile_link .green-bot{
+
+    .profile_link .green-bot {
         border-radius: 5px;
     }
-    .info-contents{
+
+    .info-contents {
         padding: 30px 0;
     }
-    .image-article-content{
+
+    .image-article-content {
         padding: 0;
         float: right;
-    }
-    .main-article-content{
-        padding: 0;
         direction: rtl;
     }
-    .owl-carousel{
+
+    .main-article-content > .owl-carousel {
+        height: 100px;
+        overflow: hidden;
+
+    }
+
+    .owl-carousel {
         direction: ltr;
         padding-right: 15px;
     }
-    .main-image{
+
+    .main-image {
         margin-bottom: 7px;
         padding-left: 15px;
+        height: 300px;
+        overflow: hidden;
     }
-    .main-image img{
+
+    .main-image img {
         border-radius: 3px;
     }
-    .actions{
+
+    .actions {
         direction: rtl;
         margin-top: 120px;
     }
-    .actions .black-bot{
+
+    .actions .black-bot {
         float: left;
     }
 
     @media screen and (max-width: 992px) {
         .owl-carousel {
             direction: ltr;
-            padding:0;
+            padding: 0;
         }
+
         .image-article-conten {
             padding: 0;
             float: right;
             margin: 0 auto 30px;
         }
+
         .main-image {
             margin-bottom: 7px;
             padding: 0;
         }
+
         .right-header.desktop-header {
             display: none;
         }
-        .actions{
+
+        .actions {
             margin-top: 20px;
         }
-        .actions .black-bot{
+
+        .actions .black-bot {
             float: left;
         }
 
@@ -285,11 +312,13 @@
             margin: 10px 0;
             padding: 0;
         }
+
         table {
             border-collapse: collapse;
             border-spacing: 0;
             margin: 20px auto;
         }
+
         .user_image {
             overflow: hidden;
             width: 120px;
@@ -298,10 +327,16 @@
             float: none;
             margin: 0 auto;
         }
-        .profile_link{
+
+        .user_image > div, .user_image img {
+            height: 100%
+        }
+
+        .profile_link {
             padding: 10px;
             text-align: center;
         }
+
         .main-content {
             padding: 60px 15px;
         }
@@ -318,10 +353,11 @@
     }
 
     @media screen and (max-width: 831px) {
-        .user_name{
+        .user_name {
             text-align: center;
         }
     }
+
     @media screen and (max-width: 555px) {
         .content-header {
             display: none;
@@ -359,60 +395,75 @@
                         </div>
                         <div class="user_name col-xs-12 col-md-8">
                             <p>{{currentUser.user_info.first_name + ' ' +
-                                currentUser.user_info.last_name}}<span> - </span>{{currentUser.user_info.province + ' | ' + currentUser.user_info.city }}</p>
+                                currentUser.user_info.last_name}}<span> - </span>{{currentUser.user_info.province + ' |
+                                ' + currentUser.user_info.city }}</p>
                         </div>
 
                     </div>
                     <div class="profile_link col-xs-12 col-sm-5">
-                              <a :href="'/profile/' + currentUser.user_info.user_name" class="green-bot">
-                                  مشاهده پروفایل تامین کننده
-                              </a>
+                        <a :href="'/profile/' + currentUser.user_info.user_name" class="green-bot">
+                            مشاهده پروفایل تامین کننده
+                        </a>
                     </div>
                 </div>
-                     <div class="info-contents col-xs-12">
-                          <div class="image-article-content  col-xs-12 col-md-5">
-                              <div class="main-image col-xs-12">
-                                  <a  :href="str + '/' + sellOfferDetail.sell_offer.photos[0]"><img :src="str + '/' + sellOfferDetail.sell_offer.photos[0]" alt=""></a>
-                              </div>
-                               <div class="owl-carousel col-xs-12">
-                                <image-wrapper
-                                        v-for="photo in sellOfferDetail.sell_offer.photos"
-                                               :key="photo.id"
-                                        :img="str + '/' + photo">
-                                </image-wrapper>
+                <div class="info-contents col-xs-12">
+                    <div class="image-article-content  col-xs-12 col-md-5">
+                        <div class="main-image col-xs-12">
+                            <a :href="str + '/' + sellOfferDetail.sell_offer.photos[0]"><img
+                                    :src="str + '/' + sellOfferDetail.sell_offer.photos[0]" alt=""></a>
+                        </div>
+                        <div class="owl-carousel col-xs-12">
+                            <image-wrapper
+                                    v-for="photo in sellOfferDetail.sell_offer.photos"
+                                    :key="photo.id"
+                                    :img="str + '/' + photo">
+                            </image-wrapper>
+                        </div>
+                    </div>
+                    <div class="main-article-content col-xs-12 col-md-7">
+                        <table class="table table-striped">
+                            <tr>
+                                <td>قیمت واحد<span class="">(هر کیلو به تومان)</span> :</td>
+                                <td> {{sellOfferDetail.sell_offer.price}} تومان</td>
+                            </tr>
+                            <tr>
+                                <td> محل تحویل کالا:</td>
+                                <td> {{sellOfferDetail.sell_offer.deliver_at}}</td>
+                            </tr>
+
+                            <tr>
+                                <td> زمان موجودی:</td>
+                                <td>{{sellOfferDetail.sell_offer.date_from + ' - ' +
+                                    sellOfferDetail.sell_offer.date_to}}
+                                </td>
+                            </tr>
+                        </table>
+                        <p>توضیحات: <span>{{sellOfferDetail.sell_offer.description}}</span></p>
+                        <div class="col-xs-12 actions">
+                            <div v-show='sellOfferDetail.sell_offer.is_pending'>
+                                <div class="col-xs-12 col-sm-6">
+                                    <button type="button" class="green-bot "
+                                            @click=initiateBuy(sellOfferDetail.sell_offer.id)>آغاز فرآیند خرید
+                                    </button>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <button type="button" class="green-bot"
+                                            @click=rejectBuy(sellOfferDetail.sell_offer.id)>رد این پیشنهاد
+                                    </button>
+                                </div>
                             </div>
-                          </div>
-                     <div class="main-article-content col-xs-12 col-md-7">
-                             <table class="table table-striped">
-                                 <tr>
-                                     <td>قیمت واحد<span class="">(هر کیلو به تومان)</span> :</td>
-                                     <td> {{sellOfferDetail.sell_offer.price}} تومان</td>
-                                 </tr>
-                                  <tr>
-                                        <td>  محل تحویل کالا:</td>
-                                        <td> {{sellOfferDetail.sell_offer.deliver_at}}</td>
-                                    </tr>
+                            <p class='text-success' v-show='sellOfferDetail.sell_offer.is_accepted'>شما قبلا این پیشنهاد
+                                را پذیرفته اید.منتظر ارتباط ما باشید.</p>
+                            <p class='text-danger'
+                               v-show='sellOfferDetail.sell_offer.is_pending == 0 && sellOfferDetail.sell_offer.is_accepted == 0 '>
+                                شما قبلا این پیشنهاد را رد کرده اید.درصورت تغییر نظر با ما تماس بگیرید</p>
 
-                                    <tr>
-                                        <td>  زمان موجودی:</td>
-                                        <td>{{sellOfferDetail.sell_offer.date_from + ' - ' + sellOfferDetail.sell_offer.date_to}}</td>
-                                    </tr>
-                                </table>
-                                <p>توضیحات: <span>{{sellOfferDetail.sell_offer.description}}</span></p>
-                                    <div class="col-xs-12 actions">
-                                        <div v-show='sellOfferDetail.sell_offer.is_pending'>
-                                            <button type="button" class="green-bot" @click=initiateBuy(sellOfferDetail.sell_offer.id)>آغاز فرآیند خرید</button>
-                                            <button type="button" class="green-bot" @click=rejectBuy(sellOfferDetail.sell_offer.id)>رد این پیشنهاد</button>
-                                        </div>
-                                            <p class='text-success' v-show='sellOfferDetail.sell_offer.is_accepted'>شما قبلا این پیشنهاد را پذیرفته اید.منتظر ارتباط ما باشید.</p>
-                                            <p class='text-danger' v-show='sellOfferDetail.sell_offer.is_pending == 0 && sellOfferDetail.sell_offer.is_accepted == 0 '>شما قبلا این پیشنهاد را رد کرده اید.درصورت تغییر نظر با ما تماس بگیرید</p>
-
-                                            <a href="/dashboard/#/my-buyAds" class="black-bot">بازگشت به صفحه قبل</a>
-                                        </div>
-                          </div>
+                            <a href="/dashboard/#/my-buyAds" class="black-bot">بازگشت به صفحه قبل</a>
+                        </div>
+                    </div>
 
 
-                      </div>
+                </div>
             </div>
         </section>
     </div>
@@ -422,46 +473,46 @@
 <script>
     import {eventBus} from "../../../../router/dashboard_router";
 
-        
-var OwlCarousel =  {
-    data:function(){
-        return {
-            imgSrcs:'',
-        };
-    },
-    props:['img'],
-    template: '<div class="image-wrapper">' +
-        '<a  :href="img">'+
-            '<img :src="img">'+
-        '</a>'+
-    '</div>',
-    mounted: function(){
-        $(".owl-carousel").owlCarousel({
-            loop:false,
-            margin:10,
-            nav:false
-        });
-    
-        $(this.$el).parent().parent().parent().magnificPopup({
-        delegate: 'a',
-        type: 'image',
-            gallery: {
-                enabled: true,
-                navigateByImgClick: true,
-                preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-            }
-    });
 
-    }
-};
-    
+    var OwlCarousel = {
+        data: function () {
+            return {
+                imgSrcs: '',
+            };
+        },
+        props: ['img'],
+        template: '<div class="image-wrapper">' +
+            '<a  :href="img">' +
+            '<img :src="img">' +
+            '</a>' +
+            '</div>',
+        mounted: function () {
+            $(".owl-carousel").owlCarousel({
+                loop: false,
+                margin: 10,
+                nav: false
+            });
+
+            $(this.$el).parent().parent().parent().magnificPopup({
+                delegate: 'a',
+                type: 'image',
+                gallery: {
+                    enabled: true,
+                    navigateByImgClick: true,
+                    preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
+                }
+            });
+
+        }
+    };
+
     export default {
         props: [
             'str',
             'defultimg'
         ],
-        components:{
-              'image-wrapper' : OwlCarousel,
+        components: {
+            'image-wrapper': OwlCarousel,
         },
         data: function () {
             return {
@@ -479,11 +530,11 @@ var OwlCarousel =  {
                     user_info: '',
                 },
                 sellOfferDetail: {
-                    sell_offer : {
-                        photos : ''
+                    sell_offer: {
+                        photos: ''
                     },
-                    sell_offer_user_info : '',
-                    profile_photo : '',
+                    sell_offer_user_info: '',
+                    profile_photo: '',
                 },
                 popUpMsg: '',
                 loading: false,
@@ -506,24 +557,24 @@ var OwlCarousel =  {
                 axios.post('/dashboard/sell-offer-detail', {
                     'sell_offer_id': this.$route.params.id,
                 })
-                .then(function (response) {
-                    self.sellOfferDetail = response.data;
-                    console.log(self.sellOfferDetail.sell_offer)
-                });
+                    .then(function (response) {
+                        self.sellOfferDetail = response.data;
+                        console.log(self.sellOfferDetail.sell_offer)
+                    });
             },
         },
         mounted() {
             this.init();
             eventBus.$emit('subHeader', this.items);
-         $('.main-image').magnificPopup({
-        delegate: 'a',
-        type: 'image',
-            gallery: {
-                enabled: true,
-                navigateByImgClick: true,
-                preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-            }
-    });
+            $('.main-image').magnificPopup({
+                delegate: 'a',
+                type: 'image',
+                gallery: {
+                    enabled: true,
+                    navigateByImgClick: true,
+                    preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
+                }
+            });
         },
     }
 </script>

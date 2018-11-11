@@ -121,7 +121,7 @@
         </section>
          <div class="loading_images  col-xs-12" v-show="loading">
               <img :src="loader" style="width:200px;height:200px">
-          </div>-->
+          </div>
     </div>
 
 </template>
@@ -169,7 +169,7 @@
         mounted() {
             this.init();
             eventBus.$emit('subHeader', this.items);
-           
+
 
         },
     }
