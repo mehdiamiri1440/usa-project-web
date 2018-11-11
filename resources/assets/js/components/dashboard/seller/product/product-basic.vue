@@ -88,13 +88,14 @@
         float: right;
         position: absolute;
         top: -5px;
-        right: 217px;
+        right: 270px;
         opacity: 0;
     }
 
     .rules input:checked + i {
         background: #28a745;
         color: #fff;
+        border: none;
         padding: 4px;
     }
 
@@ -105,12 +106,13 @@
         display: block;
         position: absolute;
         top: -5px;
-        right: 217px;
+        right: 270px;
         z-index: -1;
         color: #808c9c;
         border-radius: 50%;
-        padding: 3px 2px;
+        padding: 2px;
         font-size: 14px;
+        border: 2px solid;
     }
 
 </style>
@@ -231,7 +233,7 @@
 
                     <div class="rules col-xs-12">
                         با <span class="roules-check-inside">قوانین و شرایط</span>
-                        ثبت آگهی موافقم<input type="checkbox" v-model="product.rules">
+                        ثبت محصول موافق هستم<input type="checkbox" v-model="product.rules">
                         <i class="fa fa-check"></i>
                     </div>
                     <div class="col-xs-12">

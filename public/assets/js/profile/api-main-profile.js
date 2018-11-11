@@ -42,7 +42,8 @@ var OwlCarousel =  {
         $(".owl-carousel").owlCarousel({
             loop:false,
             margin:10,
-            nav:true
+            nav:true,
+            dots:false
         });
         $(this.$el).parent().parent().parent().magnificPopup({
         delegate: 'a',

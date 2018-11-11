@@ -1118,14 +1118,30 @@ footer p {
 
 .profile-list li {
     padding: 5px 0;
-    border-bottom: 1px solid;
-
 }
 
 .profile-list li:last-of-type {
     border-bottom: none;
 }
+.user-header-web{
+    position: relative;
+}
+img.image-blur{
+    transition: 300ms;
+}
+img.image-blur:hover{
+    transform: scale(1.05);
+    transition: 300ms;
+}
+.enamad{
+    text-align: center;
 
+}
+.enamad > div{
+    width: 120px;
+    margin:20px auto;
+    text-align: center;
+}
 /*---------------------------------------
    Responsive styles
 -----------------------------------------*/
@@ -1173,16 +1189,7 @@ footer p {
         /*background-position: 76%;*/
     /*}*/
 
-    .user-header-mobile {
-        display: block;
-        width: 7%;
-        float: left;
-        margin-left: 50px;
-    }
 
-    .user-header-web {
-        display: none !important;
-    }
 
     .user-header-mobile .profile-menu-header {
         padding: 25px 0 0;
@@ -1196,7 +1203,7 @@ footer p {
 
     .user-header-mobile .profile-menu-header i {
         top: 9px;
-        left: -45px;
+        left: -60px;
     }
 
     .main_hero_section {
@@ -1250,9 +1257,7 @@ footer p {
         margin: 0;
     }
 
-    .profile-menu-header > a {
-        border-right: none;
-    }
+
 }
 
 @media screen and (max-width: 1249px) {
@@ -1260,6 +1265,28 @@ footer p {
         width: inherit;
         height: 100%;
     }
+}
+@media screen and (max-width: 767px) {
+    .user-header-mobile {
+        display: block;
+        width: 7%;
+        float: left;
+        margin-left: 50px;
+    }
+    .user-header-web {
+        display: none !important;
+    }
+    .profile-menu-header > a {
+        border-right: none;
+    }
+    .custom-navbar .navbar-brand {
+        display: block;
+        margin: 0 auto;
+        float: none;
+    }
+
+
+
 }
 @media screen and (max-width: 534px) {
     .custom-navbar .navbar-brand {

@@ -357,6 +357,9 @@
     span.min{
         display: none;
     }
+    .choose-file {
+        background: #fff;
+    }
     @media screen and (max-width: 994px) {
         .content-header{
             display: none;
@@ -533,7 +536,7 @@
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
                           <p class="main_par" id="contractModal">
-                        
+
     برای شروع استفاده از خدمات اینکوباک ابتدا در قسمت ویرایش پروفایل، قرارداد همکاری را مطالعه و تایید کنید.
                           </p>
                             <button class="btn green-bot " data-dismiss="modal">

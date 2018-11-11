@@ -68,10 +68,12 @@
                 </div>
                 <div class="sub-header col-xs-12">
                     <ul class="list-inline">
+                        @if(session('is_seller'))
                         <li class="list-item" :class="{'active':!profileDescription}"><a @click="
                             showProfileOwnerProducts($event)" href="">
                             محصولات من </a>
                         </li>
+                        @endif
                         <li class="list-item" :class="{'active':profileDescription}"><a @click="
                             showProfileOwnerDescription($event)" href="">
                             توضیحات من
@@ -119,7 +121,7 @@
                         </div>
                         <div class="wrapper_no_pic" v-else>
                             <div class="content_no_pic"><i class="fa fa-picture-o"></i></div>
-                            <div class="text_no_pic"><p>تصویری ثبت نشده است</p></div>
+                            <div class="text_no_pic"><p>مدارکی ثبت نشده است</p></div>
                         </div>
                     </div>
 
