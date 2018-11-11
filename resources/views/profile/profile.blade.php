@@ -119,7 +119,7 @@
                         </div>
                         <div class="wrapper_no_pic" v-else>
                             <div class="content_no_pic"><i class="fa fa-picture-o"></i></div>
-                            <div class="text_no_pic"><p>تصویری ثبت نشده است</p></div>
+                            <div class="text_no_pic"><p>مدارکی ثبت نشده است</p></div>
                         </div>
                     </div>
 

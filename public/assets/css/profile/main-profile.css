@@ -176,7 +176,7 @@ th, td {
     text-align: center;
     font-size: 23px;
     padding: 15px 0;
-    border: 5px dashed;
+    border: 5px dashed #bdbdbd;
     border-radius: 4px;
 }
 .wrapper_no_pro{
@@ -188,10 +188,11 @@ th, td {
 .content_no_pic{
     font-size: 70px;
     margin: 20px auto;
-    color: #555;
+    color: #bdbdbd;
 }
 .text_no_pic{
     margin: 30px auto;
+    color: #bdbdbd;
 }
 
 .search-box {
