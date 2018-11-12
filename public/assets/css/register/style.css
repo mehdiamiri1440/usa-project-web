@@ -503,6 +503,14 @@ button {
     }
 }
 @media screen and (max-width: 768px) {
+    .main-form {
+        width: inherit;
+        min-width: inherit;
+        margin: 0 auto;
+        height: inherit;
+        overflow: scroll;
+    }
+
    .right-section{
        display: none;
    }
@@ -542,6 +550,14 @@ button {
     }
     main {
         width: 95%;
+    }
+    #main {
+        top: 20px;
+        right: 15px;
+        z-index: 1;
+        position: absolute;
+        left: 15px;
+        transform: inherit;
     }
 
 }
