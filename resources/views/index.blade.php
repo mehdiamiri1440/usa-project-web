@@ -99,7 +99,11 @@
                 <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
                 <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
                 <li><a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
+
                 @if(session('user_id'))
+                        @if(session('is_buyer'))
+                        <li><a href="/product-list" class="smoothScroll ">لیست محصولات</a></li>
+                        @endif
                     <li class="user-header-web">
                         <div class="profile-menu-header"><a href="#" onclick="dropdown()">
                                 <div class="image-header-profile">

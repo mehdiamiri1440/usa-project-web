@@ -359,10 +359,16 @@ button {
 }
 
 @media screen and (max-width: 768px) {
-    main {
-        width: 80%;
-    }
 
+    #main {
+        top: 20px;
+        right: 15px;
+        z-index: 1;
+        position: absolute;
+        left: 15px;
+        transform: inherit;
+        width: calc(100% - 30px);
+    }
 }
 @media screen and (max-width: 996px) {
     .content_section {
