@@ -303,10 +303,12 @@ class product_controller extends Controller
 			$products = product::where('confirmed',true)
                 ->skip($from_record_number)
 				->take($take_count)
+                ->orderBy('updated_at','desc')
 				->get();
 		}
 		else{
 			$products = product::where('confirmed',true)
+                ->orderBy('updated_at','desc')
                 ->get();
 		}
 		
