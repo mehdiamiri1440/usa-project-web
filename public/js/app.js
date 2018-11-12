@@ -67382,12 +67382,11 @@ var render = function() {
         _c("div", { staticClass: "user-info col-xs-12" }, [
           _c("div", { staticClass: "info_profile col-xs-12 col-sm-7" }, [
             _c("div", { staticClass: "user_image col-xs-12 col-md-2" }, [
-              _vm.currentUser.profile.profile_photo
+              _vm.sellOfferDetail.profile_photo
                 ? _c("div", [
                     _c("img", {
                       attrs: {
-                        src:
-                          _vm.str + "/" + _vm.currentUser.profile.profile_photo,
+                        src: _vm.str + "/" + _vm.sellOfferDetail.profile_photo,
                         id: "blah",
                         alt: "تصویر پروفایل"
                       }
