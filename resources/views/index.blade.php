@@ -70,6 +70,7 @@
                             <ul class="list-unstyled">
                                 <li class="list-item"><a
                                             href="{{route('profile_basic')}}">پروفایل</a></li>
+                                <li class="list-item"><a href="/dashboard#/password">تغییر کلمه عبور</a></li>
                                 <li class="list-item"><a href="{{route('logout')}}">خروج</a></li>
                             </ul>
                         </div>
@@ -82,7 +83,6 @@
                 <span class="icon icon-bar"></span>
             </button>
             <a class="navbar-brand test" href="">
-
             </a>
             <p class="logo-des hidden-xs hidden-sm">
                 اینکوباک | بازارگاه آنلاین دنیای کشاورزی
@@ -92,7 +92,9 @@
 
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="{{route('login_page')}}" class="smoothScroll">ورود/ثبت نام</a></li>
+                @if(!session('user_id'))
+                    <li><a href="{{route('login_page')}}" class="smoothScroll">ورود/ثبت نام</a></li>
+                @endif
                 <li><a href="" class="smoothScroll">صفحه ی اصلی</a></li>
                 <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
                 <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
@@ -113,6 +115,7 @@
                                 <ul class="list-unstyled">
                                     <li class="list-item"><a
                                                 href="{{route('profile_basic')}}">پروفایل</a></li>
+                                    <li class="list-item"><a href="/dashboard#/password">تغییر کلمه عبور</a></li>
                                     <li class="list-item"><a href="{{route('logout')}}">خروج</a></li>
                                 </ul>
                             </div>
@@ -166,22 +169,22 @@ DETAIL SECTION
 
 <section id="detail" class="parallax-section">
     <div class="container">
-        <div class="row">
-            <div class="wow fadeIn col-md-2 col-xs-6" data-wow-delay="0.9s">
+
+            <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
                 <div class="detail-thumb">
                     <img class="image-blur" src="{{asset('index/images/1.png')}}" class="img-responsive">
                     <h4>خرید و فروش بی واسطه</h4>
                 </div>
             </div>
 
-            <div class="wow fadeIn col-md-2 col-xs-6" data-wow-delay="0.9s">
+            <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
                 <div class="detail-thumb">
                     <img class="image-blur" src="{{asset('index/images/2.png')}}" class="img-responsive">
                     <h4>گسترش ارتباط تجاری</h4>
                 </div>
             </div>
 
-            <div class="wow fadeIn col-md-2 col-xs-6" data-wow-delay="0.9s">
+            <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
                 <div class="detail-thumb">
                     <img class="image-blur" src="{{asset('index/images/3.png')}}" class="img-responsive">
                     <h4>یافتن شرکای مطمئن</h4>
@@ -189,26 +192,26 @@ DETAIL SECTION
             </div>
 
 
-            <div class="wow fadeIn col-md-2 col-xs-6" data-wow-delay="0.9s">
+            <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
                 <div class="detail-thumb">
                     <img class="image-blur" src="{{asset('index/images/4.png')}}" class="img-responsive">
                     <h4>پرداخت مطمئن و آسوده</h4>
                 </div>
             </div>
-            <div class="wow fadeIn col-md-2 col-xs-6" data-wow-delay="0.9s">
+            <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
                 <div class="detail-thumb">
                     <img class="image-blur" src="{{asset('index/images/5.png')}}" class="img-responsive">
                     <h4>بازرسی و نظارت محصول</h4>
                 </div>
             </div>
-            <div class="wow fadeIn col-md-2 col-xs-6" data-wow-delay="0.9s">
+            <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
                 <div class="detail-thumb">
                     <img class="image-blur" src="{{asset('index/images/6.png')}}" class="img-responsive">
                     <h4>افزایش اعتماد و شفافیت</h4>
                 </div>
             </div>
         </div>
-    </div>
+
 </section>
 
 <!-- =========================
@@ -228,9 +231,9 @@ DETAIL SECTION
                         <img class="image-blur"  src="{{asset('assets/img/vegetable.jpg')}}">
                     </div>
                     @if(session('is_seller'))
-                        <a href="{{route('seller-register-product')}}" class="btn-incobac">سفارش / ثبت  صیفی</a>
+                        <a href="/dashboard/#/register-request" class="btn-incobac">سفارش / ثبت  صیفی</a>
                     @elseif(session('is_buyer'))
-                        <a href="{{route('register_buyer_request')}}" class="btn-incobac">سفارش / ثبت  صیفی</a>
+                        <a href="/dashboard/#/register-request" class="btn-incobac">سفارش / ثبت  صیفی</a>
                     @else
                         <a href="{{route('login_page')}}" class="btn-incobac">سفارش / ثبت  صیفی</a>
                     @endif
@@ -246,9 +249,9 @@ DETAIL SECTION
                         <img class="image-blur" src="{{asset('assets/img/nuts-and-dried-fruits.jpg')}}">
                     </div>
                     @if(session('is_seller'))
-                        <a href="{{route('seller-register-product')}}" class="btn-incobac">سفارش / ثبت  خشکبار</a>
+                        <a href="/dashboard/#/register-request" class="btn-incobac">سفارش / ثبت  خشکبار</a>
                     @elseif(session('is_buyer'))
-                        <a href="{{route('register_buyer_request')}}" class="btn-incobac">سفارش / ثبت  خشکبار</a>
+                        <a href="/dashboard/#/register-request" class="btn-incobac">سفارش / ثبت  خشکبار</a>
                     @else
                         <a href="{{route('login_page')}}" class="btn-incobac">سفارش / ثبت  خشکبار</a>
                     @endif
@@ -263,9 +266,9 @@ DETAIL SECTION
                         <img class="image-blur" src="{{asset('assets/img/fruits.jpg')}}">
                     </div>
                     @if(session('is_seller'))
-                        <a href="{{route('seller-register-product')}}" class="btn-incobac">سفارش / ثبت  میوه</a>
+                        <a href="/dashboard/#/register-request" class="btn-incobac">سفارش / ثبت  میوه</a>
                     @elseif(session('is_buyer'))
-                        <a href="{{route('register_buyer_request')}}" class="btn-incobac">سفارش / ثبت   میوه</a>
+                        <a href="/dashboard/#/register-request" class="btn-incobac">سفارش / ثبت  میوه</a>
                     @else
                         <a href="{{route('login_page')}}" class="btn-incobac">سفارش / ثبت  میوه</a>
                     @endif
@@ -789,12 +792,10 @@ FOOTER SECTION
 <footer>
     <div class="container">
         <div class="row">
-            <div class="col-xs-4">
+            <div class=" enamad col-xs-12">
                 <div>
                     <img src="https://trustseal.enamad.ir/logo.aspx?id=100286&amp;p=yBEoWWMXqCeIkdjL" alt="" onclick="window.open(&quot;https://trustseal.enamad.ir/Verify.aspx?id=100286&amp;p=yBEoWWMXqCeIkdjL&quot;, &quot;Popup&quot;,&quot;toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30&quot;)" style="cursor:pointer" id="yBEoWWMXqCeIkdjL">
                 </div>
-
-                <!--    <img id='jxlzesgtjxlznbqergvjsizpjzpe' style='cursor:pointer' onclick='window.open("https://logo.samandehi.ir/Verify.aspx?id=1012397&p=rfthobpdrfthuiwkxlaopfvljyoe", "Popup","toolbar=no, scrollbars=no, location=no, statusbar=no, menubar=no, resizable=0, width=450, height=630, top=30")' alt='logo-samandehi' src='https://logo.samandehi.ir/logo.aspx?id=1012397&p=nbpdlymanbpdodrfqftibsiyyndt'/> -->
             </div>
         </div>
         <div class="row">

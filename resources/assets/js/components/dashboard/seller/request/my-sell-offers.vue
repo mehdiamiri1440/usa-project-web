@@ -116,12 +116,12 @@
                 </li>
             </ul>
         </section>
-       <section class="main-content col-xs-12" v-if="sellOffers.length == 0 && !loading">
+       <section class="main-content col-xs-12" v-if="sellOffers.length == 0 && !load">
             <h4 dir="rtl" class="text-center">پیشنهاد خریدی ثبت نکرده اید.</h4>
         </section>
-         <div class="loading_images  col-xs-12" v-show="loading">
-              <img :src="loader" style="width:200px;height:200px">
-          </div>-->
+         <div class="loading_images  col-xs-12" v-show="load">
+              <img :src="loading" style="width:200px;height:200px">
+          </div>
     </div>
 
 </template>
@@ -130,7 +130,7 @@
     import {eventBus} from "../../../../router/dashboard_router";
     export default {
         props: [
-            'loader'
+            'loading'
         ],
         data: function () {
             return {
@@ -140,7 +140,7 @@
                 },
                 sellOffers: '',
                 popUpMsg: '',
-                loading: false,
+                load: false,
                 items: [
                     {
                         message: 'پیشنهادات من',
@@ -155,20 +155,22 @@
         },
         methods: {
             init: function () {
-                this.loading = true;
+                this.load = true;
 
                 var self = this;
 
                 axios.post('/get_my_sell_offer_list')
                     .then(function (response) {
                         self.sellOffers = response.data.sell_offers;
-                        self.loading = false;
+                        self.load = false;
                     });
             },
         },
         mounted() {
             this.init();
             eventBus.$emit('subHeader', this.items);
+
+
         },
     }
 </script>

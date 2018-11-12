@@ -133,7 +133,7 @@
             </div>
             <div class="profile-menu-header">
                 <a href="#" onclick="dropdown()">
-                    <div class="image-header-profile" v-if="photoLink != null">
+                    <div class="image-header-profile" v-if="photoLink">
                         <img :src="storage + '/' + photoLink">
                     </div>
                     <div class="image-header-profile" v-else>

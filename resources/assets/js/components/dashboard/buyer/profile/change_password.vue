@@ -639,7 +639,10 @@
                     .then(function(response){
                         if(response.data.status == true){
                             //show modal password changed
-                            alert('password changed');
+                        
+                            self.popUpMsg = 'کلمه عبور با موفقیت تغییر یافت';
+                            eventBus.$emit('submitSuccess', self.popUpMsg);
+                            $('#myModal').modal('show');
                         }
                         else if(response.data.status == false){
                             self.errors.current_password.push('رمز عبور فعلی درست نیست');

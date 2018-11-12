@@ -14,19 +14,19 @@
                                 </ul>
                                 <div class="content_section">
                                     <p class="text-danger" v-show="showMsg">{{step1.msg}}</p>
-                                    <label>
+                                    <label class="col-xs-12">
                                         شماره موبایل
                                     </label>
-                                    <div class="input_contents">
+                                    <div class="input_contents col-xs-12">
                                         <span class="after_icon numbers"></span>
                                         <input class="pad number" type="text" v-model="step1.phone"
                                                placeholder="09*">
                                     </div>
                                     <span class="text-danger" v-if="errors.phone">{{errors.phone[0]}}</span>
-                                    <label>
+                                    <label class="col-xs-12">
                                         کلمه عبور
                                     </label>
-                                    <div class="input_contents">
+                                    <div class="input_contents col-xs-12">
                                         <span class="after_icon  unlock-alt "></span>
                                         <input class="pad number" type="password" v-model="step1.password"
                                                placeholder="کلمه عبور">
@@ -52,24 +52,24 @@
                                 <li class="active"> بازیابی کلمه عبور</li>
                             </ul>
                             <div class="content_section">
-                                <label>
+                                <label class="col-xs-12">
                                     لطفا شماره موبایل خود را وارد کنید
                                 </label>
-                                <div class="input_contents">
+                                <div class="input_contents col-xs-12">
                                     <span class="after_icon numbers"></span>
                                     <input class="pad number" type="text"  v-model="step2.phone"
                                            placeholder="09*">
                                 </div>
                                 <span  class="text-danger" v-if="errors">{{errors[0]}} </span>
 
-                                          <div class="col-xs-12"> <button class="green_but" type="button"  @click="sendPhoneVerificationCode">ارسال پیام کوتاه
-                                          </button></div>
+                                           <button class="green_but" type="button"  @click="sendPhoneVerificationCode">ارسال پیام کوتاه
+                                          </button>
 
                             </div>
 
                             <div class="dots-step">
                                 <span class="dots active"></span>
-                                <span class="dots" @click="goToStep(3)"></span>
+                                <span class="dots"></span>
                             </div>
                         </template>
                     </div>
@@ -81,10 +81,10 @@
                             </ul>
                             <div class="content_section">
                                 <p class="text-danger" v-show="showMsg">{{step3.msg}}</p>
-                                <label>
+                                <label class="col-xs-12">
                                     کد ارسال شده به تلفن همراهتان را وارد کنید.
                                 </label>
-                                <div class=" input_contents">
+                                <div class=" input_contents col-xs-12">
                                     <span class="after_icon search-icon"></span>
                                     <input class="pad " type="text" name="name" v-model="step3.verification_code"
                                            placeholder="0101">
@@ -92,14 +92,11 @@
                                 <span v-if="errors.verification_code" class="text-danger">
                                     {{errors.verification_code[0]}}
                                 </span>
-
-                                <div class="bouttons col-xs-12">
                                     <button class=" green_but" type="button" @click="verifyCode"> بررسی کد</button>
                                     <button class="danger_border_but" type="button" @click.prevent="goToStep(2)"
                                             :disabled="step2.reSendCode == false"> کد را دریافت
                                         نکردم
                                     </button>
-                                </div>
 
                             </div>
 

@@ -67,6 +67,7 @@
         text-align: center;
         border: none;
         transition: 300ms;
+        width: 100%;
     }
     .black-bot {
         margin: 15px 0;
@@ -150,7 +151,7 @@
         float: right;
         text-align: center;
     }
-    .user_image img{
+    .user_image > .user_image img{
         height: 100%;
     }
     .user_name{
@@ -175,10 +176,12 @@
     .image-article-content{
         padding: 0;
         float: right;
-    }
-    .main-article-content{
-        padding: 0;
         direction: rtl;
+    }
+    .main-article-content > .owl-carousel{
+        height: 100px;
+        overflow: hidden;
+
     }
     .owl-carousel{
         direction: ltr;
@@ -187,6 +190,8 @@
     .main-image{
         margin-bottom: 7px;
         padding-left: 15px;
+        height:300px;
+        overflow: hidden;
     }
     .main-image img{
         border-radius: 3px;
@@ -298,6 +303,9 @@
             float: none;
             margin: 0 auto;
         }
+        .user_image  > div ,.user_image  img{
+          height:100%
+        }
         .profile_link{
             padding: 10px;
             text-align: center;
@@ -358,13 +366,13 @@
                             </div>
                         </div>
                         <div class="user_name col-xs-12 col-md-8">
-                            <p>{{currentUser.user_info.first_name + ' ' +
-                                currentUser.user_info.last_name}}<span> - </span>{{currentUser.user_info.province + ' | ' + currentUser.user_info.city }}</p>
+                            <p>{{sellOfferDetail.sell_offer_user_info.first_name + ' ' +
+                                sellOfferDetail.sell_offer_user_info.last_name}}<span> - </span>{{sellOfferDetail.sell_offer_user_info.province + ' | ' + sellOfferDetail.sell_offer_user_info.city }}</p>
                         </div>
 
                     </div>
                     <div class="profile_link col-xs-12 col-sm-5">
-                              <a :href="'/profile/' + currentUser.user_info.user_name" class="green-bot">
+                              <a :href="'/profile/' + sellOfferDetail.sell_offer_user_info.user_name" class="green-bot">
                                   مشاهده پروفایل تامین کننده
                               </a>
                     </div>
@@ -374,9 +382,13 @@
                               <div class="main-image col-xs-12">
                                   <a  :href="str + '/' + sellOfferDetail.sell_offer.photos[0]"><img :src="str + '/' + sellOfferDetail.sell_offer.photos[0]" alt=""></a>
                               </div>
-                             <div class="owl-carousel col-xs-12">
-                                  <a v-for="photo in sellOfferDetail.sell_offer.photos" :href="str + '/' + photo"><img :src="str + '/' + photo" alt=""></a>
-                              </div>
+                               <div class="owl-carousel col-xs-12">
+                                <image-wrapper
+                                        v-for="photo in sellOfferDetail.sell_offer.photos"
+                                               :key="photo.id"
+                                        :img="str + '/' + photo">
+                                </image-wrapper>
+                            </div>
                           </div>
                      <div class="main-article-content col-xs-12 col-md-7">
                              <table class="table table-striped">
@@ -397,8 +409,12 @@
                                 <p>توضیحات: <span>{{sellOfferDetail.sell_offer.description}}</span></p>
                                     <div class="col-xs-12 actions">
                                         <div v-show='sellOfferDetail.sell_offer.is_pending'>
-                                            <button type="button" class="green-bot" @click=initiateBuy(sellOfferDetail.sell_offer.id)>آغاز فرآیند خرید</button>
-                                            <button type="button" class="green-bot" @click=rejectBuy(sellOfferDetail.sell_offer.id)>رد این پیشنهاد</button>
+                                            <div class="col-xs-12 col-sm-6">
+                                            <button type="button" class="green-bot " @click=initiateBuy(sellOfferDetail.sell_offer.id)>آغاز فرآیند خرید</button>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6">
+                                                <button type="button" class="green-bot" @click=rejectBuy(sellOfferDetail.sell_offer.id)>رد این پیشنهاد</button>
+                                         </div>
                                         </div>
                                             <p class='text-success' v-show='sellOfferDetail.sell_offer.is_accepted'>شما قبلا این پیشنهاد را پذیرفته اید.منتظر ارتباط ما باشید.</p>
                                             <p class='text-danger' v-show='sellOfferDetail.sell_offer.is_pending == 0 && sellOfferDetail.sell_offer.is_accepted == 0 '>شما قبلا این پیشنهاد را رد کرده اید.درصورت تغییر نظر با ما تماس بگیرید</p>
@@ -418,11 +434,47 @@
 <script>
     import {eventBus} from "../../../../router/dashboard_router";
 
+
+var OwlCarousel =  {
+    data:function(){
+        return {
+            imgSrcs:'',
+        };
+    },
+    props:['img'],
+    template: '<div class="image-wrapper">' +
+        '<a  :href="img">'+
+            '<img :src="img">'+
+        '</a>'+
+    '</div>',
+    mounted: function(){
+        $(".owl-carousel").owlCarousel({
+            loop:false,
+            margin:10,
+            nav:false
+        });
+
+        $(this.$el).parent().parent().parent().magnificPopup({
+        delegate: 'a',
+        type: 'image',
+            gallery: {
+                enabled: true,
+                navigateByImgClick: true,
+                preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+            }
+    });
+
+    }
+};
+
     export default {
         props: [
             'str',
             'defultimg'
         ],
+        components:{
+              'image-wrapper' : OwlCarousel,
+        },
         data: function () {
             return {
                 currentUser: {
@@ -439,7 +491,9 @@
                     user_info: '',
                 },
                 sellOfferDetail: {
-                    sell_offer : '',
+                    sell_offer : {
+                        photos : ''
+                    },
                     sell_offer_user_info : '',
                     profile_photo : '',
                 },
@@ -469,10 +523,75 @@
                     console.log(self.sellOfferDetail.sell_offer)
                 });
             },
+            initiateBuy(id){
+            var self = this;
+            
+            axios.post('/accept_sell_offer_by_id',{
+                'sell_offer_id' : id,
+            })
+            .then(function(response){
+                if(response.data.status == true){
+                    self.popUpMsg = 'جهت تسهیل در ادامه ی فرآیند خرید شما کارشناسان اینکوباک برای هماهنگی های اولیه ی معامله با شما تماس خواهند گرفت.';
+                    
+                    eventBus.$emit('submitSuccess', self.popUpMsg);
+                    
+                    $('#myModal').modal('show');
+                    $('#myModal').on('shown.bs.modal',function(e){
+                            $('#close-btn').on('click',function(e){
+                                $('#myModal').modal('hide');
+                                    window.location.href = '/dashboard/#/my-buyAds';
+                            });
+                    });                  
+                }
+            })
+            .catch(function(err){
+                self.popUpMsg = 'خطایی رخ داده است.لطفا اتصال به اینترنت خود را بررسی کنید سپس دوباره تلاش کنید.';
+                
+                $('#myModal').modal('show');
+            });
+        },
+        rejectBuy:function(id){
+            var self = this;
+            
+            axios.post('/reject_sell_offer_by_id',{
+                'sell_offer_id' : id,
+            })
+            .then(function(response){
+                if(response.data.status == true){
+                    self.popUpMsg = 'شما این پیشنهاد را رد کرده اید.در صورت تغییر تصمیمتان با ما تماس بگیرید.';
+                    
+                    eventBus.$emit('submitSuccess', self.popUpMsg);
+                    
+                    $('#myModal').modal('show');
+                    $('#myModal').on('shown.bs.modal',function(e){
+                            $('#close-btn').on('click',function(e){
+                                $('#myModal').modal('hide');
+                                window.location.href = '/dashboard/#/my-buyAds';
+                            });
+                    });
+                }
+            })
+            .catch(function(err){
+                self.popUpMsg = 'خطایی رخ داده است.لطفا اتصال به اینترنت خود را بررسی کنید سپس دوباره تلاش کنید.';
+                
+                eventBus.$emit('submitSuccess', self.popUpMsg);
+                
+                $('#myModal').modal('show');
+            });
+        }
         },
         mounted() {
             this.init();
             eventBus.$emit('subHeader', this.items);
+         $('.main-image').magnificPopup({
+        delegate: 'a',
+        type: 'image',
+            gallery: {
+                enabled: true,
+                navigateByImgClick: true,
+                preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+            }
+    });
         },
     }
 </script>

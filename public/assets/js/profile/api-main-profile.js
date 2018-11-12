@@ -6,7 +6,7 @@ var PopupImage =  {
         };
     },
     props:['img','base'],
-    template: '<div>' +
+    template: '<div class="image-wrapper">' +
     '<a   :href="base + img">'+
     '<img :src="base + img">'+
     '</a>'+
@@ -33,7 +33,7 @@ var OwlCarousel =  {
         };
     },
     props:['img','base'],
-    template: '<div>' +
+    template: '<div class="image-wrapper">' +
         '<a  :href="base + img">'+
             '<img :src="base + img">'+
         '</a>'+
@@ -42,7 +42,8 @@ var OwlCarousel =  {
         $(".owl-carousel").owlCarousel({
             loop:false,
             margin:10,
-            nav:true
+            nav:true,
+            dots:false
         });
         $(this.$el).parent().parent().parent().magnificPopup({
         delegate: 'a',

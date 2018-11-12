@@ -6,6 +6,7 @@ import Router from 'vue-router'
 require('../bootstrap');
 require('../imageuploadify.min');
 require('../jquery.magnific-popup.min');
+require('../owl.carousel.min.js');
 window.Vue = require('vue');
 // Seller Components
 import sellerProfileBasic from '../components/dashboard/seller/profile/profile_basic.vue'
@@ -51,15 +52,7 @@ export const eventBus = new Vue();
 const myRouter =  new Router({
     base: process.env.BASE_URL,
     routes: [
-        {
-            path: '*',
-            name: 'pageNotFound',
-            components: {
-                seller: sellerNotFound,
-            },
-
-        }
-        , {
+      {
             path: '/password',
             name: 'password',
             components: {
@@ -251,14 +244,14 @@ myRouter.beforeEach((to,from,next) => {
                 })
             .then(function(response){
                 if(response.data.profile.confirmed == false){
-                    next(false);
                     $('#myModal-1').modal('show');
+                    next(false);
                 }
                 else if(to.name == 'profileContract'){
                     next();
                 }
                 else if(response.data.user_info.contract_confirmed == false){
-                    $('#myModal-1').modal('show');
+                    $('#contractModalWrapper').modal('show');
                     next(false);
                 }
                 else{

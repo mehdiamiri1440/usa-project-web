@@ -179,7 +179,7 @@ class sms_controller extends Controller
     protected function generate_plain_text_password($password_len)
     {
         $result = "";
-        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGH0123456789";
+        $chars = "abcdefghijkmnpqrstuvwxyzABCDEFGH123456789";
         $charArray = str_split($chars);
         for($i = 0; $i < $password_len; $i++){
             $randItem = array_rand($charArray);
@@ -196,5 +196,10 @@ class sms_controller extends Controller
         catch(\Exception $e){
             //
         }
+    }
+    
+    public function add_to_customer_club($first_name,$last_name,$phone)
+    {
+        Smsir::addToCustomerClub('',$first_name,$last_name,$phone);
     }
 }

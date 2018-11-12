@@ -605,6 +605,7 @@
             }
         },
         mounted() {
+
             this.init();
             eventBus.$emit('subHeader', this.items);
 
@@ -636,6 +637,7 @@
             $("#imgInp").change(function () {
                 show_image_preview(this);
             })
+
         }
     }
 
