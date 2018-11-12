@@ -65466,6 +65466,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -65526,85 +65534,81 @@ var render = function() {
           { staticClass: "main-content col-xs-12" },
           _vm._l(_vm.buyAds, function(buyAd) {
             return _vm.buyAds
-              ? _c(
-                  "ul",
-                  { staticClass: "list-unstyled" },
-                  [
-                    _c("li", { staticClass: "list-group-item title-list" }, [
-                      _c("span", { staticClass: "numbers" }, [
-                        _vm._v(
-                          "\r\n          " +
-                            _vm._s(buyAd.sell_offers.length) +
-                            "\r\n      "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "title-list-text" }, [
-                        _vm._v(_vm._s(buyAd.subcategory_name)),
-                        _c("span", { staticClass: "seperator" }, [
-                          _vm._v(" | ")
-                        ]),
-                        _vm._v(_vm._s(buyAd.name) + " ")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "time-show" }, [
-                        _vm._v(_vm._s(buyAd.register_date))
-                      ])
+              ? _c("ul", { staticClass: "list-unstyled" }, [
+                  _c("li", { staticClass: "list-group-item title-list" }, [
+                    _c("span", { staticClass: "numbers" }, [
+                      _vm._v(
+                        "\r\n                      " +
+                          _vm._s(buyAd.sell_offers.length) +
+                          "\r\n                  "
+                      )
                     ]),
                     _vm._v(" "),
-                    _vm._l(buyAd.sell_offers, function(sellOffer) {
-                      return _c("div", [
-                        _c(
-                          "li",
-                          { staticClass: "list-group-item content-list" },
-                          [
-                            _c("p", { staticClass: "price" }, [
-                              _c("span", { staticClass: "static-price" }, [
+                    _c("p", { staticClass: "title-list-text" }, [
+                      _vm._v(_vm._s(buyAd.subcategory_name)),
+                      _c("span", { staticClass: "seperator" }, [_vm._v(" | ")]),
+                      _vm._v(_vm._s(buyAd.name) + " ")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "time-show" }, [
+                      _vm._v(_vm._s(buyAd.register_date))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  buyAd.sell_offers.length > 0
+                    ? _c(
+                        "div",
+                        _vm._l(buyAd.sell_offers, function(sellOffer) {
+                          return _c(
+                            "li",
+                            { staticClass: "list-group-item content-list" },
+                            [
+                              _c("p", { staticClass: "price" }, [
+                                _c("span", { staticClass: "static-price" }, [
+                                  _vm._v(
+                                    "\r\n                            قیمت:\r\n                        "
+                                  )
+                                ]),
                                 _vm._v(
-                                  "\r\n                            قیمت:\r\n                        "
+                                  " " +
+                                    _vm._s(sellOffer.price + "تومان") +
+                                    "\r\n                    "
                                 )
                               ]),
-                              _vm._v(
-                                " " +
-                                  _vm._s(sellOffer.price + "تومان") +
-                                  "\r\n                    "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "city" }, [
-                              _c("span", { staticClass: "static-city" }, [
+                              _vm._v(" "),
+                              _c("p", { staticClass: "city" }, [
+                                _c("span", { staticClass: "static-city" }, [
+                                  _vm._v(
+                                    "\r\n                            تحویل:\r\n                        "
+                                  )
+                                ]),
                                 _vm._v(
-                                  "\r\n                            تحویل:\r\n                        "
+                                  _vm._s(sellOffer.deliver_at) +
+                                    "\r\n                    "
                                 )
                               ]),
-                              _vm._v(
-                                _vm._s(sellOffer.deliver_at) +
-                                  "\r\n                    "
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "show-detail green-bot",
+                                  attrs: {
+                                    to: "/sell-offer-detail/" + sellOffer.id
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\r\n                        جزئیات\r\n                    "
+                                  )
+                                ]
                               )
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "router-link",
-                              {
-                                staticClass: "show-detail green-bot",
-                                attrs: {
-                                  to: "/sell-offer-detail/" + sellOffer.id
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\r\n                        جزئیات\r\n                    "
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ])
-                    })
-                  ],
-                  2
-                )
+                            ],
+                            1
+                          )
+                        })
+                      )
+                    : _c("div", [_vm._m(0, true)])
+                ])
               : _vm._e()
           })
         )
@@ -65640,7 +65644,20 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "list-group-item content-list" }, [
+      _c("p", { staticClass: "text-center" }, [
+        _vm._v(
+          "\r\n                        تاکنون پیشنهاد فروشی برای این درخواست نیامده است\r\n                    "
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -67281,6 +67298,59 @@ var OwlCarousel = {
                 self.sellOfferDetail = response.data;
                 console.log(self.sellOfferDetail.sell_offer);
             });
+        },
+        initiateBuy: function initiateBuy(id) {
+            var self = this;
+
+            axios.post('/accept_sell_offer_by_id', {
+                'sell_offer_id': id
+            }).then(function (response) {
+                if (response.data.status == true) {
+                    self.popUpMsg = 'جهت تسهیل در ادامه ی فرآیند خرید شما کارشناسان اینکوباک برای هماهنگی های اولیه ی معامله با شما تماس خواهند گرفت.';
+
+                    __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitSuccess', self.popUpMsg);
+
+                    $('#myModal').modal('show');
+                    $('#myModal').on('shown.bs.modal', function (e) {
+                        $('#close-btn').on('click', function (e) {
+                            $('#myModal').modal('hide');
+                            window.location.href = '/dashboard/#/my-buyAds';
+                        });
+                    });
+                }
+            }).catch(function (err) {
+                self.popUpMsg = 'خطایی رخ داده است.لطفا اتصال به اینترنت خود را بررسی کنید سپس دوباره تلاش کنید.';
+
+                $('#myModal').modal('show');
+            });
+        },
+
+        rejectBuy: function rejectBuy(id) {
+            var self = this;
+
+            axios.post('/reject_sell_offer_by_id', {
+                'sell_offer_id': id
+            }).then(function (response) {
+                if (response.data.status == true) {
+                    self.popUpMsg = 'شما این پیشنهاد را رد کرده اید.در صورت تغییر تصمیمتان با ما تماس بگیرید.';
+
+                    __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitSuccess', self.popUpMsg);
+
+                    $('#myModal').modal('show');
+                    $('#myModal').on('shown.bs.modal', function (e) {
+                        $('#close-btn').on('click', function (e) {
+                            $('#myModal').modal('hide');
+                            window.location.href = '/dashboard/#/my-buyAds';
+                        });
+                    });
+                }
+            }).catch(function (err) {
+                self.popUpMsg = 'خطایی رخ داده است.لطفا اتصال به اینترنت خود را بررسی کنید سپس دوباره تلاش کنید.';
+
+                __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitSuccess', self.popUpMsg);
+
+                $('#myModal').modal('show');
+            });
         }
     },
     mounted: function mounted() {
@@ -67334,17 +67404,17 @@ var render = function() {
               _c("p", [
                 _vm._v(
                   _vm._s(
-                    _vm.currentUser.user_info.first_name +
+                    _vm.sellOfferDetail.sell_offer_user_info.first_name +
                       " " +
-                      _vm.currentUser.user_info.last_name
+                      _vm.sellOfferDetail.sell_offer_user_info.last_name
                   )
                 ),
                 _c("span", [_vm._v(" - ")]),
                 _vm._v(
                   _vm._s(
-                    _vm.currentUser.user_info.province +
+                    _vm.sellOfferDetail.sell_offer_user_info.province +
                       " | " +
-                      _vm.currentUser.user_info.city
+                      _vm.sellOfferDetail.sell_offer_user_info.city
                   )
                 )
               ])
@@ -67357,7 +67427,9 @@ var render = function() {
               {
                 staticClass: "green-bot",
                 attrs: {
-                  href: "/profile/" + _vm.currentUser.user_info.user_name
+                  href:
+                    "/profile/" +
+                    _vm.sellOfferDetail.sell_offer_user_info.user_name
                 }
               },
               [
@@ -79250,7 +79322,7 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn green-bot ",
-                      attrs: { "data-dismiss": "modal" }
+                      attrs: { "data-dismiss": "modal", id: "close-btn" }
                     },
                     [
                       _vm._v(

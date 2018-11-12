@@ -366,13 +366,13 @@
                             </div>
                         </div>
                         <div class="user_name col-xs-12 col-md-8">
-                            <p>{{currentUser.user_info.first_name + ' ' +
-                                currentUser.user_info.last_name}}<span> - </span>{{currentUser.user_info.province + ' | ' + currentUser.user_info.city }}</p>
+                            <p>{{sellOfferDetail.sell_offer_user_info.first_name + ' ' +
+                                sellOfferDetail.sell_offer_user_info.last_name}}<span> - </span>{{sellOfferDetail.sell_offer_user_info.province + ' | ' + sellOfferDetail.sell_offer_user_info.city }}</p>
                         </div>
 
                     </div>
                     <div class="profile_link col-xs-12 col-sm-5">
-                              <a :href="'/profile/' + currentUser.user_info.user_name" class="green-bot">
+                              <a :href="'/profile/' + sellOfferDetail.sell_offer_user_info.user_name" class="green-bot">
                                   مشاهده پروفایل تامین کننده
                               </a>
                     </div>
@@ -523,6 +523,62 @@ var OwlCarousel =  {
                     console.log(self.sellOfferDetail.sell_offer)
                 });
             },
+            initiateBuy(id){
+            var self = this;
+            
+            axios.post('/accept_sell_offer_by_id',{
+                'sell_offer_id' : id,
+            })
+            .then(function(response){
+                if(response.data.status == true){
+                    self.popUpMsg = 'جهت تسهیل در ادامه ی فرآیند خرید شما کارشناسان اینکوباک برای هماهنگی های اولیه ی معامله با شما تماس خواهند گرفت.';
+                    
+                    eventBus.$emit('submitSuccess', self.popUpMsg);
+                    
+                    $('#myModal').modal('show');
+                    $('#myModal').on('shown.bs.modal',function(e){
+                            $('#close-btn').on('click',function(e){
+                                $('#myModal').modal('hide');
+                                    window.location.href = '/dashboard/#/my-buyAds';
+                            });
+                    });                  
+                }
+            })
+            .catch(function(err){
+                self.popUpMsg = 'خطایی رخ داده است.لطفا اتصال به اینترنت خود را بررسی کنید سپس دوباره تلاش کنید.';
+                
+                $('#myModal').modal('show');
+            });
+        },
+        rejectBuy:function(id){
+            var self = this;
+            
+            axios.post('/reject_sell_offer_by_id',{
+                'sell_offer_id' : id,
+            })
+            .then(function(response){
+                if(response.data.status == true){
+                    self.popUpMsg = 'شما این پیشنهاد را رد کرده اید.در صورت تغییر تصمیمتان با ما تماس بگیرید.';
+                    
+                    eventBus.$emit('submitSuccess', self.popUpMsg);
+                    
+                    $('#myModal').modal('show');
+                    $('#myModal').on('shown.bs.modal',function(e){
+                            $('#close-btn').on('click',function(e){
+                                $('#myModal').modal('hide');
+                                window.location.href = '/dashboard/#/my-buyAds';
+                            });
+                    });
+                }
+            })
+            .catch(function(err){
+                self.popUpMsg = 'خطایی رخ داده است.لطفا اتصال به اینترنت خود را بررسی کنید سپس دوباره تلاش کنید.';
+                
+                eventBus.$emit('submitSuccess', self.popUpMsg);
+                
+                $('#myModal').modal('show');
+            });
+        }
         },
         mounted() {
             this.init();

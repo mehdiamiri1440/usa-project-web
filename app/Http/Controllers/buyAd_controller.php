@@ -623,6 +623,7 @@ class buyAd_controller extends Controller
         $sell_offers = sell_offer::where('buy_ad_id',$buyAd_id)
             ->where('is_pending',true)
             ->where('confirmed',true)
+            ->orderBy('created_at','desc')
             ->select($fields)
             ->get();
         
@@ -683,7 +684,7 @@ class buyAd_controller extends Controller
                 
                if($sell_offer->myuser_id == $user_id && $sell_offer->buy_ad_id == $buyAd->id){
                     $user_already_offered_for_buyAd = true;
-                    return false; //break the each loop
+                    return false; //break the 'each' loop
                 } 
             });
             
