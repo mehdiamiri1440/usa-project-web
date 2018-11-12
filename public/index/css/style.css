@@ -156,15 +156,13 @@ footer {
     margin-bottom: 0;
     background-color: #ffffff;
 }
-
-
 .custom-navbar .navbar-brand {
-    width: 178px;
+    width: 155px;
     text-align: center;
     margin: 0 auto;
     display: inline-block;
     height: 75px;
-
+    background-size: contain;
 }
 
 .logo-des {
@@ -1286,7 +1284,7 @@ img.image-blur:hover{
     }
 
     .image-header-profile {
-        margin-top: -30px;
+        margin-top: -15px;
     }
 
 }
