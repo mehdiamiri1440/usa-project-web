@@ -690,6 +690,7 @@ Route::post('/action',[
     'as' => 'action_controller'
 ]);
 
+
 Route::post('/get_terminated_transactions',[
     'uses' => 'transaction_controller@get_user_terminated_transactions',
     'as' => 'get_terminated_transactions',
