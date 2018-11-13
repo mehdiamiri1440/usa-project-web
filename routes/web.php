@@ -445,6 +445,11 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'user_controller@change_password',
         'as' => 'change_user_password'
     ]);
+    
+    Route::post('/refresh_my_product_by_id',[
+        'uses' => 'product_controller@refresh_product_updated_at_time',
+        'as' => 'refresh_my_product_by_id'
+    ]);
 
 
 });
