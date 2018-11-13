@@ -357,8 +357,8 @@
                 <div class="user-info col-xs-12">
                     <div class="info_profile col-xs-12 col-sm-7">
                         <div class="user_image col-xs-12 col-md-2">
-                            <div v-if="currentUser.profile.profile_photo">
-                                <img :src="str + '/' + currentUser.profile.profile_photo" id="blah"
+                            <div v-if="sellOfferDetail.profile_photo">
+                                <img :src="str + '/' + sellOfferDetail.profile_photo" id="blah"
                                      alt="تصویر پروفایل">
                             </div>
                             <div v-else>
