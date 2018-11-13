@@ -68,7 +68,7 @@
                 </div>
                 <div class="sub-header col-xs-12">
                     <ul class="list-inline">
-                        <li v-if="profileOwner.user_info.is_buyer == 1" class="list-item" :class="{'active':!profileDescription}"><a @click="
+                        <li v-if="profileOwner.user_info.is_seller == 1" class="list-item" :class="{'active':!profileDescription}"><a @click="
                             showProfileOwnerProducts($event)" href="">
                             محصولات من </a>
                         </li>
