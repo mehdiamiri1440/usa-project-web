@@ -393,6 +393,11 @@ th, td {
 .gray_bot:active ,.gray_bot:focus {
     color: #fff;
 }
+.text-des{
+    margin: 15px auto;
+    float: left;
+    width: 100%;
+}
 .sec-button{
     text-align: center;
 }

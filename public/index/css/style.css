@@ -1150,11 +1150,7 @@ img.image-blur:hover{
 .cta-bot-mobile{
     display: none !important;
 }
-.text-des{
-    margin: 15px auto;
-    float: left;
-    width: 100%;
-}
+
 /*---------------------------------------
    Responsive styles
 -----------------------------------------*/
