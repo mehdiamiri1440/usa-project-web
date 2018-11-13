@@ -92,18 +92,18 @@
 
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-left">
-                @if(!session('user_id'))
+                <li><a href="/product-list" class="smoothScroll cta-bot cta-bot-mobile">لیست محصولات</a></li>
+            @if(!session('user_id'))
                     <li><a href="{{route('login_page')}}" class="smoothScroll">ورود/ثبت نام</a></li>
                 @endif
                 <li><a href="" class="smoothScroll">صفحه ی اصلی</a></li>
                 <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
                 <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
                 <li><a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
+                    <li><a href="/product-list" class="smoothScroll cta-bot">لیست محصولات</a></li>
 
                 @if(session('user_id'))
-                        @if(session('is_buyer'))
-                        <li><a href="/product-list" class="smoothScroll ">لیست محصولات</a></li>
-                        @endif
+
                     <li class="user-header-web">
                         <div class="profile-menu-header"><a href="#" onclick="dropdown()">
                                 <div class="image-header-profile">
@@ -235,7 +235,7 @@ DETAIL SECTION
                         <img class="image-blur"  src="{{asset('assets/img/vegetable.jpg')}}">
                     </div>
                     @if(session('is_seller'))
-                        <a href="/dashboard/#/register-request" class="btn-incobac">سفارش / ثبت  صیفی</a>
+                        <a href="/dashboard/#/register-product" class="btn-incobac">سفارش / ثبت  صیفی</a>
                     @elseif(session('is_buyer'))
                         <a href="/dashboard/#/register-request" class="btn-incobac">سفارش / ثبت  صیفی</a>
                     @else
@@ -253,7 +253,7 @@ DETAIL SECTION
                         <img class="image-blur" src="{{asset('assets/img/nuts-and-dried-fruits.jpg')}}">
                     </div>
                     @if(session('is_seller'))
-                        <a href="/dashboard/#/register-request" class="btn-incobac">سفارش / ثبت  خشکبار</a>
+                        <a href="/dashboard/#/register-product" class="btn-incobac">سفارش / ثبت  خشکبار</a>
                     @elseif(session('is_buyer'))
                         <a href="/dashboard/#/register-request" class="btn-incobac">سفارش / ثبت  خشکبار</a>
                     @else
@@ -270,7 +270,7 @@ DETAIL SECTION
                         <img class="image-blur" src="{{asset('assets/img/fruits.jpg')}}">
                     </div>
                     @if(session('is_seller'))
-                        <a href="/dashboard/#/register-request" class="btn-incobac">سفارش / ثبت  میوه</a>
+                        <a href="/dashboard/#/register-product" class="btn-incobac">سفارش / ثبت  میوه</a>
                     @elseif(session('is_buyer'))
                         <a href="/dashboard/#/register-request" class="btn-incobac">سفارش / ثبت  میوه</a>
                     @else

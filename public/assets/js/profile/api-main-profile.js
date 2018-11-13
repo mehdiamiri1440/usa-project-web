@@ -70,6 +70,7 @@ var vm = new Vue({
             certificates:'',
             relateds:'',
             activity_domain:'',
+            is_buyer:''
         },
         profileDescription:true,
         products:'',

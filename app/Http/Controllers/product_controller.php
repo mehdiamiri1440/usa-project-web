@@ -542,6 +542,7 @@ class product_controller extends Controller
         else return false;
     }
     
+    //public method
     public function get_product_list_by_user_name(Request $request)
     {
         $this->validate($request,[
@@ -668,7 +669,55 @@ class product_controller extends Controller
         }
     }
 	
-	
+	//public method
+    public function refresh_product_updated_at_time(Request $request)
+    {
+        $this->validate($request,[
+           'product_id' => 'required|integer|min:1' 
+        ]);
+        
+        $product_id = $request->product_id;
+        
+        $user_id = session('user_id');
+        
+        
+        try{
+            $product = product::findOrFail($product_id);
+        }
+        catch(\Exception $e)
+        {
+            return response()->json([
+               'status' => false,
+                'msg' => 'product_id does not exist'
+            ],404);
+        }
+        
+        if($this->is_the_user_the_product_owner($user_id,$product)){
+            try{
+                $product->updated_at = Carbon::now();
+                $product->save();
+                
+                return response()->json([
+                    'status' => true,
+                    'msg' => 'Product updated successfully!'
+                ],200);
+            }
+            catch(\Exception $e){
+                return response()->json([
+                    'status' => false,
+                    'msg' => $e->getMessage()
+                ],500);
+            }
+        }
+        else{
+            //external use of API
+            //report in log file
+            return response()->json([
+                'status' => false,
+                'msg' => 'you are not authorized to refresh this product!'
+            ],500);
+        }
+    }
 	
 	
 	

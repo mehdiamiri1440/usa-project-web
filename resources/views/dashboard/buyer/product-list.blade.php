@@ -82,8 +82,11 @@
             <article class="main-content-item" v-for="product in products">
                 <div>
                     <div class="user-contents  col-sm-3">
-                        <div class="user-image" v-if="product.profile_info">
+                        <div class="user-image" v-if="product.profile_info.profile_photo">
                             <img v-bind:src=" '{{url('storage') }}/' + product.profile_info.profile_photo">
+                        </div>
+                        <div class="user-image" v-else>
+                            <img src="{{asset('assets/img/user-defult.png')}}" class="image_defult">
                         </div>
                         <p v-if="product.user_info">@{{product.user_info.first_name + ' ' + product.user_info.last_name}}</p>
                         <a v-bind:href="'{{url('profile')}}/' + product.user_info.user_name" class="green_bot">

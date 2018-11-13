@@ -1140,6 +1140,16 @@ img.image-blur:hover{
     margin:20px auto;
     text-align: center;
 }
+
+.cta-bot{
+    border: 1px solid;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.cta-bot-mobile{
+    display: none !important;
+}
 /*---------------------------------------
    Responsive styles
 -----------------------------------------*/
@@ -1255,7 +1265,12 @@ img.image-blur:hover{
         margin: 0;
     }
 
-
+    .cta-bot{
+        display: none !important;
+    }
+    .cta-bot.cta-bot-mobile{
+        display: inline-block  !important;
+    }
 }
 
 @media screen and (max-width: 1249px) {
@@ -1265,6 +1280,7 @@ img.image-blur:hover{
     }
 }
 @media screen and (max-width: 767px) {
+
     .user-header-mobile {
         display: block;
         width: 7%;
@@ -1289,6 +1305,7 @@ img.image-blur:hover{
 
 
 }
+
 @media screen and (max-width: 534px) {
     .custom-navbar .navbar-brand {
         line-height: 18px;

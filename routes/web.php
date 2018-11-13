@@ -151,6 +151,14 @@ Route::post('/load_profile_by_user_name',[
     'as' => 'load_profile_by_user_name',
 ]);
 
+Route::post('/get_product_list_by_user_name',[
+        'uses' => 'product_controller@get_product_list_by_user_name',
+        'as' => 'get_product_list_by_user_name'
+]);
+
+
+
+
 Route::group(['middleware' => [login::class]],function(){
 
     Route::post('/user/add_product',[
@@ -398,10 +406,10 @@ Route::group(['middleware' => [login::class]],function(){
         'as' => 'profile_controller_info'
     ]);
 
-    Route::post('/get_product_list_by_user_name',[
-        'uses' => 'product_controller@get_product_list_by_user_name',
-        'as' => 'get_product_list_by_user_name'
-    ]);
+//    Route::post('/get_product_list_by_user_name',[
+//        'uses' => 'product_controller@get_product_list_by_user_name',
+//        'as' => 'get_product_list_by_user_name'
+//    ]);
 
     Route::post('/get_user_transaction_list',[
         'uses' => 'transaction_controller@get_user_in_progress_transaction_list',
@@ -436,6 +444,11 @@ Route::group(['middleware' => [login::class]],function(){
     Route::post('/change_password',[
         'uses' => 'user_controller@change_password',
         'as' => 'change_user_password'
+    ]);
+    
+    Route::post('/refresh_my_product_by_id',[
+        'uses' => 'product_controller@refresh_product_updated_at_time',
+        'as' => 'refresh_my_product_by_id'
     ]);
 
 
@@ -676,6 +689,7 @@ Route::post('/action',[
     'uses' => 'transaction_controller@action_controller',
     'as' => 'action_controller'
 ]);
+
 
 Route::post('/get_terminated_transactions',[
     'uses' => 'transaction_controller@get_user_terminated_transactions',
