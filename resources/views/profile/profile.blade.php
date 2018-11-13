@@ -36,21 +36,29 @@
                                 <div class="back_page col-xs-12 col-sm-4">
                                     <a href="javascript:history.back()" class="green_bot">بازگشت به صفحه قبل</a>
                                 </div>
+
                                 <h1 class="content_title col-xs-12 col-sm-8">@{{profileOwner.user_info.first_name + ' ' + profileOwner.user_info.last_name}}</h1>
 
                             </div>
-                            <div class="content_user_info col-xs-12">
-                                <p>
-                                    حوزه ی فعالیت : <span>
+
+                            <div class="title_content col-xs-12">
+                                <div class="back_page col-xs-4">
+                                    <button  class="btn btn-copy">    کپی آدرس   <i class="fa fa-clipboard" aria-hidden="true"></i> </button>
+                                </div>
+                                <div class="content_user_info col-xs-8">
+                                    <p>
+                                        حوزه ی فعالیت : <span>
                                     @{{profileOwner.activity_domain}}
                             </span>
-                                </p>
-                                <p>
-                                    آدرس : <span>
+                                    </p>
+                                    <p>
+                                        آدرس : <span>
                                @{{profileOwner.user_info.province + ' - ' + profileOwner.user_info.city}}
                                 </span>
-                                </p>
+                                    </p>
+                                </div>
                             </div>
+
                         </div>
                     </div>
 
@@ -130,9 +138,12 @@
                     <div v-if="products.length > 0">
                         <article class="article-contents  col-xs-12" v-for="product in products">
                             <div class="main-article-content col-md-7">
-                                <h2 class="main-article-title">
-                                    <a href="#">@{{product.main.category_name + ' - ' + product.main.sub_category_name}}</a>
-                                </h2>
+                                <div class="main-article-title-content">
+                                    <h2 class="main-article-title">
+                                        <a href="#">@{{product.main.category_name + ' - ' + product.main.sub_category_name}}</a>
+                                    </h2>
+                                    <button class="main-green_but"> بروزرسانی <i class="fa fa-refresh"></i></button>
+                                </div>
                                 <table class="table table-striped">
                                     <tr>
                                         <td>نوع محصول:</td>

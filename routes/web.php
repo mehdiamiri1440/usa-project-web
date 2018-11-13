@@ -19,6 +19,10 @@ use App\myuser;
 use App\profile;
 
 
+Route::get('/test', function(){
+    return view('product_view');
+});
+
 Route::get('/', function(){
     return view('index');
 });
@@ -170,10 +174,10 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'buyAd_controller@add_buyAd',
         'as' => 'add_buyAd'
     ]);
-    
+
     Route::get('back-to-basic/{transaction_id}',function($transaction_id){
         return view('back-to-basic',[
-           'transaction_id' => $transaction_id 
+           'transaction_id' => $transaction_id
         ]);
     })->name('back-to-basic');
 
@@ -445,7 +449,7 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'user_controller@change_password',
         'as' => 'change_user_password'
     ]);
-    
+
     Route::post('/refresh_my_product_by_id',[
         'uses' => 'product_controller@refresh_product_updated_at_time',
         'as' => 'refresh_my_product_by_id'

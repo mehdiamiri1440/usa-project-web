@@ -104,6 +104,7 @@
                             <h2 class="main-article-title">
                                 <a href="#">@{{product.main.category_name + ' | ' + product.main.sub_category_name}}</a>
                             </h2>
+
                             <p>نوع محصول: <span>@{{product.main.product_name}}</span></p>
                             <p>استان / شهر:
                                 <span>@{{product.main.province_name + ' - ' + product.main.city_name}}</span></p>
