@@ -72,6 +72,8 @@ return [
                     'fields' => [
                         'sell_offers.loading_dead_line',
                         'sell_offers.admin_notes',
+                        'sell_offers.myuser_id as seller_user_id',
+                        'sell_offers.buy_ad_id',
                     ],
                     'conditions' => [
                         //
@@ -84,7 +86,9 @@ return [
                     'fields' => [
                         'sell_offers.loading_dead_line',
                         'sell_offers.admin_notes',
-                        'sell_offers.commission_persentage'
+                        'sell_offers.commission_persentage',
+                        'sell_offers.myuser_id as seller_user_id',
+                        'sell_offers.buy_ad_id',
                     ],
                     'conditions' => [
                         //

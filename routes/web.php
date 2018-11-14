@@ -184,37 +184,6 @@ Route::group(['middleware' => [login::class]],function(){
         ]);
     })->name('back-to-basic');
 
-//	Route::get('/dashboard/{name?}',function(){
-//
-//		$user_id = session('user_id');
-//
-//		$user = myuser::find($user_id);
-//		$profile = profile::where('myuser_id',$user_id)
-//            ->where('confirmed',true)
-//            ->get()
-//            ->last();
-//
-//        $last_profile_record_confirm_status = profile::where('myuser_id',$user_id)
-//                ->select('confirmed')
-//                ->get()
-//                ->last();
-//
-//        if($user->is_seller){
-//            return view('dashboard.seller.profile.profile_basic',[
-//                'user_info' => $user->toArray(),
-//                'profile_info' => $profile ? $profile->toArray() : "",
-//                'confirmed' => $last_profile_record_confirm_status ? $last_profile_record_confirm_status->confirmed : -1,
-//		  ]);
-//        }
-//        else if($user->is_buyer){
-//            return view('dashboard.buyer.profile.profile_basic',[
-//                'user_info' => $user->toArray(),
-//                'profile_info' => $profile ? $profile->toArray() : "",
-//                'confirmed' => $last_profile_record_confirm_status ? $last_profile_record_confirm_status->confirmed : -1,
-//		  ]);
-//        }
-//
-//	})->where('name', '[A-Za-z]+');
 
     Route::group(['prefix' => 'dashboard'],function(){
         Route::get('/',function(){
@@ -456,6 +425,16 @@ Route::group(['middleware' => [login::class]],function(){
     Route::post('/refresh_my_product_by_id',[
         'uses' => 'product_controller@refresh_product_updated_at_time',
         'as' => 'refresh_my_product_by_id'
+    ]);
+    
+    Route::post('/get_buyAd_owner_user_id',[
+        'uses' => 'buyAd_controller@get_buyAd_owner_user_id',
+        'as' => 'get_buyAd_owner_user_id'
+    ]);
+    
+    Route::post('/get_contract_sides_user_info',[
+        'uses' => 'user_controller@get_contract_sides_user_info',
+        'as' => 'get_contract_sides_user_info'
     ]);
 
 

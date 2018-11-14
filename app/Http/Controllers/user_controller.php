@@ -235,7 +235,36 @@ class user_controller extends Controller
         return $result;
     }
 
-
+    //public method
+    public function get_contract_sides_user_info(Request $request)
+    {
+        $this->validate($request,[
+           'seller_user_id' => 'required|integer|min:1',
+           'buyer_user_id' => 'required|integer|min:1'
+        ]);
+        
+        $seller_user_id = $request->seller_user_id;
+        $buyer_user_id = $request->buyer_user_id;
+        
+        $seller_user_record = myuser::find($seller_user_id);
+        $buyer_user_record = myuser::find($buyer_user_id);
+        
+        if($seller_user_record && $buyer_user_record){
+            $fields = ['first_name','last_name','national_code'];
+            
+            return response()->json([
+                'status' => true,
+                'seller_user_info' => $seller_user_record->only($fields),
+                'buyer_user_info' => $buyer_user_record->only($fields),
+            ],200);
+        }
+        else{
+            return response()->json([
+                'status' => false,
+                'msg' => 'user not found!'
+            ],404);
+        }
+    }
 
 
 }

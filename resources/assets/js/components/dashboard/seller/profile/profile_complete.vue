@@ -608,10 +608,10 @@
                 errors: '',
                 popUpMsg: '',
                 items: [
-                    {
-                        message: 'قرارداد',
-                        url: 'profileContract',
-                    },
+//                    {
+//                        message: 'قرارداد',
+//                        url: 'profileContract',
+//                    },
                     {
                         message: ' اطلاعات تکمیلی',
                         url: 'compelementry',

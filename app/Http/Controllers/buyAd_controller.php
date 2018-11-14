@@ -753,5 +753,30 @@ class buyAd_controller extends Controller
         
         return $result;
     }
+    
+    //public method
+    public function get_buyAd_owner_user_id(Request $request)
+    {
+        $this->validate($request,[
+           'buyAd_id' => 'required|integer|min:1' 
+        ]);
+        
+        $buyAd_id = $request->buyAd_id;
+        
+        $buyAd_record = buyAd::find($buyAd_id);
+        
+        if($buyAd_record){
+            return response()->json([
+                'status' => true,
+                'user_id' => $buyAd_record->myuser_id
+            ],200);
+        }
+        else{
+            return response()->json([
+                'status' => false,
+                'msg' => 'buyAd not found!'
+            ],404);
+        }
+    }
 	
 }

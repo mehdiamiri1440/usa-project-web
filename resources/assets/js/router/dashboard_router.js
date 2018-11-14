@@ -250,10 +250,10 @@ myRouter.beforeEach((to,from,next) => {
                 else if(to.name == 'profileContract'){
                     next();
                 }
-                else if(response.data.user_info.contract_confirmed == false){
-                    $('#contractModalWrapper').modal('show');
-                    next(false);
-                }
+//                else if(response.data.user_info.contract_confirmed == false){
+//                    $('#contractModalWrapper').modal('show');
+//                    next(false);
+//                }
                 else{
                     // window.location.href = url;
                     next();
