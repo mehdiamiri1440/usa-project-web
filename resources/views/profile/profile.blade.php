@@ -144,7 +144,9 @@
                                     <h2 class="main-article-title">
                                         <a href="#">@{{product.main.category_name + ' - ' + product.main.sub_category_name}}</a>
                                     </h2>
-                                    <button class="main-green_but" @click="refreshProduct(product.main.id)"> بروزرسانی <i class="fa fa-refresh"></i></button>
+                                    <div v-if="product.main.myuser_id == currentUser.user_info.id">
+                                         <button  class="main-green_but" @click="refreshProduct(product.main.id)"> بروزرسانی <i class="fa fa-refresh"></i></button>
+                                    </div>
                                 </div>
                                 <table class="table table-striped">
                                     <tr>
