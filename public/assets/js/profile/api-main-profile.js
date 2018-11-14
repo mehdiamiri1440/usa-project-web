@@ -129,6 +129,23 @@ var vm = new Vue({
             });
 
         },
+        refreshProduct:function(productId){
+            console.log(productId);
+            axios.post('/refresh_my_product_by_id',{
+                product_id : productId
+            })
+            .then(function(response){
+                if(response.data.status == true){
+                    alert('محصول شما بروز رسانی شد و در صدر لیست محصولات قرار گرفت.');
+                }
+                else{
+                    alert('هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.');
+                }
+            })
+            .catch(function(err){
+                alert('هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.');
+            });
+        }
     },
     mounted(){
       this.init();

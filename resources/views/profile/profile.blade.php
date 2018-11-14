@@ -144,7 +144,7 @@
                                     <h2 class="main-article-title">
                                         <a href="#">@{{product.main.category_name + ' - ' + product.main.sub_category_name}}</a>
                                     </h2>
-<!--                                    <button class="main-green_but"> بروزرسانی <i class="fa fa-refresh"></i></button>-->
+                                    <button class="main-green_but" @click="refreshProduct(product.main.id)"> بروزرسانی <i class="fa fa-refresh"></i></button>
                                 </div>
                                 <table class="table table-striped">
                                     <tr>
