@@ -196,7 +196,7 @@ var vm = new Vue({
         handleScroll(){
               var offset = $(window).scrollTop() + $(window).height();
               var height = $(document).height();
-
+            
               var self = this;
 
               if(offset  > height - 3){ //3 pixels to buttom
@@ -286,6 +286,15 @@ var vm = new Vue({
 
                     return false;
                 }
+            })
+            .catch(function(e){
+                    self.popUpMsg = 'حساب کاربری شما از نوع خریداران نیست!';
+                    console.log(self.popUpMsg);
+                    $('#myModal').modal('show');
+
+                    self.submiting = false;
+
+                    return false;
             });
 
 
