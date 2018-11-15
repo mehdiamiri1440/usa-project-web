@@ -369,9 +369,7 @@ var vm = new Vue({
         },
     },
     created(){
-        window.css('overflow-y','hidden');
         window.addEventListener('scroll', this.handleScroll);
-        window.css('overflow-y','auto');
     },
     destroyed(){
         window.removeEventListener('scroll', this.handleScroll);
