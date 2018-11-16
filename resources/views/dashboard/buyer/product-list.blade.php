@@ -83,7 +83,7 @@
                 <div>
                     <div class="user-contents  col-sm-3">
                         <div class="user-image" v-if="product.profile_info.profile_photo">
-                            <img v-bind:src=" '{{url('storage') }}/' + product.profile_info.profile_photo">
+                            <img v-bind:src=" '/storage/' + product.profile_info.profile_photo">
                         </div>
                         <div class="user-image" v-else>
                             <img src="{{asset('assets/img/user-defult.png')}}" class="image_defult">
@@ -92,7 +92,7 @@
                         <a v-bind:href="'{{url('profile')}}/' + product.user_info.user_name" class="green_bot">
                             مشاهده پروفایل تامین کننده
                         </a>
-                        <div class="create_buy " @click="openRequestRegisterBox($event)">
+                        <div class="create_buy"  @click="openRequestRegisterBox($event)">
                             <a class="green_bot">
                                 درخواست خرید
                             </a>

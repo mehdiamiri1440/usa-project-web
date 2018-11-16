@@ -227,12 +227,19 @@ var vm = new Vue({
                 var element =  $('article:nth-of-type(' + index + ') .buy_details');
                 element.slideToggle("125", "swing");
                 $('.buy_details').not(element).slideUp();
+                
+                this.scrollToTheRequestRegisterBox(element);
             }
             else{
                 this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
-                $('#myModal').modal('show');
+                $('#myModal2').modal('show');
             }
 
+        },
+        scrollToTheRequestRegisterBox:function(element){
+            var newPosition = $(element).offset();
+            console.log(newPosition.top);
+            $('html, body').stop().animate({ scrollTop: newPosition.top - 380}, 1000);
         },
         registerRequest:function(e){
             e.preventDefault;
@@ -348,6 +355,9 @@ var vm = new Vue({
             });
 
             return product[0];
+        },
+        redirectToLogin:function(){
+            window.location.href = '/login';
         }
     },
     watch:{
