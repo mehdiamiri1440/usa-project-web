@@ -667,6 +667,7 @@ class buyAd_controller extends Controller
     {
         $buyAds = buyAd::where('confirmed',true)
                     ->select($this->related_buyAd_list_required_fields)
+                    ->orderBy('created_at','desc')
                     ->get();
         //relevance
         $buyAds = $buyAds->filter(function($buyAd){
