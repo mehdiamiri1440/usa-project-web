@@ -202,4 +202,34 @@ class sms_controller extends Controller
     {
         Smsir::addToCustomerClub('',$first_name,$last_name,$phone);
     }
+    
+    public function send_notify_sms_to_user($msg_array,$user_id)
+    {
+        $final_msg = $this->create_text_message($msg_array);
+        
+        $user_phone = $this->get_user_phone_by_user_id($user_id);
+        
+        if($user_phone){
+            try{
+                Smsir::sendToCustomerClub($final_msg,$user_phone);
+                return $user_phone;
+            }
+            catch(\Exception $e){
+                //
+            }
+        }
+        else{
+            return false;
+        }
+    }
+    
+    protected function get_user_phone_by_user_id($user_id)
+    {
+        $user_record = myuser::find($user_id);
+        
+        if($user_record){
+            return $user_record->phone;
+        }
+        else return false;
+    }
 }

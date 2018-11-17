@@ -73,7 +73,7 @@ class sell_offer_controller extends Controller
             for($index = 0 ; $index < $request->photos_count ; $index++){
                 $image_field_name = "img_$index";
 
-                $rules[$image_field_name] = 'required|mimes:jpg,jpeg,png|max:2000';
+                $rules[$image_field_name] = 'required|mimes:jpg,jpeg,png|max:5000';
             }
         }
 
@@ -124,7 +124,8 @@ class sell_offer_controller extends Controller
 
                 $sell_offer_media->save();
             }
-
+            
+            
             return $sell_offer;
         }
         catch(\Exception $e){

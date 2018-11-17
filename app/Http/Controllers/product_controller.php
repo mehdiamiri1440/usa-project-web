@@ -656,6 +656,7 @@ class product_controller extends Controller
             
             $user_product_record->save();
             
+            
             return response()->json([
                 'status' => true,
                 'msg' => 'record added!',

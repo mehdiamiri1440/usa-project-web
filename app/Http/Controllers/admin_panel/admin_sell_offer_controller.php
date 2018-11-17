@@ -10,6 +10,7 @@ use App\Http\Library\date_convertor;
 use App\category;
 use App\buyAd;
 use App\myuser;
+use App\Http\Controllers\sms_controller;
 
 class admin_sell_offer_controller extends Controller
 {
@@ -120,10 +121,39 @@ class admin_sell_offer_controller extends Controller
         
         $sell_offer->save();
         
+        $this->notify_buyer($sell_offer);
+        
         return response()->json([
            'status' => true,
             'msg' => 'the sell offer confirmed!'
         ]);
+    }
+    
+    protected function notify_buyer(&$sell_offer)
+    {
+        $sell_offer_id = $sell_offer->id;
+        $buyAd_id = $sell_offer->buy_ad_id;
+        
+        $buyer_user_id = $this->get_buyer_user_id_by_buyAd_id($buyAd_id);
+        
+        $msg_array = [
+            'خریدار محترم اینکوباک',
+            'یک پیشنهاد فروش برای درخواست خرید شما ثبت شده',
+            'برای بررسی به www.incobac.com مراجعه کنید',
+        ];
+        
+        $sms_controller_object = new sms_controller();
+        
+        $sms_controller_object->send_notify_sms_to_user($msg_array,$buyer_user_id);
+        
+    }
+    protected function get_buyer_user_id_by_buyAd_id($buyAd_id)
+    {
+        $buyAd_record = buyAd::find($buyAd_id);
+        
+        $user_record = myuser::find($buyAd_record->myuser_id);
+        
+        return $user_record->id;
     }
     
     public function load_accepted_sell_offer_list()
