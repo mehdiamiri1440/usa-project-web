@@ -63,8 +63,8 @@ var vm = new Vue({
     methods:{
         init:function(){
             axios.post('user/get_product_list',{
-                from_record_number:0,
-                to_record_number:this.productCountInPage,
+                //from_record_number:0,
+                //to_record_number:this.productCountInPage,
             }).then(response => (this.products = response.data.products));
             axios.post('/user/profile_info')
                 .then(response => (this.currentUser = response.data));
@@ -388,7 +388,7 @@ var vm = new Vue({
         },
     },
     created(){
-        window.addEventListener('scroll', this.handleScroll);
+        //window.addEventListener('scroll', this.handleScroll);
     },
     destroyed(){
         window.removeEventListener('scroll', this.handleScroll);
