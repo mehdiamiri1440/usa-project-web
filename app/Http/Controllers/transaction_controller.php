@@ -425,7 +425,9 @@ class transaction_controller extends Controller
                                     'loading_dead_line',
                                     'admin_notes',
                                     'deal_date',
-                                    'commission_persentage'
+                                    'commission_persentage',
+                                    'buy_ad_id',
+                                    'myuser_id as seller_user_id'
                                 ])
                                 ->get()
                                 ->first();
