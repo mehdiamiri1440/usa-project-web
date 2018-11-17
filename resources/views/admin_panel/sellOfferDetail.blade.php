@@ -256,8 +256,7 @@
         })
         .done(function(json){
             if(json.status == true){
-                console.log('done');
-//                window.location = '{{route('admin_panel_sell_offer_list')}}';
+                window.location = '{{route('admin_panel_sell_offer_list')}}';
             }
         })
         .fail(function(xhr,status,errorThrown){
