@@ -437,7 +437,11 @@ return [
                 'admin_notes' => 'required',
                 'expiration_date' => 'required',
                 'commission_persentage' => 'required|between:0.00,100.00'
-            ],   
+            ], 
+            'to_notify' => [
+                'seller' => 'یک تراکنش برای شما در سامانه آغاز شده است.برای تایید قرارداد به وبسایت مراجعه کنید.',
+                'buyer'  => 'یک تراکنش برای شما در سامانه آغاز شده است.برای تایید قرارداد به وبسایت مراجعه کنید.',
+            ],
         ],
         '2' => [
             'name' => 'seller agreed contract',
@@ -452,6 +456,10 @@ return [
             'validation_rules' => [
                 //
             ],
+            'to_notify' => [
+                'admin' => 'فروشنده قرارداد رو تایید کرد',
+                'buyer' => 'تامین کننده ی ما قرارداد مربوط به این معامله را تایید کرده است.'
+            ]
         ],
         '3' => [
             'name' => 'buyer agreed contract',
@@ -466,6 +474,10 @@ return [
             'validation_rules' => [
                 //
             ],
+            'to_notify' => [
+                'admin' => 'خریدار قرارداد رو تایید کرد',
+                'seller' => 'خریدار محصول شما قرارداد مربوط به این معامله را تایید کرده است.'
+            ]
         ],
         '4' =>[
             'name' => 'prepayment factor issuance for buyer',
@@ -492,6 +504,9 @@ return [
                 'amount_to_pay' => 'required|integer|min:1',
                 'type' => 'required'
             ],
+            'to_notify' => [
+                'buyer' => 'فاکتور پیش پرداخت شما صادر شده است.برای پرداخت آن به اینکوباک مراجعه کنید.'
+            ]
         ],
         '5' =>[
             'name' => 'buyer prepayment',//will be called at bank payment callback function
@@ -504,6 +519,11 @@ return [
             'validation_rules' => [
                 //
             ],
+            'to_notify' => [
+                'admin'  => 'خریدار پیش پرداخت رو انجام داد.',
+                'seller' => 'خریدار محصول شما پیش پرداخت را انجام داد.پرداخت های اینکوباک دو مرحله ای است.',
+                'buyer'  => 'پیش پرداخت شما با موفقیت انجام شد.اینکوباک درحال پیگیری بارگیری محصول است.'
+            ]
         ],
         '6' =>[
             'name' => 'final payment factor issuance for buyer',
@@ -530,9 +550,12 @@ return [
                 'amount_to_pay' => 'required|integer|min:1',
                 'type' => 'required'
             ],
+            'to_notify' => [
+                'buyer' => 'بارگیری درحال اتمام است.فاکتور پرداخت نهایی شما صادر گردید.لطفا هر چه سریعتر برای پرداخت آن به اینکوباک مراجعه کنید.'
+            ]
         ],
         '7' =>[
-            'name' => 'buyer final payment',
+            'name' => 'buyer final payment',//will be called at bank payment callback function
             'actor' => 'buyer',
             'bit_index' => 6,
             'required_bit_index_set' => [0,1,2,3,4,5],
@@ -542,6 +565,11 @@ return [
             'validation_rules' => [
                 //
             ],
+            'to_notify' => [
+                'admin' => 'خریدار پرداخت نهایی رو انجام داد',
+                'seller' => 'خریدار تمام پول محصول را پرداخت کرد.برای خروج بار با کارشناسان اینکوباک در تماس باشید',
+                'buyer' => 'پرداخت نهایی شما با موفقیت انجام شد.منتظردریافت محصول خود باشید.'
+            ]
         ],
         '8' =>[
             'name' => 'DONE',
@@ -554,6 +582,9 @@ return [
             'validation_rules' => [
                 //
             ],
+            'to_notify' => [
+                //
+            ]
         ],
     ],
     

@@ -46,8 +46,11 @@
                             <span v-if="errors.phone" class="error_msg">
                                     {{errors.phone[0]}}
                             </span>
-                            <div class="col-xs-12"> <button class="green_but" type="button"  @click="send_verification_code">ارسال پیام کوتاه
-                            </button></div>
+                            <div class="col-xs-12">
+                                <button class="green_but" type="button"  @click.prevent="send_verification_code" :disabled="step1.sendCode == false">
+                                    ارسال پیام کوتاه
+                                </button>
+                            </div>
 
                         </div>
 
@@ -312,7 +315,8 @@
            return{
                currentStep: 1,
                step1: {
-                   phone: ''
+                   phone: '',
+                   sendCode:true,
                },
                step2: {
                    verification_code:'',
@@ -366,24 +370,26 @@
             },
             send_verification_code:function(){
                 this.step2.reSendCode = false;
-
+                this.step1.sendCode = false;
+                
                 var self = this;
                 axios.post("/send_verification_code",{
                     phone : this.toLatinNumbers(this.step1.phone)
                 })
-                    .then(function(response){
-                        self.goToStep(2);
+                .then(function(response){
+                    self.goToStep(2);
 
-                        self.step2.verification_code = '';
-                        self.errors.verification_code = [];
+                    self.step2.verification_code = '';
+                    self.errors.verification_code = [];
 
-                        setTimeout(function(){
-                            self.step2.reSendCode = true;
-                        },60000);
-                    })
-                    .catch(function(err){
-                        self.errors.phone = err.response.data.errors.phone;
-                    });
+                    setTimeout(function(){
+                        self.step2.reSendCode = true;
+                    },60000);
+                })
+                .catch(function(err){
+                    self.errors.phone = err.response.data.errors.phone;
+                    self.step1.sendCode = true;
+                });
             },
             verify_code:function(){
                 var self = this;
@@ -598,7 +604,7 @@
                 this.errors.sex = [];
 
                 if(sex === ''){
-                    this.errors.sex.push('جنسیت الرامی است');
+                    this.errors.sex.push('جنسیت الزامی است');
                     this.errorFlag = true;
                 }
             },
@@ -627,7 +633,7 @@
                 axios.post('/location/get_location_info',{
                     province_id : provinceId
                 })
-                    .then(response => (this.step3.cityList = response.data.cities));
+                .then(response => (this.step3.cityList = response.data.cities));
             },
             setProvinceName:function(e){
                 e.preventDefault();

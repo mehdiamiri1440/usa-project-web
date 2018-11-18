@@ -8,6 +8,7 @@ use App\factor;
 use App\buyAd;
 use App\Http\Library\date_convertor;
 use DB;
+use App\Http\Controllers\sms_controller;
 
 class transaction_controller extends Controller
 {
@@ -37,8 +38,14 @@ class transaction_controller extends Controller
         $user_role = $this->get_user_role();
         
         $transaction_condition = [
-            'second_side' => '0000000000000000',
-            'operator' => '<>',
+            [
+                'operator' => '<>',
+                'value' => '0000000000000000',
+            ],
+            [
+                'operator' => '<>',
+                'value' => $this->terminated_transaction_status,
+            ],
         ];
         
         $transactions = $this->get_user_transactions($user_id,$user_role,$transaction_condition);
@@ -71,18 +78,20 @@ class transaction_controller extends Controller
             return null;
         }
         
-        extract($transaction_condition);
-        
-        $transactions = DB::table('sell_offers')
+        $basic_query = DB::table('sell_offers')
                             ->join('buy_ads','sell_offers.buy_ad_id' ,'=', 'buy_ads.id')
                             ->where('sell_offers.is_accepted',true)
-                            ->where('sell_offers.is_pending',false)
-                            ->where('sell_offers.transaction_status',$operator,$second_side) //come from extract
-                            ->where("$user_related_table_name.myuser_id",$user_id)
+                            ->where('sell_offers.is_pending',false);
+        
+        foreach($transaction_condition as $condition){
+            $basic_query = $basic_query->where('sell_offers.transaction_status',$condition['operator'],$condition['value']);
+        }
+        
+        $transactions = $basic_query->where("$user_related_table_name.myuser_id",$user_id)
                             ->select($this->necessary_fields_for_transaction)
                             ->latest('sell_offers.updated_at')
                             ->get();
-        
+     
         return $transactions;
     }
     //public method
@@ -290,6 +299,12 @@ class transaction_controller extends Controller
         
         $transaction_record->save(); //updating transaction record
         
+        $this->notify_related_involved_users_in_the_tranaction(
+            $action_meta_data['to_notify'],
+            $seller_user_id = $transaction_record->myuser_id,
+            $buyAd_id = $transaction_record->buy_ad_id,
+            $request->transaction_id
+        );
         
         return response()->json([
             'status' => true,
@@ -388,10 +403,12 @@ class transaction_controller extends Controller
         $user_id = session('user_id');
         
         $user_role = $this->get_user_role();
-        
+
         $transaction_condition = [
-            'second_side' => '0000000011111111',
-            'operator' => '=',
+            [
+                'operator' => '=',
+                'value' => '0000000011111111',
+            ],
         ];
         
         $transactions = $this->get_user_transactions($user_id,$user_role,$transaction_condition);
@@ -481,6 +498,58 @@ class transaction_controller extends Controller
                                 ->first();
         
         return $factor_record;
+    }
+    
+    protected function notify_related_involved_users_in_the_tranaction($notify_actions,$seller_user_id,$buyAd_id,$transaction_id)
+    {
+        $sms_controller_object = new sms_controller();
+        
+        foreach($notify_actions as $user_role => $msg){
+
+            $msg_array = [];
+            
+            switch($user_role){
+                case 'seller' :
+                    //send sms to the seller
+                    $msg_array [] = 'فروشنده محترم اینکوباک';
+                    $msg_array [] =  $msg;
+                    $msg_array [] = 'شماره تراکنش' . ' : ' . $transaction_id ;
+                    
+                    $sms_controller_object->send_notify_sms_to_user($msg_array,$seller_user_id);
+                    
+                    break;
+                case 'buyer'  :
+                    //send sms to the buyer
+                    $buyer_user_id = $this->get_buyAd_owner_user_id($buyAd_id);
+                    
+                    $msg_array [] = 'خریدار محترم اینکوباک';
+                    $msg_array [] =  $msg;
+                    $msg_array [] = 'شماره تراکنش' . ' : ' . $transaction_id ;
+                    
+                    $sms_controller_object->send_notify_sms_to_user($msg_array,$buyer_user_id);
+                    break;
+                case 'admin'  :
+                    //send sms to the admin
+                    
+                    $sms_controller_object->send_notify_sms_to_user($msg_array,'09118413054');
+                    
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    
+    protected function get_buyAd_owner_user_id($buyAd_id)
+    {
+        $buyAd_record = buyAd::find($buyAd_id);
+        
+        if($buyAd_record){
+            return $buyAd_record->myuser_id;
+        }
+        else{
+            return false;
+        }
     }
     
     //public method
