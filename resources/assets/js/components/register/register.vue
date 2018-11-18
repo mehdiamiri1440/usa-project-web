@@ -378,10 +378,11 @@
                 })
                 .then(function(response){
                     self.goToStep(2);
+                    self.step1.sendCode = true;
 
                     self.step2.verification_code = '';
                     self.errors.verification_code = [];
-
+                    
                     setTimeout(function(){
                         self.step2.reSendCode = true;
                     },60000);

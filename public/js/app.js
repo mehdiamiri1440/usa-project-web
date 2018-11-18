@@ -81540,6 +81540,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 phone: this.toLatinNumbers(this.step1.phone)
             }).then(function (response) {
                 self.goToStep(2);
+                self.step1.sendCode = true;
 
                 self.step2.verification_code = '';
                 self.errors.verification_code = [];
