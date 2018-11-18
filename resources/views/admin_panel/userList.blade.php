@@ -58,7 +58,7 @@
                 <thead>
                 <tr>
                   <th>نام و نام خانوادگی</th>
-                  <th>جنسیت</th>
+                  <th>نوع کاربری</th>
                   <th>استان-شهر</th>
                   <th>کدملی</th>
                   <th>تاریخ ثبت نام</th>
@@ -70,7 +70,7 @@
                     @foreach($users as $user)
                     <tr>
                         <td>{{$user->first_name . ' ' . $user->last_name}}</td>
-                        <td>{{$user->sex}}</td>
+                        <td>{{$user->is_seller ? "فروشنده" : "خریدار"}}</td>
                         <td>{{$user->province}} | {{$user->city}}</td>                    
                         <td>{{$user->national_code}}</td>  
                         <td>{{$user['register_date']}}</td>
