@@ -130,16 +130,19 @@ var vm = new Vue({
 
         },
         refreshProduct:function(productId){
+            var self = this;
             console.log(productId);
             axios.post('/refresh_my_product_by_id',{
                 product_id : productId
             })
             .then(function(response){
                 if(response.data.status == true){
-                    alert('محصول شما بروز رسانی شد و در صدر لیست محصولات قرار گرفت.');
+                    self.popUpMsg = 'محصول شما بروز رسانی شد و در صدر لیست محصولات قرار گرفت.';
+                    $('#myModal').modal('show');
                 }
                 else{
-                    alert('هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.');
+                    self.popUpMsg = 'هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.';
+                    $('#myModal').modal('show');
                 }
             })
             .catch(function(err){
