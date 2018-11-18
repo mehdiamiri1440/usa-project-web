@@ -62,7 +62,7 @@
                                 </div>
                                 <span  class="text-danger" v-if="errors">{{errors[0]}} </span>
 
-                                           <button class="green_but" type="button"  @click="sendPhoneVerificationCode">ارسال پیام کوتاه
+                                           <button class="green_but" type="button"  @click="sendPhoneVerificationCode" :disabled="step2.sendCode == false">ارسال پیام کوتاه
                                           </button>
 
                             </div>
@@ -94,7 +94,7 @@
                                 </span>
                                     <button class=" green_but" type="button" @click="verifyCode"> بررسی کد</button>
                                     <button class="danger_border_but" type="button" @click.prevent="goToStep(2)"
-                                            :disabled="step2.reSendCode == false"> کد را دریافت
+                                            :disabled="step3.reSendCode == false"> کد را دریافت
                                         نکردم
                                     </button>
 
@@ -135,6 +135,7 @@
                 },
                 step2: {
                     phone: '',
+                    sendCode:true,
                     msg: '',
                 },
                 step3: {
@@ -185,6 +186,9 @@
                 window.location.href = '/register';
             },
             sendPhoneVerificationCode:function(){
+                this.step3.reSendCode = false;
+                this.step2.sendCode = false;
+                
                 var self = this;
                 this.errors = [];
 
@@ -194,10 +198,17 @@
                 .then(function(response){
                     if(response.status == 200){
                         self.goToStep(3);
+                        
+                        self.step2.sendCode = true;
+                        
+                        setTimeout(function(){
+                            self.step3.reSendCode = true;
+                        },60000);
                     }
                 })
                 .catch(function(err){
                         self.errors = err.response.data.errors.phone;
+                        self.step2.sendCode = true;
                 });
             },
             verifyCode:function(){
@@ -210,6 +221,7 @@
                 })
                 .then(function(response){
                     if(response.data.status == true){
+                        alert("گذر واژه ی جدید به تلفن همراهتان ارسال شد.")
                         window.location.href = '/login';
                     }
                     else{

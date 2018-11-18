@@ -80425,6 +80425,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             step2: {
                 phone: '',
+                sendCode: true,
                 msg: ''
             },
             step3: {
@@ -80471,6 +80472,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             window.location.href = '/register';
         },
         sendPhoneVerificationCode: function sendPhoneVerificationCode() {
+            this.step3.reSendCode = false;
+            this.step2.sendCode = false;
+
             var self = this;
             this.errors = [];
 
@@ -80479,9 +80483,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 if (response.status == 200) {
                     self.goToStep(3);
+
+                    self.step2.sendCode = true;
+
+                    setTimeout(function () {
+                        self.step3.reSendCode = true;
+                    }, 60000);
                 }
             }).catch(function (err) {
                 self.errors = err.response.data.errors.phone;
+                self.step2.sendCode = true;
             });
         },
         verifyCode: function verifyCode() {
@@ -80493,6 +80504,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'verification_code': this.toLatinNumbers(this.step3.verification_code)
             }).then(function (response) {
                 if (response.data.status == true) {
+                    alert("گذر واژه ی جدید به تلفن همراهتان ارسال شد.");
                     window.location.href = '/login';
                 } else {
                     self.errors = [];
@@ -80901,7 +80913,10 @@ var render = function() {
                       "button",
                       {
                         staticClass: "green_but",
-                        attrs: { type: "button" },
+                        attrs: {
+                          type: "button",
+                          disabled: _vm.step2.sendCode == false
+                        },
                         on: { click: _vm.sendPhoneVerificationCode }
                       },
                       [
@@ -81037,7 +81052,7 @@ var render = function() {
                         staticClass: "danger_border_but",
                         attrs: {
                           type: "button",
-                          disabled: _vm.step2.reSendCode == false
+                          disabled: _vm.step3.reSendCode == false
                         },
                         on: {
                           click: function($event) {
