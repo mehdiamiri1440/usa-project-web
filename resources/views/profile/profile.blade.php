@@ -42,12 +42,12 @@
                             </div>
 
                             <div class="title_content col-xs-12">
-<!--
-                                <div class="back_page col-xs-4">
+
+                                <div class="back_page col-xs-12 col-sm-4">
                                     <button  class="btn btn-copy">    کپی آدرس   <i class="fa fa-clipboard" aria-hidden="true"></i> </button>
                                 </div>
--->
-                                <div class="content_user_info col-xs-8">
+
+                                <div class="content_user_info col-xs-12 col-sm-8">
                                     <p>
                                         حوزه ی فعالیت : <span>
                                     @{{profileOwner.activity_domain}}

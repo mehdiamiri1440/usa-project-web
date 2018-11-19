@@ -603,6 +603,9 @@ th, td {
     .logo {
         padding: 20px 0;
     }
+    .main-content-item > div {
+        padding: 0;
+    }
 }
 
 @media screen and (max-width: 345px) {
