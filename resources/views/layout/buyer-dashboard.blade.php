@@ -26,6 +26,20 @@
     <script>
         window.Laravel = { csrfToken : '{{csrf_token()}}'}
     </script>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-129398000-1');
+        
+      gtag('set', {'user_id': session('user_id')});
+    </script>
+    
+
     <style>
         html{
             overflow-y: scroll;
