@@ -37,7 +37,9 @@
 
           gtag('config', 'UA-129398000-1');
             
-          gtag('set', {'user_id': session('user_id')});
+          var userId = '<?php echo session('user_id');?>';
+        
+          gtag('set', {'user_id': userId});
         </script>
 
         
