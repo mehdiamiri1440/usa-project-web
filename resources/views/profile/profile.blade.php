@@ -44,7 +44,8 @@
                             <div class="title_content col-xs-12">
 
                                 <div class="back_page col-xs-12 col-sm-4">
-                                    <button  class="btn btn-copy">    کپی آدرس   <i class="fa fa-clipboard" aria-hidden="true"></i> </button>
+                                    <button  class="btn btn-copy" @click="copyProfileLinkToClipBoard">    کپی آدرس   <i class="fa fa-clipboard" aria-hidden="true"></i> </button>
+                                    <input id="profileUrlText" :value=" 'https:://incobac.com/profile/' + profileOwner.user_info.user_name" type="hidden" >
                                 </div>
 
                                 <div class="content_user_info col-xs-12 col-sm-8">

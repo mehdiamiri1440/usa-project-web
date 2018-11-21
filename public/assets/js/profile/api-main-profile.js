@@ -148,7 +148,20 @@ var vm = new Vue({
             .catch(function(err){
                 alert('هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.');
             });
+        },
+        copyProfileLinkToClipBoard:function(){
+            var input = document.createElement('input');
+            input.setAttribute('value', 'https://incobac.com/profile/' + this.profileOwner.user_info.user_name);
+            document.body.appendChild(input);
+            input.select();
+            var result = document.execCommand('copy');
+            document.body.removeChild(input);
+            if(result){
+                this.popUpMsg = 'آدرس پروفایل کاربر کپی شد.';
+                $('#myModal').modal('show');
+            }
         }
+        
     },
     mounted(){
       this.init();
