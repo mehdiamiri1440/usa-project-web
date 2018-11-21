@@ -11,7 +11,12 @@
     <meta property="og:site_name" content="اینکوباک">
     <meta property="og:title" content="پروفایل" />
     <meta property="og:description" content="صفحه ی شخصی پروفایل کاربران اینکوباک" />
+    <meta property="og:image" itemprop="image" content="{{asset('assets/img/logo-inco-mobile.png')}}">
     <meta property="og:image:secure_url" itemprop="image" content="{{asset('assets/img/logo-inco-mobile.png')}}">
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="256" />
+    <meta property="og:image:height" content="256" />
+    <meta property="og:url" content="{{'https://www.incobac.com/profile/' . $user_name}}" />
     <meta property="og:type" content="website" />
     
 @endsection
