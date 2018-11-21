@@ -79,6 +79,7 @@ var vm = new Vue({
         popUpMsg:'',
         submiting:'',
     },
+    
     methods:{
         init:function(){
             axios.post('/user/profile_info')
