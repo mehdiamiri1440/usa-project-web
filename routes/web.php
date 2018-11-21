@@ -145,8 +145,23 @@ Route::post('/application_trace/increment_buy_ad_phone_view_count',[
 ]);
 
 Route::get('/profile/{user_name}',function($user_name){
+    $user_record = myuser::where('user_name',$user_name)
+        ->select('id','first_name','last_name')
+        ->get()
+        ->first();
+    
+    $profile_record = profile::where('myuser_id',$user_record->id)
+            ->where('confirmed',true)
+            ->select('profile_photo')
+            ->get()
+            ->last();
+    
+    $full_name = $user_record->first_name . ' ' . $user_record->last_name;
+    
     return view('profile.profile',[
-        'user_name' => $user_name
+        'user_name' => $user_name,
+        'full_name' => $full_name,
+        'profile_photo' => $profile_record->profile_photo,
     ]);
 });
 

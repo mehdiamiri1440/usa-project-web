@@ -9,10 +9,17 @@
     <meta name="description"  content="صفحه ی شخصی پروفایل کاربران اینکوباک. محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید">
     
     <meta property="og:site_name" content="اینکوباک">
-    <meta property="og:title" content="پروفایل" />
+    <meta property="og:title" content="{{$full_name}}" />
     <meta property="og:description" content="صفحه ی شخصی پروفایل کاربران اینکوباک" />
-    <meta property="og:image" itemprop="image" content="{{asset('assets/img/logo-inco-mobile.png')}}">
-    <meta property="og:image:secure_url" itemprop="image" content="{{asset('assets/img/logo-inco-mobile.png')}}">
+
+    @if($profile_photo)
+        <meta property="og:image" itemprop="image" content="{{asset('storage/profile_photos'.$profile_photo)}}">
+        <meta property="og:image:secure_url" itemprop="image" content="{{asset('storage/profile_photos'.$profile_photo)}}">
+    @else
+        <meta property="og:image" itemprop="image" content="{{asset('assets/img/logo-inco-mobile.png')}}">
+        <meta property="og:image:secure_url" itemprop="image" content="{{asset('assets/img/logo-inco-mobile.png')}}">
+    @endif
+    
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="256" />
     <meta property="og:image:height" content="256" />
