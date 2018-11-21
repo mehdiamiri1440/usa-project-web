@@ -13,8 +13,8 @@
     <meta property="og:description" content="صفحه ی شخصی پروفایل کاربران اینکوباک" />
 
     @if($profile_photo)
-        <meta property="og:image" itemprop="image" content="{{asset('storage/profile_photos'.$profile_photo)}}">
-        <meta property="og:image:secure_url" itemprop="image" content="{{asset('storage/profile_photos'.$profile_photo)}}">
+        <meta property="og:image" itemprop="image" content="{{asset('storage/'.$profile_photo)}}">
+        <meta property="og:image:secure_url" itemprop="image" content="{{asset('storage/'.$profile_photo)}}">
     @else
         <meta property="og:image" itemprop="image" content="{{asset('assets/img/logo-inco-mobile.png')}}">
         <meta property="og:image:secure_url" itemprop="image" content="{{asset('assets/img/logo-inco-mobile.png')}}">
