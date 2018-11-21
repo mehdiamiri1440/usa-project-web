@@ -151,16 +151,46 @@ var vm = new Vue({
             });
         },
         copyProfileLinkToClipBoard:function(){
-            var input = document.createElement('input');
-            input.setAttribute('value', 'https://incobac.com/profile/' + this.profileOwner.user_info.user_name);
-            document.body.appendChild(input);
-            input.select();
-            var result = document.execCommand('copy');
-            document.body.removeChild(input);
-            if(result){
-                this.popUpMsg = 'آدرس پروفایل کاربر کپی شد.';
-                $('#myModal').modal('show');
+            if(this.isDeviceMobile()){
+
+                var linkElement = document.createElement('a');
+                linkElement.setAttribute('href','whatsapp://send?text=' + 'https://incobac.com/profile' + this.profileOwner.user_info.user_name);
+                linkElement.setAttribute('data-action',"share/whatsapp/share");
+                document.body.appendChild(linkElement);
+                
+                linkElement.click();
+                
+                document.body.removeChild(input);
+                
             }
+            else{
+                var input = document.createElement('input');
+                input.setAttribute('value', 'https://incobac.com/profile/' + this.profileOwner.user_info.user_name);
+                document.body.appendChild(input);
+                input.select();
+                var result = document.execCommand('copy');
+                document.body.removeChild(input);
+                if(result){
+                    this.popUpMsg = 'آدرس پروفایل کاربر کپی شد.';
+                    $('#myModal').modal('show');
+                }
+            }
+            
+        },
+        isDeviceMobile:function() { 
+             if( navigator.userAgent.match(/Android/i)
+             || navigator.userAgent.match(/webOS/i)
+             || navigator.userAgent.match(/iPhone/i)
+             || navigator.userAgent.match(/iPad/i)
+             || navigator.userAgent.match(/iPod/i)
+             || navigator.userAgent.match(/BlackBerry/i)
+             || navigator.userAgent.match(/Windows Phone/i)
+             ){
+                return true;
+              }
+             else {
+                return false;
+              }
         }
         
     },
