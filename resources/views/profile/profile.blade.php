@@ -7,6 +7,7 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/profile/main-profile.css')}}">
     <meta name="description"  content="صفحه ی شخصی پروفایل کاربران اینکوباک. محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید">
+    <meta property="og:image" content="{{asset('assets/img/logo-incobac-white-red.png')}}"/>
 @endsection
 
 @section('title')

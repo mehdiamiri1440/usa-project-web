@@ -155,7 +155,7 @@ var vm = new Vue({
 
                 var linkElement = document.createElement('a');
                 linkElement.setAttribute('href','whatsapp://send?text=' + 'https://incobac.com/profile/' + this.profileOwner.user_info.user_name);
-                linkElement.setAttribute('data-action',"share/whatsapp/share");
+                linkElement.setAttribute('data-action','share/whatsapp/share');
                 document.body.appendChild(linkElement);
                 
                 linkElement.click();
