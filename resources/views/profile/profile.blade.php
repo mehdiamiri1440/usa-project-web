@@ -47,7 +47,7 @@
 
                                 <div class="back_page col-xs-12 col-sm-4">
                                     <button  class="btn btn-copy" @click="copyProfileLinkToClipBoard">    کپی آدرس   <i class="fa fa-clipboard" aria-hidden="true"></i> </button>
-                                    <a :href="'whatsapp://send?text=' + 'incobac.com/profile/'+ profileOwner.user_info.user_name" data-action="share/whatsapp/share">Share via Whatsapp</a>
+                                    <a :href="'whatsapp://send?text=' + 'https://incobac.com/profile/'+ profileOwner.user_info.user_name" data-action="share/whatsapp/share">Share via Whatsapp</a>
                                 </div>
 
                                 <div class="content_user_info col-xs-12 col-sm-8">
