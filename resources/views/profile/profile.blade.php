@@ -6,6 +6,7 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/profile/main-profile.css')}}">
+
 @endsection
 
 @section('title')
