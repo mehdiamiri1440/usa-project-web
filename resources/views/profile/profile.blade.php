@@ -6,6 +6,7 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/profile/main-profile.css')}}">
+    <meta name="description"  content="صفحه ی شخصی پروفایل کاربران اینکوباک. محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید">
 @endsection
 
 @section('title')
@@ -16,6 +17,7 @@
 @endsection
 
 @section('main_content')
+    
     <main id="main" class="col-sm-12">
         <section class="main-content container">
             <div class="main-content-item" v-if="profileOwner.user_info">
