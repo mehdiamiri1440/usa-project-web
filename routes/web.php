@@ -103,8 +103,10 @@ Route::post('/get_buy_ad_by_id',[
     'as' => 'get_buy_ad_by_id'
 ]);
 
-Route::get('product-list',function(){
-        return view('dashboard.buyer.product-list');
+Route::get('product-list/{searchText?}',function($searchText = null){
+        return view('dashboard.buyer.product-list',[
+            'searchText' => $searchText,
+        ]);
 })->name('product-list');
 
 Route::get('/product/{id?}',function(){

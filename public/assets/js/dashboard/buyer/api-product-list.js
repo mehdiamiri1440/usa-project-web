@@ -62,15 +62,25 @@ var vm = new Vue({
     },
     methods:{
         init:function(){
-            axios.post('user/get_product_list',{
+            var self = this;
+            var searchValueText = searchValue;
+            
+            axios.post('/user/get_product_list',{
                 //from_record_number:0,
                 //to_record_number:this.productCountInPage,
-            }).then(response => (this.products = response.data.products));
+            }).then(function(response){
+                self.products = response.data.products;
+                
+                if(searchValueText){
+                    self.searchText = searchValueText;
+                }
+            });
+            
             axios.post('/user/profile_info')
                 .then(response => (this.currentUser = response.data));
             axios.post('/get_category_list')
                 .then(response => (this.categoryList = response.data.categories));
-            axios.post('location/get_location_info')
+            axios.post('/location/get_location_info')
                 .then(response => (this.provinceList = response.data.provinces));
         },
         setCategoryFilter:function(e){
@@ -79,7 +89,7 @@ var vm = new Vue({
 
             var self = this;
 
-            axios.post('user/get_product_list')
+            axios.post('/user/get_product_list')
                 .then(function(response){
                     self.products = '';
                     self.products = response.data.products.filter(function(product){
@@ -109,7 +119,7 @@ var vm = new Vue({
             var subCategoryId = $(e.target).val();
             var self = this;
 
-            axios.post('user/get_product_list')
+            axios.post('/user/get_product_list')
                 .then(function(response){
                     self.products = '';
                     self.products = response.data.products.filter(function(product){
@@ -134,7 +144,7 @@ var vm = new Vue({
 
             var self = this;
 
-            axios.post('user/get_product_list')
+            axios.post('/user/get_product_list')
                 .then(function(response){
 
                     self.products = '';
@@ -155,7 +165,7 @@ var vm = new Vue({
                     });
             });
 
-            axios.post('location/get_location_info',{
+            axios.post('/location/get_location_info',{
                 province_id : provinceId
             }).then(response => (this.cityList = response.data.cities));
 
@@ -170,7 +180,7 @@ var vm = new Vue({
 
             var self = this;
 
-            axios.post('user/get_product_list')
+            axios.post('/user/get_product_list')
                 .then(function(response){
                     self.products = '';
 
@@ -203,7 +213,7 @@ var vm = new Vue({
                   if(this.searchText == '' && this.provinceId == '' && this.categoryId == '' && this.continueToLoadProducts){
                       this.productCountInPage += this.productCountInEachLoad ;
 
-                        axios.post('user/get_product_list',{
+                        axios.post('/user/get_product_list',{
                             from_record_number:0,
                             to_record_number:this.productCountInPage,
                         }).then(function(response){
@@ -365,7 +375,7 @@ var vm = new Vue({
         searchText:function(){
             var self = this;
 
-            axios.post('user/get_product_list')
+            axios.post('/user/get_product_list')
                 .then(function(response){
                     self.products = '';
 

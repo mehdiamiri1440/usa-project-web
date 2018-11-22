@@ -171,7 +171,9 @@
 
 
 @section('script_tags')
-
+    <script>
+        var searchValue = "<?php echo $searchText; ?>";
+    </script>
     <script src="{{asset('assets/js/imageuploadify.min.js')}}"></script>
     <script src="{{asset('assets/js/dashboard/buyer/product-list.js')}}"></script>
     <script src="{{asset('assets/js/dashboard/buyer/api-product-list.js')}}"></script>

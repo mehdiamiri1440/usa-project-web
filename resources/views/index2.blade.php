@@ -49,7 +49,7 @@
 <!-- =========================
  NAVIGATION LINKS
 ============================== -->
-
+<div id="app">
 <div class="navbar container-fluid navbar-fixed-top custom-navbar" role="navigation">
     <div class="container-fluid">
         <!-- navbar header -->
@@ -150,12 +150,12 @@ INTRO SECTION
                         کشاورزی</h2>
                 </div>
                 <div class="col-xs-12">
-                    <form action="" method="get">
+                    
                         <div class="search_input col-xs-12 col-sm-8 col-sm-offset-2">
-                            <input type="text" placeholder="محصول مورد نظر خود را جستجو کنید">
-                            <button class="fa fa-search"></button>
+                            <input type="text" placeholder="محصول مورد نظر خود را جستجو کنید" v-model="mainSearchBoxText">
+                            <button class="fa fa-search" @click="search"></button>
                         </div>
-                    </form>
+                    
                 </div>
                 <div class="col-xs-12">
                     <a href="{{route('login_page')}}" class="btn btn-purple  smoothScroll wow fadeInUp"
@@ -499,158 +499,7 @@ FAQ SECTION
 </section>
 
 
-<!-- =========================
-PRICING SECTION
-============================== -->
-<!--
 
-	<section id="pricing" class="parallax-section">
-		<div class="container">
-			<div class="row">
-
-				<div class=" wow bounceIn col-md-12 col-sm-12">
-					<div class="section-title">
-						<h2>قیمت گذاری بسته های ما</h2>
-						<p>لورم ایپسوم متن ساختگی با تولید سادگی.</p>
-					</div>
-				</div>
-
-				<div class="wow fadeInUp col-md-4 col-sm-6" data-wow-delay="0.3s">
-					<div class="pricing-thumb">
-						<div class="pricing-title">
-							<h3>طرح استاندارد</h3>
-						</div>
-						<div class="pricing-month">
-							<h2>ریال 400</h2>
-							<h6>ماهیانه</h6>
-						</div>
-						<p>24 حساب ها</p>
-						<p>5گیگابایت حافظه خالی</p>
-						<p>به روز رسانی مادام العمر</p>
-						<p>صفحه فرود</p>
-					</div>
-				</div>
-
-				<div class="wow fadeInUp col-md-4 col-sm-6" data-wow-delay="0.3s">
-					<div class="pricing-thumb">
-						<div class="pricing-title">
-							<h3>طرح کسب و کار</h3>
-						</div>
-						<div class="pricing-month">
-							<h2>ریال 650</h2>
-							<h6>ماهیانه</h6>
-						</div>
-						<p>40 حساب ها</p>
-						<p>5گیگابایت حافظه خالی</p>
-						<p>به روز رسانی مادام العمر</p>
-						<p>صفحه فرود</p>
-					</div>
-				</div>
-
-				<div class="wow fadeInUp col-md-4 col-sm-6" data-wow-delay="0.3s">
-					<div class="pricing-thumb">
-						<div class="pricing-title">
-							<h3>طرح حرفه ای</h3>
-						</div>
-						<div class="pricing-month">
-							<h2>ریال 840</h2>
-							<h6>ماهیانه</h6>
-						</div>
-						<p>100 حساب ها</p>
-						<p>40 گیگابایت حافظه خالی</p>
-						<p>به روز رسانی مادام العمر</p>
-						<p>صفحه فرود</p>
-					</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</section>
--->
-
-
-<!-- =========================
-CONTACT SECTION
-============================== -->
-{{--
-
-<section id="contact" class="parallax-section">
-    <div class="container">
-        <div class="row">
-
-            <div class="wow bounceIn col-md-12 col-sm-12">
-                <div class="section-title text-center">
-                    <h2>با ما در تماس باشید</h2>
-                </div>
-            </div>
-            <div class="wow fadeInUp col-md-6 col-sm-7" data-wow-delay="0.9s">
-                <div class="contact_detail">
-                    <div class="section-title">
-                        <h3>یک پیام برای مابفرستید</h3>
-                    </div>
-                    <form action="http://themes.khaitawng.com/Branded/contact.php" method="post">
-                        <input type="text" class="form-control" placeholder="نام" required>
-                        <input type="email" class="form-control" placeholder="ایمیل" required>
-                        <textarea class="form-control" placeholder="پیام" rows="5" required></textarea>
-                        <div class="col-md-6 col-sm-10">
-                            <input type="submit" class="form-control" value="ارسال">
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div class="wow fadeInUp col-md-offset-1 col-md-4 col-sm-5" data-wow-delay="0.9s">
-                <div class="contact_detail">
-                    <div class="addr">
-                        <h3> آدرس</h3>
-                        <p>شیراز ، بلوار جمهوری اسلامی، ساختمان مدیریت دانشگاه شیراز، برج نوآوری ، طبقه نهم</p>
-                    </div>
-                    <div class="ph">
-                        <h3>تماس با ما</h3>
-                        <p>0713-646-0996 / 09178928245</p>
-                    </div>
-                    <div class="email">
-                        <h3>ایمیل بفرستید</h3>
-                        <p>s.radmanesh95@gmail.com</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
---}}
-
-<!-- =========================
-FOOTER SECTION
-============================== -->
-
-{{--
-
-
-  <div class="row">
-            <div class=" enamad col-xs-12">
-                <div>
-                    <img src="https://trustseal.enamad.ir/logo.aspx?id=100286&amp;p=yBEoWWMXqCeIkdjL" alt=""
-                         onclick="window.open(&quot;https://trustseal.enamad.ir/Verify.aspx?id=100286&amp;p=yBEoWWMXqCeIkdjL&quot;, &quot;Popup&quot;,&quot;toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30&quot;)"
-                         style="cursor:pointer" id="yBEoWWMXqCeIkdjL">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-sm-12">
-                <p class="wow fadeInUp" data-wow-delay="0.6s">تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.</p>
-
-
-
-            </div>
-
-        </div>
-
-
---}}
 <footer>
     <div class="container">
         <div class="row">
@@ -716,7 +565,7 @@ FOOTER SECTION
     </div>
 </div>
 
-
+    </div> <!-- end of app tag -->
 <!-- Back top -->
 <a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
 
@@ -734,6 +583,7 @@ FOOTER SECTION
 <script src="{{asset('index/js/smoothscroll.js')}}"></script>
 <script src="{{asset('index/js/wow.min.js')}}"></script>
 <script src="{{asset('index/js/custom.js')}}"></script>
+<script src="{{asset('index/js/api-index.js')}}"></script>
 
 <!--
 <script>
@@ -752,26 +602,7 @@ FOOTER SECTION
 <script>
 
 
-    var vm = new Vue({
-        el: '#recent',
-        data: {
-            posts: '',
-        },
-        methods: {
-            init: function () {
-                var self = this;
-                console.log('test');
-                axios.post('/get_wp_posts')
-                    .then(function (response) {
-                        console.log(response.data);
-                        self.posts = response.data.posts;
-                    });
-            }
-        },
-        mounted: function () {
-            this.init();
-        }
-    })
+   
 </script>
 
 </html>
