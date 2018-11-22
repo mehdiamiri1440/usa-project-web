@@ -79,7 +79,13 @@ $(document).ready(function () {
     -----------------------------------------------*/
     $(document).ready(function () {
         $(".owl-carousel").owlCarousel({
+
             autoPlay: 6000,
+
+            autoplay:true,
+            autoplayTimeout:2000,
+            loop:true,
+
             items: 5,
             mouseDrag: true,
             margin:30,
