@@ -6,7 +6,23 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/profile/main-profile.css')}}">
+<<<<<<< HEAD
 
+=======
+    <meta name="description"  content="صفحه ی شخصی پروفایل کاربران اینکوباک. محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید">
+    
+    <meta property="og:site_name" content="اینکوباک">
+    <meta property="og:title" content="پروفایل" />
+    <meta property="og:description" content="صفحه ی شخصی پروفایل کاربران اینکوباک" />
+    <meta property="og:image" itemprop="image" content="{{asset('assets/img/logo-inco-mobile.png')}}">
+    <meta property="og:image:secure_url" itemprop="image" content="{{asset('assets/img/logo-inco-mobile.png')}}">
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="256" />
+    <meta property="og:image:height" content="256" />
+    <meta property="og:url" content="{{'https://www.incobac.com/profile/' . $user_name}}" />
+    <meta property="og:type" content="website" />
+    
+>>>>>>> 896e8668ce9c8b195a607aaf30d96382bec6add9
 @endsection
 
 @section('title')
@@ -17,6 +33,7 @@
 @endsection
 
 @section('main_content')
+    
     <main id="main" class="col-sm-12">
         <section class="main-content container">
             <div class="main-content-item" v-if="profileOwner.user_info">
@@ -45,7 +62,7 @@
                             <div class="title_content col-xs-12">
 
                                 <div class="back_page col-xs-12 col-sm-4">
-                                    <button  class="btn btn-copy">    کپی آدرس   <i class="fa fa-clipboard" aria-hidden="true"></i> </button>
+                                    <button  class="btn btn-copy" @click="copyProfileLinkToClipBoard">    کپی آدرس   <i class="fa fa-clipboard" aria-hidden="true"></i> </button>
                                 </div>
 
                                 <div class="content_user_info col-xs-12 col-sm-8">
