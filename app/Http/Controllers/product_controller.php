@@ -295,6 +295,8 @@ class product_controller extends Controller
 	protected function get_all_products_with_related_media($authentication, $from_record_number = NULL, $to_record_number = NULL)
 	{
 		$products = NULL ;
+        
+        $product_recommender_object = new product_recommender_controller();
 		
 		if($from_record_number !== null)
 		{			
@@ -310,6 +312,11 @@ class product_controller extends Controller
 			$products = product::where('confirmed',true)
                 ->orderBy('updated_at','desc')
                 ->get();
+            
+            if(session('is_buyer')){
+                $product_recommender_object->product_list_recommender_for_buyer($products,session('user_id'));
+            }
+            
 		}
 		
 		$result_products = array();

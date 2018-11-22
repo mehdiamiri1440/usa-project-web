@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="{{asset('index/css/magnific-popup.css')}}">
     <link rel="stylesheet" href="{{asset('index/css/particleNetwork.css')}}">
     <!-- Main css -->
-    <link rel="stylesheet" href="{{asset('index/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('index/css/style2.css')}}">
     <script src="{{asset('assets/cdn/vue.js')}}"></script>
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
 

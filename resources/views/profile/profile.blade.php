@@ -7,6 +7,25 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/profile/main-profile.css')}}">
     <meta name="description"  content="صفحه ی شخصی پروفایل کاربران اینکوباک. محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید">
+    
+    <meta property="og:site_name" content="اینکوباک">
+    <meta property="og:title" content="{{$full_name}}" />
+    <meta property="og:description" content="صفحه ی شخصی پروفایل کاربران اینکوباک" />
+
+    @if($profile_photo)
+        <meta property="og:image" itemprop="image" content="{{asset('storage/'.$profile_photo)}}">
+        <meta property="og:image:secure_url" itemprop="image" content="{{asset('storage/'.$profile_photo)}}">
+    @else
+        <meta property="og:image" itemprop="image" content="{{asset('assets/img/logo-inco-mobile.png')}}">
+        <meta property="og:image:secure_url" itemprop="image" content="{{asset('assets/img/logo-inco-mobile.png')}}">
+    @endif
+    
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="256" />
+    <meta property="og:image:height" content="256" />
+    <meta property="og:url" content="{{'https://www.incobac.com/profile/' . $user_name}}" />
+    <meta property="og:type" content="website" />
+    
 @endsection
 
 @section('title')
