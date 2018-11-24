@@ -38,7 +38,7 @@
       
       var userId = '<?php echo session('user_id');?>';
         
-      gtag('set', {'user_id': userId});
+      gtag('set', {'user_id': '<?php echo session('user_id');?>'});
     </script>
     
 
