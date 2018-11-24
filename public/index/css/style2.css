@@ -791,6 +791,7 @@ footer {
     direction: ltr;
 }
 
+
 /*---------------------------------------
     recent section
 -----------------------------------------*/
@@ -818,6 +819,9 @@ footer {
     width: 42px;
 }
 
+#request .img-responsive {
+    height: 190px;
+}
 #detail .detail-thumb, #request .detail-thumb {
     border-radius: 4px;
     background-color: #ffffff;
