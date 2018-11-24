@@ -469,10 +469,10 @@ FAQ SECTION
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <ul class="list-unstyled footer-list">
                     <li>
-                        <a href="#">قوانین و مقررات</a>
+                        <a href="/privacy-and-policy">قوانین و مقررات</a>
                     </li>
                     <li>
-                        <a href="#">درباره ما </a>
+                        <a href="/about-us">درباره ما </a>
                     </li>
                     <li>
                         <a href="#"> ارتباط با ما</a>

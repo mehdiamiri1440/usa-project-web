@@ -23,13 +23,13 @@ Route::get('/test', function(){
     return view('product_view');
 });
 
-Route::get('/new', function(){
+Route::get('/', function(){
     return view('index2');
 });
 
-Route::get('/', function(){
-    return view('index');
-});
+//Route::get('/', function(){
+//    return view('index');
+//});
 
 Route::get('/about-us',function(){
     return view('about_us');
