@@ -65,16 +65,18 @@ var vm = new Vue({
             var self = this;
             var searchValueText = searchValue;
             
-            axios.post('/user/get_product_list',{
+            if(searchValueText){
+                this.searchText = searchValueText;
+            }
+            else{
+                axios.post('/user/get_product_list',{
                 //from_record_number:0,
                 //to_record_number:this.productCountInPage,
-            }).then(function(response){
-                self.products = response.data.products;
-                
-                if(searchValueText){
-                    self.searchText = searchValueText;
-                }
-            });
+                }).then(function(response){
+                    self.products = response.data.products;
+                    self.productCountInPage = self.products.length;
+                });
+            }
             
             axios.post('/user/profile_info')
                 .then(response => (this.currentUser = response.data));
@@ -177,7 +179,7 @@ var vm = new Vue({
         setCityFilter:function(e){
             e.preventDefault;
             var cityId = $(e.target).val();
-
+            this.loading = true;
             var self = this;
 
             axios.post('/user/get_product_list')
@@ -201,7 +203,9 @@ var vm = new Vue({
             });
 
             this.cityId = cityId;
-            this.continueToLoadProducts = false;
+            this.loading = false;   
+//            this.continueToLoadProducts = false;
+//            self.productCountInPage = self.products.length;
         },
         handleScroll(){
               var offset = $(window).scrollTop() + $(window).height();
@@ -368,6 +372,21 @@ var vm = new Vue({
         },
         redirectToLogin:function(){
             window.location.href = '/login';
+        },
+        registerRequestInSearchNotFoundCase:function(){
+            if(this.currentUser.profile){
+                if(this.currentUser.user_info.is_buyer){
+                    window.location.href = '/dashboard/#/register-request';
+                }
+                else{
+                    this.popUpMsg = 'حساب کاربری شما از نوع خریدار نیست.';
+                    $('#myModal').modal('show');
+                }
+            }
+            else{
+                this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
+                $('#myModal2').modal('show');
+            }
         }
     },
     watch:{
@@ -401,7 +420,7 @@ var vm = new Vue({
         //window.addEventListener('scroll', this.handleScroll);
     },
     destroyed(){
-        window.removeEventListener('scroll', this.handleScroll);
+        //window.removeEventListener('scroll', this.handleScroll);
     },
     components:{
         "popup":PopupImage

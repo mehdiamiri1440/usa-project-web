@@ -302,56 +302,19 @@ SERVICES SECTION
         <div class="row">
             <h3 class="text-center col-xs-12"> محصولات</h3>
             <div class="text-center col-xs-12">
-                <a href="#" class="green-bot">
+                <a href="/product-list" class="green-bot">
                     مشاهده همه محصولات
                 </a>
             </div>
             <div class="owl-carousel col-xs-12">
-                <article class="wow fadeIn " data-wow-delay="0.9s">
-                    <div class="detail-thumb">
-                        <div class="request_image">
-                            <img src="{{asset('index/images/new-feature-img.png')}}" class="img-responsive"
-                                 alt="feature">
-                        </div>
-                        <h4>افزایش اعتماد و شفافیت</h4>
-                        <a href="#" class="blue-bot">مشاهده محصول</a>
-                    </div>
-                </article>
-                <article class="wow fadeIn " data-wow-delay="0.9s">
-                    <div class="detail-thumb">
-                        <img src="{{asset('index/images/6.png')}}" class="img-responsive">
-                        <h4>افزایش اعتماد و شفافیت</h4>
-                        <a href="#" class="blue-bot">مشاهده محصول</a>
-                    </div>
-                </article>
-                <article class="wow fadeIn " data-wow-delay="0.9s">
-                    <div class="detail-thumb">
-                        <img src="{{asset('index/images/6.png')}}" class="img-responsive">
-                        <h4>افزایش اعتماد و شفافیت</h4>
-                        <a href="#" class="blue-bot">مشاهده محصول</a>
-                    </div>
-                </article>
-                <article class="wow fadeIn " data-wow-delay="0.9s">
-                    <div class="detail-thumb">
-                        <img src="{{asset('index/images/6.png')}}" class="img-responsive">
-                        <h4>افزایش اعتماد و شفافیت</h4>
-                        <a href="#" class="blue-bot">مشاهده محصول</a>
-                    </div>
-                </article>
-                <article class="wow fadeIn " data-wow-delay="0.9s">
-                    <div class="detail-thumb">
-                        <img src="{{asset('index/images/6.png')}}" class="img-responsive">
-                        <h4>افزایش اعتماد و شفافیت</h4>
-                        <a href="#" class="blue-bot">مشاهده محصول</a>
-                    </div>
-                </article>
-                <article class="wow fadeIn " data-wow-delay="0.9s">
-                    <div class="detail-thumb">
-                        <img src="{{asset('index/images/6.png')}}" class="img-responsive">
-                        <h4>افزایش اعتماد و شفافیت</h4>
-                        <a href="#" class="blue-bot">مشاهده محصول</a>
-                    </div>
-                </article>
+                <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProducts">
+                    <image-viewer
+                        :title="product.main.sub_category_name + ' - ' + product.main.product_name"
+                        :img="'storage/' + product.photos[0].file_path"
+                        link="/product-list"
+                        >
+                    </image-viewer>
+                </article>     
             </div>
         </div>
     </div>
