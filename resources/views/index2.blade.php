@@ -311,7 +311,7 @@ SERVICES SECTION
                     <image-viewer
                         :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                         :img="'storage/' + product.photos[0].file_path"
-                        link="/product-list"
+                        :link="'/product-list/' + product.main.sub_category_name"
                         >
                     </image-viewer>
                 </article>     
