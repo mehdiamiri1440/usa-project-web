@@ -377,7 +377,7 @@
                              alt="تصویر پروفایل">
                     </div>
                     <div v-else>
-                        <img :src="defultimg" align="تصویر پروفایل">
+                        <img :src="defultimg" align="تصویر پیشفرض">
                     </div>
                     <div class="submit">
                         <input type="file" id="imgInp" ref="profilePhoto">
@@ -477,6 +477,7 @@
 
 <script>
     import {eventBus} from "../../../../router/dashboard_router";
+
     export default {
         props: [
             'str',
@@ -535,7 +536,7 @@
                 eventBus.$emit('submitingEvent', true);
                 this.errors = '';
                 var self = this;
-
+                console.log(this.currentUser.profile.is_company);
                 var data = new FormData();
 
                 for (var i = 0, cnt = this.profileBasicFields.length; i < cnt; i++) {
@@ -605,7 +606,6 @@
             }
         },
         mounted() {
-
             this.init();
             eventBus.$emit('subHeader', this.items);
 
@@ -637,7 +637,6 @@
             $("#imgInp").change(function () {
                 show_image_preview(this);
             })
-
         }
     }
 

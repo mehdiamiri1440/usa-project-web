@@ -599,8 +599,6 @@
                     'company_register_code',
                     'public_phone',
                     'description',
-                    'postal_code',
-                    'shaba_code',
                 ],
                 relatedFiles: [],
                 certificateFiles: [],

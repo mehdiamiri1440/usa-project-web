@@ -398,21 +398,19 @@ var vm = new Vue({
                 .then(function(response){
                     self.products = '';
 
-                    self.products = response.data.products.filter(function(product){
-                        if(self.searchText == ''){
-                            return true;
-                        }
-                        else if(product.main.product_name.search(self.searchText) != -1 ||
-                               product.main.province_name.search(self.searchText) != -1 ||
-                               product.main.city_name.search(self.searchText) != -1 ||
-                               product.main.category_name.search(self.searchText) != -1 ||
-                               product.main.sub_category_name.search(self.searchText) != -1
-                            ){
-                                return true;
+                     var text = self.searchText.split(' ');
+                     self.products = response.data.products.filter(function(product) {
+                        return text.every(function(el) {
+                            if(product.main.product_name.indexOf(el) > -1 ||
+                                product.main.province_name.indexOf(el) > -1 ||
+                                product.main.city_name.indexOf(el) > -1 ||
+                                product.main.category_name.indexOf(el) > -1 ||
+                                product.main.sub_category_name.indexOf(el) > -1){
+                                    return true;
                             }
-
-                        return false;
-                    });
+                            else return false;
+                        });
+                });
             });
         },
     },

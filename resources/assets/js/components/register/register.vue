@@ -455,7 +455,7 @@
                 }
 
                 var object = {
-                    phone:this.step1.phone,
+                    phone:this.toLatinNumbers(this.step1.phone),
                     first_name:this.step3.first_name,
                     last_name:this.step3.last_name,
                     password:this.step3.password,

@@ -536,11 +536,11 @@
                 eventBus.$emit('submitingEvent', true);
                 this.errors = '';
                 var self = this;
-
+                console.log(this.currentUser.profile.is_company);
                 var data = new FormData();
 
                 for (var i = 0, cnt = this.profileBasicFields.length; i < cnt; i++) {
-                    if (this.currentUser.profile[this.profileBasicFields[i]] != null) {
+                    if (this.currentUser.profile[this.profileBasicFields[i]] != null && this.currentUser.profile[this.profileBasicFields[i]] !== '') {
                         data.append(this.profileBasicFields[i], this.toLatinNumbers(this.currentUser.profile[this.profileBasicFields[i]]));
                     }
                 }

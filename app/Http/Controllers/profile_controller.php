@@ -123,15 +123,15 @@ class profile_controller extends Controller
     protected function set_user_profile_modification_rules($request)
     {
         $rules = [
-            'description' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u|min:100',
-            'activity_domain' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u',
-            'related_activity_history' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9]+$/u',
-            'human_resource_count' => 'regex:/^[0-9\x{06F0}-\x{06F9}]+$/u',
+            'description' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u|min:100|nullable',
+            'activity_domain' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u|nullable',
+            'related_activity_history' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9]+$/u|nullable',
+            'human_resource_count' => 'regex:/^[0-9\x{06F0}-\x{06F9}]+$/u|nullable',
             'profile_photo' => 'image|mimes:png,jpg,jpeg|max:5000',
             'is_company' => 'required|boolean',
             'public_phone' => 'required|regex:/^[0-9\x{06F0}-\x{06F9}]+$/u|min:11',
-            'postal_code' => 'required',
-            'shaba_code' => 'required',
+            'postal_code' => 'digits:10|nullable',
+            'shaba_code' => 'digits:24|nullable',
         ];
         
         if($request->is_company)
