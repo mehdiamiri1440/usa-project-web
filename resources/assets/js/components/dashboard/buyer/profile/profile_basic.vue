@@ -377,7 +377,7 @@
                              alt="تصویر پروفایل">
                     </div>
                     <div v-else>
-                        <img :src="defultimg" align="تصویر پیشفرض">
+                        <img :src="defultimg" align="تصویر پروفایل">
                     </div>
                     <div class="submit">
                         <input type="file" id="imgInp" ref="profilePhoto">
@@ -477,7 +477,6 @@
 
 <script>
     import {eventBus} from "../../../../router/dashboard_router";
-
     export default {
         props: [
             'str',
@@ -540,7 +539,7 @@
                 var data = new FormData();
 
                 for (var i = 0, cnt = this.profileBasicFields.length; i < cnt; i++) {
-                    if (this.currentUser.profile[this.profileBasicFields[i]] != null) {
+                    if (this.currentUser.profile[this.profileBasicFields[i]] != null){
                         data.append(this.profileBasicFields[i], this.toLatinNumbers(this.currentUser.profile[this.profileBasicFields[i]]));
                     }
                 }
@@ -606,6 +605,7 @@
             }
         },
         mounted() {
+
             this.init();
             eventBus.$emit('subHeader', this.items);
 
@@ -637,6 +637,7 @@
             $("#imgInp").change(function () {
                 show_image_preview(this);
             })
+
         }
     }
 
