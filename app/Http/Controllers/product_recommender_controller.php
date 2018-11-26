@@ -24,7 +24,7 @@ class product_recommender_controller extends Controller
         
         
         $registered_requests_sub_category_array = $this->get_buyer_registered_requests_sub_category_array($buyer_user_id);
-        $this->apply_register_request_to_filter_product_list($product_list,$registered_requests_sub_category_array);
+        $this->apply_register_request_filter_to_product_list($product_list,$registered_requests_sub_category_array);
         
         //sort based on score
         $product_list = $product_list->sortByDesc('score');
