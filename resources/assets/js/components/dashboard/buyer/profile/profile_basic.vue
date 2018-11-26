@@ -448,7 +448,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-6">
                         <label for="company" class="content-lable">
-                            کد پستی:
+                            کد پستی(اختیاری):
                         </label>
                         <input type="text" name="address" placeholder="کد پستی"
                                v-model="currentUser.profile.postal_code">
@@ -456,7 +456,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-6">
                         <label for="company" class="content-lable">
-                            شماره شبا:
+                            شماره شبا(اختیاری):
                         </label>
                         <input type="text" name="address" placeholder="شماره شبا"
                                v-model="currentUser.profile.shaba_code">
