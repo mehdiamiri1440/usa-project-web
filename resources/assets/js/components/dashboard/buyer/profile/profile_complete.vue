@@ -532,14 +532,15 @@
             <div class="image_company col-xs-12 ">
                 <div class="col-xs-12 col-sm-6">
                     <label>
-                        تصاویر مربوطه <span>(محصولات | شرکت | کارکنان)</span> </label>
+                        تصاویر مربوطه <span>(محصولات | شرکت | کارکنان)</span>
+                    </label>
 
                     <div class="row">
-                        <div class="images-content col-xs-12">
-                            <article class="image-item col-xs-4"  v-for="photo in currentUser.relateds">
-                                <a href="#"><i class="fa fa-close"></i></a>
-                                <img :src=" str + '/' + photo" alt="">
-                            </article>
+                        <div class="images-content col-xs-12" >
+                                <article class="image-item col-xs-4" v-for="photo in currentUser.relateds">
+                                       <a href="#"><i class="fa fa-close"></i></a>
+                                       <img :src=" str + '/' + photo" alt="">
+                                </article>
                         </div>
                     </div>
                 </div>
@@ -591,7 +592,7 @@
             return{
                 currentUser: {
                     profile: '',
-                    user_info: ''
+                        user_info: ''
                 },
                 profileComplementaryFields: [
                     'is_company',
@@ -600,7 +601,7 @@
                     'public_phone',
                     'description',
                 ],
-                relatedFiles: [],
+                    relatedFiles: [],
                 certificateFiles: [],
                 errors: '',
                 popUpMsg: '',
@@ -641,8 +642,9 @@
 
                 let formData = new FormData();
                 var cnt = this.profileComplementaryFields.length;
+                
 
-                for (var i = 0; i < cnt; i++) {
+                for (var i = 0; i < cnt; i++){
                     if (this.profileComplementaryFields[i] == 'description' && (this.currentUser.profile['description'] == null || this.currentUser.profile['description'] == '')) {
                         continue;
                     }

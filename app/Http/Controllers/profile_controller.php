@@ -74,11 +74,32 @@ class profile_controller extends Controller
     
     protected function change_user_profile_record(&$request,$profile_record_object,$last_confirmed_profile_record_id = NULL)
     {
+        $company_flag = false;
         //checking for all fields except files
         foreach($this->profile_fields_array as $field_name)
         {
-            if($request->filled($field_name)){
-                $profile_record_object->$field_name = $request->$field_name;
+            if($request->has($field_name)){
+                
+                if($field_name == 'is_company' && $request->$field_name == 0){
+                    
+                    $profile_record_object->company_name = '';
+                    $profile_record_object->company_register_code = '';
+                    
+                    $profile_record_object->$field_name = $request->$field_name;
+                    
+                    $company_flag = true;
+                }
+                else{
+                    if($field_name == 'company_name' || $field_name == 'company_register_code'){
+                        if($company_flag == false){
+                            $profile_record_object->$field_name = $request->$field_name;
+                        }
+                    }
+                    else{
+                        $profile_record_object->$field_name = $request->$field_name;
+                    }
+                    
+                }
             }
         }
         

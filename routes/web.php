@@ -168,7 +168,7 @@ Route::get('/profile/{user_name}',function($user_name){
     return view('profile.profile',[
         'user_name' => $user_name,
         'full_name' => $full_name,
-        'profile_photo' => $profile_record->profile_photo,
+        'profile_photo' => $profile_record ? $profile_record->profile_photo : '',
     ]);
 });
 

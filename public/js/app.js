@@ -49057,7 +49057,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['str', 'defultimg'],
     data: function data() {
@@ -49106,7 +49105,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitingEvent', true);
             this.errors = '';
             var self = this;
-            console.log(this.currentUser.profile.is_company);
+
             var data = new FormData();
 
             for (var i = 0, cnt = this.profileBasicFields.length; i < cnt; i++) {
@@ -49172,6 +49171,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
+
         this.init();
         __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('subHeader', this.items);
 
@@ -49235,7 +49235,7 @@ var render = function() {
                 ])
               : _c("div", [
                   _c("img", {
-                    attrs: { src: _vm.defultimg, align: "تصویر پیشفرض" }
+                    attrs: { src: _vm.defultimg, align: "تصویر پروفایل" }
                   })
                 ]),
             _vm._v(" "),
@@ -49524,7 +49524,7 @@ var render = function() {
                 { staticClass: "content-lable", attrs: { for: "company" } },
                 [
                   _vm._v(
-                    "\n                        کد پستی:\n                    "
+                    "\n                        کد پستی(اختیاری):\n                    "
                   )
                 ]
               ),
@@ -49571,7 +49571,7 @@ var render = function() {
                 { staticClass: "content-lable", attrs: { for: "company" } },
                 [
                   _vm._v(
-                    "\n                        شماره شبا:\n                    "
+                    "\n                        شماره شبا(اختیاری):\n                    "
                   )
                 ]
               ),
@@ -50662,6 +50662,7 @@ exports.push([module.i, "\n\n\n/*start style main header*/\n#main[data-v-3ec762c
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__ = __webpack_require__(3);
+//
 //
 //
 //
@@ -62139,7 +62140,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['str', 'defultimg'],
     data: function data() {
@@ -62188,11 +62188,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitingEvent', true);
             this.errors = '';
             var self = this;
-            console.log(this.currentUser.profile.is_company);
+
             var data = new FormData();
 
             for (var i = 0, cnt = this.profileBasicFields.length; i < cnt; i++) {
-                if (this.currentUser.profile[this.profileBasicFields[i]] != null && this.currentUser.profile[this.profileBasicFields[i]] !== '') {
+                if (this.currentUser.profile[this.profileBasicFields[i]] != null) {
                     data.append(this.profileBasicFields[i], this.toLatinNumbers(this.currentUser.profile[this.profileBasicFields[i]]));
                 }
             }
@@ -62254,6 +62254,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
+
         this.init();
         __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('subHeader', this.items);
 
@@ -62317,7 +62318,7 @@ var render = function() {
                 ])
               : _c("div", [
                   _c("img", {
-                    attrs: { src: _vm.defultimg, align: "تصویر پیشفرض" }
+                    attrs: { src: _vm.defultimg, align: "تصویر پروفایل" }
                   })
                 ]),
             _vm._v(" "),
@@ -62606,7 +62607,7 @@ var render = function() {
                 { staticClass: "content-lable", attrs: { for: "company" } },
                 [
                   _vm._v(
-                    "\n                        کد پستی:\n                    "
+                    "\n                        کد پستی(اختیاری):\n                    "
                   )
                 ]
               ),
@@ -62653,7 +62654,7 @@ var render = function() {
                 { staticClass: "content-lable", attrs: { for: "company" } },
                 [
                   _vm._v(
-                    "\n                        شماره شبا:\n                    "
+                    "\n                        شماره شبا(اختیاری):\n                    "
                   )
                 ]
               ),
@@ -62815,6 +62816,7 @@ exports.push([module.i, "\n\n\n/*start style main header*/\n#main[data-v-aabafcf
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__ = __webpack_require__(3);
+//
 //
 //
 //
