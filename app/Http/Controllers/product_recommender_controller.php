@@ -24,7 +24,7 @@ class product_recommender_controller extends Controller
         
         
         $registered_requests_sub_category_array = $this->get_buyer_registered_requests_sub_category_array($buyer_user_id);
-        $this->apply_register_request_to_product_list($product_list,$registered_requests_sub_category_array);
+        $this->apply_register_request_to_filter_product_list($product_list,$registered_requests_sub_category_array);
         
         //sort based on score
         $product_list = $product_list->sortByDesc('score');
@@ -113,7 +113,6 @@ class product_recommender_controller extends Controller
         $list = DB::table('buy_ads')
                         ->join('myusers','buy_ads.myuser_id','=','myusers.id')
                         ->where('myusers.id',$buyer_user_id)
-                        ->where('buy_ads.confirmed',true)
                         ->select('buy_ads.category_id as subcategory_id')
                         ->distinct()
                         ->get();
@@ -121,7 +120,7 @@ class product_recommender_controller extends Controller
         return $list;  
     }
     
-    protected function apply_register_request_to_product_list(&$product_list,$registered_requests_sub_category_array)
+    protected function apply_register_request_filter_to_product_list(&$product_list,$registered_requests_sub_category_array)
     {
         $filtered_products = $product_list->filter(function($product) use($registered_requests_sub_category_array){
             if( ! isset($product['score'])){
