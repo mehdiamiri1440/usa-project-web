@@ -321,6 +321,7 @@ class product_controller extends Controller
                 $product_recommender_object->product_list_recommender_for_buyer($products,session('user_id'));
             }
             
+            
 		}
 		
 		$result_products = array();
