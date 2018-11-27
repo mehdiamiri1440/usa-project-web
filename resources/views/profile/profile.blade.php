@@ -25,7 +25,7 @@
     <meta property="og:image:height" content="256" />
     <meta property="og:url" content="{{'https://www.incobac.com/profile/' . $user_name}}" />
     <meta property="og:type" content="website" />
-    git
+    
 @endsection
 
 @section('title')
