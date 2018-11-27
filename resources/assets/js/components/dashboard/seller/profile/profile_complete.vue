@@ -600,8 +600,6 @@
                     'company_register_code',
                     'public_phone',
                     'description',
-                    'postal_code',
-                    'shaba_code',
                 ],
                     relatedFiles: [],
                 certificateFiles: [],
@@ -644,8 +642,9 @@
 
                 let formData = new FormData();
                 var cnt = this.profileComplementaryFields.length;
+                
 
-                for (var i = 0; i < cnt; i++) {
+                for (var i = 0; i < cnt; i++){
                     if (this.profileComplementaryFields[i] == 'description' && (this.currentUser.profile['description'] == null || this.currentUser.profile['description'] == '')) {
                         continue;
                     }

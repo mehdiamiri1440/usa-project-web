@@ -95,7 +95,7 @@
                 @if(!session('user_id'))
                     <li><a href="{{route('login_page')}}" class="smoothScroll">ورود/ثبت نام</a></li>
                 @endif
-                <li><a href="/" class="smoothScroll">صفحه ی اصلی</a></li>
+                <li><a href="" class="smoothScroll">صفحه ی اصلی</a></li>
                 <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
                 <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
                 <li><a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
@@ -155,29 +155,6 @@ INTRO SECTION
 
 
 </section>
-    
-<section id="testimonial" class="parallax-section">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row">
-				<div class=" wow bounceIn col-md-12 col-sm-12">
-                    <p class="text-right">با توجه به تحقیقات و مطالعات صورت گرفته در بازار و حضور در نمایشگاه های داخلی و بین المللی حوزه محصولات کشاورزی و سابقه ی حضور در بازار صادرات ایران شاهد مشکلات عدیده‌ای از قبیل : عدم دسترسی مناسب به محصولات با کیفیت، فقدان شبکه دسترسی برای قیمت‌گذاری، وجود واسطه های بسیار زیاد و افزایش قیمت در تبع آن و هدر رفت سرمایه بودیم. لذا برآن شدیم تا با ایجاد ساختاری تکنولوژی محور در راستای حل و تسهیل این مشکلات گام برداریم.</p>
-                    <br/>
-                    <p class="text-right">اینکوباک، بازارگاه آنلاین محصولات کشاورزی با هدف گردهم آوردن بهترین تولیدکنندگان و بازرگانان حوزه کشاورزی در جهت افزایش بهره‌وری شروع به کار کرده است. در این راستا اینکوباک خدمات زیر را ارائه می‌دهد :</p>
-                    <br/>
-                    <ul class="text-right">
-                        <li>ایجاد پروفایل تجاری در فضایی کاملاً حرفه‌ای</li>
-                        <li>امکان بازدید و ایجاد نمایشگاه مجازی رایگان</li>
-                        <li>امکان ثبت درخواست خرید و فروش محصولات خود</li>
-                        <li>دسترسی آسان به تامین کنندگان محصولات مختلف در اقصی نقاط ایران</li>
-                        <li>امکان مقایسه کیفیت و قیمت محصولات</li>
-                        <li>امکان بازرسی و نظارت در هنگام بار گیری محصول توسط کارشناسان اینکوباک</li>
-                        <li>پرداخت الکترونیکی</li>
-                    </ul>
-				</div>
-			</div>
-		</div>
-	</section>
 
 
 <!-- =========================
@@ -190,10 +167,10 @@ FOOTER SECTION
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <ul class="list-unstyled footer-list">
                     <li>
-                        <a href="/privacy-and-policy">قوانین و مقررات</a>
+                        <a href="#">قوانین و مقررات</a>
                     </li>
                     <li>
-                        <a href="/about-us">درباره ما </a>
+                        <a href="#">درباره ما </a>
                     </li>
                     <li>
                         <a href="#"> ارتباط با ما</a>
@@ -282,4 +259,3 @@ FOOTER SECTION
 </body>
 
 </html>
-

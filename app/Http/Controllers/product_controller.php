@@ -307,6 +307,10 @@ class product_controller extends Controller
 				->take($take_count)
                 ->orderBy('updated_at','desc')
 				->get();
+            
+            if(session('is_buyer')){
+                $product_recommender_object->product_list_recommender_for_buyer($products,session('user_id'));
+            }
 		}
 		else{
 			$products = product::where('confirmed',true)
@@ -316,6 +320,7 @@ class product_controller extends Controller
             if(session('is_buyer')){
                 $product_recommender_object->product_list_recommender_for_buyer($products,session('user_id'));
             }
+            
             
 		}
 		
@@ -364,7 +369,7 @@ class product_controller extends Controller
 	protected function get_product_related_data($product_id)
 	{
 		$product_with_related_data = DB::table('products')
-													->join('categories','products.category_id','=','categories.id')	   											
+												->join('categories','products.category_id','=','categories.id')	   											
 													->leftJoin('cities','cities.id','=','products.city_id')
 													->leftJoin('provinces','provinces.id','=','cities.province_id')
 													->select('products.id','products.product_name','products.stock','products.min_sale_price','products.max_sale_price','products.min_sale_amount','products.description','products.address','products.myuser_id','products.category_id as sub_category_id','provinces.province_name','provinces.id as province_id','cities.city_name','cities.id as city_id','categories.category_name as sub_category_name')
@@ -726,7 +731,5 @@ class product_controller extends Controller
             ],500);
         }
     }
-	
-	
 	
 }

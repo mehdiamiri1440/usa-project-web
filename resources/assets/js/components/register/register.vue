@@ -85,9 +85,16 @@
 
                             <div class="bouttons col-xs-12">
                                 <button class=" green_but" type="button" @click="verify_code"> بررسی کد</button>
-                                <button class="danger_border_but" type="button" @click.prevent="goToStep(1)" :disabled="step2.reSendCode == false"> کد را دریافت
-                                    نکردم
-                                </button>
+                                <div v-if="step2.showTimer">
+                                    <button class="danger_border_but" type="button"         @click.prevent="goToStep(1)" :disabled="step2.reSendCode == false" :value="step2.timeCounterDown">
+                                        {{step2.timeCounterDown}} ثانیه تا ارسال مجدد
+                                    </button>
+                                </div>
+                                <div v-else>
+                                    <button class="danger_border_but" type="button" @click.prevent="goToStep(1)" :disabled="step2.reSendCode == false">
+                                        کد را دریافت نکردم
+                                    </button>
+                                </div>
                             </div>
 
                         </div>
@@ -321,6 +328,9 @@
                step2: {
                    verification_code:'',
                    reSendCode:false,
+                   timeCounterDown:60,
+                   showTimer:false,
+                   now:null,
                },
                step3:{
                    first_name:'',
@@ -373,6 +383,12 @@
                 this.step1.sendCode = false;
                 
                 var self = this;
+                
+                this.step2.now = new Date().getTime();
+                this.step2.showTimer = true;
+                this.step2.timeCounterDown = 59;
+                
+                
                 axios.post("/send_verification_code",{
                     phone : this.toLatinNumbers(this.step1.phone)
                 })
@@ -439,7 +455,7 @@
                 }
 
                 var object = {
-                    phone:this.step1.phone,
+                    phone:this.toLatinNumbers(this.step1.phone),
                     first_name:this.step3.first_name,
                     last_name:this.step3.last_name,
                     password:this.step3.password,
@@ -680,8 +696,29 @@
                         return numDic[w];
                     });
             },
+            updateCounterDownTimer:function(seconds){
+        
+                if(seconds != 1){
+                    this.step2.timeCounterDown = seconds;
+                }
+                else this.step2.showTimer = false;
+            }
         },
         watch:{
+            'step2.timeCounterDown':function(){
+                var self = this;
+                var now = new Date().getTime();
+                
+                var distance =  now - this.step2.now;
+                
+                var seconds =  59 - Math.floor((distance % (1000 * 60)) / 1000) + 1;
+                
+                setTimeout(function(){
+                    self.updateCounterDownTimer(seconds);
+                },1000);
+                
+                
+            },
             'step3.user_name':function(){
                 var self = this;
                 if(this.step3.user_name.length > 0){

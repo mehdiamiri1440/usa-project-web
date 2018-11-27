@@ -151,15 +151,28 @@
                 </div>
             </article>
             <div class="loading_images  col-xs-12"
-                 v-if="products.length + 1 <= productCountInPage &&  continueToLoadProducts && products.length >= productCountInEachLoad">
+                 v-if="loading">
                 <img src="{{asset('assets/img/gif/loading.gif')}}" style="width:200px;height:200px">
             </div>
         </section>
         <section class="main-content  col-xs-12 " v-else-if="products.length == 0 && searchActive == true">
+            <p></p>
             <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+            <p>شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+            <br/>
+            <div class="text-center">
+                <button class="btn btn-success">درخواست خرید</button>
+            </div>
         </section>
         <section class="main-content  col-xs-12 " v-else-if="products.length == 0 && searchText != '' ">
+            <p></p>
             <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+            <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+            <br/>
+            <div class="text-center">
+                <a class="green_bot col-xs-4" @click="registerRequestInSearchNotFoundCase()">درخواست خرید</a>
+            </div>
+            <br/>
         </section>
         <section class="loading_images  col-xs-12" v-else>
             <img src="{{asset('assets/img/gif/loading.gif')}}" style="width:200px;height:200px">
@@ -171,7 +184,9 @@
 
 
 @section('script_tags')
-
+    <script>
+        var searchValue = "<?php echo $searchText; ?>";
+    </script>
     <script src="{{asset('assets/js/imageuploadify.min.js')}}"></script>
     <script src="{{asset('assets/js/dashboard/buyer/product-list.js')}}"></script>
     <script src="{{asset('assets/js/dashboard/buyer/api-product-list.js')}}"></script>

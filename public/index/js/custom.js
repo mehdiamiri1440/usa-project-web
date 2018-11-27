@@ -77,6 +77,7 @@ $(document).ready(function () {
 
     /* Owl Carousel
     -----------------------------------------------*/
+
     $(document).ready(function () {
         $(".owl-carousel").owlCarousel({
             // autoplay:true,
@@ -104,6 +105,38 @@ $(document).ready(function () {
             }
         });
     });
+
+//    $(document).ready(function () {
+//        $(".owl-carousel").owlCarousel({
+//            autoplay:true,
+//            autoplayTimeout:2000,
+//            loop:true,
+//            items: 5,
+//            mouseDrag: true,
+//            margin:30,
+//            responsive:{
+//                0:{
+//                    items:1,
+//                    stagePadding:15
+//                },
+//                450:{
+//                    items:2,
+//                    stagePadding:15
+//                },
+//                600:{
+//                    items:3,
+//                    stagePadding:15
+//                },
+//                992:{
+//                    items:4,
+//                },
+//                1190:{
+//                    items:5,
+//                }
+//            }
+//        });
+//    });
+
 
 
     /* Owl Carousel

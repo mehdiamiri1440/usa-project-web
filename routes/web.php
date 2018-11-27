@@ -23,13 +23,14 @@ Route::get('/test', function(){
     return view('product_view');
 });
 
-Route::get('/new', function(){
+Route::get('/', function(){
     return view('index2');
 });
 
-Route::get('/', function(){
-    return view('index');
-});
+//Route::get('/', function(){
+//    return view('index');
+//});
+
 
 Route::get('/about-us',function(){
     return view('about_us');
@@ -103,8 +104,10 @@ Route::post('/get_buy_ad_by_id',[
     'as' => 'get_buy_ad_by_id'
 ]);
 
-Route::get('product-list',function(){
-        return view('dashboard.buyer.product-list');
+Route::get('product-list/{searchText?}',function($searchText = null){
+        return view('dashboard.buyer.product-list',[
+            'searchText' => $searchText,
+        ]);
 })->name('product-list');
 
 Route::get('/product/{id?}',function(){
@@ -165,7 +168,7 @@ Route::get('/profile/{user_name}',function($user_name){
     return view('profile.profile',[
         'user_name' => $user_name,
         'full_name' => $full_name,
-        'profile_photo' => $profile_record->profile_photo,
+        'profile_photo' => $profile_record ? $profile_record->profile_photo : '',
     ]);
 });
 

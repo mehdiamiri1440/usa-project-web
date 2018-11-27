@@ -59,18 +59,31 @@ var vm = new Vue({
         popUpMsg:'',
         submiting:false,
         loading:false,
+        bottom:false,
     },
     methods:{
         init:function(){
-            axios.post('user/get_product_list',{
+            var self = this;
+            var searchValueText = searchValue;
+            
+            if(searchValueText){
+                this.searchText = searchValueText;
+            }
+            else{
+                axios.post('/user/get_product_list',{
                 //from_record_number:0,
                 //to_record_number:this.productCountInPage,
-            }).then(response => (this.products = response.data.products));
+                }).then(function(response){
+                    self.products = response.data.products;
+                    self.productCountInPage = self.products.length;
+                });
+            }
+            
             axios.post('/user/profile_info')
                 .then(response => (this.currentUser = response.data));
             axios.post('/get_category_list')
                 .then(response => (this.categoryList = response.data.categories));
-            axios.post('location/get_location_info')
+            axios.post('/location/get_location_info')
                 .then(response => (this.provinceList = response.data.provinces));
         },
         setCategoryFilter:function(e){
@@ -79,7 +92,7 @@ var vm = new Vue({
 
             var self = this;
 
-            axios.post('user/get_product_list')
+            axios.post('/user/get_product_list')
                 .then(function(response){
                     self.products = '';
                     self.products = response.data.products.filter(function(product){
@@ -109,7 +122,7 @@ var vm = new Vue({
             var subCategoryId = $(e.target).val();
             var self = this;
 
-            axios.post('user/get_product_list')
+            axios.post('/user/get_product_list')
                 .then(function(response){
                     self.products = '';
                     self.products = response.data.products.filter(function(product){
@@ -134,7 +147,7 @@ var vm = new Vue({
 
             var self = this;
 
-            axios.post('user/get_product_list')
+            axios.post('/user/get_product_list')
                 .then(function(response){
 
                     self.products = '';
@@ -155,7 +168,7 @@ var vm = new Vue({
                     });
             });
 
-            axios.post('location/get_location_info',{
+            axios.post('/location/get_location_info',{
                 province_id : provinceId
             }).then(response => (this.cityList = response.data.cities));
 
@@ -167,10 +180,10 @@ var vm = new Vue({
         setCityFilter:function(e){
             e.preventDefault;
             var cityId = $(e.target).val();
-
+            this.loading = true;
             var self = this;
 
-            axios.post('user/get_product_list')
+            axios.post('/user/get_product_list')
                 .then(function(response){
                     self.products = '';
 
@@ -191,30 +204,32 @@ var vm = new Vue({
             });
 
             this.cityId = cityId;
-            this.continueToLoadProducts = false;
+            this.loading = false;   
+//            this.continueToLoadProducts = false;
+//            self.productCountInPage = self.products.length;
         },
-        handleScroll(){
-              var offset = $(window).scrollTop() + $(window).height();
-              var height = $(document).height();
+        feed(){
+//              var offset = $(window).scrollTop() + $(window).height();
+//              var height = $(document).height();
             
               var self = this;
 
-              if(offset  > height - 3){ //3 pixels to buttom
-                  if(this.searchText == '' && this.provinceId == '' && this.categoryId == '' && this.continueToLoadProducts){
-                      this.productCountInPage += this.productCountInEachLoad ;
+//              if(offset  > height - 3){ //3 pixels to buttom
+              if(this.searchText == '' && this.provinceId == '' && this.categoryId == '' && this.continueToLoadProducts){
+                  this.productCountInPage += this.productCountInEachLoad ;
 
-                        axios.post('user/get_product_list',{
-                            from_record_number:0,
-                            to_record_number:this.productCountInPage,
-                        }).then(function(response){
-                            self.products = response.data.products;
+                    axios.post('/user/get_product_list',{
+                        from_record_number:0,
+                        to_record_number:this.productCountInPage,
+                    }).then(function(response){
+                        self.products = response.data.products;
 
-                            if(self.products.length + 1 < self.productCountInPage){
-                                self.continueToLoadProducts = false;
-                            }
-                        });
-                    }
-            }
+                        if(self.products.length + 1 < self.productCountInPage){
+                            self.continueToLoadProducts = false;
+                        }
+                    });
+                }
+            
         },
         openRequestRegisterBox:function(e){
             if(this.currentUser.profile){
@@ -358,40 +373,65 @@ var vm = new Vue({
         },
         redirectToLogin:function(){
             window.location.href = '/login';
-        }
+        },
+        registerRequestInSearchNotFoundCase:function(){
+            if(this.currentUser.profile){
+                if(this.currentUser.user_info.is_buyer){
+                    window.location.href = '/dashboard/#/register-request';
+                }
+                else{
+                    this.popUpMsg = 'حساب کاربری شما از نوع خریدار نیست.';
+                    $('#myModal').modal('show');
+                }
+            }
+            else{
+                this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
+                $('#myModal2').modal('show');
+            }
+        },
+        bottomVisible:function(){
+          const scrollY = window.scrollY;
+          const visible = document.documentElement.clientHeight;
+          const pageHeight = document.documentElement.scrollHeight;
+          const bottomOfPage = visible + scrollY >= pageHeight ;
+          return bottomOfPage || pageHeight < visible ;
+        },
     },
     watch:{
 
         searchText:function(){
             var self = this;
 
-            axios.post('user/get_product_list')
+            axios.post('/user/get_product_list')
                 .then(function(response){
                     self.products = '';
 
-                    self.products = response.data.products.filter(function(product){
-                        if(self.searchText == ''){
-                            return true;
-                        }
-                        else if(product.main.product_name.search(self.searchText) != -1 ||
-                               product.main.province_name.search(self.searchText) != -1 ||
-                               product.main.city_name.search(self.searchText) != -1 ||
-                               product.main.category_name.search(self.searchText) != -1 ||
-                               product.main.sub_category_name.search(self.searchText) != -1
-                            ){
-                                return true;
+                     var text = self.searchText.split(' ');
+                     self.products = response.data.products.filter(function(product){
+                        return text.every(function(el){
+                            if(product.main.product_name.indexOf(el) > -1 ||
+                                product.main.province_name.indexOf(el) > -1 ||
+                                product.main.city_name.indexOf(el) > -1 ||
+                                product.main.category_name.indexOf(el) > -1 ||
+                                product.main.sub_category_name.indexOf(el) > -1){
+                                    return true;
                             }
-
-                        return false;
-                    });
+                            else return false;
+                        });
+                });
             });
         },
     },
     created(){
         //window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('scroll', () => {
+          this.bottom = this.bottomVisible()
+        });
+        
+        this.feed()
     },
     destroyed(){
-        window.removeEventListener('scroll', this.handleScroll);
+        //window.removeEventListener('scroll', this.handleScroll);
     },
     components:{
         "popup":PopupImage
