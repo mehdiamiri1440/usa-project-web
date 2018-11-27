@@ -156,8 +156,12 @@
     }
     .user_name{
         direction: rtl;
-        padding: 32px 0;
+
+        padding: 32px 10px;
+
         text-align: right;
+
+        float: right;
     }
     .info_profile{
         float: right;
@@ -240,7 +244,12 @@
         #main, #main.little-main {
             margin-right: 0 !important;
         }
-
+        .table{
+            direction: rtl;
+        }
+        .description-text{
+            text-align: right;
+        }
         .post-contents-table {
             width: 100%;
         }
@@ -283,7 +292,16 @@
         }
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 767px) {
+         .user_name{
+            direction: rtl;
+
+            padding: 32px 10px;
+
+            text-align: center;
+             width: 100%;
+            float: none;
+        }
         .image-content-post, .contents-post {
             width: 100%;
             float: none;
@@ -406,7 +424,7 @@
                                         <td>{{sellOfferDetail.sell_offer.date_from + ' - ' + sellOfferDetail.sell_offer.date_to}}</td>
                                     </tr>
                                 </table>
-                                <p>توضیحات: <span>{{sellOfferDetail.sell_offer.description}}</span></p>
+                                <p class="description-text">توضیحات: <span>{{sellOfferDetail.sell_offer.description}}</span></p>
                                     <div class="col-xs-12 actions">
                                         <div v-show='sellOfferDetail.sell_offer.is_pending'>
                                             <div class="col-xs-12 col-sm-6">
