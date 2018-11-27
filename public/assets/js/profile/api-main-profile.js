@@ -78,10 +78,22 @@ var vm = new Vue({
         loading:false,
         popUpMsg:'',
         submiting:'',
+        copyLinkText:'',
+        copyLinkClass:'',
     },
     
     methods:{
         init:function(){
+            
+            if(this.isDeviceMobile()){
+                this.copyLinkText = ' اشتراک در واتساپ';
+                this.copyLinkClass = 'fa fa-whatsapp fa-2x';
+            }
+            else{
+                this.copyLinkText = 'کپی آدرس';
+                this.copyLinkClass = 'fa fa-clipboard';
+            } 
+            
             axios.post('/user/profile_info')
                 .then(response => (this.currentUser = response.data));
             axios.post('/load_profile_by_user_name',{

@@ -65,7 +65,7 @@
                             <div class="title_content col-xs-12">
 
                                 <div class="back_page col-xs-12 col-sm-4">
-                                    <button  class="btn btn-copy" @click="copyProfileLinkToClipBoard">    کپی آدرس   <i class="fa fa-clipboard" aria-hidden="true"></i> </button>
+                                    <button  class="btn btn-copy" @click="copyProfileLinkToClipBoard" :value="copyLinkText"> @{{copyLinkText}} <i :class="copyLinkClass" aria-hidden="true"></i> </button>
                                 </div>
 
                                 <div class="content_user_info col-xs-12 col-sm-8">
