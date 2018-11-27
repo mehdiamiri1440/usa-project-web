@@ -79,13 +79,10 @@ $(document).ready(function () {
     -----------------------------------------------*/
     $(document).ready(function () {
         $(".owl-carousel").owlCarousel({
-
-            autoPlay: 6000,
-
-            autoplay:true,
-            autoplayTimeout:2000,
+            // autoplay:true,
+            // autoplayTimeout:2000,
             loop:true,
-
+            nav:true,
             items: 5,
             mouseDrag: true,
             margin:30,
@@ -94,19 +91,15 @@ $(document).ready(function () {
                     items:1,
                     stagePadding:15
                 },
-                450:{
+                600:{
                     items:2,
                     stagePadding:15
                 },
-                600:{
-                    items:3,
-                    stagePadding:15
-                },
                 992:{
-                    items:4,
+                    items:3,
                 },
                 1190:{
-                    items:5,
+                    items:4,
                 }
             }
         });

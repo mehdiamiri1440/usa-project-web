@@ -319,35 +319,50 @@ SERVICES SECTION
                 </article>
                 <article class="wow fadeIn " data-wow-delay="0.9s">
                     <div class="detail-thumb">
-                        <img src="{{asset('index/images/6.png')}}" class="img-responsive">
+                          <div class="request_image">
+                            <img src="{{asset('index/images/new-feature-img.png')}}" class="img-responsive"
+                                 alt="feature">
+                        </div>
                         <h4>افزایش اعتماد و شفافیت</h4>
                         <a href="#" class="blue-bot">مشاهده محصول</a>
                     </div>
                 </article>
                 <article class="wow fadeIn " data-wow-delay="0.9s">
                     <div class="detail-thumb">
-                        <img src="{{asset('index/images/6.png')}}" class="img-responsive">
+                          <div class="request_image">
+                            <img src="{{asset('index/images/new-feature-img.png')}}" class="img-responsive"
+                                 alt="feature">
+                        </div>
                         <h4>افزایش اعتماد و شفافیت</h4>
                         <a href="#" class="blue-bot">مشاهده محصول</a>
                     </div>
                 </article>
                 <article class="wow fadeIn " data-wow-delay="0.9s">
                     <div class="detail-thumb">
-                        <img src="{{asset('index/images/6.png')}}" class="img-responsive">
+                          <div class="request_image">
+                            <img src="{{asset('index/images/new-feature-img.png')}}" class="img-responsive"
+                                 alt="feature">
+                        </div>
                         <h4>افزایش اعتماد و شفافیت</h4>
                         <a href="#" class="blue-bot">مشاهده محصول</a>
                     </div>
                 </article>
                 <article class="wow fadeIn " data-wow-delay="0.9s">
                     <div class="detail-thumb">
-                        <img src="{{asset('index/images/6.png')}}" class="img-responsive">
+                          <div class="request_image">
+                            <img src="{{asset('index/images/new-feature-img.png')}}" class="img-responsive"
+                                 alt="feature">
+                        </div>
                         <h4>افزایش اعتماد و شفافیت</h4>
                         <a href="#" class="blue-bot">مشاهده محصول</a>
                     </div>
                 </article>
                 <article class="wow fadeIn " data-wow-delay="0.9s">
                     <div class="detail-thumb">
-                        <img src="{{asset('index/images/6.png')}}" class="img-responsive">
+                          <div class="request_image">
+                            <img src="{{asset('index/images/new-feature-img.png')}}" class="img-responsive"
+                                 alt="feature">
+                        </div>
                         <h4>افزایش اعتماد و شفافیت</h4>
                         <a href="#" class="blue-bot">مشاهده محصول</a>
                     </div>
