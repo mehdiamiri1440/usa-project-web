@@ -41,6 +41,15 @@
       gtag('config', 'UA-129398000-1');
     </script>
 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-129398000-1');
+    </script>
+
 </head>
 
 <body data-spy="scroll" data-offset="50" data-target=".navbar-collapse">
@@ -102,14 +111,14 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="/product-list" class="smoothScroll cta-bot cta-bot-mobile">لیست محصولات</a></li>
-            @if(!session('user_id'))
+                @if(!session('user_id'))
                     <li><a href="{{route('login_page')}}" class="smoothScroll">ورود/ثبت نام</a></li>
                 @endif
                 <li><a href="" class="smoothScroll">صفحه ی اصلی</a></li>
                 <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
                 <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
                 <li><a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
-                    <li><a href="/product-list" class="smoothScroll cta-bot">لیست محصولات</a></li>
+                <li><a href="/product-list" class="smoothScroll cta-bot">لیست محصولات</a></li>
 
                 @if(session('user_id'))
 
@@ -183,47 +192,47 @@ DETAIL SECTION
 <section id="detail" class="parallax-section">
     <div class="container">
 
-            <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
-                <div class="detail-thumb">
-                    <img class="image-blur" src="{{asset('index/images/1.png')}}" class="img-responsive">
-                    <h4>خرید و فروش بی واسطه</h4>
-                </div>
-            </div>
-
-            <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
-                <div class="detail-thumb">
-                    <img class="image-blur" src="{{asset('index/images/2.png')}}" class="img-responsive">
-                    <h4>گسترش ارتباط تجاری</h4>
-                </div>
-            </div>
-
-            <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
-                <div class="detail-thumb">
-                    <img class="image-blur" src="{{asset('index/images/3.png')}}" class="img-responsive">
-                    <h4>یافتن شرکای مطمئن</h4>
-                </div>
-            </div>
-
-
-            <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
-                <div class="detail-thumb">
-                    <img class="image-blur" src="{{asset('index/images/4.png')}}" class="img-responsive">
-                    <h4>پرداخت مطمئن و آسوده</h4>
-                </div>
-            </div>
-            <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
-                <div class="detail-thumb">
-                    <img class="image-blur" src="{{asset('index/images/5.png')}}" class="img-responsive">
-                    <h4>بازرسی و نظارت محصول</h4>
-                </div>
-            </div>
-            <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
-                <div class="detail-thumb">
-                    <img class="image-blur" src="{{asset('index/images/6.png')}}" class="img-responsive">
-                    <h4>افزایش اعتماد و شفافیت</h4>
-                </div>
+        <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
+            <div class="detail-thumb">
+                <img class="image-blur" src="{{asset('index/images/1.png')}}" class="img-responsive">
+                <h4>خرید و فروش بی واسطه</h4>
             </div>
         </div>
+
+        <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
+            <div class="detail-thumb">
+                <img class="image-blur" src="{{asset('index/images/2.png')}}" class="img-responsive">
+                <h4>گسترش ارتباط تجاری</h4>
+            </div>
+        </div>
+
+        <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
+            <div class="detail-thumb">
+                <img class="image-blur" src="{{asset('index/images/3.png')}}" class="img-responsive">
+                <h4>یافتن شرکای مطمئن</h4>
+            </div>
+        </div>
+
+
+        <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
+            <div class="detail-thumb">
+                <img class="image-blur" src="{{asset('index/images/4.png')}}" class="img-responsive">
+                <h4>پرداخت مطمئن و آسوده</h4>
+            </div>
+        </div>
+        <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
+            <div class="detail-thumb">
+                <img class="image-blur" src="{{asset('index/images/5.png')}}" class="img-responsive">
+                <h4>بازرسی و نظارت محصول</h4>
+            </div>
+        </div>
+        <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
+            <div class="detail-thumb">
+                <img class="image-blur" src="{{asset('index/images/6.png')}}" class="img-responsive">
+                <h4>افزایش اعتماد و شفافیت</h4>
+            </div>
+        </div>
+    </div>
 
 </section>
 

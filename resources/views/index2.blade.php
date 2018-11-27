@@ -150,12 +150,12 @@ INTRO SECTION
                         کشاورزی</h2>
                 </div>
                 <div class="col-xs-12">
-                    
+
                         <div class="search_input col-xs-12 col-sm-8 col-sm-offset-2">
                             <input type="text" placeholder="محصول مورد نظر خود را جستجو کنید" v-model="mainSearchBoxText">
                             <button class="fa fa-search" @click="search"></button>
                         </div>
-                    
+
                 </div>
                 <div class="col-xs-12">
                     <a href="{{route('login_page')}}" class="btn btn-purple  smoothScroll wow fadeInUp"
@@ -307,6 +307,68 @@ SERVICES SECTION
                 </a>
             </div>
             <div class="owl-carousel col-xs-12">
+
+                <article class="wow fadeIn " data-wow-delay="0.9s">
+                    <div class="detail-thumb">
+                        <div class="request_image">
+                            <img src="{{asset('index/images/new-feature-img.png')}}" class="img-responsive"
+                                 alt="feature">
+                        </div>
+                        <h4>افزایش اعتماد و شفافیت</h4>
+                        <a href="#" class="blue-bot">مشاهده محصول</a>
+                    </div>
+                </article>
+                <article class="wow fadeIn " data-wow-delay="0.9s">
+                    <div class="detail-thumb">
+                          <div class="request_image">
+                            <img src="{{asset('index/images/new-feature-img.png')}}" class="img-responsive"
+                                 alt="feature">
+                        </div>
+                        <h4>افزایش اعتماد و شفافیت</h4>
+                        <a href="#" class="blue-bot">مشاهده محصول</a>
+                    </div>
+                </article>
+                <article class="wow fadeIn " data-wow-delay="0.9s">
+                    <div class="detail-thumb">
+                          <div class="request_image">
+                            <img src="{{asset('index/images/new-feature-img.png')}}" class="img-responsive"
+                                 alt="feature">
+                        </div>
+                        <h4>افزایش اعتماد و شفافیت</h4>
+                        <a href="#" class="blue-bot">مشاهده محصول</a>
+                    </div>
+                </article>
+                <article class="wow fadeIn " data-wow-delay="0.9s">
+                    <div class="detail-thumb">
+                          <div class="request_image">
+                            <img src="{{asset('index/images/new-feature-img.png')}}" class="img-responsive"
+                                 alt="feature">
+                        </div>
+                        <h4>افزایش اعتماد و شفافیت</h4>
+                        <a href="#" class="blue-bot">مشاهده محصول</a>
+                    </div>
+                </article>
+                <article class="wow fadeIn " data-wow-delay="0.9s">
+                    <div class="detail-thumb">
+                          <div class="request_image">
+                            <img src="{{asset('index/images/new-feature-img.png')}}" class="img-responsive"
+                                 alt="feature">
+                        </div>
+                        <h4>افزایش اعتماد و شفافیت</h4>
+                        <a href="#" class="blue-bot">مشاهده محصول</a>
+                    </div>
+                </article>
+                <article class="wow fadeIn " data-wow-delay="0.9s">
+                    <div class="detail-thumb">
+                          <div class="request_image">
+                            <img src="{{asset('index/images/new-feature-img.png')}}" class="img-responsive"
+                                 alt="feature">
+                        </div>
+                        <h4>افزایش اعتماد و شفافیت</h4>
+                        <a href="#" class="blue-bot">مشاهده محصول</a>
+                    </div>
+                </article>
+
                 <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProducts">
                     <image-viewer
                         :title="product.main.sub_category_name + ' - ' + product.main.product_name"
@@ -314,7 +376,8 @@ SERVICES SECTION
                         :link="'/product-list/' + product.main.sub_category_name"
                         >
                     </image-viewer>
-                </article>     
+                </article>
+
             </div>
         </div>
     </div>
@@ -565,7 +628,7 @@ FAQ SECTION
 <script>
 
 
-   
+
 </script>
 
 </html>
