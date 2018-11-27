@@ -60,6 +60,7 @@
                   <th>دسته ی محصول</th>
                   <th>زیر دسته محصول</th>
                   <th>نام محصول</th>
+                  <th>نام و نام خانوادگی</th>
                   <th>زمان ثبت</th>
                   <th>مشاهده</th>
                 </tr>
@@ -70,6 +71,7 @@
                         <td>{{$sellAd->category_name}}</td>
                         <td>{{$sellAd->sub_category_name}}</td>
                         <td>{{$sellAd->product_name}}</td>                    
+                        <td>{{$sellAd->first_name . ' ' . $sellAd->last_name}}</td>                    
                         <td>{{$sellAd->created_at}}</td>                    
                         <td><a href="{{route($sellAd->confirmed ? 'admin_panel_load_confirmed_sellAd_by_id' : 'admin_panel_load_unconfirmed_sellAd_by_id',['sellAd_id' => $sellAd->id])}}">مشاهده جزییات</a></td>
                     </tr>

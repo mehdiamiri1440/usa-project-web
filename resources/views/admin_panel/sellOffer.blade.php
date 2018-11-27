@@ -58,20 +58,24 @@
                 <thead>
                 <tr>
                   <th>#</th>
+                  <th>نام و نام خانوادگی</th>
                   <th>تاریخ شروع</th>
                   <th>تاریخ پایان</th>
                   <th>قیمت</th>
                   <th>محل تحویل</th>
+                  <th>زمان ثبت</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($sell_offers as $sell_offer)
                 <tr>
                     <td>{{$loop->iteration}}</td>
+                    <td>{{$sell_offer->first_name . ' ' . $sell_offer->last_name}}</td>
                     <td>{{$sell_offer->date_from}}</td>
                     <td>{{$sell_offer->date_to}}</td>
                     <td>{{$sell_offer->price}}</td>                    
                     <td>{{$sell_offer->deliver_at}}</td>                    
+                    <td>{{$sell_offer->created_at}}</td>                    
                     <td><a href="{{route('admin_panel_load_sell_offer_by_id',['id' => $sell_offer->id])}}">مشاهده جزییات</a></td>
                 </tr>
                 @endforeach

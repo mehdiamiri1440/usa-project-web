@@ -11,15 +11,18 @@ use DB;
 use App\myuser;
 use App\Http\Controllers\sms_controller;
 use Illuminate\Routing\UrlGenerator;
+use App\Http\Library\date_convertor;
 
 class admin_buyAd_controller extends Controller
 {
     protected $buyAd_list_neccessary_fields_array = [
-        'id',
-        'name',
-        'confirmed',
-        'created_at',
-        'category_id',
+        'buy_ads.id',
+        'buy_ads.name',
+        'buy_ads.confirmed',
+        'buy_ads.created_at',
+        'buy_ads.category_id',
+        'myusers.first_name',
+        'myusers.last_name',
     ];
     
     protected $buyAd_detail_fields_array = [
@@ -82,20 +85,29 @@ class admin_buyAd_controller extends Controller
     
     protected function get_buyAd_list($confirm_status)
     {
-        $list = buyAd::where('confirmed',$confirm_status)
-                                    ->select($this->buyAd_list_neccessary_fields_array)
-                                    ->get();
+        $list = DB::table('buy_ads')
+                        ->leftJoin('myusers','buy_ads.myuser_id','=','myusers.id')
+                        ->where('confirmed',$confirm_status)
+                        ->select($this->buyAd_list_neccessary_fields_array)
+                        ->orderBy('buy_ads.created_at','desc')
+                        ->get();
+        
+        
         return $list;
     }
     
     protected function add_categories_to_buyAd_list(&$buyAd_list)
     {
-        $buyAd_list->each(function($buyAd){
+        $date_convertor_object = new date_convertor();
+        
+        $buyAd_list->each(function($buyAd) use($date_convertor_object){
             $sub_category_record = category::find($buyAd->category_id);
             $category_record = category::find($sub_category_record->parent_id);
             
-            $buyAd['sub_category_name'] = $sub_category_record->category_name;
-            $buyAd['category_name'] = $category_record->category_name;
+            $buyAd->created_at = $date_convertor_object->get_persian_date($buyAd->created_at);
+            
+            $buyAd->sub_category_name = $sub_category_record->category_name;
+            $buyAd->category_name = $category_record->category_name;
         });
     }
     
