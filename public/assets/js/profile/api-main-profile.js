@@ -87,7 +87,7 @@ var vm = new Vue({
             
             if(this.isDeviceMobile()){
                 this.copyLinkText = ' اشتراک در واتساپ';
-                this.copyLinkClass = 'fa fa-whatsapp';
+                this.copyLinkClass = 'fa fa-whatsapp fa-2x';
             }
             else{
                 this.copyLinkText = 'کپی آدرس';

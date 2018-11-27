@@ -59,6 +59,7 @@ var vm = new Vue({
         popUpMsg:'',
         submiting:false,
         loading:false,
+        bottom:false,
     },
     methods:{
         init:function(){
@@ -207,28 +208,28 @@ var vm = new Vue({
 //            this.continueToLoadProducts = false;
 //            self.productCountInPage = self.products.length;
         },
-        handleScroll(){
-              var offset = $(window).scrollTop() + $(window).height();
-              var height = $(document).height();
+        feed(){
+//              var offset = $(window).scrollTop() + $(window).height();
+//              var height = $(document).height();
             
               var self = this;
 
-              if(offset  > height - 3){ //3 pixels to buttom
-                  if(this.searchText == '' && this.provinceId == '' && this.categoryId == '' && this.continueToLoadProducts){
-                      this.productCountInPage += this.productCountInEachLoad ;
+//              if(offset  > height - 3){ //3 pixels to buttom
+              if(this.searchText == '' && this.provinceId == '' && this.categoryId == '' && this.continueToLoadProducts){
+                  this.productCountInPage += this.productCountInEachLoad ;
 
-                        axios.post('/user/get_product_list',{
-                            from_record_number:0,
-                            to_record_number:this.productCountInPage,
-                        }).then(function(response){
-                            self.products = response.data.products;
+                    axios.post('/user/get_product_list',{
+                        from_record_number:0,
+                        to_record_number:this.productCountInPage,
+                    }).then(function(response){
+                        self.products = response.data.products;
 
-                            if(self.products.length + 1 < self.productCountInPage){
-                                self.continueToLoadProducts = false;
-                            }
-                        });
-                    }
-            }
+                        if(self.products.length + 1 < self.productCountInPage){
+                            self.continueToLoadProducts = false;
+                        }
+                    });
+                }
+            
         },
         openRequestRegisterBox:function(e){
             if(this.currentUser.profile){
@@ -387,7 +388,14 @@ var vm = new Vue({
                 this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
                 $('#myModal2').modal('show');
             }
-        }
+        },
+        bottomVisible:function(){
+          const scrollY = window.scrollY;
+          const visible = document.documentElement.clientHeight;
+          const pageHeight = document.documentElement.scrollHeight;
+          const bottomOfPage = visible + scrollY >= pageHeight ;
+          return bottomOfPage || pageHeight < visible ;
+        },
     },
     watch:{
 
@@ -416,6 +424,11 @@ var vm = new Vue({
     },
     created(){
         //window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('scroll', () => {
+          this.bottom = this.bottomVisible()
+        });
+        
+        this.feed()
     },
     destroyed(){
         //window.removeEventListener('scroll', this.handleScroll);
