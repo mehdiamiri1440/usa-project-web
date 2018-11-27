@@ -399,8 +399,8 @@ var vm = new Vue({
                     self.products = '';
 
                      var text = self.searchText.split(' ');
-                     self.products = response.data.products.filter(function(product) {
-                        return text.every(function(el) {
+                     self.products = response.data.products.filter(function(product){
+                        return text.every(function(el){
                             if(product.main.product_name.indexOf(el) > -1 ||
                                 product.main.province_name.indexOf(el) > -1 ||
                                 product.main.city_name.indexOf(el) > -1 ||
