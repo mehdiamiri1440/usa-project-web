@@ -207,7 +207,12 @@
     .actions .black-bot{
         float: left;
     }
-
+    .table{
+            direction: rtl;
+        }
+        .description-text{
+            text-align: right;
+        }
     @media screen and (max-width: 992px) {
         .owl-carousel {
             direction: ltr;
@@ -244,12 +249,7 @@
         #main, #main.little-main {
             margin-right: 0 !important;
         }
-        .table{
-            direction: rtl;
-        }
-        .description-text{
-            text-align: right;
-        }
+       
         .post-contents-table {
             width: 100%;
         }
