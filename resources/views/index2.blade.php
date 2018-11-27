@@ -4,8 +4,8 @@
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="description" content="Responsive Personal One Page Portfolio">
-    <meta name="keywords" content="Responsive, Personal, One Page Portfolio, Freelancers, Template">
+    <meta name="description" content="خرید و فروش مستقیم محصولات کشاورزی">
+    <meta name="keywords" content="محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,اینکوباک">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- site title -->
