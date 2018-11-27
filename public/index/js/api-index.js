@@ -1,4 +1,4 @@
- 
+
 
 //
 
@@ -21,7 +21,8 @@ var OwlCarousel =  {
             autoplay:true,
             autoplayTimeout:2000,
             loop:true,
-            items: 5,
+            nav:true,
+            items: 4,
             mouseDrag: true,
             margin:30,
             responsive:{
@@ -39,15 +40,12 @@ var OwlCarousel =  {
                 },
                 992:{
                     items:4,
-                },
-                1190:{
-                    items:5,
                 }
             }
         });
     }
 };
-    
+
 
 var vm = new Vue({
         el: '#app',
@@ -63,12 +61,12 @@ var vm = new Vue({
         methods: {
             init: function () {
                 var self = this;
-                
+
                 axios.post('/get_wp_posts')
                 .then(function (response){
                     self.posts = response.data.posts;
                 });
-                
+
                 axios.post('/user/get_product_list',{
                     from_record_number:0,
                     to_record_number:5,
@@ -80,7 +78,7 @@ var vm = new Vue({
                 if(this.mainSearchBoxText != ''){
                     //redirect to product-list with
                     window.location.href = '/product-list/' + this.mainSearchBoxText;
-                } 
+                }
             },
         },
         mounted: function () {
@@ -91,7 +89,7 @@ var vm = new Vue({
             window.addEventListener('keydown', function (event) {
                 if (event.keyCode === 13) {
                     if(self.enterKeyActiveForSearch){
-                        self.search();   
+                        self.search();
                     }
                 }
             });

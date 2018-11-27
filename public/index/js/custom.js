@@ -78,6 +78,7 @@ $(document).ready(function () {
     /* Owl Carousel
     -----------------------------------------------*/
 
+/*
     $(document).ready(function () {
         $(".owl-carousel").owlCarousel({
             // autoplay:true,
@@ -105,6 +106,7 @@ $(document).ready(function () {
             }
         });
     });
+*/
 
 //    $(document).ready(function () {
 //        $(".owl-carousel").owlCarousel({
