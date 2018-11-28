@@ -54113,7 +54113,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         submitSellOffer: function submitSellOffer() {
             var self = this;
 
-            this.submiting = true;
+            __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitingEvent', true);
 
             var formData = this.getSellOfferFormFields();
 
@@ -54124,7 +54124,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     $('#myModal').modal('show');
                     setTimeout(function () {
                         window.location.href = '/dashboard/#/my-sell-offers';
-                        self.submiting = false;
+                        __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitingEvent', false);
                     }, 3000);
                 }
             }).catch(function (err) {
@@ -54136,7 +54136,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitSuccess', self.popUpMsg);
                     $('#myModal').modal('show');
                 }
-                self.submiting = false;
+                __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitingEvent', false);
             });
         },
         handleSellOfferFileUpload: function handleSellOfferFileUpload() {
@@ -66501,7 +66501,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitSuccess', self.popUpMsg);
                 $('#myModal').modal('show');
             } else {
-                this.submiting = true;
+                __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitingEvent', true);
 
                 var self = this;
 
@@ -66520,10 +66520,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             location.reload(true);
                         }, 3000);
                     }
-                    self.submiting = false;
+                    __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitingEvent', false);
                 }).catch(function (err) {
                     self.errors = err.response.data.errors;
-                    self.submiting = false;
+                    __WEBPACK_IMPORTED_MODULE_0__router_dashboard_router__["b" /* eventBus */].$emit('submitingEvent', false);
                 });
             }
         },
@@ -66954,7 +66954,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _vm._v("\n                    نوع محصول "),
-      _c("span", { staticClass: "sub-des" }, [_vm._v("(مثال:کله قوچی)")])
+      _c("span", { staticClass: "sub-des" }, [_vm._v("(مثال:مضافتی)")])
     ])
   },
   function() {

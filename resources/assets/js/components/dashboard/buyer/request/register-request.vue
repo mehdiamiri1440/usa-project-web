@@ -292,7 +292,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <label>
-                        نوع محصول <span class="sub-des">(مثال:کله قوچی)</span> </label>
+                        نوع محصول <span class="sub-des">(مثال:مضافتی)</span> </label>
                     <input type="text" placeholder="نوع محصول" v-model="buyAd.name">
                     <span v-if="errors.name" class="text-danger" >{{ errors.name[0] }}</span>
                 </div>
@@ -421,7 +421,7 @@
                   $('#myModal').modal('show');
               }
               else{
-                  this.submiting = true;
+                  eventBus.$emit('submitingEvent', true);
 
                   var self = this;
 
@@ -441,11 +441,11 @@
                                     location.reload(true);
                                 }, 3000);
                           }
-                          self.submiting = false;
+                          eventBus.$emit('submitingEvent', false);
                       })
                       .catch(function(err){
                           self.errors = err.response.data.errors;
-                          self.submiting  = false;
+                          eventBus.$emit('submitingEvent', false);
                       });
               }
 
