@@ -71,8 +71,8 @@ var vm = new Vue({
             }
             else{
                 axios.post('/user/get_product_list',{
-                //from_record_number:0,
-                //to_record_number:this.productCountInPage,
+                    //from_record_number:0,
+                    //to_record_number:this.productCountInPage,
                 }).then(function(response){
                     self.products = response.data.products;
                     self.productCountInPage = self.products.length;
@@ -213,9 +213,10 @@ var vm = new Vue({
 //              var height = $(document).height();
             
               var self = this;
+              console.log(this.bottom);
 
 //              if(offset  > height - 3){ //3 pixels to buttom
-              if(this.searchText == '' && this.provinceId == '' && this.categoryId == '' && this.continueToLoadProducts){
+              if(this.searchText == '' && this.provinceId == '' && this.categoryId == '' && this.continueToLoadProducts && this.bottom){
                   this.productCountInPage += this.productCountInEachLoad ;
 
                     axios.post('/user/get_product_list',{
@@ -229,7 +230,7 @@ var vm = new Vue({
                         }
                     });
                 }
-            
+//        }
         },
         openRequestRegisterBox:function(e){
             if(this.currentUser.profile){
@@ -421,14 +422,21 @@ var vm = new Vue({
                 });
             });
         },
+        
+        bottom(bottom){
+          if (bottom) {
+            this.feed()
+          }
+        },
     },
     created(){
         //window.addEventListener('scroll', this.handleScroll);
-        window.addEventListener('scroll', () => {
-          this.bottom = this.bottomVisible()
-        });
+//        window.addEventListener('scroll', () => {
+//          this.bottom = this.bottomVisible();
+//            this.feed();
+//        });
         
-        this.feed()
+        
     },
     destroyed(){
         //window.removeEventListener('scroll', this.handleScroll);

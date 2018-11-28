@@ -255,16 +255,16 @@ footer {
 
 @media (max-width: 1120px) {
     .logo-des {
-       display: none;
+        display: none;
     }
 
 }
 @media (max-width: 880px) {
-   .navbar-brand{
-       padding: 0;
-       width: 150px;
-       background-size: 100%;
-   }
+    .navbar-brand{
+        padding: 0;
+        width: 150px;
+        background-size: 100%;
+    }
     .top-nav-collapse .nav li a{
         padding: 11px 5px;
     }
@@ -357,7 +357,7 @@ footer {
     overflow: hidden;
 }
 #intro h2{
-font-size: 32px;
+    font-size: 32px;
 }
 
 #intro .gradient-overlay {
@@ -896,7 +896,7 @@ font-size: 32px;
     position: relative;
 }
 #testimonial .wow.bounceIn.col-md-6.col-sm-12.animated{
-  float: left;
+    float: left;
 }
 #video-bg{
     position: absolute;
@@ -1191,11 +1191,11 @@ img.image-blur:hover{
     }
 
     /*.custom-navbar .navbar-brand {*/
-        /*width: 60%;*/
-        /*padding: 0;*/
-        /*float: left;*/
-        /*margin: 0 auto;*/
-        /*background-position: 76%;*/
+    /*width: 60%;*/
+    /*padding: 0;*/
+    /*float: left;*/
+    /*margin: 0 auto;*/
+    /*background-position: 76%;*/
     /*}*/
 
 

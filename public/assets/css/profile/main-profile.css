@@ -521,13 +521,13 @@ th, td {
     float: right;
 }
 
-.logo {
-    padding: 10px;
+.logo{
+    padding: 10px ;
     text-align: right;
     float: right;
+    width: 190px;
 }
-
-.logo img {
+.logo img{
     width: 150px;
 }
 

@@ -10,15 +10,18 @@ use App\product_media;
 use DB;
 use App\Http\Controllers\sms_controller;
 use App\myuser;
+use App\Http\Library\date_convertor;
 
 class admin_sellAd_controller extends Controller
 {
     protected $sellAd_list_neccessary_fields_array = [
-        'id',
-        'product_name',
-        'confirmed',
-        'created_at',
-        'category_id',
+        'products.id',
+        'products.product_name',
+        'products.confirmed',
+        'products.created_at',
+        'products.category_id',
+        'myusers.first_name',
+        'myusers.last_name',
     ];
     
     protected $sellAd_detail_fields_array = [
@@ -86,20 +89,28 @@ class admin_sellAd_controller extends Controller
     
     protected function get_sellAd_list($confirm_status)
     {
-        $list = product::where('confirmed',$confirm_status)
-                            ->select($this->sellAd_list_neccessary_fields_array)
-                            ->get();
-        return $list;
+        $list = DB::table('products')
+                        ->leftJoin('myusers','products.myuser_id','=','myusers.id') 
+                        ->where('products.confirmed',$confirm_status)
+                        ->select($this->sellAd_list_neccessary_fields_array)
+                        ->orderBy('products.created_at','desc')
+                        ->get();
+
+        return collect($list);
     }
     
     protected function add_categories_to_sellAd_list(&$sellAd_list)
     {
-        $sellAd_list->each(function($sellAd){
+        $date_convertor_object = new date_convertor();
+         
+        $sellAd_list->each(function($sellAd) use($date_convertor_object){
             $sub_category_record = category::find($sellAd->category_id);
             $category_record = category::find($sub_category_record->parent_id);
             
-            $sellAd['sub_category_name'] = $sub_category_record->category_name;
-            $sellAd['category_name'] = $category_record->category_name;
+            $sellAd->created_at = $date_convertor_object->get_persian_date($sellAd->created_at);
+            
+            $sellAd->sub_category_name = $sub_category_record->category_name;
+            $sellAd->category_name = $category_record->category_name;
         });
     }
     

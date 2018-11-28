@@ -458,6 +458,9 @@ li.active a::after {
     .logo img {
         width: 100%;
     }
+    .user-contents > img{
+        display: none;
+    }
 }
 
 @media screen and (max-width: 715px) {

@@ -11,21 +11,27 @@ use App\category;
 use App\buyAd;
 use App\myuser;
 use App\Http\Controllers\sms_controller;
+use DB;
 
 class admin_sell_offer_controller extends Controller
 {
     public function load_unconfirmed_sell_offer_list()
     {
-        $sell_offers = sell_offer::where('confirmed',false)
-            ->get();
+        $sell_offers = DB::table('sell_offers')
+                            ->leftJoin('myusers','sell_offers.myuser_id','=','myusers.id') 
+                            ->where('sell_offers.confirmed',false)
+                            ->orderBy('sell_offers.created_at','desc')
+                            ->get();
         
         $date_convertor_object = new date_convertor();
         
         $sell_offers->each(function($sell_offer) use($date_convertor_object){
             //$category_array = $this->get_category_and_subcategory_name($sell_offer->category_id);
             
-            $sell_offer['date_from'] = $date_convertor_object->get_persian_date($sell_offer->valid_date_from);
-            $sell_offer['date_to'] = $date_convertor_object->get_persian_date($sell_offer->valid_date_to);
+            $sell_offer->date_from = $date_convertor_object->get_persian_date($sell_offer->valid_date_from);
+            $sell_offer->date_to = $date_convertor_object->get_persian_date($sell_offer->valid_date_to);
+            
+            $sell_offer->created_at = $date_convertor_object->get_persian_date($sell_offer->created_at);
             
 //            $sell_offer_media_records = sell_offer_media::where('sell_offer_id',$sell_offer->id)
 //                ->select(['id','file_path'])
@@ -46,8 +52,8 @@ class admin_sell_offer_controller extends Controller
         
         $date_convertor_object = new date_convertor();
         
-        $sell_offer['date_from'] = $date_convertor_object->get_persian_date($sell_offer->valid_date_from);
-        $sell_offer['date_to'] = $date_convertor_object->get_persian_date($sell_offer->valid_date_to);
+        $sell_offer->date_from = $date_convertor_object->get_persian_date($sell_offer->valid_date_from);
+        $sell_offer->date_to = $date_convertor_object->get_persian_date($sell_offer->valid_date_to);
         
         $sell_offer_media_records = sell_offer_media::where('sell_offer_id',$sell_offer_id)
             ->select(['id','file_path'])

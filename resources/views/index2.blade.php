@@ -4,8 +4,8 @@
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="description" content="Responsive Personal One Page Portfolio">
-    <meta name="keywords" content="Responsive, Personal, One Page Portfolio, Freelancers, Template">
+    <meta name="description" content="خرید و فروش مستقیم محصولات کشاورزی">
+    <meta name="keywords" content="محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,اینکوباک">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- site title -->
@@ -150,12 +150,12 @@ INTRO SECTION
                         کشاورزی</h2>
                 </div>
                 <div class="col-xs-12">
-                    
+
                         <div class="search_input col-xs-12 col-sm-8 col-sm-offset-2">
                             <input type="text" placeholder="محصول مورد نظر خود را جستجو کنید" v-model="mainSearchBoxText">
                             <button class="fa fa-search" @click="search"></button>
                         </div>
-                    
+
                 </div>
                 <div class="col-xs-12">
                     <a href="{{route('login_page')}}" class="btn btn-purple  smoothScroll wow fadeInUp"
@@ -307,6 +307,7 @@ SERVICES SECTION
                 </a>
             </div>
             <div class="owl-carousel col-xs-12">
+
                 <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProducts">
                     <image-viewer
                         :title="product.main.sub_category_name + ' - ' + product.main.product_name"
@@ -314,7 +315,8 @@ SERVICES SECTION
                         :link="'/product-list/' + product.main.sub_category_name"
                         >
                     </image-viewer>
-                </article>     
+                </article>
+
             </div>
         </div>
     </div>
@@ -565,7 +567,7 @@ FAQ SECTION
 <script>
 
 
-   
+
 </script>
 
 </html>
