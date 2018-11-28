@@ -13,6 +13,7 @@ use App\product_statistics;
 use App\profile;
 use App\user_product;
 use DB;
+use App\Http\Controllers\sms_controller;
 
 
 class product_controller extends Controller
@@ -659,20 +660,34 @@ class product_controller extends Controller
             
             $product_id = $request->product_id;
             
-            $user_id = session('user_id');
+            $product_record = product::find($product_id);
             
-            $user_product_record = new user_product();
+            if($product_record){
+                $sms_controller_object = new sms_controller();
+                $sms_controller_object->send_status_sms_message($product_record,'برای یکی از آگهی های شما در اینکوباک درخواست خرید ثبت شده است.برای بررسی به incobac.com مراجعه کنید.');
+                
+                 $user_id = session('user_id');
             
-            $user_product_record->myuser_id = $user_id;
-            $user_product_record->product_id = $product_id;
+                $user_product_record = new user_product();
+
+                $user_product_record->myuser_id = $user_id;
+                $user_product_record->product_id = $product_id;
+
+                $user_product_record->save();
+
+
+                return response()->json([
+                    'status' => true,
+                    'msg' => 'record added!',
+                ],201);
+            }
+            else{
+                return response()->json([
+                    'status' => false,
+                    'msg' => 'product Id is not valid',
+                ],404);
+            }
             
-            $user_product_record->save();
-            
-            
-            return response()->json([
-                'status' => true,
-                'msg' => 'record added!',
-            ],201);
         }
         else{
             return response()->json([

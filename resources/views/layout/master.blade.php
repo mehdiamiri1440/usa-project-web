@@ -148,7 +148,7 @@
 
     <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
         <div class="main-loader">
-            <img v-bind:src="loading">
+            <img src="{{asset('assets/img/gif/prload.gif')}}">
             <p dir="rtl">کمی صبر کنید...</p>
         </div>
     </div>
