@@ -634,6 +634,7 @@
                     this.popUpMsg = 'ابتدا اطلاعات پایه را تکمیل کنید.';
                     eventBus.$emit('submitSuccess', this.popUpMsg);
                     $('#myModal').modal('show');
+                    eventBus.$emit('submitingEvent',false);
                     return;
                 }
 

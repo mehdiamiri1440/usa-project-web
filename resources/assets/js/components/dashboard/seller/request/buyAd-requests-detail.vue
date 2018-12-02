@@ -470,7 +470,7 @@
             submitSellOffer:function(){
                 var self = this;
 
-                this.submiting = true;
+                eventBus.$emit('submitingEvent', true);
 
                 var formData = this.getSellOfferFormFields();
 
@@ -482,7 +482,7 @@
                             $('#myModal').modal('show');
                             setTimeout(function () {
                                 window.location.href = '/dashboard/#/my-sell-offers';
-                                self.submiting = false;
+                                eventBus.$emit('submitingEvent', false);
                             },3000);
                         }
 
@@ -496,7 +496,7 @@
                             eventBus.$emit('submitSuccess', self.popUpMsg);
                             $('#myModal').modal('show');
                         }
-                        self.submiting = false;
+                        eventBus.$emit('submitingEvent', false);
                     });
             },
             handleSellOfferFileUpload:function(){

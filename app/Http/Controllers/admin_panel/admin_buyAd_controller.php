@@ -57,7 +57,7 @@ class admin_buyAd_controller extends Controller
     
    
     
-    protected $buyAd_confirmation_sms_text = 'آگهی خرید شما در سامانه ی اینکوباک تایید گردید برای مشاهده به لینک زیر مراجعه کنید.';
+    protected $buyAd_confirmation_sms_text = 'آگهی خرید شما در سامانه ی اینکوباک تایید گردید.';
     
     public function load_unconfirmed_buyAd_list()
     {
@@ -194,15 +194,14 @@ class admin_buyAd_controller extends Controller
             $buyAd_record->save();
             
             //send SMS
-//            $sms_controller_object = new sms_controller();
-//            $sms_controller_object->send_status_sms_message($buyAd_record,$this->buyAd_confirmation_sms_text,'buyAd');
+            $sms_controller_object = new sms_controller();
+            $sms_controller_object->send_status_sms_message($buyAd_record,$this->buyAd_confirmation_sms_text);
             
             return redirect()->route('admin_panel_buyAd');
         }
         else if($request->type == 'reject')
         {
             //send SMS
-            
             return redirect()->route('admin_panel_buyAd');
         }
     }

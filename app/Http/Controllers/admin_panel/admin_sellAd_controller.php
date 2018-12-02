@@ -61,7 +61,7 @@ class admin_sellAd_controller extends Controller
     ];
     
     
-    protected $sellAd_confirmation_sms_text = 'آگهی فروش شما در سامانه ی اینکوباک تایید گردید برای مشاهده به لینک زیر مراجعه کنید.';
+    protected $sellAd_confirmation_sms_text = 'آگهی فروش شما در سامانه ی اینکوباک تایید گردید.';
     
     public function load_unconfirmed_sellAd_list()
     {
@@ -198,7 +198,7 @@ class admin_sellAd_controller extends Controller
             
             //send SMS
             $sms_controller_object = new sms_controller();            
-            $sms_controller_object->send_status_sms_message($sellAd_record,$this->sellAd_confirmation_sms_text,'product');
+            $sms_controller_object->send_status_sms_message($sellAd_record,$this->sellAd_confirmation_sms_text);
             
             return redirect()->route('admin_panel_sellAd');
         }
