@@ -60,14 +60,7 @@ th, td {
     padding: 7px;
     text-align: right;
 }
-@media (max-width: 768px) {
-    .test {
-        background-image: url('../../img/logo_dark.png');
-        background-repeat: no-repeat;
-        background-size: 180px 75px;
-        border-left: 10px;
-    }
-}
+
 /*start style right header*/
 .logo {
     height: 64px;

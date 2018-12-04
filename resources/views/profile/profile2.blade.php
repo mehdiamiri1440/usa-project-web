@@ -74,8 +74,7 @@
                                 درخواست ها
                             </div>
                             <div class="col-xs-12">
-                                <a href="#" class="green_bot" @click="copyProfileLinkToClipBoard"><i
-                                            class="fa fa-whatsapp"></i> اشتراک در واتس آپ </a>
+                                <a href="#" class="green_bot" @click="copyProfileLinkToClipBoard"><i class="fa fa-whatsapp"></i> اشتراک در واتس آپ </a>
                             </div>
                         </div>
                     </div>
@@ -155,38 +154,28 @@
                     </div>
                 </div>
                 <div class="sub-header hidden-sm hidden-md hidden-lg  col-xs-12">
-                    <div class="col-xs-6" :class="{'active':profileDescription}">
-                        <a @click="
+                    <div class="col-xs-6" :class="{'active':profileDescription}"><a @click="
                             showProfileOwnerDescription($event)" href="">
-                            <div class="inside-links">
-
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> توضیحات من
-
-                            </div>
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> توضیحات من
                         </a>
                     </div>
                     <div v-if="profileOwner.user_info.is_seller == 1" class="col-xs-6"
                          :class="{'active':!profileDescription}"><a @click="
                             showProfileOwnerProducts($event)" href="">
-                            <div class="inside-links">
-
-                                <i class="incobac-icon" aria-hidden="true"><img
-                                            src="{{asset('assets/img/lo.png')}}"></i> محصولات من
-                            </div>
+                            <i class="incobac-icon"  aria-hidden="true"><img src="{{asset('assets/img/lo.png')}}"></i>                            محصولات من
                         </a>
                     </div>
                 </div>
-                <div class="sub-header hidden-xs col-xs-12">
+                 <div class="sub-header hidden-xs col-xs-12">
                     <ul class="list-inline">
-                        <li v-if="profileOwner.user_info.is_seller == 1" class="list-item"
-                            :class="{'active':!profileDescription}"><a @click="
+                        <li v-if="profileOwner.user_info.is_seller == 1" class="list-item" :class="{'active':!profileDescription}"><a @click="
                             showProfileOwnerProducts($event)" href="">
-                                محصولات من </a>
+                            محصولات من </a>
                         </li>
 
                         <li class="list-item" :class="{'active':profileDescription}"><a @click="
                             showProfileOwnerDescription($event)" href="">
-                                توضیحات من
+                            توضیحات من
                             </a>
                         </li>
                     </ul>
@@ -205,15 +194,11 @@
                             عکس های مرتبط :
                         </p>
                         <div v-if="profileOwner.relateds[0]">
-                       
-                                 <popup-certificate
-                                  v-for="photo in profileOwner.relateds"
-                                  class="ceteficate-image col-xs-6 hidden-sm hidden-md hidden-lg"
-                                  base="{{url('storage')}}/" 
-                                  :img="photo">
-                               </popup-certificate>
-                        
+                            <article  v-for="photo in profileOwner.relateds" class="ceteficate-image col-xs-6 hidden-sm hidden-md hidden-lg">
+                                <a :href="'/storage/' + photo"> <img :src="'/storage/' + photo" /></a>
+                            </article>
                             <div class="owl-carousel hidden-xs">
+
                                 <image-viewer
                                         v-for="photo in profileOwner.relateds"
                                         base="{{url('storage')}}/"
@@ -231,9 +216,8 @@
                             مدارک من :
                         </p>
                         <div v-if="profileOwner.certificates[0]">
-                            <article v-for="photo in profileOwner.certificates"
-                                     class="ceteficate-image col-xs-6 hidden-sm hidden-md hidden-lg">
-                                <a :href="'/storage/' + photo"> <img :src="'/storage/' + photo"/></a>
+                            <article v-for="photo in profileOwner.certificates" class="ceteficate-image col-xs-6 hidden-sm hidden-md hidden-lg">
+                                <a :href="'/storage/' + photo"> <img :src="'/storage/' + photo" /></a>
                             </article>
                             <div class="owl-carousel hidden-xs">
                                 <image-viewer v-for="photo in profileOwner.certificates"
@@ -268,14 +252,9 @@
                             </div>
                             <div class="image-article-content col-xs-12 col-md-5">
                                 <div class="main-image col-xs-12" v-if="product.photos.length > 0">
-                                
-                                       <div class="owl-carousel" v-if="product.photos.length > 0">
-                                <image-viewer-list
-                                        v-for="photo in product.photos"
-                                        base="{{url('storage')}}/"
-                                        :img="photo.file_path">
-                                </image-viewer-list>
-                            </div>
+                                    <popup v-if="product.photos[0]" v-for="photo in product.photos"
+                                           base="{{url('storage')}}/" :img="photo.file_path">
+                                    </popup>
                                 </div>
                             </div>
                             <div class="main-article-content col-xs-12 col-md-7">

@@ -47,23 +47,16 @@
 
         .custom-navbar .navbar-brand {
             width: 140px;
-
             text-align: center;
-
-            display: block;
-
+            display: inline-block;
             height: 53px;
-
             background-size: contain;
-
-            margin: 0 auto;
-
-            float: none;
         }
         .navbar-brand {
             margin: 0 15px;
+            float: right;
             height: 50px;
-            padding: 3px 15px;
+            padding: 20px 15px;
             font-size: 18px;
             line-height: 20px;
 
@@ -110,8 +103,8 @@
         }
 
         .nav.navbar-nav.navbar-left {
-            padding: 16px;
-            text-align: right;
+            padding-top: 16px;
+            text-align: center;
         }
 
         .custom-navbar .nav li a:hover {
@@ -132,7 +125,7 @@
         .navbar-toggle {
 
             position: relative;
-            float: right;
+            float: left;
             padding: 9px 10px;
             padding-top: 9px;
             margin-top: 8px;
@@ -145,6 +138,7 @@
         }
         .custom-navbar .navbar-toggle {
             border: none;
+            padding-top: 10px;
         }
 
         .custom-navbar .navbar-toggle {
@@ -417,43 +411,19 @@
     </header>
 
     <!-- =========================
- NAVIGATION LINKS
-============================== -->
+     NAVIGATION LINKS
+    ============================== -->
 
     <div class="hidden-sm hidden-md hidden-lg navbar navbar-fixed-top custom-navbar" role="navigation">
         <div class="container-fluid">
             <!-- navbar header -->
             <div class="navbar-header">
-                @if(session('user_id'))
-                    <div class="user-header-mobile">
-                        <div class="profile-menu-header"><a href="#" onclick="dropdown()">
-                                <div class="image-header-profile">
-                                    @if(session('profile_photo'))
-                                        <img class="image-blur" src="{{url('/storage/')  . '/'. session('profile_photo')}}">
-                                    @else
-                                        <img class="image-blur" src="{{asset('assets/img/user-defult.png')}}">
-                                    @endif
-                                </div>
-                                <i aria-hidden="true" class="fa fa-angle-down"></i>
-                            </a>
-                            <div class="profile-list">
-                                <ul class="list-unstyled">
-                                    <li class="list-item"><a
-                                                href="{{route('profile_basic')}}">پروفایل</a></li>
-                                    <li class="list-item"><a href="/dashboard#/password">تغییر کلمه عبور</a></li>
-                                    <li class="list-item"><a href="{{route('logout')}}">خروج</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                @endif
                 <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon icon-bar"></span>
                     <span class="icon icon-bar"></span>
                     <span class="icon icon-bar"></span>
                 </button>
-                <a class="navbar-brand test" href="/">
-                     <img src="{{asset('assets/img/logo_dark.png')}}">
+                <a class="navbar-brand test" href="">
                 </a>
                 <p class="logo-des hidden-xs hidden-sm">
                     اینکوباک | بازارگاه آنلاین دنیای کشاورزی
@@ -463,14 +433,40 @@
 
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-left">
+                    <li><a href="/product-list" class="smoothScroll cta-bot cta-bot-mobile">لیست محصولات</a></li>
                     @if(!session('user_id'))
                         <li><a href="{{route('login_page')}}" class="smoothScroll">ورود/ثبت نام</a></li>
                     @endif
-                    <li><a href="/" class="smoothScroll">صفحه ی اصلی</a></li>
+                    <li><a href="" class="smoothScroll">صفحه ی اصلی</a></li>
                     <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
                     <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
-                    <li><a href="http://www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
+                    <li><a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
                     <li><a href="/product-list" class="smoothScroll cta-bot">لیست محصولات</a></li>
+
+                    @if(session('user_id'))
+
+                        <li class="user-header-web hidden-xs">
+                            <div class="profile-menu-header"><a href="#" onclick="dropdown()">
+                                    <div class="image-header-profile">
+                                        @if(session('profile_photo'))
+                                            <img class="image-blur" src="{{'storage/'  . session('profile_photo')}}">
+                                        @else
+                                            <img class="image-blur" src="{{asset('assets/img/user-defult.png')}}">
+                                        @endif
+                                    </div>
+                                    <i aria-hidden="true" class="fa fa-angle-down"></i> <span
+                                            class="name-header-profile">{{session('full_name')}}</span></a>
+                                <div class="profile-list">
+                                    <ul class="list-unstyled">
+                                        <li class="list-item"><a
+                                                    href="{{route('profile_basic')}}">پروفایل</a></li>
+                                        <li class="list-item"><a href="/dashboard#/password">تغییر کلمه عبور</a></li>
+                                        <li class="list-item"><a href="{{route('logout')}}">خروج</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    @endif
                 </ul>
             </div>
 
