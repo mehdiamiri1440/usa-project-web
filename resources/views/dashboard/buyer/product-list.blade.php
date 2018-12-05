@@ -1,6 +1,8 @@
 @extends('layout.master')
 
 @section('header_links')
+  <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/dashboard/buyer/product-list.css')}}">
     <script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
 @endsection
@@ -103,10 +105,17 @@
                 </div>
                 <div class="article-contents col-xs-12  col-sm-9 ">
                     <div class="row">
-                        <div class="image-article-content col-xs-12 col-sm-5">
-                            <popup v-if="product.photos[0]" v-for="photo in product.photos" base="{{url('storage')}}/"
-                                   :img="photo.file_path"></popup>
-                        </div>
+                               <div class="main-image col-xs-12 col-sm-5">
+
+                                    <div class="owl-carousel" v-if="product.photos.length > 0">
+                                        <image-viewer-list
+                                                v-for="photo in product.photos"
+                                                base="{{url('storage')}}/"
+                                                :img="photo.file_path">
+                                        </image-viewer-list>
+                                    </div>
+                                </div>
+                        
                         <div class="main-article-content col-xs-12 col-sm-7">
                             <h2 class="main-article-title">
                                 <a href="#">@{{product.main.category_name + ' | ' + product.main.sub_category_name}}</a>

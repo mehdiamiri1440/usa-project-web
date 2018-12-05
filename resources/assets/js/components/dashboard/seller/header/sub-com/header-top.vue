@@ -117,7 +117,7 @@
                 <span class="font-big">اینکوباک  </span> | <span> بازارگاه آنلاین کشاورزی</span>
             </div>
             <div class="profile-menu-header">
-                <a href="#" onclick="dropdown()">
+                <a href="#" @click.prevent = "dropdown()">
                     <div class="image-header-profile" v-if="photoLink ">
                         <img :src="storage + '/' + photoLink">
                     </div>
@@ -148,6 +148,7 @@
 </template>
 
 <script>
+    var viz = false;
     import subMenu from './sub-menu/sub-menu.vue'
     export default {
         props: [
@@ -160,6 +161,32 @@
         ],
         components:{
             subMenu
-        }
+        },
+        methods:{
+        dropdown:function() {
+            $(".profile-list").fadeIn("slow", function () {
+                viz = true;
+            });
+        },
+         dropdownList:function() {
+            $(".icon-header-list").fadeIn("slow", function () {
+                viz = true;
+            });
+        },
+       documentClick(e){
+            if (viz) {
+        $('.profile-list').fadeOut("slow");
+        $('.icon-header-list').fadeOut("slow");
+        viz = false;
+    
+          }
+        },
+        },
+        
+      created () {
+      document.addEventListener('click', this.documentClick)
+      },
+
+    
     }
 </script>

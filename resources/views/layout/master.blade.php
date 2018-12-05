@@ -170,6 +170,15 @@
             text-align: center;
         }
 
+        .owl-dot {
+
+    width: 10px;
+    height: 10px;
+    background: #3c9544b3 !important;
+    margin: 0 4px;
+    border-radius: 50px;
+
+}
         @media (max-width: 1120px) {
             .logo-des {
                 display: none;
@@ -205,7 +214,23 @@
             }
         }
 
-        @media (max-width: 768px) {
+        @media screen and (max-width: 768px) {
+            .profile-menu-header {
+    padding: 3px;
+    padding-left: 55px;
+    float: left;
+           }
+            
+.profile-menu-header i {
+    position: absolute;
+    color:#333;
+    left: -75px;
+
+    top: 29px;
+
+    font-size: 20px;
+}
+
             .main-content-item {
                 margin: 63px auto 24px;
 
@@ -261,6 +286,40 @@
             }
 
         }
+        @media screen and (max-width: 430px) {
+
+    .profile-menu-header {
+
+    padding: 3px;
+        padding-left: 3px;
+    padding-left: 35px;
+    float: left;
+
+}
+    /*.user-contents > p {
+
+        float: none;
+        font-size: inherit;
+        padding-top: 0;
+        padding-right: 0;
+
+    }
+    .user-image {
+
+        float: none;
+        width: 60px;
+        height: 60px;
+
+    }
+    .user-contents > .green_bot {
+
+        float: none;
+        width: initial;
+        padding: 10px 17px;
+        margin-top: 11px;
+
+    }*/
+}
 
         .loading_images img{
             display: block;
@@ -383,7 +442,7 @@
 
     <header id="header" class="hidden-xs  main-header">
         <div class="profile-menu-header" v-if="currentUser.profile">
-            <a href="#" onclick="dropdown()">
+            <a href="#" @click.prevent = "dropdown()">
                 <div class="image-header-profile" v-if="currentUser.profile.profile_photo">
                     <img  :src=" '{{url('/storage/')}}/' + currentUser.profile.profile_photo">
                 </div>
@@ -426,7 +485,7 @@
             <div class="navbar-header">
                 @if(session('user_id'))
                     <div class="user-header-mobile">
-                        <div class="profile-menu-header"><a href="#" onclick="dropdown()">
+                        <div class="profile-menu-header"><a href="#" @click.prevent = "dropdown()" >
                                 <div class="image-header-profile">
                                     @if(session('profile_photo'))
                                         <img class="image-blur" src="{{url('/storage/')  . '/'. session('profile_photo')}}">
@@ -482,6 +541,8 @@
 @yield('script_tags')
 <script src="{{asset('assets/js/idleTimer.js')}}"></script>
 <script>
+    
+
     $(document).ready(function(){
         $(document).idleTimer(7200000);
     });

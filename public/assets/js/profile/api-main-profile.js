@@ -1,4 +1,4 @@
-
+var viz = false;
 var PopupImage =  {
     data:function(){
         return {
@@ -147,6 +147,24 @@ var vm = new Vue({
     },
 
     methods:{
+      dropdown:function() {
+            $(".profile-list").fadeIn("slow", function () {
+                viz = true;
+            });
+        },
+         dropdownList:function() {
+            $(".icon-header-list").fadeIn("slow", function () {
+                viz = true;
+            });
+        },
+       documentClick(e){
+            if (viz) {
+        $('.profile-list').fadeOut("slow");
+        $('.icon-header-list').fadeOut("slow");
+        viz = false;
+    
+          }
+        },
         init:function(){
 
             var self = this;
@@ -291,7 +309,10 @@ var vm = new Vue({
         'image-viewer-list' : OwlCarouselLists,
         "popup":PopupImage,
         "popup-certificate":PopupImageCertificate,
-    }
+    },
+    created(){
+        document.addEventListener('click', this.documentClick)
+    },
 });
 
 
