@@ -6,6 +6,9 @@ use App\myuser;
 use App\profile;
 use App\profile_media;
 use App\category;
+use App\product;
+use App\buyAd;
+use App\sell_offer;
 
 class profile_controller extends Controller
 {
@@ -462,6 +465,85 @@ class profile_controller extends Controller
             'activity_domain' => $activity_domain,
         ]);
         
+    }
+    
+    //public method
+    public function get_user_statistics_by_user_name(Request $request)
+    {
+        $this->validate($request,[
+            'user_name' => 'required|alphadash'
+        ]);
+        
+        $user_record = myuser::where('user_name',$request->user_name)
+                            ->get()
+                            ->first();
+        
+        if(! $user_record){
+            return abort(404);
+         }
+        
+        $user_id = $user_record->id;
+        
+        if($user_record->is_seller){
+            $user_statistics = $this->get_seller_statistics($user_id);
+        }
+        else if($user_record->is_buyer){
+            $user_statistics = $this->get_buyer_statistics($user_id);
+        }
+        else{
+            return response()->json([
+                'status' => false,
+                'msg' => 'user type is undefined!'
+            ],500);
+        }
+        
+        return response()->json([
+            'status' => true,
+            'statistics' => $user_statistics,
+        ],200);
+    }
+    
+    protected function get_buyer_statistics($user_id)
+    {
+        $buyAd_records = buyAd::where('myuser_id',$user_id)
+                                ->where('confirmed',true)
+                                ->select('id')
+                                ->get();
+        
+        $buyAd_count = $buyAd_records->count();
+        
+        $transaction_count = sell_offer::wherein('buy_ad_id',$buyAd_records)
+                                    ->where('transaction_status','0000000011111111')
+                                    ->get()
+                                    ->count();
+        
+        $result_array = [
+            'buyAd_count' => $buyAd_count,
+            'transaction_count' => $transaction_count,
+        ];
+        
+        return $result_array;
+    }
+    
+    protected function get_seller_statistics($user_id)
+    {
+        $product_count = product::where('myuser_id',$user_id)
+                                    ->where('confirmed',true)
+                                    ->select('id')
+                                    ->get()
+                                    ->count();
+        $transaction_count = sell_offer::where('myuser_id',$user_id)
+                                            ->where('transaction_status','0000000011111111')
+                                            ->select('id')
+                                            ->get()
+                                            ->count();
+        
+        $result_array = [
+            'product_count' => $product_count,
+            'transaction_count' => $transaction_count,
+        ];
+        
+        return $result_array;
     }
     
     

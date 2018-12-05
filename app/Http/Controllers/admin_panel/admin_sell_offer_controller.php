@@ -18,8 +18,13 @@ class admin_sell_offer_controller extends Controller
     public function load_unconfirmed_sell_offer_list()
     {
         $sell_offers = DB::table('sell_offers')
-                            ->leftJoin('myusers','sell_offers.myuser_id','=','myusers.id') 
+                            ->Join('myusers','sell_offers.myuser_id','=','myusers.id') 
                             ->where('sell_offers.confirmed',false)
+                            ->select([
+                                'myusers.first_name',
+                                'myusers.last_name',
+                                'sell_offers.*'
+                            ])
                             ->orderBy('sell_offers.created_at','desc')
                             ->get();
         

@@ -26,6 +26,65 @@ var PopupImage =  {
     }
 };
 
+
+var PopupImageCertificate =  {
+
+    props:['img','base'],
+    template: 
+    '<a   :href="base + img">'+
+    '<img :src="base + img">'+
+    '</a>'
+    ,
+    mounted: function(){
+        console.log($(this.$el));
+        $('.cerificates > div').each(function() { // the containers for all your galleries
+        $(this).magnificPopup({
+        delegate: 'a', // the selector for gallery item
+        type: 'image',
+        gallery: {
+          enabled:true
+        }
+    });
+});
+    
+
+    }
+};
+
+
+var OwlCarouselLists =  {
+    data:function(){
+        return {
+            imgSrcs:'',
+        };
+    },
+    props:['img','base'],
+    template: '<div class="image-wrapper">' +
+        '<a  :href="base + img">'+
+            '<img :src="base + img">'+
+        '</a>'+
+    '</div>',
+    mounted: function(){
+        $(".owl-carousel").owlCarousel({
+            loop:false,
+            items:1,
+            margin:10,
+            nav:false,
+            dots:true
+        });
+        $(this.$el).parent().parent().parent().magnificPopup({
+        delegate: 'a',
+        type: 'image',
+            gallery: {
+                enabled: true,
+                navigateByImgClick: true,
+                preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+            }
+    });
+
+    }
+};
+
 var OwlCarousel =  {
     data:function(){
         return {
@@ -70,7 +129,7 @@ var vm = new Vue({
             certificates:'',
             relateds:'',
             activity_domain:'',
-            is_buyer:''
+            is_buyer:'',
         },
         profileDescription:true,
         products:'',
@@ -80,10 +139,17 @@ var vm = new Vue({
         submiting:'',
         copyLinkText:'',
         copyLinkClass:'',
+        profileOwnerStatistics:{
+            transaction_count:'',
+            product_count:'',
+            buyAd_count:'',
+        }
     },
     
     methods:{
         init:function(){
+            
+            var self = this;
             
             if(this.isDeviceMobile()){
                 this.copyLinkText = ' اشتراک در واتساپ';
@@ -93,6 +159,16 @@ var vm = new Vue({
                 this.copyLinkText = 'کپی آدرس';
                 this.copyLinkClass = 'fa fa-clipboard';
             } 
+            
+            axios.post('/get_user_statistics_by_user_name',{
+                user_name: userName
+            })
+            .then(function(response){
+                self.profileOwnerStatistics = response.data.statistics;
+            })
+            .catch(function(err){
+                //
+            });
             
             axios.post('/user/profile_info')
                 .then(response => (this.currentUser = response.data));
@@ -118,7 +194,6 @@ var vm = new Vue({
             axios.post('/get_product_list_by_user_name',{
                 user_name : userName
             }).then(function(response){
-                console.log('loaded');
                 self.products = response.data.products;
 
                 self.loading = false;
@@ -159,7 +234,8 @@ var vm = new Vue({
                 }
             })
             .catch(function(err){
-                alert('هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.');
+                self.popUpMsg = 'هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.';
+                $('#myModal').modal('show');
             });
         },
         copyProfileLinkToClipBoard:function(){
@@ -208,10 +284,13 @@ var vm = new Vue({
     },
     mounted(){
       this.init();
+
     },
     components:{
         'image-viewer' : OwlCarousel,
-        "popup":PopupImage
+        'image-viewer-list' : OwlCarouselLists,
+        "popup":PopupImage,
+        "popup-certificate":PopupImageCertificate,
     }
 });
 

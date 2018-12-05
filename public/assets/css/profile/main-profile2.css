@@ -163,11 +163,11 @@ th, td {
 }
 
 .des {
-    margin: 0;
+    margin: 20px 0;
 
-    padding: 0 ;
+    padding: 20px 0;
 
-
+    border-bottom: 1px solid #ededed;
 }
 
 .title-content {
@@ -368,12 +368,71 @@ th, td {
 .sub-header {
     background: #ededed;
     text-align: center;
+}
+
+.sub-header ul {
+    text-align: center;
+}
+
+.sub-header a {
+    padding: 16px;
+    display: inline-block;
+    color: #808c9b;
+    font-weight: bold;
+    font-size: 14px;
+    position: relative;
+}
+
+.sub-header a:hover {
+    color: #313942;
+}
+
+.sub-header li.active a {
+    color: #313942;
+}
+
+.sub-header li.active a::after {
+    content: " ";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #28a745;
+    height: 3px;
+    width: 100%;
+}
+
+.sub-header a:hover::after {
+    content: " ";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #28a745;
+    height: 3px;
+    width: 100%;
+}
+
+.sub-header a.active {
+    color: #313942;
+}
+
+.sub-header a.active::after {
+    content: " ";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #28a745;
+    height: 3px;
+    width: 100%;
+}
+
+.sub-header {
+    background: #ededed;
+    text-align: center;
     padding: 0;
 }
 
 .sub-header > div {
     border-top: 1px solid #ededed;
-    padding: 0;
 }
 
 .sub-header > div.active {
@@ -387,30 +446,19 @@ th, td {
 .sub-header i {
 
     font-size: 20px;
-
     position: absolute;
-
-    top: 0;
-
-    right: -30px;
-
+    top: 18px;
+    right: -13px;
     display: inline-block;
-
     width: 20px;
-
     height: 30px;
-
     float: right;
 
-}
-.inside-links{
-    display: inline-block;
 
-    position: relative;
 }
 
 .sub-header i.incobac-icon {
-    top: -6px;
+    top: 9px;
 }
 .sub-header a {
 
@@ -419,7 +467,7 @@ th, td {
     font-weight: bold;
     font-size: 14px;
     position: relative;
-    display: block;
+    display: inline-block;
 }
 .user-contents p {
     margin: 14px auto;
@@ -567,7 +615,7 @@ th, td {
 }
 
 .image-wrapper {
-    height: 215px;
+    height: 356px;
     overflow: hidden;
 }
 
@@ -601,22 +649,8 @@ th, td {
     }
 }
 
-@media screen and (max-width: 768px) {
-  
+@media screen and (max-width: 767px) {
 
-    .profile-menu-header {
-
-        padding: 0;
-        padding-left: 55px;
-        float: left;
-
-    }
-    .profile-menu-header i {
-    top: 29px !important;
-    font-size: 20px;
-    color: #333;
-
-    }
     .main-article-content {
         padding: 15px;
     }
@@ -642,12 +676,11 @@ th, td {
     }
 
     .title-content {
+        margin: 7px 0 20px;
+        background: #ededed;
 
-    margin: 7px 0 20px;
-    padding: 15px;
-    border-bottom: 1px solid #ededed;
-
-}
+        padding: 15px;
+    }
 
     .description {
         text-align: right;
@@ -711,25 +744,13 @@ th, td {
     .main-content, #main {
         padding: 0;
     }
-    .ceteficate-image {
-
-        height: 250px;
-        overflow: hidden;
-
-    }
-
 }
 
 @media screen and (max-width: 715px) {
     .name-header-profile {
         display: none;
     }
-    .ceteficate-image {
 
-        height: 200px;
-        overflow: hidden;
-
-    }
     .profile-menu-header i {
         position: absolute;
         left: -75px;
