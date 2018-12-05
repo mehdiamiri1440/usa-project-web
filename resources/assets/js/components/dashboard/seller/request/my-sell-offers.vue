@@ -117,7 +117,7 @@
             </ul>
         </section>
        <section class="main-content col-xs-12" v-if="sellOffers.length == 0 && !load">
-            <h4 dir="rtl" class="text-center">پیشنهاد خریدی ثبت نکرده اید.</h4>
+            <h4 dir="rtl" class="text-center">پیشنهاد فروشی ثبت نکرده اید.</h4>
         </section>
          <div class="loading_images  col-xs-12" v-show="load">
               <img :src="loading" style="width:200px;height:200px">
