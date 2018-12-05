@@ -24,7 +24,7 @@ Route::get('/test', function(){
 });
 
 Route::get('/', function(){
-    return view('index2');
+    return view('index');
 });
 
 //Route::get('/', function(){
@@ -156,15 +156,15 @@ Route::get('/profile/{user_name}',function($user_name){
         ->select('id','first_name','last_name')
         ->get()
         ->first();
-    
+
     $profile_record = profile::where('myuser_id',$user_record->id)
             ->where('confirmed',true)
             ->select('profile_photo')
             ->get()
             ->last();
-    
+
     $full_name = $user_record->first_name . ' ' . $user_record->last_name;
-    
+
     return view('profile.profile',[
         'user_name' => $user_name,
         'full_name' => $full_name,
@@ -453,12 +453,12 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'product_controller@refresh_product_updated_at_time',
         'as' => 'refresh_my_product_by_id'
     ]);
-    
+
     Route::post('/get_buyAd_owner_user_id',[
         'uses' => 'buyAd_controller@get_buyAd_owner_user_id',
         'as' => 'get_buyAd_owner_user_id'
     ]);
-    
+
     Route::post('/get_contract_sides_user_info',[
         'uses' => 'user_controller@get_contract_sides_user_info',
         'as' => 'get_contract_sides_user_info'
