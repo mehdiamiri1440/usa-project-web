@@ -205,14 +205,14 @@
                             عکس های مرتبط :
                         </p>
                         <div v-if="profileOwner.relateds[0]">
-                       
-                                 <popup-certificate
-                                  v-for="photo in profileOwner.relateds"
-                                  class="ceteficate-image col-xs-6 hidden-sm hidden-md hidden-lg"
-                                  base="{{url('storage')}}/" 
-                                  :img="photo">
-                               </popup-certificate>
-                        
+
+                            <popup-certificate
+                                    v-for="photo in profileOwner.relateds"
+                                    class="ceteficate-image col-xs-6 hidden-sm hidden-md hidden-lg"
+                                    base="{{url('storage')}}/"
+                                    :img="photo">
+                            </popup-certificate>
+
                             <div class="owl-carousel hidden-xs">
                                 <image-viewer
                                         v-for="photo in profileOwner.relateds"
@@ -268,14 +268,14 @@
                             </div>
                             <div class="image-article-content col-xs-12 col-md-5">
                                 <div class="main-image col-xs-12" v-if="product.photos.length > 0">
-                                
-                                       <div class="owl-carousel" v-if="product.photos.length > 0">
-                                <image-viewer-list
-                                        v-for="photo in product.photos"
-                                        base="{{url('storage')}}/"
-                                        :img="photo.file_path">
-                                </image-viewer-list>
-                            </div>
+
+                                    <div class="owl-carousel" v-if="product.photos.length > 0">
+                                        <image-viewer-list
+                                                v-for="photo in product.photos"
+                                                base="{{url('storage')}}/"
+                                                :img="photo.file_path">
+                                        </image-viewer-list>
+                                    </div>
                                 </div>
                             </div>
                             <div class="main-article-content col-xs-12 col-md-7">
