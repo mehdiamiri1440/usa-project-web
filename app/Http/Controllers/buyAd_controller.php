@@ -643,20 +643,33 @@ class buyAd_controller extends Controller
         
         if($user->is_seller){
             
+            $result_buyAds = array();
+            
             $related_buyAds = $this->get_related_buyAds_list_to_the_user($user);
-            $buyAd_recommender_object->buyAd_list_recommender_for_seller($related_buyAds,$seller_id); //check out the method for more details
+            $buyAd_recommender_object->buyAd_list_recommender_for_seller($related_buyAds,session('user_id')); //check out the method for more details
             
+//            $related_buyAds->each(function($buyAd) use($date_convertor_object,&$related_buyAds){
+//                   $category_array = $this->get_category_and_subcategory_name($buyAd->category_id);
+//                   $buyAd['category_name'] = $category_array['category_name'];
+//                   $buyAd['subcategory_name'] = $category_array['subcategory_name'];
+//                   $buyAd['register_date'] = $date_convertor_object->get_persian_date_with_month_name($buyAd->created_at);
+//                    
+//                   $result_buyAds[] = $buyAd;
+//            });
             
-            $related_buyAds->each(function($buyAd) use($date_convertor_object){
+            foreach($related_buyAds as $buyAd){
                    $category_array = $this->get_category_and_subcategory_name($buyAd->category_id);
                    $buyAd['category_name'] = $category_array['category_name'];
                    $buyAd['subcategory_name'] = $category_array['subcategory_name'];
                    $buyAd['register_date'] = $date_convertor_object->get_persian_date_with_month_name($buyAd->created_at);
-            });
+
+                   $result_buyAds[] = $buyAd;
+            }
+            
             
             return response()->json([
                 'status' => true,
-                'buyAds' => $related_buyAds,
+                'buyAds' => $result_buyAds,
             ],200);
         }
         else{
@@ -673,6 +686,7 @@ class buyAd_controller extends Controller
                     ->select($this->related_buyAd_list_required_fields)
                     ->orderBy('created_at','desc')
                     ->get();
+        
         //relevance
         $buyAds = $buyAds->filter(function($buyAd){
             $user_id = session('user_id');

@@ -1,4 +1,4 @@
-
+var viz = false;
 var PopupImage =  {
     data:function(){
         return {
@@ -25,6 +25,41 @@ var PopupImage =  {
 
     }
 };
+
+
+var OwlCarouselLists =  {
+    data:function(){
+        return {
+            imgSrcs:'',
+        };
+    },
+    props:['img','base'],
+    template: '<div class="image-wrapper">' +
+        '<a  :href="base + img">'+
+        '<img :src="base + img">'+
+        '</a>'+
+        '</div>',
+    mounted: function(){
+        $(".owl-carousel").owlCarousel({
+            loop:false,
+            items:1,
+            margin:10,
+            nav:false,
+            dots:true
+        });
+        $(this.$el).parent().parent().parent().magnificPopup({
+            delegate: 'a',
+            type: 'image',
+            gallery: {
+                enabled: true,
+                navigateByImgClick: true,
+                preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+            }
+        });
+
+    }
+};
+
 
 var vm = new Vue({
     el:'#app',
@@ -62,6 +97,24 @@ var vm = new Vue({
         bottom:false,
     },
     methods:{
+           dropdown:function() {
+            $(".profile-list").fadeIn("slow", function () {
+                viz = true;
+            });
+        },
+         dropdownList:function() {
+            $(".icon-header-list").fadeIn("slow", function () {
+                viz = true;
+            });
+        },
+       documentClick(e){
+            if (viz) {
+        $('.profile-list').fadeOut("slow");
+        $('.icon-header-list').fadeOut("slow");
+        viz = false;
+    
+          }
+        },
         init:function(){
             var self = this;
             var searchValueText = searchValue;
@@ -430,6 +483,7 @@ var vm = new Vue({
         },
     },
     created(){
+        document.addEventListener('click', this.documentClick)
         //window.addEventListener('scroll', this.handleScroll);
 //        window.addEventListener('scroll', () => {
 //          this.bottom = this.bottomVisible();
@@ -442,7 +496,9 @@ var vm = new Vue({
         //window.removeEventListener('scroll', this.handleScroll);
     },
     components:{
-        "popup":PopupImage
+        "popup":PopupImage,
+        
+        'image-viewer-list' : OwlCarouselLists,
     },
     mounted(){
       this.init();

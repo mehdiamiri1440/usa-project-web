@@ -37,9 +37,7 @@ function scrull_css_header() {
         }
     })
 }
-function dropdown() {
-    $(".profile-list").toggle("fade");
-}
+
 function formBut(link) {
         $index = ($(link).parents('article').index() + 1);
         $element =  $('article:nth-of-type(' + $index + ') .buy_details');
@@ -53,10 +51,7 @@ function subBut(link){
       var requirementAmount =  $('article:nth-of-type(' + index + ') .buy_details input#requirement-amount');
       var packType =  $('article:nth-of-type(' + index + ') .buy_details input#pack-type');
       var description =  $('article:nth-of-type(' + index + ') .buy_details textarea#description');
-      console.log(pid.val());
-      console.log(type_cat.val());
-      console.log(type_box.val());
-      console.log(description.val());
+    
      
 }
 $(document).ready(function () {

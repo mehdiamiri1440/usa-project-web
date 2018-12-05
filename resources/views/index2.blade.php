@@ -31,6 +31,15 @@
     <link rel="stylesheet" href="{{asset('index/css/style2.css')}}">
     <script src="{{asset('assets/cdn/vue.js')}}"></script>
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-129398000-1');
+    </script>
 
 </head>
 
