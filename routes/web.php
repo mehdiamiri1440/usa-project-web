@@ -182,6 +182,11 @@ Route::post('/get_product_list_by_user_name',[
         'as' => 'get_product_list_by_user_name'
 ]);
 
+Route::post('/get_user_statistics_by_user_name',[
+        'uses' => 'profile_controller@get_user_statistics_by_user_name',
+        'as' => 'get_user_statistics_by_user_name',
+]);
+
 Route::get('/product-view/{product_id}/{city}-{province}-{product_name}-{sub_category_name}-{category_name}',function($product_id){
         return view('dashboard.buyer.product-list');
 });

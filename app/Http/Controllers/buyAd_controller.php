@@ -12,6 +12,7 @@ use App\profile;
 use DB;
 use App\sell_offer;
 use App\buyAd_media;
+use App\Http\Controllers\buyAd_recommender_controller;
 
 class buyAd_controller extends Controller
 {
@@ -638,10 +639,13 @@ class buyAd_controller extends Controller
         $user = myuser::find($seller_id);
         
         $date_convertor_object = new date_convertor();
+        $buyAd_recommender_object = new buyAd_recommender_controller();
         
         if($user->is_seller){
             
             $related_buyAds = $this->get_related_buyAds_list_to_the_user($user);
+            $buyAd_recommender_object->buyAd_list_recommender_for_seller($related_buyAds,$seller_id); //check out the method for more details
+            
             
             $related_buyAds->each(function($buyAd) use($date_convertor_object){
                    $category_array = $this->get_category_and_subcategory_name($buyAd->category_id);
