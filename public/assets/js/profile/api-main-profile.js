@@ -7,15 +7,74 @@ var PopupImage =  {
     },
     props:['img','base'],
     template: '<div class="image-wrapper">' +
-    '<a   :href="base + img">'+
-    '<img :src="base + img">'+
-    '</a>'+
-    '</div>',
+        '<a   :href="base + img">'+
+        '<img :src="base + img">'+
+        '</a>'+
+        '</div>',
     mounted: function(){
         $(this.$el).parent().magnificPopup({
             delegate: 'a',
             type: 'image',
             mainClass: 'mfp-img-mobile',
+            gallery: {
+                enabled: true,
+                navigateByImgClick: true,
+                preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+            }
+        });
+
+    }
+};
+
+
+var PopupImageCertificate =  {
+
+    props:['img','base'],
+    template:
+        '<a   :href="base + img">'+
+        '<img :src="base + img">'+
+        '</a>'
+    ,
+    mounted: function(){
+        console.log($(this.$el));
+        $('.cerificates > div').each(function() { // the containers for all your galleries
+            $(this).magnificPopup({
+                delegate: 'a', // the selector for gallery item
+                type: 'image',
+                gallery: {
+                    enabled:true
+                }
+            });
+        });
+
+
+    }
+};
+
+
+var OwlCarouselLists =  {
+    data:function(){
+        return {
+            imgSrcs:'',
+        };
+    },
+    props:['img','base'],
+    template: '<div class="image-wrapper">' +
+        '<a  :href="base + img">'+
+        '<img :src="base + img">'+
+        '</a>'+
+        '</div>',
+    mounted: function(){
+        $(".owl-carousel").owlCarousel({
+            loop:false,
+            items:1,
+            margin:10,
+            nav:false,
+            dots:true
+        });
+        $(this.$el).parent().parent().parent().magnificPopup({
+            delegate: 'a',
+            type: 'image',
             gallery: {
                 enabled: true,
                 navigateByImgClick: true,
@@ -35,9 +94,9 @@ var OwlCarousel =  {
     props:['img','base'],
     template: '<div class="image-wrapper">' +
         '<a  :href="base + img">'+
-            '<img :src="base + img">'+
+        '<img :src="base + img">'+
         '</a>'+
-    '</div>',
+        '</div>',
     mounted: function(){
         $(".owl-carousel").owlCarousel({
             loop:false,
@@ -46,14 +105,14 @@ var OwlCarousel =  {
             dots:false
         });
         $(this.$el).parent().parent().parent().magnificPopup({
-        delegate: 'a',
-        type: 'image',
+            delegate: 'a',
+            type: 'image',
             gallery: {
                 enabled: true,
                 navigateByImgClick: true,
                 preload: [0,1] // Will preload 0 - before current, and 1 after the current image
             }
-    });
+        });
 
     }
 };
@@ -70,7 +129,7 @@ var vm = new Vue({
             certificates:'',
             relateds:'',
             activity_domain:'',
-            is_buyer:''
+            is_buyer:'',
         },
         profileDescription:true,
         products:'',
@@ -80,11 +139,18 @@ var vm = new Vue({
         submiting:'',
         copyLinkText:'',
         copyLinkClass:'',
+        profileOwnerStatistics:{
+            transaction_count:'',
+            product_count:'',
+            buyAd_count:'',
+        }
     },
-    
+
     methods:{
         init:function(){
-            
+
+            var self = this;
+
             if(this.isDeviceMobile()){
                 this.copyLinkText = ' اشتراک در واتساپ';
                 this.copyLinkClass = 'fa fa-whatsapp fa-2x';
@@ -92,19 +158,29 @@ var vm = new Vue({
             else{
                 this.copyLinkText = 'کپی آدرس';
                 this.copyLinkClass = 'fa fa-clipboard';
-            } 
-            
+            }
+
+            axios.post('/get_user_statistics_by_user_name',{
+                user_name: userName
+            })
+                .then(function(response){
+                    self.profileOwnerStatistics = response.data.statistics;
+                })
+                .catch(function(err){
+                    //
+                });
+
             axios.post('/user/profile_info')
                 .then(response => (this.currentUser = response.data));
             axios.post('/load_profile_by_user_name',{
                 user_name : userName
             })
-            .then(response => (this.profileOwner = response.data))
-            .catch(function(err){
-                if(err.response.status == 404){
-                    window.location.href = '/404'
-                }
-            });
+                .then(response => (this.profileOwner = response.data))
+                .catch(function(err){
+                    if(err.response.status == 404){
+                        window.location.href = '/404'
+                    }
+                });
         },
         showProfileOwnerProducts:function(e){
 
@@ -118,7 +194,6 @@ var vm = new Vue({
             axios.post('/get_product_list_by_user_name',{
                 user_name : userName
             }).then(function(response){
-                console.log('loaded');
                 self.products = response.data.products;
 
                 self.loading = false;
@@ -134,12 +209,12 @@ var vm = new Vue({
             axios.post('/load_profile_by_user_name',{
                 user_name : userName
             })
-            .then(response => (this.profileOwner = response.data))
-            .catch(function(err){
-                if(err.response.status == 404){
-                    window.location.href = '/404'
-                }
-            });
+                .then(response => (this.profileOwner = response.data))
+                .catch(function(err){
+                    if(err.response.status == 404){
+                        window.location.href = '/404'
+                    }
+                });
 
         },
         refreshProduct:function(productId){
@@ -148,19 +223,20 @@ var vm = new Vue({
             axios.post('/refresh_my_product_by_id',{
                 product_id : productId
             })
-            .then(function(response){
-                if(response.data.status == true){
-                    self.popUpMsg = 'محصول شما بروز رسانی شد و در صدر لیست محصولات قرار گرفت.';
-                    $('#myModal').modal('show');
-                }
-                else{
+                .then(function(response){
+                    if(response.data.status == true){
+                        self.popUpMsg = 'محصول شما بروز رسانی شد و در صدر لیست محصولات قرار گرفت.';
+                        $('#myModal').modal('show');
+                    }
+                    else{
+                        self.popUpMsg = 'هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.';
+                        $('#myModal').modal('show');
+                    }
+                })
+                .catch(function(err){
                     self.popUpMsg = 'هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.';
                     $('#myModal').modal('show');
-                }
-            })
-            .catch(function(err){
-                alert('هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.');
-            });
+                });
         },
         copyProfileLinkToClipBoard:function(){
             if(this.isDeviceMobile()){
@@ -169,11 +245,11 @@ var vm = new Vue({
                 linkElement.setAttribute('href','whatsapp://send?text=' + 'https://incobac.com/profile/' + this.profileOwner.user_info.user_name);
                 linkElement.setAttribute('data-action','share/whatsapp/share');
                 document.body.appendChild(linkElement);
-                
+
                 linkElement.click();
-                
+
                 document.body.removeChild(input);
-                
+
             }
             else{
                 var input = document.createElement('input');
@@ -187,31 +263,34 @@ var vm = new Vue({
                     $('#myModal').modal('show');
                 }
             }
-            
+
         },
-        isDeviceMobile:function() { 
-             if( navigator.userAgent.match(/Android/i)
-             || navigator.userAgent.match(/webOS/i)
-             || navigator.userAgent.match(/iPhone/i)
-             || navigator.userAgent.match(/iPad/i)
-             || navigator.userAgent.match(/iPod/i)
-             || navigator.userAgent.match(/BlackBerry/i)
-             || navigator.userAgent.match(/Windows Phone/i)
-             ){
+        isDeviceMobile:function() {
+            if( navigator.userAgent.match(/Android/i)
+                || navigator.userAgent.match(/webOS/i)
+                || navigator.userAgent.match(/iPhone/i)
+                || navigator.userAgent.match(/iPad/i)
+                || navigator.userAgent.match(/iPod/i)
+                || navigator.userAgent.match(/BlackBerry/i)
+                || navigator.userAgent.match(/Windows Phone/i)
+            ){
                 return true;
-              }
-             else {
+            }
+            else {
                 return false;
-              }
+            }
         }
-        
+
     },
     mounted(){
-      this.init();
+        this.init();
+
     },
     components:{
         'image-viewer' : OwlCarousel,
-        "popup":PopupImage
+        'image-viewer-list' : OwlCarouselLists,
+        "popup":PopupImage,
+        "popup-certificate":PopupImageCertificate,
     }
 });
 

@@ -20,21 +20,248 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
     <script src="{{asset('js/app.js')}}"></script>
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
-    
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-      gtag('config', 'UA-129398000-1');
+        gtag('config', 'UA-129398000-1');
     </script>
-    
+
 
     @yield('header_links')
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+
+        /*---------------------------------------
+            Navigation Links section
+        -----------------------------------------*/
+        .custom-navbar {
+            margin-bottom: 0;
+            background-color: #ffffff;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.3);
+        }
+
+        .custom-navbar .navbar-brand {
+            width: 140px;
+
+            text-align: center;
+
+            display: block;
+
+            height: 53px;
+
+            background-size: contain;
+
+            margin: 0 auto;
+
+            float: none;
+        }
+        .navbar-brand {
+            margin: 0 15px;
+            height: 50px;
+            padding: 3px 15px;
+            font-size: 18px;
+            line-height: 20px;
+
+        }
+        .logo-des {
+            color: #373737;
+            float: left;
+            padding: 24px 5px 0;
+        }
+
+        .main-logo {
+            width: 30%;
+            margin: 0 auto;
+        }
+
+        .main-logo img {
+            width: 100%;
+        }
+
+        .custom-navbar .nav li a {
+            color: #000;
+            font-weight: 400;
+            padding: 10px 15px;
+            text-transform: uppercase;
+            line-height: 20px;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .top-nav-collapse .nav li a {
+            color: black;
+            font-weight: 400;
+            text-transform: uppercase;
+            line-height: 20px;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .top-nav-collapse .nav .ads {
+            color: white;
+            font-weight: 400;
+        }
+
+        .top-nav-collapse .nav {
+            padding-top: 16px;
+        }
+
+        .nav.navbar-nav.navbar-left {
+            padding: 16px;
+            text-align: right;
+        }
+
+        .custom-navbar .nav li a:hover {
+            background: transparent;
+            color: #4dc11d;
+        }
+
+        .custom-navbar .navbar-nav > li > a:hover,
+        .custom-navbar .navbar-nav > li > a:focus {
+            background-color: transparent;
+        }
+
+        .custom-navbar .nav li.active > a {
+            background-color: transparent;
+            color: #4dc11d;
+        }
+
+        .navbar-toggle {
+
+            position: relative;
+            float: right;
+            padding: 9px 10px;
+            padding-top: 9px;
+            margin-top: 8px;
+            margin-left: 15px;
+            margin-bottom: 8px;
+            background-color: transparent;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .custom-navbar .navbar-toggle {
+            border: none;
+        }
+
+        .custom-navbar .navbar-toggle {
+            background-color: transparent;
+        }
+
+        .custom-navbar .navbar-toggle .icon-bar {
+            background: #4dc11d;
+            border-color: transparent;
+        }
+
+        .ads {
+            background-color: #46ae1b;
+            border-radius: 50px;
+            text-align: center;
+            color: #fff !important;
+            margin: 0 5px;
+        }
+
+        .ads:hover {
+            background-color: #4dc11d !important;
+            border-radius: 50px;
+            text-align: center;
+        }
+
+        @media (max-width: 1120px) {
+            .logo-des {
+                display: none;
+            }
+
+        }
+
+        @media (max-width: 992px) {
+            .content_service {
+
+                font-size: 15px;
+
+            }
+
+            .content_service {
+                font-size: 14px;
+            }
+
+        }
+
+        @media (max-width: 880px) {
+            .navbar-brand {
+                width: 150px;
+                background-size: 100%;
+            }
+
+            .top-nav-collapse .nav li a {
+                padding: 11px 5px;
+            }
+
+            .custom-navbar .nav li a {
+                padding: 11px 5px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content-item {
+                margin: 63px auto 24px;
+
+            }
+            .content_service {
+                font-size: 14px;
+            }
+
+            .custom-navbar {
+                border-bottom: 0;
+                background: #fff;
+            }
+
+            .custom-navbar.top-nav-collapse {
+                background: #ffffff;
+                box-shadow: 0 2px 8px 0 rgba(50, 50, 50, 0.04);
+            }
+
+        }
+
+        @media ( max-width: 768px) {
+            .content_service {
+                text-align: center;
+                display: inline-block;
+            }
+
+            .ads {
+                background-color: #46ae1b;
+                border-radius: 50px;
+                text-align: center;
+                color: #fff !important;
+                margin: 0 5px;
+            }
+
+            .float_li {
+
+                float: right;
+                padding: 0 7px;
+                width: 50%;
+
+            }
+
+            .custom-navbar {
+                padding: 5px 0;
+                border-bottom: 0;
+                background: #fff;
+            }
+
+            .custom-navbar.top-nav-collapse {
+                background: #ffffff;
+                box-shadow: 0 2px 8px 0 rgba(50, 50, 50, 0.04);
+                padding: 0;
+            }
+
+        }
+
         .loading_images img{
             display: block;
             margin: 0 auto;
@@ -94,8 +321,8 @@
 <body>
 
 <div id="app">
-   
-        <!-- Modal -->
+
+    <!-- Modal -->
     <div class="container">
         <div class="modal fade" id="myModal" tabindex="-1" ref="myModal" role="dialog"
              aria-labelledby="myModalLabel"
@@ -153,8 +380,8 @@
         </div>
     </div>
     <!--end loader-->
-  
-    <header id="header" class="main-header">
+
+    <header id="header" class="hidden-xs  main-header">
         <div class="profile-menu-header" v-if="currentUser.profile">
             <a href="#" onclick="dropdown()">
                 <div class="image-header-profile" v-if="currentUser.profile.profile_photo">
@@ -189,20 +416,81 @@
         </h1>
     </header>
 
-@yield('main_content')
-</div>
-    @yield('script_tags')
-    <script src="{{asset('assets/js/idleTimer.js')}}"></script>
-    <script>
-        $(document).ready(function(){
-            $(document).idleTimer(7200000);
-        });
+    <!-- =========================
+ NAVIGATION LINKS
+============================== -->
 
-        $(document).on("idle.idleTimer", function(){
-         // function you want to fire when the user goes idle
-            window.location.href = '/login'
-        });
-    </script>
+    <div class="hidden-sm hidden-md hidden-lg navbar navbar-fixed-top custom-navbar" role="navigation">
+        <div class="container-fluid">
+            <!-- navbar header -->
+            <div class="navbar-header">
+                @if(session('user_id'))
+                    <div class="user-header-mobile">
+                        <div class="profile-menu-header"><a href="#" onclick="dropdown()">
+                                <div class="image-header-profile">
+                                    @if(session('profile_photo'))
+                                        <img class="image-blur" src="{{url('/storage/')  . '/'. session('profile_photo')}}">
+                                    @else
+                                        <img class="image-blur" src="{{asset('assets/img/user-defult.png')}}">
+                                    @endif
+                                </div>
+                                <i aria-hidden="true" class="fa fa-angle-down"></i>
+                            </a>
+                            <div class="profile-list">
+                                <ul class="list-unstyled">
+                                    <li class="list-item"><a
+                                                href="{{route('profile_basic')}}">پروفایل</a></li>
+                                    <li class="list-item"><a href="/dashboard#/password">تغییر کلمه عبور</a></li>
+                                    <li class="list-item"><a href="{{route('logout')}}">خروج</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+                <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+                </button>
+                <a class="navbar-brand test" href="/">
+                    <img src="{{asset('assets/img/logo_dark.png')}}">
+                </a>
+                <p class="logo-des hidden-xs hidden-sm">
+                    اینکوباک | بازارگاه آنلاین دنیای کشاورزی
+                </p>
+
+            </div>
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    @if(!session('user_id'))
+                        <li><a href="{{route('login_page')}}" class="smoothScroll">ورود/ثبت نام</a></li>
+                    @endif
+                    <li><a href="/" class="smoothScroll">صفحه ی اصلی</a></li>
+                    <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
+                    <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
+                    <li><a href="http://www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
+                    <li><a href="/product-list" class="smoothScroll cta-bot">لیست محصولات</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    @yield('main_content')
+</div>
+@yield('script_tags')
+<script src="{{asset('assets/js/idleTimer.js')}}"></script>
+<script>
+    $(document).ready(function(){
+        $(document).idleTimer(7200000);
+    });
+
+    $(document).on("idle.idleTimer", function(){
+        // function you want to fire when the user goes idle
+        window.location.href = '/login'
+    });
+</script>
 </body>
 
 </html>
