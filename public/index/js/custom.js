@@ -15,9 +15,6 @@ $(window).scroll(function () {
     }
 });
 
-function dropdown() {
-    $(".profile-list").toggle("fade");
-}
 
 /* Magnific Popup
 -----------------------------------------------*/
@@ -50,7 +47,7 @@ $(document).ready(function () {
         $('#intro a, .custom-navbar a').bind('click', function (event) {
             var $anchor = $(this);
             $('html, body').stop().animate({
-                scrollTop: $($anchor.attr('href')).offset().top - 49
+                 scrollTop: $($anchor.attr('href')).offset().top - 49
             }, 1000);
             event.preventDefault();
         });

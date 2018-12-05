@@ -2,7 +2,7 @@
 
 //
 
-
+var viz=false;
 
 var OwlCarousel =  {
     data:function(){
@@ -59,6 +59,24 @@ var vm = new Vue({
             homePageProducts:'',
         },
         methods: {
+            dropdown: function () {
+                $(".profile-list").fadeIn("slow", function () {
+                    viz = true;
+                });
+            },
+            dropdownList: function () {
+                $(".icon-header-list").fadeIn("slow", function () {
+                    viz = true;
+                });
+            },
+            documentClick(e) {
+                if (viz) {
+                    $('.profile-list').fadeOut("slow");
+                    $('.icon-header-list').fadeOut("slow");
+                    viz = false;
+
+                }
+            },
             init: function () {
                 var self = this;
 
@@ -85,6 +103,7 @@ var vm = new Vue({
             this.init();
         },
       created() {
+          document.addEventListener('click', this.documentClick)
             var self = this;
             window.addEventListener('keydown', function (event) {
                 if (event.keyCode === 13) {

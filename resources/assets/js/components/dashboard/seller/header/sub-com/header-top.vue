@@ -4,6 +4,7 @@
         margin-top: 65px;
         background: #eff3f6;
     }
+
     .main-header {
         height: 65px;
         position: fixed;
@@ -13,9 +14,11 @@
         background: #fff;
         z-index: 5;
     }
+
     .little-main-header {
         right: 80px;
     }
+
     .image-header-profile {
         width: 50px;
         height: 50px;
@@ -23,9 +26,11 @@
         border-radius: 50%;
         float: left;
     }
-    .image-header-profile  img{
+
+    .image-header-profile img {
         height: 100%;
     }
+
     .right-menu-header {
 
         padding: 16px;
@@ -40,7 +45,6 @@
         padding: 7px;
         padding-left: 55px;
     }
-
 
     .profile-menu-header i {
         position: absolute;
@@ -100,6 +104,7 @@
         width: 100%;
         display: inline-block;
     }
+
     .font-big {
         font-size: 23px;
         position: relative;
@@ -117,7 +122,7 @@
                 <span class="font-big">اینکوباک  </span> | <span> بازارگاه آنلاین کشاورزی</span>
             </div>
             <div class="profile-menu-header">
-                <a href="#" @click.prevent = "dropdown()">
+                <a href="#" @click.prevent="dropdown()">
                     <div class="image-header-profile" v-if="photoLink ">
                         <img :src="storage + '/' + photoLink">
                     </div>
@@ -129,8 +134,12 @@
                 </a>
                 <div class="profile-list">
                     <ul class="list-unstyled">
-                        <li class="list-item"><router-link :to="{ name : 'profileBasic' }">پروفایل</router-link></li>
-                        <li class="list-item"><router-link :to="{ name : 'password' }">تغییر کلمه عبور</router-link></li>
+                        <li class="list-item">
+                            <router-link :to="{ name : 'profileBasic' }">پروفایل</router-link>
+                        </li>
+                        <li class="list-item">
+                            <router-link :to="{ name : 'password' }">تغییر کلمه عبور</router-link>
+                        </li>
                         <li class="list-item"><a :href="out">خروج</a></li>
                     </ul>
                 </div>
@@ -150,6 +159,7 @@
 <script>
     var viz = false;
     import subMenu from './sub-menu/sub-menu.vue'
+
     export default {
         props: [
             'photoLink',
@@ -159,34 +169,34 @@
             'out',
             'routeHome'
         ],
-        components:{
+        components: {
             subMenu
         },
-        methods:{
-        dropdown:function() {
-            $(".profile-list").fadeIn("slow", function () {
-                viz = true;
-            });
-        },
-         dropdownList:function() {
-            $(".icon-header-list").fadeIn("slow", function () {
-                viz = true;
-            });
-        },
-       documentClick(e){
-            if (viz) {
-        $('.profile-list').fadeOut("slow");
-        $('.icon-header-list').fadeOut("slow");
-        viz = false;
-    
-          }
-        },
-        },
-        
-      created () {
-      document.addEventListener('click', this.documentClick)
-      },
+        methods: {
+            dropdown: function () {
+                $(".profile-list").fadeIn("slow", function () {
+                    viz = true;
+                });
+            },
+            dropdownList: function () {
+                $(".icon-header-list").fadeIn("slow", function () {
+                    viz = true;
+                });
+            },
+            documentClick(e) {
+                if (viz) {
+                    $('.profile-list').fadeOut("slow");
+                    $('.icon-header-list').fadeOut("slow");
+                    viz = false;
 
-    
+                }
+            },
+        },
+
+        created() {
+            document.addEventListener('click', this.documentClick)
+        },
+
+
     }
 </script>

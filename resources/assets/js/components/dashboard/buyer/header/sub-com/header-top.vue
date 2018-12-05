@@ -4,9 +4,11 @@
         margin-top: 65px;
         background: #eff3f6;
     }
+
     #main.little-main {
         margin-right: 80px !important;
     }
+
     .main-header {
         height: 65px;
         position: fixed;
@@ -16,9 +18,11 @@
         background: #fff;
         z-index: 5;
     }
+
     .little-main-header {
         right: 80px;
     }
+
     .image-header-profile {
         width: 50px;
         height: 50px;
@@ -26,13 +30,14 @@
         border-radius: 50%;
         float: left;
     }
-    .image-header-profile  img{
+
+    .image-header-profile img {
         height: 100%;
     }
+
     .profile-menu-header {
         float: left;
     }
-
 
     .right-menu-header, .content-header {
         float: right;
@@ -43,7 +48,6 @@
         padding: 7px;
         padding-left: 55px;
     }
-
 
     .profile-menu-header i {
         position: absolute;
@@ -103,19 +107,23 @@
         width: 100%;
         display: inline-block;
     }
+
     .font-big {
         font-size: 23px;
         position: relative;
         top: 3px;
     }
-    .green-bot{
+
+    .green-bot {
         color: #fafafa !important;
     }
-    .green-bot:hover{
+
+    .green-bot:hover {
         color: #fff !important;
         background: #00d614;
     }
-    i.fa-home{
+
+    i.fa-home {
         position: relative;
         top: 5px;
     }
@@ -132,7 +140,7 @@
                 <span class="font-big">اینکوباک  </span> | <span> بازارگاه آنلاین کشاورزی</span>
             </div>
             <div class="profile-menu-header">
-                <a href="#" @click.prevent = "dropdown()">
+                <a href="#" @click.prevent="dropdown()">
                     <div class="image-header-profile" v-if="photoLink">
                         <img :src="storage + '/' + photoLink">
                     </div>
@@ -144,23 +152,28 @@
                 </a>
                 <div class="profile-list">
                     <ul class="list-unstyled">
-                        <li class="list-item"><router-link :to="{ name : 'profileBasic' }">پروفایل</router-link></li>
-                        <li class="list-item"><router-link :to="{ name : 'password' }">تغییر کلمه عبور</router-link></li>
+                        <li class="list-item">
+                            <router-link :to="{ name : 'profileBasic' }">پروفایل</router-link>
+                        </li>
+                        <li class="list-item">
+                            <router-link :to="{ name : 'password' }">تغییر کلمه عبور</router-link>
+                        </li>
                         <li class="list-item"><a :href="out">خروج</a></li>
                     </ul>
                 </div>
             </div>
             <div class="right-menu-header">
                 <ul class="list-inline">
-              <!--      <li><a href="#" onclick="dropdownList()"><i class="fa fa-bars" aria-hidden="true"></i></a>
-                        <div class="icon-header-list">
-                            <ul class="list-unstyled">
-                                <li class="list-item"><a href="/product-list">لیست محصولات</a></li>
-                            </ul>
-                        </div>
-                    </li>-->
+                    <!--      <li><a href="#" onclick="dropdownList()"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                              <div class="icon-header-list">
+                                  <ul class="list-unstyled">
+                                      <li class="list-item"><a href="/product-list">لیست محصولات</a></li>
+                                  </ul>
+                              </div>
+                          </li>-->
                     <li>
-                        <a class="green-bot" href="/product-list" style="font-size: 17px"> <span class="full">لیست محصولات</span> <span class="min"><i class="fa fa-bars" aria-hidden="true"></i></span> </a>
+                        <a class="green-bot" href="/product-list" style="font-size: 17px"> <span class="full">لیست محصولات</span>
+                            <span class="min"><i class="fa fa-bars" aria-hidden="true"></i></span> </a>
                     </li>
                     <li><a :href="routeHome"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                 </ul>
@@ -173,6 +186,7 @@
 
 <script>
     import subMenu from './sub-menu/sub-menu.vue'
+
     export default {
         props: [
             'photoLink',
@@ -183,32 +197,32 @@
             'out',
             'routeHome'
         ],
-        components:{
+        components: {
             subMenu
-        },methods:{
-        dropdown:function() {
-            $(".profile-list").fadeIn("slow", function () {
-                viz = true;
-            });
+        }, methods: {
+            dropdown: function () {
+                $(".profile-list").fadeIn("slow", function () {
+                    viz = true;
+                });
+            },
+            dropdownList: function () {
+                $(".icon-header-list").fadeIn("slow", function () {
+                    viz = true;
+                });
+            },
+            documentClick(e) {
+                if (viz) {
+                    $('.profile-list').fadeOut("slow");
+                    $('.icon-header-list').fadeOut("slow");
+                    viz = false;
+
+                }
+            },
         },
-         dropdownList:function() {
-            $(".icon-header-list").fadeIn("slow", function () {
-                viz = true;
-            });
+
+        created() {
+            document.addEventListener('click', this.documentClick)
         },
-       documentClick(e){
-            if (viz) {
-        $('.profile-list').fadeOut("slow");
-        $('.icon-header-list').fadeOut("slow");
-        viz = false;
-    
-          }
-        },
-        },
-        
-      created () {
-      document.addEventListener('click', this.documentClick)
-      },
 
     }
 </script>
