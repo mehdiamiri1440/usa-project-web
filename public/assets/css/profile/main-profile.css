@@ -454,7 +454,7 @@ th, td {
     float: right;
     padding-top: 23px;
     font-size: 12px;
-        font-weight: bold;
+    font-weight: bold;
 }
 .zone_content_title{
     font-size: 12px;
@@ -602,7 +602,7 @@ th, td {
 }
 
 @media screen and (max-width: 768px) {
-  
+
 
     .profile-menu-header {
 
@@ -612,9 +612,9 @@ th, td {
 
     }
     .profile-menu-header i {
-    top: 29px !important;
-    font-size: 20px;
-    color: #333;
+        top: 29px !important;
+        font-size: 20px;
+        color: #333;
 
     }
     .main-article-content {
@@ -633,7 +633,7 @@ th, td {
 
     }
     .cerificates ,.ceteficate-image,.contents ,.main-image,.article-contents{
-    padding: 0;
+        padding: 0;
     }
 
     #main .contents {
@@ -643,11 +643,11 @@ th, td {
 
     .title-content {
 
-    margin: 7px 0 20px;
-    padding: 15px;
-    border-bottom: 1px solid #ededed;
+        margin: 7px 0 20px;
+        padding: 15px;
+        border-bottom: 1px solid #ededed;
 
-}
+    }
 
     .description {
         text-align: right;

@@ -24,11 +24,11 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-      gtag('config', 'UA-129398000-1');
+        gtag('config', 'UA-129398000-1');
     </script>
 
 
@@ -322,7 +322,7 @@
 
 <div id="app">
 
-        <!-- Modal -->
+    <!-- Modal -->
     <div class="container">
         <div class="modal fade" id="myModal" tabindex="-1" ref="myModal" role="dialog"
              aria-labelledby="myModalLabel"
@@ -453,7 +453,7 @@
                     <span class="icon icon-bar"></span>
                 </button>
                 <a class="navbar-brand test" href="/">
-                     <img src="{{asset('assets/img/logo_dark.png')}}">
+                    <img src="{{asset('assets/img/logo_dark.png')}}">
                 </a>
                 <p class="logo-des hidden-xs hidden-sm">
                     اینکوباک | بازارگاه آنلاین دنیای کشاورزی
@@ -479,18 +479,18 @@
 
     @yield('main_content')
 </div>
-    @yield('script_tags')
-    <script src="{{asset('assets/js/idleTimer.js')}}"></script>
-    <script>
-        $(document).ready(function(){
-            $(document).idleTimer(7200000);
-        });
+@yield('script_tags')
+<script src="{{asset('assets/js/idleTimer.js')}}"></script>
+<script>
+    $(document).ready(function(){
+        $(document).idleTimer(7200000);
+    });
 
-        $(document).on("idle.idleTimer", function(){
-         // function you want to fire when the user goes idle
-            window.location.href = '/login'
-        });
-    </script>
+    $(document).on("idle.idleTimer", function(){
+        // function you want to fire when the user goes idle
+        window.location.href = '/login'
+    });
+</script>
 </body>
 
 </html>
