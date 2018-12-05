@@ -16,6 +16,10 @@ class buyAd_recommender_controller extends Controller
         $this->apply_registered_product_filter_to_buyAd_list($buyAd_list,$registered_product_sub_category_array);
         
         $buyAd_list = $buyAd_list->sortByDesc('score');
+        
+        foreach($buyAd_list as $item){
+            //echo $item->score ."\n";
+        }
     }
     
     protected function get_seller_registered_products_sub_category_array($seller_user_id)
