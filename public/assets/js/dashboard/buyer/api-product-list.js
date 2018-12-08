@@ -34,19 +34,15 @@ var OwlCarouselLists =  {
         };
     },
     props:['img','base'],
-    template: '<div class="image-wrapper">' +
-        '<a  :href="base + img">'+
-        '<img :src="base + img">'+
-        '</a>'+
-        '</div>',
+    template: '  <div class="item"> <img :src="base + img"> </div>',
     mounted: function(){
-        $(".owl-carousel").owlCarousel({
-            loop:false,
-            items:1,
-            margin:10,
-            nav:false,
-            dots:true
-        });
+//        $(".owl-carousel").owlCarousel({
+//            loop:false,
+//            items:1,
+//            margin:10,
+//            nav:false,
+//            dots:true
+//        });
         $(this.$el).parent().parent().parent().magnificPopup({
             delegate: 'a',
             type: 'image',
@@ -97,23 +93,22 @@ var vm = new Vue({
         bottom:false,
     },
     methods:{
-           dropdown:function() {
+       dropdown:function() {
             $(".profile-list").fadeIn("slow", function () {
                 viz = true;
             });
         },
-         dropdownList:function() {
+        dropdownList:function() {
             $(".icon-header-list").fadeIn("slow", function () {
                 viz = true;
             });
         },
        documentClick(e){
             if (viz) {
-        $('.profile-list').fadeOut("slow");
-        $('.icon-header-list').fadeOut("slow");
-        viz = false;
-    
-          }
+                $('.profile-list').fadeOut("slow");
+                $('.icon-header-list').fadeOut("slow");
+                viz = false;
+            }
         },
         init:function(){
             var self = this;
@@ -123,14 +118,43 @@ var vm = new Vue({
                 this.searchText = searchValueText;
             }
             else{
+                self.loading = true;
                 axios.post('/user/get_product_list',{
                     //from_record_number:0,
                     //to_record_number:this.productCountInPage,
                 }).then(function(response){
                     self.products = response.data.products;
                     self.productCountInPage = self.products.length;
+                    self.loading = false;
+                    $(".carousel").swipe({
+
+                      swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+
+                        if (direction == 'left') $(this).carousel('next');
+                        if (direction == 'right') $(this).carousel('prev');
+
+                      },
+                      allowPageScroll:"vertical"
+
+                    });
                 });
             }
+            
+            if(this.products.length > 0){
+                console.log('testtt');
+//                $(".carousel").swipe({
+//
+//                  swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+//
+//                    if (direction == 'left') $(this).carousel('next');
+//                    if (direction == 'right') $(this).carousel('prev');
+//
+//                  },
+//                  allowPageScroll:"vertical"
+//
+//                });
+            }
+            
             
             axios.post('/user/profile_info')
                 .then(response => (this.currentUser = response.data));
@@ -459,7 +483,8 @@ var vm = new Vue({
             axios.post('/user/get_product_list')
                 .then(function(response){
                     self.products = '';
-
+                    self.loading = true;
+                
                      var text = self.searchText.split(' ');
                      self.products = response.data.products.filter(function(product){
                         return text.every(function(el){
@@ -473,6 +498,7 @@ var vm = new Vue({
                             else return false;
                         });
                 });
+                self.loading = false;
             });
         },
         
@@ -481,6 +507,24 @@ var vm = new Vue({
             this.feed()
           }
         },
+        loading:function(){
+            console.log($(".carousel").length);
+            if(this.loading == false){
+                  console.log($(".carousel").length);
+                
+                  $(".carousel").swipe({
+
+                      swipe: function(event, direction, distance, duration, fingerCount, fingerData){
+
+                        if (direction == 'left') $(this).carousel('next');
+                        if (direction == 'right') $(this).carousel('prev');
+
+                      },
+                      allowPageScroll:"vertical"
+
+                });
+            }
+        }
     },
     created(){
         document.addEventListener('click', this.documentClick)
@@ -502,6 +546,6 @@ var vm = new Vue({
     },
     mounted(){
       this.init();
-
+        
     },
 });

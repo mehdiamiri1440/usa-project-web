@@ -83,7 +83,7 @@
          <section class="main-content col-xs-12" v-if="products.length > 0">
         <div class="row">
 
-            <article class="main-content-item" v-for="product in products">
+            <article class="main-content-item" v-for="(product,productIndex) in products">
 
                 <div class="user-contents col-xs-12  col-sm-3">
                     <div class="user-image" v-if="product.profile_info.profile_photo">
@@ -100,22 +100,59 @@
                         <a class="green_bot">
                             درخواست خرید
                         </a>
-
                     </div>
                 </div>
                 <div class="article-contents col-xs-12  col-sm-9 ">
                     <div class="row">
                                <div class="main-image col-xs-12 col-sm-5">
-
-                                    <div class="owl-carousel" v-if="product.photos.length > 0">
+<!--                                    <div class="owl-carousel" v-if="product.photos.length > 0">-->
+<!--
                                         <image-viewer-list
                                                 v-for="photo in product.photos"
                                                 base="{{url('storage')}}/"
                                                 :img="photo.file_path">
                                         </image-viewer-list>
-                                    </div>
+-->
+                                        
+<!--                                    </div>-->
+                                   
+
+                                          <div  id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                            <!-- Indicators -->
+                                            <ol class="carousel-indicators">
+                                              <li v-for="(photo,index) in product.photos"
+                                                  :class="[ index === 0 ? 'active' : '']"  :data-slide-to="index" data-target="#carousel-example-generic"></li>
+                                            </ol>
+
+                                            <!-- Wrapper for slides -->
+                                            <div class="carousel-inner" role="listbox">
+<!--
+                                             <image-viewer-list
+                                                v-for="photo in product.photos"
+                                                base="{{url('storage')}}/"
+                                                :img="photo.file_path">
+                                             </image-viewer-list>
+-->
+                                              <div v-for="(photo,index) in product.photos"  :class="[ index === 0 ? 'active' : '' , 'item']"  >
+                                                <img :src="'/storage/' + photo.file_path">
+                                              </div>
+                                            
+                                            </div>
+
+                                            <!-- Controls -->
+<!--
+                                            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                                              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                              <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                                              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                              <span class="sr-only">Next</span>
+                                            </a>
+-->
+                                          </div>
+
                                 </div>
-                        
                         <div class="main-article-content col-xs-12 col-sm-7">
                             <h2 class="main-article-title">
                                 <a href="#">@{{product.main.category_name + ' | ' + product.main.sub_category_name}}</a>
