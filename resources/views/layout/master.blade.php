@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <title>@yield('title') </title>
     <meta name="csrf-token" content="{{csrf_token()}}">
@@ -9,6 +10,12 @@
     </script>
     <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
+    <script src="{{asset('assets/js/main.js')}}"></script>
+    
+<!--    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.19/jquery.touchSwipe.min.js"></script>
+    <script src="{{asset('assets/js/jquery.touchSwipe.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.easing.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/fontiran.css')}}">
