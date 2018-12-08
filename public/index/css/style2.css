@@ -338,7 +338,7 @@ footer {
     }
 
     .custom-navbar {
-        padding: 5px 0;
+        padding: 0;
         border-bottom: 0;
         background: #fff;
     }
@@ -1505,7 +1505,7 @@ img.image-blur:hover {
 
     .user-header-mobile .profile-menu-header i {
         top: 9px;
-        left: -60px;
+        left: -50px;
     }
 
     h1 {

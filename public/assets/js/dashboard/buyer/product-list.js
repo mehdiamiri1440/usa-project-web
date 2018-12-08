@@ -39,23 +39,21 @@ function scrull_css_header() {
 }
 
 function formBut(link) {
-        $index = ($(link).parents('article').index() + 1);
-        $element =  $('article:nth-of-type(' + $index + ') .buy_details');
-        $element.slideToggle("125", "swing");
-        $('.buy_details').not($element).slideUp();        
+    $index = ($(link).parents('article').index() + 1);
+    $element = $('article:nth-of-type(' + $index + ') .buy_details');
+    $element.slideToggle("125", "swing");
+    $('.buy_details').not($element).slideUp();
 }
 
-function subBut(link){
-      var index = ($(link).parents('article').index() + 1);
-      var productId =  $('article:nth-of-type(' + index + ') .buy_details input#product-id');
-      var requirementAmount =  $('article:nth-of-type(' + index + ') .buy_details input#requirement-amount');
-      var packType =  $('article:nth-of-type(' + index + ') .buy_details input#pack-type');
-      var description =  $('article:nth-of-type(' + index + ') .buy_details textarea#description');
-    
-     
+function subBut(link) {
+    var index = ($(link).parents('article').index() + 1);
+    var productId = $('article:nth-of-type(' + index + ') .buy_details input#product-id');
+    var requirementAmount = $('article:nth-of-type(' + index + ') .buy_details input#requirement-amount');
+    var packType = $('article:nth-of-type(' + index + ') .buy_details input#pack-type');
+    var description = $('article:nth-of-type(' + index + ') .buy_details textarea#description');
 }
+
 $(document).ready(function () {
     scrull_css_header();
 
- 
 });

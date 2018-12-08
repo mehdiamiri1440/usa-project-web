@@ -369,7 +369,31 @@ th, td {
     text-align: center;
     padding: 0;
 }
+.sub-header a:hover {
+    color: #313942;
+}
 
+.sub-header a:hover::after {
+    content: " ";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #28a745;
+    height: 3px;
+    width: 100%;
+}
+.sub-header .active a {
+    color: #313942;
+}
+.sub-header .active a::after {
+    content: " ";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #28a745;
+    height: 3px;
+    width: 100%;
+}
 .sub-header > div {
     border-top: 1px solid #ededed;
     padding: 0;

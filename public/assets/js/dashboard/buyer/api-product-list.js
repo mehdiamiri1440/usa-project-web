@@ -1,3 +1,4 @@
+
 var viz = false;
 var PopupImage =  {
     data:function(){
@@ -26,7 +27,6 @@ var PopupImage =  {
     }
 };
 
-
 var OwlCarouselLists =  {
     data:function(){
         return {
@@ -47,7 +47,7 @@ var OwlCarouselLists =  {
             nav:false,
             dots:true
         });
-        $(this.$el).parent().parent().parent().magnificPopup({
+        $(this.$el).parent().magnificPopup({
             delegate: 'a',
             type: 'image',
             gallery: {
@@ -97,41 +97,44 @@ var vm = new Vue({
         bottom:false,
     },
     methods:{
-           dropdown:function() {
+       dropdown:function() {
             $(".profile-list").fadeIn("slow", function () {
                 viz = true;
             });
         },
-         dropdownList:function() {
+        dropdownList:function() {
             $(".icon-header-list").fadeIn("slow", function () {
                 viz = true;
             });
         },
        documentClick(e){
             if (viz) {
-        $('.profile-list').fadeOut("slow");
-        $('.icon-header-list').fadeOut("slow");
-        viz = false;
-    
-          }
+                $('.profile-list').fadeOut("slow");
+                $('.icon-header-list').fadeOut("slow");
+                viz = false;
+            }
         },
         init:function(){
             var self = this;
             var searchValueText = searchValue;
-            
+
             if(searchValueText){
                 this.searchText = searchValueText;
             }
             else{
+                self.loading = true;
                 axios.post('/user/get_product_list',{
                     //from_record_number:0,
                     //to_record_number:this.productCountInPage,
                 }).then(function(response){
                     self.products = response.data.products;
                     self.productCountInPage = self.products.length;
+                    self.loading = false;
+
                 });
             }
-            
+
+
             axios.post('/user/profile_info')
                 .then(response => (this.currentUser = response.data));
             axios.post('/get_category_list')
@@ -257,14 +260,14 @@ var vm = new Vue({
             });
 
             this.cityId = cityId;
-            this.loading = false;   
+            this.loading = false;
 //            this.continueToLoadProducts = false;
 //            self.productCountInPage = self.products.length;
         },
         feed(){
 //              var offset = $(window).scrollTop() + $(window).height();
 //              var height = $(document).height();
-            
+
               var self = this;
               console.log(this.bottom);
 
@@ -296,7 +299,7 @@ var vm = new Vue({
                 var element =  $('article:nth-of-type(' + index + ') .buy_details');
                 element.slideToggle("125", "swing");
                 $('.buy_details').not(element).slideUp();
-                
+
                 this.scrollToTheRequestRegisterBox(element);
             }
             else{
@@ -458,7 +461,9 @@ var vm = new Vue({
 
             axios.post('/user/get_product_list')
                 .then(function(response){
-                    self.products = '';
+                    self.products = [];
+                    //self.products = '';
+                    self.loading = true;
 
                      var text = self.searchText.split(' ');
                      self.products = response.data.products.filter(function(product){
@@ -473,9 +478,10 @@ var vm = new Vue({
                             else return false;
                         });
                 });
+               self.loading = false;
             });
         },
-        
+
         bottom(bottom){
           if (bottom) {
             this.feed()
@@ -489,15 +495,15 @@ var vm = new Vue({
 //          this.bottom = this.bottomVisible();
 //            this.feed();
 //        });
-        
-        
+
+
     },
     destroyed(){
         //window.removeEventListener('scroll', this.handleScroll);
     },
     components:{
         "popup":PopupImage,
-        
+
         'image-viewer-list' : OwlCarouselLists,
     },
     mounted(){

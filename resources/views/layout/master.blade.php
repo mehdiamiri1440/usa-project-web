@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <title>@yield('title') </title>
     <meta name="csrf-token" content="{{csrf_token()}}">
@@ -9,6 +10,9 @@
     </script>
     <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
+    <script src="{{asset('assets/js/main.js')}}"></script>
+
+    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.easing.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/fontiran.css')}}">
@@ -220,7 +224,7 @@
     padding-left: 55px;
     float: left;
            }
-            
+
 .profile-menu-header i {
     position: absolute;
     color:#333;
@@ -541,7 +545,7 @@
 @yield('script_tags')
 <script src="{{asset('assets/js/idleTimer.js')}}"></script>
 <script>
-    
+
 
     $(document).ready(function(){
         $(document).idleTimer(7200000);
