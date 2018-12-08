@@ -19,13 +19,11 @@ import registerComponent from './components/register/register.vue';
 
 
 
-
  new Vue({
      el:'#app',
     components:{
         loginComponent,
         registerComponent,
-       
     },
     router,
 });

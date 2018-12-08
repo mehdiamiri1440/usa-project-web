@@ -1,3 +1,4 @@
+
 var viz = false;
 var PopupImage =  {
     data:function(){
@@ -26,7 +27,6 @@ var PopupImage =  {
     }
 };
 
-
 var OwlCarouselLists =  {
     data:function(){
         return {
@@ -34,16 +34,20 @@ var OwlCarouselLists =  {
         };
     },
     props:['img','base'],
-    template: '  <div class="item"> <img :src="base + img"> </div>',
+    template: '<div class="image-wrapper">' +
+        '<a  :href="base + img">'+
+        '<img :src="base + img">'+
+        '</a>'+
+        '</div>',
     mounted: function(){
-//        $(".owl-carousel").owlCarousel({
-//            loop:false,
-//            items:1,
-//            margin:10,
-//            nav:false,
-//            dots:true
-//        });
-        $(this.$el).parent().parent().parent().magnificPopup({
+        $(".owl-carousel").owlCarousel({
+            loop:false,
+            items:1,
+            margin:10,
+            nav:false,
+            dots:true
+        });
+        $(this.$el).parent().magnificPopup({
             delegate: 'a',
             type: 'image',
             gallery: {
@@ -113,7 +117,7 @@ var vm = new Vue({
         init:function(){
             var self = this;
             var searchValueText = searchValue;
-            
+
             if(searchValueText){
                 this.searchText = searchValueText;
             }
@@ -126,36 +130,11 @@ var vm = new Vue({
                     self.products = response.data.products;
                     self.productCountInPage = self.products.length;
                     self.loading = false;
-                    $(".carousel").swipe({
 
-                      swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
-
-                        if (direction == 'left') $(this).carousel('next');
-                        if (direction == 'right') $(this).carousel('prev');
-
-                      },
-                      allowPageScroll:"vertical"
-
-                    });
                 });
             }
-            
-            if(this.products.length > 0){
-                console.log('testtt');
-//                $(".carousel").swipe({
-//
-//                  swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
-//
-//                    if (direction == 'left') $(this).carousel('next');
-//                    if (direction == 'right') $(this).carousel('prev');
-//
-//                  },
-//                  allowPageScroll:"vertical"
-//
-//                });
-            }
-            
-            
+
+
             axios.post('/user/profile_info')
                 .then(response => (this.currentUser = response.data));
             axios.post('/get_category_list')
@@ -281,14 +260,14 @@ var vm = new Vue({
             });
 
             this.cityId = cityId;
-            this.loading = false;   
+            this.loading = false;
 //            this.continueToLoadProducts = false;
 //            self.productCountInPage = self.products.length;
         },
         feed(){
 //              var offset = $(window).scrollTop() + $(window).height();
 //              var height = $(document).height();
-            
+
               var self = this;
               console.log(this.bottom);
 
@@ -320,7 +299,7 @@ var vm = new Vue({
                 var element =  $('article:nth-of-type(' + index + ') .buy_details');
                 element.slideToggle("125", "swing");
                 $('.buy_details').not(element).slideUp();
-                
+
                 this.scrollToTheRequestRegisterBox(element);
             }
             else{
@@ -482,9 +461,10 @@ var vm = new Vue({
 
             axios.post('/user/get_product_list')
                 .then(function(response){
-                    self.products = '';
+                    self.products = [];
+                    //self.products = '';
                     self.loading = true;
-                
+
                      var text = self.searchText.split(' ');
                      self.products = response.data.products.filter(function(product){
                         return text.every(function(el){
@@ -498,33 +478,15 @@ var vm = new Vue({
                             else return false;
                         });
                 });
-                self.loading = false;
+               self.loading = false;
             });
         },
-        
+
         bottom(bottom){
           if (bottom) {
             this.feed()
           }
         },
-        loading:function(){
-            console.log($(".carousel").length);
-            if(this.loading == false){
-                  console.log($(".carousel").length);
-                
-                  $(".carousel").swipe({
-
-                      swipe: function(event, direction, distance, duration, fingerCount, fingerData){
-
-                        if (direction == 'left') $(this).carousel('next');
-                        if (direction == 'right') $(this).carousel('prev');
-
-                      },
-                      allowPageScroll:"vertical"
-
-                });
-            }
-        }
     },
     created(){
         document.addEventListener('click', this.documentClick)
@@ -533,19 +495,19 @@ var vm = new Vue({
 //          this.bottom = this.bottomVisible();
 //            this.feed();
 //        });
-        
-        
+
+
     },
     destroyed(){
         //window.removeEventListener('scroll', this.handleScroll);
     },
     components:{
         "popup":PopupImage,
-        
+
         'image-viewer-list' : OwlCarouselLists,
     },
     mounted(){
       this.init();
-        
+
     },
 });
