@@ -87,7 +87,8 @@
             <section class="main-content col-xs-12" v-if="products.length > 0">
                 <div class="row">
 
-                    <article class="main-content-item" v-for="(product,productIndex) in products" :key="product.main.id">
+                    <article class="main-content-item" v-for="(product,productIndex) in products"
+                             :key="product.main.id">
 
                         <div class="user-contents col-xs-12  col-sm-3">
                             <div class="user-image" v-if="product.profile_info.profile_photo">
@@ -110,13 +111,13 @@
                         <div class="article-contents col-xs-12  col-sm-9 ">
                             <div class="row">
                                 <div class="main-image col-xs-12 col-sm-5">
-                                         <div class="owl-carousel" v-if="product.photos.length > 0">
-                                               <image-viewer-list
-                                                       v-for="photo in product.photos"
-                                                       base="{{url('storage')}}/"
-                                                       :img="photo.file_path">
-                                               </image-viewer-list>
-                                          </div>
+                                    <div class="owl-carousel" v-if="product.photos.length > 0">
+                                        <image-viewer-list
+                                                v-for="photo in product.photos"
+                                                base="{{url('storage')}}/"
+                                                :img="photo.file_path">
+                                        </image-viewer-list>
+                                    </div>
                                 </div>
                                 <div class="main-article-content col-xs-12 col-sm-7">
                                     <h2 class="main-article-title">
@@ -181,7 +182,18 @@
                             <img src="{{asset('assets/img/gif/loading.gif')}}" style="width:200px;height:200px">
                         </div>
                     </article>
-
+                    <div class="load-more-button">
+                        <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+                            <a href="#" class="btn hidden-xs">
+                                مشاهده محصولات بیشتر
+                                <span class="fa fa-plus-circle"></span>
+                            </a>
+                            <a href="#" class="btn hidden-sm hidden-md hidden-lg ">
+                                 بیشتر
+                                <span class="fa fa-plus-circle"></span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </section>
             <section class="main-content  col-xs-12 " v-else-if="products.length == 0 && searchActive == true">

@@ -69,57 +69,25 @@ th, td {
 .owl-carousel img{
     border-radius: 3px;
 }
-.profile-menu-header{
-    float: left;
-    padding: 13px 0;
-    padding-left: 55px;
-}
-.profile-menu-header a {
-    position: relative;
-    color: #fff;
-}
 
-.profile-menu-header i {
-    position: absolute;
-
-    left: -75px;
-
-    top: 18px;
-
-    font-size: 20px;
-}
-
-.image-header-profile {
-    width: 50px;
-    height: 50px;
-    overflow: hidden;
-    border-radius: 50%;
-    float: left;
-}
 .image-header-profile img{
     height: 100%;
 
 }
 
-.name-header-profile {
-    position: relative;
-    top: 18px;
-    left: 10px;
-}
-
 .header-nav {
     direction: rtl;
     text-align: right;
-    padding: 28px 30px;
+    padding: 20px 30px;
     font-size: 17px;
 }
 
 .header-nav a {
-    color: #d0d0d0;
+    color: #777;
 }
 
 .header-nav a:hover {
-    color: #fff;
+    color: #333;
 }
 
 .profile-list {
@@ -152,12 +120,13 @@ th, td {
     color: #fff;
     background-size: cover;
     overflow: hidden;
-    padding-bottom: 30px;
+    padding-top: 64px;
 }
 
 .title-page {
     text-align: center;
-    margin: 0 auto 20px;
+
+    margin: 65px auto;
 }
 
 .sub-header {
@@ -260,7 +229,9 @@ th, td {
     width: 80%;
     padding: 5px 15px;
 }
-
+.main-content{
+    padding-bottom: 40px;
+}
 .main-content > h4{
     margin: 30px auto;
 }
@@ -388,10 +359,10 @@ th, td {
 }
 
 .logo{
-    padding: 10px ;
     text-align: right;
     float: right;
     width: 190px;
+    padding-right: 15px;
 }
 .logo img{
     width: 150px;
@@ -417,11 +388,32 @@ li.active a::after {
 .main-image{
     float: right;
 }
+
+.load-more-button a{
+    direction: rtl;
+    color: #666;
+    font-size: 18px;
+    width: 100%;
+    box-shadow: 0 0 5px #bfbfbf;
+    background: #f0f3f6 !important;
+    overflow: hidden;
+    border-radius: 5px;
+    position: relative;
+    transition: 300ms;
+    border: none;
+    top: 0;
+}
+.load-more-button a:hover{
+    top: -6px;
+    color: #333333;
+    box-shadow: 0 0 5px #a5a5a5;
+    transition: 300ms;
+    position: relative;
+}
 @media screen and (max-width: 992px) {
 
     .title-page {
         text-align: center;
-        margin: 0 auto 15px;
     }
     .right-sidebar {
         display: none;
