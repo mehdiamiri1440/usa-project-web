@@ -251,7 +251,7 @@
                 </div>
                 <div class="contents" v-else>
                     <div v-if="products.length > 0">
-                        <article class="article-contents   col-xs-12" v-for="product in products">
+                        <article class="article-contents   col-xs-12" v-for="product in products" :key="product.main.id">
                             <div class="image_user_wrapper hidden-sm hidden-md hidden-lg col-xs-12">
                                 <div class="user-image-content">
                                     <div v-if="profileOwner.profile.profile_photo">
