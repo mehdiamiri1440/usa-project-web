@@ -35,9 +35,7 @@
 .custom-navbar {
     margin-bottom: 0;
     background-color: #ffffff;
-    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
-    height: 75px;
-}
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);}
 
 .header-wrapper {
     border-bottom: 0;
@@ -182,7 +180,7 @@
     padding: 3px 15px !important;
 }
 .profile-menu-header {
-    padding: 12px;
+    padding: 6px 12px 0;
     float: left;
 }
 .profile-menu-header > a {
@@ -224,7 +222,7 @@
         background-size: 100%;
     }
     .custom-navbar .nav li a {
-        padding: 13px 5px;
+        padding: 9px 5px;
     }
 }
 
