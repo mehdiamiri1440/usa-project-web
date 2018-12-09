@@ -461,8 +461,7 @@ var vm = new Vue({
 
             axios.post('/user/get_product_list')
                 .then(function(response){
-                    self.products = [];
-                    //self.products = '';
+                    self.products = '';
                     self.loading = true;
 
                      var text = self.searchText.split(' ');
