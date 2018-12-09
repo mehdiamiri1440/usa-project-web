@@ -47,7 +47,7 @@ var OwlCarouselLists =  {
             nav:false,
             dots:true
         });
-        $(this.$el).parent().magnificPopup({
+        $(this.$el).parent().parent().parent().magnificPopup({
             delegate: 'a',
             type: 'image',
             gallery: {
