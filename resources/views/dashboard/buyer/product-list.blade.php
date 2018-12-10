@@ -182,13 +182,13 @@
                             <img src="{{asset('assets/img/gif/loading.gif')}}" style="width:200px;height:200px">
                         </div>
                     </article>
-                    <div class="load-more-button">
+                    <div class="load-more-button" v-if="searchText == '' && continueToLoadProducts == true ">
                         <div class="col-xs-12 col-sm-4 col-sm-offset-4">
-                            <a href="#" class="btn hidden-xs">
+                            <a href="" class="btn hidden-xs" @click.prevent="feed">
                                 مشاهده محصولات بیشتر
                                 <span class="fa fa-plus-circle"></span>
                             </a>
-                            <a href="#" class="btn hidden-sm hidden-md hidden-lg ">
+                            <a href="" class="btn hidden-sm hidden-md hidden-lg" @click.prevent="feed">
                                  بیشتر
                                 <span class="fa fa-plus-circle"></span>
                             </a>

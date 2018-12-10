@@ -102,7 +102,7 @@ var vm = new Vue({
                 viz = true;
             });
         },
-        dropdownList:function() {
+       dropdownList:function() {
             $(".icon-header-list").fadeIn("slow", function () {
                 viz = true;
             });
@@ -114,7 +114,7 @@ var vm = new Vue({
                 viz = false;
             }
         },
-        init:function(){
+       init:function(){
             var self = this;
             var searchValueText = searchValue;
 
@@ -124,8 +124,8 @@ var vm = new Vue({
             else{
                 self.loading = true;
                 axios.post('/user/get_product_list',{
-                    //from_record_number:0,
-                    //to_record_number:this.productCountInPage,
+                    from_record_number:0,
+                    to_record_number:this.productCountInPage,
                 }).then(function(response){
                     self.products = response.data.products;
                     self.productCountInPage = self.products.length;
@@ -268,25 +268,23 @@ var vm = new Vue({
 //              var offset = $(window).scrollTop() + $(window).height();
 //              var height = $(document).height();
 
-              var self = this;
-              console.log(this.bottom);
+          var self = this;
 
-//              if(offset  > height - 3){ //3 pixels to buttom
-              if(this.searchText == '' && this.provinceId == '' && this.categoryId == '' && this.continueToLoadProducts && this.bottom){
-                  this.productCountInPage += this.productCountInEachLoad ;
+          if(this.searchText == '' && this.provinceId == '' && this.categoryId == '' && this.continueToLoadProducts){
+              this.productCountInPage += this.productCountInEachLoad ;
 
-                    axios.post('/user/get_product_list',{
-                        from_record_number:0,
-                        to_record_number:this.productCountInPage,
-                    }).then(function(response){
-                        self.products = response.data.products;
+                axios.post('/user/get_product_list',{
+                    from_record_number:0,
+                    to_record_number:this.productCountInPage,
+                }).then(function(response){
+                    self.products = response.data.products;
 
-                        if(self.products.length + 1 < self.productCountInPage){
-                            self.continueToLoadProducts = false;
-                        }
-                    });
-                }
-//        }
+                    if(self.products.length + 1 < self.productCountInPage){
+                        self.continueToLoadProducts = false;
+                    }
+                });
+            }
+
         },
         openRequestRegisterBox:function(e){
             if(this.currentUser.profile){
