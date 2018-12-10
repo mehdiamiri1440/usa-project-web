@@ -215,6 +215,9 @@
                 </div>
                 <br/>
             </section>
+            <section class="loading_images  col-xs-12" v-else-if="loadMoreActive == true">
+                <img src="{{asset('assets/img/gif/loading.gif')}}" style="width:200px;height:200px">
+            </section>
             <section class="loading_images  col-xs-12" v-else>
                 <img src="{{asset('assets/img/gif/loading.gif')}}" style="width:200px;height:200px">
             </section>

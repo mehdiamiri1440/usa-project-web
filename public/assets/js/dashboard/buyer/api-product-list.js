@@ -95,6 +95,7 @@ var vm = new Vue({
         submiting:false,
         loading:false,
         bottom:false,
+        loadMoreActive:false,
     },
     methods:{
        dropdown:function() {
@@ -269,8 +270,11 @@ var vm = new Vue({
 //              var height = $(document).height();
 
           var self = this;
+          
 
           if(this.searchText == '' && this.provinceId == '' && this.categoryId == '' && this.continueToLoadProducts){
+              this.loadMoreActive = true;
+              
               this.productCountInPage += this.productCountInEachLoad ;
 
                 axios.post('/user/get_product_list',{
@@ -282,6 +286,8 @@ var vm = new Vue({
                     if(self.products.length + 1 < self.productCountInPage){
                         self.continueToLoadProducts = false;
                     }
+                    
+                    this.loadMoreActive = true;
                 });
             }
 
