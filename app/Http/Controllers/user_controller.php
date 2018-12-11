@@ -32,12 +32,16 @@ class user_controller extends Controller
 
 		if($user)
 		{
+            $user_confirmed_profile_record_status = $this->does_user_have_confirmed_profile_record($user->id);
+            
 			$this->set_user_session($user);
+            
 			 return response()->json([
 			 	'status' => TRUE,
                  'is_buyer' => $user->is_buyer,
                  'is_seller' => $user->is_seller,
-			 	'msg' => 'Login successfull'
+                 'confirmed_profile_record' => $user_confirmed_profile_record_status, 
+			 	'msg' => 'Login successfull',
 			 ],200);
 		}
 		 else return response()->json([
@@ -88,7 +92,20 @@ class user_controller extends Controller
             'status' => true,
         ],200);
     }
-
+    
+    protected function does_user_have_confirmed_profile_record($user_id)
+    {
+        $profile_record = profile::where('myuser_id',$user_id)
+                                        ->where('confirmed',true)
+                                        ->select('id')
+                                        ->get()
+                                        ->last();
+        
+        if($profile_record) 
+            return true;
+        else 
+            return false;
+    }
     public function initial_contract_confirmation_by_user()
     {
         $user_id = session('user_id');
