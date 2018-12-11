@@ -10,7 +10,7 @@ class buyAd_recommender_controller extends Controller
     protected $registered_product_coef = 2;
     protected $registered_sell_offer_coef = 2;
     protected $sold_coef = 1;
-    protected $previous_transaction_with_buyer_coef = 3 ;
+    protected $previous_transaction_with_buyer_coef = 1 ;
     
     public function buyAd_list_recommender_for_seller(&$buyAd_list,$seller_user_id)
     {
