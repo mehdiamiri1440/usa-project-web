@@ -114,6 +114,8 @@ class buyAd_recommender_controller extends Controller
             $flag = false;
             foreach($buyers_user_id_array as $item){
                 if($item->buyer_id == $buyAd->myuser_id){
+                    unset($buyAd->myuser_id);
+
                     $flag = true;
                 }
             }
