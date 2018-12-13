@@ -43,7 +43,7 @@
         <section class="main-content container">
             <div class="main-content-item" v-if="profileOwner.user_info">
                 <div class="header-content col-xs-12">
-                    <div class="image_user_wrapper col-xs-6 col-sm-4">
+                    <div class="image_user_wrapper col-xs-4">
                         <div class="user-image">
                             <div v-if="profileOwner.profile.profile_photo">
                                 <img v-bind:src=" '{{url('storage')}}/' + profileOwner.profile.profile_photo">
@@ -53,7 +53,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="info_user_wrapper_mobile  hidden-sm hidden-md hidden-lg col-xs-6 col-sm-4">
+                    <div class="info_user_wrapper_mobile  hidden-sm hidden-md hidden-lg col-xs-8 col-sm-4">
                         <div class="row" v-if="profileOwnerStatistics">
                             <div class="col-xs-6 text-center">
                                 <div class="info-num">
@@ -74,7 +74,9 @@
                                 درخواست ها
                             </div>
                             <div class="col-xs-12">
-                                <a href="#" class="green_bot" @click="copyProfileLinkToClipBoard"><i
+                                <a href="#" class="green_bot edit" @click="copyProfileLinkToClipBoard"><i
+                                            class="fa fa-pencil"></i> ویرایش پروفایل </a>
+                                <a href="#" class="green_bot " @click="copyProfileLinkToClipBoard"><i
                                             class="fa fa-whatsapp"></i> اشتراک در واتس آپ </a>
                             </div>
                         </div>
@@ -84,6 +86,7 @@
                             <div class="title_content col-xs-12">
                                 <div class="back_page col-xs-12 col-sm-4">
                                     <a href="javascript:history.back()" class="green_bot">بازگشت به صفحه قبل</a>
+
                                 </div>
 
                                 <h1 class="content_title col-xs-12 col-sm-8">@{{profileOwner.user_info.first_name + ' '
@@ -93,9 +96,11 @@
                             <div class="title_content col-xs-12">
 
                                 <div class="back_page col-xs-12 col-sm-4">
+                                    <a href="#" class="green_bot edit" @click="copyProfileLinkToClipBoard"><i
+                                                class="fa fa-pencil"></i> ویرایش پروفایل </a>
                                     <button class="btn btn-copy" @click="copyProfileLinkToClipBoard"
-                                            :value="copyLinkText"> @{{copyLinkText}} <i :class="copyLinkClass"
-                                                                                        aria-hidden="true"></i></button>
+                                            :value="copyLinkText"> <i :class="copyLinkClass"
+                                                                                        aria-hidden="true"></i>  @{{copyLinkText}}</button>
                                 </div>
 
                                 <div class="content_user_info col-xs-12 col-sm-8">
@@ -119,8 +124,10 @@
 
                                 <div class="back_page col-xs-12 col-sm-4">
                                     <button class="btn btn-copy" @click="copyProfileLinkToClipBoard"
-                                            :value="copyLinkText"> @{{copyLinkText}} <i :class="copyLinkClass"
-                                                                                        aria-hidden="true"></i></button>
+                                            :value="copyLinkText"> <i :class="copyLinkClass"
+                                                                                        aria-hidden="true"></i> @{{copyLinkText}} </button>
+                                    <a href="#" class="green_bot edit" @click="copyProfileLinkToClipBoard"><i
+                                                class="fa fa-pencil"></i> ویرایش پروفایل </a>
                                 </div>
                                 <h1 class="content_title col-xs-12 col-sm-8">@{{profileOwner.user_info.first_name + ' '
                                     + profileOwner.user_info.last_name}}</h1>
