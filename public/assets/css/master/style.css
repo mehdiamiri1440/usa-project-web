@@ -156,14 +156,27 @@
     border-radius: 50px;
     text-align: center;
 }
-
+.article-contents{
+    padding-bottom: 20px;
+}
+.image-wrapper a{
+    position: relative;
+    display: block;
+    height: 100%;
+}
+.image-wrapper img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
 .owl-dot {
 
-    width: 10px;
-    height: 10px;
+    width: 9px !important;
+    height: 9px !important;
     background: #3c9544b3 !important;
-    margin: 0 4px;
-    border-radius: 50px;
+    margin: 0 3px !important;
+    border-radius: 50px !important;
 
 }
 .profile-menu-header i {
@@ -330,7 +343,7 @@
         float: none;
     }
     .custom-navbar .nav li a {
-        padding: 11px 5px;
+        padding: 11px 30px;
     }
     .custom-navbar .navbar-nav li a {
         line-height: 25px;

@@ -554,7 +554,7 @@ th, td {
 }
 
 .image-wrapper {
-    height: 215px;
+    height: 300px;
     overflow: hidden;
 }
 
@@ -718,9 +718,7 @@ th, td {
         padding: 20px 0;
     }
 
-    .main-content-item > div {
-        padding:20px 0;
-    }
+
 }
 
 @media screen and (max-width: 345px) {

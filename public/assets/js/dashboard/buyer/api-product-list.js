@@ -56,8 +56,7 @@ var OwlCarouselLists =  {
                 preload: [0,1] // Will preload 0 - before current, and 1 after the current image
             }
         });
-
-    }
+    },
 };
 
 
@@ -130,7 +129,6 @@ var vm = new Vue({
                     self.products = response.data.products;
                     self.productCountInPage = self.products.length;
                     self.loading = false;
-
                 });
             }
 

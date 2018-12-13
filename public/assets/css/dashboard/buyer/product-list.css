@@ -282,15 +282,17 @@ th, td {
 .image-article-content img{
   height: 100%;
 }
-.image-wrapper a:hover img {
-    transform: scale(1.03);
-    transition: 300ms;
-}
-
 .image-wrapper img {
     transition: 300ms;
 }
+.btn-content{
+    display: inline-block;
+    margin: 0 auto;
+}
 
+.btn-content img,.btn-content span{
+   float: right;
+}
 
 .user-contents {
     border-right: 2px solid #f0f3f6;
@@ -381,12 +383,13 @@ li.active a::after {
 }
 .image-wrapper {
 
-    height: 215px;
+    height: 300px;
     overflow: hidden;
 
 }
 .main-image{
     float: right;
+    margin: 0 5px;
 }
 
 .load-more-button a{
@@ -409,6 +412,15 @@ li.active a::after {
     box-shadow: 0 0 5px #a5a5a5;
     transition: 300ms;
     position: relative;
+}
+.btn-loader{
+    height: 38px;
+
+    overflow: hidden;
+}
+.btn-loader img{
+    width: 56px;
+    margin-top: -15px;
 }
 @media screen and (max-width: 992px) {
 

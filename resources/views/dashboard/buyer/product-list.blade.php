@@ -184,14 +184,23 @@
                     </article>
                     <div class="load-more-button">
                         <div class="col-xs-12 col-sm-4 col-sm-offset-4">
-                            <a href="#" class="btn hidden-xs">
-                                مشاهده محصولات بیشتر
-                                <span class="fa fa-plus-circle"></span>
+                            <a href="#" class="btn btn-loader hidden-xs">
+                               <div class="btn-content">
+<span>                                   مشاهده محصولات بیشتر
+</span>
+                                   {{--<span class="fa fa-plus-circle"></span>--}}
+                                   <img  src="{{asset('assets/img/gif/loading.gif')}}" >
+                               </div>
                             </a>
-                            <a href="#" class="btn hidden-sm hidden-md hidden-lg ">
-                                 بیشتر
-                                <span class="fa fa-plus-circle"></span>
+                            <a href="#" class="btn btn-loader hidden-sm hidden-md hidden-lg ">
+                                <div class="btn-content">
+<span>                                    بیشتر
+</span>
+                                    {{--<span class="fa fa-plus-circle"></span>--}}
+                                    <img  src="{{asset('assets/img/gif/loading.gif')}}" >
+                                </div>
                             </a>
+
                         </div>
                     </div>
                 </div>
