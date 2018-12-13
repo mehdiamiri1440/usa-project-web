@@ -183,7 +183,7 @@
                         </div>
                     </article>
                     <div class="load-more-button" v-if="searchText == '' && continueToLoadProducts == true ">
-                        <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+                        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
                             <a href="#" class="btn btn-loader hidden-xs">
                                <div class="btn-content">
 <span>                                   مشاهده محصولات بیشتر

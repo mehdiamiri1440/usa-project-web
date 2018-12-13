@@ -8,7 +8,13 @@
         float: right;
     }
 
+  ol, ul {
+        list-style: inherit;
+    }
 
+  .description-text ul {
+        padding: 0 15px;
+    }
 
     /*start main content style */
     .image-content-post {
@@ -497,10 +503,10 @@
             <div id="step1" v-if="currentStep == 1">
                 <nav class="main-content-nav col-xs-12">
                     <ul class="list-inline">
-                        <li class="list-item"><a href="#">نظر سنجی</a></li>
-                        <li class="list-item "><a href="#"> تسویه حساب </a></li>
-                        <li class="list-item "><a href="#"> پرداخت ودیعه</a></li>
-                        <li class="list-item active"><a  href="#">تایید مفاد قرارداد </a></li>
+                        <li class="list-item">نظر سنجی</li>
+                        <li class="list-item "> تسویه حساب </li>
+                        <li class="list-item "> پرداخت ودیعه</li>
+                        <li class="list-item active">تایید مفاد قرارداد </li>
                     </ul>
                 </nav>
                 <div class="contents col-xs-12" v-if="msg == ''">
@@ -691,10 +697,10 @@
             <div id="step2" v-if="currentStep == 2">
                 <nav class="main-content-nav col-xs-12">
                     <ul class="list-inline">
-                        <li class="list-item"><a href="#">نظر سنجی</a></li>
-                        <li class="list-item "><a href="#"> تسویه حساب </a></li>
-                        <li class="list-item active"><a  href="#"> پرداخت ودیعه</a></li>
-                        <li class="list-item "><a href="#">تایید مفاد قرارداد </a></li>
+                        <li class="list-item">نظر سنجی</li>
+                        <li class="list-item "> تسویه حساب </li>
+                        <li class="list-item active"> پرداخت ودیعه</li>
+                        <li class="list-item ">تایید مفاد قرارداد </li>
                     </ul>
                 </nav>
                 <div class="contents col-xs-12" >
@@ -748,10 +754,16 @@
                                 </table>
 
                             </div>
-                            <p class="description-text col-xs-12">
+                            <div class="description-text col-xs-12">
+                                <ul>
+                                <li>
                                 مبلغ پیش پرداخت 20 درصد از حجم کل تراکنش بوده و پس از پرداخت این مبلغ، فرایند آماده سازی بار
-                                توسط تامین کننده و بازرسی و نظارت آغاز خواهد شد.
-                            </p>
+                                توسط تامین کننده و بازرسی و نظارت آغاز خواهد شد.</li>
+                                <li class="text-danger">
+                                    تراکنش های مالی شما کاملا محرمانه است و اطلاعات آن نزد اینکوباک محفوظ خواهد بود.
+                                </li>
+                                </ul>
+                            </div>
                         </div>
                         <div class="buttons">
                             <div class="main_buttons col-xs-12">
@@ -772,10 +784,10 @@
             <div id="step3" v-if="currentStep == 3">
                 <nav class="main-content-nav col-xs-12">
                     <ul class="list-inline">
-                        <li class="list-item"><a href="#">نظر سنجی</a></li>
-                        <li class="list-item active" ><a  href="#"> تسویه حساب </a></li>
-                        <li class="list-item "><a href="#"> پرداخت ودیعه</a></li>
-                        <li class="list-item "><a href="#">تایید مفاد قرارداد </a></li>
+                        <li class="list-item">نظر سنجی</li>
+                        <li class="list-item active" > تسویه حساب </li>
+                        <li class="list-item "> پرداخت ودیعه</li>
+                        <li class="list-item ">تایید مفاد قرارداد </li>
                     </ul>
                 </nav>
                 <div class="contents col-xs-12">
@@ -837,11 +849,16 @@
                                 </table>
 
                             </div>
-                            <p class="description-text col-xs-12">
+                              <div class="description-text col-xs-12">
+                                <ul>
+                                <li>
                                 مبلغ پیش پرداخت 20 درصد از حجم کل تراکنش بوده و پس از پرداخت این مبلغ، فرایند آماده سازی بار
-                                توسط
-                                تامین کننده و بازرسی و نظارت آغاز خواهد شد.
-                            </p>
+                                توسط تامین کننده و بازرسی و نظارت آغاز خواهد شد.</li>
+                                <li class="text-danger">
+                                    تراکنش های مالی شما کاملا محرمانه است و اطلاعات آن نزد اینکوباک محفوظ خواهد بود.
+                                </li>
+                                </ul>
+                            </div>
                         </div>
                         <div class="buttons">
                             <div class="main_buttons col-xs-12 ">
@@ -859,10 +876,10 @@
             <div id="step4" v-if="currentStep == 4">
                 <nav class="main-content-nav col-xs-12">
                     <ul class="list-inline">
-                        <li class="list-item active"><a href="#" >نظر سنجی</a></li>
-                        <li class="list-item "><a href="#" > تسویه حساب </a></li>
-                        <li class="list-item "><a href="#" > پرداخت ودیعه</a></li>
-                        <li class="list-item "><a href="#" >تایید مفاد قرارداد </a></li>
+                        <li class="list-item active">نظر سنجی</li>
+                        <li class="list-item "> تسویه حساب </li>
+                        <li class="list-item "> پرداخت ودیعه</li>
+                        <li class="list-item ">تایید مفاد قرارداد </li>
                     </ul>
                 </nav>
                 <div class="contents col-xs-12">
