@@ -184,20 +184,21 @@
                     </article>
                     <div class="load-more-button" v-if="searchText == '' && continueToLoadProducts == true ">
                         <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-                            <a href="#" class="btn btn-loader hidden-xs">
+                            <a href="#" class="btn btn-loader hidden-xs" @click.prevent="feed">
                                <div class="btn-content">
 <span>                                   مشاهده محصولات بیشتر
 </span>
-                                   {{--<span class="fa fa-plus-circle"></span>--}}
-                                   <img  src="{{asset('assets/img/gif/loading.gif')}}" >
+                                   <span class="fa fa-plus-circle"></span>
+                                   <img  v-show="loadMoreActive" src="{{asset('assets/img/gif/loading.gif')}}" >
                                </div>
                             </a>
-                            <a href="#" class="btn btn-loader hidden-sm hidden-md hidden-lg ">
+                            <a href="#" class="btn btn-loader hidden-sm hidden-md hidden-lg" @click.prevent="feed">
                                 <div class="btn-content">
-<span>                                    بیشتر
-</span>
-                                    {{--<span class="fa fa-plus-circle"></span>--}}
-                                    <img  src="{{asset('assets/img/gif/loading.gif')}}" >
+                                    <span>
+                                        بیشتر
+                                    </span>
+                                    <span class="fa fa-plus-circle"></span>
+                                    <img  v-show="loadMoreActive" src="{{asset('assets/img/gif/loading.gif')}}" >
                                 </div>
                             </a>
 

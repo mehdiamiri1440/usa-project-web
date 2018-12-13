@@ -74,8 +74,13 @@
                                 درخواست ها
                             </div>
                             <div class="col-xs-12">
-                                <a href="#" class="green_bot edit" @click="copyProfileLinkToClipBoard"><i
-                                            class="fa fa-pencil"></i> ویرایش پروفایل </a>
+                                <div v-if="currentUser.user_info">
+                                    <a href="/dashboard" class="green_bot edit" v-if="currentUser.user_info.id == profileOwner.user_info.id">
+                                    <i class="fa fa-pencil"></i> 
+                                    ویرایش پروفایل 
+                                </a>
+                                </div>
+                                
                                 <a href="#" class="green_bot " @click="copyProfileLinkToClipBoard"><i
                                             class="fa fa-whatsapp"></i> اشتراک در واتس آپ </a>
                             </div>
@@ -96,8 +101,11 @@
                             <div class="title_content col-xs-12">
 
                                 <div class="back_page col-xs-12 col-sm-4">
-                                    <a href="#" class="green_bot edit" @click="copyProfileLinkToClipBoard"><i
-                                                class="fa fa-pencil"></i> ویرایش پروفایل </a>
+                                        <a href="/dashboard" class="green_bot edit" v-if="currentUser.user_info && currentUser.user_info.id == profileOwner.user_info.id">
+                                        <i class="fa fa-pencil"></i>
+                                        ویرایش پروفایل 
+                                    </a>
+                                    
                                     <button class="btn btn-copy" @click="copyProfileLinkToClipBoard"
                                             :value="copyLinkText"> <i :class="copyLinkClass"
                                                                                         aria-hidden="true"></i>  @{{copyLinkText}}</button>
