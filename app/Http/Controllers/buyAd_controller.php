@@ -73,6 +73,7 @@ class buyAd_controller extends Controller
         'category_id',
         'requirement_amount',
         'confirmed',
+        'myuser_id',
     ];
     
     protected $my_sell_offer_required_fields = [
@@ -577,7 +578,10 @@ class buyAd_controller extends Controller
             
             $buyAd['register_date'] = $date_convertor_object->get_persian_date_with_month_name($buyAd->created_at);
             
-            $sell_offers = $this->get_buyAd_sell_offers($buyAd->id,$this->sell_offer_required_fields_for_buy_ad_list);
+            $sell_offers = $this->get_buyAd_sell_offers($buyAd->id,$this->sell_offer_required_fields_for_buy_ad_list,[
+                'is_pending' => true,
+                'confirmed'  => true,
+            ]);
             
             $buyAd['sell_offer_count'] = $sell_offers->count();
             
@@ -619,11 +623,15 @@ class buyAd_controller extends Controller
         ];
     }
     
-    protected function get_buyAd_sell_offers($buyAd_id,$fields)
+    protected function get_buyAd_sell_offers($buyAd_id,$fields,$conditions)
     {
-        $sell_offers = sell_offer::where('buy_ad_id',$buyAd_id)
-            ->where('is_pending',true)
-            ->where('confirmed',true)
+        $query = sell_offer::where('buy_ad_id',$buyAd_id) ;
+        
+        foreach($conditions as $column => $value){
+            $query = $query->where($column,$value);
+        }
+        
+        $sell_offers = $query
             ->orderBy('created_at','desc')
             ->select($fields)
             ->get();
@@ -697,12 +705,15 @@ class buyAd_controller extends Controller
             $relevence = ($user_record->category_id == $category_record->parent_id) ? true : false;
             $user_already_offered_for_buyAd = false;
             
-            $buyAd_sell_offers = $this->get_buyAd_sell_offers($buyAd->id,$this->my_sell_offer_required_fields);
+            $buyAd_sell_offers = $this->get_buyAd_sell_offers($buyAd->id,$this->my_sell_offer_required_fields,[
+                'confirmed' => true,
+            ]);
             
             $buyAd_sell_offers->each(function($sell_offer) use(&$user_already_offered_for_buyAd,$user_id,$buyAd){
                 
                if($sell_offer->myuser_id == $user_id && $sell_offer->buy_ad_id == $buyAd->id){
                     $user_already_offered_for_buyAd = true;
+
                     return false; //break the 'each' loop
                 } 
             });

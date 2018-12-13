@@ -158,19 +158,23 @@
                 })
                 .then(function (response) {
                     if (response.data.status == true) {
-                         window.location.href = '/dashboard/';
-                       /* if (response.data.is_buyer == true){
-                            console.log('buyer');
-                            self.$router.push({ name: 'profileBasic'});
-                            console.log(self.$router.push({ name: 'profileBasic'}))
-                        }else if(response.data.is_seller == true){
-                            console.log('seller')
-                        }else{
-
-                        }*/
+                         if (response.data.confirmed_profile_record == true) {
+                             if(response.data.is_buyer) {
+                                 window.location.href = '/dashboard/#/register-request' ;
+                             }
+                             else if(response.data.is_seller){
+                                 window.location.href = '/dashboard/#/buyAd-requests' ;
+                             }
+                             else{
+                                 alert('نوع کاربری شما مشخص نشده است لطفا با پشتیبانی اینکوباک تماس بگیرید');
+                             }
+                         }
+                         else{
+                             window.location.href = '/dashboard'; // Edit Profile Page
+                         }
+                      
                     }
                     else {
-
                         self.showMsg = true;
                         self.errors = [];
                         self.step1.msg = response.data.msg;

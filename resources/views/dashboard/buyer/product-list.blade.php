@@ -182,7 +182,7 @@
                             <img src="{{asset('assets/img/gif/loading.gif')}}" style="width:200px;height:200px">
                         </div>
                     </article>
-                    <div class="load-more-button">
+                    <div class="load-more-button" v-if="searchText == '' && continueToLoadProducts == true ">
                         <div class="col-xs-12 col-sm-4 col-sm-offset-4">
                             <a href="#" class="btn btn-loader hidden-xs">
                                <div class="btn-content">
@@ -223,6 +223,9 @@
                     <a class="green_bot col-xs-4" @click="registerRequestInSearchNotFoundCase()">درخواست خرید</a>
                 </div>
                 <br/>
+            </section>
+            <section class="loading_images  col-xs-12" v-else-if="loadMoreActive == true">
+                <img src="{{asset('assets/img/gif/loading.gif')}}" style="width:200px;height:200px">
             </section>
             <section class="loading_images  col-xs-12" v-else>
                 <img src="{{asset('assets/img/gif/loading.gif')}}" style="width:200px;height:200px">
