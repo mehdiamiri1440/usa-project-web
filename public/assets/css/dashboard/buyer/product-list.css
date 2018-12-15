@@ -292,6 +292,7 @@ th, td {
 
 .btn-content img,.btn-content span{
    float: right;
+     margin: 0 5px;
 }
 
 .user-contents {
@@ -389,7 +390,7 @@ li.active a::after {
 }
 .main-image{
     float: right;
-    margin: 0 5px;
+   
 }
 
 .load-more-button a{

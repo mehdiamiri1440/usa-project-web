@@ -285,7 +285,7 @@ var vm = new Vue({
                         self.continueToLoadProducts = false;
                     }
                     
-                    this.loadMoreActive = true;
+                    self.loadMoreActive = false;
                 });
             }
 

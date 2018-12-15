@@ -496,9 +496,9 @@
             <div id="step1" v-if="currentStep == 1">
                 <nav class="main-content-nav col-xs-12">
                     <ul class="list-inline">
-                        <li class="list-item "><a href="#"> تسویه حساب </a></li>
-                        <li class="list-item "><a href="#">بارگیری محصول</a></li>
-                        <li class="list-item active"><a  href="#">تایید مفاد قرارداد </a></li>
+                        <li class="list-item " تسویه حساب </li>
+                        <li class="list-item "بارگیری محصول</li>
+                        <li class="list-item active">تایید مفاد قرارداد </li>
                     </ul>
                 </nav>
                 <div v-if="msg == ''">
@@ -692,9 +692,9 @@
             <div id="step2" v-if="currentStep == 2">
                 <nav class="main-content-nav col-xs-12">
                     <ul class="list-inline">
-                        <li class="list-item "><a href="#"> تسویه حساب </a></li>
-                        <li class="list-item active"><a href="#">بارگیری محصول</a></li>
-                        <li class="list-item"><a  href="#">تایید مفاد قرارداد </a></li>
+                        <li class="list-item "> تسویه حساب </li>
+                        <li class="list-item active">بارگیری محصول</li>
+                        <li class="list-item">تایید مفاد قرارداد </li>
                     </ul>
                 </nav>
 
@@ -726,9 +726,9 @@
             <div id="step3" v-if="currentStep == 3">
                 <nav class="main-content-nav col-xs-12">
                     <ul class="list-inline">
-                        <li class="list-item active"><a href="#"> تسویه حساب </a></li>
-                        <li class="list-item "><a href="#">بارگیری محصول</a></li>
-                        <li class="list-item"><a  href="#">تایید مفاد قرارداد </a></li>
+                        <li class="list-item active"> تسویه حساب </li>
+                        <li class="list-item ">بارگیری محصول</li>
+                        <li class="list-item">تایید مفاد قرارداد </li>
                     </ul>
                 </nav>
                 <div class="text-right alert-message">
