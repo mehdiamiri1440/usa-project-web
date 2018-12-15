@@ -348,7 +348,7 @@ TESTIMONIAL SECTION
                         <img src="{{asset('index/images/farmer.png')}}" class="img-responsive"
                              alt="feature"></figure>
                     <h3><span>50</span>
-                        تامین کنندگان تایید شده
+                        تامین کننده تایید شده
                     </h3>
                 </div>
             </div>
@@ -359,7 +359,7 @@ TESTIMONIAL SECTION
                              alt="feature"></figure>
                     <h3>
                         <span>10</span>
-                        پروژه های موفق انجام شده
+                        پروژه موفق انجام شده
                     </h3>
                 </div>
             </div>
