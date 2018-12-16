@@ -1,7 +1,7 @@
 
 <style>
     .main-content {
-        padding: 90px 35px;
+        padding: 90px 15px;
     }
     .list-title, .needs,.list-time {
         float: right;
@@ -38,6 +38,15 @@
         .list-title, .needs,.list-time {
            padding: 15px;
         }
+    }
+    @media screen and (max-width: 767px) {
+      .main-content {
+        padding: 90px 0;
+    }
+    .detail-success {
+    max-width: 300px;
+    margin: 0 auto;
+}
     }
 
 
