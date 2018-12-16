@@ -208,6 +208,11 @@
     position: relative;
     top: -13px;
 }
+.user-header-mobile a {
+    float: left;
+    width: 100%;
+}
+
 @media (max-width: 1128px) {
     .logo-des {
         display: none;
@@ -350,7 +355,6 @@
     }
     .user-header-mobile {
         display: block;
-        width: 7%;
         float: left;
         margin-left: 50px;
     }
@@ -359,8 +363,8 @@
         float: left;
     }
     .user-header-mobile .profile-menu-header i {
-        top: 19px;
-        left: -76px;
+        top: 14px;
+        left: -10px;
     }
 }
 
@@ -378,21 +382,16 @@
     .profile-menu-header {
 
         padding: 3px;
-        padding-left: 3px;
         padding-left: 35px;
         float: left;
 
     }
     .user-header-mobile {
         display: block;
-        width: 7%;
         float: left;
         margin-left: 30px;
     }
-    .user-header-mobile .profile-menu-header i {
-        top: 17px;
-        left: -71px;
-    }
+
 }
 
 .loading_images img {
