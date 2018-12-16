@@ -366,7 +366,7 @@ class payment_controller extends Controller
     }
     
     protected function message2($result)
-        {
+    {
             switch ($result) 
             {
                 case '-20':
