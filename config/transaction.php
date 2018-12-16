@@ -70,10 +70,7 @@ return [
                         //
                     ],
                     'fields' => [
-                        'sell_offers.loading_dead_line',
-                        'sell_offers.admin_notes',
-                        'sell_offers.myuser_id as seller_user_id',
-                        'sell_offers.buy_ad_id',
+                        //
                     ],
                     'conditions' => [
                         //
@@ -100,7 +97,7 @@ return [
                 'seller' => 1,
             ],
             'short_status' => [
-                'buyer' => 'آغاز شده',
+                'buyer' => 'در انتظار تایید فروشنده',
                 'seller' => 'آغاز شده',
             ],
         ],
@@ -114,6 +111,8 @@ return [
                     'fields' => [
                         'sell_offers.loading_dead_line',
                         'sell_offers.admin_notes',
+                        'sell_offers.myuser_id as seller_user_id',
+                        'sell_offers.buy_ad_id',
                     ],
                     'conditions' => [
                         //
@@ -134,16 +133,16 @@ return [
                 ],                   
             ],
             'state' => [
-                'buyer' => 1,
+                'buyer' => 2,
                 'seller' => 2,
             ],
             'short_status' => [
                 'buyer' => 'در انتظار تایید قرارداد',
-                'seller' => 'در انتظار پیش پرداخت خریدار',
+                'seller' => 'در انتظار تایید خریدار',
             ],
         ],
-        '0000000000000101' => [
-            'description' => 'buyer agreed the contract content issued by ADMIN, seller has not agreed yet',
+        '0000000000001011' => [
+            'description' => 'seller agreed the contract and admin issued prepayment factor',
             'data' => [
                 'buyer' => [
                     'tables' => [
@@ -152,6 +151,8 @@ return [
                     'fields' => [
                         'sell_offers.loading_dead_line',
                         'sell_offers.admin_notes',
+                        'sell_offers.myuser_id as seller_user_id',
+                        'sell_offers.buy_ad_id',
                     ],
                     'conditions' => [
                         //
@@ -162,9 +163,9 @@ return [
                         //
                     ],
                     'fields' => [
-                        'sell_offers.loading_dead_line',
-                        'sell_offers.admin_notes',
-                        'sell_offers.commission_persentage'
+//                        'sell_offers.loading_dead_line',
+//                        'sell_offers.admin_notes',
+//                        'sell_offers.commission_persentage'
                     ],
                     'conditions' => [
                         //
@@ -173,11 +174,11 @@ return [
             ],
             'state' => [
                 'buyer' => 2,
-                'seller' => 1,
+                'seller' => 2,
             ],
             'short_status' => [
-                'buyer' => 'در انتظار صدور فاکتور',
-                'seller' => 'در انتظار تایید قرارداد',
+                'buyer' => 'در انتظار تایید قرارداد',
+                'seller' => 'در انتظار پیش پرداخت',
             ],
         ],
         '0000000000000111' => [
@@ -483,7 +484,7 @@ return [
             'name' => 'prepayment factor issuance for buyer',
             'actor' => 'admin',
             'bit_index' => 3,
-            'required_bit_index_set' =>[0,1,2],
+            'required_bit_index_set' =>[0,1],
             'data' => [
                 'expiration_date',
                 'factor' => [
@@ -596,19 +597,19 @@ return [
                 '1' => [
                     'number' => 1,
                     'step' => 1,
-                    'description' => 'Tranacton has been initiated or just seller agreed the contact',
-                    'msg' => '',
+                    'description' => 'Tranacton has been initiated',
+                    'msg' => 'در انتظار تایید قرارداد توسط فروشنده',
                 ],
                 [
                     'number' => 2,
                     'step' => 1,
-                    'description' => 'buyer agreed the contract content issued by ADMIN, seller has not agreed yet',
-                    'msg' => 'در انتظار صدور فاکتور پیش پرداخت'
+                    'description' => 'seller agreed the contract',
+                    'msg' => ''
                 ],
                 [
                     'number' => 3,
                     'step' => 1,
-                    'description' => 'seller and buyer both agreed the cotract content issued by ADMIN',
+                    'description' => 'buyer agreed the contract content issued by ADMIN',
                     'msg' => 'در انتظار صدور فاکتور پیش پرداخت'
                 ],
                 [
