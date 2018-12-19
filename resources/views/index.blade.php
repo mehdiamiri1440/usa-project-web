@@ -508,13 +508,13 @@ FAQ SECTION
                 <p>0713-646-0996 / 09178928245
                 </p>
             </div>
-            @if(Request::segment(0) == 'incobac.ir')
+            @if(Request::url() == 'incobac.ir' || Request::url() == 'www.incobac.ir' || Request::url() == 'https:://incobac.ir' || Request::url() == 'https:://www.incobac.ir')
                 <div class="col-xs-12 col-sm-6 col-md-4 enamad">
                     <img src="https://trustseal.enamad.ir/logo.aspx?id=100286&amp;p=yBEoWWMXqCeIkdjL" alt=""
                          onclick="window.open(&quot;https://trustseal.enamad.ir/Verify.aspx?id=100286&amp;p=yBEoWWMXqCeIkdjL&quot;, &quot;Popup&quot;,&quot;toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30&quot;)"
                          style="cursor:pointer" id="yBEoWWMXqCeIkdjL">
                 </div>
-            @elif(Request::segment(0) == 'incobac.com')
+            @elif(Request::url() == 'incobac.com' || Request::url() == 'www.incobac.com' || Request::url() == 'https:://incobac.com' || Request::url() == 'https:://www.incobac.com')
                 <div class="col-xs-12 col-sm-6 col-md-4 enamad">
                     <img src="https://trustseal.enamad.ir/logo.aspx?id=110135&amp;p=e4AvUmJtRgJZ9BOl" alt="" onclick="window.open(&quot;https://trustseal.enamad.ir/Verify.aspx?id=110135&amp;p=e4AvUmJtRgJZ9BOl&quot;, &quot;Popup&quot;,&quot;toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30&quot;)" style="cursor:pointer" id="e4AvUmJtRgJZ9BOl">
                 </div>
