@@ -50,7 +50,7 @@ class user_controller extends Controller
 		 ],200);
 	}
 
-	protected function set_user_session($user_info)
+	protected function  set_user_session($user_info)
 	{
         $user_profile_record = profile::where('myuser_id',$user_info->id)
                 ->select('profile_photo')
