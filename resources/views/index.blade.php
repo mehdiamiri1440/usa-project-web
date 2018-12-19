@@ -507,8 +507,6 @@ FAQ SECTION
                 </p>
                 <p>0713-646-0996 / 09178928245
                 </p>
-                <p>{{Request::fullurl() .' '. Request::url()}}</p>
-                <img src="https://trustseal.enamad.ir/logo.aspx?id=100286&amp;p=JkEP1tFdjs5Vc9mS" alt=""           onclick="window.open(&quot;https://trustseal.enamad.ir/Verify.aspx?id=100286&amp;p=JkEP1tFdjs5Vc9mS&quot;, &quot;Popup&quot;,&quot;toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30&quot;)" style="cursor:pointer" id="JkEP1tFdjs5Vc9mS">
             </div>
 <!--            @if(Request::url() == 'localhost:6060' || Request::url() == 'www.incobac.ir' || Request::url() == 'https:://incobac.ir' || Request::url() == 'https:://www.incobac.ir')-->
                 
