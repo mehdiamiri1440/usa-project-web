@@ -678,6 +678,11 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
         'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_checkout_transaction_list',
         'as' => 'admin_panel_waiting_for_checkout_transaction_list'
     ]);
+    
+    Route::get('statistics',[
+        'uses' => 'admin_panel\admin_statistics_controller@load_statistics',
+        'as' => 'admin_panel_load_statistics'
+    ]);
 
 //    Route::get('factor-issuance-detail/{id}',[
 //        'uses' => 'admin_panel\admin_transaction_controller@'
