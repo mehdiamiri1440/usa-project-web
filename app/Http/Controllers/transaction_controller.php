@@ -181,7 +181,7 @@ class transaction_controller extends Controller
     
     protected function get_transaction_data_according_to_the_given_data_instructions($data_instruction_array,$sell_offer_id,$user_role)
     {
-        if( ! empty($data_instruction_array[$user_role])){
+        if( ! empty($data_instruction_array[$user_role]) ){
             $initial_db_query = $this->generate_DB_query_by_given_data($data_instruction_array[$user_role]);
             
             $complete_db_query = $initial_db_query->where('sell_offers.id',$sell_offer_id);

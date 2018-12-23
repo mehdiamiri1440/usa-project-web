@@ -32,8 +32,6 @@
 
   <!-- Google Font -->
  
-    
-
 </head>
 @endsection
 
@@ -43,52 +41,52 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        بررسی آگهی های خرید
+          بررسی آمار سایت
       </h1>
     </section>
 
     <!-- Main content -->
     <section class="content">
-      <div class="row">        
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">جدول داده ها</h3>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                      <!-- Default panel contents -->
+                      <div class="panel-heading">آمار ها در ماه اخیر</div>
+
+                      <!-- Table -->
+                      <table class="table">
+                            <tr>
+                                <th>شاخص</th>
+                                <th>تعداد</th>
+                            </tr>
+                            <tr>
+                                <td>تعداد تراکنش ها</td>
+                                <td>{{$transactions_count}}</td>
+                            </tr>
+                            <tr>
+                                <td>تعداد درخواست های خرید</td>
+                                <td>{{$buyAds_count}}</td>
+                            </tr>
+                            <tr>
+                                <td>تعداد محصولات</td>
+                                <td>{{$products_count}}</td>
+                            </tr>
+                            <tr>
+                                <td>تعداد پیشنهادات فروش</td>
+                                <td>{{$sell_offers_count}}</td>
+                            </tr>
+                            <tr>
+                                <td>تعداد ثبت نام ها</td>
+                                <td>{{$new_users_count}}</td>
+                            </tr>
+                            <tr>
+                                <td>تعداد کاربرانی که پروفایل آپدیت کرده اند</td>
+                                <td>{{$new_profiles_count}}</td>
+                            </tr>
+                      </table>
+                </div>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>#</th>
-                  <th>دسته ی محصول</th>
-                  <th>زیر دسته ی  محصول</th>
-                  <th>نام محصول</th>
-                  <th>نام و نام خانوادگی</th>
-                  <th>زمان ثبت</th>
-                  <th>مشاهده</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($buyAds as $buyAd)
-                    <tr>
-                        <td>{{$loop->iteration}}</td>
-                        <td>{{$buyAd->category_name}}</td>
-                        <td>{{$buyAd->sub_category_name}}</td>
-                        <td>{{$buyAd->name}}</td>                    
-                        <td>{{$buyAd->first_name . ' ' . $buyAd->last_name}}</td>                    
-                        <td>{{$buyAd->created_at}}</td>                                    
-                        <td><a href="{{route($buyAd->confirmed ? 'admin_panel_load_confirmed_buyAd_by_id' : 'admin_panel_load_unconfirmed_buyAd_by_id',['buyAd_id' => $buyAd->id])}}">مشاهده جزییات</a></td>
-                    </tr>
-                @endforeach
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
         </div>
-        <!-- /.col -->
-      
-      <!-- /.row -->
     </section>
     <!-- /.content -->
   </div>
@@ -97,11 +95,10 @@
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
-  @endsection
+@endsection
 <!-- ./wrapper -->
 
 @section('script_tags')
-<!-- jQuery 3 -->
 <script src="{{asset('admin-panel/bower_components/jquery/dist/jquery.min.js')}}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{asset('admin-panel/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
@@ -130,7 +127,7 @@
     })
   })
 </script>
-    <script>
+<script>
     function push_notification(data)
     {
         if (!window.Notification) {

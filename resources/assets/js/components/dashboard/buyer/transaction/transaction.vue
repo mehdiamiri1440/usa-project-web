@@ -498,6 +498,7 @@
     <div>
 
         <section  class="main-content col-xs-12" v-if="transactionInfo">
+            
 
             <!--part 1-->
             <div id="step1" v-if="currentStep == 1">

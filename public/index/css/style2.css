@@ -1301,6 +1301,14 @@ footer p {
     position: relative;
     padding: 3px 15px !important;
 }
+.user-header-mobile a {
+    float: left;
+    width: 100%;
+}
+.user-header-mobile .profile-menu-header i {
+    top: 5px;
+    left: -10px;
+}
 
 .profile-menu-header i {
     position: absolute;
@@ -1494,7 +1502,7 @@ img.image-blur:hover {
     }
 
     .user-header-mobile .profile-menu-header {
-        padding: 25px 0 0;
+        padding: 20px 0 0;
         float: left;
     }
 
@@ -1503,10 +1511,6 @@ img.image-blur:hover {
         top: 70px;
     }
 
-    .user-header-mobile .profile-menu-header i {
-        top: 9px;
-        left: -50px;
-    }
 
     h1 {
         font-size: 41px;
@@ -1561,7 +1565,6 @@ img.image-blur:hover {
 
     .user-header-mobile {
         display: block;
-        width: 7%;
         float: left;
         margin-left: 50px;
     }
@@ -1632,13 +1635,8 @@ img.image-blur:hover {
     }
     .user-header-mobile {
         display: block;
-        width: 7%;
         float: left;
         margin-left: 30px;
-    }
-    .user-header-mobile .profile-menu-header i {
-        top: 9px;
-        left: -40px;
     }
     #video-bg {
         right: -200px;
@@ -1667,15 +1665,10 @@ img.image-blur:hover {
 
     .user-header-mobile {
         display: block;
-        width: 7%;
         float: left;
         margin-left: 32px;
     }
 
-    .user-header-mobile .profile-menu-header i {
-        top: 9px;
-        left: -40px;
-    }
 }
 
 @media screen and (max-width: 293px) {

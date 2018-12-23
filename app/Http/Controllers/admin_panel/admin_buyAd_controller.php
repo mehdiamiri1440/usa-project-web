@@ -63,7 +63,8 @@ class admin_buyAd_controller extends Controller
     {
         $unconfirmed_buyAd_list =  $this->get_buyAd_list($confirm_status = 0);
         
-        $this->add_categories_to_buyAd_list($unconfirmed_buyAd_list);        
+        $this->add_categories_to_buyAd_list($unconfirmed_buyAd_list); 
+        
         
         return view('admin_panel.buyAd',[
             'buyAds' => $unconfirmed_buyAd_list, 
@@ -86,12 +87,11 @@ class admin_buyAd_controller extends Controller
     protected function get_buyAd_list($confirm_status)
     {
         $list = DB::table('buy_ads')
-                        ->leftJoin('myusers','buy_ads.myuser_id','=','myusers.id')
-                        ->where('confirmed',$confirm_status)
+                        ->join('myusers','buy_ads.myuser_id','=','myusers.id')
+                        ->where('buy_ads.confirmed',$confirm_status)
                         ->select($this->buyAd_list_neccessary_fields_array)
                         ->orderBy('buy_ads.created_at','desc')
                         ->get();
-        
         
         return $list;
     }
@@ -109,6 +109,7 @@ class admin_buyAd_controller extends Controller
             $buyAd->sub_category_name = $sub_category_record->category_name;
             $buyAd->category_name = $category_record->category_name;
         });
+        
     }
     
     public function load_unconfirmed_buyAd_by_id($buyAd_id)

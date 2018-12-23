@@ -57,6 +57,7 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
+                  <th>#</th>
                   <th>نام و نام خانوادگی</th>
                   <th>نوع کاربری</th>
                   <th>استان-شهر</th>
@@ -69,6 +70,7 @@
                 <tbody>
                     @foreach($users as $user)
                     <tr>
+                        <td>{{$loop->iteration}}</td>
                         <td>{{$user->first_name . ' ' . $user->last_name}}</td>
                         <td>{{$user->is_seller ? "فروشنده" : "خریدار"}}</td>
                         <td>{{$user->province}} | {{$user->city}}</td>                    

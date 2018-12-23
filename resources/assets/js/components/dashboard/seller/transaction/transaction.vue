@@ -496,8 +496,8 @@
             <div id="step1" v-if="currentStep == 1">
                 <nav class="main-content-nav col-xs-12">
                     <ul class="list-inline">
-                        <li class="list-item " تسویه حساب </li>
-                        <li class="list-item "بارگیری محصول</li>
+                        <li class="list-item "> تسویه حساب </li>
+                        <li class="list-item "> بارگیری محصول</li>
                         <li class="list-item active">تایید مفاد قرارداد </li>
                     </ul>
                 </nav>

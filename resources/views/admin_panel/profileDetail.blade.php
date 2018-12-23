@@ -75,7 +75,7 @@
                         </tr>
                         <tr>
                             <td class="col-xs-2"><b>نوع کاربری</b></td>
-                            <td class="col-xs-10">{{$user_info['activity_type']}}</td>
+                            <td class="col-xs-10">{{$user_info['is_buyer'] ? 'خریدار' : 'فروشنده'}}</td>
                         </tr>
                         <tr>
                             <td class="col-xs-2"><b>استان</b></td>
@@ -87,7 +87,7 @@
                         </tr>
                         <tr>
                             <td class="col-xs-2"><b>زمان ثبت نام</b></td>
-                            <td class="col-xs-10">{{$user_info['created_at']}}</td>
+                            <td class="col-xs-10">{{$user_info['register_date']}}</td>
                         </tr>
                         <tr>
                             <td class="col-xs-2"><b>حوزه ی فعالیت</b></td>

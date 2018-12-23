@@ -7,11 +7,22 @@
     .main-content .list-group-item > div {
         float: right;
     }
+    .list-group-item > div {
+        padding: 7px 0;
+    }
     .main-content .list-group-item p {
         text-align: center;
+        margin: 0 auto;
+display: block;
+width: inherit;
     }
     .main-content {
-        padding: 90px 35px;
+        padding: 90px 15px;
+    }
+    .status > p{
+        max-width: 300px;
+
+        margin: 0 auto;
     }
     .main-content ul {
         border-radius: 3px;
@@ -55,9 +66,17 @@
     }
 
 
-    @media screen and (max-width: 768px) {
-        .list-group-item > div {
-            padding: 7px 0;
+    @media screen and (max-width: 1130px) {
+        .list-title, .needs {
+            float: none;
+        }
+    }
+    @media screen and (max-width: 767px) {
+        .list-title, .needs {
+            float: none;
+        }
+        .main-content {
+            padding: 90px 0;
         }
     }
 </style>
@@ -76,7 +95,7 @@
                             {{sellOffer.name}}
                         </p>
                     </div>
-                    <div class="col-sm-2 col-xs-3">
+                    <div class="col-sm-2 col-xs-12">
 
                         <p class="needs">
                     <span class="static-content">
@@ -85,7 +104,7 @@
                             {{sellOffer.deliver_at}}
                         </p>
                     </div>
-                    <div class="col-sm-2 col-xs-3">
+                    <div class="col-sm-2 col-xs-12">
 
                         <p class="needs">
                     <span class="static-content">
@@ -97,7 +116,7 @@
                     </span>
                         </p>
                     </div>
-                    <div class="col-sm-3 col-xs-6">
+                    <div class="col-sm-3 col-xs-12">
                         <p class="list-time">
                             {{sellOffer.valid_from + ' - ' + sellOffer.valid_to}}
                         </p>

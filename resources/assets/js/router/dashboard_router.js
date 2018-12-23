@@ -26,7 +26,7 @@ import sellerNotFound from '../components/dashboard/page-not-found.vue';
 
 
 // Buyer Components
- import buyerProfileBasic from '../components/dashboard/buyer/profile/profile_basic.vue'
+import buyerProfileBasic from '../components/dashboard/buyer/profile/profile_basic.vue'
 import buyerChangePassword from '../components/dashboard/seller/profile/change_password.vue'
 import buyerCompelementry from '../components/dashboard/buyer/profile/profile_complete.vue'
 import buyerProfileContract from '../components/dashboard/buyer/profile/profile_contract.vue'

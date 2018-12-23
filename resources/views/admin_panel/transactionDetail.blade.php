@@ -178,7 +178,7 @@
                 </div>
                 <br/>
             </form>
-        @elseif($transaction->transaction_status == '0000000000000111')
+        @elseif($transaction->transaction_status == '0000000000000011' || $transaction->transaction_status == '0000000000000111')
             <h3>فاکتور پیش پرداخت</h3>
             <form>
                  <div class="row">

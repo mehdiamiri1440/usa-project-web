@@ -18,7 +18,8 @@ class admin_transaction_controller extends Controller
     
     protected $waitig_for_factor_issuance_statuses = [
         'buyer' => [
-            'prepayment' => '0000000000000111' ,
+            'prepayment' => '0000000000000011' ,
+            'prepayment2' => '0000000000000111' ,
             'payment' => '0000000000011111', 
         ],
         'seller' => [
@@ -147,6 +148,7 @@ class admin_transaction_controller extends Controller
     public function load_waiting_for_prepayment_factor_issuance_transactions_list(Request $request)
     {
         $transactions = sell_offer::where('transaction_status',$this->waitig_for_factor_issuance_statuses['buyer']['prepayment'])
+                            ->orWhere('transaction_status',$this->waitig_for_factor_issuance_statuses['buyer']['prepayment2'])
                             ->get();
         
         $date_convertor_object = new date_convertor();
