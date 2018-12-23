@@ -8,6 +8,7 @@ use App\profile;
 use App\profile_media;
 use App\Http\Controllers\sms_controller;
 use App\myuser;
+use App\Http\Library\date_convertor;
 
 class admin_profile_controller extends Controller
 {
@@ -23,6 +24,8 @@ class admin_profile_controller extends Controller
         'id',
         'first_name',
         'last_name',
+        'is_buyer',
+        'is_seller',
     ];
     
     protected $media_neccessary_fields_array = [
@@ -57,6 +60,7 @@ class admin_profile_controller extends Controller
         try{
            $profile_records = profile::where('confirmed',$confirm_status)
                                             ->select($this->profile_list_neccessary_fields)
+                                            ->orderBy('created_at','desc')
                                             ->get(); 
             
             $this->add_user_info_to_each_profile_record($profile_records,$this->neccessary_user_fields_for_profile_list);
@@ -76,19 +80,24 @@ class admin_profile_controller extends Controller
                                             ->select($this->media_neccessary_fields_array)
                                             ->get();
             
-            $profile_record['media'] = $related_media;               
+            $profile_record['media'] = $related_media; 
+            
         });
     }
     
     protected function add_user_info_to_each_profile_record(&$profile_records,$user_neccessary_fields_array)
     {
-        $profile_records->each(function($profile_record) use(&$user_neccessary_fields_array){
+        $date_convertor_object = new date_convertor();
+        
+        $profile_records->each(function($profile_record) use(&$user_neccessary_fields_array,$date_convertor_object){
             $user_info =  myuser::where('id',$profile_record->myuser_id)
                                     ->select($user_neccessary_fields_array)
                                     ->get()
                                     ->first();
             
             $profile_record['user_info'] = $user_info;
+            
+            $profile_record['register_date'] = $date_convertor_object->get_persian_date($profile_record->created_at);
         });
     }
     
@@ -116,6 +125,10 @@ class admin_profile_controller extends Controller
     protected function add_user_info_to_profile_record($user_id)
     {
         $user_info = myuser::find($user_id);
+        
+        $date_convertor_object = new date_convertor();
+        
+        $user_info->register_date = $date_convertor_object->get_persian_date($user_info->created_at);
         
         return collect($user_info)->except('password');
     }
