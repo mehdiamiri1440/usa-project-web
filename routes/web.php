@@ -739,6 +739,16 @@ Route::post('/get_wp_posts',[
     'as' => 'get_wp_posts'
 ]);
 
+Route::get('/manual-payment/{payment_amount}',[
+    'uses' => 'payment_controller@do_external_url_payment',
+    'as'   => 'external_url_payment'
+]);
+
+Route::any('/external-url-payment-callback',[
+    'uses' => 'payment_controller@external_url_payment_callback',
+    'as' => 'external_url_payment_callback',
+]);
+
 
 
 
