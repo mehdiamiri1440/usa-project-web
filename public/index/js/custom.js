@@ -19,14 +19,25 @@ $(window).scroll(function () {
 /* Magnific Popup
 -----------------------------------------------*/
 $(document).ready(function () {
-    $('.popup-youtube').magnificPopup({
+/*    $('.popup-youtube').magnificPopup({
         type: 'iframe',
         mainClass: 'mfp-fade',
         removalDelay: 160,
         preloader: false,
         fixedContentPos: false,
-    });
-
+    });*/
+    /*    $('.owl-carousel a').parent().parent().parent().magnificPopup({
+            delegate: 'a',
+            type: 'image',
+            gallery: {
+                enabled: true,
+                navigateByImgClick: true,
+                preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+            }
+        });*/
+    $('.projects .owl-carousel a').magnificPopup({
+            type: 'image',
+        });
 });
 
 

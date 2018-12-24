@@ -23,6 +23,14 @@ Route::get('/test', function(){
     return view('product_view');
 });
 
+Route::get('/help', function(){
+    return view('help');
+});
+
+Route::get('/p', function(){
+    return view('projects');
+});
+
 Route::get('/', function(){
     return view('index');
 });

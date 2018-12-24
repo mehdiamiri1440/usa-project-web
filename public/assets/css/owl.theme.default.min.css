@@ -62,12 +62,8 @@
 
     height: 15px;
 
-    background: #3c9544b3 !important;
     margin: 0 7px;
     border-radius: 50px;
-}
-.owl-dot.active{
-    background: #3c9544 !important;
 }
 .owl-dots{
     text-align: center !important;
