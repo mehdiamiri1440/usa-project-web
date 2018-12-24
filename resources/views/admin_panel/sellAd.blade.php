@@ -57,6 +57,7 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
+                  <th>#</th>
                   <th>دسته ی محصول</th>
                   <th>زیر دسته محصول</th>
                   <th>نام محصول</th>
@@ -68,6 +69,7 @@
                 <tbody>
                 @foreach($sellAds as $sellAd)
                     <tr>
+                        <td>{{$loop->iteration}}</td>
                         <td>{{$sellAd->category_name}}</td>
                         <td>{{$sellAd->sub_category_name}}</td>
                         <td>{{$sellAd->product_name}}</td>                    

@@ -60,7 +60,7 @@
                   <th>#</th>
                   <th>نام و نام خانوادگی</th>
                   <th>زمان ثبت پروفایل</th>
-                  <th>  آخرین نوع کاربری</th>
+                  <th> نوع کاربری</th>
                   <th>مشاهده</th>
                 </tr>
                 </thead>
@@ -69,8 +69,8 @@
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$profile->user_info->first_name . ' ' . $profile->user_info->last_name}}</td>
-                    <td>{{$profile->created_at}}</td>
-                    <td>{{$profile->activity_domain}}</td>                    
+                    <td>{{$profile->register_date}}</td>
+                    <td>{{$profile->user_info->is_buyer ? 'خریدار' : 'فروشنده'}}</td>                    
                     <td><a href="{{"/admin/profile-detail/".$profile->id}}">مشاهده جزییات</a></td>
                 </tr>
                 @endforeach

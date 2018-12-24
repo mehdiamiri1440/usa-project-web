@@ -686,6 +686,11 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
         'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_checkout_transaction_list',
         'as' => 'admin_panel_waiting_for_checkout_transaction_list'
     ]);
+    
+    Route::get('statistics',[
+        'uses' => 'admin_panel\admin_statistics_controller@load_statistics',
+        'as' => 'admin_panel_load_statistics'
+    ]);
 
 //    Route::get('factor-issuance-detail/{id}',[
 //        'uses' => 'admin_panel\admin_transaction_controller@'
@@ -745,6 +750,16 @@ Route::any('/payment_callback',[
 Route::post('/get_wp_posts',[
     'uses' => 'index_controller@get_wp_posts',
     'as' => 'get_wp_posts'
+]);
+
+Route::get('/manual-payment/{payment_amount}',[
+    'uses' => 'payment_controller@do_external_url_payment',
+    'as'   => 'external_url_payment'
+]);
+
+Route::any('/external-url-payment-callback',[
+    'uses' => 'payment_controller@external_url_payment_callback',
+    'as' => 'external_url_payment_callback',
 ]);
 
 

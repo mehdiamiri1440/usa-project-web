@@ -66,13 +66,14 @@ class admin_user_controller extends Controller
         $date_convertor_object = new date_convertor();
 
         try{
-            $users = myuser::all();
+            $users = myuser::orderBy('created_at','desc')
+                                ->get();
 
             $users->each(function($user) use($date_convertor_object){
                 $user['note_count'] = admin_note::where('myuser_id',$user->id)
                     ->get()
                     ->count();
-                $user['register_date'] = $date_convertor_object->get_persian_date_with_month_name($user->created_at);
+                $user['register_date'] = $date_convertor_object->get_persian_date($user->created_at);
             });
         }
         catch(\Exception $e){

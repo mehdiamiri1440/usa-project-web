@@ -12,6 +12,9 @@
     }
     .main-content .list-group-item p {
         text-align: center;
+        margin: 0 auto;
+display: block;
+width: inherit;
     }
     .main-content {
         padding: 90px 15px;

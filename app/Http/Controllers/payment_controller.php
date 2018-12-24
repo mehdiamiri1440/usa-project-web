@@ -366,7 +366,7 @@ class payment_controller extends Controller
     }
     
     protected function message2($result)
-        {
+    {
             switch ($result) 
             {
                 case '-20':
@@ -437,6 +437,84 @@ class payment_controller extends Controller
             unset($_SESSION[$key]);
         }
     }
+    
+    public function do_external_url_payment($payment_amount)
+    {
+        $payment_amount = (int) $payment_amount ;
+        
+        if(is_integer($payment_amount) ){
+
+            $payment_amount = $payment_amount * 10 > $this->gateway_max_amount_to_pay_value ? false : $payment_amount * 10 ;
+
+            if($payment_amount != false){
+                $_SESSION['merchantId'] = $this->MerchantId;
+                $_SESSION['sha1Key'] = $this->sha1Key;
+                $_SESSION['admin_email'] = 'ali_delkhosh@ymail.com';
+                $_SESSION['amount'] = $payment_amount ;
+                $_SESSION['PayOrderId'] = time();
+
+                $revertURL = route('external_url_payment_callback');
+
+                $client = new SoapClient('https://ikc.shaparak.ir/XToken/Tokens.xml', array('soap_version'   => SOAP_1_1));
+
+                $params['amount'] =  $payment_amount;
+                $params['merchantId'] = $this->MerchantId;
+                $params['invoiceNo'] = $_SESSION['PayOrderId'];
+                $params['paymentId'] = $_SESSION['PayOrderId'];
+                $params['specialPaymentId'] = $_SESSION['PayOrderId'];
+                $params['revertURL'] = $revertURL;
+                $params['description'] = "";
+                $result = $client->__soapCall("MakeToken", array($params));
+                $_SESSION['token'] = $result->MakeTokenResult->token;
+                $data['token'] = $_SESSION['token'];
+                $data['merchantId'] = $_SESSION['merchantId'];
+
+                $this->redirect_post('https://ikc.shaparak.ir/TPayment/Payment/index',$data);
+            }
+        }
+        else echo 'error';
+        
+           
+    }
+    
+    public function external_url_payment_callback()
+    {
+        
+        if(isset($_POST['resultCode'])){
+            if ($_POST['resultCode'] == '100'){
+                
+                $referenceId = isset($_POST['referenceId']) ? $_POST['referenceId'] : 0;
+                $client = new SoapClient('https://ikc.shaparak.ir/XVerify/Verify.xml', array('soap_version'   => SOAP_1_1));
+                $params['token'] =  $_SESSION['token'];
+                $params['merchantId'] = $this->MerchantId;
+                $params['referenceNumber'] = $referenceId;
+                $params['sha1Key'] = $this->sha1Key;
+
+
+                $result = $client->__soapCall("KicccPaymentsVerification", array($params));
+                $result = ($result->KicccPaymentsVerificationResult);
+
+
+                if (floatval($result) > 0 && floatval($result) == floatval($_SESSION['amount']) ){	
+                    //Payment verfed and OK !
+                    //
+                    // payed amount value in gateway
+                    echo "پرداخت انجام شد.";
+                    
+                }
+                else{
+                    //flush session
+                    $this->flush_global_session();
+
+                    return abort(404);
+                }
+            }
+            else{
+                return redirect()->back();
+            }
+    }
+        
+}
     
     
 }
