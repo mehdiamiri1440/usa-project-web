@@ -172,11 +172,18 @@
 }
 .owl-dot {
 
-    width: 9px !important;
-    height: 9px !important;
-    background: #3c9544b3 !important;
+    width: 7px !important;
+    height: 7px !important;
+    background: #d4d4d4 !important;
     margin: 0 3px !important;
     border-radius: 50px !important;
+
+}
+.owl-dot.active{
+
+    width: 9px !important;
+    height: 9px !important;
+    background: #a8a8a8  !important;
 
 }
 .profile-menu-header i {
