@@ -125,7 +125,7 @@
                             <a href="#" @click.prevent ="dropdown()">
                                 <div class="image-header-profile">
                                     @if(session('profile_photo'))
-                                        <img src="{{'storage/'  . session('profile_photo')}}">
+                                        <img src="{{url('storage/'  . session('profile_photo'))}}">
                                     @else
                                         <img src="{{asset('assets/img/user-defult.png')}}">
                                     @endif
@@ -136,7 +136,7 @@
                                 <ul class="list-unstyled">
                                     <li class="list-item"><a
                                                 href="{{route('profile_basic')}}">پروفایل</a></li>
-                                    <li class="list-item"><a href="/dashboard#/password">تغییر کلمه عبور</a></li>
+                                    <li class="list-item"><a href="/dashboard/#/password">تغییر کلمه عبور</a></li>
                                     <li class="list-item"><a href="{{route('logout')}}">خروج</a></li>
                                 </ul>
                             </div>
@@ -174,7 +174,7 @@
                             <div class="profile-menu-header "><a href="#" @click.prevent ="dropdown()">
                                     <div class="image-header-profile">
                                         @if(session('profile_photo'))
-                                            <img src="{{'storage/'  . session('profile_photo')}}">
+                                            <img src="{{url('storage/'  . session('profile_photo'))}}">
                                         @else
                                             <img src="{{asset('assets/img/user-defult.png')}}">
                                         @endif
@@ -185,7 +185,7 @@
                                     <ul class="list-unstyled">
                                         <li class="list-item"><a
                                                     href="{{route('profile_basic')}}">پروفایل</a></li>
-                                        <li class="list-item"><a href="/dashboard#/password">تغییر کلمه عبور</a></li>
+                                        <li class="list-item"><a href="/dashboard/#/password">تغییر کلمه عبور</a></li>
                                         <li class="list-item"><a href="{{route('logout')}}">خروج</a></li>
                                     </ul>
                                 </div>
