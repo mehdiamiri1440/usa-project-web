@@ -12,6 +12,8 @@ use App\myuser;
 use App\factor;
 use App\profile;
 use Illuminate\Http\Request;
+use App\instant_transaction;
+use Carbon\Carbon;
 
 class admin_transaction_controller extends Controller
 {
@@ -215,6 +217,65 @@ class admin_transaction_controller extends Controller
         return view('admin_panel.transactionCheckOutList',[
            'sell_offers' => $transactions, 
         ]);  
+    }
+    
+    
+    //public method
+    public function initiate_instant_transaction(Request $request)
+    {
+        $this->validate($request,[
+            'seller_phone' => 'required',
+            'buyer_phone'  => 'required',
+            'loading_dead_line' => 'required',
+            'commission_percentage' => 'required',
+            'admin_notes' => 'required',
+        ]);
+        
+        $date_convertor_object = new date_convertor();
+        
+        $seller_user_id = $this->get_user_id_by_phone_number($request->seller_phone);
+        $buyer_user_id = $this->get_user_id_by_phone_number($request->buyer_phone);
+        
+        if($seller_user_id && $buyer_user_id){
+            $transaction_object = new instant_transaction();
+        
+            $transaction_object->seller_id = $seller_user_id;
+            $transaction_object->buyer_id = $buyer_user_id;
+            $transaction_object->loading_dead_line = $date_convertor_object->get_georgian_date_from_standard_persian_date_string($request->loading_dead_line);
+            $transaction_object->commission_percentage = $request->commission_percentage;
+            $transaction_object->admin_notes = $request->admin_notes;
+            $transaction_object->transaction_status = '0000000000000001';
+            $transaction_object->deal_date = Carbon::now();
+
+            $transaction_object->save();
+            
+            return response()->json([
+                'status' => true,
+                'msg' => 'transaction inserted!',
+            ],201);
+        }
+        else{
+            return response()->json([
+                'status' => false,
+                'msg' => 'seller or buyer phone number does not exist!',
+            ],404);
+        }
+        
+        
+        
+    }
+    
+    protected function get_user_id_by_phone_number($phone_number)
+    {
+        $user_record = myuser::where('phone',$phone_number)
+                                ->get()
+                                ->first()
+                                ;
+        
+        if($user_record){
+            return $user_record->id;
+        }
+        else return false;
     }
     
 }

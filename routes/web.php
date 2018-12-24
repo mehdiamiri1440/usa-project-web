@@ -683,6 +683,15 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
         'uses' => 'admin_panel\admin_statistics_controller@load_statistics',
         'as' => 'admin_panel_load_statistics'
     ]);
+    
+    Route::get('instantTransactionDetail',function(){
+        return view('admin_panel.instantTransactionDetail');
+    });
+    
+    Route::post('initiate-instant-transaction',[
+       'uses' => 'admin_panel\admin_transaction_controller@initiate_instant_transaction',
+        'as' => 'initiate_instant_transaction'
+    ]);
 
 //    Route::get('factor-issuance-detail/{id}',[
 //        'uses' => 'admin_panel\admin_transaction_controller@'

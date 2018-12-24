@@ -81,11 +81,11 @@ return [
                         //
                     ],
                     'fields' => [
-                        'sell_offers.loading_dead_line',
-                        'sell_offers.admin_notes',
-                        'sell_offers.commission_persentage',
-                        'sell_offers.myuser_id as seller_user_id',
-                        'sell_offers.buy_ad_id',
+                        'instant_transactions.loading_dead_line',
+                        'instant_transactions.admin_notes',
+                        'instant_transactions.commission_percentage',
+                        'instant_transactions.seller_id as seller_user_id',
+                        'instant_transactions.buyer_id as buyer_user_id',
                     ],
                     'conditions' => [
                         //
@@ -109,10 +109,10 @@ return [
                         //
                     ],
                     'fields' => [
-                        'sell_offers.loading_dead_line',
-                        'sell_offers.admin_notes',
-                        'sell_offers.myuser_id as seller_user_id',
-                        'sell_offers.buy_ad_id',
+                        'instant_transactions.loading_dead_line',
+                        'instant_transactions.admin_notes',
+                        'instant_transactions.seller_id as seller_user_id',
+                        'instant_transactions.buyer_id as buyer_user_id',
                     ],
                     'conditions' => [
                         //
@@ -123,9 +123,7 @@ return [
                         //
                     ],
                     'fields' => [
-                        'sell_offers.loading_dead_line',
-                        'sell_offers.admin_notes',
-                        'sell_offers.commission_persentage'
+                        //
                     ],
                     'conditions' => [
                         //
@@ -149,10 +147,10 @@ return [
                         //
                     ],
                     'fields' => [
-                        'sell_offers.loading_dead_line',
-                        'sell_offers.admin_notes',
-                        'sell_offers.myuser_id as seller_user_id',
-                        'sell_offers.buy_ad_id',
+                        'instant_transactions.loading_dead_line',
+                        'instant_transactions.admin_notes',
+                        'instant_transactions.seller_id as seller_user_id',
+                        'instant_transactions.buyer_id as buyer_user_id',
                     ],
                     'conditions' => [
                         //
@@ -163,9 +161,9 @@ return [
                         //
                     ],
                     'fields' => [
-//                        'sell_offers.loading_dead_line',
-//                        'sell_offers.admin_notes',
-//                        'sell_offers.commission_persentage'
+//                        'instant_transactions.loading_dead_line',
+//                        'instant_transactions.admin_notes',
+//                        'instant_transactions.commission_persentage'
                     ],
                     'conditions' => [
                         //
@@ -221,24 +219,21 @@ return [
             'data' => [
                 'buyer' => [
                     'tables' => [
-                        'factors' => [
-                                ['factors.sell_offer_id','=','sell_offers.id'],
-                            ],
-                        'buy_ads' => [
-                                ['buy_ads.id','=','sell_offers.buy_ad_id'],
+                        'instant_factors' => [
+                                ['instant_factors.transaction_id','=','instant_transactions.id'],
                             ],
                     ],
                     'fields' => [
-                        'factors.unit_price',
-                        'factors.quantity',
-                        'factors.inspection_price',
-                        'factors.amount_to_pay',
-                        'factors.product_name',
-                        'factors.type',
-                        'factors.created_at',
+                        'instant_factors.unit_price',
+                        'instant_factors.quantity',
+                        'instant_factors.inspection_price',
+                        'instant_factors.amount_to_pay',
+                        'instant_factors.product_name',
+                        'instant_factors.type',
+                        'instant_factors.created_at',
                     ],
                     'conditions' => [
-                        ['factors.type','=','prepayment']  
+                        ['instant_factors.type','=','prepayment']  
                     ],
                 ],
                 'seller' => [
@@ -278,13 +273,10 @@ return [
                 ],
                 'seller' => [
                     'tables' => [
-                        'buy_ads' => [
-                            ['buy_ads.id','=','sell_offers.buy_ad_id'],
-                        ]
+                        //
                     ],
                     'fields' => [
-                        'buy_ads.description',
-                        'sell_offers.admin_notes',
+                        'instant_transactions.admin_notes',
                     ],
                     'conditions' => [
                         //
@@ -305,24 +297,21 @@ return [
             'data' => [
                 'buyer' => [
                     'tables' => [
-                        'factors' => [
-                                ['factors.sell_offer_id','=','sell_offers.id'],
-                            ],
-                        'buy_ads' => [
-                                ['buy_ads.id','=','sell_offers.buy_ad_id'],
+                        'instant_factors' => [
+                                ['instant_factors.transaction_id','=','instant_transactions.id'],
                             ],
                     ],
                     'fields' => [
-                        'factors.unit_price',
-                        'factors.quantity',
-                        'factors.inspection_price',
-                        'factors.amount_to_pay',
-                        'factors.product_name',
-                        'factors.type',
-                        'factors.created_at',
+                        'instant_factors.unit_price',
+                        'instant_factors.quantity',
+                        'instant_factors.inspection_price',
+                        'instant_factors.amount_to_pay',
+                        'instant_factors.product_name',
+                        'instant_factors.type',
+                        'instant_factors.created_at',
                     ],
                     'conditions' => [
-                        ['factors.type','=','payment']  
+                        ['instant_factors.type','=','payment']  
                     ],
                 ],
                 'seller' => [
@@ -420,31 +409,31 @@ return [
     
     
     'actions' => [
+//        '1' => [
+//            'name' => 'Transaction initiation',
+//            'actor' => 'admin',
+//            'bit_index' => 0,
+//            'required_bit_index_set' => [
+//                //
+//            ],
+//            'data' => [
+//                'loading_dead_line',
+//                'admin_notes',
+//                'expiration_date',
+//                'commission_persentage'
+//            ],
+//            'validation_rules' => [
+//                'loading_dead_line' => 'required',
+//                'admin_notes' => 'required',
+//                'expiration_date' => 'required',
+//                'commission_persentage' => 'required|between:0.00,100.00'
+//            ], 
+//            'to_notify' => [
+//                'seller' => 'یک تراکنش برای شما در سامانه آغاز شده است.برای تایید قرارداد به وبسایت مراجعه کنید.',
+//                'buyer'  => 'یک تراکنش برای شما در سامانه آغاز شده است.برای تایید قرارداد به وبسایت مراجعه کنید.',
+//            ],
+//        ],
         '1' => [
-            'name' => 'Transaction initiation',
-            'actor' => 'admin',
-            'bit_index' => 0,
-            'required_bit_index_set' => [
-                //
-            ],
-            'data' => [
-                'loading_dead_line',
-                'admin_notes',
-                'expiration_date',
-                'commission_persentage'
-            ],
-            'validation_rules' => [
-                'loading_dead_line' => 'required',
-                'admin_notes' => 'required',
-                'expiration_date' => 'required',
-                'commission_persentage' => 'required|between:0.00,100.00'
-            ], 
-            'to_notify' => [
-                'seller' => 'یک تراکنش برای شما در سامانه آغاز شده است.برای تایید قرارداد به وبسایت مراجعه کنید.',
-                'buyer'  => 'یک تراکنش برای شما در سامانه آغاز شده است.برای تایید قرارداد به وبسایت مراجعه کنید.',
-            ],
-        ],
-        '2' => [
             'name' => 'seller agreed contract',
             'actor' => 'seller',
             'bit_index' => 1,
@@ -462,12 +451,12 @@ return [
                 'buyer' => 'تامین کننده ی ما قرارداد مربوط به این معامله را تایید کرده است.'
             ]
         ],
-        '3' => [
+        '2' => [
             'name' => 'buyer agreed contract',
             'actor' => 'buyer',
             'bit_index' => 2,
             'required_bit_index_set' => [
-                0,1,
+                0,
             ],
             'data' => [
                 //
@@ -480,13 +469,13 @@ return [
                 'seller' => 'خریدار محصول شما قرارداد مربوط به این معامله را تایید کرده است.'
             ]
         ],
-        '4' =>[
+        '3' =>[
             'name' => 'prepayment factor issuance for buyer',
             'actor' => 'admin',
             'bit_index' => 3,
             'required_bit_index_set' =>[0,1],
             'data' => [
-                'expiration_date',
+//                'expiration_date',
                 'factor' => [
                     'product_name',
                     'quantity',
@@ -497,7 +486,7 @@ return [
                 ],
             ],
             'validation_rules' => [
-                'expiration_date' => 'required',
+//                'expiration_date' => 'required',
                 'product_name' => 'required',
                 'quantity' => 'required|integer|min:1',
                 'unit_price' => 'required|integer|min:1',
@@ -509,7 +498,7 @@ return [
                 'buyer' => 'فاکتور پیش پرداخت شما صادر شده است.برای پرداخت آن به اینکوباک مراجعه کنید.'
             ]
         ],
-        '5' =>[
+        '4' =>[
             'name' => 'buyer prepayment',//will be called at bank payment callback function
             'actor' => 'buyer',
             'bit_index' => 4,
@@ -526,13 +515,13 @@ return [
                 'buyer'  => 'پیش پرداخت شما با موفقیت انجام شد.اینکوباک درحال پیگیری بارگیری محصول است.'
             ]
         ],
-        '6' =>[
+        '5' =>[
             'name' => 'final payment factor issuance for buyer',
             'actor' => 'admin',
             'bit_index' => 5,
             'required_bit_index_set' => [0,1,2,3,4],
             'data' => [
-                'expiration_date',
+//                'expiration_date',
                 'factor' => [
                     'product_name',
                     'quantity',
@@ -543,7 +532,7 @@ return [
                 ],
             ],
             'validation_rules' => [
-                'expiration_date' => 'required',
+//                'expiration_date' => 'required',
                 'product_name' => 'required',
                 'quantity' => 'required|integer|min:1',
                 'unit_price' => 'required|integer|min:1',
@@ -555,7 +544,7 @@ return [
                 'buyer' => 'بارگیری درحال اتمام است.فاکتور پرداخت نهایی شما صادر گردید.لطفا هر چه سریعتر برای پرداخت آن به اینکوباک مراجعه کنید.'
             ]
         ],
-        '7' =>[
+        '6' =>[
             'name' => 'buyer final payment',//will be called at bank payment callback function
             'actor' => 'buyer',
             'bit_index' => 6,
@@ -572,7 +561,7 @@ return [
                 'buyer' => 'پرداخت نهایی شما با موفقیت انجام شد.منتظردریافت محصول خود باشید.'
             ]
         ],
-        '8' =>[
+        '7' =>[
             'name' => 'DONE',
             'actor' => 'admin',
             'bit_index' => 7,
