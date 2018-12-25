@@ -172,6 +172,41 @@
                   <h4 class="text-center" dir="rtl">تراکنشی در این قسمت وجود ندارد.</h4>
               </div>
         </section>
+        <section class="main-content col-xs-12">
+              <ul class="list-unstyled col-xs-12" v-if="instantTransactions.length != 0">
+                  <!--start title list -->
+                  <li class="list-group-item title-list">
+                      <p class="title-list-text col-xs-2">   شماره تراکنش</p>
+                      <p class="time-show  col-xs-2">تاریخ </p>
+                      <p class="time-show col-xs-5">موضوع فعالیت </p>
+                      <p class="time-show  col-xs-3"> وضعیت </p>
+                  </li>
+                  <!--end title list -->
+                  <li class="list-group-item content-list col-xs-12" v-for="transaction in instantTransactions">
+                      <!--{{this.transactionInfo['id']}}-->
+                      <router-link :to="'/transaction-detail/' + transaction.transaction_id" >
+                          <p class="number col-xs-2">
+                              {{transaction.transaction_id}}
+                          </p>
+                          <p class="date col-xs-2" dir="rtl">
+                              {{transaction.deal_formation_date}}
+                          </p>
+                          <p class="subject col-xs-5">
+                              {{transaction.product_name}}
+                          </p>
+                          <p class="col-xs-3">
+                              <span class="green-sbot"> {{transaction.short_status}}</span>
+                          </p>
+                      </router-link>
+                  </li>
+              </ul>
+              <div class="loading_images  col-xs-12" v-else-if="isLoading">
+                  <img :src="loading_img" style="width:200px;height:200px">
+              </div>
+              <div class="col-xs-12" v-else>
+                  <h4 class="text-center" dir="rtl">تراکنشی در این قسمت وجود ندارد.</h4>
+              </div>
+        </section>
     </div>
 </template>
 <script>
