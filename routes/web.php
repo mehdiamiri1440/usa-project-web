@@ -23,6 +23,14 @@ Route::get('/test', function(){
     return view('product_view');
 });
 
+Route::get('/help', function(){
+    return view('help');
+});
+
+Route::get('/p', function(){
+    return view('projects');
+});
+
 Route::get('/', function(){
     return view('index');
 });
@@ -463,6 +471,10 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'user_controller@get_contract_sides_user_info',
         'as' => 'get_contract_sides_user_info'
     ]);
+    
+//    Route::post('/get_user_instant_transactions',[
+//       'uses' => 'instant_transaction_controller@' 
+//    ]);
 
 
 });
