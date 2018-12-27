@@ -124,7 +124,7 @@
                     this.active_el = 2
                 } else if (this.subIsActive('/register-product')) {
                     this.active_el = 3
-                } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/')|| this.subIsActive('/transaction-detail/'  + this.$route.params.id)) {
+                } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/')|| this.subIsActive('/instant-transaction-detail/'  + this.$route.params.id)) {
                     this.active_el = 4
                 } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/')|| this.subIsActive('/transaction-report/' + this.$route.params.id)) {
                     this.active_el = 5

@@ -21,7 +21,9 @@ class CreateInstantFactorsTable extends Migration
             $table->bigInteger('quantity');
             $table->bigInteger('inspection_price');
             $table->boolean('is_payed')->default(false);
-            $table->bigInteger('amount_to_pay');            
+            $table->bigInteger('amount_to_pay'); 
+            $table->bigInteger('payed_so_far')->default(0);
+            $table->string('type');
             $table->unsignedBigInteger('transaction_id');
             $table->unsignedInteger('admin_id');
             

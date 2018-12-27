@@ -9,7 +9,7 @@ use App\Http\Library\date_convertor;
 use DB;
 use App\Http\Controllers\sms_controller;
 
-class transaction_controller extends Controller
+class instant_transaction_controller extends Controller
 {
     protected $necessary_fields_for_transaction = [
         'instant_transactions.id',
@@ -285,7 +285,7 @@ class transaction_controller extends Controller
         $this->notify_related_involved_users_in_the_tranaction(
             $action_meta_data['to_notify'],
             $seller_user_id = $transaction_record->seller_id,
-            $buyer_user_id = $buyer_id,
+            $buyer_user_id = $transaction_record->buyer_id,
             $request->transaction_id
         );
         
@@ -391,7 +391,7 @@ class transaction_controller extends Controller
             $transaction->transaction_id = $transaction->id + $this->transaction_id_increase_amount_proportional_to_real_id;
             
             unset($transaction->deal_date);
-            unset($transaction->deal_date);
+            //unset($transaction->deal_date);
         });
         
         return response()->json([
@@ -405,22 +405,22 @@ class transaction_controller extends Controller
             'transaction_id' => "required|integer|min:$this->transaction_id_increase_amount_proportional_to_real_id",
         ]);
         
-        $sell_offer_id = $request->transaction_id - $this->transaction_id_increase_amount_proportional_to_real_id ;
+        $transaction_id = $request->transaction_id - $this->transaction_id_increase_amount_proportional_to_real_id ;
         
-        $transaction_record = sell_offer::where('id',$sell_offer_id)
+        $transaction_record = instant::where('id',$transaction_id)
                                 ->select([
                                     'id',
                                     'loading_dead_line',
                                     'admin_notes',
                                     'deal_date',
                                     'commission_persentage',
-                                    'buy_ad_id',
+                                    'buyer_id as buyer_user_id',
                                     'myuser_id as seller_user_id'
                                 ])
                                 ->get()
                                 ->first();
         
-        $payment_factor_record  = factor::where('sell_offer_id',$sell_offer_id)
+        $payment_factor_record  = instant_factor::where('id',$transaction_id)
                                                 ->where('type','payment')
                                                 ->select([
                                                     'quantity',
@@ -431,7 +431,7 @@ class transaction_controller extends Controller
                                                 ->get()
                                                 ->first();
         
-        $prepayment_factor_record = factor::where('sell_offer_id',$sell_offer_id)
+        $prepayment_factor_record = instant_factor::where('id',$transaction_id)
                                                 ->where('type','prepayment')
                                                 ->select([
                                                     'amount_to_pay as prepayment_amount'
