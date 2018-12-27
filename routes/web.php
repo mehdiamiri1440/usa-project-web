@@ -471,10 +471,6 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'user_controller@get_contract_sides_user_info',
         'as' => 'get_contract_sides_user_info'
     ]);
-    
-//    Route::post('/get_user_instant_transactions',[
-//       'uses' => 'instant_transaction_controller@' 
-//    ]);
 
 
 });
