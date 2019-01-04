@@ -3,22 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\sell_offer;
-use App\factor;
-use App\buyAd;
+use App\instant_transaction;
+use App\instant_factor;
 use App\Http\Library\date_convertor;
 use DB;
 use App\Http\Controllers\sms_controller;
 
-class transaction_controller extends Controller
+class instant_transaction_controller extends Controller
 {
     protected $necessary_fields_for_transaction = [
-        'sell_offers.id',
-        'sell_offers.buy_ad_id',
-        'sell_offers.myuser_id',
-        'sell_offers.deal_date',
-        'sell_offers.transaction_status',
-        'buy_ads.name as product_name',
+        'instant_transactions.id',
+        'instant_transactions.buyer_id',
+        'instant_transactions.seller_id',
+        'instant_transactions.deal_date',
+        'instant_transactions.transaction_status',
+        'instant_transactions.product_name',
     ];
     protected  $transaction_id_increase_amount_proportional_to_real_id = 100000;
     
@@ -40,10 +39,6 @@ class transaction_controller extends Controller
         $transaction_condition = [
             [
                 'operator' => '<>',
-                'value' => '0000000000000000',
-            ],
-            [
-                'operator' => '<>',
                 'value' => $this->terminated_transaction_status,
             ],
         ];
@@ -55,7 +50,7 @@ class transaction_controller extends Controller
         $transactions->each(function($transaction) use($date_convertor_object,$user_role){
             $transaction->deal_formation_date = $date_convertor_object->get_persian_date_with_month_name($transaction->deal_date);
             $transaction->transaction_id = $transaction->id + $this->transaction_id_increase_amount_proportional_to_real_id;
-            $transaction->short_status = config("transaction.data-according-to-status.$transaction->transaction_status.short_status.$user_role"); 
+            $transaction->short_status = config("instantTransaction.data-according-to-status.$transaction->transaction_status.short_status.$user_role"); 
             
             unset($transaction->transaction_status);
             unset($transaction->deal_date);
@@ -67,29 +62,17 @@ class transaction_controller extends Controller
     }
     
     protected function get_user_transactions($user_id,$role,$transaction_condition)
-    {
-        if($role == 'buyer'){
-            $user_related_table_name = 'buy_ads';
-        }
-        else if($role == 'seller'){
-            $user_related_table_name = 'sell_offers';
-        }
-        else{
-            return null;
-        }
+    {   
         
-        $basic_query = DB::table('sell_offers')
-                            ->join('buy_ads','sell_offers.buy_ad_id' ,'=', 'buy_ads.id')
-                            ->where('sell_offers.is_accepted',true)
-                            ->where('sell_offers.is_pending',false);
-        
+        $basic_query = DB::table('instant_transactions');
+                            
         foreach($transaction_condition as $condition){
-            $basic_query = $basic_query->where('sell_offers.transaction_status',$condition['operator'],$condition['value']);
+            $basic_query = $basic_query->where('instant_transactions.transaction_status',$condition['operator'],$condition['value']);
         }
         
-        $transactions = $basic_query->where("$user_related_table_name.myuser_id",$user_id)
+        $transactions = $basic_query->where("$role" . '_id',$user_id)
                             ->select($this->necessary_fields_for_transaction)
-                            ->latest('sell_offers.updated_at')
+                            ->latest('instant_transactions.updated_at')
                             ->get();
      
         return $transactions;
@@ -109,14 +92,14 @@ class transaction_controller extends Controller
             ],404);
         }
         
-        $sell_offer_id = $request->transaction_id  -  $this->transaction_id_increase_amount_proportional_to_real_id;
+        $transaction_id = $request->transaction_id  -  $this->transaction_id_increase_amount_proportional_to_real_id;
         
         
-        $transaction_status = $this->get_transaction_status($sell_offer_id);        
+        $transaction_status = $this->get_transaction_status($transaction_id);        
         
-        $given_status_instructions = config("transaction.data-according-to-status")["$transaction_status"];
+        $given_status_instructions = config("instantTransaction.data-according-to-status")["$transaction_status"];
         
-        $transaction_data = $this->get_transaction_data_according_to_the_given_data_instructions($given_status_instructions['data'],$sell_offer_id,$user_role);
+        $transaction_data = $this->get_transaction_data_according_to_the_given_data_instructions($given_status_instructions['data'],$transaction_id,$user_role);
         
         $date_convertor_object = new date_convertor();
         
@@ -145,9 +128,9 @@ class transaction_controller extends Controller
         ]);
     }
     
-    protected function get_transaction_status($sell_offer_id)
+    protected function get_transaction_status($transaction_id)
     {
-        $transaction_status_object = sell_offer::where('id',$sell_offer_id)
+        $transaction_status_object = instant_transaction::where('id',$transaction_id)
                                 ->select('transaction_status')
                                 ->get()
                                 ->first();
@@ -179,12 +162,12 @@ class transaction_controller extends Controller
         return $this->user_role_array[$user_role_id];
     }
     
-    protected function get_transaction_data_according_to_the_given_data_instructions($data_instruction_array,$sell_offer_id,$user_role)
+    protected function get_transaction_data_according_to_the_given_data_instructions($data_instruction_array,$transaction_id,$user_role)
     {
         if( ! empty($data_instruction_array[$user_role]) ){
             $initial_db_query = $this->generate_DB_query_by_given_data($data_instruction_array[$user_role]);
             
-            $complete_db_query = $initial_db_query->where('sell_offers.id',$sell_offer_id);
+            $complete_db_query = $initial_db_query->where('instant_transactions.id',$transaction_id);
             $required_data = $complete_db_query->get()->first();
         }
         else {
@@ -196,12 +179,12 @@ class transaction_controller extends Controller
     
     protected function convert_transaction_status_to_step_number($transaction_status,$user_role)
     {
-        $transaction_status_meta_data = config("transaction.data-according-to-status.$transaction_status");
+        $transaction_status_meta_data = config("instantTransaction.data-according-to-status.$transaction_status");
         $transaction_state = $transaction_status_meta_data['state'][$user_role];
         
-        $step_number = config("transaction.user-state.$user_role.states.$transaction_state.step");
+        $step_number = config("instantTransaction.user-state.$user_role.states.$transaction_state.step");
         
-        $state_msg = config("transaction.user-state.$user_role.states.$transaction_state.msg");
+        $state_msg = config("instantTransaction.user-state.$user_role.states.$transaction_state.msg");
         
         return compact('step_number','state_msg');
     }
@@ -213,7 +196,7 @@ class transaction_controller extends Controller
         $additional_conditions = $given_data_array['conditions']; //AND where conditions for now
         
         if(sizeof($tables) > 0){
-            $query = DB::table('sell_offers');
+            $query = DB::table('instant_transactions');
             
             foreach($tables as $table_name => $conditions){
                 $query = $query->join($table_name,function($join) use($conditions){
@@ -235,12 +218,12 @@ class transaction_controller extends Controller
             }
         }
         else if(sizeof($fields) > 0){
-            $query = DB::table('sell_offers')
+            $query = DB::table('instant_transactions')
                         ->select($fields)
                         ;
         }
         else{
-            $query = DB::table('sell_offers')
+            $query = DB::table('instant_transactions')
                         ->select('id')
                         ;
         }
@@ -257,13 +240,13 @@ class transaction_controller extends Controller
             ],422);
         }
         
-        $action_meta_data =  config('transaction.actions')[$request->action_id];
+        $action_meta_data =  config('instantTransaction.actions')[$request->action_id];
         
-        $sell_offer_id = $request->transaction_id - $this->transaction_id_increase_amount_proportional_to_real_id ;
-        $transaction_record = sell_offer::find($sell_offer_id); //sell_offer_record in fact
+        $transaction_id = $request->transaction_id - $this->transaction_id_increase_amount_proportional_to_real_id ;
+        $transaction_record = instant_transaction::find($transaction_id); 
         
         if(isset($action_meta_data['data']['factor'])){
-            $factor_record = new factor();
+            $factor_record = new instant_factor();
             
             $admin_id = session('admin_user_id'); //factors can be issued just by admins
             
@@ -275,7 +258,7 @@ class transaction_controller extends Controller
             }
             
             $factor_record->admin_id = $admin_id;
-            $factor_record->sell_offer_id = $sell_offer_id;
+            $factor_record->transaction_id = $transaction_id;
             
             $factor_record->save(); //generating record for the first time
         }
@@ -301,8 +284,8 @@ class transaction_controller extends Controller
         
         $this->notify_related_involved_users_in_the_tranaction(
             $action_meta_data['to_notify'],
-            $seller_user_id = $transaction_record->myuser_id,
-            $buyAd_id = $transaction_record->buy_ad_id,
+            $seller_user_id = $transaction_record->seller_id,
+            $buyer_user_id = $transaction_record->buyer_id,
             $request->transaction_id
         );
         
@@ -328,7 +311,7 @@ class transaction_controller extends Controller
             'transaction_id' => "required|integer|min:$this->transaction_id_increase_amount_proportional_to_real_id"
         ]);
         
-        $action_meta_data =  config('transaction.actions')[$request->action_id];
+        $action_meta_data =  config('instantTransaction.actions')[$request->action_id];
         
         $user_role = $this->get_user_role();
         
@@ -350,16 +333,16 @@ class transaction_controller extends Controller
     
     protected function is_user_authorized_to_have_an_action_on_the_transaction($transaction_id,$user_role,$action_meta_data = null)
     {
-        $sell_offer_id = $transaction_id - $this->transaction_id_increase_amount_proportional_to_real_id;
+        $transaction_id = $transaction_id - $this->transaction_id_increase_amount_proportional_to_real_id ;
         
-        $sell_offer_record = sell_offer::find($sell_offer_id);
+        $transaction_record = instant_transaction::find($transaction_id);
         
-        if(is_null($sell_offer_record)) return false;
+        if(is_null($transaction_record)) return false;
         
         if($action_meta_data != null){
             if(sizeof($action_meta_data['required_bit_index_set']) > 0){
                 foreach($action_meta_data['required_bit_index_set'] as $index){
-                    if($sell_offer_record->transaction_status[15 - $index] != 1){
+                    if($transaction_record->transaction_status[15 - $index] != 1){
                         return false;
                     }
                 }
@@ -370,27 +353,15 @@ class transaction_controller extends Controller
         if($user_role == 'admin'){
             return true;
         }
-        else if($user_role == 'seller'){
-            if($sell_offer_record->myuser_id == session('user_id')){
+        else if($user_role == 'seller' || $user_role == 'buyer'){
+            $temp_id = $user_role . '_id';
+            
+            if($transaction_record->$temp_id == session('user_id')){
                 return true;
             }
             else {
                 return false;
             }             
-        }
-        else if($user_role == 'buyer'){
-            $buy_ad_record = buyAd::find($sell_offer_record->buy_ad_id);
-            if($buy_ad_record){
-                if($buy_ad_record->myuser_id == session('user_id')){
-                    return true;
-                }
-                else{
-                    return false;
-                } 
-            }
-             else{
-                return false;
-            } 
         }
         else {
             return false;
@@ -420,7 +391,7 @@ class transaction_controller extends Controller
             $transaction->transaction_id = $transaction->id + $this->transaction_id_increase_amount_proportional_to_real_id;
             
             unset($transaction->deal_date);
-            unset($transaction->deal_date);
+            //unset($transaction->deal_date);
         });
         
         return response()->json([
@@ -434,22 +405,22 @@ class transaction_controller extends Controller
             'transaction_id' => "required|integer|min:$this->transaction_id_increase_amount_proportional_to_real_id",
         ]);
         
-        $sell_offer_id = $request->transaction_id - $this->transaction_id_increase_amount_proportional_to_real_id ;
+        $transaction_id = $request->transaction_id - $this->transaction_id_increase_amount_proportional_to_real_id ;
         
-        $transaction_record = sell_offer::where('id',$sell_offer_id)
+        $transaction_record = instant::where('id',$transaction_id)
                                 ->select([
                                     'id',
                                     'loading_dead_line',
                                     'admin_notes',
                                     'deal_date',
                                     'commission_persentage',
-                                    'buy_ad_id',
+                                    'buyer_id as buyer_user_id',
                                     'myuser_id as seller_user_id'
                                 ])
                                 ->get()
                                 ->first();
         
-        $payment_factor_record  = factor::where('sell_offer_id',$sell_offer_id)
+        $payment_factor_record  = instant_factor::where('id',$transaction_id)
                                                 ->where('type','payment')
                                                 ->select([
                                                     'quantity',
@@ -460,7 +431,7 @@ class transaction_controller extends Controller
                                                 ->get()
                                                 ->first();
         
-        $prepayment_factor_record = factor::where('sell_offer_id',$sell_offer_id)
+        $prepayment_factor_record = instant_factor::where('id',$transaction_id)
                                                 ->where('type','prepayment')
                                                 ->select([
                                                     'amount_to_pay as prepayment_amount'
@@ -490,8 +461,8 @@ class transaction_controller extends Controller
     }
     protected function get_factor_info_by_transaction_id($transaction_id,$payment_type = 'prepayment') //payment type can be prepayment or payment for now
     {   
-        $sell_offer_id = $transaction_id - $this->transaction_id_increase_amount_proportional_to_real_id;
-        $factor_record = factor::where('sell_offer_id',$sell_offer_id)
+        $transaction_id = $transaction_id - $this->transaction_id_increase_amount_proportional_to_real_id;
+        $factor_record = instant_factor::where('transaction_id',$transaction_id)
                                 ->where('type',$payment_type)
                                 ->where('is_payed',true)
                                 ->get()
@@ -500,7 +471,7 @@ class transaction_controller extends Controller
         return $factor_record;
     }
     
-    protected function notify_related_involved_users_in_the_tranaction($notify_actions,$seller_user_id,$buyAd_id,$transaction_id)
+    protected function notify_related_involved_users_in_the_tranaction($notify_actions,$seller_user_id,$buyer_user_id,$transaction_id)
     {
         $sms_controller_object = new sms_controller();
         
@@ -520,7 +491,6 @@ class transaction_controller extends Controller
                     break;
                 case 'buyer'  :
                     //send sms to the buyer
-                    $buyer_user_id = $this->get_buyAd_owner_user_id($buyAd_id);
                     
                     $msg_array [] = 'خریدار محترم اینکوباک';
                     $msg_array [] =  $msg;
@@ -541,17 +511,6 @@ class transaction_controller extends Controller
         }
     }
     
-    protected function get_buyAd_owner_user_id($buyAd_id)
-    {
-        $buyAd_record = buyAd::find($buyAd_id);
-        
-        if($buyAd_record){
-            return $buyAd_record->myuser_id;
-        }
-        else{
-            return false;
-        }
-    }
     
     //public method
     public function get_payed_factor_list()

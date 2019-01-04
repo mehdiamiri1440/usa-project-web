@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use App\sell_offer;
+use App\instant_transaction;
 use App\factor;
+use App\instant_factor;
 use App\Http\Controllers\transaction_controller;
+use App\Http\Controllers\instant_transaction_controller;
 use SoapClient;
     
 
@@ -116,6 +119,54 @@ class payment_controller extends Controller
         
     }
     
+     protected function get_instant_transaction_payment_amount($type,$transaction_id)
+    {
+        $transaction_id = (int) $transaction_id;
+        
+        if(is_integer($transaction_id)){
+            $transaction_id = $transaction_id - $this->transaction_id_increase_amount_proportional_to_real_id;   
+        }
+        else{ return false ;}
+        
+        $transaction_record = instant_transaction::find($transaction_id);
+        
+        if($transaction_record){
+            if($type == 'prepayment'){
+                $factor_record = instant_factor::where('transaction_id',$transaction_record->id)
+                                            ->where('type','prepayment')
+                                            ->where('is_payed',false)
+                                            ->get()
+                                            ->last();
+                if($factor_record){
+                    
+//                    session(['factor_id' => $factor_record->id]);
+                    $_SESSION['factor_id'] = $factor_record->id;
+                    
+                    return $factor_record->amount_to_pay - $factor_record->payed_so_far;
+                }
+                else return false;
+            }
+            else if($type == 'finalPayment'){
+                $factor_record = instant_factor::where('transaction_id',$transaction_record->id)
+                                            ->where('type','payment')
+                                            ->where('is_payed',false)
+                                            ->get()
+                                            ->last();
+                if($factor_record){
+                    //save factor id in session
+//                    session(['factor_id' => $factor_record->id]);
+                    $_SESSION['factor_id'] = $factor_record->id;
+                    
+                    return $factor_record->amount_to_pay - $factor_record->payed_so_far;
+                }
+                else return false;
+            }
+            else return false;
+        }
+        else return false;
+        
+    }
+    
     public function payment_callback()
     {
         $transaction_id = session()->pull('transaction_id');
@@ -175,11 +226,17 @@ class payment_controller extends Controller
         
     }
     
-    protected function do_after_payment_changes($payed_amount_in_gateway)
+    protected function do_after_payment_changes($payed_amount_in_gateway,$base_factor_model)
     {
         $factor_id = $_SESSION['factor_id'];
         
-        $factor_record = factor::find($factor_id);
+        if($base_factor_model == 'instant_factor'){
+            $factor_record = instant_factor::find($factor_id);
+        }
+        else if($base_factor_model == 'factor'){
+            $factor_record = factor::find($factor_id);
+        }
+        
         
         $factor_record->payed_so_far = $factor_record->payed_so_far + intval($payed_amount_in_gateway)/10 ;
         
@@ -194,6 +251,7 @@ class payment_controller extends Controller
         }
         else return false;
     }
+    
     
     public function do_my_payment($type,$transaction_id)
     {   
@@ -215,6 +273,47 @@ class payment_controller extends Controller
                 $_SESSION['PayOrderId'] = time();
 
                 $revertURL = route('payment_callback');
+
+                $client = new SoapClient('https://ikc.shaparak.ir/XToken/Tokens.xml', array('soap_version'   => SOAP_1_1));
+
+                $params['amount'] =  $payment_amount;
+                $params['merchantId'] = $this->MerchantId;
+                $params['invoiceNo'] = $_SESSION['PayOrderId'];
+                $params['paymentId'] = $_SESSION['PayOrderId'];
+                $params['specialPaymentId'] = $_SESSION['PayOrderId'];
+                $params['revertURL'] = $revertURL;
+                $params['description'] = "";
+                $result = $client->__soapCall("MakeToken", array($params));
+                $_SESSION['token'] = $result->MakeTokenResult->token;
+                $data['token'] = $_SESSION['token'];
+                $data['merchantId'] = $_SESSION['merchantId'];
+                $_SESSION['transaction_id'] = $transaction_id ;
+                $_SESSION['payment_type'] = $type ;
+                $this->redirect_post('https://ikc.shaparak.ir/TPayment/Payment/index',$data);
+            }
+           
+    }
+    
+    public function do_instant_transaction_payment($type,$transaction_id)
+    {   
+        $payment_amount = $this->get_instant_transaction_payment_amount($type,$transaction_id);
+        
+        if($payment_amount == false){
+            return redirect()->back()->withErrors([
+               'error' => 'شما مجاز به انجام این پرداخت نیستید' 
+            ]);
+        }        
+        else{
+                
+                $payment_amount = $payment_amount * 10 > $this->gateway_max_amount_to_pay_value ? $this->gateway_max_amount_to_pay_value : $payment_amount * 10 ;
+            
+                $_SESSION['merchantId'] = $this->MerchantId;
+                $_SESSION['sha1Key'] = $this->sha1Key;
+                $_SESSION['admin_email'] = 'ali_delkhosh@ymail.com';
+                $_SESSION['amount'] = $payment_amount ;
+                $_SESSION['PayOrderId'] = time();
+
+                $revertURL = route('instant_transaction_payment_callback');
 
                 $client = new SoapClient('https://ikc.shaparak.ir/XToken/Tokens.xml', array('soap_version'   => SOAP_1_1));
 
@@ -311,7 +410,7 @@ class payment_controller extends Controller
                 if (floatval($result) > 0 && floatval($result) == floatval($_SESSION['amount']) )
                 {	
                     //Payment verfed and OK !
-                    $payment_done_completely = $this->do_after_payment_changes($result); //result is the payed amount value in gateway
+                    $payment_done_completely = $this->do_after_payment_changes($result,'factor'); //result is the payed amount value in gateway
 
                     //$payment_type = session()->pull('payment_type');
                     if($payment_done_completely == true){
@@ -340,6 +439,82 @@ class payment_controller extends Controller
                     $this->flush_global_session();
 
                     return redirect()->route('back-to-basic',['id' => $transaction_id]);
+                }else{
+                    //flush session
+                    $this->flush_global_session();
+                    
+                    return view('dashboard.buyer.transaction.payment-error',[
+                       'error_msg' => $this->message2($result),
+                       'id' => $transaction_id
+                    ]);
+                }
+            }
+            else{
+                //flush session
+                $this->flush_global_session();
+                
+                return view('dashboard.buyer.transaction.payment-error',[
+                       'error_msg' => $this->message($_POST['resultCode']),
+                       'id' => $transaction_id
+                    ]);
+            }
+        }
+        else{
+            return redirect()->back();
+        }
+    }
+    
+    public function instant_transaction_payment_callback()
+    {
+        $transaction_id = $_SESSION['transaction_id'];
+        
+        if(isset($_POST['resultCode'])){
+            if ($_POST['resultCode'] == '100') 
+            {
+                $referenceId = isset($_POST['referenceId']) ? $_POST['referenceId'] : 0;
+                $client = new SoapClient('https://ikc.shaparak.ir/XVerify/Verify.xml', array('soap_version'   => SOAP_1_1));
+                $params['token'] =  $_SESSION['token'];
+                $params['merchantId'] = $this->MerchantId;
+                $params['referenceNumber'] = $referenceId;
+                $params['sha1Key'] = $this->sha1Key;
+
+
+                $result = $client->__soapCall("KicccPaymentsVerification", array($params));
+                $result = ($result->KicccPaymentsVerificationResult);
+
+
+                if (floatval($result) > 0 && floatval($result) == floatval($_SESSION['amount']) )
+                {	
+                    //Payment verfed and OK !
+                    $payment_done_completely = $this->do_after_payment_changes($result,'instant_factor'); //result is the payed amount value in gateway
+
+                    //$payment_type = session()->pull('payment_type');
+                    if($payment_done_completely == true){
+                        $payment_type = $_SESSION['payment_type'];
+
+
+                        if($payment_type == 'prepayment'){
+                            $action_id = 4; //load action id from config file later
+                        }
+                        else if($payment_type == 'finalPayment'){
+                            $action_id = 6;
+                        }
+
+                        $request = Request::create('/instant_action', 'POST',[
+                                'action_id' => $action_id,
+                                'transaction_id' => $transaction_id,
+                        ]);
+
+                        $transaction_controller_object = new instant_transaction_controller();
+
+                        $transaction_controller_object->action_controller($request);
+                    }
+                    
+                    
+                    //flush session
+                    $this->flush_global_session();
+
+                    return redirect()->route('instant-back-to-basic',['id' => $transaction_id]);
                 }else{
                     //flush session
                     $this->flush_global_session();

@@ -218,6 +218,12 @@ Route::group(['middleware' => [login::class]],function(){
            'transaction_id' => $transaction_id
         ]);
     })->name('back-to-basic');
+    
+    Route::get('instant-back-to-basic/{transaction_id}',function($transaction_id){
+        return view('instant-back-to-basic',[
+           'transaction_id' => $transaction_id
+        ]);
+    })->name('instant-back-to-basic');
 
 
     Route::group(['prefix' => 'dashboard'],function(){
@@ -292,6 +298,11 @@ Route::group(['middleware' => [login::class]],function(){
             Route::post('/get_transaction_info',[
                 'uses' => 'transaction_controller@get_transaction_info',
                 'as' => 'get-transaction-info'
+            ]);
+            
+            Route::post('/get_instant_transaction_info',[
+                'uses' => 'instant_transaction_controller@get_transaction_info',
+                'as' => 'get-instant-transaction-info'
             ]);
 
             Route::get('/transaction-detail/{id}',function($id){
@@ -471,7 +482,21 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'user_controller@get_contract_sides_user_info',
         'as' => 'get_contract_sides_user_info'
     ]);
+    
+    Route::post('/get_user_instant_transaction_list',[
+        'uses' => 'instant_transaction_controller@get_user_in_progress_transaction_list',
+        'as'  => 'get_user_in_progress_instant_transaction_list'
+    ]);
+    
+    Route::post('/get_terminated_instant_transactions',[
+        'uses' => 'instant_transaction_controller@get_user_terminated_transactions',
+        'as' => 'get_terminated_instant_transactions',
+    ]);
 
+    Route::post('/get_terminated_instant_transaction_info',[
+        'uses' => 'instant_transaction_controller@get_terminated_instant_transaction_info',
+        'as' => 'get_terminated_instant_transaction_info',
+    ]);
 
 });
 
@@ -691,6 +716,15 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
         'uses' => 'admin_panel\admin_statistics_controller@load_statistics',
         'as' => 'admin_panel_load_statistics'
     ]);
+    
+    Route::get('instantTransactionDetail',function(){
+        return view('admin_panel.instantTransactionDetail');
+    });
+    
+    Route::post('initiate-instant-transaction',[
+       'uses' => 'admin_panel\admin_transaction_controller@initiate_instant_transaction',
+        'as' => 'initiate_instant_transaction'
+    ]);
 
 //    Route::get('factor-issuance-detail/{id}',[
 //        'uses' => 'admin_panel\admin_transaction_controller@'
@@ -717,6 +751,11 @@ Route::post('/action',[
 ]);
 
 
+Route::post('/instant_action',[
+    'uses' => 'instant_transaction_controller@action_controller',
+    'as'   => 'instant_action_controller'
+]);
+
 Route::post('/get_terminated_transactions',[
     'uses' => 'transaction_controller@get_user_terminated_transactions',
     'as' => 'get_terminated_transactions',
@@ -737,6 +776,11 @@ Route::get('/payment/{type}/{transactionId}',[
     'as' => 'do_payment',
 ]);
 
+Route::get('/instant_payment/{type}/{transactionId}',[
+    'uses' => 'payment_controller@do_instant_transaction_payment',
+    'as' => 'do_instant_transaction_payment',
+]);
+
 //Route::any('/payment_callback',[
 //    'uses' => 'payment_controller@payment_callback',
 //    'as' => 'payment_callback'
@@ -745,6 +789,11 @@ Route::get('/payment/{type}/{transactionId}',[
 Route::any('/payment_callback',[
     'uses' => 'payment_controller@my_payment_callback',
     'as' => 'payment_callback'
+]);
+
+Route::any('/instant_payment_callback',[
+    'uses' => 'payment_controller@instant_transaction_payment_callback',
+    'as' => 'instant_transaction_payment_callback'
 ]);
 
 Route::post('/get_wp_posts',[

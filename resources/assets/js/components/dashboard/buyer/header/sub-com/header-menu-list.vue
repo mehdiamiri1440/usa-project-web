@@ -124,7 +124,7 @@
                    this.active_el = 2
                }else if(this.subIsActive('/my-buyAds') || this.subIsActive('/sell-offer-detail/' + this.$route.params.id)){
                    this.active_el = 3
-               }else if(this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/' + this.$route.params.id)){
+               }else if(this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/' + this.$route.params.id) || this.subIsActive('/instant-transaction-detail/' + this.$route.params.id)){
                    this.active_el = 4
                }else if(this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/' + this.$route.params.id)){
                    this.active_el = 5
