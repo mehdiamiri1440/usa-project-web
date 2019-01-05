@@ -126,7 +126,7 @@
                     this.active_el = 3
                 } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/')|| this.subIsActive('/instant-transaction-detail/'  + this.$route.params.id)) {
                     this.active_el = 4
-                } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/')|| this.subIsActive('/transaction-report/' + this.$route.params.id)) {
+                } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/')|| this.subIsActive('/instant-transaction-report/' + this.$route.params.id)) {
                     this.active_el = 5
                 } else if (this.subIsActive('/guide')) {
                     this.active_el = 6
@@ -136,8 +136,7 @@
                 console.log(this.active_el);
             }
         }, mounted: function () {
-            console.log(this.subIsActive('/transaction-report/*'));
-            if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract')) {
+            if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract')){
                 this.active_el = 1;
             } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests') || this.subIsActive('/buyAd-request-detail/' + this.$route.params.id)) {
                 this.active_el = 2

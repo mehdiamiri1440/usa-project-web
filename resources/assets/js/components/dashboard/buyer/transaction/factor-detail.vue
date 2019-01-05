@@ -519,8 +519,11 @@
                 <div class="title-text col-xs-12 col-sm-4">
                     خلاصه ی فاکتور
                 </div>
-                <div class="serial-number col-xs-12 col-sm-4">
+                <div class="serial-number col-xs-12 col-sm-4" v-if="factorInfo.sell_offer_id">
                     شماره سریال:  <span>{{factorInfo.sell_offer_id + 100000}}</span>
+                </div>
+                <div class="serial-number col-xs-12 col-sm-4" v-if="factorInfo.transaction_id">
+                    شماره سریال:  <span>{{factorInfo.transaction_id + 100000}}</span>
                 </div>
                 <div class="date-init col-xs-12 col-sm-4">
                     تاریخ پرداخت : <span>{{factorInfo.persian_date}}</span>
@@ -557,7 +560,7 @@
                items: [
                    {
                        message: ' جزئیات فاکتور',
-                       url: 'buyerFactorDetail'
+                       url: ''
                    }
                ]
            }
@@ -565,15 +568,35 @@
         methods:{
             init:function(){
                 var self = this;
-
-                this.factorId = this.$route.params.id ;
-
-                axios.post('/get_factor_info',{
-                    factor_id : this.factorId,
-                })
+                
+                var pathName = this.$route.name;
+                
+                this.items.url = pathName;
+                
+                if(pathName == 'buyerFactorDetail'){
+                    this.factorId = this.$route.params.id ;
+                    
+                    axios.post('/get_factor_info',{
+                        factor_id : this.factorId,
+                    })
                     .then(function(response){
                         self.factorInfo = response.data.factor;
                     });
+                }
+                else{
+                    this.factorId = this.$route.params.id ;
+                    
+                    axios.post('/get_instant_factor_info',{
+                        factor_id : this.factorId,
+                    })
+                    .then(function(response){
+                        self.factorInfo = response.data.factor;
+                    });
+                }
+
+                
+                
+                
             },
         },
         mounted:function(){

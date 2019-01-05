@@ -48,66 +48,198 @@
 
     <!-- Main content -->
     <section class="content">
-    
-        <form>
-            <div class="row">
-                 <div class="form-group">
-                    <div class="col-xs-12">
-                        <label>شماره همراه خریدار</label>
-                    </div>
-                    <div class="col-xs-12 col-md-4">
-                        <input class="form-control" type="text" id="buyer-phone" placeholder="09123456789">
-                    </div>
-                    <div class="col-xs-12">
-                        <label>شماره همراه فروشنده</label>
-                    </div>
-                    <div class="col-xs-12 col-md-4">
-                        <input class="form-control" type="text" id="seller-phone" placeholder="09123456789">
-                    </div>
-                </div>                
+        <div class="row">        
+          <div class="box">
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered table-striped">
+                  <thead>
+                    <h4>فروشنده : {{$seller_user_info->first_name. ' ' . $seller_user_info->last_name}} &nbsp; <span class="text-danger">{{$seller_user_info->phone}}</span></h4>
+                  </thead>
+              </table>
             </div>
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <label>پایان بارگیری</label>
-                    </div>
-                    <div class="col-xs-12 col-md-4">
-                        <input class="form-control" type="text" id="loading-dead-line">
-                    </div>
-                </div>                
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <div class="row">        
+          <div class="box">
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered table-striped">
+                  <thead>
+                    <h4>خریدار : {{$buyer_user_info->first_name. ' ' . $buyer_user_info->last_name}} &nbsp; <span class="text-danger">{{$buyer_user_info->phone}}</span></h4>
+                  </thead>
+              </table>
             </div>
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <label>درصد کمسیون</label>
-                    </div>
-                    <div class="col-xs-12 col-md-4">
-                        <input class="form-control" type="text" id="commission-percentage" placeholder="از ۰ تا ۱۰۰">
-                    </div>
-                </div>                
-            </div>
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <label>توضیحات ادمین</label>
-                    </div>
-                    <div class="col-xs-12">
-                        <textarea class="form-control" type="text" id="admin-notes" rows="15"></textarea>
-                    </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        
+        @if($transaction->transaction_status == '0000000000000011' || $transaction->transaction_status == '0000000000000111')
+            <h3>فاکتور پیش پرداخت</h3>
+            <form>
+                 <div class="row">
+                     <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <label for="product-name">نام کامل محصول</label>
+                            <input class="form-control" type="text" id="product-name">
+                        </div> 
+                     </div>
+                     <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <label for="product-quantity">مقدار محصول به کیلوگرم</label>
+                            <input class="form-control" type="text" id="product-quantity" placeholder="به کیلوگرم">
+                        </div>
+                     </div>
                 </div>
-            </div>
-            <br/>
-            <div class="row">
-                <div class="form-group">
+                <div class="row">
+                     <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <label for="unit-price">قیمت واحد هر کیلو</label>
+                            <input class="form-control" type="text" id="unit-price" placeholder="به ریال">
+                        </div> 
+                     </div>
+                     <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <label for="inpection-price">هزینه ی بازرسی</label>
+                            <input class="form-control" type="text" id="inspection-price" placeholder="به ریال">
+                        </div>
+                     </div>
+                </div>
+                <div class="row">
+                     <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <label for="price-to-pay">مقدار پرداخت در این فاکتور</label>
+                            <input class="form-control" type="text" id="price-to-pay" placeholder="به ریال">
+                        </div> 
+                     </div>
+                </div>
+                <div class="row">
                     <div class="col-xs-4">
-                        <button type="button" class="btn btn-primary" onClick="submitTransactionInitiateForm()">آغاز فرآیند</button>
+                        <button type="button" class="btn btn-primary" onClick="submitFactorForm(3)">صدور فاکتور</button>
                     </div>
                 </div>
-            </div>
-            <br/>
-        </form>
-       
-            
+            </form>
+        
+        @elseif($transaction->transaction_status == '0000000000011111')
+            <h3>اطلاعات فاکتور پیش پرداخت</h3>
+                <table class="table table-bordered table-striped">
+                  <tbody>
+                        <tr>
+                            <td class="col-xs-2"><b>نام محصول</b></td>
+                            <td class="col-xs-10">
+                                {{$prepayment_factor->product_name}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-2"><b>قیمت واحد</b></td>
+                            <td class="col-xs-10">
+                                {{$prepayment_factor->unit_price}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-2"><b>مقدار محصول</b></td>
+                            <td class="col-xs-10">{{$prepayment_factor->quantity}}</td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-2"><b>هزینه بازرسی</b></td>
+                            <td class="col-xs-10">{{$prepayment_factor->inspection_price}}</td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-2"><b>مبلغ پرداخت شده</b></td>
+                             <td class="col-xs-10">
+                                {{$prepayment_factor->amount_to_pay}}
+                            </td>
+                      </tr>
+                  </tbody>
+              </table>
+            <h3>فاکتور تسویه</h3>
+            <form>
+                 <div class="row">
+                     <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <label for="product-name">نام کامل محصول</label>
+                            <input class="form-control" type="text" id="product-name">
+                        </div> 
+                     </div>
+                     <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <label for="product-quantity">مقدار محصول به کیلوگرم</label>
+                            <input class="form-control" type="text" id="product-quantity" placeholder="به کیلوگرم">
+                        </div>
+                     </div>
+                </div>
+                <div class="row">
+                     <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <label for="unit-price">قیمت واحد هر کیلو</label>
+                            <input class="form-control" type="text" id="unit-price" placeholder="به ریال">
+                        </div> 
+                     </div>
+                     <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <label for="inpection-price">هزینه ی بازرسی</label>
+                            <input class="form-control" type="text" id="inspection-price" placeholder="به ریال">
+                        </div>
+                     </div>
+                </div>
+                <div class="row">
+                     <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <label for="price-to-pay">مقدار پرداخت در این فاکتور</label>
+                            <input class="form-control" type="text" id="price-to-pay" placeholder="به ریال">
+                        </div> 
+                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-primary" onClick="submitFactorForm(5)">صدور فاکتور</button>
+                    </div>
+                </div>
+            </form>
+        @elseif($transaction->transaction_status == '0000000001111111')
+        <div class="row">
+            <div class="col-xs-4">
+                <button type="button" class="btn btn-primary" onClick="submitTransactionTerminationSignal()">ثبت پایان تراکنش</button>
+            </div>        
+        </div> 
+        @elseif($transaction->transaction_status == '0000000011111111')
+            <table class="table table-bordered table-striped">
+                  <tbody>
+                        <tr>
+                            <td class="col-xs-2"><b>نام کامل تامین کننده</b></td>
+                            <td class="col-xs-10">
+                                {{$sell_offer_user_info->first_name . ' ' . $sell_offer_user_info->last_name}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-2"><b>شماره تماس</b></td>
+                            <td class="col-xs-10">
+                                {{$sell_offer_user_info->phone}}
+                            </td>
+                        </tr>                      
+                        <tr>
+                            <td class="col-xs-2"><b>شماره تراکنش</b></td>
+                            <td class="col-xs-10">
+                                {{$transaction->id + 100000}}
+                            </td>
+                        </tr>
+                        <tr class="text-danger">
+                            <td class="col-xs-2"><b>مقدار طلب</b></td>
+                            <td class="col-xs-10">{{(1 - $transaction->commission_persentage * 0.01) * $payment_factor->quantity * $payment_factor->unit_price}} تومان</td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-2"><b>شماره شبا</b></td>
+                            <td class="col-xs-10">
+                                {{$sell_offer_user_profile_info->shaba_code}}
+                            </td>
+                        </tr>
+                  </tbody>
+              </table>
+        @endif
+        <!-- /.col -->
       <!-- /.row -->
     </section>
     <!-- /.content -->
@@ -182,39 +314,15 @@
                     return numDic[w]; 
             });
     }
-    function submitTransactionInitiateForm()
-    {   
-        var data = {
-            seller_phone: toLatinNumbers($('#seller-phone').val()),
-            buyer_phone: toLatinNumbers($('#buyer-phone').val()),
-            loading_dead_line: $('#loading-dead-line').val(),
-            admin_notes: $('#admin-notes').val(),
-            commission_percentage: toLatinNumbers($('#commission-percentage').val()),
-        };
-    
-        $.ajax({
-            url:"{{route('initiate_instant_transaction')}}",
-            data: data,
-            type:'POST',
-            datatype:'json'
-        })
-        .done(function(json){
-            alert('process started!');
-            window.location.href = "{{route('admin_panel_waiting_to_initiate_transactions_list')}}";
-        })
-        .fail(function(xhr,status,errorThrown){
-            
-        });
-    }
     
     function submitFactorForm(actionId)
     { 
-        var transactionId = 10;
+        var transactionId = {{$transaction->id + 100000}};
     
-        if(actionId == 4){
+        if(actionId == 3){
             var factorType = 'prepayment';
         }
-        else if(actionId == 6){
+        else if(actionId == 5){
             var factorType = 'payment';
         }
         else{
@@ -222,10 +330,11 @@
             return null;
         }
     
+        
         var data = {
             action_id : actionId,
             transaction_id : transactionId,
-            expiration_date:'2018-09-09',
+//            expiration_date:'2018-09-09',
             //factor data
             product_name:$('#product-name').val(),
             quantity: toLatinNumbers($('#product-quantity').val()),
@@ -234,36 +343,37 @@
             amount_to_pay: toLatinNumbers($('#price-to-pay').val()),
             type: factorType,
         };
-    
+
         $.ajax({
-            url:"{{route('action_controller')}}",
+            url:"{{route('instant_action_controller')}}",
             data:data,
             type: 'POST',
             dataType: 'json',
         })
         .done(function(json){
             alert('submited!');
-            if(actionId == 4){
-                window.location.href = "{{route('admin_panel_waiting_for_prepayment_factor_issuance_list')}}";
+            if(actionId == 3){
+                window.location.href = "{{route('admin_panel_waiting_for_prepayment_instant_factor_issuance_list')}}";
             }
-            else if(actionId == 6){
-               window.location.href = "{{route('admin_panel_waiting_for_payment_factor_issuance_list')}}"; 
+            else if(actionId == 5){
+               window.location.href = "{{route('admin_panel_waiting_for_payment_instant_factor_issuance_list')}}";
             }
-            
+
         })
         .fail(function(xhr,status,errorThrown){
             //
         });
+    
     }
     
     function submitTransactionTerminationSignal()
     {
-        var TransactionId = 10;
+        var TransactionId = {{$transaction->id + 100000}};
     
         $.ajax({
-            url:"{{route('action_controller')}}",
+            url:"{{route('instant_action_controller')}}",
             data:{
-                action_id: 8 ,
+                action_id: 7 ,
                 transaction_id: TransactionId,
             },
             type:'POST',
@@ -272,7 +382,7 @@
         .done(function(json){
             alert('submited!');
             
-            window.location.href = "{{route('admin_panel_waiting_for_termination_transaction_list')}}" ;
+            window.location.href = "{{route('admin_panel_waiting_for_termination_instant_transaction_list')}}" ;
         })
         .fail(function(xhr,status,errorThrown){
            // 

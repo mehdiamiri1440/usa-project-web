@@ -166,6 +166,34 @@
                 </router-link>
             </div>
         </div>
+        <div class="list-group" v-if="instantFactors.length != 0">
+            <!--start title list -->
+            <div class="list-group-item title-list">
+                <p class="title-list-text col-xs-2">شماره تراکنش</p>
+                <p class="time-show  col-xs-2">تاریخ </p>
+                <p class="time-show col-xs-5">موضوع فعالیت </p>
+                <p class="time-show  col-xs-3"> مبلغ </p>
+            </div>
+            <!--end title list -->
+            <div v-for="factor in instantFactors">
+                <router-link
+                        :to="'/instant-factor-detail/' + factor.id"
+                        class="list-group-item list-group-item-action col-xs-12">
+                    <p class="number col-xs-2">
+                        {{factor.transaction_id + 100000}}
+                    </p>
+                    <p class="date col-xs-2" dir="rtl">
+                        {{factor.persian_date}}
+                    </p>
+                    <p class="subject col-xs-5">
+                        {{factor.product_name}}
+                    </p>
+                    <p class="col-xs-3">
+                        <span class="green-sbot" dir="rtl"> {{factor.amount_to_pay}} تومان</span>
+                    </p>
+                </router-link>
+            </div>
+        </div>
         <div class="loading_images  col-xs-12" v-else-if="isLoading">
             <img :src="loading_img" style="width:200px;height:200px">
         </div>
@@ -187,6 +215,7 @@
                 isLoading: true,
                 popUpMsg: '',
                 submiting: false,
+                instantFactors:'',
                 items: [
                     {
                         message: 'فاکتور های پرداخت شده',
@@ -202,6 +231,19 @@
                 axios.post('/get_payed_factor_list')
                     .then(function (response) {
                         self.factors = response.data.factors;
+                        self.isLoading = false;
+                    })
+                    .catch(function (err) {
+                        if (err.response.status == 404) {
+                            window.location.href = '/404'
+                        }
+                        self.isLoading = false;
+                    });
+                self.isLoading = true;
+                
+                axios.post('/get_payed_instant_factor_list')
+                    .then(function (response) {
+                        self.instantFactors = response.data.factors;
                         self.isLoading = false;
                     })
                     .catch(function (err) {

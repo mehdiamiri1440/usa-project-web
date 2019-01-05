@@ -828,7 +828,8 @@
                             </tr>
                             <tr class="green-text">
                                 <td>    مبلغ کل پس از کسر حق معامله:</td>
-                                <td> {{( 1 - transactionInfo.commission_persentage  * 0.01) * transactionInfo.unit_price * transactionInfo.quantity}} تومان</td>
+                                <td v-if="transactionInfo.commission_percentage"> {{( 1 - transactionInfo.commission_percentage  * 0.01) * transactionInfo.unit_price * transactionInfo.quantity}} تومان</td>
+                                <td v-if="transactionInfo.commission_persentage"> {{( 1 - transactionInfo.commission_persentage  * 0.01) * transactionInfo.unit_price * transactionInfo.quantity}} تومان</td>
                             </tr>
                         </table>
                     </div>
@@ -855,10 +856,11 @@
                transactionInfo:'',
                sellerUserInfo:'',
                buyerUserInfo:'',
+               transactionType:'',
                items: [
                    {
-                       message: 'لیست تراکنش ها',
-                       url: 'registerProduct'
+                       message: 'گزارش تراکنش',
+                       url: ''
                    },
                ]
            }
@@ -866,37 +868,78 @@
         methods:{
             init:function(){
                 var self = this;
-                var transactionId = this.$route.params.id;
-                this.transactionId = transactionId ;
-
-                axios.post('/get_terminated_transaction_info',{
-                    transaction_id: this.transactionId,
-                })
-                .then(function(response){
-                    self.transactionInfo = response.data.transaction_info;
+                
+                var pathName = this.$route.name;
+                
+                this.items.url = pathName;
+                
+                if(pathName == 'transactionReport'){
+                    this.transactionType = 'normal';
                     
-                    axios.post('/get_buyAd_owner_user_id',{
-                        buyAd_id : self.transactionInfo.buy_ad_id
+                    var transactionId = this.$route.params.id;
+                    this.transactionId = transactionId ;
+
+                    axios.post('/get_terminated_transaction_info',{
+                        transaction_id: this.transactionId,
                     })
                     .then(function(response){
+                        self.transactionInfo = response.data.transaction_info;
+
+                        axios.post('/get_buyAd_owner_user_id',{
+                            buyAd_id : self.transactionInfo.buy_ad_id
+                        })
+                        .then(function(response){
+                            axios.post('/get_contract_sides_user_info',{
+                                seller_user_id:self.transactionInfo.seller_user_id,
+                                buyer_user_id: response.data.user_id
+                            })
+                            .then(function(response){
+                                self.sellerUserInfo = response.data.seller_user_info;
+                                self.buyerUserInfo  = response.data.buyer_user_info;
+                            });
+                        });
+
+
+                        self.msg = response.data.msg;
+                    })
+                    .catch(function(err){
+                        if(err.response.status == 404){
+                            window.location.href = '/404';
+                        }
+                    });
+                }
+                else{
+                    this.transactionType = 'instant';
+                    
+                    
+                    var transactionId = this.$route.params.id;
+                    this.transactionId = transactionId ;
+
+                    axios.post('/get_terminated_instant_transaction_info',{
+                        transaction_id: this.transactionId,
+                    })
+                    .then(function(response){
+                        self.transactionInfo = response.data.transaction_info;
+
                         axios.post('/get_contract_sides_user_info',{
                             seller_user_id:self.transactionInfo.seller_user_id,
-                            buyer_user_id: response.data.user_id
+                            buyer_user_id: self.transactionInfo.buyer_user_id
                         })
                         .then(function(response){
                             self.sellerUserInfo = response.data.seller_user_info;
                             self.buyerUserInfo  = response.data.buyer_user_info;
                         });
+
+
+                        self.msg = response.data.msg;
+                    })
+                    .catch(function(err){
+                        if(err.response.status == 404){
+                            window.location.href = '/404';
+                        }
                     });
-                   
-                      
-                    self.msg = response.data.msg;
-                })
-                .catch(function(err){
-                    if(err.response.status == 404){
-                        window.location.href = '/404';
-                    }
-                });
+                }
+                
             },
             goToNextPage: function(){
                 if (this.pageStep < 12){

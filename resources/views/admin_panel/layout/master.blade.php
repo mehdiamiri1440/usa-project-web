@@ -122,6 +122,19 @@
         <li class="{{Request::is('admin/transaction-checkout-list') ? 'active':''}}">
             <a href="{{route('admin_panel_waiting_for_checkout_transaction_list')}}"><i class="fa fa-envelope"></i><span>درانتظار تسویه با اینکوباک</span></a>
         </li>
+        <hr/>
+        <li class="{{Request::is('admin/initiate-instant-transaction') ? 'active':''}}">
+            <a href="{{route('initiate-instant-transaction-view')}}"><i class="fa fa-envelope"></i><span>آغاز تراکنش آنی</span></a>
+        </li>
+        <li class="{{Request::is('admin/prepayment-instant-factor-list') ? 'active':''}}">
+            <a href="{{route('admin_panel_waiting_for_prepayment_instant_factor_issuance_list')}}"><i class="fa fa-envelope"></i><span> صدور فاکتور پیش پرداخت آنی</span></a>
+        </li>
+        <li class="{{Request::is('admin/payment-instant-factor-list') ? 'active':''}}">
+            <a href="{{route('admin_panel_waiting_for_payment_instant_factor_issuance_list')}}"><i class="fa fa-envelope"></i><span> صدور فاکتور تسویه آنی</span></a>
+        </li>
+        <li class="{{Request::is('admin/instant-transaction-termination-list') ? 'active':''}}">
+            <a href="{{route('admin_panel_waiting_for_termination_instant_transaction_list')}}"><i class="fa fa-envelope"></i><span> اتمام تراکنش آنی</span></a>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->

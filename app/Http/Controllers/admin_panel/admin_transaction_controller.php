@@ -14,6 +14,7 @@ use App\profile;
 use Illuminate\Http\Request;
 use App\instant_transaction;
 use Carbon\Carbon;
+use App\instant_factor;
 
 class admin_transaction_controller extends Controller
 {
@@ -113,6 +114,45 @@ class admin_transaction_controller extends Controller
         ]);
     }
     
+    //public method
+    public function get_instant_transaction_with_related_data($real_transaction_id)
+    {
+        $transaction = instant_transaction::find($real_transaction_id);
+        
+        $date_convertor_object = new date_convertor();
+        
+        $buyer_user_info = myuser::find($transaction->buyer_id);
+        $seller_user_info = myuser::find($transaction->seller_id);
+                                                    
+                                            
+        $prepayment_factor_record = null;
+        $payment_factor_record = null;
+        
+        if($transaction->transaction_status == $this->waitig_for_factor_issuance_statuses['buyer']['payment']){
+            $prepayment_factor_record = instant_factor::where('transaction_id',$transaction->id)
+                                                ->where('type','prepayment')
+                                                ->get()
+                                                ->first()
+                                                ;
+        }
+        
+        if($transaction->transaction_status == $this->waiting_for_transaction_checkout_status){
+            $payment_factor_record = instant_factor::where('transaction_id',$transaction->id)
+                                                ->where('type','payment')
+                                                ->get()
+                                                ->first()
+                                                ;
+        }
+        
+        return view('admin_panel.instantTransactionDetail',[
+            'transaction' => $transaction,
+            'seller_user_info' => $seller_user_info,
+            'buyer_user_info' => $buyer_user_info,
+            'prepayment_factor' => $prepayment_factor_record ? $prepayment_factor_record : null, 
+            'payment_factor' => $payment_factor_record ? $payment_factor_record : null,
+        ]);
+    }
+    
     protected function get_category_and_subcategory_name($subcategory_id)
     {
         $subcategory_record = category::where('id',$subcategory_id)
@@ -161,7 +201,27 @@ class admin_transaction_controller extends Controller
         });
         
         return view('admin_panel.prepaymentFactorIssuanceList',[
-           'sell_offers' => $transactions, 
+           'type' => 'normal',
+           'transactions' => $transactions, 
+        ]);                            
+    }  
+    
+    //public method
+    public function load_waiting_for_prepayment_factor_issuance_instant_transactions_list(Request $request)
+    {
+        $transactions = instant_transaction::where('transaction_status',$this->waitig_for_factor_issuance_statuses['buyer']['prepayment'])
+                            ->orWhere('transaction_status',$this->waitig_for_factor_issuance_statuses['buyer']['prepayment2'])
+                            ->get();
+        
+        $date_convertor_object = new date_convertor();
+        
+        $transactions->each(function($transaction) use($date_convertor_object){            
+            $transaction->creation_date = $date_convertor_object->get_persian_date($transaction->created_at);
+        });
+        
+        return view('admin_panel.prepaymentFactorIssuanceList',[
+           'type' => 'instant',
+           'transactions' => $transactions, 
         ]);                            
     }  
     
@@ -179,9 +239,28 @@ class admin_transaction_controller extends Controller
         });
         
         return view('admin_panel.paymentFactorIssuanceList',[
-           'sell_offers' => $transactions, 
+           'type' => 'normal',
+           'transactions' => $transactions, 
         ]);                            
     }  
+    
+    //public method
+    public function load_waiting_for_payment_factor_issuance_instant_transactions_list(Request $request)
+    {
+        $transactions = instant_transaction::where('transaction_status',$this->waitig_for_factor_issuance_statuses['buyer']['payment'])
+                            ->get();
+        
+        $date_convertor_object = new date_convertor();
+        
+        $transactions->each(function($transaction) use($date_convertor_object){            
+            $transaction->creation_date = $date_convertor_object->get_persian_date($transaction->created_at);
+        });
+        
+        return view('admin_panel.paymentFactorIssuanceList',[
+           'type' => 'instant',
+           'transactions' => $transactions, 
+        ]);                            
+    } 
     
     //public method
     public function load_waiting_for_termination_transaction_list(Request $request)
@@ -197,7 +276,26 @@ class admin_transaction_controller extends Controller
         });
         
         return view('admin_panel.transactionTerminationList',[
-           'sell_offers' => $transactions, 
+           'type' => 'normal',    
+           'transactions' => $transactions, 
+        ]);  
+    }
+    
+    //public method
+    public function load_waiting_for_termination_instant_transaction_list(Request $request)
+    {
+        $transactions = instant_transaction::where('transaction_status',$this->waiting_for_transaction_termination_status)
+                            ->get();
+        
+        $date_convertor_object = new date_convertor();
+        
+        $transactions->each(function($transaction) use($date_convertor_object){            
+            $transaction->creation_date = $date_convertor_object->get_persian_date($transaction->created_at);
+        });
+        
+        return view('admin_panel.transactionTerminationList',[
+           'type' => 'instant',    
+           'transactions' => $transactions, 
         ]);  
     }
     
@@ -229,6 +327,7 @@ class admin_transaction_controller extends Controller
             'loading_dead_line' => 'required',
             'commission_percentage' => 'required',
             'admin_notes' => 'required',
+            'product_name' => 'required',
         ]);
         
         $date_convertor_object = new date_convertor();
@@ -244,6 +343,7 @@ class admin_transaction_controller extends Controller
             $transaction_object->loading_dead_line = $date_convertor_object->get_georgian_date_from_standard_persian_date_string($request->loading_dead_line);
             $transaction_object->commission_percentage = $request->commission_percentage;
             $transaction_object->admin_notes = $request->admin_notes;
+            $transaction_object->product_name = $request->product_name;
             $transaction_object->transaction_status = '0000000000000001';
             $transaction_object->deal_date = Carbon::now();
 
@@ -260,8 +360,6 @@ class admin_transaction_controller extends Controller
                 'msg' => 'seller or buyer phone number does not exist!',
             ],404);
         }
-        
-        
         
     }
     

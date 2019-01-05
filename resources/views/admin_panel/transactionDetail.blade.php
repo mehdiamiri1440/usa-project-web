@@ -48,6 +48,7 @@
 
     <!-- Main content -->
     <section class="content">
+        @if($type == 'normal')
         <h3>درخواست خرید</h3>
         <div class="row">        
           <div class="box">
@@ -136,6 +137,37 @@
           </div>
           <!-- /.box -->
         </div>
+        @else
+        <div class="row">        
+          <div class="box">
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered table-striped">
+                  <thead>
+                    <h4>فروشنده : {{$seller_user_info->first_name. ' ' . $seller_user_info->last_name}} &nbsp; <span class="text-danger">{{$seller_user_info->phone}}</span></h4>
+                  </thead>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <div class="row">        
+          <div class="box">
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered table-striped">
+                  <thead>
+                    <h4>خریدار : {{$buyer_user_info->first_name. ' ' . $buyer_user_info->last_name}} &nbsp; <span class="text-danger">{{$buyer_info->phone}}</span></h4>
+                  </thead>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        @endif
+        
         @if($transaction->transaction_status == '0000000000000000')
             <form>
                  <div class="row">
@@ -223,6 +255,7 @@
                     </div>
                 </div>
             </form>
+        
         @elseif($transaction->transaction_status == '0000000000011111')
             <h3>اطلاعات فاکتور پیش پرداخت</h3>
                 <table class="table table-bordered table-striped">
@@ -457,6 +490,7 @@
             return null;
         }
     
+        
         var data = {
             action_id : actionId,
             transaction_id : transactionId,
@@ -469,7 +503,7 @@
             amount_to_pay: toLatinNumbers($('#price-to-pay').val()),
             type: factorType,
         };
-    
+
         $.ajax({
             url:"{{route('action_controller')}}",
             data:data,
@@ -484,11 +518,46 @@
             else if(actionId == 6){
                window.location.href = "{{route('admin_panel_waiting_for_payment_factor_issuance_list')}}"; 
             }
-            
+
         })
         .fail(function(xhr,status,errorThrown){
             //
         });
+    }
+    else if(transactionType == 'instant'){
+        var data = {
+            action_id : actionId,
+            transaction_id : transactionId,
+            //expiration_date:'2018-09-09',
+            //factor data
+            product_name:$('#product-name').val(),
+            quantity: toLatinNumbers($('#product-quantity').val()),
+            unit_price: toLatinNumbers($('#unit-price').val()),
+            inspection_price: toLatinNumbers($('#inspection-price').val()),
+            amount_to_pay: toLatinNumbers($('#price-to-pay').val()),
+            type: factorType,
+        };
+
+        $.ajax({
+            url:"{{route('instant_action_controller')}}",
+            data:data,
+            type: 'POST',
+            dataType: 'json',
+        })
+        .done(function(json){
+            alert('submited!');
+            if(actionId == 3){
+               alert('done');
+            }
+            else if(actionId == 5){
+               alert('final done!');
+            }
+
+        })
+        .fail(function(xhr,status,errorThrown){
+            //
+        });
+
     }
     
     function submitTransactionTerminationSignal()
