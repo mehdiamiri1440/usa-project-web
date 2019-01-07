@@ -48,7 +48,7 @@ class instant_transaction_controller extends Controller
         $date_convertor_object = new date_convertor();  
         
         $transactions->each(function($transaction) use($date_convertor_object,$user_role){
-            $transaction->deal_formation_date = $date_convertor_object->get_persian_date_with_month_name($transaction->deal_date);
+            $transaction->deal_formation_date = $date_convertor_object->get_persian_date($transaction->deal_date);
             $transaction->transaction_id = $transaction->id + $this->transaction_id_increase_amount_proportional_to_real_id;
             $transaction->short_status = config("instantTransaction.data-according-to-status.$transaction->transaction_status.short_status.$user_role"); 
             
@@ -387,7 +387,7 @@ class instant_transaction_controller extends Controller
         $date_convertor_object = new date_convertor();
         
         $transactions->each(function($transaction) use($date_convertor_object,$user_role){
-            $transaction->deal_formation_date = $date_convertor_object->get_persian_date_with_month_name($transaction->deal_date);
+            $transaction->deal_formation_date = $date_convertor_object->get_persian_date($transaction->deal_date);
             $transaction->transaction_id = $transaction->id + $this->transaction_id_increase_amount_proportional_to_real_id;
             
             unset($transaction->deal_date);
