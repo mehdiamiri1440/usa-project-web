@@ -20,7 +20,7 @@ use App\profile;
 
 
 Route::get('/test', function(){
-    return view('product_view');
+    return view('payment.external_url_payment_callback');
 });
 
 Route::get('/help', function(){
@@ -755,6 +755,10 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
        'uses' => 'admin_panel\admin_transaction_controller@initiate_instant_transaction',
         'as' => 'initiate_instant_transaction'
     ]);
+    
+    Route::get('generate-manual-payment-url',function(){
+        return view('admin_panel.generateManualPaymentUrl');
+    })->name('generate_manual_payment_url');
 
 //    Route::get('factor-issuance-detail/{id}',[
 //        'uses' => 'admin_panel\admin_transaction_controller@'
@@ -839,7 +843,7 @@ Route::post('/get_wp_posts',[
 Route::get('/manual-payment/{payment_amount}',[
     'uses' => 'payment_controller@do_external_url_payment',
     'as'   => 'external_url_payment'
-]);
+])->name('manual-payment');
 
 Route::any('/external-url-payment-callback',[
     'uses' => 'payment_controller@external_url_payment_callback',

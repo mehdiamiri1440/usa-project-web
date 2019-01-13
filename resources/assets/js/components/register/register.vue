@@ -155,7 +155,7 @@
                                 </span>
                             </div>
                             <div class="col-sm-6">
-                                <input type="text" name="city" v-model="step3.national_code" placeholder="کد ملی">
+                                <input type="text" name="city" v-model="step3.national_code" placeholder="کد ملی(اختیاری)">
                                 <span v-if="errors.national_code" class="error_msg">
                                     {{errors.national_code[0]}}
                                 </span>
@@ -575,11 +575,11 @@
                     this.errors.national_code = [];
                 }
 
-                if(code === ''){
-                    this.errors.national_code.push('کد ملی الزامی است');
-                    this.errorFlag = true;
-                }
-                if( ! this.isIrNationalCode(code)){
+//                if(code === ''){
+//                    this.errors.national_code.push('کد ملی الزامی است');
+//                    this.errorFlag = true;
+//                }
+                if( code !== '' && (! this.isIrNationalCode(code))){
                     this.errors.national_code.push('کد ملی معتبر نیست');
                     this.errorFlag = true;
                 }
