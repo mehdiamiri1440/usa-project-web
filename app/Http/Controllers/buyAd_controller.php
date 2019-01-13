@@ -27,7 +27,6 @@ class buyAd_controller extends Controller
         'profile_photo',  
     ];
     
-    
     protected $buyAd_register_fields_array = [
         'name',
         'requirement_amount',
