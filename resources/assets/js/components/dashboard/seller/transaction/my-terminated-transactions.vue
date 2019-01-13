@@ -179,7 +179,7 @@
                 <!--end title list -->
 
                 <li class="list-group-item content-list col-xs-12" v-for="transaction in instantTransactions">
-                    <router-link :to="'/transaction-report/' + transaction.transaction_id">
+                    <router-link :to="'/instant-transaction-report/' + transaction.transaction_id">
                         <p class="number col-xs-2">
 
                             {{transaction.transaction_id}}

@@ -167,6 +167,35 @@
                 </li>
 
             </ul>
+            <ul class="list-unstyled col-xs-12" v-if="instantTransactions.length != 0">
+                <!--start title list -->
+
+                <li class="list-group-item title-list">
+                    <p class="title-list-text col-xs-2">شماره تراکنش</p>
+                    <p class="time-show  col-xs-2">تاریخ </p>
+                    <p class="time-show col-xs-5">موضوع فعالیت </p>
+                </li>
+
+                <!--end title list -->
+
+                <li class="list-group-item content-list col-xs-12" v-for="transaction in instantTransactions">
+                    <router-link :to="'/instant-transaction-report/' + transaction.transaction_id">
+                        <p class="number col-xs-2">
+
+                            {{transaction.transaction_id}}
+                        </p>
+                        <p class="date col-xs-2" dir="rtl">
+
+                            {{transaction.deal_formation_date}}
+                        </p>
+                        <p class="subject col-xs-5">
+
+                            {{transaction.product_name}}
+                        </p>
+                    </router-link>
+                </li>
+
+            </ul>
 
             <div class="loading_images  col-xs-12" v-else-if="isLoading">
                 <img :src="loading_img" style="width:200px;height:200px">
@@ -188,6 +217,7 @@
 
             return {
                 transactions: '',
+                instantTransactions:'',
                 isLoading: true,
                 items: [
                     {
@@ -203,6 +233,16 @@
                 axios.post('/get_terminated_transactions')
                     .then(function (response) {
                         self.transactions = response.data.transactions;
+                    })
+                    .catch(function (err) {
+                        if (err.response.status == 404) {
+                            window.location.href = '/404';
+                        }
+                    });
+                
+                axios.post('/get_terminated_instant_transactions')
+                    .then(function (response) {
+                        self.instantTransactions = response.data.transactions;
                         self.isLoading = false;
                     })
                     .catch(function (err) {
@@ -210,6 +250,8 @@
                             window.location.href = '/404';
                         }
                     });
+                
+                self.isLoading = false;
             },
         },
         mounted: function () {

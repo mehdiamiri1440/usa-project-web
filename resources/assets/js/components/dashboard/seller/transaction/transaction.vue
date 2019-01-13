@@ -672,7 +672,8 @@
                         <p id="step1S12" v-if="pageStep == 12">
                             <span><b>الحاقیه</b></span><br/><br/>
                             <span><b>مهلت بارگیری محصول تا تاریخ <span class="text-danger">{{transactionInfo.loading_dead_line}}</span> خواهد بود.</b></span><br/><br/>
-                            <span><b>ردصد کمسیون اینکوباک برابر <span class="text-danger">{{transactionInfo.commission_persentage}}</span> است.</b></span><br/><br/>
+                            <span v-if="transactionInfo.commission_persentage"><b> کمسیون اینکوباک برابر <span class="text-danger">{{transactionInfo.commission_persentage}}</span> درصد است.</b></span>
+                            <span v-if="transactionInfo.commission_percentage"><b> کمسیون اینکوباک برابر <span class="text-danger">{{transactionInfo.commission_percentage}}</span>درصد است.</b></span><br/><br/>
                             <span><b>توضیحات تکمیلی</b></span><br/><br/>
                             <span>{{transactionInfo.admin_notes}}</span><br/><br/>
                         </p>

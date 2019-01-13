@@ -447,10 +447,20 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'transaction_controller@get_payed_factor_list',
         'as' => 'get_payed_factor_list'
     ]);
+    
+    Route::post('/get_payed_instant_factor_list',[
+        'uses' => 'instant_transaction_controller@get_payed_factor_list',
+        'as' => 'get_payed_instant_factor_list'
+    ]);
 
     Route::post('/get_factor_info',[
         'uses' => 'transaction_controller@get_factor_info_by_factor_id',
         'as' => 'get_factor_info_by_factor_id'
+    ]);
+    
+    Route::post('/get_instant_factor_info',[
+        'uses' => 'instant_transaction_controller@get_factor_info_by_factor_id',
+        'as' => 'get_instant_factor_info_by_factor_id'
     ]);
 
     Route::post('/does_buyer_already_had_requested_the_produtct',[
@@ -676,6 +686,11 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
         'uses' => 'admin_panel\admin_transaction_controller@get_transaction_with_related_buyAd',
         'as' => 'admin_panel_load_transaction_by_id'
     ]);
+    
+    Route::get('instant-transaction-detail/{id}',[
+        'uses' => 'admin_panel\admin_transaction_controller@get_instant_transaction_with_related_data',
+        'as' => 'admin_panel_load_instant_transaction_by_id'
+    ]);
 
     Route::get('sell-offer-detail/{id}',[
         'uses' => 'admin_panel\admin_sell_offer_controller@get_sell_offer_with_related_buyAd',
@@ -696,15 +711,30 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
         'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_prepayment_factor_issuance_transactions_list',
         'as' => 'admin_panel_waiting_for_prepayment_factor_issuance_list'
     ]);
+    
+    Route::get('prepayment-instant-factor-list',[
+        'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_prepayment_factor_issuance_instant_transactions_list',
+        'as' => 'admin_panel_waiting_for_prepayment_instant_factor_issuance_list'
+    ]);
 
     Route::get('payment-factor-list',[
         'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_payment_factor_issuance_transactions_list',
         'as' => 'admin_panel_waiting_for_payment_factor_issuance_list'
     ]);
+    
+    Route::get('payment-instant-factor-list',[
+        'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_payment_factor_issuance_instant_transactions_list',
+        'as' => 'admin_panel_waiting_for_payment_instant_factor_issuance_list'
+    ]);
 
     Route::get('transaction-termination-list',[
         'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_termination_transaction_list',
         'as' => 'admin_panel_waiting_for_termination_transaction_list'
+    ]);
+    
+    Route::get('instant-transaction-termination-list',[
+        'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_termination_instant_transaction_list',
+        'as' => 'admin_panel_waiting_for_termination_instant_transaction_list'
     ]);
 
     Route::get('transaction-checkout-list',[
@@ -717,9 +747,9 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
         'as' => 'admin_panel_load_statistics'
     ]);
     
-    Route::get('instantTransactionDetail',function(){
-        return view('admin_panel.instantTransactionDetail');
-    });
+    Route::get('initiate-instant-transaction',function(){
+        return view('admin_panel.initiateInstantTransaction');
+    })->name('initiate-instant-transaction-view');
     
     Route::post('initiate-instant-transaction',[
        'uses' => 'admin_panel\admin_transaction_controller@initiate_instant_transaction',
@@ -764,6 +794,11 @@ Route::post('/get_terminated_transactions',[
 Route::post('/get_terminated_transaction_info',[
     'uses' => 'transaction_controller@get_terminated_transaction_info',
     'as' => 'get_terminated_transaction_info',
+]);
+
+Route::post('/get_terminated_instant_transaction_info',[
+    'uses' => 'instant_transaction_controller@get_terminated_transaction_info',
+    'as' => 'get_terminated_instant_transaction_info',
 ]);
 
 

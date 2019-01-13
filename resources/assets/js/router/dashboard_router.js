@@ -197,6 +197,13 @@ const myRouter =  new Router({
             },
         }
         , {
+            path: '/instant-factor-detail/:id',
+            name: 'buyerInstantFactorDetail',
+            components: {
+                buyer: buyerFactorDetail,
+            },
+        }
+        , {
             path: '/transaction-detail/:id',
             name: 'transactionDetail',
             components: {
@@ -221,6 +228,17 @@ const myRouter =  new Router({
         , {
             path: '/transaction-report/:id',
             name: 'transactionReport',
+            components: {
+                seller: sellerTransactionReport,
+                buyer: buyerTransactionReport,
+            },
+            params: {
+                active: 5
+            }
+        }
+        , {
+            path: '/instant-transaction-report/:id',
+            name: 'instantTransactionReport',
             components: {
                 seller: sellerTransactionReport,
                 buyer: buyerTransactionReport,

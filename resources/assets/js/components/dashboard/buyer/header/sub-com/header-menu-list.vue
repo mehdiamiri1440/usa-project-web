@@ -126,9 +126,9 @@
                    this.active_el = 3
                }else if(this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/' + this.$route.params.id) || this.subIsActive('/instant-transaction-detail/' + this.$route.params.id)){
                    this.active_el = 4
-               }else if(this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/' + this.$route.params.id)){
+               }else if(this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/' + this.$route.params.id) || this.subIsActive('/instant-transaction-report/' + this.$route.params.id)){
                    this.active_el = 5
-               }else if(this.subIsActive('/payed-factor-list') || this.subIsActive('/factor-detail/' + this.$route.params.id)){
+               }else if(this.subIsActive('/payed-factor-list') || this.subIsActive('/factor-detail/' + this.$route.params.id) || this.subIsActive('/instant-factor-detail/' + this.$route.params.id)){
                    this.active_el = 6
                }else if(this.subIsActive('/guide')){
                    this.active_el = 7

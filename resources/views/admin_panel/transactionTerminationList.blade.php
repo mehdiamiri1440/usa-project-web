@@ -55,28 +55,49 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>#</th>
-                  <th>تاریخ شروع</th>
-                  <th>تاریخ پایان</th>
-                  <th>قیمت</th>
-                  <th>محل تحویل</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($sell_offers as $sell_offer)
-                <tr>
-                    <td>{{$loop->iteration}}</td>
-                    <td>{{$sell_offer->date_from}}</td>
-                    <td>{{$sell_offer->date_to}}</td>
-                    <td>{{$sell_offer->price}}</td>                    
-                    <td>{{$sell_offer->deliver_at}}</td>                    
-                    <td><a href="{{route('admin_panel_load_transaction_by_id',['id' => $sell_offer->id])}}">مشاهده جزییات</a></td>
-                </tr>
-                @endforeach
-              </table>
+              @if($type == 'normal') 
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>تاریخ شروع</th>
+                      <th>تاریخ پایان</th>
+                      <th>قیمت</th>
+                      <th>محل تحویل</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($transactions as $transaction)
+                    <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$transaction->date_from}}</td>
+                        <td>{{$transaction->date_to}}</td>
+                        <td>{{$transaction->price}}</td>                    
+                        <td>{{$transaction->deliver_at}}</td>                    
+                        <td><a href="{{route('admin_panel_load_transaction_by_id',['id' => $transaction->id])}}">مشاهده جزییات</a></td>
+                    </tr>
+                    @endforeach
+                  </table>
+              @else
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>نام محصول</th>
+                      <th>تاریخ تراکنش</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($transactions as $transaction)
+                    <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$transaction->product_name}}</td>
+                        <td>{{$transaction->creation_date}}</td>                   
+                        <td><a href="{{route('admin_panel_load_instant_transaction_by_id',['id' => $transaction->id])}}">مشاهده جزییات</a></td>
+                    </tr>
+                    @endforeach
+                  </table>
+              @endif
             </div>
             <!-- /.box-body -->
           </div>

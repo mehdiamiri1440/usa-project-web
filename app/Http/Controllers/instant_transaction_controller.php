@@ -38,7 +38,7 @@ class instant_transaction_controller extends Controller
         
         $transaction_condition = [
             [
-                'operator' => '<>',
+                'operator' => '!=',
                 'value' => $this->terminated_transaction_status,
             ],
         ];
@@ -407,20 +407,20 @@ class instant_transaction_controller extends Controller
         
         $transaction_id = $request->transaction_id - $this->transaction_id_increase_amount_proportional_to_real_id ;
         
-        $transaction_record = instant::where('id',$transaction_id)
+        $transaction_record = instant_transaction::where('id',$transaction_id)
                                 ->select([
                                     'id',
                                     'loading_dead_line',
                                     'admin_notes',
                                     'deal_date',
-                                    'commission_persentage',
+                                    'commission_percentage',
                                     'buyer_id as buyer_user_id',
-                                    'myuser_id as seller_user_id'
+                                    'seller_id as seller_user_id'
                                 ])
                                 ->get()
                                 ->first();
         
-        $payment_factor_record  = instant_factor::where('id',$transaction_id)
+        $payment_factor_record  = instant_factor::where('transaction_id',$transaction_id)
                                                 ->where('type','payment')
                                                 ->select([
                                                     'quantity',
@@ -431,7 +431,7 @@ class instant_transaction_controller extends Controller
                                                 ->get()
                                                 ->first();
         
-        $prepayment_factor_record = instant_factor::where('id',$transaction_id)
+        $prepayment_factor_record = instant_factor::where('transaction_id',$transaction_id)
                                                 ->where('type','prepayment')
                                                 ->select([
                                                     'amount_to_pay as prepayment_amount'
@@ -526,12 +526,11 @@ class instant_transaction_controller extends Controller
         
         $user_id = session('user_id');
         
-        $factors = DB::table('buy_ads')
-                        ->join('sell_offers','buy_ads.id','=','sell_offers.buy_ad_id')
-                        ->join('factors','sell_offers.id','=','factors.sell_offer_id')
-                        ->where('buy_ads.myuser_id',$user_id)
-                        ->where('factors.is_payed',true)
-                        ->select('factors.*')
+        $factors = DB::table('instant_transactions')
+                        ->join('instant_factors','instant_transactions.id','=','instant_factors.transaction_id')
+                        ->where('instant_transactions.buyer_id',$user_id)
+                        ->where('instant_factors.is_payed',true)
+                        ->select('instant_factors.*')
                         ->get();
         
         $date_convertor_object = new date_convertor();
@@ -565,20 +564,15 @@ class instant_transaction_controller extends Controller
         $user_id = session('user_id');
         $factor_id = $request->factor_id;
         
-        $factor = DB::table('buy_ads')
-                        ->join('sell_offers','buy_ads.id','=','sell_offers.buy_ad_id')
-                        ->join('factors','sell_offers.id','=','factors.sell_offer_id')
-                        ->where('buy_ads.myuser_id',$user_id)
-                        ->where('factors.id',$factor_id)
-                        ->select('factors.*')
-                        ->get()
-                        ->first();
+        $factor = instant_factor::find($factor_id);
         
         $date_convertor_object = new date_convertor();
         
-        $factor->persian_date = $date_convertor_object->get_persian_date($factor->updated_at);
+        
         
         if($factor){
+            $factor->persian_date = $date_convertor_object->get_persian_date($factor->updated_at);
+            
             return response()->json([
                 'status' => true,
                 'factor' => $factor,
