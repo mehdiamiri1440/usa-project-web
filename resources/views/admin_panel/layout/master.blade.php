@@ -135,6 +135,9 @@
         <li class="{{Request::is('admin/instant-transaction-termination-list') ? 'active':''}}">
             <a href="{{route('admin_panel_waiting_for_termination_instant_transaction_list')}}"><i class="fa fa-envelope"></i><span> اتمام تراکنش آنی</span></a>
         </li>
+        <li class="{{Request::is('admin/generate-manual-payment-url') ? 'active':''}}">
+            <a href="{{route('generate_manual_payment_url')}}"><i class="fa fa-envelope"></i><span>صدور لینک پرداخت</span></a>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->
