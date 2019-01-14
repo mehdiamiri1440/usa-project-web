@@ -547,8 +547,9 @@
                 <div class="col-xs-12 col-sm-6">
                     <label>
                         افزودن تصاویر مربوطه <span>(محصولات | شرکت | کارکنان)</span> </label>
-                    <input type="file" ref="relatedFiles" id="file" multiple
-                           v-on:change="handleRelatedFilesUpload()" accept="image/*">
+                    <relatedFiles></relatedFiles>
+             <!--       <input type="file" ref="relatedFiles" id="file" multiple
+                           v-on:change="handleRelatedFilesUpload()" accept="image/*">-->
                 </div>
             </div>
             <div class="image_certif  col-xs-12">
@@ -570,9 +571,10 @@
                     <label>
                         افزودن گواهی های مربوطه <span>(گواهی های ثبت شرکت | گواهی های استاندارد محصول)</span>
                     </label>
-
+                    <certificateFiles></certificateFiles>
+<!--
                     <input type="file" multiple ref="certificateFiles" v-on:change="handleCertificateFilesUpload()"
-                           accept="image/*">
+                           accept="image/*">-->
                 </div>
             </div>
             <input class="green-bot" value="ثبت تغییرات" type="button" @click="RegisterComplementaryProfileInfo">
@@ -584,7 +586,13 @@
 
 <script>
     import {eventBus} from "../../../../router/dashboard_router";
+    import relatedFiles from './related_files'
+    import certificateFiles from './certificate_files'
     export default {
+        components:{
+            relatedFiles,
+            certificateFiles
+        },
         props:[
             'str'
         ],
@@ -643,7 +651,7 @@
 
                 let formData = new FormData();
                 var cnt = this.profileComplementaryFields.length;
-                
+
 
                 for (var i = 0; i < cnt; i++){
                     if (this.profileComplementaryFields[i] == 'description' && (this.currentUser.profile['description'] == null || this.currentUser.profile['description'] == '')) {

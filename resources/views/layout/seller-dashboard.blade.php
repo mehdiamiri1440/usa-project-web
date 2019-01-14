@@ -14,11 +14,13 @@
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap-theme.min.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/cropper.css')}}">
+
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/kamadatepicker.min.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
-        
+
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
         <script src="{{asset('assets/cdn/axios.js')}}"></script>
 
@@ -27,7 +29,7 @@
         <script>
             window.Laravel = { csrfToken : '{{csrf_token()}}'}
         </script>
-        
+
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
         <script>
@@ -36,14 +38,14 @@
           gtag('js', new Date());
 
           gtag('config', 'UA-129398000-1');
-            
+
           var userId = '<?php echo session('user_id');?>';
-        
+
           gtag('set', {'user_id': '<?php echo session('user_id');?>'});
         </script>
 
-        
-        
+
+
         <style>
             html {
                 overflow-y: scroll;
