@@ -209,7 +209,7 @@
               <div class="loading_images  col-xs-12" v-else-if="isLoading">
                   <img :src="loading" style="width:200px;height:200px">
               </div>
-              <div class="col-xs-12" v-else>
+              <div class="col-xs-12" v-else-if="transactions.length == 0 && instantTransactions.length == 0">
                   <h4 class="text-center" dir="rtl">تراکنشی در این قسمت وجود ندارد.</h4>
               </div>
         </section>
