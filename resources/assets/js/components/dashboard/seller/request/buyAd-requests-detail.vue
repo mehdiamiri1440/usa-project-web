@@ -393,7 +393,20 @@
                                 <label class="content-lable">
                                     تصاویر:
                                 </label>
-                                <input type="file" ref="sellOfferFiles" multiple accept="image/*" @change="handleSellOfferFileUpload()">
+                                <uploadFile
+                                        uploadName = "sell_offer_files"
+                                        uploadAccept = "image/*"
+                                        :uploadMinSize = "1024"
+                                        :uploadSize = "1024 * 1024 * 10"
+                                        :uploadMultiple = "true"
+                                        :uploadDrop = "true"
+                                        :uploadDropDirectory = "true"
+                                        :uploadAddIndex = "false"
+                                        :uploadThread = "3"
+                                        :uploadOCompress = "1024 * 1024"
+                                        :uploadUploadAuto = "false"
+                                        :uploadRef="sellOfferFiles"
+                                ></uploadFile>
                                 <span v-if="errors.photos_count" class="text-danger" >{{ errors.photos_count[0] }}</span>
                             </div>
                             <div class="col-sm-6">
@@ -418,8 +431,11 @@
 <script>
 
     import {eventBus} from "../../../../router/dashboard_router";
-
+    import uploadFile from '../upload-image'
     export default {
+        components:{
+            uploadFile
+        },
         props:[
             'defimgitem',
             'str'

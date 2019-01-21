@@ -336,7 +336,21 @@
             <label>
                 تصاویر نمونه محصول، بسته بندی و ...
             </label>
-            <input type="file" multiple  ref="buyAdFiles" v-on:change="handleBuyAdFilesUpload()" accept="image/*">
+            <buyAdFiles
+                    uploadName = "simple_images"
+                    uploadAccept = "image/*"
+                    :uploadMinSize = "1024"
+                    :uploadSize = "1024 * 1024 * 10"
+                    :uploadMultiple = "true"
+                    :uploadDrop = "true"
+                    :uploadDropDirectory = "true"
+                    :uploadAddIndex = "false"
+                    :uploadThread = "3"
+                    :uploadOCompress = "1024 * 1024"
+                    :uploadUploadAuto = "false"
+                    :uploadRef="buyAdFiles"
+            ></buyAdFiles>
+         <!--   <input type="file" multiple  ref="buyAdFiles" v-on:change="handleBuyAdFilesUpload()" accept="image/*">-->
         </div>
         <div class="rules col-xs-12">
             با    <span class="roules-check-inside">قوانین و شرایط</span>
@@ -349,8 +363,12 @@
     </section>
 </template>
 <script>
+    import buyAdFiles from '../upload-image'
     import {eventBus} from "../../../../router/dashboard_router";
   export default {
+      components:{
+          buyAdFiles
+      },
       data:function(){
           return {
               errors:'',

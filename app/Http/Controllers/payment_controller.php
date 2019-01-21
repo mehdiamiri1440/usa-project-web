@@ -648,8 +648,7 @@ class payment_controller extends Controller
             }
         }
         else echo 'error';
-        
-           
+          
     }
     
     public function external_url_payment_callback()
@@ -671,10 +670,14 @@ class payment_controller extends Controller
 
 
                 if (floatval($result) > 0 && floatval($result) == floatval($_SESSION['amount']) ){	
-                    //Payment verfed and OK !
+                    //Payment verified and OK !
                     //
                     // payed amount value in gateway
-                    echo "پرداخت انجام شد.";
+                    return view('payment.external_url_payment_callback',[
+                            'payed_amount' => $result,
+                            'reference_id'=> $referenceId,
+                            'payment_id' => $_POST['paymentId'] ? $_POST['paymentId'] : 0,
+                    ]);
                     
                 }
                 else{

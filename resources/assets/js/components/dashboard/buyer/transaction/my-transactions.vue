@@ -200,6 +200,7 @@
                   <h4 class="text-center" dir="rtl">تراکنشی در این قسمت وجود ندارد.</h4>
               </div>
         </section>
+        
     </div>
 </template>
 <script>

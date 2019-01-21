@@ -6,69 +6,75 @@
         </div>
         <div class="upload" v-show="!isOption">
 
-              <!--  <button  v-show="files.length" type="button" class="btn btn-success" v-if="!$refs.upload || !$refs.upload.active" @click.prevent="$refs.upload.active = true">
-                    <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                    Start Upload
-                </button>-->
-           <!--     :post-action="postAction"
-                :put-action="putAction"
-                :extensions="extensions"
-                 :data="data"
-                    :headers="headers"
-                 -->
-                <file-upload
-                        class="col-xs-12"
-                        :accept="accept"
-                        :name="name"
-                        :multiple="multiple"
-                        :directory="directory"
-                        :size="size || 0"
-                        :thread="thread < 1 ? 1 : (thread > 5 ? 5 : thread)"
-                        :drop="drop"
-                        :drop-directory="dropDirectory"
-                        :add-index="addIndex"
-                        v-model="files"
-                        @input-filter="inputFilter"
-                        @input-file="inputFile"
-                        ref="upload">
+            <!--  <button  v-show="files.length" type="button" class="btn btn-success" v-if="!$refs.upload || !$refs.upload.active" @click.prevent="$refs.upload.active = true">
+                  <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                  Start Upload
+              </button>-->
+            <!--     :post-action="postAction"
+                 :put-action="putAction"
+                 :extensions="extensions"
+                  :data="data"
+                     :headers="headers"
+                  -->
+            <file-upload
+                    class="col-xs-12"
+                    :accept="accept"
+                    :name="name"
+                    :multiple="multiple"
+                    :directory="directory"
+                    :size="size || 0"
+                    :thread="thread < 1 ? 1 : (thread > 5 ? 5 : thread)"
+                    :drop="drop"
+                    :drop-directory="dropDirectory"
+                    :add-index="addIndex"
+                    v-model="files"
+                    @input-filter="inputFilter"
+                    @input-file="inputFile"
+                    ref="upload">
 
-                </file-upload>
-                <div class="col-xs-12">
+            </file-upload>
+            <div class="col-xs-12">
                 <div class="row wrapper-articles">
-                    <article   v-for="(file, index) in files" :key="file.id" class="col-lg-4 col-sm-6 col-xs-12 article-images">
+                    <article v-for="(file, index) in files" :key="file.id"
+                             class="col-lg-4 col-sm-6 col-xs-12 article-images">
                         <div class="image">
-                            <img v-if="file.thumb" :src="file.thumb" width="40" height="auto" />
+                            <img v-if="file.thumb" :src="file.thumb" width="40" height="auto"/>
                             <span v-else>No Image</span>
                             <div class="actions-content">
-                                <a  href="#" @click.prevent="file.active || file.success || file.error === 'compressing' ? false :  onEditFileShow(file)"><i aria-hidden="true" class="fa fa-pencil"></i></a>
-                                <a class="delete" href="#" @click.prevent="$refs.upload.remove(file)"><i aria-hidden="true" class="fa fa-trash "></i></a>
+                                <a href="#"
+                                   @click.prevent="file.active || file.success || file.error === 'compressing' ? false :  onEditFileShow(file)"><i
+                                        aria-hidden="true" class="fa fa-pencil"></i></a>
+                                <a class="delete" href="#" @click.prevent="$refs.upload.remove(file)"><i
+                                        aria-hidden="true" class="fa fa-trash "></i></a>
                             </div>
                         </div>
 
                     </article>
                 </div>
-                </div>
+            </div>
 
         </div>
         <div :class="{'modal-backdrop': true, 'fade': true, show: editFile.show}"></div>
         <div :class="{modal: true, fade: true, show: editFile.show}" id="modal-edit-file" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-
                     <form @submit.prevent="onEditorFile">
                         <div class="modal-body">
-                            <button type="button" class="close"  @click.prevent="editFile.show = false">
+                            <button type="button" class="close" @click.prevent="editFile.show = false">
                                 <span>&times;</span>
                             </button>
-                            <div class="form-group" v-if="editFile.show && editFile.blob && editFile.type && editFile.type.substr(0, 6) === 'image/'">
+                            <div class="form-group"
+                                 v-if="editFile.show && editFile.blob && editFile.type && editFile.type.substr(0, 6) === 'image/'">
                                 <div class="edit-image">
-                                    <img :src="editFile.blob" ref="editImage" />
+                                    <img :src="editFile.blob" ref="editImage"/>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-12">
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" @click.prevent="editFile.show = false">انصراف</button>
+                                <button type="button" class="btn btn-secondary" @click.prevent="editFile.show = false">
+                                    انصراف
+                                </button>
                                 <button type="submit" class="btn btn-primary">برش تصویر</button>
                             </div>
                         </div>
@@ -83,29 +89,29 @@
 
 </template>
 <style scoped>
-    #modal-edit-file{
+    #modal-edit-file {
         overflow: scroll;
     }
-    .form-group{
+    .form-group {
         margin: 0;
         overflow: hidden;
     }
-    .edit-image{
+    .edit-image {
         margin-top: -2px;
     }
-    .image-upload-wrapper,.article-images{
+    .image-upload-wrapper, .article-images {
         position: relative;
     }
-    .article-images{
+    .article-images {
         padding: 10px;
     }
-    .article-images:hover .image{
+    .article-images:hover .image {
         top: -5px;
     }
-    .article-images:hover .actions-content{
-       opacity: 1;
+    .article-images:hover .actions-content {
+        opacity: 1;
     }
-    .actions-content{
+    .actions-content {
         position: absolute;
         left: 0;
         top: 0;
@@ -113,9 +119,9 @@
         display: block;
         right: 0;
         bottom: 0;
-        opacity:0;
+        opacity: 0;
         background: rgba(49, 58, 67, 0.7);
-        transition:300ms;
+        transition: 300ms;
         padding-top: 28px;
     }
     .actions-content a {
@@ -128,15 +134,15 @@
         height: 50px;
         width: 50px;
         font-size: 22px;
-        transition:300ms;
+        transition: 300ms;
 
     }
     .actions-content a:hover {
-        transition:300ms;
-        background:rgb(40, 167, 69);
+        transition: 300ms;
+        background: rgb(40, 167, 69);
     }
     .actions-content .delete:hover {
-        background:#fff;
+        background: #fff;
         color: rgb(49, 58, 67);
     }
     .image {
@@ -146,7 +152,7 @@
         box-shadow: 0 0 15px #aeaeae;
         border-radius: 4px;
         position: relative;
-        height:200px;
+        height: 200px;
 
     }
     .image img {
@@ -155,10 +161,10 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
 
     }
-    .wrapper-articles{
+    .wrapper-articles {
         padding: 30px 0 5px;
     }
     .image-upload-wrapper .btn-group .dropdown-menu {
@@ -181,14 +187,13 @@
     .image-upload-wrapper .btn-is-option {
         margin-top: 0.25rem;
     }
-
     .image-upload-wrapper .edit-image img {
         max-width: 100%;
     }
     .image-upload-wrapper .edit-image-tool {
         margin-top: .6rem;
     }
-    .image-upload-wrapper .edit-image-tool .btn-group{
+    .image-upload-wrapper .edit-image-tool .btn-group {
         margin-right: .6rem;
     }
     .image-upload-wrapper .footer-status {
@@ -237,16 +242,20 @@
     .modal-backdrop.fade.show {
         visibility: visible;
     }
+
     .fade.show {
         display: block;
         z-index: 1072;
     }
+
     .fade.show {
         opacity: 1;
     }
+
     .modal-backdrop.show {
         opacity: .5;
     }
+
     .modal {
         position: fixed;
         top: 0;
@@ -258,20 +267,24 @@
         overflow: hidden;
         outline: 0;
     }
+
     .modal.fade .modal-dialog {
         transition: -webkit-transform .3s ease-out;
         transition: transform .3s ease-out;
-        transition: transform .3s ease-out,-webkit-transform .3s ease-out;
-        -webkit-transform: translate(0,-25%);
-        transform: translate(0,-25%);
+        transition: transform .3s ease-out, -webkit-transform .3s ease-out;
+        -webkit-transform: translate(0, -25%);
+        transform: translate(0, -25%);
     }
+
     .modal-lg {
         max-width: 800px;
     }
+
     .modal.show .modal-dialog {
-        -webkit-transform: translate(0,0);
-        transform: translate(0,0);
+        -webkit-transform: translate(0, 0);
+        transform: translate(0, 0);
     }
+
     .modal-content {
         background: transparent;
 
@@ -300,6 +313,7 @@
         padding: 15px;
         border-bottom: 1px solid #e9ecef;
     }
+
     button.close {
         position: absolute;
         top: -25px;
@@ -320,12 +334,14 @@
         margin-bottom: 0;
         line-height: 1.5;
     }
+
     .modal-body {
         position: relative;
         -ms-flex: 1 1 auto;
         flex: 1 1 auto;
         padding: 0 15px;
     }
+
     .modal-footer {
         display: block;
         border-top: none;
@@ -338,9 +354,11 @@
     .modal-footer > :not(:last-child) {
         margin-right: .25rem;
     }
+
     .modal-footer > :not(:first-child) {
         margin-left: .25rem;
     }
+
     .btn-primary {
         display: inline-block;
         background: #28a745;
@@ -352,6 +370,7 @@
         -webkit-transition: 300ms;
         transition: 300ms;
     }
+
     .btn {
         display: inline-block;
 
@@ -387,6 +406,7 @@
         -webkit-transition: all .15s ease-in-out;
         transition: all .15s ease-in-out;
     }
+
     .progress {
         display: -ms-flexbox;
         display: flex;
@@ -397,8 +417,21 @@
         background-color: #e9ecef;
         border-radius: .25rem;
     }
+
     .bg-danger {
         background-color: #dc3545 !important;
+    }
+    .file-uploads{
+        padding: 0;
+    }
+    @media only screen and (max-width: 992px) {
+        .actions-content {
+            opacity: 1;
+            background: none;
+        }
+        .actions-content a {
+            background: rgba(49, 58, 67, 0.7);
+        }
     }
 </style>
 
@@ -407,29 +440,38 @@
     import ImageCompressor from '@xkeshi/image-compressor'
     import FileUpload from 'vue-upload-component'
     export default {
+        props: [
+            'uploadName',
+            'uploadAccept',
+            'uploadMinSize',
+            'uploadSize',
+            'uploadMultiple',
+            'uploadDropDirectory',
+            'uploadAddIndex',
+            'uploadThread',
+            'uploadUploadAuto',
+            'uploadRef'
+        ],
         components: {
             FileUpload,
         },
         data() {
             return {
                 files: [],
-                accept: 'image/*',
-               // extensions: 'gif,jpg,jpeg,png,webp',
-                // extensions: ['gif', 'jpg', 'jpeg','png', 'webp'],
-                // extensions: /\.(gif|jpe?g|png|webp)$/i,
-                minSize: 1024,
-                size: 1024 * 1024 * 10,
-                multiple: true,
+                accept: this.uploadAccept,
+                minSize: this.uploadMinSize,
+                size:this.uploadSize,
+                multiple: this.uploadMultiple,
                 directory: false,
                 drop: true,
-                dropDirectory: true,
-                addIndex: false,
-                thread: 3,
-                name: 'relatedFiles',
-               // postAction: '/upload/post',
+                dropDirectory: this.uploadDropDirectory,
+                addIndex: this.uploadAddIndex,
+                thread: this.uploadThread,
+                name: this.uploadName,
+                // postAction: '/upload/post',
                 // putAction: '/upload/put',
-                oCompress: 1024 * 1024,
-                uploadAuto: false,
+                oCompress: this.uploadOCompress,
+                uploadAuto: this.uploadUploadAuto,
                 isOption: false,
                 addData: {
                     show: false,
@@ -448,7 +490,9 @@
 
                 // 关闭了 自动删除 error
                 if (!newValue && oldValue) {
-                    this.$refs.upload.update(this.editFile.id, { error: this.editFile.error || '' })
+                    this.$refs.upload.update(this.editFile.id, {error: this.editFile.error || ''})
+
+
                 }
                 if (newValue) {
                     this.$nextTick(function () {
@@ -458,16 +502,16 @@
                         let cropper = new Cropper(this.$refs.editImage, {
                             autoCrop: false,
                             aspectRatio: 1 / 1,
-                            responsive:true,
-                            guides:false,
-                            movable:false,
-                            rotatable:false,
-                            scalable:false,
-                            zoomable:false,
-                            zoomOnTouch:false,
-                            zoomOnWheel:false,
-                            wheelZoomRatio:false,
-                            toggleDragModeOnDblclick:false
+                            responsive: true,
+                            guides: false,
+                            movable: false,
+                            rotatable: false,
+                            scalable: false,
+                            zoomable: false,
+                            zoomOnTouch: false,
+                            zoomOnWheel: false,
+                            wheelZoomRatio: false,
+                            toggleDragModeOnDblclick: false
                         })
                         this.editFile = {
                             ...this.editFile,
@@ -511,10 +555,10 @@
                         })
                         imageCompressor.compress(newFile.file)
                             .then((file) => {
-                                this.$refs.upload.update(newFile, { error: '', file, size: file.size, type: file.type })
+                                this.$refs.upload.update(newFile, {error: '', file, size: file.size, type: file.type})
                             })
                             .catch((err) => {
-                                this.$refs.upload.update(newFile, { error: err.message || 'compress' })
+                                this.$refs.upload.update(newFile, {error: err.message || 'compress'})
                             })
                     }
 
@@ -533,12 +577,7 @@
                     if (newFile.blob && newFile.type.substr(0, 6) === 'image/') {
                         newFile.thumb = newFile.blob
                     }
-                    console.log("add");
-                    this.$parent.relatedFiles.push(newFile.file);
-
-
-                    console.log( newFile.id);
-                    console.log( this.$parent.relatedFiles);
+                    this.uploadRef.push(newFile.file);
                 }
             },
             // add, update, remove File Event
@@ -547,13 +586,12 @@
 
                     // update
                     if (newFile.active && !oldFile.active) {
-                        this.$parent.relatedFiles.push(this.$refs.upload.files[this.$parent.relatedFiles.length ].file);
-                        console.log("update");
-                        console.log( this.$parent.relatedFiles);
+                        this.uploadRef.push(this.$refs.upload.files[this.uploadRef.length].file);
+
                         // beforeSend
                         // min size
                         if (newFile.size >= 0 && this.minSize > 0 && newFile.size < this.minSize) {
-                            this.$refs.upload.update(newFile, { error: 'size' })
+                            this.$refs.upload.update(newFile, {error: 'size'})
                         }
                     }
                     if (newFile.progress !== oldFile.progress) {
@@ -568,15 +606,14 @@
                 }
                 if (!newFile && oldFile) {
                     // remove
-                    console.log( oldFile.id);
-                    for (var i = 0 ; i < this.$parent.relatedFiles.length ; i++){
-                        if(this.$parent.relatedFiles[i] === oldFile.file){
-                            this.$parent.relatedFiles.splice(i,1);
+
+                    for (var i = 0; i < this.uploadRef.length; i++) {
+                        if (this.uploadRef[i] === oldFile.file) {
+                            this.uploadRef.splice(i, 1);
                         }
                     }
-                    console.log("remove");
 
-                    console.log( this.$parent.relatedFiles);
+
                     if (oldFile.success && oldFile.response.id) {
 
                         // $.ajax({
@@ -592,17 +629,11 @@
                     }
 
                 }
-
-
-                //for (var i = 0 ; i < this.$refs.upload.files.length ; i++){
-
-                //}
-
-
             },
             onEditFileShow(file) {
-                this.editFile = { ...file, show: true }
-                this.$refs.upload.update(file, { error: 'edit' })
+                this.editFile = {...file, show: true}
+                this.$refs.upload.update(file, {error: 'edit'})
+
             },
             onEditorFile() {
                 if (!this.$refs.upload.features.html5) {
@@ -614,17 +645,20 @@
                     name: this.editFile.name,
                 }
                 if (this.editFile.cropper) {
+
                     let binStr = atob(this.editFile.cropper.getCroppedCanvas().toDataURL(this.editFile.type).split(',')[1])
-                    let arr = new Uint8Array(binStr.length)
+                    let arr = new Uint8Array(binStr.length);
                     for (let i = 0; i < binStr.length; i++) {
                         arr[i] = binStr.charCodeAt(i)
                     }
-                    data.file = new File([arr], data.name, { type: this.editFile.type })
+                    data.file = new File([arr], data.name, {type: this.editFile.type})
                     data.size = data.file.size
                 }
+                this.uploadRef.pop();
                 this.$refs.upload.update(this.editFile.id, data)
                 this.editFile.error = ''
                 this.editFile.show = false
+
             },
             // add folader
             onAddFolader() {

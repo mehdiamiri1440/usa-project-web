@@ -547,7 +547,20 @@
                 <div class="col-xs-12 col-sm-6">
                     <label>
                         افزودن تصاویر مربوطه <span>(محصولات | شرکت | کارکنان)</span> </label>
-                    <relatedFiles name="relatedFiles"></relatedFiles>
+                    <uploadFile
+                            uploadName = "related_files"
+                            uploadAccept = "image/*"
+                            :uploadMinSize = "1024"
+                            :uploadSize = "1024 * 1024 * 10"
+                            :uploadMultiple = "true"
+                            :uploadDrop = "true"
+                            :uploadDropDirectory = "true"
+                            :uploadAddIndex = "false"
+                            :uploadThread = "3"
+                            :uploadOCompress = "1024 * 1024"
+                            :uploadUploadAuto = "false"
+                            :uploadRef="relatedFiles"
+                    ></uploadFile>
                   <!--  <input type="file" ref="relatedFiles" id="file" multiple
                            v-on:change="handleRelatedFilesUpload()" accept="image/*">-->
                 </div>
@@ -571,7 +584,20 @@
                     <label>
                         افزودن گواهی های مربوطه <span>(گواهی های ثبت شرکت | گواهی های استاندارد محصول)</span>
                     </label>
-<certificateFiles></certificateFiles>
+                    <uploadFile
+                            uploadName = "certificate_files"
+                            uploadAccept = "image/*"
+                            :uploadMinSize = "1024"
+                            :uploadSize = "1024 * 1024 * 10"
+                            :uploadMultiple = "true"
+                            :uploadDrop = "true"
+                            :uploadDropDirectory = "true"
+                            :uploadAddIndex = "false"
+                            :uploadThread = "3"
+                            :uploadOCompress = "1024 * 1024"
+                            :uploadUploadAuto = "false"
+                            :uploadRef="certificateFiles"
+                    ></uploadFile>
               <!--      <input type="file" multiple ref="certificateFiles" v-on:change="handleCertificateFilesUpload()"
                            accept="image/*">-->
                 </div>
@@ -585,13 +611,10 @@
 
 <script>
     import {eventBus} from "../../../../router/dashboard_router";
-    import relatedFiles from './related_files'
-    import certificateFiles from './certificate_files'
+    import uploadFile from '../upload-image'
     export default {
         components:{
-            relatedFiles,
-            certificateFiles
-
+            uploadFile
         },
         props:[
             'str'

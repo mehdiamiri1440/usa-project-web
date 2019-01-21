@@ -220,8 +220,20 @@
                         <label>
                             <span class="text-danger">*</span>تصاویر محصول
                         </label>
-                        <input type="file" multiple ref="productFiles" v-on:change="handleProductFilesUpload()"
-                               accept="image/*">
+                        <uploadFile
+                                uploadName = "product_files"
+                                uploadAccept = "image/*"
+                                :uploadMinSize = "1024"
+                                :uploadSize = "1024 * 1024 * 10"
+                                :uploadMultiple = "true"
+                                :uploadDrop = "true"
+                                :uploadDropDirectory = "true"
+                                :uploadAddIndex = "false"
+                                :uploadThread = "3"
+                                :uploadOCompress = "1024 * 1024"
+                                :uploadUploadAuto = "false"
+                                :uploadRef="productFiles"
+                        ></uploadFile>
                         <span v-if="errors.images_count" class="text-danger"> {{ errors.images_count[0] }}</span>
                         <span v-if="errors.image_0" class="text-danger"> {{ errors.image_0[0] }}</span>
                         <span v-if="errors.image_1" class="text-danger"> {{ errors.image_1[0] }}</span>
@@ -247,8 +259,11 @@
 </template>
 <script>
     import {eventBus} from "../../../../router/dashboard_router";
-
+    import uploadFile from '../upload-image'
     export default {
+        components:{
+            uploadFile
+        },
         data: function () {
             return {
                 currentUser: {
