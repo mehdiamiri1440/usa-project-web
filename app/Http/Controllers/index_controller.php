@@ -21,11 +21,21 @@ class  index_controller extends Controller
                                     ->get()
                                     ->last();
             
-            $post['img_url'] = $post_record['guid'];
+            $post['img_url'] = $this->remove_http($post_record['guid']);
         });
         
         return response()->json([
            'posts' => $posts, 
         ]);
+    }
+    
+    public function remove_http($url) {
+       $disallowed = array('http://');
+       foreach($disallowed as $d) {
+          if(strpos($url, $d) === 0) {
+             return str_replace($d, 'https://', $url);
+          }
+       }
+       return $url;
     }
 }
