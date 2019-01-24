@@ -82,7 +82,7 @@
                 <span class="icon icon-bar"></span>
                 <span class="icon icon-bar"></span>
             </button>
-            <a class="navbar-brand test" href="">
+            <a class="navbar-brand test" href="/">
             </a>
             <p class="logo-des hidden-xs hidden-sm">
                 اینکوباک | بازارگاه آنلاین دنیای کشاورزی
@@ -205,7 +205,7 @@ FOOTER SECTION
                         <a href="#">پروژه ها </a>
                     </li>
                     <li>
-                        <a href="#"> راهنمای خریدار و فروشنده </a>
+                        <a href="/help"> راهنمای خریدار و فروشنده </a>
                     </li>
                 </ul>
             </div>

@@ -168,6 +168,11 @@
         </div>
         <div class="list-group" v-if="instantFactors.length != 0">
             <!--start title list -->
+            <li>
+                <hr/>
+                    <h4 class="text-center">فاکتورهای آنی</h4>
+                <hr/>
+            </li>
             <div class="list-group-item title-list">
                 <p class="title-list-text col-xs-2">شماره تراکنش</p>
                 <p class="time-show  col-xs-2">تاریخ </p>
@@ -197,7 +202,7 @@
         <div class="loading_images  col-xs-12" v-else-if="isLoading">
             <img :src="loading_img" style="width:200px;height:200px">
         </div>
-        <div class="col-xs-12" v-else>
+        <div class="col-xs-12" v-else-if="factors.length == 0 && instantFactors.length == 0">
             <h4 class="text-center" dir="rtl">فاکتوری در این قسمت وجود ندارد.</h4>
         </div>
     </section>

@@ -83,7 +83,7 @@
                 <span class="icon icon-bar"></span>
                 <span class="icon icon-bar"></span>
             </button>
-            <a class="navbar-brand test" href="">
+            <a class="navbar-brand test" href="/">
             </a>
             <p class="logo-des hidden-xs hidden-sm">
                 اینکوباک | بازارگاه آنلاین دنیای کشاورزی

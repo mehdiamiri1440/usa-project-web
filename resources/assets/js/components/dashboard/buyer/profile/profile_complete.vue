@@ -702,26 +702,26 @@
                         'Content-Type': 'application/json',
                     }
                 })
-                    .then(function (response) {
-                        if (response.status == 200) {
+                .then(function (response) {
+                    if (response.status == 200) {
 
-                            eventBus.$emit('submitingEvent',false);
-                            self.popUpMsg = 'تغییرات با موفقیت انجام شد.';
-                            eventBus.$emit('submitSuccess',self.popUpMsg);
+                        eventBus.$emit('submitingEvent',false);
+                        self.popUpMsg = 'تغییرات با موفقیت انجام شد.';
+                        eventBus.$emit('submitSuccess',self.popUpMsg);
 
-                            $('#myModal').modal('show');
-                        }
-                        else if (response.status == 302) {
-                            window.location.href = '/login';
-                        }
-                    })
-                    .catch(function (err) {
-                        self.errors = '';
-                        self.errors = err.response.data.errors;
-                        eventBus.$emit('submitingEvent', false);
-                    });
+                        $('#myModal').modal('show');
+                    }
+                    else if (response.status == 302) {
+                        window.location.href = '/login';
+                    }
+                })
+                .catch(function (err) {
+                    self.errors = '';
+                    self.errors = err.response.data.errors;
+                    eventBus.$emit('submitingEvent', false);
+                });
             },
-            handleRelatedFilesUpload() {
+            handleRelatedFilesUpload(){
                 let uploadedFiles = this.$refs.relatedFiles.files;
                 // console.log(uploadedFiles)
                 /*
