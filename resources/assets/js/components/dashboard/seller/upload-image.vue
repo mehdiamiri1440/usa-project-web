@@ -391,14 +391,6 @@
         user-select: none;
 
         border: 1px solid transparent;
-        border-top-color: transparent;
-        border-right-color: transparent;
-        border-bottom-color: transparent;
-        border-left-color: transparent;
-        border-top-color: transparent;
-        border-right-color: transparent;
-        border-bottom-color: transparent;
-        border-left-color: transparent;
         padding: 1.2rem 3.75rem;
         font-size: 1.6rem;
         line-height: 1.25;

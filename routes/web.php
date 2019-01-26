@@ -24,15 +24,15 @@ Route::get('/test', function(){
 });
 
 Route::get('/help', function(){
-    return view('help');
+    return view('index_pages.help');
 });
 
 Route::get('/p', function(){
-    return view('projects');
+    return view('index_pages.projects');
 });
 
 Route::get('/', function(){
-    return view('index');
+    return view('index_pages.index_main');
 });
 
 //Route::get('/', function(){
@@ -41,11 +41,11 @@ Route::get('/', function(){
 
 
 Route::get('/about-us',function(){
-    return view('about_us');
+    return view('index_pages.about_us');
 });
 
 Route::get('/privacy-and-policy',function(){
-    return view('privacy_policy');
+    return view('index_pages.privacy_policy');
 });
 
 
@@ -218,7 +218,7 @@ Route::group(['middleware' => [login::class]],function(){
            'transaction_id' => $transaction_id
         ]);
     })->name('back-to-basic');
-    
+
     Route::get('instant-back-to-basic/{transaction_id}',function($transaction_id){
         return view('instant-back-to-basic',[
            'transaction_id' => $transaction_id
@@ -299,7 +299,7 @@ Route::group(['middleware' => [login::class]],function(){
                 'uses' => 'transaction_controller@get_transaction_info',
                 'as' => 'get-transaction-info'
             ]);
-            
+
             Route::post('/get_instant_transaction_info',[
                 'uses' => 'instant_transaction_controller@get_transaction_info',
                 'as' => 'get-instant-transaction-info'
@@ -447,7 +447,7 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'transaction_controller@get_payed_factor_list',
         'as' => 'get_payed_factor_list'
     ]);
-    
+
     Route::post('/get_payed_instant_factor_list',[
         'uses' => 'instant_transaction_controller@get_payed_factor_list',
         'as' => 'get_payed_instant_factor_list'
@@ -457,7 +457,7 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'transaction_controller@get_factor_info_by_factor_id',
         'as' => 'get_factor_info_by_factor_id'
     ]);
-    
+
     Route::post('/get_instant_factor_info',[
         'uses' => 'instant_transaction_controller@get_factor_info_by_factor_id',
         'as' => 'get_instant_factor_info_by_factor_id'
@@ -492,12 +492,12 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'user_controller@get_contract_sides_user_info',
         'as' => 'get_contract_sides_user_info'
     ]);
-    
+
     Route::post('/get_user_instant_transaction_list',[
         'uses' => 'instant_transaction_controller@get_user_in_progress_transaction_list',
         'as'  => 'get_user_in_progress_instant_transaction_list'
     ]);
-    
+
     Route::post('/get_terminated_instant_transactions',[
         'uses' => 'instant_transaction_controller@get_user_terminated_transactions',
         'as' => 'get_terminated_instant_transactions',
@@ -686,7 +686,7 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
         'uses' => 'admin_panel\admin_transaction_controller@get_transaction_with_related_buyAd',
         'as' => 'admin_panel_load_transaction_by_id'
     ]);
-    
+
     Route::get('instant-transaction-detail/{id}',[
         'uses' => 'admin_panel\admin_transaction_controller@get_instant_transaction_with_related_data',
         'as' => 'admin_panel_load_instant_transaction_by_id'
@@ -711,7 +711,7 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
         'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_prepayment_factor_issuance_transactions_list',
         'as' => 'admin_panel_waiting_for_prepayment_factor_issuance_list'
     ]);
-    
+
     Route::get('prepayment-instant-factor-list',[
         'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_prepayment_factor_issuance_instant_transactions_list',
         'as' => 'admin_panel_waiting_for_prepayment_instant_factor_issuance_list'
@@ -721,7 +721,7 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
         'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_payment_factor_issuance_transactions_list',
         'as' => 'admin_panel_waiting_for_payment_factor_issuance_list'
     ]);
-    
+
     Route::get('payment-instant-factor-list',[
         'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_payment_factor_issuance_instant_transactions_list',
         'as' => 'admin_panel_waiting_for_payment_instant_factor_issuance_list'
@@ -731,7 +731,7 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
         'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_termination_transaction_list',
         'as' => 'admin_panel_waiting_for_termination_transaction_list'
     ]);
-    
+
     Route::get('instant-transaction-termination-list',[
         'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_termination_instant_transaction_list',
         'as' => 'admin_panel_waiting_for_termination_instant_transaction_list'
@@ -741,21 +741,21 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
         'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_checkout_transaction_list',
         'as' => 'admin_panel_waiting_for_checkout_transaction_list'
     ]);
-    
+
     Route::get('statistics',[
         'uses' => 'admin_panel\admin_statistics_controller@load_statistics',
         'as' => 'admin_panel_load_statistics'
     ]);
-    
+
     Route::get('initiate-instant-transaction',function(){
         return view('admin_panel.initiateInstantTransaction');
     })->name('initiate-instant-transaction-view');
-    
+
     Route::post('initiate-instant-transaction',[
        'uses' => 'admin_panel\admin_transaction_controller@initiate_instant_transaction',
         'as' => 'initiate_instant_transaction'
     ]);
-    
+
     Route::get('generate-manual-payment-url',function(){
         return view('admin_panel.generateManualPaymentUrl');
     })->name('generate_manual_payment_url');
