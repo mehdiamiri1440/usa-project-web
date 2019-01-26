@@ -474,11 +474,11 @@
             display: none;
         }
 
-        .clouse_menu {
+        .close_menu {
             display: none;
         }
 
-        .clouse_menu_mob {
+        .close_menu_mob {
             display: block;
         }
 
@@ -639,7 +639,7 @@
                     .then(function(response){
                         if(response.data.status == true){
                             //show modal password changed
-                        
+
                             self.popUpMsg = 'کلمه عبور با موفقیت تغییر یافت';
                             eventBus.$emit('submitSuccess', self.popUpMsg);
                             $('#myModal').modal('show');
