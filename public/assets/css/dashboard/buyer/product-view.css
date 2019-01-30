@@ -67,44 +67,6 @@ th, td {
 .owl-carousel img{
     border-radius: 3px;
 }
-.profile-menu-header {
-    padding: 11px;
-    padding-left: 55px;
-    float: left;
-}
-
-.profile-menu-header a {
-    position: relative;
-    color: #fff;
-}
-
-.profile-menu-header i {
-    position: absolute;
-
-    left: -75px;
-
-    top: 18px;
-
-    font-size: 20px;
-}
-
-.image-header-profile {
-    width: 50px;
-    height: 50px;
-    overflow: hidden;
-    border-radius: 50%;
-    float: left;
-}
-.image-header-profile img{
-    height: 100%;
-
-}
-
-.name-header-profile {
-    position: relative;
-    top: 18px;
-    left: 10px;
-}
 
 .header-nav {
     direction: rtl;
@@ -129,8 +91,8 @@ th, td {
     border-radius: 3px;
     box-shadow: 0 0 3px #313a43;
     text-align: right;
-    left: 40px;
-    top: 65px;
+    left: 0;
+    top: 57px;
     display: none;
     z-index: 999;
 }
@@ -156,7 +118,7 @@ th, td {
 
 .title-page {
     text-align: center;
-    margin: 0 auto 20px;
+    margin: 30px auto 0;
 }
 
 .sub-header {
@@ -338,9 +300,9 @@ th, td {
 }
 .buy_details{
     border-top: 2px solid #f0f3f6;
-    padding: 15px;
+    padding: 15px 0;
     margin: 15px auto;
-    display: none;
+    display: block;
 }
 .buy_details > div{
     margin: 7px auto;
@@ -357,6 +319,21 @@ th, td {
     height: 100%;
 }
 
+.buy_details  .green_bot {
+    margin: 5px auto;
+    display: inline-block;
+    background: #28a745;
+    color: #fff;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 12px;
+    width: initial;
+    line-height: 21px;
+    padding: 8px 30px;
+}
+.buy_details   .submit-button {
+   text-align: center;
+}
 .green_bot {
     margin: 5px 0;
     display: inline-block;
@@ -368,6 +345,7 @@ th, td {
     font-size: 12px;
     width: 100%;
     line-height: 21px;
+    border: none;
 }
 .green_bot:hover {
     background: #279b41;
@@ -436,20 +414,82 @@ li.active a::after {
     height: 3px;
     width: 100%;
 }
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1199px) {
     /*.logo {*/
     /*float: none;*/
     /*margin: 0 auto;*/
     /*}*/
+    .user-image {
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        border-radius: 50%;
+        margin: 0 auto 10px;
+    }
+}
+@media screen and (max-width: 992px) {
+    .user-image {
+        width: 80px;
+        height: 80px;
+        overflow: hidden;
+        border-radius: 50%;
+        margin: 0 auto 10px;
+        float: right;
+    }
+    .user-contents > img {
+        display: none;
+    }
     .title-page {
         text-align: center;
-        margin: 0 auto 15px;
+        margin: 30px auto 0;
     }
     .right-sidebar {
         display: none;
     }
-}
+    .main-image {
+        padding: 0;
+    }
+    .sub-header {
 
+        background: #f0f3f6;
+        padding-top: 80px;
+
+    }
+
+    .create_buy_mobile {
+        display: block;
+    }
+
+    .links-sub-header {
+        direction: rtl;
+        text-align: center;
+    }
+
+    .logo img {
+        width: 100%;
+    }
+
+    .user-contents > p {
+        float: right;
+        font-size: 18px;
+        padding-top: 30px;
+        padding-right: 20px;
+    }
+
+    .green_bot {
+        float: none;
+        width: initial;
+        padding: 10px 25px;
+        margin-top: 20px;
+    }
+    .create_buy {
+        display: none;
+    }
+    .main-content {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+}
 @media screen and (max-width: 768px) {
     .links-sub-header {
         direction: rtl;
@@ -461,6 +501,10 @@ li.active a::after {
     .user-contents > img{
         display: none;
     }
+    #main {
+        padding-top: 75px;
+    }
+
 }
 
 @media screen and (max-width: 715px) {
@@ -475,15 +519,45 @@ li.active a::after {
     }
 }
 @media screen and (max-width: 555px) {
+    #main,.main-content,.wrapper-related-products{
+        padding-left:0 ;
+        padding-right:0 ;
+    }
     .logo {
         padding: 6px 10px;
     }
+    .user-image {
+        width: 60px;
+        height: 60px;
+        overflow: hidden;
+        border-radius: 50%;
+        margin: 10px auto 10px;
+        float: right;
+    }
+    .green_bot {
+        float: left;
+        padding: 10px 5px;
+        margin-top: 11px;
+        font-size: 10px;
+    }
+    .user-contents > p {
+        float: right;
+        font-size: inherit;
+        padding-top: 28px;
+        padding-right: 5px;
+    }
+
 }
 
 @media screen and (max-width: 430px) {
+    .user-image {
+        width: 50px;
+        height: 50px;
+    }
     .logo {
         padding: 6px 63px;
         width: 100%;
         height: 109px;
     }
+
 }

@@ -13,18 +13,41 @@ import AppSeller from './components/AppSeller'
 import AppBuyer from './components/AppBuyer'
 import loginComponent from './components/login/Login.vue';
 import registerComponent from './components/register/register.vue';
+import productVue from './components/product_view'
 
 
 
 
-
-
+var viz = false;
  new Vue({
      el:'#app',
     components:{
         loginComponent,
         registerComponent,
+        productVue
     },
+     methods: {
+         dropdown: function () {
+             $(".profile-list").fadeIn("slow", function () {
+                 viz = true;
+             });
+         },
+         dropdownList: function () {
+             $(".icon-header-list").fadeIn("slow", function () {
+                 viz = true;
+             });
+         },
+         documentClick(e) {
+             if (viz) {
+                 $('.profile-list').fadeOut("slow");
+                 $('.icon-header-list').fadeOut("slow");
+                 viz = false;
+             }
+         },
+     },
+     created() {
+         document.addEventListener('click', this.documentClick)
+     },
     router,
 });
 

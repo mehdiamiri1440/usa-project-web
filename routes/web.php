@@ -19,6 +19,10 @@ use App\myuser;
 use App\profile;
 
 
+Route::get('/pv', function(){
+    return view('product_view');
+});
+
 Route::get('/test', function(){
     return view('payment.external_url_payment_callback');
 });
