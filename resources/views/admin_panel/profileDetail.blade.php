@@ -169,7 +169,7 @@
                     <input type="hidden" name="profile_id" value="{{$profile->id}}">
                     <button class="btn btn-danger btn-block">رد</button>
                 </div> 
-            </form>        
+            </form>    
         </div>
     @else
         <div class="row">
