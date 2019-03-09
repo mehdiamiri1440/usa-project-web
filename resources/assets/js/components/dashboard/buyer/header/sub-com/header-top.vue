@@ -172,7 +172,7 @@
                               </div>
                           </li>-->
                     <li>
-                        <a class="green-bot" href="/product-list" style="font-size: 17px"> <span class="full">لیست محصولات</span>
+                        <a class="green-bot" href="/master/#/product-list" style="font-size: 17px"> <span class="full">لیست محصولات</span>
                             <span class="min"><i class="fa fa-bars" aria-hidden="true"></i></span> </a>
                     </li>
                     <li><a :href="routeHome"><i class="fa fa-home" aria-hidden="true"></i></a></li>

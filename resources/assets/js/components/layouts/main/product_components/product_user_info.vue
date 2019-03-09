@@ -18,6 +18,83 @@
         </div>
     </div>
 </template>
+<style scoped>
+
+
+    .user-image {
+        width: 135px;
+        height: 135px;
+        overflow: hidden;
+        border-radius: 50%;
+        margin: 0 auto 10px;
+    }
+
+    .user-image img, .user-image > div {
+        height: 100%;
+    }
+    .user-contents {
+        border-right: 2px solid #f0f3f6;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .user-contents h1 {
+        padding: 14px 0;
+    }
+
+    .create_buy {
+        position: relative;
+    }
+    @media screen and (max-width: 768px) {
+
+        .logo img {
+            width: 100%;
+        }
+
+        .user-contents {
+            border-right: none;
+            overflow: hidden;
+            margin-bottom: 6px;
+        }
+
+        .user-contents h1 {
+            float: none;
+
+            text-align: right;
+
+            overflow: hidden;
+
+            font-size: 18px;
+            padding: 15px 0 0;
+        }
+        .user-contents p {
+            margin: 22px 8px;
+            font-size: 12px;
+            font-weight: 800;
+            float: right;
+        }
+
+
+        .user-image {
+            width: 65px;
+            height: 65px;
+            overflow: hidden;
+            border-radius: 50%;
+            margin: 0;
+            float: right;
+        }
+
+        .user-contents a.green_bot{
+            float: left;
+            width: initial;
+            padding: 5px;
+            margin: 15px auto;
+        }
+    }
+
+
+
+</style>
 <script>
     export default {
         props:[

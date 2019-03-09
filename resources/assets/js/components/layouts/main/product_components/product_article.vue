@@ -24,7 +24,7 @@
     }
 
     .main-article-content {
-        padding: 0 15px 20px;
+        padding: 0 20px 20px;
     }
 
     .main-article-content p {
@@ -59,18 +59,6 @@
         margin: 7px auto;
     }
 
-    .user-image {
-        width: 135px;
-        height: 135px;
-        overflow: hidden;
-        border-radius: 50%;
-        margin: 0 auto 10px;
-    }
-
-    .user-image img, .user-image > div {
-        height: 100%;
-    }
-
     .image-wrapper img {
         transition: 300ms;
     }
@@ -83,16 +71,6 @@
     .btn-content img, .btn-content span {
         float: right;
         margin: 0 5px;
-    }
-
-    .user-contents {
-        border-right: 2px solid #f0f3f6;
-        text-align: center;
-        padding: 0 20px;
-    }
-
-    .create_buy {
-        position: relative;
     }
 
     .create_buy_mobile a {
@@ -157,7 +135,6 @@
                  :current_user="currentUser"
          ></product-user-info>
             <div class="article-contents col-xs-12  col-sm-9 ">
-                <div class="row">
                     <div class="main-image col-xs-12 col-sm-5">
                         <div class="owl-carousel" v-if="product.photos.length > 0">
                             <image-viewer-list
@@ -189,7 +166,6 @@
                         </a>
 
                     </div>
-                </div>
 
             </div>
             <div class="buy_details form-group  col-xs-12">

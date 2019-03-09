@@ -86509,7 +86509,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.main-content-item[data-v-10d50a4e] {\n    direction: rtl;\n    float: left;\n    width: 100%;\n    margin: 24px auto;\n    border-radius: 5px;\n    -webkit-box-shadow: 0 0 15px #dbdbdb;\n            box-shadow: 0 0 15px #dbdbdb;\n    padding: 15px 0 0;\n}\n.main-article-title[data-v-10d50a4e] {\n    margin: 15px auto;\n    font-weight: bold;\n}\n.main-article-title a[data-v-10d50a4e] {\n    color: #4c5058;\n}\n.main-article-title a[data-v-10d50a4e]:hover {\n    color: #444;\n}\n.main-article-content[data-v-10d50a4e] {\n    padding: 0 15px 20px;\n}\n.main-article-content p[data-v-10d50a4e] {\n    margin-bottom: 15px;\n    font-size: 15px;\n    font-weight: bold;\n}\n.main-article-content p span[data-v-10d50a4e] {\n    font-weight: normal;\n}\n.image-article-content[data-v-10d50a4e] {\n    padding: 0;\n    padding-top: 10px;\n    height: 240px;\n    overflow: hidden;\n    float: right;\n}\n.image-article-content img[data-v-10d50a4e] {\n    height: 100%;\n}\n.buy_details[data-v-10d50a4e] {\n    border-top: 2px solid #f0f3f6;\n    padding: 15px;\n    margin: 15px auto;\n    display: none;\n}\n.buy_details > div[data-v-10d50a4e] {\n    margin: 7px auto;\n}\n.user-image[data-v-10d50a4e] {\n    width: 135px;\n    height: 135px;\n    overflow: hidden;\n    border-radius: 50%;\n    margin: 0 auto 10px;\n}\n.user-image img[data-v-10d50a4e], .user-image > div[data-v-10d50a4e] {\n    height: 100%;\n}\n.image-wrapper img[data-v-10d50a4e] {\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.btn-content[data-v-10d50a4e] {\n    display: inline-block;\n    margin: 0 auto;\n}\n.btn-content img[data-v-10d50a4e], .btn-content span[data-v-10d50a4e] {\n    float: right;\n    margin: 0 5px;\n}\n.user-contents[data-v-10d50a4e] {\n    border-right: 2px solid #f0f3f6;\n    text-align: center;\n    padding: 0 20px;\n}\n.create_buy[data-v-10d50a4e] {\n    position: relative;\n}\n.create_buy_mobile a[data-v-10d50a4e] {\n    margin: 0;\n}\n.main-image[data-v-10d50a4e] {\n    float: right;\n}\n.load-more-button a[data-v-10d50a4e] {\n    direction: rtl;\n    color: #666;\n    font-size: 18px;\n    width: 100%;\n    -webkit-box-shadow: 0 0 5px #bfbfbf;\n            box-shadow: 0 0 5px #bfbfbf;\n    background: #f0f3f6 !important;\n    overflow: hidden;\n    border-radius: 5px;\n    position: relative;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    border: none;\n    top: 0;\n}\n.load-more-button a[data-v-10d50a4e]:hover {\n    top: -6px;\n    color: #333333;\n    -webkit-box-shadow: 0 0 5px #a5a5a5;\n            box-shadow: 0 0 5px #a5a5a5;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    position: relative;\n}\n.btn-loader[data-v-10d50a4e] {\n    height: 38px;\n\n    overflow: hidden;\n}\n.btn-loader img[data-v-10d50a4e] {\n    width: 56px;\n    margin-top: -15px;\n}\n\n\n", ""]);
+exports.push([module.i, "\n.main-content-item[data-v-10d50a4e] {\n    direction: rtl;\n    float: left;\n    width: 100%;\n    margin: 24px auto;\n    border-radius: 5px;\n    -webkit-box-shadow: 0 0 15px #dbdbdb;\n            box-shadow: 0 0 15px #dbdbdb;\n    padding: 15px 0 0;\n}\n.main-article-title[data-v-10d50a4e] {\n    margin: 15px auto;\n    font-weight: bold;\n}\n.main-article-title a[data-v-10d50a4e] {\n    color: #4c5058;\n}\n.main-article-title a[data-v-10d50a4e]:hover {\n    color: #444;\n}\n.main-article-content[data-v-10d50a4e] {\n    padding: 0 20px 20px;\n}\n.main-article-content p[data-v-10d50a4e] {\n    margin-bottom: 15px;\n    font-size: 15px;\n    font-weight: bold;\n}\n.main-article-content p span[data-v-10d50a4e] {\n    font-weight: normal;\n}\n.image-article-content[data-v-10d50a4e] {\n    padding: 0;\n    padding-top: 10px;\n    height: 240px;\n    overflow: hidden;\n    float: right;\n}\n.image-article-content img[data-v-10d50a4e] {\n    height: 100%;\n}\n.buy_details[data-v-10d50a4e] {\n    border-top: 2px solid #f0f3f6;\n    padding: 15px;\n    margin: 15px auto;\n    display: none;\n}\n.buy_details > div[data-v-10d50a4e] {\n    margin: 7px auto;\n}\n.image-wrapper img[data-v-10d50a4e] {\n    -webkit-transition: 300ms;\n    transition: 300ms;\n}\n.btn-content[data-v-10d50a4e] {\n    display: inline-block;\n    margin: 0 auto;\n}\n.btn-content img[data-v-10d50a4e], .btn-content span[data-v-10d50a4e] {\n    float: right;\n    margin: 0 5px;\n}\n.create_buy_mobile a[data-v-10d50a4e] {\n    margin: 0;\n}\n.main-image[data-v-10d50a4e] {\n    float: right;\n}\n.load-more-button a[data-v-10d50a4e] {\n    direction: rtl;\n    color: #666;\n    font-size: 18px;\n    width: 100%;\n    -webkit-box-shadow: 0 0 5px #bfbfbf;\n            box-shadow: 0 0 5px #bfbfbf;\n    background: #f0f3f6 !important;\n    overflow: hidden;\n    border-radius: 5px;\n    position: relative;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    border: none;\n    top: 0;\n}\n.load-more-button a[data-v-10d50a4e]:hover {\n    top: -6px;\n    color: #333333;\n    -webkit-box-shadow: 0 0 5px #a5a5a5;\n            box-shadow: 0 0 5px #a5a5a5;\n    -webkit-transition: 300ms;\n    transition: 300ms;\n    position: relative;\n}\n.btn-loader[data-v-10d50a4e] {\n    height: 38px;\n\n    overflow: hidden;\n}\n.btn-loader img[data-v-10d50a4e] {\n    width: 56px;\n    margin-top: -15px;\n}\n\n\n", ""]);
 
 // exports
 
@@ -86522,30 +86522,6 @@ exports.push([module.i, "\n.main-content-item[data-v-10d50a4e] {\n    direction:
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__product_user_info__ = __webpack_require__(217);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__product_user_info___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__product_user_info__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -86979,17 +86955,21 @@ var OwlCarouselLists = {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(315)
+}
 var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(218)
 /* template */
-var __vue_template__ = __webpack_require__(219)
+var __vue_template__ = __webpack_require__(317)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-bca32c76"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -87047,6 +87027,83 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['profile_photo', 'user_info', 'user_full_name', 'user_name', 'defultimg', 'current_user'],
@@ -87078,69 +87135,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 219 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "user-contents col-xs-12  col-sm-3" },
-    [
-      _vm.profile_photo
-        ? _c("div", { staticClass: "user-image" }, [
-            _c("img", { attrs: { src: "/storage/" + _vm.profile_photo } })
-          ])
-        : _c("div", { staticClass: "user-image" }, [
-            _c("img", {
-              staticClass: "image_defult",
-              attrs: { src: _vm.defultimg }
-            })
-          ]),
-      _vm._v(" "),
-      _vm.user_info ? _c("p", [_vm._v(_vm._s(_vm.user_full_name))]) : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "router-link",
-        {
-          staticClass: "green_bot",
-          attrs: { to: { path: "/profile/" + _vm.user_name } }
-        },
-        [_vm._v("مشاهده پروفایل")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "create_buy  hidden-xs" }, [
-        _c(
-          "a",
-          {
-            staticClass: "green_bot",
-            attrs: { href: "#" },
-            on: {
-              click: function($event) {
-                _vm.openRequestRegisterBox($event)
-              }
-            }
-          },
-          [_vm._v("\n                درخواست خرید\n            ")]
-        )
-      ])
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-bca32c76", module.exports)
-  }
-}
-
-/***/ }),
+/* 219 */,
 /* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -87170,109 +87165,105 @@ var render = function() {
           }),
           _vm._v(" "),
           _c("div", { staticClass: "article-contents col-xs-12  col-sm-9 " }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "main-image col-xs-12 col-sm-5" }, [
-                product.photos.length > 0
-                  ? _c(
-                      "div",
-                      { staticClass: "owl-carousel" },
-                      _vm._l(product.photos, function(photo) {
-                        return _c("image-viewer-list", {
-                          key: photo.id,
-                          attrs: { base: _vm.str, img: photo.file_path }
-                        })
+            _c("div", { staticClass: "main-image col-xs-12 col-sm-5" }, [
+              product.photos.length > 0
+                ? _c(
+                    "div",
+                    { staticClass: "owl-carousel" },
+                    _vm._l(product.photos, function(photo) {
+                      return _c("image-viewer-list", {
+                        key: photo.id,
+                        attrs: { base: _vm.str, img: photo.file_path }
                       })
-                    )
-                  : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "main-article-content col-xs-12 col-sm-7" },
-                [
-                  _c("h2", { staticClass: "main-article-title" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v(
-                        _vm._s(
-                          product.main.category_name +
-                            " | " +
-                            product.main.sub_category_name
-                        )
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v("نوع محصول: "),
-                    _c("span", [_vm._v(_vm._s(product.main.product_name))])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v("استان / شهر:\n                        "),
-                    _c("span", [
-                      _vm._v(
-                        _vm._s(
-                          product.main.province_name +
-                            " - " +
-                            product.main.city_name
-                        )
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v("مقدار موجودی: "),
-                    _c("span", [
-                      _vm._v(_vm._s(product.main.stock) + " کیلوگرم")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v("قیمت: "),
-                    _c("span", [
-                      _vm._v(
-                        _vm._s(
-                          product.main.min_sale_price +
-                            " - " +
-                            product.main.max_sale_price
-                        ) + "\n                                تومان"
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v("توضیحات: "),
-                    _c("span", [_vm._v(_vm._s(product.main.description))])
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "create_buy_mobile hidden-sm hidden-md hidden-lg"
-                },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "green_bot",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          _vm.openRequestRegisterBox($event)
-                        }
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n                        درخواست خرید\n                    "
-                      )
-                    ]
+                    })
                   )
-                ]
-              )
-            ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "main-article-content col-xs-12 col-sm-7" },
+              [
+                _c("h2", { staticClass: "main-article-title" }, [
+                  _c("a", { attrs: { href: "#" } }, [
+                    _vm._v(
+                      _vm._s(
+                        product.main.category_name +
+                          " | " +
+                          product.main.sub_category_name
+                      )
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v("نوع محصول: "),
+                  _c("span", [_vm._v(_vm._s(product.main.product_name))])
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v("استان / شهر:\n                        "),
+                  _c("span", [
+                    _vm._v(
+                      _vm._s(
+                        product.main.province_name +
+                          " - " +
+                          product.main.city_name
+                      )
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v("مقدار موجودی: "),
+                  _c("span", [_vm._v(_vm._s(product.main.stock) + " کیلوگرم")])
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v("قیمت: "),
+                  _c("span", [
+                    _vm._v(
+                      _vm._s(
+                        product.main.min_sale_price +
+                          " - " +
+                          product.main.max_sale_price
+                      ) + "\n                                تومان"
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v("توضیحات: "),
+                  _c("span", [_vm._v(_vm._s(product.main.description))])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "create_buy_mobile hidden-sm hidden-md hidden-lg"
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "green_bot",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        _vm.openRequestRegisterBox($event)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        درخواست خرید\n                    "
+                    )
+                  ]
+                )
+              ]
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "buy_details form-group  col-xs-12" }, [
@@ -90068,7 +90059,6 @@ var PopupImageCertificate = {
     template: '<a   :href="base + img">' + '<img :src="base + img">' + '</a>',
 
     mounted: function mounted() {
-        console.log($(this.$el));
         $('.cerificates > div').each(function () {
             // the containers for all your galleries
             $(this).magnificPopup({
@@ -90194,13 +90184,23 @@ var OwlCarousel = {
             }
         },
 
+        addMetaTag: function addMetaTag() {
+
+            var imgMeta;
+            if (this.profileOwner.profile.profile_photo) {
+                imgMeta = '<meta v-if="' + this.profileOwner.profile.profile_photo + '" property="og:image" itemProp="image" content="' + this.str + '/' + this.profileOwner.profile.profile_photo + ' "/>';
+            } else {
+                imgMeta = '<meta v-else  property="og:image" itemProp="image" content="' + this.defultimg + '"/>';
+            }
+
+            $('head').append('<meta property="og:type" content="website"/>' + '<meta property="og:image:height" content="256"/>' + '<meta property="og:image:width" content="256"/>' + '<meta property="og:image:type" content="image/jpeg"/>' + '<meta property="og:description" content="صفحه ی شخصی پروفایل کاربران اینکوباک"/>' + ' <meta property="og:site_name" content="اینکوباک">' + '<meta name="description" content="صفحه ی شخصی پروفایل کاربران اینکوباک. محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید">' + '<meta property="og:url" content="\'https://www.incobac.com/profile/' + this.getUserName + '"/>' + '<meta property="og:title" content="' + this.profileOwner.user_info.first_name + ' ' + this.profileOwner.user_info.last_name + '"/>' + imgMeta);
+        },
         init: function init() {
             var _this = this;
 
             var self = this;
 
             var userName = this.getUserName;
-            console.log(userName);
             if (this.isDeviceMobile()) {
                 this.copyLinkText = ' اشتراک در واتساپ';
                 this.copyLinkClass = 'fa fa-whatsapp fa-2x';
@@ -90211,6 +90211,7 @@ var OwlCarousel = {
 
             axios.post('/get_user_statistics_by_user_name', {
                 user_name: userName
+
             }).then(function (response) {
                 self.profileOwnerStatistics = response.data.statistics;
             }).catch(function (err) {
@@ -90223,7 +90224,8 @@ var OwlCarousel = {
             axios.post('/load_profile_by_user_name', {
                 user_name: userName
             }).then(function (response) {
-                return _this.profileOwner = response.data;
+                self.profileOwner = response.data;
+                self.addMetaTag();
             }).catch(function (err) {
                 if (err.response.status == 404) {
                     window.location.href = '/404';
@@ -91550,7 +91552,10 @@ var staticRenderFns = [
     return _c("li", [
       _c(
         "a",
-        { staticClass: "smoothScroll", attrs: { href: "/product-list" } },
+        {
+          staticClass: "smoothScroll",
+          attrs: { href: "/master/#/product-list" }
+        },
         [_vm._v("لیست محصولات ")]
       )
     ])
@@ -96649,7 +96654,7 @@ var staticRenderFns = [
         {
           staticClass: "green-bot",
           staticStyle: { "font-size": "17px" },
-          attrs: { href: "/product-list" }
+          attrs: { href: "/master/#/product-list" }
         },
         [
           _c("span", { staticClass: "full" }, [_vm._v("لیست محصولات")]),
@@ -99983,6 +99988,117 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 307 */,
+/* 308 */,
+/* 309 */,
+/* 310 */,
+/* 311 */,
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(316);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("38400a0e", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-bca32c76\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./product_user_info.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-bca32c76\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./product_user_info.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 316 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.user-image[data-v-bca32c76] {\n    width: 135px;\n    height: 135px;\n    overflow: hidden;\n    border-radius: 50%;\n    margin: 0 auto 10px;\n}\n.user-image img[data-v-bca32c76], .user-image > div[data-v-bca32c76] {\n    height: 100%;\n}\n.user-contents[data-v-bca32c76] {\n    border-right: 2px solid #f0f3f6;\n    text-align: center;\n    padding: 0 20px;\n}\n.user-contents h1[data-v-bca32c76] {\n    padding: 14px 0;\n}\n.create_buy[data-v-bca32c76] {\n    position: relative;\n}\n@media screen and (max-width: 768px) {\n.logo img[data-v-bca32c76] {\n        width: 100%;\n}\n.user-contents[data-v-bca32c76] {\n        border-right: none;\n        overflow: hidden;\n        margin-bottom: 6px;\n}\n.user-contents h1[data-v-bca32c76] {\n        float: none;\n\n        text-align: right;\n\n        overflow: hidden;\n\n        font-size: 18px;\n        padding: 15px 0 0;\n}\n.user-contents p[data-v-bca32c76] {\n        margin: 22px 8px;\n        font-size: 12px;\n        font-weight: 800;\n        float: right;\n}\n.user-image[data-v-bca32c76] {\n        width: 65px;\n        height: 65px;\n        overflow: hidden;\n        border-radius: 50%;\n        margin: 0;\n        float: right;\n}\n.user-contents a.green_bot[data-v-bca32c76]{\n        float: left;\n        width: initial;\n        padding: 5px;\n        margin: 15px auto;\n}\n}\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 317 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "user-contents col-xs-12  col-sm-3" },
+    [
+      _vm.profile_photo
+        ? _c("div", { staticClass: "user-image" }, [
+            _c("img", { attrs: { src: "/storage/" + _vm.profile_photo } })
+          ])
+        : _c("div", { staticClass: "user-image" }, [
+            _c("img", {
+              staticClass: "image_defult",
+              attrs: { src: _vm.defultimg }
+            })
+          ]),
+      _vm._v(" "),
+      _vm.user_info ? _c("p", [_vm._v(_vm._s(_vm.user_full_name))]) : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "router-link",
+        {
+          staticClass: "green_bot",
+          attrs: { to: { path: "/profile/" + _vm.user_name } }
+        },
+        [_vm._v("مشاهده پروفایل")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "create_buy  hidden-xs" }, [
+        _c(
+          "a",
+          {
+            staticClass: "green_bot",
+            attrs: { href: "#" },
+            on: {
+              click: function($event) {
+                _vm.openRequestRegisterBox($event)
+              }
+            }
+          },
+          [_vm._v("\n                درخواست خرید\n            ")]
+        )
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-bca32c76", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
