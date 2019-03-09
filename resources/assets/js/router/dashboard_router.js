@@ -44,6 +44,15 @@ import buyerTransactionReport from '../components/dashboard/buyer/transaction/tr
 import buyerGuide from '../components/dashboard/buyer/guide.vue';
 
 
+// Layout Components
+import indexPage from '../components/layouts/main/index'
+import productList from '../components/layouts/main/product_list'
+import productView from '../components/layouts/main/product_view'
+import indexPrivacyAndPolicy from '../components/layouts/main/privacy_and_policy'
+import indexAboutUs from '../components/layouts/main/about_us'
+import profile from '../components/layouts/main/profile'
+import indexHeader from '../components/layouts/header/hedaer'
+import indexFooter from '../components/layouts/footer/footer'
 
 
 Vue.use(Router);
@@ -53,6 +62,48 @@ export const eventBus = new Vue();
 const myRouter =  new Router({
     base: process.env.BASE_URL,
     routes: [
+        {
+            path: '/',
+            name: 'indexPage',
+            components: {
+                layouts: indexPage,
+            },
+        },
+        {
+            path: '/profile/:user_name',
+            name: 'profile',
+            components: {
+                layouts: profile,
+            },
+        },
+        {
+            path: '/about-us',
+            name: 'aboutUs',
+            components: {
+                layouts: indexAboutUs,
+            },
+        },
+        {
+            path: '/privacy-and-policy',
+            name: 'privacyAndPolicy',
+            components: {
+                layouts: indexPrivacyAndPolicy,
+            },
+        },
+        {
+            path: '/product-list',
+            name: 'productList',
+            components: {
+                layouts: productList,
+            },
+        },
+        {
+            path: '/product-view',
+            name: 'productView',
+            components: {
+                layouts: productView,
+            },
+        },
       {
             path: '/password',
             name: 'password',
@@ -70,6 +121,7 @@ const myRouter =  new Router({
             components: {
                 seller: sellerProfileBasic,
                 buyer: buyerProfileBasic,
+
             },
             params: {
                 active: 1
@@ -249,7 +301,7 @@ const myRouter =  new Router({
             }
         }
         , {
-            path: '/guide',
+            path: '/privacy_and_policy.vue',
             name: 'guide',
             components: {
                 seller: sellerGuide,
@@ -259,7 +311,7 @@ const myRouter =  new Router({
 
     ],
 });
-
+/*
 myRouter.beforeEach((to,from,next) => {
       switch(to.name){
           case 'profileBasic' :
@@ -293,6 +345,7 @@ myRouter.beforeEach((to,from,next) => {
 
       }
 });
+*/
 
 
 export default myRouter;

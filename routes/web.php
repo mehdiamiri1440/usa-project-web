@@ -19,20 +19,30 @@ use App\myuser;
 use App\profile;
 
 
-Route::get('/pv', function(){
-    return view('product_view');
-});
+/*Route::get('/pv', function(){
+    return view('layout.master');
+});*/
 
-Route::get('/test', function(){
+/*Route::get('/test', function(){
     return view('payment.external_url_payment_callback');
-});
+});*/
 
-Route::get('/help', function(){
+/*Route::get('/help', function(){
     return view('index_pages.help');
-});
-
+});*/
+/*
 Route::get('/p', function(){
     return view('index_pages.projects');
+});*/
+Route::group(['prefix' => 'master'],function (){
+    Route::get('/', function () {
+        return view('layout.master');
+    });
+    Route::get('product-list/{searchText?}',function($searchText = null){
+        return view('layout.master',[
+            'searchText' => $searchText,
+        ]);
+    })->name('product-list');
 });
 
 Route::get('/', function(){
@@ -116,11 +126,6 @@ Route::post('/get_buy_ad_by_id',[
     'as' => 'get_buy_ad_by_id'
 ]);
 
-Route::get('product-list/{searchText?}',function($searchText = null){
-        return view('dashboard.buyer.product-list',[
-            'searchText' => $searchText,
-        ]);
-})->name('product-list');
 
 Route::get('/product/{id?}',function(){
 
@@ -162,7 +167,7 @@ Route::post('/application_trace/increment_buy_ad_phone_view_count',[
     'uses' => 'buyAd_controller@increment_buy_ad_phone_view_count',
     'as' => 'increment_buy_ad_phone_view_count'
 ]);
-
+/*
 Route::get('/profile/{user_name}',function($user_name){
     $user_record = myuser::where('user_name',$user_name)
         ->select('id','first_name','last_name')
@@ -182,7 +187,7 @@ Route::get('/profile/{user_name}',function($user_name){
         'full_name' => $full_name,
         'profile_photo' => $profile_record ? $profile_record->profile_photo : '',
     ]);
-});
+});*/
 
 Route::post('/load_profile_by_user_name',[
     'uses' => 'profile_controller@get_last_profile_info_with_all_related_content_by_user_name',
@@ -202,7 +207,6 @@ Route::post('/get_user_statistics_by_user_name',[
 Route::get('/product-view/{product_id}/{city}-{province}-{product_name}-{sub_category_name}-{category_name}',function($product_id){
         return view('dashboard.buyer.product-list');
 });
-
 
 
 Route::group(['middleware' => [login::class]],function(){
@@ -228,6 +232,7 @@ Route::group(['middleware' => [login::class]],function(){
            'transaction_id' => $transaction_id
         ]);
     })->name('instant-back-to-basic');
+
 
 
     Route::group(['prefix' => 'dashboard'],function(){
@@ -367,14 +372,14 @@ Route::group(['middleware' => [login::class]],function(){
             else return abort(404);
         })->name('payed-factor-list');
 
-        Route::get('/guide',function(){
+        Route::get('/privacy_and_policy.vue',function(){
             if(session('is_buyer') == true){
-                return view('dashboard.buyer.guide');
+                return view('dashboard.buyer.privacy_and_policy.vue');
             }
             else if(session('is_seller') == true){
-                return view('dashboard.seller.guide');
+                return view('dashboard.seller.privacy_and_policy.vue');
             }
-        })->name('dashboard-guide');
+        })->name('dashboard-privacy_and_policy.vue');
     });
 
     Route::post('/user/profile_modification',[

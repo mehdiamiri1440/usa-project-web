@@ -130,7 +130,7 @@
                    this.active_el = 5
                }else if(this.subIsActive('/payed-factor-list') || this.subIsActive('/factor-detail/' + this.$route.params.id) || this.subIsActive('/instant-factor-detail/' + this.$route.params.id)){
                    this.active_el = 6
-               }else if(this.subIsActive('/guide')){
+               }else if(this.subIsActive('/privacy_and_policy.vue')){
                    this.active_el = 7
                }else{
                    this.active_el = 1
@@ -150,7 +150,7 @@
                 this.active_el = 5
             }else if(this.subIsActive('/payed-factor-list') || this.subIsActive('/factor-detail/' + this.$route.params.id)){
                 this.active_el = 6
-            }else if(this.subIsActive('/guide')){
+            }else if(this.subIsActive('/privacy_and_policy.vue')){
                 this.active_el = 7
             }else{
                 this.active_el = 1

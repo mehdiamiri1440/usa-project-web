@@ -11,9 +11,10 @@ Vue.config.productionTip = false;
 
 import AppSeller from './components/AppSeller'
 import AppBuyer from './components/AppBuyer'
+import AppLayouts from './components/AppLayouts'
 import loginComponent from './components/login/Login.vue';
 import registerComponent from './components/register/register.vue';
-import productVue from './components/product_view'
+// import productVue from './components/product_view'
 
 
 
@@ -24,7 +25,7 @@ var viz = false;
     components:{
         loginComponent,
         registerComponent,
-        productVue
+       // productVue
     },
      methods: {
          dropdown: function () {

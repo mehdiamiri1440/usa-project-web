@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.master3')
 
 @section('header_links')
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">

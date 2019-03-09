@@ -128,7 +128,7 @@
                     this.active_el = 4
                 } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/')|| this.subIsActive('/instant-transaction-report/' + this.$route.params.id)) {
                     this.active_el = 5
-                } else if (this.subIsActive('/guide')) {
+                } else if (this.subIsActive('/privacy_and_policy.vue')) {
                     this.active_el = 6
                 } else{
                     this.active_el = 1
@@ -146,7 +146,7 @@
                 this.active_el = 4
             } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/')|| this.subIsActive('/transaction-report/' + this.$route.params.id)) {
                 this.active_el = 5
-            } else if (this.subIsActive('/guide')) {
+            } else if (this.subIsActive('/privacy_and_policy.vue')) {
                 this.active_el = 6
             } else{
                 this.active_el = 1

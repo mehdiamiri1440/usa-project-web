@@ -588,7 +588,7 @@
                             uploadName = "certificate_files"
                             uploadAccept = "image/*"
                             :uploadMinSize = "1024"
-                            :uploadSize = "1024 * 1024 * 10"
+                            :uploadSize = "1024 * 1024"
                             :uploadMultiple = "true"
                             :uploadDrop = "true"
                             :uploadDropDirectory = "true"

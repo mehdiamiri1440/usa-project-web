@@ -319,10 +319,6 @@ th, td {
     margin: 0;
 }
 
-.create_buy_mobile {
-    display: none;
-}
-
 .buy_details {
     border-top: 2px solid #f0f3f6;
     padding: 15px;
@@ -472,11 +468,6 @@ li.active a::after {
         padding-top: 80px;
 
     }
-
-    .create_buy_mobile {
-        display: block;
-    }
-
     .links-sub-header {
         direction: rtl;
         text-align: center;

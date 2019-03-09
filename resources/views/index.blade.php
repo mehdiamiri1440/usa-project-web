@@ -109,7 +109,7 @@ NAVIGATION LINKS
                     <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
                     <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
                     <li><a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
-                    <li><a href="/product-list" class="smoothScroll">لیست محصولات </a></li>
+                    <li><a href="master/#/product-list" class="smoothScroll">لیست محصولات </a></li>
 
 
                     @if(session('user_id'))
