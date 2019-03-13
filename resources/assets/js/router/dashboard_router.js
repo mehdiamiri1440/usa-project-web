@@ -44,6 +44,13 @@ import buyerTransactionReport from '../components/dashboard/buyer/transaction/tr
 import buyerGuide from '../components/dashboard/buyer/guide.vue';
 
 
+import messages from '../components/dashboard/message'
+import mobileAccountsMessage from '../components/dashboard/mobile-accounts-message'
+import mobileShowMessage from '../components/dashboard/mobile-show-message'
+
+
+
+
 // Layout Components
 import indexPage from '../components/layouts/main/index'
 import productList from '../components/layouts/main/product_list'
@@ -121,7 +128,6 @@ const myRouter =  new Router({
             components: {
                 seller: sellerProfileBasic,
                 buyer: buyerProfileBasic,
-
             },
             params: {
                 active: 1
@@ -133,6 +139,28 @@ const myRouter =  new Router({
             components: {
                 seller: sellerCompelementry,
                 buyer: buyerCompelementry,
+            },
+        },
+        , {
+            path: '/mobile-accounts',
+            name: 'mobileAccounts',
+            components: {
+                seller: mobileAccountsMessage,
+                buyer: mobileAccountsMessage,
+            },
+        },{
+            path: '/mobile-show',
+            name: 'mobileShow',
+            components: {
+                seller: mobileShowMessage,
+                buyer: mobileShowMessage,
+            },
+        },{
+            path: '/messages',
+            name: 'messages',
+            components: {
+                seller: messages,
+                buyer: messages,
             },
         },
         {

@@ -74,6 +74,12 @@
               </li>
 
               <li class="list-item  ">
+                  <router-link :class="{'active' : this.active_el === 8}" :to="{ name : 'messages' }">
+                      <span>پیام ها</span>
+                      <i class="fa fa-comment " aria-hidden="true"></i>
+                  </router-link>
+              </li>
+              <li class="list-item  ">
                   <router-link :class="{'active' : this.active_el === 7}" :to="{ name : 'guide' }">
                       <span>راهنما</span>
                       <i class="fa fa-question-circle  " aria-hidden="true"></i>
@@ -130,6 +136,8 @@
                    this.active_el = 5
                }else if(this.subIsActive('/payed-factor-list') || this.subIsActive('/factor-detail/' + this.$route.params.id) || this.subIsActive('/instant-factor-detail/' + this.$route.params.id)){
                    this.active_el = 6
+               }else if(this.subIsActive('/messages')){
+                   this.active_el = 8
                }else if(this.subIsActive('/privacy_and_policy.vue')){
                    this.active_el = 7
                }else{
@@ -150,6 +158,9 @@
                 this.active_el = 5
             }else if(this.subIsActive('/payed-factor-list') || this.subIsActive('/factor-detail/' + this.$route.params.id)){
                 this.active_el = 6
+            }
+            else if(this.subIsActive('/messages')){
+                this.active_el = 8
             }else if(this.subIsActive('/privacy_and_policy.vue')){
                 this.active_el = 7
             }else{
