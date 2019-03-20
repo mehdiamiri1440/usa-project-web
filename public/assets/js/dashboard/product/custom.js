@@ -1,85 +1,85 @@
 function dropdown() {
     $(".profile-list").toggle("fade");
 }
-function toggle_header() {
-    var menu_but = $(".clouse_menu");
-    var menu_but_icon = $(".clouse_menu i");
+function toggleHeader() {
+    var menuCloseButton= $(".close_menu");
+    var menuCloseButtonIcon = $(".close_menu i");
     var profile = $(".profile");
-    var header_menu = $(".header-menu span");
-    var header_menu_a = $(".header-menu a");
+    var headerMenu= $(".header-menu span");
+    var headerMenuLink = $(".header-menu a");
     var logo = $(".logo");
-    var copy_right = $(".copy-right");
-    var right_header_desk = $(".right-header.desktop-header");
-    var little_main_header = $(".main-header");
+    var copyRight = $(".copy-right");
+    var rightHeaderDesktop = $(".right-header.desktop-header");
+    var littleMainHeader = $(".main-header");
     var main = $("#main");
-    var next_move = "shrink";
-    menu_but.click(function () {
-        if (next_move == "expand") {
+    var nextMove = "shrink";
+    menuCloseButton.click(function () {
+        if (nextMove == "expand") {
             $(this).css({
                 width : "30%"
             });
-            menu_but_icon.switchClass("fa-angle-left"," fa-angle-right",200);
+            menuCloseButtonIcon.switchClass("fa-angle-left"," fa-angle-right",200);
             profile.fadeIn();
-            copy_right.css('display','block');
+            copyRight.css('display','block');
             logo.fadeIn();
-            header_menu.css('display','inline');
-            header_menu_a.css({
+            headerMenu.css('display','inline');
+            headerMenuLink.css({
                 "text-align" : "right"
             });
-            right_header_desk.removeClass("little_header",200);
-            little_main_header.removeClass("little-main-header",200);
+            rightHeaderDesktop.removeClass("little_header",200);
+            littleMainHeader.removeClass("little-main-header",200);
             main.removeClass("little-main",200);
-            next_move = "shrink";
+            nextMove = "shrink";
         } else {
             $(this).css({
                 width : "100%"
             });
-            menu_but_icon.switchClass("fa-angle-right"," fa-angle-left",200);
+            menuCloseButtonIcon.switchClass("fa-angle-right"," fa-angle-left",200);
             profile.css('display','none');
-            header_menu.css('display','none');
-            copy_right.css('display','none');
+            headerMenu.css('display','none');
+            copyRight.css('display','none');
             logo.css('display','none');
-            header_menu_a.css({
+            headerMenuLink.css({
                 "text-align" : "center"
             });
-            right_header_desk.addClass("little_header",200);
-            little_main_header.addClass("little-main-header",200);
+            rightHeaderDesktop.addClass("little_header",200);
+            littleMainHeader.addClass("little-main-header",200);
             main.addClass("little-main",200);
-            next_move = "expand";
+            nextMove = "expand";
         }
     });
 }
-function toggle_show_header() {
-    var el = $('.show-header button');
-    var el_clouse = $('.clouse_menu_mob');
+function toggleShowHeader() {
+    var showHeaderButtonElement = $('.show-header button');
+    var closeHeaderButtonMobile = $('.close_menu_mob');
     var flag = true;
-    var right_header = $(".right-header.mobile-header");
+    var rightHeader = $(".right-header.mobile-header");
     var back = $(".background_mob_sec");
-    el.on('click', function () {
+    showHeaderButtonElement.on('click', function () {
         if (flag == true){
             console.log('flag = true');
-            right_header.animate({
+            rightHeader.animate({
                 right:'0'
             },300);
             back.fadeIn();
 
             flag = false;
         }else{
-            right_header.animate({
+            rightHeader.animate({
                 right:'-300px'
             },300);
 
             flag = true;
         }
     });
-    el_clouse.on('click', function () {
+    closeHeaderButtonMobile.on('click', function () {
         if (flag == true){
-            right_header.animate({
+            rightHeader.animate({
                 right:'0'
             },300);
             flag = false;
         }else{
-            right_header.animate({
+            rightHeader.animate({
                 right:'-300px'
 
             },300);
@@ -90,7 +90,7 @@ function toggle_show_header() {
 }
 
 $(document).ready(function () {
-    toggle_header();
-    toggle_show_header();
+    toggleHeader();
+    toggleShowHeader();
     $('input[type="file"]').imageuploadify();
 });

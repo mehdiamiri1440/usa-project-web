@@ -414,11 +414,11 @@
             display: none;
         }
 
-        .clouse_menu {
+        .close_menu {
             display: none;
         }
 
-        .clouse_menu_mob {
+        .close_menu_mob {
             display: block;
         }
 
@@ -498,7 +498,7 @@
     <div>
 
         <section  class="main-content col-xs-12" v-if="transactionInfo">
-            
+
 
             <!--part 1-->
             <div id="step1" v-if="currentStep == 1">
@@ -612,7 +612,7 @@
                             </span><br/><br/>
                             <span>6-6 اینکوباک در خصوص حمل و نقل و بیمه کالای مورد معامله هیچ گونه مسئولیت و تعهدی ندارد. </span><br/><br/>
                             <span><b>ماده 7. کمیسیون دریافتی از فروشنده</b></span><br/><br/>
-                            <span>7-1 کمیسیون اینکوباک معادل ریالی و درصدی معین از مبلغ کل معامله طبق پیوست قرارداد می باشد. کمیسیون پیش از احتساب مالیات بر ارزش افزوده کالا محاسبه می گردد. 
+                            <span>7-1 کمیسیون اینکوباک معادل ریالی و درصدی معین از مبلغ کل معامله طبق پیوست قرارداد می باشد. کمیسیون پیش از احتساب مالیات بر ارزش افزوده کالا محاسبه می گردد.
                             </span><br/><br/>
                             <span>7-2 مبلغ کمیسیون اینکوباک مشمول قانون مالیات بر ارزش افزوده می باشد که مبلغ آن به صورت حساب های اضافه واریز شده و دریافت می گردد.</span><br/><br/>
                         </p>
@@ -949,12 +949,12 @@
             init:function(){
                 var self = this;
                 var pathName = this.$route.name;
-                
+
                 this.items.url = pathName;
-                
+
                 if(pathName == 'transactionDetail'){
                     this.transactionType = 'normal';
-                    
+
                     var transaction_id = this.$route.params.id;
                     this.transactionId = transaction_id;
 
@@ -991,7 +991,7 @@
                 }
                 else{
                     this.transactionType = 'instant';
-                    
+
                     var transaction_id = this.$route.params.id;
                     this.transactionId = transaction_id;
 
@@ -1021,11 +1021,11 @@
                         }
                     });
                 }
-                
+
             },
             confirmContract:function(){
                 var self = this;
-                
+
                 if(this.transactionType == 'normal'){
                     this.doAction('/action',3);
                 }
@@ -1033,7 +1033,7 @@
                     console.log('test');
                     this.doAction('/instant_action',2);
                 }
-                
+
             },
             payPrepayment:function(){
                 if(this.transactionType == 'normal'){
@@ -1059,7 +1059,7 @@
             },
             doAction:function(url,actionId){
                 var self = this;
-                
+
                 axios.post(url,{
                     transaction_id : self.transactionId,
                     action_id : actionId

@@ -201,6 +201,7 @@
     @yield('main_content')
 </div>
 @yield('script_tags')
+<script src="{{asset('js/app.js')}}"></script>
 <script src="{{asset('assets/js/idleTimer.js')}}"></script>
 <script>
 

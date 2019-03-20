@@ -420,11 +420,11 @@
             display: none;
         }
 
-        .clouse_menu {
+        .close_menu {
             display: none;
         }
 
-        .clouse_menu_mob {
+        .close_menu_mob {
             display: block;
         }
 

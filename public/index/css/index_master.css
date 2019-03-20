@@ -860,9 +860,18 @@ img.image-blur:hover {
 }
 
 .enamad  img {
-    width: 120px;
-    margin: 20px auto;
+    width: 200px;
     text-align: center;
+    background: #fff;
+    padding: 9px;
+    border-radius: 5px;
+    position: relative;
+    top: 0;
+    transition: 300ms;
+}
+.enamad  img:hover {
+    top: -5px;
+    box-shadow: 0 0 30px #000;
 }
 
 /*---------------------------------------

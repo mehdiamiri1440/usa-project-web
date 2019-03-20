@@ -103,7 +103,7 @@ th, td {
     background: #fff;
 }
 
-.clouse_menu, .clouse_menu_mob {
+.close_menu, .close_menu_mob {
     float: left;
     width: 30%;
     border: none;
@@ -114,7 +114,7 @@ th, td {
     padding: 11px;
 }
 
-.clouse_menu_mob {
+.close_menu_mob {
     display: none;
 }
 
@@ -806,11 +806,11 @@ select {
         display: none;
     }
 
-    .clouse_menu {
+    .close_menu {
         display: none;
     }
 
-    .clouse_menu_mob {
+    .close_menu_mob {
         display: block;
     }
 

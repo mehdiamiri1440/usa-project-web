@@ -194,11 +194,11 @@
             display: none;
         }
 
-        .clouse_menu {
+        .close_menu {
             display: none;
         }
 
-        .clouse_menu_mob {
+        .close_menu_mob {
             display: block;
         }
 
@@ -284,7 +284,7 @@
                 <p class="time-show">{{buyAd.register_date}}</p>
             </li>
             <!--end title list -->
-            
+
             <div v-if="buyAd.sell_offers.length > 0">
                 <li  v-for="sellOffer in buyAd.sell_offers" class="list-group-item content-list">
                     <p class="price">

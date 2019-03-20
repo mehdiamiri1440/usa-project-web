@@ -26,7 +26,6 @@
     <login-component logo="{{asset('assets/img/logo-incobac.png')}}" homeUrl="{{url('/')}}"></login-component>
 </div>
 </body>
-<script src="{{asset('assets/cdn/axios.js')}}"></script>
 <script src="{{asset('assets/js/login/api.js')}}"></script>
 <script src="{{asset('assets/js/login/custom.js')}}"></script>
 <script src="{{asset('js/app.js')}}"></script>

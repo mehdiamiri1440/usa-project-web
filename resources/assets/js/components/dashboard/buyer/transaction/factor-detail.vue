@@ -436,11 +436,11 @@
             display: none;
         }
 
-        .clouse_menu {
+        .close_menu {
             display: none;
         }
 
-        .clouse_menu_mob {
+        .close_menu_mob {
             display: block;
         }
 
@@ -568,14 +568,14 @@
         methods:{
             init:function(){
                 var self = this;
-                
+
                 var pathName = this.$route.name;
-                
+
                 this.items.url = pathName;
-                
+
                 if(pathName == 'buyerFactorDetail'){
                     this.factorId = this.$route.params.id ;
-                    
+
                     axios.post('/get_factor_info',{
                         factor_id : this.factorId,
                     })
@@ -585,7 +585,7 @@
                 }
                 else{
                     this.factorId = this.$route.params.id ;
-                    
+
                     axios.post('/get_instant_factor_info',{
                         factor_id : this.factorId,
                     })
@@ -594,9 +594,9 @@
                     });
                 }
 
-                
-                
-                
+
+
+
             },
         },
         mounted:function(){
