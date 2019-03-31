@@ -75,6 +75,7 @@
 
     <body>
     <div id="app"></div>
+    <div id="appLayouts"></div>
     <div id="appBuyer"></div>
     <div id="appSeller">
 
@@ -89,7 +90,7 @@
                 logout="{{route('logout')}}"
                 routehome="{{url('/')}}"
                 loading="{{asset('assets/img/gif/prload.gif')}}"
-                guide="{{url('dashboard/guide')}}"
+                guide="{{url('privacy_and_policy.vue')}}"
         ></header-dash-seller>
             <main id="main">
             <router-view

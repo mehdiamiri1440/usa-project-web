@@ -1903,7 +1903,7 @@ var initProxy;
       'referenced during render. Make sure that this property is reactive, ' +
       'either in the data option, or for class-based components, by ' +
       'initializing the property. ' +
-      'See: https://vuejs.org/v2/guide/reactivity.html#Declaring-Reactive-Properties.',
+      'See: https://vuejs.org/v2/privacy_and_policy.vue/reactivity.html#Declaring-Reactive-Properties.',
       target
     );
   };
@@ -3373,7 +3373,7 @@ function initData (vm) {
     data = {};
     "development" !== 'production' && warn(
       'data functions should return an object:\n' +
-      'https://vuejs.org/v2/guide/components.html#data-Must-Be-a-Function',
+      'https://vuejs.org/v2/privacy_and_policy.vue/components.html#data-Must-Be-a-Function',
       vm
     );
   }
@@ -8553,7 +8553,7 @@ if (inBrowser) {
       console[console.info ? 'info' : 'log'](
         "You are running Vue in development mode.\n" +
         "Make sure to turn on production mode when deploying for production.\n" +
-        "See more tips at https://vuejs.org/guide/deployment.html"
+        "See more tips at https://vuejs.org/privacy_and_policy.vue/deployment.html"
       );
     }
   }, 0);
@@ -10259,7 +10259,7 @@ function genFor (
     state.warn(
       "<" + (el.tag) + " v-for=\"" + alias + " in " + exp + "\">: component lists rendered with " +
       "v-for should have explicit keys. " +
-      "See https://vuejs.org/guide/list.html#key for more info.",
+      "See https://vuejs.org/privacy_and_policy.vue/list.html#key for more info.",
       true /* tip */
     );
   }

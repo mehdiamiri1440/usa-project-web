@@ -71,11 +71,16 @@
                             </div>
                         </div>
                         <div class="col-xs-12">
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" @click.prevent="editFile.show = false">
+                            <div class="modal-footer ">
+                              <div class="col-xs-12 col-sm-6 pull-right">
+                                  <button type="submit" class="btn btn-crop">برش تصویر</button>
+                              </div>
+                                <div class="col-xs-12 col-sm-6 ">
+                                <button type="button" class="btn btn-cancel" @click.prevent="editFile.show = false">
                                     انصراف
                                 </button>
-                                <button type="submit" class="btn btn-primary">برش تصویر</button>
+                                </div>
+
                             </div>
                         </div>
                     </form>
@@ -89,6 +94,28 @@
 
 </template>
 <style scoped>
+    .btn-crop{
+        display: inline-block;
+        background: #28a745;
+        color: #fff;
+        padding: 10px 35px;
+        border-radius: 3px;
+        text-align: center;
+        border: none;
+        -webkit-transition: 300ms;
+        transition: 300ms;
+    }
+    .btn-cancel{
+        display: inline-block;
+        background: #e8312d;
+        color: #fff;
+        padding: 10px 35px;
+        border-radius: 3px;
+        text-align: center;
+        border: none;
+        -webkit-transition: 300ms;
+        transition: 300ms;
+    }
     #modal-edit-file {
         overflow: scroll;
     }
@@ -380,13 +407,7 @@
         padding: 15px;
     }
 
-    .modal-footer > :not(:last-child) {
-        margin-right: .25rem;
-    }
 
-    .modal-footer > :not(:first-child) {
-        margin-left: .25rem;
-    }
 
     .btn-primary {
         display: inline-block;
@@ -461,6 +482,14 @@
         .actions-content a {
             background: rgba(49, 58, 67, 0.7);
         }
+        .modal.show .modal-dialog{
+            margin: 40px 20px;
+        }
+
+        .btn-cancel,.btn-crop{
+            width: 100%;
+            margin: 8px 0 !important;
+        }
     }
 </style>
 
@@ -489,7 +518,7 @@
                 files: [],
                 accept: this.uploadAccept,
                 minSize: this.uploadMinSize,
-                size:this.uploadSize,
+                // size:this.uploadSize,
                 multiple: this.uploadMultiple,
                 directory: false,
                 drop: true,
@@ -501,6 +530,7 @@
                 // putAction: '/upload/put',
                 oCompress: this.uploadOCompress,
                 uploadAuto: this.uploadUploadAuto,
+
                 isOption: false,
                 addData: {
                     show: false,
@@ -529,9 +559,10 @@
                             return
                         }
                         let cropper = new Cropper(this.$refs.editImage, {
-                            autoCrop: false,
+                            autoCrop: true,
                             aspectRatio: 1 / 1,
                             responsive: true,
+                            center:true,
                             guides: false,
                             movable: false,
                             rotatable: false,
@@ -540,7 +571,10 @@
                             zoomOnTouch: false,
                             zoomOnWheel: false,
                             wheelZoomRatio: false,
-                            toggleDragModeOnDblclick: false
+                            toggleDragModeOnDblclick: false,
+                            minCropBoxWidth:400,
+                            minCropBoxHeight:400,
+
                         })
                         this.editFile = {
                             ...this.editFile,
