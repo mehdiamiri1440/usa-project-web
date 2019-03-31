@@ -190,7 +190,7 @@
     }
 
     .header-menu {
-        padding: 10px 0;
+        padding:0;
     }
 
     .header-menu a:hover {

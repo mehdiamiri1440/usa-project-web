@@ -1,4 +1,8 @@
 <style scoped>
+    .check-items{
+        padding-left: 10px;
+        color: #00a65a;
+    }
     .chat-page ul, .contact-body {
         overflow-y: scroll;
         height: 320px;
@@ -135,8 +139,6 @@
 
     .message-wrapper{
         border-right: 2px solid #F2F2F2;
-
-
     }
 
 
@@ -197,13 +199,15 @@
 
 
     .message-wrapper .chat-page .message-receive {
-        float: right;
-        background: #E7FAFA;
+        float: left;
+        background: #F7F7F7;
+
     }
 
     .message-wrapper .chat-page .message-send {
-        float: left;
-        background: #F7F7F7;
+        float: right;
+        background: #E7FAFA;
+
     }
 
     .message-wrapper .chat-page span.message-chat-date {
@@ -330,31 +334,31 @@
                                 خزر
                                 و نزدیک بودن به ایران از نظر مسافت، ظرفیت مناسبی برای صادرات، خصوصاً صادرات مواد غذایی،
                                 محصولات کشاورزی و خشکبار برخوردار است.
-                                <span class="message-chat-date">18:24 PM</span>
+                                <span class="message-chat-date">18:24 PM  </span>
                             </div>
                         </li>
                         <li>
                             <div class="message-send">
                                 کشور روسیه با جمعیت تقریبی ۱۴۴ میلیون نفر، یکی از کشورهایی می‌باشد که می‌تواند برای
-                                <span class="message-chat-date">18:24 PM</span>
+                                <span class="message-chat-date">18:24 PM <span class="check-items"><i class="fa fa-check"></i><i class="fa fa-check"></i></span></span>
                             </div>
                         </li>
 
                         <li>
-                            <div class="message-send">
+                            <div class="message-receive">
                                 کشور روسیه با جمعیت تقریبی ۱۴۴ میلیون نفر، یکی از کشورهایی می‌باشد که می‌تواند برای
                                 صادرات
                                 کالاهای ایرانی مقصد خوبی به حساب بیاید. این کشور به دلیل قرار گرفتن در حاشیه‌ی‌ دریاچه‌ی
                                 خزر
                                 و نزدیک بودن به ایران از نظر مسافت، ظرفیت مناسبی برای صادرات، خصوصاً صادرات مواد غذایی،
                                 محصولات کشاورزی و خشکبار برخوردار است.
-                                <span class="message-chat-date">18:24 PM</span>
+                                <span class="message-chat-date">18:24 PM </span>
                             </div>
                         </li>
                         <li>
-                            <div class="message-receive">
+                            <div class="message-send">
                                 کشور روسیه با جمعیت تقریبی ۱۴۴ میلیون نفر، یکی از کشورهایی می‌باشد که می‌تواند برای
-                                <span class="message-chat-date">18:24 PM</span>
+                                <span class="message-chat-date">18:24 PM <span class="check-items"><i class="fa fa-check"></i><i class="fa fa-check"></i></span></span>
                             </div>
                         </li>
 

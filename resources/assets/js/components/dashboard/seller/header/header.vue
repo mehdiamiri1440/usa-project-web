@@ -198,7 +198,7 @@
     }
 
     .header-menu {
-        padding: 10px 0;
+        padding: 0;
     }
 
     .header-menu a:hover {
@@ -572,10 +572,7 @@
                         :byadreq="byadreq"
                         :selregpro="selregpro"
                         :transactroute="transactroute"
-                        :mytrans="mytrans"
-
-
-                >
+                        :mytrans="mytrans">
 
                 </header-menu-list>
                 <div class="copy-right">
