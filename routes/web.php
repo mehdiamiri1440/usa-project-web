@@ -516,6 +516,26 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'instant_transaction_controller@get_terminated_instant_transaction_info',
         'as' => 'get_terminated_instant_transaction_info',
     ]);
+    
+    Route::post('/messanger/send_message',[
+        'uses' => 'message_controller@send_message',
+        'as' => 'send_message',
+    ]);
+    
+    Route::post('/get_contact_list',[
+        'uses' => 'message_controller@get_current_user_contact_list',
+        'as'   => 'get_current_user_contact_list'
+    ]);
+    
+    Route::post('/get_total_unread_messages_for_current_user',[
+        'uses' => 'message_controller@get_total_unread_messages_for_current_user',
+        'as' => 'message_controller@get_total_unread_messages_for_current_user'
+    ]);
+    
+    Route::post('/get_user_chat_history',[
+        'uses' => 'message_controller@get_user_chat_history',
+        'as'   => 'get_user_chat_history'
+    ]);
 
 });
 
@@ -785,6 +805,7 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
         'uses' => 'admin_panel\inspectors\admin_farmer_controller@get_farmer_product_list',
         'as' => 'admin_panel_farmer_product_list'
     ]);
+    
 });
 
 
