@@ -134,7 +134,7 @@
     <div>
         <header id="header" class="main-header">
             <div class="show-header">
-                <button class="fa fa-angle-left"></button>
+                <button class="fa fa-bars"></button>
             </div>
             <div class="content-header">
                 <span class="font-big">اینکوباک  </span> | <span> بازارگاه آنلاین کشاورزی</span>
@@ -173,7 +173,7 @@
                           </li>-->
                     <li>
                         <a class="green-bot" href="/master/#/product-list" style="font-size: 17px"> <span class="full">لیست محصولات</span>
-                            <span class="min"><i class="fa fa-bars" aria-hidden="true"></i></span> </a>
+                            <span class="min"><i class="fa fa-th-list" aria-hidden="true"></i></span> </a>
                     </li>
                     <li><a :href="routeHome"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                 </ul>

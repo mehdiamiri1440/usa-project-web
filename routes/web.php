@@ -18,6 +18,8 @@ use Illuminate\Cookie\CookieJar;
 use App\myuser;
 use App\profile;
 
+use App\Events\newMessage;
+
 
 /*Route::get('/pv', function(){
     return view('layout.master');
@@ -879,6 +881,12 @@ Route::any('/external-url-payment-callback',[
     'uses' => 'payment_controller@external_url_payment_callback',
     'as' => 'external_url_payment_callback',
 ]);
+
+Route::get('/event',function(){
+    $msg = 'this is a test';
+    
+    event(new newMessage($msg)); 
+});
 
 
 

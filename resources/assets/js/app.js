@@ -18,7 +18,7 @@ import registerComponent from './components/register/register.vue';
 
 
 
-
+ 
 var viz = false;
  new Vue({
      el:'#app',

@@ -91,19 +91,67 @@ class message_controller extends Controller
     {
         $user_id = session('user_id');
         
-        $receiver_contacts = DB::table('messages')
-                    ->join('myusers','myusers.id','=','messages.receiver_id')
-                    ->where('sender_id',$user_id)
-                    ->select(['receiver_id as contact_id', 'first_name', 'last_name'])
-                    ->get();
+        $contacts_id = $this->get_contacts_id_array($user_id);
         
-        $sender_contacts = DB::table('messages')
-                    ->join('myusers','myusers.id','=','messages.receiver_id')
-                    ->where('receiver_id',$user_id)
-                    ->select(['sender_id as contact_id', 'first_name', 'last_name'])
-                    ->get();
+        $contact_list = [];
         
-        print_r($receiver_contacts->merge($sender_contacts));
+        foreach($contacts_id as $contact_id){
+            $temp = $this->get_contact_info($contact_id);
+            $temp->unread_msgs_count = $this->get_user_contact_unread_messages_count($user_id, $contact_id);
+            
+            $contact_list[] = $temp;
+        }        
+
+        return response()->json([
+            'status' => true,
+            'contact_list' => $contact_list,
+            'user_id' => $user_id,
+        ],200);
+    }
+    
+    protected function get_contacts_id_array($user_id)
+    {
+        $related_records = message::where('sender_id',$user_id)
+                                ->orWhere('receiver_id',$user_id)
+                                ->select('sender_id','receiver_id')
+                                ->distinct()
+                                ->orderBy('created_at','desc')
+                                ->get();
+        $contact_id_array = [];
+        
+        $related_records->each(function($record) use(&$contact_id_array,$user_id){
+            if($record->sender_id != $user_id){
+                $contact_id_array[] = $record->sender_id;
+            }
+            else{
+                $contact_id_array[] = $record->receiver_id;
+            }
+        });
+        
+        return array_unique($contact_id_array);                               
+    }
+    
+    protected function get_contact_info($contact_id)
+    {
+        $contact_info = DB::table('myusers')
+                            ->Join('profiles','myusers.id','=','profiles.myuser_id')
+                            ->where('profiles.confirmed',true)
+                            ->where('myusers.id',$contact_id)
+                            ->select(['myusers.id as contact_id','first_name', 'last_name', 'profile_photo'])
+                            ->get()
+                            ->last();
+        
+        return $contact_info;
+    }
+    
+    protected function get_user_contact_unread_messages_count($user_id, $contact_id)
+    {
+        $unread_msgs_count = message::where('sender_id',$contact_id)
+                                ->where('receiver_id', $user_id)
+                                ->where('is_read',false)
+                                ->get()
+                                ->count();
+        return $unread_msgs_count;
     }
     
     //public method
@@ -143,9 +191,20 @@ class message_controller extends Controller
             ->values()
             ->all();
         
+        $this->mark_all_messages_as_read($user_id,$request->user_id);
+        
         return response()->json([
             'status' => true,
             'messages' => $messages,
+            'current_user_id' => $user_id,
         ],200);
+    }
+    
+    protected function mark_all_messages_as_read($reciver_id,$sender_id)
+    {
+        DB::table('messages')
+                ->where('sender_id',$sender_id)
+                ->where('receiver_id',$reciver_id)
+                ->update(['is_read' => true]);
     }
 }
