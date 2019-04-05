@@ -390,7 +390,7 @@
 
                     </div>
                     <div class="profile_link col-xs-12 col-sm-5">
-                              <a :href="'/profile/' + sellOfferDetail.sell_offer_user_info.user_name" class="green-bot">
+                              <a :href="'/master/#/profile/' + sellOfferDetail.sell_offer_user_info.user_name" class="green-bot">
                                   مشاهده پروفایل تامین کننده
                               </a>
                     </div>

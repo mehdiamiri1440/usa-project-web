@@ -58,7 +58,7 @@
                         <i class="fa fa-plus-square " aria-hidden="true"></i>
                     </router-link>
                 </li>
-                <li class="list-item  ">
+           <!--     <li class="list-item  ">
                     <router-link :class="{'active' : this.active_el === 4}" :to="{ name : 'myTransactions' }">
                         <span>تراکنش های جاری</span>
                         <i class="fa fa-list-ol " aria-hidden="true"></i>
@@ -70,7 +70,7 @@
                         <span>تراکنش های انجام شده</span>
                         <i class="fa fa-th-list  " aria-hidden="true"></i>
                     </router-link>
-                </li>
+                </li>-->
                 <li class="list-item  ">
                     <router-link :class="{'active' : this.active_el === 8}" :to="{ name : 'messages' }">
                         <span>پیام ها</span>

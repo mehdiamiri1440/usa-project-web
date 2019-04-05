@@ -6,7 +6,7 @@
         .main-content-item {
             padding: 0;
         }
-        .user-image,.user-contents p{
+        .user-contents .user-image,.user-contents p{
             float: right;
         }
         .user-contents p {
@@ -15,6 +15,9 @@
             font-size: 14px;
             font-weight: 800;
         }
+        .user-contents p:first-of-type {
+           padding-right: 0;
+        }
         .user-contents .green_bot{
             float: left;
             width: initial;
@@ -22,12 +25,13 @@
         }
     }
     @media screen and (max-width: 500px){
-        .user-image {
+        .user-contents .user-image {
             width: 50px;
             height: 50px;
         }
         .user-contents p {
-            padding: 0 15px;
+            padding: 5px 0;
+            width: 100%;
         }
         .user-contents .green_bot{
             float: left;
@@ -79,7 +83,7 @@
                                 </div>
                                 <div class="col-xs-12">
                                     <div v-if="currentUser.user_info">
-                                        <a href="/dashboard" class="green_bot edit"
+                                        <a href="/dashboard/#/profile" class="green_bot edit"
                                            v-if="currentUser.user_info.id == profileOwner.user_info.id">
                                             <i class="fa fa-pencil"></i>
                                             ویرایش پروفایل
@@ -107,7 +111,7 @@
                                 <div class="title_content col-xs-12">
 
                                     <div class="back_page col-xs-12 col-sm-4">
-                                        <a href="/dashboard" class="green_bot edit"
+                                        <a href="/dashboard/#/profile" class="green_bot edit"
                                            v-if="currentUser.user_info && currentUser.user_info.id == profileOwner.user_info.id">
                                             <i class="fa fa-pencil"></i>
                                             ویرایش پروفایل
@@ -170,8 +174,9 @@
                     </div>
                     <div class="info-section hidden-xs col-xs-12">
                         <div class="contents-info-num  col-sm-3">
-                            <p>
-                                021-71053525 </p>
+                            <a href="#" class="btn btn-copy">
+                                <i class="fa fa-comment"></i> ارسال پیام
+                            </a>
                         </div>
                         <div class="contents-info col-sm-9">
                             <p>
@@ -507,7 +512,7 @@
                     '<meta property="og:description" content="صفحه ی شخصی پروفایل کاربران اینکوباک"/>' +
                     ' <meta property="og:site_name" content="اینکوباک">' +
                     '<meta name="description" content="صفحه ی شخصی پروفایل کاربران اینکوباک. محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید">' +
-                    '<meta property="og:url" content="\'https://www.incobac.com/profile/' + this.getUserName  +'"/>' +
+                    '<meta property="og:url" content="\'https://www.incobac.com/master/#/profile/' + this.getUserName  +'"/>' +
                     '<meta property="og:title" content="' + this.profileOwner.user_info.first_name +
                     ' '
                     + this.profileOwner.user_info.last_name + '"/>'
@@ -615,7 +620,7 @@
                 if (this.isDeviceMobile()) {
 
                     var linkElement = document.createElement('a');
-                    linkElement.setAttribute('href', 'whatsapp://send?text=' + 'https://incobac.com/profile/' + this.profileOwner.user_info.user_name);
+                    linkElement.setAttribute('href', 'whatsapp://send?text=' + 'https://incobac.com/master/#/profile/' + this.profileOwner.user_info.user_name);
                     linkElement.setAttribute('data-action', 'share/whatsapp/share');
                     document.body.appendChild(linkElement);
 
@@ -626,7 +631,7 @@
                 }
                 else {
                     var input = document.createElement('input');
-                    input.setAttribute('value', 'https://incobac.com/profile/' + this.profileOwner.user_info.user_name);
+                    input.setAttribute('value', 'https://incobac.com/master/#/profile/' + this.profileOwner.user_info.user_name);
                     document.body.appendChild(input);
                     input.select();
                     var result = document.execCommand('copy');

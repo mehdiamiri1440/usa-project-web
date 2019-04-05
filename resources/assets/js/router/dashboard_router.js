@@ -123,7 +123,7 @@ const myRouter =  new Router({
             }
         }
         , {
-            path: '/',
+            path: '/profile',
             name: 'profileBasic',
             components: {
                 seller: sellerProfileBasic,

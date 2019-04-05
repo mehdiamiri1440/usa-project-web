@@ -18,10 +18,10 @@
                         <div class="profile-list">
                             <ul class="list-unstyled">
                                 <li class="list-item">
-                                    <router-link :to="{ name: 'profileBasic'}">پروفایل</router-link>
+                                    <a :href="'/dashboard/#/profile'">پروفایل</a>
                                 </li>
                                 <li class="list-item">
-                                    <router-link :to="{ name: 'password'}">تغییر کلمه عبور</router-link>
+                                    <a :href="'/dashboard/#/password'">تغییر کلمه عبور</a>
                                 </li>
                                 <li class="list-item"><a :href="login_page_path">خروج</a></li>
                             </ul>
@@ -68,10 +68,10 @@
                             <div class="profile-list">
                                 <ul class="list-unstyled">
                                     <li class="list-item">
-                                        <router-link :to="{ name: 'profileBasic'}">پروفایل</router-link>
+                                        <a :href="'/dashboard/#/profile'">پروفایل</a>
                                     </li>
                                     <li class="list-item">
-                                        <router-link :to="{ name: 'password'}">تغییر کلمه عبور</router-link>
+                                        <a :href="'/dashboard/#/password'">تغییر کلمه عبور</a>
                                     </li>
                                     <li class="list-item"><a :href="login_page_path">خروج</a></li>
                                 </ul>
