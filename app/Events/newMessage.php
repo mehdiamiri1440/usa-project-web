@@ -33,6 +33,6 @@ class newMessage implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('testChannel');
+        return new PrivateChannel('testChannel.'.$this->new_message->receiver_id);
     }
 }

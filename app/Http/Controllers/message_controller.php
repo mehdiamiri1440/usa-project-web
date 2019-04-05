@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\message;
 use App\myuser;
 use DB;
+use App\Events\newMessage;
 
 class message_controller extends Controller
 {
@@ -26,9 +27,9 @@ class message_controller extends Controller
         $users_are_valid = $this->are_users_valid($request->sender_id,$request->receiver_id);
         
         if($users_are_valid){
-            $this->save_msg_in_database($request);
+            $msg = $this->save_msg_in_database($request);
             
-            $this->notify_msg_receiver('you have new messages',$request->receiver_id);
+            $this->notify_msg_receiver($msg);
             
             return response()->json([
                 'status' => true,
@@ -73,6 +74,8 @@ class message_controller extends Controller
             $msg_object->text = $request->text;
 
             $msg_object->save();
+            
+            return $msg_object;
         }
         catch(\Exception $e){
             //
@@ -80,10 +83,9 @@ class message_controller extends Controller
         
     }
     
-    protected function notify_msg_receiver($msg,$user_id)
+    protected function notify_msg_receiver($msg)
     {
-        return true;
-        //notification code
+        event(new newMessage($msg));
     }
     
     //public method

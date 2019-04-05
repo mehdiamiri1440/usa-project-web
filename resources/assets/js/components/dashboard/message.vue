@@ -368,6 +368,7 @@
                     .then(function(response){
                         self.contactList = response.data.contact_list;
                         self.currentUserId = response.data.user_id;
+//                        self.listenOnChannel();
                 })
                 .catch(function(e){
                     
@@ -386,7 +387,7 @@
                     self.chatMessages = response.data.messages;
                     self.currentUserId = response.data.current_user_id;
                     self.loadContactList();
-                    self.keepChatUpdated(contact);
+//                    self.keepChatUpdated(contact);
                 })
                 .catch(function(e){
                     
@@ -419,7 +420,25 @@
         mounted:function () {
             this.init();
             eventBus.$emit('subHeader', this.items);
-        }
+        },
+        created:function(){
+            var self = this;
+            
+            Echo.private('testChannel.' + userId)
+                .listen('newMessage', (e) => {
+                    var senderId = e.new_message.sender_id;
+                    if(self.currentContactUserId){
+                        if(self.currentContactUser == senderId){
+                            self.chatMessages.push(e.new_message);
+                            console.log(self.chatMessages);
+                        }
+                    }
+                    else{
+                        
+                    }
+                    
+            });  
+        },
     }
 </script>
 

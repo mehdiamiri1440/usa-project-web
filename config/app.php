@@ -163,6 +163,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 		phplusir\smsir\SmsirServiceProvider::class,
+        
 
         /*
          * Package Service Providers...
@@ -228,6 +229,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 		'Smsir' => phplusir\smsir\SmsirFacade::class,
+        'Pusher' => Pusher\Pusher::class,
 
     ],
 

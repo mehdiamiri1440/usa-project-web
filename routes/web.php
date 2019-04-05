@@ -888,6 +888,24 @@ Route::get('/event',function(){
     event(new newMessage($msg)); 
 });
 
+Route::post('/broadcastAuth',function(Request $request){
+     $options = [
+         'cluster' => env('PUSHER_APP_CLUSTER'),
+         'encrypted' => true
+     ];
+    
+//     $pusher = new Pusher(env('PUSHER_APP_KEY'),env('PUSHER_APP_SECRET'),env('PUSHER_APP_ID'),$options);
+     $pusher = new Pusher('f04fb3210cdacabb3540','a2ffc348382adf93ea19','710900',array('cluster' => 'ap1'));
+     $temp = [];
+     $temp =  $pusher->socket_auth($_POST['channel_name'], $_POST['socket_id']);
+     return $temp;
+    
+    return response()->json([
+        'auth' => 'sdfsdf',
+        
+    ]);
+    
+ });
 
 
 
