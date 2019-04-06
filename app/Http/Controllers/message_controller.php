@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\message;
 use App\myuser;
 use DB;
-use App\Events\newMessage;
+use App\Jobs\SendNewMessageNotification;
 
 class message_controller extends Controller
 {
@@ -85,7 +85,7 @@ class message_controller extends Controller
     
     protected function notify_msg_receiver($msg)
     {
-        event(new newMessage($msg));
+        SendNewMessageNotification::dispatch($msg);
     }
     
     //public method
@@ -208,5 +208,40 @@ class message_controller extends Controller
                 ->where('sender_id',$sender_id)
                 ->where('receiver_id',$reciver_id)
                 ->update(['is_read' => true]);
+    }
+    
+     //public method
+    public function set_last_chat_contact(Request $request)
+    {
+        $this->validate($request,[
+            'contact_id' => 'required|integer',
+            'first_name' => 'required|string',
+            'last_name'  => 'required|string',
+        ]);
+        
+        $user_id = session('user_id');
+        
+        $unread_msgs_count = $this->get_user_contact_unread_messages_count($user_id, $request->contact_id);
+        
+        $contact = [
+                'contact_id' => $request->contact_id,
+                'first_name' => $request->first_name,
+                'last_name'  => $request->last_name,
+                'profile_photo' => $request->profile_photo,
+                'unread_msgs_count' => $unread_msgs_count
+        ];
+        
+        session(['last_contact' => collect($contact)]);
+        
+    }
+    
+    public function get_last_chat_contact_info_from_session(Request $request)
+    {
+        $contact = session('last_contact');
+        
+        return response()->json([
+            'status' => true,
+            'contact' => $contact
+        ]);
     }
 }
