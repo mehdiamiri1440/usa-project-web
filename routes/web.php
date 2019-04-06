@@ -538,6 +538,16 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'message_controller@get_user_chat_history',
         'as'   => 'get_user_chat_history'
     ]);
+    
+    Route::post('/set_last_chat_contact',[
+        'uses' => 'message_controller@set_last_chat_contact',
+        'as' => 'set_last_chat_contact'
+    ]);
+    
+    Route::post('/get_last_chat_contact_info_from_session',[
+        'uses' => 'message_controller@get_last_chat_contact_info_from_session',
+        'as' => 'get_last_chat_contact_info_from_session'
+    ]);
 
 });
 

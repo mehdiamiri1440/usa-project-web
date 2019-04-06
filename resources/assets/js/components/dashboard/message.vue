@@ -280,7 +280,7 @@
                     <div class="contact-search">
                         <form action="">
                             <div class="contact-search-input-wrapper">
-                                <input type="text" placeholder="جستجوی مخاطبین"/>
+                                <input type="text" placeholder="جستجوی مخاطبین" v-model="contactNameSearchText"/>
                                 <i class="fa fa-search"></i>
                             </div>
                         </form>
@@ -481,6 +481,8 @@
 <script>
     import {eventBus} from "../../router/dashboard_router";
 
+    import Push from "push.js";
+
     export default {
         props:[
             'defimgitem',
@@ -500,6 +502,8 @@
                 currentUserId:'',
                 currentContactUserId:'',
                 msgToSend:'',
+                isComponentActive:false,
+                contactNameSearchText:'',
             }
         },
         methods:{
@@ -515,11 +519,34 @@
                     .then(function(response){
                         self.contactList = response.data.contact_list;
                         self.currentUserId = response.data.user_id;
-//                        self.listenOnChannel();
+
+                        axios.post('/get_last_chat_contact_info_from_session')
+                        .then(function(response){
+                            var contact = response.data.contact;
+
+                            if(contact != null){
+                                self.contactList.unshift(contact);
+                                //removing duplicate contacts
+                                self.contactList = self.contactList.filter((thing, index, self) =>
+                                  index === self.findIndex((t) => (
+                                    t.contact_id === thing.contact_id
+                                    ))
+                                );
+                                self.loadChatHistory(contact);
+                            }
+
+
+                        })
+                        .catch(function(e){
+                            alert('error');
+                        });
+
+
                 })
                 .catch(function(e){
 
                 });
+
             },
             loadChatHistory:function(contact){
                 var self = this;
@@ -533,11 +560,8 @@
                 .then(function(response){
                     self.chatMessages = response.data.messages;
                     self.currentUserId = response.data.current_user_id;
-                    self.loadContactList();
-//                    self.keepChatUpdated(contact);
                 })
                 .catch(function(e){
-
                 });
             },
             sendMessage:function(){
@@ -562,6 +586,64 @@
                 setTimeout(function(){
                     self.loadChatHistory(contact);
                 },20000);
+            },
+            pushNotification:function(header,body,link){
+                Push.create(header, {
+                    body: body,
+                    //icon: str + '/' ,
+                    timeout: 4000,
+                    link: link,
+                    onClick: function () {
+                        window.focus();
+                        this.close();
+                    }
+                });
+            },
+        },
+        watch:{
+            contactNameSearchText:function(){
+                  var self = this;
+                if(self.contactNameSearchText != ''){
+
+                  axios.post('/get_contact_list')
+                    .then(function(response){
+                        self.contactList = response.data.contact_list;
+                        self.currentUserId = response.data.user_id;
+                        axios.post('/get_last_chat_contact_info_from_session')
+                            .then(function(response){
+                                var contact = response.data.contact;
+                                self.contactList.unshift(contact);
+                                //removing duplicate contacts
+                                self.contactList = self.contactList.filter((thing, index, self) =>
+                                  index === self.findIndex((t) => (
+                                    t.contact_id === thing.contact_id
+                                    ))
+                                );
+
+                                var text = self.contactNameSearchText.split(' ');
+                                self.contactList = self.contactList.filter(function(contact){
+                                    return text.every(function(el){
+                                        if(contact.first_name.indexOf(el) > -1 ||
+                                            contact.last_name.indexOf(el) > -1){
+                                            return true;
+                                        }
+                                        else return false;
+                                    });
+                                });
+                            })
+                            .catch(function(e){
+                                alert('error');
+                            });
+                    })
+                    .catch(function(e){
+                        //
+                    });
+                }
+                else{
+                    self.loadContactList();
+                }
+
+
             }
         },
         mounted:function () {
@@ -576,17 +658,31 @@
             Echo.private('testChannel.' + userId)
                 .listen('newMessage', (e) => {
                     var senderId = e.new_message.sender_id;
+                    //update contact list
+                    self.loadContactList();
+
                     if(self.currentContactUserId){
-                        if(self.currentContactUser == senderId){
+                        if(self.currentContactUserId == senderId){
+
                             self.chatMessages.push(e.new_message);
-                            console.log(self.chatMessages);
+
+                            if(self.isComponentActive == false){
+                                self.pushNotification("پیام جدید",e.new_message.text,'/dashboard/#/messages');
+                            }
                         }
                     }
                     else{
 
+                        this.pushNotification("پیام جدید",e.new_message.text,'/dashboard/#/messages');
                     }
 
             });
+        },
+        activated() {
+            this.isComponentActive = true;
+        },
+        deactivated() {
+            this.isComponentActive = false;
         },
     }
 </script>

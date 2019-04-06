@@ -88,6 +88,10 @@
                                             <i class="fa fa-pencil"></i>
                                             ویرایش پروفایل
                                         </a>
+                                        <a v-else href="" @click.prevent="openChat()" class="green_bot edit">
+                                            <i class="fa fa-pencil"></i>
+                                                ارسال پیام
+                                        </a>
                                     </div>
 
                                     <a href="#" class="green_bot " @click="copyProfileLinkToClipBoard"><i
@@ -115,6 +119,11 @@
                                            v-if="currentUser.user_info && currentUser.user_info.id == profileOwner.user_info.id">
                                             <i class="fa fa-pencil"></i>
                                             ویرایش پروفایل
+                                        </a>
+                                        <a href="" @click.prevent="openChat()" class="green_bot edit"
+                                           v-else>
+                                            <i class="fa fa-pencil"></i>
+                                            ارسال پیام
                                         </a>
 
                                         <button class="btn btn-copy" @click="copyProfileLinkToClipBoard"
@@ -657,7 +666,28 @@
                 else {
                     return false;
                 }
-            }
+            },
+            openChat:function(){
+                var contact = {
+                    contact_id:this.profileOwner.user_info.id,
+                    first_name:this.profileOwner.user_info.first_name,
+                    last_name:this.profileOwner.user_info.last_name,
+                    profile_photo:this.profileOwner.profile.profile_photo,
+                }  
+                
+                if(this.currentUser){
+                    axios.post('/set_last_chat_contact',contact)
+                            .then(function(response){
+                                window.location.href = '/dashboard/#/messages';
+                            })
+                            .catch(function(e){
+                                alert('Error');
+                    });
+                }
+                else{
+                    alert('ابتدا لاگین کنید');
+                }
+            },
 
         },
         mounted() {
