@@ -6,7 +6,16 @@
     #main {
         margin-right: 250px;
         margin-top: 65px;
-        background: #eff3f6;
+        background: #fff;
+        position: fixed;
+
+        right: 0;
+
+        left: 0;
+
+        bottom: 0;
+
+        top: 0;
     }
 
     #main.little-main {

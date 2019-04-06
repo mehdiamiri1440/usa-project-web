@@ -8,6 +8,7 @@
         background: #fff;
         padding: 0 50px;
         overflow: hidden;
+
     }
 
     #main label {

@@ -18,6 +18,8 @@ use Illuminate\Cookie\CookieJar;
 use App\myuser;
 use App\profile;
 
+use App\Events\newMessage;
+
 
 /*Route::get('/pv', function(){
     return view('layout.master');
@@ -516,6 +518,26 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'instant_transaction_controller@get_terminated_instant_transaction_info',
         'as' => 'get_terminated_instant_transaction_info',
     ]);
+    
+    Route::post('/messanger/send_message',[
+        'uses' => 'message_controller@send_message',
+        'as' => 'send_message',
+    ]);
+    
+    Route::post('/get_contact_list',[
+        'uses' => 'message_controller@get_current_user_contact_list',
+        'as'   => 'get_current_user_contact_list'
+    ]);
+    
+    Route::post('/get_total_unread_messages_for_current_user',[
+        'uses' => 'message_controller@get_total_unread_messages_for_current_user',
+        'as' => 'message_controller@get_total_unread_messages_for_current_user'
+    ]);
+    
+    Route::post('/get_user_chat_history',[
+        'uses' => 'message_controller@get_user_chat_history',
+        'as'   => 'get_user_chat_history'
+    ]);
 
 });
 
@@ -785,6 +807,7 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
         'uses' => 'admin_panel\inspectors\admin_farmer_controller@get_farmer_product_list',
         'as' => 'admin_panel_farmer_product_list'
     ]);
+    
 });
 
 
@@ -859,6 +882,30 @@ Route::any('/external-url-payment-callback',[
     'as' => 'external_url_payment_callback',
 ]);
 
+Route::get('/event',function(){
+    $msg = 'this is a test';
+    
+    event(new newMessage($msg)); 
+});
+
+Route::post('/broadcastAuth',function(Request $request){
+     $options = [
+         'cluster' => env('PUSHER_APP_CLUSTER'),
+         'encrypted' => true
+     ];
+    
+//     $pusher = new Pusher(env('PUSHER_APP_KEY'),env('PUSHER_APP_SECRET'),env('PUSHER_APP_ID'),$options);
+     $pusher = new Pusher('f04fb3210cdacabb3540','a2ffc348382adf93ea19','710900',array('cluster' => 'ap1'));
+     $temp = [];
+     $temp =  $pusher->socket_auth($_POST['channel_name'], $_POST['socket_id']);
+     return $temp;
+    
+    return response()->json([
+        'auth' => 'sdfsdf',
+        
+    ]);
+    
+ });
 
 
 

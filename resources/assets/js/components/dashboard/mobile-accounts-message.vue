@@ -24,7 +24,6 @@
 
     .contact-body .contact-search {
         padding: 9px 7px;
-
         background: #EEF3F3;
     }
 

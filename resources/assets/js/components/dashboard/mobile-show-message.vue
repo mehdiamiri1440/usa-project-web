@@ -251,7 +251,7 @@
     }
 
     .message-input{
-        float: right;
+        float: left;
         width: calc(100% - 60px);
     }
     .send-message-form .message-input input {
@@ -261,7 +261,7 @@
         border: none;
     }
     .button-wrapper{
-        float: left;
+        float: right;
     }
     .send-message-form .button-wrapper button {
         border: none;

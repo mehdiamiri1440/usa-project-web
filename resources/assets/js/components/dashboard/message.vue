@@ -3,10 +3,6 @@
         padding-left: 10px;
         color: #00a65a;
     }
-    .chat-page ul, .contact-body {
-        overflow-y: scroll;
-        height: 320px;
-    }
 
     .main-content {
         padding: 60px 0 0;
@@ -14,6 +10,7 @@
         direction: rtl;
 
         border-bottom: 2px solid #F2F2F2;
+        height:100%;
     }
 
     .contact-title {
@@ -139,6 +136,8 @@
 
     .message-wrapper{
         border-right: 2px solid #F2F2F2;
+        position: relative;
+        height: 100%;
     }
 
 
@@ -179,7 +178,16 @@
     }
 
     .message-wrapper .chat-page ul {
-        padding:  20px;
+        padding: 20px;
+        overflow-x: hidden;
+        position: absolute;
+
+        left: 0;
+
+        right: 0;
+
+        bottom: 75px;
+        top: 0;
     }
     .message-wrapper .chat-page ul li{
         overflow: hidden;
@@ -223,10 +231,13 @@
         background: #EEF3F3;
         overflow: hidden;
         padding: 12px 25px 13px;
+        position:absolute;
+        bottom:0;
+        width:100%;
     }
 
     .message-input{
-        float: right;
+        float: left;
         width: calc(100% - 60px);
     }
     .send-message-form .message-input input {
@@ -236,7 +247,7 @@
         border: none;
     }
     .button-wrapper{
-        float: left;
+        float: right;
     }
     .send-message-form .button-wrapper button {
         border: none;
@@ -253,6 +264,9 @@
         top: 2px;
         left: -1px;
     }
+
+
+
 </style>
 <template>
     <section class="main-content col-xs-12">
@@ -273,39 +287,148 @@
                     </div>
                     <div class="contact-items">
                         <ul>
-                            <li class="contact-item">
-                                <a href="#">
+                            <li class="contact-item" v-for="contact in contactList">
+                                <a href="" @click.prevent="loadChatHistory(contact)">
                                     <div class="contact-image">
-                                        <img src="../../../../../public/assets/img/fig.jpg" alt="">
+                                        <img v-if="contact.profile_photo" :src="str + '/' + contact.profile_photo" :alt="contact.first_name[0]">
+                                        <img v-else :src="defimgitem" :alt="contact.first_name[0]">
                                     </div>
-                                    <span class="contact-name">جواد ظریف</span>
+                                    <span class="contact-name">{{contact.first_name + ' ' + contact.last_name}}</span>
                                     <div class="contact-date">
-                                        <p class="count-number">1</p>
-                                        <p>18:24 PM</p>
+                                        <p class="count-number" v-if="contact.unread_msgs_count != 0">{{contact.unread_msgs_count}}</p>
+<!--                                        <p>18:24 PM</p>-->
                                     </div>
                                 </a>
                             </li>
-                            <li class="contact-item">
-                                <a href="#">
+                            <li class="contact-item" >
+                                <a href="#" >
                                     <div class="contact-image">
-                                        <img src="../../../../../public/assets/img/nuts-and-dried-fruits.jpg" alt="">
+                                        <img :src="defimgitem">
                                     </div>
-                                    <span class="contact-name"> حسن روحانی</span>
+                                    <span class="contact-name">علی دلداری</span>
                                     <div class="contact-date">
-                                        <p class="count-number">3</p>
-                                        <p>18:24 PM</p>
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
                                     </div>
                                 </a>
                             </li>
-                            <li class="contact-item">
-                                <a href="#">
+                            <li class="contact-item" >
+                                <a href="#" >
                                     <div class="contact-image">
-                                        <img src="../../../../../public/assets/img/back3.jpg" alt="">
+                                        <img :src="defimgitem">
                                     </div>
-                                    <span class="contact-name"> سید علی جون</span>
+                                    <span class="contact-name">علی دلداری</span>
                                     <div class="contact-date">
-                                        <p class="count-number">5</p>
-                                        <p>18:24 PM</p>
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#" >
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#" >
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#" >
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#" >
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#" >
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#" >
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#" >
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#" >
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#" >
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
                                     </div>
                                 </a>
                             </li>
@@ -316,66 +439,42 @@
         </div>
         <div class="col-xs-12 message-wrapper col-sm-8 col-md-9">
             <div class="row">
-                <div class="message-contact-title">
+                <div class="message-contact-title" v-if="selectedContact">
                     <div class="message-contact-title-img">
-                        <img src="../../../../../public/assets/img/fig.jpg" alt="">
+                        <img :src="str + '/' + selectedContact.profile_photo" alt="">
 
                     </div>
-                    <span>لیست مخاطبین</span>
+                    <span>{{selectedContact.first_name + ' ' + selectedContact.last_name}}</span>
 
                 </div>
-                <div class="chat-page">
+                <div class="chat-page ">
                     <ul>
-                        <li>
-                            <div class="message-receive">
-                                کشور روسیه با جمعیت تقریبی ۱۴۴ میلیون نفر، یکی از کشورهایی می‌باشد که می‌تواند برای
-                                صادرات
-                                کالاهای ایرانی مقصد خوبی به حساب بیاید. این کشور به دلیل قرار گرفتن در حاشیه‌ی‌ دریاچه‌ی
-                                خزر
-                                و نزدیک بودن به ایران از نظر مسافت، ظرفیت مناسبی برای صادرات، خصوصاً صادرات مواد غذایی،
-                                محصولات کشاورزی و خشکبار برخوردار است.
-                                <span class="message-chat-date">18:24 PM  </span>
+                        <li v-for="msg in chatMessages">
+                            <div :class="[msg.sender_id == currentUserId ? 'message-send' : 'message-receive']">
+                                    {{msg.text}}
+                                <span class="message-chat-date">{{msg.created_at}}
+                                    <span class="check-items" v-if="msg.sender_id == currentUserId">
+                                        <i class="fa fa-check"></i>
+                                            <i class="fa fa-check" v-if="msg.is_read"></i>
+                                    </span>
+                                </span>
                             </div>
                         </li>
-                        <li>
-                            <div class="message-send">
-                                کشور روسیه با جمعیت تقریبی ۱۴۴ میلیون نفر، یکی از کشورهایی می‌باشد که می‌تواند برای
-                                <span class="message-chat-date">18:24 PM <span class="check-items"><i class="fa fa-check"></i><i class="fa fa-check"></i></span></span>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="message-receive">
-                                کشور روسیه با جمعیت تقریبی ۱۴۴ میلیون نفر، یکی از کشورهایی می‌باشد که می‌تواند برای
-                                صادرات
-                                کالاهای ایرانی مقصد خوبی به حساب بیاید. این کشور به دلیل قرار گرفتن در حاشیه‌ی‌ دریاچه‌ی
-                                خزر
-                                و نزدیک بودن به ایران از نظر مسافت، ظرفیت مناسبی برای صادرات، خصوصاً صادرات مواد غذایی،
-                                محصولات کشاورزی و خشکبار برخوردار است.
-                                <span class="message-chat-date">18:24 PM </span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="message-send">
-                                کشور روسیه با جمعیت تقریبی ۱۴۴ میلیون نفر، یکی از کشورهایی می‌باشد که می‌تواند برای
-                                <span class="message-chat-date">18:24 PM <span class="check-items"><i class="fa fa-check"></i><i class="fa fa-check"></i></span></span>
-                            </div>
-                        </li>
-
                     </ul>
                     <div class="send-message-form">
-                        <form action="#">
+                        <form>
                             <div class="message-input">
-                                <input type="text" placeholder="پیغامی بگذارید "/>
+                                <input type="text" placeholder="پیغامی بگذارید " v-model="msgToSend">
                             </div>
                             <div class="button-wrapper">
-                                <button type="submit"><i class="fa fa-send"></i></button>
+                                <button type="submit" @click.prevent="sendMessage()"><i class="fa fa-send"></i></button>
                             </div>
                         </form>
 
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 </template>
@@ -383,6 +482,10 @@
     import {eventBus} from "../../router/dashboard_router";
 
     export default {
+        props:[
+            'defimgitem',
+            'str'
+        ],
         data: function () {
             return {
                 items: [
@@ -391,11 +494,100 @@
                         url: 'messages',
                     }
                 ],
+                contactList:'',
+                chatMessages:'',
+                selectedContact:'',
+                currentUserId:'',
+                currentContactUserId:'',
+                msgToSend:'',
+            }
+        },
+        methods:{
+            init:function(){
+                var self = this;
+
+                this.loadContactList();
+            },
+            loadContactList:function(){
+                var self = this;
+
+                axios.post('/get_contact_list')
+                    .then(function(response){
+                        self.contactList = response.data.contact_list;
+                        self.currentUserId = response.data.user_id;
+//                        self.listenOnChannel();
+                })
+                .catch(function(e){
+
+                });
+            },
+            loadChatHistory:function(contact){
+                var self = this;
+
+                this.selectedContact = contact;
+                this.currentContactUserId = contact.contact_id;
+
+                axios.post('/get_user_chat_history',{
+                    user_id:contact.contact_id
+                })
+                .then(function(response){
+                    self.chatMessages = response.data.messages;
+                    self.currentUserId = response.data.current_user_id;
+                    self.loadContactList();
+//                    self.keepChatUpdated(contact);
+                })
+                .catch(function(e){
+
+                });
+            },
+            sendMessage:function(){
+                var self = this;
+
+                axios.post('/messanger/send_message',{
+                    sender_id:self.currentUserId,
+                    receiver_id:self.currentContactUserId,
+                    text:self.msgToSend,
+                })
+                .then(function(response){
+                    self.msgToSend = '';
+                    self.loadChatHistory(self.selectedContact);
+                    self.loadContactList();
+                })
+                .catch(function(e){
+
+                });
+            },
+            keepChatUpdated:function(contact){
+                var self = this;
+                setTimeout(function(){
+                    self.loadChatHistory(contact);
+                },20000);
             }
         },
         mounted:function () {
+            this.init();
+             $(".chat-page ul").animate({ scrollTop: $(".chat-page ul").prop("scrollHeight") }, 1000);
             eventBus.$emit('subHeader', this.items);
-        }
+        },
+        created:function(){
+
+            var self = this;
+
+            Echo.private('testChannel.' + userId)
+                .listen('newMessage', (e) => {
+                    var senderId = e.new_message.sender_id;
+                    if(self.currentContactUserId){
+                        if(self.currentContactUser == senderId){
+                            self.chatMessages.push(e.new_message);
+                            console.log(self.chatMessages);
+                        }
+                    }
+                    else{
+
+                    }
+
+            });
+        },
     }
 </script>
 
