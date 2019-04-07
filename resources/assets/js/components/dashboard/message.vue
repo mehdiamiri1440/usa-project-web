@@ -560,8 +560,10 @@
                 .then(function(response){
                     self.chatMessages = response.data.messages;
                     self.currentUserId = response.data.current_user_id;
+                    this.goToButtomOfChat();
                 })
                 .catch(function(e){
+                    
                 });
             },
             sendMessage:function(){
@@ -599,6 +601,9 @@
                     }
                 });
             },
+            goToButtomOfChat:function(){
+                 $(".chat-page ul").animate({ scrollTop: $(".chat-page ul").prop("scrollHeight") }, 1000);
+            }
         },
         watch:{
             contactNameSearchText:function(){
@@ -648,15 +653,14 @@
         },
         mounted:function () {
             this.init();
-             $(".chat-page ul").animate({ scrollTop: $(".chat-page ul").prop("scrollHeight") }, 1000);
             eventBus.$emit('subHeader', this.items);
         },
         created:function(){
-
             var self = this;
-
+    
             Echo.private('testChannel.' + userId)
                 .listen('newMessage', (e) => {
+                    console.log('test');
                     var senderId = e.new_message.sender_id;
                     //update contact list
                     self.loadContactList();
@@ -667,12 +671,11 @@
                             self.chatMessages.push(e.new_message);
 
                             if(self.isComponentActive == false){
-                                self.pushNotification("پیام جدید",e.new_message.text,'/dashboard/#/messages');
+                            self.pushNotification("پیام جدید",e.new_message.text,'/dashboard/#/messages');
                             }
                         }
                     }
                     else{
-
                         this.pushNotification("پیام جدید",e.new_message.text,'/dashboard/#/messages');
                     }
 
