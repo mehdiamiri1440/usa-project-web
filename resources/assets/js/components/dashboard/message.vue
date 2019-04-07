@@ -102,7 +102,7 @@
         transition:200ms;
     }
 
-    .contact-body .contact-item a:hover{
+    .contact-body .contact-item a:hover,.contact-body .contact-item a.active{
         background: #f6f6f6;
         transition:200ms;
     }
@@ -146,7 +146,24 @@
     }
 
 
-
+    .contact-wrapper,.contact-wrapper > div{
+        height: 100%;
+    }
+    .contact-wrapper .contact-body{
+        height: calc(100% - 100px);
+    }
+    .contact-wrapper .contact-items{
+        position: relative;
+        height: 100%;
+        overflow: scroll;
+    }
+    .contact-wrapper .contact-items > ul{
+        position: absolute;
+        right: 0;
+        left: 0;
+        top: 0;
+        bottom: 0;
+    }
     .message-wrapper{
         border-right: 2px solid #F2F2F2;
         position: relative;
@@ -313,6 +330,138 @@
                                     <span class="contact-name">{{contact.first_name + ' ' + contact.last_name}}</span>
                                     <div class="contact-date">
                                         <p class="count-number" v-if="contact.unread_msgs_count != 0">{{contact.unread_msgs_count}}</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#" >
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#" >
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#" >
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#" >
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#">
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#" >
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#" >
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#" >
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#" >
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#" >
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
+<!--                                        <p>18:24 PM</p>-->
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="contact-item" >
+                                <a href="#" >
+                                    <div class="contact-image">
+                                        <img :src="defimgitem">
+                                    </div>
+                                    <span class="contact-name">علی دلداری</span>
+                                    <div class="contact-date">
+                                        <p class="count-number" >6</p>
 <!--                                        <p>18:24 PM</p>-->
                                     </div>
                                 </a>
