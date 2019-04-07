@@ -334,138 +334,7 @@
                                     </div>
                                 </a>
                             </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#">
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -483,10 +352,7 @@
                 </div>
                 <div class="chat-page ">
                     <ul>
-                        <li v-for="(msg,index) in chatMessages" >
-                            <div v-if="index == chatMessages.length - 1 ">
-                                {{scrollToEnd()}}
-                            </div>
+                        <li v-for="msg in chatMessages" >
 
                             <div :class="[msg.sender_id == currentUserId ? 'message-send' : 'message-receive']">
                                     {{msg.text}}
