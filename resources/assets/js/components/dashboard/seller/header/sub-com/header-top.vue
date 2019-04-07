@@ -3,17 +3,7 @@
         margin-right: 250px;
         margin-top: 65px;
         background: #fff;
-        position: fixed;
-
-        right: 0;
-
-        left: 0;
-
-        bottom: 0;
-
-        top: 0;
     }
-
     .main-header {
         height: 65px;
         position: fixed;

@@ -1,16 +1,29 @@
 <style scoped>
+
     .check-items{
         padding-left: 10px;
         color: #00a65a;
     }
 
     .main-content {
-        padding: 60px 0 0;
+        padding: 110px 250px 0 0;
 
         direction: rtl;
 
         border-bottom: 2px solid #F2F2F2;
         height:100%;
+        position: fixed;
+
+        /*right: 0;*/
+
+        left: 0;
+
+        bottom: 0;
+
+        top: 0;
+    }
+    .little-main .main-content {
+        padding: 110px 80px 0 0;
     }
 
     .contact-title {
@@ -187,7 +200,7 @@
         right: 0;
 
         bottom: 75px;
-        top: 0;
+        top: 70px;
     }
     .message-wrapper .chat-page ul li{
         overflow: hidden;
@@ -266,7 +279,11 @@
     }
 
 
-
+    @media screen and (max-width: 992px){
+        .main-content {
+            padding: 110px 0 0 ;
+        }
+        }
 </style>
 <template>
     <section class="main-content col-xs-12">
@@ -300,138 +317,6 @@
                                     </div>
                                 </a>
                             </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="contact-item" >
-                                <a href="#" >
-                                    <div class="contact-image">
-                                        <img :src="defimgitem">
-                                    </div>
-                                    <span class="contact-name">علی دلداری</span>
-                                    <div class="contact-date">
-                                        <p class="count-number" >6</p>
-<!--                                        <p>18:24 PM</p>-->
-                                    </div>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -449,7 +334,11 @@
                 </div>
                 <div class="chat-page ">
                     <ul>
-                        <li v-for="msg in chatMessages">
+                        <li v-for="(msg,index) in chatMessages" >
+                            <div v-if="index == chatMessages.length - 1 ">
+                                {{scrollToEnd()}}
+                            </div>
+
                             <div :class="[msg.sender_id == currentUserId ? 'message-send' : 'message-receive']">
                                     {{msg.text}}
                                 <span class="message-chat-date">{{msg.created_at}}
@@ -560,11 +449,17 @@
                 .then(function(response){
                     self.chatMessages = response.data.messages;
                     self.currentUserId = response.data.current_user_id;
+
                     this.goToButtomOfChat();
+
+                    self.scrollToEnd();
                 })
                 .catch(function(e){
                     
                 });
+            },
+            scrollToEnd: function() {
+                 $(".chat-page ul").animate({ scrollTop: $(".chat-page ul").prop("scrollHeight") }, 0)
             },
             sendMessage:function(){
                 var self = this;
@@ -577,6 +472,7 @@
                 .then(function(response){
                     self.msgToSend = '';
                     self.loadChatHistory(self.selectedContact);
+
                     self.loadContactList();
                 })
                 .catch(function(e){
@@ -635,6 +531,7 @@
                                         else return false;
                                     });
                                 });
+
                             })
                             .catch(function(e){
                                 alert('error');
@@ -660,7 +557,7 @@
     
             Echo.private('testChannel.' + userId)
                 .listen('newMessage', (e) => {
-                    console.log('test');
+
                     var senderId = e.new_message.sender_id;
                     //update contact list
                     self.loadContactList();
