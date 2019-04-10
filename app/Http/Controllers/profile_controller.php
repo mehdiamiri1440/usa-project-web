@@ -546,6 +546,33 @@ class profile_controller extends Controller
         return $result_array;
     }
     
+    public function add_a_confirmed_profile_record_for_user($user)
+    {
+         $profile_record = new profile();
+
+         $profile_record->public_phone = $user->phone;
+         $profile_record->is_company = false;
+         $profile_record->confirmed = true;
+         $profile_record->myuser_id = $user->id;
+         $profile_record->address = $user->province . ' - ' . $user->city ;
+
+         $user_role = $this->get_user_role_string($user);
+
+         $profile_record->description = "من $user_role محصولات کشاورزی در سامانه ی اینکوباک هستم. برای ارتباط با من رو دکمه ی ارسال پیام کلیک کنید. خوشحال می شوم اگر پروفایل من را با دوستان خود به اشتراک بگذارید.";
+
+         $profile_record->save();
+
+    }
+     
+     protected function get_user_role_string(&$user)
+     {
+         if($user->is_buyer){
+             return 'خریدار';
+         }
+         else{
+             return 'فروشنده';
+         }
+     }
     
     
 }

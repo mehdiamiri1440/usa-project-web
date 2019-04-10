@@ -10,9 +10,9 @@
 <!--        <a v-bind:href="'/master/#/profile/' + user_name" class="green_bot">
             مشاهده پروفایل
         </a>-->
-        <a :href=" '/master/#/profile/'+ user_name" class="green_bot">مشاهده پروفایل</a>
+        <a :href=" '/master/#/profile/'+ user_name" class="green_bot" @click="registerComponentStatistics('product','showUserProfile','show profile')">مشاهده پروفایل</a>
         <div class="create_buy  hidden-xs" >
-            <a class="green_bot" href="#" @click="openRequestRegisterBox($event)">
+            <a class="green_bot" href="#" @click.prevent="openRequestRegisterBox($event)">
                 درخواست خرید
             </a>
         </div>
@@ -110,7 +110,9 @@
                 if (this.current_user.profile) {
                     e.preventDefault;
                     var event = $(e.target);
-
+                    
+                    this.registerComponentStatistics('product','click','request register button');
+                    
                     this.errors = '';
 
                     var index = (event.parents('article').index() + 1);
@@ -130,6 +132,12 @@
                 var newPosition = $(element).offset();
                 $('html, body').stop().animate({scrollTop: newPosition.top - 380}, 1000);
             },
+            registerComponentStatistics:function(categoryName,actionName,labelName){
+                gtag('event',actionName,{
+                    'event_category' : categoryName,
+                    'event_label'    : labelName
+                });
+            }
         }
     }
 </script>

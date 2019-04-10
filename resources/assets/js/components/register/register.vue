@@ -721,7 +721,7 @@
             'step3.user_name':function(){
                 var self = this;
                 if(this.step3.user_name.length > 0){
-                    axios.post('user/is_user_name_unique',{
+                    axios.post('/user/is_user_name_unique',{
                         user_name : this.step3.user_name,
                     })
                         .then(function(response){

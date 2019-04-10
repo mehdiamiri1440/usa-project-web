@@ -574,8 +574,12 @@ Route::get('/logout',function(){
 
     Session::flush();
     Session::save();
+    
+    $cookie = \Cookie::forget('user_phone');
+    $cookie = \Cookie::forget('user_password');
+//    response('view')->withCookie($cookie);
 
-    return redirect()->route('login_page');
+    return redirect()->route('login_page')->withCookie($cookie);
 })->name('logout');
 
 //-------------------------------- ADMIN PANEL---------------------------------------

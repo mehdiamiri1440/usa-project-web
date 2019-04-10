@@ -619,11 +619,10 @@
         </main>
     </div>
 </template>
+
+
+
 <script>
-
-
-
-
     var viz = false;
     var PopupImage =  {
         data:function(){
@@ -801,6 +800,7 @@
                 var searchValueText = this.searchValue;
 
                 if(searchValueText){
+                    this.registerComponentStatistics('homePage','search',searchValueText);
                     this.searchText = searchValueText;
                 }
                 else{
@@ -826,7 +826,9 @@
             setCategoryFilter:function(e){
                 e.preventDefault;
                 var categoryId = $(e.target).val();
-
+                
+                this.registerComponentStatistics('product-list','sidebarSearch','category');
+                
                 var self = this;
 
                 axios.post('/user/get_product_list')
@@ -857,6 +859,9 @@
             setSubCategoryFilter:function(e){
                 e.preventDefault;
                 var subCategoryId = $(e.target).val();
+                
+                this.registerComponentStatistics('product-list','sidebarSearch','subCategory');
+                
                 var self = this;
 
                 axios.post('/user/get_product_list')
@@ -881,7 +886,9 @@
             setProvinceFilter:function(e){
                 e.preventDefault;
                 var provinceId = $(e.target).val();
-
+                
+                this.registerComponentStatistics('product-list','sidebarSearch','province');
+                
                 var self = this;
 
                 axios.post('/user/get_product_list')
@@ -918,6 +925,9 @@
                 e.preventDefault;
                 var cityId = $(e.target).val();
                 this.loading = true;
+                
+                this.registerComponentStatistics('product-list','sidebarSearch','city');
+                
                 var self = this;
 
                 axios.post('/user/get_product_list')
@@ -976,6 +986,8 @@
                 if(this.currentUser.profile){
                     e.preventDefault;
                     var event =  $(e.target);
+                    
+                    this.registerComponentStatistics('product-list','product','request register button');
 
                     this.errors = '';
 
@@ -1132,6 +1144,12 @@
                 const bottomOfPage = visible + scrollY >= pageHeight ;
                 return bottomOfPage || pageHeight < visible ;
             },
+            RegisterComponentStatistics:function(categoryName,actionName,labelName){
+                gtag('event',actionName,{
+                    'event_category' : categoryName,
+                    'event_label'    : labelName
+                });
+            }
         },
         watch:{
 

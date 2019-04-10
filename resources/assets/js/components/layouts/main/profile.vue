@@ -103,7 +103,7 @@
                             <div class="user-contents ">
                                 <div class="title_content col-xs-12">
                                     <div class="back_page col-xs-12 col-sm-4">
-                                        <a href="javascript:history.back()" class="green_bot">بازگشت به صفحه قبل</a>
+                                        <a href="javascript:history.back()" class="green_bot" @click="registerComponentStatistics('profileView','BackButton','click on back button');">بازگشت به صفحه قبل</a>
 
                                     </div>
 
@@ -116,7 +116,8 @@
 
                                     <div class="back_page col-xs-12 col-sm-4">
                                         <a href="/dashboard/#/profile" class="green_bot edit"
-                                           v-if="currentUser.user_info && currentUser.user_info.id == profileOwner.user_info.id">
+                                           v-if="currentUser.user_info && currentUser.user_info.id == profileOwner.user_info.id"
+                                           @click="registerComponentStatistics('profileView','editProfile','click on edit profile');">
                                             <i class="fa fa-pencil"></i>
                                             ویرایش پروفایل
                                         </a>
@@ -254,7 +255,7 @@
                                     </popup-certificate>
 
                                 <div class="owl-carousel hidden-xs">
-                                     <image-viewer
+                                     <image-viewer @click="registerComponentStatistics('profileView','RelatedView','click on related photos');"
                                              v-for="photo in profileOwner.relateds"
                                              :key="photo.id"
                                              :base="str + '/'"
@@ -277,7 +278,8 @@
                                     <a :href="'/' + str + '/' + photo"> <img :src="'/' + str + '/' + photo"/></a>
                                 </article>
                                 <div class="owl-carousel hidden-xs">
-                                           <image-viewer v-for="photo in profileOwner.certificates"
+                                           <image-viewer @click="registerComponentStatistics('profileView','CertificateView','click on certificate photos');"
+                                                         v-for="photo in profileOwner.certificates"
                                                          :base="str + '/'"
                                                          :key="photo.id"
                                                          :img="photo">
@@ -571,6 +573,8 @@
             },
             showProfileOwnerProducts: function (e) {
 
+                this.registerComponentStatistics('profileView','showUserProducts','click on show products');
+
                 e.preventDefault();
                 this.profileDescription = false;
 
@@ -587,6 +591,8 @@
                 });
             },
             showProfileOwnerDescription: function (e) {
+
+                this.registerComponentStatistics('profileView','profileDescription','click on profile description');
 
                 e.preventDefault();
                 this.profileDescription = true;
@@ -605,6 +611,9 @@
 
             },
             refreshProduct: function (productId) {
+
+                this.registerComponentStatistics('profileView','RefreshProduct','refresh product');
+
                 var self = this;
                 var userName = this.getUserName;
                 axios.post('/refresh_my_product_by_id', {
@@ -626,6 +635,9 @@
                     });
             },
             copyProfileLinkToClipBoard: function () {
+
+                this.registerComponentStatistics('profileView','CopyProfileLink','click on copy profile link');
+
                 if (this.isDeviceMobile()) {
 
                     var linkElement = document.createElement('a');
@@ -668,6 +680,9 @@
                 }
             },
             openChat:function(){
+
+                this.registerComponentStatistics('profileView','openChat','click on open chatBox');
+
                 var contact = {
                     contact_id:this.profileOwner.user_info.id,
                     first_name:this.profileOwner.user_info.first_name,
@@ -688,6 +703,13 @@
                     alert('ابتدا لاگین کنید');
                 }
             },
+
+            registerComponentStatistics:function(categoryName,actionName,labelName){
+                gtag('event',actionName,{
+                    'event_category' : categoryName,
+                    'event_label'    : labelName
+                });
+            }
 
         },
         mounted() {

@@ -17,7 +17,6 @@ import registerComponent from './components/register/register.vue';
 // import productVue from './components/product_view'
 
 
-
  
 var viz = false;
  new Vue({

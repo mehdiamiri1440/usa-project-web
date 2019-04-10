@@ -400,12 +400,12 @@
                     </div>
                     <div class="contact-items">
                         <ul>
-                            <li class="contact-item" v-for="contact in contactList">
+                            <li class="contact-item" v-for="(contact,index) in contactList" :key="index">
                                 <a href="" @click.prevent="loadChatHistory(contact)">
                                     <div class="contact-image">
                                         <img v-if="contact.profile_photo" :src="str + '/' + contact.profile_photo"
                                              :alt="contact.first_name[0]">
-                                        <img v-else :src="defimgitem" :alt="contact.first_name[0]">
+                                        <img v-else :src="defimgitem">
                                     </div>
                                     <span class="contact-name">{{contact.first_name + ' ' + contact.last_name}}</span>
                                     <div class="contact-date">
@@ -479,7 +479,6 @@
 </template>
 <script>
     import {eventBus} from "../../router/dashboard_router";
-
     import Push from "push.js";
 
     export default {
@@ -510,6 +509,20 @@
                 var self = this;
 
                 this.loadContactList();
+//                tracker.send('event', 'categoryName', 'ActionName','LabelName');
+//                console.log(tracker);
+//                tracker.send("event", "sidebar", "click","پیام ها");
+//                if ("ga" in window) {
+//                    console.log('ga exists');
+////                    var tracker = ga.getAll()[0];
+////                //    console.log('size : ' + tracker.length);
+////                    if (tracker){
+////                        console.log(to.path);
+////                        tracker.set('page',to.path);
+////                        tracker.send('pageview');
+////                //        tracker.send('event', 'categoryName', 'ActionName','LabelName');
+////                  }
+//                  }
             },
             loadContactList: function () {
                 var self = this;
@@ -523,7 +536,7 @@
                             .then(function (response) {
                                 var contact = response.data.contact;
 
-                                if (contact != null) {
+                                if (contact != null && self.pageHasBeenReloaded() == false && self.selectedContact == '') {
                                     self.contactList.unshift(contact);
                                     //removing duplicate contacts
                                     self.contactList = self.contactList.filter((thing, index, self) =>
@@ -562,7 +575,12 @@
                         self.scrollToEnd();
                     })
                     .catch(function (e) {
+
                     });
+
+                var index = this.searchForObjectIndexInArray(contact.contact_id,this.contactList);
+                contact.unread_msgs_count = 0;
+                this.contactList.splice(index,1,contact);
             },
             scrollToEnd: function () {
                 $(".chat-page ul").animate({scrollTop: $(".chat-page ul").prop("scrollHeight")}, 0)
@@ -579,7 +597,7 @@
                         self.msgToSend = '';
                         self.loadChatHistory(self.selectedContact);
 
-                        self.loadContactList();
+                        //self.loadContactList();
                     })
                     .catch(function (e) {
 
@@ -603,6 +621,26 @@
                     }
                 });
             },
+            goToButtomOfChat:function(){
+                 $(".chat-page ul").animate({ scrollTop: $(".chat-page ul").prop("scrollHeight") }, 1000);
+            },
+            searchForObjectIndexInArray:function search(contactId, myArray){
+                for (var i=0; i < myArray.length; i++) {
+                    if (myArray[i].contact_id === contactId) {
+                        return i;
+                    }
+                }
+            },
+            pageHasBeenReloaded:function(){
+                if (window.performance) {
+//                  TYPE_BACK_FORWARD
+                    if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+                        return true;
+                    }else {
+                        return false;
+                     }
+                }
+            }
         },
         watch: {
             contactNameSearchText: function () {
@@ -655,29 +693,39 @@
             this.init();
             eventBus.$emit('subHeader', this.items);
         },
-        created: function () {
+
+        created: function (){
 
             var self = this;
 
+            if ("gtag" in window) {
+              console.log('selle dashboard');
+                gtag("event","gtag testing",{'event_category':'test','event_lable':'testing'});
+             }
+
+            if(Push.Permission.has() == false){
+                Push.Permission.request(function(){}, function(){});
+            }
+
             Echo.private('testChannel.' + userId)
                 .listen('newMessage', (e) => {
+                    console.log('new Message!');
                     var senderId = e.new_message.sender_id;
                     //update contact list
                     self.loadContactList();
 
-                    if (self.currentContactUserId) {
+                    if (self.currentContactUserId){
                         if (self.currentContactUserId == senderId) {
 
                             self.chatMessages.push(e.new_message);
 
-                            if (self.isComponentActive == false) {
-                                self.pushNotification("پیام جدید", e.new_message.text, '/dashboard/#/messages');
+                            if(self.isComponentActive == false){
+                                self.pushNotification("پیام جدید",e.new_message.text,'/dashboard/#/messages');
                             }
                         }
                     }
-                    else {
-
-                        this.pushNotification("پیام جدید", e.new_message.text, '/dashboard/#/messages');
+                    else{
+                        this.pushNotification("پیام جدید",e.new_message.text,'/dashboard/#/messages');
                     }
 
                 });

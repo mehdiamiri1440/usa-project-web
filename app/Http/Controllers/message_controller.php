@@ -99,11 +99,20 @@ class message_controller extends Controller
         
         foreach($contacts_id as $contact_id){
             $temp = $this->get_contact_info($contact_id);
-            $temp->unread_msgs_count = $this->get_user_contact_unread_messages_count($user_id, $contact_id);
+            $msgs_info = $this->get_user_contact_unread_messages_count($user_id, $contact_id);
+            $temp->unread_msgs_count = $msgs_info['unread_msgs_count'];
+            $temp->last_msg_time_date = $msgs_info['last_msg_time_date'];
+            
             
             $contact_list[] = $temp;
         }        
-
+        
+        if(sizeof($contact_list) > 0){
+            usort($contact_list, function($a, $b) {
+                return (strtotime($b->last_msg_time_date) - strtotime($a->last_msg_time_date));
+            });
+        }
+        
         return response()->json([
             'status' => true,
             'contact_list' => $contact_list,
@@ -117,7 +126,7 @@ class message_controller extends Controller
                                 ->orWhere('receiver_id',$user_id)
                                 ->select('sender_id','receiver_id')
                                 ->distinct()
-                                ->orderBy('created_at','desc')
+                                ->orderBy('created_at')
                                 ->get();
         $contact_id_array = [];
         
@@ -148,12 +157,30 @@ class message_controller extends Controller
     
     protected function get_user_contact_unread_messages_count($user_id, $contact_id)
     {
-        $unread_msgs_count = message::where('sender_id',$contact_id)
+        $msgs = message::where('sender_id',$contact_id)
                                 ->where('receiver_id', $user_id)
-                                ->where('is_read',false)
-                                ->get()
-                                ->count();
-        return $unread_msgs_count;
+//                                ->where('is_read',false)
+                                ->get();
+        $unread_msgs = [];
+        
+        $msgs->each(function($msg) use(&$unread_msgs,&$last_msg_time_date){
+            if($msg->is_read == false){
+                $unread_msgs [] = $msg;
+            }
+        });
+        
+        $unread_msgs_count = sizeof($unread_msgs);
+    
+        if($msgs->count() > 0){
+            $last_msg_time_date = $msgs->last()
+                ->created_at
+                ->format('Y-m-d H:i:s');
+        }   
+        //get the last msg time here in order to arrange contact list(regardless of read or not)
+        return [
+            "unread_msgs_count" => $unread_msgs_count,
+            "last_msg_time_date" => $last_msg_time_date
+        ];
     }
     
     //public method
