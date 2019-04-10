@@ -417,7 +417,6 @@ var kamaDatepicker = function (elementID, opt) {
     });
 
     nextMonth.on("click", function () {
-        //console.log("month: " + selectedMonth + ", year: " + selectedYear);
         if (monthDropdown.val() < 12) {
             monthDropdown.val(parseInt(monthDropdown.val()) + 1);
             monthDropdown.trigger("change");

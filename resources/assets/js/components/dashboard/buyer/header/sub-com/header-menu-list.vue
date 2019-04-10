@@ -143,7 +143,6 @@
                }else{
                    this.active_el = 1
                }
-               console.log(this.active_el);
             }
         },mounted:function(){
             if (this.subIsActive('/complementry')  || this.subIsActive('/profile_contract') ){

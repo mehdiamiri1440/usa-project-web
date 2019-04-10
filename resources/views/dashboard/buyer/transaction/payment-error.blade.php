@@ -26,21 +26,20 @@
             </div>
             <div class="row">
                 <div class="col-xs-2 col-xs-offset-5">
-                    <a class="btn btn-primary" onclick="backToBasic(event)" href="#">بازگشت به اینکوباک</a>    
+                    <a class="btn btn-primary" onclick="backToBasic(event)" href="#">بازگشت به اینکوباک</a>
                 </div>
             </div>
         </div>
         <script>
             function backToBasic(event){
                 event.preventDefault();
-                
+
                 var transactionId = "<?php echo $id; ?>" ;
                 var backUrl = '/dashboard/#/transaction-detail/' + transactionId;
-                console.log(backUrl);
                 window.location.href = backUrl;
             }
-        
+
         </script>
     </body>
-    
+
 </html>

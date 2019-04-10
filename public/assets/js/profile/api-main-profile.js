@@ -36,7 +36,6 @@ var PopupImageCertificate =  {
         '</a>'
     ,
     mounted: function(){
-        console.log($(this.$el));
         $('.cerificates > div').each(function() { // the containers for all your galleries
             $(this).magnificPopup({
                 delegate: 'a', // the selector for gallery item
@@ -162,7 +161,7 @@ var vm = new Vue({
         $('.profile-list').fadeOut("slow");
         $('.icon-header-list').fadeOut("slow");
         viz = false;
-    
+
           }
         },
         init:function(){
@@ -237,7 +236,6 @@ var vm = new Vue({
         },
         refreshProduct:function(productId){
             var self = this;
-            console.log(productId);
             axios.post('/refresh_my_product_by_id',{
                 product_id : productId
             })

@@ -57,7 +57,6 @@ function toggleShowHeader() {
     var back = $(".background_mob_sec");
     showHeaderButtonElement.on('click', function () {
         if (flag == true){
-            console.log('flag = true');
             rightHeader.animate({
                 right:'0'
             },300);

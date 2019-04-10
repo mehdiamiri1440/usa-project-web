@@ -51,6 +51,6 @@ if (token) {
      broadcaster: 'pusher',
      key: 'f04fb3210cdacabb3540',
      cluster: 'ap1',
-     authEndpoint: 'http://localhost:9090/broadcastAuth',
+     authEndpoint: 'http://localhost:8000/broadcastAuth',
      encrypted: true
  });

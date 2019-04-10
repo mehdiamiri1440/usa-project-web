@@ -355,7 +355,6 @@
             },
             scrollToTheRequestRegisterBox: function (element) {
                 var newPosition = $(element).offset();
-                console.log(newPosition.top);
                 $('html, body').stop().animate({scrollTop: newPosition.top - 380}, 1000);
             },
             registerRequest: function (e) {
@@ -403,7 +402,6 @@
                         }
                         else {
                             self.popUpMsg = 'شما قبلا درخواست خرید این محصول را ثبت کرده اید!';
-                            console.log(self.popUpMsg);
                             $('#myModal').modal('show');
 
                             self.submiting = false;
@@ -413,7 +411,6 @@
                     })
                     .catch(function (e) {
                         self.popUpMsg = 'حساب کاربری شما از نوع خریداران نیست!';
-                        console.log(self.popUpMsg);
                         $('#myModal').modal('show');
 
                         self.submiting = false;

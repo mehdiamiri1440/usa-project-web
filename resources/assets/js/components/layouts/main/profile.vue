@@ -44,7 +44,7 @@
     <div>
         <header id="header" class="hidden-xs  main-header">
             <h1 class="title-page col-xs-12">
-                لیست محصولات
+                پروفایل
             </h1>
         </header>
         <main id="main" class="col-sm-12">
@@ -181,7 +181,7 @@
                         </div>
 
                     </div>
-                    <div class="info-section hidden-xs col-xs-12">
+                  <!--  <div class="info-section hidden-xs col-xs-12">
                         <div class="contents-info-num  col-sm-3">
                             <a href="#" class="btn btn-copy">
                                 <i class="fa fa-comment"></i> ارسال پیام
@@ -192,7 +192,7 @@
                                 جهت برقراری ارتباط با این فرد لطفا با کارشناسان اینکوباک تماس بگیرید.
                             </p>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="sub-header hidden-sm hidden-md hidden-lg  col-xs-12">
                         <div class="col-xs-6" :class="{'active':profileDescription}">
                             <a @click="
@@ -673,8 +673,8 @@
                     first_name:this.profileOwner.user_info.first_name,
                     last_name:this.profileOwner.user_info.last_name,
                     profile_photo:this.profileOwner.profile.profile_photo,
-                }  
-                
+                }
+
                 if(this.currentUser){
                     axios.post('/set_last_chat_contact',contact)
                             .then(function(response){

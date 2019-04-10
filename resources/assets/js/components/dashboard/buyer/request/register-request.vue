@@ -490,7 +490,6 @@
               this.buyAd.category_id = $(e.target).val();
           },
           setCityId:function(cityId){
-              console.log(cityId);
               this.buyAd.city_id = cityId;
           },
           handleBuyAdFilesUpload:function(){

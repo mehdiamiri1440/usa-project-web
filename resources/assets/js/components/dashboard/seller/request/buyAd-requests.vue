@@ -134,7 +134,6 @@
                 axios.post('/get_related_buyAds_list_to_the_seller')
                     .then(function (response) {
                         self.buyAds = response.data.buyAds;
-//                        console.log("test : " + response.data.buyAds[0].score);
                         self.load = false;
                     });
             }

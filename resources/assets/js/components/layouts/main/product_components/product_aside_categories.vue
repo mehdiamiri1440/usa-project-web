@@ -209,7 +209,6 @@
                 });
                 $(window).scroll(function () {
                     var sc = $(this).scrollTop();
-                    console.log(sc);
                     $(window).resize(function () {
                         get_with = $(window).width();
                         if (get_with > 751) {

@@ -725,7 +725,6 @@
             },
             handleRelatedFilesUpload() {
                 let uploadedFiles = this.$refs.relatedFiles.files;
-                console.log(uploadedFiles)
                 /*
                   Adds the uploaded file to the files array
                 */

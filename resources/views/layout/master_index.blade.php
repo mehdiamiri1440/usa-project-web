@@ -69,7 +69,7 @@
                         <div class="profile-list">
                             <ul class="list-unstyled">
                                 <li class="list-item"><a
-                                            href="{{route('profile_basic')}}">پروفایل</a></li>
+                                            href="/dashboard/#/profile">پروفایل</a></li>
                                 <li class="list-item"><a href="/dashboard#/password">تغییر کلمه عبور</a></li>
                                 <li class="list-item"><a href="{{route('logout')}}">خروج</a></li>
                             </ul>
@@ -117,7 +117,7 @@
                             <div class="profile-list">
                                 <ul class="list-unstyled">
                                     <li class="list-item"><a
-                                                href="{{route('profile_basic')}}">پروفایل</a></li>
+                                                href="/dashboard/#/profile">پروفایل</a></li>
                                     <li class="list-item"><a href="/dashboard#/password">تغییر کلمه عبور</a></li>
                                     <li class="list-item"><a href="{{route('logout')}}">خروج</a></li>
                                 </ul>

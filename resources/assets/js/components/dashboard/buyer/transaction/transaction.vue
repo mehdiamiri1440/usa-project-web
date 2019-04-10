@@ -1030,7 +1030,6 @@
                     this.doAction('/action',3);
                 }
                 else if(this.transactionType == 'instant'){
-                    console.log('test');
                     this.doAction('/instant_action',2);
                 }
 

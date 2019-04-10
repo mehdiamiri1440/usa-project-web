@@ -876,7 +876,6 @@
                     this.doAction('/action',2);
                 }
                 else if(this.transactionType == 'instant'){
-                    console.log('test');
                     this.doAction('/instant_action',1);
                 }
             },

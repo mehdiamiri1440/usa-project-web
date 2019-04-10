@@ -381,14 +381,14 @@
             send_verification_code:function(){
                 this.step2.reSendCode = false;
                 this.step1.sendCode = false;
-                
+
                 var self = this;
-                
+
                 this.step2.now = new Date().getTime();
                 this.step2.showTimer = true;
                 this.step2.timeCounterDown = 59;
-                
-                
+
+
                 axios.post("/send_verification_code",{
                     phone : this.toLatinNumbers(this.step1.phone)
                 })
@@ -398,7 +398,7 @@
 
                     self.step2.verification_code = '';
                     self.errors.verification_code = [];
-                    
+
                     setTimeout(function(){
                         self.step2.reSendCode = true;
                     },60000);
@@ -627,7 +627,6 @@
             },
             categoryIdValidator:function(categoryId){
                 this.errors.category_id = [];
-                console.log('test : '+ categoryId);
                 if(categoryId === ''){
                     this.errors.category_id.push('انتخاب حوزه ی فعالیت الزامی است.');
                     this.errorFlag = true;
@@ -697,7 +696,7 @@
                     });
             },
             updateCounterDownTimer:function(seconds){
-        
+
                 if(seconds != 1){
                     this.step2.timeCounterDown = seconds;
                 }
@@ -708,16 +707,16 @@
             'step2.timeCounterDown':function(){
                 var self = this;
                 var now = new Date().getTime();
-                
+
                 var distance =  now - this.step2.now;
-                
+
                 var seconds =  59 - Math.floor((distance % (1000 * 60)) / 1000) + 1;
-                
+
                 setTimeout(function(){
                     self.updateCounterDownTimer(seconds);
                 },1000);
-                
-                
+
+
             },
             'step3.user_name':function(){
                 var self = this;

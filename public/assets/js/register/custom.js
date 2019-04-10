@@ -324,7 +324,6 @@ var app = new Vue({
         },
         categoryIdValidator:function(categoryId){
             this.errors.category_id = [];
-            console.log('test : '+ categoryId);
             if(categoryId === ''){
                 this.errors.category_id.push('انتخاب حوزه ی فعالیت الزامی است.');
                 this.errorFlag = true;

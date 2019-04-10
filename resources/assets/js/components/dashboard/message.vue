@@ -661,7 +661,6 @@
 
             Echo.private('testChannel.' + userId)
                 .listen('newMessage', (e) => {
-                    console.log('shit');
                     var senderId = e.new_message.sender_id;
                     //update contact list
                     self.loadContactList();

@@ -47,7 +47,7 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="row">        
+      <div class="row">
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">تولید آدرس پرداخت</h3>
@@ -98,11 +98,8 @@
 <script>
     function generatePaymentLink(){
         var paymentAmount = $('#payment-amount').val();
-        
         var url = 'www.incobac.com/manual-payment/' + paymentAmount  ;
-    
         $('#generated-url').text(url);
-        console.log(url);
     }
 </script>
 

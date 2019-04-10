@@ -128,7 +128,6 @@
             },
             scrollToTheRequestRegisterBox: function (element) {
                 var newPosition = $(element).offset();
-                console.log(newPosition.top);
                 $('html, body').stop().animate({scrollTop: newPosition.top - 380}, 1000);
             },
         }

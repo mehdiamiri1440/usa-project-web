@@ -80,7 +80,10 @@
     .profile-menu-header {
         float: left;
     }
-
+     .profile-menu-header a {
+        color: #7f8c9b;
+        margin: 5px;
+    }
     .logo_hide {
         display: none;
     }

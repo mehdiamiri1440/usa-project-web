@@ -268,11 +268,11 @@ var vm = new Vue({
 //              var height = $(document).height();
 
           var self = this;
-          
+
 
           if(this.searchText == '' && this.provinceId == '' && this.categoryId == '' && this.continueToLoadProducts){
               this.loadMoreActive = true;
-              
+
               this.productCountInPage += this.productCountInEachLoad ;
 
                 axios.post('/user/get_product_list',{
@@ -284,7 +284,7 @@ var vm = new Vue({
                     if(self.products.length + 1 < self.productCountInPage){
                         self.continueToLoadProducts = false;
                     }
-                    
+
                     self.loadMoreActive = false;
                 });
             }
@@ -312,7 +312,6 @@ var vm = new Vue({
         },
         scrollToTheRequestRegisterBox:function(element){
             var newPosition = $(element).offset();
-            console.log(newPosition.top);
             $('html, body').stop().animate({ scrollTop: newPosition.top - 380}, 1000);
         },
         registerRequest:function(e){
@@ -360,7 +359,6 @@ var vm = new Vue({
                 }
                 else{
                     self.popUpMsg = 'شما قبلا درخواست خرید این محصول را ثبت کرده اید!';
-                    console.log(self.popUpMsg);
                     $('#myModal').modal('show');
 
                     self.submiting = false;
@@ -370,7 +368,6 @@ var vm = new Vue({
             })
             .catch(function(e){
                     self.popUpMsg = 'حساب کاربری شما از نوع خریداران نیست!';
-                    console.log(self.popUpMsg);
                     $('#myModal').modal('show');
 
                     self.submiting = false;

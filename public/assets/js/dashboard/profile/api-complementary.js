@@ -29,13 +29,13 @@ var vm = new Vue({
 
             if(this.currentUser.profile.is_company == null || this.currentUser.profile.public_phone == null){
                 this.popUpMsg = 'ابتدا اطلاعات پایه را تکمیل کنید.';
-                
+
                 $('#myModal').modal('show');
                 return ;
             }
-            
+
             this.submiting = true;
-            
+
             this.errors = '';
             var self = this;
 
@@ -83,13 +83,12 @@ var vm = new Vue({
                 .catch(function(err){
                     self.errors = '';
                     self.errors = err.response.data.errors;
-                
+
                     self.submiting = false;
                 });
         },
         handleRelatedFilesUpload(){
             let uploadedFiles = this.$refs.relatedFiles.files ;
-            console.log(uploadedFiles)
             /*
               Adds the uploaded file to the files array
             */

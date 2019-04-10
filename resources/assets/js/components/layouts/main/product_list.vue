@@ -460,7 +460,7 @@
                         <div class="load-more-button" v-if="searchText == '' && continueToLoadProducts == true ">
                             <div class="col-xs-12 col-sm-6 col-sm-offset-3">
                                <div class="row">
-                                   <a href="#" class="btn btn-loader hidden-xs" @click.prevent="feed">
+                                   <a href="#" class="btn btn-loader hidden-xs" @click.prevent="feed()">
                                        <div class="btn-content">
 <span>                                   مشاهده محصولات بیشتر
 </span>
@@ -469,7 +469,7 @@
                                                 style="width:200px;height:200px">
                                        </div>
                                    </a>
-                                   <a href="#" class="btn btn-loader hidden-sm hidden-md hidden-lg" @click.prevent="feed">
+                                   <a href="#" class="btn btn-loader hidden-sm hidden-md hidden-lg" @click.prevent="feed()">
                                        <div class="btn-content">
                                     <span>
                                         بیشتر
@@ -620,7 +620,7 @@
 
                 var self = this;
 
-
+                console.log(this.continueToLoadProducts);
                 if (this.searchText == '' && this.provinceId == '' && this.categoryId == '' && this.continueToLoadProducts) {
                     this.loadMoreActive = true;
 
@@ -641,9 +641,6 @@
                 }
 
             },
-
-
-
 
             registerRequestInSearchNotFoundCase: function () {
                 if (this.currentUser.profile) {
@@ -669,15 +666,12 @@
             },
         },
         watch: {
-
             searchText: function () {
                 var self = this;
-
                 axios.post('/user/get_product_list')
                     .then(function (response) {
                         self.products = '';
                         self.loading = true;
-
                         var text = self.searchText.split(' ');
                         self.products = response.data.products.filter(function (product) {
                             return text.every(function (el) {
