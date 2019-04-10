@@ -508,7 +508,8 @@
             'uploadAddIndex',
             'uploadThread',
             'uploadUploadAuto',
-            'uploadRef'
+            'uploadRef',
+            'size'
         ],
         components: {
             FileUpload,

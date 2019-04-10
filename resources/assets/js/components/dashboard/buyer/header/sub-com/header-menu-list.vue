@@ -122,7 +122,7 @@
                 });
 
             },
-            
+
         },watch:{
             $route (){
                if (this.subIsActive('/complementry')  || this.subIsActive('/profile_contract') ){
@@ -139,14 +139,14 @@
                    this.active_el = 6
                }else if(this.subIsActive('/messages')){
                    this.active_el = 8
-               }else if(this.subIsActive('/privacy_and_policy.vue')){
+               }else if(this.subIsActive('/guide')){
                    this.active_el = 7
                }else{
                    this.active_el = 1
                }
             }
         },mounted:function(){
-            if (this.subIsActive('/complementry')  || this.subIsActive('/profile_contract') ){
+            if (this.subIsActive('/complementry')  || this.subIsActive('/profile')  || this.subIsActive('/profile_contract') ){
                 this.active_el = 1
             }else if(this.subIsActive('/register-request')){
                 this.active_el = 2
@@ -161,7 +161,7 @@
             }
             else if(this.subIsActive('/messages')){
                 this.active_el = 8
-            }else if(this.subIsActive('/privacy_and_policy.vue')){
+            }else if(this.subIsActive('/guide')){
                 this.active_el = 7
             }else{
                 this.active_el = 1

@@ -82657,7 +82657,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['uploadName', 'uploadAccept', 'uploadMinSize', 'uploadSize', 'uploadMultiple', 'uploadDropDirectory', 'uploadAddIndex', 'uploadThread', 'uploadUploadAuto', 'uploadRef'],
+    props: ['uploadName', 'uploadAccept', 'uploadMinSize', 'uploadSize', 'uploadMultiple', 'uploadDropDirectory', 'uploadAddIndex', 'uploadThread', 'uploadUploadAuto', 'uploadRef', 'size'],
     components: {
         FileUpload: __WEBPACK_IMPORTED_MODULE_2_vue_upload_component___default.a
     },
@@ -105762,6 +105762,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.active_el = 5;
             } else if (this.subIsActive('/privacy_and_policy.vue')) {
                 this.active_el = 6;
+            } else if (this.subIsActive('/guide')) {
+                this.active_el = 7;
             } else if (this.subIsActive('/messages')) {
                 this.active_el = 8;
             } else {
@@ -105779,13 +105781,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.active_el = 4;
         } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/') || this.subIsActive('/transaction-report/' + this.$route.params.id)) {
             this.active_el = 5;
-        } else if (this.subIsActive('/privacy_and_policy.vue')) {
+        } else if (this.subIsActive('/privacy_and_policy')) {
             this.active_el = 6;
         } else if (this.subIsActive('/messages')) {
             this.active_el = 8;
+        } else if (this.subIsActive('/guide')) {
+            this.active_el = 7;
         } else {
             this.active_el = 1;
         }
+        console.log(this.active_el);
     },
     created: function created() {
         var _this2 = this;
@@ -105906,7 +105911,7 @@ var render = function() {
             _c(
               "router-link",
               {
-                class: { active: this.active_el === 6 },
+                class: { active: this.active_el === 7 },
                 attrs: { to: { name: "guide" } }
               },
               [
@@ -108415,14 +108420,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.active_el = 6;
             } else if (this.subIsActive('/messages')) {
                 this.active_el = 8;
-            } else if (this.subIsActive('/privacy_and_policy.vue')) {
+            } else if (this.subIsActive('/guide')) {
                 this.active_el = 7;
             } else {
                 this.active_el = 1;
             }
         }
     }, mounted: function mounted() {
-        if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract')) {
+        if (this.subIsActive('/complementry') || this.subIsActive('/profile') || this.subIsActive('/profile_contract')) {
             this.active_el = 1;
         } else if (this.subIsActive('/register-request')) {
             this.active_el = 2;
@@ -108436,7 +108441,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.active_el = 6;
         } else if (this.subIsActive('/messages')) {
             this.active_el = 8;
-        } else if (this.subIsActive('/privacy_and_policy.vue')) {
+        } else if (this.subIsActive('/guide')) {
             this.active_el = 7;
         } else {
             this.active_el = 1;
