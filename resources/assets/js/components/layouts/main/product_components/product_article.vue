@@ -136,8 +136,8 @@
          ></product-user-info>
             <div class="article-contents col-xs-12  col-sm-9 ">
                     <div class="main-image col-xs-12 col-sm-5">
-                        <div class="owl-carousel" v-if="product.photos.length > 0">
-                            <image-viewer-list
+                        <div class="owl-carousel" v-if="product.photos.length > 0" @click="registerComponentStatistics('productImageViewer','click','popUp')">
+                            <image-viewer-list 
                                     v-for="photo in product.photos"
                                     :key="photo.id"
                                     :base="str"
@@ -446,6 +446,12 @@
                 $element.slideToggle("125", "swing");
                 $('.buy_details').not($element).slideUp();
             },
+            registerComponentStatistics:function(categoryName,actionName,labelName){
+                gtag('event',actionName,{
+                    'event_category' : categoryName,
+                    'event_label'    : labelName
+                });
+            }
         },
         mounted() {
             this.init();

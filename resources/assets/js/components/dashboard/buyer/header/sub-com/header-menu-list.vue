@@ -73,8 +73,8 @@
                   </router-link>
               </li>-->
 
-              <li class="list-item  ">
-                  <router-link :class="{'active' : this.active_el === 8}" :to="{ name : 'messages' }">
+              <li class="list-item">
+                  <router-link :class="{'active' : this.active_el === 8}" :to="{ name : 'messages' }" @click="tracker.send('event', 'sidebar', 'click','پیام ها');">
                       <span>پیام ها</span>
                       <i class="fa fa-comment " aria-hidden="true"></i>
                   </router-link>
@@ -121,7 +121,8 @@
                     return this.$route.path.indexOf(path) === 0 // current path starts with this path string
                 });
 
-            }
+            },
+            
         },watch:{
             $route (){
                if (this.subIsActive('/complementry')  || this.subIsActive('/profile_contract') ){

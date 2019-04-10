@@ -42,7 +42,13 @@ class user_controller extends Controller
                  'is_seller' => $user->is_seller,
                  'confirmed_profile_record' => $user_confirmed_profile_record_status, 
 			 	'msg' => 'Login successfull',
-			 ],200);
+			 ],200)
+                 ->withCookie(cookie(
+                        'user_phone', $user->phone, 43200 // 30 days in minutes
+                    ))
+                 ->withCookie(cookie(
+                        'user_password', sha1($user->password), 43200 // 30 days in minutes
+                    ));
 		}
 		 else return response()->json([
 		 	'status' => FALSE,

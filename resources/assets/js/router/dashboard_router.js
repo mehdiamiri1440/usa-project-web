@@ -64,6 +64,7 @@ import indexFooter from '../components/layouts/footer/footer'
 
 Vue.use(Router);
 
+
 export const eventBus = new Vue();
 
 const myRouter =  new Router({
@@ -141,7 +142,7 @@ const myRouter =  new Router({
                 buyer: buyerCompelementry,
             },
         },
-        , {
+        {
             path: '/mobile-accounts',
             name: 'mobileAccounts',
             components: {
@@ -329,7 +330,7 @@ const myRouter =  new Router({
             }
         }
         , {
-            path: '/privacy_and_policy.vue',
+            path: '/guide',
             name: 'guide',
             components: {
                 seller: sellerGuide,
@@ -375,6 +376,22 @@ myRouter.beforeEach((to,from,next) => {
 });
 */
 
+
+myRouter.afterEach(( to, from ) => {
+  
+  if ("ga" in window) {
+    var tracker = ga.getAll()[0];
+//    console.log('size : ' + tracker.length);
+    if (tracker){
+        console.log(to.path);
+        tracker.set('page',to.path);
+        tracker.send('pageview');
+//        tracker.send('event', 'categoryName', 'ActionName','LabelName');
+  }
+  }
+  gtag('set', 'page', to.path);
+  gtag('send', 'pageview');
+});
 
 export default myRouter;
 

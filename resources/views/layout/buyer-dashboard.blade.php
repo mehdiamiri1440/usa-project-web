@@ -40,7 +40,7 @@
 
       var userId = '<?php echo session('user_id');?>';
 
-      gtag('set', {'user_id': '<?php echo session('user_id');?>'});
+      gtag('set', {'userId': userId});
     </script>
 
 

@@ -42,6 +42,7 @@
           var userId = '<?php echo session('user_id');?>';
 
           gtag('set', {'user_id': '<?php echo session('user_id');?>'});
+          //console.log('selle dashboard');
         </script>
 
 
@@ -108,7 +109,9 @@
 
     </div>
     @yield('body_script_tags')
-
+    <script>
+             
+    </script>
     <script src="{{asset('assets/js/custom.js')}}"></script>
     <script src="{{asset('js/app.js')}}"></script>
     <script src="{{asset('assets/js/idleTimer.js')}}"></script>

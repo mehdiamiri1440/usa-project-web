@@ -68,7 +68,9 @@
             setCategoryFilter: function (e) {
                 e.preventDefault;
                 var categoryId = $(e.target).val();
-
+                
+                this.registerComponentStatistics('product-list','sidebarSearch','category');
+                
                 var self = this;
 
                 axios.post('/user/get_product_list')
@@ -99,6 +101,9 @@
             setSubCategoryFilter: function (e) {
                 e.preventDefault;
                 var subCategoryId = $(e.target).val();
+                
+                this.registerComponentStatistics('product-list','sidebarSearch','subCategory');
+                
                 var self = this;
 
                 axios.post('/user/get_product_list')
@@ -123,6 +128,8 @@
             setProvinceFilter: function (e) {
                 e.preventDefault;
                 var provinceId = $(e.target).val();
+                
+                this.registerComponentStatistics('product-list','sidebarSearch','province');
 
                 var self = this;
 
@@ -160,6 +167,9 @@
                 e.preventDefault;
                 var cityId = $(e.target).val();
                 this.loading = true;
+                
+                this.registerComponentStatistics('product-list','sidebarSearch','city');
+                
                 var self = this;
 
                 axios.post('/user/get_product_list')
@@ -235,6 +245,12 @@
                     }
                 })
             },
+            registerComponentStatistics:function(categoryName,actionName,labelName){
+                gtag('event',actionName,{
+                    'event_category' : categoryName,
+                    'event_label'    : labelName
+                });
+            }
         },
         mounted() {
             this.init();

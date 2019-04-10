@@ -592,6 +592,7 @@
                 var searchValueText = this.searchValue;
 
                 if (searchValueText) {
+                    this.registerComponentStatistics('homePage','search',searchValueText);
                     this.searchText = searchValueText;
                 }
                 else {
@@ -667,6 +668,12 @@
                 const bottomOfPage = visible + scrollY >= pageHeight;
                 return bottomOfPage || pageHeight < visible;
             },
+            registerComponentStatistics:function(categoryName,actionName,labelName){
+                gtag('event',actionName,{
+                    'event_category' : categoryName,
+                    'event_label'    : labelName
+                });
+            }
         },
         watch: {
 

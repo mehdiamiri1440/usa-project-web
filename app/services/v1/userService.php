@@ -5,6 +5,7 @@ namespace App\services\v1;
 use App\myuser;
 use phplusir\smsir\Smsir;
 use App\Http\Controllers\sms_controller;
+use App\Http\Controllers\profile_controller;
 
  class userService{
 	 
@@ -44,11 +45,14 @@ use App\Http\Controllers\sms_controller;
          }
          
          $sms_controller_object = new sms_controller();
+         $profile_controller_object = new profile_controller();
          
 		 try{
 			 $user->save();
              
              $sms_controller_object->add_to_customer_club($user->firs_name,$user->last_name,$user->phone);
+             
+             $profile_controller_object ->add_a_confirmed_profile_record_for_user($user);
              
 			 return response()->json([
                  'status' => true,
@@ -90,7 +94,6 @@ use App\Http\Controllers\sms_controller;
 		 
 		return $user;
  	}
-	 
 	 
 	
  }
