@@ -151,6 +151,8 @@
         padding-bottom: 40px;
     }
 
+
+
     .main-content > h4 {
         margin: 30px auto;
     }
@@ -278,7 +280,9 @@
         .main-image {
             padding: 0;
         }
-
+        .main-content > .row {
+            margin:0;
+        }
         .sub-header {
 
             background: #f0f3f6;
