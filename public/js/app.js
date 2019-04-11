@@ -98756,6 +98756,8 @@ var viz = false;
                 photos: []
             },
             searchText: '',
+            provinceId: '',
+            categoryId: '',
             searchValue: this.$route.params.searchText,
             scrolled: false,
             productCountInPage: 6,
@@ -98833,7 +98835,6 @@ var viz = false;
             //              var height = $(document).height();
 
             var self = this;
-
             if (this.searchText == '' && this.provinceId == '' && this.categoryId == '' && this.continueToLoadProducts) {
                 this.loadMoreActive = true;
 
