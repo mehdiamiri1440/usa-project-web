@@ -103,6 +103,7 @@
             'user_full_name',
             'user_name',
             'defultimg',
+            ''
             'current_user'
         ],
         methods:{
@@ -110,9 +111,9 @@
                 if (this.current_user.profile) {
                     e.preventDefault;
                     var event = $(e.target);
-                    
+
                     this.registerComponentStatistics('product','click','request register button');
-                    
+
                     this.errors = '';
 
                     var index = (event.parents('article').index() + 1);
@@ -124,6 +125,7 @@
                 }
                 else {
                     this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
+                    ebentBus.$emit('submitSuccess',this.popUpMsg)
                     $('#myModal2').modal('show');
                 }
 

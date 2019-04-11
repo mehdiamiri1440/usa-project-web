@@ -426,7 +426,7 @@
         <div class="sub-header container-fluid">
 
             <div class="search-box col-sm-4 col-xs-12">
-                <input type="text" placeholder="لطفا محصول مورد نظر خود را جستجو کنید">
+                <input type="text" v-model="searchText" placeholder="لطفا محصول مورد نظر خود را جستجو کنید">
                 <!--    <input type="text" placeholder="لطفا محصول مورد نظر خود را جستجو کنید" v-model="searchText">-->
                 <button><i class="fa-search fa"></i></button>
             </div>
@@ -458,8 +458,8 @@
                                 :defultimg="defultimg"
                                 :str="str"
                                 :loading="loading"
+                                :popUpMsg="popUpMsg"
                         >
-
                         </product-article>
                         <div class="load-more-button" v-if="searchText == '' && continueToLoadProducts == true ">
                             <div class="col-xs-12 col-sm-6 col-sm-offset-3">
@@ -551,6 +551,7 @@
                     photos: [],
                 },
                 searchText: '',
+                searchValue:this.$route.params.searchText,
                 scrolled: false,
                 productCountInPage: 6,
                 productCountInEachLoad: 5,
@@ -593,7 +594,8 @@
             },
             init: function () {
                 var self = this;
-                var searchValueText = this.searchValue;
+                var searchValue = this.searchValue;
+                var searchValueText = searchValue;
 
                 if (searchValueText) {
                     this.registerComponentStatistics('homePage','search',searchValueText);
@@ -625,7 +627,6 @@
 
                 var self = this;
 
-                console.log(this.continueToLoadProducts);
                 if (this.searchText == '' && this.provinceId == '' && this.categoryId == '' && this.continueToLoadProducts) {
                     this.loadMoreActive = true;
 
@@ -713,7 +714,6 @@
 //          this.bottom = this.bottomVisible();
 //            this.feed();
 //        });
-
 
         },
         destroyed() {

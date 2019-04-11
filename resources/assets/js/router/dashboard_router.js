@@ -106,6 +106,13 @@ const myRouter =  new Router({
             },
         },
         {
+            path: '/product-list/:searchText',
+            name: 'productList',
+            components: {
+                layouts: productList,
+            },
+        },
+        {
             path: '/product-view',
             name: 'productView',
             components: {
@@ -378,7 +385,7 @@ myRouter.beforeEach((to,from,next) => {
 
 
 myRouter.afterEach(( to, from ) => {
-  
+
   if ("ga" in window) {
     var tracker = ga.getAll()[0];
 //    console.log('size : ' + tracker.length);

@@ -672,6 +672,12 @@ var myRouter = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
             layouts: __WEBPACK_IMPORTED_MODULE_36__components_layouts_main_product_list___default.a
         }
     }, {
+        path: '/product-list/:searchText',
+        name: 'productList',
+        components: {
+            layouts: __WEBPACK_IMPORTED_MODULE_36__components_layouts_main_product_list___default.a
+        }
+    }, {
         path: '/product-view',
         name: 'productView',
         components: {
@@ -98726,7 +98732,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -98751,6 +98756,7 @@ var viz = false;
                 photos: []
             },
             searchText: '',
+            searchValue: this.$route.params.searchText,
             scrolled: false,
             productCountInPage: 6,
             productCountInEachLoad: 5,
@@ -98795,7 +98801,8 @@ var viz = false;
             var _this = this;
 
             var self = this;
-            var searchValueText = this.searchValue;
+            var searchValue = this.searchValue;
+            var searchValueText = searchValue;
 
             if (searchValueText) {
                 this.registerComponentStatistics('homePage', 'search', searchValueText);
@@ -98827,7 +98834,6 @@ var viz = false;
 
             var self = this;
 
-            console.log(this.continueToLoadProducts);
             if (this.searchText == '' && this.provinceId == '' && this.categoryId == '' && this.continueToLoadProducts) {
                 this.loadMoreActive = true;
 
@@ -98907,7 +98913,6 @@ var viz = false;
         //          this.bottom = this.bottomVisible();
         //            this.feed();
         //        });
-
     },
     destroyed: function destroyed() {
         //window.removeEventListener('scroll', this.handleScroll);
@@ -99611,6 +99616,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.scrollToTheRequestRegisterBox(element);
             } else {
                 this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
+                ebentBus.$emit('submitSuccess', this.popUpMsg);
                 $('#myModal2').modal('show');
             }
         },
@@ -100429,7 +100435,39 @@ var render = function() {
     [
       _vm._m(0),
       _vm._v(" "),
-      _vm._m(1),
+      _c("div", { staticClass: "sub-header container-fluid" }, [
+        _c("div", { staticClass: "search-box col-sm-4 col-xs-12" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.searchText,
+                expression: "searchText"
+              }
+            ],
+            attrs: {
+              type: "text",
+              placeholder: "لطفا محصول مورد نظر خود را جستجو کنید"
+            },
+            domProps: { value: _vm.searchText },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.searchText = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm._m(1)
+        ]),
+        _vm._v(" "),
+        _vm._m(2),
+        _vm._v(" "),
+        _c("div", { staticClass: "space col-sm-3" })
+      ]),
       _vm._v(" "),
       _c("product-aside-categories"),
       _vm._v(" "),
@@ -100568,7 +100606,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("br"),
                 _vm._v(" "),
-                _vm._m(2)
+                _vm._m(3)
               ])
             : _vm.products.length == 0 && _vm.searchText != ""
               ? _c("section", { staticClass: "main-content  col-xs-12 " }, [
@@ -100646,36 +100684,27 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "sub-header container-fluid" }, [
-      _c("div", { staticClass: "search-box col-sm-4 col-xs-12" }, [
-        _c("input", {
-          attrs: {
-            type: "text",
-            placeholder: "لطفا محصول مورد نظر خود را جستجو کنید"
-          }
-        }),
-        _vm._v(" "),
-        _c("button", [_c("i", { staticClass: "fa-search fa" })])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "links-sub-header col-xs-12 col-sm-8 col-md-5" },
-        [
-          _c("ul", { staticClass: "list-inline" }, [
-            _c("li", { staticClass: "list-item active" }, [
-              _c("a", { attrs: { href: "" } }, [
-                _vm._v(
-                  "\n                        لیست محصولات\n                    "
-                )
-              ])
+    return _c("button", [_c("i", { staticClass: "fa-search fa" })])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "links-sub-header col-xs-12 col-sm-8 col-md-5" },
+      [
+        _c("ul", { staticClass: "list-inline" }, [
+          _c("li", { staticClass: "list-item active" }, [
+            _c("a", { attrs: { href: "" } }, [
+              _vm._v(
+                "\n                        لیست محصولات\n                    "
+              )
             ])
           ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "space col-sm-3" })
-    ])
+        ])
+      ]
+    )
   },
   function() {
     var _vm = this
@@ -103854,6 +103883,36 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_router_dashboard_router__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -103941,7 +104000,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 var viz = false;
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            popUpMsg: ''
+        };
+    },
+
     props: ['user_id', 'user_default_image', 'profile_photo', 'user_full_name', 'user_logout_path', 'storage_path', 'login_page_path'], methods: {
         dropdown: function dropdown() {
             $(".profile-list").fadeIn("slow", function () {
@@ -103961,7 +104027,16 @@ var viz = false;
             }
         }
     },
+    mounted: function mounted() {
+        var _this = this;
 
+        __WEBPACK_IMPORTED_MODULE_0__js_router_dashboard_router__["b" /* eventBus */].$on('submitSuccess', function (_ref) {
+            var popUpMsgUserInfo = _ref.popUpMsgUserInfo;
+
+            _this.popUpMsg = popUpMsgUserInfo;
+            console.log(popUpMsgUserInfo);
+        });
+    },
     created: function created() {
         document.addEventListener('click', this.documentClick);
     }
@@ -103975,129 +104050,93 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "navbar container-fluid navbar-fixed-top custom-navbar",
-      attrs: { role: "navigation" }
-    },
-    [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "navbar-header" }, [
-          _vm.user_id != ""
-            ? _c(
-                "div",
-                {
-                  staticClass:
-                    "user-header-mobile hidden-sm hidden-md hidden-lg "
-                },
-                [
-                  _c("div", { staticClass: "profile-menu-header" }, [
-                    _c(
-                      "a",
-                      {
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            _vm.dropdown()
-                          }
-                        }
-                      },
-                      [
-                        _c("div", { staticClass: "image-header-profile" }, [
-                          _vm.profile_photo != ""
-                            ? _c("img", {
-                                attrs: {
-                                  src:
-                                    _vm.storage_path + "/" + _vm.profile_photo
-                                }
-                              })
-                            : _c("img", {
-                                attrs: { src: _vm.user_default_image }
-                              })
-                        ]),
-                        _vm._v(" "),
-                        _c("i", {
-                          staticClass: "fa fa-angle-down",
-                          attrs: { "aria-hidden": "true" }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "profile-list" }, [
-                      _c("ul", { staticClass: "list-unstyled" }, [
-                        _c("li", { staticClass: "list-item" }, [
-                          _c("a", { attrs: { href: "/dashboard/#/profile" } }, [
-                            _vm._v("پروفایل")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "list-item" }, [
-                          _c(
-                            "a",
-                            { attrs: { href: "/dashboard/#/password" } },
-                            [_vm._v("تغییر کلمه عبور")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "list-item" }, [
-                          _c("a", { attrs: { href: _vm.login_page_path } }, [
-                            _vm._v("خروج")
-                          ])
-                        ])
-                      ])
-                    ])
-                  ])
-                ]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _c("a", { staticClass: "navbar-brand test", attrs: { href: "/" } }),
-          _vm._v(" "),
-          _c("p", { staticClass: "logo-des hidden-xs hidden-sm" }, [
-            _vm._v(
-              "\n                اینکوباک | بازارگاه آنلاین دنیای کشاورزی\n            "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "collapse navbar-collapse",
-            attrs: { id: "collapseOne", "aria-expanded": "false" }
-          },
-          [
-            _c("ul", { staticClass: "nav navbar-nav navbar-left" }, [
-              _vm.user_id == ""
-                ? _c("li", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "smoothScroll",
-                        attrs: { href: _vm.login_page_path }
-                      },
-                      [_vm._v("ورود/ثبت نام")]
+  return _c("div", [
+    _c("div", { staticClass: "container" }, [
+      _c(
+        "div",
+        {
+          ref: "myModal",
+          staticClass: "modal fade",
+          attrs: {
+            id: "myModal2",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "myModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-dialog" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "main_popup_content" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("p", { staticClass: "main_par" }, [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.popUpMsg) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn  green_bot",
+                    on: {
+                      click: function($event) {
+                        _vm.redirectToLogin()
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            ورود/ثبت نام\n                        "
                     )
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm._m(1),
-              _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
-              _vm._m(3),
-              _vm._v(" "),
-              _vm._m(4),
-              _vm._v(" "),
-              _vm._m(5),
-              _vm._v(" "),
-              _vm.user_id != ""
-                ? _c("li", { staticClass: "user-header-web hidden-xs" }, [
-                    _c("div", { staticClass: "profile-menu-header " }, [
+                  ]
+                ),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn green_bot ",
+                    attrs: { "data-dismiss": "modal" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            متوجه شدم\n                        "
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "navbar container-fluid navbar-fixed-top custom-navbar",
+        attrs: { role: "navigation" }
+      },
+      [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "navbar-header" }, [
+            _vm.user_id != ""
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "user-header-mobile hidden-sm hidden-md hidden-lg "
+                  },
+                  [
+                    _c("div", { staticClass: "profile-menu-header" }, [
                       _c(
                         "a",
                         {
@@ -104126,11 +104165,7 @@ var render = function() {
                           _c("i", {
                             staticClass: "fa fa-angle-down",
                             attrs: { "aria-hidden": "true" }
-                          }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "name-header-profile" }, [
-                            _vm._v(_vm._s(_vm.user_full_name))
-                          ])
+                          })
                         ]
                       ),
                       _vm._v(" "),
@@ -104160,16 +104195,140 @@ var render = function() {
                         ])
                       ])
                     ])
-                  ])
-                : _vm._e()
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _c("a", { staticClass: "navbar-brand test", attrs: { href: "/" } }),
+            _vm._v(" "),
+            _c("p", { staticClass: "logo-des hidden-xs hidden-sm" }, [
+              _vm._v(
+                "\n                    اینکوباک | بازارگاه آنلاین دنیای کشاورزی\n                "
+              )
             ])
-          ]
-        )
-      ])
-    ]
-  )
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "collapse navbar-collapse",
+              attrs: { id: "collapseOne", "aria-expanded": "false" }
+            },
+            [
+              _c("ul", { staticClass: "nav navbar-nav navbar-left" }, [
+                _vm.user_id == ""
+                  ? _c("li", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "smoothScroll",
+                          attrs: { href: _vm.login_page_path }
+                        },
+                        [_vm._v("ورود/ثبت نام")]
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._m(2),
+                _vm._v(" "),
+                _vm._m(3),
+                _vm._v(" "),
+                _vm._m(4),
+                _vm._v(" "),
+                _vm._m(5),
+                _vm._v(" "),
+                _vm._m(6),
+                _vm._v(" "),
+                _vm.user_id != ""
+                  ? _c("li", { staticClass: "user-header-web hidden-xs" }, [
+                      _c("div", { staticClass: "profile-menu-header " }, [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.dropdown()
+                              }
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "image-header-profile" }, [
+                              _vm.profile_photo != ""
+                                ? _c("img", {
+                                    attrs: {
+                                      src:
+                                        _vm.storage_path +
+                                        "/" +
+                                        _vm.profile_photo
+                                    }
+                                  })
+                                : _c("img", {
+                                    attrs: { src: _vm.user_default_image }
+                                  })
+                            ]),
+                            _vm._v(" "),
+                            _c("i", {
+                              staticClass: "fa fa-angle-down",
+                              attrs: { "aria-hidden": "true" }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "name-header-profile" }, [
+                              _vm._v(_vm._s(_vm.user_full_name))
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "profile-list" }, [
+                          _c("ul", { staticClass: "list-unstyled" }, [
+                            _c("li", { staticClass: "list-item" }, [
+                              _c(
+                                "a",
+                                { attrs: { href: "/dashboard/#/profile" } },
+                                [_vm._v("پروفایل")]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("li", { staticClass: "list-item" }, [
+                              _c(
+                                "a",
+                                { attrs: { href: "/dashboard/#/password" } },
+                                [_vm._v("تغییر کلمه عبور")]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("li", { staticClass: "list-item" }, [
+                              _c(
+                                "a",
+                                { attrs: { href: _vm.login_page_path } },
+                                [_vm._v("خروج")]
+                              )
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
+                  : _vm._e()
+              ])
+            ]
+          )
+        ])
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "#", "data-dismiss": "modal" } }, [
+      _c("i", { staticClass: "fa fa-close" })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -105736,10 +105895,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        /* activate:function(el){
-             this.active_el = el;
-         }*/
-
         subIsActive: function subIsActive(input) {
             var _this = this;
 

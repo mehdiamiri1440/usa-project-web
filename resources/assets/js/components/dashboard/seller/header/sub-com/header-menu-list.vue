@@ -111,10 +111,6 @@
             }
         },
         methods: {
-            /* activate:function(el){
-                 this.active_el = el;
-             }*/
-
             subIsActive(input) {
                 const paths = Array.isArray(input) ? input : [input];
                 return paths.some(path => {
