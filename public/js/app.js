@@ -102850,8 +102850,6 @@ var OwlCarousel = {
             var _this = this;
 
             var self = this;
-
-            var userName = this.getUserName;
             if (this.isDeviceMobile()) {
                 this.copyLinkText = ' اشتراک در واتساپ';
                 this.copyLinkClass = 'fa fa-whatsapp fa-2x';
@@ -102861,7 +102859,7 @@ var OwlCarousel = {
             }
 
             axios.post('/get_user_statistics_by_user_name', {
-                user_name: userName
+                user_name: this.$route.params.user_name
 
             }).then(function (response) {
                 self.profileOwnerStatistics = response.data.statistics;
@@ -102873,7 +102871,7 @@ var OwlCarousel = {
                 return _this.currentUser = response.data;
             });
             axios.post('/load_profile_by_user_name', {
-                user_name: userName
+                user_name: this.$route.params.user_name
             }).then(function (response) {
                 self.profileOwner = response.data;
                 self.addMetaTag();
@@ -102893,9 +102891,8 @@ var OwlCarousel = {
             this.loading = true;
 
             var self = this;
-            var userName = this.getUserName;
             axios.post('/get_product_list_by_user_name', {
-                user_name: userName
+                user_name: this.$route.params.user_name
             }).then(function (response) {
                 self.products = response.data.products;
 
@@ -102913,7 +102910,7 @@ var OwlCarousel = {
             this.profileOwner.profile = '';
 
             axios.post('/load_profile_by_user_name', {
-                user_name: userName
+                user_name: this.$route.params.user_name
             }).then(function (response) {
                 return _this2.profileOwner = response.data;
             }).catch(function (err) {
@@ -102927,7 +102924,6 @@ var OwlCarousel = {
             this.registerComponentStatistics('profileView', 'RefreshProduct', 'refresh product');
 
             var self = this;
-            var userName = this.getUserName;
             axios.post('/refresh_my_product_by_id', {
                 product_id: productId
             }).then(function (response) {
@@ -103008,6 +103004,7 @@ var OwlCarousel = {
 
     },
     mounted: function mounted() {
+
         this.init();
     },
 
@@ -104056,6 +104053,7 @@ var viz = false;
     mounted: function mounted() {
         var _this = this;
 
+        console.log(this.login_page_path);
         __WEBPACK_IMPORTED_MODULE_0__js_router_dashboard_router__["b" /* eventBus */].$on("submitSuccess", function ($event) {
             _this.popUpMsg = $event;
         });

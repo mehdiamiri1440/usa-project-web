@@ -172,7 +172,7 @@
             },
         },
         mounted(){
-
+            console.log(this.login_page_path);
             eventBus.$on("submitSuccess", ($event) => {
                 this.popUpMsg = $event;
             });

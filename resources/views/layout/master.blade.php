@@ -95,7 +95,7 @@
                 user_full_name="{{session('full_name')}}"
                 user_logout_path="{{route('logout')}}"
                 storage_path="{{url('storage/')}}"
-                login_page_path="{{route('login_page')}}"
+                login_page_path="{{route('logout')}}"
         ></header-master-layouts>
         <router-view
                 name="layouts"
