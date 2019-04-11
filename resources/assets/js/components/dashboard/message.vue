@@ -442,7 +442,7 @@
 
                             <div :class="[msg.sender_id == currentUserId ? 'message-send' : 'message-receive']">
                                 {{msg.text}}
-                                <span class="message-chat-date">{{msg.created_at}}
+                                <span class="message-chat-date">{{msg.created_at | moment("jYY/jMM/jDD, h:mm A") }}
                                     <span class="check-items" v-if="msg.sender_id == currentUserId">
                                         <i class="fa fa-check"></i>
                                             <i class="fa fa-check" v-if="msg.is_read"></i>
@@ -509,20 +509,6 @@
                 var self = this;
 
                 this.loadContactList();
-//                tracker.send('event', 'categoryName', 'ActionName','LabelName');
-//                console.log(tracker);
-//                tracker.send("event", "sidebar", "click","پیام ها");
-//                if ("ga" in window) {
-//                    console.log('ga exists');
-////                    var tracker = ga.getAll()[0];
-////                //    console.log('size : ' + tracker.length);
-////                    if (tracker){
-////                        console.log(to.path);
-////                        tracker.set('page',to.path);
-////                        tracker.send('pageview');
-////                //        tracker.send('event', 'categoryName', 'ActionName','LabelName');
-////                  }
-//                  }
             },
             loadContactList: function () {
                 var self = this;
@@ -640,6 +626,21 @@
                         return false;
                      }
                 }
+            },
+            parseDateTime:function(dateTimeString){
+//                var resultMessages = [];
+//                console.log('test');
+//                messages.forEach(function(msg){
+//                    //extract hours and minutes in tmp array
+//                    var tmp = (msg.created_at.split(" "))[1].split(':',2);
+//                    
+//                    msg.created_at = tmp[0] + ":" + tmp[1];
+//                    resultMessages.push(msg);
+//                });
+//                
+//                return resultMessages;
+                
+                
             }
         },
         watch: {
@@ -654,13 +655,15 @@
                             axios.post('/get_last_chat_contact_info_from_session')
                                 .then(function (response) {
                                     var contact = response.data.contact;
-                                    self.contactList.unshift(contact);
-                                    //removing duplicate contacts
-                                    self.contactList = self.contactList.filter((thing, index, self) =>
-                                        index === self.findIndex((t) => (
-                                            t.contact_id === thing.contact_id
-                                        ))
-                                    );
+                                    if (contact != null && self.pageHasBeenReloaded() == false && self.selectedContact == '') {
+                                        self.contactList.unshift(contact);
+                                        //removing duplicate contacts
+                                        self.contactList = self.contactList.filter((thing, index, self) =>
+                                            index === self.findIndex((t) => (
+                                                t.contact_id === thing.contact_id
+                                            ))
+                                        );
+                                    }
 
                                     var text = self.contactNameSearchText.split(' ');
                                     self.contactList = self.contactList.filter(function (contact) {

@@ -446,7 +446,7 @@
 
 
         <product-aside-categories>
-
+            
         </product-aside-categories>
         <main id="main" class="col-xs-12 col-md-9">
                 <section class="main-content col-xs-12" v-if="products.length > 0">

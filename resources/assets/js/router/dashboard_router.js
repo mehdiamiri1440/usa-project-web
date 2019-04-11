@@ -396,8 +396,7 @@ myRouter.afterEach(( to, from ) => {
 //        tracker.send('event', 'categoryName', 'ActionName','LabelName');
   }
   }
-  gtag('set', 'page', to.path);
-  gtag('send', 'pageview');
+  
 });
 
 export default myRouter;

@@ -660,19 +660,15 @@
                     last_name:this.sellOfferDetail.sell_offer_user_info.last_name,
                     profile_photo:this.sellOfferDetail.profile_photo,
                 }
-                console.log(contact);
-                if(this.currentUser){
-                    axios.post('/set_last_chat_contact',contact)
-                        .then(function(response){
-                            window.location.href = '/dashboard/#/messages';
-                        })
-                        .catch(function(e){
-                            alert('Error');
-                        });
-                }
-                else{
-                    alert('ابتدا لاگین کنید');
-                }
+                
+                
+                axios.post('/set_last_chat_contact',contact)
+                    .then(function(response){
+                        window.location.href = '/dashboard/#/messages';
+                    })
+                    .catch(function(e){
+                        alert('Error');
+                    });
             },
         },
         mounted() {

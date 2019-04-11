@@ -22,6 +22,8 @@ class login
             $user_phone = $request->cookie('user_phone');
             $user_hashed_password = $request->cookie('user_password');
             
+            
+            
             if($user_phone && $user_hashed_password){
                 $status = $this->set_user_session($user_phone,$user_hashed_password);
                 
@@ -43,8 +45,10 @@ class login
                                 ->where('password',$user_hashed_password)
                                 ->get()
                                 ->first();
+
         if($user_info){
-            $user_profile_record = profile::where('myuser_id',$user_info['id'])
+            
+            $user_profile_record = profile::where('myuser_id',$user_info->id)
                 ->select('profile_photo')
                 ->get()
                 ->last();        
