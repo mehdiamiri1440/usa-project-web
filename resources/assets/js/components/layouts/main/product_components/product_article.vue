@@ -137,7 +137,7 @@
             <div class="article-contents col-xs-12  col-sm-9 ">
                     <div class="main-image col-xs-12 col-sm-5">
                         <div class="owl-carousel" v-if="product.photos.length > 0" @click="registerComponentStatistics('productImageViewer','click','popUp')">
-                            <image-viewer-list 
+                            <image-viewer-list
                                     v-for="photo in product.photos"
                                     :key="photo.id"
                                     :base="str"
@@ -276,7 +276,6 @@
             'str',
             'loading',
             'loading_img',
-
         ],
 
         data:function(){

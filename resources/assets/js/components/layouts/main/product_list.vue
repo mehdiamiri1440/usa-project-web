@@ -458,7 +458,6 @@
                                 :defultimg="defultimg"
                                 :str="str"
                                 :loading="loading"
-                                :popUpMsg="popUpMsg"
                         >
                         </product-article>
                         <div class="load-more-button" v-if="searchText == '' && continueToLoadProducts == true ">

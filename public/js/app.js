@@ -99498,6 +99498,7 @@ exports.push([module.i, "\n.user-image[data-v-bca32c76] {\n    width: 135px;\n  
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_router_dashboard_router__ = __webpack_require__(3);
 //
 //
 //
@@ -99595,6 +99596,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['profile_photo', 'user_info', 'user_full_name', 'user_name', 'defultimg', 'current_user'],
@@ -99616,7 +99619,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.scrollToTheRequestRegisterBox(element);
             } else {
                 this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
-                ebentBus.$emit('submitSuccess', this.popUpMsg);
+                __WEBPACK_IMPORTED_MODULE_0__js_router_dashboard_router__["b" /* eventBus */].$emit('submitSuccess', this.popUpMsg);
                 $('#myModal2').modal('show');
             }
         },
@@ -103998,6 +104001,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var viz = false;
 
@@ -104030,11 +104055,8 @@ var viz = false;
     mounted: function mounted() {
         var _this = this;
 
-        __WEBPACK_IMPORTED_MODULE_0__js_router_dashboard_router__["b" /* eventBus */].$on('submitSuccess', function (_ref) {
-            var popUpMsgUserInfo = _ref.popUpMsgUserInfo;
-
-            _this.popUpMsg = popUpMsgUserInfo;
-            console.log(popUpMsgUserInfo);
+        __WEBPACK_IMPORTED_MODULE_0__js_router_dashboard_router__["b" /* eventBus */].$on("submitSuccess", function ($event) {
+            _this.popUpMsg = $event;
         });
     },
     created: function created() {
@@ -104058,7 +104080,7 @@ var render = function() {
           ref: "myModal",
           staticClass: "modal fade",
           attrs: {
-            id: "myModal2",
+            id: "myModal",
             tabindex: "-1",
             role: "dialog",
             "aria-labelledby": "myModalLabel",
@@ -104074,7 +104096,54 @@ var render = function() {
                 _c("p", { staticClass: "main_par" }, [
                   _vm._v(
                     "\n                            " +
-                      _vm._s(_vm.popUpMsg) +
+                      _vm._s(this.popUpMsg) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn green_bot ",
+                    attrs: { "data-dismiss": "modal" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            متوجه شدم\n                        "
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "container" }, [
+      _c(
+        "div",
+        {
+          ref: "myModal",
+          staticClass: "modal fade",
+          attrs: {
+            id: "myModal2",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "myModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-dialog" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "main_popup_content" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("p", { staticClass: "main_par" }, [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(this.popUpMsg) +
                       "\n                        "
                   )
                 ]),
@@ -104199,7 +104268,7 @@ var render = function() {
                 )
               : _vm._e(),
             _vm._v(" "),
-            _vm._m(1),
+            _vm._m(2),
             _vm._v(" "),
             _c("a", { staticClass: "navbar-brand test", attrs: { href: "/" } }),
             _vm._v(" "),
@@ -104231,8 +104300,6 @@ var render = function() {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                _vm._m(2),
-                _vm._v(" "),
                 _vm._m(3),
                 _vm._v(" "),
                 _vm._m(4),
@@ -104240,6 +104307,8 @@ var render = function() {
                 _vm._m(5),
                 _vm._v(" "),
                 _vm._m(6),
+                _vm._v(" "),
+                _vm._m(7),
                 _vm._v(" "),
                 _vm.user_id != ""
                   ? _c("li", { staticClass: "user-header-web hidden-xs" }, [
@@ -104321,6 +104390,14 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "#", "data-dismiss": "modal" } }, [
+      _c("i", { staticClass: "fa fa-close" })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

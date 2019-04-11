@@ -1,5 +1,27 @@
 <template>
   <div>
+
+      <div class="container">
+          <div class="modal fade" id="myModal" tabindex="-1" ref="myModal" role="dialog"
+               aria-labelledby="myModalLabel"
+               aria-hidden="true">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="main_popup_content">
+                          <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                          <p class="main_par">
+                              {{this.popUpMsg}}
+                          </p>
+                          <button class="btn green_bot " data-dismiss="modal">
+                              متوجه شدم
+                          </button>
+                      </div>
+                  </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+          </div>
+      </div>
+
+
       <!-- Modal -->
       <div class="container">
           <div class="modal fade" id="myModal2" tabindex="-1" ref="myModal" role="dialog"
@@ -10,7 +32,7 @@
                       <div class="main_popup_content">
                           <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
                           <p class="main_par">
-                              {{popUpMsg}}
+                              {{this.popUpMsg}}
                           </p>
                           <button class="btn  green_bot" @click="redirectToLogin()">
                               ورود/ثبت نام
@@ -150,10 +172,10 @@
             },
         },
         mounted(){
-            eventBus.$on('submitSuccess', ({ popUpMsgUserInfo}) => {
-                this.popUpMsg = popUpMsgUserInfo;
-                console.log(popUpMsgUserInfo);
-            })
+
+            eventBus.$on("submitSuccess", ($event) => {
+                this.popUpMsg = $event;
+            });
         },
         created() {
             document.addEventListener('click', this.documentClick)
