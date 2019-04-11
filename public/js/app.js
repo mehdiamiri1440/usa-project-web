@@ -104057,6 +104057,11 @@ var viz = false;
         __WEBPACK_IMPORTED_MODULE_0__js_router_dashboard_router__["b" /* eventBus */].$on("submitSuccess", function ($event) {
             _this.popUpMsg = $event;
         });
+        $('.nav a').on('click', function () {
+            $('.btn-navbar').click(); //bootstrap 2.x
+            $('.navbar-toggle').click(); //bootstrap 3.x by Richard
+            $('.navbar-toggler').click(); //bootstrap 4.x
+        });
     },
     created: function created() {
         document.addEventListener('click', this.documentClick);
