@@ -1,5 +1,27 @@
 <template>
   <div>
+
+      <div class="container">
+          <div class="modal fade" id="myModal" tabindex="-1" ref="myModal" role="dialog"
+               aria-labelledby="myModalLabel"
+               aria-hidden="true">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="main_popup_content">
+                          <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                          <p class="main_par">
+                              {{this.popUpMsg}}
+                          </p>
+                          <button class="btn green_bot " data-dismiss="modal">
+                              متوجه شدم
+                          </button>
+                      </div>
+                  </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+          </div>
+      </div>
+
+
       <!-- Modal -->
       <div class="container">
           <div class="modal fade" id="myModal2" tabindex="-1" ref="myModal" role="dialog"
@@ -10,7 +32,7 @@
                       <div class="main_popup_content">
                           <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
                           <p class="main_par">
-                              {{popUpMsg}}
+                              {{this.popUpMsg}}
                           </p>
                           <button class="btn  green_bot" @click="redirectToLogin()">
                               ورود/ثبت نام
@@ -145,15 +167,20 @@
                     $('.profile-list').fadeOut("slow");
                     $('.icon-header-list').fadeOut("slow");
                     viz = false;
-
                 }
+
             },
         },
         mounted(){
-            eventBus.$on('submitSuccess', ({ popUpMsgUserInfo}) => {
-                this.popUpMsg = popUpMsgUserInfo;
-                console.log(popUpMsgUserInfo);
-            })
+            console.log(this.login_page_path);
+            eventBus.$on("submitSuccess", ($event) => {
+                this.popUpMsg = $event;
+            });
+            $('.nav a').on('click', function(){
+                $('.btn-navbar').click(); //bootstrap 2.x
+                $('.navbar-toggle').click(); //bootstrap 3.x by Richard
+                $('.navbar-toggler').click(); //bootstrap 4.x
+            });
         },
         created() {
             document.addEventListener('click', this.documentClick)

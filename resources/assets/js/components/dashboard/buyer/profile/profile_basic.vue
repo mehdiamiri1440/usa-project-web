@@ -453,7 +453,7 @@
                         </label>
                         <input type="text" name="address" placeholder="کد پستی"
                                v-model="currentUser.profile.postal_code">
-                        <span v-if="errors.postal_code" class="text-danger">{{ errors.postal_code[0] }}</span>
+                        <span v-if="errors.postal_code" class="text-danger">{{ errors.postal_code[0] }} </span>
                     </div>
                     <div class="col-xs-12 col-sm-6">
                         <label for="company" class="content-lable">

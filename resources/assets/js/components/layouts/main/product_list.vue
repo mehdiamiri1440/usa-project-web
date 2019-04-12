@@ -458,7 +458,6 @@
                                 :defultimg="defultimg"
                                 :str="str"
                                 :loading="loading"
-                                :popUpMsg="popUpMsg"
                         >
                         </product-article>
                         <div class="load-more-button" v-if="searchText == '' && continueToLoadProducts == true ">
@@ -551,6 +550,8 @@
                     photos: [],
                 },
                 searchText: '',
+                provinceId : '',
+                categoryId : '',
                 searchValue:this.$route.params.searchText,
                 scrolled: false,
                 productCountInPage: 6,
@@ -626,7 +627,6 @@
 //              var height = $(document).height();
 
                 var self = this;
-
                 if (this.searchText == '' && this.provinceId == '' && this.categoryId == '' && this.continueToLoadProducts) {
                     this.loadMoreActive = true;
 

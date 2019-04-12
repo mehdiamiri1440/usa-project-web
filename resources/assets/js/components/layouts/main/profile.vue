@@ -532,8 +532,6 @@
             init: function () {
 
                 var self = this;
-
-                var userName = this.getUserName;
                 if (this.isDeviceMobile()) {
                     this.copyLinkText = ' اشتراک در واتساپ';
                     this.copyLinkClass = 'fa fa-whatsapp fa-2x';
@@ -544,7 +542,7 @@
                 }
 
                 axios.post('/get_user_statistics_by_user_name', {
-                    user_name: userName,
+                    user_name: this.$route.params.user_name,
 
                 })
                     .then(function (response) {
@@ -559,7 +557,7 @@
                     .then(
                         response => (this.currentUser = response.data));
                 axios.post('/load_profile_by_user_name', {
-                    user_name: userName
+                    user_name: this.$route.params.user_name
                 })
                     .then(function (response) {
                         self.profileOwner = response.data;
@@ -581,9 +579,8 @@
                 this.loading = true;
 
                 var self = this;
-                var userName = this.getUserName;
                 axios.post('/get_product_list_by_user_name', {
-                    user_name: userName
+                    user_name: this.$route.params.user_name
                 }).then(function (response) {
                     self.products = response.data.products;
 
@@ -600,7 +597,7 @@
                 this.profileOwner.profile = '';
 
                 axios.post('/load_profile_by_user_name', {
-                    user_name: userName
+                    user_name: this.$route.params.user_name
                 })
                     .then(response => (this.profileOwner = response.data))
                     .catch(function (err) {
@@ -615,7 +612,6 @@
                 this.registerComponentStatistics('profileView','RefreshProduct','refresh product');
 
                 var self = this;
-                var userName = this.getUserName;
                 axios.post('/refresh_my_product_by_id', {
                     product_id: productId
                 })
@@ -713,6 +709,7 @@
 
         },
         mounted() {
+
             this.init();
 
         },

@@ -96,6 +96,8 @@
 
 </style>
 <script>
+    import {eventBus} from "../../../../../js/router/dashboard_router";
+
     export default {
         props:[
             'profile_photo',
@@ -124,7 +126,7 @@
                 }
                 else {
                     this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
-                    ebentBus.$emit('submitSuccess',this.popUpMsg)
+                    eventBus.$emit('submitSuccess',this.popUpMsg);
                     $('#myModal2').modal('show');
                 }
 
