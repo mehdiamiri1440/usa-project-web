@@ -48,6 +48,9 @@
 
 <script>
     export default {
+        props:[
+            'productsInfo'
+        ],
         data(){
             return{
                 categoryList: '',
@@ -58,6 +61,7 @@
                 subCategoryId: '',
                 provinceId: '',
                 cityId: '',
+                products: this.productsInfo,
             }
         },
         methods:{
@@ -68,9 +72,9 @@
             setCategoryFilter: function (e) {
                 e.preventDefault;
                 var categoryId = $(e.target).val();
-                
+
                 this.registerComponentStatistics('product-list','sidebarSearch','category');
-                
+
                 var self = this;
 
                 axios.post('/user/get_product_list')
@@ -87,6 +91,7 @@
                                 return product.main.category_id == categoryId;
                             }
                         });
+                        self.$emit('productsToParent', self.products);
                     });
 
                 axios.post('/get_category_list', {
@@ -101,9 +106,9 @@
             setSubCategoryFilter: function (e) {
                 e.preventDefault;
                 var subCategoryId = $(e.target).val();
-                
+
                 this.registerComponentStatistics('product-list','sidebarSearch','subCategory');
-                
+
                 var self = this;
 
                 axios.post('/user/get_product_list')
@@ -128,7 +133,7 @@
             setProvinceFilter: function (e) {
                 e.preventDefault;
                 var provinceId = $(e.target).val();
-                
+
                 this.registerComponentStatistics('product-list','sidebarSearch','province');
 
                 var self = this;
@@ -137,7 +142,6 @@
                     .then(function (response) {
 
                         self.products = '';
-
                         self.products = response.data.products.filter(function (product) {
 
                             if (self.subCategoryId != '') {
@@ -152,6 +156,7 @@
                                 return product.main.province_id == provinceId;
                             }
                         });
+                        self.$emit('products', products);
                     });
 
                 axios.post('/location/get_location_info', {
@@ -167,9 +172,9 @@
                 e.preventDefault;
                 var cityId = $(e.target).val();
                 this.loading = true;
-                
+
                 this.registerComponentStatistics('product-list','sidebarSearch','city');
-                
+
                 var self = this;
 
                 axios.post('/user/get_product_list')

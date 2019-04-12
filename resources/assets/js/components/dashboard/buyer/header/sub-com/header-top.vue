@@ -219,7 +219,6 @@
                 }
             },
         },
-
         created() {
             document.addEventListener('click', this.documentClick)
         },

@@ -445,7 +445,7 @@
         </div>
 
 
-        <product-aside-categories>
+        <product-aside-categories :productsInfo="products" v-on:productsToParent="filterProducts($event)">
 
         </product-aside-categories>
         <main id="main" class="col-xs-12 col-md-9">
@@ -574,8 +574,9 @@
                 var packType = $('article:nth-of-type(' + index + ') .buy_details input#pack-type');
                 var description = $('article:nth-of-type(' + index + ') .buy_details textarea#description');
             },
-
-
+            filterProducts:function(productsFilter){
+              this.products = productsFilter;
+            },
             dropdown: function () {
                 $(".profile-list").fadeIn("slow", function () {
                     viz = true;
