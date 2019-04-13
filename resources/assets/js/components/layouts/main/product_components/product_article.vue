@@ -441,6 +441,7 @@
                     })
                     .catch(function (err) {
                         self.errors = '';
+                        console.log('error');
                         self.errors = err.response.data.errors;
                     });
             },
