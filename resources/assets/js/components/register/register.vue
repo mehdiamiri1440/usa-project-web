@@ -38,7 +38,7 @@
                             <div class="col-sm-12 input_contents">
                                 <span class="after_icon numbers"></span>
                                 <input class="pad number" type="text" name="name" v-model="step1.phone"
-                                       placeholder="09123456789">
+                                       placeholder="شماره موبایل">
                             </div>
                             <span class="sub-des col-xs-12">
                                پس از وارد کردن شماره موبایل ما یک کد برای شما ارسال میکنیم تا از صحت شماره وارد شده اطمینان حاصل کنیم
@@ -77,7 +77,7 @@
                             <div class="col-xs-12 input_contents">
                                 <span class="after_icon search-icon"></span>
                                 <input class="pad " type="text" name="name" v-model="step2.verification_code"
-                                       placeholder="0101">
+                                       placeholder="کد تایید">
                             </div>
                             <span v-if="errors.verification_code" class="error_msg">
                                     {{errors.verification_code[0]}}
@@ -146,20 +146,25 @@
                                     {{errors.last_name[0]}}
                                 </span>
                             </div>
-                            <div class="col-sm-6 input_contents">
+                            <div class="col-sm-12 input_contents">
                                 <span class="after_icon search-icon"></span>
                                 <input class="pad" type="text" name="city" v-model="step3.user_name"
                                        placeholder="نام کاربری به انگلیسی">
-                                <span v-if="errors.user_name" class="error_msg">
+                                <span v-if="errors.user_name[0]" class="error_msg">
                                     {{errors.user_name[0]}}
                                 </span>
+                                <span v-else class="error_msg">
+                                    بدون فاصله
+                                </span>
                             </div>
+<!--
                             <div class="col-sm-6">
                                 <input type="text" name="city" v-model="step3.national_code" placeholder="کد ملی(اختیاری)">
                                 <span v-if="errors.national_code" class="error_msg">
                                     {{errors.national_code[0]}}
                                 </span>
                             </div>
+-->
                             <div class="col-sm-6">
                                 <!--<input type="text" name="city" v-model="step3.province" placeholder="استان">-->
                                 <select  v-on:change="setProvinceName($event)">
@@ -253,30 +258,22 @@
                                 <span v-if="errors.category_id" class="error_msg">
                                     {{errors.category_id[0]}}
                                 </span>
-                                <label>
-                                    قوانین
-                                </label>
-                                <textarea disabled>اینکوباک، بستر تجاری آنلاین است که از طریق آن هر کاربر ثبت شده می تواند برای برقراری و حفظ، توسعه کسب و کار با دیگر تولید کنندگان و خریداران همکاری کند. شرایط و مقررات تشکیل شده در این صفحه مشخص می کند که چگونه باید وب سایت و خدمات مورد استفاده قرار گیرد و نهایتا روابط فی مابین اینکوباک و کاربران (ثبت شده یا ثبت نشده) آن را تنظیم میکند. لطفاً شرایط و مقررات حاضر را به دقت مطالعه کنید و در صورتی که قوانین وب سایت برای شما قابل قبول نیست استفاده خود را از وب سایت و یا خدمات اینکوباک به هر نحو متوقف کنید.
-در استفاده از خدمات وب سایت اینکوباک فرض بر این است که عملاً این شرایط و مقررات و تغییرات بعدی آن را پذیرفته اید، در این صورت هیچ ادعایی ناشی از استفاده مداوم شما از این سایت و ادعای عدم مطالعه یا آگاهی شما از این مقررات و تغییرات بعدی آن مسموع نخواهد بود.
-شرایط درج آگهی در سامانه اینکوباک:
-● آگهی ها باید زیر مجموعه حوزه کشاورزی و دسته بندی های موجود در وبسایت باشند.
-● عدم مغایرت با قوانین جمهوری اسلامی ایران، ناقض حریم خصوصی افراد ، هرگونه توهین به ادیان رسمی کشور، آداب، رسوم، قومیت‌ها، لهجه‌ها و گویش‌های مختلف.
-● عدم درج کالاهای ممنوعه مانند : ماریجوانا و مواد مخدر گیاهی و یا بذر و دانه آنها.
-● عدم درخواست کمک‌های نقدی یا پیش‌پرداخت برای معامله‌های از راه دور ، درج شماره حساب در متن آگهی.
-● نبود جملات نادرست از نظر املائی یا نگارشی در آگهی.
-به منظور بهبود فرآیند تأیید و انتشار آگهی‌ها، سامانه اینکوباک ممکن است در مواردی بر اساس قوانین، متن یا آگهی شما را به طور جزئی تغییر دهد.
-مسئولیت استفاده از آگهی‌های این سایت بر عهده شماست و اینکوباک هیچ تعهدى در قبال خسارات مستقیم، اتفاقى، تبعى، غیرمستقیم و کیفرى، ناشى از دسترسى و استفاده شما از این سایت را ندارد.
-اینکوباک هیچ قرارداد، تعهدنامه یا سندی را با آگهی‌دهندگان حقیقی یا حقوقی منعقد نمی‌کند. کاربران اینکوباک در هر لحظه قادر به ویرایش آگهی خود هستند، بنابراین اینکوباک، هیچ‌گونه مسئولیتی را در قبال هر نوع آگهی درج شده در سایت نمی‌پذیرد و صرفاً مطالب درج شده توسط کاربران را نمایش می‌دهد.
-مسئولیت استفاده از هرگونه متن، پیام، توضیح، اطلاعات، عکس، مشخصات تماس و موارد مشابه که به اینکوباک ارسال می‌شود یا در آن قرار می‌گیرد، شامل بازتولید، افشاء، مخابره، نشر و پخش آن بر عهده فرستنده اطلاعات است.
-                        </textarea>
+                                
+<!--
                                 <div class="rules col-sm-12">
                                     با <span class="roules-check-inside">قوانین و شرایط</span>
                                     موافقم<input type="checkbox" v-model='step4.rules' value="1">
                                     <i class="fa fa-check"></i>
                                 </div>
+-->
+                                <br/>
                                 <div class="buttons">
                                     <button class="green_but"  type="button" @click="submitForm">ثبت نهایی</button>
                                 </div>
+                                <br/>
+                                <p class="text-center">
+                                    با تشکر ازحُسن انتخاب شما
+                                </p>
                             </div>
 
                         </div>
@@ -447,12 +444,12 @@
 
                 this.checkStep4();
 
-                if(this.step4.rules != 1){
-                    this.popUpMsg = 'پذیرش قوانین ثبت آگهی الزامی است.';
-
-                    $('#myModal').modal('show');
-                    return ;
-                }
+//                if(this.step4.rules != 1){
+//                    this.popUpMsg = 'پذیرش قوانین ثبت آگهی الزامی است.';
+//
+//                    $('#myModal').modal('show');
+//                    return ;
+//                }
 
                 var object = {
                     phone:this.toLatinNumbers(this.step1.phone),

@@ -105,7 +105,7 @@
             'user_full_name',
             'user_name',
             'defultimg',
-            'current_user',
+            'current_user'
         ],
         methods:{
             openRequestRegisterBox: function (e) {

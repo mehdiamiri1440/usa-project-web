@@ -446,13 +446,14 @@
                         <input type="text" name="address" placeholder="آدرس" v-model="currentUser.profile.address">
                         <span v-if="errors.address" class="text-danger">{{ errors.address[0] }}</span>
                     </div>
+<!--
                     <div class="col-xs-12 col-sm-6">
                         <label for="company" class="content-lable">
                             کد پستی(اختیاری):
                         </label>
                         <input type="text" name="address" placeholder="کد پستی"
                                v-model="currentUser.profile.postal_code">
-                        <span v-if="errors.postal_code" class="text-danger">{{ errors.postal_code[0] }}</span>
+                        <span v-if="errors.postal_code" class="text-danger">{{ errors.postal_code[0] }} </span>
                     </div>
                     <div class="col-xs-12 col-sm-6">
                         <label for="company" class="content-lable">
@@ -462,6 +463,7 @@
                                v-model="currentUser.profile.shaba_code">
                         <span v-if="errors.shaba_code" class="text-danger">{{ errors.shaba_code[0] }}</span>
                     </div>
+-->
                     <div class="col-xs-12">
                         <input type="button" class="green-bot" name="submit" value="ثبت تغییرات"
                                v-on:click="RegisterBasicProfileInfo">

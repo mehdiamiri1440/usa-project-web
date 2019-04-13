@@ -170,6 +170,9 @@
                 }
 
             },
+            redirectToLogin:function(){
+                window.location.href = '/login';
+            }
         },
         mounted(){
             eventBus.$on("submitSuccess", ($event) => {

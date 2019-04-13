@@ -7,7 +7,7 @@ import Axios from 'axios'
 
 Vue.prototype.$http = Axios;
 Vue.config.productionTip = false;
-
+Vue.use(require('vue-jalali-moment'));
 
 import AppSeller from './components/AppSeller'
 import AppBuyer from './components/AppBuyer'

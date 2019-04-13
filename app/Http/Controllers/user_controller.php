@@ -47,7 +47,7 @@ class user_controller extends Controller
                         'user_phone', $user->phone, 43200 // 30 days in minutes
                     ))
                  ->withCookie(cookie(
-                        'user_password', sha1($user->password), 43200 // 30 days in minutes
+                        'user_password', $user->password, 43200 // 30 days in minutes
                     ));
 		}
 		 else return response()->json([

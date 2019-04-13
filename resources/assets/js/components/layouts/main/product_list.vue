@@ -444,7 +444,6 @@
 
         </div>
 
-
         <product-aside-categories :productsInfo="products" v-on:productsToParent="filterProducts($event)">
 
         </product-aside-categories>

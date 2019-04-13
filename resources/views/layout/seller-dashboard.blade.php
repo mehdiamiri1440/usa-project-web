@@ -33,16 +33,15 @@
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
         <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'UA-129398000-1');
-
-          var userId = '<?php echo session('user_id');?>';
-
-          gtag('set', {'user_id': '<?php echo session('user_id');?>'});
-          //console.log('selle dashboard');
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              var userId = "<?php echo session('user_id');?>";
+//              gtag('config', 'UA-129398000-1',{
+//                  'user_id' : "<?php echo session('user_id');?>"
+//              });
+            
+              gtag('config', 'UA-129398000-1');
         </script>
 
 

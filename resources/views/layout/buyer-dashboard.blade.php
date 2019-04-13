@@ -18,7 +18,7 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/kamadatepicker.min.css')}}">
-      <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/dashboard/master/style.css')}}">
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
@@ -32,15 +32,14 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-129398000-1');
-
-      var userId = '<?php echo session('user_id');?>';
-
-      gtag('set', {'userId': userId});
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          var userId = "<?php echo session('user_id');?>";
+          gtag('config', 'UA-129398000-1');
+//          gtag('config', 'UA-129398000-1',{
+//              'user_id' : "<?php echo session('user_id');?>"
+//          });
     </script>
 
 
@@ -103,11 +102,7 @@
 
 
     <script src="{{asset('assets/js/custom.js')}}"></script>
-    <script>
-        var userId = '<?php echo session('user_id'); ?>';
-    </script>
     <script src="{{asset('js/app.js')}}"></script>
-    
     <script src="{{asset('assets/js/idleTimer.js')}}"></script>
     <script>
         $(document).ready(function(){
