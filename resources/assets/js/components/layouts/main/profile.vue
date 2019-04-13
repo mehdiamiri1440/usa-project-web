@@ -94,7 +94,7 @@
                                         </a>
                                     </div>
 
-                                    <a href="#" class="green_bot " @click="copyProfileLinkToClipBoard"><i
+                                    <a href="#" class="green_bot " @click.prevent="copyProfileLinkToClipBoard"><i
                                             class="fa fa-whatsapp"></i> اشتراک در واتس آپ </a>
                                 </div>
                             </div>
@@ -329,7 +329,9 @@
 </template>
 
 <script>
-    import productArticle from './product_components/product_article'
+    import productArticle from './product_components/product_article';
+    import {eventBus} from "../../../../js/router/dashboard_router";
+    
     var viz = false;
     var PopupImage = {
         data: function () {
@@ -618,20 +620,23 @@
                     .then(function (response) {
                         if (response.data.status == true) {
                             self.popUpMsg = 'محصول شما بروز رسانی شد و در صدر لیست محصولات قرار گرفت.';
+                            eventBus.$emit('submitSuccess',self.popUpMsg);
                             $('#myModal').modal('show');
                         }
                         else {
                             self.popUpMsg = 'هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.';
+                            eventBus.$emit('submitSuccess',self.popUpMsg);
                             $('#myModal').modal('show');
                         }
                     })
                     .catch(function (err) {
                         self.popUpMsg = 'هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.';
+                        eventBus.$emit('submitSuccess',self.popUpMsg);
                         $('#myModal').modal('show');
                     });
             },
             copyProfileLinkToClipBoard: function () {
-
+                console.log('copy');
                 this.registerComponentStatistics('profileView','CopyProfileLink','click on copy profile link');
 
                 if (this.isDeviceMobile()) {
@@ -655,6 +660,7 @@
                     document.body.removeChild(input);
                     if (result) {
                         this.popUpMsg = 'آدرس پروفایل کاربر کپی شد.';
+                        eventBus.$emit('submitSuccess',this.popUpMsg);
                         $('#myModal').modal('show');
                     }
                 }

@@ -921,6 +921,10 @@ Route::post('/broadcastAuth',function(Request $request){
     
  });
 
+Route::get('/migrate_users',[
+   'uses' => 'profile_controller@migrate_users' 
+]);
+
 
 
 

@@ -573,6 +573,71 @@ class profile_controller extends Controller
              return 'فروشنده';
          }
      }
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    
+    public function migrate_users()
+    {
+        $users = myuser::all();
+        
+        $users->each(function($user){
+            $user_unconfirmed_profile_records = profile::where('myuser_id',$user->id)
+                                            ->where('confirmed',false)
+                                            ->get();
+            
+            if($user_unconfirmed_profile_records->count() > 0){
+                $user_unconfirmed_profile_records->each(function($profile_record) use($user){
+                    $this->add_a_confirmed_profile_record_for_user_migration($user,$profile_record);
+                });
+            }
+            else{
+                $this->add_a_confirmed_profile_record_for_user_migration($user);
+            }
+            
+        });
+    }
+    
+    protected function add_a_confirmed_profile_record_for_user_migration($user,$profile_record = null)
+    {
+        if($profile_record == null){
+             $profile_record = new profile();
+
+             $profile_record->public_phone = $user->phone;
+             $profile_record->is_company = false;
+             $profile_record->confirmed = true;
+             $profile_record->myuser_id = $user->id;
+             $profile_record->address = $user->province . ' - ' . $user->city ;
+
+             $user_role = $this->get_user_role_string($user);
+
+             $profile_record->description = "من $user_role محصولات کشاورزی در سامانه ی اینکوباک هستم. برای ارتباط با من رو دکمه ی ارسال پیام کلیک کنید. خوشحال می شوم اگر پروفایل من را با دوستان خود به اشتراک بگذارید.";
+
+             $profile_record->save();
+
+        }
+        else{
+
+             $profile_record->public_phone = $user->phone;
+             $profile_record->is_company = false;
+             $profile_record->confirmed = true;
+             $profile_record->myuser_id = $user->id;
+             $profile_record->address = $user->province . ' - ' . $user->city ;
+
+             $user_role = $this->get_user_role_string($user);
+
+             $profile_record->description = "من $user_role محصولات کشاورزی در سامانه ی اینکوباک هستم. برای ارتباط با من رو دکمه ی ارسال پیام کلیک کنید. خوشحال می شوم اگر پروفایل من را با دوستان خود به اشتراک بگذارید.";
+
+             $profile_record->save();
+            
+            $this->remove_related_profile_media_photos($profile_record->id);
+        }
+         
+    }
+    
+    protected function remove_related_profile_media_photos($profile_id)
+    {
+        profile_media::where('profile_id',$profile_id)
+                        ->delete();
+    }
     
     
 }

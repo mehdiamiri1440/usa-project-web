@@ -170,9 +170,11 @@
                 }
 
             },
+            redirectToLogin:function(){
+                window.location.href = '/login';
+            }
         },
         mounted(){
-            console.log(this.login_page_path);
             eventBus.$on("submitSuccess", ($event) => {
                 this.popUpMsg = $event;
             });

@@ -136,8 +136,8 @@
          ></product-user-info>
             <div class="article-contents col-xs-12  col-sm-9 ">
                     <div class="main-image col-xs-12 col-sm-5">
-                        <div class="owl-carousel" v-if="product.photos.length > 0" @click="registerComponentStatistics('productImageViewer','click','popUp')">
-                            <image-viewer-list
+                        <div class="owl-carousel" v-if="product.photos.length > 0">
+                            <image-viewer-list @click="registerComponentStatistics('productImageViewer','click','popUp')"
                                     v-for="photo in product.photos"
                                     :key="photo.id"
                                     :base="str"
@@ -161,7 +161,7 @@
                         <p>توضیحات: <span>{{product.main.description}}</span></p>
                     </div>
                     <div class="create_buy_mobile hidden-sm hidden-md hidden-lg" >
-                        <a class="green_bot" href="#" @click="openRequestRegisterBox($event)">
+                        <a class="green_bot" href="#" @click.prevent="openRequestRegisterBox($event)">
                             درخواست خرید
                         </a>
 
@@ -211,6 +211,8 @@
     </div>
 </template>
 <script>
+    import {eventBus} from "../../../../../js/router/dashboard_router";
+    
     var PopupImage =  {
         data:function(){
             return {
@@ -348,6 +350,7 @@
                 }
                 else {
                     this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
+                    eventBus.$emit('submitSuccess',this.popUpMsg);
                     $('#myModal2').modal('show');
                 }
 
@@ -410,6 +413,7 @@
                     })
                     .catch(function (e) {
                         self.popUpMsg = 'حساب کاربری شما از نوع خریداران نیست!';
+                        eventBus.$emit('submitSuccess',this.popUpMsg);
                         $('#myModal').modal('show');
 
                         self.submiting = false;
@@ -425,6 +429,7 @@
                 axios.post('/user/add_buyAd', request)
                     .then(function (response) {
                         self.popUpMsg = 'درخواست خرید شما ثبت شد!';
+                        eventBus.$emit('submitSuccess',this.popUpMsg);
                         $('#myModal').modal('show');
 
                         axios.post('/register_buyer_request_for_the_product', {
