@@ -434,7 +434,7 @@
               var self = this;
 
               if(this.buyAd.rules != true){
-                  this.popUpMsg = 'ابتدا تیک با قوانین موافق هستم را بزنید.';
+                  self.popUpMsg = 'ابتدا تیک با قوانین موافق هستم را بزنید.';
                   eventBus.$emit('submitSuccess',self.popUpMsg);
                   $('#myModal').modal('show');
               }
@@ -449,10 +449,9 @@
                       .then(function(response){
                           if(response.status == 201){
                               self.disableSubmit = true;
-
                               self.popUpMsg = 'درخواست شما با موفقیت ثبت شد';
-                              $('#myModal').modal('show');
                               eventBus.$emit('submitSuccess', self.popUpMsg);
+                              $('#myModal').modal('show');
                               eventBus.$emit('submitingEvent', false);
 
                               setTimeout(function () {

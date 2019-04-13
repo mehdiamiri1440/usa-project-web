@@ -23,7 +23,9 @@
     footer, header, menu, nav, section {
         display: block;
     }
-
+    a,a:focus,a:active,a:visited,input,input:focus,input:active{
+        outline: none;
+    }
     body {
         line-height: 1.1;
         font-family: IRANSans, sans-serif;
@@ -739,8 +741,8 @@
                     .then(function (response) {
                         if (response.status == 200) {
                             self.submiting = false;
+                            eventBus.$emit('submitSuccess',self.popUpMsg);
                             self.popUpMsg = 'تغییرات با موفقیت اعمال شد';
-
                             $('#myModal').modal('show');
                         }
                         self.submiting = false;

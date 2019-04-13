@@ -655,11 +655,13 @@
                     }
                     else {
                         this.popUpMsg = 'حساب کاربری شما از نوع خریدار نیست.';
+                        eventBus.$emit('submitSuccess',this.popUpMsg);
                         $('#myModal').modal('show');
                     }
                 }
                 else {
                     this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
+                    eventBus.$emit('submitSuccess',this.popUpMsg);
                     $('#myModal2').modal('show');
                 }
             },

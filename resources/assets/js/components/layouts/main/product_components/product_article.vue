@@ -212,7 +212,7 @@
 </template>
 <script>
     import {eventBus} from "../../../../../js/router/dashboard_router";
-    
+
     var PopupImage =  {
         data:function(){
             return {
@@ -282,6 +282,7 @@
 
         data:function(){
             return{
+                submiting:false,
                 errors: '',
                 currentUser: {
                     profile: '',
@@ -363,6 +364,8 @@
                 e.preventDefault;
                 var event = $(e.target);
 
+
+
                 this.submiting = true;
 
                 this.errors = '';
@@ -404,8 +407,8 @@
                         }
                         else {
                             self.popUpMsg = 'شما قبلا درخواست خرید این محصول را ثبت کرده اید!';
+                            eventBus.$emit('submitSuccess',self.popUpMsg);
                             $('#myModal').modal('show');
-
                             self.submiting = false;
 
                             return false;
@@ -413,7 +416,7 @@
                     })
                     .catch(function (e) {
                         self.popUpMsg = 'حساب کاربری شما از نوع خریداران نیست!';
-                        eventBus.$emit('submitSuccess',this.popUpMsg);
+                        eventBus.$emit('submitSuccess',self.popUpMsg);
                         $('#myModal').modal('show');
 
                         self.submiting = false;
@@ -429,7 +432,7 @@
                 axios.post('/user/add_buyAd', request)
                     .then(function (response) {
                         self.popUpMsg = 'درخواست خرید شما ثبت شد!';
-                        eventBus.$emit('submitSuccess',this.popUpMsg);
+                        eventBus.$emit('submitSuccess',self.popUpMsg);
                         $('#myModal').modal('show');
 
                         axios.post('/register_buyer_request_for_the_product', {

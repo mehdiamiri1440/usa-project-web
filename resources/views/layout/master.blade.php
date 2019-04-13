@@ -49,31 +49,6 @@
 <div id="appBuyer"></div>
 <div id="appSeller"></div>
 <div id="appLayouts">
-
-    <!-- Modal -->
-    <div class="container">
-        <div class="modal fade" id="myModal" tabindex="-1" ref="myModal" role="dialog"
-             aria-labelledby="myModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="main_popup_content">
-                        <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
-                        <p class="main_par">
-                            ali
-                            {{--@{{popUpMsg}}--}}
-                        </p>
-                        <button class="btn green_bot " data-dismiss="modal">
-                            متوجه شدم
-                        </button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div>
-    </div>
-
-    <!-- /.modal -->
-
     <!--loader-->
 
     {{--<div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">--}}
