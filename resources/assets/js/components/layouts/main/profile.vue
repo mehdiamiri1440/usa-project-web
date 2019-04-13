@@ -648,7 +648,7 @@
 
                     linkElement.click();
 
-                    document.body.removeChild(input);
+                    document.body.removeChild(linkElement);
 
                 }
                 else {
