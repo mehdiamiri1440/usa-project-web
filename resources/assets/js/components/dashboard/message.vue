@@ -366,6 +366,9 @@
     }
 
     @media screen and (max-width: 768px) {
+        .default-main-contents{
+            display: none;
+        }
         .main-content {
             padding: 110px 0 0;
         }
@@ -571,7 +574,10 @@
                 this.contactList.splice(index,1,contact);
             },
             scrollToEnd: function () {
-                $(".chat-page ul").animate({scrollTop: $(".chat-page ul").prop("scrollHeight")}, 0)
+                setTimeout(function(){
+                    $(".chat-page ul").animate({scrollTop: $(".chat-page ul").prop("scrollHeight")}, 500);
+                    console.log('scrol is run');
+                }, 500);
             },
             sendMessage: function () {
                 var self = this;
@@ -635,14 +641,14 @@
 //                messages.forEach(function(msg){
 //                    //extract hours and minutes in tmp array
 //                    var tmp = (msg.created_at.split(" "))[1].split(':',2);
-//                    
+//
 //                    msg.created_at = tmp[0] + ":" + tmp[1];
 //                    resultMessages.push(msg);
 //                });
-//                
+//
 //                return resultMessages;
-                
-                
+
+
             }
         },
         watch: {
