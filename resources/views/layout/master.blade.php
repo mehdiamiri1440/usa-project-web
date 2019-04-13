@@ -71,6 +71,7 @@
                 user_logout_path="{{route('logout')}}"
                 storage_path="{{url('storage/')}}"
                 login_page_path="{{route('logout')}}"
+                loading="{{asset('assets/img/gif/prload.gif')}}"
         ></header-master-layouts>
         <router-view
                 name="layouts"

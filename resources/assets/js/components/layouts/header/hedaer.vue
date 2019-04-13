@@ -1,6 +1,11 @@
 <template>
   <div>
-
+      <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
+      <div class="main-loader">
+          <img :src="loading">
+          <p dir="rtl">کمی صبر کنید...</p>
+          </div>
+      </div>
       <div class="container">
           <div class="modal fade" id="myModal" tabindex="-1" ref="myModal" role="dialog"
                aria-labelledby="myModalLabel"
@@ -140,7 +145,8 @@
     export default {
         data(){
           return{
-              popUpMsg:''
+              popUpMsg:'',
+              submiting:''
           }
         },
         props:[
@@ -150,7 +156,8 @@
             'user_full_name',
             'user_logout_path',
             'storage_path',
-            'login_page_path'
+            'login_page_path',
+            'loading'
         ], methods: {
             dropdown: function () {
                 $(".profile-list").fadeIn("slow", function () {

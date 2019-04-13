@@ -94,7 +94,7 @@
                                         </a>
                                     </div>
 
-                                    <a href="#" class="green_bot " @click.prevent="copyProfileLinkToClipBoard"><i
+                                    <a :href='"https://incobac.com/master/#/profile/" + this.profileOwner.user_info.user_name' class="green_bot " @click.prevent="copyProfileLinkToClipBoard"><i
                                             class="fa fa-whatsapp"></i> اشتراک در واتس آپ </a>
                                 </div>
                             </div>
@@ -331,7 +331,7 @@
 <script>
     import productArticle from './product_components/product_article';
     import {eventBus} from "../../../../js/router/dashboard_router";
-    
+
     var viz = false;
     var PopupImage = {
         data: function () {
@@ -642,13 +642,16 @@
                 if (this.isDeviceMobile()) {
 
                     var linkElement = document.createElement('a');
-                    linkElement.setAttribute('href', 'whatsapp://send?text=' + 'https://incobac.com/master/#/profile/' + this.profileOwner.user_info.user_name);
+                    var Message = "https://incobac.com/master/#/profile/" + this.profileOwner.user_info.user_name;
+                    var messageToWhatsApp = encodeURIComponent(Message);
+                    var url = "whatsapp://send?text=" + messageToWhatsApp;
+                    linkElement.setAttribute('href', url);
                     linkElement.setAttribute('data-action', 'share/whatsapp/share');
                     document.body.appendChild(linkElement);
 
                     linkElement.click();
 
-                    document.body.removeChild(input);
+                    document.body.removeChild(linkElement);
 
                 }
                 else {

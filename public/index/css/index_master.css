@@ -151,9 +151,8 @@ footer {
 .custom-navbar .navbar-brand {
     width: 155px;
     text-align: center;
-    margin: 0 auto;
+    margin: 7px auto;
     display: inline-block;
-    height: 75px;
     background-size: contain;
 }
 
@@ -294,7 +293,6 @@ footer {
     .custom-navbar.top-nav-collapse {
         background: #ffffff;
         box-shadow: 0 2px 8px 0 rgba(50, 50, 50, 0.04);
-        padding: 0;
     }
 
     .test {
