@@ -95,7 +95,7 @@ var vm = new Vue({
             search:function(){
                 if(this.mainSearchBoxText != ''){
                     //redirect to product-list with
-                    window.location.href = '/product-list/' + this.mainSearchBoxText;
+                    window.location.href = 'master/#/product-list/' + this.mainSearchBoxText;
                 }
             },
         },

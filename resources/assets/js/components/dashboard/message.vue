@@ -427,7 +427,9 @@
                 <div class="message-contact-title">
                     <div class="contact-title-contents  pull-right">
                         <div class="message-contact-title-img">
-                            <img :src="str + '/' + selectedContact.profile_photo" alt="">
+                            <img v-if="selectedContact.profile_photo" :src="str + '/' + selectedContact.profile_photo"
+                                 :alt="selectedContact.first_name[0]">
+                            <img v-else :src="defimgitem">
                         </div>
                         <span>{{selectedContact.first_name + ' ' + selectedContact.last_name}}</span>
                     </div>
