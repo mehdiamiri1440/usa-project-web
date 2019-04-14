@@ -124,7 +124,7 @@
 
         <article class="main-content-item" v-for="(product,productIndex) in products"
                  :key="product.main.id">
-
+            
          <product-user-info
                  :profile_photo="product.profile_info.profile_photo"
                  :user_info="product.user_info"
