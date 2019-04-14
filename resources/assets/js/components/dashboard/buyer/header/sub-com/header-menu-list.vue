@@ -1,20 +1,14 @@
 <style>
     .custom-badge{
         position: absolute;
-
         left: 20px;
-
         top: 3px;
-
-        background: #00d614;
-
+        background: #e41c38;
         height: 25px;
-
         width: 25px;
-
         border-radius: 50px;
-
         padding: 6px;
+        color: #fff;
     }
     .sub-header a.router-link-exact-active {
         color: #313942;
@@ -93,7 +87,7 @@
               <li class="list-item">
                   <router-link :class="{'active' : this.active_el === 8}" :to="{ name : 'messages' }" @click="tracker.send('event', 'sidebar', 'click','پیام ها');">
                       <span>پیام ها</span>
-                      <span class="custom-badge">12</span>
+<!--                      <span class="custom-badge">12</span>-->
                       <i class="fa fa-comment " aria-hidden="true"></i>
                   </router-link>
               </li>
@@ -126,13 +120,15 @@
         ],
         data(){
             return{
-                active_el:0
+                active_el:0,
+                unreadMessageCount:''
             }
         },
         methods:{
            /* activate:function(el){
                 this.active_el = el;
             }*/
+            
             subIsActive(input) {
                 const paths = Array.isArray(input) ? input : [input];
                 return paths.some(path => {

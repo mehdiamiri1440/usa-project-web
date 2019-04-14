@@ -463,22 +463,20 @@
                             <div class="col-xs-12 col-sm-6 col-sm-offset-3">
                                <div class="row">
                                    <a href="#" class="btn btn-loader hidden-xs" @click.prevent="feed()">
-                                       <div class="btn-content">
-<span>                                   مشاهده محصولات بیشتر
+                                       <div  class="btn-content">
+<span v-show="!loadMoreActive">                                   مشاهده محصولات بیشتر
 </span>
-                                           <span class="fa fa-plus-circle"></span>
-                                           <img v-show="loadMoreActive" :src="loading_img"
-                                                style="width:200px;height:200px">
+                                           <span v-show="!loadMoreActive" class="fa fa-plus-circle"></span>
+                                           <img v-show="loadMoreActive" :src="loading_img">
                                        </div>
                                    </a>
                                    <a href="#" class="btn btn-loader hidden-sm hidden-md hidden-lg" @click.prevent="feed()">
                                        <div class="btn-content">
-                                    <span>
+                                    <span v-show="!loadMoreActive">
                                         بیشتر
                                     </span>
-                                           <span class="fa fa-plus-circle"></span>
-                                           <img v-show="loadMoreActive" :src="loading_img"
-                                                style="width:200px;height:200px">
+                                           <span v-show="!loadMoreActive" class="fa fa-plus-circle"></span>
+                                           <img v-show="loadMoreActive" :src="loading_img">
 
                                        </div>
                                    </a>
@@ -517,15 +515,12 @@
                     </div>
                     <br/>
                 </section>
-                <section class="loading_images  col-xs-12" v-else-if="loadMoreActive == true">
+                <section class="loading_images  col-xs-12" v-else-if="loadMoreActive == false">
                     <img :src="loading_img" style="width:200px;height:200px">
-
                 </section>
                 <section class="loading_images  col-xs-12" v-else>
-                    <img :src="loading_img" style="width:200px;height:200px">
+                    <img :src="loading_img" >
                 </section>
-
-
         </main>
 
 
