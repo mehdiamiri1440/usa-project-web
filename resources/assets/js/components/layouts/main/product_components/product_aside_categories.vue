@@ -68,6 +68,8 @@
             init:function(){
                 axios.post('/get_category_list')
                     .then(response => (this.categoryList = response.data.categories));
+                axios.post('/location/get_location_info')
+                    .then(response => (this.provinceList = response.data.provinces));
             },
             setCategoryFilter: function (e) {
                 e.preventDefault;
@@ -125,6 +127,8 @@
                                 return product.main.sub_category_id == subCategoryId;
                             }
                         });
+                        self.$emit('productsToParent', self.products);
+
                     });
 
                 this.subCategoryId = subCategoryId;
@@ -156,7 +160,7 @@
                                 return product.main.province_id == provinceId;
                             }
                         });
-                        self.$emit('products', products);
+                        self.$emit('productsToParent', self.products);
                     });
 
                 axios.post('/location/get_location_info', {
@@ -195,6 +199,7 @@
                                 return product.main.city_id == cityId;
                             }
                         });
+                        self.$emit('productsToParent', self.products);
                     });
 
                 this.cityId = cityId;

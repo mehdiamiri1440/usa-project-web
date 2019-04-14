@@ -448,9 +448,9 @@
 
         </product-aside-categories>
         <main id="main" class="col-xs-12 col-md-9">
+
                 <section class="main-content col-xs-12" v-if="products.length > 0">
                     <div class="row">
-
                         <product-article
                                 :products="products"
                                 :loading_img="loading_img"
@@ -498,6 +498,16 @@
                     </div>
                 </section>
                 <section class="main-content  col-xs-12 " v-else-if="products.length == 0 && searchText != '' ">
+                    <p></p>
+                    <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+                    <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+                    <br/>
+                    <div class="text-center">
+                        <a class="green_bot col-xs-4 " @click="registerRequestInSearchNotFoundCase()">درخواست خرید</a>
+                    </div>
+                    <br/>
+                </section>
+                <section class="main-content  col-xs-12 " v-else-if="products.length == 0 && searchText == '' ">
                     <p></p>
                     <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
                     <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
@@ -618,8 +628,6 @@
                 axios.post('/user/profile_info')
                     .then(response => (this.currentUser = response.data));
 
-                axios.post('/location/get_location_info')
-                    .then(response => (this.provinceList = response.data.provinces));
             },
 
             feed() {

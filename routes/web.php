@@ -519,32 +519,32 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'instant_transaction_controller@get_terminated_instant_transaction_info',
         'as' => 'get_terminated_instant_transaction_info',
     ]);
-    
+
     Route::post('/messanger/send_message',[
         'uses' => 'message_controller@send_message',
         'as' => 'send_message',
     ]);
-    
+
     Route::post('/get_contact_list',[
         'uses' => 'message_controller@get_current_user_contact_list',
         'as'   => 'get_current_user_contact_list'
     ]);
-    
+
     Route::post('/get_total_unread_messages_for_current_user',[
         'uses' => 'message_controller@get_total_unread_messages_for_current_user',
         'as' => 'message_controller@get_total_unread_messages_for_current_user'
     ]);
-    
+
     Route::post('/get_user_chat_history',[
         'uses' => 'message_controller@get_user_chat_history',
         'as'   => 'get_user_chat_history'
     ]);
-    
+
     Route::post('/set_last_chat_contact',[
         'uses' => 'message_controller@set_last_chat_contact',
         'as' => 'set_last_chat_contact'
     ]);
-    
+
     Route::post('/get_last_chat_contact_info_from_session',[
         'uses' => 'message_controller@get_last_chat_contact_info_from_session',
         'as' => 'get_last_chat_contact_info_from_session'
@@ -575,7 +575,7 @@ Route::get('/logout',function(){
 
     Session::flush();
     Session::save();
-    
+
     $cookie = \Cookie::forget('user_phone');
     $cookie = \Cookie::forget('user_password');
 //    response('view')->withCookie($cookie);
@@ -822,7 +822,7 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
         'uses' => 'admin_panel\inspectors\admin_farmer_controller@get_farmer_product_list',
         'as' => 'admin_panel_farmer_product_list'
     ]);
-    
+
 });
 
 
@@ -899,11 +899,11 @@ Route::any('/external-url-payment-callback',[
 
 Route::get('/event',function(){
     $msg = 'this is a test';
-    
-    event(new newMessage($msg)); 
+
+    event(new newMessage($msg));
 });
 
-    
+
 Route::post('/broadcastAuth',function(Request $request){
 
      $options = [
@@ -916,15 +916,15 @@ Route::post('/broadcastAuth',function(Request $request){
      $temp =  $pusher->socket_auth($_POST['channel_name'], $_POST['socket_id']);
 
      return response()->json([
-        "auth" => json_decode($temp)->auth 
+        "auth" => json_decode($temp)->auth
      ]);
 
  });
 
-    
+
 
 //Route::get('/migrate_users',[
-//   'uses' => 'profile_controller@migrate_users' 
+//   'uses' => 'profile_controller@migrate_users'
 //]);
 
 
