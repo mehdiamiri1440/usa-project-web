@@ -140,7 +140,7 @@
                             <image-viewer-list @click="registerComponentStatistics('productImageViewer','click','popUp')"
                                     v-for="photo in product.photos"
                                     :key="photo.id"
-                                    :base="str"
+                                    :base="str + '/'"
                                     :img="photo.file_path">
                             </image-viewer-list>
                         </div>
