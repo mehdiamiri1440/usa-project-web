@@ -2,6 +2,7 @@
     <html lang="fa">
     <head>
         <meta charset="UTF-8">
+        <link rel="icon" href="{{asset('assets/img/logo-Inco-mobile.png')}}">
         <title>اینکوباک | بازارگاه کشاورزی</title>
         <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
         <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
@@ -40,7 +41,7 @@
 //              gtag('config', 'UA-129398000-1',{
 //                  'user_id' : "<?php echo session('user_id');?>"
 //              });
-            
+
               gtag('config', 'UA-129398000-1');
         </script>
 
@@ -109,7 +110,7 @@
     </div>
     @yield('body_script_tags')
     <script>
-             
+
     </script>
     <script src="{{asset('assets/js/custom.js')}}"></script>
     <script src="{{asset('js/app.js')}}"></script>

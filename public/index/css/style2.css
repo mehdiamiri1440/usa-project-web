@@ -160,9 +160,9 @@ footer {
 }
 
 .custom-navbar .navbar-brand {
-    width: 155px;
+    width: 135px;
     text-align: center;
-    margin: 7px auto;
+    margin: 10px auto;
     display: inline-block;
 
     background-size: contain;
@@ -1577,7 +1577,7 @@ img.image-blur:hover {
     .user-header-mobile {
         display: block;
         float: left;
-        margin-left: 50px;
+        margin-left: 30px;
     }
 
     .user-header-web {
@@ -1590,7 +1590,7 @@ img.image-blur:hover {
 
     .custom-navbar .navbar-brand {
         display: block;
-        margin: 0 auto;
+        margin: 8px auto;
         float: none;
     }
 

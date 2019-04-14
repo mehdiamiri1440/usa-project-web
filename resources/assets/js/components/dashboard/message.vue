@@ -514,6 +514,13 @@
                 var self = this;
 
                 this.loadContactList();
+                
+//                window.onhashchange = function() {
+//
+//                    if(self.selectedContact){
+//                        window.location.href = "/dashboard/#/messages";
+//                    }
+//                }
             },
             loadContactList: function () {
                 var self = this;
@@ -576,7 +583,6 @@
             scrollToEnd: function () {
                 setTimeout(function(){
                     $(".chat-page ul").animate({scrollTop: $(".chat-page ul").prop("scrollHeight")}, 500);
-                    console.log('scrol is run');
                 }, 500);
             },
             sendMessage: function () {
@@ -636,20 +642,24 @@
                 }
             },
             parseDateTime:function(dateTimeString){
-//                var resultMessages = [];
-//                console.log('test');
-//                messages.forEach(function(msg){
-//                    //extract hours and minutes in tmp array
-//                    var tmp = (msg.created_at.split(" "))[1].split(':',2);
-//
-//                    msg.created_at = tmp[0] + ":" + tmp[1];
-//                    resultMessages.push(msg);
-//                });
-//
-//                return resultMessages;
-
-
-            }
+                //
+            },
+            isDeviceMobile: function () {
+                if (navigator.userAgent.match(/Android/i)
+                    || navigator.userAgent.match(/webOS/i)
+                    || navigator.userAgent.match(/iPhone/i)
+                    || navigator.userAgent.match(/iPad/i)
+                    || navigator.userAgent.match(/iPod/i)
+                    || navigator.userAgent.match(/BlackBerry/i)
+                    || navigator.userAgent.match(/Windows Phone/i)
+                ) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            },
+            
         },
         watch: {
             contactNameSearchText: function () {
@@ -710,17 +720,15 @@
             var self = this;
 
             if ("gtag" in window) {
-              console.log('selle dashboard');
                 gtag("event","gtag testing",{'event_category':'test','event_lable':'testing'});
              }
 
             if(Push.Permission.has() == false){
                 Push.Permission.request(function(){}, function(){});
             }
-
+            
             Echo.private('testChannel.' + userId)
                 .listen('newMessage', (e) => {
-                    console.log('new Message!');
                     var senderId = e.new_message.sender_id;
                     //update contact list
                     self.loadContactList();
@@ -729,7 +737,8 @@
                         if (self.currentContactUserId == senderId) {
 
                             self.chatMessages.push(e.new_message);
-
+                            self.scrollToEnd();
+                            
                             if(self.isComponentActive == false){
                                 self.pushNotification("پیام جدید",e.new_message.text,'/dashboard/#/messages');
                             }

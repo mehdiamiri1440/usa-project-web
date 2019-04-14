@@ -425,6 +425,12 @@
     }
 
     @media screen and (max-width: 768px) {
+        .mobile-header .green-bot {
+            margin: 15px 0 0;
+        }
+        .mobile-header ul a {
+            padding: 15px 20px;
+        }
         .image-content-post, .contents-post {
             width: 100%;
             float: none;

@@ -7,6 +7,7 @@
     <meta name="description" content="@yield('meta_description')">
     <meta name="keywords" content="@yield('meta_keywords')">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="{{asset('assets/img/logo-Inco-mobile.png')}}">
 
     <!-- site title -->
     <title>@yield('title') </title>

@@ -373,11 +373,11 @@
             <div class="img-profile col-md-3">
                 <div class="image-input">
                     <div v-if="currentUser.profile.profile_photo">
-                        <img :src="str + '/' + currentUser.profile.profile_photo" id="blah"
+                        <img :src="str + '/' + currentUser.profile.profile_photo" id="image-preview"
                              alt="تصویر پروفایل">
                     </div>
                     <div v-else>
-                        <img :src="defultimg" align="تصویر پروفایل">
+                        <img :src="defultimg" align="تصویر پروفایل" id="image-preview">
                     </div>
                     <div class="submit">
                         <input type="file" id="imgInp" ref="profilePhoto">
@@ -614,7 +614,7 @@
             function show_image_preview(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
-                    var image = $('#blah');
+                    var image = $('#image-preview');
                     var icon_profile = $('#icon-pro');
                     reader.onload = function (e) {
                         image.attr('src', e.target.result);
@@ -627,7 +627,7 @@
             }
 
             function image_checked() {
-                var image = $('#blah');
+                var image = $('#image-preview');
                 var icon_profile = $('#icon-pro');
                 if (image.attr('src') != "") {
                     image.css('display', 'inline');

@@ -7,6 +7,7 @@
     <meta name="description" content="Responsive Personal One Page Portfolio">
     <meta name="keywords" content="Responsive, Personal, One Page Portfolio, Freelancers, Template">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="{{asset('assets/img/logo-Inco-mobile.png')}}">
 
     <!-- site title -->
     <title>اینکوباک | بازارگاه کشاورزی</title>

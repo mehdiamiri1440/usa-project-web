@@ -7,6 +7,8 @@
     <meta name="description" content="خرید و فروش مستقیم محصولات کشاورزی">
     <meta name="keywords" content="محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,اینکوباک">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="{{asset('assets/img/logo-Inco-mobile.png')}}">
+
     <title>اینکوباک | بازارگاه کشاورزی </title>
     <meta name="csrf-token" content="{{csrf_token()}}">
     <script>

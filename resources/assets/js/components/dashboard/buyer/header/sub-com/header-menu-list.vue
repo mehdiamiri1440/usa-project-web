@@ -1,4 +1,21 @@
 <style>
+    .custom-badge{
+        position: absolute;
+
+        left: 20px;
+
+        top: 3px;
+
+        background: #00d614;
+
+        height: 25px;
+
+        width: 25px;
+
+        border-radius: 50px;
+
+        padding: 6px;
+    }
     .sub-header a.router-link-exact-active {
         color: #313942;
     }
@@ -76,6 +93,7 @@
               <li class="list-item">
                   <router-link :class="{'active' : this.active_el === 8}" :to="{ name : 'messages' }" @click="tracker.send('event', 'sidebar', 'click','پیام ها');">
                       <span>پیام ها</span>
+                      <span class="custom-badge">12</span>
                       <i class="fa fa-comment " aria-hidden="true"></i>
                   </router-link>
               </li>
