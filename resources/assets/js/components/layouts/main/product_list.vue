@@ -450,7 +450,6 @@
         <main id="main" class="col-xs-12 col-md-9">
                 <section class="main-content col-xs-12" v-if="products.length > 0">
                     <div class="row">
-
                         <product-article
                                 :products="products"
                                 :loading_img="loading_img"
