@@ -914,11 +914,6 @@ Route::post('/broadcastAuth',function(Request $request){
      $temp =  $pusher->socket_auth($_POST['channel_name'], $_POST['socket_id']);
      return $temp;
     
-    return response()->json([
-        'auth' => 'sdfsdf',
-        
-    ]);
-    
  });
 
 Route::get('/migrate_users',[

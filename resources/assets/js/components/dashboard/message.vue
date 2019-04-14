@@ -583,7 +583,6 @@
             scrollToEnd: function () {
                 setTimeout(function(){
                     $(".chat-page ul").animate({scrollTop: $(".chat-page ul").prop("scrollHeight")}, 500);
-                    console.log('scrol is run');
                 }, 500);
             },
             sendMessage: function () {
@@ -738,7 +737,8 @@
                         if (self.currentContactUserId == senderId) {
 
                             self.chatMessages.push(e.new_message);
-
+                            self.scrollToEnd();
+                            
                             if(self.isComponentActive == false){
                                 self.pushNotification("پیام جدید",e.new_message.text,'/dashboard/#/messages');
                             }
