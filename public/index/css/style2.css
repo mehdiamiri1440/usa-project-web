@@ -162,9 +162,9 @@ footer {
 .custom-navbar .navbar-brand {
     width: 155px;
     text-align: center;
-    margin: 0 auto;
+    margin: 7px auto;
     display: inline-block;
-    height: 75px;
+
     background-size: contain;
 }
 
