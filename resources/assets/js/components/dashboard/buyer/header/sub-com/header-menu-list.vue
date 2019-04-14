@@ -1,20 +1,14 @@
 <style>
     .custom-badge{
         position: absolute;
-
         left: 20px;
-
         top: 3px;
-
-        background: #00d614;
-
+        background: #e41c38;
         height: 25px;
-
         width: 25px;
-
         border-radius: 50px;
-
         padding: 6px;
+        color: #fff;
     }
     .sub-header a.router-link-exact-active {
         color: #313942;
