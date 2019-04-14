@@ -14,6 +14,7 @@ use App\Http\Middleware\login;
 use App\Http\Middleware\admin_login;
 use App\Http\Middleware\profile_confirmation;
 use App\Http\Middleware\profile_and_contract_confirmation;
+use App\Http\Middleware\cors;
 use Illuminate\Cookie\CookieJar;
 use App\myuser;
 use App\profile;
@@ -902,23 +903,27 @@ Route::get('/event',function(){
     event(new newMessage($msg)); 
 });
 
-Route::post('/broadcastAuth',function(Request $request){
-     $options = [
-         'cluster' => env('PUSHER_APP_CLUSTER'),
-         'encrypted' => true
-     ];
+Route::group(['middleware' => [login::class]],function(){
     
-//     $pusher = new Pusher(env('PUSHER_APP_KEY'),env('PUSHER_APP_SECRET'),env('PUSHER_APP_ID'),$options);
-     $pusher = new Pusher('f04fb3210cdacabb3540','a2ffc348382adf93ea19','710900',array('cluster' => 'ap1'));
-     $temp = [];
-     $temp =  $pusher->socket_auth($_POST['channel_name'], $_POST['socket_id']);
-     return $temp;
-    
- });
+    Route::post('/broadcastAuth',function(Request $request){
 
-Route::get('/migrate_users',[
-   'uses' => 'profile_controller@migrate_users' 
-]);
+         $options = [
+             'cluster' => env('PUSHER_APP_CLUSTER'),
+             'encrypted' => true
+         ];
+
+         $pusher = new Pusher('f04fb3210cdacabb3540','a2ffc348382adf93ea19','710900',array('cluster' => 'ap1'));
+         $temp = [];
+         $temp =  $pusher->socket_auth($_POST['channel_name'], $_POST['socket_id']);
+         return $temp;
+
+     });
+});
+    
+
+//Route::get('/migrate_users',[
+//   'uses' => 'profile_controller@migrate_users' 
+//]);
 
 
 
