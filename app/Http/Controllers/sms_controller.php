@@ -232,4 +232,17 @@ class sms_controller extends Controller
         }
         else return false;
     }
+    
+    public function send_notify_sms_to_phone_number($msg_array,$phone_number)
+    {
+        $final_msg = $this->create_text_message($msg_array);
+        
+        try{
+            Smsir::sendToCustomerClub($final_msg,$phone_number);
+            return $phone_number;
+        }
+        catch(\Exception $e){
+            //
+        }
+    }
 }

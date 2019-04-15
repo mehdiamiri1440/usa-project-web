@@ -5,6 +5,8 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+use App\jobs\sendNewMessageSMSNotification;
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -24,8 +26,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $send_sms_notification_for_new_unread_messages_job = (new sendNewMessageSMSNotification())
+            ->onQueue('sms');
+        
+        $schedule->job($send_sms_notification_for_new_unread_messages_job)
+            ->hourly();
     }
 
     /**

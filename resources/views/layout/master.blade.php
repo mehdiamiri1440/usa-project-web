@@ -33,6 +33,7 @@
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
+<!--
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() {
@@ -43,6 +44,7 @@
 
         gtag('config', 'UA-129398000-1');
     </script>
+-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>

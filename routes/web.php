@@ -21,6 +21,9 @@ use App\profile;
 
 use App\Events\newMessage;
 
+use App\Jobs\sendNewMessageSMSNotification;
+use App\Jobs\sendSMS;
+
 
 /*Route::get('/pv', function(){
     return view('layout.master');
@@ -926,6 +929,10 @@ Route::post('/broadcastAuth',function(Request $request){
 //Route::get('/migrate_users',[
 //   'uses' => 'profile_controller@migrate_users'
 //]);
+
+Route::get('/testt',function(){
+    sendNewMessageSMSNotification::dispatch()->onQueue('sms');
+});
 
 
 
