@@ -23,7 +23,9 @@
     footer, header, menu, nav, section {
         display: block;
     }
-
+    a,a:focus,a:active,a:visited,input,input:focus,input:active{
+        outline: none;
+    }
     body {
         line-height: 1.1;
         font-family: IRANSans, sans-serif;
@@ -73,17 +75,6 @@
         width: 70%;
     }
 
-    #main {
-        background: #fff !important;
-    }
-
-    .profile-menu-header {
-        float: left;
-    }
-     .profile-menu-header a {
-        color: #7f8c9b;
-        margin: 5px;
-    }
     .logo_hide {
         display: none;
     }
@@ -194,14 +185,14 @@
 
     .header-menu a {
         color: #b1b1b1;
-        padding: 10px 20px;
+        padding: 5px 20px;
         display: inline-block;
         position: relative;
         width: 100%;
     }
 
     .header-menu {
-        padding: 0;
+        padding:0;
     }
 
     .header-menu a:hover {
@@ -251,18 +242,18 @@
         margin: 9px auto;
     }
 
-    input[type="text"], select, input[type="button"], textarea, input[type="password"] {
+    input[type="text"], select, input[type="button"], textarea {
         width: 100% !important;
     }
 
-    input[type="text"], select, textarea, input[type="password"] {
+    input[type="text"], select, textarea {
         background: #eff3f6;
         border: 1px solid #cfcfcf;
         border-radius: 3px;
         width: 100% !important;
     }
 
-    input[type="text"], textarea, input[type="password"] {
+    input[type="text"], textarea {
         padding: 13px 15px;
         width: 100% !important;
     }
@@ -277,6 +268,7 @@
 
     .right-menu-header {
         position: relative;
+        padding: 6px 16px;
     }
 
     .right-menu-header li ul a {
@@ -316,15 +308,7 @@
         z-index: -1;
         display: none;
     }
-
     /*end style right header*/
-
-    /*custom*/
-    .profile-list a {
-        width: 100%;
-        display: inline-block;
-        color: #3c3c3c;
-    }
 
     /*loader*/
 
@@ -372,13 +356,20 @@
     .loader-wrapper {
         display: none;
     }
-    .profile-list li {
-        margin: 5px;
+    span.min{
+        display: none;
     }
     .choose-file {
         background: #fff;
     }
-    @media screen and (max-width: 992px) {
+    @media screen and (max-width: 994px) {
+        .content-header{
+            display: none;
+        }
+        .img-profile {
+            padding-top: 20px;
+        }
+
         .right-header.desktop-header {
             display: none;
         }
@@ -416,11 +407,6 @@
             display: block;
         }
 
-        .kind_user > div, .kind_activity > div {
-            float: none;
-
-        }
-
         .img-profile .submit {
             position: relative;
             width: 100%;
@@ -440,7 +426,7 @@
 
     @media screen and (max-width: 768px) {
         .mobile-header .green-bot {
-           margin-bottom:0;
+            margin: 15px 0 0;
         }
         .mobile-header ul a {
             padding: 15px 20px;
@@ -450,6 +436,9 @@
             float: none;
             margin: 10px 0;
             padding: 0;
+        }
+        #step1 .main_buttons {
+            text-align: center !important;
         }
 
         .name-header-profile {
@@ -463,20 +452,43 @@
     }
 
     @media screen and (max-width: 555px) {
+        span.min{
+            display: inherit;
+        }
+        span.full{
+            display: none;
+        }
+        .right-menu-header {
+            padding: 6px;
+            border-right: 1px solid #eff3f6;
+        }
+        .profile-menu-header  .user_name{
+            display:none;
+        }
         .content-header {
             display: none;
+        }
+        .right-menu-header .green-bot {
+            padding: 10px 15px;
         }
 
     }
 
     @media screen and (max-width: 345px) {
         .sub-header a {
-            font-size: 12px !important;
-            padding: 16px 13px !important;
-        }
+            font-size: 10px;
 
+        }
+        .show-header button {
+            padding: 19px 26px 19px 19px;
+        }
+        .right-menu-header {
+            padding: 6px ;
+        }
         .sub-header {
+
             bottom: -44px;
+
         }
     }
 

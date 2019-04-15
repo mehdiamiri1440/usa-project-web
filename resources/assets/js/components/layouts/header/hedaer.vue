@@ -73,10 +73,10 @@
                           <div class="profile-list">
                               <ul class="list-unstyled">
                                   <li class="list-item">
-                                      <a :href="'/dashboard/#/profile'">پروفایل</a>
+                                      <a :href="'/dashboard#/profile'">پروفایل</a>
                                   </li>
                                   <li class="list-item">
-                                      <a :href="'/dashboard/#/password'">تغییر کلمه عبور</a>
+                                      <a :href="'/dashboard#/password'">تغییر کلمه عبور</a>
                                   </li>
                                   <li class="list-item"><a :href="login_page_path">خروج</a></li>
                               </ul>
@@ -105,7 +105,7 @@
                       <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
                       <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
                       <li><a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
-                      <li><a href="/master/#/product-list" class="smoothScroll">لیست محصولات </a></li>
+                      <li><a href="/master#/product-list" class="smoothScroll">لیست محصولات </a></li>
 
 
 
@@ -123,10 +123,10 @@
                               <div class="profile-list">
                                   <ul class="list-unstyled">
                                       <li class="list-item">
-                                          <a :href="'/dashboard/#/profile'">پروفایل</a>
+                                          <a :href="'/dashboard#/profile'">پروفایل</a>
                                       </li>
                                       <li class="list-item">
-                                          <a :href="'/dashboard/#/password'">تغییر کلمه عبور</a>
+                                          <a :href="'/dashboard#/password'">تغییر کلمه عبور</a>
                                       </li>
                                       <li class="list-item"><a :href="login_page_path">خروج</a></li>
                                   </ul>
@@ -185,14 +185,26 @@
             eventBus.$on("submitSuccess", ($event) => {
                 this.popUpMsg = $event;
             });
-            $('.nav a').on('click', function(){
-                $('.btn-navbar').click(); //bootstrap 2.x
-                $('.navbar-toggle').click(); //bootstrap 3.x by Richard
-                $('.navbar-toggler').click(); //bootstrap 4.x
-            });
+            // jQuery
+            function jqUpdateSize(){
+                // Get the dimensions of the viewport
+                var width = $(window).width();
+                if(width < 767){
+                    $('#collapseOne a.smoothScroll').on('click', function(){
+                        $('.btn-navbar').click(); //bootstrap 2.x
+                        $('.navbar-toggle').click(); //bootstrap 3.x by Richard
+                        $('.navbar-toggler').click(); //bootstrap 4.x
+                    });
+                }
+            }
+
+            $(document).ready(jqUpdateSize);    // When the page first loads
+            $(window).resize(jqUpdateSize);     // When the browser changes size
+
+
         },
         created() {
-            document.addEventListener('click', this.documentClick)
+            document.addEventListener('click', this.documentClick);
         },
     }
 </script>

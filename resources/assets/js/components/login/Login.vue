@@ -160,10 +160,10 @@
                     if (response.data.status == true) {
                          if (response.data.confirmed_profile_record == true) {
                              if(response.data.is_buyer) {
-                                 window.location.href = '/dashboard/#/register-request' ;
+                                 window.location.href = '/dashboard#/register-request' ;
                              }
                              else if(response.data.is_seller){
-                                 window.location.href = '/dashboard/#/buyAd-requests' ;
+                                 window.location.href = '/dashboard#/buyAd-requests' ;
                              }
                              else{
                                  alert('نوع کاربری شما مشخص نشده است لطفا با پشتیبانی اینکوباک تماس بگیرید');
@@ -172,7 +172,7 @@
                          else{
                              window.location.href = '/dashboard'; // Edit Profile Page
                          }
-                      
+
                     }
                     else {
                         self.showMsg = true;
@@ -192,7 +192,7 @@
             sendPhoneVerificationCode:function(){
                 this.step3.reSendCode = false;
                 this.step2.sendCode = false;
-                
+
                 var self = this;
                 this.errors = [];
 
@@ -202,9 +202,9 @@
                 .then(function(response){
                     if(response.status == 200){
                         self.goToStep(3);
-                        
+
                         self.step2.sendCode = true;
-                        
+
                         setTimeout(function(){
                             self.step3.reSendCode = true;
                         },60000);

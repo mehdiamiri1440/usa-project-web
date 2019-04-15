@@ -53,6 +53,9 @@
             }
         </style>
         <style>
+            .message-wrapper .chat-page ul{
+                background: url({{asset('assets/img/whatsappbg.jpg')}}) repeat ;
+            }
             .loading_images img {
                 display: block;
                 margin: 0 auto;

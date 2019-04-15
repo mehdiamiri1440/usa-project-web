@@ -4,6 +4,11 @@
         margin-top: 65px;
         background: #fff;
     }
+
+    #main.little-main {
+        margin-right: 80px !important;
+    }
+
     .main-header {
         height: 65px;
         position: fixed;
@@ -30,9 +35,8 @@
         height: 100%;
     }
 
-    .right-menu-header {
-
-        padding: 16px;
+    .profile-menu-header {
+        float: left;
     }
 
     .right-menu-header, .content-header {
@@ -50,7 +54,7 @@
 
         left: -90px;
 
-        top: 0;
+        top: 0px;
 
         font-size: 20px;
     }
@@ -62,7 +66,7 @@
         padding: 20px 20px 0;
     }
 
-    .right-menu-header a, .profile-menu-header > a {
+    .right-menu-header a, .profile-menu-header a {
         color: #7f8c9b;
         margin: 5px;
     }
@@ -109,6 +113,21 @@
         position: relative;
         top: 3px;
     }
+
+    .green-bot {
+        color: #fafafa !important;
+    }
+
+    .green-bot:hover {
+        color: #fff !important;
+        background: #00d614;
+    }
+
+    i.fa-home {
+        position: relative;
+        top: 5px;
+    }
+
 </style>
 
 <template>
@@ -122,22 +141,22 @@
             </div>
             <div class="profile-menu-header">
                 <a href="#" @click.prevent="dropdown()">
-                    <div class="image-header-profile" v-if="photoLink ">
+                    <div class="image-header-profile" v-if="photoLink">
                         <img :src="storage + '/' + photoLink">
                     </div>
                     <div class="image-header-profile" v-else>
                         <img :src="def">
                     </div>
                     <i class="fa fa-angle-down" aria-hidden="true"></i>
-                    {{username}}
+                    <span class="user_name">{{username}}</span>
                 </a>
                 <div class="profile-list">
                     <ul class="list-unstyled">
                         <li class="list-item">
-                            <a :href="'/dashboard/#/profile'">پروفایل</a>
+                            <a :href="'/dashboard#/profile'">پروفایل</a>
                         </li>
                         <li class="list-item">
-                            <a :href=" '/dashboard/#/password' ">تغییر کلمه عبور </a>
+                            <a :href=" '/dashboard#/password' ">تغییر کلمه عبور </a>
                         </li>
                         <li class="list-item"><a :href="out">خروج</a></li>
                     </ul>
@@ -145,7 +164,17 @@
             </div>
             <div class="right-menu-header">
                 <ul class="list-inline">
-                    <!--<li><a href="#"><i class="fa fa-bars" aria-hidden="true"></i></a></li>-->
+                    <!--      <li><a href="#" onclick="dropdownList()"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                              <div class="icon-header-list">
+                                  <ul class="list-unstyled">
+                                      <li class="list-item"><a href="/master#/product-list">لیست محصولات</a></li>
+                                  </ul>
+                              </div>
+                          </li>-->
+                    <li>
+                        <a class="green-bot" href="/master#/product-list" style="font-size: 17px"> <span class="full">لیست محصولات</span>
+                            <span class="min"><i class="fa fa-th-list" aria-hidden="true"></i></span> </a>
+                    </li>
                     <li><a :href="routeHome"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                 </ul>
             </div>
@@ -154,6 +183,7 @@
 
     </div>
 </template>
+
 
 <script>
     var viz = false;

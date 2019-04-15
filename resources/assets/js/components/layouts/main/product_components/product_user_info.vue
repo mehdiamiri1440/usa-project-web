@@ -7,10 +7,10 @@
             <img :src="defultimg" class="image_defult">
         </div>
         <p v-if="user_info">{{user_full_name}}</p>
-<!--        <a v-bind:href="'/master/#/profile/' + user_name" class="green_bot">
+<!--        <a v-bind:href="'/master#/profile/' + user_name" class="green_bot">
             مشاهده پروفایل
         </a>-->
-        <a :href=" '/master/#/profile/'+ user_name" class="green_bot" @click="registerComponentStatistics('product','showUserProfile','show profile')">مشاهده پروفایل</a>
+        <a :href=" '/master#/profile/'+ user_name" class="green_bot" @click="registerComponentStatistics('product','showUserProfile','show profile')">مشاهده پروفایل</a>
         <div class="create_buy  hidden-xs" >
             <a class="green_bot" href="#" @click.prevent="openRequestRegisterBox($event)">
                 درخواست خرید
