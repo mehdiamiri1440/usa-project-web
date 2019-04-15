@@ -83,7 +83,7 @@
                                 </div>
                                 <div class="col-xs-12">
                                     <div v-if="currentUser.user_info">
-                                        <a href="/dashboard/#/profile" class="green_bot edit"
+                                        <a href="/dashboard#/profile" class="green_bot edit"
                                            v-if="currentUser.user_info.id == profileOwner.user_info.id">
                                             <i class="fa fa-pencil"></i>
                                             ویرایش پروفایل
@@ -100,8 +100,9 @@
                                         </a>
                                     </div>
 
+
                                     <a href='#' class="green_bot " @click.prevent="copyProfileLinkToClipBoard"><i
-                                            class="fa fa-whatsapp"></i> 
+                                            class="fa fa-whatsapp"></i>
                                         اشتراک در واتس آپ </a>
                                 </div>
                             </div>
@@ -122,7 +123,7 @@
                                 <div class="title_content col-xs-12">
 
                                     <div class="back_page col-xs-12 col-sm-4">
-                                        <a href="/dashboard/#/profile" class="green_bot edit"
+                                        <a href="/dashboard#/profile" class="green_bot edit"
                                            v-if="currentUser.user_info && currentUser.user_info.id == profileOwner.user_info.id"
                                            @click="registerComponentStatistics('profileView','editProfile','click on edit profile');">
                                             <i class="fa fa-pencil"></i>
@@ -532,16 +533,16 @@
                     '<meta property="og:description" content="صفحه ی شخصی پروفایل کاربران اینکوباک"/>' +
                     ' <meta property="og:site_name" content="اینکوباک">' +
                     '<meta name="description" content="صفحه ی شخصی پروفایل کاربران اینکوباک. محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید">' +
-                    '<meta property="og:url" content="\'https://www.incobac.com/master/#/profile/' + this.getUserName  +'"/>' +
+                    '<meta property="og:url" content="\'https://www.incobac.com/master#/profile/' + this.getUserName  +'"/>' +
                     '<meta property="og:title" content="' + this.profileOwner.user_info.first_name +
                     ' '
                     + this.profileOwner.user_info.last_name + '"/>'
                     + imgMeta);
-                
+
             },
             init: function () {
                 var self = this;
-                
+
                 if (this.isDeviceMobile()) {
                     this.copyLinkText = ' اشتراک در واتساپ';
                     this.copyLinkClass = 'fa fa-whatsapp fa-2x';
@@ -650,7 +651,7 @@
                 if (this.isDeviceMobile()) {
 
                     var linkElement = document.createElement('a');
-                    var Message = "https://incobac.com/master/#/profile/" + this.profileOwner.user_info.user_name;
+                    var Message = "https://incobac.com/master#/profile/" + this.profileOwner.user_info.user_name;
                     var messageToWhatsApp = encodeURIComponent(Message);
                     var url = "whatsapp://send?text=" + messageToWhatsApp;
                     linkElement.setAttribute('href', url);
@@ -664,7 +665,7 @@
                 }
                 else {
                     var input = document.createElement('input');
-                    input.setAttribute('value', 'https://incobac.com/master/#/profile/' + this.profileOwner.user_info.user_name);
+                    input.setAttribute('value', 'https://incobac.com/master#/profile/' + this.profileOwner.user_info.user_name);
                     document.body.appendChild(input);
                     input.select();
                     var result = document.execCommand('copy');
@@ -706,7 +707,7 @@
                 if(this.currentUser){
                     axios.post('/set_last_chat_contact',contact)
                             .then(function(response){
-                                window.location.href = '/dashboard/#/messages';
+                                window.location.href = '/dashboard#/messages';
                             })
                             .catch(function(e){
                                 alert('Error');

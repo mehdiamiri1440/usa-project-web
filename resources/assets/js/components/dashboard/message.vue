@@ -266,7 +266,7 @@
 
     .message-wrapper .chat-page .message-send {
         float: right;
-        background: #E7FAFA;
+        background: #dcf8c6;
 
     }
 
@@ -514,11 +514,11 @@
                 var self = this;
 
                 this.loadContactList();
-                
+
 //                window.onhashchange = function() {
 //
 //                    if(self.selectedContact){
-//                        window.location.href = "/dashboard/#/messages";
+//                        window.location.href = "/dashboard#/messages";
 //                    }
 //                }
             },
@@ -659,7 +659,7 @@
                     return false;
                 }
             },
-            
+
         },
         watch: {
             contactNameSearchText: function () {
@@ -712,6 +712,7 @@
         },
         mounted: function () {
             this.init();
+            eventBus.$emit('messageCount', '13');
             eventBus.$emit('subHeader', this.items);
         },
 
@@ -726,7 +727,7 @@
             if(Push.Permission.has() == false){
                 Push.Permission.request(function(){}, function(){});
             }
-            
+
             Echo.private('testChannel.' + userId)
                 .listen('newMessage', (e) => {
                     var senderId = e.new_message.sender_id;
@@ -738,14 +739,14 @@
 
                             self.chatMessages.push(e.new_message);
                             self.scrollToEnd();
-                            
+
                             if(self.isComponentActive == false){
-                                self.pushNotification("پیام جدید",e.new_message.text,'/dashboard/#/messages');
+                                self.pushNotification("پیام جدید",e.new_message.text,'/dashboard#/messages');
                             }
                         }
                     }
                     else{
-                        this.pushNotification("پیام جدید",e.new_message.text,'/dashboard/#/messages');
+                        this.pushNotification("پیام جدید",e.new_message.text,'/dashboard#/messages');
                     }
 
                 });
