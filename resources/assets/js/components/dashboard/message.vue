@@ -712,6 +712,7 @@
         },
         mounted: function () {
             this.init();
+            eventBus.$emit('messageCount', '13');
             eventBus.$emit('subHeader', this.items);
         },
 

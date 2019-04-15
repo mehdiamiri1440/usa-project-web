@@ -87,7 +87,7 @@
               <li class="list-item">
                   <router-link :class="{'active' : this.active_el === 8}" :to="{ name : 'messages' }" @click="tracker.send('event', 'sidebar', 'click','پیام ها');">
                       <span>پیام ها</span>
-                      <span class="custom-badge">12</span>
+                      <span class="custom-badge">{{messageCount}}</span>
                       <i class="fa fa-comment " aria-hidden="true"></i>
                   </router-link>
               </li>
@@ -120,7 +120,8 @@
         ],
         data(){
             return{
-                active_el:0
+                active_el:0,
+                messageCount:''
             }
         },
         methods:{
@@ -180,6 +181,9 @@
             }
         },
         created() {
+            eventBus.$on('messageCount', (event) => {
+                this.messageCount = event;
+            });
             eventBus.$on('active', (event) => {
                 this.active_el = event;
             });
