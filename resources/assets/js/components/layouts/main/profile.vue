@@ -88,14 +88,22 @@
                                             <i class="fa fa-pencil"></i>
                                             ویرایش پروفایل
                                         </a>
-                                        <a v-else href="" @click.prevent="openChat()" class="green_bot edit">
-                                            <i class="fa fa-pencil"></i>
+                                        <a  v-else href="#" @click.prevent="openChat()" class="green_bot edit">
+                                            <i class="fa fa-comment"></i>
+                                                ارسال پیام
+                                        </a>
+                                    </div>
+                                    <div v-else>
+                                        <a  href="#" @click.prevent="openChat()" class="green_bot edit">
+                                            <i class="fa fa-comment"></i>
                                                 ارسال پیام
                                         </a>
                                     </div>
 
-                                    <a :href='"https://incobac.com/master#/profile/" + this.profileOwner.user_info.user_name' class="green_bot " @click.prevent="copyProfileLinkToClipBoard"><i
-                                            class="fa fa-whatsapp"></i> اشتراک در واتس آپ </a>
+
+                                    <a href='#' class="green_bot " @click.prevent="copyProfileLinkToClipBoard"><i
+                                            class="fa fa-whatsapp"></i>
+                                        اشتراک در واتس آپ </a>
                                 </div>
                             </div>
                         </div>
@@ -529,11 +537,12 @@
                     '<meta property="og:title" content="' + this.profileOwner.user_info.first_name +
                     ' '
                     + this.profileOwner.user_info.last_name + '"/>'
-                    + imgMeta)
+                    + imgMeta);
+
             },
             init: function () {
-
                 var self = this;
+
                 if (this.isDeviceMobile()) {
                     this.copyLinkText = ' اشتراک در واتساپ';
                     this.copyLinkClass = 'fa fa-whatsapp fa-2x';
@@ -563,7 +572,7 @@
                 })
                     .then(function (response) {
                         self.profileOwner = response.data;
-                        self.addMetaTag();
+                        //self.addMetaTag();
                     })
                     .catch(function (err) {
                         if (err.response.status == 404) {

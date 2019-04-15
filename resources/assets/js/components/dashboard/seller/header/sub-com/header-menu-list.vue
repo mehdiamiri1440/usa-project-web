@@ -86,6 +86,7 @@
                     <router-link :class="{'active' : this.active_el === 8}" :to="{ name : 'messages' }">
                         <span>پیام ها</span>
                         <span class="custom-badge">{{messageCount}}</span>
+
                         <i class="fa fa-comment " aria-hidden="true"></i>
                     </router-link>
                 </li>
