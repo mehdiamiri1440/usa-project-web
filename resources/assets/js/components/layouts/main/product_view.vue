@@ -1125,7 +1125,7 @@
             registerRequestInSearchNotFoundCase:function(){
                 if(this.currentUser.profile){
                     if(this.currentUser.user_info.is_buyer){
-                        window.location.href = '/dashboard#/register-request';
+                        window.location.href = '/dashboard/#/register-request';
                     }
                     else{
                         this.popUpMsg = 'حساب کاربری شما از نوع خریدار نیست.';

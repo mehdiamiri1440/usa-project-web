@@ -160,10 +160,10 @@
                     if (response.data.status == true) {
                          if (response.data.confirmed_profile_record == true) {
                              if(response.data.is_buyer) {
-                                 window.location.href = '/dashboard#/register-request' ;
+                                 window.location.href = '/dashboard/#/register-request' ;
                              }
                              else if(response.data.is_seller){
-                                 window.location.href = '/dashboard#/buyAd-requests' ;
+                                 window.location.href = '/dashboard/#/buyAd-requests' ;
                              }
                              else{
                                  alert('نوع کاربری شما مشخص نشده است لطفا با پشتیبانی اینکوباک تماس بگیرید');

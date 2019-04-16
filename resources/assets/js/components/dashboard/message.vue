@@ -518,7 +518,7 @@
 //                window.onhashchange = function() {
 //
 //                    if(self.selectedContact){
-//                        window.location.href = "/dashboard#/messages";
+//                        window.location.href = "/dashboard/#/messages";
 //                    }
 //                }
             },
@@ -741,12 +741,12 @@
                             self.scrollToEnd();
 
                             if(self.isComponentActive == false){
-                                self.pushNotification("پیام جدید",e.new_message.text,'/dashboard#/messages');
+                                self.pushNotification("پیام جدید",e.new_message.text,'/dashboard/#/messages');
                             }
                         }
                     }
                     else{
-                        this.pushNotification("پیام جدید",e.new_message.text,'/dashboard#/messages');
+                        this.pushNotification("پیام جدید",e.new_message.text,'/dashboard/#/messages');
                     }
 
                 });
