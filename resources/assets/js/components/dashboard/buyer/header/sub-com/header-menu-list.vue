@@ -85,7 +85,7 @@
               </li>-->
 
               <li class="list-item">
-                  <router-link :class="{'active' : this.active_el === 8}" :to="{ name : 'messages' }" @click="tracker.send('event', 'sidebar', 'click','پیام ها');">
+                  <router-link :class="{'active' : this.active_el === 8}" :to="{ name : 'messages' }">
                       <span>پیام ها</span>
                       <span class="custom-badge">{{messageCount}}</span>
 
@@ -122,11 +122,7 @@
         data(){
             return{
                 active_el:0,
-<<<<<<< HEAD
                 messageCount:''
-=======
-                unreadMessageCount:''
->>>>>>> 1c08c81176e5ef6a59578b0afd230d40ae6815f8
             }
         },
         methods:{
