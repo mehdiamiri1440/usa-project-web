@@ -122,11 +122,7 @@
         data(){
             return{
                 active_el:0,
-<<<<<<< HEAD
-                messageCount:''
-=======
                 unreadMessageCount:''
->>>>>>> 1c08c81176e5ef6a59578b0afd230d40ae6815f8
             }
         },
         methods:{
