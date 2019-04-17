@@ -906,12 +906,12 @@ Route::any('/external-url-payment-callback',[
 //    event(new newMessage($msg));
 //});
 
-//Route::group(['middleware' => [cors::class]],function(){
+Route::group(['middleware' => [cors::class]],function(){
     Route::options('/broadcastAuth',function(){
-        return response('OK', \Illuminate\Http\Response::HTTP_NO_CONTENT)
-            ->header('Access-Control-Allow-Origin','*')
-            ->header('Access-Control-Allow-Methods','GET, POST, PATCH, PUT, DELETE, OPTIONS')
-            ->header('Access-Control-Allow-Headers','Content-Type, Accept, Authorization, X-Requested-With, Application, X-CSRF-Token');
+        return response('OK', \Illuminate\Http\Response::HTTP_NO_CONTENT);
+//            ->header('Access-Control-Allow-Origin','*')
+//            ->header('Access-Control-Allow-Methods','GET, POST, PATCH, PUT, DELETE, OPTIONS')
+//            ->header('Access-Control-Allow-Headers','Content-Type, Accept, Authorization, X-Requested-With, Application, X-CSRF-Token');
     });
     Route::post('/broadcastAuth',function(Request $request){
 
@@ -923,7 +923,7 @@ Route::any('/external-url-payment-callback',[
             "auth" => json_decode($temp)->auth
          ]);
      });
-//});
+});
 
 
 
