@@ -53,9 +53,4 @@ if (token) {
      cluster: 'ap1',
      authEndpoint: '/broadcastAuth',
      encrypted: true,
-//     auth: {
-//        headers: {
-//          'X-CSRF-Token': token.content
-//        }
-//      }
  });

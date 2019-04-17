@@ -900,18 +900,10 @@ Route::any('/external-url-payment-callback',[
     'as' => 'external_url_payment_callback',
 ]);
 
-//Route::get('/event',function(){
-//    $msg = 'this is a test';
-//
-//    event(new newMessage($msg));
-//});
-
 Route::group(['middleware' => [cors::class]],function(){
     Route::options('/broadcastAuth',function(){
         return response('OK', \Illuminate\Http\Response::HTTP_NO_CONTENT)
-//            ->header('Access-Control-Allow-Origin','*');
             ->header('Access-Control-Allow-Methods','POST, DELETE, OPTIONS');
-//            ->header('Access-Control-Allow-Headers','Content-Type, Accept, Authorization, X-Requested-With, Application, X-CSRF-Token');
     });
     Route::post('/broadcastAuth',function(Request $request){
 
@@ -925,15 +917,10 @@ Route::group(['middleware' => [cors::class]],function(){
      });
 });
 
-
-
 //Route::get('/migrate_users',[
 //   'uses' => 'profile_controller@migrate_users'
 //]);
 
-Route::get('/testt',function(){
-    sendNewMessageSMSNotification::dispatch()->onQueue('sms');
-});
 
 
 
