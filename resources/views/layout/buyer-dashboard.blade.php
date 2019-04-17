@@ -2,10 +2,9 @@
 <html lang="fa">
 <head>
     <meta charset="UTF-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{asset('assets/img/logo-Inco-mobile.png')}}">
-
     <title>اینکوباک | بازارگاه کشاورزی</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.easing.min.js')}}"></script>
@@ -26,7 +25,6 @@
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
     @yield('header_links')
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{csrf_token()}}">
     <script>
         window.Laravel = { csrfToken : '{{csrf_token()}}'}
     </script>
