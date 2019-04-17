@@ -52,5 +52,10 @@ if (token) {
      key: 'f04fb3210cdacabb3540',
      cluster: 'ap1',
      authEndpoint: 'https://incobac.com/broadcastAuth',
-     encrypted: true
+     encrypted: true,
+     auth: {
+        headers: {
+          'X-CSRF-Token': token.content
+        }
+    }
  });
