@@ -908,9 +908,9 @@ Route::any('/external-url-payment-callback',[
 
 Route::group(['middleware' => [cors::class]],function(){
     Route::options('/broadcastAuth',function(){
-        return response('OK', \Illuminate\Http\Response::HTTP_NO_CONTENT);
-//            ->header('Access-Control-Allow-Origin','*')
-//            ->header('Access-Control-Allow-Methods','GET, POST, PATCH, PUT, DELETE, OPTIONS')
+        return response('OK', \Illuminate\Http\Response::HTTP_NO_CONTENT)
+            ->header('Access-Control-Allow-Origin','*');
+//            ->header('Access-Control-Allow-Methods','POST, DELETE, OPTIONS')
 //            ->header('Access-Control-Allow-Headers','Content-Type, Accept, Authorization, X-Requested-With, Application, X-CSRF-Token');
     });
     Route::post('/broadcastAuth',function(Request $request){
