@@ -51,11 +51,6 @@ if (token) {
      broadcaster: 'pusher',
      key: 'f04fb3210cdacabb3540',
      cluster: 'ap1',
-     authEndpoint: 'https://incobac.com/broadcastAuth',
+     authEndpoint: '/broadcastAuth',
      encrypted: true,
-     auth: {
-        headers: {
-          'X-CSRF-Token': token.content
-        }
-    }
  });
