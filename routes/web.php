@@ -907,7 +907,10 @@ Route::any('/external-url-payment-callback',[
 //});
 
 Route::group(['middleware' => [cors::class]],function(){
-    Route::match(['post','options'],'/broadcastAuth',function(Request $request){
+    Route::options('/broadcastAuth',function(){
+       // 
+    });
+    Route::post('/broadcastAuth',function(Request $request){
 
          $options = [
              'cluster' => env('PUSHER_APP_CLUSTER'),
