@@ -908,14 +908,16 @@ Route::any('/external-url-payment-callback',[
 
 Route::group(['middleware' => [cors::class]],function(){
     Route::options('/broadcastAuth',function(){
-       // 
+        
+       $pusher = new Pusher('f04fb3210cdacabb3540','a2ffc348382adf93ea19','710900',array('cluster' => 'ap1'));
+         $temp = [];
+         $temp =  $pusher->socket_auth($_POST['channel_name'], $_POST['socket_id']);
+
+         return response()->json([
+            "auth" => json_decode($temp)->auth
+         ]);
     });
     Route::post('/broadcastAuth',function(Request $request){
-
-         $options = [
-             'cluster' => env('PUSHER_APP_CLUSTER'),
-             'encrypted' => true
-         ];
 
          $pusher = new Pusher('f04fb3210cdacabb3540','a2ffc348382adf93ea19','710900',array('cluster' => 'ap1'));
          $temp = [];
@@ -924,8 +926,6 @@ Route::group(['middleware' => [cors::class]],function(){
          return response()->json([
             "auth" => json_decode($temp)->auth
          ]);
-
-
      });
 });
 
