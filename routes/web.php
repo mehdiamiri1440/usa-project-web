@@ -906,7 +906,7 @@ Route::any('/external-url-payment-callback',[
 //    event(new newMessage($msg));
 //});
 
-Route::group(['middleware' => [cors::class]],function(){
+//Route::group(['middleware' => [cors::class]],function(){
     Route::options('/broadcastAuth',function(){
         return response('OK', \Illuminate\Http\Response::HTTP_NO_CONTENT)
             ->header('Access-Control-Allow-Origin','*')
@@ -923,7 +923,7 @@ Route::group(['middleware' => [cors::class]],function(){
             "auth" => json_decode($temp)->auth
          ]);
      });
-});
+//});
 
 
 
