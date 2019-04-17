@@ -85,7 +85,7 @@
                 <li class="list-item  ">
                     <router-link :class="{'active' : this.active_el === 8}" :to="{ name : 'messages' }">
                         <span>پیام ها</span>
-                        <span class="custom-badge">{{messageCount}}</span>
+                        <span class="custom-badge" v-if="messageCount">{{messageCount}}</span>
 
                         <i class="fa fa-comment " aria-hidden="true"></i>
                     </router-link>
@@ -125,6 +125,18 @@
             }
         },
         methods: {
+            
+            init:function(){
+                var self = this;
+                
+                axios.post('/get_total_unread_messages_for_current_user')
+                    .then(function(response){
+                            self.messageCount = response.data.msg_count;
+                }).
+                    catch(function(err){
+                    //
+                });
+            },
             subIsActive(input) {
                 const paths = Array.isArray(input) ? input : [input];
                 return paths.some(path => {
@@ -174,13 +186,23 @@
             }else{
                 this.active_el = 1
             }
+            
+            this.init();
         },
         created() {
+            var self = this;
             eventBus.$on('messageCount', (event) => {
-                this.messageCount = event;
+                this.messageCount += event;
             });
             eventBus.$on('active', (event) => {
                 this.active_el = event;
+            });
+            
+            Echo.private('testChannel.' + userId)
+                .listen('newMessage', (e) => {
+                    var senderId = e.new_message.sender_id;
+                    
+                    self.messageCount += 1;
             });
         },
 

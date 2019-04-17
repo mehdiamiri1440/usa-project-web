@@ -900,29 +900,31 @@ Route::any('/external-url-payment-callback',[
     'as' => 'external_url_payment_callback',
 ]);
 
-Route::get('/event',function(){
-    $msg = 'this is a test';
+//Route::get('/event',function(){
+//    $msg = 'this is a test';
+//
+//    event(new newMessage($msg));
+//});
 
-    event(new newMessage($msg));
+Route::group(['middleware' => [cors::class]],function(){
+    Route::post('/broadcastAuth',function(Request $request){
+
+         $options = [
+             'cluster' => env('PUSHER_APP_CLUSTER'),
+             'encrypted' => true
+         ];
+
+         $pusher = new Pusher('f04fb3210cdacabb3540','a2ffc348382adf93ea19','710900',array('cluster' => 'ap1'));
+         $temp = [];
+         $temp =  $pusher->socket_auth($_POST['channel_name'], $_POST['socket_id']);
+
+         return response()->json([
+            "auth" => json_decode($temp)->auth
+         ]);
+
+
+     });
 });
-
-
-Route::post('/broadcastAuth',function(Request $request){
-
-     $options = [
-         'cluster' => env('PUSHER_APP_CLUSTER'),
-         'encrypted' => true
-     ];
-
-     $pusher = new Pusher('f04fb3210cdacabb3540','a2ffc348382adf93ea19','710900',array('cluster' => 'ap1'));
-     $temp = [];
-     $temp =  $pusher->socket_auth($_POST['channel_name'], $_POST['socket_id']);
-
-     return response()->json([
-        "auth" => json_decode($temp)->auth
-     ]);
-
- });
 
 
 

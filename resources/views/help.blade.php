@@ -71,7 +71,7 @@
                             <ul class="list-unstyled">
                                 <li class="list-item"><a
                                             href="{{route('profile_basic')}}">پروفایل</a></li>
-                                <li class="list-item"><a href="/dashboard#/password">تغییر کلمه عبور</a></li>
+                                <li class="list-item"><a href="/dashboard/#/password">تغییر کلمه عبور</a></li>
                                 <li class="list-item"><a href="{{route('logout')}}">خروج</a></li>
                             </ul>
                         </div>
@@ -119,7 +119,7 @@
                                 <ul class="list-unstyled">
                                     <li class="list-item"><a
                                                 href="{{route('profile_basic')}}">پروفایل</a></li>
-                                    <li class="list-item"><a href="/dashboard#/password">تغییر کلمه عبور</a></li>
+                                    <li class="list-item"><a href="/dashboard/#/password">تغییر کلمه عبور</a></li>
                                     <li class="list-item"><a href="{{route('logout')}}">خروج</a></li>
                                 </ul>
                             </div>
@@ -171,7 +171,7 @@ INTRO SECTION
                         <div id="collapseOne" role="tabpanel" aria-labelledby="headingOne"
                              class="panel-collapse collapse in">
                             <div class="panel-body">
-                                <p> 
+                                <p>
                                     اینکوباک بستر هوشمند و الکترونیکی خرید و فروش عمده محصولات کشاورزی (میوه-تره بار-خشکبار) است که خدمات پرداخت امن، قراردادهای حقوقی و بازرسی و کنترل کیفی را به خریداران و تامین کنندگان ارائه میدهد
                                 </p>
                             </div>

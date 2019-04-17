@@ -68,6 +68,7 @@ Vue.use(Router);
 export const eventBus = new Vue();
 
 const myRouter =  new Router({
+//    html5:true,
     base: process.env.BASE_URL,
     routes: [
         {
@@ -385,6 +386,11 @@ myRouter.beforeEach((to,from,next) => {
 
 
 myRouter.afterEach(( to, from ) => {
+    
+//    if ("gtag" in window) {
+//        console.log(to.path);
+//        gtag("pageview",to.path);
+//    }
 
   if ("ga" in window) {
     var tracker = ga.getAll()[0];

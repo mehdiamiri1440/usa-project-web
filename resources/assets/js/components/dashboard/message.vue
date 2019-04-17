@@ -518,7 +518,7 @@
 //                window.onhashchange = function() {
 //
 //                    if(self.selectedContact){
-//                        window.location.href = "/dashboard#/messages";
+//                        window.location.href = "/dashboard/#/messages";
 //                    }
 //                }
             },
@@ -544,7 +544,6 @@
                                     );
                                     self.loadChatHistory(contact);
                                 }
-
 
                             })
                             .catch(function (e) {
@@ -577,6 +576,7 @@
                     });
 
                 var index = this.searchForObjectIndexInArray(contact.contact_id,this.contactList);
+                eventBus.$emit('messageCount',-1 * contact.unread_msgs_count);
                 contact.unread_msgs_count = 0;
                 this.contactList.splice(index,1,contact);
             },
@@ -712,17 +712,13 @@
         },
         mounted: function () {
             this.init();
-            eventBus.$emit('messageCount', '13');
+//            eventBus.$emit('messageCount', '13');
             eventBus.$emit('subHeader', this.items);
         },
 
         created: function (){
 
             var self = this;
-
-            if ("gtag" in window) {
-                gtag("event","gtag testing",{'event_category':'test','event_lable':'testing'});
-             }
 
             if(Push.Permission.has() == false){
                 Push.Permission.request(function(){}, function(){});
@@ -739,14 +735,23 @@
 
                             self.chatMessages.push(e.new_message);
                             self.scrollToEnd();
+                            
+//                            if(self.selectedContact){
+//                                console.log(self.contactList);
+//                                var index = self.searchForObjectIndexInArray(self.selectedContact.contact_id,self.contactList);
+//                                eventBus.$emit('messageCount',-1 * self.selectedContact.unread_msgs_count);
+//                                self.selectedContact.unread_msgs_count = 0;
+//                                self.contactList.splice(index,1,self.selectedContact);
+//                            }
 
                             if(self.isComponentActive == false){
-                                self.pushNotification("پیام جدید",e.new_message.text,'/dashboard#/messages');
+                                self.pushNotification("پیام جدید",e.new_message.text,'/dashboard/#/messages');
                             }
                         }
                     }
                     else{
-                        this.pushNotification("پیام جدید",e.new_message.text,'/dashboard#/messages');
+                        //eventBus.$emit('messageCount',1);
+                        this.pushNotification("پیام جدید",e.new_message.text,'/dashboard/#/messages');
                     }
 
                 });

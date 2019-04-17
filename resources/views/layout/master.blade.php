@@ -24,7 +24,7 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap-theme.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">   <link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/profile/main-profile.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/master/style.css')}}">
@@ -33,7 +33,6 @@
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
-<!--
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() {
@@ -43,8 +42,8 @@
         gtag('js', new Date());
 
         gtag('config', 'UA-129398000-1');
+//        gtag('config', 'UA-129398000-1',{'send_page_view': false });
     </script>
--->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>

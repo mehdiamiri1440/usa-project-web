@@ -20,7 +20,7 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
     <script src="{{asset('js/app.js')}}"></script>
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
-    
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
     <script>
@@ -30,7 +30,7 @@
 
       gtag('config', 'UA-129398000-1');
     </script>
-    
+
 
     @yield('header_links')
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -94,7 +94,7 @@
 <body>
 
 <div id="app">
-   
+
         <!-- Modal -->
     <div class="container">
         <div class="modal fade" id="myModal" tabindex="-1" ref="myModal" role="dialog"
@@ -153,7 +153,7 @@
         </div>
     </div>
     <!--end loader-->
-  
+
     <header id="header" class="main-header">
         <div class="profile-menu-header" v-if="currentUser.profile">
             <a href="#" onclick="dropdown()">
@@ -169,7 +169,7 @@
             <div class="profile-list">
                 <ul class="list-unstyled">
                     <li class="list-item"><a href="{{route('profile_basic')}}">پروفایل</a></li>
-                    <li class="list-item"><a href="/dashboard#/password">تغییر کلمه عبور</a></li>
+                    <li class="list-item"><a href="/dashboard/#/password">تغییر کلمه عبور</a></li>
                     <li class="list-item"><a href="{{route('logout')}}">خروج</a></li>
                 </ul>
             </div>
