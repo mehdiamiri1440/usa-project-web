@@ -162,8 +162,8 @@
                         <p>توضیحات: <span>{{product.main.description}}</span></p>
                     </div>
                     <div class="create_buy_mobile hidden-sm hidden-md hidden-lg" >
-                        <a class="green_bot" href="#" @click.prevent="openRequestRegisterBox($event)">
-                            درخواست خرید
+                        <a class="green_bot" href="#" @click.prevent="openChat(product)">
+                            <span class="fa fa-comment"></span> ارسال پیام
                         </a>
 
                     </div>
@@ -451,6 +451,40 @@
                 $element = $('article:nth-of-type(' + $index + ') .buy_details');
                 $element.slideToggle("125", "swing");
                 $('.buy_details').not($element).slideUp();
+            },
+            openChat:function(product){
+
+                this.registerComponentStatistics('product','openChat','click on open chatBox');
+
+                var contact = {
+                    contact_id:product.user_info.id,
+                    first_name:product.user_info.first_name,
+                    last_name:product.user_info.last_name,
+                    profile_photo:product.profile_info.profile_photo,
+                }
+
+                if(this.currentUser.user_info){
+                    if(this.currentUser.user_info.id != product.user_info.id){
+                        axios.post('/set_last_chat_contact',contact)
+                            .then(function(response){
+                                window.location.href = '/dashboard/#/messages';
+                            })
+                            .catch(function(e){
+                                alert('Error');
+                        });
+                    }
+                    else{
+                        this.popUpMsg = 'شما نمیتوانید به خودتان پیام دهید.';
+                        eventBus.$emit('submitSuccess',this.popUpMsg);
+                        $('#myModal').modal('show');
+                    }
+                    
+                }
+                else{
+                    this.popUpMsg = 'اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
+                    eventBus.$emit('submitSuccess',this.popUpMsg);
+                    $('#myModal2').modal('show');
+                }
             },
             registerComponentStatistics:function(categoryName,actionName,labelName){
                 gtag('event',actionName,{

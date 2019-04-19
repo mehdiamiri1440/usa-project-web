@@ -12,8 +12,8 @@
         </a>-->
         <a :href=" '/master/#/profile/'+ user_name" class="green_bot" @click="registerComponentStatistics('product','showUserProfile','show profile')">مشاهده پروفایل</a>
         <div class="create_buy  hidden-xs" >
-            <a class="green_bot" href="#" @click.prevent="openRequestRegisterBox($event)">
-                درخواست خرید
+            <a class="green_bot" href="#" @click.prevent="openChat()">
+                <span class="fa fa-comment"></span> ارسال پیام
             </a>
         </div>
     </div>
@@ -130,6 +130,39 @@
                     $('#myModal2').modal('show');
                 }
 
+            },
+            openChat:function(){
+
+                this.registerComponentStatistics('product','openChat','click on open chatBox');
+
+                var contact = {
+                    contact_id:this.user_info.id,
+                    first_name:this.user_info.first_name,
+                    last_name:this.user_info.last_name,
+                    profile_photo:this.profile_photo,
+                }
+
+                if(this.current_user.user_info){
+                    if(this.current_user.user_info.id != this.user_info.id){
+                        axios.post('/set_last_chat_contact',contact)
+                            .then(function(response){
+                                window.location.href = '/dashboard/#/messages';
+                            })
+                            .catch(function(e){
+                                alert('Error');
+                        });
+                    }
+                    else{
+                        this.popUpMsg = 'شما نمیتوانید به خودتان پیام دهید.';
+                        eventBus.$emit('submitSuccess',this.popUpMsg);
+                        $('#myModal').modal('show');
+                    }
+                }
+                else{
+                    this.popUpMsg = 'اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
+                    eventBus.$emit('submitSuccess',this.popUpMsg);
+                    $('#myModal2').modal('show');
+                }
             },
             scrollToTheRequestRegisterBox: function (element) {
                 var newPosition = $(element).offset();

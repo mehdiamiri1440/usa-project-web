@@ -172,31 +172,31 @@ const myRouter =  new Router({
                 buyer: messages,
             },
         },
-        {
-            path: '/profile_contract',
-            name: 'profileContract',
-            components: {
-                seller: sellerProfileContract,
-                buyer: buyerProfileContract,
-            },
-            beforeEnter: async (to, from, next) => {
-
-                axios.post('/user/profile_info',{
-                    confirmed : true
-                })
-                .then(function(response){
-                    if(response.data.profile.confirmed == false){
-                        next(false);
-                        // $('#myModal-1').modal('show');
-                    }
-                    else{
-                        next();
-                    }
-
-                });
-            },
-        }
-        , {
+//        {
+//            path: '/profile_contract',
+//            name: 'profileContract',
+//            components: {
+//                seller: sellerProfileContract,
+//                buyer: buyerProfileContract,
+//            },
+//            beforeEnter: async (to, from, next) => {
+//
+//                axios.post('/user/profile_info',{
+//                    confirmed : true
+//                })
+//                .then(function(response){
+//                    if(response.data.profile.confirmed == false){
+//                        next(false);
+//                        // $('#myModal-1').modal('show');
+//                    }
+//                    else{
+//                        next();
+//                    }
+//
+//                });
+//            },
+//        },
+         {
             path: '/buyAd-requests',
             name: 'buyAdRequests',
             components: {
@@ -385,7 +385,7 @@ myRouter.beforeEach((to,from,next) => {
 */
 
 
-myRouter.afterEach(( to, from ) => {
+myRouter.afterEach((to, from,next ) => {
     
 //    if ("gtag" in window) {
 //        console.log(to.path);

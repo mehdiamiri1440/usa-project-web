@@ -20,6 +20,7 @@ class product_controller extends Controller
 {
 	protected $current_user;
     protected $user_info_sent_by_product_array = [
+        'id',
         'user_name',
         'first_name',
         'last_name'
