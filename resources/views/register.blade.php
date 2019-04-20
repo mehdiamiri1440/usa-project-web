@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="csrf-token" content="{{csrf_token()}}">
     <title>ثبت نام</title>
-
+    <link rel="icon" href="{{asset('assets/img/logo-Inco-mobile.png')}}">
     <script>window.Laravel = {csrfToken:'{{csrf_token()}}}'}</script>
     <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
