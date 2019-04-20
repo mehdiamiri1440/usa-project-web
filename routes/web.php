@@ -52,8 +52,8 @@ Route::group(['prefix' => 'master'],function (){
 });
 
 Route::get('/', function(){
-//    return redirect('/master/#/product-list');
-    return view('index_pages.index_main');
+    return redirect('/master/#/product-list');
+//    return view('index_pages.index_main');
 });
 
 //Route::get('/', function(){
