@@ -21,6 +21,20 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery.multiselect.css')}}"/>
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/register/style.css')}}">
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+//        gtag('config', 'UA-129398000-1');
+        gtag('config', 'UA-129398000-1',{'send_page_view': false });
+    </script>
 
 </head>
 <body>

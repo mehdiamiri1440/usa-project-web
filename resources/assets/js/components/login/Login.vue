@@ -163,7 +163,7 @@
                                  window.location.href = '/dashboard/#/register-request' ;
                              }
                              else if(response.data.is_seller){
-                                 window.location.href = '/dashboard/#/buyAd-requests' ;
+                                 window.location.href = '/dashboard/#/register-product' ;
                              }
                              else{
                                  alert('نوع کاربری شما مشخص نشده است لطفا با پشتیبانی اینکوباک تماس بگیرید');
@@ -264,6 +264,8 @@
             },
         },
         created() {
+            gtag('config','UA-129398000-1',{'page_path': '/login'});
+            
             var self = this;
             window.addEventListener('keydown', function (event) {
                 if (event.keyCode === 13) {
