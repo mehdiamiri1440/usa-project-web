@@ -52,6 +52,7 @@ Route::group(['prefix' => 'master'],function (){
 });
 
 Route::get('/', function(){
+//    return redirect('/master/#/product-list');
     return view('index_pages.index_main');
 });
 
@@ -920,6 +921,11 @@ Route::group(['middleware' => [cors::class]],function(){
 //Route::get('/migrate_users',[
 //   'uses' => 'profile_controller@migrate_users'
 //]);
+
+Route::get('/testt',function(){
+   dispatch(new sendNewMessageSMSNotification())->onQueue('sms');
+  sendSMS::dispatch(['d','c'],'09118413054')->onQueue('sms');
+});
 
 
 

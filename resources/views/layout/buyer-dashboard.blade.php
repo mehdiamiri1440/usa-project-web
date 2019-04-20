@@ -36,7 +36,8 @@
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           var userId = "<?php echo session('user_id');?>";
-          gtag('config', 'UA-129398000-1');
+//          gtag('config', 'UA-129398000-1');
+          gtag('config', 'UA-129398000-1',{'send_page_view': false });
 //          gtag('config', 'UA-129398000-1',{
 //              'user_id' : "<?php echo session('user_id');?>"
 //          });

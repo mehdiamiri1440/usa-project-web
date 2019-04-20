@@ -172,7 +172,7 @@
                               </div>
                           </li>-->
                     <li>
-                        <a class="green-bot" href="/master/#/product-list" style="font-size: 17px"> <span class="full">لیست محصولات</span>
+                        <a class="green-bot" href="/master/#/product-list" style="font-size: 17px" @click="registerComponentStatistics('product-list-btn','click','product-list in dashboard')"> <span class="full">لیست محصولات</span>
                             <span class="min"><i class="fa fa-th-list" aria-hidden="true"></i></span> </a>
                     </li>
                     <li><a :href="routeHome"><i class="fa fa-home" aria-hidden="true"></i></a></li>
@@ -225,6 +225,12 @@
         created() {
             document.addEventListener('click', this.documentClick)
         },
+        registerComponentStatistics:function(categoryName,actionName,labelName){
+            gtag('event',actionName,{
+                'event_category' : categoryName,
+                'event_label'    : labelName
+            });
+        }
 
 
     }

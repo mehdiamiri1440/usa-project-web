@@ -385,25 +385,25 @@ myRouter.beforeEach((to,from,next) => {
 */
 
 
-myRouter.afterEach((to, from,next ) => {
-    
-//    if ("gtag" in window) {
+//myRouter.afterEach((to, from,next ) => {
+//    
+////    if ("gtag" in window) {
+////        console.log(to.path);
+////        gtag("pageview",to.path);
+////    }
+//
+//  if ("ga" in window) {
+//    var tracker = ga.getAll()[0];
+////    console.log('size : ' + tracker.length);
+//    if (tracker){
 //        console.log(to.path);
-//        gtag("pageview",to.path);
-//    }
-
-  if ("ga" in window) {
-    var tracker = ga.getAll()[0];
-//    console.log('size : ' + tracker.length);
-    if (tracker){
-        console.log(to.path);
-        tracker.set('page',to.path);
-        tracker.send('pageview');
-//        tracker.send('event', 'categoryName', 'ActionName','LabelName');
-  }
-  }
-  
-});
+//        tracker.set('page',to.path);
+//        tracker.send('pageview');
+////        tracker.send('event', 'categoryName', 'ActionName','LabelName');
+//  }
+//  }
+//  
+//});
 
 export default myRouter;
 

@@ -41,8 +41,8 @@
 
         gtag('js', new Date());
 
-        gtag('config', 'UA-129398000-1');
-//        gtag('config', 'UA-129398000-1',{'send_page_view': false });
+//        gtag('config', 'UA-129398000-1');
+        gtag('config', 'UA-129398000-1',{'send_page_view': false });
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 

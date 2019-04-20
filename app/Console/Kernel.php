@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
         
         $schedule->job($send_sms_notification_for_new_unread_messages_job)
             ->hourly()
-            ->between('6:00', '22:00');
+            ->between('6:00', '23:00');
         
         $schedule->call(function () {
             DB::table('daily_sms_blacklists')->delete();

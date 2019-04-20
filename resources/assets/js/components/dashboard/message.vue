@@ -717,6 +717,8 @@
         },
 
         created: function (){
+            
+            gtag('config','UA-129398000-1',{'page_path': '/messages'});
 
             var self = this;
 
