@@ -35,6 +35,7 @@ class message_controller extends Controller
             
             return response()->json([
                 'status' => true,
+                'message' => $msg,
                 'msg' => 'msg sent.'
             ],201);
         }

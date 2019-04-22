@@ -653,7 +653,7 @@ class buyAd_controller extends Controller
             $result_buyAds = array();
             
             $related_buyAds = $this->get_related_buyAds_list_to_the_user($user);
-            $buyAd_recommender_object->buyAd_list_recommender_for_seller($related_buyAds,session('user_id')); //check out the method for more details
+            //$buyAd_recommender_object->buyAd_list_recommender_for_seller($related_buyAds,session('user_id')); //check out the method for more details
             
 //            $related_buyAds->each(function($buyAd) use($date_convertor_object,&$related_buyAds){
 //                   $category_array = $this->get_category_and_subcategory_name($buyAd->category_id);

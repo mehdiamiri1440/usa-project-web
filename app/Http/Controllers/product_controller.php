@@ -310,18 +310,18 @@ class product_controller extends Controller
                 ->orderBy('updated_at','desc')
 				->get();
             
-            if(session('is_buyer')){
-                $product_recommender_object->product_list_recommender_for_buyer($products,session('user_id'));
-            }
+//            if(session('is_buyer')){
+//                $product_recommender_object->product_list_recommender_for_buyer($products,session('user_id'));
+//            }
 		}
 		else{
 			$products = product::where('confirmed',true)
                 ->orderBy('updated_at','desc')
                 ->get();
             
-            if(session('is_buyer')){
-                $product_recommender_object->product_list_recommender_for_buyer($products,session('user_id'));
-            }
+//            if(session('is_buyer')){
+//                $product_recommender_object->product_list_recommender_for_buyer($products,session('user_id'));
+//            }
             
             
 		}

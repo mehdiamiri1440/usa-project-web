@@ -569,7 +569,7 @@
                     .then(function (response) {
                         self.chatMessages = response.data.messages;
                         self.currentUserId = response.data.current_user_id;
-                        self.scrollToEnd();
+                        self.scrollToEnd(500);
                     })
                     .catch(function (e) {
 
@@ -580,10 +580,10 @@
                 contact.unread_msgs_count = 0;
                 this.contactList.splice(index,1,contact);
             },
-            scrollToEnd: function () {
+            scrollToEnd: function (time) {
                 setTimeout(function(){
                     $(".chat-page ul").animate({scrollTop: $(".chat-page ul").prop("scrollHeight")}, 500);
-                }, 500);
+                }, time);
             },
             sendMessage: function () {
                 var self = this;
@@ -595,12 +595,15 @@
                 })
                     .then(function (response) {
                         self.msgToSend = '';
+                        self.chatMessages.push(response.data.message);
+                    
+                        self.scrollToEnd(0);
+                    
                         self.loadChatHistory(self.selectedContact);
-
                         //self.loadContactList();
                     })
                     .catch(function (e) {
-
+                        //
                     });
             },
             keepChatUpdated: function (contact) {
@@ -736,7 +739,7 @@
                         if (self.currentContactUserId == senderId) {
 
                             self.chatMessages.push(e.new_message);
-                            self.scrollToEnd();
+                            self.scrollToEnd(0);
                             
 //                            if(self.selectedContact){
 //                                console.log(self.contactList);
