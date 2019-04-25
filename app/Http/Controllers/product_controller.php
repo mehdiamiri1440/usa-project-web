@@ -20,6 +20,7 @@ class product_controller extends Controller
 {
 	protected $current_user;
     protected $user_info_sent_by_product_array = [
+        'id',
         'user_name',
         'first_name',
         'last_name'
@@ -309,18 +310,18 @@ class product_controller extends Controller
                 ->orderBy('updated_at','desc')
 				->get();
             
-            if(session('is_buyer')){
-                $product_recommender_object->product_list_recommender_for_buyer($products,session('user_id'));
-            }
+//            if(session('is_buyer')){
+//                $product_recommender_object->product_list_recommender_for_buyer($products,session('user_id'));
+//            }
 		}
 		else{
 			$products = product::where('confirmed',true)
                 ->orderBy('updated_at','desc')
                 ->get();
             
-            if(session('is_buyer')){
-                $product_recommender_object->product_list_recommender_for_buyer($products,session('user_id'));
-            }
+//            if(session('is_buyer')){
+//                $product_recommender_object->product_list_recommender_for_buyer($products,session('user_id'));
+//            }
             
             
 		}

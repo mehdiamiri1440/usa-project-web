@@ -518,7 +518,7 @@
 //                window.onhashchange = function() {
 //
 //                    if(self.selectedContact){
-//                        window.location.href = "/dashboard/#/messages";
+//                        window.location.href = "/dashboard/messages";
 //                    }
 //                }
             },
@@ -545,7 +545,6 @@
                                     self.loadChatHistory(contact);
                                 }
 
-
                             })
                             .catch(function (e) {
                                 alert('error');
@@ -570,20 +569,21 @@
                     .then(function (response) {
                         self.chatMessages = response.data.messages;
                         self.currentUserId = response.data.current_user_id;
-                        self.scrollToEnd();
+                        self.scrollToEnd(500);
                     })
                     .catch(function (e) {
 
                     });
 
                 var index = this.searchForObjectIndexInArray(contact.contact_id,this.contactList);
+                eventBus.$emit('messageCount',-1 * contact.unread_msgs_count);
                 contact.unread_msgs_count = 0;
                 this.contactList.splice(index,1,contact);
             },
-            scrollToEnd: function () {
+            scrollToEnd: function (time) {
                 setTimeout(function(){
                     $(".chat-page ul").animate({scrollTop: $(".chat-page ul").prop("scrollHeight")}, 500);
-                }, 500);
+                }, time);
             },
             sendMessage: function () {
                 var self = this;
@@ -595,12 +595,15 @@
                 })
                     .then(function (response) {
                         self.msgToSend = '';
-                        self.loadChatHistory(self.selectedContact);
+                        self.chatMessages.push(response.data.message);
 
+                        self.scrollToEnd(0);
+
+                        self.loadChatHistory(self.selectedContact);
                         //self.loadContactList();
                     })
                     .catch(function (e) {
-
+                        //
                     });
             },
             keepChatUpdated: function (contact) {
@@ -712,17 +715,15 @@
         },
         mounted: function () {
             this.init();
-            eventBus.$emit('messageCount', '13');
+//            eventBus.$emit('messageCount', '13');
             eventBus.$emit('subHeader', this.items);
         },
 
         created: function (){
 
-            var self = this;
+            gtag('config','UA-129398000-1',{'page_path': '/messages'});
 
-            if ("gtag" in window) {
-                gtag("event","gtag testing",{'event_category':'test','event_lable':'testing'});
-             }
+            var self = this;
 
             if(Push.Permission.has() == false){
                 Push.Permission.request(function(){}, function(){});
@@ -738,15 +739,24 @@
                         if (self.currentContactUserId == senderId) {
 
                             self.chatMessages.push(e.new_message);
-                            self.scrollToEnd();
+                            self.scrollToEnd(0);
+
+//                            if(self.selectedContact){
+//                                console.log(self.contactList);
+//                                var index = self.searchForObjectIndexInArray(self.selectedContact.contact_id,self.contactList);
+//                                eventBus.$emit('messageCount',-1 * self.selectedContact.unread_msgs_count);
+//                                self.selectedContact.unread_msgs_count = 0;
+//                                self.contactList.splice(index,1,self.selectedContact);
+//                            }
 
                             if(self.isComponentActive == false){
-                                self.pushNotification("پیام جدید",e.new_message.text,'/dashboard/#/messages');
+                                self.pushNotification("پیام جدید",e.new_message.text,'/dashboard/messages');
                             }
                         }
                     }
                     else{
-                        this.pushNotification("پیام جدید",e.new_message.text,'/dashboard/#/messages');
+                        //eventBus.$emit('messageCount',1);
+                        this.pushNotification("پیام جدید",e.new_message.text,'/dashboard/messages');
                     }
 
                 });

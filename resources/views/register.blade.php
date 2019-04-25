@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="csrf-token" content="{{csrf_token()}}">
     <title>ثبت نام</title>
-
+    <link rel="icon" href="{{asset('assets/img/logo-Inco-mobile.png')}}">
     <script>window.Laravel = {csrfToken:'{{csrf_token()}}}'}</script>
     <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
@@ -21,6 +21,20 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery.multiselect.css')}}"/>
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/register/style.css')}}">
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+//        gtag('config', 'UA-129398000-1');
+        gtag('config', 'UA-129398000-1',{'send_page_view': false });
+    </script>
 
 </head>
 <body>

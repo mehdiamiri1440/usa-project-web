@@ -497,7 +497,7 @@
                             eventBus.$emit('submitSuccess', self.popUpMsg);
                             $('#myModal').modal('show');
                             setTimeout(function () {
-                                window.location.href = '/dashboard/#/my-sell-offers';
+                                window.location.href = '/dashboard/my-sell-offers';
                                 eventBus.$emit('submitingEvent', false);
                             },3000);
                         }
@@ -576,5 +576,8 @@
             $('input[type="file"]').imageuploadify();
             eventBus.$emit('subHeader', this.items);
         },
+        created(){
+            gtag('config','UA-129398000-1',{'page_path': '/buyAd-requests-detail'});
+        }
     }
 </script>

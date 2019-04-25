@@ -83,7 +83,7 @@
         </div>
         <script>
              var transactionId = "<?php echo $transaction_id; ?>";
-             window.location.href = '/dashboard/#/instant-transaction-detail/' +  transactionId ;
+             window.location.href = '/dashboard/instant-transaction-detail/' +  transactionId ;
         </script>
         <script src="{{asset('js/app.js')}}"></script>
     </body>

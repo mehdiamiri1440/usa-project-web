@@ -21,6 +21,9 @@ use App\profile;
 
 use App\Events\newMessage;
 
+use App\Jobs\sendNewMessageSMSNotification;
+use App\Jobs\sendSMS;
+
 
 /*Route::get('/pv', function(){
     return view('layout.master');
@@ -49,7 +52,8 @@ Route::group(['prefix' => 'master'],function (){
 });
 
 Route::get('/', function(){
-    return view('index_pages.index_main');
+    return redirect('/master/product-list');
+//    return view('index_pages.index_main');
 });
 
 //Route::get('/', function(){
@@ -198,18 +202,22 @@ Route::post('/load_profile_by_user_name',[
 ]);
 
 Route::post('/get_product_list_by_user_name',[
-        'uses' => 'product_controller@get_product_list_by_user_name',
-        'as' => 'get_product_list_by_user_name'
+    'uses' => 'product_controller@get_product_list_by_user_name',
+    'as' => 'get_product_list_by_user_name'
 ]);
 
 Route::post('/get_user_statistics_by_user_name',[
-        'uses' => 'profile_controller@get_user_statistics_by_user_name',
-        'as' => 'get_user_statistics_by_user_name',
+    'uses' => 'profile_controller@get_user_statistics_by_user_name',
+    'as' => 'get_user_statistics_by_user_name',
 ]);
 
 Route::get('/product-view/{product_id}/{city}-{province}-{product_name}-{sub_category_name}-{category_name}',function($product_id){
-        return view('dashboard.buyer.product-list');
+    return view('dashboard.buyer.product-list');
 });
+
+Route::get('master/{any}',function(){
+    return view('layout.master');
+})->where('any','.*');
 
 
 Route::group(['middleware' => [login::class]],function(){
@@ -226,17 +234,25 @@ Route::group(['middleware' => [login::class]],function(){
 
     Route::get('back-to-basic/{transaction_id}',function($transaction_id){
         return view('back-to-basic',[
-           'transaction_id' => $transaction_id
+            'transaction_id' => $transaction_id
         ]);
     })->name('back-to-basic');
 
     Route::get('instant-back-to-basic/{transaction_id}',function($transaction_id){
         return view('instant-back-to-basic',[
-           'transaction_id' => $transaction_id
+            'transaction_id' => $transaction_id
         ]);
     })->name('instant-back-to-basic');
 
 
+    Route::get('/dashboard/{any}',function(){
+        if(session('is_seller')){
+            return view('layout.seller-dashboard');
+        }
+        else if(session('is_buyer')){
+            return view('layout.buyer-dashboard');
+        }
+    })->where('any','.*');
 
     Route::group(['prefix' => 'dashboard'],function(){
         Route::get('/',function(){
@@ -300,12 +316,12 @@ Route::group(['middleware' => [login::class]],function(){
                 'as' => 'get_sell_offer_by_id'
             ])->where('id', '[0-9]+');
 
-            Route::get('/register-request',function(){
-                if(session('is_buyer')){
-                    return view('dashboard.buyer.request.register-request');
-                }
-                else return abort(404);
-            })->name('register_buyer_request');
+//            Route::get('/register-request',function(){
+//                if(session('is_buyer')){
+//                    return view('dashboard.buyer.request.register-request');
+//                }
+//                else return abort(404);
+//            })->name('register_buyer_request');
 
             Route::post('/get_transaction_info',[
                 'uses' => 'transaction_controller@get_transaction_info',
@@ -798,7 +814,7 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
     })->name('initiate-instant-transaction-view');
 
     Route::post('initiate-instant-transaction',[
-       'uses' => 'admin_panel\admin_transaction_controller@initiate_instant_transaction',
+        'uses' => 'admin_panel\admin_transaction_controller@initiate_instant_transaction',
         'as' => 'initiate_instant_transaction'
     ]);
 
@@ -897,35 +913,32 @@ Route::any('/external-url-payment-callback',[
     'as' => 'external_url_payment_callback',
 ]);
 
-Route::get('/event',function(){
-    $msg = 'this is a test';
+Route::group(['middleware' => [cors::class]],function(){
+    Route::options('/broadcastAuth',function(){
+        return response('OK', \Illuminate\Http\Response::HTTP_NO_CONTENT)
+            ->header('Access-Control-Allow-Methods','POST, DELETE, OPTIONS');
+    });
+    Route::post('/broadcastAuth',function(Request $request){
 
-    event(new newMessage($msg));
+        $pusher = new Pusher('f04fb3210cdacabb3540','a2ffc348382adf93ea19','710900',array('cluster' => 'ap1'));
+        $temp = [];
+        $temp =  $pusher->socket_auth($_POST['channel_name'], $_POST['socket_id']);
+
+        return response()->json([
+            "auth" => json_decode($temp)->auth
+        ]);
+    });
 });
-
-
-Route::post('/broadcastAuth',function(Request $request){
-
-     $options = [
-         'cluster' => env('PUSHER_APP_CLUSTER'),
-         'encrypted' => true
-     ];
-
-     $pusher = new Pusher('f04fb3210cdacabb3540','a2ffc348382adf93ea19','710900',array('cluster' => 'ap1'));
-     $temp = [];
-     $temp =  $pusher->socket_auth($_POST['channel_name'], $_POST['socket_id']);
-
-     return response()->json([
-        "auth" => json_decode($temp)->auth
-     ]);
-
- });
-
-
 
 //Route::get('/migrate_users',[
 //   'uses' => 'profile_controller@migrate_users'
 //]);
+
+Route::get('/testt',function(){
+    dispatch(new sendNewMessageSMSNotification())->onQueue('sms');
+    sendSMS::dispatch(['d','c'],'09118413054')->onQueue('sms');
+});
+
 
 
 

@@ -1,5 +1,24 @@
 <style scoped>
 
+    .flat-plust-icon {
+        position: fixed;
+        right: 15px;
+        bottom: 15px;
+        z-index: 2;
+    }
+    .flat-plust-icon a{
+        background: #e41c38;
+
+        width: 50px;
+        height: 50px;
+        display: block;
+        border-radius: 50px;
+        color: #fff;
+        box-shadow: 0 0 20px #838383;
+        text-align: center;
+        padding-top: 15px;
+        font-size: 23px;
+    }
 
     .owl-carousel img {
         border-radius: 3px;
@@ -151,12 +170,9 @@
         padding-bottom: 40px;
     }
 
-
-
     .main-content > h4 {
         margin: 30px auto;
     }
-
 
     .green_bot {
         margin: 5px 0;
@@ -184,9 +200,11 @@
         right: 0;
         z-index: 2;
     }
+
     .main-padding-fix {
         padding-top: 72px;
     }
+
     .sidebar-fix {
         position: fixed;
         right: 0;
@@ -280,9 +298,11 @@
         .main-image {
             padding: 0;
         }
+
         .main-content > .row {
-            margin:0;
+            margin: 0;
         }
+
         .sub-header {
 
             background: #f0f3f6;
@@ -418,6 +438,9 @@
 </style>
 <template>
     <div>
+        <div class="flat-plust-icon hidden-lg hidden-md">
+            <a href="#"><i class="fa fa-plus"></i> </a>
+        </div>
         <header id="header" class="hidden-xs  main-header">
             <h1 class="title-page col-xs-12">
                 لیست محصولات
@@ -449,78 +472,79 @@
         </product-aside-categories>
         <main id="main" class="col-xs-12 col-md-9">
 
-                <section class="main-content col-xs-12" v-if="products.length > 0">
-                    <div class="row">
-                        <product-article
-                                :products="products"
-                                :loading_img="loading_img"
-                                :defultimg="defultimg"
-                                :str="str"
-                                :loading="loading"
-                        >
-                        </product-article>
-                        <div class="load-more-button" v-if="searchText == '' && continueToLoadProducts == true ">
-                            <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-                               <div class="row">
-                                   <a href="#" class="btn btn-loader hidden-xs" @click.prevent="feed()">
-                                       <div  class="btn-content">
+            <section class="main-content col-xs-12" v-if="products.length > 0">
+                <div class="row">
+                    <product-article
+                            :products="products"
+                            :loading_img="loading_img"
+                            :defultimg="defultimg"
+                            :str="str"
+                            :loading="loading"
+                    >
+                    </product-article>
+                    <div class="load-more-button" v-if="searchText == '' && continueToLoadProducts == true ">
+                        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                            <div class="row">
+                                <a href="#" class="btn btn-loader hidden-xs" @click.prevent="feed()">
+                                    <div class="btn-content">
 <span v-show="!loadMoreActive">                                   مشاهده محصولات بیشتر
 </span>
-                                           <span v-show="!loadMoreActive" class="fa fa-plus-circle"></span>
-                                           <img v-show="loadMoreActive" :src="loading_img">
-                                       </div>
-                                   </a>
-                                   <a href="#" class="btn btn-loader hidden-sm hidden-md hidden-lg" @click.prevent="feed()">
-                                       <div class="btn-content">
+                                        <span v-show="!loadMoreActive" class="fa fa-plus-circle"></span>
+                                        <img v-show="loadMoreActive" :src="loading_img">
+                                    </div>
+                                </a>
+                                <a href="#" class="btn btn-loader hidden-sm hidden-md hidden-lg"
+                                   @click.prevent="feed()">
+                                    <div class="btn-content">
                                     <span v-show="!loadMoreActive">
                                         بیشتر
                                     </span>
-                                           <span v-show="!loadMoreActive" class="fa fa-plus-circle"></span>
-                                           <img v-show="loadMoreActive" :src="loading_img">
+                                        <span v-show="!loadMoreActive" class="fa fa-plus-circle"></span>
+                                        <img v-show="loadMoreActive" :src="loading_img">
 
-                                       </div>
-                                   </a>
+                                    </div>
+                                </a>
 
-                               </div>
                             </div>
                         </div>
                     </div>
-                </section>
-                <section class="main-content  col-xs-12 " v-else-if="products.length == 0 && searchActive == true">
-                    <p></p>
-                    <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-                    <p>شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-                    <br/>
-                    <div class="text-center">
-                        <button class="btn btn-success">درخواست خرید</button>
-                    </div>
-                </section>
-                <section class="main-content  col-xs-12 " v-else-if="products.length == 0 && searchText != '' ">
-                    <p></p>
-                    <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-                    <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-                    <br/>
-                    <div class="text-center">
-                        <a class="green_bot col-xs-4 " @click="registerRequestInSearchNotFoundCase()">درخواست خرید</a>
-                    </div>
-                    <br/>
-                </section>
-                <section class="main-content  col-xs-12 " v-else-if="products.length == 0 && searchText == '' ">
-                    <p></p>
-                    <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-                    <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-                    <br/>
-                    <div class="text-center">
-                        <a class="green_bot col-xs-4 " @click="registerRequestInSearchNotFoundCase()">درخواست خرید</a>
-                    </div>
-                    <br/>
-                </section>
-                <section class="loading_images  col-xs-12" v-else-if="loadMoreActive == false">
-                    <img :src="loading_img" style="width:200px;height:200px">
-                </section>
-                <section class="loading_images  col-xs-12" v-else>
-                    <img :src="loading_img" >
-                </section>
+                </div>
+            </section>
+            <section class="main-content  col-xs-12 " v-else-if="products.length == 0 && searchActive == true">
+                <p></p>
+                <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+                <p>شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+                <br/>
+                <div class="text-center">
+                    <button class="btn btn-success">درخواست خرید</button>
+                </div>
+            </section>
+            <section class="main-content  col-xs-12 " v-else-if="products.length == 0 && searchText != '' ">
+                <p></p>
+                <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+                <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+                <br/>
+                <div class="text-center">
+                    <a class="green_bot col-xs-4 " @click="registerRequestInSearchNotFoundCase()">درخواست خرید</a>
+                </div>
+                <br/>
+            </section>
+            <section class="main-content  col-xs-12 " v-else-if="products.length == 0 && searchText == '' ">
+                <p></p>
+                <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+                <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+                <br/>
+                <div class="text-center">
+                    <a class="green_bot col-xs-4 " @click="registerRequestInSearchNotFoundCase()">درخواست خرید</a>
+                </div>
+                <br/>
+            </section>
+            <section class="loading_images  col-xs-12" v-else-if="loadMoreActive == false">
+                <img :src="loading_img" style="width:200px;height:200px">
+            </section>
+            <section class="loading_images  col-xs-12" v-else>
+                <img :src="loading_img">
+            </section>
         </main>
 
 
@@ -529,11 +553,12 @@
 <script>
     import productArticle from './product_components/product_article'
     import productAsideCategories from './product_components/product_aside_categories'
+    import {eventBus} from "../../../../js/router/dashboard_router";
 
     var viz = false;
 
     export default {
-        components:{
+        components: {
             "product-article": productArticle,
             "product-aside-categories": productAsideCategories,
 
@@ -554,9 +579,9 @@
                     photos: [],
                 },
                 searchText: '',
-                provinceId : '',
-                categoryId : '',
-                searchValue:this.$route.params.searchText,
+                provinceId: '',
+                categoryId: '',
+                searchValue: this.$route.params.searchText,
                 scrolled: false,
                 productCountInPage: 6,
                 productCountInEachLoad: 5,
@@ -578,8 +603,8 @@
                 var packType = $('article:nth-of-type(' + index + ') .buy_details input#pack-type');
                 var description = $('article:nth-of-type(' + index + ') .buy_details textarea#description');
             },
-            filterProducts:function(productsFilter){
-              this.products = productsFilter;
+            filterProducts: function (productsFilter) {
+                this.products = productsFilter;
             },
             dropdown: function () {
                 $(".profile-list").fadeIn("slow", function () {
@@ -604,7 +629,7 @@
                 var searchValueText = searchValue;
 
                 if (searchValueText) {
-                    this.registerComponentStatistics('homePage','search',searchValueText);
+                    this.registerComponentStatistics('homePage', 'search', searchValueText);
                     this.searchText = searchValueText;
                 }
                 else {
@@ -658,13 +683,13 @@
                     }
                     else {
                         this.popUpMsg = 'حساب کاربری شما از نوع خریدار نیست.';
-                        eventBus.$emit('submitSuccess',this.popUpMsg);
+                        eventBus.$emit('submitSuccess', this.popUpMsg);
                         $('#myModal').modal('show');
                     }
                 }
                 else {
                     this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
-                    eventBus.$emit('submitSuccess',this.popUpMsg);
+                    eventBus.$emit('submitSuccess', this.popUpMsg);
                     $('#myModal2').modal('show');
                 }
             },
@@ -675,10 +700,10 @@
                 const bottomOfPage = visible + scrollY >= pageHeight;
                 return bottomOfPage || pageHeight < visible;
             },
-            registerComponentStatistics:function(categoryName,actionName,labelName){
-                gtag('event',actionName,{
-                    'event_category' : categoryName,
-                    'event_label'    : labelName
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName, {
+                    'event_category': categoryName,
+                    'event_label': labelName
                 });
             }
         },
@@ -713,6 +738,8 @@
             },
         },
         created() {
+            gtag('config', 'UA-129398000-1', {'page_path': '/product-list'});
+
             document.addEventListener('click', this.documentClick)
             //window.addEventListener('scroll', this.handleScroll);
 //        window.addEventListener('scroll', () => {

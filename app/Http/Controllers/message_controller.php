@@ -7,6 +7,8 @@ use App\message;
 use App\myuser;
 use DB;
 use App\Jobs\SendNewMessageNotification;
+use Carbon\Carbon;
+use App\daily_sms_blacklist;
 
 class message_controller extends Controller
 {
@@ -33,6 +35,7 @@ class message_controller extends Controller
             
             return response()->json([
                 'status' => true,
+                'message' => $msg,
                 'msg' => 'msg sent.'
             ],201);
         }
@@ -271,4 +274,62 @@ class message_controller extends Controller
             'contact' => $contact
         ]);
     }
+    
+    public function get_users_who_have_unread_messages($exclude_users_from_sms_daily_black_list = true)
+    {
+        $to = Carbon::now();
+        $from = Carbon::now()->subDays(2);
+        
+        $users_info = DB::table('myusers')
+                            ->join('messages','messages.receiver_id','=','myusers.id') 
+                            ->where('messages.is_read',false)
+                            ->whereBetween('messages.created_at',[$from,$to])
+                            ->select('myusers.id as user_id','myusers.phone')
+                            ->distinct()
+                            ->get();
+        
+        if($exclude_users_from_sms_daily_black_list == false){
+            return $user_info;
+        }
+        else{
+            $black_list_users = daily_sms_blacklist::all();
+    
+            $user_info = $users_info->filter(function($user) use($black_list_users){
+                
+                $is_user_in_black_list = $black_list_users
+                    ->filter(function($black_list_user) use($user){
+                        return $user->user_id == $black_list_user->myuser_id;
+                    })->count() > 0;
+                
+                return ! $is_user_in_black_list ;
+            });
+            
+            return $user_info;
+        }
+    }
+    
+    public function update_daily_sms_black_list($user_list)
+    {
+        if($user_list->count() > 0){
+            $user_list_array = $this->get_user_id_array_from_user_list_collection($user_list);
+        
+            DB::table('daily_sms_blacklists')
+                    ->insert($user_list_array);
+        }
+        
+    }
+    
+    protected function get_user_id_array_from_user_list_collection(&$user_list)
+    {
+        $user_array = [];
+        
+        $user_list->each(function($user) use(&$user_array){
+            $user_array[] = ['myuser_id' => $user->user_id];
+        });
+        
+        return $user_array;
+    }
+    
+    
+    
 }

@@ -77,7 +77,7 @@
                     <p class="list-time col-sm-2 col-xs-12">
                         {{buyAd.register_date}}
                     </p>
-                    <router-link class="col-sm-3 col-xs-12" :to="'/buyAd-request-detail/' +  buyAd.id">
+                    <router-link class="col-sm-3 col-xs-12" :to="'/dashboard/buyAd-request-detail/' +  buyAd.id">
                             <p class="detail-success">
                                 مشاهده ی جزییات
                             </p>
@@ -144,7 +144,9 @@
         mounted() {
             this.init();
             eventBus.$emit('subHeader', this.items);
+        },
+        created(){
+            gtag('config','UA-129398000-1',{'page_path': '/buyAd-requests'});
         }
-        ,
     }
 </script>

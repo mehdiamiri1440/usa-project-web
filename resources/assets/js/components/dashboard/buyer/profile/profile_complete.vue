@@ -745,6 +745,9 @@
             eventBus.$emit('subHeader', this.items);
             $('input[type="file"]').imageuploadify();
         },
+        created(){
+            gtag('config','UA-129398000-1',{'page_path': '/profile-complementary'});
+        }
     }
 
     function call_api(route, data, call_back) {

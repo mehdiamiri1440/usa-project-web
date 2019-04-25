@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <link rel="icon" href="{{asset('assets/img/logo-Inco-mobile.png')}}">
         <title>اینکوباک | بازارگاه کشاورزی</title>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
         <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
         <script src="{{asset('assets/js/jquery.easing.min.js')}}"></script>
@@ -26,7 +27,6 @@
         <script src="{{asset('assets/cdn/axios.js')}}"></script>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{csrf_token()}}">
         <script>
             window.Laravel = { csrfToken : '{{csrf_token()}}'}
         </script>
@@ -38,11 +38,9 @@
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               var userId = "<?php echo session('user_id');?>";
-//              gtag('config', 'UA-129398000-1',{
-//                  'user_id' : "<?php echo session('user_id');?>"
-//              });
 
-              gtag('config', 'UA-129398000-1');
+//              gtag('config', 'UA-129398000-1');
+              gtag('config', 'UA-129398000-1',{'send_page_view': false });
         </script>
 
 

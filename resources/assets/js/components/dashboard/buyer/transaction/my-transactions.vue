@@ -149,7 +149,7 @@
                   <!--end title list -->
                   <li class="list-group-item content-list col-xs-12" v-for="transaction in transactions">
                       <!--{{this.transactionInfo['id']}}-->
-                      <router-link :to="'/transaction-detail/' + transaction.transaction_id" >
+                      <router-link :to="'/dashboard/transaction-detail/' + transaction.transaction_id" >
                           <p class="number col-xs-2">
                               {{transaction.transaction_id}}
                           </p>
@@ -177,7 +177,7 @@
                   <!--end title list -->
                   <li class="list-group-item content-list col-xs-12" v-for="transaction in instantTransactions">
                       <!--{{this.transactionInfo['id']}}-->
-                      <router-link :to="'/instant-transaction-detail/' + transaction.transaction_id" >
+                      <router-link :to="'/dashboard/instant-transaction-detail/' + transaction.transaction_id" >
                           <p class="number col-xs-2">
                               {{transaction.transaction_id}}
                           </p>
@@ -193,7 +193,7 @@
                       </router-link>
                   </li>
               </ul>
-              
+
               <div class="loading_images  col-xs-12" v-else-if="isLoading">
                   <img :src="loading_img" style="width:200px;height:200px">
               </div>
@@ -201,7 +201,7 @@
                   <h4 class="text-center" dir="rtl">تراکنشی در این قسمت وجود ندارد.</h4>
               </div>
         </section>
-        
+
     </div>
 </template>
 <script>
@@ -239,7 +239,7 @@
                         }
                         self.isLoading = false;
                     });
-                
+
                 axios.post('/get_user_instant_transaction_list')
                     .then(function (response) {
                         self.instantTransactions = response.data.transactions;

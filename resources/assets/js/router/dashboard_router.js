@@ -68,59 +68,60 @@ Vue.use(Router);
 export const eventBus = new Vue();
 
 const myRouter =  new Router({
+    mode:'history',
     base: process.env.BASE_URL,
     routes: [
         {
-            path: '/',
+            path: '/master/',
             name: 'indexPage',
             components: {
                 layouts: indexPage,
             },
         },
         {
-            path: '/profile/:user_name',
+            path: '/master/profile/:user_name',
             name: 'profile',
             components: {
                 layouts: profile,
             },
         },
         {
-            path: '/about-us',
+            path: '/master/about-us',
             name: 'aboutUs',
             components: {
                 layouts: indexAboutUs,
             },
         },
         {
-            path: '/privacy-and-policy',
+            path: '/master/privacy-and-policy',
             name: 'privacyAndPolicy',
             components: {
                 layouts: indexPrivacyAndPolicy,
             },
         },
         {
-            path: '/product-list',
+            path: '/master/product-list',
             name: 'productList',
             components: {
                 layouts: productList,
             },
         },
         {
-            path: '/product-list/:searchText',
+            path: '/master/product-list/:searchText',
             name: 'productList',
             components: {
                 layouts: productList,
             },
         },
         {
-            path: '/product-view',
+            path: '/master/product-view',
             name: 'productView',
             components: {
                 layouts: productView,
             },
         },
       {
-            path: '/password',
+            path: '/dashboard/password',
             name: 'password',
             components: {
                 seller: sellerChangePassword,
@@ -131,7 +132,7 @@ const myRouter =  new Router({
             }
         }
         , {
-            path: '/profile',
+            path: '/dashboard/profile',
             name: 'profileBasic',
             components: {
                 seller: sellerProfileBasic,
@@ -142,7 +143,7 @@ const myRouter =  new Router({
             }
         }
         , {
-            path: '/complementry',
+            path: '/dashboard/complementry',
             name: 'compelementry',
             components: {
                 seller: sellerCompelementry,
@@ -150,53 +151,53 @@ const myRouter =  new Router({
             },
         },
         {
-            path: '/mobile-accounts',
+            path: '/dashboard/mobile-accounts',
             name: 'mobileAccounts',
             components: {
                 seller: mobileAccountsMessage,
                 buyer: mobileAccountsMessage,
             },
         },{
-            path: '/mobile-show',
+            path: '/dashboard/mobile-show',
             name: 'mobileShow',
             components: {
                 seller: mobileShowMessage,
                 buyer: mobileShowMessage,
             },
         },{
-            path: '/messages',
+            path: '/dashboard/messages',
             name: 'messages',
             components: {
                 seller: messages,
                 buyer: messages,
             },
         },
-        {
-            path: '/profile_contract',
-            name: 'profileContract',
-            components: {
-                seller: sellerProfileContract,
-                buyer: buyerProfileContract,
-            },
-            beforeEnter: async (to, from, next) => {
-
-                axios.post('/user/profile_info',{
-                    confirmed : true
-                })
-                .then(function(response){
-                    if(response.data.profile.confirmed == false){
-                        next(false);
-                        // $('#myModal-1').modal('show');
-                    }
-                    else{
-                        next();
-                    }
-
-                });
-            },
-        }
-        , {
-            path: '/buyAd-requests',
+//        {
+//            path: '/profile_contract',
+//            name: 'profileContract',
+//            components: {
+//                seller: sellerProfileContract,
+//                buyer: buyerProfileContract,
+//            },
+//            beforeEnter: async (to, from, next) => {
+//
+//                axios.post('/user/profile_info',{
+//                    confirmed : true
+//                })
+//                .then(function(response){
+//                    if(response.data.profile.confirmed == false){
+//                        next(false);
+//                        // $('#myModal-1').modal('show');
+//                    }
+//                    else{
+//                        next();
+//                    }
+//
+//                });
+//            },
+//        },
+         {
+            path: '/dashboard/buyAd-requests',
             name: 'buyAdRequests',
             components: {
                 seller: sellerBuyAdRequests,
@@ -204,7 +205,7 @@ const myRouter =  new Router({
             props: true
         }
         , {
-            path: '/register-request',
+            path: '/dashboard/register-request',
             name: 'registerRequest',
             components: {
                 buyer: buyerRgisterRequest,
@@ -212,7 +213,7 @@ const myRouter =  new Router({
             props: true
         }
         , {
-            path: '/buyAd-request-detail/:id',
+            path: '/dashboard/buyAd-request-detail/:id',
             name: 'buyAdRequestsDetail',
             components: {
                 seller: sellerBuyAdRequestsDetail,
@@ -222,7 +223,7 @@ const myRouter =  new Router({
             }
         }
         , {
-            path: '/sell-offer-detail/:id',
+            path: '/dashboard/sell-offer-detail/:id',
             name: 'buyerSellOfferDetail',
             components: {
                 buyer: buyerSellOfferDetail,
@@ -232,7 +233,7 @@ const myRouter =  new Router({
             }
         }
         , {
-            path: '/my-buyAds',
+            path: '/dashboard/my-buyAds',
             name: 'myBuyAds',
             components: {
                 buyer: buyerMyBuyAd,
@@ -242,21 +243,21 @@ const myRouter =  new Router({
             }
         }
         , {
-            path: '/my-sell-offers',
+            path: '/dashboard/my-sell-offers',
             name: 'mySellOffers',
             components: {
                 seller: sellerMySellOffers,
             },
         }
         , {
-            path: '/register-product',
+            path: '/dashboard/register-product',
             name: 'registerProduct',
             components: {
                 seller: sellerRegisterProduct,
             },
         }
         , {
-            path: '/transaction-list',
+            path: '/dashboard/transaction-list',
             name: 'myTransactions',
             components: {
                 seller: sellerMyTransactions,
@@ -264,7 +265,7 @@ const myRouter =  new Router({
             },
         }
         , {
-            path: '/terminated-transaction-list',
+            path: '/dashboard/terminated-transaction-list',
             name: 'myTerminatedTransactions',
             components: {
                 seller: sellerMyTerminatedTransactions,
@@ -272,28 +273,28 @@ const myRouter =  new Router({
             },
         }
         , {
-            path: '/payed-factor-list',
+            path: '/dashboard/payed-factor-list',
             name: 'PayedFactorList',
             components: {
                 buyer: buyerPayedFactorList,
             },
         }
         , {
-            path: '/factor-detail/:id',
+            path: '/dashboard/factor-detail/:id',
             name: 'buyerFactorDetail',
             components: {
                 buyer: buyerFactorDetail,
             },
         }
         , {
-            path: '/instant-factor-detail/:id',
+            path: '/dashboard/instant-factor-detail/:id',
             name: 'buyerInstantFactorDetail',
             components: {
                 buyer: buyerFactorDetail,
             },
         }
         , {
-            path: '/transaction-detail/:id',
+            path: '/dashboard/transaction-detail/:id',
             name: 'transactionDetail',
             components: {
                 seller: sellerTransactionDetail,
@@ -304,7 +305,7 @@ const myRouter =  new Router({
             }
         },
         {
-            path: '/instant-transaction-detail/:id',
+            path: '/dashboard/instant-transaction-detail/:id',
             name: 'instantTransactionDetail',
             components: {
                 seller: sellerTransactionDetail,
@@ -315,7 +316,7 @@ const myRouter =  new Router({
             },
         }
         , {
-            path: '/transaction-report/:id',
+            path: '/dashboard/transaction-report/:id',
             name: 'transactionReport',
             components: {
                 seller: sellerTransactionReport,
@@ -326,7 +327,7 @@ const myRouter =  new Router({
             }
         }
         , {
-            path: '/instant-transaction-report/:id',
+            path: '/dashboard/instant-transaction-report/:id',
             name: 'instantTransactionReport',
             components: {
                 seller: sellerTransactionReport,
@@ -337,7 +338,7 @@ const myRouter =  new Router({
             }
         }
         , {
-            path: '/guide',
+            path: '/dashboard/guide',
             name: 'guide',
             components: {
                 seller: sellerGuide,
@@ -384,20 +385,25 @@ myRouter.beforeEach((to,from,next) => {
 */
 
 
-myRouter.afterEach(( to, from ) => {
-
-  if ("ga" in window) {
-    var tracker = ga.getAll()[0];
-//    console.log('size : ' + tracker.length);
-    if (tracker){
-        console.log(to.path);
-        tracker.set('page',to.path);
-        tracker.send('pageview');
-//        tracker.send('event', 'categoryName', 'ActionName','LabelName');
-  }
-  }
-  
-});
+//myRouter.afterEach((to, from,next ) => {
+//
+////    if ("gtag" in window) {
+////        console.log(to.path);
+////        gtag("pageview",to.path);
+////    }
+//
+//  if ("ga" in window) {
+//    var tracker = ga.getAll()[0];
+////    console.log('size : ' + tracker.length);
+//    if (tracker){
+//        console.log(to.path);
+//        tracker.set('page',to.path);
+//        tracker.send('pageview');
+////        tracker.send('event', 'categoryName', 'ActionName','LabelName');
+//  }
+//  }
+//
+//});
 
 export default myRouter;
 

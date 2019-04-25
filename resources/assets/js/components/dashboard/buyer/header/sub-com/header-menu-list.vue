@@ -85,9 +85,9 @@
               </li>-->
 
               <li class="list-item">
-                  <router-link :class="{'active' : this.active_el === 8}" :to="{ name : 'messages' }" @click="tracker.send('event', 'sidebar', 'click','پیام ها');">
+                  <router-link :class="{'active' : this.active_el === 8}" :to="{ name : 'messages' }">
                       <span>پیام ها</span>
-                      <span class="custom-badge">{{messageCount}}</span>
+                      <span class="custom-badge" v-if="messageCount">{{messageCount}}</span>
 
                       <i class="fa fa-comment " aria-hidden="true"></i>
                   </router-link>
@@ -122,13 +122,26 @@
         data(){
             return{
                 active_el:0,
-                unreadMessageCount:''
+                messageCount:''
             }
         },
         methods:{
            /* activate:function(el){
                 this.active_el = el;
             }*/
+
+
+            init:function(){
+                var self = this;
+
+                axios.post('/get_total_unread_messages_for_current_user')
+                    .then(function(response){
+                            self.messageCount = response.data.msg_count;
+                }).
+                    catch(function(err){
+                    //
+                });
+            },
 
             subIsActive(input) {
                 const paths = Array.isArray(input) ? input : [input];
@@ -140,54 +153,65 @@
 
         },watch:{
             $route (){
-               if (this.subIsActive('/complementry')  || this.subIsActive('/profile_contract') ){
+               if (this.subIsActive('/dashboard/complementry')  || this.subIsActive('/dashboard/profile_contract') ){
                    this.active_el = 1
-               }else if(this.subIsActive('/register-request')){
+               }else if(this.subIsActive('/dashboard/register-request')){
                    this.active_el = 2
-               }else if(this.subIsActive('/my-buyAds') || this.subIsActive('/sell-offer-detail/' + this.$route.params.id)){
+               }else if(this.subIsActive('/dashboard/my-buyAds') || this.subIsActive('/dashboard/sell-offer-detail/' + this.$route.params.id)){
                    this.active_el = 3
-               }else if(this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/' + this.$route.params.id) || this.subIsActive('/instant-transaction-detail/' + this.$route.params.id)){
+               }else if(this.subIsActive('/dashboard/transaction-list') || this.subIsActive('/dashboard/transaction-detail/' + this.$route.params.id) || this.subIsActive('/dashboard/instant-transaction-detail/' + this.$route.params.id)){
                    this.active_el = 4
-               }else if(this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/' + this.$route.params.id) || this.subIsActive('/instant-transaction-report/' + this.$route.params.id)){
+               }else if(this.subIsActive('/dashboard/terminated-transaction-list') || this.subIsActive('/dashboard/transaction-report/' + this.$route.params.id) || this.subIsActive('/dashboard/instant-transaction-report/' + this.$route.params.id)){
                    this.active_el = 5
-               }else if(this.subIsActive('/payed-factor-list') || this.subIsActive('/factor-detail/' + this.$route.params.id) || this.subIsActive('/instant-factor-detail/' + this.$route.params.id)){
+               }else if(this.subIsActive('/dashboard/payed-factor-list') || this.subIsActive('/dashboard/factor-detail/' + this.$route.params.id) || this.subIsActive('/dashboard/instant-factor-detail/' + this.$route.params.id)){
                    this.active_el = 6
-               }else if(this.subIsActive('/messages')){
+               }else if(this.subIsActive('/dashboard/messages')){
                    this.active_el = 8
-               }else if(this.subIsActive('/guide')){
+               }else if(this.subIsActive('/dashboard/guide')){
                    this.active_el = 7
                }else{
                    this.active_el = 1
                }
             }
         },mounted:function(){
-            if (this.subIsActive('/complementry')  || this.subIsActive('/profile')  || this.subIsActive('/profile_contract') ){
+            if (this.subIsActive('/dashboard/complementry')  || this.subIsActive('/dashboard/profile')  || this.subIsActive('/dashboard/profile_contract') ){
                 this.active_el = 1
-            }else if(this.subIsActive('/register-request')){
+            }else if(this.subIsActive('/dashboard/register-request')){
                 this.active_el = 2
-            }else if(this.subIsActive('/my-buyAds') || this.subIsActive('/sell-offer-detail/' + this.$route.params.id)){
+            }else if(this.subIsActive('/dashboard/my-buyAds') || this.subIsActive('/dashboard/sell-offer-detail/' + this.$route.params.id)){
                 this.active_el = 3
-            }else if(this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/' + this.$route.params.id)){
+            }else if(this.subIsActive('/dashboard/transaction-list') || this.subIsActive('/dashboard/transaction-detail/' + this.$route.params.id)){
                 this.active_el = 4
-            }else if(this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/' + this.$route.params.id)){
+            }else if(this.subIsActive('/dashboard/terminated-transaction-list') || this.subIsActive('/dashboard/transaction-report/' + this.$route.params.id)){
                 this.active_el = 5
-            }else if(this.subIsActive('/payed-factor-list') || this.subIsActive('/factor-detail/' + this.$route.params.id)){
+            }else if(this.subIsActive('/dashboard/payed-factor-list') || this.subIsActive('/dashboard/factor-detail/' + this.$route.params.id)){
                 this.active_el = 6
             }
-            else if(this.subIsActive('/messages')){
+            else if(this.subIsActive('/dashboard/messages')){
                 this.active_el = 8
-            }else if(this.subIsActive('/guide')){
+            }else if(this.subIsActive('/dashboard/guide')){
                 this.active_el = 7
             }else{
                 this.active_el = 1
             }
+
+            this.init();
         },
         created() {
+            var self = this;
+
             eventBus.$on('messageCount', (event) => {
-                this.messageCount = event;
+                this.messageCount += event;
             });
             eventBus.$on('active', (event) => {
                 this.active_el = event;
+            });
+
+            Echo.private('testChannel.' + userId)
+                .listen('newMessage', (e) => {
+                    var senderId = e.new_message.sender_id;
+
+                    self.messageCount += 1;
             });
         },
 

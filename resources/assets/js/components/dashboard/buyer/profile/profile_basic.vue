@@ -640,6 +640,9 @@
                 show_image_preview(this);
             })
 
+        },
+        created(){
+            gtag('config','UA-129398000-1',{'page_path': '/profile-basic'});
         }
     }
 

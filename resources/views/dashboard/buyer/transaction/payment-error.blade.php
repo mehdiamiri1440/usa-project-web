@@ -35,7 +35,7 @@
                 event.preventDefault();
 
                 var transactionId = "<?php echo $id; ?>" ;
-                var backUrl = '/dashboard/#/transaction-detail/' + transactionId;
+                var backUrl = '/dashboard/transaction-detail/' + transactionId;
                 window.location.href = backUrl;
             }
 

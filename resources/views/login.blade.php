@@ -4,6 +4,7 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>ورود</title>
+    <link rel="icon" href="{{asset('assets/img/logo-Inco-mobile.png')}}">
     <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.easing.min.js')}}"></script>
@@ -14,10 +15,22 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap-theme.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/login/style.css')}}">
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
 
-    </style>
+        gtag('js', new Date());
+
+//        gtag('config', 'UA-129398000-1');
+        gtag('config', 'UA-129398000-1',{'send_page_view': false });
+    </script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <div class="bg">
 </div>

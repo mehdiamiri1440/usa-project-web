@@ -40,7 +40,14 @@ return [
             'queue' => 'default',
             'retry_after' => 90,
         ],
-
+        
+        'database' => [
+            'driver' => 'database',
+            'table' => 'sms_jobs',
+            'queue' => 'sms',
+            'retry_after' => 90,
+        ],
+        
         'beanstalkd' => [
             'driver' => 'beanstalkd',
             'host' => 'localhost',

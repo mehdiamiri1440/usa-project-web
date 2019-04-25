@@ -529,5 +529,8 @@
           this.init();
           eventBus.$emit('subHeader', this.items);
       },
+      created(){
+          gtag('config','UA-129398000-1',{'page_path': '/register-request'});
+      }
   }
 </script>
