@@ -767,6 +767,19 @@
         deactivated() {
             this.isComponentActive = false;
         },
+        metaInfo(){
+            console.log('meta test');
+            
+            return {
+                'title' : 'Messanger',
+                'meta' : [
+                    {
+                        'name':'description',
+                        'content':'this a description part'
+                    }
+                ]
+            };
+        }
     }
 </script>
 

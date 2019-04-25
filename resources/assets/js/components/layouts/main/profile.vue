@@ -521,23 +521,26 @@
 
                 var imgMeta;
                 if (this.profileOwner.profile.profile_photo){
-                    imgMeta = '<meta v-if="' + this.profileOwner.profile.profile_photo +'" property="og:image" itemProp="image" content="' + this.str + '/' + this.profileOwner.profile.profile_photo + ' "/>';
+                    imgMeta = '<meta property="og:image" itemProp="image" content="' + this.str + '/' + this.profileOwner.profile.profile_photo + ' "/>';
                 }else {
-                    imgMeta = '<meta v-else  property="og:image" itemProp="image" content="' + this.defultimg + '"/>'
+                    imgMeta = '<meta v-else  property="og:image" itemProp="image" content="' + this.defultimg + '"/>';
                 }
 
-                $('head').append('<meta property="og:type" content="website"/>' +
+                document.head.append('<meta property="og:type" content="website"/>' +
                     '<meta property="og:image:height" content="256"/>' +
                     '<meta property="og:image:width" content="256"/>' +
                     '<meta property="og:image:type" content="image/jpeg"/>' +
                     '<meta property="og:description" content="صفحه ی شخصی پروفایل کاربران اینکوباک"/>' +
                     ' <meta property="og:site_name" content="اینکوباک">' +
                     '<meta name="description" content="صفحه ی شخصی پروفایل کاربران اینکوباک. محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید">' +
-                    '<meta property="og:url" content="\'https://www.incobac.com/master/#/profile/' + this.getUserName  +'"/>' +
+                    '<meta property="og:url" content="\'https://www.incobac.com/profile/' + this.getUserName  +'"/>' +
                     '<meta property="og:title" content="' + this.profileOwner.user_info.first_name +
                     ' '
                     + this.profileOwner.user_info.last_name + '"/>'
                     + imgMeta);
+                
+                    document.title = this.profileOwner.user_info.first_name + ' ' + this.profileOwner.user_info.last_name;  
+                    document.head.querySelector('meta[name=description]').content = this.profileOwner.profile.description;
 
             },
             init: function () {
@@ -572,7 +575,7 @@
                 })
                     .then(function (response) {
                         self.profileOwner = response.data;
-                        //self.addMetaTag();
+                        self.addMetaTag();
                     })
                     .catch(function (err) {
                         if (err.response.status == 404) {
@@ -727,7 +730,6 @@
 
         },
         mounted() {
-
             this.init();
 
         },
@@ -741,7 +743,8 @@
         created() {
             gtag('config','UA-129398000-1',{'page_path': '/profile'});
             
-            document.addEventListener('click', this.documentClick)
+            document.addEventListener('click', this.documentClick);
+            
         },
     };
 

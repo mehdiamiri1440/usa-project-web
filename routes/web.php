@@ -215,6 +215,10 @@ Route::get('/product-view/{product_id}/{city}-{province}-{product_name}-{sub_cat
         return view('dashboard.buyer.product-list');
 });
 
+Route::get('master/{any}',function(){
+        return view('layout.master');
+    })->where('any','.*');
+
 
 Route::group(['middleware' => [login::class]],function(){
 
@@ -240,7 +244,15 @@ Route::group(['middleware' => [login::class]],function(){
         ]);
     })->name('instant-back-to-basic');
 
-
+    
+    Route::get('/dashboard/{any}',function(){
+        if(session('is_seller')){
+            return view('layout.seller-dashboard');
+        }
+        else if(session('is_buyer')){
+            return view('layout.buyer-dashboard');
+        }
+    })->where('any','.*');
 
     Route::group(['prefix' => 'dashboard'],function(){
         Route::get('/',function(){
@@ -304,12 +316,12 @@ Route::group(['middleware' => [login::class]],function(){
                 'as' => 'get_sell_offer_by_id'
             ])->where('id', '[0-9]+');
 
-            Route::get('/register-request',function(){
-                if(session('is_buyer')){
-                    return view('dashboard.buyer.request.register-request');
-                }
-                else return abort(404);
-            })->name('register_buyer_request');
+//            Route::get('/register-request',function(){
+//                if(session('is_buyer')){
+//                    return view('dashboard.buyer.request.register-request');
+//                }
+//                else return abort(404);
+//            })->name('register_buyer_request');
 
             Route::post('/get_transaction_info',[
                 'uses' => 'transaction_controller@get_transaction_info',

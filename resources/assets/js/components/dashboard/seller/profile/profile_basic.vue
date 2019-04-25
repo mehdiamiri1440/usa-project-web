@@ -479,6 +479,8 @@
 
 <script>
     import {eventBus} from "../../../../router/dashboard_router";
+    import ImageCompressor from '@xkeshi/image-compressor';
+    import FileUpload from 'vue-upload-component';
     export default {
         props: [
             'str',

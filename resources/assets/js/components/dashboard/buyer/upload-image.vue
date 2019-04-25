@@ -542,7 +542,8 @@
                 editFile: {
                     show: false,
                     name: '',
-                }
+                },
+                autoCompress: 512 * 512,
             }
         },
         watch: {
@@ -613,7 +614,7 @@
                     if (newFile.file && newFile.type.substr(0, 6) === 'image/' && this.autoCompress > 0 && this.autoCompress < newFile.size) {
                         newFile.error = 'compressing'
                         const imageCompressor = new ImageCompressor(null, {
-                            convertSize: Infinity,
+                            convertSize: 1000000,
                             maxWidth: 512,
                             maxHeight: 512,
                         })

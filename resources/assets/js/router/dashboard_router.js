@@ -68,7 +68,7 @@ Vue.use(Router);
 export const eventBus = new Vue();
 
 const myRouter =  new Router({
-//    html5:true,
+    mode:'history',
     base: process.env.BASE_URL,
     routes: [
         {
@@ -79,7 +79,7 @@ const myRouter =  new Router({
             },
         },
         {
-            path: '/profile/:user_name',
+            path: '/master/profile/:user_name',
             name: 'profile',
             components: {
                 layouts: profile,
@@ -100,14 +100,14 @@ const myRouter =  new Router({
             },
         },
         {
-            path: '/product-list',
+            path: '/master/product-list',
             name: 'productList',
             components: {
                 layouts: productList,
             },
         },
         {
-            path: '/product-list/:searchText',
+            path: '/master/product-list/:searchText',
             name: 'productList',
             components: {
                 layouts: productList,
@@ -120,8 +120,8 @@ const myRouter =  new Router({
                 layouts: productView,
             },
         },
-      {
-            path: '/password',
+        {
+            path: '/dashboard/password',
             name: 'password',
             components: {
                 seller: sellerChangePassword,
@@ -132,7 +132,7 @@ const myRouter =  new Router({
             }
         }
         , {
-            path: '/profile',
+            path: '/dashboard/profile',
             name: 'profileBasic',
             components: {
                 seller: sellerProfileBasic,
@@ -143,7 +143,7 @@ const myRouter =  new Router({
             }
         }
         , {
-            path: '/complementry',
+            path: '/dashboard/complementry',
             name: 'compelementry',
             components: {
                 seller: sellerCompelementry,
@@ -151,21 +151,7 @@ const myRouter =  new Router({
             },
         },
         {
-            path: '/mobile-accounts',
-            name: 'mobileAccounts',
-            components: {
-                seller: mobileAccountsMessage,
-                buyer: mobileAccountsMessage,
-            },
-        },{
-            path: '/mobile-show',
-            name: 'mobileShow',
-            components: {
-                seller: mobileShowMessage,
-                buyer: mobileShowMessage,
-            },
-        },{
-            path: '/messages',
+            path: '/dashboard/messages',
             name: 'messages',
             components: {
                 seller: messages,
@@ -197,7 +183,7 @@ const myRouter =  new Router({
 //            },
 //        },
          {
-            path: '/buyAd-requests',
+            path: '/dashboard/buyAd-requests',
             name: 'buyAdRequests',
             components: {
                 seller: sellerBuyAdRequests,
@@ -205,7 +191,7 @@ const myRouter =  new Router({
             props: true
         }
         , {
-            path: '/register-request',
+            path: '/dashboard/register-request',
             name: 'registerRequest',
             components: {
                 buyer: buyerRgisterRequest,
@@ -213,7 +199,7 @@ const myRouter =  new Router({
             props: true
         }
         , {
-            path: '/buyAd-request-detail/:id',
+            path: '/dashboard/buyAd-request-detail/:id',
             name: 'buyAdRequestsDetail',
             components: {
                 seller: sellerBuyAdRequestsDetail,
@@ -223,7 +209,7 @@ const myRouter =  new Router({
             }
         }
         , {
-            path: '/sell-offer-detail/:id',
+            path: '/dashboard/sell-offer-detail/:id',
             name: 'buyerSellOfferDetail',
             components: {
                 buyer: buyerSellOfferDetail,
@@ -231,9 +217,9 @@ const myRouter =  new Router({
             params: {
                 active: 2
             }
-        }
-        , {
-            path: '/my-buyAds',
+        },
+        {
+            path: '/dashboard/my-buyAds',
             name: 'myBuyAds',
             components: {
                 buyer: buyerMyBuyAd,
@@ -243,21 +229,21 @@ const myRouter =  new Router({
             }
         }
         , {
-            path: '/my-sell-offers',
+            path: '/dashboard/my-sell-offers',
             name: 'mySellOffers',
             components: {
                 seller: sellerMySellOffers,
             },
         }
         , {
-            path: '/register-product',
+            path: '/dashboard/register-product',
             name: 'registerProduct',
             components: {
                 seller: sellerRegisterProduct,
             },
         }
         , {
-            path: '/transaction-list',
+            path: '/dashboard/transaction-list',
             name: 'myTransactions',
             components: {
                 seller: sellerMyTransactions,
@@ -338,7 +324,7 @@ const myRouter =  new Router({
             }
         }
         , {
-            path: '/guide',
+            path: '/dashboard/guide',
             name: 'guide',
             components: {
                 seller: sellerGuide,
