@@ -439,7 +439,7 @@
 <template>
     <div>
         <div class="flat-plust-icon hidden-lg hidden-md">
-            <a href="#"><i class="fa fa-plus"></i> </a>
+            <a href="#" @click.prevent = "addProductOrRequest()"><i class="fa fa-plus"></i> </a>
         </div>
         <header id="header" class="hidden-xs  main-header">
             <h1 class="title-page col-xs-12">
@@ -699,6 +699,21 @@
                 const pageHeight = document.documentElement.scrollHeight;
                 const bottomOfPage = visible + scrollY >= pageHeight;
                 return bottomOfPage || pageHeight < visible;
+            },
+            addProductOrRequest:function(){
+                if(this.currentUser.user_info){
+                    if(this.currentUser.user_info.is_seller){
+                        window.location.href = '/dashboard/register-product';
+                    }
+                    else if(this.currentUser.user_info.is_buyer){
+                        window.location.href = '/dashboard/register-request';
+                    }
+                }
+                else{
+                    this.popUpMsg = 'برای ثبت آگهی خرید یا فروش  ابتدا وارد سامانه شوید یا ثبت نام کنید.';
+                    eventBus.$emit('submitSuccess', this.popUpMsg);
+                    $('#myModal2').modal('show');
+                }
             },
             registerComponentStatistics: function (categoryName, actionName, labelName) {
                 gtag('event', actionName, {

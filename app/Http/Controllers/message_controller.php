@@ -151,7 +151,7 @@ class message_controller extends Controller
                             ->Join('profiles','myusers.id','=','profiles.myuser_id')
                             ->where('profiles.confirmed',true)
                             ->where('myusers.id',$contact_id)
-                            ->select(['myusers.id as contact_id','first_name', 'last_name', 'profile_photo'])
+                            ->select(['myusers.id as contact_id','first_name', 'last_name', 'profile_photo','user_name'])
                             ->get()
                             ->last();
         
@@ -247,6 +247,7 @@ class message_controller extends Controller
             'contact_id' => 'required|integer',
             'first_name' => 'required|string',
             'last_name'  => 'required|string',
+            'user_name'  => 'required|string',
         ]);
         
         $user_id = session('user_id');
@@ -258,6 +259,7 @@ class message_controller extends Controller
                 'first_name' => $request->first_name,
                 'last_name'  => $request->last_name,
                 'profile_photo' => $request->profile_photo,
+                'user_name'  => $request->user_name,
                 'unread_msgs_count' => $unread_msgs_count
         ];
         

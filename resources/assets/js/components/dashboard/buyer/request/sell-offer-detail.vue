@@ -659,6 +659,7 @@
                     first_name:this.sellOfferDetail.sell_offer_user_info.first_name,
                     last_name:this.sellOfferDetail.sell_offer_user_info.last_name,
                     profile_photo:this.sellOfferDetail.profile_photo,
+                    user_name:this.sellOfferDetail.sell_offer_user_info.user_name,
                 }
 
 

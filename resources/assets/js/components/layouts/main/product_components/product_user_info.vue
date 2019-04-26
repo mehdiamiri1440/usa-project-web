@@ -140,6 +140,7 @@
                     first_name:this.user_info.first_name,
                     last_name:this.user_info.last_name,
                     profile_photo:this.profile_photo,
+                    user_name:this.user_info.user_name,
                 }
 
                 if(this.current_user.user_info){

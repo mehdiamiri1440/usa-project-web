@@ -164,7 +164,8 @@ const myRouter =  new Router({
                 seller: mobileShowMessage,
                 buyer: mobileShowMessage,
             },
-        },{
+        },
+        {
             path: '/dashboard/messages',
             name: 'messages',
             components: {
@@ -231,8 +232,8 @@ const myRouter =  new Router({
             params: {
                 active: 2
             }
-        }
-        , {
+        }, 
+        {
             path: '/dashboard/my-buyAds',
             name: 'myBuyAds',
             components: {

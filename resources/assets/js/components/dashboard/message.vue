@@ -434,7 +434,11 @@
                                  :alt="selectedContact.first_name[0]">
                             <img v-else :src="defimgitem">
                         </div>
-                        <span>{{selectedContact.first_name + ' ' + selectedContact.last_name}}</span>
+                        <a :href="'/master/profile/' + selectedContact.user_name">
+                            <span>
+                            {{selectedContact.first_name + ' ' + selectedContact.last_name}}
+                            </span>
+                        </a>
                     </div>
                     <div class="back-state  pull-left">
                         <a href="#" @click.prevent="selectedContact = !selectedContact" class="green-bot">بازگشت</a>
@@ -767,6 +771,19 @@
         deactivated() {
             this.isComponentActive = false;
         },
+        metaInfo(){
+            console.log('meta test');
+            
+            return {
+                'title' : 'Messanger',
+                'meta' : [
+                    {
+                        'name':'description',
+                        'content':'this a description part'
+                    }
+                ]
+            };
+        }
     }
 </script>
 

@@ -216,8 +216,8 @@ Route::get('/product-view/{product_id}/{city}-{province}-{product_name}-{sub_cat
 });
 
 Route::get('master/{any}',function(){
-    return view('layout.master');
-})->where('any','.*');
+        return view('layout.master');
+    })->where('any','.*');
 
 
 Route::group(['middleware' => [login::class]],function(){
@@ -243,7 +243,6 @@ Route::group(['middleware' => [login::class]],function(){
             'transaction_id' => $transaction_id
         ]);
     })->name('instant-back-to-basic');
-
 
     Route::get('/dashboard/{any}',function(){
         if(session('is_seller')){
@@ -934,10 +933,9 @@ Route::group(['middleware' => [cors::class]],function(){
 //   'uses' => 'profile_controller@migrate_users'
 //]);
 
-Route::get('/testt',function(){
-    dispatch(new sendNewMessageSMSNotification())->onQueue('sms');
-    sendSMS::dispatch(['d','c'],'09118413054')->onQueue('sms');
-});
+//Route::get('/testt',function(){
+//    echo phpinfo();
+//});
 
 
 

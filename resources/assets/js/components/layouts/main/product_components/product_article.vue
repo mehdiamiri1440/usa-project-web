@@ -461,6 +461,7 @@
                     first_name:product.user_info.first_name,
                     last_name:product.user_info.last_name,
                     profile_photo:product.profile_info.profile_photo,
+                    user_name:product.user_info.user_name,
                 }
 
                 if(this.currentUser.user_info){
