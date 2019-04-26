@@ -960,7 +960,7 @@ img.image-blur:hover {
 
     .user-header-mobile .profile-menu-header i {
         top: 9px;
-        left: -40px;
+        right: 50px;
     }
 
     h1 {
@@ -1013,6 +1013,15 @@ img.image-blur:hover {
 }
 
 @media screen and (max-width: 767px) {
+    .profile-menu-header a {
+        color: #7f8c9b;
+        margin: 5px 0;
+        position: relative;
+        padding: 3px 15px !important;
+        width: 50px;
+        height: 50px;
+        display: block;
+    }
     .user-header-mobile {
         display: block;
         width: 7%;
@@ -1091,8 +1100,8 @@ img.image-blur:hover {
         margin-left: 30px;
     }
     .user-header-mobile .profile-menu-header i {
-        top: 9px;
-        left: -40px;
+        top: 3px;
+        right: 50px;
     }
     #video-bg {
         right: -200px;

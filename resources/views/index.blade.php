@@ -80,7 +80,7 @@ NAVIGATION LINKS
                             <div class="profile-list">
                                 <ul class="list-unstyled">
                                     <li class="list-item"><a
-                                                href="/dashboard/profile">پروفایل</a></li>
+                                                href="/dashboard/profile">داشبورد</a></li>
                                     <li class="list-item"><a href="/dashboard/password">تغییر کلمه عبور</a></li>
                                     <li class="list-item"><a href="{{route('logout')}}">خروج</a></li>
                                 </ul>
@@ -129,7 +129,7 @@ NAVIGATION LINKS
                                 <div class="profile-list">
                                     <ul class="list-unstyled">
                                         <li class="list-item"><a
-                                                    href="/dashboard/profile">پروفایل</a></li>
+                                                    href="/dashboard/profile">داشبورد</a></li>
                                         <li class="list-item"><a href="/dashboard/password">تغییر کلمه عبور</a></li>
                                         <li class="list-item"><a href="{{route('logout')}}">خروج</a></li>
                                     </ul>

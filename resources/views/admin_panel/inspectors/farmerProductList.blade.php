@@ -21,9 +21,9 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{asset('admin-panel/dist/css/skins/_all-skins.min.css')}}">
-    
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
-    
+
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -57,11 +57,11 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
-          
+
           <!-- Notifications: style can be found in dropdown.less -->
-         
+
           <!-- Tasks: style can be found in dropdown.less -->
-          
+
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -75,11 +75,11 @@
                 </p>
               </li>
               <!-- Menu Body -->
-             
+
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">پروفایل</a>
+                  <a href="#" class="btn btn-default btn-flat">داشبورد</a>
                 </div>
                 <div class="pull-left">
                   <a href="{{route('admin_panel_logout')}}" class="btn btn-default btn-flat">خروج</a>
@@ -114,29 +114,29 @@
       <ul class="sidebar-menu" data-widget="tree">
             <li class="header">منو</li>
             <li>
-                    <a href="{{route('admin_panel_load_user_list')}}"><i class="fa fa-envelope"></i><span> لیست کاربران</span></a>      
+                    <a href="{{route('admin_panel_load_user_list')}}"><i class="fa fa-envelope"></i><span> لیست کاربران</span></a>
             </li>
             <li>
-                <a href="{{route('admin_panel_profile')}}"><i class="fa fa-envelope"></i><span>پروفایل ها</span></a>      
+                <a href="{{route('admin_panel_profile')}}"><i class="fa fa-envelope"></i><span>پروفایل ها</span></a>
             </li>
             <li>
-                <a href="{{route('admin_panel_buyAd')}}"><i class="fa fa-envelope"></i><span>درخواست ها ی خرید</span></a>      
+                <a href="{{route('admin_panel_buyAd')}}"><i class="fa fa-envelope"></i><span>درخواست ها ی خرید</span></a>
             </li>
             <li>
                 <a href="{{route('admin_panel_sellAd')}}">
-                    <i class="fa fa-envelope"></i><span>آگهی های فروش</span></a>      
+                    <i class="fa fa-envelope"></i><span>آگهی های فروش</span></a>
             </li>
             <li>
-                <a href="{{route('admin_panel_profile_list')}}"><i class="fa fa-envelope"></i><span>لیست پروفایل ها</span></a>      
+                <a href="{{route('admin_panel_profile_list')}}"><i class="fa fa-envelope"></i><span>لیست پروفایل ها</span></a>
             </li>
             <li>
-                <a href="{{route('admin_panel_buyAd_list')}}"><i class="fa fa-envelope"></i><span>درخواست های خرید تایید شده</span></a>      
+                <a href="{{route('admin_panel_buyAd_list')}}"><i class="fa fa-envelope"></i><span>درخواست های خرید تایید شده</span></a>
             </li>
             <li>
-                <a href="{{route('admin_panel_sellAd_list')}}"><i class="fa fa-envelope"></i><span>آگهی های فروش تایید شده</span></a>      
+                <a href="{{route('admin_panel_sellAd_list')}}"><i class="fa fa-envelope"></i><span>آگهی های فروش تایید شده</span></a>
             </li>
             <li>
-                <a href="{{route('admin_panel_sell_offer_list')}}"><i class="fa fa-envelope"></i><span>پیشنهادات فروش</span></a>     
+                <a href="{{route('admin_panel_sell_offer_list')}}"><i class="fa fa-envelope"></i><span>پیشنهادات فروش</span></a>
             </li>
             <li>
                 <a href="{{route('admin_panel_accepted_sell_offer_list')}}"><i class="fa fa-envelope"></i><span>در انتظار تماس</span></a>
@@ -168,7 +168,7 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="row">        
+      <div class="row">
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">جدول داده ها</h3>
@@ -192,9 +192,9 @@
                     <td>{{$loop->iteration}}</td>
                     <td>{{$product->name}}</td>
                     <td>{{$product->start_date}}</td>
-                    <td>{{$product->end_date}}</td>                    
-                    <td>{{$product->product_volume}}</td>                    
-                    <td>{{$product->area_size}}</td>                    
+                    <td>{{$product->end_date}}</td>
+                    <td>{{$product->product_volume}}</td>
+                    <td>{{$product->area_size}}</td>
                 </tr>
                 @endforeach
               </table>
@@ -221,7 +221,7 @@
         </div>
     </div>
   </div>
-    
+
   <!-- /.content-wrapper -->
 
   <!-- /.control-sidebar -->
@@ -245,7 +245,7 @@
 <script src="{{asset('admin-panel/dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('admin-panel/dist/js/demo.js')}}"></script>
-    
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js.map"></script>
 <!-- page script -->
