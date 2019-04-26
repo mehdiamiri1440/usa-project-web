@@ -101,7 +101,7 @@
                   <ul class="nav navbar-nav navbar-left">
 
                       <li v-if="user_id == ''"><a :href=" login_page_path" class="smoothScroll">ورود/ثبت نام</a></li>
-                      <li><a href="/" class="smoothScroll">صفحه ی اصلی</a></li>
+<!--                      <li><a href="/" class="smoothScroll">صفحه ی اصلی</a></li>-->
                       <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
                       <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
                       <li><a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
