@@ -52,7 +52,7 @@ Route::group(['prefix' => 'master'],function (){
 });
 
 Route::get('/', function(){
-    return redirect('/master/#/product-list');
+    return redirect('/master/product-list');
 //    return view('index_pages.index_main');
 });
 
@@ -202,17 +202,17 @@ Route::post('/load_profile_by_user_name',[
 ]);
 
 Route::post('/get_product_list_by_user_name',[
-        'uses' => 'product_controller@get_product_list_by_user_name',
-        'as' => 'get_product_list_by_user_name'
+    'uses' => 'product_controller@get_product_list_by_user_name',
+    'as' => 'get_product_list_by_user_name'
 ]);
 
 Route::post('/get_user_statistics_by_user_name',[
-        'uses' => 'profile_controller@get_user_statistics_by_user_name',
-        'as' => 'get_user_statistics_by_user_name',
+    'uses' => 'profile_controller@get_user_statistics_by_user_name',
+    'as' => 'get_user_statistics_by_user_name',
 ]);
 
 Route::get('/product-view/{product_id}/{city}-{province}-{product_name}-{sub_category_name}-{category_name}',function($product_id){
-        return view('dashboard.buyer.product-list');
+    return view('dashboard.buyer.product-list');
 });
 
 Route::get('master/{any}',function(){
@@ -234,17 +234,16 @@ Route::group(['middleware' => [login::class]],function(){
 
     Route::get('back-to-basic/{transaction_id}',function($transaction_id){
         return view('back-to-basic',[
-           'transaction_id' => $transaction_id
+            'transaction_id' => $transaction_id
         ]);
     })->name('back-to-basic');
 
     Route::get('instant-back-to-basic/{transaction_id}',function($transaction_id){
         return view('instant-back-to-basic',[
-           'transaction_id' => $transaction_id
+            'transaction_id' => $transaction_id
         ]);
     })->name('instant-back-to-basic');
 
-    
     Route::get('/dashboard/{any}',function(){
         if(session('is_seller')){
             return view('layout.seller-dashboard');
@@ -814,7 +813,7 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
     })->name('initiate-instant-transaction-view');
 
     Route::post('initiate-instant-transaction',[
-       'uses' => 'admin_panel\admin_transaction_controller@initiate_instant_transaction',
+        'uses' => 'admin_panel\admin_transaction_controller@initiate_instant_transaction',
         'as' => 'initiate_instant_transaction'
     ]);
 
@@ -920,24 +919,23 @@ Route::group(['middleware' => [cors::class]],function(){
     });
     Route::post('/broadcastAuth',function(Request $request){
 
-         $pusher = new Pusher('f04fb3210cdacabb3540','a2ffc348382adf93ea19','710900',array('cluster' => 'ap1'));
-         $temp = [];
-         $temp =  $pusher->socket_auth($_POST['channel_name'], $_POST['socket_id']);
+        $pusher = new Pusher('f04fb3210cdacabb3540','a2ffc348382adf93ea19','710900',array('cluster' => 'ap1'));
+        $temp = [];
+        $temp =  $pusher->socket_auth($_POST['channel_name'], $_POST['socket_id']);
 
-         return response()->json([
+        return response()->json([
             "auth" => json_decode($temp)->auth
-         ]);
-     });
+        ]);
+    });
 });
 
 //Route::get('/migrate_users',[
 //   'uses' => 'profile_controller@migrate_users'
 //]);
 
-Route::get('/testt',function(){
-   dispatch(new sendNewMessageSMSNotification())->onQueue('sms');
-  sendSMS::dispatch(['d','c'],'09118413054')->onQueue('sms');
-});
+//Route::get('/testt',function(){
+//    echo phpinfo();
+//});
 
 
 

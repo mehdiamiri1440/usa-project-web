@@ -150,7 +150,7 @@
                 <!--end title list -->
 
                 <li class="list-group-item content-list col-xs-12" v-for="transaction in transactions">
-                    <router-link :to="'/transaction-report/' + transaction.transaction_id">
+                    <router-link :to="'/dashboard/transaction-report/' + transaction.transaction_id">
                         <p class="number col-xs-2">
 
                             {{transaction.transaction_id}}
@@ -179,7 +179,7 @@
                 <!--end title list -->
 
                 <li class="list-group-item content-list col-xs-12" v-for="transaction in instantTransactions">
-                    <router-link :to="'/instant-transaction-report/' + transaction.transaction_id">
+                    <router-link :to="'/dashboard/instant-transaction-report/' + transaction.transaction_id">
                         <p class="number col-xs-2">
 
                             {{transaction.transaction_id}}
@@ -239,7 +239,7 @@
                             window.location.href = '/404';
                         }
                     });
-                
+
                 axios.post('/get_terminated_instant_transactions')
                     .then(function (response) {
                         self.instantTransactions = response.data.transactions;

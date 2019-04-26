@@ -7,10 +7,10 @@
             <img :src="defultimg" class="image_defult">
         </div>
         <p v-if="user_info">{{user_full_name}}</p>
-<!--        <a v-bind:href="'/master/#/profile/' + user_name" class="green_bot">
+<!--        <a v-bind:href="'/master/profile/' + user_name" class="green_bot">
             مشاهده پروفایل
         </a>-->
-        <a :href=" '/master/#/profile/'+ user_name" class="green_bot" @click="registerComponentStatistics('product','showUserProfile','show profile')">مشاهده پروفایل</a>
+        <a :href=" '/master/profile/'+ user_name" class="green_bot" @click="registerComponentStatistics('product','showUserProfile','show profile')">مشاهده پروفایل</a>
         <div class="create_buy  hidden-xs" >
             <a class="green_bot" href="#" @click.prevent="openChat()">
                 <span class="fa fa-comment"></span> ارسال پیام
@@ -140,13 +140,14 @@
                     first_name:this.user_info.first_name,
                     last_name:this.user_info.last_name,
                     profile_photo:this.profile_photo,
+                    user_name:this.user_info.user_name,
                 }
 
                 if(this.current_user.user_info){
                     if(this.current_user.user_info.id != this.user_info.id){
                         axios.post('/set_last_chat_contact',contact)
                             .then(function(response){
-                                window.location.href = '/dashboard/#/messages';
+                                window.location.href = '/dashboard/messages';
                             })
                             .catch(function(e){
                                 alert('Error');

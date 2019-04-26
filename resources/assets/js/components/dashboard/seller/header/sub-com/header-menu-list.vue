@@ -120,15 +120,15 @@
         ],
         data() {
             return {
-                active_el: 0,
+                active_el: 1,
                 messageCount:''
             }
         },
         methods: {
-            
+
             init:function(){
                 var self = this;
-                
+
                 axios.post('/get_total_unread_messages_for_current_user')
                     .then(function(response){
                             self.messageCount = response.data.msg_count;
@@ -146,47 +146,47 @@
             }
         }, watch: {
             $route() {
-                if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract')) {
+                if (this.subIsActive('/dashboard/complementry') || this.subIsActive('/dashboard/profile_contract')) {
                     this.active_el = 1;
-                } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests') || this.subIsActive('/buyAd-request-detail/' + this.$route.params.id)) {
+                } else if (this.subIsActive('/dashboard/my-sell-offers') || this.subIsActive('/dashboard/buyAd-requests') || this.subIsActive('/dashboard/buyAd-request-detail/' + this.$route.params.id)) {
                     this.active_el = 2
-                } else if (this.subIsActive('/register-product')) {
+                } else if (this.subIsActive('/dashboard/register-product')) {
                     this.active_el = 3
-                } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/')|| this.subIsActive('/instant-transaction-detail/'  + this.$route.params.id)) {
+                } else if (this.subIsActive('/dashboard/transaction-list') || this.subIsActive('/dashboard/transaction-detail/')|| this.subIsActive('/dashboard/instant-transaction-detail/'  + this.$route.params.id)) {
                     this.active_el = 4
-                } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/')|| this.subIsActive('/instant-transaction-report/' + this.$route.params.id)) {
+                } else if (this.subIsActive('/dashboard/terminated-transaction-list') || this.subIsActive('/dashboard/transaction-report/')|| this.subIsActive('/dashboard/instant-transaction-report/' + this.$route.params.id)) {
                     this.active_el = 5
-                } else if (this.subIsActive('/privacy_and_policy.vue')) {
+                } else if (this.subIsActive('/dashboard/privacy_and_policy.vue')) {
                     this.active_el = 6
-                }else if(this.subIsActive('/guide')){
+                }else if(this.subIsActive('/dashboard/guide')){
                     this.active_el = 7
-                }else if(this.subIsActive('/messages')){
+                }else if(this.subIsActive('/dashboard/messages')){
                     this.active_el = 8
                 } else{
                     this.active_el = 1
                 }
             }
         }, mounted: function () {
-            if (this.subIsActive('/complementry') || this.subIsActive('/profile_contract')){
+            if (this.subIsActive('/dashboard/complementry') || this.subIsActive('/dashboard/profile_contract')){
                 this.active_el = 1;
-            } else if (this.subIsActive('/my-sell-offers') || this.subIsActive('/buyAd-requests') || this.subIsActive('/buyAd-request-detail/' + this.$route.params.id)) {
+            } else if (this.subIsActive('/dashboard/my-sell-offers') || this.subIsActive('/dashboard/buyAd-requests') || this.subIsActive('/dashboard/buyAd-request-detail/' + this.$route.params.id)) {
                 this.active_el = 2
-            } else if (this.subIsActive('/register-product')) {
+            } else if (this.subIsActive('/dashboard/register-product')) {
                 this.active_el = 3
-            } else if (this.subIsActive('/transaction-list') || this.subIsActive('/transaction-detail/')|| this.subIsActive('/transaction-detail/'  + this.$route.params.id)) {
+            } else if (this.subIsActive('/dashboard/transaction-list') || this.subIsActive('/dashboard/transaction-detail/')|| this.subIsActive('/dashboard/transaction-detail/'  + this.$route.params.id)) {
                 this.active_el = 4
-            } else if (this.subIsActive('/terminated-transaction-list') || this.subIsActive('/transaction-report/')|| this.subIsActive('/transaction-report/' + this.$route.params.id)) {
+            } else if (this.subIsActive('/dashboard/terminated-transaction-list') || this.subIsActive('/dashboard/transaction-report/')|| this.subIsActive('/dashboard/transaction-report/' + this.$route.params.id)) {
                 this.active_el = 5
-            } else if (this.subIsActive('/privacy_and_policy')) {
+            } else if (this.subIsActive('/dashboard/privacy_and_policy')) {
                 this.active_el = 6
-            } else if(this.subIsActive('/messages')){
+            } else if(this.subIsActive('/dashboard/messages')){
                 this.active_el = 8
-            } else if(this.subIsActive('/guide')){
+            } else if(this.subIsActive('/dashboard/guide')){
                 this.active_el = 7
             }else{
                 this.active_el = 1
             }
-            
+
             this.init();
         },
         created() {
@@ -197,11 +197,10 @@
             eventBus.$on('active', (event) => {
                 this.active_el = event;
             });
-            
             Echo.private('testChannel.' + userId)
                 .listen('newMessage', (e) => {
                     var senderId = e.new_message.sender_id;
-                    
+
                     self.messageCount += 1;
             });
         },

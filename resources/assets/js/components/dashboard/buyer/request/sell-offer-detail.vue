@@ -437,8 +437,8 @@
 
                     </div>
                     <div class="profile_link col-xs-12 col-sm-5">
-                        <a href="/dashboard/#/my-buyAds" class="black-bot">بازگشت به صفحه قبل</a>
-                        <a :href="'/master/#/profile/' + sellOfferDetail.sell_offer_user_info.user_name"
+                        <a href="/dashboard/my-buyAds" class="black-bot">بازگشت به صفحه قبل</a>
+                        <a :href="'/master/profile/' + sellOfferDetail.sell_offer_user_info.user_name"
                            class="green-bot">
                             پروفایل تامین کننده
                         </a>
@@ -613,7 +613,7 @@
                             $('#myModal').on('shown.bs.modal', function (e) {
                                 $('#close-btn').on('click', function (e) {
                                     $('#myModal').modal('hide');
-                                    window.location.href = '/dashboard/#/my-buyAds';
+                                    window.location.href = '/dashboard/my-buyAds';
                                 });
                             });
                         }
@@ -640,7 +640,7 @@
                             $('#myModal').on('shown.bs.modal', function (e) {
                                 $('#close-btn').on('click', function (e) {
                                     $('#myModal').modal('hide');
-                                    window.location.href = '/dashboard/#/my-buyAds';
+                                    window.location.href = '/dashboard/my-buyAds';
                                 });
                             });
                         }
@@ -659,12 +659,13 @@
                     first_name:this.sellOfferDetail.sell_offer_user_info.first_name,
                     last_name:this.sellOfferDetail.sell_offer_user_info.last_name,
                     profile_photo:this.sellOfferDetail.profile_photo,
+                    user_name:this.sellOfferDetail.sell_offer_user_info.user_name,
                 }
 
 
                 axios.post('/set_last_chat_contact',contact)
                     .then(function(response){
-                        window.location.href = '/dashboard/#/messages';
+                        window.location.href = '/dashboard/messages';
                     })
                     .catch(function(e){
                         alert('Error');

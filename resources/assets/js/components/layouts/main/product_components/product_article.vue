@@ -124,7 +124,7 @@
 
         <article class="main-content-item" v-for="(product,productIndex) in products"
                  :key="product.main.id">
-            
+
          <product-user-info
                  :profile_photo="product.profile_info.profile_photo"
                  :user_info="product.user_info"
@@ -461,13 +461,14 @@
                     first_name:product.user_info.first_name,
                     last_name:product.user_info.last_name,
                     profile_photo:product.profile_info.profile_photo,
+                    user_name:product.user_info.user_name,
                 }
 
                 if(this.currentUser.user_info){
                     if(this.currentUser.user_info.id != product.user_info.id){
                         axios.post('/set_last_chat_contact',contact)
                             .then(function(response){
-                                window.location.href = '/dashboard/#/messages';
+                                window.location.href = '/dashboard/messages';
                             })
                             .catch(function(e){
                                 alert('Error');
@@ -478,7 +479,7 @@
                         eventBus.$emit('submitSuccess',this.popUpMsg);
                         $('#myModal').modal('show');
                     }
-                    
+
                 }
                 else{
                     this.popUpMsg = 'اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';

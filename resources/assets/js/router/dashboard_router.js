@@ -72,7 +72,7 @@ const myRouter =  new Router({
     base: process.env.BASE_URL,
     routes: [
         {
-            path: '/',
+            path: '/master/',
             name: 'indexPage',
             components: {
                 layouts: indexPage,
@@ -86,14 +86,14 @@ const myRouter =  new Router({
             },
         },
         {
-            path: '/about-us',
+            path: '/master/about-us',
             name: 'aboutUs',
             components: {
                 layouts: indexAboutUs,
             },
         },
         {
-            path: '/privacy-and-policy',
+            path: '/master/privacy-and-policy',
             name: 'privacyAndPolicy',
             components: {
                 layouts: indexPrivacyAndPolicy,
@@ -114,13 +114,13 @@ const myRouter =  new Router({
             },
         },
         {
-            path: '/product-view',
+            path: '/master/product-view',
             name: 'productView',
             components: {
                 layouts: productView,
             },
         },
-        {
+      {
             path: '/dashboard/password',
             name: 'password',
             components: {
@@ -148,6 +148,21 @@ const myRouter =  new Router({
             components: {
                 seller: sellerCompelementry,
                 buyer: buyerCompelementry,
+            },
+        },
+        {
+            path: '/dashboard/mobile-accounts',
+            name: 'mobileAccounts',
+            components: {
+                seller: mobileAccountsMessage,
+                buyer: mobileAccountsMessage,
+            },
+        },{
+            path: '/dashboard/mobile-show',
+            name: 'mobileShow',
+            components: {
+                seller: mobileShowMessage,
+                buyer: mobileShowMessage,
             },
         },
         {
@@ -217,7 +232,7 @@ const myRouter =  new Router({
             params: {
                 active: 2
             }
-        },
+        }, 
         {
             path: '/dashboard/my-buyAds',
             name: 'myBuyAds',
@@ -251,7 +266,7 @@ const myRouter =  new Router({
             },
         }
         , {
-            path: '/terminated-transaction-list',
+            path: '/dashboard/terminated-transaction-list',
             name: 'myTerminatedTransactions',
             components: {
                 seller: sellerMyTerminatedTransactions,
@@ -259,28 +274,28 @@ const myRouter =  new Router({
             },
         }
         , {
-            path: '/payed-factor-list',
+            path: '/dashboard/payed-factor-list',
             name: 'PayedFactorList',
             components: {
                 buyer: buyerPayedFactorList,
             },
         }
         , {
-            path: '/factor-detail/:id',
+            path: '/dashboard/factor-detail/:id',
             name: 'buyerFactorDetail',
             components: {
                 buyer: buyerFactorDetail,
             },
         }
         , {
-            path: '/instant-factor-detail/:id',
+            path: '/dashboard/instant-factor-detail/:id',
             name: 'buyerInstantFactorDetail',
             components: {
                 buyer: buyerFactorDetail,
             },
         }
         , {
-            path: '/transaction-detail/:id',
+            path: '/dashboard/transaction-detail/:id',
             name: 'transactionDetail',
             components: {
                 seller: sellerTransactionDetail,
@@ -291,7 +306,7 @@ const myRouter =  new Router({
             }
         },
         {
-            path: '/instant-transaction-detail/:id',
+            path: '/dashboard/instant-transaction-detail/:id',
             name: 'instantTransactionDetail',
             components: {
                 seller: sellerTransactionDetail,
@@ -302,7 +317,7 @@ const myRouter =  new Router({
             },
         }
         , {
-            path: '/transaction-report/:id',
+            path: '/dashboard/transaction-report/:id',
             name: 'transactionReport',
             components: {
                 seller: sellerTransactionReport,
@@ -313,7 +328,7 @@ const myRouter =  new Router({
             }
         }
         , {
-            path: '/instant-transaction-report/:id',
+            path: '/dashboard/instant-transaction-report/:id',
             name: 'instantTransactionReport',
             components: {
                 seller: sellerTransactionReport,
@@ -372,7 +387,7 @@ myRouter.beforeEach((to,from,next) => {
 
 
 //myRouter.afterEach((to, from,next ) => {
-//    
+//
 ////    if ("gtag" in window) {
 ////        console.log(to.path);
 ////        gtag("pageview",to.path);
@@ -388,7 +403,7 @@ myRouter.beforeEach((to,from,next) => {
 ////        tracker.send('event', 'categoryName', 'ActionName','LabelName');
 //  }
 //  }
-//  
+//
 //});
 
 export default myRouter;

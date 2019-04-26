@@ -434,7 +434,11 @@
                                  :alt="selectedContact.first_name[0]">
                             <img v-else :src="defimgitem">
                         </div>
-                        <span>{{selectedContact.first_name + ' ' + selectedContact.last_name}}</span>
+                        <a :href="'/master/profile/' + selectedContact.user_name">
+                            <span>
+                            {{selectedContact.first_name + ' ' + selectedContact.last_name}}
+                            </span>
+                        </a>
                     </div>
                     <div class="back-state  pull-left">
                         <a href="#" @click.prevent="selectedContact = !selectedContact" class="green-bot">بازگشت</a>
@@ -518,7 +522,7 @@
 //                window.onhashchange = function() {
 //
 //                    if(self.selectedContact){
-//                        window.location.href = "/dashboard/#/messages";
+//                        window.location.href = "/dashboard/messages";
 //                    }
 //                }
             },
@@ -596,9 +600,9 @@
                     .then(function (response) {
                         self.msgToSend = '';
                         self.chatMessages.push(response.data.message);
-                    
+
                         self.scrollToEnd(0);
-                    
+
                         self.loadChatHistory(self.selectedContact);
                         //self.loadContactList();
                     })
@@ -720,7 +724,7 @@
         },
 
         created: function (){
-            
+
             gtag('config','UA-129398000-1',{'page_path': '/messages'});
 
             var self = this;
@@ -740,7 +744,7 @@
 
                             self.chatMessages.push(e.new_message);
                             self.scrollToEnd(0);
-                            
+
 //                            if(self.selectedContact){
 //                                console.log(self.contactList);
 //                                var index = self.searchForObjectIndexInArray(self.selectedContact.contact_id,self.contactList);
@@ -750,13 +754,13 @@
 //                            }
 
                             if(self.isComponentActive == false){
-                                self.pushNotification("پیام جدید",e.new_message.text,'/dashboard/#/messages');
+                                self.pushNotification("پیام جدید",e.new_message.text,'/dashboard/messages');
                             }
                         }
                     }
                     else{
                         //eventBus.$emit('messageCount',1);
-                        this.pushNotification("پیام جدید",e.new_message.text,'/dashboard/#/messages');
+                        this.pushNotification("پیام جدید",e.new_message.text,'/dashboard/messages');
                     }
 
                 });

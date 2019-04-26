@@ -297,7 +297,7 @@
                             تحویل:
                         </span>{{sellOffer.deliver_at}}
                     </p>
-                    <router-link :to="'/sell-offer-detail/' + sellOffer.id" class="show-detail green-bot">
+                    <router-link :to="'/dashboard/sell-offer-detail/' + sellOffer.id" class="show-detail green-bot">
                         جزئیات
                     </router-link>
                 </li>

@@ -149,7 +149,7 @@
             <!--end title list -->
             <div v-for="factor in factors">
                 <router-link
-                        :to="'/factor-detail/' + factor.id"
+                        :to="'/dashboard/factor-detail/' + factor.id"
                         class="list-group-item list-group-item-action col-xs-12">
                     <p class="number col-xs-2">
                         {{factor.sell_offer_id + 100000}}
@@ -182,7 +182,7 @@
             <!--end title list -->
             <div v-for="factor in instantFactors">
                 <router-link
-                        :to="'/instant-factor-detail/' + factor.id"
+                        :to="'/dashboard/instant-factor-detail/' + factor.id"
                         class="list-group-item list-group-item-action col-xs-12">
                     <p class="number col-xs-2">
                         {{factor.transaction_id + 100000}}
@@ -245,7 +245,7 @@
                         self.isLoading = false;
                     });
                 self.isLoading = true;
-                
+
                 axios.post('/get_payed_instant_factor_list')
                     .then(function (response) {
                         self.instantFactors = response.data.factors;

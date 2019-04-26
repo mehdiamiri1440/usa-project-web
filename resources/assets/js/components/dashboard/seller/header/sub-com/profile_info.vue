@@ -31,7 +31,7 @@
                     {{usercity}}
                 </div>
             </div>
-            <a :href="'/master/#/profile/'+ userprof" class="green-bot">
+            <a :href="'/master/profile/'+ userprof" class="green-bot">
                 نمایش پروفایل من
             </a>
 
