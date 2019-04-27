@@ -4,10 +4,12 @@
 import Vue from 'vue'
 import router from './router/dashboard_router'
 import Axios from 'axios'
+import Meta from 'vue-meta'
 
 Vue.prototype.$http = Axios;
 Vue.config.productionTip = false;
 Vue.use(require('vue-jalali-moment'));
+Vue.use(Meta);
 
 import AppSeller from './components/AppSeller'
 import AppBuyer from './components/AppBuyer'

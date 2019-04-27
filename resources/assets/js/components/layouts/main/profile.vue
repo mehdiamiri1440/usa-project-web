@@ -575,7 +575,7 @@
                 })
                     .then(function (response) {
                         self.profileOwner = response.data;
-                        self.addMetaTag();
+                        //self.addMetaTag();
                     })
                     .catch(function (err) {
                         if (err.response.status == 404) {
@@ -746,6 +746,65 @@
             
             document.addEventListener('click', this.documentClick);
         },
+        metaInfo(){
+            let fullName = this.profileOwner.user_info.first_name + ' ' + this.profileOwner.user_info.last_name;
+            
+            let url = 'https://incobac.com/master/profile/' + this.profileOwner.user_info.user_name;
+            
+            let profilePhoto = '';
+            if(this.profileOwner.profile.profile_photo){
+                profilePhoto = this.str + '/' + this.profileOwner.profile.profile_photo;
+            }
+            else{
+                profilePhoto = this.defultimg;
+            }
+            
+            return {
+                title: fullName,
+                titleTemplate:'اینکوباک | %s',
+                meta:[
+                    {name:'description', content:' محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید'},
+                    {
+                        'property': 'og:type',
+                        'content' : 'website',
+                    },
+                    {
+                        'property':'og:image:height',
+                        'content' : '256',
+                    },
+                    {
+                        'property':'og:image:width',
+                        'content' : '256',
+                    },
+                    {
+                        'property':'og:image:type',
+                        'content' : 'image/jpeg',
+                    },
+                    {
+                        'property':'og:description',
+                        'content' : 'صفحه ی پروفایل کاربران اینکوباک'
+                    },
+                    {
+                        'property':'og:site_name',
+                        'content' : 'اینکوباک'
+                    },
+                    {
+                        'property':'og:url',
+                        'content' : url
+                    },
+                    {
+                        'property':'og:title',
+                        'content' : fullName
+                    },
+                    {
+                        'property':'og:image',
+                        'content' : profilePhoto
+                    }
+
+                ]
+
+            }
+        }
     };
 
 
