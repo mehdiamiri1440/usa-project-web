@@ -106,7 +106,7 @@ NAVIGATION LINKS
                     @if(!session('user_id'))
                         <li><a href="{{route('login_page')}}" class="smoothScroll">ورود/ثبت نام</a></li>
                     @endif
-                    <li><a href="/" class="smoothScroll">صفحه ی اصلی</a></li>
+<!--                    <li><a href="/" class="smoothScroll">صفحه ی اصلی</a></li>-->
                     <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
                     <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
                     <li><a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
@@ -156,16 +156,18 @@ NAVIGATION LINKS
                         <a href="/about-us">درباره ما </a>
                     </li>
                     <li>
-                        <a href="#"> ارتباط با ما</a>
+                        <a href="/contact-us"> ارتباط با ما</a>
                     </li>
 <!--
                     <li>
                         <a href="#">پروژه ها </a>
                     </li>
 -->
+<!--
                     <li>
                         <a href="/help"> راهنمای خریدار و فروشنده </a>
                     </li>
+-->
                 </ul>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4">
@@ -175,12 +177,14 @@ NAVIGATION LINKS
                 <br/>
                 <p>تماس با ما
                 </p>
-                <p>0713-646-0996 / 09178928245
+                <p>0911-841-3054 / 0917-892-8266
                 </p>
             </div>
+<!--
             <div class="col-xs-12 col-sm-6 col-md-4 enamad">
                 <img src="https://trustseal.enamad.ir/logo.aspx?id=110135&amp;p=e4AvUmJtRgJZ9BOl" alt="" onclick="window.open(&quot;https://trustseal.enamad.ir/Verify.aspx?id=110135&amp;p=e4AvUmJtRgJZ9BOl&quot;, &quot;Popup&quot;,&quot;toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30&quot;)" style="cursor:pointer" id="e4AvUmJtRgJZ9BOl">
             </div>
+-->
 
 
         </div>

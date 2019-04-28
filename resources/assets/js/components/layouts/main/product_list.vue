@@ -769,5 +769,9 @@
         mounted() {
             this.init();
         },
+//        metaInfo:{
+//            title:'لیست محصولات کشاورزی',
+//            titleTemplate: 'اینکوباک |‌ %s',
+//        }
     }
 </script>

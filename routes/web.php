@@ -69,6 +69,10 @@ Route::get('/privacy-and-policy',function(){
     return view('index_pages.privacy_policy');
 });
 
+Route::get('/contact-us',function(){
+    return view('index_pages.contact_us');
+});
+
 
 Route::post('/dologin',[
     'uses' => 'user_controller@login',

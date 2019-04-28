@@ -955,7 +955,7 @@ img.image-blur:hover {
 
     .user-header-mobile .profile-list {
         left: 30px;
-        top: 70px;
+        top: 95px;
     }
 
     .user-header-mobile .profile-menu-header i {
@@ -1013,7 +1013,7 @@ img.image-blur:hover {
 }
 
 @media screen and (max-width: 767px) {
-    .profile-menu-header a {
+    .profile-menu-header > a {
         color: #7f8c9b;
         margin: 5px 0;
         position: relative;
