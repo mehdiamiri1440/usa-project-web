@@ -142,7 +142,8 @@
                                     v-for="photo in product.photos"
                                     :key="photo.id"
                                     :base="str + '/'"
-                                    :img="photo.file_path">
+                                    :img="photo.file_path"
+                                    v-on:popUpLoaded=updatePopUpStatus($event)>
                             </image-viewer-list>
                         </div>
                     </div>
@@ -235,7 +236,7 @@
                     enabled: true,
                     navigateByImgClick: true,
                     preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-                }
+                },
             });
 
         }
@@ -246,13 +247,15 @@
                 imgSrcs:'',
             };
         },
-        props:['img','base'],
+        props:['img','base','popUpLoaded'],
         template: '<div class="image-wrapper">' +
             '<a  :href="base + img">'+
             '<img :src="base + img">'+
             '</a>'+
             '</div>',
         mounted: function(){
+            var self = this;
+            
             $(".owl-carousel").owlCarousel({
                 loop:false,
                 items:1,
@@ -267,6 +270,17 @@
                     enabled: true,
                     navigateByImgClick: true,
                     preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+                },
+                callbacks: {
+                      open:function(){
+                          if(!window.history.state){
+                              window.history.pushState({pushed:true},'','/master/product-list');
+                          }
+                          
+                          $(window).on('popstate', function(e){
+                                $.magnificPopup.close();
+                           });
+                      },
                 }
             });
         },
@@ -289,7 +303,8 @@
                     profile: '',
                     user_info: ''
                 },
-                popUpMsg:''
+                popUpMsg:'',
+                popUpLoaded:false,
             }
         },
         components:{
@@ -492,10 +507,13 @@
                     'event_category' : categoryName,
                     'event_label'    : labelName
                 });
-            }
+            },
+            updatePopUpStatus:function(popUpOpenStatus){
+                this.popUpLoaded = popUpOpenStatus;
+            },
         },
         mounted() {
             this.init();
-        },
+        }
     }
 </script>
