@@ -114,7 +114,7 @@ NAVIGATION LINKS
 
 
                     @if(session('user_id'))
-
+                            <li><a  href="/dashboard/profile" class="smoothScroll">داشبورد</a></li>
                         <li class="user-header-web">
                             <div class="profile-menu-header"><a href="#" @click.prevent ="dropdown()">
                                     <div class="image-header-profile">
