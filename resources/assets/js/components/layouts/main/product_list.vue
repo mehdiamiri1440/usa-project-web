@@ -721,6 +721,10 @@
                     'event_category': categoryName,
                     'event_label': labelName
                 });
+            },
+            backBtn:function(){
+                alert('test');
+                window.location.href = '/';
             }
         },
         watch: {
@@ -755,10 +759,10 @@
                 }
             },
         },
-        created() {
+        created(){
             gtag('config', 'UA-129398000-1', {'page_path': '/product-list'});
 
-            document.addEventListener('click', this.documentClick)
+            document.addEventListener('click', this.documentClick);
             //window.addEventListener('scroll', this.handleScroll);
 //        window.addEventListener('scroll', () => {
 //          this.bottom = this.bottomVisible();

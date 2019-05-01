@@ -60,6 +60,28 @@ Route::get('/', function(){
 //    return view('index');
 //});
 
+// Download Route
+Route::get('download/app', function()
+{
+    // Check if file exists in app/storage/file folder
+    $file_path = storage_path() .'/app/public/download/incobac.apk' ;
+    echo $file_path;
+    if (file_exists($file_path))
+    {
+        // Send Download
+        return Response::download($file_path,'incobac.apk', [
+            'Content-Length'=> filesize($file_path),
+            'Content-Type'=>'application/vnd.android.package-archive',
+            'Content-Disposition'=> 'attachment; filename="incobac.apk"'
+        ]);
+    }
+    else
+    {
+        // Error
+        exit('خطایی رخ داده است.د.باره تلاش کنید...');
+    }
+})->name('download-app');
+
 
 Route::get('/about-us',function(){
     return view('index_pages.about_us');
