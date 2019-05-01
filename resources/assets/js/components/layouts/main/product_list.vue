@@ -438,6 +438,7 @@
 </style>
 <template>
     <div>
+
         <div class="flat-plust-icon hidden-lg hidden-md">
             <a href="#" @click.prevent = "addProductOrRequest()"><i class="fa fa-plus"></i> </a>
         </div>
@@ -450,7 +451,7 @@
 
             <div class="search-box col-sm-4 col-xs-12">
                 <input type="text" v-model="searchText" placeholder="لطفا محصول مورد نظر خود را جستجو کنید">
-                <!--    <input type="text" placeholder="لطفا محصول مورد نظر خود را جستجو کنید" v-model="searchText">-->
+
                 <button><i class="fa-search fa"></i></button>
             </div>
             <div class="links-sub-header col-xs-12 col-sm-8 col-md-5">
@@ -725,13 +726,15 @@
         watch: {
             searchText: function () {
                 var self = this;
+                eventBus.$emit('submiting', true);
                 axios.post('/user/get_product_list')
                     .then(function (response) {
                         self.products = '';
-                        self.loading = true;
+
                         var text = self.searchText.split(' ');
                         self.products = response.data.products.filter(function (product) {
                             return text.every(function (el) {
+
                                 if (product.main.product_name.indexOf(el) > -1 ||
                                     product.main.province_name.indexOf(el) > -1 ||
                                     product.main.city_name.indexOf(el) > -1 ||
@@ -742,7 +745,7 @@
                                 else return false;
                             });
                         });
-                        self.loading = false;
+                         eventBus.$emit('submiting', false);
                     });
             },
 
