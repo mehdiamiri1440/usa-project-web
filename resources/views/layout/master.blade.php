@@ -52,15 +52,7 @@
 <div id="appBuyer"></div>
 <div id="appSeller"></div>
 <div id="appLayouts">
-    <!--loader-->
 
-    {{--<div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">--}}
-        {{--<div class="main-loader">--}}
-            {{--<img src="{{asset('assets/img/gif/prload.gif')}}">--}}
-            {{--<p dir="rtl">کمی صبر کنید...</p>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-    <!--end loader-->
 
 
     <!-- =========================
@@ -75,6 +67,8 @@
                 storage_path="{{url('storage/')}}"
                 login_page_path="{{route('logout')}}"
                 loading="{{asset('assets/img/gif/prload.gif')}}"
+                incobacicon="{{asset('assets/img/logo-Inco-mobile.png')}}"
+
         ></header-master-layouts>
         <router-view
                 name="layouts"

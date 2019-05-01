@@ -282,7 +282,7 @@
     .send-message-form {
         background: #EEF3F3;
         overflow: hidden;
-        padding: 12px 25px 13px;
+        padding: 12px 15px 13px;
         position: absolute;
         bottom: 0;
         width: 100%;
@@ -344,19 +344,12 @@
     }
 
     .send-message-form .button-wrapper button {
-        border: none;
-        background: #fff;
-        border-radius: 50px;
+      border: none;
+          background: #fff;
         width: 50px;
         height: 50px;
+           border-radius: 50px;
         font-size: 25px;
-
-    }
-
-    .send-message-form .button-wrapper button i {
-        position: relative;
-        top: 2px;
-        left: -1px;
     }
 
     @media screen and (max-width: 992px) {
@@ -366,6 +359,15 @@
     }
 
     @media screen and (max-width: 768px) {
+        .send-message-form .button-wrapper button {
+            padding: 12px 13px;
+            font-size: inherit;
+            width: inherit;
+            height: inherit;
+        }
+        .send-message-form .message-input input{
+            padding: 13px 15px;
+        }
         .default-main-contents{
             display: none;
         }
@@ -773,7 +775,7 @@
         },
         metaInfo(){
             console.log('meta test');
-            
+
             return {
                 'title' : 'Messanger',
                 'meta' : [
