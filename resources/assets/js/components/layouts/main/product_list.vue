@@ -1,12 +1,50 @@
 <style scoped>
 
+
+    #searchFilter {
+        background: #fff;
+        padding-left: 0 !important;
+    }
+
+    #searchFilter .modal-dialog {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+    }
+
+    #searchFilter .main_popup_content {
+        padding: 0;
+
+    }
+
+    a.close-dialog-popup {
+        display: block;
+
+        padding: 15px;
+
+        font-size: 22px;
+
+        color: #e41c38;
+
+        text-align: right;
+
+        background: #000546;
+    }
+
+    .filter-mobile-sidebar {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
     .flat-plust-icon {
         position: fixed;
         right: 15px;
         bottom: 15px;
         z-index: 2;
     }
-    .flat-plust-icon a{
+
+    .flat-plust-icon a {
         background: #e41c38;
 
         width: 50px;
@@ -18,6 +56,18 @@
         text-align: center;
         padding-top: 15px;
         font-size: 23px;
+    }
+
+    .sidebar-buttons a {
+
+        width: 150px;
+        border: none;
+        padding: 9px 0;
+    }
+
+    .sidebar-buttons div > a:first-of-type {
+        color: #fff;
+        background: #28a745;
     }
 
     .owl-carousel img {
@@ -79,9 +129,10 @@
         padding: 10px 40px 9px 15px;
         background: #f8f8f8;
         font-size: 12px;
+        float: right;
     }
 
-    .search-box button {
+    .search-box button.btn-search {
         background: none;
         border: none;
         position: absolute;
@@ -92,6 +143,15 @@
         height: 77%;
         padding: 5px 8px;
         font-size: 18px;
+    }
+
+    .search-box button.btn-filter {
+        float: left;
+        padding: 10px 14px;
+        border-radius: 5px;
+        border: none;
+        background: #000546;
+        color: #fff;
     }
 
     .links-sub-header {
@@ -168,6 +228,7 @@
 
     .main-content {
         padding-bottom: 40px;
+        padding-top: 150px;
     }
 
     .main-content > h4 {
@@ -185,6 +246,11 @@
         font-size: 12px;
         width: 100%;
         line-height: 21px;
+    }
+
+    .red_bot {
+        background: #e41c38;
+        color: #fff;
     }
 
     .green_bot:hover {
@@ -283,7 +349,10 @@
         margin-top: -15px;
     }
 
-    @media screen and (max-width: 992px) {
+    @media screen and (max-width: 991px) {
+        .search-box input {
+            width: calc(100% - 75px);
+        }
 
         .title-page {
             text-align: center;
@@ -292,9 +361,27 @@
         .right-sidebar {
             display: none;
         }
+
+        .filter-mobile-sidebar .right-sidebar {
+            display: block;
+        }
     }
 
     @media screen and (max-width: 767px) {
+        .main-content {
+            padding-top: 85px;
+        }
+
+        .sub-header {
+            position: fixed;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .search-box {
+            margin: 4px auto 13px;
+        }
+
         .main-image {
             padding: 0;
         }
@@ -306,7 +393,7 @@
         .sub-header {
 
             background: #f0f3f6;
-            padding-top: 80px;
+            padding-top: 20px;
 
         }
 
@@ -437,24 +524,52 @@
 
 </style>
 <template>
+
     <div>
+        <!--modal-->
+        <div class="container">
+            <div class="modal fade" id="searchFilter" tabindex="-1" ref="myModal" role="dialog"
+                 aria-labelledby="myModalLabel"
+                 aria-hidden="false">
+
+                <div class="modal-dialog">
+
+                    <a href="#" class="close-dialog-popup" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+
+                    <div class="main_popup_content">
+
+                        <div class="col-xs-12">
+                            <div class="filter-mobile-sidebar ">
+                                <product-aside-categories :productsInfo="products"
+                                                          v-on:productsToParent="filterProducts($event)">
+
+                                </product-aside-categories>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.modal-dialog -->
+            </div>
+        </div>
 
         <div class="flat-plust-icon hidden-lg hidden-md">
-            <a href="#" @click.prevent = "addProductOrRequest()"><i class="fa fa-plus"></i> </a>
+            <a href="#" @click.prevent="addProductOrRequest()"><i class="fa fa-plus"></i> </a>
         </div>
-        <header id="header" class="hidden-xs  main-header">
-            <h1 class="title-page col-xs-12">
-                لیست محصولات
-            </h1>
-        </header>
-        <div class="sub-header container-fluid">
+        <!--    <header id="header" class="hidden-xs  main-header">
+                <h1 class="title-page col-xs-12">
+                    لیست محصولات
+                </h1>
+            </header>-->
+        <div class="sub-header-fix sub-header container-fluid">
 
-            <div class="search-box col-sm-4 col-xs-12">
+            <div class="search-box col-sm-8 col-xs-12 col-md-5">
                 <input type="text" v-model="searchText" placeholder="لطفا محصول مورد نظر خود را جستجو کنید">
 
-                <button><i class="fa-search fa"></i></button>
+                <button class="btn-search"><i class="fa-search fa"></i></button>
+                <button class="btn-filter  hidden-lg hidden-md" data-toggle="modal" data-target="#searchFilter"> فیلتر
+                    <i
+                            class="fa fa-filter"></i></button>
             </div>
-            <div class="links-sub-header col-xs-12 col-sm-8 col-md-5">
+            <div class="links-sub-header  hidden-xs col-xs-12 col-sm-4 col-md-4">
                 <ul class="list-inline">
                     <li class="list-item active"><a href="">
                         لیست محصولات
@@ -467,10 +582,16 @@
             </div>
 
         </div>
+        <aside class="right-sidebar sidebar-fix col-sm-3">
+            <div class="col-sm-12">
+                <h2 class="title-sidebar">دسته بندی محصولات </h2>
+                <product-aside-categories :productsInfo="products" v-on:productsToParent="filterProducts($event)">
 
-        <product-aside-categories :productsInfo="products" v-on:productsToParent="filterProducts($event)">
+                </product-aside-categories>
+            </div>
+        </aside>
 
-        </product-aside-categories>
+
         <main id="main" class="col-xs-12 col-md-9">
 
             <section class="main-content col-xs-12" v-if="products.length > 0">
@@ -701,16 +822,16 @@
                 const bottomOfPage = visible + scrollY >= pageHeight;
                 return bottomOfPage || pageHeight < visible;
             },
-            addProductOrRequest:function(){
-                if(this.currentUser.user_info){
-                    if(this.currentUser.user_info.is_seller){
+            addProductOrRequest: function () {
+                if (this.currentUser.user_info) {
+                    if (this.currentUser.user_info.is_seller) {
                         window.location.href = '/dashboard/register-product';
                     }
-                    else if(this.currentUser.user_info.is_buyer){
+                    else if (this.currentUser.user_info.is_buyer) {
                         window.location.href = '/dashboard/register-request';
                     }
                 }
-                else{
+                else {
                     this.popUpMsg = 'برای ثبت آگهی خرید یا فروش  ابتدا وارد سامانه شوید یا ثبت نام کنید.';
                     eventBus.$emit('submitSuccess', this.popUpMsg);
                     $('#myModal2').modal('show');
@@ -722,7 +843,7 @@
                     'event_label': labelName
                 });
             },
-            backBtn:function(){
+            backBtn: function () {
                 alert('test');
                 window.location.href = '/';
             }
@@ -749,7 +870,7 @@
                                 else return false;
                             });
                         });
-                         eventBus.$emit('submiting', false);
+                        eventBus.$emit('submiting', false);
                     });
             },
 
@@ -759,7 +880,7 @@
                 }
             },
         },
-        created(){
+        created() {
             gtag('config', 'UA-129398000-1', {'page_path': '/product-list'});
 
             document.addEventListener('click', this.documentClick);

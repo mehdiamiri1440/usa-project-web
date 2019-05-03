@@ -1,48 +1,90 @@
-<template>
-    <aside class="right-sidebar col-sm-3">
-        <div class="col-sm-12">
-            <h2 class="title-sidebar">دسته بندی محصولات </h2>
-            <div class="content-sidebar">
-                <div class="box-sidebar">
-                    <i class="fa-archive fa"></i>
-                    <select v-on:change="setCategoryFilter($event)">
-                        <option disabled selected>دسته محصولات</option>
-                        <option v-for="category in categoryList"
-                                v-bind:value="category.id">{{category.category_name}}
-                        </option>
-                    </select>
-                </div>
-                <div class="box-sidebar">
-                    <i class="fa-tags fa"></i>
-                    <select v-on:change="setSubCategoryFilter($event)">
-                        <option disabled selected>نام محصول</option>
-                        <option v-for="category in subCategoryList"
-                                v-bind:value="category.id">{{category.category_name}}
-                        </option>
-                    </select>
-                </div>
-                <div class="box-sidebar">
-                    <i class="fa-building  fa"></i>
-                    <select v-on:change="setProvinceFilter($event)">
-                        <option disabled selected>استان</option>
-                        <option v-for="province in provinceList"
-                                v-bind:value="province.id">{{province.province_name}}
-                        </option>
+<style scoped>
+    .sidebar-buttons a {
 
-                    </select>
-                </div>
-                <div class="box-sidebar">
-                    <i class="fa-home fa"></i>
-                    <select v-on:change="setCityFilter($event)">
-                        <option disabled selected>شهر</option>
-                        <option v-for="city in cityList"
-                                v-bind:value="city.id">{{city.city_name}}
-                        </option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </aside>
+        width: 100%;
+        border: none;
+        padding: 9px 0;
+    }
+
+    .sidebar-buttons div > a:first-of-type {
+        color: #fff;
+        background: #28a745;
+    }
+    .green_bot {
+        margin: 5px 0;
+        display: inline-block;
+        background: #28a745;
+        color: #fff;
+        padding: 10px 0;
+        border-radius: 3px;
+        text-align: center;
+        font-size: 12px;
+        width: 100%;
+        line-height: 21px;
+    }
+
+    .red_bot {
+        background: #e41c38;
+        color: #fff;
+    }
+    @media screen and (max-width: 992px){
+        .sidebar-buttons a {
+            width: 150px;
+            border: none;
+            padding: 9px 0;
+        }
+    }
+</style>
+<template>
+           <div>
+               <div class="content-sidebar">
+                   <div class="box-sidebar">
+                       <i class="fa-archive fa"></i>
+                       <select v-on:change="setCategoryFilter($event)">
+                           <option disabled selected>دسته محصولات</option>
+                           <option v-for="category in categoryList"
+                                   v-bind:value="category.id">{{category.category_name}}
+                           </option>
+                       </select>
+                   </div>
+                   <div class="box-sidebar">
+                       <i class="fa-tags fa"></i>
+                       <select v-on:change="setSubCategoryFilter($event)">
+                           <option disabled selected>نام محصول</option>
+                           <option v-for="category in subCategoryList"
+                                   v-bind:value="category.id">{{category.category_name}}
+                           </option>
+                       </select>
+                   </div>
+                   <div class="box-sidebar">
+                       <i class="fa-building  fa"></i>
+                       <select v-on:change="setProvinceFilter($event)">
+                           <option disabled selected>استان</option>
+                           <option v-for="province in provinceList"
+                                   v-bind:value="province.id">{{province.province_name}}
+                           </option>
+
+                       </select>
+                   </div>
+                   <div class="box-sidebar">
+                       <i class="fa-home fa"></i>
+                       <select v-on:change="setCityFilter($event)">
+                           <option disabled selected>شهر</option>
+                           <option v-for="city in cityList"
+                                   v-bind:value="city.id">{{city.city_name}}
+                           </option>
+                       </select>
+                   </div>
+               </div>
+               <div class="sidebar-buttons col-xs-12">
+                   <a href="#" class="btn green_bot hidden-md hidden-lg" data-dismiss="modal">
+                       جستجو
+                   </a>
+                   <a href="#" @click.prevent="resetFilter()" class="btn  red_bot" >
+                       حذف فیلتر ها
+                   </a>
+               </div>
+           </div>
 
 </template>
 
@@ -65,6 +107,12 @@
             }
         },
         methods:{
+            resetFilter: function () {
+                $('.box-sidebar option').prop('selected', function() {
+                    return this.defaultSelected;
+                });
+                this.$parent.init();
+            },
             init:function(){
                 axios.post('/get_category_list')
                     .then(response => (this.categoryList = response.data.categories));
@@ -214,16 +262,16 @@
                 var mainElement = $("#main");
 
                 if (get_with > 751) {
-                    headerElement.removeClass("sub-header-fix");
-                    sidebarElement.removeClass("sidebar-fix");
+                   // headerElement.removeClass("sub-header-fix");
+                   // sidebarElement.removeClass("sidebar-fix");
                     mainElement.removeClass("main-padding-fix");
 
                 }
                 $(window).resize(function () {
                     get_with = $(window).width();
                     if (get_with > 751) {
-                        headerElement.removeClass("sub-header-fix");
-                        sidebarElement.removeClass("sidebar-fix");
+                    //    headerElement.removeClass("sub-header-fix");
+                       // sidebarElement.removeClass("sidebar-fix");
                         mainElement.removeClass("main-padding-fix");
                     }
                 });
@@ -232,24 +280,24 @@
                     $(window).resize(function () {
                         get_with = $(window).width();
                         if (get_with > 751) {
-                            headerElement.removeClass("sub-header-fix");
-                            sidebarElement.removeClass("sidebar-fix");
+                            //headerElement.removeClass("sub-header-fix");
+                          //  sidebarElement.removeClass("sidebar-fix");
                             mainElement.removeClass("main-padding-fix");
                         }
                     });
                     if (sc >= 106) {
                         if (get_with > 751) {
-                            headerElement.addClass("sub-header-fix");
-                            sidebarElement.addClass("sidebar-fix");
+                           // headerElement.addClass("sub-header-fix");
+                          //  sidebarElement.addClass("sidebar-fix");
                             mainElement.addClass("main-padding-fix");
                         } else {
-                            headerElement.removeClass("sub-header-fix");
-                            sidebarElement.removeClass("sidebar-fix");
+                          //  headerElement.removeClass("sub-header-fix");
+                          //  sidebarElement.removeClass("sidebar-fix");
                             mainElement.removeClass("main-padding-fix");
                         }
                     } else {
-                        headerElement.removeClass("sub-header-fix");
-                        sidebarElement.removeClass("sidebar-fix");
+                      //  headerElement.removeClass("sub-header-fix");
+                      //  sidebarElement.removeClass("sidebar-fix");
                         mainElement.removeClass("main-padding-fix");
                     }
                 })

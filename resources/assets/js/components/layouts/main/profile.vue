@@ -546,7 +546,7 @@
             init: function () {
                 var self = this;
 
-                if (this.isDeviceMobile()) {
+                if (this.isDeviceMobile()){
                     this.copyLinkText = ' اشتراک در واتساپ';
                     this.copyLinkClass = 'fa fa-whatsapp fa-2x';
                 }

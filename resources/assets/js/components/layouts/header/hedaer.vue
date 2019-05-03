@@ -56,7 +56,7 @@
         <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
             <div class="main-loader">
                 <img :src="loading">
-                <p dir="rtl">کمی صبر کنید...</p>
+                <p dir="rtl">در حال جستجو...</p>
             </div>
         </div>
         <div class="container">
@@ -98,7 +98,7 @@
                             <p class="main_par">
                                 دانلود اپلیکیشن اندروید اینکوباک
                             </p>
-                            <a href="/download/app" class="btn green_bot " data-dismiss="modal">
+                            <a href="#" class="btn green_bot " data-dismiss="modal" @click.prevent="doDownload()">
                                 دریافت اپلیکیشن
                             </a>
                             <a href="#" class="btn green_bot " data-dismiss="modal">
@@ -221,6 +221,7 @@
 <script>
     var viz = false;
     import {eventBus} from "../../../../js/router/dashboard_router";
+    import Cookies from "js-cookie";
 
     export default {
         data() {
@@ -239,7 +240,8 @@
             'storage_path',
             'login_page_path',
             'loading'
-        ], methods: {
+        ],
+        methods: {
             dropdown: function () {
                 $(".profile-list").fadeIn("slow", function () {
                     viz = true;
@@ -256,22 +258,27 @@
                     $('.icon-header-list').fadeOut("slow");
                     viz = false;
                 }
-
             },
             redirectToLogin: function () {
                 window.location.href = '/login';
-            }
-        },
-        mounted() {
-            eventBus.$on("submitSuccess", ($event) => {
-                this.popUpMsg = $event;
-            });
-            eventBus.$on("submiting", ($event) => {
-                this.submiting = $event;
-            });
-
+            },
+            isDeviceMobile: function () {
+                if (navigator.userAgent.match(/Android/i)
+                    || navigator.userAgent.match(/webOS/i)
+                    || navigator.userAgent.match(/iPhone/i)
+                    || navigator.userAgent.match(/iPad/i)
+                    || navigator.userAgent.match(/iPod/i)
+                    || navigator.userAgent.match(/BlackBerry/i)
+                    || navigator.userAgent.match(/Windows Phone/i)
+                ) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            },
             // jQuery
-            function jqUpdateSize() {
+            jqUpdateSize:function() {
                 // Get the dimensions of the viewport
                 var width = $(window).width();
                 if (width < 767) {
@@ -281,24 +288,62 @@
                         $('.navbar-toggler').click(); //bootstrap 4.x
                     });
                 }
-            }
-
-            function DownloadApp() {
+            },
+            DownloadApp:function(){
                 $('#DownloadApp').modal()
-            };
+            },
+            doDownload:function(){
+                //ga
+                // code here
+                Cookies.set('appDownloaded',true);
+                window.location.href = '/download/app';
+            },
+            isOsIOS:function(){
+                var userAgent = window.navigator.userAgent.toLowerCase(),
+                safari = /safari/.test( userAgent ),
+                ios = /iphone|ipod|ipad/.test( userAgent );
 
-            $(document).ready(function () {
-                jqUpdateSize();
-                setTimeout(DownloadApp, 5000);
+                if( ios ) {
+                    return true
+                } else {
+                    return false;
+                };
+            },
+            isUserFromWebView:function(){
+                var self = this;
+
+                axios.post('/is_user_from_webview')
+                        .then(function(response){
+                            if(response.data.is_webview == false){
+                                self.activateDownloadAppPopUp();
+                            }
+                });
+            },
+            activateDownloadAppPopUp:function(){
+                this.jqUpdateSize();
+                if(this.isDeviceMobile()  && !this.isOsIOS() && !Cookies.get('appDownloaded')){
+                   setTimeout(this.DownloadApp, 5000);
+                }
+            }
+        },
+        mounted() {
+            var self = this;
+
+            eventBus.$on("submitSuccess", ($event) => {
+                this.popUpMsg = $event;
+            });
+            eventBus.$on("submiting", ($event) => {
+                this.submiting = $event;
+            });
+
+            $(document).ready(function(){
+                    self.isUserFromWebView();
             });    // When the page first loads
-            $(window).resize(jqUpdateSize);     // When the browser changes size
-
+            $(window).resize(this.jqUpdateSize);     // When the browser changes size
 
         },
         created() {
             document.addEventListener('click', this.documentClick);
-
-
         },
     }
 </script>
