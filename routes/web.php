@@ -955,6 +955,10 @@ Route::group(['middleware' => [cors::class]],function(){
     });
 });
 
+Route::post('/is_user_from_webview',[
+    'uses' => 'user_controller@is_user_from_webview'
+]);
+
 //Route::get('/migrate_users',[
 //   'uses' => 'profile_controller@migrate_users'
 //]);

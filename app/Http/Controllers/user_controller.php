@@ -288,6 +288,17 @@ class user_controller extends Controller
             ],404);
         }
     }
+    
+    //public method
+    public function is_user_from_webview(Request $request)
+    {
+        $is_webview =  $request->header('HTTP_X_REQUESTED_WITH') == 'com.deldari.incobac.incobacmobile';
+        
+        return response()->json([
+            'status' => true,
+            'is_webview' => $is_webview
+        ],200);
+    }
 
 
 }
