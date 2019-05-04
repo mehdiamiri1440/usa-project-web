@@ -80,7 +80,7 @@
                    <a href="#" class="btn green_bot hidden-md hidden-lg" data-dismiss="modal">
                        جستجو
                    </a>
-                   <a href="#" @click.prevent="resetFilter()" class="btn  red_bot" >
+                   <a href="#" @click.prevent="resetFilter()" data-dismiss="modal" class="btn  red_bot" >
                        حذف فیلتر ها
                    </a>
                </div>

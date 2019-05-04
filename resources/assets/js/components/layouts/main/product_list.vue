@@ -1,6 +1,8 @@
 <style scoped>
 
-
+    .loading_images{
+        padding-top:115px;
+    }
     #searchFilter {
         background: #fff;
         padding-left: 0 !important;
@@ -368,9 +370,6 @@
     }
 
     @media screen and (max-width: 767px) {
-        .main-content {
-            padding-top: 85px;
-        }
 
         .sub-header {
             position: fixed;
@@ -665,7 +664,7 @@
                 <img :src="loading_img" style="width:200px;height:200px">
             </section>
             <section class="loading_images  col-xs-12" v-else>
-                <img :src="loading_img">
+                <img :src="loading_img" style="width:200px;height:200px">
             </section>
         </main>
 
