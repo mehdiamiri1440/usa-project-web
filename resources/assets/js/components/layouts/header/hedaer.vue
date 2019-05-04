@@ -313,18 +313,18 @@
             isUserFromWebView:function(){
                 var self = this;
 
-//                axios.post('/is_user_from_webview')
-//                        .then(function(response){
-//                            if(response.data.is_webview == false){
-//                                self.activateDownloadAppPopUp();
-//                            }
-//                            else{
-//                                //
-//                            }
-//                });
-                if(IsWebview(navigator.userAgent)){
-                    this.activateDownloadAppPopUp();
-                }
+                axios.post('/is_user_from_webview')
+                        .then(function(response){
+                            if(response.data.is_webview == false){
+                                self.activateDownloadAppPopUp();
+                            }
+                            else{
+                                //
+                            }
+                });
+//                if( ! IsWebview(window.navigator.userAgent)){
+//                    this.activateDownloadAppPopUp();
+//                }
             },
             activateDownloadAppPopUp:function(){
                 this.jqUpdateSize();
@@ -335,7 +335,7 @@
         },
         mounted() {
             var self = this;
-//            Cookies.remove('appDownloaded');
+
             eventBus.$on("submitSuccess", ($event) => {
                 this.popUpMsg = $event;
             });
@@ -344,7 +344,7 @@
             });
 
             $(document).ready(function(){
-                    self.isUserFromWebView();
+                    //self.isUserFromWebView();
             });    // When the page first loads
             $(window).resize(this.jqUpdateSize);     // When the browser changes size
 
