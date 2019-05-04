@@ -45,7 +45,7 @@
     .create_buy {
         position: relative;
     }
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 767px) {
 
         .logo img {
             width: 100%;
