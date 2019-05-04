@@ -80,7 +80,7 @@
                    <a href="#" class="btn green_bot hidden-md hidden-lg" data-dismiss="modal">
                        جستجو
                    </a>
-                   <a href="#" @click.prevent="resetFilter()" class="btn  red_bot" >
+                   <a href="#" @click.prevent="resetFilter()" data-dismiss="modal" class="btn  red_bot" >
                        حذف فیلتر ها
                    </a>
                </div>
@@ -107,12 +107,6 @@
             }
         },
         methods:{
-            resetFilter: function () {
-                $('.box-sidebar option').prop('selected', function() {
-                    return this.defaultSelected;
-                });
-                this.$parent.init();
-            },
             init:function(){
                 axios.post('/get_category_list')
                     .then(response => (this.categoryList = response.data.categories));
@@ -301,6 +295,12 @@
                         mainElement.removeClass("main-padding-fix");
                     }
                 })
+            },
+            resetFilter: function () {
+                $('.box-sidebar option').prop('selected', function() {
+                    return this.defaultSelected;
+                });
+                this.$parent.init();
             },
             registerComponentStatistics:function(categoryName,actionName,labelName){
                 gtag('event',actionName,{

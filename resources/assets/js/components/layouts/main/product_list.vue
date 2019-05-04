@@ -1,6 +1,8 @@
 <style scoped>
 
-
+    .loading_images{
+        padding-top:115px;
+    }
     #searchFilter {
         background: #fff;
         padding-left: 0 !important;
@@ -368,9 +370,6 @@
     }
 
     @media screen and (max-width: 767px) {
-        .main-content {
-            padding-top: 85px;
-        }
 
         .sub-header {
             position: fixed;
@@ -647,7 +646,9 @@
                 <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
                 <br/>
                 <div class="text-center">
-                    <a class="green_bot col-xs-4 " @click="registerRequestInSearchNotFoundCase()">درخواست خرید</a>
+                    <a class="green_bot col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">درخواست خرید</a>
+                    <br/>
+                    <a class="green_bot col-xs-4 " @click="resetFilter()">نمایش همه محصولات</a>
                 </div>
                 <br/>
             </section>
@@ -657,7 +658,9 @@
                 <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
                 <br/>
                 <div class="text-center">
-                    <a class="green_bot col-xs-4 " @click="registerRequestInSearchNotFoundCase()">درخواست خرید</a>
+                    <a class="green_bot col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">درخواست خرید</a>
+                    <br/>
+                    <a class="green_bot col-xs-4 " @click.prevent="resetFilter()">نمایش همه محصولات</a>
                 </div>
                 <br/>
             </section>
@@ -665,7 +668,7 @@
                 <img :src="loading_img" style="width:200px;height:200px">
             </section>
             <section class="loading_images  col-xs-12" v-else>
-                <img :src="loading_img">
+                <img :src="loading_img" style="width:200px;height:200px">
             </section>
         </main>
 
@@ -766,7 +769,6 @@
                     });
                 }
 
-
                 axios.post('/user/profile_info')
                     .then(response => (this.currentUser = response.data));
 
@@ -843,9 +845,12 @@
                     'event_label': labelName
                 });
             },
-            backBtn: function () {
-                alert('test');
-                window.location.href = '/';
+            resetFilter: function () {
+                $('.box-sidebar option').prop('selected', function() {
+                    return this.defaultSelected;
+                });
+                this.searchText = '';
+                this.init();
             }
         },
         watch: {

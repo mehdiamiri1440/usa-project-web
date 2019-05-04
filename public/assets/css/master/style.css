@@ -270,6 +270,7 @@
     }
     .navbar-header {
         float: none;
+        min-height: 80px;
     }
     .test {
         background-image: url('../../img/logo_dark.png');
