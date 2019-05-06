@@ -91,7 +91,11 @@
 <script>
     export default {
         props:[
-            'productsInfo'
+            'productsInfo',
+            'categoryId',
+            'subCategoryId',
+            'provinceId',
+            'cityId',
         ],
         data(){
             return{
@@ -99,10 +103,10 @@
                 subCategoryList: '',
                 provinceList: '',
                 cityList: '',
-                categoryId: '',
-                subCategoryId: '',
-                provinceId: '',
-                cityId: '',
+                categoryId: this.categoryId,
+                subCategoryId: this.subCategoryId,
+                provinceId: this.provinceId,
+                cityId: this.cityId,
                 products: this.productsInfo,
             }
         },
@@ -297,14 +301,7 @@
                 })
             },
             resetFilter: function () {
-                $('.box-sidebar option').prop('selected', function() {
-                    return this.defaultSelected;
-                });
-                this.categoryId = '';
-                this.subCategoryId = '';
-                this.provinceId = '';
-                this.cityId = '';
-                this.$parent.init();
+                this.$parent.resetFilter();
             },
             registerComponentStatistics:function(categoryName,actionName,labelName){
                 gtag('event',actionName,{

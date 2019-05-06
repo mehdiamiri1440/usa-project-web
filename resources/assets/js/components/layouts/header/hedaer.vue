@@ -278,7 +278,7 @@
                 }
             },
             getAndroidVersion:function(ua) {
-                ua = (ua || navigator.userAgent).toLowerCase(); 
+                ua = (ua || navigator.userAgent).toLowerCase();
                 var match = ua.match(/android\s([0-9\.]*)/);
                 return match ? match[1] : undefined;
             },
@@ -317,8 +317,9 @@
             },
             isUserFromWebView:function(){
                 var self = this;
+
                 var androidVersion = parseInt(this.getAndroidVersion(), 10);
-                
+
                 if( !this.isOsIOS() && androidVersion >= 5 ){
                     axios.post('/is_user_from_webview')
                         .then(function(response){
@@ -329,8 +330,8 @@
                                 //
                             }
                     });
-                } 
-                
+                }
+
 //                if( ! IsWebview(window.navigator.userAgent)){
 //                    this.activateDownloadAppPopUp();
 //                }
@@ -362,7 +363,6 @@
                     //self.isUserFromWebView();
             });    // When the page first loads
             $(window).resize(this.jqUpdateSize);     // When the browser changes size
-
         },
         created() {
             document.addEventListener('click', this.documentClick);
