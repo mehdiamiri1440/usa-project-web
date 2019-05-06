@@ -567,7 +567,7 @@
         <div class="sub-header-fix sub-header container-fluid">
 
             <div class="search-box col-sm-8 col-xs-12 col-md-5">
-                <input type="text" v-model="searchText" placeholder="لطفا محصول مورد نظر خود را جستجو کنید">
+                <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید">
 
                 <button class="btn-search"><i class="fa-search fa"></i></button>
                 <button class="btn-filter  hidden-lg hidden-md" data-toggle="modal" data-target="#searchFilter"> فیلتر

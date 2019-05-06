@@ -240,6 +240,10 @@
                                     <i class="fa fa-check"></i>
                                 </div>
                             </div>
+                            
+                            <span v-if="errors.activity_type" class="error_msg">
+                                    {{errors.activity_type[0]}}
+                            </span>
 
                             <div class="col-xs-12">
                                 <label>
@@ -343,7 +347,7 @@
                    cityList:'',
                },
                step4:{
-                   activity_type:0,
+                   activity_type:'',
                    rules:0,
                    categoryList:'',
                    categoryId:'',
@@ -500,6 +504,7 @@
                 this.sexValidator(this.step3.sex);
             },
             checkStep4:function(){
+                this.activityTypeValidator(this.step4.activity_type);
                 this.categoryIdValidator(this.step4.categoryId);
             },
             firstNameValidator:function(name){
@@ -626,6 +631,13 @@
                 this.errors.category_id = [];
                 if(categoryId === ''){
                     this.errors.category_id.push('انتخاب حوزه ی فعالیت الزامی است.');
+                    this.errorFlag = true;
+                }
+            },
+            activityTypeValidator:function(activityType){
+                this.errors.activity_type = [];
+                if(activityType == ''){
+                    this.errors.activity_type.push('انتخاب نوع کاربری الزامی است.');
                     this.errorFlag = true;
                 }
             },
