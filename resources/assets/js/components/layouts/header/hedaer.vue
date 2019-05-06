@@ -302,7 +302,7 @@
                 this.registerComponentStatistics('download','app download btn','download app btn in popUp');
                 // code here
                 Cookies.set('appDownloaded',true);
-                window.location.href = '/download/app';
+                window.location.href = '/storage/download/incobac.apk';
             },
             isOsIOS:function(){
                 var userAgent = window.navigator.userAgent.toLowerCase(),
@@ -359,7 +359,7 @@
             });
 
             $(document).ready(function(){
-                    //self.isUserFromWebView();
+                    self.isUserFromWebView();
             });    // When the page first loads
             $(window).resize(this.jqUpdateSize);     // When the browser changes size
 
