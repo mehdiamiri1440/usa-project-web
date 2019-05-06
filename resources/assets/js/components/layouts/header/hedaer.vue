@@ -359,7 +359,7 @@
             });
 
             $(document).ready(function(){
-                    self.isUserFromWebView();
+                    //self.isUserFromWebView();
             });    // When the page first loads
             $(window).resize(this.jqUpdateSize);     // When the browser changes size
 
