@@ -748,7 +748,7 @@
                     viz = false;
                 }
             },
-            init: function () {
+            init: function (){
                 var self = this;
                 var searchValue = this.searchValue;
                 var searchValueText = searchValue;
@@ -881,7 +881,7 @@
 
             bottom(bottom) {
                 if (bottom) {
-                    this.feed()
+                    //this.feed()
                 }
             },
         },

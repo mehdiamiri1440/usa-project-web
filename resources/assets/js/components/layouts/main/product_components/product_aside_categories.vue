@@ -125,7 +125,7 @@
                     .then(function (response) {
                         self.products = '';
                         self.products = response.data.products.filter(function (product) {
-                            if (self.cityId != '') {
+                            if (self.cityId != ''){
                                 return product.main.category_id == categoryId && product.main.city_id == self.cityId;
                             }
                             else if (self.provinceId != '' && self.cityId == '') {
@@ -300,6 +300,10 @@
                 $('.box-sidebar option').prop('selected', function() {
                     return this.defaultSelected;
                 });
+                this.categoryId = '';
+                this.subCategoryId = '';
+                this.provinceId = '';
+                this.cityId = '';
                 this.$parent.init();
             },
             registerComponentStatistics:function(categoryName,actionName,labelName){
