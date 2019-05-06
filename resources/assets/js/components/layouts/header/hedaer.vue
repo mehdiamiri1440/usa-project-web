@@ -96,7 +96,7 @@
                                 <h1>اینکوباک</h1>
                             </div>
                             <p class="main_par">
-                                دانلود اپلیکیشن اندروید اینکوباک
+                               دانلود اپلیکیشن اندروید اینکوباک
                             </p>
                             <a href="#" class="btn green_bot " data-dismiss="modal" @click.prevent="doDownload()">
                                 دریافت اپلیکیشن
@@ -222,7 +222,6 @@
     var viz = false;
     import {eventBus} from "../../../../js/router/dashboard_router";
     import Cookies from "js-cookie";
-    import IsWebview from "is-webview";
 
     export default {
         data() {
@@ -278,6 +277,11 @@
                     return false;
                 }
             },
+            getAndroidVersion:function(ua) {
+                ua = (ua || navigator.userAgent).toLowerCase(); 
+                var match = ua.match(/android\s([0-9\.]*)/);
+                return match ? match[1] : undefined;
+            },
             // jQuery
             jqUpdateSize:function() {
                 // Get the dimensions of the viewport
@@ -295,6 +299,7 @@
             },
             doDownload:function(){
                 //ga
+                this.registerComponentStatistics('download','app download btn','download app btn in popUp');
                 // code here
                 Cookies.set('appDownloaded',true);
                 window.location.href = '/download/app';
@@ -312,8 +317,10 @@
             },
             isUserFromWebView:function(){
                 var self = this;
-
-                axios.post('/is_user_from_webview')
+                var androidVersion = parseInt(this.getAndroidVersion(), 10);
+                
+                if( !this.isOsIOS() && androidVersion >= 5 ){
+                    axios.post('/is_user_from_webview')
                         .then(function(response){
                             if(response.data.is_webview == false){
                                 self.activateDownloadAppPopUp();
@@ -321,17 +328,25 @@
                             else{
                                 //
                             }
-                });
+                    });
+                } 
+                
 //                if( ! IsWebview(window.navigator.userAgent)){
 //                    this.activateDownloadAppPopUp();
 //                }
             },
             activateDownloadAppPopUp:function(){
                 this.jqUpdateSize();
-                if(this.isDeviceMobile()  && !Cookies.get('appDownloaded')){
+                if(this.isDeviceMobile() && !Cookies.get('appDownloaded')){
                    setTimeout(this.DownloadApp, 5000);
                 }
-            }
+            },
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName, {
+                    'event_category': categoryName,
+                    'event_label': labelName
+                });
+            },
         },
         mounted() {
             var self = this;

@@ -292,7 +292,7 @@ class user_controller extends Controller
     //public method
     public function is_user_from_webview(Request $request)
     {
-        $is_webview =  $request->header('X-Requested-With') == 'com.deldari.incobac.incobacmobile';
+        $is_webview =  $request->header('User-Agent') == 'webView';
         
         return response()->json([
             'status' => true,
