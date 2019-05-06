@@ -33,14 +33,14 @@ class user_controller extends Controller
 		if($user)
 		{
             $user_confirmed_profile_record_status = $this->does_user_have_confirmed_profile_record($user->id);
-            
+
 			$this->set_user_session($user);
-            
+
 			 return response()->json([
 			 	'status' => TRUE,
                  'is_buyer' => $user->is_buyer,
                  'is_seller' => $user->is_seller,
-                 'confirmed_profile_record' => $user_confirmed_profile_record_status, 
+                 'confirmed_profile_record' => $user_confirmed_profile_record_status,
 			 	'msg' => 'Login successfull',
 			 ],200)
                  ->withCookie(cookie(
@@ -98,7 +98,7 @@ class user_controller extends Controller
             'status' => true,
         ],200);
     }
-    
+
     protected function does_user_have_confirmed_profile_record($user_id)
     {
         $profile_record = profile::where('myuser_id',$user_id)
@@ -106,10 +106,10 @@ class user_controller extends Controller
                                         ->select('id')
                                         ->get()
                                         ->last();
-        
-        if($profile_record) 
+
+        if($profile_record)
             return true;
-        else 
+        else
             return false;
     }
     public function initial_contract_confirmation_by_user()
@@ -265,16 +265,16 @@ class user_controller extends Controller
            'seller_user_id' => 'required|integer|min:1',
            'buyer_user_id' => 'required|integer|min:1'
         ]);
-        
+
         $seller_user_id = $request->seller_user_id;
         $buyer_user_id = $request->buyer_user_id;
-        
+
         $seller_user_record = myuser::find($seller_user_id);
         $buyer_user_record = myuser::find($buyer_user_id);
-        
+
         if($seller_user_record && $buyer_user_record){
             $fields = ['first_name','last_name','national_code'];
-            
+
             return response()->json([
                 'status' => true,
                 'seller_user_info' => $seller_user_record->only($fields),
@@ -288,12 +288,11 @@ class user_controller extends Controller
             ],404);
         }
     }
-    
+
     //public method
     public function is_user_from_webview(Request $request)
     {
-        $is_webview =  $request->header('HTTP_X_REQUESTED_WITH') == 'com.deldari.incobac.incobacmobile';
-        
+        $is_webview =  $request->header('User-Agent') == 'webView';
         return response()->json([
             'status' => true,
             'is_webview' => $is_webview

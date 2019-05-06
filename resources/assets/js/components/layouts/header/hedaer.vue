@@ -56,7 +56,7 @@
         <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
             <div class="main-loader">
                 <img :src="loading">
-                <p dir="rtl">در حال جستجو...</p>
+                <p dir="rtl">در حال بارگذاری...</p>
             </div>
         </div>
         <div class="container">
@@ -222,6 +222,7 @@
     var viz = false;
     import {eventBus} from "../../../../js/router/dashboard_router";
     import Cookies from "js-cookie";
+    import IsWebview from "is-webview";
 
     export default {
         data() {
@@ -312,23 +313,32 @@
             isUserFromWebView:function(){
                 var self = this;
 
-                axios.post('/is_user_from_webview')
-                        .then(function(response){
-                            if(response.data.is_webview == false){
-                                self.activateDownloadAppPopUp();
-                            }
-                });
+               axios.post('/is_user_from_webview')
+                       .then(function(response){
+                           if(response.data.is_webview == false){
+                               self.activateDownloadAppPopUp();
+                           }
+                           else{
+                               //
+                           }
+               });
+               console.log(document.URL.match(/^https?:/));
+//                 if( IsWebview(navigator.userAgent, { appName: 'com.deldari.incobac.incobacmobile' })){
+//                     this.activateDownloadAppPopUp();
+//
+//                 }
+
             },
             activateDownloadAppPopUp:function(){
                 this.jqUpdateSize();
-                if(this.isDeviceMobile()  && !this.isOsIOS() && !Cookies.get('appDownloaded')){
+                if(this.isDeviceMobile()  && !Cookies.get('appDownloaded')){
                    setTimeout(this.DownloadApp, 5000);
                 }
             }
         },
         mounted() {
             var self = this;
-
+//            Cookies.remove('appDownloaded');
             eventBus.$on("submitSuccess", ($event) => {
                 this.popUpMsg = $event;
             });
@@ -340,7 +350,6 @@
                     self.isUserFromWebView();
             });    // When the page first loads
             $(window).resize(this.jqUpdateSize);     // When the browser changes size
-
         },
         created() {
             document.addEventListener('click', this.documentClick);

@@ -1,8 +1,9 @@
 <style scoped>
 
-    .loading_images{
-        padding-top:115px;
+    .loading_images {
+        padding-top: 115px;
     }
+
     #searchFilter {
         background: #fff;
         padding-left: 0 !important;
@@ -539,8 +540,13 @@
 
                         <div class="col-xs-12">
                             <div class="filter-mobile-sidebar ">
-                                <product-aside-categories :productsInfo="products"
-                                                          v-on:productsToParent="filterProducts($event)">
+                                <product-aside-categories
+                                        :productsInfo="products"
+                                        :categoryId="categoryId"
+                                        :subCategoryId="subCategoryId"
+                                        :provinceId="provinceId"
+                                        :cityId="cityId"
+                                        v-on:productsToParent="filterProducts($event)">
 
                                 </product-aside-categories>
                             </div>
@@ -584,7 +590,13 @@
         <aside class="right-sidebar sidebar-fix col-sm-3">
             <div class="col-sm-12">
                 <h2 class="title-sidebar">دسته بندی محصولات </h2>
-                <product-aside-categories :productsInfo="products" v-on:productsToParent="filterProducts($event)">
+                <product-aside-categories
+                        :productsInfo="products"
+                        :categoryId="categoryId"
+                        :subCategoryId="subCategoryId"
+                        :provinceId="provinceId"
+                        :cityId="cityId"
+                        v-on:productsToParent="filterProducts($event)">
 
                 </product-aside-categories>
             </div>
@@ -646,7 +658,10 @@
                 <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
                 <br/>
                 <div class="text-center">
-                    <a class="green_bot col-xs-4 " @click="registerRequestInSearchNotFoundCase()">درخواست خرید</a>
+                    <a class="green_bot col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">درخواست
+                        خرید</a>
+                    <br/>
+                    <a class="green_bot col-xs-4 " @click="resetFilter()">نمایش همه محصولات</a>
                 </div>
                 <br/>
             </section>
@@ -656,7 +671,10 @@
                 <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
                 <br/>
                 <div class="text-center">
-                    <a class="green_bot col-xs-4 " @click="registerRequestInSearchNotFoundCase()">درخواست خرید</a>
+                    <a class="green_bot col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">درخواست
+                        خرید</a>
+                    <br/>
+                    <a class="green_bot col-xs-4 " @click.prevent="resetFilter()">نمایش همه محصولات</a>
                 </div>
                 <br/>
             </section>
@@ -702,6 +720,8 @@
                 searchText: '',
                 provinceId: '',
                 categoryId: '',
+                subCategoryId: '',
+                cityId: '',
                 searchValue: this.$route.params.searchText,
                 scrolled: false,
                 productCountInPage: 6,
@@ -764,7 +784,6 @@
                         self.loading = false;
                     });
                 }
-
 
                 axios.post('/user/profile_info')
                     .then(response => (this.currentUser = response.data));
@@ -842,9 +861,16 @@
                     'event_label': labelName
                 });
             },
-            backBtn: function () {
-                alert('test');
-                window.location.href = '/';
+            resetFilter: function () {
+                $('.box-sidebar option').prop('selected', function () {
+                    return this.defaultSelected;
+                });
+                this.searchText = '';
+                this.provinceId = '';
+                this.categoryId = '';
+                this.subCategoryId = '';
+                this.cityId = '';
+                this.init();
             }
         },
         watch: {

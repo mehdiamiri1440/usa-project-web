@@ -91,7 +91,11 @@
 <script>
     export default {
         props:[
-            'productsInfo'
+            'productsInfo',
+            'categoryId',
+            'subCategoryId',
+            'provinceId',
+            'cityId',
         ],
         data(){
             return{
@@ -99,20 +103,14 @@
                 subCategoryList: '',
                 provinceList: '',
                 cityList: '',
-                categoryId: '',
-                subCategoryId: '',
-                provinceId: '',
-                cityId: '',
+                categoryId: this.categoryId,
+                subCategoryId: this.subCategoryId,
+                provinceId: this.provinceId,
+                cityId: this.cityId,
                 products: this.productsInfo,
             }
         },
         methods:{
-            resetFilter: function () {
-                $('.box-sidebar option').prop('selected', function() {
-                    return this.defaultSelected;
-                });
-                this.$parent.init();
-            },
             init:function(){
                 axios.post('/get_category_list')
                     .then(response => (this.categoryList = response.data.categories));
@@ -301,6 +299,9 @@
                         mainElement.removeClass("main-padding-fix");
                     }
                 })
+            },
+            resetFilter: function () {
+                this.$parent.resetFilter();
             },
             registerComponentStatistics:function(categoryName,actionName,labelName){
                 gtag('event',actionName,{
