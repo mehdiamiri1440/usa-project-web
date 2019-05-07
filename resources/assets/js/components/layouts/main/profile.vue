@@ -54,10 +54,10 @@
                         <div class="image_user_wrapper col-xs-4">
                             <div class="user-image">
                                 <div v-if="profileOwner.profile.profile_photo">
-                                    <img v-bind:src=" str + '/' + profileOwner.profile.profile_photo">
+                                    <img v-bind:src=" str + '/' + profileOwner.profile.profile_photo" :alt="profileOwner.user_info.first_name + ' ' + profileOwner.user_info.last_name">
                                 </div>
                                 <div v-else>
-                                    <img :src="defultimg" class="image_defult">
+                                    <img :src="defultimg" class="image_defult" :alt="profileOwner.user_info.first_name + ' ' + profileOwner.user_info.last_name">
                                 </div>
                             </div>
                         </div>
@@ -364,7 +364,6 @@
                     preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
                 }
             });
-
         }
     };
     var PopupImageCertificate = {
