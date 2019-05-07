@@ -945,6 +945,10 @@ Route::post('/is_user_from_webview',[
     'uses' => 'user_controller@is_user_from_webview'
 ]);
 
+Route::get('/sitemap.xml',[
+    'uses' => 'user_controller@get_all_user_names_for_sitemap',
+    'as' => 'get_sitemap'
+]);
 //Route::get('/migrate_users',[
 //   'uses' => 'profile_controller@migrate_users'
 //]);

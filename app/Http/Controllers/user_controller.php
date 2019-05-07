@@ -298,6 +298,17 @@ class user_controller extends Controller
             'is_webview' => $is_webview
         ],200);
     }
+    
+    //public method
+    public function get_all_user_names_for_sitemap()
+    {
+        $user_names = myuser::select('user_name')
+                            ->get();
+        
+        return response()->view('other.sitemap',[
+            'user_names' => $user_names
+        ])->header('Content-Type','text/xml');
+    }
 
 
 }

@@ -638,6 +638,5 @@ class profile_controller extends Controller
         profile_media::where('profile_id',$profile_id)
                         ->delete();
     }
-    
-    
+
 }
