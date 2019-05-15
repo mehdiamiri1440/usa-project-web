@@ -59,12 +59,14 @@
                   </router-link>
               </li>
 
+<!--
               <li class="list-item" >
                   <router-link :class="{'active' : this.active_el === 3}" :to="{ name : 'myBuyAds' }">
                       <span>درخواست های من </span>
                       <i class="fa fa-list-alt " aria-hidden="true"></i>
                   </router-link>
               </li>
+-->
            <!--   <li class="list-item" >
                   <router-link :class="{'active' : this.active_el === 4}" :to="{ name : 'myTransactions' }">
                       <span>تراکنش های جاری</span>

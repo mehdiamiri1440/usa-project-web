@@ -56,7 +56,7 @@ class user_controller extends Controller
 		 ],200);
 	}
 
-	protected function  set_user_session($user_info)
+	protected function set_user_session($user_info)
 	{
         $user_profile_record = profile::where('myuser_id',$user_info->id)
                 ->select('profile_photo')
@@ -249,7 +249,7 @@ class user_controller extends Controller
     protected function generate_plain_text_password($password_len)
     {
         $result = "";
-        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGH0123456789";
+        $chars = "abcdefghijkmnpqrstuvwxyz123456789";
         $charArray = str_split($chars);
         for($i = 0; $i < $password_len; $i++){
             $randItem = array_rand($charArray);

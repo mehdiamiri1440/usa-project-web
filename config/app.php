@@ -163,6 +163,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 		phplusir\smsir\SmsirServiceProvider::class,
+//        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        
         
 
         /*

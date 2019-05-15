@@ -296,6 +296,7 @@
                     <input type="text" placeholder="نوع محصول" v-model="buyAd.name">
                     <span v-if="errors.name" class="text-danger" >{{ errors.name[0] }}</span>
                 </div>
+<!--
                 <div class="col-xs-12 col-sm-6">
                     <label>
                         <span class="text-danger">*</span> نوع بسته بندی
@@ -303,26 +304,32 @@
                     <input type="text" placeholder="نوع بسته بندی" v-model="buyAd.pack_type">
                     <span v-if="errors.pack_type" class="text-danger" >{{ errors.pack_type[0] }}</span>
                 </div>
+-->
                 <div class="col-xs-12 col-sm-6">
                     <label>
                         <span class="text-danger">*</span> میزان نیازمندی <span class="sub-des">(کیلوگرم)</span> </label>
                     <input type="text" placeholder="میزان نیازمندی" v-model="buyAd.requirement_amount">
                     <span v-if="errors.requirement_amount" class="text-danger" >{{ errors.requirement_amount[0] }}</span>
                 </div>
+<!--
                 <div class="col-xs-12 col-sm-6">
                     <label>
                         قیمت <span class="sub-des">(هر کیلو به تومان)</span> </label>
                     <input type="text" placeholder="قیمت" v-model="buyAd.price">
                     <span v-if="errors.price" class="text-danger" >{{ errors.price[0] }}</span>
                 </div>
+-->
+<!--
                 <div class="col-xs-12 col-sm-6">
                     <label>
                         محل تحویل </label>
                     <input type="text" placeholder="محل تحویل" v-model="buyAd.address">
                     <span v-if="errors.address" class="text-danger" >{{ errors.address[0] }}</span>
                 </div>
+-->
 
             </div>
+<!--
             <div class="col-xs-12">
                 <label>
                     <span class="text-danger">*</span> توضیحات
@@ -330,8 +337,10 @@
                 <textarea placeholder="تمام جزییات مورد نظر خود را مطرح کنید..." v-model="buyAd.description"></textarea>
                 <span v-if="errors.description" class="text-danger" >{{ errors.description[0] }}</span>
             </div>
+-->
 
         </div>
+<!--
         <div class="image_company col-xs-12">
             <label>
                 تصاویر نمونه محصول، بسته بندی و ...
@@ -350,14 +359,14 @@
                     :uploadUploadAuto = "false"
                     :uploadRef="buyAdFiles"
             ></buyAdFiles>
-         <!--   <input type="file" multiple  ref="buyAdFiles" v-on:change="handleBuyAdFilesUpload()" accept="image/*">-->
         </div>
         <div class="rules col-xs-12">
             با    <span class="roules-check-inside">قوانین و شرایط</span>
             ثبت آگهی موافقم<input type="checkbox" v-model="buyAd.rules">
             <i class="fa fa-check"></i>
         </div>
-        <div class="col-xs-12">
+-->
+        <div class="col-md-3 col-md-offset-9 col-xs-12">
             <input class="green-bot width-full" value="ثبت درخواست" type="button"   @click="submitBuyAd" :disabled="disableSubmit == true">
         </div>
     </section>
@@ -388,13 +397,13 @@
               },
               buyAdFields:[
                   'name',
-                  'stock',
+//                  'stock',
                   'requirement_amount',
-                  'price',
-                  'pack_type',
-                  'description',
-                  'address',
-                  'pack_type',
+//                  'price',
+//                  'pack_type',
+//                  'description',
+//                  'address',
+//                  'pack_type',
                   'category_id',
               ],
               categoryList:'',
@@ -433,12 +442,12 @@
               this.errors = '';
               var self = this;
 
-              if(this.buyAd.rules != true){
-                  self.popUpMsg = 'ابتدا تیک با قوانین موافق هستم را بزنید.';
-                  eventBus.$emit('submitSuccess',self.popUpMsg);
-                  $('#myModal').modal('show');
-              }
-              else{
+//              if(this.buyAd.rules != true){
+//                  self.popUpMsg = 'ابتدا تیک با قوانین موافق هستم را بزنید.';
+//                  eventBus.$emit('submitSuccess',self.popUpMsg);
+//                  $('#myModal').modal('show');
+//              }
+//              else{
                   eventBus.$emit('submitingEvent', true);
 
                   var self = this;
@@ -464,7 +473,7 @@
                           self.errors = err.response.data.errors;
                           eventBus.$emit('submitingEvent', false);
                       });
-              }
+//              }
 
           },
           getBuyAdFormFields:function(){
@@ -475,11 +484,11 @@
                   formData.append(this.buyAdFields[i],this.toLatinNumbers(this.buyAd[this.buyAdFields[i]]));
               }
 
-              for(var i = 0; i < this.buyAdFiles.length; i++ ){
-                  let file = this.buyAdFiles[i];
-                  formData.append('image_' + i , file);
-              }
-              formData.append('images_count',this.buyAdFiles.length);
+//              for(var i = 0; i < this.buyAdFiles.length; i++ ){
+//                  let file = this.buyAdFiles[i];
+//                  formData.append('image_' + i , file);
+//              }
+//              formData.append('images_count',this.buyAdFiles.length);
 
               return formData;
           },
@@ -491,15 +500,15 @@
           setCityId:function(cityId){
               this.buyAd.city_id = cityId;
           },
-          handleBuyAdFilesUpload:function(){
-              let uploadedFiles = this.$refs.buyAdFiles.files ;
-              /*
-                Adds the uploaded file to the files array
-              */
-              for( var i = 0; i < uploadedFiles.length; i++ ){
-                  this.buyAdFiles.push( uploadedFiles[i] );
-              }
-          },
+//          handleBuyAdFilesUpload:function(){
+//              let uploadedFiles = this.$refs.buyAdFiles.files ;
+//              /*
+//                Adds the uploaded file to the files array
+//              */
+//              for( var i = 0; i < uploadedFiles.length; i++ ){
+//                  this.buyAdFiles.push( uploadedFiles[i] );
+//              }
+//          },
           toLatinNumbers:function(num){
               if(num == null){
                   return '';
@@ -525,7 +534,7 @@
           }
       },
       mounted(){
-          $('input[type="file"]').imageuploadify();
+//          $('input[type="file"]').imageuploadify();
           this.init();
           eventBus.$emit('subHeader', this.items);
       },

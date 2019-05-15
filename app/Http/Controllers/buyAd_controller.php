@@ -41,8 +41,8 @@ class buyAd_controller extends Controller
         'requirement_amount' => 'required|integer|min:0',
         'category_id' => 'required|integer|min:1',
         //new mandetory fields
-        'description' => 'required|regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u',
-        'pack_type' => 'required|regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u',
+//        'description' => 'required|regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u',
+//        'pack_type' => 'required|regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u',
     );
     
     protected $buyAd_register_nullable_fields_array_with_validation_rules = array(
@@ -66,13 +66,16 @@ class buyAd_controller extends Controller
     ];
     
     protected $related_buyAd_list_required_fields = [
-        'id',
-        'name',
-        'created_at',
-        'category_id',
-        'requirement_amount',
-        'confirmed',
-        'myuser_id',
+        'buy_ads.id',
+        'buy_ads.name',
+        'buy_ads.created_at',
+        'buy_ads.category_id',
+        'buy_ads.requirement_amount',
+        'buy_ads.confirmed',
+        'buy_ads.myuser_id',
+        'myusers.user_name',
+        'myusers.first_name',
+        'myusers.last_name',
     ];
     
     protected $my_sell_offer_required_fields = [
@@ -666,9 +669,9 @@ class buyAd_controller extends Controller
             
             foreach($related_buyAds as $buyAd){
                    $category_array = $this->get_category_and_subcategory_name($buyAd->category_id);
-                   $buyAd['category_name'] = $category_array['category_name'];
-                   $buyAd['subcategory_name'] = $category_array['subcategory_name'];
-                   $buyAd['register_date'] = $date_convertor_object->get_persian_date_with_month_name($buyAd->created_at);
+                   $buyAd->category_name = $category_array['category_name'];
+                   $buyAd->subcategory_name = $category_array['subcategory_name'];
+                   $buyAd->register_date = $date_convertor_object->get_persian_date_with_month_name($buyAd->created_at);
 
                    $result_buyAds[] = $buyAd;
             }
@@ -689,9 +692,11 @@ class buyAd_controller extends Controller
     
     protected function get_related_buyAds_list_to_the_user(&$user)
     {
-        $buyAds = buyAd::where('confirmed',true)
+        $buyAds = DB::table('buy_ads')
+                    ->join('myusers','buy_ads.myuser_id','=','myusers.id')
+                    ->where('buy_ads.confirmed', true)
                     ->select($this->related_buyAd_list_required_fields)
-                    ->orderBy('created_at','desc')
+                    ->orderBy('buy_ads.created_at','desc')
                     ->get();
         
         //relevance
@@ -700,6 +705,13 @@ class buyAd_controller extends Controller
             
             $category_record = category::find($buyAd->category_id);
             $user_record = myuser::find($user_id);
+            
+//            $buyAd->profile_photo = profile::where('myuser_id',$buyAd->myuser_id)
+//                ->where('confirmed',true)
+//                ->select('profile_photo')
+//                ->get()
+//                ->last()
+//                ->profile_photo;
             
             $relevence = ($user_record->category_id == $category_record->parent_id) ? true : false;
             $user_already_offered_for_buyAd = false;
