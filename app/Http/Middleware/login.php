@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use App\profile;
 use App\myuser;
+//use JWTAuth;
 
 class login
 {
@@ -16,27 +17,24 @@ class login
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
-		if(!$request->session()->has('user_id'))
-        {
-            $user_phone = $request->cookie('user_phone');
-            $user_hashed_password = $request->cookie('user_password');
-            
-            
-            
-            if($user_phone && $user_hashed_password){
-                $status = $this->set_user_session($user_phone,$user_hashed_password);
+    {   
+            if(! $request->session()->has('user_id'))
+            {
+                $user_phone = $request->cookie('user_phone');
+                $user_hashed_password = $request->cookie('user_password');
                 
-                if($status){
-                    return $next($request);
+                
+                if($user_phone && $user_hashed_password){
+                    $status = $this->set_user_session($user_phone,$user_hashed_password);
+
+                    if($status){
+                        return $next($request);
+                    }
+                    else  return redirect()->route('login_page');                
                 }
-                else  return redirect()->route('login_page');                
+                               
             }
-            else{
-                return redirect()->route('login_page');
-            }
-        }
-        return $next($request);
+            return $next($request);
     }
     
     protected function  set_user_session($user_phone,$user_hashed_password)

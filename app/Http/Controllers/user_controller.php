@@ -7,6 +7,7 @@ use App\services\v1\userService;
 use App\profile;
 use App\myuser;
 use App\Http\Controllers\sms_controller;
+//use JWTAuth;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -35,13 +36,14 @@ class user_controller extends Controller
             $user_confirmed_profile_record_status = $this->does_user_have_confirmed_profile_record($user->id);
 
 			$this->set_user_session($user);
-
+            //$jwt_token = JWTAuth::fromUser($user);
 			 return response()->json([
 			 	'status' => TRUE,
                  'is_buyer' => $user->is_buyer,
                  'is_seller' => $user->is_seller,
                  'confirmed_profile_record' => $user_confirmed_profile_record_status,
-			 	'msg' => 'Login successfull',
+			 	 'msg' => 'Login successfull',
+                 //'token' => $jwt_token
 			 ],200)
                  ->withCookie(cookie(
                         'user_phone', $user->phone, 43200 // 30 days in minutes
@@ -310,5 +312,17 @@ class user_controller extends Controller
         ])->header('Content-Type','text/xml');
     }
 
+    protected function generate_jwt_token($request)
+    {
+        $credentials = $request->only('phone', 'password');
+        try {
+            if (! $token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'invalid_credentials'], 401);
+            }
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'could_not_create_token'], 500);
+        }
+        return $token;
+    }
 
 }
