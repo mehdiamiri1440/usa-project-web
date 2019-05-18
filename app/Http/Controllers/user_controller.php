@@ -7,7 +7,7 @@ use App\services\v1\userService;
 use App\profile;
 use App\myuser;
 use App\Http\Controllers\sms_controller;
-//use JWTAuth;
+use JWTAuth;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -36,14 +36,14 @@ class user_controller extends Controller
             $user_confirmed_profile_record_status = $this->does_user_have_confirmed_profile_record($user->id);
 
 			$this->set_user_session($user);
-            //$jwt_token = JWTAuth::fromUser($user);
+            $jwt_token = JWTAuth::fromUser($user);
 			 return response()->json([
 			 	'status' => TRUE,
                  'is_buyer' => $user->is_buyer,
                  'is_seller' => $user->is_seller,
                  'confirmed_profile_record' => $user_confirmed_profile_record_status,
 			 	 'msg' => 'Login successfull',
-                 //'token' => $jwt_token
+                 'token' => $jwt_token
 			 ],200)
                  ->withCookie(cookie(
                         'user_phone', $user->phone, 43200 // 30 days in minutes

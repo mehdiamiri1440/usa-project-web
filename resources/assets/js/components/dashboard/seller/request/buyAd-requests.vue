@@ -134,11 +134,12 @@
                 axios.post('/get_related_buyAds_list_to_the_seller')
                     .then(function (response) {
                         self.buyAds = response.data.buyAds;
-                        console.log(response.data);
                         self.load = false;
                     });
             },
             openChat:function(buyAd){
+                
+                this.registerComponentStatistics('buyAdReply','openChat','click on open chatBox');
                 
                 axios.post('/get_user_last_confirmed_profile_photo',{
                     'user_id' : buyAd.myuser_id
@@ -165,7 +166,12 @@
                     //
                 });
             },
-
+            registerComponentStatistics:function(categoryName,actionName,labelName){
+                gtag('event',actionName,{
+                    'event_category' : categoryName,
+                    'event_label'    : labelName
+                });
+            },
         },
         mounted() {
             this.init();
