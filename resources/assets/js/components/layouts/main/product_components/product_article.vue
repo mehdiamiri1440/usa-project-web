@@ -255,7 +255,7 @@
             '</div>',
         mounted: function(){
             var self = this;
-            
+
             $(".owl-carousel").owlCarousel({
                 loop:false,
                 items:1,
@@ -276,7 +276,7 @@
                           if(!window.history.state){
                               window.history.pushState({pushed:true},'','/master/product-list');
                           }
-                          
+
                           $(window).on('popstate', function(e){
                                 $.magnificPopup.close();
                            });

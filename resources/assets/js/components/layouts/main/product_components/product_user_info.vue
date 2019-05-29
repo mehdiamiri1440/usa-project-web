@@ -35,7 +35,7 @@
     .user-contents {
         border-right: 2px solid #f0f3f6;
         text-align: center;
-        padding: 0 20px;
+        padding: 0 20px 20px;
     }
 
     .user-contents h1 {

@@ -555,14 +555,11 @@
     import productArticle from './product_components/product_article'
     import productAsideCategories from './product_components/product_aside_categories'
     import {eventBus} from "../../../../js/router/dashboard_router";
-
     var viz = false;
-
     export default {
         components: {
             "product-article": productArticle,
             "product-aside-categories": productAsideCategories,
-
         },
         props: [
             'str',
@@ -768,7 +765,6 @@
 //          this.bottom = this.bottomVisible();
 //            this.feed();
 //        });
-
         },
         destroyed() {
             //window.removeEventListener('scroll', this.handleScroll);

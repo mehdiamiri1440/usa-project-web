@@ -109,6 +109,13 @@ Route::get('/register',function(){
     return view('register');
 })->name('register_page');
 
+Route::get('/register-from-blog',function(){
+    session(['is_from_QA_blog' => true]);
+//    return view('register');
+    return redirect()->route('register_page');
+});
+
+
 Route::post('/user/is_user_name_unique',[
     'uses' => 'user_controller@does_user_name_already_exists',
     'as' => 'does_user_name_already_exists'
