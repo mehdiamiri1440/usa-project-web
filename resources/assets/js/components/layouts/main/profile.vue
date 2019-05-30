@@ -312,6 +312,8 @@
                                     :defultimg="defultimg"
                                     :str="str"
                                     :loading="loading"
+                                    :is_my_profile="isMyProfile"
+
                             >
 
                             </product-article>
@@ -392,6 +394,7 @@
         data: function () {
             return {
                 imgSrcs: '',
+
             };
         },
         props: ['img', 'base'],
@@ -483,6 +486,7 @@
                 profileDescription: true,
                 noProductMsgSignal: false,
                 loading: false,
+                isMyProfile:true,
                 popUpMsg: '',
                 submiting: '',
                 copyLinkText: '',

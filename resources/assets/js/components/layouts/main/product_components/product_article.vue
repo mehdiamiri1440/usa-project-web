@@ -1,4 +1,11 @@
 <style scoped>
+    .green_bot.edit-product {
+        background: #000546;
+    }
+
+    .green_bot.edit-product:hover {
+        background: #000430;
+    }
 
     .main-content-item {
         direction: rtl;
@@ -48,6 +55,7 @@
     .image-article-content img {
         height: 100%;
     }
+
     .buy_details {
         border-top: 2px solid #f0f3f6;
         padding: 15px;
@@ -121,54 +129,57 @@
 
 <template>
     <div>
-
         <article class="main-content-item" v-for="(product,productIndex) in products"
                  :key="product.main.id">
-
-         <product-user-info
-                 :profile_photo="product.profile_info.profile_photo"
-                 :user_info="product.user_info"
-                 :user_full_name="product.user_info.first_name + ' ' +
+            <product-user-info
+                    :profile_photo="product.profile_info.profile_photo"
+                    :user_info="product.user_info"
+                    :user_full_name="product.user_info.first_name + ' ' +
             product.user_info.last_name"
-                 :user_name="product.user_info.user_name"
-                 :defultimg="defultimg"
-                 :current_user="currentUser"
-         ></product-user-info>
+                    :product_owner_id="product.main.myuser_id"
+                    :user_name="product.user_info.user_name"
+                    :defultimg="defultimg"
+                    :current_user="currentUser"
+                    v-on:isMyProfile="isMyProfileFunction($event)"
+            ></product-user-info>
             <div class="article-contents col-xs-12  col-sm-9 ">
-                    <div class="main-image col-xs-12 col-sm-5">
-                        <div class="owl-carousel" v-if="product.photos.length > 0">
+                <div class="main-image col-xs-12 col-sm-5">
+                    <div class="owl-carousel" v-if="product.photos.length > 0">
 
-                            <image-viewer-list @click="registerComponentStatistics('productImageViewer','click','popUp')"
-                                    v-for="photo in product.photos"
-                                    :key="photo.id"
-                                    :base="str + '/'"
-                                    :img="photo.file_path"
-                                    :alt="'فروش عمده ی ' + product.main.sub_category_name + ' '  +product.main.product_name + ' ' + product.main.city_name + ' - ' + product.main.province_name"
-                                    v-on:popUpLoaded=updatePopUpStatus($event)>
-                            </image-viewer-list>
-                        </div>
+                        <image-viewer-list @click="registerComponentStatistics('productImageViewer','click','popUp')"
+                                           v-for="photo in product.photos"
+                                           :key="photo.id"
+                                           :base="str + '/'"
+                                           :img="photo.file_path"
+                                           :alt="'فروش عمده ی ' + product.main.sub_category_name + ' '  +product.main.product_name + ' ' + product.main.city_name + ' - ' + product.main.province_name"
+                                           v-on:popUpLoaded=updatePopUpStatus($event)>
+                        </image-viewer-list>
                     </div>
-                    <div class="main-article-content col-xs-12 col-sm-7">
-                        <h2 class="main-article-title">
-                            <a href="#">{{product.main.category_name + ' | ' +
-                                product.main.sub_category_name}}</a>
-                        </h2>
+                </div>
+                <div class="main-article-content col-xs-12 col-sm-7">
+                    <h2 class="main-article-title">
+                        <a href="#">{{product.main.category_name + ' | ' +
+                            product.main.sub_category_name}}</a>
+                    </h2>
 
-                        <p>نوع محصول: <span>{{product.main.product_name}}</span></p>
-                        <p>استان / شهر:
-                            <span>{{product.main.province_name + ' - ' + product.main.city_name}}</span>
-                        </p>
-                        <p>مقدار موجودی: <span>{{product.main.stock}} کیلوگرم</span></p>
-                        <p>قیمت: <span>{{product.main.min_sale_price + ' - ' + product.main.max_sale_price}}
+                    <p>نوع محصول: <span>{{product.main.product_name}}</span></p>
+                    <p>استان / شهر:
+                        <span>{{product.main.province_name + ' - ' + product.main.city_name}}</span>
+                    </p>
+                    <p>مقدار موجودی: <span>{{product.main.stock}} کیلوگرم</span></p>
+                    <p>قیمت: <span>{{product.main.min_sale_price + ' - ' + product.main.max_sale_price}}
                                     تومان</span></p>
-                        <p>توضیحات: <span>{{product.main.description}}</span></p>
-                    </div>
-                    <div class="create_buy_mobile hidden-sm hidden-md hidden-lg" >
-                        <a class="green_bot" href="#" @click.prevent="openChat(product)">
-                            <span class="fa fa-comment"></span> ارسال پیام
-                        </a>
+                    <p>توضیحات: <span>{{product.main.description}}</span></p>
+                </div>
+                <div class="create_buy_mobile hidden-sm hidden-md hidden-lg">
+                    <a v-if="!isMyProfile" class="green_bot" href="#" @click.prevent="openChat(product)">
+                        <span class="fa fa-comment"></span> ارسال پیام
+                    </a>
+                    <a v-if="isMyProfile" class="green_bot edit-product" href="#" @click.prevent="openChat(product)">
+                        <span class="fa fa-pencil"></span> ویرایش
+                    </a>
 
-                    </div>
+                </div>
 
             </div>
             <div class="buy_details form-group  col-xs-12">
@@ -207,7 +218,7 @@
             </div>
             <div class="loading_images  col-xs-12"
                  v-if="loading">
-                <img  :src="loading_img" style="width:200px;height:200px">
+                <img :src="loading_img" style="width:200px;height:200px">
             </div>
         </article>
 
@@ -216,19 +227,19 @@
 <script>
     import {eventBus} from "../../../../../js/router/dashboard_router";
 
-    var PopupImage =  {
-        data:function(){
+    var PopupImage = {
+        data: function () {
             return {
-                imgSrcs:'',
+                imgSrcs: '',
             };
         },
-        props:['img','base'],
+        props: ['img', 'base'],
         template: '<div>' +
-            '<a   :href="base + img">'+
-            '<img :src="base + img">'+
-            '</a>'+
+            '<a   :href="base + img">' +
+            '<img :src="base + img">' +
+            '</a>' +
             '</div>',
-        mounted: function(){
+        mounted: function () {
             $(this.$el).parent().magnificPopup({
                 delegate: 'a',
                 type: 'image',
@@ -236,33 +247,33 @@
                 gallery: {
                     enabled: true,
                     navigateByImgClick: true,
-                    preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+                    preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
                 },
             });
 
         }
     };
-    var OwlCarouselLists =  {
-        data:function(){
+    var OwlCarouselLists = {
+        data: function () {
             return {
-                imgSrcs:'',
+                imgSrcs: '',
             };
         },
-        props:['img','base','popUpLoaded','alt'],
+        props: ['img', 'base', 'popUpLoaded', 'alt'],
         template: '<div class="image-wrapper">' +
-            '<a  :href="base + img">'+
-            '<img :src="base + img" :alt="alt">'+
-            '</a>'+
+            '<a  :href="base + img">' +
+            '<img :src="base + img" :alt="alt">' +
+            '</a>' +
             '</div>',
-        mounted: function(){
+        mounted: function () {
             var self = this;
 
             $(".owl-carousel").owlCarousel({
-                loop:false,
-                items:1,
-                margin:10,
-                nav:false,
-                dots:true
+                loop: false,
+                items: 1,
+                margin: 10,
+                nav: false,
+                dots: true
             });
             $(this.$el).parent().parent().parent().magnificPopup({
                 delegate: 'a',
@@ -270,25 +281,26 @@
                 gallery: {
                     enabled: true,
                     navigateByImgClick: true,
-                    preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+                    preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
                 },
                 callbacks: {
-                      open:function(){
-                          if(!window.history.state){
-                              window.history.pushState({pushed:true},'','/master/product-list');
-                          }
+                    open: function () {
+                        if (!window.history.state) {
+                            window.history.pushState({pushed: true}, '', '/master/product-list');
+                        }
 
-                          $(window).on('popstate', function(e){
-                                $.magnificPopup.close();
-                           });
-                      },
+                        $(window).on('popstate', function (e) {
+                            $.magnificPopup.close();
+                        });
+                    },
                 }
             });
         },
     };
     import productUserInfo from './product_user_info'
+
     export default {
-        props:[
+        props: [
             'products',
             'defultimg',
             'str',
@@ -296,28 +308,33 @@
             'loading_img',
         ],
 
-        data:function(){
-            return{
-                submiting:false,
+        data: function () {
+            return {
+                submiting: false,
                 errors: '',
                 currentUser: {
                     profile: '',
                     user_info: ''
                 },
-                popUpMsg:'',
-                popUpLoaded:false,
+                popUpMsg: '',
+                popUpLoaded: false,
+                product:this.products,
+                isMyProfile:false
             }
         },
-        components:{
-            "popup":PopupImage,
-            'image-viewer-list' : OwlCarouselLists,
+        components: {
+            "popup": PopupImage,
+            'image-viewer-list': OwlCarouselLists,
             "product-user-info": productUserInfo,
         },
-        methods:{
+        methods: {
             init: function () {
                 axios.post('/user/profile_info')
                     .then(response => (this.currentUser = response.data));
 
+            },
+            isMyProfileFunction:function(event){
+                this.isMyProfile = event;
             },
             toLatinNumbers: function (num) {
                 if (num == null) {
@@ -368,7 +385,7 @@
                 }
                 else {
                     this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
-                    eventBus.$emit('submitSuccess',this.popUpMsg);
+                    eventBus.$emit('submitSuccess', this.popUpMsg);
                     $('#myModal2').modal('show');
                 }
 
@@ -380,7 +397,6 @@
             registerRequest: function (e) {
                 e.preventDefault;
                 var event = $(e.target);
-
 
 
                 this.submiting = true;
@@ -424,7 +440,7 @@
                         }
                         else {
                             self.popUpMsg = 'شما قبلا درخواست خرید این محصول را ثبت کرده اید!';
-                            eventBus.$emit('submitSuccess',self.popUpMsg);
+                            eventBus.$emit('submitSuccess', self.popUpMsg);
                             $('#myModal').modal('show');
                             self.submiting = false;
 
@@ -433,7 +449,7 @@
                     })
                     .catch(function (e) {
                         self.popUpMsg = 'حساب کاربری شما از نوع خریداران نیست!';
-                        eventBus.$emit('submitSuccess',self.popUpMsg);
+                        eventBus.$emit('submitSuccess', self.popUpMsg);
                         $('#myModal').modal('show');
 
                         self.submiting = false;
@@ -449,7 +465,7 @@
                 axios.post('/user/add_buyAd', request)
                     .then(function (response) {
                         self.popUpMsg = 'درخواست خرید شما ثبت شد!';
-                        eventBus.$emit('submitSuccess',self.popUpMsg);
+                        eventBus.$emit('submitSuccess', self.popUpMsg);
                         $('#myModal').modal('show');
 
                         axios.post('/register_buyer_request_for_the_product', {
@@ -468,53 +484,54 @@
                 $element.slideToggle("125", "swing");
                 $('.buy_details').not($element).slideUp();
             },
-            openChat:function(product){
+            openChat: function (product) {
 
-                this.registerComponentStatistics('product','openChat','click on open chatBox');
+                this.registerComponentStatistics('product', 'openChat', 'click on open chatBox');
 
                 var contact = {
-                    contact_id:product.user_info.id,
-                    first_name:product.user_info.first_name,
-                    last_name:product.user_info.last_name,
-                    profile_photo:product.profile_info.profile_photo,
-                    user_name:product.user_info.user_name,
+                    contact_id: product.user_info.id,
+                    first_name: product.user_info.first_name,
+                    last_name: product.user_info.last_name,
+                    profile_photo: product.profile_info.profile_photo,
+                    user_name: product.user_info.user_name,
                 }
 
-                if(this.currentUser.user_info){
-                    if(this.currentUser.user_info.id != product.user_info.id){
-                        axios.post('/set_last_chat_contact',contact)
-                            .then(function(response){
+                if (this.currentUser.user_info) {
+                    if (this.currentUser.user_info.id != product.user_info.id) {
+                        axios.post('/set_last_chat_contact', contact)
+                            .then(function (response) {
                                 window.location.href = '/dashboard/messages';
                             })
-                            .catch(function(e){
+                            .catch(function (e) {
                                 alert('Error');
-                        });
+                            });
                     }
-                    else{
+                    else {
                         this.popUpMsg = 'شما نمیتوانید به خودتان پیام دهید.';
-                        eventBus.$emit('submitSuccess',this.popUpMsg);
+                        eventBus.$emit('submitSuccess', this.popUpMsg);
                         $('#myModal').modal('show');
                     }
 
                 }
-                else{
+                else {
                     this.popUpMsg = 'اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
-                    eventBus.$emit('submitSuccess',this.popUpMsg);
+                    eventBus.$emit('submitSuccess', this.popUpMsg);
                     $('#myModal2').modal('show');
                 }
             },
-            registerComponentStatistics:function(categoryName,actionName,labelName){
-                gtag('event',actionName,{
-                    'event_category' : categoryName,
-                    'event_label'    : labelName
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName, {
+                    'event_category': categoryName,
+                    'event_label': labelName
                 });
             },
-            updatePopUpStatus:function(popUpOpenStatus){
+            updatePopUpStatus: function (popUpOpenStatus) {
                 this.popUpLoaded = popUpOpenStatus;
             },
         },
         mounted() {
             this.init();
+
         }
     }
 </script>

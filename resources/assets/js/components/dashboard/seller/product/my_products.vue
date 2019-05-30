@@ -115,8 +115,12 @@
                     },
                     user_info: '',
                 },
-                // getUserName: this.$route.params.user_name
-
+                items: [
+                   {
+                       message: 'محصولات من',
+                       url: 'myProducts',
+                   },
+                ],
             }
         },
 
@@ -140,6 +144,8 @@
         },
         mounted() {
             this.init();
+            eventBus.$emit('subHeader', this.items);
+
         }
         ,
         components: {
