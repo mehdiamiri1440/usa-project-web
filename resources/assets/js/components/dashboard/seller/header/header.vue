@@ -907,8 +907,12 @@
             eventBus.$on('submitSuccess', (event) => {
                 this.popUpMsg = event;
             });
-
-
+        },
+        metaInfo(){
+            return {
+                title: 'بازارگاه کشاورزی',
+                titleTemplate:'اینکوباک | %s',
+            }
         }
     }
 </script>

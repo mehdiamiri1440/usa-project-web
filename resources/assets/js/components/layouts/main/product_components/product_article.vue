@@ -143,6 +143,7 @@
                                     :key="photo.id"
                                     :base="str + '/'"
                                     :img="photo.file_path"
+                                    :alt="'فروش عمده ی ' + product.main.sub_category_name + ' '  +product.main.product_name + ' ' + product.main.city_name + ' - ' + product.main.province_name"
                                     v-on:popUpLoaded=updatePopUpStatus($event)>
                             </image-viewer-list>
                         </div>
@@ -247,10 +248,10 @@
                 imgSrcs:'',
             };
         },
-        props:['img','base','popUpLoaded'],
+        props:['img','base','popUpLoaded','alt'],
         template: '<div class="image-wrapper">' +
             '<a  :href="base + img">'+
-            '<img :src="base + img">'+
+            '<img :src="base + img" :alt="alt">'+
             '</a>'+
             '</div>',
         mounted: function(){

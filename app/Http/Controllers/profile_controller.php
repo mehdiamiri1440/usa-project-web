@@ -639,5 +639,23 @@ class profile_controller extends Controller
                         ->delete();
     }
     
-    
+    public function get_user_last_confirmed_profile_photo(Request $request)
+    {
+        $this->validate($request,[
+            'user_id' => 'required|integer'
+        ]);
+        
+        $profile_photo = profile::where('myuser_id',$request->user_id)
+                            ->where('confirmed',true)
+                            ->select('profile_photo')
+                            ->get()
+                            ->last()
+                            ->profile_photo;
+        
+        return response()->json([
+            'status' => true,
+            'profile_photo' => $profile_photo
+        ],200);
+    }
+        
 }

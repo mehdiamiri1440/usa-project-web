@@ -60,7 +60,7 @@
                         {{buyAd.category_name}}
                         <span> | </span>
                         {{buyAd.subcategory_name}}
-                        <span> | </span>
+                        <span v-if="buyAd.name"> | </span>
                         {{buyAd.name}}
                     </p>
                     <p class="needs col-sm-4 col-xs-12">
@@ -77,11 +77,11 @@
                     <p class="list-time col-sm-2 col-xs-12">
                         {{buyAd.register_date}}
                     </p>
-                    <router-link class="col-sm-3 col-xs-12" :to="'/dashboard/buyAd-request-detail/' +  buyAd.id">
+                    <a class="col-sm-3 col-xs-12" href="" @click.prevent=openChat(buyAd)>
                             <p class="detail-success">
-                                مشاهده ی جزییات
+                                <span class="fa fa-comment"></span> پیام به خریدار
                             </p>
-                    </router-link>
+                    </a>
                 </li>
             </ul>
         </section>
@@ -113,10 +113,10 @@
                 popUpMsg: '',
                 load: false,
                 items: [
-                {
-                    message: 'پیشنهادات من',
-                    url: 'mySellOffers'
-                },
+//                {
+//                    message: 'پیشنهادات من',
+//                    url: 'mySellOffers'
+//                },
                 {
                     message: 'درخواست های جدید',
                     url: 'buyAdRequests'
@@ -136,11 +136,43 @@
                         self.buyAds = response.data.buyAds;
                         self.load = false;
                     });
-            }
-            ,
+            },
+            openChat:function(buyAd){
+                
+                this.registerComponentStatistics('buyAdReply','openChat','click on open chatBox');
+                
+                axios.post('/get_user_last_confirmed_profile_photo',{
+                    'user_id' : buyAd.myuser_id
+                }).then(function(response){
+                    var profile_photo = response.data.profile_photo;
+                    
+                    var contact = {
+                        contact_id:buyAd.myuser_id,
+                        first_name:buyAd.first_name,
+                        last_name:buyAd.last_name,
+                        profile_photo:profile_photo,
+                        user_name:buyAd.user_name,
+                    }
 
-        }
-        ,
+                    axios.post('/set_last_chat_contact',contact)
+                        .then(function(response){
+                            window.location.href = '/dashboard/messages';
+                        })
+                        .catch(function(e){
+                            alert('Error');
+                        });
+                    })
+                .catch(function(err){
+                    //
+                });
+            },
+            registerComponentStatistics:function(categoryName,actionName,labelName){
+                gtag('event',actionName,{
+                    'event_category' : categoryName,
+                    'event_label'    : labelName
+                });
+            },
+        },
         mounted() {
             this.init();
             eventBus.$emit('subHeader', this.items);

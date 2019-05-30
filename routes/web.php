@@ -64,22 +64,8 @@ Route::get('/', function(){
 Route::get('download/app', function()
 {
     // Check if file exists in app/storage/file folder
-    $file_path = storage_path() .'/app/public/download/incobac.apk' ;
-    echo $file_path;
-    if (file_exists($file_path))
-    {
-        // Send Download
-        return Response::download($file_path,'incobac.apk', [
-            'Content-Length'=> filesize($file_path),
-            'Content-Type'=>'application/vnd.android.package-archive',
-            'Content-Disposition'=> 'attachment; filename="incobac.apk"'
-        ]);
-    }
-    else
-    {
-        // Error
-        exit('خطایی رخ داده است.د.باره تلاش کنید...');
-    }
+    return redirect(asset('storage/download/incobac.apk'));
+    
 })->name('download-app');
 
 
@@ -167,36 +153,36 @@ Route::post('/get_buy_ad_by_id',[
 ]);
 
 
-Route::get('/product/{id?}',function(){
+//Route::get('/product/{id?}',function(){
+//
+//    if(session()->has('user_id'))
+//    {
+//        $user = myuser::findOrFail(session('user_id'));
+//    }
+//    else{
+//        $user = " ";
+//    }
+//
+//    return view('product',[
+//        'user_info' => is_string($user) ? $user : $user->toArray(),
+//    ]);
+//})->where('id', '[0-9]+');
 
-    if(session()->has('user_id'))
-    {
-        $user = myuser::findOrFail(session('user_id'));
-    }
-    else{
-        $user = " ";
-    }
 
-    return view('product',[
-        'user_info' => is_string($user) ? $user : $user->toArray(),
-    ]);
-})->where('id', '[0-9]+');
-
-
-Route::get('/buyAd/{id?}',function(){
-
-    if(session()->has('user_id'))
-    {
-        $user = myuser::findOrFail(session('user_id'));
-    }
-    else{
-        $user = " ";
-    }
-
-    return view('buyad',[
-        'user_info' => is_string($user) ? $user : $user->toArray(),
-    ]);
-})->where('id', '[0-9]+');
+//Route::get('/buyAd/{id?}',function(){
+//
+//    if(session()->has('user_id'))
+//    {
+//        $user = myuser::findOrFail(session('user_id'));
+//    }
+//    else{
+//        $user = " ";
+//    }
+//
+//    return view('buyad',[
+//        'user_info' => is_string($user) ? $user : $user->toArray(),
+//    ]);
+//})->where('id', '[0-9]+');
 
 Route::post('/application_trace/increment_product_phone_view_count',[
     'uses' => 'product_controller@increment_product_phone_view_count',
@@ -597,6 +583,11 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'message_controller@get_last_chat_contact_info_from_session',
         'as' => 'get_last_chat_contact_info_from_session'
     ]);
+    
+    Route::post('/get_user_last_confirmed_profile_photo',[
+        'uses' => 'profile_controller@get_user_last_confirmed_profile_photo',
+        'as' => 'get_user_last_confirmed_profile_photo'
+    ]);
 
 });
 
@@ -962,6 +953,14 @@ Route::group(['middleware' => [cors::class]],function(){
     });
 });
 
+Route::post('/is_user_from_webview',[
+    'uses' => 'user_controller@is_user_from_webview'
+]);
+
+Route::get('/sitemap.xml',[
+    'uses' => 'user_controller@get_all_user_names_for_sitemap',
+    'as' => 'get_sitemap'
+]);
 //Route::get('/migrate_users',[
 //   'uses' => 'profile_controller@migrate_users'
 //]);

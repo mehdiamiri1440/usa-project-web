@@ -7,6 +7,7 @@ use App\services\v1\userService;
 use App\profile;
 use App\myuser;
 use App\Http\Controllers\sms_controller;
+use JWTAuth;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -33,15 +34,16 @@ class user_controller extends Controller
 		if($user)
 		{
             $user_confirmed_profile_record_status = $this->does_user_have_confirmed_profile_record($user->id);
-            
+
 			$this->set_user_session($user);
-            
+            $jwt_token = JWTAuth::fromUser($user);
 			 return response()->json([
 			 	'status' => TRUE,
                  'is_buyer' => $user->is_buyer,
                  'is_seller' => $user->is_seller,
-                 'confirmed_profile_record' => $user_confirmed_profile_record_status, 
-			 	'msg' => 'Login successfull',
+                 'confirmed_profile_record' => $user_confirmed_profile_record_status,
+			 	 'msg' => 'Login successfull',
+                 'token' => $jwt_token
 			 ],200)
                  ->withCookie(cookie(
                         'user_phone', $user->phone, 43200 // 30 days in minutes
@@ -56,7 +58,7 @@ class user_controller extends Controller
 		 ],200);
 	}
 
-	protected function  set_user_session($user_info)
+	protected function set_user_session($user_info)
 	{
         $user_profile_record = profile::where('myuser_id',$user_info->id)
                 ->select('profile_photo')
@@ -98,7 +100,7 @@ class user_controller extends Controller
             'status' => true,
         ],200);
     }
-    
+
     protected function does_user_have_confirmed_profile_record($user_id)
     {
         $profile_record = profile::where('myuser_id',$user_id)
@@ -106,10 +108,10 @@ class user_controller extends Controller
                                         ->select('id')
                                         ->get()
                                         ->last();
-        
-        if($profile_record) 
+
+        if($profile_record)
             return true;
-        else 
+        else
             return false;
     }
     public function initial_contract_confirmation_by_user()
@@ -249,7 +251,7 @@ class user_controller extends Controller
     protected function generate_plain_text_password($password_len)
     {
         $result = "";
-        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGH0123456789";
+        $chars = "abcdefghijkmnpqrstuvwxyz123456789";
         $charArray = str_split($chars);
         for($i = 0; $i < $password_len; $i++){
             $randItem = array_rand($charArray);
@@ -265,16 +267,16 @@ class user_controller extends Controller
            'seller_user_id' => 'required|integer|min:1',
            'buyer_user_id' => 'required|integer|min:1'
         ]);
-        
+
         $seller_user_id = $request->seller_user_id;
         $buyer_user_id = $request->buyer_user_id;
-        
+
         $seller_user_record = myuser::find($seller_user_id);
         $buyer_user_record = myuser::find($buyer_user_id);
-        
+
         if($seller_user_record && $buyer_user_record){
             $fields = ['first_name','last_name','national_code'];
-            
+
             return response()->json([
                 'status' => true,
                 'seller_user_info' => $seller_user_record->only($fields),
@@ -289,5 +291,38 @@ class user_controller extends Controller
         }
     }
 
+    //public method
+    public function is_user_from_webview(Request $request)
+    {
+        $is_webview =  $request->header('User-Agent') == 'webView';
+        return response()->json([
+            'status' => true,
+            'is_webview' => $is_webview
+        ],200);
+    }
+    
+    //public method
+    public function get_all_user_names_for_sitemap()
+    {
+        $user_names = myuser::select('user_name')
+                            ->get();
+        
+        return response()->view('other.sitemap',[
+            'user_names' => $user_names
+        ])->header('Content-Type','text/xml');
+    }
+
+    protected function generate_jwt_token($request)
+    {
+        $credentials = $request->only('phone', 'password');
+        try {
+            if (! $token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'invalid_credentials'], 401);
+            }
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'could_not_create_token'], 500);
+        }
+        return $token;
+    }
 
 }
