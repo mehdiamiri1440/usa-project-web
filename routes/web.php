@@ -23,6 +23,7 @@ use App\Events\newMessage;
 
 use App\Jobs\sendNewMessageSMSNotification;
 use App\Jobs\sendSMS;
+use App\Jobs\NotifyBuyersBySMS;
 
 
 /*Route::get('/pv', function(){
@@ -94,6 +95,11 @@ Route::get('/login',function(){
 Route::get('/register',function(){
     return view('register');
 })->name('register_page');
+
+Route::get('/register-from-blog',function(){
+    session(['is_from_QA_blog' => true]);
+    return redirect()->route('register_page');
+});
 
 Route::post('/user/is_user_name_unique',[
     'uses' => 'user_controller@does_user_name_already_exists',
@@ -226,6 +232,16 @@ Route::post('/get_user_statistics_by_user_name',[
 Route::get('/product-view/{product_id}/{city}-{province}-{product_name}-{sub_category_name}-{category_name}',function($product_id){
     return view('dashboard.buyer.product-list');
 });
+
+Route::post('/get_user_reputation_score',[
+    'uses' => 'reputation_controller@calculate_user_reputation_score',
+    'as' => 'get_user_reputation_score'
+]);
+
+Route::post('/increment_user_profile_visit_count',[
+    'uses' => 'profile_controller@increment_user_profile_visit_count',
+    'as' => 'increment_user_profile_visit_count'
+]);
 
 Route::get('master/{any}',function(){
         return view('layout.master');
@@ -580,6 +596,11 @@ Route::group(['middleware' => [login::class]],function(){
     Route::post('/get_user_last_confirmed_profile_photo',[
         'uses' => 'profile_controller@get_user_last_confirmed_profile_photo',
         'as' => 'get_user_last_confirmed_profile_photo'
+    ]);
+    
+    Route::post('/is_allowed_to_access_buyAd_requests',[
+        'uses' => 'buyAd_controller@is_user_allowed_to_access_buyAd_requests',
+        'as' => 'is_allowed_to_access_buyAd_requests'
     ]);
 
 });
@@ -958,9 +979,8 @@ Route::get('/sitemap.xml',[
 //   'uses' => 'profile_controller@migrate_users'
 //]);
 
-//Route::get('/testt',function(){
-//    echo phpinfo();
-//});
+
+
 
 
 

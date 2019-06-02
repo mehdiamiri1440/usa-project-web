@@ -14,6 +14,7 @@ use App\profile;
 use App\user_product;
 use DB;
 use App\Http\Controllers\sms_controller;
+use App\Jobs\NotifyBuyersBySMS;
 
 
 class product_controller extends Controller
@@ -23,7 +24,8 @@ class product_controller extends Controller
         'id',
         'user_name',
         'first_name',
-        'last_name'
+        'last_name',
+        'active_pakage_type'
     ];
     protected $profile_info_sent_by_product_array = [
         'profile_photo',
@@ -46,6 +48,12 @@ class product_controller extends Controller
 	// public method
 	public function add_product(Request $request)
 	{
+        if($this->is_user_allowed_to_register_another_product() == false){
+            return response()->json([
+                'status' => true,
+                'msg' => 'سقف تعداد محصولات ثبت شده ی شما پر شده است.'
+            ],200);
+        }
 		$rules = $this->set_product_validation_rules($request);		
 		
 		$this->validate($request,$rules);
@@ -80,11 +88,19 @@ class product_controller extends Controller
                     $product->$field_name = $request->$field_name ;    
                 }
             }
+            
+            if($this->is_immediate_product_confirm_active()){
+                $product->confirmed = true;
+            }
 			
 			$user->product()->save($product);			
 			
 			$files_path_array = $this->save_product_photos($request,$request->images_count);
 			$this->register_photos_path_in_DB($files_path_array,$product);
+            
+            if($this->is_send_sms_to_buyers_active()){
+                NotifyBuyersBySMS::dispatch($product->id)->onQueue('default');
+            }
 			
 			return $product;
 		}
@@ -227,7 +243,11 @@ class product_controller extends Controller
 			}
 			else $all_products = $this->get_all_products_with_related_media(FALSE);
 			
-			
+            //changing view priority according to owners pakage type
+			usort($all_products,function($item1, $item2){
+                return $item1['user_info']->active_pakage_type >  $item2['user_info']->active_pakage_type ;
+            });
+            
 			return response()->json([
 				'status' => TRUE,
 				'products' => $all_products
@@ -326,7 +346,6 @@ class product_controller extends Controller
 				->get();			
 			
 			$product_related_data['main'] = $this->get_product_related_data($product->id);			
-			
 			$product_related_user_info = myuser::where('id',$product->myuser_id)
                 ->get($this->user_info_sent_by_product_array)
                 ->first();
@@ -736,6 +755,43 @@ class product_controller extends Controller
                 'msg' => 'you are not authorized to refresh this product!'
             ],500);
         }
+    }
+    
+    protected function is_immediate_product_confirm_active()
+    {
+        $user_id = session('user_id');
+        
+        $user_active_pakage_type = myuser::find($user_id)->active_pakage_type;
+        
+        return config("subscriptionPakage.type-$user_active_pakage_type.immediate-confirm");
+    }
+    
+    protected function is_user_allowed_to_register_another_product()
+    {
+        $user_id = session('user_id');
+        
+        $user_active_pakage_type = myuser::find($user_id)->active_pakage_type;
+        
+        $max_allowed_prodcut_register = config("subscriptionPakage.type-$user_active_pakage_type.max-products");
+        
+        $user_confirmed_products_count = product::where('myuser_id',$user_id)
+                                            ->where('confirmed',true)
+                                            ->get()
+                                            ->count();
+        
+        if($max_allowed_prodcut_register > $user_confirmed_products_count){
+            return true;
+        }
+        else return false;
+    }
+    
+    protected function is_send_sms_to_buyers_active()
+    {
+        $user_id = session('user_id');
+        
+        $user_active_pakage_type = myuser::find($user_id)->active_pakage_type;
+        
+        return config("subscriptionPakage.type-$user_active_pakage_type.sms-to-buyers");
     }
 	
 }

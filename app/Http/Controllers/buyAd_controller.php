@@ -819,5 +819,18 @@ class buyAd_controller extends Controller
             ],404);
         }
     }
+    
+    //public method
+    public function is_user_allowed_to_access_buyAd_requests(Request $request)
+    {
+        $user_id = session('user_id');
+        
+        $user_active_pakage_type = myuser::find($user_id)->active_pakage_type;
+        
+        return response()->json([
+            'status' => true,
+            'access_to_buyAd_requests' => config("subscriptionPakage.type-$user_active_pakage_type.access-to-buy-requests")
+        ],200);
+    }
 	
 }

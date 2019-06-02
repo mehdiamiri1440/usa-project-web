@@ -6,6 +6,9 @@ use App\myuser;
 use phplusir\smsir\Smsir;
 use App\Http\Controllers\sms_controller;
 use App\Http\Controllers\profile_controller;
+use DB;
+use MikeMcLin\WpPassword\Facades\WpPassword;
+use Carbon\Carbon;
 
  class userService{
 	 
@@ -54,6 +57,8 @@ use App\Http\Controllers\profile_controller;
              
              $profile_controller_object ->add_a_confirmed_profile_record_for_user($user);
              
+             $this->register_user_in_wp_forum($request);
+             
 			 return response()->json([
                  'status' => true,
                  'msg' => 'کاربر ثبت شد.'
@@ -94,6 +99,35 @@ use App\Http\Controllers\profile_controller;
 		 
 		return $user;
  	}
+     
+     protected function register_user_in_wp_forum($request)
+     {
+         $user_full_name = $request->first_name.' '.$request->last_name;
+         $hashed_password = WpPassword::make($request->password);
+         
+         $user_record = [
+             'user_login' => strtolower($request->user_name),
+             'user_pass' => $hashed_password,
+             'user_email' => '',
+             'user_nicename' => $request->first_name,
+             'user_url' => '',
+             'user_activation_key' => '',
+             'user_status' => '',
+             'display_name' => $user_full_name,
+             'user_registered' => Carbon::now(),
+             'user_status' => 0,
+         ];
+         
+         $wp_user_id = DB::connection('forum')->table('wp_users')->insertGetId($user_record,'ID');
+         
+         $user_meta_record = [
+             'user_id' => $wp_user_id,
+             'meta_key' => 'wp_capabilities',
+             'meta_value' => 'a:1:{s:10:"subscriber";b:1;}',
+         ];
+         
+         DB::connection('forum')->table('wp_usermeta')->insert($user_meta_record);
+     }
 	 
 	
  }

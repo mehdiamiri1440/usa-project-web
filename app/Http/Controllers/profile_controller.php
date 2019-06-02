@@ -9,6 +9,8 @@ use App\category;
 use App\product;
 use App\buyAd;
 use App\sell_offer;
+use App\Http\Controllers\reputation_controller;
+use DB;
 
 class profile_controller extends Controller
 {
@@ -485,7 +487,7 @@ class profile_controller extends Controller
         $user_id = $user_record->id;
         
         if($user_record->is_seller){
-            $user_statistics = $this->get_seller_statistics($user_id);
+            $user_statistics = $this->get_seller_statistics($user_id,$user_record->active_pakage_type);
         }
         else if($user_record->is_buyer){
             $user_statistics = $this->get_buyer_statistics($user_id);
@@ -517,15 +519,20 @@ class profile_controller extends Controller
                                     ->get()
                                     ->count();
         
+        $reputation_controller_object = new reputation_controller();
+        
+        $reputation_score = $reputation_controller_object->calculate_user_reputation_score($user_id);
+        
         $result_array = [
             'buyAd_count' => $buyAd_count,
             'transaction_count' => $transaction_count,
+            'reputation_score' => $reputation_score
         ];
         
         return $result_array;
     }
     
-    protected function get_seller_statistics($user_id)
+    protected function get_seller_statistics($user_id,$user_active_pakage_type)
     {
         $product_count = product::where('myuser_id',$user_id)
                                     ->where('confirmed',true)
@@ -538,9 +545,15 @@ class profile_controller extends Controller
                                             ->get()
                                             ->count();
         
+        $reputation_controller_object = new reputation_controller();
+        
+        $reputation_score = $reputation_controller_object->calculate_user_reputation_score($user_id);
+        
         $result_array = [
             'product_count' => $product_count,
             'transaction_count' => $transaction_count,
+            'reputation_score' => $reputation_score,
+            'validated_seller' => config("type-$user_active_pakage_type.validated-seller"),
         ];
         
         return $result_array;
@@ -639,6 +652,7 @@ class profile_controller extends Controller
                         ->delete();
     }
     
+    //public method
     public function get_user_last_confirmed_profile_photo(Request $request)
     {
         $this->validate($request,[
@@ -656,6 +670,46 @@ class profile_controller extends Controller
             'status' => true,
             'profile_photo' => $profile_photo
         ],200);
+    }
+    
+    //public method
+    public function increment_user_profile_visit_count(Request $request)
+    {
+        $this->validate($request,[
+           'user_name' => 'required|string|exists:myusers,user_name' 
+        ]);
+        
+        
+        $user_name = $request->user_name;
+        
+        print_r(session()->all());
+        
+        if(session()->has('visited_profiles')){
+            $user_names = session('visited_profiles');
+            
+            var_dump($user_names);
+            
+            if( ! in_array($user_name,$user_names)){
+                DB::table('myusers')
+                    ->where('user_name',$user_name)
+                    ->increment('profile_visit');
+                
+                array_push($user_names,$user_name);
+                var_dump($user_names);
+//                \Session::forget('visited_profiles'); //can't be removed
+                session(['visited_profiles' => $user_names]);
+                var_dump(session('visited_profiles'));
+            }
+        }
+        else{
+            DB::table('myusers')
+                ->where('user_name',$user_name)
+                ->increment('profile_visit');
+//            session(['visited_profiles' => [$user_name]]);
+            session(['visited_profiles' => array($user_name)]);
+            print_r(session('visited_profiles'));
+        }
+        
     }
         
 }

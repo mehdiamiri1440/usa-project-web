@@ -203,7 +203,21 @@ const myRouter =  new Router({
             components: {
                 seller: sellerBuyAdRequests,
             },
-            props: true
+            props: true,
+            beforeEnter: async (to, from, next) => {
+                console.log('test');
+                axios.post('/is_allowed_to_access_buyAd_requests')
+                .then(function(response){
+                    if(response.data.access_to_buyAd_requests == false){
+                        next(false);
+                    $('#myModal-2').modal('show');
+                    }
+                    else{
+                        next();
+                    }
+
+                });
+            },
         }
         , {
             path: '/dashboard/register-request',
@@ -241,7 +255,7 @@ const myRouter =  new Router({
             },
             params: {
                 active: 3
-            }
+            },
         }
         , {
             path: '/dashboard/my-sell-offers',

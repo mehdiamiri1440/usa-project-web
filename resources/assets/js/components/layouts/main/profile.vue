@@ -65,9 +65,9 @@
                             <div class="row" v-if="profileOwnerStatistics">
                                 <div class="col-xs-6 text-center">
                                     <div class="info-num">
-                                        {{profileOwnerStatistics.transaction_count}}
+                                        {{profileOwnerStatistics.reputation_score}}
                                     </div>
-                                    معاملات
+                                    اعتبار
                                 </div>
                                 <div class="col-xs-6 text-center" v-if="profileOwner.user_info.is_seller">
                                     <div class="info-num">
@@ -516,32 +516,6 @@
 
                 }
             },
-            addMetaTag:function(){
-
-                var imgMeta;
-                if (this.profileOwner.profile.profile_photo){
-                    imgMeta = '<meta property="og:image" itemProp="image" content="' + this.str + '/' + this.profileOwner.profile.profile_photo + ' "/>';
-                }else {
-                    imgMeta = '<meta v-else  property="og:image" itemProp="image" content="' + this.defultimg + '"/>';
-                }
-
-                document.head.append('<meta property="og:type" content="website"/>' +
-                    '<meta property="og:image:height" content="256"/>' +
-                    '<meta property="og:image:width" content="256"/>' +
-                    '<meta property="og:image:type" content="image/jpeg"/>' +
-                    '<meta property="og:description" content="صفحه ی شخصی پروفایل کاربران اینکوباک"/>' +
-                    ' <meta property="og:site_name" content="اینکوباک">' +
-                    '<meta name="description" content="صفحه ی شخصی پروفایل کاربران اینکوباک. محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید">' +
-                    '<meta property="og:url" content="\'https://www.incobac.com/master/profile/' + this.getUserName  +'"/>' +
-                    '<meta property="og:title" content="' + this.profileOwner.user_info.first_name +
-                    ' '
-                    + this.profileOwner.user_info.last_name + '"/>'
-                    + imgMeta);
-                
-                    document.title = this.profileOwner.user_info.first_name + ' ' + this.profileOwner.user_info.last_name;  
-                    document.head.querySelector('meta[name=description]').content = this.profileOwner.profile.description;
-
-            },
             init: function () {
                 var self = this;
 
@@ -556,31 +530,32 @@
 
                 axios.post('/get_user_statistics_by_user_name', {
                     user_name: this.$route.params.user_name,
-
                 })
-                    .then(function (response) {
-                        self.profileOwnerStatistics = response.data.statistics;
-
-                    })
-                    .catch(function (err) {
-                        //
-                    });
+                .then(function (response) {
+                    self.profileOwnerStatistics = response.data.statistics;
+                })
+                .catch(function (err) {
+                    //
+                });
 
                 axios.post('/user/profile_info')
-                    .then(
-                        response => (this.currentUser = response.data));
+                .then(response => (this.currentUser = response.data));
+                
                 axios.post('/load_profile_by_user_name', {
                     user_name: this.$route.params.user_name
                 })
-                    .then(function (response) {
-                        self.profileOwner = response.data;
-                        //self.addMetaTag();
-                    })
-                    .catch(function (err) {
-                        if (err.response.status == 404) {
-                            window.location.href = '/404'
-                        }
-                    });
+                .then(function (response) {
+                    self.profileOwner = response.data;
+                })
+                .catch(function (err) {
+                    if (err.response.status == 404) {
+                        window.location.href = '/404'
+                    }
+                });
+                
+//                axios.post('/increment_user_profile_visit_count',{
+//                    user_name:this.$route.params.user_name
+//                });
             },
             showProfileOwnerProducts: function (e) {
 
@@ -720,7 +695,6 @@
                     alert('ابتدا لاگین کنید');
                 }
             },
-
             registerComponentStatistics:function(categoryName,actionName,labelName){
                 gtag('event',actionName,{
                     'event_category' : categoryName,
