@@ -6,6 +6,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 use App\Jobs\sendNewMessageSMSNotification;
+use App\Jobs\CheckPakageExpiry;
 use DB;
 
 class Kernel extends ConsoleKernel
@@ -37,6 +38,11 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             DB::table('daily_sms_blacklists')->delete();
         })->dailyAt('5:45');
+        
+        $check_pakage_expiry_time_job = new CheckPakageExpiry();
+        
+        $schedule->job($check_pakage_expiry_time_job)
+                ->dailyAt('3:00');
     }
 
     /**

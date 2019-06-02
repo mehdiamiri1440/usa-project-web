@@ -360,6 +360,12 @@
                                     eventBus.$emit('submitingEvent', false);
                                 }, 3000);
                             }
+                            else if(response.status == 200){
+                                self.popUpMsg = response.data.msg;
+                                eventBus.$emit('submitSuccess', self.popUpMsg);
+                                eventBus.$emit('submitingEvent', false);
+                                $('#myModal').modal('show');
+                            }
                         })
                         .catch(function (err) {
                             self.errors = [];

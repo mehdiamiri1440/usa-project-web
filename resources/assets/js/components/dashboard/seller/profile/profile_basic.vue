@@ -608,8 +608,7 @@
                 feild_co.prop('disabled', false);
             }
         },
-        mounted() {
-
+        mounted(){
             this.init();
             eventBus.$emit('subHeader', this.items);
 
