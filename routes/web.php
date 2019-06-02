@@ -65,7 +65,7 @@ Route::get('download/app', function()
 {
     // Check if file exists in app/storage/file folder
     return redirect(asset('storage/download/incobac.apk'));
-    
+
 })->name('download-app');
 
 
@@ -583,7 +583,7 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'message_controller@get_last_chat_contact_info_from_session',
         'as' => 'get_last_chat_contact_info_from_session'
     ]);
-    
+
     Route::post('/get_user_last_confirmed_profile_photo',[
         'uses' => 'profile_controller@get_user_last_confirmed_profile_photo',
         'as' => 'get_user_last_confirmed_profile_photo'
@@ -973,6 +973,10 @@ Route::get('/sitemap.xml',[
 
 
 
+
+Route::get('/pricing', function(){
+    return view('index_pages.pricing_page');
+});
 
 
 

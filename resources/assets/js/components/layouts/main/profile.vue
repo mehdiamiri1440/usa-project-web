@@ -1,8 +1,30 @@
 <style scoped>
+    .title_content .back_page.first-back {
+        margin-top: 9px;
+    }
     .main-content-item{
         box-shadow: none;
     }
+    .valid-seller{
+        font-size: 14px;
+
+        color: #28a745;
+
+        border: 2px solid;
+
+        border-radius: 3px;
+
+        padding: 4px 8px 3px;
+
+        position: relative;
+
+        top: -3px;
+    }
     @media screen and (max-width: 767px){
+        .valid-seller{
+            font-size: 12px;
+
+        }
         .main-content-item {
             padding: 0;
         }
@@ -110,14 +132,20 @@
                         <div class="content_user_wrapper hidden-xs col-xs-6 col-sm-8">
                             <div class="user-contents ">
                                 <div class="title_content col-xs-12">
-                                    <div class="back_page col-xs-12 col-sm-4">
+                                    <div class="back_page first-back col-xs-12 col-sm-4">
                                         <a href="javascript:history.back()" class="green_bot" @click="registerComponentStatistics('profileView','BackButton','click on back button');">بازگشت به صفحه قبل</a>
 
                                     </div>
 
                                     <h1 class="content_title col-xs-12 col-sm-8">{{profileOwner.user_info.first_name +
                                         ' '
-                                        + profileOwner.user_info.last_name}}</h1>
+                                        + profileOwner.user_info.last_name}}
+                                        <span class="valid-seller">
+                                            <i class="fa fa-check-circle"></i>
+                                            فروشنده معتبر
+                                        </span>
+                                    </h1>
+
 
                                 </div>
                                 <div class="title_content col-xs-12">
@@ -170,7 +198,12 @@
                                     </div>
                                     <h1 class="content_title col-xs-12 col-sm-8">{{profileOwner.user_info.first_name +
                                         ' '
-                                        + profileOwner.user_info.last_name}}</h1>
+                                        + profileOwner.user_info.last_name}}
+                                        <span class="valid-seller">
+                                            <i class="fa fa-check-circle"></i>
+                                            فروشنده معتبر
+                                        </span>
+                                    </h1>
 
                                     <div class="content_user_info col-xs-12 col-sm-8">
                                         <p>
