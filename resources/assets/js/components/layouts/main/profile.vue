@@ -312,6 +312,8 @@
                                     :defultimg="defultimg"
                                     :str="str"
                                     :loading="loading"
+                                    :is_my_profile="isMyProfile"
+
                             >
 
                             </product-article>
@@ -392,6 +394,7 @@
         data: function () {
             return {
                 imgSrcs: '',
+
             };
         },
         props: ['img', 'base'],
@@ -483,6 +486,7 @@
                 profileDescription: true,
                 noProductMsgSignal: false,
                 loading: false,
+                isMyProfile:true,
                 popUpMsg: '',
                 submiting: '',
                 copyLinkText: '',
@@ -716,14 +720,14 @@
         },
         created() {
             gtag('config','UA-129398000-1',{'page_path': '/profile'});
-            
+
             document.addEventListener('click', this.documentClick);
         },
         metaInfo(){
             let fullName = this.profileOwner.user_info.first_name + ' ' + this.profileOwner.user_info.last_name;
-            
+
             let url = 'https://incobac.com/master/profile/' + this.profileOwner.user_info.user_name;
-            
+
             let profilePhoto = '';
             if(this.profileOwner.profile.profile_photo){
                 profilePhoto = this.str + '/' + this.profileOwner.profile.profile_photo;
@@ -731,7 +735,7 @@
             else{
                 profilePhoto = this.defultimg;
             }
-            
+
             return {
                 title: fullName,
                 titleTemplate:'اینکوباک | %s',

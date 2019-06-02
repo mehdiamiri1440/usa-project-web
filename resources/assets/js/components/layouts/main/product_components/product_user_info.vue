@@ -7,11 +7,19 @@
             <img :src="defultimg" class="image_defult">
         </div>
         <p v-if="user_info">{{user_full_name}}</p>
-<!--        <a v-bind:href="'/master/profile/' + user_name" class="green_bot">
-            مشاهده پروفایل
-        </a>-->
-        <a :href=" '/master/profile/'+ user_name" class="green_bot" @click="registerComponentStatistics('product','showUserProfile','show profile')">مشاهده پروفایل</a>
-        <div class="create_buy  hidden-xs" >
+        <!--        <a v-bind:href="'/master/profile/' + user_name" class="green_bot">
+                    مشاهده پروفایل
+                </a>-->
+        <a v-if="isMyProfile" :href=" '/master/profile/'+ user_name" class="green_bot delete-product"
+           @click="registerComponentStatistics('product','showUserProfile','show profile')"> حذف</a>
+
+        <a v-if="isMyProfile" :href=" '/master/profile/'+ user_name" class="green_bot edit-product hidden-xs"
+           @click="registerComponentStatistics('product','showUserProfile','show profile')">ویرایش </a>
+
+
+        <a v-if="!isMyProfile" :href=" '/master/profile/'+ user_name" class="green_bot"
+           @click="registerComponentStatistics('product','showUserProfile','show profile')">مشاهده پروفایل</a>
+        <div v-if="!isMyProfile" class="create_buy  hidden-xs">
             <a class="green_bot" href="#" @click.prevent="openChat()">
                 <span class="fa fa-comment"></span> ارسال پیام
             </a>
@@ -19,7 +27,21 @@
     </div>
 </template>
 <style scoped>
+    .green_bot.delete-product {
+        background: #e41c38;
+    }
 
+    .green_bot.delete-product:hover {
+        background: #d81b35;
+    }
+
+    .green_bot.edit-product {
+        background: #000546;
+    }
+
+    .green_bot.edit-product:hover {
+        background: #000430;
+    }
 
     .user-image {
         width: 135px;
@@ -32,10 +54,11 @@
     .user-image img, .user-image > div {
         height: 100%;
     }
+
     .user-contents {
         border-right: 2px solid #f0f3f6;
         text-align: center;
-        padding: 0 20px;
+        padding: 0 20px 20px;
     }
 
     .user-contents h1 {
@@ -45,6 +68,7 @@
     .create_buy {
         position: relative;
     }
+
     @media screen and (max-width: 767px) {
 
         .logo img {
@@ -67,13 +91,13 @@
             font-size: 18px;
             padding: 15px 0 0;
         }
+
         .user-contents p {
             margin: 22px 8px;
             font-size: 12px;
             font-weight: 800;
             float: right;
         }
-
 
         .user-image {
             width: 65px;
@@ -84,7 +108,7 @@
             float: right;
         }
 
-        .user-contents a.green_bot{
+        .user-contents a.green_bot {
             float: left;
             width: initial;
             padding: 5px;
@@ -93,27 +117,47 @@
     }
 
 
-
 </style>
 <script>
     import {eventBus} from "../../../../../js/router/dashboard_router";
 
     export default {
-        props:[
+        data(){
+          return{
+              isMyProfile:false
+          }
+        },
+        props: [
             'profile_photo',
             'user_info',
             'user_full_name',
             'user_name',
             'defultimg',
-            'current_user'
+            'current_user',
+            'product_owner_id'
         ],
-        methods:{
+        methods: {
+            init: function () {
+                var self = this;
+                axios.post('/user/profile_info')
+                    .then(function (response) {
+                        self.currentUser = response.data;
+                        if (self.currentUser.user_info) {
+                            if (self.currentUser.user_info.id === self.product_owner_id) {
+                                self.isMyProfile = true;
+
+                            }
+                        }
+                        self.$emit('isMyProfile', self.isMyProfile);
+                    });
+
+            },
             openRequestRegisterBox: function (e) {
                 if (this.current_user.profile) {
                     e.preventDefault;
                     var event = $(e.target);
 
-                    this.registerComponentStatistics('product','click','request register button');
+                    this.registerComponentStatistics('product', 'click', 'request register button');
 
                     this.errors = '';
 
@@ -126,42 +170,42 @@
                 }
                 else {
                     this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
-                    eventBus.$emit('submitSuccess',this.popUpMsg);
+                    eventBus.$emit('submitSuccess', this.popUpMsg);
                     $('#myModal2').modal('show');
                 }
 
             },
-            openChat:function(){
+            openChat: function () {
 
-                this.registerComponentStatistics('product','openChat','click on open chatBox');
+                this.registerComponentStatistics('product', 'openChat', 'click on open chatBox');
 
                 var contact = {
-                    contact_id:this.user_info.id,
-                    first_name:this.user_info.first_name,
-                    last_name:this.user_info.last_name,
-                    profile_photo:this.profile_photo,
-                    user_name:this.user_info.user_name,
+                    contact_id: this.user_info.id,
+                    first_name: this.user_info.first_name,
+                    last_name: this.user_info.last_name,
+                    profile_photo: this.profile_photo,
+                    user_name: this.user_info.user_name,
                 }
 
-                if(this.current_user.user_info){
-                    if(this.current_user.user_info.id != this.user_info.id){
-                        axios.post('/set_last_chat_contact',contact)
-                            .then(function(response){
+                if (this.current_user.user_info) {
+                    if (this.current_user.user_info.id != this.user_info.id) {
+                        axios.post('/set_last_chat_contact', contact)
+                            .then(function (response) {
                                 window.location.href = '/dashboard/messages';
                             })
-                            .catch(function(e){
+                            .catch(function (e) {
                                 alert('Error');
-                        });
+                            });
                     }
-                    else{
+                    else {
                         this.popUpMsg = 'شما نمیتوانید به خودتان پیام دهید.';
-                        eventBus.$emit('submitSuccess',this.popUpMsg);
+                        eventBus.$emit('submitSuccess', this.popUpMsg);
                         $('#myModal').modal('show');
                     }
                 }
-                else{
+                else {
                     this.popUpMsg = 'اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
-                    eventBus.$emit('submitSuccess',this.popUpMsg);
+                    eventBus.$emit('submitSuccess', this.popUpMsg);
                     $('#myModal2').modal('show');
                 }
             },
@@ -169,12 +213,15 @@
                 var newPosition = $(element).offset();
                 $('html, body').stop().animate({scrollTop: newPosition.top - 380}, 1000);
             },
-            registerComponentStatistics:function(categoryName,actionName,labelName){
-                gtag('event',actionName,{
-                    'event_category' : categoryName,
-                    'event_label'    : labelName
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName, {
+                    'event_category': categoryName,
+                    'event_label': labelName
                 });
             }
+        },
+        mounted(){
+            this.init();
         }
     }
 </script>

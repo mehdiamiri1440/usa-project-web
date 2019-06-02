@@ -98,6 +98,7 @@ Route::get('/register',function(){
 
 Route::get('/register-from-blog',function(){
     session(['is_from_QA_blog' => true]);
+
     return redirect()->route('register_page');
 });
 

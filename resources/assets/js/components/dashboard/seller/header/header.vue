@@ -739,8 +739,7 @@
                 this.isLoaded = true;
                 axios.post('/user/profile_info')
                     .then(response => (this.currentUser = response.data)
-                    )
-                ;
+                    );
             },
             RegisterBasicProfileInfo: function () {
                 this.submiting = true;

@@ -69,6 +69,12 @@
                         <i class="fa fa-plus-square " aria-hidden="true"></i>
                     </router-link>
                 </li>
+                <li class="list-item  ">
+                    <router-link :class="{'active' : this.active_el === 9}" :to="{ name : 'myProducts' }">
+                        <span> محصولات من </span>
+                        <i class="fa fa-list-alt " aria-hidden="true"></i>
+                    </router-link>
+                </li>
            <!--     <li class="list-item  ">
                     <router-link :class="{'active' : this.active_el === 4}" :to="{ name : 'myTransactions' }">
                         <span>تراکنش های جاری</span>
@@ -162,6 +168,8 @@
                     this.active_el = 7
                 }else if(this.subIsActive('/dashboard/messages')){
                     this.active_el = 8
+                } else if(this.subIsActive('/dashboard/my-products')){
+                    this.active_el = 9
                 } else{
                     this.active_el = 1
                 }
@@ -183,6 +191,8 @@
                 this.active_el = 8
             } else if(this.subIsActive('/dashboard/guide')){
                 this.active_el = 7
+            } else if(this.subIsActive('/dashboard/my-products')){
+                this.active_el = 9
             }else{
                 this.active_el = 1
             }

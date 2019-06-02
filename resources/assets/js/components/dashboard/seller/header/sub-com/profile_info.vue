@@ -1,6 +1,6 @@
 <style>
     .green-bot {
-        margin: 15px 0;
+        margin: 15px 0 0;
         display: inline-block;
         background: #28a745;
         color: #fff;
@@ -10,9 +10,27 @@
         border: none;
         transition: 300ms;
     }
+    .green_bot {
+        margin: 15px 0 0;
+        display: inline-block;
+        background: #28a745;
+        color: #fff;
+        padding: 10px 0;
+        border-radius: 3px;
+        text-align: center;
+        font-size: 12px;
+        width: 100%;
+        line-height: 21px;
+        border: none;
+    }
+    .green_bot:hover {
+        background: #279b41;
+        color: #fff;
+    }
     .green-bot:focus,.gray-bot:focus {
         color: #fff;
     }
+
 </style>
 <template>
     <div>

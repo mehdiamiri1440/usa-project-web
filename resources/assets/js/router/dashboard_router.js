@@ -8,6 +8,7 @@ require('../imageuploadify.min');
 require('../jquery.magnific-popup.min');
 require('../owl.carousel.min.js');
 window.Vue = require('vue');
+
 // Seller Components
 import sellerProfileBasic from '../components/dashboard/seller/profile/profile_basic.vue'
 import sellerChangePassword from '../components/dashboard/seller/profile/change_password.vue'
@@ -22,7 +23,7 @@ import sellerMyTerminatedTransactions from '../components/dashboard/seller/trans
 import sellerTransactionDetail from '../components/dashboard/seller/transaction/transaction.vue';
 import sellerTransactionReport from '../components/dashboard/seller/transaction/transactionReport';
 import sellerGuide from '../components/dashboard/seller/guide.vue';
-import sellerNotFound from '../components/dashboard/page-not-found.vue';
+import myProducts from '../components/dashboard/seller/product/my_products';
 
 
 // Buyer Components
@@ -106,13 +107,13 @@ const myRouter =  new Router({
                 layouts: productList,
             },
         },
-        {
+       /* {
             path: '/master/product-list/:searchText',
             name: 'productList',
             components: {
                 layouts: productList,
             },
-        },
+        },*/
         {
             path: '/master/product-view',
             name: 'productView',
@@ -173,6 +174,7 @@ const myRouter =  new Router({
                 buyer: messages,
             },
         },
+
 //        {
 //            path: '/profile_contract',
 //            name: 'profileContract',
@@ -226,8 +228,14 @@ const myRouter =  new Router({
                 buyer: buyerRgisterRequest,
             },
             props: true
-        }
-        , {
+        },
+        {
+            path: '/dashboard/my-products',
+            name: 'myProducts',
+            components: {
+                seller: myProducts,
+            },
+        },{
             path: '/dashboard/buyAd-request-detail/:id',
             name: 'buyAdRequestsDetail',
             components: {
@@ -246,7 +254,7 @@ const myRouter =  new Router({
             params: {
                 active: 2
             }
-        }, 
+        },
         {
             path: '/dashboard/my-buyAds',
             name: 'myBuyAds',
