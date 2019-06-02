@@ -158,8 +158,8 @@
 
     .contact-wrapper .contact-items {
         position: relative;
-        height: 100%;
         overflow: scroll;
+        height: calc(100% - 30px);
     }
 
     .contact-wrapper .contact-items > ul {
