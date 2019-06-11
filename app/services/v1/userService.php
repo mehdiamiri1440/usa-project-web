@@ -106,7 +106,7 @@ use Carbon\Carbon;
          $hashed_password = WpPassword::make($request->password);
          
          $user_record = [
-             'user_login' => strtolower($request->user_name),
+             'user_login' => $request->phone,
              'user_pass' => $hashed_password,
              'user_email' => '',
              'user_nicename' => $request->first_name,

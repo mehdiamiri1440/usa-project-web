@@ -553,7 +553,7 @@ class profile_controller extends Controller
             'product_count' => $product_count,
             'transaction_count' => $transaction_count,
             'reputation_score' => $reputation_score,
-            'validated_seller' => config("type-$user_active_pakage_type.validated-seller"),
+            'validated_seller' => config("subscriptionPakage.type-$user_active_pakage_type.validated-seller"),
         ];
         
         return $result_array;

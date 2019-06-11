@@ -141,6 +141,7 @@
                     :defultimg="defultimg"
                     :current_user="currentUser"
                     v-on:isMyProfile="isMyProfileFunction($event)"
+                    :product_id="product.main.id"
             ></product-user-info>
             <div class="article-contents col-xs-12  col-sm-9 ">
                 <div class="main-image col-xs-12 col-sm-5">
