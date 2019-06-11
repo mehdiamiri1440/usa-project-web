@@ -172,15 +172,17 @@
                                     تومان</span></p>
                     <p>توضیحات: <span>{{product.main.description}}</span></p>
                 </div>
-                <div class="create_buy_mobile hidden-sm hidden-md hidden-lg">
-                    <a v-if="!isMyProfile" class="green_bot" href="#" @click.prevent="openChat(product)">
-                        <span class="fa fa-comment"></span> ارسال پیام
-                    </a>
-                    <a v-if="isMyProfile" class="green_bot edit-product" href="#" @click.prevent="openChat(product)">
-                        <span class="fa fa-pencil"></span> ویرایش
-                    </a>
+               <div class="row">
+                   <div class="create_buy_mobile hidden-sm hidden-md hidden-lg">
+                       <a v-if="!isMyProfile" class="green_bot" href="#" @click.prevent="openChat(product)">
+                           <span class="fa fa-comment"></span> ارسال پیام
+                       </a>
+                       <a v-if="isMyProfile" class="green_bot edit-product" href="#" @click.prevent="openChat(product)">
+                           <span class="fa fa-pencil"></span> ویرایش
+                       </a>
 
-                </div>
+                   </div>
+               </div>
 
             </div>
             <div class="buy_details form-group  col-xs-12">

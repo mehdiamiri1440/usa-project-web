@@ -8,7 +8,10 @@
         .main-content-item {
             padding: 0;
         }
-
+        #main {
+            margin-top: 111px;
+            background: #fff;
+        }
         .user-contents .user-image, .user-contents p {
             float: right;
         }
