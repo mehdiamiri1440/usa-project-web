@@ -156,8 +156,8 @@ class profile_controller extends Controller
             'profile_photo' => 'image|mimes:png,jpg,jpeg|max:5000',
             'is_company' => 'required|boolean',
             'public_phone' => 'required|regex:/^[0-9\x{06F0}-\x{06F9}]+$/u|min:11',
-            'postal_code' => 'digits:10|nullable',
-            'shaba_code' => 'digits:24|nullable',
+            //'postal_code' => 'digits:10|nullable',
+            //'shaba_code' => 'digits:24|nullable',
         ];
         
         if($request->is_company)

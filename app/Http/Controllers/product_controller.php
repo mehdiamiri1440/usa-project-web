@@ -193,9 +193,8 @@ class product_controller extends Controller
         } 
         
         //applying filters
-        
         $all_products = array_filter($all_products, function($product) use($request){
-            $category_flag = $sub_category_flag = $province_flag = $city_flag = true;
+            $category_flag = $sub_category_flag = $province_flag = $city_flag = $search_text_flag = true;
             
             if($request->filled('category_id')){
                 $category_flag = ( $request->category_id == $product['main']->category_id);
@@ -209,8 +208,13 @@ class product_controller extends Controller
             if($request->filled('city_id')){
                 $city_flag = ( $request->city_id == $product['main']->city_id);
             }
+            if($request->filled('search_text')){
+                $search_text = $request->search_text;
+                
+                $search_text_flag = $this->does_search_text_matche_the_product($search_text,$product);
+            }
             
-            return $category_flag && $sub_category_flag && $province_flag && $city_flag;
+            return $category_flag && $sub_category_flag && $province_flag && $city_flag &&  $search_text_flag;
         });
         //changing view priority according to owners pakage type
         usort($all_products,function($item1, $item2){
@@ -755,6 +759,28 @@ class product_controller extends Controller
         $user_active_pakage_type = myuser::find($user_id)->active_pakage_type;
         
         return config("subscriptionPakage.type-$user_active_pakage_type.sms-to-buyers");
+    }
+    
+    protected function does_search_text_matche_the_product($search_text,&$product)
+    {
+        $search_text_array = explode(' ',$search_text);
+        
+        foreach($product['main'] as $key => $value){
+            foreach($search_text_array as $search_text_value){
+                if(is_string($value) && strpos($value,$search_text_value) !== false){
+                    return true;
+                }
+            }
+        }
+        foreach($product['user_info']->toArray() as $key => $value){
+            foreach($search_text_array as $search_text_value){
+                if(is_string($value) && strpos($value,$search_text_value) !== false){
+                    return true;
+                }
+            }
+        }
+        
+        return false;
     }
 	
 }
