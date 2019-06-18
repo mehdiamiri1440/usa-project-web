@@ -173,86 +173,59 @@ class product_controller extends Controller
 	
 	// public method
 	public function get_product_list(Request $request)
-	{
-		if($request->current_user == TRUE)
-		{
-			if( ! $request->session()->has('user_id'))
-			{
-				return redirect()->route('login_page');
-			}
-			
-			$this->validate($request,[
-				'from_record_number' => 'integer|min:1',
-				'to_record_number' => 'integer|min:1',
-			]);
-			
-			$current_user_products = null;
-			
-			if($request->filled('from_record_number') && $request->filled('to_record_number'))
-			{
-				$from_record_number  = $request->from_record_number;
-				$to_record_number = $request->to_record_number;
-				
-				$current_user_products = $this->get_current_user_products_with_related_media(null,$from_record_number,$to_record_number);
-			}
-			else{
-				$current_user_products = $this->get_current_user_products_with_related_media(null);	
-			}
-			
-			return response()->json([
-				'status' => TRUE,
-				'products' => $current_user_products
-			],200);
-		}
-		else if($request->private_view == TRUE)
-		{
-			if(!session()->has('user_id'))
-			{
-				return redirect()->route('login_page');
-			} 
-			
-			$this->validate($request,[
-				'from_record_number' => 'integer|min:1',
-				'to_record_number' => 'ingeger|min:1',
-			]);
-			
-			$all_products = NULL;
-			
-			if($request->filled('from_record_number') && $request->filled('to_record_number')){
-				$all_products = $this->get_all_products_with_related_media(TRUE,$request->from_record_number,$request->to_record_number);
-			}
-			else $all_products = $this->get_all_products_with_related_media(TRUE);
-			
-			
-			return response()->json([
-				'status' => TRUE,
-				'products' => $all_products
-			],200);
-		}
-		else{
-			
-			$this->validate($request,[
-				'from_record_number' => 'integer|min:0',
-				'to_record_number' => 'integer|min:1',
-			]);
-			
-			$all_products = NULL ;
-			
-			if($request->filled('from_record_number') && $request->filled('to_record_number')){
-				$all_products = $this->get_all_products_with_related_media(FALSE,$request->from_record_number,$request->to_record_number);
-			}
-			else $all_products = $this->get_all_products_with_related_media(FALSE);
-			
-            //changing view priority according to owners pakage type
-			usort($all_products,function($item1, $item2){
-                return $item1['user_info']->active_pakage_type >  $item2['user_info']->active_pakage_type ;
-            });
+    {		
+        $this->validate($request,[
+            'from_record_number'    => 'integer|min:0',
+            'to_record_number'      => 'integer|min:1',
+            'category_id'           => 'integer|min:1',
+            'sub_category_id'       => 'integer|min:1',
+            'province_id'           => 'integer|min:1',
+            'city_id'               => 'integer|min:1'
+        ]);
+
+        $all_products = NULL ;
+
+        if($request->filled('from_record_number') && $request->filled('to_record_number')){
+            $all_products = $this->get_all_products_with_related_media($request->from_record_number,$request->to_record_number);
+        }
+        else{
+            $all_products = $this->get_all_products_with_related_media();  
+        } 
+        
+        //applying filters
+        $all_products = array_filter($all_products, function($product) use($request){
+            $category_flag = $sub_category_flag = $province_flag = $city_flag = $search_text_flag = true;
             
-			return response()->json([
-				'status' => TRUE,
-				'products' => $all_products
-			],200);
-		}
+            if($request->filled('category_id')){
+                $category_flag = ( $request->category_id == $product['main']->category_id);
+            }
+            if($request->filled('sub_category_id')){
+                $sub_category_flag = ( $request->sub_category_id == $product['main']->sub_category_id);
+            }
+            if($request->filled('province_id')){
+                $province_flag = ( $request->province_id == $product['main']->province_id);
+            }
+            if($request->filled('city_id')){
+                $city_flag = ( $request->city_id == $product['main']->city_id);
+            }
+            if($request->filled('search_text')){
+                $search_text = $request->search_text;
+                
+                $search_text_flag = $this->does_search_text_matche_the_product($search_text,$product);
+            }
+            
+            return $category_flag && $sub_category_flag && $province_flag && $city_flag &&  $search_text_flag;
+        });
+        //changing view priority according to owners pakage type
+        usort($all_products,function($item1, $item2){
+            return $item1['user_info']->active_pakage_type >  $item2['user_info']->active_pakage_type ;
+        });
+
+        return response()->json([
+            'status' => TRUE,
+            'products' => $all_products
+        ],200);
+		
 	}
 	
 	protected function get_current_user_products_with_related_media($user_id = NULL,$from_record_number = NULL , $to_record_number = NULL)
@@ -314,7 +287,7 @@ class product_controller extends Controller
 		
 	}
 	
-	protected function get_all_products_with_related_media($authentication, $from_record_number = NULL, $to_record_number = NULL)
+	protected function get_all_products_with_related_media($from_record_number = NULL, $to_record_number = NULL)
 	{
 		$products = NULL ;
         
@@ -357,12 +330,6 @@ class product_controller extends Controller
             
             $product_related_data['user_info'] = $product_related_user_info;
             $product_related_data['profile_info'] = $product_related_profile_info;           
-            
-//			if($authentication == TRUE)
-//			{
-//				$product_related_user_info = myuser::find($product->myuser_id);
-//				$product_related_data['phone'] = $product_related_user_info->phone ;
-//			}
 			
 			$product_related_data['photos'] = $product_related_photos;
 			 
@@ -523,7 +490,7 @@ class product_controller extends Controller
 	public function delete_product_by_id(Request $request)
 	{
 		$this->validate($request,[
-			'product_id' => 'required|numeric'
+			'product_id' => 'required|integer|min:1'
 		]);        
 		
 		$product_id = $request->product_id;
@@ -792,6 +759,28 @@ class product_controller extends Controller
         $user_active_pakage_type = myuser::find($user_id)->active_pakage_type;
         
         return config("subscriptionPakage.type-$user_active_pakage_type.sms-to-buyers");
+    }
+    
+    protected function does_search_text_matche_the_product($search_text,&$product)
+    {
+        $search_text_array = explode(' ',$search_text);
+        
+        foreach($product['main'] as $key => $value){
+            foreach($search_text_array as $search_text_value){
+                if(is_string($value) && strpos($value,$search_text_value) !== false){
+                    return true;
+                }
+            }
+        }
+        foreach($product['user_info']->toArray() as $key => $value){
+            foreach($search_text_array as $search_text_value){
+                if(is_string($value) && strpos($value,$search_text_value) !== false){
+                    return true;
+                }
+            }
+        }
+        
+        return false;
     }
 	
 }

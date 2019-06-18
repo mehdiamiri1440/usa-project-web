@@ -156,8 +156,8 @@ class profile_controller extends Controller
             'profile_photo' => 'image|mimes:png,jpg,jpeg|max:5000',
             'is_company' => 'required|boolean',
             'public_phone' => 'required|regex:/^[0-9\x{06F0}-\x{06F9}]+$/u|min:11',
-            'postal_code' => 'digits:10|nullable',
-            'shaba_code' => 'digits:24|nullable',
+            //'postal_code' => 'digits:10|nullable',
+            //'shaba_code' => 'digits:24|nullable',
         ];
         
         if($request->is_company)
@@ -553,7 +553,7 @@ class profile_controller extends Controller
             'product_count' => $product_count,
             'transaction_count' => $transaction_count,
             'reputation_score' => $reputation_score,
-            'validated_seller' => config("type-$user_active_pakage_type.validated-seller"),
+            'validated_seller' => config("subscriptionPakage.type-$user_active_pakage_type.validated-seller"),
         ];
         
         return $result_array;

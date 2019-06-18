@@ -434,7 +434,7 @@ Route::group(['middleware' => [login::class]],function(){
         'as' => 'profile_modification'
     ]);
 
-    Route::delete('/delete_product_by_id',[
+    Route::post('/delete_product_by_id',[
         'uses' => 'product_controller@delete_product_by_id',
         'as' => 'delete_product_by_id'
     ]);
@@ -979,14 +979,6 @@ Route::get('/sitemap.xml',[
 //Route::get('/migrate_users',[
 //   'uses' => 'profile_controller@migrate_users'
 //]);
-
-
-
-
-
-
-
-
 
 Route::get('/pricing', function(){
     return view('index_pages.pricing_page');

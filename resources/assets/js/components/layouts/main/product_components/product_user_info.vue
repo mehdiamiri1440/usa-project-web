@@ -10,8 +10,9 @@
         <!--        <a v-bind:href="'/master/profile/' + user_name" class="green_bot">
                     مشاهده پروفایل
                 </a>-->
-        <a v-if="isMyProfile" :href=" '/master/profile/'+ user_name" class="green_bot delete-product"
-           @click="registerComponentStatistics('product','showUserProfile','show profile')"> <i class="fa fa-trash"></i> حذف</a>
+
+        <a v-if="isMyProfile" href="" class="green_bot delete-product"
+           @click.prevent="deleteProduct()"> حذف</a>
 
         <a v-if="isMyProfile" :href=" '/master/profile/'+ user_name" class="green_bot edit-product hidden-xs"
            @click="registerComponentStatistics('product','showUserProfile','show profile')">ویرایش </a>
@@ -140,7 +141,8 @@
             'user_name',
             'defultimg',
             'current_user',
-            'product_owner_id'
+            'product_owner_id',
+            'product_id'
         ],
         methods: {
             init: function () {
@@ -223,6 +225,23 @@
                 gtag('event', actionName, {
                     'event_category': categoryName,
                     'event_label': labelName
+                });
+            },
+            deleteProduct:function(){
+                var self = this;
+                //show modal
+                //
+                axios.post('/delete_product_by_id',{
+                    product_id : self.product_id
+                })
+                .then(function(response){
+                    //show product deleted message
+                    //code
+
+                    window.location.reload();
+                })
+                .catch(function(err){
+                    alert('error!');
                 });
             }
         },

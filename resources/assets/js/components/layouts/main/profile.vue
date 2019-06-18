@@ -199,7 +199,7 @@
                                     <h1 class="content_title col-xs-12 col-sm-8">{{profileOwner.user_info.first_name +
                                         ' '
                                         + profileOwner.user_info.last_name}}
-                                        <span class="valid-seller">
+                                        <span class="valid-seller" v-if="profileOwnerStatistics.validated_seller">
                                             <i class="fa fa-check-circle"></i>
                                             فروشنده معتبر
                                         </span>
