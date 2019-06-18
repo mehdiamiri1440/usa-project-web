@@ -31,7 +31,7 @@ import buyerProfileBasic from '../components/dashboard/buyer/profile/profile_bas
 import buyerChangePassword from '../components/dashboard/seller/profile/change_password.vue'
 import buyerCompelementry from '../components/dashboard/buyer/profile/profile_complete.vue'
 import buyerProfileContract from '../components/dashboard/buyer/profile/profile_contract.vue'
-import buyerRequests from '../components/dashboard/buyer/request/request'
+//import buyerRequests from '../components/dashboard/buyer/request/request'
 import buyerMyBuyAd from '../components/dashboard/buyer/request/my-buyAd'
 import buyerRgisterRequest from '../components/dashboard/buyer/request/register-request'
 import buyerSellOfferDetail from '../components/dashboard/buyer/request/sell-offer-detail'
@@ -46,11 +46,6 @@ import buyerGuide from '../components/dashboard/buyer/guide.vue';
 
 
 import messages from '../components/dashboard/message'
-import mobileAccountsMessage from '../components/dashboard/mobile-accounts-message'
-import mobileShowMessage from '../components/dashboard/mobile-show-message'
-
-
-
 
 // Layout Components
 import indexPage from '../components/layouts/main/index'
@@ -149,21 +144,6 @@ const myRouter =  new Router({
             components: {
                 seller: sellerCompelementry,
                 buyer: buyerCompelementry,
-            },
-        },
-        {
-            path: '/dashboard/mobile-accounts',
-            name: 'mobileAccounts',
-            components: {
-                seller: mobileAccountsMessage,
-                buyer: mobileAccountsMessage,
-            },
-        },{
-            path: '/dashboard/mobile-show',
-            name: 'mobileShow',
-            components: {
-                seller: mobileShowMessage,
-                buyer: mobileShowMessage,
             },
         },
         {

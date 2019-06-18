@@ -594,11 +594,7 @@
                         :byadreq="byadreq"
                         :selregpro="selregpro"
                         :transactroute="transactroute"
-                        :mytrans="mytrans"
-
-
-                >
-
+                        :mytrans="mytrans">
                 </header-menu-list>
                 <div class="copy-right">
                     <!--

@@ -23,7 +23,7 @@
         top: 0;
     }
 
-    .little-main .main-content {
+    .little-main .main-content{
         padding: 110px 80px 0 0;
     }
 

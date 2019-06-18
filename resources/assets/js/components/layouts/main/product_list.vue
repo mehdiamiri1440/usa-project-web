@@ -868,32 +868,71 @@
                 this.subCategoryId = '';
                 this.cityId = '';
                 this.init();
-            }
+            },
+            applyFilter:function(){
+                var self = this;
+                
+                eventBus.$emit('submiting', true);
+                
+                var searchObject = {};
+                
+                if(this.categoryId){
+                    searchObject.category_id = this.categoryId;
+                }
+                if(this.subCategoryId){
+                    searchObject.sub_category_id = this.subCategoryId;
+                }
+                if(this.provinceId){
+                    searchObject.province_id = this.provinceId;
+                }
+                if(this.cityId){
+                    searchObject.city_id = this.cityId;
+                }
+                if(this.searchText){
+                    searchObject.search_text = this.searchText;
+                }
+                
+                if(jQuery.isEmptyObject(searchObject)){
+                    searchObject.from_record_number = 0;
+                    searchObject.to_record_number = 5;
+                }
+                
+                axios.post('/user/get_product_list',searchObject)
+                    .then(function(response){
+                        self.products = response.data.products;
+                        eventBus.$emit('submiting', false);
+                    })
+                    .catch(function(err){
+                        alert('error');
+                    });
+                
+            },
         },
         watch: {
             searchText: function () {
                 var self = this;
                 eventBus.$emit('submiting', true);
-                axios.post('/user/get_product_list')
-                    .then(function (response) {
-                        self.products = '';
-
-                        var text = self.searchText.split(' ');
-                        self.products = response.data.products.filter(function (product) {
-                            return text.every(function (el) {
-
-                                if (product.main.product_name.indexOf(el) > -1 ||
-                                    product.main.province_name.indexOf(el) > -1 ||
-                                    product.main.city_name.indexOf(el) > -1 ||
-                                    product.main.category_name.indexOf(el) > -1 ||
-                                    product.main.sub_category_name.indexOf(el) > -1) {
-                                    return true;
-                                }
-                                else return false;
-                            });
-                        });
-                        eventBus.$emit('submiting', false);
-                    });
+                this.applyFilter();
+//                axios.post('/user/get_product_list')
+//                    .then(function (response) {
+//                        self.products = '';
+//
+//                        var text = self.searchText.split(' ');
+//                        self.products = response.data.products.filter(function (product) {
+//                            return text.every(function (el) {
+//
+//                                if (product.main.product_name.indexOf(el) > -1 ||
+//                                    product.main.province_name.indexOf(el) > -1 ||
+//                                    product.main.city_name.indexOf(el) > -1 ||
+//                                    product.main.category_name.indexOf(el) > -1 ||
+//                                    product.main.sub_category_name.indexOf(el) > -1) {
+//                                    return true;
+//                                }
+//                                else return false;
+//                            });
+//                        });
+//                        eventBus.$emit('submiting', false);
+//                    });
             },
 
             bottom(bottom) {
