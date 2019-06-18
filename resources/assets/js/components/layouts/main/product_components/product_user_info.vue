@@ -11,7 +11,7 @@
                     مشاهده پروفایل
                 </a>-->
         <a v-if="isMyProfile" :href=" '/master/profile/'+ user_name" class="green_bot delete-product"
-           @click="registerComponentStatistics('product','showUserProfile','show profile')"> حذف</a>
+           @click="registerComponentStatistics('product','showUserProfile','show profile')"> <i class="fa fa-trash"></i> حذف</a>
 
         <a v-if="isMyProfile" :href=" '/master/profile/'+ user_name" class="green_bot edit-product hidden-xs"
            @click="registerComponentStatistics('product','showUserProfile','show profile')">ویرایش </a>
@@ -68,7 +68,13 @@
     .create_buy {
         position: relative;
     }
-
+    .user-contents a.green_bot {
+        float: left;
+        padding: 5px 25px;
+        margin: 15px auto;
+        font-size: 14px;
+        font-weight: bold;
+    }
     @media screen and (max-width: 767px) {
 
         .logo img {
@@ -111,7 +117,7 @@
         .user-contents a.green_bot {
             float: left;
             width: initial;
-            padding: 5px;
+            padding: 7px 20px;
             margin: 15px auto;
         }
     }

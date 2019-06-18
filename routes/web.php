@@ -37,10 +37,10 @@ use App\Jobs\NotifyBuyersBySMS;
 /*Route::get('/help', function(){
     return view('index_pages.help');
 });*/
-/*
+
 Route::get('/p', function(){
-    return view('index_pages.projects');
-});*/
+    return view('index_pages.index_main');
+});
 Route::group(['prefix' => 'master'],function (){
     Route::get('/', function () {
         return view('layout.master');
@@ -598,7 +598,7 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'profile_controller@get_user_last_confirmed_profile_photo',
         'as' => 'get_user_last_confirmed_profile_photo'
     ]);
-    
+
     Route::post('/is_allowed_to_access_buyAd_requests',[
         'uses' => 'buyAd_controller@is_user_allowed_to_access_buyAd_requests',
         'as' => 'is_allowed_to_access_buyAd_requests'

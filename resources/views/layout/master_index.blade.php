@@ -52,7 +52,7 @@
 ============================== -->
 
 <div class="navbar container-fluid navbar-fixed-top custom-navbar" role="navigation">
-    <div class="container-fluid">
+    <div class="container-fl=uid">
         <!-- navbar header -->
         <div class="navbar-header">
             @if(session('user_id'))

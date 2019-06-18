@@ -238,7 +238,7 @@
 
         right: 0;
 
-        bottom: 75px;
+        bottom: 66px;
         top: 70px;
     }
 

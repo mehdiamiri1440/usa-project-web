@@ -31,7 +31,9 @@
         font-family: IRANSans, sans-serif;
         font-size: 14px;
     }
-
+   select,option, textarea{
+        font-family: IRANSans, sans-serif;
+    }
     ol, ul {
         list-style: none;
     }
