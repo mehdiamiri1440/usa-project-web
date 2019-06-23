@@ -186,20 +186,20 @@ const myRouter =  new Router({
                 seller: sellerBuyAdRequests,
             },
             props: true,
-            beforeEnter: async (to, from, next) => {
-                console.log('test');
-                axios.post('/is_allowed_to_access_buyAd_requests')
-                .then(function(response){
-                    if(response.data.access_to_buyAd_requests == false){
-                        next(false);
-                    $('#myModal-2').modal('show');
-                    }
-                    else{
-                        next();
-                    }
-
-                });
-            },
+//            beforeEnter: async (to, from, next) => {
+//                console.log('test');
+//                axios.post('/is_allowed_to_access_buyAd_requests')
+//                .then(function(response){
+//                    if(response.data.access_to_buyAd_requests == false){
+//                        next(false);
+//                    $('#myModal-2').modal('show');
+//                    }
+//                    else{
+//                        next();
+//                    }
+//
+//                });
+//            },
         }
         , {
             path: '/dashboard/register-request',

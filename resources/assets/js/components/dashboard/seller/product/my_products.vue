@@ -11,6 +11,7 @@
         #main {
             margin-top: 111px;
             background: #fff;
+            padding: 0;
         }
         .user-contents .user-image, .user-contents p {
             float: right;
@@ -27,11 +28,10 @@
             padding-right: 0;
         }
 
-        .user-contents .green_bot {
-            float: left;
-            width: initial;
-            padding: 15px;
+        .article-contents , .article-contents > .main-image {
+            padding: 0 !important;
         }
+
     }
 
     @media screen and (max-width: 500px) {
@@ -48,7 +48,7 @@
         .user-contents .green_bot {
             float: left;
             width: initial;
-            padding: 15px;
+            padding: 15px 30px;
         }
     }
 </style>

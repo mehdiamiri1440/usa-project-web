@@ -10,6 +10,7 @@
         <!--        <a v-bind:href="'/master/profile/' + user_name" class="green_bot">
                     مشاهده پروفایل
                 </a>-->
+
         <a v-if="isMyProfile" href="" class="green_bot delete-product"
            @click.prevent="deleteProduct()"> حذف</a>
 
@@ -68,7 +69,13 @@
     .create_buy {
         position: relative;
     }
-
+    .user-contents a.green_bot {
+        float: left;
+        padding: 5px 25px;
+        margin: 15px auto;
+        font-size: 14px;
+        font-weight: bold;
+    }
     @media screen and (max-width: 767px) {
 
         .logo img {
@@ -111,7 +118,7 @@
         .user-contents a.green_bot {
             float: left;
             width: initial;
-            padding: 5px;
+            padding: 7px 20px;
             margin: 15px auto;
         }
     }
@@ -222,7 +229,7 @@
             },
             deleteProduct:function(){
                 var self = this;
-                //show modal 
+                //show modal
                 //
                 axios.post('/delete_product_by_id',{
                     product_id : self.product_id
@@ -230,7 +237,7 @@
                 .then(function(response){
                     //show product deleted message
                     //code
-                    
+
                     window.location.reload();
                 })
                 .catch(function(err){

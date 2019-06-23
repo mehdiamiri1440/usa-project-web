@@ -10,6 +10,9 @@ return [
         'validated-seller' => false,
         'access-to-buy-requests' => false,
         'show-profile-link-in-blog' => false,
+        'pakage-duration-in-months' => 12,
+        'buyAd-count' => 5,
+        'price' => 0
     ],
     'type-1' => [
         'max-products' => 3,
@@ -20,6 +23,9 @@ return [
         'validated-seller' => false,
         'access-to-buy-requests' => false,
         'show-profile-link-in-blog' => false,
+        'pakage-duration-in-months' => 12,
+        'buyAd-count' => 12,
+        'price' => 1000
     ],
     'type-2' => [
         'max-products' => 5,
@@ -30,6 +36,9 @@ return [
         'validated-seller' => false,
         'access-to-buy-requests' => false,
         'show-profile-link-in-blog' => true,
+        'pakage-duration-in-months' => 12,
+        'buyAd-count' => 30,
+        'price' => 2000
     ],
     'type-3' => [
         'max-products' => 7,
@@ -40,5 +49,8 @@ return [
         'validated-seller' => true,
         'access-to-buy-requests' => true,
         'show-profile-link-in-blog' => true,
+        'pakage-duration-in-months' => 12,
+        'buyAd-count' => 200,
+        'price' => 3000
     ],
 ];

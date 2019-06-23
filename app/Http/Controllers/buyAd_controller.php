@@ -692,11 +692,16 @@ class buyAd_controller extends Controller
     
     protected function get_related_buyAds_list_to_the_user(&$user)
     {
+        $record_count = config("subscriptionPakage.type-$user->active_pakage_type.buyAd-count");
+        
+//        echo 'test';
+        
         $buyAds = DB::table('buy_ads')
                     ->join('myusers','buy_ads.myuser_id','=','myusers.id')
                     ->where('buy_ads.confirmed', true)
                     ->select($this->related_buyAd_list_required_fields)
                     ->orderBy('buy_ads.created_at','desc')
+                    ->limit($record_count + 1)
                     ->get();
         
         //relevance

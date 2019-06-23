@@ -164,6 +164,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 		phplusir\smsir\SmsirServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Larabookir\Gateway\GatewayServiceProvider::class,
         
         
 
@@ -234,6 +235,7 @@ return [
         'Pusher' => Pusher\Pusher::class,
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'Gateway' => \Larabookir\Gateway\Gateway::class, 
 
     ],
 

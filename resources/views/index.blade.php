@@ -36,11 +36,15 @@
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
 
-      gtag('config', 'UA-129398000-1');
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-129398000-1');
     </script>
 
 </head>
@@ -67,7 +71,7 @@ NAVIGATION LINKS
                 @if(session('user_id'))
                     <div class="user-header-mobile">
                         <div class="profile-menu-header">
-                            <a href="#" @click.prevent ="dropdown()">
+                            <a href="#" @click.prevent="dropdown()">
                                 <div class="image-header-profile">
                                     @if(session('profile_photo'))
                                         <img src="{{'storage/'  . session('profile_photo')}}">
@@ -105,18 +109,17 @@ NAVIGATION LINKS
                 <ul class="nav navbar-nav navbar-left">
                     @if(!session('user_id'))
                         <li><a href="{{route('login_page')}}" class="smoothScroll">ورود/ثبت نام</a></li>
+                    @else
+                        <li><a href="/dashboard/profile" class="smoothScroll">داشبورد</a></li>
                     @endif
-<!--                    <li><a href="/" class="smoothScroll">صفحه ی اصلی</a></li>-->
+                <!--                    <li><a href="/" class="smoothScroll">صفحه ی اصلی</a></li>-->
+                        <li><a href="master/product-list" class="smoothScroll">لیست محصولات </a></li>
+                        <li><a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
+                        <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
                     <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
-                    <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
-                    <li><a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
-                    <li><a href="master/product-list" class="smoothScroll">لیست محصولات </a></li>
-
-
                     @if(session('user_id'))
-                            <li><a  href="/dashboard/profile" class="smoothScroll">داشبورد</a></li>
                         <li class="user-header-web">
-                            <div class="profile-menu-header"><a href="#" @click.prevent ="dropdown()">
+                            <div class="profile-menu-header"><a href="#" @click.prevent="dropdown()">
                                     <div class="image-header-profile">
                                         @if(session('profile_photo'))
                                             <img src="{{'storage/'  . session('profile_photo')}}">
@@ -144,80 +147,80 @@ NAVIGATION LINKS
     </div>
 
     @yield('main_content')
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <ul class="list-unstyled footer-list">
-                    <li>
-                        <a href="/privacy-and-policy">قوانین و مقررات</a>
-                    </li>
-                    <li>
-                        <a href="/about-us">درباره ما </a>
-                    </li>
-                    <li>
-                        <a href="/contact-us"> ارتباط با ما</a>
-                    </li>
-<!--
-                    <li>
-                        <a href="#">پروژه ها </a>
-                    </li>
--->
-<!--
-                    <li>
-                        <a href="/help"> راهنمای خریدار و فروشنده </a>
-                    </li>
--->
-                </ul>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <p>آدرس</p>
-                <p>شیراز ، بلوار جمهوری اسلامی، ساختمان مدیریت دانشگاه شیراز، برج نوآوری ، طبقه نهم
-                </p>
-                <br/>
-                <p>تماس با ما
-                </p>
-                <p>0911-841-3054 / 0917-892-8266
-                </p>
-            </div>
-<!--
-            <div class="col-xs-12 col-sm-6 col-md-4 enamad">
-                <img src="https://trustseal.enamad.ir/logo.aspx?id=110135&amp;p=e4AvUmJtRgJZ9BOl" alt="" onclick="window.open(&quot;https://trustseal.enamad.ir/Verify.aspx?id=110135&amp;p=e4AvUmJtRgJZ9BOl&quot;, &quot;Popup&quot;,&quot;toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30&quot;)" style="cursor:pointer" id="e4AvUmJtRgJZ9BOl">
-            </div>
--->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <ul class="list-unstyled footer-list">
+                        <li>
+                            <a href="/privacy-and-policy">قوانین و مقررات</a>
+                        </li>
+                        <li>
+                            <a href="/about-us">درباره ما </a>
+                        </li>
+                        <li>
+                            <a href="/contact-us"> ارتباط با ما</a>
+                        </li>
+                        <!--
+                                            <li>
+                                                <a href="#">پروژه ها </a>
+                                            </li>
+                        -->
+                        <!--
+                                            <li>
+                                                <a href="/help"> راهنمای خریدار و فروشنده </a>
+                                            </li>
+                        -->
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <p>آدرس</p>
+                    <p>شیراز ، بلوار جمهوری اسلامی، ساختمان مدیریت دانشگاه شیراز، برج نوآوری ، طبقه نهم
+                    </p>
+                    <br/>
+                    <p>تماس با ما
+                    </p>
+                    <p>0911-841-3054 / 0917-892-8266
+                    </p>
+                </div>
+                <!--
+                            <div class="col-xs-12 col-sm-6 col-md-4 enamad">
+                                <img src="https://trustseal.enamad.ir/logo.aspx?id=110135&amp;p=e4AvUmJtRgJZ9BOl" alt="" onclick="window.open(&quot;https://trustseal.enamad.ir/Verify.aspx?id=110135&amp;p=e4AvUmJtRgJZ9BOl&quot;, &quot;Popup&quot;,&quot;toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30&quot;)" style="cursor:pointer" id="e4AvUmJtRgJZ9BOl">
+                            </div>
+                -->
 
-
-        </div>
-    </div>
-</footer>
-<div class="footer-bottom">
-    <div class="container">
-        <div class="row">
-            <div class=" col-xs-12">
-                <ul class="social-icon">
-                    <li>
-                        <a href="#" class="fa fa-facebook wow "></a>
-                    </li>
-                    <li>
-                        <a href="#" class="fa fa-twitter wow "></a>
-                    </li>
-                    <li>
-                        <a href="#" class="fa fa-linkedin wow "></a>
-                    </li>
-                    <li>
-                        <a href="#" class="fa fa-google-plus wow " ></a>
-                    </li>
-                </ul>
-                <p class="wow" >تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.</p>
 
             </div>
         </div>
-    </div>
-</div>
+    </footer>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class=" col-xs-12">
+                    <ul class="social-icon">
+                        <li>
+                            <a href="#" class="fa fa-facebook wow "></a>
+                        </li>
+                        <li>
+                            <a href="#" class="fa fa-twitter wow "></a>
+                        </li>
+                        <li>
+                            <a href="#" class="fa fa-linkedin wow "></a>
+                        </li>
+                        <li>
+                            <a href="#" class="fa fa-google-plus wow "></a>
+                        </li>
+                    </ul>
+                    <p class="wow">تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.</p>
 
-<!-- end of app tag -->
-<!-- Back top -->
-<a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end of app tag -->
+    <!-- Back top -->
+    <a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
 
 </div>
 <!-- =========================
@@ -248,7 +251,6 @@ NAVIGATION LINKS
 </script>
 -->
 </body>
-
 
 
 </html>

@@ -295,7 +295,11 @@ footer {
 @media (min-width: 768px) {
     .content_service {
         font-size: 14px;
-    }
+    }.custom-navbar {
+         padding: 0;
+         border-bottom: 0;
+         background: #fff;
+     }
 
     .custom-navbar {
         border-bottom: 0;
@@ -1643,6 +1647,8 @@ img.image-blur:hover {
         width: 55%;
         background-size: 50%;
         background-position: 50% 50%;
+        background-repeat: no-repeat;
+
     }
     .user-header-mobile {
         display: block;
