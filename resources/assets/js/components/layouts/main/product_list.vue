@@ -491,7 +491,6 @@
         .profile-menu-header {
 
             padding: 3px;
-            padding-left: 3px;
             padding-left: 35px;
             float: left;
 

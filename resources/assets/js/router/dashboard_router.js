@@ -46,9 +46,6 @@ import buyerGuide from '../components/dashboard/buyer/guide.vue';
 
 
 import messages from '../components/dashboard/message'
-import mobileAccountsMessage from '../components/dashboard/mobile-accounts-message'
-import mobileShowMessage from '../components/dashboard/mobile-show-message'
-
 
 
 
@@ -149,21 +146,6 @@ const myRouter =  new Router({
             components: {
                 seller: sellerCompelementry,
                 buyer: buyerCompelementry,
-            },
-        },
-        {
-            path: '/dashboard/mobile-accounts',
-            name: 'mobileAccounts',
-            components: {
-                seller: mobileAccountsMessage,
-                buyer: mobileAccountsMessage,
-            },
-        },{
-            path: '/dashboard/mobile-show',
-            name: 'mobileShow',
-            components: {
-                seller: mobileShowMessage,
-                buyer: mobileShowMessage,
             },
         },
         {

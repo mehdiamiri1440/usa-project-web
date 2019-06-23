@@ -284,22 +284,18 @@ footer {
     }
 
     .top-nav-collapse .nav li a {
-        padding: 11px 5px;
+        padding: 11px 30px;
     }
 
     .custom-navbar .nav li a {
-        padding: 11px 5px;
+        padding: 11px 30px;
     }
 }
 
 @media (min-width: 768px) {
     .content_service {
         font-size: 14px;
-    }.custom-navbar {
-         padding: 0;
-         border-bottom: 0;
-         background: #fff;
-     }
+    }
 
     .custom-navbar {
         border-bottom: 0;
@@ -825,7 +821,7 @@ footer {
 #request .img-responsive {
     height: 190px;
 }
-#detail .detail-thumb, #request .detail-thumb {
+.detail-thumb {
     border-radius: 4px;
     background-color: #ffffff;
     box-shadow: 0 1px 2px 0 rgba(90, 91, 95, 0.15);
@@ -836,12 +832,11 @@ footer {
     margin-top: 32px;
 }
 
-#detail .detail-thumb:hover, #request .detail-thumb:hover {
+ .detail-thumb:hover {
     box-shadow: 0 16px 22px 0 rgba(90, 91, 95, 0.3);
     top: -5px;
 }
-
-#detail .detail-thumb .fa {
+ .detail-thumb .fa {
     font-size: 42px;
 }
 

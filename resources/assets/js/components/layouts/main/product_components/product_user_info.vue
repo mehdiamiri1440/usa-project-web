@@ -7,16 +7,12 @@
             <img :src="defultimg" class="image_defult">
         </div>
         <p v-if="user_info">{{user_full_name}}</p>
-        <!--        <a v-bind:href="'/master/profile/' + user_name" class="green_bot">
-                    مشاهده پروفایل
-                </a>-->
-
         <a v-if="isMyProfile" href="" class="green_bot delete-product"
-           @click.prevent="deleteProduct()"> حذف</a>
+           @click.prevent="deleteProduct()"> <span class="fa fa-trash"></span> حذف </a>
 
-        <a v-if="isMyProfile" :href=" '/master/profile/'+ user_name" class="green_bot edit-product hidden-xs"
-           @click="registerComponentStatistics('product','showUserProfile','show profile')">ویرایش </a>
-
+        <a v-if="isMyProfile" class="green_bot edit-product hidden-xs"  href="#" @click="openRequestRegisterBox($event)" >
+            <span class="fa fa-pencil"></span> ویرایش
+        </a>
 
         <a v-if="!isMyProfile" :href=" '/master/profile/'+ user_name" class="green_bot"
            @click="registerComponentStatistics('product','showUserProfile','show profile')">مشاهده پروفایل</a>

@@ -37,10 +37,10 @@ use App\Jobs\NotifyBuyersBySMS;
 /*Route::get('/help', function(){
     return view('index_pages.help');
 });*/
-
+/*
 Route::get('/p', function(){
     return view('index_pages.index_main');
-});
+});*/
 Route::group(['prefix' => 'master'],function (){
     Route::get('/', function () {
         return view('layout.master');
