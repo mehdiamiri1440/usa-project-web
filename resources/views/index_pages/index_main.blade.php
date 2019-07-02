@@ -74,7 +74,11 @@
             <div class="row">
                 <h3 class="text-center col-xs-12"> خرما</h3>
                 <div class="text-center col-xs-12">
+<<<<<<< HEAD
                     <a href="/product-list" class="green-bot">
+=======
+                    <a href="master/product-list" class="green-bot">
+>>>>>>> b3a08d78daa77c0dfd874bcd4bf8af887840d95d
                         مشاهده همه محصولات
                     </a>
                 </div>
@@ -84,7 +88,11 @@
                         <image-viewer
                                 :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                 :img="'storage/' + product.photos[0].file_path"
+<<<<<<< HEAD
                                 :link="'/product-list/' + product.main.sub_category_name"
+=======
+                                :link="'master/product-list/' + product.main.sub_category_name"
+>>>>>>> b3a08d78daa77c0dfd874bcd4bf8af887840d95d
                         >
                         </image-viewer>
                     </article>
@@ -103,7 +111,11 @@
             <div class="row">
                 <h3 class="text-center col-xs-12"> برنج</h3>
                 <div class="text-center col-xs-12">
+<<<<<<< HEAD
                     <a href="/product-list" class="green-bot">
+=======
+                    <a href="master/product-list" class="green-bot">
+>>>>>>> b3a08d78daa77c0dfd874bcd4bf8af887840d95d
                         مشاهده همه محصولات
                     </a>
                 </div>
@@ -113,7 +125,11 @@
                         <image-viewer
                                 :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                 :img="'storage/' + product.photos[0].file_path"
+<<<<<<< HEAD
                                 :link="'/product-list/' + product.main.sub_category_name"
+=======
+                                :link="'master/product-list/' + product.main.sub_category_name"
+>>>>>>> b3a08d78daa77c0dfd874bcd4bf8af887840d95d
                         >
                         </image-viewer>
                     </article>
@@ -254,6 +270,34 @@
         <div class="container">
             <div class="row">
                 <h3 class="text-center col-xs-12"> خرما</h3>
+<<<<<<< HEAD
+=======
+                <div class="text-center col-xs-12">
+                    <a href="master/product-list" class="green-bot">
+                        مشاهده همه محصولات
+                    </a>
+                </div>
+                <div class="owl-carousel col-xs-12">
+
+                    <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProducts">
+                        <image-viewer
+                                :title="product.main.sub_category_name + ' - ' + product.main.product_name"
+                                :img="'storage/' + product.photos[0].file_path"
+                                :link="'master/product-list/' + product.main.sub_category_name"
+                        >
+                        </image-viewer>
+                    </article>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section  class="parallax-section  hidden-xs">
+        <div class="container">
+            <div class="row">
+                <h3 class="text-center col-xs-12"> برنج</h3>
+>>>>>>> b3a08d78daa77c0dfd874bcd4bf8af887840d95d
                 <div class="text-center col-xs-12">
                     <a href="/product-list" class="green-bot">
                         مشاهده همه محصولات
@@ -348,7 +392,11 @@
                         <image-viewer
                                 :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                 :img="'storage/' + product.photos[0].file_path"
+<<<<<<< HEAD
                                 :link="'/product-list/' + product.main.sub_category_name"
+=======
+                                :link="'master/product-list/' + product.main.sub_category_name"
+>>>>>>> b3a08d78daa77c0dfd874bcd4bf8af887840d95d
                         >
                         </image-viewer>
                     </article>

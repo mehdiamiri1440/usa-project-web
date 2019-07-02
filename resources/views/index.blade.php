@@ -113,7 +113,9 @@ NAVIGATION LINKS
                         <li><a href="/dashboard/profile" class="smoothScroll">داشبورد</a></li>
                     @endif
                 <!--                    <li><a href="/" class="smoothScroll">صفحه ی اصلی</a></li>-->
+
                     <li><a href="/product-list" class="smoothScroll">لیست محصولات </a></li>
+
                     <li><a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
                     <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
                     <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
@@ -145,6 +147,7 @@ NAVIGATION LINKS
 
         </div>
     </div>
+
 
     @yield('main_content')
     <footer>
@@ -185,6 +188,7 @@ NAVIGATION LINKS
                     <ul class="social-icon">
                         <li>
                             <a href="https://www.instagram.com/incobac.ir/" class="fa fa-instagram wow "></a>
+<<<<<<< HEAD
                         </li>
                         <li>
                             <a href="https://t.me/Incobac" class="fa fa-telegram wow "></a>
@@ -196,6 +200,19 @@ NAVIGATION LINKS
                             <a href="https://twitter.com/incobac" class="fa fa-twitter wow "></a>
                         </li>
                         <li>
+=======
+                        </li>
+                        <li>
+                            <a href="https://t.me/Incobac" class="fa fa-telegram wow "></a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/company/27058131/ " class="fa fa-linkedin wow "></a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/incobac" class="fa fa-twitter wow "></a>
+                        </li>
+                        <li>
+>>>>>>> b3a08d78daa77c0dfd874bcd4bf8af887840d95d
                             <a href="https://www.facebook.com/incobac/" class="fa fa-facebook wow "></a>
                         </li>
                     </ul>

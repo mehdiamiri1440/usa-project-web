@@ -17,7 +17,6 @@
                      @click="registerComponentStatistics('product','showUserProfile','show profile')">
             مشاهده پروفایل
         </a>
-
         <div v-if="!isMyProfile" class="create_buy  hidden-xs">
             <a class="green_bot" href="#" @click.prevent="openChat()">
                 <span class="fa fa-comment"></span> ارسال پیام

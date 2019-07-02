@@ -2,6 +2,9 @@
     .green_bot.edit-product {
         background: #000546;
     }
+    .green_bot:focus {
+        color: #fff;
+    }
 
     .green_bot.edit-product:hover {
         background: #000430;

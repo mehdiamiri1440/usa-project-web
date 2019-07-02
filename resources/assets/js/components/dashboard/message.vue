@@ -694,6 +694,7 @@
                 var self = this;
                 if (self.contactNameSearchText != '') {
                      self.isSearchingContact = true;
+                     eventBus.$emit('submiting', true);
                     axios.post('/get_contact_list')
                         .then(function (response) {
                             self.contactList = response.data.contact_list;
@@ -721,8 +722,10 @@
                                             else return false;
                                         });
                                     });
-                                    console.log(self.contactList);
+
                                    self.isSearchingContact = false;
+                                    eventBus.$emit('submiting', false);
+
                                 })
                                 .catch(function (e) {
                                     alert('error');
