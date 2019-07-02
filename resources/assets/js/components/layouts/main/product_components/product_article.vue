@@ -58,7 +58,7 @@
 
     .buy_details {
         border-top: 2px solid #f0f3f6;
-        padding: 15px;
+        padding: 15px 0;
         margin: 15px auto;
         display: none;
     }
@@ -87,7 +87,6 @@
 
     .main-image {
         float: right;
-
     }
 
     .load-more-button a {
@@ -124,7 +123,28 @@
         margin-top: -15px;
     }
 
+    input[type="text"], select, textarea {
+        background: #eff3f6;
+        border: 1px solid #cfcfcf;
+        border-radius: 3px;
+        width: 100% !important;
+    }
+    input[type="text"], textarea {
+        padding: 13px 15px;
+    }
+    label {
+        display: block;
+        margin: 9px auto;
+    }
 
+    @media screen  and (max-width: 768px){
+        .buy_details {
+            padding: 15px 0;
+        }
+        .buy_details > div ,.main-image,.article-contents{
+            padding:  0;
+        }
+    }
 </style>
 
 <template>
@@ -146,7 +166,6 @@
             <div class="article-contents col-xs-12  col-sm-9 ">
                 <div class="main-image col-xs-12 col-sm-5">
                     <div class="owl-carousel" v-if="product.photos.length > 0">
-
                         <image-viewer-list @click="registerComponentStatistics('productImageViewer','click','popUp')"
                                            v-for="photo in product.photos"
                                            :key="photo.id"
@@ -171,60 +190,72 @@
                     <p>قیمت: <span>{{product.main.min_sale_price + ' - ' + product.main.max_sale_price}}
                                     تومان</span></p>
                     <p>توضیحات: <span>{{product.main.description}}</span></p>
-                </div>
-               <div class="row">
-                   <div class="create_buy_mobile hidden-sm hidden-md hidden-lg">
-                       <a v-if="!isMyProfile" class="green_bot" href="#" @click.prevent="openChat(product)">
-                           <span class="fa fa-comment"></span> ارسال پیام
-                       </a>
-                       <a v-if="isMyProfile" class="green_bot edit-product" href="#" @click.prevent="openChat(product)">
-                           <span class="fa fa-pencil"></span> ویرایش
-                       </a>
 
-                   </div>
-               </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="row">
 
-            </div>
-            <div class="buy_details form-group  col-xs-12">
-                <input type="hidden" id="product-id" :value="product.main.id">
-                <div class="col-xs-12 col-sm-6">
-                    <label for="requirement-amount" class="content-lable">
-                        مقدار مورد نیاز (کیلوگرم):
-                    </label>
-                    <input id="requirement-amount" placeholder="مقدار مورد نیاز" type="text"
-                           class=" form-control">
-                    <span class="text-danger" v-if="errors.requirement_amount">{{errors.requirement_amount[0]}}</span>
-                </div>
-                <div class="col-xs-12 col-sm-6">
-                    <label for="pack-type" class="content-lable">
-                        نوع بسته بندی:
-                    </label>
-                    <input id="pack-type" placeholder=" نوع بسته بندی" type="text" class=" form-control">
-                    <span class="text-danger" v-if="errors.pack_type">{{errors.pack_type[0]}}</span>
-                </div>
-                <div class="col-xs-12 ">
-                    <label for="description" class="content-lable">
-                        توضیحات:
-                    </label>
-                    <textarea id="description" rows="5" placeholder="ویژگی های لازم محصول را توضیح دهید..."
-                              class=" form-control"></textarea>
-                    <span class="text-danger" v-if="errors.description">{{errors.description[0]}}</span>
-                </div>
-                <div class="hidden-xs col-sm-8">
-                </div>
-                <div class="col-xs-12 col-sm-4">
-                    <button @click="registerRequest($event)" type="submit" style="border:none"
-                            class="green_bot">ثبت درخواست
-                    </button>
-                </div>
+                        <div class="create_buy_mobile hidden-sm hidden-md hidden-lg">
+                            <a v-if="!isMyProfile" class="green_bot" href="#" @click.prevent="openChat(product)">
+                                <span class="fa fa-comment"></span> ارسال پیام
+                            </a>
+                            <a v-if="isMyProfile" class="green_bot edit-product"  href="#" @click="openRequestRegisterBox($event)" >
+                                <span class="fa fa-pencil"></span> ویرایش
+                            </a>
 
+                        </div>
+                    </div>
+                </div>
+                <div class="buy_details form-group  col-xs-12">
+                    <input type="hidden" id="product-id" :value="product.main.id">
+                    <div class="col-xs-12 col-sm-6">
+                        <label for="requirement-amount" class="content-lable">
+                            مقدار مورد نیاز (کیلوگرم):
+                        </label>
+                        <input id="requirement-amount" placeholder="مقدار مورد نیاز" type="text"
+                               class=" form-control">
+                        <span class="text-danger" v-if="errors.requirement_amount">{{errors.requirement_amount[0]}}</span>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                       <div class="row">
+                           <div class="col-xs-6">
+                               <label for="max-price-input" class="content-lable">
+                                   حداکثر قیمت:
+                               </label>
+                               <input id="max-price-input" placeholder="حداکثر قیمت" type="text" class=" form-control">
+                               <span class="text-danger" v-if="errors.pack_type">{{errors.pack_type[0]}}</span>
+                           </div>
+                           <div class="col-xs-6">
+                               <label for="min-price-input" class="content-lable">
+                                   حداقل قیمت:
+                               </label>
+                               <input id="min-price-input" placeholder="حداقل قیمت" type="text" class=" form-control">
+                               <span class="text-danger" v-if="errors.pack_type">{{errors.pack_type[0]}}</span>
+                           </div>
+                       </div>
+                    </div>
+                    <div class="col-xs-12 ">
+                        <label for="description" class="content-lable">
+                            توضیحات:
+                        </label>
+                        <textarea id="description" rows="5" placeholder="ویژگی های لازم محصول را توضیح دهید..."
+                                  class=" form-control"></textarea>
+                        <span class="text-danger" v-if="errors.description">{{errors.description[0]}}</span>
+                    </div>
+                    <div class="hidden-xs col-sm-8">
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <button @click="registerRequest($event)" type="submit" style="border:none"
+                                class="green_bot">ثبت درخواست
+                        </button>
+                    </div>
+                </div>
             </div>
             <div class="loading_images  col-xs-12"
                  v-if="loading">
                 <img :src="loading_img" style="width:200px;height:200px">
             </div>
         </article>
-
     </div>
 </template>
 <script>
@@ -289,7 +320,7 @@
                 callbacks: {
                     open: function () {
                         if (!window.history.state) {
-                            window.history.pushState({pushed: true}, '', '/master/product-list');
+                            window.history.pushState({pushed: true}, '', '/product-list');
                         }
 
                         $(window).on('popstate', function (e) {

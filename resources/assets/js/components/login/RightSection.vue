@@ -1,5 +1,5 @@
 <template>
-    <div class="col-sm-4 right-section">
+    <div class="col-sm-4 hidden-xs  right-section">
         <h1>
             اینکوباک
         </h1>
@@ -19,3 +19,33 @@
         </ul>
     </div>
 </template>
+
+<style scoped>
+
+
+    .right-section {
+        background-size: cover;
+        height: 100%;
+        color: #f7f7f7;
+        text-align: center;
+        line-height: 1.618;
+        padding-top: 10px;
+    }
+
+    .right-section h1{
+        color: #f7f7f7;
+        margin: 0 auto;
+        padding: 15px;
+    }
+    .right-section ul{
+        list-style: inherit;
+        padding: 38px 25px 0 0;
+        text-align: right;
+    }
+    .right-section ul li{
+        padding: 10px 0;
+    }
+
+
+
+</style>

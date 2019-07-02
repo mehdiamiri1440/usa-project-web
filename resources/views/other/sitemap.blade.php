@@ -8,7 +8,7 @@
 
 
 <url>
-  <loc>{{url("master/product-list/")}}</loc>
+  <loc>{{url("/product-list/")}}</loc>
   <changefreq>daily</changefreq>
   <priority>1.0</priority>
 </url>
@@ -36,7 +36,7 @@
   <changefreq>daily</changefreq>
   <priority>0.5</priority>
 </url>
-    
+
 @foreach($user_names as $user_name)
     <url>
       <loc>{{url("master/profile/".$user_name->user_name)}}</loc>

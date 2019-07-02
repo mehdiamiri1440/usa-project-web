@@ -1,11 +1,17 @@
 <style scoped>
+    #wrap-footer {
+        display: none;
+    }
+
     .title_content .back_page.first-back {
         margin-top: 9px;
     }
-    .main-content-item{
+
+    .main-content-item {
         box-shadow: none;
     }
-    .valid-seller{
+
+    .valid-seller {
         font-size: 14px;
 
         color: #28a745;
@@ -17,45 +23,54 @@
         padding: 4px 8px 3px;
 
         position: relative;
-
+        display: inline-block;
         top: -3px;
     }
-    @media screen and (max-width: 767px){
-        .valid-seller{
+
+    @media screen and (max-width: 767px) {
+        .valid-seller {
             font-size: 12px;
 
         }
+
         .main-content-item {
             padding: 0;
         }
-        .user-contents .user-image,.user-contents p{
+
+        .user-contents .user-image, .user-contents p {
             float: right;
         }
+
         .user-contents p {
             padding: 15px;
             margin: 0;
             font-size: 14px;
             font-weight: 800;
         }
+
         .user-contents p:first-of-type {
-           padding-right: 0;
+            padding-right: 0;
         }
-        .user-contents .green_bot{
+
+        .user-contents .green_bot {
             float: left;
             width: initial;
             padding: 15px;
         }
     }
-    @media screen and (max-width: 500px){
+
+    @media screen and (max-width: 500px) {
         .user-contents .user-image {
             width: 50px;
             height: 50px;
         }
+
         .user-contents p {
             padding: 5px 0;
             width: 100%;
         }
-        .user-contents .green_bot{
+
+        .user-contents .green_bot {
             float: left;
             width: initial;
             padding: 15px;
@@ -76,10 +91,12 @@
                         <div class="image_user_wrapper col-xs-4">
                             <div class="user-image">
                                 <div v-if="profileOwner.profile.profile_photo">
-                                    <img v-bind:src=" str + '/' + profileOwner.profile.profile_photo" :alt="profileOwner.user_info.first_name + ' ' + profileOwner.user_info.last_name">
+                                    <img v-bind:src=" str + '/' + profileOwner.profile.profile_photo"
+                                         :alt="profileOwner.user_info.first_name + ' ' + profileOwner.user_info.last_name">
                                 </div>
                                 <div v-else>
-                                    <img :src="defultimg" class="image_defult" :alt="profileOwner.user_info.first_name + ' ' + profileOwner.user_info.last_name">
+                                    <img :src="defultimg" class="image_defult"
+                                         :alt="profileOwner.user_info.first_name + ' ' + profileOwner.user_info.last_name">
                                 </div>
                             </div>
                         </div>
@@ -110,15 +127,15 @@
                                             <i class="fa fa-pencil"></i>
                                             ویرایش پروفایل
                                         </a>
-                                        <a  v-else href="#" @click.prevent="openChat()" class="green_bot edit">
+                                        <a v-else href="#" @click.prevent="openChat()" class="green_bot edit">
                                             <i class="fa fa-comment"></i>
-                                                ارسال پیام
+                                            ارسال پیام
                                         </a>
                                     </div>
                                     <div v-else>
-                                        <a  href="#" @click.prevent="openChat()" class="green_bot edit">
+                                        <a href="#" @click.prevent="openChat()" class="green_bot edit">
                                             <i class="fa fa-comment"></i>
-                                                ارسال پیام
+                                            ارسال پیام
                                         </a>
                                     </div>
 
@@ -133,7 +150,9 @@
                             <div class="user-contents ">
                                 <div class="title_content col-xs-12">
                                     <div class="back_page first-back col-xs-12 col-sm-4">
-                                        <a href="javascript:history.back()" class="green_bot" @click="registerComponentStatistics('profileView','BackButton','click on back button');">بازگشت به صفحه قبل</a>
+                                        <a href="javascript:history.back()" class="green_bot"
+                                           @click="registerComponentStatistics('profileView','BackButton','click on back button');">بازگشت
+                                            به صفحه قبل</a>
 
                                     </div>
 
@@ -223,18 +242,18 @@
                         </div>
 
                     </div>
-                  <!--  <div class="info-section hidden-xs col-xs-12">
-                        <div class="contents-info-num  col-sm-3">
-                            <a href="#" class="btn btn-copy">
-                                <i class="fa fa-comment"></i> ارسال پیام
-                            </a>
-                        </div>
-                        <div class="contents-info col-sm-9">
-                            <p>
-                                جهت برقراری ارتباط با این فرد لطفا با کارشناسان اینکوباک تماس بگیرید.
-                            </p>
-                        </div>
-                    </div>-->
+                    <!--  <div class="info-section hidden-xs col-xs-12">
+                          <div class="contents-info-num  col-sm-3">
+                              <a href="#" class="btn btn-copy">
+                                  <i class="fa fa-comment"></i> ارسال پیام
+                              </a>
+                          </div>
+                          <div class="contents-info col-sm-9">
+                              <p>
+                                  جهت برقراری ارتباط با این فرد لطفا با کارشناسان اینکوباک تماس بگیرید.
+                              </p>
+                          </div>
+                      </div>-->
                     <div class="sub-header hidden-sm hidden-md hidden-lg  col-xs-12">
                         <div class="col-xs-6" :class="{'active':profileDescription}">
                             <a @click="
@@ -287,21 +306,23 @@
                             </p>
                             <div v-if="profileOwner.relateds[0]">
 
-                                    <popup-certificate
-                                            v-for="photo in profileOwner.relateds"
-                                            :key="photo.id"
-                                            class="ceteficate-image col-xs-6 hidden-sm hidden-md hidden-lg"
-                                            :base="str + '/'"
-                                            :img="photo">
-                                    </popup-certificate>
+                                <popup-certificate
+                                        v-for="photo in profileOwner.relateds"
+                                        :key="photo.id"
+                                        class="ceteficate-image col-xs-6 hidden-sm hidden-md hidden-lg"
+                                        :base="str + '/'"
+                                        :img="photo">
+                                </popup-certificate>
 
                                 <div class="owl-carousel hidden-xs">
-                                     <image-viewer @click="registerComponentStatistics('profileView','RelatedView','click on related photos');"
-                                             v-for="photo in profileOwner.relateds"
-                                             :key="photo.id"
-                                             :base="str + '/'"
-                                             :img="photo">
-                                     </image-viewer>-
+                                    <image-viewer
+                                            @click="registerComponentStatistics('profileView','RelatedView','click on related photos');"
+                                            v-for="photo in profileOwner.relateds"
+                                            :key="photo.id"
+                                            :base="str + '/'"
+                                            :img="photo">
+                                    </image-viewer>
+                                    -
                                 </div>
                             </div>
                             <div class="wrapper_no_pic" v-else>
@@ -319,12 +340,13 @@
                                     <a :href="'/' + str + '/' + photo"> <img :src="'/' + str + '/' + photo"/></a>
                                 </article>
                                 <div class="owl-carousel hidden-xs">
-                                           <image-viewer @click="registerComponentStatistics('profileView','CertificateView','click on certificate photos');"
-                                                         v-for="photo in profileOwner.certificates"
-                                                         :base="str + '/'"
-                                                         :key="photo.id"
-                                                         :img="photo">
-                                           </image-viewer>
+                                    <image-viewer
+                                            @click="registerComponentStatistics('profileView','CertificateView','click on certificate photos');"
+                                            v-for="photo in profileOwner.certificates"
+                                            :base="str + '/'"
+                                            :key="photo.id"
+                                            :img="photo">
+                                    </image-viewer>
                                 </div>
                             </div>
                             <div class="wrapper_no_pic" v-else>
@@ -519,7 +541,7 @@
                 profileDescription: true,
                 noProductMsgSignal: false,
                 loading: false,
-                isMyProfile:true,
+                isMyProfile: true,
                 popUpMsg: '',
                 submiting: '',
                 copyLinkText: '',
@@ -535,6 +557,11 @@
         },
 
         methods: {
+            loader: function () {
+                this.$nextTick(function () {
+                    eventBus.$emit('finishLoad', false);
+                });
+            },
             dropdown: function () {
                 $(".profile-list").fadeIn("slow", function () {
                     viz = true;
@@ -556,7 +583,7 @@
             init: function () {
                 var self = this;
 
-                if (this.isDeviceMobile()){
+                if (this.isDeviceMobile()) {
                     this.copyLinkText = ' اشتراک در واتساپ';
                     this.copyLinkClass = 'fa fa-whatsapp fa-2x';
                 }
@@ -568,35 +595,35 @@
                 axios.post('/get_user_statistics_by_user_name', {
                     user_name: this.$route.params.user_name,
                 })
-                .then(function (response) {
-                    self.profileOwnerStatistics = response.data.statistics;
-                })
-                .catch(function (err) {
-                    //
-                });
+                    .then(function (response) {
+                        self.profileOwnerStatistics = response.data.statistics;
+                    })
+                    .catch(function (err) {
+                        //
+                    });
 
                 axios.post('/user/profile_info')
-                .then(response => (this.currentUser = response.data));
-                
+                    .then(response => (this.currentUser = response.data));
+
                 axios.post('/load_profile_by_user_name', {
                     user_name: this.$route.params.user_name
                 })
-                .then(function (response) {
-                    self.profileOwner = response.data;
-                })
-                .catch(function (err) {
-                    if (err.response.status == 404) {
-                        window.location.href = '/404'
-                    }
-                });
-                
+                    .then(function (response) {
+                        self.profileOwner = response.data;
+                    })
+                    .catch(function (err) {
+                        if (err.response.status == 404) {
+                            window.location.href = '/404'
+                        }
+                    });
+
 //                axios.post('/increment_user_profile_visit_count',{
 //                    user_name:this.$route.params.user_name
 //                });
             },
             showProfileOwnerProducts: function (e) {
 
-                this.registerComponentStatistics('profileView','showUserProducts','click on show products');
+                this.registerComponentStatistics('profileView', 'showUserProducts', 'click on show products');
 
                 e.preventDefault();
                 this.profileDescription = false;
@@ -614,7 +641,7 @@
             },
             showProfileOwnerDescription: function (e) {
 
-                this.registerComponentStatistics('profileView','profileDescription','click on profile description');
+                this.registerComponentStatistics('profileView', 'profileDescription', 'click on profile description');
 
                 e.preventDefault();
                 this.profileDescription = true;
@@ -634,7 +661,7 @@
             },
             refreshProduct: function (productId) {
 
-                this.registerComponentStatistics('profileView','RefreshProduct','refresh product');
+                this.registerComponentStatistics('profileView', 'RefreshProduct', 'refresh product');
 
                 var self = this;
                 axios.post('/refresh_my_product_by_id', {
@@ -643,29 +670,28 @@
                     .then(function (response) {
                         if (response.data.status == true) {
                             self.popUpMsg = 'محصول شما بروز رسانی شد و در صدر لیست محصولات قرار گرفت.';
-                            eventBus.$emit('submitSuccess',self.popUpMsg);
+                            eventBus.$emit('submitSuccess', self.popUpMsg);
                             $('#myModal').modal('show');
                         }
                         else {
                             self.popUpMsg = 'هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.';
-                            eventBus.$emit('submitSuccess',self.popUpMsg);
+                            eventBus.$emit('submitSuccess', self.popUpMsg);
                             $('#myModal').modal('show');
                         }
                     })
                     .catch(function (err) {
                         self.popUpMsg = 'هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.';
-                        eventBus.$emit('submitSuccess',self.popUpMsg);
+                        eventBus.$emit('submitSuccess', self.popUpMsg);
                         $('#myModal').modal('show');
                     });
             },
             copyProfileLinkToClipBoard: function () {
-                console.log('copy');
-                this.registerComponentStatistics('profileView','CopyProfileLink','click on copy profile link');
+                this.registerComponentStatistics('profileView', 'CopyProfileLink', 'click on copy profile link');
 
                 if (this.isDeviceMobile()) {
 
                     var linkElement = document.createElement('a');
-                    var Message = "https://incobac.com/master/profile/" + this.profileOwner.user_info.user_name;
+                    var Message = "https://incobac.com/profile/" + this.profileOwner.user_info.user_name;
                     var messageToWhatsApp = encodeURIComponent(Message);
                     var url = "whatsapp://send?text=" + messageToWhatsApp;
                     linkElement.setAttribute('href', url);
@@ -679,14 +705,14 @@
                 }
                 else {
                     var input = document.createElement('input');
-                    input.setAttribute('value', 'https://incobac.com/master/profile/' + this.profileOwner.user_info.user_name);
+                    input.setAttribute('value', 'https://incobac.com/profile/' + this.profileOwner.user_info.user_name);
                     document.body.appendChild(input);
                     input.select();
                     var result = document.execCommand('copy');
                     document.body.removeChild(input);
                     if (result) {
                         this.popUpMsg = 'آدرس پروفایل کاربر کپی شد.';
-                        eventBus.$emit('submitSuccess',this.popUpMsg);
+                        eventBus.$emit('submitSuccess', this.popUpMsg);
                         $('#myModal').modal('show');
                     }
                 }
@@ -707,42 +733,44 @@
                     return false;
                 }
             },
-            openChat:function(){
+            openChat: function () {
 
-                this.registerComponentStatistics('profileView','openChat','click on open chatBox');
+                this.registerComponentStatistics('profileView', 'openChat', 'click on open chatBox');
 
                 var contact = {
-                    contact_id:this.profileOwner.user_info.id,
-                    first_name:this.profileOwner.user_info.first_name,
-                    last_name:this.profileOwner.user_info.last_name,
-                    profile_photo:this.profileOwner.profile.profile_photo,
-                    user_name:this.profileOwner.user_info.user_name,
+                    contact_id: this.profileOwner.user_info.id,
+                    first_name: this.profileOwner.user_info.first_name,
+                    last_name: this.profileOwner.user_info.last_name,
+                    profile_photo: this.profileOwner.profile.profile_photo,
+                    user_name: this.profileOwner.user_info.user_name,
                 }
 
-                if(this.currentUser){
-                    axios.post('/set_last_chat_contact',contact)
-                            .then(function(response){
-                                window.location.href = '/dashboard/messages';
-                            })
-                            .catch(function(e){
-                                alert('Error');
-                    });
+                if (this.currentUser) {
+                    axios.post('/set_last_chat_contact', contact)
+                        .then(function (response) {
+                            window.location.href = '/dashboard/messages';
+                        })
+                        .catch(function (e) {
+                            alert('Error');
+                        });
                 }
-                else{
+                else {
                     alert('ابتدا لاگین کنید');
                 }
             },
-            registerComponentStatistics:function(categoryName,actionName,labelName){
-                gtag('event',actionName,{
-                    'event_category' : categoryName,
-                    'event_label'    : labelName
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName, {
+                    'event_category': categoryName,
+                    'event_label': labelName
                 });
             }
 
         },
         mounted() {
             this.init();
-
+        },
+        updated: function () {
+            this.loader();
         },
         components: {
             'image-viewer': OwlCarousel,
@@ -752,63 +780,63 @@
             "product-article": productArticle,
         },
         created() {
-            gtag('config','UA-129398000-1',{'page_path': '/profile'});
+            gtag('config', 'UA-129398000-1', {'page_path': '/profile'});
 
             document.addEventListener('click', this.documentClick);
         },
-        metaInfo(){
+        metaInfo() {
             let fullName = this.profileOwner.user_info.first_name + ' ' + this.profileOwner.user_info.last_name;
 
-            let url = 'https://incobac.com/master/profile/' + this.profileOwner.user_info.user_name;
+            let url = 'https://incobac.com/profile/' + this.profileOwner.user_info.user_name;
 
             let profilePhoto = '';
-            if(this.profileOwner.profile.profile_photo){
+            if (this.profileOwner.profile.profile_photo) {
                 profilePhoto = this.str + '/' + this.profileOwner.profile.profile_photo;
             }
-            else{
+            else {
                 profilePhoto = this.defultimg;
             }
 
             return {
                 title: fullName,
-                titleTemplate:'اینکوباک | %s',
-                meta:[
-                    {name:'description', content:' محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید'},
+                titleTemplate: 'اینکوباک | %s',
+                meta: [
+                    {name: 'description', content: ' محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید'},
                     {
                         'property': 'og:type',
-                        'content' : 'website',
+                        'content': 'website',
                     },
                     {
-                        'property':'og:image:height',
-                        'content' : '256',
+                        'property': 'og:image:height',
+                        'content': '256',
                     },
                     {
-                        'property':'og:image:width',
-                        'content' : '256',
+                        'property': 'og:image:width',
+                        'content': '256',
                     },
                     {
-                        'property':'og:image:type',
-                        'content' : 'image/jpeg',
+                        'property': 'og:image:type',
+                        'content': 'image/jpeg',
                     },
                     {
-                        'property':'og:description',
-                        'content' : 'صفحه ی پروفایل کاربران اینکوباک'
+                        'property': 'og:description',
+                        'content': 'صفحه ی پروفایل کاربران اینکوباک'
                     },
                     {
-                        'property':'og:site_name',
-                        'content' : 'اینکوباک'
+                        'property': 'og:site_name',
+                        'content': 'اینکوباک'
                     },
                     {
-                        'property':'og:url',
-                        'content' : url
+                        'property': 'og:url',
+                        'content': url
                     },
                     {
-                        'property':'og:title',
-                        'content' : fullName
+                        'property': 'og:title',
+                        'content': fullName
                     },
                     {
-                        'property':'og:image',
-                        'content' : profilePhoto
+                        'property': 'og:image',
+                        'content': profilePhoto
                     }
 
                 ]

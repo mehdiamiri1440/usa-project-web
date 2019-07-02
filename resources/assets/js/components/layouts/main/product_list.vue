@@ -1,5 +1,8 @@
 <style scoped>
 
+    #wrap-footer{
+        display: none;
+    }
     .loading_images {
         padding-top: 115px;
     }
@@ -20,6 +23,7 @@
         padding: 0;
 
     }
+
 
     a.close-dialog-popup {
         display: block;
@@ -491,7 +495,6 @@
         .profile-menu-header {
 
             padding: 3px;
-            padding-left: 3px;
             padding-left: 35px;
             float: left;
 
@@ -527,10 +530,26 @@
 
     <div>
         <!--modal-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div class="container">
-            <div class="modal fade" id="searchFilter" tabindex="-1" ref="myModal" role="dialog"
-                 aria-labelledby="myModalLabel"
-                 aria-hidden="false">
+            <div class="modal" id="searchFilter" tabindex="-1" role="dialog" aria-labelledby="searchFilter">
 
                 <div class="modal-dialog">
 
@@ -556,6 +575,14 @@
             </div>
         </div>
 
+
+
+
+
+
+
+
+
         <div class="flat-plust-icon hidden-lg hidden-md">
             <a href="#" @click.prevent="addProductOrRequest()"><i class="fa fa-plus"></i> </a>
         </div>
@@ -573,6 +600,7 @@
                 <button class="btn-filter  hidden-lg hidden-md" data-toggle="modal" data-target="#searchFilter"> فیلتر
                     <i
                             class="fa fa-filter"></i></button>
+
             </div>
             <div class="links-sub-header  hidden-xs col-xs-12 col-sm-4 col-md-4">
                 <ul class="list-inline">
@@ -706,6 +734,10 @@
         ],
         data: function () {
             return {
+                currentUser: {
+                    profile: '',
+                    user_info: ''
+                },
                 products: {
                     main: '',
                     user_info: '',
@@ -731,6 +763,7 @@
                 loading: false,
                 bottom: false,
                 loadMoreActive: false,
+
             }
         },
         methods: {
@@ -814,9 +847,10 @@
             },
 
             registerRequestInSearchNotFoundCase: function () {
-                if (this.currentUser.profile) {
+
+               if (this.currentUser.profile) {
                     if (this.currentUser.user_info.is_buyer) {
-                        window.location.href = '/dashboard#/register-request';
+                        window.location.href = '/dashboard/register-request';
                     }
                     else {
                         this.popUpMsg = 'حساب کاربری شما از نوع خریدار نیست.';
@@ -893,6 +927,7 @@
                             });
                         });
                         eventBus.$emit('submiting', false);
+                        eventBus.$emit('finishLoad', false);
                     });
             },
 
@@ -917,6 +952,7 @@
         },
         mounted() {
             this.init();
+            eventBus.$emit('finishLoad', false);
         },
 //        metaInfo:{
 //            title:'لیست محصولات کشاورزی',

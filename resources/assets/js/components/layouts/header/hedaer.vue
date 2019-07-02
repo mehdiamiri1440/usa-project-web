@@ -1,7 +1,11 @@
 <style scoped>
     #DownloadApp {
         background: #fff;
-        padding-left:0 !important;
+        padding-left: 0 !important;
+    }
+
+    .green_bot:focus, .green_bot:hover {
+        color: #fff !important;
     }
 
     #DownloadApp .modal-dialog {
@@ -15,13 +19,15 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        padding:0;
+        padding: 0;
         width: calc(100% - 30px);
     }
+
     #DownloadApp .main_popup_content > div {
-        transform: translate(-50% ,-50%);
+        transform: translate(-50%, -50%);
     }
-    a.close-dialog-popup{
+
+    a.close-dialog-popup {
         display: block;
 
         padding: 15px;
@@ -34,25 +40,67 @@
 
         background: #000546;
     }
+
     .main_popup_content div > a {
 
         width: 150px;
         border: none;
         padding: 9px 0;
     }
+
     .main_popup_content div > a:first-of-type {
-        color:#fff;
-        background:#28a745;
+        color: #fff;
+        background: #28a745;
     }
+
     .main-logo-popup {
-        text-align:center;
+        text-align: center;
     }
-    .main-logo-popup img{
-        width:30%;
+
+    .main-logo-popup img {
+        width: 30%;
     }
+
+    .login-button {
+        background: #28a745;
+
+        border-radius: 3px;
+        transition: 300ms;
+        color: #fff !important;
+    }
+
+    .login-button:hover {
+        background: #279b41 !important;
+        transition: 300ms;
+
+    }
+
+    .custom-navbar .navbar-nav > li > a.login-button:focus {
+        background: #279b41 !important;
+        transition: 300ms;
+    }
+
+   @media  screen and (max-width: 768px){
+       ul.nav {
+           width: 100%;
+           text-align: center !important;
+           margin: 0;
+       }
+
+       #collapseHeader {
+           padding: 0;
+       }
+   }
 </style>
 <template>
     <div>
+        <div :class="{'loader-wrapper': !finishLoad , 'finish-loader-show' : finishLoad }">
+            <div class="main-loader">
+                <img :src="finish_load_img">
+            </div>
+        </div>
+
+
         <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
             <div class="main-loader">
                 <img :src="loading">
@@ -60,10 +108,8 @@
             </div>
         </div>
         <div class="container">
-            <div class="modal fade" id="myModal" tabindex="-1" ref="myModal" role="dialog"
-                 aria-labelledby="myModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog">
+            <div id="myModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
@@ -80,13 +126,10 @@
         </div>
 
         <div class="container">
-            <div class="modal fade" id="DownloadApp" tabindex="-1" ref="myModal" role="dialog"
-                 aria-labelledby="myModalLabel"
-                 aria-hidden="false">
+            <div id="DownloadApp" class="modal " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-lg" role="document">
 
-                <div class="modal-dialog">
-
-                    <a href="#"  class="close-dialog-popup" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                    <a href="#" class="close-dialog-popup" data-dismiss="modal"> <i class="fa fa-close"></i></a>
 
                     <div class="main_popup_content">
 
@@ -96,7 +139,7 @@
                                 <h1>اینکوباک</h1>
                             </div>
                             <p class="main_par">
-                               دانلود اپلیکیشن اندروید اینکوباک
+                                دانلود اپلیکیشن اندروید اینکوباک
                             </p>
                             <a href="#" class="btn green_bot " data-dismiss="modal" @click.prevent="doDownload()">
                                 دریافت اپلیکیشن
@@ -114,7 +157,7 @@
 
         <!-- Modal -->
         <div class="container">
-            <div class="modal fade" id="myModal2" tabindex="-1" ref="myModal" role="dialog"
+            <div class="modal" id="myModal2" tabindex="-1" ref="myModal" role="dialog"
                  aria-labelledby="myModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog">
@@ -124,9 +167,10 @@
                             <p class="main_par">
                                 {{this.popUpMsg}}
                             </p>
-                            <button class="btn  green_bot" @click="redirectToLogin()">
+                            <router-link :to="{name:'login'}" tag="button" class="btn  green_bot"
+                                         @click="redirectToLogin()">
                                 ورود/ثبت نام
-                            </button>
+                            </router-link>
                             <br/>
                             <br/>
                             <button class="btn green_bot " data-dismiss="modal">
@@ -168,7 +212,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="navbar-toggle" data-toggle="collapse" href="#collapseOne">
+                    <button class="navbar-toggle" data-toggle="collapse" href="#collapseHeader">
                         <span class="icon icon-bar"></span>
                         <span class="icon icon-bar"></span>
                         <span class="icon icon-bar"></span>
@@ -180,15 +224,30 @@
                     </p>
                 </div>
 
-                <div class="collapse navbar-collapse" id="collapseOne" aria-expanded="false">
-                    <ul class="nav navbar-nav navbar-left">
-                        <li v-if="user_id != ''"><a class="smoothScroll" :href="'/dashboard/profile'">داشبورد</a></li>
-                        <li><a href="/master/product-list" class="smoothScroll">لیست محصولات </a></li>
-                        <li><a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
-                        <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
-                        <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
+                <div class="collapse navbar-collapse" id="collapseHeader" aria-expanded="false">
+                    <ul class="nav navbar-nav navbar-left ">
+                        <li>
+                            <a class="smoothScroll" href="/">صفحه نخست</a>
+                        </li>
+                        <li v-if="user_id != ''">
+                            <a class="smoothScroll" href="/dashboard/profile">داشبورد</a>
+                        </li>
+                        <li>
+                            <a class="smoothScroll" href="/product-list">لیست محصولات</a>
+                        </li>
+                        <li>
+                            <a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a>
+                        </li>
+                        <li>
+                            <a class="smoothScroll" href="/privacy-and-policy">قوانین و مقررات</a>
+                        </li>
+                        <li>
 
-                        <li v-if="user_id == ''"><a :href=" login_page_path" class="smoothScroll">ورود/ثبت نام</a></li>
+                            <a class="smoothScroll" href="/about-us">درباره ما</a>
+                        </li>
+
+                        <li v-if="user_id == ''"><a href="/login" class="smoothScroll login-button">ورود/ثبت نام</a>
+                        </li>
 
 
                         <li v-if="user_id != ''" class="user-header-web hidden-xs">
@@ -229,7 +288,8 @@
         data() {
             return {
                 popUpMsg: '',
-                submiting: false
+                submiting: false,
+                finishLoad: true
             }
         },
         props: [
@@ -241,7 +301,8 @@
             'user_logout_path',
             'storage_path',
             'login_page_path',
-            'loading'
+            'loading',
+            'finish_load_img'
         ],
         methods: {
             dropdown: function () {
@@ -261,9 +322,9 @@
                     viz = false;
                 }
             },
-            redirectToLogin: function () {
+            /*redirectToLogin: function () {
                 window.location.href = '/login';
-            },
+            },*/
             isDeviceMobile: function () {
                 if (navigator.userAgent.match(/Android/i)
                     || navigator.userAgent.match(/webOS/i)
@@ -279,69 +340,70 @@
                     return false;
                 }
             },
-            getAndroidVersion:function(ua) {
+            getAndroidVersion: function (ua) {
                 ua = (ua || navigator.userAgent).toLowerCase();
                 var match = ua.match(/android\s([0-9\.]*)/);
                 return match ? match[1] : undefined;
             },
             // jQuery
-            jqUpdateSize:function() {
+            jqUpdateSize: function () {
                 // Get the dimensions of the viewport
                 var width = $(window).width();
                 if (width < 767) {
-                    $('#collapseOne a.smoothScroll').on('click', function () {
+                    $('#collapseHeader a.smoothScroll').on('click', function () {
                         $('.btn-navbar').click(); //bootstrap 2.x
                         $('.navbar-toggle').click(); //bootstrap 3.x by Richard
                         $('.navbar-toggler').click(); //bootstrap 4.x
                     });
                 }
             },
-            DownloadApp:function(){
+            DownloadApp: function () {
                 $('#DownloadApp').modal()
             },
-            doDownload:function(){
+            doDownload: function () {
                 //ga
-                this.registerComponentStatistics('download','app download btn','download app btn in popUp');
+                this.registerComponentStatistics('download', 'app download btn', 'download app btn in popUp');
                 // code here
-                Cookies.set('appDownloaded',true);
+                Cookies.set('appDownloaded', true);
                 window.location.href = '/storage/download/incobac.apk';
             },
-            isOsIOS:function(){
+            isOsIOS: function () {
                 var userAgent = window.navigator.userAgent.toLowerCase(),
-                safari = /safari/.test( userAgent ),
-                ios = /iphone|ipod|ipad/.test( userAgent );
+                    safari = /safari/.test(userAgent),
+                    ios = /iphone|ipod|ipad/.test(userAgent);
 
-                if( ios ) {
+                if (ios) {
                     return true
                 } else {
                     return false;
-                };
+                }
+                ;
             },
-            isUserFromWebView:function(){
+            isUserFromWebView: function () {
                 var self = this;
 
                 var androidVersion = parseInt(this.getAndroidVersion(), 10);
 
-                if( !this.isOsIOS() && androidVersion >= 5 ){
+                if (!this.isOsIOS() && androidVersion >= 5) {
                     axios.post('/is_user_from_webview')
-                        .then(function(response){
-                            if(response.data.is_webview == false){
+                        .then(function (response) {
+                            if (response.data.is_webview == false) {
                                 self.activateDownloadAppPopUp();
                             }
-                            else{
+                            else {
                                 //
                             }
-                    });
+                        });
                 }
 
 //                if( ! IsWebview(window.navigator.userAgent)){
 //                    this.activateDownloadAppPopUp();
 //                }
             },
-            activateDownloadAppPopUp:function(){
+            activateDownloadAppPopUp: function () {
                 this.jqUpdateSize();
-                if(this.isDeviceMobile() && !Cookies.get('appDownloaded')){
-                   setTimeout(this.DownloadApp, 5000);
+                if (this.isDeviceMobile() && !Cookies.get('appDownloaded')) {
+                    setTimeout(this.DownloadApp, 5000);
                 }
             },
             registerComponentStatistics: function (categoryName, actionName, labelName) {
@@ -360,14 +422,18 @@
             eventBus.$on("submiting", ($event) => {
                 this.submiting = $event;
             });
+            eventBus.$on("finishLoad", ($event) => {
+                this.finishLoad = $event;
+            });
 
-            $(document).ready(function(){
-                    self.isUserFromWebView();
+            $(document).ready(function () {
+                self.isUserFromWebView();
+
             });    // When the page first loads
             $(window).resize(this.jqUpdateSize);     // When the browser changes size
         },
         created() {
             document.addEventListener('click', this.documentClick);
-        },
+        }
     }
 </script>

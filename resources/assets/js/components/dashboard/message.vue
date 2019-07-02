@@ -1,5 +1,13 @@
 <style scoped>
 
+
+
+    .contact-is-search img {
+        display: block;
+        width: 60px;
+        margin: 18px auto;
+    }
+
     .check-items {
         padding-left: 10px;
         color: #00a65a;
@@ -158,7 +166,7 @@
 
     .contact-wrapper .contact-items {
         position: relative;
-        overflow: scroll;
+        /*overflow-y: scroll;*/
         height: calc(100% - 30px);
     }
 
@@ -403,7 +411,10 @@
                             </div>
                         </form>
                     </div>
-                    <div class="contact-items">
+                    <div v-if="isSearchingContact" class="contact-is-search">
+                        <img :src="loading"/>
+                    </div>
+                    <div v-else-if="!isSearchingContact && contactList" class="contact-items">
                         <ul>
                             <li class="contact-item" v-for="(contact,index) in contactList" :key="index">
                                 <a href="" @click.prevent="loadChatHistory(contact)">
@@ -415,13 +426,19 @@
                                     <span class="contact-name">{{contact.first_name + ' ' + contact.last_name}}</span>
                                     <div class="contact-date">
                                         <p class="count-number" v-if="contact.unread_msgs_count != 0">
-                                            {{contact.unread_msgs_count}}</p>
+                                            {{contact.unread_msgs_count}}
+                                        </p>
                                         <!--                                        <p>18:24 PM</p>-->
                                     </div>
                                 </a>
                             </li>
 
                         </ul>
+                    </div>
+                    <div v-else="contactList.length == 0" class="contact-not-found">
+                       <p>
+                       مخاطب یافت نشد
+                       </p>
                     </div>
                 </div>
             </div>
@@ -495,7 +512,8 @@
     export default {
         props: [
             'defimgitem',
-            'str'
+            'str',
+            'loading'
         ],
         data: function () {
             return {
@@ -505,7 +523,8 @@
                         url: 'messages',
                     }
                 ],
-                contactList: '',
+                isSearchingContact : false,
+                contactList: [],
                 chatMessages: '',
                 selectedContact: '',
                 currentUserId: '',
@@ -674,7 +693,7 @@
             contactNameSearchText: function () {
                 var self = this;
                 if (self.contactNameSearchText != '') {
-
+                     self.isSearchingContact = true;
                     axios.post('/get_contact_list')
                         .then(function (response) {
                             self.contactList = response.data.contact_list;
@@ -702,7 +721,8 @@
                                             else return false;
                                         });
                                     });
-
+                                    console.log(self.contactList);
+                                   self.isSearchingContact = false;
                                 })
                                 .catch(function (e) {
                                     alert('error');
