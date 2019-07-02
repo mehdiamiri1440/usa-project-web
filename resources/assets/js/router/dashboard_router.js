@@ -53,9 +53,21 @@ import productList from '../components/layouts/main/product_list'
 import productView from '../components/layouts/main/product_view'
 import indexPrivacyAndPolicy from '../components/layouts/main/privacy_and_policy'
 import indexAboutUs from '../components/layouts/main/about_us'
+import help from '../components/layouts/main/help'
+import contactUs from '../components/layouts/main/contact_us'
 import profile from '../components/layouts/main/profile'
-import indexHeader from '../components/layouts/header/hedaer'
-import indexFooter from '../components/layouts/footer/footer'
+
+
+// Login & Register Components
+import register from '../components/register/register'
+import login from '../components/login/Login'
+
+
+
+// Errors Components
+import notFound from '../components/errors/404'
+
+
 
 
 Vue.use(Router);
@@ -68,52 +80,66 @@ const myRouter =  new Router({
     base: process.env.BASE_URL,
     routes: [
         {
-            path: '/master/',
+            path: '/',
             name: 'indexPage',
             components: {
                 layouts: indexPage,
             },
         },
         {
-            path: '/master/profile/:user_name',
-            name: 'profile',
-            components: {
-                layouts: profile,
-            },
-        },
-        {
-            path: '/master/about-us',
+            path: '/about-us',
             name: 'aboutUs',
             components: {
                 layouts: indexAboutUs,
             },
         },
         {
-            path: '/master/privacy-and-policy',
+            path: '/help',
+            name: 'help',
+            components: {
+                layouts: help,
+            },
+        },
+        {
+            path: '/contact-us',
+            name: 'contactUs',
+            components: {
+                layouts: contactUs,
+            },
+        },
+        {
+            path: '/privacy-and-policy',
             name: 'privacyAndPolicy',
             components: {
                 layouts: indexPrivacyAndPolicy,
             },
         },
         {
-            path: '/master/product-list',
+            path: '/product-list',
             name: 'productList',
             components: {
                 layouts: productList,
             },
         },
-       /* {
-            path: '/master/product-list/:searchText',
+        {
+            path: '/product-view',
+            name: 'productView',
+            components: {
+                layouts: productView,
+            },
+        },
+        {
+            path: '/product-list/:searchText',
             name: 'productList',
             components: {
                 layouts: productList,
             },
-        },*/
+        },
         {
-            path: '/master/product-view',
-            name: 'productView',
+            path: '/profile/:user_name',
+            name: 'profile',
             components: {
-                layouts: productView,
+                layouts: profile,
             },
         },
       {
@@ -347,6 +373,35 @@ const myRouter =  new Router({
                 seller: sellerGuide,
                 buyer: buyerGuide,
             },
+        },
+        {
+            path: '/login',
+            name: 'login',
+            components: {
+                seller: login,
+                buyer: login,
+                layouts: login,
+            },
+        },
+        {
+            path: '/register',
+            name: 'register',
+            components: {
+                seller: register,
+                buyer: register,
+                layouts: register,
+            },
+        },
+        {
+            path: '/404',
+            name: 'notFound',
+            components: {
+                layouts: notFound,
+            },
+        },
+        {
+            path: '/*',
+            redirect: '/404'
         }
 
     ],

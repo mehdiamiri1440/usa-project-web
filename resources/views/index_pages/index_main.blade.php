@@ -43,9 +43,9 @@
 
                     </div>
                     <div class="col-xs-12">
-                        <a href="{{route('login_page')}}" class="btn btn-purple  smoothScroll wow fadeInUp"
+                        <a href="#" class="btn btn-purple  smoothScroll wow fadeInUp"
                            data-wow-delay="1.4s">ورود به سامانه</a>
-                        <a href="master/product-list" class="btn btn-green smoothScroll wow fadeInUp "
+                        <a href="/product-list" class="btn btn-green smoothScroll wow fadeInUp "
                            data-wow-delay="1.4s"> لیست محصولات</a>
                     </div>
                     <div class="col-xs-12">
@@ -74,7 +74,7 @@
             <div class="row">
                 <h3 class="text-center col-xs-12"> خرما</h3>
                 <div class="text-center col-xs-12">
-                    <a href="master/product-list" class="green-bot">
+                    <a href="/product-list" class="green-bot">
                         مشاهده همه محصولات
                     </a>
                 </div>
@@ -84,7 +84,7 @@
                         <image-viewer
                                 :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                 :img="'storage/' + product.photos[0].file_path"
-                                :link="'master/product-list/' + product.main.sub_category_name"
+                                :link="'/product-list/' + product.main.sub_category_name"
                         >
                         </image-viewer>
                     </article>
@@ -103,7 +103,7 @@
             <div class="row">
                 <h3 class="text-center col-xs-12"> برنج</h3>
                 <div class="text-center col-xs-12">
-                    <a href="master/product-list" class="green-bot">
+                    <a href="/product-list" class="green-bot">
                         مشاهده همه محصولات
                     </a>
                 </div>
@@ -113,7 +113,7 @@
                         <image-viewer
                                 :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                 :img="'storage/' + product.photos[0].file_path"
-                                :link="'master/product-list/' + product.main.sub_category_name"
+                                :link="'/product-list/' + product.main.sub_category_name"
                         >
                         </image-viewer>
                     </article>
@@ -255,7 +255,7 @@
             <div class="row">
                 <h3 class="text-center col-xs-12"> خرما</h3>
                 <div class="text-center col-xs-12">
-                    <a href="master/product-list" class="green-bot">
+                    <a href="/product-list" class="green-bot">
                         مشاهده همه محصولات
                     </a>
                 </div>
@@ -280,7 +280,7 @@
             <div class="row">
                 <h3 class="text-center col-xs-12"> برنج</h3>
                 <div class="text-center col-xs-12">
-                    <a href="master/product-list" class="green-bot">
+                    <a href="/product-list" class="green-bot">
                         مشاهده همه محصولات
                     </a>
                 </div>
@@ -290,7 +290,32 @@
                         <image-viewer
                                 :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                 :img="'storage/' + product.photos[0].file_path"
-                                :link="'master/product-list/' + product.main.sub_category_name"
+                                :link="'/product-list/' + product.main.sub_category_name"
+                        >
+                        </image-viewer>
+                    </article>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section  class="parallax-section  hidden-xs">
+        <div class="container">
+            <div class="row">
+                <h3 class="text-center col-xs-12"> برنج</h3>
+                <div class="text-center col-xs-12">
+                    <a href="/product-list" class="green-bot">
+                        مشاهده همه محصولات
+                    </a>
+                </div>
+                <div class="owl-carousel col-xs-12">
+
+                    <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProducts">
+                        <image-viewer
+                                :title="product.main.sub_category_name + ' - ' + product.main.product_name"
+                                :img="'storage/' + product.photos[0].file_path"
+                                :link="'/product-list/' + product.main.sub_category_name"
                         >
                         </image-viewer>
                     </article>
@@ -348,7 +373,7 @@
                         <image-viewer
                                 :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                 :img="'storage/' + product.photos[0].file_path"
-                                :link="'master/product-list/' + product.main.sub_category_name"
+                                :link="'/product-list/' + product.main.sub_category_name"
                         >
                         </image-viewer>
                     </article>

@@ -22,7 +22,9 @@ article, aside, details, figcaption, figure,
 footer, header, menu, nav, section {
     display: block;
 }
-
+.green_bot:focus,.green_bot:hover{
+    color: #fff !important;
+}
 body {
     line-height: 1.5em;
     font-family: IRANSans, sans-serif;
@@ -496,6 +498,8 @@ th, td {
     width: 100%;
     line-height: 21px;
     border: none;
+    /*max-width: 300px;*/
+
 }
 
 .green_bot:hover {
@@ -509,11 +513,12 @@ th, td {
 }
 
 .info_user_wrapper_mobile .green_bot.edit, .back_page > .green_bot.edit {
-    background: none;
-    border: 1px solid;
-    color: #000546;
+    background: #28a745;
+    color: #fff;
 }
-
+.green_bot.edit:hover{
+    background: #279b41;
+}
 .main_green_but {
     display: inline-block;
     background: #28a745;
@@ -544,6 +549,18 @@ th, td {
     float: left;
     padding: 8px 0;
 }
+
+.back_page a {
+    background: #000546;
+}
+.back_page a:hover {
+    background: #000461 !important;
+}
+
+.back_page a.edit:hover {
+    background: #279b41  !important;
+}
+
 
 .content_title {
     float: right;
@@ -582,12 +599,16 @@ th, td {
 }
 
 .btn {
-    color: #333;
-    border: 1px solid;
-    padding: 10px 30px;
+    margin: 3px 0;
+    padding: 4px 0;
+
+}
+.back_page  .btn.btn-copy {
     width: 100%;
+
 }
 
+/*
 .btn {
     color: #000;
     background: #eee;
@@ -597,6 +618,7 @@ th, td {
     margin: 3px auto;
     border-radius: 3px;
 }
+*/
 
 .content_user_wrapper_mobile {
     border-top: 1px solid #eee;

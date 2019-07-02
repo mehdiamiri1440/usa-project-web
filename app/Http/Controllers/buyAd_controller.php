@@ -192,7 +192,7 @@ class buyAd_controller extends Controller
             
 			if( ! session()->has('user_id'))
 			{
-				return redirect()->route('login_page');
+				return redirect('/login');
 			}
 			
 			$this->validate($request,[

@@ -82,6 +82,9 @@ a:focus {
     padding-bottom: 60px;
 }
 
+#testimonial {
+    background: url('../images/counter-back.jpg') ;
+}
 footer {
     text-align: center;
 }
@@ -292,68 +295,10 @@ footer {
     Intro section
 -----------------------------------------*/
 
+
 #intro {
     background: url('../../assets/img/hero-section.jpg') 50% 0 repeat-y fixed;
-    -webkit-background-size: cover;
-    background-size: cover;
-    background-position: center center;
-    color: #ffffff;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    padding: 100px 0 31px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
 }
-
-#intro h2 {
-    font-size: 32px;
-}
-
-#intro .gradient-overlay {
-    /*background: rgba(00, 00, 00, 0.1);*/
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-}
-
-#intro .btn {
-    background: transparent;
-    border: 3px solid #ffffff;
-    border-radius: 8px;
-    color: #ffffff;
-    font-size: 15px;
-    font-weight: 500;
-    padding: 10px 60px;
-    margin-right: 12px;
-    -webkit-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-    margin-bottom: 10px;
-}
-
-#intro .btn-purple {
-    background: rgba(0, 0, 85, 0.7);
-}
-
-#intro .btn-green {
-    background: rgba(20, 139, 0, 0.7);
-}
-
-#intro .btn-purple:hover {
-    background: rgba(0, 0, 85, 1);
-}
-
-#intro .btn-green:hover {
-    background: rgba(20, 139, 0, 1);
-}
-
 .btn-incobac {
     background: #3c9544;
     border-radius: 3px;

@@ -63,7 +63,9 @@
         padding: 7px;
         text-align: right;
     }
-
+    .green_bot:focus,.green_bot:hover{
+        color: #fff !important;
+    }
     /*start style right header*/
     .logo {
         height: 64px;

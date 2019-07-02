@@ -7,19 +7,31 @@
             <img :src="defultimg" class="image_defult">
         </div>
         <p v-if="user_info">{{user_full_name}}</p>
-        <a v-if="isMyProfileStatus" href="" class="green_bot delete-product"
+      
+<!--
+        <a v-if="!isMyProfileStatus" :href=" '/master/profile/'+ user_name" class="green_bot"
+           @click="registerComponentStatistics('product','showUserProfile','show profile')">مشاهده پروفایل</a>
+        
+-->
+        <div v-if="!isMyProfileStatus" class="create_buy  hidden-xs">
+            <a  :href="'/profile/' + user_name" class="green_bot"
+                         @click="registerComponentStatistics('product','showUserProfile','show profile')">
+                مشاهده پروفایل
+            </a>
+            <div  class="create_buy  hidden-xs">
+                <a class="green_bot" href="#" @click.prevent="openChat()">
+                    <span class="fa fa-comment"></span> ارسال پیام
+                </a>
+            </div>
+        </div>
+        <div v-else class="create_buy  hidden-xs">
+              <a  href="" class="green_bot delete-product"
            @click.prevent="deleteProduct()"> <span class="fa fa-trash"></span> حذف </a>
 
-        <a v-if="isMyProfileStatus" class="green_bot edit-product hidden-xs"  href="#" @click.prevent="openEditBox($event)" >
+        <a class="green_bot edit-product hidden-xs"  href="#" @click.prevent="openEditBox($event)" >
             <span class="fa fa-pencil"></span> ویرایش
         </a>
 
-        <a v-if="!isMyProfileStatus" :href=" '/master/profile/'+ user_name" class="green_bot"
-           @click="registerComponentStatistics('product','showUserProfile','show profile')">مشاهده پروفایل</a>
-        <div v-if="!isMyProfileStatus" class="create_buy  hidden-xs">
-            <a class="green_bot" href="#" @click.prevent="openChat()">
-                <span class="fa fa-comment"></span> ارسال پیام
-            </a>
         </div>
     </div>
 </template>
