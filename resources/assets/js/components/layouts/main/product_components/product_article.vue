@@ -2,6 +2,9 @@
     .green_bot.edit-product {
         background: #000546;
     }
+    .green_bot:focus {
+        color: #fff;
+    }
 
     .green_bot.edit-product:hover {
         background: #000430;
@@ -58,13 +61,14 @@
 
     .buy_details {
         border-top: 2px solid #f0f3f6;
-        padding: 15px;
+        padding: 15px 0;
         margin: 15px auto;
         display: none;
     }
 
     .buy_details > div {
         margin: 7px auto;
+        float: right;
     }
 
     .image-wrapper img {
@@ -87,7 +91,6 @@
 
     .main-image {
         float: right;
-
     }
 
     .load-more-button a {
@@ -124,29 +127,47 @@
         margin-top: -15px;
     }
 
+    input[type="text"], select, textarea {
+        background: #eff3f6;
+        border: 1px solid #cfcfcf;
+        border-radius: 3px;
+        width: 100% !important;
+    }
+    input[type="text"], textarea {
+        padding: 13px 15px;
+    }
+    label {
+        display: block;
+        margin: 9px auto;
+    }
 
+    @media screen  and (max-width: 768px){
+        .buy_details {
+            padding: 15px 0;
+        }
+        .main-image,.article-contents{
+            padding:  0;
+        }
+    }
 </style>
 
 <template>
     <div>
-        <article class="main-content-item" v-for="(product,productIndex) in products"
-                 :key="product.main.id">
+        <article class="main-content-item" >
             <product-user-info
                     :profile_photo="product.profile_info.profile_photo"
                     :user_info="product.user_info"
                     :user_full_name="product.user_info.first_name + ' ' +
             product.user_info.last_name"
-                    :product_owner_id="product.main.myuser_id"
+                    :isMyProfileStatus="isMyProfile"
                     :user_name="product.user_info.user_name"
                     :defultimg="defultimg"
                     :current_user="currentUser"
-                    v-on:isMyProfile="isMyProfileFunction($event)"
                     :product_id="product.main.id"
             ></product-user-info>
             <div class="article-contents col-xs-12  col-sm-9 ">
                 <div class="main-image col-xs-12 col-sm-5">
                     <div class="owl-carousel" v-if="product.photos.length > 0">
-
                         <image-viewer-list @click="registerComponentStatistics('productImageViewer','click','popUp')"
                                            v-for="photo in product.photos"
                                            :key="photo.id"
@@ -168,63 +189,84 @@
                         <span>{{product.main.province_name + ' - ' + product.main.city_name}}</span>
                     </p>
                     <p>مقدار موجودی: <span>{{product.main.stock}} کیلوگرم</span></p>
+                    <p>حداقل میزان سفارش: <span>{{product.main.min_sale_amount}} کیلوگرم</span></p>
                     <p>قیمت: <span>{{product.main.min_sale_price + ' - ' + product.main.max_sale_price}}
                                     تومان</span></p>
                     <p>توضیحات: <span>{{product.main.description}}</span></p>
-                </div>
-               <div class="row">
-                   <div class="create_buy_mobile hidden-sm hidden-md hidden-lg">
-                       <a v-if="!isMyProfile" class="green_bot" href="#" @click.prevent="openChat(product)">
-                           <span class="fa fa-comment"></span> ارسال پیام
-                       </a>
-                       <a v-if="isMyProfile" class="green_bot edit-product" href="#" @click.prevent="openChat(product)">
-                           <span class="fa fa-pencil"></span> ویرایش
-                       </a>
 
-                   </div>
-               </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="create_buy_mobile hidden-sm hidden-md hidden-lg">
+                            <a v-if="!isMyProfile" class="green_bot" href="#" @click.prevent="openChat(product)">
+                                <span class="fa fa-comment"></span> ارسال پیام
+                            </a>
+                            <a v-if="isMyProfile" class="green_bot edit-product"  href="#" @click.prevent="openEditBox($event)" >
+                                <span class="fa fa-pencil"></span> ویرایش
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="buy_details form-group  col-xs-12">
+                    <input type="hidden" id="product-id" :value="product.main.id">
+                    <div class="col-xs-12 col-sm-6">
+                        <label for="stock" class="content-lable">
+                            مقدار موجودی (کیلوگرم):
+                        </label>
+                        <input id="stock" placeholder="مقدار موجودی" type="text" :value="product.main.stock"
+                               class=" form-control">
+                        <span class="text-danger" v-if="errors.stock">{{errors.stock[0]}}</span>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <label for="min-sale-amount" class="content-lable">
+                            حداقل میزان سفارش:
+                        </label>
+                        <input id="min-sale-amount" placeholder="حداقل میزان سفارش" type="text" :value="product.main.min_sale_amount"
+                               class="form-control">
+                        <span class="text-danger" v-if="errors.min_sale_amount">{{errors.min_sale_amount[0]}}</span>
+                    </div>
+                                
+                    
+                    <div class="col-xs-12 col-sm-6">
+                       <label for="min-sale-price" class="content-lable">
+                                   حداقل قیمت:
+                               </label>
+                               <input id="min-sale-price" placeholder="حداقل قیمت" type="text" :value="product.main.min_sale_price" class=" form-control">
+                               <span class="text-danger" v-if="errors.min_sale_price">{{errors.min_sale_price[0]}}</span>
+                        
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                       
+                               <label for="max-sale-price" class="content-lable">
+                                   حداکثر قیمت:
+                               </label>
+                               <input id="max-sale-price" placeholder="حداکثر قیمت" type="text" :value="product.main.max_sale_price" class=" form-control">
+                               <span class="text-danger" v-if="errors.max_sale_price">{{errors.max_sale_price[0]}}</span>
+                         
+                    </div>
 
-            </div>
-            <div class="buy_details form-group  col-xs-12">
-                <input type="hidden" id="product-id" :value="product.main.id">
-                <div class="col-xs-12 col-sm-6">
-                    <label for="requirement-amount" class="content-lable">
-                        مقدار مورد نیاز (کیلوگرم):
-                    </label>
-                    <input id="requirement-amount" placeholder="مقدار مورد نیاز" type="text"
-                           class=" form-control">
-                    <span class="text-danger" v-if="errors.requirement_amount">{{errors.requirement_amount[0]}}</span>
+                    <div class="col-xs-12 ">
+                        <label for="description" class="content-lable">
+                            توضیحات:
+                        </label>
+                        <textarea id="description" rows="5" placeholder="ویژگی های لازم محصول را توضیح دهید..." :value="product.main.description"
+                                  class=" form-control"></textarea>
+                        <span class="text-danger" v-if="errors.description">{{errors.description[0]}}</span>
+                    </div>
+                    <div class="hidden-xs col-sm-8">
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <button @click="editProduct($event)" type="submit" style="border:none"
+                                class="green_bot">ثبت ویرایش
+                        </button>
+                    </div>
                 </div>
-                <div class="col-xs-12 col-sm-6">
-                    <label for="pack-type" class="content-lable">
-                        نوع بسته بندی:
-                    </label>
-                    <input id="pack-type" placeholder=" نوع بسته بندی" type="text" class=" form-control">
-                    <span class="text-danger" v-if="errors.pack_type">{{errors.pack_type[0]}}</span>
-                </div>
-                <div class="col-xs-12 ">
-                    <label for="description" class="content-lable">
-                        توضیحات:
-                    </label>
-                    <textarea id="description" rows="5" placeholder="ویژگی های لازم محصول را توضیح دهید..."
-                              class=" form-control"></textarea>
-                    <span class="text-danger" v-if="errors.description">{{errors.description[0]}}</span>
-                </div>
-                <div class="hidden-xs col-sm-8">
-                </div>
-                <div class="col-xs-12 col-sm-4">
-                    <button @click="registerRequest($event)" type="submit" style="border:none"
-                            class="green_bot">ثبت درخواست
-                    </button>
-                </div>
-
             </div>
             <div class="loading_images  col-xs-12"
                  v-if="loading">
                 <img :src="loading_img" style="width:200px;height:200px">
             </div>
         </article>
-
     </div>
 </template>
 <script>
@@ -257,8 +299,8 @@
         }
     };
     var OwlCarouselLists = {
-        data: function () {
-            return {
+        data: function (){
+            return{
                 imgSrcs: '',
             };
         },
@@ -304,7 +346,7 @@
 
     export default {
         props: [
-            'products',
+            'product',
             'defultimg',
             'str',
             'loading',
@@ -314,14 +356,14 @@
         data: function () {
             return {
                 submiting: false,
-                errors: '',
+                errors: [],
                 currentUser: {
                     profile: '',
                     user_info: ''
                 },
                 popUpMsg: '',
                 popUpLoaded: false,
-                product:this.products,
+            
                 isMyProfile:false
             }
         },
@@ -332,12 +374,27 @@
         },
         methods: {
             init: function () {
+                var self = this;
                 axios.post('/user/profile_info')
-                    .then(response => (this.currentUser = response.data));
+                .then(response => (this.currentUser = response.data));
+                var self = this;
+            
+                axios.post('/user/profile_info')
+                    .then(function (response) {
+                        self.currentUser = response.data;
+                        if (self.currentUser.user_info){
+                            if (self.currentUser.user_info.id === self.product.main.myuser_id) {
+                                console.log('product ' + self.product.main.myuser_id);
+                                console.log('user '+ self.currentUser.user_info.id);
+                                self.isMyProfile = true;
+                            }
+                        }
+                        
+                    });
 
             },
             isMyProfileFunction:function(event){
-                this.isMyProfile = event;
+                this.isMyProfile = true;
             },
             toLatinNumbers: function (num) {
                 if (num == null) {
@@ -372,16 +429,17 @@
 
                 return product[0];
             },
-            openRequestRegisterBox: function (e) {
+            openEditBox: function (e) {
                 if (this.currentUser.profile) {
                     e.preventDefault;
                     var event = $(e.target);
-
                     this.errors = '';
+     
+                    this.registerComponentStatistics('product', 'click', 'request register button');
 
-                    var index = (event.parents('article').index() + 1);
-                    var element = $('article:nth-of-type(' + index + ') .buy_details');
-                    element.slideToggle("125", "swing");
+                   var element = (event.parents('article').find('.buy_details'));
+                
+                    element.slideToggle("125", "swing")
                     $('.buy_details').not(element).slideUp();
 
                     this.scrollToTheRequestRegisterBox(element);
@@ -397,70 +455,53 @@
                 var newPosition = $(element).offset();
                 $('html, body').stop().animate({scrollTop: newPosition.top - 380}, 1000);
             },
-            registerRequest: function (e) {
+            editProduct: function (e){
                 e.preventDefault;
                 var event = $(e.target);
-
 
                 this.submiting = true;
 
                 this.errors = '';
+                
+                var element = (event.parents('article').find('.buy_details'));
+                var productId = (event.parents('article').find('.buy_details input#product-id'));
+                var minSalePrice = (event.parents('article').find('.buy_details input#min-sale-price'));
+                var maxSalePrice = (event.parents('article').find('.buy_details input#max-sale-price'));
+                var minSaleAmount = (event.parents('article').find('.buy_details input#min-sale-amount'));
+                var stock = (event.parents('article').find('.buy_details input#stock'));
+                var description = (event.parents('article').find('.buy_details textarea#description'));
+            
 
-                var index = (event.parents('article').index() + 1);
-                var productId = $('article:nth-of-type(' + index + ') .buy_details input#product-id');
-                var requirementAmount = $('article:nth-of-type(' + index + ') .buy_details input#requirement-amount');
-                var packType = $('article:nth-of-type(' + index + ') .buy_details input#pack-type');
-                var description = $('article:nth-of-type(' + index + ') .buy_details textarea#description');
-
+                productId = this.toLatinNumbers(productId.val());
+                minSalePrice = this.toLatinNumbers(minSalePrice.val());
+                maxSalePrice = this.toLatinNumbers(maxSalePrice.val());
+                minSaleAmount = this.toLatinNumbers(minSaleAmount.val());
+                stock = this.toLatinNumbers(stock.val());
                 description = description.val();
-                requirementAmount = this.toLatinNumbers(requirementAmount.val());
-                packType = packType.val();
-                productId = productId.val();
-
-                var product = this.getProductById(productId);
-
+                
                 var request = {
-                    requirement_amount: requirementAmount,
-                    category_id: product.main.sub_category_id,
-                    pack_type: packType,
-                    description: description,
+                    product_id: productId,
+                    stock: stock,
+                    min_sale_price: minSalePrice,
+                    max_sale_price: maxSalePrice,
+                    min_sale_amount: minSaleAmount
                 };
-
-                if (product.main.product_name) {
-                    request.name = product.main.product_name;
+                
+                if(description != ''){
+                    request.description = description;
                 }
 
                 var self = this;
-                //check if product_id there isn't in user product request list
-                axios.post('/does_buyer_already_had_requested_the_produtct', {
-                    product_id: productId,
+                //send data
+                axios.post('/edit_product',request)
+                    .then(function(response){
+                        alert('done');
                 })
-                    .then(function (response) {
-
-                        if (response.data.status == false) {
-                            self.RegisterBuyAdRequest(request, productId);
-                            self.submiting = false;
-                        }
-                        else {
-                            self.popUpMsg = 'شما قبلا درخواست خرید این محصول را ثبت کرده اید!';
-                            eventBus.$emit('submitSuccess', self.popUpMsg);
-                            $('#myModal').modal('show');
-                            self.submiting = false;
-
-                            return false;
-                        }
-                    })
-                    .catch(function (e) {
-                        self.popUpMsg = 'حساب کاربری شما از نوع خریداران نیست!';
-                        eventBus.$emit('submitSuccess', self.popUpMsg);
-                        $('#myModal').modal('show');
-
-                        self.submiting = false;
-
-                        return false;
-                    });
-
-
+                .catch(function(err){
+                    self.errors = [];
+                    self.errors = err.response.data.errors;
+//                    console.log(errors);
+                });
             },
             RegisterBuyAdRequest: function (request, productId) {
                 var self = this;
@@ -481,12 +522,13 @@
                         self.errors = err.response.data.errors;
                     });
             },
-            formBut: function (link) {
-                $index = ($(link).parents('article').index() + 1);
-                $element = $('article:nth-of-type(' + $index + ') .buy_details');
-                $element.slideToggle("125", "swing");
-                $('.buy_details').not($element).slideUp();
-            },
+//            formBut: function (link) {
+//                
+//                var element = (event.parents('article').find('.buy_details'));
+//            
+//                element.slideToggle("125", "swing");
+//                $('.buy_details').not(element).slideUp();
+//            },
             openChat: function (product) {
 
                 this.registerComponentStatistics('product', 'openChat', 'click on open chatBox');
@@ -533,6 +575,7 @@
             },
         },
         mounted() {
+
             this.init();
 
         }

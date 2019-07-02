@@ -8,6 +8,3 @@ function trElement(element){
     }
 
 }
-$(document).ready(function () {
-
-});

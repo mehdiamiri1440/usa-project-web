@@ -674,7 +674,7 @@
             contactNameSearchText: function () {
                 var self = this;
                 if (self.contactNameSearchText != '') {
-
+                     eventBus.$emit('submiting', true);
                     axios.post('/get_contact_list')
                         .then(function (response) {
                             self.contactList = response.data.contact_list;
@@ -702,7 +702,7 @@
                                             else return false;
                                         });
                                     });
-
+                                    eventBus.$emit('submiting', false);
                                 })
                                 .catch(function (e) {
                                     alert('error');

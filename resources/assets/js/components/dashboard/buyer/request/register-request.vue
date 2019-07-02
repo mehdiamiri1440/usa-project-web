@@ -372,7 +372,7 @@
     </section>
 </template>
 <script>
-    import buyAdFiles from '../upload-image'
+    import buyAdFiles from '../../upload-image'
     import {eventBus} from "../../../../router/dashboard_router";
   export default {
       components:{

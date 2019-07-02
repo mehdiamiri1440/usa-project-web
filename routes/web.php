@@ -34,13 +34,13 @@ use App\Jobs\NotifyBuyersBySMS;
     return view('payment.external_url_payment_callback');
 });*/
 
-/*Route::get('/help', function(){
+Route::get('/help', function(){
     return view('index_pages.help');
-});*/
-
+});
+/*
 Route::get('/p', function(){
     return view('index_pages.index_main');
-});
+});*/
 Route::group(['prefix' => 'master'],function (){
     Route::get('/', function () {
         return view('layout.master');
@@ -53,8 +53,8 @@ Route::group(['prefix' => 'master'],function (){
 });
 
 Route::get('/', function(){
-    return redirect('/master/product-list');
-//    return view('index_pages.index_main');
+//    return redirect('/master/product-list');
+    return view('index_pages.index_main');
 });
 
 //Route::get('/', function(){
@@ -602,6 +602,11 @@ Route::group(['middleware' => [login::class]],function(){
     Route::post('/is_allowed_to_access_buyAd_requests',[
         'uses' => 'buyAd_controller@is_user_allowed_to_access_buyAd_requests',
         'as' => 'is_allowed_to_access_buyAd_requests'
+    ]);
+    
+    Route::post('/edit_product',[
+        'uses' => 'product_controller@edit_product_by_id',
+        'as'   => 'edit_product_by_id'
     ]);
 
 });

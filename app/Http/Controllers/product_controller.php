@@ -523,7 +523,7 @@ class product_controller extends Controller
         }		
 	}
     
-    protected function is_the_user_the_product_owner($user_id,$product)
+    protected function is_the_user_the_product_owner($user_id,&$product)
     {
         if($product->myuser_id == $user_id)
         {
@@ -782,5 +782,56 @@ class product_controller extends Controller
         
         return false;
     }
+    
+    public function edit_product_by_id(Request $request)
+    {
+        $this->validate($request,[
+            'product_id' => 'required|integer|min:1',
+            'min_sale_price' => 'required|integer|min:0',
+            'max_sale_price' => 'required|integer|min:1',
+            'min_sale_amount' => 'required|integer|min:1',
+            'stock' => 'required|integer:min:1',
+            'description' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u',
+        ]);
+        
+        $product_id = $request->product_id;
+        $user_id = session('user_id');
+        
+        $product = product::find($product_id);
+        
+        if($product){
+            if($this->is_the_user_the_product_owner($user_id,$product)){
+                $data = [
+                    'min_sale_price' => $request->min_sale_price,
+                    'max_sale_price' => $request->max_sale_price,
+                    'min_sale_amount' => $request->min_sale_amount,
+                    'stock' => $request->stock,
+                    'description' => $request->description,
+                ];
+
+                DB::table('products')
+                        ->where('id',$product_id)
+                        ->update($data);
+
+                return response()->json([
+                    'status' => true,
+                    'msg' => 'ویرایش با موفقیت انجام شد'
+                ],200);
+            }
+            else{
+                return response()->json([
+                    'status' => false,
+                    'msg' => 'شما مجاز به انجام این عملیات نیستید.'
+                ]);
+            }
+        }
+        else{
+            return response()->json([
+                'status' => false,
+                'msg' => 'محصول مورد نظر یافت نشد.'
+            ],404);
+        }
+    }
+        
 	
 }

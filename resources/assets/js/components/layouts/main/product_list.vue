@@ -491,35 +491,11 @@
         .profile-menu-header {
 
             padding: 3px;
-            padding-left: 3px;
             padding-left: 35px;
             float: left;
 
         }
 
-        /*.user-contents > p {
-
-            float: none;
-            font-size: inherit;
-            padding-top: 0;
-            padding-right: 0;
-
-        }
-        .user-image {
-
-            float: none;
-            width: 60px;
-            height: 60px;
-
-        }
-        .user-contents > .green_bot {
-
-            float: none;
-            width: initial;
-            padding: 10px 17px;
-            margin-top: 11px;
-
-        }*/
     }
 
 </style>
@@ -547,7 +523,6 @@
                                         :provinceId="provinceId"
                                         :cityId="cityId"
                                         v-on:productsToParent="filterProducts($event)">
-
                                 </product-aside-categories>
                             </div>
                         </div>
@@ -571,8 +546,7 @@
 
                 <button class="btn-search"><i class="fa-search fa"></i></button>
                 <button class="btn-filter  hidden-lg hidden-md" data-toggle="modal" data-target="#searchFilter"> فیلتر
-                    <i
-                            class="fa fa-filter"></i></button>
+                    <i class="fa fa-filter"></i></button>
             </div>
             <div class="links-sub-header  hidden-xs col-xs-12 col-sm-4 col-md-4">
                 <ul class="list-inline">
@@ -597,7 +571,6 @@
                         :provinceId="provinceId"
                         :cityId="cityId"
                         v-on:productsToParent="filterProducts($event)">
-
                 </product-aside-categories>
             </div>
         </aside>
@@ -607,8 +580,9 @@
 
             <section class="main-content col-xs-12" v-if="products.length > 0">
                 <div class="row">
-                    <product-article
-                            :products="products"
+                    <product-article v-for="(product,productIndex) in products"
+                 :key="product.main.id"
+                            :product="product"
                             :loading_img="loading_img"
                             :defultimg="defultimg"
                             :str="str"
@@ -734,13 +708,13 @@
             }
         },
         methods: {
-            subBut: function (link) {
-                var index = ($(link).parents('article').index() + 1);
-                var productId = $('article:nth-of-type(' + index + ') .buy_details input#product-id');
-                var requirementAmount = $('article:nth-of-type(' + index + ') .buy_details input#requirement-amount');
-                var packType = $('article:nth-of-type(' + index + ') .buy_details input#pack-type');
-                var description = $('article:nth-of-type(' + index + ') .buy_details textarea#description');
-            },
+//            subBut: function (link) {
+//                var index = ($(link).parents('article').index() + 1);
+//                var productId = $('article:nth-of-type(' + index + ') .buy_details input#product-id');
+//                var requirementAmount = $('article:nth-of-type(' + index + ') .buy_details input#requirement-amount');
+//                var packType = $('article:nth-of-type(' + index + ') .buy_details input#pack-type');
+//                var description = $('article:nth-of-type(' + index + ') .buy_details textarea#description');
+//            },
             filterProducts: function (productsFilter) {
                 this.products = productsFilter;
             },
@@ -956,6 +930,7 @@
         },
         mounted() {
             this.init();
+            $("#myModal").modal('show');
         },
 //        metaInfo:{
 //            title:'لیست محصولات کشاورزی',

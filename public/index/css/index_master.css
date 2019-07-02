@@ -278,11 +278,11 @@ footer {
     }
 
     .top-nav-collapse .nav li a {
-        padding: 11px 5px;
+        padding: 11px 30px;
     }
 
     .custom-navbar .nav li a {
-        padding: 11px 5px;
+        padding: 11px 30px;
     }
 }
 
@@ -894,8 +894,8 @@ img.image-blur:hover {
     }
 
     .user-header-mobile .profile-list {
-        left: 30px;
-        top: 95px;
+        left: 40px;
+        top: 71px;
     }
 
     .user-header-mobile .profile-menu-header i {

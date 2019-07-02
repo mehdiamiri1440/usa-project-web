@@ -60,7 +60,7 @@
             </div>
         </div>
         <div class="container">
-            <div class="modal fade" id="myModal" tabindex="-1" ref="myModal" role="dialog"
+            <div class="modal" id="myModal" tabindex="-1" ref="myModal" role="dialog"
                  aria-labelledby="myModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog">
@@ -80,7 +80,7 @@
         </div>
 
         <div class="container">
-            <div class="modal fade" id="DownloadApp" tabindex="-1" ref="myModal" role="dialog"
+            <div class="modal" id="DownloadApp" tabindex="-1" ref="myModal" role="dialog"
                  aria-labelledby="myModalLabel"
                  aria-hidden="false">
 
@@ -114,7 +114,7 @@
 
         <!-- Modal -->
         <div class="container">
-            <div class="modal fade" id="myModal2" tabindex="-1" ref="myModal" role="dialog"
+            <div class="modal" id="myModal2" tabindex="-1" ref="myModal" role="dialog"
                  aria-labelledby="myModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog">
@@ -131,6 +131,29 @@
                             <br/>
                             <button class="btn green_bot " data-dismiss="modal">
                                 متوجه شدم
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+        </div>
+        
+         <div class="container">
+            <div class="modal fade" id="deleteProduct" tabindex="-1" ref="myModal" role="dialog"
+                 aria-labelledby="deleteProduct"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="main_popup_content">
+                            <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                            <p class="main_par">
+                                آیا از حذف این محصول اطمینان دارید؟
+                            </p>
+                            <button class="btn green_bot " data-dismiss="modal">
+                                حذف کن
+                            </button>
+                            <button class="btn green_bot " data-dismiss="modal">
+                                منصرف شدم
                             </button>
                         </div>
                     </div><!-- /.modal-content -->

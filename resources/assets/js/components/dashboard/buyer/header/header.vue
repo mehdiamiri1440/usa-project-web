@@ -557,11 +557,11 @@
         </div>
         <!-- /.modal -->
         <!--loader-->
-
+        {{this.submiting}}
         <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
             <div class="main-loader">
-                <img v-bind:src="loading">
-                <p dir="rtl">کمی صبر کنید...</p>
+                <img :src="loading">
+                <p dir="rtl">در حال بارگذاری...</p>
             </div>
         </div>
         <!--end loader-->
@@ -903,7 +903,7 @@
             this.toggleShowHeader();
         },
         created() {
-            eventBus.$on('submitingEvent', (event) => {
+            eventBus.$on('submiting', (event) => {
                 this.submiting = event;
             });
             eventBus.$on('submitSuccess', (event) => {
