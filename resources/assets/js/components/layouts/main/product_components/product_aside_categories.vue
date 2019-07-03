@@ -103,10 +103,6 @@
                 subCategoryList: '',
                 provinceList: '',
                 cityList: '',
-                categoryId: this.categoryId,
-                subCategoryId: this.subCategoryId,
-                provinceId: this.provinceId,
-                cityId: this.cityId,
                 products: this.productsInfo,
             }
         },
@@ -117,36 +113,23 @@
                 axios.post('/location/get_location_info')
                     .then(response => (this.provinceList = response.data.provinces));
             },
-            setCategoryFilter: function (e) {
+            setCategoryFilter: function (e){
                 e.preventDefault;
                 var categoryId = $(e.target).val();
 
                 this.registerComponentStatistics('product-list','sidebarSearch','category');
 
                 var self = this;
-
-                axios.post('/user/get_product_list')
-                    .then(function (response) {
-                        self.products = '';
-                        self.products = response.data.products.filter(function (product) {
-                            if (self.cityId != ''){
-                                return product.main.category_id == categoryId && product.main.city_id == self.cityId;
-                            }
-                            else if (self.provinceId != '' && self.cityId == '') {
-                                return product.main.category_id == categoryId && product.main.province_id == self.provinceId;
-                            }
-                            else {
-                                return product.main.category_id == categoryId;
-                            }
-                        });
-                        self.$emit('productsToParent', self.products);
-                    });
+                
+                this.$parent.categoryId = categoryId;
+                
+                this.$parent.applyFilter();
 
                 axios.post('/get_category_list', {
                     parent_id: categoryId
                 }).then(response => (this.subCategoryList = response.data.categories));
 
-                this.categoryId = categoryId;
+                
                 this.searchText = '';
                 this.continueToLoadProducts = false;
                 this.searchActive = true;
@@ -159,25 +142,10 @@
 
                 var self = this;
 
-                axios.post('/user/get_product_list')
-                    .then(function (response) {
-                        self.products = '';
-                        self.products = response.data.products.filter(function (product) {
-                            if (self.cityId != '') {
-                                return product.main.sub_category_id == subCategoryId && product.main.city_id == self.cityId;
-                            }
-                            else if (self.provinceId != '' && self.cityId == '') {
-                                return product.main.sub_category_id == subCategoryId && product.main.province_id == self.provinceId;
-                            }
-                            else {
-                                return product.main.sub_category_id == subCategoryId;
-                            }
-                        });
-                        self.$emit('productsToParent', self.products);
-
-                    });
-
-                this.subCategoryId = subCategoryId;
+                this.$parent.subCategoryId = subCategoryId;
+                
+                this.$parent.applyFilter();
+                
                 this.continueToLoadProducts = false;
             },
             setProvinceFilter: function (e) {
@@ -187,33 +155,16 @@
                 this.registerComponentStatistics('product-list','sidebarSearch','province');
 
                 var self = this;
-
-                axios.post('/user/get_product_list')
-                    .then(function (response) {
-
-                        self.products = '';
-                        self.products = response.data.products.filter(function (product) {
-
-                            if (self.subCategoryId != '') {
-                                return product.main.province_id == provinceId && product.main.sub_category_id == self.subCategoryId;
-                            }
-                            else if (self.categoryId != '' && self.subCategoryId == '') {
-                                return product.main.province_id == provinceId &&
-                                    product.main.category_id == self.categoryId;
-
-                            }
-                            else {
-                                return product.main.province_id == provinceId;
-                            }
-                        });
-                        self.$emit('productsToParent', self.products);
-                    });
+            
+                this.$parent.provinceId = provinceId;
+                
+                this.$parent.applyFilter();
 
                 axios.post('/location/get_location_info', {
                     province_id: provinceId
                 }).then(response => (this.cityList = response.data.cities));
 
-                this.provinceId = provinceId;
+                
                 this.searchText = '';
                 this.continueToLoadProducts = false;
                 this.searchActive = true;
@@ -227,28 +178,9 @@
 
                 var self = this;
 
-                axios.post('/user/get_product_list')
-                    .then(function (response) {
-                        self.products = '';
-
-                        self.products = response.data.products.filter(function (product) {
-
-                            if (self.subCategoryId != '') {
-                                return product.main.city_id == cityId && product.main.sub_category_id == self.subCategoryId;
-                            }
-                            else if (self.categoryId != '' && self.subCategoryId == '') {
-                                return product.main.city_id == cityId &&
-                                    product.main.category_id == self.categoryId;
-
-                            }
-                            else {
-                                return product.main.city_id == cityId;
-                            }
-                        });
-                        self.$emit('productsToParent', self.products);
-                    });
-
-                this.cityId = cityId;
+                this.$parent.cityId = cityId;
+                this.$parent.applyFilter();
+                
                 this.loading = false;
 //            this.continueToLoadProducts = false;
 //            self.productCountInPage = self.products.length;

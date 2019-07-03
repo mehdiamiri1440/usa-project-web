@@ -152,8 +152,7 @@
 
 <template>
     <div>
-        <article class="main-content-item" v-for="(product,productIndex) in products"
-                 :key="product.main.id">
+        <article class="main-content-item" >
             <product-user-info
                     :profile_photo="product.profile_info.profile_photo"
                     :user_info="product.user_info"
@@ -338,7 +337,7 @@
 
     export default {
         props: [
-            'products',
+            'product',
             'defultimg',
             'str',
             'loading',

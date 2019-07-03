@@ -43,7 +43,7 @@
 
                     </div>
                     <div class="col-xs-12">
-                        <a href="{{route('login_page')}}" class="btn btn-purple  smoothScroll wow fadeInUp"
+                        <a href="#" class="btn btn-purple  smoothScroll wow fadeInUp"
                            data-wow-delay="1.4s">ورود به سامانه</a>
                         <a href="/product-list" class="btn btn-green smoothScroll wow fadeInUp "
                            data-wow-delay="1.4s"> لیست محصولات</a>
@@ -74,11 +74,7 @@
             <div class="row">
                 <h3 class="text-center col-xs-12"> خرما</h3>
                 <div class="text-center col-xs-12">
-<<<<<<< HEAD
                     <a href="/product-list" class="green-bot">
-=======
-                    <a href="master/product-list" class="green-bot">
->>>>>>> b3a08d78daa77c0dfd874bcd4bf8af887840d95d
                         مشاهده همه محصولات
                     </a>
                 </div>
@@ -88,11 +84,7 @@
                         <image-viewer
                                 :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                 :img="'storage/' + product.photos[0].file_path"
-<<<<<<< HEAD
                                 :link="'/product-list/' + product.main.sub_category_name"
-=======
-                                :link="'master/product-list/' + product.main.sub_category_name"
->>>>>>> b3a08d78daa77c0dfd874bcd4bf8af887840d95d
                         >
                         </image-viewer>
                     </article>
@@ -111,11 +103,7 @@
             <div class="row">
                 <h3 class="text-center col-xs-12"> برنج</h3>
                 <div class="text-center col-xs-12">
-<<<<<<< HEAD
                     <a href="/product-list" class="green-bot">
-=======
-                    <a href="master/product-list" class="green-bot">
->>>>>>> b3a08d78daa77c0dfd874bcd4bf8af887840d95d
                         مشاهده همه محصولات
                     </a>
                 </div>
@@ -125,11 +113,7 @@
                         <image-viewer
                                 :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                 :img="'storage/' + product.photos[0].file_path"
-<<<<<<< HEAD
                                 :link="'/product-list/' + product.main.sub_category_name"
-=======
-                                :link="'master/product-list/' + product.main.sub_category_name"
->>>>>>> b3a08d78daa77c0dfd874bcd4bf8af887840d95d
                         >
                         </image-viewer>
                     </article>
@@ -270,10 +254,8 @@
         <div class="container">
             <div class="row">
                 <h3 class="text-center col-xs-12"> خرما</h3>
-<<<<<<< HEAD
-=======
                 <div class="text-center col-xs-12">
-                    <a href="master/product-list" class="green-bot">
+                    <a href="/product-list" class="green-bot">
                         مشاهده همه محصولات
                     </a>
                 </div>
@@ -297,7 +279,6 @@
         <div class="container">
             <div class="row">
                 <h3 class="text-center col-xs-12"> برنج</h3>
->>>>>>> b3a08d78daa77c0dfd874bcd4bf8af887840d95d
                 <div class="text-center col-xs-12">
                     <a href="/product-list" class="green-bot">
                         مشاهده همه محصولات
@@ -392,11 +373,7 @@
                         <image-viewer
                                 :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                 :img="'storage/' + product.photos[0].file_path"
-<<<<<<< HEAD
                                 :link="'/product-list/' + product.main.sub_category_name"
-=======
-                                :link="'master/product-list/' + product.main.sub_category_name"
->>>>>>> b3a08d78daa77c0dfd874bcd4bf8af887840d95d
                         >
                         </image-viewer>
                     </article>

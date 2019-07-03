@@ -94,12 +94,12 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-left">
                 @if(!session('user_id'))
-                    <li><a href="{{route('login_page')}}" class="smoothScroll">ورود/ثبت نام</a></li>
+                    <li><a href="/login" class="smoothScroll">ورود/ثبت نام</a></li>
                 @endif
                 <li><a href="" class="smoothScroll">صفحه ی اصلی</a></li>
                 <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
                 <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
-                <li><a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
+                <li><a href="https:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
 
 
                 @if(session('user_id'))

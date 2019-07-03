@@ -438,7 +438,7 @@
                     </div>
                     <div class="profile_link col-xs-12 col-sm-5">
                         <a href="/dashboard/my-buyAds" class="black-bot">بازگشت به صفحه قبل</a>
-                        <a :href="'/master/profile/' + sellOfferDetail.sell_offer_user_info.user_name"
+                        <a :href="'/profile/' + sellOfferDetail.sell_offer_user_info.user_name"
                            class="green-bot">
                             پروفایل تامین کننده
                         </a>

@@ -30,7 +30,9 @@ class login
                     if($status){
                         return $next($request);
                     }
+
                     else  return redirect('/login');;
+
                 }
                 else if($user = JWTAuth::parseToken()->authenticate()){
                      $status = $this->set_user_session($user->phone,$user->password);
@@ -38,14 +40,18 @@ class login
                     if($status){
                         return $next($request);
                     }
+
                     else return redirect('/login');;
                 }
                 else return redirect('/login');;
+
             }
             else return $next($request);
         }
         catch(\Exception $e){
+
             return redirect('/login');;
+
         }
     }
 

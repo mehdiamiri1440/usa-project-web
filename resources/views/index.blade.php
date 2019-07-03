@@ -188,7 +188,6 @@ NAVIGATION LINKS
                     <ul class="social-icon">
                         <li>
                             <a href="https://www.instagram.com/incobac.ir/" class="fa fa-instagram wow "></a>
-<<<<<<< HEAD
                         </li>
                         <li>
                             <a href="https://t.me/Incobac" class="fa fa-telegram wow "></a>
@@ -200,19 +199,6 @@ NAVIGATION LINKS
                             <a href="https://twitter.com/incobac" class="fa fa-twitter wow "></a>
                         </li>
                         <li>
-=======
-                        </li>
-                        <li>
-                            <a href="https://t.me/Incobac" class="fa fa-telegram wow "></a>
-                        </li>
-                        <li>
-                            <a href="https://www.linkedin.com/company/27058131/ " class="fa fa-linkedin wow "></a>
-                        </li>
-                        <li>
-                            <a href="https://twitter.com/incobac" class="fa fa-twitter wow "></a>
-                        </li>
-                        <li>
->>>>>>> b3a08d78daa77c0dfd874bcd4bf8af887840d95d
                             <a href="https://www.facebook.com/incobac/" class="fa fa-facebook wow "></a>
                         </li>
                     </ul>

@@ -360,9 +360,10 @@
 
                     <div class="contents" v-else>
 
-                        <div v-if="products.length > 0">
+                        <div v-if="products.length > 0" v-for="(product,productIndex) in products"
+                 :key="product.main.id">
                             <product-article
-                                    :products="products"
+                                    :product="product"
                                     :loading_img="loading_img"
                                     :defultimg="defultimg"
                                     :str="str"
@@ -370,6 +371,7 @@
                                     :is_my_profile="isMyProfile"
 
                             >
+                                
 
                             </product-article>
                         </div>

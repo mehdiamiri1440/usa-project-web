@@ -121,6 +121,7 @@ return array(
         'product_name' => 'نوع محصول',
         'postal_code' => 'کد پستی',
         'shaba_code' => 'شماره شبا',
-        'verification_code' => 'کد'
+        'verification_code' => 'کد',
+        'min_sale_amount' => 'حداقل سفارش'
     ),
 );

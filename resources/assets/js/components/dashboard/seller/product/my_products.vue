@@ -58,8 +58,9 @@
             <div class="contents">
 
                 <div v-if="products.length > 0">
-                    <product-article
-                            :products="products"
+                    <product-article  v-for="(product,productIndex) in products"
+                 :key="product.main.id"
+                            :product="product"
                             :loading_img="loading_img"
                             :defultimg="defultimg"
                             :str="str"
@@ -68,17 +69,6 @@
 
                     </product-article>
                 </div>
-                <!--  <div class="col-xs-12" v-if="products.length == 0 && !loading">
-                      <div class="col-xs-12" v-if="products.length == 0 && !loading">
-                          <div class="wrapper_no_pro">
-                              <div class="content_no_pic"><i class="fa fa-list-alt"></i></div>
-                              <div class="text_no_pic"><p>محصولی ثبت نشده است</p></div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="loading_images  col-xs-12" v-show="loading">
-                      <img :src="loading_img" style="width:200px;height:200px">
-                  </div>-->
             </div>
         </main>
     </div>
@@ -157,7 +147,7 @@
         }
         ,
         created() {
-            gtag('config', 'UA-129398000-1', {'page_path': '/my_products'});
+            gtag('config', 'UA-129398000-1', {'page_path': '/my-products'});
         }
         ,
     }

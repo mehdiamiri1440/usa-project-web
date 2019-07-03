@@ -237,6 +237,7 @@
         padding: 20px;
         position: absolute;
         bottom: 76px;
+        direction: rtl;
     }
 
     label {
@@ -596,11 +597,7 @@
                         :byadreq="byadreq"
                         :selregpro="selregpro"
                         :transactroute="transactroute"
-                        :mytrans="mytrans"
-
-
-                >
-
+                        :mytrans="mytrans">
                 </header-menu-list>
                 <div class="copy-right">
                     <!--

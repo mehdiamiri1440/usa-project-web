@@ -56,28 +56,28 @@
                             <th class="head-secend-package">
                                 <div class="main-pricing-icon">
                                     <img src="{{asset('index/images/Group_32.png')}}">
-                                    <span class="main-pricing-span">برنزی</span>
+                                    <span class="main-pricing-span">رایگان</span>
                                 </div>
 
                             </th>
                             <th class="head-secend-package">
                                 <div class="main-pricing-icon">
                                     <img src="{{asset('index/images/Group_38.png')}}">
-                                    <span class="main-pricing-span">نقره ای</span>
+                                    <span class="main-pricing-span">برنزی</span>
                                 </div>
 
                             </th>
                             <th class="head-secend-package">
                                 <div class="main-pricing-icon">
                                     <img src="{{asset('index/images/Group_36.png')}}">
-                                    <span class="main-pricing-span">طلایی</span>
+                                    <span class="main-pricing-span">نقره ای</span>
                                 </div>
 
                             </th>
                             <th class="head-secend-package">
                                 <div class="main-pricing-icon">
                                     <img src="{{asset('index/images/Group_34.png')}}">
-                                    <span class="main-pricing-span">ویژه</span>
+                                    <span class="main-pricing-span">طلایی</span>
                                 </div>
 
                             </th>
@@ -94,22 +94,22 @@
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span> 4</span>
+                                    <span>1</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span> 6</span>
+                                    <span>3</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span> 10</span>
+                                    <span>5</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span> 10</span>
+                                    <span>7</span>
                                       <i class="fa fa-angle-down collapse-icon"></i>
                                 </div>
                             </td>
@@ -133,22 +133,22 @@
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span> 4</span>
+                                    <span>4</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span> 7</span>
+                                    <span>3</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span> 13</span>
+                                    <span>2</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span> 20</span>
+                                    <span>1</span>
                                       <i class="fa fa-angle-down collapse-icon"></i>
                                 </div>
                             </td>
@@ -174,17 +174,17 @@
                             </td>
                             <td>
                                 <div class="main-table-item">
+                                    <span class="red-check"><i class="fa fa-close"></i></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="main-table-item">
                                     <span class="green-check"><i class="fa fa-check"></i></span>
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span class="red-check"><i class="fa fa-close"></i></span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="main-table-item">
-                                    <span class="red-check"><i class="fa fa-close"></i></span>
+                                    <span class="green-check"><i class="fa fa-check"></i></span>
                                 </div>
                             </td>
                             <td>
@@ -213,6 +213,11 @@
                             </td>
                             <td>
                                 <div class="main-table-item">
+                                    <span class="red-check"><i class="fa fa-close"></i></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="main-table-item">
                                     <span class="green-check"><i class="fa fa-check"></i></span>
                                 </div>
                             </td>
@@ -223,12 +228,7 @@
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span class="red-check"><i class="fa fa-close"></i></span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="main-table-item">
-                                    <span class="red-check"><i class="fa fa-close"></i></span>
+                                    <span class="green-check"><i class="fa fa-check"></i></span>
                                       <i class="fa fa-angle-down collapse-icon"></i>
                                 </div>
                             </td>
@@ -252,23 +252,23 @@
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span> 500,000</span>
+                                    <span>0</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
 
-                                    <span> 500,000</span>
+                                    <span>80</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span> 500,000</span>
+                                    <span>200</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span> 500,000</span>
+                                    <span>350</span>
                                       <i class="fa fa-angle-down collapse-icon"></i>
                                 </div>
                             </td>
@@ -298,12 +298,12 @@
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span class="green-check"><i class="fa fa-check"></i></span>
+                                    <span class="red-check"><i class="fa fa-close"></i></span>
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span class="green-check"><i class="fa fa-check"></i></span>
+                                    <span class="red-check"><i class="fa fa-close"></i></span>
                                 </div>
                             </td>
                             <td>
@@ -326,78 +326,35 @@
                             <td>
                                 <div class="main-table-item">
                                     <div>
-                                        مشاهده درخواست های خرید
+                                        تعداد درخواستهای خرید
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span> 500,000</span>
+                                    <span>5</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
 
-                                    <span> 500,000</span>
+                                    <span>12</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span> 500,000</span>
+                                    <span>30</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span> 500,000</span>
+                                    <span>نامحدود</span>
                                       <i class="fa fa-angle-down collapse-icon"></i>
                                 </div>
                             </td>
                         </tr>
-                        <tr class="collapse" id="seven-package">
-                            <td colspan="5">
-                                تعداد عکس هایی که در آگهی شما قابل نمایش می باشند.
-                            </td>
 
-                        </tr>
-                        {{-- مشاهده درخواست های خرید--}}
-
-                        {{-- قیمت--}}
-                        <tr id="price-tr">
-                            <td>
-                                <div class="main-table-item">
-                                    <div>
-                                        قیمت
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="main-table-item">
-                                    <span> 500,000</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="main-table-item">
-
-                                    <span> 500,000</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="main-table-item">
-                                    <span> 500,000</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="main-table-item">
-                                    <span> 500,000</span>
-                                </div>
-                            </td>
-                        </tr>
-                        {{--  قیمت--}}
-
-
-
-
-                        <tr >
+                        <tr>
                             <td>
                                 <div class="main-table-item">
                                     <div>
@@ -406,25 +363,25 @@
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span> <a href="#" class="green-bot">خرید</a> </span>
+                                    <span> <a href="/register" class="green-bot">ثبت نام</a> </span>
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
 
-                                    <span> <a href="#" class="green-bot">خرید</a> </span>
+                                    <span> <a href="/payment/1" class="green-bot">خرید</a> </span>
 
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span> <a href="#" class="green-bot">خرید</a> </span>
+                                    <span> <a href="/payment/2" class="green-bot">خرید</a> </span>
 
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span> <a href="#" class="green-bot">خرید</a> </span>
+                                    <span> <a href="/payment/3" class="green-bot">خرید</a> </span>
 
                                 </div>
                             </td>
@@ -436,215 +393,6 @@
             </div>
         </div>
     </section>
-
-
-    {{--  <div id="generic_price_table">
-          <section>
-              <div class="container">
-
-                  <!--BLOCK ROW START-->
-                  <div class="row">
-                      <div class="wow fadeIn col-xs-12 col-sm-6 col-lg-3"  data-wow-delay="1s">
-
-                          <!--PRICE CONTENT START-->
-                          <div class="generic_content active   clearfix">
-
-                              <!--HEAD PRICE DETAIL START-->
-                              <div class="generic_head_price clearfix">
-                                  <h2 class="head-price">
-                                      رایگان
-                                  </h2>
-
-                                  <!--PRICE START-->
-                                  <div class="generic_price_tag clearfix">
-                                   <span class="price">
-
-                                      <span class="currency">0</span>
-                                         <span class="sign">تومان</span>
-                                      <span class="month">/سال</span>
-                                  </span>
-                                  </div>
-                                  <!--//PRICE END-->
-
-                              </div>
-                              <!--//HEAD PRICE DETAIL END-->
-
-                              <!--FEATURE LIST START-->
-                              <div class="generic_feature_list">
-                                  <ul>
-                                      <li><span>2GB</span> پهنای باند</li>
-                                      <li><span>150GB</span> حافظه</li>
-                                      <li><span>12</span> حساب کاربری</li>
-                                      <li><span>7</span> تعداد درخواست ها</li>
-                                      <li><span>24/7</span> پشتیبانی</li>
-                                  </ul>
-                              </div>
-                              <!--//FEATURE LIST END-->
-
-                              <!--BUTTON START-->
-                            --}}{{--  <div class="generic_price_btn clearfix">
-                                  <a class="" href="">Sign up</a>
-                              </div>--}}{{--
-                              <!--//BUTTON END-->
-
-                          </div>
-                          <!--//PRICE CONTENT END-->
-
-                      </div>
-                      <div class="wow fadeIn col-xs-12 col-sm-6 col-lg-3"  data-wow-delay="1s">
-
-                          <!--PRICE CONTENT START-->
-                          <div class="generic_content active clearfix">
-
-                              <!--HEAD PRICE DETAIL START-->
-                              <div class="generic_head_price clearfix">
-                                  <h2 class="head-price">
-                                      رایگان
-                                  </h2>
-
-
-                                  <!--PRICE START-->
-                                  <div class="generic_price_tag clearfix">
-                                    <span class="price">
-
-                                      <span class="currency">0</span>
-                                         <span class="sign">تومان</span>
-                                      <span class="month">/سال</span>
-                                  </span>
-                                  </div>
-                                  <!--//PRICE END-->
-
-                              </div>
-                              <!--//HEAD PRICE DETAIL END-->
-
-                              <!--FEATURE LIST START-->
-                              <div class="generic_feature_list">
-                                  <ul>
-                                      <li><span>2GB</span> پهنای باند</li>
-                                      <li><span>150GB</span> حافظه</li>
-                                      <li><span>12</span> حساب کاربری</li>
-                                      <li><span>7</span> تعداد درخواست ها</li>
-                                      <li><span>24/7</span> پشتیبانی</li>
-                                  </ul>
-                              </div>
-                              <!--//FEATURE LIST END-->
-
-                              <!--BUTTON START-->
-                              <div class="generic_price_btn clearfix">
-                                  <a class="" href="">پرداخت</a>
-                              </div>
-                              <!--//BUTTON END-->
-
-                          </div>
-                          <!--//PRICE CONTENT END-->
-
-                      </div>
-                      <div class="wow fadeIn col-xs-12 col-sm-6 col-lg-3"  data-wow-delay="1s">
-
-                          <!--PRICE CONTENT START-->
-                          <div class="generic_content active  clearfix">
-
-                              <!--HEAD PRICE DETAIL START-->
-                              <div class="generic_head_price clearfix">
-                                  <h2 class="head-price">
-                                      رایگان
-                                  </h2>
-
-
-                                  <!--PRICE START-->
-                                  <div class="generic_price_tag clearfix">
-                                  <span class="price">
-
-                                      <span class="currency">0</span>
-                                         <span class="sign">تومان</span>
-                                      <span class="month">/سال</span>
-                                  </span>
-                                  </div>
-                                  <!--//PRICE END-->
-
-                              </div>
-                              <!--//HEAD PRICE DETAIL END-->
-
-                              <!--FEATURE LIST START-->
-                              <div class="generic_feature_list">
-                                  <ul>
-                                      <li><span>2GB</span> پهنای باند</li>
-                                      <li><span>150GB</span> حافظه</li>
-                                      <li><span>12</span> حساب کاربری</li>
-                                      <li><span>7</span> تعداد درخواست ها</li>
-                                      <li><span>24/7</span> پشتیبانی</li>
-                                  </ul>
-                              </div>
-                              <!--//FEATURE LIST END-->
-
-                              <!--BUTTON START-->
-                              <div class="generic_price_btn clearfix">
-                                  <a class="" href="">پرداخت</a>
-                              </div>
-                              <!--//BUTTON END-->
-
-                          </div>
-                          <!--//PRICE CONTENT END-->
-
-                      </div>
-                      <div class="wow fadeIn col-xs-12 col-sm-6 col-lg-3"  data-wow-delay="1s">
-
-                          <!--PRICE CONTENT START-->
-                          <div class="generic_content active  clearfix">
-
-                              <!--HEAD PRICE DETAIL START-->
-                              <div class="generic_head_price clearfix">
-                                  <h2 class="head-price">
-                                      رایگان
-                                  </h2>
-
-                                  <!--PRICE START-->
-                                  <div class="generic_price_tag clearfix">
-                                  <span class="price">
-
-                                      <span class="currency">0</span>
-                                         <span class="sign">تومان</span>
-                                      <span class="month">/سال</span>
-                                  </span>
-                                  </div>
-                                  <!--//PRICE END-->
-
-                              </div>
-                              <!--//HEAD PRICE DETAIL END-->
-
-                              <!--FEATURE LIST START-->
-                              <div class="generic_feature_list">
-                                  <ul>
-                                      <li><span>2GB</span> پهنای باند</li>
-                                      <li><span>150GB</span> حافظه</li>
-                                      <li><span>12</span> حساب کاربری</li>
-                                      <li><span>7</span> تعداد درخواست ها</li>
-                                      <li><span>24/7</span> پشتیبانی</li>
-                                  </ul>
-                              </div>
-                              <!--//FEATURE LIST END-->
-
-                              <!--BUTTON START-->
-                              <div class="generic_price_btn clearfix">
-                                  <a class="" href="">پرداخت</a>
-                              </div>
-                              <!--//BUTTON END-->
-
-                          </div>
-                          <!--//PRICE CONTENT END-->
-
-                      </div>
-                  </div>
-                  <!--//BLOCK ROW END-->
-
-              </div>
-          </section>
-
-      </div>
-  --}}
-
-
-
 
 @endsection
 

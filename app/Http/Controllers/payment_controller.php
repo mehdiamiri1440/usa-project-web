@@ -11,6 +11,8 @@ use App\instant_factor;
 use App\Http\Controllers\transaction_controller;
 use App\Http\Controllers\instant_transaction_controller;
 use SoapClient;
+use App\myuser;
+use Carbon\Carbon;
     
 
 class payment_controller extends Controller
@@ -39,11 +41,11 @@ class payment_controller extends Controller
     
     protected $gateway_max_amount_to_pay_value = 500000000; //Rials -> 50 M Toman
     
-    public function do_payment($type,$transaction_id)
+    public function do_payment($pakage_type)
     {
-        $payment_amount = $this->get_payment_amount($type,$transaction_id);
+        $payment_amount = config("subscriptionPakage.type-$pakage_type.price");//$this->get_payment_amount($type,$transaction_id);
         
-        if($payment_amount == false){
+        if($pakage_type > 3){
             return redirect()->back()->withErrors([
                'error' => 'شما مجاز به انجام این پرداخت نیستید' 
             ]);
@@ -58,8 +60,10 @@ class payment_controller extends Controller
 
                 // Your code here
                 session(['gateway_transaction_id' => $transID]);
-                session(['transaction_id' => $transaction_id]);
-                session(['payment_type' => $type]);
+                session(['pakage_type' => $pakage_type]);
+                session(['pakage_duration_in_months' => config("subscriptionPakage.type-$pakage_type.pakage-duration-in-months")]);
+//                session(['transaction_id' => $transaction_id]);
+//                session(['payment_type' => $type]);
                 
                 return $gateway->redirect(); 
             }catch (Exception $e){ 
@@ -169,7 +173,6 @@ class payment_controller extends Controller
     
     public function payment_callback()
     {
-        $transaction_id = session()->pull('transaction_id');
         
         try { 
             $gateway = \Gateway::verify();
@@ -179,49 +182,32 @@ class payment_controller extends Controller
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
-            $this->do_after_payment_changes();
+            $this->do_after_payment_changes_for_subscription();
             
-            $payment_type = session()->pull('payment_type');
-            
-            if($payment_type == 'prepayment'){
-                $action_id = 5; //load action id from config file later
-            }
-            else if($payment_type == 'finalPayment'){
-                $action_id = 7;
-            }
-            
-            $request = Request::create('/action', 'POST',[
-                    'action_id' => $action_id,
-                    'transaction_id' => $transaction_id,
-            ]);
-            
-            $transaction_controller_object = new transaction_controller();
-            
-            $transaction_controller_object->action_controller($request);
-            
-            return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
+            return redirect()->back();
 
         } 
-        catch (RetryException $e)
+        catch (\Exception $e)
         {
-            return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
+            return redirect()->back();
+            //return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
         }
-         catch (PortNotFoundException $e) 
-        {
-            return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
-        }
-         catch (InvalidRequestException $e)
-        {
-            return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
-        }
-         catch (NotFoundTransactionException $e)
-        {
-            return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
-        }
-         catch (\Exception $e) 
-        {
-            return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
-        }
+//         catch (PortNotFoundException $e) 
+//        {
+//            return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
+//        }
+//         catch (InvalidRequestException $e)
+//        {
+//            return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
+//        }
+//         catch (NotFoundTransactionException $e)
+//        {
+//            return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
+//        }
+//         catch (\Exception $e) 
+//        {
+//            return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
+//        }
         
         
     }
@@ -252,6 +238,19 @@ class payment_controller extends Controller
         else return false;
     }
     
+    protected function do_after_payment_changes_for_subscription()
+    {
+        $user_id = session('user_id');
+        $user_record = myuser::find($user_id);
+        
+        $now = Carbon::now();
+        
+        $user_record->active_pakage_type = session()->pull('pakage_type');
+        $user_record->pakage_start = $now;
+        $user_record->pakage_end   = $now->addMonths(session()->pull('pakage_duration_in_months'));
+        
+        $user_record->save();
+    }
     
     public function do_my_payment($type,$transaction_id)
     {   

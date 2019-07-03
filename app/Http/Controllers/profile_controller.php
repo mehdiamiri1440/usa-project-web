@@ -294,7 +294,9 @@ class profile_controller extends Controller
             $user_id = $user_id ? $user_id : session('user_id');
 
             if(is_null($user_id)){
+
                 return redirect('/login');;
+
             }
 
             $last_confirmed_profile_record = $this->get_user_last_profile_record(TRUE,$user_id);
@@ -308,7 +310,9 @@ class profile_controller extends Controller
 
             if(!session()->has('user_id'))
             {
+
                 return redirect('/login');;
+
             }
             $user_id = session('user_id');
 
@@ -321,7 +325,9 @@ class profile_controller extends Controller
         else{
             if(!session()->has('user_id'))
             {
+
                 return redirect('/login');;
+
             }
             $user_id = session('user_id');
 

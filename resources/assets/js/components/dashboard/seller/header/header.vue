@@ -239,6 +239,7 @@
         padding: 20px;
         position: absolute;
         bottom: 76px;
+        direction: rtl;
     }
 
     label {

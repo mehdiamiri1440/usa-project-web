@@ -31,7 +31,7 @@ import buyerProfileBasic from '../components/dashboard/buyer/profile/profile_bas
 import buyerChangePassword from '../components/dashboard/seller/profile/change_password.vue'
 import buyerCompelementry from '../components/dashboard/buyer/profile/profile_complete.vue'
 import buyerProfileContract from '../components/dashboard/buyer/profile/profile_contract.vue'
-import buyerRequests from '../components/dashboard/buyer/request/request'
+//import buyerRequests from '../components/dashboard/buyer/request/request'
 import buyerMyBuyAd from '../components/dashboard/buyer/request/my-buyAd'
 import buyerRgisterRequest from '../components/dashboard/buyer/request/register-request'
 import buyerSellOfferDetail from '../components/dashboard/buyer/request/sell-offer-detail'
@@ -46,8 +46,6 @@ import buyerGuide from '../components/dashboard/buyer/guide.vue';
 
 
 import messages from '../components/dashboard/message'
-
-
 
 // Layout Components
 import indexPage from '../components/layouts/main/index'
@@ -214,20 +212,20 @@ const myRouter =  new Router({
                 seller: sellerBuyAdRequests,
             },
             props: true,
-            beforeEnter: async (to, from, next) => {
-                console.log('test');
-                axios.post('/is_allowed_to_access_buyAd_requests')
-                .then(function(response){
-                    if(response.data.access_to_buyAd_requests == false){
-                        next(false);
-                    $('#myModal-2').modal('show');
-                    }
-                    else{
-                        next();
-                    }
-
-                });
-            },
+//            beforeEnter: async (to, from, next) => {
+//                console.log('test');
+//                axios.post('/is_allowed_to_access_buyAd_requests')
+//                .then(function(response){
+//                    if(response.data.access_to_buyAd_requests == false){
+//                        next(false);
+//                    $('#myModal-2').modal('show');
+//                    }
+//                    else{
+//                        next();
+//                    }
+//
+//                });
+//            },
         }
         , {
             path: '/dashboard/register-request',

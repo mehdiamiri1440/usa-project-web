@@ -34,9 +34,9 @@ use App\Jobs\NotifyBuyersBySMS;
     return view('payment.external_url_payment_callback');
 });*/
 
-/*Route::get('/help', function(){
-    return view('index_pages.help');
-});*/
+//Route::get('/help', function(){
+//    return view('index_pages.help');
+//});
 /*
 Route::get('/p', function(){
     return view('layout.master');
@@ -53,6 +53,10 @@ Route::group(['prefix' => 'master'],function (){
     })->name('product-list');
 });
 
+//Route::get('/', function(){
+////    return redirect('/master/product-list');
+//    return view('index_pages.index_main');
+//});
 
 //Route::get('/', function(){
 //    return view('index');
@@ -84,12 +88,11 @@ Route::post('/dologin',[
     'uses' => 'user_controller@login',
     'as' => "login"
 ]);
-
-/*Route::get('/login',function(){
+//
+//Route::get('/login',function(){
 //    return view('login');
-//    return redirect('/login');
-    return true;
-})->name('login_page');*/
+////    return redirect('/login');
+//})->name('login_page');
 
 /*Route::get('/register',function(){
     return view('register');
@@ -602,6 +605,11 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'buyAd_controller@is_user_allowed_to_access_buyAd_requests',
         'as' => 'is_allowed_to_access_buyAd_requests'
     ]);
+    
+    Route::post('/edit_product',[
+        'uses' => 'product_controller@edit_product_by_id',
+        'as'   => 'edit_product_by_id'
+    ]);
 
 });
 
@@ -910,8 +918,8 @@ Route::get('/transaction-report',function(){
     return view('dashboard.buyer.transaction.transaction-report-detail');
 });
 
-Route::get('/payment/{type}/{transactionId}',[
-    'uses' => 'payment_controller@do_my_payment',
+Route::get('/payment/{pakageType}',[
+    'uses' => 'payment_controller@do_payment',
     'as' => 'do_payment',
 ]);
 
@@ -920,15 +928,15 @@ Route::get('/instant_payment/{type}/{transactionId}',[
     'as' => 'do_instant_transaction_payment',
 ]);
 
-//Route::any('/payment_callback',[
-//    'uses' => 'payment_controller@payment_callback',
-//    'as' => 'payment_callback'
-//]);
-
 Route::any('/payment_callback',[
-    'uses' => 'payment_controller@my_payment_callback',
+    'uses' => 'payment_controller@payment_callback',
     'as' => 'payment_callback'
 ]);
+
+//Route::any('/payment_callback',[
+//    'uses' => 'payment_controller@my_payment_callback',
+//    'as' => 'payment_callback'
+//]);
 
 Route::any('/instant_payment_callback',[
     'uses' => 'payment_controller@instant_transaction_payment_callback',

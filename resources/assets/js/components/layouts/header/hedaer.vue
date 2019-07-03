@@ -25,7 +25,7 @@
 
     #DownloadApp .main_popup_content > div {
         transform: translate(-50%, -50%);
-    }
+   }
 
     a.close-dialog-popup {
         display: block;
@@ -80,7 +80,7 @@
         transition: 300ms;
     }
 
-   @media  screen and (max-width: 768px){
+   @media  screen and (max-width: 767px){
        ul.nav {
            width: 100%;
            text-align: center !important;
