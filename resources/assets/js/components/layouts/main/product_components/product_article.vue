@@ -158,11 +158,11 @@
                     :user_info="product.user_info"
                     :user_full_name="product.user_info.first_name + ' ' +
             product.user_info.last_name"
-                    :product_owner_id="product.main.myuser_id"
                     :user_name="product.user_info.user_name"
                     :defultimg="defultimg"
                     :current_user="currentUser"
                     :product_id="product.main.id"
+                    :is_my_profile_status="isMyProfile"
             ></product-user-info>
             <div class="article-contents col-xs-12  col-sm-9 ">
                 <div class="main-image col-xs-12 col-sm-5">
@@ -195,7 +195,6 @@
                 </div>
                 <div class="col-xs-12">
                     <div class="row">
-
                         <div class="create_buy_mobile hidden-sm hidden-md hidden-lg">
                             <a v-if="!isMyProfile" class="green_bot" href="#" @click.prevent="openChat(product)">
                                 <span class="fa fa-comment"></span> ارسال پیام
@@ -353,8 +352,7 @@
                 },
                 popUpMsg: '',
                 popUpLoaded: false,
-                product:this.products,
-                isMyProfile:false
+                isMyProfile:false,
             }
         },
         components: {
@@ -364,9 +362,17 @@
         },
         methods: {
             init: function () {
+                var self = this;
                 axios.post('/user/profile_info')
-                    .then(response => (this.currentUser = response.data));
-
+                    .then(function (response) {
+                        self.currentUser = response.data;
+                        if (self.currentUser.user_info) {
+                            if (self.currentUser.user_info.id === self.product.main.myuser_id) {
+                                self.isMyProfile = true;
+                                self.$emit('isMyProfile', self.isMyProfile);
+                            }
+                        }
+                    });
             },
             toLatinNumbers: function (num) {
                 if (num == null) {

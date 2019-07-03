@@ -7,19 +7,23 @@
             <img :src="defultimg" class="image_defult">
         </div>
         <p v-if="user_info">{{user_full_name}}</p>
-        <a v-if="isMyProfile" href="" class="green_bot delete-product"
-           @click.prevent="deleteProduct()"> <span class="fa fa-trash"></span> حذف </a>
 
-        <a v-if="isMyProfile" class="green_bot edit-product hidden-xs"  href="#" @click="openRequestRegisterBox($event)" >
-            <span class="fa fa-pencil"></span> ویرایش
-        </a>
-        <a v-if="!isMyProfile" :href="'/profile/' + user_name" class="green_bot"
-                     @click="registerComponentStatistics('product','showUserProfile','show profile')">
-            مشاهده پروفایل
-        </a>
-        <div v-if="!isMyProfile" class="create_buy  hidden-xs">
-            <a class="green_bot" href="#" @click.prevent="openChat()">
+
+
+        <div v-if="!is_my_profile_status"  class="create_buy  ">
+            <a :href=" '/profile/'+ user_name" class="green_bot"
+               @click="registerComponentStatistics('product','showUserProfile','show profile')">مشاهده پروفایل</a>
+            <a class="green_bot hidden-xs" href="#" @click.prevent="openChat()">
                 <span class="fa fa-comment"></span> ارسال پیام
+            </a>
+        </div>
+
+        <div v-else class="create_buy  ">
+            <a  href="" class="green_bot delete-product"
+                @click.prevent="deleteProduct()"> <span class="fa fa-trash"></span> حذف </a>
+
+            <a class="green_bot edit-product hidden-xs"  href="#" @click.prevent="openEditBox($event)" >
+                <span class="fa fa-pencil"></span> ویرایش
             </a>
         </div>
     </div>
@@ -126,11 +130,6 @@
     import {eventBus} from "../../../../../js/router/dashboard_router";
 
     export default {
-        data(){
-          return{
-              isMyProfile:false
-          }
-        },
         props: [
             'profile_photo',
             'user_info',
@@ -138,47 +137,12 @@
             'user_name',
             'defultimg',
             'current_user',
-            'product_owner_id',
-            'product_id'
+            'product_id',
+            'is_my_profile_status'
         ],
         methods: {
-            init: function () {
-                var self = this;
-                axios.post('/user/profile_info')
-                    .then(function (response) {
-                        self.currentUser = response.data;
-                        if (self.currentUser.user_info) {
-                            if (self.currentUser.user_info.id === self.product_owner_id) {
-                                self.isMyProfile = true;
-
-                            }
-                        }
-                        self.$emit('isMyProfile', self.isMyProfile);
-                    });
-
-            },
-            openRequestRegisterBox: function (e) {
-                if (this.current_user.profile) {
-                    e.preventDefault;
-                    var event = $(e.target);
-
-                    this.registerComponentStatistics('product', 'click', 'request register button');
-
-                    this.errors = '';
-
-                    var index = (event.parents('article').index() + 1);
-                    var element = $('article:nth-of-type(' + index + ') .buy_details');
-                    element.slideToggle("125", "swing");
-                    $('.buy_details').not(element).slideUp();
-
-                    this.scrollToTheRequestRegisterBox(element);
-                }
-                else {
-                    this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
-                    eventBus.$emit('submitSuccess', this.popUpMsg);
-                    $('#myModal2').modal('show');
-                }
-
+         EditBox:function(e){
+                this.$parent.openEditBox(e);
             },
             openChat: function () {
 
@@ -227,7 +191,8 @@
             deleteProduct:function(){
                 var self = this;
                 //show modal
-                //
+
+
                 axios.post('/delete_product_by_id',{
                     product_id : self.product_id
                 })
@@ -238,12 +203,9 @@
                     window.location.reload();
                 })
                 .catch(function(err){
-                    alert('error!');
+                    //show modal
                 });
             }
         },
-        mounted(){
-            this.init();
-        }
     }
 </script>

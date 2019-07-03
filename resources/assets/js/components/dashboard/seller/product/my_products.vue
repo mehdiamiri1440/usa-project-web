@@ -91,7 +91,6 @@
                             :str="str"
                             :loading="loading"
                     >
-
                     </product-article>
                 </div>
                 <div class="col-xs-12" v-if="products.length == 0 && !loading">
