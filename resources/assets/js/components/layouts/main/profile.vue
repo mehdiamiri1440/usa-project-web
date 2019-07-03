@@ -371,7 +371,7 @@
                                     :is_my_profile="isMyProfile"
 
                             >
-                                
+
 
                             </product-article>
                         </div>

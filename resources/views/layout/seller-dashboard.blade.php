@@ -98,7 +98,7 @@
             <router-view
                     name="seller"
                     pagenotfoundimage = "{{url('index/images/def404.png')}}"
-                    loading="{{asset('assets/img/gif/loading.gif')}}"
+                    loading_img="{{asset('assets/img/gif/loading.gif')}}"
                     trans="{{url('dashboard/transaction-detail')}}"
                     transRep="{{url('dashboard/transaction-report')}}"
                     str="{{asset('storage/')}}"

@@ -162,7 +162,6 @@
                     :user_name="product.user_info.user_name"
                     :defultimg="defultimg"
                     :current_user="currentUser"
-                    v-on:isMyProfile="isMyProfileFunction($event)"
                     :product_id="product.main.id"
             ></product-user-info>
             <div class="article-contents col-xs-12  col-sm-9 ">
@@ -368,9 +367,6 @@
                 axios.post('/user/profile_info')
                     .then(response => (this.currentUser = response.data));
 
-            },
-            isMyProfileFunction:function(event){
-                this.isMyProfile = event;
             },
             toLatinNumbers: function (num) {
                 if (num == null) {
