@@ -411,6 +411,7 @@
                             </div>
                         </form>
                     </div>
+                      <h1 >{{this.contactList.length}}</h1>
                     <div v-if="isSearchingContact" class="contact-is-search">
                         <img :src="loading"/>
                     </div>
@@ -435,6 +436,7 @@
 
                         </ul>
                     </div>
+
                     <div v-else="contactList.length == 0" class="contact-not-found">
                        <p>
                        مخاطب یافت نشد
@@ -694,7 +696,7 @@
                 var self = this;
                 if (self.contactNameSearchText != '') {
                      self.isSearchingContact = true;
-                     eventBus.$emit('submiting', true);
+            
                     axios.post('/get_contact_list')
                         .then(function (response) {
                             self.contactList = response.data.contact_list;
@@ -724,7 +726,7 @@
                                     });
 
                                    self.isSearchingContact = false;
-                                    eventBus.$emit('submiting', false);
+                            
 
                                 })
                                 .catch(function (e) {
