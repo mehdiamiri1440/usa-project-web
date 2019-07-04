@@ -1724,7 +1724,7 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProducts">
+                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageDates">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
@@ -1752,7 +1752,7 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProducts">
+                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageDates">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
@@ -1890,7 +1890,7 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProducts">
+                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageDates">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
@@ -1915,7 +1915,7 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProducts">
+                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageDates">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
@@ -2063,7 +2063,7 @@
                 posts: '',
                 mainSearchBoxText: '',
                 enterKeyActiveForSearch: false,
-                homePageProducts: '',
+                homePageDates: '',
 
             }
         },
@@ -2102,8 +2102,9 @@
                 axios.post('/user/get_product_list', {
                     from_record_number: 0,
                     to_record_number: 5,
+                    search_text:'خرما',
                 }).then(function (response) {
-                    self.homePageProducts = response.data.products;
+                    self.homePageDates = response.data.products;
                 });
             },
             search: function () {
