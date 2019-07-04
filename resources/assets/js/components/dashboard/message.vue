@@ -359,7 +359,16 @@
            border-radius: 50px;
         font-size: 25px;
     }
-
+    .contact-not-found{
+        text-align: center;
+        margin: 15px auto;
+    }
+    .contact-not-found i{
+        font-size:26px;
+    }
+    .contact-not-found p{
+        margin-bottom:7px;
+    }
     @media screen and (max-width: 992px) {
         .main-content {
             padding: 110px 0 0;
@@ -411,10 +420,17 @@
                             </div>
                         </form>
                     </div>
-                    <div v-if="isSearchingContact" class="contact-is-search">
+                    <div v-if="contactList.length == 0" class="contact-not-found">
+                        <p>
+                            <i class="fa fa-user"></i>
+                        </p><p>
+                            مخاطب یافت نشد
+                        </p>
+                    </div>
+                    <div v-else-if="isSearchingContact" class="contact-is-search">
                         <img :src="loading"/>
                     </div>
-                    <div v-else-if="!isSearchingContact && contactList" class="contact-items">
+                    <div v-else class="contact-items">
                         <ul>
                             <li class="contact-item" v-for="(contact,index) in contactList" :key="index">
                                 <a href="" @click.prevent="loadChatHistory(contact)">
@@ -435,11 +451,6 @@
 
                         </ul>
                     </div>
-                    <div v-else="contactList.length == 0" class="contact-not-found">
-                       <p>
-                       مخاطب یافت نشد
-                       </p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -453,7 +464,7 @@
                                  :alt="selectedContact.first_name[0]">
                             <img v-else :src="defimgitem">
                         </div>
-                        <a :href="'/master/profile/' + selectedContact.user_name">
+                        <a :href="'/profile/' + selectedContact.user_name">
                             <span>
                             {{selectedContact.first_name + ' ' + selectedContact.last_name}}
                             </span>
@@ -694,7 +705,7 @@
                 var self = this;
                 if (self.contactNameSearchText != '') {
                      self.isSearchingContact = true;
-                     eventBus.$emit('submiting', true);
+
                     axios.post('/get_contact_list')
                         .then(function (response) {
                             self.contactList = response.data.contact_list;
@@ -724,7 +735,7 @@
                                     });
 
                                    self.isSearchingContact = false;
-                                    eventBus.$emit('submiting', false);
+
 
                                 })
                                 .catch(function (e) {

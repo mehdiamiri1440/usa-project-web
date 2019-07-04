@@ -80,7 +80,7 @@
         transition: 300ms;
     }
 
-   @media  screen and (max-width: 768px){
+   @media  screen and (max-width: 767px){
        ul.nav {
            width: 100%;
            text-align: center !important;

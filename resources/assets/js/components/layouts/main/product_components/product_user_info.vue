@@ -7,31 +7,24 @@
             <img :src="defultimg" class="image_defult">
         </div>
         <p v-if="user_info">{{user_full_name}}</p>
-      
-<!--
-        <a v-if="!isMyProfileStatus" :href=" '/master/profile/'+ user_name" class="green_bot"
-           @click="registerComponentStatistics('product','showUserProfile','show profile')">مشاهده پروفایل</a>
-        
--->
-        <div v-if="!isMyProfileStatus" class="create_buy  hidden-xs">
-            <a  :href="'/profile/' + user_name" class="green_bot"
-                         @click="registerComponentStatistics('product','showUserProfile','show profile')">
-                مشاهده پروفایل
+
+
+
+        <div v-if="!is_my_profile_status"  class="create_buy  ">
+            <a :href=" '/profile/'+ user_name" class="green_bot"
+               @click="registerComponentStatistics('product','showUserProfile','show profile')">مشاهده پروفایل</a>
+            <a class="green_bot hidden-xs" href="#" @click.prevent="openChat()">
+                <span class="fa fa-comment"></span> ارسال پیام
             </a>
-            <div  class="create_buy  hidden-xs">
-                <a class="green_bot" href="#" @click.prevent="openChat()">
-                    <span class="fa fa-comment"></span> ارسال پیام
-                </a>
-            </div>
         </div>
-        <div v-else class="create_buy  hidden-xs">
-              <a  href="" class="green_bot delete-product"
-           @click.prevent="deleteProduct()"> <span class="fa fa-trash"></span> حذف </a>
 
-        <a class="green_bot edit-product hidden-xs"  href="#" @click.prevent="openEditBox($event)" >
-            <span class="fa fa-pencil"></span> ویرایش
-        </a>
+        <div v-else class="create_buy  ">
+            <a  href="" class="green_bot delete-product"
+                @click.prevent="deleteProduct()"> <span class="fa fa-trash"></span> حذف </a>
 
+            <a class="green_bot edit-product hidden-xs"  href="#" @click.prevent="openEditBox($event)" >
+                <span class="fa fa-pencil"></span> ویرایش
+            </a>
         </div>
     </div>
 </template>
@@ -137,11 +130,6 @@
     import {eventBus} from "../../../../../js/router/dashboard_router";
 
     export default {
-        data(){
-          return{
-              isMyProfile:false
-          }
-        },
         props: [
             'profile_photo',
             'user_info',
@@ -149,11 +137,11 @@
             'user_name',
             'defultimg',
             'current_user',
-            'isMyProfileStatus',
-            'product_id'
+            'product_id',
+            'is_my_profile_status'
         ],
         methods: {
-            openEditBox:function(e){
+         EditBox:function(e){
                 this.$parent.openEditBox(e);
             },
             openChat: function () {
@@ -203,7 +191,7 @@
             deleteProduct:function(){
                 var self = this;
                 //show modal
-                
+
 
                 axios.post('/delete_product_by_id',{
                     product_id : self.product_id
@@ -219,8 +207,5 @@
                 });
             }
         },
-        mounted(){
-        
-        }
     }
 </script>

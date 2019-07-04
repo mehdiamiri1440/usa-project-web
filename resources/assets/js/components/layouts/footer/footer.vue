@@ -98,8 +98,10 @@
         padding: 0;
     }
     .footer-bottom p {
-        padding-top: 22px;
+        padding-top: 20px;
         display: block;
+        color: #fff;
+        direction: rtl;
     }
     footer p {
         text-align: right;

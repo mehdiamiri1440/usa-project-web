@@ -274,9 +274,9 @@
         z-index: 2;
     }
 
-    .main-padding-fix {
+  /*  .main-padding-fix {
         padding-top: 72px;
-    }
+    }*/
 
     .sidebar-fix {
         position: fixed;
@@ -880,11 +880,11 @@
             },
             applyFilter:function(){
                 var self = this;
-                
+
                 eventBus.$emit('submiting', true);
-                
+
                 var searchObject = {};
-                
+
                 if(this.categoryId){
                     searchObject.category_id = this.categoryId;
                 }
@@ -900,12 +900,12 @@
                 if(this.searchText){
                     searchObject.search_text = this.searchText;
                 }
-                
+
                 if(jQuery.isEmptyObject(searchObject)){
                     searchObject.from_record_number = 0;
                     searchObject.to_record_number = 5;
                 }
-                
+
                 axios.post('/user/get_product_list',searchObject)
                     .then(function(response){
                         self.products = response.data.products;
@@ -914,14 +914,14 @@
                     .catch(function(err){
                         alert('error');
                     });
-                
+
             },
         },
         watch: {
             searchText: function () {
                 var self = this;
                 eventBus.$emit('submiting', true);
-                
+
                 this.applyFilter();
 
 //                axios.post('/user/get_product_list')
