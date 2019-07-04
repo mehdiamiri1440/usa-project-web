@@ -1,5 +1,13 @@
 <style scoped>
 
+
+
+    .contact-is-search img {
+        display: block;
+        width: 60px;
+        margin: 18px auto;
+    }
+
     .check-items {
         padding-left: 10px;
         color: #00a65a;
@@ -158,7 +166,7 @@
 
     .contact-wrapper .contact-items {
         position: relative;
-        overflow: scroll;
+        /*overflow-y: scroll;*/
         height: calc(100% - 30px);
     }
 
@@ -351,7 +359,16 @@
            border-radius: 50px;
         font-size: 25px;
     }
-
+    .contact-not-found{
+        text-align: center;
+        margin: 15px auto;
+    }
+    .contact-not-found i{
+        font-size:26px;
+    }
+    .contact-not-found p{
+        margin-bottom:7px;
+    }
     @media screen and (max-width: 992px) {
         .main-content {
             padding: 110px 0 0;
@@ -403,7 +420,17 @@
                             </div>
                         </form>
                     </div>
-                    <div class="contact-items">
+                    <div v-if="contactList.length == 0" class="contact-not-found">
+                        <p>
+                            <i class="fa fa-user"></i>
+                        </p><p>
+                            مخاطب یافت نشد
+                        </p>
+                    </div>
+                    <div v-else-if="isSearchingContact" class="contact-is-search">
+                        <img :src="loading"/>
+                    </div>
+                    <div v-else class="contact-items">
                         <ul>
                             <li class="contact-item" v-for="(contact,index) in contactList" :key="index">
                                 <a href="" @click.prevent="loadChatHistory(contact)">
@@ -415,7 +442,8 @@
                                     <span class="contact-name">{{contact.first_name + ' ' + contact.last_name}}</span>
                                     <div class="contact-date">
                                         <p class="count-number" v-if="contact.unread_msgs_count != 0">
-                                            {{contact.unread_msgs_count}}</p>
+                                            {{contact.unread_msgs_count}}
+                                        </p>
                                         <!--                                        <p>18:24 PM</p>-->
                                     </div>
                                 </a>
@@ -436,7 +464,7 @@
                                  :alt="selectedContact.first_name[0]">
                             <img v-else :src="defimgitem">
                         </div>
-                        <a :href="'/master/profile/' + selectedContact.user_name">
+                        <a :href="'/profile/' + selectedContact.user_name">
                             <span>
                             {{selectedContact.first_name + ' ' + selectedContact.last_name}}
                             </span>
@@ -495,7 +523,8 @@
     export default {
         props: [
             'defimgitem',
-            'str'
+            'str',
+            'loading'
         ],
         data: function () {
             return {
@@ -505,7 +534,8 @@
                         url: 'messages',
                     }
                 ],
-                contactList: '',
+                isSearchingContact : false,
+                contactList: [],
                 chatMessages: '',
                 selectedContact: '',
                 currentUserId: '',
@@ -674,6 +704,7 @@
             contactNameSearchText: function () {
                 var self = this;
                 if (self.contactNameSearchText != '') {
+                     self.isSearchingContact = true;
 
                     axios.post('/get_contact_list')
                         .then(function (response) {
@@ -702,6 +733,9 @@
                                             else return false;
                                         });
                                     });
+
+                                   self.isSearchingContact = false;
+
 
                                 })
                                 .catch(function (e) {

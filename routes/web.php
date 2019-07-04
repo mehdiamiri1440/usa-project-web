@@ -34,13 +34,14 @@ use App\Jobs\NotifyBuyersBySMS;
     return view('payment.external_url_payment_callback');
 });*/
 
-/*Route::get('/help', function(){
-    return view('index_pages.help');
+//Route::get('/help', function(){
+//    return view('index_pages.help');
+//});
+/*
+Route::get('/p', function(){
+    return view('layout.master');
 });*/
 
-Route::get('/p', function(){
-    return view('index_pages.index_main');
-});
 Route::group(['prefix' => 'master'],function (){
     Route::get('/', function () {
         return view('layout.master');
@@ -52,10 +53,10 @@ Route::group(['prefix' => 'master'],function (){
     })->name('product-list');
 });
 
-Route::get('/', function(){
-    return redirect('/master/product-list');
+//Route::get('/', function(){
+////    return redirect('/master/product-list');
 //    return view('index_pages.index_main');
-});
+//});
 
 //Route::get('/', function(){
 //    return view('index');
@@ -70,36 +71,37 @@ Route::get('download/app', function()
 })->name('download-app');
 
 
-Route::get('/about-us',function(){
+/*Route::get('/about-us',function(){
     return view('index_pages.about_us');
 });
 
 Route::get('/privacy-and-policy',function(){
     return view('index_pages.privacy_policy');
-});
+});*/
 
-Route::get('/contact-us',function(){
+/*Route::get('/contact-us',function(){
     return view('index_pages.contact_us');
-});
+});*/
 
 
 Route::post('/dologin',[
     'uses' => 'user_controller@login',
     'as' => "login"
 ]);
+//
+//Route::get('/login',function(){
+//    return view('login');
+////    return redirect('/login');
+//})->name('login_page');
 
-Route::get('/login',function(){
-    return view('login');
-})->name('login_page');
-
-Route::get('/register',function(){
+/*Route::get('/register',function(){
     return view('register');
-})->name('register_page');
+})->name('register_page');*/
 
 Route::get('/register-from-blog',function(){
     session(['is_from_QA_blog' => true]);
 
-    return redirect()->route('register_page');
+    return redirect('/register');
 });
 
 Route::post('/user/is_user_name_unique',[
@@ -244,10 +246,6 @@ Route::post('/increment_user_profile_visit_count',[
     'as' => 'increment_user_profile_visit_count'
 ]);
 
-Route::get('master/{any}',function(){
-        return view('layout.master');
-    })->where('any','.*');
-
 
 Route::group(['middleware' => [login::class]],function(){
 
@@ -281,6 +279,10 @@ Route::group(['middleware' => [login::class]],function(){
             return view('layout.buyer-dashboard');
         }
     })->where('any','.*');
+
+
+
+
 
     Route::group(['prefix' => 'dashboard'],function(){
         Route::get('/',function(){
@@ -603,6 +605,11 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'buyAd_controller@is_user_allowed_to_access_buyAd_requests',
         'as' => 'is_allowed_to_access_buyAd_requests'
     ]);
+    
+    Route::post('/edit_product',[
+        'uses' => 'product_controller@edit_product_by_id',
+        'as'   => 'edit_product_by_id'
+    ]);
 
 });
 
@@ -634,7 +641,7 @@ Route::get('/logout',function(){
     $cookie = \Cookie::forget('user_password');
 //    response('view')->withCookie($cookie);
 
-    return redirect()->route('login_page')->withCookie($cookie);
+    return redirect('/login')->withCookie($cookie);
 })->name('logout');
 
 //-------------------------------- ADMIN PANEL---------------------------------------
@@ -984,5 +991,19 @@ Route::get('/pricing', function(){
     return view('index_pages.pricing_page');
 });
 
+
+
+
+
+
+
+
+    //-----------------------------------------------------
+    //    in code bayad bad az har chizi ke any dare biad
+    Route::get('/{any}',function(){
+
+        return  view('layout.master');
+    })->where('any','.*');
+    //-----------------------------------------------------
 
 

@@ -120,23 +120,7 @@
                 this.registerComponentStatistics('product-list','sidebarSearch','category');
 
                 var self = this;
-
-//                axios.post('/user/get_product_list')
-//                    .then(function (response) {
-//                        self.products = '';
-//                        self.products = response.data.products.filter(function (product) {
-//                            if (self.cityId != ''){
-//                                return product.main.category_id == categoryId && product.main.city_id == self.cityId;
-//                            }
-//                            else if (self.provinceId != '' && self.cityId == '') {
-//                                return product.main.category_id == categoryId && product.main.province_id == self.provinceId;
-//                            }
-//                            else {
-//                                return product.main.category_id == categoryId;
-//                            }
-//                        });
-//                        self.$emit('productsToParent', self.products);
-//                    });
+                
                 this.$parent.categoryId = categoryId;
                 
                 this.$parent.applyFilter();
@@ -158,24 +142,6 @@
 
                 var self = this;
 
-//                axios.post('/user/get_product_list')
-//                    .then(function (response) {
-//                        self.products = '';
-//                        self.products = response.data.products.filter(function (product) {
-//                            if (self.cityId != '') {
-//                                return product.main.sub_category_id == subCategoryId && product.main.city_id == self.cityId;
-//                            }
-//                            else if (self.provinceId != '' && self.cityId == '') {
-//                                return product.main.sub_category_id == subCategoryId && product.main.province_id == self.provinceId;
-//                            }
-//                            else {
-//                                return product.main.sub_category_id == subCategoryId;
-//                            }
-//                        });
-//                        self.$emit('productsToParent', self.products);
-//
-//                    });
-
                 this.$parent.subCategoryId = subCategoryId;
                 
                 this.$parent.applyFilter();
@@ -189,28 +155,7 @@
                 this.registerComponentStatistics('product-list','sidebarSearch','province');
 
                 var self = this;
-
-//                axios.post('/user/get_product_list')
-//                    .then(function (response) {
-//
-//                        self.products = '';
-//                        self.products = response.data.products.filter(function (product) {
-//
-//                            if (self.subCategoryId != '') {
-//                                return product.main.province_id == provinceId && product.main.sub_category_id == self.subCategoryId;
-//                            }
-//                            else if (self.categoryId != '' && self.subCategoryId == '') {
-//                                return product.main.province_id == provinceId &&
-//                                    product.main.category_id == self.categoryId;
-//
-//                            }
-//                            else {
-//                                return product.main.province_id == provinceId;
-//                            }
-//                        });
-//                        self.$emit('productsToParent', self.products);
-//                    });
-//                
+            
                 this.$parent.provinceId = provinceId;
                 
                 this.$parent.applyFilter();
@@ -233,29 +178,7 @@
 
                 var self = this;
 
-//                axios.post('/user/get_product_list')
-//                    .then(function (response) {
-//                        self.products = '';
-//
-//                        self.products = response.data.products.filter(function (product) {
-//
-//                            if (self.subCategoryId != '') {
-//                                return product.main.city_id == cityId && product.main.sub_category_id == self.subCategoryId;
-//                            }
-//                            else if (self.categoryId != '' && self.subCategoryId == '') {
-//                                return product.main.city_id == cityId &&
-//                                    product.main.category_id == self.categoryId;
-//
-//                            }
-//                            else {
-//                                return product.main.city_id == cityId;
-//                            }
-//                        });
-//                        self.$emit('productsToParent', self.products);
-//                    });
-
                 this.$parent.cityId = cityId;
-                
                 this.$parent.applyFilter();
                 
                 this.loading = false;

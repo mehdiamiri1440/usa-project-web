@@ -1,7 +1,513 @@
+<style scoped>
+
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    a, abbr, acronym, address, big, cite, code,
+    del, dfn, em, img, ins, kbd, q, s, samp,
+    small, strike, strong, sub, sup, tt, var,
+    b, u, i, center,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    article, aside, canvas, details, embed,
+    figure, figcaption, footer, header,
+    menu, nav, output, ruby, section, summary,
+    time, mark, audio, video {
+        margin: 0;
+        vertical-align: baseline;
+    }
+
+    /* HTML5 display-role reset for older browsers */
+    article, aside, details, figcaption, figure,
+    footer, header, menu, nav, section {
+        display: block;
+    }
+
+    body {
+        line-height: 1.1;
+        font-family: IRANSans, sans-serif;
+        font-size: 14px;
+
+        direction: rtl;
+
+    }
+    p{
+        color: #333;
+    }
+    ol, ul {
+        list-style: none;
+    }
+
+    blockquote, q {
+        quotes: none;
+    }
+
+    blockquote:before, blockquote:after,
+    q:before, q:after {
+        content: none;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    a, a:hover, a:visited, a:focus, a:active {
+        text-decoration: none;
+        transition: 300ms;
+    }
+
+    th, td {
+        padding: 7px;
+        text-align: right;
+    }
+
+    h1, h2, h3 {
+        color: #565657;
+    }
+    label{
+        font-size: 12px;
+        padding: 6px 0;
+        display: block;
+    }
+    input[type="text"],input[type="password"],input[type="email"]{
+        border: 2px solid #818d9b;
+        border-radius: 5px;
+        width: 100%;
+        padding: 5px 15px;
+        line-height: 1.1;
+        direction: rtl;
+    }
+    select{
+        width: 100%;
+
+        padding: 0 10px;
+
+        border-radius: 3px;
+
+        border: 1px solid;
+        margin: 7px auto 0;
+    }
+    .input-forms > div{
+        margin: 3px auto;
+        float: right;
+        height: 50px;
+    }
+    .input-forms .radio_btn{
+        height: 24px;
+    }
+    .error_msg{
+        color: #ff0000;
+        font-size: 11px;
+        display: block;
+        text-align: center;
+        padding: 2px;
+    }
+    #step1 .content_section, #step2 .content_section {
+        padding: 5px 66px;
+        overflow: hidden;
+        padding-top: 40px;
+    }
+    #step4 .header_list,#step3 .header_list{
+        margin-bottom: 5px;
+    }
+
+    .ui-corner-all {
+        margin: 7px 0;
+
+        padding-bottom: 10px;
+
+    }
+    .ui-corner-all input{
+        cursor: pointer;
+        width: 23px;
+        height: 23px;
+        position: absolute !important;
+        top: 2px;
+        opacity: 0;
+        left: 15px;
+    }
+
+    .ui-corner-all  input[type="checkbox"]:checked + .fa {
+        color: #28a745;
+        background: red;
+        width: 100px;
+        height: 100px;
+    }
+    input[type="text"], input[type="password"], input[type="email"] {
+        -webkit-appearance: none;
+        border: 1px solid #818d9b;
+        border-radius: 5px;
+        width: 100%;
+        padding: 8px 15px;
+    }
+    .ui-corner-all i {
+        background: none;
+        width: 23px;
+        height: 23px;
+        display: block;
+        position: absolute;
+        top: 4px;
+        left: 15px;
+        color: #808c9c;
+        border: 2px solid;
+        border-radius: 50%;
+        padding: 3px 2px;
+        font-size: 14px;
+    }
+    .radio-wrapper{
+        margin-bottom: 12px;
+    }
+    .radio-wrapper input {
+        cursor: pointer;
+        width: 23px;
+        height: 23px;
+        float: right;
+        position: absolute;
+        top: -5px;
+        right: 65px;
+        opacity: 0;
+        z-index: 1;
+    }
+
+    .radio-wrapper input:checked + i, .radio-wrapper input:checked + i {
+        background: #28a745;
+        color: #fff;
+        padding: 4px;
+    }
+    .radio-wrapper input {
+        cursor: pointer;
+        width: 23px;
+        height: 23px;
+        float: right;
+        position: absolute;
+        top: -5px;
+        right: 65px;
+        opacity: 0;
+        z-index: 1;
+    }
+    .radio-wrapper i, .radio-wrapper i {
+        background: none;
+        width: 23px;
+        height: 23px;
+        display: block;
+        position: absolute;
+        top: -5px;
+        right: 65px;
+        color: #808c9c;
+        border-radius: 50%;
+        padding: 3px 2px;
+        font-size: 14px;
+    }
+
+    .bouttons {
+
+        margin: 60px auto;
+
+    }
+    .bg.register{
+
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: bottom;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: -1;
+        position: absolute;
+        overflow: hidden;
+    }
+    #main{
+        width: 680px;
+        margin: 160px auto 110px;
+        direction: rtl;
+
+    }
+    .green_but{
+        width: 100%;
+
+        background: #28a745;
+
+        border: none;
+
+        border-radius: 3px;
+
+        color: #fff;
+
+        padding: 8px;
+
+        margin: 5px auto;
+    }
+    .danger_border_but{
+        width: 100%;
+        border-radius: 3px;
+        padding: 12px;
+        background: #030947;
+        color: #fff;
+        margin: 5px auto;
+    }
+    .sub-des{
+        color: #909aa6;
+        font-size: 9px;
+        margin: 8px 0 50px;
+        display: inline-block;
+    }
+
+    .input_contents{
+        position: relative;
+    }
+    input.pad{
+        padding: 13px 47px 9px 15px;
+    }
+
+    .forget_pass{
+        color: #28a745;
+        float: left;
+        font-size: 12px;
+
+        border-bottom: 1px solid;
+
+        padding-bottom: 5px;
+
+        margin: 14px 0;
+    }
+    .after_icon:after{
+        position: absolute;
+        content: " ";
+        bottom: 9px;
+        right: 23px;
+        font-family: "fontawesome",sans-serif;
+        font-size: 22px;
+        color: #818d9b;
+        border-left: 1px solid;
+        padding-left: 11px;
+    }
+    .after_icon.numbers:after{
+        content: "\f098";
+    }
+    .after_icon.unlock-alt:after{
+        content: "\f13e";
+    }
+    .after_icon.search-icon:after{
+        content: "\f002";
+    }
+    #input-user-name .after_icon:after{
+        bottom: 19px;
+    }
+    .left-section {
+        padding: 0;
+        height: 100%;
+        position: relative;
+        background: #fff;
+    }
+
+    .main-form {
+        min-width: 250px;
+        margin: 0 auto;
+        height: 550px;
+        overflow: hidden;
+        border-radius: 5px;
+        box-shadow: 0 0 44px rgba(0,0,0,0.6);
+    }
+
+    .left-section h1 {
+        font-size: 24px;
+        text-align: center;
+        padding: 20px ;
+    }
+
+    ul.header_list {
+        text-align: center;
+        width: 100%;
+        border-top: 1px solid #e6e6e6;
+        background: #ededed;
+        font-size: 13px;
+        color: #818d9b;
+    }
+    ul.header_list a{
+        font-size: 13px;
+        color: #818d9b;
+    }
+    ul.header_list li {
+        padding: 10px 12px;
+    }
+    ul.header_list li.active {
+        color: #313a43;
+        border-bottom:2px solid #28a745;
+    }
+    .content_section{
+        padding: 5px 25px;
+    }
+
+    .dots-step{
+        position: absolute;
+        left: calc(50% - 50px);
+        bottom: 8px;
+        direction: rtl;
+    }
+
+    .dots-step span {
+        width: 12px;
+        height: 12px;
+        border: 2px solid #818d9b;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 5px;
+        position: relative;
+
+    }
+    .dots-step span.active{
+        background: #28a745;
+
+    }
+
+    .dots-step span:after{
+        position: absolute;
+        content: " ";
+        top: 3px;
+        background: #a0a9b3;
+        right: 10px;
+        color: #818d9b;
+        width: 15px;
+        height: 3px;
+    }
+
+    .dots-step span:last-of-type:after{
+        display: none;
+    }
+    .dropdown {
+        position: absolute;
+        top:50%;
+        transform: translateY(-50%);
+    }
+
+    a {
+        color: #fff;
+    }
+
+    .dropdown dd,
+    .dropdown dt {
+        margin: 0;
+        padding: 0;
+    }
+
+    .dropdown ul {
+        margin: -1px 0 0 0;
+    }
+
+    .dropdown dd {
+        position: relative;
+    }
+
+    .dropdown a,
+    .dropdown a:visited {
+        color: #fff;
+        text-decoration: none;
+        outline: none;
+        font-size: 12px;
+    }
+
+    .dropdown dt a {
+        background-color: #4F6877;
+        display: block;
+        padding: 8px 20px 5px 10px;
+        min-height: 25px;
+        line-height: 24px;
+        overflow: hidden;
+        border: 0;
+        width: 272px;
+    }
+
+    .dropdown dt a span,
+    .multiSel span {
+        cursor: pointer;
+        display: inline-block;
+        padding: 0 3px 2px 0;
+    }
+
+    .dropdown dd ul {
+        background-color: #4F6877;
+        border: 0;
+        color: #fff;
+        display: none;
+        left: 0px;
+        padding: 2px 15px 2px 5px;
+        position: absolute;
+        top: 2px;
+        width: 280px;
+        list-style: none;
+        height: 100px;
+        overflow: auto;
+    }
+
+    .dropdown span.value {
+        display: none;
+    }
+
+    .dropdown dd ul li a {
+        padding: 5px;
+        display: block;
+    }
+
+    .dropdown dd ul li a:hover {
+        background-color: #fff;
+    }
+
+
+
+
+    button {
+        background-color: #6BBE92;
+        width: 302px;
+        border: 0;
+        padding: 10px 0;
+        margin: 5px 0;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+    }
+    @media screen and (max-width: 996px) {
+        body{
+            line-height: 1.1em;
+        }
+        .content_section {
+            padding: 15px !important; ;
+        }
+        .dots-step{
+
+        }
+    }
+    @media screen and (max-width: 768px) {
+        #main {
+            margin: 160px auto 80px;
+            left: 15px;
+            transform: inherit;
+            width: calc(100% - 30px);
+        }
+    }
+
+
+    @media screen and (max-width: 447px) {
+        .content_section {
+            padding: 0 15px !important;
+        }
+        .dots-step[data-v-5abd7116] {
+            bottom: -2px;
+        }
+    }
+
+
+
+</style>
 <template>
 <div>
     <!-- Modal -->
-    <div class="container">
+   <!-- <div class="container">
         <div class="modal fade" id="myModal" tabindex="-1" ref="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -14,14 +520,17 @@
                             متوجه شدم
                         </button>
                     </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
+                </div>&lt;!&ndash; /.modal-content &ndash;&gt;
+            </div>&lt;!&ndash; /.modal-dialog &ndash;&gt;
         </div>
-    </div>
+    </div>-->
     <!-- /.modal -->
+    <div class="bg register"> </div>
+
+
     <main id="main">
         <div class="main-form">
-            <div class="left-section col-xs-8">
+            <div class="left-section col-sm-8">
                 <h1>ثبت نام در سامانه </h1>
                 <div id="step1" v-show="currentStep == 1">
                     <template>
@@ -35,7 +544,7 @@
                             <label class="col-xs-12">
                                 لطفا شماره موبایل خود را وارد کنید
                             </label>
-                            <div class="col-sm-12 input_contents">
+                            <div class="col-xs-12 input_contents">
                                 <span class="after_icon numbers"></span>
                                 <input class="pad number" type="text" name="name" v-model="step1.phone"
                                        placeholder="شماره موبایل">
@@ -134,19 +643,19 @@
                             </div>
                             <label class="col-xs-12">
                                 اطلاعات شخصی خود را وارد کنید. </label>
-                            <div class="col-sm-6">
+                            <div class="col-xs-6">
                                 <input type="text" name="city" v-model="step3.first_name" placeholder="نام">
                                 <span v-if="errors.first_name" class="error_msg">
                                     {{errors.first_name[0]}}
                                 </span>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-xs-6">
                                 <input type="text" name="city" v-model="step3.last_name" placeholder="نام خانوادگی">
                                 <span v-if="errors.last_name" class="error_msg">
                                     {{errors.last_name[0]}}
                                 </span>
                             </div>
-                            <div class="col-sm-12 input_contents">
+                            <div id="input-user-name" class="col-xs-12  input_contents">
                                 <span class="after_icon search-icon"></span>
                                 <input class="pad" type="text" name="city" v-model="step3.user_name"
                                        placeholder="نام کاربری به انگلیسی">
@@ -158,14 +667,14 @@
                                 </span>
                             </div>
 <!--
-                            <div class="col-sm-6">
+                            <div class="col-xs-6">
                                 <input type="text" name="city" v-model="step3.national_code" placeholder="کد ملی(اختیاری)">
                                 <span v-if="errors.national_code" class="error_msg">
                                     {{errors.national_code[0]}}
                                 </span>
                             </div>
 -->
-                            <div class="col-sm-6">
+                            <div class="col-xs-6">
                                 <!--<input type="text" name="city" v-model="step3.province" placeholder="استان">-->
                                 <select  v-on:change="setProvinceName($event)">
                                     <option selected disabled>استان را انتخاب کنید</option>
@@ -180,7 +689,7 @@
                                     {{errors.province[0]}}
                                 </span>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-xs-6">
                                 <!--<input type="text" name="city" v-model="step3.city" placeholder="شهر">-->
                                 <select v-on:change="setCityName($event)">
                                     <option selected disabled>شهر را انتخاب کنید</option>
@@ -192,13 +701,13 @@
                                     {{errors.city[0]}}
                                 </span>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-xs-6">
                                 <input type="password" name="city" v-model="step3.password" placeholder="رمز عبور">
                                 <span v-if="errors.password" class="error_msg">
                                     {{errors.password[0]}}
                                 </span>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-xs-6">
                                 <input type="password" name="city" v-model="step3.re_password" placeholder="تکرار رمز عبور">
                                 <span v-if="errors.password_conf" class="error_msg">
                                     {{errors.password_conf[0]}}
@@ -240,7 +749,7 @@
                                     <i class="fa fa-check"></i>
                                 </div>
                             </div>
-                            
+
                             <span v-if="errors.activity_type" class="error_msg">
                                     {{errors.activity_type[0]}}
                             </span>
@@ -262,9 +771,9 @@
                                 <span v-if="errors.category_id" class="error_msg">
                                     {{errors.category_id[0]}}
                                 </span>
-                                
+
 <!--
-                                <div class="rules col-sm-12">
+                                <div class="rules col-xs-12">
                                     با <span class="roules-check-inside">قوانین و شرایط</span>
                                     موافقم<input type="checkbox" v-model='step4.rules' value="1">
                                     <i class="fa fa-check"></i>
@@ -292,25 +801,7 @@
                 </div>
 
             </div>
-            <div class="col-sm-4 right-section">
-                <h1>
-                    اینکوباک
-                </h1>
-                <ul>
-                    <li>
-                        فرصت های جدیدی را خلق کنید.
-                    </li>
-                    <li>
-                        در زمان و هزینه صرفه جویی کنید.
-                    </li>
-                    <li>
-                        با شرکای  قابل اعتماد ارتباط برقرار کنید.
-                    </li>
-                    <li>
-                        بیشتر از یک سایت خدمات بگیرید.
-                    </li>
-                </ul>
-            </div>
+            <RightSection></RightSection>
         </div>
     </main>
 </div>
@@ -318,6 +809,8 @@
 </template>
 
 <script>
+    import {eventBus} from "../../router/dashboard_router";
+    import RightSection from './RightSection.vue'
     export default {
         data:function(){
            return{
@@ -369,13 +862,18 @@
                errorFlag:false,
                userNameUnique:true,
                nationalCodeUnique:true,
-               popUpMsg:'',
+               popUpMsg:'شیر کلفت',
            }
         },
-        ready: function(){
-            console.log('ready');
+        components:{
+            RightSection
         },
         methods:{
+            loader:function(){
+                this.$nextTick(function () {
+                    eventBus.$emit('finishLoad', false);
+                });
+            },
             goToStep: function(step){
                 this.currentStep = step;
             },
@@ -388,8 +886,6 @@
                 this.step2.now = new Date().getTime();
                 this.step2.showTimer = true;
                 this.step2.timeCounterDown = 59;
-
-
                 axios.post("/send_verification_code",{
                     phone : this.toLatinNumbers(this.step1.phone)
                 })
@@ -475,7 +971,7 @@
                             if(response.status == 201){
 
                                 self.popUpMsg = 'ثبت نام با موفقیت انجام شد.در حال انتقال به صفحه ی ورود...';
-
+                                eventBus.$emit('submitSuccess', self.popUpMsg);
                                 $('#myModal').modal('show');
 
                                 setTimeout(function(){
@@ -782,6 +1278,12 @@
         },
         created(){
             gtag('config','UA-129398000-1',{'page_path': '/register'});
+        },
+        mounted:function(){
+            this.loader();
+        },
+        updated: function () {
+            this.loader();
         }
     }
 </script>

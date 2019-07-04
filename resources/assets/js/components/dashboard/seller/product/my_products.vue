@@ -1,5 +1,30 @@
 <style scoped>
 
+    .wrapper_no_pic {
+        text-align: center;
+        font-size: 23px;
+        padding: 15px 0;
+        border: 5px dashed #bdbdbd;
+        border-radius: 4px;
+    }
+
+    .wrapper_no_pro {
+        text-align: center;
+        font-size: 23px;
+        padding: 15px 0;
+    }
+
+    .content_no_pic {
+        font-size: 70px;
+        margin: 20px auto;
+        color: #bdbdbd;
+    }
+
+    .text_no_pic {
+        margin: 30px auto;
+        color: #bdbdbd;
+    }
+
     .main-content-item {
         box-shadow: none;
     }
@@ -58,27 +83,25 @@
             <div class="contents">
 
                 <div v-if="products.length > 0">
-                    <product-article
-                            :products="products"
+                    <product-article  v-for="(product,productIndex) in products"
+                 :key="product.main.id"
+                            :product="product"
                             :loading_img="loading_img"
                             :defultimg="defultimg"
                             :str="str"
                             :loading="loading"
                     >
-
                     </product-article>
                 </div>
-                <!--  <div class="col-xs-12" v-if="products.length == 0 && !loading">
-                      <div class="col-xs-12" v-if="products.length == 0 && !loading">
-                          <div class="wrapper_no_pro">
-                              <div class="content_no_pic"><i class="fa fa-list-alt"></i></div>
-                              <div class="text_no_pic"><p>محصولی ثبت نشده است</p></div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="loading_images  col-xs-12" v-show="loading">
-                      <img :src="loading_img" style="width:200px;height:200px">
-                  </div>-->
+                <div class="col-xs-12" v-if="products.length == 0 && !loading">
+                    <div class="wrapper_no_pro">
+                        <div class="content_no_pic"><i class="fa fa-list-alt"></i></div>
+                        <div class="text_no_pic"><p>محصولی ثبت نشده است</p></div>
+                    </div>
+                </div>
+                <div class="loading_images  col-xs-12" v-show="loading">
+                    <img :src="loading_img" style="width:200px;height:200px">
+                </div>
             </div>
         </main>
     </div>
@@ -124,13 +147,14 @@
                        url: 'myProducts',
                    },
                 ],
+                loading :false
             }
         },
 
         methods: {
             init: function () {
                 var self = this;
-
+                self.loading = true;
                 axios.post('/user/profile_info')
                     .then(function (response) {
                             self.currentUser = response.data;
@@ -157,7 +181,7 @@
         }
         ,
         created() {
-            gtag('config', 'UA-129398000-1', {'page_path': '/my_products'});
+            gtag('config', 'UA-129398000-1', {'page_path': '/my-products'});
         }
         ,
     }

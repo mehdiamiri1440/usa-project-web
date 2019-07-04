@@ -167,12 +167,12 @@
                     <!--      <li><a href="#" onclick="dropdownList()"><i class="fa fa-bars" aria-hidden="true"></i></a>
                               <div class="icon-header-list">
                                   <ul class="list-unstyled">
-                                      <li class="list-item"><a href="/master/product-list">لیست محصولات</a></li>
+                                      <li class="list-item"><a href="/product-list">لیست محصولات</a></li>
                                   </ul>
                               </div>
                           </li>-->
                     <li>
-                        <a class="green-bot" href="/master/product-list" style="font-size: 17px" @click="registerComponentStatistics('product-list-btn','click','product-list in dashboard')"> <span class="full">لیست محصولات</span>
+                        <a class="green-bot" href="/product-list" style="font-size: 17px" @click="registerComponentStatistics('product-list-btn','click','product-list in dashboard')"> <span class="full">لیست محصولات</span>
                             <span class="min"><i class="fa fa-th-list" aria-hidden="true"></i></span> </a>
                     </li>
                     <li><a :href="routeHome"><i class="fa fa-home" aria-hidden="true"></i></a></li>

@@ -1,7 +1,4 @@
 
-
-//
-
 var viz=false;
 
 var OwlCarousel =  {
@@ -46,11 +43,10 @@ var OwlCarousel =  {
     }
 };
 
-
 var vm = new Vue({
         el: '#app',
         components:{
-            'image-viewer' : OwlCarousel
+            'image-viewer' : OwlCarousel,
         },
         data: {
             posts: '',
