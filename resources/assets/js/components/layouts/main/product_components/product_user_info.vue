@@ -1,30 +1,33 @@
 <template>
-    <div class="user-contents col-xs-12  col-sm-3">
-        <div class="user-image" v-if="profile_photo">
-            <img v-bind:src=" '/storage/' + profile_photo">
-        </div>
-        <div class="user-image" v-else>
-            <img :src="defultimg" class="image_defult">
-        </div>
-        <p v-if="user_info">{{user_full_name}}</p>
+    <div>
+
+        <div class="user-contents col-xs-12  col-sm-3">
+            <div class="user-image" v-if="profile_photo">
+                <img v-bind:src=" '/storage/' + profile_photo">
+            </div>
+            <div class="user-image" v-else>
+                <img :src="defultimg" class="image_defult">
+            </div>
+            <p v-if="user_info">{{user_full_name}}</p>
 
 
 
-        <div v-if="!is_my_profile_status"  class="create_buy  ">
-            <a :href=" '/profile/'+ user_name" class="green_bot"
-               @click="registerComponentStatistics('product','showUserProfile','show profile')">مشاهده پروفایل</a>
-            <a class="green_bot hidden-xs" href="#" @click.prevent="openChat()">
-                <span class="fa fa-comment"></span> ارسال پیام
-            </a>
-        </div>
+            <div v-if="!is_my_profile_status"  class="create_buy  ">
+                <a :href=" '/profile/'+ user_name" class="green_bot"
+                   @click="registerComponentStatistics('product','showUserProfile','show profile')">مشاهده پروفایل</a>
+                <a class="green_bot hidden-xs" href="#" @click.prevent="openChat()">
+                    <span class="fa fa-comment"></span> ارسال پیام
+                </a>
+            </div>
 
-        <div v-else class="create_buy  ">
-            <a  href="" class="green_bot delete-product"
-                @click.prevent="deleteProduct()"> <span class="fa fa-trash"></span> حذف </a>
+            <div v-else class="create_buy  ">
+                <a  href="" class="green_bot delete-product"
+                    @click.prevent="deleteProduct()"> <span class="fa fa-trash"></span> حذف </a>
 
-            <a class="green_bot edit-product hidden-xs"  href="#" @click.prevent="openEditBox($event)" >
-                <span class="fa fa-pencil"></span> ویرایش
-            </a>
+                <a class="green_bot edit-product hidden-xs"  href="#" @click.prevent="$parent.openEditBox($event)" >
+                    <span class="fa fa-pencil"></span> ویرایش
+                </a>
+            </div>
         </div>
     </div>
 </template>
@@ -130,6 +133,13 @@
     import {eventBus} from "../../../../../js/router/dashboard_router";
 
     export default {
+        data(){
+            return{
+                popUpMsg:'',
+                deleteButtonText:'',
+                cancelButtonText:''
+            }
+        },
         props: [
             'profile_photo',
             'user_info',
@@ -141,9 +151,6 @@
             'is_my_profile_status'
         ],
         methods: {
-         EditBox:function(e){
-                this.$parent.openEditBox(e);
-            },
             openChat: function () {
 
                 this.registerComponentStatistics('product', 'openChat', 'click on open chatBox');
@@ -188,23 +195,22 @@
                     'event_label': labelName
                 });
             },
+            
             deleteProduct:function(){
                 var self = this;
                 //show modal
-
-
-                axios.post('/delete_product_by_id',{
-                    product_id : self.product_id
-                })
-                .then(function(response){
-                    //show product deleted message
-                    //code
-
-                    window.location.reload();
-                })
-                .catch(function(err){
-                    //show modal
-                });
+               this.popUpMsg  = 'آیا محصول حذف شود؟';
+               this.deleteButtonText  = 'حذف';
+               this.cancelButtonText  = 'انصراف';
+                
+                
+                eventBus.$emit('submitSuccess',this.popUpMsg);
+                eventBus.$emit('deleteButtonText',this.deleteButtonText);
+                eventBus.$emit('cancelButtonText',this.cancelButtonText);
+                
+                eventBus.$emit('productId',this.product_id);
+                $('#deleteModal').modal('show');
+                
             }
         },
     }
