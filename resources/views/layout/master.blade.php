@@ -36,13 +36,13 @@
     {{--<script src="{{asset('index/js/jquery.js')}}"></script>--}}
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
 {{--    <script src="{{asset('index/js/bootstrap.min.js')}}"></script>--}}
-    <script src="{{asset('index/js/particleNetwork.js') }}"></script>
+{{--    <script src="{{asset('index/js/particleNetwork.js') }}"></script>--}}
     <script src="{{asset('index/js/jquery.magnific-popup.min.js')}}"></script>
     <script src="{{asset('index/js/jquery.parallax.js')}}"></script>
     <script src="{{asset('index/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('index/js/smoothscroll.js')}}"></script>
     <script src="{{asset('index/js/wow.min.js')}}"></script>
-    <script src="{{asset('index/js/custom.js')}}"></script>
+{{--    <script src="{{asset('index/js/custom.js')}}"></script>--}}
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
@@ -97,6 +97,10 @@
                  site_logo="{{asset('assets/img/logo-incobac.png')}}"
                  site_logo_white="{{asset('/index/images/logo_white.png')}}"
                  incobaicon="{{asset('assets/img/lo.png')}}"
+                 img_pricing_38="{{asset('index/images/Group_38.png')}}"
+                 img_pricing_36="{{asset('index/images/Group_36.png')}}"
+                 img_pricing_34="{{asset('index/images/Group_34.png')}}"
+                 img_pricing_32="{{asset('index/images/Group_32.png')}}"
                  img_success_project="{{asset('index/images/current.png')}}"
                  img_success_verified="{{asset('index/images/farmer.png')}}"
                  img_seller_services="{{asset('index/images/seller.jpg')}}"
@@ -134,6 +138,7 @@
                  img_mobile_11_5_help_page="{{asset('assets/img/help/mobile_11_5.jpg')}}"
                  img_mobile_12_help_page="{{asset('assets/img/help/mobile_12.jpg')}}"
                  img_mobile_13_help_page="{{asset('assets/img/help/mobile_13.jpg')}}"
+                 img_mobile_13_1_help_page="{{asset('assets/img/help/mobile_13_1.jpg')}}"
     ></router-view>
 
     <footer-master-layouts></footer-master-layouts>

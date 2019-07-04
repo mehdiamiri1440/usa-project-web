@@ -216,23 +216,27 @@
                                class=" form-control">
                         <span class="text-danger" v-if="errors.requirement_amount">{{errors.requirement_amount[0]}}</span>
                     </div>
+              <!--      <div class="col-xs-12 col-sm-6">
+                        <label for="requirement-amount" class="content-lable">
+                            مقدار مورد نیاز (کیلوگرم):
+                        </label>
+                        <input id="requirement-amount" placeholder="مقدار مورد نیاز" type="text"
+                               class=" form-control">
+                        <span class="text-danger" v-if="errors.requirement_amount">{{errors.requirement_amount[0]}}</span>
+                    </div>-->
                     <div class="col-xs-12 col-sm-6">
-                       <div class="row">
-                           <div class="col-xs-6">
-                               <label for="max-price-input" class="content-lable">
-                                   حداکثر قیمت:
-                               </label>
-                               <input id="max-price-input" placeholder="حداکثر قیمت" type="text" class=" form-control">
-                               <span class="text-danger" v-if="errors.pack_type">{{errors.pack_type[0]}}</span>
-                           </div>
-                           <div class="col-xs-6">
                                <label for="min-price-input" class="content-lable">
                                    حداقل قیمت:
                                </label>
                                <input id="min-price-input" placeholder="حداقل قیمت" type="text" class=" form-control">
                                <span class="text-danger" v-if="errors.pack_type">{{errors.pack_type[0]}}</span>
-                           </div>
-                       </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                               <label for="max-price-input" class="content-lable">
+                                   حداکثر قیمت:
+                               </label>
+                               <input id="max-price-input" placeholder="حداکثر قیمت" type="text" class=" form-control">
+                               <span class="text-danger" v-if="errors.pack_type">{{errors.pack_type[0]}}</span>
                     </div>
                     <div class="col-xs-12 ">
                         <label for="description" class="content-lable">
@@ -398,7 +402,7 @@
                     });
             },
             getProductById: function (productId) {
-                var product = this.products.filter(function (product) {
+                var product = this.product.filter(function (product) {
                     if (product.main.id == productId) {
                         return true;
                     }
@@ -414,12 +418,11 @@
 
                     this.errors = '';
 
-                    var index = (event.parents('article').index() + 1);
-                    var element = $('article:nth-of-type(' + index + ') .buy_details');
-                    element.slideToggle("125", "swing");
-                    $('.buy_details').not(element).slideUp();
+                    var index = (event.parents('article').find('.buy_details'));
+                    index.slideToggle("125", "swing");
+                    $('.buy_details').not(index).slideUp();
 
-                    this.scrollToTheRequestRegisterBox(element);
+                    this.scrollToTheRequestRegisterBox(index);
                 }
                 else {
                     this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
@@ -441,11 +444,15 @@
 
                 this.errors = '';
 
-                var index = (event.parents('article').index() + 1);
-                var productId = $('article:nth-of-type(' + index + ') .buy_details input#product-id');
-                var requirementAmount = $('article:nth-of-type(' + index + ') .buy_details input#requirement-amount');
-                var packType = $('article:nth-of-type(' + index + ') .buy_details input#pack-type');
-                var description = $('article:nth-of-type(' + index + ') .buy_details textarea#description');
+
+
+
+
+                var productId = (event.parents('article').find('.buy_details input#product-id'));
+                console.log(productId.val());
+                var requirementAmount = (event.parents('article').find('.buy_details input#requirement-amount'));
+                var packType = (event.parents('article').find('.buy_details input#pack-type'));
+                var description = (event.parents('article').find('.buy_details textarea#description'));
 
                 description = description.val();
                 requirementAmount = this.toLatinNumbers(requirementAmount.val());
@@ -453,7 +460,7 @@
                 productId = productId.val();
 
                 var product = this.getProductById(productId);
-
+                console.log(product);
                 var request = {
                     requirement_amount: requirementAmount,
                     category_id: product.main.sub_category_id,

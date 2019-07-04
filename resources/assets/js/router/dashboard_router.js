@@ -56,6 +56,7 @@ import indexAboutUs from '../components/layouts/main/about_us'
 import help from '../components/layouts/main/help'
 import contactUs from '../components/layouts/main/contact_us'
 import profile from '../components/layouts/main/profile'
+import pricing from '../components/layouts/main/pricing_page'
 
 
 // Login & Register Components
@@ -390,6 +391,15 @@ const myRouter =  new Router({
                 seller: register,
                 buyer: register,
                 layouts: register,
+            },
+        },
+        {
+            path: '/pricing',
+            name: 'pricing',
+            components: {
+                seller: pricing,
+                buyer: pricing,
+                layouts: pricing,
             },
         },
         {

@@ -167,7 +167,7 @@
                             <p class="main_par">
                                 {{this.popUpMsg}}
                             </p>
-                            <router-link :to="{name:'login'}" tag="button" class="btn  green_bot"
+                            <router-link to="/login" tag="button" class="btn  green_bot"
                                          @click="redirectToLogin()">
                                 ورود/ثبت نام
                             </router-link>

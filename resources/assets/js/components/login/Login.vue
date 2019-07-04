@@ -24,8 +24,9 @@
                                            <span class="after_icon numbers"></span>
                                            <input class="pad number" type="text" v-model="step1.phone"
                                                   placeholder="09*">
+                                           <span class="text-danger" v-if="errors.phone">{{errors.phone[0]}}</span>
                                        </div>
-                                       <span class="text-danger" v-if="errors.phone">{{errors.phone[0]}}</span>
+
                                        <label class="col-xs-12">
                                            کلمه عبور
                                        </label>
@@ -33,8 +34,9 @@
                                            <span class="after_icon  unlock-alt "></span>
                                            <input class="pad number" type="password" v-model="step1.password"
                                                   placeholder="کلمه عبور">
+                                           <span class="text-danger" v-if="errors.password">{{errors.password[0]}}</span>
                                        </div>
-                                       <span class="text-danger" v-if="errors.password">{{errors.password[0]}}</span>
+
                                        <a href="#" @click="goToStep(2)" class="forget_pass">رمز عبور خود را فراموش کرده
                                            ام!</a>
                                        <button class="green_but" type="button" @click="doLogin">ورود به سامانه

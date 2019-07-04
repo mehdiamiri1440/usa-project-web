@@ -17,8 +17,10 @@
                              class="panel-collapse collapse">
                             <div class="panel-body">
                                 <p>
-                                    اینکوباک بستر هوشمند و الکترونیکی خرید و فروش عمده محصولات کشاورزی (میوه - تره بار -خشکبار) است که خدمات دسترسی به خرید(ان و فروشندگان مختلف،)درخواست خرید و اطلاع از
+                                    اینکوباک بستر هوشمند و الکترونیکی خرید و فروش عمده محصولات کشاورزی (میوه - تره بار
+                                    -خشکبار) است که خدمات دسترسی به (خریدان و فروشندگان مختلف)درخواست خرید و اطلاع از
                                     قیمت های بازار را به خریداران و تامین کنندگان ارائه میدهد.
+
 
                                 </p>
                             </div>
@@ -209,14 +211,14 @@
                                         </p>
                                     </li>
                                     <li>
-                                        <p>در سمت راست پنل خود بر روی لینک (ثبت محصول)  کلیک کنید.</p>
+                                        <p>در سمت راست پنل خود بر روی لینک (ثبت محصول) کلیک کنید.</p>
                                         <p>
 
                                             اطلاعات محصول خود را وارد کرده و بر روی دکمه ی )ثبت محصول( کلیک کنید.
 
                                         </p>
                                         <div class="desktop-image">
-                                        <img :src="img_6_help_page">
+                                            <img :src="img_6_help_page">
                                         </div>
                                         <br/><br/>
                                         <div class="mobile-image">
@@ -314,8 +316,8 @@
 
                                     <li>
                                         <div class="desktop-image">
-                                        <img :src="img_7_help_page">
-                                        <br/><br/>
+                                            <img :src="img_7_help_page">
+                                            <br/><br/>
                                         </div>
                                         <div class="mobile-image">
                                             <img :src="img_mobile_7_1_help_page">
@@ -349,11 +351,17 @@
                                 </p>
 
                                 <br/><br/>
-                                <img :src="img_13_help_page">
-
-                                <br/><br/>
+                                <div class="desktop-image">
+                                    <img :src="img_13_help_page">
+                                    <br/><br/>
+                                </div>
                                 <div class="mobile-image">
                                     <img :src="img_mobile_13_help_page">
+                                    <br/><br/>
+                                </div>
+                                <div class="mobile-image">
+                                    <img :src="img_mobile_13_1_help_page">
+                                    <br/><br/>
                                 </div>
                             </div>
                         </div>
@@ -420,10 +428,12 @@
         display: block;
         line-height: 1.618;
     }
-    @media screen and (max-width: 768px){
-        .desktop-image{
+
+    @media screen and (max-width: 768px) {
+        .desktop-image {
             display: none;
         }
+
         .mobile-image {
             display: block;
         }
@@ -462,10 +472,10 @@
             'img_mobile_11_5_help_page',
             'img_mobile_12_help_page',
             'img_mobile_13_help_page',
+            'img_mobile_13_1_help_page',
         ],
         methods: {
             loader: function () {
-                console.log('is loader');
                 this.$nextTick(function () {
                     eventBus.$emit('finishLoad', false);
                 });

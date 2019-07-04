@@ -180,7 +180,8 @@ class product_controller extends Controller
             'category_id'           => 'integer|min:1',
             'sub_category_id'       => 'integer|min:1',
             'province_id'           => 'integer|min:1',
-            'city_id'               => 'integer|min:1'
+            'city_id'               => 'integer|min:1',
+            'search_text'           => 'string',
         ]);
 
         $all_products = NULL ;

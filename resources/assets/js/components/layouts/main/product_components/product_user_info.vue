@@ -22,7 +22,7 @@
             <a  href="" class="green_bot delete-product"
                 @click.prevent="deleteProduct()"> <span class="fa fa-trash"></span> حذف </a>
 
-            <a class="green_bot edit-product hidden-xs"  href="#" @click.prevent="$parent.openRequestRegisterBox($event)" >
+            <a class="green_bot edit-product hidden-xs"  href="#" @click.prevent="openEditBox($event)" >
                 <span class="fa fa-pencil"></span> ویرایش
             </a>
         </div>

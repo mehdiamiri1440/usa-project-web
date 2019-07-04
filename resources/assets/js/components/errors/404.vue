@@ -150,7 +150,6 @@
         ],
         methods:{
             loader:function(){
-                console.log('is loader');
                 this.$nextTick(function () {
                     eventBus.$emit('finishLoad', false);
                 });

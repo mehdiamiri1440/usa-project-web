@@ -605,7 +605,7 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'buyAd_controller@is_user_allowed_to_access_buyAd_requests',
         'as' => 'is_allowed_to_access_buyAd_requests'
     ]);
-    
+
     Route::post('/edit_product',[
         'uses' => 'product_controller@edit_product_by_id',
         'as'   => 'edit_product_by_id'
@@ -987,10 +987,10 @@ Route::get('/sitemap.xml',[
 //   'uses' => 'profile_controller@migrate_users'
 //]);
 
-Route::get('/pricing', function(){
+/*Route::get('/pricing', function(){
     return view('index_pages.pricing_page');
 });
-
+*/
 
 
 

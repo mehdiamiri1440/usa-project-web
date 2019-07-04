@@ -772,12 +772,6 @@
                     }
                 })
             },
-            formBut:function(link) {
-                $index = ($(link).parents('article').index() + 1);
-                $element = $('article:nth-of-type(' + $index + ') .buy_details');
-                $element.slideToggle("125", "swing");
-                $('.buy_details').not($element).slideUp();
-            },
             dropdown:function() {
                 $(".profile-list").fadeIn("slow", function () {
                     viz = true;
@@ -991,12 +985,10 @@
 
                     this.errors = '';
 
-                    var index = (event.parents('article').index() + 1);
-                    var element =  $('article:nth-of-type(' + index + ') .buy_details');
-                    element.slideToggle("125", "swing");
-                    $('.buy_details').not(element).slideUp();
-
-                    this.scrollToTheRequestRegisterBox(element);
+                    var index = (event.parents('article').find('.buy_details'));
+                    index.slideToggle("125", "swing");
+                    $('.buy_details').not(index).slideUp();
+                    this.scrollToTheRequestRegisterBox(index);
                 }
                 else{
                     this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
@@ -1016,11 +1008,10 @@
 
                 this.errors = '';
 
-                var index = (event.parents('article').index() + 1);
-                var productId =  $('article:nth-of-type(' + index + ') .buy_details input#product-id');
-                var requirementAmount =  $('article:nth-of-type(' + index + ') .buy_details input#requirement-amount');
-                var packType =  $('article:nth-of-type(' + index + ') .buy_details input#pack-type');
-                var description =  $('article:nth-of-type(' + index + ') .buy_details textarea#description');
+                var productId = (event.parents('article').find('.buy_details input#product-id'));
+                var requirementAmount = (event.parents('article').find('.buy_details input#requirement-amount'));
+                var packType = (event.parents('article').find('.buy_details input#pack-type'));
+                var description = (event.parents('article').find('.buy_details textarea#description'));
 
                 description = description.val();
                 requirementAmount = this.toLatinNumbers(requirementAmount.val());

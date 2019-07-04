@@ -6,6 +6,9 @@
                     <div class="col-xs-12 col-sm-6 col-md-4">
                         <ul class="list-unstyled footer-list">
                             <li>
+                                <a  class="smoothScroll" href="/pricing">تعرفه ها</a>
+                            <li>
+                            <li>
                                 <a  class="smoothScroll" href="#"> قیمت روزانه</a>
                             <li>
                                 <a  class="smoothScroll" href="/privacy-and-policy">قوانین و مقررات</a>
