@@ -391,6 +391,7 @@
         text-align: center;
         position: relative;
         overflow: hidden;
+        direction: rtl;
     }
 
     #intro h2 {
