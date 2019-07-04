@@ -107,7 +107,7 @@
                 <p dir="rtl">در حال بارگذاری...</p>
             </div>
         </div>
-        
+
          <div class="container">
                 <div id="deleteModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                     <div class="modal-dialog modal-lg" role="document">
@@ -117,7 +117,7 @@
                                 <p class="main_par">
                                     {{popUpMsg}}
                                 </p>
-                            
+
                             <a href="#" class="btn green_bot " data-dismiss="modal" @click.prevent="deleteProduct()">
                                 {{deleteButtonText}}
                             </a>
@@ -130,7 +130,7 @@
                 </div>
             </div>
 
-        
+
         <div class="container">
             <div id="myModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                 <div class="modal-dialog modal-lg" role="document">
@@ -191,10 +191,9 @@
                             <p class="main_par">
                                 {{popUpMsg}}
                             </p>
-                            <router-link to="/login" tag="button" class="btn  green_bot"
-                                         @click="redirectToLogin()">
+                            <a href="/login"  class="btn  green_bot">
                                 ورود/ثبت نام
-                            </router-link>
+                            </a>
                             <br/>
                             <br/>
                             <button class="btn green_bot " data-dismiss="modal">
@@ -442,7 +441,7 @@
             },
             deleteProduct:function(){
                 var self = this;
-                
+
                 axios.post('/delete_product_by_id',{
                     product_id : self.productId
                 })
@@ -451,7 +450,7 @@
                     //code
                     self.popUpMsg = 'حذف شد.';
                     $('#myModal').modal('show');
-                    
+
                     setTimeout(function(){
                         window.location.reload();
                     },3000);
@@ -475,18 +474,18 @@
             eventBus.$on("finishLoad", ($event) => {
                 this.finishLoad = $event;
             });
-        
+
             eventBus.$on('deleteButtonText', (event) => {
                 this.deleteButtonText = event;
             });
-        
+
             eventBus.$on('cancelButtonText', (event) => {
                 this.cancelButtonText = event;
-            });        
+            });
             eventBus.$on('productId', (event) => {
                 this.productId = event;
             });
-        
+
             $(document).ready(function () {
                 self.isUserFromWebView();
 
@@ -494,7 +493,7 @@
             $(window).resize(this.jqUpdateSize);     // When the browser changes size
         },
         created() {
-            
+
             document.addEventListener('click', this.documentClick);
         }
     }

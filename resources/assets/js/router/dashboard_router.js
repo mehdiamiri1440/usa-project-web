@@ -131,7 +131,7 @@ const myRouter =  new Router({
         },
         {
             path: '/product-list/:searchText',
-            name: 'productList',
+            name: 'productListSearch',
             components: {
                 layouts: productList,
             },
