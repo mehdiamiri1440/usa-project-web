@@ -39,7 +39,7 @@
 
 @foreach($user_names as $user_name)
     <url>
-      <loc>{{url("master/profile/".$user_name->user_name)}}</loc>
+      <loc>{{url("profile/".$user_name->user_name)}}</loc>
       <changefreq>monthly</changefreq>
       <priority>0.5</priority>
     </url>
