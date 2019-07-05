@@ -189,7 +189,7 @@ class payment_controller extends Controller
         } 
         catch (\Exception $e)
         {
-            return redirect()->back();
+            return redirect('/pricing');
             //return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
         }
 //         catch (PortNotFoundException $e) 

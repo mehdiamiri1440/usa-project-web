@@ -501,6 +501,30 @@
 </style>
 <template>
     <div>
+
+          <div class="container">
+                <div id="deleteModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="main_popup_content">
+                                <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                                <p class="main_par">
+                                    {{popUpMsg}}
+                                </p>
+
+                            <a href="#" class="btn green_bot " data-dismiss="modal" @click.prevent="deleteProduct()">
+                                {{deleteButtonText}}
+                            </a>
+                            <a href="#" class="btn green_bot " data-dismiss="modal">
+                                {{cancelButtonText}}
+                            </a>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
+            </div>
+
+
         <!-- Modal -->
         <div class="container">
             <div class="modal fade" id="myModal" tabindex="-1" ref="myModal" role="dialog"
@@ -707,6 +731,9 @@
         ],
         data: function () {
             return {
+                deleteButtonText:'',
+                cancelButtonText:'',
+                ProductId:'',
                 currentUser: {
                     profile: {
                         is_company: '',
@@ -717,6 +744,7 @@
                         profile_photo: this.storage + '',
                         postal_code: '',
                         shaba_code: '',
+
                     },
                     user_info: '',
                 },
@@ -768,7 +796,6 @@
                         if (response.status == 200) {
                             self.submiting = false;
                             self.popUpMsg = 'تغییرات با موفقیت اعمال شد';
-
                             $('#myModal').modal('show');
                         }
                         self.submiting = false;
@@ -919,6 +946,28 @@
                     }
                 })
             },
+            deleteProduct:function(){
+                var self = this;
+
+                axios.post('/delete_product_by_id',{
+                    product_id : self.productId
+                })
+                .then(function(response){
+                    //show product deleted message
+                    //code
+                    self.popUpMsg = 'حذف شد.';
+                    $('#myModal').modal('show');
+
+                    setTimeout(function(){
+                        window.location.reload();
+                    },3000);
+                })
+                .catch(function(err){
+                    //show modal
+                    self.popUpMsg = 'خطایی رخ داده است.لطفا دوباره تلاش کنید.';
+                    $('#myModal').modal('show');
+                });
+            }
 
         },
         mounted() {
@@ -932,6 +981,16 @@
             });
             eventBus.$on('submitSuccess', (event) => {
                 this.popUpMsg = event;
+            });
+             eventBus.$on('deleteButtonText', (event) => {
+                this.deleteButtonText = event;
+            });
+
+            eventBus.$on('cancelButtonText', (event) => {
+                this.cancelButtonText = event;
+            });
+            eventBus.$on('productId', (event) => {
+                this.productId = event;
             });
         },
         metaInfo(){

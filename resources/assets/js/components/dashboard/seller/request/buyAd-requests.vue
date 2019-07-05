@@ -48,14 +48,33 @@
     margin: 0 auto;
 }
     }
+    .message-list{
+        padding: 19px;
+        text-align: center;
+        background: #eff3f6;
+        line-height: 1.618;
 
+    }
+    .message-list .text-red{
+        color: #e41c38;
+    }
 
+    .green_bot {
+        width: initial;
+        padding: 13px 15px;
+        font-size: 16px;
+    }
+    @media screen and (max-width: 767px){
+        .green_bot {
+            width: 100%;
+        }
+    }
 </style>
 <template>
     <div>
         <section class="main-content col-xs-12" v-if="buyAds.length != 0">
-            <ul class="list-unstyled" v-for="buyAd in buyAds">
-                <li class="list-group-item  col-xs-12">
+            <ul class="list-unstyled" >
+                <li v-for="buyAd in buyAds" class="list-group-item  col-xs-12">
                     <p class="list-title col-sm-3 col-xs-12">
                         {{buyAd.category_name}}
                         <span> | </span>
@@ -83,6 +102,12 @@
                             </p>
                     </a>
                 </li>
+                <li class="message-list col-xs-12">
+                    <p>
+                        نیگ این وسط چینه و یکو نیم خطیه حالا تو هر چی دوست داری بزار فکر کنم عدد ها مثل <span class="text-red">654</span> رنگشون فرق میکنه
+                    </p>
+                    <a class="green_bot" href="/pricing">تعرفه ها</a>
+                </li>
             </ul>
         </section>
         <section class="main-content col-xs-12 loading_images" v-else-if="buyAds.length == 0 && !load">
@@ -90,7 +115,7 @@
         </section>
         <section class="main-content col-xs-12 loading_images" v-show="load">
 
-            <img :src="loading" style="width:200px;height:200px">
+            <img :src="loading_img" style="width:200px;height:200px">
         </section>
     </div>
 </template>
@@ -99,7 +124,7 @@
     import {eventBus} from "../../../../router/dashboard_router";
     export default {
         props: [
-            "loading",
+            "loading_img",
             "storage",
             "defultimg"
         ],
@@ -138,14 +163,14 @@
                     });
             },
             openChat:function(buyAd){
-                
+
                 this.registerComponentStatistics('buyAdReply','openChat','click on open chatBox');
-                
+
                 axios.post('/get_user_last_confirmed_profile_photo',{
                     'user_id' : buyAd.myuser_id
                 }).then(function(response){
                     var profile_photo = response.data.profile_photo;
-                    
+
                     var contact = {
                         contact_id:buyAd.myuser_id,
                         first_name:buyAd.first_name,
