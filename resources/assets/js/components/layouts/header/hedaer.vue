@@ -288,7 +288,7 @@
                             <a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a>
                         </li>
                         <li>
-                            <a class="smoothScroll" href="/privacy-and-policy">قوانین و مقررات</a>
+                            <a class="smoothScroll" href="/pricing">تعرفه ها</a>
                         </li>
                         <li>
 
