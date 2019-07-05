@@ -15,7 +15,7 @@
                             </li>
                             <li>
 
-                                <a  class="smoothScroll" href="/help">اینکوباک چگونه کار می کند</a>
+                                <a  class="smoothScroll" href="/help">اینکوباک چگونه کار می کند? </a>
                             </li>
                             <li>
 
@@ -109,6 +109,9 @@
     footer p {
         text-align: right;
         color: white;
+        direction:rtl;
+    }
+    footer a {
         direction:rtl;
     }
     .footer-list{

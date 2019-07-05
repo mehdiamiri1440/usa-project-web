@@ -5,7 +5,7 @@
        <main id="main" class="login-main">
            <div class="main-form">
                <div class="left-section col-xs-12 col-sm-8">
-                   <a :href="homeurl">
+                   <a href="/">
                        <h1><img :src="site_logo"></h1>
                    </a>
                    <div id="app">
@@ -500,7 +500,6 @@
     export default{
         props: [
             'site_logo',
-            'homeurl'
         ],
         data: function () {
             return {
