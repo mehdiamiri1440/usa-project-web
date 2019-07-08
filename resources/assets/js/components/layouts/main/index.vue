@@ -1742,7 +1742,7 @@
 
 
         <!--{{اسلایدر برنج }}-->
-        <section id="mobile-rice" class="parallax-section hidden-sm hidden-md hidden-lg">
+        <section id="mobile-rice" class="parallax-section hidden-sm hidden-md hidden-lg" v-if="homePageRice">
             <div class="container">
                 <div class="row">
                     <h3 class="text-center col-xs-12"> برنج</h3>
@@ -1905,7 +1905,7 @@
             </div>
         </section>
 
-        <section id="rice" class="parallax-section  hidden-xs">
+        <section id="rice" class="parallax-section  hidden-xs" v-if="homePageRice">
             <div class="container">
                 <div class="row">
                     <h3 class="text-center col-xs-12"> برنج</h3>
@@ -1916,7 +1916,7 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageDates" :key="product.main.id">
+                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageRice" :key="product.main.id">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
@@ -2101,23 +2101,24 @@
                     .then(function (response) {
                         self.posts = response.data.posts;
                     });
-
-                axios.post('/user/get_product_list', {
+                
+                 axios.post('/user/get_product_list', {
 //                    from_record_number: 0,
 //                    to_record_number: 5,
 //                     sub_category_id:6,
-                }).then(function (response) {
-                    self.homePageDates = response.data.products;
-                });
+        }).then(function (response) {
+            self.homePageDates = response.data.products;
+        });
 
-                axios.post('/user/get_product_list', {
+        axios.post('/user/get_product_list', {
 //                    from_record_number: 0,
 //                    to_record_number: 5,
 //                     sub_category_id:43,
-//                     sub_category_id:43,
-                }).then(function (response) {
-                    self.homePageRice = response.data.products;
-                });
+        }).then(function (response) {
+            self.homePageRice = response.data.products;
+        });
+
+           
             },
             search: function () {
                 if (this.mainSearchBoxText != '') {
@@ -2135,6 +2136,7 @@
         created() {
             document.addEventListener('click', this.documentClick)
             var self = this;
+        
             window.addEventListener('keydown', function (event) {
                 if (event.keyCode === 13) {
                     if (self.enterKeyActiveForSearch) {
