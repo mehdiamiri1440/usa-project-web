@@ -1712,8 +1712,9 @@
         <!-- =========================
        mobile sliders
         ============================== -->
+<!--
 
-        <!--{{اسلایدر خرما}}-->
+        {{اسلایدر خرما}}
         <section id="mobile-date" class="parallax-section hidden-sm hidden-md hidden-lg">
             <div class="container">
                 <div class="row">
@@ -1725,49 +1726,24 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                    <!--    <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 6" :key="product.main.id">
+                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 6" :key="product.main.id">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
                                     :link="'/product-list/' + product.main.sub_category_name"
                             >
                             </image-viewer>
-                        </article>-->
+                        </article>
 
                     </div>
                 </div>
             </div>
         </section>
-        <!--{{پایان اسلایدر خرما }}-->
+        {{پایان اسلایدر خرما }}
 
 
         <!--{{اسلایدر برنج }}-->
-        <section id="mobile-rice" class="parallax-section hidden-sm hidden-md hidden-lg" v-if="homePageRice">
-            <div class="container">
-                <div class="row">
-                    <h3 class="text-center col-xs-12"> برنج</h3>
-                    <div class="text-center col-xs-12">
-                        <a href="/product-list" class="green-bot">
-                            مشاهده همه محصولات
-                        </a>
-                    </div>
-                    <div class="owl-carousel col-xs-12">
-
-                      <!--  <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 4" :key="product.main.id">
-                            <image-viewer
-                                    :title="product.main.sub_category_name + ' - ' + product.main.product_name"
-                                    :img="'storage/' + product.photos[0].file_path"
-                                    :link="'/product-list/' + product.main.sub_category_name"
-                            >
-                            </image-viewer>
-                        </article>-->
-
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--{{ پایان اسلایدر برنج }}-->
-
+    
 
         <!-- =========================
         DETAIL SECTION
@@ -1879,6 +1855,7 @@
         <!-- =========================
          WEB RICE AND DATE SLIDER
         ============================== -->
+<!--
 
         <section id="request" class="parallax-section  hidden-xs">
             <div class="container">
@@ -1891,14 +1868,14 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                      <!--  <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 6" :key="product.main.id">
+                      &lt;!&ndash;  <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 6" :key="product.main.id">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
                                     :link="'/product-list/' + product.main.sub_category_name"
                             >
                             </image-viewer>
-                        </article>-->
+                        </article>&ndash;&gt;
 
                     </div>
                 </div>
@@ -1916,7 +1893,7 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                     <!--   <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 4" :key="product.main.id">
+                     &lt;!&ndash;   <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 4" :key="product.main.id">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
@@ -1924,17 +1901,19 @@
                             >
                             </image-viewer>
                         </article>
--->
+&ndash;&gt;
                     </div>
                 </div>
             </div>
         </section>
 
+-->
 
         <!-- =========================
         TESTIMONIAL SECTION
         ============================== -->
 
+<!--
         <section id="testimonial" class="">
             <div class="overlay"></div>
             <div class="container">
@@ -1963,6 +1942,7 @@
                 </div>
             </div>
         </section>
+-->
 
 
         <!-- =========================
