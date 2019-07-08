@@ -31,7 +31,7 @@ class login
                         return $next($request);
                     }
 
-                    else  return redirect('/login');;
+                    else  return redirect('/login');
 
                 }
                 else if($user = JWTAuth::parseToken()->authenticate()){
@@ -41,16 +41,16 @@ class login
                         return $next($request);
                     }
 
-                    else return redirect('/login');;
+                    else return redirect('/login');
                 }
-                else return redirect('/login');;
+                else return redirect('/login');
 
             }
             else return $next($request);
         }
         catch(\Exception $e){
 
-            return redirect('/login');;
+            return redirect('/login');
 
         }
     }

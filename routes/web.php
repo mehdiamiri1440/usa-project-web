@@ -610,6 +610,16 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'product_controller@edit_product_by_id',
         'as'   => 'edit_product_by_id'
     ]);
+    
+    Route::get('/payment/{pakageType}',[
+        'uses' => 'payment_controller@do_payment',
+        'as' => 'do_payment',
+    ]);
+    
+    Route::any('/payment_callback',[
+        'uses' => 'payment_controller@payment_callback',
+        'as' => 'payment_callback'
+    ]);
 
 });
 
@@ -918,20 +928,11 @@ Route::get('/transaction-report',function(){
     return view('dashboard.buyer.transaction.transaction-report-detail');
 });
 
-Route::get('/payment/{pakageType}',[
-    'uses' => 'payment_controller@do_payment',
-    'as' => 'do_payment',
-]);
-
 Route::get('/instant_payment/{type}/{transactionId}',[
     'uses' => 'payment_controller@do_instant_transaction_payment',
     'as' => 'do_instant_transaction_payment',
 ]);
 
-Route::any('/payment_callback',[
-    'uses' => 'payment_controller@payment_callback',
-    'as' => 'payment_callback'
-]);
 
 //Route::any('/payment_callback',[
 //    'uses' => 'payment_controller@my_payment_callback',
