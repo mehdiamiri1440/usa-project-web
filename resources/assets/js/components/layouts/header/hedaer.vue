@@ -79,7 +79,33 @@
         background: #279b41 !important;
         transition: 300ms;
     }
+    .modal-content .green_bot {
+        margin: 15px;
 
+        display: inline-block;
+
+        background: #28a745;
+
+        color: #fff;
+
+        padding: 10px 35px;
+
+        border-radius: 3px;
+
+        text-align: center;
+
+        border: none;
+
+        -webkit-transition: 300ms;
+
+        transition: 300ms;
+
+        width: initial;
+    }
+     .green_bot.delete {
+           background: #e41c38;
+         color: #fff;
+    }
    @media  screen and (max-width: 767px){
        ul.nav {
            width: 100%;
@@ -118,7 +144,7 @@
                                     {{popUpMsg}}
                                 </p>
 
-                            <a href="#" class="btn green_bot " data-dismiss="modal" @click.prevent="deleteProduct()">
+                            <a href="#" class="btn green_bot delete " data-dismiss="modal" @click.prevent="deleteProduct()">
                                 {{deleteButtonText}}
                             </a>
                             <a href="#" class="btn green_bot " data-dismiss="modal">
@@ -262,7 +288,7 @@
                             <a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a>
                         </li>
                         <li>
-                            <a class="smoothScroll" href="/privacy-and-policy">قوانین و مقررات</a>
+                            <a class="smoothScroll" href="/pricing">تعرفه ها</a>
                         </li>
                         <li>
 
