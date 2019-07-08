@@ -2105,7 +2105,7 @@
                 axios.post('/user/get_product_list', {
                     from_record_number: 0,
                     to_record_number: 5,
-                    category_id:6,
+                    sub_category_id:6,
                 }).then(function (response) {
                     self.homePageDates = response.data.products;
                 });
@@ -2113,7 +2113,7 @@
                 axios.post('/user/get_product_list', {
                     from_record_number: 0,
                     to_record_number: 5,
-                    category_id:43,
+                    sub_category_id:43,
                 }).then(function (response) {
                     self.homePageRice = response.data.products;
                 });
