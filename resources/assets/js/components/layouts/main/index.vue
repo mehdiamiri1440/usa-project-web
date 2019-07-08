@@ -1725,7 +1725,7 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageDates" :key="product.main.id">
+                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 6" :key="product.main.id">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
@@ -1753,7 +1753,7 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageRice" :key="product.main.id">
+                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 4" :key="product.main.id">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
@@ -1891,7 +1891,7 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageDates" :key="product.main.id">
+                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 6" :key="product.main.id">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
@@ -1916,7 +1916,7 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageDates" :key="product.main.id">
+                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 4" :key="product.main.id">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
@@ -2068,6 +2068,7 @@
                 enterKeyActiveForSearch: false,
                 homePageDates: '',
                 homePageRice:'',
+                homePageProductsSlider:'',
             }
         },
         methods: {
@@ -2107,17 +2108,10 @@
 //                    to_record_number: 5,
 //                     sub_category_id:6,
                 }).then(function (response) {
-                    self.homePageDates = response.data.products;
+                    console.log(response.data.products);
+                    self.homePageProductsSlider = response.data.products;
                 });
 
-                axios.post('/user/get_product_list', {
-//                    from_record_number: 0,
-//                    to_record_number: 5,
-//                     sub_category_id:43,
-//                     sub_category_id:43,
-                }).then(function (response) {
-                    self.homePageRice = response.data.products;
-                });
             },
             search: function () {
                 if (this.mainSearchBoxText != '') {
