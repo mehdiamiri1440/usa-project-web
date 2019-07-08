@@ -1944,7 +1944,7 @@
                             <figure>
                                 <img :src="img_success_verified" class="img-responsive"
                                      alt="feature"></figure>
-                            <h3><span>50</span>
+                            <h3><span>107</span>
                                 تامین کننده تایید شده
                             </h3>
                         </div>
@@ -1955,7 +1955,7 @@
                                 <img :src="img_success_project" class="img-responsive"
                                      alt="feature"></figure>
                             <h3>
-                                <span>10</span>
+                                <span>24</span>
                                 پروژه موفق انجام شده
                             </h3>
                         </div>

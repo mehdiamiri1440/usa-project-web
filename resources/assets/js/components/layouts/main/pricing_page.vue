@@ -339,6 +339,39 @@
                                 </td>
 
                             </tr>
+                            <tr>
+                                <td>
+                                    <div class="main-table-item">
+                                        <div>
+                                            قیمت
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>رایگان</span>
+                                    </div>
+                                </td>
+<!--
+                                <td>
+                                    <div class="main-table-item">
+
+                                        <span>12</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>30</span>
+                                    </div>
+                                </td>
+-->
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>تومان 500,000</span>
+                                        <i class="fa fa-angle-down collapse-icon"></i>
+                                    </div>
+                                </td>
+                            </tr>
 
                             <tr>
                                 <td>
@@ -606,6 +639,27 @@
                             <tr>
                                 <td>
                                     <div class="main-table-item">
+                                        <i class="fa fa-angle-down collapse-icon"></i>
+
+                                        <div>
+                                            قیمت
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>رایگان</span>
+                                    </div>
+                                </td>
+                                 <td>
+                                    <div class="main-table-item">
+                                        <span>500,000 تومان</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="main-table-item">
                                         <div>
                                         </div>
                                     </div>
@@ -618,7 +672,7 @@
                                 <td>
                                     <div class="main-table-item">
 
-                                        <span> <a href="/payment/1" class="green_bot">خرید</a> </span>
+                                        <span> <a href="/payment/3" class="green_bot">خرید</a> </span>
 
                                     </div>
                                 </td>
