@@ -1725,14 +1725,14 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageDates" :key="product.main.id">
+                    <!--    <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 6" :key="product.main.id">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
                                     :link="'/product-list/' + product.main.sub_category_name"
                             >
                             </image-viewer>
-                        </article>
+                        </article>-->
 
                     </div>
                 </div>
@@ -1753,14 +1753,14 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageRice" :key="product.main.id">
+                      <!--  <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 4" :key="product.main.id">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
                                     :link="'/product-list/' + product.main.sub_category_name"
                             >
                             </image-viewer>
-                        </article>
+                        </article>-->
 
                     </div>
                 </div>
@@ -1891,14 +1891,14 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageDates" :key="product.main.id">
+                      <!--  <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 6" :key="product.main.id">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
                                     :link="'/product-list/' + product.main.sub_category_name"
                             >
                             </image-viewer>
-                        </article>
+                        </article>-->
 
                     </div>
                 </div>
@@ -1916,7 +1916,7 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageRice" :key="product.main.id">
+                     <!--   <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 4" :key="product.main.id">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
@@ -1924,7 +1924,7 @@
                             >
                             </image-viewer>
                         </article>
-
+-->
                     </div>
                 </div>
             </div>
@@ -2068,6 +2068,7 @@
                 enterKeyActiveForSearch: false,
                 homePageDates: '',
                 homePageRice:'',
+                homePageProductsSlider:'',
             }
         },
         methods: {
@@ -2106,19 +2107,10 @@
 //                    from_record_number: 0,
 //                    to_record_number: 5,
 //                     sub_category_id:6,
-        }).then(function (response) {
-            self.homePageDates = response.data.products;
-        });
+                }).then(function (response) {
+                    self.homePageProductsSlider = response.data.products;
+                });
 
-        axios.post('/user/get_product_list', {
-//                    from_record_number: 0,
-//                    to_record_number: 5,
-//                     sub_category_id:43,
-        }).then(function (response) {
-            self.homePageRice = response.data.products;
-        });
-
-           
             },
             search: function () {
                 if (this.mainSearchBoxText != '') {
@@ -2129,6 +2121,7 @@
         },
         mounted: function () {
             this.init();
+            this.loader();
         },
         updated: function(){
             this.loader();
