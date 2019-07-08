@@ -45,7 +45,7 @@ class payment_controller extends Controller
     {
         $payment_amount = config("subscriptionPakage.type-$pakage_type.price");//$this->get_payment_amount($type,$transaction_id);
         
-        if($pakage_type > 3){
+        if($pakage_type == 3){
             return redirect()->back()->withErrors([
                'error' => 'شما مجاز به انجام این پرداخت نیستید' 
             ]);

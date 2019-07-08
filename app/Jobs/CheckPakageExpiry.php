@@ -45,7 +45,7 @@ class CheckPakageExpiry implements ShouldQueue
             $products = product::where('myuser_id',$user_record->id)
                                 ->where('confirmed',true)
                                 ->get();
-        
+    
             $products->each(function($product){
                $product->delete(); 
             });

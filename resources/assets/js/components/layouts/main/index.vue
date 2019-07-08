@@ -1725,7 +1725,7 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageDates">
+                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageDates" :key="product.main.id">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
@@ -1753,7 +1753,7 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageDates">
+                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageRice" :key="product.main.id">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
@@ -1891,7 +1891,7 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageDates">
+                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageDates" :key="product.main.id">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
@@ -1916,7 +1916,7 @@
                     </div>
                     <div class="owl-carousel col-xs-12">
 
-                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageDates">
+                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageDates" :key="product.main.id">
                             <image-viewer
                                     :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                     :img="'storage/' + product.photos[0].file_path"
@@ -1942,7 +1942,7 @@
                     <div class=" wow bounceIn col-xs-12 col-sm-6">
                         <div class="section-title">
                             <figure>
-                                <img :src=" img_success_verified" class="img-responsive"
+                                <img :src="img_success_verified" class="img-responsive"
                                      alt="feature"></figure>
                             <h3><span>50</span>
                                 تامین کننده تایید شده
@@ -1968,6 +1968,7 @@
         <!-- =========================
         RECENT BLOG POSTS SECTION
         ============================== -->
+<!--
         <section id="blog" class="parallax-section ">
             <div class="container">
                 <div class="row">
@@ -1988,6 +1989,7 @@
                 </div>
             </div>
         </section>
+-->
 
 
     </div>
@@ -2065,7 +2067,7 @@
                 mainSearchBoxText: '',
                 enterKeyActiveForSearch: false,
                 homePageDates: '',
-
+                homePageRice:'',
             }
         },
         methods: {
@@ -2101,11 +2103,20 @@
                     });
 
                 axios.post('/user/get_product_list', {
-                    from_record_number: 0,
-                    to_record_number: 5,
-                    search_text:'خرما',
+//                    from_record_number: 0,
+//                    to_record_number: 5,
+//                     sub_category_id:6,
                 }).then(function (response) {
                     self.homePageDates = response.data.products;
+                });
+
+                axios.post('/user/get_product_list', {
+//                    from_record_number: 0,
+//                    to_record_number: 5,
+//                     sub_category_id:43,
+//                     sub_category_id:43,
+                }).then(function (response) {
+                    self.homePageRice = response.data.products;
                 });
             },
             search: function () {

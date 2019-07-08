@@ -103,8 +103,8 @@
                     </a>
                 </li>
                 <li class="message-list col-xs-12">
-                    <p>
-                        نیگ این وسط چینه و یکو نیم خطیه حالا تو هر چی دوست داری بزار فکر کنم عدد ها مثل <span class="text-red">654</span> رنگشون فرق میکنه
+                    <p> سقف تعداد درخواست های خریدی که به شما نمایش داده میشود
+                        <span class="text-red"> 5 </span>   است 
                     </p>
                     <a class="green_bot" href="/pricing">تعرفه ها</a>
                 </li>
@@ -137,6 +137,7 @@
                 buyAds: '',
                 popUpMsg: '',
                 load: false,
+                textActive:false,
                 items: [
 //                {
 //                    message: 'پیشنهادات من',

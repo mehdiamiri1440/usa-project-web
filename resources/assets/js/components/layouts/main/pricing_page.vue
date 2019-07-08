@@ -35,6 +35,7 @@
                                         <span class="main-pricing-span">رایگان</span>
                                     </div>
                                 </th>
+<!--
                                 <th class="head-secend-package">
                                     <div class="main-pricing-icon">
                                         <img :src="img_pricing_38">
@@ -49,6 +50,7 @@
                                     </div>
 
                                 </th>
+-->
                                 <th class="head-secend-package">
                                     <div class="main-pricing-icon">
                                         <img :src="img_pricing_34">
@@ -72,6 +74,7 @@
                                         <span>1</span>
                                     </div>
                                 </td>
+<!--
                                 <td>
                                     <div class="main-table-item">
                                         <span>3</span>
@@ -82,6 +85,7 @@
                                         <span>5</span>
                                     </div>
                                 </td>
+-->
                                 <td>
                                     <div class="main-table-item">
                                         <span>7</span>
@@ -104,6 +108,7 @@
                                         </div>
                                     </div>
                                 </td>
+<!--
                                 <td>
                                     <div class="main-table-item">
                                         <span>4</span>
@@ -114,6 +119,7 @@
                                         <span>3</span>
                                     </div>
                                 </td>
+-->
                                 <td>
                                     <div class="main-table-item">
                                         <span>2</span>
@@ -146,6 +152,7 @@
                                         <span class="red-check"><i class="fa fa-close"></i></span>
                                     </div>
                                 </td>
+<!--
                                 <td>
                                     <div class="main-table-item">
                                         <span class="green-check"><i class="fa fa-check"></i></span>
@@ -156,6 +163,7 @@
                                         <span class="green-check"><i class="fa fa-check"></i></span>
                                     </div>
                                 </td>
+-->
                                 <td>
                                     <div class="main-table-item">
                                         <span class="green-check"><i class="fa fa-check"></i></span>
@@ -184,6 +192,7 @@
                                         <span class="red-check"><i class="fa fa-close"></i></span>
                                     </div>
                                 </td>
+<!--
                                 <td>
                                     <div class="main-table-item">
                                         <span class="green-check"><i class="fa fa-check"></i></span>
@@ -194,6 +203,7 @@
                                         <span class="green-check"><i class="fa fa-check"></i></span>
                                     </div>
                                 </td>
+-->
                                 <td>
                                     <div class="main-table-item">
                                         <span class="green-check"><i class="fa fa-check"></i></span>
@@ -222,6 +232,7 @@
                                         <span>0</span>
                                     </div>
                                 </td>
+<!--
                                 <td>
                                     <div class="main-table-item">
 
@@ -233,6 +244,7 @@
                                         <span>200</span>
                                     </div>
                                 </td>
+-->
                                 <td>
                                     <div class="main-table-item">
                                         <span>350</span>
@@ -261,6 +273,7 @@
                                         <span class="red-check"><i class="fa fa-close"></i></span>
                                     </div>
                                 </td>
+<!--
                                 <td>
                                     <div class="main-table-item">
                                         <span class="red-check"><i class="fa fa-close"></i></span>
@@ -271,6 +284,7 @@
                                         <span class="red-check"><i class="fa fa-close"></i></span>
                                     </div>
                                 </td>
+-->
                                 <td>
                                     <div class="main-table-item">
                                         <span class="green-check"><i class="fa fa-check"></i></span>
@@ -299,6 +313,7 @@
                                         <span>5</span>
                                     </div>
                                 </td>
+<!--
                                 <td>
                                     <div class="main-table-item">
 
@@ -310,6 +325,7 @@
                                         <span>30</span>
                                     </div>
                                 </td>
+-->
                                 <td>
                                     <div class="main-table-item">
                                         <span>نامحدود</span>
@@ -336,6 +352,7 @@
                                         <span> <a href="/register" class="green_bot">ثبت نام</a> </span>
                                     </div>
                                 </td>
+<!--
                                 <td>
                                     <div class="main-table-item">
 
@@ -349,6 +366,7 @@
 
                                     </div>
                                 </td>
+-->
                                 <td>
                                     <div class="main-table-item">
                                         <span> <a href="/payment/3" class="green_bot">خرید</a> </span>
@@ -376,10 +394,9 @@
                                 </th>
                                 <th class="head-secend-package">
                                     <div class="main-pricing-icon">
-                                        <img :src="img_pricing_38">
-                                        <span class="main-pricing-span">برنزی</span>
+                                        <img :src="img_pricing_34">
+                                        <span class="main-pricing-span">طلایی</span>
                                     </div>
-
                                 </th>
                             </tr>
                             </thead>
@@ -401,7 +418,7 @@
                                 </td>
                                 <td>
                                     <div class="main-table-item">
-                                        <span>3</span>
+                                        <span>7</span>
                                     </div>
                                 </td>
 
@@ -424,12 +441,12 @@
                                 </td>
                                 <td>
                                     <div class="main-table-item">
-                                        <span>4</span>
+                                        <span>2</span>
                                     </div>
                                 </td>
-                                <td>
+                               <td>
                                     <div class="main-table-item">
-                                        <span>3</span>
+                                        <span>1</span>
                                     </div>
                                 </td>
                             </tr>
@@ -455,11 +472,11 @@
                                         <span class="red-check"><i class="fa fa-close"></i></span>
                                     </div>
                                 </td>
-                                <td>
+                               <td>
                                     <div class="main-table-item">
                                         <span class="green-check"><i class="fa fa-check"></i></span>
                                     </div>
-                                </td>
+                               </td>
                             </tr>
                             <tr class="collapse" id="mobile-three-package">
                                 <td colspan="5">
@@ -516,8 +533,7 @@
                                 </td>
                                 <td>
                                     <div class="main-table-item">
-
-                                        <span>80</span>
+                                        <span>350</span>
                                     </div>
                                 </td>
 
@@ -548,7 +564,7 @@
                                 </td>
                                 <td>
                                     <div class="main-table-item">
-                                        <span class="red-check"><i class="fa fa-close"></i></span>
+                                        <span class="green-check"><i class="fa fa-check"></i></span>
                                     </div>
                                 </td>
                             </tr>
@@ -575,10 +591,9 @@
                                         <span>5</span>
                                     </div>
                                 </td>
-                                <td>
+                                 <td>
                                     <div class="main-table-item">
-
-                                        <span>12</span>
+                                        <span>نامحدود</span>
                                     </div>
                                 </td>
                             </tr>
@@ -614,6 +629,7 @@
                     </div>
 
 
+<!--
                     <div class="col-xs-12 animated hidden-sm hidden-md hidden-lg"
                          style="visibility: visible; animation-delay: 0.9s; animation-name: fadeInUp;">
 
@@ -862,6 +878,7 @@
                         </table>
 
                     </div>
+-->
                 </div>
             </div>
         </section>

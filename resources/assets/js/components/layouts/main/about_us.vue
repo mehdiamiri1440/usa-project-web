@@ -152,6 +152,7 @@
     }
     .about-us-icons .row > div{
         min-height: 310px;
+        float: right;
     }
     .about-us-icons p{
         text-align:center;
