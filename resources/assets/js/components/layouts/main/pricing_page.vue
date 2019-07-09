@@ -367,7 +367,7 @@
 -->
                                 <td>
                                     <div class="main-table-item">
-                                        <span>تومان 500,000</span>
+                                        <span>تومان 489,000</span>
                                         <i class="fa fa-angle-down collapse-icon"></i>
                                     </div>
                                 </td>
@@ -653,7 +653,7 @@
                                 </td>
                                  <td>
                                     <div class="main-table-item">
-                                        <span>500,000 تومان</span>
+                                        <span>489,000 تومان</span>
                                     </div>
                                 </td>
                             </tr>

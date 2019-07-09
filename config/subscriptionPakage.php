@@ -51,6 +51,6 @@ return [
         'show-profile-link-in-blog' => true,
         'pakage-duration-in-months' => 12,
         'buyAd-count' => 2000,
-        'price' => 5000000
+        'price' => 4890000
     ],
 ];

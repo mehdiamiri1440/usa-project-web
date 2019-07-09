@@ -435,19 +435,19 @@
             isUserFromWebView: function () {
                 var self = this;
 
-                var androidVersion = parseInt(this.getAndroidVersion(), 10);
-
-                if (!this.isOsIOS() && androidVersion >= 5) {
-                    axios.post('/is_user_from_webview')
-                        .then(function (response) {
-                            if (response.data.is_webview == false) {
-                                self.activateDownloadAppPopUp();
-                            }
-                            else {
-                                //
-                            }
-                        });
-                }
+//                var androidVersion = parseInt(this.getAndroidVersion(), 10);
+//
+//                if (!this.isOsIOS() && androidVersion >= 5) {
+//                    axios.post('/is_user_from_webview')
+//                        .then(function (response) {
+//                            if (response.data.is_webview == false) {
+//                                self.activateDownloadAppPopUp();
+//                            }
+//                            else {
+//                                //
+//                            }
+//                        });
+//                }
 
 //                if( ! IsWebview(window.navigator.userAgent)){
 //                    this.activateDownloadAppPopUp();
