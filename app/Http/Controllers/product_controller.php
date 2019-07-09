@@ -218,7 +218,7 @@ class product_controller extends Controller
             return $category_flag && $sub_category_flag && $province_flag && $city_flag &&  $search_text_flag;
         });
         //changing view priority according to owners pakage type
-        if($request->filled('search_text')){
+//        if($request->filled('search_text')){
             usort($all_products,function($item1, $item2){
                 $a = $item1['user_info']->active_pakage_type;
                 $b = $item2['user_info']->active_pakage_type;
@@ -229,8 +229,8 @@ class product_controller extends Controller
 
                 return ($a > $b) ? 1 : -1;
             });
-        }
-
+        
+//            }
         return response()->json([
             'status' => TRUE,
             'products' => $all_products
