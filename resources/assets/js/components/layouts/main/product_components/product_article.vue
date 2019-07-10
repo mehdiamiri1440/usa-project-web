@@ -352,16 +352,17 @@
             'str',
             'loading',
             'loading_img',
+            'currentUser',
         ],
 
         data: function () {
             return {
                 submiting: false,
                 errors: '',
-                currentUser: {
-                    profile: '',
-                    user_info: ''
-                },
+//                currentUser: {
+//                    profile: '',
+//                    user_info: ''
+//                },
                 popUpMsg: '',
                 popUpLoaded: false,
                 isMyProfile:false,
@@ -376,16 +377,22 @@
         methods: {
             init: function () {
                 var self = this;
-                axios.post('/user/profile_info')
-                    .then(function (response) {
-                        self.currentUser = response.data;
-                        if (self.currentUser.user_info) {
-                            if (self.currentUser.user_info.id === self.product.main.myuser_id) {
-                                self.isMyProfile = true;
-                                self.$emit('isMyProfile', self.isMyProfile);
-                            }
-                        }
-                    });
+//                axios.post('/user/profile_info')
+//                    .then(function (response) {
+//                        self.currentUser = response.data;
+//                        if (self.currentUser.user_info) {
+//                            if (self.currentUser.user_info.id === self.product.main.myuser_id) {
+//                                self.isMyProfile = true;
+//                                self.$emit('isMyProfile', self.isMyProfile);
+//                            }
+//                        }
+//                    });
+                if(this.currentUser.user_info){
+                    if(this.currentUser.user_info.id == this.product.main.myuser_id){
+                        this.isMyProfile = true;
+                        this.$emit('isMyProfile',this.isMyProfile);
+                    }
+                }
             },
             toLatinNumbers: function (num) {
                 if (num == null) {
@@ -423,7 +430,7 @@
                     element.slideToggle("125", "swing");
                     $('.buy_details').not(element).slideUp();
 
-                    this.scrollToTheRequestRegisterBox(index);
+                    this.scrollToTheRequestRegisterBox(element);
                 }
                 else {
                     //

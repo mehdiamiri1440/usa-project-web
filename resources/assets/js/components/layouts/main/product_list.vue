@@ -616,6 +616,7 @@
                             :defultimg="defultimg"
                             :str="str"
                             :loading="loading"
+                            :currentUser="currentUser"
                     >
                     </product-article>
                     <div class="load-more-button" v-if="searchText == '' && continueToLoadProducts == true ">
@@ -646,7 +647,7 @@
                     </div>
                 </div>
             </section>
-            <section class="main-content  col-xs-12 " v-else-if="products.length == 0 && searchActive == true">
+            <section class="main-content  col-xs-12" v-else-if="products.length == 0 && searchActive == true">
                 <p></p>
                 <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
                 <p>شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
@@ -738,7 +739,7 @@
                 loading: false,
                 bottom: false,
                 loadMoreActive: false,
-
+                searchTextTimeout:null,
             }
         },
         methods: {
@@ -773,25 +774,25 @@
                 var self = this;
                 var searchValue = this.searchValue;
                 var searchValueText = searchValue;
-
-                if (searchValueText) {
-                    this.registerComponentStatistics('homePage', 'search', searchValueText);
-                    this.searchText = searchValueText;
-                }
-                else {
-                    self.loading = true;
-                    axios.post('/user/get_product_list', {
-                        from_record_number: 0,
-                        to_record_number: this.productCountInPage,
-                    }).then(function (response) {
-                        self.products = response.data.products;
-                        self.productCountInPage = self.products.length;
-                        self.loading = false;
-                    });
-                }
-
+                
                 axios.post('/user/profile_info')
-                    .then(response => (this.currentUser = response.data));
+                    .then(function(response){
+                        self.currentUser = response.data;
+                        if (searchValueText) {
+                            self.registerComponentStatistics('homePage', 'search', searchValueText);
+                            self.searchText = searchValueText;
+                        }
+                        else {
+                            self.loading = true;
+                            axios.post('/user/get_product_list', {
+                                from_record_number: 0,
+                                to_record_number: self.productCountInPage,
+                            }).then(function (response){
+                                self.products = response.data.products;
+                                self.loading = false;
+                            });
+                        }
+                });
 
             },
 
@@ -920,9 +921,12 @@
         watch: {
             searchText: function () {
                 var self = this;
-                eventBus.$emit('submiting', true);
-
-                this.applyFilter();
+//                eventBus.$emit('submiting', true);
+                clearTimeout(this.searchTextTimeout);
+                
+                this.searchTextTimeout = setTimeout(function(){
+                    self.applyFilter();
+                },1500);
 
 //                axios.post('/user/get_product_list')
 //                    .then(function (response) {

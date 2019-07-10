@@ -338,8 +338,7 @@
             submitProduct: function () {
                 eventBus.$emit('submitingEvent', true);
                 var self = this;
-                console.log('submited');
-                console.log(this.product.rules);
+                
                 if (this.product.rules != true) {
                     this.popUpMsg = 'موافقت با قوانین ثبت آگهی الزامی است';
                     eventBus.$emit('submitSuccess', this.popUpMsg);

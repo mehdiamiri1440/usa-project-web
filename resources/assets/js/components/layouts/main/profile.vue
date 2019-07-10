@@ -368,7 +368,7 @@
                                     :defultimg="defultimg"
                                     :str="str"
                                     :loading="loading"
-                                    :is_my_profile="isMyProfile"
+                                    :currentUser="currentUser"
 
                             >
 

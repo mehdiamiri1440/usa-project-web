@@ -214,26 +214,35 @@ class product_controller extends Controller
                 
                 $search_text_flag = $this->does_search_text_matche_the_product($search_text,$product);
             }
-            
-            return $category_flag && $sub_category_flag && $province_flag && $city_flag &&  $search_text_flag;
+            $test = $category_flag && $sub_category_flag && $province_flag && $city_flag &&  $search_text_flag;
+//            var_dump($test);
+            if($test){
+                return true;
+            }
+            else return false;
         });
+
         //changing view priority according to owners pakage type
 //        if($request->filled('search_text')){
-            usort($all_products,function($item1, $item2){
-                $a = $item1['user_info']->active_pakage_type;
-                $b = $item2['user_info']->active_pakage_type;
-
-                if($a == $b){
-                    return 0;
-                }
-
-                return ($a > $b) ? 1 : -1;
-            });
+//        echo gettype($all_products);
+//        usort($all_products,function($item1, $item2){
+//            $a = $item1['user_info']->active_pakage_type;
+//            $b = $item2['user_info']->active_pakage_type;
+//
+//            if($a == $b){
+//                return 0;
+//            }
+//
+//            return ($a > $b) ? 1 : -1;
+//        });
+//        echo gettype($all_products);
         
+//        sleep(5000);
+//        var_dump($all_products);
 //            }
         return response()->json([
             'status' => TRUE,
-            'products' => $all_products
+            'products' => array_values($all_products)
         ],200);
 		
 	}
@@ -773,24 +782,25 @@ class product_controller extends Controller
     
     protected function does_search_text_matche_the_product($search_text,&$product)
     {
+        $search_text = str_replace('\\','',$search_text);
+        $search_text = str_replace('/','',$search_text);
         $search_text_array = explode(' ',$search_text);
         
-        foreach($product['main'] as $key => $value){
-            foreach($search_text_array as $search_text_value){
-                if(is_string($value) && strpos($value,$search_text_value) !== false){
-                    return true;
-                }
-            }
+        $search_expresion = "(.*)";
+        
+        foreach($search_text_array as $text){
+            $search_expresion .= "($text)(.*)";
         }
-        foreach($product['user_info']->toArray() as $key => $value){
-            foreach($search_text_array as $search_text_value){
-                if(is_string($value) && strpos($value,$search_text_value) !== false){
-                    return true;
-                }
-            }
+
+        $result = array_filter(collect($product['main'])->toArray(),function($item) use($search_text,$search_expresion){
+            return preg_match("/$search_expresion/", $item);
+        });
+
+        if(sizeof($result) > 0){
+            return true;
         }
         
-        return false;
+        else return false;
     }
     
     public function edit_product_by_id(Request $request)
