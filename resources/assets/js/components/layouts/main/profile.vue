@@ -85,7 +85,7 @@
             </h1>
         </header>
         <main id="main" class="col-sm-12">
-            <section class="main-content container">
+            <section class="main-content container" itemscope itemprop="Person" itemtype="http://schema.org/Person">
                 <div class="main-content-item" v-if="profileOwner.user_info">
                     <div class="header-content col-xs-12">
                         <div class="image_user_wrapper col-xs-4">
@@ -156,7 +156,7 @@
 
                                     </div>
 
-                                    <h1 class="content_title col-xs-12 col-sm-8">{{profileOwner.user_info.first_name +
+                                    <h1 class="content_title col-xs-12 col-sm-8" itemprop="name">{{profileOwner.user_info.first_name +
                                         ' '
                                         + profileOwner.user_info.last_name}}
                                         <span class="valid-seller" v-if="profileOwnerStatistics.validated_seller">
@@ -195,7 +195,7 @@
                             </span>
                                         </p>
                                         <p>
-                                            آدرس : <span>
+                                            آدرس : <span itemprop="address">
                                {{profileOwner.user_info.province + ' - ' + profileOwner.user_info.city}}
                                 </span>
                                         </p>

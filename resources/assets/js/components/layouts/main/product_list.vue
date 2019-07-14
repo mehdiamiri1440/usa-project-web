@@ -505,7 +505,7 @@
 </style>
 <template>
 
-    <div>
+    <div itemscope itemtype="http://schema.org/SomeProducts">
         <!--modal-->
 
 

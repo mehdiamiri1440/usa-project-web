@@ -586,12 +586,10 @@
                                 alert('error');
                             });
 
-
                     })
                     .catch(function (e) {
-
+                        //
                     });
-
             },
             loadChatHistory: function (contact) {
                 var self = this;

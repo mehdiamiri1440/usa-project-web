@@ -184,14 +184,14 @@ class product_controller extends Controller
             'search_text'           => 'string',
         ]);
 
-        $all_products = NULL ;
+        $all_products = NULL ; 
 
-        if($request->filled('from_record_number') && $request->filled('to_record_number')){
-            $all_products = $this->get_all_products_with_related_media($request->from_record_number,$request->to_record_number);
-        }
-        else{
+//        if($request->filled('from_record_number') && $request->filled('to_record_number')){
+//            $all_products = $this->get_all_products_with_related_media($request->from_record_number,$request->to_record_number);
+//        }
+//        else{
             $all_products = $this->get_all_products_with_related_media();  
-        } 
+//        } 
         
         //applying filters
         $all_products = array_filter($all_products, function($product) use($request){
@@ -214,32 +214,27 @@ class product_controller extends Controller
                 
                 $search_text_flag = $this->does_search_text_matche_the_product($search_text,$product);
             }
-            $test = $category_flag && $sub_category_flag && $province_flag && $city_flag &&  $search_text_flag;
+            $result = $category_flag && $sub_category_flag && $province_flag && $city_flag &&  $search_text_flag;
 //            var_dump($test);
-            if($test){
-                return true;
-            }
-            else return false;
+            return $result;
         });
 
         //changing view priority according to owners pakage type
-//        if($request->filled('search_text')){
-//        echo gettype($all_products);
-//        usort($all_products,function($item1, $item2){
-//            $a = $item1['user_info']->active_pakage_type;
-//            $b = $item2['user_info']->active_pakage_type;
-//
-//            if($a == $b){
-//                return 0;
-//            }
-//
-//            return ($a > $b) ? 1 : -1;
-//        });
-//        echo gettype($all_products);
+        usort($all_products,function($item1, $item2){
+            $a = $item1['user_info']->active_pakage_type;
+            $b = $item2['user_info']->active_pakage_type;
+
+            if($a == $b){
+                return $item1['main']->id < $item2['main']->id;
+            }
+
+            return ($a < $b) ? 1 : -1;
+        });
         
-//        sleep(5000);
-//        var_dump($all_products);
-//            }
+        if($request->filled('from_record_number') && $request->filled('to_record_number')){
+            $all_products = array_slice($all_products,$request->from_record_number,$request->to_record_number,true);   
+        }
+        
         return response()->json([
             'status' => TRUE,
             'products' => array_values($all_products)

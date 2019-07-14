@@ -69,6 +69,9 @@
                 </div>
             </div>
         </div>
+        <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+            <span itemprop="ratingValue">4.5</span>
+        </div>
 
         <!-- end of app tag -->
         <!-- Back top -->
