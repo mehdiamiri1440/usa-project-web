@@ -505,11 +505,8 @@
 </style>
 <template>
 
-    <div itemscope itemtype="http://schema.org/SomeProducts">
+    <div>
         <!--modal-->
-
-
-
 
 
 
@@ -690,7 +687,23 @@
             </section>
         </main>
 
-
+        <script type="application/ld+json">
+            {"@context": "http://schema.org",
+            "@type": "SomeProducts",
+            "name": "لیست محصولات کشاورزی",
+            "description": "خرید و فروش عمده محصولات کشاورزی",
+            "aggregateRating": {"@type": "AggregateRating", 
+                                "ratingValue": "4.5",
+                                "reviewCount": "57"
+                                },
+            "offers": {"@type": "AggregateOffer",
+            "availability": "http://schema.org/InStock",
+            "seller": {"@type": "Organization",
+                        "name": "اینکوباک"
+                      }
+                }
+            }
+        </script>
     </div>
 </template>
 <script>
@@ -979,4 +992,5 @@
 //            titleTemplate: 'اینکوباک |‌ %s',
 //        }
     }
+    
 </script>
