@@ -69,8 +69,9 @@
                 </div>
             </div>
         </div>
-        <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-            <span itemprop="ratingValue">4.5</span>
+        <div itemscope="" itemtype="http://schema.org/Review">
+            <span itemprop="itemReviewed" content="اینکوباک"></span>
+            <span itemprop="" itemtype="http://schema.org/Rating">4.5</span>
         </div>
 
         <!-- end of app tag -->
