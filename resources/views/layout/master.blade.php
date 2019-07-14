@@ -155,21 +155,13 @@
 <script src="{{asset('assets/js/idleTimer.js')}}"></script>
 <script type="application/ld+json">
             {"@context": "http://schema.org",
-            "@type": "Product",
+            "@type": "website",
             "name": "محصولات کشاورزی",
             "description": "خرید و فروش عمده محصولات کشاورزی",
             "aggregateRating": {"@type": "AggregateRating", 
                                 "ratingValue": "4.5",
                                 "reviewCount": "57"
-                                },
-            "offers": {"@type": "AggregateOffer",
-            "lowPrice": "1000000",
-            "priceCurrency": "IRR",
-            "availability": "http://schema.org/InStock",
-            "seller": {"@type": "Organization",
-                        "name": "اینکوباک"
-                      }
-                }   
+                                }
             }
 </script>
 
