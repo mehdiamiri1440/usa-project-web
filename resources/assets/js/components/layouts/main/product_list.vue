@@ -689,7 +689,7 @@
 
         <script type="application/ld+json">
             {"@context": "http://schema.org",
-            "@type": "SomeProducts",
+            "@type": "Product",
             "name": "لیست محصولات کشاورزی",
             "description": "خرید و فروش عمده محصولات کشاورزی",
             "aggregateRating": {"@type": "AggregateRating", 
