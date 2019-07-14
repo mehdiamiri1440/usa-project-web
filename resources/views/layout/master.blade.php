@@ -158,10 +158,24 @@
             "@type": "Product",
             "name": "محصولات کشاورزی",
             "description": "خرید و فروش عمده محصولات کشاورزی",
-            "image":[""],
+            "image":["https://www.incobac.com/assets/img/logo_dark.png"],
+            "sku": "0446310786",
+            "mpn": "925872",
             "brand":{
                 "@type": "Thing",
                 "name": "اینکوباک"
+            },
+            "review": {
+                "@type": "Review",
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": "4.8",
+                  "bestRating": "5"
+                },
+                "author": {
+                  "@type": "Person",
+                  "name": "علی دلخوش"
+                }
             },
             "aggregateRating": {
                 "@type": "AggregateRating", 
@@ -172,7 +186,8 @@
                 "@type": "AggregateOffer",
                 "lowPrice": "10000",
                 "highPrice": "15000",
-                "priceCurrency": "IRR"
+                "priceCurrency": "IRR",
+                "offerCount":"12",
               }
             }
 </script>
