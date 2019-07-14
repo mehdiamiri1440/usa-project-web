@@ -154,14 +154,26 @@
 <script src="{{asset('js/app.js')}}"></script>
 <script src="{{asset('assets/js/idleTimer.js')}}"></script>
 <script type="application/ld+json">
-            {"@context": "http://schema.org",
-            "@type": "website",
+            {"@context": "http://schema.org/",
+            "@type": "Product",
             "name": "محصولات کشاورزی",
             "description": "خرید و فروش عمده محصولات کشاورزی",
-            "aggregateRating": {"@type": "AggregateRating", 
-                                "ratingValue": "4.5",
-                                "reviewCount": "57"
-                                }
+            "image":[""],
+            "brand":{
+                "@type": "Thing",
+                "name": "اینکوباک"
+            },
+            "aggregateRating": {
+                "@type": "AggregateRating", 
+                "ratingValue": "4.5",
+                "reviewCount": "57"
+            },
+            "offers": {
+                "@type": "AggregateOffer",
+                "lowPrice": "10000",
+                "highPrice": "15000",
+                "priceCurrency": "IRR"
+              }
             }
 </script>
 
