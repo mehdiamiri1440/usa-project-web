@@ -187,7 +187,7 @@
                 "lowPrice": "10000",
                 "highPrice": "15000",
                 "priceCurrency": "IRR",
-                "offerCount":"12",
+                "offerCount":"12"
               }
             }
 </script>
