@@ -153,7 +153,22 @@
 </div>
 <script src="<?php echo e(asset('js/app.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/js/idleTimer.js')); ?>"></script>
-
+<script type="application/ld+json">
+            {"@context": "http://schema.org",
+            "@type": "Product",
+            "name": "محصولات کشاورزی",
+            "description": "خرید و فروش عمده محصولات کشاورزی",
+            "aggregateRating": {"@type": "AggregateRating", 
+                                "ratingValue": "4.5",
+                                "reviewCount": "57"
+                                },
+            "offers": {"@type": "AggregateOffer",
+            "availability": "http://schema.org/InStock",
+            "seller": {"@type": "Organization",
+                        "name": "اینکوباک"
+                      }
+                }
+</script>
 
 <script>
 
