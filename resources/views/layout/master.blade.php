@@ -163,6 +163,8 @@
                                 "reviewCount": "57"
                                 },
             "offers": {"@type": "AggregateOffer",
+            "lowPrice": "1000000",
+            "priceCurrency": "IRR",
             "availability": "http://schema.org/InStock",
             "seller": {"@type": "Organization",
                         "name": "اینکوباک"
