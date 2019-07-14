@@ -167,7 +167,8 @@
             "seller": {"@type": "Organization",
                         "name": "اینکوباک"
                       }
-                }
+                }   
+            }
 </script>
 
 <script>
