@@ -107,6 +107,18 @@
                 ]
         }
     </script>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "url": "https://www.incobac.com/",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.incobac.com/{search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+    </script>
 
 </head>
 <body>
