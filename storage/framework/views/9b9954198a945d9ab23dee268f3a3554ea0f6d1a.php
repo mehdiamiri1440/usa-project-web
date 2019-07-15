@@ -154,20 +154,42 @@
 <script src="<?php echo e(asset('js/app.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/js/idleTimer.js')); ?>"></script>
 <script type="application/ld+json">
-            {"@context": "http://schema.org",
+            {"@context": "http://schema.org/",
             "@type": "Product",
             "name": "محصولات کشاورزی",
             "description": "خرید و فروش عمده محصولات کشاورزی",
-            "aggregateRating": {"@type": "AggregateRating", 
-                                "ratingValue": "4.5",
-                                "reviewCount": "57"
-                                },
-            "offers": {"@type": "AggregateOffer",
-            "availability": "http://schema.org/InStock",
-            "seller": {"@type": "Organization",
-                        "name": "اینکوباک"
-                      }
+            "image":["https://www.incobac.com/assets/img/logo_dark.png"],
+            "sku": "0446310786",
+            "mpn": "925872",
+            "brand":{
+                "@type": "Thing",
+                "name": "اینکوباک"
+            },
+            "review": {
+                "@type": "Review",
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": "4.8",
+                  "bestRating": "5"
+                },
+                "author": {
+                  "@type": "Person",
+                  "name": "علی دلخوش"
                 }
+            },
+            "aggregateRating": {
+                "@type": "AggregateRating", 
+                "ratingValue": "4.5",
+                "reviewCount": "57"
+            },
+            "offers": {
+                "@type": "AggregateOffer",
+                "lowPrice": "10000",
+                "highPrice": "15000",
+                "priceCurrency": "IRR",
+                "offerCount":"12"
+              }
+            }
 </script>
 
 <script>

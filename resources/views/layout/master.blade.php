@@ -59,6 +59,54 @@
         gtag('config', 'UA-129398000-1', {'send_page_view': false});
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <script type="application/ld+json">
+        { 
+            "@context" : "http://schema.org/",
+            "@type" : "Organization",
+            "url" : "https://www.incobac.com",
+            "email": "support@incobac.com",
+            "logo":"https://www.incobac.com/assets/img/logo_dark.png",
+            "name" : "اینکوباک",
+            "foundingDate":"2017-09-14",
+            "location" : {
+                   "@type" : "Place",
+                   "name" : "اینکوباک",
+                   "address" : "NO.264 - 15 - Eram Street - Shiraz - IR"
+                },
+            "description":"خرید و فروش محصولات عمده کشاورزی، برنج و خرما",
+            "review":{
+                "@type": "Review",
+                "itemReviewed": {
+                        "@type": "Organization",
+                        "image": "https://www.incobac.com/assets/img/logo_dark.png",
+                        "name": "اینکوباک",
+                        "telephone": "0917-202-1943"
+                    },
+                    "reviewRating": {
+                        "@type": "Rating",
+                        "ratingValue": "4"
+                    },
+                    "name": "اینکوباک",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Ali Delkhosh"
+                    },
+                    "reviewBody": "بازارگاه خرید و فروش محصولات کشاورزی",
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "اینکوباک"
+                    }
+            },
+            "contactPoint" : [
+                  { 
+                    "@type" : "ContactPoint",
+                    "telephone" : "+98-917-202-1943",
+                    "contactType" : "customer service"
+                  } 
+                ]
+        }
+    </script>
 
 </head>
 <body>
@@ -153,48 +201,8 @@
 </div>
 <script src="{{asset('js/app.js')}}"></script>
 <script src="{{asset('assets/js/idleTimer.js')}}"></script>
-<script type="application/ld+json">
-            {"@context": "http://schema.org/",
-            "@type": "Product",
-            "name": "محصولات کشاورزی",
-            "description": "خرید و فروش عمده محصولات کشاورزی",
-            "image":["https://www.incobac.com/assets/img/logo_dark.png"],
-            "sku": "0446310786",
-            "mpn": "925872",
-            "brand":{
-                "@type": "Thing",
-                "name": "اینکوباک"
-            },
-            "review": {
-                "@type": "Review",
-                "reviewRating": {
-                  "@type": "Rating",
-                  "ratingValue": "4.8",
-                  "bestRating": "5"
-                },
-                "author": {
-                  "@type": "Person",
-                  "name": "علی دلخوش"
-                }
-            },
-            "aggregateRating": {
-                "@type": "AggregateRating", 
-                "ratingValue": "4.5",
-                "reviewCount": "57"
-            },
-            "offers": {
-                "@type": "AggregateOffer",
-                "lowPrice": "10000",
-                "highPrice": "15000",
-                "priceCurrency": "IRR",
-                "offerCount":"12"
-              }
-            }
-</script>
 
 <script>
-
-
     $(document).ready(function () {
         $(document).idleTimer(7200000);
     });
