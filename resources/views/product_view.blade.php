@@ -108,7 +108,7 @@
             <div class="collapse navbar-collapse" id="collapseOne" aria-expanded="false">
                 <ul class="nav navbar-nav navbar-left">
                     @if(!session('user_id'))
-                        <li><a href="" class="smoothScroll">ورود/ثبت نام</a></li>
+                        <li><a href="{{route('login_page')}}" class="smoothScroll">ورود/ثبت نام</a></li>
                     @endif
                     <li><a href="/" class="smoothScroll">صفحه ی اصلی</a></li>
                     <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
@@ -148,7 +148,7 @@
         </div>
     </div>
 
-    <product-view default-image="{{asset('assets/img/user-defult.png')}}" incobac-logo="{{asset('assets/img/logo-incobac.png')}}"></product-view>
+    <product-vue default-image="{{asset('assets/img/user-defult.png')}}" incobac-logo="{{asset('assets/img/logo-incobac.png')}}"></product-vue>
 </div>
 
 <script src="{{asset('js/app.js')}}"></script>
