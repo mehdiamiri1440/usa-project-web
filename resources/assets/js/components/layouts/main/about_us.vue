@@ -175,17 +175,21 @@
             'img_about_us_6',
         ],
         methods: {
-            loader: function () {
-                this.$nextTick(function () {
-                    eventBus.$emit('finishLoad', false);
-                });
+            stopLoader: function () {
+                    eventBus.$emit('isLoading', false);
             }
         },
         mounted: function () {
-            this.loader();
+//            this.$nextTick(this.stopLoader());
         },
-        updated: function () {
-            this.loader();
+        updated:function(){
+//            this.$nextTick(this.stopLoader);
+        },
+        beforeCreate:function(){
+            var self = this;
+            window.addEventListener("load", function(event) {
+                    self.stopLoader();
+            });
         }
     }
 </script>

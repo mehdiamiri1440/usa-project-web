@@ -120,7 +120,7 @@
 </style>
 <template>
     <div>
-        <div :class="{'loader-wrapper': !finishLoad , 'finish-loader-show' : finishLoad }">
+        <div :class="{'loader-wrapper': !isLoading , 'finish-loader-show' : isLoading }">
             <div class="main-loader">
                 <img :src="finish_load_img">
             </div>
@@ -338,7 +338,7 @@
             return {
                 popUpMsg: '',
                 submiting: false,
-                finishLoad: true,
+                isLoading: true,
                 deleteText:'',
                 deleteButtonText:'',
                 cancelButtonText:'',
@@ -497,8 +497,8 @@
             eventBus.$on("submiting", ($event) => {
                 this.submiting = $event;
             });
-            eventBus.$on("finishLoad", ($event) => {
-                this.finishLoad = $event;
+            eventBus.$on("isLoading", ($event) => {
+                this.isLoading = $event;
             });
 
             eventBus.$on('deleteButtonText', (event) => {

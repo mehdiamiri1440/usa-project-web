@@ -637,7 +637,9 @@
         <!--loader-->
         <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
             <div class="main-loader">
-                <img :src="loading">
+<!--                <img :src="loading">-->
+                <p dir="rtl">{{uploadPercentage}}%</p>
+                <progress max="100" :value="uploadPercentage"></progress>
                 <p dir="rtl">در حال بارگذاری...</p>
             </div>
         </div>
@@ -788,6 +790,7 @@
                 errors: '',
                 popUpMsg: '',
                 submiting: false,
+                uploadPercentage:0,
 
             }
         },
@@ -1019,12 +1022,20 @@
             eventBus.$on('productId', (event) => {
                 this.productId = event;
             });
+            eventBus.$on('uploadPercentage', (event) => {
+                this.uploadPercentage = event;
+            });
         },
         metaInfo(){
             return {
                 title: 'بازارگاه کشاورزی',
                 titleTemplate:'اینکوباک | %s',
             }
+        },
+        watch:{
+            uploadPercentage:function(){
+                console.log(this.uploadPercentage);
+            }   
         }
     }
 </script>

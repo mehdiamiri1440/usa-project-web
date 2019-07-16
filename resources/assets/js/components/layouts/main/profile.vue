@@ -461,7 +461,7 @@
             '<img :src="base + img">' +
             '</a>' +
             '</div>',
-        mounted: function () {
+        mounted: function (){
             $(".owl-carousel").owlCarousel({
                 loop: false,
                 items: 1,
@@ -561,10 +561,8 @@
         },
 
         methods: {
-            loader: function () {
-                this.$nextTick(function () {
-                    eventBus.$emit('finishLoad', false);
-                });
+            stopLoader: function () {
+                    eventBus.$emit('isLoading', false);
             },
             dropdown: function () {
                 $(".profile-list").fadeIn("slow", function () {
@@ -817,7 +815,7 @@
             this.init();
         },
         updated: function () {
-            this.loader();
+            //
         },
         components: {
             'image-viewer': OwlCarousel,
@@ -889,6 +887,12 @@
                 ]
 
             }
+        },
+        beforeCreate:function(){
+            var self = this;
+            window.addEventListener("load", function(event) {
+                    self.stopLoader();
+            });
         }
     };
 

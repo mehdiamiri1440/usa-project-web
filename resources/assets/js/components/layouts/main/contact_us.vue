@@ -33,17 +33,23 @@
 
     export default {
         methods:{
-            loader:function(){
+            stopLoader: function () {
                 this.$nextTick(function () {
-                    eventBus.$emit('finishLoad', false);
+                    eventBus.$emit('isLoading', false);
                 });
-            }
+            },
         },
         mounted:function(){
-            this.loader();
+            //
         },
         updated: function () {
-            this.loader();
+            //
+        },
+        beforeCreate:function(){
+            var self = this;
+            window.addEventListener("load", function(event) {
+                    self.stopLoader();
+            });
         }
     }
 </script>

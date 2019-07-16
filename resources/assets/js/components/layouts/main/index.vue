@@ -2052,10 +2052,8 @@
             }
         },
         methods: {
-            loader:function(){
-                this.$nextTick(function () {
-                    eventBus.$emit('finishLoad', false);
-                });
+            stopLoader: function () {
+                    eventBus.$emit('isLoading', false);
             },
             dropdown: function () {
                 $(".profile-list").fadeIn("slow", function () {
@@ -2090,7 +2088,7 @@
                 }).then(function (response) {
                     self.homePageProductsSlider = response.data.products;
                 });
-
+                
             },
             search: function () {
                 if (this.mainSearchBoxText != '') {
@@ -2101,10 +2099,9 @@
         },
         mounted: function () {
             this.init();
-            this.loader();
         },
-        updated: function(){
-            this.loader();
+        updated(){
+            //
         },
         created() {
             document.addEventListener('click', this.documentClick)
@@ -2127,7 +2124,13 @@
                     this.enterKeyActiveForSearch = false;
                 }
             }
-        }
+        },
+        beforeCreate:function(){
+            var self = this;
+            window.addEventListener("load", function(event) {
+                    self.stopLoader();
+            });
+        },
 
     }
 </script>

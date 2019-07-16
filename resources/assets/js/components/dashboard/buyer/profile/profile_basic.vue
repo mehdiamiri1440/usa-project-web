@@ -515,7 +515,7 @@
                     .then(response => (this.currentUser = response.data));
             },
             RegisterBasicProfileInfo: function () {
-                eventBus.$emit('submitingEvent', true);
+                eventBus.$emit('submiting', true);
                 this.errors = '';
                 var self = this;
 
@@ -535,7 +535,7 @@
                 axios.post('/user/profile_modification', data)
                     .then(function (response) {
                         if (response.status == 200) {
-                            eventBus.$emit('submitingEvent', false);
+                            eventBus.$emit('submiting', false);
                             self.popUpMsg = 'تغییرات با موفقیت اعمال شد';
                             eventBus.$emit('submitSuccess', self.popUpMsg);
                             $('#myModal').modal('show');
@@ -545,7 +545,7 @@
                     .catch(function (err) {
                         self.errors = '';
                         self.errors = err.response.data.errors;
-                        eventBus.$emit('submitingEvent', false);
+                        eventBus.$emit('submiting', false);
                     });
             },
             toLatinNumbers: function (num) {

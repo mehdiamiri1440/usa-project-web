@@ -283,7 +283,7 @@
         props: ['img', 'base'],
         template: '<div>' +
             '<a   :href="base + img">' +
-            '<img :src="base + img" itemprop="image">' +
+            '<img :src="base + img">' +
             '</a>' +
             '</div>',
         mounted: function () {

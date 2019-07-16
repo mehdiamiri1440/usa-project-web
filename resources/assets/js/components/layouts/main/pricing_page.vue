@@ -1223,10 +1223,8 @@
             return {}
         },
         methods: {
-            loader: function () {
-                this.$nextTick(function () {
-                    eventBus.$emit('finishLoad', false);
-                });
+            stopLoader: function () {
+                eventBus.$emit('isLoading', false);
             },
             trElement: function (element) {
                 var elementClass = $(element).attr('class');
@@ -1240,10 +1238,16 @@
             }
         },
         mounted: function () {
-            this.loader();
+            //
         },
         updated: function () {
-            this.loader();
+            //
+        },
+        beforeCreate:function(){
+            var self = this;
+            window.addEventListener("load", function(event) {
+                    self.stopLoader();
+            });
         }
     }
 </script>

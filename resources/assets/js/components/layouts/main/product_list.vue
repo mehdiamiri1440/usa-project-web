@@ -917,6 +917,9 @@
             scrollToTop() {
                 window.scrollTo(0,0);
            },
+            stopLoader: function () {
+                    eventBus.$emit('isLoading', false);
+            },
         },
         watch: {
             searchText: function () {
@@ -972,7 +975,15 @@
         },
         mounted() {
             this.init();
-            eventBus.$emit('finishLoad', false);
+        },
+        updated(){
+            //
+        },
+        beforeCreate:function(){
+            var self = this;
+            window.addEventListener("load", function(event) {
+                    self.stopLoader();
+            });
         },
 //        metaInfo:{
 //            title:'لیست محصولات کشاورزی',
