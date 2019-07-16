@@ -907,12 +907,16 @@
                     .then(function(response){
                         self.products = response.data.products;
                         eventBus.$emit('submiting', false);
+                        self.scrollToTop();
                     })
                     .catch(function(err){
                         alert('error');
                     });
 
             },
+            scrollToTop() {
+                window.scrollTo(0,0);
+           },
         },
         watch: {
             searchText: function () {

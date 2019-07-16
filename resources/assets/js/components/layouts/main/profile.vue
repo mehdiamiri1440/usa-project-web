@@ -79,6 +79,7 @@
 </style>
 <template>
     <div>
+        <script v-html="jsonLDObject" type="application/ld+json"></script>
         <header id="header" class="hidden-xs  main-header">
             <h1 class="title-page col-xs-12">
                 پروفایل
@@ -553,7 +554,8 @@
                     product_count: '',
                     buyAd_count: '',
                 },
-                getUserName: this.$route.params.user_name
+                getUserName: this.$route.params.user_name,
+                jsonLDObject:"",
 
             }
         },
@@ -597,12 +599,12 @@
                 axios.post('/get_user_statistics_by_user_name', {
                     user_name: this.$route.params.user_name,
                 })
-                    .then(function (response) {
-                        self.profileOwnerStatistics = response.data.statistics;
-                    })
-                    .catch(function (err) {
-                        //
-                    });
+                .then(function (response) {
+                    self.profileOwnerStatistics = response.data.statistics;
+                })
+                .catch(function (err) {
+                    //
+                });
 
                 axios.post('/user/profile_info')
                     .then(response => (this.currentUser = response.data));
@@ -610,14 +612,15 @@
                 axios.post('/load_profile_by_user_name', {
                     user_name: this.$route.params.user_name
                 })
-                    .then(function (response) {
-                        self.profileOwner = response.data;
-                    })
-                    .catch(function (err) {
-                        if (err.response.status == 404) {
-                            window.location.href = '/404'
-                        }
-                    });
+                .then(function (response){
+                    self.profileOwner = response.data;
+                    self.jsonLDObject = self.createJsonLDObject(self.profileOwner);
+                })
+                .catch(function (err) {
+                    if (err.response.status == 404) {
+                        window.location.href = '/404'
+                    }
+                });
 
 //                axios.post('/increment_user_profile_visit_count',{
 //                    user_name:this.$route.params.user_name
@@ -759,6 +762,48 @@
                 else {
                     alert('ابتدا لاگین کنید');
                 }
+            },
+            createJsonLDObject:function(profileOwner){
+                var fullName =  profileOwner.user_info.first_name + ' ' + profileOwner.user_info.last_name ;
+                var address = profileOwner.user_info.province + ' - ' +           profileOwner.user_info.city ;  
+        
+                var images = [];
+                profileOwner.certificates.forEach(function(photo){
+                    images.push("https://incobac.com/storage/" + photo);
+                });
+                profileOwner.relateds.forEach(function(photo){
+                    images.push("https://incobac.com/storage/" + photo);
+                });
+                
+                if(profileOwner.profile.profile_photo){
+                    images.push("https://incobac.com/storage/" + profileOwner.profile.profile_photo)
+                }
+                
+                if(profileOwner.user_info.is_seller){
+                    var jobTitle  = "فروشنده ی " + " " + profileOwner.activity_domain;
+                }
+                else{
+                    var jobTitle  = "خریدار " + " " + profileOwner.activity_domain;
+                }
+                
+                var gender = (profileOwner.user_info.sex == 'آقا' ? "male" : "female");
+                
+                var jsondl = {
+                      "@context": "https://schema.org",
+                      "@type": "Person",
+                      "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": address
+                      },
+                      "image": images,
+                      "jobTitle": jobTitle,
+                      "name": fullName,
+                      "gender": gender,
+                      "nationality": "Iranian",
+                      "url": "http://www.incobac.com/profile/" + profileOwner.user_info.user_name
+                }
+                
+                return jsondl;
             },
             registerComponentStatistics: function (categoryName, actionName, labelName) {
                 gtag('event', actionName, {

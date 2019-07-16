@@ -1193,8 +1193,8 @@
             'image-viewer-list' : OwlCarouselLists,
         },
         mounted(){
-            this.init();
-            this.scrull_css_header();
+//            this.init();
+//            this.scrull_css_header();
         },
     }
 </script>

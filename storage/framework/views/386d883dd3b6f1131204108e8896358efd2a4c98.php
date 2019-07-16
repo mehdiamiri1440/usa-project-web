@@ -4,34 +4,34 @@
 
     <meta charset="UTF-8">
     <title>صفحه محصول</title>
-    <meta name="csrf-token" content="{{csrf_token()}}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <script>
-        window.Laravel = {csrfToken: '{{csrf_token()}}'}
+        window.Laravel = {csrfToken: '<?php echo e(csrf_token()); ?>'}
     </script>
-    <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
-    <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
-    <script src="{{asset('assets/js/main.js')}}"></script>
-    <script src="{{asset('assets/js/jquery.easing.min.js')}}"></script>
-    <script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/fontiran.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap-theme.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/master/style.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/dashboard/buyer/product-list.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/dashboard/buyer/product-view.css')}}">
+    <script src="<?php echo e(asset('assets/js/jquery-3.3.1.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/jquery-ui.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/jquery.easing.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/jquery.magnific-popup.min.js')); ?>"></script>
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/fontiran.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/font-awesome.min.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap.min.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap-theme.min.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl.theme.default.min.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/popup.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/magnific-popup.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/master/style.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl.carousel.min.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl.theme.default.min.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/dashboard/buyer/product-list.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/dashboard/buyer/product-view.css')); ?>">
     <style>
         .main-loader{
             display: none;
         }
     </style>
 
-    <script src="{{asset('assets/cdn/axios.js')}}"></script>
+    <script src="<?php echo e(asset('assets/cdn/axios.js')); ?>"></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
@@ -68,30 +68,30 @@
         <div class="container-fluid">
             <!-- navbar header -->
             <div class="navbar-header">
-                @if(session('user_id'))
+                <?php if(session('user_id')): ?>
                     <div class="user-header-mobile hidden-sm hidden-md hidden-lg ">
                         <div class="profile-menu-header">
                             <a href="#" @click.prevent ="dropdown()">
                                 <div class="image-header-profile">
-                                    @if(session('profile_photo'))
-                                        <img src="{{url('storage/'  . session('profile_photo'))}}">
-                                    @else
-                                        <img src="{{asset('assets/img/user-defult.png')}}">
-                                    @endif
+                                    <?php if(session('profile_photo')): ?>
+                                        <img src="<?php echo e(url('storage/'  . session('profile_photo'))); ?>">
+                                    <?php else: ?>
+                                        <img src="<?php echo e(asset('assets/img/user-defult.png')); ?>">
+                                    <?php endif; ?>
                                 </div>
                                 <i aria-hidden="true" class="fa fa-angle-down"></i>
                             </a>
                             <div class="profile-list">
                                 <ul class="list-unstyled">
                                     <li class="list-item"><a
-                                                href="{{route('profile_basic')}}">داشبورد</a></li>
+                                                href="<?php echo e(route('profile_basic')); ?>">داشبورد</a></li>
                                     <li class="list-item"><a href="/dashboard/password">تغییر کلمه عبور</a></li>
-                                    <li class="list-item"><a href="{{route('logout')}}">خروج</a></li>
+                                    <li class="list-item"><a href="<?php echo e(route('logout')); ?>">خروج</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                @endif
+                <?php endif; ?>
                 <button class="navbar-toggle"  data-toggle="collapse" href="#collapseOne">
                     <span class="icon icon-bar"></span>
                     <span class="icon icon-bar"></span>
@@ -107,9 +107,9 @@
 
             <div class="collapse navbar-collapse" id="collapseOne" aria-expanded="false">
                 <ul class="nav navbar-nav navbar-left">
-                    @if(!session('user_id'))
+                    <?php if(!session('user_id')): ?>
                         <li><a href="" class="smoothScroll">ورود/ثبت نام</a></li>
-                    @endif
+                    <?php endif; ?>
                     <li><a href="/" class="smoothScroll">صفحه ی اصلی</a></li>
                     <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
                     <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
@@ -117,30 +117,30 @@
                     <li><a href="/product-list" class="smoothScroll">لیست محصولات </a></li>
 
 
-                    @if(session('user_id'))
+                    <?php if(session('user_id')): ?>
 
                         <li class="user-header-web hidden-xs">
                             <div class="profile-menu-header "><a href="#" @click.prevent ="dropdown()">
                                     <div class="image-header-profile">
-                                        @if(session('profile_photo'))
-                                            <img src="{{url('storage/'  . session('profile_photo'))}}">
-                                        @else
-                                            <img src="{{asset('assets/img/user-defult.png')}}">
-                                        @endif
+                                        <?php if(session('profile_photo')): ?>
+                                            <img src="<?php echo e(url('storage/'  . session('profile_photo'))); ?>">
+                                        <?php else: ?>
+                                            <img src="<?php echo e(asset('assets/img/user-defult.png')); ?>">
+                                        <?php endif; ?>
                                     </div>
                                     <i aria-hidden="true" class="fa fa-angle-down"></i> <span
-                                            class="name-header-profile">{{session('full_name')}}</span></a>
+                                            class="name-header-profile"><?php echo e(session('full_name')); ?></span></a>
                                 <div class="profile-list">
                                     <ul class="list-unstyled">
                                         <li class="list-item"><a
-                                                    href="{{route('profile_basic')}}">داشبورد</a></li>
+                                                    href="<?php echo e(route('profile_basic')); ?>">داشبورد</a></li>
                                         <li class="list-item"><a href="/dashboard/password">تغییر کلمه عبور</a></li>
-                                        <li class="list-item"><a href="{{route('logout')}}">خروج</a></li>
+                                        <li class="list-item"><a href="<?php echo e(route('logout')); ?>">خروج</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </li>
-                    @endif
+                    <?php endif; ?>
                 </ul>
             </div>
 
@@ -148,10 +148,10 @@
         </div>
     </div>
 
-    <product-view default-image="{{asset('assets/img/user-defult.png')}}" incobac-logo="{{asset('assets/img/logo-incobac.png')}}"></product-view>
+    <product-view default-image="<?php echo e(asset('assets/img/user-defult.png')); ?>" incobac-logo="<?php echo e(asset('assets/img/logo-incobac.png')); ?>"></product-view>
 </div>
 
-<script src="{{asset('js/app.js')}}"></script>
+<script src="<?php echo e(asset('js/app.js')); ?>"></script>
 
 <script>
 
