@@ -813,9 +813,10 @@
         },
         mounted() {
             this.init();
+             this.$nextTick(this.stopLoader());
         },
         updated: function () {
-            //
+             this.$nextTick(this.stopLoader());
         },
         components: {
             'image-viewer': OwlCarousel,
@@ -888,12 +889,12 @@
 
             }
         },
-        beforeCreate:function(){
-            var self = this;
-            window.addEventListener("load", function(event) {
-                    self.stopLoader();
-            });
-        }
+//        beforeCreate:function(){
+//            var self = this;
+//            window.addEventListener("load", function(event) {
+//                    self.stopLoader();
+//            });
+//        }
     };
 
 

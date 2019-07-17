@@ -2099,9 +2099,10 @@
         },
         mounted: function () {
             this.init();
+             this.$nextTick(this.stopLoader());
         },
         updated(){
-            //
+             this.$nextTick(this.stopLoader());
         },
         created() {
             document.addEventListener('click', this.documentClick)
@@ -2125,12 +2126,12 @@
                 }
             }
         },
-        beforeCreate:function(){
-            var self = this;
-            window.addEventListener("load", function(event) {
-                    self.stopLoader();
-            });
-        },
+//        beforeCreate:function(){
+//            var self = this;
+//            window.addEventListener("load", function(event) {
+//                    self.stopLoader();
+//            });
+//        },
 
     }
 </script>

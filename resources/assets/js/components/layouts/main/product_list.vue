@@ -975,16 +975,17 @@
         },
         mounted() {
             this.init();
+            this.stopLoader();
         },
         updated(){
             //
         },
-        beforeCreate:function(){
-            var self = this;
-            window.addEventListener("load", function(event) {
-                    self.stopLoader();
-            });
-        },
+//        beforeCreate:function(){
+//            var self = this;
+//            window.addEventListener("load", function(event) {
+//                    self.stopLoader();
+//            });
+//        },
 //        metaInfo:{
 //            title:'لیست محصولات کشاورزی',
 //            titleTemplate: 'اینکوباک |‌ %s',

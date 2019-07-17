@@ -657,17 +657,17 @@
             RightSection
         },
         mounted:function(){
-            //
+             this.$nextTick(this.stopLoader());
         },
         updated: function () {
-            //
+             this.$nextTick(this.stopLoader());
         },
-        beforeCreate:function(){
-            var self = this;
-            window.addEventListener("load", function(event) {
-                    self.stopLoader();
-            });
-        }
+//        beforeCreate:function(){
+//            var self = this;
+//            window.addEventListener("load", function(event) {
+//                    self.stopLoader();
+//            });
+//        }
     }
 </script>
 
