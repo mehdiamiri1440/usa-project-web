@@ -166,7 +166,7 @@
 
     .contact-wrapper .contact-items {
         position: relative;
-        /*overflow-y: scroll;*/
+        overflow-y: scroll;
         height: calc(100% - 30px);
     }
 

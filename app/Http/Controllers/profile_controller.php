@@ -149,7 +149,7 @@ class profile_controller extends Controller
     protected function set_user_profile_modification_rules($request)
     {
         $rules = [
-            'description' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u|min:100|nullable',
+            'description' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}\x{060C}\x{061B}\x{061F}\x{0640}\x{066A}\x{066B}\x{066C}_\.\-\:\(\)\A-Za-z0-9 ]+$/u|min:100|nullable',
             'activity_domain' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u|nullable',
             'related_activity_history' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9]+$/u|nullable',
             'human_resource_count' => 'regex:/^[0-9\x{06F0}-\x{06F9}]+$/u|nullable',
