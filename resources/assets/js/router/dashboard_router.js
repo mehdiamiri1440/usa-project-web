@@ -415,7 +415,7 @@ const myRouter =  new Router({
         {
             path: '/*',
             redirect: '/404'
-        }
+        },
 
     ],
 });

@@ -35,8 +35,8 @@ class sendNewMessageSMSNotification implements ShouldQueue
         $msg_controller_object = new message_controller();
         
         $msg_array = [
-            'پیام جدید در اینکوباک',
-            'https://incobac.com'
+            'شما پیام خوانده نشده در اینکوباک دارید',
+            'www.incobac.com'
         ];
         
         $users_to_notify = $msg_controller_object->get_users_who_have_unread_messages();

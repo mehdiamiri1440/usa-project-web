@@ -90,6 +90,7 @@
                             :defultimg="defultimg"
                             :str="str"
                             :loading="loading"
+                            :currentUser="currentUser"
                     >
                     </product-article>
                 </div>

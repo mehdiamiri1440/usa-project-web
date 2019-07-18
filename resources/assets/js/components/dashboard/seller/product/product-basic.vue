@@ -307,7 +307,8 @@
                         message: ' ثبت محصول',
                         url: 'registerProduct'
                     },
-                ]
+                ],
+                uploadPercentage:0,
             };
         },
         methods: {
@@ -336,43 +337,49 @@
                 }).then(response => (this.cities = response.data.cities));
             },
             submitProduct: function () {
-                eventBus.$emit('submitingEvent', true);
+                eventBus.$emit('submiting', true);
                 var self = this;
-                console.log('submited');
-                console.log(this.product.rules);
+                
                 if (this.product.rules != true) {
                     this.popUpMsg = 'موافقت با قوانین ثبت آگهی الزامی است';
                     eventBus.$emit('submitSuccess', this.popUpMsg);
-                    eventBus.$emit('submitingEvent', false);
+                    eventBus.$emit('submiting', false);
                     $('#myModal').modal('show');
                 }
                 else {
                     let formData = this.getProductFormFields();
-                    axios.post('/user/add_product', formData)
+                    axios.post('/user/add_product', formData,{
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest',
+                                'Content-Type': 'application/json',
+                            },
+                            onUploadProgress: function(progressEvent) {
+                                this.uploadPercentage = parseInt( Math.round( ( progressEvent.loaded * 100 ) / progressEvent.total ) );
+                            }.bind(this)
+                        })
                         .then(function (response) {
                             if (response.status == 201) {
                                 self.disableSubmit = true;
                                 self.popUpMsg = 'محصول شما با موفقیت ثبت شد';
                                 eventBus.$emit('submitSuccess', self.popUpMsg);
-                                eventBus.$emit('submitingEvent', false);
+                                eventBus.$emit('submiting', false);
                                 $('#myModal').modal('show');
                                 setTimeout(function () {
                                     location.reload(true);
-                                    eventBus.$emit('submitingEvent', false);
+                                    eventBus.$emit('submiting', false);
                                 }, 3000);
                             }
                             else if(response.status == 200){
                                 self.popUpMsg = response.data.msg;
                                 eventBus.$emit('submitSuccess', self.popUpMsg);
-                                eventBus.$emit('submitingEvent', false);
+                                eventBus.$emit('submiting', false);
                                 $('#myModal').modal('show');
                             }
                         })
                         .catch(function (err) {
-                            console.log('axios is error');
                             self.errors = [];
                             self.errors = err.response.data.errors;
-                            eventBus.$emit('submitingEvent', false);
+                            eventBus.$emit('submiting', false);
                         });
                 }
             },
@@ -441,6 +448,11 @@
         },
         created(){
             gtag('config','UA-129398000-1',{'page_path': '/register-product'});
+        },
+        watch:{
+            uploadPercentage:function(){
+                eventBus.$emit('uploadPercentage', this.uploadPercentage);
+            }
         }
     }
 </script>

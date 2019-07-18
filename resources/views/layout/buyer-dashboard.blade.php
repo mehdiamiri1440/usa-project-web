@@ -92,7 +92,7 @@
     <main id="main">
         <router-view
                 name="buyer"
-                loading="{{asset('assets/img/gif/loading.gif')}}"
+                loading_img="{{asset('assets/img/gif/loading.gif')}}"
                 trans="{{url('dashboard/transaction-detail')}}"
                 transRep="{{url('dashboard/transaction-report')}}"
                 str="{{asset('storage/')}}"

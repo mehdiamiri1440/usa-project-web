@@ -120,7 +120,7 @@
 </style>
 <template>
     <div>
-        <div :class="{'loader-wrapper': !finishLoad , 'finish-loader-show' : finishLoad }">
+        <div :class="{'loader-wrapper': !isLoading , 'finish-loader-show' : isLoading }">
             <div class="main-loader">
                 <img :src="finish_load_img">
             </div>
@@ -338,7 +338,7 @@
             return {
                 popUpMsg: '',
                 submiting: false,
-                finishLoad: true,
+                isLoading: true,
                 deleteText:'',
                 deleteButtonText:'',
                 cancelButtonText:'',
@@ -435,19 +435,19 @@
             isUserFromWebView: function () {
                 var self = this;
 
-                var androidVersion = parseInt(this.getAndroidVersion(), 10);
-
-                if (!this.isOsIOS() && androidVersion >= 5) {
-                    axios.post('/is_user_from_webview')
-                        .then(function (response) {
-                            if (response.data.is_webview == false) {
-                                self.activateDownloadAppPopUp();
-                            }
-                            else {
-                                //
-                            }
-                        });
-                }
+//                var androidVersion = parseInt(this.getAndroidVersion(), 10);
+//
+//                if (!this.isOsIOS() && androidVersion >= 5) {
+//                    axios.post('/is_user_from_webview')
+//                        .then(function (response) {
+//                            if (response.data.is_webview == false) {
+//                                self.activateDownloadAppPopUp();
+//                            }
+//                            else {
+//                                //
+//                            }
+//                        });
+//                }
 
 //                if( ! IsWebview(window.navigator.userAgent)){
 //                    this.activateDownloadAppPopUp();
@@ -497,8 +497,8 @@
             eventBus.$on("submiting", ($event) => {
                 this.submiting = $event;
             });
-            eventBus.$on("finishLoad", ($event) => {
-                this.finishLoad = $event;
+            eventBus.$on("isLoading", ($event) => {
+                this.isLoading = $event;
             });
 
             eventBus.$on('deleteButtonText', (event) => {

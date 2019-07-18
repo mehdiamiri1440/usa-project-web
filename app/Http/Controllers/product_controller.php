@@ -184,14 +184,14 @@ class product_controller extends Controller
             'search_text'           => 'string',
         ]);
 
-        $all_products = NULL ;
+        $all_products = NULL ; 
 
-        if($request->filled('from_record_number') && $request->filled('to_record_number')){
-            $all_products = $this->get_all_products_with_related_media($request->from_record_number,$request->to_record_number);
-        }
-        else{
+//        if($request->filled('from_record_number') && $request->filled('to_record_number')){
+//            $all_products = $this->get_all_products_with_related_media($request->from_record_number,$request->to_record_number);
+//        }
+//        else{
             $all_products = $this->get_all_products_with_related_media();  
-        } 
+//        } 
         
         //applying filters
         $all_products = array_filter($all_products, function($product) use($request){
@@ -214,17 +214,30 @@ class product_controller extends Controller
                 
                 $search_text_flag = $this->does_search_text_matche_the_product($search_text,$product);
             }
-            
-            return $category_flag && $sub_category_flag && $province_flag && $city_flag &&  $search_text_flag;
-        });
-        //changing view priority according to owners pakage type
-        usort($all_products,function($item1, $item2){
-            return $item1['user_info']->active_pakage_type >  $item2['user_info']->active_pakage_type ;
+            $result = $category_flag && $sub_category_flag && $province_flag && $city_flag &&  $search_text_flag;
+//            var_dump($test);
+            return $result;
         });
 
+        //changing view priority according to owners pakage type
+        usort($all_products,function($item1, $item2){
+            $a = $item1['user_info']->active_pakage_type;
+            $b = $item2['user_info']->active_pakage_type;
+
+            if($a == $b){
+                return $item1['main']->id < $item2['main']->id;
+            }
+
+            return ($a < $b) ? 1 : -1;
+        });
+        
+        if($request->filled('from_record_number') && $request->filled('to_record_number')){
+            $all_products = array_slice($all_products,$request->from_record_number,$request->to_record_number,true);   
+        }
+        
         return response()->json([
             'status' => TRUE,
-            'products' => $all_products
+            'products' => array_values($all_products)
         ],200);
 		
 	}
@@ -764,24 +777,25 @@ class product_controller extends Controller
     
     protected function does_search_text_matche_the_product($search_text,&$product)
     {
+        $search_text = str_replace('\\','',$search_text);
+        $search_text = str_replace('/','',$search_text);
         $search_text_array = explode(' ',$search_text);
         
-        foreach($product['main'] as $key => $value){
-            foreach($search_text_array as $search_text_value){
-                if(is_string($value) && strpos($value,$search_text_value) !== false){
-                    return true;
-                }
-            }
+        $search_expresion = "(.*)";
+        
+        foreach($search_text_array as $text){
+            $search_expresion .= "($text)(.*)";
         }
-        foreach($product['user_info']->toArray() as $key => $value){
-            foreach($search_text_array as $search_text_value){
-                if(is_string($value) && strpos($value,$search_text_value) !== false){
-                    return true;
-                }
-            }
+
+        $result = array_filter(collect($product['main'])->toArray(),function($item) use($search_text,$search_expresion){
+            return preg_match("/$search_expresion/", $item);
+        });
+
+        if(sizeof($result) > 0){
+            return true;
         }
         
-        return false;
+        else return false;
     }
     
     public function edit_product_by_id(Request $request)

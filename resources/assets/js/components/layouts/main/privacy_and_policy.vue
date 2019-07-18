@@ -38,12 +38,8 @@
                             مسئولیتی را در قبال هر نوع آگهی درج شده در سایت نمی‌پذیرد و صرفاً مطالب درج شده توسط کاربران
                             را نمایش می‌دهد.
                             مسئولیت استفاده از هرگونه متن، پیام، توضیح، اطلاعات، عکس، مشخصات تماس و موارد مشابه که به
-                            اینکوباک جهت درج آگهی ارسال می‌شود یا در آن قرار می‌گیرد، شامل بازتولید، افشاء، مخابره، نشر
-<<<<<<< HEAD
-                            .و پخش آن بر عهده فرستنده اطلاعات است
-=======
-                            و پخش آن بر عهده فرستنده اطلاعات است
->>>>>>> 2133123ea84b8dfaf3a50ae399bbf074563a180f
+                            اینکوباک جهت درج آگهی ارسال می‌شود یا در آن قرار می‌گیرد، شامل بازتولید، افشاء، مخابره، نشر و پخش آن بر عهده فرستنده اطلاعات است
+
 
                         </p>
                     </div>
@@ -106,17 +102,21 @@
 
     export default {
         methods:{
-            loader:function(){
-                this.$nextTick(function () {
-                    eventBus.$emit('finishLoad', false);
-                });
-            }
+            stopLoader: function () {
+                eventBus.$emit('isLoading', false);
+            },
         },
         mounted:function(){
-            this.loader();
+             this.$nextTick(this.stopLoader());
         },
         updated: function () {
-           this.loader();
-        }
+            this.$nextTick(this.stopLoader());
+        },
+//        beforeCreate:function(){
+//            var self = this;
+//            window.addEventListener("load", function(event) {
+//                    self.stopLoader();
+//            });
+//        },
     }
 </script>

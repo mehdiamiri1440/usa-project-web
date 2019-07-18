@@ -428,7 +428,7 @@
                         </p>
                     </div>
                     <div v-else-if="isSearchingContact" class="contact-is-search">
-                        <img :src="loading"/>
+                        <img :src="loading_img"/>
                     </div>
                     <div v-else class="contact-items">
                         <ul>
@@ -524,7 +524,7 @@
         props: [
             'defimgitem',
             'str',
-            'loading'
+            'loading_img'
         ],
         data: function () {
             return {
@@ -586,12 +586,10 @@
                                 alert('error');
                             });
 
-
                     })
                     .catch(function (e) {
-
+                        //
                     });
-
             },
             loadChatHistory: function (contact) {
                 var self = this;

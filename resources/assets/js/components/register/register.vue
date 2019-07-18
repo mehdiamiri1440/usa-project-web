@@ -869,10 +869,8 @@
             RightSection
         },
         methods:{
-            loader:function(){
-                this.$nextTick(function () {
-                    eventBus.$emit('finishLoad', false);
-                });
+            stopLoader: function () {
+                eventBus.$emit('isLoading', false);
             },
             goToStep: function(step){
                 this.currentStep = step;
@@ -1280,10 +1278,16 @@
             gtag('config','UA-129398000-1',{'page_path': '/register'});
         },
         mounted:function(){
-            this.loader();
+             this.$nextTick(this.stopLoader());
         },
         updated: function () {
-            this.loader();
-        }
+             this.$nextTick(this.stopLoader());
+        },
+//        beforeCreate:function(){
+//            var self = this;
+//            window.addEventListener("load", function(event) {
+//                    self.stopLoader();
+//            });
+//        }
     }
 </script>

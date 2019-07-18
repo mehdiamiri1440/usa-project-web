@@ -59,6 +59,66 @@
         gtag('config', 'UA-129398000-1', {'send_page_view': false});
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <script type="application/ld+json">
+        { 
+            "@context" : "http://schema.org/",
+            "@type" : "Organization",
+            "url" : "https://www.incobac.com",
+            "email": "support@incobac.com",
+            "logo":"https://www.incobac.com/assets/img/logo_dark.png",
+            "name" : "اینکوباک",
+            "foundingDate":"2017-09-14",
+            "location" : {
+                   "@type" : "Place",
+                   "name" : "اینکوباک",
+                   "address" : "NO.264 - 15 - Eram Street - Shiraz - IR"
+                },
+            "description":"خرید و فروش محصولات عمده کشاورزی، برنج و خرما",
+            "review":{
+                "@type": "Review",
+                "itemReviewed": {
+                        "@type": "Organization",
+                        "image": "https://www.incobac.com/assets/img/logo_dark.png",
+                        "name": "اینکوباک",
+                        "telephone": "0917-202-1943"
+                    },
+                    "reviewRating": {
+                        "@type": "Rating",
+                        "ratingValue": "4"
+                    },
+                    "name": "اینکوباک",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Ali Delkhosh"
+                    },
+                    "reviewBody": "بازارگاه خرید و فروش محصولات کشاورزی",
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "اینکوباک"
+                    }
+            },
+            "contactPoint" : [
+                  { 
+                    "@type" : "ContactPoint",
+                    "telephone" : "+98-917-202-1943",
+                    "contactType" : "customer service"
+                  } 
+                ]
+        }
+    </script>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "url": "https://www.incobac.com/",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.incobac.com/product-list/{search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+    </script>
 
 </head>
 <body>
@@ -154,10 +214,7 @@
 <script src="{{asset('js/app.js')}}"></script>
 <script src="{{asset('assets/js/idleTimer.js')}}"></script>
 
-
 <script>
-
-
     $(document).ready(function () {
         $(document).idleTimer(7200000);
     });

@@ -1820,7 +1820,7 @@
          WEB RICE AND DATE SLIDER
         ============================== -->
 
-
+<!--
         <section v-if="homePageDates" id="request" class="parallax-section  ">
             <div class="container">
                 <div class="row">
@@ -1848,6 +1848,7 @@
         </section>
 
         <section v-if="homePageRice"  id="rice" class="parallax-section  ">
+
             <div class="container">
                 <div class="row">
                     <h3 class="text-center col-xs-12"> برنج</h3>
@@ -1873,12 +1874,14 @@
                 </div>
             </div>
         </section>
+-->
 
 
         <!-- =========================
         TESTIMONIAL SECTION
         ============================== -->
 
+<!--
         <section id="testimonial" class="">
             <div class="overlay"></div>
             <div class="container">
@@ -1907,6 +1910,7 @@
                 </div>
             </div>
         </section>
+-->
 
 
         <!-- =========================
@@ -2016,10 +2020,8 @@
             }
         },
         methods: {
-            loader: function () {
-                this.$nextTick(function () {
-                    eventBus.$emit('finishLoad', false);
-                });
+            stopLoader: function () {
+                    eventBus.$emit('isLoading', false);
             },
             dropdown: function () {
                 $(".profile-list").fadeIn("slow", function () {
@@ -2047,7 +2049,7 @@
                         self.posts = response.data.posts;
                     });
 
-                axios.post('/user/get_product_list', {
+                 axios.post('/user/get_product_list', {
 //                    from_record_number: 0,
 //                    to_record_number: 5,
                     sub_category_id:6,
@@ -2062,6 +2064,7 @@
                 }).then(function (response) {
 
                     self.homePageRice = response.data.products;
+
                 });
 
             },
@@ -2074,14 +2077,15 @@
         },
         mounted: function () {
             this.init();
-            this.loader();
+             this.$nextTick(this.stopLoader());
         },
-        updated: function () {
-            this.loader();
+        updated(){
+             this.$nextTick(this.stopLoader());
         },
         created() {
             document.addEventListener('click', this.documentClick)
             var self = this;
+
             window.addEventListener('keydown', function (event) {
                 if (event.keyCode === 13) {
                     if (self.enterKeyActiveForSearch) {
@@ -2099,7 +2103,13 @@
                     this.enterKeyActiveForSearch = false;
                 }
             }
-        }
+        },
+//        beforeCreate:function(){
+//            var self = this;
+//            window.addEventListener("load", function(event) {
+//                    self.stopLoader();
+//            });
+//        },
 
     }
 </script>

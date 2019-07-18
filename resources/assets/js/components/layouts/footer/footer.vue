@@ -69,6 +69,10 @@
                 </div>
             </div>
         </div>
+        <div itemscope="" itemtype="http://schema.org/Review">
+            <span itemprop="itemReviewed" content="اینکوباک"></span>
+            <span itemprop="" itemtype="http://schema.org/Rating">4.5</span>
+        </div>
 
         <!-- end of app tag -->
         <!-- Back top -->

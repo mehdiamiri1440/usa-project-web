@@ -152,7 +152,7 @@
 
 <template>
     <div>
-        <article class="main-content-item" >
+        <article class="main-content-item" itemscope itemtype="http://schema.org/Product">
             <product-user-info
                     :profile_photo="product.profile_info.profile_photo"
                     :user_info="product.user_info"
@@ -164,7 +164,7 @@
                     :product_id="product.main.id"
                     :is_my_profile_status="isMyProfile"
             ></product-user-info>
-            <div class="article-contents col-xs-12  col-sm-9 ">
+            <div class="article-contents col-xs-12  col-sm-9">
                 <div class="main-image col-xs-12 col-sm-5">
                     <div class="owl-carousel" v-if="product.photos.length > 0">
                         <image-viewer-list @click="registerComponentStatistics('productImageViewer','click','popUp')"
@@ -179,19 +179,20 @@
                 </div>
                 <div class="main-article-content col-xs-12 col-sm-7">
                     <h2 class="main-article-title">
-                        <a href="#">{{product.main.category_name + ' | ' +
+                        <a href="#" itemprop="category">{{product.main.category_name + ' | ' +
                             product.main.sub_category_name}}</a>
                     </h2>
 
-                    <p>نوع محصول: <span>{{product.main.product_name}}</span></p>
+                    <p>نوع محصول: <span itemprop="name">{{product.main.product_name}}</span></p>
                     <p>استان / شهر:
                         <span>{{product.main.province_name + ' - ' + product.main.city_name}}</span>
                     </p>
-                    <p>مقدار موجودی: <span>{{product.main.stock}} کیلوگرم</span></p>
+                    <p>مقدار موجودی: <span itemprop="weight">{{product.main.stock}} کیلوگرم</span></p>
                     <p>حداقل سفارش: <span>{{product.main.min_sale_amount}} کیلوگرم</span></p>
-                    <p>قیمت: <span>{{product.main.min_sale_price + ' - ' + product.main.max_sale_price}}
+                    <p>قیمت: <span itemprop="price">{{product.main.min_sale_price + ' - ' + product.main.max_sale_price}}
                                     تومان</span></p>
-                    <p>توضیحات: <span>{{product.main.description}}</span></p>
+                    <p>توضیحات: <span itemprop="description">{{product.main.description}}</span>
+                    </p>
 
                 </div>
                 <div class="col-xs-12">
@@ -352,16 +353,17 @@
             'str',
             'loading',
             'loading_img',
+            'currentUser',
         ],
 
         data: function () {
             return {
                 submiting: false,
                 errors: '',
-                currentUser: {
-                    profile: '',
-                    user_info: ''
-                },
+//                currentUser: {
+//                    profile: '',
+//                    user_info: ''
+//                },
                 popUpMsg: '',
                 popUpLoaded: false,
                 isMyProfile:false,
@@ -376,16 +378,22 @@
         methods: {
             init: function () {
                 var self = this;
-                axios.post('/user/profile_info')
-                    .then(function (response) {
-                        self.currentUser = response.data;
-                        if (self.currentUser.user_info) {
-                            if (self.currentUser.user_info.id === self.product.main.myuser_id) {
-                                self.isMyProfile = true;
-                                self.$emit('isMyProfile', self.isMyProfile);
-                            }
-                        }
-                    });
+//                axios.post('/user/profile_info')
+//                    .then(function (response) {
+//                        self.currentUser = response.data;
+//                        if (self.currentUser.user_info) {
+//                            if (self.currentUser.user_info.id === self.product.main.myuser_id) {
+//                                self.isMyProfile = true;
+//                                self.$emit('isMyProfile', self.isMyProfile);
+//                            }
+//                        }
+//                    });
+                if(this.currentUser.user_info){
+                    if(this.currentUser.user_info.id == this.product.main.myuser_id){
+                        this.isMyProfile = true;
+                        this.$emit('isMyProfile',this.isMyProfile);
+                    }
+                }
             },
             toLatinNumbers: function (num) {
                 if (num == null) {
@@ -423,7 +431,7 @@
                     element.slideToggle("125", "swing");
                     $('.buy_details').not(element).slideUp();
 
-                    this.scrollToTheRequestRegisterBox(index);
+                    this.scrollToTheRequestRegisterBox(element);
                 }
                 else {
                     //

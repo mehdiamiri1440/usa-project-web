@@ -652,6 +652,7 @@
                         url: 'profileBasic',
                     }
                 ],
+                uploadPercentage:0
             }
         },
         methods: {
@@ -662,12 +663,12 @@
             RegisterComplementaryProfileInfo: function () {
 
 
-                eventBus.$emit('submitingEvent',true);
+                eventBus.$emit('submiting',true);
                 if (this.currentUser.profile.is_company == null || this.currentUser.profile.public_phone == null) {
                     this.popUpMsg = 'ابتدا اطلاعات پایه را تکمیل کنید.';
                     eventBus.$emit('submitSuccess', this.popUpMsg);
                     $('#myModal').modal('show');
-                    eventBus.$emit('submitingEvent',false);
+                    eventBus.$emit('submiting',false);
                     return;
                 }
 
@@ -697,17 +698,20 @@
 
                 formData.append('related_image_count', this.relatedFiles.length);
                 formData.append('certificate_image_count', this.certificateFiles.length);
-
+                var self = this;
                 axios.post('/user/profile_modification', formData, {
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest',
                         'Content-Type': 'application/json',
-                    }
-                })
+                    },
+                    onUploadProgress: function(progressEvent) {
+                        this.uploadPercentage = parseInt( Math.round( ( progressEvent.loaded * 100 ) / progressEvent.total ) );
+                      }.bind(this)
+                    })
                     .then(function (response) {
                         if (response.status == 200) {
 
-                            eventBus.$emit('submitingEvent',false);
+                            eventBus.$emit('submiting',false);
                             self.popUpMsg = 'تغییرات با موفقیت انجام شد.';
                             eventBus.$emit('submitSuccess',self.popUpMsg);
 
@@ -720,7 +724,7 @@
                     .catch(function (err) {
                         self.errors = '';
                         self.errors = err.response.data.errors;
-                        eventBus.$emit('submitingEvent', false);
+                        eventBus.$emit('submiting', false);
                     });
             },
             handleRelatedFilesUpload() {
@@ -749,15 +753,13 @@
         },
         created(){
             gtag('config','UA-129398000-1',{'page_path': '/profile-complementary'});
+        },
+        watch:{
+            uploadPercentage:function(){
+                eventBus.$emit('uploadPercentage', this.uploadPercentage);
+            }
         }
     }
-
-    function call_api(route, data, call_back) {
-        axios.post(route, data)
-            .then(call_back);
-    }
-
-
 
 
 </script>

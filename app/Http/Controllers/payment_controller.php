@@ -184,7 +184,7 @@ class payment_controller extends Controller
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
             $this->do_after_payment_changes_for_subscription();
             
-            return redirect()->back();
+            return redirect('/pricing');
 
         } 
         catch (\Exception $e)

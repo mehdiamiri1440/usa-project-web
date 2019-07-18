@@ -367,8 +367,7 @@
 -->
                                 <td>
                                     <div class="main-table-item">
-                                        <span>تومان 500,000</span>
-                                        <i class="fa fa-angle-down collapse-icon"></i>
+                                        <span>تومان 489,000</span>
                                     </div>
                                 </td>
                             </tr>
@@ -639,9 +638,7 @@
                             <tr>
                                 <td>
                                     <div class="main-table-item">
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-
-                                        <div>
+                                                                             <div>
                                             قیمت
                                         </div>
                                     </div>
@@ -653,7 +650,7 @@
                                 </td>
                                  <td>
                                     <div class="main-table-item">
-                                        <span>500,000 تومان</span>
+                                        <span>489,000 تومان</span>
                                     </div>
                                 </td>
                             </tr>
@@ -944,8 +941,8 @@
 
     #faq {
         direction:rtl;
-        padding-top: 120px;
-        padding-bottom: 50px;
+        padding-top: 64px;
+        padding-bottom: 0;
     }
     .pricing-table {
         background: #fff;
@@ -1131,11 +1128,27 @@
         .pricing-table > tbody > tr:nth-of-type(2n+1) .collapse-icon {
             top: 0;
             font-size: 15px;
-            padding-top: 2px;
+            padding-top: 0;
             z-index: 1;
-            right: 0;
+            right: -10px;
         }
-
+        .pricing-table > tbody > tr:nth-of-type(2n+1) .collapse-icon{
+            display: block;
+            content: "\F107";
+            width: 15px;
+            height: 15px;
+            background: #000546;
+            position: absolute;
+            left: -5px;
+            top: 0;
+            border-radius: 5px;
+            font-family: "fontawesome", sans-serif;
+            color: #fff;
+            font-size: 18px;
+            -webkit-transition: 300ms;
+            transition: 300ms;
+            padding-right: 0;
+        }
         table thead th {
             font-size: 14px;
         }
@@ -1223,10 +1236,8 @@
             return {}
         },
         methods: {
-            loader: function () {
-                this.$nextTick(function () {
-                    eventBus.$emit('finishLoad', false);
-                });
+            stopLoader: function () {
+                eventBus.$emit('isLoading', false);
             },
             trElement: function (element) {
                 var elementClass = $(element).attr('class');
@@ -1240,10 +1251,16 @@
             }
         },
         mounted: function () {
-            this.loader();
+             this.$nextTick(this.stopLoader());
         },
         updated: function () {
-            this.loader();
-        }
+             this.$nextTick(this.stopLoader());
+        },
+//        beforeCreate:function(){
+//            var self = this;
+//            window.addEventListener("load", function(event) {
+//                    self.stopLoader();
+//            });
+//        }
     }
 </script>
