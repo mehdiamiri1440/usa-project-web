@@ -180,7 +180,12 @@
             }
         },
         mounted: function () {
-            this.$nextTick(this.stopLoader());
+            var self = this;
+            document.onreadystatechange = () => {
+                if (document.readyState == "complete") {
+                    self.$nextTick(self.stopLoader());
+                }
+            }
         },
         updated:function(){
             this.$nextTick(this.stopLoader);

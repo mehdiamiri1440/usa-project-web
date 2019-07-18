@@ -508,20 +508,6 @@
     <div>
         <!--modal-->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="container">
             <div class="modal" id="searchFilter" tabindex="-1" role="dialog" aria-labelledby="searchFilter">
 
@@ -770,7 +756,7 @@
                 var self = this;
                 var searchValue = this.searchValue;
                 var searchValueText = searchValue;
-                
+
                 axios.post('/user/profile_info')
                     .then(function(response){
                         self.currentUser = response.data;
@@ -926,7 +912,7 @@
                 var self = this;
 //                eventBus.$emit('submiting', true);
                 clearTimeout(this.searchTextTimeout);
-                
+
                 this.searchTextTimeout = setTimeout(function(){
                     self.applyFilter();
                 },1500);
@@ -991,5 +977,5 @@
 //            titleTemplate: 'اینکوباک |‌ %s',
 //        }
     }
-    
+
 </script>

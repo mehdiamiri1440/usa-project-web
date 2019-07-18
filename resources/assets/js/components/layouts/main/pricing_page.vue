@@ -25,7 +25,7 @@
                     <div class="col-xs-12 animated hidden-xs"
                          style="visibility: visible; animation-delay: 0.9s; animation-name: fadeInUp;">
 
-                        <table class="wow fadeInUp   pricing-table ">
+                        <table class="wow fadeInUp table-striped   pricing-table ">
                             <thead>
                             <tr>
                                 <th class="head-package">تعرفه ها</th>
@@ -33,6 +33,7 @@
                                     <div class="main-pricing-icon">
                                         <img :src="img_pricing_32">
                                         <span class="main-pricing-span">رایگان</span>
+
                                     </div>
                                 </th>
 <!--
@@ -55,6 +56,7 @@
                                     <div class="main-pricing-icon">
                                         <img :src="img_pricing_34">
                                         <span class="main-pricing-span">طلایی</span>
+                                        <p class="text-red">یک ساله</p>
                                     </div>
                                 </th>
                             </tr>
@@ -428,6 +430,7 @@
                                     <div class="main-pricing-icon">
                                         <img :src="img_pricing_34">
                                         <span class="main-pricing-span">طلایی</span>
+                                        <p class="text-red">یک ساله</p>
                                     </div>
                                 </th>
                             </tr>
@@ -938,7 +941,9 @@
 
 
 <style scoped>
-
+    .text-red{
+        color: #e41c38;
+    }
     #faq {
         direction:rtl;
         padding-top: 64px;
@@ -946,7 +951,7 @@
     }
     .pricing-table {
         background: #fff;
-
+        min-width: 522px;
         margin: 60px auto;
 
         border-radius: 6px;
@@ -977,7 +982,7 @@
 
     .pricing-table thead .head-secend-package {
         background: #f2f2f2;
-        padding: 0 30px 20px;
+        padding: 0 50px 20px;
         color: #333;
     }
 
@@ -994,8 +999,11 @@
         transition: 300ms;
         border: none;
         position: relative;
+        background-color: #f2f2f2;
     }
-
+    .pricing-table > tbody > tr:nth-of-type(4n+1) {
+        background: #fff;
+    }
     .pricing-table > tbody > tr {
         transition: 300ms;
         border: none;
@@ -1039,6 +1047,9 @@
         width: 130px;
         margin: 0 auto;
     }
+    .main-pricing-icon img  {
+        padding: 0 10px;
+    }
 
     .pricing-table > tbody > tr:nth-of-type(2n+1) .collapse-icon {
         display: block;
@@ -1077,6 +1088,7 @@
     }
 
     @media (max-width: 992px) {
+
         #faq .container {
             width: 100%;
 
@@ -1111,6 +1123,13 @@
     }
 
     @media (max-width: 767px) {
+        .main-pricing-icon img  {
+            padding: 0;
+        }
+
+        .pricing-table{
+            min-width: initial;
+        }
         table {
             font-size: 13px;
         }
@@ -1210,7 +1229,7 @@
         .pricing-table th, .pricing-table td {
 
             text-align: center;
-            padding: 10px 1px;
+            padding: 10px;
 
         }
 
@@ -1251,7 +1270,12 @@
             }
         },
         mounted: function () {
-             this.$nextTick(this.stopLoader());
+            var self = this;
+            document.onreadystatechange = () => {
+                if (document.readyState == "complete") {
+                    self.$nextTick(self.stopLoader());
+                }
+            }
         },
         updated: function () {
              this.$nextTick(this.stopLoader());

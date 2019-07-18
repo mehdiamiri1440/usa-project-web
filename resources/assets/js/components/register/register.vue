@@ -1278,7 +1278,11 @@
             gtag('config','UA-129398000-1',{'page_path': '/register'});
         },
         mounted:function(){
-             this.$nextTick(this.stopLoader());
+              document.onreadystatechange = () => { 
+                if (document.readyState == "complete") { 
+                    self.$nextTick(this.stopLoader());
+                } 
+            } 
         },
         updated: function () {
              this.$nextTick(this.stopLoader());

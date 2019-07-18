@@ -1,0 +1,47 @@
+.image-wrapper {
+    height: 300px;
+    overflow: hidden;
+}
+.image-wrapper img {
+    transition: 300ms;
+}
+.image-wrapper a {
+    position: relative;
+    display: block;
+    height: 100%;
+}
+
+.image-wrapper img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.owl-dots {
+    text-align: center;
+
+}
+.owl-dot {
+
+    width: 7px !important;
+    height: 7px !important;
+    background: #d4d4d4 !important;
+    margin: 0 3px !important;
+    border-radius: 50px !important;
+
+}
+.owl-dot.active{
+
+    width: 9px !important;
+    height: 9px !important;
+    background: #a8a8a8  !important;
+
+}
+
+.owl-carousel{
+    margin-bottom: 45px;
+}
+.owl-carousel .owl-item img{
+    margin-bottom: 15px;
+}
+

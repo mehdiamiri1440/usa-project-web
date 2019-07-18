@@ -22,6 +22,8 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/dashboard/master/style.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl-custom-style.css')}}">
+
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
     @yield('header_links')
     <meta name="viewport" content="width=device-width, initial-scale=1">

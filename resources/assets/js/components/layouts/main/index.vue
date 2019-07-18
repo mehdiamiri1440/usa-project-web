@@ -99,7 +99,8 @@
     #rice,
     #mobile-rice,
     #mobile-date,
-    #testimonial {
+    #testimonial
+    {
         padding-top: 60px;
         padding-bottom: 60px;
     }
@@ -117,11 +118,9 @@
     #testimonial {
         text-align: center;
     }
-
-    #request {
+    #rice {
         background-color: #f0f0f0;
     }
-
     .parallax-section {
         background-attachment: fixed !important;
         background-size: cover !important;
@@ -620,6 +619,7 @@
         color: #fff;
     }
 
+
     .green-bot:hover {
         color: #fff;
         background: #00d614;
@@ -744,7 +744,6 @@
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
         padding: 15px;
     }
-
     /*
 
         .request_image {
@@ -768,7 +767,6 @@
     #request h3 {
         color: #fff;
     }
-
     .detail-thumb h4 {
         height: 28px;
     }
@@ -784,6 +782,7 @@
         height: 100%;
 
     }
+
 
     /*---------------------------------------
         recent section
@@ -802,7 +801,6 @@
     #detail {
         background: #f0f0f0;
     }
-
     #detail h2 {
         padding-bottom: 10px;
     }
@@ -1710,6 +1708,43 @@
 
         </section>
 
+
+        <!-- =========================
+       mobile sliders
+        ============================== -->
+        <!--
+
+                {{اسلایدر خرما}}
+                <section id="mobile-date" class="parallax-section hidden-sm hidden-md hidden-lg">
+                    <div class="container">
+                        <div class="row">
+                            <h3 class="text-center col-xs-12"> خرما</h3>
+                            <div class="text-center col-xs-12">
+                                <a href="/product-list" class="green-bot">
+                                    مشاهده همه محصولات
+                                </a>
+                            </div>
+                            <div class="owl-carousel col-xs-12">
+
+                                <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 6" :key="product.main.id">
+                                    <image-viewer
+                                            :title="product.main.sub_category_name + ' - ' + product.main.product_name"
+                                            :img="'storage/' + product.photos[0].file_path"
+                                            :link="'/product-list/' + product.main.sub_category_name"
+                                    >
+                                    </image-viewer>
+                                </article>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                {{پایان اسلایدر خرما }}
+
+
+                <!--{{اسلایدر برنج }}-->
+
+
         <!-- =========================
         DETAIL SECTION
         ============================== -->
@@ -1807,6 +1842,7 @@
                                     </li>
                                     <li><span>بهره مندی از مشاوره تخصصی کارشناسان اینکوباک</span>
                                     </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -1819,98 +1855,94 @@
         <!-- =========================
          WEB RICE AND DATE SLIDER
         ============================== -->
+        <!--
 
-<!--
-        <section v-if="homePageDates" id="request" class="parallax-section  ">
-            <div class="container">
-                <div class="row">
-                    <h3 class="text-center col-xs-12"> خرما</h3>
-                    <div class="text-center col-xs-12">
-                        <a href="/product-list" class="green-bot">
-                            مشاهده همه محصولات
-                        </a>
+                <section id="request" class="parallax-section  hidden-xs">
+                    <div class="container">
+                        <div class="row">
+                            <h3 class="text-center col-xs-12"> خرما</h3>
+                            <div class="text-center col-xs-12">
+                                <a href="/product-list" class="green-bot">
+                                    مشاهده همه محصولات
+                                </a>
+                            </div>
+                            <div class="owl-carousel col-xs-12">
+
+                              &lt;!&ndash;  <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 6" :key="product.main.id">
+                                    <image-viewer
+                                            :title="product.main.sub_category_name + ' - ' + product.main.product_name"
+                                            :img="'storage/' + product.photos[0].file_path"
+                                            :link="'/product-list/' + product.main.sub_category_name"
+                                    >
+                                    </image-viewer>
+                                </article>&ndash;&gt;
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="owl-carousel col-xs-12">
+                </section>
 
-                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageDates"
-                                 v-if="product.main.sub_category_id == 6" :key="product.main.id">
-                            <image-viewer
-                                    :title="product.main.sub_category_name + ' - ' + product.main.product_name"
-                                    :img="'storage/' + product.photos[0].file_path"
-                                    :link="'/product-list/' + product.main.sub_category_name"
-                            >
-                            </image-viewer>
-                        </article>
+                <section id="rice" class="parallax-section  hidden-xs" v-if="homePageRice">
+                    <div class="container">
+                        <div class="row">
+                            <h3 class="text-center col-xs-12"> برنج</h3>
+                            <div class="text-center col-xs-12">
+                                <a href="/product-list" class="green-bot">
+                                    مشاهده همه محصولات
+                                </a>
+                            </div>
+                            <div class="owl-carousel col-xs-12">
 
+                             &lt;!&ndash;   <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 4" :key="product.main.id">
+                                    <image-viewer
+                                            :title="product.main.sub_category_name + ' - ' + product.main.product_name"
+                                            :img="'storage/' + product.photos[0].file_path"
+                                            :link="'/product-list/' + product.main.sub_category_name"
+                                    >
+                                    </image-viewer>
+                                </article>
+        &ndash;&gt;
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </section>
+                </section>
 
-        <section v-if="homePageRice"  id="rice" class="parallax-section  ">
-
-            <div class="container">
-                <div class="row">
-                    <h3 class="text-center col-xs-12"> برنج</h3>
-                    <div class="text-center col-xs-12">
-                        <a href="/product-list" class="green-bot">
-                            مشاهده همه محصولات
-                        </a>
-                    </div>
-                    <div class="owl-carousel col-xs-12">
-
-
-                        <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageRice"
-                                 v-if="product.main.sub_category_id == 4" :key="product.main.id">
-                            <image-viewer
-                                    :title="product.main.sub_category_name + ' - ' + product.main.product_name"
-                                    :img="'storage/' + product.photos[0].file_path"
-                                    :link="'/product-list/' + product.main.sub_category_name"
-                            >
-                            </image-viewer>
-                        </article>
-
-                    </div>
-                </div>
-            </div>
-        </section>
--->
-
+        -->
 
         <!-- =========================
         TESTIMONIAL SECTION
         ============================== -->
 
-<!--
-        <section id="testimonial" class="">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row">
-                    <div class=" wow bounceIn col-xs-12 col-sm-6">
-                        <div class="section-title">
-                            <figure>
-                                <img :src="img_success_verified" class="img-responsive"
-                                     alt="feature"></figure>
-                            <h3><span>107</span>
-                                تامین کننده تایید شده
-                            </h3>
+        <!--
+                <section id="testimonial" class="">
+                    <div class="overlay"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class=" wow bounceIn col-xs-12 col-sm-6">
+                                <div class="section-title">
+                                    <figure>
+                                        <img :src="img_success_verified" class="img-responsive"
+                                             alt="feature"></figure>
+                                    <h3><span>107</span>
+                                        تامین کننده تایید شده
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class=" wow bounceIn col-xs-12 col-sm-6">
+                                <div class="section-title">
+                                    <figure>
+                                        <img :src="img_success_project" class="img-responsive"
+                                             alt="feature"></figure>
+                                    <h3>
+                                        <span>24</span>
+                                        پروژه موفق انجام شده
+                                    </h3>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class=" wow bounceIn col-xs-12 col-sm-6">
-                        <div class="section-title">
-                            <figure>
-                                <img :src="img_success_project" class="img-responsive"
-                                     alt="feature"></figure>
-                            <h3>
-                                <span>24</span>
-                                پروژه موفق انجام شده
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
--->
+                </section>
+        -->
 
 
         <!-- =========================
@@ -1946,7 +1978,6 @@
 
 <script>
     import {eventBus} from "../../../router/dashboard_router";
-
     var viz = false;
     var OwlCarousel = {
         data: function () {
@@ -1954,7 +1985,7 @@
                 imgSrcs: '',
             };
         },
-        props: ['img', 'title', 'link', 'content'],
+        props: ['img', 'title', 'link','content'],
         template: "<div class='detail-thumb'>"
             +
             "<img :src='img' class='img-responsive'>"
@@ -1969,7 +2000,7 @@
                 autoplayTimeout: 2000,
                 loop: true,
                 nav: true,
-                navText: ['<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>'],
+                navText: ['<span class="fa fa-angle-left"></span>','<span class="fa fa-angle-right"></span>'],
                 items: 4,
                 mouseDrag: true,
                 margin: 30,
@@ -2016,12 +2047,13 @@
                 mainSearchBoxText: '',
                 enterKeyActiveForSearch: false,
                 homePageDates: '',
-                homePageRice: '',
+                homePageRice:'',
+                homePageProductsSlider:'',
             }
         },
         methods: {
             stopLoader: function () {
-                    eventBus.$emit('isLoading', false);
+                eventBus.$emit('isLoading', false);
             },
             dropdown: function () {
                 $(".profile-list").fadeIn("slow", function () {
@@ -2049,22 +2081,12 @@
                         self.posts = response.data.posts;
                     });
 
-                 axios.post('/user/get_product_list', {
-//                    from_record_number: 0,
-//                    to_record_number: 5,
-                    sub_category_id:6,
-                }).then(function (response) {
-
-                    self.homePageDates = response.data.products;
-                });
                 axios.post('/user/get_product_list', {
 //                    from_record_number: 0,
 //                    to_record_number: 5,
-                    sub_category_id:4,
+//                     sub_category_id:6,
                 }).then(function (response) {
-
-                    self.homePageRice = response.data.products;
-
+                    self.homePageProductsSlider = response.data.products;
                 });
 
             },
@@ -2077,10 +2099,15 @@
         },
         mounted: function () {
             this.init();
-             this.$nextTick(this.stopLoader());
+            var self = this;
+            document.onreadystatechange = () => {
+                if (document.readyState == "complete") {
+                    self.$nextTick(self.stopLoader());
+                }
+            }
         },
         updated(){
-             this.$nextTick(this.stopLoader());
+            this.$nextTick(this.stopLoader());
         },
         created() {
             document.addEventListener('click', this.documentClick)

@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="{{asset('index/css/animate.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/profile/main-profile.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/master/style.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl-custom-style.css')}}">
 
 
     {{--<script src="{{asset('index/js/jquery.js')}}"></script>--}}
@@ -59,9 +60,9 @@
         gtag('config', 'UA-129398000-1', {'send_page_view': false});
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <script type="application/ld+json">
-        { 
+        {
             "@context" : "http://schema.org/",
             "@type" : "Organization",
             "url" : "https://www.incobac.com",
@@ -99,11 +100,11 @@
                     }
             },
             "contactPoint" : [
-                  { 
+                  {
                     "@type" : "ContactPoint",
                     "telephone" : "+98-917-202-1943",
                     "contactType" : "customer service"
-                  } 
+                  }
                 ]
         }
     </script>

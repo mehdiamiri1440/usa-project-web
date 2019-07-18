@@ -228,43 +228,7 @@ a:focus {
 .article-contents{
     padding-bottom: 20px;
 }
-.image-wrapper a{
-    position: relative;
-    display: block;
-    height: 100%;
-}
-.image-wrapper img{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-.owl-dot {
 
-    width: 7px !important;
-    height: 7px !important;
-    background: #d4d4d4 !important;
-    margin: 0 3px !important;
-    border-radius: 50px !important;
-
-}
-.owl-dot.active{
-
-    width: 9px !important;
-    height: 9px !important;
-    background: #a8a8a8  !important;
-
-}
-
-.owl-carousel{
-    margin-bottom: 45px;
-}
-.owl-stage{
-    padding: 20px 0;
-}
-.owl-carousel .owl-item img{
-    margin-bottom: 15px;
-}
 .parallax-section .owl-carousel .owl-stage-outer {
     padding: 0 0 15px;
     direction: ltr;

@@ -25,10 +25,9 @@ use App\Jobs\sendNewMessageSMSNotification;
 use App\Jobs\sendSMS;
 use App\Jobs\NotifyBuyersBySMS;
 
-
-/*Route::get('/pv', function(){
+Route::get('/pv', function(){
     return view('layout.master');
-});*/
+});
 
 /*Route::get('/test', function(){
     return view('payment.external_url_payment_callback');
@@ -610,12 +609,12 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'product_controller@edit_product_by_id',
         'as'   => 'edit_product_by_id'
     ]);
-    
+
     Route::get('/payment/{pakageType}',[
         'uses' => 'payment_controller@do_payment',
         'as' => 'do_payment',
     ]);
-    
+
     Route::any('/payment_callback',[
         'uses' => 'payment_controller@payment_callback',
         'as' => 'payment_callback'

@@ -70,10 +70,6 @@
         margin: 7px auto;
     }
 
-    .image-wrapper img {
-        transition: 300ms;
-    }
-
     .btn-content {
         display: inline-block;
         margin: 0 auto;
@@ -90,6 +86,7 @@
 
     .main-image {
         float: right;
+        direction: ltr;
     }
 
     .load-more-button a {
@@ -179,7 +176,7 @@
                 </div>
                 <div class="main-article-content col-xs-12 col-sm-7">
                     <h2 class="main-article-title">
-                        <a href="#" itemprop="category">{{product.main.category_name + ' | ' +
+                        <a :href="/product-view/ + product.main.id" itemprop="category">{{product.main.category_name + ' | ' +
                             product.main.sub_category_name}}</a>
                     </h2>
 
@@ -320,7 +317,9 @@
                 items: 1,
                 margin: 10,
                 nav: false,
-                dots: true
+                dots: true,
+                touchDrag:true,
+                mouseDrag:true
             });
             $(this.$el).parent().parent().parent().magnificPopup({
                 delegate: 'a',
@@ -388,9 +387,11 @@
 //                            }
 //                        }
 //                    });
+//                 console.log(this.currentUser.user);
                 if(this.currentUser.user_info){
                     if(this.currentUser.user_info.id == this.product.main.myuser_id){
                         this.isMyProfile = true;
+
                         this.$emit('isMyProfile',this.isMyProfile);
                     }
                 }
