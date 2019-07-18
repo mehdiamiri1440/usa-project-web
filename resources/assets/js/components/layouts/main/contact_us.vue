@@ -40,7 +40,12 @@
             },
         },
         mounted:function(){
-             this.$nextTick(this.stopLoader());
+            var self = this;
+            document.onreadystatechange = () => { 
+                if (document.readyState == "complete") { 
+                    self.$nextTick(this.stopLoader());
+                } 
+            } 
         },
         updated: function () {
              this.$nextTick(this.stopLoader());
