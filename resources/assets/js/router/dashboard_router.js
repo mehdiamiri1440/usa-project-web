@@ -126,7 +126,7 @@ const myRouter =  new Router({
             },
         },
         {
-            path: '/product-view',
+            path: '/product-view/:categoryName/:subCategoryName/:id',
             name: 'productView',
             components: {
                 layouts: productView,

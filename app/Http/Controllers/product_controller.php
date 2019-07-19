@@ -424,8 +424,8 @@ class product_controller extends Controller
 //		}
 			
 		$product_parent_category_data =  $product->category;
-		$product_related_data['category_id'] = $product_parent_category_data['parent_id'];
-		$product_related_data['category_name'] = (category::find($product_parent_category_data['parent_id']))['category_name'];
+		$product_related_data['main']->category_id = $product_parent_category_data['parent_id'];
+		$product_related_data['main']->category_name = (category::find($product_parent_category_data['parent_id']))['category_name'];
         
         $this->increment_product_view_count($product,session('user_id'));
 		

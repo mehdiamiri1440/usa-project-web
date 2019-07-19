@@ -452,7 +452,7 @@
                     .then(function (response) {
                         self.currentUser = response.data;
                         axios.post('/get_product_by_id', {
-                            product_id: 65
+                            product_id: self.$route.params.id
                         }).then(function (response) {
                             self.product = response.data.product;
                             self.loading = false;
