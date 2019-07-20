@@ -22,6 +22,8 @@
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl.carousel.min.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/custom.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/dashboard/master/style.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl-custom-style.css')); ?>">
+
     <script src="<?php echo e(asset('assets/cdn/axios.js')); ?>"></script>
     <?php echo $__env->yieldContent('header_links'); ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -92,7 +94,7 @@
     <main id="main">
         <router-view
                 name="buyer"
-                loading="<?php echo e(asset('assets/img/gif/loading.gif')); ?>"
+                loading_img="<?php echo e(asset('assets/img/gif/loading.gif')); ?>"
                 trans="<?php echo e(url('dashboard/transaction-detail')); ?>"
                 transRep="<?php echo e(url('dashboard/transaction-report')); ?>"
                 str="<?php echo e(asset('storage/')); ?>"

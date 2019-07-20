@@ -22,6 +22,7 @@
         <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/magnific-popup.css')); ?>">
         <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/kamadatepicker.min.css')); ?>">
         <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl.carousel.min.css')); ?>">
+        <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl-custom-style.css')); ?>">
 
         <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/custom.css')); ?>">
         <script src="<?php echo e(asset('assets/cdn/axios.js')); ?>"></script>

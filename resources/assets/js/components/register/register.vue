@@ -822,7 +822,7 @@
                step2: {
                    verification_code:'',
                    reSendCode:false,
-                   timeCounterDown:60,
+                   timeCounterDown:120,
                    showTimer:false,
                    now:null,
                },
@@ -883,7 +883,7 @@
 
                 this.step2.now = new Date().getTime();
                 this.step2.showTimer = true;
-                this.step2.timeCounterDown = 59;
+                this.step2.timeCounterDown = 119;
                 axios.post("/send_verification_code",{
                     phone : this.toLatinNumbers(this.step1.phone)
                 })
@@ -896,7 +896,7 @@
 
                     setTimeout(function(){
                         self.step2.reSendCode = true;
-                    },60000);
+                    },120000);
                 })
                 .catch(function(err){
                     self.errors.phone = err.response.data.errors.phone;
@@ -1213,13 +1213,11 @@
 
                 var distance =  now - this.step2.now;
 
-                var seconds =  59 - Math.floor((distance % (1000 * 60)) / 1000) + 1;
+                var seconds =  119 - Math.floor((distance % (1000 * 120)) / 1000) + 1;
 
                 setTimeout(function(){
                     self.updateCounterDownTimer(seconds);
                 },1000);
-
-
             },
             'step3.user_name':function(){
                 var self = this;
