@@ -620,6 +620,7 @@
                         })
                         imageCompressor.compress(newFile.file)
                             .then((file) => {
+                                this.uploadRef.pop();
                                 this.$refs.upload.update(newFile, {error: '', file, size: file.size, type: file.type})
                             })
                             .catch((err) => {
@@ -643,6 +644,7 @@
                         newFile.thumb = newFile.blob
                     }
                     this.uploadRef.push(newFile.file);
+                    console.log(newFile.file);
                 }
             },
             // add, update, remove File Event
@@ -731,27 +733,28 @@
                     this.alert('Your browser does not support')
                     return
                 }
-                let input = this.$refs.upload.$el.querySelector('input')
-                input.directory = true
-                input.webkitdirectory = true
-                this.directory = true
-                input.onclick = null
-                input.click()
+                let input = this.$refs.upload.$el.querySelector('input');
+                input.directory = true;
+                input.webkitdirectory = true;
+                this.directory = true;
+                input.onclick = null;
+                input.click();
                 input.onclick = (e) => {
-                    this.directory = false
-                    input.directory = false
-                    input.webkitdirectory = false
+                    this.directory = false;
+                    input.directory = false;
+                    input.webkitdirectory = false;
                 }
             },
             onAddData() {
                 this.addData.show = false;
                 if (!this.$refs.upload.features.html5) {
-                    this.alert('Your browser does not support')
+                    this.alert('Your browser does not support');
                     return
                 }
                 let file = new window.File([this.addData.content], this.addData.name, {
                     type: this.addData.type,
                 })
+
             }
         }
     }
