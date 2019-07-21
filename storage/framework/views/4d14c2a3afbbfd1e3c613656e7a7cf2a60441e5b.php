@@ -148,7 +148,7 @@
 
     <router-view id="main-content"
                  name="layouts"
-                 not_found_image="<?php echo e(url('assets/img/404.jpg')); ?>"
+                 not_found_image="<?php echo e(url('assets/img/def404.png')); ?>"
                  loading_img="<?php echo e(asset('assets/img/gif/loading.gif')); ?>"
                  trans="<?php echo e(url('dashboard/transaction-detail')); ?>"
                  transRep="<?php echo e(url('dashboard/transaction-report')); ?>"

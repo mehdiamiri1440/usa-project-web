@@ -149,7 +149,7 @@
     .gray_bot {
         margin: 5px auto;
         display: inline-block;
-        background: #444444;
+        background: #000122;
         color: #fff;
         padding: 15px 30px;
         border-radius: 3px;
@@ -456,6 +456,8 @@
                         }).then(function (response) {
                             self.product = response.data.product;
                             self.loading = false;
+                        }).catch(function(err){
+                            window.location.href = '/404';
                         });
                     });
 
@@ -479,10 +481,15 @@
         },
         mounted() {
             this.init();
-            this.stopLoader();
+            var self = this;
+            document.onreadystatechange = () => {
+                if (document.readyState == "complete") {
+                    self.$nextTick(self.stopLoader());
+                }
+            }
         },
-        updated() {
-            //
+        updated(){
+            this.$nextTick(this.stopLoader());
         },
     }
 

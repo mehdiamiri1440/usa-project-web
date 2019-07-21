@@ -148,7 +148,7 @@
 
     <router-view id="main-content"
                  name="layouts"
-                 not_found_image="{{url('assets/img/404.jpg')}}"
+                 not_found_image="{{url('assets/img/def404.png')}}"
                  loading_img="{{asset('assets/img/gif/loading.gif')}}"
                  trans="{{url('dashboard/transaction-detail')}}"
                  transRep="{{url('dashboard/transaction-report')}}"

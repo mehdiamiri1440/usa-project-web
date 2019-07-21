@@ -17,7 +17,7 @@
         margin: 24px auto;
         border-radius: 5px;
         box-shadow: 0 0 15px #dbdbdb;
-        padding: 15px 0 0;
+        padding: 15px 0;
     }
 
     .main-article-title {
@@ -137,12 +137,15 @@
         margin: 9px auto;
     }
 
-    @media screen  and (max-width: 768px){
+    @media screen  and (max-width: 767px){
         .buy_details {
             padding: 15px 0;
         }
         .main-image,.article-contents{
             padding:  0;
+        }
+        .main-content-item {
+            padding: 15px 0 0;
         }
     }
 </style>
@@ -172,7 +175,20 @@
                                            :alt="'فروش عمده ی ' + product.main.sub_category_name + ' '  +product.main.product_name + ' ' + product.main.city_name + ' - ' + product.main.province_name"
                                            v-on:popUpLoaded=updatePopUpStatus($event)>
                         </image-viewer-list>
+
                     </div>
+                </div>
+                <div class="buttom-carousel-items-wrapper hidden-sm hidden-md hidden-lg col-xs-12">
+                   <div class="row">
+                       <div class="col-xs-6 text-left">
+                           <a href="#" @click.prevent="copyProfileLinkToClipBoard">
+                               <i class="fa fa-share-alt-square"></i>
+                           </a>
+                       </div>
+                       <div class="col-xs-6 text-right">
+                       </div>
+
+                   </div>
                 </div>
                 <div class="main-article-content col-xs-12 col-sm-7">
                     <h2 class="main-article-title">
@@ -307,7 +323,7 @@
         template: '<div class="image-wrapper">' +
             '<a  :href="base + img">' +
             '<img :src="base + img" :alt="alt">' +
-            '</a>' +
+            '</a>'+
             '</div>',
         mounted: function () {
             var self = this;
@@ -319,7 +335,7 @@
                 nav: false,
                 dots: true,
                 touchDrag:true,
-                mouseDrag:true
+                mouseDrag:true,
             });
             $(this.$el).parent().parent().parent().magnificPopup({
                 delegate: 'a',
@@ -580,7 +596,61 @@
                     + '/'
                     + this.product.main.id;
                 return url;
-            }
+            },
+            copyProfileLinkToClipBoard: function () {
+                this.registerComponentStatistics('profileView', 'CopyProfileLink', 'click on copy profile link');
+
+                if (this.isDeviceMobile()) {
+
+                    var linkElement = document.createElement('a');
+                    var Message = "https://incobac.com" + this.getProductUrl();
+                    var messageToWhatsApp = encodeURIComponent(Message);
+                    var url = "whatsapp://send?text=" + messageToWhatsApp;
+                    linkElement.setAttribute('href', url);
+                    linkElement.setAttribute('data-action', 'share/whatsapp/share');
+                    document.body.appendChild(linkElement);
+
+                    linkElement.click();
+
+                    document.body.removeChild(linkElement);
+
+                }
+                else {
+                    var input = document.createElement('input');
+                    input.setAttribute('value', 'https://incobac.com' + this.getProductUrl());
+                    document.body.appendChild(input);
+                    input.select();
+                    var result = document.execCommand('copy');
+                    document.body.removeChild(input);
+                    if (result) {
+                        this.popUpMsg = 'آدرس پروفایل کاربر کپی شد.';
+                        eventBus.$emit('submitSuccess', this.popUpMsg);
+                        $('#myModal').modal('show');
+                    }
+                }
+
+            },
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName, {
+                    'event_category': categoryName,
+                    'event_label': labelName
+                });
+            },
+            isDeviceMobile: function () {
+                if (navigator.userAgent.match(/Android/i)
+                    || navigator.userAgent.match(/webOS/i)
+                    || navigator.userAgent.match(/iPhone/i)
+                    || navigator.userAgent.match(/iPad/i)
+                    || navigator.userAgent.match(/iPod/i)
+                    || navigator.userAgent.match(/BlackBerry/i)
+                    || navigator.userAgent.match(/Windows Phone/i)
+                ) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            },
         },
         mounted() {
             this.init();

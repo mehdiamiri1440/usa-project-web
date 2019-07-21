@@ -390,9 +390,9 @@ class product_controller extends Controller
         if(is_null($product))
         {
             return response()->json([
-               'status' => false,
-                'msg' => "The product has't been confirmed yet"
-            ]);
+                'status' => false,
+                'msg' => "product not found."
+            ],404);
         }
 		
 		$product_related_data['main'] = $this->get_product_related_data($product_id);

@@ -390,7 +390,6 @@
                 for (var i = 0; i < cnt; i++) {
                     formData.append(this.productFields[i], this.toLatinNumbers(this.product[this.productFields[i]]));
                 }
-
                 for (var i = 0; i < this.productFiles.length; i++) {
                     let file = this.productFiles[i];
                     formData.append('image_' + i, file);
