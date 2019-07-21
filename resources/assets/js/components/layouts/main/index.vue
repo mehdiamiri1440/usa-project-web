@@ -99,8 +99,7 @@
     #rice,
     #mobile-rice,
     #mobile-date,
-    #testimonial
-    {
+    #testimonial {
         padding-top: 60px;
         padding-bottom: 60px;
     }
@@ -118,9 +117,11 @@
     #testimonial {
         text-align: center;
     }
+
     #rice {
         background-color: #f0f0f0;
     }
+
     .parallax-section {
         background-attachment: fixed !important;
         background-size: cover !important;
@@ -619,7 +620,6 @@
         color: #fff;
     }
 
-
     .green-bot:hover {
         color: #fff;
         background: #00d614;
@@ -744,6 +744,7 @@
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
         padding: 15px;
     }
+
     /*
 
         .request_image {
@@ -767,6 +768,7 @@
     #request h3 {
         color: #fff;
     }
+
     .detail-thumb h4 {
         height: 28px;
     }
@@ -782,7 +784,6 @@
         height: 100%;
 
     }
-
 
     /*---------------------------------------
         recent section
@@ -801,6 +802,7 @@
     #detail {
         background: #f0f0f0;
     }
+
     #detail h2 {
         padding-bottom: 10px;
     }
@@ -1978,6 +1980,7 @@
 
 <script>
     import {eventBus} from "../../../router/dashboard_router";
+
     var viz = false;
     var OwlCarousel = {
         data: function () {
@@ -1985,7 +1988,7 @@
                 imgSrcs: '',
             };
         },
-        props: ['img', 'title', 'link','content'],
+        props: ['img', 'title', 'link', 'content'],
         template: "<div class='detail-thumb'>"
             +
             "<img :src='img' class='img-responsive'>"
@@ -2000,7 +2003,7 @@
                 autoplayTimeout: 2000,
                 loop: true,
                 nav: true,
-                navText: ['<span class="fa fa-angle-left"></span>','<span class="fa fa-angle-right"></span>'],
+                navText: ['<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>'],
                 items: 4,
                 mouseDrag: true,
                 margin: 30,
@@ -2047,8 +2050,8 @@
                 mainSearchBoxText: '',
                 enterKeyActiveForSearch: false,
                 homePageDates: '',
-                homePageRice:'',
-                homePageProductsSlider:'',
+                homePageRice: '',
+                homePageProductsSlider: '',
             }
         },
         methods: {
@@ -2100,13 +2103,12 @@
         mounted: function () {
             this.init();
             var self = this;
-            document.onreadystatechange = () => {
-                if (document.readyState == "complete") {
+                window.addEventListener('load', (event) => {
                     self.$nextTick(self.stopLoader());
-                }
-            }
+                    console.log('page is fully loaded');
+                });
         },
-        updated(){
+        updated() {
             this.$nextTick(this.stopLoader());
         },
         created() {

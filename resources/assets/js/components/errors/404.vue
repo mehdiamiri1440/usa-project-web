@@ -2,14 +2,17 @@
         <div class="container-fluid">
             <div class="container">
 
-                <img :src="not_found_image">
-                <div class="buttons">
-                    <div>
+                <div class="col-xs-12">
+                    <img :src="not_found_image">
+                    <p class="description-error">صفحه مورد نظر یافت نشد</p>
+                </div>
+                <div class="buttons col-xs-12">
+                    <div class="col-xs-12 col-sm-6">
                         <a href="/" class="green-bot">
                             صفحه نخست
                         </a>
                     </div>
-                    <div>
+                    <div class="col-xs-12 col-sm-6">
                         <a href="javascript:history.back()" class="botton-inco">
                             بازگشت به صفحه قبل
                         </a>
@@ -20,7 +23,15 @@
 </template>
 
 <style scoped>
-
+    p.description-error{
+        text-align: center;
+        font-size: 23px;
+        font-weight: bold;
+        color: #e41c38;
+        margin-top: -15px;
+        margin-bottom: 15px;
+        line-height:1.618;
+    }
     img {
         width: 31%;
         margin: 90px auto 20px;
@@ -66,12 +77,7 @@
         width: 55%;
         margin: 0 auto;
         text-align: center;
-    }
-
-    .buttons div {
-        width: 50%;
-        padding: 0 15px;
-        float: right;
+        float:none;
     }
 
     .buttons div a {
@@ -95,23 +101,7 @@
 
     @media screen and (max-width: 768px) {
         .buttons {
-            width: 50%;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        img {
-
-            width: 40%;
-            margin: 50px auto 20px;
-            display: block;
-
-        }
-    }
-
-    @media screen and (max-width: 500px) {
-        .buttons {
-            width: 70%;
+            width: 80%;
             margin: 0 auto;
             text-align: center;
         }
@@ -119,9 +109,19 @@
         img {
 
             width: 60%;
-            margin: 50px auto 20px;
+            margin: 100px auto 20px;
             display: block;
 
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        .buttons {
+            width: 100%;
+
+        }
+        img {
+            width: 80%;
         }
     }
 
@@ -134,7 +134,6 @@
 
         img {
 
-            width: 60%;
             margin: 150px auto 20px;
             display: block;
 
@@ -149,17 +148,21 @@
             'not_found_image',
         ],
         methods:{
-            loader:function(){
-                this.$nextTick(function () {
-                    eventBus.$emit('finishLoad', false);
-                });
-            }
+            stopLoader: function () {
+                eventBus.$emit('isLoading', false);
+            },
+
         },
         mounted:function(){
-            this.loader();
+            var self = this;
+            document.onreadystatechange = () => {
+                if (document.readyState == "complete") {
+                    self.$nextTick(self.stopLoader());
+                }
+            }
         },
-        updated: function () {
-            this.loader();
-        }
+        updated(){
+            this.$nextTick(this.stopLoader());
+        },
     }
 </script>

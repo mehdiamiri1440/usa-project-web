@@ -11,8 +11,11 @@
             <p v-if="user_info">{{user_full_name}}</p>
 
 
-
-            <div v-if="!is_my_profile_status"  class="create_buy  ">
+            <div class="create_buy hidden-xs ">
+                <a href="#" @click.prevent="$parent.copyProfileLinkToClipBoard" class="btn btn-copy"><i aria-hidden="true" class="fa fa-clipboard"></i> کپی آدرس
+                </a>
+            </div>
+            <div v-if="!is_my_profile_status" class="create_buy  ">
                 <a :href=" '/profile/'+ user_name" class="green_bot"
                    @click="registerComponentStatistics('product','showUserProfile','show profile')">مشاهده پروفایل</a>
                 <a class="green_bot hidden-xs" href="#" @click.prevent="openChat()">
@@ -21,10 +24,10 @@
             </div>
 
             <div v-else class="create_buy  ">
-                <a  href="" class="green_bot delete-product"
-                    @click.prevent="deleteProduct()"> <span class="fa fa-trash"></span> حذف </a>
+                <a href="" class="green_bot delete-product"
+                   @click.prevent="deleteProduct()"> <span class="fa fa-trash"></span> حذف </a>
 
-                <a class="green_bot edit-product hidden-xs"  href="#" @click.prevent="$parent.openEditBox($event)" >
+                <a class="green_bot edit-product hidden-xs" href="#" @click.prevent="$parent.openEditBox($event)">
                     <span class="fa fa-pencil"></span> ویرایش
                 </a>
             </div>
@@ -32,6 +35,18 @@
     </div>
 </template>
 <style scoped>
+    .btn-copy {
+        background: #eff2f5;
+        color: #333333;
+        padding:5px;
+        width:100%;
+        border: 1px solid;
+        margin: 5px auto;
+    }
+    .btn-copy:hover {
+        background: #e8ebee;
+    }
+
     .green_bot.delete-product {
         background: #e41c38;
     }
@@ -63,7 +78,7 @@
     .user-contents {
         border-right: 2px solid #f0f3f6;
         text-align: center;
-        padding: 0 20px 20px;
+        padding: 0 20px;
     }
 
     .user-contents h1 {
@@ -73,13 +88,15 @@
     .create_buy {
         position: relative;
     }
+
     .user-contents a.green_bot {
         float: left;
         padding: 5px 25px;
-        margin: 15px auto;
+        margin: 5px auto;
         font-size: 14px;
         font-weight: bold;
     }
+
     @media screen and (max-width: 767px) {
 
         .logo img {
@@ -133,11 +150,11 @@
     import {eventBus} from "../../../../../js/router/dashboard_router";
 
     export default {
-        data(){
-            return{
-                popUpMsg:'',
-                deleteButtonText:'',
-                cancelButtonText:''
+        data() {
+            return {
+                popUpMsg: '',
+                deleteButtonText: '',
+                cancelButtonText: ''
             }
         },
         props: [
@@ -195,22 +212,22 @@
                     'event_label': labelName
                 });
             },
-            
-            deleteProduct:function(){
+
+            deleteProduct: function () {
                 var self = this;
                 //show modal
-               this.popUpMsg  = 'آیا محصول حذف شود؟';
-               this.deleteButtonText  = 'حذف';
-               this.cancelButtonText  = 'انصراف';
-                
-                
-                eventBus.$emit('submitSuccess',this.popUpMsg);
-                eventBus.$emit('deleteButtonText',this.deleteButtonText);
-                eventBus.$emit('cancelButtonText',this.cancelButtonText);
-                
-                eventBus.$emit('productId',this.product_id);
+                this.popUpMsg = 'آیا محصول حذف شود؟';
+                this.deleteButtonText = 'حذف';
+                this.cancelButtonText = 'انصراف';
+
+
+                eventBus.$emit('submitSuccess', this.popUpMsg);
+                eventBus.$emit('deleteButtonText', this.deleteButtonText);
+                eventBus.$emit('cancelButtonText', this.cancelButtonText);
+
+                eventBus.$emit('productId', this.product_id);
                 $('#deleteModal').modal('show');
-                
+
             }
         },
     }
