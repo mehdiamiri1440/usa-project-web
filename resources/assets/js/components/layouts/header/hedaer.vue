@@ -120,11 +120,11 @@
 </style>
 <template>
     <div>
-        <div :class="{'loader-wrapper': !isLoading , 'finish-loader-show' : isLoading }">
+       <!-- <div :class="{'loader-wrapper': !isLoading , 'finish-loader-show' : isLoading }">
             <div class="main-loader">
                 <img :src="finish_load_img">
             </div>
-        </div>
+        </div>-->
 
 
         <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">

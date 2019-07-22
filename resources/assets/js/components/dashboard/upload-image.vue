@@ -72,13 +72,13 @@
                         </div>
                         <div class="col-xs-12">
                             <div class="modal-footer ">
-                              <div class="col-xs-12 col-sm-6 pull-right">
-                                  <button type="submit" class="btn btn-crop">برش تصویر</button>
-                              </div>
+                                <div class="col-xs-12 col-sm-6 pull-right">
+                                    <button type="submit" class="btn btn-crop">برش تصویر</button>
+                                </div>
                                 <div class="col-xs-12 col-sm-6 ">
-                                <button type="button" class="btn btn-cancel" @click.prevent="editFile.show = false">
-                                    انصراف
-                                </button>
+                                    <button type="button" class="btn btn-cancel" @click.prevent="editFile.show = false">
+                                        انصراف
+                                    </button>
                                 </div>
 
                             </div>
@@ -543,6 +543,7 @@
                     show: false,
                     name: '',
                 },
+                fileSizeBeforeCrop:null,
                 autoCompress: 512 * 512,
             }
         },
@@ -620,8 +621,8 @@
                         })
                         imageCompressor.compress(newFile.file)
                             .then((file) => {
+                                this.$refs.upload.update(newFile, {error: '', file, size: file.size, type: file.type});
                                 this.uploadRef.pop();
-                                this.$refs.upload.update(newFile, {error: '', file, size: file.size, type: file.type})
                             })
                             .catch((err) => {
                                 this.$refs.upload.update(newFile, {error: err.message || 'compress'})
@@ -644,7 +645,6 @@
                         newFile.thumb = newFile.blob
                     }
                     this.uploadRef.push(newFile.file);
-                    console.log(newFile.file);
                 }
             },
             // add, update, remove File Event
@@ -711,6 +711,7 @@
                 let data = {
                     name: this.editFile.name,
                 }
+
                 if (this.editFile.cropper) {
 
                     let binStr = atob(this.editFile.cropper.getCroppedCanvas().toDataURL(this.editFile.type).split(',')[1])
@@ -721,9 +722,13 @@
                     data.file = new File([arr], data.name, {type: this.editFile.type})
                     data.size = data.file.size
                 }
-                this.uploadRef.pop();
-                this.$refs.upload.update(this.editFile.id, data)
-                this.editFile.error = ''
+                for (var i = 0; i < this.uploadRef.length ; i++) {
+                    if (this.uploadRef[i].name == data.file.name && this.uploadRef[i].size == this.uploadRef[i].size ) {
+                        this.uploadRef.splice(i, 1);
+                    }
+                }
+                this.$refs.upload.update(this.editFile.id, data);
+                this.editFile.error = '';
                 this.editFile.show = false
 
             },
@@ -733,28 +738,27 @@
                     this.alert('Your browser does not support')
                     return
                 }
-                let input = this.$refs.upload.$el.querySelector('input');
-                input.directory = true;
-                input.webkitdirectory = true;
-                this.directory = true;
-                input.onclick = null;
-                input.click();
+                let input = this.$refs.upload.$el.querySelector('input')
+                input.directory = true
+                input.webkitdirectory = true
+                this.directory = true
+                input.onclick = null
+                input.click()
                 input.onclick = (e) => {
-                    this.directory = false;
-                    input.directory = false;
-                    input.webkitdirectory = false;
+                    this.directory = false
+                    input.directory = false
+                    input.webkitdirectory = false
                 }
             },
             onAddData() {
                 this.addData.show = false;
                 if (!this.$refs.upload.features.html5) {
-                    this.alert('Your browser does not support');
+                    this.alert('Your browser does not support')
                     return
                 }
                 let file = new window.File([this.addData.content], this.addData.name, {
                     type: this.addData.type,
                 })
-
             }
         }
     }
