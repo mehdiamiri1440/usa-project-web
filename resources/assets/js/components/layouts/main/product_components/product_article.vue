@@ -152,7 +152,8 @@
 
 <template>
     <div>
-        <article class="main-content-item" itemscope itemtype="http://schema.org/Product">
+        <script v-html="jsonLDObject" type="application/ld+json"></script>
+        <article class="main-content-item">
             <product-user-info
                     :profile_photo="product.profile_info.profile_photo"
                     :user_info="product.user_info"
@@ -382,7 +383,8 @@
                 popUpMsg: '',
                 popUpLoaded: false,
                 isMyProfile:false,
-                productUrl:""
+                productUrl:'',
+                jsonLDObject:'',
             }
         },
         components: {
@@ -394,13 +396,17 @@
 
             init: function () {
                 var self = this;
+                
                 this.productUrl = this.getProductUrl();
+                
                 if(this.currentUser.user_info){
                     if(this.currentUser.user_info.id == this.product.main.myuser_id){
                         this.isMyProfile = true;
                         this.$emit('isMyProfile',this.isMyProfile);
                     }
                 }
+                
+                this.jsonLDObject = this.createJsonLDObject();
             },
             toLatinNumbers: function (num) {
                 if (num == null) {
@@ -651,6 +657,40 @@
                     return false;
                 }
             },
+            createJsonLDObject:function(){
+                var fullName = this.product.user_info.first_name + ' ' + this.product.user_info.last_name;
+                
+                var productOwnerProfilePageUrl = "https://www.incobac.com/profile/" + this.product.user_info.user_name;
+                
+                let jsonDL = {
+                      "@context": "https://schema.org/",
+                      "@type": "Product",
+                      "name": this.product.main.name,
+                      "image": this.product.photos.map(function(photo){
+                          return 'https://www.incobac.com/storage/' + photo.file_path;
+                      }),
+                      "description": this.product.main.description,
+                      "aggregateRating": {
+                        "@type": "AggregateRating",
+                        "ratingValue": "4.4",
+                        "reviewCount": "3"
+                      },
+                      "offers": {
+                        "@type": "Offer",
+                        "url": "https://www.incobac.com" + this.getProductUrl(),
+                        "priceCurrency": "IRR",
+                        "price": this.product.main.min_sale_price * 10,
+                        "availability": "https://schema.org/InStock",
+                        "seller": {
+                          "@type": "Person",
+                          "name": fullName,
+                          "url" : productOwnerProfilePageUrl
+                        }
+                      }
+                };
+                
+                return jsonDL;
+            }
         },
         mounted() {
             this.init();

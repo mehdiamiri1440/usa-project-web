@@ -76,29 +76,6 @@
                    "address" : "NO.264 - 15 - Eram Street - Shiraz - IR"
                 },
             "description":"خرید و فروش محصولات عمده کشاورزی، برنج و خرما",
-            "review":{
-                "@type": "Review",
-                "itemReviewed": {
-                        "@type": "Organization",
-                        "image": "https://www.incobac.com/assets/img/logo_dark.png",
-                        "name": "اینکوباک",
-                        "telephone": "0917-202-1943"
-                    },
-                    "reviewRating": {
-                        "@type": "Rating",
-                        "ratingValue": "4"
-                    },
-                    "name": "اینکوباک",
-                    "author": {
-                        "@type": "Person",
-                        "name": "Ali Delkhosh"
-                    },
-                    "reviewBody": "بازارگاه خرید و فروش محصولات کشاورزی",
-                    "publisher": {
-                        "@type": "Organization",
-                        "name": "اینکوباک"
-                    }
-            },
             "contactPoint" : [
                   {
                     "@type" : "ContactPoint",
