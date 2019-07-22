@@ -761,7 +761,7 @@
                     .then(function(response){
                         self.currentUser = response.data;
                         if (searchValueText) {
-                            self.registerComponentStatistics('homePage', 'search', searchValueText);
+                            self.registerComponentStatistics('homePage', 'search-text', searchValueText);
                             self.searchText = searchValueText;
                         }
                         else {
@@ -832,23 +832,23 @@
             addProductOrRequest: function () {
                 if (this.currentUser.user_info) {
                     if (this.currentUser.user_info.is_seller) {
+                        this.registerComponentStatistics('product-list','register-product','seller clicks on plus button');
+                        
                         window.location.href = '/dashboard/register-product';
                     }
                     else if (this.currentUser.user_info.is_buyer) {
+                        this.registerComponentStatistics('product-list','register-request','seller clicks on plus button');
+                        
                         window.location.href = '/dashboard/register-request';
                     }
                 }
                 else {
+                    this.registerComponentStatistics('product-list','unauthorized-user-clicks-on-plus-btn','unauthorized-user-clicks-on-plus-btn');
+                    
                     this.popUpMsg = 'برای ثبت آگهی خرید یا فروش  ابتدا وارد سامانه شوید یا ثبت نام کنید.';
                     eventBus.$emit('submitSuccess', this.popUpMsg);
                     $('#myModal2').modal('show');
                 }
-            },
-            registerComponentStatistics: function (categoryName, actionName, labelName) {
-                gtag('event', actionName, {
-                    'event_category': categoryName,
-                    'event_label': labelName
-                });
             },
             resetFilter: function () {
                 $('.box-sidebar option').prop('selected', function () {
@@ -906,6 +906,18 @@
             stopLoader: function () {
                     eventBus.$emit('isLoading', false);
             },
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName, {
+                    'event_category': categoryName,
+                    'event_label': labelName
+                });
+            },
+            registerComponentExceptions:function(description,fatal = false){
+                gtag('event','exception',{
+                    'description': description,
+                    'fatal': fatal
+                });
+            }
         },
         watch: {
             searchText: function () {
@@ -914,6 +926,8 @@
                 clearTimeout(this.searchTextTimeout);
 
                 this.searchTextTimeout = setTimeout(function(){
+                    self.registerComponentStatistics('product-list','search-text',self.searchText);
+                    
                     self.applyFilter();
                 },1500);
 

@@ -541,15 +541,23 @@
                          if (response.data.confirmed_profile_record == true) {
                              if(response.data.is_buyer) {
                                  window.location.href = '/dashboard/register-request' ;
+                                 
+                                 self.registerComponentStatistics('Login','seller-login','seller-logged-in-successfully');
                              }
                              else if(response.data.is_seller){
                                  window.location.href = '/dashboard/register-product' ;
+                                 
+                                 self.registerComponentStatistics('Login','buyer-login','buyer-logged-in-succeccfully');
                              }
                              else{
+                                 self.registerComponentExceptions('Login-page: Undefined user type user phone nubmer is: ' + response.data.phone, true);
+                                 
                                  alert('نوع کاربری شما مشخص نشده است لطفا با پشتیبانی اینکوباک تماس بگیرید');
                              }
                          }
                          else{
+                             self.registerComponentExceptions('Login-page: User does not have confirmed profile record',true);
+                             
                              window.location.href = '/dashboard'; // Edit Profile Page
                          }
 
@@ -558,12 +566,16 @@
                         self.showMsg = true;
                         self.errors = [];
                         self.step1.msg = response.data.msg;
+                        
+                        self.registerComponentExceptions('Login-page: Validation error for user credentials in login page');
                     }
                 })
                 .catch(function (err) {
                     self.errors = [];
                     self.showMsg = false;
                     self.errors = err.response.data.errors;
+                    
+                    self.registerComponentExceptions('Login-page: Validation error for user credentials in login page');
                 });
             },
           /*  gotToRegister: function (){
@@ -642,6 +654,18 @@
                         return numDic[w];
                     });
             },
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName,{
+                    'event_category': categoryName,
+                    'event_label': labelName
+                });
+            },
+            registerComponentExceptions:function(description,fatal = false){
+                gtag('event','exception',{
+                    'description': description,
+                    'fatal': fatal
+                });
+            }
         },
         created() {
             gtag('config','UA-129398000-1',{'page_path': '/login'});

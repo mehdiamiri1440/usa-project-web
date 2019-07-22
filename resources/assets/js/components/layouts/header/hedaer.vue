@@ -120,11 +120,11 @@
 </style>
 <template>
     <div>
-        <div :class="{'loader-wrapper': !isLoading , 'finish-loader-show' : isLoading }">
+       <!-- <div :class="{'loader-wrapper': !isLoading , 'finish-loader-show' : isLoading }">
             <div class="main-loader">
                 <img :src="finish_load_img">
             </div>
-        </div>
+        </div>-->
 
 
         <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
@@ -276,26 +276,26 @@
                 <div class="collapse navbar-collapse" id="collapseHeader" aria-expanded="false">
                     <ul class="nav navbar-nav navbar-left ">
                         <li>
-                            <a class="smoothScroll" href="/">صفحه نخست</a>
+                            <a class="smoothScroll" href="/" @click="registerComponentStatistics('header','home-page','click-on-home-page')">صفحه نخست</a>
                         </li>
                         <li v-if="user_id != ''">
-                            <a class="smoothScroll" href="/dashboard/profile">داشبورد</a>
+                            <a class="smoothScroll" href="/dashboard/profile" @click="registerComponentStatistics('header','dashboard','click-on-dashboard')">داشبورد</a>
                         </li>
                         <li>
-                            <a class="smoothScroll" href="/product-list">لیست محصولات</a>
+                            <a class="smoothScroll" href="/product-list" @click="registerComponentStatistics('header','product-list','click-on-product-list')">لیست محصولات</a>
                         </li>
                         <li>
-                            <a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a>
+                            <a href="http:\\www.blog.incobac.com" class="smoothScroll" @click="registerComponentStatistics('header','blog','click-on-blog')">وبلاگ</a>
                         </li>
                         <li>
-                            <a class="smoothScroll" href="/pricing">تعرفه ها</a>
+                            <a class="smoothScroll" href="/pricing" @click="registerComponentStatistics('header','pricing','click-on-pricing')">تعرفه ها</a>
                         </li>
                         <li>
 
-                            <a class="smoothScroll" href="/about-us">درباره ما</a>
+                            <a class="smoothScroll" href="/about-us" @click="registerComponentStatistics('header','about-us','click-on-about-us')">درباره ما</a>
                         </li>
 
-                        <li v-if="user_id == ''"><a href="/login" class="smoothScroll login-button">ورود/ثبت نام</a>
+                        <li v-if="user_id == ''"><a href="/login" class="smoothScroll login-button" @click="registerComponentStatistics('header','register-login','click-on-register-login')">ورود/ثبت نام</a>
                         </li>
 
 
@@ -476,12 +476,15 @@
                     //code
                     self.popUpMsg = 'حذف شد.';
                     $('#myModal').modal('show');
-
+                    
+                    self.registerComponentStatistics('product','product-deleted','product-deleted-successfully');
+                    
                     setTimeout(function(){
                         window.location.reload();
                     },3000);
                 })
                 .catch(function(err){
+                    elf.registerComponentStatistics('product','product-delete-failed','product-delete-failed');
                     //show modal
                     self.popUpMsg = 'خطایی رخ داده است.لطفا دوباره تلاش کنید.';
                     $('#myModal').modal('show');

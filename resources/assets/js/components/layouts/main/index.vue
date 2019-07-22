@@ -2112,6 +2112,8 @@
             this.$nextTick(this.stopLoader());
         },
         created() {
+            gtag('config', 'UA-129398000-1', {'page_path': '/home-page'});
+            
             document.addEventListener('click', this.documentClick)
             var self = this;
 

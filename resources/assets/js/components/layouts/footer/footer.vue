@@ -6,24 +6,24 @@
                     <div class="col-xs-12 col-sm-6 col-md-4">
                         <ul class="list-unstyled footer-list">
                             <li>
-                                <a  class="smoothScroll" href="/pricing">تعرفه ها</a>
+                                <a  class="smoothScroll" href="/pricing" @click="registerComponentStatistics('footer','pricing','click-on-pricing')">تعرفه ها</a>
                             <li>
                             <li>
                                 <a  class="smoothScroll" href="#"> قیمت روزانه</a>
                             <li>
-                                <a  class="smoothScroll" href="/privacy-and-policy">قوانین و مقررات</a>
+                                <a  class="smoothScroll" href="/privacy-and-policy" @click="registerComponentStatistics('footer','privacy-and-policy','click-on-privacy-policy')">قوانین و مقررات</a>
                             </li>
                             <li>
 
-                                <a  class="smoothScroll" href="/help">اینکوباک چگونه کار می کند؟ </a>
+                                <a  class="smoothScroll" href="/help" @click="registerComponentStatistics('footer','help','click-on-help')">اینکوباک چگونه کار می کند؟ </a>
                             </li>
                             <li>
 
-                                <a  class="smoothScroll" href="/about-us">درباره ما</a>
+                                <a  class="smoothScroll" href="/about-us" @click="registerComponentStatistics('footer','about-us','click-on-about-us')">درباره ما</a>
                             </li>
                             <li>
 
-                                <a  class="smoothScroll" href="/contact-us">ارتباط با ما</a>
+                                <a  class="smoothScroll" href="/contact-us" @click="registerComponentStatistics('footer','contact-us','click-on-contact-us')">ارتباط با ما</a>
                             </li>
                         </ul>
                     </div>
@@ -47,19 +47,19 @@
                     <div class=" col-xs-12 col-sm-6">
                         <ul class="social-icon">
                             <li>
-                                <a href="https://www.instagram.com/incobac.ir/" class="fa fa-instagram wow "></a>
+                                <a href="https://www.instagram.com/incobac.ir/" class="fa fa-instagram wow" @click="registerComponentStatistics('footer','instagram','click-on-instagram')"></a>
                             </li>
                             <li>
-                                <a href="https://t.me/Incobac" class="fa fa-telegram wow "></a>
+                                <a href="https://t.me/Incobac" class="fa fa-telegram wow " @click="registerComponentStatistics('footer','telegram','click-on-telegram')"></a>
                             </li>
                             <li>
-                                <a href="https://www.linkedin.com/company/27058131/ " class="fa fa-linkedin wow "></a>
+                                <a href="https://www.linkedin.com/company/27058131/ " class="fa fa-linkedin wow " @click="registerComponentStatistics('footer','linked-in','click-on-linked-in')"></a>
                             </li>
                             <li>
-                                <a href="https://twitter.com/incobac" class="fa fa-twitter wow "></a>
+                                <a href="https://twitter.com/incobac" class="fa fa-twitter wow " @click="registerComponentStatistics('footer','twitter','click-on-twitter')"></a>
                             </li>
                             <li>
-                                <a href="https://www.facebook.com/incobac/" class="fa fa-facebook wow "></a>
+                                <a href="https://www.facebook.com/incobac/" class="fa fa-facebook wow " @click="registerComponentStatistics('footer','facebook','click-on-facebook')"></a>
                             </li>
                         </ul>
                     </div>
@@ -68,10 +68,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div itemscope="" itemtype="http://schema.org/Review">
-            <span itemprop="itemReviewed" content="اینکوباک"></span>
-            <span itemprop="" itemtype="http://schema.org/Rating">4.5</span>
         </div>
 
         <!-- end of app tag -->
@@ -302,3 +298,22 @@
         }
     }
 </style>
+
+<script>
+    export default {
+        data() {
+            return {
+                //
+            }
+        },
+        methods: {
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName, {
+                    'event_category': categoryName,
+                    'event_label': labelName
+                });
+            },
+        },
+    }
+
+</script>
