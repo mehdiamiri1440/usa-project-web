@@ -822,7 +822,7 @@
                step2: {
                    verification_code:'',
                    reSendCode:false,
-                   timeCounterDown:60,
+                   timeCounterDown:120,
                    showTimer:false,
                    now:null,
                },
@@ -883,7 +883,7 @@
 
                 this.step2.now = new Date().getTime();
                 this.step2.showTimer = true;
-                this.step2.timeCounterDown = 59;
+                this.step2.timeCounterDown = 119;
                 axios.post("/send_verification_code",{
                     phone : this.toLatinNumbers(this.step1.phone)
                 })
@@ -896,11 +896,15 @@
 
                     setTimeout(function(){
                         self.step2.reSendCode = true;
-                    },60000);
+                    },120000);
+                    
+                    self.registerComponentStatistics('Register','send-verification-code','verification-code-sent-to-user');
                 })
                 .catch(function(err){
                     self.errors.phone = err.response.data.errors.phone;
                     self.step1.sendCode = true;
+                    
+                    self.registerComponentExceptions('phone number is empty or incorrect or already exists');
                 });
             },
             verify_code:function(){
@@ -917,12 +921,16 @@
                         self.goToStep(2);
                         self.errors.verification_code = [];
                         self.errors.verification_code.push('کد وارد شده درست نیست');
+                        self.registerComponentExceptions('کد وارد شده درست نیست');
                     }
                 }).catch(function(error){
                     self.goToStep(2);
                     self.errors.verification_code = [];
                     self.errors.verification_code.push('وارد کردن کد الزامی است.');
+                    self.registerComponentExceptions('وارد کردن کد الزامی است');
                 });
+                
+                
 
             },
             register_details:function(){
@@ -975,10 +983,12 @@
                                 setTimeout(function(){
                                     window.location.href = '/login';
                                 },3000);
+                                
+                                self.registerComponentStatistics('Register','successful-register','user-registered-successfully');
                             }
                         })
                         .catch(function(err){
-
+                            self.registerComponentExceptions('User register API failed',true);
                         });
                 }
             },
@@ -996,10 +1006,19 @@
                 this.nationalCodeValidator(this.step3.national_code);
                 this.passwordValidator(this.step3.password,this.step3.re_password);
                 this.sexValidator(this.step3.sex);
+                
+                if(this.errorFlag){
+                    this.registerComponentExceptions('Validation error in step 3 in user register page!');
+                }
+                
             },
             checkStep4:function(){
                 this.activityTypeValidator(this.step4.activity_type);
                 this.categoryIdValidator(this.step4.categoryId);
+                
+                if(this.errorFlag){
+                    this.registerComponentExceptions('Validation Error in step 4 in user register page!');
+                }
             },
             firstNameValidator:function(name){
                 this.errors.first_name = [];
@@ -1204,6 +1223,18 @@
                     this.step2.timeCounterDown = seconds;
                 }
                 else this.step2.showTimer = false;
+            },
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName,{
+                    'event_category': categoryName,
+                    'event_label': labelName
+                });
+            },
+            registerComponentExceptions:function(description,fatal = false){
+                gtag('event','exception',{
+                    'description': description,
+                    'fatal': fatal
+                });
             }
         },
         watch:{
@@ -1213,13 +1244,11 @@
 
                 var distance =  now - this.step2.now;
 
-                var seconds =  59 - Math.floor((distance % (1000 * 60)) / 1000) + 1;
+                var seconds =  119 - Math.floor((distance % (1000 * 120)) / 1000) + 1;
 
                 setTimeout(function(){
                     self.updateCounterDownTimer(seconds);
                 },1000);
-
-
             },
             'step3.user_name':function(){
                 var self = this;

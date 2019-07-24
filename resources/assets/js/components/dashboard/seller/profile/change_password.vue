@@ -649,7 +649,7 @@
                     })
                     .catch(function(err){
                         //failed for unknown reason try again later
-                        alert('test');
+                        alert('خطایی رخ داده است.لطفا دوباره تلاش کنید.');
                     });
                 }
                 else{

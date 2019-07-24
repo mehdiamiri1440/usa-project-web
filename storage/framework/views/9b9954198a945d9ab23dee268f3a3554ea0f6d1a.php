@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="<?php echo e(asset('index/css/animate.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/profile/main-profile.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/master/style.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl-custom-style.css')); ?>">
 
 
     
@@ -59,9 +60,9 @@
         gtag('config', 'UA-129398000-1', {'send_page_view': false});
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <script type="application/ld+json">
-        { 
+        {
             "@context" : "http://schema.org/",
             "@type" : "Organization",
             "url" : "https://www.incobac.com",
@@ -75,35 +76,12 @@
                    "address" : "NO.264 - 15 - Eram Street - Shiraz - IR"
                 },
             "description":"خرید و فروش محصولات عمده کشاورزی، برنج و خرما",
-            "review":{
-                "@type": "Review",
-                "itemReviewed": {
-                        "@type": "Organization",
-                        "image": "https://www.incobac.com/assets/img/logo_dark.png",
-                        "name": "اینکوباک",
-                        "telephone": "0917-202-1943"
-                    },
-                    "reviewRating": {
-                        "@type": "Rating",
-                        "ratingValue": "4"
-                    },
-                    "name": "اینکوباک",
-                    "author": {
-                        "@type": "Person",
-                        "name": "Ali Delkhosh"
-                    },
-                    "reviewBody": "بازارگاه خرید و فروش محصولات کشاورزی",
-                    "publisher": {
-                        "@type": "Organization",
-                        "name": "اینکوباک"
-                    }
-            },
             "contactPoint" : [
-                  { 
+                  {
                     "@type" : "ContactPoint",
                     "telephone" : "+98-917-202-1943",
                     "contactType" : "customer service"
-                  } 
+                  }
                 ]
         }
     </script>
@@ -147,7 +125,7 @@
 
     <router-view id="main-content"
                  name="layouts"
-                 not_found_image="<?php echo e(url('assets/img/404.jpg')); ?>"
+                 not_found_image="<?php echo e(url('assets/img/def404.png')); ?>"
                  loading_img="<?php echo e(asset('assets/img/gif/loading.gif')); ?>"
                  trans="<?php echo e(url('dashboard/transaction-detail')); ?>"
                  transRep="<?php echo e(url('dashboard/transaction-report')); ?>"

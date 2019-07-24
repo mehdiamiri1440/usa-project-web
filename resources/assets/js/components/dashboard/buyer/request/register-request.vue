@@ -462,7 +462,11 @@
                               eventBus.$emit('submitSuccess', self.popUpMsg);
                               $('#myModal').modal('show');
                               eventBus.$emit('submitingEvent', false);
-
+                              
+                              
+                              self.registerComponentStatistics('buyAd-register','buyAd-registered-successfully','buyAd-registered-successfully');
+                              
+                              
                               setTimeout(function () {
                                     location.reload(true);
                                 }, 3000);
@@ -472,6 +476,7 @@
                       .catch(function(err){
                           self.errors = err.response.data.errors;
                           eventBus.$emit('submitingEvent', false);
+                          self.registerComponentExceptions('validation error in buyAd-request');
                       });
 //              }
 
@@ -531,7 +536,19 @@
                   .replace(/[۰-۹]/g,function(w){
                       return numDic[w];
                   });
-          }
+          },
+          registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName,{
+                    'event_category': categoryName,
+                    'event_label': labelName
+                });
+            },
+            registerComponentExceptions:function(description,fatal = false){
+                gtag('event','exception',{
+                    'description': description,
+                    'fatal': fatal
+                });
+            }
       },
       mounted(){
 //          $('input[type="file"]').imageuploadify();

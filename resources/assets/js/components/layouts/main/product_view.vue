@@ -456,6 +456,8 @@
                         }).then(function (response) {
                             self.product = response.data.product;
                             self.loading = false;
+                        }).catch(function(err){
+                            window.location.href = '/404';
                         });
                     });
 

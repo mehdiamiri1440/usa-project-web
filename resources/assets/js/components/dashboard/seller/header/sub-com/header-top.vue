@@ -153,12 +153,12 @@
                 <div class="profile-list">
                     <ul class="list-unstyled">
                         <li class="list-item">
-                            <a :href="'/dashboard/profile'">پروفایل</a>
+                            <a :href="'/dashboard/profile'" @click="registerComponentStatistics('seller-dashboard-header','profile-link','click-on-profile-link-in-dashboard')">پروفایل</a>
                         </li>
                         <li class="list-item">
-                            <a :href=" '/dashboard/password' ">تغییر کلمه عبور </a>
+                            <a :href=" '/dashboard/password' " @click="registerComponentStatistics('seller-dashboard-header','change-password','click-on-change-password-dashboard')">تغییر کلمه عبور </a>
                         </li>
-                        <li class="list-item"><a :href="out">خروج</a></li>
+                        <li class="list-item"><a :href="out" @click="registerComponentStatistics('seller-dashboard-header','logout','click-on-logout-in-dashboard')">خروج</a></li>
                     </ul>
                 </div>
             </div>
@@ -172,10 +172,10 @@
                               </div>
                           </li>-->
                     <li>
-                        <a class="green-bot" href="/product-list" style="font-size: 17px" @click="registerComponentStatistics('product-list-btn','click','product-list in dashboard')"> <span class="full">لیست محصولات</span>
+                        <a class="green-bot" href="/product-list" style="font-size: 17px" @click="registerComponentStatistics('dashboard-header','product-list-btn','click-on-product-list-in-dashboard')"> <span class="full">لیست محصولات</span>
                             <span class="min"><i class="fa fa-th-list" aria-hidden="true"></i></span> </a>
                     </li>
-                    <li><a :href="routeHome"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                    <li><a :href="routeHome" @click="registerComponentStatistics('dashboard-header','home-page-btn','click-on-home-page-in-dashboard')"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                 </ul>
             </div>
             <subMenu></subMenu>
@@ -231,7 +231,5 @@
                 'event_label'    : labelName
             });
         }
-
-
     }
 </script>

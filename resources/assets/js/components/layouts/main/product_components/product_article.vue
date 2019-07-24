@@ -152,7 +152,8 @@
 
 <template>
     <div>
-        <article class="main-content-item" itemscope itemtype="http://schema.org/Product">
+        <script v-html="jsonLDObject" type="application/ld+json"></script>
+        <article class="main-content-item">
             <product-user-info
                     :profile_photo="product.profile_info.profile_photo"
                     :user_info="product.user_info"
@@ -181,7 +182,7 @@
                 <div class="buttom-carousel-items-wrapper hidden-sm hidden-md hidden-lg col-xs-12">
                    <div class="row">
                        <div class="col-xs-6 text-left">
-                           <a href="#" @click.prevent="copyProfileLinkToClipBoard">
+                           <a href="#" @click.prevent="copyProductLinkToClipBoard">
                                <i class="fa fa-share-alt-square"></i>
                            </a>
                        </div>
@@ -192,19 +193,19 @@
                 </div>
                 <div class="main-article-content col-xs-12 col-sm-7">
                     <h2 class="main-article-title">
-                        <a :href="productUrl" itemprop="category">{{product.main.category_name + ' | ' +
+                        <a :href="productUrl" @click="registerComponentStatistics('product','show-product-in-seperate-page','show-product-in-seperate-page')">{{product.main.category_name + ' | ' +
                             product.main.sub_category_name}}</a>
                     </h2>
 
-                    <p>نوع محصول: <span itemprop="name">{{product.main.product_name}}</span></p>
+                    <p>نوع محصول: <span>{{product.main.product_name}}</span></p>
                     <p>استان / شهر:
                         <span>{{product.main.province_name + ' - ' + product.main.city_name}}</span>
                     </p>
-                    <p>مقدار موجودی: <span itemprop="weight">{{product.main.stock}} کیلوگرم</span></p>
+                    <p>مقدار موجودی: <span>{{product.main.stock}} کیلوگرم</span></p>
                     <p>حداقل سفارش: <span>{{product.main.min_sale_amount}} کیلوگرم</span></p>
-                    <p>قیمت: <span itemprop="price">{{product.main.min_sale_price + ' - ' + product.main.max_sale_price}}
+                    <p>قیمت: <span>{{product.main.min_sale_price + ' - ' + product.main.max_sale_price}}
                                     تومان</span></p>
-                    <p>توضیحات: <span itemprop="description">{{product.main.description}}</span>
+                    <p>توضیحات: <span>{{product.main.description}}</span>
                     </p>
 
                 </div>
@@ -247,7 +248,6 @@
                                <input id="min-sale-price" placeholder="حداقل قیمت" type="text" class=" form-control" :value="product.main.min_sale_price">
                                <span class="text-danger" v-if="errors.min_sale_price">{{errors.min_sale_price[0]}}
                                </span>
-
                     </div>
                     <div class="col-xs-12 col-sm-6 ">
 
@@ -382,7 +382,8 @@
                 popUpMsg: '',
                 popUpLoaded: false,
                 isMyProfile:false,
-                productUrl:""
+                productUrl:'',
+                jsonLDObject:'',
             }
         },
         components: {
@@ -394,13 +395,17 @@
 
             init: function () {
                 var self = this;
+                
                 this.productUrl = this.getProductUrl();
+                
                 if(this.currentUser.user_info){
                     if(this.currentUser.user_info.id == this.product.main.myuser_id){
                         this.isMyProfile = true;
                         this.$emit('isMyProfile',this.isMyProfile);
                     }
                 }
+                
+                this.jsonLDObject = this.createJsonLDObject();
             },
             toLatinNumbers: function (num) {
                 if (num == null) {
@@ -439,9 +444,11 @@
                     $('.buy_details').not(element).slideUp();
 
                     this.scrollToTheRequestRegisterBox(element);
+                    
+                    this.registerComponentStatistics('product','open-edit-box','click on open edit box');
                 }
                 else {
-                    //
+                    this.registerComponentExceptions('Product-component: click on open edit box while current user is undefined',true);
                 }
 
             },
@@ -487,12 +494,16 @@
                 axios.post('/edit_product',request)
                     .then(function(response){
                          self.popUpMsg = 'محصول شما با موفقیت ویرایش شد.';
-                            eventBus.$emit('submitSuccess', self.popUpMsg);
-                            $('#myModal').modal('show');
+                         eventBus.$emit('submitSuccess', self.popUpMsg);
+                         $('#myModal').modal('show');
+                    
+                         self.registerComponentStatistics('product','register-product-edit','product-edited-successfully');
                     })
                     .catch(function(err){
                         self.errors = '';
                         self.errors = err.response.data.errors;
+                    
+                        self.registerComponentExceptions('Product-component: validation errors in edit product API');
                     });
 
 //                axios.post('/does_buyer_already_had_requested_the_produtct', {
@@ -524,25 +535,6 @@
 //                    });
 //
 
-            },
-            RegisterBuyAdRequest: function (request, productId) {
-                var self = this;
-
-                axios.post('/user/add_buyAd', request)
-                    .then(function (response) {
-                        self.popUpMsg = 'درخواست خرید شما ثبت شد!';
-                        eventBus.$emit('submitSuccess', self.popUpMsg);
-                        $('#myModal').modal('show');
-
-                        axios.post('/register_buyer_request_for_the_product', {
-                            product_id: productId,
-                        });
-                    })
-                    .catch(function (err) {
-                        self.errors = '';
-                        console.log('error');
-                        self.errors = err.response.data.errors;
-                    });
             },
             openChat: function (product) {
 
@@ -579,26 +571,21 @@
                     $('#myModal2').modal('show');
                 }
             },
-            registerComponentStatistics: function (categoryName, actionName, labelName) {
-                gtag('event', actionName, {
-                    'event_category': categoryName,
-                    'event_label': labelName
-                });
-            },
             updatePopUpStatus: function (popUpOpenStatus) {
                 this.popUpLoaded = popUpOpenStatus;
             },
             getProductUrl:function () {
+                
                 var url = '/product-view/خرید-عمده-'
-                    + this.product.main.sub_category_name
+                    + this.product.main.sub_category_name.replace(' ','-')
                     + '/'
-                    + this.product.main.category_name
+                    + this.product.main.category_name.replace(' ','-')
                     + '/'
                     + this.product.main.id;
                 return url;
             },
-            copyProfileLinkToClipBoard: function () {
-                this.registerComponentStatistics('profileView', 'CopyProfileLink', 'click on copy profile link');
+            copyProductLinkToClipBoard: function () {
+                this.registerComponentStatistics('product', 'copy-product-link', 'click on copy poduct link');
 
                 if (this.isDeviceMobile()) {
 
@@ -623,18 +610,12 @@
                     var result = document.execCommand('copy');
                     document.body.removeChild(input);
                     if (result) {
-                        this.popUpMsg = 'آدرس پروفایل کاربر کپی شد.';
+                        this.popUpMsg = 'آدرس محصول کپی شد.';
                         eventBus.$emit('submitSuccess', this.popUpMsg);
                         $('#myModal').modal('show');
                     }
                 }
 
-            },
-            registerComponentStatistics: function (categoryName, actionName, labelName) {
-                gtag('event', actionName, {
-                    'event_category': categoryName,
-                    'event_label': labelName
-                });
             },
             isDeviceMobile: function () {
                 if (navigator.userAgent.match(/Android/i)
@@ -650,6 +631,52 @@
                 else {
                     return false;
                 }
+            },
+            createJsonLDObject:function(){
+                var fullName = this.product.user_info.first_name + ' ' + this.product.user_info.last_name;
+                
+                var productOwnerProfilePageUrl = "https://www.incobac.com/profile/" + this.product.user_info.user_name;
+                
+                let jsonDL = {
+                      "@context": "https://schema.org/",
+                      "@type": "Product",
+                      "name": this.product.main.name,
+                      "image": this.product.photos.map(function(photo){
+                          return 'https://www.incobac.com/storage/' + photo.file_path;
+                      }),
+                      "description": this.product.main.description,
+                      "aggregateRating": {
+                        "@type": "AggregateRating",
+                        "ratingValue": "4.4",
+                        "reviewCount": "3"
+                      },
+                      "offers": {
+                        "@type": "Offer",
+                        "url": "https://www.incobac.com" + this.getProductUrl(),
+                        "priceCurrency": "IRR",
+                        "price": this.product.main.min_sale_price * 10,
+                        "availability": "https://schema.org/InStock",
+                        "seller": {
+                          "@type": "Person",
+                          "name": fullName,
+                          "url" : productOwnerProfilePageUrl
+                        }
+                      }
+                };
+                
+                return jsonDL;
+            },
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName, {
+                    'event_category': categoryName,
+                    'event_label': labelName
+                });
+            },
+            registerComponentExceptions:function(description,fatal = false){
+                gtag('event','exception',{
+                    'description': description,
+                    'fatal': fatal
+                });
             },
         },
         mounted() {

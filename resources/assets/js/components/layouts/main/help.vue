@@ -490,6 +490,9 @@
         updated: function () {
              this.$nextTick(this.stopLoader());
         },
+        created(){
+            gtag('config', 'UA-129398000-1', {'page_path': '/help'});
+        },
 
 //        beforeCreate:function(){
 //            var self = this;

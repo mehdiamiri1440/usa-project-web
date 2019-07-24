@@ -12,7 +12,7 @@
 
 
             <div class="create_buy hidden-xs ">
-                <a href="#" @click.prevent="$parent.copyProfileLinkToClipBoard" class="btn btn-copy"><i aria-hidden="true" class="fa fa-clipboard"></i> کپی آدرس
+                <a href="#" @click.prevent="$parent.copyProductLinkToClipBoard" class="btn btn-copy"><i aria-hidden="true" class="fa fa-clipboard"></i> کپی آدرس
                 </a>
             </div>
             <div v-if="!is_my_profile_status" class="create_buy  ">
@@ -23,7 +23,7 @@
                 </a>
             </div>
 
-            <div v-else class="create_buy  ">
+            <div v-else class="create_buy">
                 <a href="" class="green_bot delete-product"
                    @click.prevent="deleteProduct()"> <span class="fa fa-trash"></span> حذف </a>
 
@@ -206,14 +206,7 @@
                 var newPosition = $(element).offset();
                 $('html, body').stop().animate({scrollTop: newPosition.top - 380}, 1000);
             },
-            registerComponentStatistics: function (categoryName, actionName, labelName) {
-                gtag('event', actionName, {
-                    'event_category': categoryName,
-                    'event_label': labelName
-                });
-            },
-
-            deleteProduct: function () {
+            deleteProduct: function (){
                 var self = this;
                 //show modal
                 this.popUpMsg = 'آیا محصول حذف شود؟';
@@ -227,8 +220,22 @@
 
                 eventBus.$emit('productId', this.product_id);
                 $('#deleteModal').modal('show');
+                
+                this.registerComponentStatistics('product', 'delete-product', 'click on delete product-btn');
 
-            }
+            },
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName, {
+                    'event_category': categoryName,
+                    'event_label': labelName
+                });
+            },
+            registerComponentExceptions:function(description,fatal = false){
+                gtag('event','exception',{
+                    'description': description,
+                    'fatal': fatal
+                });
+            },
         },
     }
 </script>

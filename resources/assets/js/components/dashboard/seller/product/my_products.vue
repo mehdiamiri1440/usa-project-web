@@ -168,12 +168,10 @@
                         }
                     );
             },
-
         },
         mounted() {
             this.init();
             eventBus.$emit('subHeader', this.items);
-
         }
         ,
         components: {
