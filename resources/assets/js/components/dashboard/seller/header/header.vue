@@ -600,14 +600,14 @@
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
                             <p class="main_par">
-                                شما به این قسمت دسترسی ندارید.
+                                {{popUpMsg}}
                             </p>
                             <button class="btn green-bot " data-dismiss="modal">
                                 متوجه شدم
                             </button>
-                            <button class="btn green-bot " data-dismiss="modal">
+                            <a class="btn green-bot" href='/pricing'>
                                 مشاهده تعرفه ها
-                            </button>
+                            </a>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->

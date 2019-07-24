@@ -338,7 +338,7 @@
                             <div v-if="profileOwner.certificates[0]">
                                 <article v-for="photo in profileOwner.certificates"
                                          class="ceteficate-image col-xs-6 hidden-sm hidden-md hidden-lg">
-                                    <a :href="'/' + str + '/' + photo"> <img :src="'/' + str + '/' + photo"/></a>
+                                    <a :href="str + '/' + photo"> <img :src="str + '/' + photo"/></a>
                                 </article>
                                 <div class="owl-carousel hidden-xs">
                                     <image-viewer

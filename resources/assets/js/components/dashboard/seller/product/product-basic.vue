@@ -244,7 +244,9 @@
                     </div>
 
                     <div class="rules col-xs-12">
-                        با <span class="roules-check-inside">قوانین و شرایط</span>
+                        با <span class="roules-check-inside">
+                        <a href='/privacy-and-policy' target="_blank">قوانین و شرایط</a>
+                        </span>
                         ثبت محصول موافق هستم<input type="checkbox" v-model="product.rules">
                         <i class="fa fa-check"></i>
                     </div>
@@ -360,26 +362,31 @@
                         .then(function (response) {
                             if (response.status == 201) {
                                 self.disableSubmit = true;
-                                self.popUpMsg = 'محصول شما با موفقیت ثبت شد';
+                                self.popUpMsg = self.getProductRegisterSuccessMessage();
                                 eventBus.$emit('submitSuccess', self.popUpMsg);
                                 eventBus.$emit('submiting', false);
                                 $('#myModal').modal('show');
+                                 
+                                self.registerComponentStatistics('product-register','product-registered-successfully','product-registered-successfully');
+                                
                                 setTimeout(function () {
                                     location.reload(true);
                                     eventBus.$emit('submiting', false);
-                                }, 3000);
+                                }, 4000);
                             }
                             else if(response.status == 200){
                                 self.popUpMsg = response.data.msg;
                                 eventBus.$emit('submitSuccess', self.popUpMsg);
                                 eventBus.$emit('submiting', false);
-                                $('#myModal').modal('show');
+                                $('#myModal-2').modal('show');
                             }
                         })
                         .catch(function (err) {
                             self.errors = [];
                             self.errors = err.response.data.errors;
                             eventBus.$emit('submiting', false);
+                        
+                            self.registerComponentExceptions('Validation error in product register');
                         });
                 }
             },
@@ -438,7 +445,31 @@
                     .replace(/[۰-۹]/g, function (w) {
                         return numDic[w];
                     });
-            }
+            },
+            getProductRegisterSuccessMessage:function(){
+                let msg = '';
+                
+                if(this.currentUser.user_info.active_pakage_type == 0){
+                    msg = 'محصول شما با موفقیت ثبت شد و پس از تایید کارشناسان در لیست محصولات نمایش داده میشود.';
+                }
+                else{
+                    msg = 'محصول شما با موفقیت ثبت شد.';
+                }
+                
+                return msg;
+            },
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName, {
+                    'event_category': categoryName,
+                    'event_label': labelName
+                });
+            },
+            registerComponentExceptions:function(description,fatal = false){
+                gtag('event','exception',{
+                    'description': description,
+                    'fatal': fatal
+                });
+            },
         },
         mounted() {
             this.init();

@@ -536,25 +536,6 @@
 //
 
             },
-//            RegisterBuyAdRequest: function (request, productId) {
-//                var self = this;
-//
-//                axios.post('/user/add_buyAd', request)
-//                    .then(function (response) {
-//                        self.popUpMsg = 'درخواست خرید شما ثبت شد!';
-//                        eventBus.$emit('submitSuccess', self.popUpMsg);
-//                        $('#myModal').modal('show');
-//
-//                        axios.post('/register_buyer_request_for_the_product', {
-//                            product_id: productId,
-//                        });
-//                    })
-//                    .catch(function (err) {
-//                        self.errors = '';
-//                        console.log('error');
-//                        self.errors = err.response.data.errors;
-//                    });
-//            },
             openChat: function (product) {
 
                 this.registerComponentStatistics('product', 'openChat', 'click on open chatBox');
