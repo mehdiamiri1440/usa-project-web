@@ -40,6 +40,15 @@
 @foreach($user_names as $user_name)
     <url>
       <loc>{{url("profile/".$user_name->user_name)}}</loc>
+      <changefreq>daily</changefreq>
+      <priority>0.5</priority>
+    </url>
+@endforeach
+    
+    
+@foreach($products as $product)
+    <url>
+      <loc>{{url("product-view/".str_replace(' ','-',$product['main']->category_name)."/"."خرید-عمده-".str_replace(' ','-',$product['main']->sub_category_name)."/".$product['main']->id)}}</loc>
       <changefreq>monthly</changefreq>
       <priority>0.5</priority>
     </url>

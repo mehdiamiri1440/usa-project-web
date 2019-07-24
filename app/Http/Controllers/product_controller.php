@@ -847,6 +847,16 @@ class product_controller extends Controller
             ],404);
         }
     }
+    
+    
+    public function get_all_products_url_for_sitemap()
+    {
+        $products = collect($this->get_all_products_with_related_media());
+        
+//        var_dump($products);
+        
+        return $products;
+    }
         
 	
 }

@@ -301,17 +301,6 @@ class user_controller extends Controller
         ],200);
     }
     
-    //public method
-    public function get_all_user_names_for_sitemap()
-    {
-        $user_names = myuser::select('user_name')
-                            ->get();
-        
-        return response()->view('other.sitemap',[
-            'user_names' => $user_names
-        ])->header('Content-Type','text/xml');
-    }
-
     protected function generate_jwt_token($request)
     {
         $credentials = $request->only('phone', 'password');
