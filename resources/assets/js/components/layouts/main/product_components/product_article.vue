@@ -575,10 +575,11 @@
                 this.popUpLoaded = popUpOpenStatus;
             },
             getProductUrl:function () {
+                
                 var url = '/product-view/خرید-عمده-'
-                    + this.product.main.sub_category_name
+                    + this.product.main.sub_category_name.replace(' ','-')
                     + '/'
-                    + this.product.main.category_name
+                    + this.product.main.category_name.replace(' ','-')
                     + '/'
                     + this.product.main.id;
                 return url;

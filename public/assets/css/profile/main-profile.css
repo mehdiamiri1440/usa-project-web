@@ -691,7 +691,7 @@ th, td {
 
     .description {
         text-align: right;
-        white-space: initial !important;
+/*        white-space: initial !important;*/
     }
 
     .logo img {
