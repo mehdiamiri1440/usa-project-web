@@ -16,6 +16,7 @@
         width: 100%;
     }
 
+
     .btn-copy:hover {
         background: #e8ebee;
     }
@@ -99,6 +100,10 @@
             border-radius: 50%;
             margin: 0;
             float: right;
+        }
+        .user-contents a.green-button{
+            width: initial;
+            margin: 15px auto;
         }
     }
 
