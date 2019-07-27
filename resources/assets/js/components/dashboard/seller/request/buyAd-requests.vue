@@ -1,18 +1,20 @@
-
 <style>
     .main-content {
         padding: 90px 15px;
     }
-    .list-title, .needs,.list-time {
+
+    .list-title, .needs, .list-time {
         float: right;
         text-align: center;
         line-height: 1.618;
         font-weight: bold;
         padding-top: 5px;
     }
+
     .list-group-item {
         border: 1px solid #ddd;
     }
+
     .detail-success {
         padding: 8px 0;
         width: 100%;
@@ -22,50 +24,53 @@
         border-radius: 5px;
         font-size: 13px;
     }
+
     .main-content > ul {
         border-radius: 3px;
-        box-shadow: 0 0 10px #e1e1e1 ;
+        box-shadow: 0 0 10px #e1e1e1;
         overflow: hidden;
     }
+
     .main-content .list-group-item p {
         text-align: center;
         direction: rtl;
     }
+
     #main.little-main {
         margin-right: 80px;
     }
+
     @media screen and (max-width: 992px) {
-        .list-title, .needs,.list-time {
-           padding: 15px;
+        .list-title, .needs, .list-time {
+            padding: 15px;
         }
     }
+
     @media screen and (max-width: 767px) {
-      .main-content {
-        padding: 90px 0;
+        .main-content {
+            padding: 90px 0;
+        }
+
+        .detail-success {
+            max-width: 300px;
+            margin: 0 auto;
+        }
     }
-    .detail-success {
-    max-width: 300px;
-    margin: 0 auto;
-}
-    }
-    .message-list{
+
+    .message-list {
         padding: 19px;
         text-align: center;
         background: #eff3f6;
         line-height: 1.618;
 
     }
-    .message-list .text-red{
+
+    .message-list .text-red {
         color: #e41c38;
     }
 
-    .green_bot {
-        width: initial;
-        padding: 13px 15px;
-        font-size: 16px;
-    }
-    @media screen and (max-width: 767px){
-        .green_bot {
+    @media screen and (max-width: 767px) {
+        .green-button {
             width: 100%;
         }
     }
@@ -73,48 +78,60 @@
 <template>
     <div>
         <section class="main-content col-xs-12" v-if="buyAds.length != 0">
-            <ul class="list-unstyled" >
+            <ul class="list-unstyled">
                 <li v-for="buyAd in buyAds" class="list-group-item  col-xs-12">
                     <p class="list-title col-sm-3 col-xs-12">
-                        {{buyAd.category_name}}
+                        <span v-text="buyAd.category_name"></span>
+
                         <span> | </span>
-                        {{buyAd.subcategory_name}}
-                        <span v-if="buyAd.name"> | </span>
-                        {{buyAd.name}}
+
+                        <span v-text="buyAd.subcategory_name"></span>
+
+                        <span v-if="buyAd.name" v-text="' | ' + buyAd.name"></span>
+
                     </p>
+
                     <p class="needs col-sm-4 col-xs-12">
-                      <span class="static-content">
-                        میزان نیازمندی :
-                    </span>
-                        {{buyAd.requirement_amount}}
+                        <span class="static-content">
+                            میزان نیازمندی :
+                        </span>
+
+                        <span v-text="buyAd.requirement_amount"></span>
 
                         <span class="static-content">
-کیلوگرم
-                    </span>
+                            کیلوگرم
+                        </span>
+
                     </p>
 
-                    <p class="list-time col-sm-2 col-xs-12">
-                        {{buyAd.register_date}}
-                    </p>
+                    <p class="list-time col-sm-2 col-xs-12" v-text="buyAd.register_date"></p>
+
                     <a class="col-sm-3 col-xs-12" href="" @click.prevent=openChat(buyAd)>
-                            <p class="detail-success">
-                                <span class="fa fa-comment"></span> پیام به خریدار
-                            </p>
+                        <p class="detail-success">
+                            <span class="fa fa-comment"></span> پیام به خریدار
+                        </p>
                     </a>
                 </li>
+
                 <li class="message-list col-xs-12">
-                    <p> سقف تعداد درخواست های خریدی که به شما نمایش داده میشود
-                        <span class="text-red"> 5 </span>   است 
+                    <p>
+                        سقف تعداد درخواست های خریدی که به شما نمایش داده میشود
+                        <span class="text-red"> 5 </span>
+                        است
                     </p>
-                    <a class="green_bot" href="/pricing">تعرفه ها</a>
+
+                    <a class="green-button" href="/pricing">تعرفه ها</a>
                 </li>
             </ul>
         </section>
-        <section class="main-content col-xs-12 loading_images" v-else-if="buyAds.length == 0 && !load">
+        <section class="main-content col-xs-12 loading_images"
+                 v-else-if="buyAds.length === 0 && !load"
+        >
             <h4 dir="rtl" class="text-center">درخواستی برای شما وجود ندارد.</h4>
-        </section>
-        <section class="main-content col-xs-12 loading_images" v-show="load">
 
+        </section>
+
+        <section class="main-content col-xs-12 loading_images" v-show="load">
             <img :src="loading_img" style="width:200px;height:200px">
         </section>
     </div>
@@ -122,6 +139,7 @@
 
 <script>
     import {eventBus} from "../../../../router/dashboard_router";
+
     export default {
         props: [
             "loading_img",
@@ -137,24 +155,19 @@
                 buyAds: '',
                 popUpMsg: '',
                 load: false,
-                textActive:false,
+                textActive: false,
                 items: [
-//                {
-//                    message: 'پیشنهادات من',
-//                    url: 'mySellOffers'
-//                },
-                {
-                    message: 'درخواست های جدید',
-                    url: 'buyAdRequests'
-                }
-            ]
+                    {
+                        message: 'درخواست های جدید',
+                        url: 'buyAdRequests'
+                    }
+                ]
             }
         }
         ,
         methods: {
             init: function () {
                 this.load = true;
-
                 var self = this;
 
                 axios.post('/get_related_buyAds_list_to_the_seller')
@@ -163,39 +176,38 @@
                         self.load = false;
                     });
             },
-            openChat:function(buyAd){
+            openChat: function (buyAd) {
+                this.registerComponentStatistics('buyAdReply', 'openChat', 'click on open chatBox');
 
-                this.registerComponentStatistics('buyAdReply','openChat','click on open chatBox');
-
-                axios.post('/get_user_last_confirmed_profile_photo',{
-                    'user_id' : buyAd.myuser_id
-                }).then(function(response){
+                axios.post('/get_user_last_confirmed_profile_photo', {
+                    'user_id': buyAd.myuser_id
+                }).then(function (response) {
                     var profile_photo = response.data.profile_photo;
 
                     var contact = {
-                        contact_id:buyAd.myuser_id,
-                        first_name:buyAd.first_name,
-                        last_name:buyAd.last_name,
-                        profile_photo:profile_photo,
-                        user_name:buyAd.user_name,
-                    }
+                        contact_id: buyAd.myuser_id,
+                        first_name: buyAd.first_name,
+                        last_name: buyAd.last_name,
+                        profile_photo: profile_photo,
+                        user_name: buyAd.user_name,
+                    };
 
-                    axios.post('/set_last_chat_contact',contact)
-                        .then(function(response){
+                    axios.post('/set_last_chat_contact', contact)
+                        .then(function (response) {
                             window.location.href = '/dashboard/messages';
                         })
-                        .catch(function(e){
+                        .catch(function (e) {
                             alert('Error');
                         });
-                    })
-                .catch(function(err){
-                    //
-                });
+                })
+                    .catch(function (err) {
+                        //
+                    });
             },
-            registerComponentStatistics:function(categoryName,actionName,labelName){
-                gtag('event',actionName,{
-                    'event_category' : categoryName,
-                    'event_label'    : labelName
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName, {
+                    'event_category': categoryName,
+                    'event_label': labelName
                 });
             },
         },
@@ -203,8 +215,8 @@
             this.init();
             eventBus.$emit('subHeader', this.items);
         },
-        created(){
-            gtag('config','UA-129398000-1',{'page_path': '/buyAd-requests'});
+        created() {
+            gtag('config', 'UA-129398000-1', {'page_path': '/buyAd-requests'});
         }
     }
 </script>

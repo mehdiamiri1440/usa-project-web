@@ -23,18 +23,18 @@
         height: 85px;
     }
 
-
     .main-content {
         padding: 60px 15px;
         direction: rtl;
     }
+
     .roules-check-inside {
         color: #28a745;
     }
 
     /*end main content style */
     /*custom cods*/
-    .green-bot {
+    .green-button {
         margin: 15px 0;
         display: inline-block;
         background: #28a745;
@@ -50,7 +50,7 @@
         width: 100%;
     }
 
-    .green-bot:hover {
+    .green-button:hover {
         color: #fff;
         background: #29A045;
         transition: 300ms;
@@ -125,10 +125,13 @@
                         <label>
                             <span class="text-danger">*</span>دسته ی محصول
                         </label>
-                        <select class="profile_select" v-on:change="loadSubCategoryList($event)">
+
+                        <select class="profile-select" v-on:change="loadSubCategoryList($event)">
                             <option disabled selected>لطفا انتخاب کنید</option>
                             <option v-for="category in categoryList"
-                                    v-bind:value="category.id"> {{category.category_name}}
+                                    v-bind:value="category.id"
+                                    v-text="category.category_name"
+                            >
                             </option>
                         </select>
                     </div>
@@ -136,135 +139,245 @@
                         <label>
                             <span class="text-danger">*</span>زیر دسته ی محصول
                         </label>
-                        <select class="profile_select" v-on:change=setCategoryId($event)>
+
+                        <select class="profile-select" v-on:change=setCategoryId($event)>
                             <option disabled selected>لطفا انتخاب کنید</option>
                             <option v-for="category in SubCategoryList"
-                                    v-bind:value="category.id"> {{category.category_name}}
+                                    v-bind:value="category.id"
+                                    v-text="category.category_name"
+                            >
                             </option>
                         </select>
-                        <span v-if="errors.category_id" class="text-danger"> {{ errors.category_id[0] }}</span>
+                        <span v-if="errors.category_id"
+                              class="text-danger"
+                              v-text="errors.category_id[0]"
+                        >
+                        </span>
                     </div>
+
                     <div class="col-xs-12 col-sm-6">
                         <label>
                             <span class="text-danger">*</span> موجودی <span class="sub-des">(کیلوگرم)</span>
                         </label>
                         <input type="text" placeholder="موجودی" v-model="product.stock">
-                        <span v-if="errors.stock" class="text-danger"> {{ errors.stock[0] }}</span>
+                        <span v-if="errors.stock"
+                              class="text-danger"
+                              v-text="errors.stock[0]"
+                        >
+                        </span>
+
                     </div>
 
                     <div class="col-xs-12 col-sm-6">
                         <label>
-                            <span class="text-danger">*</span>نوع محصول <span class="sub-des">(مثال:کله قوچی)</span>
+                            <span class="text-danger">*</span>
+                            نوع محصول
+                            <span class="sub-des">
+                                (مثال:کله قوچی)
+                            </span>
+
                         </label>
-                        <input type="text" placeholder="نوع محصول، نوع بذر و ..." v-model="product.product_name">
-                        <span v-if="errors.product_name" class="text-danger"> {{ errors.product_name[0] }}</span>
+
+                        <input type="text"
+                               placeholder="نوع محصول، نوع بذر و ..."
+                               v-model="product.product_name"
+                        >
+                        <span v-if="errors.product_name"
+                              class="text-danger"
+                              v-text="errors.product_name[0]"
+                        >
+
+                        </span>
                     </div>
+
                     <div class="col-xs-12 col-sm-6">
                         <label>
                             <span class="text-danger">*</span>قیمت واحد از <span
                                 class="sub-des">(هر کیلو به تومان)</span>
                         </label>
-                        <input type="text" placeholder="حداقل قیمت هر کیلو" v-model="product.max_sale_price">
-                        <span v-if="errors.max_sale_price" class="text-danger"> {{ errors.min_sale_price[0] }}</span>
+                        <input type="text"
+                               placeholder="حداقل قیمت هر کیلو"
+                               v-model="product.max_sale_price"
+                        >
+
+                        <span v-if="errors.max_sale_price"
+                              class="text-danger"
+                              v-text="errors.min_sale_price[0] "
+                        >
+                        </span>
                     </div>
+
                     <div class="col-xs-12 col-sm-6">
                         <label>
                             <span class="text-danger">*</span>قیمت واحد تا <span
                                 class="sub-des">(هر کیلو به تومان)</span>
                         </label>
-                        <input type="text" placeholder="حداکثر قیمت هر کیلو" v-model="product.min_sale_price">
-                        <span v-if="errors.min_sale_price" class="text-danger"> {{ errors.max_sale_price[0] }}</span>
+                        <input type="text"
+                               placeholder="حداکثر قیمت هر کیلو"
+                               v-model="product.min_sale_price"
+                        >
+                        <span v-if="errors.min_sale_price"
+                              class="text-danger"
+                              v-text="errors.max_sale_price[0]"
+                        >
+                        </span>
                     </div>
-
 
                     <div class="col-xs-12 col-sm-6">
                         <label>
                             <span class="text-danger">*</span>استان مبدا
                         </label>
-                        <select class="profile_select" v-on:change="loadCityList($event)">
+
+                        <select class="profile-select" v-on:change="loadCityList($event)">
                             <option disabled selected>لطفا انتخاب کنید</option>
                             <option v-for="province in provinces"
-                                    v-bind:value="province.id"> {{province.province_name}}
+                                    v-bind:value="province.id"
+                                    v-text="province.province_name"
+                            >
                             </option>
                         </select>
                     </div>
-
 
                     <div class="col-xs-12 col-sm-6">
                         <label>
                             <span class="text-danger">*</span> شهرمبدا
                         </label>
-                        <select class="profile_select" v-on:change="setCityId($event)">
+
+                        <select class="profile-select" v-on:change="setCityId($event)">
                             <option disabled selected>لطفا انتخاب کنید</option>
                             <option v-for="city in cities"
-                                    v-bind:value="city.id"> {{city.city_name}}
+                                    v-bind:value="city.id"
+                                    v-text="city.city_name"
+                            >
                             </option>
                         </select>
-                        <span v-if="errors.city_id" class="text-danger"> {{ errors.city_id[0] }}</span>
+                        <span v-if="errors.city_id"
+                              class="text-danger"
+                              v-text="errors.city_id[0]"
+                        >
+                        </span>
                     </div>
+
                     <div class="col-xs-12 col-sm-6">
                         <label>
-                            <span class="text-danger">*</span> حداقل سفارش <span class="sub-des">(کیلوگرم)</span>
+                            <span class="text-danger">*</span>
+                            حداقل سفارش
+                            <span class="sub-des">
+                                (کیلوگرم)
+                            </span>
+
                         </label>
-                        <input type="text" placeholder="حداقل میزان سفارش به کیلوگرم" v-model="product.min_sale_amount">
-                        <span v-if="errors.stock" class="text-danger"> {{ errors.stock[0] }}</span>
+
+                        <input type="text"
+                               placeholder="حداقل میزان سفارش به کیلوگرم"
+                               v-model="product.min_sale_amount"
+                        >
+                        <span v-if="errors.min_sale_amount"
+                              class="text-danger"
+                              v-text="errors.min_sale_amount[0]"
+                        >
+                        </span>
                     </div>
+
                     <div class="col-xs-12">
                         <label>
                             توضیحات
                         </label>
-                        <textarea placeholder="درباره ی محصولتان بنویسید..." v-model="product.description"></textarea>
-                        <span v-if="errors.description" class="text-danger"> {{ errors.description[0] }}</span>
+                        <textarea placeholder="درباره ی محصولتان بنویسید..."
+                                  v-model="product.description"
+                        ></textarea>
+
+                        <span v-if="errors.description"
+                              class="text-danger"
+                              v-text="errors.description[0]"
+                        >
+                        </span>
                     </div>
+
                     <div class="image_company col-xs-12">
                         <label>
                             <span class="text-danger">*</span>تصاویر محصول
                         </label>
-                        <uploadFile
-                                uploadName = "product_files"
-                                uploadAccept = "image/*"
-                                :uploadMinSize = "1024"
-                                :uploadSize = "1024 * 1024 * 10"
-                                :uploadMultiple = "true"
-                                :uploadDrop = "true"
-                                :uploadDropDirectory = "true"
-                                :uploadAddIndex = "false"
-                                :uploadThread = "3"
-                                :uploadOCompress = "1024 * 1024"
-                                :uploadUploadAuto = "false"
+
+                        <UploadFile
+                                uploadName="product_files"
+                                uploadAccept="image/*"
+                                :uploadMinSize="1024"
+                                :uploadSize="1024 * 1024 * 10"
+                                :uploadMultiple="true"
+                                :uploadDrop="true"
+                                :uploadDropDirectory="true"
+                                :uploadAddIndex="false"
+                                :uploadThread="3"
+                                :uploadOCompress="1024 * 1024"
+                                :uploadUploadAuto="false"
                                 :uploadRef="productFiles"
-                        ></uploadFile>
-                        <span v-if="errors.images_count" class="text-danger"> {{ errors.images_count[0] }}</span>
-                        <span v-if="errors.image_0" class="text-danger"> {{ errors.image_0[0] }}</span>
-                        <span v-if="errors.image_1" class="text-danger"> {{ errors.image_1[0] }}</span>
-                        <span v-if="errors.image_2" class="text-danger"> {{ errors.image_2[0] }}</span>
-                        <span v-if="errors.image_3" class="text-danger"> {{ errors.image_3[0] }}</span>
-                        <span v-if="errors.image_4" class="text-danger"> {{ errors.image_4[0] }}</span>
-                        <span v-if="errors.image_5" class="text-danger"> {{ errors.image_5[0] }}</span>
+                        />
+
+                        <span v-if="errors.images_count"
+                              class="text-danger" v-text="errors.images_count[0]"
+                        ></span>
+
+                        <span v-if="errors.image_0"
+                              class="text-danger"
+                              v-text="errors.image_0[0]"
+                        ></span>
+
+                        <span v-if="errors.image_1"
+                              class="text-danger"
+                              v-text="errors.image_1[0]"
+                        ></span>
+
+                        <span v-if="errors.image_2"
+                              class="text-danger"
+                              v-text="errors.image_2[0]"
+                        ></span>
+
+                        <span v-if="errors.image_3"
+                              class="text-danger"
+                              v-text="errors.image_3[0]"
+                        ></span>
+
+                        <span v-if="errors.image_4"
+                              class="text-danger"
+                              v-text="errors.image_4[0]"
+                        ></span>
+
+                        <span v-if="errors.image_5"
+                              class="text-danger"
+                              v-text="errors.image_5[0]"
+                        ></span>
+
                     </div>
 
                     <div class="rules col-xs-12">
-                        با <span class="roules-check-inside">
-                        <a href='/privacy-and-policy' target="_blank">قوانین و شرایط</a>
+                        با
+                        <span class="roules-check-inside">
+                            <a href='/privacy-and-policy' target="_blank">قوانین و شرایط</a>
                         </span>
-                        ثبت محصول موافق هستم<input type="checkbox" v-model="product.rules">
+                        ثبت محصول موافق هستم
+                        <input type="checkbox" v-model="product.rules">
+
                         <i class="fa fa-check"></i>
                     </div>
+
                     <div class="col-xs-12">
-                        <input class="green-bot width-full" value="ثبت محصول" type="button" @click="submitProduct"
-                               :disabled="disableSubmit == true">
+                        <input class="green-button width-full" value="ثبت محصول" type="button" @click="submitProduct"
+                               :disabled="disableSubmit === true">
                     </div>
                 </div>
             </form>
         </section>
     </div>
 </template>
+
 <script>
     import {eventBus} from "../../../../router/dashboard_router";
-    import uploadFile from '../../upload-image'
+    import UploadFile from '../../upload-image'
+
     export default {
-        components:{
-            uploadFile
+        components: {
+            UploadFile
         },
         data: function () {
             return {
@@ -310,7 +423,7 @@
                         url: 'registerProduct'
                     },
                 ],
-                uploadPercentage:0,
+                uploadPercentage: 0,
             };
         },
         methods: {
@@ -324,6 +437,7 @@
             },
             loadSubCategoryList: function (e) {
                 e.preventDefault();
+
                 var categoryId = $(e.target).val();
 
                 axios.post('/get_category_list', {
@@ -332,6 +446,7 @@
             },
             loadCityList: function (e) {
                 e.preventDefault();
+
                 var provinceId = $(e.target).val();
 
                 axios.post('/location/get_location_info', {
@@ -341,51 +456,53 @@
             submitProduct: function () {
                 eventBus.$emit('submiting', true);
                 var self = this;
-                
-                if (this.product.rules != true) {
+
+                if (this.product.rules !== true) {
                     this.popUpMsg = 'موافقت با قوانین ثبت آگهی الزامی است';
+
                     eventBus.$emit('submitSuccess', this.popUpMsg);
                     eventBus.$emit('submiting', false);
-                    $('#myModal').modal('show');
+
+                    $('#custom-main-modal').modal('show');
                 }
                 else {
                     let formData = this.getProductFormFields();
                     axios.post('/user/add_product', formData,{
-                            headers: {
-                                'X-Requested-With': 'XMLHttpRequest',
-                                'Content-Type': 'application/json',
-                            },
-                            onUploadProgress: function(progressEvent) {
-                                this.uploadPercentage = parseInt( Math.round( ( progressEvent.loaded * 100 ) / progressEvent.total ) );
-                            }.bind(this)
-                        })
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'Content-Type': 'application/json',
+                        },
+                        onUploadProgress: function(progressEvent) {
+                            this.uploadPercentage = parseInt( Math.round( ( progressEvent.loaded * 100 ) / progressEvent.total ) );
+                        }.bind(this)
+                    })
                         .then(function (response) {
-                            if (response.status == 201) {
+                            if (response.status === 201) {
                                 self.disableSubmit = true;
                                 self.popUpMsg = self.getProductRegisterSuccessMessage();
                                 eventBus.$emit('submitSuccess', self.popUpMsg);
                                 eventBus.$emit('submiting', false);
-                                $('#myModal').modal('show');
-                                 
+                                $('#custom-main-modal').modal('show');
+
                                 self.registerComponentStatistics('product-register','product-registered-successfully','product-registered-successfully');
-                                
+
                                 setTimeout(function () {
                                     location.reload(true);
                                     eventBus.$emit('submiting', false);
                                 }, 4000);
                             }
-                            else if(response.status == 200){
+                            else if(response.status === 200){
                                 self.popUpMsg = response.data.msg;
                                 eventBus.$emit('submitSuccess', self.popUpMsg);
                                 eventBus.$emit('submiting', false);
-                                $('#myModal-2').modal('show');
+                                $('#modal-buttons').modal('show');
                             }
                         })
                         .catch(function (err) {
                             self.errors = [];
                             self.errors = err.response.data.errors;
                             eventBus.$emit('submiting', false);
-                        
+
                             self.registerComponentExceptions('Validation error in product register');
                         });
                 }
@@ -448,14 +565,14 @@
             },
             getProductRegisterSuccessMessage:function(){
                 let msg = '';
-                
+
                 if(this.currentUser.user_info.active_pakage_type == 0){
                     msg = 'محصول شما با موفقیت ثبت شد و پس از تایید کارشناسان در لیست محصولات نمایش داده میشود.';
                 }
                 else{
                     msg = 'محصول شما با موفقیت ثبت شد.';
                 }
-                
+
                 return msg;
             },
             registerComponentStatistics: function (categoryName, actionName, labelName) {

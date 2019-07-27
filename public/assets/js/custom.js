@@ -1,23 +1,23 @@
-var viz = false;
+var visible = false;
 
 function dropdown() {
     $(".profile-list").fadeIn("slow", function () {
-        viz = true;
+        visible = true;
     });
 }
 
 function dropdownList() {
     $(".icon-header-list").fadeIn("slow", function () {
-        viz = true;
+        visible = true;
     });
 }
 
 
 $(document).click(function () {
-    if (viz) {
+    if (visible) {
         $('.profile-list').fadeOut("slow");
         $('.icon-header-list').fadeOut("slow");
-        viz = false;
+        visible = false;
     }
 });
 $(document).ready(function () {

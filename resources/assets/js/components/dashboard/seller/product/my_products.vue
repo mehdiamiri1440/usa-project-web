@@ -70,7 +70,7 @@
             width: 100%;
         }
 
-        .user-contents .green_bot {
+        .user-contents .green-button {
             float: left;
             width: initial;
             padding: 15px 30px;
@@ -81,23 +81,27 @@
     <div>
         <main id="main" class="col-sm-12">
             <div class="contents">
-
                 <div v-if="products.length > 0">
-                    <product-article  v-for="(product,productIndex) in products"
-                 :key="product.main.id"
+                    <ProductArticle
+                            v-for="(product,productIndex) in products"
+                            :key="product.main.id"
                             :product="product"
                             :loading_img="loading_img"
                             :defultimg="defultimg"
                             :str="str"
                             :loading="loading"
                             :currentUser="currentUser"
-                    >
-                    </product-article>
+                    />
                 </div>
-                <div class="col-xs-12" v-if="products.length == 0 && !loading">
+                <div class="col-xs-12" v-if="products.length === 0 && !loading">
                     <div class="wrapper_no_pro">
-                        <div class="content_no_pic"><i class="fa fa-list-alt"></i></div>
-                        <div class="text_no_pic"><p>محصولی ثبت نشده است</p></div>
+                        <div class="content_no_pic">
+                            <i class="fa fa-list-alt"></i>
+                        </div>
+
+                        <div class="text_no_pic">
+                            <p>محصولی ثبت نشده است</p>
+                        </div>
                     </div>
                 </div>
                 <div class="loading_images  col-xs-12" v-show="loading">
@@ -109,10 +113,13 @@
 </template>
 
 <script>
-    import productArticle from '../../../../components/layouts/main/product_components/product_article';
+    import ProductArticle from '../../../../components/layouts/main/product_components/product_article';
     import {eventBus} from "../../../../../js/router/dashboard_router";
 
     export default {
+        components: {
+            ProductArticle,
+        },
         props: [
             'defultimg',
             'incobaicon',
@@ -151,14 +158,15 @@
                 loading :false
             }
         },
-
         methods: {
             init: function () {
                 var self = this;
                 self.loading = true;
+
                 axios.post('/user/profile_info')
                     .then(function (response) {
                             self.currentUser = response.data;
+
                             axios.post('/get_product_list_by_user_name', {
                                 user_name: self.currentUser.user_info.user_name
                             }).then(function (response) {
@@ -172,19 +180,9 @@
         mounted() {
             this.init();
             eventBus.$emit('subHeader', this.items);
-        }
-        ,
-        components: {
-            "product-article":
-            productArticle,
-        }
-        ,
+        },
         created() {
             gtag('config', 'UA-129398000-1', {'page_path': '/my-products'});
         }
-        ,
-    }
-    ;
-
-
+    };
 </script>

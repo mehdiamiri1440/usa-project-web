@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 
     /*start style sub-header*/
     .sub-header {
@@ -43,9 +43,11 @@
         height: 3px;
         width: 100%;
     }
+
     .sub-header a.active {
         color: #313942;
     }
+
     .sub-header a.active::after {
         content: " ";
         position: absolute;
@@ -55,27 +57,29 @@
         height: 3px;
         width: 100%;
     }
+
     /*end style sub-header*/
+
 </style>
 
 <template>
     <div class="sub-header">
         <ul class="list-inline">
             <li class="list-item" v-for="item in items" :class="item.active">
-                <router-link :to="{ name : item.url }">
-                    {{ item.message }}
-                </router-link>
+                <router-link :to="{ name : item.url }" v-text="item.message" />
             </li>
         </ul>
 
     </div>
 </template>
+
 <script>
     import {eventBus} from "../../../../../../router/dashboard_router";
+
     export default {
         data: function () {
-            return{
-                items:[]
+            return {
+                items: []
             }
         },
         created() {

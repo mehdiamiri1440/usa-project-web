@@ -1,5 +1,5 @@
 
-var viz=false;
+var visible=false;
 
 var OwlCarousel =  {
     data:function(){
@@ -57,19 +57,19 @@ var vm = new Vue({
         methods: {
             dropdown: function () {
                 $(".profile-list").fadeIn("slow", function () {
-                    viz = true;
+                    visible = true;
                 });
             },
             dropdownList: function () {
                 $(".icon-header-list").fadeIn("slow", function () {
-                    viz = true;
+                    visible = true;
                 });
             },
             documentClick(e) {
-                if (viz) {
+                if (visible) {
                     $('.profile-list').fadeOut("slow");
                     $('.icon-header-list').fadeOut("slow");
-                    viz = false;
+                    visible = false;
 
                 }
             },

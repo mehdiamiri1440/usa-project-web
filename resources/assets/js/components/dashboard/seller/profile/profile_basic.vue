@@ -103,19 +103,19 @@
         overflow: hidden;
     }
 
-    .header-lable {
+    .header-label {
         display: block;
         margin: 13px;
         padding: 0;
     }
 
-    .content-lable {
+    .content-label {
         font-weight: 400;
     }
 
     /*end main content style */
     /*custom cods*/
-    .green-bot {
+    .green-button {
         margin: 15px 0;
         display: inline-block;
         background: #28a745;
@@ -127,7 +127,7 @@
         transition: 300ms;
     }
 
-    .green-bot:hover {
+    .green-button:hover {
         color: #fff;
         background: #00d614;
         transition: 300ms;
@@ -373,100 +373,146 @@
             <div class="img-profile col-md-3">
                 <div class="image-input">
                     <div v-if="currentUser.profile.profile_photo">
-                        <img :src="str + '/' + currentUser.profile.profile_photo" id="image-preview"
-                             alt="تصویر پروفایل">
+                        <img :src="str + '/' + currentUser.profile.profile_photo"
+                             class="image-preview"
+                             alt="تصویر پروفایل"
+                        />
                     </div>
+
                     <div v-else>
-                        <img :src="defultimg" align="تصویر پروفایل" id="image-preview">
+                        <img :src="defultimg" align="تصویر پروفایل" class="image-preview">
                     </div>
+
                     <div class="submit">
                         <input type="file" id="imgInp" ref="profilePhoto">
                         <label>ویرایش تصویر</label>
                         <br/>
                         <span v-if="errors.profile_photo"
-                              class="text-danger tex-left">{{ errors.profile_photo[0] }}</span>
+                              class="text-danger tex-left"
+                              v-text="errors.profile_photo[0]"
+                        >
+                        </span>
                     </div>
                 </div>
             </div>
             <div class="main-profile col-md-9">
                 <div class="kind_user col-xs-12">
-                    <label class="header-lable ">
+                    <label class="header-label ">
                         نوع کاربری
                     </label>
                     <div class=" col-xs-6 col-md-4">
-                        حقیقی <input @click="disable_form()" type="radio" name="kind_user" value="0"
-                                     v-model="currentUser.profile.is_company">
+                        حقیقی
+                        <input @click="disableForm()"
+                               type="radio"
+                               name="kind_user"
+                               value="0"
+                               v-model="currentUser.profile.is_company"
+                        >
+
                         <i class="fa fa-check"></i>
                     </div>
+
                     <div class=" col-xs-6 col-md-4">
-                        حقوقی <input @click="enable_form()" type="radio" name="kind_user" value="1"
-                                     v-model="currentUser.profile.is_company">
+                        حقوقی
+                        <input @click="enableForm()"
+                               type="radio"
+                               name="kind_user"
+                               value="1"
+                               v-model="currentUser.profile.is_company"
+                        >
                         <i class="fa fa-check"></i>
                     </div>
-                    <span v-if="errors.is_company" class="text-danger">{{ errors.is_company[0] }}</span>
+
+                    <span v-if="errors.is_company"
+                          class="text-danger"
+                          v-text="errors.is_company[0]"
+                    >
+                    </span>
+
                 </div>
                 <div class="user-form col-xs-12">
-
-                    <label class="header-lable">
+                    <label class="header-label">
                         مشخصات کاربری
                     </label>
 
                     <div class="col-xs-12 col-sm-6">
-                        <label for="co-num" class="content-lable">
+                        <label for="company-number" class="content-label">
                             شماره ثبت شرکت:
                         </label>
-                        <input type="text" id="co-num" name="company-number" placeholder="شماره ثبت شرکت"
-                               v-model="currentUser.profile.company_register_code" disabled="disabled">
-                        <span v-if="errors.company_register_code" class="text-danger">{{ errors.company_register_code[0]
-                            }}</span>
+
+                        <input type="text" id="company-number"
+                               name="company-number"
+                               placeholder="شماره ثبت شرکت"
+                               v-model="currentUser.profile.company_register_code"
+                               disabled="disabled">
+
+                        <span v-if="errors.company_register_code"
+                              class="text-danger"
+                              v-text="errors.company_register_code[0]"></span>
                     </div>
                     <div class="col-xs-12 col-sm-6">
-                        <label for="company" class="content-lable">
+                        <label for="company" class="content-label">
                             نام شرکت:
                         </label>
-                        <input type="text" id="company" name="company" placeholder="نام شرکت"
-                               v-model="currentUser.profile.company_name" disabled>
-                        <span v-if="errors.company_name" class="text-danger">{{ errors.company_name[0] }}</span>
+
+                        <input type="text"
+                               id="company"
+                               name="company"
+                               placeholder="نام شرکت"
+                               v-model="currentUser.profile.company_name"
+                               disabled>
+
+                        <span v-if="errors.company_name"
+                              class="text-danger"
+                              v-text="errors.company_name[0]"
+                        ></span>
+
                     </div>
 
                     <div class="col-xs-12 col-sm-6">
 
-                        <label for="company" class="content-lable">
+                        <label for="company" class="content-label">
                             شماره تماس:
                         </label>
-                        <input type="text" name="tel" placeholder="شماره تماس"
-                               v-model="currentUser.profile.public_phone">
-                        <span v-if="errors.public_phone" class="text-danger">{{ errors.public_phone[0] }}</span>
-                    </div>
-                    <div class="col-xs-12 col-sm-6">
+                        <input type="text"
+                               name="tel"
+                               placeholder="شماره تماس"
+                               v-model="currentUser.profile.public_phone"
+                        >
 
-                        <label for="company" class="content-lable">
+                        <span v-if="errors.public_phone"
+                              class="text-danger"
+                              v-text="errors.public_phone[0]"
+                        >
+                        </span>
+
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6">
+                        <label for="company" class="content-label">
                             آدرس:
                         </label>
-                        <input type="text" name="address" placeholder="آدرس" v-model="currentUser.profile.address">
-                        <span v-if="errors.address" class="text-danger">{{ errors.address[0] }}</span>
+
+                        <input type="text"
+                               name="address"
+                               placeholder="آدرس"
+                               v-model="currentUser.profile.address">
+
+                        <span v-if="errors.address"
+                              class="text-danger"
+                              v-text="errors.address[0]"
+                        >
+                        </span>
+
                     </div>
-<!--
-                    <div class="col-xs-12 col-sm-6">
-                        <label for="company" class="content-lable">
-                            کد پستی(اختیاری):
-                        </label>
-                        <input type="text" name="address" placeholder="کد پستی"
-                               v-model="currentUser.profile.postal_code">
-                        <span v-if="errors.postal_code" class="text-danger">{{ errors.postal_code[0] }}</span>
-                    </div>
-                    <div class="col-xs-12 col-sm-6">
-                        <label for="company" class="content-lable">
-                            شماره شبا(اختیاری):
-                        </label>
-                        <input type="text" name="address" placeholder="شماره شبا"
-                               v-model="currentUser.profile.shaba_code">
-                        <span v-if="errors.shaba_code" class="text-danger">{{ errors.shaba_code[0] }}</span>
-                    </div>
--->
+
                     <div class="col-xs-12">
-                        <input type="button" class="green-bot" name="submit" value="ثبت تغییرات"
-                               v-on:click="RegisterBasicProfileInfo">
+                        <input type="button"
+                               class="green-button"
+                               name="submit"
+                               value="ثبت تغییرات"
+                               v-on:click="RegisterBasicProfileInfo"
+                        >
                     </div>
 
                 </div>
@@ -479,8 +525,8 @@
 
 <script>
     import {eventBus} from "../../../../router/dashboard_router";
-    import ImageCompressor from '@xkeshi/image-compressor';
-    import FileUpload from 'vue-upload-component';
+
+
     export default {
         props: [
             'str',
@@ -514,13 +560,9 @@
                 errors: '',
                 popUpMsg: '',
                 items: [
-//                    {
-//                        message: 'قرارداد',
-//                        url: 'profileContract',
-//                    },
                     {
                         message: ' اطلاعات تکمیلی',
-                        url: 'compelementry',
+                        url: 'complementary',
                     },
                     {
                         message: 'اطلاعات پایه',
@@ -539,7 +581,6 @@
                 eventBus.$emit('submiting', true);
                 this.errors = '';
                 var self = this;
-
                 var data = new FormData();
 
                 for (var i = 0, cnt = this.profileBasicFields.length; i < cnt; i++) {
@@ -555,11 +596,11 @@
 
                 axios.post('/user/profile_modification', data)
                     .then(function (response) {
-                        if (response.status == 200) {
+                        if (response.status === 200) {
                             eventBus.$emit('submiting', false);
                             self.popUpMsg = 'تغییرات با موفقیت اعمال شد';
                             eventBus.$emit('submitSuccess', self.popUpMsg);
-                            $('#myModal').modal('show');
+                            $('#custom-main-modal').modal('show');
                         }
                         self.submiting = false;
                     })
@@ -592,20 +633,22 @@
                         return numDic[w];
                     });
             },
-            disable_form: function () {
-                var feild_co_num = $("#co-num");
-                var feild_co = $("#company");
+            disableForm: function () {
+                var companyNumber = $("#company-number");
+                var companyName = $("#company-name");
+
                 this.currentUser.profile.company_register_code = null;
                 this.currentUser.profile.company_name = null;
-                feild_co_num.attr('disabled', true);
-                feild_co.attr('disabled', true);
+
+                companyNumber.attr('disabled', true);
+                companyName.attr('disabled', true);
             },
-            enable_form: function () {
-                var feild_co_num = $("#co-num");
-                var feild_co = $("#company");
-                feild_co.val('');
-                feild_co_num.prop('disabled', false);
-                feild_co.prop('disabled', false);
+            enableForm: function () {
+                var companyNumber = $("#company-number");
+                var companyName = $("#company-name");
+                companyName.val('');
+                companyNumber.prop('disabled', false);
+                companyName.prop('disabled', false);
             }
         },
         mounted(){
@@ -615,12 +658,12 @@
             function show_image_preview(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
-                    var image = $('#image-preview');
-                    var icon_profile = $('#icon-pro');
+                    var image = $('.image-preview');
+                    var iconProfile = $('#icon-pro');
                     reader.onload = function (e) {
                         image.attr('src', e.target.result);
                         image.css('display', 'inline');
-                        icon_profile.css('display', 'none');
+                        iconProfile.css('display', 'none');
                     };
                     reader.readAsDataURL(input.files[0]);
                 }
@@ -628,15 +671,16 @@
             }
 
             function image_checked() {
-                var image = $('#image-preview');
-                var icon_profile = $('#icon-pro');
-                if (image.attr('src') != "") {
+                var image = $('.image-preview');
+                var iconProfile = $('#icon-pro');
+                if (image.attr('src') !== "") {
                     image.css('display', 'inline');
-                    icon_profile.css('display', 'none');
+                    iconProfile.css('display', 'none');
                 }
             }
 
             image_checked();
+
             $("#imgInp").change(function () {
                 show_image_preview(this);
             })

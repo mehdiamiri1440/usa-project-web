@@ -23,17 +23,21 @@
     footer, header, menu, nav, section {
         display: block;
     }
-    a,a:focus,a:active,a:visited,input,input:focus,input:active{
+
+    a, a:focus, a:active, a:visited, input, input:focus, input:active {
         outline: none;
     }
+
     body {
         line-height: 1.1;
         font-family: IRANSans, sans-serif;
         font-size: 14px;
     }
-   select,option, textarea{
+
+    select, option, textarea {
         font-family: IRANSans, sans-serif;
     }
+
     ol, ul {
         list-style: none;
     }
@@ -65,9 +69,30 @@
         padding: 7px;
         text-align: right;
     }
-    .green_bot:focus,.green_bot:hover{
+
+    .green-button {
+        margin: 15px 0 0;
+        display: inline-block;
+        background: #28a745;
+        color: #fff;
+        padding: 10px 35px;
+        border-radius: 3px;
+        text-align: center;
+        border: none;
+        -webkit-transition: 300ms;
+        transition: 300ms;
+    }
+    .green-button:hover {
+        background: #279b41;
+        color: #fff;
+    }
+    .green-button:focus,.gray-bot:focus {
+        color: #fff;
+    }
+    .green-button:focus, .green-button:hover {
         color: #fff !important;
     }
+
     /*start style right header*/
     .logo {
         height: 64px;
@@ -196,7 +221,7 @@
     }
 
     .header-menu {
-        padding:0;
+        padding: 0;
     }
 
     .header-menu a:hover {
@@ -313,6 +338,7 @@
         z-index: -1;
         display: none;
     }
+
     /*end style right header*/
 
     /*loader*/
@@ -361,13 +387,16 @@
     .loader-wrapper {
         display: none;
     }
-    span.min{
+
+    span.min {
         display: none;
     }
+
     .choose-file {
         background: #fff;
     }
-    .modal-content .green_bot {
+
+    .modal-content .green-button {
         margin: 15px;
 
         display: inline-block;
@@ -390,14 +419,47 @@
 
         width: initial;
     }
-    .green_bot.delete {
+
+    .green-button.delete {
         background: #e41c38;
         color: #fff;
     }
+
+    .sub-header a.router-link-exact-active {
+        color: #313942;
+    }
+
+    .sub-header a.router-link-exact-active::after {
+        content: " ";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: #28a745;
+        height: 3px;
+        width: 100%;
+    }
+
+    .header-menu a.router-link-exact-active::before, a.active::before {
+        content: " ";
+        height: 100%;
+        width: 2px;
+        background: #00d614;
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: block;
+    }
+
+    .header-menu a.router-link-exact-active, a.active {
+        color: #fff;
+        background: #637484;
+    }
+
     @media screen and (max-width: 994px) {
-        .content-header{
+        .content-header {
             display: none;
         }
+
         .img-profile {
             padding-top: 20px;
         }
@@ -457,18 +519,21 @@
     }
 
     @media screen and (max-width: 768px) {
-        .mobile-header .green-bot {
+        .mobile-header .green-button {
             margin: 15px 0 0;
         }
+
         .mobile-header ul a {
             padding: 15px 20px;
         }
+
         .image-content-post, .contents-post {
             width: 100%;
             float: none;
             margin: 10px 0;
             padding: 0;
         }
+
         #step1 .main_buttons {
             text-align: center !important;
         }
@@ -484,23 +549,28 @@
     }
 
     @media screen and (max-width: 555px) {
-        span.min{
+        span.min {
             display: inherit;
         }
-        span.full{
+
+        span.full {
             display: none;
         }
+
         .right-menu-header {
             padding: 6px;
             border-right: 1px solid #eff3f6;
         }
-        .profile-menu-header  .user_name{
-            display:none;
+
+        .profile-menu-header .user_name {
+            display: none;
         }
+
         .content-header {
             display: none;
         }
-        .right-menu-header .green-bot {
+
+        .right-menu-header .green-button {
             padding: 10px 15px;
         }
 
@@ -511,12 +581,15 @@
             font-size: 10px;
 
         }
+
         .show-header button {
             padding: 19px 26px 19px 19px;
         }
+
         .right-menu-header {
-            padding: 6px ;
+            padding: 6px;
         }
+
         .sub-header {
 
             bottom: -44px;
@@ -527,44 +600,58 @@
     /*end loader*/
 </style>
 <template>
+
     <div>
+        <div class="container">
+            <div id="deleteModal"
+                 class="modal"
+                 tabindex="-1"
+                 role="dialog"
+                 aria-labelledby="myLargeModalLabel"
+            >
 
-          <div class="container">
-                <div id="deleteModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="main_popup_content">
-                                <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
-                                <p class="main_par">
-                                    {{popUpMsg}}
-                                </p>
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="main_popup_content">
+                            <a href="#" data-dismiss="modal">
+                                <i class="fa fa-close"></i>
+                            </a>
 
-                            <a href="#" class="btn green_bot delete" data-dismiss="modal" @click.prevent="deleteProduct()">
-                                {{deleteButtonText}}
-                            </a>
-                            <a href="#" class="btn green_bot " data-dismiss="modal">
-                                {{cancelButtonText}}
-                            </a>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div>
+                            <p class="main-pop-up" v-text="popUpMsg"></p>
+
+                            <a href="#" class="btn green-button delete" data-dismiss="modal"
+                               @click.prevent="deleteProduct()" v-text="deleteButtonText"></a>
+
+                            <a href="#" class="btn green-button " data-dismiss="modal" v-text="cancelButtonText"></a>
+
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
             </div>
+        </div>
 
 
         <!-- Modal -->
         <div class="container">
-            <div class="modal fade" id="myModal" tabindex="-1" ref="myModal" role="dialog"
+            <div class="modal fade"
+                 id="custom-main-modal"
+                 tabindex="-1"
+                 ref="custom-main-modal"
+                 role="dialog"
                  aria-labelledby="myModalLabel"
-                 aria-hidden="true">
+                 aria-hidden="true"
+            >
+
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="main_popup_content">
-                            <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
-                            <p class="main_par">
-                                {{popUpMsg}}
-                            </p>
-                            <button class="btn green-bot " data-dismiss="modal">
+                            <a href="#" data-dismiss="modal">
+                                <i class="fa fa-close"></i>
+                            </a>
+
+                            <p class="main-pop-up" v-text="popUpMsg"></p>
+
+                            <button class="btn green-button" data-dismiss="modal">
                                 متوجه شدم
                             </button>
                         </div>
@@ -572,18 +659,27 @@
                 </div><!-- /.modal-dialog -->
             </div>
         </div>
+
         <div class="container">
-            <div class="modal fade" id="myModal-1" tabindex="-1" ref="myModal" role="dialog"
-                 aria-labelledby="myModalLabel"
-                 aria-hidden="true">
+
+            <div class="modal fade"
+                 id="confirmation-modal"
+                 tabindex="-1"
+                 ref="confirmation-modal"
+                 role="dialog"
+                 aria-labelledby="confirmation-modal-label"
+                 aria-hidden="true"
+            >
+
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
-                            <p class="main_par">
-                        لطفا پس از تکمیل اطلاعات پروفایل خود، منتظر تماس کارشناسان اینکوباک جهت تکمیل اطلاعات باشید. از شکیبایی شما سپاسگزاریم.
+                            <p class="main-pop-up">
+                                لطفا پس از تکمیل اطلاعات پروفایل خود، منتظر تماس کارشناسان اینکوباک جهت تکمیل اطلاعات
+                                باشید. از شکیبایی شما سپاسگزاریم.
                             </p>
-                            <button class="btn green-bot " data-dismiss="modal">
+                            <button class="btn green-button " data-dismiss="modal">
                                 متوجه شدم
                             </button>
                         </div>
@@ -591,21 +687,28 @@
                 </div><!-- /.modal-dialog -->
             </div>
         </div>
+
         <div class="container">
-            <div class="modal fade" id="myModal-2" tabindex="-1" ref="myModal" role="dialog"
+            <div class="modal fade"
+                 id="modal-buttons"
+                 tabindex="-1"
+                 ref="myModal"
+                 role="dialog"
                  aria-labelledby="myModalLabel"
-                 aria-hidden="true">
+                 aria-hidden="true"
+            >
+
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
-                            <p class="main_par">
-                                {{popUpMsg}}
+                            <p class="main-pop-up" v-text="popUpMsg">
+
                             </p>
-                            <button class="btn green-bot " data-dismiss="modal">
+                            <button class="btn green-button " data-dismiss="modal">
                                 متوجه شدم
                             </button>
-                            <a class="btn green-bot" href='/pricing'>
+                            <a class="btn green-button" href='/pricing'>
                                 مشاهده تعرفه ها
                             </a>
                         </div>
@@ -613,19 +716,30 @@
                 </div><!-- /.modal-dialog -->
             </div>
         </div>
-  <div class="container">
-            <div class="modal fade" id="contractModalWrapper" tabindex="-1" ref="myModal" role="dialog"
-                 aria-labelledby="myModalLabel"
-                 aria-hidden="true">
+
+        <div class="container">
+            <div class="modal fade"
+                 id="contract-modal-wrapper"
+                 tabindex="-1"
+                 ref="contract-modal-wrapper"
+                 role="dialog"
+                 aria-labelledby="contract-modal-wrapper-label"
+                 aria-hidden="true"
+            >
+
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="main_popup_content">
-                            <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
-                          <p class="main_par" id="contractModal">
+                            <a href="#" data-dismiss="modal">
+                                <i class="fa fa-close"></i>
+                            </a>
 
-    برای شروع استفاده از خدمات اینکوباک ابتدا در قسمت ویرایش پروفایل، قرارداد همکاری را مطالعه و تایید کنید.
-                          </p>
-                            <button class="btn green-bot " data-dismiss="modal">
+                            <p class="main-pop-up" id="contractModal">
+                                برای شروع استفاده از خدمات اینکوباک ابتدا در قسمت ویرایش پروفایل، قرارداد همکاری را
+                                مطالعه و تایید کنید.
+                            </p>
+
+                            <button class="btn green-button " data-dismiss="modal">
                                 متوجه شدم
                             </button>
                         </div>
@@ -634,115 +748,128 @@
             </div>
         </div>
         <!-- /.modal -->
-        <!--loader-->
+
+        <!--loading upload-->
         <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
             <div class="main-loader">
-<!--                <img :src="loading">-->
                 <p dir="rtl">{{uploadPercentage}}%</p>
                 <progress max="100" :value="uploadPercentage"></progress>
                 <p dir="rtl">در حال بارگذاری...</p>
             </div>
         </div>
-        <!--end loader-->
+        <!--loading upload-->
+
         <section class="right-header mobile-header">
             <header class="header-right-header">
                 <button class="close_menu_mob">
                     <i class="fa fa-angle-right"></i>
                 </button>
+
                 <button class="close_menu">
                     <i class="fa fa-angle-right"> </i>
                 </button>
-                <h1 class="logo"><a href="/"><img :src="logo" alt="incoboc"></a></h1>
+
+                <span class="logo">
+                    <a href="/">
+                        <img :src="logo" alt="incoboc">
+                    </a>
+                </span>
             </header>
 
 
             <section class="main-right-header">
 
-                <profileinfo
+                <ProfileInfo
                         :photoLink="currentUser.profile.profile_photo"
                         :storage="storage"
                         :def="defultimg"
                         :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
                         :usercity="currentUser.user_info.province + ' - ' + currentUser.user_info.city"
                         :userprof="currentUser.user_info.user_name"
-                >
-                </profileinfo>
+                />
 
-                <header-menu-list
+                <HeaderMenuList
                         :byadreq="byadreq"
                         :selregpro="selregpro"
                         :transactroute="transactroute"
-                        :mytrans="mytrans">
+                        :mytrans="mytrans"
+                />
 
-                </header-menu-list>
                 <div class="copy-right">
                     <!--
                      <p dir="rtl">
                          تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.
                      </p>-->
                 </div>
+
             </section>
 
-            <div class="background_mob_sec">
+            <div class="background_mob_sec"></div>
 
-            </div>
         </section>
+
         <section class="right-header desktop-header">
             <header class="header-right-header">
                 <button class="close_menu_mob">
                     <i class="fa fa-angle-right"> </i>
                 </button>
+
                 <button class="close_menu">
                     <i class="fa fa-angle-right"> </i>
                 </button>
-                <h1 class="logo"><a href="/"><img :src="logo" alt="incoboc"></a></h1>
+
+                <span class="logo">
+                    <a href="/">
+                        <img :src="logo" alt="incoboc">
+                    </a>
+                </span>
             </header>
+
             <section class="main-right-header">
-                <profileinfo
+                <ProfileInfo
                         :photoLink="currentUser.profile.profile_photo"
                         :storage="storage"
                         :def="defultimg"
                         :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
                         :usercity="currentUser.user_info.province + ' - ' + currentUser.user_info.city"
                         :userprof="currentUser.user_info.user_name"
-                >
-                </profileinfo>
+                />
 
-                <header-menu-list
+                <HeaderMenuList
                         :byadreq="byadreq"
                         :selregpro="selregpro"
                         :transactroute="transactroute"
                         :mytrans="mytrans"
                         :guide="guide"
 
-                >
+                />
 
-                </header-menu-list>
             </section>
         </section>
-        <headerTop
+
+        <HeaderTop
                 :photoLink="currentUser.profile.profile_photo"
                 :storage="storage"
                 :def="defultimg"
                 :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
                 :out="logout"
                 :routeHome="routehome"
-        ></headerTop>
+       />
     </div>
 
 </template>
 
 <script>
     import {eventBus} from "../../../../router/dashboard_router";
-    import profileinfo from './sub-com/profile_info.vue'
-    import headerMenuList from './sub-com/header-menu-list.vue'
-    import headerTop from './sub-com/header-top.vue'
+    import ProfileInfo from './sub-com/profile_info.vue'
+    import HeaderMenuList from './sub-com/header-menu-list.vue'
+    import HeaderTop from './sub-com/header-top.vue'
 
     export default {
         components: {
-            profileinfo,
-            headerMenuList,
-            headerTop
+            ProfileInfo,
+            HeaderMenuList,
+            HeaderTop
         },
         props: [
             'defultimg',
@@ -760,9 +887,9 @@
         ],
         data: function () {
             return {
-                deleteButtonText:'',
-                cancelButtonText:'',
-                ProductId:'',
+                deleteButtonText: '',
+                cancelButtonText: '',
+                ProductId: '',
                 currentUser: {
                     profile: {
                         is_company: '',
@@ -790,15 +917,15 @@
                 errors: '',
                 popUpMsg: '',
                 submiting: false,
-                uploadPercentage:0,
+                uploadPercentage: 0,
 
             }
         },
         methods: {
 
             init: function () {
-
                 this.isLoaded = true;
+
                 axios.post('/user/profile_info')
                     .then(response => (this.currentUser = response.data)
                     );
@@ -807,7 +934,6 @@
                 this.submiting = true;
                 this.errors = '';
                 var self = this;
-
                 var data = new FormData();
 
                 for (var i = 0, cnt = this.profileBasicFields.length; i < cnt; i++) {
@@ -817,16 +943,18 @@
                 }
 
                 let profilePhoto = this.$refs.profilePhoto.files[0];
+
                 if (profilePhoto) {
                     data.append('profile_photo', profilePhoto);
                 }
 
                 axios.post('/user/profile_modification', data)
                     .then(function (response) {
-                        if (response.status == 200) {
+                        if (response.status === 200) {
                             self.submiting = false;
                             self.popUpMsg = 'تغییرات با موفقیت اعمال شد';
-                            $('#myModal').modal('show');
+
+                            $('#custom-main-modal').modal('show');
                         }
                         self.submiting = false;
                     })
@@ -860,10 +988,10 @@
                     });
             },
             toggleHeader() {
-                var menuCloseButton= $(".close_menu");
+                var menuCloseButton = $(".close_menu");
                 var menuCloseButtonIcon = $(".close_menu i");
                 var profile = $(".profile");
-                var headerMenu= $(".header-menu span");
+                var headerMenu = $(".header-menu span");
                 var headerMenuLink = $(".header-menu a");
                 var logo = $(".logo");
                 var copyRight = $(".copy-right");
@@ -871,8 +999,9 @@
                 var littleMainHeader = $(".main-header");
                 var main = $("#main");
                 var nextMove = "shrink";
+
                 menuCloseButton.click(function () {
-                    if (nextMove == "expand") {
+                    if (nextMove === "expand") {
                         $(this).css({
                             width: "30%"
                         });
@@ -892,8 +1021,6 @@
                         $(this).css({
                             width: "100%"
                         });
-                        menuCloseButtonIcon.addClass('fa-angle-left', 200).removeClass('fa-angle-right', 200);
-                        // menuCloseButtonIcon.switchClass("fa-angle-right"," fa-angle-left",200);
                         profile.css('display', 'none');
                         headerMenu.css('display', 'none');
                         copyRight.css('display', 'none');
@@ -901,9 +1028,14 @@
                         headerMenuLink.css({
                             "text-align": "center"
                         });
+
+                        menuCloseButtonIcon.addClass('fa-angle-left', 200).removeClass('fa-angle-right', 200);
+                        // menuCloseButtonIcon.switchClass("fa-angle-right"," fa-angle-left",200);
+
                         rightHeaderDesktop.addClass("little_header", 200);
                         littleMainHeader.addClass("little-main-header", 200);
                         main.addClass("little-main", 200);
+
                         nextMove = "expand";
                     }
                 });
@@ -915,8 +1047,9 @@
                 var rightHeader = $(".right-header.mobile-header");
                 var back = $(".background_mob_sec");
                 var closeHeaderButtonMobileLinks = $('.mobile-header .header-menu a');
+
                 showHeaderButtonElement.on('click', function () {
-                    if (flag == true) {
+                    if (flag === true) {
                         rightHeader.animate({
                             right: '0'
                         }, 300);
@@ -930,8 +1063,9 @@
                         flag = true;
                     }
                 });
+
                 closeHeaderButtonMobile.on('click', function () {
-                    if (flag == true) {
+                    if (flag === true) {
                         rightHeader.animate({
                             right: '0'
                         }, 300);
@@ -945,8 +1079,9 @@
                         flag = true;
                     }
                 });
+
                 closeHeaderButtonMobileLinks.on('click', function () {
-                    if (flag == true) {
+                    if (flag === true) {
                         rightHeader.animate({
                             right: '0'
                         }, 300);
@@ -960,8 +1095,9 @@
                         flag = true;
                     }
                 });
-                back.on('click',function () {
-                    if (flag == true) {
+
+                back.on('click', function () {
+                    if (flag === true) {
                         rightHeader.animate({
                             right: '0'
                         }, 300);
@@ -976,27 +1112,27 @@
                     }
                 })
             },
-            deleteProduct:function(){
+            deleteProduct: function () {
                 var self = this;
 
-                axios.post('/delete_product_by_id',{
-                    product_id : self.productId
+                axios.post('/delete_product_by_id', {
+                    product_id: self.productId
                 })
-                .then(function(response){
-                    //show product deleted message
-                    //code
-                    self.popUpMsg = 'حذف شد.';
-                    $('#myModal').modal('show');
+                    .then(function (response) {
+                        //show product deleted message
+                        //code
+                        self.popUpMsg = 'حذف شد.';
+                        $('#custom-main-modal').modal('show');
 
-                    setTimeout(function(){
-                        window.location.reload();
-                    },3000);
-                })
-                .catch(function(err){
-                    //show modal
-                    self.popUpMsg = 'خطایی رخ داده است.لطفا دوباره تلاش کنید.';
-                    $('#myModal').modal('show');
-                });
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 3000);
+                    })
+                    .catch(function (err) {
+                        //show modal
+                        self.popUpMsg = 'خطایی رخ داده است.لطفا دوباره تلاش کنید.';
+                        $('#custom-main-modal').modal('show');
+                    });
             }
 
         },
@@ -1012,7 +1148,7 @@
             eventBus.$on('submitSuccess', (event) => {
                 this.popUpMsg = event;
             });
-             eventBus.$on('deleteButtonText', (event) => {
+            eventBus.$on('deleteButtonText', (event) => {
                 this.deleteButtonText = event;
             });
 
@@ -1026,16 +1162,16 @@
                 this.uploadPercentage = event;
             });
         },
-        metaInfo(){
+        metaInfo() {
             return {
                 title: 'بازارگاه کشاورزی',
-                titleTemplate:'اینکوباک | %s',
+                titleTemplate: 'اینکوباک | %s',
             }
         },
-        watch:{
-            uploadPercentage:function(){
+        watch: {
+            uploadPercentage: function () {
                 console.log(this.uploadPercentage);
-            }   
+            }
         }
     }
 </script>

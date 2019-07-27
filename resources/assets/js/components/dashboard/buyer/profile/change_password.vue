@@ -279,19 +279,19 @@
         overflow: hidden;
     }
 
-    .header-lable {
+    .header-label {
         display: block;
         margin: 13px;
         padding: 0;
     }
 
-    .content-lable {
+    .content-label {
         font-weight: 400;
     }
 
     /*end main content style */
     /*custom cods*/
-    .green-bot {
+    .green-button {
         margin: 15px 0;
         display: inline-block;
         background: #28a745;
@@ -303,7 +303,7 @@
         transition: 300ms;
     }
 
-    .green-bot:hover {
+    .green-button:hover {
         color: #fff;
         background: #00d614;
         transition: 300ms;
@@ -552,36 +552,46 @@
             <div class="main-profile col-xs-12">
 
                 <div class="user-form col-xs-12">
-
-                    <label class="header-lable">
+                    <label class="header-label">
                        تغییر کلمه عبور
                     </label>
 
 
                     <div class="col-sm-12">
-                        <label for="old-password" class="content-lable">
+                        <label for="old-password" class="content-label">
                             کلمه عبور فعلی:
                         </label>
+
                         <input id="old-password" type="password" v-model="currentPassword" placeholder="کلمه عبور فعلی">
-                        <span class="text-danger" v-if="errors.current_password">{{ errors.current_password[0] }}</span>
+                        <span class="text-danger" v-if="errors.current_password" v-text="errors.current_password[0]"></span>
+
                     </div>
+
                     <div class="col-sm-12">
-                        <label for="new-password" class="content-lable">
+                        <label for="new-password" class="content-label">
                             کلمه عبور جدید:
                         </label>
+
                         <input id="new-password" type="password" v-model="newPassword" placeholder="کلمه عبور جدید">
-                        <span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
+
+                        <span class="text-danger" v-if="errors.password" v-text="errors.password[0]"></span>
+
                     </div>
                     <div class="col-sm-12">
-                        <label for="repeat-new-password" class="content-lable">
+                        <label for="repeat-new-password" class="content-label">
                             تکرار کلمه عبور جدید:
                         </label>
+
                         <input id="repeat-new-password" type="password" v-model="newPasswordRepeat" placeholder="کلمه عبور جدید">
-                        <span class="text-danger" v-if="errors.password_repeat">{{ errors.password_repeat[0] }}</span>
+
+                        <span class="text-danger" v-if="errors.password_repeat" v-text="errors.password_repeat[0]"></span>
+
                     </div>
+
                     <div class="col-xs-12">
-                        <input type="button" class="green-bot" name="submit" value="ارسال"
+                        <input type="button" class="green-button" name="submit" value="ارسال"
                                v-on:click="changePassword">
+
                     </div>
 
                 </div>
@@ -622,40 +632,39 @@
             }
         },
         methods: {
-            init: function () {
-
-            },
             changePassword: function(){
                 this.errorFlag = false;
+
                 this.passwordValidator(this.currentPassword,this.newPassword,this.newPasswordRepeat);
 
-                if(this.errorFlag == false){
+                if(this.errorFlag === false){
                     //send Request
                     var self  = this;
+
                     axios.post('/change_password',{
                         current_password: self.currentPassword,
                         new_password: self.newPassword
                     })
                     .then(function(response){
-                        if(response.data.status == true){
+                        if(response.data.status === true){
                             //show modal password changed
-
                             self.popUpMsg = 'کلمه عبور با موفقیت تغییر یافت';
+
                             eventBus.$emit('submitSuccess', self.popUpMsg);
-                            $('#myModal').modal('show');
+
+                            $('#custom-main-modal').modal('show');
                         }
-                        else if(response.data.status == false){
+                        else if(response.data.status === false){
                             self.errors.current_password.push('رمز عبور فعلی درست نیست');
                         }
                     })
                     .catch(function(err){
                         //failed for unknown reason try again later
-                        alert('test');
+                        alert('failed unknown Error');
                     });
+
                 }
-                else{
-                    //
-                }
+
             },
             passwordValidator:function(currentPass,pass,passConf){
                 this.errors.password = [];
@@ -678,10 +687,11 @@
                     this.errors.password_repeat.push('تکرار رمز عبور الزامی است');
                     this.errorFlag = true;
                 }
-                if(passConf != pass){
+                if(passConf !== pass){
                     this.errors.password_repeat.push('رمز عبور مطابقت ندارد');
                     this.errorFlag = true;
                 }
+
             },
             toLatinNumbers: function (num) {
                 if (num == null) {
@@ -708,7 +718,6 @@
             },
         },
         mounted() {
-            this.init();
             eventBus.$emit('subHeader', this.items);
         },
         created(){

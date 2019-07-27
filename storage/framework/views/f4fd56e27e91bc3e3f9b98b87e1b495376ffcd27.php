@@ -31,8 +31,8 @@
     <link rel="stylesheet" href="<?php echo e(asset('index/css/index_master.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('index/css/projects.css')); ?>">
 
-    
-    
+
+
 
 </head>
 
@@ -58,7 +58,7 @@
         <div class="navbar-header">
             <?php if(session('user_id')): ?>
                 <div class="user-header-mobile">
-                    <div class="profile-menu-header"><a href="#" onclick="dropdown()">
+                    <div class="profile-menu-header"><a href="#" onclick="collapseDropDown()">
                             <div class="image-header-profile">
                                 <?php if(session('profile_photo')): ?>
                                     <img src="<?php echo e('storage/'  . session('profile_photo')); ?>">
@@ -106,7 +106,7 @@
                 <?php if(session('user_id')): ?>
 
                     <li class="user-header-web">
-                        <div class="profile-menu-header"><a href="#" onclick="dropdown()">
+                        <div class="profile-menu-header"><a href="#" onclick="collapseDropDown()">
                                 <div class="image-header-profile">
                                     <?php if(session('profile_photo')): ?>
                                         <img src="<?php echo e('storage/'  . session('profile_photo')); ?>">

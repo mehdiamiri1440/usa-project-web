@@ -45,19 +45,19 @@
         padding: 15px;
     }
 
-    .header-lable {
+    .header-label {
         display: block;
         margin: 13px;
         padding: 0;
     }
 
-    .content-lable {
+    .content-label {
         font-weight: 400;
     }
 
     /*end main content style */
     /*custom cods*/
-    .green-bot {
+    .green-button {
         margin: 15px 0;
         display: inline-block;
         background: #28a745;
@@ -90,7 +90,7 @@
         transition: 300ms;
     }
 
-    .green-bot:hover {
+    .green-button:hover {
         color: #fff;
         background: #00d614;
         transition: 300ms;
@@ -182,7 +182,7 @@
         padding-left: 0;
     }
 
-    .profile_link .green-bot {
+    .profile_link .green-button {
         font-size: 11px;
         float: left;
         padding: 10px 15px;
@@ -382,7 +382,7 @@
         }
 
 
-        /*.profile_link .green-bot {
+        /*.profile_link .green-button {
             width: 100%;
             margin:7px 0;
         }
@@ -439,7 +439,7 @@
                     <div class="profile_link col-xs-12 col-sm-5">
                         <a href="/dashboard/my-buyAds" class="black-bot">بازگشت به صفحه قبل</a>
                         <a :href="'/profile/' + sellOfferDetail.sell_offer_user_info.user_name"
-                           class="green-bot">
+                           class="green-button">
                             پروفایل تامین کننده
                         </a>
                     </div>
@@ -480,12 +480,12 @@
                         <div class="col-xs-12 actions">
                             <div v-show='sellOfferDetail.sell_offer.is_pending'>
                                 <!--    <div class="col-xs-12 col-sm-6">
-                                    <button type="button" class="green-bot " @click=initiateBuy(sellOfferDetail.sell_offer.id)>آغاز فرآیند خرید</button>
+                                    <button type="button" class="green-button " @click=initiateBuy(sellOfferDetail.sell_offer.id)>آغاز فرآیند خرید</button>
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
-                                        <button type="button" class="green-bot" @click=rejectBuy(sellOfferDetail.sell_offer.id)>رد این پیشنهاد</button>
+                                        <button type="button" class="green-button" @click=rejectBuy(sellOfferDetail.sell_offer.id)>رد این پیشنهاد</button>
                                  </div>-->
-                                <a href="#" @click.prevent="openChat()" class="green-bot"><i class="fa fa-comment"></i> ارسال
+                                <a href="#" @click.prevent="openChat()" class="green-button"><i class="fa fa-comment"></i> ارسال
                                     پیام </a>
                             </div>
                             <p class='text-success' v-show='sellOfferDetail.sell_offer.is_accepted'>شما قبلا این پیشنهاد
@@ -609,10 +609,10 @@
 
                             eventBus.$emit('submitSuccess', self.popUpMsg);
 
-                            $('#myModal').modal('show');
-                            $('#myModal').on('shown.bs.modal', function (e) {
+                            $('#custom-main-modal').modal('show');
+                            $('#custom-main-modal').on('shown.bs.modal', function (e) {
                                 $('#close-btn').on('click', function (e) {
-                                    $('#myModal').modal('hide');
+                                    $('#custom-main-modal').modal('hide');
                                     window.location.href = '/dashboard/my-buyAds';
                                 });
                             });
@@ -621,7 +621,7 @@
                     .catch(function (err) {
                         self.popUpMsg = 'خطایی رخ داده است.لطفا اتصال به اینترنت خود را بررسی کنید سپس دوباره تلاش کنید.';
 
-                        $('#myModal').modal('show');
+                        $('#custom-main-modal').modal('show');
                     });
             },
             rejectBuy: function (id) {
@@ -636,10 +636,10 @@
 
                             eventBus.$emit('submitSuccess', self.popUpMsg);
 
-                            $('#myModal').modal('show');
-                            $('#myModal').on('shown.bs.modal', function (e) {
+                            $('#custom-main-modal').modal('show');
+                            $('#custom-main-modal').on('shown.bs.modal', function (e) {
                                 $('#close-btn').on('click', function (e) {
-                                    $('#myModal').modal('hide');
+                                    $('#custom-main-modal').modal('hide');
                                     window.location.href = '/dashboard/my-buyAds';
                                 });
                             });
@@ -650,7 +650,7 @@
 
                         eventBus.$emit('submitSuccess', self.popUpMsg);
 
-                        $('#myModal').modal('show');
+                        $('#custom-main-modal').modal('show');
                     });
             },
             openChat:function(){

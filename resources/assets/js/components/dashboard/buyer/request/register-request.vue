@@ -3,6 +3,7 @@
         height: 120px;
         float: right;
     }
+
     #main {
         margin-right: 250px;
         margin-top: 65px;
@@ -12,6 +13,7 @@
     #main.little-main {
         margin-right: 80px;
     }
+
     .image_company {
         margin: 15px auto;
 
@@ -38,13 +40,14 @@
         direction: rtl;
     }
 
-    .header-lable {
+    .header-label {
         display: block;
         margin: 13px;
         padding: 0;
     }
-    .content-lable{
-        font-weight:400 ;
+
+    .content-label {
+        font-weight: 400;
     }
 
     .roules-check-inside {
@@ -53,7 +56,7 @@
 
     /*end main content style */
     /*custom cods*/
-    .green-bot {
+    .green-button {
         margin: 15px 0;
         display: inline-block;
         background: #28a745;
@@ -69,7 +72,7 @@
         width: 100%;
     }
 
-    .green-bot:hover {
+    .green-button:hover {
         color: #fff;
         background: #29A045;
         transition: 300ms;
@@ -266,297 +269,221 @@
 <template>
     <section class="main-content col-xs-12">
         <div class="company_des">
-            <div clss="col-xs-12 min_cols">
+            <div class="col-xs-12 main-column">
                 <div class="col-xs-12 col-sm-6">
-                    <label>
+                    <label for="product-category">
                         <span class="text-danger">*</span> دسته ی محصول
                     </label>
-                    <select class="profile_select" v-on:change="loadSubCategoryList($event)">
+
+                    <select id="product-category" class="profile-select" v-on:change="loadSubCategoryList($event)">
                         <option disabled selected>لطفا انتخاب کنید</option>
                         <option v-for="category in categoryList"
                                 v-bind:value="category.id"
-                        >{{category.category_name}}</option>
+                                v-text="category.category_name"></option>
                     </select>
                 </div>
+
                 <div class="col-xs-12 col-sm-6">
-                    <label>
+                    <label for="product-sub-category">
                         <span class="text-danger">*</span> نام محصول
                     </label>
-                    <select class="profile_select" v-on:change="setCategoryId($event)">
+                    <select id="product-sub-category" class="profile-select" v-on:change="setCategoryId($event)">
                         <option disabled selected>لطفا انتخاب کنید</option>
                         <option v-for="category in SubCategoryList"
                                 v-bind:value="category.id"
-                        >{{category.category_name}}</option>
+                                v-text="category.category_name"></option>
                     </select>
+
                     <span v-if="errors.category_id" class="text-danger">فیلد دسته ی محصول الزامی است</span>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <label>
                         نوع محصول <span class="sub-des">(مثال:مضافتی)</span> </label>
+
                     <input type="text" placeholder="نوع محصول" v-model="buyAd.name">
-                    <span v-if="errors.name" class="text-danger" >{{ errors.name[0] }}</span>
+
+                    <span v-if="errors.name" class="text-danger">{{ errors.name[0] }}</span>
                 </div>
-<!--
+
                 <div class="col-xs-12 col-sm-6">
                     <label>
-                        <span class="text-danger">*</span> نوع بسته بندی
+                        <span class="text-danger">*</span> میزان نیازمندی <span class="sub-des">(کیلوگرم)</span>
                     </label>
-                    <input type="text" placeholder="نوع بسته بندی" v-model="buyAd.pack_type">
-                    <span v-if="errors.pack_type" class="text-danger" >{{ errors.pack_type[0] }}</span>
-                </div>
--->
-                <div class="col-xs-12 col-sm-6">
-                    <label>
-                        <span class="text-danger">*</span> میزان نیازمندی <span class="sub-des">(کیلوگرم)</span> </label>
                     <input type="text" placeholder="میزان نیازمندی" v-model="buyAd.requirement_amount">
-                    <span v-if="errors.requirement_amount" class="text-danger" >{{ errors.requirement_amount[0] }}</span>
+                    <span v-if="errors.requirement_amount" class="text-danger"
+                          v-text="errors.requirement_amount[0]"></span>
                 </div>
-<!--
-                <div class="col-xs-12 col-sm-6">
-                    <label>
-                        قیمت <span class="sub-des">(هر کیلو به تومان)</span> </label>
-                    <input type="text" placeholder="قیمت" v-model="buyAd.price">
-                    <span v-if="errors.price" class="text-danger" >{{ errors.price[0] }}</span>
-                </div>
--->
-<!--
-                <div class="col-xs-12 col-sm-6">
-                    <label>
-                        محل تحویل </label>
-                    <input type="text" placeholder="محل تحویل" v-model="buyAd.address">
-                    <span v-if="errors.address" class="text-danger" >{{ errors.address[0] }}</span>
-                </div>
--->
-
             </div>
-<!--
-            <div class="col-xs-12">
-                <label>
-                    <span class="text-danger">*</span> توضیحات
-                </label>
-                <textarea placeholder="تمام جزییات مورد نظر خود را مطرح کنید..." v-model="buyAd.description"></textarea>
-                <span v-if="errors.description" class="text-danger" >{{ errors.description[0] }}</span>
-            </div>
--->
+        </div>
 
-        </div>
-<!--
-        <div class="image_company col-xs-12">
-            <label>
-                تصاویر نمونه محصول، بسته بندی و ...
-            </label>
-            <buyAdFiles
-                    uploadName = "simple_images"
-                    uploadAccept = "image/*"
-                    :uploadMinSize = "1024"
-                    :uploadSize = "1024 * 1024 * 10"
-                    :uploadMultiple = "true"
-                    :uploadDrop = "true"
-                    :uploadDropDirectory = "true"
-                    :uploadAddIndex = "false"
-                    :uploadThread = "3"
-                    :uploadOCompress = "1024 * 1024"
-                    :uploadUploadAuto = "false"
-                    :uploadRef="buyAdFiles"
-            ></buyAdFiles>
-        </div>
-        <div class="rules col-xs-12">
-            با    <span class="roules-check-inside">قوانین و شرایط</span>
-            ثبت آگهی موافقم<input type="checkbox" v-model="buyAd.rules">
-            <i class="fa fa-check"></i>
-        </div>
--->
         <div class="col-md-3 col-md-offset-9 col-xs-12">
-            <input class="green-bot width-full" value="ثبت درخواست" type="button"   @click="submitBuyAd" :disabled="disableSubmit == true">
+            <input class="green-button width-full" value="ثبت درخواست" type="button" @click="submitBuyAd"
+                   :disabled="disableSubmit === true">
         </div>
     </section>
 </template>
 <script>
-    import buyAdFiles from '../../upload-image'
+    import BuyAdFiles from '../../upload-image'
     import {eventBus} from "../../../../router/dashboard_router";
-  export default {
-      components:{
-          buyAdFiles
-      },
-      data:function(){
-          return {
-              errors:'',
-              currentUser:{
-                  profile:'',
-                  user_info: '',
-              },
-              buyAd : {
-                  name:'',
-                  requirement_amount:'',
-                  price:'',
-                  description:'',
-                  address:'',
-                  pack_type:'',
-                  category_id:'',
-                  rules:false,
-              },
-              buyAdFields:[
-                  'name',
-//                  'stock',
-                  'requirement_amount',
-//                  'price',
-//                  'pack_type',
-//                  'description',
-//                  'address',
-//                  'pack_type',
-                  'category_id',
-              ],
-              categoryList:'',
-              SubCategoryList:'',
-              categorySelected:'',
-              cities:'',
-              buyAdFiles:[],
-              popUpMsg:'',
-              profileConfirmed:false,
-              disableSubmit:false,
-              submiting:false,
-              items: [
-                  {
-                      message: ' ثبت درخواست جدید',
-                      url: 'registerRequest'
-                  }
-              ]
-          };
-      },
-      methods:{
-          init:function(){
-              axios.post('/user/profile_info')
-                  .then(response => (this.currentUser = response.data));
-              axios.post('/get_category_list')
-                  .then(response => (this.categoryList = response.data.categories));
-          },
-          loadSubCategoryList:function(e){
-              e.preventDefault();
-              var categoryId = $(e.target).val();
 
-              axios.post('/get_category_list',{
-                  parent_id : categoryId,
-              }).then(response => (this.SubCategoryList = response.data.categories));
-          },
-          submitBuyAd:function(){
-              this.errors = '';
-              var self = this;
+    export default {
+        components: {
+            BuyAdFiles
+        },
+        data: function () {
+            return {
+                errors: '',
+                currentUser: {
+                    profile: '',
+                    user_info: '',
+                },
+                buyAd: {
+                    name: '',
+                    requirement_amount: '',
+                    price: '',
+                    description: '',
+                    address: '',
+                    pack_type: '',
+                    category_id: '',
+                    rules: false,
+                },
+                buyAdFields: [
+                    'name',
+                    'requirement_amount',
+                    'category_id',
+                ],
+                categoryList: '',
+                SubCategoryList: '',
+                categorySelected: '',
+                cities: '',
+                buyAdFiles: [],
+                popUpMsg: '',
+                profileConfirmed: false,
+                disableSubmit: false,
+                submiting: false,
+                items: [
+                    {
+                        message: ' ثبت درخواست جدید',
+                        url: 'registerRequest'
+                    }
+                ]
+            };
+        },
+        methods: {
+            init: function () {
+                axios.post('/user/profile_info')
+                    .then(response => (this.currentUser = response.data));
 
-//              if(this.buyAd.rules != true){
-//                  self.popUpMsg = 'ابتدا تیک با قوانین موافق هستم را بزنید.';
-//                  eventBus.$emit('submitSuccess',self.popUpMsg);
-//                  $('#myModal').modal('show');
-//              }
-//              else{
-                  eventBus.$emit('submitingEvent', true);
+                axios.post('/get_category_list')
+                    .then(response => (this.categoryList = response.data.categories));
+            },
+            loadSubCategoryList: function (e) {
+                e.preventDefault();
 
-                  var self = this;
+                var categoryId = $(e.target).val();
 
-                  let formData = this.getBuyAdFormFields();
+                axios.post('/get_category_list', {
+                    parent_id: categoryId,
+                })
+                    .then(response => (this.SubCategoryList = response.data.categories));
+            },
+            submitBuyAd: function () {
+                this.errors = '';
+                var self = this;
 
-                  axios.post('/user/add_buyAd',formData)
-                      .then(function(response){
-                          if(response.status == 201){
-                              self.disableSubmit = true;
-                              self.popUpMsg = 'درخواست شما با موفقیت ثبت شد';
-                              eventBus.$emit('submitSuccess', self.popUpMsg);
-                              $('#myModal').modal('show');
-                              eventBus.$emit('submitingEvent', false);
-                              
-                              
-                              self.registerComponentStatistics('buyAd-register','buyAd-registered-successfully','buyAd-registered-successfully');
-                              
-                              
-                              setTimeout(function () {
-                                    location.reload(true);
-                                }, 3000);
-                          }
-                          eventBus.$emit('submitingEvent', false);
-                      })
-                      .catch(function(err){
-                          self.errors = err.response.data.errors;
-                          eventBus.$emit('submitingEvent', false);
-                          self.registerComponentExceptions('validation error in buyAd-request');
-                      });
-//              }
+                eventBus.$emit('submitingEvent', true);
 
-          },
-          getBuyAdFormFields:function(){
-              let formData = new FormData();
-              let cnt = this.buyAdFields.length;
+                let formData = this.getBuyAdFormFields();
 
-              for(var i = 0 ; i < cnt ; i++){
-                  formData.append(this.buyAdFields[i],this.toLatinNumbers(this.buyAd[this.buyAdFields[i]]));
-              }
+                axios.post('/user/add_buyAd', formData)
+                    .then(function (response) {
+                        if (response.status === 201) {
+                            self.disableSubmit = true;
+                            self.popUpMsg = 'درخواست شما با موفقیت ثبت شد';
 
-//              for(var i = 0; i < this.buyAdFiles.length; i++ ){
-//                  let file = this.buyAdFiles[i];
-//                  formData.append('image_' + i , file);
-//              }
-//              formData.append('images_count',this.buyAdFiles.length);
+                            eventBus.$emit('submitSuccess', self.popUpMsg);
 
-              return formData;
-          },
-          setCategoryId:function(e){
-              e.preventDefault();
+                            $('#custom-main-modal').modal('show');
 
-              this.buyAd.category_id = $(e.target).val();
-          },
-          setCityId:function(cityId){
-              this.buyAd.city_id = cityId;
-          },
-//          handleBuyAdFilesUpload:function(){
-//              let uploadedFiles = this.$refs.buyAdFiles.files ;
-//              /*
-//                Adds the uploaded file to the files array
-//              */
-//              for( var i = 0; i < uploadedFiles.length; i++ ){
-//                  this.buyAdFiles.push( uploadedFiles[i] );
-//              }
-//          },
-          toLatinNumbers:function(num){
-              if(num == null){
-                  return '';
-              }
-              var numDic = {
-                  '۰': '0',
-                  '۱': '1',
-                  '۲': '2',
-                  '۳': '3',
-                  '۴': '4',
-                  '۵': '5',
-                  '۶': '6',
-                  '۷': '7',
-                  '۸': '8',
-                  '۹': '9',
-              };
+                            eventBus.$emit('submitingEvent', false);
 
-              return num
-                  .toString()
-                  .replace(/[۰-۹]/g,function(w){
-                      return numDic[w];
-                  });
-          },
-          registerComponentStatistics: function (categoryName, actionName, labelName) {
-                gtag('event', actionName,{
+                            self.registerComponentStatistics('buyAd-register', 'buyAd-registered-successfully', 'buyAd-registered-successfully');
+
+                            setTimeout(function () {
+                                location.reload(true);
+                            }, 3000);
+                        }
+                        eventBus.$emit('submitingEvent', false);
+                    })
+                    .catch(function (err) {
+                        self.errors = err.response.data.errors;
+
+                        eventBus.$emit('submitingEvent', false);
+
+                        self.registerComponentExceptions('validation error in buyAd-request');
+                    });
+
+            },
+            getBuyAdFormFields: function () {
+                let formData = new FormData();
+                let cnt = this.buyAdFields.length;
+
+                for (var i = 0; i < cnt; i++) {
+                    formData.append(this.buyAdFields[i], this.toLatinNumbers(this.buyAd[this.buyAdFields[i]]));
+                }
+                return formData;
+            },
+            setCategoryId: function (e) {
+                e.preventDefault();
+
+                this.buyAd.category_id = $(e.target).val();
+            },
+            setCityId: function (cityId) {
+                this.buyAd.city_id = cityId;
+            },
+            toLatinNumbers: function (num) {
+                if (num == null) {
+                    return '';
+                }
+                var numDic = {
+                    '۰': '0',
+                    '۱': '1',
+                    '۲': '2',
+                    '۳': '3',
+                    '۴': '4',
+                    '۵': '5',
+                    '۶': '6',
+                    '۷': '7',
+                    '۸': '8',
+                    '۹': '9',
+                };
+
+                return num
+                    .toString()
+                    .replace(/[۰-۹]/g, function (w) {
+                        return numDic[w];
+                    });
+            },
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName, {
                     'event_category': categoryName,
                     'event_label': labelName
                 });
             },
-            registerComponentExceptions:function(description,fatal = false){
-                gtag('event','exception',{
+            registerComponentExceptions: function (description, fatal = false) {
+                gtag('event', 'exception', {
                     'description': description,
                     'fatal': fatal
                 });
             }
-      },
-      mounted(){
-//          $('input[type="file"]').imageuploadify();
-          this.init();
-          eventBus.$emit('subHeader', this.items);
-      },
-      created(){
-          gtag('config','UA-129398000-1',{'page_path': '/register-request'});
-      }
-  }
+        },
+        mounted() {
+            this.init();
+
+            eventBus.$emit('subHeader', this.items);
+        },
+        created() {
+            gtag('config', 'UA-129398000-1', {'page_path': '/register-request'});
+        }
+    }
 </script>

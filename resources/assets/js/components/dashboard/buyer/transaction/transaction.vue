@@ -61,7 +61,7 @@
         padding: 60px 15px;
     }
 
-    .header-lable {
+    .header-label {
         display: block;
         margin: 13px;
         padding: 0;
@@ -69,7 +69,7 @@
 
     /*end main content style */
     /*custom cods*/
-    .green-bot {
+    .green-button {
         margin: 15px 0;
         display: inline-block;
         background: #28a745;
@@ -80,7 +80,7 @@
         border: none;
         transition: 300ms;
     }
-    .green-bot:focus,.gray-bot:focus {
+    .green-button:focus,.gray-bot:focus {
         color: #fff;
     }
     .default_btn{
@@ -110,7 +110,7 @@
         background: #ddd;
         transition: 300ms;
     }
-    .green-bot:hover {
+    .green-button:hover {
         color: #fff;
         background: #00d614;
         transition: 300ms;
@@ -518,7 +518,7 @@
                                 <a href="#" class="default_btn" @click.prevent="goToPrePage()">صفحه قبل</a>
                             </div>
                             <div class="continue_but col-xs-12 col-sm-4 col-md-3">
-                                <a href="#" @click.prevent="confirmContract()" class="green-bot">تایید قرارداد</a>
+                                <a href="#" @click.prevent="confirmContract()" class="green-button">تایید قرارداد</a>
                             </div>
 
                         </div>
@@ -768,7 +768,7 @@
                         </div>
                         <div class="buttons">
                             <div class="main_buttons col-xs-12">
-                                <a href="#" @click.prevent="payPrepayment" class="green-bot">پرداخت آنلاین</a>
+                                <a href="#" @click.prevent="payPrepayment" class="green-button">پرداخت آنلاین</a>
                             </div>
                         </div>
                     </div>
@@ -863,7 +863,7 @@
                         </div>
                         <div class="buttons">
                             <div class="main_buttons col-xs-12 ">
-                                <a href="#" class="green-bot" @click.prevent="finalPayment">پرداخت آنلاین</a>
+                                <a href="#" class="green-button" @click.prevent="finalPayment">پرداخت آنلاین</a>
                             </div>
                         </div>
                     </div>

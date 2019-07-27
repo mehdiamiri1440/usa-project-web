@@ -62,9 +62,7 @@
     <div class="sub-header">
         <ul class="list-inline">
             <li class="list-item" v-for="item in items" :class="item.active">
-                <router-link :to="{ name : item.url }">
-                    {{ item.message }}
-                </router-link>
+                <router-link :to="{ name : item.url }" v-text="item.message" />
             </li>
         </ul>
 
@@ -72,6 +70,7 @@
 </template>
 <script>
     import {eventBus} from "../../../../../../router/dashboard_router";
+
     export default {
         data: function () {
             return{

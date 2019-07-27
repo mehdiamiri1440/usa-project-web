@@ -71,7 +71,7 @@ NAVIGATION LINKS
                 <?php if(session('user_id')): ?>
                     <div class="user-header-mobile">
                         <div class="profile-menu-header">
-                            <a href="#" @click.prevent="dropdown()">
+                            <a href="#" @click.prevent="collapseDropDown()">
                                 <div class="image-header-profile">
                                     <?php if(session('profile_photo')): ?>
                                         <img src="<?php echo e('storage/'  . session('profile_photo')); ?>">
@@ -121,7 +121,7 @@ NAVIGATION LINKS
                     <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
                     <?php if(session('user_id')): ?>
                         <li class="user-header-web">
-                            <div class="profile-menu-header"><a href="#" @click.prevent="dropdown()">
+                            <div class="profile-menu-header"><a href="#" @click.prevent="collapseDropDown()">
                                     <div class="image-header-profile">
                                         <?php if(session('profile_photo')): ?>
                                             <img src="<?php echo e('storage/'  . session('profile_photo')); ?>">

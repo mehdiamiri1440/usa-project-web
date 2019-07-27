@@ -1,12 +1,17 @@
 <style scoped>
-    .green_bot.edit-product {
+
+    .green-button:focus, .green-button:hover {
+        color: #fff !important;
+    }
+    .green-button.edit-product {
         background: #000546;
     }
-    .green_bot:focus {
+
+    .green-button:focus {
         color: #fff;
     }
 
-    .green_bot.edit-product:hover {
+    .green-button.edit-product:hover {
         background: #000430;
     }
 
@@ -129,21 +134,25 @@
         border-radius: 3px;
         width: 100% !important;
     }
+
     input[type="text"], textarea {
         padding: 13px 15px;
     }
+
     label {
         display: block;
         margin: 9px auto;
     }
 
-    @media screen  and (max-width: 767px){
+    @media screen  and (max-width: 767px) {
         .buy_details {
             padding: 15px 0;
         }
-        .main-image,.article-contents{
-            padding:  0;
+
+        .main-image, .article-contents {
+            padding: 0;
         }
+
         .main-content-item {
             padding: 15px 0 0;
         }
@@ -153,8 +162,9 @@
 <template>
     <div>
         <script v-html="jsonLDObject" type="application/ld+json"></script>
+
         <article class="main-content-item">
-            <product-user-info
+            <ProductUserInfo
                     :profile_photo="product.profile_info.profile_photo"
                     :user_info="product.user_info"
                     :user_full_name="product.user_info.first_name + ' ' +
@@ -164,119 +174,172 @@
                     :current_user="currentUser"
                     :product_id="product.main.id"
                     :is_my_profile_status="isMyProfile"
-            ></product-user-info>
+            />
+
             <div class="article-contents col-xs-12  col-sm-9">
                 <div class="main-image col-xs-12 col-sm-5">
                     <div class="owl-carousel" v-if="product.photos.length > 0">
-                        <image-viewer-list @click="registerComponentStatistics('productImageViewer','click','popUp')"
-                                           v-for="photo in product.photos"
-                                           :key="photo.id"
-                                           :base="str + '/'"
-                                           :img="photo.file_path"
-                                           :alt="'فروش عمده ی ' + product.main.sub_category_name + ' '  +product.main.product_name + ' ' + product.main.city_name + ' - ' + product.main.province_name"
-                                           v-on:popUpLoaded=updatePopUpStatus($event)>
-                        </image-viewer-list>
+                        <OwlCarouselLists @click="registerComponentStatistics('productImageViewer','click','popUp')"
+                                          v-for="photo in product.photos"
+                                          :key="photo.id"
+                                          :base="str + '/'"
+                                          :img="photo.file_path"
+                                          :alt="'فروش عمده ی ' + product.main.sub_category_name +
+                                            ' '  +
+                                            product.main.product_name +
+                                            ' ' +
+                                            product.main.city_name +
+                                             ' - ' +
+                                            product.main.province_name"
+                                          v-on:popUpLoaded=updatePopUpStatus($event)
+                        />
 
                     </div>
                 </div>
-                <div class="buttom-carousel-items-wrapper hidden-sm hidden-md hidden-lg col-xs-12">
-                   <div class="row">
-                       <div class="col-xs-6 text-left">
-                           <a href="#" @click.prevent="copyProductLinkToClipBoard">
-                               <i class="fa fa-share-alt-square"></i>
-                           </a>
-                       </div>
-                       <div class="col-xs-6 text-right">
-                       </div>
 
-                   </div>
+                <div class="buttom-carousel-items-wrapper hidden-sm hidden-md hidden-lg col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-6 text-left">
+                            <a href="#" @click.prevent="copyProductLinkToClipBoard">
+                                <i class="fa fa-share-alt-square"></i>
+                            </a>
+                        </div>
+
+                        <div class="col-xs-6 text-right"></div>
+
+                    </div>
                 </div>
+
                 <div class="main-article-content col-xs-12 col-sm-7">
                     <h2 class="main-article-title">
-                        <a :href="productUrl" @click="registerComponentStatistics('product','show-product-in-seperate-page','show-product-in-seperate-page')">{{product.main.category_name + ' | ' +
-                            product.main.sub_category_name}}</a>
+                        <a :href="productUrl"
+                           @click="registerComponentStatistics('product',
+                           'show-product-in-seperate-page',
+                           'show-product-in-seperate-page')"
+
+                           v-text="product.main.category_name +
+                            ' | ' +
+                            product.main.sub_category_name">
+                        </a>
                     </h2>
 
-                    <p>نوع محصول: <span>{{product.main.product_name}}</span></p>
+                    <p>نوع محصول: <span v-text="product.main.product_name"></span></p>
+
                     <p>استان / شهر:
-                        <span>{{product.main.province_name + ' - ' + product.main.city_name}}</span>
-                    </p>
-                    <p>مقدار موجودی: <span>{{product.main.stock}} کیلوگرم</span></p>
-                    <p>حداقل سفارش: <span>{{product.main.min_sale_amount}} کیلوگرم</span></p>
-                    <p>قیمت: <span>{{product.main.min_sale_price + ' - ' + product.main.max_sale_price}}
-                                    تومان</span></p>
-                    <p>توضیحات: <span>{{product.main.description}}</span>
+                        <span v-text="product.main.province_name +
+                         ' - ' +
+                          product.main.city_name"
+                        ></span>
                     </p>
 
+                    <p>مقدار موجودی: <span v-text="product.main.stock + 'کیلوگرم'"></span>
+                    </p>
+
+                    <p>حداقل سفارش: <span v-text="product.main.min_sale_amount"> کیلوگرم</span>
+                    </p>
+
+                    <p>قیمت:
+                        <span v-text="product.main.min_sale_price +
+                         ' - ' +
+                         product.main.max_sale_price"
+                        >
+                            تومان
+                        </span>
+                    </p>
+
+                    <p>توضیحات: <span v-text="product.main.description"></span>
+                    </p>
                 </div>
+
                 <div class="col-xs-12">
                     <div class="row">
                         <div class="create_buy_mobile hidden-sm hidden-md hidden-lg">
-                            <a v-if="!isMyProfile" class="green_bot" href="#" @click.prevent="openChat(product)">
+                            <a v-if="!isMyProfile" class="green-button" href="#" @click.prevent="openChat(product)">
+
                                 <span class="fa fa-comment"></span> ارسال پیام
                             </a>
-                            <a v-if="isMyProfile" class="green_bot edit-product"  href="#" @click="openEditBox($event)" >
+
+                            <a v-if="isMyProfile" class="green-button edit-product" href="#"
+                               @click="openEditBox($event)">
+
                                 <span class="fa fa-pencil"></span> ویرایش
                             </a>
 
                         </div>
                     </div>
                 </div>
+
                 <div class="buy_details form-group  col-xs-12">
                     <input type="hidden" id="product-id" :value="product.main.id">
+
                     <div class="col-xs-12 col-sm-6 pull-right">
-                        <label for="stock" class="content-lable">
+                        <label for="stock" class="content-label">
                             مقدار موجودی (کیلوگرم):
                         </label>
+
                         <input id="stock" placeholder="مقدار موجودی" type="text"
                                class=" form-control" :value="product.main.stock">
-                        <span class="text-danger" v-if="errors.stock">{{errors.stock[0]}}</span>
+
+                        <span class="text-danger" v-if="errors.stock" v-text="errors.stock[0]"></span>
                     </div>
 
-                      <div class="col-xs-12 col-sm-6">
-                        <label for="min-sale-amount" class="content-lable">
-                            حداقل سفارش  (کیلوگرم):
+                    <div class="col-xs-12 col-sm-6">
+                        <label for="min-sale-amount" class="content-label">
+                            حداقل سفارش (کیلوگرم):
                         </label>
+
                         <input id="min-sale-amount" placeholder="حداقل سفارش" type="text"
                                class=" form-control" :value="product.main.min_sale_amount">
-                        <span class="text-danger" v-if="errors.min_sale_amount">{{errors.min_sale_amount[0]}}</span>
+
+                        <span class="text-danger" v-if="errors.min_sale_amount"
+                              v-text="errors.min_sale_amount[0]"></span>
                     </div>
-                     <div class="col-xs-12 col-sm-6 pull-right ">
-                               <label for="min-sale-price" class="content-lable">
-                                   حداقل قیمت:
-                               </label>
-                               <input id="min-sale-price" placeholder="حداقل قیمت" type="text" class=" form-control" :value="product.main.min_sale_price">
-                               <span class="text-danger" v-if="errors.min_sale_price">{{errors.min_sale_price[0]}}
+
+                    <div class="col-xs-12 col-sm-6 pull-right ">
+                        <label for="min-sale-price" class="content-label">
+                            حداقل قیمت:
+                        </label>
+
+                        <input id="min-sale-price" placeholder="حداقل قیمت" type="text" class=" form-control"
+                               :value="product.main.min_sale_price">
+
+                        <span class="text-danger" v-if="errors.min_sale_price" v-text="errors.min_sale_price[0]">
                                </span>
+
                     </div>
+
                     <div class="col-xs-12 col-sm-6 ">
+                        <label for="max-sale-price" class="content-label">
+                            حداکثر قیمت:
+                        </label>
 
-                               <label for="max-sale-price" class="content-lable">
-                                   حداکثر قیمت:
-                               </label>
-                               <input id="max-sale-price" placeholder="حداکثر قیمت" type="text" class=" form-control" :value="product.main.max_sale_price">
-                               <span class="text-danger" v-if="errors.max_sale_price">{{errors.max_sale_price[0]}}</span>
+                        <input id="max-sale-price" placeholder="حداکثر قیمت" type="text" class=" form-control"
+                               :value="product.main.max_sale_price">
 
-
+                        <span class="text-danger" v-if="errors.max_sale_price" v-text="errors.max_sale_price[0]"></span>
                     </div>
 
                     <div class="col-xs-12 ">
-                        <label for="description" class="content-lable">
+                        <label for="description" class="content-label">
                             توضیحات:
                         </label>
+
                         <textarea id="description" rows="5" placeholder="ویژگی های لازم محصول را توضیح دهید..."
                                   class=" form-control" :value="product.main.description"></textarea>
-                        <span class="text-danger" v-if="errors.description">{{errors.description[0]}}</span>
+                        <span class="text-danger" v-if="errors.description" v-text="errors.description[0]"></span>
+
                     </div>
-                    <div class="hidden-xs col-sm-8">
-                    </div>
+
+                    <div class="hidden-xs col-sm-8"></div>
+
                     <div class="col-xs-12 col-sm-4">
                         <button @click="editProduct($event)" type="submit" style="border:none"
-                                class="green_bot">ثبت ویرایش
+                                class="green-button">ثبت ویرایش
                         </button>
                     </div>
                 </div>
             </div>
+
             <div class="loading_images  col-xs-12"
                  v-if="loading">
                 <img :src="loading_img" style="width:200px;height:200px">
@@ -323,10 +386,9 @@
         template: '<div class="image-wrapper">' +
             '<a  :href="base + img">' +
             '<img :src="base + img" :alt="alt">' +
-            '</a>'+
+            '</a>' +
             '</div>',
         mounted: function () {
-            var self = this;
 
             $(".owl-carousel").owlCarousel({
                 loop: false,
@@ -334,8 +396,8 @@
                 margin: 10,
                 nav: false,
                 dots: true,
-                touchDrag:true,
-                mouseDrag:true,
+                touchDrag: true,
+                mouseDrag: true,
             });
             $(this.$el).parent().parent().parent().magnificPopup({
                 delegate: 'a',
@@ -359,9 +421,14 @@
             });
         },
     };
-    import productUserInfo from './product_user_info'
+    import ProductUserInfo from './product_user_info'
 
     export default {
+        components: {
+            PopupImage,
+            OwlCarouselLists,
+            ProductUserInfo,
+        },
         props: [
             'product',
             'defultimg',
@@ -370,41 +437,28 @@
             'loading_img',
             'currentUser',
         ],
-
         data: function () {
             return {
                 submiting: false,
                 errors: '',
-//                currentUser: {
-//                    profile: '',
-//                    user_info: ''
-//                },
                 popUpMsg: '',
                 popUpLoaded: false,
-                isMyProfile:false,
-                productUrl:'',
-                jsonLDObject:'',
+                isMyProfile: false,
+                productUrl: '',
+                jsonLDObject: '',
             }
         },
-        components: {
-            "popup": PopupImage,
-            'image-viewer-list': OwlCarouselLists,
-            "product-user-info": productUserInfo,
-        },
         methods: {
-
             init: function () {
-                var self = this;
-                
                 this.productUrl = this.getProductUrl();
-                
-                if(this.currentUser.user_info){
-                    if(this.currentUser.user_info.id == this.product.main.myuser_id){
+
+                if (this.currentUser.user_info) {
+                    if (this.currentUser.user_info.id === this.product.main.myuser_id) {
                         this.isMyProfile = true;
-                        this.$emit('isMyProfile',this.isMyProfile);
+                        this.$emit('isMyProfile', this.isMyProfile);
                     }
                 }
-                
+
                 this.jsonLDObject = this.createJsonLDObject();
             },
             toLatinNumbers: function (num) {
@@ -430,25 +484,23 @@
                         return numDic[w];
                     });
             },
-
             openEditBox: function (e) {
+                e.preventDefault();
+
                 if (this.currentUser.profile) {
-                    e.preventDefault;
                     var event = $(e.target);
-
                     this.errors = '';
-
                     var element = (event.parents('article').find('.buy_details'));
 
                     element.slideToggle("125", "swing");
                     $('.buy_details').not(element).slideUp();
 
                     this.scrollToTheRequestRegisterBox(element);
-                    
-                    this.registerComponentStatistics('product','open-edit-box','click on open edit box');
+
+                    this.registerComponentStatistics('product', 'open-edit-box', 'click on open edit box');
                 }
                 else {
-                    this.registerComponentExceptions('Product-component: click on open edit box while current user is undefined',true);
+                    this.registerComponentExceptions('Product-component: click on open edit box while current user is undefined', true);
                 }
 
             },
@@ -457,13 +509,12 @@
                 $('html, body').stop().animate({scrollTop: newPosition.top - 380}, 1000);
             },
             editProduct: function (e) {
-                e.preventDefault;
-                var event = $(e.target);
+                e.preventDefault();
 
                 this.submiting = true;
-
                 this.errors = '';
 
+                var event = $(e.target);
                 var productId = (event.parents('article').find('.buy_details input#product-id'));
                 var stock = (event.parents('article').find('.buy_details input#stock'));
                 var minSalePrice = (event.parents('article').find('.buy_details input#min-sale-price'));
@@ -486,58 +537,28 @@
                     min_sale_amount: minSaleAmount,
                 };
 
-                if(description != '') {
+                if (description !== '') {
                     request.description = description;
                 }
 
                 var self = this;
-                axios.post('/edit_product',request)
-                    .then(function(response){
-                         self.popUpMsg = 'محصول شما با موفقیت ویرایش شد.';
-                         eventBus.$emit('submitSuccess', self.popUpMsg);
-                         $('#myModal').modal('show');
-                    
-                         self.registerComponentStatistics('product','register-product-edit','product-edited-successfully');
+                axios.post('/edit_product', request)
+                    .then(function (response) {
+                        self.popUpMsg = 'محصول شما با موفقیت ویرایش شد.';
+                        eventBus.$emit('submitSuccess', self.popUpMsg);
+                        $('#custom-main-modal').modal('show');
+
+                        self.registerComponentStatistics('product', 'register-product-edit', 'product-edited-successfully');
                     })
-                    .catch(function(err){
+                    .catch(function (err) {
                         self.errors = '';
                         self.errors = err.response.data.errors;
-                    
+
                         self.registerComponentExceptions('Product-component: validation errors in edit product API');
                     });
-
-//                axios.post('/does_buyer_already_had_requested_the_produtct', {
-//                    product_id: productId,
-//                })
-//                    .then(function (response) {
-//
-//                        if (response.data.status == false) {
-//                            self.RegisterBuyAdRequest(request, productId);
-//                            self.submiting = false;
-//                        }
-//                        else {
-//                            self.popUpMsg = 'شما قبلا درخواست خرید این محصول را ثبت کرده اید!';
-//                            eventBus.$emit('submitSuccess', self.popUpMsg);
-//                            $('#myModal').modal('show');
-//                            self.submiting = false;
-//
-//                            return false;
-//                        }
-//                    })
-//                    .catch(function (e) {
-//                        self.popUpMsg = 'حساب کاربری شما از نوع خریداران نیست!';
-//                        eventBus.$emit('submitSuccess', self.popUpMsg);
-//                        $('#myModal').modal('show');
-//
-//                        self.submiting = false;
-//
-//                        return false;
-//                    });
-//
-
             },
-            openChat: function (product) {
 
+            openChat: function (product) {
                 this.registerComponentStatistics('product', 'openChat', 'click on open chatBox');
 
                 var contact = {
@@ -546,10 +567,10 @@
                     last_name: product.user_info.last_name,
                     profile_photo: product.profile_info.profile_photo,
                     user_name: product.user_info.user_name,
-                }
+                };
 
                 if (this.currentUser.user_info) {
-                    if (this.currentUser.user_info.id != product.user_info.id) {
+                    if (this.currentUser.user_info.id !== product.user_info.id) {
                         axios.post('/set_last_chat_contact', contact)
                             .then(function (response) {
                                 window.location.href = '/dashboard/messages';
@@ -561,30 +582,30 @@
                     else {
                         this.popUpMsg = 'شما نمیتوانید به خودتان پیام دهید.';
                         eventBus.$emit('submitSuccess', this.popUpMsg);
-                        $('#myModal').modal('show');
+                        $('#custom-main-modal').modal('show');
                     }
-
                 }
                 else {
                     this.popUpMsg = 'اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
                     eventBus.$emit('submitSuccess', this.popUpMsg);
-                    $('#myModal2').modal('show');
+                    $('#auth-popup').modal('show');
                 }
             },
             updatePopUpStatus: function (popUpOpenStatus) {
                 this.popUpLoaded = popUpOpenStatus;
             },
-            getProductUrl:function () {
-                
-                var url = '/product-view/خرید-عمده-'
-                    + this.product.main.sub_category_name.replace(' ','-')
+            getProductUrl: function () {
+
+                return '/product-view/خرید-عمده-'
+                    + this.product.main.sub_category_name.replace(' ', '-')
                     + '/'
-                    + this.product.main.category_name.replace(' ','-')
+                    + this.product.main.category_name.replace(' ', '-')
                     + '/'
                     + this.product.main.id;
-                return url;
+
             },
             copyProductLinkToClipBoard: function () {
+
                 this.registerComponentStatistics('product', 'copy-product-link', 'click on copy poduct link');
 
                 if (this.isDeviceMobile()) {
@@ -593,8 +614,10 @@
                     var Message = "https://incobac.com" + this.getProductUrl();
                     var messageToWhatsApp = encodeURIComponent(Message);
                     var url = "whatsapp://send?text=" + messageToWhatsApp;
+
                     linkElement.setAttribute('href', url);
                     linkElement.setAttribute('data-action', 'share/whatsapp/share');
+
                     document.body.appendChild(linkElement);
 
                     linkElement.click();
@@ -612,7 +635,7 @@
                     if (result) {
                         this.popUpMsg = 'آدرس محصول کپی شد.';
                         eventBus.$emit('submitSuccess', this.popUpMsg);
-                        $('#myModal').modal('show');
+                        $('#custom-main-modal').modal('show');
                     }
                 }
 
@@ -625,45 +648,46 @@
                     || navigator.userAgent.match(/iPod/i)
                     || navigator.userAgent.match(/BlackBerry/i)
                     || navigator.userAgent.match(/Windows Phone/i)
-                ) {
+                )
+                {
                     return true;
                 }
                 else {
                     return false;
                 }
             },
-            createJsonLDObject:function(){
+            createJsonLDObject: function () {
                 var fullName = this.product.user_info.first_name + ' ' + this.product.user_info.last_name;
-                
+
                 var productOwnerProfilePageUrl = "https://www.incobac.com/profile/" + this.product.user_info.user_name;
-                
+
                 let jsonDL = {
-                      "@context": "https://schema.org/",
-                      "@type": "Product",
-                      "name": this.product.main.name,
-                      "image": this.product.photos.map(function(photo){
-                          return 'https://www.incobac.com/storage/' + photo.file_path;
-                      }),
-                      "description": this.product.main.description,
-                      "aggregateRating": {
+                    "@context": "https://schema.org/",
+                    "@type": "Product",
+                    "name": this.product.main.name,
+                    "image": this.product.photos.map(function (photo) {
+                        return 'https://www.incobac.com/storage/' + photo.file_path;
+                    }),
+                    "description": this.product.main.description,
+                    "aggregateRating": {
                         "@type": "AggregateRating",
                         "ratingValue": "4.4",
                         "reviewCount": "3"
-                      },
-                      "offers": {
+                    },
+                    "offers": {
                         "@type": "Offer",
                         "url": "https://www.incobac.com" + this.getProductUrl(),
                         "priceCurrency": "IRR",
                         "price": this.product.main.min_sale_price * 10,
                         "availability": "https://schema.org/InStock",
                         "seller": {
-                          "@type": "Person",
-                          "name": fullName,
-                          "url" : productOwnerProfilePageUrl
+                            "@type": "Person",
+                            "name": fullName,
+                            "url": productOwnerProfilePageUrl
                         }
-                      }
+                    }
                 };
-                
+
                 return jsonDL;
             },
             registerComponentStatistics: function (categoryName, actionName, labelName) {
@@ -672,8 +696,8 @@
                     'event_label': labelName
                 });
             },
-            registerComponentExceptions:function(description,fatal = false){
-                gtag('event','exception',{
+            registerComponentExceptions: function (description, fatal = false) {
+                gtag('event', 'exception', {
                     'description': description,
                     'fatal': fatal
                 });

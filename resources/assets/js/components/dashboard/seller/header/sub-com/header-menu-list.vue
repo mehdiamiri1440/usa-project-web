@@ -1,5 +1,5 @@
 <style>
-    .custom-badge{
+    .custom-badge {
         position: absolute;
         left: 20px;
         top: 3px;
@@ -9,97 +9,61 @@
         border-radius: 50px;
         padding: 6px;
         color: #fff;
-    }
-    .sub-header a.router-link-exact-active {
-        color: #313942;
-    }
-
-    .sub-header a.router-link-exact-active::after {
-        content: " ";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        background: #28a745;
-        height: 3px;
-        width: 100%;
-    }
-
-    .header-menu a.router-link-exact-active::before, a.active::before {
-        content: " ";
-        height: 100%;
-        width: 2px;
-        background: #00d614;
-        position: absolute;
-        right: 0;
-        top: 0;
-        display: block;
-    }
-
-    .header-menu a.router-link-exact-active, a.active {
-        color: #fff;
-        background: #637484;
+        text-align: center;
     }
 
     .header-menu i.fa {
         margin: 5px;
     }
-
 </style>
 <template>
     <div>
         <div class="header-menu">
             <ul class="list-unstyled">
                 <li class="list-item">
-                    <router-link :class="{'active' : this.active_el === 1}" :to="{ name : 'profileBasic' }">
+                    <router-link :class="{'active' : this.activeElement === 0}"  :to="{ name : 'profileBasic' }">
                         <span>ویرایش پروفایل</span>
                         <i class="fa fa-user" aria-hidden="true"></i>
                     </router-link>
                 </li>
 
                 <li class="list-item  ">
-                    <router-link :class="{'active' : this.active_el === 2}" :to="{ name : 'buyAdRequests' }">
+                    <router-link  :to="{ name : 'buyAdRequests' }">
                         <span>درخواست ها</span>
                         <i class="fa fa-list-alt " aria-hidden="true"></i>
                     </router-link>
                 </li>
 
                 <li class="list-item  ">
-                    <router-link :class="{'active' : this.active_el === 3}" :to="{ name : 'registerProduct' }">
+                    <router-link  :to="{ name : 'registerProduct' }">
                         <span>ثبت محصول </span>
                         <i class="fa fa-plus-square " aria-hidden="true"></i>
                     </router-link>
                 </li>
+
                 <li class="list-item  ">
-                    <router-link :class="{'active' : this.active_el === 9}" :to="{ name : 'myProducts' }">
+                    <router-link  :to="{ name : 'myProducts' }">
                         <span> محصولات من </span>
                         <i class="fa fa-list-alt " aria-hidden="true"></i>
                     </router-link>
                 </li>
-           <!--     <li class="list-item  ">
-                    <router-link :class="{'active' : this.active_el === 4}" :to="{ name : 'myTransactions' }">
-                        <span>تراکنش های جاری</span>
-                        <i class="fa fa-list-ol " aria-hidden="true"></i>
-                    </router-link>
-                </li>
 
                 <li class="list-item  ">
-                    <router-link :class="{'active' : this.active_el === 5}" :to="{ name : 'myTerminatedTransactions' }">
-                        <span>تراکنش های انجام شده</span>
-                        <i class="fa fa-th-list  " aria-hidden="true"></i>
-                    </router-link>
-                </li>-->
-                <li class="list-item  ">
-                    <router-link :class="{'active' : this.active_el === 8}" :to="{ name : 'messages' }">
+                    <router-link  :to="{ name : 'messages' }">
                         <span>پیام ها</span>
-                        <span class="custom-badge" v-if="messageCount">{{messageCount}}</span>
+                        <span class="custom-badge"
+                              v-if="messageCount"
+                              v-text="messageCount"
+                        ></span>
 
-                        <i class="fa fa-comment " aria-hidden="true"></i>
+                        <i class="fa fa-comment" aria-hidden="true"></i>
                     </router-link>
                 </li>
-                <li class="list-item  ">
-                    <router-link :class="{'active' : this.active_el === 7}" :to="{ name : 'guide' }">
+
+                <li class="list-item">
+                    <router-link  :to="{ name : 'guide' }">
                         <span>راهنما</span>
-                        <i class="fa fa-question-circle  " aria-hidden="true"></i>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
                     </router-link>
                 </li>
             </ul>
@@ -126,20 +90,22 @@
         ],
         data() {
             return {
-                active_el: 1,
-                messageCount:''
+                activeElement: null,
+                messageCount: '',
+                linksPath: [
+                    '/dashboard/complementary',
+                ]
             }
         },
         methods: {
 
-            init:function(){
+            init: function () {
                 var self = this;
 
                 axios.post('/get_total_unread_messages_for_current_user')
-                    .then(function(response){
-                            self.messageCount = response.data.msg_count;
-                }).
-                    catch(function(err){
+                    .then(function (response) {
+                        self.messageCount = response.data.msg_count;
+                    }).catch(function (err) {
                     //
                 });
             },
@@ -148,73 +114,42 @@
                 return paths.some(path => {
                     return this.$route.path.indexOf(path) === 0 // current path starts with this path string
                 });
-
-            }
-        }, watch: {
-            $route() {
-                if (this.subIsActive('/dashboard/complementry') || this.subIsActive('/dashboard/profile_contract')) {
-                    this.active_el = 1;
-                } else if (this.subIsActive('/dashboard/my-sell-offers') || this.subIsActive('/dashboard/buyAd-requests') || this.subIsActive('/dashboard/buyAd-request-detail/' + this.$route.params.id)) {
-                    this.active_el = 2
-                } else if (this.subIsActive('/dashboard/register-product')) {
-                    this.active_el = 3
-                } else if (this.subIsActive('/dashboard/transaction-list') || this.subIsActive('/dashboard/transaction-detail/')|| this.subIsActive('/dashboard/instant-transaction-detail/'  + this.$route.params.id)) {
-                    this.active_el = 4
-                } else if (this.subIsActive('/dashboard/terminated-transaction-list') || this.subIsActive('/dashboard/transaction-report/')|| this.subIsActive('/dashboard/instant-transaction-report/' + this.$route.params.id)) {
-                    this.active_el = 5
-                } else if (this.subIsActive('/dashboard/privacy_and_policy.vue')) {
-                    this.active_el = 6
-                }else if(this.subIsActive('/dashboard/guide')){
-                    this.active_el = 7
-                }else if(this.subIsActive('/dashboard/messages')){
-                    this.active_el = 8
-                } else if(this.subIsActive('/dashboard/my-products')){
-                    this.active_el = 9
-                } else{
-                    this.active_el = 1
+            },
+            checkLinkActive: function () {
+                for (var i = 0; i < this.linksPath.length; i++){
+                    if (this.subIsActive(this.linksPath[i])) {
+                        this.activeElement = i;
+                    }else{
+                        this.activeElement = null;
+                    }
                 }
             }
-        }, mounted: function () {
-            if (this.subIsActive('/dashboard/complementry') || this.subIsActive('/dashboard/profile_contract')){
-                this.active_el = 1;
-            } else if (this.subIsActive('/dashboard/my-sell-offers') || this.subIsActive('/dashboard/buyAd-requests') || this.subIsActive('/dashboard/buyAd-request-detail/' + this.$route.params.id)) {
-                this.active_el = 2
-            } else if (this.subIsActive('/dashboard/register-product')) {
-                this.active_el = 3
-            } else if (this.subIsActive('/dashboard/transaction-list') || this.subIsActive('/dashboard/transaction-detail/')|| this.subIsActive('/dashboard/transaction-detail/'  + this.$route.params.id)) {
-                this.active_el = 4
-            } else if (this.subIsActive('/dashboard/terminated-transaction-list') || this.subIsActive('/dashboard/transaction-report/')|| this.subIsActive('/dashboard/transaction-report/' + this.$route.params.id)) {
-                this.active_el = 5
-            } else if (this.subIsActive('/dashboard/privacy_and_policy')) {
-                this.active_el = 6
-            } else if(this.subIsActive('/dashboard/messages')){
-                this.active_el = 8
-            } else if(this.subIsActive('/dashboard/guide')){
-                this.active_el = 7
-            } else if(this.subIsActive('/dashboard/my-products')){
-                this.active_el = 9
-            }else{
-                this.active_el = 1
-            }
 
+        },
+        watch: {
+            $route() {
+                this.checkLinkActive();
+            }
+        },
+        mounted: function () {
+            this.checkLinkActive();
             this.init();
         },
         created() {
             var self = this;
+
             eventBus.$on('messageCount', (event) => {
                 this.messageCount += event;
             });
             eventBus.$on('active', (event) => {
-                this.active_el = event;
+                this.activeElement = event;
             });
             Echo.private('testChannel.' + userId)
                 .listen('newMessage', (e) => {
                     var senderId = e.new_message.sender_id;
 
                     self.messageCount += 1;
-            });
+                });
         },
-
-
     }
 </script>

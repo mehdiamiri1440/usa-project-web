@@ -1,85 +1,9 @@
-<template>
-    <div id="wrap-footer">
-        <footer id="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-4">
-                        <ul class="list-unstyled footer-list">
-                            <li>
-                                <a  class="smoothScroll" href="/pricing" @click="registerComponentStatistics('footer','pricing','click-on-pricing')">تعرفه ها</a>
-                            <li>
-                            <li>
-                                <a  class="smoothScroll" href="#"> قیمت روزانه</a>
-                            <li>
-                                <a  class="smoothScroll" href="/privacy-and-policy" @click="registerComponentStatistics('footer','privacy-and-policy','click-on-privacy-policy')">قوانین و مقررات</a>
-                            </li>
-                            <li>
+<style scoped>
 
-                                <a  class="smoothScroll" href="/help" @click="registerComponentStatistics('footer','help','click-on-help')">اینکوباک چگونه کار می کند؟ </a>
-                            </li>
-                            <li>
-
-                                <a  class="smoothScroll" href="/about-us" @click="registerComponentStatistics('footer','about-us','click-on-about-us')">درباره ما</a>
-                            </li>
-                            <li>
-
-                                <a  class="smoothScroll" href="/contact-us" @click="registerComponentStatistics('footer','contact-us','click-on-contact-us')">ارتباط با ما</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-4 contact-us">
-                        <p>آدرس</p>
-                        <p>
-                            شیراز، خیابان ارم کوچه 15 پلاک 264
-                        </p>
-                        <br/>
-                        <p>تماس با ما
-                        </p>
-                        <p>‌09118413054 / 09178928266</p>
-                    </div>
-
-                </div>
-            </div>
-        </footer>
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class=" col-xs-12 col-sm-6">
-                        <ul class="social-icon">
-                            <li>
-                                <a href="https://www.instagram.com/incobac.ir/" class="fa fa-instagram wow" @click="registerComponentStatistics('footer','instagram','click-on-instagram')"></a>
-                            </li>
-                            <li>
-                                <a href="https://t.me/Incobac" class="fa fa-telegram wow " @click="registerComponentStatistics('footer','telegram','click-on-telegram')"></a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/company/27058131/ " class="fa fa-linkedin wow " @click="registerComponentStatistics('footer','linked-in','click-on-linked-in')"></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/incobac" class="fa fa-twitter wow " @click="registerComponentStatistics('footer','twitter','click-on-twitter')"></a>
-                            </li>
-                            <li>
-                                <a href="https://www.facebook.com/incobac/" class="fa fa-facebook wow " @click="registerComponentStatistics('footer','facebook','click-on-facebook')"></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-12 col-sm-6">
-                        <p class="wow copy-right">تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- end of app tag -->
-        <!-- Back top -->
-        <a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
-    </div>
-</template>
-<style scoped >
-
-    .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9 {
+    .col-md-4 {
         float: right;
     }
+
     /*---------------------------------------
        Footer section
     -----------------------------------------*/
@@ -87,49 +11,60 @@
     #wrap-footer {
         background: #000122;
     }
+
     #wrap-footer footer {
         padding: 30px 0;
     }
-    .footer-bottom{
+
+    .footer-bottom {
         background: #000235;
         text-align: center;
         padding: 20px 0;
     }
-    .social-icon a{
+
+    .social-icon a {
         border: 1px solid;
         margin: 7px;
         padding: 0;
     }
+
     .footer-bottom p {
         padding-top: 20px;
         display: block;
         color: #fff;
         direction: rtl;
     }
+
     footer p {
         text-align: right;
         color: white;
-        direction:rtl;
+        direction: rtl;
     }
+
     footer a {
-        direction:rtl;
+        direction: rtl;
     }
-    .footer-list{
+
+    .footer-list {
         text-align: right;
         line-height: 1.618;
     }
-    .footer-list li{
+
+    .footer-list li {
         text-align: right;
         line-height: 1.618;
     }
-    .footer-list a{
+
+    .footer-list a {
         color: #fff;
         padding: 7px 0;
         display: inline-block;
     }
-    .footer-list a:hover{
+
+    .footer-list a:hover {
         color: #00a65a;
     }
+
     /* Back top */
     .go-top {
         z-index: 1;
@@ -206,10 +141,12 @@
         position: relative;
         padding: 3px 15px !important;
     }
+
     .user-header-mobile a {
         float: left;
         width: 100%;
     }
+
     .user-header-mobile .profile-menu-header i {
         top: 5px;
         left: -10px;
@@ -270,12 +207,11 @@
         transition: 300ms;
     }
 
-
     .enamad {
         text-align: center;
     }
 
-    .enamad  img {
+    .enamad img {
         width: 200px;
         text-align: center;
         background: #fff;
@@ -285,13 +221,14 @@
         top: 0;
         transition: 300ms;
     }
-    .enamad  img:hover {
+
+    .enamad img:hover {
         top: -5px;
         box-shadow: 0 0 30px #000;
     }
 
-    @media screen and (max-width : 767px) {
-        .contact-us{
+    @media screen and (max-width: 767px) {
+        .contact-us {
             border-top: 2px solid #f8f8f8;
             padding: 15px;
             margin: 15px 0;
@@ -299,13 +236,110 @@
     }
 </style>
 
+<template>
+    <div id="wrap-footer">
+        <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <ul class="list-unstyled footer-list">
+                            <li>
+                                <a class="smoothScroll" href="/pricing"
+                                   @click="registerComponentStatistics('footer','pricing','click-on-pricing')">تعرفه
+                                    ها</a>
+                            <li>
+                            <li>
+                                <a class="smoothScroll" href="#"> قیمت روزانه</a>
+                            <li>
+                                <a class="smoothScroll" href="/privacy-and-policy"
+                                   @click="registerComponentStatistics('footer','privacy-and-policy','click-on-privacy-policy')">قوانین
+                                    و مقررات</a>
+                            </li>
+                            <li>
+
+                                <a class="smoothScroll" href="/help"
+                                   @click="registerComponentStatistics('footer','help','click-on-help')">اینکوباک چگونه
+                                    کار می کند؟ </a>
+                            </li>
+                            <li>
+
+                                <a class="smoothScroll" href="/about-us"
+                                   @click="registerComponentStatistics('footer','about-us','click-on-about-us')">درباره
+                                    ما</a>
+                            </li>
+                            <li>
+
+                                <a class="smoothScroll" href="/contact-us"
+                                   @click="registerComponentStatistics('footer','contact-us','click-on-contact-us')">ارتباط
+                                    با ما</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-4 contact-us">
+                        <p>آدرس</p>
+                        <p>
+                            شیراز، خیابان ارم کوچه 15 پلاک 264
+                        </p>
+                        <br/>
+                        <p>تماس با ما
+                        </p>
+                        <p>‌09118413054 / 09178928266</p>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class=" col-xs-12 col-sm-6">
+                        <ul class="social-icon">
+                            <li>
+                                <a href="https://www.instagram.com/incobac.ir/"
+                                   class="fa fa-instagram wow"
+                                   @click="registerComponentStatistics('footer','instagram','click-on-instagram')"></a>
+                            </li>
+
+                            <li>
+                                <a href="https://t.me/Incobac" class="fa fa-telegram wow "
+                                   @click="registerComponentStatistics('footer','telegram','click-on-telegram')"></a>
+                            </li>
+
+                            <li>
+                                <a href="https://www.linkedin.com/company/27058131/ "
+                                   class="fa fa-linkedin wow "
+                                   @click="registerComponentStatistics('footer','linked-in','click-on-linked-in')"></a>
+                            </li>
+
+                            <li>
+                                <a href="https://twitter.com/incobac"
+                                   class="fa fa-twitter wow "
+                                   @click="registerComponentStatistics('footer','twitter','click-on-twitter')"></a>
+                            </li>
+
+                            <li>
+                                <a href="https://www.facebook.com/incobac/"
+                                   class="fa fa-facebook wow "
+                                   @click="registerComponentStatistics('footer','facebook','click-on-facebook')"></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6">
+                        <p class="wow copy-right">تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
+    </div>
+</template>
+
 <script>
     export default {
-        data() {
-            return {
-                //
-            }
-        },
         methods: {
             registerComponentStatistics: function (categoryName, actionName, labelName) {
                 gtag('event', actionName, {
@@ -315,5 +349,4 @@
             },
         },
     }
-
 </script>

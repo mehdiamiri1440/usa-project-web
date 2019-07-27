@@ -37,18 +37,18 @@
         padding: 60px 100px;
     }
 
-    .header-lable {
+    .header-label {
         display: block;
         margin: 13px;
         padding: 0;
     }
-    .content-lable{
+    .content-label{
         font-weight:400 ;
     }
 
     /*end main content style */
     /*custom cods*/
-    .green-bot {
+    .green-button {
         margin: 15px 0;
         display: inline-block;
         background: #28a745;
@@ -78,7 +78,7 @@
         transition: 300ms;
     }
 
-    .green-bot:hover {
+    .green-button:hover {
         color: #fff;
         background: #00d614;
         transition: 300ms;
@@ -165,7 +165,7 @@
         max-width: 100%;
         min-width: 100%;
     }
-    .fields .green-bot,.fields .black-bot {
+    .fields .green-button,.fields .black-bot {
         width: 100%;
     }
 
@@ -347,11 +347,11 @@
                 </div>
                 <div class="bottom-contents  col-xs-12">
                     <form>
-                        <label class="header-lable">تمامی موارد خواسته شده را وارد کرده و برای خریدار ارسال نمایید.</label>
+                        <label class="header-label">تمامی موارد خواسته شده را وارد کرده و برای خریدار ارسال نمایید.</label>
                         <div class="fields col-xs-12">
                             <input type="hidden" :value="buyAd.id" ref="buyAdId">
                             <div class="col-xs-12 col-sm-6">
-                                <label class="content-lable">
+                                <label class="content-label">
                                     محل تحویل
                                 </label>
                                 <input type="text" v-model="sellOffer.deliver_at" >
@@ -359,14 +359,14 @@
                             </div>
                             <div class="col-xs-12 col-sm-6">
 
-                                <label class="content-lable">
+                                <label class="content-label">
                                     قیمت پیشنهادی به ازای هر کیلو به تومان
                                 </label>
                                 <input type="text" v-model="sellOffer.price"  >
                                 <span v-if="errors.price" class="text-danger" >{{ errors.price[0] }}</span>
                             </div>
                             <div class="col-xs-12 col-sm-6">
-                                <label class="content-lable">
+                                <label class="content-label">
                                     تاریخ موجودی
                                 </label>
                                 <input readonly="true" type="text" id="first-date-id" ref="validDateFrom">
@@ -374,7 +374,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-6">
 
-                                <label class="content-lable">
+                                <label class="content-label">
                                     انتهای تاریخ موجودی
                                 </label>
                                 <input readonly="true" type="text" id="end-date-id" ref="validDateTo">
@@ -382,7 +382,7 @@
                             </div>
                             <div class="col-xs-12">
 
-                                <label class="content-lable">
+                                <label class="content-label">
                                     توضیحات:
                                 </label>
                                 <textarea placeholder="" v-model="sellOffer.description"></textarea>
@@ -390,10 +390,10 @@
                             </div>
                             <div class="image_company col-xs-12">
 
-                                <label class="content-lable">
+                                <label class="content-label">
                                     تصاویر:
                                 </label>
-                                <uploadFile
+                                <UploadFile
                                         uploadName = "sell_offer_files"
                                         uploadAccept = "image/*"
                                         :uploadMinSize = "1024"
@@ -406,11 +406,11 @@
                                         :uploadOCompress = "1024 * 1024"
                                         :uploadUploadAuto = "false"
                                         :uploadRef="sellOfferFiles"
-                                ></uploadFile>
+                                ></UploadFile>
                                 <span v-if="errors.photos_count" class="text-danger" >{{ errors.photos_count[0] }}</span>
                             </div>
                             <div class="col-sm-6">
-                                <button type="button" class="col-xs-12 green-bot" @click="submitSellOffer">تایید</button>
+                                <button type="button" class="col-xs-12 green-button" @click="submitSellOffer">تایید</button>
                             </div>
                             <div class="col-sm-6">
                                 <!--<a href="{{route('seller-buyAd-requests')}}" class="black-bot col-xs-12 col-xs-6">بازگشت به صفحه قبل</a>-->
@@ -431,10 +431,10 @@
 <script>
 
     import {eventBus} from "../../../../router/dashboard_router";
-    import uploadFile from '../../upload-image'
+    import UploadFile from '../../upload-image'
     export default {
         components:{
-            uploadFile
+            UploadFile
         },
         props:[
             'defimgitem',
@@ -495,7 +495,7 @@
                         if(response.status == 201){
                             self.popUpMsg = 'پیشنهاد فروش شما ثبت شد.';
                             eventBus.$emit('submitSuccess', self.popUpMsg);
-                            $('#myModal').modal('show');
+                            $('#custom-main-modal').modal('show');
                             setTimeout(function () {
                                 window.location.href = '/dashboard/my-sell-offers';
                                 eventBus.$emit('submitingEvent', false);
@@ -510,7 +510,7 @@
                         if(err.response.data.msg){
                             self.popUpMsg = err.response.data.msg;
                             eventBus.$emit('submitSuccess', self.popUpMsg);
-                            $('#myModal').modal('show');
+                            $('#custom-main-modal').modal('show');
                         }
                         eventBus.$emit('submitingEvent', false);
                     });

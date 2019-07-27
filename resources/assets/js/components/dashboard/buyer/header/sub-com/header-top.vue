@@ -114,11 +114,11 @@
         top: 3px;
     }
 
-    .green-bot {
+    .green-button {
         color: #fafafa !important;
     }
 
-    .green-bot:hover {
+    .green-button:hover {
         color: #fff !important;
         background: #00d614;
     }
@@ -133,14 +133,17 @@
 <template>
     <div>
         <header id="header" class="main-header">
+
             <div class="show-header">
                 <button class="fa fa-bars"></button>
             </div>
+
             <div class="content-header">
                 <span class="font-big">اینکوباک  </span> | <span> بازارگاه آنلاین کشاورزی</span>
             </div>
+
             <div class="profile-menu-header">
-                <a href="#" @click.prevent="dropdown()">
+                <a href="#" @click.prevent="collapseDropDown()">
                     <div class="image-header-profile" v-if="photoLink">
                         <img :src="storage + '/' + photoLink">
                     </div>
@@ -148,46 +151,49 @@
                         <img :src="def">
                     </div>
                     <i class="fa fa-angle-down" aria-hidden="true"></i>
-                    <span class="user_name">{{username}}</span>
+                    <span class="user_name" v-text="username"></span>
                 </a>
+
                 <div class="profile-list">
                     <ul class="list-unstyled">
                         <li class="list-item">
                             <a :href="'/dashboard/profile'">پروفایل</a>
                         </li>
                         <li class="list-item">
-                            <a :href=" '/dashboard/password' ">تغییر کلمه عبور </a>
+                            <a :href="'/dashboard/password'">تغییر کلمه عبور </a>
                         </li>
                         <li class="list-item"><a :href="out">خروج</a></li>
                     </ul>
                 </div>
             </div>
+
             <div class="right-menu-header">
                 <ul class="list-inline">
-                    <!--      <li><a href="#" onclick="dropdownList()"><i class="fa fa-bars" aria-hidden="true"></i></a>
-                              <div class="icon-header-list">
-                                  <ul class="list-unstyled">
-                                      <li class="list-item"><a href="/product-list">لیست محصولات</a></li>
-                                  </ul>
-                              </div>
-                          </li>-->
                     <li>
-                        <a class="green-bot" href="/product-list" style="font-size: 17px" @click="registerComponentStatistics('product-list-btn','click','product-list in dashboard')"> <span class="full">لیست محصولات</span>
+                        <a class="green-button" href="/product-list" style="font-size: 17px"
+                           @click="registerComponentStatistics('product-list-btn','click','product-list in dashboard')">
+                            <span class="full">لیست محصولات</span>
                             <span class="min"><i class="fa fa-th-list" aria-hidden="true"></i></span> </a>
                     </li>
                     <li><a :href="routeHome"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                 </ul>
             </div>
-            <subMenu></subMenu>
+
+            <SubMenu/>
+
         </header>
 
     </div>
+
 </template>
 
 <script>
-    import subMenu from './sub-menu/sub-menu.vue'
+    import SubMenu from './sub-menu/sub-menu.vue'
 
     export default {
+        components: {
+            SubMenu
+        },
         props: [
             'photoLink',
             'profilebasic',
@@ -197,37 +203,36 @@
             'out',
             'routeHome'
         ],
-        components: {
-            subMenu
-        }, methods: {
-            dropdown: function () {
+        methods: {
+            collapseDropDown: function () {
                 $(".profile-list").fadeIn("slow", function () {
-                    viz = true;
+                    visible = true;
                 });
+
             },
-            dropdownList: function () {
+            collapseDropDownList: function () {
                 $(".icon-header-list").fadeIn("slow", function () {
-                    viz = true;
+                    visible = true;
                 });
             },
             documentClick(e) {
-                if (viz) {
+                if (visible) {
                     $('.profile-list').fadeOut("slow");
                     $('.icon-header-list').fadeOut("slow");
-                    viz = false;
+                    visible = false;
 
                 }
             },
-            registerComponentStatistics:function(categoryName,actionName,labelName){
-                gtag('event',actionName,{
-                    'event_category' : categoryName,
-                    'event_label'    : labelName
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName, {
+                    'event_category': categoryName,
+                    'event_label': labelName
                 });
             }
         },
         created() {
-            document.addEventListener('click', this.documentClick)
-        },
+            document.addEventListener('click', this.documentClick);
+        }
 
     }
 </script>

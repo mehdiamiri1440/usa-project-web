@@ -4,7 +4,7 @@
         padding-left: 0 !important;
     }
 
-    .green_bot:focus, .green_bot:hover {
+    .green-button:focus, .green-button:hover {
         color: #fff !important;
     }
 
@@ -25,7 +25,7 @@
 
     #DownloadApp .main_popup_content > div {
         transform: translate(-50%, -50%);
-   }
+    }
 
     a.close-dialog-popup {
         display: block;
@@ -79,7 +79,8 @@
         background: #279b41 !important;
         transition: 300ms;
     }
-    .modal-content .green_bot {
+
+    .modal-content .green-button {
         margin: 15px;
 
         display: inline-block;
@@ -102,30 +103,26 @@
 
         width: initial;
     }
-     .green_bot.delete {
-           background: #e41c38;
-         color: #fff;
-    }
-   @media  screen and (max-width: 767px){
-       ul.nav {
-           width: 100%;
-           text-align: center !important;
-           margin: 0;
-       }
 
-       #collapseHeader {
-           padding: 0;
-       }
-   }
+    .green-button.delete {
+        background: #e41c38;
+        color: #fff;
+    }
+
+    @media screen and (max-width: 767px) {
+        ul.nav {
+            width: 100%;
+            text-align: center !important;
+            margin: 0;
+        }
+
+        #collapseHeader {
+            padding: 0;
+        }
+    }
 </style>
 <template>
     <div>
-       <!-- <div :class="{'loader-wrapper': !isLoading , 'finish-loader-show' : isLoading }">
-            <div class="main-loader">
-                <img :src="finish_load_img">
-            </div>
-        </div>-->
-
 
         <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
             <div class="main-loader">
@@ -134,39 +131,44 @@
             </div>
         </div>
 
-         <div class="container">
-                <div id="deleteModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="main_popup_content">
-                                <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
-                                <p class="main_par">
-                                    {{popUpMsg}}
-                                </p>
-
-                            <a href="#" class="btn green_bot delete " data-dismiss="modal" @click.prevent="deleteProduct()">
-                                {{deleteButtonText}}
-                            </a>
-                            <a href="#" class="btn green_bot " data-dismiss="modal">
-                                {{cancelButtonText}}
-                            </a>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div>
-            </div>
-
-
         <div class="container">
-            <div id="myModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div id="deleteModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="main_popup_content">
-                            <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
-                            <p class="main_par">
-                                {{this.popUpMsg}}
+                            <a href="#" data-dismiss="modal">
+                                <i class="fa fa-close"></i>
+                            </a>
+                            <p class="main-pop-up" v-text="popUpMsg"></p>
+
+                            <a href="#" class="btn green-button delete " data-dismiss="modal"
+                               @click.prevent="deleteProduct()" v-text="deleteButtonText">
+
+                            </a>
+
+                            <a href="#" class="btn green-button"
+                               data-dismiss="modal" v-text="cancelButtonText">
+                            </a>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div id="custom-main-modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="main_popup_content">
+                            <a href="#" data-dismiss="modal">
+                                <i class="fa fa-close"></i>
+                            </a>
+
+                            <p class="main-pop-up" v-text="popUpMsg">
                             </p>
-                            <button class="btn green_bot " data-dismiss="modal">
+
+                            <button class="btn green-button " data-dismiss="modal">
                                 متوجه شدم
                             </button>
                         </div>
@@ -176,10 +178,14 @@
         </div>
 
         <div class="container">
-            <div id="DownloadApp" class="modal " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                <div class="modal-dialog modal-lg" role="document">
+            <div id="DownloadApp" class="modal"
+                 tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 
-                    <a href="#" class="close-dialog-popup" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                <div class="modal-dialog modal-lg" role="document">
+                    <a href="#" class="close-dialog-popup"
+                       data-dismiss="modal">
+                        <i class="fa fa-close"></i>
+                    </a>
 
                     <div class="main_popup_content">
 
@@ -188,16 +194,19 @@
                                 <img :src="incobacicon" alt="">
                                 <h1>اینکوباک</h1>
                             </div>
-                            <p class="main_par">
+
+                            <p class="main-pop-up">
                                 دانلود اپلیکیشن اندروید اینکوباک
                             </p>
-                            <a href="#" class="btn green_bot " data-dismiss="modal" @click.prevent="doDownload()">
+
+                            <a href="#" class="btn green-button "
+                               data-dismiss="modal" @click.prevent="doDownload()">
                                 دریافت اپلیکیشن
                             </a>
-                            <a href="#" class="btn green_bot " data-dismiss="modal">
+
+                            <a href="#" class="btn green-button " data-dismiss="modal">
                                 متوجه شدم
                             </a>
-
                         </div>
                     </div>
                 </div><!-- /.modal-dialog -->
@@ -207,22 +216,27 @@
 
         <!-- Modal -->
         <div class="container">
-            <div class="modal" id="myModal2" tabindex="-1" ref="myModal" role="dialog"
+            <div class="modal" id="auth-popup" tabindex="-1" ref="myModal" role="dialog"
                  aria-labelledby="myModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="main_popup_content">
-                            <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
-                            <p class="main_par">
-                                {{popUpMsg}}
+                            <a href="#" data-dismiss="modal">
+                                <i class="fa fa-close"></i>
+                            </a>
+
+                            <p class="main-pop-up" v-text="popUpMsg">
                             </p>
-                            <a href="/login"  class="btn  green_bot">
+
+                            <a href="/login" class="btn  green-button">
                                 ورود/ثبت نام
                             </a>
+
                             <br/>
                             <br/>
-                            <button class="btn green_bot " data-dismiss="modal">
+
+                            <button class="btn green-button" data-dismiss="modal">
                                 متوجه شدم
                             </button>
                         </div>
@@ -236,18 +250,19 @@
             <div class="container-fluid">
                 <!-- navbar header -->
                 <div class="navbar-header">
-                    <div v-if="user_id != ''" class="user-header-mobile hidden-sm hidden-md hidden-lg ">
+                    <div v-if="user_id !== ''" class="user-header-mobile hidden-sm hidden-md hidden-lg ">
                         <div class="profile-menu-header">
-                            <a href="#" @click.prevent="dropdown()">
+                            <a href="#" @click.prevent="collapseDropDown()">
                                 <div class="image-header-profile">
 
-                                    <img v-if="profile_photo != ''" :src="storage_path + '/' + profile_photo">
+                                    <img v-if="profile_photo !== ''" :src="storage_path + '/' + profile_photo">
 
                                     <img v-else :src="user_default_image">
 
                                 </div>
                                 <i aria-hidden="true" class="fa fa-angle-down"></i>
                             </a>
+
                             <div class="profile-list">
                                 <ul class="list-unstyled">
                                     <li class="list-item">
@@ -261,13 +276,18 @@
                             </div>
                         </div>
                     </div>
-                    <button class="navbar-toggle" data-toggle="collapse" href="#collapseHeader">
+
+                    <button class="navbar-toggle" data-toggle="collapse" ref="#collapseHeader">
+
                         <span class="icon icon-bar"></span>
                         <span class="icon icon-bar"></span>
                         <span class="icon icon-bar"></span>
+
                     </button>
+
                     <a class="navbar-brand test" href="/">
                     </a>
+
                     <p class="logo-des hidden-xs hidden-sm">
                         اینکوباک | بازارگاه آنلاین دنیای کشاورزی
                     </p>
@@ -276,31 +296,44 @@
                 <div class="collapse navbar-collapse" id="collapseHeader" aria-expanded="false">
                     <ul class="nav navbar-nav navbar-left ">
                         <li>
-                            <a class="smoothScroll" href="/" @click="registerComponentStatistics('header','home-page','click-on-home-page')">صفحه نخست</a>
+                            <a class="smoothScroll" href="/"
+                               @click="registerComponentStatistics('header','home-page','click-on-home-page')">صفحه
+                                نخست</a>
+
                         </li>
-                        <li v-if="user_id != ''">
-                            <a class="smoothScroll" href="/dashboard/profile" @click="registerComponentStatistics('header','dashboard','click-on-dashboard')">داشبورد</a>
+
+                        <li v-if="user_id !== ''">
+                            <a class="smoothScroll" href="/dashboard/profile"
+                               @click="registerComponentStatistics('header','dashboard','click-on-dashboard')">داشبورد</a>
                         </li>
                         <li>
-                            <a class="smoothScroll" href="/product-list" @click="registerComponentStatistics('header','product-list','click-on-product-list')">لیست محصولات</a>
+                            <a class="smoothScroll" href="/product-list"
+                               @click="registerComponentStatistics('header','product-list','click-on-product-list')">لیست
+                                محصولات</a>
                         </li>
                         <li>
-                            <a href="http:\\www.blog.incobac.com" class="smoothScroll" @click="registerComponentStatistics('header','blog','click-on-blog')">وبلاگ</a>
+                            <a href="http:\\www.blog.incobac.com" class="smoothScroll"
+                               @click="registerComponentStatistics('header','blog','click-on-blog')">وبلاگ</a>
                         </li>
                         <li>
-                            <a class="smoothScroll" href="/pricing" @click="registerComponentStatistics('header','pricing','click-on-pricing')">تعرفه ها</a>
+                            <a class="smoothScroll" href="/pricing"
+                               @click="registerComponentStatistics('header','pricing','click-on-pricing')">تعرفه ها</a>
                         </li>
                         <li>
 
-                            <a class="smoothScroll" href="/about-us" @click="registerComponentStatistics('header','about-us','click-on-about-us')">درباره ما</a>
+                            <a class="smoothScroll" href="/about-us"
+                               @click="registerComponentStatistics('header','about-us','click-on-about-us')">درباره
+                                ما</a>
                         </li>
 
-                        <li v-if="user_id == ''"><a href="/login" class="smoothScroll login-button" @click="registerComponentStatistics('header','register-login','click-on-register-login')">ورود/ثبت نام</a>
+                        <li v-if="user_id == ''"><a href="/login" class="smoothScroll login-button"
+                                                    @click="registerComponentStatistics('header','register-login','click-on-register-login')">ورود/ثبت
+                            نام</a>
                         </li>
 
 
                         <li v-if="user_id != ''" class="user-header-web hidden-xs">
-                            <div class="profile-menu-header "><a href="#" @click.prevent="dropdown()">
+                            <div class="profile-menu-header "><a href="#" @click.prevent="collapseDropDown()">
                                 <div class="image-header-profile">
                                     <img v-if="profile_photo != ''" :src="storage_path + '/' + profile_photo">
 
@@ -320,16 +353,22 @@
                                         <li class="list-item"><a :href="login_page_path">خروج</a></li>
                                     </ul>
                                 </div>
+
                             </div>
+
                         </li>
+
                     </ul>
+
                 </div>
+
             </div>
+
         </div>
     </div>
 </template>
 <script>
-    var viz = false;
+    var visible = false;
     import {eventBus} from "../../../../js/router/dashboard_router";
     import Cookies from "js-cookie";
 
@@ -339,10 +378,10 @@
                 popUpMsg: '',
                 submiting: false,
                 isLoading: true,
-                deleteText:'',
-                deleteButtonText:'',
-                cancelButtonText:'',
-                ProductId:'',
+                deleteText: '',
+                deleteButtonText: '',
+                cancelButtonText: '',
+                ProductId: '',
             }
         },
         props: [
@@ -358,21 +397,21 @@
             'finish_load_img'
         ],
         methods: {
-            dropdown: function () {
+            collapseDropDown: function () {
                 $(".profile-list").fadeIn("slow", function () {
-                    viz = true;
+                    visible = true;
                 });
             },
-            dropdownList: function () {
+            collapseDropDownList: function () {
                 $(".icon-header-list").fadeIn("slow", function () {
-                    viz = true;
+                    visible = true;
                 });
             },
             documentClick(e) {
-                if (viz) {
+                if (visible) {
                     $('.profile-list').fadeOut("slow");
                     $('.icon-header-list').fadeOut("slow");
-                    viz = false;
+                    visible = false;
                 }
             },
             /*redirectToLogin: function () {
@@ -425,33 +464,13 @@
                     safari = /safari/.test(userAgent),
                     ios = /iphone|ipod|ipad/.test(userAgent);
 
-                if (ios) {
+                // simplify condition if
+                /*if (ios) {
                     return true
                 } else {
                     return false;
-                }
-                ;
-            },
-            isUserFromWebView: function () {
-                var self = this;
-
-//                var androidVersion = parseInt(this.getAndroidVersion(), 10);
-//
-//                if (!this.isOsIOS() && androidVersion >= 5) {
-//                    axios.post('/is_user_from_webview')
-//                        .then(function (response) {
-//                            if (response.data.is_webview == false) {
-//                                self.activateDownloadAppPopUp();
-//                            }
-//                            else {
-//                                //
-//                            }
-//                        });
-//                }
-
-//                if( ! IsWebview(window.navigator.userAgent)){
-//                    this.activateDownloadAppPopUp();
-//                }
+                };*/
+                return ios;
             },
             activateDownloadAppPopUp: function () {
                 this.jqUpdateSize();
@@ -465,34 +484,33 @@
                     'event_label': labelName
                 });
             },
-            deleteProduct:function(){
+            deleteProduct: function () {
                 var self = this;
 
-                axios.post('/delete_product_by_id',{
-                    product_id : self.productId
+                axios.post('/delete_product_by_id', {
+                    product_id: self.productId
                 })
-                .then(function(response){
-                    //show product deleted message
-                    //code
-                    self.popUpMsg = 'حذف شد.';
-                    $('#myModal').modal('show');
-                    
-                    self.registerComponentStatistics('product','product-deleted','product-deleted-successfully');
-                    
-                    setTimeout(function(){
-                        window.location.reload();
-                    },3000);
-                })
-                .catch(function(err){
-                    elf.registerComponentStatistics('product','product-delete-failed','product-delete-failed');
-                    //show modal
-                    self.popUpMsg = 'خطایی رخ داده است.لطفا دوباره تلاش کنید.';
-                    $('#myModal').modal('show');
-                });
+                    .then(function (response) {
+                        //show product deleted message
+                        //code
+                        self.popUpMsg = 'حذف شد.';
+                        $('#custom-main-modal').modal('show');
+
+                        self.registerComponentStatistics('product', 'product-deleted', 'product-deleted-successfully');
+
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 3000);
+                    })
+                    .catch(function (err) {
+                        elf.registerComponentStatistics('product', 'product-delete-failed', 'product-delete-failed');
+                        //show modal
+                        self.popUpMsg = 'خطایی رخ داده است.لطفا دوباره تلاش کنید.';
+                        $('#custom-main-modal').modal('show');
+                    });
             }
         },
         mounted() {
-            var self = this;
 
             eventBus.$on("submitSuccess", ($event) => {
                 this.popUpMsg = $event;
@@ -515,14 +533,9 @@
                 this.productId = event;
             });
 
-            $(document).ready(function () {
-                self.isUserFromWebView();
-
-            });    // When the page first loads
             $(window).resize(this.jqUpdateSize);     // When the browser changes size
         },
         created() {
-
             document.addEventListener('click', this.documentClick);
         }
     }

@@ -1,56 +1,34 @@
-<template>
-        <div class="container-fluid">
-            <div class="container">
-
-                <div class="col-xs-12">
-                    <img :src="not_found_image">
-                    <p class="description-error">صفحه مورد نظر یافت نشد</p>
-                </div>
-                <div class="buttons col-xs-12">
-                    <div class="col-xs-12 col-sm-6">
-                        <a href="/" class="green-bot">
-                            صفحه نخست
-                        </a>
-                    </div>
-                    <div class="col-xs-12 col-sm-6">
-                        <a href="javascript:history.back()" class="botton-inco">
-                            بازگشت به صفحه قبل
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-</template>
-
 <style scoped>
-    p.description-error{
+    p.description-error {
         text-align: center;
         font-size: 23px;
         font-weight: bold;
         color: #e41c38;
         margin-top: -15px;
         margin-bottom: 15px;
-        line-height:1.618;
+        line-height: 1.618;
     }
+
     img {
         width: 31%;
         margin: 90px auto 20px;
         display: block;
     }
 
-    .green-bot {
+    .green-button {
         margin: 15px 0;
         display: inline-block;
         background: #28a745;
         color: #f5f5f5;
         padding: 10px 35px;
         border-radius: 3px;
+        font-size: 14px;
         text-align: center;
         border: none;
         transition: 300ms;
     }
 
-    .green-bot:hover {
+    .green-button:hover {
         color: #fff;
         background: #11a028;
         transition: 300ms;
@@ -59,7 +37,7 @@
     .botton-inco {
         margin: 15px 0;
         display: inline-block;
-        background: #313a43;
+        background: #000122;
         color: #f5f5f5;
         padding: 10px 35px;
         border-radius: 3px;
@@ -70,14 +48,14 @@
 
     .botton-inco:hover {
         color: #fff;
-        background: #283743;
+        background: #28a745;
     }
 
     .buttons {
         width: 55%;
         margin: 0 auto;
         text-align: center;
-        float:none;
+        float: none;
     }
 
     .buttons div a {
@@ -120,6 +98,7 @@
             width: 100%;
 
         }
+
         img {
             width: 80%;
         }
@@ -133,35 +112,58 @@
         }
 
         img {
-
             margin: 150px auto 20px;
             display: block;
-
         }
     }
 </style>
+
+<template>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="col-xs-12">
+                <img :src="not_found_image">
+                <p class="description-error">صفحه مورد نظر یافت نشد</p>
+            </div>
+
+            <div class="buttons col-xs-12">
+                <div class="col-xs-12 col-sm-6">
+                    <a href="/" class="green-button">
+                        صفحه نخست
+                    </a>
+                </div>
+
+                <div class="col-xs-12 col-sm-6">
+                    <a href="javascript:history.back()" class="botton-inco">
+                        بازگشت به صفحه قبل
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
 <script>
     import {eventBus} from "../../router/dashboard_router";
 
     export default {
-        props:[
+        props: [
             'not_found_image',
         ],
-        methods:{
+        methods: {
             stopLoader: function () {
                 eventBus.$emit('isLoading', false);
             },
-
         },
-        mounted:function(){
+        mounted: function () {
             var self = this;
             document.onreadystatechange = () => {
-                if (document.readyState == "complete") {
+                if (document.readyState === "complete") {
                     self.$nextTick(self.stopLoader());
                 }
             }
         },
-        updated(){
+        updated() {
             this.$nextTick(this.stopLoader());
         },
     }
