@@ -40,6 +40,15 @@
 <?php $__currentLoopData = $user_names; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user_name): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <url>
       <loc><?php echo e(url("profile/".$user_name->user_name)); ?></loc>
+      <changefreq>daily</changefreq>
+      <priority>0.5</priority>
+    </url>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    
+    
+<?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <url>
+      <loc><?php echo e(url("product-view/".str_replace(' ','-',$product['main']->category_name)."/"."خرید-عمده-".str_replace(' ','-',$product['main']->sub_category_name)."/".$product['main']->id)); ?></loc>
       <changefreq>monthly</changefreq>
       <priority>0.5</priority>
     </url>
