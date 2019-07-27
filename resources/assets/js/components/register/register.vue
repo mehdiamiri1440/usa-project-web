@@ -31,9 +31,11 @@
         direction: rtl;
 
     }
-    p{
+
+    p {
         color: #333;
     }
+
     ol, ul {
         list-style: none;
     }
@@ -69,12 +71,14 @@
     h1, h2, h3 {
         color: #565657;
     }
-    label{
+
+    label {
         font-size: 12px;
         padding: 6px 0;
         display: block;
     }
-    input[type="text"],input[type="password"],input[type="email"]{
+
+    input[type="text"], input[type="password"], input[type="email"] {
         border: 2px solid #818d9b;
         border-radius: 5px;
         width: 100%;
@@ -82,7 +86,8 @@
         line-height: 1.1;
         direction: rtl;
     }
-    select{
+
+    select {
         width: 100%;
 
         padding: 0 10px;
@@ -92,27 +97,32 @@
         border: 1px solid;
         margin: 7px auto 0;
     }
-    .input-forms > div{
+
+    .input-forms > div {
         margin: 3px auto;
         float: right;
         height: 50px;
     }
-    .input-forms .radio_btn{
+
+    .input-forms .radio_btn {
         height: 24px;
     }
-    .error_msg{
+
+    .error_msg {
         color: #ff0000;
         font-size: 11px;
         display: block;
         text-align: center;
         padding: 2px;
     }
+
     #step1 .content_section, #step2 .content_section {
         padding: 5px 66px;
         overflow: hidden;
         padding-top: 40px;
     }
-    #step4 .header_list,#step3 .header_list{
+
+    #step4 .header_list, #step3 .header_list {
         margin-bottom: 5px;
     }
 
@@ -122,7 +132,8 @@
         padding-bottom: 10px;
 
     }
-    .ui-corner-all input{
+
+    .ui-corner-all input {
         cursor: pointer;
         width: 23px;
         height: 23px;
@@ -132,12 +143,13 @@
         left: 15px;
     }
 
-    .ui-corner-all  input[type="checkbox"]:checked + .fa {
+    .ui-corner-all input[type="checkbox"]:checked + .fa {
         color: #28a745;
         background: red;
         width: 100px;
         height: 100px;
     }
+
     input[type="text"], input[type="password"], input[type="email"] {
         -webkit-appearance: none;
         border: 1px solid #818d9b;
@@ -145,6 +157,7 @@
         width: 100%;
         padding: 8px 15px;
     }
+
     .ui-corner-all i {
         background: none;
         width: 23px;
@@ -159,9 +172,11 @@
         padding: 3px 2px;
         font-size: 14px;
     }
-    .radio-wrapper{
+
+    .radio-wrapper {
         margin-bottom: 12px;
     }
+
     .radio-wrapper input {
         cursor: pointer;
         width: 23px;
@@ -179,6 +194,7 @@
         color: #fff;
         padding: 4px;
     }
+
     .radio-wrapper input {
         cursor: pointer;
         width: 23px;
@@ -190,6 +206,7 @@
         opacity: 0;
         z-index: 1;
     }
+
     .radio-wrapper i, .radio-wrapper i {
         background: none;
         width: 23px;
@@ -209,7 +226,8 @@
         margin: 60px auto;
 
     }
-    .bg.register{
+
+    .bg.register {
 
         background-size: cover;
         background-repeat: no-repeat;
@@ -222,13 +240,15 @@
         position: absolute;
         overflow: hidden;
     }
-    #main{
+
+    #main {
         width: 680px;
         margin: 160px auto 110px;
         direction: rtl;
 
     }
-    .green_but{
+
+    .green-button {
         width: 100%;
 
         background: #28a745;
@@ -243,7 +263,8 @@
 
         margin: 5px auto;
     }
-    .danger_border_but{
+
+    .danger_border_but {
         width: 100%;
         border-radius: 3px;
         padding: 12px;
@@ -251,21 +272,23 @@
         color: #fff;
         margin: 5px auto;
     }
-    .sub-des{
+
+    .sub-des {
         color: #909aa6;
         font-size: 9px;
         margin: 8px 0 50px;
         display: inline-block;
     }
 
-    .input_contents{
+    .input_contents {
         position: relative;
     }
-    input.pad{
+
+    input.pad {
         padding: 13px 47px 9px 15px;
     }
 
-    .forget_pass{
+    .forget_pass {
         color: #28a745;
         float: left;
         font-size: 12px;
@@ -276,29 +299,35 @@
 
         margin: 14px 0;
     }
-    .after_icon:after{
+
+    .after_icon:after {
         position: absolute;
         content: " ";
         bottom: 9px;
         right: 23px;
-        font-family: "fontawesome",sans-serif;
+        font-family: "fontawesome", sans-serif;
         font-size: 22px;
         color: #818d9b;
         border-left: 1px solid;
         padding-left: 11px;
     }
-    .after_icon.numbers:after{
+
+    .after_icon.numbers:after {
         content: "\f098";
     }
-    .after_icon.unlock-alt:after{
+
+    .after_icon.unlock-alt:after {
         content: "\f13e";
     }
-    .after_icon.search-icon:after{
+
+    .after_icon.search-icon:after {
         content: "\f002";
     }
-    #input-user-name .after_icon:after{
+
+    #input-user-name .after_icon:after {
         bottom: 19px;
     }
+
     .left-section {
         padding: 0;
         height: 100%;
@@ -312,13 +341,13 @@
         height: 550px;
         overflow: hidden;
         border-radius: 5px;
-        box-shadow: 0 0 44px rgba(0,0,0,0.6);
+        box-shadow: 0 0 44px rgba(0, 0, 0, 0.6);
     }
 
     .left-section h1 {
         font-size: 24px;
         text-align: center;
-        padding: 20px ;
+        padding: 20px;
     }
 
     ul.header_list {
@@ -329,22 +358,26 @@
         font-size: 13px;
         color: #818d9b;
     }
-    ul.header_list a{
+
+    ul.header_list a {
         font-size: 13px;
         color: #818d9b;
     }
+
     ul.header_list li {
         padding: 10px 12px;
     }
+
     ul.header_list li.active {
         color: #313a43;
-        border-bottom:2px solid #28a745;
+        border-bottom: 2px solid #28a745;
     }
-    .content_section{
+
+    .content_section {
         padding: 5px 25px;
     }
 
-    .dots-step{
+    .dots-step {
         position: absolute;
         left: calc(50% - 50px);
         bottom: 8px;
@@ -361,12 +394,13 @@
         position: relative;
 
     }
-    .dots-step span.active{
+
+    .dots-step span.active {
         background: #28a745;
 
     }
 
-    .dots-step span:after{
+    .dots-step span:after {
         position: absolute;
         content: " ";
         top: 3px;
@@ -377,12 +411,13 @@
         height: 3px;
     }
 
-    .dots-step span:last-of-type:after{
+    .dots-step span:last-of-type:after {
         display: none;
     }
+
     .dropdown {
         position: absolute;
-        top:50%;
+        top: 50%;
         transform: translateY(-50%);
     }
 
@@ -458,9 +493,6 @@
         background-color: #fff;
     }
 
-
-
-
     button {
         background-color: #6BBE92;
         width: 302px;
@@ -471,17 +503,21 @@
         color: #fff;
         font-weight: bold;
     }
+
     @media screen and (max-width: 996px) {
-        body{
+        body {
             line-height: 1.1em;
         }
+
         .content_section {
-            padding: 15px !important; ;
+            padding: 15px !important;;
         }
-        .dots-step{
+
+        .dots-step {
 
         }
     }
+
     @media screen and (max-width: 768px) {
         #main {
             margin: 160px auto 80px;
@@ -491,391 +527,482 @@
         }
     }
 
-
     @media screen and (max-width: 447px) {
         .content_section {
             padding: 0 15px !important;
         }
+
         .dots-step[data-v-5abd7116] {
             bottom: -2px;
         }
     }
 
 
-
 </style>
+
 <template>
-<div>
-    <!-- Modal -->
-   <!-- <div class="container">
-        <div class="modal fade" id="myModal" tabindex="-1" ref="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="main_popup_content">
-                        <a href="#" data-dismiss="modal" > <i class="fa fa-close"></i></a>
-                        <p class="main_par">
-                            {{popUpMsg}}
-                        </p>
-                        <button class=" green-bot " data-dismiss="modal">
-                            متوجه شدم
-                        </button>
-                    </div>
-                </div>&lt;!&ndash; /.modal-content &ndash;&gt;
-            </div>&lt;!&ndash; /.modal-dialog &ndash;&gt;
-        </div>
-    </div>-->
-    <!-- /.modal -->
-    <div class="bg register"> </div>
+    <div>
+        <div class="bg register"></div>
 
+        <main id="main">
+            <div class="main-form">
+                <div class="left-section col-sm-8">
+                    <h1>ثبت نام در سامانه </h1>
+                    <div id="step1" v-show="currentStep === 1">
 
-    <main id="main">
-        <div class="main-form">
-            <div class="left-section col-sm-8">
-                <h1>ثبت نام در سامانه </h1>
-                <div id="step1" v-show="currentStep == 1">
-                    <template>
-                        <ul class="header_list list-inline">
-                            <li class="active">ثبت موبایل</li>
-                            <li>تایید موبایل</li>
-                            <li>ثبت مشخصات فردی</li>
-                            <li> ثبت نهایی</li>
-                        </ul>
-                        <div class="content_section">
-                            <label class="col-xs-12">
-                                لطفا شماره موبایل خود را وارد کنید
-                            </label>
-                            <div class="col-xs-12 input_contents">
-                                <span class="after_icon numbers"></span>
-                                <input class="pad number" type="text" name="name" v-model="step1.phone"
-                                       placeholder="شماره موبایل">
-                            </div>
-                            <span class="sub-des col-xs-12">
+                        <template>
+                            <ul class="header_list list-inline">
+                                <li class="active">ثبت موبایل</li>
+                                <li>تایید موبایل</li>
+                                <li>ثبت مشخصات فردی</li>
+                                <li> ثبت نهایی</li>
+                            </ul>
+
+                            <div class="content_section">
+                                <label class="col-xs-12">
+                                    لطفا شماره موبایل خود را وارد کنید
+                                </label>
+
+                                <div class="col-xs-12 input_contents">
+                                    <span class="after_icon numbers"></span>
+
+                                    <input class="pad number"
+                                           type="text"
+                                           name="name"
+                                           v-model="step1.phone"
+                                           placeholder="شماره موبایل">
+                                </div>
+
+                                <span class="sub-des col-xs-12">
                                پس از وارد کردن شماره موبایل ما یک کد برای شما ارسال میکنیم تا از صحت شماره وارد شده اطمینان حاصل کنیم
                            </span>
-                            <span v-if="errors.phone" class="error_msg">
-                                    {{errors.phone[0]}}
-                            </span>
-                            <div class="col-xs-12">
-                                <button class="green_but" type="button"  @click.prevent="send_verification_code" :disabled="step1.sendCode == false">
-                                    ارسال پیام کوتاه
-                                </button>
-                            </div>
 
-                        </div>
+                                <span v-if="errors.phone" class="error_msg" v-text="errors.phone[0]">
 
-                        <div class="dots-step">
-                            <span class="dots active"></span>
-                            <span class="dots"></span>
-                            <span class="dots"></span>
-                            <span class="dots"></span>
-                        </div>
-                    </template>
-                </div>
-                <div id="step2" v-show="currentStep == 2">
-                    <template>
-                        <ul class="header_list list-inline">
-                            <li class="back_step" @click="goToStep(1)">ثبت موبایل</li>
-                            <li class="active">تایید موبایل</li>
-                            <li>ثبت مشخصات فردی</li>
-                            <li> ثبت نهایی</li>
-                        </ul>
-                        <div class="content_section">
-                            <label class="col-xs-12">
-                                کد ارسال شده به تلفن همراهتان را وارد کنید.
-                            </label>
-                            <div class="col-xs-12 input_contents">
-                                <span class="after_icon search-icon"></span>
-                                <input class="pad " type="text" name="name" v-model="step2.verification_code"
-                                       placeholder="کد تایید">
-                            </div>
-                            <span v-if="errors.verification_code" class="error_msg">
-                                    {{errors.verification_code[0]}}
                             </span>
 
-                            <div class="bouttons col-xs-12">
-                                <button class=" green_but" type="button" @click="verify_code"> بررسی کد</button>
-                                <div v-if="step2.showTimer">
-                                    <button class="danger_border_but" type="button"         @click.prevent="goToStep(1)" :disabled="step2.reSendCode == false" :value="step2.timeCounterDown">
-                                        {{step2.timeCounterDown}} ثانیه تا ارسال مجدد
+                                <div class="col-xs-12">
+                                    <button class="green-button"
+                                            type="button"
+                                            @click.prevent="send_verification_code"
+                                            :disabled="step1.sendCode === false">
+
+                                        ارسال پیام کوتاه
+
                                     </button>
                                 </div>
-                                <div v-else>
-                                    <button class="danger_border_but" type="button" @click.prevent="goToStep(1)" :disabled="step2.reSendCode == false">
-                                        کد را دریافت نکردم
-                                    </button>
-                                </div>
+
                             </div>
 
-                        </div>
+                            <div class="dots-step">
 
-                        <div class="dots-step">
-                            <span class="dots active back_step" @click="goToStep(1)"></span>
-                            <span class="dots active"></span>
-                            <span class="dots"></span>
-                            <span class="dots"></span>
-                        </div>
-                    </template>
-                </div>
-                <div id="step3" v-show="currentStep == 3">
-                    <template>
-                        <ul class="header_list list-inline">
-                            <li class="back_step" @click="goToStep(1)">ثبت موبایل</li>
-                            <li class="back_step" @click="goToStep(2)">تایید موبایل</li>
-                            <li class="active">ثبت مشخصات فردی</li>
-                            <li> ثبت نهایی</li>
-                        </ul>
-                        <div class="input-forms content_section">
-                            <label class="col-xs-12">
-                                جنسیت
-                            </label>
+                                <span class="dots active"></span>
+                                <span class="dots"></span>
+                                <span class="dots"></span>
+                                <span class="dots"></span>
 
-                            <div class="col-xs-6 radio_btn">
-                                <div class="radio-wrapper"><input v-model="step3.sex" type="radio" name="sex"
-                                                                  value="خانم">خانم
-                                    <i class="fa fa-check"></i>
+                            </div>
+                        </template>
+
+                    </div>
+
+                    <div id="step2" v-show="currentStep === 2">
+                        <template>
+                            <ul class="header_list list-inline">
+                                <li class="back_step" @click="goToStep(1)">ثبت موبایل</li>
+                                <li class="active">تایید موبایل</li>
+                                <li>ثبت مشخصات فردی</li>
+                                <li> ثبت نهایی</li>
+                            </ul>
+
+                            <div class="content_section">
+
+                                <label class="col-xs-12">
+                                    کد ارسال شده به تلفن همراهتان را وارد کنید.
+                                </label>
+
+                                <div class="col-xs-12 input_contents">
+                                    <span class="after_icon search-icon"></span>
+
+                                    <input class="pad "
+                                           type="text"
+                                           name="name"
+                                           v-model="step2.verification_code"
+                                           placeholder="کد تایید">
                                 </div>
-                            </div>
-                            <div class="col-xs-6 radio_btn">
-                                <div class="radio-wrapper"><input v-model="step3.sex" type="radio" sname="sex"
-                                                                  value="آقا">آقا
-                                    <i class="fa fa-check"></i>
+
+                                <span v-if="errors.verification_code"
+                                      class="error_msg"
+                                      v-text="errors.verification_code[0]">
+
+                            </span>
+
+                                <div class="bouttons col-xs-12">
+                                    <button class=" green-button"
+                                            type="button"
+                                            @click="verify_code"> بررسی کد</button>
+
+                                    <div v-if="step2.showTimer">
+                                        <button class="danger_border_but"
+                                                type="button"
+                                                @click.prevent="goToStep(1)"
+                                                :disabled="step2.reSendCode === false"
+                                                :value="step2.timeCounterDown">
+
+                                            <span v-text="step2.timeCounterDown"></span>
+                                            ثانیه تا ارسال مجدد
+                                        </button>
+
+                                    </div>
+
+                                    <div v-else>
+
+                                        <button class="danger_border_but"
+                                                type="button"
+                                                @click.prevent="goToStep(1)"
+                                                :disabled="step2.reSendCode === false">
+                                            کد را دریافت نکردم
+                                        </button>
+                                    </div>
+
                                 </div>
+
                             </div>
-                            <label class="col-xs-12">
-                                اطلاعات شخصی خود را وارد کنید. </label>
-                            <div class="col-xs-6">
-                                <input type="text" name="city" v-model="step3.first_name" placeholder="نام">
-                                <span v-if="errors.first_name" class="error_msg">
-                                    {{errors.first_name[0]}}
-                                </span>
+
+                            <div class="dots-step">
+                                <span class="dots active back_step" @click="goToStep(1)"></span>
+                                <span class="dots active"></span>
+                                <span class="dots"></span>
+                                <span class="dots"></span>
                             </div>
-                            <div class="col-xs-6">
-                                <input type="text" name="city" v-model="step3.last_name" placeholder="نام خانوادگی">
-                                <span v-if="errors.last_name" class="error_msg">
-                                    {{errors.last_name[0]}}
+
+                        </template>
+                    </div>
+
+                    <div id="step3" v-show="currentStep === 3">
+                        <template>
+                            <ul class="header_list list-inline">
+                                <li class="back_step" @click="goToStep(1)">ثبت موبایل</li>
+                                <li class="back_step" @click="goToStep(2)">تایید موبایل</li>
+                                <li class="active">ثبت مشخصات فردی</li>
+                                <li> ثبت نهایی</li>
+                            </ul>
+
+                            <div class="input-forms content_section">
+                                <label class="col-xs-12">
+                                    جنسیت
+                                </label>
+
+                                <div class="col-xs-6 radio_btn">
+                                    <div class="radio-wrapper">
+                                        <input v-model="step3.sex" type="radio" name="sex"
+                                               value="خانم">خانم
+                                        <i class="fa fa-check"></i>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6 radio_btn">
+                                    <div class="radio-wrapper">
+                                        <input v-model="step3.sex" type="radio" sname="sex"
+                                               value="آقا">آقا
+                                        <i class="fa fa-check"></i>
+                                    </div>
+                                </div>
+
+                                <label class="col-xs-12">
+                                    اطلاعات شخصی خود را وارد کنید. </label>
+                                <div class="col-xs-6">
+                                    <input type="text"
+                                           name="city"
+                                           v-model="step3.first_name"
+                                           placeholder="نام">
+                                    <span v-if="errors.first_name"
+                                          class="error_msg"
+                                          v-text="errors.first_name[0]">
+
                                 </span>
-                            </div>
-                            <div id="input-user-name" class="col-xs-12  input_contents">
-                                <span class="after_icon search-icon"></span>
-                                <input class="pad" type="text" name="city" v-model="step3.user_name"
-                                       placeholder="نام کاربری به انگلیسی">
-                                <span v-if="errors.user_name[0]" class="error_msg">
-                                    {{errors.user_name[0]}}
+
+                                </div>
+                                <div class="col-xs-6">
+                                    <input type="text"
+                                           name="city"
+                                           v-model="step3.last_name" placeholder="نام خانوادگی">
+
+                                    <span v-if="errors.last_name"
+                                          class="error_msg"
+                                          v-text="errors.last_name[0]">
                                 </span>
-                                <span v-else class="error_msg">
+
+                                </div>
+                                <div id="input-user-name" class="col-xs-12  input_contents">
+
+                                    <span class="after_icon search-icon"></span>
+
+                                    <input class="pad"
+                                           type="text"
+                                           name="city"
+                                           v-model="step3.user_name"
+                                           placeholder="نام کاربری به انگلیسی">
+
+                                    <span v-if="errors.user_name[0]"
+                                          class="error_msg"
+                                          v-text="errors.user_name[0]">
+                                </span>
+
+                                    <span v-else class="error_msg">
                                     بدون فاصله
                                 </span>
-                            </div>
-<!--
-                            <div class="col-xs-6">
-                                <input type="text" name="city" v-model="step3.national_code" placeholder="کد ملی(اختیاری)">
-                                <span v-if="errors.national_code" class="error_msg">
-                                    {{errors.national_code[0]}}
-                                </span>
-                            </div>
--->
-                            <div class="col-xs-6">
-                                <!--<input type="text" name="city" v-model="step3.province" placeholder="استان">-->
-                                <select  v-on:change="setProvinceName($event)">
-                                    <option selected disabled>استان را انتخاب کنید</option>
-                                    <option
-                                            v-for="province in step3.provinceList"
-                                            v-bind:value="province.province_name"
-                                    >
-                                        {{province.province_name}}
-                                    </option>
-                                </select>
-                                <span v-if="errors.province" class="error_msg">
-                                    {{errors.province[0]}}
-                                </span>
-                            </div>
-                            <div class="col-xs-6">
-                                <!--<input type="text" name="city" v-model="step3.city" placeholder="شهر">-->
-                                <select v-on:change="setCityName($event)">
-                                    <option selected disabled>شهر را انتخاب کنید</option>
-                                    <option v-for="city in step3.cityList"
-                                            v-bind:value="city.city_name"
-                                    >{{city.city_name}}</option>
-                                </select>
-                                <span v-if="errors.city" class="error_msg">
-                                    {{errors.city[0]}}
-                                </span>
-                            </div>
-                            <div class="col-xs-6">
-                                <input type="password" name="city" v-model="step3.password" placeholder="رمز عبور">
-                                <span v-if="errors.password" class="error_msg">
-                                    {{errors.password[0]}}
-                                </span>
-                            </div>
-                            <div class="col-xs-6">
-                                <input type="password" name="city" v-model="step3.re_password" placeholder="تکرار رمز عبور">
-                                <span v-if="errors.password_conf" class="error_msg">
-                                    {{errors.password_conf[0]}}
-                                </span>
-                            </div>
-                            <div class="buttons col-xs-12">
-                                <button  class="green_but" type="button" @click="register_details">ثبت مشخصات</button>
-                            </div>
-                        </div>
-                        <div class="dots-step">
-                            <span class="dots active back_step" @click="goToStep(1)"></span>
-                            <span class="dots active back_step" @click="goToStep(2)"></span>
-                            <span class="dots active"></span>
-                            <span class="dots"></span>
-                        </div>
-                    </template>
-                </div>
-                <div id="step4" v-show="currentStep == 4">
-                    <template>
-                        <ul class="header_list list-inline">
-                            <li  class="back_step" @click="goToStep(1)">ثبت موبایل</li>
-                            <li  class="back_step" @click="goToStep(2)">تایید موبایل</li>
-                            <li  class="back_step" @click="goToStep(3)">ثبت مشخصات فردی</li>
-                            <li class="active"> ثبت نهایی</li>
-                        </ul>
-                        <div class="content_section ">
-                            <label class="col-xs-12">
-                                نوع فعالیت
-                            </label>
-                            <div class="col-xs-6">
-                                <div class="radio-wrapper"><input v-model="step4.activity_type" type="radio" name="kind"
-                                                                  value="1">خریدار
-                                    <i class="fa fa-check"></i>
+
                                 </div>
-                            </div>
-                            <div class="col-xs-6">
-                                <div class="radio-wrapper"><input v-model="step4.activity_type" type="radio" name="kind"
-                                                                  value="0">فروشنده
-                                    <i class="fa fa-check"></i>
+
+                                <div class="col-xs-6">
+
+                                    <select v-on:change="setProvinceName($event)">
+
+                                        <option selected disabled>استان را انتخاب کنید</option>
+                                        <option
+                                                v-for="province in step3.provinceList"
+                                                v-bind:value="province.province_name"
+                                                v-text="province.province_name"
+                                        >
+
+                                        </option>
+                                    </select>
+
+                                    <span v-if="errors.province"
+                                          class="error_msg"
+                                          v-text="errors.province[0]">
+                                </span>
+
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <select v-on:change="setCityName($event)">
+                                        <option selected disabled>شهر را انتخاب کنید</option>
+                                        <option v-for="city in step3.cityList"
+                                                v-bind:value="city.city_name"
+                                       v-text="city.city_name"
+                                        >
+                                        </option>
+
+                                    </select>
+                                    <span v-if="errors.city"
+                                          class="error_msg" v-text="errors.city[0]">
+
+                                </span>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <input type="password"
+                                           name="city"
+                                           v-model="step3.password"
+                                           placeholder="رمز عبور">
+                                    <span v-if="errors.password"
+                                          class="error_msg"
+                                          v-text="errors.password[0]">
+
+                                </span>
+
+                                </div>
+                                <div class="col-xs-6">
+                                    <input type="password"
+                                           name="city"
+                                           v-model="step3.re_password"
+                                           placeholder="تکرار رمز عبور">
+                                    <span v-if="errors.password_conf"
+                                          class="error_msg"
+                                          v-text="errors.password_conf[0]">
+
+                                </span>
+
+                                </div>
+
+                                <div class="buttons col-xs-12">
+                                    <button class="green-button" type="button" @click="register_details">ثبت مشخصات
+                                    </button>
                                 </div>
                             </div>
 
-                            <span v-if="errors.activity_type" class="error_msg">
-                                    {{errors.activity_type[0]}}
+                            <div class="dots-step">
+                                <span class="dots active back_step" @click="goToStep(1)"></span>
+                                <span class="dots active back_step" @click="goToStep(2)"></span>
+                                <span class="dots active"></span>
+                                <span class="dots"></span>
+                            </div>
+
+                        </template>
+                    </div>
+
+                    <div id="step4" v-show="currentStep === 4">
+                        <template>
+                            <ul class="header_list list-inline">
+                                <li class="back_step" @click="goToStep(1)">ثبت موبایل</li>
+                                <li class="back_step" @click="goToStep(2)">تایید موبایل</li>
+                                <li class="back_step" @click="goToStep(3)">ثبت مشخصات فردی</li>
+                                <li class="active"> ثبت نهایی</li>
+                            </ul>
+
+                            <div class="content_section ">
+                                <label class="col-xs-12">
+                                    نوع فعالیت
+                                </label>
+
+                                <div class="col-xs-6">
+                                    <div class="radio-wrapper">
+                                        <input v-model="step4.activity_type" type="radio"
+                                                                      name="kind"
+                                                                      value="1">خریدار
+                                        <i class="fa fa-check"></i>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <div class="radio-wrapper">
+                                        <input v-model="step4.activity_type"
+                                               type="radio"
+                                                                      name="kind"
+                                                                      value="0">فروشنده
+                                        <i class="fa fa-check"></i>
+
+                                    </div>
+                                </div>
+
+                                <span v-if="errors.activity_type"
+                                      class="error_msg"
+                                      v-text="errors.activity_type[0]">
+
                             </span>
 
-                            <div class="col-xs-12">
-                                <label>
-                                    حوزه فعالیت خود را مشخص کنید. </label>
-                                <select v-on:change="setCategoryId($event)">
-                                    <option disabled selected>
-                                        انتخاب کنید
-                                    </option>
-                                    <option
-                                            v-for="category in step4.categoryList"
-                                            v-bind:value="category.id"
-                                    >
-                                        {{category.category_name }}
-                                    </option>
-                                </select>
-                                <span v-if="errors.category_id" class="error_msg">
-                                    {{errors.category_id[0]}}
+                                <div class="col-xs-12">
+                                    <label>
+                                        حوزه فعالیت خود را مشخص کنید.
+                                    </label>
+
+                                    <select v-on:change="setCategoryId($event)">
+                                        <option disabled selected>
+                                            انتخاب کنید
+                                        </option>
+
+                                        <option
+                                                v-for="category in step4.categoryList"
+                                                v-bind:value="category.id"
+                                                v-text="category.category_name"
+                                        >
+
+                                        </option>
+                                    </select>
+
+                                    <span v-if="errors.category_id"
+                                          class="error_msg"
+                                          v-text="errors.category_id[0]">
+
                                 </span>
 
-<!--
-                                <div class="rules col-xs-12">
-                                    با <span class="roules-check-inside">قوانین و شرایط</span>
-                                    موافقم<input type="checkbox" v-model='step4.rules' value="1">
-                                    <i class="fa fa-check"></i>
+                                    <br/>
+
+                                    <div class="buttons">
+                                        <button class="green-button"
+                                                type="button"
+                                                @click="submitForm">ثبت نهایی
+                                        </button>
+                                    </div>
+
+                                    <br/>
+
+                                    <p class="text-center">
+                                        با تشکر ازحُسن انتخاب شما
+                                    </p>
                                 </div>
--->
-                                <br/>
-                                <div class="buttons">
-                                    <button class="green_but"  type="button" @click="submitForm">ثبت نهایی</button>
-                                </div>
-                                <br/>
-                                <p class="text-center">
-                                    با تشکر ازحُسن انتخاب شما
-                                </p>
+
                             </div>
 
-                        </div>
+                            <div class="dots-step">
+                                <span class="dots active back_step" @click="goToStep(1)"></span>
+                                <span class="dots active back_step" @click="goToStep(2)"></span>
+                                <span class="dots active back_step" @click="goToStep(3)"></span>
+                                <span class="dots active"></span>
+                            </div>
+                        </template>
+                    </div>
 
-                        <div class="dots-step">
-                            <span class="dots active back_step" @click="goToStep(1)"></span>
-                            <span class="dots active back_step" @click="goToStep(2)"></span>
-                            <span class="dots active back_step" @click="goToStep(3)"></span>
-                            <span class="dots active"></span>
-                        </div>
-                    </template>
                 </div>
 
+                <RightSection></RightSection>
             </div>
-            <RightSection></RightSection>
-        </div>
-    </main>
-</div>
+        </main>
+    </div>
 
 </template>
 
 <script>
     import {eventBus} from "../../router/dashboard_router";
     import RightSection from './RightSection.vue'
+
     export default {
-        data:function(){
-           return{
-               currentStep: 1,
-               step1: {
-                   phone: '',
-                   sendCode:true,
-               },
-               step2: {
-                   verification_code:'',
-                   reSendCode:false,
-                   timeCounterDown:120,
-                   showTimer:false,
-                   now:null,
-               },
-               step3:{
-                   first_name:'',
-                   last_name:'',
-                   password:'',
-                   re_password:'',
-                   user_name:'',
-                   sex:'آقا',
-                   province:'',
-                   city:'',
-                   national_code:'',
-                   provinceList:'',
-                   cityList:'',
-               },
-               step4:{
-                   activity_type:'',
-                   rules:0,
-                   categoryList:'',
-                   categoryId:'',
-               },
-               errors:{
-                   first_name:[],
-                   last_name:[],
-                   province:[],
-                   city:[],
-                   user_name:[],
-                   national_code:[],
-                   password:[],
-                   password_conf:[],
-                   sex:[],
-                   verification_code:[],
-                   phone:[],
-                   category_id:[],
-               },
-               errorFlag:false,
-               userNameUnique:true,
-               nationalCodeUnique:true,
-               popUpMsg:'شیر کلفت',
-           }
-        },
-        components:{
+        components: {
             RightSection
         },
-        methods:{
+        data: function () {
+            return {
+                currentStep: 1,
+                step1: {
+                    phone: '',
+                    sendCode: true,
+                },
+                step2: {
+                    verification_code: '',
+                    reSendCode: false,
+                    timeCounterDown: 120,
+                    showTimer: false,
+                    now: null,
+                },
+                step3: {
+                    first_name: '',
+                    last_name: '',
+                    password: '',
+                    re_password: '',
+                    user_name: '',
+                    sex: 'آقا',
+                    province: '',
+                    city: '',
+                    national_code: '',
+                    provinceList: '',
+                    cityList: '',
+                },
+                step4: {
+                    activity_type: '',
+                    rules: 0,
+                    categoryList: '',
+                    categoryId: '',
+                },
+                errors: {
+                    first_name: [],
+                    last_name: [],
+                    province: [],
+                    city: [],
+                    user_name: [],
+                    national_code: [],
+                    password: [],
+                    password_conf: [],
+                    sex: [],
+                    verification_code: [],
+                    phone: [],
+                    category_id: [],
+                },
+                errorFlag: false,
+                userNameUnique: true,
+                nationalCodeUnique: true,
+                popUpMsg: 'شیر کلفت',
+            }
+        },
+        methods: {
             stopLoader: function () {
                 eventBus.$emit('isLoading', false);
             },
-            goToStep: function(step){
+            goToStep: function (step) {
                 this.currentStep = step;
             },
-            send_verification_code:function(){
+            send_verification_code: function () {
                 this.step2.reSendCode = false;
                 this.step1.sendCode = false;
 
@@ -884,318 +1011,311 @@
                 this.step2.now = new Date().getTime();
                 this.step2.showTimer = true;
                 this.step2.timeCounterDown = 119;
-                axios.post("/send_verification_code",{
-                    phone : this.toLatinNumbers(this.step1.phone)
+                axios.post("/send_verification_code", {
+                    phone: this.toLatinNumbers(this.step1.phone)
                 })
-                .then(function(response){
-                    self.goToStep(2);
-                    self.step1.sendCode = true;
+                    .then(function (response) {
+                        self.goToStep(2);
+                        self.step1.sendCode = true;
 
-                    self.step2.verification_code = '';
-                    self.errors.verification_code = [];
+                        self.step2.verification_code = '';
+                        self.errors.verification_code = [];
 
-                    setTimeout(function(){
-                        self.step2.reSendCode = true;
-                    },120000);
-                    
-                    self.registerComponentStatistics('Register','send-verification-code','verification-code-sent-to-user');
-                })
-                .catch(function(err){
-                    self.errors.phone = err.response.data.errors.phone;
-                    self.step1.sendCode = true;
-                    
-                    self.registerComponentExceptions('phone number is empty or incorrect or already exists');
-                });
+                        setTimeout(function () {
+                            self.step2.reSendCode = true;
+                        }, 120000);
+
+                        self.registerComponentStatistics('Register', 'send-verification-code', 'verification-code-sent-to-user');
+                    })
+                    .catch(function (err) {
+                        self.errors.phone = err.response.data.errors.phone;
+                        self.step1.sendCode = true;
+
+                        self.registerComponentExceptions('phone number is empty or incorrect or already exists');
+                    });
             },
-            verify_code:function(){
+            verify_code: function () {
                 var self = this;
 
-                axios.post('/verify_code',{
-                    verification_code:this.toLatinNumbers(this.step2.verification_code)
-                }).then(function (response){
+                axios.post('/verify_code', {
+                    verification_code: this.toLatinNumbers(this.step2.verification_code)
+                }).then(function (response) {
 
-                    if (response.data.status == true){
+                    if (response.data.status === true) {
                         self.goToStep(3);
                         self.getProvinceList();
-                    }else if(response.data.status == false){
+                    } else if (response.data.status === false) {
                         self.goToStep(2);
                         self.errors.verification_code = [];
                         self.errors.verification_code.push('کد وارد شده درست نیست');
                         self.registerComponentExceptions('کد وارد شده درست نیست');
                     }
-                }).catch(function(error){
+                }).catch(function (error) {
                     self.goToStep(2);
                     self.errors.verification_code = [];
                     self.errors.verification_code.push('وارد کردن کد الزامی است.');
                     self.registerComponentExceptions('وارد کردن کد الزامی است');
                 });
-                
-                
+
 
             },
-            register_details:function(){
+            register_details: function () {
                 this.errorFlag = false;
 
                 this.checkStep3();
 
-                if(this.errorFlag == false && this.userNameUnique == true && this.nationalCodeUnique == true){
+                if (this.errorFlag === false &&
+                    this.userNameUnique === true &&
+                    this.nationalCodeUnique === true) {
                     this.goToStep(4);
                     this.getCategory();
                 }
             },
-            submitForm:function(){
+            submitForm: function () {
                 var self = this;
 
                 this.errorFlag = false;
 
                 this.checkStep4();
 
-//                if(this.step4.rules != 1){
-//                    this.popUpMsg = 'پذیرش قوانین ثبت آگهی الزامی است.';
-//
-//                    $('#myModal').modal('show');
-//                    return ;
-//                }
-
                 var object = {
-                    phone:this.toLatinNumbers(this.step1.phone),
-                    first_name:this.step3.first_name,
-                    last_name:this.step3.last_name,
-                    password:this.step3.password,
-                    user_name:this.step3.user_name,
-                    sex:this.step3.sex,
-                    province:this.step3.province,
-                    city:this.step3.city,
-                    activity_type:this.step4.activity_type,
-                    national_code:this.toLatinNumbers(this.step3.national_code),
-                    category_id:this.step4.categoryId
+                    phone: this.toLatinNumbers(this.step1.phone),
+                    first_name: this.step3.first_name,
+                    last_name: this.step3.last_name,
+                    password: this.step3.password,
+                    user_name: this.step3.user_name,
+                    sex: this.step3.sex,
+                    province: this.step3.province,
+                    city: this.step3.city,
+                    activity_type: this.step4.activity_type,
+                    national_code: this.toLatinNumbers(this.step3.national_code),
+                    category_id: this.step4.categoryId
                 };
 
-                if(this.errorFlag == false){
-                    axios.post('api/v1/users',object)
-                        .then(function (response){
-                            if(response.status == 201){
+                if (this.errorFlag === false) {
+                    axios.post('api/v1/users', object)
+                        .then(function (response) {
+                            if (response.status === 201) {
 
                                 self.popUpMsg = 'ثبت نام با موفقیت انجام شد.در حال انتقال به صفحه ی ورود...';
                                 eventBus.$emit('submitSuccess', self.popUpMsg);
-                                $('#myModal').modal('show');
+                                $('#custom-main-modal').modal('show');
 
-                                setTimeout(function(){
+                                setTimeout(function () {
                                     window.location.href = '/login';
-                                },3000);
-                                
-                                self.registerComponentStatistics('Register','successful-register','user-registered-successfully');
+                                }, 3000);
+
+                                self.registerComponentStatistics('Register', 'successful-register', 'user-registered-successfully');
                             }
                         })
-                        .catch(function(err){
-                            self.registerComponentExceptions('User register API failed',true);
+                        .catch(function (err) {
+                            self.registerComponentExceptions('User register API failed', true);
                         });
                 }
             },
-            setCategoryId:function(e){
+            setCategoryId: function (e) {
                 e.preventDefault();
 
                 this.step4.categoryId = $(e.target).val();
             },
-            checkStep3:function(){
+            checkStep3: function () {
                 this.userNameValidator(this.step3.user_name);
                 this.firstNameValidator(this.step3.first_name);
                 this.lastNameValidator(this.step3.last_name);
                 this.provinceValidator(this.step3.province);
                 this.cityValidator(this.step3.city);
                 this.nationalCodeValidator(this.step3.national_code);
-                this.passwordValidator(this.step3.password,this.step3.re_password);
+                this.passwordValidator(this.step3.password, this.step3.re_password);
                 this.sexValidator(this.step3.sex);
-                
-                if(this.errorFlag){
+
+                if (this.errorFlag) {
                     this.registerComponentExceptions('Validation error in step 3 in user register page!');
                 }
-                
+
             },
-            checkStep4:function(){
+            checkStep4: function () {
                 this.activityTypeValidator(this.step4.activity_type);
                 this.categoryIdValidator(this.step4.categoryId);
-                
-                if(this.errorFlag){
+
+                if (this.errorFlag) {
                     this.registerComponentExceptions('Validation Error in step 4 in user register page!');
                 }
             },
-            firstNameValidator:function(name){
+            firstNameValidator: function (name) {
                 this.errors.first_name = [];
 
-                if(name === ''){
+                if (name === '') {
                     this.errors.first_name.push('فیلد الزامی است');
                     this.errorFlag = true;
                 }
-                if( ! this.validateRegx(name,/^[\u0600-\u06FF\s]+$/)){
+                if (!this.validateRegx(name, /^[\u0600-\u06FF\s]+$/)) {
                     this.errors.first_name.push('فیلد باید فارسی باشد');
                     this.errorFlag = true;
                 }
             },
-            lastNameValidator:function(name){
+            lastNameValidator: function (name) {
                 this.errors.last_name = [];
 
-                if(name === ''){
+                if (name === '') {
                     this.errors.last_name.push('فیلد الزامی است');
                     this.errorFlag = true;
                 }
-                if( ! this.validateRegx(name,/^[\u0600-\u06FF\s]+$/)){
+                if (!this.validateRegx(name, /^[\u0600-\u06FF\s]+$/)) {
                     this.errors.last_name.push('فیلد باید فارسی باشد');
                     this.errorFlag = true;
                 }
             },
-            provinceValidator:function(province){
+            provinceValidator: function (province) {
                 this.errors.province = [];
 
-                if(province === ''){
+                if (province === '') {
                     this.errors.province.push('فیلد استان الزامی است');
                     this.errorFlag = true;
                 }
-                if( ! this.validateRegx(province,/^[\u0600-\u06FF\s]+$/)){
+                if (!this.validateRegx(province, /^[\u0600-\u06FF\s]+$/)) {
                     this.errors.province.push('استان باید فارسی باشد');
                     this.errorFlag = true;
                 }
             },
-            cityValidator:function(city){
+            cityValidator: function (city) {
                 this.errors.city = [];
 
-                if(city === ''){
+                if (city === '') {
                     this.errors.city.push('فیلد شهر الزامی است');
                     this.errorFlag = true;
                 }
-                if( ! this.validateRegx(city,/^[\u0600-\u06FF\s]+$/)){
+                if (!this.validateRegx(city, /^[\u0600-\u06FF\s]+$/)) {
                     this.errors.city.push('شهر باید فارسی باشد');
                     this.errorFlag = true;
                 }
             },
-            userNameValidator:function(userName){
-                if(this.userNameUnique == true){
+            userNameValidator: function (userName) {
+                if (this.userNameUnique === true) {
                     this.errors.user_name = [];
                 }
 
-                if(userName == ''){
+                if (userName === '') {
                     this.errors.user_name.push('نام کاربری الزامی است');
 
                     this.errorFlag = true;
                 }
-                if( ! this.validateRegx(userName,/^\w+$/)){
+                if (!this.validateRegx(userName, /^\w+$/)) {
                     this.errors.user_name.push(' شامل حروف غیر مجاز است');
                     this.errorFlag = true;
                 }
             },
-            nationalCodeValidator:function(code){
+            nationalCodeValidator: function (code) {
                 code = this.toLatinNumbers(code);
 
-                if(this.nationalCodeUnique == true){
+                if (this.nationalCodeUnique === true) {
                     this.errors.national_code = [];
                 }
-
-//                if(code === ''){
-//                    this.errors.national_code.push('کد ملی الزامی است');
-//                    this.errorFlag = true;
-//                }
-                if( code !== '' && (! this.isIrNationalCode(code))){
+                if (code !== '' && (!this.isIrNationalCode(code))) {
                     this.errors.national_code.push('کد ملی معتبر نیست');
                     this.errorFlag = true;
                 }
             },
-            isIrNationalCode:function(input){
-                if (!/^\d{10}$/.test(input)){
+            isIrNationalCode: function (input) {
+                if (!/^\d{10}$/.test(input)) {
                     return false;
                 }
 
                 var check = parseInt(input[9]);
                 var sum = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-                    .map(function (x) { return parseInt(input[x]) * (10 - x); })
-                    .reduce(function (x, y) { return x + y; }) % 11;
+                    .map(function (x) {
+                        return parseInt(input[x]) * (10 - x);
+                    })
+                    .reduce(function (x, y) {
+                        return x + y;
+                    }) % 11;
 
                 return sum < 2 && check == sum || sum >= 2 && check + sum == 11;
             },
-            passwordValidator:function(pass,passConf){
+            passwordValidator: function (pass, passConf) {
                 this.errors.password = [];
                 this.errors.password_conf = [];
 
-                if(pass === ''){
+                if (pass === '') {
                     this.errors.password.push('رمز عبور الزامی است');
                     this.errorFlag = true;
                 }
-                if(pass.length < 8){
+                if (pass.length < 8) {
                     this.errors.password.push('رمز عبور حداقل ۸ کاراکتر باشد');
                     this.errorFlag = true;
                 }
-                if(passConf === ''){
+                if (passConf === '') {
                     this.errors.password_conf.push('تکرار رمز عبور الزامی است');
                     this.errorFlag = true;
                 }
-                if(passConf != pass){
+                if (passConf !== pass) {
                     this.errors.password_conf.push('رمز عبور مطابقت ندارد');
                     this.errorFlag = true;
                 }
             },
-            sexValidator:function(sex){
+            sexValidator: function (sex) {
                 this.errors.sex = [];
 
-                if(sex === ''){
+                if (sex === '') {
                     this.errors.sex.push('جنسیت الزامی است');
                     this.errorFlag = true;
                 }
             },
-            categoryIdValidator:function(categoryId){
+            categoryIdValidator: function (categoryId) {
                 this.errors.category_id = [];
-                if(categoryId === ''){
+                if (categoryId === '') {
                     this.errors.category_id.push('انتخاب حوزه ی فعالیت الزامی است.');
                     this.errorFlag = true;
                 }
             },
-            activityTypeValidator:function(activityType){
+            activityTypeValidator: function (activityType) {
                 this.errors.activity_type = [];
-                if(activityType == ''){
+                if (activityType === '') {
                     this.errors.activity_type.push('انتخاب نوع کاربری الزامی است.');
                     this.errorFlag = true;
                 }
             },
-            validateRegx:function(input,regx){
+            validateRegx: function (input, regx) {
                 return regx.test(input);
             },
-            getCategory:function(){
+            getCategory: function () {
                 axios.post('/get_category_list').then(response => (this.step4.categoryList = response.data.categories));
             },
-            getCategoryId:function (categoryId){
+            getCategoryId: function (categoryId) {
                 this.step4.categoryId = categoryId;
             },
-            getProvinceList:function(){
+            getProvinceList: function () {
                 axios.post('/location/get_location_info')
                     .then(response => (this.step3.provinceList = response.data.provinces));
             },
-            getCityList:function(provinceId){
-                axios.post('/location/get_location_info',{
-                    province_id : provinceId
+            getCityList: function (provinceId) {
+                axios.post('/location/get_location_info', {
+                    province_id: provinceId
                 })
-                .then(response => (this.step3.cityList = response.data.cities));
+                    .then(response => (this.step3.cityList = response.data.cities));
             },
-            setProvinceName:function(e){
+            setProvinceName: function (e) {
                 e.preventDefault();
 
                 this.step3.province = $(e.target).val();
 
                 var provinceId = '';
 
-                for(var i = 0 ; i < this.step3.provinceList.length ; i++){
-                    if(this.step3.province == this.step3.provinceList[i].province_name){
-                        provinceId = this.step3.provinceList[i].id ;
+                for (var i = 0; i < this.step3.provinceList.length; i++) {
+                    if (this.step3.province === this.step3.provinceList[i].province_name) {
+                        provinceId = this.step3.provinceList[i].id;
                         break;
                     }
                 }
 
                 this.getCityList(provinceId);
             },
-            setCityName:function(e){
+            setCityName: function (e) {
                 e.preventDefault();
 
                 this.step3.city = $(e.target).val();
             },
-            toLatinNumbers:function(num){
-                if(num == null){
+            toLatinNumbers: function (num) {
+                if (num == null) {
                     return '';
                 }
                 var numDic = {
@@ -1213,56 +1333,56 @@
 
                 return num
                     .toString()
-                    .replace(/[۰-۹]/g,function(w){
+                    .replace(/[۰-۹]/g, function (w) {
                         return numDic[w];
                     });
             },
-            updateCounterDownTimer:function(seconds){
+            updateCounterDownTimer: function (seconds) {
 
-                if(seconds != 1){
+                if (seconds !== 1) {
                     this.step2.timeCounterDown = seconds;
                 }
                 else this.step2.showTimer = false;
             },
             registerComponentStatistics: function (categoryName, actionName, labelName) {
-                gtag('event', actionName,{
+                gtag('event', actionName, {
                     'event_category': categoryName,
                     'event_label': labelName
                 });
             },
-            registerComponentExceptions:function(description,fatal = false){
-                gtag('event','exception',{
+            registerComponentExceptions: function (description, fatal = false) {
+                gtag('event', 'exception', {
                     'description': description,
                     'fatal': fatal
                 });
             }
         },
-        watch:{
-            'step2.timeCounterDown':function(){
+        watch: {
+            'step2.timeCounterDown': function () {
                 var self = this;
                 var now = new Date().getTime();
 
-                var distance =  now - this.step2.now;
+                var distance = now - this.step2.now;
 
-                var seconds =  119 - Math.floor((distance % (1000 * 120)) / 1000) + 1;
+                var seconds = 119 - Math.floor((distance % (1000 * 120)) / 1000) + 1;
 
-                setTimeout(function(){
+                setTimeout(function () {
                     self.updateCounterDownTimer(seconds);
-                },1000);
+                }, 1000);
             },
-            'step3.user_name':function(){
+            'step3.user_name': function () {
                 var self = this;
-                if(this.step3.user_name.length > 0){
-                    axios.post('/user/is_user_name_unique',{
-                        user_name : this.step3.user_name,
+                if (this.step3.user_name.length > 0) {
+                    axios.post('/user/is_user_name_unique', {
+                        user_name: this.step3.user_name,
                     })
-                        .then(function(response){
-                            if(response.data.status == true){
+                        .then(function (response) {
+                            if (response.data.status === true) {
                                 self.errors.user_name = [];
                                 self.userNameUnique = true;
                             }
                         })
-                        .catch(function(err){
+                        .catch(function (err) {
                             self.errors.user_name = [];
                             self.errors.user_name.push('نام کاربری قبلا گرفته شده');
 
@@ -1271,28 +1391,28 @@
                         });
                 }
             },
-            'step3.national_code':function(){
+            'step3.national_code': function () {
                 var self = this;
 
                 this.step3.national_code = this.toLatinNumbers(this.step3.national_code);
 
-                if(this.step3.national_code.length > 0 && this.step3.national_code < 10){
+                if (this.step3.national_code.length > 0 && this.step3.national_code < 10) {
                     this.errors.national_code = [];
                     this.errors.national_code.push('کد ملی ۱۰ رقمی است');
 
                     this.errorFlag = true;
                 }
-                else if(this.step3.national_code.length == 10){
-                    axios.post('user/is_national_code_unique',{
+                else if (this.step3.national_code.length === 10) {
+                    axios.post('user/is_national_code_unique', {
                         national_code: this.toLatinNumbers(this.step3.national_code),
                     })
-                        .then(function(response){
-                            if(response.data.status == true){
+                        .then(function (response) {
+                            if (response.data.status === true) {
                                 self.errors.national_code = [];
                                 self.nationalCodeUnique = true;
                             }
                         })
-                        .catch(function(err){
+                        .catch(function (err) {
                             self.errors.national_code = [];
                             self.errors.national_code.push('کد ملی قبلا گرفته شده');
 
@@ -1303,24 +1423,18 @@
 
             }
         },
-        created(){
-            gtag('config','UA-129398000-1',{'page_path': '/register'});
+        created() {
+            gtag('config', 'UA-129398000-1', {'page_path': '/register'});
         },
-        mounted:function(){
-              document.onreadystatechange = () => { 
-                if (document.readyState == "complete") { 
+        mounted: function () {
+            document.onreadystatechange = () => {
+                if (document.readyState === "complete") {
                     self.$nextTick(this.stopLoader());
-                } 
-            } 
+                }
+            }
         },
         updated: function () {
-             this.$nextTick(this.stopLoader());
-        },
-//        beforeCreate:function(){
-//            var self = this;
-//            window.addEventListener("load", function(event) {
-//                    self.stopLoader();
-//            });
-//        }
+            this.$nextTick(this.stopLoader());
+        }
     }
 </script>

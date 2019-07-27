@@ -1,8 +1,9 @@
 <style scoped>
 
-    #wrap-footer{
+    #wrap-footer {
         display: none;
     }
+
     .loading_images {
         padding-top: 115px;
     }
@@ -23,7 +24,6 @@
         padding: 0;
 
     }
-
 
     a.close-dialog-popup {
         display: block;
@@ -242,7 +242,7 @@
         margin: 30px auto;
     }
 
-    .green_bot {
+    .green-button {
         margin: 5px 0;
         display: inline-block;
         background: #28a745;
@@ -260,7 +260,7 @@
         color: #fff;
     }
 
-    .green_bot:hover {
+    .green-button:hover {
         background: #279b41;
         color: #fff;
         cursor: pointer;
@@ -274,9 +274,9 @@
         z-index: 2;
     }
 
-  /*  .main-padding-fix {
-        padding-top: 72px;
-    }*/
+    /*  .main-padding-fix {
+          padding-top: 72px;
+      }*/
 
     .sidebar-fix {
         position: fixed;
@@ -428,7 +428,7 @@
             padding-right: 20px;
         }
 
-        .user-contents > .green_bot {
+        .user-contents > .green-button {
             float: left;
 
             width: initial;
@@ -464,7 +464,7 @@
             height: 60px;
         }
 
-        .user-contents > .green_bot {
+        .user-contents > .green-button {
 
             float: left;
             width: initial;
@@ -509,24 +509,29 @@
         <!--modal-->
 
         <div class="container">
-            <div class="modal" id="searchFilter" tabindex="-1" role="dialog" aria-labelledby="searchFilter">
+            <div class="modal"
+                 id="searchFilter"
+                 tabindex="-1" role="dialog"
+                 aria-labelledby="searchFilter">
 
                 <div class="modal-dialog">
 
-                    <a href="#" class="close-dialog-popup" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                    <a href="#" class="close-dialog-popup" data-dismiss="modal">
+                        <i class="fa fa-close"></i>
+                    </a>
 
                     <div class="main_popup_content">
 
                         <div class="col-xs-12">
                             <div class="filter-mobile-sidebar ">
-                                <product-aside-categories
+                                <ProductAsideCategories
                                         :productsInfo="products"
                                         :categoryId="categoryId"
                                         :subCategoryId="subCategoryId"
                                         :provinceId="provinceId"
                                         :cityId="cityId"
-                                        v-on:productsToParent="filterProducts($event)">
-                                </product-aside-categories>
+                                        v-on:productsToParent="filterProducts($event)"/>
+
                             </div>
                         </div>
                     </div>
@@ -534,37 +539,33 @@
             </div>
         </div>
 
-
-
-
-
-
-
-
-
         <div class="flat-plust-icon hidden-lg hidden-md">
             <a href="#" @click.prevent="addProductOrRequest()"><i class="fa fa-plus"></i> </a>
         </div>
-        <!--    <header id="header" class="hidden-xs  main-header">
-                <h1 class="title-page col-xs-12">
-                    لیست محصولات
-                </h1>
-            </header>-->
+
         <div class="sub-header-fix sub-header container-fluid">
 
             <div class="search-box col-sm-8 col-xs-12 col-md-5">
                 <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید">
 
-                <button class="btn-search"><i class="fa-search fa"></i></button>
-                <button class="btn-filter  hidden-lg hidden-md" data-toggle="modal" data-target="#searchFilter"> فیلتر
-                    <i class="fa fa-filter"></i></button>
+                <button class="btn-search">
+                    <i class="fa-search fa"></i>
+                </button>
+
+                <button class="btn-filter  hidden-lg hidden-md"
+                        data-toggle="modal" data-target="#searchFilter">
+                    فیلتر
+                    <i class="fa fa-filter"></i>
+                </button>
 
             </div>
+
             <div class="links-sub-header  hidden-xs col-xs-12 col-sm-4 col-md-4">
                 <ul class="list-inline">
-                    <li class="list-item active"><a href="">
-                        لیست محصولات
-                    </a>
+                    <li class="list-item active">
+                        <a href="">
+                            لیست محصولات
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -576,14 +577,15 @@
         <aside class="right-sidebar sidebar-fix col-sm-3">
             <div class="col-sm-12">
                 <h2 class="title-sidebar">دسته بندی محصولات </h2>
-                <product-aside-categories
+                <ProductAsideCategories
                         :productsInfo="products"
                         :categoryId="categoryId"
                         :subCategoryId="subCategoryId"
                         :provinceId="provinceId"
                         :cityId="cityId"
-                        v-on:productsToParent="filterProducts($event)">
-                </product-aside-categories>
+                        v-on:productsToParent="filterProducts($event)"
+                />
+
             </div>
         </aside>
 
@@ -592,34 +594,44 @@
 
             <section class="main-content col-xs-12" v-if="products.length > 0">
                 <div class="row">
-                    <product-article v-for="(product,productIndex) in products"
-                 :key="product.main.id"
-                            :product="product"
-                            :loading_img="loading_img"
-                            :defultimg="defultimg"
-                            :str="str"
-                            :loading="loading"
-                            :currentUser="currentUser"
-                    >
-                    </product-article>
-                    <div class="load-more-button" v-if="searchText == '' && continueToLoadProducts == true ">
+                    <ProductArticle v-for="(product,productIndex) in products"
+                                    :key="product.main.id"
+                                    :product="product"
+                                    :loading_img="loading_img"
+                                    :defultimg="defultimg"
+                                    :str="str"
+                                    :loading="loading"
+                                    :currentUser="currentUser"
+                    />
+
+                    <div class="load-more-button"
+                         v-if="searchText === '' && continueToLoadProducts === true ">
                         <div class="col-xs-12 col-sm-6 col-sm-offset-3">
                             <div class="row">
                                 <a href="#" class="btn btn-loader hidden-xs" @click.prevent="feed()">
                                     <div class="btn-content">
-<span v-show="!loadMoreActive">                                   مشاهده محصولات بیشتر
-</span>
-                                        <span v-show="!loadMoreActive" class="fa fa-plus-circle"></span>
+                                        <span v-show="!loadMoreActive">
+                                            مشاهده محصولات بیشتر
+                                        </span>
+
+                                        <span v-show="!loadMoreActive"
+                                              class="fa fa-plus-circle"></span>
+
                                         <img v-show="loadMoreActive" :src="loading_img">
                                     </div>
                                 </a>
+
                                 <a href="#" class="btn btn-loader hidden-sm hidden-md hidden-lg"
                                    @click.prevent="feed()">
                                     <div class="btn-content">
+
                                     <span v-show="!loadMoreActive">
                                         بیشتر
                                     </span>
-                                        <span v-show="!loadMoreActive" class="fa fa-plus-circle"></span>
+
+                                        <span v-show="!loadMoreActive"
+                                              class="fa fa-plus-circle"></span>
+
                                         <img v-show="loadMoreActive" :src="loading_img">
 
                                     </div>
@@ -630,44 +642,73 @@
                     </div>
                 </div>
             </section>
-            <section class="main-content  col-xs-12" v-else-if="products.length == 0 && searchActive == true">
+
+            <section class="main-content  col-xs-12"
+                     v-else-if="products.length === 0 && searchActive === true">
                 <p></p>
+
                 <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+
                 <p>شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+
                 <br/>
+
                 <div class="text-center">
                     <button class="btn btn-success">درخواست خرید</button>
                 </div>
+
             </section>
-            <section class="main-content  col-xs-12 " v-else-if="products.length == 0 && searchText != '' ">
+
+            <section class="main-content  col-xs-12 "
+                     v-else-if="products.length === 0 && searchText !== '' ">
                 <p></p>
+
                 <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+
                 <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
                 <br/>
+
                 <div class="text-center">
-                    <a class="green_bot col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">درخواست
-                        خرید</a>
+                    <a class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">درخواست
+                        خرید
+                    </a>
                     <br/>
-                    <a class="green_bot col-xs-4 " @click="resetFilter()">نمایش همه محصولات</a>
+
+                    <a class="green-button col-xs-4 " @click="resetFilter()">نمایش همه محصولات</a>
+
                 </div>
+
                 <br/>
             </section>
-            <section class="main-content  col-xs-12 " v-else-if="products.length == 0 && searchText == '' ">
+
+            <section class="main-content  col-xs-12 "
+                     v-else-if="products.length === 0 && searchText === '' ">
                 <p></p>
+
                 <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+
                 <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+
                 <br/>
+
                 <div class="text-center">
-                    <a class="green_bot col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">درخواست
-                        خرید</a>
+                    <a class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">
+                        درخواست
+                        خرید
+                    </a>
+
                     <br/>
-                    <a class="green_bot col-xs-4 " @click.prevent="resetFilter()">نمایش همه محصولات</a>
+                    <a class="green-button col-xs-4 " @click.prevent="resetFilter()">نمایش همه محصولات</a>
                 </div>
+
                 <br/>
             </section>
-            <section class="loading_images  col-xs-12" v-else-if="loadMoreActive == false">
+
+            <section class="loading_images  col-xs-12"
+                     v-else-if="loadMoreActive === false">
                 <img :src="loading_img" style="width:200px;height:200px">
             </section>
+
             <section class="loading_images  col-xs-12" v-else>
                 <img :src="loading_img" style="width:200px;height:200px">
             </section>
@@ -676,14 +717,15 @@
     </div>
 </template>
 <script>
-    import productArticle from './product_components/product_article'
-    import productAsideCategories from './product_components/product_aside_categories'
+    import ProductArticle from './product_components/product_article'
+    import ProductAsideCategories from './product_components/product_aside_categories'
     import {eventBus} from "../../../../js/router/dashboard_router";
-    var viz = false;
+
+    var visible = false;
     export default {
         components: {
-            "product-article": productArticle,
-            "product-aside-categories": productAsideCategories,
+            ProductArticle,
+            ProductAsideCategories,
         },
         props: [
             'str',
@@ -721,44 +763,37 @@
                 loading: false,
                 bottom: false,
                 loadMoreActive: false,
-                searchTextTimeout:null,
+                searchTextTimeout: null,
             }
         },
         methods: {
-//            subBut: function (link) {
-//                var index = ($(link).parents('article').index() + 1);
-//                var productId = $('article:nth-of-type(' + index + ') .buy_details input#product-id');
-//                var requirementAmount = $('article:nth-of-type(' + index + ') .buy_details input#requirement-amount');
-//                var packType = $('article:nth-of-type(' + index + ') .buy_details input#pack-type');
-//                var description = $('article:nth-of-type(' + index + ') .buy_details textarea#description');
-//            },
             filterProducts: function (productsFilter) {
                 this.products = productsFilter;
             },
-            dropdown: function () {
+            collapseDropDown: function () {
                 $(".profile-list").fadeIn("slow", function () {
-                    viz = true;
+                    visible = true;
                 });
             },
-            dropdownList: function () {
+            collapseDropDownList: function () {
                 $(".icon-header-list").fadeIn("slow", function () {
-                    viz = true;
+                    visible = true;
                 });
             },
             documentClick(e) {
-                if (viz) {
+                if (visible) {
                     $('.profile-list').fadeOut("slow");
                     $('.icon-header-list').fadeOut("slow");
-                    viz = false;
+                    visible = false;
                 }
             },
-            init: function (){
+            init: function () {
                 var self = this;
                 var searchValue = this.searchValue;
                 var searchValueText = searchValue;
 
                 axios.post('/user/profile_info')
-                    .then(function(response){
+                    .then(function (response) {
                         self.currentUser = response.data;
                         if (searchValueText) {
                             self.registerComponentStatistics('homePage', 'search-text', searchValueText);
@@ -769,21 +804,19 @@
                             axios.post('/user/get_product_list', {
                                 from_record_number: 0,
                                 to_record_number: self.productCountInPage,
-                            }).then(function (response){
+                            }).then(function (response) {
                                 self.products = response.data.products;
                                 self.loading = false;
                             });
                         }
-                });
+                    });
 
             },
 
             feed() {
-//              var offset = $(window).scrollTop() + $(window).height();
-//              var height = $(document).height();
 
                 var self = this;
-                if (this.searchText == '' && this.provinceId == '' && this.categoryId == '' && this.continueToLoadProducts) {
+                if (this.searchText === '' && this.provinceId === '' && this.categoryId === '' && this.continueToLoadProducts) {
                     this.loadMoreActive = true;
 
                     this.productCountInPage += this.productCountInEachLoad;
@@ -806,20 +839,20 @@
 
             registerRequestInSearchNotFoundCase: function () {
 
-               if (this.currentUser.profile) {
+                if (this.currentUser.profile) {
                     if (this.currentUser.user_info.is_buyer) {
                         window.location.href = '/dashboard/register-request';
                     }
                     else {
                         this.popUpMsg = 'حساب کاربری شما از نوع خریدار نیست.';
                         eventBus.$emit('submitSuccess', this.popUpMsg);
-                        $('#myModal').modal('show');
+                        $('#custom-main-modal').modal('show');
                     }
                 }
                 else {
                     this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
                     eventBus.$emit('submitSuccess', this.popUpMsg);
-                    $('#myModal2').modal('show');
+                    $('#auth-popup').modal('show');
                 }
             },
             bottomVisible: function () {
@@ -832,79 +865,81 @@
             addProductOrRequest: function () {
                 if (this.currentUser.user_info) {
                     if (this.currentUser.user_info.is_seller) {
-                        this.registerComponentStatistics('product-list','register-product','seller clicks on plus button');
-                        
+                        this.registerComponentStatistics('product-list', 'register-product', 'seller clicks on plus button');
+
                         window.location.href = '/dashboard/register-product';
                     }
                     else if (this.currentUser.user_info.is_buyer) {
-                        this.registerComponentStatistics('product-list','register-request','seller clicks on plus button');
-                        
+                        this.registerComponentStatistics('product-list', 'register-request', 'seller clicks on plus button');
+
                         window.location.href = '/dashboard/register-request';
                     }
                 }
                 else {
-                    this.registerComponentStatistics('product-list','unauthorized-user-clicks-on-plus-btn','unauthorized-user-clicks-on-plus-btn');
-                    
+                    this.registerComponentStatistics('product-list', 'unauthorized-user-clicks-on-plus-btn', 'unauthorized-user-clicks-on-plus-btn');
+
                     this.popUpMsg = 'برای ثبت آگهی خرید یا فروش  ابتدا وارد سامانه شوید یا ثبت نام کنید.';
                     eventBus.$emit('submitSuccess', this.popUpMsg);
-                    $('#myModal2').modal('show');
+                    $('#auth-popup').modal('show');
                 }
             },
             resetFilter: function () {
                 $('.box-sidebar option').prop('selected', function () {
                     return this.defaultSelected;
                 });
+
                 this.searchText = '';
                 this.provinceId = '';
                 this.categoryId = '';
                 this.subCategoryId = '';
                 this.cityId = '';
+
                 this.init();
             },
-            applyFilter:function(){
+            applyFilter: function () {
                 var self = this;
 
                 eventBus.$emit('submiting', true);
 
                 var searchObject = {};
 
-                if(this.categoryId){
+                if (this.categoryId) {
                     searchObject.category_id = this.categoryId;
                 }
-                if(this.subCategoryId){
+                if (this.subCategoryId) {
                     searchObject.sub_category_id = this.subCategoryId;
                 }
-                if(this.provinceId){
+                if (this.provinceId) {
                     searchObject.province_id = this.provinceId;
                 }
-                if(this.cityId){
+                if (this.cityId) {
                     searchObject.city_id = this.cityId;
                 }
-                if(this.searchText){
+                if (this.searchText) {
                     searchObject.search_text = this.searchText;
                 }
 
-                if(jQuery.isEmptyObject(searchObject)){
+                if (jQuery.isEmptyObject(searchObject)) {
                     searchObject.from_record_number = 0;
                     searchObject.to_record_number = 5;
                 }
 
-                axios.post('/user/get_product_list',searchObject)
-                    .then(function(response){
+                axios.post('/user/get_product_list', searchObject)
+                    .then(function (response) {
                         self.products = response.data.products;
                         eventBus.$emit('submiting', false);
                         self.scrollToTop();
                     })
-                    .catch(function(err){
+                    .catch(function (err) {
                         alert('error');
                     });
 
             },
             scrollToTop() {
-                window.scrollTo(0,0);
-           },
+                window.scrollTo(0, 0);
+            },
             stopLoader: function () {
-                    eventBus.$emit('isLoading', false);
+                eventBus.$emit('isLoading', false);
             },
             registerComponentStatistics: function (categoryName, actionName, labelName) {
                 gtag('event', actionName, {
@@ -912,8 +947,8 @@
                     'event_label': labelName
                 });
             },
-            registerComponentExceptions:function(description,fatal = false){
-                gtag('event','exception',{
+            registerComponentExceptions: function (description, fatal = false) {
+                gtag('event', 'exception', {
                     'description': description,
                     'fatal': fatal
                 });
@@ -922,36 +957,15 @@
         watch: {
             searchText: function () {
                 var self = this;
-//                eventBus.$emit('submiting', true);
+
                 clearTimeout(this.searchTextTimeout);
 
-                this.searchTextTimeout = setTimeout(function(){
-                    self.registerComponentStatistics('product-list','search-text',self.searchText);
-                    
-                    self.applyFilter();
-                },1500);
+                this.searchTextTimeout = setTimeout(function () {
+                    self.registerComponentStatistics('product-list', 'search-text', self.searchText);
 
-//                axios.post('/user/get_product_list')
-//                    .then(function (response) {
-//                        self.products = '';
-//
-//                        var text = self.searchText.split(' ');
-//                        self.products = response.data.products.filter(function (product) {
-//                            return text.every(function (el) {
-//
-//                                if (product.main.product_name.indexOf(el) > -1 ||
-//                                    product.main.province_name.indexOf(el) > -1 ||
-//                                    product.main.city_name.indexOf(el) > -1 ||
-//                                    product.main.category_name.indexOf(el) > -1 ||
-//                                    product.main.sub_category_name.indexOf(el) > -1) {
-//                                    return true;
-//                                }
-//                                else return false;
-//                            });
-//                        });
-//                        eventBus.$emit('submiting', false);
-//                        eventBus.$emit('finishLoad', false);
-//                    });
+                    self.applyFilter();
+                }, 1500);
+
             },
 
             bottom(bottom) {
@@ -964,32 +978,11 @@
             gtag('config', 'UA-129398000-1', {'page_path': '/product-list'});
 
             document.addEventListener('click', this.documentClick);
-            //window.addEventListener('scroll', this.handleScroll);
-//        window.addEventListener('scroll', () => {
-//          this.bottom = this.bottomVisible();
-//            this.feed();
-//        });
-        },
-        destroyed() {
-            //window.removeEventListener('scroll', this.handleScroll);
         },
         mounted() {
             this.init();
             this.stopLoader();
-        },
-        updated(){
-            //
-        },
-//        beforeCreate:function(){
-//            var self = this;
-//            window.addEventListener("load", function(event) {
-//                    self.stopLoader();
-//            });
-//        },
-//        metaInfo:{
-//            title:'لیست محصولات کشاورزی',
-//            titleTemplate: 'اینکوباک |‌ %s',
-//        }
+        }
     }
 
 </script>

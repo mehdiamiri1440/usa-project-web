@@ -109,7 +109,7 @@
         height: 100%;
     }
 
-    .buy_details .green_bot {
+    .buy_details .green-button {
         margin: 5px auto;
         display: inline-block;
         background: #28a745;
@@ -126,7 +126,7 @@
         text-align: center;
     }
 
-    .green_bot {
+    .green-button {
         margin: 5px 0;
         display: inline-block;
         background: #28a745;
@@ -140,13 +140,13 @@
         border: none;
     }
 
-    .green_bot:hover {
+    .green-button:hover {
         background: #279b41;
         color: #fff;
         cursor: pointer;
     }
 
-    .gray_bot {
+    .gray-button {
         margin: 5px auto;
         display: inline-block;
         background: #000122;
@@ -158,13 +158,13 @@
         line-height: 21px;
     }
 
-    .gray_bot:hover {
-        background: #222;
+    .gray-button:hover {
+        background: #279b41;
         color: #fff;
         cursor: pointer;
     }
 
-    .gray_bot:active, .gray_bot:focus {
+    .gray-button:active, .gray-button:focus {
         color: #fff;
     }
 
@@ -286,7 +286,7 @@
             padding-right: 20px;
         }
 
-        .green_bot {
+        .green-button {
             float: none;
             width: initial;
             padding: 10px 25px;
@@ -355,7 +355,7 @@
             float: right;
         }
 
-        .green_bot {
+        .green-button {
             float: left;
             padding: 10px 5px;
             margin-top: 11px;
@@ -386,29 +386,29 @@
     }
 
 </style>
+
 <template>
     <div class="container">
         <main id="main" class="row ">
-            <!--<div class="col-xs-12 col-md-2"></div>-->
+
             <div class="col-xs-12 ">
                 <section class="main-content" v-if="product">
                     <div class="row">
-                        <product-article
+                        <ProductArticle
                                 :product="product"
                                 :loading_img="loading_img"
                                 :defultimg="defultimg"
                                 :str="str"
                                 :loading="loading"
                                 :currentUser="currentUser"
-                        >
-                        </product-article>
+                        />
                     </div>
                 </section>
+
                 <div class="sec-button">
-                    <a href="/product-list" class="btn gray_bot">نمایش دیگرمحصولات</a>
+                    <a href="/product-list" class="btn gray-button">نمایش دیگرمحصولات</a>
                 </div>
             </div>
-            <!--<div class="col-xs-12 col-md-2"></div>-->
         </main>
 
     </div>
@@ -416,21 +416,20 @@
 
 
 <script>
-    import productArticle from './product_components/product_article'
-    import productAsideCategories from './product_components/product_aside_categories'
+    import ProductArticle from './product_components/product_article'
+    import ProductAsideCategories from './product_components/product_aside_categories'
     import {eventBus} from "../../../../js/router/dashboard_router";
 
-    var viz = false;
+
     export default {
         components: {
-            "product-article": productArticle,
-            "product-aside-categories": productAsideCategories,
+            ProductArticle,
+            ProductAsideCategories,
         },
         props: [
             'str',
             'defultimg',
             'loading_img',
-
         ],
         data: function () {
             return {
@@ -470,20 +469,12 @@
             gtag('config', 'UA-129398000-1', {'page_path': '/product-view'});
 
             document.addEventListener('click', this.documentClick);
-            //window.addEventListener('scroll', this.handleScroll);
-//        window.addEventListener('scroll', () => {
-//          this.bottom = this.bottomVisible();
-//            this.feed();
-//        });
-        },
-        destroyed() {
-            //window.removeEventListener('scroll', this.handleScroll);
         },
         mounted() {
             this.init();
             var self = this;
             document.onreadystatechange = () => {
-                if (document.readyState == "complete") {
+                if (document.readyState === "complete") {
                     self.$nextTick(self.stopLoader());
                 }
             }

@@ -301,7 +301,7 @@
                                     </h2>
                                     <div v-if="currentUser.user_info">
                                         <button v-if="product.main.myuser_id == currentUser.user_info.id"
-                                                class="main_green_but" @click="refreshProduct(product.main.id)">
+                                                class="main-green-button" @click="refreshProduct(product.main.id)">
                                             بروزرسانی <i class="fa fa-refresh"></i></button>
                                     </div>
                                 </div>

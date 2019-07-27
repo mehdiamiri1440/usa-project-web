@@ -4,7 +4,7 @@
         margin: 0 auto;
         display: block;
     }
-    .green-bot {
+    .green-button {
         margin:0 !important;
         display: inline-block;
         background: #28a745;
@@ -15,7 +15,7 @@
         border:none;
         transition: 300ms;
     }
-    .green-bot:hover {
+    .green-button:hover {
         color: #fff;
         background: #11a028;
         transition: 300ms;
@@ -60,7 +60,7 @@
             padding: 0 15px;
             float: right;
         }
-        .green-bot {
+        .green-button {
             margin:15px auto !important;
 
         }
@@ -104,7 +104,7 @@
             <img id="page_not_found" :src="pagenotfoundimage">
             <div class="buttons">
                 <div>
-                    <a href="/" class="green-bot">
+                    <a href="/" class="green-button">
                         صفحه نخست
                     </a>
                 </div>

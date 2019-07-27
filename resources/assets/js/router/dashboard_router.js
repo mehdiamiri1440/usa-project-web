@@ -12,7 +12,7 @@ window.Vue = require('vue');
 // Seller Components
 import sellerProfileBasic from '../components/dashboard/seller/profile/profile_basic.vue'
 import sellerChangePassword from '../components/dashboard/seller/profile/change_password.vue'
-import sellerCompelementry from '../components/dashboard/seller/profile/profile_complete.vue'
+import sellerComplementary from '../components/dashboard/seller/profile/profile_complete.vue'
 import sellerProfileContract from '../components/dashboard/seller/profile/profile_contract.vue'
 import sellerBuyAdRequests from '../components/dashboard/seller/request/buyAd-requests.vue'
 import sellerBuyAdRequestsDetail from '../components/dashboard/seller/request/buyAd-requests-detail.vue'
@@ -29,7 +29,7 @@ import myProducts from '../components/dashboard/seller/product/my_products';
 // Buyer Components
 import buyerProfileBasic from '../components/dashboard/buyer/profile/profile_basic.vue'
 import buyerChangePassword from '../components/dashboard/seller/profile/change_password.vue'
-import buyerCompelementry from '../components/dashboard/buyer/profile/profile_complete.vue'
+import buyerComplementary from '../components/dashboard/buyer/profile/profile_complete.vue'
 import buyerProfileContract from '../components/dashboard/buyer/profile/profile_contract.vue'
 //import buyerRequests from '../components/dashboard/buyer/request/request'
 import buyerMyBuyAd from '../components/dashboard/buyer/request/my-buyAd'
@@ -169,11 +169,11 @@ const myRouter =  new Router({
             }
         }
         , {
-            path: '/dashboard/complementry',
-            name: 'compelementry',
+            path: '/dashboard/complementary',
+            name: 'complementary',
             components: {
-                seller: sellerCompelementry,
-                buyer: buyerCompelementry,
+                seller: sellerComplementary,
+                buyer: buyerComplementary,
             },
         },
         {
@@ -200,7 +200,7 @@ const myRouter =  new Router({
 //                .then(function(response){
 //                    if(response.data.profile.confirmed == false){
 //                        next(false);
-//                        // $('#myModal-1').modal('show');
+//                        // $('#confirmation-modal').modal('show');
 //                    }
 //                    else{
 //                        next();
@@ -222,7 +222,7 @@ const myRouter =  new Router({
 //                .then(function(response){
 //                    if(response.data.access_to_buyAd_requests == false){
 //                        next(false);
-//                    $('#myModal-2').modal('show');
+//                    $('confirmation-modal').modal('show');
 //                    }
 //                    else{
 //                        next();
@@ -425,7 +425,7 @@ myRouter.beforeEach((to,from,next) => {
           case 'profileBasic' :
               next();
               break;
-          case 'compelementry' :
+          case 'complementary' :
               next();
               break;
           default :
@@ -434,14 +434,14 @@ myRouter.beforeEach((to,from,next) => {
                 })
             .then(function(response){
                 if(response.data.profile.confirmed == false){
-                    $('#myModal-1').modal('show');
+                    $('#confirmation-modal').modal('show');
                     next(false);
                 }
                 else if(to.name == 'profileContract'){
                     next();
                 }
 //                else if(response.data.user_info.contract_confirmed == false){
-//                    $('#contractModalWrapper').modal('show');
+//                    $('#contract-modal-wrapper').modal('show');
 //                    next(false);
 //                }
                 else{

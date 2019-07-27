@@ -1,7 +1,5 @@
 <style scoped>
 
-
-
     .contact-is-search img {
         display: block;
         width: 60px;
@@ -31,7 +29,7 @@
         top: 0;
     }
 
-    .little-main .main-content{
+    .little-main .main-content {
         padding: 110px 80px 0 0;
     }
 
@@ -218,7 +216,7 @@
         padding-top: 17px;
     }
 
-    .back-state .green-bot {
+    .back-state .green-button {
         margin: 14px 0 0 25px;
         display: inline-block;
         background: #28a745;
@@ -322,7 +320,7 @@
 
         top: 50%;
 
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
 
         text-align: center;
 
@@ -330,11 +328,11 @@
         box-shadow: 0 0 10px #ebebeb;
     }
 
-    .default-message-wrapper .default-main-contents i{
+    .default-message-wrapper .default-main-contents i {
         font-size: 55px;
     }
 
-    .default-message-wrapper .default-main-contents p{
+    .default-message-wrapper .default-main-contents p {
         font-size: 16px;
 
         margin: 20px 0;
@@ -352,23 +350,27 @@
     }
 
     .send-message-form .button-wrapper button {
-      border: none;
-          background: #fff;
+        border: none;
+        background: #fff;
         width: 50px;
         height: 50px;
-           border-radius: 50px;
+        border-radius: 50px;
         font-size: 25px;
     }
-    .contact-not-found{
+
+    .contact-not-found {
         text-align: center;
         margin: 15px auto;
     }
-    .contact-not-found i{
-        font-size:26px;
+
+    .contact-not-found i {
+        font-size: 26px;
     }
-    .contact-not-found p{
-        margin-bottom:7px;
+
+    .contact-not-found p {
+        margin-bottom: 7px;
     }
+
     @media screen and (max-width: 992px) {
         .main-content {
             padding: 110px 0 0;
@@ -382,12 +384,15 @@
             width: inherit;
             height: inherit;
         }
-        .send-message-form .message-input input{
+
+        .send-message-form .message-input input {
             padding: 13px 15px;
         }
-        .default-main-contents{
+
+        .default-main-contents {
             display: none;
         }
+
         .main-content {
             padding: 110px 0 0;
         }
@@ -402,6 +407,7 @@
     }
 
 </style>
+
 <template>
     <section class="main-content col-xs-12">
         <div class="col-xs-12 contact-wrapper pull-right col-sm-4 col-md-3"
@@ -411,68 +417,91 @@
                     <i class="fa fa-user-circle"></i>
                     <span>لیست مخاطبین</span>
                 </div>
+
                 <div class="contact-body">
                     <div class="contact-search">
                         <form action="">
                             <div class="contact-search-input-wrapper">
-                                <input type="text" placeholder="جستجوی مخاطبین" v-model="contactNameSearchText"/>
+                                <input type="text"
+                                       placeholder="جستجوی مخاطبین"
+                                       v-model="contactNameSearchText"
+                                />
+
                                 <i class="fa fa-search"></i>
                             </div>
                         </form>
                     </div>
-                    <div v-if="contactList.length == 0" class="contact-not-found">
+                    <div v-if="contactList.length === 0" class="contact-not-found">
                         <p>
                             <i class="fa fa-user"></i>
-                        </p><p>
+                        </p>
+
+                        <p>
                             مخاطب یافت نشد
                         </p>
                     </div>
                     <div v-else-if="isSearchingContact" class="contact-is-search">
                         <img :src="loading_img"/>
                     </div>
+
                     <div v-else class="contact-items">
                         <ul>
                             <li class="contact-item" v-for="(contact,index) in contactList" :key="index">
                                 <a href="" @click.prevent="loadChatHistory(contact)">
                                     <div class="contact-image">
-                                        <img v-if="contact.profile_photo" :src="str + '/' + contact.profile_photo"
-                                             :alt="contact.first_name[0]">
+                                        <img v-if="contact.profile_photo"
+                                             :src="str + '/' + contact.profile_photo"
+                                             :alt="contact.first_name[0]"
+                                        >
+
                                         <img v-else :src="defimgitem">
                                     </div>
-                                    <span class="contact-name">{{contact.first_name + ' ' + contact.last_name}}</span>
+                                    <span class="contact-name"
+                                          v-text="contact.first_name + ' ' + contact.last_name"
+                                    ></span>
                                     <div class="contact-date">
-                                        <p class="count-number" v-if="contact.unread_msgs_count != 0">
-                                            {{contact.unread_msgs_count}}
+                                        <p class="count-number"
+                                           v-if="contact.unread_msgs_count !== 0"
+                                           v-text="contact.unread_msgs_count"
+                                        >
                                         </p>
-                                        <!--                                        <p>18:24 PM</p>-->
+
                                     </div>
                                 </a>
                             </li>
-
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 message-wrapper col-sm-8  col-md-9" v-bind:class="{ hidden_element: !selectedContact }"
+        <div class="col-xs-12 message-wrapper col-sm-8  col-md-9"
+             v-bind:class="{ hidden_element: !selectedContact }"
              v-if="selectedContact">
+
             <div class="row">
                 <div class="message-contact-title">
                     <div class="contact-title-contents  pull-right">
                         <div class="message-contact-title-img">
-                            <img v-if="selectedContact.profile_photo" :src="str + '/' + selectedContact.profile_photo"
-                                 :alt="selectedContact.first_name[0]">
+                            <img v-if="selectedContact.profile_photo"
+                                 :src="str + '/' + selectedContact.profile_photo"
+                                 :alt="selectedContact.first_name[0]"
+                            >
+
                             <img v-else :src="defimgitem">
+
                         </div>
+
                         <a :href="'/profile/' + selectedContact.user_name">
-                            <span>
-                            {{selectedContact.first_name + ' ' + selectedContact.last_name}}
+                            <span
+                                    v-text="selectedContact.first_name + ' ' + selectedContact.last_name"
+                            >
                             </span>
                         </a>
                     </div>
                     <div class="back-state  pull-left">
-                        <a href="#" @click.prevent="selectedContact = !selectedContact" class="green-bot">بازگشت</a>
+                        <a href="#" @click.prevent="selectedContact = !selectedContact" class="green-button">بازگشت</a>
                     </div>
+
                 </div>
 
                 <div class="chat-page " v-if="selectedContact">
@@ -480,9 +509,9 @@
                         <li v-for="msg in chatMessages">
 
                             <div :class="[msg.sender_id == currentUserId ? 'message-send' : 'message-receive']">
-                                {{msg.text}}
+                                <span v-text="msg.text"></span>
                                 <span class="message-chat-date">{{msg.created_at | moment("jYY/jMM/jDD, h:mm A") }}
-                                    <span class="check-items" v-if="msg.sender_id == currentUserId">
+                                    <span class="check-items" v-if="msg.sender_id === currentUserId">
                                         <i class="fa fa-check"></i>
                                             <i class="fa fa-check" v-if="msg.is_read"></i>
                                     </span>
@@ -490,11 +519,13 @@
                             </div>
                         </li>
                     </ul>
+
                     <div class="send-message-form">
                         <form>
                             <div class="message-input">
                                 <input type="text" placeholder="پیغامی بگذارید " v-model="msgToSend">
                             </div>
+
                             <div class="button-wrapper">
                                 <button type="submit" @click.prevent="sendMessage()"><i class="fa fa-send"></i></button>
                             </div>
@@ -516,6 +547,7 @@
         </div>
     </section>
 </template>
+
 <script>
     import {eventBus} from "../../router/dashboard_router";
     import Push from "push.js";
@@ -534,7 +566,7 @@
                         url: 'messages',
                     }
                 ],
-                isSearchingContact : false,
+                isSearchingContact: false,
                 contactList: [],
                 chatMessages: '',
                 selectedContact: '',
@@ -547,16 +579,7 @@
         },
         methods: {
             init: function () {
-                var self = this;
-
                 this.loadContactList();
-
-//                window.onhashchange = function() {
-//
-//                    if(self.selectedContact){
-//                        window.location.href = "/dashboard/messages";
-//                    }
-//                }
             },
             loadContactList: function () {
                 var self = this;
@@ -570,7 +593,7 @@
                             .then(function (response) {
                                 var contact = response.data.contact;
 
-                                if (contact != null && self.pageHasBeenReloaded() == false && self.selectedContact == '') {
+                                if (contact != null && self.pageHasBeenReloaded() === false && self.selectedContact === '') {
                                     self.contactList.unshift(contact);
                                     //removing duplicate contacts
                                     self.contactList = self.contactList.filter((thing, index, self) =>
@@ -606,17 +629,22 @@
                         self.scrollToEnd(500);
                     })
                     .catch(function (e) {
-
+                        //
                     });
 
-                var index = this.searchForObjectIndexInArray(contact.contact_id,this.contactList);
-                eventBus.$emit('messageCount',-1 * contact.unread_msgs_count);
+                var index = this.searchForObjectIndexInArray(contact.contact_id, this.contactList);
+
+                eventBus.$emit('messageCount', -1 * contact.unread_msgs_count);
+
                 contact.unread_msgs_count = 0;
-                this.contactList.splice(index,1,contact);
+
+                this.contactList.splice(index, 1, contact);
             },
             scrollToEnd: function (time) {
-                setTimeout(function(){
-                    $(".chat-page ul").animate({scrollTop: $(".chat-page ul").prop("scrollHeight")}, 500);
+                var chatPageElementList = $(".chat-page ul");
+
+                setTimeout(function () {
+                    chatPageElementList.animate({scrollTop: chatPageElementList.prop("scrollHeight")}, 500);
                 }, time);
             },
             sendMessage: function () {
@@ -634,7 +662,6 @@
                         self.scrollToEnd(0);
 
                         self.loadChatHistory(self.selectedContact);
-                        //self.loadContactList();
                     })
                     .catch(function (e) {
                         //
@@ -649,7 +676,6 @@
             pushNotification: function (header, body, link) {
                 Push.create(header, {
                     body: body,
-                    //icon: str + '/' ,
                     timeout: 4000,
                     link: link,
                     onClick: function () {
@@ -658,27 +684,27 @@
                     }
                 });
             },
-            goToButtomOfChat:function(){
-                 $(".chat-page ul").animate({ scrollTop: $(".chat-page ul").prop("scrollHeight") }, 1000);
+            goToButtomOfChat: function () {
+                $(".chat-page ul").animate({scrollTop: $(".chat-page ul").prop("scrollHeight")}, 1000);
             },
-            searchForObjectIndexInArray:function search(contactId, myArray){
-                for (var i=0; i < myArray.length; i++) {
+            searchForObjectIndexInArray: function search(contactId, myArray) {
+                for (var i = 0; i < myArray.length; i++) {
                     if (myArray[i].contact_id === contactId) {
                         return i;
                     }
                 }
             },
-            pageHasBeenReloaded:function(){
+            pageHasBeenReloaded: function () {
                 if (window.performance) {
 //                  TYPE_BACK_FORWARD
-                    if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+                    if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
                         return true;
-                    }else {
+                    } else {
                         return false;
-                     }
+                    }
                 }
             },
-            parseDateTime:function(dateTimeString){
+            parseDateTime: function (dateTimeString) {
                 //
             },
             isDeviceMobile: function () {
@@ -701,8 +727,8 @@
         watch: {
             contactNameSearchText: function () {
                 var self = this;
-                if (self.contactNameSearchText != '') {
-                     self.isSearchingContact = true;
+                if (self.contactNameSearchText !== '') {
+                    self.isSearchingContact = true;
 
                     axios.post('/get_contact_list')
                         .then(function (response) {
@@ -711,7 +737,7 @@
                             axios.post('/get_last_chat_contact_info_from_session')
                                 .then(function (response) {
                                     var contact = response.data.contact;
-                                    if (contact != null && self.pageHasBeenReloaded() == false && self.selectedContact == '') {
+                                    if (contact != null && self.pageHasBeenReloaded() === false && self.selectedContact === '') {
                                         self.contactList.unshift(contact);
                                         //removing duplicate contacts
                                         self.contactList = self.contactList.filter((thing, index, self) =>
@@ -732,7 +758,7 @@
                                         });
                                     });
 
-                                   self.isSearchingContact = false;
+                                    self.isSearchingContact = false;
 
 
                                 })
@@ -753,18 +779,19 @@
         },
         mounted: function () {
             this.init();
-//            eventBus.$emit('messageCount', '13');
             eventBus.$emit('subHeader', this.items);
         },
 
-        created: function (){
+        created: function () {
 
-            gtag('config','UA-129398000-1',{'page_path': '/messages'});
+            gtag('config', 'UA-129398000-1', {'page_path': '/messages'});
 
             var self = this;
 
-            if(Push.Permission.has() == false){
-                Push.Permission.request(function(){}, function(){});
+            if (Push.Permission.has() === false) {
+                Push.Permission.request(function () {
+                }, function () {
+                });
             }
 
             Echo.private('testChannel.' + userId)
@@ -773,28 +800,19 @@
                     //update contact list
                     self.loadContactList();
 
-                    if (self.currentContactUserId){
-                        if (self.currentContactUserId == senderId) {
+                    if (self.currentContactUserId) {
+                        if (self.currentContactUserId === senderId) {
 
                             self.chatMessages.push(e.new_message);
                             self.scrollToEnd(0);
 
-//                            if(self.selectedContact){
-//                                console.log(self.contactList);
-//                                var index = self.searchForObjectIndexInArray(self.selectedContact.contact_id,self.contactList);
-//                                eventBus.$emit('messageCount',-1 * self.selectedContact.unread_msgs_count);
-//                                self.selectedContact.unread_msgs_count = 0;
-//                                self.contactList.splice(index,1,self.selectedContact);
-//                            }
-
-                            if(self.isComponentActive == false){
-                                self.pushNotification("پیام جدید",e.new_message.text,'/dashboard/messages');
+                            if (self.isComponentActive == false) {
+                                self.pushNotification("پیام جدید", e.new_message.text, '/dashboard/messages');
                             }
                         }
                     }
-                    else{
-                        //eventBus.$emit('messageCount',1);
-                        this.pushNotification("پیام جدید",e.new_message.text,'/dashboard/messages');
+                    else {
+                        this.pushNotification("پیام جدید", e.new_message.text, '/dashboard/messages');
                     }
 
                 });
@@ -807,4 +825,6 @@
         },
     }
 </script>
+
+
 

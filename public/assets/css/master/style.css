@@ -14,10 +14,28 @@
 .main-content-index-pages h1 ,.main-content-index-pages h2,.main-content-index-pages h3,.main-content-index-pages h4,.main-content-index-pages h5 {
     margin: 15px 0;
 }
-.green_bot:focus,.green_bot:hover{
+.green-button {
+    margin: 15px 0 0;
+    display: inline-block;
+    background: #28a745;
+    color: #fff;
+    padding: 10px 35px;
+    border-radius: 3px;
+    text-align: center;
+    border: none;
+    -webkit-transition: 300ms;
+    transition: 300ms;
+}
+.green-button:hover {
+    background: #279b41;
+    color: #fff;
+}
+.green-button:focus,.gray-bot:focus {
+    color: #fff;
+}
+.green-button:focus, .green-button:hover {
     color: #fff !important;
 }
-
 .right-section {
     background: url("../../img/inco-form-back1.jpg") no-repeat;
 }

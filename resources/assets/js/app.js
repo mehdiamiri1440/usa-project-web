@@ -19,8 +19,8 @@ import registerComponent from './components/register/register.vue';
 // import productVue from './components/product_view'
 
 
- 
-var viz = false;
+
+var visible = false;
  new Vue({
      el:'#app',
     components:{
@@ -29,21 +29,21 @@ var viz = false;
        // productVue
     },
      methods: {
-         dropdown: function () {
+         collapseDropDown: function () {
              $(".profile-list").fadeIn("slow", function () {
-                 viz = true;
+                 visible = true;
              });
          },
-         dropdownList: function () {
+         collapseDropDownList: function () {
              $(".icon-header-list").fadeIn("slow", function () {
-                 viz = true;
+                 visible = true;
              });
          },
          documentClick(e) {
-             if (viz) {
+             if (visible) {
                  $('.profile-list').fadeOut("slow");
                  $('.icon-header-list').fadeOut("slow");
-                 viz = false;
+                 visible = false;
              }
          },
      },

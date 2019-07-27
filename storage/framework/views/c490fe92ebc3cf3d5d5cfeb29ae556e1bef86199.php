@@ -56,7 +56,7 @@
         <div class="navbar-header">
             <?php if(session('user_id')): ?>
                 <div class="user-header-mobile">
-                    <div class="profile-menu-header"><a href="#" onclick="dropdown()">
+                    <div class="profile-menu-header"><a href="#" onclick="collapseDropDown()">
                             <div class="image-header-profile">
                                 <?php if(session('profile_photo')): ?>
                                     <img src="<?php echo e('storage/'  . session('profile_photo')); ?>">
@@ -104,7 +104,7 @@
                 <?php if(session('user_id')): ?>
 
                     <li class="user-header-web">
-                        <div class="profile-menu-header"><a href="#" onclick="dropdown()">
+                        <div class="profile-menu-header"><a href="#" onclick="collapseDropDown()">
                                 <div class="image-header-profile">
                                     <?php if(session('profile_photo')): ?>
                                         <img src="<?php echo e('storage/'  . session('profile_photo')); ?>">
@@ -155,16 +155,16 @@ INTRO SECTION
 
 
 </section>
-    
+
 <section id="testimonial" class="parallax-section">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
 				<div class=" wow bounceIn col-md-12 col-sm-12">
-                            
+
                         <p class="text-right">اینکوباک، بستر تجاری آنلاین است که از طریق آن هر کاربر ثبت شده می تواند برای برقراری و حفظ، توسعه کسب و کار با دیگر تولید کنندگان و خریداران همکاری کند. شرایط و مقررات تشکیل شده در این صفحه مشخص می کند که چگونه باید وب سایت و خدمات مورد استفاده قرار گیرد و نهایتا روابط فی مابین اینکوباک و کاربران (ثبت شده یا ثبت نشده) آن را تنظیم میکند. لطفاً شرایط و مقررات حاضر را به دقت مطالعه کنید و در صورتی که قوانین وب سایت برای شما قابل قبول نیست استفاده خود را از وب سایت و یا خدمات اینکوباک به هر نحو متوقف کنید.
 در استفاده از خدمات وب سایت اینکوباک فرض بر این است که عملاً این شرایط و مقررات و تغییرات بعدی آن را پذیرفته اید، در این صورت هیچ ادعایی ناشی از استفاده مداوم شما از این سایت و ادعای عدم مطالعه یا آگاهی شما از این مقررات و تغییرات بعدی آن مسموع نخواهد بود.
-شرایط درج درخواست خرید یا فروش در سامانه اینکوباک: 
+شرایط درج درخواست خرید یا فروش در سامانه اینکوباک:
                     </p>
                         <ul class="text-right">
                             <li>درخواست ها باید زیر مجموعه حوزه کشاورزی و دسته بندی های موجود در وبسایت باشند.</li>

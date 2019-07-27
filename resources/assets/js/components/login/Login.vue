@@ -1,124 +1,3 @@
-
-<template>
-   <div>
-       <div class="bg login"> </div>
-       <main id="main" class="login-main">
-           <div class="main-form">
-               <div class="left-section col-xs-12 col-sm-8">
-                   <a href="/">
-                       <h1><img :src="site_logo"></h1>
-                   </a>
-                   <div id="app">
-                       <div id="step1" v-show="currentStep == 1">
-                           <template>
-                               <div>
-                                   <ul class="header_list list-inline">
-                                       <li class="active"> ورود به سامانه</li>
-                                   </ul>
-                                   <div class="content_section">
-                                       <p class="text-danger" v-show="showMsg">{{step1.msg}}</p>
-                                       <label class="col-xs-12">
-                                           شماره موبایل
-                                       </label>
-                                       <div class="input_contents col-xs-12">
-                                           <span class="after_icon numbers"></span>
-                                           <input class="pad number" type="text" v-model="step1.phone"
-                                                  placeholder="09*">
-                                           <span class="text-danger" v-if="errors.phone">{{errors.phone[0]}}</span>
-                                       </div>
-
-                                       <label class="col-xs-12">
-                                           کلمه عبور
-                                       </label>
-                                       <div class="input_contents col-xs-12">
-                                           <span class="after_icon  unlock-alt "></span>
-                                           <input class="pad number" type="password" v-model="step1.password"
-                                                  placeholder="کلمه عبور">
-                                           <span class="text-danger" v-if="errors.password">{{errors.password[0]}}</span>
-                                       </div>
-
-                                       <a href="#" @click="goToStep(2)" class="forget_pass">رمز عبور خود را فراموش کرده
-                                           ام!</a>
-                                       <button class="green_but" type="button" @click="doLogin">ورود به سامانه
-                                       </button>
-                                       <router-link tag="button" class="danger_border_but" type="button" :to="{name:'register'}">ثبت نام در
-                                           سامانه
-                                       </router-link>
-                                       <!--<button class="danger_border_but" type="button" @click="gotToRegister">ثبت نام در سامانه-->
-                                       <!--</button>-->
-                                   </div>
-                               </div>
-                           </template>
-                       </div>
-                       <div id="step2" v-show="currentStep == 2">
-                           <template>
-                               <ul class="header_list list-inline">
-                                   <li><a href="#" @click="goToStep(1)">ورود به سامانه</a></li>
-                                   <li class="active"> بازیابی کلمه عبور</li>
-                               </ul>
-                               <div class="content_section">
-                                   <label class="col-xs-12">
-                                       لطفا شماره موبایل خود را وارد کنید
-                                   </label>
-                                   <div class="input_contents col-xs-12">
-                                       <span class="after_icon numbers"></span>
-                                       <input class="pad number" type="text"  v-model="step2.phone"
-                                              placeholder="09*">
-                                   </div>
-                                   <span  class="text-danger" v-if="errors">{{errors[0]}} </span>
-
-                                   <button class="green_but" type="button"  @click="sendPhoneVerificationCode" :disabled="step2.sendCode == false">ارسال پیام کوتاه
-                                   </button>
-
-                               </div>
-
-                               <div class="dots-step">
-                                   <span class="dots active"></span>
-                                   <span class="dots"></span>
-                               </div>
-                           </template>
-                       </div>
-                       <div id="step3" v-show="currentStep == 3">
-                           <template>
-                               <ul class="header_list list-inline">
-                                   <li><a href="#" @click="goToStep(1)">ورود به سامانه</a></li>
-                                   <li class="active"> بازیابی کلمه عبور</li>
-                               </ul>
-                               <div class="content_section">
-                                   <p class="text-danger" v-show="showMsg">{{step3.msg}}</p>
-                                   <label class="col-xs-12">
-                                       کد ارسال شده به تلفن همراهتان را وارد کنید.
-                                   </label>
-                                   <div class=" input_contents col-xs-12">
-                                       <span class="after_icon search-icon"></span>
-                                       <input class="pad " type="text" name="name" v-model="step3.verification_code"
-                                              placeholder="0101">
-                                   </div>
-                                   <span v-if="errors.verification_code" class="text-danger">
-                                    {{errors.verification_code[0]}}
-                                </span>
-                                   <button class=" green_but" type="button" @click="verifyCode"> بررسی کد</button>
-                                   <button class="danger_border_but" type="button" @click.prevent="goToStep(2)"
-                                           :disabled="step3.reSendCode == false"> کد را دریافت
-                                       نکردم
-                                   </button>
-
-                               </div>
-
-                               <div class="dots-step">
-                                   <span class="dots active back_step" @click="goToStep(2)"></span>
-                                   <span class="dots active"></span>
-
-                               </div>
-                           </template>
-                       </div>
-                   </div>
-               </div>
-               <RightSection></RightSection>
-           </div>
-       </main>
-   </div>
-</template>
 <style scoped>
 
     html, body, div, span, applet, object, iframe,
@@ -190,12 +69,14 @@
     h1, h2, h3 {
         color: #565657;
     }
-    label{
+
+    label {
         font-size: 12px;
         padding: 6px 0;
         display: block;
     }
-    input[type="text"],input[type="password"],input[type="email"]{
+
+    input[type="text"], input[type="password"], input[type="email"] {
         border: 2px solid #818d9b;
         border-radius: 5px;
         width: 100%;
@@ -203,7 +84,8 @@
         line-height: 1.1;
         direction: rtl;
     }
-    .bg.login{
+
+    .bg.login {
 
         background-size: cover;
         background-repeat: no-repeat;
@@ -216,12 +98,14 @@
         position: absolute;
         overflow: hidden;
     }
-    #main{
+
+    #main {
         width: 680px;
         margin: 160px auto 110px;
         direction: rtl;
     }
-    .green_but{
+
+    .green-button {
         width: 100%;
         background: #28a745;
         border: none;
@@ -230,7 +114,8 @@
         padding: 12px;
         margin: 20px auto 5px;
     }
-    .danger_border_but{
+
+    .danger_border_but {
         width: 100%;
         border-radius: 3px;
         padding: 12px;
@@ -238,21 +123,24 @@
         color: #fff;
         margin: 5px auto;
     }
-    .sub-des{
+
+    .sub-des {
         color: #909aa6;
         font-size: 9px;
         margin: 8px 0 50px;
         display: inline-block;
     }
 
-    .input_contents{
+    .input_contents {
         position: relative;
         padding: 0;
     }
-    input.pad{
+
+    input.pad {
         padding: 13px 47px 9px 15px;
     }
-    .forget_pass{
+
+    .forget_pass {
         color: #28a745;
         float: left;
         font-size: 12px;
@@ -263,26 +151,31 @@
 
         margin: 14px 0;
     }
-    .after_icon:after{
+
+    .after_icon:after {
         position: absolute;
         content: " ";
         top: 21%;
         right: 12px;
-        font-family: "fontawesome",sans-serif;
+        font-family: "fontawesome", sans-serif;
         font-size: 22px;
         color: #818d9b;
         border-left: 1px solid;
         padding-left: 11px;
     }
-    .after_icon.numbers:after{
+
+    .after_icon.numbers:after {
         content: "\f098";
     }
-    .after_icon.unlock-alt:after{
+
+    .after_icon.unlock-alt:after {
         content: "\f13e";
     }
-    .after_icon.search-icon:after{
+
+    .after_icon.search-icon:after {
         content: "\f002";
     }
+
     .left-section {
         padding: 0;
         height: 100%;
@@ -297,7 +190,7 @@
         overflow: hidden;
         border-radius: 5px;
         background: #fff;
-        box-shadow: 0 0 44px rgba(0,0,0,0.6);
+        box-shadow: 0 0 44px rgba(0, 0, 0, 0.6);
     }
 
     .left-section h1 {
@@ -316,22 +209,26 @@
         font-size: 13px;
         color: #818d9b;
     }
-    ul.header_list a{
+
+    ul.header_list a {
         font-size: 13px;
         color: #818d9b;
     }
+
     ul.header_list li {
         padding: 10px 12px;
     }
+
     ul.header_list li.active {
         color: #313a43;
-        border-bottom:2px solid #28a745;
+        border-bottom: 2px solid #28a745;
     }
-    .content_section{
+
+    .content_section {
         padding: 40px 66px 0;
     }
 
-    .dots-step{
+    .dots-step {
         position: absolute;
         left: calc(40% + 5px);
         bottom: 35px;
@@ -348,12 +245,13 @@
         position: relative;
 
     }
-    .dots-step span.active{
+
+    .dots-step span.active {
         background: #28a745;
 
     }
 
-    .dots-step span:after{
+    .dots-step span:after {
         position: absolute;
         content: " ";
         top: 3px;
@@ -364,12 +262,13 @@
         height: 3px;
     }
 
-    .dots-step span:last-of-type:after{
+    .dots-step span:last-of-type:after {
         display: none;
     }
+
     .dropdown {
         position: absolute;
-        top:50%;
+        top: 50%;
         transform: translateY(-50%);
     }
 
@@ -445,9 +344,6 @@
         background-color: #fff;
     }
 
-
-
-
     button {
         background-color: #6BBE92;
         width: 302px;
@@ -468,23 +364,28 @@
             width: calc(100% - 30px);
         }
     }
+
     @media screen and (max-width: 996px) {
         .content_section {
             padding: 15px 30px;
         }
+
         main {
             width: 60%;
         }
     }
+
     @media screen and (max-width: 300px) {
         .content_section {
             padding: 15px;
         }
+
         main {
             width: 80%;
         }
 
     }
+
     @media screen and (max-width: 500px) {
         main {
             width: 90%;
@@ -493,11 +394,199 @@
 
 
 </style>
-<script>
-    import {eventBus} from "../../router/dashboard_router";
-    import RightSection from './RightSection.vue'
 
-    export default{
+<template>
+    <div>
+        <div class="bg login"></div>
+        <main id="main" class="login-main">
+            <div class="main-form">
+                <div class="left-section col-xs-12 col-sm-8">
+                    <a href="/">
+                        <h1><img :src="site_logo"></h1>
+                    </a>
+                    <div id="app">
+                        <div id="step1" v-show="currentStep === 1">
+                            <template>
+                                <div>
+                                    <ul class="header_list list-inline">
+                                        <li class="active"> ورود به سامانه</li>
+                                    </ul>
+                                    <div class="content_section">
+                                        <p class="text-danger" v-show="showMsg" v-text="step1.msg"></p>
+
+                                        <label class="col-xs-12">
+                                            شماره موبایل
+                                        </label>
+
+                                        <div class="input_contents col-xs-12">
+                                            <span class="after_icon numbers"></span>
+
+                                            <input class="pad number"
+                                                   type="text"
+                                                   v-model="step1.phone"
+                                                   placeholder="09*">
+
+                                            <span class="text-danger"
+                                                  v-if="errors.phone"
+                                                  v-text="errors.phone[0]"></span>
+
+                                        </div>
+
+                                        <label class="col-xs-12">
+                                            کلمه عبور
+                                        </label>
+                                        <div class="input_contents col-xs-12">
+                                            <span class="after_icon  unlock-alt "></span>
+
+                                            <input class="pad number"
+                                                   type="password"
+                                                   v-model="step1.password"
+                                                   placeholder="کلمه عبور">
+
+                                            <span class="text-danger"
+                                                  v-if="errors.password"
+                                                  v-text="errors.password[0]"></span>
+                                        </div>
+
+                                        <a href="#" @click="goToStep(2)"
+                                           class="forget_pass">
+                                            رمز عبور خود را فراموش کرده
+                                            ام!
+                                        </a>
+
+                                        <button class="green-button" type="button" @click="doLogin">
+                                            ورود به سامانه
+                                        </button>
+
+                                        <router-link tag="button"
+                                                     class="danger_border_but"
+                                                     type="button"
+                                                     :to="{name:'register'}">
+                                            ثبت نام در
+                                            سامانه
+                                        </router-link>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                        <div id="step2" v-show="currentStep === 2">
+                            <template>
+                                <ul class="header_list list-inline">
+                                    <li>
+                                        <a href="#" @click="goToStep(1)">
+                                            ورود به سامانه
+                                        </a>
+                                    </li>
+
+                                    <li class="active"> بازیابی کلمه عبور</li>
+                                </ul>
+
+                                <div class="content_section">
+                                    <label class="col-xs-12">
+                                        لطفا شماره موبایل خود را وارد کنید
+                                    </label>
+
+                                    <div class="input_contents col-xs-12">
+                                        <span class="after_icon numbers"></span>
+
+                                        <input class="pad number" type="text" v-model="step2.phone"
+                                               placeholder="09*">
+
+                                    </div>
+
+                                    <span class="text-danger" v-if="errors" v-text="errors[0]"> </span>
+
+                                    <button class="green-button" type="button" @click="sendPhoneVerificationCode"
+                                            :disabled="step2.sendCode === false">ارسال پیام کوتاه
+                                    </button>
+
+                                </div>
+
+                                <div class="dots-step">
+                                    <span class="dots active"></span>
+                                    <span class="dots"></span>
+                                </div>
+                            </template>
+                        </div>
+                        <div id="step3" v-show="currentStep === 3">
+                            <template>
+                                <ul class="header_list list-inline">
+                                    <li>
+                                        <a href="#" @click="goToStep(1)">
+                                            ورود به سامانه</a>
+                                    </li>
+
+                                    <li class="active"> بازیابی کلمه عبور</li>
+
+                                </ul>
+
+                                <div class="content_section">
+                                    <p class="text-danger" v-show="showMsg" v-text="step3.msg"></p>
+
+                                    <label class="col-xs-12">
+                                        کد ارسال شده به تلفن همراهتان را وارد کنید.
+                                    </label>
+
+                                    <div class=" input_contents col-xs-12">
+
+                                        <span class="after_icon search-icon"></span>
+
+                                        <input class="pad "
+                                               type="text"
+                                               name="name"
+                                               v-model="step3.verification_code"
+                                               placeholder="0101">
+                                    </div>
+
+                                    <span v-if="errors.verification_code"
+                                          class="text-danger"
+                                          v-text="errors.verification_code[0]"
+                                    >
+                                    </span>
+
+                                    <button class=" green-button"
+                                            type="button"
+                                            @click="verifyCode">
+                                        بررسی کد
+                                    </button>
+
+                                    <button class="danger_border_but"
+                                            type="button"
+                                            @click.prevent="goToStep(2)"
+                                            :disabled="step3.reSendCode === false">
+                                        کد را دریافت
+                                        نکردم
+                                    </button>
+
+                                </div>
+
+                                <div class="dots-step">
+                                    <span class="dots active back_step"
+                                          @click="goToStep(2)">
+                                    </span>
+
+                                    <span class="dots active"></span>
+                                </div>
+
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <RightSection/>
+            </div>
+        </main>
+    </div>
+</template>
+
+<script>
+    import RightSection from './RightSection.vue'
+    import {eventBus} from "../../router/dashboard_router";
+
+    export default {
+        components: {
+            RightSection
+        },
         props: [
             'site_logo',
         ],
@@ -513,7 +602,7 @@
                 },
                 step2: {
                     phone: '',
-                    sendCode:true,
+                    sendCode: true,
                     msg: '',
                 },
                 step3: {
@@ -525,114 +614,110 @@
         },
         methods: {
             stopLoader: function () {
-                 eventBus.$emit('isLoading', false);
+                eventBus.$emit('isLoading', false);
             },
             goToStep: function (step) {
                 this.currentStep = step;
             },
-            doLogin: function (){
+            doLogin: function () {
                 var self = this;
                 axios.post("/dologin", {
                     phone: this.step1.phone,
                     password: this.step1.password,
                 })
-                .then(function (response) {
-                    if (response.data.status == true) {
-                         if (response.data.confirmed_profile_record == true) {
-                             if(response.data.is_buyer) {
-                                 window.location.href = '/dashboard/register-request' ;
-                                 
-                                 self.registerComponentStatistics('Login','seller-login','seller-logged-in-successfully');
-                             }
-                             else if(response.data.is_seller){
-                                 window.location.href = '/dashboard/register-product' ;
-                                 
-                                 self.registerComponentStatistics('Login','buyer-login','buyer-logged-in-succeccfully');
-                             }
-                             else{
-                                 self.registerComponentExceptions('Login-page: Undefined user type user phone nubmer is: ' + response.data.phone, true);
-                                 
-                                 alert('نوع کاربری شما مشخص نشده است لطفا با پشتیبانی اینکوباک تماس بگیرید');
-                             }
-                         }
-                         else{
-                             self.registerComponentExceptions('Login-page: User does not have confirmed profile record',true);
-                             
-                             window.location.href = '/dashboard'; // Edit Profile Page
-                         }
+                    .then(function (response) {
+                        if (response.data.status === true) {
+                            if (response.data.confirmed_profile_record === true) {
+                                if (response.data.is_buyer) {
+                                    window.location.href = '/dashboard/register-request';
 
-                    }
-                    else {
-                        self.showMsg = true;
+                                    self.registerComponentStatistics('Login', 'seller-login', 'seller-logged-in-successfully');
+                                }
+                                else if (response.data.is_seller) {
+                                    window.location.href = '/dashboard/register-product';
+
+                                    self.registerComponentStatistics('Login', 'buyer-login', 'buyer-logged-in-succeccfully');
+                                }
+                                else {
+                                    self.registerComponentExceptions('Login-page: Undefined user type user phone nubmer is: ' + response.data.phone, true);
+
+                                    alert('نوع کاربری شما مشخص نشده است لطفا با پشتیبانی اینکوباک تماس بگیرید');
+                                }
+                            }
+                            else {
+                                self.registerComponentExceptions('Login-page: User does not have confirmed profile record', true);
+
+                                window.location.href = '/dashboard'; // Edit Profile Page
+                            }
+                        }
+                        else {
+                            self.showMsg = true;
+                            self.errors = [];
+                            self.step1.msg = response.data.msg;
+
+                            self.registerComponentExceptions('Login-page: Validation error for user credentials in login page');
+                        }
+                    })
+                    .catch(function (err) {
                         self.errors = [];
-                        self.step1.msg = response.data.msg;
-                        
+                        self.showMsg = false;
+                        self.errors = err.response.data.errors;
+
                         self.registerComponentExceptions('Login-page: Validation error for user credentials in login page');
-                    }
-                })
-                .catch(function (err) {
-                    self.errors = [];
-                    self.showMsg = false;
-                    self.errors = err.response.data.errors;
-                    
-                    self.registerComponentExceptions('Login-page: Validation error for user credentials in login page');
-                });
+                    });
             },
-          /*  gotToRegister: function (){
-                window.location.href = '/register';
-            },*/
-            sendPhoneVerificationCode:function(){
+            sendPhoneVerificationCode: function () {
                 this.step3.reSendCode = false;
                 this.step2.sendCode = false;
-
-                var self = this;
                 this.errors = [];
+                var self = this;
 
-                axios.post('/send_phone_verification_code_for_password_reset',{
-                    'phone' : this.toLatinNumbers(this.step2.phone)
+
+                axios.post('/send_phone_verification_code_for_password_reset', {
+                    'phone': this.toLatinNumbers(this.step2.phone)
                 })
-                .then(function(response){
-                    if(response.status == 200){
-                        self.goToStep(3);
+                    .then(function (response) {
+                        if (response.status === 200) {
+                            self.goToStep(3);
 
-                        self.step2.sendCode = true;
+                            self.step2.sendCode = true;
 
-                        setTimeout(function(){
-                            self.step3.reSendCode = true;
-                        },60000);
-                    }
-                })
-                .catch(function(err){
+                            setTimeout(function () {
+                                self.step3.reSendCode = true;
+                            }, 60000);
+                        }
+                    })
+                    .catch(function (err) {
                         self.errors = err.response.data.errors.phone;
                         self.step2.sendCode = true;
-                });
+                    });
             },
-            verifyCode:function(){
+            verifyCode: function () {
                 var self = this;
-                this.showMsg  = false;
+                this.showMsg = false;
 
-                axios.post('/reset_password',{
-                    'phone' : this.toLatinNumbers(this.step2.phone),
-                    'verification_code' : this.toLatinNumbers(this.step3.verification_code),
+                axios.post('/reset_password', {
+                    'phone': this.toLatinNumbers(this.step2.phone),
+                    'verification_code': this.toLatinNumbers(this.step3.verification_code),
                 })
-                .then(function(response){
-                    if(response.data.status == true){
-                        alert("گذر واژه ی جدید به تلفن همراهتان ارسال شد.")
-                        window.location.href = '/login';
-                    }
-                    else{
+                    .then(function (response) {
+                        if (response.data.status === true) {
+                            alert("گذر واژه ی جدید به تلفن همراهتان ارسال شد.")
+                            window.location.href = '/login';
+                        }
+                        else {
+                            self.errors = [];
+                            self.showMsg = true;
+                            self.step3.msg = 'کد اشتباه است یا منقضی شده';
+                        }
+                    })
+                    .catch(function (err) {
                         self.errors = [];
-                        self.showMsg = true;
-                        self.step3.msg = 'کد اشتباه است یا منقضی شده';
-                    }
-                })
-                .catch(function(err){
-                    self.errors = [];
-                    self.errors = err.response.data.errors;
-                });
+                        self.errors = err.response.data.errors;
+                    });
             },
-            toLatinNumbers:function(num){
-                if(num == null){
+            toLatinNumbers: function (num) {
+                if (num == null) {
                     return '';
                 }
                 var numDic = {
@@ -650,25 +735,25 @@
 
                 return num
                     .toString()
-                    .replace(/[۰-۹]/g,function(w){
+                    .replace(/[۰-۹]/g, function (w) {
                         return numDic[w];
                     });
             },
             registerComponentStatistics: function (categoryName, actionName, labelName) {
-                gtag('event', actionName,{
+                gtag('event', actionName, {
                     'event_category': categoryName,
                     'event_label': labelName
                 });
             },
-            registerComponentExceptions:function(description,fatal = false){
-                gtag('event','exception',{
+            registerComponentExceptions: function (description, fatal = false) {
+                gtag('event', 'exception', {
                     'description': description,
                     'fatal': fatal
                 });
             }
         },
         created() {
-            gtag('config','UA-129398000-1',{'page_path': '/login'});
+            gtag('config', 'UA-129398000-1', {'page_path': '/login'});
 
             var self = this;
             window.addEventListener('keydown', function (event) {
@@ -677,26 +762,18 @@
                 }
             });
         },
-        components: {
-            RightSection
-        },
-        mounted:function(){
-             document.onreadystatechange = () => { 
-                if (document.readyState == "complete") { 
+
+        mounted: function () {
+            var self = this;
+            document.onreadystatechange = () => {
+                if (document.readyState === "complete") {
                     self.$nextTick(this.stopLoader());
-                } 
-             } 
-//             this.$nextTick(this.stopLoader());
+                }
+            }
         },
         updated: function () {
-             this.$nextTick(this.stopLoader());
-        },
-//        beforeCreate:function(){
-//            var self = this;
-//            window.addEventListener("load", function(event) {
-//                    self.stopLoader();
-//            });
-//        }
+            this.$nextTick(this.stopLoader());
+        }
     }
 </script>
 

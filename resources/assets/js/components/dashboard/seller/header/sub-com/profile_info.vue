@@ -1,59 +1,22 @@
-<style>
-    .green-bot {
-        margin: 15px 0 0;
-        display: inline-block;
-        background: #28a745;
-        color: #fff;
-        padding: 10px 35px;
-        border-radius: 3px;
-        text-align: center;
-        border: none;
-        transition: 300ms;
-    }
-    .green_bot {
-        margin: 15px 0 0;
-        display: inline-block;
-        background: #28a745;
-        color: #fff;
-        padding: 10px 0;
-        border-radius: 3px;
-        text-align: center;
-        font-size: 12px;
-        width: 100%;
-        line-height: 21px;
-        border: none;
-    }
-    .green_bot:hover {
-        background: #279b41;
-        color: #fff;
-    }
-    .green-bot:focus,.gray-bot:focus {
-        color: #fff;
-    }
-
-</style>
 <template>
     <div>
         <div class="profile">
             <div class="profile-img" v-if="photoLink">
                 <img :src="storage + '/' + photoLink">
             </div>
+
             <div class="profile-img" v-else>
                 <img :src="def">
             </div>
+
             <div class="profile-content">
-                <div class="profile-name">
-                    {{username}}
-                </div>
-                <div class="profile-city">
-                    {{usercity}}
-                </div>
+                <div class="profile-name" v-text="username"></div>
+                <div class="profile-city" v-text="usercity"></div>
             </div>
-            <a :href="'/profile/'+ userprof" class="green-bot">
+
+            <a :href="'/profile/'+ userprof" class="green-button">
                 نمایش پروفایل من
             </a>
-
-
         </div>
     </div>
 </template>

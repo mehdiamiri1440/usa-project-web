@@ -604,7 +604,7 @@
     }
 
     /*end*/
-    .green-bot {
+    .green-button {
         margin: 15px 0;
         display: inline-block;
         background: #28a745;
@@ -616,11 +616,11 @@
         transition: 300ms;
     }
 
-    .green-bot:focus, .gray-bot:focus {
+    .green-button:focus, .gray-bot:focus {
         color: #fff;
     }
 
-    .green-bot:hover {
+    .green-button:hover {
         color: #fff;
         background: #00d614;
         transition: 300ms;
@@ -1666,8 +1666,6 @@
         <!-- =========================
         INTRO SECTION
         ============================== -->
-
-
         <section id="intro" class="parallax-section">
             <div class="particle-network-animation"></div>
             <div class="container-fluid main_hero_section col-xs-12">
@@ -1680,6 +1678,7 @@
                             <h2 class="wow fadeIn" data-wow-delay="1.2s">اینکوباک | سامانه خرید و فروش عمده محصولات
                                 کشاورزی</h2>
                         </div>
+
                         <div class="col-xs-12">
 
                             <div class="search_input col-xs-12 col-sm-8 col-sm-offset-2">
@@ -1689,67 +1688,25 @@
                             </div>
 
                         </div>
+
                         <div class="col-xs-12">
                             <a href="/login" class="btn btn-purple  smoothScroll wow fadeInUp"
                                data-wow-delay="1.4s">ورود به سامانه</a>
                             <a href="/product-list" class="btn btn-green smoothScroll wow fadeInUp "
                                data-wow-delay="1.4s"> لیست محصولات</a>
                         </div>
+
                         <div class="col-xs-12">
                             <div class="mouse-animation">
                                 <a href="#detail"> <span class="fa fa-angle-down"></span></a>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
-
             </div>
 
 
         </section>
-
-
-        <!-- =========================
-       mobile sliders
-        ============================== -->
-        <!--
-
-                {{اسلایدر خرما}}
-                <section id="mobile-date" class="parallax-section hidden-sm hidden-md hidden-lg">
-                    <div class="container">
-                        <div class="row">
-                            <h3 class="text-center col-xs-12"> خرما</h3>
-                            <div class="text-center col-xs-12">
-                                <a href="/product-list" class="green-bot">
-                                    مشاهده همه محصولات
-                                </a>
-                            </div>
-                            <div class="owl-carousel col-xs-12">
-
-                                <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 6" :key="product.main.id">
-                                    <image-viewer
-                                            :title="product.main.sub_category_name + ' - ' + product.main.product_name"
-                                            :img="'storage/' + product.photos[0].file_path"
-                                            :link="'/product-list/' + product.main.sub_category_name"
-                                    >
-                                    </image-viewer>
-                                </article>
-
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                {{پایان اسلایدر خرما }}
-
-
-                <!--{{اسلایدر برنج }}-->
-
-
-        <!-- =========================
-        DETAIL SECTION
-        ============================== -->
 
         <section id="detail" class="parallax-section">
             <div class="container">
@@ -1775,19 +1732,20 @@
                     </div>
                 </div>
 
-
                 <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
                     <div class="detail-thumb">
                         <img :src="img_four" class="img-responsive">
                         <h4>دسترسی مستقیم به افراد </h4>
                     </div>
                 </div>
+
                 <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
                     <div class="detail-thumb">
                         <img :src="img_five" class="img-responsive">
                         <h4> اعتبار سنجی اعضا </h4>
                     </div>
                 </div>
+
                 <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
                     <div class="detail-thumb">
                         <img :src="img_six" class="img-responsive">
@@ -1795,7 +1753,6 @@
                     </div>
                 </div>
             </div>
-
         </section>
 
         <!-- =========================
@@ -1816,164 +1773,52 @@
                             </h3>
                             <div class="content_service">
                                 <ul>
-                                    <li><span>استعلام قیمــت از تامیــن کننــدگان و کشــاورزان</span>
-                                    </li>
-                                    <li><span>استفـــاده از خدمات نظارت و بازرســی محصـــول</span>
+                                    <li>
+                                        <span>استعلام قیمــت از تامیــن کننــدگان و کشــاورزان</span>
                                     </li>
 
-                                    <li><span>دستـرسی گستــرده به کشـاورزان و تولیـد کننـدگان</span>
+                                    <li>
+                                        <span>استفـــاده از خدمات نظارت و بازرســی محصـــول</span>
+                                    </li>
+
+                                    <li>
+                                        <span>دستـرسی گستــرده به کشـاورزان و تولیـد کننـدگان</span>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-xs-12 col-sm-6">
                         <div class="title_image_service">
                             <img :src="img_seller_services" alt="">
                         </div>
+
                         <div class="contents_service text-center">
                             <h3 class="title_service">
                                 خدمات تامین کنندگان
-
                             </h3>
+
                             <div class="content_service">
                                 <ul>
-                                    <li><span>ساخت پروفایل حرفه ای جهــت فروش محصـولات</span>
-                                    </li>
-                                    <li><span>دسترســـی به خریــداران واقعــی جهــت فروش</span>
-                                    </li>
-                                    <li><span>بهره مندی از مشاوره تخصصی کارشناسان اینکوباک</span>
+                                    <li>
+                                        <span>ساخت پروفایل حرفه ای جهــت فروش محصـولات</span>
                                     </li>
 
+                                    <li>
+                                        <span>دسترســـی به خریــداران واقعــی جهــت فروش</span>
+                                    </li>
+
+                                    <li>
+                                        <span>بهره مندی از مشاوره تخصصی کارشناسان اینکوباک</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </section>
-
-        <!-- =========================
-         WEB RICE AND DATE SLIDER
-        ============================== -->
-        <!--
-
-                <section id="request" class="parallax-section  hidden-xs">
-                    <div class="container">
-                        <div class="row">
-                            <h3 class="text-center col-xs-12"> خرما</h3>
-                            <div class="text-center col-xs-12">
-                                <a href="/product-list" class="green-bot">
-                                    مشاهده همه محصولات
-                                </a>
-                            </div>
-                            <div class="owl-carousel col-xs-12">
-
-                              &lt;!&ndash;  <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 6" :key="product.main.id">
-                                    <image-viewer
-                                            :title="product.main.sub_category_name + ' - ' + product.main.product_name"
-                                            :img="'storage/' + product.photos[0].file_path"
-                                            :link="'/product-list/' + product.main.sub_category_name"
-                                    >
-                                    </image-viewer>
-                                </article>&ndash;&gt;
-
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="rice" class="parallax-section  hidden-xs" v-if="homePageRice">
-                    <div class="container">
-                        <div class="row">
-                            <h3 class="text-center col-xs-12"> برنج</h3>
-                            <div class="text-center col-xs-12">
-                                <a href="/product-list" class="green-bot">
-                                    مشاهده همه محصولات
-                                </a>
-                            </div>
-                            <div class="owl-carousel col-xs-12">
-
-                             &lt;!&ndash;   <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProductsSlider" v-if="product.main.sub_category_id == 4" :key="product.main.id">
-                                    <image-viewer
-                                            :title="product.main.sub_category_name + ' - ' + product.main.product_name"
-                                            :img="'storage/' + product.photos[0].file_path"
-                                            :link="'/product-list/' + product.main.sub_category_name"
-                                    >
-                                    </image-viewer>
-                                </article>
-        &ndash;&gt;
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-        -->
-
-        <!-- =========================
-        TESTIMONIAL SECTION
-        ============================== -->
-
-        <!--
-                <section id="testimonial" class="">
-                    <div class="overlay"></div>
-                    <div class="container">
-                        <div class="row">
-                            <div class=" wow bounceIn col-xs-12 col-sm-6">
-                                <div class="section-title">
-                                    <figure>
-                                        <img :src="img_success_verified" class="img-responsive"
-                                             alt="feature"></figure>
-                                    <h3><span>107</span>
-                                        تامین کننده تایید شده
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class=" wow bounceIn col-xs-12 col-sm-6">
-                                <div class="section-title">
-                                    <figure>
-                                        <img :src="img_success_project" class="img-responsive"
-                                             alt="feature"></figure>
-                                    <h3>
-                                        <span>24</span>
-                                        پروژه موفق انجام شده
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-        -->
-
-
-        <!-- =========================
-        RECENT BLOG POSTS SECTION
-        ============================== -->
-        <!--
-                <section id="blog" class="parallax-section ">
-                    <div class="container">
-                        <div class="row">
-                            <h3 class="text-center col-xs-12"> وبلاگ اینکوباک</h3>
-                            <div class="owl-carousel col-xs-12">
-
-                                <article class="wow fadeIn " data-wow-delay="0.4s" v-for="post in posts">
-                                    <image-viewer
-                                            :title="post.post_title"
-                                            :img="post.img_url"
-                                            :link="post.guid"
-                                            :content="post.post_content.substr(0,150) + '...'"
-                                    >
-                                    </image-viewer>
-                                </article>
-
-                            </div>
-                        </div>
-                    </div>
-                </section>
-        -->
-
-
     </div>
 
 </template>
@@ -1981,7 +1826,7 @@
 <script>
     import {eventBus} from "../../../router/dashboard_router";
 
-    var viz = false;
+    var visible = false;
     var OwlCarousel = {
         data: function () {
             return {
@@ -2028,6 +1873,9 @@
         }
     };
     export default {
+        components: {
+            OwlCarousel,
+        },
         props: [
             'img_success_project',
             'img_success_verified',
@@ -2041,9 +1889,6 @@
             'img_one',
             'site_logo_white',
         ],
-        components: {
-            'image-viewer': OwlCarousel,
-        },
         data: function () {
             return {
                 posts: '',
@@ -2058,21 +1903,21 @@
             stopLoader: function () {
                 eventBus.$emit('isLoading', false);
             },
-            dropdown: function () {
+            collapseDropDown: function () {
                 $(".profile-list").fadeIn("slow", function () {
-                    viz = true;
+                    visible = true;
                 });
             },
-            dropdownList: function () {
+            collapseDropDownList: function () {
                 $(".icon-header-list").fadeIn("slow", function () {
-                    viz = true;
+                    visible = true;
                 });
             },
             documentClick(e) {
-                if (viz) {
+                if (visible) {
                     $('.profile-list').fadeOut("slow");
                     $('.icon-header-list').fadeOut("slow");
-                    viz = false;
+                    visible = false;
 
                 }
             },
@@ -2085,13 +1930,9 @@
                     });
 
                 axios.post('/user/get_product_list', {
-//                    from_record_number: 0,
-//                    to_record_number: 5,
-//                     sub_category_id:6,
                 }).then(function (response) {
                     self.homePageProductsSlider = response.data.products;
                 });
-
             },
             search: function () {
                 if (this.mainSearchBoxText != '') {
@@ -2113,8 +1954,9 @@
         },
         created() {
             gtag('config', 'UA-129398000-1', {'page_path': '/home-page'});
-            
-            document.addEventListener('click', this.documentClick)
+
+            document.addEventListener('click', this.documentClick);
+
             var self = this;
 
             window.addEventListener('keydown', function (event) {
@@ -2127,20 +1969,8 @@
         },
         watch: {
             mainSearchBoxText: function () {
-                if (this.mainSearchBoxText != '') {
-                    this.enterKeyActiveForSearch = true;
-                }
-                else {
-                    this.enterKeyActiveForSearch = false;
-                }
+                this.enterKeyActiveForSearch = this.mainSearchBoxText !== '';
             }
         },
-//        beforeCreate:function(){
-//            var self = this;
-//            window.addEventListener("load", function(event) {
-//                    self.stopLoader();
-//            });
-//        },
-
     }
 </script>

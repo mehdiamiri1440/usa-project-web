@@ -242,18 +242,18 @@
         padding: 60px 15px;
     }
 
-    .header-lable {
+    .header-label {
         display: block;
         margin: 13px;
         padding: 0;
     }
-    .content-lable{
+    .content-label{
         font-weight:400 ;
     }
 
     /*end main content style */
     /*custom cods*/
-    .green-bot {
+    .green-button {
         margin: 15px 0;
         display: inline-block;
         background: #28a745;
@@ -266,7 +266,7 @@
         width: 100%;
     }
 
-    .green-bot:hover {
+    .green-button:hover {
         color: #fff;
         background: #249741;
         transition: 300ms;
@@ -454,7 +454,7 @@
             float: none;
         }
     }
-    .company_des,.image_company,.image_certif{
+    .company_des,.image_company,.image-certificates{
         margin: 40px auto;
     }
     .images-content{
@@ -522,14 +522,23 @@
 <template>
     <section class="main-content col-xs-12">
         <form action="#" method="post" enctype="multipart/form-data">
-
             <div class="company_des col-xs-12">
-                <label>
+                <label for="description">
                     شرح فعالیت من | شرکت:
                 </label>
-                <textarea name="company_name" v-model="currentUser.profile.description"></textarea>
-                <span v-if="errors.description" class="text-danger">@{{ errors.description[0] }}</span>
+
+                <textarea id="description"
+                          name="company_name"
+                          v-model="currentUser.profile.description"
+                >
+
+                </textarea>
+
+                <span v-if="errors.description"
+                      class="text-danger"
+                      v-text="errors.description[0]"></span>
             </div>
+
             <div class="image_company col-xs-12 ">
                 <div class="col-xs-12 col-sm-6">
                     <label>
@@ -538,17 +547,22 @@
 
                     <div class="row">
                         <div class="images-content col-xs-12" >
-                                <article class="image-item col-xs-4" v-for="photo in currentUser.relateds">
-                                       <a href="#"><i class="fa fa-close"></i></a>
-                                       <img :src=" str + '/' + photo" alt="">
-                                </article>
+                            <article class="image-item col-xs-4"
+                                     v-for="photo in currentUser.relateds">
+                                <a href="#">
+                                    <i class="fa fa-close"></i>
+                                </a>
+
+                                <img :src=" str + '/' + photo" alt="">
+
+                            </article>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <label>
                         افزودن تصاویر مربوطه <span>(محصولات | شرکت | کارکنان)</span> </label>
-                    <uploadFile
+                    <UploadFile
                             uploadName = "related_files"
                             uploadAccept = "image/*"
                             :uploadMinSize = "1024"
@@ -561,12 +575,11 @@
                             :uploadOCompress = "1024 * 1024"
                             :uploadUploadAuto = "false"
                             :uploadRef="relatedFiles"
-                    ></uploadFile>
-             <!--       <input type="file" ref="relatedFiles" id="file" multiple
-                           v-on:change="handleRelatedFilesUpload()" accept="image/*">-->
+                    />
+
                 </div>
             </div>
-            <div class="image_certif  col-xs-12">
+            <div class="image-certificates  col-xs-12">
                 <div class="col-xs-12 col-sm-6">
                     <label>
                         تصاویر گواهی های مربوطه <span>(گواهی های ثبت شرکت | گواهی های استاندارد محصول)</span>
@@ -575,7 +588,10 @@
                     <div class="row">
                         <div class="images-content col-xs-12">
                             <article class="image-item col-xs-4" v-for="photo in currentUser.certificates">
-                                <a href="#"><i class="fa fa-close"></i></a>
+                                <a href="#">
+                                    <i class="fa fa-close"></i>
+                                </a>
+
                                 <img :src="str + '/' + photo" alt="">
                             </article>
                         </div>
@@ -585,11 +601,12 @@
                     <label>
                         افزودن گواهی های مربوطه <span>(گواهی های ثبت شرکت | گواهی های استاندارد محصول)</span>
                     </label>
-                    <uploadFile
+
+                    <UploadFile
                             uploadName = "certificate_files"
                             uploadAccept = "image/*"
                             :uploadMinSize = "1024"
-                            :uploadSize = "1024 * 1024 * 10"
+                            :uploadSize = "1024 * 1024"
                             :uploadMultiple = "true"
                             :uploadDrop = "true"
                             :uploadDropDirectory = "true"
@@ -598,13 +615,11 @@
                             :uploadOCompress = "1024 * 1024"
                             :uploadUploadAuto = "false"
                             :uploadRef="certificateFiles"
-                    ></uploadFile>
-<!--
-                    <input type="file" multiple ref="certificateFiles" v-on:change="handleCertificateFilesUpload()"
-                           accept="image/*">-->
+                    />
                 </div>
             </div>
-            <input class="green-bot" value="ثبت تغییرات" type="button" @click="RegisterComplementaryProfileInfo">
+
+            <input class="green-button" value="ثبت تغییرات" type="button" @click="RegisterComplementaryProfileInfo">
         </form>
 
     </section>
@@ -613,10 +628,11 @@
 
 <script>
     import {eventBus} from "../../../../router/dashboard_router";
-    import uploadFile from '../../upload-image'
+    import UploadFile from '../../upload-image'
+
     export default {
         components:{
-            uploadFile
+            UploadFile
         },
         props:[
             'str'
@@ -639,13 +655,9 @@
                 errors: '',
                 popUpMsg: '',
                 items: [
-//                    {
-//                        message: 'قرارداد',
-//                        url: 'profileContract',
-//                    },
                     {
                         message: ' اطلاعات تکمیلی',
-                        url: 'compelementry',
+                        url: 'complementary',
                     },
                     {
                         message: 'اطلاعات پایه',
@@ -661,26 +673,24 @@
                     .then(response => (this.currentUser = response.data));
             },
             RegisterComplementaryProfileInfo: function () {
-
+                let formData = new FormData();
+                var cnt = this.profileComplementaryFields.length;
+                var self = this;
 
                 eventBus.$emit('submiting',true);
+
                 if (this.currentUser.profile.is_company == null || this.currentUser.profile.public_phone == null) {
                     this.popUpMsg = 'ابتدا اطلاعات پایه را تکمیل کنید.';
                     eventBus.$emit('submitSuccess', this.popUpMsg);
-                    $('#myModal').modal('show');
+                    $('#custom-main-modal').modal('show');
                     eventBus.$emit('submiting',false);
                     return;
                 }
 
                 this.errors = '';
-                var self = this;
-
-                let formData = new FormData();
-                var cnt = this.profileComplementaryFields.length;
-
 
                 for (var i = 0; i < cnt; i++){
-                    if (this.profileComplementaryFields[i] == 'description' && (this.currentUser.profile['description'] == null || this.currentUser.profile['description'] == '')) {
+                    if (this.profileComplementaryFields[i] === 'description' && (this.currentUser.profile['description'] == null || this.currentUser.profile['description'] === '')) {
                         continue;
                     }
                     formData.append(this.profileComplementaryFields[i], this.currentUser.profile[this.profileComplementaryFields[i]]);
@@ -695,10 +705,9 @@
                     let file = this.certificateFiles[i];
                     formData.append('certificate_' + i, file);
                 }
-
                 formData.append('related_image_count', this.relatedFiles.length);
                 formData.append('certificate_image_count', this.certificateFiles.length);
-                var self = this;
+
                 axios.post('/user/profile_modification', formData, {
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest',
@@ -709,15 +718,15 @@
                       }.bind(this)
                     })
                     .then(function (response) {
-                        if (response.status == 200) {
+                        if (response.status === 200) {
 
                             eventBus.$emit('submiting',false);
                             self.popUpMsg = 'تغییرات با موفقیت انجام شد.';
                             eventBus.$emit('submitSuccess',self.popUpMsg);
 
-                            $('#myModal').modal('show');
+                            $('#custom-main-modal').modal('show');
                         }
-                        else if (response.status == 302) {
+                        else if (response.status === 302) {
                             window.location.href = '/login';
                         }
                     })
@@ -760,7 +769,5 @@
             }
         }
     }
-
-
 </script>
 

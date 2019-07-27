@@ -22,7 +22,7 @@ article, aside, details, figcaption, figure,
 footer, header, menu, nav, section {
     display: block;
 }
-.green_bot:focus,.green_bot:hover{
+.green-button:focus,.green-button:hover{
     color: #fff !important;
 }
 body {
@@ -486,8 +486,8 @@ th, td {
     border-bottom: none;
 }
 
-.green_bot {
-    margin: 15px 0;
+.green-button {
+    margin: 15px 0 0;
     display: inline-block;
     background: #28a745;
     color: #fff;
@@ -502,58 +502,37 @@ th, td {
 
 }
 
-.green_bot:hover {
+.green-button:hover {
     background: #279b41;
     color: #fff;
 }
 
-.info_user_wrapper_mobile .green_bot, .back_page > .green_bot {
+.info_user_wrapper_mobile .green-button, .back_page > .green-button {
     margin: 3px 0;
     padding: 4px 0;
 }
 
-.info_user_wrapper_mobile .green_bot.edit, .back_page > .green_bot.edit {
-    background: #28a745;
-    color: #fff;
-}
-.green_bot.edit:hover{
-    background: #279b41;
-}
-.main_green_but {
-    display: inline-block;
-    background: #28a745;
-    color: #fff;
-    padding: 10px 30px;
-    margin: 0 15px;
-    border-radius: 3px;
-    text-align: center;
-    font-size: 12px;
-    line-height: 21px;
-    border: none;
-}
 
-.main_green_but:hover {
-    background: #279b41;
-    color: #fff;
-}
 
-.main-article-title-content .main_green_but {
+.main-article-title-content .main-green-button {
     float: left;
 }
 
 .main-article-title-content .main-article-title {
     float: right;
 }
-
+.back_page .green-button{
+    width: 100%;
+}
 .back_page {
     float: left;
     padding: 8px 0;
 }
 
-.back_page a {
+.back_page.first-back a {
     background: #000546;
 }
-.back_page a:hover {
+.back_page.first-back a:hover {
     background: #000461 !important;
 }
 
@@ -691,7 +670,6 @@ th, td {
 
     .description {
         text-align: right;
-/*        white-space: initial !important;*/
     }
 
     .logo img {

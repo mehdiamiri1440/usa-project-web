@@ -1,6 +1,31 @@
+<style scoped>
+    .green-button {
+        width: initial;
+        padding: 13px 15px;
+        font-size: 16px;
+    }
+
+    .about-us-icons {
+        margin: 7px auto 15px;
+        text-align: center;
+    }
+
+    .about-us-icons .row > div {
+        min-height: 310px;
+        float: right;
+    }
+
+    .about-us-icons p {
+        text-align: center;
+    }
+
+    .about-us-icons img {
+        max-width: 130px;
+    }
+</style>
+
 <template>
     <div class="main-content-index-pages">
-
         <section class="parallax-section policy">
             <div class="overlay"></div>
             <div class="container">
@@ -74,7 +99,7 @@
                             <br/>
 
                             <h3 class="text-center">
-                                <a href="/register" class="green_bot">                                هم اکنون عضو جامعه اینکوباک شوید
+                                <a href="/register" class="green-button"> هم اکنون عضو جامعه اینکوباک شوید
                                 </a>
                             </h3>
                             <p>
@@ -99,7 +124,8 @@
                                         <div class="about-us-icon">
                                             <img :src="img_about_us_3" alt="">
                                         </div>
-                                        <p>     عضوی از جامعه اینکوباک باشید، با اطلاع از آخرین تغییرات بازار، با قیمت و شرایط بهتر محصول خود را تهیه کنید.
+                                        <p> عضوی از جامعه اینکوباک باشید، با اطلاع از آخرین تغییرات بازار، با قیمت و
+                                            شرایط بهتر محصول خود را تهیه کنید.
 
                                         </p>
                                     </div>
@@ -107,7 +133,8 @@
                                         <div class="about-us-icon">
                                             <img :src="img_about_us_4" alt="">
                                         </div>
-                                        <p> کالای مورد نظر خود را از میان فروشندگان مختلف بیابید و با آنها به صورت مستقیم ارتباط برقرار کنید. </p>
+                                        <p> کالای مورد نظر خود را از میان فروشندگان مختلف بیابید و با آنها به صورت
+                                            مستقیم ارتباط برقرار کنید. </p>
                                     </div>
                                     <div class="col-xs-6 col-sm-4 col-md-3">
                                         <div class="about-us-icon">
@@ -124,7 +151,7 @@
                                 </div>
                             </div>
                             <h3 class="text-center">
-                                <a href="/help" class="green_bot">                               اینکوباک چگونه کار میکند؟
+                                <a href="/help" class="green-button"> اینکوباک چگونه کار میکند؟
                                 </a>
                             </h3>
                             <p class="text-right">
@@ -140,28 +167,7 @@
 
     </div>
 </template>
-<style scoped>
-    .green_bot {
-        width: initial;
-        padding: 13px 15px;
-        font-size: 16px;
-    }
-    .about-us-icons{
-        margin: 7px auto 15px;
-        text-align: center;
-    }
-    .about-us-icons .row > div{
-        min-height: 310px;
-        float: right;
-    }
-    .about-us-icons p{
-        text-align:center;
-    }
 
-    .about-us-icons img{
-        max-width: 130px;
-    }
-</style>
 <script>
     import {eventBus} from "../../../router/dashboard_router";
 
@@ -176,28 +182,22 @@
         ],
         methods: {
             stopLoader: function () {
-                    eventBus.$emit('isLoading', false);
+                eventBus.$emit('isLoading', false);
             }
         },
         mounted: function () {
             var self = this;
             document.onreadystatechange = () => {
-                if (document.readyState == "complete") {
+                if (document.readyState === "complete") {
                     self.$nextTick(self.stopLoader());
                 }
             }
         },
-        updated:function(){
+        updated: function () {
             this.$nextTick(this.stopLoader);
         },
-        created(){
+        created() {
             gtag('config', 'UA-129398000-1', {'page_path': '/about-us'});
         },
-//        beforeCreate:function(){
-//            var self = this;
-//            window.addEventListener("load", function(event) {
-//                    self.stopLoader();
-//            });
-//        }
     }
 </script>

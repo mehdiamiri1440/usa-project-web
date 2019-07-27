@@ -1,954 +1,23 @@
-<template>
-    <div>
-
-        <section id="intro" class="parallax-section">
-            <div class="container-fluid main_hero_section col-xs-12">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h1 class="wow fadeIn" data-wow-delay="1.2s">
-                                تعرفه ها
-                            </h1>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-        </section>
-        <!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
-
-        <section id="faq" class="parallax-section" style="background-position: 50% 60px;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 animated hidden-xs"
-                         style="visibility: visible; animation-delay: 0.9s; animation-name: fadeInUp;">
-
-                        <table class="wow fadeInUp table-striped   pricing-table ">
-                            <thead>
-                            <tr>
-                                <th class="head-package">تعرفه ها</th>
-                                <th class="head-secend-package">
-                                    <div class="main-pricing-icon">
-                                        <img :src="img_pricing_32">
-                                        <span class="main-pricing-span">رایگان</span>
-
-                                    </div>
-                                </th>
-<!--
-                                <th class="head-secend-package">
-                                    <div class="main-pricing-icon">
-                                        <img :src="img_pricing_38">
-                                        <span class="main-pricing-span">برنزی</span>
-                                    </div>
-
-                                </th>
-                                <th class="head-secend-package">
-                                    <div class="main-pricing-icon">
-                                        <img :src="img_pricing_36">
-                                        <span class="main-pricing-span">نقره ای</span>
-                                    </div>
-
-                                </th>
--->
-                                <th class="head-secend-package">
-                                    <div class="main-pricing-icon">
-                                        <img :src="img_pricing_34">
-                                        <span class="main-pricing-span">طلایی</span>
-                                        <p class="text-red">یک ساله</p>
-                                    </div>
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#free-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <div> تعداد آگهی ها</div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>1</span>
-                                    </div>
-                                </td>
-<!--
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>3</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>5</span>
-                                    </div>
-                                </td>
--->
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>7</span>
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="collapse" id="free-package">
-                                <td colspan="5">
-                                    تعداد آگهی های همزمان شما که در لیست محصولات  نمایش داده می شود.
-                                </td>
-
-                            </tr>
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#one-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <div>
-                                            اولویت نمایش
-                                        </div>
-                                    </div>
-                                </td>
-<!--
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>4</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>3</span>
-                                    </div>
-                                </td>
--->
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>2</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>1</span>
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="collapse" id="one-package">
-                                <td colspan="5">
-                                اولویت نمایش در لیست محصولات و جستجو ها
-                                </td>
-                            </tr>
-
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#three-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <div>
-                                            ارسال پیامک به خریداران
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="red-check"><i class="fa fa-close"></i></span>
-                                    </div>
-                                </td>
-<!--
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="green-check"><i class="fa fa-check"></i></span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="green-check"><i class="fa fa-check"></i></span>
-                                    </div>
-                                </td>
--->
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="green-check"><i class="fa fa-check"></i></span>
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="collapse" id="three-package">
-                                <td colspan="5">
-                                    پس از ثبت آگهی فروش به صورت خودکار به خریداران متقاضی آن محصول پیامک ارسال می شود.
-                                </td>
-
-                            </tr>
-
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#four-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <div>
-                                            تایید فوری
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="red-check"><i class="fa fa-close"></i></span>
-                                    </div>
-                                </td>
-<!--
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="green-check"><i class="fa fa-check"></i></span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="green-check"><i class="fa fa-check"></i></span>
-                                    </div>
-                                </td>
--->
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="green-check"><i class="fa fa-check"></i></span>
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="collapse" id="four-package">
-                                <td colspan="5">
-                                آگهی های فروش ثبت شده بلافاصله پس از ثبت در لیست محصولات نمایش داده می شود.
-                                </td>
-
-                            </tr>
-
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#five-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <div>
-                                            میزان افزایش خوشنامی
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>0</span>
-                                    </div>
-                                </td>
-<!--
-                                <td>
-                                    <div class="main-table-item">
-
-                                        <span>80</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>200</span>
-                                    </div>
-                                </td>
--->
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>350</span>
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="collapse" id="five-package">
-                                <td colspan="5">
-                                مقدار اعتبار اضافه شده به صفحه پروفایل شما
-                                </td>
-
-                            </tr>
-
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#six-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <div>
-                                            نشان فروشنده معتبر
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="red-check"><i class="fa fa-close"></i></span>
-                                    </div>
-                                </td>
-<!--
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="red-check"><i class="fa fa-close"></i></span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="red-check"><i class="fa fa-close"></i></span>
-                                    </div>
-                                </td>
--->
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="green-check"><i class="fa fa-check"></i></span>
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="collapse" id="six-package">
-                                <td colspan="5">
-                                    این نشان در صفحه پروفایل فروشنده نمایش داده می شود.
-                                </td>
-
-                            </tr>
-
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#seven-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <div>
-                                            تعداد درخواستهای خرید
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>5</span>
-                                    </div>
-                                </td>
-<!--
-                                <td>
-                                    <div class="main-table-item">
-
-                                        <span>12</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>30</span>
-                                    </div>
-                                </td>
--->
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>نامحدود</span>
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="collapse" id="seven-package">
-                                <td colspan="5">
-                                    سقف تعداد درخواست های خریدی که به کاربر نمایش داده می شود.
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="main-table-item">
-                                        <div>
-                                            قیمت
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>رایگان</span>
-                                    </div>
-                                </td>
-<!--
-                                <td>
-                                    <div class="main-table-item">
-
-                                        <span>12</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>30</span>
-                                    </div>
-                                </td>
--->
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>تومان 489,000</span>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div class="main-table-item">
-                                        <div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span> <a href="/register" class="green_bot">ثبت نام</a> </span>
-                                    </div>
-                                </td>
-<!--
-                                <td>
-                                    <div class="main-table-item">
-
-                                        <span> <a href="/payment/1" class="green_bot">خرید</a> </span>
-
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span> <a href="/payment/2" class="green_bot">خرید</a> </span>
-
-                                    </div>
-                                </td>
--->
-                                <td>
-                                    <div class="main-table-item">
-                                        <span> <a href="/payment/3" class="green_bot">خرید</a> </span>
-
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-
-                    <div class="col-xs-12 animated hidden-sm hidden-md hidden-lg "
-                         style="visibility: visible; animation-delay: 0.9s; animation-name: fadeInUp;">
-
-                        <table class="wow fadeInUp   pricing-table ">
-                            <thead>
-                            <tr>
-                                <th class="head-package">تعرفه ها</th>
-                                <th class="head-secend-package">
-                                    <div class="main-pricing-icon">
-                                        <img :src="img_pricing_32">
-                                        <span class="main-pricing-span">رایگان</span>
-                                    </div>
-                                </th>
-                                <th class="head-secend-package">
-                                    <div class="main-pricing-icon">
-                                        <img :src="img_pricing_34">
-                                        <span class="main-pricing-span">طلایی</span>
-                                        <p class="text-red">یک ساله</p>
-                                    </div>
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#mobile-free-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-                                        <div> تعداد آگهی ها</div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>1</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>7</span>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            <tr class="collapse" id="mobile-free-package">
-                                <td colspan="5">
-                                    تعداد آگهی های همزمان شما که در لیست محصولات  نمایش داده می شود.
-                                </td>
-
-                            </tr>
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#mobile-one-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-                                        <div>
-                                            اولویت نمایش
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>2</span>
-                                    </div>
-                                </td>
-                               <td>
-                                    <div class="main-table-item">
-                                        <span>1</span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="collapse" id="mobile-one-package">
-                                <td colspan="5">
-                                    اولویت نمایش در لیست محصولات و جستجو ها
-                                </td>
-
-                            </tr>
-
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#mobile-three-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-                                        <div>
-                                            ارسال پیامک به خریداران
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="red-check"><i class="fa fa-close"></i></span>
-                                    </div>
-                                </td>
-                               <td>
-                                    <div class="main-table-item">
-                                        <span class="green-check"><i class="fa fa-check"></i></span>
-                                    </div>
-                               </td>
-                            </tr>
-                            <tr class="collapse" id="mobile-three-package">
-                                <td colspan="5">
-                                    پس از ثبت آگهی فروش به صورت خودکار به خریداران متقاضی آن محصول پیامک ارسال می شود.
-                                </td>
-
-                            </tr>
-
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#mobile-four-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-
-                                        <div>
-                                            تایید فوری
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="red-check"><i class="fa fa-close"></i></span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="green-check"><i class="fa fa-check"></i></span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="collapse" id="mobile-four-package">
-
-                                <td colspan="5">
-                                    آگهی های فروش ثبت شده بلافاصله پس از ثبت در لیست محصولات نمایش داده می شود.
-                                </td>
-
-                            </tr>
-
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#mobile-five-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-
-                                        <div>
-                                            میزان افزایش خوشنامی
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>0</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>350</span>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            <tr class="collapse" id="mobile-five-package">
-
-                                <td colspan="5">
-                                    مقدار اعتبار اضافه شده به صفحه پروفایل شما
-                                </td>
-
-                            </tr>
-
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#mobile-six-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-
-                                        <div>
-                                            نشان فروشنده معتبر
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="red-check"><i class="fa fa-close"></i></span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="green-check"><i class="fa fa-check"></i></span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="collapse" id="mobile-six-package">
-                                <td colspan="5">
-                                این نشان در صفحه پروفایل فروشنده نمایش داده می شود.
-                                </td>
-
-                            </tr>
-
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#mobile-seven-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-
-                                        <div>
-                                            تعداد درخواستهای خرید
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>5</span>
-                                    </div>
-                                </td>
-                                 <td>
-                                    <div class="main-table-item">
-                                        <span>نامحدود</span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="collapse" id="mobile-seven-package">
-                                <td colspan="5">
-                                    سقف تعداد درخواست های خریدی که به کاربر نمایش داده می شود.
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="main-table-item">
-                                                                             <div>
-                                            قیمت
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>رایگان</span>
-                                    </div>
-                                </td>
-                                 <td>
-                                    <div class="main-table-item">
-                                        <span>489,000 تومان</span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="main-table-item">
-                                        <div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span> <a href="/register" class="green_bot">ثبت نام</a> </span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-
-                                        <span> <a href="/payment/3" class="green_bot">خرید</a> </span>
-
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-
-
-<!--
-                    <div class="col-xs-12 animated hidden-sm hidden-md hidden-lg"
-                         style="visibility: visible; animation-delay: 0.9s; animation-name: fadeInUp;">
-
-                        <table class="wow fadeInUp   pricing-table ">
-                            <thead>
-                            <tr>
-                                <th class="head-package">تعرفه ها</th>
-                                <th class="head-secend-package">
-                                    <div class="main-pricing-icon">
-                                        <img :src="img_pricing_36">
-                                        <span class="main-pricing-span">نقره ای</span>
-                                    </div>
-
-                                </th>
-                                <th class="head-secend-package">
-                                    <div class="main-pricing-icon">
-                                        <img :src="img_pricing_34">
-                                        <span class="main-pricing-span">طلایی</span>
-                                    </div>
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#mobile-two-free-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-                                        <div> تعداد آگهی ها</div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>5</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>7</span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="collapse" id="mobile-two-free-package">
-                                <td colspan="5">
-                                    تعداد آگهی های همزمان شما که در لیست محصولات  نمایش داده می شود.
-                                </td>
-
-                            </tr>
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#mobile-two-one-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-                                        <div>
-                                            اولویت نمایش
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>2</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>1</span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="collapse" id="mobile-two-one-package">
-                                <td colspan="5">
-                                    اولویت نمایش در لیست محصولات و جستجو ها
-                                </td>
-
-                            </tr>
-
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#mobile-two-three-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-
-                                        <div>
-                                            ارسال پیامک به خریداران
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="green-check"><i class="fa fa-check"></i></span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="green-check"><i class="fa fa-check"></i></span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="collapse" id="mobile-two-three-package">
-                                <td colspan="5">
-                                    پس از ثبت آگهی فروش به صورت خودکار به خریداران متقاضی آن محصول پیامک ارسال می شود.
-                                </td>
-
-                            </tr>
-
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#mobile-two-four-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-
-                                        <div>
-                                            تایید فوری
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="green-check"><i class="fa fa-check"></i></span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="green-check"><i class="fa fa-check"></i></span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="collapse" id="mobile-two-four-package">
-                                <td colspan="5">
-                                    آگهی های فروش ثبت شده بلافاصله پس از ثبت در لیست محصولات نمایش داده می شود.
-                                </td>
-
-                            </tr>
-
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#mobile-two-five-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-                                        <div>
-                                            میزان افزایش خوشنامی
-                                        </div>
-
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>200</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>350</span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="collapse" id="mobile-two-five-package">
-
-                                <td colspan="5">
-                                    مقدار اعتبار اضافه شده به صفحه پروفایل شما
-                                </td>
-
-                            </tr>
-
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#mobile-two-six-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <div>
-                                            نشان فروشنده معتبر
-                                        </div>
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="red-check"><i class="fa fa-close"></i></span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span class="green-check"><i class="fa fa-check"></i></span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="collapse" id="mobile-two-six-package">
-                                <td colspan="5">
-                                    این نشان در صفحه پروفایل فروشنده نمایش داده می شود.
-                                </td>
-
-
-                            </tr>
-
-                            <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse"
-                                data-target="#mobile-two-seven-package">
-                                <td>
-                                    <div class="main-table-item">
-                                        <i class="fa fa-angle-down collapse-icon"></i>
-                                        <div>
-                                            تعداد درخواستهای خرید
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>30</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span>نامحدود</span>
-
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="collapse" id="mobile-two-seven-package">
-                                <td colspan="5">
-                                    سقف تعداد درخواست های خریدی که به کاربر نمایش داده می شود.
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div class="main-table-item">
-                                        <div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span> <a href="/payment/2" class="green_bot">خرید</a> </span>
-
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="main-table-item">
-                                        <span> <a href="/payment/3" class="green_bot">خرید</a> </span>
-
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
--->
-                </div>
-            </div>
-        </section>
-    </div>
-</template>
-
-
 <style scoped>
-    .text-red{
+
+    .text-red {
         color: #e41c38;
     }
+
     #faq {
-        direction:rtl;
+        direction: rtl;
         padding-top: 64px;
         padding-bottom: 0;
+        background-position: 50% 60px;
+
     }
+
+    #faq .wrapper-table {
+        visibility: visible;
+        animation-delay: 0.9s;
+        animation-name: fadeInUp;
+    }
+
     .pricing-table {
         background: #fff;
         min-width: 522px;
@@ -1001,9 +70,11 @@
         position: relative;
         background-color: #f2f2f2;
     }
+
     .pricing-table > tbody > tr:nth-of-type(4n+1) {
         background: #fff;
     }
+
     .pricing-table > tbody > tr {
         transition: 300ms;
         border: none;
@@ -1047,7 +118,8 @@
         width: 130px;
         margin: 0 auto;
     }
-    .main-pricing-icon img  {
+
+    .main-pricing-icon img {
         padding: 0 10px;
     }
 
@@ -1117,27 +189,27 @@
             padding-left: 20px;
         }
 
-        .green_bot {
+        .green-button {
             padding: 12px 20px;
         }
     }
 
     @media (max-width: 767px) {
-        .main-pricing-icon img  {
+        .main-pricing-icon img {
             padding: 0;
         }
 
-        .pricing-table{
+        .pricing-table {
             min-width: initial;
         }
+
         table {
             font-size: 13px;
         }
 
-        .green_bot {
+        .green-button {
             padding: 7px 18px;
         }
-
 
         #faq .container {
             padding: 0;
@@ -1151,7 +223,8 @@
             z-index: 1;
             right: -10px;
         }
-        .pricing-table > tbody > tr:nth-of-type(2n+1) .collapse-icon{
+
+        .pricing-table > tbody > tr:nth-of-type(2n+1) .collapse-icon {
             display: block;
             content: "\F107";
             width: 15px;
@@ -1168,6 +241,7 @@
             transition: 300ms;
             padding-right: 0;
         }
+
         table thead th {
             font-size: 14px;
         }
@@ -1192,6 +266,7 @@
             margin: 20px auto;
             width: 100%;
         }
+
         .pricing-table td {
             padding: 13px;
         }
@@ -1203,7 +278,7 @@
             padding-left: 0;
         }
 
-        .green_bot {
+        .green-button {
             padding: 7px 13px;
         }
 
@@ -1216,7 +291,7 @@
 
     @media (max-width: 475px) {
 
-        .green_bot {
+        .green-button {
             padding: 7px 7px;
             font-size: 13px;
             margin: 0 2px;
@@ -1240,16 +315,656 @@
 
 
 </style>
+<template>
+    <div>
+
+        <section id="intro" class="parallax-section">
+            <div class="container-fluid main_hero_section col-xs-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h1 class="wow fadeIn" data-wow-delay="1.2s">
+                                تعرفه ها
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="parallax-section">
+            <div class="container">
+                <div class="row">
+                    <div class="wrapper-table col-xs-12 animated hidden-xs">
+                        <table class="wow fadeInUp table-striped  pricing-table ">
+
+                            <thead>
+                            <tr>
+                                <th class="head-package">تعرفه ها</th>
+
+                                <th class="head-secend-package">
+                                    <div class="main-pricing-icon">
+                                        <img :src="img_pricing_32">
+
+                                        <span class="main-pricing-span">
+                                            رایگان
+                                        </span>
+
+                                    </div>
+                                </th>
+
+                                <th class="head-secend-package">
+                                    <div class="main-pricing-icon">
+                                        <img :src="img_pricing_34">
+
+                                        <span class="main-pricing-span">
+                                            طلایی
+                                        </span>
+
+                                        <p class="text-red">یک ساله</p>
+                                    </div>
+                                </th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr class="collapsed" onclick="trElement(this)"
+                                data-toggle="collapse"
+                                data-target="#free-package">
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <div> تعداد آگهی ها</div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>1</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>7</span>
+                                        <i class="fa fa-angle-down collapse-icon"></i>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="collapse" id="free-package">
+                                <td colspan="5">
+                                    تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود.
+                                </td>
+                            </tr>
+
+                            <tr class="collapsed" onclick="trElement(this)"
+                                data-toggle="collapse"
+                                data-target="#one-package">
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <div>
+                                            اولویت نمایش
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>2</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>1</span>
+                                        <i class="fa fa-angle-down collapse-icon"></i>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="collapse" id="one-package">
+                                <td colspan="5">
+                                    اولویت نمایش در لیست محصولات و جستجو ها
+                                </td>
+                            </tr>
+
+                            <tr class="collapsed" onclick="trElement(this)"
+                                data-toggle="collapse"
+                                data-target="#three-package">
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <div>
+                                            ارسال پیامک به خریداران
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span class="red-check"><i class="fa fa-close"></i></span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span class="green-check"><i class="fa fa-check"></i></span>
+                                        <i class="fa fa-angle-down collapse-icon"></i>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="collapse" id="three-package">
+                                <td colspan="5">
+                                    پس از ثبت آگهی فروش به صورت خودکار به خریداران متقاضی آن محصول پیامک ارسال می شود.
+                                </td>
+                            </tr>
+
+                            <tr class="collapsed" onclick="trElement(this)"
+                                data-toggle="collapse"
+                                data-target="#four-package">
+                                <td>
+                                    <div class="main-table-item">
+                                        <div>
+                                            تایید فوری
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span class="red-check"><i class="fa fa-close"></i></span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span class="green-check"><i class="fa fa-check"></i></span>
+                                        <i class="fa fa-angle-down collapse-icon"></i>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="collapse" id="four-package">
+                                <td colspan="5">
+                                    آگهی های فروش ثبت شده بلافاصله پس از ثبت در لیست محصولات نمایش داده می شود.
+                                </td>
+                            </tr>
+
+                            <tr class="collapsed" onclick="trElement(this)"
+                                data-toggle="collapse"
+                                data-target="#five-package">
+                                <td>
+                                    <div class="main-table-item">
+                                        <div>
+                                            میزان افزایش خوشنامی
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>0</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>350</span>
+                                        <i class="fa fa-angle-down collapse-icon"></i>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="collapse" id="five-package">
+                                <td colspan="5">
+                                    مقدار اعتبار اضافه شده به صفحه پروفایل شما
+                                </td>
+
+                            </tr>
+
+                            <tr class="collapsed" onclick="trElement(this)"
+                                data-toggle="collapse"
+                                data-target="#six-package">
+                                <td>
+                                    <div class="main-table-item">
+                                        <div>
+                                            نشان فروشنده معتبر
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span class="red-check"><i class="fa fa-close"></i></span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span class="green-check"><i class="fa fa-check"></i></span>
+                                        <i class="fa fa-angle-down collapse-icon"></i>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="collapse" id="six-package">
+                                <td colspan="5">
+                                    این نشان در صفحه پروفایل فروشنده نمایش داده می شود.
+                                </td>
+                            </tr>
+
+                            <tr class="collapsed" onclick="trElement(this)"
+                                data-toggle="collapse"
+                                data-target="#seven-package">
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <div>
+                                            تعداد درخواستهای خرید
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>5</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>نامحدود</span>
+                                        <i class="fa fa-angle-down collapse-icon"></i>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="collapse" id="seven-package">
+                                <td colspan="5">
+                                    سقف تعداد درخواست های خریدی که به کاربر نمایش داده می شود.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="main-table-item">
+                                        <div>
+                                            قیمت
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>رایگان</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>تومان 489,000</span>
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="main-table-item">
+                                        <div>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span> <a href="/register" class="green-button">ثبت نام</a> </span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span> <a href="/payment/3" class="green-button">خرید</a> </span>
+
+                                    </div>
+                                </td>
+                            </tr>
+
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                    <div class="wrapper-table col-xs-12 animated hidden-sm hidden-md hidden-lg">
+
+                        <table class="wow fadeInUp   pricing-table ">
+                            <thead>
+                            <tr>
+                                <th class="head-package">تعرفه ها</th>
+
+                                <th class="head-secend-package">
+                                    <div class="main-pricing-icon">
+                                        <img :src="img_pricing_32">
+                                        <span class="main-pricing-span">رایگان</span>
+                                    </div>
+                                </th>
+
+                                <th class="head-secend-package">
+                                    <div class="main-pricing-icon">
+                                        <img :src="img_pricing_34">
+
+                                        <span class="main-pricing-span">
+                                            طلایی
+                                        </span>
+
+                                        <p class="text-red">یک ساله</p>
+                                    </div>
+                                </th>
+                            </tr>
+
+                            </thead>
+                            <tbody>
+
+
+                            <tr class="collapsed" onclick="trElement(this)"
+                                data-toggle="collapse"
+                                data-target="#mobile-free-package">
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <i class="fa fa-angle-down collapse-icon"></i>
+
+                                        <div> تعداد آگهی ها</div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>1</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>7</span>
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                            <tr class="collapse" id="mobile-free-package">
+                                <td colspan="5">
+                                    تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود.
+                                </td>
+
+                            </tr>
+                            <tr class="collapsed" onclick="trElement(this)"
+                                data-toggle="collapse"
+                                data-target="#mobile-one-package">
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <i class="fa fa-angle-down collapse-icon"></i>
+                                        <div>
+                                            اولویت نمایش
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>2</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>1</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="collapse" id="mobile-one-package">
+                                <td colspan="5">
+                                    اولویت نمایش در لیست محصولات و جستجو ها
+                                </td>
+                            </tr>
+
+                            <tr class="collapsed" onclick="trElement(this)"
+                                data-toggle="collapse"
+                                data-target="#mobile-three-package">
+                                <td>
+                                    <div class="main-table-item">
+                                        <i class="fa fa-angle-down collapse-icon"></i>
+                                        <div>
+                                            ارسال پیامک به خریداران
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span class="red-check"><i class="fa fa-close"></i></span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span class="green-check"><i class="fa fa-check"></i></span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="collapse" id="mobile-three-package">
+                                <td colspan="5">
+                                    پس از ثبت آگهی فروش به صورت خودکار به خریداران متقاضی آن محصول پیامک ارسال می شود.
+                                </td>
+                            </tr>
+
+                            <tr class="collapsed" onclick="trElement(this)"
+                                data-toggle="collapse"
+                                data-target="#mobile-four-package">
+                                <td>
+                                    <div class="main-table-item">
+                                        <i class="fa fa-angle-down collapse-icon"></i>
+
+                                        <div>
+                                            تایید فوری
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span class="red-check"><i class="fa fa-close"></i></span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span class="green-check"><i class="fa fa-check"></i></span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="collapse" id="mobile-four-package">
+
+                                <td colspan="5">
+                                    آگهی های فروش ثبت شده بلافاصله پس از ثبت در لیست محصولات نمایش داده می شود.
+                                </td>
+
+                            </tr>
+
+                            <tr class="collapsed" onclick="trElement(this)"
+                                data-toggle="collapse"
+                                data-target="#mobile-five-package">
+                                <td>
+                                    <div class="main-table-item">
+                                        <i class="fa fa-angle-down collapse-icon"></i>
+
+                                        <div>
+                                            میزان افزایش خوشنامی
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>0</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>350</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="collapse" id="mobile-five-package">
+
+                                <td colspan="5">
+                                    مقدار اعتبار اضافه شده به صفحه پروفایل شما
+                                </td>
+
+                            </tr>
+
+                            <tr class="collapsed" onclick="trElement(this)"
+                                data-toggle="collapse"
+                                data-target="#mobile-six-package">
+                                <td>
+                                    <div class="main-table-item">
+                                        <i class="fa fa-angle-down collapse-icon"></i>
+
+                                        <div>
+                                            نشان فروشنده معتبر
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span class="red-check"><i class="fa fa-close"></i></span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span class="green-check"><i class="fa fa-check"></i></span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="collapse" id="mobile-six-package">
+                                <td colspan="5">
+                                    این نشان در صفحه پروفایل فروشنده نمایش داده می شود.
+                                </td>
+                            </tr>
+
+                            <tr class="collapsed" onclick="trElement(this)"
+                                data-toggle="collapse"
+                                data-target="#mobile-seven-package">
+                                <td>
+                                    <div class="main-table-item">
+                                        <i class="fa fa-angle-down collapse-icon"></i>
+
+                                        <div>
+                                            تعداد درخواستهای خرید
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>5</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>نامحدود</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="collapse" id="mobile-seven-package">
+                                <td colspan="5">
+                                    سقف تعداد درخواست های خریدی که به کاربر نمایش داده می شود.
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="main-table-item">
+                                        <div>
+                                            قیمت
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>رایگان</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>489,000 تومان</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="main-table-item">
+                                        <div>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+                                        <span>
+                                            <a href="/register" class="green-button">ثبت نام</a>
+                                        </span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="main-table-item">
+
+                                        <span>
+                                            <a href="/payment/3" class="green-button">خرید</a>
+                                        </span>
+
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</template>
+
 
 <script>
     import {eventBus} from "../../../router/dashboard_router";
 
     export default {
-        props:[
-          'img_pricing_38',
-          'img_pricing_36',
-          'img_pricing_34',
-          'img_pricing_32',
+        props: [
+            'img_pricing_38',
+            'img_pricing_36',
+            'img_pricing_34',
+            'img_pricing_32',
         ],
         data: function () {
             return {}
@@ -1260,7 +975,7 @@
             },
             trElement: function (element) {
                 var elementClass = $(element).attr('class');
-                if (elementClass != '') {
+                if (elementClass !== '') {
                     console.log($(element).toggleClass('changed-angle'));
                 } else {
                     console.log('false')
@@ -1272,22 +987,16 @@
         mounted: function () {
             var self = this;
             document.onreadystatechange = () => {
-                if (document.readyState == "complete") {
+                if (document.readyState === "complete") {
                     self.$nextTick(self.stopLoader());
                 }
             }
         },
         updated: function () {
-             this.$nextTick(this.stopLoader());
+            this.$nextTick(this.stopLoader());
         },
-        created(){
+        created() {
             gtag('config', 'UA-129398000-1', {'page_path': '/pricing'});
-        },
-//        beforeCreate:function(){
-//            var self = this;
-//            window.addEventListener("load", function(event) {
-//                    self.stopLoader();
-//            });
-//        }
+        }
     }
 </script>

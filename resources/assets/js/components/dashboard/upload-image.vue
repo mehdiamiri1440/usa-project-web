@@ -569,7 +569,7 @@
                             guides: false,
                             movable: false,
                             rotatable: false,
-                            scalable: false,
+                            scalabel: false,
                             zoomable: false,
                             zoomOnTouch: false,
                             zoomOnWheel: false,

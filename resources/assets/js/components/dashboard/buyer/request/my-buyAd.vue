@@ -12,7 +12,7 @@
         padding: 90px 15px;
     }
     /*custom cods*/
-    .green-bot {
+    .green-button {
         margin: 15px 0;
         display: inline-block;
         background: #28a745;
@@ -24,7 +24,7 @@
         transition: 300ms;
     }
 
-    .green-bot:hover {
+    .green-button:hover {
         color: #fff;
         background: #00d614;
         transition: 300ms;
@@ -297,7 +297,7 @@
                             تحویل:
                         </span>{{sellOffer.deliver_at}}
                     </p>
-                    <router-link :to="'/dashboard/sell-offer-detail/' + sellOffer.id" class="show-detail green-bot">
+                    <router-link :to="'/dashboard/sell-offer-detail/' + sellOffer.id" class="show-detail green-button">
                         جزئیات
                     </router-link>
                 </li>
