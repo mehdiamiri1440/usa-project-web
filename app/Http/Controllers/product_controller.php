@@ -432,7 +432,7 @@ class product_controller extends Controller
 		return response()->json([
 			'status' => TRUE,
 			'product' => $product_related_data,
-		],200);
+		],201);
 		
 	}
     
