@@ -73,18 +73,19 @@ a:focus {
     outline: none;
     text-decoration: none !important;
 }
-.blue-bot {
+.blue-button {
     margin: 15px 0;
     display: inline-block;
     background: #150e47;
     color: #fff;
-    padding: 10px 35px;
+    padding: 5px 0;
+    width: 100%;
     border-radius: 3px;
     text-align: center;
     border: none;
     transition: 300ms;
 }
-.blue-bot:hover, .blue-bot:focus {
+.blue-button:hover, .blue-button:focus {
     color:#fff;
     background: #1d1060;
 }

@@ -235,7 +235,12 @@
                     <p>مقدار موجودی: <span v-text="product.main.stock + 'کیلوگرم'"></span>
                     </p>
 
-                    <p>حداقل سفارش: <span v-text="product.main.min_sale_amount"> کیلوگرم</span>
+                    <p>
+                        حداقل سفارش:
+
+                        <span v-text="product.main.min_sale_amount"> </span>
+
+                        <span>کیلوگرم</span>
                     </p>
 
                     <p>قیمت:
@@ -243,8 +248,9 @@
                          ' - ' +
                          product.main.max_sale_price"
                         >
-                            تومان
                         </span>
+
+                        <span>تومان</span>
                     </p>
 
                     <p>توضیحات: <span v-text="product.main.description"></span>

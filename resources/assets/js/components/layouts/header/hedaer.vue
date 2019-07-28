@@ -124,6 +124,7 @@
 <template>
     <div>
 
+
         <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
             <div class="main-loader">
                 <img :src="loading">

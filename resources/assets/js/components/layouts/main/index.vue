@@ -122,6 +122,7 @@
         background-color: #f0f0f0;
     }
 
+
     .parallax-section {
         background-attachment: fixed !important;
         background-size: cover !important;
@@ -603,31 +604,8 @@
         }
     }
 
-    /*end*/
-    .green-button {
-        margin: 15px 0;
-        display: inline-block;
-        background: #28a745;
-        color: #fff;
-        padding: 10px 35px;
-        border-radius: 3px;
-        text-align: center;
-        border: none;
-        transition: 300ms;
-    }
 
-    .green-button:focus, .gray-bot:focus {
-        color: #fff;
-    }
-
-    .green-button:hover {
-        color: #fff;
-        background: #00d614;
-        transition: 300ms;
-
-    }
-
-    .blue-bot:hover {
+    .blue-button:hover {
         color: #fff;
         background: #160F55;
         transition: 300ms;
@@ -765,10 +743,6 @@
         min-height: 190px;
     }
 
-    #request h3 {
-        color: #fff;
-    }
-
     .detail-thumb h4 {
         height: 28px;
     }
@@ -839,6 +813,7 @@
     .detail-thumb h4 {
         font-size: 14px;
     }
+
 
     /*---------------------------------------
         Feature section
@@ -1395,6 +1370,12 @@
         box-shadow: 0 0 30px #000;
     }
 
+
+    .title-button.green-button{
+        width: initial !important;
+        margin-bottom: 15px
+    }
+
     /*---------------------------------------
        Responsive styles
     -----------------------------------------*/
@@ -1662,6 +1643,13 @@
 
 <template>
     <div>
+         <div :class="{'loader-wrapper': isLoading , 'finish-loader-show' : !isLoading }">
+             <div class="main-loader">
+                 <img :src="loading_img">
+             </div>
+         </div>
+
+
 
         <!-- =========================
         INTRO SECTION
@@ -1755,6 +1743,57 @@
             </div>
         </section>
 
+
+        <!-- =========================
+       WEB RICE AND DATE SLIDER
+      ============================== -->
+
+
+                <section id="request" class="parallax-section " v-if="homePageDates">
+                    <div class="container">
+                        <div class="row">
+                            <div class="owl-carousel col-xs-12">
+
+                               <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageDates"  :key="product.main.id">
+                                    <OwlCarousel
+                                            :title="product.main.sub_category_name + ' - ' + product.main.product_name"
+                                            :img="'storage/' + product.photos[0].file_path"
+                                            :link="'/product-list/' + product.main.sub_category_name"
+                                    />
+
+                                </article>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="rice" class="parallax-section  " v-if="homePageRice">
+                    <div class="container">
+                        <div class="row">
+                            <div class="owl-carousel col-xs-12">
+
+                           <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageRice"  :key="product.main.id">
+                                    <OwlCarousel
+                                            :title="product.main.sub_category_name + ' - ' + product.main.product_name.substring(0,7)+'..' "
+                                            :img="'storage/' + product.photos[0].file_path"
+                                            :link="'/product-list/' + product.main.sub_category_name"
+                                    />
+
+                                </article>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
         <!-- =========================
         SERVICES SECTION
         ============================== -->
@@ -1830,43 +1869,45 @@
     var OwlCarousel = {
         data: function () {
             return {
-                imgSrcs: '',
+                imgSrcs: ''
+
             };
         },
         props: ['img', 'title', 'link', 'content'],
         template: "<div class='detail-thumb'>"
             +
             "<img :src='img' class='img-responsive'>"
-            + "<h4>{{title}}</h4>"
+            + "<h4 style='font-size:14px; direction:rtl;' v-if='title.length>=20'>{{title.substring(0,20) + ' ...'}}</h4>"
+            + "<h4 style='font-size:14px; direction:rtl;' v-else>{{title }}</h4>"
             + "<p v-if='content'>{{content}}</p>"
-            + "<a v-if='!content' :href='link' class='blue-bot'>مشاهده محصول</a>"
-            + "<a v-else :href='link' class='blue-bot'>بیشتر بخوانید</a>"
+            + "<a v-if='!content' :href='link' class='blue-button'>مشاهده محصول</a>"
+            + "<a v-else :hrefdetail-thumb='link' class='blue-button'>بیشتر بخوانید</a>"
             + "</div>",
         mounted: function () {
             $(".owl-carousel").owlCarousel({
                 autoplay: true,
-                autoplayTimeout: 2000,
+                autoplayTimeout: 4000,
                 loop: true,
                 nav: true,
                 navText: ['<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>'],
-                items: 4,
+                items: 6,
                 mouseDrag: true,
                 margin: 30,
                 responsive: {
                     0: {
-                        items: 1,
-                        stagePadding: 15
-                    },
-                    450: {
                         items: 2,
                         stagePadding: 15
                     },
+                    450: {
+                        items: 4,
+                        stagePadding: 15
+                    },
                     600: {
-                        items: 3,
+                        items: 5,
                         stagePadding: 15
                     },
                     992: {
-                        items: 4,
+                        items: 6,
                     }
                 }
             });
@@ -1888,6 +1929,7 @@
             'img_two',
             'img_one',
             'site_logo_white',
+            'loading_img'
         ],
         data: function () {
             return {
@@ -1896,7 +1938,7 @@
                 enterKeyActiveForSearch: false,
                 homePageDates: '',
                 homePageRice: '',
-                homePageProductsSlider: '',
+                isLoading : false
             }
         },
         methods: {
@@ -1924,18 +1966,28 @@
             init: function () {
                 var self = this;
 
-                axios.post('/get_wp_posts')
+             /*   axios.post('/get_wp_posts')
                     .then(function (response) {
                         self.posts = response.data.posts;
                     });
-
+*/
                 axios.post('/user/get_product_list', {
+                   from_record_number: 0,
+                   to_record_number: 6,
+                    sub_category_id:6,
                 }).then(function (response) {
-                    self.homePageProductsSlider = response.data.products;
+                    self.homePageDates = response.data.products;
+                });
+                axios.post('/user/get_product_list', {
+                   from_record_number: 0,
+                    to_record_number: 6,
+                    sub_category_id:5,
+                }).then(function (response) {
+                    self.homePageRice = response.data.products;
                 });
             },
             search: function () {
-                if (this.mainSearchBoxText != '') {
+                if (this.mainSearchBoxText !== '') {
                     //redirect to product-list with
                     window.location.href = '/product-list/' + this.mainSearchBoxText;
                 }
@@ -1943,9 +1995,9 @@
         },
         mounted: function () {
             this.init();
-            var self = this;
+
                 window.addEventListener('load', (event) => {
-                    self.$nextTick(self.stopLoader());
+                    this.isLoading = true;
                     console.log('page is fully loaded');
                 });
         },
