@@ -14,12 +14,15 @@
     .green-button.edit-product:hover {
         background: #000430;
     }
-
+    .title-widget{
+        font-size:18px;
+        padding: 15px 15px 0 15px;
+    }
     .main-content-item {
         direction: rtl;
         float: left;
         width: 100%;
-        margin: 24px auto;
+        margin: 15px auto;
         border-radius: 5px;
         box-shadow: 0 0 15px #dbdbdb;
         padding: 15px 0;

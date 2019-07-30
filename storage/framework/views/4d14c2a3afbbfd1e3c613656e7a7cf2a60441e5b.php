@@ -34,7 +34,7 @@
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl-custom-style.css')); ?>">
 
 
-    
+    <script src="<?php echo e(asset('index/js/jquery-ui.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/cdn/axios.js')); ?>"></script>
 
 

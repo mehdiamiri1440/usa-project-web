@@ -417,7 +417,7 @@
 
 <script>
     import ProductArticle from './product_components/product_article'
-    import ProductAsideCategories from './product_components/product_aside_categories'
+    import ProductAsideCategories from './product_components/sidebar/product_aside_categories'
     import {eventBus} from "../../../../js/router/dashboard_router";
 
 

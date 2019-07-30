@@ -1,7 +1,4 @@
 
-.main_popup_content span {
-    color: #28a745;
-}
 .main_popup_content .main-pop-up {
     font-size: 15px;
     line-height: 1.618;
@@ -18,7 +15,7 @@
     margin: 0;
     direction: rtl;
 }
-.main_popup_content i {
+.main_popup_content i.fa-close {
     color: #fff;
     position: absolute;
     top: -16px;

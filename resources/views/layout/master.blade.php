@@ -34,7 +34,7 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl-custom-style.css')}}">
 
 
-    {{--<script src="{{asset('index/js/jquery.js')}}"></script>--}}
+    <script src="{{asset('index/js/jquery-ui.min.js')}}"></script>
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
 {{--    <script src="{{asset('index/js/bootstrap.min.js')}}"></script>--}}
 {{--    <script src="{{asset('index/js/particleNetwork.js') }}"></script>--}}

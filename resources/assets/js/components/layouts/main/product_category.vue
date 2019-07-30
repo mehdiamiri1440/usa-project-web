@@ -626,7 +626,7 @@
                         <img :src="loading_img" style="width:200px;height:200px">
                     </section>
                 </div>
-                <aside class=" product-sidebar hidden-xs  hidden-sm col-md-3">
+                <aside class=" product-sidebar hidden-xs hidden-sm col-md-3">
                         <ProductAsideCategories
                                 :productsInfo="products"
                                 :categoryId="categoryId"
