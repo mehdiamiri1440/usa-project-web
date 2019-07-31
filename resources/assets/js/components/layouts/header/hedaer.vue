@@ -124,6 +124,7 @@
 <template>
     <div>
 
+
         <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
             <div class="main-loader">
                 <img :src="loading">
@@ -277,7 +278,7 @@
                         </div>
                     </div>
 
-                    <button class="navbar-toggle" data-toggle="collapse" ref="#collapseHeader">
+                    <button class="navbar-toggle" data-toggle="collapse" href="#collapseHeader" ref="#collapseHeader">
 
                         <span class="icon icon-bar"></span>
                         <span class="icon icon-bar"></span>

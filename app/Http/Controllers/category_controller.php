@@ -11,14 +11,34 @@ class category_controller extends Controller
 	{
 		$categories = NULL ;
 		$parent_id = $request->parent_id;
+        $casade_list = $request->cascade_list;
 		
 		if(!$request->has('parent_id')){
-			$categories = category::where('parent_id',NULL)
+            
+            $categories = category::where('parent_id',NULL)
 				->get();
+            
+            if($request->has('cascade_list') && $casade_list == true){
+                
+                $categories->each(function($item){
+                    $item['subcategories'] = category::where('parent_id',$item->id)
+				        ->get(); 
+                });
+            }
 		}
 		else{
-			$categories = category::where('parent_id',$parent_id)
+            if($request->has('cascade_list') && $casade_list == true){
+                $categories = [];
+                
+                $categories['category'] = category::find($parent_id);
+                
+                $categories['subcategories'] = category::where('parent_id',$parent_id)
+				->get(); 
+            }
+            else{
+                $categories = category::where('parent_id',$parent_id)
 				->get();
+            }
 		}
 		
 		return response()->json([

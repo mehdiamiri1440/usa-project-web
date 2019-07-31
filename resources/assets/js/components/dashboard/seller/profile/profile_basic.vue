@@ -451,13 +451,13 @@
                               v-text="errors.company_register_code[0]"></span>
                     </div>
                     <div class="col-xs-12 col-sm-6">
-                        <label for="company" class="content-label">
+                        <label for="company-name" class="content-label">
                             نام شرکت:
                         </label>
 
                         <input type="text"
-                               id="company"
-                               name="company"
+                               id="company-name"
+                               name="company-name"
                                placeholder="نام شرکت"
                                v-model="currentUser.profile.company_name"
                                disabled>
@@ -471,7 +471,7 @@
 
                     <div class="col-xs-12 col-sm-6">
 
-                        <label for="company" class="content-label">
+                        <label  class="content-label">
                             شماره تماس:
                         </label>
                         <input type="text"
@@ -489,7 +489,7 @@
                     </div>
 
                     <div class="col-xs-12 col-sm-6">
-                        <label for="company" class="content-label">
+                        <label class="content-label">
                             آدرس:
                         </label>
 
