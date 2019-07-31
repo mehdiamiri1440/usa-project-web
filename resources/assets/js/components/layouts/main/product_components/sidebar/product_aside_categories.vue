@@ -52,6 +52,7 @@
            <div class="sidebar-widget-wrapper">
                <CategoryFilter/>
                <GeoLocationFilter/>
+           
            </div>
 </template>
 
@@ -133,7 +134,14 @@
             },
             resetFilterChild: function () {
                 this.$parent.resetFilter();
+            },
+            scrollSet(){
+                var self = this;
+                setTimeout(function () {
+                    self.$parent.sidebarScroll()
+                },500)
             }
+
         },
         mounted() {
             this.scrull_css_header();

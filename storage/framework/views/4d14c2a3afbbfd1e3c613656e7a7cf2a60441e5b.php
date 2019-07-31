@@ -17,8 +17,9 @@
     <script src="<?php echo e(asset('assets/js/jquery-3.3.1.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/jquery-ui.min.js')); ?>"></script>
     
-    
+    <script src="<?php echo e(asset('assets/js/jquery.easing.min.js')); ?>"></script>
 
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/placeholder-content.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/fontiran.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/font-awesome.min.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap.min.css')); ?>">

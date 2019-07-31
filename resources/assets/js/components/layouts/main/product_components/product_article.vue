@@ -41,9 +41,6 @@
         color: #444;
     }
 
-    .main-article-content {
-        padding: 0 20px 20px;
-    }
 
     .main-article-content p {
         margin-bottom: 15px;

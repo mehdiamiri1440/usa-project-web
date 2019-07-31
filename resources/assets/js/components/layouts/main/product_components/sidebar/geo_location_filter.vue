@@ -53,67 +53,12 @@
     .red-button:hover,.red-button:active,.red-button:focus  {
         color: #fff;
     }
-    .default-content .title-widget span,.header-item-default {
-        height: 20px;
-        display: block;
-        overflow: hidden;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
 
-    }
     .header-item-default{
         margin:15px 0;
         padding: 25px;
     }
-    .category-products-widget-default{
-        padding: 0 15px;
-    }
-    .default {
-        background: linear-gradient(72deg, #dddddd, #dddddd, #f0f3f6, #dddddd, #dddddd);
-        background-size: 1000% 1000%;
 
-        -webkit-animation: AnimationBackgroundGradient 3s ease infinite;
-        -moz-animation: AnimationBackgroundGradient 3s ease infinite;
-        -o-animation: AnimationBackgroundGradient 3s ease infinite;
-        animation: AnimationBackgroundGradient 3s ease infinite;
-    }
-
-    @-webkit-keyframes AnimationBackgroundGradient {
-        0% {
-            background-position: 0 69%
-        }
-        100% {
-            background-position: 100% 32%
-        }
-    }
-
-    @-moz-keyframes AnimationBackgroundGradient {
-        0% {
-            background-position: 0 69%
-        }
-        100% {
-            background-position: 100% 32%
-        }
-    }
-
-    @-o-keyframes AnimationBackgroundGradient {
-        0% {
-            background-position: 0 69%
-        }
-        100% {
-            background-position: 100% 32%
-        }
-    }
-
-    @keyframes AnimationBackgroundGradient {
-        0% {
-            background-position: 0 69%
-        }
-        100% {
-            background-position: 100% 32%
-        }
-    }
 
     @media screen and (max-width: 992px) {
         .sidebar-buttons a {
@@ -163,19 +108,24 @@
         </div>
 
     </div>
-    <div v-else class=" default-content content-sidebar">
+    <div v-else class="content-sidebar">
         <div class="title-widget">
-            <span class="default"></span>
+            <span class="placeholder-content default-boxing-size content-half-width"></span>
             <hr>
         </div>
         <div class="category-products-widget-default">
             <ul>
                 <li>
-                    <span class="default header-item-default ">
+                    <span class="placeholder-content default-input-boxing-size content-full-width ">
                     </span>
-                    <span class="default header-item-default ">
+                    <span class="placeholder-content default-input-boxing-size content-full-width ">
                     </span>
+                    <div class="text-center">
+                        <span class="placeholder-content default-button"></span>
+
+                    </div>
                 </li>
+
 
             </ul>
 

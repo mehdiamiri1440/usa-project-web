@@ -435,15 +435,6 @@ th, td {
     height: 100%;
 }
 
-.article-contents {
-    padding: 20px 15px;
-    border-bottom: 2px solid #f9f9f9;
-}
-
-.article-contents:last-of-type {
-    border-bottom: none;
-}
-
 .green-button {
     margin: 15px 0 0;
     display: inline-block;

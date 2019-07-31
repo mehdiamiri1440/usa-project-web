@@ -69,7 +69,10 @@
         color: #28a745;
         transition: 300ms;
     }
+     .sub-category-product a.active {
+        color: #28a745;
 
+    }
     .list-open .button-toggle i {
         transform: rotate(180deg);
         transition: 300ms;
@@ -100,78 +103,9 @@
 
     }
 
-    .default-content .title-widget span,.header-item-default {
-        height: 20px;
-        display: block;
-        overflow: hidden;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
-
-    }
     .header-item-default{
         margin:15px 0;
         padding: 15px;
-    }
-    .category-products-widget-default{
-        padding: 15px;
-    }
-    .default {
-        background: linear-gradient(72deg, #dddddd, #dddddd, #f0f3f6, #dddddd, #dddddd);
-        background-size: 1000% 1000%;
-
-        -webkit-animation: AnimationBackgroundGradient 3s ease infinite;
-        -moz-animation: AnimationBackgroundGradient 3s ease infinite;
-        -o-animation: AnimationBackgroundGradient 3s ease infinite;
-        animation: AnimationBackgroundGradient 3s ease infinite;
-    }
-
-    @-webkit-keyframes AnimationBackgroundGradient {
-        0% {
-            background-position: 0 69%
-        }
-        50% {
-            background-position: 100% 32%
-        }
-        100% {
-            background-position: 0 69%
-        }
-    }
-
-    @-moz-keyframes AnimationBackgroundGradient {
-        0% {
-            background-position: 0 69%
-        }
-        50% {
-            background-position: 100% 32%
-        }
-        100% {
-            background-position: 0 69%
-        }
-    }
-
-    @-o-keyframes AnimationBackgroundGradient {
-        0% {
-            background-position: 0 69%
-        }
-        50% {
-            background-position: 100% 32%
-        }
-        100% {
-            background-position: 0 69%
-        }
-    }
-
-    @keyframes AnimationBackgroundGradient {
-        0% {
-            background-position: 0 69%
-        }
-        50% {
-            background-position: 100% 32%
-        }
-        100% {
-            background-position: 0 69%
-        }
     }
 </style>
 <template>
@@ -202,7 +136,7 @@
                       <ul class=" sub-category-product little">
 
                           <li class="sub-category-item " v-for="subCategory in category.subcategories">
-                              <a
+                              <a       :class="{'active' : $route.params.categoryName === subCategory.category_name}"
                                       :href="'/product-list/category/' + subCategory.category_name"
                                       v-text="subCategory.category_name">
                               </a>
@@ -231,18 +165,20 @@
 
     <div v-else class=" default-content content-sidebar">
         <div class="title-widget">
-            <span class="default"></span>
+            <span class="placeholder-content  content-half-width"></span>
             <hr>
         </div>
+
         <div class="category-products-widget-default">
             <ul>
                 <li>
-                    <span class="default header-item-default ">
+                    <span class="placeholder-content default-boxing-size content-full-width ">
                     </span>
-                    <span class="default header-item-default ">
+                    <span class="placeholder-content default-boxing-size content-full-width ">
                     </span>
-                    <span class="default header-item-default ">
+                    <span class="placeholder-content default-boxing-size content-full-width ">
                     </span>
+
                 </li>
 
             </ul>
@@ -262,14 +198,26 @@
         methods: {
             init: function () {
                 var self = this;
-
+                var categoryParameterName = self.$route.params.categoryName;
                 axios.post('/get_category_list', {
                     cascade_list: true
                 })
                     .then(function (response) {
                         self.categoryList = response.data.categories;
+                       setTimeout(function(){
+                         for (var i = 0 ; i < self.categoryList.length ; i++) {
+                                for (var j = 0 ; j < self.categoryList[i].subcategories.length; j++) {
+                                     if (self.categoryList[i].subcategories[j].category_name === 
+                                        categoryParameterName) {
 
-                    });
+                                        self.collapseMethod(self.categoryList[i].id , i);
+
+                                     }
+                                }
+                            
+                            }
+                       })
+                    },500);
             },
             collapseMethod: function (id, index) {
                 var wrapperlistElemetn = $(' aside .collapse-category-' + id);
@@ -278,16 +226,15 @@
                 var initialHeight = this.categoryList[index].subcategories.length * 22;
 
 
-                console.log(listElemetn.hasClass('little'));
                 if (listElemetn.hasClass('little')) {
 
                     listElemetn.css('height', initialHeight + 'px');
                     listElemetn.removeClass('little', 2000);
-                    console.log(listElemetn.hasClass('little'));
+
                 } else {
                     listElemetn.css('height', '68px');
                     listElemetn.addClass('little', 2000);
-                    console.log(listElemetn.hasClass('little'));
+
                 }
                 wrapperlistElemetn.toggleClass("list-open", 2000);
                 buttonElemetn.text(function (i, v) {
@@ -303,16 +250,17 @@
 
                     listElemetnMobile.css('height', initialHeight + 'px');
                     listElemetnMobile.removeClass('little', 2000);
-                    console.log(listElemetnMobile.hasClass('little'));
                 } else {
                     listElemetnMobile.css('height', '68px');
                     listElemetnMobile.addClass('little', 2000);
                     console.log(listElemetnMobile.hasClass('little'));
                 }
-                wrapperlistElemetnMobile.toggleClass("list-open", 1000)
+                wrapperlistElemetnMobile.toggleClass("list-open", 1000);
                 buttonElemetnMobile.text(function (i, v) {
                     return v === 'بستن' ? 'مشاهده بیشتر' : 'بستن'
                 });
+
+                this.$parent.scrollSet();
             }
         },
         mounted() {

@@ -1,0 +1,104 @@
+ .content-full-width{
+    height: 20px;
+    display: block;
+    overflow: hidden;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+
+}
+ .content-half-width{
+    height: 20px;
+    display: block;
+     width: 50%;
+    overflow: hidden;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+
+}
+
+ .default-button-full-with{
+     height: 38px;
+     margin: 15px auto;
+     width: 100%;
+     overflow: hidden;
+     -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+     border-radius: 3px;
+     display: inline-block;
+ }
+ .default-button{
+     height: 38px;
+     margin: 15px auto;
+     min-width: 130px;
+     padding: 0 15px;
+     overflow: hidden;
+     -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+     border-radius: 3px;
+     display:inline-block;
+ }
+
+ .default-boxing-size{
+    margin:15px 0;
+    padding: 15px;
+}
+.default-input-boxing-size{
+    margin:15px 0;
+    padding: 25px;
+}
+
+.default-title-boxing-size{
+    margin:15px 0;
+}
+
+
+.category-products-widget-default{
+    padding: 15px;
+}
+.placeholder-content {
+    background: linear-gradient(72deg, #dddddd, #dddddd, #f0f3f6, #dddddd, #dddddd);
+    background-size: 1000% 1000%;
+
+    -webkit-animation: AnimationBackgroundGradient 3s ease infinite;
+    -moz-animation: AnimationBackgroundGradient 3s ease infinite;
+    -o-animation: AnimationBackgroundGradient 3s ease infinite;
+    animation: AnimationBackgroundGradient 3s ease infinite;
+}
+
+@-webkit-keyframes AnimationBackgroundGradient {
+    0% {
+        background-position: 0 69%
+    }
+    100% {
+        background-position: 100% 32%
+    }
+}
+
+@-moz-keyframes AnimationBackgroundGradient {
+    0% {
+        background-position: 0 69%
+    }
+    100% {
+        background-position: 100% 32%
+    }
+}
+
+@-o-keyframes AnimationBackgroundGradient {
+    0% {
+        background-position: 0 69%
+    }
+    100% {
+        background-position: 100% 32%
+    }
+}
+
+@keyframes AnimationBackgroundGradient {
+    0% {
+        background-position: 0 69%
+    }
+    100% {
+        background-position: 100% 32%
+    }
+}
