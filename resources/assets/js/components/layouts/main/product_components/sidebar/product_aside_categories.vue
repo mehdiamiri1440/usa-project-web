@@ -50,8 +50,9 @@
 
 <template>
            <div class="sidebar-widget-wrapper">
-               <CategoryFilter/>
-               <GeoLocationFilter/>
+        
+               <CategoryFilter />
+               <GeoLocationFilter />
            
            </div>
 </template>
@@ -82,6 +83,7 @@
                 provinceList: '',
                 cityList: '',
                 products: this.productsInfo,
+            
             }
         },
         methods:{
@@ -144,7 +146,9 @@
 
         },
         mounted() {
+             
             this.scrull_css_header();
+            
         },
     }
 </script>

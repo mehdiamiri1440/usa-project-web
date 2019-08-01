@@ -1,4 +1,6 @@
 <style scoped>
+   
+
 
     .green-button:focus, .green-button:hover {
         color: #fff !important;
@@ -382,51 +384,7 @@
 
         }
     };
-    var OwlCarouselLists = {
-        data: function () {
-            return {
-                imgSrcs: '',
-            };
-        },
-        props: ['img', 'base', 'popUpLoaded', 'alt'],
-        template: '<div class="image-wrapper">' +
-            '<a  :href="base + img">' +
-            '<img :src="base + img" :alt="alt">' +
-            '</a>' +
-            '</div>',
-        mounted: function () {
-
-            $(".owl-carousel").owlCarousel({
-                loop: false,
-                items: 1,
-                margin: 10,
-                nav: false,
-                dots: true,
-                touchDrag: true,
-                mouseDrag: true,
-            });
-            $(this.$el).parent().parent().parent().magnificPopup({
-                delegate: 'a',
-                type: 'image',
-                gallery: {
-                    enabled: true,
-                    navigateByImgClick: true,
-                    preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
-                },
-                callbacks: {
-                    open: function () {
-                        if (!window.history.state) {
-                            window.history.pushState({pushed: true}, '', '/product-list');
-                        }
-
-                        $(window).on('popstate', function (e) {
-                            $.magnificPopup.close();
-                        });
-                    },
-                }
-            });
-        },
-    };
+    import OwlCarouselLists from './carousel_image'
     import ProductUserInfo from './product_user_info'
 
     export default {

@@ -70,7 +70,7 @@
 </style>
 
 <template>
-    <div v-if="provinceList" class="content-sidebar">
+    <div v-if="fontIsLoad && provinceList" class="content-sidebar">
         <div class="title-widget">
             <h3>موقعیت جغرافیایی</h3>
             <hr>
@@ -108,6 +108,8 @@
         </div>
 
     </div>
+
+    
     <div v-else class="content-sidebar">
         <div class="title-widget">
             <span class="placeholder-content default-boxing-size content-half-width"></span>
@@ -135,10 +137,12 @@
 
 <script>
     export default {
+
         data() {
             return {
                 provinceList: '',
                 cityList: '',
+                fontIsLoad:false
             }
         },
         methods: {
@@ -182,6 +186,14 @@
         },
         mounted() {
             this.init();
+             var self = this;
+                this.$parent.scrollSet();
+             document.fonts.ready.then(function () {
+                        setTimeout(function(){
+                          self.fontIsLoad = true;
+                        },500)
+                
+            });
         }
     }
 </script>

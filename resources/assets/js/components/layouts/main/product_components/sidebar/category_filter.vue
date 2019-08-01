@@ -109,7 +109,8 @@
     }
 </style>
 <template>
-      <div v-if="categoryList" class="content-sidebar">
+      <div v-if=" categoryList" class="content-sidebar">
+
           <div class="title-widget">
               <h3>دسته بندی محصولات </h3>
               <hr>
@@ -122,7 +123,7 @@
                           <a
                                   :class="'collapse-button-' + category.id"
                                   href="#"
-                                  @click.prevent="collapseMethod(category.id,index)"
+                                  @click.prevent="collapseMethod(category.id,index,category.subcategories.length)"
 
                           >
 
@@ -147,7 +148,7 @@
                       <div class="button-wrapper">
 
                           <button class="green-button button-toggle"
-                                  @click.prevent="collapseMethod(category.id,index)">
+                                  @click.prevent="collapseMethod(category.id,index,category.subcategories.length)">
 
                               <span>مشاهده بیشتر </span>
 
@@ -190,9 +191,13 @@
 
 <script>
     export default {
+        props:[
+          'fotnLoad'
+        ],
         data() {
             return {
                 categoryList: '',
+                fontIsLoad :false
             }
         },
         methods: {
@@ -209,62 +214,121 @@
                                 for (var j = 0 ; j < self.categoryList[i].subcategories.length; j++) {
                                      if (self.categoryList[i].subcategories[j].category_name === 
                                         categoryParameterName) {
-
-                                        self.collapseMethod(self.categoryList[i].id , i);
-
+                                    
+                                        self.collapseMethod(self.categoryList[i].id , i , self.categoryList[i].subcategories.length);
+                                       
                                      }
                                 }
-                            
+
+                              self.checkListHeight(self.categoryList[i].id, self.categoryList[i].subcategories.length);
                             }
                        })
                     },500);
             },
-            collapseMethod: function (id, index) {
+            collapseMethod: function (id, index, listItems) {
+              console.log('this is run')
                 var wrapperlistElemetn = $(' aside .collapse-category-' + id);
                 var listElemetn = $('aside .collapse-category-' + id + ' .sub-category-product');
                 var buttonElemetn = $('aside .collapse-category-' + id + ' button span');
                 var initialHeight = this.categoryList[index].subcategories.length * 22;
+             
+               
+               if (this.checkListHeight(id,listItems) !==  true) {
+
+                   if (listElemetn.hasClass('little')) {
+
+                      listElemetn.css('height', initialHeight + 'px');
+                      listElemetn.removeClass('little', 2000);
+
+                  } else {
+                      listElemetn.css('height', '68px');
+                      listElemetn.addClass('little', 2000);
+
+                  }
+                  wrapperlistElemetn.toggleClass("list-open", 2000);
+                  buttonElemetn.text(function (i, v) {
+                      return v === 'بستن' ? 'مشاهده بیشتر' : 'بستن'
+                  });
+
+                  var wrapperlistElemetnMobile = $(' #searchFilter .collapse-category-' + id);
+                  var listElemetnMobile = $('#searchFilter .collapse-category-' + id + ' .sub-category-product');
+                  var buttonElemetnMobile = $('#searchFilter .collapse-category-' + id + ' button span');
 
 
-                if (listElemetn.hasClass('little')) {
+                  if (listElemetnMobile.hasClass('little')) {
 
-                    listElemetn.css('height', initialHeight + 'px');
-                    listElemetn.removeClass('little', 2000);
+                      listElemetnMobile.css('height', initialHeight + 'px');
+                      listElemetnMobile.removeClass('little', 2000);
+                  } else {
+                      listElemetnMobile.css('height', '68px');
+                      listElemetnMobile.addClass('little', 2000);
+                  }
+                  wrapperlistElemetnMobile.toggleClass("list-open", 1000);
+                  buttonElemetnMobile.text(function (i, v) {
+                      return v === 'بستن' ? 'مشاهده بیشتر' : 'بستن'
+                  });
 
-                } else {
-                    listElemetn.css('height', '68px');
-                    listElemetn.addClass('little', 2000);
+               
+               }
+
+              this.$parent.scrollSet();
+             
+            },
+            checkListHeight(id,listItems){
+
+                var buttonFilter = $(' aside .collapse-category-' + id + ' .green-button.button-toggle');
+
+                var mobileButton = $(' #searchFilter .collapse-category-' + id + ' .green-button.button-toggle');
+
+                if (listItems < 3) {
+
+                   buttonFilter.css('display','none');
+                   mobileButton.css('display','none');
+
+                  return true;
+
+                }else{
+
+                   return false;
 
                 }
-                wrapperlistElemetn.toggleClass("list-open", 2000);
-                buttonElemetn.text(function (i, v) {
-                    return v === 'بستن' ? 'مشاهده بیشتر' : 'بستن'
-                });
+            },
+            checkListHeightUpdate(){
+                var elements = $(' .category-products-widget > ul > li');
+                var elementClass = '';
+                var elementLenght = null;
+                var buttonFilter = '';
+               
+                for (var i = 0; i < elements.length; i++) {
+                  console.log(i);
+                  elementClass  = $(elements[i]).attr('class');
+                  elementLenght = $('.' + elementClass + ' .sub-category-item').length ;
+                  buttonFilter = $(' .' + elementClass + ' .green-button.button-toggle');
 
-                var wrapperlistElemetnMobile = $(' #searchFilter .collapse-category-' + id);
-                var listElemetnMobile = $('#searchFilter .collapse-category-' + id + ' .sub-category-product');
-                var buttonElemetnMobile = $('#searchFilter .collapse-category-' + id + ' button span');
-
-
-                if (listElemetnMobile.hasClass('little')) {
-
-                    listElemetnMobile.css('height', initialHeight + 'px');
-                    listElemetnMobile.removeClass('little', 2000);
-                } else {
-                    listElemetnMobile.css('height', '68px');
-                    listElemetnMobile.addClass('little', 2000);
-                    console.log(listElemetnMobile.hasClass('little'));
+                      
+                      if (elementLenght < 3) {
+                        
+                         buttonFilter.css('display','none');
+                        
+                      }
                 }
-                wrapperlistElemetnMobile.toggleClass("list-open", 1000);
-                buttonElemetnMobile.text(function (i, v) {
-                    return v === 'بستن' ? 'مشاهده بیشتر' : 'بستن'
-                });
-
-                this.$parent.scrollSet();
             }
         },
         mounted() {
-            this.init();
+              this.init();
+               var self = this;
+/*
+              document.fonts.ready.then(function () {
+            
+                   self.fontIsLoad = true;
+                   console.log(self.fontIsLoad)
+                        
+              });*/
+             
+        },
+        updated(){
+            this.checkListHeightUpdate();
+         
         }
 
     }

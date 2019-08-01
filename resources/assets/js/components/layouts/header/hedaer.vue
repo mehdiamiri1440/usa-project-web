@@ -382,7 +382,8 @@
                 deleteText: '',
                 deleteButtonText: '',
                 cancelButtonText: '',
-                ProductId: '',
+                ProductId: ''
+            
             }
         },
         props: [
