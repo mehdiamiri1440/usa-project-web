@@ -1758,7 +1758,7 @@
                                     <OwlCarousel
                                             :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                             :img="'storage/' + product.photos[0].file_path"
-                                            :link="'/product-list/' + product.main.sub_category_name"
+                                             :link="generateProductLink(product)"
                                     />
 
                                 </article>
@@ -1775,9 +1775,9 @@
 
                            <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageRice"  :key="product.main.id">
                                     <OwlCarousel
-                                            :title="product.main.sub_category_name + ' - ' + product.main.product_name.substring(0,7)+'..' "
+                                            :title="product.main.sub_category_name + ' - ' + product.main.product_name"
                                             :img="'storage/' + product.photos[0].file_path"
-                                            :link="'/product-list/' + product.main.sub_category_name"
+                                            :link="generateProductLink(product)"
                                     />
 
                                 </article>
@@ -1877,7 +1877,7 @@
         template: "<div class='detail-thumb'>"
             +
             "<img :src='img' class='img-responsive'>"
-            + "<h4 style='font-size:14px; direction:rtl;' v-if='title.length>=20'>{{title.substring(0,20) + ' ...'}}</h4>"
+            + "<h4 style='font-size:14px; direction:rtl;' v-if='title.length>=20'>{{title.substring(0,17) + ' ...'}}</h4>"
             + "<h4 style='font-size:14px; direction:rtl;' v-else>{{title }}</h4>"
             + "<p v-if='content'>{{content}}</p>"
             + "<a v-if='!content' :href='link' class='blue-button'>مشاهده محصول</a>"
@@ -1973,16 +1973,16 @@
 */
                 axios.post('/user/get_product_list', {
                    from_record_number: 0,
-                   to_record_number: 6,
+                   to_record_number: 10,
                     sub_category_id:6,
                 }).then(function (response) {
                     self.homePageDates = response.data.products;
                 });
                 axios.post('/user/get_product_list', {
                    from_record_number: 0,
-                    to_record_number: 6,
-                    sub_category_id:5,
-                }).then(function (response) {
+                    to_record_number: 10,
+                    sub_category_id:3,
+                }).then(function (response){
                     self.homePageRice = response.data.products;
                 });
             },
@@ -1992,6 +1992,18 @@
                     window.location.href = '/product-list/' + this.mainSearchBoxText;
                 }
             },
+            generateProductLink:function(product){
+                var id = product.main.id;
+                var categoryName = product.main.category_name;
+                var subCategoryName = product.main.sub_category_name;
+                
+                 return '/product-view/خرید-عمده-'
+                    + subCategoryName.replace(' ', '-')
+                    + '/'
+                    + categoryName.replace(' ', '-')
+                    + '/'
+                    + id;
+            }
         },
         mounted: function () {
             this.init();
