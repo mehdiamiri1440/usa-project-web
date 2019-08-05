@@ -226,7 +226,8 @@
                     },500);
             },
             collapseMethod: function (id, index, listItems) {
-              console.log('this is run')
+              
+
                 var wrapperlistElemetn = $(' aside .collapse-category-' + id);
                 var listElemetn = $('aside .collapse-category-' + id + ' .sub-category-product');
                 var buttonElemetn = $('aside .collapse-category-' + id + ' button span');
@@ -238,14 +239,14 @@
                    if (listElemetn.hasClass('little')) {
 
                       listElemetn.css('height', initialHeight + 'px');
-                      listElemetn.removeClass('little', 2000);
+                      listElemetn.removeClass('little', 500);
 
                   } else {
                       listElemetn.css('height', '68px');
-                      listElemetn.addClass('little', 2000);
+                      listElemetn.addClass('little', 500);
 
                   }
-                  wrapperlistElemetn.toggleClass("list-open", 2000);
+                  wrapperlistElemetn.toggleClass("list-open", 500);
                   buttonElemetn.text(function (i, v) {
                       return v === 'بستن' ? 'مشاهده بیشتر' : 'بستن'
                   });
@@ -258,12 +259,12 @@
                   if (listElemetnMobile.hasClass('little')) {
 
                       listElemetnMobile.css('height', initialHeight + 'px');
-                      listElemetnMobile.removeClass('little', 2000);
+                      listElemetnMobile.removeClass('little', 500);
                   } else {
                       listElemetnMobile.css('height', '68px');
-                      listElemetnMobile.addClass('little', 2000);
+                      listElemetnMobile.addClass('little', 500);
                   }
-                  wrapperlistElemetnMobile.toggleClass("list-open", 1000);
+                  wrapperlistElemetnMobile.toggleClass("list-open", 500);
                   buttonElemetnMobile.text(function (i, v) {
                       return v === 'بستن' ? 'مشاهده بیشتر' : 'بستن'
                   });
@@ -271,7 +272,7 @@
                
                }
 
-              this.$parent.scrollSet();
+              
              
             },
             checkListHeight(id,listItems){
@@ -300,7 +301,7 @@
                 var buttonFilter = '';
                
                 for (var i = 0; i < elements.length; i++) {
-                  console.log(i);
+               
                   elementClass  = $(elements[i]).attr('class');
                   elementLenght = $('.' + elementClass + ' .sub-category-item').length ;
                   buttonFilter = $(' .' + elementClass + ' .green-button.button-toggle');
@@ -317,13 +318,13 @@
         mounted() {
               this.init();
                var self = this;
-/*
+
               document.fonts.ready.then(function () {
             
                    self.fontIsLoad = true;
                    console.log(self.fontIsLoad)
                         
-              });*/
+              });
              
         },
         updated(){

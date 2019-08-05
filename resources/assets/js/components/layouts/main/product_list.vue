@@ -1,5 +1,20 @@
 <style scoped>
- 
+    
+
+
+    .sidebar{
+    will-change: min-height;
+    }
+
+    .sidebar__inner{
+        transform: translate(0, 0); /* For browsers don't support translate3d. */
+        transform: translate3d(0, 0, 0);
+        will-change: position, transform;
+    }
+    #article-list{
+        /*overflow: hidden;*/
+    }
+
     #wrap-footer {
         display: none;
     }
@@ -177,9 +192,14 @@
     }
 
     #main {
-        padding-bottom: 40px;
+      
         padding-top: 165px;
         position:relative;
+
+    }
+    .main-content{
+          min-height: 900px;
+          transition: 200ms;
     }
 
     .main-content > h4 {
@@ -503,7 +523,9 @@
                 <div class="col-xs-12 col-md-9">
                     <section class="main-content col-xs-12" v-if="products.length > 0  ">
                         <div class="row">
-                            <ProductArticle v-for="(product,productIndex) in products"
+                           <div id="article-list">
+                               
+                             <ProductArticle v-for="(product,productIndex) in products"
                                             v-if="products.length >= productIndex"
                                             :key="product.main.id"
                                             :product="product"
@@ -513,6 +535,9 @@
                                             :loading="loading"
                                             :currentUser="currentUser"
                             />
+
+
+                           </div>
                             <div class="load-more-button"
                                  v-if="searchText === '' && continueToLoadProducts === true ">
                                 <div class="col-xs-12 col-sm-6 col-sm-offset-3">
@@ -759,16 +784,32 @@
                             
                     </section>
                 </div>
-                <aside class=" product-sidebar sticky hidden-xs  hidden-sm col-md-3">
-                    <ProductAsideCategories
-                            :productsInfo="products"
-                            :categoryId="categoryId"
-                            :subCategoryId="subCategoryId"
-                            :provinceId="provinceId"
-                            :cityId="cityId"
-                            v-on:productsToParent="filterProducts($event)"
-                    />
+      
+
+                <aside id="sidebar" class=" product-sidebar sidebar hidden-xs  hidden-sm col-md-3">
+
+                    <div class="row">
+                        
+                        <div class="sidebar__inner col-xs-12" style="position: relative;">
+                              
+                    
+                            <ProductAsideCategories
+                                    :productsInfo="products"
+                                    :categoryId="categoryId"
+                                    :subCategoryId="subCategoryId"
+                                    :provinceId="provinceId"
+                                    :cityId="cityId"
+                                    v-on:productsToParent="filterProducts($event)"
+                            />
+           
+
+                     </div>
+
+                    </div>
+
                 </aside>
+
+
             </div>
 
         </main>
@@ -779,6 +820,7 @@
     import ProductArticle from './product_components/product_article'
     import ProductAsideCategories from './product_components/sidebar/product_aside_categories'
     import {eventBus} from "../../../../js/router/dashboard_router";
+    import StickySidebar from 'sticky-sidebar';
 
     var visible = false;
     export default {
@@ -847,6 +889,7 @@
                 }
             },
             init: function () {
+                this.scrollToTop();
                 var self = this;
                 var searchValue = this.searchValue;
                 var searchValueText = searchValue;
@@ -857,18 +900,24 @@
                         if (searchValueText) {
                             self.registerComponentStatistics('homePage', 'search-text', searchValueText);
                             self.searchText = searchValueText;
+                             setTimeout(function(){
+                                    self.sidebarScroll();
+                                },500)
                         }
                         else {
                             self.loading = true;
                             axios.post('/user/get_product_list', {
                                 from_record_number: 0,
                                 to_record_number: self.productCountInPage,
+                          
                             }).then(function (response) {
                                 self.products = response.data.products;
                                 self.loading = false;
                                 setTimeout(function(){
                                     self.sidebarScroll();
                                 },500)
+                                eventBus.$emit('submiting', false);
+
                             });
                         }
                     });
@@ -893,10 +942,14 @@
                         }
 
                         self.loadMoreActive = false;
+
                         setTimeout(function(){
                             self.sidebarScroll();
                         },500)
                     });
+
+                  eventBus.$emit('submiting', false);
+
                 }
 
             },
@@ -997,6 +1050,10 @@
                         self.products = response.data.products;
                         eventBus.$emit('submiting', false);
                         self.scrollToTop();
+
+                        setTimeout(function () {
+                            self.sidebarScroll()
+                        },500)
                     })
                     .catch(function (err) {
                         alert('error');
@@ -1022,172 +1079,19 @@
                 });
             },
             sidebarScroll() {
-              
-                var $sticky = $('.sticky');
-                var stickyrStopper = $('#wrap-footer');
-                var lastScrollTop = 0;
 
-
-                var dynamicScroll = $sticky.offset().top;
             
+                var sidebarStopper = $('#wrap-footer').height();
 
-                if (!!$sticky.offset()) { // make sure ".sticky" element exists
-
-
-
-                    var documentHeight = $(document).height();
-                    var wHeight = $(window).height();
-                    var generalSidebarHeight = $sticky.innerHeight();
-                    var stickyTop = 162;
-                    var stickOffset = 0;
-                    var stickPositionToContent = 115;
-                    var stickyStopperPosition = stickyrStopper.offset().top;
-                    var stopPoint = documentHeight - (wHeight + stickyrStopper.innerHeight() + 130);
-                    var differences = (stickyStopperPosition - stickPositionToContent) - (generalSidebarHeight - stickOffset);
-                    var diff = differences + stickOffset ; 
-                    var sidebarHeightToTop = generalSidebarHeight + stickyTop;
-                    
-
-                        if (generalSidebarHeight > wHeight) {
-                          
-                          
-                            if(wHeight < sidebarHeightToTop){
-                    
-                                $(window).scroll(function(){ // scroll event
-                                      var windowTop = $(window).scrollTop(); // returns number
-                                    
-                                           if (windowTop > lastScrollTop){
-
-                                                if ((dynamicScroll + generalSidebarHeight) < windowTop + wHeight) {
-                                            
-                                                      if (stopPoint + 13  < windowTop  ) {
-                                                          $sticky.css({
-                                                              position: 'absolute',
-                                                              top: diff,
-                                                              right:'0'
-                                                          });
-                                                      } else if (windowTop + wHeight > sidebarHeightToTop) {
-                                                          $sticky.css({
-                                                              position: 'fixed',
-                                                              bottom: stickOffset,
-                                                              top:'initial',
-                                                              right:'0'
-                                                          });
-                                                      } else {
-                                                          $sticky.css({
-                                                              position: 'absolute',
-                                                              top: 'initial',
-                                                              right:'0',
-                                                              bottom:'initial'
-                                                          });
-                                                      }
-
-                                                }else{
-                                                   
-                                                      if (stopPoint  < windowTop) {
-                                                          $sticky.css({
-                                                              position: 'absolute',
-                                                              top: diff,
-                                                              right:'0'
-                                                          });
-                                                      } else {
-                                                          $sticky.css({
-                                                              position: 'absolute',
-                                                              top: dynamicScroll + stickOffset,
-                                                              right:'0',
-                                                              bottom:'initial'
-                                                          });
-                                                      }
-
-
-                                                }
-
-                                      dynamicScroll = $sticky.offset().top;
-
-                                    }else{
-
-                                 if ((dynamicScroll - stickyTop) < windowTop) {
-                                        $sticky.css({
-                                              position: 'absolute',
-                                              top: dynamicScroll + 'px' ,
-                                              right:'0',
-                                              bottom:'initial'
-                                          });
-                                    }else{
-                                          $sticky.css({
-                                              position: 'fixed',
-                                              bottom: 'initial',
-                                              top:stickyTop,
-                                              right:'0'
-                                          });
-                                    }
-
-
-
-
-                                    }
-                                  dynamicScroll = $sticky.offset().top;
-                                 
-                                  lastScrollTop = windowTop;
-                                 });
-
-                            }else{
-
-                                  $(window).scroll(function(){ // scroll event
-                                      var windowTop = $(window).scrollTop(); // returns number
-                                      if (windowTop < lastScrollTop){
-                                        
-
-                                         if (stopPoint  < windowTop) {
-                                                  $sticky.css({
-                                                      position: 'absolute',
-                                                      top: diff,
-                                                      right:'0'
-                                                  });
-                                              }else{
-                                                  $sticky.css({
-                                                      position: 'fixed',
-                                                      bottom: 'initial',
-                                                      top:stickyTop,
-                                                      right:'0'
-                                                  });
-                                              } 
-                                          }
-                                       lastScrollTop = windowTop;
-                                    });
-                                      
-                            }; //end all if
-
-
-                        } else {
-
-                         
-
-                             $(window).scroll(function(){ // scroll event
-                                      var windowTop = $(window).scrollTop(); // returns number'
-                                      var getHeightFooter = documentHeight - (stickyrStopper.innerHeight() + stickPositionToContent +  stickyTop + generalSidebarHeight);
-                                        if (getHeightFooter  < windowTop) {
-                                                  $sticky.css({
-                                                      position: 'absolute',
-                                                      top: diff,
-                                                      right:'0'
-                                                  });
-                                              }else{
-                                                  $sticky.css({
-                                                      position: 'fixed',
-                                                      bottom: 'initial',
-                                                      top:stickyTop,
-                                                      right:'0'
-                                                  });
-                                              } 
-                            });
-                                      
-                        }
-                  
-               }
+                   var sidebar = new StickySidebar('#sidebar', {
+                        containerSelector: '#article-list',
+                        innerWrapperSelector: '.sidebar__inner',
+                        topSpacing: 160,
+                        resizeSensor: true,
+                            
+                    });
 
             }
-
         },
         watch: {
             searchText: function () {
@@ -1196,16 +1100,17 @@
                 clearTimeout(this.searchTextTimeout);
 
                 this.searchTextTimeout = setTimeout(function () {
-                    self.registerComponentStatistics('product-list', 'search-text', self.searchText);
+                self.registerComponentStatistics('product-list', 'search-text', self.searchText);
 
                     self.applyFilter();
+
                 }, 1500);
 
             },
 
             bottom(bottom) {
                 if (bottom) {
-                    //this.feed()
+                    this.feed()
                 }
             },
         },
