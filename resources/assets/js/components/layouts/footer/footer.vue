@@ -10,6 +10,8 @@
 
     #wrap-footer {
         background: #000122;
+        margin-top: 60px;
+        position: relative;
     }
 
     #wrap-footer footer {

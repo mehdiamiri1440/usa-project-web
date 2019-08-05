@@ -5,9 +5,6 @@
 
         direction: rtl;
 
-        float: left;
-
-        width: 100%;
 
         margin: 15px auto;
 
@@ -49,8 +46,9 @@
 </style>
 
 <template>
-           <div class="sidebar-widget-wrapper">
-        
+           <div>
+            
+
                <CategoryFilter />
                <GeoLocationFilter />
            
@@ -137,12 +135,6 @@
             resetFilterChild: function () {
                 this.$parent.resetFilter();
             },
-            scrollSet(){
-                var self = this;
-                setTimeout(function () {
-                    self.$parent.sidebarScroll()
-                },500)
-            }
 
         },
         mounted() {

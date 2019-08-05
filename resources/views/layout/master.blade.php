@@ -16,6 +16,8 @@
     </script>
     <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
+    <script src="{{asset('assets/js/ResizeSensor.js')}}"></script>
+
     {{--<script src="{{asset('assets/js/main.js')}}"></script>--}}
     <script src="{{asset('assets/js/jquery.easing.min.js')}}"></script>
 {{--    <script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}"></script>--}}
@@ -35,16 +37,13 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl-custom-style.css')}}">
 
 
-    <script src="{{asset('index/js/jquery-ui.min.js')}}"></script>
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
-{{--    <script src="{{asset('index/js/bootstrap.min.js')}}"></script>--}}
-{{--    <script src="{{asset('index/js/particleNetwork.js') }}"></script>--}}
+
     <script src="{{asset('index/js/jquery.magnific-popup.min.js')}}"></script>
     <script src="{{asset('index/js/jquery.parallax.js')}}"></script>
     <script src="{{asset('index/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('index/js/smoothscroll.js')}}"></script>
     <script src="{{asset('index/js/wow.min.js')}}"></script>
-{{--    <script src="{{asset('index/js/custom.js')}}"></script>--}}
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
