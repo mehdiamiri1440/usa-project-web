@@ -1,4 +1,6 @@
 <style scoped>
+   
+
 
     .green-button:focus, .green-button:hover {
         color: #fff !important;
@@ -14,12 +16,15 @@
     .green-button.edit-product:hover {
         background: #000430;
     }
-
+    .title-widget{
+        font-size:18px;
+        padding: 15px 15px 0 15px;
+    }
     .main-content-item {
         direction: rtl;
         float: left;
         width: 100%;
-        margin: 24px auto;
+        margin: 15px auto;
         border-radius: 5px;
         box-shadow: 0 0 15px #dbdbdb;
         padding: 15px 0;
@@ -38,9 +43,6 @@
         color: #444;
     }
 
-    .main-article-content {
-        padding: 0 20px 20px;
-    }
 
     .main-article-content p {
         margin-bottom: 15px;
@@ -382,51 +384,7 @@
 
         }
     };
-    var OwlCarouselLists = {
-        data: function () {
-            return {
-                imgSrcs: '',
-            };
-        },
-        props: ['img', 'base', 'popUpLoaded', 'alt'],
-        template: '<div class="image-wrapper">' +
-            '<a  :href="base + img">' +
-            '<img :src="base + img" :alt="alt">' +
-            '</a>' +
-            '</div>',
-        mounted: function () {
-
-            $(".owl-carousel").owlCarousel({
-                loop: false,
-                items: 1,
-                margin: 10,
-                nav: false,
-                dots: true,
-                touchDrag: true,
-                mouseDrag: true,
-            });
-            $(this.$el).parent().parent().parent().magnificPopup({
-                delegate: 'a',
-                type: 'image',
-                gallery: {
-                    enabled: true,
-                    navigateByImgClick: true,
-                    preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
-                },
-                callbacks: {
-                    open: function () {
-                        if (!window.history.state) {
-                            window.history.pushState({pushed: true}, '', '/product-list');
-                        }
-
-                        $(window).on('popstate', function (e) {
-                            $.magnificPopup.close();
-                        });
-                    },
-                }
-            });
-        },
-    };
+    import OwlCarouselLists from './carousel_image'
     import ProductUserInfo from './product_user_info'
 
     export default {

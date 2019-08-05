@@ -1,0 +1,231 @@
+ .content-full-width{
+    height: 20px;
+    display: block;
+    overflow: hidden;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+
+}
+ .content-half-width{
+    height: 15px;
+    display: block;
+     width: 50%;
+    overflow: hidden;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+
+}
+ .content-default-width{
+    height: 15px;
+    display: block;
+     width: 75%;
+    overflow: hidden;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+
+}
+.full-content-wrapp{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.default-main-article-content span{
+    margin-right: 0 !important;
+}
+.default-main-image{
+    position: relative;
+    padding: 100%;
+
+}
+ .default-wrapper-main-image{
+    position: relative;
+}
+.default-user-content{
+    padding-bottom: 15px;
+}
+.default-main-article-content{
+    padding: 0;
+
+    padding-top: 0px;
+    padding-right: 0px;
+
+    padding-right: 25px;
+
+    padding-top: 15px;
+}
+.default-article-contents{
+    position: relative;
+
+overflow: hidden;
+}
+ .default-article-user-image{
+    width: 135px;
+    height: 135px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+}
+
+ .default-button-full-with{
+     height: 38px;
+     margin: 15px auto;
+     width: 100%;
+     overflow: hidden;
+     -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+     border-radius: 3px;
+     display: inline-block;
+ }
+ .default-button{
+     height: 38px;
+     margin: 15px auto;
+     min-width: 130px;
+     padding: 0 15px;
+     overflow: hidden;
+     -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+     border-radius: 3px;
+     display:inline-block;
+ }
+ .default-item-wrapper{
+    padding: 15px;
+ }
+ .default-user-contents{
+    border-right: 2px solid #f0f3f6;
+    text-align: center;
+    padding: 0 20px;
+ }
+ .default-boxing-size{
+    margin:15px auto;
+    padding: 15px;
+}
+.default-input-boxing-size{
+    margin:15px auto;
+    padding: 25px;
+}
+
+.default-title-boxing-size{
+    margin:15px 0;
+}
+.padding-15-0{
+    padding: 15px 0;
+}
+.margin-15-0{
+    margin: 15px 0;
+}
+.margin-0{
+    margin: 0
+}
+.category-products-widget-default{
+    padding: 15px;
+}
+.shadow-content{
+    box-shadow: 0 0 15px #dbdbdb;
+    border-radius: 5px;
+}
+
+.placeholder-content {
+    background: linear-gradient(72deg, #dddddd, #dddddd, #f0f3f6, #dddddd, #dddddd);
+    background-size: 1000% 1000%;
+
+    -webkit-animation: AnimationBackgroundGradient 3s ease infinite;
+    -moz-animation: AnimationBackgroundGradient 3s ease infinite;
+    -o-animation: AnimationBackgroundGradient 3s ease infinite;
+    animation: AnimationBackgroundGradient 3s ease infinite;
+}
+
+@-webkit-keyframes AnimationBackgroundGradient {
+    0% {
+        background-position: 0 69%
+    }
+    100% {
+        background-position: 100% 32%
+    }
+}
+
+@-moz-keyframes AnimationBackgroundGradient {
+    0% {
+        background-position: 0 69%
+    }
+    100% {
+        background-position: 100% 32%
+    }
+}
+
+@-o-keyframes AnimationBackgroundGradient {
+    0% {
+        background-position: 0 69%
+    }
+    100% {
+        background-position: 100% 32%
+    }
+}
+
+@keyframes AnimationBackgroundGradient {
+    0% {
+        background-position: 0 69%
+    }
+    100% {
+        background-position: 100% 32%
+    }
+}
+
+@media screen and (max-width: 767px){
+    .default-article-user-image {
+
+    margin: 0;
+
+    float: right;
+
+    width: 67px;
+
+    height: 67px;
+
+    }
+
+   .default-wrapper-main-image, .default-article-contents{
+        padding: 0 !important;
+    }
+
+    .xs-text-right{
+        text-align: right;
+    }
+
+    .xs-text-right span{
+       margin: 20px 15px;
+
+       float: right;
+
+       width: 30%;
+    }
+    .xs-default-user-button {
+        width: 80px;
+
+        float: left;
+
+        margin: 15px auto;
+    }
+    .default-item-wrapper{
+        padding: 15px 0;
+
+        border: none;   
+    }
+    .default-main-image{
+        padding: 0;
+
+        position: relative;
+
+        height: 300px;
+
+        width: 100%;
+
+        display: block;
+
+        margin: 15px auto;
+    }
+}
+
+

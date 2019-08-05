@@ -7,46 +7,47 @@ use App\category;
 
 class category_controller extends Controller
 {
-	public function get_all_categories(Request $request)
-	{
-		$categories = NULL ;
-		$parent_id = $request->parent_id;
+    public function get_all_categories(Request $request)
+    {
+        $categories = NULL ;
+        $parent_id = $request->parent_id;
         $casade_list = $request->cascade_list;
-		
-		if(!$request->has('parent_id')){
-            
+
+        if(!$request->has('parent_id')){
+
             $categories = category::where('parent_id',NULL)
-				->get();
-            
+                ->get();
+
             if($request->has('cascade_list') && $casade_list == true){
-                
+
                 $categories->each(function($item){
                     $item['subcategories'] = category::where('parent_id',$item->id)
-				        ->get(); 
+                        ->get();
                 });
             }
-		}
-		else{
+        }
+        else{
             if($request->has('cascade_list') && $casade_list == true){
                 $categories = [];
-                
+
                 $categories['category'] = category::find($parent_id);
-                
+
                 $categories['subcategories'] = category::where('parent_id',$parent_id)
-				->get(); 
+                    ->get();
             }
             else{
                 $categories = category::where('parent_id',$parent_id)
-				->get();
+                    ->get();
             }
-		}
-		
-		return response()->json([
-			'status' => TRUE,
-			'categories' => $categories
-		],200);
-		
-	}
-	
-	
+        }
+
+        return response()->json([
+            'status' => TRUE,
+            'categories' => $categories
+        ],200);
+
+    }
+
+
 }
+

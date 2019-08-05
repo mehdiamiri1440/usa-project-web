@@ -1,5 +1,5 @@
 <style scoped>
-
+ 
     #wrap-footer {
         display: none;
     }
@@ -63,18 +63,6 @@
         text-align: center;
         padding-top: 15px;
         font-size: 23px;
-    }
-
-    .sidebar-buttons a {
-
-        width: 150px;
-        border: none;
-        padding: 9px 0;
-    }
-
-    .sidebar-buttons div > a:first-of-type {
-        color: #fff;
-        background: #28a745;
     }
 
     .owl-carousel img {
@@ -188,54 +176,10 @@
         width: 100%;
     }
 
-    .right-sidebar {
-        float: right;
-    }
-
-    .right-sidebar > div {
-        background: #fff;
-        box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-        overflow: hidden;
-        display: block;
-        margin-top: -64px;
-        padding: 8px 15px;
-        border-radius: 0 0 5px 5px;
-    }
-
-    .title-sidebar {
-        font-size: 23px;
-        font-weight: bold;
-        color: #4c5058;
-        text-align: center;
-        margin: 15px auto;
-    }
-
-    .box-sidebar {
-        text-align: center;
-        direction: rtl;
-        margin-bottom: 30px;
-
-    }
-
-    .content-sidebar {
-        margin: 50px auto;
-    }
-
-    .content-sidebar i {
-        margin-left: 5px;
-        font-size: 17px;
-    }
-
-    .box-sidebar select {
-        border-radius: 3px;
-        border: 1px solid #4c5058;
-        width: 80%;
-        padding: 5px 15px;
-    }
-
-    .main-content {
+    #main {
         padding-bottom: 40px;
-        padding-top: 150px;
+        padding-top: 165px;
+        position:relative;
     }
 
     .main-content > h4 {
@@ -277,24 +221,6 @@
     /*  .main-padding-fix {
           padding-top: 72px;
       }*/
-
-    .sidebar-fix {
-        position: fixed;
-        right: 0;
-        top: 145px;
-        z-index: 2;
-    }
-
-    .logo {
-        text-align: right;
-        float: right;
-        width: 190px;
-        padding-right: 15px;
-    }
-
-    .logo img {
-        width: 150px;
-    }
 
     li.active a {
         color: #313942;
@@ -560,7 +486,7 @@
 
             </div>
 
-            <div class="links-sub-header  hidden-xs col-xs-12 col-sm-4 col-md-4">
+            <div class="links-sub-header   hidden-xs col-sm-4 col-xs-7 ">
                 <ul class="list-inline">
                     <li class="list-item active">
                         <a href="">
@@ -569,156 +495,289 @@
                     </li>
                 </ul>
             </div>
-            <div class="space col-sm-3">
-
-            </div>
-
         </div>
-        <aside class="right-sidebar sidebar-fix col-sm-3">
-            <div class="col-sm-12">
-                <h2 class="title-sidebar">دسته بندی محصولات </h2>
-                <ProductAsideCategories
-                        :productsInfo="products"
-                        :categoryId="categoryId"
-                        :subCategoryId="subCategoryId"
-                        :provinceId="provinceId"
-                        :cityId="cityId"
-                        v-on:productsToParent="filterProducts($event)"
-                />
-
-            </div>
-        </aside>
 
 
-        <main id="main" class="col-xs-12 col-md-9">
-
-            <section class="main-content col-xs-12" v-if="products.length > 0">
-                <div class="row">
-                    <ProductArticle v-for="(product,productIndex) in products"
-                                    :key="product.main.id"
-                                    :product="product"
-                                    :loading_img="loading_img"
-                                    :defultimg="defultimg"
-                                    :str="str"
-                                    :loading="loading"
-                                    :currentUser="currentUser"
-                    />
-
-                    <div class="load-more-button"
-                         v-if="searchText === '' && continueToLoadProducts === true ">
-                        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-                            <div class="row">
-                                <a href="#" class="btn btn-loader hidden-xs" @click.prevent="feed()">
-                                    <div class="btn-content">
+        <main id="main" class="container-fluid ">
+            <div class="row">
+                <div class="col-xs-12 col-md-9">
+                    <section class="main-content col-xs-12" v-if="products.length > 0  ">
+                        <div class="row">
+                            <ProductArticle v-for="(product,productIndex) in products"
+                                            v-if="products.length >= productIndex"
+                                            :key="product.main.id"
+                                            :product="product"
+                                            :loading_img="loading_img"
+                                            :defultimg="defultimg"
+                                            :str="str"
+                                            :loading="loading"
+                                            :currentUser="currentUser"
+                            />
+                            <div class="load-more-button"
+                                 v-if="searchText === '' && continueToLoadProducts === true ">
+                                <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                                    <div class="row">
+                                        <a href="#" class="btn btn-loader hidden-xs" @click.prevent="feed()">
+                                            <div class="btn-content">
                                         <span v-show="!loadMoreActive">
                                             مشاهده محصولات بیشتر
                                         </span>
 
-                                        <span v-show="!loadMoreActive"
-                                              class="fa fa-plus-circle"></span>
+                                                <span v-show="!loadMoreActive"
+                                                      class="fa fa-plus-circle"></span>
 
-                                        <img v-show="loadMoreActive" :src="loading_img">
-                                    </div>
-                                </a>
+                                                <img v-show="loadMoreActive" :src="loading_img">
+                                            </div>
+                                        </a>
 
-                                <a href="#" class="btn btn-loader hidden-sm hidden-md hidden-lg"
-                                   @click.prevent="feed()">
-                                    <div class="btn-content">
+                                        <a href="#" class="btn btn-loader hidden-sm hidden-md hidden-lg"
+                                           @click.prevent="feed()">
+                                            <div class="btn-content">
 
                                     <span v-show="!loadMoreActive">
                                         بیشتر
                                     </span>
 
-                                        <span v-show="!loadMoreActive"
-                                              class="fa fa-plus-circle"></span>
+                                                <span v-show="!loadMoreActive"
+                                                      class="fa fa-plus-circle"></span>
 
-                                        <img v-show="loadMoreActive" :src="loading_img">
+                                                <img v-show="loadMoreActive" :src="loading_img">
+
+                                            </div>
+                                        </a>
 
                                     </div>
-                                </a>
-
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
+
+                    <section class="main-content  col-xs-12"
+                             v-else-if="products.length === 0 && searchActive === true">
+                        <p></p>
+
+                        <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+
+                        <p>شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+
+                        <br/>
+
+                        <div class="text-center">
+                            <button class="btn btn-success">درخواست خرید</button>
+                        </div>
+
+                    </section>
+
+                    <section class="main-content  col-xs-12 "
+                             v-else-if="products.length === 0 && searchText !== '' ">
+                        <p></p>
+
+                        <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+
+                        <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+                        <br/>
+
+                        <div class="text-center">
+                            <a class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">درخواست
+                                خرید
+                            </a>
+                            <br/>
+
+                            <a class="green-button col-xs-4 " @click="resetFilter()">نمایش همه محصولات</a>
+
+                        </div>
+
+                        <br/>
+                    </section>
+
+                    <section class="main-content  col-xs-12 "
+                             v-else-if="products.length === 0 && searchText === '' ">
+                        <p></p>
+
+                        <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+
+                        <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+
+                        <br/>
+
+                        <div class="text-center">
+                            <a class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">
+                                درخواست
+                                خرید
+                            </a>
+
+                            <br/>
+                            <a class="green-button col-xs-4 " @click.prevent="resetFilter()">نمایش همه محصولات</a>
+                        </div>
+
+                        <br/>
+                    </section>
+
+
+
+
+                    <section v-else style="padding-top:0; "  class="padding-15-0  col-xs-12"
+                             
+                             >
+
+                             <div class="margin-15-0 default-item-wrapper shadow-content row">
+
+                                 <div class="default-user-contents col-xs-12  col-sm-3">
+
+                                     <div class=" default-boxing-size placeholder-content default-article-user-image"></div>
+
+                                     <div class="text-center xs-text-right">
+
+                                         <span class="placeholder-content default-boxing-size content-half-width "></span>
+
+                                     </div>
+
+                                        <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
+
+                                         <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
+                                          
+
+                                 </div>
+
+                                 <div class="default-article-contents col-xs-12  col-sm-9">
+
+                                     <div class="default-wrapper-main-image pull-right  col-xs-12 col-sm-5">
+
+                                         <span class="default-main-image  placeholder-content"></span>
+
+                                     </div> 
+
+                                      <br/>
+
+                                    <div class=" default-main-article-content col-xs-12 col-sm-7">
+                                            <span class="content-half-width placeholder-content default-input-boxing-size"></span>
+
+                                            <span class="default-boxing-size content-full-width placeholder-content "></span>
+
+                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
+
+                                             <span class="default-boxing-size content-default-width placeholder-content "></span>
+
+                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
+
+                                         </div>
+                                 </div>
+                             </div>        
+
+
+                          <div class="margin-15-0 default-item-wrapper shadow-content row">
+
+                                 <div class="default-user-contents col-xs-12  col-sm-3">
+
+                                     <div class=" default-boxing-size placeholder-content default-article-user-image"></div>
+
+                                     <div class="text-center xs-text-right">
+
+                                         <span class="placeholder-content default-boxing-size content-half-width "></span>
+
+                                     </div>
+
+                                        <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
+
+                                         <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
+                                          
+
+                                 </div>
+
+                                 <div class="default-article-contents col-xs-12  col-sm-9">
+
+                                     <div class="default-wrapper-main-image pull-right  col-xs-12 col-sm-5">
+
+                                         <span class="default-main-image  placeholder-content"></span>
+
+                                     </div> 
+
+                                      <br/>
+
+                                    <div class=" default-main-article-content col-xs-12 col-sm-7">
+                                            <span class="content-half-width placeholder-content default-input-boxing-size"></span>
+
+                                            <span class="default-boxing-size content-full-width placeholder-content "></span>
+
+                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
+
+                                             <span class="default-boxing-size content-default-width placeholder-content "></span>
+
+                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
+
+                                         </div>
+                                 </div>
+                             </div>        
+
+
+
+
+                                 <div class="margin-15-0 default-item-wrapper shadow-content row">
+
+                                 <div class="default-user-contents col-xs-12  col-sm-3">
+
+                                     <div class=" default-boxing-size placeholder-content default-article-user-image"></div>
+
+                                     <div class="text-center xs-text-right">
+
+                                         <span class="placeholder-content default-boxing-size content-half-width "></span>
+
+                                     </div>
+
+                                        <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
+
+                                         <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
+                                          
+
+                                 </div>
+
+                                 <div class="default-article-contents col-xs-12  col-sm-9">
+
+                                     <div class="default-wrapper-main-image pull-right  col-xs-12 col-sm-5">
+
+                                         <span class="default-main-image  placeholder-content"></span>
+
+                                     </div> 
+
+                                      <br/>
+
+                                    <div class=" default-main-article-content col-xs-12 col-sm-7">
+                                            <span class="content-half-width placeholder-content default-input-boxing-size"></span>
+
+                                            <span class="default-boxing-size content-full-width placeholder-content "></span>
+
+                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
+
+                                             <span class="default-boxing-size content-default-width placeholder-content "></span>
+
+                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
+
+                                         </div>
+                                 </div>
+                             </div>        
+
+                            
+                    </section>
                 </div>
-            </section>
+                <aside class=" product-sidebar sticky hidden-xs  hidden-sm col-md-3">
+                    <ProductAsideCategories
+                            :productsInfo="products"
+                            :categoryId="categoryId"
+                            :subCategoryId="subCategoryId"
+                            :provinceId="provinceId"
+                            :cityId="cityId"
+                            v-on:productsToParent="filterProducts($event)"
+                    />
+                </aside>
+            </div>
 
-            <section class="main-content  col-xs-12"
-                     v-else-if="products.length === 0 && searchActive === true">
-                <p></p>
-
-                <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-
-                <p>شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-
-                <br/>
-
-                <div class="text-center">
-                    <button class="btn btn-success">درخواست خرید</button>
-                </div>
-
-            </section>
-
-            <section class="main-content  col-xs-12 "
-                     v-else-if="products.length === 0 && searchText !== '' ">
-                <p></p>
-
-                <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-
-                <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-                <br/>
-
-                <div class="text-center">
-                    <a class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">درخواست
-                        خرید
-                    </a>
-                    <br/>
-
-                    <a class="green-button col-xs-4 " @click="resetFilter()">نمایش همه محصولات</a>
-
-                </div>
-
-                <br/>
-            </section>
-
-            <section class="main-content  col-xs-12 "
-                     v-else-if="products.length === 0 && searchText === '' ">
-                <p></p>
-
-                <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-
-                <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-
-                <br/>
-
-                <div class="text-center">
-                    <a class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">
-                        درخواست
-                        خرید
-                    </a>
-
-                    <br/>
-                    <a class="green-button col-xs-4 " @click.prevent="resetFilter()">نمایش همه محصولات</a>
-                </div>
-
-                <br/>
-            </section>
-
-            <section class="loading_images  col-xs-12"
-                     v-else-if="loadMoreActive === false">
-                <img :src="loading_img" style="width:200px;height:200px">
-            </section>
-
-            <section class="loading_images  col-xs-12" v-else>
-                <img :src="loading_img" style="width:200px;height:200px">
-            </section>
         </main>
 
     </div>
 </template>
 <script>
     import ProductArticle from './product_components/product_article'
-    import ProductAsideCategories from './product_components/product_aside_categories'
+    import ProductAsideCategories from './product_components/sidebar/product_aside_categories'
     import {eventBus} from "../../../../js/router/dashboard_router";
 
     var visible = false;
@@ -807,12 +866,14 @@
                             }).then(function (response) {
                                 self.products = response.data.products;
                                 self.loading = false;
+                                setTimeout(function(){
+                                    self.sidebarScroll();
+                                },500)
                             });
                         }
                     });
 
             },
-
             feed() {
 
                 var self = this;
@@ -832,11 +893,13 @@
                         }
 
                         self.loadMoreActive = false;
+                        setTimeout(function(){
+                            self.sidebarScroll();
+                        },500)
                     });
                 }
 
             },
-
             registerRequestInSearchNotFoundCase: function () {
 
                 if (this.currentUser.profile) {
@@ -884,6 +947,10 @@
                 }
             },
             resetFilter: function () {
+              
+
+                eventBus.$emit('submiting', true);
+
                 $('.box-sidebar option').prop('selected', function () {
                     return this.defaultSelected;
                 });
@@ -895,6 +962,7 @@
                 this.cityId = '';
 
                 this.init();
+
             },
             applyFilter: function () {
                 var self = this;
@@ -952,7 +1020,174 @@
                     'description': description,
                     'fatal': fatal
                 });
+            },
+            sidebarScroll() {
+              
+                var $sticky = $('.sticky');
+                var stickyrStopper = $('#wrap-footer');
+                var lastScrollTop = 0;
+
+
+                var dynamicScroll = $sticky.offset().top;
+            
+
+                if (!!$sticky.offset()) { // make sure ".sticky" element exists
+
+
+
+                    var documentHeight = $(document).height();
+                    var wHeight = $(window).height();
+                    var generalSidebarHeight = $sticky.innerHeight();
+                    var stickyTop = 162;
+                    var stickOffset = 0;
+                    var stickPositionToContent = 115;
+                    var stickyStopperPosition = stickyrStopper.offset().top;
+                    var stopPoint = documentHeight - (wHeight + stickyrStopper.innerHeight() + 130);
+                    var differences = (stickyStopperPosition - stickPositionToContent) - (generalSidebarHeight - stickOffset);
+                    var diff = differences + stickOffset ; 
+                    var sidebarHeightToTop = generalSidebarHeight + stickyTop;
+                    
+
+                        if (generalSidebarHeight > wHeight) {
+                          
+                          
+                            if(wHeight < sidebarHeightToTop){
+                    
+                                $(window).scroll(function(){ // scroll event
+                                      var windowTop = $(window).scrollTop(); // returns number
+                                    
+                                           if (windowTop > lastScrollTop){
+
+                                                if ((dynamicScroll + generalSidebarHeight) < windowTop + wHeight) {
+                                            
+                                                      if (stopPoint + 13  < windowTop  ) {
+                                                          $sticky.css({
+                                                              position: 'absolute',
+                                                              top: diff,
+                                                              right:'0'
+                                                          });
+                                                      } else if (windowTop + wHeight > sidebarHeightToTop) {
+                                                          $sticky.css({
+                                                              position: 'fixed',
+                                                              bottom: stickOffset,
+                                                              top:'initial',
+                                                              right:'0'
+                                                          });
+                                                      } else {
+                                                          $sticky.css({
+                                                              position: 'absolute',
+                                                              top: 'initial',
+                                                              right:'0',
+                                                              bottom:'initial'
+                                                          });
+                                                      }
+
+                                                }else{
+                                                   
+                                                      if (stopPoint  < windowTop) {
+                                                          $sticky.css({
+                                                              position: 'absolute',
+                                                              top: diff,
+                                                              right:'0'
+                                                          });
+                                                      } else {
+                                                          $sticky.css({
+                                                              position: 'absolute',
+                                                              top: dynamicScroll + stickOffset,
+                                                              right:'0',
+                                                              bottom:'initial'
+                                                          });
+                                                      }
+
+
+                                                }
+
+                                      dynamicScroll = $sticky.offset().top;
+
+                                    }else{
+
+                                 if ((dynamicScroll - stickyTop) < windowTop) {
+                                        $sticky.css({
+                                              position: 'absolute',
+                                              top: dynamicScroll + 'px' ,
+                                              right:'0',
+                                              bottom:'initial'
+                                          });
+                                    }else{
+                                          $sticky.css({
+                                              position: 'fixed',
+                                              bottom: 'initial',
+                                              top:stickyTop,
+                                              right:'0'
+                                          });
+                                    }
+
+
+
+
+                                    }
+                                  dynamicScroll = $sticky.offset().top;
+                                 
+                                  lastScrollTop = windowTop;
+                                 });
+
+                            }else{
+
+                                  $(window).scroll(function(){ // scroll event
+                                      var windowTop = $(window).scrollTop(); // returns number
+                                      if (windowTop < lastScrollTop){
+                                        
+
+                                         if (stopPoint  < windowTop) {
+                                                  $sticky.css({
+                                                      position: 'absolute',
+                                                      top: diff,
+                                                      right:'0'
+                                                  });
+                                              }else{
+                                                  $sticky.css({
+                                                      position: 'fixed',
+                                                      bottom: 'initial',
+                                                      top:stickyTop,
+                                                      right:'0'
+                                                  });
+                                              } 
+                                          }
+                                       lastScrollTop = windowTop;
+                                    });
+                                      
+                            }; //end all if
+
+
+                        } else {
+
+                         
+
+                             $(window).scroll(function(){ // scroll event
+                                      var windowTop = $(window).scrollTop(); // returns number'
+                                      var getHeightFooter = documentHeight - (stickyrStopper.innerHeight() + stickPositionToContent +  stickyTop + generalSidebarHeight);
+                                        if (getHeightFooter  < windowTop) {
+                                                  $sticky.css({
+                                                      position: 'absolute',
+                                                      top: diff,
+                                                      right:'0'
+                                                  });
+                                              }else{
+                                                  $sticky.css({
+                                                      position: 'fixed',
+                                                      bottom: 'initial',
+                                                      top:stickyTop,
+                                                      right:'0'
+                                                  });
+                                              } 
+                            });
+                                      
+                        }
+                  
+               }
+
             }
+
         },
         watch: {
             searchText: function () {
@@ -981,7 +1216,9 @@
         },
         mounted() {
             this.init();
+
             this.stopLoader();
+
         }
     }
 

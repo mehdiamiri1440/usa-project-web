@@ -50,6 +50,7 @@ import messages from '../components/dashboard/message'
 // Layout Components
 import indexPage from '../components/layouts/main/index'
 import productList from '../components/layouts/main/product_list'
+import productCategory from '../components/layouts/main/product_category'
 import productView from '../components/layouts/main/product_view'
 import indexPrivacyAndPolicy from '../components/layouts/main/privacy_and_policy'
 import indexAboutUs from '../components/layouts/main/about_us'
@@ -137,6 +138,13 @@ const myRouter =  new Router({
             name: 'productListSearch',
             components: {
                 layouts: productList,
+            },
+        },
+        {
+            path: '/product-list/category/:categoryName',
+            name: 'productCategory',
+            components: {
+                layouts: productCategory,
             },
         },
         {
