@@ -183,7 +183,16 @@
         border: 2px solid #fff;
         float: right;
     }
-
+    .dark-profile-img {
+        overflow: hidden;
+        border-radius: 50%;
+        height: 85px;
+        width: 85px;
+        margin: 0 auto;
+        margin-left: 10px;
+        border: 2px solid #5B5C5D;
+        float: right;
+    }
     .profile-img img {
         height: 100%;
     }
@@ -685,6 +694,7 @@
 
             <section class="main-right-header">
                 <ProfileInfo
+                :isLoading='isLoading'
                         :photoLink="currentUser.profile.profile_photo"
                         :storage="storage"
                         :def="defultimg"
@@ -734,6 +744,7 @@
 
             <section class="main-right-header">
                 <ProfileInfo
+                :isLoading='isLoading'               
                         :photoLink="currentUser.profile.profile_photo"
                         :storage="storage"
                         :def="defultimg"
@@ -756,6 +767,7 @@
         </section>
 
         <HeaderTop
+                :isLoading='isLoading'
                 :photoLink="currentUser.profile.profile_photo"
                 :storage="storage"
                 :def="defultimg"
@@ -795,6 +807,7 @@
         ],
         data: function () {
             return {
+                isLoading:true,
                 currentUser: {
                     profile: {
                         is_company: '',
@@ -830,7 +843,7 @@
 
                 this.isLoaded = true;
                 axios.post('/user/profile_info')
-                    .then(response => (this.currentUser = response.data)
+                    .then(response => {this.isLoading=false;return this.currentUser = response.data;}
                     );
 
             },
