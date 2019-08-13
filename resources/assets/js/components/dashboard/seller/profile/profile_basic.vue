@@ -1,526 +1,851 @@
+<style >
+        
+        .sub-header{
+            display: none;
+        }
+
+</style>
 <style scoped>
-    /*start main content style */
-    .image-content-post {
-        width: 30%;
-        float: right;
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-inner-spin-button, 
+    input[type="number"]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+    input, textarea{
+        padding: 9px 15px;
+
+    }
+    input.disabled{
+        color: #fff;
+        background: #F6F6F6;
+        border: none;
+        font-weight: bold;
+    }
+
+
+    input{
+
+        width: 100%;
+        background: none;
+        border-radius: 4px;
+        border: 1px solid;
+        color: #BEBEBE;
+        transition: 300ms;
+
+    }
+
+    input:focus, textarea:focus{
+        color: #333;
+        border-color: #333;
+
+    }
+
+    input.active, textarea.active{
+        color: #00C569;
+    }
+
+    input.active:focus, textarea.active:focus {
+        color: #00C569;
+    }
+
+    input.error {
+        color: #e41c38;
+    }
+
+    input.error:focus{
+        color: #e41c38;
+    }
+
+    textarea{
+        background: none;
+        min-height: 70px;
+        max-height: 80px;
+        transition: 300ms
+    }
+
+    .error-message{
+
+        text-align: center;
+
+        color: #e41c38;
+
+        font-weight: bold;
+
+        height: 25px;
+
+        margin-bottom: 5px;
+
+        direction: rtl;
+
+    }
+
+
+
+
+
+    .main-wrapper {
+        direction: rtl;
+        background: #F6F6F6;
+        font-size: 13px;
+    }
+
+    .title{
+        padding: 13px 15px;
+    }
+
+    .title h1{
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .title p{
+        color: #E41C38;
+        padding-top: 4px;
+    }
+
+    /*progress styles*/
+
+    .progress-wrapper{
+
+        background: #fff;
+        border-radius: 4px;
+        position: relative;
+        overflow: hidden;
+
+    }
+
+    .custom-progress{
+
+        background: #00C569;
+        color: #fff;
+        width: 50%;
+        text-align: center;
+        padding: 3px 0;
+        font-weight: bold;
+
+    }
+
+    .custom-progress p{
+
+        display: inline;
+        
+    }
+
+
+    /*form styles*/
+
+
+    .content-wrapper{
+        background: #fff;
+        box-shadow: 0 0 10px #C5C5C5;
+        border-radius: 9px;
+        margin: 7px auto 8px;
+
+    }
+
+    .wrapper-section{
+        padding: 8px 0 7px;
+    }
+
+    /*user image*/
+
+    .user-image-wrapper{
+        text-align: center;
+    }
+
+    .user-image-wrapper > p{
+        margin-bottom:7px;
+    }
+
+    .content-wrapper{
+        padding: 15px 0;
+    }
+
+    .user-image{
+        width: 86px;
+        height: 86px;
+        overflow:hidden;
+        margin: 0 auto;
+        border-radius: 50px;
         position: relative;
     }
 
-    .image-content-post img {
-        border-radius: 3px;
-        transition: 200ms;
-        filter: grayscale(30%);
-    }
+    .user-image img{
 
-    .image-content-post a:hover img {
-        filter: grayscale(0);
-        transition: 200ms;
-    }
-
-    .image-content-post i {
-        display: none;
         position: absolute;
-        top: 46%;
-        left: 0;
-        right: 0;
+
+        width: initial;
+
+        height: 100%;
+
+        left: 50%;
+
+        top: 50%;
+
+        transform: translate(-50%, -50%);
+
+    }
+
+    .submit{
+        position: relative;
+
+        max-width: 105px;
+
+        margin: 7px auto 0;
+
+        height: 25px;
+
+        background: #00C569;
+
         text-align: center;
-        font-size: 35px;
+
         color: #fff;
+
+        overflow: hidden;
+
+        border-radius: 4px;
+    }
+
+    #imgInp{
+
+        max-width: 100%;
+        position: relative;
+        opacity: 0;
+        height: 100%;
         z-index: 1;
 
     }
 
-    .image-content-post a:hover i {
-        display: block;
-    }
+    #imgInp:hover{
 
-    .content-item {
-        overflow: hidden;
-        text-align: right;
-        direction: rtl;
-    }
-
-    .main-content {
-        padding: 60px 15px;
-    }
-
-    .img-profile {
-        text-align: center;
-    }
-
-    .img-profile .image-input img {
-        width: 150px;
-        height: 150px;
-        overflow: hidden;
-        border-radius: 50%;
-    }
-
-    .img-profile i {
-        font-size: 150px;
-        color: #4b4b4b;
-
-    }
-
-    .img-profile .submit {
-        position: relative;
-        width: 80%;
-        margin: 25px auto;
-    }
-
-    .img-profile .submit input {
-        opacity: 0;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 10px;
-        right: 0;
-    }
-
-    .img-profile .submit label {
-        background: #28a745;
-        color: #fff;
-        padding: 12px 0;
-        font-size: 13px;
-        font-weight: 400;
-        border-radius: 5px;
-        transition: 300ms;
-        width: 100%;
-    }
-
-    .img-profile .submit input:hover + label {
-        background: #29d44d;
-        transition: 300ms;
-    }
-
-    .img-profile .submit input:hover {
-        cursor: pointer
-    }
-
-    .main-profile {
-        border-right: 1px solid #eff3f6;
-        text-align: right;
-        direction: rtl;
-        overflow: hidden;
-    }
-
-    .header-label {
-        display: block;
-        margin: 13px;
-        padding: 0;
-    }
-
-    .content-label {
-        font-weight: 400;
-    }
-
-    /*end main content style */
-    /*custom cods*/
-    .green-button {
-        margin: 15px 0;
-        display: inline-block;
-        background: #28a745;
-        color: #fff;
-        padding: 10px 35px;
-        border-radius: 3px;
-        text-align: center;
-        border: none;
-        transition: 300ms;
-    }
-
-    .green-button:hover {
-        color: #fff;
-        background: #00d614;
-        transition: 300ms;
-
-    }
-
-    .botton-inco {
-        margin: 15px 7px;
-        display: inline-block;
-        color: #313a43;
-        padding: 8px 35px;
-        border-radius: 3px;
-        text-align: center;
-    }
-
-    .botton-inco:hover {
-        color: #fff;
-    }
-
-    .font-big {
-        font-size: 23px;
-        position: relative;
-        top: 3px;
-    }
-
-    .little_header {
-        width: 80px;
-    }
-
-    .little-main-header {
-        right: 80px;
-    }
-
-    .background_mob_sec {
-        position: fixed;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        top: 0;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: -1;
-        display: none;
-    }
-
-    .kind_user, .kind_activity {
-        margin: 7px 0;
-        border-bottom: 1px solid #eff3f6;
-        padding-bottom: 10px;
-    }
-
-    .kind_user > div, .kind_activity > div {
-        float: right;
-        overflow: hidden;
-        padding: 10px;
-        font-size: 15px;
-    }
-
-    .kind_user input, .kind_activity input {
         cursor: pointer;
-        width: 23px;
-        height: 23px;
-        float: right;
+
+    }
+ 
+
+    .submit label{
+
         position: absolute;
-        top: 2px;
-        right: 65px;
-        opacity: 0;
-    }
-
-    .kind_user input:checked + i, .kind_activity input:checked + i {
-        background: #28a745;
-        color: #fff;
-        border: none;
-        padding: 4px;
-    }
-
-    .kind_user i, .kind_activity i {
-        background: none;
-        width: 23px;
-        height: 23px;
-        display: block;
-        position: absolute;
-        top: 4px;
-        right: 65px;
-        z-index: -1;
-        color: #808c9c;
-        border-radius: 50%;
-        padding: 2px;
-        font-size: 14px;
-        border: 2px solid;
-    }
-
-    .user-form {
-        padding: 0;
-    }
-
-    input[type="text"], select,input[type="password"] {
-        width: 100%;
-        border: 1px solid #e9e9e9;
-        padding: 15px 20px;
-        margin: 7px auto;
-        border-radius: 4px;
-        transition: 300ms;
-    }
-
-    textarea {
-        height: 120px;
-        max-width: 100%
-    }
-
-    .user-form input[type="button"] {
-        width: 100%;
+        z-index: 0;
+        top: 3px;
+        margin: 0;
+        left: 0;
+        right: 0;
+        font-weight: normal;
 
     }
 
-    .user-form input[type="text"]:focus ,input[type="password"]:focus{
-        border: 1px solid #28a745;
-        transition: 500ms;
 
+    /*inputs styles*/
+
+    .inputs-wrapper{
+        margin-bottom: 10px
     }
 
-    .img-profile {
-        float: right;
-        padding-top: 90px;
-    }
+    /*redio button styles*/
 
-    #icon-pro {
-        width: 150px;
-        height: 150px;
+
+    .label-radio {
+
         display: inline-block;
+
+        position: relative;
+
+        cursor: pointer;
+
+
+
+        -webkit-user-select: none;
+
+        -moz-user-select: none;
+
+        -ms-user-select: none;
+
+        user-select: none;
+
+        direction: rtl;
+
+        padding: 0 29px 0 15px;
+
+        font-size: 14px;
+
     }
 
-    #icon-pro svg {
-        height: 150px;
+    .label-radio:nth-of-type(1){
+        margin-left: 16px;
     }
 
-    .col-sm-6 {
-        height: 120px;
-        float: right;
+    /* Hide the browser's default radio button */
+    .label-radio input {
+        position: absolute;
+
+        opacity: 0;
+
+        cursor: pointer;
+
+        z-index: 1;
+
+        left: 0;
+
+        right: 0;
+
+        top: 0;
+
+        bottom: 0;
+
+        height: 100%;
+
+        margin: 0;
+
+        width: 100%;
+
     }
 
-    @media screen and (max-width: 992px) {
-        .img-profile {
-            padding-top: 20px;
-        }
+    /* Create a custom radio button */
+    .checkmark {
+        position: absolute;
 
-        .right-header.desktop-header {
-            display: none;
-        }
+        top: 11px;
 
-        .right-header.mobile-header {
-            display: block;
-            right: -300px;
-        }
+        right: 13px;
 
-        .main-header, .little-main-header {
-            right: 0 !important;
-        }
+        height: 12px;
 
-        #main, #main.little-main {
-            margin-right: 0 !important;
-        }
+        width: 12px;
 
-        .post-contents-table {
-            width: 100%;
-        }
+        background-color: #eee;
 
-        .copy-right {
-            display: none;
-        }
-
-        .close_menu {
-            display: none;
-        }
-
-        .close_menu_mob {
-            display: block;
-        }
-
-        .show-header button {
-            display: block;
-        }
-
-        .img-profile .submit {
-            position: relative;
-            width: 100%;
-            margin: 25px auto;
-
-        }
-
-        .img-profile .submit label {
-            width: 40%;
-            padding: 12px 0;
-        }
-
-        .img-profile {
-            float: none;
-        }
+        border-radius: 50%;
     }
 
-    @media screen and (max-width: 768px) {
-        .image-content-post, .contents-post {
-            width: 100%;
-            float: none;
-            margin: 10px 0;
+    /* On mouse-over, add a grey background color */
+    .label-radio:hover input ~ .checkmark {
+          background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .label-radio input:checked ~ .checkmark {
+          background-color: #00C569;
+    }
+
+    .label-radio input:checked ~ label::after{
+          border-color: #00C569;
+    }
+
+
+    .label-radio label::after{
+
+        content: "";
+
+        display: block;
+
+        position: absolute;
+
+        left: 0;
+
+        right: 0;
+
+        top: -2px;
+
+        bottom: 0;
+
+        z-index: 0;
+
+        margin: 0;
+
+        padding: 0;
+
+        border-radius: 3px;
+
+        border: 1px solid #BDC4CC;
+
+    }
+
+
+    .label-radio label i {
+        margin: 0 4px;
+    }
+
+    .label-text{
+        margin-bottom: 10px;
+    }
+
+    /*link help style*/
+
+    .link-help{
+        text-align: right;
+    }
+
+    .link-help a{
+        
+        color: #00C569;
+
+        padding: 2px 15px;
+
+        border-radius: 4px;
+
+        border: 1px solid;
+
+        display: inline-block;
+
+        font-weight: bold;
+
+        margin-bottom: 5px;
+
+    }
+
+    .link-help a{
+        
+        color: #00C569;
+
+        padding: 2px 15px;
+
+        border-radius: 4px;
+
+        border: 1px solid;
+
+        display: inline-block;
+
+        font-weight: bold;
+
+    }
+
+    .link-help a:hover{
+        
+        color: #fff;
+        background: #00C569;
+
+    }
+
+    .link-help i{
+        
+        -ms-transform: matrix(-1, 0, 0, 1, 0, 0); /* Standard syntax */
+        -webkit-transform: matrix(-1, 0, 0, 1, 0, 0); /* Standard syntax */
+        transform: matrix(-1, 0, 0, 1, 0, 0); /* Standard syntax */
+
+    }
+
+    .link-help p{
+                
+        color: #BDC4CC;
+
+        font-size: 12px;
+
+        line-height: 19px;
+
+        font-weight: bold;
+
+    }
+
+
+
+
+    @media only  screen and (max-width: 1080px) {
+
+        .label-radio {
+            padding: 0 25px 0 11px;
+            font-size: 14px;
+        }
+
+        .label-radio:nth-of-type(1) {
+            margin-left: 10px;
+        }
+
+        .checkmark {
+
+            right: 8px;
+          
+        }
+        .link-help a{
+   
+            padding: 2px 10px;
+
+        }
+
+    }
+   
+
+   @media only screen and (max-width: 991px) {
+
+        .radio-wrapper {
+            margin-bottom: 10px;
+        }
+
+        .label-radio {
+            padding: 0 29px 0 15px;
+        }
+
+        .label-radio:nth-of-type(1) {
+            margin-left: 16px;
+        }
+
+        .checkmark {
+
+            right: 13px;
+          
+        }
+
+        .description {
+
+            margin: 15px auto;
+
+        }
+
+        .description hr{
+
+            margin: 0  auto 15px;
+
+        }
+
+        .link-help a {
+
+            float: right;
+            margin-left: 15px;
+
+        }
+
+    }
+
+    @media only screen and (max-width: 767px) {
+        .title{
+            text-align: center;
+            padding: 5px 15px;
+        }
+        .user-image-wrapper {
+
+            margin-top: 23px;
+
+        }
+        .title p, .title h1 {
+
+            padding-top: 0;
+            margin: 5px auto;
+
+        }
+        .link-help a{
+
+           float: initial;
+           margin: 0 auto;
+
+        }
+
+        .link-help{
+            text-align: center;
+        }
+
+        .main-wrapper {
+
             padding: 0;
+
         }
+        .content-wrapper{
 
+            border-radius: 0;
 
-        .name-header-profile {
-            display: none;
-        }
-
-        .profile-menu-header {
-            padding: 7px;
-            padding-left: 36px;
-        }
-    }
-
-    @media screen and (max-width: 555px) {
-        .content-header {
-            display: none;
         }
 
     }
 
-    @media screen and (max-width: 345px) {
-        .sub-header a {
-            font-size: 10px;
 
-        }
 
-        .sub-header {
-
-            bottom: -44px;
-
-        }
-    }
 </style>
 
 <template>
-    <section class="main-content col-xs-12">
-        <form action="#" method="post" enctype="multipart/form-data">
-            <div class="img-profile col-md-3">
-                <div class="image-input">
-                    <div v-if="currentUser.profile.profile_photo">
-                        <img :src="str + '/' + currentUser.profile.profile_photo"
-                             class="image-preview"
-                             alt="تصویر پروفایل"
-                        />
-                    </div>
+    <div class="main-wrapper col-xs-12">
+           
+                <header class="col-xs-12">
+        
 
-                    <div v-else>
-                        <img :src="defultimg" align="تصویر پروفایل" class="image-preview">
-                    </div>
+                          <div class="title col-xs-12">
 
-                    <div class="submit">
-                        <input type="file" id="imgInp" ref="profilePhoto">
-                        <label>ویرایش تصویر</label>
-                        <br/>
-                        <span v-if="errors.profile_photo"
-                              class="text-danger tex-left"
-                              v-text="errors.profile_photo[0]"
-                        >
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="main-profile col-md-9">
-                <div class="kind_user col-xs-12">
-                    <label class="header-label ">
-                        نوع کاربری
-                    </label>
-                    <div class=" col-xs-6 col-md-4">
-                        حقیقی
-                        <input @click="disableForm()"
-                               type="radio"
-                               name="kind_user"
-                               value="0"
-                               v-model="currentUser.profile.is_company"
-                        >
+                              <div class="row">
+                                  <div class="col-xs-12 col-sm-4 pull-right"> 
+                                    <h1>ویرایش پروفایل</h1>
+                                  </div>
+                                  <div class="col-xs-12 col-sm-8">
+                                      <p>
+                                          برای تکمیل فرایند ثبت نام، لطفا اطلاعات خود را کامل کنید
+                                      </p>
+                                  </div>
+                              </div>
 
-                        <i class="fa fa-check"></i>
-                    </div>
+                          </div>
 
-                    <div class=" col-xs-6 col-md-4">
-                        حقوقی
-                        <input @click="enableForm()"
-                               type="radio"
-                               name="kind_user"
-                               value="1"
-                               v-model="currentUser.profile.is_company"
-                        >
-                        <i class="fa fa-check"></i>
-                    </div>
+                          <div class="progressbar col-xs-12">
 
-                    <span v-if="errors.is_company"
-                          class="text-danger"
-                          v-text="errors.is_company[0]"
-                    >
-                    </span>
+                                <div class="progress-wrapper row">
+                                    <div class="custom-progress">
+                                        <p class="hidden-xs">
+                                            میزان تکمیل پروفایل
+                                        </p>
 
-                </div>
-                <div class="user-form col-xs-12">
-                    <label class="header-label">
-                        مشخصات کاربری
-                    </label>
+                                        <span>50%</span>
+                                        
+                                    </div>
+                                </div>
 
-                    <div class="col-xs-12 col-sm-6">
-                        <label for="company-number" class="content-label">
-                            شماره ثبت شرکت:
-                        </label>
+                          </div>
 
-                        <input type="text" id="company-number"
-                               name="company-number"
-                               placeholder="شماره ثبت شرکت"
-                               v-model="currentUser.profile.company_register_code"
-                               disabled="disabled">
+                </header>
 
-                        <span v-if="errors.company_register_code"
-                              class="text-danger"
-                              v-text="errors.company_register_code[0]"></span>
-                    </div>
-                    <div class="col-xs-12 col-sm-6">
-                        <label for="company-name" class="content-label">
-                            نام شرکت:
-                        </label>
+                <main class="col-xs-12">
 
-                        <input type="text"
-                               id="company-name"
-                               name="company-name"
-                               placeholder="نام شرکت"
-                               v-model="currentUser.profile.company_name"
-                               disabled>
+                    <section class="wrapper-section">
+                        
+                        <div class="content-wrapper row">
 
-                        <span v-if="errors.company_name"
-                              class="text-danger"
-                              v-text="errors.company_name[0]"
-                        ></span>
+                                
 
-                    </div>
+                                <div class="form-wrapper col-xs-12">
 
-                    <div class="col-xs-12 col-sm-6">
+                                    <div class="user-image-wrapper col-xs-4 col-sm-2 pull-right">
+                                            <p class="hidden-xs">تصویر پروفایل</p>
+                                            <div class="user-image">
 
-                        <label  class="content-label">
-                            شماره تماس:
-                        </label>
-                        <input type="text"
-                               name="tel"
-                               placeholder="شماره تماس"
-                               v-model="currentUser.profile.public_phone"
-                        >
+                                                    <img 
+                                                    v-if="currentUser.profile.profile_photo"
+                                                    :src="str + '/' + currentUser.profile.profile_photo"
+                                                         class="image-preview"
+                                                         alt="تصویر پروفایل"
+                                                    />
 
-                        <span v-if="errors.public_phone"
-                              class="text-danger"
-                              v-text="errors.public_phone[0]"
-                        >
-                        </span>
+                                                    <img 
+                                                    v-else
+                                                    :src="defultimg"
+                                                     align="تصویر پروفایل" class="image-preview">
 
-                    </div>
+                                            </div>
+                                            
+                                            <div class="submit">
 
-                    <div class="col-xs-12 col-sm-6">
-                        <label class="content-label">
-                            آدرس:
-                        </label>
+                                                <input type="file" id="imgInp" ref="profilePhoto">
 
-                        <input type="text"
-                               name="address"
-                               placeholder="آدرس"
-                               v-model="currentUser.profile.address">
+                                                <label>ویرایش تصویر</label>
 
-                        <span v-if="errors.address"
-                              class="text-danger"
-                              v-text="errors.address[0]"
-                        >
-                        </span>
+                                                <br/>
 
-                    </div>
+                                                <span v-if="errors.profile_photo"
+                                                      class="text-danger tex-left"
+                                                      v-text="errors.profile_photo[0]"
+                                                >
+                                                </span>
 
-                    <div class="col-xs-12">
-                        <input type="button"
-                               class="green-button"
-                               name="submit"
-                               value="ثبت تغییرات"
-                               v-on:click="RegisterBasicProfileInfo"
-                        >
-                    </div>
+                                            </div>
 
-                </div>
-            </div>
+                                    </div>
 
-        </form>
-    </section>
 
+                                        <div class="user-information col-xs-8 col-sm-10">
+                                                
+                                                <div class="row">
+                                                    
+                                                    <div class="col-xs-12 col-md-4 pull-right">
+                                                        <p class="label-text">
+                                                            نوع کاربری
+                                                        </p>
+                                                        <div class="radio-wrapper">
+
+                                                            <div class="label-radio">
+
+                                                                  <input
+                                                                 
+                                                                   type="radio"
+                                                                   value="حقیقی" 
+                                                                   name="radio"
+                                                                   :checked="'p'  == 'p'"
+                                                                   />
+
+                                                                  <span class="checkmark"></span>
+
+                                                                  <label>
+                                                                  حقیقی
+                                                                  </label>
+
+                                                            </div>
+
+                                                            <div class="label-radio">
+
+                                                              <input type="radio" 
+                                                            
+                                                              value="حقوقی" 
+                                                              :checked="'آقا'  == sex"
+                                                              name="radio"
+
+                                                              >
+                                                              <span class="checkmark"></span>
+                                                              <label>
+                                                              حقوقی
+                                                              </label>
+                                                            </div>
+
+                                                        </div>
+                                                            
+
+                                                    </div>
+
+                                                    <div class="inputs-wrapper col-xs-12 col-md-8 pull-left">
+
+                                                       <div class="row">
+
+                                                            <div class="col-xs-12 col-sm-6 pull-right">
+
+                                                                <p class="label-text">
+                                                                    نام شرکت
+                                                                </p>
+
+                                                                <div 
+                                                                class="input-wrapper company-name-wrapper"
+                                                                >
+
+                                                                <input 
+                                                                id="company-name" 
+                                                                type="text"
+                                                                class="dire disabled"
+                                                                placeholder="نام شرکت"
+                                                                readonly
+                                                                >
+
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="col-xs-12 col-sm-6">
+                                                                
+                                                                <p class="label-text">
+                                                                    شماره ثبت شرکت
+                                                                </p>
+
+                                                                <div 
+                                                                class="input-wrapper company-name-wrapper"
+                                                                >
+                                                                
+                                                                <input 
+                                                                id="company-name" 
+                                                                type="text"
+                                                                class="dire disabled"
+                                                                placeholder="شماره ثبت "
+                                                                readonly
+                                                                >
+
+                                                                </div>
+
+                                                            </div>
+
+                                                       </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                        </div>
+
+                                    <div class="user-form col-xs-12 col-sm-10">
+                                            
+                                        <div class="row">
+
+                                            <div class="form-wrapper col-xs-12 col-md-8 pull-left">
+
+                                               <div class="row">
+                                                    <div class="col-xs-6 pull-right">
+                                                          
+                                                                <p class="label-text">
+                                                                    شماره شما
+                                                                </p>
+
+                                                                <div 
+                                                                class="input-wrapper company-name-wrapper"
+                                                                >
+                                                                
+                                                                <input 
+                                                                    id="phone-number" 
+                                                                    type="number"
+                                                                    class="dire"
+                                                                    placeholder="09123456789"
+                                                                    pattern="[0-9]*"
+                                                                >
+
+                                                                </div>
+                                                    </div>
+
+                                                    <div class="col-xs-6">
+                                                        
+                                                            <p class="label-text">
+                                                                    آدرس
+                                                                </p>
+
+                                                                <div 
+                                                                class="input-wrapper address-wrapper"
+                                                                >
+                                                                
+                                                                <input 
+                                                                id="address" 
+                                                                type="text"
+                                                                class="dire "
+                                                                placeholder="آدرس شما"
+                                                                
+                                                                >
+
+                                                                </div>
+
+
+                                                    </div>
+
+                                               </div>   
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    
+                               </div>
+
+                               <div class="form-wrapper col-xs-12 col-md-10 pull-left">
+
+                                    <div class="description col-xs-12 col-md-8">
+                                        <hr class="hidden-md hidden-lg">
+                                        <p class="label-text">
+                                          درباره  کسب و کارتان بنویسید
+                                        </p>
+
+                                         <div 
+                                         class="input-wrapper address-wrapper"
+                                         >
+                                                                
+                                         <textarea
+                                         rows="3"
+                                         id="description"
+                                         class="dire "
+                                         placeholder="آدرس شما"
+                                                                
+                                         ></textarea> 
+
+                                         </div>
+
+
+                                    </div>
+
+                                    <div class="link-help col-xs-12  col-md-4">
+                                        <a href="#">
+                                            نمونه پروفایل تکمیل شده
+                                             <i class="fa fa-question"></i>
+                                        </a>
+                                        <p>
+                                            من فروشنده محصولات کشاورزی در سامانه ی اینکوباک هستم. برای ارتباط با من رو دکمه ی ارسال پیام کلیک کنید. 
+                                        </p>
+                                    </div>
+
+                               </div>
+
+                        </div>
+
+                    </section>
+
+                </main>
+    </div>
 </template>
 
 <script>
@@ -559,16 +884,7 @@
                 profilePhoto: '',
                 errors: '',
                 popUpMsg: '',
-                items: [
-                    {
-                        message: ' اطلاعات تکمیلی',
-                        url: 'complementary',
-                    },
-                    {
-                        message: 'اطلاعات پایه',
-                        url: 'profileBasic',
-                    }
-                ],
+                items: [    ],
             }
         },
         methods: {

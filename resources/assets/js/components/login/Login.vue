@@ -377,6 +377,7 @@
             },
             goToStep: function (step) {
                 this.currentStep = step;
+                this.scrollToTop();
             },
             doLogin: function () {
                 var self = this;
@@ -511,6 +512,9 @@
                     'description': description,
                     'fatal': fatal
                 });
+            },
+            scrollToTop() {
+                window.scrollTo(0, 0);
             }
         },
         created() {

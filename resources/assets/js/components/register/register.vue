@@ -533,6 +533,7 @@
                
                 this.currentStep = step;
                 this.checkLevel();
+                this.scrollToTop();
             },
             checkLevel(){
                 var progressElement = $('.custom-progressbar.active');
@@ -912,7 +913,10 @@
                     'description': description,
                     'fatal': fatal
                 });
-            }
+            },
+            scrollToTop() {
+                window.scrollTo(0, 0);
+            },
         },
         watch: {
             'step2.timeCounterDown': function () {
