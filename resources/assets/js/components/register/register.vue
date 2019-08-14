@@ -648,7 +648,6 @@
                                                 @click.prevent="goToStep(1)"
                                                 :disabled="step2.reSendCode === false"
                                                 :value="step2.timeCounterDown">
-
                                             <span v-text="step2.timeCounterDown"></span>
                                             ثانیه تا ارسال مجدد
                                         </button>
