@@ -111,16 +111,16 @@
 
     
     <div v-else class="content-sidebar">
-        <div class="title-widget">
-            <span class="placeholder-content default-boxing-size content-half-width"></span>
+      <div class="title-widget">
+            <span class="placeholder-content  content-half-width"></span>
             <hr>
         </div>
         <div class="category-products-widget-default">
             <ul>
                 <li>
-                    <span class="placeholder-content default-input-boxing-size content-full-width ">
+                    <span class="placeholder-content default-boxing-size content-full-width ">
                     </span>
-                    <span class="placeholder-content default-input-boxing-size content-full-width ">
+                    <span class="placeholder-content default-boxing-size content-full-width ">
                     </span>
                     <div class="text-center">
                         <span class="placeholder-content default-button"></span>
@@ -187,7 +187,7 @@
         mounted() {
             this.init();
              var self = this;
-                this.$parent.scrollSet();
+                // this.$parent.scrollSet();
              document.fonts.ready.then(function () {
                         setTimeout(function(){
                           self.fontIsLoad = true;
