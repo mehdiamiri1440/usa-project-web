@@ -1,945 +1,444 @@
-<style scoped>
-
-    html, body, div, span, applet, object, iframe,
-    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-    a, abbr, acronym, address, big, cite, code,
-    del, dfn, em, img, ins, kbd, q, s, samp,
-    small, strike, strong, sub, sup, tt, var,
-    b, u, i, center,
-    dl, dt, dd, ol, ul, li,
-    fieldset, form, label, legend,
-    table, caption, tbody, tfoot, thead, tr, th, td,
-    article, aside, canvas, details, embed,
-    figure, figcaption, footer, header,
-    menu, nav, output, ruby, section, summary,
-    time, mark, audio, video {
-        margin: 0;
-        vertical-align: baseline;
+<style >
+    #main-content{
+        padding-bottom: 0
     }
-
-    /* HTML5 display-role reset for older browsers */
-    article, aside, details, figcaption, figure,
-    footer, header, menu, nav, section {
-        display: block;
-    }
-
-    body {
-        line-height: 1.1;
-        font-family: IRANSans, sans-serif;
-        font-size: 14px;
-
+    .error-message{
         direction: rtl;
-
-    }
-
-    p {
-        color: #333;
-    }
-
-    ol, ul {
-        list-style: none;
-    }
-
-    blockquote, q {
-        quotes: none;
-    }
-
-    blockquote:before, blockquote:after,
-    q:before, q:after {
-        content: none;
-    }
-
-    table {
-        border-collapse: collapse;
-        border-spacing: 0;
-    }
-
-    img {
-        width: 100%;
-    }
-
-    a, a:hover, a:visited, a:focus, a:active {
-        text-decoration: none;
-        transition: 300ms;
-    }
-
-    th, td {
-        padding: 7px;
-        text-align: right;
-    }
-
-    h1, h2, h3 {
-        color: #565657;
-    }
-
-    label {
-        font-size: 12px;
-        padding: 6px 0;
-        display: block;
-    }
-
-    input[type="text"], input[type="password"], input[type="email"] {
-        border: 2px solid #818d9b;
-        border-radius: 5px;
-        width: 100%;
-        padding: 5px 15px;
-        line-height: 1.1;
-        direction: rtl;
-    }
-
-    select {
-        width: 100%;
-
-        padding: 0 10px;
-
-        border-radius: 3px;
-
-        border: 1px solid;
-        margin: 7px auto 0;
-    }
-
-    .input-forms > div {
-        margin: 3px auto;
-        float: right;
-        height: 50px;
-    }
-
-    .input-forms .radio_btn {
-        height: 24px;
-    }
-
-    .error_msg {
-        color: #ff0000;
         font-size: 11px;
-        display: block;
-        text-align: center;
-        padding: 2px;
     }
+    #main{
+        margin-top: 21px;
+        background: #F9F9F9;
 
-    #step1 .content_section, #step2 .content_section {
-        padding: 5px 66px;
-        overflow: hidden;
-        padding-top: 40px;
-    }
-
-    #step4 .header_list, #step3 .header_list {
-        margin-bottom: 5px;
-    }
-
-    .ui-corner-all {
-        margin: 7px 0;
-
-        padding-bottom: 10px;
-
-    }
-
-    .ui-corner-all input {
-        cursor: pointer;
-        width: 23px;
-        height: 23px;
-        position: absolute !important;
-        top: 2px;
-        opacity: 0;
-        left: 15px;
-    }
-
-    .ui-corner-all input[type="checkbox"]:checked + .fa {
-        color: #28a745;
-        background: red;
-        width: 100px;
-        height: 100px;
-    }
-
-    input[type="text"], input[type="password"], input[type="email"] {
-        -webkit-appearance: none;
-        border: 1px solid #818d9b;
-        border-radius: 5px;
-        width: 100%;
-        padding: 8px 15px;
-    }
-
-    .ui-corner-all i {
-        background: none;
-        width: 23px;
-        height: 23px;
-        display: block;
-        position: absolute;
-        top: 4px;
-        left: 15px;
-        color: #808c9c;
-        border: 2px solid;
-        border-radius: 50%;
-        padding: 3px 2px;
-        font-size: 14px;
-    }
-
-    .radio-wrapper {
-        margin-bottom: 12px;
-    }
-
-    .radio-wrapper input {
-        cursor: pointer;
-        width: 23px;
-        height: 23px;
-        float: right;
-        position: absolute;
-        top: -5px;
-        right: 65px;
-        opacity: 0;
-        z-index: 1;
-    }
-
-    .radio-wrapper input:checked + i, .radio-wrapper input:checked + i {
-        background: #28a745;
-        color: #fff;
-        padding: 4px;
-    }
-
-    .radio-wrapper input {
-        cursor: pointer;
-        width: 23px;
-        height: 23px;
-        float: right;
-        position: absolute;
-        top: -5px;
-        right: 65px;
-        opacity: 0;
-        z-index: 1;
-    }
-
-    .radio-wrapper i, .radio-wrapper i {
-        background: none;
-        width: 23px;
-        height: 23px;
-        display: block;
-        position: absolute;
-        top: -5px;
-        right: 65px;
-        color: #808c9c;
-        border-radius: 50%;
-        padding: 3px 2px;
-        font-size: 14px;
-    }
-
-    .bouttons {
-
-        margin: 60px auto;
-
-    }
-
-    .bg.register {
-
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: bottom;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        z-index: -1;
-        position: absolute;
-        overflow: hidden;
-    }
-
-    #main {
-        width: 680px;
-        margin: 160px auto 110px;
-        direction: rtl;
-
-    }
-
-    .green-button {
-        width: 100%;
-
-        background: #28a745;
-
-        border: none;
-
-        border-radius: 3px;
-
-        color: #fff;
-
-        padding: 8px;
-
-        margin: 5px auto;
-    }
-
-    .danger_border_but {
-        width: 100%;
-        border-radius: 3px;
-        padding: 12px;
-        background: #030947;
-        color: #fff;
-        margin: 5px auto;
-    }
-
-    .sub-des {
-        color: #909aa6;
-        font-size: 9px;
-        margin: 8px 0 50px;
-        display: inline-block;
-    }
-
-    .input_contents {
-        position: relative;
-    }
-
-    input.pad {
-        padding: 13px 47px 9px 15px;
-    }
-
-    .forget_pass {
-        color: #28a745;
-        float: left;
-        font-size: 12px;
-
-        border-bottom: 1px solid;
-
-        padding-bottom: 5px;
-
-        margin: 14px 0;
-    }
-
-    .after_icon:after {
-        position: absolute;
-        content: " ";
-        bottom: 9px;
-        right: 23px;
-        font-family: "fontawesome", sans-serif;
-        font-size: 22px;
-        color: #818d9b;
-        border-left: 1px solid;
-        padding-left: 11px;
-    }
-
-    .after_icon.numbers:after {
-        content: "\f098";
-    }
-
-    .after_icon.unlock-alt:after {
-        content: "\f13e";
-    }
-
-    .after_icon.search-icon:after {
-        content: "\f002";
-    }
-
-    #input-user-name .after_icon:after {
-        bottom: 19px;
-    }
-
-    .left-section {
-        padding: 0;
         height: 100%;
+
         position: relative;
-        background: #fff;
-    }
 
-    .main-form {
-        min-width: 250px;
-        margin: 0 auto;
-        height: 550px;
-        overflow: hidden;
-        border-radius: 5px;
-        box-shadow: 0 0 44px rgba(0, 0, 0, 0.6);
-    }
-
-    .left-section h1 {
-        font-size: 24px;
-        text-align: center;
-        padding: 20px;
-    }
-
-    ul.header_list {
-        text-align: center;
         width: 100%;
-        border-top: 1px solid #e6e6e6;
-        background: #ededed;
-        font-size: 13px;
-        color: #818d9b;
+        overflow: hidden;
+        min-height: 768px;
     }
-
-    ul.header_list a {
-        font-size: 13px;
-        color: #818d9b;
+    input[type="number"] {
+      -moz-appearance: textfield;
     }
-
-    ul.header_list li {
-        padding: 10px 12px;
+    input[type="number"]::-webkit-inner-spin-button, 
+    input[type="number"]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
     }
-
-    ul.header_list li.active {
-        color: #313a43;
-        border-bottom: 2px solid #28a745;
-    }
-
-    .content_section {
-        padding: 5px 25px;
-    }
-
-    .dots-step {
-        position: absolute;
-        left: calc(50% - 50px);
-        bottom: 8px;
-        direction: rtl;
-    }
-
-    .dots-step span {
-        width: 12px;
-        height: 12px;
-        border: 2px solid #818d9b;
-        border-radius: 50%;
-        display: inline-block;
-        margin: 5px;
-        position: relative;
-
-    }
-
-    .dots-step span.active {
-        background: #28a745;
-
-    }
-
-    .dots-step span:after {
-        position: absolute;
-        content: " ";
-        top: 3px;
-        background: #a0a9b3;
-        right: 10px;
-        color: #818d9b;
-        width: 15px;
-        height: 3px;
-    }
-
-    .dots-step span:last-of-type:after {
-        display: none;
-    }
-
-    .dropdown {
+    .main-wrapper{
         position: absolute;
         top: 50%;
-        transform: translateY(-50%);
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 100%;
+        max-width: 620px;
     }
 
-    a {
-        color: #fff;
+    .wraper-main-contents{
+
+        text-align: right;
+        margin: 40px auto;
+
     }
 
-    .dropdown dd,
-    .dropdown dt {
-        margin: 0;
-        padding: 0;
-    }
 
-    .dropdown ul {
-        margin: -1px 0 0 0;
-    }
+    /*progressbar styles*/
 
-    .dropdown dd {
+    .wrapper-progressbar{
+        position: relative;
+    }
+    .progressbar-items{
+        display: flex;
+        justify-content: space-between;
+        direction: rtl;
         position: relative;
     }
 
-    .dropdown a,
-    .dropdown a:visited {
-        color: #fff;
-        text-decoration: none;
-        outline: none;
+    .progrees-item{
+        text-align: center;
+        color: #BEBEBE;
+
+    }
+
+    .progrees-item p{
         font-size: 12px;
     }
 
-    .dropdown dt a {
-        background-color: #4F6877;
-        display: block;
-        padding: 8px 20px 5px 10px;
-        min-height: 25px;
-        line-height: 24px;
-        overflow: hidden;
-        border: 0;
-        width: 272px;
-    }
-
-    .dropdown dt a span,
-    .multiSel span {
-        cursor: pointer;
+    .progrees-item span {
+        width: 20px;
+        height: 20px;
+        font-size: 13px;
+        background: #BEBEBE;
+        border-radius: 50px;
+        color: #fff;
         display: inline-block;
-        padding: 0 3px 2px 0;
+        margin-bottom: 6px;
+        padding-top: 1px;
     }
 
-    .dropdown dd ul {
-        background-color: #4F6877;
-        border: 0;
-        color: #fff;
-        display: none;
-        left: 0px;
-        padding: 2px 15px 2px 5px;
-        position: absolute;
-        top: 2px;
-        width: 280px;
-        list-style: none;
-        height: 100px;
-        overflow: auto;
+     .progrees-item.active{
+        color: #333;
+      
     }
 
-    .dropdown span.value {
-        display: none;
+    .progrees-item.active p{
+         font-weight: bold;
+    }
+     .progrees-item.active span {
+        background: #00C569;
     }
 
-    .dropdown dd ul li a {
-        padding: 5px;
+     .custom-progressbar{
+
         display: block;
-    }
+        height: 3px;
+        background: #BEBEBE;
+        right: 20px;
+        left: 21px;
+        position: absolute;
+        top: 9px;
+        z-index: 0;
 
-    .dropdown dd ul li a:hover {
-        background-color: #fff;
-    }
+     }
+     .custom-progressbar.active{
+        background: #00c569;
+        width: 0;
+        left: initial;
+     }
 
-    button {
-        background-color: #6BBE92;
-        width: 302px;
-        border: 0;
-        padding: 10px 0;
-        margin: 5px 0;
+     .custom-progressbar .progress-bar{
+        background: #00c569;
+        float: right;
+     }
+
+
+
+     /*main contents styles */
+     .main-contents{
+        background: #fff;
+        border-radius: 9px;
+        overflow: hidden;
+        margin-top: 16px;
+        box-shadow: 0 0 10px #C5C5C5;   
+        height: 500px;
+     }
+
+
+     /*main content headers styles*/
+     .main-content-header {
+        direction: rtl;
         text-align: center;
+        background: #00C569;
         color: #fff;
-        font-weight: bold;
-    }
+        padding: 22px 0;
+     }
+     .main-content-header a{
+        color: #fff;
+        position: relative;
+        right: 0;
+        transition: 300ms;
+     }
+     .main-content-header a, .main-content-header h1  {
+        font-size: 23px
+     }
+     .main-content-header a:hover{
+        transition: 300ms;
+     }
+   
+     .main-content-header a.arrow-left:hover{
+          right: 5px;
+     }
 
-    @media screen and (max-width: 996px) {
-        body {
-            line-height: 1.1em;
+     .main-content-header a.arrow-right:hover{
+          right: -5px;
+     }
+     
+
+     /*main content footer style*/
+     .main-content-footer{
+       position: absolute;
+
+        bottom: 0;
+     }
+     .footer-content{
+        direction: rtl;
+        text-align: center;
+        background: #F6F6F6;
+        font-size: 11px;
+        padding: 5px;
+        color: #333;
+     }
+
+     .footer-content i{
+
+        font-size: 12px;
+        color: #00C569;
+
+     }
+
+     @media screen and (max-width: 767px){
+        #main{
+            padding: 0
+        }
+        .progrees-item p{
+            display: none;
         }
 
-        .content_section {
-            padding: 15px !important;;
-        }
+        .main-wrapper{
 
-        .dots-step {
+            top: calc(50% - 30px);
 
         }
-    }
 
-    @media screen and (max-width: 768px) {
-        #main {
-            margin: 160px auto 80px;
-            left: 15px;
-            transform: inherit;
-            width: calc(100% - 30px);
+        .progressbar-items{
+            padding: 0 15px 
         }
-    }
+        .main-contents {
 
-    @media screen and (max-width: 447px) {
-        .content_section {
-            padding: 0 15px !important;
+            border-radius: 0;
+   
+        }
+        .main-content-header {
+            direction: rtl;
+            text-align: center;
+            background: none;
+            color: #333;
+            padding: 14px 0;
+            border-bottom: 2px solid #00C569;
         }
 
-        .dots-step[data-v-5abd7116] {
-            bottom: -2px;
+        .main-content-header a, .main-content-header h1{
+            font-size: 17px;
         }
-    }
+        .main-content-header a {
+            color: #333;
+            text-align: left;
+        }
+        .title-contents {
 
+            font-weight: bold;
+            font-size: 16px;
+
+        }
+
+        .form-contents label{
+              font-size: 12px;
+        }
+
+        .small-description{
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+        }
+        input{
+            font-size: 13px;
+            padding: 8px 15px 9px 35px ; 
+        }
+
+     }
+
+     @media screen and (max-width: 370px){
+
+
+        .form-contents .col-xs-10  {
+
+            padding: 0;
+
+        }
+        .form-contents .col-xs-3{
+
+            padding: 0 5px;
+
+        }
+        .col-xs-10.col-xs-offset-1.col-sm-8.col-sm-offset-2{
+            padding: 0
+        }
+
+     }
 
 </style>
 
 <template>
-    <div>
-        <div class="bg register"></div>
+        <div>
+            
 
-        <main id="main">
-            <div class="main-form">
-                <div class="left-section col-sm-8">
-                    <h1>ثبت نام در سامانه </h1>
-                    <div id="step1" v-show="currentStep === 1">
+        <main id="main" class="container">
 
-                        <template>
-                            <ul class="header_list list-inline">
-                                <li class="active">ثبت موبایل</li>
-                                <li>تایید موبایل</li>
-                                <li>ثبت مشخصات فردی</li>
-                                <li> ثبت نهایی</li>
-                            </ul>
+            <div class="main-wrapper col-xs-12">
+                
+                <div class="row">
 
-                            <div class="content_section">
-                                <label class="col-xs-12">
-                                    لطفا شماره موبایل خود را وارد کنید
-                                </label>
+                    <div class="wrapper-progressbar">
 
-                                <div class="col-xs-12 input_contents">
-                                    <span class="after_icon numbers"></span>
-
-                                    <input class="pad number"
-                                           type="text"
-                                           name="name"
-                                           v-model="step1.phone"
-                                           placeholder="شماره موبایل">
-                                </div>
-
-                                <span class="sub-des col-xs-12">
-                               پس از وارد کردن شماره موبایل ما یک کد برای شما ارسال میکنیم تا از صحت شماره وارد شده اطمینان حاصل کنیم
-                           </span>
-
-                                <span v-if="errors.phone" class="error_msg" v-text="errors.phone[0]">
-
-                            </span>
-
-                                <div class="col-xs-12">
-                                    <button class="green-button"
-                                            type="button"
-                                            @click.prevent="send_verification_code"
-                                            :disabled="step1.sendCode === false">
-
-                                        ارسال پیام کوتاه
-
-                                    </button>
-                                </div>
-
+                        <div class="custom-progressbar">
+                            <div class="progress-bar" 
+                            role="progressbar" 
+                            aria-valuenow="21"
+                            aria-valuemin="0" 
+                            aria-valuemax="100">
+                        
                             </div>
-
-                            <div class="dots-step">
-
-                                <span class="dots active"></span>
-                                <span class="dots"></span>
-                                <span class="dots"></span>
-                                <span class="dots"></span>
-
+                        </div>
+                         <div class="custom-progressbar active">
+                            <div class="progress-bar" 
+                            role="progressbar" 
+                            aria-valuenow="21"
+                            aria-valuemin="0" 
+                            aria-valuemax="100">
+                        
                             </div>
-                        </template>
+                        </div>
+
+                        <div class="progressbar-items">
+
+                            <a class="progrees-item active">
+                                
+                                    <span>1</span>
+                                    <p>ثبت موبایل</p>
+                               
+                            </a>
+
+                            <a class="progrees-item" :class="{'active' : currentStep >= 2}">
+                                
+                                    <span>2</span>
+                                    <p>تایید شماره</p>
+                               
+                            </a>
+
+                            
+                            <a class="progrees-item" :class="{'active' : currentStep >= 3}">
+                                
+                                    <span>3</span>
+                                    <p>مشخصات فردی</p>
+                               
+                            </a>
+
+                            
+                            <a class="progrees-item" :class="{'active' : currentStep >= 4}">
+                                
+                                    <span>4</span>
+                                     <p>انتخاب آدرس</p>
+                               
+                            </a>
+
+                            
+                            <a class="progrees-item" :class="{'active' : currentStep >= 5}">
+                                
+                                    <span>5</span>
+                                  <p>حساب کاربری</p>
+                               
+                            </a>
+
+                            
+                            <a class="progrees-item" :class="{'active' : currentStep >= 6}">
+                                
+                                    <span>6</span>
+                                      <p>حوزه فعالیت</p>
+                               
+                            </a>
+                        </div>
 
                     </div>
 
-                    <div id="step2" v-show="currentStep === 2">
-                        <template>
-                            <ul class="header_list list-inline">
-                                <li class="back_step" @click="goToStep(1)">ثبت موبایل</li>
-                                <li class="active">تایید موبایل</li>
-                                <li>ثبت مشخصات فردی</li>
-                                <li> ثبت نهایی</li>
-                            </ul>
+                    <div class="main-contents">
 
-                            <div class="content_section">
+                        <header class="main-content-header col-xs-12">
 
-                                <label class="col-xs-12">
-                                    کد ارسال شده به تلفن همراهتان را وارد کنید.
-                                </label>
+                           <div class="row">
+                                <p
+                                class="arrow-left col-xs-2">
+                                    <!-- <i class="fa fa-arrow-left"></i> -->
+                                </p>
 
-                                <div class="col-xs-12 input_contents">
-                                    <span class="after_icon search-icon"></span>
+                                <h1 class="col-xs-8">ثبت نام در سامانه</h1>
 
-                                    <input class="pad "
-                                           type="text"
-                                           name="name"
-                                           v-model="step2.verification_code"
-                                           placeholder="کد تایید">
-                                </div>
+                                <a href="#" v-if="currentStep != 1" @click.prevent="goToStep(currentStep - 1)"
+                                class="arrow-right col-xs-2">
+                                    <i class="fa fa-arrow-right"></i>
+                                </a>
 
-                                <span v-if="errors.verification_code"
-                                      class="error_msg"
-                                      v-text="errors.verification_code[0]">
+                           </div>
 
-                            </span>
+                        </header>
 
-                                <div class="bouttons col-xs-12">
-                                    <button class=" green-button"
-                                            type="button"
-                                            @click="verify_code"> بررسی کد</button>
+                        <main class="col-xs-12">
+                                <div class="row">
+                                    <div class=" col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+                                        <div class="wraper-main-contents row">
 
-                                    <div v-if="step2.showTimer">
-                                        <button class="danger_border_but"
-                                                type="button"
-                                                @click.prevent="goToStep(1)"
-                                                :disabled="step2.reSendCode === false"
-                                                :value="step2.timeCounterDown">
-                                            <span v-text="step2.timeCounterDown"></span>
-                                            ثانیه تا ارسال مجدد
-                                        </button>
+                                            <RegisterNumber 
+                                            @getPhoneNumber="setPhoneNumber" 
+                                            v-if="currentStep == 1" 
+                                            :parent-errors = "errors.phone[0]"
+                                             />
 
+                                            <VerifyCode
+                                            @getVerificationCode="setVerificationCode"
+                                             v-else-if="currentStep == 2" 
+                                             :parent-errors = "errors.verification_code[0]"/>
+
+                                             <PersonalInformatin
+                                             v-else-if="currentStep == 3"
+                                             />
+
+                                             <Location
+                                             v-else-if="currentStep == 4"
+                                             />
+
+                                             <UserAccount
+                                             v-else-if="currentStep == 5"
+                                             />
+
+                                             <ActivityDomain
+                                             v-else-if="currentStep == 6"
+                                             />
+
+                                        </div>
                                     </div>
-
-                                    <div v-else>
-
-                                        <button class="danger_border_but"
-                                                type="button"
-                                                @click.prevent="goToStep(1)"
-                                                :disabled="step2.reSendCode === false">
-                                            کد را دریافت نکردم
-                                        </button>
-                                    </div>
-
                                 </div>
+                        </main>
 
-                            </div>
-
-                            <div class="dots-step">
-                                <span class="dots active back_step" @click="goToStep(1)"></span>
-                                <span class="dots active"></span>
-                                <span class="dots"></span>
-                                <span class="dots"></span>
-                            </div>
-
-                        </template>
+                        <footer class="main-content-footer col-xs-12">
+                                <div class="footer-content row">
+                                    <i class="fa fa-star"></i>
+                                    فرصت های جدید را خلق کنید و در زمان و هزینه صرفه جویی کنید
+                                </div>
+                        </footer>
                     </div>
-
-                    <div id="step3" v-show="currentStep === 3">
-                        <template>
-                            <ul class="header_list list-inline">
-                                <li class="back_step" @click="goToStep(1)">ثبت موبایل</li>
-                                <li class="back_step" @click="goToStep(2)">تایید موبایل</li>
-                                <li class="active">ثبت مشخصات فردی</li>
-                                <li> ثبت نهایی</li>
-                            </ul>
-
-                            <div class="input-forms content_section">
-                                <label class="col-xs-12">
-                                    جنسیت
-                                </label>
-
-                                <div class="col-xs-6 radio_btn">
-                                    <div class="radio-wrapper">
-                                        <input v-model="step3.sex" type="radio" name="sex"
-                                               value="خانم">خانم
-                                        <i class="fa fa-check"></i>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-6 radio_btn">
-                                    <div class="radio-wrapper">
-                                        <input v-model="step3.sex" type="radio" sname="sex"
-                                               value="آقا">آقا
-                                        <i class="fa fa-check"></i>
-                                    </div>
-                                </div>
-
-                                <label class="col-xs-12">
-                                    اطلاعات شخصی خود را وارد کنید. </label>
-                                <div class="col-xs-6">
-                                    <input type="text"
-                                           name="city"
-                                           v-model="step3.first_name"
-                                           placeholder="نام">
-                                    <span v-if="errors.first_name"
-                                          class="error_msg"
-                                          v-text="errors.first_name[0]">
-
-                                </span>
-
-                                </div>
-                                <div class="col-xs-6">
-                                    <input type="text"
-                                           name="city"
-                                           v-model="step3.last_name" placeholder="نام خانوادگی">
-
-                                    <span v-if="errors.last_name"
-                                          class="error_msg"
-                                          v-text="errors.last_name[0]">
-                                </span>
-
-                                </div>
-                                <div id="input-user-name" class="col-xs-12  input_contents">
-
-                                    <span class="after_icon search-icon"></span>
-
-                                    <input class="pad"
-                                           type="text"
-                                           name="city"
-                                           v-model="step3.user_name"
-                                           placeholder="نام کاربری به انگلیسی">
-
-                                    <span v-if="errors.user_name[0]"
-                                          class="error_msg"
-                                          v-text="errors.user_name[0]">
-                                </span>
-
-                                    <span v-else class="error_msg">
-                                    بدون فاصله
-                                </span>
-
-                                </div>
-
-                                <div class="col-xs-6">
-
-                                    <select v-on:change="setProvinceName($event)">
-
-                                        <option selected disabled>استان را انتخاب کنید</option>
-                                        <option
-                                                v-for="province in step3.provinceList"
-                                                v-bind:value="province.province_name"
-                                                v-text="province.province_name"
-                                        >
-
-                                        </option>
-                                    </select>
-
-                                    <span v-if="errors.province"
-                                          class="error_msg"
-                                          v-text="errors.province[0]">
-                                </span>
-
-                                </div>
-
-                                <div class="col-xs-6">
-                                    <select v-on:change="setCityName($event)">
-                                        <option selected disabled>شهر را انتخاب کنید</option>
-                                        <option v-for="city in step3.cityList"
-                                                v-bind:value="city.city_name"
-                                       v-text="city.city_name"
-                                        >
-                                        </option>
-
-                                    </select>
-                                    <span v-if="errors.city"
-                                          class="error_msg" v-text="errors.city[0]">
-
-                                </span>
-                                </div>
-
-                                <div class="col-xs-6">
-                                    <input type="password"
-                                           name="city"
-                                           v-model="step3.password"
-                                           placeholder="رمز عبور">
-                                    <span v-if="errors.password"
-                                          class="error_msg"
-                                          v-text="errors.password[0]">
-
-                                </span>
-
-                                </div>
-                                <div class="col-xs-6">
-                                    <input type="password"
-                                           name="city"
-                                           v-model="step3.re_password"
-                                           placeholder="تکرار رمز عبور">
-                                    <span v-if="errors.password_conf"
-                                          class="error_msg"
-                                          v-text="errors.password_conf[0]">
-
-                                </span>
-
-                                </div>
-
-                                <div class="buttons col-xs-12">
-                                    <button class="green-button" type="button" @click="register_details">ثبت مشخصات
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="dots-step">
-                                <span class="dots active back_step" @click="goToStep(1)"></span>
-                                <span class="dots active back_step" @click="goToStep(2)"></span>
-                                <span class="dots active"></span>
-                                <span class="dots"></span>
-                            </div>
-
-                        </template>
-                    </div>
-
-                    <div id="step4" v-show="currentStep === 4">
-                        <template>
-                            <ul class="header_list list-inline">
-                                <li class="back_step" @click="goToStep(1)">ثبت موبایل</li>
-                                <li class="back_step" @click="goToStep(2)">تایید موبایل</li>
-                                <li class="back_step" @click="goToStep(3)">ثبت مشخصات فردی</li>
-                                <li class="active"> ثبت نهایی</li>
-                            </ul>
-
-                            <div class="content_section ">
-                                <label class="col-xs-12">
-                                    نوع فعالیت
-                                </label>
-
-                                <div class="col-xs-6">
-                                    <div class="radio-wrapper">
-                                        <input v-model="step4.activity_type" type="radio"
-                                                                      name="kind"
-                                                                      value="1">خریدار
-                                        <i class="fa fa-check"></i>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-6">
-                                    <div class="radio-wrapper">
-                                        <input v-model="step4.activity_type"
-                                               type="radio"
-                                                                      name="kind"
-                                                                      value="0">فروشنده
-                                        <i class="fa fa-check"></i>
-
-                                    </div>
-                                </div>
-
-                                <span v-if="errors.activity_type"
-                                      class="error_msg"
-                                      v-text="errors.activity_type[0]">
-
-                            </span>
-
-                                <div class="col-xs-12">
-                                    <label>
-                                        حوزه فعالیت خود را مشخص کنید.
-                                    </label>
-
-                                    <select v-on:change="setCategoryId($event)">
-                                        <option disabled selected>
-                                            انتخاب کنید
-                                        </option>
-
-                                        <option
-                                                v-for="category in step4.categoryList"
-                                                v-bind:value="category.id"
-                                                v-text="category.category_name"
-                                        >
-
-                                        </option>
-                                    </select>
-
-                                    <span v-if="errors.category_id"
-                                          class="error_msg"
-                                          v-text="errors.category_id[0]">
-
-                                </span>
-
-                                    <br/>
-
-                                    <div class="buttons">
-                                        <button class="green-button"
-                                                type="button"
-                                                @click="submitForm">ثبت نهایی
-                                        </button>
-                                    </div>
-
-                                    <br/>
-
-                                    <p class="text-center">
-                                        با تشکر ازحُسن انتخاب شما
-                                    </p>
-                                </div>
-
-                            </div>
-
-                            <div class="dots-step">
-                                <span class="dots active back_step" @click="goToStep(1)"></span>
-                                <span class="dots active back_step" @click="goToStep(2)"></span>
-                                <span class="dots active back_step" @click="goToStep(3)"></span>
-                                <span class="dots active"></span>
-                            </div>
-                        </template>
-                    </div>
-
+                  
                 </div>
 
-                <RightSection></RightSection>
             </div>
+
         </main>
-    </div>
+
+
+        </div>
 
 </template>
 
+
 <script>
     import {eventBus} from "../../router/dashboard_router";
-    import RightSection from './RightSection.vue'
+    import RegisterNumber from "./register_steps/register_number";
+    import VerifyCode from "./register_steps/verify_code"
+    import PersonalInformatin from "./register_steps/personal_information"
+    import Location from "./register_steps/location"
+    import UserAccount from "./register_steps/user_account"
+    import ActivityDomain from "./register_steps/activity_domain"
+
 
     export default {
         components: {
-            RightSection
+             RegisterNumber,
+             VerifyCode,
+             PersonalInformatin,
+             Location,
+             UserAccount,
+             ActivityDomain
         },
         data: function () {
             return {
@@ -995,11 +494,70 @@
             }
         },
         methods: {
+            setPhoneNumber(phoneNumber){
+                this.step1.phone = phoneNumber;
+                this.send_verification_code();
+
+            },
+            setVerificationCode(vaerifyCode){
+                this.step2.verification_code = vaerifyCode;
+                this.verify_code();
+            },
+            setPersonalInformatin(){
+
+                this.firstNameValidator(this.step3.first_name);
+                this.lastNameValidator(this.step3.last_name);
+                console.log(this.errors.first_name.length);
+                console.log(this.errors.last_name.length);
+                if (this.errors.first_name.length == 0 && this.errors.last_name.length == 0) {
+                     this.goToStep(4);
+                }
+
+            },
+            setLocation(){
+                this.goToStep(5);
+            },
+            setAccount(){
+               this.register_details();
+            },
             stopLoader: function () {
                 eventBus.$emit('isLoading', false);
             },
             goToStep: function (step) {
+
+                if (step < 1 ) {
+                    step = 1;
+                }else if(step > 6){
+                        step = 6;
+                }
+               
                 this.currentStep = step;
+                this.checkLevel();
+                this.scrollToTop();
+            },
+            checkLevel(){
+                var progressElement = $('.custom-progressbar.active');
+                 switch(this.currentStep) {
+                  case 1:
+                     progressElement.css('width','0')
+                    break;
+                  case 2:
+                     progressElement.css('width','18%')
+                    break;
+                  case 3:
+                     progressElement.css('width','36%')
+                    break;
+                  case 4:
+                     progressElement.css('width','54%')
+                    break;
+                  case 5:
+                     progressElement.css('width','73%')
+                    break;
+                  case 6:
+                     progressElement.css('width','90%')
+                    break;
+                
+                } 
             },
             send_verification_code: function () {
                 this.step2.reSendCode = false;
@@ -1028,6 +586,7 @@
                     })
                     .catch(function (err) {
                         self.errors.phone = err.response.data.errors.phone;
+                        
                         self.step1.sendCode = true;
 
                         self.registerComponentExceptions('phone number is empty or incorrect or already exists');
@@ -1066,7 +625,7 @@
                 if (this.errorFlag === false &&
                     this.userNameUnique === true &&
                     this.nationalCodeUnique === true) {
-                    this.goToStep(4);
+                    this.goToStep(6);
                     this.getCategory();
                 }
             },
@@ -1354,7 +913,10 @@
                     'description': description,
                     'fatal': fatal
                 });
-            }
+            },
+            scrollToTop() {
+                window.scrollTo(0, 0);
+            },
         },
         watch: {
             'step2.timeCounterDown': function () {
@@ -1428,9 +990,10 @@
         mounted: function () {
             document.onreadystatechange = () => {
                 if (document.readyState === "complete") {
-                    self.$nextTick(this.stopLoader());
+                    // self.$nextTick(this.stopLoader());
                 }
             }
+            this.checkLevel();
         },
         updated: function () {
             this.$nextTick(this.stopLoader());
