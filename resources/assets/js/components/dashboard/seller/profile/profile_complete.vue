@@ -650,7 +650,7 @@
                     'public_phone',
                     'description',
                 ],
-                    relatedFiles: [],
+                relatedFiles: [],
                 certificateFiles: [],
                 errors: '',
                 popUpMsg: '',

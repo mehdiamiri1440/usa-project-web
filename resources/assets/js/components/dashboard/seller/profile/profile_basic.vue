@@ -1,11 +1,41 @@
 <style >
         
-        .sub-header{
+  /*      .sub-header{
             display: none;
-        }
+        }*/
 
 </style>
+
 <style scoped>
+    
+
+
+    .main-wrapper main{
+        padding-bottom: 50px;
+    }
+
+    .submit-button{
+        background: #DDDDDD;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        width: 100%;
+        font-size: 16px;
+        padding: 10px 0 9px;
+        transition: 300ms;
+        cursor: default;
+    }
+
+    .submit-button.active{
+        background: #00C569;
+        color: #fff !important;
+        cursor: pointer;
+    }
+
+
+    .padding-0{
+        padding: 0
+    }
 
     input[type="number"] {
       -moz-appearance: textfield;
@@ -22,7 +52,7 @@
     input.disabled{
         color: #fff;
         background: #F6F6F6;
-        border: none;
+        border: 1px solid;
         font-weight: bold;
     }
 
@@ -45,11 +75,13 @@
     }
 
     input.active, textarea.active{
-        color: #00C569;
+        color: #333;
+        border-color : #00C569;
     }
 
     input.active:focus, textarea.active:focus {
-        color: #00C569;
+          color: #333;
+        border-color : #00C569;
     }
 
     input.error {
@@ -64,22 +96,20 @@
         background: none;
         min-height: 70px;
         max-height: 80px;
-        transition: 300ms
+        transition: 300ms;
+        line-height: 1.618;
     }
 
     .error-message{
 
         text-align: center;
-
         color: #e41c38;
-
         font-weight: bold;
-
-        height: 25px;
-
-        margin-bottom: 5px;
-
+        height: 16px;
+        margin: 4px auto 0;
         direction: rtl;
+        font-size: 12px;
+        display: block;
 
     }
 
@@ -122,10 +152,12 @@
 
         background: #00C569;
         color: #fff;
-        width: 50%;
+        width: 25%;
         text-align: center;
         padding: 3px 0;
         font-weight: bold;
+        min-width: 25%;
+        transition: 300ms;
 
     }
 
@@ -143,12 +175,8 @@
         background: #fff;
         box-shadow: 0 0 10px #C5C5C5;
         border-radius: 9px;
-        margin: 7px auto 8px;
+        margin: 15px auto ;
 
-    }
-
-    .wrapper-section{
-        padding: 8px 0 7px;
     }
 
     /*user image*/
@@ -440,11 +468,64 @@
         font-weight: bold;
 
     }
+    
+    .default-images{
 
+        text-align: center;
+        border: 3px dashed;
+        border-radius: 3px;
+        padding: 19px 0px;
+        font-size: 15px;
+        font-weight: bold;
+        color: #d2d2d2;
 
+    }
+    
+    .default-images i{
 
+        display: block;
+        font-size: 50px;
+        margin: 6px auto;
+        
+    }
 
-    @media only  screen and (max-width: 1080px) {
+    .images-content i.fa-close{
+
+            position: absolute;
+            color: red;
+
+    }
+
+    .small-description{
+        font-size: 12px;
+        color: #BDC4CC;
+    }
+
+    .images-content > article{
+        padding: 5px;
+    }
+
+    .images-content .image-item {
+        transition: 300ms;
+        top: 0;
+        overflow: hidden;
+        border-radius: 3px;
+        position: relative;
+        height: 115px;
+
+    }
+
+    .images-content .image-item img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: initial;
+    height: 100%;
+    min-width: 100%;
+}
+    @media  screen and (max-width: 1120px) {
 
         .label-radio {
             padding: 0 25px 0 11px;
@@ -508,6 +589,31 @@
 
         }
 
+        .link-help{
+            padding: 0 15px;
+        }
+
+        .form-control-wrapper {
+
+            margin-bottom: 7px;
+
+        }
+        .description {
+
+            margin: 8px auto 15px;
+
+        }
+
+        .activity-type {
+            padding: 0 15px;
+        }
+
+        .images-content .image-item {
+
+            height: 150px;
+
+        }
+
     }
 
     @media only screen and (max-width: 767px) {
@@ -537,7 +643,7 @@
             text-align: center;
         }
 
-        .main-wrapper {
+        .main-wrapper, main, .form-wrapper{
 
             padding: 0;
 
@@ -548,9 +654,24 @@
 
         }
 
+        .images-content .image-item {
+
+            height: 200px;
+
+        }
+
+
     }
 
+    @media only screen and (max-width: 512px) {
 
+        .images-content .image-item {
+
+            height: 150px;
+
+        }
+
+    }
 
 </style>
 
@@ -559,7 +680,6 @@
            
                 <header class="col-xs-12">
         
-
                           <div class="title col-xs-12">
 
                               <div class="row">
@@ -567,7 +687,7 @@
                                     <h1>ویرایش پروفایل</h1>
                                   </div>
                                   <div class="col-xs-12 col-sm-8">
-                                      <p>
+                                      <p v-if="completeProfileProgress <= 85">
                                           برای تکمیل فرایند ثبت نام، لطفا اطلاعات خود را کامل کنید
                                       </p>
                                   </div>
@@ -583,7 +703,9 @@
                                             میزان تکمیل پروفایل
                                         </p>
 
-                                        <span>50%</span>
+                                        <span>
+                                            {{completeProfileProgress}}%
+                                        </span>
                                         
                                     </div>
                                 </div>
@@ -598,8 +720,7 @@
                         
                         <div class="content-wrapper row">
 
-                                
-
+                            
                                 <div class="form-wrapper col-xs-12">
 
                                     <div class="user-image-wrapper col-xs-4 col-sm-2 pull-right">
@@ -607,6 +728,7 @@
                                             <div class="user-image">
 
                                                     <img 
+                                                  
                                                     v-if="currentUser.profile.profile_photo"
                                                     :src="str + '/' + currentUser.profile.profile_photo"
                                                          class="image-preview"
@@ -643,7 +765,7 @@
                                                 
                                                 <div class="row">
                                                     
-                                                    <div class="col-xs-12 col-md-4 pull-right">
+                                                    <div class="activity-type padding-0 col-xs-12 col-md-4 pull-right">
                                                         <p class="label-text">
                                                             نوع کاربری
                                                         </p>
@@ -652,11 +774,12 @@
                                                             <div class="label-radio">
 
                                                                   <input
-                                                                 
-                                                                   type="radio"
-                                                                   value="حقیقی" 
-                                                                   name="radio"
-                                                                   :checked="'p'  == 'p'"
+                                                                       @click="disableForm()"
+                                                                       type="radio"
+                                                                       value="0" 
+                                                                       name="radio"
+                                                                       :checked="0  == currentUser.profile.is_company"
+                                                                       v-model="currentUser.profile.is_company"
                                                                    />
 
                                                                   <span class="checkmark"></span>
@@ -669,21 +792,32 @@
 
                                                             <div class="label-radio">
 
-                                                              <input type="radio" 
-                                                            
-                                                              value="حقوقی" 
-                                                              :checked="'آقا'  == sex"
-                                                              name="radio"
+                                                                  <input  type="radio" 
+                                                                          @click="enableForm()"
+                                                                          value="1" 
+                                                                          :checked="1  == currentUser.profile.is_company"
+                                                                          name="radio"
+                                                                          v-model="currentUser.profile.is_company"
+                                                                  >
+                                                                  <span class="checkmark"></span>
 
-                                                              >
-                                                              <span class="checkmark"></span>
-                                                              <label>
-                                                              حقوقی
-                                                              </label>
+                                                                  <label>
+                                                                  حقوقی
+                                                                  </label>
+
                                                             </div>
 
                                                         </div>
-                                                            
+                                                         
+ 
+                                                        <div class="error-message">
+
+                                                            <span 
+                                                                  v-if="errors.is_company"     
+                                                                  v-text="errors.is_company[0]"
+                                                                > </span> 
+
+                                                        </div>  
 
                                                     </div>
 
@@ -691,47 +825,62 @@
 
                                                        <div class="row">
 
-                                                            <div class="col-xs-12 col-sm-6 pull-right">
+                                                                    <div class="form-control-wrapper  col-xs-12 col-sm-6 pull-right">
 
-                                                                <p class="label-text">
-                                                                    نام شرکت
-                                                                </p>
+                                                                        <p class="label-text">
+                                                                            نام شرکت
+                                                                        </p>
 
-                                                                <div 
-                                                                class="input-wrapper company-name-wrapper"
-                                                                >
+                                                                        <div 
+                                                                        class="input-wrapper company-name-wrapper"
+                                                                        >
 
-                                                                <input 
-                                                                id="company-name" 
-                                                                type="text"
-                                                                class="dire disabled"
-                                                                placeholder="نام شرکت"
-                                                                readonly
-                                                                >
+                                                                        <input 
+                                                                           type="text"
+                                                                           id="company-name"
+                                                                           name="company-name"
+                                                                           placeholder="نام شرکت"
+                                                                           v-model="currentUser.profile.company_name"
+                                                                           :disabled="!formEnabled"
+                                                                           :class="{'disabled' : formEnabled == false , 'active' : currentUser.profile.company_name.length}"
+                                                                        >
 
-                                                                </div>
+                                                                        </div>
 
-                                                            </div>
+                                                                        <div class="error-message">
+                                                                                 <span v-if="errors.company_name"
+                                                                                      v-text="errors.company_name[0]"
+                                                                                 ></span>
+                                                                        </div>
 
-                                                            <div class="col-xs-12 col-sm-6">
-                                                                
-                                                                <p class="label-text">
-                                                                    شماره ثبت شرکت
-                                                                </p>
+                                                                     </div>
 
-                                                                <div 
-                                                                class="input-wrapper company-name-wrapper"
-                                                                >
-                                                                
-                                                                <input 
-                                                                id="company-name" 
-                                                                type="text"
-                                                                class="dire disabled"
-                                                                placeholder="شماره ثبت "
-                                                                readonly
-                                                                >
+                                                                    <div class="form-control-wrapper col-xs-12 col-sm-6">
+                                                                        
+                                                                        <p class="label-text">
+                                                                            شماره ثبت شرکت
+                                                                        </p>
 
-                                                                </div>
+                                                                        <div 
+                                                                        class="input-wrapper company-number-wrapper"
+                                                                        >
+                                                                        
+                                                                        <input 
+                                                                           id="company-number"
+                                                                           type="tel"
+                                                                           name="company-number"
+                                                                           placeholder="شماره ثبت شرکت"
+                                                                           v-model="currentUser.profile.company_register_code"
+                                                                           :disabled="!formEnabled"
+                                                                           :class="{'disabled' : formEnabled == false , 'active' : currentUser.profile.company_register_code.length}"
+                                                                        >
+
+                                                                        <div class="error-message">
+                                                                             <span v-if="errors.company_register_code"
+                                                                                  v-text="errors.company_register_code[0]"
+                                                                             ></span>
+                                                                        </div>
+                                                             </div>
 
                                                             </div>
 
@@ -747,31 +896,38 @@
                                             
                                         <div class="row">
 
-                                            <div class="form-wrapper col-xs-12 col-md-8 pull-left">
+                                            <div class=" col-xs-12 col-md-8 pull-left">
 
                                                <div class="row">
-                                                    <div class="col-xs-6 pull-right">
+                                                    <div class="form-control-wrapper col-xs-6 pull-right">
                                                           
                                                                 <p class="label-text">
                                                                     شماره شما
                                                                 </p>
 
                                                                 <div 
-                                                                class="input-wrapper company-name-wrapper"
+                                                                class="input-wrapper phone-number-wrapper"
                                                                 >
                                                                 
                                                                 <input 
                                                                     id="phone-number" 
-                                                                    type="number"
+                                                                    type="tel"
                                                                     class="dire"
                                                                     placeholder="09123456789"
                                                                     pattern="[0-9]*"
+                                                                    v-model="currentUser.profile.public_phone"
+                                                                    :class="{'active' : currentUser.profile.public_phone.length}"
                                                                 >
 
-                                                                </div>
+                                                                 <div class="error-message">
+                                                                      <span v-if="errors.public_phone"
+                                                                           v-text="errors.public_phone[0]"
+                                                                      ></span>
+                                                                 </div>
+                                                        </div>
                                                     </div>
 
-                                                    <div class="col-xs-6">
+                                                    <div class="col-xs-6 form-control-wrapper ">
                                                         
                                                             <p class="label-text">
                                                                     آدرس
@@ -786,10 +942,17 @@
                                                                 type="text"
                                                                 class="dire "
                                                                 placeholder="آدرس شما"
-                                                                
+                                                                v-model="currentUser.profile.address"
+                                                                :class="{'active' : currentUser.profile.address.length}"
                                                                 >
 
+                                                                 <div class="error-message">
+                                                                     <span v-if="errors.address"
+                                                                          v-text="errors.address[0]"
+                                                                     ></span>
                                                                 </div>
+
+                                                        </div>
 
 
                                                     </div>
@@ -819,8 +982,9 @@
                                          rows="3"
                                          id="description"
                                          class="dire "
-                                         placeholder="آدرس شما"
-                                                                
+                                         placeholder="آ درباره کسب و کارتان بنویسید "
+                                         v-model="currentUser.profile.description" 
+                                         :class="{'active' : currentUser.profile.description}"                
                                          ></textarea> 
 
                                          </div>
@@ -828,7 +992,7 @@
 
                                     </div>
 
-                                    <div class="link-help col-xs-12  col-md-4">
+                                    <div class="link-help padding-0 col-xs-12  col-md-4">
                                         <a href="#">
                                             نمونه پروفایل تکمیل شده
                                              <i class="fa fa-question"></i>
@@ -842,6 +1006,148 @@
 
                         </div>
 
+
+
+
+                        <div class="content-wrapper row">
+
+              
+
+                            <div class="col-xs-12 col-sm-6  pull-right">
+
+                                <label>
+                                    افزودن تصاویر مربوطه <span class="small-description">(محصولات | شرکت | کارکنان)</span> </label>
+
+                                <UploadFile
+                                        uploadName = "related_files"
+                                        uploadAccept = "image/*"
+                                        :uploadMinSize = "1024"
+                                        :uploadSize = "1024 * 1024 * 10"
+                                        :uploadMultiple = "true"
+                                        :uploadDrop = "true"
+                                        :uploadDropDirectory = "true"
+                                        :uploadAddIndex = "false"
+                                        :uploadThread = "3"
+                                        :uploadOCompress = "1024 * 1024"
+                                        :uploadUploadAuto = "false"
+                                        :uploadRef="relatedFiles"
+                                />
+
+                            </div>
+
+
+                             <div class="col-xs-12 col-sm-6 pull-left">
+
+                                <label>
+                                    تصاویر ثبت شده 
+                                </label>
+
+                                <div class="row">
+                                    <div class="images-content col-xs-12" >
+                                       
+                                       <article class="col-md-4 col-xs-6 col-lg-3 pull-right"
+                                                      v-for="photo in currentUser.relateds"
+                                                      v-if="currentUser.relateds.length"
+                                                      >
+
+<!--                                             <a href="#">
+                                                <i class="fa fa-close"></i>
+                                            </a> -->
+
+                                            <div class="image-item">
+                                                <img :src=" str + '/' + photo" alt="">
+                                            </div>
+
+                                        </article> 
+
+                                         <div v-else  class="default-images">
+                                            <i class="fa fa-picture-o"></i>
+                                            هنوز تصویری ثبت نشده است
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                            <div class="content-wrapper row">
+
+              
+
+                            <div class="col-xs-12 col-sm-6  pull-right">
+
+                                <label>
+                                     افزودن گواهی های مربوطه <span class="small-description">(گواهی های ثبت شرکت | استاندارد محصول)</span>
+                                 </label>
+
+                                 <UploadFile
+                                        uploadName = "certificate_files"
+                                        uploadAccept = "image/*"
+                                        :uploadMinSize = "1024"
+                                        :uploadSize = "1024 * 1024"
+                                        :uploadMultiple = "true"
+                                        :uploadDrop = "true"
+                                        :uploadDropDirectory = "true"
+                                        :uploadAddIndex = "false"
+                                        :uploadThread = "3"
+                                        :uploadOCompress = "1024 * 1024"
+                                        :uploadUploadAuto = "false"
+                                        :uploadRef="certificateFiles"
+                                 />
+
+                            </div>
+
+
+                             <div class="col-xs-12 col-sm-6 pull-left">
+
+                                <label>
+                                    تصاویر ثبت شده 
+                                </label>
+
+                                <div class="row">
+                                    <div class="images-content col-xs-12" >
+                                         <article
+                                                  v-if="currentUser.certificates.length"  
+                                                  class="col-md-4 col-xs-6 col-lg-3 pull-right"
+                                                  v-for="photo in currentUser.certificates">
+                                          <!--   <a href="#">
+                                                <i class="fa fa-close"></i>
+                                            </a> -->
+                                            <div class="image-item">
+
+                                                <img :src=" str + '/' + photo" alt="">
+
+                                            </div>
+
+                                        </article> 
+                                        <div v-else  class="default-images">
+                                            <i class="fa fa-picture-o"></i>
+                                            هنوز تصویری ثبت نشده است
+                                        </div>
+
+                                        
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-xs-12 col-md-3 col-sm-4 pull-right">
+
+                             <div class="row">
+                                    
+                                  <button class="submit-button active"  @click="RegisterBasicProfileInfo">
+                                     ثبت تغییرات
+                                 </button> 
+
+                             </div>
+
+                        </div>
+
                     </section>
 
                 </main>
@@ -850,16 +1156,22 @@
 
 <script>
     import {eventBus} from "../../../../router/dashboard_router";
-
+    import UploadFile from '../../upload-image'
 
     export default {
         props: [
             'str',
             'defultimg'
         ],
+        components:{
+
+            UploadFile
+
+        },
         data: function () {
             return {
-                currentUser: {
+                
+                currentUser:{
                     profile: {
                         is_company: '',
                         company_name:'',
@@ -871,6 +1183,8 @@
                         shaba_code:'',
                     },
                     user_info: '',
+                    relateds:'',
+                    certificates : ''
                 },
                 profileBasicFields: [
                     'is_company',
@@ -881,23 +1195,58 @@
                     'postal_code',
                     'shaba_code',
                 ],
+                profileComplementaryFields: [
+                    'is_company',
+                    'company_name',
+                    'company_register_code',
+                    'public_phone',
+                    'description',
+                ],
                 profilePhoto: '',
                 errors: '',
                 popUpMsg: '',
-                items: [    ],
+                items: [],
+                relatedFiles: [],
+                certificateFiles: [],
+                formEnabled:false,
+                rankState:{
+                    is_company : 11,
+                    company_name : 11,
+                    company_register_code : 11,
+                    public_phone: 11,
+                    address: 11,
+                    description: 11,
+                    profile_photo: 11,
+                    certificates: 11,
+                    relateds: 11,
+                },
+                completeProfileProgress:0,
+                uploadPercentage:0,
+
             }
         },
         methods: {
             init: function () {
                 this.isLoaded = true;
+                 $('input[type="file"]').imageuploadify();
+                 var self = this;
                 axios.post('/user/profile_info')
-                    .then(response => (this.currentUser = response.data));
+                    .then(function(response){
+                        self.currentUser = response.data;
+                        self.sumProgressNumber();
+                      
+
+                    });
+
+                
             },
             RegisterBasicProfileInfo: function () {
+
                 eventBus.$emit('submiting', true);
                 this.errors = '';
                 var self = this;
                 var data = new FormData();
+               
 
                 for (var i = 0, cnt = this.profileBasicFields.length; i < cnt; i++) {
                     if (this.currentUser.profile[this.profileBasicFields[i]] != null){
@@ -905,14 +1254,50 @@
                     }
                 }
 
+                // Complementary  form check
+                
+
+                for (var i = 0; i < this.profileComplementaryFields.length; i++){
+                    if (this.profileComplementaryFields[i] === 'description' && (this.currentUser.profile['description'] == null || this.currentUser.profile['description'] === '')) {
+                        continue;
+                    }
+                    data.append(this.profileComplementaryFields[i], this.currentUser.profile[this.profileComplementaryFields[i]]);
+                }
+
+                for (var i = 0; i < this.relatedFiles.length; i++) {
+                    let file = this.relatedFiles[i];
+                    data.append('related_' + i, file);
+                }
+
+                for (var i = 0; i < this.certificateFiles.length; i++) {
+                    let file = this.certificateFiles[i];
+                    data.append('certificate_' + i, file);
+                }
+
+                data.append('related_image_count', this.relatedFiles.length);
+                data.append('certificate_image_count', this.certificateFiles.length);
+
+                // end Complementary  form check
+
+
+
                 let profilePhoto = this.$refs.profilePhoto.files[0];
                 if (profilePhoto) {
                     data.append('profile_photo', profilePhoto);
                 }
 
-                axios.post('/user/profile_modification', data)
+                axios.post('/user/profile_modification', data , {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Content-Type': 'application/json',
+                    },
+                    onUploadProgress: function(progressEvent) {
+                        this.uploadPercentage = parseInt( Math.round( ( progressEvent.loaded * 100 ) / progressEvent.total ) );
+                      }.bind(this)
+                    })
                     .then(function (response) {
                         if (response.status === 200) {
+
                             eventBus.$emit('submiting', false);
                             self.popUpMsg = 'تغییرات با موفقیت اعمال شد';
                             eventBus.$emit('submitSuccess', self.popUpMsg);
@@ -953,11 +1338,13 @@
                 var companyNumber = $("#company-number");
                 var companyName = $("#company-name");
 
-                this.currentUser.profile.company_register_code = null;
-                this.currentUser.profile.company_name = null;
+
+                this.currentUser.profile.company_register_code = '';
+                this.currentUser.profile.company_name = '';
 
                 companyNumber.attr('disabled', true);
                 companyName.attr('disabled', true);
+                this.formEnabled = false;
             },
             enableForm: function () {
                 var companyNumber = $("#company-number");
@@ -965,18 +1352,81 @@
                 companyName.val('');
                 companyNumber.prop('disabled', false);
                 companyName.prop('disabled', false);
-            }
+                this.formEnabled = true;
+            },
+            sumProgressNumber(){
+
+                this.completeProfileProgress = 0 ;
+
+                if (this.currentUser.profile.is_company) {
+
+                    this.completeProfileProgress += this.rankState.is_company;
+
+                }
+                 if (this.currentUser.profile.company_name) {
+
+                    this.completeProfileProgress += this.rankState.company_name;
+                
+                }
+                 if (this.currentUser.profile.company_register_code) {
+
+
+                    this.completeProfileProgress += this.rankState.company_register_code;
+
+                }
+                 if (this.currentUser.profile.address) {
+
+
+                    this.completeProfileProgress += this.rankState.address;
+
+                }
+                 if (this.currentUser.profile.public_phone) {
+
+
+                    this.completeProfileProgress += this.rankState.public_phone;
+
+                }
+                 if (this.currentUser.profile.description) {
+
+
+                    this.completeProfileProgress += this.rankState.description;
+
+                }
+                 if (this.currentUser.profile.profile_photo) {
+
+
+                    this.completeProfileProgress += this.rankState.profile_photo;
+
+                }
+                   
+                 if (this.currentUser.certificates.length) {
+
+                    this.completeProfileProgress += this.rankState.certificates;
+                 
+
+                }
+                 if (this.currentUser.relateds.length) {
+
+                    this.completeProfileProgress += this.rankState.relateds;
+                  
+
+                }
+                 
+            },
+        
+                
         },
         mounted(){
             this.init();
             eventBus.$emit('subHeader', this.items);
-
+            var self = this;
             function show_image_preview(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
                     var image = $('.image-preview');
                     var iconProfile = $('#icon-pro');
                     reader.onload = function (e) {
+                     
                         image.attr('src', e.target.result);
                         image.css('display', 'inline');
                         iconProfile.css('display', 'none');
@@ -1004,6 +1454,24 @@
         },
         created(){
             gtag('config','UA-129398000-1',{'page_path': '/profile-basic'});
+        },
+        watch:{
+            uploadPercentage:function(){
+                eventBus.$emit('uploadPercentage', this.uploadPercentage);
+            },
+            'currentUser.profile.is_company':function(value){
+
+                if (value == 1) {
+                    this.enableForm();
+                }else{
+                    this.disableForm();
+                }
+            },
+            completeProfileProgress:function(value){
+                 
+                $('.custom-progress').css('width',value + '%')
+
+            },
         }
     }
 
