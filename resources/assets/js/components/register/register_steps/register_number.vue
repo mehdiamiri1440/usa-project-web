@@ -138,7 +138,7 @@
 			     		id="phone-number" 
 			     		type="tel"
 			     		class="dire"
-			     	    placeholder="09123456789"
+			     	    placeholder="شماره موبایل"
 			     	    pattern="[0-9]*"
 			     		>
 
