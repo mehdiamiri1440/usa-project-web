@@ -121,6 +121,7 @@
     }
 
     input.error {
+    		color: #333;
 		border-color: #e41c38;
     }
 

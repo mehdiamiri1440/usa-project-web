@@ -36,6 +36,9 @@
     	position: relative;
     }
 
+     input{
+    	box-shadow: none !important;
+    }
     input{
     	width: 100%;
 
@@ -88,6 +91,7 @@
     }
 
     input.error {
+    	color: #333;
 		border-color: #e41c38;
     }
 
@@ -173,7 +177,6 @@
 		},
 		methods:{
 			 getPhoneNumber(){
-
 			 	this.$parent.step2.phone = this.phoneNumber;
 			 	this.$parent.sendPhoneVerificationCode();
 
@@ -182,6 +185,8 @@
 	    watch: {
 	  	  'phoneNumber': function(value) {
 	  	  	this.$parent.errors.phone = '';
+	  	  				 	console.log(this.phoneNumber)
+
 	  	    if(this.phoneNumber.length >= 11){
 	  	   	 	this.phoneNumber = this.phoneNumber.substring(0,11);
 	  	   		

@@ -906,7 +906,7 @@
                                                                     id="phone-number" 
                                                                     type="tel"
                                                                     class="dire"
-                                                                    placeholder="09123456789"
+                                                                    placeholder="شماره موبایل"
                                                                     pattern="[0-9]*"
                                                                     v-model="currentUser.profile.public_phone"
                                                                     :class="{'active' : currentUser.profile.public_phone}"

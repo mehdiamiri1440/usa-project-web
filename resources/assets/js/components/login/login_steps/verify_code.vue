@@ -1,4 +1,4 @@
-<style scoped>
+	<style scoped>
 		
 	.submit-button{
 		background: #DDDDDD;
@@ -121,6 +121,7 @@
     }
 
     input.error {
+    		color: #333;
 		border-color: #e41c38;
     }
 
