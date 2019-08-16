@@ -835,7 +835,7 @@
                                                                            placeholder="نام شرکت"
                                                                            v-model="currentUser.profile.company_name"
                                                                            :disabled="!formEnabled"
-                                                                           :class="{'disabled' : formEnabled == false , 'active' : currentUser.profile.company_name.length}"
+                                                                           :class="{'disabled' : formEnabled == false , 'active' : currentUser.profile.company_name}"
                                                                         >
 
                                                                         </div>
@@ -865,7 +865,7 @@
                                                                            placeholder="شماره ثبت شرکت"
                                                                            v-model="currentUser.profile.company_register_code"
                                                                            :disabled="!formEnabled"
-                                                                           :class="{'disabled' : formEnabled == false , 'active' : currentUser.profile.company_register_code.length}"
+                                                                           :class="{'disabled' : formEnabled == false , 'active' : currentUser.profile.company_register_code}"
                                                                         >
 
                                                                         <div class="error-message">
@@ -909,7 +909,7 @@
                                                                     placeholder="09123456789"
                                                                     pattern="[0-9]*"
                                                                     v-model="currentUser.profile.public_phone"
-                                                                    :class="{'active' : currentUser.profile.public_phone.length}"
+                                                                    :class="{'active' : currentUser.profile.public_phone}"
                                                                 >
 
                                                                  <div class="error-message">
@@ -936,7 +936,7 @@
                                                                 class="dire "
                                                                 placeholder="آدرس شما"
                                                                 v-model="currentUser.profile.address"
-                                                                :class="{'active' : currentUser.profile.address.length}"
+                                                                :class="{'active' : currentUser.profile.address}"
                                                                 >
 
                                                                  <div class="error-message">
