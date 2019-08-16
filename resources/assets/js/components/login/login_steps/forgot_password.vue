@@ -69,24 +69,35 @@
     }
 
 
+
     input:focus ,  input:focus + i{
 		color: #333;
     }
 
     input.active{
+		border-color: #00C569;
+		color: #333;
+    }
+
+    input.active + i{
 		color: #00C569;
     }
 
     input.active:focus ,  input.active:focus + i , input.active + i {
-		color: #00C569;
+		border-color: #00C569;
     }
 
     input.error {
+		border-color: #e41c38;
+    }
+
+    input.error + i{
 		color: #e41c38;
     }
 
-    input.error:focus ,  input.error:focus + i , input.error + i {
-		color: #e41c38;
+
+    input.error:focus ,  input.error:focus + i  {
+		border-color: #e41c38;
     }
     .error-message{
 
@@ -121,9 +132,9 @@
 			     	<div class="input-wrapper phone-number-wrapper">
 			     		<input 
 			     		v-model="phoneNumber" 
-			     		:class="{'error' : $parent.errors.phone}" 
+			     		:class="{'error' : $parent.errors.phone , 'active' : phoneNumber.length >= 11}" 
 			     		id="phone-number" 
-			     		type="number"
+			     		type="tel"
 			     		class="dire"
 			     	    placeholder="09123456789"
 			     	    pattern="[0-9]*"
@@ -140,7 +151,9 @@
 			       	<p class="error-message">
 			       		<span  v-if="$parent.errors" v-text="$parent.errors[0]"></span>
 			       	</p>
-			        <button class="submit-button disabled " @click.prevent="getPhoneNumber()" >
+			        <button class="submit-button disabled "
+			          :class="{'active' : phoneNumber.length >= 11}"
+			          @click.prevent="getPhoneNumber()" >
 			        	ارسال کد تایید
 					</button>
 
@@ -165,33 +178,21 @@
 			 	this.$parent.sendPhoneVerificationCode();
 
 		 	 },
-		 	 checkPhoneIsfill(){
-		 	 	var element = $('#phone-number').val();
-		 	 	if (element.length >= 11) {
-	    			$('#phone-number').addClass('active');
-	    			$('.submit-button').removeClass('disabled').addClass('active');
-
-	    		}else{
-	    			$('#phone-number').removeClass('active');
-	    			$('.submit-button').removeClass('active').addClass('disabled');
-	    		}
-		 	 }
 		},
 	    watch: {
 	  	  'phoneNumber': function(value) {
 	  	  	this.$parent.errors.phone = '';
-	  	  	$('#phone-number').removeClass('active');
-	  	  	$('#phone-number').removeClass('error');
-
-	  	  	if(this.phoneNumber.length >= 11){
-	  	  		this.phoneNumber = this.phoneNumber.substring(0,11);
-	  	  		$('.submit-button').focus();
-	  	  	}
-	    	this.checkPhoneIsfill();
+	  	    if(this.phoneNumber.length >= 11){
+	  	   	 	this.phoneNumber = this.phoneNumber.substring(0,11);
+	  	   		
+	  	  	 }
 	      }
 	    },
 	    mounted(){	
-	    	this.checkPhoneIsfill();
+	    		    	
+	    	if (this.$parent.isOsIOS()) {
+	    		$('#phone-number').attr('type','text')
+	    	}
 	    }
 	}
 

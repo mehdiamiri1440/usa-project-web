@@ -74,20 +74,31 @@
     }
 
     input.active{
+		border-color: #00C569;
+		color: #333;
+    }
+
+    input.active + i{
 		color: #00C569;
     }
 
     input.active:focus ,  input.active:focus + i , input.active + i {
-		color: #00C569;
+		border-color: #00C569;
     }
 
     input.error {
+		border-color: #e41c38;
+    }
+
+    input.error + i{
 		color: #e41c38;
     }
 
-    input.error:focus ,  input.error:focus + i , input.error + i {
-		color: #e41c38;
+
+    input.error:focus ,  input.error:focus + i  {
+		border-color: #e41c38;
     }
+
     .error-message{
 
     	text-align: center;
@@ -123,9 +134,9 @@
 			     	<div class="input-wrapper phone-number-wrapper">
 			     		<input 
 			     		v-model="phoneNumber" 
-			     		:class="{'error' : $parent.errors.phone[0]}" 
+			     		:class="{'error' : $parent.errors.phone[0] , 'active' : this.phoneNumber.length >= 11}" 
 			     		id="phone-number" 
-			     		type="number"
+			     		type="tel"
 			     		class="dire"
 			     	    placeholder="09123456789"
 			     	    pattern="[0-9]*"
@@ -142,7 +153,9 @@
 			       	<p class="error-message">
 			       		<span  v-if="$parent.errors.phone" v-text="$parent.errors.phone[0]"></span>
 			       	</p>
-			        <button class="submit-button disabled " @click.prevent="getPhoneNumber()" >
+			        <button class="submit-button disabled"
+			        		:class="{'active' : this.phoneNumber.length >= 11}" 
+			         @click.prevent="getPhoneNumber()" >
 			        	ارسال کد تایید
 					</button>
 
@@ -163,44 +176,24 @@
 		methods:{
 			 getPhoneNumber(){
 				this.$emit("getPhoneNumber", this.phoneNumber);
-		  	 	if(this.$parent.errors.phone.length <= 0){
-		  	 		$('#phone-number').addClass('error');
-	    			$('.submit-button').removeClass('active').addClass('disabled');
-	    	
-		  	 	}else{
-		  	 		$('#phone-number').addClass('removeClass').addClass('active');
-	    			$('.submit-button').removeClass('active').addClass('disabled');
-	    	
-		  	 	}
-		 		
+		  	 	 		
 		 	 },
-		 	 checkPhoneIsfill(){
-		 	 	var element = $('#phone-number').val();
-		 	 	if (element.length >= 11) {
-	    			$('#phone-number').addClass('active');
-	    			$('.submit-button').removeClass('disabled').addClass('active');
-
-	    		}else{
-	    			$('#phone-number').removeClass('active');
-	    			$('.submit-button').removeClass('active').addClass('disabled');
-	    		}
-		 	 }
 		},
 	    watch: {
 	  	  'phoneNumber': function(value) {
 	  	  	this.$parent.errors.phone[0] = '';
-	  	  	$('#phone-number').removeClass('active');
-	  	  	$('#phone-number').removeClass('error');
 
 	  	  	if(this.phoneNumber.length >= 11){
 	  	  		this.phoneNumber = this.phoneNumber.substring(0,11);
-	  	  		$('.submit-button').focus();
+	  	  		
 	  	  	}
-	    	this.checkPhoneIsfill();
+
 	      }
 	    },
 	    mounted(){	
-	    	this.checkPhoneIsfill();
+	    	if (this.$parent.isOsIOS()) {
+	    		$('#phone-number').attr('type','text')
+	    	}
 	    }
 	}
 

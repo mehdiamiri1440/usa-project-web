@@ -1,10 +1,3 @@
-<style >
-        
-  /*      .sub-header{
-            display: none;
-        }*/
-
-</style>
 
 <style scoped>
     
@@ -978,14 +971,22 @@
                                          class="input-wrapper address-wrapper"
                                          >
                                                                 
-                                         <textarea
-                                         rows="3"
-                                         id="description"
-                                         class="dire "
-                                         placeholder="آ درباره کسب و کارتان بنویسید "
-                                         v-model="currentUser.profile.description" 
-                                         :class="{'active' : currentUser.profile.description}"                
-                                         ></textarea> 
+                                             <textarea
+                                             rows="3"
+                                             id="description"
+                                             class="dire "
+                                             placeholder=" درباره کسب و کارتان بنویسید "
+                                             v-model="currentUser.profile.description" 
+                                             :class="{'active' : currentUser.profile.description}"                
+                                             ></textarea> 
+
+
+
+                                            <div   class="error-message">
+                                                
+                                                <span v-if="errors.description"
+                                                      v-text="errors.description[0]"></span>
+                                            </div>
 
                                          </div>
 

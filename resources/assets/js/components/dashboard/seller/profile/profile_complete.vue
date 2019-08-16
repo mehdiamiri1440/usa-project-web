@@ -533,10 +533,12 @@
                 >
 
                 </textarea>
+                <div   class="text-danger">
+                    
+                    <span v-if="errors.description.length"
+                          v-text="errors.description[0]"></span>
+                </div>
 
-                <span v-if="errors.description"
-                      class="text-danger"
-                      v-text="errors.description[0]"></span>
             </div>
 
             <div class="image_company col-xs-12 ">

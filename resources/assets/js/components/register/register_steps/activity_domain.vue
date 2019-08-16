@@ -75,25 +75,31 @@
     }
 
 
-    input:focus ,  input:focus + i{
+    input.active{
+		border-color: #00C569;
 		color: #333;
     }
 
-    input.active{
+    input.active + i{
 		color: #00C569;
     }
 
     input.active:focus ,  input.active:focus + i , input.active + i {
-		color: #00C569;
+		border-color: #00C569;
     }
 
     input.error {
+		border-color: #e41c38;
+    }
+
+    input.error + i{
 		color: #e41c38;
     }
 
-    input.error:focus ,  input.error:focus + i , input.error + i {
-		color: #e41c38;
+    input.error:focus ,  input.error:focus + i  {
+		border-color: #e41c38;
     }
+
     .error-message{
 
     	text-align: center;
@@ -481,7 +487,7 @@
 			       		<span  v-if="$parent.errors.category_id[0]" v-text="$parent.errors.category_id[0]"></span>
 			       	</p>
 
-			        <button class="submit-button disabled " @click.prevent="sbumitForm()" >
+			        <button class="submit-button disabled " @click.prevent="nextStep()" >
 					ثبت نهایی
 					</button>
 
@@ -502,7 +508,7 @@
 			}
 		},
 		methods:{
-			 sbumitForm(){
+			 nextStep(){
 					this.checkfildsIsCurrect();
 					this.$parent.submitForm();
 		 	 },
@@ -528,8 +534,7 @@
 			 	 	
 		 	 },
 		 	 fildsIsFill(){
-		 	 	console.log(this.$parent.step4.categoryId);
-		 	 	console.log(this.activityType)
+
 		 	 	 if(this.activityType != '' && this.$parent.step4.categoryId != ''){
 		 	 	 	   $('.submit-button').removeClass('disabled').addClass('active');
 		 	 	 	   $('#activity-domain').addClass('active').removeClass('error')
