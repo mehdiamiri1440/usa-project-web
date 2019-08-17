@@ -7,6 +7,7 @@
     }
     .green-button.edit-product {
         background: #000546;
+        width: 100%;
     }
 
     .green-button:focus {

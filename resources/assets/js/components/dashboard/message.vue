@@ -30,7 +30,7 @@
     }
 
     .little-main .main-content {
-        padding: 110px 80px 0 0;
+        padding: 65px 80px 0 0;
     }
 
     .contact-title {
@@ -189,6 +189,16 @@
         border-bottom: 2px solid #F2F2F2;
     }
 
+    .message-contact-title a{
+        color: #333;
+        transition: 300ms;
+    }
+
+    .message-contact-title a:hover{
+        color: #00c569;
+        transition: 300ms;
+    }
+    
     .message-wrapper .message-contact-title-img {
         width: 55px;
         height: 55px;
@@ -373,7 +383,7 @@
 
     @media screen and (max-width: 992px) {
         .main-content {
-            padding: 110px 0 0;
+            padding: 65px 0 0;
         }
     }
 
@@ -394,7 +404,7 @@
         }
 
         .main-content {
-            padding: 110px 0 0;
+            padding: 65px 0 0;
         }
 
         .hidden_element {

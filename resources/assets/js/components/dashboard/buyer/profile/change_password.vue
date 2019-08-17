@@ -216,10 +216,6 @@
         direction: rtl;
     }
 
-    .main-content {
-        padding: 60px 15px;
-    }
-
     .img-profile {
         text-align: center;
     }
@@ -273,7 +269,6 @@
     }
 
     .main-profile {
-        border-right: 1px solid #eff3f6;
         text-align: right;
         direction: rtl;
         overflow: hidden;
