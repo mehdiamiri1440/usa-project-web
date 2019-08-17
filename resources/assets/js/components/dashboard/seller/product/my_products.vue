@@ -28,8 +28,30 @@
     .main-content-item {
         box-shadow: none;
     }
+    .title {
+        text-align: right;
+        padding: 13px 15px 0;
+
+    }
+
+    .title h1 {
+
+        font-size: 18px;
+        font-weight: bold;
+
+    }
 
     @media screen and (max-width: 767px) {
+
+        .title {
+            text-align: center;
+
+        }
+
+        .detail-success {
+            max-width: 300px;
+            margin: 0 auto;
+        }
         .main-content-item {
             padding: 0;
         }
@@ -79,9 +101,27 @@
 </style>
 <template>
     <div>
-        <main id="main" class="col-sm-12">
+        <main id="main-content" class="col-sm-12">
             <div class="contents">
+
                 <div v-if="products.length > 0">
+
+                    <div  class="title col-xs-12">
+
+                        <div  class="row">
+
+                            <div  class="col-xs-12 col-sm-4 pull-right">
+
+                                <h1>
+                                     محصولات من
+                                </h1>
+
+                            </div> 
+
+                        </div>
+
+                    </div>
+
                     <ProductArticle
                             v-for="(product,productIndex) in products"
                             :key="product.main.id"

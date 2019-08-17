@@ -76,7 +76,7 @@ select#bd-month-first-date-id option {
 }
 
 .bd-table thead tr, .bd-goto-today {
-    background: #28a745;
+    background: #00c569;
 }
 .bd-dropdown{
     width: 50%;
@@ -166,7 +166,7 @@ select#bd-month-end-date-id option {
 }
 
 .bd-table thead tr, .bd-goto-today {
-    background: #28a745;
+    background: #00c569;
 }
 .bd-dropdown{
     width: 50%;

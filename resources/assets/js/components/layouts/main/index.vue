@@ -242,7 +242,7 @@
 
     .custom-navbar .nav li a:hover {
         background: transparent;
-        color: #4dc11d;
+        color: #00c569;
     }
 
     .custom-navbar .navbar-nav > li > a:hover,
@@ -252,7 +252,7 @@
 
     .custom-navbar .nav li.active > a {
         background-color: transparent;
-        color: #4dc11d;
+        color: #00c569;
     }
 
     .custom-navbar .navbar-toggle {
@@ -265,7 +265,7 @@
     }
 
     .custom-navbar .navbar-toggle .icon-bar {
-        background: #4dc11d;
+        background: #00c569;
         border-color: transparent;
     }
 
@@ -278,7 +278,7 @@
     }
 
     .ads:hover {
-        background-color: #4dc11d !important;
+        background-color: #00c569 !important;
         border-radius: 50px;
         text-align: center;
     }
@@ -613,8 +613,8 @@
     }
 
     #intro .btn-danger {
-        background: #4dc11d;
-        border-color: #4dc11d;
+        background: #00c569;
+        border-color: #00c569;
         color: #ffffff
     }
 
@@ -625,7 +625,7 @@
     }
 
     #intro .btn-default:hover {
-        background: #4dc11d;
+        background: #00c569;
         color: #ffffff;
         border-color: transparent;
     }
@@ -782,7 +782,7 @@
     }
 
     #detail hr {
-        border-bottom: 2px solid #4dc11d;
+        border-bottom: 2px solid #00c569;
         width: 42px;
     }
 
@@ -833,7 +833,7 @@
     }
 
     #feature .media .fa {
-        background-color: #4dc11d;
+        background-color: #00c569;
         border-radius: 2px;
         color: #ffffff;
         font-size: 22px;
@@ -876,7 +876,7 @@
 
     #video .fa {
         position: relative;
-        background-color: #4dc11d;
+        background-color: #00c569;
         border-radius: 100%;
         color: #ffffff;
         font-size: 38px;
@@ -1996,7 +1996,7 @@
                 var id = product.main.id;
                 var categoryName = product.main.category_name;
                 var subCategoryName = product.main.sub_category_name;
-                
+
                  return '/product-view/خرید-عمده-'
                     + subCategoryName.replace(' ', '-')
                     + '/'

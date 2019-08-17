@@ -32,7 +32,7 @@
         .green-bot {
             margin: 15px 0;
             display: inline-block;
-            background: #28a745;
+            background: #00C569;
             color: #f5f5f5;
             padding: 10px 35px;
             border-radius: 3px;

@@ -1,7 +1,7 @@
 <style scoped>
     .btn-crop{
         display: inline-block;
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         padding: 10px 35px;
         border-radius: 3px;
@@ -34,7 +34,7 @@
         position: relative;
     }
 
-   
+
     .actions-content {
         position: absolute;
         left: 0;
@@ -276,7 +276,7 @@
 
     .btn-primary {
         display: inline-block;
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         padding: 10px 35px;
         border-radius: 3px;
@@ -397,19 +397,19 @@
         <div v-show="$refs.upload && $refs.upload.dropActive" class="drop-active">
             <h3>Drop files to upload</h3>
         </div>
-      
+
                 <div class="col-xs-12 ">
                     <div class=" row wrapper-articles">
-                        
+
                         <article v-if="files.length > 0" v-for="(file, index) in files" :key="file.id"
                                  class=" col-md-4 col-xs-6 col-lg-3 pull-right article-images">
                             <div class="image">
                                 <img v-if="file.thumb" :src="file.thumb" width="40" height="auto"/>
                                 <span v-else>No Image</span>
                                 <div class="actions-content">
-                                    <a 
+                                    <a
                                        href="#"
-                                       class="edit-image" 
+                                       class="edit-image"
                                        @click.prevent="file.active || file.success || file.error === 'compressing' ? false :  onEditFileShow(file)"><i
                                             aria-hidden="true" class="fa fa-pencil"></i></a>
                                     <a class="delete" href="#" @click.prevent="$refs.upload.remove(file)"><i
@@ -436,9 +436,9 @@
                         ref="upload">
 
                 </file-upload>
-                          
+
                     </div>
-         
+
 
             </div>
 

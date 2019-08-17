@@ -69,7 +69,7 @@
     .green-button {
         margin: 15px 0 0;
         display: inline-block;
-        background: #28a745;
+        background: #00C569;
         color: #fff;
         padding: 10px 35px;
         border-radius: 3px;
@@ -229,7 +229,7 @@
         content: " ";
         height: 100%;
         width: 2px;
-        background: #00d614;
+        background: #00ac5c;
         position: absolute;
         right: 0;
         top: 0;
@@ -245,7 +245,7 @@
         content: " ";
         height: 100%;
         width: 2px;
-        background: #00d614;
+        background: #00C569;
         position: absolute;
         right: 0;
         top: 0;
@@ -401,7 +401,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background: #28a745;
+        background: #00C569;
         height: 3px;
         width: 100%;
     }
@@ -410,7 +410,7 @@
         content: " ";
         height: 100%;
         width: 2px;
-        background: #00d614;
+        background: #00ac5c;
         position: absolute;
         right: 0;
         top: 0;
@@ -466,6 +466,8 @@
 
         .show-header button {
             display: block;
+            background: #000546;
+            color: #fff;
         }
 
         .img-profile .submit {

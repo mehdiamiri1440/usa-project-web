@@ -12,7 +12,7 @@
     }
 
     .main-content {
-        padding: 110px 250px 0 0;
+        padding: 65px 250px 0 0;
 
         direction: rtl;
 
@@ -143,7 +143,7 @@
 
         width: 17px;
 
-        background: #28a745;
+        background: #00C569;
 
         color: #fff;
 
@@ -219,7 +219,7 @@
     .back-state .green-button {
         margin: 14px 0 0 25px;
         display: inline-block;
-        background: #28a745;
+        background: #00C569;
         color: #fff;
         padding: 5px 18px;
         border-radius: 3px;
@@ -796,6 +796,7 @@
 
             Echo.private('testChannel.' + userId)
                 .listen('newMessage', (e) => {
+                    console.log('harchi');
                     var senderId = e.new_message.sender_id;
                     //update contact list
                     self.loadContactList();

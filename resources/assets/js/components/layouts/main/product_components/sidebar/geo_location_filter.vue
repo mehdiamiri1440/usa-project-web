@@ -109,7 +109,7 @@
 
     </div>
 
-    
+
     <div v-else class="content-sidebar">
       <div class="title-widget">
             <span class="placeholder-content  content-half-width"></span>
@@ -192,7 +192,7 @@
                         setTimeout(function(){
                           self.fontIsLoad = true;
                         },500)
-                
+
             });
         }
     }

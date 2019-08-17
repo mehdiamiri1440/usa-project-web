@@ -1,5 +1,5 @@
 <style scoped>
-    
+
 
 
     .sidebar{
@@ -186,20 +186,19 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background: #28a745;
+        background: #00c569;
         height: 3px;
         width: 100%;
     }
 
     #main {
-      
+
         padding-top: 165px;
         position:relative;
 
     }
     .main-content{
           min-height: 900px;
-          transition: 200ms;
     }
 
     .main-content > h4 {
@@ -209,7 +208,7 @@
     .green-button {
         margin: 5px 0;
         display: inline-block;
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         padding: 10px 0;
         border-radius: 3px;
@@ -251,7 +250,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background: #28a745;
+        background: #00c569;
         height: 3px;
         width: 100%;
     }
@@ -524,7 +523,7 @@
                     <section class="main-content col-xs-12" v-if="products.length > 0  ">
                         <div class="row">
                            <div id="article-list">
-                               
+
                              <ProductArticle v-for="(product,productIndex) in products"
                                             v-if="products.length >= productIndex"
                                             :key="product.main.id"
@@ -642,7 +641,7 @@
 
 
                     <section v-else style="padding-top:0; "  class="padding-15-0  col-xs-12"
-                             
+
                              >
 
                              <div class="margin-15-0 default-item-wrapper shadow-content row">
@@ -660,7 +659,7 @@
                                         <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
 
                                          <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-                                          
+
 
                                  </div>
 
@@ -670,7 +669,7 @@
 
                                          <span class="default-main-image  placeholder-content"></span>
 
-                                     </div> 
+                                     </div>
 
                                       <br/>
 
@@ -687,7 +686,7 @@
 
                                          </div>
                                  </div>
-                             </div>        
+                             </div>
 
 
                           <div class="margin-15-0 default-item-wrapper shadow-content row">
@@ -705,7 +704,7 @@
                                         <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
 
                                          <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-                                          
+
 
                                  </div>
 
@@ -715,7 +714,7 @@
 
                                          <span class="default-main-image  placeholder-content"></span>
 
-                                     </div> 
+                                     </div>
 
                                       <br/>
 
@@ -732,7 +731,7 @@
 
                                          </div>
                                  </div>
-                             </div>        
+                             </div>
 
 
 
@@ -752,7 +751,7 @@
                                         <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
 
                                          <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-                                          
+
 
                                  </div>
 
@@ -762,7 +761,7 @@
 
                                          <span class="default-main-image  placeholder-content"></span>
 
-                                     </div> 
+                                     </div>
 
                                       <br/>
 
@@ -779,20 +778,20 @@
 
                                          </div>
                                  </div>
-                             </div>        
+                             </div>
 
-                            
+
                     </section>
                 </div>
-      
+
 
                 <aside id="sidebar" class=" product-sidebar sidebar hidden-xs  hidden-sm col-md-3">
 
                     <div class="row">
-                        
+
                         <div class="sidebar__inner col-xs-12" style="position: relative;">
-                              
-                    
+
+
                             <ProductAsideCategories
                                     :productsInfo="products"
                                     :categoryId="categoryId"
@@ -801,7 +800,7 @@
                                     :cityId="cityId"
                                     v-on:productsToParent="filterProducts($event)"
                             />
-           
+
 
                      </div>
 
@@ -909,7 +908,7 @@
                             axios.post('/user/get_product_list', {
                                 from_record_number: 0,
                                 to_record_number: self.productCountInPage,
-                          
+
                             }).then(function (response) {
                                 self.products = response.data.products;
                                 self.loading = false;
@@ -1000,7 +999,7 @@
                 }
             },
             resetFilter: function () {
-              
+
 
                 eventBus.$emit('submiting', true);
 
@@ -1080,7 +1079,7 @@
             },
             sidebarScroll() {
 
-            
+
                 var sidebarStopper = $('#wrap-footer').height();
 
                    var sidebar = new StickySidebar('#sidebar', {
@@ -1088,7 +1087,7 @@
                         innerWrapperSelector: '.sidebar__inner',
                         topSpacing: 160,
                         resizeSensor: true,
-                            
+
                     });
 
             }

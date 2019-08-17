@@ -66,11 +66,11 @@
     }
 
     .content-sidebar h4 a:hover, .sub-category-product a:hover {
-        color: #28a745;
+        color: #00c569;
         transition: 300ms;
     }
      .sub-category-product a.active {
-        color: #28a745;
+        color: #00c569;
 
     }
     .list-open .button-toggle i {
@@ -212,11 +212,11 @@
                        setTimeout(function(){
                          for (var i = 0 ; i < self.categoryList.length ; i++) {
                                 for (var j = 0 ; j < self.categoryList[i].subcategories.length; j++) {
-                                     if (self.categoryList[i].subcategories[j].category_name === 
+                                     if (self.categoryList[i].subcategories[j].category_name ===
                                         categoryParameterName) {
-                                    
+
                                         self.collapseMethod(self.categoryList[i].id , i , self.categoryList[i].subcategories.length);
-                                       
+
                                      }
                                 }
 
@@ -226,14 +226,14 @@
                     },500);
             },
             collapseMethod: function (id, index, listItems) {
-              
+
 
                 var wrapperlistElemetn = $(' aside .collapse-category-' + id);
                 var listElemetn = $('aside .collapse-category-' + id + ' .sub-category-product');
                 var buttonElemetn = $('aside .collapse-category-' + id + ' button span');
                 var initialHeight = this.categoryList[index].subcategories.length * 22;
-             
-               
+
+
                if (this.checkListHeight(id,listItems) !==  true) {
 
                    if (listElemetn.hasClass('little')) {
@@ -269,11 +269,11 @@
                       return v === 'بستن' ? 'مشاهده بیشتر' : 'بستن'
                   });
 
-               
+
                }
 
-              
-             
+
+
             },
             checkListHeight(id,listItems){
 
@@ -299,18 +299,18 @@
                 var elementClass = '';
                 var elementLenght = null;
                 var buttonFilter = '';
-               
+
                 for (var i = 0; i < elements.length; i++) {
-               
+
                   elementClass  = $(elements[i]).attr('class');
                   elementLenght = $('.' + elementClass + ' .sub-category-item').length ;
                   buttonFilter = $(' .' + elementClass + ' .green-button.button-toggle');
 
-                      
+
                       if (elementLenght < 3) {
-                        
+
                          buttonFilter.css('display','none');
-                        
+
                       }
                 }
             }
@@ -320,16 +320,16 @@
                var self = this;
 
               document.fonts.ready.then(function () {
-            
+
                    self.fontIsLoad = true;
                    console.log(self.fontIsLoad)
-                        
+
               });
-             
+
         },
         updated(){
             this.checkListHeightUpdate();
-         
+
         }
 
     }

@@ -29,7 +29,7 @@
 
     .sidebar-buttons div > a:first-of-type {
         color: #fff;
-        background: #28a745;
+        background: #00C569;
     }
 
     .right-sidebar > div {
@@ -47,11 +47,11 @@
 
 <template>
            <div>
-            
+
 
                <CategoryFilter />
                <GeoLocationFilter />
-           
+
            </div>
 </template>
 
@@ -81,7 +81,7 @@
                 provinceList: '',
                 cityList: '',
                 products: this.productsInfo,
-            
+
             }
         },
         methods:{
@@ -138,9 +138,9 @@
 
         },
         mounted() {
-             
+
             this.scrull_css_header();
-            
+
         },
     }
 </script>

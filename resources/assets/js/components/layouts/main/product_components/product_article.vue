@@ -94,6 +94,7 @@
     .main-image {
         float: right;
         direction: ltr;
+        padding: 0
     }
 
     .load-more-button a {
