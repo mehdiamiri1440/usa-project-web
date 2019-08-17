@@ -118,6 +118,7 @@
 
     .title{
         padding: 13px 15px;
+
     }
 
     .title h1{
@@ -128,6 +129,7 @@
     .title p{
         color: #E41C38;
         padding-top: 4px;
+        text-align: center;
     }
 
     /*progress styles*/
@@ -676,12 +678,14 @@
                           <div class="title col-xs-12">
 
                               <div class="row">
-                                  <div class="col-xs-12 col-sm-4 pull-right"> 
+                                  <div class="col-xs-12 col-sm-3 pull-right"> 
                                     <h1>ویرایش پروفایل</h1>
                                   </div>
-                                  <div class="col-xs-12 col-sm-8">
+                                  <div class="col-xs-12 col-sm-9">
                                       <p v-if="completeProfileProgress <= 85">
-                                          برای تکمیل فرایند ثبت نام، لطفا اطلاعات خود را کامل کنید
+                                          
+                                      برای ارتباط مستقیم با خریداران و صادر کنندگان و فروش بیشتر محصولات، پروفایل خود را تکمیل کنید
+
                                       </p>
                                   </div>
                               </div>
@@ -895,7 +899,7 @@
                                                     <div class="form-control-wrapper col-xs-6 pull-right">
                                                           
                                                                 <p class="label-text">
-                                                                    شماره شما
+                                                                    شماره تماس عمومی
                                                                 </p>
 
                                                                 <div 
@@ -994,12 +998,15 @@
                                     </div>
 
                                     <div class="link-help padding-0 col-xs-12  col-md-4">
-                                        <a href="#">
+                                        <a href="https://www.incobac.com/profile/incobacs">
                                             نمونه پروفایل تکمیل شده
-                                             <i class="fa fa-question"></i>
+                                             <i class="fa fa-question-circle"></i>
                                         </a>
                                         <p>
-                                            من فروشنده محصولات کشاورزی در سامانه ی اینکوباک هستم. برای ارتباط با من رو دکمه ی ارسال پیام کلیک کنید. 
+                                            در بخش (درباره کسب و کارتان بنویسید) به این سوالات پاسخ دهید.
+                                            <br/>
+                                          
+1- چه محصولاتی برای فروش دارید؟ 2- میزان تولید ماهانه یا سالانه محصولات چقدر است ؟ 3- محصولات در چه زمانی از سال آماده فروش می باشند؟ 4- چند سال سابقه فعالیت دارید؟ 
                                         </p>
                                     </div>
 

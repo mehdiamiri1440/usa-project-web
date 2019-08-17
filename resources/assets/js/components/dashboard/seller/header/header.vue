@@ -70,6 +70,12 @@
         text-align: right;
     }
 
+    .list-inline > li {
+        display: inline-block;
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+    
     .green-button {
         margin: 15px 0 0;
         display: inline-block;
@@ -499,6 +505,8 @@
 
         .show-header button {
             display: block;
+            background: #000546;
+            color: #fff;
         }
 
         .img-profile .submit {
@@ -519,6 +527,14 @@
     }
 
     @media screen and (max-width: 768px) {
+
+        span.min {
+            display: inherit;
+        }
+
+        span.full {
+            display: none;
+        }
         .mobile-header .green-button {
             margin: 15px 0 0;
         }
@@ -549,13 +565,7 @@
     }
 
     @media screen and (max-width: 555px) {
-        span.min {
-            display: inherit;
-        }
 
-        span.full {
-            display: none;
-        }
 
         .right-menu-header {
             padding: 6px;
