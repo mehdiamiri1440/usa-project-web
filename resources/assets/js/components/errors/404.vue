@@ -18,7 +18,7 @@
     .green-button {
         margin: 15px 0;
         display: inline-block;
-        background: #28a745;
+        background: #00c569;
         color: #f5f5f5;
         padding: 10px 35px;
         border-radius: 3px;
@@ -48,7 +48,7 @@
 
     .botton-inco:hover {
         color: #fff;
-        background: #28a745;
+        background: #00c569;
     }
 
     .buttons {

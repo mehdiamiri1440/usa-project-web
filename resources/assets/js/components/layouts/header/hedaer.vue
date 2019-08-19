@@ -50,7 +50,7 @@
 
     .main_popup_content div > a:first-of-type {
         color: #fff;
-        background: #28a745;
+        background: #00C569;
     }
 
     .main-logo-popup {
@@ -62,7 +62,7 @@
     }
 
     .login-button {
-        background: #28a745;
+        background: #00C569;
 
         border-radius: 3px;
         transition: 300ms;
@@ -85,7 +85,7 @@
 
         display: inline-block;
 
-        background: #28a745;
+        background: #00C569;
 
         color: #fff;
 
@@ -383,7 +383,7 @@
                 deleteButtonText: '',
                 cancelButtonText: '',
                 ProductId: ''
-            
+
             }
         },
         props: [

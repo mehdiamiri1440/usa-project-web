@@ -14,7 +14,7 @@
     .valid-seller {
         font-size: 14px;
 
-        color: #28a745;
+        color: #00C569;
 
         border: 2px solid;
 

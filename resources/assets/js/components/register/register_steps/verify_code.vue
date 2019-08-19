@@ -121,6 +121,7 @@
     }
 
     input.error {
+    		color: #333;
 		border-color: #e41c38;
     }
 
@@ -250,8 +251,8 @@
 			       	<div class="timer-wrapper" v-if="$parent.step2.showTimer">
 
 			       	   <span>
-			       	   	دت اعتبار کد
-					   </span>
+			       	   	مدت اعتبار کد
+						</span>
 
                        <span class="text-green" v-text="$parent.step2.timeCounterDown"></span>
                        	<span>

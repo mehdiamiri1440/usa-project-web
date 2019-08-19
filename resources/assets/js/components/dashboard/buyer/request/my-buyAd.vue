@@ -15,7 +15,7 @@
     .green-button {
         margin: 15px 0;
         display: inline-block;
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         padding: 10px 35px;
         border-radius: 3px;
@@ -26,7 +26,7 @@
 
     .green-button:hover {
         color: #fff;
-        background: #00d614;
+        background: #00ac5c;
         transition: 300ms;
 
     }
@@ -94,7 +94,7 @@
     }
 
     .kind_user input:checked + i, .kind_activity input:checked + i {
-        color: #28a745;
+        color: #00c569;
         border: none;
         padding: 4px;
     }
@@ -149,7 +149,7 @@
         direction: rtl;
     }
     .show-detail {
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         display: inline-block;
         padding: 10px 30px;

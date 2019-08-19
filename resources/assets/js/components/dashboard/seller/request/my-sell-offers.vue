@@ -55,7 +55,7 @@
     .detail-success {
         padding: 8px 0;
         width: 100%;
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         text-align: center;
         border-radius: 5px;

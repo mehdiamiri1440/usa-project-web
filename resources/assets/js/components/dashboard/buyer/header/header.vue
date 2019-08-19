@@ -65,11 +65,15 @@
         padding: 7px;
         text-align: right;
     }
-
+    .list-inline > li {
+        display: inline-block;
+        padding-right: 5px;
+        padding-left: 5px;
+    }
     .green-button {
         margin: 15px 0 0;
         display: inline-block;
-        background: #28a745;
+        background: #00C569;
         color: #fff;
         padding: 10px 35px;
         border-radius: 3px;
@@ -229,7 +233,7 @@
         content: " ";
         height: 100%;
         width: 2px;
-        background: #00d614;
+        background: #00ac5c;
         position: absolute;
         right: 0;
         top: 0;
@@ -245,7 +249,7 @@
         content: " ";
         height: 100%;
         width: 2px;
-        background: #00d614;
+        background: #00C569;
         position: absolute;
         right: 0;
         top: 0;
@@ -294,7 +298,7 @@
 
     .right-menu-header {
         position: relative;
-        padding: 6px 16px;
+        padding: 6px;
     }
 
     .right-menu-header li ul a {
@@ -401,7 +405,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background: #28a745;
+        background: #00C569;
         height: 3px;
         width: 100%;
     }
@@ -410,7 +414,7 @@
         content: " ";
         height: 100%;
         width: 2px;
-        background: #00d614;
+        background: #00ac5c;
         position: absolute;
         right: 0;
         top: 0;
@@ -466,6 +470,8 @@
 
         .show-header button {
             display: block;
+            background: #000546;
+            color: #fff;
         }
 
         .img-profile .submit {
@@ -486,6 +492,14 @@
     }
 
     @media screen and (max-width: 768px) {
+
+        span.min {
+            display: inherit;
+        }
+
+        span.full {
+            display: none;
+        }
         .mobile-header .green-button {
             margin: 15px 0 0;
         }
@@ -516,13 +530,6 @@
     }
 
     @media screen and (max-width: 555px) {
-        span.min {
-            display: inherit;
-        }
-
-        span.full {
-            display: none;
-        }
 
         .right-menu-header {
             padding: 6px;

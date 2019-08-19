@@ -87,6 +87,7 @@
     }
 
     input.error {
+    		color: #333;
 		border-color: #e41c38;
     }
 
@@ -138,7 +139,7 @@
 			     		id="phone-number" 
 			     		type="tel"
 			     		class="dire"
-			     	    placeholder="09123456789"
+			     	    placeholder="شماره موبایل"
 			     	    pattern="[0-9]*"
 			     		>
 

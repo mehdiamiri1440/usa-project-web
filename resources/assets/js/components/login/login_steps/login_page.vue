@@ -2,7 +2,7 @@
 	a.text-green{
 		color: #00C569;
 
-		margin: 10px auto 7px;
+		margin: 10px auto;
 
 		display: inline-block;
 	}
@@ -41,6 +41,9 @@
     .input-wrapper{
    	    margin: 6px auto 4px;
     	position: relative;
+    }
+    input{
+    	box-shadow: none !important;
     }
 
     input{
@@ -96,6 +99,7 @@
     }
 
     input.error {
+    	color: #333;
 		border-color: #e41c38;
     }
 
@@ -195,7 +199,7 @@
 			     		id="phone-number" 
 			     		type="tel"
 			     		class="dire"
-			     	    placeholder="09123456789"
+			     	    placeholder="شماره موبایل"
 			  			pattern="[0-9]*"
 			     		>
 

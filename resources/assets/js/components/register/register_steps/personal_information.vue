@@ -91,6 +91,7 @@
     }
 
     input.error {
+    		color: #333;
 		border-color: #e41c38;
     }
 
@@ -322,7 +323,7 @@
 					     		 id="first-name"
 					     		 type="text"
 					     		 class="dire "
-					     		 placeholder="نام شما" 
+					     		 placeholder="نام" 
 
 					     		 />
 
@@ -350,7 +351,7 @@
 					     		 id="last-name"
 					     		 type="text"
 					     		 class="dire "
-					     		 placeholder="نام خانوادگی " 
+					     		 placeholder="" 
 
 					     		 />
 

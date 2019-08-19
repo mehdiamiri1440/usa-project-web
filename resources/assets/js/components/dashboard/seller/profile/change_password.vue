@@ -68,7 +68,7 @@
     }
 
     .content-header {
-        background: #28a745;
+        background: #00C569;
         color: #fff;
         height: 100%;
         padding: 20px 20px 0;
@@ -155,7 +155,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background: #28a745;
+        background: #00C569;
         height: 3px;
         width: 100%;
     }
@@ -169,7 +169,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background: #28a745;
+        background: #00C569;
         height: 3px;
         width: 100%;
     }
@@ -216,10 +216,6 @@
         direction: rtl;
     }
 
-    .main-content {
-        padding: 60px 15px;
-    }
-
     .img-profile {
         text-align: center;
     }
@@ -253,7 +249,7 @@
     }
 
     .img-profile .submit label {
-        background: #28a745;
+        background: #00C569;
         color: #fff;
         padding: 12px 0;
         font-size: 13px;
@@ -273,7 +269,6 @@
     }
 
     .main-profile {
-        border-right: 1px solid #eff3f6;
         text-align: right;
         direction: rtl;
         overflow: hidden;
@@ -294,7 +289,7 @@
     .green-button {
         margin: 15px 0;
         display: inline-block;
-        background: #28a745;
+        background: #00C569;
         color: #fff;
         padding: 10px 35px;
         border-radius: 3px;
@@ -305,7 +300,7 @@
 
     .green-button:hover {
         color: #fff;
-        background: #00d614;
+        background: #00ac5c;
         transition: 300ms;
 
     }
@@ -373,7 +368,7 @@
     }
 
     .kind_user input:checked + i, .kind_activity input:checked + i {
-        background: #28a745;
+        background: #00C569;
         color: #fff;
         border: none;
         padding: 4px;
@@ -419,7 +414,7 @@
     }
 
     .user-form input[type="text"]:focus, input[type="password"]:focus {
-        border: 1px solid #28a745;
+        border: 1px solid #00C569;
         transition: 500ms;
 
     }
@@ -550,26 +545,20 @@
     <section class="main-content col-xs-12">
         <form action="#" method="post" enctype="multipart/form-data">
             <div class="main-profile col-xs-12">
+
                 <div class="user-form col-xs-12">
                     <label class="header-label">
                        تغییر کلمه عبور
                     </label>
+
 
                     <div class="col-sm-12">
                         <label for="old-password" class="content-label">
                             کلمه عبور فعلی:
                         </label>
 
-                        <input id="old-password"
-                               type="password"
-                               v-model="currentPassword"
-                               placeholder="کلمه عبور فعلی"
-                        >
-
-                        <span class="text-danger"
-                              v-if="errors.current_password"
-                              v-text="errors.current_password[0]">
-                        </span>
+                        <input id="old-password" type="password" v-model="currentPassword" placeholder="کلمه عبور فعلی">
+                        <span class="text-danger" v-if="errors.current_password" v-text="errors.current_password[0]"></span>
 
                     </div>
 
@@ -580,38 +569,24 @@
 
                         <input id="new-password" type="password" v-model="newPassword" placeholder="کلمه عبور جدید">
 
-                        <span class="text-danger"
-                              v-if="errors.password"
-                              v-text="errors.password[0]"
-                        >
-                        </span>
-                    </div>
+                        <span class="text-danger" v-if="errors.password" v-text="errors.password[0]"></span>
 
+                    </div>
                     <div class="col-sm-12">
                         <label for="repeat-new-password" class="content-label">
                             تکرار کلمه عبور جدید:
                         </label>
 
-                        <input id="repeat-new-password"
-                               type="password"
-                               v-model="newPasswordRepeat"
-                               placeholder="کلمه عبور جدید"
-                        >
+                        <input id="repeat-new-password" type="password" v-model="newPasswordRepeat" placeholder="کلمه عبور جدید">
 
-                        <span class="text-danger"
-                              v-if="errors.password_repeat"
-                              v-text="errors.password_repeat[0]"
-                        >
-                        </span>
+                        <span class="text-danger" v-if="errors.password_repeat" v-text="errors.password_repeat[0]"></span>
+
                     </div>
 
                     <div class="col-xs-12">
-                        <input type="button"
-                               class="green-button"
-                               name="submit"
-                               value="ارسال"
-                               v-on:click="changePassword"
-                        >
+                        <input type="button" class="green-button" name="submit" value="ارسال"
+                               v-on:click="changePassword">
+
                     </div>
 
                 </div>
@@ -621,7 +596,6 @@
     </section>
 
 </template>
-
 
 <script>
     import {eventBus} from "../../../../router/dashboard_router";

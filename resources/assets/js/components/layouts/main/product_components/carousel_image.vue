@@ -24,13 +24,13 @@
       width: 51px;
       height: 51px;
       margin: 6px;
-      border: 5px solid #28a745;
+      border: 5px solid #00c569;
       border-radius: 50%;
       animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-      border-color: #28a745 transparent transparent transparent;
+      border-color: #00c569 transparent transparent transparent;
     }
     .lds-ring-alt{
-    	display: block;	
+    	display: block;
     	margin-top: 50px;
     	direction: rtl;
     	text-align: center;
@@ -72,13 +72,13 @@
              <div v-show="!isImageLoad" class="lds-ring">
              	<div></div><div></div><div></div><div></div>
 
-             </div> 
+             </div>
              <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
      </div>
 </template>
 
 <script>
-	
+
 	export default{
 		 data: function () {
             return {
@@ -87,7 +87,7 @@
             };
         },
         props: ['img', 'base', 'popUpLoaded', 'alt'],
-     
+
         mounted: function () {
 
             $(".owl-carousel").owlCarousel({

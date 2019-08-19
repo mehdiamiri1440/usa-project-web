@@ -17,6 +17,7 @@
         top: 0;
         background: #fff;
         z-index: 5;
+        border-bottom: 2px solid #f6f6f6;
     }
 
     .little-main-header {
@@ -61,7 +62,7 @@
     }
 
     .content-header {
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         height: 100%;
         padding: 20px 20px 0;
@@ -123,7 +124,7 @@
 
     .green-button:hover {
         color: #fff !important;
-        background: #00d614;
+        background: #00ac5c;
     }
 
     i.fa-home {

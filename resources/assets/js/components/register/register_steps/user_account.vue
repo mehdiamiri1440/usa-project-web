@@ -1,5 +1,8 @@
 <style scoped>
-		
+	
+	.text-red{
+		color: red;
+	}	
 	.submit-button{
 		background: #DDDDDD;
 		color: #fff;
@@ -85,6 +88,7 @@
     }
 
     input.error {
+    		color: #333;
 		border-color: #e41c38;
     }
 
@@ -127,7 +131,10 @@
 			        	
 				        <label for="user-name">
 
-				        		یک نام کاربری منحصر به فرد (انگلیسی و بدون فاصله) وارد کنید
+				        		یک نام کاربری  
+				        		<span class="text-red">(انگلیسی و بدون فاصله)</span>
+				        		 وارد کنید
+
 						</label>
 				    
 				     	<div class="input-wrapper col-xs-12 user-name-wrapper">
@@ -139,7 +146,7 @@
 						     		 id="user-name" 
 						     		 type="text"
 						     		 class="dire"
-						     		 placeholder="نام کاربری"  
+						     		 placeholder="مثال : alizade_1357"  
 						     		 maxlength="20"
 						     		 >
 
@@ -153,15 +160,17 @@
 			     
 			        	
 				     		</div>
-				        <label for="password">
-						کلمه عبور را وارد کنید				     	
-					        </label>
+
 				     	<div class="row">
 				     		
 				    
 				     		<div class="col-xs-6 pull-right">
 				     			
 					     		<div class="input-wrapper  password-wrapper">
+
+					     			<label for="password">
+									کلمه عبور را وارد کنید				     	
+								    </label>
 
 						     		<input 
 						     		v-model="password" 
@@ -187,6 +196,9 @@
 				     			
 					     		<div class="input-wrapper password-wrapper">
 
+					     			<label for="password">
+					     				تکرار کلمه عبور
+									</label>
 						     		<input 
 						     		 v-model="rePassword" 
 						     		 :class = "{'error' : $parent.errors.password_conf[0], 'active' : rePassword.length}"

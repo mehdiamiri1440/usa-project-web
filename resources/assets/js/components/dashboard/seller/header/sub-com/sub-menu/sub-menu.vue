@@ -39,7 +39,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background: #28a745;
+        background: #00c569;
         height: 3px;
         width: 100%;
     }
@@ -51,7 +51,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background: #28a745;
+        background: #00c569;
         height: 3px;
         width: 100%;
     }
@@ -59,14 +59,14 @@
 </style>
 
 <template>
-    <div class="sub-header">
+<!--     <div class="sub-header">
         <ul class="list-inline">
             <li class="list-item" v-for="item in items" :class="item.active">
                 <router-link :to="{ name : item.url }" v-text="item.message" />
             </li>
         </ul>
 
-    </div>
+    </div> -->
 </template>
 <script>
     import {eventBus} from "../../../../../../router/dashboard_router";

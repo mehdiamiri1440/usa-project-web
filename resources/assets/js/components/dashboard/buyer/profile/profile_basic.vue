@@ -118,6 +118,7 @@
 
     .title{
         padding: 13px 15px;
+
     }
 
     .title h1{
@@ -128,6 +129,7 @@
     .title p{
         color: #E41C38;
         padding-top: 4px;
+        text-align: center;
     }
 
     /*progress styles*/
@@ -676,12 +678,13 @@
                           <div class="title col-xs-12">
 
                               <div class="row">
-                                  <div class="col-xs-12 col-sm-4 pull-right"> 
+                                  <div class="col-xs-12 col-sm-3 pull-right"> 
                                     <h1>ویرایش پروفایل</h1>
                                   </div>
-                                  <div class="col-xs-12 col-sm-8">
+                                  <div class="col-xs-12 col-sm-9">
                                       <p v-if="completeProfileProgress <= 85">
-                                          برای تکمیل فرایند ثبت نام، لطفا اطلاعات خود را کامل کنید
+                                          
+                                        برای ارتباط مستقیم و پاسخ گویی بهتر از سمت فروشندگان، پروفایل خود را کامل کنید
                                       </p>
                                   </div>
                               </div>
@@ -835,7 +838,7 @@
                                                                            placeholder="نام شرکت"
                                                                            v-model="currentUser.profile.company_name"
                                                                            :disabled="!formEnabled"
-                                                                           :class="{'disabled' : formEnabled == false , 'active' : currentUser.profile.company_name.length}"
+                                                                           :class="{'disabled' : formEnabled == false , 'active' : currentUser.profile.company_name}"
                                                                         >
 
                                                                         </div>
@@ -865,7 +868,7 @@
                                                                            placeholder="شماره ثبت شرکت"
                                                                            v-model="currentUser.profile.company_register_code"
                                                                            :disabled="!formEnabled"
-                                                                           :class="{'disabled' : formEnabled == false , 'active' : currentUser.profile.company_register_code.length}"
+                                                                           :class="{'disabled' : formEnabled == false , 'active' : currentUser.profile.company_register_code}"
                                                                         >
 
                                                                         <div class="error-message">
@@ -895,7 +898,7 @@
                                                     <div class="form-control-wrapper col-xs-6 pull-right">
                                                           
                                                                 <p class="label-text">
-                                                                    شماره شما
+                                                                    شماره تماس عمومی
                                                                 </p>
 
                                                                 <div 
@@ -906,10 +909,10 @@
                                                                     id="phone-number" 
                                                                     type="tel"
                                                                     class="dire"
-                                                                    placeholder="09123456789"
+                                                                    placeholder="شماره موبایل"
                                                                     pattern="[0-9]*"
                                                                     v-model="currentUser.profile.public_phone"
-                                                                    :class="{'active' : currentUser.profile.public_phone.length}"
+                                                                    :class="{'active' : currentUser.profile.public_phone}"
                                                                 >
 
                                                                  <div class="error-message">
@@ -936,7 +939,7 @@
                                                                 class="dire "
                                                                 placeholder="آدرس شما"
                                                                 v-model="currentUser.profile.address"
-                                                                :class="{'active' : currentUser.profile.address.length}"
+                                                                :class="{'active' : currentUser.profile.address}"
                                                                 >
 
                                                                  <div class="error-message">
@@ -994,12 +997,14 @@
                                     </div>
 
                                     <div class="link-help padding-0 col-xs-12  col-md-4">
-                                        <a href="#">
+                                        <a href="https://www.incobac.com/profile/bincobac">
                                             نمونه پروفایل تکمیل شده
-                                             <i class="fa fa-question"></i>
+                                             <i class="fa fa-question-circle"></i>
                                         </a>
                                         <p>
-                                            من فروشنده محصولات کشاورزی در سامانه ی اینکوباک هستم. برای ارتباط با من رو دکمه ی ارسال پیام کلیک کنید. 
+                                            در بخش (درباره کسب و کارتان بنویسید) به این سوالات پاسخ دهید.
+                                            <br/>
+1- در چه زمینه ای فعالیت می کنید؟ 2- بازار فعالیت شما داخلی است یا خارجی؟ 3- چند سال سابقه فعالیت دارید؟
                                         </p>
                                     </div>
 

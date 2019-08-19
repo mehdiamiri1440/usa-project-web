@@ -88,7 +88,7 @@
     }
 
     .go-top:hover {
-        background: #4dc11d;
+        background: #00c569;
         color: #ffffff;
     }
 
@@ -120,7 +120,7 @@
     }
 
     .social-icon li a:hover {
-        background: #4dc11d;
+        background: #00c569;
         color: #ffffff;
     }
 
@@ -134,7 +134,7 @@
     }
 
     .profile-menu-header > a {
-        border-right: 1px solid #4dc11d;
+        border-right: 1px solid #00c569;
     }
 
     .profile-menu-header a {

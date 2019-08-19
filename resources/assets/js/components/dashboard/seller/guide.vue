@@ -1,7 +1,5 @@
 <style scoped>
-    .main-content {
-        padding: 60px 15px;
-    }
+   
     .help {
         direction: rtl;
         line-height: 1.618;
@@ -19,7 +17,6 @@
     }
 
     .help .title_list_help {
-        margin: 30px auto;
         font-size: 16px;
         font-weight: 800;
     }
@@ -35,11 +32,50 @@
     .help .title_list_help li {
         padding: 6px 0;
     }
+    
+    .title {
+        text-align: right;
+        padding: 13px 15px ;
+
+    }
+
+    .title h1 {
+
+        font-size: 18px;
+        font-weight: bold;
+
+    }
+
+    @media screen and (max-width: 767px) {
+
+        .title {
+            text-align: center;
+
+        }
+
+    }
 
 </style>
 <template>
     <section class="main-content col-xs-12">
         <div class="help">
+
+            <div  class="title col-xs-12">
+
+                <div  class="row">
+
+                   <div  class="col-xs-12 col-sm-4 pull-right">
+
+                       <h1>
+                        راهنما
+                       </h1>
+
+                   </div> 
+
+               </div>
+
+            </div>
+
             <ul>
                 <li class="title_list_help">
                     کشاورزان و تامین کنندگان محترم، می توانید نسبت به فروش مستقیم و ثبت محصولات خود و طبق راهنمای زیر
