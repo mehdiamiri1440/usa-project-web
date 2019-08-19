@@ -165,13 +165,13 @@
 				     		
 				    
 				     		<div class="col-xs-6 pull-right">
-				     			
-					     		<div class="input-wrapper  password-wrapper">
-
-					     			<label for="password">
+				     				<label for="password">
 									کلمه عبور را وارد کنید				     	
 								    </label>
 
+					     		<div class="input-wrapper  password-wrapper">
+
+					     		
 						     		<input 
 						     		v-model="password" 
 						     		 :class = "{'error' : $parent.errors.password[0], 'active' : password.length}"
@@ -193,12 +193,12 @@
 				     		</div>
 
 				     		<div class="col-xs-6 ">
-				     			
-					     		<div class="input-wrapper password-wrapper">
-
-					     			<label for="password">
+				     				<label for="password">
 					     				تکرار کلمه عبور
 									</label>
+					     		<div class="input-wrapper password-wrapper">
+
+					     		
 						     		<input 
 						     		 v-model="rePassword" 
 						     		 :class = "{'error' : $parent.errors.password_conf[0], 'active' : rePassword.length}"
