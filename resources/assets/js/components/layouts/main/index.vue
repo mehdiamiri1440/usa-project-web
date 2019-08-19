@@ -1877,7 +1877,7 @@
         template: "<div class='detail-thumb'>"
             +
             "<img :src='img' class='img-responsive'>"
-            + "<h4 style='font-size:14px; direction:rtl;' v-if='title.length>=20'>{{title.substring(0,17) + ' ...'}}</h4>"
+            + "<h4 style='font-size:14px; direction:rtl;' v-if='title.length>=20'>{{title.substring(0,15) + ' ...'}}</h4>"
             + "<h4 style='font-size:14px; direction:rtl;' v-else>{{title }}</h4>"
             + "<p v-if='content'>{{content}}</p>"
             + "<a v-if='!content' :href='link' class='blue-button'>مشاهده محصول</a>"

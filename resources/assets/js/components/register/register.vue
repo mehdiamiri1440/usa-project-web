@@ -472,6 +472,7 @@
                     rules: 0,
                     categoryList: '',
                     categoryId: '',
+                    formSubmitActive : true
                 },
                 errors: {
                     first_name: [],
@@ -636,7 +637,7 @@
             },
             submitForm: function () {
                 var self = this;
-
+                this.step4.formSubmitActive = false;
                 this.errorFlag = false;
 
                 this.checkStep4();
@@ -672,6 +673,7 @@
                             }
                         })
                         .catch(function (err) {
+                            self.formSubmitActive = true;
                             self.registerComponentExceptions('User register API failed', true);
                         });
                 }

@@ -869,6 +869,7 @@
                                                                            v-model="currentUser.profile.company_register_code"
                                                                            :disabled="!formEnabled"
                                                                            :class="{'disabled' : formEnabled == false , 'active' : currentUser.profile.company_register_code}"
+                                                                            pattern="[0-9]*"
                                                                         >
 
                                                                         <div class="error-message">
@@ -975,7 +976,7 @@
                                          >
                                                                 
                                              <textarea
-                                             rows="3"
+                                             rows="4"
                                              id="description"
                                              class="dire "
                                              placeholder=" درباره کسب و کارتان بنویسید "
@@ -1231,7 +1232,7 @@
 
             }
         },
-        methods: {
+         methods: {
             init: function () {
                 this.isLoaded = true;
                  $('input[type="file"]').imageuploadify();
@@ -1252,7 +1253,7 @@
                 this.errors = '';
                 var self = this;
                 var data = new FormData();
-               
+                
 
                 for (var i = 0, cnt = this.profileBasicFields.length; i < cnt; i++) {
                     if (this.currentUser.profile[this.profileBasicFields[i]] != null){
@@ -1312,8 +1313,26 @@
                         self.submiting = false;
                     })
                     .catch(function (err) {
+                        self.scrollToTop();
+                       if (err.response.status === 413) {
+
+                            self.popUpMsg = 'اندازه تصاویر بزرگ تر 5  از مگابایت است یا فرمت مناسبی ندارد';
+                            eventBus.$emit('submitSuccess', self.popUpMsg);
+                            $('#custom-main-modal').modal('show');
+
+                        }
+
+             
                         self.errors = '';
                         self.errors = err.response.data.errors;
+                
+                        let tmpArray = Object.keys(self.errors);
+                           console.log((tmpArray.join() + "").includes('related') || (tmpArray.join() + "").includes('certificate') );
+                        if((tmpArray.join() + "").includes('related') || (tmpArray.join() + "").includes('certificate') ){
+                            self.popUpMsg = 'اندازه تصاویر بزرگ تر 5  از مگابایت است یا فرمت مناسبی ندارد';
+                            eventBus.$emit('submitSuccess', self.popUpMsg);
+                            $('#custom-main-modal').modal('show');
+                        };
                         eventBus.$emit('submiting', false);
                     });
             },
@@ -1419,7 +1438,16 @@
                 }
                  
             },
-        
+            isOsIOS: function () {
+                var userAgent = window.navigator.userAgent.toLowerCase(),
+                    safari = /safari/.test(userAgent),
+                    ios = /iphone|ipod|ipad/.test(userAgent);
+
+                return ios;
+            },
+            scrollToTop() {
+                window.scrollTo(0, 0);
+            },
                 
         },
         mounted(){
@@ -1457,6 +1485,10 @@
                 show_image_preview(this);
             })
 
+            if (this.isOsIOS()) {
+                $('#phone-number').attr('type','text');
+                $('#company-number').attr('type','text');
+            }
         },
         created(){
             gtag('config','UA-129398000-1',{'page_path': '/profile-basic'});
@@ -1472,6 +1504,10 @@
                 }else{
                     this.disableForm();
                 }
+            },
+            'currentUser.profile.company_register_code':function(value){
+                  this.currentUser.profile.company_register_code =  this.toLatinNumbers(value); 
+
             },
             completeProfileProgress:function(value){
                  

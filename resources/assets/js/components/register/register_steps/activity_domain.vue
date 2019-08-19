@@ -488,7 +488,10 @@
 			       		<span  v-if="$parent.errors.category_id[0]" v-text="$parent.errors.category_id[0]"></span>
 			       	</p>
 
-			        <button class="submit-button disabled " @click.prevent="nextStep()" >
+			        <button class="submit-button disabled "
+			        :class = "{'active' : $parent.step4.formSubmitActive && activityType && isSelect }"
+			         :disabled="!$parent.step4.formSubmitActive"
+			         @click.prevent="finalStep()" >
 					ثبت نهایی
 					</button>
 
@@ -505,19 +508,26 @@
 			return{
 					activityDomain : this.$parent.step4.categoryId,
 					activityType : this.$parent.step4.activity_type,
-					error : ''
+					error : '',
+					isSelect : false
 			}
 		},
 		methods:{
-			 nextStep(){
+			 finalStep(){
+
 					this.checkfildsIsCurrect();
 					this.$parent.submitForm();
+
 		 	 },
 		 	 getActivityDomain(event){
-		 	 	
+
+		 	 	 if (event) {
+		 	 	 	this.isSelect = true
+		 	 	 }
 		 	 	 $('#activity-domain').removeClass('error').addClass('active');
 		 	 	 this.$parent.setCategoryId(event);
 		 	 	 this.fildsIsFill();
+		 	 	 
 		 	 },
 		 	 checkfildsIsCurrect(){
 		 	 	this.fildsIsFill();
@@ -527,8 +537,11 @@
 		 	 	if (this.$parent.step4.activity_type == '') {
 			 	 	  this.error = ' نوع فعالیت خود را مشخص کنید'
 			 	 	  $('.label-radio').addClass('error').removeClass('active');
+			 	 	  this.$parent.step4.formSubmitActive = true;
 			 	}else if (this.$parent.step4.categoryId == '') {
 			 		$('#activity-domain').addClass('error').removeClass('active');
+			 	 	  this.$parent.step4.formSubmitActive = true;
+
 			 	}
 
 			 	 	   

@@ -155,8 +155,10 @@
 			       		<span  v-if="$parent.errors.phone" v-text="$parent.errors.phone[0]"></span>
 			       	</p>
 			        <button class="submit-button disabled"
-			        		:class="{'active' : this.phoneNumber.length >= 11}" 
-			         @click.prevent="getPhoneNumber()" >
+			        		:class="{'active' : this.phoneNumber.length >= 11  && $parent.step1.sendCode}" 
+			                @click.prevent="getPhoneNumber()" 
+			                :disabled="!$parent.step1.sendCode"
+			                >
 			        	ارسال کد تایید
 					</button>
 
