@@ -1218,7 +1218,7 @@
                 certificateFiles: [],
                 formEnabled:false,
                 rankState:{
-                    is_company : 11,
+                    is_company : 12,
                     company_name : 11,
                     company_register_code : 11,
                     public_phone: 11,
@@ -1245,8 +1245,6 @@
                       
 
                     });
-
-                
             },
             RegisterBasicProfileInfo: function () {
 
@@ -1266,7 +1264,7 @@
                 
 
                 for (var i = 0; i < this.profileComplementaryFields.length; i++){
-                    if (this.profileComplementaryFields[i] === 'description' && (this.currentUser.profile['description'] == null || this.currentUser.profile['description'] === '')) {
+                    if (this.profileComplementaryFields[i] === 'description' && (this.currentUser.profile['description'] == '' || this.currentUser.profile['description'] === '')) {
                         continue;
                     }
                     data.append(this.profileComplementaryFields[i], this.currentUser.profile[this.profileComplementaryFields[i]]);

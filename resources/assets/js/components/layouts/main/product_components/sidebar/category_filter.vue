@@ -137,8 +137,8 @@
                       <ul class=" sub-category-product little">
 
                           <li class="sub-category-item " v-for="subCategory in category.subcategories">
-                              <a       :class="{'active' : $route.params.categoryName === subCategory.category_name}"
-                                      :href="'/product-list/category/' + subCategory.category_name"
+                              <a       :class="{'active' : getCategoryName() === subCategory.category_name}"
+                                      :href=getSubCategoryUrl(subCategory)
                                       v-text="subCategory.category_name">
                               </a>
                           </li>
@@ -203,7 +203,7 @@
         methods: {
             init: function () {
                 var self = this;
-                var categoryParameterName = self.$route.params.categoryName;
+                var categoryParameterName = this.getCategoryName();
                 axios.post('/get_category_list', {
                     cascade_list: true
                 })
@@ -313,6 +313,19 @@
 
                       }
                 }
+            },
+            getSubCategoryUrl: function(t){
+
+                let url = '/product-list/category/'
+                    + t.category_name.replace(' ', '-')
+                ;
+               
+                return url;
+            },
+            getCategoryName:function(){
+                let name = this.$route.params.categoryName ? this.$route.params.categoryName :'';
+                
+                return name.replace('-',' ');
             }
         },
         mounted() {
@@ -320,10 +333,7 @@
                var self = this;
 
               document.fonts.ready.then(function () {
-
                    self.fontIsLoad = true;
-                   console.log(self.fontIsLoad)
-
               });
 
         },

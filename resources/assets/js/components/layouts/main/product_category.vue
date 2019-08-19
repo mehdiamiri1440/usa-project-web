@@ -893,6 +893,8 @@
                 var self = this;
                 var searchValue = this.searchValue;
                 var searchValueText = searchValue;
+                let categoryName = this.getCategoryName();
+                
 
                 axios.post('/user/profile_info')
                     .then(function (response) {
@@ -909,6 +911,7 @@
                             axios.post('/user/get_product_list', {
                                 from_record_number: 0,
                                 to_record_number: self.productCountInPage,
+                                search_text:categoryName
 
                             }).then(function (response) {
                                 self.products = response.data.products;
@@ -934,6 +937,7 @@
                     axios.post('/user/get_product_list', {
                         from_record_number: 0,
                         to_record_number: this.productCountInPage,
+                        search_text:this.getCategoryName()
                     }).then(function (response) {
                         self.products = response.data.products;
 
@@ -1036,9 +1040,9 @@
                 if (this.cityId) {
                     searchObject.city_id = this.cityId;
                 }
-                if (this.searchText) {
-                    searchObject.search_text = this.searchText;
-                }
+             
+                searchObject.search_text = this.getCategoryName();
+                
 
                 if (jQuery.isEmptyObject(searchObject)) {
                     searchObject.from_record_number = 0;
@@ -1091,6 +1095,11 @@
 
                     });
 
+            },
+            getCategoryName:function(){
+                let name = this.$route.params.categoryName;
+                
+                return name.replace('-',' ');
             }
         },
         watch: {
