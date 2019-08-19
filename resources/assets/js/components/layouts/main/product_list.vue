@@ -128,6 +128,7 @@
     .search-box {
         position: relative;
         margin-top: 14px;
+        border:none;
     }
 
     .search-box input {
@@ -671,8 +672,7 @@
 
                                      </div>
 
-                                      <br/>
-
+                                     
                                     <div class=" default-main-article-content col-xs-12 col-sm-7">
                                             <span class="content-half-width placeholder-content default-input-boxing-size"></span>
 
@@ -716,8 +716,7 @@
 
                                      </div>
 
-                                      <br/>
-
+                                    
                                     <div class=" default-main-article-content col-xs-12 col-sm-7">
                                             <span class="content-half-width placeholder-content default-input-boxing-size"></span>
 
@@ -762,8 +761,6 @@
                                          <span class="default-main-image  placeholder-content"></span>
 
                                      </div>
-
-                                      <br/>
 
                                     <div class=" default-main-article-content col-xs-12 col-sm-7">
                                             <span class="content-half-width placeholder-content default-input-boxing-size"></span>

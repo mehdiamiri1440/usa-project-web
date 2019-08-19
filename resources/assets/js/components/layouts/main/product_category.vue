@@ -127,7 +127,8 @@
 
     .search-box {
         position: relative;
-        margin-top: 14px;
+        margin-top: 15px;
+        border:none;
     }
 
     .search-box input {
@@ -193,13 +194,12 @@
 
     #main {
 
-        padding-top: 165px;
+        padding-top: 85px;
         position:relative;
 
     }
     .main-content{
           min-height: 900px;
-          transition: 200ms;
     }
 
     .main-content > h4 {
@@ -303,6 +303,11 @@
     }
 
     @media screen and (max-width: 991px) {
+
+        #main{
+            padding-top: 165px;
+        }
+        
         .search-box input {
             width: calc(100% - 75px);
         }
@@ -326,12 +331,13 @@
             position: fixed;
             z-index: 1;
             width: 100%;
+            background: #f0f3f6;
+         
         }
 
-        .search-box {
-            margin: 4px auto 13px;
+        .search-box{
+            margin-top: 20px;
         }
-
         .main-image {
             padding: 0;
         }
@@ -340,12 +346,6 @@
             margin: 0;
         }
 
-        .sub-header {
-
-            background: #f0f3f6;
-            padding-top: 20px;
-
-        }
 
         .links-sub-header {
             direction: rtl;
@@ -489,16 +489,16 @@
             <a href="#" @click.prevent="addProductOrRequest()"><i class="fa fa-plus"></i> </a>
         </div>
 
-        <div class="sub-header-fix sub-header container-fluid">
+        <div class="sub-header-fix sub-header hidden-md hidden-lg container-fluid">
 
-            <div class="search-box col-sm-8 col-xs-12 col-md-5">
+            <div class="search-box hidden col-sm-8 col-xs-12 col-md-5">
                 <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید">
 
-                <button class="btn-search">
+                <button class="btn-search ">
                     <i class="fa-search fa"></i>
                 </button>
 
-                <button class="btn-filter  hidden-lg hidden-md"
+                <button class="btn-filter "
                         data-toggle="modal" data-target="#searchFilter">
                     فیلتر
                     <i class="fa fa-filter"></i>
@@ -506,11 +506,21 @@
 
             </div>
 
-            <div class="links-sub-header   hidden-xs col-sm-4 col-xs-7 ">
+            <div class="search-box col-xs-4">
+
+                <button class="btn-filter "
+                        data-toggle="modal" data-target="#searchFilter">
+                    فیلتر
+                    <i class="fa fa-filter"></i>
+                </button>
+
+            </div>
+
+            <div class="links-sub-header   col-xs-6 col-sm-3 pull-right  ">
                 <ul class="list-inline">
                     <li class="list-item active">
-                        <a href="">
-                            لیست محصولات
+                        <a href="#">
+                            دسته بندی محصول
                         </a>
                     </li>
                 </ul>
@@ -672,8 +682,6 @@
 
                                      </div>
 
-                                      <br/>
-
                                     <div class=" default-main-article-content col-xs-12 col-sm-7">
                                             <span class="content-half-width placeholder-content default-input-boxing-size"></span>
 
@@ -716,8 +724,6 @@
                                          <span class="default-main-image  placeholder-content"></span>
 
                                      </div>
-
-                                      <br/>
 
                                     <div class=" default-main-article-content col-xs-12 col-sm-7">
                                             <span class="content-half-width placeholder-content default-input-boxing-size"></span>
@@ -763,8 +769,6 @@
                                          <span class="default-main-image  placeholder-content"></span>
 
                                      </div>
-
-                                      <br/>
 
                                     <div class=" default-main-article-content col-xs-12 col-sm-7">
                                             <span class="content-half-width placeholder-content default-input-boxing-size"></span>
