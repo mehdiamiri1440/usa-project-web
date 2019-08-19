@@ -455,14 +455,16 @@
                     });
             },
             verifyCode: function () {
+
                 var self = this;
                 this.showMsg = false;
-
+                
                 axios.post('/reset_password', {
                     'phone': this.toLatinNumbers(this.step2.phone),
                     'verification_code': this.toLatinNumbers(this.step3.verification_code),
                 })
                     .then(function (response) {
+                        
                         if (response.data.status === true) {
                             alert("گذر واژه ی جدید به تلفن همراهتان ارسال شد.")
                             window.location.href = '/login';
@@ -476,6 +478,8 @@
                     .catch(function (err) {
                         self.errors = [];
                         self.errors = err.response.data.errors;
+
+
                     });
             },
             toLatinNumbers: function (num) {
@@ -515,7 +519,14 @@
             },
             scrollToTop() {
                 window.scrollTo(0, 0);
-            }
+            },
+            isOsIOS: function () {
+                var userAgent = window.navigator.userAgent.toLowerCase(),
+                    safari = /safari/.test(userAgent),
+                    ios = /iphone|ipod|ipad/.test(userAgent);
+
+                return ios;
+            },
         },
         created() {
             gtag('config', 'UA-129398000-1', {'page_path': '/login'});
