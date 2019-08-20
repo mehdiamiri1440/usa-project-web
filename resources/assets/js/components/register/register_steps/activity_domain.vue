@@ -554,6 +554,8 @@
 		 	 	 	   $('#activity-domain').addClass('active').removeClass('error')
 		 	 	}else{
 		 	 		 $('.submit-button').removeClass('active').addClass('disabled');
+                     this.$parent.step4.formSubmitActive = true;
+
 		 	 	}
 		 	 }
 		},

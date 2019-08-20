@@ -1747,6 +1747,7 @@
         <!-- =========================
        WEB RICE AND DATE SLIDER
       ============================== -->
+<!--
 
 
                 <section id="request" class="parallax-section " v-if="homePageDates">
@@ -1786,6 +1787,7 @@
                         </div>
                     </div>
                 </section>
+-->
 
 
 
