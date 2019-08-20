@@ -93,7 +93,7 @@
     }
 
     .content-header {
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         height: 100%;
         padding: 20px 20px 0;
@@ -180,7 +180,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background: #28a745;
+        background: #00c569;
         height: 3px;
         width: 100%;
     }
@@ -192,7 +192,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background: #28a745;
+        background: #00c569;
         height: 3px;
         width: 100%;
     }
@@ -256,7 +256,7 @@
     .green-button {
         margin: 15px 0;
         display: inline-block;
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         padding: 10px 35px;
         border-radius: 3px;
@@ -336,7 +336,7 @@
     }
 
     .kind_user input:checked + i, .kind_activity input:checked + i {
-        color: #28a745;
+        color: #00c569;
         border: none;
         padding: 4px;
     }
@@ -376,7 +376,7 @@
     }
 
     .user-form input[type="text"]:focus {
-        border: 1px solid #28a745;
+        border: 1px solid #00c569;
         transition: 500ms;
     }
 
@@ -533,10 +533,12 @@
                 >
 
                 </textarea>
+                <div   class="text-danger">
 
-                <span v-if="errors.description"
-                      class="text-danger"
-                      v-text="errors.description[0]"></span>
+                    <span v-if="errors.description.length"
+                          v-text="errors.description[0]"></span>
+                </div>
+
             </div>
 
             <div class="image_company col-xs-12 ">
@@ -650,7 +652,7 @@
                     'public_phone',
                     'description',
                 ],
-                    relatedFiles: [],
+                relatedFiles: [],
                 certificateFiles: [],
                 errors: '',
                 popUpMsg: '',

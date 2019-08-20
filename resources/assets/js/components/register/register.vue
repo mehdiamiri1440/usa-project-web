@@ -240,7 +240,7 @@
 
      }
 
-     @media screen and (max-width: 370px){
+     @media screen and (max-width: 400px){
 
 
         .form-contents .col-xs-10  {
@@ -442,7 +442,7 @@
         },
         data: function () {
             return {
-                currentStep: 3,
+                currentStep: 1,
                 step1: {
                     phone: '',
                     sendCode: true,
@@ -472,6 +472,7 @@
                     rules: 0,
                     categoryList: '',
                     categoryId: '',
+                    formSubmitActive : true
                 },
                 errors: {
                     first_name: [],
@@ -503,12 +504,10 @@
                 this.step2.verification_code = vaerifyCode;
                 this.verify_code();
             },
-            setPersonalInformatin(){
+            setPersonalInformation(){
 
                 this.firstNameValidator(this.step3.first_name);
                 this.lastNameValidator(this.step3.last_name);
-                console.log(this.errors.first_name.length);
-                console.log(this.errors.last_name.length);
                 if (this.errors.first_name.length == 0 && this.errors.last_name.length == 0) {
                      this.goToStep(4);
                 }
@@ -518,7 +517,14 @@
                 this.goToStep(5);
             },
             setAccount(){
-               this.register_details();
+
+
+                this.userNameValidator(this.step3.user_name);
+                this.passwordValidator(this.step3.password, this.step3.re_password);
+                if (!this.errors.user_name[0] && !this.errors.password[0]  && !this.errors.password_conf[0]) {
+                      this.register_details();
+                }
+              
             },
             stopLoader: function () {
                 eventBus.$emit('isLoading', false);
@@ -605,8 +611,8 @@
                     } else if (response.data.status === false) {
                         self.goToStep(2);
                         self.errors.verification_code = [];
-                        self.errors.verification_code.push('کد وارد شده درست نیست');
-                        self.registerComponentExceptions('کد وارد شده درست نیست');
+                        self.errors.verification_code.push('کد وارد شده صحیح نیست یا منقضی شده است');
+                        self.registerComponentExceptions('کد وارد شده صحیح نیست یا منقضی شده است');
                     }
                 }).catch(function (error) {
                     self.goToStep(2);
@@ -631,7 +637,7 @@
             },
             submitForm: function () {
                 var self = this;
-
+                this.step4.formSubmitActive = false;
                 this.errorFlag = false;
 
                 this.checkStep4();
@@ -667,6 +673,7 @@
                             }
                         })
                         .catch(function (err) {
+                            self.formSubmitActive = true;
                             self.registerComponentExceptions('User register API failed', true);
                         });
                 }
@@ -916,6 +923,13 @@
             },
             scrollToTop() {
                 window.scrollTo(0, 0);
+            },
+            isOsIOS: function () {
+                var userAgent = window.navigator.userAgent.toLowerCase(),
+                    safari = /safari/.test(userAgent),
+                    ios = /iphone|ipod|ipad/.test(userAgent);
+
+                return ios;
             },
         },
         watch: {

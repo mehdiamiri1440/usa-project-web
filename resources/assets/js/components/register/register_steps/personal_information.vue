@@ -75,25 +75,34 @@
     }
 
 
-    input:focus ,  input:focus + i{
+    input.active{
+		border-color: #00C569;
 		color: #333;
     }
 
-    input.active{
+    input.active + i {
+
 		color: #00C569;
+
     }
 
     input.active:focus ,  input.active:focus + i , input.active + i {
-		color: #00C569;
+		border-color: #00C569;
     }
 
     input.error {
+    		color: #333;
+		border-color: #e41c38;
+    }
+
+    input.error + i{
 		color: #e41c38;
     }
 
-    input.error:focus ,  input.error:focus + i , input.error + i {
-		color: #e41c38;
+    input.error:focus ,  input.error:focus + i  {
+		border-color: #e41c38;
     }
+
     .error-message{
 
     	text-align: center;
@@ -301,8 +310,6 @@
 			     		<div class="row">
 
 
-
-
 			     			 <div class="col-xs-6 pull-right">
 
 					     		<label for="first-name">
@@ -312,11 +319,11 @@
 
 					     		<input
 					     		 v-model="firstName"
-					     		 :class="{'error' : $parent.errors.first_name[0]}" 
+					     		 :class="{'error' : $parent.errors.first_name[0] , 'active' : firstName.length}" 
 					     		 id="first-name"
 					     		 type="text"
 					     		 class="dire "
-					     		 placeholder="نام شما" 
+					     		 placeholder="نام" 
 
 					     		 />
 
@@ -340,7 +347,7 @@
 
 					     		 <input
 					     		 v-model="lastName"
-					     		 :class="{'error' : $parent.errors.last_name[0]}" 
+					     		 :class="{'error' : $parent.errors.last_name[0] , 'active' : lastName.length}" 
 					     		 id="last-name"
 					     		 type="text"
 					     		 class="dire "
@@ -368,7 +375,9 @@
 			     	
 			       	
 			      
-			        <button class="submit-button disabled " @click.prevent="getPersonalInformatin()" >
+			        <button class="submit-button disabled " 
+			        		:class = "{'active' : firstName.length && lastName.length}"
+			        		@click.prevent="nexStep()" >
 			        	مرحله بعد
 					</button>
 
@@ -390,58 +399,27 @@
 			}
 		},
 		methods:{
-			 getPersonalInformatin(){
+			 nexStep(){
 					
-		  	 	if(this.firstName && this.lastName  ){
-		  	 		this.$parent.errors.first_name = [];
+
+			     	this.$parent.errors.first_name = [];
 		  	 		this.$parent.errors.last_name = [];
 		  	 		this.$parent.step3.first_name = this.firstName;
 		  	 		this.$parent.step3.last_name = this.lastName;
 	    			this.$parent.step3.sex = this.sex;
-	    			this.$parent.setPersonalInformatin();
-		  	 	}else if(!this.firstName){
-		  	 		
-		  	 		 $('#first-name').addClass('error');
-		  	 		 $('.submit-button').removeClass('active').addClass('disabled');
-		  	 		 this.$parent.errors.first_name = ['فیلد ها الزامی می باشند'];
-
-		  	 	}else if(!this.lastName){
-
-		  	 		$('#last-name').addClass('error');
-					this.$parent.errors.last_name = ['فیلد ها الزامی می باشند'];
-
-		  	 	}
+	    			this.$parent.setPersonalInformation();
 		 		
-		 	 },
-		 	 fildsIsFill(element,value){
-		 	 	if(value.length >= 0){
-		 	 	 element.addClass('active');
-		 	 	}else{
-		 	 	 element.removeClass('active');
-		 	 	}
-
-		 	 	if (this.firstName && this.lastName ) {
-				   $('.submit-button').removeClass('disabled').addClass('active');
-		 	 	}else{
-	    	       $('.submit-button').removeClass('active').addClass('disabled');
-		 	 	}
 		 	 }
+		
 		},
 	    watch: {
 	  	  'firstName': function(value) {
 	  	  	 this.$parent.errors.first_name = [];
-	  	  	 var element = $('#first-name');
-	  	  	 element.removeClass('active');	 
-	  	   	 element.removeClass('error');
-	    	 this.fildsIsFill(element,value);
+
 	  
 	      },
 	      'lastName': function(value) {
 	      	 this.$parent.errors.last_name = [];
-	      	 var element = $('#last-name');
-	      	 element.removeClass('active');
-	  	   	 element.removeClass('error');
-	  	   	 this.fildsIsFill(element,value);
 
 	      },
 	    },

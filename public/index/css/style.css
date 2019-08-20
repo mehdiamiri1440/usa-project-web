@@ -212,7 +212,7 @@ footer {
 
 .custom-navbar .nav li a:hover {
     background: transparent;
-    color: #4dc11d;
+    color: #00c569;
 }
 
 .custom-navbar .navbar-nav > li > a:hover,
@@ -222,7 +222,7 @@ footer {
 
 .custom-navbar .nav li.active > a {
     background-color: transparent;
-    color: #4dc11d;
+    color: #00c569;
 }
 
 .custom-navbar .navbar-toggle {
@@ -235,7 +235,7 @@ footer {
 }
 
 .custom-navbar .navbar-toggle .icon-bar {
-    background: #4dc11d;
+    background: #00c569;
     border-color: transparent;
 }
 
@@ -248,7 +248,7 @@ footer {
 }
 
 .ads:hover {
-    background-color: #4dc11d !important;
+    background-color: #00c569 !important;
     border-radius: 50px;
     text-align: center;
 }
@@ -566,8 +566,8 @@ footer {
 /*end*/
 
 #intro .btn-danger {
-    background: #4dc11d;
-    border-color: #4dc11d;
+    background: #00c569;
+    border-color: #00c569;
     color: #ffffff
 }
 
@@ -578,7 +578,7 @@ footer {
 }
 
 #intro .btn-default:hover {
-    background: #4dc11d;
+    background: #00c569;
     color: #ffffff;
     border-color: transparent;
 }
@@ -630,7 +630,7 @@ footer {
 }
 
 #detail hr {
-    border-bottom: 2px solid #4dc11d;
+    border-bottom: 2px solid #00c569;
     width: 42px;
 }
 
@@ -676,7 +676,7 @@ footer {
 }
 
 #feature .media .fa {
-    background-color: #4dc11d;
+    background-color: #00c569;
     border-radius: 2px;
     color: #ffffff;
     font-size: 22px;
@@ -717,7 +717,7 @@ footer {
 
 #video .fa {
     position: relative;
-    background-color: #4dc11d;
+    background-color: #00c569;
     border-radius: 100%;
     color: #ffffff;
     font-size: 38px;
@@ -875,7 +875,7 @@ footer {
 }
 
 #pricing .pricing-month h2 {
-    color: #4dc11d;
+    color: #00c569;
 }
 
 #pricing .pricing-thumb p {
@@ -971,7 +971,7 @@ footer {
 }
 
 #contact input[type="submit"] {
-    background: #4dc11d;
+    background: #00c569;
     border-radius: 100px;
     border: none;
     color: #ffffff;
@@ -1024,7 +1024,7 @@ footer p {
 }
 
 .go-top:hover {
-    background: #4dc11d;
+    background: #00c569;
     color: #ffffff;
 }
 
@@ -1056,7 +1056,7 @@ footer p {
 }
 
 .social-icon li a:hover {
-    background: #4dc11d;
+    background: #00c569;
     color: #ffffff;
 }
 

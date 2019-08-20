@@ -2,7 +2,7 @@
 	a.text-green{
 		color: #00C569;
 
-		margin: 10px auto 7px;
+		margin: 10px auto;
 
 		display: inline-block;
 	}
@@ -42,6 +42,9 @@
    	    margin: 6px auto 4px;
     	position: relative;
     }
+    input{
+    	box-shadow: none !important;
+    }
 
     input{
     	width: 100%;
@@ -76,24 +79,37 @@
     }
 
 
+
+
     input:focus ,  input:focus + i{
 		color: #333;
     }
 
     input.active{
+		border-color: #00C569;
+		color: #333;
+    }
+
+    input.active + i{
 		color: #00C569;
     }
 
     input.active:focus ,  input.active:focus + i , input.active + i {
-		color: #00C569;
+		border-color: #00C569;
     }
 
     input.error {
+    	color: #333;
+		border-color: #e41c38;
+    }
+
+    input.error + i{
 		color: #e41c38;
     }
 
-    input.error:focus ,  input.error:focus + i , input.error + i {
-		color: #e41c38;
+
+    input.error:focus ,  input.error:focus + i  {
+		border-color: #e41c38;
     }
     .error-message{
 
@@ -179,12 +195,12 @@
 			     	<div class="input-wrapper phone-number-wrapper">
 			     		<input 
 			     		v-model="phoneNumber" 
-			     		:class="{'error' : $parent.errors.phone}" 
+			     		:class="{'error' : $parent.errors.phone , 'active' : phoneNumber.length >= 11}" 
 			     		id="phone-number" 
-			     		type="number"
+			     		type="tel"
 			     		class="dire"
-			     	    placeholder="09123456789"
-			  
+			     	    placeholder="شماره موبایل"
+			  			pattern="[0-9]*"
 			     		>
 
 			     		<i class="fa fa-phone-square"></i>
@@ -204,7 +220,7 @@
 			     	<div class="input-wrapper phone-number-wrapper">
 			     		<input 
 			     		v-model="password" 
-			     		:class="{'error' : $parent.errors.password}" 
+			     		:class="{'error' : $parent.errors.password , 'active' : password.length}" 
 			     		id="password" 
 			     		type="password"
 			     		class="dire"
@@ -221,7 +237,12 @@
 			       	</p>
 
 			        <a href="#" class="text-green" @click.prevent="$parent.goToStep(2)"> رمز عبور خود را فراموش کرده اید؟</a>
-			        <button class="submit-button disabled " @click.prevent="doLogin()" >
+
+			        <button 
+			            class="submit-button disabled "
+			     		:class="{'active' : phoneNumber.length >= 11 && password.length}" 
+			            @click.prevent="doLogin()" >
+
 						ورود
 
 					</button>
@@ -263,62 +284,30 @@
 				this.$parent.doLogin();
 
 		 	 },
-		 	 checkPhoneIsfill(){
-		 	 	var phone = $('#phone-number');
-		 	 	var pass = $ ('#password');
-
-		 	 	if (this.phoneNumber.length >= 11 && this.password.length > 0) {
-
-		 	 		 phone.addClass('active');
-	    			 pass.addClass('active');
-	    			 $('.submit-button').removeClass('disabled').addClass('active');
-
-		 	 	}else if(this.phoneNumber.length >= 11){
-
-		 	 		  phone.addClass('active');
-		 	 		  $('.submit-button').removeClass('active').addClass('disabled');
-
-		 	 	}else if(this.password.length > 0){
-
-		 	 		  pass.addClass('active');
-		 	 		  $('.submit-button').removeClass('active').addClass('disabled');
-
-		 	 	}else if(this.phoneNumber.length <= 0 && this.password.length <= 0){
-
-		 	 		phone.removeClass('active');
-		 	 		pass.removeClass('active');
-		 	 		$('.submit-button').addClass('disabled').removeClass('active');
-
-		 	 	}
-	    	
-		 	 }
+		 	
 		},
 	    watch: {
 	  	  'phoneNumber': function(value) {
-	  	  
+	  	  	
 	  	  	this.$parent.errors.phone = '';
-	  	  	$('#phone-number').removeClass('active');
-	  	  	$('#phone-number').removeClass('error');
 
-	  	  	if(this.phoneNumber.length >= 11){
+	  	    if(this.phoneNumber.length >= 11){
 	  	  		this.phoneNumber = this.phoneNumber.substring(0,11);
-	  	  		$('#password').focus();
+	  	  		this.$parent.step1.phone = this.phoneNumber
 	  	  	}
-	  	  	this.$parent.step1.phone = this.phoneNumber
-	    	this.checkPhoneIsfill();
 	      },
 	       'password': function(value) {
 
 	  	  	this.$parent.errors.password = '';
-	  	  	$('#password').removeClass('active');
-	  	  	$('#password').removeClass('error');
 	  	  	this.$parent.step1.password = this.password
-	    	this.checkPhoneIsfill();
 
 	      }
 	    },
 	    mounted(){	
-	    	this.checkPhoneIsfill();
+	    	
+	    	if (this.$parent.isOsIOS()) {
+	    		$('#phone-number').attr('type','text')
+	    	}
 	    }
 	}
 

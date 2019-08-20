@@ -43,9 +43,9 @@
     /*custom cods*/
 
 
-    .green-sbot {
+    .green-button {
         display: block;
-        color: #28a745;
+        color: #00c569;
         padding: 10px 0;
         border-radius: 3px;
         text-align: center;
@@ -160,7 +160,7 @@
                               {{transaction.product_name}}
                           </p>
                           <p class="col-xs-3">
-                              <span class="green-sbot"> {{transaction.short_status}}</span>
+                              <span class="green-button"> {{transaction.short_status}}</span>
                           </p>
                       </router-link>
                    <!--   <a :href="trans + '/' + transaction.transaction_id">
@@ -174,7 +174,7 @@
                                {{transaction.product_name}}
                           </p>
                           <p class="col-xs-3">
-                              <span class="green-sbot"> {{transaction.short_status}}</span>
+                              <span class="green-button"> {{transaction.short_status}}</span>
                           </p>
                       </a>-->
                   </li>
@@ -201,7 +201,7 @@
                               {{transaction.product_name}}
                           </p>
                           <p class="col-xs-3">
-                              <span class="green-sbot"> {{transaction.short_status}}</span>
+                              <span class="green-button"> {{transaction.short_status}}</span>
                           </p>
                       </router-link>
                   </li>

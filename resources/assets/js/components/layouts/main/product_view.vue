@@ -112,7 +112,7 @@
     .buy_details .green-button {
         margin: 5px auto;
         display: inline-block;
-        background: #28a745;
+        background: #00C569;
         color: #fff;
         border-radius: 3px;
         text-align: center;
@@ -129,7 +129,7 @@
     .green-button {
         margin: 5px 0;
         display: inline-block;
-        background: #28a745;
+        background: #00C569;
         color: #fff;
         padding: 10px 0;
         border-radius: 3px;
@@ -213,7 +213,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background: #28a745;
+        background: #00C569;
         height: 3px;
         width: 100%;
     }

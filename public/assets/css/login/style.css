@@ -102,7 +102,7 @@ input[type="text"],input[type="password"],input[type="email"]{
 }
 .green-button{
     width: 100%;
-    background: #28a745;
+    background: #00c569;
     border: none;
     border-radius: 3px;
     color: #fff;
@@ -132,7 +132,7 @@ input.pad{
     padding: 13px 47px 9px 15px;
 }
 .forget_pass{
-    color: #28a745;
+    color: #00c569;
     float: left;
     font-size: 12px;
 
@@ -228,7 +228,7 @@ ul.header_list li {
 }
 ul.header_list li.active {
     color: #313a43;
-    border-bottom:2px solid #28a745;
+    border-bottom:2px solid #00c569;
 }
 .content_section{
     padding: 40px 66px 0;
@@ -251,7 +251,7 @@ ul.header_list li.active {
 
 }
 .dots-step span.active{
-    background: #28a745;
+    background: #00c569;
 
 }
 

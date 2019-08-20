@@ -66,7 +66,7 @@
     .green-button {
         margin: 15px 0;
         display: inline-block;
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         padding: 10px 35px;
         border-radius: 3px;
@@ -106,7 +106,7 @@
     }
     .green-button:hover {
         color: #fff;
-        background: #00d614;
+        background: #00ac5c;
         transition: 300ms;
 
     }
@@ -180,7 +180,7 @@
     }
 
     .kind_user input:checked + i, .kind_activity input:checked + i {
-        color: #28a745;
+        color: #00c569;
     }
 
     .kind_user i, .kind_activity i {
@@ -222,7 +222,7 @@
     }
 
     .user-form input[type="text"]:focus {
-        border: 1px solid #28a745;
+        border: 1px solid #00c569;
         transition: 500ms;
     }
 
