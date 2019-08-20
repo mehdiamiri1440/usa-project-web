@@ -522,7 +522,8 @@
 		 	 getActivityDomain(event){
 
 		 	 	 if (event) {
-		 	 	 	this.isSelect = true
+		 	 	 	this.isSelect = true;
+                    this.$parent.step4.formSubmitActive = true;
 		 	 	 }
 		 	 	 $('#activity-domain').removeClass('error').addClass('active');
 		 	 	 this.$parent.setCategoryId(event);
