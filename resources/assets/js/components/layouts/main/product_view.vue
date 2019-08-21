@@ -482,6 +482,45 @@
         updated(){
             this.$nextTick(this.stopLoader());
         },
+        metaInfo() {
+            
+            let productSubCategory = this.product.main.sub_category_name;
+            let productName = this.product.main.product_name;
+            let productCity = this.product.main.city_name;
+            let productProvince = this.product.main.province_name;
+            let productOwnerFullName = this.product.user_info.first_name + ' ' + this.product.user_info.last_name;
+            let productStock = this.product.main.stock;
+            let productDescription = this.product.main.description ? this.product.main.description : '';
+//            
+            return {
+                title: 'خرید و فروش عمده و قیمت ' + productSubCategory + ' ' + productName + ' ' + productCity + ' ' + productProvince + ' ' + productOwnerFullName,
+                titleTemplate: 'اینکوباک | %s',
+                meta: [
+                    {
+                        name: 'description', 
+                        content: 'خرید و فروش عمده و قیمت ' + productSubCategory + ' ' + productName + ' ' + productCity + ' ' + productProvince + ' ' + 'موجودی : ' +  productStock + ' کیلوگرم' + productDescription
+                    },
+                    {
+                        name: 'author',
+                        content: 'اینکوباک'
+                    },
+                    {
+                        property: 'og:description',
+                        content: 'خرید و فروش عمده و قیمت ' + productSubCategory + ' از بهترین تولیدکنندگان ایران - اینکوباک بازار آنلاین کشاورزی ایران'
+                    },
+                    {
+                        property: 'og:site_name',
+                        content: 'اینکوباک بازارآنلاین خرید و فروش محصولات کشاورزی ایران'
+                    },
+                    {
+                        'property': 'og:title',
+                        'content':  'اینکوباک | خرید و فروش عمده و قیمت ' + productSubCategory + ' ' + productName + ' ' + productCity + ' ' + productProvince + ' ' + productOwnerFullName,
+                    },
+
+                ]
+
+            }
+        }
     }
 
 </script>
