@@ -16,9 +16,12 @@
     </script>
     <script src="<?php echo e(asset('assets/js/jquery-3.3.1.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/jquery-ui.min.js')); ?>"></script>
-    
-    
+    <script src="<?php echo e(asset('assets/js/ResizeSensor.js')); ?>"></script>
 
+    
+    <script src="<?php echo e(asset('assets/js/jquery.easing.min.js')); ?>"></script>
+
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/placeholder-content.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/fontiran.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/font-awesome.min.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap.min.css')); ?>">
@@ -34,16 +37,13 @@
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl-custom-style.css')); ?>">
 
 
-    
     <script src="<?php echo e(asset('assets/cdn/axios.js')); ?>"></script>
-
 
     <script src="<?php echo e(asset('index/js/jquery.magnific-popup.min.js')); ?>"></script>
     <script src="<?php echo e(asset('index/js/jquery.parallax.js')); ?>"></script>
     <script src="<?php echo e(asset('index/js/owl.carousel.min.js')); ?>"></script>
     <script src="<?php echo e(asset('index/js/smoothscroll.js')); ?>"></script>
     <script src="<?php echo e(asset('index/js/wow.min.js')); ?>"></script>
-
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>

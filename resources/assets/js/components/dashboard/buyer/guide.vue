@@ -1,7 +1,5 @@
 <style scoped>
-    .main-content {
-        padding: 60px 15px;
-    }
+   
     .help {
         direction: rtl;
         line-height: 1.618;
@@ -19,7 +17,6 @@
     }
 
     .help .title_list_help {
-        margin: 30px auto;
         font-size: 16px;
         font-weight: 800;
     }
@@ -36,11 +33,51 @@
         padding: 6px 0;
     }
 
+    .title {
+        text-align: right;
+        padding: 13px 15px ;
+
+    }
+
+    .title h1 {
+
+        font-size: 18px;
+        font-weight: bold;
+
+    }
+
+    @media screen and (max-width: 767px) {
+
+        .title {
+            text-align: center;
+
+        }
+
+    }
+
+
 </style>
 <template>
     <section class="main-content col-xs-12">
         <div class="help">
-            <ul>
+
+            <div  class="title col-xs-12">
+
+                <div  class="row">
+
+                   <div  class="col-xs-12 col-sm-4 pull-right">
+
+                       <h1>
+                        راهنما
+                       </h1>
+
+                   </div> 
+
+               </div>
+
+            </div>
+
+            <ul class="col-xs-12">
                 <li class="title_list_help">
                     بازرگانان و خریدارن محترم می توانید طبق راهنمای زیر، نسبت به ثبت سفارش و استعلام قیمت محصولات اقدام کنید:
                     <ol class="list-group">
@@ -54,7 +91,6 @@
                         <li>
                             پس از تنظیم و ثبت درخواست خرید، این درخواست ابتدا باید به تایید کارشناسان ما برسد و سپس به تامین کنندگان مرتبط ارسال می شود تا پیشنهادهای خود را برای شما ارسال کنند.
                         </li>
-                        <li>
                         <li>
                             در قسمت <a href="/product-list">لیست محصولات </a> می توانید متناسب با نیاز خود محصول و تامین کنندگان مورد نظر را پیدا کرده و نسبت به انجام معامله با وی و کسب اطلاعات بیشتر، با مراجعه به صفحه ی پروفایل فروشنده و کلیک روی دکمه ی ارسال پیام با او وارد چت شوید.
                         </li>

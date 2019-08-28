@@ -1,5 +1,5 @@
 <style scoped>
-    
+
 
 
     .sidebar{
@@ -127,7 +127,8 @@
 
     .search-box {
         position: relative;
-        margin-top: 14px;
+        margin-top: 15px;
+        border:none;
     }
 
     .search-box input {
@@ -186,20 +187,19 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background: #28a745;
+        background: #00c569;
         height: 3px;
         width: 100%;
     }
 
     #main {
-      
-        padding-top: 165px;
+
+        padding-top: 85px;
         position:relative;
 
     }
     .main-content{
           min-height: 900px;
-          transition: 200ms;
     }
 
     .main-content > h4 {
@@ -209,7 +209,7 @@
     .green-button {
         margin: 5px 0;
         display: inline-block;
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         padding: 10px 0;
         border-radius: 3px;
@@ -219,7 +219,7 @@
         line-height: 21px;
     }
 
-    .red_bot {
+    .#e41c38_bot {
         background: #e41c38;
         color: #fff;
     }
@@ -251,7 +251,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background: #28a745;
+        background: #00c569;
         height: 3px;
         width: 100%;
     }
@@ -303,6 +303,11 @@
     }
 
     @media screen and (max-width: 991px) {
+
+        #main{
+            padding-top: 165px;
+        }
+        
         .search-box input {
             width: calc(100% - 75px);
         }
@@ -326,12 +331,13 @@
             position: fixed;
             z-index: 1;
             width: 100%;
+            background: #f0f3f6;
+         
         }
 
-        .search-box {
-            margin: 4px auto 13px;
+        .search-box{
+            margin-top: 20px;
         }
-
         .main-image {
             padding: 0;
         }
@@ -340,12 +346,6 @@
             margin: 0;
         }
 
-        .sub-header {
-
-            background: #f0f3f6;
-            padding-top: 20px;
-
-        }
 
         .links-sub-header {
             direction: rtl;
@@ -489,16 +489,16 @@
             <a href="#" @click.prevent="addProductOrRequest()"><i class="fa fa-plus"></i> </a>
         </div>
 
-        <div class="sub-header-fix sub-header container-fluid">
+        <div class="sub-header-fix sub-header hidden-md hidden-lg container-fluid">
 
-            <div class="search-box col-sm-8 col-xs-12 col-md-5">
+            <div class="search-box hidden col-sm-8 col-xs-12 col-md-5">
                 <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید">
 
-                <button class="btn-search">
+                <button class="btn-search ">
                     <i class="fa-search fa"></i>
                 </button>
 
-                <button class="btn-filter  hidden-lg hidden-md"
+                <button class="btn-filter "
                         data-toggle="modal" data-target="#searchFilter">
                     فیلتر
                     <i class="fa fa-filter"></i>
@@ -506,11 +506,21 @@
 
             </div>
 
-            <div class="links-sub-header   hidden-xs col-sm-4 col-xs-7 ">
+            <div class="search-box col-xs-4">
+
+                <button class="btn-filter "
+                        data-toggle="modal" data-target="#searchFilter">
+                    فیلتر
+                    <i class="fa fa-filter"></i>
+                </button>
+
+            </div>
+
+            <div class="links-sub-header   col-xs-6 col-sm-3 pull-right  ">
                 <ul class="list-inline">
                     <li class="list-item active">
-                        <a href="">
-                            لیست محصولات
+                        <a href="#">
+                            دسته بندی محصول
                         </a>
                     </li>
                 </ul>
@@ -524,7 +534,7 @@
                     <section class="main-content col-xs-12" v-if="products.length > 0  ">
                         <div class="row">
                            <div id="article-list">
-                               
+
                              <ProductArticle v-for="(product,productIndex) in products"
                                             v-if="products.length >= productIndex"
                                             :key="product.main.id"
@@ -642,7 +652,7 @@
 
 
                     <section v-else style="padding-top:0; "  class="padding-15-0  col-xs-12"
-                             
+
                              >
 
                              <div class="margin-15-0 default-item-wrapper shadow-content row">
@@ -660,7 +670,7 @@
                                         <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
 
                                          <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-                                          
+
 
                                  </div>
 
@@ -670,9 +680,7 @@
 
                                          <span class="default-main-image  placeholder-content"></span>
 
-                                     </div> 
-
-                                      <br/>
+                                     </div>
 
                                     <div class=" default-main-article-content col-xs-12 col-sm-7">
                                             <span class="content-half-width placeholder-content default-input-boxing-size"></span>
@@ -687,7 +695,7 @@
 
                                          </div>
                                  </div>
-                             </div>        
+                             </div>
 
 
                           <div class="margin-15-0 default-item-wrapper shadow-content row">
@@ -705,7 +713,7 @@
                                         <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
 
                                          <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-                                          
+
 
                                  </div>
 
@@ -715,9 +723,7 @@
 
                                          <span class="default-main-image  placeholder-content"></span>
 
-                                     </div> 
-
-                                      <br/>
+                                     </div>
 
                                     <div class=" default-main-article-content col-xs-12 col-sm-7">
                                             <span class="content-half-width placeholder-content default-input-boxing-size"></span>
@@ -732,7 +738,7 @@
 
                                          </div>
                                  </div>
-                             </div>        
+                             </div>
 
 
 
@@ -752,7 +758,7 @@
                                         <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
 
                                          <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-                                          
+
 
                                  </div>
 
@@ -762,9 +768,7 @@
 
                                          <span class="default-main-image  placeholder-content"></span>
 
-                                     </div> 
-
-                                      <br/>
+                                     </div>
 
                                     <div class=" default-main-article-content col-xs-12 col-sm-7">
                                             <span class="content-half-width placeholder-content default-input-boxing-size"></span>
@@ -779,20 +783,20 @@
 
                                          </div>
                                  </div>
-                             </div>        
+                             </div>
 
-                            
+
                     </section>
                 </div>
-      
+
 
                 <aside id="sidebar" class=" product-sidebar sidebar hidden-xs  hidden-sm col-md-3">
 
                     <div class="row">
-                        
+
                         <div class="sidebar__inner col-xs-12" style="position: relative;">
-                              
-                    
+
+
                             <ProductAsideCategories
                                     :productsInfo="products"
                                     :categoryId="categoryId"
@@ -801,7 +805,7 @@
                                     :cityId="cityId"
                                     v-on:productsToParent="filterProducts($event)"
                             />
-           
+
 
                      </div>
 
@@ -893,6 +897,8 @@
                 var self = this;
                 var searchValue = this.searchValue;
                 var searchValueText = searchValue;
+                let categoryName = this.getCategoryName();
+                
 
                 axios.post('/user/profile_info')
                     .then(function (response) {
@@ -909,7 +915,8 @@
                             axios.post('/user/get_product_list', {
                                 from_record_number: 0,
                                 to_record_number: self.productCountInPage,
-                          
+                                search_text:categoryName
+
                             }).then(function (response) {
                                 self.products = response.data.products;
                                 self.loading = false;
@@ -934,6 +941,7 @@
                     axios.post('/user/get_product_list', {
                         from_record_number: 0,
                         to_record_number: this.productCountInPage,
+                        search_text:this.getCategoryName()
                     }).then(function (response) {
                         self.products = response.data.products;
 
@@ -1000,7 +1008,7 @@
                 }
             },
             resetFilter: function () {
-              
+
 
                 eventBus.$emit('submiting', true);
 
@@ -1036,9 +1044,9 @@
                 if (this.cityId) {
                     searchObject.city_id = this.cityId;
                 }
-                if (this.searchText) {
-                    searchObject.search_text = this.searchText;
-                }
+             
+                searchObject.search_text = this.getCategoryName();
+                
 
                 if (jQuery.isEmptyObject(searchObject)) {
                     searchObject.from_record_number = 0;
@@ -1080,7 +1088,7 @@
             },
             sidebarScroll() {
 
-            
+
                 var sidebarStopper = $('#wrap-footer').height();
 
                    var sidebar = new StickySidebar('#sidebar', {
@@ -1088,9 +1096,14 @@
                         innerWrapperSelector: '.sidebar__inner',
                         topSpacing: 160,
                         resizeSensor: true,
-                            
+
                     });
 
+            },
+            getCategoryName:function(){
+                let name = this.$route.params.categoryName;
+                
+                return name.replace('-',' ');
             }
         },
         watch: {

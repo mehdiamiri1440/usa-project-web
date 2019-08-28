@@ -12,7 +12,7 @@
     }
 
     .main-content {
-        padding: 110px 250px 0 0;
+        padding: 65px 250px 0 0;
 
         direction: rtl;
 
@@ -30,7 +30,7 @@
     }
 
     .little-main .main-content {
-        padding: 110px 80px 0 0;
+        padding: 65px 80px 0 0;
     }
 
     .contact-title {
@@ -143,7 +143,7 @@
 
         width: 17px;
 
-        background: #28a745;
+        background: #00C569;
 
         color: #fff;
 
@@ -189,6 +189,16 @@
         border-bottom: 2px solid #F2F2F2;
     }
 
+    .message-contact-title a{
+        color: #333;
+        transition: 300ms;
+    }
+
+    .message-contact-title a:hover{
+        color: #00c569;
+        transition: 300ms;
+    }
+    
     .message-wrapper .message-contact-title-img {
         width: 55px;
         height: 55px;
@@ -219,7 +229,7 @@
     .back-state .green-button {
         margin: 14px 0 0 25px;
         display: inline-block;
-        background: #28a745;
+        background: #00C569;
         color: #fff;
         padding: 5px 18px;
         border-radius: 3px;
@@ -373,7 +383,7 @@
 
     @media screen and (max-width: 992px) {
         .main-content {
-            padding: 110px 0 0;
+            padding: 65px 0 0;
         }
     }
 
@@ -394,7 +404,7 @@
         }
 
         .main-content {
-            padding: 110px 0 0;
+            padding: 65px 0 0;
         }
 
         .hidden_element {
@@ -796,6 +806,7 @@
 
             Echo.private('testChannel.' + userId)
                 .listen('newMessage', (e) => {
+                    console.log('harchi');
                     var senderId = e.new_message.sender_id;
                     //update contact list
                     self.loadContactList();

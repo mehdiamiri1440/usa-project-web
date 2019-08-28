@@ -51,7 +51,7 @@
     .green-button {
         margin: 15px 0;
         display: inline-block;
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         padding: 10px 35px;
         border-radius: 3px;
@@ -80,7 +80,7 @@
 
     .green-button:hover {
         color: #fff;
-        background: #00d614;
+        background: #00ac5c;
         transition: 300ms;
 
     }

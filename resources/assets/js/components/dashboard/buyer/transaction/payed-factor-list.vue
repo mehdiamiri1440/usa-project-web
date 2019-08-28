@@ -38,9 +38,9 @@
     /*end main content style */
     /*custom cods*/
 
-    .green-sbot {
+    .green-button {
         display: block;
-        color: #28a745;
+        color: #00c569;
         padding: 10px 0;
         border-radius: 3px;
         text-align: center;
@@ -161,7 +161,7 @@
                         {{factor.product_name}}
                     </p>
                     <p class="col-xs-3">
-                        <span class="green-sbot" dir="rtl"> {{factor.amount_to_pay}} تومان</span>
+                        <span class="green-button" dir="rtl"> {{factor.amount_to_pay}} تومان</span>
                     </p>
                 </router-link>
             </div>
@@ -194,7 +194,7 @@
                         {{factor.product_name}}
                     </p>
                     <p class="col-xs-3">
-                        <span class="green-sbot" dir="rtl"> {{factor.amount_to_pay}} تومان</span>
+                        <span class="green-button" dir="rtl"> {{factor.amount_to_pay}} تومان</span>
                     </p>
                 </router-link>
             </div>

@@ -5,11 +5,15 @@
 
     }
 
+    .form-wrapper .row > div{
+        float: right;
+    }
+
     .sub-des {
         font-size: 11px;
     }
 
-    .company_des > div {
+    .form-wrapper > div {
         float: right;
         margin-bottom: 10px;
     }
@@ -19,17 +23,16 @@
         padding: 4px 0;
     }
 
-    .company_des > div.col-sm-6 {
+    .form-wrapper > div.col-sm-6 {
         height: 85px;
     }
 
     .main-content {
-        padding: 60px 15px;
         direction: rtl;
     }
 
     .roules-check-inside {
-        color: #28a745;
+        color: #00c569;
     }
 
     /*end main content style */
@@ -37,7 +40,7 @@
     .green-button {
         margin: 15px 0;
         display: inline-block;
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         padding: 10px 35px;
         border-radius: 3px;
@@ -93,7 +96,7 @@
     }
 
     .rules input:checked + i {
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         border: none;
         padding: 4px;
@@ -115,258 +118,300 @@
         border: 2px solid;
     }
 
+    .title {
+        text-align: right;
+        padding: 13px 15px;
+
+    }
+
+    .title h1 {
+
+        font-size: 18px;
+        font-weight: bold;
+
+    }
+
+    @media screen and (max-width: 767px) {
+
+        .title {
+            text-align: center;
+
+        }
+
+        .detail-success {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+    }
 </style>
 <template>
     <div>
         <section class="main-content col-xs-12">
-            <form>
-                <div class="company_des col-xs-12">
-                    <div class="col-xs-12 col-sm-6">
-                        <label>
-                            <span class="text-danger">*</span>دسته ی محصول
-                        </label>
 
-                        <select class="profile-select" v-on:change="loadSubCategoryList($event)">
-                            <option disabled selected>لطفا انتخاب کنید</option>
-                            <option v-for="category in categoryList"
-                                    v-bind:value="category.id"
-                                    v-text="category.category_name"
-                            >
-                            </option>
-                        </select>
-                    </div>
-                    <div class="col-xs-12 col-sm-6">
-                        <label>
-                            <span class="text-danger">*</span>زیر دسته ی محصول
-                        </label>
-
-                        <select class="profile-select" v-on:change=setCategoryId($event)>
-                            <option disabled selected>لطفا انتخاب کنید</option>
-                            <option v-for="category in SubCategoryList"
-                                    v-bind:value="category.id"
-                                    v-text="category.category_name"
-                            >
-                            </option>
-                        </select>
-                        <span v-if="errors.category_id"
-                              class="text-danger"
-                              v-text="errors.category_id[0]"
-                        >
-                        </span>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6">
-                        <label>
-                            <span class="text-danger">*</span> موجودی <span class="sub-des">(کیلوگرم)</span>
-                        </label>
-                        <input type="text" placeholder="موجودی" v-model="product.stock">
-                        <span v-if="errors.stock"
-                              class="text-danger"
-                              v-text="errors.stock[0]"
-                        >
-                        </span>
-
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6">
-                        <label>
-                            <span class="text-danger">*</span>
-                            نوع محصول
-                            <span class="sub-des">
-                                (مثال:کله قوچی)
-                            </span>
-
-                        </label>
-
-                        <input type="text"
-                               placeholder="نوع محصول، نوع بذر و ..."
-                               v-model="product.product_name"
-                        >
-                        <span v-if="errors.product_name"
-                              class="text-danger"
-                              v-text="errors.product_name[0]"
-                        >
-
-                        </span>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6">
-                        <label>
-                            <span class="text-danger">*</span>قیمت واحد از <span
-                                class="sub-des">(هر کیلو به تومان)</span>
-                        </label>
-                        <input type="text"
-                               placeholder="حداقل قیمت هر کیلو"
-                               v-model="product.max_sale_price"
-                        >
-
-                        <span v-if="errors.max_sale_price"
-                              class="text-danger"
-                              v-text="errors.min_sale_price[0] "
-                        >
-                        </span>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6">
-                        <label>
-                            <span class="text-danger">*</span>قیمت واحد تا <span
-                                class="sub-des">(هر کیلو به تومان)</span>
-                        </label>
-                        <input type="text"
-                               placeholder="حداکثر قیمت هر کیلو"
-                               v-model="product.min_sale_price"
-                        >
-                        <span v-if="errors.min_sale_price"
-                              class="text-danger"
-                              v-text="errors.max_sale_price[0]"
-                        >
-                        </span>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6">
-                        <label>
-                            <span class="text-danger">*</span>استان مبدا
-                        </label>
-
-                        <select class="profile-select" v-on:change="loadCityList($event)">
-                            <option disabled selected>لطفا انتخاب کنید</option>
-                            <option v-for="province in provinces"
-                                    v-bind:value="province.id"
-                                    v-text="province.province_name"
-                            >
-                            </option>
-                        </select>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6">
-                        <label>
-                            <span class="text-danger">*</span> شهرمبدا
-                        </label>
-
-                        <select class="profile-select" v-on:change="setCityId($event)">
-                            <option disabled selected>لطفا انتخاب کنید</option>
-                            <option v-for="city in cities"
-                                    v-bind:value="city.id"
-                                    v-text="city.city_name"
-                            >
-                            </option>
-                        </select>
-                        <span v-if="errors.city_id"
-                              class="text-danger"
-                              v-text="errors.city_id[0]"
-                        >
-                        </span>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6">
-                        <label>
-                            <span class="text-danger">*</span>
-                            حداقل سفارش
-                            <span class="sub-des">
-                                (کیلوگرم)
-                            </span>
-
-                        </label>
-
-                        <input type="text"
-                               placeholder="حداقل میزان سفارش به کیلوگرم"
-                               v-model="product.min_sale_amount"
-                        >
-                        <span v-if="errors.min_sale_amount"
-                              class="text-danger"
-                              v-text="errors.min_sale_amount[0]"
-                        >
-                        </span>
-                    </div>
-
-                    <div class="col-xs-12">
-                        <label>
-                            توضیحات
-                        </label>
-                        <textarea placeholder="درباره ی محصولتان بنویسید..."
-                                  v-model="product.description"
-                        ></textarea>
-
-                        <span v-if="errors.description"
-                              class="text-danger"
-                              v-text="errors.description[0]"
-                        >
-                        </span>
-                    </div>
-
-                    <div class="image_company col-xs-12">
-                        <label>
-                            <span class="text-danger">*</span>تصاویر محصول
-                        </label>
-
-                        <UploadFile
-                                uploadName="product_files"
-                                uploadAccept="image/*"
-                                :uploadMinSize="1024"
-                                :uploadSize="1024 * 1024 * 10"
-                                :uploadMultiple="true"
-                                :uploadDrop="true"
-                                :uploadDropDirectory="true"
-                                :uploadAddIndex="false"
-                                :uploadThread="3"
-                                :uploadOCompress="1024 * 1024"
-                                :uploadUploadAuto="false"
-                                :uploadRef="productFiles"
-                        />
-
-                        <span v-if="errors.images_count"
-                              class="text-danger" v-text="errors.images_count[0]"
-                        ></span>
-
-                        <span v-if="errors.image_0"
-                              class="text-danger"
-                              v-text="errors.image_0[0]"
-                        ></span>
-
-                        <span v-if="errors.image_1"
-                              class="text-danger"
-                              v-text="errors.image_1[0]"
-                        ></span>
-
-                        <span v-if="errors.image_2"
-                              class="text-danger"
-                              v-text="errors.image_2[0]"
-                        ></span>
-
-                        <span v-if="errors.image_3"
-                              class="text-danger"
-                              v-text="errors.image_3[0]"
-                        ></span>
-
-                        <span v-if="errors.image_4"
-                              class="text-danger"
-                              v-text="errors.image_4[0]"
-                        ></span>
-
-                        <span v-if="errors.image_5"
-                              class="text-danger"
-                              v-text="errors.image_5[0]"
-                        ></span>
-
-                    </div>
-
-                    <div class="rules col-xs-12">
-                        با
-                        <span class="roules-check-inside">
-                            <a href='/privacy-and-policy' target="_blank">قوانین و شرایط</a>
-                        </span>
-                        ثبت محصول موافق هستم
-                        <input type="checkbox" v-model="product.rules">
-
-                        <i class="fa fa-check"></i>
-                    </div>
-
-                    <div class="col-xs-12">
-                        <input class="green-button width-full" value="ثبت محصول" type="button" @click="submitProduct"
-                               :disabled="disableSubmit === true">
+                <div  class="title col-xs-12">
+                    <div  class="row">
+                        <div  class="col-xs-12 col-sm-4 pull-right">
+                            <h1>
+                                ثبت محصول
+                            </h1>
+                        </div> 
                     </div>
                 </div>
-            </form>
+
+                <div class="form-wrapper col-xs-12">
+
+                    <div class="row">
+                    
+                        <div class="col-xs-12 col-sm-6">
+
+                            <label>
+                                <span class="text-danger">*</span>دسته ی محصول
+                            </label>
+
+                            <select class="profile-select" v-on:change="loadSubCategoryList($event)">
+                                <option disabled selected>لطفا انتخاب کنید</option>
+                                <option v-for="category in categoryList"
+                                        v-bind:value="category.id"
+                                        v-text="category.category_name"
+                                >
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <label>
+                                <span class="text-danger">*</span>زیر دسته ی محصول
+                            </label>
+
+                            <select class="profile-select" v-on:change=setCategoryId($event)>
+                                <option disabled selected>لطفا انتخاب کنید</option>
+                                <option v-for="category in SubCategoryList"
+                                        v-bind:value="category.id"
+                                        v-text="category.category_name"
+                                >
+                                </option>
+                            </select>
+                            <span v-if="errors.category_id"
+                                  class="text-danger"
+                                  v-text="errors.category_id[0]"
+                            >
+                            </span>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6">
+                            <label>
+                                <span class="text-danger">*</span> موجودی <span class="sub-des">(کیلوگرم)</span>
+                            </label>
+                            <input type="text" placeholder="موجودی" v-model="product.stock">
+                            <span v-if="errors.stock"
+                                  class="text-danger"
+                                  v-text="errors.stock[0]"
+                            >
+                            </span>
+
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6">
+                            <label>
+                                <span class="text-danger">*</span>
+                                نوع محصول
+                                <span class="sub-des">
+                                    (مثال:کله قوچی)
+                                </span>
+
+                            </label>
+
+                            <input type="text"
+                                   placeholder="نوع محصول، نوع بذر و ..."
+                                   v-model="product.product_name"
+                            >
+                            <span v-if="errors.product_name"
+                                  class="text-danger"
+                                  v-text="errors.product_name[0]"
+                            >
+
+                            </span>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6">
+                            <label>
+                                <span class="text-danger">*</span>قیمت واحد از <span
+                                    class="sub-des">(هر کیلو به تومان)</span>
+                            </label>
+                            <input type="text"
+                                   placeholder="حداقل قیمت هر کیلو"
+                                   v-model="product.max_sale_price"
+                            >
+
+                            <span v-if="errors.max_sale_price"
+                                  class="text-danger"
+                                  v-text="errors.min_sale_price[0] "
+                            >
+                            </span>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6">
+                            <label>
+                                <span class="text-danger">*</span>قیمت واحد تا <span
+                                    class="sub-des">(هر کیلو به تومان)</span>
+                            </label>
+                            <input type="text"
+                                   placeholder="حداکثر قیمت هر کیلو"
+                                   v-model="product.min_sale_price"
+                            >
+                            <span v-if="errors.min_sale_price"
+                                  class="text-danger"
+                                  v-text="errors.max_sale_price[0]"
+                            >
+                            </span>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6">
+                            <label>
+                                <span class="text-danger">*</span>استان مبدا
+                            </label>
+
+                            <select class="profile-select" v-on:change="loadCityList($event)">
+                                <option disabled selected>لطفا انتخاب کنید</option>
+                                <option v-for="province in provinces"
+                                        v-bind:value="province.id"
+                                        v-text="province.province_name"
+                                >
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6">
+                            <label>
+                                <span class="text-danger">*</span> شهرمبدا
+                            </label>
+
+                            <select class="profile-select" v-on:change="setCityId($event)">
+                                <option disabled selected>لطفا انتخاب کنید</option>
+                                <option v-for="city in cities"
+                                        v-bind:value="city.id"
+                                        v-text="city.city_name"
+                                >
+                                </option>
+                            </select>
+                            <span v-if="errors.city_id"
+                                  class="text-danger"
+                                  v-text="errors.city_id[0]"
+                            >
+                            </span>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6">
+                            <label>
+                                <span class="text-danger">*</span>
+                                حداقل سفارش
+                                <span class="sub-des">
+                                    (کیلوگرم)
+                                </span>
+
+                            </label>
+
+                            <input type="text"
+                                   placeholder="حداقل میزان سفارش به کیلوگرم"
+                                   v-model="product.min_sale_amount"
+                            >
+                            <span v-if="errors.min_sale_amount"
+                                  class="text-danger"
+                                  v-text="errors.min_sale_amount[0]"
+                            >
+                            </span>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <label>
+                                توضیحات
+                            </label>
+                            <textarea placeholder="درباره ی محصولتان بنویسید..."
+                                      v-model="product.description"
+                            ></textarea>
+
+                            <span v-if="errors.description"
+                                  class="text-danger"
+                                  v-text="errors.description[0]"
+                            >
+                            </span>
+                        </div>
+
+                        <div class="image_company col-xs-12">
+                            <label>
+                                <span class="text-danger">*</span>تصاویر محصول
+                            </label>
+
+                            <UploadFile
+                                    uploadName="product_files"
+                                    uploadAccept="image/*"
+                                    :uploadMinSize="1024"
+                                    :uploadSize="1024 * 1024 * 10"
+                                    :uploadMultiple="true"
+                                    :uploadDrop="true"
+                                    :uploadDropDirectory="true"
+                                    :uploadAddIndex="false"
+                                    :uploadThread="3"
+                                    :uploadOCompress="1024 * 1024"
+                                    :uploadUploadAuto="false"
+                                    :uploadRef="productFiles"
+                            />
+
+                            <span v-if="errors.images_count"
+                                  class="text-danger" v-text="errors.images_count[0]"
+                            ></span>
+
+                            <span v-if="errors.image_0"
+                                  class="text-danger"
+                                  v-text="errors.image_0[0]"
+                            ></span>
+
+                            <span v-if="errors.image_1"
+                                  class="text-danger"
+                                  v-text="errors.image_1[0]"
+                            ></span>
+
+                            <span v-if="errors.image_2"
+                                  class="text-danger"
+                                  v-text="errors.image_2[0]"
+                            ></span>
+
+                            <span v-if="errors.image_3"
+                                  class="text-danger"
+                                  v-text="errors.image_3[0]"
+                            ></span>
+
+                            <span v-if="errors.image_4"
+                                  class="text-danger"
+                                  v-text="errors.image_4[0]"
+                            ></span>
+
+                            <span v-if="errors.image_5"
+                                  class="text-danger"
+                                  v-text="errors.image_5[0]"
+                            ></span>
+
+                        </div>
+
+                        <div class="rules col-xs-12">
+                            با
+                            <span class="roules-check-inside">
+                                <a href='/privacy-and-policy' target="_blank">قوانین و شرایط</a>
+                            </span>
+                            ثبت محصول موافق هستم
+                            <input type="checkbox" v-model="product.rules">
+
+                            <i class="fa fa-check"></i>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <input class="green-button width-full" value="ثبت محصول" type="button" @click="submitProduct"
+                                   :disabled="disableSubmit === true">
+                        </div>
+
+                    </div>
+
+                </div>
+
         </section>
     </div>
 </template>

@@ -1,102 +1,7 @@
-<template>
-
-    <div class="image-upload-wrapper">
-        <div v-show="$refs.upload && $refs.upload.dropActive" class="drop-active">
-            <h3>Drop files to upload</h3>
-        </div>
-        <div class="upload" v-show="!isOption">
-
-            <!--  <button  v-show="files.length" type="button" class="btn btn-success" v-if="!$refs.upload || !$refs.upload.active" @click.prevent="$refs.upload.active = true">
-                  <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                  Start Upload
-              </button>-->
-            <!--     :post-action="postAction"
-                 :put-action="putAction"
-                 :extensions="extensions"
-                  :data="data"
-                     :headers="headers"
-                  -->
-            <file-upload
-                    class="col-xs-12"
-                    :accept="accept"
-                    :name="name"
-                    :multiple="multiple"
-                    :directory="directory"
-                    :size="size || 0"
-                    :thread="thread < 1 ? 1 : (thread > 5 ? 5 : thread)"
-                    :drop="drop"
-                    :drop-directory="dropDirectory"
-                    :add-index="addIndex"
-                    v-model="files"
-                    @input-filter="inputFilter"
-                    @input-file="inputFile"
-                    ref="upload">
-
-            </file-upload>
-            <div class="col-xs-12">
-                <div class="row wrapper-articles">
-                    <article v-for="(file, index) in files" :key="file.id"
-                             class="col-lg-4 col-sm-6 col-xs-12 article-images">
-                        <div class="image">
-                            <img v-if="file.thumb" :src="file.thumb" width="40" height="auto"/>
-                            <span v-else>No Image</span>
-                            <div class="actions-content">
-                                <a href="#"
-                                   @click.prevent="file.active || file.success || file.error === 'compressing' ? false :  onEditFileShow(file)"><i
-                                        aria-hidden="true" class="fa fa-pencil"></i></a>
-                                <a class="delete" href="#" @click.prevent="$refs.upload.remove(file)"><i
-                                        aria-hidden="true" class="fa fa-trash "></i></a>
-                            </div>
-                        </div>
-
-                    </article>
-                </div>
-            </div>
-
-        </div>
-        <div :class="{'modal-backdrop': true, 'fade': true, show: editFile.show}"></div>
-        <div :class="{modal: true, fade: true, show: editFile.show}" id="modal-edit-file" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <form @submit.prevent="onEditorFile">
-                        <div class="modal-body">
-                            <button type="button" class="close" @click.prevent="editFile.show = false">
-                                <span>&times;</span>
-                            </button>
-                            <div class="form-group"
-                                 v-if="editFile.show && editFile.blob && editFile.type && editFile.type.substr(0, 6) === 'image/'">
-                                <div class="edit-image">
-                                    <img :src="editFile.blob" ref="editImage"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="modal-footer ">
-                                <div class="col-xs-12 col-sm-6 pull-right">
-                                    <button type="submit" class="btn btn-crop">برش تصویر</button>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 ">
-                                    <button type="button" class="btn btn-cancel" @click.prevent="editFile.show = false">
-                                        انصراف
-                                    </button>
-                                </div>
-
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-
-
-</template>
 <style scoped>
     .btn-crop{
         display: inline-block;
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         padding: 10px 35px;
         border-radius: 3px;
@@ -125,25 +30,10 @@
         overflow: hidden;
     }
 
-    .edit-image {
-        margin-top: -2px;
-    }
-
     .image-upload-wrapper, .article-images {
         position: relative;
     }
 
-    .article-images {
-        padding: 10px;
-    }
-
-    .article-images:hover .image {
-        top: -5px;
-    }
-
-    .article-images:hover .actions-content {
-        opacity: 1;
-    }
 
     .actions-content {
         position: absolute;
@@ -152,61 +42,36 @@
         text-align: center;
         display: block;
         right: 0;
-        bottom: 0;
         opacity: 0;
-        background: rgba(49, 58, 67, 0.7);
+        background: rgba(49, 58, 67, 0.85);
         transition: 300ms;
-        padding-top: 28px;
     }
 
-    .actions-content a {
-        color: #fff;
-        display: block;
-        margin: 15px auto;
-        border: 1px solid;
-        padding: 15px;
-        border-radius: 50px;
-        height: 50px;
-        width: 50px;
-        font-size: 22px;
-        transition: 300ms;
 
-    }
-
-    .actions-content a:hover {
-        transition: 300ms;
-        background: rgb(40, 167, 69);
-    }
-
-    .actions-content .delete:hover {
-        background: #fff;
-        color: rgb(49, 58, 67);
-    }
 
     .image {
         transition: 300ms;
         top: 0;
         overflow: hidden;
-        box-shadow: 0 0 15px #aeaeae;
-        border-radius: 4px;
+        border-radius: 3px;
         position: relative;
-        height: 200px;
+        height: 115px;
 
     }
 
     .image img {
-        min-height: 200px;
-        min-width: 250px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            width: initial;
+            height: 100%;
+            min-width: 100%;
 
     }
 
-    .wrapper-articles {
-        padding: 30px 0 5px;
-    }
 
     .image-upload-wrapper .btn-group .dropdown-menu {
         display: block;
@@ -411,7 +276,7 @@
 
     .btn-primary {
         display: inline-block;
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         padding: 10px 35px;
         border-radius: 3px;
@@ -471,17 +336,14 @@
     .bg-danger {
         background-color: #dc3545 !important;
     }
-    .file-uploads{
-        padding: 0;
-    }
-    @media only screen and (max-width: 992px) {
+
+
+    @media only screen and (max-width: 991px) {
         .actions-content {
             opacity: 1;
             background: none;
         }
-        .actions-content a {
-            background: rgba(49, 58, 67, 0.7);
-        }
+
         .modal.show .modal-dialog{
             margin: 40px 20px;
         }
@@ -490,8 +352,135 @@
             width: 100%;
             margin: 8px 0 !important;
         }
+        .image {
+
+            height: 150px;
+
+        }
     }
+
+    @media only screen and (max-width: 767px) {
+
+       .imageuploadify .imageuploadify-images-list {
+            padding: 78px 0;
+        }
+
+        .image {
+
+            height: 200px;
+
+        }
+    }
+
+    @media only screen and (max-width: 512px) {
+
+        .imageuploadify .imageuploadify-images-list {
+            padding: 53px 0;
+        }
+
+        .image {
+
+            height: 150px;
+
+        }
+    }
+
 </style>
+
+
+
+
+
+<template>
+
+    <div class="image-upload-wrapper">
+        <div v-show="$refs.upload && $refs.upload.dropActive" class="drop-active">
+            <h3>Drop files to upload</h3>
+        </div>
+
+                <div class="col-xs-12 ">
+                    <div class=" row wrapper-articles">
+
+                        <article v-if="files.length > 0" v-for="(file, index) in files" :key="file.id"
+                                 class=" col-md-4 col-xs-6 col-lg-3 pull-right article-images">
+                            <div class="image">
+                                <img v-if="file.thumb" :src="file.thumb" width="40" height="auto"/>
+                                <span v-else>No Image</span>
+                                <div class="actions-content">
+                                    <a
+                                       href="#"
+                                       class="edit-image"
+                                       @click.prevent="file.active || file.success || file.error === 'compressing' ? false :  onEditFileShow(file)"><i
+                                            aria-hidden="true" class="fa fa-pencil"></i></a>
+                                    <a class="delete" href="#" @click.prevent="$refs.upload.remove(file)"><i
+                                            aria-hidden="true" class="fa fa-trash "></i></a>
+                                </div>
+                            </div>
+
+                        </article>
+                             <file-upload
+                        v-show="!isOption"
+                        class="upload col-md-4 col-xs-6 col-lg-3 pull-right"
+                        :accept="accept"
+                        :name="name"
+                        :multiple="multiple"
+                        :directory="directory"
+                        :size="size || 0"
+                        :thread="thread < 1 ? 1 : (thread > 5 ? 5 : thread)"
+                        :drop="drop"
+                        :drop-directory="dropDirectory"
+                        :add-index="addIndex"
+                        v-model="files"
+                        @input-filter="inputFilter"
+                        @input-file="inputFile"
+                        ref="upload">
+
+                </file-upload>
+
+                    </div>
+
+
+            </div>
+
+        <div :class="{'modal-backdrop': true, 'fade': true, show: editFile.show}"></div>
+        <div :class="{modal: true, fade: true, show: editFile.show}" id="modal-edit-file" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <form @submit.prevent="onEditorFile">
+                        <div class="modal-body">
+                            <button type="button" class="close" @click.prevent="editFile.show = false">
+                                <span>&times;</span>
+                            </button>
+                            <div class="form-group"
+                                 v-if="editFile.show && editFile.blob && editFile.type && editFile.type.substr(0, 6) === 'image/'">
+                                <div class="edit-image">
+                                    <img :src="editFile.blob" ref="editImage"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="modal-footer ">
+                                <div class="col-xs-12 col-sm-6 pull-right">
+                                    <button type="submit" class="btn btn-crop">برش تصویر</button>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 ">
+                                    <button type="button" class="btn btn-cancel" @click.prevent="editFile.show = false">
+                                        انصراف
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</template>
 
 <script>
     import Cropper from 'cropperjs'

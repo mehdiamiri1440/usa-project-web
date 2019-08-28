@@ -43,9 +43,9 @@
     /*custom cods*/
 
 
-    .green-sbot {
+    .green-button {
         display: block;
-        color: #28a745;
+        color: #00c569;
         padding: 10px 0;
         border-radius: 3px;
         text-align: center;
