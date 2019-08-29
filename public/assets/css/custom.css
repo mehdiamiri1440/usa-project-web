@@ -76,7 +76,7 @@ select#bd-month-first-date-id option {
 }
 
 .bd-table thead tr, .bd-goto-today {
-    background: #28a745;
+    background: #00c569;
 }
 .bd-dropdown{
     width: 50%;
@@ -166,7 +166,7 @@ select#bd-month-end-date-id option {
 }
 
 .bd-table thead tr, .bd-goto-today {
-    background: #28a745;
+    background: #00c569;
 }
 .bd-dropdown{
     width: 50%;
@@ -178,4 +178,136 @@ select#bd-month-end-date-id option {
 .bd-calendar, .bd-title {
     margin: 0;
     overflow: hidden;
+}
+
+.imageuploadify{
+
+        transition: 300ms;
+
+}
+
+.file-uploads:hover .imageuploadify{
+
+    transition: 300ms;
+    cursor: pointer;
+    border-color: #00c569;
+
+}
+
+
+.imageuploadify .imageuploadify-images-list i{
+
+    font-size: 1.3em;
+    color: #00c569;
+}
+
+.imageuploadify .imageuploadify-images-list span.imageuploadify-message{
+
+    font-size: 13px;
+    padding: 3px 7px;
+    display: inline-block;
+    margin: 0 auto;
+    font-weight: bold;
+}
+
+.imageuploadify{
+
+    margin: 0;
+    border-radius: 5px;
+    border: 3px dashed #d2d2d2;
+    color: #333;
+
+}
+
+
+.file-uploads.file-uploads-html5 label{
+    margin: 0;
+}
+
+
+ .article-images {
+     padding: 5px;
+ }
+
+
+
+ .article-images:hover .actions-content {
+    opacity: 1;
+ }
+
+ .upload{
+    padding: 5px;
+ }
+
+ .actions-content a{
+
+        color: #fff;
+        display: block;
+        margin: 3px 5px;
+        padding: 4px;
+        border-radius: 50px;
+        font-size: 16px;
+        -webkit-transition: 300ms;
+        transition: 300ms;
+        width: 25px;
+        height: 25px;
+
+ }
+
+ .actions-content a:hover {
+    transition: 300ms;
+    color: rgb(40, 167, 69);
+    background: #fff;
+}
+
+.actions-content .edit-image{
+
+    float: right;
+
+}
+.actions-content .delete{
+
+    float: left;
+
+}
+
+.actions-content .delete:hover {
+    transition: 300ms;
+    color: #e41c38;
+    background: #fff;
+}
+
+.imageuploadify .imageuploadify-images-list {
+    display: inline-block;
+    padding: 35px 0;
+}
+
+@media only screen and (max-width: 991px){
+
+    .imageuploadify .imageuploadify-images-list {
+        padding: 53px 0;
+    }
+
+    .actions-content a {
+
+        background: rgba(49, 58, 67, 0.85);
+        width: 40px;
+        height: 40px;
+        padding-top: 10px;
+        font-size: 18px;
+        border: 1px solid;
+        margin: 15px 11px 15px;
+
+    }
+
+    .actions-content .edit-image{
+
+        float: inherit;
+
+    }
+    .actions-content .delete{
+
+        float: inherit;
+
+    }
 }

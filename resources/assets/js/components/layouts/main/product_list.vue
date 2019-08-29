@@ -1,5 +1,20 @@
 <style scoped>
- 
+
+
+
+    .sidebar{
+    will-change: min-height;
+    }
+
+    .sidebar__inner{
+        transform: translate(0, 0); /* For browsers don't support translate3d. */
+        transform: translate3d(0, 0, 0);
+        will-change: position, transform;
+    }
+    #article-list{
+        /*overflow: hidden;*/
+    }
+
     #wrap-footer {
         display: none;
     }
@@ -113,6 +128,7 @@
     .search-box {
         position: relative;
         margin-top: 14px;
+        border:none;
     }
 
     .search-box input {
@@ -171,15 +187,18 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background: #28a745;
+        background: #00c569;
         height: 3px;
         width: 100%;
     }
 
     #main {
-        padding-bottom: 40px;
+
         padding-top: 165px;
         position:relative;
+    }
+    .main-content{
+          min-height: 900px;
     }
 
     .main-content > h4 {
@@ -189,7 +208,7 @@
     .green-button {
         margin: 5px 0;
         display: inline-block;
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         padding: 10px 0;
         border-radius: 3px;
@@ -231,7 +250,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background: #28a745;
+        background: #00c569;
         height: 3px;
         width: 100%;
     }
@@ -503,7 +522,9 @@
                 <div class="col-xs-12 col-md-9">
                     <section class="main-content col-xs-12" v-if="products.length > 0  ">
                         <div class="row">
-                            <ProductArticle v-for="(product,productIndex) in products"
+                           <div id="article-list">
+
+                             <ProductArticle v-for="(product,productIndex) in products"
                                             v-if="products.length >= productIndex"
                                             :key="product.main.id"
                                             :product="product"
@@ -617,7 +638,7 @@
 
 
                     <section v-else style="padding-top:0; "  class="padding-15-0  col-xs-12"
-                             
+
                              >
 
                              <div class="margin-15-0 default-item-wrapper shadow-content row">
@@ -635,7 +656,7 @@
                                         <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
 
                                          <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-                                          
+
 
                                  </div>
 
@@ -645,10 +666,9 @@
 
                                          <span class="default-main-image  placeholder-content"></span>
 
-                                     </div> 
+                                     </div>
 
-                                      <br/>
-
+                                     
                                     <div class=" default-main-article-content col-xs-12 col-sm-7">
                                             <span class="content-half-width placeholder-content default-input-boxing-size"></span>
 
@@ -662,7 +682,7 @@
 
                                          </div>
                                  </div>
-                             </div>        
+                             </div>
 
 
                           <div class="margin-15-0 default-item-wrapper shadow-content row">
@@ -680,7 +700,7 @@
                                         <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
 
                                          <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-                                          
+
 
                                  </div>
 
@@ -690,10 +710,9 @@
 
                                          <span class="default-main-image  placeholder-content"></span>
 
-                                     </div> 
+                                     </div>
 
-                                      <br/>
-
+                                    
                                     <div class=" default-main-article-content col-xs-12 col-sm-7">
                                             <span class="content-half-width placeholder-content default-input-boxing-size"></span>
 
@@ -707,7 +726,7 @@
 
                                          </div>
                                  </div>
-                             </div>        
+                             </div>
 
 
 
@@ -727,7 +746,7 @@
                                         <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
 
                                          <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-                                          
+
 
                                  </div>
 
@@ -737,9 +756,7 @@
 
                                          <span class="default-main-image  placeholder-content"></span>
 
-                                     </div> 
-
-                                      <br/>
+                                     </div>
 
                                     <div class=" default-main-article-content col-xs-12 col-sm-7">
                                             <span class="content-half-width placeholder-content default-input-boxing-size"></span>
@@ -754,20 +771,34 @@
 
                                          </div>
                                  </div>
-                             </div>        
+                             </div>
 
-                            
+
                     </section>
                 </div>
-                <aside class=" product-sidebar sticky hidden-xs  hidden-sm col-md-3">
-                    <ProductAsideCategories
-                            :productsInfo="products"
-                            :categoryId="categoryId"
-                            :subCategoryId="subCategoryId"
-                            :provinceId="provinceId"
-                            :cityId="cityId"
-                            v-on:productsToParent="filterProducts($event)"
-                    />
+
+
+                <aside id="sidebar" class=" product-sidebar sidebar hidden-xs  hidden-sm col-md-3">
+
+                    <div class="row">
+
+                        <div class="sidebar__inner col-xs-12" style="position: relative;">
+
+
+                            <ProductAsideCategories
+                                    :productsInfo="products"
+                                    :categoryId="categoryId"
+                                    :subCategoryId="subCategoryId"
+                                    :provinceId="provinceId"
+                                    :cityId="cityId"
+                                    v-on:productsToParent="filterProducts($event)"
+                            />
+
+
+                     </div>
+
+                    </div>
+
                 </aside>
             </div>
 
@@ -863,6 +894,7 @@
                             axios.post('/user/get_product_list', {
                                 from_record_number: 0,
                                 to_record_number: self.productCountInPage,
+
                             }).then(function (response) {
                                 self.products = response.data.products;
                                 self.loading = false;
@@ -947,7 +979,7 @@
                 }
             },
             resetFilter: function () {
-              
+
 
                 eventBus.$emit('submiting', true);
 
@@ -1028,10 +1060,15 @@
                 var lastScrollTop = 0;
 
 
-                var dynamicScroll = $sticky.offset().top;
-            
+                var sidebarStopper = $('#wrap-footer').height();
 
-                if (!!$sticky.offset()) { // make sure ".sticky" element exists
+                   var sidebar = new StickySidebar('#sidebar', {
+                        containerSelector: '#article-list',
+                        innerWrapperSelector: '.sidebar__inner',
+                        topSpacing: 160,
+                        resizeSensor: true,
+
+                    });
 
 
 

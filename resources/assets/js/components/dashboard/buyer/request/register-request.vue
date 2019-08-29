@@ -23,9 +23,6 @@
         font-size: 11px;
     }
 
-    .company_des > div {
-        margin-bottom: 10px;
-    }
 
     .rules-check {
         font-weight: 800;
@@ -36,7 +33,6 @@
     }
 
     .main-content {
-        padding: 60px 15px;
         direction: rtl;
     }
 
@@ -51,7 +47,7 @@
     }
 
     .roules-check-inside {
-        color: #28a745;
+        color: #00c569;
     }
 
     /*end main content style */
@@ -59,7 +55,7 @@
     .green-button {
         margin: 15px 0;
         display: inline-block;
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         padding: 10px 35px;
         border-radius: 3px;
@@ -145,7 +141,7 @@
     }
 
     .rules input:checked + i {
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         padding: 4px;
         border: none;
@@ -166,6 +162,20 @@
         font-size: 14px;
         border: 2px solid;
     }
+    .title {
+        text-align: right;
+        padding: 13px 15px ;
+
+    }
+
+    .title h1 {
+
+        font-size: 18px;
+        font-weight: bold;
+
+    }
+
+
 
     @media screen and (max-width: 992px) {
         .right-header.desktop-header {
@@ -243,6 +253,11 @@
             padding: 7px;
             padding-left: 36px;
         }
+        .title {
+            text-align: center;
+
+        }
+
     }
 
     @media screen and (max-width: 555px) {
@@ -268,7 +283,19 @@
 
 <template>
     <section class="main-content col-xs-12">
-        <div class="company_des">
+        <div class="row">
+            <div  class="title col-xs-12">
+
+                <div  class="col-xs-12 col-sm-4 pull-right">
+
+                    <h1>
+                        ثبت درخواست جدید
+                    </h1>
+
+                </div> 
+
+            </div>
+
             <div class="col-xs-12 main-column">
                 <div class="col-xs-12 col-sm-6">
                     <label for="product-category">

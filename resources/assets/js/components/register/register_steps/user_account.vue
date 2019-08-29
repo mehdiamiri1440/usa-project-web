@@ -1,5 +1,8 @@
 <style scoped>
-		
+	
+	.text-red{
+		color: red;
+	}	
 	.submit-button{
 		background: #DDDDDD;
 		color: #fff;
@@ -71,26 +74,32 @@
     }
 
 
-    input:focus ,  input:focus + i{
+    input.active{
+		border-color: #00C569;
 		color: #333;
-
     }
 
-    input.active{
+    input.active + i{
 		color: #00C569;
     }
 
     input.active:focus ,  input.active:focus + i , input.active + i {
-		color: #00C569;
+		border-color: #00C569;
     }
 
     input.error {
+    		color: #333;
+		border-color: #e41c38;
+    }
+
+    input.error + i{
 		color: #e41c38;
     }
 
-    input.error:focus ,  input.error:focus + i , input.error + i {
-		color: #e41c38;
+    input.error:focus ,  input.error:focus + i  {
+		border-color: #e41c38;
     }
+
     .error-message{
 
     	text-align: center;
@@ -122,7 +131,10 @@
 			        	
 				        <label for="user-name">
 
-				        		یک نام کاربری منحصر به فرد (انگلیسی و بدون فاصله) وارد کنید
+				        		یک نام کاربری  
+				        		<span class="text-red">(انگلیسی و بدون فاصله)</span>
+				        		 وارد کنید
+
 						</label>
 				    
 				     	<div class="input-wrapper col-xs-12 user-name-wrapper">
@@ -130,11 +142,11 @@
 				     		<div class="row">
 				     			<input 
 						     	 	 v-model="userName" 
-						     		 :class = "{'error' : $parent.errors.user_name[0]}"
+						     		 :class = "{'error' : $parent.errors.user_name[0], 'active' : userName.length >= 3 }"
 						     		 id="user-name" 
 						     		 type="text"
 						     		 class="dire"
-						     		 placeholder="نام کاربری"  
+						     		 placeholder="مثال : alizade_1357"  
 						     		 maxlength="20"
 						     		 >
 
@@ -148,19 +160,21 @@
 			     
 			        	
 				     		</div>
-				        <label for="password">
-						کلمه عبور را وارد کنید				     	
-					        </label>
+
 				     	<div class="row">
 				     		
 				    
 				     		<div class="col-xs-6 pull-right">
-				     			
+				     				<label for="password">
+									کلمه عبور را وارد کنید				     	
+								    </label>
+
 					     		<div class="input-wrapper  password-wrapper">
 
+					     		
 						     		<input 
 						     		v-model="password" 
-						     		
+						     		 :class = "{'error' : $parent.errors.password[0], 'active' : password.length}"
 						     		 id="password" 
 						     		 type="password"
 						     		 class="dire"
@@ -172,15 +186,22 @@
 
 					     	 	</div>
 
+					     	 	<p class="error-message">
+							       		<span  v-if="$parent.errors.password[0]" v-text="$parent.errors.password[0]"></span>
+							    </p>
+
 				     		</div>
 
 				     		<div class="col-xs-6 ">
-				     			
+				     				<label for="password">
+					     				تکرار کلمه عبور
+									</label>
 					     		<div class="input-wrapper password-wrapper">
 
+					     		
 						     		<input 
 						     		 v-model="rePassword" 
-						     		
+						     		 :class = "{'error' : $parent.errors.password_conf[0], 'active' : rePassword.length}"
 						     		 id="re-password" 
 						     		 type="password"
 						     		 class="dire"
@@ -193,17 +214,17 @@
 					     	 	</div>
 
 				     		</div>
-
+				     		   <p class="error-message">
+							       		<span  v-if="$parent.errors.password_conf[0]" v-text="$parent.errors.password_conf[0]"></span>
+							    </p>
 				     
 
 			        </div>
 
-
-
-			       	<p class="error-message">
-			       		<span  v-if="error " v-text="error"></span>
-			       	</p>
-			        <button class="submit-button disabled " @click.prevent="submitForm()" >
+			       
+			        <button class="submit-button disabled " 
+			        :class="{'active' : password.length && rePassword.length && userName.length >=3}"
+			        @click.prevent="$parent.setAccount()" >
 			        	مرحله بعد
 					</button>
 
@@ -221,120 +242,24 @@
 				password : '',
 				rePassword : '',
 				userName : '',
-				passwordCurrect:false,
-				error : ''
 			}
-		},
-		methods:{
-			 submitForm(){
-
-			 	if (this.password != this.rePassword) {
-
-			 		this.error = "کلمه عبور مطابقت ندارد"
-			 		$('#password').addClass('error').removeClass('active');
-			 		$('#re-password').addClass('error').removeClass('active');
-
-			 	}else if(this.userName.length < 3){
-			 		this.$parent.errors.user_name = ['نام کاربری باید حد اقل 3 حرف و بدون فاصله باشد'];
-			 		$('#user-name').addClass('error').removeClass('active');
-
-			 	}else if (this.password.length <= 7) {
-
-			 		this.error = "رمز عبور حداقل ۸ کاراکتر باشد "
-			 		$('#password').addClass('error').removeClass('active');
-
-			 	}else if(this.password.length <= 0 && this.password.length <= 0 ){
-			 		this.error = "کلمه عبور را وارد کنید";
-			 		$('#password').addClass('error').removeClass('active');
-			 		$('#re-password').addClass('error').removeClass('active');
-			 	}else{
-			 		this.error = '';
-			 		$('#password').addClass('active').removeClass('error');
-			 		$('#re-password').addClass('active').removeClass('error');
-			 		this.formIsFill();
-			 		this.$parent.setAccount();
-			 	}
-		 		
-		 	 },
-		 	 formIsFill(){
-		 	 	if (this.passwordCurrect && this.userName ) {
-
-		 	 		this.$parent.step3.user_name = this.userName;
-		 	 		this.$parent.step3.password = this.password;
-		 	 		this.$parent.step3.re_password = this.rePassword;
-
-
-
-			 		$('#user-name').addClass('active').removeClass('error');
-			 		$('#password').addClass('active').removeClass('error');
-			 		$('#re-password').addClass('active').removeClass('error');
-		 	 		$('.submit-button').removeClass('disabled').addClass('active');
-		 	 	}else{
-		 	 		$('.submit-button').removeClass('active').addClass('disabled');
-		 	 	}
-		 	 }
 		},
 	    watch: {
 	  	  'userName': function(value) {
-	  	  	this.$parent.errors.user_name = ''
-	  	  	var element = $('#user-name');
-	  	  	element.removeClass('active');
-	  	  	element.removeClass('error');
 
-	    		if (value.length >= 3) {
+	  	    this.$parent.step3.user_name = this.userName;
 
-	    			element.addClass('active').removeClass('err');
-
-	    		}else{
-
-	    			element.removeClass('active');
-	    		
-	    		}
-	    		 this.formIsFill();
 	      },
 	      'password': function(value) {
-	  	  	var element = $('#password');
-	  	  	var nextElement = $('#re-password');
-	  	  	element.removeClass('active');
-	  	  	element.removeClass('error');
-	  	  	nextElement.removeClass('active');
-	  	  	nextElement.removeClass('error');
 
-	    		if (value.length > 7) {
-
-	    			element.addClass('active');
-
-	    		}else{
-
-	    			element.removeClass('active');
-	    		
-	    		}
-	    		 this.formIsFill();
+	  	  	this.$parent.errors.password = '';
+	  	  	this.$parent.step3.password = this.password;
 
 	      },
 	      'rePassword': function(value) {
-	  	  	var element = $('#re-password');
-	  	 	var nextElement = $('#password');
-	  	  	element.removeClass('active');
-	  	  	element.removeClass('error');
-	  	  	nextElement.removeClass('active');
-	  	  	nextElement.removeClass('error');
 
-	    		if (value.length > 7) {
-
-	    			element.addClass('active');
-
-	    		}else{
-
-	    			element.removeClass('active');
-	    		
-	    		}
-
-	    		if (this.password == this.rePassword) {
-					this.passwordCurrect = true; 		
-			 	}
-	    		 this.formIsFill();
-
+	  	  		this.$parent.errors.password_conf = '';
+	  	  		this.$parent.step3.re_password = this.rePassword;
 	      },
 
 	    },

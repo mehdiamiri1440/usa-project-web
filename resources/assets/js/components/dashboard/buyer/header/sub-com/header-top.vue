@@ -21,15 +21,17 @@
   margin-right: 80px !important;
 }
 
-.main-header {
-  height: 65px;
-  position: fixed;
-  left: 0;
-  right: 250px;
-  top: 0;
-  background: #fff;
-  z-index: 5;
-}
+    .main-header {
+        height: 65px;
+        position: fixed;
+        left: 0;
+        right: 250px;
+        top: 0;
+        background: #fff;
+        z-index: 5;
+        border-bottom: 2px solid #f6f6f6;
+
+    }
 
 .little-main-header {
   right: 80px;
@@ -78,11 +80,12 @@
   padding: 20px 20px 0;
 }
 
-.right-menu-header a,
-.profile-menu-header a {
-  color: #7f8c9b;
-  margin: 5px;
-}
+    .content-header {
+        background: #00C569;
+        color: #fff;
+        height: 100%;
+        padding: 20px 20px 0;
+    }
 
 .right-menu-header a {
   font-size: 30px;
@@ -137,10 +140,16 @@
   background: #00d614;
 }
 
-i.fa-home {
-  position: relative;
-  top: 5px;
-}
+    .green-button:hover {
+        color: #fff !important;
+        background: #00ac5c;
+    }
+
+    i.fa-home {
+        position: relative;
+        top: 5px;
+    }
+
 </style>
 
 <template>

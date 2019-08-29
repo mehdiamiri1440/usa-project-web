@@ -108,10 +108,29 @@ hr {
     </div>
   </div>
 
-  <div v-else class="content-sidebar">
-    <div class="title-widget">
-      <span class="placeholder-content content-half-width"></span>
-      <hr />
+
+    <div v-else class="content-sidebar">
+      <div class="title-widget">
+            <span class="placeholder-content  content-half-width"></span>
+            <hr>
+        </div>
+        <div class="category-products-widget-default">
+            <ul>
+                <li>
+                    <span class="placeholder-content default-boxing-size content-full-width ">
+                    </span>
+                    <span class="placeholder-content default-boxing-size content-full-width ">
+                    </span>
+                    <div class="text-center">
+                        <span class="placeholder-content default-button"></span>
+
+                    </div>
+                </li>
+
+
+            </ul>
+
+        </div>
     </div>
     <div class="category-products-widget-default">
       <ul>
@@ -164,17 +183,46 @@ export default {
       e.preventDefault();
       var cityId = $(e.target).val();
 
-      this.loading = true;
-      this.registerComponentStatistics("product-list", "sidebarSearch", "city");
-      this.$parent.cityIdChild = cityId;
-      this.$parent.setCityFilterChild();
-      this.loading = false;
-    },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
-      gtag("event", actionName, {
-        event_category: categoryName,
-        event_label: labelName
-      });
+                this.registerComponentStatistics('product-list', 'sidebarSearch', 'province');
+                this.$parent.provinceIdChild = provinceId;
+                this.$parent.setProvinceFilterChild();
+
+                axios.post('/location/get_location_info', {
+                    province_id: provinceId
+                }).then(response => (this.cityList = response.data.cities));
+
+
+            },
+            setCityFilter: function (e) {
+                e.preventDefault();
+                var cityId = $(e.target).val();
+
+                this.loading = true;
+                this.registerComponentStatistics('product-list', 'sidebarSearch', 'city');
+                this.$parent.cityIdChild = cityId;
+                this.$parent.setCityFilterChild();
+                this.loading = false;
+
+            },
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName, {
+                    'event_category': categoryName,
+                    'event_label': labelName
+                });
+            },
+
+        },
+        mounted() {
+            this.init();
+             var self = this;
+                // this.$parent.scrollSet();
+             document.fonts.ready.then(function () {
+                        setTimeout(function(){
+                          self.fontIsLoad = true;
+                        },500)
+
+            });
+        }
     }
   },
   mounted() {

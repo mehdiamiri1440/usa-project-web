@@ -66,11 +66,11 @@
     }
 
     .content-sidebar h4 a:hover, .sub-category-product a:hover {
-        color: #28a745;
+        color: #00c569;
         transition: 300ms;
     }
      .sub-category-product a.active {
-        color: #28a745;
+        color: #00c569;
 
     }
     .list-open .button-toggle i {
@@ -137,8 +137,8 @@
                       <ul class=" sub-category-product little">
 
                           <li class="sub-category-item " v-for="subCategory in category.subcategories">
-                              <a       :class="{'active' : $route.params.categoryName === subCategory.category_name}"
-                                      :href="'/product-list/category/' + subCategory.category_name"
+                              <a       :class="{'active' : getCategoryName() === subCategory.category_name}"
+                                      :href=getSubCategoryUrl(subCategory)
                                       v-text="subCategory.category_name">
                               </a>
                           </li>
@@ -203,7 +203,7 @@
         methods: {
             init: function () {
                 var self = this;
-                var categoryParameterName = self.$route.params.categoryName;
+                var categoryParameterName = this.getCategoryName();
                 axios.post('/get_category_list', {
                     cascade_list: true
                 })
@@ -212,11 +212,11 @@
                        setTimeout(function(){
                          for (var i = 0 ; i < self.categoryList.length ; i++) {
                                 for (var j = 0 ; j < self.categoryList[i].subcategories.length; j++) {
-                                     if (self.categoryList[i].subcategories[j].category_name === 
+                                     if (self.categoryList[i].subcategories[j].category_name ===
                                         categoryParameterName) {
-                                    
+
                                         self.collapseMethod(self.categoryList[i].id , i , self.categoryList[i].subcategories.length);
-                                       
+
                                      }
                                 }
 
@@ -226,14 +226,14 @@
                     },500);
             },
             collapseMethod: function (id, index, listItems) {
-              
+
 
                 var wrapperlistElemetn = $(' aside .collapse-category-' + id);
                 var listElemetn = $('aside .collapse-category-' + id + ' .sub-category-product');
                 var buttonElemetn = $('aside .collapse-category-' + id + ' button span');
                 var initialHeight = this.categoryList[index].subcategories.length * 22;
-             
-               
+
+
                if (this.checkListHeight(id,listItems) !==  true) {
 
                    if (listElemetn.hasClass('little')) {
@@ -269,11 +269,11 @@
                       return v === 'بستن' ? 'مشاهده بیشتر' : 'بستن'
                   });
 
-               
+
                }
 
-              
-             
+
+
             },
             checkListHeight(id,listItems){
 
@@ -299,20 +299,33 @@
                 var elementClass = '';
                 var elementLenght = null;
                 var buttonFilter = '';
-               
+
                 for (var i = 0; i < elements.length; i++) {
-               
+
                   elementClass  = $(elements[i]).attr('class');
                   elementLenght = $('.' + elementClass + ' .sub-category-item').length ;
                   buttonFilter = $(' .' + elementClass + ' .green-button.button-toggle');
 
-                      
+
                       if (elementLenght < 3) {
-                        
+
                          buttonFilter.css('display','none');
-                        
+
                       }
                 }
+            },
+            getSubCategoryUrl: function(t){
+
+                let url = '/product-list/category/'
+                    + t.category_name.replace(' ', '-')
+                ;
+               
+                return url;
+            },
+            getCategoryName:function(){
+                let name = this.$route.params.categoryName ? this.$route.params.categoryName :'';
+                
+                return name.replace('-',' ');
             }
         },
         mounted() {
@@ -320,16 +333,13 @@
                var self = this;
 
               document.fonts.ready.then(function () {
-            
                    self.fontIsLoad = true;
-                   console.log(self.fontIsLoad)
-                        
               });
-             
+
         },
         updated(){
             this.checkListHeightUpdate();
-         
+
         }
 
     }

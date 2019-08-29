@@ -109,6 +109,7 @@
     }
 
     select.active{
+    		color: #333;
 		color: #00C569;
     }
 
@@ -117,6 +118,7 @@
     }
 
     select.error {
+    		color: #333;
 		color: #e41c38;
     }
 
@@ -166,7 +168,7 @@
 		     	<div class="row">
 		     		
 			     	<label for="phone-number">
-			     		ناحیه شهر موردنظر خود را انتخاب کنید
+			     		استان و شهر خود را انتخاب کنید
 			     	</label>
 			    	
 			    	<div class="row">

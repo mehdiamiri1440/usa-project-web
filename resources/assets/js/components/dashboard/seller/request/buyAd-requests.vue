@@ -1,8 +1,21 @@
 <style>
-    .main-content {
-        padding: 90px 15px;
+     .wrapper_no_pro {
+        text-align: center;
+        font-size: 23px;
+        padding: 15px 0;
     }
 
+    .content_no_pic {
+        font-size: 70px;
+        margin: 20px auto;
+        color: #bdbdbd;
+    }
+
+    .text_no_pic {
+        margin: 30px auto;
+        color: #bdbdbd;
+    }
+    
     .list-title, .needs, .list-time {
         float: right;
         text-align: center;
@@ -18,7 +31,7 @@
     .detail-success {
         padding: 8px 0;
         width: 100%;
-        background: #28a745;
+        background: #00c569;
         color: #fff;
         text-align: center;
         border-radius: 5px;
@@ -40,23 +53,6 @@
         margin-right: 80px;
     }
 
-    @media screen and (max-width: 992px) {
-        .list-title, .needs, .list-time {
-            padding: 15px;
-        }
-    }
-
-    @media screen and (max-width: 767px) {
-        .main-content {
-            padding: 90px 0;
-        }
-
-        .detail-success {
-            max-width: 300px;
-            margin: 0 auto;
-        }
-    }
-
     .message-list {
         padding: 19px;
         text-align: center;
@@ -69,65 +65,124 @@
         color: #e41c38;
     }
 
+    .title {
+        text-align: right;
+        padding: 13px 15px;
+
+    }
+
+    .title h1 {
+
+        font-size: 18px;
+        font-weight: bold;
+
+    }
+
+    @media screen and (max-width: 992px) {
+
+        .list-title, .needs, .list-time {
+            padding: 15px;
+        }
+
+    }
+
     @media screen and (max-width: 767px) {
+
         .green-button {
             width: 100%;
         }
+
+        .title {
+            text-align: center;
+
+        }
+
+        .detail-success {
+            max-width: 300px;
+            margin: 0 auto;
+        }
     }
+
 </style>
 <template>
     <div>
+
+
+
         <section class="main-content col-xs-12" v-if="buyAds.length != 0">
-            <ul class="list-unstyled">
-                <li v-for="buyAd in buyAds" class="list-group-item  col-xs-12">
-                    <p class="list-title col-sm-3 col-xs-12">
-                        <span v-text="buyAd.category_name"></span>
+            <div  class="title col-xs-12">
+                <div  class="row">
+                    <div  class="col-xs-12 col-sm-4 pull-right">
+                        <h1>
+                            درخواست ها
+                        </h1>
+                    </div> 
+                </div>
+            </div>
+            <div class="col-xs-12">
 
-                        <span> | </span>
+                <ul class="list-unstyled">
+                    <li v-for="buyAd in buyAds" class="list-group-item  col-xs-12">
+                        <p class="list-title col-sm-3 col-xs-12">
+                            <span v-text="buyAd.category_name"></span>
 
-                        <span v-text="buyAd.subcategory_name"></span>
+                            <span> | </span>
 
-                        <span v-if="buyAd.name" v-text="' | ' + buyAd.name"></span>
+                            <span v-text="buyAd.subcategory_name"></span>
 
-                    </p>
+                            <span v-if="buyAd.name" v-text="' | ' + buyAd.name"></span>
 
-                    <p class="needs col-sm-4 col-xs-12">
-                        <span class="static-content">
-                            میزان نیازمندی :
-                        </span>
-
-                        <span v-text="buyAd.requirement_amount"></span>
-
-                        <span class="static-content">
-                            کیلوگرم
-                        </span>
-
-                    </p>
-
-                    <p class="list-time col-sm-2 col-xs-12" v-text="buyAd.register_date"></p>
-
-                    <a class="col-sm-3 col-xs-12" href="" @click.prevent=openChat(buyAd)>
-                        <p class="detail-success">
-                            <span class="fa fa-comment"></span> پیام به خریدار
                         </p>
-                    </a>
-                </li>
 
-                <li class="message-list col-xs-12">
-                    <p>
-                        سقف تعداد درخواست های خریدی که به شما نمایش داده میشود
-                        <span class="text-red"> 5 </span>
-                        است
-                    </p>
+                        <p class="needs col-sm-4 col-xs-12">
+                            <span class="static-content">
+                                میزان نیازمندی :
+                            </span>
 
-                    <a class="green-button" href="/pricing">تعرفه ها</a>
-                </li>
-            </ul>
+                            <span v-text="buyAd.requirement_amount"></span>
+
+                            <span class="static-content">
+                                کیلوگرم
+                            </span>
+
+                        </p>
+
+                        <p class="list-time col-sm-2 col-xs-12" v-text="buyAd.register_date"></p>
+
+                        <a class="col-sm-3 col-xs-12" href="" @click.prevent=openChat(buyAd)>
+                            <p class="detail-success">
+                                <span class="fa fa-comment"></span> پیام به خریدار
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="message-list col-xs-12">
+                        <p>
+                            سقف تعداد درخواست های خریدی که به شما نمایش داده میشود
+                            <span class="text-red"> 5 </span>
+                            است
+                        </p>
+
+                        <a class="green-button" href="/pricing">تعرفه ها</a>
+                    </li>
+                </ul>
+
+            </div>
+
         </section>
+
         <section class="main-content col-xs-12 loading_images"
                  v-else-if="buyAds.length === 0 && !load"
         >
-            <h4 dir="rtl" class="text-center">درخواستی برای شما وجود ندارد.</h4>
+                    <div class="wrapper_no_pro">
+                        <div class="content_no_pic">
+                            <i class="fa fa-list-alt"></i>
+                        </div>
+
+                        <div class="text_no_pic">
+                            <p>درخواست خرید مرتبط با شما وجود ندارد</p>
+                        </div>
+                    </div>
 
         </section>
 

@@ -75,25 +75,32 @@
     }
 
 
-    input:focus ,  input:focus + i{
+    input.active{
+		border-color: #00C569;
 		color: #333;
     }
 
-    input.active{
+    input.active + i{
 		color: #00C569;
     }
 
     input.active:focus ,  input.active:focus + i , input.active + i {
-		color: #00C569;
+		border-color: #00C569;
     }
 
     input.error {
+    		color: #333;
+		border-color: #e41c38;
+    }
+
+    input.error + i{
 		color: #e41c38;
     }
 
-    input.error:focus ,  input.error:focus + i , input.error + i {
-		color: #e41c38;
+    input.error:focus ,  input.error:focus + i  {
+		border-color: #e41c38;
     }
+
     .error-message{
 
     	text-align: center;
@@ -481,7 +488,10 @@
 			       		<span  v-if="$parent.errors.category_id[0]" v-text="$parent.errors.category_id[0]"></span>
 			       	</p>
 
-			        <button class="submit-button disabled " @click.prevent="sbumitForm()" >
+			        <button class="submit-button disabled "
+			        :class = "{'active' : $parent.step4.formSubmitActive && activityType && isSelect }"
+			         :disabled="!$parent.step4.formSubmitActive"
+			         @click.prevent="finalStep()" >
 					ثبت نهایی
 					</button>
 
@@ -498,19 +508,26 @@
 			return{
 					activityDomain : this.$parent.step4.categoryId,
 					activityType : this.$parent.step4.activity_type,
-					error : ''
+					error : '',
+					isSelect : false
 			}
 		},
 		methods:{
-			 sbumitForm(){
+			 finalStep(){
+
 					this.checkfildsIsCurrect();
 					this.$parent.submitForm();
+
 		 	 },
 		 	 getActivityDomain(event){
-		 	 	
+
+		 	 	 if (event) {
+		 	 	 	this.isSelect = true
+		 	 	 }
 		 	 	 $('#activity-domain').removeClass('error').addClass('active');
 		 	 	 this.$parent.setCategoryId(event);
 		 	 	 this.fildsIsFill();
+		 	 	 
 		 	 },
 		 	 checkfildsIsCurrect(){
 		 	 	this.fildsIsFill();
@@ -520,16 +537,18 @@
 		 	 	if (this.$parent.step4.activity_type == '') {
 			 	 	  this.error = ' نوع فعالیت خود را مشخص کنید'
 			 	 	  $('.label-radio').addClass('error').removeClass('active');
+			 	 	  this.$parent.step4.formSubmitActive = true;
 			 	}else if (this.$parent.step4.categoryId == '') {
 			 		$('#activity-domain').addClass('error').removeClass('active');
+			 	 	  this.$parent.step4.formSubmitActive = true;
+
 			 	}
 
 			 	 	   
 			 	 	
 		 	 },
 		 	 fildsIsFill(){
-		 	 	console.log(this.$parent.step4.categoryId);
-		 	 	console.log(this.activityType)
+
 		 	 	 if(this.activityType != '' && this.$parent.step4.categoryId != ''){
 		 	 	 	   $('.submit-button').removeClass('disabled').addClass('active');
 		 	 	 	   $('#activity-domain').addClass('active').removeClass('error')

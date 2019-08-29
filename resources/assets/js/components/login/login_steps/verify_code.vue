@@ -1,4 +1,4 @@
-<style scoped>
+	<style scoped>
 		
 	.submit-button{
 		background: #DDDDDD;
@@ -107,24 +107,30 @@
     }
 
 
-    input:focus ,  input:focus + i{
+    input.active{
+		border-color: #00C569;
 		color: #333;
     }
 
-    input.active{
+    input.active + i{
 		color: #00C569;
     }
 
     input.active:focus ,  input.active:focus + i , input.active + i {
-		color: #00C569;
+		border-color: #00C569;
     }
 
     input.error {
+    		color: #333;
+		border-color: #e41c38;
+    }
+
+    input.error + i{
 		color: #e41c38;
     }
 
-    input.error:focus ,  input.error:focus + i , input.error + i {
-		color: #e41c38;
+    input.error:focus ,  input.error:focus + i  {
+		border-color: #e41c38;
     }
 
     .error-message{
@@ -156,50 +162,57 @@
 		     	<div class="row">
 		     		
 			     	<label for="verify-code">
-					کد تاییدیه 4 رقمی به شماره			     		
-						<span class="text-green" v-text="$parent.step2.phone"></span>
-			     		ارسال شد
+					کد ارسال شده به شماره ی	     		
+						<span class="text-green" v-text="$parent.step1.phone"></span>
+			     		را وارد کنید
 
 			     	</label>
 			    
 			     	<div class="input-wrapper verify-code-wrapper">
-
-			     		<div class="row">
+			     	
+			     		<div class="row">	
 
 				     		<div class="col-xs-3">
 					     		<input v-model="verifycode1" 
-					     		:class="{'error' : $parent.step3.msg || $parent.errors.verification_code}"
+					     		:class="{'error' : this.$parent.errors.verification_code|| $parent.step3.msg, 'active' : verifycode1.length}"
 					     		id="verify-code-1" 
 					     		type="number" 
 					     		class="dire"
 					     		placeholder="_"  
 					     		max="9"
 					     		onfocus="this.select();"
+					     		pattern="[0-9]*"
+					     		v-on:keyup="keymonitor($event,2)"
+
 					     		 />
 				     		</div>
 
 				     		<div class="col-xs-3">
 					     		<input v-model="verifycode2"
-					     		:class="{'error' : $parent.step3.msg || $parent.errors.verification_code}"
+					     		:class="{'error' : $parent.errors.verification_code || $parent.step3.msg, 'active' : verifycode2.length}"
 					     		id="verify-code-2" 
 					     		type="number" 
 					     		class="dire"
 					     		placeholder="_"  
 					     		max="9"
 					     		onfocus="this.select();"
+					     		pattern="[0-9]*"
+					     		v-on:keyup="keymonitor($event,3)"
 
 					     		 />
 				     		</div>
 
 				     		<div class="col-xs-3">
 					     		<input v-model="verifycode3"
-					     		:class="{'error' : $parent.step3.msg || $parent.errors.verification_code}"
+					     		:class="{'error' : $parent.errors.verification_code || $parent.step3.msg, 'active' : verifycode3.length }"
 					     		id="verify-code-3" 
 					     		type="number" 
 					     		class="dire"
 					     		placeholder="_"  
 					     		max="9"
 					     		onfocus="this.select();"
+					     		pattern="[0-9]*"
+					     		v-on:keyup="keymonitor($event,4)"
 
 
 					     		 />
@@ -207,13 +220,15 @@
 
 				     		<div class="col-xs-3">
 					     		<input v-model="verifycode4"
-					     		:class="{'error' : $parent.step3.msg || $parent.errors.verification_code}"
+					     		:class="{'error' : $parent.errors.verification_code|| $parent.step3.msg, 'active' : verifycode4.length}"
 					     		id="verify-code-4" 
 					     		type="number" 
 					     		class="dire"
 					     		placeholder="_"  
 					     		max="9"
 					     		onfocus="this.select();"
+					     		pattern="[0-9]*"
+					     		v-on:keyup="keymonitor($event,5)"
 
 					     		 />
 				     		</div>
@@ -225,30 +240,39 @@
 	
 			       	<p class="error-message">
 			       		<span
-			       		 v-if="this.$parent.errors.verification_code"
-			       	     v-text="this.$parent.errors.verification_code[0]"
-			       		> </span>
+			       		 v-if="$parent.errors.verification_code "
+			       	     v-text="$parent.errors.verification_code[0]"
+			       		>
+			       			
+			       		</span>
+
+
 			       		<span
-			       		 v-if="this.$parent.step3.msg"
-			       	     v-text="this.$parent.step3.msg"
-			       		> </span>
+			       		 v-if=" $parent.step3.msg "
+			       	     v-text=" $parent.step3.msg"
+			       		>
+			       			
+			       		</span>
+			       	
 			       	</p>
 
-
-                    <div class="timer-wrapper">
+                    <div class="timer-wrapper" >
                          <button
                         		
                                  class="timer-button"
                                  type="button"
                                  @click="reSendCode()"
-                                 >
+                                 :disabled="$parent.step2.reSendCode === false"
+                                 :value="$parent.step2.timeCounterDown">
 
                                  ارسال مجدد کد فعال سازی
 							
 		                     </button>
                     </div>
 
-			        <button class="submit-button disabled " @click.prevent="getVerificationCode()" >
+			        <button class="submit-button disabled " 
+			        :class="{'active' : currentCode.length == 4}"
+			        @click.prevent="getVerificationCode()" >
 			        	بررسی کد
 					</button>
 
@@ -263,6 +287,7 @@
 	export default{
 		data(){
 			return{
+
 				verifycode1 : this.$parent.step3.verification_code.substring(0, 1),
 				verifycode2 : this.$parent.step3.verification_code.substring(1, 2),
 				verifycode3 : this.$parent.step3.verification_code.substring(2, 3),
@@ -281,75 +306,72 @@
 				
 		 	 },
 		 	 sumCodeNumbers(){
+		 	 		
 		 	 		this.currentCode =  this.verifycode1 + this.verifycode2 + this.verifycode3 + this.verifycode4;
-		 	 		this.$parent.step3.verification_code = this.currentCode;
+		 	 		if (this.currentCode.length == 4) {
+		 	 			this.$parent.step3.verification_code = this.currentCode
+		 	 		}
 		 	 },
 		 	 tabTopNext(element){
 		 	 	  $(element).focus();
 			 },
-			 checkCodeActive(nextElement){
-			 	this.formIsFill();
-			 },
-			 formIsFill(){
-			 	$('.dire').removeClass('error');
-			 	$('.dire').removeClass('active');
-		    	if (this.currentCode.length >= 4 ) {
-		    		$('.dire').addClass('active');
-					$('.submit-button').removeClass('disabled').addClass('active');
-		    	}else{
-		    	
-					$('.submit-button').removeClass('active').addClass('disabled');
-		    	}
-			 }
+			 keymonitor: function(event,index) {
+			       
+
+			       var keyWatch = this.$parent.toLatinNumbers(event.key);
+		
+			       	if(
+			       		(event.keyCode >= 48 && event.keyCode <= 57)
+			       	 || (event.keyCode >= 96 && event.keyCode <= 105 )
+			       	 || (keyWatch >= 0 && keyWatch <= 9)
+			       	 ){
+
+			       	if (index <= 4) {
+			       		  this.tabTopNext('#verify-code-' + index);
+			       	}
+				       
+				         
+			         }
+			   },
+			
 		 },
 	    watch: {
 	  	  'verifycode1': function(value) {
+	  	  	this.$parent.errors.verification_code = ''
 	  	  	this.sumCodeNumbers();
-	  	  	var element = $('#verify-code-1');
-	  	  	var nextElement = $('#verify-code-2');
-	  	  	this.checkCodeActive(nextElement);
 	  	  	this.verifycode1 = this.verifycode1.substring(0,1);
 	      },
 	      'verifycode2': function(value) {
+	      	this.$parent.errors.verification_code = ''
 	      	this.sumCodeNumbers();
-	  	  	var element = $('#verify-code-2');
-	  	  	var nextElement = $('#verify-code-3');
-	  	  	this.checkCodeActive(nextElement);
 	  	  	this.verifycode2 = this.verifycode2.substring(0,1);
 
 	      },
 	      'verifycode3': function(value) {
+	      	this.$parent.errors.verification_code = ''
 	      	this.sumCodeNumbers();
-	  	  	var element = $('#verify-code-3');
-	  	  	var nextElement = $('#verify-code-4');
-	  	  	this.checkCodeActive(nextElement);
 	  	  	this.verifycode3 = this.verifycode3.substring(0,1);
 
 	      },
 	      'verifycode4': function(value) {
+	      	this.$parent.errors.verification_code = ''
 	      	this.sumCodeNumbers();
-	  	  	var element = $('#verify-code-4');
-	  	  	var nextElement = $('.submit-button');
-	  	  	this.checkCodeActive(nextElement);
 	  	  	this.verifycode4 = this.verifycode4.substring(0,1);
 	      }
+
 	     
 	    },
 	    mounted(){
-	    		
-	    		var self = this;
-	    		$('#verify-code-1').keyup(function(){
-	    			self.tabTopNext('#verify-code-2');
-	    		});
-	    		$('#verify-code-2').keyup(function(){
-	    			self.tabTopNext('#verify-code-3');
-	    		})
-	    		$('#verify-code-3').keyup(function(){
-	    			self.tabTopNext('#verify-code-4');
-	    		});
-	    		$('#verify-code-4').keyup(function(){
-	    			self.tabTopNext('.submit-button');
-	    		})
+	    		if (this.$parent.isOsIOS()) {
+	    			for (var i = 0; i <= 4; i++) {
+	    				$('#verify-code-' + i).attr('type','text')
+	    			}
+		    		
+		    	}	
+
+	    	if (this.$parent.isOsIOS()) {
+	    		$('#phone-number').attr('type','text')
+	    	}
 	    }
 	  
 	}

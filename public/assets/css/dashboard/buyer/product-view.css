@@ -173,7 +173,7 @@ th, td {
     position: absolute;
     bottom: 0;
     left: 0;
-    background: #28a745;
+    background: #00c569;
     height: 3px;
     width: 100%;
 }
@@ -322,7 +322,7 @@ th, td {
 .buy_details  .green_bot {
     margin: 5px auto;
     display: inline-block;
-    background: #28a745;
+    background: #00c569;
     color: #fff;
     border-radius: 3px;
     text-align: center;
@@ -337,7 +337,7 @@ th, td {
 .green_bot {
     margin: 5px 0;
     display: inline-block;
-    background: #28a745;
+    background: #00c569;
     color: #fff;
     padding: 10px 0;
     border-radius: 3px;
@@ -410,7 +410,7 @@ li.active a::after {
     position: absolute;
     bottom: 0;
     left: 0;
-    background: #28a745;
+    background: #00c569;
     height: 3px;
     width: 100%;
 }

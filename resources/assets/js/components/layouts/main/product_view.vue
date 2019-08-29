@@ -110,36 +110,36 @@
   height: 100%;
 }
 
-.buy_details .green-button {
-  margin: 5px auto;
-  display: inline-block;
-  background: #28a745;
-  color: #fff;
-  border-radius: 3px;
-  text-align: center;
-  font-size: 12px;
-  width: initial;
-  line-height: 21px;
-  padding: 8px 30px;
-}
+    .buy_details .green-button {
+        margin: 5px auto;
+        display: inline-block;
+        background: #00C569;
+        color: #fff;
+        border-radius: 3px;
+        text-align: center;
+        font-size: 12px;
+        width: initial;
+        line-height: 21px;
+        padding: 8px 30px;
+    }
 
 .buy_details .submit-button {
   text-align: center;
 }
 
-.green-button {
-  margin: 5px 0;
-  display: inline-block;
-  background: #28a745;
-  color: #fff;
-  padding: 10px 0;
-  border-radius: 3px;
-  text-align: center;
-  font-size: 12px;
-  width: 100%;
-  line-height: 21px;
-  border: none;
-}
+    .green-button {
+        margin: 5px 0;
+        display: inline-block;
+        background: #00C569;
+        color: #fff;
+        padding: 10px 0;
+        border-radius: 3px;
+        text-align: center;
+        font-size: 12px;
+        width: 100%;
+        line-height: 21px;
+        border: none;
+    }
 
 .green-button:hover {
   background: #279b41;
@@ -210,15 +210,15 @@ li.active a {
   color: #313942;
 }
 
-li.active a::after {
-  content: " ";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background: #28a745;
-  height: 3px;
-  width: 100%;
-}
+    li.active a::after {
+        content: " ";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: #00C569;
+        height: 3px;
+        width: 100%;
+    }
 
 @media screen and (max-width: 1199px) {
   /*.logo {*/
