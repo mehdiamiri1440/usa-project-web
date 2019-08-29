@@ -1,9 +1,4 @@
 <style scoped>
-.contact-is-search img {
-  display: block;
-  width: 60px;
-  margin: 18px auto;
-}
 .loading-container {
   display: flex;
   width: 100%;
@@ -23,22 +18,22 @@
 .chat-loaded {
   opacity: 1;
 }
-.hidden-style {
-  display: none;
-}
-.show-style {
+.contact-is-search img {
   display: block;
+  width: 60px;
+  margin: 18px auto;
 }
+
 .check-items {
   padding-left: 10px;
   color: #00a65a;
 }
 
 .main-content {
-   padding: 65px 250px 0 0;
+  padding: 65px 250px 0 0;
+
   direction: rtl;
 
-      
   border-bottom: 2px solid #f2f2f2;
   height: 100%;
   position: fixed;
@@ -53,7 +48,7 @@
 }
 
 .little-main .main-content {
-  padding: 110px 80px 0 0;
+  padding: 65px 80px 0 0;
 }
 
 .contact-title {
@@ -62,9 +57,11 @@
   border-bottom: 2px solid #f2f2f2;
 }
 
-    .little-main .main-content {
-        padding: 65px 80px 0 0;
-    }
+.contact-title i {
+  font-size: 26px;
+  position: relative;
+  top: 5px;
+}
 
 .contact-title span {
   font-size: 16px;
@@ -162,8 +159,8 @@
   height: 17px;
 
   width: 17px;
- background: #00C569;
- 
+
+  background: #00c569;
 
   color: #fff;
 
@@ -173,7 +170,6 @@
 
   padding-top: 5px;
 }
-       
 
 .contact-wrapper,
 .contact-wrapper > div {
@@ -211,6 +207,16 @@
   border-bottom: 2px solid #f2f2f2;
 }
 
+.message-contact-title a {
+  color: #333;
+  transition: 300ms;
+}
+
+.message-contact-title a:hover {
+  color: #00c569;
+  transition: 300ms;
+}
+
 .message-wrapper .message-contact-title-img {
   width: 55px;
   height: 55px;
@@ -241,7 +247,7 @@
 .back-state .green-button {
   margin: 14px 0 0 25px;
   display: inline-block;
-  background: #28a745;
+  background: #00c569;
   color: #fff;
   padding: 5px 18px;
   border-radius: 3px;
@@ -252,26 +258,9 @@
   font-size: 12px;
 }
 
-    .message-contact-title a{
-        color: #333;
-        transition: 300ms;
-    }
-
-    .message-contact-title a:hover{
-        color: #00c569;
-        transition: 300ms;
-    }
-    
-    .message-wrapper .message-contact-title-img {
-        width: 55px;
-        height: 55px;
-        float: right;
-        border-radius: 50px;
-        overflow: hidden;
-        border: 1px solid #B5B5B5;
-        position: relative;
-        margin: 0 22px 0 17px;
-    }
+.back-state {
+  display: none;
+}
 
 .message-wrapper .chat-page ul {
   padding: 20px;
@@ -280,18 +269,7 @@
 
   left: 0;
 
-    .back-state .green-button {
-        margin: 14px 0 0 25px;
-        display: inline-block;
-        background: #00C569;
-        color: #fff;
-        padding: 5px 18px;
-        border-radius: 3px;
-        text-align: center;
-        border: none;
-        -webkit-transition: 300ms;
-        transition: 300ms;
-        font-size: 12px;
+  right: 0;
 
   bottom: 66px;
   top: 70px;
@@ -419,7 +397,7 @@
 
 @media screen and (max-width: 992px) {
   .main-content {
-    padding: 110px 0 0;
+    padding: 65px 0 0;
   }
 }
 
@@ -440,56 +418,17 @@
   }
 
   .main-content {
-    padding: 110px 0 0;
+    padding: 65px 0 0;
   }
 
   .hidden_element {
     display: none;
   }
 
-    .contact-not-found i {
-        font-size: 26px;
-    }
-
-    .contact-not-found p {
-        margin-bottom: 7px;
-    }
-
-    @media screen and (max-width: 992px) {
-        .main-content {
-            padding: 65px 0 0;
-        }
-    }
-
-    @media screen and (max-width: 768px) {
-        .send-message-form .button-wrapper button {
-            padding: 12px 13px;
-            font-size: inherit;
-            width: inherit;
-            height: inherit;
-        }
-
-        .send-message-form .message-input input {
-            padding: 13px 15px;
-        }
-
-        .default-main-contents {
-            display: none;
-        }
-
-        .main-content {
-            padding: 65px 0 0;
-        }
-
-        .hidden_element {
-            display: none;
-        }
-
-        .back-state {
-            display: block;
-        }
-    }
-
+  .back-state {
+    display: block;
+  }
+}
 </style>
 
 <template>
@@ -887,7 +826,7 @@ export default {
     this.init();
     eventBus.$emit("subHeader", this.items);
   },
-  created: function() {
+  /* created: function() {
     gtag("config", "UA-129398000-1", { page_path: "/messages" });
 
     var self = this;
@@ -908,55 +847,56 @@ export default {
 
 
             }
-        },
-        mounted: function () {
-            this.init();
-            eventBus.$emit('subHeader', this.items);
-        },
+        }, */
+  mounted: function() {
+    this.init();
+    eventBus.$emit("subHeader", this.items);
+  },
 
-        created: function () {
+  created: function() {
+    gtag("config", "UA-129398000-1", { page_path: "/messages" });
 
-            gtag('config', 'UA-129398000-1', {'page_path': '/messages'});
+    var self = this;
 
-            var self = this;
-
-            if (Push.Permission.has() === false) {
-                Push.Permission.request(function () {
-                }, function () {
-                });
-            }
-
-            Echo.private('testChannel.' + userId)
-                .listen('newMessage', (e) => {
-                    console.log('harchi');
-                    var senderId = e.new_message.sender_id;
-                    //update contact list
-                    self.loadContactList();
-
-                    if (self.currentContactUserId) {
-                        if (self.currentContactUserId === senderId) {
-
-                            self.chatMessages.push(e.new_message);
-                            self.scrollToEnd(0);
-
-                            if (self.isComponentActive == false) {
-                                self.pushNotification("پیام جدید", e.new_message.text, '/dashboard/messages');
-                            }
-                        }
-                    }
-                    else {
-                        this.pushNotification("پیام جدید", e.new_message.text, '/dashboard/messages');
-                    }
-
-                });
-        },
-        activated() {
-            this.isComponentActive = true;
-        },
-        deactivated() {
-            this.isComponentActive = false;
-        },
+    if (Push.Permission.has() === false) {
+      Push.Permission.request(function() {}, function() {});
     }
+
+    Echo.private("testChannel." + userId).listen("newMessage", e => {
+      console.log("harchi");
+      var senderId = e.new_message.sender_id;
+      //update contact list
+      self.loadContactList();
+
+      if (self.currentContactUserId) {
+        if (self.currentContactUserId === senderId) {
+          self.chatMessages.push(e.new_message);
+          self.scrollToEnd(0);
+
+          if (self.isComponentActive == false) {
+            self.pushNotification(
+              "پیام جدید",
+              e.new_message.text,
+              "/dashboard/messages"
+            );
+          }
+        }
+      } else {
+        this.pushNotification(
+          "پیام جدید",
+          e.new_message.text,
+          "/dashboard/messages"
+        );
+      }
+    });
+  },
+  activated() {
+    this.isComponentActive = true;
+  },
+  deactivated() {
+    this.isComponentActive = false;
+  }
+};
 </script>
 
 

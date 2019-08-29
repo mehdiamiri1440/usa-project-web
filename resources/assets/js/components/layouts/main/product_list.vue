@@ -570,6 +570,7 @@
                                     </div>
                                 </div>
                             </div>
+                            </div>
                         </div>
                     </section>
 
@@ -800,6 +801,7 @@
                     </div>
 
                 </aside>
+                
             </div>
 
         </main>
@@ -1223,9 +1225,7 @@
                   
                }
 
-            }
-
-        },
+            },
         watch: {
             searchText: function () {
                 var self = this;

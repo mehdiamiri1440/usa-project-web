@@ -70,67 +70,61 @@ hr {
 </style>
 
 <template>
-  <div v-if="fontIsLoad && provinceList" class="content-sidebar">
-    <div class="title-widget">
-      <h3>موقعیت جغرافیایی</h3>
-      <hr />
+  <div>
+    <div v-if="fontIsLoad && provinceList" class="content-sidebar">
+      <div class="title-widget">
+        <h3>موقعیت جغرافیایی</h3>
+        <hr />
+      </div>
+
+      <div class="box-sidebar">
+        <i class="fa-building fa"></i>
+
+        <select v-on:change="setProvinceFilter($event)">
+          <option disabled selected>استان</option>
+
+          <option
+            v-for="province in provinceList"
+            v-bind:value="province.id"
+            v-text="province.province_name"
+          ></option>
+        </select>
+      </div>
+      <div class="box-sidebar">
+        <i class="fa-home fa"></i>
+        <select v-on:change="setCityFilter($event)">
+          <option disabled selected>شهر</option>
+          <option v-for="city in cityList" v-bind:value="city.id">{{city.city_name}}</option>
+        </select>
+      </div>
+      <div class="sidebar-buttons">
+        <a href="#" class="btn green-button hidden-md hidden-lg" data-dismiss="modal">جستجو</a>
+
+        <a
+          href="#"
+          @click.prevent="$parent.resetFilterChild()"
+          data-dismiss="modal"
+          class="btn red-button"
+        >حذف فیلتر ها</a>
+      </div>
     </div>
-
-    <div class="box-sidebar">
-      <i class="fa-building fa"></i>
-
-      <select v-on:change="setProvinceFilter($event)">
-        <option disabled selected>استان</option>
-
-        <option
-          v-for="province in provinceList"
-          v-bind:value="province.id"
-          v-text="province.province_name"
-        ></option>
-      </select>
-    </div>
-    <div class="box-sidebar">
-      <i class="fa-home fa"></i>
-      <select v-on:change="setCityFilter($event)">
-        <option disabled selected>شهر</option>
-        <option v-for="city in cityList" v-bind:value="city.id">{{city.city_name}}</option>
-      </select>
-    </div>
-    <div class="sidebar-buttons">
-      <a href="#" class="btn green-button hidden-md hidden-lg" data-dismiss="modal">جستجو</a>
-
-      <a
-        href="#"
-        @click.prevent="$parent.resetFilterChild()"
-        data-dismiss="modal"
-        class="btn red-button"
-      >حذف فیلتر ها</a>
-    </div>
-  </div>
-
 
     <div v-else class="content-sidebar">
       <div class="title-widget">
-            <span class="placeholder-content  content-half-width"></span>
-            <hr>
-        </div>
-        <div class="category-products-widget-default">
-            <ul>
-                <li>
-                    <span class="placeholder-content default-boxing-size content-full-width ">
-                    </span>
-                    <span class="placeholder-content default-boxing-size content-full-width ">
-                    </span>
-                    <div class="text-center">
-                        <span class="placeholder-content default-button"></span>
-
-                    </div>
-                </li>
-
-
-            </ul>
-
-        </div>
+        <span class="placeholder-content content-half-width"></span>
+        <hr />
+      </div>
+      <div class="category-products-widget-default">
+        <ul>
+          <li>
+            <span class="placeholder-content default-boxing-size content-full-width"></span>
+            <span class="placeholder-content default-boxing-size content-full-width"></span>
+            <div class="text-center">
+              <span class="placeholder-content default-button"></span>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="category-products-widget-default">
       <ul>
@@ -183,47 +177,46 @@ export default {
       e.preventDefault();
       var cityId = $(e.target).val();
 
-                this.registerComponentStatistics('product-list', 'sidebarSearch', 'province');
-                this.$parent.provinceIdChild = provinceId;
-                this.$parent.setProvinceFilterChild();
+      this.registerComponentStatistics(
+        "product-list",
+        "sidebarSearch",
+        "province"
+      );
+      this.$parent.provinceIdChild = provinceId;
+      this.$parent.setProvinceFilterChild();
 
-                axios.post('/location/get_location_info', {
-                    province_id: provinceId
-                }).then(response => (this.cityList = response.data.cities));
+      axios
+        .post("/location/get_location_info", {
+          province_id: provinceId
+        })
+        .then(response => (this.cityList = response.data.cities));
+    },
+    setCityFilter: function(e) {
+      e.preventDefault();
+      var cityId = $(e.target).val();
 
-
-            },
-            setCityFilter: function (e) {
-                e.preventDefault();
-                var cityId = $(e.target).val();
-
-                this.loading = true;
-                this.registerComponentStatistics('product-list', 'sidebarSearch', 'city');
-                this.$parent.cityIdChild = cityId;
-                this.$parent.setCityFilterChild();
-                this.loading = false;
-
-            },
-            registerComponentStatistics: function (categoryName, actionName, labelName) {
-                gtag('event', actionName, {
-                    'event_category': categoryName,
-                    'event_label': labelName
-                });
-            },
-
-        },
-        mounted() {
-            this.init();
-             var self = this;
-                // this.$parent.scrollSet();
-             document.fonts.ready.then(function () {
-                        setTimeout(function(){
-                          self.fontIsLoad = true;
-                        },500)
-
-            });
-        }
+      this.loading = true;
+      this.registerComponentStatistics("product-list", "sidebarSearch", "city");
+      this.$parent.cityIdChild = cityId;
+      this.$parent.setCityFilterChild();
+      this.loading = false;
+    },
+    registerComponentStatistics: function(categoryName, actionName, labelName) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName
+      });
     }
+  },
+  mounted() {
+    this.init();
+    var self = this;
+    // this.$parent.scrollSet();
+    document.fonts.ready.then(function() {
+      setTimeout(function() {
+        self.fontIsLoad = true;
+      }, 500);
+    });
   },
   mounted() {
     this.init();
