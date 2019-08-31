@@ -2,14 +2,15 @@
 .loading-container {
   display: flex;
   width: 100%;
+  min-height: 60vh;
   justify-content: center;
   align-items: center;
 }
 .whatsapp-loading-gif {
   justify-content: center;
   align-items: center;
-  width: 30%;
-  height: 30%;
+  width: 20%;
+  height: 0%;
   display: flex;
 }
 .chat-not-loaded {
