@@ -532,7 +532,12 @@
                                 self.registerComponentStatistics('product-register','product-registered-successfully','product-registered-successfully');
 
                                 setTimeout(function () {
-                                    location.reload(true);
+                                    // location.reload(true);
+                                                            $('#modal-buttons').modal('show');
+                                                window.location.replace(
+                               '/dashboard/my-products'
+
+)
                                     eventBus.$emit('submiting', false);
                                 }, 4000);
                             }
@@ -540,8 +545,7 @@
                                 self.popUpMsg = response.data.msg;
                                 eventBus.$emit('submitSuccess', self.popUpMsg);
                                 eventBus.$emit('submiting', false);
-                                $('#modal-buttons').modal('show');
-                            }
+}
                         })
                         .catch(function (err) {
                             self.errors = [];
