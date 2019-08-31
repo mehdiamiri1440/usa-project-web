@@ -38,9 +38,15 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     <script src="<?php echo e(asset('index/js/jquery-ui.min.js')); ?>"></script>
 >>>>>>> 3-redesign-register-form-to-be-more-user-friendly-and-exploratory
+=======
+    <script src="<?php echo e(asset('index/js/jquery-ui.min.js')); ?>"></script>
+=======
+>>>>>>> 5-redesign-complete-profile-form-to-be-more-user-friendly-and-exploratory-2
+>>>>>>> 14-youtube-like-loaders-in-all-pages-if-possible
     <script src="<?php echo e(asset('assets/cdn/axios.js')); ?>"></script>
 
     <script src="<?php echo e(asset('index/js/jquery.magnific-popup.min.js')); ?>"></script>
