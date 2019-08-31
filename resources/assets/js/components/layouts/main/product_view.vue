@@ -110,36 +110,36 @@
   height: 100%;
 }
 
-    .buy_details .green-button {
-        margin: 5px auto;
-        display: inline-block;
-        background: #00C569;
-        color: #fff;
-        border-radius: 3px;
-        text-align: center;
-        font-size: 12px;
-        width: initial;
-        line-height: 21px;
-        padding: 8px 30px;
-    }
+.buy_details .green-button {
+  margin: 5px auto;
+  display: inline-block;
+  background: #00c569;
+  color: #fff;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 12px;
+  width: initial;
+  line-height: 21px;
+  padding: 8px 30px;
+}
 
 .buy_details .submit-button {
   text-align: center;
 }
 
-    .green-button {
-        margin: 5px 0;
-        display: inline-block;
-        background: #00C569;
-        color: #fff;
-        padding: 10px 0;
-        border-radius: 3px;
-        text-align: center;
-        font-size: 12px;
-        width: 100%;
-        line-height: 21px;
-        border: none;
-    }
+.green-button {
+  margin: 5px 0;
+  display: inline-block;
+  background: #00c569;
+  color: #fff;
+  padding: 10px 0;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 12px;
+  width: 100%;
+  line-height: 21px;
+  border: none;
+}
 
 .green-button:hover {
   background: #279b41;
@@ -210,15 +210,15 @@ li.active a {
   color: #313942;
 }
 
-    li.active a::after {
-        content: " ";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        background: #00C569;
-        height: 3px;
-        width: 100%;
-    }
+li.active a::after {
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #00c569;
+  height: 3px;
+  width: 100%;
+}
 
 @media screen and (max-width: 1199px) {
   /*.logo {*/
@@ -456,6 +456,100 @@ export default {
     stopLoader: function() {
       eventBus.$emit("isLoading", false);
     }
+  },
+  created() {
+    gtag("config", "UA-129398000-1", { page_path: "/product-view" });
+
+    document.addEventListener("click", this.documentClick);
+  },
+  mounted() {
+    this.init();
+    var self = this;
+    document.onreadystatechange = () => {
+      if (document.readyState === "complete") {
+        self.$nextTick(self.stopLoader());
+      }
+    };
+  },
+  updated() {
+    this.$nextTick(this.stopLoader());
+  },
+  metaInfo() {
+    let productSubCategory = this.product.main.sub_category_name;
+    let productName = this.product.main.product_name;
+    let productCity = this.product.main.city_name;
+    let productProvince = this.product.main.province_name;
+    let productOwnerFullName =
+      this.product.user_info.first_name +
+      " " +
+      this.product.user_info.last_name;
+    let productStock = this.product.main.stock;
+    let productDescription = this.product.main.description
+      ? this.product.main.description
+      : "";
+    //
+    return {
+      title:
+        "خرید و فروش عمده و قیمت " +
+        productSubCategory +
+        " " +
+        productName +
+        " " +
+        productCity +
+        " " +
+        productProvince +
+        " " +
+        productOwnerFullName,
+      titleTemplate: "اینکوباک | %s",
+      meta: [
+        {
+          name: "description",
+          content:
+            "خرید و فروش عمده و قیمت " +
+            productSubCategory +
+            " " +
+            productName +
+            " " +
+            productCity +
+            " " +
+            productProvince +
+            " " +
+            "موجودی : " +
+            productStock +
+            " کیلوگرم" +
+            productDescription
+        },
+        {
+          name: "author",
+          content: "اینکوباک"
+        },
+        {
+          property: "og:description",
+          content:
+            "خرید و فروش عمده و قیمت " +
+            productSubCategory +
+            " از بهترین تولیدکنندگان ایران - اینکوباک بازار آنلاین کشاورزی ایران"
+        },
+        {
+          property: "og:site_name",
+          content: "اینکوباک بازارآنلاین خرید و فروش محصولات کشاورزی ایران"
+        },
+        {
+          property: "og:title",
+          content:
+            "اینکوباک | خرید و فروش عمده و قیمت " +
+            productSubCategory +
+            " " +
+            productName +
+            " " +
+            productCity +
+            " " +
+            productProvince +
+            " " +
+            productOwnerFullName
+        }
+      ]
+    };
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/product-view" });

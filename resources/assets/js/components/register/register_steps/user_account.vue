@@ -154,7 +154,7 @@
 
 						     	</div>
 
-								     <p class="error-message">
+								    <p class="error-message">
 							       		<span  v-if="$parent.errors.user_name[0]" v-text="$parent.errors.user_name[0]"></span>
 							       	</p>
 			     
@@ -173,7 +173,7 @@
 
 					     		
 						     		<input 
-						     		v-model="password" 
+						     		 v-model="password" 
 						     		 :class = "{'error' : $parent.errors.password[0], 'active' : password.length}"
 						     		 id="password" 
 						     		 type="password"
