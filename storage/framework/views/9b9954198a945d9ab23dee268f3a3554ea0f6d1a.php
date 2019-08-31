@@ -37,6 +37,10 @@
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl-custom-style.css')); ?>">
 
 
+<<<<<<< HEAD
+=======
+    <script src="<?php echo e(asset('index/js/jquery-ui.min.js')); ?>"></script>
+>>>>>>> 3-redesign-register-form-to-be-more-user-friendly-and-exploratory
     <script src="<?php echo e(asset('assets/cdn/axios.js')); ?>"></script>
 
     <script src="<?php echo e(asset('index/js/jquery.magnific-popup.min.js')); ?>"></script>
