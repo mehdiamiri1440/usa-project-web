@@ -1,6 +1,4 @@
-@extends('admin_panel.layout.master')
-
-@section('header_links')
+<?php $__env->startSection('header_links'); ?>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,21 +6,21 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="{{asset('admin-panel/dist/css/bootstrap-theme.css')}}">
+  <link rel="stylesheet" href="<?php echo e(asset('admin-panel/dist/css/bootstrap-theme.css')); ?>">
   <!-- Bootstrap rtl -->
-  <link rel="stylesheet" href="{{asset('admin-panel/dist/css/rtl.css')}}">
+  <link rel="stylesheet" href="<?php echo e(asset('admin-panel/dist/css/rtl.css')); ?>">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{asset('admin-panel/bower_components/font-awesome/css/font-awesome.min.css')}}">
+  <link rel="stylesheet" href="<?php echo e(asset('admin-panel/bower_components/font-awesome/css/font-awesome.min.css')); ?>">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="{{asset('admin-panel/bower_components/Ionicons/css/ionicons.min.css')}}">
+  <link rel="stylesheet" href="<?php echo e(asset('admin-panel/bower_components/Ionicons/css/ionicons.min.css')); ?>">
   <!-- DataTables -->
-  <link rel="stylesheet" href="{{asset('admin-panel/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
+  <link rel="stylesheet" href="<?php echo e(asset('admin-panel/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')); ?>">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{asset('admin-panel/dist/css/AdminLTE.css')}}">
+  <link rel="stylesheet" href="<?php echo e(asset('admin-panel/dist/css/AdminLTE.css')); ?>">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="{{asset('admin-panel/dist/css/skins/_all-skins.min.css')}}">
-  <link  rel="stylesheet" href="{{asset('assets/css/kamadatepicker.min.css')}}">
+  <link rel="stylesheet" href="<?php echo e(asset('admin-panel/dist/css/skins/_all-skins.min.css')); ?>">
+  <link  rel="stylesheet" href="<?php echo e(asset('assets/css/kamadatepicker.min.css')); ?>">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,9 +32,9 @@
   <!-- Google Font -->
  
 </head>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('main_content')
+<?php $__env->startSection('main_content'); ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -46,7 +44,7 @@
       </h1>
     <hr/>
     <div class="row">
-        <form method="post" action="{{route('admin_panel_load_statistics')}}">
+        <form method="post" action="<?php echo e(route('admin_panel_load_statistics')); ?>">
              <div class="row">
                 <div class="col-xs-6">
                     <div class="form-group">
@@ -99,43 +97,43 @@
                             </tr>
                             <tr>
                                 <td>تعداد ثبت نام فروشندگان</td>
-                                <td>{{$new_seller_users_count}}</td>
+                                <td><?php echo e($new_seller_users_count); ?></td>
                             </tr>
                             <tr>
                                 <td>تعداد ثبت نام خریداران</td>
-                                <td>{{$new_buyer_users_count}}</td>
+                                <td><?php echo e($new_buyer_users_count); ?></td>
                             </tr>
                             <tr>
                                 <td>تعداد درخواست های خرید تایید شده</td>
-                                <td>{{$confirmed_buyAds_count}}</td>
+                                <td><?php echo e($confirmed_buyAds_count); ?></td>
                             </tr>
                             <tr>
                                 <td>مجموع درخواست های خرید</td>
-                                <td>{{$buyAds_count}}</td>
+                                <td><?php echo e($buyAds_count); ?></td>
                             </tr>
                             <tr>
                                 <td>تعداد محصولات تایید شده</td>
-                                <td>{{$confirmed_products_count}}</td>
+                                <td><?php echo e($confirmed_products_count); ?></td>
                             </tr>
                             <tr>
                                 <td>مجموع محصولات ثبت شده</td>
-                                <td>{{$products_count}}</td>
+                                <td><?php echo e($products_count); ?></td>
                             </tr>
                             <tr>
                                 <td>تعداد کاربران ارسال کننده پیام</td>
-                                <td>{{$total_unique_message_senders_count}}</td>
+                                <td><?php echo e($total_unique_message_senders_count); ?></td>
                             </tr>
                             <tr>
                                 <td>تعداد فروشندگان ارسال کننده پیام</td>
-                                <td>{{$sellers_unique_message_senders_count}}</td>
+                                <td><?php echo e($sellers_unique_message_senders_count); ?></td>
                             </tr>
                             <tr>
                                 <td>تعداد خریداران ارسال کننده پیام</td>
-                                <td>{{$buyers_unique_message_senders_count}}</td>
+                                <td><?php echo e($buyers_unique_message_senders_count); ?></td>
                             </tr>
                             <tr>
                                 <td>میانگین درصد پاسخگویی افراد</td>
-                                <td>{{printf("%.2f",$avg_response_rate)}}</td>
+                                <td><?php echo e(printf("%.2f",$avg_response_rate)); ?></td>
                             </tr>
                       </table>
                 </div>
@@ -149,26 +147,26 @@
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
-@endsection
+<?php $__env->stopSection(); ?>
 <!-- ./wrapper -->
 
-@section('script_tags')
-<script src="{{asset('admin-panel/bower_components/jquery/dist/jquery.min.js')}}"></script>
+<?php $__env->startSection('script_tags'); ?>
+<script src="<?php echo e(asset('admin-panel/bower_components/jquery/dist/jquery.min.js')); ?>"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="{{asset('admin-panel/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+<script src="<?php echo e(asset('admin-panel/bower_components/bootstrap/dist/js/bootstrap.min.js')); ?>"></script>
 <!-- DataTables -->
-<script src="{{asset('admin-panel/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('admin-panel/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+<script src="<?php echo e(asset('admin-panel/bower_components/datatables.net/js/jquery.dataTables.min.js')); ?>"></script>
+<script src="<?php echo e(asset('admin-panel/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')); ?>"></script>
 <!-- SlimScroll -->
-<script src="{{asset('admin-panel/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
+<script src="<?php echo e(asset('admin-panel/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')); ?>"></script>
 <!-- FastClick -->
-<script src="{{asset('admin-panel/bower_components/fastclick/lib/fastclick.js')}}"></script>
+<script src="<?php echo e(asset('admin-panel/bower_components/fastclick/lib/fastclick.js')); ?>"></script>
 <!-- AdminLTE App -->
-<script src="{{asset('admin-panel/dist/js/adminlte.min.js')}}"></script>
+<script src="<?php echo e(asset('admin-panel/dist/js/adminlte.min.js')); ?>"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{asset('admin-panel/dist/js/demo.js')}}"></script>
+<script src="<?php echo e(asset('admin-panel/dist/js/demo.js')); ?>"></script>
 <!-- page script -->
-<script src="{{asset('assets/js/kamadatepicker.js')}}"></script>
+<script src="<?php echo e(asset('assets/js/kamadatepicker.js')); ?>"></script>
 <script>
   $(function () {
     $('#example1').DataTable()
@@ -195,14 +193,14 @@
                         else {
                               notify = new Notification(data.title, {
                                     body: data.msg,
-                                    icon: "{{asset('images/logo-Inco-mobile.png')}}",
+                                    icon: "<?php echo e(asset('images/logo-Inco-mobile.png')); ?>",
                               });
                         }
                   });
             } else {
                   notify = new Notification(data.title, {
                         body: data.msg,
-                        icon: "{{asset('images/logo-Inco-mobile.png')}}",  
+                        icon: "<?php echo e(asset('images/logo-Inco-mobile.png')); ?>",  
                         // You Can give image Link to change notification Icon.
                   });
             }
@@ -210,7 +208,7 @@
     }
     function notif(){
             $.ajax({
-                url: "{{route('admin_notify')}}",
+                url: "<?php echo e(route('admin_notify')); ?>",
                 method:'POST',
                 success: function(data){
                     if(data.notify){
@@ -234,4 +232,6 @@
     });
     
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin_panel.layout.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

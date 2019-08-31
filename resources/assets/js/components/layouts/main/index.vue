@@ -2034,5 +2034,36 @@
                 this.enterKeyActiveForSearch = this.mainSearchBoxText !== '';
             }
         },
+        metaInfo() {
+
+            return {
+                title: 'سامانه خرید و فروش محصولات کشاورزی',
+                titleTemplate: 'اینکوباک | %s',
+                meta: [
+                    {
+                        name: 'description', 
+                        content: 'مرجع تخصصی خرید و فروش و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
+                    },
+                    {
+                        name: 'author',
+                        content: 'اینکوباک'
+                    },
+                    {
+                        'property': 'og:description',
+                        'content': 'مرجع تخصصی خرید و فروش و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
+                    },
+                    {
+                        'property': 'og:site_name',
+                        'content': 'اینکوباک بازارآنلاین خرید و فروش محصولات کشاورزی ایران'
+                    },
+                    {
+                        'property': 'og:title',
+                        'content': 'اینکوباک | سامانه خرید و فروش محصولات کشاورزی'
+                    },
+
+                ]
+
+            }
+        }
     }
 </script>

@@ -416,45 +416,107 @@ import ProductArticle from "./product_components/product_article";
 import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
 import { eventBus } from "../../../../js/router/dashboard_router";
 
-export default {
-  components: {
-    ProductArticle,
-    ProductAsideCategories
-  },
-  props: ["str", "defultimg", "loading_img"],
-  data: function() {
-    return {
-      currentUser: {
-        profile: "",
-        user_info: ""
-      },
-      product: "",
-      errors: "",
-      popUpMsg: "",
-      submiting: false,
-      loading: false
-    };
-  },
-  methods: {
-    init: function() {
-      var self = this;
-      axios.post("/user/profile_info").then(function(response) {
-        self.currentUser = response.data;
-        axios
-          .post("/get_product_by_id", {
-            product_id: self.$route.params.id
-          })
-          .then(function(response) {
-            self.product = response.data.product;
-            self.loading = false;
-          })
-          .catch(function(err) {
-            window.location.href = "/404";
-          });
-      });
-    },
-    stopLoader: function() {
-      eventBus.$emit("isLoading", false);
+
+    export default {
+        components: {
+            ProductArticle,
+            ProductAsideCategories,
+        },
+        props: [
+            'str',
+            'defultimg',
+            'loading_img',
+        ],
+        data: function () {
+            return {
+                currentUser: {
+                    profile: '',
+                    user_info: ''
+                },
+                product:"",
+                errors: '',
+                popUpMsg: '',
+                submiting: false,
+                loading :false
+            }
+        },
+        methods: {
+            init: function () {
+                var self = this;
+                axios.post('/user/profile_info')
+                    .then(function (response) {
+                        self.currentUser = response.data;
+                        axios.post('/get_product_by_id', {
+                            product_id: self.$route.params.id
+                        }).then(function (response) {
+                            self.product = response.data.product;
+                            self.loading = false;
+                        }).catch(function(err){
+                            window.location.href = '/404';
+                        });
+                    });
+
+            },
+            stopLoader: function () {
+                eventBus.$emit('isLoading', false);
+            },
+        },
+        created() {
+            gtag('config', 'UA-129398000-1', {'page_path': '/product-view'});
+
+            document.addEventListener('click', this.documentClick);
+        },
+        mounted() {
+            this.init();
+            var self = this;
+            document.onreadystatechange = () => {
+                if (document.readyState === "complete") {
+                    self.$nextTick(self.stopLoader());
+                }
+            }
+        },
+        updated(){
+            this.$nextTick(this.stopLoader());
+        },
+        metaInfo() {
+            
+            let productSubCategory = this.product.main.sub_category_name;
+            let productName = this.product.main.product_name;
+            let productCity = this.product.main.city_name;
+            let productProvince = this.product.main.province_name;
+            let productOwnerFullName = this.product.user_info.first_name + ' ' + this.product.user_info.last_name;
+            let productStock = this.product.main.stock;
+            let productDescription = this.product.main.description ? this.product.main.description : '';
+//            
+            return {
+                title: 'خرید و فروش عمده و قیمت ' + productSubCategory + ' ' + productName + ' ' + productCity + ' ' + productProvince + ' ' + productOwnerFullName,
+                titleTemplate: 'اینکوباک | %s',
+                meta: [
+                    {
+                        name: 'description', 
+                        content: 'خرید و فروش عمده و قیمت ' + productSubCategory + ' ' + productName + ' ' + productCity + ' ' + productProvince + ' ' + 'موجودی : ' +  productStock + ' کیلوگرم' + productDescription
+                    },
+                    {
+                        name: 'author',
+                        content: 'اینکوباک'
+                    },
+                    {
+                        property: 'og:description',
+                        content: 'خرید و فروش عمده و قیمت ' + productSubCategory + ' از بهترین تولیدکنندگان ایران - اینکوباک بازار آنلاین کشاورزی ایران'
+                    },
+                    {
+                        property: 'og:site_name',
+                        content: 'اینکوباک بازارآنلاین خرید و فروش محصولات کشاورزی ایران'
+                    },
+                    {
+                        'property': 'og:title',
+                        'content':  'اینکوباک | خرید و فروش عمده و قیمت ' + productSubCategory + ' ' + productName + ' ' + productCity + ' ' + productProvince + ' ' + productOwnerFullName,
+                    },
+
+                ]
+
+            }
+        }
     }
   },
   created() {

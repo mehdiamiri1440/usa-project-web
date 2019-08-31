@@ -858,9 +858,14 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
         'as' => 'admin_panel_waiting_for_checkout_transaction_list'
     ]);
 
-    Route::get('statistics',[
+    Route::match(['get','post'],'statistics',[
         'uses' => 'admin_panel\admin_statistics_controller@load_statistics',
         'as' => 'admin_panel_load_statistics'
+    ]);
+    
+    Route::post('get_site_statistics',[
+        'uses' => 'admin_panel\admin_statistics_controller@load_statistics',
+        'as' => 'get_site_statistics'
     ]);
 
     Route::get('initiate-instant-transaction',function(){
