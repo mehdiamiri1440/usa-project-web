@@ -1137,6 +1137,39 @@
 
             this.stopLoader();
 
+        },
+        metaInfo() {
+            
+            let categoryName = this.getCategoryName();
+            
+            return {
+                title: 'خرید و فروش عمده و قیمت ' + categoryName,
+                titleTemplate: 'اینکوباک | %s',
+                meta: [
+                    {
+                        name: 'description', 
+                        content: 'خرید و فروش عمده و قیمت ' + categoryName + ' از بهترین تولیدکنندگان ایران - اینکوباک بازار آنلاین کشاورزی' 
+                    },
+                    {
+                        name: 'author',
+                        content: 'اینکوباک'
+                    },
+                    {
+                        property: 'og:description',
+                        content: 'خرید و فروش عمده و قیمت ' + categoryName + ' از بهترین تولیدکنندگان ایران - اینکوباک بازار آنلاین کشاورزی ایران'
+                    },
+                    {
+                        property: 'og:site_name',
+                        content: 'اینکوباک بازارآنلاین خرید و فروش محصولات کشاورزی ایران'
+                    },
+                    {
+                        'property': 'og:title',
+                        'content': 'اینکوباک | خرید و فروش عمده و قیمت ' + categoryName
+                    },
+
+                ]
+
+            }
         }
     }
 
