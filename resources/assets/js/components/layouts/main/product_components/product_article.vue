@@ -132,6 +132,76 @@
         margin-top: -15px;
     }
 
+    .valid-user-badge{
+
+        background: #00c569;
+
+        display: inline-block;
+
+        position: absolute;
+
+        left: 0;
+
+        top: -15px;
+
+        padding: 5px 15px 3px 14px;
+
+        border-top: 3px solid #00B761;
+
+        text-align: center;
+
+        color: #fff;
+
+    }
+
+    .valid-user-badge::after {
+
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 27px 25px;
+        border-color: transparent #00c569  transparent #00c569 ;
+        line-height: 0;
+        _border-color: #000000 #000000 #000000 #6980fe;
+        _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -25px;
+
+    }
+
+    .valid-user-badge.mobile-view{
+
+        left: initial;
+
+        top: -5px;
+
+        padding: 0 15px 2px 14px;
+
+        text-align: center;
+
+        color: #fff;
+
+        right: 15px;
+
+    }
+
+    .valid-user-badge .wrapper-icon span {
+
+        font-size: 13px;
+        display: inherit;
+
+    }
+
+    .valid-user-badge.mobile-view::after  {
+
+        border-width: 0 27px 20px;
+        bottom: -20px;
+
+    }
+    
     input[type="text"], select, textarea {
         background: #eff3f6;
         border: 1px solid #cfcfcf;
@@ -209,12 +279,48 @@
                             </a>
                         </div>
 
-                        <div class="col-xs-6 text-right"></div>
+                        <div class="col-xs-6 text-right">
+                      
+                            <div v-if="product.user_info.active_pakage_type != 0" class="valid-user-badge mobile-view hidden-sm hidden-md hidden-lg">
+                                <div class="wrapper-icon">
+                                    <svg  width="24.965" height="30.574" viewBox="0 0 24.965 30.574">
+                                      <g id="incobac-icon" data-name="incobac" transform="translate(-273.1 -715.025)">
+                                        <path id="Subtraction_1" data-name="Subtraction 1" d="M-1951.5,35.792a12.419,12.419,0,0,1-8.839-3.661A12.419,12.419,0,0,1-1964,23.292a12.361,12.361,0,0,1,1.378-5.71,12.614,12.614,0,0,1,3.679-4.333l3.175,3.175a7.967,7.967,0,0,0-3.732,6.768,8.009,8.009,0,0,0,8,8,8.036,8.036,0,0,0,7.917-6.85l2.185-2.149,2.34,2.3a12.464,12.464,0,0,1-4.012,8.026A12.467,12.467,0,0,1-1951.5,35.792Zm12.465-13.44,0,0-2.361-2.33-2.169,2.14a8.029,8.029,0,0,0-4.052-5.965l3.2-3.2a12.44,12.44,0,0,1,5.381,9.357Z" transform="translate(2237.1 709.808)" fill="#fff"/>
+                                        <g id="Group_24" data-name="Group 24">
+                                          <path id="Rectangle_12" data-name="Rectangle 12" d="M3,0H9.5a0,0,0,0,1,0,0V5.5a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V3A3,3,0,0,1,3,0Z" transform="translate(282.389 717.5) rotate(45)" fill="#fff"/>
+                                          <path id="Rectangle_13" data-name="Rectangle 13" d="M0,0H13.5a0,0,0,0,1,0,0V5a0,0,0,0,1,0,0H4A4,4,0,0,1,0,1V0A0,0,0,0,1,0,0Z" transform="translate(294.935 718.561) rotate(135)" fill="#fff"/>
+                                        </g>
+                                      </g>
+                                    </svg>
+                                    <span >ویژه</span>
+
+                                </div>
+                            </div>
+
+                        </div>
 
                     </div>
                 </div>
 
                 <div class="main-article-content col-xs-12 col-sm-7">
+
+                    <div v-if="product.user_info.active_pakage_type != 0"  class="valid-user-badge hidden-xs">
+                        <div class="wrapper-icon">
+                            <svg  width="24.965" height="30.574" viewBox="0 0 24.965 30.574">
+                              <g id="incobac-icon" data-name="incobac" transform="translate(-273.1 -715.025)">
+                                <path id="Subtraction_1" data-name="Subtraction 1" d="M-1951.5,35.792a12.419,12.419,0,0,1-8.839-3.661A12.419,12.419,0,0,1-1964,23.292a12.361,12.361,0,0,1,1.378-5.71,12.614,12.614,0,0,1,3.679-4.333l3.175,3.175a7.967,7.967,0,0,0-3.732,6.768,8.009,8.009,0,0,0,8,8,8.036,8.036,0,0,0,7.917-6.85l2.185-2.149,2.34,2.3a12.464,12.464,0,0,1-4.012,8.026A12.467,12.467,0,0,1-1951.5,35.792Zm12.465-13.44,0,0-2.361-2.33-2.169,2.14a8.029,8.029,0,0,0-4.052-5.965l3.2-3.2a12.44,12.44,0,0,1,5.381,9.357Z" transform="translate(2237.1 709.808)" fill="#fff"/>
+                                <g id="Group_24" data-name="Group 24">
+                                  <path id="Rectangle_12" data-name="Rectangle 12" d="M3,0H9.5a0,0,0,0,1,0,0V5.5a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V3A3,3,0,0,1,3,0Z" transform="translate(282.389 717.5) rotate(45)" fill="#fff"/>
+                                  <path id="Rectangle_13" data-name="Rectangle 13" d="M0,0H13.5a0,0,0,0,1,0,0V5a0,0,0,0,1,0,0H4A4,4,0,0,1,0,1V0A0,0,0,0,1,0,0Z" transform="translate(294.935 718.561) rotate(135)" fill="#fff"/>
+                                </g>
+                              </g>
+                            </svg>
+
+
+
+                        </div>
+                    </div>
+
                     <h2 class="main-article-title">
                         <a :href="productUrl"
                            @click="registerComponentStatistics('product',
