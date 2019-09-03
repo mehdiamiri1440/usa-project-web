@@ -1,4 +1,4 @@
-<style scoped>
+<style >
 
     .content-sidebar {
         background: #fff;
