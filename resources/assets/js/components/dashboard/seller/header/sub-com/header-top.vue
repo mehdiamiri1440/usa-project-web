@@ -1,21 +1,11 @@
 <style>
-.display-loading {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-}
-.margin-loading {
-  margin: 3%;
-}
-.loading-height {
-  height: 10px !important;
-  width: 60px;
-}
-#main {
-  margin-right: 250px;
-  margin-top: 65px;
-  background: #fff;
-}
+    #main {
+        margin-right: 250px;
+        margin-top: 65px;
+        background: #fff;
+        position: relative;
+        min-height: 600px;
+    }
 
 #main.little-main {
   margin-right: 80px !important;
