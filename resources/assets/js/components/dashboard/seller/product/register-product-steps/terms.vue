@@ -1,298 +1,266 @@
 
 <style scoped>
-	
-	p{
-		margin: 10px auto;
-		line-height: 1.618;
-	}
+p {
+  margin: 10px auto;
+  line-height: 1.618;
+}
 
-	textarea{
-		margin: 0 auto 9px auto;
-	}	
+textarea {
+  margin: 0 auto 9px auto;
+}
 
-	.submit-button{
-		background: #DDDDDD;
-		color: #fff;
-		border: none;
-		border-radius: 4px;
-		display: inline-block;
-		font-size: 16px;
-		padding: 10px 30px 9px;
-		transition: 200ms;
-		cursor: default;
-		margin: 8px 0;
-    }
-    .submit-button.default-button{
-    	background: #fff;
-		color: #777;
-		border: 1px solid #777;
-		border-radius: 4px;
-		cursor: pointer;
+.submit-button {
+  background: #dddddd;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 16px;
+  padding: 10px 30px 9px;
+  transition: 200ms;
+  cursor: default;
+  margin: 8px 0;
+}
+.submit-button.default-button {
+  background: #fff;
+  color: #777;
+  border: 1px solid #777;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.submit-button.active {
+  background: #00c569;
+  cursor: pointer;
+}
 
-    }
-    .submit-button.active{
-		background: #00C569;
-		cursor: pointer;
-    }
+.title-contents {
+  font-weight: bold;
+  font-size: 19px;
+}
 
-    .title-contents{
+.form-contents {
+  margin: 5px auto;
+}
 
-    	font-weight: bold;
-    	font-size: 19px;
+.form-contents lable {
+  font-size: 12px;
+}
 
+.input-wrapper,
+.text-input-wrapper {
+  margin: 6px auto;
 
-    }
+  position: relative;
+}
 
-    .form-contents{
-    	margin: 5px auto;
-    }
+.input-wrapper:after {
+  content: "\F107";
 
-    .form-contents lable{
-    	font-size: 12px;
-    }
+  color: #777;
 
-    .input-wrapper,.text-input-wrapper{
-   		margin: 6px auto;
+  position: absolute;
 
-    	position: relative;
+  display: inline-block;
 
-    }
+  top: 6px;
 
-    .input-wrapper:after{
-		content: "\F107";
+  font-family: "FontAwesome", sans-serif;
 
-		color: #777;
+  left: 15px;
 
-		position: absolute;
+  font-size: 20px;
 
-		display: inline-block;
+  z-index: 0;
+}
 
-		top: 6px;
+textarea {
+  width: 100%;
 
-		font-family: 'FontAwesome',sans-serif;
+  border-radius: 4px;
 
-		left: 15px;
+  border: 1px solid;
 
-		font-size: 20px;
+  padding: 8px 15px;
 
-		z-index: 0;
+  color: #bebebe;
 
-    }
-    
-    textarea{
-    	width: 100%;
+  border-color: #bebebe;
 
-		border-radius: 4px;
+  direction: rtl;
 
-		border: 1px solid;
+  transition: 300ms;
 
-		padding: 8px 15px ;
+  background: #fff;
+}
 
-		color: #BEBEBE;
+.input-wrapper i {
+  display: inline-block;
 
-		border-color: #BEBEBE;
+  position: absolute;
 
-		direction: rtl;
+  left: 15px;
 
-		transition: 300ms;
+  font-size: 20px;
 
-		background: #fff;
-    }
+  color: #bebebe;
 
-    .input-wrapper i {
+  top: 9px;
 
-    	display: inline-block;
+  transition: 300ms;
+}
 
-		position: absolute;
+textarea:focus,
+textarea:focus + i {
+  color: #333;
+  border-color: #333;
+}
 
-		left: 15px;
+textarea.active {
+  border-color: #00c569;
+  color: #333;
+}
 
-		font-size: 20px;
+textarea.active + i {
+  color: #00c569;
+}
 
-		color: #BEBEBE;
-		
-		top: 9px;
+textarea.active:focus,
+textarea.active:focus + i,
+textarea.active + i {
+  border-color: #00c569;
+}
 
-		transition: 300ms;
-    }
+textarea.error {
+  color: #333;
+  border-color: #e41c38;
+}
 
+textarea.error + i {
+  color: #e41c38;
+}
 
-    textarea:focus ,  textarea:focus + i{
-		color: #333;
-		border-color: #333;
+textarea.error:focus,
+textarea.error:focus + i {
+  border-color: #e41c38;
+}
 
-    }
+.input-wrapper i {
+  display: inline-block;
 
-    textarea.active{
-		border-color: #00C569;
-		color: #333;
-    }
+  position: absolute;
 
-    textarea.active + i{
-		color: #00C569;
-    }
+  left: 15px;
 
-    textarea.active:focus ,  textarea.active:focus + i , textarea.active + i {
-		border-color: #00C569;
-    }
+  font-size: 20px;
 
-    textarea.error {
-    	color: #333;
-		border-color: #e41c38;
-    }
+  color: #bebebe;
 
-    textarea.error + i{
-		color: #e41c38;
-    }
+  top: 9px;
 
+  transition: 200ms;
+}
 
-    textarea.error:focus ,  textarea.error:focus + i  {
-		border-color: #e41c38;
-    }
+.error-message {
+  text-align: center;
 
-  
+  color: #e41c38;
 
-    .input-wrapper i {
-    	display: inline-block;
+  font-weight: bold;
 
-		position: absolute;
+  height: 15px;
 
-		left: 15px;
+  direction: rtl;
 
-		font-size: 20px;
+  font-size: 11px;
 
-		color: #BEBEBE;
+  margin: 0;
+}
 
-		top: 9px;
+.small-description {
+  font-size: 11px;
 
-		transition: 200ms;
-    }
+  font-weight: bold;
 
+  color: #777777;
 
+  line-height: 1.618;
+}
 
-    .error-message{
+.green-text {
+  color: #00c569;
+}
 
-    	text-align: center;
+textarea .small-label {
+  font-size: 12px;
+}
 
-		color: #e41c38;
-
-		font-weight: bold;
-
-		height: 15px;
-		
-	    direction: rtl;
-
-		font-size: 11px;
-
-		margin: 0;
-
-    }
-    
-    .small-description{
-
-         font-size: 11px;
-
-         font-weight: bold;
-
-         color: #777777;
-                
-         line-height: 1.618;
-
-    }
-
-    .green-text{
-    	color: #00C569;
-    }
-
-
-
-    textarea .small-label{
-    	font-size: 12px;
-    }
-
-    @media screen and (max-width: 767px){
-		textarea{
-			font-size: 12px;
-		}
-		.input-wrapper::after {
-		    left: 14px;
-		}
-
-	}	
+@media screen and (max-width: 767px) {
+  textarea {
+    font-size: 12px;
+  }
+  .input-wrapper::after {
+    left: 14px;
+  }
+}
 </style>
 
 <template>
-	<div>
-
-		 <div class="col-xs-12">
-		 	<h2 class="title-contents ">
-		  ثبت نهایی محصول 
-		    </h2>
-		 </div>
-		
-		 <div class="form-contents col-xs-12 ">
-
-		 		
-			    		  <label for="province">
-			     		توضیحات نهایی محصول خود را بنویسید
-			     		  </label>
-
-				     	<div class="text-input-wrapper  ">
-				     		<!-- input type tel because we have some limmitation for processes -->
-				     		
-				     		<textarea  rows="4" :class="{'active' : $parent.product.description , 'error' : $parent.errors.description}"  v-model="$parent.product.description" placeholder="مثلا : محصول شما چه میزان کیفیت و توضیحاتی دارد"></textarea>	
-
-				     
-				     	   <p class="error-message col-xs-12">
-			    	   		  <span  v-if="$parent.errors.description" v-text="$parent.errors.description"></span>
-						   </p>
-				        </div>
-
-			     	<span class="small-description">
-			     		
- انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند 
- انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند 
-
-			     	</span>
-			     	<p>
-			     		ثبت نهایی این مرحله به منزل قبول کرد
-			     		<a href="#" class="green-text">شرایط و قوانین اینکوباک </a>
-			     		می باشد
-			     	</p>
-			
-			</div>
-		    <div class="col-xs-12">
-				     
-				       		 <button class="submit-button active pull-left "
-				       		 	@click.prevent="$parent.submitProduct()"
-				       		   >
-				        		ثبت نهایی 
-							 </button>
-
-
-							 <button class="submit-button default-button  pull-right "
-				       		 	
-				       		 	@click.prevent="$parent.currentStep--"
-				       		   >
-				       		   <i class="fa fa-arrow-right"></i>
-				        		مرحله  قبل 
-				        		
-							 </button>
-
-				    
-			</div>
-	
-		
+  <div>
+    <div class="col-xs-12">
+      <h2 class="title-contents">ثبت نهایی محصول</h2>
     </div>
+
+    <div class="form-contents col-xs-12">
+      <label for="province">توضیحات نهایی محصول خود را بنویسید</label>
+
+      <div class="text-input-wrapper">
+        <!-- input type tel because we have some limmitation for processes -->
+
+        <textarea
+          rows="4"
+          :class="{'active' : $parent.product.description , 'error' : $parent.errors.description}"
+          v-model="$parent.product.description"
+          placeholder="مثلا : محصول شما چه میزان کیفیت و توضیحاتی دارد"
+        ></textarea>
+
+        <p class="error-message col-xs-12">
+          <span v-if="$parent.errors.description" v-text="$parent.errors.description[0]"></span>
+        </p>
+      </div>
+
+      <span class="small-description">
+        انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند
+        انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند
+      </span>
+      <p>
+        ثبت نهایی این مرحله به منزل قبول کرد
+        <a href="#" class="green-text">شرایط و قوانین اینکوباک</a>
+        می باشد
+      </p>
+    </div>
+    <div class="col-xs-12">
+      <button
+        class="submit-button active pull-left"
+        @click.prevent="$parent.submitProduct()"
+      >ثبت نهایی</button>
+
+      <button
+        class="submit-button default-button pull-right"
+        @click.prevent="$parent.currentStep--"
+      >
+        <i class="fa fa-arrow-right"></i>
+
+        مرحله قبل
+      </button>
+    </div>
+  </div>
 </template>
-<script> 
-
-	export default{
-	    mounted(){	
-	    	if (this.$parent.isOsIOS()) {
-	    		$('input[type="tel"]').attr('type','text')
-	    	}
-	    }
-	}
-
+<script>
+export default {
+  mounted() {
+    if (this.$parent.isOsIOS()) {
+      $('input[type="tel"]').attr("type", "text");
+    }
+  }
+};
 </script>

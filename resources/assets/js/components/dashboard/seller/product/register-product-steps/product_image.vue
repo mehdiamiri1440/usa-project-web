@@ -1,391 +1,337 @@
 
 <style scoped>
-	input[type="tel"]{
-		box-shadow: none !important;
-	}
-	label{
-		margin: 0 auto 9px auto;
-	}	
+input[type="tel"] {
+  box-shadow: none !important;
+}
+label {
+  margin: 0 auto 9px auto;
+}
 
-	.submit-button{
-		background: #DDDDDD;
-		color: #fff;
-		border: none;
-		border-radius: 4px;
-		display: inline-block;
-		font-size: 16px;
-		padding: 10px 30px 9px;
-		transition: 200ms;
-		cursor: default;
-		margin: 8px 0;
-    }
-    .submit-button.default-button{
-    	background: #fff;
-		color: #777;
-		border: 1px solid #777;
-		border-radius: 4px;
-		cursor: pointer;
+.submit-button {
+  background: #dddddd;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 16px;
+  padding: 10px 30px 9px;
+  transition: 200ms;
+  cursor: default;
+  margin: 8px 0;
+}
+.submit-button.default-button {
+  background: #fff;
+  color: #777;
+  border: 1px solid #777;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.submit-button.active {
+  background: #00c569;
+  cursor: pointer;
+}
+.submit-button-wrapper {
+  margin: 0 auto;
+  max-width: 420px;
+}
+.title-contents {
+  font-weight: bold;
+  font-size: 19px;
+  margin-bottom: 15px;
+}
 
-    }
-    .submit-button.active{
-		background: #00C569;
-		cursor: pointer;
-    }
-    .submit-button-wrapper{
-    	margin: 0 auto;
-    	max-width: 420px;
-    }
-    .title-contents{
+.form-contents {
+  margin: 5px auto;
+}
 
-    	font-weight: bold;
-    	font-size: 19px;
-		margin-bottom: 15px;
+.form-contents lable {
+  font-size: 12px;
+}
 
-    }
+.input-wrapper,
+.text-input-wrapper {
+  margin: 6px auto;
 
-    .form-contents{
-    	margin: 5px auto;
-    }
+  position: relative;
+}
 
-    .form-contents lable{
-    	font-size: 12px;
-    }
+.input-wrapper:after {
+  content: "\F107";
 
-    .input-wrapper,.text-input-wrapper{
-   		margin: 6px auto;
+  color: #777;
 
-    	position: relative;
+  position: absolute;
 
-    }
+  display: inline-block;
 
-    .input-wrapper:after{
-		content: "\F107";
+  top: 6px;
 
-		color: #777;
+  font-family: "FontAwesome", sans-serif;
 
-		position: absolute;
+  left: 15px;
 
-		display: inline-block;
+  font-size: 20px;
 
-		top: 6px;
+  z-index: 0;
+}
 
-		font-family: 'FontAwesome',sans-serif;
+input {
+  width: 100%;
 
-		left: 15px;
+  border-radius: 4px;
 
-		font-size: 20px;
+  border: 1px solid;
 
-		z-index: 0;
+  padding: 8px 15px;
 
-    }
-    
-    input{
-    	width: 100%;
+  color: #bebebe;
 
-		border-radius: 4px;
+  border-color: #bebebe;
 
-		border: 1px solid;
+  direction: rtl;
 
-		padding: 8px 15px ;
+  transition: 300ms;
 
-		color: #BEBEBE;
+  background: #fff;
+}
 
-		border-color: #BEBEBE;
+.input-wrapper i {
+  display: inline-block;
 
-		direction: rtl;
+  position: absolute;
 
-		transition: 300ms;
+  left: 15px;
 
-		background: #fff;
-    }
+  font-size: 20px;
 
-    .input-wrapper i {
+  color: #bebebe;
 
-    	display: inline-block;
+  top: 9px;
 
-		position: absolute;
+  transition: 300ms;
+}
 
-		left: 15px;
+input:focus,
+input:focus + i {
+  color: #333;
+  border-color: #333;
+}
 
-		font-size: 20px;
+input.active {
+  border-color: #00c569;
+  color: #333;
+}
 
-		color: #BEBEBE;
-		
-		top: 9px;
+input.active + i {
+  color: #00c569;
+}
 
-		transition: 300ms;
-    }
+input.active:focus,
+input.active:focus + i,
+input.active + i {
+  border-color: #00c569;
+}
 
+input.error {
+  color: #333;
+  border-color: #e41c38;
+}
 
-    input:focus ,  input:focus + i{
-		color: #333;
-		border-color: #333;
+input.error + i {
+  color: #e41c38;
+}
 
-    }
+input.error:focus,
+input.error:focus + i {
+  border-color: #e41c38;
+}
 
-    input.active{
-		border-color: #00C569;
-		color: #333;
-    }
+select {
+  width: 100%;
 
-    input.active + i{
-		color: #00C569;
-    }
+  border-radius: 4px;
 
-    input.active:focus ,  input.active:focus + i , input.active + i {
-		border-color: #00C569;
-    }
+  border: 1px solid;
 
-    input.error {
-    	color: #333;
-		border-color: #e41c38;
-    }
+  padding: 8px 15px;
 
-    input.error + i{
-		color: #e41c38;
-    }
+  position: relative;
 
+  z-index: 1;
 
-    input.error:focus ,  input.error:focus + i  {
-		border-color: #e41c38;
-    }
+  color: #777777;
 
-    select{
+  direction: rtl;
 
-    	width: 100%;
+  transition: 200ms;
 
-		border-radius: 4px;
+  background: none;
 
-		border: 1px solid;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+}
 
-		padding: 8px 15px;
+.input-wrapper i {
+  display: inline-block;
 
-		position: relative;
+  position: absolute;
 
-		z-index: 1;
+  left: 15px;
 
-		color: #777777;
+  font-size: 20px;
 
-		direction: rtl;
+  color: #bebebe;
 
-		transition: 200ms;
+  top: 9px;
 
-		background: none;
+  transition: 200ms;
+}
 
-		appearance:none;
-		-webkit-appearance:none;
-		-moz-appearance:none;
-		-ms-appearance:none;
+select option {
+  color: #333;
+}
 
+select:focus {
+  color: #333;
+}
 
+select.active {
+  color: #333;
+  color: #00c569;
+}
 
-    }
+select.active:focus {
+  color: #00c569;
+}
 
-    .input-wrapper i {
-    	display: inline-block;
+select.error {
+  color: #333;
+  color: #e41c38;
+}
 
-		position: absolute;
+select.error:focus {
+  color: #e41c38;
+}
 
-		left: 15px;
+.error-message {
+  text-align: center;
 
-		font-size: 20px;
+  color: #e41c38;
 
-		color: #BEBEBE;
+  font-weight: bold;
 
-		top: 9px;
+  height: 15px;
 
-		transition: 200ms;
-    }
+  direction: rtl;
 
-     select option{
-		color: #333;
-    }
+  font-size: 11px;
+  margin-bottom: 15px;
+}
 
-    select:focus{
-		color: #333;
-    }
+.small-description {
+  font-size: 11px;
 
-    select.active{
-    		color: #333;
-		color: #00C569;
-    }
+  font-weight: bold;
 
-    select.active:focus {
-		color: #00C569;
-    }
+  color: #777777;
 
-    select.error {
-    		color: #333;
-		color: #e41c38;
-    }
-
-    select.error:focus{
-		color: #e41c38;
-    }
-
-    .error-message{
-
-    	text-align: center;
-
-		color: #e41c38;
-
-		font-weight: bold;
-
-		height: 15px;
-		
-	    direction: rtl;
-
-		font-size: 11px;
-		margin-bottom: 15px;
-    }
-    
-    .small-description{
-
-         font-size: 11px;
-
-         font-weight: bold;
-
-         color: #777777;
-
-         line-height: 1.618;
-         
-    }
-    label .small-label{
-    	font-size: 12px;
-    }
-    @media screen and (max-width: 767px){
-		select{
-			font-size: 12px;
-		}
-		.input-wrapper::after {
-		    left: 14px;
-		}
-
-	}	
+  line-height: 1.618;
+}
+label .small-label {
+  font-size: 12px;
+}
+@media screen and (max-width: 767px) {
+  select {
+    font-size: 12px;
+  }
+  .input-wrapper::after {
+    left: 14px;
+  }
+}
 </style>
 
 <template>
-	<div>
+  <div>
+    <h2 class="title-contents col-xs-12">افزودن تصاویر محصول</h2>
 
-		 <h2 class="title-contents col-xs-12">
-		    افزودن تصاویر محصول
-		 </h2>
-		
-		 <div class="form-contents col-xs-12 ">
+    <div class="form-contents col-xs-12">
+      <div class="text-input-wrapper">
+        <!-- input type tel because we have some limmitation for processes -->
 
+        <UploadFile
+          uploadName="product_files"
+          uploadAccept="image/*"
+          :uploadMinSize="1024"
+          :uploadSize="1024 * 1024 * 10"
+          :uploadMultiple="true"
+          :uploadDrop="true"
+          :uploadDropDirectory="true"
+          :uploadAddIndex="false"
+          :uploadThread="3"
+          :uploadOCompress="1024 * 1024"
+          :uploadUploadAuto="false"
+          :uploadRef="$parent.productFiles"
+        />
+      </div>
+      <p class="error-message col-xs-12">
+        <span v-if="$parent.errors.images_type" v-text="$parent.errors.images_type"></span>
 
-				     	<div class="text-input-wrapper  ">
-				     		<!-- input type tel because we have some limmitation for processes -->
-				     		
-				     		  <UploadFile
-                                    uploadName="product_files"
-                                    uploadAccept="image/*"
-                                    :uploadMinSize="1024"
-                                    :uploadSize="1024 * 1024 * 10"
-                                    :uploadMultiple="true"
-                                    :uploadDrop="true"
-                                    :uploadDropDirectory="true"
-                                    :uploadAddIndex="false"
-                                    :uploadThread="3"
-                                    :uploadOCompress="1024 * 1024"
-                                    :uploadUploadAuto="false"
-                                    :uploadRef="$parent.productFiles"
-                            />
+        <span v-if="$parent.errors.images_size" v-text="$parent.errors.images_size"></span>
 
-                         
-				
-				     	</div>
-				     	   <p class="error-message col-xs-12">
-				     	   	<span v-if="$parent.errors.images_type"
-                                  v-text="$parent.errors.images_type"
-                            ></span>
+        <span v-if="$parent.errors.images_count" v-text="$parent.errors.images_count[0]"></span>
 
-				     	   	<span v-if="$parent.errors.images_size"
-                                  v-text="$parent.errors.images_size"
-                            ></span>
+        <span v-if="$parent.errors.image_0" v-text="$parent.errors.image_0[0]"></span>
 
-			    	   	    <span v-if="$parent.errors.images_count"
-                                  v-text="$parent.errors.images_count[0]"
-                            ></span>
+        <span v-if="$parent.errors.image_1" v-text="$parent.errors.image_1[0]"></span>
 
-                            <span v-if="$parent.errors.image_0"
-                                 
-                                  v-text="$parent.errors.image_0[0]"
-                            ></span>
+        <span v-if="$parent.errors.image_2" v-text="$parent.errors.image_2[0]"></span>
 
-                            <span v-if="$parent.errors.image_1"
-                                 
-                                  v-text="$parent.errors.image_1[0]"
-                            ></span>
+        <span v-if="$parent.errors.image_3" v-text="$parent.errors.image_3[0]"></span>
 
-                            <span v-if="$parent.errors.image_2"
-                                 
-                                  v-text="$parent.errors.image_2[0]"
-                            ></span>
+        <span v-if="$parent.errors.image_4" v-text="$parent.errors.image_4[0]"></span>
 
-                            <span v-if="$parent.errors.image_3"
-                                 
-                                  v-text="$parent.errors.image_3[0]"
-                            ></span>
+        <span v-if="$parent.errors.image_5" v-text="$parent.errors.image_5[0]"></span>
+      </p>
 
-                            <span v-if="$parent.errors.image_4"
-                                 
-                                  v-text="$parent.errors.image_4[0]"
-                            ></span>
+      <span class="small-description">
+        انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند
+        انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند
+      </span>
 
-                            <span v-if="$parent.errors.image_5"
-                                 
-                                  v-text="$parent.errors.image_5[0]"
-                            ></span>
+      <div class="submit-button-wrapper">
+        <button
+          class="submit-button disabled pull-left"
+          :class="{'active' : $parent.productFiles[0] && !$parent.errors.images_type && !$parent.errors.images_size}"
+          @click.prevent="$parent.productImageSubmited()"
+        >
+          مرحله بعد
+          <i class="fa fa-arrow-left"></i>
+        </button>
 
-						   </p>
+        <button
+          class="submit-button default-button pull-right"
+          @click.prevent="$parent.currentStep --"
+        >
+          <i class="fa fa-arrow-right"></i>
 
-	
-
-			     	<span class="small-description">
-			     		
- انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند 
- انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند 
-
-			     	</span>
-
-			       <div class="row">
-			       	<div class=" submit-button-wrapper">
-			       		 <button class="submit-button disabled pull-left "
-			       		 	:class="{'active' : $parent.productFiles[0] && !$parent.errors.images_type && !$parent.errors.images_size}"
-			       		 	@click.prevent="$parent.productImageSubmited()"
-			       		   >
-			        		مرحله بعد 
-			        		<i class="fa fa-arrow-left"></i>
-						 </button>
-
-
-						 <button class="submit-button default-button  pull-right "
-			       		 	
-			       		 	@click.prevent="$parent.currentStep --"
-			       		   >
-			       		   <i class="fa fa-arrow-right"></i>
-			        		مرحله  قبل 
-			        		
-						 </button>
-
-			       	</div>
-			       </div>
-		</div>
-		
+          مرحله قبل
+        </button>
+      </div>
     </div>
+  </div>
 </template>
-<script> 
-	import UploadFile from '../../../upload-image'
-	export default{
-		components:{
-			UploadFile
-		},
-	    mounted(){	
-	    	if (this.$parent.isOsIOS()) {
-	    		$('input[type="tel"]').attr('type','text')
-	    	}
-	    }
-	}
-
+<script>
+import UploadFile from "../../../upload-image";
+export default {
+  components: {
+    UploadFile
+  },
+  mounted() {
+    if (this.$parent.isOsIOS()) {
+      $('input[type="tel"]').attr("type", "text");
+    }
+  }
+};
 </script>
