@@ -411,7 +411,7 @@
                 }
             },
             productImageSubmited(){
-                console.log(this.productFiles[0])
+
                 if (!this.productFiles[0]) {
                     this.errors.images_count.push('لطفا تصویر محصول را وارد کنید')
                 }else{
@@ -694,25 +694,29 @@
                 this.errors.product_name = '';
             },
             productFiles:function(files){
-
+                    var errorsStatus = false;
                     if (files.length) {
                         this.errors.images_count = [];
                         for(var i = 0; i <= files.length ; i++){
                               if (files[i]) {
-
                                   if (!files[i].type || files[i].type == '' || files[i].type == 'image/gif' ||  files[i].type == 'image/svg+xml' ||  files[i].type == 'application/postscript' ||  files[i].type == 'text/xml'||  files[i].type == 'application/x-gzip' ) {
+                                    errorsStatus = true;
                                     this.errors.images_type = 'تصاویر باید فرمت معتبری باشند.';
-                                  }else{
-                                    this.errors.images_type = '';
+
                                   }
 
                                   if (files[i].size > 5000000) {
+                                    errorsStatus = true;
                                     this.errors.images_size = 'حجم تصویر باید کمتر از 5 مگابایت باشد.';
-                                  }else{
-                                    this.errors.images_size = '';
                                   }
                              }
                         }
+                             if (!errorsStatus) {
+
+                                this.errors.images_type = '';
+                                this.errors.images_size = '';
+
+                              }
                     }else{
                          this.errors.images_type = '';
                          this.errors.images_size = '';

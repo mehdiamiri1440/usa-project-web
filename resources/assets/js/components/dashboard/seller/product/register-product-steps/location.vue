@@ -280,7 +280,7 @@
 
 			     		  </label>
 
-				     	<div class="text-input-wrapper  ">
+				     	<div class="input-wrapper  ">
 				     		<!-- input type tel because we have some limmitation for processes -->
 				     		
 				     		<select
@@ -318,7 +318,7 @@
 
 			     		  </label>
 
-				     	<div class="text-input-wrapper  ">
+				     	<div class="input-wrapper  ">
 
 				     		<select
 				     		@change="$parent.setCityId($event)"
