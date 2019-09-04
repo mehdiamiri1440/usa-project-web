@@ -1,7 +1,7 @@
 <style>
-    .content-sidebar {
+ .content-sidebar {
         text-align: right;
-    }
+ }
 .box-sidebar {
   text-align: center;
   direction: rtl;
@@ -15,7 +15,7 @@ hr {
   text-align: right;
   padding: 15px 15px 0 15px;
 }
-.title-widget h3 {
+.title-widget div {
   font-size: 18px;
 }
 .sidebar-buttons {
@@ -76,7 +76,7 @@ hr {
   <div>
     <div v-if="fontIsLoad && provinceList" class="content-sidebar">
       <div class="title-widget">
-        <h3>موقعیت جغرافیایی</h3>
+        <div>موقعیت جغرافیایی</div>
         <hr />
       </div>
 

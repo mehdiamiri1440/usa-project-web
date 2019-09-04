@@ -17,6 +17,7 @@
         <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap.min.css')); ?>">
         <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap-theme.min.css')); ?>">
         <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/cropper.css')); ?>">
+        <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/placeholder-content.css')); ?>">
 
         <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/popup.css')); ?>">
         <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/magnific-popup.css')); ?>">

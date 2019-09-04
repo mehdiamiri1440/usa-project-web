@@ -508,9 +508,11 @@
             <div class="links-sub-header   hidden-xs col-sm-4 col-xs-7 ">
                 <ul class="list-inline">
                     <li class="list-item active">
-                        <a href="">
-                            لیست محصولات
-                        </a>
+                        <h1 >
+                            <a href="">
+                                لیست محصولات
+                            </a>
+                        </h1>
                     </li>
                 </ul>
             </div>
@@ -1260,7 +1262,7 @@
         metaInfo() {
 
             return {
-                title: 'لیست محصولات و قیمت محصولات کشاورزی',
+                title: 'اینکوباک | لیست محصولات و قیمت عمده محصولات کشاورزی',
                 titleTemplate: 'اینکوباک | %s',
                 meta: [
                     {
@@ -1273,7 +1275,7 @@
                     },
                     {
                         property: 'og:description',
-                        content: 'مرجع تخصصی خرید و فروش و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
+                        content: 'مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
                     },
                     {
                         property: 'og:site_name',

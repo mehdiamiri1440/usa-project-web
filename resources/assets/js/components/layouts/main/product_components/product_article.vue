@@ -34,6 +34,7 @@
     .main-article-title {
         margin: 15px auto;
         font-weight: bold;
+        font-size: 32px;
     }
 
     .main-article-title a {
@@ -217,6 +218,24 @@
         display: block;
         margin: 9px auto;
     }
+    
+    .article-seo-title {
+
+        margin-bottom: 15px;
+        font-size: 15px;
+        font-weight: bold;
+        
+    }
+    
+    .article-seo-title h2{
+
+
+        font-size: 15px;
+        font-weight: normal;
+        display: inline-block;
+        color: #333;
+
+    }
 
     @media screen  and (max-width: 767px) {
         .buy_details {
@@ -320,8 +339,7 @@
 
                         </div>
                     </div>
-
-                    <h2 class="main-article-title">
+                    <h1 v-if="$route.params.id" class="main-article-title">
                         <a :href="productUrl"
                            @click="registerComponentStatistics('product',
                            'show-product-in-seperate-page',
@@ -331,9 +349,34 @@
                             ' | ' +
                             product.main.sub_category_name">
                         </a>
-                    </h2>
+                    </h1>
 
-                    <p>نوع محصول: <span v-text="product.main.product_name"></span></p>
+                    <h3 v-else class="main-article-title">
+                        <a :href="productUrl"
+                           @click="registerComponentStatistics('product',
+                           'show-product-in-seperate-page',
+                           'show-product-in-seperate-page')"
+
+                           v-text="product.main.category_name +
+                            ' | ' +
+                            product.main.sub_category_name">
+                        </a>
+                    </h3>
+
+                       <div class="article-seo-title" v-if="$route.params.categoryName">
+                            نوع محصول: 
+
+                        <h2>
+                        <span  v-text="product.main.product_name"></span>
+                        </h2>
+
+                       </div>
+
+                        <p v-else>
+                            نوع محصول: 
+                              <span  v-text="product.main.product_name"></span>
+
+                        </p>
 
                     <p>استان / شهر:
                         <span v-text="product.main.province_name +
