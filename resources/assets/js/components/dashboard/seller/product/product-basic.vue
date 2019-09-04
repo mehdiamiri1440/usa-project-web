@@ -361,6 +361,9 @@
                     },
                 ],
                 uploadPercentage: 0,
+                relatedBuyAd:null,
+                productCategoryName:'',
+                productSubCategoryName:'',
             };
         },
         methods: {
@@ -471,6 +474,10 @@
                                 // $('#custom-main-modal').modal('show');
 
                                 self.registerComponentStatistics('product-register','product-registered-successfully','product-registered-successfully');
+                                
+                                if(response.data.buyAd){
+                                    self.relatedBuyAd = response.data.buyAd;
+                                }
 
                                 self.goToStep(6);
                             }
@@ -674,6 +681,34 @@
 
                 return ios;
             }, 
+            openChat: function (buyAd) {
+                this.registerComponentStatistics('buyAdReplyAfterProductRegister', 'openChat', 'click on open chatBox');
+
+                axios.post('/get_user_last_confirmed_profile_photo', {
+                    'user_id': buyAd.myuser_id
+                }).then(function (response) {
+                    var profile_photo = response.data.profile_photo;
+
+                    var contact = {
+                        contact_id: buyAd.myuser_id,
+                        first_name: buyAd.first_name,
+                        last_name: buyAd.last_name,
+                        profile_photo: profile_photo,
+                        user_name: buyAd.user_name,
+                    };
+
+                    axios.post('/set_last_chat_contact', contact)
+                        .then(function (response) {
+                            window.location.href = '/dashboard/messages';
+                        })
+                        .catch(function (e) {
+                            alert('Error');
+                        });
+                })
+                    .catch(function (err) {
+                        //
+                    });
+            },
             
 
         },
