@@ -1,456 +1,399 @@
 
 <style scoped>
-	input{
-		box-shadow: none !important;
-	}
+input {
+  box-shadow: none !important;
+}
 
-	label{
-		margin: 0 auto 9px auto;
-	}	
+label {
+  margin: 0 auto 9px auto;
+}
 
-	.submit-button{
-		background: #DDDDDD;
-		color: #fff;
-		border: none;
-		border-radius: 4px;
-		display: inline-block;
-		font-size: 16px;
-		padding: 10px 30px 9px;
-		transition: 200ms;
-		cursor: default;
-		margin: 8px 0;
-    }
-    .submit-button.default-button{
-    	background: #fff;
-		color: #777;
-		border: 1px solid #777;
-		border-radius: 4px;
-		cursor: pointer;
+.submit-button {
+  background: #dddddd;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 16px;
+  padding: 10px 30px 9px;
+  transition: 200ms;
+  cursor: default;
+  margin: 8px 0;
+}
+.submit-button.default-button {
+  background: #fff;
+  color: #777;
+  border: 1px solid #777;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.submit-button.active {
+  background: #00c569;
+  cursor: pointer;
+}
 
-    }
-    .submit-button.active{
-		background: #00C569;
-		cursor: pointer;
-    }
+.title-contents {
+  font-weight: bold;
+  font-size: 19px;
+  margin-bottom: 15px;
+}
 
-    .title-contents{
+.form-contents {
+  margin: 5px auto;
+}
 
-    	font-weight: bold;
-    	font-size: 19px;
-		margin-bottom: 15px;
+.form-contents lable {
+  font-size: 12px;
+}
 
-    }
+.input-wrapper,
+.text-input-wrapper {
+  margin: 6px auto;
 
-    .form-contents{
-    	margin: 5px auto;
-    }
+  position: relative;
+}
 
-    .form-contents lable{
-    	font-size: 12px;
-    }
+.input-wrapper:after {
+  content: "\F107";
 
-    .input-wrapper,.text-input-wrapper{
-   		margin: 6px auto;
+  color: #777;
 
-    	position: relative;
+  position: absolute;
 
-    }
+  display: inline-block;
 
-    .input-wrapper:after{
-		content: "\F107";
+  top: 6px;
 
-		color: #777;
+  font-family: "FontAwesome", sans-serif;
 
-		position: absolute;
+  left: 15px;
 
-		display: inline-block;
+  font-size: 20px;
 
-		top: 6px;
+  z-index: 0;
+}
 
-		font-family: 'FontAwesome',sans-serif;
+input {
+  width: 100%;
 
-		left: 15px;
+  border-radius: 4px;
 
-		font-size: 20px;
+  border: 1px solid;
 
-		z-index: 0;
+  padding: 8px 15px;
 
-    }
-    
-    input{
-    	width: 100%;
+  color: #bebebe;
 
-		border-radius: 4px;
+  border-color: #bebebe;
 
-		border: 1px solid;
+  direction: rtl;
 
-		padding: 8px 15px ;
+  transition: 300ms;
 
-		color: #BEBEBE;
+  background: #fff;
+}
 
-		border-color: #BEBEBE;
+.input-wrapper i {
+  display: inline-block;
 
-		direction: rtl;
+  position: absolute;
 
-		transition: 300ms;
+  left: 15px;
 
-		background: #fff;
-    }
+  font-size: 20px;
 
-    .input-wrapper i {
+  color: #bebebe;
 
-    	display: inline-block;
+  top: 9px;
 
-		position: absolute;
+  transition: 300ms;
+}
 
-		left: 15px;
+input:focus,
+input:focus + i {
+  color: #333;
+  border-color: #333;
+}
 
-		font-size: 20px;
+input.active {
+  border-color: #00c569;
+  color: #333;
+}
 
-		color: #BEBEBE;
-		
-		top: 9px;
+input.active + i {
+  color: #00c569;
+}
 
-		transition: 300ms;
-    }
+input.active:focus,
+input.active:focus + i,
+input.active + i {
+  border-color: #00c569;
+}
 
+input.error {
+  color: #333;
+  border-color: #e41c38;
+}
 
-    input:focus ,  input:focus + i{
-		color: #333;
-		border-color: #333;
+input.error + i {
+  color: #e41c38;
+}
 
-    }
+input.error:focus,
+input.error:focus + i {
+  border-color: #e41c38;
+}
 
-    input.active{
-		border-color: #00C569;
-		color: #333;
-    }
+select {
+  width: 100%;
 
-    input.active + i{
-		color: #00C569;
-    }
+  border-radius: 4px;
 
-    input.active:focus ,  input.active:focus + i , input.active + i {
-		border-color: #00C569;
-    }
+  border: 1px solid;
 
-    input.error {
-    	color: #333;
-		border-color: #e41c38;
-    }
+  padding: 8px 15px;
 
-    input.error + i{
-		color: #e41c38;
-    }
+  position: relative;
 
+  z-index: 1;
 
-    input.error:focus ,  input.error:focus + i  {
-		border-color: #e41c38;
-    }
+  color: #777777;
 
-    select{
+  direction: rtl;
 
-    	width: 100%;
+  transition: 200ms;
 
-		border-radius: 4px;
+  background: none;
 
-		border: 1px solid;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+}
 
-		padding: 8px 15px;
+.input-wrapper i {
+  display: inline-block;
 
-		position: relative;
+  position: absolute;
 
-		z-index: 1;
+  left: 15px;
 
-		color: #777777;
+  font-size: 20px;
 
-		direction: rtl;
+  color: #bebebe;
 
-		transition: 200ms;
+  top: 9px;
 
-		background: none;
+  transition: 200ms;
+}
 
-		appearance:none;
-		-webkit-appearance:none;
-		-moz-appearance:none;
-		-ms-appearance:none;
+select option {
+  color: #333;
+}
 
+select:focus {
+  color: #333;
+}
 
+select.active {
+  color: #333;
+  color: #00c569;
+}
 
-    }
+select.active:focus {
+  color: #00c569;
+}
 
-    .input-wrapper i {
-    	display: inline-block;
+select.error {
+  color: #333;
+  color: #e41c38;
+}
 
-		position: absolute;
+select.error:focus {
+  color: #e41c38;
+}
 
-		left: 15px;
+.error-message {
+  text-align: center;
 
-		font-size: 20px;
+  color: #e41c38;
 
-		color: #BEBEBE;
+  font-weight: bold;
 
-		top: 9px;
+  height: 15px;
 
-		transition: 200ms;
-    }
+  direction: rtl;
 
-     select option{
-		color: #333;
-    }
+  font-size: 11px;
+}
 
-    select:focus{
-		color: #333;
-    }
+.small-description {
+  font-size: 11px;
 
-    select.active{
-    		color: #333;
-		color: #00C569;
-    }
+  font-weight: bold;
 
-    select.active:focus {
-		color: #00C569;
-    }
+  color: #777777;
 
-    select.error {
-    		color: #333;
-		color: #e41c38;
-    }
-
-    select.error:focus{
-		color: #e41c38;
-    }
-
-    .error-message{
-
-    	text-align: center;
-
-		color: #e41c38;
-
-		font-weight: bold;
-
-		height: 15px;
-		
-	    direction: rtl;
-
-		font-size: 11px;
-    }
-    
-    .small-description{
-
-         font-size: 11px;
-
-         font-weight: bold;
-
-         color: #777777;
-                
-         line-height: 1.618;
-
-    }
-    label .small-label{
-    	font-size: 12px;
-    }
-    @media screen and (max-width: 767px){
-		select{
-			font-size: 12px;
-		}
-		.input-wrapper::after {
-		    left: 14px;
-		}
-
-	}	
+  line-height: 1.618;
+}
+label .small-label {
+  font-size: 12px;
+}
+@media screen and (max-width: 767px) {
+  select {
+    font-size: 12px;
+  }
+  .input-wrapper::after {
+    left: 14px;
+  }
+}
 </style>
 
 <template>
-	<div>
+  <div>
+    <h2 class="title-contents col-xs-12">موجودی و قیمت محصول</h2>
 
-		 <h2 class="title-contents col-xs-12">
-		    موجودی و قیمت محصول
-		 </h2>
-		
-		 <div class="form-contents col-xs-12 ">
+    <div class="form-contents col-xs-12">
+      <div class="row">
+        <div class="col-xs-6 pull-right">
+          <label for="stock">
+            میزان موجودی
+            <span class="small-label">(کیلوگرم)</span>
+          </label>
 
-		    <div class="row">
+          <div class="text-input-wrapper">
+            <!-- input type tel because we have some limmitation for processes -->
 
-			    	<div class=" col-xs-6 pull-right">
+            <input
+              v-model="$parent.product.stock"
+              id="stock"
+              type="tel"
+              :class="{'active' :  $parent.product.stock , 'error': $parent.errors.stock}"
+              placeholder="مثلا : 1000 کیلوگرم"
+              pattern="[0-9]*"
+            />
+          </div>
+          <p class="error-message col-xs-12">
+            <span v-if="$parent.errors.stock" v-text="$parent.errors.stock"></span>
+          </p>
+        </div>
 
+        <div class="col-xs-6">
+          <label for="min-sale-amount">
+            حداقل سفارش
+            <span class="small-label">(کیلوگرم)</span>
+          </label>
 
-			    		  <label for="stock">
-			     			میزان موجودی
-			     			<span class="small-label">
-			     				(کیلوگرم) 
-			     			</span>
-			     		  </label>
+          <div class="text-input-wrapper">
+            <input
+              v-model="$parent.product.min_sale_amount"
+              id="min-sale-amount"
+              type="tel"
+              :class="{'active' :  $parent.product.min_sale_amount , 'error':$parent.errors.min_sale_amount}"
+              placeholder="مثلا : 20 کیلوگرم"
+              pattern="[0-9]*"
+            />
+          </div>
+          <p class="error-message">
+            <span v-if="$parent.errors.min_sale_amount" v-text="$parent.errors.min_sale_amount"></span>
+          </p>
+        </div>
 
-				     	<div class="text-input-wrapper  ">
-				     		<!-- input type tel because we have some limmitation for processes -->
-				     		
-				     		<input 
-					     		v-model="$parent.product.stock"
-					     		id="stock" 
-					     		type="tel"
-					     		:class="{'active' :  $parent.product.stock , 'error': $parent.errors.stock}"
-					     	    placeholder="مثلا : 1000 کیلوگرم"
-					  			pattern="[0-9]*"
+        <div class="col-xs-6 pull-right">
+          <label for="min-sale-price">
+            حداقل قیمت
+            <span class="small-label">(هر کیلو به تومان)</span>
+          </label>
 
-					     		>
+          <div class="text-input-wrapper">
+            <input
+              v-model="$parent.product.min_sale_price"
+              id="min-sale-price"
+              type="tel"
+              :class="{'active' :  $parent.product.min_sale_price , 'error':$parent.errors.min_sale_price}"
+              placeholder="مثلا : 260000 تومان"
+              pattern="[0-9]*"
+            />
+          </div>
+          <p class="error-message">
+            <span v-if="$parent.errors.min_sale_price" v-text="$parent.errors.min_sale_price"></span>
+          </p>
+        </div>
 
-				
-				     	</div>
-				     	   <p class="error-message col-xs-12">
-			    	   		  <span  v-if="$parent.errors.stock" v-text="$parent.errors.stock"></span>
-						   </p>
-				    </div>
+        <div class="col-xs-6">
+          <label for="max-sale-price">
+            حداکثر قیمت
+            <span class="small-label">(هر کیلو به تومان)</span>
+          </label>
 
-			    	<div class=" col-xs-6 ">
+          <div class="text-input-wrapper">
+            <input
+              v-model="$parent.product.max_sale_price"
+              id="max-sale-price"
+              type="tel"
+              :class="{'active' :  $parent.product.max_sale_price , 'error':$parent.errors.max_sale_price}"
+              placeholder="مثلا : 500000 تومان"
+              pattern="[0-9]*"
+            />
+          </div>
 
+          <p class="error-message">
+            <span v-if="$parent.errors.max_sale_price" v-text="$parent.errors.max_sale_price"></span>
+          </p>
+        </div>
+      </div>
 
-			    		  <label for="min-sale-amount">
-			     			حداقل سفارش
-			     			<span class="small-label">
-			     				(کیلوگرم) 
-			     			</span>
-			     		  </label>
-
-				     	<div class="text-input-wrapper  ">
-
-				     		<input 
-					     		v-model="$parent.product.min_sale_amount"
-					     		id="min-sale-amount" 
-					     		type="tel"
-					     		:class="{'active' :  $parent.product.min_sale_amount , 'error':$parent.errors.min_sale_amount}"
-					     	    placeholder="مثلا : 20 کیلوگرم"
-					  			pattern="[0-9]*"
-					     		>
-
-				
-				     	</div>
-				     	   <p class="error-message ">
-			    	   		  <span  v-if="$parent.errors.min_sale_amount" v-text="$parent.errors.min_sale_amount"></span>
-						   </p>
-				    </div>
-			    
-
-			    	<div class=" col-xs-6 pull-right">
-
-
-			    		  <label for="min-sale-price">
-			     			حداقل قیمت
-			     			<span class="small-label">
-			     			(هر کیلو به تومان)
-			     			</span>
-			     		  </label>
-
-				     	<div class="text-input-wrapper  ">
-
-				     		<input 
-					     		v-model="$parent.product.min_sale_price"
-					     		id="min-sale-price" 
-					     		type="tel"
-					     		:class="{'active' :  $parent.product.min_sale_price , 'error':$parent.errors.min_sale_price}"
-					     	    placeholder="مثلا : 260000 تومان"
-					  			pattern="[0-9]*"
-					     		>
-
-				
-				     	</div>
-				     	   <p class="error-message ">
-			    	   		  <span  v-if="$parent.errors.min_sale_price" v-text="$parent.errors.min_sale_price"></span>
-						   </p>
-				    </div>
-
-
-
-			    	<div class=" col-xs-6 ">
-
-
-			    		  <label for="max-sale-price">
-			     			حداکثر قیمت
-			     			<span class="small-label">
-			     			(هر کیلو به تومان)
-			     			</span>
-			     		  </label>
-
-				     	<div class="text-input-wrapper  ">
-
-				     		<input 
-					     		v-model="$parent.product.max_sale_price"
-					     		id="max-sale-price" 
-					     		type="tel"
-					     		:class="{'active' :  $parent.product.max_sale_price , 'error':$parent.errors.max_sale_price}"
-					     	    placeholder="مثلا : 500000 تومان"
-					  			pattern="[0-9]*"
-					     		>
-
-				
-				     	</div>
-
-				     	   <p class="error-message ">
-			    	   		  <span  v-if="$parent.errors.max_sale_price" v-text="$parent.errors.max_sale_price"></span>
-						   </p>
-
-				    </div>
-
-			    </div>
-
-			     	<span class="small-description">
+      <!-- <span class="small-description">
 			     		
  انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند 
  انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند 
 
-			     	</span>
+      </span>-->
 
-			       <div class="col-xs-12">
-			       	<div class="row">
-			       		 <button class="submit-button disabled pull-left "
-			       		 	:class="{'active' : $parent.product.stock && $parent.product.min_sale_price && $parent.product.max_sale_price && $parent.product.min_sale_amount}"
-			       		 	@click.prevent="$parent.stockAndPriceSubmited()"
-			       		   >
-			        		مرحله بعد 
-			        		<i class="fa fa-arrow-left"></i>
-						 </button>
+      <div class="col-xs-12">
+        <div class="row">
+          <button
+            class="submit-button disabled pull-left"
+            :class="{'active' : $parent.product.stock && $parent.product.min_sale_price && $parent.product.max_sale_price && $parent.product.min_sale_amount}"
+            @click.prevent="$parent.stockAndPriceSubmited()"
+          >
+            مرحله بعد
+            <i class="fa fa-arrow-left"></i>
+          </button>
 
+          <button
+            class="submit-button default-button pull-right"
+            @click.prevent="$parent.currentStep--"
+          >
+            <i class="fa fa-arrow-right"></i>
 
-						 <button class="submit-button default-button  pull-right "
-			       		 	
-			       		 	@click.prevent="$parent.currentStep--"
-			       		   >
-			       		   <i class="fa fa-arrow-right"></i>
-			        		مرحله  قبل 
-			        		
-						 </button>
-
-			       	</div>
-			       </div>
-		</div>
-		
+            مرحله قبل
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
-<script> 
-
-	export default{
-
-	    mounted(){	
-
-	    	if (this.$parent.isOsIOS()) {
-	    		$('input[type="tel"]').attr('type','text')
-	    	}
-	    },
-	    watch:{
-	    	'$parent.product.stock':function(){
-	    		this.$parent.errors.stock = '';
-	    	},
-	    	'$parent.product.min_sale_amount':function(){
-	    		this.$parent.errors.min_sale_amount = '';
-	    	},
-	    	'$parent.product.min_sale_price':function(){
-	    		this.$parent.errors.min_sale_price = '';
-	    	},
-	    	'$parent.product.max_sale_price':function(){
-	    		this.$parent.errors.max_sale_price = '';
-	    	},
-
-	    }
-	}
-
+<script>
+export default {
+  mounted() {
+    if (this.$parent.isOsIOS()) {
+      $('input[type="tel"]').attr("type", "text");
+    }
+  },
+  watch: {
+    "$parent.product.stock": function() {
+      this.$parent.errors.stock = "";
+    },
+    "$parent.product.min_sale_amount": function() {
+      this.$parent.errors.min_sale_amount = "";
+    },
+    "$parent.product.min_sale_price": function() {
+      this.$parent.errors.min_sale_price = "";
+    },
+    "$parent.product.max_sale_price": function() {
+      this.$parent.errors.max_sale_price = "";
+    }
+  }
+};
 </script>

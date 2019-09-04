@@ -228,13 +228,17 @@ textarea .small-label {
         </p>
       </div>
 
-      <span class="small-description">
+      <!-- <span class="small-description">
         انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند
         انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند
-      </span>
+      </span>-->
       <p>
-        ثبت نهایی این مرحله به منزل قبول کرد
-        <a href="#" class="green-text">شرایط و قوانین اینکوباک</a>
+        ثبت نهایی این مرحله به منزله قبول کرد
+        <a
+          href="/privacy-and-policy"
+          target="_balnk"
+          class="green-text"
+        >شرایط و قوانین اینکوباک</a>
         می باشد
       </p>
     </div>
@@ -249,7 +253,6 @@ textarea .small-label {
         @click.prevent="$parent.currentStep--"
       >
         <i class="fa fa-arrow-right"></i>
-
         مرحله قبل
       </button>
     </div>
