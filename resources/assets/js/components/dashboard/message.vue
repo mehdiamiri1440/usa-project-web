@@ -596,9 +596,9 @@
           </ul>
           <div class="loading-container" v-if="isChatMessagesLoaded">
             <div class="image-wrapper">
-              <a v-show="isImageLoad" :href="base + img">
+              <a v-show="isImageLoad">
                 <transition>
-                  <img :src="base + img" @load="ImageLoaded" :alt="alt" />
+                  <img src @load="ImageLoaded" alt="alt" />
                 </transition>
               </a>
 
