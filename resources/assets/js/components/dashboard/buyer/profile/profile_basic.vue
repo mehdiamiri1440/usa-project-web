@@ -998,7 +998,7 @@
                                     </div>
 
                                     <div class="link-help padding-0 col-xs-12  col-md-4">
-                                        <a href="https://www.incobac.com/profile/bincobac">
+                                        <a target="_blank" href="https://www.incobac.com/profile/bincobac">
                                             نمونه پروفایل تکمیل شده
                                              <i class="fa fa-question-circle"></i>
                                         </a>
@@ -1217,7 +1217,7 @@
                 certificateFiles: [],
                 formEnabled:false,
                 rankState:{
-                    is_company : 11,
+                    is_company : 12,
                     company_name : 11,
                     company_register_code : 11,
                     public_phone: 11,

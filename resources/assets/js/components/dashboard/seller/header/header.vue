@@ -193,6 +193,16 @@
         border: 2px solid #fff;
         float: right;
     }
+    .dark-profile-img {
+        overflow: hidden;
+        border-radius: 50%;
+        height: 85px;
+        width: 85px;
+        margin: 0 auto;
+        margin-left: 10px;
+        border: 2px solid #5B5C5D;
+        float: right;
+    }
 
     .profile-img img {
         height: 100%;
@@ -793,6 +803,7 @@
                         :photoLink="currentUser.profile.profile_photo"
                         :storage="storage"
                         :def="defultimg"
+                        :isLoading="isLoading"
                         :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
                         :usercity="currentUser.user_info.province + ' - ' + currentUser.user_info.city"
                         :userprof="currentUser.user_info.user_name"
@@ -839,6 +850,7 @@
                 <ProfileInfo
                         :photoLink="currentUser.profile.profile_photo"
                         :storage="storage"
+                        :isLoading="isLoading"
                         :def="defultimg"
                         :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
                         :usercity="currentUser.user_info.province + ' - ' + currentUser.user_info.city"
@@ -858,6 +870,7 @@
         </section>
 
         <HeaderTop
+        :isLoading='isLoading'
                 :photoLink="currentUser.profile.profile_photo"
                 :storage="storage"
                 :def="defultimg"
@@ -897,6 +910,7 @@
         ],
         data: function () {
             return {
+                isLoading:true,
                 deleteButtonText: '',
                 cancelButtonText: '',
                 ProductId: '',
@@ -937,7 +951,9 @@
                 this.isLoaded = true;
 
                 axios.post('/user/profile_info')
-                    .then(response => (this.currentUser = response.data)
+                    .then(response => {
+                        this.currentUser = response.data
+                        this.isLoading = false;}
                     );
             },
             RegisterBasicProfileInfo: function () {

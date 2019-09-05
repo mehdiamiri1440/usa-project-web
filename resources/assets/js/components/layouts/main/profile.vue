@@ -99,7 +99,7 @@
 
                 <div class="main-content-item" v-if="profileOwner.user_info">
                     <div class="header-content col-xs-12">
-                        <div class="image_user_wrapper col-xs-4">
+                        <div class="image_user_wrapper col-xs-4 col-sm-3 col-md-2">
                             <div class="user-image">
                                 <div v-if="profileOwner.profile.profile_photo">
                                     <img v-bind:src=" str + '/' +
@@ -189,10 +189,10 @@
 
                         </div>
 
-                        <div class="content_user_wrapper hidden-xs col-xs-6 col-sm-8">
-                            <div class="user-contents ">
+                        <div class="content_user_wrapper hidden-xs col-xs-6 col-sm-9 col-md-10">
+                            <div class="user-contents row">
                                 <div class="title_content col-xs-12">
-                                    <div class="back_page first-back col-xs-12 col-sm-4">
+                                    <div class="back_page first-back col-xs-12 col-sm-4 col-md-3">
                                         <a href="javascript:history.back()" class="green-button"
                                            @click="registerComponentStatistics('profileView','BackButton','click on back button')">
                                             بازگشت
@@ -200,7 +200,7 @@
                                         </a>
                                     </div>
 
-                                    <h1 class="content_title col-xs-12 col-sm-8"
+                                    <h1 class="content_title col-xs-12 col-sm-8 col-md-9"
                                         itemprop="name">
                                         <span v-text="
                                         profileOwner.user_info.first_name +
@@ -220,7 +220,7 @@
                                 </div>
 
                                 <div class="title_content col-xs-12">
-                                    <div class="back_page col-xs-12 col-sm-4">
+                                    <div class="back_page col-xs-12 col-sm-4 col-md-3">
                                         <a href="/dashboard/profile" class="green-button edit"
                                            v-if="currentUser.user_info &&
                                             currentUser.user_info.id ===
@@ -250,29 +250,66 @@
                                         </button>
                                     </div>
 
-                                    <div class="content_user_info col-xs-12 col-sm-8">
-                                        <p>
-                                            حوزه ی فعالیت :
+                                    <div class="content_user_info col-xs-12 col-sm-8 col-md-9">
+                                       
+                                        <div class="row">
+                                            <div class="col-xs-6 pull-right">
 
-                                            <span v-text="profileOwner.activity_domain"></span>
-                                        </p>
+                                               <p >
+                                                حوزه ی فعالیت :
 
-                                        <p>
-                                            آدرس :
-                                            <span itemprop="address"
-                                                  v-text="profileOwner.user_info.province +
-                                                   ' - ' +
-                                                    profileOwner.user_info.city">
-                                            </span>
+                                                <span v-text="profileOwner.activity_domain"></span>
+                                               </p>
 
-                                        </p>
+                                            </div>
+
+                                            <div class="col-xs-6 ">
+                                                
+
+                                                <p>
+                                                    آدرس :
+                                                    <span itemprop="address"
+                                                          v-text="profileOwner.user_info.province +
+                                                           ' - ' +
+                                                            profileOwner.user_info.city">
+                                                    </span>
+
+                                                </p>
+
+                                            </div>
+
+                                            <div   class="col-xs-6 pull-right">
+                                                
+                                                <p v-if="profileOwner.profile.is_company">
+                                                    نام شرکت
+
+                                                    <span v-text="profileOwner.profile.company_name"></span>
+                                                </p>
+
+                                            </div>                                            
+
+                                            <div class="col-xs-6 ">
+                                                
+                                                <p  v-if="profileOwner.profile.is_company" >
+                                                   شماره ثبت
+
+                                                    <span v-text="profileOwner.profile.company_register_code"></span>
+                                                </p>  
+
+                                            </div>
+
+
+
+
+                                        </div>
+                                                 
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="content_user_wrapper_mobile hidden-sm hidden-md hidden-lg col-xs-12">
-                            <div class="user-contents ">
+                            <div class="user-contents row">
                                 <div class="title_content col-xs-12">
                                     <div class="back_page col-xs-12 col-sm-4">
                                         <button class="btn btn-copy"
@@ -308,20 +345,62 @@
 
                                     </h1>
                                     <div class="content_user_info col-xs-12 col-sm-8">
-                                        <p>
-                                            حوزه ی فعالیت :
 
-                                            <span v-text="profileOwner.activity_domain">
-                                            </span>
-                                        </p>
 
-                                        <p>
-                                            آدرس :
-                                            <span v-text="profileOwner.user_info.province +
-                                             ' - ' +
-                                             profileOwner.user_info.city">
-                                            </span>
-                                        </p>
+
+                                 
+                                        <div class="row">
+                                            <div class="col-xs-6 pull-right">
+
+                                               <p >
+                                                حوزه ی فعالیت :
+
+                                                <span v-text="profileOwner.activity_domain"></span>
+                                               </p>
+
+                                            </div>
+
+                                            <div class="col-xs-6 ">
+                                                
+
+                                                <p>
+                                                    آدرس :
+                                                    <span itemprop="address"
+                                                          v-text="profileOwner.user_info.province +
+                                                           ' - ' +
+                                                            profileOwner.user_info.city">
+                                                    </span>
+
+                                                </p>
+
+                                            </div>
+
+                                            <div   class="col-xs-6 pull-right">
+                                                
+                                                <p v-if="profileOwner.profile.is_company">
+                                                    نام شرکت
+
+                                                    <span v-text="profileOwner.profile.company_name"></span>
+                                                </p>
+
+                                            </div>                                            
+
+                                            <div class="col-xs-6 ">
+                                                
+                                                <p  v-if="profileOwner.profile.is_company" >
+                                                   شماره ثبت
+
+                                                    <span v-text="profileOwner.profile.company_register_code"></span>
+                                                </p>  
+
+                                            </div>
+
+
+
+
+                                        </div>
+                                                                                         
+                                       
                                     </div>
                                 </div>
 

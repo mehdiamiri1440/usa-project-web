@@ -736,7 +736,7 @@
                 let jsonDL = {
                     "@context": "https://schema.org/",
                     "@type": "Product",
-                    "name": this.product.main.name,
+                    "name": this.product.main.product_name,
                     "image": this.product.photos.map(function (photo) {
                         return 'https://www.incobac.com/storage/' + photo.file_path;
                     }),
