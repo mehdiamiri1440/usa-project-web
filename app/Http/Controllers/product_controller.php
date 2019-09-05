@@ -963,6 +963,24 @@ class product_controller extends Controller
             'subcategory_name' => $subcategory_record->category_name,
         ];
     }
+    
+    //public method
+    public function is_user_allowed_to_register_product(Request $request){
+        
+        if($this->is_user_allowed_to_register_another_product() == false){
+            return response()->json([
+                'status' => true,
+                'is_limited' => true,
+                'msg' => ' سقف تعداد محصولات ثبت شده شما پر شده است.برای اضافه کردن محصولات بیشتر بخش تعرفه ها را بررسی کنید.'
+            ],200);
+        }
+        else {
+            return response()->json([
+                'status' => true,
+                'is_limited' => false
+            ],200);
+        }
+    }
             
 	
 }
