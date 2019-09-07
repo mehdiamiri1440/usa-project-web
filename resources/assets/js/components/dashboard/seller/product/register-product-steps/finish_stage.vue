@@ -275,6 +275,10 @@
     .main-description{
     	margin-top: 25px;
     }
+    .red-text{
+		color: #e41c38;
+
+    }
     @media screen and (max-width: 767px){
 		.input-wrapper {
 		    padding: 0 5px;
@@ -303,9 +307,11 @@
 
 
 				     		<p class="main-description">
-				     			در صورت استفاده از طرح رایگان محصول شما پس از تایید کارشناسان در لیست محصولات قرار میگیرید و از طریق پیامک به شما اطلاع رسانی خواهد شد. 
+				     			در صورت استفاده از طرح عضویت رایگان محصول شما پس از تایید کارشناسان در لیست محصولات قرار می گیرید و از طریق پیامک به شما اطلاع رسانی خواهد شد. 
 				     		</p>
-                            <p class="main-description" v-if="$parent.relatedBuyAd">یکی از مرتبط ترین درخواست های خرید برای شما در زیر نمایش داده شده است. <span class="text-red">در صورت عدم ارسال پیام به خریدار دیگر به این درخواست دسترسی نخواهید داشت.</span></p>
+                            <p class="main-description" v-if="$parent.relatedBuyAd" ><strong>یکی از مرتبط ترین درخواست های خرید برای محصول شما در زیر نمایش داده شده است. 
+                            	<br/>
+                            	<span class="red-text">در صورت عدم ارسال پیام به خریدار دیگر به این درخواست خرید دسترسی نخواهید داشت.</span></strong></p>
 							
 							<div class="list-group-item list-item-wrapper  col-xs-12" v-if="$parent.relatedBuyAd">
 								<p class="list-title col-sm-3 col-xs-12">

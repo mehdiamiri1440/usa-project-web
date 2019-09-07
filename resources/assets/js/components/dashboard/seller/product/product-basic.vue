@@ -300,6 +300,9 @@
             Terms,
             FinishStage
         },
+        props:[
+            'loading_img'
+        ],
         data: function () {
             return {
                 currentStep: 0,
@@ -364,6 +367,11 @@
                 relatedBuyAd:null,
                 productCategoryName:'',
                 productSubCategoryName:'',
+                limited:{
+                    isLimited : true,
+                    msg : ''
+                },
+                isStartLoading:false
             };
         },
         methods: {
@@ -374,11 +382,32 @@
                     .then(response => (this.categoryList = response.data.categories));
                 axios.post('/location/get_location_info')
                     .then(response => (this.provinces = response.data.provinces));
+
+                
+
+                   
             },
 
             startRegisterProductSubmited(){
+                this.isStartLoading = true;
+                 var self = this;
+                 axios.post('/is_user_allowed_to_register_product')
+                    .then(function(response){
+                        self.limited.isLimited = response.data.is_limited;
+                        self.limited.msg = response.data.msg;
+                        self.isStartLoading = false;
 
-                this.goToStep(1);
+                         if (self.limited.isLimited) {
+
+                            self.popUpMsg = self.limited.msg;
+                            eventBus.$emit('submitSuccess', self.popUpMsg);
+                           $('#custom-main-modal').modal('show');
+                        }else{
+
+                           self.goToStep(1);
+
+                        }
+                    });
 
             },
 
