@@ -15,23 +15,24 @@
   margin-right: 250px;
   margin-top: 65px;
   background: #fff;
+  position: relative;
+  min-height: 600px;
 }
 
 #main.little-main {
   margin-right: 80px !important;
 }
 
-    .main-header {
-        height: 65px;
-        position: fixed;
-        left: 0;
-        right: 250px;
-        top: 0;
-        background: #fff;
-        z-index: 5;
-        border-bottom: 2px solid #f6f6f6;
-
-    }
+.main-header {
+  height: 65px;
+  position: fixed;
+  left: 0;
+  right: 250px;
+  top: 0;
+  background: #fff;
+  z-index: 5;
+  border-bottom: 2px solid #f6f6f6;
+}
 
 .little-main-header {
   right: 80px;
@@ -68,7 +69,7 @@
 
   left: -90px;
 
-  top: 0px;
+  top: 0;
 
   font-size: 20px;
 }
@@ -79,21 +80,32 @@
   height: 100%;
   padding: 20px 20px 0;
 }
-
-    .content-header {
-        background: #00C569;
-        color: #fff;
-        height: 100%;
-        padding: 20px 20px 0;
-    }
+.right-menu-header .green-button {
+  font-size: 17px;
+}
+.right-menu-header a,
+.profile-menu-header a {
+  color: #7f8c9b;
+  margin: 5px;
+}
 
 .right-menu-header a {
   font-size: 30px;
 }
 
-.right-menu-header a:hover,
-.profile-menu-header > a:hover {
-  color: #2e353e;
+.content-header {
+  background: #00c569;
+  color: #fff;
+  height: 100%;
+  padding: 20px 20px 0;
+}
+.right-menu-header .green-button {
+  font-size: 17px;
+}
+.right-menu-header a,
+.profile-menu-header a {
+  color: #7f8c9b;
+  margin: 5px;
 }
 
 .profile-menu-header > a {
@@ -140,16 +152,19 @@
   background: #00d614;
 }
 
-    .green-button:hover {
-        color: #fff !important;
-        background: #00ac5c;
-    }
+.green-button {
+  color: #fafafa !important;
+}
 
-    i.fa-home {
-        position: relative;
-        top: 5px;
-    }
+.green-button:hover {
+  color: #fff !important;
+  background: #00ac5c;
+}
 
+i.fa-home {
+  position: relative;
+  top: 5px;
+}
 </style>
 
 <template>

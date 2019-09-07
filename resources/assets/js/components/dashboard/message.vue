@@ -577,7 +577,9 @@
         </div>
 
         <div class="chat-page" v-if="selectedContact">
-          <ul :class="[isChatMessagesLoaded?'chat-not-loaded':'chat-loaded']">
+          <ul
+            :class="[(isChatMessagesLoaded&&isFirstMessageLoading)?'chat-not-loaded':'chat-loaded']"
+          >
             <li :key="msg.id" v-for="msg in chatMessages">
               <div :class="[msg.sender_id == currentUserId ? 'message-send' : 'message-receive']">
                 <span v-text="msg.text"></span>
@@ -594,11 +596,11 @@
               </div>
             </li>
           </ul>
-          <div class="loading-container" v-if="isChatMessagesLoaded">
+          <div class="loading-container" v-if="isChatMessagesLoaded&&isFirstMessageLoading">
             <div class="image-wrapper">
-              <a v-show="isImageLoad" :href="base + img">
+              <a v-show="isImageLoad">
                 <transition>
-                  <img :src="base + img" @load="ImageLoaded" :alt="alt" />
+                  <img src @load="ImageLoaded" alt="alt" />
                 </transition>
               </a>
 
@@ -646,6 +648,7 @@ export default {
     return {
       isImageLoad: false,
       isChatMessagesLoaded: true,
+      isFirstMessageLoading: true,
       selectedIndex: -1,
       items: [
         {
@@ -714,6 +717,7 @@ export default {
     loadChatHistory: function(contact, index) {
       var self = this;
       self.isChatMessagesLoaded = true;
+      if (index !== -10) self.isFirstMessageLoading = true;
       self.selectedIndex = index;
       this.selectedContact = contact;
       this.currentContactUserId = contact.contact_id;
@@ -769,8 +773,8 @@ export default {
           self.chatMessages.push(response.data.message);
 
           self.scrollToEnd(0);
-
-          self.loadChatHistory(self.selectedContact);
+          self.isFirstMessageLoading = false;
+          self.loadChatHistory(self.selectedContact, -10);
         })
         .catch(function(e) {
           //
