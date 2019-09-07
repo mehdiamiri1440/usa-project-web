@@ -297,7 +297,7 @@ select.error:focus {
               id="product-type"
               type="text"
               :class="{'active' :  $parent.product.product_name , 'error':$parent.errors.product_name}"
-              placeholder="مثلا : پسته کله قوچی"
+              placeholder="مثلا : مضافتی "
             />
           </div>
           <p class="error-message col-xs-12">
