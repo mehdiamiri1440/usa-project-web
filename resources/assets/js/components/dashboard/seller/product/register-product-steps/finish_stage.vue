@@ -275,6 +275,10 @@
     .main-description{
     	margin-top: 25px;
     }
+    .red-text{
+		color: #e41c38;
+
+    }
     @media screen and (max-width: 767px){
 		.input-wrapper {
 		    padding: 0 5px;
@@ -299,33 +303,36 @@
 
 	
 
-				     	<div class="text-input-wrapper  ">
+				     	<div class="text-input-wrapper">
 
 
 				     		<p class="main-description">
-				     			لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله 
+				     			در صورت استفاده از طرح عضویت رایگان محصول شما پس از تایید کارشناسان در لیست محصولات قرار می گیرید و از طریق پیامک به شما اطلاع رسانی خواهد شد. 
 				     		</p>
+                            <p class="main-description" v-if="$parent.relatedBuyAd" ><strong>یکی از مرتبط ترین درخواست های خرید برای محصول شما در زیر نمایش داده شده است. 
+                            	<br/>
+                            	<span class="red-text">در صورت عدم ارسال پیام به خریدار دیگر به این درخواست خرید دسترسی نخواهید داشت.</span></strong></p>
 							
-							<div class="list-group-item list-item-wrapper  col-xs-12">
+							<div class="list-group-item list-item-wrapper  col-xs-12" v-if="$parent.relatedBuyAd">
 								<p class="list-title col-sm-3 col-xs-12">
-									<span>میوه</span> <span> | </span> <span>سایر</span> <span> | خیارسبز</span>
+									<span>{{$parent.relatedBuyAd.category_name}}</span> <span> | </span> <span>{{$parent.relatedBuyAd.subcategory_name}}</span> <span> | {{$parent.relatedBuyAd.name}}</span>
 								</p> 
 								<p class="needs col-sm-4 col-xs-12">
 									<span class="static-content">
                             			میزان نیازمندی :
                         			</span> 
-                        			<span>50000</span> 
+                        			<span>{{$parent.relatedBuyAd.requirement_amount}}</span> 
                         			<span class="static-content">
                             				کیلوگرم
-                       				 </span>
+                       	            </span>
                        			</p> 
                        			<p class="list-time col-sm-2 col-xs-12">
-                       			۱۰  شهریور , ۱۳۹۸
+                                    {{$parent.relatedBuyAd.register_date}}
                        		    </p> 
 
                        		    <div class="send-message col-sm-3 col-xs-12">
                        		    	
-                       		    	<button class="submit-button active ">
+                       		    	<button class="submit-button active" @click.prevent="$parent.openChat($parent.relatedBuyAd)">
                        		    		 پیام به خریدار
                      				</button> 
 
@@ -351,3 +358,8 @@
 		
     </div>
 </template>
+
+<script>
+    
+
+</script>

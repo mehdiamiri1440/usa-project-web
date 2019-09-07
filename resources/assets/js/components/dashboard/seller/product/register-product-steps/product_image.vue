@@ -297,7 +297,7 @@ label .small-label {
 
       <span
         class="small-description"
-      >انتخاب تصویر مناسب تاثیر قابل توجهی در بیشتر ملاحظه شدن محصول شما دارد</span>
+      >انتخاب تصویر مناسب ، تاثیر قابل توجهی در بیشتر ملاحظه شدن محصول شما دارد</span>
 
       <div class="submit-button-wrapper">
         <button

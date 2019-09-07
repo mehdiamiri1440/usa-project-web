@@ -378,7 +378,7 @@
                                             <div   class="col-xs-6 pull-right">
                                                 
                                                 <p v-if="profileOwner.profile.is_company">
-                                                    نام شرکت
+                                                    نام شرکت :
 
                                                     <span v-text="profileOwner.profile.company_name"></span>
                                                 </p>
@@ -388,7 +388,7 @@
                                             <div class="col-xs-6 ">
                                                 
                                                 <p  v-if="profileOwner.profile.is_company" >
-                                                   شماره ثبت
+                                                   شماره ثبت :
 
                                                     <span v-text="profileOwner.profile.company_register_code"></span>
                                                 </p>  
