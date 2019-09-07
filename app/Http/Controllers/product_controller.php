@@ -15,6 +15,8 @@ use App\user_product;
 use DB;
 use App\Http\Controllers\sms_controller;
 use App\Jobs\NotifyBuyersBySMS;
+use App\buyAd;
+use App\Http\Library\date_convertor;
 
 
 class product_controller extends Controller
@@ -59,13 +61,25 @@ class product_controller extends Controller
 		$this->validate($request,$rules);
 		
 		$product_object_or_failuire_message = $this->add_product_to_DB($request);
+        
 		
 		if(is_object($product_object_or_failuire_message))
 		{
-			return response()->json([
-				'status' => TRUE,
-				'product' => $product_object_or_failuire_message,
-			],201);
+            $most_related_buyAd = $this->get_the_most_related_buyAd_to_the_given_product_if_there_is_any($product_object_or_failuire_message);
+            
+            if($most_related_buyAd){
+                return response()->json([
+                    'status' => TRUE,
+                    'buyAd' => $most_related_buyAd
+                ],201);
+            }
+            else{
+                return response()->json([
+                    'status' => TRUE,
+                    'product' => $product_object_or_failuire_message,
+                ],201);
+            }
+			
 		}
 		else{
 			return response()->json([
@@ -101,6 +115,7 @@ class product_controller extends Controller
             if($this->is_send_sms_to_buyers_active()){
                 NotifyBuyersBySMS::dispatch($product->id)->onQueue('default');
             }
+            
 			
 			return $product;
 		}
@@ -798,6 +813,7 @@ class product_controller extends Controller
         else return false;
     }
     
+    //public method
     public function edit_product_by_id(Request $request)
     {
         $this->validate($request,[
@@ -848,7 +864,7 @@ class product_controller extends Controller
         }
     }
     
-    
+    //public method
     public function get_all_products_url_for_sitemap()
     {
         $products = collect($this->get_all_products_with_related_media());
@@ -857,6 +873,114 @@ class product_controller extends Controller
         
         return $products;
     }
+    
+    protected function get_the_most_related_buyAd_to_the_given_product_if_there_is_any(&$product)
+    {
+        $until_date = Carbon::now();
+        $from_date = Carbon::now()->subDays(14); // last 2 weeks
         
+        $related_subcategory_buyAds = buyAd::where('category_id',$product->category_id)
+                                            ->where('confirmed',true)
+                                            ->whereBetween('created_at',[$from_date,$until_date])
+                                            ->orderBy('created_at','desc')
+                                            ->get();
+        
+        if($related_subcategory_buyAds){
+            $the_most_related_buyAd_record = $this->get_the_most_related_buyAd_to_given_product($product,$related_subcategory_buyAds);
+            
+            return $the_most_related_buyAd_record ? $the_most_related_buyAd_record : null;
+        }
+        else return null;
+    }
+    
+    
+    protected function get_the_most_related_buyAd_to_given_product(&$product,&$related_subcategory_buyAds)
+    {
+        $most_related_record = null;
+        $max_mached_words = 0;
+        
+        $product_name_array = array_filter(array_map('trim',explode(' ',str_replace('،',' ',$product->product_name))));
+        
+        foreach($related_subcategory_buyAds as $buyAd){
+            $mached = 0;
+            
+            $buyAd_name_array = array_filter(array_map('trim',explode(' ',str_replace('،',' ',$buyAd->name))));
+            
+            foreach($buyAd_name_array as $word){
+                if(in_array($word,$product_name_array)){
+                    $mached++;
+                }
+            }
+            
+            if($mached > $max_mached_words){
+                    $most_related_record = $buyAd;
+                    $max_mached_words = $mached;
+            }
+        }
+        
+        if($most_related_record){
+            $this->append_user_info_to_most_related_buyAd_record($most_related_record,$product);
+        }
+        
+        return $most_related_record;
+    }
+    
+    protected function append_user_info_to_most_related_buyAd_record(&$buyAd,&$product){
+        $buyAd_owner_user_record = myuser::where('id',$buyAd->myuser_id)
+                                            ->select(['user_name','first_name','last_name'])
+                                            ->get()
+                                            ->first();
+        
+        $buyAd['user_name'] = $buyAd_owner_user_record->user_name;
+        $buyAd['first_name'] = $buyAd_owner_user_record->first_name;
+        $buyAd['last_name'] = $buyAd_owner_user_record->last_name;
+        
+        $category_record = $this->get_category_and_subcategory_name($product->category_id);
+        
+        $buyAd['category_name'] = $category_record['category_name'];
+        $buyAd['subcategory_name'] = $category_record['subcategory_name'];
+        
+        $date_convertor_object = new date_convertor();
+        
+        $buyAd['register_date'] = $date_convertor_object->get_persian_date_with_month_name($buyAd->created_at);
+        
+    }
+    
+    protected function get_category_and_subcategory_name($subcategory_id)
+    {
+        $subcategory_record = category::where('id',$subcategory_id)
+            ->select('category_name','parent_id')
+            ->get()
+            ->first();
+
+        $category_record = category::where('id',$subcategory_record->parent_id)
+            ->select('category_name')
+            ->get()
+            ->first();
+
+        return [
+            'category_name' => $category_record->category_name,
+            'subcategory_name' => $subcategory_record->category_name,
+        ];
+    }
+    
+    //public method
+    public function is_user_allowed_to_register_product(Request $request){
+        
+        if($this->is_user_allowed_to_register_another_product() == false){
+            return response()->json([
+                'status' => true,
+                'is_limited' => true,
+                'msg' => ' سقف تعداد محصولات ثبت شده شما پر شده است.برای اضافه کردن محصولات بیشتر بخش تعرفه ها را بررسی کنید.'
+            ],200);
+        }
+        else {
+            return response()->json([
+                'status' => true,
+                'is_limited' => false
+            ],200);
+        }
+    }
+            
 	
 }
