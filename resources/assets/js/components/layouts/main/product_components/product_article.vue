@@ -253,10 +253,11 @@
 </style>
 
 <template>
-    <div>
-        <script v-html="jsonLDObject" type="application/ld+json"></script>
+   
+        
 
         <article class="main-content-item">
+            <script v-html="jsonLDObject" type="application/ld+json"></script>
             <ProductUserInfo
                     :profile_photo="product.profile_info.profile_photo"
                     :user_info="product.user_info"
@@ -504,7 +505,7 @@
                 <img :src="loading_img" style="width:200px;height:200px">
             </div>
         </article>
-    </div>
+
 </template>
 <script>
     import {eventBus} from "../../../../../js/router/dashboard_router";
