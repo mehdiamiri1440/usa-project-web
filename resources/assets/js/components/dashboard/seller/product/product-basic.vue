@@ -300,6 +300,9 @@
             Terms,
             FinishStage
         },
+        props:[
+            'loading_img'
+        ],
         data: function () {
             return {
                 currentStep: 0,
@@ -361,6 +364,14 @@
                     },
                 ],
                 uploadPercentage: 0,
+                relatedBuyAd:null,
+                productCategoryName:'',
+                productSubCategoryName:'',
+                limited:{
+                    isLimited : true,
+                    msg : ''
+                },
+                isStartLoading:false
             };
         },
         methods: {
@@ -371,11 +382,32 @@
                     .then(response => (this.categoryList = response.data.categories));
                 axios.post('/location/get_location_info')
                     .then(response => (this.provinces = response.data.provinces));
+
+                
+
+                   
             },
 
             startRegisterProductSubmited(){
+                this.isStartLoading = true;
+                 var self = this;
+                 axios.post('/is_user_allowed_to_register_product')
+                    .then(function(response){
+                        self.limited.isLimited = response.data.is_limited;
+                        self.limited.msg = response.data.msg;
+                        self.isStartLoading = false;
 
-                this.goToStep(1);
+                         if (self.limited.isLimited) {
+
+                            self.popUpMsg = self.limited.msg;
+                            eventBus.$emit('submitSuccess', self.popUpMsg);
+                           $('#custom-main-modal').modal('show');
+                        }else{
+
+                           self.goToStep(1);
+
+                        }
+                    });
 
             },
 
@@ -471,6 +503,10 @@
                                 // $('#custom-main-modal').modal('show');
 
                                 self.registerComponentStatistics('product-register','product-registered-successfully','product-registered-successfully');
+                                
+                                if(response.data.buyAd){
+                                    self.relatedBuyAd = response.data.buyAd;
+                                }
 
                                 self.goToStep(6);
                             }
@@ -674,6 +710,34 @@
 
                 return ios;
             }, 
+            openChat: function (buyAd) {
+                this.registerComponentStatistics('buyAdReplyAfterProductRegister', 'openChat', 'click on open chatBox');
+
+                axios.post('/get_user_last_confirmed_profile_photo', {
+                    'user_id': buyAd.myuser_id
+                }).then(function (response) {
+                    var profile_photo = response.data.profile_photo;
+
+                    var contact = {
+                        contact_id: buyAd.myuser_id,
+                        first_name: buyAd.first_name,
+                        last_name: buyAd.last_name,
+                        profile_photo: profile_photo,
+                        user_name: buyAd.user_name,
+                    };
+
+                    axios.post('/set_last_chat_contact', contact)
+                        .then(function (response) {
+                            window.location.href = '/dashboard/messages';
+                        })
+                        .catch(function (e) {
+                            alert('Error');
+                        });
+                })
+                    .catch(function (err) {
+                        //
+                    });
+            },
             
 
         },

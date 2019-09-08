@@ -25,7 +25,7 @@
           <div class="profile-city" v-text="usercity"></div>
         </div>
 
-        <a :href="'/profile/'+ userprof" class="green-button">پروفایل من</a>
+        <a :href="'/profile/'+ userprof" class="green-button">نمایش پروفایل من</a>
       </div>
     </section>
 

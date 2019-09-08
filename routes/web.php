@@ -619,6 +619,11 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'payment_controller@payment_callback',
         'as' => 'payment_callback'
     ]);
+    
+    Route::post('/is_user_allowed_to_register_product',[
+        'uses' => 'product_controller@is_user_allowed_to_register_product',
+        'as'   => 'is_user_allowed_to_register_product'
+    ]);
 
 });
 
