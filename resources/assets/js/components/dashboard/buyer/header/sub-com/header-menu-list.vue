@@ -29,7 +29,7 @@
 
                 <li class="list-item">
                     <router-link  :to="{ name : 'registerRequest' }">
-                        <span>ثبت درخواست جدید</span>
+                        <span>ثبت درخواست خرید</span>
                         <i class="fa fa-plus-square " aria-hidden="true"></i>
                     </router-link>
                 </li>
