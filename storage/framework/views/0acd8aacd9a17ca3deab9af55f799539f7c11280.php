@@ -23,6 +23,7 @@
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/custom.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/dashboard/master/style.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl-custom-style.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/placeholder-content.css')); ?>">
 
     <script src="<?php echo e(asset('assets/cdn/axios.js')); ?>"></script>
     <?php echo $__env->yieldContent('header_links'); ?>

@@ -889,9 +889,11 @@
                 axios.post('/user/profile_info')
                     .then(function (response) {
                         self.currentUser = response.data;
+
                         if (searchValueText) {
                             self.registerComponentStatistics('homePage', 'search-text', searchValueText);
                             self.searchText = searchValueText;
+                             eventBus.$emit('submiting', false);
                         }
                         else {
                             self.loading = true;
@@ -902,6 +904,7 @@
                             }).then(function (response) {
                                 self.products = response.data.products;
                                 self.loading = false;
+                                 eventBus.$emit('submiting', false);
                                 setTimeout(function(){
                                     self.sidebarScroll();
                                 },500)
@@ -915,15 +918,13 @@
                 var self = this;
                 if (this.searchText === '' && this.provinceId === '' && this.categoryId === '' && this.continueToLoadProducts) {
                     this.loadMoreActive = true;
-
                     this.productCountInPage += this.productCountInEachLoad;
-
                     axios.post('/user/get_product_list', {
                         from_record_number: 0,
                         to_record_number: this.productCountInPage,
                     }).then(function (response) {
                         self.products = response.data.products;
-
+                        eventBus.$emit('submiting', false);
                         if (self.products.length + 1 < self.productCountInPage) {
                             self.continueToLoadProducts = false;
                         }
