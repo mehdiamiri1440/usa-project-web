@@ -520,8 +520,8 @@
                 <ul class="list-inline">
                     <li class="list-item active">
                        <h1 class="main-title">
-                        <a href="#">
-                            {{$route.params.categoryName}}
+                        <a href="">
+                            {{this.getCategoryName()}}
                         </a>
                         </h1>
                     </li>
