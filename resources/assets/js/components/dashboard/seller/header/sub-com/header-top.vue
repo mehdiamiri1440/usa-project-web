@@ -74,6 +74,16 @@
   font-size: 20px;
 }
 
+.profile-menu-header span.user_name{
+ 
+  display: block;
+
+  float: right;
+
+  padding-top: 15px;
+
+}
+
 .content-header {
   background: #28a745;
   color: #fff;
