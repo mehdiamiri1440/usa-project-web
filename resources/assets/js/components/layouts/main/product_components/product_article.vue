@@ -434,10 +434,10 @@
 
                     <div class="col-xs-12 col-sm-6 pull-right">
                         <label for="stock" class="content-label">
-                            مقدار موجودی (کیلوگرم):
+                            مقدار موجودی (کیلوگرم)
                         </label>
 
-                        <input id="stock" placeholder="مقدار موجودی" type="text"
+                        <input id="stock" placeholder="" type="text"
                                class=" form-control" :value="product.main.stock">
 
                         <span class="text-danger" v-if="errors.stock" v-text="errors.stock[0]"></span>
@@ -445,7 +445,7 @@
 
                     <div class="col-xs-12 col-sm-6">
                         <label for="min-sale-amount" class="content-label">
-                            حداقل سفارش (کیلوگرم):
+                            حداقل سفارش (کیلوگرم)
                         </label>
 
                         <input id="min-sale-amount" placeholder="حداقل سفارش" type="text"
@@ -457,7 +457,7 @@
 
                     <div class="col-xs-12 col-sm-6 pull-right ">
                         <label for="min-sale-price" class="content-label">
-                            حداقل قیمت:
+                            حداقل قیمت
                         </label>
 
                         <input id="min-sale-price" placeholder="حداقل قیمت" type="text" class=" form-control"
@@ -470,7 +470,7 @@
 
                     <div class="col-xs-12 col-sm-6 ">
                         <label for="max-sale-price" class="content-label">
-                            حداکثر قیمت:
+                            حداکثر قیمت
                         </label>
 
                         <input id="max-sale-price" placeholder="حداکثر قیمت" type="text" class=" form-control"
@@ -479,7 +479,7 @@
                         <span class="text-danger" v-if="errors.max_sale_price" v-text="errors.max_sale_price[0]"></span>
                     </div>
 
-                    <div class="col-xs-12 ">
+                <!--     <div class="col-xs-12 ">
                         <label for="description" class="content-label">
                             توضیحات:
                         </label>
@@ -488,7 +488,7 @@
                                   class=" form-control" :value="product.main.description"></textarea>
                         <span class="text-danger" v-if="errors.description" v-text="errors.description[0]"></span>
 
-                    </div>
+                    </div> -->
 
                     <div class="hidden-xs col-sm-8"></div>
 
