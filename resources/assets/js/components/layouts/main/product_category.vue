@@ -519,9 +519,11 @@
             <div class="links-sub-header   col-xs-6 col-sm-3 pull-right  ">
                 <ul class="list-inline">
                     <li class="list-item active">
+                       <h1 class="main-title">
                         <a href="#">
-                            دسته بندی محصول
+                            {{this.getCategoryName()}}
                         </a>
+                        </h1>
                     </li>
                 </ul>
             </div>

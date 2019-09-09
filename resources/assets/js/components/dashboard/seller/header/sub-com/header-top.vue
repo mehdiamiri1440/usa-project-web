@@ -67,9 +67,9 @@
 .profile-menu-header i {
   position: absolute;
 
-  left: -90px;
+  left: -80px;
 
-  top: 0;
+  top: 20px;
 
   font-size: 20px;
 }
@@ -110,8 +110,6 @@
 
 .profile-menu-header > a {
   position: relative;
-  top: 18px;
-  left: 10px;
 }
 
 .profile-list {
