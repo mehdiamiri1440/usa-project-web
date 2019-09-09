@@ -677,9 +677,9 @@
         padding-bottom: 50px;
     }
 
-    #services .row > h2 {
+    #services .row > h4 {
         text-align: center;
-
+        font-size: 32px;
         margin: 45px auto -25px;
     }
 
@@ -743,7 +743,7 @@
         min-height: 190px;
     }
 
-    .detail-thumb h4 {
+    .detail-thumb h3 {
         height: 28px;
     }
 
@@ -810,7 +810,7 @@
         font-size: 42px;
     }
 
-    .detail-thumb h4 {
+    .detail-thumb h3 {
         font-size: 14px;
     }
 
