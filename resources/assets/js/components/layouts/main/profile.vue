@@ -531,9 +531,9 @@
 
                     <div class="contents" v-else>
 
-                        <div v-if="products.length > 0" v-for="(product,productIndex) in products"
-                             :key="product.main.id">
-                            <ProductArticle
+ 
+                         <ProductArticle v-if="products.length > 0" v-for="(product,productIndex) in products"
+                                    :key="product.main.id"
                                     :product="product"
                                     :loading_img="loading_img"
                                     :defultimg="defultimg"
@@ -541,9 +541,7 @@
                                     :loading="loading"
                                     :currentUser="currentUser"
 
-                            />
-
-                        </div>
+                         />
                         <div class="col-xs-12" v-if="products.length === 0 && !loading">
                             <div class="col-xs-12" v-if="products.length === 0 && !loading">
                                 <div class="wrapper_no_pro">
