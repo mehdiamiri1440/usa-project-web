@@ -520,7 +520,7 @@
                 <ul class="list-inline">
                     <li class="list-item active">
                        <h1 class="main-title">
-                        <a href="#">
+                        <a href="">
                             {{this.getCategoryName()}}
                         </a>
                         </h1>
