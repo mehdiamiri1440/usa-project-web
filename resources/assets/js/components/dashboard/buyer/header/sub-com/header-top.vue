@@ -61,17 +61,27 @@
 
 .profile-menu-header {
   padding: 7px;
-  padding-left: 55px;
+  padding-left: 37px;
 }
 
 .profile-menu-header i {
   position: absolute;
 
-  left: -90px;
+  left: -80px;
 
-  top: 0;
+  top: 20px;
 
   font-size: 20px;
+}
+
+.profile-menu-header span.user_name{
+ 
+  display: block;
+
+  float: right;
+
+  padding-top: 15px;
+
 }
 
 .content-header {
@@ -110,8 +120,6 @@
 
 .profile-menu-header > a {
   position: relative;
-  top: 18px;
-  left: 10px;
 }
 
 .profile-list {
@@ -184,39 +192,52 @@ i.fa-home {
           <div class="image-header-profile" v-if="photoLink">
             <img :src="storage + '/' + photoLink" />
           </div>
+
           <div class="image-header-profile" v-else>
             <img :src="def" />
           </div>
+
           <i class="fa fa-angle-down" aria-hidden="true"></i>
+
           <span class="user_name" v-text="username"></span>
         </a>
         <div class="col display-loading" v-else>
           <div class="image-header-profile shadow-content placeholder-content"></div>
           <div class="user_name shadow-content placeholder-content loading-height margin-loading"></div>
         </div>
+
         <div class="profile-list">
           <ul class="list-unstyled">
             <li class="list-item">
-              <a :href="'/dashboard/profile'">پروفایل</a>
+              <a
+                :href="'/dashboard/profile'"
+                @click="registerComponentStatistics('seller-dashboard-header','profile-link','click-on-profile-link-in-dashboard')"
+              >پروفایل</a>
             </li>
+
             <li class="list-item">
-              <a :href="'/dashboard/password'">تغییر کلمه عبور</a>
+              <a
+                :href=" '/dashboard/password' "
+                @click="registerComponentStatistics('seller-dashboard-header','change-password','click-on-change-password-dashboard')"
+              >تغییر کلمه عبور</a>
             </li>
+
             <li class="list-item">
-              <a :href="out">خروج</a>
+              <a
+                :href="out"
+                @click="registerComponentStatistics('seller-dashboard-header','logout','click-on-logout-in-dashboard')"
+              >خروج</a>
             </li>
           </ul>
         </div>
       </div>
-
       <div class="right-menu-header">
         <ul class="list-inline">
           <li>
             <a
               class="green-button"
               href="/product-list"
-              style="font-size: 17px"
-              @click="registerComponentStatistics('product-list-btn','click','product-list in dashboard')"
+              @click="registerComponentStatistics('dashboard-header','product-list-btn','click-on-product-list-in-dashboard')"
             >
               <span class="full">لیست محصولات</span>
               <span class="min">
@@ -224,8 +245,12 @@ i.fa-home {
               </span>
             </a>
           </li>
+
           <li>
-            <a :href="routeHome">
+            <a
+              :href="routeHome"
+              @click="registerComponentStatistics('dashboard-header','home-page-btn','click-on-home-page-in-dashboard')"
+            >
               <i class="fa fa-home" aria-hidden="true"></i>
             </a>
           </li>
@@ -237,7 +262,9 @@ i.fa-home {
   </div>
 </template>
 
+
 <script>
+var visible = false;
 import SubMenu from "./sub-menu/sub-menu.vue";
 
 export default {
@@ -246,7 +273,6 @@ export default {
   },
   props: [
     "photoLink",
-    "profilebasic",
     "storage",
     "def",
     "username",
@@ -271,16 +297,16 @@ export default {
         $(".icon-header-list").fadeOut("slow");
         visible = false;
       }
-    },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
-      gtag("event", actionName, {
-        event_category: categoryName,
-        event_label: labelName
-      });
     }
   },
   created() {
     document.addEventListener("click", this.documentClick);
+  },
+  registerComponentStatistics: function(categoryName, actionName, labelName) {
+    gtag("event", actionName, {
+      event_category: categoryName,
+      event_label: labelName
+    });
   }
 };
 </script>
