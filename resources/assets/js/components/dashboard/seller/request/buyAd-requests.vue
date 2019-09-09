@@ -88,6 +88,9 @@
 
     @media screen and (max-width: 767px) {
 
+        .main-content{
+            padding: 0
+        }
         .green-button {
             width: 100%;
         }
@@ -121,7 +124,8 @@
             </div>
             <div class="col-xs-12">
 
-                <ul class="list-unstyled">
+               <div class="row">
+                    <ul class="list-unstyled">
                     <li v-for="buyAd in buyAds" class="list-group-item  col-xs-12">
                         <p class="list-title col-sm-3 col-xs-12">
                             <span v-text="buyAd.category_name"></span>
@@ -166,6 +170,7 @@
                         <a class="green-button" href="/pricing">تعرفه ها</a>
                     </li>
                 </ul>
+               </div>
 
             </div>
 
