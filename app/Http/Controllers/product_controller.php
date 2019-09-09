@@ -240,7 +240,7 @@ class product_controller extends Controller
             $b = $item2['user_info']->active_pakage_type;
 
             if($a == $b){
-                return $item1['main']->id < $item2['main']->id;
+                return $item1['main']->updated_at < $item2['main']->updated_at;
             }
 
             return ($a < $b) ? 1 : -1;
@@ -379,7 +379,7 @@ class product_controller extends Controller
 												->join('categories','products.category_id','=','categories.id')	   											
 													->leftJoin('cities','cities.id','=','products.city_id')
 													->leftJoin('provinces','provinces.id','=','cities.province_id')
-													->select('products.id','products.product_name','products.stock','products.min_sale_price','products.max_sale_price','products.min_sale_amount','products.description','products.address','products.myuser_id','products.category_id as sub_category_id','provinces.province_name','provinces.id as province_id','cities.city_name','cities.id as city_id','categories.category_name as sub_category_name')
+													->select('products.id','products.updated_at','products.product_name','products.stock','products.min_sale_price','products.max_sale_price','products.min_sale_amount','products.description','products.address','products.myuser_id','products.category_id as sub_category_id','provinces.province_name','provinces.id as province_id','cities.city_name','cities.id as city_id','categories.category_name as sub_category_name')
 													->where('products.id',$product_id)
                                                     ->where('confirmed',true)
 													->get()

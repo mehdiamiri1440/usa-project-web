@@ -4,7 +4,7 @@
         margin-bottom: 0;
     }
 
-    .content-sidebar h4 {
+    .content-sidebar h2 {
         padding: 0 15px;
     }
 
@@ -34,14 +34,14 @@
         text-align: center;
     }
 
-    .content-sidebar h4 a {
+    .content-sidebar h2 a {
         font-size: 17px;
         color: #333;
         font-weight: 700;
         margin: 5px;
     }
 
-    .content-sidebar h4 i {
+    .content-sidebar h2 i {
         font-weight: 700;
         position: relative;
         top: 2px;
@@ -65,7 +65,7 @@
         transition: 300ms;
     }
 
-    .content-sidebar h4 a:hover, .sub-category-product a:hover {
+    .content-sidebar h2 a:hover, .sub-category-product a:hover {
         color: #00c569;
         transition: 300ms;
     }
@@ -78,7 +78,7 @@
         transition: 300ms;
     }
 
-    .list-open h4 i {
+    .list-open h2 i {
         transform: rotate(-90deg);
     }
 
@@ -107,19 +107,29 @@
         margin:15px 0;
         padding: 15px;
     }
+
+    .sub-category-item h4 , .sub-category-item h1{
+
+      font-size: 14px;
+      line-height: 1.5;
+
+    }
+
+
 </style>
 <template>
       <div v-if=" categoryList" class="content-sidebar">
 
           <div class="title-widget">
-              <h3>دسته بندی محصولات </h3>
+              <div>دسته بندی محصولات </div>
               <hr>
           </div>
+          
           <div  class="category-products-widget">
               <ul>
                   <li v-for="(category, index) in categoryList" :key="category.id"
                       :class="'collapse-category-' + category.id">
-                      <h4>
+                      <h2>
                           <a
                                   :class="'collapse-button-' + category.id"
                                   href="#"
@@ -132,15 +142,27 @@
                               <span v-text="category.category_name"></span>
 
                           </a>
-                      </h4>
+                      </h2>
 
                       <ul class=" sub-category-product little">
 
                           <li class="sub-category-item " v-for="subCategory in category.subcategories">
-                              <a       :class="{'active' : getCategoryName() === subCategory.category_name}"
+
+                              <h1 v-if="getCategoryName() === subCategory.category_name">
+                                <a       :class="{'active' : getCategoryName() === subCategory.category_name}"
                                       :href=getSubCategoryUrl(subCategory)
                                       v-text="subCategory.category_name">
                               </a>
+                              </h1>
+
+                              <h4 v-else>
+                                <a       :class="{'active' : getCategoryName() === subCategory.category_name}"
+                                      :href=getSubCategoryUrl(subCategory)
+                                      v-text="subCategory.category_name">
+                              </a>
+                              </h4>
+
+
                           </li>
 
                       </ul>

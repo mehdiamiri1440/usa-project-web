@@ -382,9 +382,6 @@
                     .then(response => (this.categoryList = response.data.categories));
                 axios.post('/location/get_location_info')
                     .then(response => (this.provinces = response.data.provinces));
-
-                
-
                    
             },
 
@@ -401,7 +398,7 @@
 
                             self.popUpMsg = self.limited.msg;
                             eventBus.$emit('submitSuccess', self.popUpMsg);
-                           $('#custom-main-modal').modal('show');
+                           $('#modal-buttons').modal('show');
                         }else{
 
                            self.goToStep(1);

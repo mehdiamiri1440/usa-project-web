@@ -677,9 +677,9 @@
         padding-bottom: 50px;
     }
 
-    #services .row > h2 {
+    #services .row > h4 {
         text-align: center;
-
+        font-size: 32px;
         margin: 45px auto -25px;
     }
 
@@ -743,7 +743,7 @@
         min-height: 190px;
     }
 
-    .detail-thumb h4 {
+    .detail-thumb h3 {
         height: 28px;
     }
 
@@ -810,7 +810,7 @@
         font-size: 42px;
     }
 
-    .detail-thumb h4 {
+    .detail-thumb h3 {
         font-size: 14px;
     }
 
@@ -1376,6 +1376,9 @@
         margin-bottom: 15px
     }
 
+    .intro-site-title {
+        font-size: 32px
+    }
     /*---------------------------------------
        Responsive styles
     -----------------------------------------*/
@@ -1660,11 +1663,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12">
-                            <h1 class="wow fadeIn main-logo" data-wow-delay="1s"><img
-                                    :src="site_logo_white">
-                            </h1>
-                            <h2 class="wow fadeIn" data-wow-delay="1.2s">اینکوباک | سامانه خرید و فروش عمده محصولات
-                                کشاورزی</h2>
+                            <div class="wow fadeIn main-logo" data-wow-delay="1s">
+                                <img :src="site_logo_white" >
+                            </div>
+                            <h1 class="wow fadeIn intro-site-title" data-wow-delay="1.2s">اینکوباک | سامانه خرید و فروش عمده محصولات
+                                کشاورزی</h1>
                         </div>
 
                         <div class="col-xs-12">
@@ -1702,42 +1705,42 @@
                 <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
                     <div class="detail-thumb">
                         <img :src="img_one" class="img-responsive">
-                        <h4>خرید و فروش بی واسطه</h4>
+                        <h3>خرید و فروش بی واسطه</h3>
                     </div>
                 </div>
 
                 <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
                     <div class="detail-thumb">
                         <img :src="img_two" class="img-responsive">
-                        <h4>گسترش ارتباط تجاری</h4>
+                        <h3>گسترش ارتباط تجاری</h3>
                     </div>
                 </div>
 
                 <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
                     <div class="detail-thumb">
                         <img :src="img_three" class="img-responsive">
-                        <h4>یافتن شرکای مطمئن</h4>
+                        <h3>یافتن شرکای مطمئن</h3>
                     </div>
                 </div>
 
                 <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
                     <div class="detail-thumb">
                         <img :src="img_four" class="img-responsive">
-                        <h4>دسترسی مستقیم به افراد </h4>
+                        <h3>دسترسی مستقیم به افراد </h3>
                     </div>
                 </div>
 
                 <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
                     <div class="detail-thumb">
                         <img :src="img_five" class="img-responsive">
-                        <h4> اعتبار سنجی اعضا </h4>
+                        <h3> اعتبار سنجی اعضا </h3>
                     </div>
                 </div>
 
                 <div class="wow fadeIn col-md-2 col-sm-4 col-xs-6" data-wow-delay="0.9s">
                     <div class="detail-thumb">
                         <img :src="img_six" class="img-responsive">
-                        <h4>افزایش اعتماد و شفافیت</h4>
+                        <h3>افزایش اعتماد و شفافیت</h3>
                     </div>
                 </div>
             </div>
@@ -1803,15 +1806,15 @@
         <section id="services" class="parallax-section">
             <div class="container">
                 <div class="row">
-                    <h2>خدمات اینکوباک</h2>
+                    <h4>خدمات اینکوباک</h4>
                     <div class="col-xs-12 col-sm-6">
                         <div class="title_image_service">
                             <img :src="img_buyer_services" alt="">
                         </div>
                         <div class="contents_service text-center">
-                            <h3 class="title_service">
+                            <h4 class="title_service">
                                 خدمات خریداران و تجار
-                            </h3>
+                            </h4>
                             <div class="content_service">
                                 <ul>
                                     <li>
@@ -1836,9 +1839,9 @@
                         </div>
 
                         <div class="contents_service text-center">
-                            <h3 class="title_service">
+                            <h4 class="title_service">
                                 خدمات تامین کنندگان
-                            </h3>
+                            </h4>
 
                             <div class="content_service">
                                 <ul>
@@ -2037,12 +2040,12 @@
         metaInfo() {
 
             return {
-                title: 'سامانه خرید و فروش محصولات کشاورزی',
+                title: 'اینکوباک | سامانه خرید و فروش عمده محصولات کشاورزی',
                 titleTemplate: 'اینکوباک | %s',
                 meta: [
                     {
                         name: 'description', 
-                        content: 'مرجع تخصصی خرید و فروش و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
+                        content: 'مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
                     },
                     {
                         name: 'author',
@@ -2050,15 +2053,15 @@
                     },
                     {
                         'property': 'og:description',
-                        'content': 'مرجع تخصصی خرید و فروش و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
+                        'content': 'مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
                     },
                     {
                         'property': 'og:site_name',
-                        'content': 'اینکوباک بازارآنلاین خرید و فروش محصولات کشاورزی ایران'
+                        'content': 'اینکوباک بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران'
                     },
                     {
                         'property': 'og:title',
-                        'content': 'اینکوباک | سامانه خرید و فروش محصولات کشاورزی'
+                        'content': 'اینکوباک | سامانه خرید و فروش عمده محصولات کشاورزی'
                     },
 
                 ]

@@ -57,6 +57,12 @@
         text-align: center;
     }
 
+
+    .main-logo-popup p.title{
+        font-size: 32px;
+    }
+
+    
     .main-logo-popup img {
         width: 30%;
     }
@@ -193,7 +199,7 @@
                         <div>
                             <div class="main-logo-popup">
                                 <img :src="incobacicon" alt="">
-                                <h1>اینکوباک</h1>
+                                <p class="title">اینکوباک</p>
                             </div>
 
                             <p class="main-pop-up">

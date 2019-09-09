@@ -508,9 +508,11 @@
             <div class="links-sub-header   hidden-xs col-sm-4 col-xs-7 ">
                 <ul class="list-inline">
                     <li class="list-item active">
-                        <a href="">
-                            لیست محصولات
-                        </a>
+                        <h1 >
+                            <a href="">
+                                لیست محصولات
+                            </a>
+                        </h1>
                     </li>
                 </ul>
             </div>
@@ -887,9 +889,11 @@
                 axios.post('/user/profile_info')
                     .then(function (response) {
                         self.currentUser = response.data;
+
                         if (searchValueText) {
                             self.registerComponentStatistics('homePage', 'search-text', searchValueText);
                             self.searchText = searchValueText;
+                             eventBus.$emit('submiting', false);
                         }
                         else {
                             self.loading = true;
@@ -900,6 +904,7 @@
                             }).then(function (response) {
                                 self.products = response.data.products;
                                 self.loading = false;
+                                 eventBus.$emit('submiting', false);
                                 setTimeout(function(){
                                     self.sidebarScroll();
                                 },500)
@@ -913,15 +918,13 @@
                 var self = this;
                 if (this.searchText === '' && this.provinceId === '' && this.categoryId === '' && this.continueToLoadProducts) {
                     this.loadMoreActive = true;
-
                     this.productCountInPage += this.productCountInEachLoad;
-
                     axios.post('/user/get_product_list', {
                         from_record_number: 0,
                         to_record_number: this.productCountInPage,
                     }).then(function (response) {
                         self.products = response.data.products;
-
+                        eventBus.$emit('submiting', false);
                         if (self.products.length + 1 < self.productCountInPage) {
                             self.continueToLoadProducts = false;
                         }
@@ -1260,7 +1263,7 @@
         metaInfo() {
 
             return {
-                title: 'لیست محصولات و قیمت محصولات کشاورزی',
+                title: 'لیست محصولات و قیمت عمده محصولات کشاورزی',
                 titleTemplate: 'اینکوباک | %s',
                 meta: [
                     {
@@ -1273,7 +1276,7 @@
                     },
                     {
                         property: 'og:description',
-                        content: 'مرجع تخصصی خرید و فروش و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
+                        content: 'مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
                     },
                     {
                         property: 'og:site_name',
