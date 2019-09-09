@@ -72,8 +72,8 @@
 
     .list-inline > li {
         display: inline-block;
-        padding-right: 5px;
-        padding-left: 5px;
+        padding: 0;
+
     }
     
     .green-button {
@@ -576,6 +576,9 @@
 
     @media screen and (max-width: 555px) {
 
+        .user_name{
+            display: none !important;
+        }
 
         .right-menu-header {
             padding: 6px;
@@ -596,7 +599,7 @@
 
     }
 
-    @media screen and (max-width: 345px) {
+    @media screen and (max-width: 348px) {
         .sub-header a {
             font-size: 10px;
 

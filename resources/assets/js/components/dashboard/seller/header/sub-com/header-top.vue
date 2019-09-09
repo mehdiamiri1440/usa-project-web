@@ -61,7 +61,7 @@
 
 .profile-menu-header {
   padding: 7px;
-  padding-left: 55px;
+  padding-left: 37px;
 }
 
 .profile-menu-header i {

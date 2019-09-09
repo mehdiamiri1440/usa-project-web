@@ -540,6 +540,9 @@
 
     @media screen and (max-width: 555px) {
 
+        .user_name{
+            display: none !important;
+        }
         .right-menu-header {
             padding: 6px;
             border-right: 1px solid #eff3f6;
