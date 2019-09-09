@@ -1689,7 +1689,7 @@
 
                         <div class="col-xs-12">
                             <div class="mouse-animation">
-                                <a href="#detail"> <span class="fa fa-angle-down"></span></a>
+                                <a href="#" @click.prevent="smoothScroll('#detail')"> <span class="fa fa-angle-down"></span></a>
                             </div>
                         </div>
                     </div>
@@ -1970,7 +1970,8 @@
             },
             init: function () {
                 var self = this;
-
+                window.scrollTo(0, 0);
+                
              /*   axios.post('/get_wp_posts')
                     .then(function (response) {
                         self.posts = response.data.posts;
@@ -2008,6 +2009,11 @@
                     + categoryName.replace(' ', '-')
                     + '/'
                     + id;
+            },
+            smoothScroll:function(id){
+                 $([document.documentElement, document.body]).animate({
+                    scrollTop: $(id).offset().top - 72
+                }, 1000);
             }
         },
         mounted: function () {
