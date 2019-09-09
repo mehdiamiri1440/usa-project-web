@@ -75,10 +75,6 @@
         display: none;
     }
 
-    .buy_details > div {
-        margin: 7px auto;
-    }
-
     .btn-content {
         display: inline-block;
         margin: 0 auto;
@@ -137,7 +133,7 @@
 
         background: #00c569;
 
-        display: inline-block;
+        display: inline;
 
         position: absolute;
 
@@ -153,6 +149,8 @@
 
         color: #fff;
 
+        width: 54px;  
+        
     }
 
     .valid-user-badge::after {
@@ -169,7 +167,7 @@
         content: "";
         position: absolute;
         left: 0;
-        bottom: -25px;
+        bottom: -24px;
 
     }
 
@@ -235,6 +233,10 @@
         display: inline-block;
         color: #333;
 
+    }
+
+    .text-danger{
+        height: 24px
     }
 
     @media screen  and (max-width: 767px) {
@@ -440,7 +442,7 @@
                         <input id="stock" placeholder="" type="text"
                                class=" form-control" :value="product.main.stock">
 
-                        <span class="text-danger" v-if="errors.stock" v-text="errors.stock[0]"></span>
+                        <div class="text-danger" > <span v-if="errors.stock" v-text="errors.stock[0]" ></span></div>
                     </div>
 
                     <div class="col-xs-12 col-sm-6">
@@ -451,8 +453,8 @@
                         <input id="min-sale-amount" placeholder="حداقل سفارش" type="text"
                                class=" form-control" :value="product.main.min_sale_amount">
 
-                        <span class="text-danger" v-if="errors.min_sale_amount"
-                              v-text="errors.min_sale_amount[0]"></span>
+                        <div class="text-danger"><span  v-if="errors.min_sale_amount"
+                              v-text="errors.min_sale_amount[0]"></span></div>
                     </div>
 
                     <div class="col-xs-12 col-sm-6 pull-right ">
@@ -463,8 +465,9 @@
                         <input id="min-sale-price" placeholder="حداقل قیمت" type="text" class=" form-control"
                                :value="product.main.min_sale_price">
 
-                        <span class="text-danger" v-if="errors.min_sale_price" v-text="errors.min_sale_price[0]">
-                               </span>
+                        <div class="text-danger" >
+                            <span v-if="errors.min_sale_price" v-text="errors.min_sale_price[0]"></span>
+                        </div>
 
                     </div>
 
@@ -476,7 +479,7 @@
                         <input id="max-sale-price" placeholder="حداکثر قیمت" type="text" class=" form-control"
                                :value="product.main.max_sale_price">
 
-                        <span class="text-danger" v-if="errors.max_sale_price" v-text="errors.max_sale_price[0]"></span>
+                        <div class="text-danger" > <span v-if="errors.max_sale_price" v-text="errors.max_sale_price[0]"></span></div>
                     </div>
 
                 <!--     <div class="col-xs-12 ">
