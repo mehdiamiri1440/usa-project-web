@@ -2,37 +2,19 @@
     <html lang="fa">
     <head>
         <meta charset="UTF-8">
-        <link rel="icon" href="{{asset('assets/img/logo-Inco-mobile.png')}}">
-        <title>اینکوباک | بازارگاه کشاورزی</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <title>اینکوباک | بازارگاه کشاورزی</title>
+
         <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
         <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
         <script src="{{asset('assets/js/jquery.easing.min.js')}}"></script>
         <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('assets/js/kamadatepicker.js')}}"></script>
-        <script src="{{asset('assets/js/kamadatepicker.js')}}"></script>
-        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/fontiran.css')}}">
-        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/imageuploadify.min.css')}}">
-        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
-        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
-        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap-theme.min.css')}}">
-        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/cropper.css')}}">
-        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/placeholder-content.css')}}">
-
-        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
-        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
-        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/kamadatepicker.min.css')}}">
-        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
-        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl-custom-style.css')}}">
-
-        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
         <script src="{{asset('assets/cdn/axios.js')}}"></script>
-
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <script>
             window.Laravel = { csrfToken : '{{csrf_token()}}'}
         </script>
-
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
         <script>
@@ -45,6 +27,21 @@
               gtag('config', 'UA-129398000-1',{'send_page_view': false });
         </script>
 
+        <link rel="icon" href="{{asset('assets/img/logo-Inco-mobile.png')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/fontiran.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/imageuploadify.min.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/all.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap-theme.min.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/cropper.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/placeholder-content.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/kamadatepicker.min.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl-custom-style.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl-custom-style.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
 
 
         <style>

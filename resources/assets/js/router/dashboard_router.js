@@ -24,6 +24,7 @@ import sellerTransactionDetail from '../components/dashboard/seller/transaction/
 import sellerTransactionReport from '../components/dashboard/seller/transaction/transactionReport';
 import sellerGuide from '../components/dashboard/seller/guide.vue';
 import myProducts from '../components/dashboard/seller/product/my_products';
+import sellerStatus from '../components/dashboard/seller/dashboard/status.vue';
 
 
 // Buyer Components
@@ -154,12 +155,22 @@ const myRouter =  new Router({
                 layouts: profile,
             },
         },
-      {
+        {
             path: '/dashboard/password',
             name: 'password',
             components: {
                 seller: sellerChangePassword,
                 buyer: buyerChangePassword,
+            },
+            params: {
+                active: 1
+            }
+        },
+        {
+            path: '/dashboard/status',
+            name: 'status',
+            components: {
+                seller: sellerStatus,
             },
             params: {
                 active: 1

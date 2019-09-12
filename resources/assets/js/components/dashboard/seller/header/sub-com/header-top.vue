@@ -14,7 +14,6 @@
 #main {
   margin-right: 250px;
   margin-top: 65px;
-  background: #fff;
   position: relative;
   min-height: 600px;
 }
