@@ -30,7 +30,6 @@
         <link rel="icon" href="<?php echo e(asset('assets/img/logo-Inco-mobile.png')); ?>">
         <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/fontiran.css')); ?>">
         <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/imageuploadify.min.css')); ?>">
-        <!-- <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/font-awesome.min.css')); ?>"> -->
         <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/all.css')); ?>">
         <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap.min.css')); ?>">
         <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap-theme.min.css')); ?>">

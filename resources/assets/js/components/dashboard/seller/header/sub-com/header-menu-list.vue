@@ -41,8 +41,8 @@
               :class="{'active' : this.activeElement === 0}"
               :to="{ name : 'status' }"
             >
-              <span>داشبورد</span>
-              <i class="fas fa-user" aria-hidden="true"></i>
+              <span>داشبورد</span> 
+              <i class="fa fa-chart-line"></i>
             </router-link>
           </li>
 

@@ -12,7 +12,6 @@
   width: 60px;
 }
 #main {
-  
   margin-right: 250px;
   margin-top: 65px;
   position: relative;
