@@ -8,6 +8,8 @@ use App\profile;
 use App\myuser;
 use App\Http\Controllers\sms_controller;
 use JWTAuth;
+use App\product;
+use App\Http\Controllers\reputation_controller;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -312,6 +314,52 @@ class user_controller extends Controller
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
         return $token;
+    }
+    
+    //public method
+    public function get_seller_dashboard_required_data(Request $request)
+    {
+        $user_pakage_type = myuser::find(session('user_id'))->active_pakage_type;
+        
+        $pakage_info = config("subscriptionPakage.type-$user_pakage_type");
+        $confirmed_products_count = $this->get_user_confirmed_products_count();
+        
+        $active_pakage_type = $user_pakage_type;
+        $reputation_score   = $this->get_user_reputation_score();
+        $accessable_buyAds  = $pakage_info['buyAd-count'];
+        $is_valid           = $pakage_info['validated-seller'];
+        $max_allowed_product_register_count = $pakage_info['max-products'] - $confirmed_products_count;
+        
+        return response()->json(compact([
+            'active_pakage_type',
+            'reputation_score',
+            'accessable_buyAds',
+            'is_valid',
+            'max_allowed_product_register_count',
+        ]),200);
+    }
+    
+    protected function get_user_reputation_score()
+    {
+        $user_id = session('user_id');
+        
+        $reputaion_controller_object = new reputation_controller();
+        
+        $score = $reputaion_controller_object->calculate_user_reputation_score($user_id);
+        
+        return $score;
+    }
+    
+    protected function get_user_confirmed_products_count()
+    {
+        $user_id  = session('user_id');
+        
+        $confirmed_products_count = product::where('myuser_id',$user_id)
+                                            ->where('confirmed',true)
+                                            ->get()
+                                            ->count();
+        
+        return $confirmed_products_count;
     }
 
 }
