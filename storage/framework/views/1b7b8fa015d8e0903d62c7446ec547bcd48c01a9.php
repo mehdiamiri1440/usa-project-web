@@ -9,7 +9,6 @@
         <script src="<?php echo e(asset('assets/js/jquery-3.3.1.min.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/js/jquery-ui.min.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/js/jquery.easing.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('assets/js/bootstrap.min.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/js/kamadatepicker.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/cdn/axios.js')); ?>"></script>
         <script>
