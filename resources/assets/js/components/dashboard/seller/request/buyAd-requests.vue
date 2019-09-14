@@ -1,4 +1,4 @@
-<style>
+<style scoped>
      .wrapper_no_pro {
         text-align: center;
         font-size: 23px;

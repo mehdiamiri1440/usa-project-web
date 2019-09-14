@@ -40,7 +40,8 @@
   position: fixed;
 
   /*right: 0;*/
-
+  background: #fff;
+  
   left: 0;
 
   bottom: 0;

@@ -1,5 +1,16 @@
 <style>
+    
 
+    html, body, #appSeller, #main {
+    height: 100%;
+    }
+    
+    #main {
+    direction: rtl;
+    background: #F6F6F6;
+    height: calc(100% - 65px);
+    }
+    
     html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
     a, abbr, acronym, address, big, cite, code,
@@ -133,6 +144,10 @@
 
     .little_header {
         width: 80px;
+    }
+
+    .little_header .profile{
+        display: none;
     }
 
     .right-header.mobile-header {
@@ -801,7 +816,7 @@
 
 
             <section class="main-right-header">
-
+                <h1></h1>
                 <ProfileInfo
                         :photoLink="currentUser.profile.profile_photo"
                         :storage="storage"
@@ -952,7 +967,7 @@
 
             init: function () {
                 this.isLoaded = true;
-
+                
                 axios.post('/user/profile_info')
                     .then(response => {
                         this.currentUser = response.data

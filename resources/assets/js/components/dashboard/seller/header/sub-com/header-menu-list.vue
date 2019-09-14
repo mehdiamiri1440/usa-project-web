@@ -39,6 +39,15 @@
           <li class="list-item">
             <router-link
               :class="{'active' : this.activeElement === 0}"
+              :to="{ name : 'status' }"
+            >
+              <span>داشبورد</span> 
+              <i class="fa fa-chart-line"></i>
+            </router-link>
+          </li>
+
+          <li class="list-item">
+            <router-link
               :to="{ name : 'profileBasic' }"
             >
               <span>ویرایش پروفایل</span>

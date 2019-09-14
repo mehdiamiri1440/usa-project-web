@@ -42,7 +42,9 @@
     }
 
     @media screen and (max-width: 767px) {
-
+        .product-wrapper{
+            padding: 0;
+        }
         .title {
             text-align: center;
 
@@ -122,17 +124,19 @@
 
                     </div>
 
-                   <div class="row">
-                        <ProductArticle
-                            v-for="(product,productIndex) in products"
-                            :key="product.main.id"
-                            :product="product"
-                            :loading_img="loading_img"
-                            :defultimg="defultimg"
-                            :str="str"
-                            :loading="loading"
-                            :currentUser="currentUser"
-                    />
+                   <div class="col-xs-12 product-wrapper">
+                       <div class="row">
+                                <ProductArticle
+                                    v-for="(product,productIndex) in products"
+                                    :key="product.main.id"
+                                    :product="product"
+                                    :loading_img="loading_img"
+                                    :defultimg="defultimg"
+                                    :str="str"
+                                    :loading="loading"
+                                    :currentUser="currentUser"
+                                />
+                       </div>
                    </div>
                 </div>
                 <div class="col-xs-12" v-if="products.length === 0 && !loading">

@@ -29,6 +29,7 @@
         border-radius: 5px;
         box-shadow: 0 0 15px #dbdbdb;
         padding: 15px 0;
+        background: #fff;
     }
 
     .main-article-title {

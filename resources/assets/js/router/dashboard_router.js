@@ -24,6 +24,8 @@ import sellerTransactionDetail from '../components/dashboard/seller/transaction/
 import sellerTransactionReport from '../components/dashboard/seller/transaction/transactionReport';
 import sellerGuide from '../components/dashboard/seller/guide.vue';
 import myProducts from '../components/dashboard/seller/product/my_products';
+import sellerStatus from '../components/dashboard/seller/dashboard/status.vue';
+
 
 
 // Buyer Components
@@ -58,7 +60,7 @@ import help from '../components/layouts/main/help'
 import contactUs from '../components/layouts/main/contact_us'
 import profile from '../components/layouts/main/profile'
 import pricing from '../components/layouts/main/pricing_page'
-
+import dashboardPricingTable from '../components/dashboard/pricing-table.vue';
 
 // Login & Register Components
 import register from '../components/register/register'
@@ -154,7 +156,7 @@ const myRouter =  new Router({
                 layouts: profile,
             },
         },
-      {
+        {
             path: '/dashboard/password',
             name: 'password',
             components: {
@@ -164,6 +166,20 @@ const myRouter =  new Router({
             params: {
                 active: 1
             }
+        },
+        {
+            path: '/dashboard/status',
+            name: 'status',
+            components: {
+                seller: sellerStatus,
+            },
+        },
+        {
+            path: '/dashboard/pricing',
+            name: 'dashboardPricingTable',
+            components: {
+                seller: dashboardPricingTable,
+            },
         }
         , {
             path: '/dashboard/profile',

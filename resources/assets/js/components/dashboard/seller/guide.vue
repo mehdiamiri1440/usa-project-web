@@ -27,6 +27,7 @@
         font-weight: 400;
         padding: 15px 30px;
         box-shadow: 0 0 9px rgba(0, 0, 0, .075);
+        background: #fff;
     }
 
     .help .title_list_help li {
