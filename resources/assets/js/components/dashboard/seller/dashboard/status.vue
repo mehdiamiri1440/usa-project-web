@@ -19,7 +19,7 @@
 
     .title h1 {
 
-        font-size: 30px;
+        font-size: 18px;
         font-weight: bold;
 
     }
@@ -150,7 +150,7 @@
 <template>
     <div>
 
-        <section class="main-content col-xs-12"چپ77>
+        <section class="main-content col-xs-12">
             <div  class="title col-xs-12">
                 <div  class="row">
                     <div  class="col-xs-12 col-sm-4 pull-right">
@@ -159,11 +159,13 @@
                         </h1>
                     </div> 
                     <div  class="col-xs-12 col-sm-4 pull-left text-left">
-                        <a href="#" class="green-button blue-brand-background">
+
+                        <router-link :to="{ name : 'dashboardPricingTable'}" class="green-button blue-brand-background">
                         	  <i class="fa fa-list-alt"></i>
                             مشاهده تعرفه ها
 
-                        </a>
+                        </router-link>
+                        
                     </div> 
 
                 </div>
@@ -292,7 +294,7 @@
 						icon : 'fas fa-boxes',
 						iconColor : '#aa49c8',
 						staticName : 'محصول',
-						upgrade : true,
+						upgrade : false,
 						status : '10'
 					},
 					{
@@ -304,11 +306,11 @@
 						status : '185'
 					},
 					{
-						title : 'عداد درخواست های خرید ',
+						title : 'درخواست های خرید قابل مشاهده',
 						icon : 'fas fa-inbox',
 						iconColor : '#D8A679',
 						staticName : 'درخواست',
-						upgrade : true,
+						upgrade : false,
 						status : '120'
 					},
 					{
@@ -316,17 +318,17 @@
 						icon : 'fas fa-award	',
 						iconColor : '#21AD93',
 						staticName : '',
-						upgrade : true,
+						upgrade : false,
 						status : 'خیر'
 					},	
-					{
+/*					{
 						title : 'احتمال پاسخگویی به پیام',
 						icon : 'fa fa-chart-line',
 						iconColor : '#FF8058',
 						staticName : 'درصد',
 						upgrade : true,
 						status : '20'
-					},					
+					},	*/				
 				]
 			}
 		}

@@ -27,6 +27,7 @@ import myProducts from '../components/dashboard/seller/product/my_products';
 import sellerStatus from '../components/dashboard/seller/dashboard/status.vue';
 
 
+
 // Buyer Components
 import buyerProfileBasic from '../components/dashboard/buyer/profile/profile_basic.vue'
 import buyerChangePassword from '../components/dashboard/seller/profile/change_password.vue'
@@ -59,7 +60,7 @@ import help from '../components/layouts/main/help'
 import contactUs from '../components/layouts/main/contact_us'
 import profile from '../components/layouts/main/profile'
 import pricing from '../components/layouts/main/pricing_page'
-
+import dashboardPricingTable from '../components/dashboard/pricing-table.vue';
 
 // Login & Register Components
 import register from '../components/register/register'
@@ -172,9 +173,13 @@ const myRouter =  new Router({
             components: {
                 seller: sellerStatus,
             },
-            params: {
-                active: 1
-            }
+        },
+        {
+            path: '/dashboard/pricing',
+            name: 'dashboardPricingTable',
+            components: {
+                seller: dashboardPricingTable,
+            },
         }
         , {
             path: '/dashboard/profile',
