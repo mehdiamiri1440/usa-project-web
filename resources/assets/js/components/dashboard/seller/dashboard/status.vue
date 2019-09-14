@@ -8,7 +8,7 @@
    	}
 
    	.header-links-wrapper a{
-   		margin-top: 30px;
+   		margin-top: 15px;
    		margin-left: 15px;
    	}
     .title {
@@ -20,8 +20,8 @@
     .title h1 {
 
         font-size: 18px;
-        font-weight: bold;
-
+		font-weight: bold;
+		padding-top: 9px;
     }
 
     .boxes {
@@ -137,10 +137,24 @@
     }
 
     @media screen and (max-width: 767px) {
+    	.box-upgrade-link{
+    		margin-top: 45px;
+    	}
+    	
+    	.green-button{
+    		padding: 13px 20px;
+    		font-size: 15px;
+			font-weight: bold;
+    	}
+
+    	.header-links-wrapper a{
+    		margin-left: 0; 
+    		width: 100%;
+    	}
 
 
         .title {
-            text-align: center;
+            float: right;
 
         }
 
@@ -153,12 +167,12 @@
         <section class="main-content col-xs-12">
             <div  class="title col-xs-12">
                 <div  class="row">
-                    <div  class="col-xs-12 col-sm-4 pull-right">
+                    <div  class="col-xs-3 col-sm-4 pull-right">
                         <h1>
                             داشبورد
                         </h1>
                     </div> 
-                    <div  class="col-xs-12 col-sm-4 pull-left text-left">
+                    <div  class="col-xs-9 col-sm-4 pull-left text-left">
 
                         <router-link :to="{ name : 'dashboardPricingTable'}" class="green-button blue-brand-background">
                         	  <i class="fa fa-list-alt"></i>
@@ -171,16 +185,14 @@
                 </div>
             </div>
             <div  class="header-links col-xs-12">
-                <div  class="row">
           			<div  class="header-links-wrapper"  >
 
-                        <a v-for="link in linkItems" :href="link.href" class="green-button" >
+                        <a v-for="link in linkItems" :href="link.href" class="green-button " >
                         	<i :class="link.icon"></i>
                         	<span v-text="link.text"></span>
                         </a>
 
                     </div> 	
-                </div>
             </div>
 
             <div class="boxes col-xs-12">
