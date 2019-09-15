@@ -112,7 +112,7 @@
     }
 
     .box-upgrade-link{
-    	margin-top: 54px;
+    	margin-top: 51px;
     }
 
 
@@ -187,10 +187,10 @@
             <div  class="header-links col-xs-12">
           			<div  class="header-links-wrapper"  >
 
-                        <a v-for="link in linkItems" :href="link.href" class="green-button " >
+                        <router-link v-for="(link , index) in linkItems" :key="index" :to="{name : link.href}" class="green-button " >
                         	<i :class="link.icon"></i>
                         	<span v-text="link.text"></span>
-                        </a>
+                        </router-link>
 
                     </div> 	
             </div>
@@ -216,10 +216,10 @@
 	                			</div>
 	                			<div v-if="box.upgrade" class="box-upgrade-link">
 	                				
-	                				<a href="#" class="green-button blue-brand-background">
+	                				<router-link :to="{ name:'dashboardPricingTable'}" class="green-button blue-brand-background">
 	                					<i class="fa fa-arrow-up"></i>
 	                					ارتقاء به عضو ویژه
-	                				</a>	
+	                				</router-link>	
 	                			
 	                			</div>
 
@@ -232,7 +232,7 @@
             <div v-else class="boxes col-xs-12">
 
                <div class="row ">
-                	<div v-for="items in 7" class=" pull-right col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                	<div v-for="items in 6" class=" pull-right col-xs-12 col-sm-6 col-md-4 col-lg-3">
 	                	<div  class="box">
 	                		
 	                			<div class="box-title-default">
@@ -271,17 +271,17 @@
 
 				linkItems : [
 				    {
-						href : '#',
+						href : 'registerProduct',
 						icon : 'fa fa-plus',
 						text : 'افزودن محصول'
 					},
 				    {
-						href : '#',
+						href : 'buyAdRequests',
 						icon : 'fa fa-list-alt',
 						text : 'درخواست های خرید'
 					},
 				    {
-						href : '#',
+						href : 'messages',
 						icon : 'fas fa-comment-alt',
 						text : 'پیام ها'
 					}
@@ -296,30 +296,31 @@
 			 	axios.post('/get_seller_dashboard_required_data')
                     .then(function(response){
                     	self.statusData = response.data;
+                    	
                     	self.boxes = [
 							{
 								title : 'نوع پلن فعال شما',
 								icon : 'fas fa-address-card',
 								iconColor : '#19668E',
 								staticName : '',
-								upgrade : true,
-								status : response.data.active_pakage_type
+								upgrade : (response.data.active_pakage_type <= 3) ?  true : false,
+								status : self.checkPackage(response.data.active_pakage_type)
 							},
 							{
 								title : 'تعداد محصولات ثبت شده',
 								icon : 'fas fa-box-open',
 								iconColor : '#FFAC58',
-								staticName : 'محصول',
+								staticName : '',
 								upgrade : false,
-								status : '10'
+								status: (  response.data.confirmed_products_count == 0) ?  'صفر' : response.data.confirmed_products_count + ' محصول'
 							},
 							{
 								title : 'تعداد محصولات قابل ثبت',
 								icon : 'fas fa-boxes',
 								iconColor : '#aa49c8',
-								staticName : 'محصول',
+								staticName : '',
 								upgrade : false,
-								status : response.data.max_allowed_product_register_count
+								status : (response.data.max_allowed_product_register_count == 0) ?  'صفر' : response.data.max_allowed_product_register_count + ' محصول'
 							},
 							{
 								title : 'میزان امتیاز',
@@ -327,15 +328,15 @@
 								iconColor : '#00C5BE',
 								staticName : 'امتیاز',
 								upgrade : false,
-								status : '185'
+								status : response.data.reputation_score
 							},
 							{
 								title : 'درخواست های خرید قابل مشاهده',
 								icon : 'fas fa-inbox',
 								iconColor : '#D8A679',
-								staticName : 'درخواست',
+								staticName : '',
 								upgrade : false,
-								status : response.data.accessable_buyAds
+								status : (response.data.accessable_buyAds >= 2000) ? 'نامحدود' : response.data.accessable_buyAds + ' درخواست'
 							},
 							{
 								title : 'فروشنده معتبر',
@@ -343,7 +344,7 @@
 								iconColor : '#21AD93',
 								staticName : '',
 								upgrade : false,
-								status : 'خیر'
+								status : response.data.is_valid ? 'بله' : 'خیر'
 							},	
 		/*					{
 								title : 'احتمال پاسخگویی به پیام',
@@ -356,6 +357,24 @@
 						]
 
                     });
+			},
+			checkPackage(packageId){
+				var packageName = '';
+				switch(packageId){
+					case 0:
+					packageName = 'رایگان';
+					break;
+					case 1:
+					packageName = 'شماره دو';
+					break;
+					case 2:
+					packageName = 'شماره سه';
+					break;
+					case 3:
+					packageName = 'عضویت ویژه';
+					break;
+				}
+				return packageName;
 			}
 		},
 		mounted(){

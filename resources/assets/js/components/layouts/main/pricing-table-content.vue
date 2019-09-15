@@ -3,7 +3,7 @@
    		margin: 5px auto 0;
         font-size: 16px;
         font-weight: bold;
-
+        width: initial;
    	}
 
    	.text-red {
@@ -14,19 +14,6 @@
         color: #00ac5c;
     }
 
-    .title {
-        text-align: right;
-        padding: 15px 0;
-        border-bottom: 2px solid #E8E8E8;
-        margin-bottom: 15px;
-    }
-
-    .title h1 {
-
-        font-size: 18px;
-        font-weight: bold;
-
-    }
     .wrapper-background{
 
         background: #fff;
@@ -283,26 +270,12 @@
             right: 0px;
             top: 45px;
         }
+
     }
 
 </style>
 <template>
-    <div>
-
-        <section class="main-content col-xs-12">
-          
-            <div  class="title col-xs-12">
-                <div  class="row">
-                    <div  class="col-xs-12 col-sm-4 pull-right">
-                        <h1>
-                          تعرفه ها
-                        </h1>
-                    </div> 
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2  ">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2  ">
                     <div class="row">
                         <div class="  col-xs-12">
                             <div class="header-wrapper wrapper-background">
@@ -373,7 +346,7 @@
                                                   :href="'#content-item-' + index"
                                                   @click.prevent="collapseControl($event)"
                                                   class="item-help"
-                                                  :title="item.title"
+                                                  :title="item.helpDescription"
                                                   >
                                                     
                                                      <i class="fa fa-question-circle"></i>
@@ -402,9 +375,13 @@
 
                                     <div class="item-action">
                                         
-                                        <p  class="text-green">
+                                        <p v-if="statusData"  class="text-green">
                                            در حال استفاده
                                         </p>
+
+                                        <a v-else href="/register" class="green-button">
+                                           ثبت نام رایگان
+                                        </a>
 
                                     </div>
 
@@ -451,7 +428,7 @@
                                                   :href="'#content-item-pro-' + index"
                                                   @click.prevent="collapseControl($event)"
                                                   class="item-help"
-                                                  :title="item.title"
+                                                  :title="item.helpDescription"
                                                   >
                                                     
                                                      <i class="fa fa-question-circle"></i>
@@ -479,8 +456,11 @@
                                     </div>
 
                                     <div class="item-action">
-                                        
-                                        <a href="#" class="green-button">
+                                        <p v-if="statusData.active_pakage_type >= 3"  class="text-green">
+                                           در حال استفاده
+                                        </p>
+
+                                        <a v-else href="/payment/3" class="green-button">
                                             ارتقاء حساب
                                         </a>
 
@@ -496,9 +476,6 @@
 
                     </div>
                 </div>
-            </div>
-        </section>
-    </div>
 </template>
 
 
@@ -508,6 +485,8 @@
 
 		data:function(){
 			return {
+                statusData : '',
+
 				priceItemPro:[
                     {
                         title:'تعداد آگهی ها',
@@ -585,6 +564,16 @@
 			}
 		},
         methods:{
+            init:function(){
+                var self = this;
+                axios.post('/get_seller_dashboard_required_data')
+                    .then(function(response){
+                        if (response.data.is_valid || response.data.is_valid == false) {
+                            self.statusData = response.data;
+                        }
+                        
+                    });
+            },
             collapseControl:function(link){
 
             var $myGroup = $('.item-content');
@@ -593,7 +582,7 @@
 
         },
         mounted(){
-
+            this.init();
             $(document).on('click',function(){
                 $('.collapse').collapse('hide');
             })
