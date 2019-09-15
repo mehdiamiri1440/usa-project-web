@@ -335,7 +335,8 @@ class user_controller extends Controller
             'reputation_score',
             'accessable_buyAds',
             'is_valid',
-            'max_allowed_product_register_count',
+            'max_allowed_product_register_count'
+            'confirmed_products_count',
         ]),200);
     }
     
