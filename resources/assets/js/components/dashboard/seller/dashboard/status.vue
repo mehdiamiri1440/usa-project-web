@@ -195,7 +195,7 @@
                     </div> 	
             </div>
 
-            <div class="boxes col-xs-12">
+            <div v-if="statusData" class="boxes col-xs-12">
 
                <div class="row ">
                 	<div v-for="box in boxes" class=" pull-right col-xs-12 col-sm-6 col-md-4 col-lg-3">
@@ -229,7 +229,7 @@
 
             </div>
 
-            <div  class="boxes col-xs-12">
+            <div v-else class="boxes col-xs-12">
 
                <div class="row ">
                 	<div v-for="items in 7" class=" pull-right col-xs-12 col-sm-6 col-md-4 col-lg-3">
@@ -267,6 +267,8 @@
 
 		data:function(){
 			return {
+				statusData : '',
+
 				linkItems : [
 				    {
 						href : '#',
@@ -284,65 +286,80 @@
 						text : 'پیام ها'
 					}
 				],
-				boxes : [
-					{
-						title : 'نوع پلن فعال شما',
-						icon : 'fas fa-address-card',
-						iconColor : '#19668E',
-						staticName : '',
-						upgrade : true,
-						status : 'شماره یک'
-					},
-					{
-						title : 'تعداد محصولات ثبت شده',
-						icon : 'fas fa-box-open',
-						iconColor : '#FFAC58',
-						staticName : 'محصول',
-						upgrade : false,
-						status : '10'
-					},
-					{
-						title : 'تعداد محصولات قابل ثبت',
-						icon : 'fas fa-boxes',
-						iconColor : '#aa49c8',
-						staticName : 'محصول',
-						upgrade : false,
-						status : '10'
-					},
-					{
-						title : 'میزان امتیاز',
-						icon : 'fas fa-star',
-						iconColor : '#00C5BE',
-						staticName : 'امتیاز',
-						upgrade : false,
-						status : '185'
-					},
-					{
-						title : 'درخواست های خرید قابل مشاهده',
-						icon : 'fas fa-inbox',
-						iconColor : '#D8A679',
-						staticName : 'درخواست',
-						upgrade : false,
-						status : '120'
-					},
-					{
-						title : 'فروشنده معتبر',
-						icon : 'fas fa-award	',
-						iconColor : '#21AD93',
-						staticName : '',
-						upgrade : false,
-						status : 'خیر'
-					},	
-/*					{
-						title : 'احتمال پاسخگویی به پیام',
-						icon : 'fa fa-chart-line',
-						iconColor : '#FF8058',
-						staticName : 'درصد',
-						upgrade : true,
-						status : '20'
-					},	*/				
-				]
+
+				boxes : ''
 			}
+		},
+		methods:{
+			 init: function () {
+			 	var self = this;
+			 	axios.post('/get_seller_dashboard_required_data')
+                    .then(function(response){
+                    	self.statusData = response.data;
+                    	self.boxes = [
+							{
+								title : 'نوع پلن فعال شما',
+								icon : 'fas fa-address-card',
+								iconColor : '#19668E',
+								staticName : '',
+								upgrade : true,
+								status : response.data.active_pakage_type
+							},
+							{
+								title : 'تعداد محصولات ثبت شده',
+								icon : 'fas fa-box-open',
+								iconColor : '#FFAC58',
+								staticName : 'محصول',
+								upgrade : false,
+								status : '10'
+							},
+							{
+								title : 'تعداد محصولات قابل ثبت',
+								icon : 'fas fa-boxes',
+								iconColor : '#aa49c8',
+								staticName : 'محصول',
+								upgrade : false,
+								status : response.data.max_allowed_product_register_count
+							},
+							{
+								title : 'میزان امتیاز',
+								icon : 'fas fa-star',
+								iconColor : '#00C5BE',
+								staticName : 'امتیاز',
+								upgrade : false,
+								status : '185'
+							},
+							{
+								title : 'درخواست های خرید قابل مشاهده',
+								icon : 'fas fa-inbox',
+								iconColor : '#D8A679',
+								staticName : 'درخواست',
+								upgrade : false,
+								status : response.data.accessable_buyAds
+							},
+							{
+								title : 'فروشنده معتبر',
+								icon : 'fas fa-award	',
+								iconColor : '#21AD93',
+								staticName : '',
+								upgrade : false,
+								status : 'خیر'
+							},	
+		/*					{
+								title : 'احتمال پاسخگویی به پیام',
+								icon : 'fa fa-chart-line',
+								iconColor : '#FF8058',
+								staticName : 'درصد',
+								upgrade : true,
+								status : '20'
+							},	*/				
+						]
+
+                    });
+			}
+		},
+		mounted(){
+			this.init();
 		}
 	}
 
