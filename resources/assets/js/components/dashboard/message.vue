@@ -41,7 +41,7 @@
 
   /*right: 0;*/
   background: #fff;
-  
+
   left: 0;
 
   bottom: 0;
@@ -624,7 +624,7 @@
 
               <div class="button-wrapper">
                 <button type="submit" @click.prevent="sendMessage()">
-                  <i class="fa fa-send"></i>
+                  <i class="fa fa-paper-plane"></i>
                 </button>
               </div>
             </form>

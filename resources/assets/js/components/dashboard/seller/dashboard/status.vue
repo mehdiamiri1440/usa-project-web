@@ -80,9 +80,9 @@
     }
 
     .content-wrapper{
-    	
+
     	font-size: 28px;
-    	
+
     	font-weight: bold;
 
     }
@@ -121,7 +121,7 @@
 	  10%, 90% {
 	    transform: translate3d(0, -6px, 0);
 	  }
-	  
+
 	  20%, 80% {
 	    transform: translate3d(0, 0, 0);
 	  }
@@ -140,7 +140,7 @@
     	.box-upgrade-link{
     		margin-top: 45px;
     	}
-    	
+
     	.green-button{
     		padding: 13px 20px;
     		font-size: 15px;
@@ -148,7 +148,7 @@
     	}
 
     	.header-links-wrapper a{
-    		margin-left: 0; 
+    		margin-left: 0;
     		width: 100%;
     	}
 
@@ -171,7 +171,7 @@
                         <h1>
                             داشبورد
                         </h1>
-                    </div> 
+                    </div>
                     <div  class="col-xs-9 col-sm-4 pull-left text-left">
 
                         <router-link :to="{ name : 'dashboardPricingTable'}" class="green-button blue-brand-background">
@@ -179,8 +179,8 @@
                             مشاهده تعرفه ها
 
                         </router-link>
-                        
-                    </div> 
+
+                    </div>
 
                 </div>
             </div>
@@ -192,7 +192,7 @@
                         	<span v-text="link.text"></span>
                         </router-link>
 
-                    </div> 	
+                    </div>
             </div>
 
             <div v-if="statusData" class="boxes col-xs-12">
@@ -200,8 +200,8 @@
                <div class="row ">
                 	<div v-for="box in boxes" class=" pull-right col-xs-12 col-sm-6 col-md-4 col-lg-3">
 	                	<div  class="box">
-	                		
-	                			
+
+
 	                			<div class="box-title">
 	                				<span v-text='box.title'></span>
 	                			</div>
@@ -215,15 +215,15 @@
 
 	                			</div>
 	                			<div v-if="box.upgrade" class="box-upgrade-link">
-	                				
+
 	                				<router-link :to="{ name:'dashboardPricingTable'}" class="green-button blue-brand-background">
 	                					<i class="fa fa-arrow-up"></i>
 	                					ارتقاء به عضو ویژه
-	                				</router-link>	
-	                			
+	                				</router-link>
+
 	                			</div>
 
-	                	</div> 
+	                	</div>
                		</div>
                </div>
 
@@ -234,7 +234,7 @@
                <div class="row ">
                 	<div v-for="items in 6" class=" pull-right col-xs-12 col-sm-6 col-md-4 col-lg-3">
 	                	<div  class="box">
-	                		
+
 	                			<div class="box-title-default">
 	                				<span class="content-half-width placeholder-content margin-15"></span>
 	                			</div>
@@ -251,7 +251,7 @@
 	                				<span class="content-full-width placeholder-content default-item-wrapper col-xs-12"></span>
 	                			</div>
 
-	                	</div> 
+	                	</div>
                		</div>
                </div>
 
@@ -296,14 +296,14 @@
 			 	axios.post('/get_seller_dashboard_required_data')
                     .then(function(response){
                     	self.statusData = response.data;
-                    	
+
                     	self.boxes = [
 							{
 								title : 'نوع پلن فعال شما',
 								icon : 'fas fa-address-card',
 								iconColor : '#19668E',
 								staticName : '',
-								upgrade : (response.data.active_pakage_type <= 3) ?  true : false,
+								upgrade : (response.data.active_pakage_type < 2) ?  true : false,
 								status : self.checkPackage(response.data.active_pakage_type)
 							},
 							{
@@ -312,7 +312,7 @@
 								iconColor : '#FFAC58',
 								staticName : '',
 								upgrade : false,
-								status: (  response.data.confirmed_products_count == 0) ?  'صفر' : response.data.confirmed_products_count + ' محصول'
+								status: (response.data.confirmed_products_count == 0) ?  'صفر' : response.data.confirmed_products_count + ' محصول'
 							},
 							{
 								title : 'تعداد محصولات قابل ثبت',
@@ -326,9 +326,9 @@
 								title : 'میزان امتیاز',
 								icon : 'fas fa-star',
 								iconColor : '#00C5BE',
-								staticName : 'امتیاز',
+								staticName : '',
 								upgrade : false,
-								status : response.data.reputation_score
+								status : response.data.reputation_score ? response.data.reputation_score + 'امتیاز' : 'بدون امتیاز'
 							},
 							{
 								title : 'درخواست های خرید قابل مشاهده',
@@ -336,7 +336,7 @@
 								iconColor : '#D8A679',
 								staticName : '',
 								upgrade : false,
-								status : (response.data.accessable_buyAds >= 2000) ? 'نامحدود' : response.data.accessable_buyAds + ' درخواست'
+								status : self.checkRequest(response.data.accessable_buyAds)
 							},
 							{
 								title : 'فروشنده معتبر',
@@ -345,7 +345,7 @@
 								staticName : '',
 								upgrade : false,
 								status : response.data.is_valid ? 'بله' : 'خیر'
-							},	
+							},
 		/*					{
 								title : 'احتمال پاسخگویی به پیام',
 								icon : 'fa fa-chart-line',
@@ -353,7 +353,7 @@
 								staticName : 'درصد',
 								upgrade : true,
 								status : '20'
-							},	*/				
+							},	*/
 						]
 
                     });
@@ -375,7 +375,21 @@
 					break;
 				}
 				return packageName;
-			}
+			},
+            checkRequest(requestNumber){
+                var setRequest = '';
+
+                if (requestNumber >= 2000){
+                    setRequest = ' نامحدود';
+				}else if (requestNumber == 0) {
+                    setRequest =  'بدون درخواست'
+
+                }else{
+                    setRequest = requestNumber + ' درخواست'
+
+                }
+                return setRequest;
+            }
 		},
 		mounted(){
 			this.init();

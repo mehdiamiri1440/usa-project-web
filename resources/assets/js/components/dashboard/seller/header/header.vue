@@ -1,16 +1,16 @@
 <style>
-    
+
 
     html, body, #appSeller, #main {
     height: 100%;
     }
-    
+
     #main {
     direction: rtl;
     background: #F6F6F6;
     height: calc(100% - 65px);
     }
-    
+
     html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
     a, abbr, acronym, address, big, cite, code,
@@ -86,7 +86,7 @@
         padding: 0;
 
     }
-    
+
     .green-button {
         margin: 15px 0 0;
         display: inline-block;
@@ -652,7 +652,7 @@
                     <div class="modal-content">
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal">
-                                <i class="fa fa-close"></i>
+                                <i class="fa fa-times"></i>
                             </a>
 
                             <p class="main-pop-up" v-text="popUpMsg"></p>
@@ -684,7 +684,7 @@
                     <div class="modal-content">
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal">
-                                <i class="fa fa-close"></i>
+                                <i class="fa fa-times"></i>
                             </a>
 
                             <p class="main-pop-up" v-text="popUpMsg"></p>
@@ -712,7 +712,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="main_popup_content">
-                            <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                            <a href="#" data-dismiss="modal"> <i class="fa fa-times"></i></a>
                             <p class="main-pop-up">
                                 لطفا پس از تکمیل اطلاعات پروفایل خود، منتظر تماس کارشناسان اینکوباک جهت تکمیل اطلاعات
                                 باشید. از شکیبایی شما سپاسگزاریم.
@@ -739,7 +739,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="main_popup_content">
-                            <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                            <a href="#" data-dismiss="modal"> <i class="fa fa-times"></i></a>
                             <p class="main-pop-up" v-text="popUpMsg">
 
                             </p>
@@ -769,7 +769,7 @@
                     <div class="modal-content">
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal">
-                                <i class="fa fa-close"></i>
+                                <i class="fa fa-times"></i>
                             </a>
 
                             <p class="main-pop-up" id="contractModal">
@@ -967,7 +967,7 @@
 
             init: function () {
                 this.isLoaded = true;
-                
+
                 axios.post('/user/profile_info')
                     .then(response => {
                         this.currentUser = response.data

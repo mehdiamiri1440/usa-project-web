@@ -128,7 +128,7 @@
             <div class="create_buy hidden-xs ">
                 <a href="#" @click.prevent="$parent.copyProductLinkToClipBoard"
                    class="btn btn-copy">
-                    <i aria-hidden="true" class="fa fa-clipboard"></i>
+                    <i aria-hidden="true" class="fa fa-copy"></i>
                     کپی آدرس
                 </a>
             </div>
@@ -148,7 +148,7 @@
                    @click.prevent="deleteProduct()"> <span class="fa fa-trash"></span> حذف </a>
 
                 <a class="green-button edit-product hidden-xs" href="#" @click.prevent="$parent.openEditBox($event)">
-                    <span class="fa fa-pencil"></span> ویرایش
+                    <span class="fa fa-pencil-alt"></span> ویرایش
                 </a>
             </div>
         </div>
