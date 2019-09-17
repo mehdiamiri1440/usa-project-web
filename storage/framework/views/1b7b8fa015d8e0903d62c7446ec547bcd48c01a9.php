@@ -101,7 +101,7 @@
                     transRep="<?php echo e(url('dashboard/transaction-report')); ?>"
                     str="<?php echo e(asset('storage/')); ?>"
                     defimgitem="<?php echo e(asset('/assets/img/product.jpg')); ?>"
-                          defultimg="<?php echo e(asset('assets/img/user-defult.png')); ?>"
+                    defultimg="<?php echo e(asset('assets/img/user-defult.png')); ?>"
             ></router-view>
 
             </main>

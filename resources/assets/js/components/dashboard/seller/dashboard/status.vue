@@ -80,9 +80,9 @@
     }
 
     .content-wrapper{
-    	
+
     	font-size: 28px;
-    	
+
     	font-weight: bold;
 
     }
@@ -112,7 +112,7 @@
     }
 
     .box-upgrade-link{
-    	margin-top: 54px;
+    	margin-top: 51px;
     }
 
 
@@ -121,7 +121,7 @@
 	  10%, 90% {
 	    transform: translate3d(0, -6px, 0);
 	  }
-	  
+
 	  20%, 80% {
 	    transform: translate3d(0, 0, 0);
 	  }
@@ -140,7 +140,7 @@
     	.box-upgrade-link{
     		margin-top: 45px;
     	}
-    	
+
     	.green-button{
     		padding: 13px 20px;
     		font-size: 15px;
@@ -148,7 +148,7 @@
     	}
 
     	.header-links-wrapper a{
-    		margin-left: 0; 
+    		margin-left: 0;
     		width: 100%;
     	}
 
@@ -171,37 +171,37 @@
                         <h1>
                             داشبورد
                         </h1>
-                    </div> 
+                    </div>
                     <div  class="col-xs-9 col-sm-4 pull-left text-left">
 
                         <router-link :to="{ name : 'dashboardPricingTable'}" class="green-button blue-brand-background">
-                        	  <i class="fa fa-list-alt"></i>
+                        	  <i class="far fa-credit-card"></i>
                             مشاهده تعرفه ها
 
                         </router-link>
-                        
-                    </div> 
+
+                    </div>
 
                 </div>
             </div>
             <div  class="header-links col-xs-12">
           			<div  class="header-links-wrapper"  >
 
-                        <a v-for="link in linkItems" :href="link.href" class="green-button " >
+                        <router-link v-for="(link , index) in linkItems" :key="index" :to="{name : link.href}" class="green-button " >
                         	<i :class="link.icon"></i>
                         	<span v-text="link.text"></span>
-                        </a>
+                        </router-link>
 
-                    </div> 	
+                    </div>
             </div>
 
-            <div class="boxes col-xs-12">
+            <div v-if="statusData" class="boxes col-xs-12">
 
                <div class="row ">
                 	<div v-for="box in boxes" class=" pull-right col-xs-12 col-sm-6 col-md-4 col-lg-3">
 	                	<div  class="box">
-	                		
-	                			
+
+
 	                			<div class="box-title">
 	                				<span v-text='box.title'></span>
 	                			</div>
@@ -215,26 +215,26 @@
 
 	                			</div>
 	                			<div v-if="box.upgrade" class="box-upgrade-link">
-	                				
-	                				<a href="#" class="green-button blue-brand-background">
+
+	                				<router-link :to="{ name:'dashboardPricingTable'}" class="green-button blue-brand-background">
 	                					<i class="fa fa-arrow-up"></i>
 	                					ارتقاء به عضو ویژه
-	                				</a>	
-	                			
+	                				</router-link>
+
 	                			</div>
 
-	                	</div> 
+	                	</div>
                		</div>
                </div>
 
             </div>
 
-            <div  class="boxes col-xs-12">
+            <div v-else class="boxes col-xs-12">
 
                <div class="row ">
-                	<div v-for="items in 7" class=" pull-right col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                	<div v-for="items in 6" class=" pull-right col-xs-12 col-sm-6 col-md-4 col-lg-3">
 	                	<div  class="box">
-	                		
+
 	                			<div class="box-title-default">
 	                				<span class="content-half-width placeholder-content margin-15"></span>
 	                			</div>
@@ -251,7 +251,7 @@
 	                				<span class="content-full-width placeholder-content default-item-wrapper col-xs-12"></span>
 	                			</div>
 
-	                	</div> 
+	                	</div>
                		</div>
                </div>
 
@@ -267,82 +267,132 @@
 
 		data:function(){
 			return {
+				statusData : '',
+
 				linkItems : [
 				    {
-						href : '#',
+						href : 'registerProduct',
 						icon : 'fa fa-plus',
 						text : 'افزودن محصول'
 					},
 				    {
-						href : '#',
+						href : 'buyAdRequests',
 						icon : 'fa fa-list-alt',
 						text : 'درخواست های خرید'
 					},
 				    {
-						href : '#',
+						href : 'messages',
 						icon : 'fas fa-comment-alt',
 						text : 'پیام ها'
 					}
 				],
-				boxes : [
-					{
-						title : 'نوع پلن فعال شما',
-						icon : 'fas fa-address-card',
-						iconColor : '#19668E',
-						staticName : '',
-						upgrade : true,
-						status : 'شماره یک'
-					},
-					{
-						title : 'تعداد محصولات ثبت شده',
-						icon : 'fas fa-box-open',
-						iconColor : '#FFAC58',
-						staticName : 'محصول',
-						upgrade : false,
-						status : '10'
-					},
-					{
-						title : 'تعداد محصولات قابل ثبت',
-						icon : 'fas fa-boxes',
-						iconColor : '#aa49c8',
-						staticName : 'محصول',
-						upgrade : false,
-						status : '10'
-					},
-					{
-						title : 'میزان امتیاز',
-						icon : 'fas fa-star',
-						iconColor : '#00C5BE',
-						staticName : 'امتیاز',
-						upgrade : false,
-						status : '185'
-					},
-					{
-						title : 'درخواست های خرید قابل مشاهده',
-						icon : 'fas fa-inbox',
-						iconColor : '#D8A679',
-						staticName : 'درخواست',
-						upgrade : false,
-						status : '120'
-					},
-					{
-						title : 'فروشنده معتبر',
-						icon : 'fas fa-award	',
-						iconColor : '#21AD93',
-						staticName : '',
-						upgrade : false,
-						status : 'خیر'
-					},	
-/*					{
-						title : 'احتمال پاسخگویی به پیام',
-						icon : 'fa fa-chart-line',
-						iconColor : '#FF8058',
-						staticName : 'درصد',
-						upgrade : true,
-						status : '20'
-					},	*/				
-				]
+
+				boxes : ''
 			}
+		},
+		methods:{
+			 init: function () {
+			 	var self = this;
+			 	axios.post('/get_seller_dashboard_required_data')
+                    .then(function(response){
+                    	self.statusData = response.data;
+
+                    	self.boxes = [
+							{
+								title : 'نوع پلن فعال شما',
+								icon : 'fas fa-address-card',
+								iconColor : '#19668E',
+								staticName : '',
+								upgrade : (response.data.active_pakage_type < 2) ?  true : false,
+								status : self.checkPackage(response.data.active_pakage_type)
+							},
+							{
+								title : 'تعداد محصولات قابل ثبت',
+								icon : 'fas fa-list-ol',
+								iconColor : '#aa49c8',
+								staticName : '',
+								upgrade : false,
+								status : (response.data.max_allowed_product_register_count == 0) ?  'صفر' : response.data.max_allowed_product_register_count + ' محصول'
+							},	
+							{
+								title : 'درخواست های خرید قابل مشاهده',
+								icon : 'fas fa-list-alt',
+								iconColor : '#D8A679',
+								staticName : '',
+								upgrade : false,
+								status : self.checkRequest(response.data.accessable_buyAds)
+							},	
+							{
+								title : 'فروشنده معتبر',
+								icon : 'fas fa-award	',
+								iconColor : '#21AD93',
+								staticName : '',
+								upgrade : false,
+								status : response.data.is_valid ? 'بله' : 'خیر'
+							},
+							{
+								title : 'میزان امتیاز',
+								icon : 'fas fa-star',
+								iconColor : '#00C5BE',
+								staticName : '',
+								upgrade : false,
+								status : response.data.reputation_score ? response.data.reputation_score + 'امتیاز' : 'بدون امتیاز'
+							},			
+							{
+								title : 'تعداد محصولات ثبت شده',
+								icon : 'fas fa-list-ol',
+								iconColor : '#FFAC58',
+								staticName : '',
+								upgrade : false,
+								status: (response.data.confirmed_products_count == 0) ?  'صفر' : response.data.confirmed_products_count + ' محصول'
+							},
+		/*					{
+								title : 'احتمال پاسخگویی به پیام',
+								icon : 'fa fa-chart-line',
+								iconColor : '#FF8058',
+								staticName : 'درصد',
+								upgrade : true,
+								status : '20'
+							},	*/
+						]
+
+                    });
+			},
+			checkPackage(packageId){
+				var packageName = '';
+				switch(packageId){
+					case 0:
+					packageName = 'رایگان';
+					break;
+					case 1:
+					packageName = 'شماره دو';
+					break;
+					case 2:
+					packageName = 'شماره سه';
+					break;
+					case 3:
+					packageName = 'عضویت ویژه';
+					break;
+				}
+				return packageName;
+			},
+            checkRequest(requestNumber){
+                var setRequest = '';
+
+                if (requestNumber >= 2000){
+                    setRequest = ' نامحدود';
+				}else if (requestNumber == 0) {
+                    setRequest =  'بدون درخواست'
+
+                }else{
+                    setRequest = requestNumber + ' درخواست'
+
+                }
+                return setRequest;
+            }
+		},
+		mounted(){
+			this.init();
 		}
 	}
 

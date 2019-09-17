@@ -1,6 +1,6 @@
 
 <style scoped>
-    
+
 
 
     .main-wrapper main{
@@ -33,10 +33,10 @@
     input[type="number"] {
       -moz-appearance: textfield;
     }
-    input[type="number"]::-webkit-inner-spin-button, 
-    input[type="number"]::-webkit-outer-spin-button { 
-      -webkit-appearance: none; 
-      margin: 0; 
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
     input, textarea{
         padding: 9px 15px;
@@ -159,7 +159,7 @@
     .custom-progress p{
 
         display: inline;
-        
+
     }
 
 
@@ -248,7 +248,7 @@
         cursor: pointer;
 
     }
- 
+
 
     .submit label{
 
@@ -404,7 +404,7 @@
     }
 
     .link-help a{
-        
+
         color: #00C569;
 
         padding: 2px 15px;
@@ -422,7 +422,7 @@
     }
 
     .link-help a{
-        
+
         color: #00C569;
 
         padding: 2px 15px;
@@ -438,14 +438,14 @@
     }
 
     .link-help a:hover{
-        
+
         color: #fff;
         background: #00C569;
 
     }
 
     .link-help i{
-        
+
         -ms-transform: matrix(-1, 0, 0, 1, 0, 0); /* Standard syntax */
         -webkit-transform: matrix(-1, 0, 0, 1, 0, 0); /* Standard syntax */
         transform: matrix(-1, 0, 0, 1, 0, 0); /* Standard syntax */
@@ -453,7 +453,7 @@
     }
 
     .link-help p{
-                
+
         color: #BDC4CC;
 
         font-size: 12px;
@@ -463,7 +463,7 @@
         font-weight: bold;
 
     }
-    
+
     .default-images{
 
         text-align: center;
@@ -475,16 +475,16 @@
         color: #d2d2d2;
 
     }
-    
+
     .default-images i{
 
         display: block;
         font-size: 50px;
         margin: 6px auto;
-        
+
     }
 
-    .images-content i.fa-close{
+    .images-content i.fa-times{
 
             position: absolute;
             color: red;
@@ -534,16 +534,16 @@
         .checkmark {
 
             right: 8px;
-          
+
         }
         .link-help a{
-   
+
             padding: 2px 10px;
 
         }
 
     }
-   
+
 
    @media only screen and (max-width: 991px) {
 
@@ -562,7 +562,7 @@
         .checkmark {
 
             right: 13px;
-          
+
         }
 
         .description {
@@ -672,18 +672,18 @@
 
 <template>
     <div class="main-wrapper col-xs-12">
-           
+
                 <header class="col-xs-12">
-        
+
                           <div class="title col-xs-12">
 
                               <div class="row">
-                                  <div class="col-xs-12 col-sm-3 pull-right"> 
+                                  <div class="col-xs-12 col-sm-3 pull-right">
                                     <h1>ویرایش پروفایل</h1>
                                   </div>
                                   <div class="col-xs-12 col-sm-9">
                                       <p v-if="completeProfileProgress <= 85">
-                                          
+
                                         برای ارتباط مستقیم و پاسخ گویی بهتر از سمت فروشندگان، پروفایل خود را کامل کنید
                                       </p>
                                   </div>
@@ -702,7 +702,7 @@
                                         <span>
                                             {{completeProfileProgress}}%
                                         </span>
-                                        
+
                                     </div>
                                 </div>
 
@@ -713,31 +713,31 @@
                 <main class="col-xs-12">
 
                     <section class="wrapper-section">
-                        
+
                         <div class="content-wrapper row">
 
-                            
+
                                 <div class="form-wrapper col-xs-12">
 
                                     <div class="user-image-wrapper col-xs-4 col-sm-2 pull-right">
                                             <p class="hidden-xs">تصویر پروفایل</p>
                                             <div class="user-image">
 
-                                                    <img 
-                                                  
+                                                    <img
+
                                                     v-if="currentUser.profile.profile_photo"
                                                     :src="str + '/' + currentUser.profile.profile_photo"
                                                          class="image-preview"
                                                          alt="تصویر پروفایل"
                                                     />
 
-                                                    <img 
+                                                    <img
                                                     v-else
                                                     :src="defultimg"
                                                      align="تصویر پروفایل" class="image-preview">
 
                                             </div>
-                                            
+
                                             <div class="submit">
 
                                                 <input type="file" id="imgInp" ref="profilePhoto">
@@ -758,9 +758,9 @@
 
 
                                         <div class="user-information col-xs-8 col-sm-10">
-                                                
+
                                                 <div class="row">
-                                                    
+
                                                     <div class="activity-type padding-0 col-xs-12 col-md-4 pull-right">
                                                         <p class="label-text">
                                                             نوع کاربری
@@ -772,7 +772,7 @@
                                                                   <input
                                                                        @click="disableForm()"
                                                                        type="radio"
-                                                                       value="0" 
+                                                                       value="0"
                                                                        name="radio"
                                                                        :checked="0  == currentUser.profile.is_company"
                                                                        v-model="currentUser.profile.is_company"
@@ -788,9 +788,9 @@
 
                                                             <div class="label-radio">
 
-                                                                  <input  type="radio" 
+                                                                  <input  type="radio"
                                                                           @click="enableForm()"
-                                                                          value="1" 
+                                                                          value="1"
                                                                           :checked="1  == currentUser.profile.is_company"
                                                                           name="radio"
                                                                           v-model="currentUser.profile.is_company"
@@ -804,16 +804,16 @@
                                                             </div>
 
                                                         </div>
-                                                         
- 
+
+
                                                         <div class="error-message">
 
-                                                            <span 
-                                                                  v-if="errors.is_company"     
+                                                            <span
+                                                                  v-if="errors.is_company"
                                                                   v-text="errors.is_company[0]"
-                                                                > </span> 
+                                                                > </span>
 
-                                                        </div>  
+                                                        </div>
 
                                                     </div>
 
@@ -827,11 +827,11 @@
                                                                             نام شرکت
                                                                         </p>
 
-                                                                        <div 
+                                                                        <div
                                                                         class="input-wrapper company-name-wrapper"
                                                                         >
 
-                                                                        <input 
+                                                                        <input
                                                                            type="text"
                                                                            id="company-name"
                                                                            name="company-name"
@@ -852,16 +852,16 @@
                                                                      </div>
 
                                                                     <div class="form-control-wrapper col-xs-12 col-sm-6">
-                                                                        
+
                                                                         <p class="label-text">
                                                                             شماره ثبت شرکت
                                                                         </p>
 
-                                                                        <div 
+                                                                        <div
                                                                         class="input-wrapper company-number-wrapper"
                                                                         >
-                                                                        
-                                                                        <input 
+
+                                                                        <input
                                                                            id="company-number"
                                                                            type="tel"
                                                                            name="company-number"
@@ -890,24 +890,24 @@
                                         </div>
 
                                     <div class="user-form col-xs-12 col-sm-10">
-                                            
+
                                         <div class="row">
 
                                             <div class=" col-xs-12 col-md-8 pull-left">
 
                                                <div class="row">
                                                     <div class="form-control-wrapper col-xs-6 pull-right">
-                                                          
+
                                                                 <p class="label-text">
                                                                     شماره تماس عمومی
                                                                 </p>
 
-                                                                <div 
+                                                                <div
                                                                 class="input-wrapper phone-number-wrapper"
                                                                 >
-                                                                
-                                                                <input 
-                                                                    id="phone-number" 
+
+                                                                <input
+                                                                    id="phone-number"
                                                                     type="tel"
                                                                     class="dire"
                                                                     placeholder="شماره موبایل"
@@ -925,17 +925,17 @@
                                                     </div>
 
                                                     <div class="col-xs-6 form-control-wrapper ">
-                                                        
+
                                                             <p class="label-text">
                                                                     آدرس
                                                                 </p>
 
-                                                                <div 
+                                                                <div
                                                                 class="input-wrapper address-wrapper"
                                                                 >
-                                                                
-                                                                <input 
-                                                                id="address" 
+
+                                                                <input
+                                                                id="address"
                                                                 type="text"
                                                                 class="dire "
                                                                 placeholder="آدرس شما"
@@ -954,13 +954,13 @@
 
                                                     </div>
 
-                                               </div>   
+                                               </div>
                                             </div>
 
                                         </div>
 
                                     </div>
-                                    
+
                                </div>
 
                                <div class="form-wrapper col-xs-12 col-md-10 pull-left">
@@ -971,23 +971,23 @@
                                           درباره  کسب و کارتان بنویسید
                                         </p>
 
-                                         <div 
+                                         <div
                                          class="input-wrapper address-wrapper"
                                          >
-                                                                
+
                                              <textarea
                                              rows="4"
                                              id="description"
                                              class="dire "
                                              placeholder=" درباره کسب و کارتان بنویسید "
-                                             v-model="currentUser.profile.description" 
-                                             :class="{'active' : currentUser.profile.description}"                
-                                             ></textarea> 
+                                             v-model="currentUser.profile.description"
+                                             :class="{'active' : currentUser.profile.description}"
+                                             ></textarea>
 
 
 
                                             <div   class="error-message">
-                                                
+
                                                 <span v-if="errors.description"
                                                       v-text="errors.description[0]"></span>
                                             </div>
@@ -1018,7 +1018,7 @@
 
                         <div class="content-wrapper row">
 
-              
+
 
                             <div class="col-xs-12 col-sm-6  pull-right">
 
@@ -1046,26 +1046,26 @@
                              <div class="col-xs-12 col-sm-6 pull-left">
 
                                 <label>
-                                    تصاویر ثبت شده 
+                                    تصاویر ثبت شده
                                 </label>
 
                                 <div class="row">
                                     <div class="images-content col-xs-12" >
-                                       
+
                                        <article class="col-md-4 col-xs-6 col-lg-3 pull-right"
                                                       v-for="photo in currentUser.relateds"
                                                       v-if="currentUser.relateds.length"
                                                       >
 
 <!--                                             <a href="#">
-                                                <i class="fa fa-close"></i>
+                                                <i class="fa fa-times"></i>
                                             </a> -->
 
                                             <div class="image-item">
                                                 <img :src=" str + '/' + photo" alt="">
                                             </div>
 
-                                        </article> 
+                                        </article>
 
                                          <div v-else  class="default-images">
                                             <i class="fa fa-picture-o"></i>
@@ -1082,7 +1082,7 @@
 
                             <div class="content-wrapper row">
 
-              
+
 
                             <div class="col-xs-12 col-sm-6  pull-right">
 
@@ -1111,17 +1111,17 @@
                              <div class="col-xs-12 col-sm-6 pull-left">
 
                                 <label>
-                                    تصاویر ثبت شده 
+                                    تصاویر ثبت شده
                                 </label>
 
                                 <div class="row">
                                     <div class="images-content col-xs-12" >
                                          <article
-                                                  v-if="currentUser.certificates.length"  
+                                                  v-if="currentUser.certificates.length"
                                                   class="col-md-4 col-xs-6 col-lg-3 pull-right"
                                                   v-for="photo in currentUser.certificates">
                                           <!--   <a href="#">
-                                                <i class="fa fa-close"></i>
+                                                <i class="fa fa-times"></i>
                                             </a> -->
                                             <div class="image-item">
 
@@ -1129,13 +1129,13 @@
 
                                             </div>
 
-                                        </article> 
+                                        </article>
                                         <div v-else  class="default-images">
                                             <i class="fa fa-picture-o"></i>
                                             هنوز تصویری ثبت نشده است
                                         </div>
 
-                                        
+
                                     </div>
                                 </div>
 
@@ -1146,10 +1146,10 @@
                         <div class="col-xs-12 col-md-3 col-sm-4 pull-right">
 
                              <div class="row">
-                                    
+
                                   <button class="submit-button active"  @click="RegisterBasicProfileInfo">
                                      ثبت تغییرات
-                                 </button> 
+                                 </button>
 
                              </div>
 
@@ -1177,7 +1177,7 @@
         },
         data: function () {
             return {
-                
+
                 currentUser:{
                     profile: {
                         is_company: '',
@@ -1241,11 +1241,11 @@
                     .then(function(response){
                         self.currentUser = response.data;
                         self.sumProgressNumber();
-                      
+
 
                     });
 
-                
+
             },
             RegisterBasicProfileInfo: function () {
 
@@ -1253,7 +1253,7 @@
                 this.errors = '';
                 var self = this;
                 var data = new FormData();
-                
+
 
                 for (var i = 0, cnt = this.profileBasicFields.length; i < cnt; i++) {
                     if (this.currentUser.profile[this.profileBasicFields[i]] != null){
@@ -1262,7 +1262,7 @@
                 }
 
                 // Complementary  form check
-                
+
 
                 for (var i = 0; i < this.profileComplementaryFields.length; i++){
                     if (this.profileComplementaryFields[i] === 'description' && (this.currentUser.profile['description'] == null || this.currentUser.profile['description'] === '')) {
@@ -1322,10 +1322,10 @@
 
                         }
 
-             
+
                         self.errors = '';
                         self.errors = err.response.data.errors;
-                
+
                         let tmpArray = Object.keys(self.errors);
                            console.log((tmpArray.join() + "").includes('related') || (tmpArray.join() + "").includes('certificate') );
                         if((tmpArray.join() + "").includes('related') || (tmpArray.join() + "").includes('certificate') ){
@@ -1391,7 +1391,7 @@
                  if (this.currentUser.profile.company_name) {
 
                     this.completeProfileProgress += this.rankState.company_name;
-                
+
                 }
                  if (this.currentUser.profile.company_register_code) {
 
@@ -1423,20 +1423,20 @@
                     this.completeProfileProgress += this.rankState.profile_photo;
 
                 }
-                   
+
                  if (this.currentUser.certificates.length) {
 
                     this.completeProfileProgress += this.rankState.certificates;
-                 
+
 
                 }
                  if (this.currentUser.relateds.length) {
 
                     this.completeProfileProgress += this.rankState.relateds;
-                  
+
 
                 }
-                 
+
             },
             isOsIOS: function () {
                 var userAgent = window.navigator.userAgent.toLowerCase(),
@@ -1448,7 +1448,7 @@
             scrollToTop() {
                 window.scrollTo(0, 0);
             },
-                
+
         },
         mounted(){
             this.init();
@@ -1460,7 +1460,7 @@
                     var image = $('.image-preview');
                     var iconProfile = $('#icon-pro');
                     reader.onload = function (e) {
-                     
+
                         image.attr('src', e.target.result);
                         image.css('display', 'inline');
                         iconProfile.css('display', 'none');
@@ -1506,11 +1506,11 @@
                 }
             },
             'currentUser.profile.company_register_code':function(value){
-                  this.currentUser.profile.company_register_code =  this.toLatinNumbers(value); 
+                  this.currentUser.profile.company_register_code =  this.toLatinNumbers(value);
 
             },
             completeProfileProgress:function(value){
-                 
+
                 $('.custom-progress').css('width',value + '%')
 
             },

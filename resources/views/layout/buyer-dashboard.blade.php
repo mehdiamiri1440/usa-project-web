@@ -12,7 +12,7 @@
     <script src="{{asset('assets/js/kamadatepicker.js')}}"></script>
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/fontiran.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/imageuploadify.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/all.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap-theme.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/cropper.css')}}">
@@ -100,7 +100,7 @@
                 transRep="{{url('dashboard/transaction-report')}}"
                 str="{{asset('storage/')}}"
                 defimgitem="{{asset('/assets/img/product.jpg')}}"
-                      defultimg="{{asset('assets/img/user-defult.png')}}"
+                defultimg="{{asset('assets/img/user-defult.png')}}"
         ></router-view>
     </main>
 </div>

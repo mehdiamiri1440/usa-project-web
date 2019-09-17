@@ -485,7 +485,7 @@
                                     <div class="col-xs-12 col-sm-6">
                                         <button type="button" class="green-button" @click=rejectBuy(sellOfferDetail.sell_offer.id)>رد این پیشنهاد</button>
                                  </div>-->
-                                <a href="#" @click.prevent="openChat()" class="green-button"><i class="fa fa-comment"></i> ارسال
+                                <a href="#" @click.prevent="openChat()" class="green-button"><i class="fas fa-comment-alt"></i> ارسال
                                     پیام </a>
                             </div>
                             <p class='text-success' v-show='sellOfferDetail.sell_offer.is_accepted'>شما قبلا این پیشنهاد

@@ -46,8 +46,10 @@ import buyerTransactionDetail from '../components/dashboard/buyer/transaction/tr
 import buyerTransactionReport from '../components/dashboard/buyer/transaction/transaction-report-detail';
 import buyerGuide from '../components/dashboard/buyer/guide.vue';
 
-
+// dashboard main
 import messages from '../components/dashboard/message'
+import dashboardPricingTable from '../components/dashboard/dashboard-pricing-table';
+
 
 // Layout Components
 import indexPage from '../components/layouts/main/index'
@@ -59,8 +61,7 @@ import indexAboutUs from '../components/layouts/main/about_us'
 import help from '../components/layouts/main/help'
 import contactUs from '../components/layouts/main/contact_us'
 import profile from '../components/layouts/main/profile'
-import pricing from '../components/layouts/main/pricing_page'
-import dashboardPricingTable from '../components/dashboard/pricing-table.vue';
+import pricingTable from '../components/layouts/main/pricing-page'
 
 // Login & Register Components
 import register from '../components/register/register'
@@ -424,9 +425,7 @@ const myRouter =  new Router({
             path: '/pricing',
             name: 'pricing',
             components: {
-                seller: pricing,
-                buyer: pricing,
-                layouts: pricing,
+                layouts: pricingTable,
             },
         },
         {

@@ -1,5 +1,5 @@
 <style scoped>
-   
+
 
 
     .green-button:focus, .green-button:hover {
@@ -150,8 +150,8 @@
 
         color: #fff;
 
-        width: 54px;  
-        
+        width: 54px;
+
     }
 
     .valid-user-badge::after {
@@ -201,7 +201,7 @@
         bottom: -20px;
 
     }
-    
+
     input[type="text"], select, textarea {
         background: #eff3f6;
         border: 1px solid #cfcfcf;
@@ -217,15 +217,15 @@
         display: block;
         margin: 9px auto;
     }
-    
+
     .article-seo-title {
 
         margin-bottom: 15px;
         font-size: 15px;
         font-weight: bold;
-        
+
     }
-    
+
     .article-seo-title h2{
 
 
@@ -256,8 +256,8 @@
 </style>
 
 <template>
-   
-        
+
+
 
         <article class="main-content-item">
             <script v-html="jsonLDObject" type="application/ld+json"></script>
@@ -303,7 +303,7 @@
                         </div>
 
                         <div class="col-xs-6 text-right">
-                      
+
                             <div v-if="product.user_info.active_pakage_type != 0" class="valid-user-badge mobile-view hidden-sm hidden-md hidden-lg">
                                 <div class="wrapper-icon">
                                     <svg  width="24.965" height="30.574" viewBox="0 0 24.965 30.574">
@@ -368,7 +368,7 @@
                     </h3>
 
                        <div class="article-seo-title" v-if="$route.params.categoryName">
-                            نوع محصول: 
+                            نوع محصول:
 
                         <h2>
                         <span  v-text="product.main.product_name"></span>
@@ -377,7 +377,7 @@
                        </div>
 
                         <p v-else>
-                            نوع محصول: 
+                            نوع محصول:
                               <span  v-text="product.main.product_name"></span>
 
                         </p>
@@ -419,13 +419,13 @@
                         <div class="create_buy_mobile hidden-sm hidden-md hidden-lg">
                             <a v-if="!isMyProfile" class="green-button" href="#" @click.prevent="openChat(product)">
 
-                                <span class="fa fa-comment"></span> ارسال پیام
+                                <span class="fas fa-comment-alt"></span> ارسال پیام
                             </a>
 
                             <a v-if="isMyProfile" class="green-button edit-product" href="#"
                                @click="openEditBox($event)">
 
-                                <span class="fa fa-pencil"></span> ویرایش
+                                <span class="fa fa-pencil-alt"></span> ویرایش
                             </a>
 
                         </div>

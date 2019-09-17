@@ -42,7 +42,7 @@
                               v-text="messageCount"
                         ></span>
 
-                        <i class="fa fa-comment" aria-hidden="true"></i>
+                        <i class="fas fa-comment-alt" aria-hidden="true"></i>
                     </router-link>
                 </li>
 

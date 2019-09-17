@@ -300,30 +300,30 @@
                         <ul class="social-icon">
                             <li>
                                 <a href="https://www.instagram.com/incobac.ir/"
-                                   class="fa fa-instagram wow"
+                                   class="fab fa-instagram wow"
                                    @click="registerComponentStatistics('footer','instagram','click-on-instagram')"></a>
                             </li>
 
                             <li>
-                                <a href="https://t.me/Incobac" class="fa fa-telegram wow "
+                                <a href="https://t.me/Incobac" class="fab fa-telegram wow "
                                    @click="registerComponentStatistics('footer','telegram','click-on-telegram')"></a>
                             </li>
 
                             <li>
                                 <a href="https://www.linkedin.com/company/27058131/ "
-                                   class="fa fa-linkedin wow "
+                                   class="fab fa-linkedin wow "
                                    @click="registerComponentStatistics('footer','linked-in','click-on-linked-in')"></a>
                             </li>
 
                             <li>
                                 <a href="https://twitter.com/incobac"
-                                   class="fa fa-twitter wow "
+                                   class="fab fa-twitter wow "
                                    @click="registerComponentStatistics('footer','twitter','click-on-twitter')"></a>
                             </li>
 
                             <li>
                                 <a href="https://www.facebook.com/incobac/"
-                                   class="fa fa-facebook wow "
+                                   class="fab fa-facebook wow "
                                    @click="registerComponentStatistics('footer','facebook','click-on-facebook')"></a>
                             </li>
                         </ul>

@@ -3,7 +3,7 @@
    		margin: 5px auto 0;
         font-size: 16px;
         font-weight: bold;
-
+        width: initial;
    	}
 
    	.text-red {
@@ -14,19 +14,6 @@
         color: #00ac5c;
     }
 
-    .title {
-        text-align: right;
-        padding: 15px 0;
-        border-bottom: 2px solid #E8E8E8;
-        margin-bottom: 15px;
-    }
-
-    .title h1 {
-
-        font-size: 18px;
-        font-weight: bold;
-
-    }
     .wrapper-background{
 
         background: #fff;
@@ -35,12 +22,15 @@
         padding: 15px;
         line-height: 1.618;
         margin-bottom: 30px;
+        overflow: hidden;
 
     }
 
     .header-wrapper{
         text-align: center;
         padding: 15px 50px;
+        float: left;
+        width: calc(100% - 100px);
     }
 
     .header-title {
@@ -49,14 +39,31 @@
 
     .header-title span{
         font-size: 20px;
-        color: #777;
+        color: #333;
+        font-weight: bold;
+    }
+    .header-icon-wrapper{
+        float: right;
+        width: 100px;
+        text-align: center;
     }
 
-    .header-title i{
-        font-size: 26px;
+    .header-icon-wrapper i{
+        font-size: 112px;
         color: #FFBB00;
         position: relative;
         top: 3px;
+
+    }
+
+    .header-icon-wrapper i:after{
+        content: "\f00c";
+        font-size: 29px;
+        text-align: center;
+        width: 100%;
+        display: block;
+        position: absolute;
+        top: 24px;
     }
 
     hr{
@@ -222,7 +229,20 @@
         position: relative;
     }
 
+    .wrapper-icon{
+        display: inline;
+    }
 
+    .header-description{
+        color: #777;
+    }
+
+    .wrapper-icon svg{
+        width: 20px;
+        position: relative;
+        top: 7px;
+        margin-left: 5px;
+    }
 
     @media screen and (max-width: 992px) {
 
@@ -233,8 +253,45 @@
     }
 
     @media screen and (max-width: 767px) {
+
+        .header-icon-wrapper {
+            float: right;
+            width: 50px;
+            text-align: center;
+        }
+
+        .header-icon-wrapper i {
+            font-size: 69px;
+            color: #FFBB00;
+            position: relative;
+            top: 16px;
+        }
+
+        .header-wrapper {
+            text-align: center;
+            padding: 15px 50px;
+            float: left;
+            width: calc(100% - 59px);
+        }
+
+        .header-icon-wrapper i::after {
+            content: "\F00C";
+            font-size: 19px;
+            text-align: center;
+            width: 100%;
+            display: block;
+            position: absolute;
+            top: 14px;
+        }
+
+        .header-description {
+            font-size: 13px
+        }
+        .header-title {
+            margin-bottom: 0;
+        }
         .header-wrapper{
-            padding: 15px;
+            padding: 0;
         }
 
         .item-title,.item-price{
@@ -283,49 +340,38 @@
             right: 0px;
             top: 45px;
         }
+
     }
 
 </style>
 <template>
-    <div>
-
-        <section class="main-content col-xs-12">
-          
-            <div  class="title col-xs-12">
-                <div  class="row">
-                    <div  class="col-xs-12 col-sm-4 pull-right">
-                        <h1>
-                          تعرفه ها
-                        </h1>
-                    </div> 
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2  ">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2  ">
                     <div class="row">
                         <div class="  col-xs-12">
-                            <div class="header-wrapper wrapper-background">
-
-                                <div class="header-title">
-
-                                    <i class="fa fa-certificate"></i>
-                                    <span>
-                                        ضمانت بازگشت وجه
-                                    </span>
+                            <div class=" wrapper-background">
+                                <div class="header-icon-wrapper">
+                                        <i class="fas fa-award"></i>
                                 </div>
+                                <div class="header-wrapper">
+                                    <div class="header-title">
+                                   
+                                        <span>
+                                            ضمانت بازگشت وجه
+                                        </span>
+                                    </div>
 
-                                <p class="header-description">
-                                        
-                                        <strong>
-                                           در صورتیکه یکی از بسته های زیر را بخرید و پس از یک ماه به هر دلیلی از نتیجه آن رضایت نداشتید،
-                                           <span class="text-red">
-                                              100% مبلغ پرداختی، به شما بازگردانده میشود.
-                                           </span>
-                                        </strong>
+                                    <p class="header-description">
+                                            
+                                            <strong>
+                                              در صورت  ارتقاء به عضویت ویژه اگر پس از  سه ماه  از نتیجه آن رضایت نداشته باشید 
 
-                                </p>
+                                               <span class="text-green">
+                                                  100% مبلغ پرداختی به شما بازگردانده می شود
+                                               </span>
+                                            </strong>
 
+                                    </p>
+                                </div>
                             </div>
                             
                         </div>
@@ -373,7 +419,7 @@
                                                   :href="'#content-item-' + index"
                                                   @click.prevent="collapseControl($event)"
                                                   class="item-help"
-                                                  :title="item.title"
+                                                  :title="item.helpDescription"
                                                   >
                                                     
                                                      <i class="fa fa-question-circle"></i>
@@ -402,9 +448,13 @@
 
                                     <div class="item-action">
                                         
-                                        <p  class="text-green">
+                                        <p v-if="statusData"  class="text-green">
                                            در حال استفاده
                                         </p>
+
+                                        <a v-else href="/register" class="green-button">
+                                           ثبت نام رایگان
+                                        </a>
 
                                     </div>
 
@@ -451,7 +501,7 @@
                                                   :href="'#content-item-pro-' + index"
                                                   @click.prevent="collapseControl($event)"
                                                   class="item-help"
-                                                  :title="item.title"
+                                                  :title="item.helpDescription"
                                                   >
                                                     
                                                      <i class="fa fa-question-circle"></i>
@@ -479,8 +529,11 @@
                                     </div>
 
                                     <div class="item-action">
-                                        
-                                        <a href="#" class="green-button">
+                                        <p v-if="statusData.active_pakage_type >= 3"  class="text-green">
+                                           در حال استفاده
+                                        </p>
+
+                                        <a v-else href="/payment/3" class="green-button">
                                             ارتقاء حساب
                                         </a>
 
@@ -496,18 +549,16 @@
 
                     </div>
                 </div>
-            </div>
-        </section>
-    </div>
 </template>
 
 
 <script>
 
 	export default{
-
 		data:function(){
 			return {
+                statusData : '',
+
 				priceItemPro:[
                     {
                         title:'تعداد آگهی ها',
@@ -585,6 +636,16 @@
 			}
 		},
         methods:{
+            init:function(){
+                var self = this;
+                axios.post('/get_seller_dashboard_required_data')
+                    .then(function(response){
+                        if (response.data.is_valid || response.data.is_valid == false) {
+                            self.statusData = response.data;
+                        }
+                        
+                    });
+            },
             collapseControl:function(link){
 
             var $myGroup = $('.item-content');
@@ -593,7 +654,7 @@
 
         },
         mounted(){
-
+            this.init();
             $(document).on('click',function(){
                 $('.collapse').collapse('hide');
             })

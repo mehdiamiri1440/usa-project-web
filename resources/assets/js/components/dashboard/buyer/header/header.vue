@@ -602,7 +602,7 @@
                     <div class="modal-content">
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal">
-                                <i class="fa fa-close"></i>
+                                <i class="fa fa-times"></i>
                             </a>
 
                             <p class="main-pop-up" v-text="popUpMsg"></p>
@@ -628,7 +628,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="main_popup_content">
-                            <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                            <a href="#" data-dismiss="modal"> <i class="fa fa-times"></i></a>
                             <p class="main-pop-up" id="popUpMsg">
                                 لطفا پس از تکمیل اطلاعات پروفایل خود، منتظر تماس کارشناسان اینکوباک جهت تکمیل اطلاعات
                                 باشید. از شکیبایی شما سپاسگزاریم.
@@ -649,7 +649,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="main_popup_content">
-                            <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                            <a href="#" data-dismiss="modal"> <i class="fa fa-times"></i></a>
                             <p class="main-pop-up" id="contractModal">
 
                                 برای شروع استفاده از خدمات اینکوباک ابتدا در قسمت ویرایش پروفایل، قرارداد همکاری را
@@ -754,7 +754,7 @@
 
             <section class="main-right-header">
                 <ProfileInfo
-                :isLoading='isLoading'               
+                :isLoading='isLoading'
                         :photoLink="currentUser.profile.profile_photo"
                         :storage="storage"
                         :def="defultimg"
