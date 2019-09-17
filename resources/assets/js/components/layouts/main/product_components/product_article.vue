@@ -419,7 +419,7 @@
                         <div class="create_buy_mobile hidden-sm hidden-md hidden-lg">
                             <a v-if="!isMyProfile" class="green-button" href="#" @click.prevent="openChat(product)">
 
-                                <span class="fa fa-comment"></span> ارسال پیام
+                                <span class="fas fa-comment-alt"></span> ارسال پیام
                             </a>
 
                             <a v-if="isMyProfile" class="green-button edit-product" href="#"

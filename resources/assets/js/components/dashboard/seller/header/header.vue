@@ -746,9 +746,9 @@
                             <button class="btn green-button " data-dismiss="modal">
                                 متوجه شدم
                             </button>
-                            <a class="btn green-button" href='/pricing'>
+                            <router-link class="btn green-button"  data-dismiss="modal" type="button" :to='{name : "dashboardPricingTable"}'>
                                 مشاهده تعرفه ها
-                            </a>
+                            </router-link >
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->

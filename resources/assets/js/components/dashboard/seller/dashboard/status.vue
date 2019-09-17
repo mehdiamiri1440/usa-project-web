@@ -175,7 +175,7 @@
                     <div  class="col-xs-9 col-sm-4 pull-left text-left">
 
                         <router-link :to="{ name : 'dashboardPricingTable'}" class="green-button blue-brand-background">
-                        	  <i class="fa fa-list-alt"></i>
+                        	  <i class="far fa-credit-card"></i>
                             مشاهده تعرفه ها
 
                         </router-link>
@@ -307,20 +307,28 @@
 								status : self.checkPackage(response.data.active_pakage_type)
 							},
 							{
-								title : 'تعداد محصولات ثبت شده',
-								icon : 'fas fa-box-open',
-								iconColor : '#FFAC58',
-								staticName : '',
-								upgrade : false,
-								status: (response.data.confirmed_products_count == 0) ?  'صفر' : response.data.confirmed_products_count + ' محصول'
-							},
-							{
 								title : 'تعداد محصولات قابل ثبت',
-								icon : 'fas fa-boxes',
+								icon : 'fas fa-list-ol',
 								iconColor : '#aa49c8',
 								staticName : '',
 								upgrade : false,
 								status : (response.data.max_allowed_product_register_count == 0) ?  'صفر' : response.data.max_allowed_product_register_count + ' محصول'
+							},	
+							{
+								title : 'درخواست های خرید قابل مشاهده',
+								icon : 'fas fa-list-alt',
+								iconColor : '#D8A679',
+								staticName : '',
+								upgrade : false,
+								status : self.checkRequest(response.data.accessable_buyAds)
+							},	
+							{
+								title : 'فروشنده معتبر',
+								icon : 'fas fa-award	',
+								iconColor : '#21AD93',
+								staticName : '',
+								upgrade : false,
+								status : response.data.is_valid ? 'بله' : 'خیر'
 							},
 							{
 								title : 'میزان امتیاز',
@@ -329,22 +337,14 @@
 								staticName : '',
 								upgrade : false,
 								status : response.data.reputation_score ? response.data.reputation_score + 'امتیاز' : 'بدون امتیاز'
-							},
+							},			
 							{
-								title : 'درخواست های خرید قابل مشاهده',
-								icon : 'fas fa-inbox',
-								iconColor : '#D8A679',
+								title : 'تعداد محصولات ثبت شده',
+								icon : 'fas fa-list-ol',
+								iconColor : '#FFAC58',
 								staticName : '',
 								upgrade : false,
-								status : self.checkRequest(response.data.accessable_buyAds)
-							},
-							{
-								title : 'فروشنده معتبر',
-								icon : 'fas fa-award	',
-								iconColor : '#21AD93',
-								staticName : '',
-								upgrade : false,
-								status : response.data.is_valid ? 'بله' : 'خیر'
+								status: (response.data.confirmed_products_count == 0) ?  'صفر' : response.data.confirmed_products_count + ' محصول'
 							},
 		/*					{
 								title : 'احتمال پاسخگویی به پیام',

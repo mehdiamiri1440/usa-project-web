@@ -139,7 +139,7 @@
                     مشاهده پروفایل
                 </a>
                 <a class="green-button hidden-xs" href="#" @click.prevent="openChat()">
-                    <span class="fa fa-comment"></span> ارسال پیام
+                    <span class="fas fa-comment-alt"></span> ارسال پیام
                 </a>
             </div>
 
