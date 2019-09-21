@@ -1,4 +1,8 @@
 <style scoped>
+	.main-content{
+		direction: rtl;
+	}
+
    	.green-button{
    		margin: 0;
    	}
@@ -66,7 +70,8 @@
     	font-size: 17px;
 
 		padding: 15px 10px 0;
-
+		
+		line-height: 1.618;
     }
 
     .box-main{

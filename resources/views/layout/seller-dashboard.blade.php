@@ -77,10 +77,10 @@
     <div id="app"></div>
     <div id="appLayouts"></div>
     <div id="appBuyer"></div>
-    <div id="appSeller">
+    <div id="appSeller" style="height: 100%">
 
         <header-dash-seller
-                logo="{{asset('assets/img/logo-incobac.png')}}"
+                logo="{{asset('assets/img/logo-incobac-white-red.png')}}"
                 storage="{{asset('storage/')}}"
                 defultimg="{{asset('assets/img/user-defult.png')}}"
                 transactroute="{{route('my-terminated-transaction-list')}}"

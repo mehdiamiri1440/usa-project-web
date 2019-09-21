@@ -77,9 +77,10 @@
 <div id="app"></div>
 <div id="appLayouts"></div>
 <div id="appSeller"></div>
-<div id="appBuyer">
+<div id="appBuyer" style="height: 100%">
+
    <header-dash-buyer
-            logo="<?php echo e(asset('assets/img/logo-incobac.png')); ?>"
+            logo="<?php echo e(asset('assets/img/logo-incobac-white-red.png')); ?>"
             storage="<?php echo e(asset('storage/')); ?>"
             defultimg="<?php echo e(asset('assets/img/user-defult.png')); ?>"
             transactroute="<?php echo e(route('my-terminated-transaction-list')); ?>"
@@ -92,6 +93,7 @@
             loading="<?php echo e(asset('assets/img/gif/prload.gif')); ?>"
             guide="<?php echo e(url('privacy_and_policy.vue')); ?>"
     ></header-dash-buyer>
+
     <main id="main">
         <router-view
                 name="buyer"
@@ -100,7 +102,7 @@
                 transRep="<?php echo e(url('dashboard/transaction-report')); ?>"
                 str="<?php echo e(asset('storage/')); ?>"
                 defimgitem="<?php echo e(asset('/assets/img/product.jpg')); ?>"
-                      defultimg="<?php echo e(asset('assets/img/user-defult.png')); ?>"
+                defultimg="<?php echo e(asset('assets/img/user-defult.png')); ?>"
         ></router-view>
     </main>
 </div>
