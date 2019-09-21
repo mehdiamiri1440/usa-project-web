@@ -77,10 +77,10 @@
     <div id="app"></div>
     <div id="appLayouts"></div>
     <div id="appBuyer"></div>
-    <div id="appSeller">
+    <div id="appSeller" style="height: 100%">
 
         <header-dash-seller
-                logo="<?php echo e(asset('assets/img/logo-incobac.png')); ?>"
+                logo="<?php echo e(asset('assets/img/logo-incobac-white-red.png')); ?>"
                 storage="<?php echo e(asset('storage/')); ?>"
                 defultimg="<?php echo e(asset('assets/img/user-defult.png')); ?>"
                 transactroute="<?php echo e(route('my-terminated-transaction-list')); ?>"

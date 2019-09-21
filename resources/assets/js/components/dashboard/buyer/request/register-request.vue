@@ -1,365 +1,225 @@
 <style scoped>
-    .col-sm-6 {
-        height: 120px;
-        float: right;
-    }
+    /*main style*/
 
-    #main {
-        margin-right: 250px;
-        margin-top: 65px;
+
+    .main-content{
+        max-width: 685px;
         background: #fff;
-    }
-
-    #main.little-main {
-        margin-right: 80px;
-    }
-
-    .image_company {
-        margin: 15px auto;
-
-    }
-
-    .sub-des {
-        font-size: 11px;
-    }
-
-
-    .rules-check {
-        font-weight: 800;
-    }
-
-    .rules-check {
-        font-weight: 800;
-    }
-
-    .main-content {
+        border-radius: 9px;
+        box-shadow: 0 0 10px #c5c5c5;
+        position: absolute;
+        left: calc(50% - 342px);
+        top: 65px;
+        margin-bottom: 50px;
+        min-height: 500px;
         direction: rtl;
-    }
-
-    .header-label {
-        display: block;
-        margin: 13px;
-        padding: 0;
-    }
-
-    .content-label {
-        font-weight: 400;
-    }
-
-    .roules-check-inside {
-        color: #00c569;
-    }
-
-    /*end main content style */
-    /*custom cods*/
-    .green-button {
-        margin: 15px 0;
-        display: inline-block;
-        background: #00c569;
-        color: #fff;
-        padding: 10px 35px;
-        border-radius: 3px;
-        text-align: center;
-        border: none;
-        transition: 300ms;
-    }
-
-    .width-full {
-        width: 100%;
-    }
-
-    .green-button:hover {
-        color: #fff;
-        background: #29A045;
-        transition: 300ms;
 
     }
 
-    .botton-inco {
-        margin: 15px 7px;
-        display: inline-block;
-        color: #313a43;
-        padding: 8px 35px;
-        border-radius: 3px;
-        text-align: center;
-    }
+    .wrapper-progressbar.title h2{
 
-    .botton-inco:hover {
-        color: #fff;
-    }
-
-    .font-big {
         font-size: 23px;
-        position: relative;
-        top: 3px;
-    }
-
-    .little_header {
-        width: 80px;
-    }
-
-    .little-main-header {
-        right: 80px;
-    }
-
-    .background_mob_sec {
-        position: fixed;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        top: 0;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: -1;
-        display: none;
-    }
-
-    .radio-wrapper {
-        margin: 10px;
-    }
-
-    .rules {
-        margin: 7px 0;
-        padding-bottom: 10px;
-    }
-
-    .rules > div, .kind_activity > div {
-        float: right;
-        overflow: hidden;
-        padding: 10px;
-        font-size: 15px;
-    }
-
-    .rules input {
-        cursor: pointer;
-        width: 23px;
-        height: 23px;
-        float: right;
-        position: absolute;
-        top: -5px;
-        right: 217px;
-        opacity: 0;
-    }
-
-    .rules input:checked + i {
-        background: #00c569;
-        color: #fff;
-        padding: 4px;
-        border: none;
-    }
-
-    .rules i {
-        background: none;
-        width: 23px;
-        height: 23px;
-        display: block;
-        position: absolute;
-        top: -5px;
-        right: 217px;
-        z-index: -1;
-        color: #808c9c;
-        border-radius: 50%;
-        padding: 3px 2px;
-        font-size: 14px;
-        border: 2px solid;
-    }
-    .title {
-        text-align: right;
-        padding: 13px 15px ;
-
-    }
-
-    .title h1 {
-
-        font-size: 18px;
         font-weight: bold;
+        text-align: center;
 
     }
 
+    .main-section-wrapper{
+        max-width: 420px;
+        margin: 50px auto 0;
+    }
+    .main-section-wrapper-full-width{
+         max-width: 100%;
+         margin: 25px auto 0;
+    }
+    /*progressbar styles*/
 
-
-    @media screen and (max-width: 992px) {
-        .right-header.desktop-header {
-            display: none;
-        }
-
-        .right-header.mobile-header {
-            display: block;
-            right: -300px;
-        }
-
-        .main-header, .little-main-header {
-            right: 0 !important;
-        }
-
-        #main, #main.little-main {
-            margin-right: 0 !important;
-        }
-
-        .post-contents-table {
-            width: 100%;
-        }
-
-        .copy-right {
-            display: none;
-        }
-
-        .close_menu {
-            display: none;
-        }
-
-        .close_menu_mob {
-            display: block;
-        }
-
-        .show-header button {
-            display: block;
-        }
-
-        .kind_user > div, .kind_activity > div {
-            float: none;
-
-        }
-
-        .img-profile .submit {
-            position: relative;
-            width: 100%;
-            margin: 25px auto;
-
-        }
-
-        .img-profile .submit label {
-            width: 40%;
-            padding: 12px 0;
-        }
-
-        .img-profile {
-            float: none;
-        }
+    .wrapper-progressbar{
+        position: relative;
+        padding: 15px;
+        border-bottom: 2px solid #00c569;
     }
 
-    @media screen and (max-width: 768px) {
-        .image-content-post, .contents-post {
-            width: 100%;
-            float: none;
-            margin: 10px 0;
-            padding: 0;
-        }
+    .progressbar-items{
+        display: flex;
+        justify-content: space-between;
+        direction: rtl;
+        position: relative;
+    }
 
-        .name-header-profile {
-            display: none;
-        }
-
-        .profile-menu-header {
-            padding: 7px;
-            padding-left: 36px;
-        }
-        .title {
-            text-align: center;
-
-        }
+    .progrees-item{
+        text-align: center;
+        color: #BEBEBE;
 
     }
 
-    @media screen and (max-width: 555px) {
-        .content-header {
+    .progrees-item p{
+        font-size: 12px;
+    }
+
+    .progrees-item span {
+        width: 20px;
+        height: 20px;
+        font-size: 13px;
+        background: #BEBEBE;
+        border-radius: 50px;
+        color: #fff;
+        display: inline-block;
+        margin-bottom: 6px;
+        padding-top: 4px;
+    }
+
+     .progrees-item.active-item{
+        color: #333;
+      
+    }
+
+    .progrees-item.active-item p{
+         font-weight: bold;
+    }
+     .progrees-item.active-item span {
+        background: #00C569;
+    }
+
+     .custom-progressbar{
+
+        display: block;
+        height: 3px;
+        background: #BEBEBE;
+        right: 40px;
+        left: 34px;
+        position: absolute;
+        top: 23px;
+        z-index: 0;
+
+     }
+     .custom-progressbar.active-item{
+        background: #00c569;
+        width: 0;
+        left: initial;
+     }
+
+     .custom-progressbar .progress-bar{
+        background: #00c569;
+        float: right;
+     }
+     .active-progress-wrapper{
+        position: absolute;
+
+        right: 37px;
+
+        left: 41px;
+     }
+     .active-progress-wrapper .custom-progressbar{
+
+        right: 0px;
+        left: 0px;
+        top: 8px !important;
+
+     }
+
+     @media screen and (max-width: 767px){
+        .main-section-wrapper{
+            max-width: 600px;
+        }
+
+        .main-content{
+            max-width: initial;
+            background: #fff;
+            border-radius: 0;
+            box-shadow: none;
+            position: inherit;
+            min-height: 500px;
+            direction: rtl;
+            transform: translate(0,0);
+
+        }
+
+        .progrees-item p{
             display: none;
         }
 
-    }
-
-    @media screen and (max-width: 345px) {
-        .sub-header a {
-            font-size: 10px;
-
+        .custom-progressbar{
+            right: 30px;
+            left: 34px;
         }
 
-        .sub-header {
+         .active-progress-wrapper{
+            
+            right: 20px;
+            left: 26px;
 
-            bottom: -44px;
+         }
 
-        }
-    }
+         .active-progress-wrapper .custom-progressbar{
+
+            right: 0px;
+            left: 0px;
+            top: 8px;
+
+         }
+     }
+
+  
 </style>
 
+
 <template>
-    <section class="main-content col-xs-12">
-        <div class="row">
-            <div  class="title col-xs-12">
+    <div>
+        <section class="main-content col-xs-12">
 
-                <div  class="col-xs-12 col-sm-4 pull-right">
+            <div class="row">
+                <header class="header-section">
+                    <div v-if="currentStep == 0 || currentStep == 1" class="wrapper-progressbar title">
 
-                    <h1>
-                        ثبت درخواست جدید
-                    </h1>
+                     <h2>
+                         ثبت درخواست خرید
+                     </h2>
 
-                </div> 
+                    </div>
+
+                    <div v-else class="wrapper-progressbar title">
+
+                        <h2>ثبت درخواست با موفقیت انجام شد</h2>
+
+                    </div>
+
+                </header>
+
+                <main class="main-section-wrapper">
+                    <StartRegisterRequest v-show="currentStep == 0" />
+                    <RegisterRequest v-show="currentStep == 1" />
+                    <FnishRegisterRequest v-show="currentStep == 2" />
+                </main>
 
             </div>
 
-            <div class="col-xs-12 main-column">
-                <div class="col-xs-12 col-sm-6">
-                    <label for="product-category">
-                        <span class="text-danger">*</span> دسته ی محصول
-                    </label>
+        </section>
 
-                    <select id="product-category" class="profile-select" v-on:change="loadSubCategoryList($event)">
-                        <option disabled selected>لطفا انتخاب کنید</option>
-                        <option v-for="category in categoryList"
-                                v-bind:value="category.id"
-                                v-text="category.category_name"></option>
-                    </select>
-                </div>
-
-                <div class="col-xs-12 col-sm-6">
-                    <label for="product-sub-category">
-                        <span class="text-danger">*</span> نام محصول
-                    </label>
-                    <select id="product-sub-category" class="profile-select" v-on:change="setCategoryId($event)">
-                        <option disabled selected>لطفا انتخاب کنید</option>
-                        <option v-for="category in SubCategoryList"
-                                v-bind:value="category.id"
-                                v-text="category.category_name"></option>
-                    </select>
-
-                    <span v-if="errors.category_id" class="text-danger">فیلد دسته ی محصول الزامی است</span>
-                </div>
-                <div class="col-xs-12 col-sm-6">
-                    <label>
-                        نوع محصول <span class="sub-des">(مثال:مضافتی)</span> </label>
-
-                    <input type="text" placeholder="نوع محصول" v-model="buyAd.name">
-
-                    <span v-if="errors.name" class="text-danger">{{ errors.name[0] }}</span>
-                </div>
-
-                <div class="col-xs-12 col-sm-6">
-                    <label>
-                        <span class="text-danger">*</span> میزان نیازمندی <span class="sub-des">(کیلوگرم)</span>
-                    </label>
-                    <input type="text" placeholder="میزان نیازمندی" v-model="buyAd.requirement_amount">
-                    <span v-if="errors.requirement_amount" class="text-danger"
-                          v-text="errors.requirement_amount[0]"></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3 col-md-offset-9 col-xs-12">
-            <input class="green-button width-full" value="ثبت درخواست" type="button" @click="submitBuyAd"
-                   :disabled="disableSubmit === true">
-        </div>
-    </section>
+    </div>
 </template>
+
 <script>
-    import BuyAdFiles from '../../upload-image'
     import {eventBus} from "../../../../router/dashboard_router";
+    import StartRegisterRequest from './register-request-steps/start-register-request'
+    import RegisterRequest from './register-request-steps/register-request-content'
+    import FnishRegisterRequest from './register-request-steps/fnish-register-request'
 
     export default {
         components: {
-            BuyAdFiles
-        },
-        data: function () {
+             StartRegisterRequest,
+            RegisterRequest,
+            FnishRegisterRequest
+        },   
+        data: function () {         
             return {
-                errors: '',
+                currentStep: 0,                
+                errors: {
+                    categorySelected : '',
+                    category_id : '',
+                    requirement_amount : '',
+                    name : ''
+                },
                 currentUser: {
                     profile: '',
                     user_info: '',
@@ -379,9 +239,9 @@
                     'requirement_amount',
                     'category_id',
                 ],
+                categorySelected : '',
                 categoryList: '',
-                SubCategoryList: '',
-                categorySelected: '',
+                subCategoryList: '',
                 cities: '',
                 buyAdFiles: [],
                 popUpMsg: '',
@@ -406,13 +266,30 @@
             },
             loadSubCategoryList: function (e) {
                 e.preventDefault();
-
                 var categoryId = $(e.target).val();
+                this.categorySelected = categoryId;
 
                 axios.post('/get_category_list', {
                     parent_id: categoryId,
                 })
-                    .then(response => (this.SubCategoryList = response.data.categories));
+                .then(response => (this.subCategoryList = response.data.categories));
+
+            },
+            formValidator:function(){
+                if (!this.categorySelected) {
+                    this.errors.categorySelected = "دسته بندی الزامی است"
+                }
+                if (!this.buyAd.category_id) {
+                    this.errors.category_id = "نام محصول الزامی است"
+                }
+                
+                this.nameValidator(this.buyAd.name);
+
+                this.requirementAmountValidator(this.buyAd.requirement_amount);
+
+                if (!this.errors.categorySelected && !this.errors.category_id && !this.errors.name && !this.errors.requirement_amount) {
+                    this.submitBuyAd();
+                }
             },
             submitBuyAd: function () {
                 this.errors = '';
@@ -430,28 +307,31 @@
 
                             eventBus.$emit('submitSuccess', self.popUpMsg);
 
-                            $('#custom-main-modal').modal('show');
+                            // $('#custom-main-modal').modal('show');
 
                             eventBus.$emit('submitingEvent', false);
 
                             self.registerComponentStatistics('buyAd-register', 'buyAd-registered-successfully', 'buyAd-registered-successfully');
 
-                            setTimeout(function () {
-                                location.reload(true);
-                            }, 3000);
+                            self.goToStep(2);
+
                         }
                         eventBus.$emit('submitingEvent', false);
+
                     })
                     .catch(function (err) {
+
                         self.errors = err.response.data.errors;
 
                         eventBus.$emit('submitingEvent', false);
 
                         self.registerComponentExceptions('validation error in buyAd-request');
+
                     });
 
             },
             getBuyAdFormFields: function () {
+
                 let formData = new FormData();
                 let cnt = this.buyAdFields.length;
 
@@ -459,6 +339,7 @@
                     formData.append(this.buyAdFields[i], this.toLatinNumbers(this.buyAd[this.buyAdFields[i]]));
                 }
                 return formData;
+                
             },
             setCategoryId: function (e) {
                 e.preventDefault();
@@ -490,7 +371,7 @@
                     .replace(/[۰-۹]/g, function (w) {
                         return numDic[w];
                     });
-            },
+            }, 
             registerComponentStatistics: function (categoryName, actionName, labelName) {
                 gtag('event', actionName, {
                     'event_category': categoryName,
@@ -502,7 +383,46 @@
                     'description': description,
                     'fatal': fatal
                 });
-            }
+            },
+            goToStep: function (step) {
+                this.currentStep = step;
+                this.scrollToTop();
+            },
+            isOsIOS: function () {
+                var userAgent = window.navigator.userAgent.toLowerCase(),
+                    safari = /safari/.test(userAgent),
+                    ios = /iphone|ipod|ipad/.test(userAgent);
+
+                return ios;
+            }, 
+            scrollToTop() {
+                window.scrollTo(0, 0);
+            },
+            nameValidator:function(name){
+                if (!name) {
+
+                     this.errors.name = '';
+
+                } else if (!this.validateRegx(name, /^[\u0600-\u06FF\s]+$/)) {
+                    this.errors.name = 'نوع محصول فرمت مناسبی نیست';
+                }
+            },
+            requirementAmountValidator: function (number) {
+                this.errors.stock = '';
+                var standardNumber = this.toLatinNumbers(number);
+                if (standardNumber == '') {
+                    this.errors.requirement_amount = 'فیلد حد اکثر قیمت الزامی است';
+                }else if (!this.validateRegx(standardNumber, /^\d*$/)) {
+                    this.errors.requirement_amount = 'لطفا عدد وارد کنید';
+                }
+            
+            },  
+            validateRegx: function (input, regx) {
+                return regx.test(input);
+            },
+            reLoadPage(){
+                location.reload(true);
+            },
         },
         mounted() {
             this.init();

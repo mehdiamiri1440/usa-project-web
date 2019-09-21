@@ -77,9 +77,10 @@
 <div id="app"></div>
 <div id="appLayouts"></div>
 <div id="appSeller"></div>
-<div id="appBuyer">
+<div id="appBuyer" style="height: 100%">
+
    <header-dash-buyer
-            logo="{{asset('assets/img/logo-incobac.png')}}"
+            logo="{{asset('assets/img/logo-incobac-white-red.png')}}"
             storage="{{asset('storage/')}}"
             defultimg="{{asset('assets/img/user-defult.png')}}"
             transactroute="{{route('my-terminated-transaction-list')}}"
@@ -92,6 +93,7 @@
             loading="{{asset('assets/img/gif/prload.gif')}}"
             guide="{{url('privacy_and_policy.vue')}}"
     ></header-dash-buyer>
+
     <main id="main">
         <router-view
                 name="buyer"

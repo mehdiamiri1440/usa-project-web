@@ -12,16 +12,26 @@
         text-align: center;
     }
 
-    .header-menu i.fa {
+    .header-menu i {
         margin: 5px;
     }
+
 </style>
 <template>
     <div>
         <div class="header-menu">
             <ul class="list-unstyled">
+<!--                 <li class="list-item">
+                  <router-link
+                    :class="{'active' : this.activeElement === 0}"
+                    :to="{ name : 'status' }"
+                  >
+                    <span>داشبورد</span> 
+                    <i class="fa fa-chart-line"></i>
+                  </router-link>
+                </li> -->
                 <li class="list-item">
-                    <router-link :class="{'active' : this.activeElement === 0}" :to="{ name : 'profileBasic' }">
+                    <router-link  :to="{ name : 'profileBasic' }">
                         <span>ویرایش پروفایل</span>
                         <i class="fa fa-user" aria-hidden="true"></i>
                     </router-link>
