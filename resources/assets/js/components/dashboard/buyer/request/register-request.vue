@@ -283,8 +283,8 @@
                     this.errors.category_id = "نام محصول الزامی است"
                 }
                 
-                this.nameValidator(this.buyAd.name);
-
+                // this.nameValidator(this.buyAd.name);
+                console.log(this.nameValidator(this.buyAd.name));
                 this.requirementAmountValidator(this.buyAd.requirement_amount);
 
                 if (!this.errors.categorySelected && !this.errors.category_id && !this.errors.name && !this.errors.requirement_amount) {
@@ -399,11 +399,12 @@
                 window.scrollTo(0, 0);
             },
             nameValidator:function(name){
+                this.toLatinNumbers(name);
                 if (!name) {
 
                      this.errors.name = '';
 
-                } else if (!this.validateRegx(name, /^[\u0600-\u06FF\s]+$/)) {
+                } else if (!this.validateRegx(name, /^[\u0600-\u06FF\s\d]+$/)) {
                     this.errors.name = 'نوع محصول فرمت مناسبی نیست';
                 }
             },
