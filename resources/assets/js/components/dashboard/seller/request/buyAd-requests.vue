@@ -1,4 +1,8 @@
 <style scoped>
+     ul{
+        overflow: hidden;
+     }
+
      .wrapper_no_pro {
         text-align: center;
         font-size: 23px;
@@ -61,7 +65,7 @@
 
     }
 
-    .message-list .text-red {
+    .text-red {
         color: #e41c38;
     }
 
@@ -75,6 +79,112 @@
 
         font-size: 18px;
         font-weight: bold;
+
+    }
+
+    .list-placeholder-wrapper{
+
+        border : 1px solid rgb(221, 221, 221);
+
+        position: relative;
+
+        overflow: hidden;
+
+        border-radius: 0 0 3px 3px;
+
+        margin-bottom: 20px;
+
+        border-top: none;
+
+        background: #f6f6f6;
+    }
+
+    .list-placeholder-wrapper ul{
+        margin: 0;
+
+        overflow: hidden;
+
+        border:none;
+    }
+
+    .list-placeholder-wrapper li{
+
+        background: none;
+
+        -webkit-filter: blur(8px);
+
+        filter: blur(8px);
+
+    }
+
+
+    .list-placeholder::after{
+
+        position: absolute;
+
+        width: 100%;
+
+        height: 100%;
+
+        content: "";
+
+        left: 0;
+
+        top: 0;
+
+    }
+
+    .list-placeholder-wrapper .link{
+
+        position: absolute;
+
+        width: 100%;
+
+        text-align: center;
+
+        top: calc(50% - 82px);
+
+        padding: 15px;
+
+    }
+
+    .list-placeholder-wrapper .link-wrapper-content{
+
+        max-width: 500px;
+
+        background: white;
+
+        padding: 15px;
+
+        border-radius: 4px;
+
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+
+        margin: 0 auto;
+
+    }    
+
+    .list-placeholder-wrapper .link p{
+
+        font-size: 19px;
+
+        font-weight: bold;
+
+        color: #333;
+
+        margin-bottom: 4px;
+
+        line-height: 1.618;
+
+    }
+
+    .list-placeholder-wrapper .link a{
+
+        font-size: 14px;
+
+        font-weight: bold;
+
+        margin-top: 4px;
 
     }
 
@@ -159,17 +269,54 @@
                             </p>
                         </a>
                     </li>
-
-                    <li class="message-list col-xs-12">
-                        <p>
-                            سقف تعداد درخواست های خریدی که به شما نمایش داده میشود
-                            <span class="text-red"> 5 </span>
-                            است
-                        </p>
-
-                        <a class="green-button" href="/pricing">تعرفه ها</a>
-                    </li>
                 </ul>
+                <div class="list-placeholder-wrapper">
+
+                    <ul class="list-placeholder">
+                        <li v-for="item in 3" class="list-group-item  col-xs-12">
+                            <p  class="list-title col-sm-3 col-xs-12">
+                                <span>میوه</span> 
+                                <span> | </span>
+                                <span>خرما</span> 
+                                <span> | زاهدی</span>
+                            </p> 
+
+                            <p class="needs col-sm-4 col-xs-12">
+                                <span  class="static-content">
+                                میزان نیازمندی :
+                            </span>
+                            <span>1000</span>
+                            <span class="static-content">
+                                کیلوگرم
+                            </span>
+                            </p>
+
+                            <p class="list-time col-sm-2 col-xs-12">۱۲  آبان , ۱۳۹۷</p>
+
+                            <a href="" class="col-sm-3 col-xs-12">
+                                <p  class="detail-success">
+                                    <span class="fas fa-comment-alt"></span> پیام به خریدار
+                                </p>
+                            </a>
+
+                        </li>
+                    </ul>
+                    
+                    <div class="link">
+                        <div class="link-wrapper-content">
+                               <p>
+                             سقف تعداد درخواست های خریدی که به شما نمایش داده میشود 
+                             <span class="text-red">5</span>
+                              است 
+                                </p>
+                             <router-link class="green-button" :to="{ name : 'dashboardPricingTable' }">
+                                مشاهده تعرفه ها
+                             </router-link>
+                        </div>  
+                    </div>
+
+
+                </div>
                </div>
 
             </div>
