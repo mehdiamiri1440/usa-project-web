@@ -74,11 +74,11 @@
                             <div class="col-xs-12">
                                 <div v-if="currentUser.user_info">
                                     <a href="/dashboard" class="green_bot edit" v-if="currentUser.user_info.id == profileOwner.user_info.id">
-                                    <i class="fa fa-pencil"></i> 
-                                    ویرایش پروفایل 
+                                    <i class="fa fa-pencil-alt"></i>
+                                    ویرایش پروفایل
                                 </a>
                                 </div>
-                                
+
                                 <a href="#" class="green_bot " @click="copyProfileLinkToClipBoard"><i
                                             class="fa fa-whatsapp"></i> اشتراک در واتس آپ </a>
                             </div>
@@ -100,10 +100,10 @@
 
                                 <div class="back_page col-xs-12 col-sm-4">
                                         <a href="/dashboard" class="green_bot edit" v-if="currentUser.user_info && currentUser.user_info.id == profileOwner.user_info.id">
-                                        <i class="fa fa-pencil"></i>
-                                        ویرایش پروفایل 
+                                        <i class="fa fa-pencil-alt"></i>
+                                        ویرایش پروفایل
                                     </a>
-                                    
+
                                     <button class="btn btn-copy" @click="copyProfileLinkToClipBoard"
                                             :value="copyLinkText"> <i :class="copyLinkClass"
                                                                                         aria-hidden="true"></i>  {{copyLinkText}}</button>
@@ -133,7 +133,7 @@
                                             :value="copyLinkText"> <i :class="copyLinkClass"
                                                                                         aria-hidden="true"></i> {{copyLinkText}} </button>
                                     <a href="#" class="green_bot edit" @click="copyProfileLinkToClipBoard"><i
-                                                class="fa fa-pencil"></i> ویرایش پروفایل </a>
+                                                class="fa fa-pencil-alt"></i> ویرایش پروفایل </a>
                                 </div>
                                 <h1 class="content_title col-xs-12 col-sm-8">{{profileOwner.user_info.first_name + ' '
                                     + profileOwner.user_info.last_name}}</h1>
@@ -173,7 +173,7 @@
                             showProfileOwnerDescription($event)" href="">
                             <div class="inside-links">
 
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> توضیحات من
+                                <i class="fa fa-pencil-alt-square-o" aria-hidden="true"></i> توضیحات من
 
                             </div>
                         </a>

@@ -180,67 +180,67 @@
 <!-- 		 <h2 class="title-contents">
 		 	ورود به سامانه
 		 </h2>
- -->	
+ -->
    					<p class="error-message">
 			       		<span v-if="$parent.showMsg"  v-text="$parent.step1.msg"></span>
 			       	</p>
 		 <div class="form-contents col-xs-12">
 
 		     	<div class="row">
-		     		
+
 			     	<label for="phone-number">
- 						شماره موبایل 
+ 						شماره موبایل
  			     	</label>
-		
+
 			     	<div class="input-wrapper phone-number-wrapper">
-			     		<input 
-			     		v-model="phoneNumber" 
-			     		:class="{'error' : $parent.errors.phone , 'active' : phoneNumber.length >= 11}" 
-			     		id="phone-number" 
+			     		<input
+			     		v-model="phoneNumber"
+			     		:class="{'error' : $parent.errors.phone , 'active' : phoneNumber.length >= 11}"
+			     		id="phone-number"
 			     		type="tel"
 			     		class="dire"
 			     	    placeholder="شماره موبایل"
 			  			pattern="[0-9]*"
 			     		>
 
-			     		<i class="fa fa-phone-square"></i>
+			     		<i class="fa fa-phone-square-alt"></i>
 			     	</div>
-			       	
+
 			       	<p class="error-message">
 			       		<span  v-if="$parent.errors.phone" v-text="$parent.errors.phone[0]"></span>
 
-			       		
+
 			       	</p>
 
 
 			       	<label for="phone-number">
 			     		کلمه عبور
 			     	</label>
-	
+
 			     	<div class="input-wrapper phone-number-wrapper">
-			     		<input 
-			     		v-model="password" 
-			     		:class="{'error' : $parent.errors.password , 'active' : password.length}" 
-			     		id="password" 
+			     		<input
+			     		v-model="password"
+			     		:class="{'error' : $parent.errors.password , 'active' : password.length}"
+			     		id="password"
 			     		type="password"
 			     		class="dire"
 			     	    placeholder="کلمه عبور را وارد کنید"
-			 
+
 			     		>
 
 			     		<i class="fa fa-lock"></i>
 
 			     	</div>
-			       	
+
 			       	<p class="error-message">
 			       		<span  v-if="$parent.errors.password" v-text="$parent.errors.password[0]"></span>
 			       	</p>
 
 			        <a href="#" class="text-green" @click.prevent="$parent.goToStep(2)"> رمز عبور خود را فراموش کرده اید؟</a>
 
-			        <button 
+			        <button
 			            class="submit-button disabled "
-			     		:class="{'active' : phoneNumber.length >= 11 && password.length}" 
+			     		:class="{'active' : phoneNumber.length >= 11 && password.length}"
 			            @click.prevent="doLogin()" >
 
 						ورود
@@ -255,7 +255,7 @@
 							</span>
 							<img src="./img/banner-arrow.png">
 						</p>
-							
+
 						<a href="/register" class="register-button "  >
 
 							ثبت نام در سامانه
@@ -266,16 +266,16 @@
 
 		     </div>
 		</div>
-		
+
     </div>
 </template>
 
-<script> 
+<script>
 
 	export default{
 		data:function(){
 			return{
-				phoneNumber : this.$parent.step1.phone,	
+				phoneNumber : this.$parent.step1.phone,
 				password :  this.$parent.step1.password
 			}
 		},
@@ -284,11 +284,11 @@
 				this.$parent.doLogin();
 
 		 	 },
-		 	
+
 		},
 	    watch: {
 	  	  'phoneNumber': function(value) {
-	  	  	
+
 	  	  	this.$parent.errors.phone = '';
 
 	  	    if(this.phoneNumber.length >= 11){
@@ -303,8 +303,8 @@
 
 	      }
 	    },
-	    mounted(){	
-	    	
+	    mounted(){
+
 	    	if (this.$parent.isOsIOS()) {
 	    		$('#phone-number').attr('type','text')
 	    	}

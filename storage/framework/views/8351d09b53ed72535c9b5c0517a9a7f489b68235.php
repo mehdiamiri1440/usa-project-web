@@ -83,7 +83,7 @@
                         </thead>
                         <tbody>
 
-                        
+
                         <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse" data-target="#free-package">
                             <td>
                                 <div class="main-table-item">
@@ -118,9 +118,9 @@
                             </td>
 
                         </tr>
-                        
 
-                        
+
+
                         <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse" data-target="#one-package">
                             <td>
                                 <div class="main-table-item">
@@ -158,10 +158,10 @@
                             </td>
 
                         </tr>
-                        
 
 
-                        
+
+
                         <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse" data-target="#three-package">
                             <td>
                                 <div class="main-table-item">
@@ -172,7 +172,7 @@
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span class="red-check"><i class="fa fa-close"></i></span>
+                                    <span class="red-check"><i class="fa fa-times"></i></span>
                                 </div>
                             </td>
                             <td>
@@ -198,9 +198,9 @@
                             </td>
 
                         </tr>
-                        
 
-                        
+
+
                         <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse" data-target="#four-package">
                             <td>
                                 <div class="main-table-item">
@@ -211,7 +211,7 @@
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span class="red-check"><i class="fa fa-close"></i></span>
+                                    <span class="red-check"><i class="fa fa-times"></i></span>
                                 </div>
                             </td>
                             <td>
@@ -237,9 +237,9 @@
                             </td>
 
                         </tr>
-                        
 
-                        
+
+
                         <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse" data-target="#five-package">
                             <td>
                                 <div class="main-table-item">
@@ -277,10 +277,10 @@
                             </td>
 
                         </tr>
-                        
 
 
-                        
+
+
                         <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse" data-target="#six-package">
                             <td>
                                 <div class="main-table-item">
@@ -291,17 +291,17 @@
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span class="red-check"><i class="fa fa-close"></i></span>
+                                    <span class="red-check"><i class="fa fa-times"></i></span>
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span class="red-check"><i class="fa fa-close"></i></span>
+                                    <span class="red-check"><i class="fa fa-times"></i></span>
                                 </div>
                             </td>
                             <td>
                                 <div class="main-table-item">
-                                    <span class="red-check"><i class="fa fa-close"></i></span>
+                                    <span class="red-check"><i class="fa fa-times"></i></span>
                                 </div>
                             </td>
                             <td>
@@ -317,9 +317,9 @@
                             </td>
 
                         </tr>
-                        
 
-                        
+
+
                         <tr class="collapsed" onclick="trElement(this)" data-toggle="collapse" data-target="#seven-package">
                             <td>
                                 <div class="main-table-item">

@@ -411,7 +411,7 @@
                                        href="#"
                                        class="edit-image"
                                        @click.prevent="file.active || file.success || file.error === 'compressing' ? false :  onEditFileShow(file)"><i
-                                            aria-hidden="true" class="fa fa-pencil"></i></a>
+                                            aria-hidden="true" class="fa fa-pencil-alt"></i></a>
                                     <a class="delete" href="#" @click.prevent="$refs.upload.remove(file)"><i
                                             aria-hidden="true" class="fa fa-trash "></i></a>
                                 </div>
