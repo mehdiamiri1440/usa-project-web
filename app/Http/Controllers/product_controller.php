@@ -822,7 +822,7 @@ class product_controller extends Controller
             'max_sale_price' => 'required|integer|min:1',
             'min_sale_amount' => 'required|integer|min:1',
             'stock' => 'required|integer:min:1',
-            'description' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u',
+//            'description' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u',
         ]);
         
         $product_id = $request->product_id;
@@ -837,7 +837,7 @@ class product_controller extends Controller
                     'max_sale_price' => $request->max_sale_price,
                     'min_sale_amount' => $request->min_sale_amount,
                     'stock' => $request->stock,
-                    'description' => $request->description,
+//                    'description' => $request->description,
                 ];
 
                 DB::table('products')

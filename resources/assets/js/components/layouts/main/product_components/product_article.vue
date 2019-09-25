@@ -655,6 +655,8 @@
                     max_sale_price: maxSalePrice,
                     min_sale_amount: minSaleAmount,
                 };
+                
+                console.log('Description:' + description);
 
                 if (description !== '') {
                     request.description = description;
