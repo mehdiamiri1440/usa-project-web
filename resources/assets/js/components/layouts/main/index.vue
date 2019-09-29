@@ -4,6 +4,21 @@
         background: #f9f9f9;
     }
 
+    #main-content {
+        margin-bottom: -60px;
+    }
+
+    .owl-dots {
+        position: absolute;
+        left: 50px;
+        z-index: 1;
+        padding-top: 18px;
+        display: block;
+        text-align: center;
+        width: calc(100% - 100px);
+        bottom: -10px;
+    }
+
    .owl-carousel .owl-stage-outer{
         padding-bottom: 15px;
     }
@@ -67,6 +82,45 @@
         box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 
     }
+
+    .request-carousel-content{
+        padding: 5px 15px 20px;
+    }
+
+    .request-carousel-content p{
+
+        text-align: center;
+        font-weight: bold;
+        margin-top: 10px;
+        direction: rtl;
+    }
+
+    .request-carousel-content a{
+
+        font-size: 14px;
+        font-weight: bold;
+        width: initial;
+        direction: rtl;
+        padding: 4px 20px 7px 15px;
+
+    }
+
+    .request-carousel-content a:before{
+
+        position: relative;
+        top: 2px;
+        left: 5px;
+     
+    }
+
+    .request-carousel-content div{
+
+        text-align: center;
+
+    }
+
+
+
 </style>
 <style scoped>
     
@@ -77,7 +131,9 @@
         line-height: 1.618
 
     }
-
+    p{
+        font-size: 14px;
+    }
     h1{
 
         font-size: 26px;
@@ -110,13 +166,8 @@
     .title-box h3{
         font-size: 17px;
         font-weight: bold;
-        color: #333;
+        color: #4b4b4b;
         margin-bottom: 12px;
-    }
-
-    .title-box p{
-        font-size: 14px;
-
     }
 
     .title-box a{
@@ -162,7 +213,7 @@
     }
 
     .section-wrapper{
-        margin-top: 10px;
+        margin-top: 30px;
     }
 
 
@@ -302,12 +353,15 @@
 
 /*sub navigation styles*/
 
-    
+.requests-carousel {
+    z-index: 0;
+}
+
 .secondary-nav-wrapper{
 
         background: #fff;
 
-        color: #333;
+        color: #4b4b4b;
 
         -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.07);
 
@@ -473,11 +527,15 @@ nav li > ul {
 }
 
 nav > ul > li {
- opacity:1; 
+ 
+   opacity:1; 
 
- direction: ltr;
+   padding: 0;
 
- transition: 500ms;
+   direction: ltr;
+
+   transition: 500ms;
+
 }
 
 li.active > ul {
@@ -564,7 +622,9 @@ li > ul > li.active > ul > li{
         text-align: center;
         line-height: 1.618;
         font-weight: bold;
+        padding: 0;
         padding-top: 5px;
+
     }
 
     .list-group-item {
@@ -725,7 +785,7 @@ li > ul > li.active > ul > li{
 
         font-weight: bold;
 
-        color: #333;
+        color: #4b4b4b;
 
         margin-bottom: 4px;
 
@@ -754,6 +814,194 @@ li > ul > li.active > ul > li{
     }
     .products-contents{
         padding:0;
+    }
+
+
+
+
+
+
+    /*services section*/
+
+
+    #services-section{
+
+        background: #ECECEC;
+
+        text-align: center;
+
+    }  
+
+    #services-section h3{
+
+        margin-top: 24px;
+
+        font-size: 23px;
+
+        font-weight: bold;
+
+        color: #4b4b4b;
+    }
+
+    .service-boxs-wrapper{
+        padding: 20px 15px 45px;
+    }
+
+    .box-image{
+
+      height: 85px;  
+
+    }
+
+    .box-image img{
+
+        width: initial;
+
+        height: 100%; 
+
+    }
+
+    .service-box{
+        padding: 0;
+        position: relative;
+        top: 0;
+        transition: 200ms;
+    }  
+
+    .service-box:hover{
+        top: -5px;
+        transition: 200ms;
+        box-shadow: 0 6px 10px rgba(0,0,0,0.2)
+    }
+
+    .service-box a{
+        padding: 15px;
+        display: block;
+        color: #4b4b4b;
+       
+    }
+    .service-box a h4{
+
+        font-size: 17px;
+
+        font-weight: bold;
+
+    }
+
+    .service-box p{
+
+        margin-top: 5px;
+
+    }
+
+
+
+    /*links section styles */
+
+    #benefit-links{
+
+        background: #fff;
+        
+        text-align: right;
+        padding-top: 
+    }
+
+    .links-title{
+
+        color: #777;
+
+        font-size: 16px;
+
+        font-weight: bold;
+
+        margin-top: 24px;
+
+    }
+
+    .benefit-links-item{
+        line-height: 1.4;
+        margin-top: 6px;
+        direction: rtl;
+        margin-bottom: 50px;
+    }
+
+    .benefit-links-item h4{
+        line-height: 1.4;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .benefit-links-item a{
+        font-size: 12px;
+        color: #BDC4CC;
+        transition: 200ms;
+    }
+
+    .benefit-links-item a:hover{
+        color: #00c569;
+        transition: 200ms;
+
+    }   
+
+    @media screen and (max-width: 767px){
+
+        .search-input{
+
+            width: 100%;
+
+            margin-bottom: 15px;
+
+            min-width: initial;
+
+            overflow: hidden;
+        }
+
+        .search-input button {
+
+            padding: 12px 15px 14px;
+
+        }
+
+        #intro a.green-button{
+
+            margin: 0 auto;
+
+            float: none !important;
+
+        }
+        .secondary-nav-wrapper{
+            padding: 0;
+        }
+        .category-item{
+            padding: 7px 15px 13px;
+        }
+
+        .category-item i::before {
+
+            position: relative;
+            right: 1px;
+            top: 4px;
+
+        }
+
+        li.active > ul {
+
+            left: 0;
+
+            right: 0;
+
+        }
+
+        .product-link.green-button{
+
+            margin: 15px 0 0;
+
+        }   
+        .service-box{
+            margin-top: 30px;
+        }
+
     }
 </style>
 
@@ -786,8 +1034,8 @@ li > ul > li.active > ul > li{
                               animateClass="animated"
                               :begin="false" 
                             >
-                              <h1 class=" intro-site-title" data-wow-delay="1.2s">اینکوباک | سامانه خرید و فروش عمده محصولات
-                                    کشاورزی
+                              <h1 class=" intro-site-title" data-wow-delay="1.2s">
+                                اینکوباک | بازار خرید و فروش عمده محصولات کشاورزی 
                               </h1>
                             </u-animate>
 
@@ -803,8 +1051,9 @@ li > ul > li.active > ul > li{
                             >
                         
 
-                              <h2 class="intro-site-title" data-wow-delay="1.2s">اینکوباک | سامانه خرید و فروش عمده محصولات
-                                        کشاورزی
+                              <h2 class="intro-site-title" data-wow-delay="1.2s">
+                                ارتباط مستقیم با خریداران و فروشندگان دست اول محصولات کشاورزی
+
                               </h2>
 
                           </u-animate>
@@ -824,10 +1073,13 @@ li > ul > li.active > ul > li{
 
                                 <input type="text" placeholder="محصول مورد نظر خود را جستجو کنید"
                                        v-model="mainSearchBoxText">
-                                <button class="fa fa-search" @click="search">
-                                    جستجو
+                                <button class="hidden-sm hidden-md hidden-lg fa fa-search" @click="search">
+                                
                                 </button>
 
+                                <button class="hidden-xs fa fa-search" @click="search">
+                                    جستجو
+                                </button>
                             </div>
 
                            <a href="/product-list" class=" green-button "> لیست محصولات</a>
@@ -843,11 +1095,9 @@ li > ul > li.active > ul > li{
         Secondary Nav SECTION
         ============================== -->
         <section class="secondary-nav-wrapper container-fluid">
-
-
-       
-                <nav class=" container">
-
+        <div class="container">
+                <nav class=" row">
+                   
                     <ul class="menu-wrapper list-inline">
                         <li
                             v-if="categoryList.length"
@@ -859,12 +1109,12 @@ li > ul > li.active > ul > li{
                                 <h2>
                                    <a href="#" class="category-item" >
                                     <i class="fa fa-angle-down "></i>
-                                    <span v-text="category.category_name"></span>
+                                    {{category.category_name}}
                                    </a>
                                 </h2>
                                 <ul class="sub-categories-wrapper list-inline col-xs-12">
 
-                                    <li  v-for="subCategory in category.subcategories" class="col-xs-2 pull-right">
+                                    <li  v-for="subCategory in category.subcategories" class="col-xs-4 col-sm-3 col-md-4 pull-right">
 
                                         <a 
                                          class="sub-category-item"
@@ -887,7 +1137,7 @@ li > ul > li.active > ul > li{
                         </li>
                     </ul>
                 </nav> 
-
+            </div>
        </section>
         <!-- =========================
         Request SECTION
@@ -897,27 +1147,7 @@ li > ul > li.active > ul > li{
             <div class=" container"> 
                 <div class="row">
                     
-                    <div class=" col-xs-12 col-sm-4 col-md-3 pull-right ">
-
-                        <div class="title-box box-content">
-                            <h3>
-
-                              ثبت نام به عنوان خریدار
-
-                            </h3>
-                            <p>
-                                لورم ایپسوم متن ساختگی در زمینه طراحی صفحات وب ومحتوای اینترنتی لورم ایپسوم متن ساختگی در زمینه طراحی
-                            </p>
-                            <a class="green-button" href="#">
-                                
-                                ثبت نام
-
-                            </a>
-                        </div>
-
-                    </div>
-
-                    <div class=" col-xs-12 col-sm-8 col-md-9">
+                    <div class=" col-xs-12 col-md-9">
                         
                             <div class="title-section col-xs-12">
                                   <div class="row">
@@ -932,8 +1162,8 @@ li > ul > li.active > ul > li{
                                   </div>
                             </div>
 
-                            <div class="col-xs-12 requests-contents box-content ">
-                                <div class="row">
+                            <div class="col-xs-12  requests-contents box-content ">
+                                <div class="row hidden-xs ">
                                      <ul class="list-unstyled">
                                         <li v-for="buyAd in 4" class="list-group-item  col-xs-12">
                                             <p class="list-title col-sm-3 col-xs-12">
@@ -984,6 +1214,40 @@ li > ul > li.active > ul > li{
                                     </ul>
                                 </div>
                             </div>
+
+                        <div style="padding:0" class="requests-carousel hidden-sm hidden-md hidden-lg  col-xs-12 ">
+
+                            <div class="row">
+                                    <div class="owl-carousel">  
+                                         <RequestCarousel  v-for="(item, index) in 5" :key="index"  />
+                                    </div>
+                            </div>
+
+                        </div>
+
+                
+
+
+                    </div>
+
+                    <div class=" col-xs-12 col-md-3 pull-right ">
+
+                        <div class="title-box box-content">
+                            <h3>
+
+                              ثبت نام  خریداران 
+
+                            </h3>
+                            <p>
+                                لورم ایپسوم متن ساختگی در زمینه طراحی صفحات وب ومحتوای اینترنتی لورم ایپسوم متن ساختگی در زمینه طراحی
+                            </p>
+                            <a class="green-button" href="#">
+                                
+                                ثبت نام
+
+                            </a>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -995,13 +1259,45 @@ li > ul > li.active > ul > li{
         <section id="product-section" class="section-wrapper container-fluid"> 
             <div class=" container"> 
                 <div class="row">
-                    
-                    <div class=" col-xs-12 col-sm-4 col-md-3 pull-right ">
+                    <div class=" col-xs-12 col-md-9">
+                        
+                            <div class="title-section col-xs-12">
+                                  <div class="row">
+                                    
+                                    <h3>
+                                        
+                                      آخرین محصولات ثبت شده
+
+                                    </h3>
+                                    <hr/>
+
+                                  </div>
+                            </div>
+
+                            <div class="col-xs-12 products-contents ">
+                                <div class="row">
+                                    <div class="owl-carousel">
+
+                                          <ProductCarousel
+                                         v-for="(items , index) in 10"
+                                         :key="index"
+                                         img="https://www.incobac.com/storage/products/9sPZCpAD5S4QJWSxoHjKXbJHXp33okkRavn6HoZP.jpeg"
+                                         title="خرمای مضافتی اصل"
+                                         price="3000"
+                                         link='/'
+                                         /> 
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class=" col-xs-12 col-md-3 pull-right ">
 
                         <div class="title-box box-content">
                             <h3>
 
-                                ثبت نام به عنوان فروشنده
+                                ثبت نام  فروشندگان 
 
                             </h3>
                             <p>
@@ -1016,49 +1312,65 @@ li > ul > li.active > ul > li{
 
                     </div>
 
-                    <div class=" col-xs-12 col-sm-8 col-md-9">
-                        
-                            <div class="title-section col-xs-12">
-                                  <div class="row">
-                                    
-                                    <h3>
-                                        
-                                        آخرین درخواست های خرید
-
-                                    </h3>
-                                    <h3>
-                                        
-                                      آخرین محصولات ثبت شده
-
-                                    </h3>
-                                    <hr/>
-
-                                  </div>
-                            </div>
-
-                            <div class="col-xs-12 products-contents ">
-                                <div class="row">
-                                    <article class="owl-carousel">
-
-                                          <OwlCarousel
-                                         v-for="(items , index) in 10"
-                                         :key="index"
-                                         img="https://www.incobac.com/storage/products/9sPZCpAD5S4QJWSxoHjKXbJHXp33okkRavn6HoZP.jpeg"
-                                         title="خرمای مضافتی اصل"
-                                         price="3000"
-                                         link='/'
-                                         /> 
-                                        
-                                    </article>
-                                </div>
-                            </div>
-                    </div>
                 </div>
             </div>
         </section>
 
+        <section id="services-section" class="section-wrapper container-fluid">
 
+            <div class="container">
+                <div class="row">
+                    
+                    <h3 class="col-xs-12">
+                         ارتباط مستقیم با خریداران و فروشندگان دست اول محصولات کشاورزی 
+                    </h3>
 
+                    <div class="service-boxs-wrapper col-xs-12">
+                            
+                        <div class="row" >
+
+                            <div v-for="(item , index) in 3" :key="index" class=" col-xs-12 col-sm-4 "> 
+
+                                <article class="service-box  box-content">
+                                    <a href="#">
+                                        <div class="box-image">
+                                            <img :src="site_logo"/>
+                                        </div>
+                                        <h4>
+                                            اینکوباک چیست؟
+                                        </h4>
+                                        <p>
+                                            لورم ایپسوم متن ساختگی در زمینه طراحی صفحات وب ومحتوای اینترنتی لورم ایپسوم متن ساختگی در زمینه طراحی صفحات وب ومحتوای اینترنتی 
+                                        </p>
+                                    </a>
+                                </article>
+                            </div>       
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+         </section>
+         <section id="benefit-links" class="container-fluid " >
+             <div class="container">
+                 <div class="row">
+                     <div class="links-title col-xs-12">
+                         لینک های مفید
+                     </div>
+                     <div class="benefit-links-item col-xs-12">
+                        <div class="row">
+                             <h4 v-for="(item , index) in 20" :key="index"  class="col-xs-6 col-sm-4 col-md-3 col-lg-2 pull-right">
+                             <a href="#">
+                                 لینک مفید
+                             </a>
+                         </h4>
+                        </div>
+                     </div>
+                 </div>
+             </div>
+         </section>
     </div>
 
 </template>
@@ -1067,29 +1379,25 @@ li > ul > li.active > ul > li{
     import {eventBus} from "../../../router/dashboard_router";
     import VueWow from 'vue-wow';
     import {UAnimateContainer, UAnimate} from 'vue-wow'
-
     var visible = false;
-    var OwlCarousel = {
-        data: function () {
-            return {
-                imgSrcs: ''
 
-            };
-        },
+
+    var ProductCarousel = {
+
         props: ['img', 'title', 'link', 'price'],
-        template: "<div class='carousel-item box-content'>"
+        template: "<article class='carousel-item box-content'>"
             +
             "<div class='carousel-img' style='height: 135px;overflow: hidden;position: relative;'><a :href='link' ><img style='position: absolute;top: 50%;left: 50%;transition: 300ms;transform: translate(-50%, -50%);' :src='img' class='img-responsive'></a></div>"
-            + "<a style='font-size: 16px;direction: rtl;font-weight: bold;color: #333;' :href='link' v-if='title.length>=20'><h4 style='margin-top: 10px;margin-bottom: 9px;'>{{title.substring(0,15) + ' ...'}}</h4></a>"
-            + "<a style='font-size: 16px;direction: rtl;font-weight: bold;color: #333;' :href='link'  v-else><h4 style='margin-top: 10px;margin-bottom: 9px;'>{{title }}</h4></a>"
+            + "<a style='font-size: 16px;direction: rtl;font-weight: bold;color: #4b4b4b;' :href='link' v-if='title.length>=20'><h4 style='text-overflow: ellipsis;overflow: hidden;white-space: nowrap;padding: 0 10px;margin-top: 10px;margin-bottom: 9px;'>{{title.substring(0,15) + ' ...'}}</h4></a>"
+            + "<a style='font-size: 16px;direction: rtl;font-weight: bold;color: #4b4b4b;' :href='link'  v-else><h4 style='text-overflow: ellipsis;overflow: hidden;white-space: nowrap;padding: 0 10px;margin-top: 10px;margin-bottom: 9px;'>{{title }}</h4></a>"
             + "<a style='font-size: 14px;direction: rtl;font-weight: bold;color: #00c569;margin-bottom: 5px;display:inline-block' :href='link' class='price' >"
             + "<span>  هر کیلو : </span>"
             + "<span v-text='price'></span>"
             + "<span> تومان </span>"
             + "</a>"
-            + "</div>",
+            + "</article>",
         mounted: function () {
-            $(".owl-carousel").owlCarousel({
+            $("#product-section .owl-carousel").owlCarousel({
                 autoplay: true,
                 autoplayTimeout: 4000,
                 loop: true,
@@ -1104,14 +1412,16 @@ li > ul > li.active > ul > li{
                     0: {
                         items: 1,
                         stagePadding: 15,
-                        navText:false
+                        navText:false,
+                        dots:true
                     },
                     450: {
                         items: 2,
                         stagePadding: 15,
                         navText:false,
+                         dots:true
                     },
-                    600: {
+                    767: {
                         items: 3,
                         stagePadding: 15
                     },
@@ -1122,9 +1432,69 @@ li > ul > li.active > ul > li{
             });
         }
     };
+
+
+    var RequestCarousel = {
+
+        props: ['title', 'need', 'date', 'link'],
+        template: '<article class="box-content col-xs-12 request-carousel-content ">'
+        + '<div class="row">'
+        + '<p class="list-title">'
+        + '<span>'
+        + 'میوه'
+        + '</span>'
+        + '<span> | </span>'
+        + '<span>'
+        + 'خرما'
+        + '</span>'
+        + '<span>'
+        + '| پیارم'
+        + '</span>'
+        + '</p>'
+        + '<p class="needs col-sm-4 col-xs-12">'
+        + '<span class="static-content">'
+        + 'میزان نیازمندی :'
+        + '</span>'
+        + '<span >'
+        + '3000'
+        + '</span>'
+        + '<span class="static-content">'
+        + 'کیلوگرم' 
+        + '</span>' 
+        + '</p>'
+        + '<p class="list-time col-sm-2 col-xs-12">'
+        + '۳۰ شهریور , ۱۳۹۸'
+        + '</p>'
+        +'<div class="col-xs-12">'
+        + '<a class=" fas fa-comment-alt green-button" href="">'
+        + 'پیام به خریدار'
+        + '</a>'
+        + '</div>'
+        + '</div>'
+        + '</article>',
+
+        mounted: function () {
+            $("#requests-section .owl-carousel").owlCarousel({
+                autoplay: true,
+                autoplayTimeout: 4000,
+                loop: true,
+                nav: true,
+                navText: false,
+                items: 1,
+                mouseDrag: true,
+                margin: 30,
+                dots:true,
+                stagePadding: 15,
+            });
+        }
+    };
+
+
+
     export default {
         components: {
-            OwlCarousel,
+            ProductCarousel,
+            RequestCarousel,
             UAnimateContainer,
             UAnimate
         },
@@ -1133,7 +1503,7 @@ li > ul > li.active > ul > li{
             'img_success_verified',
             'img_seller_services',
             'img_buyer_services',
-            'site_logo_white',
+            'site_logo',
             'loading_img'
         ],
         data: function () {
@@ -1230,7 +1600,6 @@ li > ul > li.active > ul > li{
                     var dropdownActive = $('.menu-wrapper > li.active');
                     
                          dropdowns.each(function( index ) {
-
                            if (index == indexValue && $(event.target).attr('class') == dropdowns.find('a.category-item').attr('class') ) {
 
                                  return
