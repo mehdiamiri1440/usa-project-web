@@ -47,6 +47,8 @@ class product_controller extends Controller
     protected $product_register_nullable_fields_array_with_validation_rules = array(
         'description' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u',
     );	
+    
+    protected $max_factorial_input_number = 10;
 	// public method
 	public function add_product(Request $request)
 	{
@@ -897,28 +899,40 @@ class product_controller extends Controller
     protected function get_the_most_related_buyAd_to_given_product(&$product,&$related_subcategory_buyAds)
     {
         $most_related_record = null;
-        $max_mached_words = 0;
+        $max_mached_score = 0;
         
-        $product_name_array = array_filter(array_map('trim',explode(' ',str_replace('،',' ',$product->product_name))));
+        $product_name_array = array_filter(array_map('trim',explode(' ',str_replace('،',' ',$product->product_name ))));
         
+        $category_info = $this->get_category_and_subcategory_name($product->category_id);
+        
+        if(count($product_name_array) > 1){
+            if($product_name_array[0] == $category_info['subcategory_name']){
+                array_splice($product_name_array,0,1);//removes the first element
+            }
+        }
+        
+        $product_name_array_count = count($product_name_array);
+    
         foreach($related_subcategory_buyAds as $buyAd){
-            $mached = 0;
+            $score = 0;
             
             $buyAd_name_array = array_filter(array_map('trim',explode(' ',str_replace('،',' ',$buyAd->name))));
             
             foreach($buyAd_name_array as $word){
-                if(in_array($word,$product_name_array)){
-                    $mached++;
+                $index = array_search($word,$buyAd_name_array);
+                if($index !== false){
+                    $score += $this->factorial($product_name_array_count - $index);
                 }
             }
             
-            if($mached > $max_mached_words){
+            if($score > $max_mached_score){
                     $most_related_record = $buyAd;
-                    $max_mached_words = $mached;
+                    $max_mached_score = $score;
             }
         }
         
         if($most_related_record){
+            $this->append_category_info_to_buyAd($most_related_record,$category_info);
             $this->append_user_info_to_most_related_buyAd_record($most_related_record,$product);
         }
         
@@ -934,11 +948,6 @@ class product_controller extends Controller
         $buyAd['user_name'] = $buyAd_owner_user_record->user_name;
         $buyAd['first_name'] = $buyAd_owner_user_record->first_name;
         $buyAd['last_name'] = $buyAd_owner_user_record->last_name;
-        
-        $category_record = $this->get_category_and_subcategory_name($product->category_id);
-        
-        $buyAd['category_name'] = $category_record['category_name'];
-        $buyAd['subcategory_name'] = $category_record['subcategory_name'];
         
         $date_convertor_object = new date_convertor();
         
@@ -962,6 +971,28 @@ class product_controller extends Controller
             'category_name' => $category_record->category_name,
             'subcategory_name' => $subcategory_record->category_name,
         ];
+    }
+    
+    protected function append_category_info_to_buyAd($buyAd,&$category_info)
+    {
+//        $category_record = $this->get_category_and_subcategory_name($buyAd->category_id);
+        
+        $buyAd['category_name'] = $category_info['category_name'];
+        $buyAd['subcategory_name'] = $category_info['subcategory_name'];
+    }
+    
+    private function factorial($number)
+    {
+        if($number > $this->max_factorial_input_number){
+            return 1;
+        }
+        
+        $factorial = 1;
+        for($i = 1; $i < $number ; $i++){
+            $factorial = $factorial * $i;
+        }
+        
+        return $factorial;
     }
     
     //public method

@@ -595,7 +595,7 @@
                         
                         self.step1.sendCode = true;
 
-                        self.registerComponentExceptions('phone number is empty or incorrect or already exists');
+                        self.registerComponentStatistics('Register-Error', 'phone-number-verification','error:' + self.errors.phone[0]);
                     });
             },
             verify_code: function () {
@@ -612,13 +612,13 @@
                         self.goToStep(2);
                         self.errors.verification_code = [];
                         self.errors.verification_code.push('کد وارد شده صحیح نیست یا منقضی شده است');
-                        self.registerComponentExceptions('کد وارد شده صحیح نیست یا منقضی شده است');
+                        self.registerComponentStatistics('Register-Error', 'verification-code-wrong', 'error:' + self.errors.verification_code[0]);
                     }
                 }).catch(function (error) {
                     self.goToStep(2);
                     self.errors.verification_code = [];
                     self.errors.verification_code.push('وارد کردن کد الزامی است.');
-                    self.registerComponentExceptions('وارد کردن کد الزامی است');
+                    self.registerComponentStatistics('Register-Error', 'verification-code-empty', 'error:' + self.errors.verification_code[0]);
                 });
 
 
@@ -694,7 +694,7 @@
                 this.sexValidator(this.step3.sex);
 
                 if (this.errorFlag) {
-                    this.registerComponentExceptions('Validation error in step 3 in user register page!');
+                    this.registerComponentStatistics('Register-Error', 'step-3', 'validation error in step 3');
                 }
 
             },
@@ -703,7 +703,7 @@
                 this.categoryIdValidator(this.step4.categoryId);
 
                 if (this.errorFlag) {
-                    this.registerComponentExceptions('Validation Error in step 4 in user register page!');
+                    this.registerComponentStatistics('Register-Error', 'step-4', 'validation error in step 4');
                 }
             },
             firstNameValidator: function (name) {
@@ -717,6 +717,10 @@
                     this.errors.first_name.push('فیلد باید فارسی باشد');
                     this.errorFlag = true;
                 }
+                
+                if(this.errors.first_name[0]){
+                    this.registerComponentStatistics('Register-Error', 'first-name','input:' + name + ' Error:' + this.errors.first_name[0]);
+                }
             },
             lastNameValidator: function (name) {
                 this.errors.last_name = [];
@@ -728,6 +732,10 @@
                 if (!this.validateRegx(name, /^[\u0600-\u06FF\s]+$/)) {
                     this.errors.last_name.push('فیلد باید فارسی باشد');
                     this.errorFlag = true;
+                }
+                
+                if(this.errors.last_name[0]){
+                    this.registerComponentStatistics('Register-Error', 'last-name','input:' + name + ' Error:' + this.errors.last_name[0]);
                 }
             },
             provinceValidator: function (province) {
@@ -741,6 +749,10 @@
                     this.errors.province.push('استان باید فارسی باشد');
                     this.errorFlag = true;
                 }
+                
+                if(this.errors.province[0]){
+                    this.registerComponentStatistics('Register-Error', 'province','input:' + province + ' Error:' + this.errors.province[0]);
+                }
             },
             cityValidator: function (city) {
                 this.errors.city = [];
@@ -752,6 +764,10 @@
                 if (!this.validateRegx(city, /^[\u0600-\u06FF\s]+$/)) {
                     this.errors.city.push('شهر باید فارسی باشد');
                     this.errorFlag = true;
+                }
+                
+                if(this.errors.city[0]){
+                    this.registerComponentStatistics('Register-Error', 'city','input:' + city + ' Error:' + this.errors.city[0]);
                 }
             },
             userNameValidator: function (userName) {
@@ -767,6 +783,10 @@
                 if (!this.validateRegx(userName, /^\w+$/)) {
                     this.errors.user_name.push(' شامل حروف غیر مجاز است');
                     this.errorFlag = true;
+                }
+                
+                if(this.errors.user_name[0]){
+                    this.registerComponentStatistics('Register-Error', 'username','input:' + username + ' Error:' + this.errors.last_name[0]);
                 }
             },
             nationalCodeValidator: function (code) {
@@ -816,6 +836,13 @@
                     this.errors.password_conf.push('رمز عبور مطابقت ندارد');
                     this.errorFlag = true;
                 }
+                
+                if(this.errors.password[0]){
+                    this.registerComponentStatistics('Register-Error', 'password','input:' + pass + ' Error:' + this.errors.password[0]);
+                }
+                if(this.errors.password_conf[0]){
+                    this.registerComponentStatistics('Register-Error', 'passwordConfirmation','input:' + passConf + ' Error:' + this.errors.password_conf[0]);
+                }
             },
             sexValidator: function (sex) {
                 this.errors.sex = [];
@@ -824,6 +851,10 @@
                     this.errors.sex.push('جنسیت الزامی است');
                     this.errorFlag = true;
                 }
+                
+                if(this.errors.sex[0]){
+                    this.registerComponentStatistics('Register-Error', 'sex','input:' + sex + ' Error:' + this.errors.sex[0]);
+                }
             },
             categoryIdValidator: function (categoryId) {
                 this.errors.category_id = [];
@@ -831,12 +862,20 @@
                     this.errors.category_id.push('انتخاب حوزه ی فعالیت الزامی است.');
                     this.errorFlag = true;
                 }
+                
+                if(this.errors.category_id[0]){
+                    this.registerComponentStatistics('Register-Error', 'category-selection','input:' + categoryId + ' Error:' + this.errors.category_id[0]);
+                }
             },
             activityTypeValidator: function (activityType) {
                 this.errors.activity_type = [];
                 if (activityType === '') {
                     this.errors.activity_type.push('انتخاب نوع کاربری الزامی است.');
                     this.errorFlag = true;
+                }
+                
+                if(this.errors.activity_type[0]){
+                    this.registerComponentStatistics('Register-Error', 'activity-type','input:' + activity_type + ' Error:' + this.errors.activity_type[0]);
                 }
             },
             validateRegx: function (input, regx) {

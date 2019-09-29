@@ -128,12 +128,17 @@
             background: #fff;
             border-radius: 0;
             box-shadow: none;
-            position: inherit;
             min-height: 500px;
             direction: rtl;
             transform: translate(0,0);
+            height: 100%;
+            bottom: 0;
+            top: 0;
+            width: 100%;
+            left: 0;
 
         }
+    
 
         .progrees-item p{
             display: none;
@@ -519,8 +524,6 @@
                             self.errors = [];
                             self.errors = err.response.data.errors;
                             eventBus.$emit('submiting', false);
-
-                            self.registerComponentExceptions('Validation error in product register');
                         });
                 }
             },
@@ -562,24 +565,29 @@
                 }
             },
             toLatinNumbers: function (num) {
-                var numDic = {
-                    '۰': '0',
-                    '۱': '1',
-                    '۲': '2',
-                    '۳': '3',
-                    '۴': '4',
-                    '۵': '5',
-                    '۶': '6',
-                    '۷': '7',
-                    '۸': '8',
-                    '۹': '9',
-                };
-
-                return num
-                    .toString()
-                    .replace(/[۰-۹]/g, function (w) {
-                        return numDic[w];
-                    });
+//                var numDic = {
+//                    '۰': '0',
+//                    '۱': '1',
+//                    '۲': '2',
+//                    '۳': '3',
+//                    '۴': '4',
+//                    '۵': '5',
+//                    '۶': '6',
+//                    '۷': '7',
+//                    '۸': '8',
+//                    '۹': '9',
+//                };
+//
+//                return num
+//                    .toString()
+//                    .replace(/[۰-۹]/g, function (w) {
+//                        return numDic[w];
+//                    });
+                 return num.replace(/[\u0660-\u0669]/g, function (c) {
+                    return c.charCodeAt(0) - 0x0660;
+                }).replace(/[\u06f0-\u06f9]/g, function (c) {
+                   return c.charCodeAt(0) - 0x06f0;
+               });
             },
             getProductRegisterSuccessMessage:function(){
                 let msg = '';
@@ -614,7 +622,10 @@
 
                 if (id == '') {
                     this.errors.category_selected = 'لطفا دسته بندی را انتخاب کنید';
-
+                }
+                
+                if(this.errors.category_selected){
+                    this.registerComponentStatistics('product-register-error','category- selection',this.errors.category_selected);
                 }
             },       
             categoryIdValidator: function (id) {
@@ -622,7 +633,10 @@
 
                 if (id == '') {
                     this.errors.category_id = 'لطفا زیر دسته بندی را مشخص کنید';
-
+                }
+                
+                if(this.errors.category_id){
+                    this.registerComponentStatistics('product-register-error','sub-category-selection',this.errors.category_id);
                 }
             },
             productNameValidator: function (name) {
@@ -632,6 +646,10 @@
                     this.errors.product_name = 'لطفا نوع محصول را وارد کنید';
                 }else if (!this.validateRegx(name, /^[\u0600-\u06FF\s]+$/)) {
                     this.errors.product_name = 'نوع محصول فرمت مناسبی نیست';
+                }
+                
+                if(this.errors.product_name){
+                    this.registerComponentStatistics('product-register-error','product-name','input:' + name + ' error:' + this.errors.product_name);
                 }
                 
 
@@ -644,6 +662,10 @@
                 }else if (!this.validateRegx(standardNumber, /^\d*$/)) {
                     this.errors.stock = 'یک فرمت معتبر وارد کنید';
                 }
+                
+                if(this.errors.stock){
+                    this.registerComponentStatistics('product-register-error','stock','input:' + number + ' error:' + this.errors.stock);
+                }
             
             },   
             minSaleAmountValidator: function (number) {
@@ -653,6 +675,10 @@
                     this.errors.min_sale_amount = 'لطفا فیلد را وارد کنید';
                 }else if (!this.validateRegx(standardNumber, /^\d*$/)) {
                     this.errors.min_sale_amount = 'یک فرمت معتبر وارد کنید';
+                }
+                
+                if(this.errors.min_sale_amount){
+                    this.registerComponentStatistics('product-register-error','min-sale-amount','input:' + number + ' error:' + this.errors.min_sale_amount);
                 }
             
             },
@@ -664,6 +690,10 @@
                 }else if (!this.validateRegx(standardNumber, /^\d*$/)) {
                     this.errors.max_sale_price = 'یک فرمت معتبر وارد کنید';
                 }
+                
+                if(this.errors.max_sale_price){
+                    this.registerComponentStatistics('product-register-error','max-sale-price','input:'+ number + ' error:' + this.errors.max_sale_price);
+                }
             
             }, 
             minSalePriceValidator: function (number) {
@@ -674,6 +704,10 @@
                 }else if (!this.validateRegx(standardNumber, /^\d*$/)) {
                     this.errors.min_sale_price = 'یک فرمت معتبر وارد کنید';
                 }
+                
+                if(this.errors.min_sale_price){
+                    this.registerComponentStatistics('product-register-error','min-sale-price','input:' + number + ' error:' + this.errors.min_sale_price);
+                }
             
             },
             provincesValidator: function (id) {
@@ -683,6 +717,10 @@
                 if (id == '') {
                     this.errors.provinceSelected = 'لطفا استان را انتخاب کنید';
                 }
+                
+                if(this.errors.provinceSelected){
+                    this.registerComponentStatistics('product-register-error','province-selection',this.errors.provinceSelected);
+                }
             },  
             cityIdValidator: function (id) {
                 this.errors.city_id = '';
@@ -690,6 +728,11 @@
                 if (id == '') {
                     this.errors.city_id = 'لطفا شهر را وارد کنید';
                 }
+                
+                if(this.errors.provinceSelected){
+                    this.registerComponentStatistics('product-register-error','city-selection',this.errors.city_id);
+                }
+                
             },  
             validateRegx: function (input, regx) {
                 return regx.test(input);

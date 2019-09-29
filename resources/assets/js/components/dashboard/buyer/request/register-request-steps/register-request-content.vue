@@ -258,7 +258,7 @@ label .small-label {
 
 <template>
   <div>
-    <h2 class="title-contents col-xs-12">موجودی و قیمت محصول</h2>
+    <h2 class="title-contents col-xs-12">چی و چه مقدار؟</h2>
 
     <div class="form-contents col-xs-12">
       <div class="row">
@@ -315,7 +315,7 @@ label .small-label {
         <div class="col-xs-6 pull-right">
           <label for="min-sale-price">
             نوع محصول
-            <span class="small-label">(اختیاری)</span>
+
 
           </label>
 
@@ -335,8 +335,8 @@ label .small-label {
 
         <div class="col-xs-6">
           <label for="max-sale-price">
-            حداکثر قیمت
-            <span class="small-label">(هر کیلو به تومان)</span>
+            میزان نیاز مندی
+            <span class="small-label">(به کیلوگرم)</span>
           </label>
 
           <div class="text-input-wrapper">
@@ -345,7 +345,7 @@ label .small-label {
               id="max-sale-price"
               type="tel"
               :class="{'active' :  $parent.buyAd.requirement_amount , 'error': $parent.errors.requirement_amount}"
-              placeholder="مثلا : 500000 تومان"
+              placeholder="مثلا : 500000"
               pattern="[0-9]*"
             />
           </div>

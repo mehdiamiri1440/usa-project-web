@@ -471,7 +471,10 @@
         background: #637484;
     }
 
-
+    .green-button.delete {
+        background: #e41c38;
+        color: #fff;
+    }
 
     @media screen and (max-width: 994px) {
         .content-header {
@@ -956,7 +959,11 @@
                 errors: '',
                 popUpMsg: '',
                 submiting: false,
-                uploadPercentage: 0
+                uploadPercentage: 0,
+                deleteText: '',
+                deleteButtonText: '',
+                cancelButtonText: '',
+                productId:''
             }
         },
         methods: {
@@ -1170,6 +1177,38 @@
                     }
                 })
             },
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName, {
+                    'event_category': categoryName,
+                    'event_label': labelName
+                });
+            },
+            deleteProduct: function () {
+                var self = this;
+
+                axios.post('/delete_product_by_id', {
+                    product_id: self.productId
+                })
+                    .then(function (response) {
+                        //show product deleted message
+                        //code
+                        self.popUpMsg = 'حذف شد.';
+                        $('#custom-main-modal').modal('show');
+
+                        self.registerComponentStatistics('product', 'product-deleted', 'product-deleted-successfully');
+
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 3000);
+                    
+                    })
+                    .catch(function (err) {
+                        self.registerComponentStatistics('product', 'product-delete-failed', 'product-delete-failed');
+                        //show modal
+                        self.popUpMsg = 'خطایی رخ داده است.لطفا دوباره تلاش کنید.';
+                        $('#custom-main-modal').modal('show');
+                    });
+            }
 
         },
         mounted() {
@@ -1188,7 +1227,16 @@
             eventBus.$on('uploadPercentage', (event) => {
                 this.uploadPercentage = event;
             });
+            eventBus.$on('deleteButtonText', (event) => {
+                this.deleteButtonText = event;
+            });
 
+            eventBus.$on('cancelButtonText', (event) => {
+                this.cancelButtonText = event;
+            });
+            eventBus.$on('productId', (event) => {
+                this.productId = event;
+            });
         },
         metaInfo() {
             return {
