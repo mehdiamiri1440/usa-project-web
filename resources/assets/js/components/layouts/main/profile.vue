@@ -179,7 +179,7 @@
                                     <a href='#' class="green-button"
                                        @click.prevent="copyProfileLinkToClipBoard">
 
-                                        <i class="fa fa-whatsapp"></i>
+                                        <i class="fab fa-whatsapp"></i>
 
                                         اشتراک در واتس آپ
                                     </a>
@@ -756,7 +756,7 @@
 
                 if (this.isDeviceMobile()) {
                     this.copyLinkText = ' اشتراک در واتساپ';
-                    this.copyLinkClass = 'fa fa-whatsapp fa-2x';
+                    this.copyLinkClass = 'fab fa-whatsapp fa-2x';
                 }
                 else {
                     this.copyLinkText = 'کپی آدرس';

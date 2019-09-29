@@ -123,13 +123,13 @@
     .logo img {
 
         width: 100px;
-        
+
     }
 
     .logo a p{
 
         margin-top: -6px;
-       
+
     }
 
     .right-header {
@@ -211,7 +211,7 @@
         display: none;
 
     }
-    
+
     .profile-img {
         overflow: hidden;
         border-radius: 50%;
@@ -222,7 +222,7 @@
         border: 2px solid #fff;
         float: right;
     }
-    
+
     .dark-profile-img {
         overflow: hidden;
         border-radius: 50%;
@@ -632,7 +632,7 @@
         <!-- Modal -->
 
 
-        
+
         <div class="container">
             <div id="deleteModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                 <div class="modal-dialog modal-lg" role="document">
@@ -1010,23 +1010,12 @@
                 if (num == null) {
                     return null;
                 }
-                var numDic = {
-                    '۰': '0',
-                    '۱': '1',
-                    '۲': '2',
-                    '۳': '3',
-                    '۴': '4',
-                    '۵': '5',
-                    '۶': '6',
-                    '۷': '7',
-                    '۸': '8',
-                    '۹': '9',
-                };
 
-                return num
-                    .toString()
-                    .replace(/[۰-۹]/g, function (w) {
-                        return numDic[w];
+                return num.toString()
+                    .replace(/[\u0660-\u0669]/g, function (c) {
+                        return c.charCodeAt(0) - 0x0660;
+                    }).replace(/[\u06f0-\u06f9]/g, function (c) {
+                        return c.charCodeAt(0) - 0x06f0;
                     });
             },
             toggleHeader() {
@@ -1176,7 +1165,7 @@
             this.init();
             this.toggleHeader();
             this.toggleShowHeader();
-            
+
         },
         created() {
             eventBus.$on('submiting', (event) => {
