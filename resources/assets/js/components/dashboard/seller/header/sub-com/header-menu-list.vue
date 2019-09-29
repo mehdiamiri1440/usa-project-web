@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 .custom-badge {
   position: absolute;
   left: 20px;
@@ -27,7 +27,7 @@
   -o-animation: AnimationBackgroundGradient 3s ease infinite;
   animation: AnimationBackgroundGradient 3s ease infinite;
 }
-.header-menu i.fa {
+.header-menu i{
   margin: 5px;
 }
 </style>
@@ -39,6 +39,15 @@
           <li class="list-item">
             <router-link
               :class="{'active' : this.activeElement === 0}"
+              :to="{ name : 'status' }"
+            >
+              <span>داشبورد</span> 
+              <i class="fa fa-chart-line"></i>
+            </router-link>
+          </li>
+
+          <li class="list-item">
+            <router-link
               :to="{ name : 'profileBasic' }"
             >
               <span>ویرایش پروفایل</span>
@@ -48,7 +57,7 @@
 
           <li class="list-item">
             <router-link :to="{ name : 'buyAdRequests' }">
-              <span>درخواست ها</span>
+              <span>درخواست های خرید</span>
               <i class="fa fa-list-alt" aria-hidden="true"></i>
             </router-link>
           </li>
@@ -63,7 +72,7 @@
           <li class="list-item">
             <router-link :to="{ name : 'myProducts' }">
               <span>محصولات من</span>
-              <i class="fa fa-list-alt" aria-hidden="true"></i>
+              <i class="fas fa-list-ol" aria-hidden="true"></i>
             </router-link>
           </li>
 
@@ -72,14 +81,14 @@
               <span>پیام ها</span>
               <span class="custom-badge" v-if="messageCount" v-text="messageCount"></span>
 
-              <i class="fa fa-comment" aria-hidden="true"></i>
+              <i class="fas fa-comment-alt" aria-hidden="true"></i>
             </router-link>
           </li>
 
           <li class="list-item">
             <router-link :to="{ name : 'guide' }">
               <span>راهنما</span>
-              <i class="fa fa-question-circle" aria-hidden="true"></i>
+              <i class="fa fa-question" aria-hidden="true"></i>
             </router-link>
           </li>
         </ul>

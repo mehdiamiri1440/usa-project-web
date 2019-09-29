@@ -1,5 +1,5 @@
 <style scoped>
-		
+
 	.submit-button{
 		background: #DDDDDD;
 		color: #fff;
@@ -128,30 +128,30 @@
 		 <div class="form-contents col-xs-12">
 
 		     	<div class="row">
-		     		
+
 			     	<label for="phone-number">
 			     		لطفا شماره موبایل خود را وارد کنید
 			     	</label>
-			    
+
 			     	<div class="input-wrapper phone-number-wrapper">
-			     		<input 
-			     		v-model="phoneNumber" 
-			     		:class="{'error' : $parent.errors.phone , 'active' : phoneNumber.length >= 11}" 
-			     		id="phone-number" 
+			     		<input
+			     		v-model="phoneNumber"
+			     		:class="{'error' : $parent.errors.phone , 'active' : phoneNumber.length >= 11}"
+			     		id="phone-number"
 			     		type="tel"
 			     		class="dire"
 			     	    placeholder="شماره موبایل"
 			     	    pattern="[0-9]*"
 			     		>
 
-			     		<i class="fa fa-phone-square"></i>
+			     		<i class="fa fa-phone-square-alt"></i>
 			     	</div>
-			     		
+
 			     	<span class="small-description">
-			     		 پس از وارد کردن شماره موبایل ما یک کد برای شما ارسال میکنیم تا از صحت شماره وارد شده اطمینان حاصل کنیم 
+			     		 پس از وارد کردن شماره موبایل ما یک کد برای شما ارسال میکنیم تا از صحت شماره وارد شده اطمینان حاصل کنیم
 
 			     	</span>
-			       	
+
 			       	<p class="error-message">
 			       		<span  v-if="$parent.errors" v-text="$parent.errors[0]"></span>
 			       	</p>
@@ -163,16 +163,16 @@
 
 		     </div>
 		</div>
-		
+
     </div>
 </template>
 
-<script> 
+<script>
 
 	export default{
 		data:function(){
 			return{
-				phoneNumber : this.$parent.step2.phone,	
+				phoneNumber : this.$parent.step2.phone,
 			}
 		},
 		methods:{
@@ -189,12 +189,12 @@
 
 	  	    if(this.phoneNumber.length >= 11){
 	  	   	 	this.phoneNumber = this.phoneNumber.substring(0,11);
-	  	   		
+
 	  	  	 }
 	      }
 	    },
-	    mounted(){	
-	    		    	
+	    mounted(){
+
 	    	if (this.$parent.isOsIOS()) {
 	    		$('#phone-number').attr('type','text')
 	    	}

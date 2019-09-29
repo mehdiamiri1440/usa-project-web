@@ -1,4 +1,7 @@
 <style>
+    html, body, #main {
+    height: 100%;
+    }
 
     html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -34,10 +37,6 @@
         font-size: 14px;
     }
 
-    select, option, textarea {
-        font-family: IRANSans, sans-serif;
-    }
-
     ol, ul {
         list-style: none;
     }
@@ -69,17 +68,16 @@
         padding: 7px;
         text-align: right;
     }
-
     .list-inline > li {
         display: inline-block;
-        padding: 0;
-
+        padding-right: 5px;
+        padding-left: 5px;
     }
-    
+
     .green-button {
         margin: 15px 0 0;
         display: inline-block;
-        background: #00c569;
+        background: #00C569;
         color: #fff;
         padding: 10px 35px;
         border-radius: 3px;
@@ -88,6 +86,7 @@
         -webkit-transition: 300ms;
         transition: 300ms;
     }
+    
     .green-button:hover {
         background: #279b41;
         color: #fff;
@@ -115,10 +114,24 @@
     }
 
     .logo a {
+
         display: inline-block;
-        margin-top: -11px;
-        height: 75px;
+        margin-top: 0;
         padding: 0 10px;
+        color: #fff;
+        text-align: center;
+    }
+
+    .logo img {
+
+        width: 100px;
+
+    }
+
+    .logo a p{
+
+        margin-top: -6px;
+
     }
 
     .right-header {
@@ -142,7 +155,11 @@
 
     .right-header > header {
         overflow: hidden;
-        background: #fff;
+        background: #313a43;
+        border-bottom: 2px solid #2a3035;
+        border-bottom-color: rgb(42, 48, 53);
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
     }
 
     .close_menu, .close_menu_mob {
@@ -154,6 +171,10 @@
         top: 0;
         position: relative;
         padding: 11px;
+    }
+
+    .close_menu i ,.close_menu_mob i{
+        color: #fff;
     }
 
     .close_menu_mob {
@@ -178,9 +199,19 @@
         display: none;
     }
 
+
+
     .profile {
-        padding: 20px 20px 10px;
-        border-bottom: 2px solid #2e353e;
+
+        padding: 10px 15px 15px;
+        text-align: center;
+
+    }
+
+    .little_header .profile {
+
+        display: none;
+
     }
 
     .profile-img {
@@ -193,6 +224,7 @@
         border: 2px solid #fff;
         float: right;
     }
+
     .dark-profile-img {
         overflow: hidden;
         border-radius: 50%;
@@ -203,7 +235,6 @@
         border: 2px solid #5B5C5D;
         float: right;
     }
-
     .profile-img img {
         height: 100%;
     }
@@ -249,7 +280,7 @@
         content: " ";
         height: 100%;
         width: 2px;
-        background: #00C569;
+        background: #00ac5c;
         position: absolute;
         right: 0;
         top: 0;
@@ -314,7 +345,7 @@
 
     .right-menu-header {
         position: relative;
-        padding: 6px 16px;
+        padding: 6px;
     }
 
     .right-menu-header li ul a {
@@ -412,35 +443,6 @@
         background: #fff;
     }
 
-    .modal-content .green-button {
-        margin: 15px;
-
-        display: inline-block;
-
-        background: #00c569;
-
-        color: #fff;
-
-        padding: 10px 35px;
-
-        border-radius: 3px;
-
-        text-align: center;
-
-        border: none;
-
-        -webkit-transition: 300ms;
-
-        transition: 300ms;
-
-        width: initial;
-    }
-
-    .green-button.delete {
-        background: #e41c38;
-        color: #fff;
-    }
-
     .sub-header a.router-link-exact-active {
         color: #313942;
     }
@@ -450,7 +452,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background: #00c569;
+        background: #00C569;
         height: 3px;
         width: 100%;
     }
@@ -469,6 +471,11 @@
     .header-menu a.router-link-exact-active, a.active {
         color: #fff;
         background: #637484;
+    }
+
+    .green-button.delete {
+        background: #e41c38;
+        color: #fff;
     }
 
     @media screen and (max-width: 994px) {
@@ -599,7 +606,7 @@
 
     }
 
-    @media screen and (max-width: 348px) {
+    @media screen and (max-width: 345px) {
         .sub-header a {
             font-size: 10px;
 
@@ -622,9 +629,13 @@
 
     /*end loader*/
 </style>
-<template>
 
+<template>
     <div>
+
+             <!-- Modal -->
+
+
         <div class="container">
             <div id="deleteModal"
                  class="modal"
@@ -653,28 +664,57 @@
             </div>
         </div>
 
+        <div class="container">
+                    <div class="modal fade"
+                         id="modal-buttons"
+                         tabindex="-1"
+                         ref="myModal"
+                         role="dialog"
+                         aria-labelledby="myModalLabel"
+                         aria-hidden="true"
+                    >
 
-        <!-- Modal -->
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="main_popup_content">
+                                    <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                                    <p class="main-pop-up" v-text="popUpMsg">
+
+                                    </p>
+                                    <button class="btn green-button " data-dismiss="modal">
+                                        متوجه شدم
+                                    </button>
+                                    <router-link class="btn green-button" data-dismiss="modal" :to='{name : "dashboardPricingTable"}'>
+                                        مشاهده تعرفه ها
+                                    </router-link>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div>
+
+        </div>
+
+
+
         <div class="container">
             <div class="modal fade"
                  id="custom-main-modal"
                  tabindex="-1"
                  ref="custom-main-modal"
                  role="dialog"
-                 aria-labelledby="myModalLabel"
-                 aria-hidden="true"
-            >
+                 aria-labelledby="custom-main-modal-label"
+                 aria-hidden="true">
 
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal">
-                                <i class="fa fa-close"></i>
+                                <i class="fa fa-times"></i>
                             </a>
 
                             <p class="main-pop-up" v-text="popUpMsg"></p>
 
-                            <button class="btn green-button" data-dismiss="modal">
+                            <button class="btn green-button " data-dismiss="modal" id="close-btn">
                                 متوجه شدم
                             </button>
                         </div>
@@ -683,22 +723,21 @@
             </div>
         </div>
 
-        <div class="container">
 
+        <div class="container">
             <div class="modal fade"
                  id="confirmation-modal"
                  tabindex="-1"
                  ref="confirmation-modal"
                  role="dialog"
                  aria-labelledby="confirmation-modal-label"
-                 aria-hidden="true"
-            >
+                 aria-hidden="true">
 
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="main_popup_content">
-                            <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
-                            <p class="main-pop-up">
+                            <a href="#" data-dismiss="modal"> <i class="fa fa-times"></i></a>
+                            <p class="main-pop-up" id="popUpMsg">
                                 لطفا پس از تکمیل اطلاعات پروفایل خود، منتظر تماس کارشناسان اینکوباک جهت تکمیل اطلاعات
                                 باشید. از شکیبایی شما سپاسگزاریم.
                             </p>
@@ -712,56 +751,18 @@
         </div>
 
         <div class="container">
-            <div class="modal fade"
-                 id="modal-buttons"
-                 tabindex="-1"
-                 ref="myModal"
-                 role="dialog"
-                 aria-labelledby="myModalLabel"
-                 aria-hidden="true"
-            >
-
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="main_popup_content">
-                            <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
-                            <p class="main-pop-up" v-text="popUpMsg">
-
-                            </p>
-                            <button class="btn green-button " data-dismiss="modal">
-                                متوجه شدم
-                            </button>
-                            <a class="btn green-button" href='/pricing'>
-                                مشاهده تعرفه ها
-                            </a>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="modal fade"
-                 id="contract-modal-wrapper"
-                 tabindex="-1"
-                 ref="contract-modal-wrapper"
-                 role="dialog"
+            <div class="modal fade" id="contract-modal-wrapper" tabindex="-1" ref="contract-modal-wrapper" role="dialog"
                  aria-labelledby="contract-modal-wrapper-label"
-                 aria-hidden="true"
-            >
-
+                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="main_popup_content">
-                            <a href="#" data-dismiss="modal">
-                                <i class="fa fa-close"></i>
-                            </a>
-
+                            <a href="#" data-dismiss="modal"> <i class="fa fa-times"></i></a>
                             <p class="main-pop-up" id="contractModal">
+
                                 برای شروع استفاده از خدمات اینکوباک ابتدا در قسمت ویرایش پروفایل، قرارداد همکاری را
                                 مطالعه و تایید کنید.
                             </p>
-
                             <button class="btn green-button " data-dismiss="modal">
                                 متوجه شدم
                             </button>
@@ -772,7 +773,10 @@
         </div>
         <!-- /.modal -->
 
+
+        <!--loader-->
         <!--loading upload-->
+
         <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
             <div class="main-loader">
                 <p dir="rtl">{{uploadPercentage}}%</p>
@@ -780,7 +784,14 @@
                 <p dir="rtl">در حال بارگذاری...</p>
             </div>
         </div>
-        <!--loading upload-->
+
+    <!--    <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
+            <div class="main-loader">
+                <img :src="loading">
+                <p dir="rtl">در حال بارگذاری...</p>
+            </div>
+        </div>-->
+        <!--end loader-->
 
         <section class="right-header mobile-header">
             <header class="header-right-header">
@@ -795,36 +806,40 @@
                 <span class="logo">
                     <a href="/">
                         <img :src="logo" alt="incoboc">
+                        <p>
+                            بازارگاه آنلاین کشاورزی
+                        </p>
                     </a>
                 </span>
+
             </header>
 
 
             <section class="main-right-header">
-
                 <ProfileInfo
+                :isLoading='isLoading'
                         :photoLink="currentUser.profile.profile_photo"
                         :storage="storage"
                         :def="defultimg"
-                        :isLoading="isLoading"
                         :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
                         :usercity="currentUser.user_info.province + ' - ' + currentUser.user_info.city"
                         :userprof="currentUser.user_info.user_name"
                 />
 
                 <HeaderMenuList
+                        :profilebasic="profilebasic"
                         :byadreq="byadreq"
                         :selregpro="selregpro"
                         :transactroute="transactroute"
                         :mytrans="mytrans"
                 />
 
-                <div class="copy-right">
-                    <!--
-                     <p dir="rtl">
-                         تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.
-                     </p>-->
-                </div>
+                <!-- <div class="copy-right">
+
+                      <p dir="rtl">
+                          تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.
+                      </p>
+                 </div>-->
 
             </section>
 
@@ -845,15 +860,19 @@
                 <span class="logo">
                     <a href="/">
                         <img :src="logo" alt="incoboc">
+                        <p>
+                            بازارگاه آنلاین کشاورزی
+                        </p>
                     </a>
                 </span>
+
             </header>
 
             <section class="main-right-header">
                 <ProfileInfo
+                :isLoading='isLoading'
                         :photoLink="currentUser.profile.profile_photo"
                         :storage="storage"
-                        :isLoading="isLoading"
                         :def="defultimg"
                         :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
                         :usercity="currentUser.user_info.province + ' - ' + currentUser.user_info.city"
@@ -861,35 +880,36 @@
                 />
 
                 <HeaderMenuList
+                        :profilebasic="profilebasic"
                         :byadreq="byadreq"
                         :selregpro="selregpro"
                         :transactroute="transactroute"
                         :mytrans="mytrans"
                         :guide="guide"
-
                 />
 
             </section>
+
         </section>
 
         <HeaderTop
-        :isLoading='isLoading'
+                :isLoading='isLoading'
                 :photoLink="currentUser.profile.profile_photo"
                 :storage="storage"
                 :def="defultimg"
                 :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
                 :out="logout"
                 :routeHome="routehome"
-       />
+        />
     </div>
 
 </template>
 
 <script>
-    import {eventBus} from "../../../../router/dashboard_router";
     import ProfileInfo from './sub-com/profile_info.vue'
     import HeaderMenuList from './sub-com/header-menu-list.vue'
     import HeaderTop from './sub-com/header-top.vue'
+    import {eventBus} from "../../../../router/dashboard_router";
 
     export default {
         components: {
@@ -914,9 +934,6 @@
         data: function () {
             return {
                 isLoading:true,
-                deleteButtonText: '',
-                cancelButtonText: '',
-                ProductId: '',
                 currentUser: {
                     profile: {
                         is_company: '',
@@ -926,10 +943,9 @@
                         public_phone: '',
                         profile_photo: this.storage + '',
                         postal_code: '',
-                        shaba_code: '',
-
+                        shaba_code: ''
                     },
-                    user_info: '',
+                    user_info: ''
                 },
                 profileBasicFields: [
                     'is_company',
@@ -945,19 +961,21 @@
                 popUpMsg: '',
                 submiting: false,
                 uploadPercentage: 0,
-
+                deleteText: '',
+                deleteButtonText: '',
+                cancelButtonText: '',
+                productId:''
             }
         },
         methods: {
 
             init: function () {
-                this.isLoaded = true;
 
+                this.isLoaded = true;
                 axios.post('/user/profile_info')
-                    .then(response => {
-                        this.currentUser = response.data
-                        this.isLoading = false;}
+                    .then(response => {this.isLoading=false;return this.currentUser = response.data;}
                     );
+
             },
             RegisterBasicProfileInfo: function () {
                 this.submiting = true;
@@ -967,7 +985,8 @@
 
                 for (var i = 0, cnt = this.profileBasicFields.length; i < cnt; i++) {
                     if (this.currentUser.profile[this.profileBasicFields[i]] != null) {
-                        data.append(this.profileBasicFields[i], this.toLatinNumbers(this.currentUser.profile[this.profileBasicFields[i]]));
+                        data.append(this.profileBasicFields[i], this.toLatinNumbers(this.currentUser.profile[this.profileBasicFields[i]])
+                        );
                     }
                 }
 
@@ -979,10 +998,11 @@
 
                 axios.post('/user/profile_modification', data)
                     .then(function (response) {
-                        if (response.status === 200) {
+                        if (response.status == 200) {
                             self.submiting = false;
-                            self.popUpMsg = 'تغییرات با موفقیت اعمال شد';
+                            eventBus.$emit('submitSuccess', self.popUpMsg);
 
+                            self.popUpMsg = 'تغییرات با موفقیت اعمال شد';
                             $('#custom-main-modal').modal('show');
                         }
                         self.submiting = false;
@@ -991,29 +1011,19 @@
                         self.errors = '';
                         self.errors = err.response.data.errors;
                         self.submiting = false;
+
                     });
             },
             toLatinNumbers: function (num) {
                 if (num == null) {
                     return null;
                 }
-                var numDic = {
-                    '۰': '0',
-                    '۱': '1',
-                    '۲': '2',
-                    '۳': '3',
-                    '۴': '4',
-                    '۵': '5',
-                    '۶': '6',
-                    '۷': '7',
-                    '۸': '8',
-                    '۹': '9',
-                };
 
-                return num
-                    .toString()
-                    .replace(/[۰-۹]/g, function (w) {
-                        return numDic[w];
+                return num.toString()
+                    .replace(/[\u0660-\u0669]/g, function (c) {
+                        return c.charCodeAt(0) - 0x0660;
+                    }).replace(/[\u06f0-\u06f9]/g, function (c) {
+                        return c.charCodeAt(0) - 0x06f0;
                     });
             },
             toggleHeader() {
@@ -1028,24 +1038,29 @@
                 var littleMainHeader = $(".main-header");
                 var main = $("#main");
                 var nextMove = "shrink";
-
                 menuCloseButton.click(function () {
-                    if (nextMove === "expand") {
+                    if (nextMove == "expand") {
                         $(this).css({
                             width: "30%"
                         });
-                        menuCloseButtonIcon.addClass('fa-angle-right', 200).removeClass('fa-angle-left');
-                        profile.fadeIn();
-                        copyRight.css('display', 'block');
-                        logo.fadeIn();
-                        headerMenu.css('display', 'inline');
                         headerMenuLink.css({
                             "text-align": "right"
                         });
+                        copyRight.css('display', 'block');
+                        headerMenu.css('display', 'inline');
+
+                        menuCloseButtonIcon.addClass('fa-angle-right', 200).removeClass('fa-angle-left');
+
                         rightHeaderDesktop.removeClass("little_header", 200);
                         littleMainHeader.removeClass("little-main-header", 200);
                         main.removeClass("little-main", 200);
+
                         nextMove = "shrink";
+
+                        profile.fadeIn();
+                        logo.fadeIn();
+
+
                     } else {
                         $(this).css({
                             width: "100%"
@@ -1059,87 +1074,104 @@
                         });
 
                         menuCloseButtonIcon.addClass('fa-angle-left', 200).removeClass('fa-angle-right', 200);
-                        // menuCloseButtonIcon.switchClass("fa-angle-right"," fa-angle-left",200);
 
                         rightHeaderDesktop.addClass("little_header", 200);
                         littleMainHeader.addClass("little-main-header", 200);
                         main.addClass("little-main", 200);
 
                         nextMove = "expand";
+
                     }
                 });
             },
             toggleShowHeader() {
                 var showHeaderButtonElement = $('.show-header button');
-                var closeHeaderButtonMobile = $('.close_menu_mob');
+                var closeHeaderButtonMobile = $('.close_menu_mob ');
                 var flag = true;
                 var rightHeader = $(".right-header.mobile-header");
                 var back = $(".background_mob_sec");
                 var closeHeaderButtonMobileLinks = $('.mobile-header .header-menu a');
-
                 showHeaderButtonElement.on('click', function () {
                     if (flag === true) {
                         rightHeader.animate({
                             right: '0'
                         }, 300);
+
                         back.fadeIn();
+
                         flag = false;
+
                     } else {
                         rightHeader.animate({
                             right: '-300px'
                         }, 300);
 
                         flag = true;
+
                     }
                 });
-
                 closeHeaderButtonMobile.on('click', function () {
                     if (flag === true) {
                         rightHeader.animate({
                             right: '0'
                         }, 300);
+
                         flag = false;
+
                     } else {
                         rightHeader.animate({
                             right: '-300px'
-
                         }, 300);
+
                         back.fadeOut();
+
                         flag = true;
+
                     }
                 });
-
                 closeHeaderButtonMobileLinks.on('click', function () {
                     if (flag === true) {
                         rightHeader.animate({
                             right: '0'
                         }, 300);
+
                         flag = false;
+
                     } else {
                         rightHeader.animate({
                             right: '-300px'
-
                         }, 300);
+
                         back.fadeOut();
+
                         flag = true;
                     }
                 });
-
                 back.on('click', function () {
                     if (flag === true) {
                         rightHeader.animate({
                             right: '0'
                         }, 300);
+
                         flag = false;
+
                     } else {
                         rightHeader.animate({
                             right: '-300px'
-
                         }, 300);
+
                         back.fadeOut();
+
                         flag = true;
+
                     }
                 })
+            },
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName, {
+                    'event_category': categoryName,
+                    'event_label': labelName
+                });
             },
             deleteProduct: function () {
                 var self = this;
@@ -1153,11 +1185,15 @@
                         self.popUpMsg = 'حذف شد.';
                         $('#custom-main-modal').modal('show');
 
+                        self.registerComponentStatistics('product', 'product-deleted', 'product-deleted-successfully');
+
                         setTimeout(function () {
                             window.location.reload();
                         }, 3000);
+
                     })
                     .catch(function (err) {
+                        self.registerComponentStatistics('product', 'product-delete-failed', 'product-delete-failed');
                         //show modal
                         self.popUpMsg = 'خطایی رخ داده است.لطفا دوباره تلاش کنید.';
                         $('#custom-main-modal').modal('show');
@@ -1169,6 +1205,7 @@
             this.init();
             this.toggleHeader();
             this.toggleShowHeader();
+
         },
         created() {
             eventBus.$on('submiting', (event) => {
@@ -1176,6 +1213,9 @@
             });
             eventBus.$on('submitSuccess', (event) => {
                 this.popUpMsg = event;
+            });
+            eventBus.$on('uploadPercentage', (event) => {
+                this.uploadPercentage = event;
             });
             eventBus.$on('deleteButtonText', (event) => {
                 this.deleteButtonText = event;
@@ -1187,20 +1227,13 @@
             eventBus.$on('productId', (event) => {
                 this.productId = event;
             });
-            eventBus.$on('uploadPercentage', (event) => {
-                this.uploadPercentage = event;
-            });
         },
         metaInfo() {
             return {
                 title: 'بازارگاه کشاورزی',
                 titleTemplate: 'اینکوباک | %s',
             }
-        },
-        watch: {
-            uploadPercentage: function () {
-                console.log(this.uploadPercentage);
-            }
+
         }
     }
 </script>

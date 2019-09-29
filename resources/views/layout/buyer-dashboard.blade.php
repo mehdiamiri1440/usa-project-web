@@ -12,7 +12,7 @@
     <script src="{{asset('assets/js/kamadatepicker.js')}}"></script>
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/fontiran.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/imageuploadify.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/all.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap-theme.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/cropper.css')}}">
@@ -77,9 +77,10 @@
 <div id="app"></div>
 <div id="appLayouts"></div>
 <div id="appSeller"></div>
-<div id="appBuyer">
+<div id="appBuyer" style="height: 100%">
+
    <header-dash-buyer
-            logo="{{asset('assets/img/logo-incobac.png')}}"
+            logo="{{asset('assets/img/logo-incobac-white-red.png')}}"
             storage="{{asset('storage/')}}"
             defultimg="{{asset('assets/img/user-defult.png')}}"
             transactroute="{{route('my-terminated-transaction-list')}}"
@@ -92,6 +93,7 @@
             loading="{{asset('assets/img/gif/prload.gif')}}"
             guide="{{url('privacy_and_policy.vue')}}"
     ></header-dash-buyer>
+
     <main id="main">
         <router-view
                 name="buyer"
@@ -100,7 +102,7 @@
                 transRep="{{url('dashboard/transaction-report')}}"
                 str="{{asset('storage/')}}"
                 defimgitem="{{asset('/assets/img/product.jpg')}}"
-                      defultimg="{{asset('assets/img/user-defult.png')}}"
+                defultimg="{{asset('assets/img/user-defult.png')}}"
         ></router-view>
     </main>
 </div>

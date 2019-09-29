@@ -64,7 +64,9 @@ label {
 
   top: 6px;
 
-  font-family: "FontAwesome", sans-serif;
+  font-family: "Font Awesome 5 Free",sans-serif;
+
+  font-weight: 900;
 
   left: 15px;
 
@@ -344,9 +346,9 @@ label .small-label {
       </div>
 
       <!-- <span class="small-description">
-			     		
- انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند 
- انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند 
+
+ انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند
+ انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند
 
       </span>-->
 

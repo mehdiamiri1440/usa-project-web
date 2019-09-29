@@ -40,6 +40,7 @@
   position: fixed;
 
   /*right: 0;*/
+  background: #fff;
 
   left: 0;
 
@@ -623,7 +624,7 @@
 
               <div class="button-wrapper">
                 <button type="submit" @click.prevent="sendMessage()">
-                  <i class="fa fa-send"></i>
+                  <i class="fa fa-paper-plane"></i>
                 </button>
               </div>
             </form>
@@ -709,7 +710,7 @@ export default {
               }
             })
             .catch(function(e) {
-              alert("error");
+                alert("error");
             });
         })
         .catch(function(e) {
@@ -841,7 +842,13 @@ export default {
       } else {
         return false;
       }
-    }
+    },
+    registerComponentStatistics: function (categoryName, actionName, labelName) {
+        gtag('event', actionName, {
+            'event_category': categoryName,
+            'event_label': labelName
+        });
+    },
   },
   watch: {
     contactNameSearchText: function() {
