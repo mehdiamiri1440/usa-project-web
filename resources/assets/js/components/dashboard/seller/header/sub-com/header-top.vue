@@ -78,7 +78,7 @@
 }
 
 .profile-menu-header span.user_name{
- 
+
   display: block;
 
   float: right;
@@ -109,7 +109,7 @@
   display: none;
 }
 
-/*.content-header span{  
+/*.content-header span{
   display: block;
   text-align: right;
 }*/
@@ -267,7 +267,7 @@ i.fa-home {
 
           <li>
             <router-link
-              :to="{name : 'profileBasic'}"
+              :to="{name : 'status'}"
               @click="registerComponentStatistics('dashboard-header','home-page-btn','click-on-home-page-in-dashboard')"
             >
               <i class="fa fa-home" aria-hidden="true"></i>
@@ -287,7 +287,7 @@ var visible = false;
 import SubMenu from "./sub-menu/sub-menu.vue";
 
 export default {
-  
+
   components: {
     SubMenu
   },

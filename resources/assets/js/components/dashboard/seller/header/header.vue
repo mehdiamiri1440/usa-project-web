@@ -73,6 +73,7 @@
         padding-right: 5px;
         padding-left: 5px;
     }
+
     .green-button {
         margin: 15px 0 0;
         display: inline-block;
@@ -85,6 +86,7 @@
         -webkit-transition: 300ms;
         transition: 300ms;
     }
+    
     .green-button:hover {
         background: #279b41;
         color: #fff;
@@ -123,13 +125,13 @@
     .logo img {
 
         width: 100px;
-        
+
     }
 
     .logo a p{
 
         margin-top: -6px;
-       
+
     }
 
     .right-header {
@@ -211,7 +213,7 @@
         display: none;
 
     }
-    
+
     .profile-img {
         overflow: hidden;
         border-radius: 50%;
@@ -222,7 +224,7 @@
         border: 2px solid #fff;
         float: right;
     }
-    
+
     .dark-profile-img {
         overflow: hidden;
         border-radius: 50%;
@@ -584,6 +586,7 @@
         .user_name{
             display: none !important;
         }
+
         .right-menu-header {
             padding: 6px;
             border-right: 1px solid #eff3f6;
@@ -629,7 +632,7 @@
 
 <template>
     <div>
-        
+
              <!-- Modal -->
 
 
@@ -661,7 +664,7 @@
             </div>
         </div>
 
-          <div class="container">
+        <div class="container">
                     <div class="modal fade"
                          id="modal-buttons"
                          tabindex="-1"
@@ -681,17 +684,15 @@
                                     <button class="btn green-button " data-dismiss="modal">
                                         متوجه شدم
                                     </button>
-                                    <a class="btn green-button" href='/pricing'>
+                                    <router-link class="btn green-button" data-dismiss="modal" :to='{name : "dashboardPricingTable"}'>
                                         مشاهده تعرفه ها
-                                    </a>
+                                    </router-link>
                                 </div>
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
                     </div>
+
         </div>
-
-
-
 
 
 
@@ -1017,23 +1018,12 @@
                 if (num == null) {
                     return null;
                 }
-                var numDic = {
-                    '۰': '0',
-                    '۱': '1',
-                    '۲': '2',
-                    '۳': '3',
-                    '۴': '4',
-                    '۵': '5',
-                    '۶': '6',
-                    '۷': '7',
-                    '۸': '8',
-                    '۹': '9',
-                };
 
-                return num
-                    .toString()
-                    .replace(/[۰-۹]/g, function (w) {
-                        return numDic[w];
+                return num.toString()
+                    .replace(/[\u0660-\u0669]/g, function (c) {
+                        return c.charCodeAt(0) - 0x0660;
+                    }).replace(/[\u06f0-\u06f9]/g, function (c) {
+                        return c.charCodeAt(0) - 0x06f0;
                     });
             },
             toggleHeader() {
@@ -1200,7 +1190,7 @@
                         setTimeout(function () {
                             window.location.reload();
                         }, 3000);
-                    
+
                     })
                     .catch(function (err) {
                         self.registerComponentStatistics('product', 'product-delete-failed', 'product-delete-failed');

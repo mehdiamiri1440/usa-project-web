@@ -72,7 +72,7 @@
 
      .progrees-item.active-item{
         color: #333;
-      
+
     }
 
     .progrees-item.active-item p{
@@ -123,7 +123,7 @@
         .main-section-wrapper{
             max-width: 600px;
         }
-         
+
            .main-section-wrapper{
                 max-width: 420px;
                 margin: 20px auto ;
@@ -144,7 +144,7 @@
             left: 0;
 
         }
-    
+
         .progrees-item p{
             display: none;
         }
@@ -155,7 +155,7 @@
         }
 
          .active-progress-wrapper{
-            
+
             right: 20px;
             left: 26px;
 
@@ -170,7 +170,7 @@
          }
      }
 
-  
+
 </style>
 
 
@@ -220,10 +220,10 @@
              StartRegisterRequest,
             RegisterRequest,
             FnishRegisterRequest
-        },   
-        data: function () {         
+        },
+        data: function () {
             return {
-                currentStep: 0,                
+                currentStep: 0,
                 errors: {
                     categorySelected : '',
                     category_id : '',
@@ -293,7 +293,7 @@
                 if (!this.buyAd.category_id) {
                     this.errors.category_id = "نام محصول الزامی است"
                 }
-                
+
                 // this.nameValidator(this.buyAd.name);
                 console.log(this.nameValidator(this.buyAd.name));
                 this.requirementAmountValidator(this.buyAd.requirement_amount);
@@ -323,7 +323,7 @@
                             eventBus.$emit('submitingEvent', false);
 
                             self.registerComponentStatistics('buyAd-register', 'buyAd-registered-successfully', 'buyAd-registered-successfully');
-                            
+
                             if(response.data.product){
                                 self.relatedProduct = response.data.product;
                             }
@@ -354,7 +354,7 @@
                     formData.append(this.buyAdFields[i], this.toLatinNumbers(this.buyAd[this.buyAdFields[i]]));
                 }
                 return formData;
-                
+
             },
             setCategoryId: function (e) {
                 e.preventDefault();
@@ -366,27 +366,16 @@
             },
             toLatinNumbers: function (num) {
                 if (num == null) {
-                    return '';
+                    return null;
                 }
-                var numDic = {
-                    '۰': '0',
-                    '۱': '1',
-                    '۲': '2',
-                    '۳': '3',
-                    '۴': '4',
-                    '۵': '5',
-                    '۶': '6',
-                    '۷': '7',
-                    '۸': '8',
-                    '۹': '9',
-                };
 
-                return num
-                    .toString()
-                    .replace(/[۰-۹]/g, function (w) {
-                        return numDic[w];
+                return num.toString()
+                    .replace(/[\u0660-\u0669]/g, function (c) {
+                        return c.charCodeAt(0) - 0x0660;
+                    }).replace(/[\u06f0-\u06f9]/g, function (c) {
+                        return c.charCodeAt(0) - 0x06f0;
                     });
-            }, 
+            },
             registerComponentStatistics: function (categoryName, actionName, labelName) {
                 gtag('event', actionName, {
                     'event_category': categoryName,
@@ -409,7 +398,7 @@
                     ios = /iphone|ipod|ipad/.test(userAgent);
 
                 return ios;
-            }, 
+            },
             scrollToTop() {
                 window.scrollTo(0, 0);
             },
@@ -431,8 +420,8 @@
                 }else if (!this.validateRegx(standardNumber, /^\d*$/)) {
                     this.errors.requirement_amount = 'فقط عدد وارد کنید';
                 }
-            
-            },  
+
+            },
             validateRegx: function (input, regx) {
                 return regx.test(input);
             },
