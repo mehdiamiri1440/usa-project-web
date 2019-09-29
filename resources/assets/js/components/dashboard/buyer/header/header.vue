@@ -1,4 +1,7 @@
 <style>
+    html, body, #main {
+    height: 100%;
+    }
 
     html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -109,10 +112,24 @@
     }
 
     .logo a {
+
         display: inline-block;
-        margin-top: -11px;
-        height: 75px;
+        margin-top: 0;
         padding: 0 10px;
+        color: #fff;
+        text-align: center;
+    }
+
+    .logo img {
+
+        width: 100px;
+        
+    }
+
+    .logo a p{
+
+        margin-top: -6px;
+       
     }
 
     .right-header {
@@ -136,7 +153,11 @@
 
     .right-header > header {
         overflow: hidden;
-        background: #fff;
+        background: #313a43;
+        border-bottom: 2px solid #2a3035;
+        border-bottom-color: rgb(42, 48, 53);
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
     }
 
     .close_menu, .close_menu_mob {
@@ -148,6 +169,10 @@
         top: 0;
         position: relative;
         padding: 11px;
+    }
+
+    .close_menu i ,.close_menu_mob i{
+        color: #fff;
     }
 
     .close_menu_mob {
@@ -172,11 +197,21 @@
         display: none;
     }
 
+
+
     .profile {
-        padding: 20px 20px 10px;
-        border-bottom: 2px solid #2e353e;
+
+        padding: 10px 15px 15px;
+        text-align: center;
+
     }
 
+    .little_header .profile {
+
+        display: none;
+
+    }
+    
     .profile-img {
         overflow: hidden;
         border-radius: 50%;
@@ -187,6 +222,7 @@
         border: 2px solid #fff;
         float: right;
     }
+    
     .dark-profile-img {
         overflow: hidden;
         border-radius: 50%;
@@ -435,6 +471,8 @@
         background: #637484;
     }
 
+
+
     @media screen and (max-width: 994px) {
         .content-header {
             display: none;
@@ -602,7 +640,7 @@
                     <div class="modal-content">
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal">
-                                <i class="fa fa-close"></i>
+                                <i class="fa fa-times"></i>
                             </a>
 
                             <p class="main-pop-up" v-text="popUpMsg"></p>
@@ -628,7 +666,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="main_popup_content">
-                            <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                            <a href="#" data-dismiss="modal"> <i class="fa fa-times"></i></a>
                             <p class="main-pop-up" id="popUpMsg">
                                 لطفا پس از تکمیل اطلاعات پروفایل خود، منتظر تماس کارشناسان اینکوباک جهت تکمیل اطلاعات
                                 باشید. از شکیبایی شما سپاسگزاریم.
@@ -649,7 +687,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="main_popup_content">
-                            <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                            <a href="#" data-dismiss="modal"> <i class="fa fa-times"></i></a>
                             <p class="main-pop-up" id="contractModal">
 
                                 برای شروع استفاده از خدمات اینکوباک ابتدا در قسمت ویرایش پروفایل، قرارداد همکاری را
@@ -696,6 +734,9 @@
                 <span class="logo">
                     <a href="/">
                         <img :src="logo" alt="incoboc">
+                        <p>
+                            بازارگاه آنلاین کشاورزی
+                        </p>
                     </a>
                 </span>
 
@@ -747,6 +788,9 @@
                 <span class="logo">
                     <a href="/">
                         <img :src="logo" alt="incoboc">
+                        <p>
+                            بازارگاه آنلاین کشاورزی
+                        </p>
                     </a>
                 </span>
 
@@ -754,7 +798,7 @@
 
             <section class="main-right-header">
                 <ProfileInfo
-                :isLoading='isLoading'               
+                :isLoading='isLoading'
                         :photoLink="currentUser.profile.profile_photo"
                         :storage="storage"
                         :def="defultimg"

@@ -62,7 +62,7 @@
         font-size: 32px;
     }
 
-    
+
     .main-logo-popup img {
         width: 30%;
     }
@@ -144,7 +144,7 @@
                     <div class="modal-content">
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal">
-                                <i class="fa fa-close"></i>
+                                <i class="fa fa-times"></i>
                             </a>
                             <p class="main-pop-up" v-text="popUpMsg"></p>
 
@@ -169,7 +169,7 @@
                     <div class="modal-content">
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal">
-                                <i class="fa fa-close"></i>
+                                <i class="fa fa-times"></i>
                             </a>
 
                             <p class="main-pop-up" v-text="popUpMsg">
@@ -191,7 +191,7 @@
                 <div class="modal-dialog modal-lg" role="document">
                     <a href="#" class="close-dialog-popup"
                        data-dismiss="modal">
-                        <i class="fa fa-close"></i>
+                        <i class="fa fa-times"></i>
                     </a>
 
                     <div class="main_popup_content">
@@ -230,7 +230,7 @@
                     <div class="modal-content">
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal">
-                                <i class="fa fa-close"></i>
+                                <i class="fa fa-times"></i>
                             </a>
 
                             <p class="main-pop-up" v-text="popUpMsg">

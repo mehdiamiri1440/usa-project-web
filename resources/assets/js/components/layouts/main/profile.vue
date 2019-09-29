@@ -157,13 +157,13 @@
                                         <a href="/dashboard/profile" class="green-button edit"
                                            v-if="currentUser.user_info.id === profileOwner.user_info.id">
 
-                                            <i class="fa fa-pencil"></i>
+                                            <i class="fa fa-pencil-alt"></i>
                                             ویرایش پروفایل
                                         </a>
 
                                         <a v-else href="#" @click.prevent="openChat()" class="green-button edit">
 
-                                            <i class="fa fa-comment"></i>
+                                            <i class="fas fa-comment-alt"></i>
                                             ارسال پیام
                                         </a>
 
@@ -171,7 +171,7 @@
 
                                     <div v-else>
                                         <a href="#" @click.prevent="openChat()" class="green-button edit">
-                                            <i class="fa fa-comment"></i>
+                                            <i class="fas fa-comment-alt"></i>
                                             ارسال پیام
                                         </a>
                                     </div>
@@ -227,7 +227,7 @@
                                             profileOwner.user_info.id"
                                            @click="registerComponentStatistics('profileView','editProfile','click on edit profile')">
 
-                                            <i class="fa fa-pencil"></i>
+                                            <i class="fa fa-pencil-alt"></i>
                                             ویرایش پروفایل
 
                                         </a>
@@ -236,7 +236,7 @@
                                            class="green-button edit"
                                            v-else>
 
-                                            <i class="fa fa-pencil"></i>
+                                            <i class="fa fa-pencil-alt"></i>
                                             ارسال پیام
                                         </a>
 
@@ -251,7 +251,7 @@
                                     </div>
 
                                     <div class="content_user_info col-xs-12 col-sm-8 col-md-9">
-                                       
+
                                         <div class="row">
                                             <div class="col-xs-6 pull-right">
 
@@ -264,7 +264,7 @@
                                             </div>
 
                                             <div class="col-xs-6 ">
-                                                
+
 
                                                 <p>
                                                     آدرس :
@@ -279,22 +279,22 @@
                                             </div>
 
                                             <div   class="col-xs-6 pull-right">
-                                                
+
                                                 <p v-if="profileOwner.profile.is_company">
                                                     نام شرکت
 
                                                     <span v-text="profileOwner.profile.company_name"></span>
                                                 </p>
 
-                                            </div>                                            
+                                            </div>
 
                                             <div class="col-xs-6 ">
-                                                
+
                                                 <p  v-if="profileOwner.profile.is_company" >
                                                    شماره ثبت
 
                                                     <span v-text="profileOwner.profile.company_register_code"></span>
-                                                </p>  
+                                                </p>
 
                                             </div>
 
@@ -302,7 +302,7 @@
 
 
                                         </div>
-                                                 
+
                                     </div>
                                 </div>
                             </div>
@@ -324,7 +324,7 @@
 
                                         <a href="#" class="green-button edit"
                                            @click="copyProfileLinkToClipBoard">
-                                            <i class="fa fa-pencil"></i>
+                                            <i class="fa fa-pencil-alt"></i>
                                             ویرایش پروفایل
                                         </a>
 
@@ -348,7 +348,7 @@
 
 
 
-                                 
+
                                         <div class="row">
                                             <div class="col-xs-6 pull-right">
 
@@ -361,7 +361,7 @@
                                             </div>
 
                                             <div class="col-xs-6 ">
-                                                
+
 
                                                 <p>
                                                     آدرس :
@@ -376,22 +376,22 @@
                                             </div>
 
                                             <div   class="col-xs-6 pull-right">
-                                                
+
                                                 <p v-if="profileOwner.profile.is_company">
                                                     نام شرکت :
 
                                                     <span v-text="profileOwner.profile.company_name"></span>
                                                 </p>
 
-                                            </div>                                            
+                                            </div>
 
                                             <div class="col-xs-6 ">
-                                                
+
                                                 <p  v-if="profileOwner.profile.is_company" >
                                                    شماره ثبت :
 
                                                     <span v-text="profileOwner.profile.company_register_code"></span>
-                                                </p>  
+                                                </p>
 
                                             </div>
 
@@ -399,8 +399,8 @@
 
 
                                         </div>
-                                                                                         
-                                       
+
+
                                     </div>
                                 </div>
 
@@ -412,7 +412,7 @@
                         <div class="col-xs-6" :class="{'active':profileDescription}">
                             <a @click="showProfileOwnerDescription($event)" href="">
                                 <div class="inside-links">
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> توضیحات من
+                                    <i class="fa fa-edit" aria-hidden="true"></i> توضیحات من
                                 </div>
                             </a>
                         </div>
@@ -531,7 +531,7 @@
 
                     <div class="contents" v-else>
 
- 
+
                          <ProductArticle v-if="products.length > 0" v-for="(product,productIndex) in products"
                                     :key="product.main.id"
                                     :product="product"
@@ -760,7 +760,7 @@
                 }
                 else {
                     this.copyLinkText = 'کپی آدرس';
-                    this.copyLinkClass = 'fa fa-clipboard';
+                    this.copyLinkClass = 'fa fa-copy';
                 }
 
                 axios.post('/get_user_statistics_by_user_name', {

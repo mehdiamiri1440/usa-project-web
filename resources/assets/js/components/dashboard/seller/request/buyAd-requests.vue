@@ -1,4 +1,4 @@
-<style>
+<style scoped>
      .wrapper_no_pro {
         text-align: center;
         font-size: 23px;
@@ -15,7 +15,7 @@
         margin: 30px auto;
         color: #bdbdbd;
     }
-    
+
     .list-title, .needs, .list-time {
         float: right;
         text-align: center;
@@ -119,7 +119,7 @@
                         <h1>
                             درخواست ها
                         </h1>
-                    </div> 
+                    </div>
                 </div>
             </div>
             <div class="col-xs-12">
@@ -155,7 +155,7 @@
 
                         <a class="col-sm-3 col-xs-12" href="" @click.prevent=openChat(buyAd)>
                             <p class="detail-success">
-                                <span class="fa fa-comment"></span> پیام به خریدار
+                                <span class="fas fa-comment-alt"></span> پیام به خریدار
                             </p>
                         </a>
                     </li>

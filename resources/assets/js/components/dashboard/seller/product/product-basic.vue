@@ -9,7 +9,7 @@
         box-shadow: 0 0 10px #c5c5c5;
         position: absolute;
         left: calc(50% - 342px);
-        top: calc(50% - 250px);
+        top: 65px;
         margin-bottom: 50px;
         min-height: 500px;
         direction: rtl;

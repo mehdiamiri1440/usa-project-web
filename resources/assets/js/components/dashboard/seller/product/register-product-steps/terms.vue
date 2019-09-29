@@ -64,7 +64,9 @@ textarea {
 
   top: 6px;
 
-  font-family: "FontAwesome", sans-serif;
+  font-family: "Font Awesome 5 Free",sans-serif;
+
+  font-weight: 900;
 
   left: 15px;
 

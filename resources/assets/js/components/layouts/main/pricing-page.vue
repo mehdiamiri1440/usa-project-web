@@ -1,0 +1,93 @@
+<style scoped>
+
+    .text-red {
+        color: #e41c38;
+    }
+
+    #faq {
+        direction: rtl;
+        padding-top: 105px;
+        padding-bottom: 0;
+        background-position: 50% 60px;
+        background: #f6f6f6;
+
+    }
+
+    #faq .wrapper-table {
+        visibility: visible;
+        animation-delay: 0.9s;
+        animation-name: fadeInUp;
+    }
+  
+
+
+</style>
+<template>
+    <div>
+
+        <section id="intro" class="parallax-section">
+            <div class="container-fluid main_hero_section col-xs-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h1 class="wow fadeIn" data-wow-delay="1.2s">
+                                تعرفه ها
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="parallax-section">
+            <div class="container">
+                <div class="row">
+
+                    <PricingTableComponent />
+
+                </div>
+            </div>
+        </section>
+    </div>
+</template>
+
+
+<script>
+    import {eventBus} from "../../../router/dashboard_router";
+    import PricingTableComponent from './pricing-table-content'
+ 
+    export default {
+        components:{
+            PricingTableComponent
+        },
+        methods: {
+            stopLoader: function () {
+                eventBus.$emit('isLoading', false);
+            },
+            trElement: function (element) {
+                var elementClass = $(element).attr('class');
+                if (elementClass !== '') {
+                    console.log($(element).toggleClass('changed-angle'));
+                } else {
+                    console.log('false')
+
+                }
+
+            }
+        },
+        mounted: function () {
+            var self = this;
+            document.onreadystatechange = () => {
+                if (document.readyState === "complete") {
+                    self.$nextTick(self.stopLoader());
+                }
+            }
+        },
+        updated: function () {
+            this.$nextTick(this.stopLoader());
+        },
+        created() {
+            gtag('config', 'UA-129398000-1', {'page_path': '/pricing'});
+        }
+    }
+</script>
