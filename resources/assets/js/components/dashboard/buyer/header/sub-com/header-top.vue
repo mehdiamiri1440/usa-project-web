@@ -179,23 +179,16 @@ i.fa-home {
   position: relative;
   top: 5px;
 }
-
+    
 .product-list-link{
-
 
   font-size: 17px !important;
   padding: 7px 20px !important;
-  color: #00c569 !important;
+  background: #00c569 !important;
   border-radius: 4px;
   border: 1px solid;
   display: inline-block;
-  font-weight: bold;
-
-}
-.product-list-link:hover{
-
   color: #fff !important;
-  background: #00c569;
 
 }
 

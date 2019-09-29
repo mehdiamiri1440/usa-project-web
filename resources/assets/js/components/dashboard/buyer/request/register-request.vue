@@ -13,6 +13,7 @@
         margin-bottom: 50px;
         min-height: 500px;
         direction: rtl;
+        padding-bottom: 15px;
 
     }
 
@@ -122,19 +123,28 @@
         .main-section-wrapper{
             max-width: 600px;
         }
+         
+           .main-section-wrapper{
+                max-width: 420px;
+                margin: 20px auto ;
+            }
 
         .main-content{
             max-width: initial;
             background: #fff;
             border-radius: 0;
             box-shadow: none;
-            position: inherit;
             min-height: 500px;
             direction: rtl;
             transform: translate(0,0);
+            height: 100%;
+            bottom: 0;
+            top: 0;
+            width: 100%;
+            left: 0;
 
         }
-
+    
         .progrees-item p{
             display: none;
         }
@@ -180,7 +190,7 @@
 
                     <div v-else class="wrapper-progressbar title">
 
-                        <h2>ثبت درخواست با موفقیت انجام شد</h2>
+                        <h2>درخواست شما با موفقیت ثبت شد</h2>
 
                     </div>
 
@@ -248,6 +258,7 @@
                 profileConfirmed: false,
                 disableSubmit: false,
                 submiting: false,
+                relatedProduct:null,
                 items: [
                     {
                         message: ' ثبت درخواست جدید',
@@ -312,6 +323,10 @@
                             eventBus.$emit('submitingEvent', false);
 
                             self.registerComponentStatistics('buyAd-register', 'buyAd-registered-successfully', 'buyAd-registered-successfully');
+                            
+                            if(response.data.product){
+                                self.relatedProduct = response.data.product;
+                            }
 
                             self.goToStep(2);
 
@@ -412,9 +427,9 @@
                 this.errors.stock = '';
                 var standardNumber = this.toLatinNumbers(number);
                 if (standardNumber == '') {
-                    this.errors.requirement_amount = 'فیلد حد اکثر قیمت الزامی است';
+                    this.errors.requirement_amount = 'فیلد میزان نیاز الزامی است';
                 }else if (!this.validateRegx(standardNumber, /^\d*$/)) {
-                    this.errors.requirement_amount = 'لطفا عدد وارد کنید';
+                    this.errors.requirement_amount = 'فقط عدد وارد کنید';
                 }
             
             },  
@@ -423,6 +438,44 @@
             },
             reLoadPage(){
                 location.reload(true);
+            },
+            openChat: function (product) {
+                this.registerComponentStatistics('productReplyAfterBuyAdRegister', 'openChat', 'click on open chatBox');
+
+                axios.post('/get_user_last_confirmed_profile_photo', {
+                    'user_id': product.myuser_id
+                }).then(function (response) {
+                    var profile_photo = response.data.profile_photo;
+
+                    var contact = {
+                        contact_id: product.myuser_id,
+                        first_name: product.first_name,
+                        last_name: product.last_name,
+                        profile_photo: profile_photo,
+                        user_name: product.user_name,
+                    };
+
+                    axios.post('/set_last_chat_contact', contact)
+                        .then(function (response) {
+                            window.location.href = '/dashboard/messages';
+                        })
+                        .catch(function (e) {
+                            alert('Error');
+                        });
+                })
+                    .catch(function (err) {
+                        //
+                    });
+            },
+            getProductUrl: function () {
+
+                return '/product-view/خرید-عمده-'
+                    + this.relatedProduct.subcategory_name.replace(' ', '-')
+                    + '/'
+                    + this.relatedProduct.category_name.replace(' ', '-')
+                    + '/'
+                    + this.relatedProduct.id;
+
             },
         },
         mounted() {

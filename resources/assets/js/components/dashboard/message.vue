@@ -710,7 +710,7 @@ export default {
               }
             })
             .catch(function(e) {
-              alert("error");
+                alert("error");
             });
         })
         .catch(function(e) {
@@ -842,7 +842,13 @@ export default {
       } else {
         return false;
       }
-    }
+    },
+    registerComponentStatistics: function (categoryName, actionName, labelName) {
+        gtag('event', actionName, {
+            'event_category': categoryName,
+            'event_label': labelName
+        });
+    },
   },
   watch: {
     contactNameSearchText: function() {

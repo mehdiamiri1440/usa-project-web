@@ -108,6 +108,7 @@
 ============================== -->
     <header-master-layouts
             user_id="{{session('user_id')}}"
+            is_seller = "{{session('is_seller')}}"
             user_default_image="{{asset('assets/img/user-defult.png')}}"
             profile_photo="{{session('profile_photo')}}"
             user_full_name="{{session('full_name')}}"

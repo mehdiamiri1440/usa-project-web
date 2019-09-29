@@ -471,7 +471,10 @@
         background: #637484;
     }
 
-
+    .green-button.delete {
+        background: #e41c38;
+        color: #fff;
+    }
 
     @media screen and (max-width: 994px) {
         .content-header {
@@ -629,28 +632,25 @@
         <!-- Modal -->
 
 
+        
         <div class="container">
-            <div id="deleteModal"
-                 class="modal"
-                 tabindex="-1"
-                 role="dialog"
-                 aria-labelledby="myLargeModalLabel"
-            >
-
+            <div id="deleteModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal">
-                                <i class="fa fa-close"></i>
+                                <i class="fa fa-times"></i>
                             </a>
-
                             <p class="main-pop-up" v-text="popUpMsg"></p>
 
-                            <a href="#" class="btn green-button delete" data-dismiss="modal"
-                               @click.prevent="deleteProduct()" v-text="deleteButtonText"></a>
+                            <a href="#" class="btn green-button delete " data-dismiss="modal"
+                               @click.prevent="deleteProduct()" v-text="deleteButtonText">
 
-                            <a href="#" class="btn green-button " data-dismiss="modal" v-text="cancelButtonText"></a>
+                            </a>
 
+                            <a href="#" class="btn green-button"
+                               data-dismiss="modal" v-text="cancelButtonText">
+                            </a>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
@@ -953,7 +953,10 @@
                 errors: '',
                 popUpMsg: '',
                 submiting: false,
-                uploadPercentage: 0
+                uploadPercentage: 0,
+                deleteText: '',
+                deleteButtonText: '',
+                cancelButtonText: '',
             }
         },
         methods: {
@@ -1173,7 +1176,7 @@
             this.init();
             this.toggleHeader();
             this.toggleShowHeader();
-
+            
         },
         created() {
             eventBus.$on('submiting', (event) => {
@@ -1185,7 +1188,13 @@
             eventBus.$on('uploadPercentage', (event) => {
                 this.uploadPercentage = event;
             });
+             eventBus.$on('deleteButtonText', (event) => {
+                this.deleteButtonText = event;
+            });
 
+            eventBus.$on('cancelButtonText', (event) => {
+                this.cancelButtonText = event;
+            });
         },
         metaInfo() {
             return {

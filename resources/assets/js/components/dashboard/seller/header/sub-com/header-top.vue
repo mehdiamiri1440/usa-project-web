@@ -182,20 +182,13 @@ i.fa-home {
 
 .product-list-link{
 
-
   font-size: 17px !important;
   padding: 7px 20px !important;
-  color: #00c569 !important;
+  background: #00c569 !important;
   border-radius: 4px;
   border: 1px solid;
   display: inline-block;
-  font-weight: bold;
-
-}
-.product-list-link:hover{
-
   color: #fff !important;
-  background: #00c569;
 
 }
 
@@ -235,10 +228,10 @@ i.fa-home {
         <div class="profile-list">
           <ul class="list-unstyled">
             <li class="list-item">
-              <a
-                :href="'/dashboard/profile'"
+              <router-link
+                :to="{name : 'profileBasic'}"
                 @click="registerComponentStatistics('seller-dashboard-header','profile-link','click-on-profile-link-in-dashboard')"
-              >پروفایل</a>
+              >پروفایل</router-link>
             </li>
 
             <li class="list-item">
@@ -273,12 +266,12 @@ i.fa-home {
           </li>
 
           <li>
-            <a
-              :href="routeHome"
+            <router-link
+              :to="{name : 'profileBasic'}"
               @click="registerComponentStatistics('dashboard-header','home-page-btn','click-on-home-page-in-dashboard')"
             >
               <i class="fa fa-home" aria-hidden="true"></i>
-            </a>
+            </router-link>
           </li>
         </ul>
       </div>

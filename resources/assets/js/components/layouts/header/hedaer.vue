@@ -272,9 +272,12 @@
 
                             <div class="profile-list">
                                 <ul class="list-unstyled">
-                                    <li class="list-item">
-                                        <a :href="'/dashboard/profile'">داشبورد</a>
-                                    </li>
+                                    <li v-if="is_seller == 1" class="list-item">
+                                            <a :href="'/dashboard/status'">داشبورد</a>
+                                        </li>
+                                        <li v-else class="list-item">
+                                            <a :href="'/dashboard/profile'">داشبورد</a>
+                                        </li>
                                     <li class="list-item">
                                         <a :href="'/dashboard/password'">تغییر کلمه عبور</a>
                                     </li>
@@ -308,11 +311,14 @@
                                 نخست</a>
 
                         </li>
-
+                        
                         <li v-if="user_id !== ''">
-                            <a class="smoothScroll" href="/dashboard/profile"
+                            <a v-if="is_seller == 1" class="smoothScroll" href="/dashboard/status"
+                               @click="registerComponentStatistics('header','dashboard','click-on-dashboard')">داشبورد</a>
+                             <a v-else class="smoothScroll" href="/dashboard/profile"
                                @click="registerComponentStatistics('header','dashboard','click-on-dashboard')">داشبورد</a>
                         </li>
+                       
                         <li>
                             <a class="smoothScroll" href="/product-list"
                                @click="registerComponentStatistics('header','product-list','click-on-product-list')">لیست
@@ -351,7 +357,10 @@
                                     class="name-header-profile">{{user_full_name}}</span></a>
                                 <div class="profile-list">
                                     <ul class="list-unstyled">
-                                        <li class="list-item">
+                                        <li v-if="is_seller == 1" class="list-item">
+                                            <a :href="'/dashboard/status'">داشبورد</a>
+                                        </li>
+                                        <li v-else class="list-item">
                                             <a :href="'/dashboard/profile'">داشبورد</a>
                                         </li>
                                         <li class="list-item">
@@ -395,6 +404,7 @@
         props: [
             'incobacicon',
             'user_id',
+            'is_seller',
             'user_default_image',
             'profile_photo',
             'user_full_name',
@@ -511,7 +521,7 @@
                         }, 3000);
                     })
                     .catch(function (err) {
-                        elf.registerComponentStatistics('product', 'product-delete-failed', 'product-delete-failed');
+                        self.registerComponentStatistics('product', 'product-delete-failed', 'product-delete-failed');
                         //show modal
                         self.popUpMsg = 'خطایی رخ داده است.لطفا دوباره تلاش کنید.';
                         $('#custom-main-modal').modal('show');
