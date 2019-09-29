@@ -626,7 +626,72 @@
 
 <template>
     <div>
-        <!-- Modal -->
+        
+             <!-- Modal -->
+
+
+        <div class="container">
+            <div id="deleteModal"
+                 class="modal"
+                 tabindex="-1"
+                 role="dialog"
+                 aria-labelledby="myLargeModalLabel"
+            >
+
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="main_popup_content">
+                            <a href="#" data-dismiss="modal">
+                                <i class="fa fa-close"></i>
+                            </a>
+
+                            <p class="main-pop-up" v-text="popUpMsg"></p>
+
+                            <a href="#" class="btn green-button delete" data-dismiss="modal"
+                               @click.prevent="deleteProduct()" v-text="deleteButtonText"></a>
+
+                            <a href="#" class="btn green-button " data-dismiss="modal" v-text="cancelButtonText"></a>
+
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+        </div>
+
+          <div class="container">
+                    <div class="modal fade"
+                         id="modal-buttons"
+                         tabindex="-1"
+                         ref="myModal"
+                         role="dialog"
+                         aria-labelledby="myModalLabel"
+                         aria-hidden="true"
+                    >
+
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="main_popup_content">
+                                    <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                                    <p class="main-pop-up" v-text="popUpMsg">
+
+                                    </p>
+                                    <button class="btn green-button " data-dismiss="modal">
+                                        متوجه شدم
+                                    </button>
+                                    <a class="btn green-button" href='/pricing'>
+                                        مشاهده تعرفه ها
+                                    </a>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div>
+        </div>
+
+
+
+
+
+
         <div class="container">
             <div class="modal fade"
                  id="custom-main-modal"
@@ -653,6 +718,7 @@
                 </div><!-- /.modal-dialog -->
             </div>
         </div>
+
 
         <div class="container">
             <div class="modal fade"
@@ -702,6 +768,8 @@
             </div>
         </div>
         <!-- /.modal -->
+
+
         <!--loader-->
         <!--loading upload-->
 
