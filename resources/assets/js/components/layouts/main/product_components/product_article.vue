@@ -400,15 +400,16 @@
                         <span>کیلوگرم</span>
                     </p>
 
-                    <!--<p>قیمت:
-                        <span v-text="product.main.min_sale_price +
+                    <p v-if="!isMyProfile">قیمت:
+                        <a  href="#" @click.prevent="openChat(product)">استعلام بگیرید</a>
+                       <!-- <span v-text="product.main.min_sale_price +
                          ' - ' +
                          product.main.max_sale_price"
                         >
                         </span>
 
-                        <span>تومان</span>
-                    </p>-->
+                        <span>تومان</span>-->
+                    </p>
 
                     <p>توضیحات: <span v-text="product.main.description"></span>
                     </p>
@@ -419,7 +420,7 @@
                         <div class="create_buy_mobile hidden-sm hidden-md hidden-lg">
                             <a v-if="!isMyProfile" class="green-button" href="#" @click.prevent="openChat(product)">
 
-                                <span class="fas fa-comment-alt"></span> ارسال پیام
+                                <span class="fas fa-comment-alt"></span> استعلام قیمت
                             </a>
 
                             <a v-if="isMyProfile" class="green-button edit-product" href="#"
