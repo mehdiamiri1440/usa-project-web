@@ -1,6 +1,6 @@
 <style>
     html, body, #main {
-    height: 100%;
+        height: 100%;
     }
 
     html, body, div, span, applet, object, iframe,
@@ -86,7 +86,7 @@
         -webkit-transition: 300ms;
         transition: 300ms;
     }
-    
+
     .green-button:hover {
         background: #279b41;
         color: #fff;
@@ -107,6 +107,8 @@
         float: right;
 
         width: 70%;
+
+        text-align: center;
     }
 
     .logo_hide {
@@ -142,6 +144,8 @@
         top: 0;
         overflow: hidden;
         z-index: 9;
+        background: #313a43;
+        direction: rtl;
     }
 
     .little_header {
@@ -182,8 +186,7 @@
     }
 
     .main-right-header {
-        background: #313a43;
-        height: 100%;
+
         text-align: right;
         color: #fff;
         position: relative;
@@ -215,14 +218,21 @@
     }
 
     .profile-img {
+
         overflow: hidden;
+
         border-radius: 50%;
-        height: 85px;
-        width: 85px;
+
+        height: 55px;
+
+        width: 55px;
+
         margin: 0 auto;
-        margin-left: 10px;
+
         border: 2px solid #fff;
+
         float: right;
+
     }
 
     .dark-profile-img {
@@ -240,8 +250,15 @@
     }
 
     .profile-content {
+
+        width: calc(100% - 55px);
+
         float: right;
-        padding-top: 15px;
+
+        text-align: right;
+
+        padding-right: 10px;
+
     }
 
     .profile-name {
@@ -261,7 +278,7 @@
 
     .header-menu a {
         color: #b1b1b1;
-        padding: 5px 20px;
+        padding: 10px 20px;
         display: inline-block;
         position: relative;
         width: 100%;
@@ -304,14 +321,18 @@
     }
 
     .copy-right {
+
         text-align: center;
         font-size: 12px;
         font-weight: 200;
-        line-height: 1.3em;
-        padding: 20px;
-        position: absolute;
-        bottom: 76px;
+        padding: 30px 15px 0;
         direction: rtl;
+        line-height: 1.618;
+        position: absolute;
+        bottom: 50px;
+        z-index: 10;
+        color: #fff;
+
     }
 
     label {
@@ -382,7 +403,7 @@
         bottom: 0;
         top: 0;
         background: rgba(0, 0, 0, 0.6);
-        z-index: -1;
+        z-index: 6;
         display: none;
     }
 
@@ -494,6 +515,8 @@
         .right-header.mobile-header {
             display: block;
             right: -300px;
+            overflow: auto;
+            direction: rtl;
         }
 
         .main-header, .little-main-header {
@@ -506,10 +529,6 @@
 
         .post-contents-table {
             width: 100%;
-        }
-
-        .copy-right {
-            display: none;
         }
 
         .close_menu {
@@ -834,19 +853,11 @@
                         :mytrans="mytrans"
                 />
 
-                <!-- <div class="copy-right">
-
-                      <p dir="rtl">
-                          تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.
-                      </p>
-                 </div>-->
-
             </section>
 
-            <div class="background_mob_sec"></div>
 
         </section>
-
+        <div class="background_mob_sec"></div>
         <section class="right-header desktop-header">
             <header class="header-right-header">
                 <button class="close_menu_mob">
@@ -889,7 +900,12 @@
                 />
 
             </section>
+            <div class="copy-right">
 
+                <p dir="rtl">
+                    تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.
+                </p>
+            </div>
         </section>
 
         <HeaderTop
@@ -901,6 +917,8 @@
                 :out="logout"
                 :routeHome="routehome"
         />
+
+
     </div>
 
 </template>
@@ -1092,6 +1110,9 @@
                 var back = $(".background_mob_sec");
                 var closeHeaderButtonMobileLinks = $('.mobile-header .header-menu a');
                 showHeaderButtonElement.on('click', function () {
+
+                    rightHeader.animate({ scrollTop: 0 }, "fast");
+
                     if (flag === true) {
                         rightHeader.animate({
                             right: '0'
@@ -1111,6 +1132,7 @@
                     }
                 });
                 closeHeaderButtonMobile.on('click', function () {
+
                     if (flag === true) {
                         rightHeader.animate({
                             right: '0'
