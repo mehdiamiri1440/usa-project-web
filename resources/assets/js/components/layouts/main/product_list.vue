@@ -644,7 +644,7 @@
 
                              >
 
-                             <div class="margin-15-0 default-item-wrapper shadow-content row">
+                             <div v-for="(defaultItem ,index) in 6" :key="index" class="margin-15-0 default-item-wrapper shadow-content row">
 
                                  <div class="default-user-contents col-xs-12  col-sm-3">
 
@@ -671,95 +671,6 @@
 
                                      </div>
 
-
-                                    <div class=" default-main-article-content col-xs-12 col-sm-7">
-                                            <span class="content-half-width placeholder-content default-input-boxing-size"></span>
-
-                                            <span class="default-boxing-size content-full-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
-                                             <span class="default-boxing-size content-default-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
-                                         </div>
-                                 </div>
-                             </div>
-
-
-                          <div class="margin-15-0 default-item-wrapper shadow-content row">
-
-                                 <div class="default-user-contents col-xs-12  col-sm-3">
-
-                                     <div class=" default-boxing-size placeholder-content default-article-user-image"></div>
-
-                                     <div class="text-center xs-text-right">
-
-                                         <span class="placeholder-content default-boxing-size content-half-width "></span>
-
-                                     </div>
-
-                                        <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-                                         <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-
-                                 </div>
-
-                                 <div class="default-article-contents col-xs-12  col-sm-9">
-
-                                     <div class="default-wrapper-main-image pull-right  col-xs-12 col-sm-5">
-
-                                         <span class="default-main-image  placeholder-content"></span>
-
-                                     </div>
-
-
-                                    <div class=" default-main-article-content col-xs-12 col-sm-7">
-                                            <span class="content-half-width placeholder-content default-input-boxing-size"></span>
-
-                                            <span class="default-boxing-size content-full-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
-                                             <span class="default-boxing-size content-default-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
-                                         </div>
-                                 </div>
-                             </div>
-
-
-
-
-                                 <div class="margin-15-0 default-item-wrapper shadow-content row">
-
-                                 <div class="default-user-contents col-xs-12  col-sm-3">
-
-                                     <div class=" default-boxing-size placeholder-content default-article-user-image"></div>
-
-                                     <div class="text-center xs-text-right">
-
-                                         <span class="placeholder-content default-boxing-size content-half-width "></span>
-
-                                     </div>
-
-                                        <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-                                         <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-
-                                 </div>
-
-                                 <div class="default-article-contents col-xs-12  col-sm-9">
-
-                                     <div class="default-wrapper-main-image pull-right  col-xs-12 col-sm-5">
-
-                                         <span class="default-main-image  placeholder-content"></span>
-
-                                     </div>
 
                                     <div class=" default-main-article-content col-xs-12 col-sm-7">
                                             <span class="content-half-width placeholder-content default-input-boxing-size"></span>
