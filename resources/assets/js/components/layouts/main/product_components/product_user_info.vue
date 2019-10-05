@@ -128,7 +128,7 @@
             <div class="create_buy hidden-xs ">
                 <a href="#" @click.prevent="$parent.copyProductLinkToClipBoard"
                    class="btn btn-copy">
-                    <i aria-hidden="true" class="fa fa-clipboard"></i>
+                    <i aria-hidden="true" class="fa fa-copy"></i>
                     کپی آدرس
                 </a>
             </div>
@@ -139,7 +139,7 @@
                     مشاهده پروفایل
                 </a>
                 <a class="green-button hidden-xs" href="#" @click.prevent="openChat()">
-                    <span class="fa fa-comment"></span> ارسال پیام
+                    <span class="fas fa-comment-alt"></span> استعلام قیمت
                 </a>
             </div>
 
@@ -148,7 +148,7 @@
                    @click.prevent="deleteProduct()"> <span class="fa fa-trash"></span> حذف </a>
 
                 <a class="green-button edit-product hidden-xs" href="#" @click.prevent="$parent.openEditBox($event)">
-                    <span class="fa fa-pencil"></span> ویرایش
+                    <span class="fa fa-pencil-alt"></span> ویرایش
                 </a>
             </div>
         </div>
@@ -200,7 +200,7 @@
                             });
                     }
                     else {
-                        this.popUpMsg = 'شما نمیتوانید به خودتان پیام دهید.';
+                        this.popUpMsg = 'شما نمی توانید به خودتان پیام دهید.';
                         eventBus.$emit('submitSuccess', this.popUpMsg);
                         $('#custom-main-modal').modal('show');
                     }

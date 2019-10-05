@@ -1,5 +1,5 @@
 <style scoped>
-   
+
 
 
     .green-button:focus, .green-button:hover {
@@ -29,6 +29,7 @@
         border-radius: 5px;
         box-shadow: 0 0 15px #dbdbdb;
         padding: 15px 0;
+        background: #fff;
     }
 
     .main-article-title {
@@ -149,8 +150,8 @@
 
         color: #fff;
 
-        width: 54px;  
-        
+        width: 54px;
+
     }
 
     .valid-user-badge::after {
@@ -200,7 +201,7 @@
         bottom: -20px;
 
     }
-    
+
     input[type="text"], select, textarea {
         background: #eff3f6;
         border: 1px solid #cfcfcf;
@@ -216,15 +217,15 @@
         display: block;
         margin: 9px auto;
     }
-    
+
     .article-seo-title {
 
         margin-bottom: 15px;
         font-size: 15px;
         font-weight: bold;
-        
+
     }
-    
+
     .article-seo-title h2{
 
 
@@ -255,8 +256,8 @@
 </style>
 
 <template>
-   
-        
+
+
 
         <article class="main-content-item">
             <script v-html="jsonLDObject" type="application/ld+json"></script>
@@ -302,7 +303,7 @@
                         </div>
 
                         <div class="col-xs-6 text-right">
-                      
+
                             <div v-if="product.user_info.active_pakage_type != 0" class="valid-user-badge mobile-view hidden-sm hidden-md hidden-lg">
                                 <div class="wrapper-icon">
                                     <svg  width="24.965" height="30.574" viewBox="0 0 24.965 30.574">
@@ -367,7 +368,7 @@
                     </h3>
 
                        <div class="article-seo-title" v-if="$route.params.categoryName">
-                            نوع محصول: 
+                            نوع محصول:
 
                         <h2>
                         <span  v-text="product.main.product_name"></span>
@@ -376,7 +377,7 @@
                        </div>
 
                         <p v-else>
-                            نوع محصول: 
+                            نوع محصول:
                               <span  v-text="product.main.product_name"></span>
 
                         </p>
@@ -399,14 +400,15 @@
                         <span>کیلوگرم</span>
                     </p>
 
-                    <p>قیمت:
-                        <span v-text="product.main.min_sale_price +
+                    <p v-if="!isMyProfile">قیمت:
+                        <a  href="#" @click.prevent="openChat(product)">استعلام بگیرید</a>
+                       <!-- <span v-text="product.main.min_sale_price +
                          ' - ' +
                          product.main.max_sale_price"
                         >
                         </span>
 
-                        <span>تومان</span>
+                        <span>تومان</span>-->
                     </p>
 
                     <p>توضیحات: <span v-text="product.main.description"></span>
@@ -418,13 +420,13 @@
                         <div class="create_buy_mobile hidden-sm hidden-md hidden-lg">
                             <a v-if="!isMyProfile" class="green-button" href="#" @click.prevent="openChat(product)">
 
-                                <span class="fa fa-comment"></span> ارسال پیام
+                                <span class="fas fa-comment-alt"></span> استعلام قیمت
                             </a>
 
                             <a v-if="isMyProfile" class="green-button edit-product" href="#"
                                @click="openEditBox($event)">
 
-                                <span class="fa fa-pencil"></span> ویرایش
+                                <span class="fa fa-pencil-alt"></span> ویرایش
                             </a>
 
                         </div>
@@ -582,25 +584,14 @@
             },
             toLatinNumbers: function (num) {
                 if (num == null) {
-                    return '';
+                    return null;
                 }
-                var numDic = {
-                    '۰': '0',
-                    '۱': '1',
-                    '۲': '2',
-                    '۳': '3',
-                    '۴': '4',
-                    '۵': '5',
-                    '۶': '6',
-                    '۷': '7',
-                    '۸': '8',
-                    '۹': '9',
-                };
 
-                return num
-                    .toString()
-                    .replace(/[۰-۹]/g, function (w) {
-                        return numDic[w];
+                return num.toString()
+                    .replace(/[\u0660-\u0669]/g, function (c) {
+                        return c.charCodeAt(0) - 0x0660;
+                    }).replace(/[\u06f0-\u06f9]/g, function (c) {
+                        return c.charCodeAt(0) - 0x06f0;
                     });
             },
             openEditBox: function (e) {
@@ -655,6 +646,8 @@
                     max_sale_price: maxSalePrice,
                     min_sale_amount: minSaleAmount,
                 };
+
+                console.log('Description:' + description);
 
                 if (description !== '') {
                     request.description = description;

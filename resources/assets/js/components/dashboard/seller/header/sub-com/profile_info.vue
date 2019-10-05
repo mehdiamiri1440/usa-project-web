@@ -10,6 +10,7 @@
 </style>
 <template>
   <div>
+    
     <section v-if="!isLoading">
       <div class="profile">
         <div class="profile-img" v-if="photoLink">

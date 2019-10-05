@@ -20,6 +20,3 @@ $(document).click(function () {
         visible = false;
     }
 });
-$(document).ready(function () {
-
-});

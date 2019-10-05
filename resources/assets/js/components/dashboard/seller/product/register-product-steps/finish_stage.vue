@@ -8,7 +8,7 @@
 
 	label{
 		margin: 0 auto 9px auto;
-	}	
+	}
 
 	.submit-button{
 
@@ -64,7 +64,9 @@
 
 		top: 6px;
 
-		font-family: 'FontAwesome',sans-serif;
+		font-family: "Font Awesome 5 Free",sans-serif;
+
+		font-weight: 900;
 
 		left: 15px;
 
@@ -73,7 +75,7 @@
 		z-index: 0;
 
     }
-    
+
     input{
     	width: 100%;
 
@@ -105,7 +107,7 @@
 		font-size: 20px;
 
 		color: #BEBEBE;
-		
+
 		top: 9px;
 
 		transition: 300ms;
@@ -226,12 +228,12 @@
 		font-weight: bold;
 
 		height: 15px;
-		
+
 	    direction: rtl;
 
 		font-size: 11px;
     }
-    
+
     .small-description{
 
          font-size: 11px;
@@ -239,7 +241,7 @@
          font-weight: bold;
 
          color: #777777;
-       
+
          line-height: 1.618;
 
     }
@@ -252,9 +254,9 @@
 		margin: 50px auto;
 		padding: 4px 0;
 
-    }    
+    }
     .list-item-wrapper > p{
-    		
+
 		float: right;
 		padding: 0;
 		padding-top: 12px;
@@ -280,6 +282,11 @@
 
     }
     @media screen and (max-width: 767px){
+        .list-item-wrapper{
+
+            margin: 15px auto;
+
+        }
 		.input-wrapper {
 		    padding: 0 5px;
 
@@ -290,51 +297,51 @@
 		.input-wrapper::after {
 		    left: 14px;
 		}
-	}	
+	}
 </style>
 
 <template>
 	<div>
 
-		
+
 		 <div class="form-contents ">
 
 			    	<div class=" col-xs-12 ">
 
-	
+
 
 				     	<div class="text-input-wrapper">
 
 
 				     		<p class="main-description">
-				     			در صورت استفاده از طرح عضویت رایگان محصول شما پس از تایید کارشناسان در لیست محصولات قرار می گیرید و از طریق پیامک به شما اطلاع رسانی خواهد شد. 
+				     			در صورت استفاده از طرح عضویت رایگان محصول شما پس از تایید کارشناسان در لیست محصولات قرار می گیرید و از طریق پیامک به شما اطلاع رسانی خواهد شد.
 				     		</p>
-                            <p class="main-description" v-if="$parent.relatedBuyAd" ><strong>یکی از مرتبط ترین درخواست های خرید برای محصول شما در زیر نمایش داده شده است. 
+                            <p class="main-description" v-if="$parent.relatedBuyAd" ><strong>یکی از مرتبط ترین درخواست های خرید برای محصول شما در زیر نمایش داده شده است.
                             	<br/>
                             	<span class="red-text">در صورت عدم ارسال پیام به خریدار دیگر به این درخواست خرید دسترسی نخواهید داشت.</span></strong></p>
-							
+
 							<div class="list-group-item list-item-wrapper  col-xs-12" v-if="$parent.relatedBuyAd">
-								<p class="list-title col-sm-3 col-xs-12">
+								<p class="list-title col-xs-12">
 									<span>{{$parent.relatedBuyAd.category_name}}</span> <span> | </span> <span>{{$parent.relatedBuyAd.subcategory_name}}</span> <span> | {{$parent.relatedBuyAd.name}}</span>
-								</p> 
-								<p class="needs col-sm-4 col-xs-12">
+								</p>
+								<p class="needs col-xs-12">
 									<span class="static-content">
                             			میزان نیازمندی :
-                        			</span> 
-                        			<span>{{$parent.relatedBuyAd.requirement_amount}}</span> 
+                        			</span>
+                        			<span>{{$parent.relatedBuyAd.requirement_amount}}</span>
                         			<span class="static-content">
                             				کیلوگرم
                        	            </span>
-                       			</p> 
-                       			<p class="list-time col-sm-2 col-xs-12">
+                       			</p>
+                       			<p class="list-time col-xs-12">
                                     {{$parent.relatedBuyAd.register_date}}
-                       		    </p> 
+                       		    </p>
 
-                       		    <div class="send-message col-sm-3 col-xs-12">
-                       		    	
+                       		    <div class="send-message col-xs-12">
+
                        		    	<button class="submit-button active" @click.prevent="$parent.openChat($parent.relatedBuyAd)">
                        		    		 پیام به خریدار
-                     				</button> 
+                     				</button>
 
                    				</div>
                 			</div>
@@ -346,20 +353,20 @@
 			       <div class="col-xs-12">
 			       	<div class="text-center">
 			       		 <button class="submit-button active "
-			       		 
+
 			       		 	@click.prevent="$parent.reLoadPage()"
 			       		   >
 			        		ثبت محصول جدید
-			        	  
+
 		        	  </button>
 			       	</div>
 			       </div>
 		</div>
-		
+
     </div>
 </template>
 
 <script>
-    
+
 
 </script>

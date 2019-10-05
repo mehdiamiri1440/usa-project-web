@@ -21,10 +21,10 @@
     input[type="number"] {
       -moz-appearance: textfield;
     }
-    input[type="number"]::-webkit-inner-spin-button, 
-    input[type="number"]::-webkit-outer-spin-button { 
-      -webkit-appearance: none; 
-      margin: 0; 
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
     .main-wrapper{
         position: absolute;
@@ -79,7 +79,7 @@
 
      .progrees-item.active{
         color: #333;
-      
+
     }
 
     .progrees-item.active p{
@@ -120,7 +120,7 @@
         border-radius: 9px;
         overflow: hidden;
         margin-top: 16px;
-        box-shadow: 0 0 10px #C5C5C5;   
+        box-shadow: 0 0 10px #C5C5C5;
         height: 500px;
      }
 
@@ -145,7 +145,7 @@
      .main-content-header a:hover{
         transition: 300ms;
      }
-   
+
      .main-content-header a.arrow-left:hover{
           right: 5px;
      }
@@ -153,7 +153,7 @@
      .main-content-header a.arrow-right:hover{
           right: -5px;
      }
-     
+
 
      /*main content footer style*/
      .main-content-footer{
@@ -192,12 +192,12 @@
         }
 
         .progressbar-items{
-            padding: 0 15px 
+            padding: 0 15px
         }
         .main-contents {
 
             border-radius: 0;
-   
+
         }
         .main-content-header {
             direction: rtl;
@@ -235,7 +235,7 @@
         }
         input{
             font-size: 13px;
-            padding: 8px 15px 9px 35px ; 
+            padding: 8px 15px 9px 35px ;
         }
 
      }
@@ -263,81 +263,81 @@
 
 <template>
         <div>
-            
+
 
         <main id="main" class="container">
 
             <div class="main-wrapper col-xs-12">
-                
+
                 <div class="row">
 
                     <div class="wrapper-progressbar">
 
                         <div class="custom-progressbar">
-                            <div class="progress-bar" 
-                            role="progressbar" 
+                            <div class="progress-bar"
+                            role="progressbar"
                             aria-valuenow="21"
-                            aria-valuemin="0" 
+                            aria-valuemin="0"
                             aria-valuemax="100">
-                        
+
                             </div>
                         </div>
                          <div class="custom-progressbar active">
-                            <div class="progress-bar" 
-                            role="progressbar" 
+                            <div class="progress-bar"
+                            role="progressbar"
                             aria-valuenow="21"
-                            aria-valuemin="0" 
+                            aria-valuemin="0"
                             aria-valuemax="100">
-                        
+
                             </div>
                         </div>
 
                         <div class="progressbar-items">
 
                             <a class="progrees-item active">
-                                
+
                                     <span>1</span>
                                     <p>ثبت موبایل</p>
-                               
+
                             </a>
 
                             <a class="progrees-item" :class="{'active' : currentStep >= 2}">
-                                
+
                                     <span>2</span>
                                     <p>تایید شماره</p>
-                               
+
                             </a>
 
-                            
+
                             <a class="progrees-item" :class="{'active' : currentStep >= 3}">
-                                
+
                                     <span>3</span>
                                     <p>مشخصات فردی</p>
-                               
+
                             </a>
 
-                            
+
                             <a class="progrees-item" :class="{'active' : currentStep >= 4}">
-                                
+
                                     <span>4</span>
                                      <p>انتخاب آدرس</p>
-                               
+
                             </a>
 
-                            
+
                             <a class="progrees-item" :class="{'active' : currentStep >= 5}">
-                                
+
                                     <span>5</span>
                                   <p>حساب کاربری</p>
-                               
+
                             </a>
 
-                            
+
                             <a class="progrees-item" :class="{'active' : currentStep >= 6}">
-                                
+
                                     <span>6</span>
                                       <p>حوزه فعالیت</p>
-                               
+
                             </a>
                         </div>
 
@@ -369,15 +369,15 @@
                                     <div class=" col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
                                         <div class="wraper-main-contents row">
 
-                                            <RegisterNumber 
-                                            @getPhoneNumber="setPhoneNumber" 
-                                            v-if="currentStep == 1" 
+                                            <RegisterNumber
+                                            @getPhoneNumber="setPhoneNumber"
+                                            v-if="currentStep == 1"
                                             :parent-errors = "errors.phone[0]"
                                              />
 
                                             <VerifyCode
                                             @getVerificationCode="setVerificationCode"
-                                             v-else-if="currentStep == 2" 
+                                             v-else-if="currentStep == 2"
                                              :parent-errors = "errors.verification_code[0]"/>
 
                                              <PersonalInformatin
@@ -408,7 +408,7 @@
                                 </div>
                         </footer>
                     </div>
-                  
+
                 </div>
 
             </div>
@@ -524,7 +524,7 @@
                 if (!this.errors.user_name[0] && !this.errors.password[0]  && !this.errors.password_conf[0]) {
                       this.register_details();
                 }
-              
+
             },
             stopLoader: function () {
                 eventBus.$emit('isLoading', false);
@@ -536,7 +536,7 @@
                 }else if(step > 6){
                         step = 6;
                 }
-               
+
                 this.currentStep = step;
                 this.checkLevel();
                 this.scrollToTop();
@@ -562,8 +562,8 @@
                   case 6:
                      progressElement.css('width','90%')
                     break;
-                
-                } 
+
+                }
             },
             send_verification_code: function () {
                 this.step2.reSendCode = false;
@@ -592,10 +592,10 @@
                     })
                     .catch(function (err) {
                         self.errors.phone = err.response.data.errors.phone;
-                        
+
                         self.step1.sendCode = true;
 
-                        self.registerComponentExceptions('phone number is empty or incorrect or already exists');
+                        self.registerComponentStatistics('Register-Error', 'phone-number-verification','error:' + self.errors.phone[0]);
                     });
             },
             verify_code: function () {
@@ -612,13 +612,13 @@
                         self.goToStep(2);
                         self.errors.verification_code = [];
                         self.errors.verification_code.push('کد وارد شده صحیح نیست یا منقضی شده است');
-                        self.registerComponentExceptions('کد وارد شده صحیح نیست یا منقضی شده است');
+                        self.registerComponentStatistics('Register-Error', 'verification-code-wrong', 'error:' + self.errors.verification_code[0]);
                     }
                 }).catch(function (error) {
                     self.goToStep(2);
                     self.errors.verification_code = [];
                     self.errors.verification_code.push('وارد کردن کد الزامی است.');
-                    self.registerComponentExceptions('وارد کردن کد الزامی است');
+                    self.registerComponentStatistics('Register-Error', 'verification-code-empty', 'error:' + self.errors.verification_code[0]);
                 });
 
 
@@ -694,7 +694,7 @@
                 this.sexValidator(this.step3.sex);
 
                 if (this.errorFlag) {
-                    this.registerComponentExceptions('Validation error in step 3 in user register page!');
+                    this.registerComponentStatistics('Register-Error', 'step-3', 'validation error in step 3');
                 }
 
             },
@@ -703,7 +703,7 @@
                 this.categoryIdValidator(this.step4.categoryId);
 
                 if (this.errorFlag) {
-                    this.registerComponentExceptions('Validation Error in step 4 in user register page!');
+                    this.registerComponentStatistics('Register-Error', 'step-4', 'validation error in step 4');
                 }
             },
             firstNameValidator: function (name) {
@@ -717,6 +717,10 @@
                     this.errors.first_name.push('فیلد باید فارسی باشد');
                     this.errorFlag = true;
                 }
+
+                if(this.errors.first_name[0]){
+                    this.registerComponentStatistics('Register-Error', 'first-name','input:' + name + ' Error:' + this.errors.first_name[0]);
+                }
             },
             lastNameValidator: function (name) {
                 this.errors.last_name = [];
@@ -728,6 +732,10 @@
                 if (!this.validateRegx(name, /^[\u0600-\u06FF\s]+$/)) {
                     this.errors.last_name.push('فیلد باید فارسی باشد');
                     this.errorFlag = true;
+                }
+
+                if(this.errors.last_name[0]){
+                    this.registerComponentStatistics('Register-Error', 'last-name','input:' + name + ' Error:' + this.errors.last_name[0]);
                 }
             },
             provinceValidator: function (province) {
@@ -741,6 +749,10 @@
                     this.errors.province.push('استان باید فارسی باشد');
                     this.errorFlag = true;
                 }
+
+                if(this.errors.province[0]){
+                    this.registerComponentStatistics('Register-Error', 'province','input:' + province + ' Error:' + this.errors.province[0]);
+                }
             },
             cityValidator: function (city) {
                 this.errors.city = [];
@@ -752,6 +764,10 @@
                 if (!this.validateRegx(city, /^[\u0600-\u06FF\s]+$/)) {
                     this.errors.city.push('شهر باید فارسی باشد');
                     this.errorFlag = true;
+                }
+
+                if(this.errors.city[0]){
+                    this.registerComponentStatistics('Register-Error', 'city','input:' + city + ' Error:' + this.errors.city[0]);
                 }
             },
             userNameValidator: function (userName) {
@@ -767,6 +783,10 @@
                 if (!this.validateRegx(userName, /^\w+$/)) {
                     this.errors.user_name.push(' شامل حروف غیر مجاز است');
                     this.errorFlag = true;
+                }
+
+                if(this.errors.user_name[0]){
+                    this.registerComponentStatistics('Register-Error', 'username','input:' + username + ' Error:' + this.errors.last_name[0]);
                 }
             },
             nationalCodeValidator: function (code) {
@@ -816,6 +836,13 @@
                     this.errors.password_conf.push('رمز عبور مطابقت ندارد');
                     this.errorFlag = true;
                 }
+
+                if(this.errors.password[0]){
+                    this.registerComponentStatistics('Register-Error', 'password','input:' + pass + ' Error:' + this.errors.password[0]);
+                }
+                if(this.errors.password_conf[0]){
+                    this.registerComponentStatistics('Register-Error', 'passwordConfirmation','input:' + passConf + ' Error:' + this.errors.password_conf[0]);
+                }
             },
             sexValidator: function (sex) {
                 this.errors.sex = [];
@@ -824,6 +851,10 @@
                     this.errors.sex.push('جنسیت الزامی است');
                     this.errorFlag = true;
                 }
+
+                if(this.errors.sex[0]){
+                    this.registerComponentStatistics('Register-Error', 'sex','input:' + sex + ' Error:' + this.errors.sex[0]);
+                }
             },
             categoryIdValidator: function (categoryId) {
                 this.errors.category_id = [];
@@ -831,12 +862,20 @@
                     this.errors.category_id.push('انتخاب حوزه ی فعالیت الزامی است.');
                     this.errorFlag = true;
                 }
+
+                if(this.errors.category_id[0]){
+                    this.registerComponentStatistics('Register-Error', 'category-selection','input:' + categoryId + ' Error:' + this.errors.category_id[0]);
+                }
             },
             activityTypeValidator: function (activityType) {
                 this.errors.activity_type = [];
                 if (activityType === '') {
                     this.errors.activity_type.push('انتخاب نوع کاربری الزامی است.');
                     this.errorFlag = true;
+                }
+
+                if(this.errors.activity_type[0]){
+                    this.registerComponentStatistics('Register-Error', 'activity-type','input:' + activity_type + ' Error:' + this.errors.activity_type[0]);
                 }
             },
             validateRegx: function (input, regx) {
@@ -881,25 +920,14 @@
             },
             toLatinNumbers: function (num) {
                 if (num == null) {
-                    return '';
+                    return null;
                 }
-                var numDic = {
-                    '۰': '0',
-                    '۱': '1',
-                    '۲': '2',
-                    '۳': '3',
-                    '۴': '4',
-                    '۵': '5',
-                    '۶': '6',
-                    '۷': '7',
-                    '۸': '8',
-                    '۹': '9',
-                };
 
-                return num
-                    .toString()
-                    .replace(/[۰-۹]/g, function (w) {
-                        return numDic[w];
+                return num.toString()
+                    .replace(/[\u0660-\u0669]/g, function (c) {
+                        return c.charCodeAt(0) - 0x0660;
+                    }).replace(/[\u06f0-\u06f9]/g, function (c) {
+                        return c.charCodeAt(0) - 0x06f0;
                     });
             },
             updateCounterDownTimer: function (seconds) {

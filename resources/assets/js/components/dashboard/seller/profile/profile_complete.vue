@@ -552,7 +552,7 @@
                             <article class="image-item col-xs-4"
                                      v-for="photo in currentUser.relateds">
                                 <a href="#">
-                                    <i class="fa fa-close"></i>
+                                    <i class="fa fa-times"></i>
                                 </a>
 
                                 <img :src=" str + '/' + photo" alt="">
@@ -591,7 +591,7 @@
                         <div class="images-content col-xs-12">
                             <article class="image-item col-xs-4" v-for="photo in currentUser.certificates">
                                 <a href="#">
-                                    <i class="fa fa-close"></i>
+                                    <i class="fa fa-times"></i>
                                 </a>
 
                                 <img :src="str + '/' + photo" alt="">

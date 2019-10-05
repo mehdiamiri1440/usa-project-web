@@ -462,7 +462,7 @@
                 <div class="modal-dialog">
 
                     <a href="#" class="close-dialog-popup" data-dismiss="modal">
-                        <i class="fa fa-close"></i>
+                        <i class="fa fa-times"></i>
                     </a>
 
                     <div class="main_popup_content">
@@ -644,7 +644,7 @@
 
                              >
 
-                             <div class="margin-15-0 default-item-wrapper shadow-content row">
+                             <div v-for="(defaultItem ,index) in 6" :key="index" class="margin-15-0 default-item-wrapper shadow-content row">
 
                                  <div class="default-user-contents col-xs-12  col-sm-3">
 
@@ -671,95 +671,6 @@
 
                                      </div>
 
-                                     
-                                    <div class=" default-main-article-content col-xs-12 col-sm-7">
-                                            <span class="content-half-width placeholder-content default-input-boxing-size"></span>
-
-                                            <span class="default-boxing-size content-full-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
-                                             <span class="default-boxing-size content-default-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
-                                         </div>
-                                 </div>
-                             </div>
-
-
-                          <div class="margin-15-0 default-item-wrapper shadow-content row">
-
-                                 <div class="default-user-contents col-xs-12  col-sm-3">
-
-                                     <div class=" default-boxing-size placeholder-content default-article-user-image"></div>
-
-                                     <div class="text-center xs-text-right">
-
-                                         <span class="placeholder-content default-boxing-size content-half-width "></span>
-
-                                     </div>
-
-                                        <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-                                         <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-
-                                 </div>
-
-                                 <div class="default-article-contents col-xs-12  col-sm-9">
-
-                                     <div class="default-wrapper-main-image pull-right  col-xs-12 col-sm-5">
-
-                                         <span class="default-main-image  placeholder-content"></span>
-
-                                     </div>
-
-                                    
-                                    <div class=" default-main-article-content col-xs-12 col-sm-7">
-                                            <span class="content-half-width placeholder-content default-input-boxing-size"></span>
-
-                                            <span class="default-boxing-size content-full-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
-                                             <span class="default-boxing-size content-default-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
-                                         </div>
-                                 </div>
-                             </div>
-
-
-
-
-                                 <div class="margin-15-0 default-item-wrapper shadow-content row">
-
-                                 <div class="default-user-contents col-xs-12  col-sm-3">
-
-                                     <div class=" default-boxing-size placeholder-content default-article-user-image"></div>
-
-                                     <div class="text-center xs-text-right">
-
-                                         <span class="placeholder-content default-boxing-size content-half-width "></span>
-
-                                     </div>
-
-                                        <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-                                         <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-
-                                 </div>
-
-                                 <div class="default-article-contents col-xs-12  col-sm-9">
-
-                                     <div class="default-wrapper-main-image pull-right  col-xs-12 col-sm-5">
-
-                                         <span class="default-main-image  placeholder-content"></span>
-
-                                     </div>
 
                                     <div class=" default-main-article-content col-xs-12 col-sm-7">
                                             <span class="content-half-width placeholder-content default-input-boxing-size"></span>
@@ -803,7 +714,7 @@
                     </div>
 
                 </aside>
-                
+
             </div>
 
         </main>
@@ -1059,7 +970,7 @@
                 });
             },
             sidebarScroll() {
-              
+
                 var $sticky = $('.sticky');
                 var stickyrStopper = $('#wrap-footer');
                 var lastScrollTop = 0;
@@ -1086,22 +997,22 @@
                     var stickyStopperPosition = stickyrStopper.offset().top;
                     var stopPoint = documentHeight - (wHeight + stickyrStopper.innerHeight() + 130);
                     var differences = (stickyStopperPosition - stickPositionToContent) - (generalSidebarHeight - stickOffset);
-                    var diff = differences + stickOffset ; 
+                    var diff = differences + stickOffset ;
                     var sidebarHeightToTop = generalSidebarHeight + stickyTop;
-                    
+
 
                         if (generalSidebarHeight > wHeight) {
-                          
-                          
+
+
                             if(wHeight < sidebarHeightToTop){
-                    
+
                                 $(window).scroll(function(){ // scroll event
                                       var windowTop = $(window).scrollTop(); // returns number
-                                    
+
                                            if (windowTop > lastScrollTop){
 
                                                 if ((dynamicScroll + generalSidebarHeight) < windowTop + wHeight) {
-                                            
+
                                                       if (stopPoint + 13  < windowTop  ) {
                                                           $sticky.css({
                                                               position: 'absolute',
@@ -1125,7 +1036,7 @@
                                                       }
 
                                                 }else{
-                                                   
+
                                                       if (stopPoint  < windowTop) {
                                                           $sticky.css({
                                                               position: 'absolute',
@@ -1169,7 +1080,7 @@
 
                                     }
                                   dynamicScroll = $sticky.offset().top;
-                                 
+
                                   lastScrollTop = windowTop;
                                  });
 
@@ -1178,7 +1089,7 @@
                                   $(window).scroll(function(){ // scroll event
                                       var windowTop = $(window).scrollTop(); // returns number
                                       if (windowTop < lastScrollTop){
-                                        
+
 
                                          if (stopPoint  < windowTop) {
                                                   $sticky.css({
@@ -1193,17 +1104,17 @@
                                                       top:stickyTop,
                                                       right:'0'
                                                   });
-                                              } 
+                                              }
                                           }
                                        lastScrollTop = windowTop;
                                     });
-                                      
+
                             }; //end all if
 
 
                         } else {
 
-                         
+
 
                              $(window).scroll(function(){ // scroll event
                                       var windowTop = $(window).scrollTop(); // returns number'
@@ -1221,11 +1132,11 @@
                                                       top:stickyTop,
                                                       right:'0'
                                                   });
-                                              } 
+                                              }
                             });
-                                      
+
                         }
-                  
+
                }
 
             },
@@ -1267,7 +1178,7 @@
                 titleTemplate: 'اینکوباک | %s',
                 meta: [
                     {
-                        name: 'description', 
+                        name: 'description',
                         content: 'خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار'
                     },
                     {
