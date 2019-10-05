@@ -400,7 +400,7 @@
                         <span>کیلوگرم</span>
                     </p>
 
-                    <p>قیمت:
+                    <!--<p>قیمت:
                         <span v-text="product.main.min_sale_price +
                          ' - ' +
                          product.main.max_sale_price"
@@ -408,7 +408,7 @@
                         </span>
 
                         <span>تومان</span>
-                    </p>
+                    </p>-->
 
                     <p>توضیحات: <span v-text="product.main.description"></span>
                     </p>
@@ -645,7 +645,7 @@
                     max_sale_price: maxSalePrice,
                     min_sale_amount: minSaleAmount,
                 };
-                
+
                 console.log('Description:' + description);
 
                 if (description !== '') {
