@@ -37,10 +37,8 @@
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
 
     <script src="{{asset('index/js/jquery.magnific-popup.min.js')}}"></script>
-    <script src="{{asset('index/js/jquery.parallax.js')}}"></script>
     <script src="{{asset('index/js/owl.carousel.min.js')}}"></script>
-    <script src="{{asset('index/js/smoothscroll.js')}}"></script>
-    <script src="{{asset('index/js/wow.min.js')}}"></script>
+
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
@@ -147,12 +145,6 @@
                  img_success_verified="{{asset('index/images/farmer.png')}}"
                  img_seller_services="{{asset('index/images/seller.jpg')}}"
                  img_buyer_services="{{asset('index/images/buyer.jpg')}}"
-                 img_six="{{asset('index/images/6.png')}}"
-                 img_five="{{asset('index/images/5.png')}}"
-                 img_four="{{asset('index/images/4.png')}}"
-                 img_three="{{asset('index/images/3.png')}}"
-                 img_two="{{asset('index/images/2.png')}}"
-                 img_one="{{asset('index/images/1.png')}}"
                  img_2_help_page="{{asset('assets/img/help/2.jpg')}}"
                  img_3_help_page="{{asset('assets/img/help/3.jpg')}}"
                  img_4_help_page="{{asset('assets/img/help/4.jpg')}}"
@@ -196,7 +188,6 @@
     });
 
     $(document).on("idle.idleTimer", function () {
-        // function you want to fire when the user goes idle
         window.location.href = '/login'
     });
 </script>
