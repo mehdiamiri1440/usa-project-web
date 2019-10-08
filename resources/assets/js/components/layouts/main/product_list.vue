@@ -1,6 +1,10 @@
+<style>
+
+    body{
+        padding-right: 0 !important;
+    }
+</style>
 <style scoped>
-
-
 
     .sidebar{
     will-change: min-height;
@@ -521,21 +525,23 @@
 
         <main id="main" class="container-fluid ">
             <div class="row">
-                <div class="col-xs-12 col-md-9">
+                <div class="col-xs-12 col-lg-9">
                     <section class="main-content col-xs-12" v-if="products.length > 0  ">
                         <div class="row">
-                           <div id="article-list">
+                           <div id="article-list" >
+                            <div class="col-xs-12 col-md-6"  v-for="(product,productIndex) in products">
+                                <ProductArticle
+                                        v-if="products.length >= productIndex"
+                                        :key="product.main.id"
+                                        :product="product"
+                                        :loading_img="loading_img"
+                                        :defultimg="defultimg"
+                                        :str="str"
+                                        :loading="loading"
+                                        :currentUser="currentUser"
+                                />
+                            </div>
 
-                             <ProductArticle v-for="(product,productIndex) in products"
-                                            v-if="products.length >= productIndex"
-                                            :key="product.main.id"
-                                            :product="product"
-                                            :loading_img="loading_img"
-                                            :defultimg="defultimg"
-                                            :str="str"
-                                            :loading="loading"
-                                            :currentUser="currentUser"
-                            />
                             <div class="load-more-button"
                                  v-if="searchText === '' && continueToLoadProducts === true ">
                                 <div class="col-xs-12 col-sm-6 col-sm-offset-3">
@@ -691,8 +697,7 @@
                     </section>
                 </div>
 
-
-                <aside id="sidebar" class=" product-sidebar sidebar hidden-xs  hidden-sm col-md-3">
+                <aside id="sidebar" class=" product-sidebar sidebar hidden-xs  hidden-sm col-lg-3">
 
                     <div class="row">
 

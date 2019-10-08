@@ -96,7 +96,7 @@
     </script>
 
 </head>
-<body>
+<body >
 <div id="app"></div>
 <div id="appBuyer"></div>
 <div id="appSeller"></div>
