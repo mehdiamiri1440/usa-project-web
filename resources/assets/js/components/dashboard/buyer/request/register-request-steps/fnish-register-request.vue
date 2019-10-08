@@ -233,7 +233,13 @@
 
 		font-size: 11px;
     }
-
+    
+    .background-blue{
+    
+        background: #000546 !important;
+        
+    }
+    
     .small-description{
 
          font-size: 11px;
@@ -251,7 +257,7 @@
 		background: #f8f8f8;
 		box-shadow: 0 5px 10px #c5c5c5;
 		border: none;
-		margin: 50px auto;
+		margin: 20px auto;
 		padding: 4px 0;
 
     }
@@ -268,10 +274,17 @@
     	text-align: center;
 
     }
-    .send-message button{
-
+    .send-message .submit-button{
+        
+        display: inline-block;
     	font-size: 14px;
 		padding: 7px 15px;
+
+    }
+        
+    .send-message a.submit-button:before{
+        
+        content: none;
 
     }
     .main-description{
@@ -280,6 +293,12 @@
     .red-text{
 		color: #e41c38;
 
+    }
+    
+    .blue-background{
+    
+        background: #000546 !important;
+        
     }
     @media screen and (max-width: 767px){
 		.input-wrapper {
@@ -309,37 +328,49 @@
 
 
 				     		<p class="main-description">
-				     			در صورت استفاده از طرح عضویت رایگان محصول شما پس از تایید کارشناسان در لیست محصولات قرار می گیرید و از طریق پیامک به شما اطلاع رسانی خواهد شد.
+                                درخواست خرید شما پس از تایید کارشناسان اینکوباک برای کشاورزان و تامین کنندگان مرتبط ارسال میشود.
 				     		</p>
-                            <!-- <p class="main-description" v-if="$parent.relatedBuyAd" ><strong>یکی از مرتبط ترین درخواست های خرید برای محصول شما در زیر نمایش داده شده است.
+                            <p class="main-description" v-if="$parent.relatedProduct" ><strong>یکی از مرتبط ترین محصولات برای درخواست خرید شما در زیر نمایش داده شده است.
                             	<br/>
-                            	<span class="red-text">در صورت عدم ارسال پیام به خریدار دیگر به این درخواست خرید دسترسی نخواهید داشت.</span></strong></p> -->
+                            	<span class="red-text">در صورت عدم ارسال پیام به فروشنده دیگر به این محصول دسترسی نخواهید داشت.</span></strong></p>
 
-							<!-- <div class="list-group-item list-item-wrapper  col-xs-12" v-if="$parent.relatedBuyAd">
-								<p class="list-title col-sm-3 col-xs-12">
-									<span>{{$parent.relatedBuyAd.category_name}}</span> <span> | </span> <span>{{$parent.relatedBuyAd.subcategory_name}}</span> <span> | {{$parent.relatedBuyAd.name}}</span>
+							 <div class="list-group-item list-item-wrapper  col-xs-12" v-if="$parent.relatedProduct">
+								<p class="list-title  col-xs-12">
+									<span>{{$parent.relatedProduct.category_name}}</span> <span> | </span> <span>{{$parent.relatedProduct.subcategory_name}}</span> <span> | {{$parent.relatedProduct.product_name}}</span>
 								</p>
-								<p class="needs col-sm-4 col-xs-12">
+								<p class="needs  col-xs-12">
 									<span class="static-content">
-                            			میزان نیازمندی :
+                            			میزان موجودی :
                         			</span>
-                        			<span>{{$parent.relatedBuyAd.requirement_amount}}</span>
+                        			<span>{{$parent.relatedProduct.stock}}</span>
                         			<span class="static-content">
                             				کیلوگرم
                        	            </span>
                        			</p>
-                       			<p class="list-time col-sm-2 col-xs-12">
-                                    {{$parent.relatedBuyAd.register_date}}
+                       			<p class="list-time  col-xs-12">
+                                    {{$parent.relatedProduct.register_date}}
                        		    </p>
 
-                       		    <div class="send-message col-sm-3 col-xs-12">
-
-                       		    	<button class="submit-button active" @click.prevent="$parent.openChat($parent.relatedBuyAd)">
-                       		    		 پیام به خریدار
+                       		    <div class="send-message  col-xs-12">
+                                    <a class="submit-button active blue-background" :href="$parent.getProductUrl()" target="_blank">
+                       		    		 جزییات محصول
+                     				</a>
+                                    
+                       		    	<button class="submit-button active " @click.prevent="$parent.openChat($parent.relatedProduct)">
+                       		    		 <i style="position:relative;top:2px;font-size: 12px;left: 2px;" class="fa fa-comment-alt"></i>
+                                        پیام به فروشنده
                      				</button>
+                                    
+
+                                    
+<!--
+                                    <button class="submit-button active" @click.prevent="$parent.getProductUrl()">
+                       		    		 پیام به فروشنده
+                     				</button>
+-->
 
                    				</div>
-                			</div> -->
+                			</div>
 
 				     	</div>
 
@@ -351,7 +382,7 @@
 
 			       		 	@click.prevent="$parent.reLoadPage()"
 			       		   >
-			        		ثبت درخواست خرید
+			        		ثبت درخواست جدید
 
 		        	  </button>
 			       	</div>

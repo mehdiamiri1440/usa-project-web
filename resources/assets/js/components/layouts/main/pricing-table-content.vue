@@ -190,7 +190,7 @@
     .item-help{
 
         transition: 300ms;
-       
+
         display: block;
 
         float: right;
@@ -304,8 +304,9 @@
 
         .item-header{
             overflow: hidden;
+            direction:rtl;
         }
-        
+
         .item-date{
             padding: 11px 7px 0 0;
         }
@@ -354,16 +355,16 @@
                                 </div>
                                 <div class="header-wrapper">
                                     <div class="header-title">
-                                   
+
                                         <span>
                                             ضمانت بازگشت وجه
                                         </span>
                                     </div>
 
                                     <p class="header-description">
-                                            
+
                                             <strong>
-                                              در صورت  ارتقاء به عضویت ویژه اگر پس از  سه ماه  از نتیجه آن رضایت نداشته باشید 
+                                              در صورت  ارتقاء به عضویت ویژه اگر پس از  سه ماه  از نتیجه آن رضایت نداشته باشید
 
                                                <span class="text-green">
                                                   100% مبلغ پرداختی به شما بازگردانده می شود
@@ -373,19 +374,19 @@
                                     </p>
                                 </div>
                             </div>
-                            
+
                         </div>
 
 
                         <div class="main-content-wrapper  col-xs-12">
                             <div class="row">
-                                
+
                              <div class=" pull-right col-xs-12 col-sm-6">
-                            
+
                                 <div class="item-wrapper wrapper-background ">
 
                                     <div class="item-header">
-                                        
+
                                         <div class="item-title">
                                             عضویت
                                         </div>
@@ -405,49 +406,49 @@
 
                                         </div>
 
-                                    </div> 
+                                    </div>
 
                                     <hr/>
 
                                     <div class="item-content">
-                                        
+
                                         <ul class="item-content-list">
-                                            
+
                                             <li v-for="(item, index) in priceItem">
-                                            
+
                                                  <a data-toggle="collapse"
                                                   :href="'#content-item-' + index"
                                                   @click.prevent="collapseControl($event)"
                                                   class="item-help"
                                                   :title="item.helpDescription"
                                                   >
-                                                    
+
                                                      <i class="fa fa-question-circle"></i>
 
                                                      <div class="item-help-content collapse" :id="'content-item-' + index" v-text="item.helpDescription">
-                                                         
+
                                                      </div>
 
-                                                 </a> 
+                                                 </a>
 
                                                  <p class="item-content-title" v-text="item.title">
 
                                                  </p>
 
                                                  <p class="item-content-amount" v-html="item.contentUnit">
-                                                
+
                                                  </p>
 
                                             </li>
-                                            
-                                        
+
+
 
                                         </ul>
 
                                     </div>
 
                                     <div class="item-action">
-                                        
+
                                         <p v-if="statusData"  class="text-green">
                                            در حال استفاده
                                         </p>
@@ -459,16 +460,16 @@
                                     </div>
 
                                 </div>
-                            
+
                             </div>
 
 
                            <div class=" col-xs-12 col-sm-6">
-                            
+
                                 <div class="item-wrapper pro-version wrapper-background ">
 
                                     <div class="item-header">
-                                        
+
                                         <div class="item-title">
                                             عضویت ویژه
                                         </div>
@@ -487,42 +488,42 @@
                                             </div>
                                         </div>
 
-                                    </div> 
+                                    </div>
 
                                     <hr/>
 
                                     <div class="item-content">
-                                        
+
                                         <ul class="item-content-list">
-                                            
+
                                             <li v-for="(item, index) in priceItemPro">
-                                            
+
                                                  <a data-toggle="collapse"
                                                   :href="'#content-item-pro-' + index"
                                                   @click.prevent="collapseControl($event)"
                                                   class="item-help"
                                                   :title="item.helpDescription"
                                                   >
-                                                    
+
                                                      <i class="fa fa-question-circle"></i>
 
                                                      <div class="item-help-content collapse" :id="'content-item-pro-' + index" v-text="item.helpDescription">
-                                                         
+
                                                      </div>
 
-                                                 </a> 
+                                                 </a>
 
                                                  <p class="item-content-title" v-text="item.title">
 
                                                  </p>
 
                                                  <p class="item-content-amount" v-html="item.contentUnit">
-                                                
+
                                                  </p>
 
                                             </li>
-                                            
-                                        
+
+
 
                                         </ul>
 
@@ -540,7 +541,7 @@
                                     </div>
 
                                 </div>
-                            
+
                             </div>
 
                             </div>
@@ -632,7 +633,7 @@
                         contentUnit : '5',
                         helpDescription : ' سقف تعداد درخواست های خریدی که به کاربر نمایش داده می شود. '
                     }
-                ]                
+                ]
 			}
 		},
         methods:{
@@ -643,7 +644,7 @@
                         if (response.data.is_valid || response.data.is_valid == false) {
                             self.statusData = response.data;
                         }
-                        
+
                     });
             },
             collapseControl:function(link){

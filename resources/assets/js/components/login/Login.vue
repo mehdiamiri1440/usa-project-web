@@ -21,10 +21,10 @@
     input[type="number"] {
       -moz-appearance: textfield;
     }
-    input[type="number"]::-webkit-inner-spin-button, 
-    input[type="number"]::-webkit-outer-spin-button { 
-      -webkit-appearance: none; 
-      margin: 0; 
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
     .main-wrapper{
         position: absolute;
@@ -79,7 +79,7 @@
 
      .progrees-item.active{
         color: #333;
-      
+
     }
 
     .progrees-item.active p{
@@ -120,7 +120,7 @@
         border-radius: 9px;
         overflow: hidden;
         margin-top: 16px;
-        box-shadow: 0 0 10px #C5C5C5;   
+        box-shadow: 0 0 10px #C5C5C5;
         height: 500px;
      }
 
@@ -145,7 +145,7 @@
      .main-content-header a:hover{
         transition: 300ms;
      }
-   
+
      .main-content-header a.arrow-left:hover{
           right: 5px;
      }
@@ -153,7 +153,7 @@
      .main-content-header a.arrow-right:hover{
           right: -5px;
      }
-     
+
 
      /*main content footer style*/
      .main-content-footer{
@@ -192,12 +192,12 @@
         }
 
         .progressbar-items{
-            padding: 0 15px 
+            padding: 0 15px
         }
         .main-contents {
 
             border-radius: 0;
-   
+
         }
         .main-content-header {
             direction: rtl;
@@ -235,7 +235,7 @@
         }
         input{
             font-size: 13px;
-            padding: 8px 15px 9px 35px ; 
+            padding: 8px 15px 9px 35px ;
         }
 
      }
@@ -248,19 +248,19 @@
             padding: 0;
 
         }
-     
+
      }
 
 </style>
 
 <template>
         <div>
-            
+
 
         <main id="main" class="container">
 
             <div class="main-wrapper col-xs-12">
-                
+
                 <div class="row">
 
                     <div class="main-contents">
@@ -295,16 +295,16 @@
                                     <div class=" col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
                                         <div class="wraper-main-contents row">
 
-                                            <loginPage 
-                                            v-if="currentStep == 1" 
+                                            <loginPage
+                                            v-if="currentStep == 1"
                                              />
 
                                             <ForgotPassword
-                                             v-else-if="currentStep == 2" 
+                                             v-else-if="currentStep == 2"
                                             />
 
                                             <VerifyCode
-                                             v-else-if="currentStep == 3" 
+                                             v-else-if="currentStep == 3"
                                             />
 
 
@@ -320,7 +320,7 @@
                                 </div>
                         </footer>
                     </div>
-                  
+
                 </div>
 
             </div>
@@ -458,13 +458,13 @@
 
                 var self = this;
                 this.showMsg = false;
-                
+
                 axios.post('/reset_password', {
                     'phone': this.toLatinNumbers(this.step2.phone),
                     'verification_code': this.toLatinNumbers(this.step3.verification_code),
                 })
                     .then(function (response) {
-                        
+
                         if (response.data.status === true) {
                             alert("گذر واژه ی جدید به تلفن همراهتان ارسال شد.")
                             window.location.href = '/login';
@@ -484,25 +484,14 @@
             },
             toLatinNumbers: function (num) {
                 if (num == null) {
-                    return '';
+                    return null;
                 }
-                var numDic = {
-                    '۰': '0',
-                    '۱': '1',
-                    '۲': '2',
-                    '۳': '3',
-                    '۴': '4',
-                    '۵': '5',
-                    '۶': '6',
-                    '۷': '7',
-                    '۸': '8',
-                    '۹': '9',
-                };
 
-                return num
-                    .toString()
-                    .replace(/[۰-۹]/g, function (w) {
-                        return numDic[w];
+                return num.toString()
+                    .replace(/[\u0660-\u0669]/g, function (c) {
+                        return c.charCodeAt(0) - 0x0660;
+                    }).replace(/[\u06f0-\u06f9]/g, function (c) {
+                        return c.charCodeAt(0) - 0x06f0;
                     });
             },
             registerComponentStatistics: function (categoryName, actionName, labelName) {

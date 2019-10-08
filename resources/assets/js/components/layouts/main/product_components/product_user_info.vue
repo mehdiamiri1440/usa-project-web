@@ -139,7 +139,7 @@
                     مشاهده پروفایل
                 </a>
                 <a class="green-button hidden-xs" href="#" @click.prevent="openChat()">
-                    <span class="fas fa-comment-alt"></span> ارسال پیام
+                    <span class="fas fa-comment-alt"></span> استعلام قیمت
                 </a>
             </div>
 
@@ -200,7 +200,7 @@
                             });
                     }
                     else {
-                        this.popUpMsg = 'شما نمیتوانید به خودتان پیام دهید.';
+                        this.popUpMsg = 'شما نمی توانید به خودتان پیام دهید.';
                         eventBus.$emit('submitSuccess', this.popUpMsg);
                         $('#custom-main-modal').modal('show');
                     }

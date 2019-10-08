@@ -400,14 +400,15 @@
                         <span>کیلوگرم</span>
                     </p>
 
-                    <p>قیمت:
-                        <span v-text="product.main.min_sale_price +
+                    <p v-if="!isMyProfile">قیمت:
+                        <a  href="#" @click.prevent="openChat(product)">استعلام بگیرید</a>
+                       <!-- <span v-text="product.main.min_sale_price +
                          ' - ' +
                          product.main.max_sale_price"
                         >
                         </span>
 
-                        <span>تومان</span>
+                        <span>تومان</span>-->
                     </p>
 
                     <p>توضیحات: <span v-text="product.main.description"></span>
@@ -419,7 +420,7 @@
                         <div class="create_buy_mobile hidden-sm hidden-md hidden-lg">
                             <a v-if="!isMyProfile" class="green-button" href="#" @click.prevent="openChat(product)">
 
-                                <span class="fas fa-comment-alt"></span> ارسال پیام
+                                <span class="fas fa-comment-alt"></span> استعلام قیمت
                             </a>
 
                             <a v-if="isMyProfile" class="green-button edit-product" href="#"
@@ -583,25 +584,14 @@
             },
             toLatinNumbers: function (num) {
                 if (num == null) {
-                    return '';
+                    return null;
                 }
-                var numDic = {
-                    '۰': '0',
-                    '۱': '1',
-                    '۲': '2',
-                    '۳': '3',
-                    '۴': '4',
-                    '۵': '5',
-                    '۶': '6',
-                    '۷': '7',
-                    '۸': '8',
-                    '۹': '9',
-                };
 
-                return num
-                    .toString()
-                    .replace(/[۰-۹]/g, function (w) {
-                        return numDic[w];
+                return num.toString()
+                    .replace(/[\u0660-\u0669]/g, function (c) {
+                        return c.charCodeAt(0) - 0x0660;
+                    }).replace(/[\u06f0-\u06f9]/g, function (c) {
+                        return c.charCodeAt(0) - 0x06f0;
                     });
             },
             openEditBox: function (e) {
@@ -656,6 +646,8 @@
                     max_sale_price: maxSalePrice,
                     min_sale_amount: minSaleAmount,
                 };
+
+                console.log('Description:' + description);
 
                 if (description !== '') {
                     request.description = description;

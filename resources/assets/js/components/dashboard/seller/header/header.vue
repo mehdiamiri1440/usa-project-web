@@ -1,6 +1,6 @@
 <style>
     html, body, #main {
-    height: 100%;
+        height: 100%;
     }
 
     html, body, div, span, applet, object, iframe,
@@ -73,6 +73,7 @@
         padding-right: 5px;
         padding-left: 5px;
     }
+
     .green-button {
         margin: 15px 0 0;
         display: inline-block;
@@ -85,6 +86,7 @@
         -webkit-transition: 300ms;
         transition: 300ms;
     }
+
     .green-button:hover {
         background: #279b41;
         color: #fff;
@@ -105,6 +107,8 @@
         float: right;
 
         width: 70%;
+
+        text-align: center;
     }
 
     .logo_hide {
@@ -123,13 +127,13 @@
     .logo img {
 
         width: 100px;
-        
+
     }
 
     .logo a p{
 
         margin-top: -6px;
-       
+
     }
 
     .right-header {
@@ -140,6 +144,8 @@
         top: 0;
         overflow: hidden;
         z-index: 9;
+        background: #313a43;
+        direction: rtl;
     }
 
     .little_header {
@@ -180,8 +186,7 @@
     }
 
     .main-right-header {
-        background: #313a43;
-        height: 100%;
+
         text-align: right;
         color: #fff;
         position: relative;
@@ -211,18 +216,25 @@
         display: none;
 
     }
-    
+
     .profile-img {
+
         overflow: hidden;
+
         border-radius: 50%;
-        height: 85px;
-        width: 85px;
+
+        height: 55px;
+
+        width: 55px;
+
         margin: 0 auto;
-        margin-left: 10px;
+
         border: 2px solid #fff;
+
         float: right;
+
     }
-    
+
     .dark-profile-img {
         overflow: hidden;
         border-radius: 50%;
@@ -238,8 +250,15 @@
     }
 
     .profile-content {
+
+        width: calc(100% - 55px);
+
         float: right;
-        padding-top: 15px;
+
+        text-align: right;
+
+        padding-right: 10px;
+
     }
 
     .profile-name {
@@ -259,7 +278,7 @@
 
     .header-menu a {
         color: #b1b1b1;
-        padding: 5px 20px;
+        padding: 10px 20px;
         display: inline-block;
         position: relative;
         width: 100%;
@@ -302,14 +321,18 @@
     }
 
     .copy-right {
+
         text-align: center;
         font-size: 12px;
         font-weight: 200;
-        line-height: 1.3em;
-        padding: 20px;
-        position: absolute;
-        bottom: 76px;
+        padding: 30px 15px 0;
         direction: rtl;
+        line-height: 1.618;
+        position: absolute;
+        bottom: 50px;
+        z-index: 10;
+        color: #fff;
+
     }
 
     label {
@@ -380,7 +403,7 @@
         bottom: 0;
         top: 0;
         background: rgba(0, 0, 0, 0.6);
-        z-index: -1;
+        z-index: 6;
         display: none;
     }
 
@@ -471,7 +494,10 @@
         background: #637484;
     }
 
-
+    .green-button.delete {
+        background: #e41c38;
+        color: #fff;
+    }
 
     @media screen and (max-width: 994px) {
         .content-header {
@@ -489,6 +515,8 @@
         .right-header.mobile-header {
             display: block;
             right: -300px;
+            overflow: auto;
+            direction: rtl;
         }
 
         .main-header, .little-main-header {
@@ -501,10 +529,6 @@
 
         .post-contents-table {
             width: 100%;
-        }
-
-        .copy-right {
-            display: none;
         }
 
         .close_menu {
@@ -581,6 +605,7 @@
         .user_name{
             display: none !important;
         }
+
         .right-menu-header {
             padding: 6px;
             border-right: 1px solid #eff3f6;
@@ -626,7 +651,7 @@
 
 <template>
     <div>
-        
+
              <!-- Modal -->
 
 
@@ -658,7 +683,7 @@
             </div>
         </div>
 
-          <div class="container">
+        <div class="container">
                     <div class="modal fade"
                          id="modal-buttons"
                          tabindex="-1"
@@ -678,17 +703,15 @@
                                     <button class="btn green-button " data-dismiss="modal">
                                         متوجه شدم
                                     </button>
-                                    <a class="btn green-button" href='/pricing'>
+                                    <router-link class="btn green-button" data-dismiss="modal" :to='{name : "dashboardPricingTable"}'>
                                         مشاهده تعرفه ها
-                                    </a>
+                                    </router-link>
                                 </div>
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
                     </div>
+
         </div>
-
-
-
 
 
 
@@ -830,19 +853,11 @@
                         :mytrans="mytrans"
                 />
 
-                <!-- <div class="copy-right">
-
-                      <p dir="rtl">
-                          تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.
-                      </p>
-                 </div>-->
-
             </section>
 
-            <div class="background_mob_sec"></div>
 
         </section>
-
+        <div class="background_mob_sec"></div>
         <section class="right-header desktop-header">
             <header class="header-right-header">
                 <button class="close_menu_mob">
@@ -885,7 +900,12 @@
                 />
 
             </section>
+            <div class="copy-right">
 
+                <p dir="rtl">
+                    تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.
+                </p>
+            </div>
         </section>
 
         <HeaderTop
@@ -897,6 +917,8 @@
                 :out="logout"
                 :routeHome="routehome"
         />
+
+
     </div>
 
 </template>
@@ -956,7 +978,11 @@
                 errors: '',
                 popUpMsg: '',
                 submiting: false,
-                uploadPercentage: 0
+                uploadPercentage: 0,
+                deleteText: '',
+                deleteButtonText: '',
+                cancelButtonText: '',
+                productId:''
             }
         },
         methods: {
@@ -1010,23 +1036,12 @@
                 if (num == null) {
                     return null;
                 }
-                var numDic = {
-                    '۰': '0',
-                    '۱': '1',
-                    '۲': '2',
-                    '۳': '3',
-                    '۴': '4',
-                    '۵': '5',
-                    '۶': '6',
-                    '۷': '7',
-                    '۸': '8',
-                    '۹': '9',
-                };
 
-                return num
-                    .toString()
-                    .replace(/[۰-۹]/g, function (w) {
-                        return numDic[w];
+                return num.toString()
+                    .replace(/[\u0660-\u0669]/g, function (c) {
+                        return c.charCodeAt(0) - 0x0660;
+                    }).replace(/[\u06f0-\u06f9]/g, function (c) {
+                        return c.charCodeAt(0) - 0x06f0;
                     });
             },
             toggleHeader() {
@@ -1095,6 +1110,9 @@
                 var back = $(".background_mob_sec");
                 var closeHeaderButtonMobileLinks = $('.mobile-header .header-menu a');
                 showHeaderButtonElement.on('click', function () {
+
+                    rightHeader.animate({ scrollTop: 0 }, "fast");
+
                     if (flag === true) {
                         rightHeader.animate({
                             right: '0'
@@ -1114,6 +1132,7 @@
                     }
                 });
                 closeHeaderButtonMobile.on('click', function () {
+
                     if (flag === true) {
                         rightHeader.animate({
                             right: '0'
@@ -1170,6 +1189,38 @@
                     }
                 })
             },
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag('event', actionName, {
+                    'event_category': categoryName,
+                    'event_label': labelName
+                });
+            },
+            deleteProduct: function () {
+                var self = this;
+
+                axios.post('/delete_product_by_id', {
+                    product_id: self.productId
+                })
+                    .then(function (response) {
+                        //show product deleted message
+                        //code
+                        self.popUpMsg = 'حذف شد.';
+                        $('#custom-main-modal').modal('show');
+
+                        self.registerComponentStatistics('product', 'product-deleted', 'product-deleted-successfully');
+
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 3000);
+
+                    })
+                    .catch(function (err) {
+                        self.registerComponentStatistics('product', 'product-delete-failed', 'product-delete-failed');
+                        //show modal
+                        self.popUpMsg = 'خطایی رخ داده است.لطفا دوباره تلاش کنید.';
+                        $('#custom-main-modal').modal('show');
+                    });
+            }
 
         },
         mounted() {
@@ -1188,7 +1239,16 @@
             eventBus.$on('uploadPercentage', (event) => {
                 this.uploadPercentage = event;
             });
+            eventBus.$on('deleteButtonText', (event) => {
+                this.deleteButtonText = event;
+            });
 
+            eventBus.$on('cancelButtonText', (event) => {
+                this.cancelButtonText = event;
+            });
+            eventBus.$on('productId', (event) => {
+                this.productId = event;
+            });
         },
         metaInfo() {
             return {

@@ -108,6 +108,7 @@
 ============================== -->
     <header-master-layouts
             user_id="<?php echo e(session('user_id')); ?>"
+            is_seller = "<?php echo e(session('is_seller')); ?>"
             user_default_image="<?php echo e(asset('assets/img/user-defult.png')); ?>"
             profile_photo="<?php echo e(session('profile_photo')); ?>"
             user_full_name="<?php echo e(session('full_name')); ?>"

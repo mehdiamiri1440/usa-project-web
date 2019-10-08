@@ -18,16 +18,7 @@ class buyAd_recommender_controller extends Controller
         
         $this->apply_registered_product_filter_to_buyAd_list($buyAd_list,$registered_product_sub_category_array);
         
-//        $registered_sell_offer_sub_category_array = $this->get_seller_registered_sell_offer_sub_category_array($seller_user_id);
-//        $this->apply_registered_sell_offer_filter_to_buyAd_list($buyAd_list,$registered_sell_offer_sub_category_array);
-//        
-//        $buyers_user_id_array = $this->get_buyers_user_id_list_who_had_at_least_one_transaction_with_the_seller($seller_user_id);
-//        $this->apply_previous_transaction_with_the_buyers_filter_to_buyAd_list($buyAd_list,$buyers_user_id_array);
-        
-//        var_dump($buyAd_list);
-        
         $buyAd_list = $buyAd_list->sortByDesc('score');
-        
     }
     
     protected function get_seller_registered_products_sub_category_array($seller_user_id)

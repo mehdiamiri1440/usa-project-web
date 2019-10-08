@@ -70,7 +70,7 @@
     	font-size: 17px;
 
 		padding: 15px 10px 0;
-		
+
 		line-height: 1.618;
     }
 
@@ -273,7 +273,6 @@
 		data:function(){
 			return {
 				statusData : '',
-
 				linkItems : [
 				    {
 						href : 'registerProduct',
@@ -304,7 +303,7 @@
 
                     	self.boxes = [
 							{
-								title : 'نوع پلن فعال شما',
+								title : 'نوع عضویت فعال شما',
 								icon : 'fas fa-address-card',
 								iconColor : '#19668E',
 								staticName : '',
@@ -318,7 +317,7 @@
 								staticName : '',
 								upgrade : false,
 								status : (response.data.max_allowed_product_register_count == 0) ?  'صفر' : response.data.max_allowed_product_register_count + ' محصول'
-							},	
+							},
 							{
 								title : 'درخواست های خرید قابل مشاهده',
 								icon : 'fas fa-list-alt',
@@ -326,7 +325,7 @@
 								staticName : '',
 								upgrade : false,
 								status : self.checkRequest(response.data.accessable_buyAds)
-							},	
+							},
 							{
 								title : 'فروشنده معتبر',
 								icon : 'fas fa-award	',
@@ -336,13 +335,13 @@
 								status : response.data.is_valid ? 'بله' : 'خیر'
 							},
 							{
-								title : 'میزان امتیاز',
+								title : 'میزان اعتبار',
 								icon : 'fas fa-star',
 								iconColor : '#00C5BE',
 								staticName : '',
 								upgrade : false,
-								status : response.data.reputation_score ? response.data.reputation_score + 'امتیاز' : 'بدون امتیاز'
-							},			
+								status : response.data.reputation_score ? response.data.reputation_score : 'بدون اعتبار'
+							},
 							{
 								title : 'تعداد محصولات ثبت شده',
 								icon : 'fas fa-list-ol',
@@ -367,7 +366,7 @@
 				var packageName = '';
 				switch(packageId){
 					case 0:
-					packageName = 'رایگان';
+					packageName = 'عضویت رایگان';
 					break;
 					case 1:
 					packageName = 'شماره دو';
