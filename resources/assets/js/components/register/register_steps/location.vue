@@ -1,5 +1,5 @@
 <style scoped>
-		
+
 	.submit-button{
 		background: #DDDDDD;
 		color: #fff;
@@ -46,7 +46,9 @@
 
 		top: 9px;
 
-		font-family: 'FontAwesome',sans-serif;
+		font-family: "Font Awesome 5 Free",sans-serif;
+
+		font-weight: 900;
 
 		left: 25px;
 
@@ -136,7 +138,7 @@
 		height: 25px;
 
 		margin-bottom: 5px;
-		
+
 	    direction: rtl;
 
     }
@@ -152,7 +154,7 @@
 		.input-wrapper[data-v-3cdb4684]::after {
 		    left: 14px;
 		}
-	}	
+	}
 </style>
 
 <template>
@@ -166,19 +168,19 @@
 		 <div class="form-contents col-xs-12">
 
 		     	<div class="row">
-		     		
+
 			     	<label for="phone-number">
 			     		استان و شهر خود را انتخاب کنید
 			     	</label>
-			    	
+
 			    	<div class="row">
-			    		
+
 				     	<div class="input-wrapper province-wrapper col-xs-6 pull-right">
 
 				     		<select
 				     		@change="setProvince($event)"
 				     		:class="{'error' :  error}"
-				     		 id="province" 
+				     		 id="province"
 				     		 class="dire" >
 
 				     		   <option selected disabled>استان را انتخاب کنید</option>
@@ -192,9 +194,9 @@
 
                                 </option>
 
-				     		</select> 
-				 
-				    
+				     		</select>
+
+
 				     	</div>
 
 				     	<div class="input-wrapper province-wrapper col-xs-6 ">
@@ -202,11 +204,11 @@
 				     		<select
 				     		@change="setCity($event)"
 				     		:class="{'error' :  error}"
-				     		 id="city" 
+				     		 id="city"
 				     		 class="dire" >
-                                        
+
                                 <option selected disabled>شهر را انتخاب کنید</option>
-                                <option 
+                                <option
                                 v-for="city in $parent.step3.cityList"
                                 :selected = "$parent.step3.city == city.city_name"
                                 v-bind:value="city.city_name"
@@ -214,18 +216,18 @@
                                 >
                                 </option>
 
-				     		</select> 
-				
+				     		</select>
+
 				     	</div>
 
 			    	</div>
 
 			     	<span class="small-description">
-			     		
- انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند 
+
+ انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند
 
 			     	</span>
-			       	
+
 			       	<p class="error-message">
 			       		<span  v-if="error " v-text="error"></span>
 			       	</p>
@@ -235,11 +237,11 @@
 
 		     </div>
 		</div>
-		
+
     </div>
 </template>
 
-<script> 
+<script>
 
 	export default{
 		data:function(){
@@ -247,7 +249,7 @@
 				province : '',
 				city : '',
 				error : ''
-				
+
 			}
 		},
 		methods:{
@@ -263,12 +265,12 @@
 		 	 	}
 		 	 },
 		 	 submitForm(){
-		 	 	
+
 		  	 	if(this.$parent.step3.city.length == 0){
 		  	 		this.error = "لطفا استان و شهر خود را مشخص کنید";
 		  	 		$('#city').addClass('error').removeClass('active');
 	    			$('.submit-button').removeClass('active').addClass('disabled');
-	    	
+
 		  	 	}else{
 		  	 		this.$parent.setLocation();
 		  	 		$('#city').addClass('active').removeClass('error');

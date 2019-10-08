@@ -1,4 +1,7 @@
 <style>
+    html, body, #main {
+        height: 100%;
+    }
 
     html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -70,6 +73,7 @@
         padding-right: 5px;
         padding-left: 5px;
     }
+
     .green-button {
         margin: 15px 0 0;
         display: inline-block;
@@ -82,6 +86,7 @@
         -webkit-transition: 300ms;
         transition: 300ms;
     }
+
     .green-button:hover {
         background: #279b41;
         color: #fff;
@@ -102,6 +107,8 @@
         float: right;
 
         width: 70%;
+
+        text-align: center;
     }
 
     .logo_hide {
@@ -109,10 +116,24 @@
     }
 
     .logo a {
+
         display: inline-block;
-        margin-top: -11px;
-        height: 75px;
+        margin-top: 0;
         padding: 0 10px;
+        color: #fff;
+        text-align: center;
+    }
+
+    .logo img {
+
+        width: 100px;
+
+    }
+
+    .logo a p{
+
+        margin-top: -6px;
+
     }
 
     .right-header {
@@ -123,6 +144,8 @@
         top: 0;
         overflow: hidden;
         z-index: 9;
+        background: #313a43;
+        direction: rtl;
     }
 
     .little_header {
@@ -136,7 +159,11 @@
 
     .right-header > header {
         overflow: hidden;
-        background: #fff;
+        background: #313a43;
+        border-bottom: 2px solid #2a3035;
+        border-bottom-color: rgb(42, 48, 53);
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
     }
 
     .close_menu, .close_menu_mob {
@@ -150,13 +177,16 @@
         padding: 11px;
     }
 
+    .close_menu i ,.close_menu_mob i{
+        color: #fff;
+    }
+
     .close_menu_mob {
         display: none;
     }
 
     .main-right-header {
-        background: #313a43;
-        height: 100%;
+
         text-align: right;
         color: #fff;
         position: relative;
@@ -172,21 +202,39 @@
         display: none;
     }
 
+
+
     .profile {
-        padding: 20px 20px 10px;
-        border-bottom: 2px solid #2e353e;
+
+        padding: 10px 15px 15px;
+        text-align: center;
+
+    }
+
+    .little_header .profile {
+
+        display: none;
+
     }
 
     .profile-img {
+
         overflow: hidden;
+
         border-radius: 50%;
-        height: 85px;
-        width: 85px;
+
+        height: 55px;
+
+        width: 55px;
+
         margin: 0 auto;
-        margin-left: 10px;
+
         border: 2px solid #fff;
+
         float: right;
+
     }
+
     .dark-profile-img {
         overflow: hidden;
         border-radius: 50%;
@@ -202,8 +250,15 @@
     }
 
     .profile-content {
+
+        width: calc(100% - 55px);
+
         float: right;
-        padding-top: 15px;
+
+        text-align: right;
+
+        padding-right: 10px;
+
     }
 
     .profile-name {
@@ -223,7 +278,7 @@
 
     .header-menu a {
         color: #b1b1b1;
-        padding: 5px 20px;
+        padding: 10px 20px;
         display: inline-block;
         position: relative;
         width: 100%;
@@ -266,14 +321,18 @@
     }
 
     .copy-right {
+
         text-align: center;
         font-size: 12px;
         font-weight: 200;
-        line-height: 1.3em;
-        padding: 20px;
-        position: absolute;
-        bottom: 76px;
+        padding: 30px 15px 0;
         direction: rtl;
+        line-height: 1.618;
+        position: absolute;
+        bottom: 50px;
+        z-index: 10;
+        color: #fff;
+
     }
 
     label {
@@ -344,7 +403,7 @@
         bottom: 0;
         top: 0;
         background: rgba(0, 0, 0, 0.6);
-        z-index: -1;
+        z-index: 6;
         display: none;
     }
 
@@ -435,6 +494,11 @@
         background: #637484;
     }
 
+    .green-button.delete {
+        background: #e41c38;
+        color: #fff;
+    }
+
     @media screen and (max-width: 994px) {
         .content-header {
             display: none;
@@ -451,6 +515,8 @@
         .right-header.mobile-header {
             display: block;
             right: -300px;
+            overflow: auto;
+            direction: rtl;
         }
 
         .main-header, .little-main-header {
@@ -463,10 +529,6 @@
 
         .post-contents-table {
             width: 100%;
-        }
-
-        .copy-right {
-            display: none;
         }
 
         .close_menu {
@@ -540,6 +602,10 @@
 
     @media screen and (max-width: 555px) {
 
+        .user_name{
+            display: none !important;
+        }
+
         .right-menu-header {
             padding: 6px;
             border-right: 1px solid #eff3f6;
@@ -586,6 +652,67 @@
 <template>
     <div>
         <!-- Modal -->
+
+
+
+        <div class="container">
+            <div id="deleteModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="main_popup_content">
+                            <a href="#" data-dismiss="modal">
+                                <i class="fa fa-times"></i>
+                            </a>
+                            <p class="main-pop-up" v-text="popUpMsg"></p>
+
+                            <a href="#" class="btn green-button delete " data-dismiss="modal"
+                               @click.prevent="deleteProduct()" v-text="deleteButtonText">
+
+                            </a>
+
+                            <a href="#" class="btn green-button"
+                               data-dismiss="modal" v-text="cancelButtonText">
+                            </a>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+        </div>
+
+          <div class="container">
+                    <div class="modal fade"
+                         id="modal-buttons"
+                         tabindex="-1"
+                         ref="myModal"
+                         role="dialog"
+                         aria-labelledby="myModalLabel"
+                         aria-hidden="true"
+                    >
+
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="main_popup_content">
+                                    <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                                    <p class="main-pop-up" v-text="popUpMsg">
+
+                                    </p>
+                                    <button class="btn green-button " data-dismiss="modal">
+                                        متوجه شدم
+                                    </button>
+                                    <a class="btn green-button" href='/pricing'>
+                                        مشاهده تعرفه ها
+                                    </a>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div>
+        </div>
+
+
+
+
+
+
         <div class="container">
             <div class="modal fade"
                  id="custom-main-modal"
@@ -599,7 +726,7 @@
                     <div class="modal-content">
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal">
-                                <i class="fa fa-close"></i>
+                                <i class="fa fa-times"></i>
                             </a>
 
                             <p class="main-pop-up" v-text="popUpMsg"></p>
@@ -613,6 +740,7 @@
             </div>
         </div>
 
+
         <div class="container">
             <div class="modal fade"
                  id="confirmation-modal"
@@ -625,7 +753,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="main_popup_content">
-                            <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                            <a href="#" data-dismiss="modal"> <i class="fa fa-times"></i></a>
                             <p class="main-pop-up" id="popUpMsg">
                                 لطفا پس از تکمیل اطلاعات پروفایل خود، منتظر تماس کارشناسان اینکوباک جهت تکمیل اطلاعات
                                 باشید. از شکیبایی شما سپاسگزاریم.
@@ -646,7 +774,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="main_popup_content">
-                            <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                            <a href="#" data-dismiss="modal"> <i class="fa fa-times"></i></a>
                             <p class="main-pop-up" id="contractModal">
 
                                 برای شروع استفاده از خدمات اینکوباک ابتدا در قسمت ویرایش پروفایل، قرارداد همکاری را
@@ -693,6 +821,9 @@
                 <span class="logo">
                     <a href="/">
                         <img :src="logo" alt="incoboc">
+                        <p>
+                            بازارگاه آنلاین کشاورزی
+                        </p>
                     </a>
                 </span>
 
@@ -718,20 +849,16 @@
                         :mytrans="mytrans"
                 />
 
-                <!-- <div class="copy-right">
-
-                      <p dir="rtl">
-                          تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.
-                      </p>
-                 </div>-->
 
             </section>
 
-            <div class="background_mob_sec"></div>
 
         </section>
 
+        <div class="background_mob_sec"></div>
+
         <section class="right-header desktop-header">
+
             <header class="header-right-header">
                 <button class="close_menu_mob">
                     <i class="fa fa-angle-right"> </i>
@@ -744,6 +871,9 @@
                 <span class="logo">
                     <a href="/">
                         <img :src="logo" alt="incoboc">
+                        <p>
+                            بازارگاه آنلاین کشاورزی
+                        </p>
                     </a>
                 </span>
 
@@ -751,7 +881,7 @@
 
             <section class="main-right-header">
                 <ProfileInfo
-                :isLoading='isLoading'               
+                :isLoading='isLoading'
                         :photoLink="currentUser.profile.profile_photo"
                         :storage="storage"
                         :def="defultimg"
@@ -771,6 +901,12 @@
 
             </section>
 
+            <div class="copy-right">
+
+                <p dir="rtl">
+                    تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.
+                </p>
+            </div>
         </section>
 
         <HeaderTop
@@ -782,6 +918,7 @@
                 :out="logout"
                 :routeHome="routehome"
         />
+
     </div>
 
 </template>
@@ -841,7 +978,10 @@
                 errors: '',
                 popUpMsg: '',
                 submiting: false,
-                uploadPercentage: 0
+                uploadPercentage: 0,
+                deleteText: '',
+                deleteButtonText: '',
+                cancelButtonText: '',
             }
         },
         methods: {
@@ -895,23 +1035,12 @@
                 if (num == null) {
                     return null;
                 }
-                var numDic = {
-                    '۰': '0',
-                    '۱': '1',
-                    '۲': '2',
-                    '۳': '3',
-                    '۴': '4',
-                    '۵': '5',
-                    '۶': '6',
-                    '۷': '7',
-                    '۸': '8',
-                    '۹': '9',
-                };
 
-                return num
-                    .toString()
-                    .replace(/[۰-۹]/g, function (w) {
-                        return numDic[w];
+                return num.toString()
+                    .replace(/[\u0660-\u0669]/g, function (c) {
+                        return c.charCodeAt(0) - 0x0660;
+                    }).replace(/[\u06f0-\u06f9]/g, function (c) {
+                        return c.charCodeAt(0) - 0x06f0;
                     });
             },
             toggleHeader() {
@@ -980,6 +1109,9 @@
                 var back = $(".background_mob_sec");
                 var closeHeaderButtonMobileLinks = $('.mobile-header .header-menu a');
                 showHeaderButtonElement.on('click', function () {
+
+                    rightHeader.animate({ scrollTop: 0 }, "fast");
+
                     if (flag === true) {
                         rightHeader.animate({
                             right: '0'
@@ -1073,7 +1205,13 @@
             eventBus.$on('uploadPercentage', (event) => {
                 this.uploadPercentage = event;
             });
+             eventBus.$on('deleteButtonText', (event) => {
+                this.deleteButtonText = event;
+            });
 
+            eventBus.$on('cancelButtonText', (event) => {
+                this.cancelButtonText = event;
+            });
         },
         metaInfo() {
             return {

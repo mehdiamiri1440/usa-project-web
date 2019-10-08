@@ -1,4 +1,5 @@
-<style>
+<style >
+
 .display-loading {
   display: inline-flex;
   justify-content: center;
@@ -14,7 +15,7 @@
 #main {
   margin-right: 250px;
   margin-top: 65px;
-  background: #fff;
+  background: #f6f6f6;
   position: relative;
   min-height: 600px;
 }
@@ -56,12 +57,14 @@
 
 .right-menu-header,
 .content-header {
+
   float: right;
+
 }
 
 .profile-menu-header {
   padding: 7px;
-  padding-left: 55px;
+  padding-left: 37px;
 }
 
 .profile-menu-header i {
@@ -74,15 +77,20 @@
   font-size: 20px;
 }
 
-.content-header {
-  background: #28a745;
-  color: #fff;
-  height: 100%;
-  padding: 20px 20px 0;
+.profile-menu-header span.user_name{
+
+  display: block;
+
+  float: right;
+
+  padding-top: 15px;
+
 }
+
 .right-menu-header .green-button {
   font-size: 17px;
 }
+
 .right-menu-header a,
 .profile-menu-header a {
   color: #7f8c9b;
@@ -98,10 +106,18 @@
   color: #fff;
   height: 100%;
   padding: 20px 20px 0;
+  display: none;
 }
+
+/*.content-header span{
+  display: block;
+  text-align: right;
+}*/
+
 .right-menu-header .green-button {
   font-size: 17px;
 }
+
 .right-menu-header a,
 .profile-menu-header a {
   color: #7f8c9b;
@@ -163,6 +179,19 @@ i.fa-home {
   position: relative;
   top: 5px;
 }
+
+.product-list-link{
+
+  font-size: 17px !important;
+  padding: 7px 20px !important;
+  background: #00c569 !important;
+  border-radius: 4px;
+  border: 1px solid;
+  display: inline-block;
+  color: #fff !important;
+
+}
+
 </style>
 
 <template>
@@ -173,7 +202,7 @@ i.fa-home {
       </div>
 
       <div class="content-header">
-        <span class="font-big">اینکوباک</span> |
+        <span class="font-big">اینکوباک</span>
         <span>بازارگاه آنلاین کشاورزی</span>
       </div>
 
@@ -199,10 +228,10 @@ i.fa-home {
         <div class="profile-list">
           <ul class="list-unstyled">
             <li class="list-item">
-              <a
-                :href="'/dashboard/profile'"
+              <router-link
+                :to="{name : 'profileBasic'}"
                 @click="registerComponentStatistics('seller-dashboard-header','profile-link','click-on-profile-link-in-dashboard')"
-              >پروفایل</a>
+              >پروفایل</router-link>
             </li>
 
             <li class="list-item">
@@ -225,7 +254,7 @@ i.fa-home {
         <ul class="list-inline">
           <li>
             <a
-              class="green-button"
+              class="product-list-link"
               href="/product-list"
               @click="registerComponentStatistics('dashboard-header','product-list-btn','click-on-product-list-in-dashboard')"
             >
@@ -237,12 +266,12 @@ i.fa-home {
           </li>
 
           <li>
-            <a
-              :href="routeHome"
+            <router-link
+              :to="{name : 'status'}"
               @click="registerComponentStatistics('dashboard-header','home-page-btn','click-on-home-page-in-dashboard')"
             >
               <i class="fa fa-home" aria-hidden="true"></i>
-            </a>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -258,6 +287,7 @@ var visible = false;
 import SubMenu from "./sub-menu/sub-menu.vue";
 
 export default {
+
   components: {
     SubMenu
   },

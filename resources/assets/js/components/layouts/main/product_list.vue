@@ -1,6 +1,10 @@
+<style>
+
+    body{
+        padding-right: 0 !important;
+    }
+</style>
 <style scoped>
-
-
 
     .sidebar{
     will-change: min-height;
@@ -462,7 +466,7 @@
                 <div class="modal-dialog">
 
                     <a href="#" class="close-dialog-popup" data-dismiss="modal">
-                        <i class="fa fa-close"></i>
+                        <i class="fa fa-times"></i>
                     </a>
 
                     <div class="main_popup_content">
@@ -521,21 +525,23 @@
 
         <main id="main" class="container-fluid ">
             <div class="row">
-                <div class="col-xs-12 col-md-9">
+                <div class="col-xs-12 col-lg-9">
                     <section class="main-content col-xs-12" v-if="products.length > 0  ">
                         <div class="row">
-                           <div id="article-list">
+                           <div id="article-list" >
+                            <div class="col-xs-12 col-md-6"  v-for="(product,productIndex) in products">
+                                <ProductArticle
+                                        v-if="products.length >= productIndex"
+                                        :key="product.main.id"
+                                        :product="product"
+                                        :loading_img="loading_img"
+                                        :defultimg="defultimg"
+                                        :str="str"
+                                        :loading="loading"
+                                        :currentUser="currentUser"
+                                />
+                            </div>
 
-                             <ProductArticle v-for="(product,productIndex) in products"
-                                            v-if="products.length >= productIndex"
-                                            :key="product.main.id"
-                                            :product="product"
-                                            :loading_img="loading_img"
-                                            :defultimg="defultimg"
-                                            :str="str"
-                                            :loading="loading"
-                                            :currentUser="currentUser"
-                            />
                             <div class="load-more-button"
                                  v-if="searchText === '' && continueToLoadProducts === true ">
                                 <div class="col-xs-12 col-sm-6 col-sm-offset-3">
@@ -644,7 +650,7 @@
 
                              >
 
-                             <div class="margin-15-0 default-item-wrapper shadow-content row">
+                             <div v-for="(defaultItem ,index) in 6" :key="index" class="margin-15-0 default-item-wrapper shadow-content row">
 
                                  <div class="default-user-contents col-xs-12  col-sm-3">
 
@@ -671,95 +677,6 @@
 
                                      </div>
 
-                                     
-                                    <div class=" default-main-article-content col-xs-12 col-sm-7">
-                                            <span class="content-half-width placeholder-content default-input-boxing-size"></span>
-
-                                            <span class="default-boxing-size content-full-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
-                                             <span class="default-boxing-size content-default-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
-                                         </div>
-                                 </div>
-                             </div>
-
-
-                          <div class="margin-15-0 default-item-wrapper shadow-content row">
-
-                                 <div class="default-user-contents col-xs-12  col-sm-3">
-
-                                     <div class=" default-boxing-size placeholder-content default-article-user-image"></div>
-
-                                     <div class="text-center xs-text-right">
-
-                                         <span class="placeholder-content default-boxing-size content-half-width "></span>
-
-                                     </div>
-
-                                        <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-                                         <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-
-                                 </div>
-
-                                 <div class="default-article-contents col-xs-12  col-sm-9">
-
-                                     <div class="default-wrapper-main-image pull-right  col-xs-12 col-sm-5">
-
-                                         <span class="default-main-image  placeholder-content"></span>
-
-                                     </div>
-
-                                    
-                                    <div class=" default-main-article-content col-xs-12 col-sm-7">
-                                            <span class="content-half-width placeholder-content default-input-boxing-size"></span>
-
-                                            <span class="default-boxing-size content-full-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
-                                             <span class="default-boxing-size content-default-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
-                                         </div>
-                                 </div>
-                             </div>
-
-
-
-
-                                 <div class="margin-15-0 default-item-wrapper shadow-content row">
-
-                                 <div class="default-user-contents col-xs-12  col-sm-3">
-
-                                     <div class=" default-boxing-size placeholder-content default-article-user-image"></div>
-
-                                     <div class="text-center xs-text-right">
-
-                                         <span class="placeholder-content default-boxing-size content-half-width "></span>
-
-                                     </div>
-
-                                        <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-                                         <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-
-                                 </div>
-
-                                 <div class="default-article-contents col-xs-12  col-sm-9">
-
-                                     <div class="default-wrapper-main-image pull-right  col-xs-12 col-sm-5">
-
-                                         <span class="default-main-image  placeholder-content"></span>
-
-                                     </div>
 
                                     <div class=" default-main-article-content col-xs-12 col-sm-7">
                                             <span class="content-half-width placeholder-content default-input-boxing-size"></span>
@@ -780,8 +697,7 @@
                     </section>
                 </div>
 
-
-                <aside id="sidebar" class=" product-sidebar sidebar hidden-xs  hidden-sm col-md-3">
+                <aside id="sidebar" class=" product-sidebar sidebar hidden-xs  hidden-sm col-lg-3">
 
                     <div class="row">
 
@@ -803,7 +719,7 @@
                     </div>
 
                 </aside>
-                
+
             </div>
 
         </main>
@@ -1059,7 +975,7 @@
                 });
             },
             sidebarScroll() {
-              
+
                 var $sticky = $('.sticky');
                 var stickyrStopper = $('#wrap-footer');
                 var lastScrollTop = 0;
@@ -1086,22 +1002,22 @@
                     var stickyStopperPosition = stickyrStopper.offset().top;
                     var stopPoint = documentHeight - (wHeight + stickyrStopper.innerHeight() + 130);
                     var differences = (stickyStopperPosition - stickPositionToContent) - (generalSidebarHeight - stickOffset);
-                    var diff = differences + stickOffset ; 
+                    var diff = differences + stickOffset ;
                     var sidebarHeightToTop = generalSidebarHeight + stickyTop;
-                    
+
 
                         if (generalSidebarHeight > wHeight) {
-                          
-                          
+
+
                             if(wHeight < sidebarHeightToTop){
-                    
+
                                 $(window).scroll(function(){ // scroll event
                                       var windowTop = $(window).scrollTop(); // returns number
-                                    
+
                                            if (windowTop > lastScrollTop){
 
                                                 if ((dynamicScroll + generalSidebarHeight) < windowTop + wHeight) {
-                                            
+
                                                       if (stopPoint + 13  < windowTop  ) {
                                                           $sticky.css({
                                                               position: 'absolute',
@@ -1125,7 +1041,7 @@
                                                       }
 
                                                 }else{
-                                                   
+
                                                       if (stopPoint  < windowTop) {
                                                           $sticky.css({
                                                               position: 'absolute',
@@ -1169,7 +1085,7 @@
 
                                     }
                                   dynamicScroll = $sticky.offset().top;
-                                 
+
                                   lastScrollTop = windowTop;
                                  });
 
@@ -1178,7 +1094,7 @@
                                   $(window).scroll(function(){ // scroll event
                                       var windowTop = $(window).scrollTop(); // returns number
                                       if (windowTop < lastScrollTop){
-                                        
+
 
                                          if (stopPoint  < windowTop) {
                                                   $sticky.css({
@@ -1193,17 +1109,17 @@
                                                       top:stickyTop,
                                                       right:'0'
                                                   });
-                                              } 
+                                              }
                                           }
                                        lastScrollTop = windowTop;
                                     });
-                                      
+
                             }; //end all if
 
 
                         } else {
 
-                         
+
 
                              $(window).scroll(function(){ // scroll event
                                       var windowTop = $(window).scrollTop(); // returns number'
@@ -1221,11 +1137,11 @@
                                                       top:stickyTop,
                                                       right:'0'
                                                   });
-                                              } 
+                                              }
                             });
-                                      
+
                         }
-                  
+
                }
 
             },
@@ -1263,11 +1179,11 @@
         metaInfo() {
 
             return {
-                title: 'اینکوباک | لیست محصولات و قیمت عمده محصولات کشاورزی',
+                title: 'لیست محصولات و قیمت عمده محصولات کشاورزی',
                 titleTemplate: 'اینکوباک | %s',
                 meta: [
                     {
-                        name: 'description', 
+                        name: 'description',
                         content: 'خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار'
                     },
                     {

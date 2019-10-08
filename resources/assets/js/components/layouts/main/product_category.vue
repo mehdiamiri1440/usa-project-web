@@ -307,7 +307,7 @@
         #main{
             padding-top: 165px;
         }
-        
+
         .search-box input {
             width: calc(100% - 75px);
         }
@@ -332,7 +332,7 @@
             z-index: 1;
             width: 100%;
             background: #f0f3f6;
-         
+
         }
 
         .search-box{
@@ -463,7 +463,7 @@
                 <div class="modal-dialog">
 
                     <a href="#" class="close-dialog-popup" data-dismiss="modal">
-                        <i class="fa fa-close"></i>
+                        <i class="fa fa-times"></i>
                     </a>
 
                     <div class="main_popup_content">
@@ -520,8 +520,8 @@
                 <ul class="list-inline">
                     <li class="list-item active">
                        <h1 class="main-title">
-                        <a href="#">
-                            {{$route.params.categoryName}}
+                        <a href="">
+                            {{this.getCategoryName()}}
                         </a>
                         </h1>
                     </li>
@@ -900,7 +900,7 @@
                 var searchValue = this.searchValue;
                 var searchValueText = searchValue;
                 let categoryName = this.getCategoryName();
-                
+
 
                 axios.post('/user/profile_info')
                     .then(function (response) {
@@ -1046,9 +1046,9 @@
                 if (this.cityId) {
                     searchObject.city_id = this.cityId;
                 }
-             
+
                 searchObject.search_text = this.getCategoryName();
-                
+
 
                 if (jQuery.isEmptyObject(searchObject)) {
                     searchObject.from_record_number = 0;
@@ -1104,7 +1104,7 @@
             },
             getCategoryName:function(){
                 let name = this.$route.params.categoryName;
-                
+
                 return name.replace('-',' ');
             }
         },
@@ -1141,16 +1141,16 @@
 
         },
         metaInfo() {
-            
+
             let categoryName = this.getCategoryName();
-            
+
             return {
                 title: 'خرید و فروش عمده و قیمت ' + categoryName,
                 titleTemplate: 'اینکوباک | %s',
                 meta: [
                     {
-                        name: 'description', 
-                        content: 'خرید و فروش عمده و قیمت ' + categoryName + ' از بهترین تولیدکنندگان ایران - اینکوباک بازار آنلاین کشاورزی' 
+                        name: 'description',
+                        content: 'خرید و فروش عمده و قیمت ' + categoryName + ' از بهترین تولیدکنندگان ایران - اینکوباک بازار آنلاین کشاورزی'
                     },
                     {
                         name: 'author',

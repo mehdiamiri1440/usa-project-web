@@ -41,7 +41,7 @@ class admin_statistics_controller extends Controller
         
 //        $transactions_count = $this->get_transactions_count($from_date, $until_date);
         $buyAds_count = $this->get_buyAds_count($from_date, $until_date);
-        $confirmed_buyAds_count = $this->get_buyAds_count($from_date, $until_date,'true');
+        $confirmed_buyAds_count = $this->get_buyAds_count($from_date, $until_date,true);
         $products_count = $this->get_products_count($from_date, $until_date);
         $confirmed_products_count = $this->get_products_count($from_date, $until_date,true);
 //        $sell_offers_count = $this->get_sell_offers_count($from_date, $until_date);
@@ -90,14 +90,14 @@ class admin_statistics_controller extends Controller
     protected function get_buyAds_count($from_date, $until_date , $confirmed_status = null)
     {
         if($confirmed_status == null){
-            $buyAds_count = buyAd::whereBetween('updated_at',[$from_date, $until_date])
+            $buyAds_count = buyAd::whereBetween('created_at',[$from_date, $until_date])
                                 ->select('id')
                                 ->get()
                                 ->count();
         }
         else{
             $buyAds_count = buyAd::where('confirmed',$confirmed_status)
-                                ->whereBetween('updated_at',[$from_date, $until_date])
+                                ->whereBetween('created_at',[$from_date, $until_date])
                                 ->select('id')
                                 ->get()
                                 ->count();
@@ -110,14 +110,14 @@ class admin_statistics_controller extends Controller
     protected function get_products_count($from_date, $until_date, $confirmed_status = null)
     {
         if($confirmed_status == null){
-            $products_count = product::whereBetween('updated_at',[$from_date, $until_date])
+            $products_count = product::whereBetween('created_at',[$from_date, $until_date])
                                 ->select('id')
                                 ->get()
                                 ->count();
         }
         else{
             $products_count = product::where('confirmed', $confirmed_status)
-                                ->whereBetween('updated_at',[$from_date, $until_date])
+                                ->whereBetween('created_at',[$from_date, $until_date])
                                 ->select('id')
                                 ->get()
                                 ->count();

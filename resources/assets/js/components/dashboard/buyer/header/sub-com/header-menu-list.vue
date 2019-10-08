@@ -12,52 +12,61 @@
         text-align: center;
     }
 
-    .header-menu i.fa {
+    .header-menu i {
         margin: 5px;
     }
+
 </style>
 <template>
     <div>
         <div class="header-menu">
             <ul class="list-unstyled">
+<!--                 <li class="list-item">
+                  <router-link
+                    :class="{'active' : this.activeElement === 0}"
+                    :to="{ name : 'status' }"
+                  >
+                    <span>داشبورد</span>
+                    <i class="fa fa-chart-line"></i>
+                  </router-link>
+                </li> -->
                 <li class="list-item">
-                    <router-link :class="{'active' : this.activeElement === 0}" :to="{ name : 'profileBasic' }">
-                        <span>ویرایش پروفایل</span>
+                    <router-link  :to="{ name : 'profileBasic' }">
                         <i class="fa fa-user" aria-hidden="true"></i>
+                        <span>ویرایش پروفایل</span>
+
                     </router-link>
                 </li>
 
                 <li class="list-item">
                     <router-link  :to="{ name : 'registerRequest' }">
-                        <span>ثبت درخواست خرید</span>
                         <i class="fa fa-plus-square " aria-hidden="true"></i>
+                        <span>ثبت درخواست خرید</span>
+
                     </router-link>
                 </li>
 
                 <li class="list-item">
                     <router-link  :to="{ name : 'messages' }">
+                        <i class="fas fa-comment-alt" aria-hidden="true"></i>
                         <span>پیام ها</span>
                         <span class="custom-badge"
                               v-if="messageCount"
                               v-text="messageCount"
                         ></span>
 
-                        <i class="fa fa-comment" aria-hidden="true"></i>
+
                     </router-link>
                 </li>
 
                 <li class="list-item">
                     <router-link  :to="{ name : 'guide' }">
-                        <span>راهنما</span>
                         <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <span>راهنما</span>
+
                     </router-link>
                 </li>
             </ul>
-        </div>
-        <div class="copy-right">
-            <p>
-                تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.
-            </p>
         </div>
     </div>
 </template>
