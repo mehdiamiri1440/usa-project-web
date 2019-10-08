@@ -669,17 +669,12 @@ class buyAd_controller extends Controller
             $result_buyAds = array();
 
             $related_buyAds = $this->get_related_buyAds_list_to_the_user($user);
-            //$buyAd_recommender_object->buyAd_list_recommender_for_seller($related_buyAds,session('user_id')); //check out the method for more details
+            $buyAd_recommender_object->buyAd_list_recommender_for_seller($related_buyAds,$seller_id); //check out the method for more details
 
-//            $related_buyAds->each(function($buyAd) use($date_convertor_object,&$related_buyAds){
-//                   $category_array = $this->get_category_and_subcategory_name($buyAd->category_id);
-//                   $buyAd['category_name'] = $category_array['category_name'];
-//                   $buyAd['subcategory_name'] = $category_array['subcategory_name'];
-//                   $buyAd['register_date'] = $date_convertor_object->get_persian_date_with_month_name($buyAd->created_at);
-//
-//                   $result_buyAds[] = $buyAd;
-//            });
-
+            $record_count = config("subscriptionPakage.type-$user->active_pakage_type.buyAd-count");
+            
+            $related_buyAds = array_slice($related_buyAds->toArray(),0,$record_count);
+            
             foreach($related_buyAds as $buyAd){
                    $category_array = $this->get_category_and_subcategory_name($buyAd->category_id);
                    $buyAd->category_name = $category_array['category_name'];
@@ -705,16 +700,14 @@ class buyAd_controller extends Controller
 
     protected function get_related_buyAds_list_to_the_user(&$user)
     {
-        $record_count = config("subscriptionPakage.type-$user->active_pakage_type.buyAd-count");
-
-//        echo 'test';
+//        $record_count = config("subscriptionPakage.type-$user->active_pakage_type.buyAd-count");
 
         $buyAds = DB::table('buy_ads')
                     ->join('myusers','buy_ads.myuser_id','=','myusers.id')
                     ->where('buy_ads.confirmed', true)
                     ->select($this->related_buyAd_list_required_fields)
                     ->orderBy('buy_ads.created_at','desc')
-                    ->limit($record_count + 1)
+//                    ->limit($record_count)
                     ->get();
 
         //relevance
@@ -734,20 +727,7 @@ class buyAd_controller extends Controller
             $relevence = ($user_record->category_id == $category_record->parent_id) ? true : false;
             $user_already_offered_for_buyAd = false;
 
-            $buyAd_sell_offers = $this->get_buyAd_sell_offers($buyAd->id,$this->my_sell_offer_required_fields,[
-                'confirmed' => true,
-            ]);
-
-            $buyAd_sell_offers->each(function($sell_offer) use(&$user_already_offered_for_buyAd,$user_id,$buyAd){
-
-               if($sell_offer->myuser_id == $user_id && $sell_offer->buy_ad_id == $buyAd->id){
-                    $user_already_offered_for_buyAd = true;
-
-                    return false; //break the 'each' loop
-                }
-            });
-
-            return  $relevence && ($user_already_offered_for_buyAd == false);
+            return  $relevence;
         });
 
         return $buyAds;
