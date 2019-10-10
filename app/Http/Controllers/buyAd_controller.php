@@ -669,7 +669,7 @@ class buyAd_controller extends Controller
             $result_buyAds = array();
 
             $related_buyAds = $this->get_related_buyAds_list_to_the_user($user);
-            $buyAd_recommender_object->buyAd_list_recommender_for_seller($related_buyAds,$seller_id); //check out the method for more details
+//            $buyAd_recommender_object->buyAd_list_recommender_for_seller($related_buyAds,$seller_id); //check out the method for more details
 
             $record_count = config("subscriptionPakage.type-$user->active_pakage_type.buyAd-count");
             
