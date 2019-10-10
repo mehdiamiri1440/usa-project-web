@@ -21,35 +21,35 @@ import registerComponent from './components/register/register.vue';
 
 
 var visible = false;
- new Vue({
-     el:'#app',
-    components:{
+new Vue({
+    el: '#app',
+    components: {
         loginComponent,
         registerComponent,
-       // productVue
+        // productVue
     },
-     methods: {
-         collapseDropDown: function () {
-             $(".profile-list").fadeIn("slow", function () {
-                 visible = true;
-             });
-         },
-         collapseDropDownList: function () {
-             $(".icon-header-list").fadeIn("slow", function () {
-                 visible = true;
-             });
-         },
-         documentClick(e) {
-             if (visible) {
-                 $('.profile-list').fadeOut("slow");
-                 $('.icon-header-list').fadeOut("slow");
-                 visible = false;
-             }
-         },
-     },
-     created() {
-         document.addEventListener('click', this.documentClick)
-     },
+    methods: {
+        collapseDropDown: function () {
+            $(".profile-list").fadeIn("slow", function () {
+                visible = true;
+            });
+        },
+        collapseDropDownList: function () {
+            $(".icon-header-list").fadeIn("slow", function () {
+                visible = true;
+            });
+        },
+        documentClick(e) {
+            if (visible) {
+                $('.profile-list').fadeOut("slow");
+                $('.icon-header-list').fadeOut("slow");
+                visible = false;
+            }
+        },
+    },
+    created() {
+        document.addEventListener('click', this.documentClick)
+    },
     router,
 });
 
