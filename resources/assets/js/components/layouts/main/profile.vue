@@ -61,6 +61,10 @@
             width: initial;
             padding: 15px;
         }
+        .contents > .row{
+            margin: 0;
+        }
+
     }
 
     @media screen and (max-width: 500px) {
@@ -531,17 +535,19 @@
 
                     <div class="contents" v-else>
 
-
-                         <ProductArticle v-if="products.length > 0" v-for="(product,productIndex) in products"
-                                    :key="product.main.id"
+                          <div class="row">
+                              <div v-for="(product,productIndex) in products" :key="product.main.id" class="col-xs-12 col-lg-6 pull-right">
+                                <ProductArticle
                                     :product="product"
                                     :loading_img="loading_img"
                                     :defultimg="defultimg"
                                     :str="str"
                                     :loading="loading"
                                     :currentUser="currentUser"
+                                />
+                              </div>
+                          </div>   
 
-                         />
                         <div class="col-xs-12" v-if="products.length === 0 && !loading">
                             <div class="col-xs-12" v-if="products.length === 0 && !loading">
                                 <div class="wrapper_no_pro">

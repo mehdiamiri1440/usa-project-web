@@ -1,3 +1,9 @@
+<style>
+
+    body{
+        padding-right: 0 !important;
+    }
+</style>
 <style scoped>
 
     span {
@@ -76,6 +82,7 @@
         border-radius: 4px;
         padding: 0 5px;
         color: #777 !important;
+        line-height: 21px;
     }
 
     .valid-user-badge {
@@ -117,6 +124,8 @@
     .text-danger {
         height: 24px
     }
+
+
 
     @media screen and (max-width: 480px) {
         .main-article-contents h1, .main-article-contents h3, .main-article-contents a p {

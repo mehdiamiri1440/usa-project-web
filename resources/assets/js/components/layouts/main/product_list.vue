@@ -1,9 +1,4 @@
-<style>
 
-    body{
-        padding-right: 0 !important;
-    }
-</style>
 <style scoped>
 
     .sidebar{

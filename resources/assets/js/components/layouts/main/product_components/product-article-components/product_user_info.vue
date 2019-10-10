@@ -11,6 +11,8 @@
         margin: 0;
 
         margin-top: 3px;
+        
+        line-height: 1.618;
     }
 
     .green-text {
@@ -37,6 +39,23 @@
         color: #000430;
     }
 
+    .blue-button {
+    margin: 15px 0;
+    display: inline-block;
+    background: #150e47;
+    color: #fff;
+    padding: 5px 0;
+    width: 100%;
+    border-radius: 3px;
+    text-align: center;
+    border: none;
+    transition: 300ms;
+    }
+
+    .blue-button:hover, .blue-button:focus {
+        color:#fff;
+        background: #1d1060;
+    }
     .user-image {
         width: 35px;
         height: 35px;
