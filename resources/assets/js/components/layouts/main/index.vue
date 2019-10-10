@@ -933,7 +933,7 @@ li > ul > li.active > ul > li{
     }
 
     .benefit-links-item a{
-        font-size: 12px;
+        font-size: 10px;
         color: #BDC4CC;
         transition: 200ms;
     }
@@ -1118,7 +1118,7 @@ li > ul > li.active > ul > li{
 
                                         <a 
                                          class="sub-category-item"
-                                         :href=getSubCategoryUrl(subCategory.category_name) 
+                                         :href="getSubCategoryUrl(subCategory.category_name) "
                                          v-text="subCategory.category_name">
                                              
                                          </a>
@@ -1239,7 +1239,7 @@ li > ul > li.active > ul > li{
 
                             </h3>
                             <p>
-                                لورم ایپسوم متن ساختگی در زمینه طراحی صفحات وب ومحتوای اینترنتی لورم ایپسوم متن ساختگی در زمینه طراحی
+                               برای استعلام قیمت و خرید محصولات کشاورزی از بهترین فروشندگان دست اول هم اکنون ثبت نام کنید
                             </p>
                             <a class="green-button" href="#">
                                 
@@ -1301,7 +1301,9 @@ li > ul > li.active > ul > li{
 
                             </h3>
                             <p>
-                                لورم ایپسوم متن ساختگی در زمینه طراحی صفحات وب ومحتوای اینترنتی لورم ایپسوم متن ساختگی در زمینه طراحی
+                              
+
+برای فروش بدون واسطه محصولات کشاورزی خود به خریداران مستقیم و صادرکنندگان هم اکنون ثبت نام کنید 
                             </p>
                             <a class="green-button" href="#">
                                 
@@ -1360,12 +1362,46 @@ li > ul > li.active > ul > li{
                          لینک های مفید
                      </div>
                      <div class="benefit-links-item col-xs-12">
+                        
                         <div class="row">
-                             <h4 v-for="(item , index) in 20" :key="index"  class="col-xs-6 col-sm-4 col-md-3 col-lg-2 pull-right">
-                             <a href="#">
-                                 لینک مفید
-                             </a>
-                         </h4>
+                            <!-- loop for wholesale date -->
+                            <h4 v-for="item in footerLinks.wholesaleDate"   class="col-xs-4 col-sm-3 col-md-2  pull-right">
+                                 <a :href="getSubCategoryUrl(item.link)" v-text="'فروش عمده' + ' ' +item.name">
+                                     
+                                 </a>
+                             </h4>  
+                             <!-- end loop  -->
+
+                            <!-- loop for wholesale  -->
+                            <div  v-if="categoryList.length"
+                            v-for="(category , index) in categoryList">
+                                <h4
+                                 v-for="subCategory in category.subcategories" 
+                                 class="col-xs-4 col-sm-3 col-md-2  pull-right"
+                                >
+                                   
+                                    <a     
+                                             :href="getSubCategoryUrl(subCategory.category_name)"
+                                             v-text="'فروش عمده' + ' ' + subCategory.category_name">
+                                                 
+                                    </a>  
+
+                               </h4>
+                            </div>
+                             <!-- end loop  -->
+
+                            <!-- loop for wholesale rice -->
+
+                              <h4 v-for="item in footerLinks.wholesaleRise"   class="col-xs-4 col-sm-3 col-md-2  pull-right">
+                                 <a :href="getSubCategoryUrl(item.link)" 
+                                  v-text="'فروش عمده برنج' + ' ' + item.name">
+                                     
+                                 </a>
+                             </h4> 
+
+                            <!-- end loop  --> 
+
+
                         </div>
                      </div>
                  </div>
@@ -1515,6 +1551,120 @@ li > ul > li.active > ul > li{
                 isLoading : false,
                 categoryList: '',
                 subCategoryList: '',
+                footerLinks:{
+                    wholesaleDate : 
+                    [
+                        {
+                            name : 'خرما',
+                            link : 'خرما'
+                        },
+                        {
+                            name : 'خرمای مضافتی',
+                            link : 'خرما'
+                        },
+                        {
+                            name : 'خرمای بم',
+                            link : 'خرما'
+                        },
+                        {
+                            name : 'خرمای زاهدی',
+                            link : 'خرما'
+                        },
+                        {
+                            name : 'خرمای بوشهر',
+                            link : 'خرما'
+                        },
+                        {
+                            name : 'خرمای کبکاب',
+                            link : 'خرما'
+                        },
+                        {
+                            name : 'خرمای خوزستان',
+                            link : 'خرما'
+                        },
+                        {
+                            name : 'خرما در مشهد',
+                            link : 'خرما'
+                        },
+                        {
+                            name : 'خرما در بوشهر',
+                            link : 'خرما'
+                        },
+                        {
+                            name : 'خرمای مجول',
+                            link : 'خرما'
+                        },
+                        {
+                            name : 'کشمش',
+                            link : 'کشمش'
+                        },
+                        {
+                            name : 'پسته',
+                            link : 'پسته'
+                        },
+                        {
+                            name : 'انجیر خشک استهبان',
+                            link : 'انجیر'
+                        },
+                        {
+                            name : 'زعفران',
+                            link : 'زعفران'
+                        }
+
+                    ],
+                    wholesaleRise : [
+                        {
+                            name : 'برنج',
+                            link : 'برنج'
+                        },
+                        {
+                            name : 'خاطره',
+                            link : 'برنج'
+                        },
+                        {
+                            name : 'هندی طبیعت',
+                            link : 'برنج'
+                        },
+                        {
+                            name : 'محسن',
+                            link : 'برنج'
+                        },
+                        {
+                            name : 'پاکستانی',
+                            link : 'برنج'
+                        },
+                        {
+                            name : 'طبیعت',
+                            link : 'برنج'
+                        },
+                        {
+                            name : 'قهوه ای',
+                            link : 'برنج'
+                        },
+                        {
+                            name : 'شمال',
+                            link : 'برنج'
+                        },
+                        {
+                            name : 'طارم',
+                            link : 'برنج'
+                        },
+                        {
+                            name : 'دم سیاه',
+                            link : 'برنج'
+                        },
+                        {
+                            name : 'هاشمی',
+                            link : 'برنج'
+                        },
+                        {
+                            name : 'صدری',
+                            link : 'برنج'
+                        },
+
+                    ],
+                    
+                }
             }
         },
         methods: {

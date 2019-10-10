@@ -86,7 +86,7 @@
 
     .user-action-link{
 
-        padding-top: 7px;
+        padding-top: 9px;
 
         padding-right: 8px;
 

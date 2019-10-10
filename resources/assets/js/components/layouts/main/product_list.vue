@@ -299,11 +299,15 @@
         width: 56px;
         margin-top: -15px;
     }
-
-    @media screen and (max-width: 991px) {
+    @media screen and (max-width: 1199px) {
         .search-box input {
             width: calc(100% - 75px);
         }
+
+    }
+
+    @media screen and (max-width: 991px) {
+ 
 
         .title-page {
             text-align: center;
@@ -489,14 +493,14 @@
 
         <div class="sub-header-fix sub-header container-fluid">
 
-            <div class="search-box col-sm-8 col-xs-12 col-md-5">
+            <div class="search-box col-sm-8 col-xs-12 col-lg-5">
                 <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید">
 
                 <button class="btn-search">
                     <i class="fa-search fa"></i>
                 </button>
 
-                <button class="btn-filter  hidden-lg hidden-md"
+                <button class="btn-filter  hidden-lg "
                         data-toggle="modal" data-target="#searchFilter">
                     فیلتر
                     <i class="fa fa-filter"></i>
@@ -504,7 +508,7 @@
 
             </div>
 
-            <div class="links-sub-header   hidden-xs col-sm-4 col-xs-7 ">
+            <div class="links-sub-header   hidden-xs col-sm-4">
                 <ul class="list-inline">
                     <li class="list-item active">
                         <h1 >
@@ -641,52 +645,56 @@
 
 
 
-                    <section v-else style="padding-top:0; "  class="padding-15-0  col-xs-12"
+                    <section v-else  class=" col-xs-12"
 
                              >
+                            <div class="row">
+                                 <div  v-for="(defaultItem ,index) in 8" :key="index" class="col-xs-12 col-md-6">
+                                     <div class=" col-xs-12 padding-0 margin-15-0 default-item-wrapper shadow-content ">
 
-                             <div v-for="(defaultItem ,index) in 6" :key="index" class="margin-15-0 default-item-wrapper shadow-content row">
+                                         <div class="default-user-contents padding-10  col-xs-12 padding-0">
 
-                                 <div class="default-user-contents col-xs-12  col-sm-3">
+                                             <div class="  placeholder-content default-article-user-image  pull-right"></div>
 
-                                     <div class=" default-boxing-size placeholder-content default-article-user-image"></div>
-
-                                     <div class="text-center xs-text-right">
-
-                                         <span class="placeholder-content default-boxing-size content-half-width "></span>
-
-                                     </div>
-
-                                        <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-                                         <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
+                                             
+                                                 <span class="padding-top-5 placeholder-content margin-10 pull-right content-min-width "></span>
 
 
-                                 </div>
 
-                                 <div class="default-article-contents col-xs-12  col-sm-9">
+                                                <span class="margin-0 placeholder-content  default-button-min-with  pull-left"></span>
 
-                                     <div class="default-wrapper-main-image pull-right  col-xs-12 col-sm-5">
+                                            
 
-                                         <span class="default-main-image  placeholder-content"></span>
-
-                                     </div>
-
-
-                                    <div class=" default-main-article-content col-xs-12 col-sm-7">
-                                            <span class="content-half-width placeholder-content default-input-boxing-size"></span>
-
-                                            <span class="default-boxing-size content-full-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
-                                             <span class="default-boxing-size content-default-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
 
                                          </div>
+
+                                         <div class="default-article-contents padding-10  col-xs-12 ">
+
+                                             <div class="default-wrapper-main-image pull-right ">
+
+                                                 <span class="default-main-image  placeholder-content"></span>
+
+                                             </div>
+
+
+                                            <div class=" default-main-article-content ">
+                                                  
+
+                                                    <span class=" content-full-width placeholder-content "></span>
+
+                                                    <span class=" content-half-width placeholder-content "></span>
+
+                                                     <span class=" content-default-width placeholder-content "></span>
+
+                                                    <span class=" content-min-width placeholder-content "></span>
+
+                                                 </div>
+                                         </div>
+                                     </div>
+
                                  </div>
-                             </div>
+                            </div>
+                             
 
 
                     </section>
