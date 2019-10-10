@@ -72,13 +72,13 @@
 
     .flat-plust-icon a {
         background: #e41c38;
-
         width: 50px;
         height: 50px;
         display: block;
         border-radius: 50px;
         color: #fff;
-        box-shadow: 0 0 20px #838383;
+        -webkit-box-shadow: 0 3px 15px rgba(0,0,0,0.30);
+        box-shadow: 0 3px 15px rgba(0,0,0,0.30);
         text-align: center;
         padding-top: 15px;
         font-size: 23px;
@@ -697,7 +697,7 @@
                     </section>
                 </div>
 
-                <aside id="sidebar" class=" product-sidebar sidebar hidden-xs  hidden-sm col-lg-3">
+                <aside id="sidebar" class=" product-sidebar sidebar hidden-xs  hidden-sm hidden-md col-lg-3">
 
                     <div class="row">
 

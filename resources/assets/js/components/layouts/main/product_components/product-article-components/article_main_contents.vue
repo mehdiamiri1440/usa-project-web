@@ -89,7 +89,6 @@
         border-top: 3px solid #00B761;
         text-align: center;
         color: #fff !important;
-        z-index: 1;
 
     }
 
