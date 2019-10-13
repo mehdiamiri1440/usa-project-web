@@ -655,7 +655,6 @@
                     national_code: this.toLatinNumbers(this.step3.national_code),
                     category_id: this.step4.categoryId
                 };
-
                 if (this.errorFlag === false) {
                     axios.post('api/v1/users', object)
                         .then(function (response) {
@@ -666,8 +665,9 @@
                                 $('#custom-main-modal').modal('show');
 
                                 setTimeout(function () {
-                                    window.location.href = '/login';
-                                }, 3000);
+if(object.activity_type==='0')window.location.href='/dashboard/register-request'
+else window.location.href='/dashboard/register-product'
+}, 3000);
 
                                 self.registerComponentStatistics('Register', 'successful-register', 'user-registered-successfully');
                             }
