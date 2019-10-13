@@ -660,13 +660,13 @@
                         .then(function (response) {
                             if (response.status === 201) {
 
-                                self.popUpMsg = 'ثبت نام با موفقیت انجام شد.در حال انتقال به صفحه ی ورود...';
+                                self.popUpMsg = 'ثبت نام با موفقیت انجام شد.در حال انتقال به پنل کاربری هستید ...';
                                 eventBus.$emit('submitSuccess', self.popUpMsg);
                                 $('#custom-main-modal').modal('show');
 
                                 setTimeout(function () {
-if(object.activity_type==='0')window.location.href='/dashboard/register-request'
-else window.location.href='/dashboard/register-product'
+if(object.activity_type==='0')window.location.href='/dashboard/register-product'
+else window.location.href='/dashboard/register-request'
 }, 3000);
 
                                 self.registerComponentStatistics('Register', 'successful-register', 'user-registered-successfully');
