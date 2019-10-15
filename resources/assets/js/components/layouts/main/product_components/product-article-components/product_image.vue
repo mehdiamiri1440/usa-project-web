@@ -62,9 +62,9 @@
     /*preloader image style*/
     .main-article-image {
 
-        width: 120px;
+        width: 140px;
 
-        height: 120px;
+        height: 140px;
 
         overflow: hidden;
 

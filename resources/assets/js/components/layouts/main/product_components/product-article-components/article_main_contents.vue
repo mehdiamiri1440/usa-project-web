@@ -28,11 +28,14 @@
         white-space: nowrap;
 
         text-overflow: ellipsis;
+
+        margin-bottom: 10px; 
     }
 
     .main-article-contents-wrapper {
-        padding: 10px;
+        padding: 15px;
         overflow: hidden;
+        display: block;
     }
 
     .main-article-contents-image-wrapper, .main-article-contents {
@@ -41,7 +44,7 @@
 
     .main-article-contents {
         float: right;
-        width: calc(100% - 120px);
+        width: calc(100% - 140px);
         padding-right: 10px;
         position: relative;
     }
@@ -51,16 +54,16 @@
         float: right;
     }
 
-    .main-article-contents a {
+    .main-article-contents {
         color: #474747;
     }
 
-    .main-article-contents a p {
+    .main-article-contents p {
         font-size: 13px;
 
         font-weight: bold;
 
-        max-width: 240px;
+        max-width: 500px;
 
         overflow: hidden;
 
@@ -71,6 +74,8 @@
         white-space: nowrap;
 
         text-overflow: ellipsis;
+
+        margin-bottom: 10px;
     }
 
     .share-link {
@@ -118,7 +123,7 @@
     }
 
     .is-user-valid-content {
-        padding: 8px 10px;
+        padding: 15px;
     }
 
     .text-danger {
@@ -126,6 +131,16 @@
     }
 
 
+
+    @media screen and (max-width: 767px) {
+
+          .main-article-contents a p {
+
+            max-width: 300px;
+
+        }
+
+    }
 
     @media screen and (max-width: 480px) {
         .main-article-contents h1, .main-article-contents h3, .main-article-contents a p {
@@ -182,12 +197,13 @@
 </style>
 <template>
 
-    <div class="main-article-contents-wrapper"
+    <a class="main-article-contents-wrapper" :href="$parent.productUrl" @click="$parent.registerComponentStatistics('product',
+                           'show-product-in-seperate-page',
+                           'show-product-in-seperate-page')"
          :class="{ 'is-user-valid-content': $parent.product.user_info.active_pakage_type != 0 }">
 
         <div class="main-article-contents-image-wrapper">
-            <a :href="$parent.productUrl"
-               @click="$parent.registerComponentStatistics('productImageViewer','click','popUp')">
+           
                 <ProductImage
                         :base="$parent.str + '/'"
                         :img="$parent.product.photos[0].file_path"
@@ -201,10 +217,9 @@
                         :image-count="$parent.product.photos.length"
                 />
 
-            </a>
         </div>
         <div class="main-article-contents">
-            <a :href="$parent.productUrl" class="valid-user-badge"
+            <div class="valid-user-badge" 
                v-if="$parent.product.user_info.active_pakage_type != 0">
                 <div class="wrapper-icon">
                     <svg width="24.965" height="30.574" viewBox="0 0 24.965 30.574">
@@ -223,10 +238,8 @@
                         </g>
                     </svg>
                 </div>
-            </a>
-            <a :href="$parent.productUrl" @click="$parent.registerComponentStatistics('product',
-                           'show-product-in-seperate-page',
-                           'show-product-in-seperate-page')">
+            </div>
+            <div >
                 <h1 v-if="$route.params.id" class="article-title" v-html="getProductName()">
 
                 </h1>
@@ -235,44 +248,49 @@
 
                 </h3>
 
+
+                <p>مقدار موجودی: <span v-text="$parent.product.main.stock + ' کیلوگرم'"></span>
+                </p>
+                 
+                <p v-if="$parent.product.main.description">
+                    توضیحات
+                 <span v-text="$parent.product.main.description"></span>
+                
+                </p>
+<!--    
+                <p >
+                    حداقل سفارش:
+
+                    <span v-text="$parent.product.main.min_sale_amount"> </span>
+
+                    <span>کیلوگرم</span>
+                </p> -->
                 <p>استان / شهر:
                     <span v-text="$parent.product.main.province_name +
                             ' - ' +
                              $parent.product.main.city_name"
                     ></span>
                 </p>
-
-                <p>مقدار موجودی: <span v-text="$parent.product.main.stock + ' کیلوگرم'"></span>
-                </p>
-
-                <p>
-                    حداقل سفارش:
-
-                    <span v-text="$parent.product.main.min_sale_amount"> </span>
-
-                    <span>کیلوگرم</span>
-                </p>
-
-                <p v-if="!$parent.isMyProfile">قیمت:
+                <!-- <p v-if="!$parent.isMyProfile">قیمت:
                     <a href="#" @click.prevent="$parent.openChat($parent.product)">استعلام بگیرید</a>
-                    <!-- <span v-text="product.main.min_sale_price +
+                     <span v-text="product.main.min_sale_price +
                        ' - ' +
                        product.main.max_sale_price"
                       >
                       </span>
 
-                      <span>تومان</span>-->
-                </p>
+                      <span>تومان</span>
+                </p> -->
 
-            </a>
-            <a href="#" @click.prevent="$parent.copyProductLinkToClipBoard" class="share-link">
+            </div>
+            <a href="#" @click.prevent="$parent.copyProductLinkToClipBoard" class="share-link hidden">
                 <i class="fa fa-share"></i>
                 <span> اشتراک گذاری </span>
             </a>
 
         </div>
 
-    </div>
+    </a>
 
 </template>
 

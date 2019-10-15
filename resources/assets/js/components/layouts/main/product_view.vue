@@ -1,3 +1,19 @@
+
+<style>
+
+    .wrapper-bg{
+
+      background: #fff;
+
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+
+      border-radius: 4px;
+
+      padding: 15px;
+
+    }
+</style>
+
 <style scoped>
 #main {
   padding-top: 100px;
@@ -10,451 +26,37 @@
   margin: 30px auto;
 }
 
-.main-content-item {
-  direction: rtl;
-  float: left;
-  width: 100%;
-  margin: 24px auto;
-  border-radius: 5px;
-  box-shadow: 0 0 5px #cfcfcf;
-  padding: 15px 0;
-}
 
-.main-article-title {
-  margin: 15px auto;
-  font-weight: bold;
-}
 
-.main-article-title a {
-  color: #4c5058;
-}
-
-.main-article-title a:hover {
-  color: #444;
-}
-
-.main-article-content {
-  padding: 0 15px;
-}
-
-.main-article-content p {
-  margin-bottom: 15px;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-.main-article-content p span {
-  font-weight: normal;
-}
-
-.image-article-content {
-  padding: 0;
-  padding-top: 10px;
-  height: 240px;
-  overflow: hidden;
-}
-
-.image-article-content img {
-  height: 100%;
-}
-
-.image-article-content > div {
-  display: none;
-}
-
-.image-article-content > div:first-of-type {
-  display: block;
-}
-
-.image-article-content a:hover img {
-  filter: grayscale(0);
-  transition: 300ms;
-}
-
-.image-article-content img {
-  transition: 300ms;
-  filter: grayscale(40%);
-}
-
-.user-contents {
-  border-right: 2px solid #f0f3f6;
-  text-align: center;
-  padding: 0 20px;
-}
-
-.create_buy {
-  position: relative;
-}
-
-.buy_details {
-  border-top: 2px solid #f0f3f6;
-  padding: 15px 0;
-  margin: 15px auto;
-  display: block;
-}
-
-.buy_details > div {
-  margin: 7px auto;
-}
-
-.user-image {
-  width: 135px;
-  height: 135px;
-  overflow: hidden;
-  border-radius: 50%;
-  margin: 0 auto 10px;
-}
-
-.user-image img,
-.user-image > div {
-  height: 100%;
-}
-
-.buy_details .green-button {
-  margin: 5px auto;
-  display: inline-block;
-  background: #00c569;
-  color: #fff;
-  border-radius: 3px;
-  text-align: center;
-  font-size: 12px;
-  width: initial;
-  line-height: 21px;
-  padding: 8px 30px;
-}
-
-.buy_details .submit-button {
-  text-align: center;
-}
-
-.green-button {
-  margin: 5px 0;
-  display: inline-block;
-  background: #00c569;
-  color: #fff;
-  padding: 10px 0;
-  border-radius: 3px;
-  text-align: center;
-  font-size: 12px;
-  width: 100%;
-  line-height: 21px;
-  border: none;
-}
-
-.green-button:hover {
-  background: #279b41;
-  color: #fff;
-  cursor: pointer;
-}
-
-.gray-button {
-  margin: 5px auto;
-  display: inline-block;
-  background: #000122;
-  color: #fff;
-  padding: 15px 30px;
-  border-radius: 3px;
-  text-align: center;
-  font-size: 12px;
-  line-height: 21px;
-}
-
-.gray-button:hover {
-  background: #279b41;
-  color: #fff;
-  cursor: pointer;
-}
-
-.gray-button:active,
-.gray-button:focus {
-  color: #fff;
-}
-
-.text-des {
-  margin: 15px auto;
-  float: left;
-  width: 100%;
-}
-
-.sec-button {
-  text-align: center;
-}
-
-.sub-header-fix {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
-}
-
-.sidebar-fix {
-  position: fixed;
-  right: 0;
-  top: 64px;
-  z-index: 2;
-}
-
-.logo {
-  padding: 10px;
-  text-align: right;
-  float: right;
-  width: 190px;
-}
-
-.logo img {
-  width: 150px;
-}
-
-li.active a {
-  color: #313942;
-}
-
-li.active a::after {
-  content: " ";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background: #00c569;
-  height: 3px;
-  width: 100%;
-}
-
-@media screen and (max-width: 1199px) {
-  /*.logo {*/
-  /*float: none;*/
-  /*margin: 0 auto;*/
-  /*}*/
-  .user-image {
-    width: 100px;
-    height: 100px;
-    overflow: hidden;
-    border-radius: 50%;
-    margin: 0 auto 10px;
-  }
-}
-
-@media screen and (max-width: 992px) {
-  .user-image {
-    width: 80px;
-    height: 80px;
-    overflow: hidden;
-    border-radius: 50%;
-    margin: 0 auto 10px;
-    float: right;
-  }
-
-  .user-contents > img {
-    display: none;
-  }
-
-  .title-page {
-    text-align: center;
-    margin: 30px auto 0;
-  }
-
-  .right-sidebar {
-    display: none;
-  }
-
-  .main-image {
-    padding: 0;
-  }
-
-  .sub-header {
-    background: #f0f3f6;
-    padding-top: 80px;
-  }
-
-  .create_buy_mobile {
-    display: block;
-  }
-
-  .links-sub-header {
-    direction: rtl;
-    text-align: center;
-  }
-
-  .logo img {
-    width: 100%;
-  }
-
-  .user-contents > p {
-    float: right;
-    font-size: 18px;
-    padding-top: 30px;
-    padding-right: 20px;
-  }
-
-  .green-button {
-    float: none;
-    width: initial;
-    padding: 10px 25px;
-    margin-top: 20px;
-  }
-
-  .create_buy {
-    display: none;
-  }
-
-  .main-content {
-    margin-bottom: 0;
-    padding-bottom: 0;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .links-sub-header {
-    direction: rtl;
-    text-align: center;
-  }
-
-  .logo img {
-    width: 100%;
-  }
-
-  .user-contents > img {
-    display: none;
-  }
+@media screen and (max-width: 767px){
 
   #main {
-    padding-top: 75px;
-  }
-}
 
-@media screen and (max-width: 715px) {
-  .name-header-profile {
-    display: none;
+    padding-top: 80px;
+
   }
 
-  .profile-menu-header i {
-    position: absolute;
-    left: -75px;
-    top: 22px;
-    font-size: 20px;
-  }
-}
-
-@media screen and (max-width: 555px) {
-  #main,
-  .main-content,
-  .wrapper-related-products {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .logo {
-    padding: 6px 10px;
-  }
-
-  .user-image {
-    width: 60px;
-    height: 60px;
-    overflow: hidden;
-    border-radius: 50%;
-    margin: 10px auto 10px;
-    float: right;
-  }
-
-  .green-button {
-    float: left;
-    padding: 10px 5px;
-    margin-top: 11px;
-    font-size: 10px;
-  }
-
-  .user-contents > p {
-    float: right;
-    font-size: inherit;
-    padding-top: 28px;
-    padding-right: 5px;
-  }
-}
-
-@media screen and (max-width: 430px) {
-  .user-image {
-    width: 50px;
-    height: 50px;
-  }
-
-  .logo {
-    padding: 6px 63px;
-    width: 100%;
-    height: 109px;
-  }
 }
 </style>
 
 <template>
   <div class="container">
     <main id="main" class="row">
-      <div class="col-xs-12">
-        <section v-if="product.main.id" class="main-content">
+
+      <div class="col-xs-12 col-lg-9 pull-right">
+
+        <section  class="main-content">
           <div class="row">
-            <ProductArticle
-              :product="product"
-              :loading_img="loading_img"
-              :defultimg="defultimg"
-              :str="str"
-              :loading="loading"
-              :currentUser="currentUser"
-            />
+            <ProductContents  />  
+            
           </div>
         </section>
 
-        <section v-else style="padding-top:0; "  class="padding-15-0  col-xs-12"
+      </div>
 
-                             >
-
-                             <div class="margin-15-0 default-item-wrapper shadow-content row">
-
-                                 <div class="default-user-contents col-xs-12  col-sm-3">
-
-                                     <div class=" default-boxing-size placeholder-content default-article-user-image"></div>
-
-                                     <div class="text-center xs-text-right">
-
-                                         <span class="placeholder-content default-boxing-size content-half-width "></span>
-
-                                     </div>
-
-                                        <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-                                         <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-
-                                 </div>
-
-                                 <div class="default-article-contents col-xs-12  col-sm-9">
-
-                                     <div class="default-wrapper-main-image pull-right  col-xs-12 col-sm-5">
-
-                                         <span class="default-main-image  placeholder-content"></span>
-
-                                     </div>
-
-                                     
-                                    <div class=" default-main-article-content col-xs-12 col-sm-7">
-                                            <span class="content-half-width placeholder-content default-input-boxing-size"></span>
-
-                                            <span class="default-boxing-size content-full-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
-                                             <span class="default-boxing-size content-default-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
-                                         </div>
-                                 </div>
-                             </div>
-
-                    </section>
-
-
-        <div class="sec-button">
-          <a href="/product-list" class="btn gray-button">نمایش دیگرمحصولات</a>
-        </div>
+      <div class="col-xs-12 col-lg-3 pull-left">
+       
+         <UserInfo  />  
 
       </div>
     </main>
@@ -463,16 +65,21 @@ li.active a::after {
 
 
 <script>
-import ProductArticle from "./product_components/product_article";
-import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
+import ProductContents from "./product_components/product-view/product";
+import UserInfo from "./product_components/product-view/user_info";
 import { eventBus } from "../../../../js/router/dashboard_router";
 
 export default {
   components: {
-    ProductArticle,
-    ProductAsideCategories
+    ProductContents,
+    UserInfo
   },
-  props: ["str", "defultimg", "loading_img"],
+  props: 
+  [
+   "str",
+   "defultimg",
+   "loading_img"
+  ],
   data: function() {
     return {
       currentUser: {
@@ -493,13 +100,16 @@ export default {
       errors: "",
       popUpMsg: "",
       submiting: false,
-      loading: false
+      loading: false,
+      isMyProfile: false,
     };
   },
   methods: {
     init: function() {
+
       var self = this;
       axios.post("/user/profile_info").then(function(response) {
+
         self.currentUser = response.data;
         axios
           .post("/get_product_by_id", {
@@ -508,11 +118,186 @@ export default {
           .then(function(response) {
             self.product = response.data.product;
             self.loading = false;
+            if (self.currentUser.user_info) {
+              if (self.currentUser.user_info.id === self.product.main.myuser_id) {
+                  self.isMyProfile = true;
+                  self.$emit('isMyProfile', self.isMyProfile);
+              }
+          }
           })
           .catch(function(err) {
             window.location.href = "/404";
           });
       });
+    },
+    openChat: function (product) {
+      this.registerComponentStatistics('product', 'openChat', 'click on open chatBox');
+
+      var contact = {
+          contact_id: product.user_info.id,
+          first_name: product.user_info.first_name,
+          last_name: product.user_info.last_name,
+          profile_photo: product.profile_info.profile_photo,
+          user_name: product.user_info.user_name,
+      };
+
+      if (this.currentUser.user_info) {
+          if (this.currentUser.user_info.id !== product.user_info.id) {
+              axios.post('/set_last_chat_contact', contact)
+                  .then(function (response) {
+                      window.location.href = '/dashboard/messages';
+                  })
+                  .catch(function (e) {
+                      alert('Error');
+                  });
+          }
+          else {
+              this.popUpMsg = 'شما نمیتوانید به خودتان پیام دهید.';
+              eventBus.$emit('submitSuccess', this.popUpMsg);
+              $('#custom-main-modal').modal('show');
+          }
+      }
+      else {
+          this.popUpMsg = 'اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
+          eventBus.$emit('submitSuccess', this.popUpMsg);
+          $('#auth-popup').modal('show');
+      }
+    },
+    registerComponentStatistics: function (categoryName, actionName, labelName) {
+      gtag('event', actionName, {
+          'event_category': categoryName,
+          'event_label': labelName
+      });
+    },
+    getProductUrl: function () {
+
+        return '/product-view/خرید-عمده-'
+            + this.product.main.sub_category_name.replace(' ', '-')
+            + '/'
+            + this.product.main.category_name.replace(' ', '-')
+            + '/'
+            + this.product.main.id;
+
+    },
+    copyProductLinkToClipBoard: function () {
+
+      this.registerComponentStatistics('product', 'copy-product-link', 'click on copy poduct link');
+
+      if (this.isDeviceMobile()) {
+
+          var linkElement = document.createElement('a');
+          var Message = "https://incobac.com" + this.getProductUrl();
+          var messageToWhatsApp = encodeURIComponent(Message);
+          var url = "whatsapp://send?text=" + messageToWhatsApp;
+
+          linkElement.setAttribute('href', url);
+          linkElement.setAttribute('data-action', 'share/whatsapp/share');
+
+          document.body.appendChild(linkElement);
+
+          linkElement.click();
+
+          document.body.removeChild(linkElement);
+
+       }
+       else {
+           var input = document.createElement('input');
+           input.setAttribute('value', 'https://incobac.com' + this.getProductUrl());
+           document.body.appendChild(input);
+           input.select();
+           var result = document.execCommand('copy');
+           document.body.removeChild(input);
+           if (result) {
+               this.popUpMsg = 'آدرس محصول کپی شد.';
+               eventBus.$emit('submitSuccess', this.popUpMsg);
+               $('#custom-main-modal').modal('show');
+           }
+       }
+
+    },
+    isDeviceMobile: function () {
+        if (navigator.userAgent.match(/Android/i)
+            || navigator.userAgent.match(/webOS/i)
+            || navigator.userAgent.match(/iPhone/i)
+            || navigator.userAgent.match(/iPad/i)
+            || navigator.userAgent.match(/iPod/i)
+            || navigator.userAgent.match(/BlackBerry/i)
+            || navigator.userAgent.match(/Windows Phone/i)
+        ) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    },      
+    toLatinNumbers: function (num) {
+        if (num == null) {
+            return null;
+        }
+
+       return num.toString()
+           .replace(/[\u0660-\u0669]/g, function (c) {
+               return c.charCodeAt(0) - 0x0660;
+           }).replace(/[\u06f0-\u06f9]/g, function (c) {
+               return c.charCodeAt(0) - 0x06f0;
+           });
+    },
+    editProduct: function (getProductWrapper) {
+
+
+        this.submiting = true;
+        this.errors = '';
+
+        var stock = '#' + getProductWrapper + ' input.stock';
+        var getProductId = '#' + getProductWrapper + ' .product-id';
+        var minSalePrice = '#' + getProductWrapper + ' input.min-sale-price';
+        var maxSalePrice = '#' + getProductWrapper + ' input.max-sale-price';
+        var minSaleAmount = '#' + getProductWrapper + ' input.min-sale-amount';
+        var description = '#' + getProductWrapper + ' textarea.description';
+
+
+        stock = this.toLatinNumbers($(stock).val());
+        getProductId = this.toLatinNumbers($(getProductId).val());
+        minSalePrice = this.toLatinNumbers($(minSalePrice).val());
+        maxSalePrice = this.toLatinNumbers($(maxSalePrice).val());
+        minSaleAmount = this.toLatinNumbers($(minSaleAmount).val());
+        description = $(description).val();
+
+
+        var request = {
+            product_id: getProductId,
+            stock: stock,
+            min_sale_price: minSalePrice,
+            max_sale_price: maxSalePrice,
+            min_sale_amount: minSaleAmount,
+        };
+
+
+        if (description !== '') {
+            request.description = description;
+        }
+
+        var self = this;
+
+
+        axios.post('/edit_product', request)
+            .then(function (response) {
+                $('.modal').modal('hide');
+                self.popUpMsg = 'محصول شما با موفقیت ویرایش شد.';
+                eventBus.$emit('submitSuccess', self.popUpMsg);
+                setTimeout(function () {
+                    $('#custom-main-modal').modal('show');
+                            $('#custom-main-modal').on('hidden.bs.modal', function (e) {
+                                location.reload(); 
+                            });
+                }, 300);
+                self.registerComponentStatistics('product', 'register-product-edit', 'product-edited-successfully');
+            })
+            .catch(function (err) {
+                self.errors = '';
+                self.errors = err.response.data.
+                self.registerComponentExceptions('Product-component: validation errors in edit product API');
+            });
     },
     stopLoader: function() {
       eventBus.$emit("isLoading", false);

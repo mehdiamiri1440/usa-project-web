@@ -520,6 +520,9 @@
                         eventBus.$emit('submitSuccess', self.popUpMsg);
                         setTimeout(function () {
                             $('#custom-main-modal').modal('show');
+                            $('#custom-main-modal').on('hidden.bs.modal', function (e) {
+                                location.reload(); 
+                            });
                         }, 300);
                         self.registerComponentStatistics('product', 'register-product-edit', 'product-edited-successfully');
                     })

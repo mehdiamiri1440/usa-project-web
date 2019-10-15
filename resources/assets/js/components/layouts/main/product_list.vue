@@ -1,6 +1,8 @@
 
 <style scoped>
-
+    .shadow-content{
+        background: #fff;
+    }
     .sidebar{
     will-change: min-height;
     }
@@ -136,7 +138,7 @@
         direction: rtl;
         border: 1px solid #666666;
         border-radius: 6px;
-        padding: 10px 40px 9px 15px;
+        padding: 10px 45px 9px 15px;
         background: #f8f8f8;
         font-size: 12px;
         float: right;
@@ -146,7 +148,7 @@
         background: none;
         border: none;
         position: absolute;
-        right: 2px;
+        right: 18px;
         top: 6px;
         border-left: 1px solid;
         color: #666;
@@ -234,6 +236,9 @@
         left: 0;
         right: 0;
         z-index: 2;
+        background: #f0f3f6;
+        padding: 0 15PX;
+        border-bottom: 3px solid #ececec;
     }
 
     /*  .main-padding-fix {
@@ -266,33 +271,53 @@
 
     }
 
+    .load-more-button {
+        
+        text-align: center;
+
+        margin: 15px;
+    }
+
     .load-more-button a {
-        direction: rtl;
-        color: #666;
-        font-size: 18px;
-        width: 100%;
-        box-shadow: 0 0 5px #bfbfbf;
-        background: #f0f3f6 !important;
-        overflow: hidden;
-        border-radius: 5px;
+
+        border: 2px solid;
+
+        padding: 15px 30px;
+
+        height: initial;
+
+        background: #fff;
+
         position: relative;
-        transition: 300ms;
-        border: none;
+
         top: 0;
+
+        box-shadow: 0 3px 6px rgba(0,0,0,0,.2);
+
+        transition: 200ms;
+
+        color: #00c569;
+
     }
 
     .load-more-button a:hover {
-        top: -6px;
-        color: #333333;
-        box-shadow: 0 0 5px #a5a5a5;
-        transition: 300ms;
-        position: relative;
+        top: -3px;
+
+        box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+
+        transition: 200ms;
+
     }
 
     .btn-loader {
-        height: 38px;
 
         overflow: hidden;
+    }
+
+    .btn-loader-active-wrapper{
+
+        height: 26px;
+
     }
 
     .btn-loader img {
@@ -492,43 +517,45 @@
         </div>
 
         <div class="sub-header-fix sub-header container-fluid">
+            <div class="container">
+                
+                <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
+                    <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید">
 
-            <div class="search-box col-sm-8 col-xs-12 col-lg-5">
-                <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید">
+                    <button class="btn-search">
+                        <i class="fa-search fa"></i>
+                    </button>
 
-                <button class="btn-search">
-                    <i class="fa-search fa"></i>
-                </button>
+                    <button class="btn-filter  hidden-lg "
+                            data-toggle="modal" data-target="#searchFilter">
+                        فیلتر
+                        <i class="fa fa-filter"></i>
+                    </button>
 
-                <button class="btn-filter  hidden-lg "
-                        data-toggle="modal" data-target="#searchFilter">
-                    فیلتر
-                    <i class="fa fa-filter"></i>
-                </button>
+                </div>
 
-            </div>
-
-            <div class="links-sub-header   hidden-xs col-sm-4">
-                <ul class="list-inline">
-                    <li class="list-item active">
-                        <h1 >
-                            <a href="">
-                                لیست محصولات
-                            </a>
-                        </h1>
-                    </li>
-                </ul>
+                <div class="links-sub-header   hidden-xs col-sm-4 pull-left">
+                    <ul class="list-inline">
+                        <li class="list-item active">
+                            <h1 >
+                                <a href="">
+                                    لیست محصولات
+                                </a>
+                            </h1>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 
 
-        <main id="main" class="container-fluid ">
+        <main id="main" class="container ">
             <div class="row">
                 <div class="col-xs-12 col-lg-9">
                     <section class="main-content col-xs-12" v-if="products.length > 0  ">
                         <div class="row">
                            <div id="article-list" >
-                            <div class="col-xs-12 col-md-6"  v-for="(product,productIndex) in products">
+                            <div class="col-xs-12"  v-for="(product,productIndex) in products">
                                 <ProductArticle
                                         v-if="products.length >= productIndex"
                                         :key="product.main.id"
@@ -541,20 +568,18 @@
                                 />
                             </div>
 
-                            <div class="load-more-button"
+                            <div class="load-more-button col-xs-12 "
                                  v-if="searchText === '' && continueToLoadProducts === true ">
-                                <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-                                    <div class="row">
+                               
+                                  
                                         <a href="#" class="btn btn-loader hidden-xs" @click.prevent="feed()">
                                             <div class="btn-content">
-                                        <span v-show="!loadMoreActive">
-                                            مشاهده محصولات بیشتر
-                                        </span>
-
-                                                <span v-show="!loadMoreActive"
-                                                      class="fa fa-plus-circle"></span>
-
-                                                <img v-show="loadMoreActive" :src="loading_img">
+                                                <span v-show="!loadMoreActive">
+                                                    مشاهده محصولات بیشتر
+                                                </span>
+                                                <div v-show="loadMoreActive" class="btn-loader-active-wrapper">
+                                                    <img  :src="loading_img">
+                                                </div>
                                             </div>
                                         </a>
 
@@ -562,21 +587,18 @@
                                            @click.prevent="feed()">
                                             <div class="btn-content">
 
-                                    <span v-show="!loadMoreActive">
-                                        بیشتر
-                                    </span>
+                                                <span v-show="!loadMoreActive">
+                                                    بیشتر
+                                                </span>
 
-                                                <span v-show="!loadMoreActive"
-                                                      class="fa fa-plus-circle"></span>
-
-                                                <img v-show="loadMoreActive" :src="loading_img">
+                                                <div v-show="loadMoreActive" class="btn-loader-active-wrapper">
+                                                    <img  :src="loading_img">
+                                                </div>
 
                                             </div>
                                         </a>
 
-                                    </div>
-                                </div>
-                            </div>
+                              </div>
                             </div>
                         </div>
                     </section>
@@ -649,15 +671,15 @@
 
                              >
                             <div class="row">
-                                 <div  v-for="(defaultItem ,index) in 8" :key="index" class="col-xs-12 col-md-6">
-                                     <div class=" col-xs-12 padding-0 margin-15-0 default-item-wrapper shadow-content ">
+                                 <div  v-for="(defaultItem ,index) in 8" :key="index" class="col-xs-12">
+                                     <div class=" col-xs-12 padding-15 margin-15-0  default-item-wrapper shadow-content ">
 
-                                         <div class="default-user-contents padding-10  col-xs-12 padding-0">
+                                         <div class="default-user-contents  col-xs-12 padding-0">
 
                                              <div class="  placeholder-content default-article-user-image  pull-right"></div>
 
                                              
-                                                 <span class="padding-top-5 placeholder-content margin-10 pull-right content-min-width "></span>
+                                                 <span class="padding-top-5 placeholder-content margin-15 pull-right content-min-width "></span>
 
 
 
@@ -668,7 +690,7 @@
 
                                          </div>
 
-                                         <div class="default-article-contents padding-10  col-xs-12 ">
+                                         <div class="default-article-contents padding-0 margin-15-0 col-xs-12 ">
 
                                              <div class="default-wrapper-main-image pull-right ">
 
@@ -680,13 +702,13 @@
                                             <div class=" default-main-article-content ">
                                                   
 
-                                                    <span class=" content-full-width placeholder-content "></span>
-
                                                     <span class=" content-half-width placeholder-content "></span>
 
-                                                     <span class=" content-default-width placeholder-content "></span>
+                                                    <span class=" content-default-width placeholder-content "></span>
 
-                                                    <span class=" content-min-width placeholder-content "></span>
+                                                     <span class=" content-min-width placeholder-content "></span>
+
+                                                    <span class=" content-half-width placeholder-content "></span>
 
                                                  </div>
                                          </div>
