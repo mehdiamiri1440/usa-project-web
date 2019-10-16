@@ -96,7 +96,7 @@
         background: #00c569;
         position: absolute;
         left: 0;
-        top: -10px;
+        top: -15px;
         padding: 2px;
         border-top: 3px solid #00B761;
         text-align: center;

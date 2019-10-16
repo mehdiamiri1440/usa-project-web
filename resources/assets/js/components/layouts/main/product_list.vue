@@ -1,8 +1,10 @@
 
 <style scoped>
+    
     .shadow-content{
         background: #fff;
     }
+
     .sidebar{
     will-change: min-height;
     }
@@ -12,9 +14,7 @@
         transform: translate3d(0, 0, 0);
         will-change: position, transform;
     }
-    #article-list{
-        /*overflow: hidden;*/
-    }
+
 
     #wrap-footer {
         display: none;
@@ -275,7 +275,7 @@
         
         text-align: center;
 
-        margin: 15px;
+        margin: 15px auto;
     }
 
     .load-more-button a {
@@ -456,6 +456,10 @@
         .logo {
             padding: 6px 10px;
         }
+
+        #article-list > div{
+            padding: 0
+        }
     }
 
     @media screen and (max-width: 430px) {
@@ -550,7 +554,7 @@
 
 
         <main id="main" class="container ">
-            <div class="row">
+
                 <div class="col-xs-12 col-lg-9">
                     <section class="main-content col-xs-12" v-if="products.length > 0  ">
                         <div class="row">
@@ -745,7 +749,6 @@
 
                 </aside>
 
-            </div>
 
         </main>
 
