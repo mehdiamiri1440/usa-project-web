@@ -489,9 +489,9 @@
             <a href="#" @click.prevent="addProductOrRequest()"><i class="fa fa-plus"></i> </a>
         </div>
 
-        <div class="sub-header-fix sub-header hidden-md hidden-lg container-fluid">
+        <div class="sub-header-fix sub-header hidden-lg container-fluid">
 
-            <div class="search-box hidden col-sm-8 col-xs-12 col-md-5">
+            <div class="search-box hidden col-md-8 col-xs-12 col-lg-5">
                 <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید">
 
                 <button class="btn-search ">
@@ -516,7 +516,7 @@
 
             </div>
 
-            <div class="links-sub-header   col-xs-6 col-sm-3 pull-right  ">
+            <div class="links-sub-header   col-xs-6 col-md-3 pull-right  ">
                 <ul class="list-inline">
                     <li class="list-item active">
                        <h1 class="main-title">
@@ -532,24 +532,23 @@
 
         <main id="main" class="container-fluid ">
             <div class="row">
-                <div class="col-xs-12 col-md-9">
-                    <section class="main-content col-xs-12" v-if="products.length > 0  ">
+                <div class="col-xs-12 col-lg-9">
+                     <section class="main-content col-xs-12" v-if="products.length > 0  ">
                         <div class="row">
-                           <div id="article-list">
+                           <div id="article-list" >
+                            <div class="col-xs-12 col-md-6"  v-for="(product,productIndex) in products">
+                                <ProductArticle
+                                        v-if="products.length >= productIndex"
+                                        :key="product.main.id"
+                                        :product="product"
+                                        :loading_img="loading_img"
+                                        :defultimg="defultimg"
+                                        :str="str"
+                                        :loading="loading"
+                                        :currentUser="currentUser"
+                                />
+                            </div>
 
-                             <ProductArticle v-for="(product,productIndex) in products"
-                                            v-if="products.length >= productIndex"
-                                            :key="product.main.id"
-                                            :product="product"
-                                            :loading_img="loading_img"
-                                            :defultimg="defultimg"
-                                            :str="str"
-                                            :loading="loading"
-                                            :currentUser="currentUser"
-                            />
-
-
-                           </div>
                             <div class="load-more-button"
                                  v-if="searchText === '' && continueToLoadProducts === true ">
                                 <div class="col-xs-12 col-sm-6 col-sm-offset-3">
@@ -585,6 +584,7 @@
 
                                     </div>
                                 </div>
+                            </div>
                             </div>
                         </div>
                     </section>
@@ -653,146 +653,63 @@
 
 
 
-                    <section v-else style="padding-top:0; "  class="padding-15-0  col-xs-12"
+                                   <section v-else  class=" col-xs-12"
 
                              >
+                            <div class="row">
+                                 <div  v-for="(defaultItem ,index) in 8" :key="index" class="col-xs-12 col-md-6">
+                                     <div class=" col-xs-12 padding-0 margin-15-0 default-item-wrapper shadow-content ">
 
-                             <div class="margin-15-0 default-item-wrapper shadow-content row">
+                                         <div class="default-user-contents padding-10  col-xs-12 padding-0">
 
-                                 <div class="default-user-contents col-xs-12  col-sm-3">
+                                             <div class="  placeholder-content default-article-user-image  pull-right"></div>
 
-                                     <div class=" default-boxing-size placeholder-content default-article-user-image"></div>
-
-                                     <div class="text-center xs-text-right">
-
-                                         <span class="placeholder-content default-boxing-size content-half-width "></span>
-
-                                     </div>
-
-                                        <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-                                         <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
+                                             
+                                                 <span class="padding-top-5 placeholder-content margin-10 pull-right content-min-width "></span>
 
 
-                                 </div>
 
-                                 <div class="default-article-contents col-xs-12  col-sm-9">
+                                                <span class="margin-0 placeholder-content  default-button-min-with  pull-left"></span>
 
-                                     <div class="default-wrapper-main-image pull-right  col-xs-12 col-sm-5">
+                                            
 
-                                         <span class="default-main-image  placeholder-content"></span>
-
-                                     </div>
-
-                                    <div class=" default-main-article-content col-xs-12 col-sm-7">
-                                            <span class="content-half-width placeholder-content default-input-boxing-size"></span>
-
-                                            <span class="default-boxing-size content-full-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
-                                             <span class="default-boxing-size content-default-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
 
                                          </div>
-                                 </div>
-                             </div>
+
+                                         <div class="default-article-contents padding-10  col-xs-12 ">
+
+                                             <div class="default-wrapper-main-image pull-right ">
+
+                                                 <span class="default-main-image  placeholder-content"></span>
+
+                                             </div>
 
 
-                          <div class="margin-15-0 default-item-wrapper shadow-content row">
+                                            <div class=" default-main-article-content ">
+                                                  
 
-                                 <div class="default-user-contents col-xs-12  col-sm-3">
+                                                    <span class=" content-full-width placeholder-content "></span>
 
-                                     <div class=" default-boxing-size placeholder-content default-article-user-image"></div>
+                                                    <span class=" content-half-width placeholder-content "></span>
 
-                                     <div class="text-center xs-text-right">
+                                                     <span class=" content-default-width placeholder-content "></span>
 
-                                         <span class="placeholder-content default-boxing-size content-half-width "></span>
+                                                    <span class=" content-min-width placeholder-content "></span>
 
-                                     </div>
-
-                                        <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-                                         <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-
-                                 </div>
-
-                                 <div class="default-article-contents col-xs-12  col-sm-9">
-
-                                     <div class="default-wrapper-main-image pull-right  col-xs-12 col-sm-5">
-
-                                         <span class="default-main-image  placeholder-content"></span>
-
-                                     </div>
-
-                                    <div class=" default-main-article-content col-xs-12 col-sm-7">
-                                            <span class="content-half-width placeholder-content default-input-boxing-size"></span>
-
-                                            <span class="default-boxing-size content-full-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
-                                             <span class="default-boxing-size content-default-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
+                                                 </div>
                                          </div>
-                                 </div>
-                             </div>
-
-
-
-
-                                 <div class="margin-15-0 default-item-wrapper shadow-content row">
-
-                                 <div class="default-user-contents col-xs-12  col-sm-3">
-
-                                     <div class=" default-boxing-size placeholder-content default-article-user-image"></div>
-
-                                     <div class="text-center xs-text-right">
-
-                                         <span class="placeholder-content default-boxing-size content-half-width "></span>
-
                                      </div>
 
-                                        <span class="xs-default-user-button placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-                                         <span class="hidden-xs placeholder-content default-boxing-size default-button-full-with margin-0"></span>
-
-
                                  </div>
-
-                                 <div class="default-article-contents col-xs-12  col-sm-9">
-
-                                     <div class="default-wrapper-main-image pull-right  col-xs-12 col-sm-5">
-
-                                         <span class="default-main-image  placeholder-content"></span>
-
-                                     </div>
-
-                                    <div class=" default-main-article-content col-xs-12 col-sm-7">
-                                            <span class="content-half-width placeholder-content default-input-boxing-size"></span>
-
-                                            <span class="default-boxing-size content-full-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
-                                             <span class="default-boxing-size content-default-width placeholder-content "></span>
-
-                                            <span class="default-boxing-size content-half-width placeholder-content "></span>
-
-                                         </div>
-                                 </div>
-                             </div>
+                            </div>
+                             
 
 
                     </section>
                 </div>
 
 
-                <aside id="sidebar" class=" product-sidebar sidebar hidden-xs  hidden-sm col-md-3">
+                <aside id="sidebar" class=" product-sidebar sidebar hidden-xs  hidden-md col-lg-3">
 
                     <div class="row">
 

@@ -139,7 +139,7 @@
         </div>
 
         <div class="container">
-            <div id="deleteModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="main_popup_content">
@@ -164,8 +164,8 @@
 
 
         <div class="container">
-            <div id="custom-main-modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                <div class="modal-dialog modal-lg" role="document">
+            <div id="custom-main-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal">
@@ -185,7 +185,7 @@
         </div>
 
         <div class="container">
-            <div id="DownloadApp" class="modal"
+            <div id="DownloadApp" class="modal fade"
                  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 
                 <div class="modal-dialog modal-lg" role="document">
@@ -223,10 +223,10 @@
 
         <!-- Modal -->
         <div class="container">
-            <div class="modal" id="auth-popup" tabindex="-1" ref="myModal" role="dialog"
+            <div class="modal fade" id="auth-popup" tabindex="-1" ref="myModal" role="dialog"
                  aria-labelledby="myModalLabel"
                  aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal">
@@ -311,14 +311,14 @@
                                 نخست</a>
 
                         </li>
-                        
+
                         <li v-if="user_id !== ''">
                             <a v-if="is_seller == 1" class="smoothScroll" href="/dashboard/status"
                                @click="registerComponentStatistics('header','dashboard','click-on-dashboard')">داشبورد</a>
                              <a v-else class="smoothScroll" href="/dashboard/profile"
                                @click="registerComponentStatistics('header','dashboard','click-on-dashboard')">داشبورد</a>
                         </li>
-                       
+
                         <li>
                             <a class="smoothScroll" href="/product-list"
                                @click="registerComponentStatistics('header','product-list','click-on-product-list')">لیست
