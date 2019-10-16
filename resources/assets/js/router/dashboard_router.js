@@ -55,7 +55,7 @@ import dashboardPricingTable from '../components/dashboard/dashboard-pricing-tab
 import indexPage from '../components/layouts/main/index'
 import productList from '../components/layouts/main/product_list'
 import productCategory from '../components/layouts/main/product_category'
-import productView from '../components/layouts/main/product_view'
+import productView from '../components/layouts/main/product_components/product_view'
 import indexPrivacyAndPolicy from '../components/layouts/main/privacy_and_policy'
 import indexAboutUs from '../components/layouts/main/about_us'
 import help from '../components/layouts/main/help'

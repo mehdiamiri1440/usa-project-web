@@ -1,4 +1,15 @@
 
+<style >
+
+    #main-content{
+
+          padding-top: 165px;
+          
+          
+    }
+
+</style>
+
 <style scoped>
     
     .shadow-content{
@@ -195,12 +206,10 @@
 
     #main {
 
-        padding-top: 165px;
         position:relative;
+
     }
-    .main-content{
-          min-height: 900px;
-    }
+
 
     .main-content > h4 {
         margin: 30px auto;
@@ -480,6 +489,7 @@
     }
 
 </style>
+
 <template>
 
     <div>
@@ -553,205 +563,208 @@
         </div>
 
 
-        <main id="main" class="container ">
+      <main id="main" class="container ">
+                <div class="row">
 
-                <div class="col-xs-12 col-lg-9">
-                    <section class="main-content col-xs-12" v-if="products.length > 0  ">
-                        <div class="row">
-                           <div id="article-list" >
-                            <div class="col-xs-12"  v-for="(product,productIndex) in products">
-                                <ProductArticle
-                                        v-if="products.length >= productIndex"
-                                        :key="product.main.id"
-                                        :product="product"
-                                        :loading_img="loading_img"
-                                        :defultimg="defultimg"
-                                        :str="str"
-                                        :loading="loading"
-                                        :currentUser="currentUser"
-                                />
-                            </div>
+                    <div class="col-xs-12 col-lg-9">
+                    <div class="row">
+                        <section class="main-content col-xs-12" v-if="products.length > 0  ">
 
-                            <div class="load-more-button col-xs-12 "
-                                 v-if="searchText === '' && continueToLoadProducts === true ">
-                               
-                                  
-                                        <a href="#" class="btn btn-loader hidden-xs" @click.prevent="feed()">
-                                            <div class="btn-content">
-                                                <span v-show="!loadMoreActive">
-                                                    مشاهده محصولات بیشتر
-                                                </span>
-                                                <div v-show="loadMoreActive" class="btn-loader-active-wrapper">
-                                                    <img  :src="loading_img">
+                               <div id="article-list" class="row" >
+                                <div class="col-xs-12"  v-for="(product,productIndex) in products">
+                                    <ProductArticle
+                                            v-if="products.length >= productIndex"
+                                            :key="product.main.id"
+                                            :product="product"
+                                            :loading_img="loading_img"
+                                            :defultimg="defultimg"
+                                            :str="str"
+                                            :loading="loading"
+                                            :currentUser="currentUser"
+                                    />
+                                </div>
+
+                                <div class="load-more-button col-xs-12 "
+                                     v-if="searchText === '' && continueToLoadProducts === true ">
+                                   
+                                      
+                                            <a href="#" class="btn btn-loader hidden-xs" @click.prevent="feed()">
+                                                <div class="btn-content">
+                                                    <span v-show="!loadMoreActive">
+                                                        مشاهده محصولات بیشتر
+                                                    </span>
+                                                    <div v-show="loadMoreActive" class="btn-loader-active-wrapper">
+                                                        <img  :src="loading_img">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </a>
+                                            </a>
 
-                                        <a href="#" class="btn btn-loader hidden-sm hidden-md hidden-lg"
-                                           @click.prevent="feed()">
-                                            <div class="btn-content">
+                                            <a href="#" class="btn btn-loader hidden-sm hidden-md hidden-lg"
+                                               @click.prevent="feed()">
+                                                <div class="btn-content">
 
-                                                <span v-show="!loadMoreActive">
-                                                    بیشتر
-                                                </span>
+                                                    <span v-show="!loadMoreActive">
+                                                        بیشتر
+                                                    </span>
 
-                                                <div v-show="loadMoreActive" class="btn-loader-active-wrapper">
-                                                    <img  :src="loading_img">
+                                                    <div v-show="loadMoreActive" class="btn-loader-active-wrapper">
+                                                        <img  :src="loading_img">
+                                                    </div>
+
                                                 </div>
+                                            </a>
 
-                                            </div>
-                                        </a>
+                                  </div>
+                                </div>
+                          
+                        </section>
 
-                              </div>
-                            </div>
-                        </div>
-                    </section>
+                        <section class="main-content  col-xs-12"
+                                 v-else-if="products.length === 0 && searchActive === true">
+                            <p></p>
 
-                    <section class="main-content  col-xs-12"
-                             v-else-if="products.length === 0 && searchActive === true">
-                        <p></p>
+                            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
 
-                        <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+                            <p>شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
 
-                        <p>شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-
-                        <br/>
-
-                        <div class="text-center">
-                            <button class="btn btn-success">درخواست خرید</button>
-                        </div>
-
-                    </section>
-
-                    <section class="main-content  col-xs-12 "
-                             v-else-if="products.length === 0 && searchText !== '' ">
-                        <p></p>
-
-                        <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-
-                        <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-                        <br/>
-
-                        <div class="text-center">
-                            <a class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">درخواست
-                                خرید
-                            </a>
                             <br/>
 
-                            <a class="green-button col-xs-4 " @click="resetFilter()">نمایش همه محصولات</a>
+                            <div class="text-center">
+                                <button class="btn btn-success">درخواست خرید</button>
+                            </div>
 
-                        </div>
+                        </section>
 
-                        <br/>
-                    </section>
+                        <section class="main-content  col-xs-12 "
+                                 v-else-if="products.length === 0 && searchText !== '' ">
+                            <p></p>
 
-                    <section class="main-content  col-xs-12 "
-                             v-else-if="products.length === 0 && searchText === '' ">
-                        <p></p>
+                            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
 
-                        <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+                            <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+                            <br/>
 
-                        <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+                            <div class="text-center">
+                                <a class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">درخواست
+                                    خرید
+                                </a>
+                                <br/>
 
-                        <br/>
+                                <a class="green-button col-xs-4 " @click="resetFilter()">نمایش همه محصولات</a>
 
-                        <div class="text-center">
-                            <a class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">
-                                درخواست
-                                خرید
-                            </a>
+                            </div>
 
                             <br/>
-                            <a class="green-button col-xs-4 " @click.prevent="resetFilter()">نمایش همه محصولات</a>
-                        </div>
+                        </section>
 
-                        <br/>
-                    </section>
+                        <section class="main-content  col-xs-12 "
+                                 v-else-if="products.length === 0 && searchText === '' ">
+                            <p></p>
 
+                            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
 
+                            <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
 
+                            <br/>
 
-                    <section v-else  class=" col-xs-12"
+                            <div class="text-center">
+                                <a class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">
+                                    درخواست
+                                    خرید
+                                </a>
 
-                             >
-                            <div class="row">
-                                 <div  v-for="(defaultItem ,index) in 8" :key="index" class="col-xs-12">
-                                     <div class=" col-xs-12 padding-15 margin-15-0  default-item-wrapper shadow-content ">
+                                <br/>
+                                <a class="green-button col-xs-4 " @click.prevent="resetFilter()">نمایش همه محصولات</a>
+                            </div>
 
-                                         <div class="default-user-contents  col-xs-12 padding-0">
-
-                                             <div class="  placeholder-content default-article-user-image  pull-right"></div>
-
-                                             
-                                                 <span class="padding-top-5 placeholder-content margin-15 pull-right content-min-width "></span>
-
-
-
-                                                <span class="margin-0 placeholder-content  default-button-min-with  pull-left"></span>
-
-                                            
+                            <br/>
+                        </section>
 
 
-                                         </div>
 
-                                         <div class="default-article-contents padding-0 margin-15-0 col-xs-12 ">
 
-                                             <div class="default-wrapper-main-image pull-right ">
+                        <section v-else  class=" col-xs-12"
 
-                                                 <span class="default-main-image  placeholder-content"></span>
+                                 >
+                                <div class="row">
+                                     <div  v-for="(defaultItem ,index) in 8" :key="index" class="col-xs-12">
+                                         <div class=" col-xs-12 padding-15 margin-15-0  default-item-wrapper shadow-content ">
+
+                                             <div class="default-user-contents  col-xs-12 padding-0">
+
+                                                 <div class="  placeholder-content default-article-user-image  pull-right"></div>
+
+                                                 
+                                                     <span class="padding-top-5 placeholder-content margin-15 pull-right content-min-width "></span>
+
+
+
+                                                    <span class="margin-0 placeholder-content  default-button-min-with  pull-left"></span>
+
+                                                
+
 
                                              </div>
 
+                                             <div class="default-article-contents padding-0 margin-15-0 col-xs-12 ">
 
-                                            <div class=" default-main-article-content ">
-                                                  
+                                                 <div class="default-wrapper-main-image pull-right ">
 
-                                                    <span class=" content-half-width placeholder-content "></span>
-
-                                                    <span class=" content-default-width placeholder-content "></span>
-
-                                                     <span class=" content-min-width placeholder-content "></span>
-
-                                                    <span class=" content-half-width placeholder-content "></span>
+                                                     <span class="default-main-image  placeholder-content"></span>
 
                                                  </div>
+
+
+                                                <div class=" default-main-article-content ">
+                                                      
+
+                                                        <span class=" content-half-width placeholder-content "></span>
+
+                                                        <span class=" content-default-width placeholder-content "></span>
+
+                                                         <span class=" content-min-width placeholder-content "></span>
+
+                                                        <span class=" content-half-width placeholder-content "></span>
+
+                                                     </div>
+                                             </div>
                                          </div>
+
                                      </div>
-
-                                 </div>
-                            </div>
-                             
+                                </div>
+                                 
 
 
-                    </section>
-                </div>
-
-                <aside id="sidebar" class=" product-sidebar sidebar hidden-xs  hidden-sm hidden-md col-lg-3">
-
-                    <div class="row">
-
-                        <div class="sidebar__inner col-xs-12" style="position: relative;">
-
-
-                            <ProductAsideCategories
-                                    :productsInfo="products"
-                                    :categoryId="categoryId"
-                                    :subCategoryId="subCategoryId"
-                                    :provinceId="provinceId"
-                                    :cityId="cityId"
-                                    v-on:productsToParent="filterProducts($event)"
-                            />
-
-
-                     </div>
-
+                        </section>
+                          </div>
                     </div>
 
-                </aside>
+                    <aside id="sidebar" class=" product-sidebar sidebar hidden-xs  hidden-sm hidden-md col-lg-3">
 
+                        <div class="row">
+
+                            <div class="sidebar__inner col-xs-12" style="position: relative;">
+
+
+                                <ProductAsideCategories
+                                        :productsInfo="products"
+                                        :categoryId="categoryId"
+                                        :subCategoryId="subCategoryId"
+                                        :provinceId="provinceId"
+                                        :cityId="cityId"
+                                        v-on:productsToParent="filterProducts($event)"
+                                />
+
+
+                         </div>
+
+                        </div>
+
+                    </aside>
+                    
+                </div>
 
         </main>
-
     </div>
 </template>
 <script>

@@ -65,9 +65,9 @@
 
 
 <script>
-import ProductContents from "./product_components/product-view/product";
-import UserInfo from "./product_components/product-view/user_info";
-import { eventBus } from "../../../../js/router/dashboard_router";
+import ProductContents from "./product-view/product";
+import UserInfo from "./product-view/user_info";
+import { eventBus } from "../../../../../js/router/dashboard_router";
 
 export default {
   components: {
