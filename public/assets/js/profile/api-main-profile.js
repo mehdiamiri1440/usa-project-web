@@ -174,7 +174,7 @@ var vm = new Vue({
             }
             else{
                 this.copyLinkText = 'کپی آدرس';
-                this.copyLinkClass = 'fa fa-clipboard';
+                this.copyLinkClass = 'fa fa-copy';
             }
 
             axios.post('/get_user_statistics_by_user_name',{

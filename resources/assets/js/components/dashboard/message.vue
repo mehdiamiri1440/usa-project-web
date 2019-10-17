@@ -40,6 +40,7 @@
   position: fixed;
 
   /*right: 0;*/
+  background: #fff;
 
   left: 0;
 
@@ -51,6 +52,58 @@
 .little-main .main-content {
   padding: 65px 80px 0 0;
 }
+.lds-ring {
+  display: inline-block;
+
+  position: absolute;
+
+  width: 64px;
+
+  height: 64px;
+
+  left: 50%;
+
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  margin: 6px;
+  border: 5px solid #00c569;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #00c569 transparent transparent transparent;
+}
+.lds-ring-alt {
+  display: block;
+  margin-top: 50px;
+  direction: rtl;
+  text-align: center;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/*preloader image style*/
 
 .contact-title {
   font-size: 16px;
@@ -376,11 +429,13 @@
 
 .send-message-form .button-wrapper button {
   border: none;
-  background: #fff;
+  background: #00c569;
   width: 50px;
   height: 50px;
   border-radius: 50px;
-  font-size: 25px;
+  font-size: 22px;
+  color: #fff;
+  padding-left: 5px;
 }
 
 .contact-not-found {
@@ -525,7 +580,9 @@
         </div>
 
         <div class="chat-page" v-if="selectedContact">
-          <ul :class="[isChatMessagesLoaded?'chat-not-loaded':'chat-loaded']">
+          <ul
+            :class="[(isChatMessagesLoaded&&isFirstMessageLoading)?'chat-not-loaded':'chat-loaded']"
+          >
             <li :key="msg.id" v-for="msg in chatMessages">
               <div :class="[msg.sender_id == currentUserId ? 'message-send' : 'message-receive']">
                 <span v-text="msg.text"></span>
@@ -542,12 +599,22 @@
               </div>
             </li>
           </ul>
-          <div class="loading-container" v-if="isChatMessagesLoaded">
-            <img
-              class="whatsapp-loading-gif"
-              src="../../../../../public/assets/img/gif/android-loading.gif"
-              alt="android-loading"
-            />
+          <div class="loading-container" v-if="isChatMessagesLoaded&&isFirstMessageLoading">
+            <div class="image-wrapper">
+              <a v-show="isImageLoad">
+                <transition>
+                  <img src @load="ImageLoaded" alt="alt" />
+                </transition>
+              </a>
+
+              <div v-show="!isImageLoad" class="lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
+            </div>
           </div>
           <div class="send-message-form">
             <form>
@@ -557,7 +624,7 @@
 
               <div class="button-wrapper">
                 <button type="submit" @click.prevent="sendMessage()">
-                  <i class="fa fa-send"></i>
+                  <i class="fa fa-paper-plane"></i>
                 </button>
               </div>
             </form>
@@ -582,7 +649,9 @@ export default {
   props: ["defimgitem", "str", "loading_img"],
   data: function() {
     return {
+      isImageLoad: false,
       isChatMessagesLoaded: true,
+      isFirstMessageLoading: true,
       selectedIndex: -1,
       items: [
         {
@@ -604,6 +673,12 @@ export default {
   methods: {
     init: function() {
       this.loadContactList();
+    },
+    loadImage: function() {
+      this.isImageLoad = false;
+    },
+    ImageLoaded: function() {
+      this.isImageLoad = true;
     },
     loadContactList: function() {
       var self = this;
@@ -635,7 +710,7 @@ export default {
               }
             })
             .catch(function(e) {
-              alert("error");
+                alert("error");
             });
         })
         .catch(function(e) {
@@ -645,6 +720,7 @@ export default {
     loadChatHistory: function(contact, index) {
       var self = this;
       self.isChatMessagesLoaded = true;
+      if (index !== -10) self.isFirstMessageLoading = true;
       self.selectedIndex = index;
       this.selectedContact = contact;
       this.currentContactUserId = contact.contact_id;
@@ -700,8 +776,8 @@ export default {
           self.chatMessages.push(response.data.message);
 
           self.scrollToEnd(0);
-
-          self.loadChatHistory(self.selectedContact);
+          self.isFirstMessageLoading = false;
+          self.loadChatHistory(self.selectedContact, -10);
         })
         .catch(function(e) {
           //
@@ -766,7 +842,13 @@ export default {
       } else {
         return false;
       }
-    }
+    },
+    registerComponentStatistics: function (categoryName, actionName, labelName) {
+        gtag('event', actionName, {
+            'event_category': categoryName,
+            'event_label': labelName
+        });
+    },
   },
   watch: {
     contactNameSearchText: function() {

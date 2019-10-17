@@ -61,6 +61,10 @@
             width: initial;
             padding: 15px;
         }
+        .contents > .row{
+            margin: 0;
+        }
+
     }
 
     @media screen and (max-width: 500px) {
@@ -92,14 +96,14 @@
             </h1>
         </header>
 
-        <main id="main" class="col-sm-12">
+        <main id="main" class="container">
             <section class="main-content container"
                      itemscope itemprop="Person"
                      itemtype="http://schema.org/Person">
 
                 <div class="main-content-item" v-if="profileOwner.user_info">
                     <div class="header-content col-xs-12">
-                        <div class="image_user_wrapper col-xs-4">
+                        <div class="image_user_wrapper col-xs-4 col-sm-3 col-md-2">
                             <div class="user-image">
                                 <div v-if="profileOwner.profile.profile_photo">
                                     <img v-bind:src=" str + '/' +
@@ -157,13 +161,13 @@
                                         <a href="/dashboard/profile" class="green-button edit"
                                            v-if="currentUser.user_info.id === profileOwner.user_info.id">
 
-                                            <i class="fa fa-pencil"></i>
+                                            <i class="fa fa-pencil-alt"></i>
                                             ویرایش پروفایل
                                         </a>
 
                                         <a v-else href="#" @click.prevent="openChat()" class="green-button edit">
 
-                                            <i class="fa fa-comment"></i>
+                                            <i class="fas fa-comment-alt"></i>
                                             ارسال پیام
                                         </a>
 
@@ -171,7 +175,7 @@
 
                                     <div v-else>
                                         <a href="#" @click.prevent="openChat()" class="green-button edit">
-                                            <i class="fa fa-comment"></i>
+                                            <i class="fas fa-comment-alt"></i>
                                             ارسال پیام
                                         </a>
                                     </div>
@@ -179,7 +183,7 @@
                                     <a href='#' class="green-button"
                                        @click.prevent="copyProfileLinkToClipBoard">
 
-                                        <i class="fa fa-whatsapp"></i>
+                                        <i class="fab fa-whatsapp"></i>
 
                                         اشتراک در واتس آپ
                                     </a>
@@ -189,10 +193,10 @@
 
                         </div>
 
-                        <div class="content_user_wrapper hidden-xs col-xs-6 col-sm-8">
-                            <div class="user-contents ">
+                        <div class="content_user_wrapper hidden-xs col-xs-6 col-sm-9 col-md-10">
+                            <div class="user-contents row">
                                 <div class="title_content col-xs-12">
-                                    <div class="back_page first-back col-xs-12 col-sm-4">
+                                    <div class="back_page first-back col-xs-12 col-sm-4 col-md-3">
                                         <a href="javascript:history.back()" class="green-button"
                                            @click="registerComponentStatistics('profileView','BackButton','click on back button')">
                                             بازگشت
@@ -200,7 +204,7 @@
                                         </a>
                                     </div>
 
-                                    <h1 class="content_title col-xs-12 col-sm-8"
+                                    <h1 class="content_title col-xs-12 col-sm-8 col-md-9"
                                         itemprop="name">
                                         <span v-text="
                                         profileOwner.user_info.first_name +
@@ -220,14 +224,14 @@
                                 </div>
 
                                 <div class="title_content col-xs-12">
-                                    <div class="back_page col-xs-12 col-sm-4">
+                                    <div class="back_page col-xs-12 col-sm-4 col-md-3">
                                         <a href="/dashboard/profile" class="green-button edit"
                                            v-if="currentUser.user_info &&
                                             currentUser.user_info.id ===
                                             profileOwner.user_info.id"
                                            @click="registerComponentStatistics('profileView','editProfile','click on edit profile')">
 
-                                            <i class="fa fa-pencil"></i>
+                                            <i class="fa fa-pencil-alt"></i>
                                             ویرایش پروفایل
 
                                         </a>
@@ -236,7 +240,7 @@
                                            class="green-button edit"
                                            v-else>
 
-                                            <i class="fa fa-pencil"></i>
+                                            <i class="fa fa-pencil-alt"></i>
                                             ارسال پیام
                                         </a>
 
@@ -250,29 +254,66 @@
                                         </button>
                                     </div>
 
-                                    <div class="content_user_info col-xs-12 col-sm-8">
-                                        <p>
-                                            حوزه ی فعالیت :
+                                    <div class="content_user_info col-xs-12 col-sm-8 col-md-9">
 
-                                            <span v-text="profileOwner.activity_domain"></span>
-                                        </p>
+                                        <div class="row">
+                                            <div class="col-xs-6 pull-right">
 
-                                        <p>
-                                            آدرس :
-                                            <span itemprop="address"
-                                                  v-text="profileOwner.user_info.province +
-                                                   ' - ' +
-                                                    profileOwner.user_info.city">
-                                            </span>
+                                               <p >
+                                                حوزه ی فعالیت :
 
-                                        </p>
+                                                <span v-text="profileOwner.activity_domain"></span>
+                                               </p>
+
+                                            </div>
+
+                                            <div class="col-xs-6 ">
+
+
+                                                <p>
+                                                    آدرس :
+                                                    <span itemprop="address"
+                                                          v-text="profileOwner.user_info.province +
+                                                           ' - ' +
+                                                            profileOwner.user_info.city">
+                                                    </span>
+
+                                                </p>
+
+                                            </div>
+
+                                            <div   class="col-xs-6 pull-right">
+
+                                                <p v-if="profileOwner.profile.is_company">
+                                                    نام شرکت
+
+                                                    <span v-text="profileOwner.profile.company_name"></span>
+                                                </p>
+
+                                            </div>
+
+                                            <div class="col-xs-6 ">
+
+                                                <p  v-if="profileOwner.profile.is_company" >
+                                                   شماره ثبت
+
+                                                    <span v-text="profileOwner.profile.company_register_code"></span>
+                                                </p>
+
+                                            </div>
+
+
+
+
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="content_user_wrapper_mobile hidden-sm hidden-md hidden-lg col-xs-12">
-                            <div class="user-contents ">
+                            <div class="user-contents row">
                                 <div class="title_content col-xs-12">
                                     <div class="back_page col-xs-12 col-sm-4">
                                         <button class="btn btn-copy"
@@ -287,7 +328,7 @@
 
                                         <a href="#" class="green-button edit"
                                            @click="copyProfileLinkToClipBoard">
-                                            <i class="fa fa-pencil"></i>
+                                            <i class="fa fa-pencil-alt"></i>
                                             ویرایش پروفایل
                                         </a>
 
@@ -308,20 +349,62 @@
 
                                     </h1>
                                     <div class="content_user_info col-xs-12 col-sm-8">
-                                        <p>
-                                            حوزه ی فعالیت :
 
-                                            <span v-text="profileOwner.activity_domain">
-                                            </span>
-                                        </p>
 
-                                        <p>
-                                            آدرس :
-                                            <span v-text="profileOwner.user_info.province +
-                                             ' - ' +
-                                             profileOwner.user_info.city">
-                                            </span>
-                                        </p>
+
+
+                                        <div class="row">
+                                            <div class="col-xs-6 pull-right">
+
+                                               <p >
+                                                حوزه ی فعالیت :
+
+                                                <span v-text="profileOwner.activity_domain"></span>
+                                               </p>
+
+                                            </div>
+
+                                            <div class="col-xs-6 ">
+
+
+                                                <p>
+                                                    آدرس :
+                                                    <span itemprop="address"
+                                                          v-text="profileOwner.user_info.province +
+                                                           ' - ' +
+                                                            profileOwner.user_info.city">
+                                                    </span>
+
+                                                </p>
+
+                                            </div>
+
+                                            <div   class="col-xs-6 pull-right">
+
+                                                <p v-if="profileOwner.profile.is_company">
+                                                    نام شرکت :
+
+                                                    <span v-text="profileOwner.profile.company_name"></span>
+                                                </p>
+
+                                            </div>
+
+                                            <div class="col-xs-6 ">
+
+                                                <p  v-if="profileOwner.profile.is_company" >
+                                                   شماره ثبت :
+
+                                                    <span v-text="profileOwner.profile.company_register_code"></span>
+                                                </p>
+
+                                            </div>
+
+
+
+
+                                        </div>
+
+
                                     </div>
                                 </div>
 
@@ -333,7 +416,7 @@
                         <div class="col-xs-6" :class="{'active':profileDescription}">
                             <a @click="showProfileOwnerDescription($event)" href="">
                                 <div class="inside-links">
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> توضیحات من
+                                    <i class="fa fa-edit" aria-hidden="true"></i> توضیحات من
                                 </div>
                             </a>
                         </div>
@@ -452,19 +535,19 @@
 
                     <div class="contents" v-else>
 
-                        <div v-if="products.length > 0" v-for="(product,productIndex) in products"
-                             :key="product.main.id">
-                            <ProductArticle
+                          <div class="row">
+                              <div v-for="(product,productIndex) in products" :key="product.main.id" class="col-xs-12 pull-right">
+                                <ProductArticle
                                     :product="product"
                                     :loading_img="loading_img"
                                     :defultimg="defultimg"
                                     :str="str"
                                     :loading="loading"
                                     :currentUser="currentUser"
+                                />
+                              </div>
+                          </div>   
 
-                            />
-
-                        </div>
                         <div class="col-xs-12" v-if="products.length === 0 && !loading">
                             <div class="col-xs-12" v-if="products.length === 0 && !loading">
                                 <div class="wrapper_no_pro">
@@ -679,11 +762,11 @@
 
                 if (this.isDeviceMobile()) {
                     this.copyLinkText = ' اشتراک در واتساپ';
-                    this.copyLinkClass = 'fa fa-whatsapp fa-2x';
+                    this.copyLinkClass = 'fab fa-whatsapp fa-2x';
                 }
                 else {
                     this.copyLinkText = 'کپی آدرس';
-                    this.copyLinkClass = 'fa fa-clipboard';
+                    this.copyLinkClass = 'fa fa-copy';
                 }
 
                 axios.post('/get_user_statistics_by_user_name', {

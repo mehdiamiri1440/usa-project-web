@@ -253,7 +253,7 @@ th, td {
 .user-contents {
     border-right: 2px solid #f0f3f6;
     text-align: right;
-    padding: 0 20px;
+    padding-right: 15px;
 }
 
 .user-contents h1 {
@@ -261,10 +261,13 @@ th, td {
 }
 
 .title_content {
-    border-bottom: 1px solid;
+    border-bottom: 1px solid #ededed;
     padding: 0;
 }
 
+.title_content:last-of-type {
+    border-bottom: none;
+}
 .info-section {
     color: #fff;
     background: #3a3c39;
@@ -679,7 +682,6 @@ th, td {
 
     .main-content, #main {
         padding: 0;
-        z-index: 0;
     }
 
     .ceteficate-image {

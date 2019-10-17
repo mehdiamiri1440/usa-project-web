@@ -92,10 +92,14 @@
                       <!-- Default panel contents -->
                       <div class="panel-heading">آمار ها در ماه اخیر</div>
                       <!-- Table -->
-                      <table class="table">
+                      <table class="table table-striped">
                             <tr>
                                 <th>شاخص</th>
                                 <th>تعداد</th>
+                            </tr>
+                            <tr>
+                                <td>تعداد کاربران ثبت نامی</td>
+                                <td>{{$new_users_count}}</td>
                             </tr>
                             <tr>
                                 <td>تعداد ثبت نام فروشندگان</td>
@@ -105,7 +109,7 @@
                                 <td>تعداد ثبت نام خریداران</td>
                                 <td>{{$new_buyer_users_count}}</td>
                             </tr>
-                            <tr>
+                            <tr class="danger">
                                 <td>تعداد درخواست های خرید تایید شده</td>
                                 <td>{{$confirmed_buyAds_count}}</td>
                             </tr>
@@ -113,7 +117,7 @@
                                 <td>مجموع درخواست های خرید</td>
                                 <td>{{$buyAds_count}}</td>
                             </tr>
-                            <tr>
+                            <tr class="danger">
                                 <td>تعداد محصولات تایید شده</td>
                                 <td>{{$confirmed_products_count}}</td>
                             </tr>
@@ -121,7 +125,7 @@
                                 <td>مجموع محصولات ثبت شده</td>
                                 <td>{{$products_count}}</td>
                             </tr>
-                            <tr>
+                            <tr class="danger">
                                 <td>تعداد کاربران ارسال کننده پیام</td>
                                 <td>{{$total_unique_message_senders_count}}</td>
                             </tr>
@@ -132,6 +136,54 @@
                             <tr>
                                 <td>تعداد خریداران ارسال کننده پیام</td>
                                 <td>{{$buyers_unique_message_senders_count}}</td>
+                            </tr>
+                            <tr>
+                                <td>تعداد کاربران دریافت کننده</td>
+                                <td>{{$total_unique_message_receivers_count}}</td>
+                            </tr>
+                            <tr>
+                                <td>تعداد فروشندگان دریافت کننده پیام</td>
+                                <td>{{$sellers_unique_message_receivers_count}}</td>
+                            </tr>
+                            <tr>
+                                <td>تعداد خریدران دریافت کننده پیام</td>
+                                <td>{{$buyers_unique_message_receiver_count}}</td>
+                            </tr>
+                            <tr>
+                                <td>تعداد کاربرانی که پیام خوانده نشده دارند</td>
+                                <td>{{$total_unique_message_receivers_count_who_have_at_least_one_unseen_message}}</td>
+                            </tr>
+                            <tr>
+                                <td>تعداد فروشندگانی که پیام خوانده نشده دارند</td>
+                                <td>{{$sellers_unique_message_receivers_count_who_have_at_least_one_unseen_message}}</td>
+                            </tr>
+                            <tr>
+                                <td>تعداد خریدارانی که پیام خوانده نشده دارند</td>
+                                <td>{{$buyers_unique_message_receivers_count_who_have_at_least_one_unseen_message}}</td>
+                            </tr>
+                            <tr class="danger">
+                                <td>تعداد کاربران فعال</td>
+                                <td>{{$total_active_users_count}}</td>
+                            </tr>
+                            <tr>
+                                <td>تعداد فروشندگان فعال</td>
+                                <td>{{$seller_active_users_count}}</td>
+                            </tr>
+                            <tr>
+                                <td> تعداد خریداران فعال</td>
+                                <td>{{$buyer_active_users_count}}</td>
+                            </tr>
+                            <tr class="danger">
+                                <td> تعداد کاربران بازگشتی</td>
+                                <td>{{$total_returning_users_count}}</td>
+                            </tr>
+                            <tr>
+                                <td> تعداد فروشندگان بازگشتی</td>
+                                <td>{{$seller_returning_users_count}}</td>
+                            </tr>
+                            <tr>
+                                <td> تعداد خریداران بازگشتی</td>
+                                <td>{{$buyer_returning_users_count}}</td>
                             </tr>
                             <tr>
                                 <td>میانگین درصد پاسخگویی افراد</td>

@@ -35,7 +35,7 @@ class CheckPakageExpiry implements ShouldQueue
         $now = Carbon::now();
         
         $user_records = myuser::where('active_pakage_type','<>',0)
-                                ->whereDate('pakage_end','>',$now)
+                                ->whereDate('pakage_end','<',$now)
                                 ->get();
         
         $user_records->each(function($user_record){

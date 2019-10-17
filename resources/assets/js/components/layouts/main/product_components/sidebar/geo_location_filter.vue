@@ -1,4 +1,7 @@
 <style>
+ .content-sidebar {
+        text-align: right;
+ }
 .box-sidebar {
   text-align: center;
   direction: rtl;
@@ -12,7 +15,7 @@ hr {
   text-align: right;
   padding: 15px 15px 0 15px;
 }
-.title-widget h3 {
+.title-widget div {
   font-size: 18px;
 }
 .sidebar-buttons {
@@ -73,7 +76,7 @@ hr {
   <div>
     <div v-if="fontIsLoad && provinceList" class="content-sidebar">
       <div class="title-widget">
-        <h3>موقعیت جغرافیایی</h3>
+        <div>موقعیت جغرافیایی</div>
         <hr />
       </div>
 
@@ -110,34 +113,24 @@ hr {
     </div>
 
     <div v-else class="content-sidebar">
-      <div class="title-widget">
-        <span class="placeholder-content content-half-width"></span>
-        <hr />
-      </div>
-      <div class="category-products-widget-default">
-        <ul>
-          <li>
-            <span class="placeholder-content default-boxing-size content-full-width"></span>
-            <span class="placeholder-content default-boxing-size content-full-width"></span>
-            <div class="text-center">
-              <span class="placeholder-content default-button"></span>
-            </div>
-          </li>
-        </ul>
-      </div>
+        <div class="title-widget">
+          <span class="placeholder-content content-half-width"></span>
+          <hr />
+        </div>
+        <div class="category-products-widget-default">
+          <ul>
+            <li>
+              <span class="placeholder-content default-boxing-size content-full-width"></span>
+              <span class="placeholder-content default-boxing-size content-full-width"></span>
+              <div class="text-center">
+                <span class="placeholder-content default-button"></span>
+              </div>
+            </li>
+          </ul>
+        </div>
     </div>
-    <div class="category-products-widget-default">
-      <ul>
-        <li>
-          <span class="placeholder-content default-boxing-size content-full-width"></span>
-          <span class="placeholder-content default-boxing-size content-full-width"></span>
-          <div class="text-center">
-            <span class="placeholder-content default-button"></span>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
+
+   </div>
 </template>
 
 <script>

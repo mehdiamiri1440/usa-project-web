@@ -10,6 +10,7 @@
 </style>
 <template>
   <div>
+    
     <section v-if="!isLoading">
       <div class="profile">
         <div class="profile-img" v-if="photoLink">
@@ -25,7 +26,7 @@
           <div class="profile-city" v-text="usercity"></div>
         </div>
 
-        <a :href="'/profile/'+ userprof" class="green-button">پروفایل من</a>
+        <a :href="'/profile/'+ userprof" class="green-button">نمایش پروفایل من</a>
       </div>
     </section>
 

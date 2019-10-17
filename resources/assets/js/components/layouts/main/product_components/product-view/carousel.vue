@@ -1,3 +1,4 @@
+
 <style scoped>
 
 /* preloader image style*/
@@ -24,13 +25,13 @@
       width: 51px;
       height: 51px;
       margin: 6px;
-      border: 5px solid #00c569;
+      border: 5px solid #28a745;
       border-radius: 50%;
       animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-      border-color: #00c569 transparent transparent transparent;
+      border-color: #28a745 transparent transparent transparent;
     }
     .lds-ring-alt{
-    	display: block;
+    	display: block;	
     	margin-top: 50px;
     	direction: rtl;
     	text-align: center;
@@ -72,13 +73,13 @@
              <div v-show="!isImageLoad" class="lds-ring">
              	<div></div><div></div><div></div><div></div>
 
-             </div>
+             </div> 
              <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
      </div>
 </template>
 
 <script>
-
+	
 	export default{
 		 data: function () {
             return {
@@ -86,18 +87,26 @@
                 isImageLoad:false,
             };
         },
+        props:
+		[
+			'productImages',
+			'str',
+			'productName',
+			'categoryName',
+			'cityName',
+			'provinceName',
+		],
         props: ['img', 'base', 'popUpLoaded', 'alt'],
-
+     
         mounted: function () {
 
             $(".owl-carousel").owlCarousel({
-                loop: false,
-                items: 1,
-                margin: 10,
-                nav: false,
-                dots: true,
-                touchDrag: true,
-                mouseDrag: true,
+                loop:false,
+                items:1,
+                margin:10,
+                nav:true,
+                navText: ['<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>'],
+                dots:true
             });
             $(this.$el).parent().parent().parent().magnificPopup({
                 delegate: 'a',

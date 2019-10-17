@@ -1,4 +1,4 @@
-<style scoped>
+<style >
 
     .content-sidebar {
         background: #fff;
@@ -10,9 +10,9 @@
 
         border-radius: 5px;
 
-        -webkit-box-shadow: 0 0 15px #dbdbdb;
+        -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16);
 
-        box-shadow: 0 0 15px #dbdbdb;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16);
 
     }
 

@@ -1,10 +1,10 @@
 <style scoped>
-   
 
 
     .green-button:focus, .green-button:hover {
         color: #fff !important;
     }
+
     .green-button.edit-product {
         background: #000546;
         width: 100%;
@@ -17,23 +17,25 @@
     .green-button.edit-product:hover {
         background: #000430;
     }
-    .title-widget{
-        font-size:18px;
+
+    .title-widget {
+        font-size: 18px;
         padding: 15px 15px 0 15px;
     }
+
     .main-content-item {
         direction: rtl;
-        float: left;
-        width: 100%;
         margin: 15px auto;
         border-radius: 5px;
-        box-shadow: 0 0 15px #dbdbdb;
-        padding: 15px 0;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.16);
+        padding: 0;
+        background: #fff;
     }
 
     .main-article-title {
         margin: 15px auto;
         font-weight: bold;
+        font-size: 32px;
     }
 
     .main-article-title a {
@@ -43,7 +45,6 @@
     .main-article-title a:hover {
         color: #444;
     }
-
 
     .main-article-content p {
         margin-bottom: 15px;
@@ -72,10 +73,6 @@
         padding: 15px 0;
         margin: 15px auto;
         display: none;
-    }
-
-    .buy_details > div {
-        margin: 7px auto;
     }
 
     .btn-content {
@@ -132,6 +129,8 @@
         margin-top: -15px;
     }
 
+
+
     input[type="text"], select, textarea {
         background: #eff3f6;
         border: 1px solid #cfcfcf;
@@ -148,252 +147,195 @@
         margin: 9px auto;
     }
 
-    @media screen  and (max-width: 767px) {
-        .buy_details {
-            padding: 15px 0;
-        }
+    .article-seo-title {
 
-        .main-image, .article-contents {
-            padding: 0;
-        }
+        margin-bottom: 15px;
+        font-size: 15px;
+        font-weight: bold;
 
-        .main-content-item {
-            padding: 15px 0 0;
-        }
     }
+
+    .article-seo-title h2 {
+
+        font-size: 15px;
+        font-weight: normal;
+        display: inline-block;
+        color: #333;
+
+    }
+
+    .is-user-valid {
+        border: 2px solid #00c569;
+    }
+
+    .modal-content {
+        overflow: hidden;
+    }
+    .text-danger{
+        height: 24px;
+        font-size: 12px;
+    }
+    .close-modal{
+        font-size: 20px;
+
+        color: red;
+
+        float: right;
+
+        display: block;
+
+        margin-left: 15px;
+
+        margin-top: 8px;
+    }
+
+    .modal-title{
+        float: right;
+
+        font-size: 23px;
+
+        font-weight: bold;
+
+        color: #474747;
+    }
+
+    .green-button {
+        border: medium none;
+
+        margin: 15px auto;
+
+        width: initial;
+
+        font-size: 14px;
+
+        font-weight: bold;
+
+        display: block;
+
+    }
+
 </style>
 
 <template>
-    <div>
-        <script v-html="jsonLDObject" type="application/ld+json"></script>
 
-        <article class="main-content-item">
-            <ProductUserInfo
-                    :profile_photo="product.profile_info.profile_photo"
-                    :user_info="product.user_info"
-                    :user_full_name="product.user_info.first_name + ' ' +
-            product.user_info.last_name"
-                    :user_name="product.user_info.user_name"
-                    :defultimg="defultimg"
-                    :current_user="currentUser"
-                    :product_id="product.main.id"
-                    :is_my_profile_status="isMyProfile"
-            />
 
-            <div class="article-contents col-xs-12  col-sm-9">
-                <div class="main-image col-xs-12 col-sm-5">
-                    <div class="owl-carousel" v-if="product.photos.length > 0">
-                        <OwlCarouselLists @click="registerComponentStatistics('productImageViewer','click','popUp')"
-                                          v-for="photo in product.photos"
-                                          :key="photo.id"
-                                          :base="str + '/'"
-                                          :img="photo.file_path"
-                                          :alt="'فروش عمده ی ' + product.main.sub_category_name +
-                                            ' '  +
-                                            product.main.product_name +
-                                            ' ' +
-                                            product.main.city_name +
-                                             ' - ' +
-                                            product.main.province_name"
-                                          v-on:popUpLoaded=updatePopUpStatus($event)
-                        />
+    <article class="main-content-item" :class="{ 'is-user-valid': product.user_info.active_pakage_type != 0 }">
 
-                    </div>
-                </div>
+        <!--article modal-->
 
-                <div class="buttom-carousel-items-wrapper hidden-sm hidden-md hidden-lg col-xs-12">
-                    <div class="row">
-                        <div class="col-xs-6 text-left">
-                            <a href="#" @click.prevent="copyProductLinkToClipBoard">
-                                <i class="fa fa-share-alt-square"></i>
-                            </a>
-                        </div>
+        <div v-if="isMyProfile" class="modal fade" :id="'article-modal' + product.main.id" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog " role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
 
-                        <div class="col-xs-6 text-right"></div>
-
-                    </div>
-                </div>
-
-                <div class="main-article-content col-xs-12 col-sm-7">
-                    <h2 class="main-article-title">
-                        <a :href="productUrl"
-                           @click="registerComponentStatistics('product',
-                           'show-product-in-seperate-page',
-                           'show-product-in-seperate-page')"
-
-                           v-text="product.main.category_name +
-                            ' | ' +
-                            product.main.sub_category_name">
+                        <a class="close-modal" href="#" data-dismiss="modal">
+                            <i class="fa fa-times"></i>
                         </a>
-                    </h2>
 
-                    <p>نوع محصول: <span v-text="product.main.product_name"></span></p>
-
-                    <p>استان / شهر:
-                        <span v-text="product.main.province_name +
-                         ' - ' +
-                          product.main.city_name"
-                        ></span>
-                    </p>
-
-                    <p>مقدار موجودی: <span v-text="product.main.stock + 'کیلوگرم'"></span>
-                    </p>
-
-                    <p>
-                        حداقل سفارش:
-
-                        <span v-text="product.main.min_sale_amount"> </span>
-
-                        <span>کیلوگرم</span>
-                    </p>
-
-                    <p>قیمت:
-                        <span v-text="product.main.min_sale_price +
-                         ' - ' +
-                         product.main.max_sale_price"
-                        >
-                        </span>
-
-                        <span>تومان</span>
-                    </p>
-
-                    <p>توضیحات: <span v-text="product.main.description"></span>
-                    </p>
-                </div>
-
-                <div class="col-xs-12">
-                    <div class="row">
-                        <div class="create_buy_mobile hidden-sm hidden-md hidden-lg">
-                            <a v-if="!isMyProfile" class="green-button" href="#" @click.prevent="openChat(product)">
-
-                                <span class="fa fa-comment"></span> ارسال پیام
-                            </a>
-
-                            <a v-if="isMyProfile" class="green-button edit-product" href="#"
-                               @click="openEditBox($event)">
-
-                                <span class="fa fa-pencil"></span> ویرایش
-                            </a>
+                        <div class="modal-title"
+                             v-text="'ویرایش ' + product.main.category_name + ' | ' + product.main.sub_category_name ">
 
                         </div>
-                    </div>
-                </div>
-
-                <div class="buy_details form-group  col-xs-12">
-                    <input type="hidden" id="product-id" :value="product.main.id">
-
-                    <div class="col-xs-12 col-sm-6 pull-right">
-                        <label for="stock" class="content-label">
-                            مقدار موجودی (کیلوگرم):
-                        </label>
-
-                        <input id="stock" placeholder="مقدار موجودی" type="text"
-                               class=" form-control" :value="product.main.stock">
-
-                        <span class="text-danger" v-if="errors.stock" v-text="errors.stock[0]"></span>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6">
-                        <label for="min-sale-amount" class="content-label">
-                            حداقل سفارش (کیلوگرم):
-                        </label>
-
-                        <input id="min-sale-amount" placeholder="حداقل سفارش" type="text"
-                               class=" form-control" :value="product.main.min_sale_amount">
-
-                        <span class="text-danger" v-if="errors.min_sale_amount"
-                              v-text="errors.min_sale_amount[0]"></span>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6 pull-right ">
-                        <label for="min-sale-price" class="content-label">
-                            حداقل قیمت:
-                        </label>
-
-                        <input id="min-sale-price" placeholder="حداقل قیمت" type="text" class=" form-control"
-                               :value="product.main.min_sale_price">
-
-                        <span class="text-danger" v-if="errors.min_sale_price" v-text="errors.min_sale_price[0]">
-                               </span>
 
                     </div>
+                    <div class="modal-body col-xs-12">
+                        <div class="row">
+                            <input type="hidden" class="product-id" :value="product.main.id">
+                            <div class="col-xs-12 col-sm-6 pull-right">
+                                <label class="content-label">
+                                    مقدار موجودی (کیلوگرم)
+                                </label>
 
-                    <div class="col-xs-12 col-sm-6 ">
-                        <label for="max-sale-price" class="content-label">
-                            حداکثر قیمت:
-                        </label>
+                                <input placeholder="مثلا : 5000 کیلوگرم" type="text"
+                                       class=" form-control stock" :value="product.main.stock">
 
-                        <input id="max-sale-price" placeholder="حداکثر قیمت" type="text" class=" form-control"
-                               :value="product.main.max_sale_price">
+                                <div class="text-danger"><span v-if="errors.stock" v-text="errors.stock[0]"></span>
+                                </div>
+                            </div>
 
-                        <span class="text-danger" v-if="errors.max_sale_price" v-text="errors.max_sale_price[0]"></span>
-                    </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <label class="content-label">
+                                    حداقل سفارش (کیلوگرم)
+                                </label>
 
-                    <div class="col-xs-12 ">
-                        <label for="description" class="content-label">
-                            توضیحات:
-                        </label>
+                                <input placeholder="مثلا : 200 کیلوگرم" type="text"
+                                       class=" form-control min-sale-amount" :value="product.main.min_sale_amount">
 
-                        <textarea id="description" rows="5" placeholder="ویژگی های لازم محصول را توضیح دهید..."
-                                  class=" form-control" :value="product.main.description"></textarea>
-                        <span class="text-danger" v-if="errors.description" v-text="errors.description[0]"></span>
+                                <div class="text-danger"><span v-if="errors.min_sale_amount"
+                                                               v-text="errors.min_sale_amount[0]"></span></div>
+                            </div>
 
-                    </div>
+                            <div class="col-xs-12 col-sm-6 pull-right ">
+                                <label class="content-label">
+                                    حداقل قیمت (تومان)
+                                </label>
 
-                    <div class="hidden-xs col-sm-8"></div>
+                                <input placeholder="مثلا : 10000 تومان" type="text" class=" form-control min-sale-price"
+                                       :value="product.main.min_sale_price">
 
-                    <div class="col-xs-12 col-sm-4">
-                        <button @click="editProduct($event)" type="submit" style="border:none"
+                                <div class="text-danger">
+                                    <span v-if="errors.min_sale_price" v-text="errors.min_sale_price[0]"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 ">
+                                <label class="content-label">
+                                    حداکثر قیمت (تومان)
+                                </label>
+
+                                <input placeholder="مثلا : 50000 تومان" type="text" class=" form-control max-sale-price"
+                                       :value="product.main.max_sale_price">
+
+                                <div class="text-danger">
+                                    <span v-if="errors.max_sale_price"
+                                          v-text="errors.max_sale_price[0]"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <button @click="editProduct('article-modal' + product.main.id)" type="submit"
+                                style="border:none"
                                 class="green-button">ثبت ویرایش
                         </button>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="loading_images  col-xs-12"
-                 v-if="loading">
-                <img :src="loading_img" style="width:200px;height:200px">
-            </div>
-        </article>
-    </div>
+        <!--end article modal-->
+
+
+        <ProductUserInfo
+                :profile_photo="product.profile_info.profile_photo"
+                :user_info="product.user_info"
+                :user_full_name="product.user_info.first_name + ' ' +
+            product.user_info.last_name"
+                :user_name="product.user_info.user_name"
+                :defultimg="defultimg"
+                :current_user="currentUser"
+                :product_id="product.main.id"
+                :is_my_profile_status="isMyProfile"
+        />
+
+        <ArticleMainContents/>
+
+        <!--google codes-->
+        <script v-html="jsonLDObject" type="application/ld+json"></script>
+        <!--end google codes-->
+
+    </article>
+
 </template>
 <script>
     import {eventBus} from "../../../../../js/router/dashboard_router";
 
-    var PopupImage = {
-        data: function () {
-            return {
-                imgSrcs: '',
-            };
-        },
-        props: ['img', 'base'],
-        template: '<div>' +
-            '<a   :href="base + img">' +
-            '<img :src="base + img">' +
-            '</a>' +
-            '</div>',
-        mounted: function () {
-            $(this.$el).parent().magnificPopup({
-                delegate: 'a',
-                type: 'image',
-                mainClass: 'mfp-img-mobile',
-                gallery: {
-                    enabled: true,
-                    navigateByImgClick: true,
-                    preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
-                },
-            });
-
-        }
-    };
-    import OwlCarouselLists from './carousel_image'
-    import ProductUserInfo from './product_user_info'
+    import ProductUserInfo from './product-article-components/product_user_info'
+    import ArticleMainContents from './product-article-components/article_main_contents'
 
     export default {
         components: {
-            PopupImage,
-            OwlCarouselLists,
             ProductUserInfo,
+            ArticleMainContents,
         },
         props: [
             'product',
@@ -429,25 +371,14 @@
             },
             toLatinNumbers: function (num) {
                 if (num == null) {
-                    return '';
+                    return null;
                 }
-                var numDic = {
-                    '۰': '0',
-                    '۱': '1',
-                    '۲': '2',
-                    '۳': '3',
-                    '۴': '4',
-                    '۵': '5',
-                    '۶': '6',
-                    '۷': '7',
-                    '۸': '8',
-                    '۹': '9',
-                };
 
-                return num
-                    .toString()
-                    .replace(/[۰-۹]/g, function (w) {
-                        return numDic[w];
+                return num.toString()
+                    .replace(/[\u0660-\u0669]/g, function (c) {
+                        return c.charCodeAt(0) - 0x0660;
+                    }).replace(/[\u06f0-\u06f9]/g, function (c) {
+                        return c.charCodeAt(0) - 0x06f0;
                     });
             },
             openEditBox: function (e) {
@@ -474,46 +405,55 @@
                 var newPosition = $(element).offset();
                 $('html, body').stop().animate({scrollTop: newPosition.top - 380}, 1000);
             },
-            editProduct: function (e) {
-                e.preventDefault();
+            editProduct: function (getProductWrapper) {
+
 
                 this.submiting = true;
                 this.errors = '';
 
-                var event = $(e.target);
-                var productId = (event.parents('article').find('.buy_details input#product-id'));
-                var stock = (event.parents('article').find('.buy_details input#stock'));
-                var minSalePrice = (event.parents('article').find('.buy_details input#min-sale-price'));
-                var maxSalePrice = (event.parents('article').find('.buy_details input#max-sale-price'));
-                var minSaleAmount = (event.parents('article').find('.buy_details input#min-sale-amount'));
-                var description = (event.parents('article').find('.buy_details textarea#description'));
+                var stock = '#' + getProductWrapper + ' input.stock';
+                var getProductId = '#' + getProductWrapper + ' .product-id';
+                var minSalePrice = '#' + getProductWrapper + ' input.min-sale-price';
+                var maxSalePrice = '#' + getProductWrapper + ' input.max-sale-price';
+                var minSaleAmount = '#' + getProductWrapper + ' input.min-sale-amount';
+                var description = '#' + getProductWrapper + ' textarea.description';
 
-                description = description.val();
-                stock = this.toLatinNumbers(stock.val());
-                minSalePrice = this.toLatinNumbers(minSalePrice.val());
-                maxSalePrice = this.toLatinNumbers(maxSalePrice.val());
-                minSaleAmount = this.toLatinNumbers(minSaleAmount.val());
-                productId = productId.val();
+
+                stock = this.toLatinNumbers($(stock).val());
+                getProductId = this.toLatinNumbers($(getProductId).val());
+                minSalePrice = this.toLatinNumbers($(minSalePrice).val());
+                maxSalePrice = this.toLatinNumbers($(maxSalePrice).val());
+                minSaleAmount = this.toLatinNumbers($(minSaleAmount).val());
+                description = $(description).val();
+
 
                 var request = {
-                    product_id: productId,
+                    product_id: getProductId,
                     stock: stock,
                     min_sale_price: minSalePrice,
                     max_sale_price: maxSalePrice,
                     min_sale_amount: minSaleAmount,
                 };
 
+
                 if (description !== '') {
                     request.description = description;
                 }
 
                 var self = this;
+
+
                 axios.post('/edit_product', request)
                     .then(function (response) {
+                        $('.modal').modal('hide');
                         self.popUpMsg = 'محصول شما با موفقیت ویرایش شد.';
                         eventBus.$emit('submitSuccess', self.popUpMsg);
-                        $('#custom-main-modal').modal('show');
-
+                        setTimeout(function () {
+                            $('#custom-main-modal').modal('show');
+                            $('#custom-main-modal').on('hidden.bs.modal', function (e) {
+                                location.reload(); 
+                            });
+                        }, 300);
                         self.registerComponentStatistics('product', 'register-product-edit', 'product-edited-successfully');
                     })
                     .catch(function (err) {
@@ -614,8 +554,7 @@
                     || navigator.userAgent.match(/iPod/i)
                     || navigator.userAgent.match(/BlackBerry/i)
                     || navigator.userAgent.match(/Windows Phone/i)
-                )
-                {
+                ) {
                     return true;
                 }
                 else {

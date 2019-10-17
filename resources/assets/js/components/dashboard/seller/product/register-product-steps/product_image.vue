@@ -66,7 +66,9 @@ label {
 
   top: 6px;
 
-  font-family: "FontAwesome", sans-serif;
+  font-family: "Font Awesome 5 Free",sans-serif;
+
+  font-weight: 900;
 
   left: 15px;
 
@@ -295,10 +297,9 @@ label .small-label {
         <span v-if="$parent.errors.image_5" v-text="$parent.errors.image_5[0]"></span>
       </p>
 
-      <span class="small-description">
-        انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند
-        انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند
-      </span>
+      <span
+        class="small-description"
+      >انتخاب تصویر مناسب ، تاثیر قابل توجهی در بیشتر ملاحظه شدن محصول شما دارد</span>
 
       <div class="submit-button-wrapper">
         <button
@@ -315,7 +316,6 @@ label .small-label {
           @click.prevent="$parent.currentStep --"
         >
           <i class="fa fa-arrow-right"></i>
-
           مرحله قبل
         </button>
       </div>

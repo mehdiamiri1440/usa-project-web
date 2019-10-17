@@ -15,6 +15,8 @@ use App\user_product;
 use DB;
 use App\Http\Controllers\sms_controller;
 use App\Jobs\NotifyBuyersBySMS;
+use App\buyAd;
+use App\Http\Library\date_convertor;
 
 
 class product_controller extends Controller
@@ -45,6 +47,8 @@ class product_controller extends Controller
     protected $product_register_nullable_fields_array_with_validation_rules = array(
         'description' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u',
     );	
+    
+    protected $max_factorial_input_number = 10;
 	// public method
 	public function add_product(Request $request)
 	{
@@ -59,13 +63,25 @@ class product_controller extends Controller
 		$this->validate($request,$rules);
 		
 		$product_object_or_failuire_message = $this->add_product_to_DB($request);
+        
 		
 		if(is_object($product_object_or_failuire_message))
 		{
-			return response()->json([
-				'status' => TRUE,
-				'product' => $product_object_or_failuire_message,
-			],201);
+            $most_related_buyAd = $this->get_the_most_related_buyAd_to_the_given_product_if_there_is_any($product_object_or_failuire_message);
+            
+            if($most_related_buyAd){
+                return response()->json([
+                    'status' => TRUE,
+                    'buyAd' => $most_related_buyAd
+                ],201);
+            }
+            else{
+                return response()->json([
+                    'status' => TRUE,
+                    'product' => $product_object_or_failuire_message,
+                ],201);
+            }
+			
 		}
 		else{
 			return response()->json([
@@ -101,6 +117,7 @@ class product_controller extends Controller
             if($this->is_send_sms_to_buyers_active()){
                 NotifyBuyersBySMS::dispatch($product->id)->onQueue('default');
             }
+            
 			
 			return $product;
 		}
@@ -225,7 +242,7 @@ class product_controller extends Controller
             $b = $item2['user_info']->active_pakage_type;
 
             if($a == $b){
-                return $item1['main']->id < $item2['main']->id;
+                return $item1['main']->updated_at < $item2['main']->updated_at;
             }
 
             return ($a < $b) ? 1 : -1;
@@ -364,7 +381,7 @@ class product_controller extends Controller
 												->join('categories','products.category_id','=','categories.id')	   											
 													->leftJoin('cities','cities.id','=','products.city_id')
 													->leftJoin('provinces','provinces.id','=','cities.province_id')
-													->select('products.id','products.product_name','products.stock','products.min_sale_price','products.max_sale_price','products.min_sale_amount','products.description','products.address','products.myuser_id','products.category_id as sub_category_id','provinces.province_name','provinces.id as province_id','cities.city_name','cities.id as city_id','categories.category_name as sub_category_name')
+													->select('products.id','products.updated_at','products.product_name','products.stock','products.min_sale_price','products.max_sale_price','products.min_sale_amount','products.description','products.address','products.myuser_id','products.category_id as sub_category_id','provinces.province_name','provinces.id as province_id','cities.city_name','cities.id as city_id','categories.category_name as sub_category_name')
 													->where('products.id',$product_id)
                                                     ->where('confirmed',true)
 													->get()
@@ -798,6 +815,7 @@ class product_controller extends Controller
         else return false;
     }
     
+    //public method
     public function edit_product_by_id(Request $request)
     {
         $this->validate($request,[
@@ -806,7 +824,7 @@ class product_controller extends Controller
             'max_sale_price' => 'required|integer|min:1',
             'min_sale_amount' => 'required|integer|min:1',
             'stock' => 'required|integer:min:1',
-            'description' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u',
+//            'description' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u',
         ]);
         
         $product_id = $request->product_id;
@@ -821,7 +839,7 @@ class product_controller extends Controller
                     'max_sale_price' => $request->max_sale_price,
                     'min_sale_amount' => $request->min_sale_amount,
                     'stock' => $request->stock,
-                    'description' => $request->description,
+//                    'description' => $request->description,
                 ];
 
                 DB::table('products')
@@ -848,7 +866,7 @@ class product_controller extends Controller
         }
     }
     
-    
+    //public method
     public function get_all_products_url_for_sitemap()
     {
         $products = collect($this->get_all_products_with_related_media());
@@ -857,6 +875,143 @@ class product_controller extends Controller
         
         return $products;
     }
+    
+    protected function get_the_most_related_buyAd_to_the_given_product_if_there_is_any(&$product)
+    {
+        $until_date = Carbon::now();
+        $from_date = Carbon::now()->subDays(14); // last 2 weeks
         
+        $related_subcategory_buyAds = buyAd::where('category_id',$product->category_id)
+                                            ->where('confirmed',true)
+                                            ->whereBetween('created_at',[$from_date,$until_date])
+                                            ->orderBy('created_at','desc')
+                                            ->get();
+        
+        if($related_subcategory_buyAds){
+            $the_most_related_buyAd_record = $this->get_the_most_related_buyAd_to_given_product($product,$related_subcategory_buyAds);
+            
+            return $the_most_related_buyAd_record ? $the_most_related_buyAd_record : null;
+        }
+        else return null;
+    }
+    
+    
+    protected function get_the_most_related_buyAd_to_given_product(&$product,&$related_subcategory_buyAds)
+    {
+        $most_related_record = null;
+        $max_mached_score = 0;
+        
+        $product_name_array = array_filter(array_map('trim',explode(' ',str_replace('،',' ',$product->product_name ))));
+        
+        $category_info = $this->get_category_and_subcategory_name($product->category_id);
+        
+        if(count($product_name_array) > 1){
+            if($product_name_array[0] == $category_info['subcategory_name']){
+                array_splice($product_name_array,0,1);//removes the first element
+            }
+        }
+        
+        $product_name_array_count = count($product_name_array);
+    
+        foreach($related_subcategory_buyAds as $buyAd){
+            $score = 0;
+            
+            $buyAd_name_array = array_filter(array_map('trim',explode(' ',str_replace('،',' ',$buyAd->name))));
+            
+            foreach($buyAd_name_array as $word){
+                $index = array_search($word,$buyAd_name_array);
+                if($index !== false){
+                    $score += $this->factorial($product_name_array_count - $index);
+                }
+            }
+            
+            if($score > $max_mached_score){
+                    $most_related_record = $buyAd;
+                    $max_mached_score = $score;
+            }
+        }
+        
+        if($most_related_record){
+            $this->append_category_info_to_buyAd($most_related_record,$category_info);
+            $this->append_user_info_to_most_related_buyAd_record($most_related_record,$product);
+        }
+        
+        return $most_related_record;
+    }
+    
+    protected function append_user_info_to_most_related_buyAd_record(&$buyAd,&$product){
+        $buyAd_owner_user_record = myuser::where('id',$buyAd->myuser_id)
+                                            ->select(['user_name','first_name','last_name'])
+                                            ->get()
+                                            ->first();
+        
+        $buyAd['user_name'] = $buyAd_owner_user_record->user_name;
+        $buyAd['first_name'] = $buyAd_owner_user_record->first_name;
+        $buyAd['last_name'] = $buyAd_owner_user_record->last_name;
+        
+        $date_convertor_object = new date_convertor();
+        
+        $buyAd['register_date'] = $date_convertor_object->get_persian_date_with_month_name($buyAd->created_at);
+        
+    }
+    
+    protected function get_category_and_subcategory_name($subcategory_id)
+    {
+        $subcategory_record = category::where('id',$subcategory_id)
+            ->select('category_name','parent_id')
+            ->get()
+            ->first();
+
+        $category_record = category::where('id',$subcategory_record->parent_id)
+            ->select('category_name')
+            ->get()
+            ->first();
+
+        return [
+            'category_name' => $category_record->category_name,
+            'subcategory_name' => $subcategory_record->category_name,
+        ];
+    }
+    
+    protected function append_category_info_to_buyAd($buyAd,&$category_info)
+    {
+//        $category_record = $this->get_category_and_subcategory_name($buyAd->category_id);
+        
+        $buyAd['category_name'] = $category_info['category_name'];
+        $buyAd['subcategory_name'] = $category_info['subcategory_name'];
+    }
+    
+    private function factorial($number)
+    {
+        if($number > $this->max_factorial_input_number){
+            return 1;
+        }
+        
+        $factorial = 1;
+        for($i = 1; $i < $number ; $i++){
+            $factorial = $factorial * $i;
+        }
+        
+        return $factorial;
+    }
+    
+    //public method
+    public function is_user_allowed_to_register_product(Request $request){
+        
+        if($this->is_user_allowed_to_register_another_product() == false){
+            return response()->json([
+                'status' => true,
+                'is_limited' => true,
+                'msg' => ' سقف تعداد محصولات ثبت شده شما پر شده است.برای اضافه کردن محصولات بیشتر بخش تعرفه ها را بررسی کنید.'
+            ],200);
+        }
+        else {
+            return response()->json([
+                'status' => true,
+                'is_limited' => false
+            ],200);
+        }
+    }
+            
 	
 }

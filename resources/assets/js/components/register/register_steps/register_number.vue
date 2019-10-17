@@ -1,5 +1,5 @@
 <style scoped>
-		
+
 	.submit-button{
 		background: #DDDDDD;
 		color: #fff;
@@ -127,36 +127,36 @@
 		 <div class="form-contents col-xs-12">
 
 		     	<div class="row">
-		     		
+
 			     	<label for="phone-number">
 			     		لطفا شماره موبایل خود را وارد کنید
 			     	</label>
-			    
+
 			     	<div class="input-wrapper phone-number-wrapper">
-			     		<input 
-			     		v-model="phoneNumber" 
-			     		:class="{'error' : $parent.errors.phone[0] , 'active' : this.phoneNumber.length >= 11}" 
-			     		id="phone-number" 
+			     		<input
+			     		v-model="phoneNumber"
+			     		:class="{'error' : $parent.errors.phone[0] , 'active' : this.phoneNumber.length >= 11}"
+			     		id="phone-number"
 			     		type="tel"
 			     		class="dire"
 			     	    placeholder="شماره موبایل"
 			     	    pattern="[0-9]*"
 			     		>
 
-			     		<i class="fa fa-phone-square"></i>
+			     		<i class="fa fa-phone-square-alt"></i>
 			     	</div>
-			     		
+
 			     	<span class="small-description">
-			     		 پس از وارد کردن شماره موبایل ما یک کد برای شما ارسال میکنیم تا از صحت شماره وارد شده اطمینان حاصل کنیم 
+			     		 پس از وارد کردن شماره موبایل ما یک کد برای شما ارسال میکنیم تا از صحت شماره وارد شده اطمینان حاصل کنیم
 
 			     	</span>
-			       	
+
 			       	<p class="error-message">
 			       		<span  v-if="$parent.errors.phone" v-text="$parent.errors.phone[0]"></span>
 			       	</p>
 			        <button class="submit-button disabled"
-			        		:class="{'active' : this.phoneNumber.length >= 11  && $parent.step1.sendCode}" 
-			                @click.prevent="getPhoneNumber()" 
+			        		:class="{'active' : this.phoneNumber.length >= 11  && $parent.step1.sendCode}"
+			                @click.prevent="getPhoneNumber()"
 			                :disabled="!$parent.step1.sendCode"
 			                >
 			        	ارسال کد تایید
@@ -164,22 +164,22 @@
 
 		     </div>
 		</div>
-		
+
     </div>
 </template>
 
-<script> 
+<script>
 
 	export default{
 		data:function(){
 			return{
-				phoneNumber : this.$parent.step1.phone,	
+				phoneNumber : this.$parent.step1.phone,
 			}
 		},
 		methods:{
 			 getPhoneNumber(){
 				this.$emit("getPhoneNumber", this.phoneNumber);
-		  	 	 		
+
 		 	 },
 		},
 	    watch: {
@@ -188,12 +188,12 @@
 
 	  	  	if(this.phoneNumber.length >= 11){
 	  	  		this.phoneNumber = this.phoneNumber.substring(0,11);
-	  	  		
+
 	  	  	}
 
 	      }
 	    },
-	    mounted(){	
+	    mounted(){
 	    	if (this.$parent.isOsIOS()) {
 	    		$('#phone-number').attr('type','text')
 	    	}

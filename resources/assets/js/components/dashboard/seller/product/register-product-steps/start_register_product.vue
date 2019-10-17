@@ -3,13 +3,24 @@
 
 	p{
 		line-height: 1.618;
-		margin: 95px auto;
+		margin: 45px auto 55px;
 		text-align: center;
+	}
+
+	.red-text{
+		color: #e41c38;
+	}
+
+	.event-text{
+
+		font-size: 18px;
+		margin-bottom: 15px;
+
 	}
 
 	label{
 		margin: 0 auto 9px auto;
-	}	
+	}
 
 	.submit-button{
 
@@ -65,7 +76,9 @@
 
 		top: 6px;
 
-		font-family: 'FontAwesome',sans-serif;
+		font-family: "Font Awesome 5 Free",sans-serif;
+
+		font-weight: 900;
 
 		left: 15px;
 
@@ -74,7 +87,7 @@
 		z-index: 0;
 
     }
-    
+
     input{
     	width: 100%;
 
@@ -106,7 +119,7 @@
 		font-size: 20px;
 
 		color: #BEBEBE;
-		
+
 		top: 9px;
 
 		transition: 300ms;
@@ -227,12 +240,12 @@
 		font-weight: bold;
 
 		height: 15px;
-		
+
 	    direction: rtl;
 
 		font-size: 11px;
     }
-    
+
     .small-description{
 
          font-size: 11px;
@@ -240,11 +253,14 @@
          font-weight: bold;
 
          color: #777777;
-                
+
          line-height: 1.618;
 
     }
-
+    .loading-submit{
+    	width: 50px;
+		margin: 0 auto;
+    }
     @media screen and (max-width: 767px){
 		.input-wrapper {
 		    padding: 0 5px;
@@ -256,41 +272,54 @@
 		.input-wrapper::after {
 		    left: 14px;
 		}
-	}	
+	}
 </style>
 
 <template>
 	<div>
 
-		
+
 		 <div class="form-contents ">
 
 			    	<div class=" col-xs-12 ">
 
-	
+
 
 				     	<div class="text-input-wrapper  ">
 
 
 				     		<p>
-				     			لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله 
+				     			فروشنده محترم برای استفاده از خدمات اینکوباک و ارتباط مستقیم با خریداران ابتدا باید محصولات خود را در سامانه اینکوباک ثبت کنید.
+
+				     			<br/>
+				     			<br/>
+
+				     			<strong>
+				     				<span class="red-text">تنها </span>پس از ثبت محصول اطلاعات شما بر روی سامانه به خریداران نمایش داده می شود
+				     			</strong>
 				     		</p>
-				
+
 				     	</div>
 
 				    </div>
 
 			       <div class="col-xs-12">
 			       	<div class="text-center">
-			       		 <button class="submit-button active "
-			       		 
+			       		<div class="event-text"><strong>همین حالا محصول خود را ثبت کنید</strong></div>
+
+			       		 <button v-if="!$parent.isStartLoading" class="submit-button active "
+
 			       		 	@click.prevent="$parent.startRegisterProductSubmited()"
 			       		   >
 			        		ثبت محصول
 						 </button>
+						  <div v-else class="loading-submit  ">
+			        		<img :src="$parent.loading_img">
+			        		</div>
+			       	</div>
 			       	</div>
 			       </div>
 		</div>
-		
+
     </div>
 </template>

@@ -48,7 +48,7 @@ class NotifyBuyersBySMS implements ShouldQueue
         
             $product_owner_user_name = $this->get_product_owner_user_name();
         
-            $link = "www.incobac.com/master/profile/$product_owner_user_name";
+            $link = "www.incobac.com/profile/$product_owner_user_name";
         
             $msg_array = [
               'یک محصول مشابه محصول درخواستی شما یافت شد',
@@ -72,8 +72,6 @@ class NotifyBuyersBySMS implements ShouldQueue
     protected function get_the_list_of_matched_buyers_for_the_product($product)
     {
         $related_buyAds = $this->get_related_buyAds($product->category_id);
-        
-        var_dump($related_buyAds);
         
         $related_buyAds = $related_buyAds->filter(function($buyAd) use($product){
              if($buyAd->name != null && $product->name != null){
