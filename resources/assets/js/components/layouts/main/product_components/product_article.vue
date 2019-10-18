@@ -129,77 +129,7 @@
         margin-top: -15px;
     }
 
-    .valid-user-badge {
 
-        background: #00c569;
-
-        display: inline;
-
-        position: absolute;
-
-        left: 0;
-
-        top: -15px;
-
-        padding: 5px 15px 3px 14px;
-
-        border-top: 3px solid #00B761;
-
-        text-align: center;
-
-        color: #fff;
-
-        width: 54px;
-
-    }
-
-    .valid-user-badge::after {
-
-        display: inline-block;
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 0 27px 25px;
-        border-color: transparent #00c569 transparent #00c569;
-        line-height: 0;
-        _border-color: #000000 #000000 #000000 #6980fe;
-        _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -24px;
-
-    }
-
-    .valid-user-badge.mobile-view {
-
-        left: initial;
-
-        top: -5px;
-
-        padding: 0 15px 2px 14px;
-
-        text-align: center;
-
-        color: #fff;
-
-        right: 15px;
-
-    }
-
-    .valid-user-badge .wrapper-icon span {
-
-        font-size: 13px;
-        display: inherit;
-
-    }
-
-    .valid-user-badge.mobile-view::after {
-
-        border-width: 0 27px 20px;
-        bottom: -20px;
-
-    }
 
     input[type="text"], select, textarea {
         background: #eff3f6;
@@ -520,6 +450,9 @@
                         eventBus.$emit('submitSuccess', self.popUpMsg);
                         setTimeout(function () {
                             $('#custom-main-modal').modal('show');
+                            $('#custom-main-modal').on('hidden.bs.modal', function (e) {
+                                location.reload(); 
+                            });
                         }, 300);
                         self.registerComponentStatistics('product', 'register-product-edit', 'product-edited-successfully');
                     })

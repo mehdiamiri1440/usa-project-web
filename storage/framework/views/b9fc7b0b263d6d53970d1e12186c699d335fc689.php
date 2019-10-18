@@ -18,12 +18,9 @@
     <script src="<?php echo e(asset('assets/js/jquery-ui.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/ResizeSensor.js')); ?>"></script>
 
-    
-    <script src="<?php echo e(asset('assets/js/jquery.easing.min.js')); ?>"></script>
-
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/placeholder-content.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/fontiran.css')); ?>">
-    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/font-awesome.min.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/all.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap.min.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap-theme.min.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl.carousel.min.css')); ?>">
@@ -40,10 +37,8 @@
     <script src="<?php echo e(asset('assets/cdn/axios.js')); ?>"></script>
 
     <script src="<?php echo e(asset('index/js/jquery.magnific-popup.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('index/js/jquery.parallax.js')); ?>"></script>
     <script src="<?php echo e(asset('index/js/owl.carousel.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('index/js/smoothscroll.js')); ?>"></script>
-    <script src="<?php echo e(asset('index/js/wow.min.js')); ?>"></script>
+
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
@@ -99,7 +94,7 @@
     </script>
 
 </head>
-<body>
+<body >
 <div id="app"></div>
 <div id="appBuyer"></div>
 <div id="appSeller"></div>
@@ -111,6 +106,7 @@
 ============================== -->
     <header-master-layouts
             user_id="<?php echo e(session('user_id')); ?>"
+            is_seller = "<?php echo e(session('is_seller')); ?>"
             user_default_image="<?php echo e(asset('assets/img/user-defult.png')); ?>"
             profile_photo="<?php echo e(session('profile_photo')); ?>"
             user_full_name="<?php echo e(session('full_name')); ?>"
@@ -123,8 +119,10 @@
 
     ></header-master-layouts>
 
+
     <router-view id="main-content"
                  name="layouts"
+                
                  not_found_image="<?php echo e(url('assets/img/def404.png')); ?>"
                  loading_img="<?php echo e(asset('assets/img/gif/loading.gif')); ?>"
                  trans="<?php echo e(url('dashboard/transaction-detail')); ?>"
@@ -149,12 +147,6 @@
                  img_success_verified="<?php echo e(asset('index/images/farmer.png')); ?>"
                  img_seller_services="<?php echo e(asset('index/images/seller.jpg')); ?>"
                  img_buyer_services="<?php echo e(asset('index/images/buyer.jpg')); ?>"
-                 img_six="<?php echo e(asset('index/images/6.png')); ?>"
-                 img_five="<?php echo e(asset('index/images/5.png')); ?>"
-                 img_four="<?php echo e(asset('index/images/4.png')); ?>"
-                 img_three="<?php echo e(asset('index/images/3.png')); ?>"
-                 img_two="<?php echo e(asset('index/images/2.png')); ?>"
-                 img_one="<?php echo e(asset('index/images/1.png')); ?>"
                  img_2_help_page="<?php echo e(asset('assets/img/help/2.jpg')); ?>"
                  img_3_help_page="<?php echo e(asset('assets/img/help/3.jpg')); ?>"
                  img_4_help_page="<?php echo e(asset('assets/img/help/4.jpg')); ?>"
@@ -183,6 +175,8 @@
                  img_mobile_12_help_page="<?php echo e(asset('assets/img/help/mobile_12.jpg')); ?>"
                  img_mobile_13_help_page="<?php echo e(asset('assets/img/help/mobile_13.jpg')); ?>"
                  img_mobile_13_1_help_page="<?php echo e(asset('assets/img/help/mobile_13_1.jpg')); ?>"
+                 is-user-login="<?php echo e(session('user_id')); ?>"
+                 user-type = "<?php echo e(session('is_seller')); ?>"           
     ></router-view>
 
     <footer-master-layouts></footer-master-layouts>
@@ -198,7 +192,6 @@
     });
 
     $(document).on("idle.idleTimer", function () {
-        // function you want to fire when the user goes idle
         window.location.href = '/login'
     });
 </script>

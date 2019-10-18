@@ -959,7 +959,7 @@ li > ul > li.active > ul > li{
 
         .search-input button {
 
-            padding: 12px 15px 14px;
+            padding: 13px 15px 15px;
 
         }
 
@@ -1125,10 +1125,10 @@ li > ul > li.active > ul > li{
 
                                     </li>
 
-                                    <li class="col-xs-12">
-                                        <a class="product-link green-button" href="/product-list">
-                                            <i class="fa fa-arrow-left"></i>
-                                            <span> مشاهده همه محصولات </span>
+                                    <li class="col-xs-12 button-link-wrapper">
+                                        <a class="product-link green-button fa fa-arrow-left" href="/product-list">
+                                       
+                                            مشاهده همه محصولات 
                                          </a>
                                     </li>
 
@@ -1727,9 +1727,14 @@ li > ul > li.active > ul > li{
             },
             dropDownSecondaryMenu:function(event,index){
 
-               this.dropDownClose(index);
-
-                if ($(event.target).attr('class') == 'sub-category-item') {
+              
+               if ($(event.target).attr('class') == 'col-xs-12 button-link-wrapper') {
+                    return
+               }else{
+                this.dropDownClose(index);
+               }
+                console.log($(event.target).attr('class'));
+                if ($(event.target).attr('href')) {
                     window.location.href = $(event.target).attr('href');
                 }
 

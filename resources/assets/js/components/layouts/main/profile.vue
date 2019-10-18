@@ -96,7 +96,7 @@
             </h1>
         </header>
 
-        <main id="main" class="col-sm-12">
+        <main id="main" class="container">
             <section class="main-content container"
                      itemscope itemprop="Person"
                      itemtype="http://schema.org/Person">
@@ -536,7 +536,7 @@
                     <div class="contents" v-else>
 
                           <div class="row">
-                              <div v-for="(product,productIndex) in products" :key="product.main.id" class="col-xs-12 col-lg-6 pull-right">
+                              <div v-for="(product,productIndex) in products" :key="product.main.id" class="col-xs-12 pull-right">
                                 <ProductArticle
                                     :product="product"
                                     :loading_img="loading_img"

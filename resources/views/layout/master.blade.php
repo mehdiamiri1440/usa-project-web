@@ -119,8 +119,10 @@
 
     ></header-master-layouts>
 
+
     <router-view id="main-content"
                  name="layouts"
+                
                  not_found_image="{{url('assets/img/def404.png')}}"
                  loading_img="{{asset('assets/img/gif/loading.gif')}}"
                  trans="{{url('dashboard/transaction-detail')}}"
@@ -173,6 +175,8 @@
                  img_mobile_12_help_page="{{asset('assets/img/help/mobile_12.jpg')}}"
                  img_mobile_13_help_page="{{asset('assets/img/help/mobile_13.jpg')}}"
                  img_mobile_13_1_help_page="{{asset('assets/img/help/mobile_13_1.jpg')}}"
+                 is-user-login="{{session('user_id')}}"
+                 user-type = "{{session('is_seller')}}"           
     ></router-view>
 
     <footer-master-layouts></footer-master-layouts>

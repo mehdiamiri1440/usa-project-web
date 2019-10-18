@@ -22,7 +22,7 @@ class admin_statistics_controller extends Controller
     
     public function load_statistics(Request $request)
     {   
-        if($request->has('start_date') && $request->has('end_date')){
+        if($request->filled('start_date') && $request->filled('end_date')){
             $date_convertor_object = new date_convertor();
         
             $from_date = $date_convertor_object->get_georgian_date_from_standard_persian_date_string($request->start_date);
@@ -31,9 +31,6 @@ class admin_statistics_controller extends Controller
         else{
             $until_date = new Carbon('today');
             $from_date = new Carbon('last month');
-            
-            $from_date = '2019-01-01';
-            $until_date = '2019-08-08';
         }
         
 
@@ -54,9 +51,23 @@ class admin_statistics_controller extends Controller
         $sellers_unique_message_senders_count = $this->get_unique_message_sender_users_count($from_date,$until_date,'seller');
         $buyers_unique_message_senders_count = $this->get_unique_message_sender_users_count($from_date,$until_date,'buyer');
         
+        $total_unique_message_receivers_count = $this->get_unique_message_receiver_users_count($from_date,$until_date);
+        $sellers_unique_message_receivers_count = $this->get_unique_message_receiver_users_count($from_date,$until_date,'seller');
+        $buyers_unique_message_receiver_count = $this->get_unique_message_receiver_users_count($from_date,$until_date,'buyer');
+        
+        $total_unique_message_receivers_count_who_have_at_least_one_unseen_message = $this->get_unique_message_receivers_count_who_have_at_least_one_unseen_message($from_date,$until_date);
+        $sellers_unique_message_receivers_count_who_have_at_least_one_unseen_message = $this->get_unique_message_receivers_count_who_have_at_least_one_unseen_message($from_date,$until_date,'seller');
+        $buyers_unique_message_receivers_count_who_have_at_least_one_unseen_message = $this->get_unique_message_receivers_count_who_have_at_least_one_unseen_message($from_date,$until_date,'buyer');
+        
+        $total_active_users_count = $this->get_active_users_count($from_date,$until_date);
+        $seller_active_users_count = $this->get_active_users_count($from_date,$until_date,'seller');
+        $buyer_active_users_count = $this->get_active_users_count($from_date,$until_date,'buyer');
+        
+        $seller_returning_users_count = $this->get_returning_users_count($from_date,$until_date,'seller');
+        $buyer_returning_users_count = $this->get_returning_users_count($from_date,$until_date,'buyer');
+        $total_returning_users_count = $seller_returning_users_count + $buyer_returning_users_count;
+        
         $avg_response_rate = $this->get_average_users_response_rate($from_date, $until_date);
-        
-        
         
         
         return view('admin_panel.siteStatistics',compact(
@@ -70,6 +81,18 @@ class admin_statistics_controller extends Controller
                 'total_unique_message_senders_count',
                 'sellers_unique_message_senders_count',
                 'buyers_unique_message_senders_count',
+                'total_unique_message_receivers_count',
+                'sellers_unique_message_receivers_count',
+                'buyers_unique_message_receiver_count',
+                'total_unique_message_receivers_count_who_have_at_least_one_unseen_message',
+                'sellers_unique_message_receivers_count_who_have_at_least_one_unseen_message',
+                'buyers_unique_message_receivers_count_who_have_at_least_one_unseen_message',
+                'total_active_users_count',
+                'seller_active_users_count',
+                'buyer_active_users_count',
+                'total_returning_users_count',
+                'seller_returning_users_count',
+                'buyer_returning_users_count',
                 'avg_response_rate'
             )
         );
@@ -138,8 +161,24 @@ class admin_statistics_controller extends Controller
         return $sell_offers_count;
     }
     
-    protected function get_active_users_count($from_date, $until_date)
+    protected function get_active_users_count($from_date, $until_date, $user_type = null)
     {
+       if($user_type == null){
+           $tmp = DB::select("SELECT DISTINCT(myusers.id) as user_id from myusers,products where myusers.id = products.myuser_id and products.confirmed = true and myusers.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and products.created_at BETWEEN '" . $from_date ."' and "."'" .$until_date."' UNION SELECT DISTINCT(myusers.id) as user_id from myusers,buy_ads where myusers.id = buy_ads.myuser_id and buy_ads.confirmed = true and myusers.created_at BETWEEN '". $from_date ."' and "."'" .$until_date . "' and buy_ads.created_at BETWEEN '" .$from_date ."' and "."'".$until_date."' UNION SELECT DISTINCT(myusers.id) as user_id from myusers,messages where myusers.id = messages.sender_id and myusers.created_at BETWEEN '". $from_date . "' and "."'" .$until_date ."' and messages.created_at BETWEEN '". $from_date. "' and "."'" . $until_date ."'");
+           
+           return count($tmp);
+       }
+       else if($user_type == 'seller'){
+           $tmp = DB::select("SELECT count(DISTINCT(myusers.id)) as cnt from myusers where myusers.id in (SELECT DISTINCT(myusers.id) as user_id from myusers,products where myusers.id = products.myuser_id and products.confirmed = true and myusers.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and products.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and myusers.is_seller = true) or myusers.id in (SELECT DISTINCT(myusers.id) as user_id from myusers,buy_ads where myusers.id = buy_ads.myuser_id and buy_ads.confirmed = true and myusers.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and buy_ads.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and myusers.is_seller = true) or myusers.id in (SELECT DISTINCT(myusers.id) as user_id from myusers,messages where myusers.id = messages.sender_id and myusers.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and messages.created_at BETWEEN '". $from_date ."'"." and "."'". $until_date ."' and myusers.is_seller = true)");
+           
+           return $tmp[0]->cnt;
+           
+       }
+       else if($user_type == 'buyer'){
+           $tmp = DB::select("SELECT count(DISTINCT(myusers.id)) as cnt from myusers where myusers.id in (SELECT DISTINCT(myusers.id) as user_id from myusers,products where myusers.id = products.myuser_id and products.confirmed = true and myusers.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and products.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and myusers.is_buyer = true) or myusers.id in (SELECT DISTINCT(myusers.id) as user_id from myusers,buy_ads where myusers.id = buy_ads.myuser_id and buy_ads.confirmed = true and myusers.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and buy_ads.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and myusers.is_buyer = true) or myusers.id in (SELECT DISTINCT(myusers.id) as user_id from myusers,messages where myusers.id = messages.sender_id and myusers.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and messages.created_at BETWEEN '". $from_date ."'"." and "."'". $until_date ."' and myusers.is_buyer = true)");
+           
+           return $tmp[0]->cnt;
+       }
        
     }
     
@@ -258,6 +297,91 @@ class admin_statistics_controller extends Controller
     protected function get_user_response_rate($user_id){
         
         
+        
+    }
+    
+    protected function get_unique_message_receiver_users_count($from_date,$until_date,$user_type = null)
+    {
+        if($user_type == null){
+            $count = message::whereBetween('created_at',[$from_date, $until_date])
+                                ->select('receiver_id')
+                                ->distinct('receiver_id')
+                                ->get()
+                                ->count();
+        }
+        else if($user_type == 'seller'){
+            $count = DB::table('messages')
+                            ->join('myusers','myusers.id','=','messages.receiver_id')
+                            ->where('myusers.is_seller',true)
+                            ->whereBetween('messages.created_at',[$from_date, $until_date])
+                            ->select('messages.receiver_id')
+                            ->distinct('messages.receiver_id')
+                            ->get()
+                            ->count();
+        }
+        else if($user_type == 'buyer'){
+            $count = DB::table('messages')
+                            ->join('myusers','myusers.id','=','messages.receiver_id')
+                            ->where('myusers.is_buyer',true)
+                            ->whereBetween('messages.created_at',[$from_date, $until_date])
+                            ->select('messages.receiver_id')
+                            ->distinct('messages.receiver_id')
+                            ->get()
+                            ->count();
+        }
+        
+        return $count;
+    }
+    
+    protected function get_unique_message_receivers_count_who_have_at_least_one_unseen_message($from_date,$until_date,$user_type = null)
+    {
+        if($user_type == null){
+            $count = message::whereBetween('created_at',[$from_date, $until_date])
+                                ->where('is_read',false)
+                                ->select('receiver_id')
+                                ->distinct('receiver_id')
+                                ->get()
+                                ->count();
+        }
+        else if($user_type == 'seller'){
+            $count = DB::table('messages')
+                            ->join('myusers','myusers.id','=','messages.receiver_id')
+                            ->where('myusers.is_seller',true)
+                            ->whereBetween('messages.created_at',[$from_date, $until_date])
+                            ->where('messages.is_read',false)
+                            ->select('messages.receiver_id')
+                            ->distinct('messages.receiver_id')
+                            ->get()
+                            ->count();
+        }
+        else if($user_type == 'buyer'){
+            $count = DB::table('messages')
+                            ->join('myusers','myusers.id','=','messages.receiver_id')
+                            ->where('myusers.is_buyer',true)
+                            ->whereBetween('messages.created_at',[$from_date, $until_date])
+                            ->where('messages.is_read',false)
+                            ->select('messages.receiver_id')
+                            ->distinct('messages.receiver_id')
+                            ->get()
+                            ->count();
+        }
+        
+        return $count;
+    }
+    
+    protected function get_returning_users_count($from_date,$until_date,$user_type)
+    {
+        if($user_type = 'seller'){
+            $tmp = DB::select("SELECT COUNT(DISTINCT(m1.id)) as cnt FROM myusers m1,products p1,messages msg1 where m1.id = p1.myuser_id and m1.id = msg1.sender_id and p1.confirmed = true and m1.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and p1.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and msg1.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and EXISTS (SELECT * FROM myusers m2,products p2,messages msg2 where m2.id = p2.myuser_id and m2.id = msg2.sender_id and p2.confirmed = true and m2.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and p2.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and msg2.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and date_add(p2.created_at,INTERVAL 8 HOUR) > p1.created_at and date_add(msg2.created_at,INTERVAL 8 HOUR) > msg1.created_at
+            )");
+            
+            return $tmp[0]->cnt;
+        }
+        else if($user_type = 'buyer'){
+            $tmp = DB::select("SELECT COUNT(DISTINCT(m1.id)) as cnt FROM myusers m1,buy_ads p1,messages msg1 where m1.id = p1.myuser_id and m1.id = msg1.sender_id and p1.confirmed = true and m1.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and p1.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and msg1.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and EXISTS ( SELECT * FROM myusers m2,buy_ads p2,messages msg2 where m2.id = p2.myuser_id and m2.id = msg2.sender_id and p2.confirmed = true and m2.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and p2.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and msg2.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and date_add(p2.created_at,INTERVAL 8 HOUR) > p1.created_at and date_add(msg2.created_at,INTERVAL 8 HOUR) > msg1.created_at )");
+            
+            return $tmp[0]->cnt;;
+        }
         
     }
 }

@@ -270,7 +270,7 @@
                         </a>
                     </li>
                 </ul>
-                <div class="list-placeholder-wrapper">
+                <div class="list-placeholder-wrapper" v-if="buyAds.length <= 5">
 
                     <ul class="list-placeholder">
                         <li v-for="item in 3" class="list-group-item  col-xs-12">

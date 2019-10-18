@@ -70,7 +70,7 @@
     }
 
     .user-information-wrapper {
-        padding: 8px 10px;
+        padding: 8px 15px;
         border-bottom: 2px solid #EEEEEE;
     }
 
