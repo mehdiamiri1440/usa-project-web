@@ -122,7 +122,7 @@
 
     <router-view id="main-content"
                  name="layouts"
-                
+
                  not_found_image="{{url('assets/img/def404.png')}}"
                  loading_img="{{asset('assets/img/gif/loading.gif')}}"
                  trans="{{url('dashboard/transaction-detail')}}"
@@ -133,6 +133,7 @@
                  site_logo="{{asset('assets/img/logo-incobac.png')}}"
                  site_logo_white="{{asset('/index/images/logo_white.png')}}"
                  incobaicon="{{asset('assets/img/lo.png')}}"
+                 assets = "{{asset('assets')}}"
                  img_about_us_1="{{asset('assets/img/about-us/1.jpg')}}"
                  img_about_us_2="{{asset('assets/img/about-us/2.jpg')}}"
                  img_about_us_3="{{asset('assets/img/about-us/3.jpg')}}"
@@ -176,7 +177,7 @@
                  img_mobile_13_help_page="{{asset('assets/img/help/mobile_13.jpg')}}"
                  img_mobile_13_1_help_page="{{asset('assets/img/help/mobile_13_1.jpg')}}"
                  is-user-login="{{session('user_id')}}"
-                 user-type = "{{session('is_seller')}}"           
+                 user-type = "{{session('is_seller')}}"
     ></router-view>
 
     <footer-master-layouts></footer-master-layouts>
