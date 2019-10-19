@@ -1026,7 +1026,7 @@ class product_controller extends Controller
                                 ->limit(10)
                                 ->get()
                                 ->shuffle()
-                                ->slice(5);
+                                ->slice(0,5);
         
         
         $products->map(function($product){
@@ -1034,6 +1034,10 @@ class product_controller extends Controller
            
             $product->category_name = $category_info['category_name'];
             $product->subcategory_name = $category_info['subcategory_name'];
+            $product->photo = product_media::where('product_id',$product->id)
+                                                ->get()
+                                                ->first()
+                                                ->file_path;
         });
         
         return response()->json([

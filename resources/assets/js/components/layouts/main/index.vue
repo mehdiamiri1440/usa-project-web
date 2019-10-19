@@ -84,15 +84,11 @@
 
     }
 
-    .request-carousel-content {
-        padding: 5px 15px 20px;
-    }
-
     .request-carousel-content p {
 
         text-align: center;
         font-weight: bold;
-        margin-top: 10px;
+        margin-top: 15px;
         direction: rtl;
     }
 
@@ -589,6 +585,18 @@
         padding: 0 15px;
     }
 
+    .requests-contents p{
+
+        font-size: 13px;
+
+    }
+
+    .requests-contents .buttons-action{
+
+        text-align: center;
+
+    }
+
     .wrapper_no_pro {
         text-align: center;
         font-size: 23px;
@@ -604,6 +612,12 @@
     .text_no_pic {
         margin: 30px auto;
         color: #bdbdbd;
+    }
+
+    .list-time {
+
+        direction: rtl;
+        
     }
 
     .list-title, .needs, .list-time {
@@ -919,6 +933,25 @@
 
     }
 
+
+    /*mobile responsive styles*/
+
+    .mobile-requests-contents{
+        background: #fff;
+        border: 1px solid #ddd;
+        margin-bottom: 30px;
+        padding: 5px 0 20px;
+    }
+
+    .mobile-requests-buttons{
+
+        font-size: 14px;
+        width: initial;
+        font-weight: bold;
+        margin: 25px 0 0;
+
+    }
+
     @media screen and (max-width: 767px) {
 
         .search-input {
@@ -995,7 +1028,8 @@
         <!-- =========================
         Intro SECTION
         ============================== -->
-
+  
+        
         <section id="intro" class="container-fluid">
             <!-- <div class="particle-network-animation"></div> -->
             <div class="container">
@@ -1122,7 +1156,7 @@
         Request SECTION
         ============================== -->
 
-        <section id="requests-section" class="section-wrapper container-fluid">
+        <section id="requests-section" class="section-wrapper container-fluid hidden-xs">
             <div class=" container">
                 <div class="row">
 
@@ -1142,69 +1176,57 @@
                         </div>
 
                         <div class="col-xs-12  requests-contents box-content ">
+
                             <div class="row hidden-xs ">
                                 <ul class="list-unstyled">
-                                    <li v-for="buyAd in 4" class="list-group-item  col-xs-12">
-                                        <p class="list-title col-sm-3 col-xs-12">
-                                                <span>
+                                
+                                     <li v-for="(buyAd, index) in lastRequests" :key="index" class="list-group-item  col-xs-12">
+                                        <p class="list-title col-sm-4 col-xs-12">
 
-                                                    میوه
-
-                                                </span>
+                                            <span v-text = "buyAd.category_name"></span>
 
                                             <span> | </span>
 
-                                            <span>
-                                                    خرما
-                                                </span>
+                                            <span v-text = "buyAd.subcategory_name"></span>
 
-                                            <span>
-
-                                                    | پیارم
-                                                </span>
+                                            <span v-text = "'| ' + buyAd.name"></span>
 
                                         </p>
 
                                         <p class="needs col-sm-4 col-xs-12">
-                                                <span class="static-content">
-                                                    میزان نیازمندی :
-                                                </span>
 
-                                            <span>
-                                                    3000
-                                                </span>
+                                            <span class="static-content">
+                                                میزان نیازمندی :
+                                            </span>
+
+                                            <span v-text="buyAd.requirement_amount"></span>
 
                                             <span class="static-content">
                                                     کیلوگرم
-                                                </span>
+                                            </span>
 
                                         </p>
 
-                                        <p class="list-time col-sm-2 col-xs-12">
-                                            ۳۰ شهریور , ۱۳۹۸
-                                        </p>
-                                        <div class="col-sm-3 col-xs-12">
-                                            <a class="green-button" href="">
-                                                <i class="fas fa-envelope"></i>
-                                                پیام به خریدار
-                                            </a>
-                                        </div>
+                                        <p class="list-time col-sm-4 col-xs-12" v-text="buyAd.register_date"></p>
+                                       
 
-                                    </li>
+                                    </li> 
+                                
+                                    <li v-if="!isUserLogin || userType == 1"  class="buttons-action list-group-item  col-xs-12">
+                                        
+                                        <a   class="green-button" href="/dashboard/buyAd-requests">
+                                              همه درخواست های خرید
+
+                                              <i class="fa fa-arrow-left"></i>
+
+                                        </a>
+
+                                    </li> 
+
                                 </ul>
                             </div>
-                        </div>
-
-                        <div style="padding:0" class="requests-carousel hidden-sm hidden-md hidden-lg  col-xs-12 ">
-
-                            <div class="row">
-                                <div class="owl-carousel">
-                                    <RequestCarousel v-for="(item, index) in 5" :key="index"/>
-                                </div>
-                            </div>
 
                         </div>
-
 
                     </div>
 
@@ -1223,9 +1245,14 @@
                                 برای فروش بدون واسطه محصولات کشاورزی خود به خریداران مستقیم و صادرکنندگان هم اکنون ثبت
                                 نام کنید
                             </p>
-                            <a class="green-button" href="/register">
+                            <a v-if="!isUserLogin " class="green-button" href="/register">
 
                                 ثبت نام
+
+                            </a>
+                            <a v-else-if="isUserLogin && userType == 1" class="green-button" href="/dashboard/status">
+
+                                داشبورد
 
                             </a>
                         </div>
@@ -1235,6 +1262,83 @@
             </div>
         </section>
 
+
+        <section id="mobile-requests-section" class="section-wrapper container-fluid hidden-sm hidden-md hidden-lg">
+         
+                <div class="row">
+
+                        <div class="title-section col-xs-12">
+                     
+
+                                <h3>
+
+                                    آخرین درخواست های خرید
+
+                                </h3>
+                                <hr/>
+
+                        </div>
+
+                        <div class="col-xs-12  mobile-requests-contents ">
+
+                                <div class="row">
+                                    <div class="owl-carousel requests-carousel ">
+                                        <RequestCarousel  v-for="(buyAd, index) in lastRequests" :key="index"
+                                        :name="buyAd.name"
+                                        :title = "buyAd.category_name + ' | ' + buyAd.subcategory_name "
+                                        :need = "buyAd.requirement_amount"
+                                        :date = "buyAd.register_date"
+                                        
+                                        />
+                                    </div>
+                                     <div class="text-center  text-rtl" v-if="!isUserLogin || userType == 1">
+                                        
+                                        
+                                        <a   class="mobile-requests-buttons green-button" href="/dashboard/buyAd-requests">
+                                              همه درخواست های خرید
+
+                                              <i class="fa fa-arrow-left"></i>
+
+                                        </a>
+
+                           
+                                     </div>
+                                </div>
+
+                        </div>
+     
+
+                    <div class=" container ">
+
+
+                        <div class="title-box box-content">
+                            <h3>
+
+                                ثبت نام فروشندگان
+
+                            </h3>
+                            <p>
+
+
+                                برای فروش بدون واسطه محصولات کشاورزی خود به خریداران مستقیم و صادرکنندگان هم اکنون ثبت
+                                نام کنید
+                            </p>
+                            <a v-if="!isUserLogin " class="green-button" href="/register">
+
+                                ثبت نام
+
+                            </a>
+                            <a v-else-if="isUserLogin && userType == 1" class="green-button" href="/dashboard/status">
+
+                                داشبورد
+
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+      
+        </section>
         <!-- =========================
         Product SECTION
         ============================== -->
@@ -1261,12 +1365,12 @@
                                 <div class="owl-carousel">
 
                                     <ProductCarousel
-                                            v-for="(items , index) in 10"
+                                            v-for="(product , index) in lastProducts"
                                             :key="index"
-                                            img="https://www.incobac.com/storage/products/9sPZCpAD5S4QJWSxoHjKXbJHXp33okkRavn6HoZP.jpeg"
-                                            title="خرمای مضافتی اصل"
-                                            price="3000"
-                                            link='/'
+                                            :img="str + '/' + product.photo"
+                                            :title="product.product_name"
+                                            :stock="product.stock"
+                                            :link='getProductUrl(product)'
                                     />
 
                                 </div>
@@ -1285,11 +1389,20 @@
                                 برای استعلام قیمت و خرید محصولات کشاورزی از بهترین فروشندگان دست اول هم اکنون ثبت نام
                                 کنید
                             </p>
-                            <a class="green-button" href="/register">
+                            
+                             <a v-if="!isUserLogin " class="green-button" href="/register">
 
                                 ثبت نام
 
                             </a>
+
+                            <a v-else-if="isUserLogin && userType == 0" class="green-button" href="/dashboard/profile">
+
+                                داشبورد
+
+                            </a>
+
+
                         </div>
 
                     </div>
@@ -1459,16 +1572,16 @@
 
     var ProductCarousel = {
 
-        props: ['img', 'title', 'link', 'price'],
+        props: ['img', 'title', 'link', 'stock'],
         template: "<article class='carousel-item box-content'>"
             +
             "<div class='carousel-img' style='height: 135px;overflow: hidden;position: relative;'><a :href='link' ><img style='position: absolute;top: 50%;left: 50%;transition: 300ms;transform: translate(-50%, -50%);' :src='img' class='img-responsive'></a></div>"
             + "<a style='font-size: 16px;direction: rtl;font-weight: bold;color: #4b4b4b;' :href='link' v-if='title.length>=20'><h4 style='text-overflow: ellipsis;overflow: hidden;white-space: nowrap;padding: 0 10px;margin-top: 10px;margin-bottom: 9px;'>{{title.substring(0,15) + ' ...'}}</h4></a>"
             + "<a style='font-size: 16px;direction: rtl;font-weight: bold;color: #4b4b4b;' :href='link'  v-else><h4 style='text-overflow: ellipsis;overflow: hidden;white-space: nowrap;padding: 0 10px;margin-top: 10px;margin-bottom: 9px;'>{{title }}</h4></a>"
-            + "<a style='font-size: 14px;direction: rtl;font-weight: bold;color: #00c569;margin-bottom: 5px;display:inline-block' :href='link' class='price' >"
-            + "<span>  هر کیلو : </span>"
-            + "<span v-text='price'></span>"
-            + "<span> تومان </span>"
+            + "<a style='font-size: 14px;direction: rtl;font-weight: bold;color: #00c569;margin-bottom: 5px;display:inline-block' :href='link' class='stock' >"
+            + "<span>  موجودی  </span>"
+            + "<span v-text='stock'></span>"
+            + "<span> کیلوگرم </span>"
             + "</a>"
             + "</article>",
         mounted: function () {
@@ -1511,45 +1624,28 @@
 
     var RequestCarousel = {
 
-        props: ['title', 'need', 'date', 'link'],
-        template: '<article class="box-content col-xs-12 request-carousel-content ">'
+        props: ['name', 'title', 'need', 'date', 'link'],
+        template: '<article class=" request-carousel-content col-xs-12  ">'
             + '<div class="row">'
             + '<p class="list-title">'
-            + '<span>'
-            + 'میوه'
-            + '</span>'
-            + '<span> | </span>'
-            + '<span>'
-            + 'خرما'
-            + '</span>'
-            + '<span>'
-            + '| پیارم'
-            + '</span>'
+            + '<span v-text="title"></span>'
+            + '<span v-if= "name" v-text="\' | \' + name"></span>'
             + '</p>'
             + '<p class="needs col-sm-4 col-xs-12">'
             + '<span class="static-content">'
             + 'میزان نیازمندی :'
             + '</span>'
-            + '<span >'
-            + '3000'
-            + '</span>'
+            + '<span v-text="need"></span>'
             + '<span class="static-content">'
             + 'کیلوگرم'
             + '</span>'
             + '</p>'
-            + '<p class="list-time col-sm-2 col-xs-12">'
-            + '۳۰ شهریور , ۱۳۹۸'
-            + '</p>'
-            + '<div class="col-xs-12">'
-            + '<a class=" fas fa-comment-alt green-button" href="">'
-            + 'پیام به خریدار'
-            + '</a>'
-            + '</div>'
+            + '<p class="list-time col-sm-4 col-xs-12" v-text="date"></p>'
             + '</div>'
             + '</article>',
 
         mounted: function () {
-            $("#requests-section .owl-carousel").owlCarousel({
+            $("#mobile-requests-section .owl-carousel").owlCarousel({
                 autoplay: true,
                 autoplayTimeout: 4000,
                 loop: true,
@@ -1573,20 +1669,23 @@
             UAnimate
         },
         props: [
+            'isUserLogin',
+            'userType',
             'img_success_project',
             'img_success_verified',
-            'img_seller_services',
-            'img_buyer_services',
             'site_logo',
             'assets',
-            'loading_img'
+            'loading_img',
+            'defimgitem',
+            'str'
+
         ],
         data: function () {
             return {
                 mainSearchBoxText: '',
                 enterKeyActiveForSearch: false,
-                homePageDates: '',
-                homePageRice: '',
+                lastRequests: '',
+                lastProducts: '',
                 isLoading: false,
                 categoryList: '',
                 subCategoryList: '',
@@ -1735,9 +1834,24 @@
                 axios.post('/get_category_list', {
                     cascade_list: true
                 })
-                    .then(function (response) {
-                        self.categoryList = response.data.categories;
-                    });
+                .then(function (response) {
+                       self.categoryList = response.data.categories;
+                });
+
+                axios.post('/get_sample_products', {
+                    
+                })
+                .then(function (response) {
+                       self.lastProducts = response.data.products;
+                });
+
+                axios.post('/get_sample_buyAds', {
+                    
+                })
+                .then(function (response) {
+                       self.lastRequests = response.data.buyAds;
+                });
+
             },
             search: function () {
                 if (this.mainSearchBoxText !== '') {
@@ -1767,12 +1881,12 @@
             dropDownSecondaryMenu: function (event, index) {
 
 
-                if ($(event.target).attr('class') == 'col-xs-12 button-link-wrapper') {
+                if ($(event.target).attr('class') == 'col-xs-12 button-link-wrapper' ) {
                     return
                 } else {
                     this.dropDownClose(index);
                 }
-                console.log($(event.target).attr('class'));
+
                 if ($(event.target).attr('href')) {
                     window.location.href = $(event.target).attr('href');
                 }
@@ -1807,8 +1921,17 @@
                     });
 
                 }
-            }
+            },
+            getProductUrl: function (product) {
 
+                return '/product-view/خرید-عمده-'
+                    + product.subcategory_name.replace(' ', '-')
+                    + '/'
+                    + product.category_name.replace(' ', '-')
+                    + '/'
+                    + product.id;
+
+            },
         },
         mounted: function () {
             this.init();
