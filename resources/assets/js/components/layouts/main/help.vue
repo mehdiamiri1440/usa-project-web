@@ -593,10 +593,7 @@
                              class="panel-collapse collapse">
                             <div class="panel-body">
                                 <p>
-                                    عضویت در سامانه اینکوباک و استفاده از خدمات سیستمی سامانه اینکوباک (ساخت پروفایل،
-                                    ثبت محصول، ثبت درخواست خرید و استعلام قیمت) در پکیج نوع اول رایگان است و برای ارتقای
-                                    جایگاه خود، افزایش تعداد مشتریان و فروش خود میتوانید از دیگر پکیج های اینکوباک
-                                    استفاده نمایید.
+                                    شما با عضویت رایگان می توانید به صورت محدود از خدمات اینکوباک استفاده کنید. برای استفاده نامحدود از خدمات اینکوباک ( ثبت محصولات بیشتر، دیدن همه درخواست های خرید اولویت در نمایش و...) می توانید حساب کاربری خود را به عضویت ویژه ارتقا دهید و به عنوان کاربر ویژه در جمع خریداران و فروشندگان فعالیت کنید.
                                 </p>
                             </div>
                         </div>
@@ -624,34 +621,6 @@
     export default {
         props: [
             'assets',
-            'img_2_help_page',
-            'img_3_help_page',
-            'img_4_help_page',
-            'img_5_help_page',
-            'img_6_help_page',
-            'img_7_help_page',
-            'img_8_help_page',
-            'img_8_1_help_page',
-            'img_11_help_page',
-            'img_12_help_page',
-            'img_13_help_page',
-            'img_mobile_2_help_page',
-            'img_mobile_3_help_page',
-            'img_mobile_4_help_page',
-            'img_mobile_5_help_page',
-            'img_mobile_6_help_page',
-            'img_mobile_6_2_help_page',
-            'img_mobile_6_3_help_page',
-            'img_mobile_7_help_page',
-            'img_mobile_7_1_help_page',
-            'img_mobile_11_1_help_page',
-            'img_mobile_11_2_help_page',
-            'img_mobile_11_3_help_page',
-            'img_mobile_11_4_help_page',
-            'img_mobile_11_5_help_page',
-            'img_mobile_12_help_page',
-            'img_mobile_13_help_page',
-            'img_mobile_13_1_help_page',
         ],
         methods: {
             stopLoader: function () {

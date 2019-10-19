@@ -1,14 +1,21 @@
 <style scoped>
-		
+
+	i{
+		position: relative;
+		top: 1px;
+		padding: 0 2px;
+	}
+
+
 	.green-button{
-		
+
 		font-size: 14px;
 		font-weight: bold;
 		padding: 10px 0;
 	}
-		
+
 	.green-button-o{
-		
+
 		color: #00c569;
 		background:none;
 		border: 2px solid #00c569;
@@ -19,7 +26,7 @@
 	.green-button-o:hover{
 
 		background:#00c569;
-		
+
 	}
 
 	.user-info-wrapper{
@@ -77,7 +84,7 @@
 	}
 
 	.user-information-content p.user-position{
-		
+
 		font-size: 12px;
 
 
@@ -226,16 +233,16 @@
 		}
 
 		.green-button{
-			
+
 				padding: 10px 0;
-				
+
 		}
-		
+
 
 		.user-info-actions a:first-of-type{
-			
+
 			margin-top: 15px
-			
+
 		}
 
 		.default-image-info{
@@ -256,12 +263,12 @@
                        <div class="user-information-content-image">
                           <div class="user-image" v-if="$parent.product.profile_info.profile_photo">
                               <img v-bind:src=" '/storage/' + $parent.product.profile_info.profile_photo">
-                            
+
                           </div>
 
                           <div class="user-image" v-else>
                               <img :src="$parent.defultimg" class="image_defult">
-	                             
+
                           </div>
  <div class="valid-icon"  v-if="$parent.product.user_info.active_pakage_type != 0">
 
@@ -289,38 +296,45 @@
                       	  <p class="user-position">
                       	  	فروشنده
                       	  </p>
-                          
+
                           <p v-if="$parent.product.user_info" v-text="$parent.product.user_info.first_name + ' ' +
             $parent.product.user_info.last_name"></p>
 
-                          <p v-if="$parent.product.user_info.active_pakage_type != 0" class="user-valid-text">                 
+                          <p v-if="$parent.product.user_info.active_pakage_type != 0" class="user-valid-text">
 	                        	کاربر تایید شده
 	                      </p>
-                      </div> 
-
-                      <div class="user-info-actions">
-
-	                      <a :href="'/profile/'+ $parent.product.user_info.user_name" class="green-button green-button-o">
-	                      	مشاهده پروفایل
-	                      </a>
-
-	                      <a  v-if="!$parent.isMyProfile" href="#" @click.prevent="$parent.openChat($parent.product)" class="green-button">
-	                      	ارسال پیام
-	                      </a>
-
-	                      <a  v-else href="/dashboard/profile"  class="green-button ">
-	                      	ویرایش پروفایل
-	                      </a>
-
-	                      
                       </div>
+
+
                   </a>
+		<div class="user-info-actions">
+
+			<a :href="'/profile/'+ $parent.product.user_info.user_name" class="green-button green-button-o">
+				مشاهده پروفایل
+			</a>
+
+			<button  v-if="!$parent.isMyProfile"  @click.prevent="$parent.openChat($parent.product)" class="green-button">
+
+				ارسال پیام
+				<i class="fa fa-envelope"></i>
+
+			</button>
+
+			<a  v-else href="/dashboard/profile"  class="green-button ">
+
+				ویرایش پروفایل
+				<i class="fa fa-pencil-alt"></i>
+
+			</a>
+
+
+		</div>
 	</div>
 
 
 	<div class="user-info-wrapper default-user-info-wrapper wrapper-bg" v-else>
 		<div class="default-wrapper-main-image placeholder-content text-center">
-			
+
 		</div>
 
 		<div class="default-image-info text-rtl text-center margin-15-0">

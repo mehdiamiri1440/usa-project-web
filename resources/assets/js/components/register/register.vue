@@ -298,7 +298,7 @@ input[type="number"]::-webkit-outer-spin-button {
                   <!-- <i class="fa fa-arrow-left"></i> -->
                 </p>
 
-                <h1 class="col-xs-8">ثبت نام در سامانه</h1>
+                <h1 class="col-xs-8">ثبت نام در اینکوباک</h1>
 
                 <a
                   href="#"

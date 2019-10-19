@@ -251,14 +251,14 @@
 					<div class="register-form">
 						<p>
 							<span>
-							برای ثبت نام در سامانه بر روی دکمه زیر کلیک کنید
+							برای ثبت نام در اینکوباک بر روی دکمه زیر کلیک کنید
 							</span>
 							<img src="./img/banner-arrow.png">
 						</p>
 
 						<a href="/register" class="register-button "  >
 
-							ثبت نام در سامانه
+							ثبت نام در اینکوباک
 
 						</a>
 

@@ -1,6 +1,11 @@
 <style scoped>
+    i{
+        position: relative;
+        top: 1px;
+        padding: 0 2px;
+    }
 
-    .user-information-wrapper, .article-action-buttons a{
+    .user-information-wrapper, .article-action-buttons button{
 
         font-size: 12px;
 
@@ -11,7 +16,7 @@
         margin: 0;
 
         margin-top: 3px;
-        
+
         line-height: 1.618;
     }
 
@@ -173,13 +178,15 @@
                   </a>
               </div>
                 <div class="article-action-buttons">
-                    <a v-if="!is_my_profile_status" href="#"  @click.prevent="$parent.openChat($parent.product)" class="green-button">
+                    <button v-if="!is_my_profile_status" @click.prevent="$parent.openChat($parent.product)" class="green-button">
+                        <i class="fa fa-envelope"></i>
                         استعلام قیمت
-                    </a>
+                    </button>
 
-                    <a v-else="!is_my_profile_status" href="#" class="blue-button" data-toggle="modal" :data-target="'#article-modal' + $parent.product.main.id">
+                    <button v-else="!is_my_profile_status" class="blue-button" data-toggle="modal" :data-target="'#article-modal' + $parent.product.main.id">
+                        <i class="fa fa-pencil-alt"></i>
                         ویرایش
-                    </a>
+                    </button>
                 </div>
            <!--   <p v-if="user_info" v-text="user_full_name"></p>
 

@@ -246,7 +246,7 @@
                                     مقدار موجودی (کیلوگرم)
                                 </label>
 
-                                <input placeholder="مثلا : 5000 کیلوگرم" type="text"
+                                <input placeholder="مثلا : 5000 " type="text"
                                        class=" form-control stock" :value="product.main.stock">
 
                                 <div class="text-danger"><span v-if="errors.stock" v-text="errors.stock[0]"></span>
@@ -258,7 +258,7 @@
                                     حداقل سفارش (کیلوگرم)
                                 </label>
 
-                                <input placeholder="مثلا : 200 کیلوگرم" type="text"
+                                <input placeholder="مثلا : 200 " type="text"
                                        class=" form-control min-sale-amount" :value="product.main.min_sale_amount">
 
                                 <div class="text-danger"><span v-if="errors.min_sale_amount"
@@ -270,7 +270,7 @@
                                     حداقل قیمت (تومان)
                                 </label>
 
-                                <input placeholder="مثلا : 10000 تومان" type="text" class=" form-control min-sale-price"
+                                <input placeholder="مثلا : 10000 " type="text" class=" form-control min-sale-price"
                                        :value="product.main.min_sale_price">
 
                                 <div class="text-danger">
@@ -284,7 +284,7 @@
                                     حداکثر قیمت (تومان)
                                 </label>
 
-                                <input placeholder="مثلا : 50000 تومان" type="text" class=" form-control max-sale-price"
+                                <input placeholder="مثلا : 50000 " type="text" class=" form-control max-sale-price"
                                        :value="product.main.max_sale_price">
 
                                 <div class="text-danger">
@@ -451,7 +451,7 @@
                         setTimeout(function () {
                             $('#custom-main-modal').modal('show');
                             $('#custom-main-modal').on('hidden.bs.modal', function (e) {
-                                location.reload(); 
+                                location.reload();
                             });
                         }, 300);
                         self.registerComponentStatistics('product', 'register-product-edit', 'product-edited-successfully');
