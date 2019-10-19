@@ -29,7 +29,7 @@
 
         text-overflow: ellipsis;
 
-        margin-bottom: 10px; 
+        margin-bottom: 10px;
     }
 
     .main-article-contents-wrapper {
@@ -203,7 +203,7 @@
          :class="{ 'is-user-valid-content': $parent.product.user_info.active_pakage_type != 0 }">
 
         <div class="main-article-contents-image-wrapper">
-           
+
                 <ProductImage
                         :base="$parent.str + '/'"
                         :img="$parent.product.photos[0].file_path"
@@ -219,7 +219,7 @@
 
         </div>
         <div class="main-article-contents">
-            <div class="valid-user-badge" 
+            <div class="valid-user-badge"
                v-if="$parent.product.user_info.active_pakage_type != 0">
                 <div class="wrapper-icon">
                     <svg width="24.965" height="30.574" viewBox="0 0 24.965 30.574">
@@ -251,13 +251,13 @@
 
                 <p>مقدار موجودی: <span v-text="$parent.product.main.stock + ' کیلوگرم'"></span>
                 </p>
-                 
+
                 <p v-if="$parent.product.main.description">
                     توضیحات
                  <span v-text="$parent.product.main.description"></span>
-                
+
                 </p>
-<!--    
+<!--
                 <p >
                     حداقل سفارش:
 
@@ -265,12 +265,14 @@
 
                     <span>کیلوگرم</span>
                 </p> -->
+
                 <p>استان / شهر:
                     <span v-text="$parent.product.main.province_name +
                             ' - ' +
                              $parent.product.main.city_name"
                     ></span>
                 </p>
+
                 <!-- <p v-if="!$parent.isMyProfile">قیمت:
                     <a href="#" @click.prevent="$parent.openChat($parent.product)">استعلام بگیرید</a>
                      <span v-text="product.main.min_sale_price +

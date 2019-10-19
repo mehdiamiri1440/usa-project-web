@@ -947,5 +947,39 @@ class buyAd_controller extends Controller
         
         return $factorial;
     }
+    
+    //public method
+    public function get_sample_buyAds()
+    {
+        $until_date = Carbon::now();
+        $from_date = Carbon::now()->subDays(7); // last 2 weeks
+        
+        $buyAds = buyAd::where('confirmed',true)
+                            ->whereBetween('created_at',[$from_date,$until_date])
+                            ->select(['id','name','requirement_amount','created_at','category_id'])
+                            ->orderBy('created_at','desc')
+                            ->limit(10)
+                            ->get()
+                            ->shuffle()
+                            ->slice(5);
+        
+        $date_convertor_object = new date_convertor();
+        
+        $buyAds->map(function($buyAd) use($date_convertor_object){
+                $category_info = $this->get_category_and_subcategory_name($buyAd->category_id);
+            
+                $buyAd->category_name = $category_info['category_name'];
+                $buyAd->subcategory_name = $category_info['subcategory_name'];
+            
+                $buyAd->register_date = $date_convertor_object->get_persian_date_with_month_name($buyAd->created_at);
+        });
+        
+        
+        return response()->json([
+            'status' => true,
+            'buyAds' => $buyAds,
+        ],200);
+                    
+    }
 
 }

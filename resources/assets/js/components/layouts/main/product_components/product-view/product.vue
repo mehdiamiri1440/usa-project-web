@@ -1,9 +1,14 @@
 <style scoped>
-		
+    i{
+        position: relative;
+        top: 1px;
+        padding: 0 2px;
+    }
+
 	label {
 	    display: block;
 	    margin: 9px auto;
-	}	
+	}
 
     .modal-content {
         overflow: hidden;
@@ -121,7 +126,7 @@
 		padding: 8px 15px;
 
 	}
-	
+
 	.product-info-table{
 		padding-top: 10px;
 	}
@@ -153,7 +158,7 @@
 
 		font-weight: bold;
 		display: inline-block;
-		margin-bottom: 9px; 
+		margin-bottom: 9px;
 	}
 
 
@@ -225,7 +230,7 @@
                                     مقدار موجودی (کیلوگرم)
                                 </label>
 
-                                <input placeholder="مثلا : 5000 کیلوگرم" type="text"
+                                <input placeholder="مثلا : 5000 " type="text"
                                        class=" form-control stock" :value="$parent.product.main.stock">
 
                                 <div class="text-danger"><span v-if="$parent.errors.stock" v-text="$parent.errors.stock[0]"></span>
@@ -237,7 +242,7 @@
                                     حداقل سفارش (کیلوگرم)
                                 </label>
 
-                                <input placeholder="مثلا : 200 کیلوگرم" type="text"
+                                <input placeholder="مثلا : 200 " type="text"
                                        class=" form-control min-sale-amount" :value="$parent.product.main.min_sale_amount">
 
                                 <div class="text-danger"><span v-if="$parent.errors.min_sale_amount"
@@ -249,7 +254,7 @@
                                     حداقل قیمت (تومان)
                                 </label>
 
-                                <input placeholder="مثلا : 10000 تومان" type="text" class=" form-control min-sale-price"
+                                <input placeholder="مثلا : 10000 " type="text" class=" form-control min-sale-price"
                                        :value="$parent.product.main.min_sale_price">
 
                                 <div class="text-danger">
@@ -263,7 +268,7 @@
                                     حداکثر قیمت (تومان)
                                 </label>
 
-                                <input placeholder="مثلا : 50000 تومان" type="text" class=" form-control max-sale-price"
+                                <input placeholder="مثلا : 50000 " type="text" class=" form-control max-sale-price"
                                        :value="$parent.product.main.max_sale_price">
 
                                 <div class="text-danger">
@@ -288,7 +293,7 @@
 
 				<div class="  owl-carousel" >
 
-					<Carousel 
+					<Carousel
 					 	v-for="photo in $parent.product.photos"
 	                 	:key="photo.id"
 	                 	:base="$parent.str + '/'"
@@ -299,11 +304,11 @@
 				</div>
 			</div>
 			<div class="share hidden-xs hidden-sm">
-				<a href="#" @click.prevent="$parent.copyProductLinkToClipBoard" class="share-button">
-				
+				<button @click.prevent="$parent.copyProductLinkToClipBoard" class="share-button">
+
 					<span> اشتراک گذاری</span>
 					<i class="fa fa-share"></i>
-				</a>
+                </button>
 			</div>
 			<p class="incobac-default-text hidden-xs hidden-sm">
 				اینکوباک هیچ‌گونه منفعت و مسئولیتی در قبال معامله شما ندارد.
@@ -316,20 +321,26 @@
 				<h1 v-text="$parent.product.main.product_name"></h1>
 
 				<div class="actions">
-					<a v-if="!$parent.isMyProfile" href="#" @click.prevent="$parent.openChat($parent.product)" class="green-button">
-						استعلام قیمت
-					</a>
-					
-					<a v-else href="#"  class="green-button blue-button" data-toggle="modal" :data-target="'#article-modal' + $parent.product.main.id">
-						 ویرایش
-					</a>
+					<button v-if="!$parent.isMyProfile" @click.prevent="$parent.openChat($parent.product)" class="green-button">
+
+                        استعلام قیمت
+                        <i class="fa fa-envelope"></i>
+
+                    </button>
+
+					<button v-else   class="green-button blue-button" data-toggle="modal" :data-target="'#article-modal' + $parent.product.main.id">
+
+                        ویرایش
+                        <i class="fa fa-pencil-alt"></i>
+
+                    </button>
 
 					<div class="share hidden-md hidden-lg pull-left ">
-						<a href="#" @click.prevent="$parent.copyProductLinkToClipBoard" class="share-button">
-						
+						<button @click.prevent="$parent.copyProductLinkToClipBoard" class="share-button">
+
 							<span> اشتراک گذاری</span>
 							<i class="fa fa-share"></i>
-						</a>
+						</button>
 					</div>
 				</div>
 				<div class="product-info-table">
@@ -377,7 +388,7 @@
 							توضیحات
 						</span>
 						<p v-text="$parent.product.main.description">
-						
+
 						</p>
 					</div>
 				</div>
@@ -388,13 +399,13 @@
 
 	<div v-else class="wrapper-bg  main-product-wrapper default-product-contents-wrapper">
                   <div class="default-image-wrapper text-right text-rtl pull-left">
-                      
+
                     <div class="default-product-image placeholder-content content-full-width padding-0">
-                      
-                    </div>  
+
+                    </div>
 
                     <div class="default-button-min-with placeholder-content margin-15-0 hidden-xs hidden-sm">
-                      
+
                     </div>
                     <p class="content-default-width placeholder-content hidden-xs hidden-sm"></p>
                     <p class="content-half-width placeholder-content margin-15-0 hidden-xs hidden-sm"></p>
@@ -402,17 +413,17 @@
 
                   <div class="default-product-contents text-rtl pull-right ">
                     <div class="content-default-width  placeholder-content padding-15-0 margin-15-0">
-                      
+
                     </div>
                     <div class="default-action-buttons hidden-md hidden-lg">
                          <div class="default-button placeholder-content  pull-right">
-                      
+
                     </div>
                     <div class="default-button placeholder-content  pull-left">
-                      
+
                     </div>
                     </div>
-                 
+
 
                     <ul class="default-product-list">
                       <li>
@@ -445,7 +456,7 @@
 </template>
 
 <script >
-	
+
 	import Carousel from './carousel';
 	export default{
 		components:{

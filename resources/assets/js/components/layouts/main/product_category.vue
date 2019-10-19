@@ -4,22 +4,31 @@
     #main-content{
 
           padding-top: 165px;
-          
-          
+
+
     }
 
     @media screen and (min-width: 1200px) {
 
         #main-content{
 
-              padding-top: 80px !important;       
+              padding-top: 80px !important;
+        }
+
+    }
+
+    @media screen and (max-width: 767px) {
+
+        #main-content{
+
+            padding-top: 150px !important;
         }
 
     }
 
 </style>
 <style scoped>
-    
+
     .shadow-content{
         background: #fff;
     }
@@ -289,13 +298,13 @@
     }
 
     .load-more-button {
-        
+
         text-align: center;
 
         margin: 15px auto;
     }
 
-    .load-more-button a {
+    .load-more-button button {
 
         border: 2px solid;
 
@@ -309,7 +318,7 @@
 
         top: 0;
 
-        box-shadow: 0 3px 6px rgba(0,0,0,0,.2);
+        box-shadow: 0 3px 6px rgba(0,0,0,0,0.2);
 
         transition: 200ms;
 
@@ -317,7 +326,7 @@
 
     }
 
-    .load-more-button a:hover {
+    .load-more-button button:hover {
         top: -3px;
 
         box-shadow: 0 3px 8px rgba(0,0,0,0.2);
@@ -350,7 +359,7 @@
     }
 
     @media screen and (max-width: 991px) {
- 
+
 
         .title-page {
             text-align: center;
@@ -367,6 +376,11 @@
 
     @media screen and (max-width: 767px) {
 
+        .links-sub-header a{
+
+            padding: 23px 15px;
+        }
+
         .sub-header {
             position: fixed;
             z-index: 1;
@@ -374,7 +388,7 @@
         }
 
         .search-box {
-            margin: 4px auto 13px;
+            margin: 10px auto ;
         }
 
         .main-image {
@@ -388,7 +402,7 @@
         .sub-header {
 
             background: #f0f3f6;
-            padding-top: 20px;
+            padding-top: 7px;
 
         }
 
@@ -556,7 +570,7 @@
 
                 </div>
 
-                <div class="search-box col-xs-4">
+                <div class="search-box col-xs-6">
 
                     <button class="btn-filter "
                             data-toggle="modal" data-target="#searchFilter">
@@ -604,37 +618,28 @@
 
                                 <div class="load-more-button col-xs-12 "
                                      v-if="searchText === '' && continueToLoadProducts === true ">
-                                   
-                                      
-                                            <a href="#" class="btn btn-loader hidden-xs" @click.prevent="feed()">
-                                                <div class="btn-content">
-                                                    <span v-show="!loadMoreActive">
+
+                                    <button class="btn btn-loader " @click.prevent="feed()">
+                                        <div class="btn-content">
+                                                    <span class="hidden-xs" v-show="!loadMoreActive">
                                                         مشاهده محصولات بیشتر
                                                     </span>
-                                                    <div v-show="loadMoreActive" class="btn-loader-active-wrapper">
-                                                        <img  :src="loading_img">
-                                                    </div>
-                                                </div>
-                                            </a>
 
-                                            <a href="#" class="btn btn-loader hidden-sm hidden-md hidden-lg"
-                                               @click.prevent="feed()">
-                                                <div class="btn-content">
-
-                                                    <span v-show="!loadMoreActive">
+                                            <span class="hidden-sm hidden-md hidden-lg" v-show="!loadMoreActive">
                                                         بیشتر
                                                     </span>
 
-                                                    <div v-show="loadMoreActive" class="btn-loader-active-wrapper">
-                                                        <img  :src="loading_img">
-                                                    </div>
 
-                                                </div>
-                                            </a>
+
+                                            <div v-show="loadMoreActive" class="btn-loader-active-wrapper">
+                                                <img  :src="loading_img">
+                                            </div>
+                                        </div>
+                                    </button>
 
                                   </div>
                                 </div>
-                          
+
                         </section>
 
                         <section class="main-content  col-xs-12"
@@ -712,14 +717,14 @@
 
                                                  <div class="  placeholder-content default-article-user-image  pull-right"></div>
 
-                                                 
+
                                                      <span class="padding-top-5 placeholder-content margin-15 pull-right content-min-width "></span>
 
 
 
                                                     <span class="margin-0 placeholder-content  default-button-min-with  pull-left"></span>
 
-                                                
+
 
 
                                              </div>
@@ -734,7 +739,7 @@
 
 
                                                 <div class=" default-main-article-content ">
-                                                      
+
 
                                                         <span class=" content-half-width placeholder-content "></span>
 
@@ -750,7 +755,7 @@
 
                                      </div>
                                 </div>
-                                 
+
 
 
                         </section>
@@ -779,7 +784,7 @@
                         </div>
 
                     </aside>
-                    
+
                 </div>
 
         </main>
@@ -824,8 +829,8 @@
                 cityId: '',
                 searchValue: this.$route.params.searchText,
                 scrolled: false,
-                productCountInPage: 6,
-                productCountInEachLoad: 5,
+                productCountInPage: 10,
+                productCountInEachLoad: 10,
                 continueToLoadProducts: true,
                 searchActive: false,
                 errors: '',
@@ -1099,6 +1104,8 @@
             document.addEventListener('click', this.documentClick);
         },
         mounted() {
+            this.scrollToTop();
+
             this.init();
 
             this.stopLoader();
