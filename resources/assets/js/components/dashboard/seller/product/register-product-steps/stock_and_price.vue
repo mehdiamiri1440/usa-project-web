@@ -271,7 +271,7 @@ label .small-label {
               id="stock"
               type="tel"
               :class="{'active' :  $parent.product.stock , 'error': $parent.errors.stock}"
-              placeholder="مثلا : 1000 کیلوگرم"
+              placeholder="مثلا : 1000 "
               pattern="[0-9]*"
             />
           </div>
@@ -292,7 +292,7 @@ label .small-label {
               id="min-sale-amount"
               type="tel"
               :class="{'active' :  $parent.product.min_sale_amount , 'error':$parent.errors.min_sale_amount}"
-              placeholder="مثلا : 20 کیلوگرم"
+              placeholder="مثلا : 20 "
               pattern="[0-9]*"
             />
           </div>
@@ -313,7 +313,7 @@ label .small-label {
               id="min-sale-price"
               type="tel"
               :class="{'active' :  $parent.product.min_sale_price , 'error':$parent.errors.min_sale_price}"
-              placeholder="مثلا : 260000 تومان"
+              placeholder="مثلا : 260000 "
               pattern="[0-9]*"
             />
           </div>
@@ -334,7 +334,7 @@ label .small-label {
               id="max-sale-price"
               type="tel"
               :class="{'active' :  $parent.product.max_sale_price , 'error':$parent.errors.max_sale_price}"
-              placeholder="مثلا : 500000 تومان"
+              placeholder="مثلا : 500000 "
               pattern="[0-9]*"
             />
           </div>

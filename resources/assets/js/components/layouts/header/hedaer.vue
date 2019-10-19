@@ -139,7 +139,7 @@
         </div>
 
         <div class="container">
-            <div id="deleteModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="main_popup_content">
@@ -164,8 +164,8 @@
 
 
         <div class="container">
-            <div id="custom-main-modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                <div class="modal-dialog modal-lg" role="document">
+            <div id="custom-main-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal">
@@ -185,7 +185,7 @@
         </div>
 
         <div class="container">
-            <div id="DownloadApp" class="modal"
+            <div id="DownloadApp" class="modal fade"
                  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 
                 <div class="modal-dialog modal-lg" role="document">
@@ -223,10 +223,10 @@
 
         <!-- Modal -->
         <div class="container">
-            <div class="modal" id="auth-popup" tabindex="-1" ref="myModal" role="dialog"
+            <div class="modal fade" id="auth-popup" tabindex="-1" ref="myModal" role="dialog"
                  aria-labelledby="myModalLabel"
                  aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="main_popup_content">
                             <a href="#" data-dismiss="modal">
@@ -272,9 +272,12 @@
 
                             <div class="profile-list">
                                 <ul class="list-unstyled">
-                                    <li class="list-item">
-                                        <a :href="'/dashboard/profile'">داشبورد</a>
-                                    </li>
+                                    <li v-if="is_seller == 1" class="list-item">
+                                            <a :href="'/dashboard/status'">داشبورد</a>
+                                        </li>
+                                        <li v-else class="list-item">
+                                            <a :href="'/dashboard/profile'">داشبورد</a>
+                                        </li>
                                     <li class="list-item">
                                         <a :href="'/dashboard/password'">تغییر کلمه عبور</a>
                                     </li>
@@ -310,9 +313,12 @@
                         </li>
 
                         <li v-if="user_id !== ''">
-                            <a class="smoothScroll" href="/dashboard/profile"
+                            <a v-if="is_seller == 1" class="smoothScroll" href="/dashboard/status"
+                               @click="registerComponentStatistics('header','dashboard','click-on-dashboard')">داشبورد</a>
+                             <a v-else class="smoothScroll" href="/dashboard/profile"
                                @click="registerComponentStatistics('header','dashboard','click-on-dashboard')">داشبورد</a>
                         </li>
+
                         <li>
                             <a class="smoothScroll" href="/product-list"
                                @click="registerComponentStatistics('header','product-list','click-on-product-list')">لیست
@@ -351,7 +357,10 @@
                                     class="name-header-profile">{{user_full_name}}</span></a>
                                 <div class="profile-list">
                                     <ul class="list-unstyled">
-                                        <li class="list-item">
+                                        <li v-if="is_seller == 1" class="list-item">
+                                            <a :href="'/dashboard/status'">داشبورد</a>
+                                        </li>
+                                        <li v-else class="list-item">
                                             <a :href="'/dashboard/profile'">داشبورد</a>
                                         </li>
                                         <li class="list-item">
@@ -395,6 +404,7 @@
         props: [
             'incobacicon',
             'user_id',
+            'is_seller',
             'user_default_image',
             'profile_photo',
             'user_full_name',
@@ -511,7 +521,7 @@
                         }, 3000);
                     })
                     .catch(function (err) {
-                        elf.registerComponentStatistics('product', 'product-delete-failed', 'product-delete-failed');
+                        self.registerComponentStatistics('product', 'product-delete-failed', 'product-delete-failed');
                         //show modal
                         self.popUpMsg = 'خطایی رخ داده است.لطفا دوباره تلاش کنید.';
                         $('#custom-main-modal').modal('show');

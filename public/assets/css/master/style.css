@@ -1,6 +1,10 @@
 
+body{
+    background: #F6F6F6;
+}
+
 #main-content{
-    overflow: hidden;
+
     min-height: 600px;
     position: relative;
 

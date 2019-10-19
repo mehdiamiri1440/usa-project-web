@@ -126,9 +126,9 @@
 
                    <div class="col-xs-12 product-wrapper">
                        <div class="row">
+
+                        <div v-for="(product,productIndex) in products" :key="product.main.id" class="col-xs-12  pull-right">
                                 <ProductArticle
-                                    v-for="(product,productIndex) in products"
-                                    :key="product.main.id"
                                     :product="product"
                                     :loading_img="loading_img"
                                     :defultimg="defultimg"
@@ -137,6 +137,7 @@
                                     :currentUser="currentUser"
                                 />
                        </div>
+                    </div>
                    </div>
                 </div>
                 <div class="col-xs-12" v-if="products.length === 0 && !loading">

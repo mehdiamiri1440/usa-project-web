@@ -94,7 +94,7 @@
     </script>
 
 </head>
-<body>
+<body >
 <div id="app"></div>
 <div id="appBuyer"></div>
 <div id="appSeller"></div>
@@ -106,6 +106,7 @@
 ============================== -->
     <header-master-layouts
             user_id="<?php echo e(session('user_id')); ?>"
+            is_seller = "<?php echo e(session('is_seller')); ?>"
             user_default_image="<?php echo e(asset('assets/img/user-defult.png')); ?>"
             profile_photo="<?php echo e(session('profile_photo')); ?>"
             user_full_name="<?php echo e(session('full_name')); ?>"
@@ -118,8 +119,10 @@
 
     ></header-master-layouts>
 
+
     <router-view id="main-content"
                  name="layouts"
+
                  not_found_image="<?php echo e(url('assets/img/def404.png')); ?>"
                  loading_img="<?php echo e(asset('assets/img/gif/loading.gif')); ?>"
                  trans="<?php echo e(url('dashboard/transaction-detail')); ?>"
@@ -130,6 +133,7 @@
                  site_logo="<?php echo e(asset('assets/img/logo-incobac.png')); ?>"
                  site_logo_white="<?php echo e(asset('/index/images/logo_white.png')); ?>"
                  incobaicon="<?php echo e(asset('assets/img/lo.png')); ?>"
+                 assets = "<?php echo e(asset('assets')); ?>"
                  img_about_us_1="<?php echo e(asset('assets/img/about-us/1.jpg')); ?>"
                  img_about_us_2="<?php echo e(asset('assets/img/about-us/2.jpg')); ?>"
                  img_about_us_3="<?php echo e(asset('assets/img/about-us/3.jpg')); ?>"
@@ -172,6 +176,8 @@
                  img_mobile_12_help_page="<?php echo e(asset('assets/img/help/mobile_12.jpg')); ?>"
                  img_mobile_13_help_page="<?php echo e(asset('assets/img/help/mobile_13.jpg')); ?>"
                  img_mobile_13_1_help_page="<?php echo e(asset('assets/img/help/mobile_13_1.jpg')); ?>"
+                 is-user-login="<?php echo e(session('user_id')); ?>"
+                 user-type = "<?php echo e(session('is_seller')); ?>"
     ></router-view>
 
     <footer-master-layouts></footer-master-layouts>

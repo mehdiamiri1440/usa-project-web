@@ -94,7 +94,7 @@
     </script>
 
 </head>
-<body>
+<body >
 <div id="app"></div>
 <div id="appBuyer"></div>
 <div id="appSeller"></div>
@@ -106,6 +106,7 @@
 ============================== -->
     <header-master-layouts
             user_id="{{session('user_id')}}"
+            is_seller = "{{session('is_seller')}}"
             user_default_image="{{asset('assets/img/user-defult.png')}}"
             profile_photo="{{session('profile_photo')}}"
             user_full_name="{{session('full_name')}}"
@@ -117,6 +118,7 @@
             incobacicon="{{asset('assets/img/logo-Inco-mobile.png')}}"
 
     ></header-master-layouts>
+
 
     <router-view id="main-content"
                  name="layouts"
@@ -130,6 +132,7 @@
                  site_logo="{{asset('assets/img/logo-incobac.png')}}"
                  site_logo_white="{{asset('/index/images/logo_white.png')}}"
                  incobaicon="{{asset('assets/img/lo.png')}}"
+                 assets = "{{asset('assets')}}"
                  img_about_us_1="{{asset('assets/img/about-us/1.jpg')}}"
                  img_about_us_2="{{asset('assets/img/about-us/2.jpg')}}"
                  img_about_us_3="{{asset('assets/img/about-us/3.jpg')}}"
@@ -142,36 +145,8 @@
                  img_pricing_32="{{asset('index/images/Group_32.png')}}"
                  img_success_project="{{asset('index/images/current.png')}}"
                  img_success_verified="{{asset('index/images/farmer.png')}}"
-                 img_seller_services="{{asset('index/images/seller.jpg')}}"
-                 img_buyer_services="{{asset('index/images/buyer.jpg')}}"
-                 img_2_help_page="{{asset('assets/img/help/2.jpg')}}"
-                 img_3_help_page="{{asset('assets/img/help/3.jpg')}}"
-                 img_4_help_page="{{asset('assets/img/help/4.jpg')}}"
-                 img_5_help_page="{{asset('assets/img/help/5.jpg')}}"
-                 img_6_help_page="{{asset('assets/img/help/6.jpg')}}"
-                 img_7_help_page="{{asset('assets/img/help/7.jpg')}}"
-                 img_8_help_page="{{asset('assets/img/help/8.jpg')}}"
-                 img_8_1_help_page="{{asset('assets/img/help/8_1.jpg')}}"
-                 img_11_help_page="{{asset('assets/img/help/11.jpg')}}"
-                 img_12_help_page="{{asset('assets/img/help/12.jpg')}}"
-                 img_13_help_page="{{asset('assets/img/help/13.jpg')}}"
-                 img_mobile_2_help_page="{{asset('assets/img/help/mobile_2.jpg')}}"
-                 img_mobile_3_help_page="{{asset('assets/img/help/mobile_3.jpg')}}"
-                 img_mobile_4_help_page="{{asset('assets/img/help/mobile_4.jpg')}}"
-                 img_mobile_5_help_page="{{asset('assets/img/help/mobile_5.jpg')}}"
-                 img_mobile_6_help_page="{{asset('assets/img/help/mobile_6.jpg')}}"
-                 img_mobile_6_2_help_page="{{asset('assets/img/help/mobile_6_2.jpg')}}"
-                 img_mobile_6_3_help_page="{{asset('assets/img/help/mobile_6_3.jpg')}}"
-                 img_mobile_7_help_page="{{asset('assets/img/help/mobile_7.jpg')}}"
-                 img_mobile_7_1_help_page="{{asset('assets/img/help/mobile_7_1.jpg')}}"
-                 img_mobile_11_1_help_page="{{asset('assets/img/help/mobile_11_1.jpg')}}"
-                 img_mobile_11_2_help_page="{{asset('assets/img/help/mobile_11_2.jpg')}}"
-                 img_mobile_11_3_help_page="{{asset('assets/img/help/mobile_11_3.jpg')}}"
-                 img_mobile_11_4_help_page="{{asset('assets/img/help/mobile_11_4.jpg')}}"
-                 img_mobile_11_5_help_page="{{asset('assets/img/help/mobile_11_5.jpg')}}"
-                 img_mobile_12_help_page="{{asset('assets/img/help/mobile_12.jpg')}}"
-                 img_mobile_13_help_page="{{asset('assets/img/help/mobile_13.jpg')}}"
-                 img_mobile_13_1_help_page="{{asset('assets/img/help/mobile_13_1.jpg')}}"
+                 is-user-login="{{session('user_id')}}"
+                 user-type = "{{session('is_seller')}}"
     ></router-view>
 
     <footer-master-layouts></footer-master-layouts>

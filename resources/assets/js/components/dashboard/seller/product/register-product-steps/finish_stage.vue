@@ -282,6 +282,11 @@
 
     }
     @media screen and (max-width: 767px){
+        .list-item-wrapper{
+
+            margin: 15px auto;
+
+        }
 		.input-wrapper {
 		    padding: 0 5px;
 
@@ -316,10 +321,10 @@
                             	<span class="red-text">در صورت عدم ارسال پیام به خریدار دیگر به این درخواست خرید دسترسی نخواهید داشت.</span></strong></p>
 
 							<div class="list-group-item list-item-wrapper  col-xs-12" v-if="$parent.relatedBuyAd">
-								<p class="list-title col-sm-3 col-xs-12">
+								<p class="list-title col-xs-12">
 									<span>{{$parent.relatedBuyAd.category_name}}</span> <span> | </span> <span>{{$parent.relatedBuyAd.subcategory_name}}</span> <span> | {{$parent.relatedBuyAd.name}}</span>
 								</p>
-								<p class="needs col-sm-4 col-xs-12">
+								<p class="needs col-xs-12">
 									<span class="static-content">
                             			میزان نیازمندی :
                         			</span>
@@ -328,11 +333,11 @@
                             				کیلوگرم
                        	            </span>
                        			</p>
-                       			<p class="list-time col-sm-2 col-xs-12">
+                       			<p class="list-time col-xs-12">
                                     {{$parent.relatedBuyAd.register_date}}
                        		    </p>
 
-                       		    <div class="send-message col-sm-3 col-xs-12">
+                       		    <div class="send-message col-xs-12">
 
                        		    	<button class="submit-button active" @click.prevent="$parent.openChat($parent.relatedBuyAd)">
                        		    		 پیام به خریدار

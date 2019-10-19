@@ -1,6 +1,7 @@
 .image-wrapper {
-    height: 300px;
+    height: 380px;
     overflow: hidden;
+    border-radius: 4px;
 }
 .image-wrapper img {
     transition: 300ms;
@@ -17,9 +18,18 @@
     top: 50%;
     transform: translate(-50%, -50%);
 }
+
 .owl-dots {
-text-align: center;
+
+    text-align: center;
+
+    position: absolute;
+
+    bottom: -20px;
+
+    width: 100%;
 }
+
 .owl-dot {
     width: 7px !important;
     height: 7px !important;
@@ -28,6 +38,7 @@ text-align: center;
     border-radius: 50px !important;
 
 }
+
 .owl-dot.active{
 
     width: 9px !important;
@@ -35,28 +46,88 @@ text-align: center;
     background: #a8a8a8  !important;
 
 }
+
 .buttom-carousel-items-wrapper{
     font-size: 35px;
     padding: 10px 20px;
 
 }
+
 .buttom-carousel-items-wrapper a{
     color: #000546;
 }
+
 .owl-carousel .owl-item img{
-    margin-bottom: 15px;
+
+    display: block;
+
+    width: 100%;
+
+
+}
+
+.wrapper-bg .owl-carousel .owl-item img{
+
+    display: block;
+
+    width: initial;
+
+    height: 100%;
+
+}
+
+.wrapper-bg  .owl-nav{
+
+    position: absolute;
+
+    width: 100%;
+
+    margin-top: -10px;
+
+    top: 50%;
+
+}
+
+.wrapper-bg .owl-nav span{
+    height: 40px;
+    width: 40px;
+    border-radius: 0;
+    font-size: 22px;
+    color: #fff;
+    background: rgba(0,0,0,0.7);
+    padding-top: 9px;
+}
+
+.wrapper-bg .owl-nav .owl-prev span{
+
+    border-radius: 0 4px 4px 0;
+
+}
+
+.wrapper-bg .owl-nav .owl-next span{
+
+    border-radius:  4px 0 0 4px ;
+
 }
 
 @media screen and (max-width: 767px ){
+    
     .owl-dots {
+
         position: absolute;
 
         left: 50px;
 
         z-index: 1;
+
         padding-top: 18px;
+
         display: block;
+
         text-align: center;
+
         width: calc(100% - 100px);
+
     }
+
 }

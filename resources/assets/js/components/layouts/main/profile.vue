@@ -61,6 +61,10 @@
             width: initial;
             padding: 15px;
         }
+        .contents > .row{
+            margin: 0;
+        }
+
     }
 
     @media screen and (max-width: 500px) {
@@ -92,7 +96,7 @@
             </h1>
         </header>
 
-        <main id="main" class="col-sm-12">
+        <main id="main" class="container">
             <section class="main-content container"
                      itemscope itemprop="Person"
                      itemtype="http://schema.org/Person">
@@ -179,7 +183,7 @@
                                     <a href='#' class="green-button"
                                        @click.prevent="copyProfileLinkToClipBoard">
 
-                                        <i class="fa fa-whatsapp"></i>
+                                        <i class="fab fa-whatsapp"></i>
 
                                         اشتراک در واتس آپ
                                     </a>
@@ -531,17 +535,19 @@
 
                     <div class="contents" v-else>
 
-
-                         <ProductArticle v-if="products.length > 0" v-for="(product,productIndex) in products"
-                                    :key="product.main.id"
+                          <div class="row">
+                              <div v-for="(product,productIndex) in products" :key="product.main.id" class="col-xs-12 pull-right">
+                                <ProductArticle
                                     :product="product"
                                     :loading_img="loading_img"
                                     :defultimg="defultimg"
                                     :str="str"
                                     :loading="loading"
                                     :currentUser="currentUser"
+                                />
+                              </div>
+                          </div>   
 
-                         />
                         <div class="col-xs-12" v-if="products.length === 0 && !loading">
                             <div class="col-xs-12" v-if="products.length === 0 && !loading">
                                 <div class="wrapper_no_pro">
@@ -756,7 +762,7 @@
 
                 if (this.isDeviceMobile()) {
                     this.copyLinkText = ' اشتراک در واتساپ';
-                    this.copyLinkClass = 'fa fa-whatsapp fa-2x';
+                    this.copyLinkClass = 'fab fa-whatsapp fa-2x';
                 }
                 else {
                     this.copyLinkText = 'کپی آدرس';

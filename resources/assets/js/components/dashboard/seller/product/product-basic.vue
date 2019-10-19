@@ -71,7 +71,7 @@
 
      .progrees-item.active-item{
         color: #333;
-      
+
     }
 
     .progrees-item.active-item p{
@@ -128,12 +128,17 @@
             background: #fff;
             border-radius: 0;
             box-shadow: none;
-            position: inherit;
             min-height: 500px;
             direction: rtl;
             transform: translate(0,0);
+            height: 100%;
+            bottom: 0;
+            top: 0;
+            width: 100%;
+            left: 0;
 
         }
+
 
         .progrees-item p{
             display: none;
@@ -145,7 +150,7 @@
         }
 
          .active-progress-wrapper{
-            
+
             right: 20px;
             left: 26px;
 
@@ -160,7 +165,7 @@
          }
      }
 
-  
+
 </style>
 
 
@@ -180,12 +185,12 @@
 
                         <div class="custom-progressbar">
 
-                            <div class="progress-bar" 
-                                role="progressbar" 
+                            <div class="progress-bar"
+                                role="progressbar"
                                 aria-valuenow="21"
-                                aria-valuemin="0" 
+                                aria-valuemin="0"
                                 aria-valuemax="100">
-                            
+
                             </div>
 
                         </div>
@@ -193,12 +198,12 @@
                         <div class="active-progress-wrapper">
 
                             <div class="custom-progressbar active-item">
-                                <div class="progress-bar" 
-                                    role="progressbar" 
+                                <div class="progress-bar"
+                                    role="progressbar"
                                     aria-valuenow="21"
-                                    aria-valuemin="0" 
+                                    aria-valuemin="0"
                                     aria-valuemax="100">
-                                
+
                                 </div>
                              </div>
 
@@ -208,48 +213,48 @@
                         <div  class="progressbar-items">
 
                                 <a class="progrees-item active-item">
-                                    
+
                                         <span>1</span>
                                         <p>نوع محصول</p>
-                                   
+
                                 </a>
 
                                 <a class="progrees-item" :class="{'active-item' : currentStep >= 2}">
-                                    
+
                                         <span>2</span>
                                         <p>موجودی و قیمت</p>
 
-                                   
+
                                 </a>
 
-                                
+
                                 <a class="progrees-item" :class="{'active-item' : currentStep >= 3}">
-                                    
+
                                         <span>3</span>
                                         <p>انتخاب مبدا</p>
 
-                                   
+
                                 </a>
 
-                                
+
                                 <a class="progrees-item" :class="{'active-item' : currentStep >= 4}">
-                                    
+
                                         <span>4</span>
                                         <p>تصاویر محصول</p>
 
-                                   
+
                                 </a>
 
-                                
+
                                 <a class="progrees-item" :class="{'active-item' : currentStep >= 5}">
-                                    
+
                                         <span>5</span>
                                         <p>ثبت نهایی</p>
 
-                                   
+
                                 </a>
 
-                                
+
 
                         </div>
 
@@ -382,7 +387,7 @@
                     .then(response => (this.categoryList = response.data.categories));
                 axios.post('/location/get_location_info')
                     .then(response => (this.provinces = response.data.provinces));
-                   
+
             },
 
             startRegisterProductSubmited(){
@@ -415,7 +420,7 @@
                 this.productNameValidator(this.product.product_name);
                 if (!this.errors.category_selected  && !this.errors.category_id && !this.errors.product_name) {
                     this.goToStep(2);
-                } 
+                }
 
             },
             stockAndPriceSubmited(){
@@ -426,7 +431,7 @@
                 this.minSalePriceValidator(this.product.min_sale_price);
 
                 if (!this.errors.stock  && !this.errors.min_sale_amount && !this.errors.max_sale_price && !this.errors.min_sale_price ) {
-                    this.goToStep(3);     
+                    this.goToStep(3);
                 }
 
             },
@@ -500,7 +505,7 @@
                                 // $('#custom-main-modal').modal('show');
 
                                 self.registerComponentStatistics('product-register','product-registered-successfully','product-registered-successfully');
-                                
+
                                 if(response.data.buyAd){
                                     self.relatedBuyAd = response.data.buyAd;
                                 }
@@ -519,8 +524,6 @@
                             self.errors = [];
                             self.errors = err.response.data.errors;
                             eventBus.$emit('submiting', false);
-
-                            self.registerComponentExceptions('Validation error in product register');
                         });
                 }
             },
@@ -562,23 +565,15 @@
                 }
             },
             toLatinNumbers: function (num) {
-                var numDic = {
-                    '۰': '0',
-                    '۱': '1',
-                    '۲': '2',
-                    '۳': '3',
-                    '۴': '4',
-                    '۵': '5',
-                    '۶': '6',
-                    '۷': '7',
-                    '۸': '8',
-                    '۹': '9',
-                };
+                if (num == null) {
+                    return null;
+                }
 
-                return num
-                    .toString()
-                    .replace(/[۰-۹]/g, function (w) {
-                        return numDic[w];
+                return num.toString()
+                    .replace(/[\u0660-\u0669]/g, function (c) {
+                        return c.charCodeAt(0) - 0x0660;
+                    }).replace(/[\u06f0-\u06f9]/g, function (c) {
+                        return c.charCodeAt(0) - 0x06f0;
                     });
             },
             getProductRegisterSuccessMessage:function(){
@@ -614,15 +609,21 @@
 
                 if (id == '') {
                     this.errors.category_selected = 'لطفا دسته بندی را انتخاب کنید';
-
                 }
-            },       
+
+                if(this.errors.category_selected){
+                    this.registerComponentStatistics('product-register-error','category- selection',this.errors.category_selected);
+                }
+            },
             categoryIdValidator: function (id) {
                 this.errors.category_id = '';
 
                 if (id == '') {
                     this.errors.category_id = 'لطفا زیر دسته بندی را مشخص کنید';
+                }
 
+                if(this.errors.category_id){
+                    this.registerComponentStatistics('product-register-error','sub-category-selection',this.errors.category_id);
                 }
             },
             productNameValidator: function (name) {
@@ -633,9 +634,13 @@
                 }else if (!this.validateRegx(name, /^[\u0600-\u06FF\s]+$/)) {
                     this.errors.product_name = 'نوع محصول فرمت مناسبی نیست';
                 }
-                
 
-            },   
+                if(this.errors.product_name){
+                    this.registerComponentStatistics('product-register-error','product-name','input:' + name + ' error:' + this.errors.product_name);
+                }
+
+
+            },
             stockValidator: function (number) {
                 this.errors.stock = '';
                 var standardNumber = this.toLatinNumbers(number);
@@ -644,8 +649,12 @@
                 }else if (!this.validateRegx(standardNumber, /^\d*$/)) {
                     this.errors.stock = 'یک فرمت معتبر وارد کنید';
                 }
-            
-            },   
+
+                if(this.errors.stock){
+                    this.registerComponentStatistics('product-register-error','stock','input:' + number + ' error:' + this.errors.stock);
+                }
+
+            },
             minSaleAmountValidator: function (number) {
                 this.errors.min_sale_amount = '';
                 var standardNumber = this.toLatinNumbers(number);
@@ -654,7 +663,11 @@
                 }else if (!this.validateRegx(standardNumber, /^\d*$/)) {
                     this.errors.min_sale_amount = 'یک فرمت معتبر وارد کنید';
                 }
-            
+
+                if(this.errors.min_sale_amount){
+                    this.registerComponentStatistics('product-register-error','min-sale-amount','input:' + number + ' error:' + this.errors.min_sale_amount);
+                }
+
             },
             maxSalePriceValidator: function (number) {
                 this.errors.max_sale_price = '';
@@ -664,8 +677,12 @@
                 }else if (!this.validateRegx(standardNumber, /^\d*$/)) {
                     this.errors.max_sale_price = 'یک فرمت معتبر وارد کنید';
                 }
-            
-            }, 
+
+                if(this.errors.max_sale_price){
+                    this.registerComponentStatistics('product-register-error','max-sale-price','input:'+ number + ' error:' + this.errors.max_sale_price);
+                }
+
+            },
             minSalePriceValidator: function (number) {
                 this.errors.min_sale_price = '';
                 var standardNumber = this.toLatinNumbers(number);
@@ -674,7 +691,11 @@
                 }else if (!this.validateRegx(standardNumber, /^\d*$/)) {
                     this.errors.min_sale_price = 'یک فرمت معتبر وارد کنید';
                 }
-            
+
+                if(this.errors.min_sale_price){
+                    this.registerComponentStatistics('product-register-error','min-sale-price','input:' + number + ' error:' + this.errors.min_sale_price);
+                }
+
             },
             provincesValidator: function (id) {
                 this.errors.provinceSelected = '';
@@ -683,14 +704,23 @@
                 if (id == '') {
                     this.errors.provinceSelected = 'لطفا استان را انتخاب کنید';
                 }
-            },  
+
+                if(this.errors.provinceSelected){
+                    this.registerComponentStatistics('product-register-error','province-selection',this.errors.provinceSelected);
+                }
+            },
             cityIdValidator: function (id) {
                 this.errors.city_id = '';
 
                 if (id == '') {
                     this.errors.city_id = 'لطفا شهر را وارد کنید';
                 }
-            },  
+
+                if(this.errors.provinceSelected){
+                    this.registerComponentStatistics('product-register-error','city-selection',this.errors.city_id);
+                }
+
+            },
             validateRegx: function (input, regx) {
                 return regx.test(input);
             },
@@ -706,7 +736,7 @@
                     ios = /iphone|ipod|ipad/.test(userAgent);
 
                 return ios;
-            }, 
+            },
             openChat: function (buyAd) {
                 this.registerComponentStatistics('buyAdReplyAfterProductRegister', 'openChat', 'click on open chatBox');
 
@@ -735,7 +765,7 @@
                         //
                     });
             },
-            
+
 
         },
         mounted() {
@@ -783,7 +813,7 @@
                          this.errors.images_size = '';
                     }
 
-                
+
             },
             currentStep:function(step){
                 switch(step){
