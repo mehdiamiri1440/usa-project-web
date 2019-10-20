@@ -245,6 +245,16 @@ Route::post('/increment_user_profile_visit_count',[
     'as' => 'increment_user_profile_visit_count'
 ]);
 
+Route::post('/get_sample_products',[
+    'uses' => 'product_controller@get_sample_products',
+    'as'   => 'get_sample_products'
+]);
+
+Route::post('/get_sample_buyAds',[
+    'uses' => 'buyAd_controller@get_sample_buyAds',
+    'as'   => 'get_sample_buyAds'
+]);
+
 
 Route::group(['middleware' => [login::class]],function(){
 

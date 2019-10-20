@@ -78,8 +78,6 @@
 
     	padding: 0 10px;
 
-		position: relative;
-
 		margin: 27px auto;
 
     }
@@ -94,15 +92,11 @@
 
     .box .box-icon{
 
-    	opacity: 0.35;
-
+		opacity: 0.18;
 		font-size: 76px;
-
 		position: absolute;
-
 		left: 10px;
-
-		top: -5px;
+		bottom: 15px;
 
     }
 

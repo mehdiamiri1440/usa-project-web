@@ -1012,6 +1012,39 @@ class product_controller extends Controller
             ],200);
         }
     }
+    
+    //public method
+    public function get_sample_products()
+    {
+         $until_date = Carbon::now();
+         $from_date = Carbon::now()->subDays(14); // last 2 weeks
+        
+         $products = product::where('confirmed',true)
+                                ->whereBetween('created_at',[$from_date,$until_date])
+                                ->select(['id','product_name','category_id','stock'])
+                                ->orderBy('created_at','desc')
+                                ->limit(10)
+                                ->get()
+                                ->shuffle()
+                                ->slice(0,5);
+        
+        
+        $products->map(function($product){
+            $category_info = $this->get_category_and_subcategory_name($product->category_id);
+           
+            $product->category_name = $category_info['category_name'];
+            $product->subcategory_name = $category_info['subcategory_name'];
+            $product->photo = product_media::where('product_id',$product->id)
+                                                ->get()
+                                                ->first()
+                                                ->file_path;
+        });
+        
+        return response()->json([
+            'status' => true,
+            'products' => $products
+        ],200);  
+    }
             
 	
 }

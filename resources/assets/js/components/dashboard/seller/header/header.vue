@@ -482,9 +482,9 @@
         content: " ";
         height: 100%;
         width: 2px;
-        background: #00ac5c;
+        background: #00c569;
         position: absolute;
-        right: 0;
+        right: 1px;
         top: 0;
         display: block;
     }

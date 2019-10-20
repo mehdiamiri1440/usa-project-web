@@ -173,7 +173,7 @@
                             </tr>
                             <tr class="danger">
                                 <td> تعداد کاربران بازگشتی</td>
-                                <td><?php echo e($total_returning_users_count); ?> -- <?php echo e(printf("%.2f",$total_returning_users_count / $total_active_users_count)); ?></td>
+                                <td><?php echo e($total_returning_users_count); ?></td>
                             </tr>
                             <tr>
                                 <td> تعداد فروشندگان بازگشتی</td>

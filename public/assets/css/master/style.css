@@ -1,6 +1,10 @@
 
+body{
+    background: #F6F6F6;
+}
+
 #main-content{
-    overflow: hidden;
+
     min-height: 600px;
     position: relative;
 
@@ -102,15 +106,33 @@ a:focus {
 }
 
 #intro {
-    background: url('../../../assets/img/hero-section.jpg') 50% 0 repeat-y fixed;
+    background: url('../../../assets/img/hero-section.jpg') ;
+    background-size: cover;
+    background-position: center right;
+    position: relative;
+}
 
+#intro::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: red;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(25,102,142,0.4);
+    background: linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
+    background: -webkit-linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
+    background: -moz-linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
+    background: -o-linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
+    background: -ms-linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
+    z-index: 0;
 }
-#testimonial {
-    background: url('../../../assets/img/counter-back.jpg') ;
+#intro > div{
+    position: relative;
+    z-index: 1;
 }
-#mobile-rice{
-    background: url('../../../assets/img/rice.jpg') ;
-}
+
 .navbar-header{
     float: right;
 }
@@ -187,11 +209,6 @@ a:focus {
     transition: all 0.4s ease-in-out;
 }
 
-.top-nav-collapse .nav .ads {
-    color: white;
-    font-weight: 400;
-}
-
 .top-nav-collapse .nav {
     padding-top: 16px;
 }
@@ -231,70 +248,6 @@ a:focus {
     border-color: transparent;
 }
 
-.ads {
-    background-color: #46ae1b;
-    border-radius: 50px;
-    text-align: center;
-    color: #fff !important;
-    margin: 0 5px;
-}
-
-.ads:hover {
-    background-color: #00c569 !important;
-    border-radius: 50px;
-    text-align: center;
-}
-
-.parallax-section .owl-carousel .owl-stage-outer {
-    padding: 0 0 15px;
-    direction: ltr;
-
-}
-.parallax-section .owl-nav{
-    text-align: center;
-    font-size: 45px;
-    position: absolute;
-    top: 42%;
-    width: 100%;
-    left: 0;
-}
-
-.parallax-section .owl-prev span:hover{
-    transition: 300ms;
-    box-shadow: 0 0 25px #a5a5a5;
-}
-.parallax-section .owl-prev span{
-    color: #333;
-    display: inline-block;
-    top: -7px;
-    position: relative;
-    width: 50px;
-    height: 50px;
-    background: rgba(255,255,255,1);
-    box-shadow: 0 0 5px #a5a5a5;
-    overflow: hidden;
-    border-radius: 50px;
-    padding-top: 7px;
-    font-size: 34px;
-}
-.parallax-section .owl-next span:hover{
-    transition: 300ms;
-    box-shadow: 0 0 25px #a5a5a5;
-}
-.parallax-section .owl-next span{
-    color: #333;
-    display: inline-block;
-    top: -7px;
-    position: relative;
-    width: 50px;
-    height: 50px;
-    background: rgba(255,255,255,1);
-    box-shadow: 0 0 5px #a5a5a5;
-    overflow: hidden;
-    border-radius: 50px;
-    padding-top: 7px;
-    font-size: 34px;
-}
 
 
 .profile-menu-header i {
@@ -414,9 +367,6 @@ a:focus {
 
     }
 
-    .content_service {
-        font-size: 14px;
-    }
 
     .custom-navbar.top-nav-collapse {
         background: #ffffff;
@@ -443,13 +393,6 @@ a:focus {
         padding-top: 31px;
         padding-right: 30px;
         margin: 0;
-    }
-    .ads {
-        background-color: #46ae1b;
-        border-radius: 50px;
-        text-align: center;
-        color: #fff !important;
-        margin: 0 5px;
     }
 
     .float_li {
