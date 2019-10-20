@@ -167,7 +167,7 @@
 
                                         <a v-else href="#" @click.prevent="openChat()" class="green-button edit">
 
-                                            <i class="fas fa-comment-alt"></i>
+                                            <i class="fa fa-envelope"></i>
                                             ارسال پیام
                                         </a>
 
@@ -175,7 +175,7 @@
 
                                     <div v-else>
                                         <a href="#" @click.prevent="openChat()" class="green-button edit">
-                                            <i class="fas fa-comment-alt"></i>
+                                            <i class="fa fa-envelope"></i>
                                             ارسال پیام
                                         </a>
                                     </div>
@@ -240,7 +240,7 @@
                                            class="green-button edit"
                                            v-else>
 
-                                            <i class="fa fa-pencil-alt"></i>
+                                            <i class="fa fa-envelope"></i>
                                             ارسال پیام
                                         </a>
 

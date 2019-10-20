@@ -58,8 +58,8 @@
                 <section class="main-content">
                     <div class="row">
                         <ProductContents/>
-                        <div class="buttons-wrapper">
-                            <a href="/produt-list" class="green-button blue-button">
+                        <div class="buttons-wrapper  hidden-xs  hidden-sm hidden-md">
+                            <a href="/product-list" class="green-button blue-button">
                                 مشاهده همه محصولات
                             </a>
                         </div>
@@ -72,6 +72,11 @@
 
                 <UserInfo/>
 
+                <div class="buttons-wrapper  hidden-lg">
+                    <a href="/product-list" class="green-button blue-button">
+                        مشاهده همه محصولات
+                    </a>
+                </div>
             </div>
         </main>
     </div>

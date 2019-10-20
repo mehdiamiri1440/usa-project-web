@@ -539,7 +539,7 @@
 
         padding: 20px 15px;
 
-        z-index: 1;
+        z-index: 1020;
     }
 
     li.active > ul > li,
@@ -617,7 +617,7 @@
     .list-time {
 
         direction: rtl;
-        
+
     }
 
     .list-title, .needs, .list-time {
@@ -1028,8 +1028,8 @@
         <!-- =========================
         Intro SECTION
         ============================== -->
-  
-        
+
+
         <section id="intro" class="container-fluid">
             <!-- <div class="particle-network-animation"></div> -->
             <div class="container">
@@ -1139,8 +1139,8 @@
                                 </li>
 
                                 <li class="col-xs-12 button-link-wrapper">
-                                    <a class="product-link green-button fa fa-arrow-left" href="/product-list">
-
+                                    <a class="product-link green-button" href="/product-list">
+                                        <i class=" fa fa-arrow-left"></i>
                                         مشاهده همه محصولات
                                     </a>
                                 </li>
@@ -1178,8 +1178,8 @@
                         <div class="col-xs-12  requests-contents box-content ">
 
                             <div class="row hidden-xs ">
-                                <ul class="list-unstyled">
-                                
+                                <ul v-if="lastRequests" class="list-unstyled">
+
                                      <li v-for="(buyAd, index) in lastRequests" :key="index" class="list-group-item  col-xs-12">
                                         <p class="list-title col-sm-4 col-xs-12">
 
@@ -1208,12 +1208,12 @@
                                         </p>
 
                                         <p class="list-time col-sm-4 col-xs-12" v-text="buyAd.register_date"></p>
-                                       
 
-                                    </li> 
-                                
+
+                                    </li>
+
                                     <li v-if="!isUserLogin || userType == 1"  class="buttons-action list-group-item  col-xs-12">
-                                        
+
                                         <a   class="green-button" href="/dashboard/buyAd-requests">
                                               همه درخواست های خرید
 
@@ -1221,7 +1221,20 @@
 
                                         </a>
 
-                                    </li> 
+                                    </li>
+
+                                </ul>
+
+
+                                <ul v-else class="list-unstyled" >
+
+                                        <li v-for="(item, index) in  3" class="list-group-item  col-xs-12">
+                                            <span class="margin-10 content-full-width placeholder-content"></span>
+                                        </li>
+
+                                        <li  class="list-group-item  col-xs-12 text-center">
+                                            <span class="default-button  margin-10 content-min-width placeholder-content"></span>
+                                        </li>
 
                                 </ul>
                             </div>
@@ -1264,11 +1277,11 @@
 
 
         <section id="mobile-requests-section" class="section-wrapper container-fluid hidden-sm hidden-md hidden-lg">
-         
+
                 <div class="row">
 
                         <div class="title-section col-xs-12">
-                     
+
 
                                 <h3>
 
@@ -1281,19 +1294,19 @@
 
                         <div class="col-xs-12  mobile-requests-contents ">
 
-                                <div class="row">
+                                <div v-if="lastRequests">
                                     <div class="owl-carousel requests-carousel ">
                                         <RequestCarousel  v-for="(buyAd, index) in lastRequests" :key="index"
                                         :name="buyAd.name"
                                         :title = "buyAd.category_name + ' | ' + buyAd.subcategory_name "
                                         :need = "buyAd.requirement_amount"
                                         :date = "buyAd.register_date"
-                                        
+
                                         />
                                     </div>
                                      <div class="text-center  text-rtl" v-if="!isUserLogin || userType == 1">
-                                        
-                                        
+
+
                                         <a   class="mobile-requests-buttons green-button" href="/dashboard/buyAd-requests">
                                               همه درخواست های خرید
 
@@ -1301,12 +1314,40 @@
 
                                         </a>
 
-                           
+
                                      </div>
                                 </div>
 
+                                <div  v-else>
+
+
+
+                                    <article class=' col-xs-6 col-xs-offset-3'>
+                                        <br/>
+                                        <span class="margin-15"></span>
+                                        <span class="content-default-width placeholder-content padding-10-0 margin-10 col-xs-6 col-xs-offset-3"></span>
+
+                                        <span class="content-default-width placeholder-content padding-10-0 margin-10 col-xs-10 col-xs-offset-1"></span>
+
+                                        <span class="content-default-width placeholder-content padding-10-0 margin-10 col-xs-8 col-xs-offset-2"></span>
+
+                                        <div class="text-center">
+
+                                        <span class="default-button placeholder-content"></span>
+
+                                        </div>
+
+
+                                    </article>
+
+                                </div>
+
+
+
+
+
                         </div>
-     
+
 
                     <div class=" container ">
 
@@ -1337,7 +1378,7 @@
 
                     </div>
                 </div>
-      
+
         </section>
         <!-- =========================
         Product SECTION
@@ -1361,7 +1402,8 @@
                         </div>
 
                         <div class="col-xs-12 products-contents ">
-                            <div class="row">
+
+                            <div v-if="lastProducts" class="row">
                                 <div class="owl-carousel">
 
                                     <ProductCarousel
@@ -1375,6 +1417,27 @@
 
                                 </div>
                             </div>
+
+
+                            <div v-else class="row">
+                                <div v-for="(item, index) in 4"  :class="{ 'hidden-xs' : index >= 2}" class="class='col-md-3 col-sm-3  col-xs-6 '">
+
+                                <article class='carousel-item box-content col-xs-12'>
+
+                                    <span class="default-index-product-image placeholder-content col-xs-12"></span>
+
+                                    <span class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"></span>
+
+                                    <span class="content-default-width placeholder-content  col-xs-8 col-xs-offset-2"></span>
+
+                                    <span class="margin-10"></span>
+
+                                </article>
+
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
 
@@ -1389,7 +1452,7 @@
                                 برای استعلام قیمت و خرید محصولات کشاورزی از بهترین فروشندگان دست اول هم اکنون ثبت نام
                                 کنید
                             </p>
-                            
+
                              <a v-if="!isUserLogin " class="green-button" href="/register">
 
                                 ثبت نام
@@ -1515,7 +1578,7 @@
                         <div class="row">
                             <!-- loop for wholesale date -->
                             <h4 v-for="item in footerLinks.wholesaleDate"
-                                class="col-xs-4 col-sm-3 col-md-2  pull-right">
+                                class="col-xs-6 col-sm-4 col-md-2  pull-right">
                                 <a :href="getSubCategoryUrl(item.link)" v-text="'فروش عمده' + ' ' +item.name">
 
                                 </a>
@@ -1527,7 +1590,7 @@
                                  v-for="(category , index) in categoryList">
                                 <h4
                                         v-for="subCategory in category.subcategories"
-                                        class="col-xs-4 col-sm-3 col-md-2  pull-right"
+                                        class="col-xs-6 col-sm-4 col-md-2  pull-right"
                                 >
 
                                     <a
@@ -1543,7 +1606,7 @@
                             <!-- loop for wholesale rice -->
 
                             <h4 v-for="item in footerLinks.wholesaleRise"
-                                class="col-xs-4 col-sm-3 col-md-2  pull-right">
+                                class="col-xs-6 col-sm-4 col-md-2  pull-right">
                                 <a :href="getSubCategoryUrl(item.link)"
                                    v-text="'فروش عمده برنج' + ' ' + item.name">
 
@@ -1839,14 +1902,14 @@
                 });
 
                 axios.post('/get_sample_products', {
-                    
+
                 })
                 .then(function (response) {
                        self.lastProducts = response.data.products;
                 });
 
                 axios.post('/get_sample_buyAds', {
-                    
+
                 })
                 .then(function (response) {
                        self.lastRequests = response.data.buyAds;
