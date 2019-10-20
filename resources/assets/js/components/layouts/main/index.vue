@@ -1,5 +1,70 @@
 <style>
 
+    /* preloader image style*/
+    .lds-ring {
+        display: inline-block;
+
+        position: absolute;
+
+        width: 64px;
+
+        height: 64px;
+
+        left: 50%;
+
+        top: 50%;
+
+        transform: translate(-50%, -50%);
+
+    }
+
+    .lds-ring div {
+        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        width: 51px;
+        height: 51px;
+        margin: 6px;
+        border: 5px solid #28a745;
+        border-radius: 50%;
+        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: #28a745 transparent transparent transparent;
+    }
+
+    .lds-ring-alt {
+        display: block;
+        margin-top: 50px;
+        direction: rtl;
+        text-align: center;
+    }
+
+    .lds-ring div:nth-child(1) {
+        animation-delay: -0.45s;
+    }
+
+    .lds-ring div:nth-child(2) {
+        animation-delay: -0.3s;
+    }
+
+    .lds-ring div:nth-child(3) {
+        animation-delay: -0.15s;
+    }
+
+    @keyframes lds-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .carousel-img {
+        background: #ececec;
+    }
+
+    /*preloader image style*/
+
     body {
         background: #f9f9f9;
     }
@@ -1061,7 +1126,7 @@
 
 
                             <h2 class="intro-site-title" data-wow-delay="1.2s">
-                                ارتباط مستقیم با خریداران و فروشندگان دست اول محصولات کشاورزی
+                                ارتباط مستقیم با خریداران و فروشندگان عمده محصولات کشاورزی
 
                             </h2>
 
@@ -1246,7 +1311,36 @@
                     <div class=" col-xs-12 col-md-3 pull-right ">
 
 
-                        <div class="title-box box-content">
+                        <div v-if="isUserLogin && userType == 0" class="title-box box-content">
+                            <h3>
+
+                                از فروشندگان عمده قیمت بگیرید و با یک درخواست چندین قیمت دریافت کنید
+
+                            </h3>
+
+                            <a class="green-button" href="/dashboard/register-request">
+
+                                ثبت درخواست خرید
+
+                            </a>
+
+                        </div>
+
+                        <div v-else-if="isUserLogin && userType == 1" class="title-box box-content">
+                            <h3>
+
+                                درخواست های خریداران عمده را ببینید و بدون واسطه با آن ها ارتباط برقرار کنید
+
+                            </h3>
+
+                            <a class="green-button" href="/dashboard/buyAd-requests">
+
+                                لیست درخواست های خرید
+
+                            </a>
+                        </div>
+
+                        <div v-else class="title-box box-content">
                             <h3>
 
                                 ثبت نام فروشندگان
@@ -1261,11 +1355,6 @@
                             <a v-if="!isUserLogin " class="green-button" href="/register">
 
                                 ثبت نام
-
-                            </a>
-                            <a v-else-if="isUserLogin && userType == 1" class="green-button" href="/dashboard/status">
-
-                                داشبورد
 
                             </a>
                         </div>
@@ -1439,29 +1528,54 @@
                     </div>
 
                     <div class=" col-xs-12 col-md-3 pull-right ">
-                        <div class="title-box box-content">
+
+                        <div v-if="isUserLogin && userType == 0" class="title-box box-content">
+                            <h3>
+
+                                محصولات فروشندگان را ببینید
+                                و بدون واسطه با آن ها ارتباط برقرار کنید
+
+                            </h3>
+
+                            <a class="green-button" href="/product-list/">
+
+                                لیست محصولات
+
+                            </a>
+
+                        </div>
+
+                        <div v-else-if="isUserLogin && userType == 1" class="title-box box-content">
+                            <h3>
+
+                                با ثبت و معرفی محصول خود، بدون واسطه با خریداران عمده ارتباط برقرار کنید
+
+                            </h3>
+
+                            <a class="green-button" href="/dashboard/register-product">
+
+                                ثبت محصول
+
+                            </a>
+
+                        </div>
+
+                        <div v-else class="title-box box-content">
                             <h3>
 
                                 ثبت نام خریداران
 
                             </h3>
                             <p>
-                                برای استعلام قیمت و خرید محصولات کشاورزی از بهترین فروشندگان دست اول هم اکنون ثبت نام
+                                برای استعلام قیمت و خرید محصولات کشاورزی از بهترین فروشندگان عمده هم اکنون ثبت نام
                                 کنید
                             </p>
 
-                            <a v-if="!isUserLogin " class="green-button" href="/register">
+                            <a class="green-button" href="/register">
 
                                 ثبت نام
 
                             </a>
-
-                            <a v-else-if="isUserLogin && userType == 0" class="green-button" href="/dashboard/profile">
-
-                                داشبورد
-
-                            </a>
-
 
                         </div>
 
@@ -1477,7 +1591,7 @@
                 <div class="row">
 
                     <h3 class="col-xs-12">
-                        ارتباط مستقیم با خریداران و فروشندگان دست اول محصولات کشاورزی
+                        ارتباط مستقیم با خریداران و فروشندگان عمده محصولات کشاورزی
                     </h3>
 
                     <div class="service-boxs-wrapper col-xs-12">
@@ -1494,13 +1608,17 @@
                                         <h4>
                                             اینکوباک چیست؟
                                         </h4>
-                                        <ul>
-                                            <li>
-                                                اینکوباک بازار خرید و فروش عمده محصولات کشاورزی است که خریداران را به
-                                                فروشندگان دست اول متصل کرده و کاربران بدون واسطه می توانند با یکدیگر
-                                                ارتباط برقرار کنند
-                                            </li>
-                                        </ul>
+                                        <p>
+                                            اینکوباک بازار خرید و فروش عمده محصولات کشاورزی
+                                            <br/>
+                                            است  که خریداران را به
+                                            فروشندگان عمده متصل کرده <br/>
+                                            و خریداران و فروشندگان بدون واسطه می توانند با یکدیگر
+
+                                            ارتباط برقرار کنند
+
+                                        </p>
+
                                     </a>
                                 </article>
                             </div>
@@ -1516,17 +1634,14 @@
                                             خدمات فروشندگان
                                         </h4>
 
-                                        <ul>
-                                            <li>
-                                                ساخت پروفایل حرفه ای جهت فروش محصولات
-                                            </li>
-                                            <li>
-                                                دسترسی به خریداران واقعی جهت فروش
-                                            </li>
-                                            <li>
-                                                بهره مندی از مشاوره تخصصی کارشناسان اینکوباک
-                                            </li>
-                                        </ul>
+
+                                        <p>
+                                            معرفی محصولات به خریداران عمده <br/>
+                                            دسترسی به درخواست های خرید روزانه <br/>
+                                            گسترش شبکه ی تجاری و مشتریان <br/>
+                                            فروش بدون واسطه و مقرون به صرفه <br/>
+                                        </p>
+
 
                                     </a>
                                 </article>
@@ -1543,17 +1658,12 @@
                                             خدمات خریداران
                                         </h4>
 
-                                        <ul>
-                                            <li>
-                                                استعلام قیمت از تامین کنندگان و کشاورزان
-                                            </li>
-                                            <li>
-                                                استفاده از خدمات نظارت و بازرسی محصـول
-                                            </li>
-                                            <li>
-                                                دسترسی گسترده به کشاورزان و تولید کنندگان
-                                            </li>
-                                        </ul>
+                                        <p>
+                                            استعلام قیمت از فروشندگان و کشاورزان <br/>
+                                            دسترسی بدون واسطه به فروشندگان متنوع <br/>
+                                            صرفه جویی در زمان و هزینه خرید محصول <br/>
+                                            گسترش شبکه تامین کنندگان <br/>
+                                        </p>
 
                                     </a>
                                 </article>
@@ -1632,56 +1742,7 @@
     var visible = false;
 
 
-    var ProductCarousel = {
-
-        props: ['img', 'title', 'link', 'stock'],
-        template: "<article class='carousel-item box-content'>"
-            +
-            "<div class='carousel-img' style='height: 135px;overflow: hidden;position: relative;'><a :href='link' ><img style='position: absolute;top: 50%;left: 50%;transition: 300ms;transform: translate(-50%, -50%);' :src='img' class='img-responsive'></a></div>"
-            + "<a style='font-size: 16px;direction: rtl;font-weight: bold;color: #4b4b4b;' :href='link' v-if='title.length>=20'><h4 style='text-overflow: ellipsis;overflow: hidden;white-space: nowrap;padding: 0 10px;margin-top: 10px;margin-bottom: 9px;'>{{title.substring(0,15) + ' ...'}}</h4></a>"
-            + "<a style='font-size: 16px;direction: rtl;font-weight: bold;color: #4b4b4b;' :href='link'  v-else><h4 style='text-overflow: ellipsis;overflow: hidden;white-space: nowrap;padding: 0 10px;margin-top: 10px;margin-bottom: 9px;'>{{title }}</h4></a>"
-            + "<a style='font-size: 14px;direction: rtl;font-weight: bold;color: #00c569;margin-bottom: 5px;display:inline-block' :href='link' class='stock' >"
-            + "<span>  موجودی  </span>"
-            + "<span v-text='stock'></span>"
-            + "<span> کیلوگرم </span>"
-            + "</a>"
-            + "</article>",
-        mounted: function () {
-            $("#product-section .owl-carousel").owlCarousel({
-                autoplay: true,
-                autoplayTimeout: 4000,
-                loop: true,
-                nav: true,
-                navText: ['<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>'],
-                items: 6,
-                mouseDrag: true,
-                margin: 30,
-                dots: false,
-                stagePadding: 15,
-                responsive: {
-                    0: {
-                        items: 1,
-                        stagePadding: 15,
-                        navText: false,
-                        dots: true
-                    },
-                    450: {
-                        items: 2,
-                        stagePadding: 15,
-                        navText: false,
-                        dots: true
-                    },
-                    767: {
-                        items: 3,
-                        stagePadding: 15
-                    },
-                    992: {
-                        items: 4,
-                    }
-                }
-            });
-        }
-    };
+    import ProductCarousel from './landing_page_components/product-list-carousel'
 
 
     var RequestCarousel = {
