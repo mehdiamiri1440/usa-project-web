@@ -58,7 +58,7 @@
 
     }
 
-    .owl-nav > button, .owl-nav > button span{
+    .owl-nav > button, .owl-nav > button span {
 
         transition: 200ms;
 
@@ -148,11 +148,12 @@
 
     }
 
-    i{
+    i {
         position: relative;
         top: 1px;
         padding: 0 2px;
     }
+
     .box-content {
         overflow: hidden;
         background: #fff;
@@ -494,7 +495,7 @@
 
         left: calc(50% - 8px);
 
-        z-index: 2;
+        z-index: 1001;
 
     }
 
@@ -539,7 +540,7 @@
 
         padding: 20px 15px;
 
-        z-index: 1020;
+        z-index: 1000;
     }
 
     li.active > ul > li,
@@ -585,13 +586,13 @@
         padding: 0 15px;
     }
 
-    .requests-contents p{
+    .requests-contents p {
 
         font-size: 13px;
 
     }
 
-    .requests-contents .buttons-action{
+    .requests-contents .buttons-action {
 
         text-align: center;
 
@@ -653,8 +654,6 @@
         font-weight: bold;
 
     }
-
-
 
     .main-content > ul {
         border-radius: 3px;
@@ -933,17 +932,16 @@
 
     }
 
-
     /*mobile responsive styles*/
 
-    .mobile-requests-contents{
+    .mobile-requests-contents {
         background: #fff;
         border: 1px solid #ddd;
         margin-bottom: 30px;
         padding: 5px 0 20px;
     }
 
-    .mobile-requests-buttons{
+    .mobile-requests-buttons {
 
         font-size: 14px;
         width: initial;
@@ -1114,17 +1112,17 @@
                         <li
                                 v-if="categoryList.length"
                                 v-for="(category , index) in categoryList"
-                                @click.prevent="dropDownSecondaryMenu($event, index)"
+
                                 :id="'menu' + index"
                                 class="nav-item"
                         >
                             <h2>
-                                <a href="#" class="category-item">
+                                <a href="#" @click.prevent="dropDownSecondaryMenu($event, index)" class="category-item">
                                     <i class="fa fa-angle-down "></i>
                                     {{category.category_name}}
                                 </a>
                             </h2>
-                            <ul class="sub-categories-wrapper list-inline col-xs-12">
+                            <ul class="sub-categories-wrapper list-inline col-xs-12" :data-index="index">
 
                                 <li v-for="subCategory in category.subcategories"
                                     class="col-xs-4 col-sm-3 col-md-4 pull-right">
@@ -1180,16 +1178,17 @@
                             <div class="row hidden-xs ">
                                 <ul v-if="lastRequests" class="list-unstyled">
 
-                                     <li v-for="(buyAd, index) in lastRequests" :key="index" class="list-group-item  col-xs-12">
+                                    <li v-for="(buyAd, index) in lastRequests" :key="index"
+                                        class="list-group-item  col-xs-12">
                                         <p class="list-title col-sm-4 col-xs-12">
 
-                                            <span v-text = "buyAd.category_name"></span>
+                                            <span v-text="buyAd.category_name"></span>
 
                                             <span> | </span>
 
-                                            <span v-text = "buyAd.subcategory_name"></span>
+                                            <span v-text="buyAd.subcategory_name"></span>
 
-                                            <span v-text = "'| ' + buyAd.name"></span>
+                                            <span v-text="'| ' + buyAd.name"></span>
 
                                         </p>
 
@@ -1212,12 +1211,13 @@
 
                                     </li>
 
-                                    <li v-if="!isUserLogin || userType == 1"  class="buttons-action list-group-item  col-xs-12">
+                                    <li v-if="!isUserLogin || userType == 1"
+                                        class="buttons-action list-group-item  col-xs-12">
 
-                                        <a   class="green-button" href="/dashboard/buyAd-requests">
-                                              همه درخواست های خرید
+                                        <a class="green-button" href="/dashboard/buyAd-requests">
+                                            همه درخواست های خرید
 
-                                              <i class="fa fa-arrow-left"></i>
+                                            <i class="fa fa-arrow-left"></i>
 
                                         </a>
 
@@ -1226,15 +1226,15 @@
                                 </ul>
 
 
-                                <ul v-else class="list-unstyled" >
+                                <ul v-else class="list-unstyled">
 
-                                        <li v-for="(item, index) in  3" class="list-group-item  col-xs-12">
-                                            <span class="margin-10 content-full-width placeholder-content"></span>
-                                        </li>
+                                    <li v-for="(item, index) in  3" class="list-group-item  col-xs-12">
+                                        <span class="margin-10 content-full-width placeholder-content"></span>
+                                    </li>
 
-                                        <li  class="list-group-item  col-xs-12 text-center">
-                                            <span class="default-button  margin-10 content-min-width placeholder-content"></span>
-                                        </li>
+                                    <li class="list-group-item  col-xs-12 text-center">
+                                        <span class="default-button  margin-10 content-min-width placeholder-content"></span>
+                                    </li>
 
                                 </ul>
                             </div>
@@ -1278,106 +1278,102 @@
 
         <section id="mobile-requests-section" class="section-wrapper container-fluid hidden-sm hidden-md hidden-lg">
 
-                <div class="row">
+            <div class="row">
 
-                        <div class="title-section col-xs-12">
+                <div class="title-section col-xs-12">
 
 
-                                <h3>
+                    <h3>
 
-                                    آخرین درخواست های خرید
+                        آخرین درخواست های خرید
 
-                                </h3>
-                                <hr/>
+                    </h3>
+                    <hr/>
 
+                </div>
+
+                <div class="col-xs-12  mobile-requests-contents ">
+
+                    <div v-if="lastRequests">
+                        <div class="owl-carousel requests-carousel ">
+                            <RequestCarousel v-for="(buyAd, index) in lastRequests" :key="index"
+                                             :name="buyAd.name"
+                                             :title="buyAd.category_name + ' | ' + buyAd.subcategory_name "
+                                             :need="buyAd.requirement_amount"
+                                             :date="buyAd.register_date"
+
+                            />
                         </div>
-
-                        <div class="col-xs-12  mobile-requests-contents ">
-
-                                <div v-if="lastRequests">
-                                    <div class="owl-carousel requests-carousel ">
-                                        <RequestCarousel  v-for="(buyAd, index) in lastRequests" :key="index"
-                                        :name="buyAd.name"
-                                        :title = "buyAd.category_name + ' | ' + buyAd.subcategory_name "
-                                        :need = "buyAd.requirement_amount"
-                                        :date = "buyAd.register_date"
-
-                                        />
-                                    </div>
-                                     <div class="text-center  text-rtl" v-if="!isUserLogin || userType == 1">
+                        <div class="text-center  text-rtl" v-if="!isUserLogin || userType == 1">
 
 
-                                        <a   class="mobile-requests-buttons green-button" href="/dashboard/buyAd-requests">
-                                              همه درخواست های خرید
+                            <a class="mobile-requests-buttons green-button" href="/dashboard/buyAd-requests">
+                                همه درخواست های خرید
 
-                                              <i class="fa fa-arrow-left"></i>
-
-                                        </a>
-
-
-                                     </div>
-                                </div>
-
-                                <div  v-else>
-
-
-
-                                    <article class=' col-xs-6 col-xs-offset-3'>
-                                        <br/>
-                                        <span class="margin-15"></span>
-                                        <span class="content-default-width placeholder-content padding-10-0 margin-10 col-xs-6 col-xs-offset-3"></span>
-
-                                        <span class="content-default-width placeholder-content padding-10-0 margin-10 col-xs-10 col-xs-offset-1"></span>
-
-                                        <span class="content-default-width placeholder-content padding-10-0 margin-10 col-xs-8 col-xs-offset-2"></span>
-
-                                        <div class="text-center">
-
-                                        <span class="default-button placeholder-content"></span>
-
-                                        </div>
-
-
-                                    </article>
-
-                                </div>
-
-
-
-
-
-                        </div>
-
-
-                    <div class=" container ">
-
-
-                        <div class="title-box box-content">
-                            <h3>
-
-                                ثبت نام فروشندگان
-
-                            </h3>
-                            <p>
-
-
-                                برای فروش بدون واسطه محصولات کشاورزی خود به خریداران مستقیم و صادرکنندگان هم اکنون ثبت
-                                نام کنید
-                            </p>
-                            <a v-if="!isUserLogin " class="green-button" href="/register">
-
-                                ثبت نام
+                                <i class="fa fa-arrow-left"></i>
 
                             </a>
-                            <a v-else-if="isUserLogin && userType == 1" class="green-button" href="/dashboard/status">
 
-                                داشبورد
 
-                            </a>
                         </div>
+                    </div>
+
+                    <div v-else>
+
+
+                        <article class=' col-xs-6 col-xs-offset-3'>
+                            <br/>
+                            <span class="margin-15"></span>
+                            <span class="content-default-width placeholder-content padding-10-0 margin-10 col-xs-6 col-xs-offset-3"></span>
+
+                            <span class="content-default-width placeholder-content padding-10-0 margin-10 col-xs-10 col-xs-offset-1"></span>
+
+                            <span class="content-default-width placeholder-content padding-10-0 margin-10 col-xs-8 col-xs-offset-2"></span>
+
+                            <div class="text-center">
+
+                                <span class="default-button placeholder-content"></span>
+
+                            </div>
+
+
+                        </article>
 
                     </div>
+
+
                 </div>
+
+
+                <div class=" container ">
+
+
+                    <div class="title-box box-content">
+                        <h3>
+
+                            ثبت نام فروشندگان
+
+                        </h3>
+                        <p>
+
+
+                            برای فروش بدون واسطه محصولات کشاورزی خود به خریداران مستقیم و صادرکنندگان هم اکنون ثبت
+                            نام کنید
+                        </p>
+                        <a v-if="!isUserLogin " class="green-button" href="/register">
+
+                            ثبت نام
+
+                        </a>
+                        <a v-else-if="isUserLogin && userType == 1" class="green-button" href="/dashboard/status">
+
+                            داشبورد
+
+                        </a>
+                    </div>
+
+                </div>
+            </div>
 
         </section>
         <!-- =========================
@@ -1420,19 +1416,20 @@
 
 
                             <div v-else class="row">
-                                <div v-for="(item, index) in 4"  :class="{ 'hidden-xs' : index >= 2}" class="class='col-md-3 col-sm-3  col-xs-6 '">
+                                <div v-for="(item, index) in 4" :class="{ 'hidden-xs' : index >= 2}"
+                                     class="class='col-md-3 col-sm-3  col-xs-6 '">
 
-                                <article class='carousel-item box-content col-xs-12'>
+                                    <article class='carousel-item box-content col-xs-12'>
 
-                                    <span class="default-index-product-image placeholder-content col-xs-12"></span>
+                                        <span class="default-index-product-image placeholder-content col-xs-12"></span>
 
-                                    <span class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"></span>
+                                        <span class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"></span>
 
-                                    <span class="content-default-width placeholder-content  col-xs-8 col-xs-offset-2"></span>
+                                        <span class="content-default-width placeholder-content  col-xs-8 col-xs-offset-2"></span>
 
-                                    <span class="margin-10"></span>
+                                        <span class="margin-10"></span>
 
-                                </article>
+                                    </article>
 
                                 </div>
 
@@ -1453,7 +1450,7 @@
                                 کنید
                             </p>
 
-                             <a v-if="!isUserLogin " class="green-button" href="/register">
+                            <a v-if="!isUserLogin " class="green-button" href="/register">
 
                                 ثبت نام
 
@@ -1497,11 +1494,13 @@
                                         <h4>
                                             اینکوباک چیست؟
                                         </h4>
-                                       <ul>
-                                           <li>
-                                               اینکوباک بازار خرید و فروش عمده محصولات کشاورزی است که خریداران را به فروشندگان دست اول متصل کرده و کاربران بدون واسطه می توانند با یکدیگر ارتباط برقرار کنند
-                                           </li>
-                                       </ul>
+                                        <ul>
+                                            <li>
+                                                اینکوباک بازار خرید و فروش عمده محصولات کشاورزی است که خریداران را به
+                                                فروشندگان دست اول متصل کرده و کاربران بدون واسطه می توانند با یکدیگر
+                                                ارتباط برقرار کنند
+                                            </li>
+                                        </ul>
                                     </a>
                                 </article>
                             </div>
@@ -1897,23 +1896,19 @@
                 axios.post('/get_category_list', {
                     cascade_list: true
                 })
-                .then(function (response) {
-                       self.categoryList = response.data.categories;
-                });
+                    .then(function (response) {
+                        self.categoryList = response.data.categories;
+                    });
 
-                axios.post('/get_sample_products', {
+                axios.post('/get_sample_products', {})
+                    .then(function (response) {
+                        self.lastProducts = response.data.products;
+                    });
 
-                })
-                .then(function (response) {
-                       self.lastProducts = response.data.products;
-                });
-
-                axios.post('/get_sample_buyAds', {
-
-                })
-                .then(function (response) {
-                       self.lastRequests = response.data.buyAds;
-                });
+                axios.post('/get_sample_buyAds', {})
+                    .then(function (response) {
+                        self.lastRequests = response.data.buyAds;
+                    });
 
             },
             search: function () {
@@ -1943,48 +1938,36 @@
             },
             dropDownSecondaryMenu: function (event, index) {
 
-
-                if ($(event.target).attr('class') == 'col-xs-12 button-link-wrapper' ) {
-                    return
-                } else {
-                    this.dropDownClose(index);
-                }
-
-                if ($(event.target).attr('href')) {
-                    window.location.href = $(event.target).attr('href');
-                }
-
-                function collapseDropDown() {
-
-                    document.getElementById('menu' + index)
-                        .classList.toggle('active')
-
-                }
-
-                setTimeout(collapseDropDown, 80);
-            },
-            dropDownClose: function (index) {
-                var indexValue = index;
-                window.onclick = function (event) {
+                function collapseDropDown(eventItem) {
                     var dropdowns = $('.menu-wrapper > li');
-                    var dropdownLinks = $('.menu-wrapper > li > a');
-                    var dropdownActive = $('.menu-wrapper > li.active');
+                    var targetClass = $(eventItem.target).attr('class');
+                    var activeItemIndex = $('.active .sub-categories-wrapper ').data('index');
 
-                    dropdowns.each(function (index) {
-                        if (index == indexValue && $(event.target).attr('class') == dropdowns.find('a.category-item').attr('class')) {
 
-                            return
-
-                        } else {
-
+                    if (index != activeItemIndex && targetClass == 'category-item' || index != activeItemIndex && targetClass == 'fa fa-angle-down ') {
+                        dropdowns.each(function (index) {
                             $(this).removeClass('active')
+                        });
+                        document.getElementById('menu' + index)
+                            .classList.toggle('active')
+                    } else {
 
-                        }
-
-                    });
+                        dropdowns.each(function (index) {
+                            $(this).removeClass('active')
+                        });
+                    }
 
                 }
+
+
+                window.onclick = function (event) {
+                    var eventItem = event;
+                    setTimeout(collapseDropDown(eventItem), 80);
+                };
+
+                // setTimeout(collapseDropDown, 80);
             },
+
             getProductUrl: function (product) {
 
                 return '/product-view/خرید-عمده-'
@@ -1999,6 +1982,7 @@
         mounted: function () {
             this.init();
             this.isLoading = true;
+
         },
         updated() {
             this.$nextTick(this.stopLoader());
