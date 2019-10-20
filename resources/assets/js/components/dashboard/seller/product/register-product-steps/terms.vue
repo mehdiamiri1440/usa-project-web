@@ -21,7 +21,7 @@ textarea {
   cursor: default;
   margin: 8px 0;
 }
-.submit-button.default-button {
+.submit-button.default-back-button {
   background: #fff;
   color: #777;
   border: 1px solid #777;
@@ -251,7 +251,7 @@ textarea .small-label {
       >ثبت نهایی</button>
 
       <button
-        class="submit-button default-button pull-right"
+        class="submit-button default-back-button pull-right"
         @click.prevent="$parent.currentStep--"
       >
         <i class="fa fa-arrow-right"></i>

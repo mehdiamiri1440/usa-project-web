@@ -143,6 +143,8 @@
 
 		border-bottom: 1px solid #F1F1F1;
 
+		width: 100%;
+
 		padding: 15px 0;
 
 	}
@@ -164,7 +166,8 @@
 
 	.default-product-contents-wrapper{
 	  padding: 15px;
-	}
+	}	
+
 
 	@media screen and (max-width: 992px){
 		.images-wrapper,.main-contents-wrapper{

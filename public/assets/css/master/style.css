@@ -122,6 +122,10 @@ a:focus {
     left: 0;
     background: rgba(25,102,142,0.4);
     background: linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
+    background: -webkit-linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
+    background: -moz-linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
+    background: -o-linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
+    background: -ms-linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
     z-index: 0;
 }
 #intro > div{

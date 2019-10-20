@@ -596,7 +596,7 @@
 
 
         <main id="main" class="container ">
-                <div class="row">
+               
 
                     <div class="col-xs-12 col-lg-9">
                     <div class="row">
@@ -785,7 +785,6 @@
 
                     </aside>
 
-                </div>
 
         </main>
 
@@ -902,7 +901,7 @@
 
             },
             feed() {
-
+            
                 var self = this;
                 if (this.searchText === '' && this.provinceId === '' && this.categoryId === '' && this.continueToLoadProducts) {
                     this.loadMoreActive = true;

@@ -1,5 +1,70 @@
 <style>
 
+    /* preloader image style*/
+    .lds-ring {
+        display: inline-block;
+
+        position: absolute;
+
+        width: 64px;
+
+        height: 64px;
+
+        left: 50%;
+
+        top: 50%;
+
+        transform: translate(-50%, -50%);
+
+    }
+
+    .lds-ring div {
+        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        width: 51px;
+        height: 51px;
+        margin: 6px;
+        border: 5px solid #28a745;
+        border-radius: 50%;
+        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: #28a745 transparent transparent transparent;
+    }
+
+    .lds-ring-alt {
+        display: block;
+        margin-top: 50px;
+        direction: rtl;
+        text-align: center;
+    }
+
+    .lds-ring div:nth-child(1) {
+        animation-delay: -0.45s;
+    }
+
+    .lds-ring div:nth-child(2) {
+        animation-delay: -0.3s;
+    }
+
+    .lds-ring div:nth-child(3) {
+        animation-delay: -0.15s;
+    }
+
+    @keyframes lds-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .carousel-img {
+        background: #ececec;
+    }
+
+    /*preloader image style*/
+
     body {
         background: #f9f9f9;
     }
@@ -58,7 +123,7 @@
 
     }
 
-    .owl-nav > button, .owl-nav > button span{
+    .owl-nav > button, .owl-nav > button span {
 
         transition: 200ms;
 
@@ -84,15 +149,11 @@
 
     }
 
-    .request-carousel-content {
-        padding: 5px 15px 20px;
-    }
-
     .request-carousel-content p {
 
         text-align: center;
         font-weight: bold;
-        margin-top: 10px;
+        margin-top: 15px;
         direction: rtl;
     }
 
@@ -152,11 +213,12 @@
 
     }
 
-    i{
+    i {
         position: relative;
         top: 1px;
         padding: 0 2px;
     }
+
     .box-content {
         overflow: hidden;
         background: #fff;
@@ -498,7 +560,7 @@
 
         left: calc(50% - 8px);
 
-        z-index: 2;
+        z-index: 1001;
 
     }
 
@@ -543,7 +605,7 @@
 
         padding: 20px 15px;
 
-        z-index: 1;
+        z-index: 1000;
     }
 
     li.active > ul > li,
@@ -589,6 +651,18 @@
         padding: 0 15px;
     }
 
+    .requests-contents p {
+
+        font-size: 13px;
+
+    }
+
+    .requests-contents .buttons-action {
+
+        text-align: center;
+
+    }
+
     .wrapper_no_pro {
         text-align: center;
         font-size: 23px;
@@ -604,6 +678,12 @@
     .text_no_pic {
         margin: 30px auto;
         color: #bdbdbd;
+    }
+
+    .list-time {
+
+        direction: rtl;
+
     }
 
     .list-title, .needs, .list-time {
@@ -639,8 +719,6 @@
         font-weight: bold;
 
     }
-
-
 
     .main-content > ul {
         border-radius: 3px;
@@ -919,6 +997,24 @@
 
     }
 
+    /*mobile responsive styles*/
+
+    .mobile-requests-contents {
+        background: #fff;
+        border: 1px solid #ddd;
+        margin-bottom: 30px;
+        padding: 5px 0 20px;
+    }
+
+    .mobile-requests-buttons {
+
+        font-size: 14px;
+        width: initial;
+        font-weight: bold;
+        margin: 25px 0 0;
+
+    }
+
     @media screen and (max-width: 767px) {
 
         .search-input {
@@ -996,6 +1092,7 @@
         Intro SECTION
         ============================== -->
 
+
         <section id="intro" class="container-fluid">
             <!-- <div class="particle-network-animation"></div> -->
             <div class="container">
@@ -1029,7 +1126,7 @@
 
 
                             <h2 class="intro-site-title" data-wow-delay="1.2s">
-                                ارتباط مستقیم با خریداران و فروشندگان دست اول محصولات کشاورزی
+                                ارتباط مستقیم با خریداران و فروشندگان عمده محصولات کشاورزی
 
                             </h2>
 
@@ -1080,17 +1177,17 @@
                         <li
                                 v-if="categoryList.length"
                                 v-for="(category , index) in categoryList"
-                                @click.prevent="dropDownSecondaryMenu($event, index)"
+
                                 :id="'menu' + index"
                                 class="nav-item"
                         >
                             <h2>
-                                <a href="#" class="category-item">
+                                <a href="#" @click.prevent="dropDownSecondaryMenu($event, index)" class="category-item">
                                     <i class="fa fa-angle-down "></i>
                                     {{category.category_name}}
                                 </a>
                             </h2>
-                            <ul class="sub-categories-wrapper list-inline col-xs-12">
+                            <ul class="sub-categories-wrapper list-inline col-xs-12" :data-index="index">
 
                                 <li v-for="subCategory in category.subcategories"
                                     class="col-xs-4 col-sm-3 col-md-4 pull-right">
@@ -1105,8 +1202,8 @@
                                 </li>
 
                                 <li class="col-xs-12 button-link-wrapper">
-                                    <a class="product-link green-button fa fa-arrow-left" href="/product-list">
-
+                                    <a class="product-link green-button" href="/product-list">
+                                        <i class=" fa fa-arrow-left"></i>
                                         مشاهده همه محصولات
                                     </a>
                                 </li>
@@ -1122,7 +1219,7 @@
         Request SECTION
         ============================== -->
 
-        <section id="requests-section" class="section-wrapper container-fluid">
+        <section id="requests-section" class="section-wrapper container-fluid hidden-xs">
             <div class=" container">
                 <div class="row">
 
@@ -1142,76 +1239,108 @@
                         </div>
 
                         <div class="col-xs-12  requests-contents box-content ">
+
                             <div class="row hidden-xs ">
-                                <ul class="list-unstyled">
-                                    <li v-for="buyAd in 4" class="list-group-item  col-xs-12">
-                                        <p class="list-title col-sm-3 col-xs-12">
-                                                <span>
+                                <ul v-if="lastRequests" class="list-unstyled">
 
-                                                    میوه
+                                    <li v-for="(buyAd, index) in lastRequests" :key="index"
+                                        class="list-group-item  col-xs-12">
+                                        <p class="list-title col-sm-4 col-xs-12">
 
-                                                </span>
+                                            <span v-text="buyAd.category_name"></span>
 
                                             <span> | </span>
 
-                                            <span>
-                                                    خرما
-                                                </span>
+                                            <span v-text="buyAd.subcategory_name"></span>
 
-                                            <span>
-
-                                                    | پیارم
-                                                </span>
+                                            <span v-text="'| ' + buyAd.name"></span>
 
                                         </p>
 
                                         <p class="needs col-sm-4 col-xs-12">
-                                                <span class="static-content">
-                                                    میزان نیازمندی :
-                                                </span>
 
-                                            <span>
-                                                    3000
-                                                </span>
+                                            <span class="static-content">
+                                                میزان نیازمندی :
+                                            </span>
+
+                                            <span v-text="buyAd.requirement_amount"></span>
 
                                             <span class="static-content">
                                                     کیلوگرم
-                                                </span>
+                                            </span>
 
                                         </p>
 
-                                        <p class="list-time col-sm-2 col-xs-12">
-                                            ۳۰ شهریور , ۱۳۹۸
-                                        </p>
-                                        <div class="col-sm-3 col-xs-12">
-                                            <a class="green-button" href="">
-                                                <i class="fas fa-envelope"></i>
-                                                پیام به خریدار
-                                            </a>
-                                        </div>
+                                        <p class="list-time col-sm-4 col-xs-12" v-text="buyAd.register_date"></p>
+
 
                                     </li>
+
+                                    <li v-if="!isUserLogin || userType == 1"
+                                        class="buttons-action list-group-item  col-xs-12">
+
+                                        <a class="green-button" href="/dashboard/buyAd-requests">
+                                            همه درخواست های خرید
+
+                                            <i class="fa fa-arrow-left"></i>
+
+                                        </a>
+
+                                    </li>
+
+                                </ul>
+
+
+                                <ul v-else class="list-unstyled">
+
+                                    <li v-for="(item, index) in  3" class="list-group-item  col-xs-12">
+                                        <span class="margin-10 content-full-width placeholder-content"></span>
+                                    </li>
+
+                                    <li class="list-group-item  col-xs-12 text-center">
+                                        <span class="default-button  margin-10 content-min-width placeholder-content"></span>
+                                    </li>
+
                                 </ul>
                             </div>
-                        </div>
-
-                        <div style="padding:0" class="requests-carousel hidden-sm hidden-md hidden-lg  col-xs-12 ">
-
-                            <div class="row">
-                                <div class="owl-carousel">
-                                    <RequestCarousel v-for="(item, index) in 5" :key="index"/>
-                                </div>
-                            </div>
 
                         </div>
-
 
                     </div>
 
                     <div class=" col-xs-12 col-md-3 pull-right ">
 
 
-                        <div class="title-box box-content">
+                        <div v-if="isUserLogin && userType == 0" class="title-box box-content">
+                            <h3>
+
+                                از فروشندگان عمده قیمت بگیرید و با یک درخواست چندین قیمت دریافت کنید
+
+                            </h3>
+
+                            <a class="green-button" href="/dashboard/register-request">
+
+                                ثبت درخواست خرید
+
+                            </a>
+
+                        </div>
+
+                        <div v-else-if="isUserLogin && userType == 1" class="title-box box-content">
+                            <h3>
+
+                                درخواست های خریداران عمده را ببینید و بدون واسطه با آن ها ارتباط برقرار کنید
+
+                            </h3>
+
+                            <a class="green-button" href="/dashboard/buyAd-requests">
+
+                                لیست درخواست های خرید
+
+                            </a>
+                        </div>
+
+                        <div v-else class="title-box box-content">
                             <h3>
 
                                 ثبت نام فروشندگان
@@ -1223,7 +1352,7 @@
                                 برای فروش بدون واسطه محصولات کشاورزی خود به خریداران مستقیم و صادرکنندگان هم اکنون ثبت
                                 نام کنید
                             </p>
-                            <a class="green-button" href="/register">
+                            <a v-if="!isUserLogin " class="green-button" href="/register">
 
                                 ثبت نام
 
@@ -1235,6 +1364,107 @@
             </div>
         </section>
 
+
+        <section id="mobile-requests-section" class="section-wrapper container-fluid hidden-sm hidden-md hidden-lg">
+
+            <div class="row">
+
+                <div class="title-section col-xs-12">
+
+
+                    <h3>
+
+                        آخرین درخواست های خرید
+
+                    </h3>
+                    <hr/>
+
+                </div>
+
+                <div class="col-xs-12  mobile-requests-contents ">
+
+                    <div v-if="lastRequests">
+                        <div class="owl-carousel requests-carousel ">
+                            <RequestCarousel v-for="(buyAd, index) in lastRequests" :key="index"
+                                             :name="buyAd.name"
+                                             :title="buyAd.category_name + ' | ' + buyAd.subcategory_name "
+                                             :need="buyAd.requirement_amount"
+                                             :date="buyAd.register_date"
+
+                            />
+                        </div>
+                        <div class="text-center  text-rtl" v-if="!isUserLogin || userType == 1">
+
+
+                            <a class="mobile-requests-buttons green-button" href="/dashboard/buyAd-requests">
+                                همه درخواست های خرید
+
+                                <i class="fa fa-arrow-left"></i>
+
+                            </a>
+
+
+                        </div>
+                    </div>
+
+                    <div v-else>
+
+
+                        <article class=' col-xs-6 col-xs-offset-3'>
+                            <br/>
+                            <span class="margin-15"></span>
+                            <span class="content-default-width placeholder-content padding-10-0 margin-10 col-xs-6 col-xs-offset-3"></span>
+
+                            <span class="content-default-width placeholder-content padding-10-0 margin-10 col-xs-10 col-xs-offset-1"></span>
+
+                            <span class="content-default-width placeholder-content padding-10-0 margin-10 col-xs-8 col-xs-offset-2"></span>
+
+                            <div class="text-center">
+
+                                <span class="default-button placeholder-content"></span>
+
+                            </div>
+
+
+                        </article>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class=" container ">
+
+
+                    <div class="title-box box-content">
+                        <h3>
+
+                            ثبت نام فروشندگان
+
+                        </h3>
+                        <p>
+
+
+                            برای فروش بدون واسطه محصولات کشاورزی خود به خریداران مستقیم و صادرکنندگان هم اکنون ثبت
+                            نام کنید
+                        </p>
+                        <a v-if="!isUserLogin " class="green-button" href="/register">
+
+                            ثبت نام
+
+                        </a>
+                        <a v-else-if="isUserLogin && userType == 1" class="green-button" href="/dashboard/status">
+
+                            داشبورد
+
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
         <!-- =========================
         Product SECTION
         ============================== -->
@@ -1257,39 +1487,96 @@
                         </div>
 
                         <div class="col-xs-12 products-contents ">
-                            <div class="row">
+
+                            <div v-if="lastProducts" class="row">
                                 <div class="owl-carousel">
 
                                     <ProductCarousel
-                                            v-for="(items , index) in 10"
+                                            v-for="(product , index) in lastProducts"
                                             :key="index"
-                                            img="https://www.incobac.com/storage/products/9sPZCpAD5S4QJWSxoHjKXbJHXp33okkRavn6HoZP.jpeg"
-                                            title="خرمای مضافتی اصل"
-                                            price="3000"
-                                            link='/'
+                                            :img="str + '/' + product.photo"
+                                            :title="product.product_name"
+                                            :stock="product.stock"
+                                            :link='getProductUrl(product)'
                                     />
 
                                 </div>
                             </div>
+
+
+                            <div v-else class="row">
+                                <div v-for="(item, index) in 4" :class="{ 'hidden-xs' : index >= 2}"
+                                     class="class='col-md-3 col-sm-3  col-xs-6 '">
+
+                                    <article class='carousel-item box-content col-xs-12'>
+
+                                        <span class="default-index-product-image placeholder-content col-xs-12"></span>
+
+                                        <span class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"></span>
+
+                                        <span class="content-default-width placeholder-content  col-xs-8 col-xs-offset-2"></span>
+
+                                        <span class="margin-10"></span>
+
+                                    </article>
+
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
 
                     <div class=" col-xs-12 col-md-3 pull-right ">
-                        <div class="title-box box-content">
+
+                        <div v-if="isUserLogin && userType == 0" class="title-box box-content">
+                            <h3>
+
+                                محصولات فروشندگان را ببینید
+                                و بدون واسطه با آن ها ارتباط برقرار کنید
+
+                            </h3>
+
+                            <a class="green-button" href="/product-list/">
+
+                                لیست محصولات
+
+                            </a>
+
+                        </div>
+
+                        <div v-else-if="isUserLogin && userType == 1" class="title-box box-content">
+                            <h3>
+
+                                با ثبت و معرفی محصول خود، بدون واسطه با خریداران عمده ارتباط برقرار کنید
+
+                            </h3>
+
+                            <a class="green-button" href="/dashboard/register-product">
+
+                                ثبت محصول
+
+                            </a>
+
+                        </div>
+
+                        <div v-else class="title-box box-content">
                             <h3>
 
                                 ثبت نام خریداران
 
                             </h3>
                             <p>
-                                برای استعلام قیمت و خرید محصولات کشاورزی از بهترین فروشندگان دست اول هم اکنون ثبت نام
+                                برای استعلام قیمت و خرید محصولات کشاورزی از بهترین فروشندگان عمده هم اکنون ثبت نام
                                 کنید
                             </p>
+
                             <a class="green-button" href="/register">
 
                                 ثبت نام
 
                             </a>
+
                         </div>
 
                     </div>
@@ -1304,7 +1591,7 @@
                 <div class="row">
 
                     <h3 class="col-xs-12">
-                        ارتباط مستقیم با خریداران و فروشندگان دست اول محصولات کشاورزی
+                        ارتباط مستقیم با خریداران و فروشندگان عمده محصولات کشاورزی
                     </h3>
 
                     <div class="service-boxs-wrapper col-xs-12">
@@ -1321,11 +1608,17 @@
                                         <h4>
                                             اینکوباک چیست؟
                                         </h4>
-                                       <ul>
-                                           <li>
-                                               اینکوباک بازار خرید و فروش عمده محصولات کشاورزی است که خریداران را به فروشندگان دست اول متصل کرده و کاربران بدون واسطه می توانند با یکدیگر ارتباط برقرار کنند
-                                           </li>
-                                       </ul>
+                                        <p>
+                                            اینکوباک بازار خرید و فروش عمده محصولات کشاورزی
+                                            <br/>
+                                            است  که خریداران را به
+                                            فروشندگان عمده متصل کرده <br/>
+                                            و خریداران و فروشندگان بدون واسطه می توانند با یکدیگر
+
+                                            ارتباط برقرار کنند
+
+                                        </p>
+
                                     </a>
                                 </article>
                             </div>
@@ -1341,17 +1634,14 @@
                                             خدمات فروشندگان
                                         </h4>
 
-                                        <ul>
-                                            <li>
-                                                ساخت پروفایل حرفه ای جهت فروش محصولات
-                                            </li>
-                                            <li>
-                                                دسترسی به خریداران واقعی جهت فروش
-                                            </li>
-                                            <li>
-                                                بهره مندی از مشاوره تخصصی کارشناسان اینکوباک
-                                            </li>
-                                        </ul>
+
+                                        <p>
+                                            معرفی محصولات به خریداران عمده <br/>
+                                            دسترسی به درخواست های خرید روزانه <br/>
+                                            گسترش شبکه ی تجاری و مشتریان <br/>
+                                            فروش بدون واسطه و مقرون به صرفه <br/>
+                                        </p>
+
 
                                     </a>
                                 </article>
@@ -1368,17 +1658,12 @@
                                             خدمات خریداران
                                         </h4>
 
-                                        <ul>
-                                            <li>
-                                                استعلام قیمت از تامین کنندگان و کشاورزان
-                                            </li>
-                                            <li>
-                                                استفاده از خدمات نظارت و بازرسی محصـول
-                                            </li>
-                                            <li>
-                                                دسترسی گسترده به کشاورزان و تولید کنندگان
-                                            </li>
-                                        </ul>
+                                        <p>
+                                            استعلام قیمت از فروشندگان و کشاورزان <br/>
+                                            دسترسی بدون واسطه به فروشندگان متنوع <br/>
+                                            صرفه جویی در زمان و هزینه خرید محصول <br/>
+                                            گسترش شبکه تامین کنندگان <br/>
+                                        </p>
 
                                     </a>
                                 </article>
@@ -1402,7 +1687,7 @@
                         <div class="row">
                             <!-- loop for wholesale date -->
                             <h4 v-for="item in footerLinks.wholesaleDate"
-                                class="col-xs-4 col-sm-3 col-md-2  pull-right">
+                                class="col-xs-6 col-sm-4 col-md-2  pull-right">
                                 <a :href="getSubCategoryUrl(item.link)" v-text="'فروش عمده' + ' ' +item.name">
 
                                 </a>
@@ -1414,7 +1699,7 @@
                                  v-for="(category , index) in categoryList">
                                 <h4
                                         v-for="subCategory in category.subcategories"
-                                        class="col-xs-4 col-sm-3 col-md-2  pull-right"
+                                        class="col-xs-6 col-sm-4 col-md-2  pull-right"
                                 >
 
                                     <a
@@ -1430,7 +1715,7 @@
                             <!-- loop for wholesale rice -->
 
                             <h4 v-for="item in footerLinks.wholesaleRise"
-                                class="col-xs-4 col-sm-3 col-md-2  pull-right">
+                                class="col-xs-6 col-sm-4 col-md-2  pull-right">
                                 <a :href="getSubCategoryUrl(item.link)"
                                    v-text="'فروش عمده برنج' + ' ' + item.name">
 
@@ -1457,99 +1742,33 @@
     var visible = false;
 
 
-    var ProductCarousel = {
-
-        props: ['img', 'title', 'link', 'price'],
-        template: "<article class='carousel-item box-content'>"
-            +
-            "<div class='carousel-img' style='height: 135px;overflow: hidden;position: relative;'><a :href='link' ><img style='position: absolute;top: 50%;left: 50%;transition: 300ms;transform: translate(-50%, -50%);' :src='img' class='img-responsive'></a></div>"
-            + "<a style='font-size: 16px;direction: rtl;font-weight: bold;color: #4b4b4b;' :href='link' v-if='title.length>=20'><h4 style='text-overflow: ellipsis;overflow: hidden;white-space: nowrap;padding: 0 10px;margin-top: 10px;margin-bottom: 9px;'>{{title.substring(0,15) + ' ...'}}</h4></a>"
-            + "<a style='font-size: 16px;direction: rtl;font-weight: bold;color: #4b4b4b;' :href='link'  v-else><h4 style='text-overflow: ellipsis;overflow: hidden;white-space: nowrap;padding: 0 10px;margin-top: 10px;margin-bottom: 9px;'>{{title }}</h4></a>"
-            + "<a style='font-size: 14px;direction: rtl;font-weight: bold;color: #00c569;margin-bottom: 5px;display:inline-block' :href='link' class='price' >"
-            + "<span>  هر کیلو : </span>"
-            + "<span v-text='price'></span>"
-            + "<span> تومان </span>"
-            + "</a>"
-            + "</article>",
-        mounted: function () {
-            $("#product-section .owl-carousel").owlCarousel({
-                autoplay: true,
-                autoplayTimeout: 4000,
-                loop: true,
-                nav: true,
-                navText: ['<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>'],
-                items: 6,
-                mouseDrag: true,
-                margin: 30,
-                dots: false,
-                stagePadding: 15,
-                responsive: {
-                    0: {
-                        items: 1,
-                        stagePadding: 15,
-                        navText: false,
-                        dots: true
-                    },
-                    450: {
-                        items: 2,
-                        stagePadding: 15,
-                        navText: false,
-                        dots: true
-                    },
-                    767: {
-                        items: 3,
-                        stagePadding: 15
-                    },
-                    992: {
-                        items: 4,
-                    }
-                }
-            });
-        }
-    };
+    import ProductCarousel from './landing_page_components/product-list-carousel'
 
 
     var RequestCarousel = {
 
-        props: ['title', 'need', 'date', 'link'],
-        template: '<article class="box-content col-xs-12 request-carousel-content ">'
+        props: ['name', 'title', 'need', 'date', 'link'],
+        template: '<article class=" request-carousel-content col-xs-12  ">'
             + '<div class="row">'
             + '<p class="list-title">'
-            + '<span>'
-            + 'میوه'
-            + '</span>'
-            + '<span> | </span>'
-            + '<span>'
-            + 'خرما'
-            + '</span>'
-            + '<span>'
-            + '| پیارم'
-            + '</span>'
+            + '<span v-text="title"></span>'
+            + '<span v-if= "name" v-text="\' | \' + name"></span>'
             + '</p>'
             + '<p class="needs col-sm-4 col-xs-12">'
             + '<span class="static-content">'
             + 'میزان نیازمندی :'
             + '</span>'
-            + '<span >'
-            + '3000'
-            + '</span>'
+            + '<span v-text="need"></span>'
             + '<span class="static-content">'
             + 'کیلوگرم'
             + '</span>'
             + '</p>'
-            + '<p class="list-time col-sm-2 col-xs-12">'
-            + '۳۰ شهریور , ۱۳۹۸'
-            + '</p>'
-            + '<div class="col-xs-12">'
-            + '<a class=" fas fa-comment-alt green-button" href="">'
-            + 'پیام به خریدار'
-            + '</a>'
-            + '</div>'
+            + '<p class="list-time col-sm-4 col-xs-12" v-text="date"></p>'
             + '</div>'
             + '</article>',
 
         mounted: function () {
-            $("#requests-section .owl-carousel").owlCarousel({
+            $("#mobile-requests-section .owl-carousel").owlCarousel({
                 autoplay: true,
                 autoplayTimeout: 4000,
                 loop: true,
@@ -1573,20 +1792,23 @@
             UAnimate
         },
         props: [
+            'isUserLogin',
+            'userType',
             'img_success_project',
             'img_success_verified',
-            'img_seller_services',
-            'img_buyer_services',
             'site_logo',
             'assets',
-            'loading_img'
+            'loading_img',
+            'defimgitem',
+            'str'
+
         ],
         data: function () {
             return {
                 mainSearchBoxText: '',
                 enterKeyActiveForSearch: false,
-                homePageDates: '',
-                homePageRice: '',
+                lastRequests: '',
+                lastProducts: '',
                 isLoading: false,
                 categoryList: '',
                 subCategoryList: '',
@@ -1738,6 +1960,17 @@
                     .then(function (response) {
                         self.categoryList = response.data.categories;
                     });
+
+                axios.post('/get_sample_products', {})
+                    .then(function (response) {
+                        self.lastProducts = response.data.products;
+                    });
+
+                axios.post('/get_sample_buyAds', {})
+                    .then(function (response) {
+                        self.lastRequests = response.data.buyAds;
+                    });
+
             },
             search: function () {
                 if (this.mainSearchBoxText !== '') {
@@ -1766,53 +1999,51 @@
             },
             dropDownSecondaryMenu: function (event, index) {
 
-
-                if ($(event.target).attr('class') == 'col-xs-12 button-link-wrapper') {
-                    return
-                } else {
-                    this.dropDownClose(index);
-                }
-                console.log($(event.target).attr('class'));
-                if ($(event.target).attr('href')) {
-                    window.location.href = $(event.target).attr('href');
-                }
-
-                function collapseDropDown() {
-
-                    document.getElementById('menu' + index)
-                        .classList.toggle('active')
-
-                }
-
-                setTimeout(collapseDropDown, 80);
-            },
-            dropDownClose: function (index) {
-                var indexValue = index;
-                window.onclick = function (event) {
+                function collapseDropDown(eventItem) {
                     var dropdowns = $('.menu-wrapper > li');
-                    var dropdownLinks = $('.menu-wrapper > li > a');
-                    var dropdownActive = $('.menu-wrapper > li.active');
+                    var targetClass = $(eventItem.target).attr('class');
+                    var activeItemIndex = $('.active .sub-categories-wrapper ').data('index');
 
-                    dropdowns.each(function (index) {
-                        if (index == indexValue && $(event.target).attr('class') == dropdowns.find('a.category-item').attr('class')) {
 
-                            return
-
-                        } else {
-
+                    if (index != activeItemIndex && targetClass == 'category-item' || index != activeItemIndex && targetClass == 'fa fa-angle-down ') {
+                        dropdowns.each(function (index) {
                             $(this).removeClass('active')
+                        });
+                        document.getElementById('menu' + index)
+                            .classList.toggle('active')
+                    } else {
 
-                        }
-
-                    });
+                        dropdowns.each(function (index) {
+                            $(this).removeClass('active')
+                        });
+                    }
 
                 }
-            }
 
+
+                window.onclick = function (event) {
+                    var eventItem = event;
+                    setTimeout(collapseDropDown(eventItem), 80);
+                };
+
+                // setTimeout(collapseDropDown, 80);
+            },
+
+            getProductUrl: function (product) {
+
+                return '/product-view/خرید-عمده-'
+                    + product.subcategory_name.replace(' ', '-')
+                    + '/'
+                    + product.category_name.replace(' ', '-')
+                    + '/'
+                    + product.id;
+
+            },
         },
         mounted: function () {
             this.init();
             this.isLoading = true;
+
         },
         updated() {
             this.$nextTick(this.stopLoader());
