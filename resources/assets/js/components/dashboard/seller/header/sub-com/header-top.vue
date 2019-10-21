@@ -319,7 +319,6 @@ export default {
     document.addEventListener("click", this.documentClick);
   },
   registerComponentStatistics: function(categoryName, actionName, labelName) {
-    console.log("chiiiiiiiiiiii??");
     localStorage.userRoute = null;
     gtag("event", actionName, {
       event_category: categoryName,
