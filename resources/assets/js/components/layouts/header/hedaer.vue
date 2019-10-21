@@ -311,8 +311,20 @@ a.close-dialog-popup {
 
           <a class="navbar-brand test" href="/"></a>
 
-          <p class="logo-des hidden-xs hidden-sm">اینکوباک | بازارگاه آنلاین دنیای کشاورزی</p>
-        </div>
+                        <li>
+                            <a class="smoothScroll" href="/product-list"
+                               @click="registerComponentStatistics('header','product-list','click-on-product-list')">لیست
+                                محصولات</a>
+                        </li>
+                        <li>
+                            <a href="http:\\www.blog.incobac.com" class="smoothScroll"
+                               @click="registerComponentStatistics('header','blog','click-on-blog')">وبلاگ</a>
+                        </li>
+                        <!-- <li>
+                            <a class="smoothScroll" href="/pricing"
+                               @click="registerComponentStatistics('header','pricing','click-on-pricing')">تعرفه ها</a>
+                        </li> -->
+                        <li>
 
         <div class="collapse navbar-collapse" id="collapseHeader" aria-expanded="false">
           <ul class="nav navbar-nav navbar-left">

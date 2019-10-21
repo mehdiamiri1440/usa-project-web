@@ -315,7 +315,11 @@
 			</div>
 			<p class="incobac-default-text hidden-xs hidden-sm">
 				اینکوباک هیچ‌گونه منفعت و مسئولیتی در قبال معامله شما ندارد.
-با مطالعه‌ی راهنمای خرید امن، آسوده‌تر معامله کنید.
+با مطالعه‌ی راهنمای 
+	<a href="https://blog.incobac.com/%d8%b1%d8%a7%d9%87%d9%86%d9%85%d8%a7%db%8c-%d8%ae%d8%b1%db%8c%d8%af-%d8%a7%d9%85%d9%86/" target="_blank">
+		خرید امن
+	</a>
+، آسوده‌تر معامله کنید.
 			</p>
 		</div>
 
@@ -367,14 +371,14 @@
 								مقدار موجودی
 							</span>
 
-							<span v-text="$parent.product.main.stock"></span>
+							<span v-text="$parent.product.main.stock + ' کیلوگرم '"></span>
 						</li>
 						<li>
 							<span class="gray-text">
 								حداقل سفارش
 							</span>
 
-							<span v-text="$parent.product.main.min_sale_amount"></span>
+							<span v-text="$parent.product.main.min_sale_amount + ' کیلوگرم '"></span>
 						</li>
 						<li v-if="!$parent.isMyProfile">
 							<span class="gray-text">

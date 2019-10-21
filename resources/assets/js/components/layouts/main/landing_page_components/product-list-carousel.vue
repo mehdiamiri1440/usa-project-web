@@ -187,7 +187,7 @@
             $("#product-section .owl-carousel").owlCarousel({
                 autoplay: true,
                 autoplayTimeout: 4000,
-                loop: false,
+                loop: true,
                 nav: true,
                 navText: ['<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>'],
                 items: 6,
@@ -219,6 +219,9 @@
             });
         },
         methods: {
+            created:function(){
+                this.loadImage();
+            },
             loadImage: function () {
                 this.isImageLoad = false;
             },
