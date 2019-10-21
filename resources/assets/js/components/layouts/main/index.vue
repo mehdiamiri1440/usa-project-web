@@ -1437,29 +1437,53 @@
                 <div class=" container ">
 
 
-                    <div class="title-box box-content">
-                        <h3>
+                        <div v-if="isUserLogin && userType == 0" class="title-box box-content">
+                            <h3>
 
-                            ثبت نام فروشندگان
+                                از فروشندگان عمده قیمت بگیرید و با یک درخواست چندین قیمت دریافت کنید
 
-                        </h3>
-                        <p>
+                            </h3>
+
+                            <a class="green-button" href="/dashboard/register-request">
+
+                                ثبت درخواست خرید
+
+                            </a>
+
+                        </div>
+
+                        <div v-else-if="isUserLogin && userType == 1" class="title-box box-content">
+                            <h3>
+
+                                درخواست های خریداران عمده را ببینید و بدون واسطه با آن ها ارتباط برقرار کنید
+
+                            </h3>
+
+                            <a class="green-button" href="/dashboard/buyAd-requests">
+
+                                لیست درخواست های خرید
+
+                            </a>
+                        </div>
+
+                        <div v-else class="title-box box-content">
+                            <h3>
+
+                                ثبت نام فروشندگان
+
+                            </h3>
+                            <p>
 
 
-                            برای فروش بدون واسطه محصولات کشاورزی خود به خریداران مستقیم و صادرکنندگان هم اکنون ثبت
-                            نام کنید
-                        </p>
-                        <a v-if="!isUserLogin " class="green-button" href="/register">
+                                برای فروش بدون واسطه محصولات کشاورزی خود به خریداران مستقیم و صادرکنندگان هم اکنون ثبت
+                                نام کنید
+                            </p>
+                            <a v-if="!isUserLogin " class="green-button" href="/register">
 
-                            ثبت نام
+                                ثبت نام
 
-                        </a>
-                        <a v-else-if="isUserLogin && userType == 1" class="green-button" href="/dashboard/status">
-
-                            داشبورد
-
-                        </a>
-                    </div>
+                            </a>
+                        </div>
 
                 </div>
             </div>

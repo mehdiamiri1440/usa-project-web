@@ -328,10 +328,10 @@
                             <a href="http:\\www.blog.incobac.com" class="smoothScroll"
                                @click="registerComponentStatistics('header','blog','click-on-blog')">وبلاگ</a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a class="smoothScroll" href="/pricing"
                                @click="registerComponentStatistics('header','pricing','click-on-pricing')">تعرفه ها</a>
-                        </li>
+                        </li> -->
                         <li>
 
                             <a class="smoothScroll" href="/about-us"

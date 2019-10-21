@@ -249,7 +249,11 @@
                 </h3>
 
 
-                <p>مقدار موجودی: <span v-text="$parent.product.main.stock + ' کیلوگرم'"></span>
+                <p>استان / شهر:
+                    <span v-text="$parent.product.main.province_name +
+                            ' - ' +
+                             $parent.product.main.city_name"
+                    ></span>
                 </p>
 
                 <p v-if="$parent.product.main.description">
@@ -265,13 +269,9 @@
 
                     <span>کیلوگرم</span>
                 </p> -->
-
-                <p>استان / شهر:
-                    <span v-text="$parent.product.main.province_name +
-                            ' - ' +
-                             $parent.product.main.city_name"
-                    ></span>
+<p>مقدار موجودی: <span v-text="$parent.product.main.stock + ' کیلوگرم'"></span>
                 </p>
+                
 
                 <!-- <p v-if="!$parent.isMyProfile">قیمت:
                     <a href="#" @click.prevent="$parent.openChat($parent.product)">استعلام بگیرید</a>

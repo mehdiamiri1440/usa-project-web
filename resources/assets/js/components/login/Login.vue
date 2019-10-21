@@ -23,13 +23,16 @@
   z-index: 1100;
   position: fixed;
 }
+
 #main-content {
   padding-bottom: 0;
 }
+
 .error-message {
   direction: rtl;
   font-size: 11px;
 }
+
 #main {
   margin-top: 21px;
   background: #f9f9f9;
@@ -314,7 +317,7 @@ input[type="number"]::-webkit-outer-spin-button {
                     <!-- <i class="fa fa-arrow-left"></i> -->
                   </p>
                   <h1 class="col-xs-8">
-                    <span v-if="currentStep == 1">ورود به سامانه</span>
+                    <span v-if="currentStep == 1">ورود به  اینکوباک</span>
                     <span v-if="currentStep == 2">بازیابی کلمه عبور</span>
                     <span v-if="currentStep == 3"></span>
                   </h1>
