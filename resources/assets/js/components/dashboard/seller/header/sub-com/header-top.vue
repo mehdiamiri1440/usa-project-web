@@ -1,5 +1,4 @@
 <style >
-
 .display-loading {
   display: inline-flex;
   justify-content: center;
@@ -57,9 +56,7 @@
 
 .right-menu-header,
 .content-header {
-
   float: right;
-
 }
 
 .profile-menu-header {
@@ -77,14 +74,12 @@
   font-size: 20px;
 }
 
-.profile-menu-header span.user_name{
-
+.profile-menu-header span.user_name {
   display: block;
 
   float: right;
 
   padding-top: 15px;
-
 }
 
 .right-menu-header .green-button {
@@ -180,8 +175,7 @@ i.fa-home {
   top: 5px;
 }
 
-.product-list-link{
-
+.product-list-link {
   font-size: 17px !important;
   padding: 7px 20px !important;
   background: #00c569 !important;
@@ -189,9 +183,7 @@ i.fa-home {
   border: 1px solid;
   display: inline-block;
   color: #fff !important;
-
 }
-
 </style>
 
 <template>
@@ -242,10 +234,7 @@ i.fa-home {
             </li>
 
             <li class="list-item">
-              <a
-                :href="out"
-                @click="registerComponentStatistics('seller-dashboard-header','logout','click-on-logout-in-dashboard')"
-              >خروج</a>
+              <a :href="out" @click="logUserOut()">خروج</a>
             </li>
           </ul>
         </div>
@@ -287,7 +276,6 @@ var visible = false;
 import SubMenu from "./sub-menu/sub-menu.vue";
 
 export default {
-
   components: {
     SubMenu
   },
@@ -301,6 +289,14 @@ export default {
     "isLoading"
   ],
   methods: {
+    logUserOut: function() {
+      localStorage.removeItem("userRoute");
+      registerComponentStatistics(
+        "seller-dashboard-header",
+        "logout",
+        "click-on-logout-in-dashboard"
+      );
+    },
     collapseDropDown: function() {
       $(".profile-list").fadeIn("slow", function() {
         visible = true;
@@ -323,6 +319,8 @@ export default {
     document.addEventListener("click", this.documentClick);
   },
   registerComponentStatistics: function(categoryName, actionName, labelName) {
+    console.log("chiiiiiiiiiiii??");
+    localStorage.userRoute = null;
     gtag("event", actionName, {
       event_category: categoryName,
       event_label: labelName
