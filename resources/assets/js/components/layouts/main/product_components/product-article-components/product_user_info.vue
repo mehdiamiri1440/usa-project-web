@@ -7,7 +7,7 @@
 
     .user-information-wrapper, .article-action-buttons button{
 
-        font-size: 12px;
+        font-size: 14px;
 
         font-weight: bold;
 

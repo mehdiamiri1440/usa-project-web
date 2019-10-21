@@ -961,7 +961,7 @@ class buyAd_controller extends Controller
                             ->limit(10)
                             ->get()
                             ->shuffle()
-                            ->slice(5);
+                            ->slice(0,5);
         
         $date_convertor_object = new date_convertor();
         

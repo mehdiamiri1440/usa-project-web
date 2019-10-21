@@ -20,13 +20,7 @@ label {
   cursor: default;
   margin: 8px 0;
 }
-.submit-button.default-button {
-  background: #fff;
-  color: #777;
-  border: 1px solid #777;
-  border-radius: 4px;
-  cursor: pointer;
-}
+
 .submit-button.active {
   background: #00c569;
   cursor: pointer;
@@ -290,7 +284,7 @@ label .small-label {
 
         <div class="col-xs-6">
           <label for="min-sale-amount">
-            نام محصول 
+            نام محصول
           </label>
 
           <div class="input-wrapper">
@@ -399,7 +393,7 @@ export default {
     },
     "$parent.buyAd.name": function() {
       this.$parent.errors.name = "";
-    },    
+    },
   }
 };
 </script>

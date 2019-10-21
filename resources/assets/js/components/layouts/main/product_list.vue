@@ -564,7 +564,7 @@
 
 
       <main id="main" class="container ">
-                <div class="row">
+
 
                     <div class="col-xs-12 col-lg-9">
                     <div class="row">
@@ -754,7 +754,7 @@
 
                     </aside>
 
-                </div>
+               
 
         </main>
     </div>

@@ -107,6 +107,7 @@
      border-radius: 3px;
      display: inline-block;
  }
+
   .default-button-min-with{
      height: 28px;
      margin-top: 3px;
@@ -117,8 +118,9 @@
      border-radius: 3px;
      display: inline-block;
  }
+
  .default-button{
-     height: 38px;
+     height: 28px;
      margin: 15px auto;
      min-width: 130px;
      padding: 0 15px;
@@ -263,6 +265,15 @@
 
 }
 
+
+
+/*index styles*/
+
+.default-index-product-image{
+    position: relative;
+    width: 200px;
+    height: 140px;
+}
 
 
 

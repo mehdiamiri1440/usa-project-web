@@ -31,7 +31,7 @@
       border-color: #28a745 transparent transparent transparent;
     }
     .lds-ring-alt{
-    	display: block;	
+    	display: block;
     	margin-top: 50px;
     	direction: rtl;
     	text-align: center;
@@ -73,13 +73,13 @@
              <div v-show="!isImageLoad" class="lds-ring">
              	<div></div><div></div><div></div><div></div>
 
-             </div> 
+             </div>
              <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
      </div>
 </template>
 
 <script>
-	
+
 	export default{
 		 data: function () {
             return {
@@ -95,9 +95,11 @@
 			'categoryName',
 			'cityName',
 			'provinceName',
+            'img',
+            'base',
+            'popUpLoaded',
+            'alt'
 		],
-        props: ['img', 'base', 'popUpLoaded', 'alt'],
-     
         mounted: function () {
 
             $(".owl-carousel").owlCarousel({
