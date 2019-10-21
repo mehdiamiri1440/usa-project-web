@@ -55,7 +55,8 @@ class login
         }
     }
 
-    protected function  set_user_session($user_phone,$user_hashed_password)
+    //this method is public because I had to call it from web.php, check it out!
+    public function  set_user_session($user_phone,$user_hashed_password)
 	{
         $user_info = myuser::where('phone',$user_phone)
                                 ->where('password',$user_hashed_password)
