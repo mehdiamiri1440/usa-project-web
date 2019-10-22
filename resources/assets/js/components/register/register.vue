@@ -588,6 +588,7 @@ export default {
     },
     submitForm: function() {
       var self = this;
+      // test
       this.step4.formSubmitActive = false;
       this.errorFlag = false;
 
