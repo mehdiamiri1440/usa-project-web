@@ -324,7 +324,7 @@ a.close-dialog-popup {
                             <a class="smoothScroll" href="/pricing"
                                @click="registerComponentStatistics('header','pricing','click-on-pricing')">تعرفه ها</a>
                         </li> -->
-                        <li>
+<!--                        <li>-->
 
         <div class="collapse navbar-collapse" id="collapseHeader" aria-expanded="false">
           <ul class="nav navbar-nav navbar-left">
