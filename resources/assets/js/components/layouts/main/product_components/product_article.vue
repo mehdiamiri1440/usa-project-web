@@ -373,7 +373,7 @@
                 if (num == null) {
                     return null;
                 }
-
+                num = num.toString().replace(/^0+/, '');
                 return num.toString()
                     .replace(/[\u0660-\u0669]/g, function (c) {
                         return c.charCodeAt(0) - 0x0660;

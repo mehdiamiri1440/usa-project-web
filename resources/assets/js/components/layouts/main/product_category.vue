@@ -619,23 +619,27 @@
                                 <div class="load-more-button col-xs-12 "
                                      v-if="searchText === '' && continueToLoadProducts === true ">
 
-                                    <button class="btn btn-loader " @click.prevent="feed()">
-                                        <div class="btn-content">
-                                                    <span class="hidden-xs" v-show="!loadMoreActive">
+
+                                            <button class="btn btn-loader " @click.prevent="feed()">
+                                                <div class="btn-content">
+                                                    <span class="hidden-xs  text-rtl" v-show="!loadMoreActive">
                                                         مشاهده محصولات بیشتر
+                                                        <i class="fa fa-plus"></i>
+
                                                     </span>
 
-                                            <span class="hidden-sm hidden-md hidden-lg" v-show="!loadMoreActive">
-                                                        بیشتر
+                                                    <span class="hidden-sm hidden-md hidden-lg text-rtl" v-show="!loadMoreActive">
+                                                        محصولات بیشتر
+                                                        <i class="fa fa-plus"></i>
                                                     </span>
 
 
 
-                                            <div v-show="loadMoreActive" class="btn-loader-active-wrapper">
-                                                <img  :src="loading_img">
-                                            </div>
-                                        </div>
-                                    </button>
+                                                    <div v-show="loadMoreActive" class="btn-loader-active-wrapper ">
+                                                        <img  :src="loading_img">
+                                                    </div>
+                                                </div>
+                                            </button>
 
                                   </div>
                                 </div>
