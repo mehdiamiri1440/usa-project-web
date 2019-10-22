@@ -384,7 +384,7 @@ a.close-dialog-popup {
               <a
                 href="/login"
                 class="smoothScroll login-button"
-                @click="registerComponentStatistics('header','register-login','click-on-register-login')"
+                @click="logUserOut()"
               >
                 ورود/ثبت
                 نام
@@ -541,6 +541,10 @@ export default {
       if (this.isDeviceMobile() && !Cookies.get("appDownloaded")) {
         setTimeout(this.DownloadApp, 5000);
       }
+    },
+    logUserOut: function() {
+      localStorage.removeItem("userRoute");
+    registerComponentStatistics('header','register-login','click-on-register-login')
     },
     registerComponentStatistics: function(categoryName, actionName, labelName) {
       gtag("event", actionName, {

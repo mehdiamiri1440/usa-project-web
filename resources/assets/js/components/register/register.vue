@@ -1150,17 +1150,17 @@ export default {
   },
   created() {
     var self = this;
-    if (localStorage.userRoute) {
-      window.location.href = JSON.parse(localStorage.userRoute);
-    }
+//    if (localStorage.userRoute) {
+//      window.location.href = JSON.parse(localStorage.userRoute);
+//    }
 //      else {
 //      self.loginCheckerLoading = false;
 //    }
-//     if (self.isUserLogin && self.userType == 1) {
-//       window.location.href = "/dashboard/register-product";
-//     } else if (self.isUserLogin && self.userType != 1) {
-//       window.location.href = "/dashboard/register-request";
-//     }
+     if (self.isUserLogin && self.userType == 1) {
+       window.location.href = "/dashboard/register-product";
+     } else if (self.isUserLogin && self.userType != 1) {
+       window.location.href = "/dashboard/register-request";
+     }
     else {
       self.loginCheckerLoading = false;
     }
