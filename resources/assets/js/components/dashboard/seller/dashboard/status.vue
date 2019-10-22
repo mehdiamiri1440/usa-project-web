@@ -92,11 +92,11 @@
 
     .box .box-icon{
 
-		opacity: 0.18;
+		opacity: 0.14;
 		font-size: 76px;
 		position: absolute;
 		left: 10px;
-		bottom: 15px;
+		bottom: 40px;
 
     }
 
@@ -111,7 +111,7 @@
     }
 
     .box-upgrade-link{
-    	margin-top: 51px;
+    	margin-top: 43px;
     }
 
 

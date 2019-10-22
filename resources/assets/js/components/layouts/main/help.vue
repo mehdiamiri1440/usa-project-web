@@ -66,7 +66,8 @@
         <section class="parallax-section policy">
             <div class="overlay"></div>
             <div class="container">
-                <h3 class="text-right ">اینکوباک چگونه کار می کند</h3>
+                <h3 class="text-right ">اینکوباک چگونه کار می کند؟</h3>
+
                 <div id="accordion" role="tablist" aria-multiselectable="true" class="panel-group">
 
                     <div class="panel panel-default">

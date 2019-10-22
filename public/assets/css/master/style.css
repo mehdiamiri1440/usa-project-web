@@ -40,16 +40,7 @@ body{
 .green-button:focus, .green-button:hover {
     color: #fff !important;
 }
-.right-section {
-    background: url("../../img/inco-form-back1.jpg") no-repeat;
-}
-.bg.login{
-    background: url("../../img/back3.jpg");
-}
 
-.bg.register{
-    background: url("../../img/back2.jpg") ;
-}
 
 
     /*---------------------------------------
@@ -309,9 +300,7 @@ a:focus {
         width: 150px;
         background-size: 100%;
     }
-    .custom-navbar .nav li a {
-        padding: 9px 5px;
-    }
+
 }
 
 @media (max-width: 850px) {
