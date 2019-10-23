@@ -478,13 +478,13 @@
         width: 100%;
     }
 
-    .header-menu a.router-link-exact-active::before, a.active::before {
+    .header-menu a.router-link-exact-active::before, .header-menu a.active::before {
         content: " ";
         height: 100%;
         width: 2px;
-        background: #00ac5c;
+        background: #00c569;
         position: absolute;
-        right: 0;
+        right: 1px;
         top: 0;
         display: block;
     }

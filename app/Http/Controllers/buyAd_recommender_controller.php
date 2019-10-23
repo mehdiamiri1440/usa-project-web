@@ -18,7 +18,21 @@ class buyAd_recommender_controller extends Controller
         
         $this->apply_registered_product_filter_to_buyAd_list($buyAd_list,$registered_product_sub_category_array);
         
-        $buyAd_list = $buyAd_list->sortByDesc('score');
+        $buyAd_list = $buyAd_list->toArray();
+        
+        usort($buyAd_list,function($item1,$item2){
+            $a = $item1->score;
+            $b = $item2->score;
+            
+            if($a == $b){
+                return $item1->created_at < $item2->created_at;
+            }
+            else{
+                return ($a < $b) ? 1 : -1;
+            }
+        });
+        
+        $buyAd_list = array_values($buyAd_list);
     }
     
     protected function get_seller_registered_products_sub_category_array($seller_user_id)
@@ -123,7 +137,7 @@ class buyAd_recommender_controller extends Controller
         });
     }
     
-    protected function increase_buyAd_score(&$buyAd,$score)
+    protected function increase_buyAd_score($buyAd,$score)
     {
         $buyAd->score += $score;
     }

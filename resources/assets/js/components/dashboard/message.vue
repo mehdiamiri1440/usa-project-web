@@ -484,6 +484,45 @@
   .back-state {
     display: block;
   }
+  .message-wrapper .message-contact-title span{
+ 
+    padding-top: 14px;
+
+    width: 170px;
+
+    overflow: hidden;
+
+    height: 40px;
+
+    line-height: 1.618;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+  }
+}
+
+@media screen and (max-width: 370px) {
+ 
+  .message-wrapper .message-contact-title span{
+  
+    width: 130px;
+
+  }
+}
+
+@media screen and (max-width: 330px) {
+
+  .message-wrapper .message-contact-title-img{
+
+    margin: 0 15px ;
+
+  }
+
+  .message-wrapper .message-contact-title span{
+  
+    font-size: 13px;
+  }
 }
 </style>
 

@@ -21,7 +21,7 @@ textarea {
   cursor: default;
   margin: 8px 0;
 }
-.submit-button.default-button {
+.submit-button.default-back-button {
   background: #fff;
   color: #777;
   border: 1px solid #777;
@@ -222,7 +222,7 @@ textarea .small-label {
           rows="4"
           :class="{'active' : $parent.product.description , 'error' : $parent.errors.description}"
           v-model="$parent.product.description"
-          placeholder="مثلا : محصول شما چه میزان کیفیت و توضیحاتی دارد"
+          placeholder="در مورد کیفیت و نوع بسته بندی محصول خود توضیح دهید"
         ></textarea>
 
         <p class="error-message col-xs-12">
@@ -235,13 +235,18 @@ textarea .small-label {
         انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند
       </span>-->
       <p>
-        ثبت نهایی این مرحله به منزله قبول کرد
+        
+        با کلیک روی دکمه ثبت نهایی موافقت خود را 
+
+
         <a
           href="/privacy-and-policy"
           target="_balnk"
           class="green-text"
-        >شرایط و قوانین اینکوباک</a>
-        می باشد
+        > 
+        قوانین و شرایط اینکوباک
+      </a>
+        اعلام می کنید
       </p>
     </div>
     <div class="col-xs-12">
@@ -251,7 +256,7 @@ textarea .small-label {
       >ثبت نهایی</button>
 
       <button
-        class="submit-button default-button pull-right"
+        class="submit-button default-back-button pull-right"
         @click.prevent="$parent.currentStep--"
       >
         <i class="fa fa-arrow-right"></i>
