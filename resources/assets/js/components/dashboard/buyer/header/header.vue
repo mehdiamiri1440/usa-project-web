@@ -478,7 +478,7 @@
         width: 100%;
     }
 
-    .header-menu a.router-link-exact-active::before, a.active::before {
+    .header-menu a.router-link-exact-active::before, .header-menu a.active::before {
         content: " ";
         height: 100%;
         width: 2px;

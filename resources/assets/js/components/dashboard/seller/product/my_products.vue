@@ -140,14 +140,15 @@
                     </div>
                    </div>
                 </div>
+                
                 <div class="col-xs-12" v-if="products.length === 0 && !loading">
                     <div class="wrapper_no_pro">
                         <div class="content_no_pic">
                             <i class="fa fa-list-alt"></i>
                         </div>
 
-                        <div class="text_no_pic">
-                            <p>محصولی ثبت نشده است</p>
+                        <div class="text_no_pic standard-line">
+                            <p>محصولی ثبت نشده است یا در انتظار تایید است</p>
                         </div>
                     </div>
                 </div>

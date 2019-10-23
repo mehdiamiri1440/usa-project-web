@@ -244,6 +244,11 @@ select.error:focus {
 label .small-label {
   font-size: 12px;
 }
+
+.text-red{
+  color: red;
+}
+
 @media screen and (max-width: 767px) {
   select {
     font-size: 12px;
@@ -257,7 +262,10 @@ label .small-label {
 <template>
   <div>
     <h2 class="title-contents col-xs-12">افزودن تصاویر محصول</h2>
-
+    <span
+        class="text-red col-xs-12 small-description">
+        لطفا فقط عکس های مرتبط با محصول خود را ثبت کنید
+      </span>
     <div class="form-contents col-xs-12">
       <div class="text-input-wrapper">
         <!-- input type tel because we have some limmitation for processes -->
@@ -297,9 +305,7 @@ label .small-label {
         <span v-if="$parent.errors.image_5" v-text="$parent.errors.image_5[0]"></span>
       </p>
 
-      <span
-        class="small-description"
-      >انتخاب تصویر مناسب ، تاثیر قابل توجهی در بیشتر ملاحظه شدن محصول شما دارد</span>
+      
 
       <div class="submit-button-wrapper">
         <button
