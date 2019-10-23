@@ -437,7 +437,9 @@ export default {
             if (response.data.confirmed_profile_record === true) {
               if (response.data.is_buyer) {
                 window.location.href = "/dashboard/register-request";
-
+                localStorage.userRoute = JSON.stringify(
+                  "/dashboard/register-request"
+                );
                 self.registerComponentStatistics(
                   "Login",
                   "seller-login",
@@ -445,7 +447,9 @@ export default {
                 );
               } else if (response.data.is_seller) {
                 window.location.href = "/dashboard/register-product";
-
+                localStorage.userRoute = JSON.stringify(
+                  "/dashboard/register-product"
+                );
                 self.registerComponentStatistics(
                   "Login",
                   "buyer-login",
@@ -587,11 +591,17 @@ export default {
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/login" });
     var self = this;
-    if (self.isUserLogin && self.userType === "1")
-      window.location.href = "/dashboard/register-product";
-    else if (self.isUserLogin && self.userType !== "1")
-      window.location.href = "/dashboard/register-request";
-    else self.loginCheckerLoading = false;
+//    if (localStorage.userRoute) {
+//      window.location.href = JSON.parse(localStorage.userRoute);
+//    }
+     if (self.isUserLogin && self.userType == 1) {
+       window.location.href = "/dashboard/register-product";
+     } else if (self.isUserLogin && self.userType != 1) {
+       window.location.href = "/dashboard/register-request";
+     }
+    else {
+      self.loginCheckerLoading = false;
+    }
     window.addEventListener("keydown", function(event) {
       if (event.keyCode === 13) {
         self.doLogin();

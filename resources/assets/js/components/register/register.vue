@@ -1,4 +1,78 @@
 <style >
+.text-loader {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  position: absolute;
+  bottom: 37%;
+  right: 10px;
+}
+.loading-container {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 1100;
+  position: fixed;
+}
+.lds-ring {
+  display: inline-block;
+
+  position: absolute;
+
+  width: 64px;
+
+  height: 64px;
+
+  left: 50%;
+
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  margin: 6px;
+  border: 5px solid #00c569;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #00c569 transparent transparent transparent;
+}
+.lds-ring-alt {
+  display: block;
+  margin-top: 50px;
+  direction: rtl;
+  text-align: center;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 #main-content {
   padding-bottom: 0;
 }
@@ -235,120 +309,141 @@ input[type="number"]::-webkit-outer-spin-button {
 
 <template>
   <div>
-    <main id="main" class="container">
-      <div class="main-wrapper col-xs-12">
-        <div class="row">
-          <div class="wrapper-progressbar">
-            <div class="custom-progressbar">
-              <div
-                class="progress-bar"
-                role="progressbar"
-                aria-valuenow="21"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              ></div>
-            </div>
-            <div class="custom-progressbar active">
-              <div
-                class="progress-bar"
-                role="progressbar"
-                aria-valuenow="21"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              ></div>
-            </div>
+    <div v-if="!loginCheckerLoading">
+      <main id="main" class="container">
+        <div class="main-wrapper col-xs-12">
+          <div class="row">
+            <div class="wrapper-progressbar">
+              <div class="custom-progressbar">
+                <div
+                  class="progress-bar"
+                  role="progressbar"
+                  aria-valuenow="21"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+              <div class="custom-progressbar active">
+                <div
+                  class="progress-bar"
+                  role="progressbar"
+                  aria-valuenow="21"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
 
-            <div class="progressbar-items">
-              <a class="progrees-item active">
-                <span>1</span>
-                <p>ثبت موبایل</p>
-              </a>
+              <div class="progressbar-items">
+                <a class="progrees-item active">
+                  <span>1</span>
+                  <p>ثبت موبایل</p>
+                </a>
 
-              <a class="progrees-item" :class="{'active' : currentStep >= 2}">
-                <span>2</span>
-                <p>تایید شماره</p>
-              </a>
+                <a class="progrees-item" :class="{'active' : currentStep >= 2}">
+                  <span>2</span>
+                  <p>تایید شماره</p>
+                </a>
 
-              <a class="progrees-item" :class="{'active' : currentStep >= 3}">
-                <span>3</span>
-                <p>مشخصات فردی</p>
-              </a>
+                <a class="progrees-item" :class="{'active' : currentStep >= 3}">
+                  <span>3</span>
+                  <p>مشخصات فردی</p>
+                </a>
 
-              <a class="progrees-item" :class="{'active' : currentStep >= 4}">
-                <span>4</span>
-                <p>انتخاب آدرس</p>
-              </a>
+                <a class="progrees-item" :class="{'active' : currentStep >= 4}">
+                  <span>4</span>
+                  <p>انتخاب آدرس</p>
+                </a>
 
-              <a class="progrees-item" :class="{'active' : currentStep >= 5}">
-                <span>5</span>
-                <p>حساب کاربری</p>
-              </a>
+                <a class="progrees-item" :class="{'active' : currentStep >= 5}">
+                  <span>5</span>
+                  <p>حساب کاربری</p>
+                </a>
 
-              <a class="progrees-item" :class="{'active' : currentStep >= 6}">
-                <span>6</span>
-                <p>حوزه فعالیت</p>
-              </a>
-            </div>
-          </div>
-
-          <div class="main-contents">
-            <header class="main-content-header col-xs-12">
-              <div class="row">
-                <p class="arrow-left col-xs-2">
-                  <!-- <i class="fa fa-arrow-left"></i> -->
-                </p>
-
-                <h1 class="col-xs-8">ثبت نام در اینکوباک</h1>
-
-                <a
-                  href="#"
-                  v-if="currentStep != 1"
-                  @click.prevent="goToStep(currentStep - 1)"
-                  class="arrow-right col-xs-2"
-                >
-                  <i class="fa fa-arrow-right"></i>
+                <a class="progrees-item" :class="{'active' : currentStep >= 6}">
+                  <span>6</span>
+                  <p>حوزه فعالیت</p>
                 </a>
               </div>
-            </header>
+            </div>
 
-            <main class="col-xs-12">
-              <div class="row">
-                <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
-                  <div class="wraper-main-contents row">
-                    <RegisterNumber
-                      @getPhoneNumber="setPhoneNumber"
-                      v-if="currentStep == 1"
-                      :parent-errors="errors.phone[0]"
-                    />
+            <div class="main-contents">
+              <header class="main-content-header col-xs-12">
+                <div class="row">
+                  <p class="arrow-left col-xs-2">
+                    <!-- <i class="fa fa-arrow-left"></i> -->
+                  </p>
 
-                    <VerifyCode
-                      @getVerificationCode="setVerificationCode"
-                      v-else-if="currentStep == 2"
-                      :parent-errors="errors.verification_code[0]"
-                    />
+                  <h1 class="col-xs-8">ثبت نام در اینکوباک</h1>
 
-                    <PersonalInformatin v-else-if="currentStep == 3" />
+                  <a
+                    href="#"
+                    v-if="currentStep != 1"
+                    @click.prevent="goToStep(currentStep - 1)"
+                    class="arrow-right col-xs-2"
+                  >
+                    <i class="fa fa-arrow-right"></i>
+                  </a>
+                </div>
+              </header>
 
-                    <Location v-else-if="currentStep == 4" />
+              <main class="col-xs-12">
+                <div class="row">
+                  <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+                    <div class="wraper-main-contents row">
+                      <RegisterNumber
+                        @getPhoneNumber="setPhoneNumber"
+                        v-if="currentStep == 1"
+                        :parent-errors="errors.phone[0]"
+                      />
 
-                    <UserAccount v-else-if="currentStep == 5" />
+                      <VerifyCode
+                        @getVerificationCode="setVerificationCode"
+                        v-else-if="currentStep == 2"
+                        :parent-errors="errors.verification_code[0]"
+                      />
 
-                    <ActivityDomain v-else-if="currentStep == 6" />
+                      <PersonalInformatin v-else-if="currentStep == 3" />
+
+                      <Location v-else-if="currentStep == 4" />
+
+                      <UserAccount v-else-if="currentStep == 5" />
+
+                      <ActivityDomain v-else-if="currentStep == 6" />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </main>
+              </main>
 
-            <footer class="main-content-footer col-xs-12">
-              <div class="footer-content row">
-                <i class="fa fa-star"></i>
-                فرصت های جدید را خلق کنید و در زمان و هزینه صرفه جویی کنید
-              </div>
-            </footer>
+              <footer class="main-content-footer col-xs-12">
+                <div class="footer-content row">
+                  <i class="fa fa-star"></i>
+                  فرصت های جدید را خلق کنید و در زمان و هزینه صرفه جویی کنید
+                </div>
+              </footer>
+            </div>
           </div>
         </div>
+      </main>
+    </div>
+    <div v-else>
+      <div class="loading-container">
+        <div class="image-wrapper">
+          <a v-show="isImageLoad">
+            <transition>
+              <img src @load="ImageLoaded" alt="alt" />
+            </transition>
+          </a>
+          <div class="text-loader text-muted">... در حال انتقال به پنل کاربری</div>
+          <div v-show="!isImageLoad" class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
+        </div>
       </div>
-    </main>
+    </div>
   </div>
 </template>
 
@@ -371,8 +466,11 @@ export default {
     UserAccount,
     ActivityDomain
   },
+  props: ["site_logo", "isUserLogin", "userType"],
   data: function() {
     return {
+      isImageLoad: false,
+      loginCheckerLoading: true,
       currentStep: 1,
       step1: {
         phone: "",
@@ -426,6 +524,12 @@ export default {
     };
   },
   methods: {
+    ImageLoaded: function() {
+      this.isImageLoad = true;
+    },
+    loadImage: function() {
+      this.isImageLoad = false;
+    },
     setPhoneNumber(phoneNumber) {
       this.step1.phone = phoneNumber;
       this.send_verification_code();
@@ -1045,6 +1149,21 @@ export default {
     }
   },
   created() {
+    var self = this;
+//    if (localStorage.userRoute) {
+//      window.location.href = JSON.parse(localStorage.userRoute);
+//    }
+//      else {
+//      self.loginCheckerLoading = false;
+//    }
+     if (self.isUserLogin && self.userType == 1) {
+       window.location.href = "/dashboard/register-product";
+     } else if (self.isUserLogin && self.userType != 1) {
+       window.location.href = "/dashboard/register-request";
+     }
+    else {
+      self.loginCheckerLoading = false;
+    }
     gtag("config", "UA-129398000-1", { page_path: "/register" });
   },
   mounted: function() {
