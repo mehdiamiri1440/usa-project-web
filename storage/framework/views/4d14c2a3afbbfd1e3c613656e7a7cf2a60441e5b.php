@@ -37,10 +37,8 @@
     <script src="<?php echo e(asset('assets/cdn/axios.js')); ?>"></script>
 
     <script src="<?php echo e(asset('index/js/jquery.magnific-popup.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('index/js/jquery.parallax.js')); ?>"></script>
     <script src="<?php echo e(asset('index/js/owl.carousel.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('index/js/smoothscroll.js')); ?>"></script>
-    <script src="<?php echo e(asset('index/js/wow.min.js')); ?>"></script>
+
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
@@ -96,7 +94,7 @@
     </script>
 
 </head>
-<body>
+<body >
 <div id="app"></div>
 <div id="appBuyer"></div>
 <div id="appSeller"></div>
@@ -121,8 +119,10 @@
 
     ></header-master-layouts>
 
+
     <router-view id="main-content"
                  name="layouts"
+
                  not_found_image="<?php echo e(url('assets/img/def404.png')); ?>"
                  loading_img="<?php echo e(asset('assets/img/gif/loading.gif')); ?>"
                  trans="<?php echo e(url('dashboard/transaction-detail')); ?>"
@@ -133,6 +133,7 @@
                  site_logo="<?php echo e(asset('assets/img/logo-incobac.png')); ?>"
                  site_logo_white="<?php echo e(asset('/index/images/logo_white.png')); ?>"
                  incobaicon="<?php echo e(asset('assets/img/lo.png')); ?>"
+                 assets = "<?php echo e(asset('assets')); ?>"
                  img_about_us_1="<?php echo e(asset('assets/img/about-us/1.jpg')); ?>"
                  img_about_us_2="<?php echo e(asset('assets/img/about-us/2.jpg')); ?>"
                  img_about_us_3="<?php echo e(asset('assets/img/about-us/3.jpg')); ?>"
@@ -147,12 +148,6 @@
                  img_success_verified="<?php echo e(asset('index/images/farmer.png')); ?>"
                  img_seller_services="<?php echo e(asset('index/images/seller.jpg')); ?>"
                  img_buyer_services="<?php echo e(asset('index/images/buyer.jpg')); ?>"
-                 img_six="<?php echo e(asset('index/images/6.png')); ?>"
-                 img_five="<?php echo e(asset('index/images/5.png')); ?>"
-                 img_four="<?php echo e(asset('index/images/4.png')); ?>"
-                 img_three="<?php echo e(asset('index/images/3.png')); ?>"
-                 img_two="<?php echo e(asset('index/images/2.png')); ?>"
-                 img_one="<?php echo e(asset('index/images/1.png')); ?>"
                  img_2_help_page="<?php echo e(asset('assets/img/help/2.jpg')); ?>"
                  img_3_help_page="<?php echo e(asset('assets/img/help/3.jpg')); ?>"
                  img_4_help_page="<?php echo e(asset('assets/img/help/4.jpg')); ?>"
@@ -181,6 +176,8 @@
                  img_mobile_12_help_page="<?php echo e(asset('assets/img/help/mobile_12.jpg')); ?>"
                  img_mobile_13_help_page="<?php echo e(asset('assets/img/help/mobile_13.jpg')); ?>"
                  img_mobile_13_1_help_page="<?php echo e(asset('assets/img/help/mobile_13_1.jpg')); ?>"
+                 is-user-login="<?php echo e(session('user_id')); ?>"
+                 user-type = "<?php echo e(session('is_seller')); ?>"
     ></router-view>
 
     <footer-master-layouts></footer-master-layouts>
@@ -196,7 +193,6 @@
     });
 
     $(document).on("idle.idleTimer", function () {
-        // function you want to fire when the user goes idle
         window.location.href = '/login'
     });
 </script>

@@ -243,15 +243,27 @@
         <footer id="footer">
             <div class="container">
                 <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4 pull-left">
+                        <ul class="list-unstyled footer-list">
+                            <li >
+                                <div class="enamad">
+                                    <a target="_blank" href="https://trustseal.enamad.ir/?id=129504&amp;Code=I3flHhEiFZPLWVe9vTFK"><img src="https://Trustseal.eNamad.ir/logo.aspx?id=129504&amp;Code=I3flHhEiFZPLWVe9vTFK" alt="" style="cursor:pointer" id="I3flHhEiFZPLWVe9vTFK"></a>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+
                     <div class="col-xs-12 col-sm-6 col-md-4">
                         <ul class="list-unstyled footer-list">
                             <li>
                                 <a class="smoothScroll" href="/pricing"
                                    @click="registerComponentStatistics('footer','pricing','click-on-pricing')">تعرفه
                                     ها</a>
-                            <li>
+                            </li>
                             <li>
                                 <a class="smoothScroll" href="#"> قیمت روزانه</a>
+                            </li>
                             <li>
                                 <a class="smoothScroll" href="/privacy-and-policy"
                                    @click="registerComponentStatistics('footer','privacy-and-policy','click-on-privacy-policy')">قوانین

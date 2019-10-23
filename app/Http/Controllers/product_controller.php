@@ -277,8 +277,9 @@ class product_controller extends Controller
 		}
 		else{
 			$products = product::where('myuser_id',$current_user_id)
-                ->where('confirmed',true)
-				->get();
+                        ->where('confirmed',true)
+                        ->orderBy('updated_at','desc')
+                        ->get();
 		}
 		
 		$result_products = array();
@@ -381,7 +382,7 @@ class product_controller extends Controller
 												->join('categories','products.category_id','=','categories.id')	   											
 													->leftJoin('cities','cities.id','=','products.city_id')
 													->leftJoin('provinces','provinces.id','=','cities.province_id')
-													->select('products.id','products.updated_at','products.product_name','products.stock','products.min_sale_price','products.max_sale_price','products.min_sale_amount','products.description','products.address','products.myuser_id','products.category_id as sub_category_id','provinces.province_name','provinces.id as province_id','cities.city_name','cities.id as city_id','categories.category_name as sub_category_name')
+													->select('products.id','products.updated_at','products.product_name','products.stock','products.min_sale_price','products.max_sale_price','products.min_sale_amount','products.description','products.address','products.myuser_id','products.category_id as sub_category_id','products.confirmed','provinces.province_name','provinces.id as province_id','cities.city_name','cities.id as city_id','categories.category_name as sub_category_name')
 													->where('products.id',$product_id)
                                                     ->where('confirmed',true)
 													->get()
@@ -1011,6 +1012,39 @@ class product_controller extends Controller
                 'is_limited' => false
             ],200);
         }
+    }
+    
+    //public method
+    public function get_sample_products()
+    {
+         $until_date = Carbon::now();
+         $from_date = Carbon::now()->subDays(14); // last 2 weeks
+        
+         $products = product::where('confirmed',true)
+                                ->whereBetween('created_at',[$from_date,$until_date])
+                                ->select(['id','product_name','category_id','stock'])
+                                ->orderBy('created_at','desc')
+                                ->limit(10)
+                                ->get()
+                                ->shuffle()
+                                ->slice(0,5);
+        
+        
+        $products->map(function($product){
+            $category_info = $this->get_category_and_subcategory_name($product->category_id);
+           
+            $product->category_name = $category_info['category_name'];
+            $product->subcategory_name = $category_info['subcategory_name'];
+            $product->photo = product_media::where('product_id',$product->id)
+                                                ->get()
+                                                ->first()
+                                                ->file_path;
+        });
+        
+        return response()->json([
+            'status' => true,
+            'products' => $products
+        ],200);  
     }
             
 	

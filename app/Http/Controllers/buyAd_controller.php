@@ -669,11 +669,17 @@ class buyAd_controller extends Controller
             $result_buyAds = array();
 
             $related_buyAds = $this->get_related_buyAds_list_to_the_user($user);
-//            $buyAd_recommender_object->buyAd_list_recommender_for_seller($related_buyAds,$seller_id); //check out the method for more details
 
             $record_count = config("subscriptionPakage.type-$user->active_pakage_type.buyAd-count");
             
-            $related_buyAds = array_slice($related_buyAds->toArray(),0,$record_count);
+            if($record_count <= 5){
+                   $buyAd_recommender_object->buyAd_list_recommender_for_seller($related_buyAds,$seller_id); //check out the method for more details
+            }
+            else {
+                $related_buyAds = $related_buyAds->toArray();
+            }
+            
+            $related_buyAds = array_slice($related_buyAds,0,$record_count);
             
             foreach($related_buyAds as $buyAd){
                    $category_array = $this->get_category_and_subcategory_name($buyAd->category_id);
@@ -940,6 +946,40 @@ class buyAd_controller extends Controller
         }
         
         return $factorial;
+    }
+    
+    //public method
+    public function get_sample_buyAds()
+    {
+        $until_date = Carbon::now();
+        $from_date = Carbon::now()->subDays(7); // last 2 weeks
+        
+        $buyAds = buyAd::where('confirmed',true)
+                            ->whereBetween('created_at',[$from_date,$until_date])
+                            ->select(['id','name','requirement_amount','created_at','category_id'])
+                            ->orderBy('created_at','desc')
+                            ->limit(10)
+                            ->get()
+                            ->shuffle()
+                            ->slice(0,5);
+        
+        $date_convertor_object = new date_convertor();
+        
+        $buyAds->map(function($buyAd) use($date_convertor_object){
+                $category_info = $this->get_category_and_subcategory_name($buyAd->category_id);
+            
+                $buyAd->category_name = $category_info['category_name'];
+                $buyAd->subcategory_name = $category_info['subcategory_name'];
+            
+                $buyAd->register_date = $date_convertor_object->get_persian_date_with_month_name($buyAd->created_at);
+        });
+        
+        
+        return response()->json([
+            'status' => true,
+            'buyAds' => $buyAds,
+        ],200);
+                    
     }
 
 }

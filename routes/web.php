@@ -18,6 +18,7 @@ use App\Http\Middleware\cors;
 use Illuminate\Cookie\CookieJar;
 use App\myuser;
 use App\profile;
+use Illuminate\Http\Request;
 
 use App\Events\newMessage;
 
@@ -243,6 +244,16 @@ Route::post('/get_user_reputation_score',[
 Route::post('/increment_user_profile_visit_count',[
     'uses' => 'profile_controller@increment_user_profile_visit_count',
     'as' => 'increment_user_profile_visit_count'
+]);
+
+Route::post('/get_sample_products',[
+    'uses' => 'product_controller@get_sample_products',
+    'as'   => 'get_sample_products'
+]);
+
+Route::post('/get_sample_buyAds',[
+    'uses' => 'buyAd_controller@get_sample_buyAds',
+    'as'   => 'get_sample_buyAds'
 ]);
 
 
@@ -660,7 +671,7 @@ Route::get('/logout',function(){
     $cookie = \Cookie::forget('user_password');
 //    response('view')->withCookie($cookie);
 
-    return redirect('/login')->withCookie($cookie);
+    return redirect('/')->withCookie($cookie);
 })->name('logout');
 
 //-------------------------------- ADMIN PANEL---------------------------------------
@@ -1013,12 +1024,21 @@ Route::get('/sitemap.xml',[
 
 
 
-    //-----------------------------------------------------
-    //    in code bayad bad az har chizi ke any dare biad
-    Route::get('/{any}',function(){
-
-        return  view('layout.master');
-    })->where('any','.*');
-    //-----------------------------------------------------
+//-----------------------------------------------------
+//    in code bayad bad az har chizi ke any dare biad
+Route::get('/{any}',function(Request $request){
+    if(! $request->session()->has('user_id')){
+        $user_phone = $request->cookie('user_phone');
+        $user_hashed_password = $request->cookie('user_password');
+        
+        if($user_phone && $user_hashed_password){
+            $login_middleware_object = new login();
+            $status = $login_middleware_object->set_user_session($user_phone,$user_hashed_password); 
+        }
+    }
+    
+    return  view('layout.master');
+})->where('any','.*');
+//-----------------------------------------------------
 
 
