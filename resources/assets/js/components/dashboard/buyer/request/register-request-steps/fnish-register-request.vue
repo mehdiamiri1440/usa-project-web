@@ -322,61 +322,75 @@
 
 			    	<div class=" col-xs-12 ">
 
-
-
 				     	<div class="text-input-wrapper">
 
 
 				     		<p class="main-description">
                                 درخواست خرید شما پس از تایید کارشناسان اینکوباک برای کشاورزان و تامین کنندگان مرتبط ارسال میشود.
 				     		</p>
-                            <p class="main-description" v-if="$parent.relatedProduct" ><strong>یکی از مرتبط ترین محصولات برای درخواست خرید شما در زیر نمایش داده شده است.
-                            	<br/>
-                            	<span class="red-text">در صورت عدم ارسال پیام به فروشنده دیگر به این محصول دسترسی نخواهید داشت.</span></strong></p>
+                            
+                           <div v-if="$parent.relatedProduct">
+                           	
+                     
+	                            <p class="main-description"  ><strong>یکی از مرتبط ترین محصولات برای درخواست خرید شما در زیر نمایش داده شده است.
+	                            	<br/>
+	                            	<span class="red-text">در صورت عدم ارسال پیام به فروشنده دیگر به این محصول دسترسی نخواهید داشت.</span></strong>
+	                            </p>
 
-							 <div class="list-group-item list-item-wrapper  col-xs-12" v-if="$parent.relatedProduct">
-								<p class="list-title  col-xs-12">
-									<span>{{$parent.relatedProduct.category_name}}</span> <span> | </span> <span>{{$parent.relatedProduct.subcategory_name}}</span> <span> | {{$parent.relatedProduct.product_name}}</span>
-								</p>
-								<p class="needs  col-xs-12">
-									<span class="static-content">
-                            			میزان موجودی :
-                        			</span>
-                        			<span>{{$parent.relatedProduct.stock}}</span>
-                        			<span class="static-content">
-                            				کیلوگرم
-                       	            </span>
-                       			</p>
-                       			<p class="list-time  col-xs-12">
-                                    {{$parent.relatedProduct.register_date}}
-                       		    </p>
+								 <div class="list-group-item list-item-wrapper  col-xs-12" >
+									<p class="list-title  col-xs-12">
+										<span>{{$parent.relatedProduct.category_name}}</span> <span> | </span> <span>{{$parent.relatedProduct.subcategory_name}}</span> <span> | {{$parent.relatedProduct.product_name}}</span>
+									</p>
+									<p class="needs  col-xs-12">
+										<span class="static-content">
+	                            			میزان موجودی :
+	                        			</span>
+	                        			<span>{{$parent.relatedProduct.stock}}</span>
+	                        			<span class="static-content">
+	                            				کیلوگرم
+	                       	            </span>
+	                       			</p>
+	                       			<p class="list-time  col-xs-12">
+	                                    {{$parent.relatedProduct.register_date}}
+	                       		    </p>
 
-                       		    <div class="send-message  col-xs-12">
-                                    <a class="submit-button active blue-background" :href="$parent.getProductUrl()" target="_blank">
-                       		    		 جزییات محصول
-                     				</a>
+	                       		    <div class="send-message  col-xs-12">
+	                                    <a class="submit-button active blue-background" :href="$parent.getProductUrl()" target="_blank">
+	                       		    		 جزییات محصول
+	                     				</a>
                                     
                        		    	<button class="submit-button active " @click.prevent="$parent.openChat($parent.relatedProduct)">
                        		    		 <i style="position:relative;top:2px;font-size: 12px;left: 2px;" class="fa fa-comment-alt"></i>
                                         پیام به فروشنده
                      				</button>
                                     
+      								</div>
 
-                                    
-<!--
+      							</div>
+
+                            </div>
+
+                            <div class="text-center margin-15-0" v-else>
+                            	   <a class="submit-button active" href="/product-list">
+                       		    		  لیست محصولات
+                     				</a>
+
+                            </div>
+
+<!--						
+
                                     <button class="submit-button active" @click.prevent="$parent.getProductUrl()">
                        		    		 پیام به فروشنده
                      				</button>
 -->
 
-                   				</div>
-                			</div>
-
+                   			
+                	
 				     	</div>
 
 				    </div>
 
-			       <div class="col-xs-12">
+			      <!--  <div class="col-xs-12">
 			       	<div class="text-center">
 			       		 <button class="submit-button active "
 
@@ -386,7 +400,7 @@
 
 		        	  </button>
 			       	</div>
-			       </div>
+			       </div> -->
 		</div>
 
     </div>
