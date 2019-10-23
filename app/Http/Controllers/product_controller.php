@@ -920,7 +920,7 @@ class product_controller extends Controller
             $buyAd_name_array = array_filter(array_map('trim',explode(' ',str_replace('،',' ',$buyAd->name))));
             
             foreach($buyAd_name_array as $word){
-                $index = array_search($word,$buyAd_name_array);
+                $index = array_search($word,$product_name_array);
                 if($index !== false){
                     $score += $this->factorial($product_name_array_count - $index);
                 }
