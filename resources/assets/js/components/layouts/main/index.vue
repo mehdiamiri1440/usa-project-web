@@ -1529,8 +1529,8 @@
 
 
                             <div v-else class="row">
-                                <div v-for="(item, index) in 4" :class="{ 'hidden-xs' : index >= 2}"
-                                     class="class='col-md-3 col-sm-3  col-xs-6 '">
+                                <div v-for="(item, index) in 3" :class="{ 'hidden-xs' : index >= 2}"
+                                     class="class='col-md-4 col-sm-4  col-xs-6 '">
 
                                     <article class='carousel-item box-content col-xs-12'>
 

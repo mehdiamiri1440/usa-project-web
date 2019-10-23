@@ -316,41 +316,53 @@
 				     		<p class="main-description">
 				     			در صورت استفاده از طرح عضویت رایگان محصول شما پس از تایید کارشناسان در لیست محصولات قرار می گیرید و از طریق پیامک به شما اطلاع رسانی خواهد شد.
 				     		</p>
-                            <p class="main-description" v-if="$parent.relatedBuyAd" ><strong>یکی از مرتبط ترین درخواست های خرید برای محصول شما در زیر نمایش داده شده است.
-                            	<br/>
-                            	<span class="red-text">در صورت عدم ارسال پیام به خریدار دیگر به این درخواست خرید دسترسی نخواهید داشت.</span></strong></p>
 
-							<div class="list-group-item list-item-wrapper  col-xs-12" v-if="$parent.relatedBuyAd">
-								<p class="list-title col-xs-12">
-									<span>{{$parent.relatedBuyAd.category_name}}</span> <span> | </span> <span>{{$parent.relatedBuyAd.subcategory_name}}</span> <span> | {{$parent.relatedBuyAd.name}}</span>
-								</p>
-								<p class="needs col-xs-12">
-									<span class="static-content">
-                            			میزان نیازمندی :
-                        			</span>
-                        			<span>{{$parent.relatedBuyAd.requirement_amount}}</span>
-                        			<span class="static-content">
-                            				کیلوگرم
-                       	            </span>
-                       			</p>
-                       			<p class="list-time col-xs-12">
-                                    {{$parent.relatedBuyAd.register_date}}
-                       		    </p>
+                           <div v-if="$parent.relatedBuyAd">
+	                           	 <p class="main-description"  ><strong>یکی از مرتبط ترین درخواست های خرید برای محصول شما در زیر نمایش داده شده است.
+	                            	<br/>
+	                            	<span class="red-text">در صورت عدم ارسال پیام به خریدار دیگر به این درخواست خرید دسترسی نخواهید داشت.</span></strong>
+	                            </p>
 
-                       		    <div class="send-message col-xs-12">
+								<div class="list-group-item list-item-wrapper  col-xs-12" >
+									<p class="list-title col-xs-12">
+										<span>{{$parent.relatedBuyAd.category_name}}</span> <span> | </span> <span>{{$parent.relatedBuyAd.subcategory_name}}</span> <span> | {{$parent.relatedBuyAd.name}}</span>
+									</p>
+									<p class="needs col-xs-12">
+										<span class="static-content">
+	                            			میزان نیازمندی :
+	                        			</span>
+	                        			<span>{{$parent.relatedBuyAd.requirement_amount}}</span>
+	                        			<span class="static-content">
+	                            				کیلوگرم
+	                       	            </span>
+	                       			</p>
+	                       			<p class="list-time col-xs-12">
+	                                    {{$parent.relatedBuyAd.register_date}}
+	                       		    </p>
 
-                       		    	<button class="submit-button active" @click.prevent="$parent.openChat($parent.relatedBuyAd)">
-                       		    		 پیام به خریدار
-                     				</button>
+	                       		    <div class="send-message col-xs-12">
 
-                   				</div>
-                			</div>
+	                       		    	<button class="submit-button active" @click.prevent="$parent.openChat($parent.relatedBuyAd)">
+	                       		    		 پیام به خریدار
+	                     				</button>
+
+	                   				</div>
+	                			</div>
+                           </div>
+
+                           <div class="text-center margin-15-0" v-else>
+                           		
+                           		<router-link class="green-button" :to="{ name : 'buyAdRequests'}">
+                           			مشاهده درخواست های خرید
+                           		</router-link>
+
+                           </div>
 
 				     	</div>
 
 				    </div>
 
-			       <div class="col-xs-12">
+			       <!-- <div class="col-xs-12">
 			       	<div class="text-center">
 			       		 <button class="submit-button active "
 
@@ -360,7 +372,7 @@
 
 		        	  </button>
 			       	</div>
-			       </div>
+			       </div> -->
 		</div>
 
     </div>

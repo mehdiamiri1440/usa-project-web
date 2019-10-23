@@ -186,8 +186,9 @@
         mounted: function () {
             $("#product-section .owl-carousel").owlCarousel({
                 autoplay: true,
-                autoplayTimeout: 4000,
-                loop: true,
+                autoplayTimeout: 3000,
+                loop: false,
+                rewind: true,
                 nav: true,
                 navText: ['<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>'],
                 items: 6,
@@ -211,9 +212,6 @@
                     767: {
                         items: 3,
                         stagePadding: 15
-                    },
-                    992: {
-                        items: 4,
                     }
                 }
             });

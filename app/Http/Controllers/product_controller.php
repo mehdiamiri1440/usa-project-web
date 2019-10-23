@@ -1027,7 +1027,7 @@ class product_controller extends Controller
                                 ->limit(10)
                                 ->get()
                                 ->shuffle()
-                                ->slice(0,5);
+                                ->slice(0,9);
         
         
         $products->map(function($product){
