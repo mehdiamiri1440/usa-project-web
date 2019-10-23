@@ -669,7 +669,7 @@ class buyAd_controller extends Controller
             $result_buyAds = array();
 
             $related_buyAds = $this->get_related_buyAds_list_to_the_user($user);
-            
+
             $record_count = config("subscriptionPakage.type-$user->active_pakage_type.buyAd-count");
             
             if($record_count <= 5){
