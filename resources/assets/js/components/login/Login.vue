@@ -317,7 +317,7 @@ input[type="number"]::-webkit-outer-spin-button {
                     <!-- <i class="fa fa-arrow-left"></i> -->
                   </p>
                   <h1 class="col-xs-8">
-                    <span v-if="currentStep == 1">ورود به  اینکوباک</span>
+                    <span v-if="currentStep == 1">ورود به اینکوباک</span>
                     <span v-if="currentStep == 2">بازیابی کلمه عبور</span>
                     <span v-if="currentStep == 3"></span>
                   </h1>
@@ -446,10 +446,31 @@ export default {
                   "seller-logged-in-successfully"
                 );
               } else if (response.data.is_seller) {
-                window.location.href = "/dashboard/register-product";
-                localStorage.userRoute = JSON.stringify(
-                  "/dashboard/register-product"
-                );
+                axios
+                  .post("/user/profile_info")
+                  .then(function(response) {
+                    self.currentUser = response.data;
+                    axios
+                      .post("/get_product_list_by_user_name", {
+                        user_name: self.currentUser.user_info.user_name
+                      })
+                      .then(function(response) {
+                        self.products = response.data.products;
+                        self.loading = false;
+                        if (!self.products.length) {
+                          window.location.href = "/dashboard/register-product";
+                          localStorage.userRoute = JSON.stringify(
+                            "/dashboard/register-product"
+                          );
+                        } else {
+                          window.location.href = "/dashboard/status";
+                          localStorage.userRoute = JSON.stringify(
+                            "/dashboard/status"
+                          );
+                        }
+                      });
+                  })
+                  .catch(error => console.log("error"));
                 self.registerComponentStatistics(
                   "Login",
                   "buyer-login",
@@ -591,15 +612,14 @@ export default {
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/login" });
     var self = this;
-//    if (localStorage.userRoute) {
-//      window.location.href = JSON.parse(localStorage.userRoute);
-//    }
-     if (self.isUserLogin && self.userType == 1) {
-       window.location.href = "/dashboard/register-product";
-     } else if (self.isUserLogin && self.userType != 1) {
-       window.location.href = "/dashboard/register-request";
-     }
-    else {
+    //    if (localStorage.userRoute) {
+    //      window.location.href = JSON.parse(localStorage.userRoute);
+    //    }
+    if (self.isUserLogin && self.userType == 1) {
+      window.location.href = "/dashboard/register-product";
+    } else if (self.isUserLogin && self.userType != 1) {
+      window.location.href = "/dashboard/register-request";
+    } else {
       self.loginCheckerLoading = false;
     }
     window.addEventListener("keydown", function(event) {
