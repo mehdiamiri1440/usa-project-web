@@ -184,12 +184,30 @@ i.fa-home {
   display: inline-block;
   color: #fff !important;
 }
+@media only screen and (max-width: 767px) {
+  .message-notification {
+    top: 4px;
+    cursor: pointer;
+    border: 1px solid white;
+    right: 35px;
+    position: absolute;
+    background-color: #e41c38;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: wheat;
+  }
+}
 </style>
 
 <template>
   <div>
     <header id="header" class="main-header">
       <div class="show-header">
+        <div v-if="messageCount>0" class="message-notification">{{messageCount}}</div>
         <button class="fa fa-bars"></button>
       </div>
 
@@ -274,8 +292,14 @@ i.fa-home {
 <script>
 var visible = false;
 import SubMenu from "./sub-menu/sub-menu.vue";
+import { eventBus } from "../../../../../router/dashboard_router";
 
 export default {
+  data: function() {
+    return {
+      messageCount: 0
+    };
+  },
   components: {
     SubMenu
   },
@@ -315,7 +339,30 @@ export default {
       }
     }
   },
+  mounted() {
+    var self = this;
+    axios
+      .post("/get_total_unread_messages_for_current_user")
+      .then(function(response) {
+        self.messageCount = response.data.msg_count;
+      })
+      .catch(function(error) {
+        console.log("error", error);
+      });
+  },
   created() {
+    var self = this;
+    eventBus.$on("messageCount", event => {
+      this.messageCount += event;
+    });
+    eventBus.$on("active", event => {
+      this.activeElement = event;
+    });
+    Echo.private("testChannel." + userId).listen("newMessage", e => {
+      var senderId = e.new_message.sender_id;
+
+      self.messageCount += 1;
+    });
     document.addEventListener("click", this.documentClick);
   },
   registerComponentStatistics: function(categoryName, actionName, labelName) {

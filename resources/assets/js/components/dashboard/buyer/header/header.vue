@@ -1102,7 +1102,7 @@
                 });
             },
             toggleShowHeader() {
-                var showHeaderButtonElement = $('.show-header button');
+                var showHeaderButtonElement = $('.show-header ');
                 var closeHeaderButtonMobile = $('.close_menu_mob ');
                 var flag = true;
                 var rightHeader = $(".right-header.mobile-header");
