@@ -1104,20 +1104,23 @@
                 });
             },
             toggleShowHeader() {
+                var self=this
                 var showHeaderButtonElement = $('.show-header ');
                 var closeHeaderButtonMobile = $('.close_menu_mob ');
                 var flag = true;
                 var rightHeader = $(".right-header.mobile-header");
                 var back = $(".background_mob_sec");
                 var closeHeaderButtonMobileLinks = $('.mobile-header .header-menu a');
-                  rightHeader.animate({
+                                rightHeader.animate({
                             right: '0'
                         }, 800);
                        setTimeout(() => {
                               rightHeader.animate({
                             right: '-300'
                         },800,undefined,function(){
+                            console.log('menu closed',self.menuClosed)                            
                             self.menuClosed=true
+                            console.log('menu closed',self.menuClosed)
                             });
                        }, 2000);
                 showHeaderButtonElement.on('click', function () {
