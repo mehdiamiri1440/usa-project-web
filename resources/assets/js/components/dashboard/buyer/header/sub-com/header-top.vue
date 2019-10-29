@@ -197,8 +197,14 @@ i.fa-home {
     height: 28px;
     display: flex;
     justify-content: center;
+    z-index: 10;
     align-items: center;
     color: wheat;
+  }
+}
+@media only screen and (min-width: 767px) {
+  .hide-message-notification {
+    display: none;
   }
 }
 .rotation {
@@ -236,7 +242,10 @@ i.fa-home {
   <div>
     <header id="header" class="main-header">
       <div id="notification" class="show-header">
-        <div v-if="messageCount>0" class="message-notification">{{messageCount}}</div>
+        <div
+          v-if="messageCount>0"
+          class="message-notification hide-message-notification"
+        >{{messageCount}}</div>
         <button>
           <span :class="menuClosed?'rotation':''" class="fa fa-bars"></span>
         </button>
