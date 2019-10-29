@@ -1,4 +1,4 @@
-<style scoped>
+<style >
 .custom-badge {
   position: absolute;
   left: 20px;
@@ -39,7 +39,7 @@
           <li class="list-item">
             <router-link
               :class="{'active' : this.activeElement === 0}"
-              :to="{ name : 'status' }"
+              :to="{ name : 'statusSeller' }"
             >
               <i class="fa fa-chart-line"></i>
               <span>داشبورد</span>
@@ -48,7 +48,7 @@
           </li>
 
           <li class="list-item">
-            <router-link :to="{ name : 'buyAdRequests' }">
+            <router-link :to="{ name : 'buyAdRequestsSeller' }">
               <i class="fa fa-list-alt" aria-hidden="true"></i>
               <span>درخواست های خرید</span>
 
@@ -56,7 +56,7 @@
           </li>
 
           <li class="list-item">
-            <router-link :to="{ name : 'registerProduct' }">
+            <router-link :to="{ name : 'registerProductSeller' }">
               <i class="fa fa-plus-square" aria-hidden="true"></i>
               <span>ثبت محصول</span>
 
@@ -65,7 +65,7 @@
 
 
           <li class="list-item">
-            <router-link :to="{ name : 'messages' }">
+            <router-link :to="{ name : 'messagesSeller' }">
               <i class="fas fa-comment-alt" aria-hidden="true"></i>
 
               <span>پیام ها</span>
@@ -76,7 +76,7 @@
 
           <li class="list-item">
             <router-link
-                    :to="{ name : 'profileBasic' }"
+                    :to="{ name : 'profileBasicSeller' }"
             >
               <i class="fa fa-user" aria-hidden="true"></i>
               <span>ویرایش پروفایل</span>
@@ -85,7 +85,7 @@
           </li>
 
           <li class="list-item">
-            <router-link :to="{ name : 'myProducts' }">
+            <router-link :to="{ name : 'myProductsSeller' }">
               <i class="fas fa-list-ol" aria-hidden="true"></i>
               <span>محصولات من</span>
 
@@ -93,7 +93,7 @@
           </li>
 
           <li class="list-item">
-            <router-link :to="{ name : 'guide' }">
+            <router-link :to="{ name : 'guideSeller' }">
               <i class="fa fa-question" aria-hidden="true"></i>
               <span>راهنما</span>
 
@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import { eventBus } from "../../../../../router/dashboard_router";
+import { eventBus } from "../../../../../router/router";
 
 export default {
   props: [
@@ -167,13 +167,15 @@ export default {
   },
   created() {
     var self = this;
+    var userId = window.localStorage.getItem('userId');
 
-    eventBus.$on("messageCount", event => {
+      eventBus.$on("messageCount", event => {
       this.messageCount += event;
     });
     eventBus.$on("active", event => {
       this.activeElement = event;
     });
+
     Echo.private("testChannel." + userId).listen("newMessage", e => {
       var senderId = e.new_message.sender_id;
 

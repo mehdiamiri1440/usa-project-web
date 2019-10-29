@@ -124,7 +124,7 @@
               <div>دسته بندی محصولات </div>
               <hr>
           </div>
-          
+
           <div  class="category-products-widget">
               <ul>
                   <li v-for="(category, index) in categoryList" :key="category.id"
@@ -149,17 +149,17 @@
                           <li class="sub-category-item " v-for="subCategory in category.subcategories">
 
                               <h1 v-if="getCategoryName() === subCategory.category_name">
-                                <a       :class="{'active' : getCategoryName() === subCategory.category_name}"
-                                      :href=getSubCategoryUrl(subCategory)
+                                <router-link      :class="{'active' : getCategoryName() === subCategory.category_name}"
+                                      :to=getSubCategoryUrl(subCategory)
                                       v-text="subCategory.category_name">
-                              </a>
+                              </router-link>
                               </h1>
 
                               <h4 v-else>
-                                <a       :class="{'active' : getCategoryName() === subCategory.category_name}"
-                                      :href=getSubCategoryUrl(subCategory)
+                                <router-link       :class="{'active' : getCategoryName() === subCategory.category_name}"
+                                      :to=getSubCategoryUrl(subCategory)
                                       v-text="subCategory.category_name">
-                              </a>
+                              </router-link>
                               </h4>
 
 
@@ -212,7 +212,9 @@
 </template>
 
 <script>
+    import Route from "../../../../../router/components/route";
     export default {
+        components: {Route},
         props:[
           'fotnLoad'
         ],
@@ -341,12 +343,12 @@
                 let url = '/product-list/category/'
                     + t.category_name.replace(' ', '-')
                 ;
-               
+
                 return url;
             },
             getCategoryName:function(){
                 let name = this.$route.params.categoryName ? this.$route.params.categoryName :'';
-                
+
                 return name.replace('-',' ');
             }
         },

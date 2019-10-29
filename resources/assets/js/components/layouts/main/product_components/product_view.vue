@@ -1,19 +1,7 @@
-<style>
 
-    .wrapper-bg {
-
-        background: #fff;
-
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-
-        border-radius: 4px;
-
-        padding: 15px;
-
-    }
-</style>
 
 <style scoped>
+
     #main {
         padding-top: 100px;
     }
@@ -59,9 +47,9 @@
                     <div class="row">
                         <ProductContents/>
                         <div class="buttons-wrapper  hidden-xs  hidden-sm hidden-md">
-                            <a href="/product-list" class="green-button blue-button">
+                            <router-link :to="{name : 'productList'}" class="green-button blue-button">
                                 مشاهده همه محصولات
-                            </a>
+                            </router-link>
                         </div>
                     </div>
                 </section>
@@ -73,9 +61,9 @@
                 <UserInfo/>
 
                 <div class="buttons-wrapper  hidden-lg">
-                    <a href="/product-list" class="green-button blue-button">
+                    <router-link :to="{name : 'productList'}" class="green-button blue-button">
                         مشاهده همه محصولات
-                    </a>
+                    </router-link>
                 </div>
             </div>
         </main>
@@ -86,7 +74,7 @@
 <script>
     import ProductContents from "./product-view/product";
     import UserInfo from "./product-view/user_info";
-    import {eventBus} from "../../../../../js/router/dashboard_router";
+    import {eventBus} from "../../../../router/router";
 
     export default {
         components: {
@@ -97,7 +85,8 @@
             [
                 "str",
                 "defultimg",
-                "loading_img"
+                "loading_img",
+                'userType'
             ],
         data: function () {
             return {
@@ -159,12 +148,16 @@
                     profile_photo: product.profile_info.profile_photo,
                     user_name: product.user_info.user_name,
                 };
-
+                var self = this;
                 if (this.currentUser.user_info) {
                     if (this.currentUser.user_info.id !== product.user_info.id) {
                         axios.post('/set_last_chat_contact', contact)
                             .then(function (response) {
-                                window.location.href = '/dashboard/messages';
+                                if (self.currentUser.user_info.is_seller == 1) {
+                                    self.$router.push('/seller/messages');
+                                } else if (self.currentUser.user_info.is_buyer == 1) {
+                                    self.$router.push('/buyer/messages');
+                                }
                             })
                             .catch(function (e) {
                                 alert('Error');
@@ -253,7 +246,7 @@
                 if (num == null) {
                     return null;
                 }
-               
+
                 num = num.toString().replace(/^0+/, '');
                 num = num.toString().replace(/^\u0660+/, '');
                 num = num.toString().replace(/^\u06f0+/, '');

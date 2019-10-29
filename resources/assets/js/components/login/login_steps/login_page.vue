@@ -256,11 +256,11 @@
 							<img src="./img/banner-arrow.png">
 						</p>
 
-						<a href="/register" class="register-button "  >
+						<router-link to="/register" class="register-button "  >
 
 							ثبت نام در اینکوباک
 
-						</a>
+						</router-link>
 
 					</div>
 

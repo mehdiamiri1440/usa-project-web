@@ -31,7 +31,7 @@
                   </router-link>
                 </li> -->
                 <li class="list-item">
-                    <router-link  :to="{ name : 'profileBasic' }">
+                    <router-link  :to="{ name : 'profileBasicBuyer' }">
                         <i class="fa fa-user" aria-hidden="true"></i>
                         <span>ویرایش پروفایل</span>
 
@@ -39,7 +39,7 @@
                 </li>
 
                 <li class="list-item">
-                    <router-link  :to="{ name : 'registerRequest' }">
+                    <router-link  :to="{ name : 'registerRequestBuyer' }">
                         <i class="fa fa-plus-square " aria-hidden="true"></i>
                         <span>ثبت درخواست خرید</span>
 
@@ -47,7 +47,7 @@
                 </li>
 
                 <li class="list-item">
-                    <router-link  :to="{ name : 'messages' }">
+                    <router-link  :to="{ name : 'messagesBuyer' }">
                         <i class="fas fa-comment-alt" aria-hidden="true"></i>
                         <span>پیام ها</span>
                         <span class="custom-badge"
@@ -60,7 +60,7 @@
                 </li>
 
                 <li class="list-item">
-                    <router-link  :to="{ name : 'guide' }">
+                    <router-link  :to="{ name : 'guideBuyer' }">
                         <i class="fa fa-question-circle" aria-hidden="true"></i>
                         <span>راهنما</span>
 
@@ -72,7 +72,7 @@
 </template>
 
 <script>
-    import {eventBus} from "../../../../../router/dashboard_router";
+    import {eventBus} from "../../../../../router/router";
 
     export default {
         props: [
@@ -130,6 +130,8 @@
         },
         created() {
             var self = this;
+            var userId = window.localStorage.getItem('userId');
+
 
             eventBus.$on('messageCount', (event) => {
                 this.messageCount += event;

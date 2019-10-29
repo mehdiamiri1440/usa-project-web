@@ -129,8 +129,6 @@
         margin-top: -15px;
     }
 
-
-
     input[type="text"], select, textarea {
         background: #eff3f6;
         border: 1px solid #cfcfcf;
@@ -171,11 +169,13 @@
     .modal-content {
         overflow: hidden;
     }
-    .text-danger{
+
+    .text-danger {
         height: 24px;
         font-size: 12px;
     }
-    .close-modal{
+
+    .close-modal {
         font-size: 20px;
 
         color: red;
@@ -189,7 +189,7 @@
         margin-top: 8px;
     }
 
-    .modal-title{
+    .modal-title {
         float: right;
 
         font-size: 23px;
@@ -223,7 +223,8 @@
 
         <!--article modal-->
 
-        <div v-if="isMyProfile" class="modal fade" :id="'article-modal' + product.main.id" tabindex="-1" role="dialog" aria-hidden="true">
+        <div v-if="isMyProfile" class="modal fade" :id="'article-modal' + product.main.id" tabindex="-1" role="dialog"
+             aria-hidden="true">
             <div class="modal-dialog " role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -327,7 +328,7 @@
 
 </template>
 <script>
-    import {eventBus} from "../../../../../js/router/dashboard_router";
+    import {eventBus} from "../../../../router/router";
 
     import ProductUserInfo from './product-article-components/product_user_info'
     import ArticleMainContents from './product-article-components/article_main_contents'
@@ -344,6 +345,7 @@
             'loading',
             'loading_img',
             'currentUser',
+
         ],
         data: function () {
             return {
@@ -373,11 +375,11 @@
                 if (num == null) {
                     return null;
                 }
-                
+
                 num = num.toString().replace(/^0+/, '');
                 num = num.toString().replace(/^\u0660+/, '');
                 num = num.toString().replace(/^\u06f0+/, '');
-                
+
                 return num.toString()
                     .replace(/[\u0660-\u0669]/g, function (c) {
                         return c.charCodeAt(0) - 0x0660;
@@ -479,11 +481,17 @@
                     user_name: product.user_info.user_name,
                 };
 
+                var self = this;
+
                 if (this.currentUser.user_info) {
                     if (this.currentUser.user_info.id !== product.user_info.id) {
                         axios.post('/set_last_chat_contact', contact)
                             .then(function (response) {
-                                window.location.href = '/dashboard/messages';
+                                if (self.currentUser.user_info.is_seller == 1) {
+                                    self.$router.push('/seller/messages');
+                                } else if (self.currentUser.user_info.is_buyer == 1) {
+                                    self.$router.push('/buyer/messages');
+                                }
                             })
                             .catch(function (e) {
                                 alert('Error');

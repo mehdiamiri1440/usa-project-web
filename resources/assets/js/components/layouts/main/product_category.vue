@@ -1,9 +1,9 @@
 
-<style >
+<style scoped>
 
     #main-content{
 
-          padding-top: 165px;
+        padding-top: 165px;
 
 
     }
@@ -12,7 +12,7 @@
 
         #main-content{
 
-              padding-top: 80px !important;
+            padding-top: 80px !important;
         }
 
     }
@@ -25,10 +25,6 @@
         }
 
     }
-
-</style>
-<style scoped>
-
     .shadow-content{
         background: #fff;
     }
@@ -596,7 +592,7 @@
 
 
         <main id="main" class="container ">
-               
+
 
                     <div class="col-xs-12 col-lg-9">
                     <div class="row">
@@ -797,7 +793,7 @@
 <script>
     import ProductArticle from './product_components/product_article'
     import ProductAsideCategories from './product_components/sidebar/product_aside_categories'
-    import {eventBus} from "../../../../js/router/dashboard_router";
+    import {eventBus} from "../../../router/router";
     import StickySidebar from 'sticky-sidebar';
 
     var visible = false;
@@ -905,7 +901,7 @@
 
             },
             feed() {
-            
+
                 var self = this;
                 if (this.searchText === '' && this.provinceId === '' && this.categoryId === '' && this.continueToLoadProducts) {
                     this.loadMoreActive = true;

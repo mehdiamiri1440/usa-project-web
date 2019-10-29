@@ -90,7 +90,7 @@
     <div>
         <script v-html="jsonLDObject" type="application/ld+json"></script>
 
-        <header id="header" class="hidden-xs  main-header">
+        <header class="hidden-xs profile-header  main-header">
             <h1 class="title-page col-xs-12">
                 پروفایل
             </h1>
@@ -158,12 +158,19 @@
                                 <div class="col-xs-12">
                                     <div v-if="currentUser.user_info">
 
-                                        <a href="/dashboard/profile" class="green-button edit"
-                                           v-if="currentUser.user_info.id === profileOwner.user_info.id">
+                                        <router-link :to="{name : 'profileBasicSeller'}" class="green-button edit"
+                                           v-if="currentUser.user_info.is_seller == 1 && currentUser.user_info.id === profileOwner.user_info.id">
 
                                             <i class="fa fa-pencil-alt"></i>
                                             ویرایش پروفایل
-                                        </a>
+                                        </router-link>
+
+                                        <router-link :to="{name : 'profileBasicBuyer'}" class="green-button edit"
+                                           v-if="currentUser.user_info.is_seller == 0 && currentUser.user_info.id === profileOwner.user_info.id">
+
+                                            <i class="fa fa-pencil-alt"></i>
+                                            ویرایش پروفایل
+                                        </router-link>
 
                                         <a v-else href="#" @click.prevent="openChat()" class="green-button edit">
 
@@ -546,7 +553,7 @@
                                     :currentUser="currentUser"
                                 />
                               </div>
-                          </div>   
+                          </div>
 
                         <div class="col-xs-12" v-if="products.length === 0 && !loading">
                             <div class="col-xs-12" v-if="products.length === 0 && !loading">
@@ -570,7 +577,7 @@
 
 <script>
     import ProductArticle from './product_components/product_article';
-    import {eventBus} from "../../../../js/router/dashboard_router";
+    import {eventBus} from "../../../router/router";
 
     var visible = false;
     var PopupImage = {
@@ -916,19 +923,28 @@
                     profile_photo: this.profileOwner.profile.profile_photo,
                     user_name: this.profileOwner.user_info.user_name,
                 };
+                var self = this;
 
-                if (this.currentUser) {
+                if (this.currentUser.user_info) {
                     axios.post('/set_last_chat_contact', contact)
                         .then(function (response) {
-                            window.location.href = '/dashboard/messages';
+                            console.log(self.currentUser.user_info.is_seller);
+                            if (self.currentUser.user_info.is_seller == 1) {
+                                self.$router.push('/seller/messages');
+                            } else if (self.currentUser.user_info.is_buyer == 1) {
+                                self.$router.push('/buyer/messages');
+                            }
                         })
                         .catch(function (e) {
                             alert('Error');
                         });
                 }
                 else {
-                    alert('ابتدا لاگین کنید');
+                    this.popUpMsg = 'اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
+                    eventBus.$emit('submitSuccess', this.popUpMsg);
+                    $('#auth-popup').modal('show');
                 }
+
             },
             createJsonLDObject: function (profileOwner) {
                 var fullName = profileOwner.user_info.first_name + ' ' + profileOwner.user_info.last_name;

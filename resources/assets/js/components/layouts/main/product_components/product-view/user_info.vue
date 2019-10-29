@@ -259,7 +259,7 @@
 </style>
 <template>
 	<div v-if="$parent.product.user_info" class="user-info-wrapper wrapper-bg" :class="{ 'active': $parent.product.user_info.active_pakage_type != 0 }">
-		<a v-if :href="'/profile/'+ $parent.product.user_info.user_name"  class="user-information-link">
+		<router-link  :to="'/profile/'+ $parent.product.user_info.user_name"  class="user-information-link">
                        <div class="user-information-content-image">
                           <div class="user-image" v-if="$parent.product.profile_info.profile_photo">
                               <img v-bind:src=" '/storage/' + $parent.product.profile_info.profile_photo">
@@ -306,12 +306,12 @@
                       </div>
 
 
-                  </a>
+                  </router-link>
 		<div class="user-info-actions">
 
-			<a :href="'/profile/'+ $parent.product.user_info.user_name" class="green-button green-button-o">
+			<router-link :to="'/profile/'+ $parent.product.user_info.user_name" class="green-button green-button-o">
 				مشاهده پروفایل
-			</a>
+			</router-link>
 
 			<button  v-if="!$parent.isMyProfile"  @click.prevent="$parent.openChat($parent.product)" class="green-button">
 
@@ -320,12 +320,19 @@
 
 			</button>
 
-			<a  v-else href="/dashboard/profile"  class="green-button ">
+			<router-link v-else-if="$parent.userType == 0" :to="{name : 'profileBasicBuyer'}"  class="green-button ">
 
 				ویرایش پروفایل
 				<i class="fa fa-pencil-alt"></i>
 
-			</a>
+			</router-link>
+
+			<router-link v-else-if="$parent.userType == 1" :to="{name : 'profileBasicSeller'}"  class="green-button ">
+
+				ویرایش پروفایل
+				<i class="fa fa-pencil-alt"></i>
+
+			</router-link>
 
 
 		</div>

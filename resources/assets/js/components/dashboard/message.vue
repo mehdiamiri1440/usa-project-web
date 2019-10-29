@@ -485,7 +485,7 @@
     display: block;
   }
   .message-wrapper .message-contact-title span{
- 
+
     padding-top: 14px;
 
     width: 170px;
@@ -503,9 +503,9 @@
 }
 
 @media screen and (max-width: 370px) {
- 
+
   .message-wrapper .message-contact-title span{
-  
+
     width: 130px;
 
   }
@@ -520,7 +520,7 @@
   }
 
   .message-wrapper .message-contact-title span{
-  
+
     font-size: 13px;
   }
 }
@@ -681,7 +681,7 @@
 </template>
 
 <script>
-import { eventBus } from "../../router/dashboard_router";
+import { eventBus } from "../../router/router";
 import Push from "push.js";
 
 export default {

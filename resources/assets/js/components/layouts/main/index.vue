@@ -1157,7 +1157,7 @@
                                 </button>
                             </div>
 
-                            <a href="/product-list" class=" green-button "> لیست محصولات</a>
+                            <router-link :to="{name : 'productList'}" class=" green-button "> لیست محصولات</router-link>
                         </u-animate>
 
                     </u-animate-container>
@@ -1192,20 +1192,19 @@
                                 <li v-for="subCategory in category.subcategories"
                                     class="col-xs-4 col-sm-3 col-md-4 pull-right">
 
-                                    <a
+                                    <router-link
                                             class="sub-category-item"
-                                            :href="getSubCategoryUrl(subCategory.category_name) "
+                                            :to="getSubCategoryUrl(subCategory.category_name) "
                                             v-text="subCategory.category_name">
-
-                                    </a>
+                                    </router-link>
 
                                 </li>
 
                                 <li class="col-xs-12 button-link-wrapper">
-                                    <a class="product-link green-button" href="/product-list">
+                                    <router-link class="product-link green-button" :to="{name : 'productList'}">
                                         <i class=" fa fa-arrow-left"></i>
                                         مشاهده همه محصولات
-                                    </a>
+                                    </router-link>
                                 </li>
 
                             </ul>
@@ -1279,12 +1278,12 @@
                                     <li v-if="!isUserLogin || userType == 1"
                                         class="buttons-action list-group-item  col-xs-12">
 
-                                        <a class="green-button" href="/dashboard/buyAd-requests">
+                                        <router-link class="green-button" :to="{name : 'buyAdRequestsSeller'}">
                                             همه درخواست های خرید
 
                                             <i class="fa fa-arrow-left"></i>
 
-                                        </a>
+                                        </router-link>
 
                                     </li>
 
@@ -1318,11 +1317,11 @@
 
                             </h3>
 
-                            <a class="green-button" href="/dashboard/register-request">
+                            <router-link class="green-button" :to="{name : 'registerRequestBuyer'}">
 
                                 ثبت درخواست خرید
 
-                            </a>
+                            </router-link>
 
                         </div>
 
@@ -1333,11 +1332,11 @@
 
                             </h3>
 
-                            <a class="green-button" href="/dashboard/buyAd-requests">
+                            <router-link class="green-button" :to="{name : 'buyAdRequestsSeller'}">
 
                                 لیست درخواست های خرید
 
-                            </a>
+                            </router-link>
                         </div>
 
                         <div v-else class="title-box box-content">
@@ -1352,11 +1351,11 @@
                                 برای فروش بدون واسطه محصولات کشاورزی خود به خریداران مستقیم و صادرکنندگان هم اکنون ثبت
                                 نام کنید
                             </p>
-                            <a v-if="!isUserLogin " class="green-button" href="/register">
+                            <router-link v-if="!isUserLogin " class="green-button" :to="{name : 'register'}">
 
                                 ثبت نام
 
-                            </a>
+                            </router-link>
                         </div>
 
                     </div>
@@ -1395,13 +1394,12 @@
                         </div>
                         <div class="text-center  text-rtl" v-if="!isUserLogin || userType == 1">
 
-
-                            <a class="mobile-requests-buttons green-button" href="/dashboard/buyAd-requests">
+                            <router-link class="mobile-requests-buttons green-button" :to="{name : 'buyAdRequestsSeller'}">
                                 همه درخواست های خرید
 
                                 <i class="fa fa-arrow-left"></i>
 
-                            </a>
+                            </router-link>
 
 
                         </div>
@@ -1444,11 +1442,11 @@
 
                             </h3>
 
-                            <a class="green-button" href="/dashboard/register-request">
+                            <router-link class="green-button" :to="{name : 'registerRequestBuyer'}">
 
                                 ثبت درخواست خرید
 
-                            </a>
+                            </router-link>
 
                         </div>
 
@@ -1459,11 +1457,11 @@
 
                             </h3>
 
-                            <a class="green-button" href="/dashboard/buyAd-requests">
+                            <router-link class="green-button" :to="{name : 'buyAdRequestsSeller'}">
 
                                 لیست درخواست های خرید
 
-                            </a>
+                            </router-link>
                         </div>
 
                         <div v-else class="title-box box-content">
@@ -1478,11 +1476,11 @@
                                 برای فروش بدون واسطه محصولات کشاورزی خود به خریداران مستقیم و صادرکنندگان هم اکنون ثبت
                                 نام کنید
                             </p>
-                            <a v-if="!isUserLogin " class="green-button" href="/register">
+                            <router-link v-if="!isUserLogin " class="green-button" :to="{name : 'register'}">
 
                                 ثبت نام
 
-                            </a>
+                            </router-link>
                         </div>
 
                 </div>
@@ -1561,11 +1559,11 @@
 
                             </h3>
 
-                            <a class="green-button" href="/product-list/">
+                            <router-link class="green-button" :to="{name : 'productList'}">
 
                                 لیست محصولات
 
-                            </a>
+                            </router-link>
 
                         </div>
 
@@ -1576,11 +1574,11 @@
 
                             </h3>
 
-                            <a class="green-button" href="/dashboard/register-product">
+                            <router-link class="green-button" :to="{name : 'registerProductSeller'}">
 
                                 ثبت محصول
 
-                            </a>
+                            </router-link>
 
                         </div>
 
@@ -1595,11 +1593,11 @@
                                 کنید
                             </p>
 
-                            <a class="green-button" href="/register">
+                            <router-link class="green-button" :to="{name : 'register'}">
 
                                 ثبت نام
 
-                            </a>
+                            </router-link>
 
                         </div>
 
@@ -1625,7 +1623,7 @@
                             <div class=" col-xs-12 col-sm-4 pull-right">
 
                                 <article class="service-box  box-content">
-                                    <a href="/help">
+                                    <router-link :to="{name : 'help'}">
                                         <div class="box-image">
                                             <img :src="site_logo"/>
                                         </div>
@@ -1643,16 +1641,16 @@
 
                                         </p>
 
-                                    </a>
+                                    </router-link>
                                 </article>
                             </div>
 
                             <div class=" col-xs-12 col-sm-4  pull-right ">
 
                                 <article class="service-box  box-content">
-                                    <a href="/help">
+                                    <router-link :to="{name : 'help'}">
                                         <div class="box-image">
-                                            <img :src="assets + '/img/seller.jpg'"/>
+                                            <img :src="assets + 'assets/img/seller.jpg'"/>
                                         </div>
                                         <h4>
                                             خدمات فروشندگان
@@ -1667,16 +1665,16 @@
                                         </p>
 
 
-                                    </a>
+                                    </router-link>
                                 </article>
                             </div>
 
                             <div class=" col-xs-12 col-sm-4  pull-right ">
 
                                 <article class="service-box  box-content">
-                                    <a href="/help">
+                                    <router-link :to="{name : 'help'}">
                                         <div class="box-image">
-                                            <img :src="assets + '/img/buyer.jpg'"/>
+                                            <img :src="assets + 'assets/img/buyer.jpg'"/>
                                         </div>
                                         <h4>
                                             خدمات خریداران
@@ -1689,7 +1687,7 @@
                                             گسترش شبکه تامین کنندگان <br/>
                                         </p>
 
-                                    </a>
+                                    </router-link>
                                 </article>
                             </div>
                         </div>
@@ -1712,9 +1710,9 @@
                             <!-- loop for wholesale date -->
                             <h4 v-for="item in footerLinks.wholesaleDate"
                                 class="col-xs-6 col-sm-4 col-md-2  pull-right">
-                                <a :href="getSubCategoryUrl(item.link)" v-text="'فروش عمده' + ' ' +item.name">
+                                <router-link :to="getSubCategoryUrl(item.link)" v-text="'فروش عمده' + ' ' +item.name">
 
-                                </a>
+                                </router-link>
                             </h4>
                             <!-- end loop  -->
 
@@ -1726,11 +1724,11 @@
                                         class="col-xs-6 col-sm-4 col-md-2  pull-right"
                                 >
 
-                                    <a
-                                            :href="getSubCategoryUrl(subCategory.category_name)"
+                                    <router-link
+                                            :to="getSubCategoryUrl(subCategory.category_name)"
                                             v-text="'فروش عمده' + ' ' + subCategory.category_name">
 
-                                    </a>
+                                    </router-link>
 
                                 </h4>
                             </div>
@@ -1740,10 +1738,10 @@
 
                             <h4 v-for="item in footerLinks.wholesaleRise"
                                 class="col-xs-6 col-sm-4 col-md-2  pull-right">
-                                <a :href="getSubCategoryUrl(item.link)"
+                                <router-link :to="getSubCategoryUrl(item.link)"
                                    v-text="'فروش عمده برنج' + ' ' + item.name">
 
-                                </a>
+                                </router-link>
                             </h4>
 
                             <!-- end loop  -->
@@ -1759,7 +1757,7 @@
 </template>
 
 <script>
-    import {eventBus} from "../../../router/dashboard_router";
+    import {eventBus} from "../../../router/router";
     import VueWow from 'vue-wow';
     import {UAnimateContainer, UAnimate} from 'vue-wow'
 
@@ -1767,6 +1765,7 @@
 
 
     import ProductCarousel from './landing_page_components/product-list-carousel'
+    import Route from "../../../router/components/route";
 
 
     var RequestCarousel = {
@@ -1810,6 +1809,7 @@
 
     export default {
         components: {
+            Route,
             ProductCarousel,
             RequestCarousel,
             UAnimateContainer,
@@ -1998,7 +1998,7 @@
             },
             search: function () {
                 if (this.mainSearchBoxText !== '') {
-                    window.location.href = '/product-list/' + this.mainSearchBoxText;
+                    this.$router.push('/product-list/' + this.mainSearchBoxText);
                 }
             },
             generateProductLink: function (product) {

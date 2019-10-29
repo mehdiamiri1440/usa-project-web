@@ -221,16 +221,16 @@ i.fa-home {
           <ul class="list-unstyled">
             <li class="list-item">
               <router-link
-                :to="{name : 'profileBasic'}"
+                :to="{name : 'profileBasicSeller'}"
                 @click="registerComponentStatistics('seller-dashboard-header','profile-link','click-on-profile-link-in-dashboard')"
               >پروفایل</router-link>
             </li>
 
             <li class="list-item">
-              <a
-                :href=" '/dashboard/password' "
+              <router-link
+                :to=" {name : 'passwordSeller'} "
                 @click="registerComponentStatistics('seller-dashboard-header','change-password','click-on-change-password-dashboard')"
-              >تغییر کلمه عبور</a>
+              >تغییر کلمه عبور</router-link>
             </li>
 
             <li class="list-item">
@@ -242,21 +242,21 @@ i.fa-home {
       <div class="right-menu-header">
         <ul class="list-inline">
           <li>
-            <a
+            <router-link
               class="product-list-link"
-              href="/product-list"
+              :to="{name : 'productList'}"
               @click="registerComponentStatistics('dashboard-header','product-list-btn','click-on-product-list-in-dashboard')"
             >
               <span class="full">لیست محصولات</span>
               <span class="min">
                 <i class="fa fa-th-list" aria-hidden="true"></i>
               </span>
-            </a>
+            </router-link>
           </li>
 
           <li>
             <router-link
-              :to="{name : 'status'}"
+              :to="{name : 'statusSeller'}"
               @click="registerComponentStatistics('dashboard-header','home-page-btn','click-on-home-page-in-dashboard')"
             >
               <i class="fa fa-home" aria-hidden="true"></i>

@@ -1,17 +1,13 @@
 
-<style >
-
-    #main-content{
-
-          padding-top: 165px;
-
-
-    }
-
-</style>
 
 <style scoped>
 
+    #main-content{
+
+        padding-top: 165px;
+
+
+    }
     .shadow-content{
         background: #fff;
     }
@@ -757,7 +753,7 @@
 
                     </aside>
 
-               
+
 
         </main>
     </div>
@@ -765,7 +761,7 @@
 <script>
     import ProductArticle from './product_components/product_article'
     import ProductAsideCategories from './product_components/sidebar/product_aside_categories'
-    import {eventBus} from "../../../../js/router/dashboard_router";
+    import {eventBus} from "../../../router/router";
 
     var visible = false;
     export default {

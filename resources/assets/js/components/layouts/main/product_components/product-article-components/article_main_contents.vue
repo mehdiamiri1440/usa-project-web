@@ -197,7 +197,7 @@
 </style>
 <template>
 
-    <a class="main-article-contents-wrapper" :href="$parent.productUrl" @click="$parent.registerComponentStatistics('product',
+    <router-link class="main-article-contents-wrapper" :to="$parent.productUrl" @click="$parent.registerComponentStatistics('product',
                            'show-product-in-seperate-page',
                            'show-product-in-seperate-page')"
          :class="{ 'is-user-valid-content': $parent.product.user_info.active_pakage_type != 0 }">
@@ -271,7 +271,7 @@
                 </p> -->
 <p>مقدار موجودی: <span v-text="$parent.product.main.stock + ' کیلوگرم'"></span>
                 </p>
-                
+
 
                 <!-- <p v-if="!$parent.isMyProfile">قیمت:
                     <a href="#" @click.prevent="$parent.openChat($parent.product)">استعلام بگیرید</a>
@@ -285,14 +285,14 @@
                 </p> -->
 
             </div>
-            <a href="#" @click.prevent="$parent.copyProductLinkToClipBoard" class="share-link hidden">
+            <router-link to="#" @click.prevent="$parent.copyProductLinkToClipBoard" class="share-link hidden">
                 <i class="fa fa-share"></i>
                 <span> اشتراک گذاری </span>
-            </a>
+            </router-link>
 
         </div>
 
-    </a>
+    </router-link>
 
 </template>
 

@@ -32,7 +32,7 @@
           <div class="profile-city" v-text="usercity"></div>
         </div>
 
-        <a :href="'/profile/'+ userprof" class="green-button">نمایش پروفایل من</a>
+        <router-link :to="'/profile/'+ userprof" class="green-button">نمایش پروفایل من</router-link>
       </div>
     </section>
 
@@ -46,7 +46,7 @@
           <div class="profile-city placeholder-content loading-height"></div>
         </div>
 
-        <a class="button-loading green-button placeholder-content"></a>
+        <span class="button-loading green-button placeholder-content"></span>
       </div>
     </section>
   </div>

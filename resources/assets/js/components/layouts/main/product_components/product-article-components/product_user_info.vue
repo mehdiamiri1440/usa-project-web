@@ -152,7 +152,7 @@
 
         <div class="user-information-wrapper row">
               <div class="user-information-contents">
-                  <a :href="'/profile/'+ user_name"  class="user-information-link">
+                  <router-link :to="'/profile/'+ user_name"  class="user-information-link">
                       <div class="user-information-content-image">
                           <div class="user-image" v-if="profile_photo">
                               <img v-bind:src=" '/storage/' + profile_photo">
@@ -166,11 +166,11 @@
                       <div class="user-information-content">
                           <p v-if="user_info" v-text="user_full_name"></p>
                       </div>
-                  </a>
+                  </router-link>
 
-                  <a v-if="!is_my_profile_status" :href="'/profile/'+ user_name" @click="registerComponentStatistics('product','showUserProfile','show profile')" class="user-action-link green-text">
+                  <router-link v-if="!is_my_profile_status" :to="'/profile/'+ user_name" @click="registerComponentStatistics('product','showUserProfile','show profile')" class="user-action-link green-text">
                         مشاهده پروفایل
-                  </a>
+                  </router-link>
                   <a v-else href="#"
                      @click.prevent="deleteProduct()"
                      class="user-action-link red-text">
@@ -215,9 +215,11 @@
 </template>
 
 <script>
-    import {eventBus} from "../../../../../../js/router/dashboard_router";
+    import {eventBus} from "../../../../../router/router";
+    import Route from "../../../../../router/components/route";
 
     export default {
+        components: {Route},
         props: [
             'profile_photo',
             'user_info',
@@ -247,12 +249,17 @@
                     profile_photo: this.profile_photo,
                     user_name: this.user_info.user_name,
                 };
+                var self = this;
 
                 if (this.current_user.user_info) {
                     if (this.current_user.user_info.id !== this.user_info.id) {
                         axios.post('/set_last_chat_contact', contact)
                             .then(function (response) {
-                                window.location.href = '/dashboard/messages';
+                                if (self.currentUser.user_info.is_seller == 1) {
+                                    self.$router.push('/seller/messages');
+                                } else if (self.currentUser.user_info.is_buyer == 1) {
+                                    self.$router.push('/buyer/messages');
+                                }
                             })
                             .catch(function (e) {
                                 alert('Error');

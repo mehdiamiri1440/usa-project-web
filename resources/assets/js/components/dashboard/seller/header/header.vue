@@ -823,12 +823,12 @@
                 </button>
 
                 <span class="logo">
-                    <a href="/">
+                    <router-link :to="{name : 'indexPage'}">
                         <img :src="logo" alt="incoboc">
                         <p>
                             بازارگاه آنلاین کشاورزی
                         </p>
-                    </a>
+                    </router-link>
                 </span>
 
             </header>
@@ -869,12 +869,12 @@
                 </button>
 
                 <span class="logo">
-                    <a href="/">
+                    <router-link :to="{name : 'indexPage'}">
                         <img :src="logo" alt="incoboc">
                         <p>
                             بازارگاه آنلاین کشاورزی
                         </p>
-                    </a>
+                    </router-link>
                 </span>
 
             </header>
@@ -927,7 +927,7 @@
     import ProfileInfo from './sub-com/profile_info.vue'
     import HeaderMenuList from './sub-com/header-menu-list.vue'
     import HeaderTop from './sub-com/header-top.vue'
-    import {eventBus} from "../../../../router/dashboard_router";
+    import {eventBus} from "../../../../router/router";
 
     export default {
         components: {

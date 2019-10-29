@@ -29,9 +29,9 @@
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/magnific-popup.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('index/css/particleNetwork.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('index/css/animate.css')); ?>">
-    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/profile/main-profile.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/master/style.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl-custom-style.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/custom.css')); ?>">
 
 
     <script src="<?php echo e(asset('assets/cdn/axios.js')); ?>"></script>
@@ -95,95 +95,20 @@
 
 </head>
 <body >
-<div id="app"></div>
-<div id="appBuyer"></div>
-<div id="appSeller"></div>
-<div id="appLayouts">
 
+<div id="app">
 
-    <!-- =========================
- NAVIGATION LINKS
-============================== -->
-    <header-master-layouts
-            user_id="<?php echo e(session('user_id')); ?>"
-            is_seller = "<?php echo e(session('is_seller')); ?>"
-            user_default_image="<?php echo e(asset('assets/img/user-defult.png')); ?>"
-            profile_photo="<?php echo e(session('profile_photo')); ?>"
-            user_full_name="<?php echo e(session('full_name')); ?>"
-            user_logout_path="<?php echo e(route('logout')); ?>"
-            storage_path="<?php echo e(url('storage/')); ?>"
-            login_page_path="<?php echo e(route('logout')); ?>"
-            loading="<?php echo e(asset('assets/img/gif/prload.gif')); ?>"
-            finish_load_img="<?php echo e(asset('assets/img/gif/loading.gif')); ?>"
-            incobacicon="<?php echo e(asset('assets/img/logo-Inco-mobile.png')); ?>"
-
-    ></header-master-layouts>
-
-
-    <router-view id="main-content"
-                 name="layouts"
-
-                 not_found_image="<?php echo e(url('assets/img/def404.png')); ?>"
-                 loading_img="<?php echo e(asset('assets/img/gif/loading.gif')); ?>"
-                 trans="<?php echo e(url('dashboard/transaction-detail')); ?>"
-                 transRep="<?php echo e(url('dashboard/transaction-report')); ?>"
-                 str="<?php echo e(asset('storage/')); ?>"
-                 defimgitem="<?php echo e(asset('/assets/img/product.jpg')); ?>"
-                 defultimg="<?php echo e(asset('assets/img/user-defult.png')); ?>"
-                 site_logo="<?php echo e(asset('assets/img/logo-incobac.png')); ?>"
-                 site_logo_white="<?php echo e(asset('/index/images/logo_white.png')); ?>"
-                 incobaicon="<?php echo e(asset('assets/img/lo.png')); ?>"
-                 assets = "<?php echo e(asset('assets')); ?>"
-                 img_about_us_1="<?php echo e(asset('assets/img/about-us/1.jpg')); ?>"
-                 img_about_us_2="<?php echo e(asset('assets/img/about-us/2.jpg')); ?>"
-                 img_about_us_3="<?php echo e(asset('assets/img/about-us/3.jpg')); ?>"
-                 img_about_us_4="<?php echo e(asset('assets/img/about-us/4.jpg')); ?>"
-                 img_about_us_5="<?php echo e(asset('assets/img/about-us/5.jpg')); ?>"
-                 img_about_us_6="<?php echo e(asset('assets/img/about-us/6.jpg')); ?>"
-                 img_pricing_38="<?php echo e(asset('index/images/Group_38.png')); ?>"
-                 img_pricing_36="<?php echo e(asset('index/images/Group_36.png')); ?>"
-                 img_pricing_34="<?php echo e(asset('index/images/Group_34.png')); ?>"
-                 img_pricing_32="<?php echo e(asset('index/images/Group_32.png')); ?>"
-                 img_success_project="<?php echo e(asset('index/images/current.png')); ?>"
-                 img_success_verified="<?php echo e(asset('index/images/farmer.png')); ?>"
-                 img_seller_services="<?php echo e(asset('index/images/seller.jpg')); ?>"
-                 img_buyer_services="<?php echo e(asset('index/images/buyer.jpg')); ?>"
-                 img_2_help_page="<?php echo e(asset('assets/img/help/2.jpg')); ?>"
-                 img_3_help_page="<?php echo e(asset('assets/img/help/3.jpg')); ?>"
-                 img_4_help_page="<?php echo e(asset('assets/img/help/4.jpg')); ?>"
-                 img_5_help_page="<?php echo e(asset('assets/img/help/5.jpg')); ?>"
-                 img_6_help_page="<?php echo e(asset('assets/img/help/6.jpg')); ?>"
-                 img_7_help_page="<?php echo e(asset('assets/img/help/7.jpg')); ?>"
-                 img_8_help_page="<?php echo e(asset('assets/img/help/8.jpg')); ?>"
-                 img_8_1_help_page="<?php echo e(asset('assets/img/help/8_1.jpg')); ?>"
-                 img_11_help_page="<?php echo e(asset('assets/img/help/11.jpg')); ?>"
-                 img_12_help_page="<?php echo e(asset('assets/img/help/12.jpg')); ?>"
-                 img_13_help_page="<?php echo e(asset('assets/img/help/13.jpg')); ?>"
-                 img_mobile_2_help_page="<?php echo e(asset('assets/img/help/mobile_2.jpg')); ?>"
-                 img_mobile_3_help_page="<?php echo e(asset('assets/img/help/mobile_3.jpg')); ?>"
-                 img_mobile_4_help_page="<?php echo e(asset('assets/img/help/mobile_4.jpg')); ?>"
-                 img_mobile_5_help_page="<?php echo e(asset('assets/img/help/mobile_5.jpg')); ?>"
-                 img_mobile_6_help_page="<?php echo e(asset('assets/img/help/mobile_6.jpg')); ?>"
-                 img_mobile_6_2_help_page="<?php echo e(asset('assets/img/help/mobile_6_2.jpg')); ?>"
-                 img_mobile_6_3_help_page="<?php echo e(asset('assets/img/help/mobile_6_3.jpg')); ?>"
-                 img_mobile_7_help_page="<?php echo e(asset('assets/img/help/mobile_7.jpg')); ?>"
-                 img_mobile_7_1_help_page="<?php echo e(asset('assets/img/help/mobile_7_1.jpg')); ?>"
-                 img_mobile_11_1_help_page="<?php echo e(asset('assets/img/help/mobile_11_1.jpg')); ?>"
-                 img_mobile_11_2_help_page="<?php echo e(asset('assets/img/help/mobile_11_2.jpg')); ?>"
-                 img_mobile_11_3_help_page="<?php echo e(asset('assets/img/help/mobile_11_3.jpg')); ?>"
-                 img_mobile_11_4_help_page="<?php echo e(asset('assets/img/help/mobile_11_4.jpg')); ?>"
-                 img_mobile_11_5_help_page="<?php echo e(asset('assets/img/help/mobile_11_5.jpg')); ?>"
-                 img_mobile_12_help_page="<?php echo e(asset('assets/img/help/mobile_12.jpg')); ?>"
-                 img_mobile_13_help_page="<?php echo e(asset('assets/img/help/mobile_13.jpg')); ?>"
-                 img_mobile_13_1_help_page="<?php echo e(asset('assets/img/help/mobile_13_1.jpg')); ?>"
-                 is-user-login="<?php echo e(session('user_id')); ?>"
-                 user-type = "<?php echo e(session('is_seller')); ?>"
-    ></router-view>
-
-    <footer-master-layouts></footer-master-layouts>
-
-
+            <route-component
+                    user-id = "<?php echo e(session('user_id')); ?>"
+                    is-seller = "<?php echo e(session('is_seller')); ?>"
+                    assets = "<?php echo e(asset('')); ?>"
+                    storage-path = "<?php echo e(url('storage/')); ?>"
+                    profile-photo="<?php echo e(session('profile_photo')); ?>"
+                    user-full-name="<?php echo e(session('full_name')); ?>"
+                    user-logout-path="<?php echo e(route('logout')); ?>"
+            />
 </div>
+
 <script src="<?php echo e(asset('js/app.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/js/idleTimer.js')); ?>"></script>
 

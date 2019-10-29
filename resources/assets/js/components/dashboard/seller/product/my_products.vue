@@ -118,7 +118,7 @@
                                      محصولات من
                                 </h1>
 
-                            </div> 
+                            </div>
 
                         </div>
 
@@ -140,7 +140,7 @@
                     </div>
                    </div>
                 </div>
-                
+
                 <div class="col-xs-12" v-if="products.length === 0 && !loading">
                     <div class="wrapper_no_pro">
                         <div class="content_no_pic">
@@ -161,8 +161,8 @@
 </template>
 
 <script>
-    import ProductArticle from '../../../../components/layouts/main/product_components/product_article';
-    import {eventBus} from "../../../../../js/router/dashboard_router";
+    import ProductArticle from '../../../layouts/main/product_components/product_article';
+    import {eventBus} from "../../../../router/router";
 
     export default {
         components: {

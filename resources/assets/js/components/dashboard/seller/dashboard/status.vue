@@ -173,7 +173,7 @@
                     </div>
                     <div  class="col-xs-9 col-sm-4 pull-left text-left">
 
-                        <router-link :to="{ name : 'dashboardPricingTable'}" class="green-button blue-brand-background">
+                        <router-link :to="{ name : 'dashboardPricingTableSeller'}" class="green-button blue-brand-background">
                         	  <i class="far fa-credit-card"></i>
                             مشاهده تعرفه ها
 
@@ -215,7 +215,7 @@
 	                			</div>
 	                			<div v-if="box.upgrade" class="box-upgrade-link">
 
-	                				<router-link :to="{ name:'dashboardPricingTable'}" class="green-button blue-brand-background">
+	                				<router-link :to="{ name:'dashboardPricingTableSeller'}" class="green-button blue-brand-background">
 	                					<i class="fa fa-arrow-up"></i>
 	                					ارتقاء به عضو ویژه
 	                				</router-link>
@@ -269,17 +269,17 @@
 				statusData : '',
 				linkItems : [
 				    {
-						href : 'registerProduct',
+						href : 'registerProductSeller',
 						icon : 'fa fa-plus',
 						text : 'افزودن محصول'
 					},
 				    {
-						href : 'buyAdRequests',
+						href : 'buyAdRequestsSeller',
 						icon : 'fa fa-list-alt',
 						text : 'درخواست های خرید'
 					},
 				    {
-						href : 'messages',
+						href : 'messagesSeller',
 						icon : 'fas fa-comment-alt',
 						text : 'پیام ها'
 					}

@@ -104,7 +104,7 @@
   display: none;
 }
 
-/*.content-header span{  
+/*.content-header span{
   display: block;
   text-align: right;
 }*/
@@ -220,17 +220,17 @@ i.fa-home {
         <div class="profile-list">
           <ul class="list-unstyled">
             <li class="list-item">
-              <a
-                :href="'/dashboard/profile'"
+              <router-link
+                :to="{name : 'profileBasicBuyer'}"
                 @click="registerComponentStatistics('seller-dashboard-header','profile-link','click-on-profile-link-in-dashboard')"
-              >پروفایل</a>
+              >پروفایل</router-link>
             </li>
 
             <li class="list-item">
-              <a
-                :href=" '/dashboard/password' "
+              <router-link
+                      :to="{name : 'passwordBuyer'}"
                 @click="registerComponentStatistics('seller-dashboard-header','change-password','click-on-change-password-dashboard')"
-              >تغییر کلمه عبور</a>
+              >تغییر کلمه عبور</router-link>
             </li>
 
             <li class="list-item">
@@ -242,25 +242,25 @@ i.fa-home {
       <div class="right-menu-header">
         <ul class="list-inline">
           <li>
-            <a
+            <router-link
               class="product-list-link"
-              href="/product-list"
+              :to="{ name : 'productList'}"
               @click="registerComponentStatistics('dashboard-header','product-list-btn','click-on-product-list-in-dashboard')"
             >
               <span class="full">لیست محصولات</span>
               <span class="min">
                 <i class="fa fa-th-list" aria-hidden="true"></i>
               </span>
-            </a>
+            </router-link>
           </li>
 
           <li>
-            <a
-              :href="routeHome"
+            <router-link
+              :to="{name : 'indexPage'}"
               @click="registerComponentStatistics('dashboard-header','home-page-btn','click-on-home-page-in-dashboard')"
             >
               <i class="fa fa-home" aria-hidden="true"></i>
-            </a>
+            </router-link>
           </li>
         </ul>
       </div>
