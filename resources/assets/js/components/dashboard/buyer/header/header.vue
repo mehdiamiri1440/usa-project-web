@@ -917,6 +917,7 @@
                 :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
                 :out="logout"
                 :routeHome="routehome"
+                :menuClosed="menuClosed"
         />
 
     </div>
@@ -951,6 +952,7 @@
         ],
         data: function () {
             return {
+                menuClosed:false,
                 isLoading:true,
                 currentUser: {
                     profile: {
@@ -1108,6 +1110,16 @@
                 var rightHeader = $(".right-header.mobile-header");
                 var back = $(".background_mob_sec");
                 var closeHeaderButtonMobileLinks = $('.mobile-header .header-menu a');
+                  rightHeader.animate({
+                            right: '0'
+                        }, 800);
+                       setTimeout(() => {
+                              rightHeader.animate({
+                            right: '-300'
+                        },800,undefined,function(){
+                            self.menuClosed=true
+                            });
+                       }, 2000);
                 showHeaderButtonElement.on('click', function () {
 
                     rightHeader.animate({ scrollTop: 0 }, "fast");

@@ -201,6 +201,35 @@ i.fa-home {
     color: wheat;
   }
 }
+.rotation {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
 </style>
 
 <template>
@@ -208,7 +237,9 @@ i.fa-home {
     <header id="header" class="main-header">
       <div id="notification" class="show-header">
         <div v-if="messageCount>0" class="message-notification">{{messageCount}}</div>
-        <button class="fa fa-bars"></button>
+        <button>
+          <span :class="menuClosed?'rotation':''" class="fa fa-bars"></span>
+        </button>
       </div>
 
       <div class="content-header">
@@ -303,6 +334,7 @@ export default {
     SubMenu
   },
   props: [
+    "menuClosed",
     "photoLink",
     "storage",
     "def",

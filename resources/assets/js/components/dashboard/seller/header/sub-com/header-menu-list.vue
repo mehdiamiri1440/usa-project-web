@@ -27,7 +27,7 @@
   -o-animation: AnimationBackgroundGradient 3s ease infinite;
   animation: AnimationBackgroundGradient 3s ease infinite;
 }
-.header-menu i{
+.header-menu i {
   margin: 5px;
 }
 </style>
@@ -37,13 +37,9 @@
       <div class="header-menu">
         <ul class="list-unstyled">
           <li class="list-item">
-            <router-link
-              :class="{'active' : this.activeElement === 0}"
-              :to="{ name : 'status' }"
-            >
+            <router-link :class="{'active' : this.activeElement === 0}" :to="{ name : 'status' }">
               <i class="fa fa-chart-line"></i>
               <span>داشبورد</span>
-
             </router-link>
           </li>
 
@@ -51,7 +47,6 @@
             <router-link :to="{ name : 'buyAdRequests' }">
               <i class="fa fa-list-alt" aria-hidden="true"></i>
               <span>درخواست های خرید</span>
-
             </router-link>
           </li>
 
@@ -59,10 +54,8 @@
             <router-link :to="{ name : 'registerProduct' }">
               <i class="fa fa-plus-square" aria-hidden="true"></i>
               <span>ثبت محصول</span>
-
             </router-link>
           </li>
-
 
           <li class="list-item">
             <router-link :to="{ name : 'messages' }">
@@ -70,17 +63,13 @@
 
               <span>پیام ها</span>
               <span class="custom-badge" v-if="messageCount" v-text="messageCount"></span>
-
             </router-link>
           </li>
 
           <li class="list-item">
-            <router-link
-                    :to="{ name : 'profileBasic' }"
-            >
+            <router-link :to="{ name : 'profileBasic' }">
               <i class="fa fa-user" aria-hidden="true"></i>
               <span>ویرایش پروفایل</span>
-
             </router-link>
           </li>
 
@@ -88,7 +77,6 @@
             <router-link :to="{ name : 'myProducts' }">
               <i class="fas fa-list-ol" aria-hidden="true"></i>
               <span>محصولات من</span>
-
             </router-link>
           </li>
 
@@ -96,14 +84,11 @@
             <router-link :to="{ name : 'guide' }">
               <i class="fa fa-question" aria-hidden="true"></i>
               <span>راهنما</span>
-
             </router-link>
           </li>
         </ul>
       </div>
     </section>
-
-
   </div>
 </template>
 
