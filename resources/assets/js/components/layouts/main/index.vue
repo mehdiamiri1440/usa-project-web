@@ -1,188 +1,4 @@
-<style>
 
-    /* preloader image style*/
-    .lds-ring {
-        display: inline-block;
-
-        position: absolute;
-
-        width: 64px;
-
-        height: 64px;
-
-        left: 50%;
-
-        top: 50%;
-
-        transform: translate(-50%, -50%);
-
-    }
-
-    .lds-ring div {
-        box-sizing: border-box;
-        display: block;
-        position: absolute;
-        width: 51px;
-        height: 51px;
-        margin: 6px;
-        border: 5px solid #28a745;
-        border-radius: 50%;
-        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        border-color: #28a745 transparent transparent transparent;
-    }
-
-    .lds-ring-alt {
-        display: block;
-        margin-top: 50px;
-        direction: rtl;
-        text-align: center;
-    }
-
-    .lds-ring div:nth-child(1) {
-        animation-delay: -0.45s;
-    }
-
-    .lds-ring div:nth-child(2) {
-        animation-delay: -0.3s;
-    }
-
-    .lds-ring div:nth-child(3) {
-        animation-delay: -0.15s;
-    }
-
-    @keyframes lds-ring {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-
-    .carousel-img {
-        background: #ececec;
-    }
-
-    /*preloader image style*/
-
-    body {
-        background: #f9f9f9;
-    }
-
-    #main-content {
-        margin-bottom: -60px;
-    }
-
-    .owl-dots {
-        position: absolute;
-        left: 50px;
-        z-index: 1;
-        padding-top: 18px;
-        display: block;
-        text-align: center;
-        width: calc(100% - 100px);
-        bottom: -10px;
-    }
-
-    .owl-carousel .owl-stage-outer {
-        padding-bottom: 15px;
-    }
-
-    .owl-nav span {
-
-        color: #777;
-
-        background: #fff;
-
-        width: 50px;
-
-        height: 50px;
-
-        display: inline-block;
-
-        border-radius: 50%;
-
-        padding-top: 16px;
-
-        font-size: 19px;
-
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-
-        transition: 200ms;
-    }
-
-    .owl-nav .owl-prev {
-
-        left: -5px;
-
-    }
-
-    .owl-nav .owl-next {
-
-        right: -5px;
-
-    }
-
-    .owl-nav > button, .owl-nav > button span {
-
-        transition: 200ms;
-
-    }
-
-    .owl-nav > button:hover, .owl-nav > button:hover span {
-
-        transition: 200ms;
-        color: #00c569;
-
-    }
-
-    .owl-nav > button span {
-        position: relative;
-        top: 0;
-    }
-
-    .owl-nav > button span:hover {
-
-        top: -2px;
-
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-
-    }
-
-    .request-carousel-content p {
-
-        text-align: center;
-        font-weight: bold;
-        margin-top: 15px;
-        direction: rtl;
-    }
-
-    .request-carousel-content a {
-
-        font-size: 14px;
-        font-weight: bold;
-        width: initial;
-        direction: rtl;
-        padding: 4px 20px 7px 15px;
-
-    }
-
-    .request-carousel-content a:before {
-
-        position: relative;
-        top: 2px;
-        left: 5px;
-
-    }
-
-    .request-carousel-content div {
-
-        text-align: center;
-
-    }
-
-
-</style>
 <style scoped>
 
     /*general styles*/
@@ -217,6 +33,37 @@
         position: relative;
         top: 1px;
         padding: 0 2px;
+    }
+    
+     #main-content {
+        margin-bottom: -60px;
+    }
+
+
+     #intro {
+        position: relative;
+    }
+
+    #intro::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: rgba(25,102,142,0.4);
+        background: linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
+        background: -webkit-linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
+        background: -moz-linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
+        background: -o-linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
+        background: -ms-linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
+        z-index: 0;
+    }
+
+
+    #intro > div{
+        position: relative;
+        z-index: 1;
     }
 
     .box-content {

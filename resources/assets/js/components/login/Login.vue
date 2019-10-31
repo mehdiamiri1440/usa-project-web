@@ -1,4 +1,4 @@
-<style>
+<style scoped>
     .text-loader {
         display: block;
         width: 100%;
@@ -460,7 +460,7 @@
                         if (response.data.status === true) {
                             if (response.data.confirmed_profile_record === true) {
                                 if (response.data.is_buyer) {
-                                    window.location.href = "buyer/register-request";
+                                    self.$router.push({ name: 'registerRequestBuyer'});
                                     localStorage.userRoute = JSON.stringify(
                                         "buyer/register-request"
                                     );
@@ -470,7 +470,8 @@
                                         "seller-logged-in-successfully"
                                     );
                                 } else if (response.data.is_seller) {
-                                    window.location.href = "seller/register-product";
+
+                                    self.$router.push('/seller/register-product');
                                     localStorage.userRoute = JSON.stringify(
                                         "seller/register-product"
                                     );
@@ -495,7 +496,6 @@
                                     "Login-page: User does not have confirmed profile record",
                                     true
                                 );
-
                                 // window.location.href = "/seller/profile"; // Edit Profile Page
                             }
                         } else {
@@ -529,7 +529,6 @@
                         phone: this.toLatinNumbers(this.step2.phone)
                     })
                     .then(function (response) {
-                        console.log(response.msg);
                         if (response.status === 200) {
                             self.goToStep(3);
 
@@ -556,8 +555,10 @@
                     })
                     .then(function (response) {
                         if (response.data.status === true) {
-                            alert("گذر واژه ی جدید به تلفن همراهتان ارسال شد.");
-                            window.location.href = "/login";
+                            self.errors = [];
+                            self.showMsg = true;
+                            self.step3.msg = "گذر واژه ی جدید به تلفن همراهتان ارسال شد.";
+                            self.$router.push('/login');
                         } else {
                             self.errors = [];
                             self.showMsg = true;

@@ -29,9 +29,10 @@
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/magnific-popup.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('index/css/particleNetwork.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('index/css/animate.css')); ?>">
-    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/master/style.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl-custom-style.css')); ?>">
-    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/custom.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/imageuploadify.min.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/cropper.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/master/style.css')); ?>">
 
 
     <script src="<?php echo e(asset('assets/cdn/axios.js')); ?>"></script>

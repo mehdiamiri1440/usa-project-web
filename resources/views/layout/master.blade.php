@@ -29,9 +29,10 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
     <link rel="stylesheet" href="{{asset('index/css/particleNetwork.css')}}">
     <link rel="stylesheet" href="{{asset('index/css/animate.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/master/style.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl-custom-style.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/imageuploadify.min.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/cropper.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/master/style.css')}}">
 
 
     <script src="{{asset('assets/cdn/axios.js')}}"></script>

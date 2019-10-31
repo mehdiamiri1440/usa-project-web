@@ -25,6 +25,7 @@
 
     .content-sidebar .green-button {
         min-width: 130px;
+        width: 100%;
         font-size: 13px;
         padding: 6px 0;
         margin: 0;

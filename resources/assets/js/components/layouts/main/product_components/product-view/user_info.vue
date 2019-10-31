@@ -40,6 +40,7 @@
 		border: 2px solid #00C569;
 	}
 
+
 	.user-information-content-image{
 		position: relative;
 	}
@@ -48,9 +49,19 @@
 		width: 90px;
 		height: 90px;
 		position: relative;
+		margin: 0 auto 10px;
+		border-radius: 90px;
+		overflow: hidden;
 
 	}
 
+	.user-information-content-image img{
+		width: initial;
+		height: 100%;
+		position: relative;
+		left: 50%;
+		transform: translate(-50%, 0);
+	}
 	.valid-icon{
 		background: #00C569;
 

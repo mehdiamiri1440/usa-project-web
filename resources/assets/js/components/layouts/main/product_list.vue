@@ -132,8 +132,7 @@
         background: #f0f3f6;
         padding: 0 15PX;
     }
-
-    .search-box {
+ .search-box {
         position: relative;
         margin-top: 14px;
         border:none;
@@ -173,6 +172,7 @@
         color: #fff;
     }
 
+
     .links-sub-header {
         direction: rtl;
     }
@@ -199,13 +199,6 @@
         height: 3px;
         width: 100%;
     }
-
-    #main {
-
-        position:relative;
-
-    }
-
 
     .main-content > h4 {
         margin: 30px auto;
@@ -353,7 +346,10 @@
     }
 
     @media screen and (max-width: 767px) {
-
+        
+        .main-content, #main {
+            padding: 0;
+        }
         .sub-header {
             position: fixed;
             z-index: 1;

@@ -1,3 +1,24 @@
+<style scoped>
+     #main {
+        margin-right: 250px;
+        margin-top: 65px;
+        position: relative;
+    }
+
+    #main.little-main {
+        margin-right: 80px;
+    }
+
+    @media screen and (max-width: 994px) {
+
+        #main, #main.little-main {
+            margin-right: 0 !important;
+        }
+
+    }
+
+</style>
+
 <template>
     <div>
         <header-dash-seller

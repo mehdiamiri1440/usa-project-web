@@ -5,6 +5,8 @@
 
    	.green-button{
    		margin: 0;
+		padding: 10px 35px;
+		width: initial;
    	}
 
    	.blue-brand-background {
@@ -108,10 +110,6 @@
 
 		border-radius: 0;
 
-    }
-
-    .box-upgrade-link{
-    	margin-top: 43px;
     }
 
 

@@ -1,4 +1,210 @@
 <style scoped>
+    body{
+        background: #F6F6F6;
+    }
+
+    #main-content{
+
+        min-height: 600px;
+        position: relative;
+
+    }
+
+    .image-header-profile img {
+        height: 100%;
+    }
+
+    .header-nav {
+        direction: rtl;
+        text-align: right;
+        padding: 28px 30px;
+        font-size: 17px;
+    }
+
+    .header-nav a {
+        color: #d0d0d0;
+    }
+
+    .header-nav a:hover {
+        color: #fff;
+    }
+
+    .profile-list {
+        position: absolute;
+        width: 165px;
+        background: #fff;
+        padding: 8px 10px;
+        border-radius: 3px;
+        box-shadow: 0 0 3px #313a43;
+        text-align: right;
+        left: -5px;
+        top: 57px;
+        display: none;
+        z-index: 999;
+    }
+
+    .profile-list li {
+        margin: 5px;
+    }
+
+    .profile-list a {
+        width: 100%;
+        display: inline-block;
+        color: #3c3c3c;
+    }
+
+
+
+    .navbar-header{
+        float: right;
+    }
+    .custom-navbar .navbar-brand {
+        width: 135px;
+        text-align: center;
+        margin: 11px auto;
+        display: inline-block;
+        background-size: contain;
+    }
+    .navbar-brand {
+        float: right;
+    }
+    .navbar > .container-fluid .navbar-brand {
+        margin-right: -15px;
+        margin-left: auto;
+    }
+    .logo-des {
+        color: #373737;
+        float: left;
+        padding: 24px 5px 0;
+    }
+
+    .custom-navbar {
+        margin-bottom: 0;
+        background-color: #ffffff;
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);}
+
+    .header-wrapper {
+        border-bottom: 0;
+
+        background: #fff;
+    }
+
+
+    .navbar-brand {
+        margin: 0 15px;
+        height: 50px;
+        padding: 3px 15px;
+        font-size: 18px;
+        line-height: 20px;
+
+    }
+
+    .logo-des {
+        color: #373737;
+        float: left;
+        padding: 24px 5px 0;
+    }
+
+    .main-logo {
+        width: 30%;
+        margin: 0 auto;
+    }
+
+    .main-logo img {
+        width: 100%;
+    }
+
+    .custom-navbar .nav li a {
+        color: #000;
+        font-weight: 400;
+        padding: 10px 15px;
+        text-transform: uppercase;
+        line-height: 20px;
+        transition: all 0.4s ease-in-out;
+    }
+
+    .top-nav-collapse .nav li a {
+        color: black;
+        font-weight: 400;
+        text-transform: uppercase;
+        line-height: 20px;
+        transition: all 0.4s ease-in-out;
+    }
+
+    .top-nav-collapse .nav {
+        padding-top: 16px;
+    }
+    .nav.navbar-nav.navbar-left {
+
+        padding-top: 16px;
+        text-align: right;
+    }
+
+    .navbar-nav, .navbar-nav > li {
+        float: right;
+    }
+    .custom-navbar .nav li a:hover {
+        background: transparent;
+        color: #00c569;
+    }
+
+    .custom-navbar .navbar-nav > li > a:hover,
+    .custom-navbar .navbar-nav > li > a:focus {
+        background-color: transparent;
+    }
+
+    .custom-navbar .nav li.active > a {
+        background-color: transparent;
+        color: #00c569;
+    }
+
+
+    .custom-navbar .navbar-toggle {
+        background-color: transparent;
+    }
+    .custom-navbar .navbar-toggle {
+        border: none;
+    }
+    .custom-navbar .navbar-toggle .icon-bar {
+        background: #00c569;
+        border-color: transparent;
+    }
+
+
+
+    .profile-menu-header i {
+        position: absolute;
+        left: -75px;
+        top: 5px;
+        font-size: 20px;
+    }
+    .profile-menu-header a {
+        color: #7f8c9b;
+        margin: 5px 0;
+        position: relative;
+        padding: 3px 15px !important;
+    }
+    .profile-menu-header {
+        padding: 6px 12px 0;
+        float: left;
+    }
+    .profile-menu-header > a {
+        border-right: 1px solid #00c569;
+    }
+    .image-header-profile {
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        border-radius: 50%;
+        float: left;
+        position: relative;
+        top: -13px;
+    }
+    .user-header-mobile a {
+        float: left;
+        width: 100%;
+    }
+
     #DownloadApp {
         background: #fff;
         padding-left: 0 !important;
@@ -123,6 +329,177 @@
             padding: 0;
         }
     }
+    @media (max-width: 1300px) {
+        .logo-des {
+            display: none;
+        }
+
+    }
+
+    @media (max-width: 992px) {
+        .content_service {
+
+            font-size: 15px;
+
+        }
+
+        .content_service {
+            font-size: 14px;
+        }
+
+    }
+
+    @media (max-width: 1100px) {
+        .navbar-brand {
+            padding: 0;
+            width: 150px;
+            background-size: 100%;
+        }
+
+    }
+
+    @media (max-width: 850px) {
+        .name-header-profile{
+            display: none;
+        }
+    }
+
+
+    @media screen and ( max-width: 767px) {
+        .parallax-section .owl-nav{
+            display: none;
+        }
+        .image-header-profile {
+            top: -3px;
+        }
+        .profile-menu-header > a {
+            border-right: none;
+        }
+        .profile-menu-header {
+            padding: 3px;
+            padding-left: 55px;
+            float: left;
+        }
+        .navbar > .container-fluid .navbar-brand {
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .navbar-header {
+            float: none;
+            min-height: 80px;
+        }
+        .profile-menu-header i {
+            position: absolute;
+            color: #333;
+            left: -75px;
+
+            top: 29px;
+
+            font-size: 20px;
+        }
+
+        .main-content-item {
+            margin: 63px auto 24px;
+
+        }
+
+
+        .custom-navbar.top-nav-collapse {
+            background: #ffffff;
+            box-shadow: 0 2px 8px 0 rgba(50, 50, 50, 0.04);
+        }
+        .custom-navbar .navbar-brand {
+            line-height: 18px;
+        }
+        .content_service {
+            text-align: center;
+            display: inline-block;
+        }
+        .navbar-nav, .navbar-nav > li {
+            float: right;
+        }
+        .custom-navbar .navbar-brand {
+            display: block;
+            margin: 10px auto;
+            float: none;
+        }
+        .custom-navbar .navbar-toggle {
+            float: right;
+            text-align: center;
+            padding-top: 31px;
+            padding-right: 30px;
+            margin: 0;
+        }
+
+        .float_li {
+
+            float: right;
+            padding: 0 7px;
+            width: 50%;
+
+        }
+
+        .custom-navbar {
+            padding:0;
+            border-bottom: 0;
+            background: #fff;
+        }
+
+        .custom-navbar.top-nav-collapse {
+            background: #ffffff;
+            box-shadow: 0 2px 8px 0 rgba(50, 50, 50, 0.04);
+            padding: 0;
+        }
+        .custom-navbar .nav li  {
+            float: none;
+        }
+        .custom-navbar .nav li a {
+            padding: 11px 30px;
+        }
+        .custom-navbar .navbar-nav li a {
+            line-height: 25px;
+        }
+        .user-header-mobile {
+            display: block;
+            float: left;
+            margin-left: 50px;
+        }
+        .user-header-mobile .profile-menu-header {
+            padding: 5px 0 0;
+            float: left;
+        }
+        .user-header-mobile .profile-menu-header i {
+            top: 14px;
+            left: -10px;
+        }
+    }
+
+    @media screen and (max-width: 534px) {
+        .custom-navbar .navbar-brand {
+            line-height: 18px;
+        }
+    }
+    @media screen and (max-width: 432px) {
+        .custom-navbar .navbar-brand {
+            width: 55%;
+            background-size: 50%;
+            background-position: 50% 50%;
+        }
+        .profile-menu-header {
+
+            padding: 3px;
+            padding-left: 35px;
+            float: left;
+
+        }
+        .user-header-mobile {
+            display: block;
+            float: left;
+            margin-left: 30px;
+        }
+
+    }
+
 </style>
 <template>
     <div>
@@ -308,7 +685,7 @@
                     </div>
 
                     <button
-                            class="navbar-toggle"
+                            class="navbar-toggle hidden-md hidden-sm hidden-lg"
                             data-toggle="collapse"
                             href="#collapseHeader"
                             ref="#collapseHeader"

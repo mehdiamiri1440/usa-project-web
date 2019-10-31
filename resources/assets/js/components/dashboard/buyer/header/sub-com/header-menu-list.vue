@@ -1,4 +1,78 @@
 <style scoped>
+    .sub-header a.router-link-exact-active {
+        color: #313942;
+    }
+
+    .sub-header a.router-link-exact-active::after {
+        content: " ";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: #00C569;
+        height: 3px;
+        width: 100%;
+    }
+
+    .header-menu a.router-link-exact-active::before, .header-menu a.active::before {
+        content: " ";
+        height: 100%;
+        width: 2px;
+        background: #00c569;
+        position: absolute;
+        right: 1px;
+        top: 0;
+        display: block;
+    }
+
+    .header-menu a.router-link-exact-active, a.active {
+        color: #fff;
+        background: #637484;
+    }
+
+    .header-menu a {
+        color: #b1b1b1;
+        padding: 10px 20px;
+        display: inline-block;
+        position: relative;
+        width: 100%;
+    }
+
+    .header-menu {
+        padding: 0;
+    }
+
+    .header-menu a:hover {
+        color: #fff;
+        background: #637484;
+    }
+
+    .header-menu a:hover::before {
+        content: " ";
+        height: 100%;
+        width: 2px;
+        background: #00ac5c;
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: block;
+    }
+
+    .header-menu li.active a {
+        color: #fff;
+        background: #637484;
+    }
+
+    .header-menu li.active a:before {
+        content: " ";
+        height: 100%;
+        width: 2px;
+        background: #00C569;
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: block;
+    }
+
     .custom-badge {
         position: absolute;
         left: 20px;

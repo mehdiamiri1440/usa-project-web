@@ -31,10 +31,7 @@
     .main-green-button {
         max-width: 360px;
         margin: 0 auto;
-    }
-
-    .main-green-button .green-button {
-        font-size: 23px;
+        text-align:center;
     }
 
     .panel-heading, .panel-title {

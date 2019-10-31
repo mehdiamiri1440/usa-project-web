@@ -325,7 +325,7 @@
 
   right: 0;
 
-  bottom: 66px;
+  bottom: 75px;
   top: 70px;
 }
 
@@ -417,7 +417,6 @@
 }
 
 .send-message-form .message-input input {
-  padding: 17px 20px;
   border-radius: 50px;
   background: #fff;
   border: none;
