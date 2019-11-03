@@ -53,9 +53,9 @@ use Carbon\Carbon;
 		 try{
 			 $user->save();
 
-             $sms_controller_object->add_to_customer_club($user->firs_name,$user->last_name,$user->phone);
-
              $profile_controller_object ->add_a_confirmed_profile_record_for_user($user);
+             
+             $sms_controller_object->add_to_customer_club($user->firs_name,$user->last_name,$user->phone);
 
              $this->register_user_in_wp_forum($request);
 

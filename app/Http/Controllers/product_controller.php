@@ -49,6 +49,14 @@ class product_controller extends Controller
     );	
     
     protected $max_factorial_input_number = 10;
+    
+    protected $client;
+    protected $endpoint;
+
+    public function __construct(\Solarium\Client $client)
+    {
+        $this->client = $client;
+    }
 	// public method
 	public function add_product(Request $request)
 	{
@@ -203,13 +211,20 @@ class product_controller extends Controller
 
         $all_products = NULL ; 
 
-//        if($request->filled('from_record_number') && $request->filled('to_record_number')){
-//            $all_products = $this->get_all_products_with_related_media($request->from_record_number,$request->to_record_number);
-//        }
-//        else{
-            $all_products = $this->get_all_products_with_related_media();  
-//        } 
-        
+        if($request->filled('search_text')){
+            $product_ids_array = $this->get_product_ids_from_solr_server($request->search_text);
+            if($product_ids_array){
+               $all_products = $this->get_all_products_with_related_media(null,null,$product_ids_array); 
+            }
+            else{
+                $all_products = $this->get_all_products_with_related_media(null,null,[]);
+            }
+
+        }
+        else{
+            $all_products = $this->get_all_products_with_related_media(null,null,[]);
+        }
+              
         //applying filters
         $all_products = array_filter($all_products, function($product) use($request){
             $category_flag = $sub_category_flag = $province_flag = $city_flag = $search_text_flag = true;
@@ -226,13 +241,13 @@ class product_controller extends Controller
             if($request->filled('city_id')){
                 $city_flag = ( $request->city_id == $product['main']->city_id);
             }
-            if($request->filled('search_text')){
-                $search_text = $request->search_text;
-                
-                $search_text_flag = $this->does_search_text_matche_the_product($search_text,$product);
-            }
+//            if($request->filled('search_text')){
+//                $search_text = $request->search_text;
+//                
+//                $search_text_flag = $this->does_search_text_matche_the_product($search_text,$product);
+//            }
             $result = $category_flag && $sub_category_flag && $province_flag && $city_flag &&  $search_text_flag;
-//            var_dump($test);
+
             return $result;
         });
 
@@ -248,13 +263,27 @@ class product_controller extends Controller
             return ($a < $b) ? 1 : -1;
         });
         
+        if(! empty($product_ids_array)){
+            
+            $cnt = count($product_ids_array);
+            
+            $all_products = collect($all_products)->sortBy(function($product,$key) use($product_ids_array,$cnt){
+                
+                $added_score = ($product['user_info']->active_pakage_type) * $cnt;
+                return  array_search($product['main']->id,$product_ids_array) - $added_score;
+
+            })->toArray();
+        }
+        
+        
         if($request->filled('from_record_number') && $request->filled('to_record_number')){
             $all_products = array_slice($all_products,$request->from_record_number,$request->to_record_number,true);   
         }
         
         return response()->json([
             'status' => TRUE,
-            'products' => array_values($all_products)
+            'products' => array_values($all_products),
+            'array' => 'last'
         ],200);
 		
 	}
@@ -319,7 +348,7 @@ class product_controller extends Controller
 		
 	}
 	
-	protected function get_all_products_with_related_media($from_record_number = NULL, $to_record_number = NULL)
+	protected function get_all_products_with_related_media($from_record_number = NULL, $to_record_number = NULL, $product_ids_array = [])
 	{
 		$products = NULL ;
         
@@ -336,9 +365,17 @@ class product_controller extends Controller
 				->get();
 		}
 		else{
-			$products = product::where('confirmed',true)
-                ->orderBy('updated_at','desc')
-                ->get();
+            if($product_ids_array){
+                $products = product::where('confirmed',true)
+                    ->whereIn('id',$product_ids_array)
+                    ->orderBy('updated_at','desc')
+                    ->get();
+            }
+            else{
+                $products = product::where('confirmed',true)
+                    ->orderBy('updated_at','desc')
+                    ->get();
+            }
 		}
 		
 		$result_products = array();
@@ -870,9 +907,7 @@ class product_controller extends Controller
     //public method
     public function get_all_products_url_for_sitemap()
     {
-        $products = collect($this->get_all_products_with_related_media());
-        
-//        var_dump($products);
+        $products = collect($this->get_all_products_with_related_media(null,null,[]));
         
         return $products;
     }
@@ -1045,6 +1080,75 @@ class product_controller extends Controller
             'status' => true,
             'products' => $products
         ],200);  
+    }
+    
+    protected function get_product_ids_from_solr_server($searchText)
+    {   
+        $query = $this->client->createSelect(['rows' => 10000]);
+        $solr_search_query = $this->get_solr_search_query($searchText);
+        $query->setQuery($solr_search_query);
+
+        $resultset = $this->client->select($query);
+
+        $product_ids_array = [];
+        foreach($resultset as $document){
+            
+            foreach($document as $field => $value){
+                if($field == 'id'){
+                    $product_ids_array[] = $value;
+                    continue;
+                }
+            }
+        }
+        
+        return $product_ids_array;
+    }
+    
+    protected function get_solr_search_query($searchText)
+    {
+        $words = explode(' ',$searchText);
+        
+        $tmp1 = "product_name:";
+        $tmp2 = "description:";
+        $tmp3 = "last_name:";
+        
+        $query = "";
+        $words_count = count($words);
+        
+        $i = 1;
+        foreach($words as $index => $value){
+            $query .= $tmp1 . "(*{$value}*)^8" . " OR ";
+            $query .= $tmp2 . "(*{$value}*)^2" . " OR ";
+            $query .= $tmp3 . "({$value})^1 "  . " OR ";
+        }
+        
+        $i = 1;
+        $tmp_words = $words;
+        foreach($words as $key => $word){
+            $value = $word;
+            
+            foreach($tmp_words as $maching_key => $maching_word){
+    
+                if(strcmp($word,$maching_word) != 0){
+                    if($key < $maching_key){
+                        $value .= ' '. $maching_word;
+                        
+                        $coef = count(explode(' ',$value)) ;
+                        $tmp1_score = $coef * 16;
+                        $tmp2_score = $coef * 2;
+                        
+                        $query .= $tmp1 . "(*{$value}*)^{$tmp1_score}" . " OR ";
+                        $query .= $tmp2 . "(*{$value}*)^{$tmp2_score}" . " OR ";
+                    }
+                }
+            }
+            
+            if($i++ == $words_count){
+                $query = rtrim($query," OR ");
+            }
+        }
+        
+        return $query;
     }
             
 	

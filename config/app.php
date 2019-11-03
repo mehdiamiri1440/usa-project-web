@@ -165,6 +165,7 @@ return [
 		phplusir\smsir\SmsirServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Larabookir\Gateway\GatewayServiceProvider::class,
+        App\Providers\SolariumServiceProvider::class,
         
         
 
