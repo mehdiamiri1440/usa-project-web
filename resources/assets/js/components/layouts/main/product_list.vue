@@ -84,7 +84,7 @@
         -webkit-box-shadow: 0 3px 15px rgba(0,0,0,0.30);
         box-shadow: 0 3px 15px rgba(0,0,0,0.30);
         text-align: center;
-        padding-top: 15px;
+        padding-top: 12px;
         font-size: 23px;
     }
 

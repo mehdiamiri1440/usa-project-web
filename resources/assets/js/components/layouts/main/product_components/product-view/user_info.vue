@@ -9,6 +9,7 @@ i {
   font-size: 14px;
   font-weight: bold;
   padding: 10px 0;
+  width: 100%;
 }
 
 .green-button-o {
