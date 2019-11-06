@@ -1,208 +1,13 @@
 <style scoped>
-    body{
+    body {
         background: #F6F6F6;
     }
 
-    #main-content{
+    #main-content {
 
         min-height: 600px;
         position: relative;
 
-    }
-
-    .image-header-profile img {
-        height: 100%;
-    }
-
-    .header-nav {
-        direction: rtl;
-        text-align: right;
-        padding: 28px 30px;
-        font-size: 17px;
-    }
-
-    .header-nav a {
-        color: #d0d0d0;
-    }
-
-    .header-nav a:hover {
-        color: #fff;
-    }
-
-    .profile-list {
-        position: absolute;
-        width: 165px;
-        background: #fff;
-        padding: 8px 10px;
-        border-radius: 3px;
-        box-shadow: 0 0 3px #313a43;
-        text-align: right;
-        left: -5px;
-        top: 57px;
-        display: none;
-        z-index: 999;
-    }
-
-    .profile-list li {
-        margin: 5px;
-    }
-
-    .profile-list a {
-        width: 100%;
-        display: inline-block;
-        color: #3c3c3c;
-    }
-
-
-
-    .navbar-header{
-        float: right;
-    }
-    .custom-navbar .navbar-brand {
-        width: 135px;
-        text-align: center;
-        margin: 11px auto;
-        display: inline-block;
-        background-size: contain;
-    }
-    .navbar-brand {
-        float: right;
-    }
-    .navbar > .container-fluid .navbar-brand {
-        margin-right: -15px;
-        margin-left: auto;
-    }
-    .logo-des {
-        color: #373737;
-        float: left;
-        padding: 24px 5px 0;
-    }
-
-    .custom-navbar {
-        margin-bottom: 0;
-        background-color: #ffffff;
-        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);}
-
-    .header-wrapper {
-        border-bottom: 0;
-
-        background: #fff;
-    }
-
-
-    .navbar-brand {
-        margin: 0 15px;
-        height: 50px;
-        padding: 3px 15px;
-        font-size: 18px;
-        line-height: 20px;
-
-    }
-
-    .logo-des {
-        color: #373737;
-        float: left;
-        padding: 24px 5px 0;
-    }
-
-    .main-logo {
-        width: 30%;
-        margin: 0 auto;
-    }
-
-    .main-logo img {
-        width: 100%;
-    }
-
-    .custom-navbar .nav li a {
-        color: #000;
-        font-weight: 400;
-        padding: 10px 15px;
-        text-transform: uppercase;
-        line-height: 20px;
-        transition: all 0.4s ease-in-out;
-    }
-
-    .top-nav-collapse .nav li a {
-        color: black;
-        font-weight: 400;
-        text-transform: uppercase;
-        line-height: 20px;
-        transition: all 0.4s ease-in-out;
-    }
-
-    .top-nav-collapse .nav {
-        padding-top: 16px;
-    }
-    .nav.navbar-nav.navbar-left {
-
-        padding-top: 16px;
-        text-align: right;
-    }
-
-    .navbar-nav, .navbar-nav > li {
-        float: right;
-    }
-    .custom-navbar .nav li a:hover {
-        background: transparent;
-        color: #00c569;
-    }
-
-    .custom-navbar .navbar-nav > li > a:hover,
-    .custom-navbar .navbar-nav > li > a:focus {
-        background-color: transparent;
-    }
-
-    .custom-navbar .nav li.active > a {
-        background-color: transparent;
-        color: #00c569;
-    }
-
-
-    .custom-navbar .navbar-toggle {
-        background-color: transparent;
-    }
-    .custom-navbar .navbar-toggle {
-        border: none;
-    }
-    .custom-navbar .navbar-toggle .icon-bar {
-        background: #00c569;
-        border-color: transparent;
-    }
-
-
-
-    .profile-menu-header i {
-        position: absolute;
-        left: -75px;
-        top: 5px;
-        font-size: 20px;
-    }
-    .profile-menu-header a {
-        color: #7f8c9b;
-        margin: 5px 0;
-        position: relative;
-        padding: 3px 15px !important;
-    }
-    .profile-menu-header {
-        padding: 6px 12px 0;
-        float: left;
-    }
-    .profile-menu-header > a {
-        border-right: 1px solid #00c569;
-    }
-    .image-header-profile {
-        width: 50px;
-        height: 50px;
-        overflow: hidden;
-        border-radius: 50%;
-        float: left;
-        position: relative;
-        top: -13px;
-    }
-    .user-header-mobile a {
-        float: left;
-        width: 100%;
     }
 
     #DownloadApp {
@@ -271,24 +76,6 @@
         width: 30%;
     }
 
-    .login-button {
-        background: #00c569;
-
-        border-radius: 3px;
-        transition: 300ms;
-        color: #fff !important;
-    }
-
-    .login-button:hover {
-        background: #279b41 !important;
-        transition: 300ms;
-    }
-
-    .custom-navbar .navbar-nav > li > a.login-button:focus {
-        background: #279b41 !important;
-        transition: 300ms;
-    }
-
     .modal-content .green-button {
         margin: 15px;
 
@@ -318,198 +105,576 @@
         color: #fff;
     }
 
-    @media screen and (max-width: 767px) {
-        ul.nav {
-            width: 100%;
-            text-align: center !important;
+    /*end global styles */
+
+    /*start header styles*/
+
+    .search-input {
+
+        transition: 300ms;
+
+        display: inline-block;
+
+        min-width: 455px;
+
+        overflow: hidden;
+
+        position: relative;
+
+        float: right;
+
+
+    }
+
+    .search-input input {
+
+        padding: 9px 15px 8px;
+
+        border-radius: 0 4px 4px 0;
+
+        margin: 0;
+
+        float: right;
+
+        border: none;
+
+        width: calc(100% - 20px);
+
+        background: #F8F8F8;
+
+    }
+
+    .search-input button {
+
+        transition: 300ms;
+
+        border: none;
+
+        margin: 0;
+
+        padding: 8px 15px;
+
+        color: #fff;
+
+        background: #000546;
+
+        border-radius: 4px 0 0 4px;
+
+        position: absolute;
+
+        left: 0;
+
+        top: 0;
+
+    }
+
+    .search-input button:hover {
+
+        transition: 300ms;
+
+        background: #00032b;
+
+        padding-left: 18px;
+
+        padding-right: 18px;
+
+    }
+
+    .search-input button:before {
+
+        position: relative;
+
+        top: 2px;
+
+    }
+
+    nav.navbar {
+        background: #fff;
+        margin: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1010;
+        border-radius: 0;
+        border-bottom: 1px solid #F0F0F0;
+    }
+
+    .incobac-main-nav {
+        padding: 10px 15px 8px;
+        border-bottom: 2px solid #F8F9FA
+    }
+
+    .nav > li > a.green-button:hover {
+        background: #00c569;
+    }
+
+    .nav > li > a.green-button.router-link-exact-active:hover {
+        background: #eee;
+    }
+
+    nav .green-button {
+        font-size: 13px;
+        padding: 8px 7px 7px;
+        margin-top: 0;
+        margin-right: 15px;
+    }
+
+    nav .green-button-alt {
+        background: #fff;
+        color: #00c569 !important;
+        border: 2px solid #00c569;
+        padding: 6px 7px 5px;
+
+    }
+
+    .green-button-alt:focus,
+    .green-button-alt:hover {
+        color: #fff !important;
+    }
+
+    nav .green-button.router-link-exact-active, nav > li > a.green-button.router-link-exact-active:hover {
+        background-color: #eee;
+        border-color: #eee;
+        color: #fff !important;
+    }
+
+
+    .incobac-logo .navbar-brand {
+
+        overflow: hidden;
+
+        width: 132px;
+
+    }
+
+    .incobac-logo .navbar-brand {
+
+        height: initial;
+
+        margin: 0;
+
+        padding: 0;
+
+    }
+
+    #incobac-nav{
+        margin-right: 46px;
+    }
+
+    .incobac-sub-menu .navbar-right{
+        margin-right: 193px;
+    }
+
+    .incobac-sub-menu {
+        border-bottom: 2px solid #E6E6E6
+    }
+
+    .incobac-sub-menu  li{
+        float: right;
+    }
+
+    .incobac-sub-menu a{
+       color: #777;
+        padding: 9px 15px;
+        position: relative;
+    }
+
+    .incobac-sub-menu a:hover, .incobac-sub-menu a.router-link-exact-active {
+       color: #00C569;
+        background:#fbfbfb;
+    }
+
+    .incobac-sub-menu a:hover:after, .incobac-sub-menu a.router-link-exact-active:after {
+        content:'';
+        background: #00C569;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 2px;
+        right:0;
+    }
+
+    a.profile-info-wrapper{
+
+        overflow: hidden;
+
+        padding: 0;
+
+        font-size: 14px;
+
+        color: #777;
+        
+        font-weight: bold;
+
+    }
+
+    a.profile-info-wrapper:focus{
+
+        background: none;
+
+    }
+
+    a.profile-info-wrapper:hover{
+
+        background: none;
+
+        color: #00c569;
+
+    }
+
+    .profile-information{
+        
+        float: left;
+
+        padding-top: 10px;
+        
+    }
+
+    .profile-information i{
+        
+        position: relative;
+
+        top: 3px;
+
+        margin-right: 7px;
+        
+    }
+
+    .profile-image-wrapper{
+        width: 40px;
+
+        height: 40px;
+
+        border-radius: 40px;
+
+        overflow: hidden;
+
+        float: right;
+
+        margin-left: 10px;
+
+    }
+
+ 
+    .profile-image-wrapper img{
+        width: initial;
+        height: 100%;
+        position: relative;
+        left: -50%;
+        transform: translate(50% ,0);
+    }
+
+    #web-profile-items{
+        position: absolute;
+
+        top: 50px;
+
+        background: #fff;
+
+        width: 100%;
+
+        text-align: right;
+
+        direction: rtl;
+
+        border-radius: 4px;
+
+        line-height: 1.618;
+
+        box-shadow: 0 3px 15px
+        rgba(0, 0, 0, 0.2);
+    }
+
+
+    #web-profile-items > li a{
+        padding: 7px 15px;
+        display: block;
+    }
+
+
+
+    #web-profile-items a{
+        color: #777;
+    }
+
+    #web-profile-items a:hover{
+        color: #333;
+        background: #eee;
+    }
+
+    .mobile-menu-button{
+        float: right;
+    }   
+
+    .navbar-toggle{
+
+        margin: 0;
+
+        border:2px solid  #000546;
+
+    }
+
+    .navbar-toggle .icon-bar{
+
+        background: #000546;
+
+    }
+
+    .mobile-background-shadow{
+
+        background: rgb(0,0,0);
+
+        opacity: 0.8;
+
+        display: none;
+
+        transition:300ms;
+
+        position: fixed;
+
+        height: 100%;
+
+        width: 100%;
+
+        z-index: 10;
+
+    }
+
+    @media screen and (min-width: 767px){
+        .mobile-background-shadow{
+            display: none !important;
+        }
+    }
+
+    @media screen and (max-width: 992px){
+
+        #incobac-nav{
+
+            margin: 0
+
+        }
+
+        .incobac-sub-menu .navbar-right {
+
+            margin-right: 149px;
+
+        }
+
+        .search-input {
+
+            min-width: 300px;
+
+        
+        }
+
+    }
+
+    @media screen and (max-width: 767px){
+        
+        #incobac-nav{
+            padding: 0;
+
+            overflow: hidden;
+
             margin: 0;
-        }
 
-        #collapseHeader {
-            padding: 0;
-        }
-    }
-    @media (max-width: 1300px) {
-        .logo-des {
-            display: none;
-        }
-
-    }
-
-    @media (max-width: 992px) {
-        .content_service {
-
-            font-size: 15px;
-
-        }
-
-        .content_service {
-            font-size: 14px;
-        }
-
-    }
-
-    @media (max-width: 1100px) {
-        .navbar-brand {
-            padding: 0;
-            width: 150px;
-            background-size: 100%;
-        }
-
-    }
-
-    @media (max-width: 850px) {
-        .name-header-profile{
-            display: none;
-        }
-    }
-
-
-    @media screen and ( max-width: 767px) {
-        .parallax-section .owl-nav{
-            display: none;
-        }
-        .image-header-profile {
-            top: -3px;
-        }
-        .profile-menu-header > a {
-            border-right: none;
-        }
-        .profile-menu-header {
-            padding: 3px;
-            padding-left: 55px;
-            float: left;
-        }
-        .navbar > .container-fluid .navbar-brand {
-            margin-right: auto;
-            margin-left: auto;
-        }
-        .navbar-header {
-            float: none;
-            min-height: 80px;
-        }
-        .profile-menu-header i {
             position: absolute;
-            color: #333;
-            left: -75px;
 
-            top: 29px;
-
-            font-size: 20px;
-        }
-
-        .main-content-item {
-            margin: 63px auto 24px;
-
-        }
-
-
-        .custom-navbar.top-nav-collapse {
-            background: #ffffff;
-            box-shadow: 0 2px 8px 0 rgba(50, 50, 50, 0.04);
-        }
-        .custom-navbar .navbar-brand {
-            line-height: 18px;
-        }
-        .content_service {
-            text-align: center;
-            display: inline-block;
-        }
-        .navbar-nav, .navbar-nav > li {
-            float: right;
-        }
-        .custom-navbar .navbar-brand {
-            display: block;
-            margin: 10px auto;
-            float: none;
-        }
-        .custom-navbar .navbar-toggle {
-            float: right;
-            text-align: center;
-            padding-top: 31px;
-            padding-right: 30px;
-            margin: 0;
-        }
-
-        .float_li {
-
-            float: right;
-            padding: 0 7px;
-            width: 50%;
-
-        }
-
-        .custom-navbar {
-            padding:0;
-            border-bottom: 0;
             background: #fff;
+
+            top: 57px;
+
+            right: -1px;
+
+            left: -1px;
+
+            border-top: 2px solid #00c569;
+
         }
 
-        .custom-navbar.top-nav-collapse {
-            background: #ffffff;
-            box-shadow: 0 2px 8px 0 rgba(50, 50, 50, 0.04);
-            padding: 0;
+        #incobac-nav:after{
+
+            width: 0;
+
+            height: 0;
+
+            border-style: solid;
+
+            border-width: 0 10px 10px 10px;
+
+            border-color:  transparent transparent #00c569 transparent;
+
+            content: "";
+
+            position: absolute;
+
+            top: -10px;
+
+            right: 29px;
+
+
         }
-        .custom-navbar .nav li  {
+
+        #incobac-nav .wrapper-nav{
+
+            padding: 30px 0 0; 
+
+        }
+
+        .incobac-logo{
+
+            margin: 0 auto;
+
+            float: right;
+
+            position: relative;
+
+            right: calc(50% - 114px);
+
+        }
+
+        .profile-image-wrapper, .user-auth-info-wrapper, .user-auth-info-wrapper .navbar-nav{
+            margin: 0
+        }
+
+        .user-auth-info-wrapper{
+            float: left;
+        }
+
+
+        #incobac-nav .search-input{
+
+            max-width: 100%;
+
+            width: 100%;
+
+            padding: 0 15px;
+
+            margin-bottom:  15px;
+
             float: none;
+
         }
-        .custom-navbar .nav li a {
-            padding: 11px 30px;
+
+        #incobac-nav .search-input input{
+
+            border:1px solid #E6E6E6;
         }
-        .custom-navbar .navbar-nav li a {
-            line-height: 25px;
+
+        .search-input button{
+
+            left: 15px;
+
+            padding: 13px 15px;
+            
+            height: 100%;
         }
-        .user-header-mobile {
-            display: block;
-            float: left;
-            margin-left: 50px;
+
+        #incobac-nav ul.mobile-navigation a{
+
+                color: #777;
+
+                font-weight: bold;
+
+                padding: 15px;
+
+                display: block;
+
+                border-bottom: 1px solid #E6E6E6;
+
         }
-        .user-header-mobile .profile-menu-header {
-            padding: 5px 0 0;
-            float: left;
+
+        #incobac-nav ul.mobile-navigation a:hover, 
+        #incobac-nav ul.mobile-navigation a:focus,
+        #incobac-nav ul.mobile-navigation a.router-link-exact-active{
+
+                color: #00c569;
+                
+                background: #fbfbfb;
+
+                border-color: #00c569;
         }
-        .user-header-mobile .profile-menu-header i {
-            top: 14px;
-            left: -10px;
+
+        #web-profile-items{
+
+            min-width: 150px;
+
+            left: 0;
         }
     }
 
-    @media screen and (max-width: 534px) {
-        .custom-navbar .navbar-brand {
-            line-height: 18px;
-        }
-    }
-    @media screen and (max-width: 432px) {
-        .custom-navbar .navbar-brand {
-            width: 55%;
-            background-size: 50%;
-            background-position: 50% 50%;
-        }
-        .profile-menu-header {
+    @media screen and (max-width: 550px){
+        .incobac-logo{
 
-            padding: 3px;
-            padding-left: 35px;
+            margin: 0 auto;
+
+            float: right;
+
+            position: relative;
+
+            right: calc(50% - 95px);
+
+        }
+
+        .incobac-logo .navbar-brand{
+
+            width: 100px;
+
+            margin-top: 5px;
+
+        }
+
+
+        .profile-image-wrapper, .user-auth-info-wrapper, .user-auth-info-wrapper .navbar-nav{
+            margin: 0
+        }
+
+        .user-auth-info-wrapper{
             float: left;
+        }
+
+        .mobile-login-link a{
+            
+            font-size: 11px;
 
         }
-        .user-header-mobile {
-            display: block;
-            float: left;
-            margin-left: 30px;
-        }
+
 
     }
 
+
+    @media screen and (max-width: 360px){
+
+        .mobile-login-link a{
+            
+            margin: 0;
+
+            padding: 8px 16px 7px;
+
+            font-size: 17px;
+
+
+        }
+
+        .mobile-login-link span{
+            
+            display: none;
+
+        }
+
+    }
 </style>
+
 <template>
     <div>
+        <!-- loading -->
         <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
             <div class="main-loader">
                 <img :src="loading"/>
                 <p dir="rtl">در حال بارگذاری...</p>
             </div>
         </div>
-
+        <!-- Modals -->
         <div class="container">
             <div
                     id="deleteModal"
@@ -606,7 +771,7 @@
             </div>
         </div>
 
-        <!-- Modal -->
+
         <div class="container">
             <div
                     class="modal fade"
@@ -640,70 +805,137 @@
             </div>
         </div>
 
-        <!-- /.modal -->
-        <div class="navbar container-fluid navbar-fixed-top custom-navbar" role="navigation">
-            <div class="container-fluid">
-                <!-- navbar header -->
-                <div class="navbar-header">
-                    <div v-if="user_id !== ''" class="user-header-mobile hidden-sm hidden-md hidden-lg">
-                        <div class="profile-menu-header">
-                            <a href="#" @click.prevent="collapseDropDown()">
-                                <div class="image-header-profile">
-                                    <img v-if="profile_photo !== ''" :src="storage_path + '/' + profile_photo"/>
-
-                                    <img v-else :src="user_default_image"/>
-                                </div>
-                                <i aria-hidden="true" class="fa fa-angle-down"></i>
-                            </a>
-
-                            <div class="profile-list">
-                                <ul v-if="is_seller == 1" class="list-unstyled" >
-                                    <li  class="list-item">
-                                        <router-link :to="{name : 'statusSeller'}">داشبورد</router-link>
-                                    </li>
-                                    <li class="list-item">
-                                        <router-link :to="{name : 'passwordSeller'}">تغییر کلمه عبور</router-link>
-                                    </li>
-                                    <li class="list-item">
-                                        <router-link :to="login_page_path">خروج</router-link>
-                                    </li>
-                                </ul>
-
-                                <ul v-else class="list-unstyled">
-                                    <li  class="list-item">
-                                        <router-link :to="{name : 'profileBasicBuyer'}">داشبورد</router-link>
-                                    </li>
-                                    <li class="list-item">
-                                        <router-link :to="{name : 'passwordBuyer'}">تغییر کلمه عبور</router-link>
-                                    </li>
-                                    <li class="list-item">
-                                        <router-link :to="login_page_path">خروج</router-link>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button
-                            class="navbar-toggle hidden-md hidden-sm hidden-lg"
-                            data-toggle="collapse"
-                            href="#collapseHeader"
-                            ref="#collapseHeader"
-                    >
-                        <span class="icon icon-bar"></span>
-                        <span class="icon icon-bar"></span>
-                        <span class="icon icon-bar"></span>
-                    </button>
-
-                    <router-link class="navbar-brand test" :to="{name: 'indexPage'}"></router-link>
+        <!-- end modals -->
 
 
-                    <p class="logo-des hidden-xs hidden-sm">اینکوباک | بازارگاه آنلاین دنیای کشاورزی</p>
+        <!--nav-->
+        <div class="mobile-background-shadow"></div>
+        <nav class="navbar text-rtl">
+        
+            <div class="container-fluid incobac-main-nav">
+
+                <div class="hidden-md hidden-sm hidden-lg mobile-menu-button">
+                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#incobac-nav">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
                 </div>
 
+                <div class="incobac-logo navbar-header navbar-right">
+                  
+                    <router-link class="navbar-brand " :to="{name : 'indexPage'}">
+                        <img :src="assets + 'assets/img/logo_dark.png'" alt="اینکوباک | بازارگاه آنلاین دنیای کشاورزی">
+                    </router-link>
+                </div>
+                
+                <div class="user-auth-info-wrapper navbar-nav">
+                    <ul  v-if="user_id != ''" class="nav navbar-nav ">
+                        <li>
+                            <a class="profile-info-wrapper" data-toggle="collapse" href="#web-profile-items" role="button" >
+                                <div class="profile-image-wrapper">
+                                
+                                    <img v-if="profile_photo != ''" :src="storage_path + '/' + profile_photo" :alt="user_full_name"/>
+                                    <img v-else :src="user_default_image" :alt="user_full_name"/>
 
-                <div class="collapse navbar-collapse" id="collapseHeader" aria-expanded="false">
-                    <ul class="nav navbar-nav navbar-left">
+                                </div>
+                                <div class="profile-information ">
+                                    <span class="hidden-xs" v-text="user_full_name"></span>
+                                    <i class="fa fa-angle-down"></i>
+                                </div>
+                            </a> 
+            
+                              <ul v-if="is_seller == 1" id="web-profile-items" class="collapse ">
+                                        <li  class="list-item">
+                                            <router-link
+                                                    :to="{ name: 'statusSeller'}"
+                                            >داشبورد
+                                            </router-link>
+                                        </li>
+                                        <li class="list-item">
+                                            <router-link
+                                                    :to="{ name: 'passwordSeller'}"
+                                            >تغییر کلمه عبور
+                                            </router-link>
+                                        </li>
+                                        <li class="list-item">
+                                            <a   href="/logout">خروج</a>
+                                        </li>
+                                    </ul>
+                                    <ul v-else id="web-profile-items" class="collapse ">
+                                        <li  class="list-item">
+                                            <router-link
+                                                    :to="{ name: 'profileBasicBuyer'}"
+                                            >داشبورد
+                                            </router-link>
+                                        </li>
+                                        <li class="list-item">
+                                            <router-link
+                                                    :to="{ name: 'passwordBuyer'}"
+                                            >تغییر کلمه عبور
+                                            </router-link>
+                                        </li>
+                                        <li class="list-item">
+                                            <a   href="/logout">خروج</a>
+                                        </li>
+                                    </ul>
+                        
+                        </li>
+                    </ul>
+                    <ul v-else class="nav navbar-nav ">
+                        <li  class="hidden-xs">
+                            <router-link
+                                    class="green-button"
+                                    :to="{name : 'register'}">
+                                <i class="fa fa-user"></i>
+
+                                    ثبت نام رایگان
+                            </router-link>
+                        </li>
+
+
+                         <li class="mobile-login-link hidden-sm hidden-md hidden-lg">
+                            <router-link
+                                    class="green-button"
+                                    :to="{name : 'login'}">
+                                <i class="fa fa-user"></i>
+
+                                <span>
+                                    ورود / ثبت نام
+
+                                </span>                              
+                            </router-link>
+                        </li>
+
+
+                        <li class="hidden-xs">
+                            <router-link
+                                    class="green-button green-button-alt"
+                                    :to="{name : 'login'}">
+                                <i class="fa  fa-sign-in-alt "></i>
+                                ورود به اینکوباک
+                            </router-link>
+                        </li>
+                    </ul>      
+                 </div>
+
+                <div class="collapse navbar-collapse navbar-right" id="incobac-nav">
+
+                    <div class="wrapper-nav">
+                        <div class="search-input">
+
+                        <input type="text" placeholder="محصول مورد نظر خود را جستجو کنید"
+                               v-model="mainSearchBoxText">
+                        <button class="hidden-sm hidden-md hidden-lg fa fa-search" @click="search">
+
+                        </button>
+
+                        <button class="hidden-xs " @click="search">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <ul class="mobile-navigation hidden-lg hidden-sm hidden-md ">
                         <li>
                             <router-link
                                     class="smoothScroll"
@@ -768,70 +1000,85 @@
                             </router-link>
                         </li>
 
-                        <li v-if="user_id == ''">
-                            <router-link
-                                    :to="{ name: 'login'}"
-                                    class="smoothScroll login-button"
-                                    @click="logUserOut()"
-                            >
-                                ورود/ثبت
-                                نام
-                            </router-link>
-                        </li>
+                     </ul>
 
-                        <li v-if="user_id != ''" class="user-header-web hidden-xs">
-                            <div class="profile-menu-header">
-                                <a href="#" @click.prevent="collapseDropDown()">
-                                    <div class="image-header-profile">
-                                        <img v-if="profile_photo != ''" :src="storage_path + '/' + profile_photo"/>
-
-                                        <img v-else :src="user_default_image"/>
-                                    </div>
-                                    <i aria-hidden="true" class="fa fa-angle-down"></i>
-                                    <span class="name-header-profile">{{user_full_name}}</span>
-                                </a>
-                                <div class="profile-list">
-                                    <ul v-if="is_seller == 1" class="list-unstyled">
-                                        <li  class="list-item">
-                                            <router-link
-                                                    :to="{ name: 'statusSeller'}"
-                                            >داشبورد
-                                            </router-link>
-                                        </li>
-                                        <li class="list-item">
-                                            <router-link
-                                                    :to="{ name: 'passwordSeller'}"
-                                            >تغییر کلمه عبور
-                                            </router-link>
-                                        </li>
-                                        <li class="list-item">
-                                            <a   href="/logout">خروج</a>
-                                        </li>
-                                    </ul>
-                                    <ul v-else class="list-unstyled">
-                                        <li  class="list-item">
-                                            <router-link
-                                                    :to="{ name: 'profileBasicBuyer'}"
-                                            >داشبورد
-                                            </router-link>
-                                        </li>
-                                        <li class="list-item">
-                                            <router-link
-                                                    :to="{ name: 'passwordBuyer'}"
-                                            >تغییر کلمه عبور
-                                            </router-link>
-                                        </li>
-                                        <li class="list-item">
-                                            <a   href="/logout">خروج</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                    </div>
                 </div>
             </div>
-        </div>
+
+
+            <div class="container-fluid incobac-sub-menu hidden-xs">
+
+
+                <ul class="nav navbar-right navbar-nav">
+                    <li>
+                        <router-link
+                                class="smoothScroll"
+                                :to="{ name: 'indexPage'}"
+                                @click="registerComponentStatistics('header','home-page','click-on-home-page')"
+                        >
+                            صفحه
+                            نخست
+                        </router-link>
+                    </li>
+
+                    <li v-if="user_id !== ''">
+                        <router-link
+                                v-if="is_seller == 1"
+                                class="smoothScroll"
+                                :to="{name : 'statusSeller'}"
+                                @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
+                        >داشبورد
+                        </router-link>
+                        <router-link
+                                v-else
+                                class="smoothScroll"
+                                :to="{name : 'profileBasicBuyer'}"
+                                @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
+                        >داشبورد
+                        </router-link>
+                    </li>
+
+                    <li>
+                        <router-link
+                                class="smoothScroll"
+                                :to="{ name: 'productList'}"
+                                @click="registerComponentStatistics('header','product-list','click-on-product-list')"
+                        >
+                            لیست
+                            محصولات
+                        </router-link>
+                    </li>
+                    <li>
+                        <a
+                                href="http:\\www.blog.incobac.com"
+                                class="smoothScroll"
+                                @click="registerComponentStatistics('header','blog','click-on-blog')"
+                        >وبلاگ</a>
+                    </li>
+                    <!--  <li>
+                        <router-link
+                          class="smoothScroll"
+                          :to="{ name: 'pricing'}"
+                          @click="registerComponentStatistics('header','pricing','click-on-pricing')"
+                        >تعرفه ها</router-link>
+                      </li>
+          -->
+                    <li>
+                        <router-link
+                                class="smoothScroll"
+                                :to="{ name: 'aboutUs'}"
+                                @click="registerComponentStatistics('header','about-us','click-on-about-us')"
+                        >
+                            درباره
+                            ما
+                        </router-link>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
     </div>
 </template>
 <script>
@@ -848,10 +1095,12 @@
                 deleteText: "",
                 deleteButtonText: "",
                 cancelButtonText: "",
-                ProductId: ""
+                ProductId: "",
+                mainSearchBoxText: ""
             };
         },
         props: [
+            "assets",
             "incobacicon",
             "user_id",
             "is_seller",
@@ -865,23 +1114,6 @@
             "finish_load_img"
         ],
         methods: {
-            collapseDropDown: function () {
-                $(".profile-list").fadeIn("slow", function () {
-                    visible = true;
-                });
-            },
-            collapseDropDownList: function () {
-                $(".icon-header-list").fadeIn("slow", function () {
-                    visible = true;
-                });
-            },
-            documentClick(e) {
-                if (visible) {
-                    $(".profile-list").fadeOut("slow");
-                    $(".icon-header-list").fadeOut("slow");
-                    visible = false;
-                }
-            },
             /*redirectToLogin: function () {
                         window.location.href = '/login';
                     },*/
@@ -993,9 +1225,55 @@
                         self.popUpMsg = "خطایی رخ داده است.لطفا دوباره تلاش کنید.";
                         $("#custom-main-modal").modal("show");
                     });
-            }
+            },
+            search: function () {
+                if (this.mainSearchBoxText !== '') {
+                    this.$router.push('/product-list/' + this.mainSearchBoxText);
+                }
+            },
         },
         mounted() {
+                 
+                 $("#incobac-nav").on("hide.bs.collapse", function(){
+                     
+                     $('.mobile-background-shadow').fadeTo(0,0,function(){
+                        $(this).css('display','none')
+                     })
+
+                 });
+
+
+                  $("#incobac-nav").on("show.bs.collapse", function(){
+                     $('.mobile-background-shadow').fadeTo(0,0.8)
+                  });
+
+
+            $(document).on('click', function (e){
+                /* bootstrap collapse js adds "in" class to your collapsible element*/
+
+                var user_menu_opened = $('#web-profile-items').hasClass('in');
+
+                if(!$(e.target).closest('#web-profile-items').length &&
+                    !$(e.target).is('#web-profile-items') &&
+                    user_menu_opened === true){
+
+                        $('#web-profile-items').collapse('toggle');
+                }
+
+                  /* bootstrap collapse js adds "in" class to your collapsible element*/
+
+                var menu_opened = $('#incobac-nav').hasClass('in');
+            
+                if(!$(e.target).is('.search-input input') && menu_opened === true){
+
+                        $('#incobac-nav').collapse('toggle');
+
+                }
+
+            });
+
+
+ 
             eventBus.$on("submitSuccess", $event => {
                 this.popUpMsg = $event;
             });
@@ -1021,6 +1299,24 @@
         },
         created() {
             document.addEventListener("click", this.documentClick);
-        }
+
+            var self = this;
+
+            window.addEventListener('keydown', function (event) {
+                if (event.keyCode === 13) {
+                    if (self.enterKeyActiveForSearch) {
+                        self.search();
+                        $('#incobac-nav').collapse('hide');
+                        $('#web-profile-items').collapse('hide');
+
+                    }
+                }
+            });
+        },
+        watch: {
+            mainSearchBoxText: function () {
+                this.enterKeyActiveForSearch = this.mainSearchBoxText !== '';
+            }
+        },
     };
 </script>

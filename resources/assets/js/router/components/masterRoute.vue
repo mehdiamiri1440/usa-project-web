@@ -1,7 +1,7 @@
 <template>
     <div>
        <header-master-layouts
-
+                :assets= "assets"
                 :user_id="userId"
                 :is_seller="isSeller"
                 :user_default_image="assets + 'assets/img/user-defult.png'"
