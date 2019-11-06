@@ -1,188 +1,4 @@
-<style>
 
-    /* preloader image style*/
-    .lds-ring {
-        display: inline-block;
-
-        position: absolute;
-
-        width: 64px;
-
-        height: 64px;
-
-        left: 50%;
-
-        top: 50%;
-
-        transform: translate(-50%, -50%);
-
-    }
-
-    .lds-ring div {
-        box-sizing: border-box;
-        display: block;
-        position: absolute;
-        width: 51px;
-        height: 51px;
-        margin: 6px;
-        border: 5px solid #28a745;
-        border-radius: 50%;
-        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        border-color: #28a745 transparent transparent transparent;
-    }
-
-    .lds-ring-alt {
-        display: block;
-        margin-top: 50px;
-        direction: rtl;
-        text-align: center;
-    }
-
-    .lds-ring div:nth-child(1) {
-        animation-delay: -0.45s;
-    }
-
-    .lds-ring div:nth-child(2) {
-        animation-delay: -0.3s;
-    }
-
-    .lds-ring div:nth-child(3) {
-        animation-delay: -0.15s;
-    }
-
-    @keyframes lds-ring {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-
-    .carousel-img {
-        background: #ececec;
-    }
-
-    /*preloader image style*/
-
-    body {
-        background: #f9f9f9;
-    }
-
-    #main-content {
-        margin-bottom: -60px;
-    }
-
-    .owl-dots {
-        position: absolute;
-        left: 50px;
-        z-index: 1;
-        padding-top: 18px;
-        display: block;
-        text-align: center;
-        width: calc(100% - 100px);
-        bottom: -10px;
-    }
-
-    .owl-carousel .owl-stage-outer {
-        padding-bottom: 15px;
-    }
-
-    .owl-nav span {
-
-        color: #777;
-
-        background: #fff;
-
-        width: 50px;
-
-        height: 50px;
-
-        display: inline-block;
-
-        border-radius: 50%;
-
-        padding-top: 16px;
-
-        font-size: 19px;
-
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-
-        transition: 200ms;
-    }
-
-    .owl-nav .owl-prev {
-
-        left: -5px;
-
-    }
-
-    .owl-nav .owl-next {
-
-        right: -5px;
-
-    }
-
-    .owl-nav > button, .owl-nav > button span {
-
-        transition: 200ms;
-
-    }
-
-    .owl-nav > button:hover, .owl-nav > button:hover span {
-
-        transition: 200ms;
-        color: #00c569;
-
-    }
-
-    .owl-nav > button span {
-        position: relative;
-        top: 0;
-    }
-
-    .owl-nav > button span:hover {
-
-        top: -2px;
-
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-
-    }
-
-    .request-carousel-content p {
-
-        text-align: center;
-        font-weight: bold;
-        margin-top: 15px;
-        direction: rtl;
-    }
-
-    .request-carousel-content a {
-
-        font-size: 14px;
-        font-weight: bold;
-        width: initial;
-        direction: rtl;
-        padding: 4px 20px 7px 15px;
-
-    }
-
-    .request-carousel-content a:before {
-
-        position: relative;
-        top: 2px;
-        left: 5px;
-
-    }
-
-    .request-carousel-content div {
-
-        text-align: center;
-
-    }
-
-
-</style>
 <style scoped>
 
     /*general styles*/
@@ -217,6 +33,37 @@
         position: relative;
         top: 1px;
         padding: 0 2px;
+    }
+    
+     #main-content {
+        margin-bottom: -60px;
+    }
+
+
+     #intro {
+        position: relative;
+    }
+
+    #intro::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: rgba(25,102,142,0.4);
+        background: linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
+        background: -webkit-linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
+        background: -moz-linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
+        background: -o-linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
+        background: -ms-linear-gradient(66deg, rgba(25, 102, 142,0.4) 0%, rgba(33, 173, 147,0.4) 100%);
+        z-index: 0;
+    }
+
+
+    #intro > div{
+        position: relative;
+        z-index: 1;
     }
 
     .box-content {
@@ -1157,7 +1004,7 @@
                                 </button>
                             </div>
 
-                            <a href="/product-list" class=" green-button "> لیست محصولات</a>
+                            <router-link :to="{name : 'productList'}" class=" green-button "> لیست محصولات</router-link>
                         </u-animate>
 
                     </u-animate-container>
@@ -1192,20 +1039,19 @@
                                 <li v-for="subCategory in category.subcategories"
                                     class="col-xs-4 col-sm-3 col-md-4 pull-right">
 
-                                    <a
+                                    <router-link
                                             class="sub-category-item"
-                                            :href="getSubCategoryUrl(subCategory.category_name) "
+                                            :to="getSubCategoryUrl(subCategory.category_name) "
                                             v-text="subCategory.category_name">
-
-                                    </a>
+                                    </router-link>
 
                                 </li>
 
                                 <li class="col-xs-12 button-link-wrapper">
-                                    <a class="product-link green-button" href="/product-list">
+                                    <router-link class="product-link green-button" :to="{name : 'productList'}">
                                         <i class=" fa fa-arrow-left"></i>
                                         مشاهده همه محصولات
-                                    </a>
+                                    </router-link>
                                 </li>
 
                             </ul>
@@ -1279,12 +1125,12 @@
                                     <li v-if="!isUserLogin || userType == 1"
                                         class="buttons-action list-group-item  col-xs-12">
 
-                                        <a class="green-button" href="/dashboard/buyAd-requests">
+                                        <router-link class="green-button" :to="{name : 'buyAdRequestsSeller'}">
                                             همه درخواست های خرید
 
                                             <i class="fa fa-arrow-left"></i>
 
-                                        </a>
+                                        </router-link>
 
                                     </li>
 
@@ -1318,11 +1164,11 @@
 
                             </h3>
 
-                            <a class="green-button" href="/dashboard/register-request">
+                            <router-link class="green-button" :to="{name : 'registerRequestBuyer'}">
 
                                 ثبت درخواست خرید
 
-                            </a>
+                            </router-link>
 
                         </div>
 
@@ -1333,11 +1179,11 @@
 
                             </h3>
 
-                            <a class="green-button" href="/dashboard/buyAd-requests">
+                            <router-link class="green-button" :to="{name : 'buyAdRequestsSeller'}">
 
                                 لیست درخواست های خرید
 
-                            </a>
+                            </router-link>
                         </div>
 
                         <div v-else class="title-box box-content">
@@ -1352,11 +1198,11 @@
                                 برای فروش بدون واسطه محصولات کشاورزی خود به خریداران مستقیم و صادرکنندگان هم اکنون ثبت
                                 نام کنید
                             </p>
-                            <a v-if="!isUserLogin " class="green-button" href="/register">
+                            <router-link v-if="!isUserLogin " class="green-button" :to="{name : 'register'}">
 
                                 ثبت نام
 
-                            </a>
+                            </router-link>
                         </div>
 
                     </div>
@@ -1395,13 +1241,12 @@
                         </div>
                         <div class="text-center  text-rtl" v-if="!isUserLogin || userType == 1">
 
-
-                            <a class="mobile-requests-buttons green-button" href="/dashboard/buyAd-requests">
+                            <router-link class="mobile-requests-buttons green-button" :to="{name : 'buyAdRequestsSeller'}">
                                 همه درخواست های خرید
 
                                 <i class="fa fa-arrow-left"></i>
 
-                            </a>
+                            </router-link>
 
 
                         </div>
@@ -1444,11 +1289,11 @@
 
                             </h3>
 
-                            <a class="green-button" href="/dashboard/register-request">
+                            <router-link class="green-button" :to="{name : 'registerRequestBuyer'}">
 
                                 ثبت درخواست خرید
 
-                            </a>
+                            </router-link>
 
                         </div>
 
@@ -1459,11 +1304,11 @@
 
                             </h3>
 
-                            <a class="green-button" href="/dashboard/buyAd-requests">
+                            <router-link class="green-button" :to="{name : 'buyAdRequestsSeller'}">
 
                                 لیست درخواست های خرید
 
-                            </a>
+                            </router-link>
                         </div>
 
                         <div v-else class="title-box box-content">
@@ -1478,11 +1323,11 @@
                                 برای فروش بدون واسطه محصولات کشاورزی خود به خریداران مستقیم و صادرکنندگان هم اکنون ثبت
                                 نام کنید
                             </p>
-                            <a v-if="!isUserLogin " class="green-button" href="/register">
+                            <router-link v-if="!isUserLogin " class="green-button" :to="{name : 'register'}">
 
                                 ثبت نام
 
-                            </a>
+                            </router-link>
                         </div>
 
                 </div>
@@ -1561,11 +1406,11 @@
 
                             </h3>
 
-                            <a class="green-button" href="/product-list/">
+                            <router-link class="green-button" :to="{name : 'productList'}">
 
                                 لیست محصولات
 
-                            </a>
+                            </router-link>
 
                         </div>
 
@@ -1576,11 +1421,11 @@
 
                             </h3>
 
-                            <a class="green-button" href="/dashboard/register-product">
+                            <router-link class="green-button" :to="{name : 'registerProductSeller'}">
 
                                 ثبت محصول
 
-                            </a>
+                            </router-link>
 
                         </div>
 
@@ -1595,11 +1440,11 @@
                                 کنید
                             </p>
 
-                            <a class="green-button" href="/register">
+                            <router-link class="green-button" :to="{name : 'register'}">
 
                                 ثبت نام
 
-                            </a>
+                            </router-link>
 
                         </div>
 
@@ -1625,7 +1470,7 @@
                             <div class=" col-xs-12 col-sm-4 pull-right">
 
                                 <article class="service-box  box-content">
-                                    <a href="/help">
+                                    <router-link :to="{name : 'help'}">
                                         <div class="box-image">
                                             <img :src="site_logo"/>
                                         </div>
@@ -1643,16 +1488,16 @@
 
                                         </p>
 
-                                    </a>
+                                    </router-link>
                                 </article>
                             </div>
 
                             <div class=" col-xs-12 col-sm-4  pull-right ">
 
                                 <article class="service-box  box-content">
-                                    <a href="/help">
+                                    <router-link :to="{name : 'help'}">
                                         <div class="box-image">
-                                            <img :src="assets + '/img/seller.jpg'"/>
+                                            <img :src="assets + 'assets/img/seller.jpg'"/>
                                         </div>
                                         <h4>
                                             خدمات فروشندگان
@@ -1667,16 +1512,16 @@
                                         </p>
 
 
-                                    </a>
+                                    </router-link>
                                 </article>
                             </div>
 
                             <div class=" col-xs-12 col-sm-4  pull-right ">
 
                                 <article class="service-box  box-content">
-                                    <a href="/help">
+                                    <router-link :to="{name : 'help'}">
                                         <div class="box-image">
-                                            <img :src="assets + '/img/buyer.jpg'"/>
+                                            <img :src="assets + 'assets/img/buyer.jpg'"/>
                                         </div>
                                         <h4>
                                             خدمات خریداران
@@ -1689,7 +1534,7 @@
                                             گسترش شبکه تامین کنندگان <br/>
                                         </p>
 
-                                    </a>
+                                    </router-link>
                                 </article>
                             </div>
                         </div>
@@ -1712,9 +1557,9 @@
                             <!-- loop for wholesale date -->
                             <h4 v-for="item in footerLinks.wholesaleDate"
                                 class="col-xs-6 col-sm-4 col-md-2  pull-right">
-                                <a :href="getSubCategoryUrl(item.link)" v-text="'فروش عمده' + ' ' +item.name">
+                                <router-link :to="getSubCategoryUrl(item.link)" v-text="'فروش عمده' + ' ' +item.name">
 
-                                </a>
+                                </router-link>
                             </h4>
                             <!-- end loop  -->
 
@@ -1726,11 +1571,11 @@
                                         class="col-xs-6 col-sm-4 col-md-2  pull-right"
                                 >
 
-                                    <a
-                                            :href="getSubCategoryUrl(subCategory.category_name)"
+                                    <router-link
+                                            :to="getSubCategoryUrl(subCategory.category_name)"
                                             v-text="'فروش عمده' + ' ' + subCategory.category_name">
 
-                                    </a>
+                                    </router-link>
 
                                 </h4>
                             </div>
@@ -1740,10 +1585,10 @@
 
                             <h4 v-for="item in footerLinks.wholesaleRise"
                                 class="col-xs-6 col-sm-4 col-md-2  pull-right">
-                                <a :href="getSubCategoryUrl(item.link)"
+                                <router-link :to="getSubCategoryUrl(item.link)"
                                    v-text="'فروش عمده برنج' + ' ' + item.name">
 
-                                </a>
+                                </router-link>
                             </h4>
 
                             <!-- end loop  -->
@@ -1759,7 +1604,7 @@
 </template>
 
 <script>
-    import {eventBus} from "../../../router/dashboard_router";
+    import {eventBus} from "../../../router/router";
     import VueWow from 'vue-wow';
     import {UAnimateContainer, UAnimate} from 'vue-wow'
 
@@ -1767,6 +1612,7 @@
 
 
     import ProductCarousel from './landing_page_components/product-list-carousel'
+    import Route from "../../../router/components/route";
 
 
     var RequestCarousel = {
@@ -1810,6 +1656,7 @@
 
     export default {
         components: {
+            Route,
             ProductCarousel,
             RequestCarousel,
             UAnimateContainer,
@@ -1998,7 +1845,7 @@
             },
             search: function () {
                 if (this.mainSearchBoxText !== '') {
-                    window.location.href = '/product-list/' + this.mainSearchBoxText;
+                    this.$router.push('/product-list/' + this.mainSearchBoxText);
                 }
             },
             generateProductLink: function (product) {

@@ -18,7 +18,7 @@
         animation-delay: 0.9s;
         animation-name: fadeInUp;
     }
-  
+
 
 
 </style>
@@ -53,9 +53,9 @@
 
 
 <script>
-    import {eventBus} from "../../../router/dashboard_router";
+    import {eventBus} from "../../../router/router";
     import PricingTableComponent from './pricing-table-content'
- 
+
     export default {
         components:{
             PricingTableComponent

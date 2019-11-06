@@ -233,13 +233,13 @@
 
 		font-size: 11px;
     }
-    
+
     .background-blue{
-    
+
         background: #000546 !important;
-        
+
     }
-    
+
     .small-description{
 
          font-size: 11px;
@@ -275,15 +275,15 @@
 
     }
     .send-message .submit-button{
-        
+
         display: inline-block;
     	font-size: 14px;
 		padding: 7px 15px;
 
     }
-        
+
     .send-message a.submit-button:before{
-        
+
         content: none;
 
     }
@@ -294,11 +294,11 @@
 		color: #e41c38;
 
     }
-    
+
     .blue-background{
-    
+
         background: #000546 !important;
-        
+
     }
     @media screen and (max-width: 767px){
 		.input-wrapper {
@@ -328,10 +328,10 @@
 				     		<p class="main-description">
                                 درخواست خرید شما پس از تایید کارشناسان اینکوباک برای کشاورزان و تامین کنندگان مرتبط ارسال میشود.
 				     		</p>
-                            
+
                            <div v-if="$parent.relatedProduct">
-                           	
-                     
+
+
 	                            <p class="main-description"  ><strong>یکی از مرتبط ترین محصولات برای درخواست خرید شما در زیر نمایش داده شده است.
 	                            	<br/>
 	                            	<span class="red-text">در صورت عدم ارسال پیام به فروشنده دیگر به این محصول دسترسی نخواهید داشت.</span></strong>
@@ -355,15 +355,15 @@
 	                       		    </p>
 
 	                       		    <div class="send-message  col-xs-12">
-	                                    <a class="submit-button active blue-background" :href="$parent.getProductUrl()" target="_blank">
+	                                    <router-link class="submit-button active blue-background" :to="$parent.getProductUrl()" target="_blank">
 	                       		    		 جزییات محصول
-	                     				</a>
-                                    
+	                     				</router-link>
+
                        		    	<button class="submit-button active " @click.prevent="$parent.openChat($parent.relatedProduct)">
                        		    		 <i style="position:relative;top:2px;font-size: 12px;left: 2px;" class="fa fa-comment-alt"></i>
                                         پیام به فروشنده
                      				</button>
-                                    
+
       								</div>
 
       							</div>
@@ -371,21 +371,21 @@
                             </div>
 
                             <div class="text-center margin-15-0" v-else>
-                            	   <a class="submit-button active" href="/product-list">
+                            	   <router-link class="submit-button active" :to="{name : 'productList'}">
                        		    		  لیست محصولات
-                     				</a>
+                     				</router-link>
 
                             </div>
 
-<!--						
+<!--
 
                                     <button class="submit-button active" @click.prevent="$parent.getProductUrl()">
                        		    		 پیام به فروشنده
                      				</button>
 -->
 
-                   			
-                	
+
+
 				     	</div>
 
 				    </div>

@@ -31,10 +31,7 @@
     .main-green-button {
         max-width: 360px;
         margin: 0 auto;
-    }
-
-    .main-green-button .green-button {
-        font-size: 23px;
+        text-align:center;
     }
 
     .panel-heading, .panel-title {
@@ -143,22 +140,22 @@
                                 <ul>
                                     <li>
                                         جهت ثبت نام دکمه ورود به اینکوباک یا
-                                        <a
-                                                href="/login" target="_blank">ورود/ثبت نام</a>
+                                        <router-link
+                                                :to="{name : 'login'}" target="_blank">ورود/ثبت نام</router-link>
                                         کلیک کنید
                                     </li>
-                                    <li>سپس در صفحه ورود روی دکمه ی <a href="/register" target="_blank">ثبت نام در
-                                        اینکوباک</a> کلیک
+                                    <li>سپس در صفحه ورود روی دکمه ی <router-link :to="{name : 'register'}" target="_blank">ثبت نام در
+                                        اینکوباک</router-link> کلیک
                                         کنید.
                                     </li>
                                     <li>
 
                                         <div class="desktop-image">
-                                            <img :src="assets + '/img/help/register/web/login.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/register/web/login.jpg'"/>
                                         </div>
 
                                         <div class="mobile-image">
-                                            <img :src="assets + '/img/help/register/mobile/login.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/register/mobile/login.jpg'"/>
                                         </div>
 
                                     </li>
@@ -170,11 +167,11 @@
 
 
                                         <p class="desktop-image">
-                                            <img :src="assets + '/img/help/register/web/1.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/register/web/1.jpg'"/>
                                         </p>
 
                                         <p class="mobile-image">
-                                            <img :src="assets + '/img/help/register/mobile/1.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/register/mobile/1.jpg'"/>
                                         </p>
 
                                     </li>
@@ -186,11 +183,11 @@
 
 
                                         <p class="desktop-image">
-                                            <img :src="assets + '/img/help/register/web/2.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/register/web/2.jpg'"/>
                                         </p>
 
                                         <p class="mobile-image">
-                                            <img :src="assets + '/img/help/register/mobile/2.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/register/mobile/2.jpg'"/>
                                         </p>
 
                                     </li>
@@ -200,11 +197,11 @@
                                             مشخصات فردی خود را وارد کرده و روی دکمه "مرحله بعد" کلیک کنید
                                         </p>
                                         <div class="desktop-image">
-                                            <img :src="assets + '/img/help/register/web/3.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/register/web/3.jpg'"/>
                                         </div>
 
                                         <div class="mobile-image">
-                                            <img :src="assets + '/img/help/register/mobile/3.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/register/mobile/3.jpg'"/>
                                         </div>
                                     </li>
 
@@ -213,11 +210,11 @@
                                             استان و شهر خود را انتخاب کرده و روی دکمه "مرحله بعد" کلیک کنید
                                         </p>
                                         <div class="desktop-image">
-                                            <img :src="assets + '/img/help/register/web/4.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/register/web/4.jpg'"/>
                                         </div>
 
                                         <div class="mobile-image">
-                                            <img :src="assets + '/img/help/register/mobile/4.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/register/mobile/4.jpg'"/>
                                         </div>
                                     </li>
 
@@ -227,11 +224,11 @@
                                             مثال: amiri243
                                         </p>
                                         <div class="desktop-image">
-                                            <img :src="assets + '/img/help/register/web/5.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/register/web/5.jpg'"/>
                                         </div>
 
                                         <div class="mobile-image">
-                                            <img :src="assets + '/img/help/register/mobile/5.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/register/mobile/5.jpg'"/>
                                         </div>
                                     </li>
                                     <li>
@@ -240,11 +237,11 @@
                                             نهایی را کلیک کنید
                                         </p>
                                         <div class="desktop-image">
-                                            <img :src="assets + '/img/help/register/web/6.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/register/web/6.jpg'"/>
                                         </div>
 
                                         <div class="mobile-image">
-                                            <img :src="assets + '/img/help/register/mobile/6.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/register/mobile/6.jpg'"/>
                                         </div>
                                     </li>
                                 </ul>
@@ -279,14 +276,14 @@
                                     </li>
                                     <li>
                                         <div class="desktop-image">
-                                            <img :src="assets + '/img/help/edit-profile/web/1.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/edit-profile/web/1.jpg'"/>
 
 
                                         </div>
                                     </li>
                                     <li>
                                         <div class="mobile-image">
-                                            <img :src="assets + '/img/help/edit-profile/mobile/1.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/edit-profile/mobile/1.jpg'"/>
                                         </div>
                                     </li>
                                     <li>
@@ -303,17 +300,17 @@
 
                                     <li>
                                         <div class="desktop-image">
-                                            <img :src="assets + '/img/help/edit-profile/web/2.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/edit-profile/web/2.jpg'"/>
                                         </div>
 
                                     </li>
                                     <li>
                                         <div class="mobile-image">
-                                            <img :src="assets + '/img/help/edit-profile/mobile/2.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/edit-profile/mobile/2.jpg'"/>
                                         </div>
 
                                         <div class="mobile-image">
-                                            <img :src="assets + '/img/help/edit-profile/mobile/3.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/edit-profile/mobile/3.jpg'"/>
                                         </div>
                                     </li>
 
@@ -332,7 +329,7 @@
                             <div class="panel-body">
                                 <ul>
                                     <li>
-                                        <p>ابتدا وارد پنل کاربری خود شوید.<a href="/login">لینک ورود</a>
+                                        <p>ابتدا وارد پنل کاربری خود شوید.<router-link :to="{name : 'login'}">لینک ورود</router-link>
                                         </p>
                                     </li>
                                     <li>
@@ -349,11 +346,11 @@
                                         </p>
 
                                         <div class="desktop-image">
-                                            <img :src="assets + '/img/help/post-product/web/1.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/post-product/web/1.jpg'"/>
                                         </div>
 
                                         <div class="mobile-image">
-                                            <img :src="assets + '/img/help/post-product/mobile/1.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/post-product/mobile/1.jpg'"/>
                                         </div>
                                         <p>
 
@@ -363,12 +360,12 @@
                                         </p>
 
                                         <div class="desktop-image">
-                                            <img :src="assets + '/img/help/post-product/web/2.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/post-product/web/2.jpg'"/>
                                         </div>
 
 
                                         <div class="mobile-image">
-                                            <img :src="assets + '/img/help/post-product/mobile/2.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/post-product/mobile/2.jpg'"/>
                                         </div>
 
                                         <p>
@@ -378,12 +375,12 @@
 
                                         </p>
                                         <div class="desktop-image">
-                                            <img :src="assets + '/img/help/post-product/web/3.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/post-product/web/3.jpg'"/>
                                         </div>
 
 
                                         <div class="mobile-image">
-                                            <img :src="assets + '/img/help/post-product/mobile/3.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/post-product/mobile/3.jpg'"/>
                                         </div>
 
                                         <p>
@@ -393,12 +390,12 @@
 
                                         </p>
                                         <div class="desktop-image">
-                                            <img :src="assets + '/img/help/post-product/web/4.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/post-product/web/4.jpg'"/>
                                         </div>
 
 
                                         <div class="mobile-image">
-                                            <img :src="assets + '/img/help/post-product/mobile/4.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/post-product/mobile/4.jpg'"/>
                                         </div>
 
                                         <p>
@@ -409,12 +406,12 @@
                                         </p>
 
                                         <div class="desktop-image">
-                                            <img :src="assets + '/img/help/post-product/web/5.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/post-product/web/5.jpg'"/>
                                         </div>
 
 
                                         <div class="mobile-image">
-                                            <img :src="assets + '/img/help/post-product/mobile/5.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/post-product/mobile/5.jpg'"/>
                                         </div>
 
                                         <p>
@@ -425,21 +422,21 @@
                                         </p>
 
                                         <div class="desktop-image">
-                                            <img :src="assets + '/img/help/post-product/web/6.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/post-product/web/6.jpg'"/>
                                         </div>
 
 
                                         <div class="mobile-image">
-                                            <img :src="assets + '/img/help/post-product/mobile/6.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/post-product/mobile/6.jpg'"/>
                                         </div>
 
 
                                     </li>
 
                                     <li>
-                                        محصول شما پس از تایید ناظران اینکوباک در صفحه ی <a href="/product-list"
+                                        محصول شما پس از تایید ناظران اینکوباک در صفحه ی <router-link :to="{name : 'productList'}"
                                                                                            target="_blank">لیست
-                                        محصولات</a>
+                                        محصولات</router-link>
                                         نمایش داده می شود و خریداران می توانند درخواست های خرید خود را برای شما ارسال
                                         کنند.
                                     </li>
@@ -462,7 +459,7 @@
                             <div class="panel-body">
                                 <ul>
                                     <li>
-                                        ابتدا وارد پنل کاربری خود شوید. <a href="/login">لینک ورود</a>
+                                        ابتدا وارد پنل کاربری خود شوید. <router-link :to="{name : 'login'}">لینک ورود</router-link>
                                     </li>
                                     <li>
                                         <p>
@@ -484,7 +481,7 @@
                                         </p>
 
                                         <div class="desktop-image">
-                                            <img :src="assets + '/img/help/buyad/web/1.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/buyad/web/1.jpg'"/>
                                         </div>
 
                                         <p>
@@ -492,19 +489,19 @@
 
                                         </p>
                                         <div class="desktop-image">
-                                            <img :src="assets + '/img/help/buyad/web/2.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/buyad/web/2.jpg'"/>
                                         </div>
 
                                         <div class="mobile-image">
-                                            <img :src="assets + '/img/help/buyad/mobile/1.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/buyad/mobile/1.jpg'"/>
                                         </div>
 
                                         <div class="mobile-image">
-                                            <img :src="assets + '/img/help/buyad/mobile/2.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/buyad/mobile/2.jpg'"/>
                                         </div>
 
                                         <div class="mobile-image">
-                                            <img :src="assets + '/img/help/buyad/mobile/3.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/buyad/mobile/3.jpg'"/>
                                         </div>
 
 
@@ -538,16 +535,16 @@
 
                                     <li>
                                         <div class="desktop-image">
-                                            <img :src="assets + '/img/help/buy-ad-list/web/1.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/buy-ad-list/web/1.jpg'"/>
                                         </div>
 
                                         <div class="mobile-image">
-                                            <img :src="assets + '/img/help/buy-ad-list/mobile/1.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/buy-ad-list/mobile/1.jpg'"/>
 
                                         </div>
 
                                         <div class="mobile-image">
-                                            <img :src="assets + '/img/help/buy-ad-list/mobile/2.jpg'"/>
+                                            <img :src="assets + 'assets/img/help/buy-ad-list/mobile/2.jpg'"/>
 
                                         </div>
 
@@ -571,14 +568,14 @@
                                 </p>
 
                                 <div class="desktop-image">
-                                    <img :src="assets + '/img/help/messenger/web/1.jpg'"/>
+                                    <img :src="assets + 'assets/img/help/messenger/web/1.jpg'"/>
                                 </div>
                                 <div class="mobile-image">
-                                    <img :src="assets + '/img/help/messenger/mobile/1.jpg'"/>
+                                    <img :src="assets + 'assets/img/help/messenger/mobile/1.jpg'"/>
 
                                 </div>
                                 <div class="mobile-image">
-                                    <img :src="assets + '/img/help/messenger/mobile/2.jpg'"/>
+                                    <img :src="assets + 'assets/img/help/messenger/mobile/2.jpg'"/>
 
                                 </div>
                             </div>
@@ -605,7 +602,15 @@
                     <div class="row">
 
                         <h1 class=" main-green-button">
-                            <a href="/register" class="green-button">ثبت نام در سامانه</a>
+
+                            <router-link v-if="isUserLogin && userType == 0" :to="{name : 'productList'}" class="green-button">لیست محصولات</router-link>
+
+                            <router-link v-else-if="isUserLogin && userType == 1" :to="{name : 'buyAdRequestsSeller'}" class="green-button">
+                                لیست درخواست های خرید
+                            </router-link>
+
+                            <router-link v-else :to="{name : 'register'}" class="green-button">ثبت نام در اینکوباک</router-link>
+
                         </h1>
                     </div>
                 </div>
@@ -617,11 +622,15 @@
 </template>
 
 <script>
-    import {eventBus} from "../../../router/dashboard_router";
+    import {eventBus} from "../../../router/router";
+    import Route from "../../../router/components/route";
 
     export default {
+        components: {Route},
         props: [
             'assets',
+            'isUserLogin',
+            'userType'
         ],
         methods: {
             stopLoader: function () {

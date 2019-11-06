@@ -1,8 +1,7 @@
 <style scoped>
     /*main style*/
 
-
-    .main-content{
+    .main-content {
         max-width: 685px;
         background: #fff;
         border-radius: 9px;
@@ -17,7 +16,7 @@
 
     }
 
-    .wrapper-progressbar.title h2{
+    .wrapper-progressbar.title h2 {
 
         font-size: 23px;
         font-weight: bold;
@@ -25,36 +24,38 @@
 
     }
 
-    .main-section-wrapper{
+    .main-section-wrapper {
         max-width: 420px;
         margin: 50px auto 0;
     }
-    .main-section-wrapper-full-width{
-         max-width: 100%;
-         margin: 25px auto 0;
+
+    .main-section-wrapper-full-width {
+        max-width: 100%;
+        margin: 25px auto 0;
     }
+
     /*progressbar styles*/
 
-    .wrapper-progressbar{
+    .wrapper-progressbar {
         position: relative;
         padding: 15px;
         border-bottom: 2px solid #00c569;
     }
 
-    .progressbar-items{
+    .progressbar-items {
         display: flex;
         justify-content: space-between;
         direction: rtl;
         position: relative;
     }
 
-    .progrees-item{
+    .progrees-item {
         text-align: center;
         color: #BEBEBE;
 
     }
 
-    .progrees-item p{
+    .progrees-item p {
         font-size: 12px;
     }
 
@@ -70,19 +71,20 @@
         padding-top: 4px;
     }
 
-     .progrees-item.active-item{
+    .progrees-item.active-item {
         color: #333;
 
     }
 
-    .progrees-item.active-item p{
-         font-weight: bold;
+    .progrees-item.active-item p {
+        font-weight: bold;
     }
-     .progrees-item.active-item span {
+
+    .progrees-item.active-item span {
         background: #00C569;
     }
 
-     .custom-progressbar{
+    .custom-progressbar {
 
         display: block;
         height: 3px;
@@ -93,50 +95,53 @@
         top: 23px;
         z-index: 0;
 
-     }
-     .custom-progressbar.active-item{
+    }
+
+    .custom-progressbar.active-item {
         background: #00c569;
         width: 0;
         left: initial;
-     }
+    }
 
-     .custom-progressbar .progress-bar{
+    .custom-progressbar .progress-bar {
         background: #00c569;
         float: right;
-     }
-     .active-progress-wrapper{
+    }
+
+    .active-progress-wrapper {
         position: absolute;
 
         right: 37px;
 
         left: 41px;
-     }
-     .active-progress-wrapper .custom-progressbar{
+    }
+
+    .active-progress-wrapper .custom-progressbar {
 
         right: 0px;
         left: 0px;
         top: 8px !important;
 
-     }
+    }
 
-     @media screen and (max-width: 767px){
-        .main-section-wrapper{
+    @media screen and (max-width: 767px) {
+        .main-section-wrapper {
             max-width: 600px;
         }
 
-           .main-section-wrapper{
-                max-width: 420px;
-                margin: 20px auto ;
-            }
+        .main-section-wrapper {
+            max-width: 420px;
+            margin: 20px auto;
+        }
 
-        .main-content{
+        .main-content {
             max-width: initial;
             background: #fff;
             border-radius: 0;
             box-shadow: none;
             min-height: 500px;
             direction: rtl;
-            transform: translate(0,0);
+            transform: translate(0, 0);
             height: 100%;
             bottom: 0;
             top: 0;
@@ -145,30 +150,30 @@
 
         }
 
-        .progrees-item p{
+        .progrees-item p {
             display: none;
         }
 
-        .custom-progressbar{
+        .custom-progressbar {
             right: 30px;
             left: 34px;
         }
 
-         .active-progress-wrapper{
+        .active-progress-wrapper {
 
             right: 20px;
             left: 26px;
 
-         }
+        }
 
-         .active-progress-wrapper .custom-progressbar{
+        .active-progress-wrapper .custom-progressbar {
 
             right: 0px;
             left: 0px;
             top: 8px;
 
-         }
-     }
+        }
+    }
 
 
 </style>
@@ -182,9 +187,9 @@
                 <header class="header-section">
                     <div v-if="currentStep == 0 || currentStep == 1" class="wrapper-progressbar title">
 
-                     <h2>
-                         ثبت درخواست خرید
-                     </h2>
+                        <h2>
+                            ثبت درخواست خرید
+                        </h2>
 
                     </div>
 
@@ -197,9 +202,9 @@
                 </header>
 
                 <main class="main-section-wrapper">
-                    <StartRegisterRequest v-show="currentStep == 0" />
-                    <RegisterRequest v-show="currentStep == 1" />
-                    <FnishRegisterRequest v-show="currentStep == 2" />
+                    <StartRegisterRequest v-show="currentStep == 0"/>
+                    <RegisterRequest v-show="currentStep == 1"/>
+                    <FnishRegisterRequest v-show="currentStep == 2"/>
                 </main>
 
             </div>
@@ -210,14 +215,14 @@
 </template>
 
 <script>
-    import {eventBus} from "../../../../router/dashboard_router";
+    import {eventBus} from "../../../../router/router";
     import StartRegisterRequest from './register-request-steps/start-register-request'
     import RegisterRequest from './register-request-steps/register-request-content'
     import FnishRegisterRequest from './register-request-steps/fnish-register-request'
 
     export default {
         components: {
-             StartRegisterRequest,
+            StartRegisterRequest,
             RegisterRequest,
             FnishRegisterRequest
         },
@@ -225,10 +230,10 @@
             return {
                 currentStep: 0,
                 errors: {
-                    categorySelected : '',
-                    category_id : '',
-                    requirement_amount : '',
-                    name : ''
+                    categorySelected: '',
+                    category_id: '',
+                    requirement_amount: '',
+                    name: ''
                 },
                 currentUser: {
                     profile: '',
@@ -249,7 +254,7 @@
                     'requirement_amount',
                     'category_id',
                 ],
-                categorySelected : '',
+                categorySelected: '',
                 categoryList: '',
                 subCategoryList: '',
                 cities: '',
@@ -258,7 +263,7 @@
                 profileConfirmed: false,
                 disableSubmit: false,
                 submiting: false,
-                relatedProduct:null,
+                relatedProduct: null,
                 items: [
                     {
                         message: ' ثبت درخواست جدید',
@@ -283,10 +288,10 @@
                 axios.post('/get_category_list', {
                     parent_id: categoryId,
                 })
-                .then(response => (this.subCategoryList = response.data.categories));
+                    .then(response => (this.subCategoryList = response.data.categories));
 
             },
-            formValidator:function(){
+            formValidator: function () {
                 if (!this.categorySelected) {
                     this.errors.categorySelected = "دسته بندی الزامی است"
                 }
@@ -324,7 +329,7 @@
 
                             self.registerComponentStatistics('buyAd-register', 'buyAd-registered-successfully', 'buyAd-registered-successfully');
 
-                            if(response.data.product){
+                            if (response.data.product) {
                                 self.relatedProduct = response.data.product;
                             }
 
@@ -406,11 +411,11 @@
             scrollToTop() {
                 window.scrollTo(0, 0);
             },
-            nameValidator:function(name){
+            nameValidator: function (name) {
                 this.toLatinNumbers(name);
                 if (!name) {
 
-                     this.errors.name = '';
+                    this.errors.name = '';
 
                 } else if (!this.validateRegx(name, /^[\u0600-\u06FF\s\d]+$/)) {
                     this.errors.name = 'نوع محصول فرمت مناسبی نیست';
@@ -421,7 +426,7 @@
                 var standardNumber = this.toLatinNumbers(number);
                 if (standardNumber == '') {
                     this.errors.requirement_amount = 'فیلد میزان نیاز الزامی است';
-                }else if (!this.validateRegx(standardNumber, /^\d*$/)) {
+                } else if (!this.validateRegx(standardNumber, /^\d*$/)) {
                     this.errors.requirement_amount = 'فقط عدد وارد کنید';
                 }
 
@@ -429,11 +434,12 @@
             validateRegx: function (input, regx) {
                 return regx.test(input);
             },
-            reLoadPage(){
+            reLoadPage() {
                 location.reload(true);
             },
             openChat: function (product) {
                 this.registerComponentStatistics('productReplyAfterBuyAdRegister', 'openChat', 'click on open chatBox');
+                var self = this;
 
                 axios.post('/get_user_last_confirmed_profile_photo', {
                     'user_id': product.myuser_id
@@ -450,7 +456,7 @@
 
                     axios.post('/set_last_chat_contact', contact)
                         .then(function (response) {
-                            window.location.href = '/dashboard/messages';
+                            self.$router.push('/buyer/messages');
                         })
                         .catch(function (e) {
                             alert('Error');

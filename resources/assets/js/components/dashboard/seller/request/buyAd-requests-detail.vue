@@ -430,7 +430,7 @@
 
 <script>
 
-    import {eventBus} from "../../../../router/dashboard_router";
+    import {eventBus} from "../../../../router/router";
     import UploadFile from '../../upload-image'
     export default {
         components:{

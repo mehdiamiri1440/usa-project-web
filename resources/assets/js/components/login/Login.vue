@@ -1,4 +1,4 @@
-<style >
+<style scoped>
 .text-loader {
   display: block;
   width: 100%;
@@ -8,6 +8,7 @@
   bottom: 37%;
   right: 10px;
 }
+
 .loading-container {
   width: 100%;
   height: 100%;
@@ -45,14 +46,17 @@
   overflow: hidden;
   min-height: 768px;
 }
+
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 .main-wrapper {
   position: absolute;
   top: 50%;
@@ -64,7 +68,6 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .wraper-main-contents {
   text-align: right;
-  margin: 30px auto;
 }
 
 /*progressbar styles*/
@@ -72,6 +75,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .wrapper-progressbar {
   position: relative;
 }
+
 .progressbar-items {
   display: flex;
   justify-content: space-between;
@@ -99,6 +103,7 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-bottom: 6px;
   padding-top: 1px;
 }
+
 .lds-ring {
   display: inline-block;
 
@@ -114,6 +119,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
   transform: translate(-50%, -50%);
 }
+
 .lds-ring div {
   box-sizing: border-box;
   display: block;
@@ -126,21 +132,26 @@ input[type="number"]::-webkit-outer-spin-button {
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: #00c569 transparent transparent transparent;
 }
+
 .lds-ring-alt {
   display: block;
   margin-top: 50px;
   direction: rtl;
   text-align: center;
 }
+
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;
 }
+
 .lds-ring div:nth-child(2) {
   animation-delay: -0.3s;
 }
+
 .lds-ring div:nth-child(3) {
   animation-delay: -0.15s;
 }
+
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg);
@@ -157,6 +168,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .progrees-item.active p {
   font-weight: bold;
 }
+
 .progrees-item.active span {
   background: #00c569;
 }
@@ -171,6 +183,7 @@ input[type="number"]::-webkit-outer-spin-button {
   top: 9px;
   z-index: 0;
 }
+
 .custom-progressbar.active {
   background: #00c569;
   width: 0;
@@ -200,16 +213,19 @@ input[type="number"]::-webkit-outer-spin-button {
   color: #fff;
   padding: 22px 0;
 }
+
 .main-content-header a {
   color: #fff;
   position: relative;
   right: 0;
   transition: 300ms;
 }
+
 .main-content-header a,
 .main-content-header h1 {
   font-size: 23px;
 }
+
 .main-content-header a:hover {
   transition: 300ms;
 }
@@ -228,6 +244,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
   bottom: 0;
 }
+
 .footer-content {
   direction: rtl;
   text-align: center;
@@ -246,6 +263,7 @@ input[type="number"]::-webkit-outer-spin-button {
   #main {
     padding: 0;
   }
+
   .progrees-item p {
     display: none;
   }
@@ -257,9 +275,11 @@ input[type="number"]::-webkit-outer-spin-button {
   .progressbar-items {
     padding: 0 15px;
   }
+
   .main-contents {
     border-radius: 0;
   }
+
   .main-content-header {
     direction: rtl;
     text-align: center;
@@ -273,10 +293,12 @@ input[type="number"]::-webkit-outer-spin-button {
   .main-content-header h1 {
     font-size: 17px;
   }
+
   .main-content-header a {
     color: #333;
     text-align: left;
   }
+
   .title-contents {
     font-weight: bold;
     font-size: 16px;
@@ -291,6 +313,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
     font-weight: bold;
   }
+
   input {
     font-size: 13px;
     padding: 8px 15px 9px 35px;
@@ -381,7 +404,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 
 <script>
-import { eventBus } from "../../router/dashboard_router";
+import { eventBus } from "../../router/router";
 import loginPage from "./login_steps/login_page";
 import ForgotPassword from "./login_steps/forgot_password";
 import VerifyCode from "./login_steps/verify_code";
@@ -436,41 +459,21 @@ export default {
           if (response.data.status === true) {
             if (response.data.confirmed_profile_record === true) {
               if (response.data.is_buyer) {
-                window.location.href = "/dashboard/register-request";
+                window.location.href = "/buyer/register-request";
                 localStorage.userRoute = JSON.stringify(
-                  "/dashboard/register-request"
+                  "buyer/register-request"
                 );
+                // test
                 self.registerComponentStatistics(
                   "Login",
                   "seller-login",
                   "seller-logged-in-successfully"
                 );
               } else if (response.data.is_seller) {
-                axios
-                  .post("/user/profile_info")
-                  .then(function(response) {
-                    self.currentUser = response.data;
-                    axios
-                      .post("/get_product_list_by_user_name", {
-                        user_name: self.currentUser.user_info.user_name
-                      })
-                      .then(function(response) {
-                        self.products = response.data.products;
-                        self.loading = false;
-                        if (!self.products.length) {
-                          window.location.href = "/dashboard/register-product";
-                          localStorage.userRoute = JSON.stringify(
-                            "/dashboard/register-product"
-                          );
-                        } else {
-                          window.location.href = "/dashboard/status";
-                          localStorage.userRoute = JSON.stringify(
-                            "/dashboard/status"
-                          );
-                        }
-                      });
-                  })
-                  .catch(error => console.log("error"));
+                window.location.href = "/seller/register-product";
+                localStorage.userRoute = JSON.stringify(
+                  "seller/register-product"
+                );
                 self.registerComponentStatistics(
                   "Login",
                   "buyer-login",
@@ -492,8 +495,7 @@ export default {
                 "Login-page: User does not have confirmed profile record",
                 true
               );
-
-              window.location.href = "/dashboard"; // Edit Profile Page
+              // window.location.href = "/seller/profile"; // Edit Profile Page
             }
           } else {
             self.showMsg = true;
@@ -526,7 +528,6 @@ export default {
           phone: this.toLatinNumbers(this.step2.phone)
         })
         .then(function(response) {
-          console.log(response.msg);
           if (response.status === 200) {
             self.goToStep(3);
 
@@ -553,8 +554,10 @@ export default {
         })
         .then(function(response) {
           if (response.data.status === true) {
-            alert("گذر واژه ی جدید به تلفن همراهتان ارسال شد.");
-            window.location.href = "/login";
+            self.errors = [];
+            self.showMsg = true;
+            self.step3.msg = "گذر واژه ی جدید به تلفن همراهتان ارسال شد.";
+            self.$router.push("/login");
           } else {
             self.errors = [];
             self.showMsg = true;
@@ -616,9 +619,9 @@ export default {
     //      window.location.href = JSON.parse(localStorage.userRoute);
     //    }
     if (self.isUserLogin && self.userType == 1) {
-      window.location.href = "/dashboard/register-product";
+      self.$router.push("seller/register-product");
     } else if (self.isUserLogin && self.userType != 1) {
-      window.location.href = "/dashboard/register-request";
+      self.$router.push("buyer/register-request");
     } else {
       self.loginCheckerLoading = false;
     }

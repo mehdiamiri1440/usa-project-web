@@ -1,16 +1,34 @@
-<style >
+<style scoped>
+.show-header button {
+  float: right;
+  border: none;
+  background: none;
+  font-size: 25px;
+  padding: 19px 30px 17px 24px;
+  display: none;
+}
+
+.show-header button {
+  display: block;
+  background: #000546;
+  color: #fff;
+}
+
 .display-loading {
   display: inline-flex;
   justify-content: center;
   align-items: center;
 }
+
 .margin-loading {
   margin: 3%;
 }
+
 .loading-height {
   height: 10px !important;
   width: 60px;
 }
+
 #main {
   margin-right: 250px;
   margin-top: 65px;
@@ -104,10 +122,25 @@
   display: none;
 }
 
-/*.content-header span{  
-  display: block;
-  text-align: right;
-}*/
+/*.content-header span{
+      display: block;
+      text-align: right;
+    }*/
+
+.right-menu-header {
+  position: relative;
+  padding: 6px;
+}
+
+.right-menu-header li ul a {
+  font-size: 14px;
+  width: 100%;
+  display: inline-block;
+}
+
+.right-menu-header li ul li {
+  margin: 5px;
+}
 
 .right-menu-header .green-button {
   font-size: 17px;
@@ -184,6 +217,76 @@ i.fa-home {
   display: inline-block;
   color: #fff !important;
 }
+
+@media screen and (max-width: 994px) {
+  .content-header {
+    display: none;
+  }
+
+  .main-header,
+  .little-main-header {
+    right: 0 !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  span.min {
+    display: inherit;
+  }
+
+  span.full {
+    display: none;
+  }
+  .mobile-header .green-button {
+    margin: 15px 0 0;
+  }
+
+  .mobile-header ul a {
+    padding: 15px 20px;
+  }
+
+  .profile-menu-header {
+    padding: 7px;
+    padding-left: 36px;
+  }
+}
+
+@media screen and (max-width: 555px) {
+  .user_name {
+    display: none !important;
+  }
+
+  .right-menu-header {
+    padding: 6px;
+    border-right: 1px solid #eff3f6;
+  }
+
+  .profile-menu-header .user_name {
+    display: none;
+  }
+
+  .content-header {
+    display: none;
+  }
+
+  .right-menu-header .green-button {
+    padding: 10px 15px;
+  }
+}
+
+@media screen and (max-width: 345px) {
+  .sub-header a {
+    font-size: 10px;
+  }
+
+  .show-header button {
+    padding: 19px 26px 19px 19px;
+  }
+
+  .right-menu-header {
+    padding: 6px;
+  }
+}
 @media only screen and (max-width: 767px) {
   .message-notification {
     top: 4px;
@@ -200,11 +303,6 @@ i.fa-home {
     z-index: 10;
     align-items: center;
     color: wheat;
-  }
-}
-@media only screen and (min-width: 767px) {
-  .hide-message-notification {
-    display: none;
   }
 }
 .rotation {
@@ -236,21 +334,28 @@ i.fa-home {
     transform: translate3d(4px, 0, 0);
   }
 }
+@media only screen and (min-width: 767px) {
+  .hide-message-notification {
+    display: none;
+  }
+}
+.button-height {
+  line-height: 1;
+}
 </style>
 
 <template>
   <div>
     <header id="header" class="main-header">
-      <div id="notification" class="show-header">
+      <div class="show-header hidden-md hidden-lg">
         <div
           v-if="messageCount>0"
           class="message-notification hide-message-notification"
         >{{messageCount}}</div>
-        <button>
+        <button class="button-height">
           <span :class="menuClosed?'rotation':''" class="fa fa-bars"></span>
         </button>
       </div>
-
       <div class="content-header">
         <span class="font-big">اینکوباک</span>
         <span>بازارگاه آنلاین کشاورزی</span>
@@ -278,17 +383,17 @@ i.fa-home {
         <div class="profile-list">
           <ul class="list-unstyled">
             <li class="list-item">
-              <a
-                :href="'/dashboard/profile'"
+              <router-link
+                :to="{name : 'profileBasicBuyer'}"
                 @click="registerComponentStatistics('seller-dashboard-header','profile-link','click-on-profile-link-in-dashboard')"
-              >پروفایل</a>
+              >پروفایل</router-link>
             </li>
 
             <li class="list-item">
-              <a
-                :href=" '/dashboard/password' "
+              <router-link
+                :to="{name : 'passwordBuyer'}"
                 @click="registerComponentStatistics('seller-dashboard-header','change-password','click-on-change-password-dashboard')"
-              >تغییر کلمه عبور</a>
+              >تغییر کلمه عبور</router-link>
             </li>
 
             <li class="list-item">
@@ -300,25 +405,25 @@ i.fa-home {
       <div class="right-menu-header">
         <ul class="list-inline">
           <li>
-            <a
+            <router-link
               class="product-list-link"
-              href="/product-list"
+              :to="{ name : 'productList'}"
               @click="registerComponentStatistics('dashboard-header','product-list-btn','click-on-product-list-in-dashboard')"
             >
               <span class="full">لیست محصولات</span>
               <span class="min">
                 <i class="fa fa-th-list" aria-hidden="true"></i>
               </span>
-            </a>
+            </router-link>
           </li>
 
           <li>
-            <a
-              :href="routeHome"
+            <router-link
+              :to="{name : 'indexPage'}"
               @click="registerComponentStatistics('dashboard-header','home-page-btn','click-on-home-page-in-dashboard')"
             >
               <i class="fa fa-home" aria-hidden="true"></i>
-            </a>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -332,7 +437,7 @@ i.fa-home {
 <script>
 var visible = false;
 import SubMenu from "./sub-menu/sub-menu.vue";
-import { eventBus } from "../../../../../router/dashboard_router";
+import { eventBus } from "../../../../../router/router";
 export default {
   data: function() {
     return {

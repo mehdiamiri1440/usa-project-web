@@ -1,4 +1,516 @@
 <style scoped>
+
+    .owl-carousel {
+        direction: ltr;
+    }
+
+    .owl-carousel img {
+        border-radius: 3px;
+    }
+
+
+    .filter-mobile-sidebar .box-sidebar i {
+        text-align: center;
+        top: 0;
+        right: 3px;
+    }
+
+    .filter-mobile-sidebar .box-sidebar select {
+        width: calc(100% - 45px);
+    }
+
+    .box-sidebar select {
+        border-radius: 3px;
+        border: 1px solid #4c5058;
+        width: 80%;
+        padding: 5px 15px;
+    }
+
+    .main-content {
+        padding: 0 11px;
+    }
+
+    .main-content-item {
+        direction: rtl;
+        overflow: hidden;
+        margin: -100px auto 24px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px #cfcfcf;
+        padding: 15px;
+        background: #fff;
+    }
+
+    .main-article-title {
+        margin: 0 auto 15px;
+        font-weight: bold;
+    }
+
+    .main-article-title a {
+        color: #4c5058;
+    }
+
+    .main-article-title a:hover {
+        color: #444;
+    }
+
+    .main-article-content {
+        padding: 0;
+        padding-right: 25px;
+        padding-top: 15px;
+    }
+
+    .main-article-content p {
+        margin-bottom: 15px;
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .main-article-content p span {
+        font-weight: normal;
+    }
+
+    .image-article-content {
+        padding: 0;
+        padding-top: 10px;
+        float: right;
+    }
+
+    .image-article-content a:hover img {
+        transition: 300ms;
+    }
+
+    .image-article-content img {
+        transition: 300ms;
+    }
+
+    .main-image > div {
+        display: none;
+    }
+
+    .main-image > div:first-of-type {
+        display: block;
+    }
+
+    .user-contents {
+        border-right: 2px solid #f0f3f6;
+        text-align: right;
+        padding-right: 15px;
+    }
+
+    .user-contents h1 {
+        padding: 14px 0;
+    }
+
+    .title_content {
+        border-bottom: 1px solid #ededed;
+        padding: 0;
+    }
+
+    .title_content:last-of-type {
+        border-bottom: none;
+    }
+    .info-section {
+        color: #fff;
+        background: #3a3c39;
+        padding: 15px;
+        font-size: 17px;
+    }
+
+    .info_user_wrapper_mobile .col-xs-6 {
+        font-size: 10px;
+    }
+
+    .info_user_wrapper_mobile .info-num {
+        font-size: 18px;
+    }
+
+    .contents-info-num {
+        color: #00c569;
+    }
+
+    .contents-info p {
+        font-size: 15px;
+        padding-top: 6px;
+    }
+
+    .sub-header {
+        background: #ededed;
+        text-align: center;
+        padding: 0;
+    }
+
+    .sub-header a:hover {
+        color: #313942;
+    }
+
+    .sub-header a:hover::after {
+        content: " ";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: #00c569;
+        height: 3px;
+        width: 100%;
+    }
+
+    .sub-header .active a {
+        color: #313942;
+    }
+
+    .sub-header .active a::after {
+        content: " ";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: #00c569;
+        height: 3px;
+        width: 100%;
+    }
+
+    .sub-header > div {
+        border-top: 1px solid #ededed;
+        padding: 0;
+    }
+
+    .sub-header > div.active {
+        background: #fff;
+    }
+
+    .sub-header ul {
+        text-align: center;
+    }
+
+    .sub-header a i {
+
+        font-size: 20px;
+
+        position: absolute;
+
+        top: 0;
+
+        right: -30px;
+
+        display: inline-block;
+
+        width: 20px;
+
+        height: 30px;
+
+        float: right;
+
+    }
+
+    .inside-links {
+        display: inline-block;
+
+        position: relative;
+    }
+
+    .sub-header i.incobac-icon {
+        top: -6px;
+    }
+
+    .sub-header a {
+
+        padding: 16px;
+        color: #808c9b;
+        font-weight: bold;
+        font-size: 14px;
+        position: relative;
+        display: block;
+    }
+
+    .user-contents p {
+        margin: 14px auto;
+        font-size: 16px;
+        font-weight: 800;
+    }
+
+    .user-contents p span {
+        color: #767676;
+        font-weight: 400;
+    }
+
+    .user-image {
+        width: 135px;
+        height: 135px;
+        overflow: hidden;
+        border-radius: 50%;
+        margin: 0 auto 10px;
+
+    }
+
+    .user-image-content {
+        width: 40px;
+        height: 40px;
+        overflow: hidden;
+        border-radius: 50%;
+        margin: 7px 5px 7px 20px;
+        float: right;
+    }
+
+    .content_title_mobile {
+
+        float: right;
+        padding-top: 23px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .zone_content_title {
+        font-size: 12px;
+
+        font-weight: lighter;
+
+        color: #989898;
+
+        border-right: 1px solid;
+
+        margin: 0 5px;
+
+        padding: 0 5px;
+
+        height: 16px;
+
+        display: inline-block;
+    }
+
+    .user-image img, .user-image > div, .user-image-content img, .user-image-content > div {
+        height: 100%;
+    }
+
+    .content_title {
+        float: right;
+    }
+
+    .sidebar-fix {
+        position: fixed;
+        right: 0;
+        top: 64px;
+        z-index: 2;
+    }
+
+    .header-content {
+        padding: 20px 0;
+    }
+
+    .image_user_wrapper {
+        float: right;
+        padding: 0;
+    }
+
+    .logo {
+        padding: 10px;
+        text-align: right;
+        float: right;
+        width: 190px;
+    }
+
+    .logo img {
+        width: 150px;
+    }
+
+    .image-wrapper {
+        height: 300px;
+        overflow: hidden;
+    }
+
+    .btn {
+        margin: 3px 0;
+        padding: 4px 0;
+
+    }
+    .back_page  .btn.btn-copy {
+        width: 100%;
+
+    }
+
+
+    .content_user_wrapper_mobile {
+        border-top: 1px solid #eee;
+        margin-top: 10px;
+    }
+
+    @media screen and (max-width: 992px) {
+
+        .title-page {
+
+            text-align: center;
+            margin: -10px auto 95px;
+
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+
+        .profile-list {
+            left: 40px;
+            top: 80px;
+        }
+
+        .main-content-item {
+            padding:  0;
+            margin: 63px auto 24px;
+        }
+
+        .header-content {
+            padding: 35px 15px 15px;
+        }
+
+        .content_user_wrapper_mobile {
+            padding: 0;
+        }
+
+        .main-article-content {
+            padding: 15px;
+        }
+
+        .description {
+            padding: 0 15px;
+        }
+
+        .ceteficate-image {
+            height: 374px;
+            overflow: hidden;
+        }
+
+        .image-article-content {
+            width: 100%;
+
+        }
+
+        .cerificates, .ceteficate-image, .contents, .main-image, .article-contents {
+            padding: 0;
+        }
+
+        #main .contents {
+            background: #fff;
+            width: 100%;
+        }
+
+        .title-content {
+
+            margin: 7px 0 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ededed;
+
+        }
+
+        .description {
+            text-align: right;
+        }
+
+        .logo img {
+            width: 100%;
+        }
+
+        .user-contents {
+            border-right: none;
+        }
+
+        .user-contents h1 {
+            float: none;
+
+            text-align: right;
+
+            overflow: hidden;
+
+            font-size: 18px;
+            padding: 15px 0;
+        }
+
+        .user-contents p {
+
+            margin: 14px auto;
+            font-size: 14px;
+            font-weight: 800;
+
+        }
+
+        .content_user_info {
+            text-align: right;
+            margin-bottom: 10px;
+            padding: 0;
+        }
+
+        .title_content {
+
+            border-bottom: none;
+
+        }
+
+        .info-section {
+            text-align: center;
+
+        }
+
+        .user-image {
+            width: 85px;
+            height: 85px;
+            overflow: hidden;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+        }
+
+        .back_page {
+            display: none;
+        }
+
+        .main-content, #main {
+            padding: 0;
+        }
+
+        .ceteficate-image {
+
+            height: 250px;
+            overflow: hidden;
+
+        }
+
+    }
+
+    @media screen and (max-width: 715px) {
+        .name-header-profile {
+            display: none;
+        }
+
+        .ceteficate-image {
+
+            height: 200px;
+            overflow: hidden;
+
+        }
+
+        .profile-menu-header i {
+            position: absolute;
+            left: -75px;
+            top: 22px;
+            font-size: 20px;
+        }
+    }
+
+    @media screen and (max-width: 555px) {
+        .logo {
+            padding: 20px 0;
+        }
+
+    }
+
+    @media screen and (max-width: 345px) {
+
+    }
+    .profile-header {
+        color: #fff;
+        background-size: cover;
+        overflow: hidden;
+        padding: 140px 0 65px;
+    }
+
+    .main-content-index-pages h1 ,.main-content-index-pages h2,.main-content-index-pages h3,.main-content-index-pages h4,.main-content-index-pages h5 {
+        margin: 15px 0;
+    }
+
+
     #wrap-footer {
         display: none;
     }
@@ -37,10 +549,7 @@
 
         }
 
-        .main-content-item {
-            padding: 0;
-        }
-
+    
         .user-contents .user-image, .user-contents p {
             float: right;
         }
@@ -84,20 +593,34 @@
             padding: 15px;
         }
     }
+    .green-button {
+  margin: 15px 0 0;
+  display: inline-block;
+  background: #00c569;
+  color: #fff;
+  padding: 10px 35px;
+  width: 100%;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 21px;
+  border: none;
+}
 </style>
 
 <template>
     <div>
         <script v-html="jsonLDObject" type="application/ld+json"></script>
 
-        <header id="header" class="hidden-xs  main-header">
+        <header class="hidden-xs profile-header  main-header">
             <h1 class="title-page col-xs-12">
                 پروفایل
             </h1>
         </header>
 
         <main id="main" class="container">
-            <section class="main-content container"
+            <section class="main-content "
                      itemscope itemprop="Person"
                      itemtype="http://schema.org/Person">
 
@@ -158,12 +681,19 @@
                                 <div class="col-xs-12">
                                     <div v-if="currentUser.user_info">
 
-                                        <a href="/dashboard/profile" class="green-button edit"
-                                           v-if="currentUser.user_info.id === profileOwner.user_info.id">
+                                        <router-link :to="{name : 'profileBasicSeller'}" class="green-button edit"
+                                           v-if="currentUser.user_info.is_seller == 1 && currentUser.user_info.id === profileOwner.user_info.id">
 
                                             <i class="fa fa-pencil-alt"></i>
                                             ویرایش پروفایل
-                                        </a>
+                                        </router-link>
+
+                                        <router-link :to="{name : 'profileBasicBuyer'}" class="green-button edit"
+                                           v-if="currentUser.user_info.is_seller == 0 && currentUser.user_info.id === profileOwner.user_info.id">
+
+                                            <i class="fa fa-pencil-alt"></i>
+                                            ویرایش پروفایل
+                                        </router-link>
 
                                         <a v-else href="#" @click.prevent="openChat()" class="green-button edit">
 
@@ -225,7 +755,7 @@
 
                                 <div class="title_content col-xs-12">
                                     <div class="back_page col-xs-12 col-sm-4 col-md-3">
-                                        <a href="/dashboard/profile" class="green-button edit"
+                                        <router-link   :to="{name : 'profileBasicBuyer'}" class="green-button edit"
                                            v-if="currentUser.user_info &&
                                             currentUser.user_info.id ===
                                             profileOwner.user_info.id"
@@ -234,7 +764,7 @@
                                             <i class="fa fa-pencil-alt"></i>
                                             ویرایش پروفایل
 
-                                        </a>
+                                        </router-link>
 
                                         <a href="" @click.prevent="openChat()"
                                            class="green-button edit"
@@ -546,7 +1076,7 @@
                                     :currentUser="currentUser"
                                 />
                               </div>
-                          </div>   
+                          </div>
 
                         <div class="col-xs-12" v-if="products.length === 0 && !loading">
                             <div class="col-xs-12" v-if="products.length === 0 && !loading">
@@ -570,7 +1100,7 @@
 
 <script>
     import ProductArticle from './product_components/product_article';
-    import {eventBus} from "../../../../js/router/dashboard_router";
+    import {eventBus} from "../../../router/router";
 
     var visible = false;
     var PopupImage = {
@@ -916,19 +1446,28 @@
                     profile_photo: this.profileOwner.profile.profile_photo,
                     user_name: this.profileOwner.user_info.user_name,
                 };
+                var self = this;
 
-                if (this.currentUser) {
+                if (this.currentUser.user_info) {
                     axios.post('/set_last_chat_contact', contact)
                         .then(function (response) {
-                            window.location.href = '/dashboard/messages';
+                            console.log(self.currentUser.user_info.is_seller);
+                            if (self.currentUser.user_info.is_seller == 1) {
+                                self.$router.push('/seller/messages');
+                            } else if (self.currentUser.user_info.is_buyer == 1) {
+                                self.$router.push('/buyer/messages');
+                            }
                         })
                         .catch(function (e) {
                             alert('Error');
                         });
                 }
                 else {
-                    alert('ابتدا لاگین کنید');
+                    this.popUpMsg = 'اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
+                    eventBus.$emit('submitSuccess', this.popUpMsg);
+                    $('#auth-popup').modal('show');
                 }
+
             },
             createJsonLDObject: function (profileOwner) {
                 var fullName = profileOwner.user_info.first_name + ' ' + profileOwner.user_info.last_name;

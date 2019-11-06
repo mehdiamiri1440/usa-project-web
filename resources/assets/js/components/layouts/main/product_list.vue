@@ -1,17 +1,13 @@
 
-<style >
-
-    #main-content{
-
-          padding-top: 165px;
-
-
-    }
-
-</style>
 
 <style scoped>
 
+    #main-content{
+
+        padding-top: 165px;
+
+
+    }
     .shadow-content{
         background: #fff;
     }
@@ -88,7 +84,7 @@
         -webkit-box-shadow: 0 3px 15px rgba(0,0,0,0.30);
         box-shadow: 0 3px 15px rgba(0,0,0,0.30);
         text-align: center;
-        padding-top: 15px;
+        padding-top: 12px;
         font-size: 23px;
     }
 
@@ -136,8 +132,7 @@
         background: #f0f3f6;
         padding: 0 15PX;
     }
-
-    .search-box {
+ .search-box {
         position: relative;
         margin-top: 14px;
         border:none;
@@ -177,6 +172,7 @@
         color: #fff;
     }
 
+
     .links-sub-header {
         direction: rtl;
     }
@@ -203,13 +199,6 @@
         height: 3px;
         width: 100%;
     }
-
-    #main {
-
-        position:relative;
-
-    }
-
 
     .main-content > h4 {
         margin: 30px auto;
@@ -357,7 +346,10 @@
     }
 
     @media screen and (max-width: 767px) {
-
+        
+        .main-content, #main {
+            padding: 0;
+        }
         .sub-header {
             position: fixed;
             z-index: 1;
@@ -757,7 +749,7 @@
 
                     </aside>
 
-               
+
 
         </main>
     </div>
@@ -765,7 +757,7 @@
 <script>
     import ProductArticle from './product_components/product_article'
     import ProductAsideCategories from './product_components/sidebar/product_aside_categories'
-    import {eventBus} from "../../../../js/router/dashboard_router";
+    import {eventBus} from "../../../router/router";
 
     var visible = false;
     export default {

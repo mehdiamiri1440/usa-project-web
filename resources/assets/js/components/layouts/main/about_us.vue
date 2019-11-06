@@ -99,8 +99,8 @@
                             <br/>
 
                             <h3 class="text-center">
-                                <a href="/register" class="green-button"> هم اکنون عضو جامعه اینکوباک شوید
-                                </a>
+                                <router-link :to="{name : 'register'}" class="green-button"> هم اکنون عضو جامعه اینکوباک شوید
+                                </router-link>
                             </h3>
                             <p>
 
@@ -151,8 +151,8 @@
                                 </div>
                             </div>
                             <h3 class="text-center">
-                                <a href="/help" class="green-button"> اینکوباک چگونه کار میکند؟
-                                </a>
+                                <router-link :to="{name : 'help'}" class="green-button"> اینکوباک چگونه کار میکند؟
+                                </router-link>
                             </h3>
                             <p class="text-right">
                                 سوالات، انتقادات و پیشنهادات خود را از طریق آدرس ایمیل support@incobac.com با ما در میان
@@ -169,9 +169,11 @@
 </template>
 
 <script>
-    import {eventBus} from "../../../router/dashboard_router";
+    import {eventBus} from "../../../router/router";
+    import Route from "../../../router/components/route";
 
     export default {
+        components: {Route},
         props: [
             'img_about_us_1',
             'img_about_us_2',

@@ -1,101 +1,6 @@
-<style>
+<style scoped>
     html, body, #main {
         height: 100%;
-    }
-
-    html, body, div, span, applet, object, iframe,
-    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-    a, abbr, acronym, address, big, cite, code,
-    del, dfn, em, img, ins, kbd, q, s, samp,
-    small, strike, strong, sub, sup, tt, var,
-    b, u, i, center,
-    dl, dt, dd, ol, ul, li,
-    fieldset, form, label, legend,
-    table, caption, tbody, tfoot, thead, tr, th, td,
-    article, aside, canvas, details, embed,
-    figure, figcaption, footer, header,
-    menu, nav, output, ruby, section, summary,
-    time, mark, audio, video {
-        margin: 0;
-        padding: 0;
-        vertical-align: baseline;
-    }
-
-    /* HTML5 display-role reset for older browsers */
-    article, aside, details, figcaption, figure,
-    footer, header, menu, nav, section {
-        display: block;
-    }
-
-    a, a:focus, a:active, a:visited, input, input:focus, input:active {
-        outline: none;
-    }
-
-    body {
-        line-height: 1.1;
-        font-family: IRANSans, sans-serif;
-        font-size: 14px;
-    }
-
-    ol, ul {
-        list-style: none;
-    }
-
-    blockquote, q {
-        quotes: none;
-    }
-
-    blockquote:before, blockquote:after,
-    q:before, q:after {
-        content: none;
-    }
-
-    table {
-        border-collapse: collapse;
-        border-spacing: 0;
-    }
-
-    img, svg {
-        width: 100%;
-    }
-
-    a, a:hover, a:visited, a:focus, a:active {
-        text-decoration: none;
-        transition: 300ms;
-    }
-
-    th, td {
-        padding: 7px;
-        text-align: right;
-    }
-    .list-inline > li {
-        display: inline-block;
-        padding-right: 5px;
-        padding-left: 5px;
-    }
-
-    .green-button {
-        margin: 15px 0 0;
-        display: inline-block;
-        background: #00C569;
-        color: #fff;
-        padding: 10px 35px;
-        border-radius: 3px;
-        text-align: center;
-        border: none;
-        -webkit-transition: 300ms;
-        transition: 300ms;
-    }
-
-    .green-button:hover {
-        background: #279b41;
-        color: #fff;
-    }
-    .green-button:focus,.gray-bot:focus {
-        color: #fff;
-    }
-    .green-button:focus, .green-button:hover {
-        color: #fff !important;
     }
 
     /*start style right header*/
@@ -175,9 +80,10 @@
         top: 0;
         position: relative;
         padding: 11px;
+
     }
 
-    .close_menu i ,.close_menu_mob i{
+    .close_menu i, .close_menu_mob i{
         color: #fff;
     }
 
@@ -193,171 +99,23 @@
 
     }
 
-    .show-header button {
-        float: right;
-        border: none;
-        background: none;
-        font-size: 25px;
-        padding: 19px 30px 19px 24px;
-        display: none;
-    }
-
-
-
-    .profile {
-
-        padding: 10px 15px 15px;
-        text-align: center;
-
-    }
-
-    .little_header .profile {
-
-        display: none;
-
-    }
-
-    .profile-img {
-
-        overflow: hidden;
-
-        border-radius: 50%;
-
-        height: 55px;
-
-        width: 55px;
-
-        margin: 0 auto;
-
-        border: 2px solid #fff;
-
-        float: right;
-
-    }
-
-    .dark-profile-img {
-        overflow: hidden;
-        border-radius: 50%;
-        height: 85px;
-        width: 85px;
-        margin: 0 auto;
-        margin-left: 10px;
-        border: 2px solid #5B5C5D;
-        float: right;
-    }
-    .profile-img img {
-        height: 100%;
-    }
-
-    .profile-content {
-
-        width: calc(100% - 55px);
-
-        float: right;
-
-        text-align: right;
-
-        padding-right: 10px;
-
-    }
-
-    .profile-name {
-        margin: 8px 0;
-        font-size: 17px;
-    }
-
-    .profile-city {
-        font-size: 14px;
-        font-weight: 200;
-    }
-
-    .profile-city {
-        font-size: 14px;
-        font-weight: 200;
-    }
-
-    .header-menu a {
-        color: #b1b1b1;
-        padding: 10px 20px;
-        display: inline-block;
-        position: relative;
-        width: 100%;
-    }
-
-    .header-menu {
-        padding: 0;
-    }
-
-    .header-menu a:hover {
-        color: #fff;
-        background: #637484;
-    }
-
-    .header-menu a:hover::before {
-        content: " ";
-        height: 100%;
-        width: 2px;
-        background: #00ac5c;
-        position: absolute;
-        right: 0;
-        top: 0;
-        display: block;
-    }
-
-    .header-menu li.active a {
-        color: #fff;
-        background: #637484;
-    }
-
-    .header-menu li.active a:before {
-        content: " ";
-        height: 100%;
-        width: 2px;
-        background: #00C569;
-        position: absolute;
-        right: 0;
-        top: 0;
-        display: block;
-    }
-
     .copy-right {
 
         text-align: center;
-        font-size: 12px;
-        font-weight: 200;
-        padding: 30px 15px 0;
+        padding: 15px 15px 0;
         direction: rtl;
         line-height: 1.618;
         position: absolute;
-        bottom: 50px;
+        bottom: 15px;
         z-index: 10;
         color: #fff;
 
     }
 
-    label {
-        display: block;
-        margin: 9px auto;
-    }
 
-    input[type="text"], select, input[type="button"], textarea {
-        width: 100% !important;
-    }
-
-    input[type="text"], select, textarea {
-        background: #eff3f6;
-        border: 1px solid #cfcfcf;
-        border-radius: 3px;
-        width: 100% !important;
-    }
-
-    input[type="text"], textarea {
-        padding: 13px 15px;
-        width: 100% !important;
-    }
-
-    select {
-        padding: 7px 15px;
+    .copy-right p{
+        font-size: 12px;
+        font-weight: 200;
     }
 
     .image-header-profile img {
@@ -464,35 +222,6 @@
         background: #fff;
     }
 
-    .sub-header a.router-link-exact-active {
-        color: #313942;
-    }
-
-    .sub-header a.router-link-exact-active::after {
-        content: " ";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        background: #00C569;
-        height: 3px;
-        width: 100%;
-    }
-
-    .header-menu a.router-link-exact-active::before, .header-menu a.active::before {
-        content: " ";
-        height: 100%;
-        width: 2px;
-        background: #00c569;
-        position: absolute;
-        right: 1px;
-        top: 0;
-        display: block;
-    }
-
-    .header-menu a.router-link-exact-active, a.active {
-        color: #fff;
-        background: #637484;
-    }
 
     .green-button.delete {
         background: #e41c38;
@@ -500,14 +229,6 @@
     }
 
     @media screen and (max-width: 994px) {
-        .content-header {
-            display: none;
-        }
-
-        .img-profile {
-            padding-top: 20px;
-        }
-
         .right-header.desktop-header {
             display: none;
         }
@@ -519,18 +240,6 @@
             direction: rtl;
         }
 
-        .main-header, .little-main-header {
-            right: 0 !important;
-        }
-
-        #main, #main.little-main {
-            margin-right: 0 !important;
-        }
-
-        .post-contents-table {
-            width: 100%;
-        }
-
         .close_menu {
             display: none;
         }
@@ -539,11 +248,6 @@
             display: block;
         }
 
-        .show-header button {
-            display: block;
-            background: #000546;
-            color: #fff;
-        }
 
         .img-profile .submit {
             position: relative;
@@ -557,20 +261,11 @@
             padding: 12px 0;
         }
 
-        .img-profile {
-            float: none;
-        }
+
     }
 
     @media screen and (max-width: 768px) {
 
-        span.min {
-            display: inherit;
-        }
-
-        span.full {
-            display: none;
-        }
         .mobile-header .green-button {
             margin: 15px 0 0;
         }
@@ -579,43 +274,12 @@
             padding: 15px 20px;
         }
 
-        .image-content-post, .contents-post {
-            width: 100%;
-            float: none;
-            margin: 10px 0;
-            padding: 0;
-        }
-
-        #step1 .main_buttons {
-            text-align: center !important;
-        }
-
-        .name-header-profile {
-            display: none;
-        }
-
-        .profile-menu-header {
-            padding: 7px;
-            padding-left: 36px;
-        }
     }
 
     @media screen and (max-width: 555px) {
 
-        .user_name{
-            display: none !important;
-        }
-
-        .right-menu-header {
-            padding: 6px;
-            border-right: 1px solid #eff3f6;
-        }
 
         .profile-menu-header .user_name {
-            display: none;
-        }
-
-        .content-header {
             display: none;
         }
 
@@ -628,20 +292,6 @@
     @media screen and (max-width: 345px) {
         .sub-header a {
             font-size: 10px;
-
-        }
-
-        .show-header button {
-            padding: 19px 26px 19px 19px;
-        }
-
-        .right-menu-header {
-            padding: 6px;
-        }
-
-        .sub-header {
-
-            bottom: -44px;
 
         }
     }
@@ -819,12 +469,12 @@
                 </button>
 
                 <span class="logo">
-                    <a href="/">
+                    <router-link :to="{name : 'indexPage'}">
                         <img :src="logo" alt="incoboc">
                         <p>
                             بازارگاه آنلاین کشاورزی
                         </p>
-                    </a>
+                    </router-link>
                 </span>
 
             </header>
@@ -869,12 +519,12 @@
                 </button>
 
                 <span class="logo">
-                    <a href="/">
+                    <router-link :to="{name : 'indexPage'}">
                         <img :src="logo" alt="incoboc">
                         <p>
                             بازارگاه آنلاین کشاورزی
                         </p>
-                    </a>
+                    </router-link>
                 </span>
 
             </header>
@@ -928,7 +578,7 @@
     import ProfileInfo from './sub-com/profile_info.vue'
     import HeaderMenuList from './sub-com/header-menu-list.vue'
     import HeaderTop from './sub-com/header-top.vue'
-    import {eventBus} from "../../../../router/dashboard_router";
+    import {eventBus} from "../../../../router/router";
 
     export default {
         components: {
@@ -952,7 +602,7 @@
         ],
         data: function () {
             return {
-                menuClosed:false,
+                    menuClosed:false,
                 isLoading:true,
                 currentUser: {
                     profile: {
@@ -1104,26 +754,24 @@
                 });
             },
             toggleShowHeader() {
-                var self=this
-                var showHeaderButtonElement = $('.show-header ');
+              var self=this
+              var showHeaderButtonElement = $('.show-header ');
                 var closeHeaderButtonMobile = $('.close_menu_mob ');
                 var flag = true;
                 var rightHeader = $(".right-header.mobile-header");
                 var back = $(".background_mob_sec");
                 var closeHeaderButtonMobileLinks = $('.mobile-header .header-menu a');
-                                rightHeader.animate({
+                                 rightHeader.animate({
                             right: '0'
                         }, 800);
                        setTimeout(() => {
                               rightHeader.animate({
                             right: '-300'
                         },800,undefined,function(){
-                            console.log('menu closed',self.menuClosed)                            
                             self.menuClosed=true
-                            console.log('menu closed',self.menuClosed)
                             });
                        }, 2000);
-                showHeaderButtonElement.on('click', function () {
+               showHeaderButtonElement.on('click', function () {
 
                     rightHeader.animate({ scrollTop: 0 }, "fast");
 
