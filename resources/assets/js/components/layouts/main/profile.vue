@@ -593,6 +593,20 @@
             padding: 15px;
         }
     }
+    .green-button {
+  margin: 15px 0 0;
+  display: inline-block;
+  background: #00c569;
+  color: #fff;
+  padding: 10px 35px;
+  width: 100%;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 21px;
+  border: none;
+}
 </style>
 
 <template>
@@ -741,7 +755,7 @@
 
                                 <div class="title_content col-xs-12">
                                     <div class="back_page col-xs-12 col-sm-4 col-md-3">
-                                        <a href="/dashboard/profile" class="green-button edit"
+                                        <router-link   :to="{name : 'profileBasicBuyer'}" class="green-button edit"
                                            v-if="currentUser.user_info &&
                                             currentUser.user_info.id ===
                                             profileOwner.user_info.id"
@@ -750,7 +764,7 @@
                                             <i class="fa fa-pencil-alt"></i>
                                             ویرایش پروفایل
 
-                                        </a>
+                                        </router-link>
 
                                         <a href="" @click.prevent="openChat()"
                                            class="green-button edit"

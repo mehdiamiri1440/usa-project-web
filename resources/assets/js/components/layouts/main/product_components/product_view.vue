@@ -311,7 +311,8 @@
                     })
                     .catch(function (err) {
                         self.errors = '';
-                        self.errors = err.response.data.self.registerComponentExceptions('Product-component: validation errors in edit product API');
+                        self.errors = err.response.data.errors;
+                        // self.registerComponentExceptions('Product-component: validation errors in edit product API');
                     });
             },
             stopLoader: function () {
