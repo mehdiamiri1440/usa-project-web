@@ -200,7 +200,6 @@
 
 .contact-body .contact-item .contact-date {
   float: left;
-  font-size: 10px;
   padding-top: 5px;
   width: 50px;
   direction: ltr;
@@ -219,10 +218,9 @@
   color: #fff;
 
   border-radius: 50px;
-
+  font-size: 10px;
+  line-height: 2;
   margin: 5px auto;
-
-  padding-top: 5px;
 }
 
 .contact-wrapper,
@@ -424,6 +422,7 @@
 
 .button-wrapper {
   float: right;
+  line-height: 1.1;
 }
 
 .send-message-form .button-wrapper button {
@@ -483,8 +482,7 @@
   .back-state {
     display: block;
   }
-  .message-wrapper .message-contact-title span{
-
+  .message-wrapper .message-contact-title span {
     padding-top: 14px;
 
     width: 170px;
@@ -502,24 +500,17 @@
 }
 
 @media screen and (max-width: 370px) {
-
-  .message-wrapper .message-contact-title span{
-
+  .message-wrapper .message-contact-title span {
     width: 130px;
-
   }
 }
 
 @media screen and (max-width: 330px) {
-
-  .message-wrapper .message-contact-title-img{
-
-    margin: 0 15px ;
-
+  .message-wrapper .message-contact-title-img {
+    margin: 0 15px;
   }
 
-  .message-wrapper .message-contact-title span{
-
+  .message-wrapper .message-contact-title span {
     font-size: 13px;
   }
 }
@@ -748,7 +739,7 @@ export default {
               }
             })
             .catch(function(e) {
-                alert("error");
+              alert("error");
             });
         })
         .catch(function(e) {
@@ -881,12 +872,12 @@ export default {
         return false;
       }
     },
-    registerComponentStatistics: function (categoryName, actionName, labelName) {
-        gtag('event', actionName, {
-            'event_category': categoryName,
-            'event_label': labelName
-        });
-    },
+    registerComponentStatistics: function(categoryName, actionName, labelName) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName
+      });
+    }
   },
   watch: {
     contactNameSearchText: function() {

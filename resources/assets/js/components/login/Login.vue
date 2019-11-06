@@ -463,6 +463,7 @@ export default {
                 localStorage.userRoute = JSON.stringify(
                   "buyer/register-request"
                 );
+                // test
                 self.registerComponentStatistics(
                   "Login",
                   "seller-login",
