@@ -500,7 +500,7 @@
             return {
                 isImageLoad: false,
                 loginCheckerLoading: true,
-                currentStep: 1,
+                currentStep: 6,
                 step1: {
                     phone: "",
                     sendCode: true
@@ -755,8 +755,8 @@
                                     })
                                     .then(result => {
                                         if (object.activity_type === "1")
-                                            self.$router.push('seller/register-product');
-                                        else self.$router.push('buyer/register-request');
+                                            window.location.href=('/seller/register-product');
+                                        else window.location.href=('/buyer/register-request');
                                     })
                                     .catch(err => {
                                         console.log("err");

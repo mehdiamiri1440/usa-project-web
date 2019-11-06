@@ -1,290 +1,266 @@
 <style scoped>
+.submit-button {
+  background: #dddddd;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 16px;
+  padding: 10px 0 9px;
+  transition: 200ms;
+  cursor: default;
+}
 
-	.submit-button{
-		background: #DDDDDD;
-		color: #fff;
-		border: none;
-		border-radius: 4px;
-		width: 100%;
-		font-size: 16px;
-		padding: 10px 0 9px;
-		transition: 200ms;
-		cursor: default;
-    }
+.submit-button.active {
+  background: #00c569;
+  cursor: pointer;
+}
 
-    .submit-button.active{
-		background: #00C569;
-		cursor: pointer;
-    }
+.title-contents {
+  font-weight: bold;
+  font-size: 19px;
+}
 
-    .title-contents{
-    	font-weight: bold;
-    	font-size: 19px;
+.form-contents {
+  margin: 5px auto;
+}
 
-    }
+.form-contents lable {
+  font-size: 12px;
+}
 
-    .form-contents{
-    	margin: 5px auto;
-    }
+.input-wrapper {
+  margin: 6px auto 13px;
+  position: relative;
+}
+.input-wrapper:after {
+  content: "\F107";
 
-    .form-contents lable{
-    	font-size: 12px;
-    }
+  color: #777;
 
-    .input-wrapper{
-   		margin: 6px auto 13px;
-    	position: relative;
-    }
-    .input-wrapper:after{
-		content: "\F107";
+  position: absolute;
 
-		color: #777;
+  display: inline-block;
 
-		position: absolute;
+  top: 5px;
 
-		display: inline-block;
+  font-family: "Font Awesome 5 Free", sans-serif;
 
-		top: 9px;
+  font-weight: 900;
 
-		font-family: "Font Awesome 5 Free",sans-serif;
+  left: 25px;
 
-		font-weight: 900;
+  font-size: 20px;
 
-		left: 25px;
+  z-index: 0;
+}
+select {
+  width: 100%;
 
-		font-size: 20px;
+  border-radius: 4px;
 
-		z-index: 0;
+  border: 1px solid;
 
-    }
-    select{
+  padding: 8px 15px;
+  position: relative;
 
-    	width: 100%;
+  z-index: 1;
 
-		border-radius: 4px;
+  color: #777777;
 
-		border: 1px solid;
+  direction: rtl;
 
-		padding: 8px 15px;
-		position: relative;
+  transition: 200ms;
 
-		z-index: 1;
+  background: none;
 
-		color: #777777;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+}
+.input-wrapper i {
+  display: inline-block;
 
-		direction: rtl;
+  position: absolute;
 
-		transition: 200ms;
+  left: 15px;
 
-		background: none;
+  font-size: 20px;
 
-		appearance:none;
-		-webkit-appearance:none;
-		-moz-appearance:none;
-		-ms-appearance:none;
+  color: #bebebe;
 
+  top: 9px;
 
+  transition: 200ms;
+}
 
-    }
-    .input-wrapper i {
-    	display: inline-block;
+select option {
+  color: #333;
+}
 
-		position: absolute;
+select:focus {
+  color: #333;
+}
 
-		left: 15px;
+select.active {
+  color: #333;
+  color: #00c569;
+}
 
-		font-size: 20px;
+select.active:focus {
+  color: #00c569;
+}
 
-		color: #BEBEBE;
+select.error {
+  color: #333;
+  color: #e41c38;
+}
 
-		top: 9px;
+select.error:focus {
+  color: #e41c38;
+}
+.error-message {
+  text-align: center;
 
-		transition: 200ms;
-    }
+  color: #e41c38;
 
-     select option{
-		color: #333;
-    }
+  font-weight: bold;
 
-    select:focus{
-		color: #333;
-    }
+  height: 25px;
 
-    select.active{
-    		color: #333;
-		color: #00C569;
-    }
+  margin-bottom: 5px;
 
-    select.active:focus {
-		color: #00C569;
-    }
+  direction: rtl;
 
-    select.error {
-    		color: #333;
-		color: #e41c38;
-    }
+  font-size: 12px;
+}
 
-    select.error:focus{
-		color: #e41c38;
-    }
-    .error-message{
-
-    	text-align: center;
-
-		color: #e41c38;
-
-		font-weight: bold;
-
-		height: 25px;
-
-		margin-bottom: 5px;
-
-	    direction: rtl;
-
-    }
-
-    @media screen and (max-width: 767px){
-		.input-wrapper {
-		    padding: 0 5px;
-
-		}
-		select{
-			font-size: 12px;
-		}
-		.input-wrapper[data-v-3cdb4684]::after {
-		    left: 14px;
-		}
-	}
+@media screen and (max-width: 767px) {
+  .input-wrapper {
+    padding: 0 5px;
+  }
+  select {
+    font-size: 12px;
+  }
+  .input-wrapper::after {
+    left: 14px;
+  }
+}
 </style>
 
 <template>
-	<div>
-		 <h2 class="title-contents">
+  <div>
+    <h2 class="title-contents">انتخاب آدرس</h2>
 
-			انتخاب آدرس
+    <div class="form-contents col-xs-12">
+      <div class="row">
+        <label for="phone-number">استان و شهر خود را انتخاب کنید</label>
 
-		 </h2>
+        <div class="row">
+          <div class="input-wrapper province-wrapper col-xs-6 pull-right">
+            <select
+              @change="setProvince($event)"
+              :class="{'error' :  error}"
+              id="province"
+              class="dire"
+            >
+              <option selected disabled>استان را انتخاب کنید</option>
 
-		 <div class="form-contents col-xs-12">
+              <option
+                v-for="province in $parent.step3.provinceList"
+                :selected="$parent.step3.province == province.province_name"
+                v-bind:value="province.province_name"
+                v-text="province.province_name"
+              ></option>
+            </select>
+          </div>
 
-		     	<div class="row">
+          <div class="input-wrapper province-wrapper col-xs-6">
+            <select @change="setCity($event)" :class="{'error' :  error}" id="city" class="dire">
+              <option selected disabled>شهر را انتخاب کنید</option>
+              <option
+                v-for="city in $parent.step3.cityList"
+                :selected="$parent.step3.city == city.city_name"
+                v-bind:value="city.city_name"
+                v-text="city.city_name"
+              ></option>
+            </select>
+          </div>
+        </div>
 
-			     	<label for="phone-number">
-			     		استان و شهر خود را انتخاب کنید
-			     	</label>
+        <span
+          class="small-description"
+        >انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند</span>
 
-			    	<div class="row">
-
-				     	<div class="input-wrapper province-wrapper col-xs-6 pull-right">
-
-				     		<select
-				     		@change="setProvince($event)"
-				     		:class="{'error' :  error}"
-				     		 id="province"
-				     		 class="dire" >
-
-				     		   <option selected disabled>استان را انتخاب کنید</option>
-
-                                <option
-                                    v-for="province in $parent.step3.provinceList"
-                                    :selected = "$parent.step3.province == province.province_name"
-                                    v-bind:value="province.province_name"
-                                    v-text="province.province_name"
-                                >
-
-                                </option>
-
-				     		</select>
-
-
-				     	</div>
-
-				     	<div class="input-wrapper province-wrapper col-xs-6 ">
-
-				     		<select
-				     		@change="setCity($event)"
-				     		:class="{'error' :  error}"
-				     		 id="city"
-				     		 class="dire" >
-
-                                <option selected disabled>شهر را انتخاب کنید</option>
-                                <option
-                                v-for="city in $parent.step3.cityList"
-                                :selected = "$parent.step3.city == city.city_name"
-                                v-bind:value="city.city_name"
-                                v-text="city.city_name"
-                                >
-                                </option>
-
-				     		</select>
-
-				     	</div>
-
-			    	</div>
-
-			     	<span class="small-description">
-
- انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند
-
-			     	</span>
-
-			       	<p class="error-message">
-			       		<span  v-if="error " v-text="error"></span>
-			       	</p>
-			        <button class="submit-button disabled " @click.prevent="submitForm()" >
-			        	مرحله بعد
-					</button>
-
-		     </div>
-		</div>
-
+        <p class="error-message">
+          <span v-if="error " v-text="error"></span>
+        </p>
+        <button class="submit-button disabled" @click.prevent="submitForm()">مرحله بعد</button>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-
-	export default{
-		data:function(){
-			return{
-				province : '',
-				city : '',
-				error : ''
-
-			}
-		},
-		methods:{
-			 setProvince(event){
-			 	$('#province').addClass('active').removeClass('error');
-			 	this.$parent.setProvinceName(event)
-		 	 },
-		 	 setCity(event){
-		 	 	$('#city').addClass('active').removeClass('error');
-		 	 	this.$parent.setCityName(event);
-		 	 	if ($(event.target).val().length >= 0) {
-		 	 		 $('.submit-button').removeClass('disabled').addClass('active');
-		 	 	}
-		 	 },
-		 	 submitForm(){
-
-		  	 	if(this.$parent.step3.city.length == 0){
-		  	 		this.error = "لطفا استان و شهر خود را مشخص کنید";
-		  	 		$('#city').addClass('error').removeClass('active');
-	    			$('.submit-button').removeClass('active').addClass('disabled');
-
-		  	 	}else{
-		  	 		this.$parent.setLocation();
-		  	 		$('#city').addClass('active').removeClass('error');
-	    		    $('.submit-button').removeClass('disabled').addClass('active');
-		  	 	}
-		 	 }
-		},
-	    mounted(){
-	   			if (this.$parent.step3.city) {
-	   				$('#province').addClass('active').removeClass('error');
-	   				$('#city').addClass('active').removeClass('error');
-	   				$('.submit-button').removeClass('disabled').addClass('active');
-	   			}
-	    }
-	}
-
+export default {
+  data: function() {
+    return {
+      province: "",
+      city: "",
+      error: ""
+    };
+  },
+  methods: {
+    setProvince(event) {
+      $("#province")
+        .addClass("active")
+        .removeClass("error");
+      this.$parent.setProvinceName(event);
+    },
+    setCity(event) {
+      $("#city")
+        .addClass("active")
+        .removeClass("error");
+      this.$parent.setCityName(event);
+      if ($(event.target).val().length >= 0) {
+        $(".submit-button")
+          .removeClass("disabled")
+          .addClass("active");
+      }
+    },
+    submitForm() {
+      if (this.$parent.step3.city.length == 0) {
+        this.error = "لطفا استان و شهر خود را مشخص کنید";
+        $("#city")
+          .addClass("error")
+          .removeClass("active");
+        $(".submit-button")
+          .removeClass("active")
+          .addClass("disabled");
+      } else {
+        this.$parent.setLocation();
+        $("#city")
+          .addClass("active")
+          .removeClass("error");
+        $(".submit-button")
+          .removeClass("disabled")
+          .addClass("active");
+      }
+    }
+  },
+  mounted() {
+    if (this.$parent.step3.city) {
+      $("#province")
+        .addClass("active")
+        .removeClass("error");
+      $("#city")
+        .addClass("active")
+        .removeClass("error");
+      $(".submit-button")
+        .removeClass("disabled")
+        .addClass("active");
+    }
+  }
+};
 </script>

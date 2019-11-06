@@ -300,6 +300,7 @@
         }
     }
 
+
     /*end loader*/
 </style>
 
@@ -571,6 +572,7 @@
                 :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
                 :out="logout"
                 :routeHome="routehome"
+                :menuClosed="menuClosed"
         />
 
     </div>
@@ -605,6 +607,7 @@
         ],
         data: function () {
             return {
+                 menuClosed:false,
                 isLoading:true,
                 currentUser: {
                     profile: {
@@ -756,13 +759,24 @@
                 });
             },
             toggleShowHeader() {
-                var showHeaderButtonElement = $('.show-header button');
+                 var self=this
+               var showHeaderButtonElement = $('.show-header');
                 var closeHeaderButtonMobile = $('.close_menu_mob ');
                 var flag = true;
                 var rightHeader = $(".right-header.mobile-header");
                 var back = $(".background_mob_sec");
                 var closeHeaderButtonMobileLinks = $('.mobile-header .header-menu a');
-                showHeaderButtonElement.on('click', function () {
+               rightHeader.animate({
+                            right: '0'
+                        }, 800);
+                       setTimeout(() => {
+                              rightHeader.animate({
+                            right: '-300'
+                        },800,undefined,function(){
+                            self.menuClosed=true
+                            });
+                       }, 2000);
+             showHeaderButtonElement.on('click', function () {
 
                     rightHeader.animate({ scrollTop: 0 }, "fast");
 

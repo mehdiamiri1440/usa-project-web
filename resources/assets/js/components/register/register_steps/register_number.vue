@@ -113,6 +113,8 @@
 		margin-bottom: 5px;
 
 	    direction: rtl;
+		
+		font-size: 12px;
 
     }
 

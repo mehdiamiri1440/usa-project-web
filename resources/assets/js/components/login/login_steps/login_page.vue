@@ -121,8 +121,9 @@
 
 		height: 15px;
 
-	    direction: rtl;
-
+		direction: rtl;
+		
+		font-size: 12px;
     }
     .register-form{
      	overflow: hidden;

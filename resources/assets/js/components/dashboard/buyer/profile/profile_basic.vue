@@ -103,7 +103,7 @@
         direction: rtl;
         font-size: 12px;
         display: block;
-
+        
     }
 
 
