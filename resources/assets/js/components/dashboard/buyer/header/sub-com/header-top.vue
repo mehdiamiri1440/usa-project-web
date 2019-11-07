@@ -123,9 +123,9 @@
 }
 
 /*.content-header span{
-      display: block;
-      text-align: right;
-    }*/
+    display: block;
+    text-align: right;
+  }*/
 
 .right-menu-header {
   position: relative;
@@ -293,6 +293,7 @@ i.fa-home {
     cursor: pointer;
     border: 1px solid white;
     right: 35px;
+    z-index: 10;
     position: absolute;
     background-color: #e41c38;
     border-radius: 50%;
@@ -300,9 +301,13 @@ i.fa-home {
     height: 28px;
     display: flex;
     justify-content: center;
-    z-index: 10;
     align-items: center;
     color: wheat;
+  }
+}
+@media only screen and (min-width: 767px) {
+  .hide-message-notification {
+    display: none;
   }
 }
 .rotation {
@@ -334,11 +339,6 @@ i.fa-home {
     transform: translate3d(4px, 0, 0);
   }
 }
-@media only screen and (min-width: 767px) {
-  .hide-message-notification {
-    display: none;
-  }
-}
 .button-height {
   line-height: 1;
 }
@@ -356,6 +356,7 @@ i.fa-home {
           <span :class="menuClosed?'rotation':''" class="fa fa-bars"></span>
         </button>
       </div>
+
       <div class="content-header">
         <span class="font-big">اینکوباک</span>
         <span>بازارگاه آنلاین کشاورزی</span>
@@ -497,14 +498,13 @@ export default {
   },
   created() {
     var self = this;
-
     eventBus.$on("messageCount", event => {
       this.messageCount += event;
     });
     eventBus.$on("active", event => {
       this.activeElement = event;
     });
-    Echo.private("testChannel." + userId).listen("newMessage", e => {
+    Echo.private("testChannel." + this.$parent.userId).listen("newMessage", e => {
       var senderId = e.new_message.sender_id;
 
       self.messageCount += 1;

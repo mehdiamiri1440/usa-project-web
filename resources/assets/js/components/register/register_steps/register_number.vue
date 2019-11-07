@@ -1,5 +1,7 @@
 <style scoped>
-
+	p, span{
+		line-height: 1.5;
+	}
 	.submit-button{
 		background: #DDDDDD;
 		color: #fff;
@@ -113,7 +115,7 @@
 		margin-bottom: 5px;
 
 	    direction: rtl;
-		
+
 		font-size: 12px;
 
     }

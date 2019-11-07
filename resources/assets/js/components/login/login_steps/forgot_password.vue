@@ -1,4 +1,7 @@
 <style scoped>
+  p, span{
+    line-height: 1.5;
+  }
 .submit-button {
   background: #dddddd;
   color: #fff;
@@ -171,8 +174,6 @@ export default {
   watch: {
     phoneNumber: function(value) {
       this.$parent.errors.phone = "";
-      console.log(this.phoneNumber);
-
       if (this.phoneNumber.length >= 11) {
         this.phoneNumber = this.phoneNumber.substring(0, 11);
       }

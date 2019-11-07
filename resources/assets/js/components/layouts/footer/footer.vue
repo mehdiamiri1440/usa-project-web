@@ -214,7 +214,7 @@
     }
 
     .enamad img {
-        width: 200px;
+        width: 120px;
         text-align: center;
         background: #fff;
         padding: 9px;

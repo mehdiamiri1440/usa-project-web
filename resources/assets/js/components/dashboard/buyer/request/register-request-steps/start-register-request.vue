@@ -5,6 +5,7 @@
 		line-height: 1.618;
 		margin: 45px auto 55px;
 		text-align: center;
+
 	}
 
 	.red-text{

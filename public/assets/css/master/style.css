@@ -105,7 +105,7 @@ section {
 }
 
 body {
-    line-height: 1.5;
+    line-height: 1.1;
     font-family: IRANSans, sans-serif;
     font-size: 14px;
     background: #f6f6f6;
@@ -148,9 +148,8 @@ a:active {
 }
 
 p {
-    font-size: 15px;
-    font-weight: 300;
-    line-height: 25px;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 th,
@@ -173,8 +172,11 @@ select,
 input[type="button"],
 textarea {
     width: 100%;
-}
 
+}
+button, input, select, textarea{
+    line-height: 24px;
+}
 input[type="text"],
 select,
 textarea {
@@ -212,7 +214,6 @@ select {
     text-align: center;
     font-size: 13px;
     font-weight: bold;
-    line-height: 21px;
     border: none;
 
 }
@@ -222,11 +223,6 @@ select {
     color: #fff;
 }
 
-.info_user_wrapper_mobile .green-button,
-.back_page>.green-button {
-    margin: 3px 0;
-    padding: 4px 0;
-}
 
 .main-article-title-content .main-green-button {
     float: left;
@@ -787,10 +783,10 @@ select#bd-month-end-date-id option {
 /*end header logo image*/
 
 .main-content-index-pages {
-    padding-top: 106px;
+    padding-top: 122px;
     direction: rtl;
     text-align: right;
-    line-height: 1.618;
+    /*line-height: 1.618;*/
 }
 
 .wrapper-bg {
@@ -994,5 +990,13 @@ span.min {
 
         float: inherit;
 
+    }
+}
+
+@media only screen and (max-width: 767px) {
+
+
+    .main-content-index-pages {
+        padding-top: 70px;
     }
 }

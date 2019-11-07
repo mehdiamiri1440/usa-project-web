@@ -25,6 +25,7 @@
       :defultimg="assets + 'assets/img/user-defult.png'"
       :logout="'/logout'"
       :loading="assets + 'assets/img/gif/prload.gif'"
+      :user-id="userId"
     ></header-dash-seller>
 
     <div id="main">

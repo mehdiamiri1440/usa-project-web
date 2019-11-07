@@ -459,8 +459,6 @@
   .send-message-form .button-wrapper button {
     padding: 12px 13px;
     font-size: inherit;
-    width: inherit;
-    height: inherit;
   }
 
   .send-message-form .message-input input {
@@ -725,7 +723,7 @@ export default {
 
               if (
                 contact != null &&
-                self.pageHasBeenReloaded() === false &&
+                //self.pageHasBeenReloaded() === false &&
                 self.selectedContact === ""
               ) {
                 self.contactList.unshift(contact);
@@ -974,8 +972,8 @@ export default {
       Push.Permission.request(function() {}, function() {});
     }
 
-    Echo.private("testChannel." + userId).listen("newMessage", e => {
-      console.log("harchi");
+    Echo.private("testChannel." + self.currentContactUserId).listen("newMessage", e => {
+
       var senderId = e.new_message.sender_id;
       //update contact list
       self.loadContactList();

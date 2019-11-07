@@ -12,7 +12,7 @@
 
         #main-content{
 
-            padding-top: 80px !important;
+            padding-top: 122px ;
         }
 
     }
@@ -254,7 +254,7 @@
 
     .sub-header-fix {
         position: fixed;
-        top: 73px;
+        top: 56px;
         left: 0;
         right: 0;
         z-index: 2;
@@ -374,7 +374,7 @@
 
         .links-sub-header a{
 
-            padding: 23px 15px;
+            padding: 21px 15px 22px;
         }
 
         .sub-header {
@@ -384,7 +384,7 @@
         }
 
         .search-box {
-            margin: 10px auto ;
+            margin: 7px auto ;
         }
 
         .main-image {
@@ -398,7 +398,6 @@
         .sub-header {
 
             background: #f0f3f6;
-            padding-top: 7px;
 
         }
 
@@ -863,6 +862,7 @@
                 }
             },
             init: function () {
+                this.products = {};
                 this.scrollToTop();
                 var self = this;
                 var searchValue = this.searchValue;
@@ -1077,8 +1077,15 @@
             }
         },
         watch: {
+            '$route.params.categoryName':function(name){
+
+                 this.init();
+
+            },
+
             searchText: function () {
                 var self = this;
+
 
                 clearTimeout(this.searchTextTimeout);
 

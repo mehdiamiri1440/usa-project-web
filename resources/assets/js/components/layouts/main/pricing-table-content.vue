@@ -455,9 +455,9 @@
                                            در حال استفاده
                                         </p>
 
-                                        <a v-else href="/register" class="green-button">
+                                        <router-link v-else :to="{name : 'register'}" class="green-button">
                                            ثبت نام رایگان
-                                        </a>
+                                        </router-link>
 
                                     </div>
 

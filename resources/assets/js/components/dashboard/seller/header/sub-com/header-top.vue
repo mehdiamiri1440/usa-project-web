@@ -504,7 +504,7 @@ export default {
     eventBus.$on("active", event => {
       this.activeElement = event;
     });
-    Echo.private("testChannel." + userId).listen("newMessage", e => {
+    Echo.private("testChannel." + this.$parent.userId).listen("newMessage", e => {
       var senderId = e.new_message.sender_id;
 
       self.messageCount += 1;

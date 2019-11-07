@@ -357,7 +357,6 @@ const router = new Router({
             beforeEnter: (to, from, next) => {
                 var userId = window.localStorage.getItem('userId');
                 var userType = window.localStorage.getItem('userType');
-                console.log(userId)
                  if (userId && userType == 0 ) next();
                 else next('/login');
             }

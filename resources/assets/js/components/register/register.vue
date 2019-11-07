@@ -1,4 +1,7 @@
 <style scoped>
+    p, span{
+        line-height: 1.5;
+    }
     .text-loader {
         display: block;
         width: 100%;
@@ -500,7 +503,7 @@
             return {
                 isImageLoad: false,
                 loginCheckerLoading: true,
-                currentStep: 6,
+                currentStep: 1,
                 step1: {
                     phone: "",
                     sendCode: true

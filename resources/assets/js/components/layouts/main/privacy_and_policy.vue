@@ -1,3 +1,8 @@
+<style scoped>
+    p, span, div, h3{
+        line-height: 1.618;
+    }
+</style>
 <template>
     <div class="main-content-index-pages">
         <section class="parallax-section policy">

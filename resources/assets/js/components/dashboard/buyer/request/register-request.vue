@@ -300,7 +300,7 @@
                 }
 
                 // this.nameValidator(this.buyAd.name);
-                console.log(this.nameValidator(this.buyAd.name));
+                //console.log(this.nameValidator(this.buyAd.name));
                 this.requirementAmountValidator(this.buyAd.requirement_amount);
 
                 if (!this.errors.categorySelected && !this.errors.category_id && !this.errors.name && !this.errors.requirement_amount) {

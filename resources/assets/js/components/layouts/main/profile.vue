@@ -1,5 +1,10 @@
 <style scoped>
 
+    .info_user_wrapper_mobile .green-button,
+    .back_page>.green-button {
+        margin: 3px 0;
+        padding: 4px 0;
+    }
     .owl-carousel {
         direction: ltr;
     }
@@ -30,7 +35,7 @@
         padding: 0 11px;
     }
 
-    .main-content-item {
+    .profile-main-content-item {
         direction: rtl;
         overflow: hidden;
         margin: -100px auto 24px;
@@ -348,7 +353,7 @@
             top: 80px;
         }
 
-        .main-content-item {
+        .profile-main-content-item {
             padding:  0;
             margin: 63px auto 24px;
         }
@@ -519,7 +524,7 @@
         margin-top: 9px;
     }
 
-    .main-content-item {
+    .profile-main-content-item {
         box-shadow: none;
     }
 
@@ -549,7 +554,7 @@
 
         }
 
-    
+
         .user-contents .user-image, .user-contents p {
             float: right;
         }
@@ -624,7 +629,7 @@
                      itemscope itemprop="Person"
                      itemtype="http://schema.org/Person">
 
-                <div class="main-content-item" v-if="profileOwner.user_info">
+                <div class="profile-main-content-item" v-if="profileOwner.user_info">
                     <div class="header-content col-xs-12">
                         <div class="image_user_wrapper col-xs-4 col-sm-3 col-md-2">
                             <div class="user-image">
@@ -1451,7 +1456,7 @@
                 if (this.currentUser.user_info) {
                     axios.post('/set_last_chat_contact', contact)
                         .then(function (response) {
-                            console.log(self.currentUser.user_info.is_seller);
+
                             if (self.currentUser.user_info.is_seller == 1) {
                                 self.$router.push('/seller/messages');
                             } else if (self.currentUser.user_info.is_buyer == 1) {

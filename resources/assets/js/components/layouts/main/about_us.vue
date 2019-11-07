@@ -1,4 +1,8 @@
+
 <style scoped>
+    p, span, div, h3{
+        line-height: 1.618;
+    }
     .green-button {
         width: initial;
         padding: 13px 15px;

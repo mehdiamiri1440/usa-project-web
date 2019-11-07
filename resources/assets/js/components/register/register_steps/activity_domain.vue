@@ -1,4 +1,7 @@
 <style scoped>
+  p, span{
+    line-height: 1.5;
+  }
 .submit-button {
   background: #dddddd;
   color: #fff;
@@ -227,15 +230,17 @@ input.error:focus + i {
 .label-radio.error label::after {
   border: 1px solid #e41c38;
 }
+
 .label-radio label svg {
   width: 20px;
   height: 30px;
   float: right;
+  margin-top: -5px;
 }
+
 .label-radio label span {
-  margin: 5px;
-  position: relative;
-  top: 5px;
+  margin: 0 5px;
+
 }
 
 .cls-1 {

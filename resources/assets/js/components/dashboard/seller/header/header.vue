@@ -496,13 +496,7 @@
                         :userprof="currentUser.user_info.user_name"
                 />
 
-                <HeaderMenuList
-                        :profilebasic="profilebasic"
-                        :byadreq="byadreq"
-                        :selregpro="selregpro"
-                        :transactroute="transactroute"
-                        :mytrans="mytrans"
-                />
+                <HeaderMenuList/>
 
 
             </section>
@@ -545,14 +539,7 @@
                         :userprof="currentUser.user_info.user_name"
                 />
 
-                <HeaderMenuList
-                        :profilebasic="profilebasic"
-                        :byadreq="byadreq"
-                        :selregpro="selregpro"
-                        :transactroute="transactroute"
-                        :mytrans="mytrans"
-                        :guide="guide"
-                />
+                <HeaderMenuList/>
 
             </section>
 
@@ -571,7 +558,6 @@
                 :def="defultimg"
                 :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
                 :out="logout"
-                :routeHome="routehome"
                 :menuClosed="menuClosed"
         />
 
@@ -596,14 +582,8 @@
             'logo',
             'loading',
             'storage',
-            'transactroute',
-            'mytrans',
-            'selregpro',
-            'byadreq',
-            'profilebasic',
             'logout',
-            'routehome',
-            'guide'
+            'userId'
         ],
         data: function () {
             return {
@@ -639,6 +619,7 @@
                 deleteText: '',
                 deleteButtonText: '',
                 cancelButtonText: '',
+                ProductId: "",
             }
         },
         methods: {
@@ -855,6 +836,46 @@
                     }
                 })
             },
+            deleteProduct: function () {
+                var self = this;
+
+                axios
+                    .post("/delete_product_by_id", {
+                        product_id: self.productId
+                    })
+                    .then(function (response) {
+                        //show product deleted message
+                        //code
+                        self.popUpMsg = "حذف شد.";
+                        $("#custom-main-modal").modal("show");
+
+                        self.registerComponentStatistics(
+                            "product",
+                            "product-deleted",
+                            "product-deleted-successfully"
+                        );
+
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 3000);
+                    })
+                    .catch(function (err) {
+                        self.registerComponentStatistics(
+                            "product",
+                            "product-delete-failed",
+                            "product-delete-failed"
+                        );
+                        //show modal
+                        self.popUpMsg = "خطایی رخ داده است.لطفا دوباره تلاش کنید.";
+                        $("#custom-main-modal").modal("show");
+                    });
+            },
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag("event", actionName, {
+                    event_category: categoryName,
+                    event_label: labelName
+                });
+            },
 
         },
         mounted() {
@@ -883,6 +904,10 @@
 
             eventBus.$on('cancelButtonText', (event) => {
                 this.cancelButtonText = event;
+            });
+            
+            eventBus.$on("productId", event => {
+                this.productId = event;
             });
         },
         metaInfo() {

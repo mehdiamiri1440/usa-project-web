@@ -1,4 +1,7 @@
 <style scoped>
+	p, span{
+		line-height: 1.5;
+	}
 	a.text-green{
 		color: #00C569;
 
@@ -122,7 +125,7 @@
 		height: 15px;
 
 		direction: rtl;
-		
+
 		font-size: 12px;
     }
     .register-form{

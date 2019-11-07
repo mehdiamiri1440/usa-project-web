@@ -1,4 +1,7 @@
 <style scoped>
+  p, span{
+    line-height: 1.5;
+  }
 .submit-button {
   background: #dddddd;
   color: #fff;
@@ -119,11 +122,13 @@ input.error:focus + i {
 .radio-wrapper {
   margin: 10px auto;
 }
+
 .label-radio label svg {
   width: 20px;
   height: 30px;
   float: right;
 }
+
 .label-radio {
   display: inline-block;
   position: relative;
@@ -136,6 +141,7 @@ input.error:focus + i {
   padding: 8px 30px 8px 13px;
   font-size: 14px;
 }
+
 .label-radio:nth-of-type(2) {
   margin-left: 16px;
 }
@@ -168,6 +174,10 @@ input.error:focus + i {
   background-color: #eee;
 
   border-radius: 50%;
+}
+
+.label-radio label{
+  margin: 0;
 }
 
 /* On mouse-over, add a grey background color */

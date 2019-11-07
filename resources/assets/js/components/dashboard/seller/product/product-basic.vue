@@ -743,6 +743,7 @@
             },
             openChat: function (buyAd) {
                 this.registerComponentStatistics('buyAdReplyAfterProductRegister', 'openChat', 'click on open chatBox');
+                var self = this;
 
                 axios.post('/get_user_last_confirmed_profile_photo', {
                     'user_id': buyAd.myuser_id
@@ -756,7 +757,6 @@
                         profile_photo: profile_photo,
                         user_name: buyAd.user_name,
                     };
-                    var self = this;
 
                     axios.post('/set_last_chat_contact', contact)
                         .then(function (response) {

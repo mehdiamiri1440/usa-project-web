@@ -1,9 +1,11 @@
 
 
 <style scoped>
-
+    div, p, span{
+        line-height: 1.5em;
+    }
     #main {
-        padding-top: 100px;
+        padding-top: 160px;
     }
 
     .main-content {
@@ -30,7 +32,7 @@
 
         #main {
 
-            padding-top: 80px;
+            padding-top: 56px;
 
         }
 

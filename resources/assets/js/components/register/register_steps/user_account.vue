@@ -1,4 +1,7 @@
 <style scoped>
+  p, span{
+    line-height: 1.5;
+  }
 .text-red {
   color: red;
 }

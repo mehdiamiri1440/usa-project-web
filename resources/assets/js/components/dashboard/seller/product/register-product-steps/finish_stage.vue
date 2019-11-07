@@ -354,7 +354,7 @@
 
                            <div class="text-center margin-15-0" v-else>
 
-                           		<router-link class="green-button" :to="{ name : 'buyAdRequests'}">
+                           		<router-link class="green-button" :to="{ name : 'buyAdRequestsSeller'}">
                            			مشاهده درخواست های خرید
                            		</router-link>
 

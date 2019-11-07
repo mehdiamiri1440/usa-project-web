@@ -196,7 +196,8 @@
         width: 100%;
         z-index: 1010;
         border-radius: 0;
-        border-bottom: 1px solid #F0F0F0;
+        border: none;
+        box-shadow: 0 7px 8px 0 rgba(0,0,0,.04);
     }
 
     .incobac-main-nav {
@@ -266,7 +267,14 @@
     }
 
     .incobac-sub-menu {
-        border-bottom: 2px solid #E6E6E6
+        transition: 0.3s;
+        height: 38px;
+        overflow: hidden;
+    }
+
+    .incobac-sub-menu.scrollUp{
+        height: 0;
+        transition: 0.3s;
     }
 
     .incobac-sub-menu  li{
@@ -303,7 +311,7 @@
         font-size: 14px;
 
         color: #777;
-        
+
         font-weight: bold;
 
     }
@@ -323,21 +331,21 @@
     }
 
     .profile-information{
-        
+
         float: left;
 
         padding-top: 10px;
-        
+
     }
 
     .profile-information i{
-        
+
         position: relative;
 
         top: 3px;
 
         margin-right: 7px;
-        
+
     }
 
     .profile-image-wrapper{
@@ -355,7 +363,7 @@
 
     }
 
- 
+
     .profile-image-wrapper img{
         width: initial;
         height: 100%;
@@ -404,7 +412,7 @@
 
     .mobile-menu-button{
         float: right;
-    }   
+    }
 
     .navbar-toggle{
 
@@ -464,13 +472,13 @@
 
             min-width: 300px;
 
-        
+
         }
 
     }
 
     @media screen and (max-width: 767px){
-        
+
         #incobac-nav{
             padding: 0;
 
@@ -482,7 +490,7 @@
 
             background: #fff;
 
-            top: 57px;
+            top: 56px;
 
             right: -1px;
 
@@ -517,7 +525,7 @@
 
         #incobac-nav .wrapper-nav{
 
-            padding: 30px 0 0; 
+            padding: 30px 0 0;
 
         }
 
@@ -566,7 +574,7 @@
             left: 15px;
 
             padding: 13px 15px;
-            
+
             height: 100%;
         }
 
@@ -584,12 +592,12 @@
 
         }
 
-        #incobac-nav ul.mobile-navigation a:hover, 
+        #incobac-nav ul.mobile-navigation a:hover,
         #incobac-nav ul.mobile-navigation a:focus,
         #incobac-nav ul.mobile-navigation a.router-link-exact-active{
 
                 color: #00c569;
-                
+
                 background: #fbfbfb;
 
                 border-color: #00c569;
@@ -634,7 +642,7 @@
         }
 
         .mobile-login-link a{
-            
+
             font-size: 11px;
 
         }
@@ -646,7 +654,7 @@
     @media screen and (max-width: 360px){
 
         .mobile-login-link a{
-            
+
             margin: 0;
 
             padding: 8px 16px 7px;
@@ -657,7 +665,7 @@
         }
 
         .mobile-login-link span{
-            
+
             display: none;
 
         }
@@ -811,7 +819,7 @@
         <!--nav-->
         <div class="mobile-background-shadow"></div>
         <nav class="navbar text-rtl">
-        
+
             <div class="container-fluid incobac-main-nav">
 
                 <div class="hidden-md hidden-sm hidden-lg mobile-menu-button">
@@ -823,18 +831,18 @@
                 </div>
 
                 <div class="incobac-logo navbar-header navbar-right">
-                  
+
                     <router-link class="navbar-brand " :to="{name : 'indexPage'}">
                         <img :src="assets + 'assets/img/logo_dark.png'" alt="اینکوباک | بازارگاه آنلاین دنیای کشاورزی">
                     </router-link>
                 </div>
-                
+
                 <div class="user-auth-info-wrapper navbar-nav">
                     <ul  v-if="user_id != ''" class="nav navbar-nav ">
                         <li>
                             <a class="profile-info-wrapper" data-toggle="collapse" href="#web-profile-items" role="button" >
                                 <div class="profile-image-wrapper">
-                                
+
                                     <img v-if="profile_photo != ''" :src="storage_path + '/' + profile_photo" :alt="user_full_name"/>
                                     <img v-else :src="user_default_image" :alt="user_full_name"/>
 
@@ -843,8 +851,8 @@
                                     <span class="hidden-xs" v-text="user_full_name"></span>
                                     <i class="fa fa-angle-down"></i>
                                 </div>
-                            </a> 
-            
+                            </a>
+
                               <ul v-if="is_seller == 1" id="web-profile-items" class="collapse ">
                                         <li  class="list-item">
                                             <router-link
@@ -879,7 +887,7 @@
                                             <a   href="/logout">خروج</a>
                                         </li>
                                     </ul>
-                        
+
                         </li>
                     </ul>
                     <ul v-else class="nav navbar-nav ">
@@ -903,7 +911,7 @@
                                 <span>
                                     ورود / ثبت نام
 
-                                </span>                              
+                                </span>
                             </router-link>
                         </li>
 
@@ -916,7 +924,7 @@
                                 ورود به اینکوباک
                             </router-link>
                         </li>
-                    </ul>      
+                    </ul>
                  </div>
 
                 <div class="collapse navbar-collapse navbar-right" id="incobac-nav">
@@ -1233,19 +1241,43 @@
             },
         },
         mounted() {
-                 
-                 $("#incobac-nav").on("hide.bs.collapse", function(){
-                     
-                     $('.mobile-background-shadow').fadeTo(0,0,function(){
-                        $(this).css('display','none')
-                     })
-
-                 });
 
 
-                  $("#incobac-nav").on("show.bs.collapse", function(){
-                     $('.mobile-background-shadow').fadeTo(0,0.8)
-                  });
+
+            // scroll handeling hide in web
+
+             var lastScroll = 0;
+             var navbar = $('nav.navbar .incobac-sub-menu');
+            $(window).scroll(function(){
+                var state = $(window).scrollTop();
+
+                if($(window).scrollTop() > 60 && state > lastScroll)
+                {
+                     navbar.addClass("scrollUp");
+
+                }else if ($(window).scrollTop() < 60 && state < lastScroll || $(window).scrollTop() > 60 && state < lastScroll){
+
+                    navbar.removeClass("scrollUp");
+
+                }
+
+                lastScroll = state
+            });
+
+
+
+            $("#incobac-nav").on("hide.bs.collapse", function(){
+
+             $('.mobile-background-shadow').fadeTo(0,0,function(){
+                $(this).css('display','none')
+             })
+
+            });
+
+
+            $("#incobac-nav").on("show.bs.collapse", function(){
+               $('.mobile-background-shadow').fadeTo(0,0.8)
+             });
 
 
             $(document).on('click', function (e){
@@ -1263,7 +1295,7 @@
                   /* bootstrap collapse js adds "in" class to your collapsible element*/
 
                 var menu_opened = $('#incobac-nav').hasClass('in');
-            
+
                 if(!$(e.target).is('.search-input input') && menu_opened === true){
 
                         $('#incobac-nav').collapse('toggle');
@@ -1273,7 +1305,7 @@
             });
 
 
- 
+
             eventBus.$on("submitSuccess", $event => {
                 this.popUpMsg = $event;
             });

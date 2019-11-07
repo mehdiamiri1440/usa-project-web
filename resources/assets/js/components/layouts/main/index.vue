@@ -34,15 +34,11 @@
         top: 1px;
         padding: 0 2px;
     }
-    
+
      #main-content {
         margin-bottom: -60px;
     }
 
-
-     #intro {
-        position: relative;
-    }
 
     #intro::after {
         content: "";
@@ -142,13 +138,15 @@
     /*intro section style */
 
     #intro {
-        margin-top: 73px;
+        margin-top: 97px;
 
         text-align: center;
 
         padding: 25px 15px;
 
         direction: rtl;
+
+        position: relative;
 
     }
 
@@ -863,7 +861,9 @@
     }
 
     @media screen and (max-width: 767px) {
-
+        #intro{
+            margin-top: 57px;
+        }
         .search-input {
 
             width: 100%;

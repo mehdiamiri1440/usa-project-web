@@ -99,6 +99,10 @@
 
     }
 
+
+
+
+
     .copy-right {
 
         text-align: center;
@@ -296,6 +300,7 @@
         }
     }
 
+
     /*end loader*/
 </style>
 
@@ -329,33 +334,33 @@
             </div>
         </div>
 
-          <div class="container">
-                    <div class="modal fade"
-                         id="modal-buttons"
-                         tabindex="-1"
-                         ref="myModal"
-                         role="dialog"
-                         aria-labelledby="myModalLabel"
-                         aria-hidden="true"
-                    >
+        <div class="container">
+            <div class="modal fade"
+                 id="modal-buttons"
+                 tabindex="-1"
+                 ref="myModal"
+                 role="dialog"
+                 aria-labelledby="myModalLabel"
+                 aria-hidden="true"
+            >
 
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="main_popup_content">
-                                    <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
-                                    <p class="main-pop-up" v-text="popUpMsg">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="main_popup_content">
+                            <a href="#" data-dismiss="modal"> <i class="fa fa-close"></i></a>
+                            <p class="main-pop-up" v-text="popUpMsg">
 
-                                    </p>
-                                    <button class="btn green-button " data-dismiss="modal">
-                                        متوجه شدم
-                                    </button>
-                                    <a class="btn green-button" href='/pricing'>
-                                        مشاهده تعرفه ها
-                                    </a>
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                    </div>
+                            </p>
+                            <button class="btn green-button " data-dismiss="modal">
+                                متوجه شدم
+                            </button>
+                            <a class="btn green-button" href='/pricing'>
+                                مشاهده تعرفه ها
+                            </a>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
         </div>
 
 
@@ -450,12 +455,12 @@
             </div>
         </div>
 
-    <!--    <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
-            <div class="main-loader">
-                <img :src="loading">
-                <p dir="rtl">در حال بارگذاری...</p>
-            </div>
-        </div>-->
+        <!--    <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
+                <div class="main-loader">
+                    <img :src="loading">
+                    <p dir="rtl">در حال بارگذاری...</p>
+                </div>
+            </div>-->
         <!--end loader-->
 
         <section class="right-header mobile-header">
@@ -482,7 +487,7 @@
 
             <section class="main-right-header">
                 <ProfileInfo
-                :isLoading='isLoading'
+                        :isLoading='isLoading'
                         :photoLink="currentUser.profile.profile_photo"
                         :storage="storage"
                         :def="defultimg"
@@ -491,13 +496,7 @@
                         :userprof="currentUser.user_info.user_name"
                 />
 
-                <HeaderMenuList
-                        :profilebasic="profilebasic"
-                        :byadreq="byadreq"
-                        :selregpro="selregpro"
-                        :transactroute="transactroute"
-                        :mytrans="mytrans"
-                />
+                <HeaderMenuList/>
 
 
             </section>
@@ -531,7 +530,7 @@
 
             <section class="main-right-header">
                 <ProfileInfo
-                :isLoading='isLoading'
+                        :isLoading='isLoading'
                         :photoLink="currentUser.profile.profile_photo"
                         :storage="storage"
                         :def="defultimg"
@@ -540,14 +539,7 @@
                         :userprof="currentUser.user_info.user_name"
                 />
 
-                <HeaderMenuList
-                        :profilebasic="profilebasic"
-                        :byadreq="byadreq"
-                        :selregpro="selregpro"
-                        :transactroute="transactroute"
-                        :mytrans="mytrans"
-                        :guide="guide"
-                />
+                <HeaderMenuList/>
 
             </section>
 
@@ -566,7 +558,6 @@
                 :def="defultimg"
                 :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
                 :out="logout"
-                :routeHome="routehome"
                 :menuClosed="menuClosed"
         />
 
@@ -591,18 +582,12 @@
             'logo',
             'loading',
             'storage',
-            'transactroute',
-            'mytrans',
-            'selregpro',
-            'byadreq',
-            'profilebasic',
             'logout',
-            'routehome',
-            'guide'
+            'userId'
         ],
         data: function () {
             return {
-                    menuClosed:false,
+                 menuClosed:false,
                 isLoading:true,
                 currentUser: {
                     profile: {
@@ -634,6 +619,7 @@
                 deleteText: '',
                 deleteButtonText: '',
                 cancelButtonText: '',
+                ProductId: "",
             }
         },
         methods: {
@@ -754,14 +740,14 @@
                 });
             },
             toggleShowHeader() {
-              var self=this
-              var showHeaderButtonElement = $('.show-header ');
+                 var self=this
+               var showHeaderButtonElement = $('.show-header');
                 var closeHeaderButtonMobile = $('.close_menu_mob ');
                 var flag = true;
                 var rightHeader = $(".right-header.mobile-header");
                 var back = $(".background_mob_sec");
                 var closeHeaderButtonMobileLinks = $('.mobile-header .header-menu a');
-                                 rightHeader.animate({
+               rightHeader.animate({
                             right: '0'
                         }, 800);
                        setTimeout(() => {
@@ -771,7 +757,7 @@
                             self.menuClosed=true
                             });
                        }, 2000);
-               showHeaderButtonElement.on('click', function () {
+             showHeaderButtonElement.on('click', function () {
 
                     rightHeader.animate({ scrollTop: 0 }, "fast");
 
@@ -850,9 +836,53 @@
                     }
                 })
             },
+            deleteProduct: function () {
+                var self = this;
+
+                axios
+                    .post("/delete_product_by_id", {
+                        product_id: self.productId
+                    })
+                    .then(function (response) {
+                        //show product deleted message
+                        //code
+                        self.popUpMsg = "حذف شد.";
+                        $("#custom-main-modal").modal("show");
+
+                        self.registerComponentStatistics(
+                            "product",
+                            "product-deleted",
+                            "product-deleted-successfully"
+                        );
+
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 3000);
+                    })
+                    .catch(function (err) {
+                        self.registerComponentStatistics(
+                            "product",
+                            "product-delete-failed",
+                            "product-delete-failed"
+                        );
+                        //show modal
+                        self.popUpMsg = "خطایی رخ داده است.لطفا دوباره تلاش کنید.";
+                        $("#custom-main-modal").modal("show");
+                    });
+            },
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag("event", actionName, {
+                    event_category: categoryName,
+                    event_label: labelName
+                });
+            },
 
         },
         mounted() {
+       var self=this;
+       eventBus.$on("firstDashboardSeen", event => {
+      self.isfirstDashboardSeen = event;
+    });
             this.init();
             this.toggleHeader();
             this.toggleShowHeader();
@@ -868,12 +898,16 @@
             eventBus.$on('uploadPercentage', (event) => {
                 this.uploadPercentage = event;
             });
-             eventBus.$on('deleteButtonText', (event) => {
+            eventBus.$on('deleteButtonText', (event) => {
                 this.deleteButtonText = event;
             });
 
             eventBus.$on('cancelButtonText', (event) => {
                 this.cancelButtonText = event;
+            });
+            
+            eventBus.$on("productId", event => {
+                this.productId = event;
             });
         },
         metaInfo() {

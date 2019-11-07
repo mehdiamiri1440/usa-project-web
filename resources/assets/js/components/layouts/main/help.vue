@@ -3,7 +3,9 @@
         direction: rtl;
         margin-bottom: 15px;
     }
-
+    p, span, div, h3{
+        line-height: 1.618;
+    }
     li {
         margin-bottom: 15px;
     }

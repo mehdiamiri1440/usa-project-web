@@ -4,7 +4,7 @@
 
     #main-content{
 
-        padding-top: 165px;
+        padding-top: 122px;
 
 
     }
@@ -132,7 +132,8 @@
         background: #f0f3f6;
         padding: 0 15PX;
     }
- .search-box {
+
+    .search-box {
         position: relative;
         margin-top: 14px;
         border:none;
@@ -154,7 +155,7 @@
         background: none;
         border: none;
         position: absolute;
-        right: 18px;
+        right: 3px;
         top: 6px;
         border-left: 1px solid;
         color: #666;
@@ -230,7 +231,7 @@
 
     .sub-header-fix {
         position: fixed;
-        top: 73px;
+        top: 56px;
         left: 0;
         right: 0;
         z-index: 2;
@@ -346,7 +347,7 @@
     }
 
     @media screen and (max-width: 767px) {
-        
+
         .main-content, #main {
             padding: 0;
         }
@@ -357,7 +358,8 @@
         }
 
         .search-box {
-            margin: 4px auto 13px;
+            margin: 7px auto;
+            padding: 0;
         }
 
         .main-image {
@@ -371,7 +373,6 @@
         .sub-header {
 
             background: #f0f3f6;
-            padding-top: 20px;
 
         }
 
@@ -522,7 +523,7 @@
             <a href="#" @click.prevent="addProductOrRequest()"><i class="fa fa-plus"></i> </a>
         </div>
 
-        <div class="sub-header-fix sub-header container-fluid">
+        <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
             <div class="container">
 
                 <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
@@ -1014,7 +1015,7 @@
                    var sidebar = new StickySidebar('#sidebar', {
                         containerSelector: '#article-list',
                         innerWrapperSelector: '.sidebar__inner',
-                        topSpacing: 160,
+                        topSpacing: 122,
                         resizeSensor: true,
 
                     });

@@ -130,6 +130,7 @@
         color: #E41C38;
         padding-top: 4px;
         text-align: center;
+        font-size: 13px;
     }
 
     /*progress styles*/
@@ -1329,7 +1330,7 @@
                         self.errors = err.response.data.errors;
 
                         let tmpArray = Object.keys(self.errors);
-                           console.log((tmpArray.join() + "").includes('related') || (tmpArray.join() + "").includes('certificate') );
+                           //console.log((tmpArray.join() + "").includes('related') || (tmpArray.join() + "").includes('certificate') );
                         if((tmpArray.join() + "").includes('related') || (tmpArray.join() + "").includes('certificate') ){
                             self.popUpMsg = 'اندازه تصاویر بزرگ تر 5  از مگابایت است یا فرمت مناسبی ندارد';
                             eventBus.$emit('submitSuccess', self.popUpMsg);

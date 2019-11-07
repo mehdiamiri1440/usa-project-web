@@ -1,4 +1,7 @@
-	<style scoped>
+<style scoped>
+  p, span{
+    line-height: 1.5;
+  }
 .submit-button {
   background: #dddddd;
   color: #fff;

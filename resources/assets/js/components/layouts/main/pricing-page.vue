@@ -6,7 +6,6 @@
 
     #faq {
         direction: rtl;
-        padding-top: 105px;
         padding-bottom: 0;
         background-position: 50% 60px;
         background: #f6f6f6;
@@ -23,21 +22,7 @@
 
 </style>
 <template>
-    <div>
-
-        <section id="intro" class="parallax-section">
-            <div class="container-fluid main_hero_section col-xs-12">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h1 class="wow fadeIn" data-wow-delay="1.2s">
-                                تعرفه ها
-                            </h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="main-content-index-pages">
 
         <section id="faq" class="parallax-section">
             <div class="container">
