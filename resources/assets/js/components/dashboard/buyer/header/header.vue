@@ -889,6 +889,9 @@
 
         },
         created() {
+                        var self=this
+                self.showSnapShot=localStorage.getItem('showSnapShot')
+            localStorage.removeItem('showSnapShot')
             eventBus.$on('submiting', (event) => {
                 this.submiting = event;
             });

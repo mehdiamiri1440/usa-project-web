@@ -1,7 +1,8 @@
 <style scoped>
-  p, span{
-    line-height: 1.5;
-  }
+p,
+span {
+  line-height: 1.5;
+}
 .text-loader {
   display: block;
   width: 100%;
@@ -463,6 +464,7 @@ export default {
             if (response.data.confirmed_profile_record === true) {
               if (response.data.is_buyer) {
                 window.location.href = "/buyer/register-request";
+                localStorage.setItem("showSnapShot", true);
                 localStorage.userRoute = JSON.stringify(
                   "buyer/register-request"
                 );
@@ -474,6 +476,7 @@ export default {
                 );
               } else if (response.data.is_seller) {
                 window.location.href = "/seller/register-product";
+                localStorage.setItem("showSnapShot", true);
                 localStorage.userRoute = JSON.stringify(
                   "seller/register-product"
                 );

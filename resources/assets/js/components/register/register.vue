@@ -757,9 +757,12 @@
                                         password: object.password
                                     })
                                     .then(result => {
-                                        if (object.activity_type === "1")
-                                            window.location.href=('/seller/register-product');
-                                        else window.location.href=('/buyer/register-request');
+                                        if (object.activity_type === "1"){
+                                            localStorage.setItem("showSnapShot", true);
+                                            window.location.href=('/seller/register-product');}
+                                        else{
+                                            localStorage.setItem("showSnapShot", true);
+                                            window.location.href=('/buyer/register-request');}
                                     })
                                     .catch(err => {
                                         console.log("err");

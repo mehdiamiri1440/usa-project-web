@@ -287,7 +287,7 @@ i.fa-home {
     padding: 6px;
   }
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 992px) {
   .message-notification {
     top: 4px;
     cursor: pointer;
@@ -305,7 +305,7 @@ i.fa-home {
     color: wheat;
   }
 }
-@media only screen and (min-width: 767px) {
+@media only screen and (min-width: 992px) {
   .hide-message-notification {
     display: none;
   }
@@ -504,11 +504,14 @@ export default {
     eventBus.$on("active", event => {
       this.activeElement = event;
     });
-    Echo.private("testChannel." + this.$parent.userId).listen("newMessage", e => {
-      var senderId = e.new_message.sender_id;
+    Echo.private("testChannel." + this.$parent.userId).listen(
+      "newMessage",
+      e => {
+        var senderId = e.new_message.sender_id;
 
-      self.messageCount += 1;
-    });
+        self.messageCount += 1;
+      }
+    );
     document.addEventListener("click", this.documentClick);
   },
   registerComponentStatistics: function(categoryName, actionName, labelName) {

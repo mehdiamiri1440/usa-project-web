@@ -587,6 +587,7 @@
         ],
         data: function () {
             return {
+                showSnapShot:false,
                  menuClosed:false,
                 isLoading:true,
                 currentUser: {
@@ -747,7 +748,8 @@
                 var rightHeader = $(".right-header.mobile-header");
                 var back = $(".background_mob_sec");
                 var closeHeaderButtonMobileLinks = $('.mobile-header .header-menu a');
-               rightHeader.animate({
+          if(self.showSnapShot)
+          rightHeader.animate({
                             right: '0'
                         }, 800);
                        setTimeout(() => {
@@ -889,6 +891,9 @@
 
         },
         created() {
+            var self=this
+            self.showSnapShot=localStorage.getItem('showSnapShot')
+            localStorage.removeItem('showSnapShot')
             eventBus.$on('submiting', (event) => {
                 this.submiting = event;
             });
