@@ -1,17 +1,13 @@
 
-<style >
-
-    #main-content{
-
-          padding-top: 165px;
-
-
-    }
-
-</style>
 
 <style scoped>
 
+    #main-content{
+
+        padding-top: 122px;
+
+
+    }
     .shadow-content{
         background: #fff;
     }
@@ -88,7 +84,7 @@
         -webkit-box-shadow: 0 3px 15px rgba(0,0,0,0.30);
         box-shadow: 0 3px 15px rgba(0,0,0,0.30);
         text-align: center;
-        padding-top: 15px;
+        padding-top: 12px;
         font-size: 23px;
     }
 
@@ -159,7 +155,7 @@
         background: none;
         border: none;
         position: absolute;
-        right: 18px;
+        right: 3px;
         top: 6px;
         border-left: 1px solid;
         color: #666;
@@ -176,6 +172,7 @@
         background: #000546;
         color: #fff;
     }
+
 
     .links-sub-header {
         direction: rtl;
@@ -203,13 +200,6 @@
         height: 3px;
         width: 100%;
     }
-
-    #main {
-
-        position:relative;
-
-    }
-
 
     .main-content > h4 {
         margin: 30px auto;
@@ -241,7 +231,7 @@
 
     .sub-header-fix {
         position: fixed;
-        top: 73px;
+        top: 56px;
         left: 0;
         right: 0;
         z-index: 2;
@@ -358,6 +348,9 @@
 
     @media screen and (max-width: 767px) {
 
+        .main-content, #main {
+            padding: 0;
+        }
         .sub-header {
             position: fixed;
             z-index: 1;
@@ -365,7 +358,8 @@
         }
 
         .search-box {
-            margin: 4px auto 13px;
+            margin: 7px auto;
+            padding: 0;
         }
 
         .main-image {
@@ -379,7 +373,6 @@
         .sub-header {
 
             background: #f0f3f6;
-            padding-top: 20px;
 
         }
 
@@ -530,7 +523,7 @@
             <a href="#" @click.prevent="addProductOrRequest()"><i class="fa fa-plus"></i> </a>
         </div>
 
-        <div class="sub-header-fix sub-header container-fluid">
+        <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
             <div class="container">
 
                 <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
@@ -757,7 +750,7 @@
 
                     </aside>
 
-               
+
 
         </main>
     </div>
@@ -765,7 +758,7 @@
 <script>
     import ProductArticle from './product_components/product_article'
     import ProductAsideCategories from './product_components/sidebar/product_aside_categories'
-    import {eventBus} from "../../../../js/router/dashboard_router";
+    import {eventBus} from "../../../router/router";
 
     var visible = false;
     export default {
@@ -1022,7 +1015,7 @@
                    var sidebar = new StickySidebar('#sidebar', {
                         containerSelector: '#article-list',
                         innerWrapperSelector: '.sidebar__inner',
-                        topSpacing: 160,
+                        topSpacing: 122,
                         resizeSensor: true,
 
                     });

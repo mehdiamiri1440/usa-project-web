@@ -1,273 +1,237 @@
 <style scoped>
-	
-	.text-red{
-		color: red;
-	}	
-	.submit-button{
-		background: #DDDDDD;
-		color: #fff;
-		border: none;
-		border-radius: 4px;
-		width: 100%;
-		font-size: 16px;
-		padding: 10px 0 9px;
-		transition: 300ms;
-		cursor: default;
-    }
+  p, span{
+    line-height: 1.5;
+  }
+.text-red {
+  color: red;
+}
+.submit-button {
+  background: #dddddd;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 16px;
+  padding: 10px 0 9px;
+  transition: 300ms;
+  cursor: default;
+}
 
-    .submit-button.active{
-		background: #00C569;
-		cursor: pointer;
-    }
+.submit-button.active {
+  background: #00c569;
+  cursor: pointer;
+}
 
-    .title-contents{
-    	font-weight: bold;
-    	font-size: 19px;
+.title-contents {
+  font-weight: bold;
+  font-size: 19px;
+}
 
-    }
+.form-contents {
+  margin: 5px auto;
+}
 
-    .form-contents{
-    	margin: 5px auto;
-    }
+.form-contents lable {
+  font-size: 12px;
+}
 
-    .form-contents lable{
-    	font-size: 12px;
-    }
+.input-wrapper {
+  margin: 6px auto 4px;
+  position: relative;
+}
 
-    .input-wrapper{
-   	    margin: 6px auto 4px;
-    	position: relative;
-    }
+input {
+  width: 100%;
 
-    input{
-    	width: 100%;
+  border-radius: 4px;
 
-		border-radius: 4px;
+  box-shadow: none;
 
-		box-shadow: none;
+  border: 1px solid;
 
-		border: 1px solid;
+  padding: 8px 15px 9px 45px;
 
-		padding: 8px 15px 9px 45px;
+  color: #bebebe;
 
-		color: #BEBEBE;
+  direction: ltr;
 
-		direction: ltr;
+  transition: 300ms;
+}
+.input-wrapper i {
+  display: inline-block;
 
-		transition: 300ms;
+  position: absolute;
 
-    }
-    .input-wrapper i {
-    	display: inline-block;
+  left: 15px;
 
-		position: absolute;
+  font-size: 20px;
 
-		left: 15px;
+  color: #bebebe;
 
-		font-size: 20px;
+  top: 9px;
 
-		color: #BEBEBE;
+  transition: 300ms;
+}
 
-		top: 9px;
+input.active {
+  border-color: #00c569;
+  color: #333;
+}
 
-		transition: 300ms;
-    }
+input.active + i {
+  color: #00c569;
+}
 
+input.active:focus,
+input.active:focus + i,
+input.active + i {
+  border-color: #00c569;
+}
 
-    input.active{
-		border-color: #00C569;
-		color: #333;
-    }
+input.error {
+  color: #333;
+  border-color: #e41c38;
+}
 
-    input.active + i{
-		color: #00C569;
-    }
+input.error + i {
+  color: #e41c38;
+}
 
-    input.active:focus ,  input.active:focus + i , input.active + i {
-		border-color: #00C569;
-    }
+input.error:focus,
+input.error:focus + i {
+  border-color: #e41c38;
+}
 
-    input.error {
-    		color: #333;
-		border-color: #e41c38;
-    }
+.error-message {
+  text-align: center;
 
-    input.error + i{
-		color: #e41c38;
-    }
+  color: #e41c38;
 
-    input.error:focus ,  input.error:focus + i  {
-		border-color: #e41c38;
-    }
+  font-weight: bold;
 
-    .error-message{
+  height: 25px;
 
-    	text-align: center;
+  margin-bottom: 5px;
 
-		color: #e41c38;
+  direction: rtl;
 
-		font-weight: bold;
-
-		height: 25px;
-
-		margin-bottom: 5px;
-
-	    direction: rtl;
-
-    }
-
+  font-size: 12px;
+}
 </style>
 
 <template>
-	<div>
-		 <h2 class="title-contents">
-		     حساب کاربری
-		 </h2>
+  <div>
+    <h2 class="title-contents">حساب کاربری</h2>
 
-		 <div class="form-contents col-xs-12">
+    <div class="form-contents col-xs-12">
+      <div class="row">
+        <label for="user-name">
+          یک نام کاربری
+          <span class="text-red">(انگلیسی و بدون فاصله)</span>
+          وارد کنید
+        </label>
 
-		     	<div class="row">
-		     		
-			        	
-				        <label for="user-name">
+        <div class="input-wrapper col-xs-12 user-name-wrapper">
+          <div class="row">
+            <input
+              v-model="userName"
+              :class="{'error' : $parent.errors.user_name[0], 'active' : userName.length >= 3 }"
+              id="user-name"
+              type="text"
+              class="dire"
+              placeholder="مثال : alizade_1357"
+              maxlength="20"
+            />
 
-				        		یک نام کاربری  
-				        		<span class="text-red">(انگلیسی و بدون فاصله)</span>
-				        		 وارد کنید
+            <i class="fa fa-user"></i>
+          </div>
 
-						</label>
-				    
-				     	<div class="input-wrapper col-xs-12 user-name-wrapper">
+          <p class="error-message">
+            <span v-if="$parent.errors.user_name[0]" v-text="$parent.errors.user_name[0]"></span>
+          </p>
+        </div>
 
-				     		<div class="row">
-				     			<input 
-						     	 	 v-model="userName" 
-						     		 :class = "{'error' : $parent.errors.user_name[0], 'active' : userName.length >= 3 }"
-						     		 id="user-name" 
-						     		 type="text"
-						     		 class="dire"
-						     		 placeholder="مثال : alizade_1357"  
-						     		 maxlength="20"
-						     		 >
+        <div class="row">
+          <div class="col-xs-6 pull-right">
+            <label for="password">کلمه عبور را وارد کنید</label>
 
-						     		<i class="fa fa-user"></i>
+            <div class="input-wrapper password-wrapper">
+              <input
+                v-model="password"
+                :class="{'error' : $parent.errors.password[0], 'active' : password.length}"
+                id="password"
+                type="password"
+                class="dire"
+                placeholder="کلمه عبور"
+              />
 
-						     	</div>
+              <i class="fa fa-lock"></i>
+              <p class="error-message">
+                <span v-if="$parent.errors.password[0]" v-text="$parent.errors.password[0]"></span>
+              </p>
+            </div>
+          </div>
 
-								    <p class="error-message">
-							       		<span  v-if="$parent.errors.user_name[0]" v-text="$parent.errors.user_name[0]"></span>
-							       	</p>
-			     
-			        	
-				     		</div>
+          <div class="col-xs-6">
+            <label for="password">تکرار کلمه عبور</label>
+            <div class="input-wrapper password-wrapper">
+              <input
+                v-model="rePassword"
+                :class="{'error' : $parent.errors.password_conf[0], 'active' : rePassword.length}"
+                id="re-password"
+                type="password"
+                class="dire"
+                placeholder="تکرار کلمه عبور"
+                minlength="20"
+              />
 
-				     	<div class="row">
-				     		
-				    
-				     		<div class="col-xs-6 pull-right">
-				     				<label for="password">
-									کلمه عبور را وارد کنید				     	
-								    </label>
+              <i class="fa fa-lock"></i>
+              <p class="error-message">
+                <span
+                  v-if="$parent.errors.password_conf[0]"
+                  v-text="$parent.errors.password_conf[0]"
+                ></span>
+              </p>
+            </div>
+          </div>
+        </div>
 
-					     		<div class="input-wrapper  password-wrapper">
-
-					     		
-						     		<input 
-						     		 v-model="password" 
-						     		 :class = "{'error' : $parent.errors.password[0], 'active' : password.length}"
-						     		 id="password" 
-						     		 type="password"
-						     		 class="dire"
-						     		 placeholder="کلمه عبور" 
-
-						     		 >
-
-						     		<i class="fa fa-lock"></i>
-
-					     	 	</div>
-
-					     	 	<p class="error-message">
-							       		<span  v-if="$parent.errors.password[0]" v-text="$parent.errors.password[0]"></span>
-							    </p>
-
-				     		</div>
-
-				     		<div class="col-xs-6 ">
-				     				<label for="password">
-					     				تکرار کلمه عبور
-									</label>
-					     		<div class="input-wrapper password-wrapper">
-
-					     		
-						     		<input 
-						     		 v-model="rePassword" 
-						     		 :class = "{'error' : $parent.errors.password_conf[0], 'active' : rePassword.length}"
-						     		 id="re-password" 
-						     		 type="password"
-						     		 class="dire"
-						     		 placeholder="تکرار کلمه عبور"  
-						     		 minlength="20"
-						     		 >
-
-						     		<i class="fa fa-lock"></i>
-
-					     	 	</div>
-
-				     		</div>
-				     		   <p class="error-message">
-							       		<span  v-if="$parent.errors.password_conf[0]" v-text="$parent.errors.password_conf[0]"></span>
-							    </p>
-				     
-
-			        </div>
-
-			       
-			        <button class="submit-button disabled " 
-			        :class="{'active' : password.length && rePassword.length && userName.length >=3}"
-			        @click.prevent="$parent.setAccount()" >
-			        	مرحله بعد
-					</button>
-
-		     </div>
-		</div>
-		
+        <button
+          class="submit-button disabled"
+          :class="{'active' : password.length && rePassword.length && userName.length >=3}"
+          @click.prevent="$parent.setAccount()"
+        >مرحله بعد</button>
+      </div>
     </div>
+  </div>
 </template>
 
-<script> 
-
-	export default{
-		data:function(){
-			return{
-				password : '',
-				rePassword : '',
-				userName : '',
-			}
-		},
-	    watch: {
-	  	  'userName': function(value) {
-
-	  	    this.$parent.step3.user_name = this.userName;
-
-	      },
-	      'password': function(value) {
-
-	  	  	this.$parent.errors.password = '';
-	  	  	this.$parent.step3.password = this.password;
-
-	      },
-	      'rePassword': function(value) {
-
-	  	  		this.$parent.errors.password_conf = '';
-	  	  		this.$parent.step3.re_password = this.rePassword;
-	      },
-
-	    },
-	    mounted(){
-	    	this.userName = this.$parent.step3.user_name;
-	    	this.password = this.$parent.step3.password;
-	    	this.rePassword = this.$parent.step3.re_password;
-	    }
-	}
-
+<script>
+export default {
+  data: function() {
+    return {
+      password: "",
+      rePassword: "",
+      userName: ""
+    };
+  },
+  watch: {
+    userName: function(value) {
+      this.$parent.step3.user_name = this.userName;
+    },
+    password: function(value) {
+      this.$parent.errors.password = "";
+      this.$parent.step3.password = this.password;
+    },
+    rePassword: function(value) {
+      this.$parent.errors.password_conf = "";
+      this.$parent.step3.re_password = this.rePassword;
+    }
+  },
+  mounted() {
+    this.userName = this.$parent.step3.user_name;
+    this.password = this.$parent.step3.password;
+    this.rePassword = this.$parent.step3.re_password;
+  }
+};
 </script>

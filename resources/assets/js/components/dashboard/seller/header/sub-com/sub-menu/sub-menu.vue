@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 
     /*start style sub-header*/
     .sub-header {
@@ -39,42 +39,57 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background: #00c569;
+        background: #00C569;
         height: 3px;
         width: 100%;
     }
+
     .sub-header a.active {
         color: #313942;
     }
+
     .sub-header a.active::after {
         content: " ";
         position: absolute;
         bottom: 0;
         left: 0;
-        background: #00c569;
+        background: #00C569;
         height: 3px;
         width: 100%;
     }
+
     /*end style sub-header*/
+    @media screen and (max-width: 345px) {
+        .sub-header a {
+            font-size: 10px;
+
+        }
+        .sub-header {
+
+            bottom: -44px;
+
+        }
+    }
 </style>
 
 <template>
-<!--     <div class="sub-header">
-        <ul class="list-inline">
-            <li class="list-item" v-for="item in items" :class="item.active">
-                <router-link :to="{ name : item.url }" v-text="item.message" />
-            </li>
-        </ul>
+    <!--     <div class="sub-header">
+            <ul class="list-inline">
+                <li class="list-item" v-for="item in items" :class="item.active">
+                    <router-link :to="{ name : item.url }" v-text="item.message" />
+                </li>
+            </ul>
 
-    </div> -->
+        </div> -->
 </template>
+
 <script>
-    import {eventBus} from "../../../../../../router/dashboard_router";
+    import {eventBus} from "../../../../../../router/router";
 
     export default {
         data: function () {
-            return{
-                items:[]
+            return {
+                items: []
             }
         },
         created() {

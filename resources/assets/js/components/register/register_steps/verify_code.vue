@@ -1,5 +1,7 @@
 <style scoped>
-		
+	p, span{
+		line-height: 1.5;
+	}
 	.submit-button{
 		background: #DDDDDD;
 		color: #fff;
@@ -38,7 +40,7 @@
 	transition: 300ms;
 		color: #fff;
 
-	
+
     }
     .text-green{
     	color: #00C569
@@ -61,7 +63,7 @@
    	    margin: 13px auto 4px;
     	position: relative;
     }
-    
+
     .timer-wrapper{
     	height: 38px;
     	text-align: center;
@@ -70,7 +72,7 @@
     }
 
     input{
-    	
+
     	width: 100%;
 
 		border-radius: 4px;
@@ -147,6 +149,8 @@
 
 	    direction: rtl;
 
+		font-size: 12px;
+
     }
 
 </style>
@@ -160,25 +164,25 @@
 		 <div class="form-contents col-xs-12">
 
 		     	<div class="row">
-		     		
+
 			     	<label for="verify-code">
-					کد ارسال شده به شماره ی	     		
+					کد ارسال شده به شماره ی
 						<span class="text-green" v-text="$parent.step1.phone"></span>
 			     		را وارد کنید
 
 			     	</label>
-			    
+
 			     	<div class="input-wrapper verify-code-wrapper">
-			     	
-			     		<div class="row">	
+
+			     		<div class="row">
 
 				     		<div class="col-xs-3">
-					     		<input v-model="verifycode1" 
+					     		<input v-model="verifycode1"
 					     		:class="{'error' : this.$parent.errors.verification_code[0], 'active' : verifycode1.length}"
-					     		id="verify-code-1" 
-					     		type="number" 
+					     		id="verify-code-1"
+					     		type="number"
 					     		class="dire"
-					     		placeholder="_"  
+					     		placeholder="_"
 					     		max="9"
 					     		onfocus="this.select();"
 					     		pattern="[0-9]*"
@@ -190,10 +194,10 @@
 				     		<div class="col-xs-3">
 					     		<input v-model="verifycode2"
 					     		:class="{'error' : this.$parent.errors.verification_code[0], 'active' : verifycode2.length}"
-					     		id="verify-code-2" 
-					     		type="number" 
+					     		id="verify-code-2"
+					     		type="number"
 					     		class="dire"
-					     		placeholder="_"  
+					     		placeholder="_"
 					     		max="9"
 					     		onfocus="this.select();"
 					     		pattern="[0-9]*"
@@ -205,10 +209,10 @@
 				     		<div class="col-xs-3">
 					     		<input v-model="verifycode3"
 					     		:class="{'error' : this.$parent.errors.verification_code[0] , 'active' : verifycode3.length }"
-					     		id="verify-code-3" 
-					     		type="number" 
+					     		id="verify-code-3"
+					     		type="number"
 					     		class="dire"
-					     		placeholder="_"  
+					     		placeholder="_"
 					     		max="9"
 					     		onfocus="this.select();"
 					     		pattern="[0-9]*"
@@ -221,10 +225,10 @@
 				     		<div class="col-xs-3">
 					     		<input v-model="verifycode4"
 					     		:class="{'error' : this.$parent.errors.verification_code[0], 'active' : verifycode4.length}"
-					     		id="verify-code-4" 
-					     		type="number" 
+					     		id="verify-code-4"
+					     		type="number"
 					     		class="dire"
-					     		placeholder="_"  
+					     		placeholder="_"
 					     		max="9"
 					     		onfocus="this.select();"
 					     		pattern="[0-9]*"
@@ -236,16 +240,16 @@
 			     		</div>
 
 			     	</div>
-			     		
-	
+
+
 			       	<p class="error-message">
 			       		<span
 			       		 v-if="this.$parent.errors.verification_code[0]"
 			       	     v-text="this.$parent.errors.verification_code[0]"
 			       		>
-			       			
+
 			       		</span>
-			       	
+
 			       	</p>
 
 			       	<div class="timer-wrapper" v-if="$parent.step2.showTimer">
@@ -262,7 +266,7 @@
 
                     <div class="timer-wrapper"  v-else>
                          <button
-                        		
+
                                  class="timer-button"
                                  type="button"
                                  @click="reSendCode()"
@@ -270,11 +274,11 @@
                                  :value="$parent.step2.timeCounterDown">
 
                                  ارسال مجدد کد فعال سازی
-							
+
 		                     </button>
                     </div>
 
-			        <button class="submit-button disabled " 
+			        <button class="submit-button disabled "
 			        :class="{'active' : currentCode.length == 4}"
 			        @click.prevent="getVerificationCode()" >
 			        	بررسی کد
@@ -282,11 +286,11 @@
 
 		     </div>
 		</div>
-		
+
     </div>
 </template>
 
-<script> 
+<script>
 
 	export default{
 		data(){
@@ -303,7 +307,7 @@
 			 	this.$parent.goToStep(1);
 			 },
 			 getVerificationCode(){
-			 
+
 			 	this.sumCodeNumbers();
 			 	this.$emit("getVerificationCode", this.currentCode);
 
@@ -316,10 +320,10 @@
 		 	 	  $(element).focus();
 			 },
 			 keymonitor: function(event,index) {
-			       
+
 
 			       var keyWatch = this.$parent.toLatinNumbers(event.key);
-		
+
 			       	if(
 			       		(event.keyCode >= 48 && event.keyCode <= 57)
 			       	 || (event.keyCode >= 96 && event.keyCode <= 105 )
@@ -329,11 +333,11 @@
 			       	if (index <= 4) {
 			       		  this.tabTopNext('#verify-code-' + index);
 			       	}
-				       
-				         
+
+
 			         }
 			   },
-			
+
 		 },
 	    watch: {
 	  	  'verifycode1': function(value) {
@@ -355,21 +359,21 @@
 	  	  	this.verifycode4 = this.verifycode4.substring(0,1);
 	      }
 
-	     
+
 	    },
 	    mounted(){
 	    		if (this.$parent.isOsIOS()) {
 	    			for (var i = 0; i <= 4; i++) {
 	    				$('#verify-code-' + i).attr('type','text')
 	    			}
-		    		
-		    	}	
+
+		    	}
 
 	    	if (this.$parent.isOsIOS()) {
 	    		$('#phone-number').attr('type','text')
 	    	}
 	    }
-	  
+
 	}
 
 </script>

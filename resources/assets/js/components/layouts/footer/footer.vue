@@ -214,7 +214,7 @@
     }
 
     .enamad img {
-        width: 200px;
+        width: 120px;
         text-align: center;
         background: #fff;
         padding: 9px;
@@ -257,35 +257,35 @@
                     <div class="col-xs-12 col-sm-6 col-md-4">
                         <ul class="list-unstyled footer-list">
                             <li>
-                                <a class="smoothScroll" href="/pricing"
+                                <router-link class="smoothScroll" to="/pricing"
                                    @click="registerComponentStatistics('footer','pricing','click-on-pricing')">تعرفه
-                                    ها</a>
+                                    ها</router-link>
                             </li>
                             <li>
-                                <a class="smoothScroll" href="#"> قیمت روزانه</a>
+                                <router-link class="smoothScroll" to="#"> قیمت روزانه</router-link>
                             </li>
                             <li>
-                                <a class="smoothScroll" href="/privacy-and-policy"
+                                <router-link class="smoothScroll" to="/privacy-and-policy"
                                    @click="registerComponentStatistics('footer','privacy-and-policy','click-on-privacy-policy')">قوانین
-                                    و مقررات</a>
+                                    و مقررات</router-link>
                             </li>
                             <li>
 
-                                <a class="smoothScroll" href="/help"
+                                <router-link class="smoothScroll" to="/help"
                                    @click="registerComponentStatistics('footer','help','click-on-help')">اینکوباک چگونه
-                                    کار می کند؟ </a>
+                                    کار می کند؟ </router-link>
                             </li>
                             <li>
 
-                                <a class="smoothScroll" href="/about-us"
+                                <router-link class="smoothScroll" to="/about-us"
                                    @click="registerComponentStatistics('footer','about-us','click-on-about-us')">درباره
-                                    ما</a>
+                                    ما</router-link>
                             </li>
                             <li>
 
-                                <a class="smoothScroll" href="/contact-us"
+                                <router-link class="smoothScroll" to="/contact-us"
                                    @click="registerComponentStatistics('footer','contact-us','click-on-contact-us')">ارتباط
-                                    با ما</a>
+                                    با ما</router-link>
                             </li>
                         </ul>
                     </div>

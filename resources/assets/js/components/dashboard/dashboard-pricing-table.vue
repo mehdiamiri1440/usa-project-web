@@ -13,7 +13,7 @@
         font-weight: bold;
 
     }
-   
+
 
     @media screen and (max-width: 992px) {
 
@@ -24,7 +24,7 @@
     }
 
     @media screen and (max-width: 767px) {
-     
+
         .title {
             text-align: center;
             margin-bottom: 15px;
@@ -37,14 +37,14 @@
     <div>
 
         <section class="main-content col-xs-12">
-          
+
             <div  class="title col-xs-12">
                 <div  class="row">
                     <div  class="col-xs-12 col-sm-4 pull-right">
                         <h1>
                           تعرفه ها
                         </h1>
-                    </div> 
+                    </div>
                 </div>
             </div>
 

@@ -136,12 +136,12 @@
 
         <div class="carousel-img" >
 
-            <a v-show="isImageLoad" :href="link">
+            <router-link v-show="isImageLoad" :to="link">
                 <transition>
                     <img  @load="ImageLoaded"
                          :src="img" class="main-image">
                 </transition>
-            </a>
+            </router-link>
 
             <div v-show="!isImageLoad" class="lds-ring">
                 <div></div>

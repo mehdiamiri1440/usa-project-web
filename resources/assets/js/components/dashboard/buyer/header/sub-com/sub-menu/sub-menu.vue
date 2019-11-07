@@ -59,7 +59,17 @@
     }
 
     /*end style sub-header*/
+    @media screen and (max-width: 345px) {
+        .sub-header a {
+            font-size: 10px;
 
+        }
+        .sub-header {
+
+            bottom: -44px;
+
+        }
+    }
 </style>
 
 <template>
@@ -74,7 +84,7 @@
 </template>
 
 <script>
-    import {eventBus} from "../../../../../../router/dashboard_router";
+    import {eventBus} from "../../../../../../router/router";
 
     export default {
         data: function () {

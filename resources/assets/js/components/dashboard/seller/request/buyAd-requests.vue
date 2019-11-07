@@ -162,7 +162,7 @@
 
         margin: 0 auto;
 
-    }    
+    }
 
     .list-placeholder-wrapper .link p{
 
@@ -275,11 +275,11 @@
                     <ul class="list-placeholder">
                         <li v-for="item in 3" class="list-group-item  col-xs-12">
                             <p  class="list-title col-sm-3 col-xs-12">
-                                <span>میوه</span> 
+                                <span>میوه</span>
                                 <span> | </span>
-                                <span>خرما</span> 
+                                <span>خرما</span>
                                 <span> | زاهدی</span>
-                            </p> 
+                            </p>
 
                             <p class="needs col-sm-4 col-xs-12">
                                 <span  class="static-content">
@@ -301,18 +301,18 @@
 
                         </li>
                     </ul>
-                    
+
                     <div class="link">
                         <div class="link-wrapper-content">
                                <p>
-                             سقف تعداد درخواست های خریدی که به شما نمایش داده میشود 
+                             سقف تعداد درخواست های خریدی که به شما نمایش داده میشود
                              <span class="text-red">5</span>
-                              است 
+                              است
                                 </p>
                              <router-link class="green-button" :to="{ name : 'dashboardPricingTable' }">
                                 مشاهده تعرفه ها
                              </router-link>
-                        </div>  
+                        </div>
                     </div>
 
 
@@ -345,7 +345,7 @@
 </template>
 
 <script>
-    import {eventBus} from "../../../../router/dashboard_router";
+    import {eventBus} from "../../../../router/router";
 
     export default {
         props: [
@@ -385,6 +385,7 @@
             },
             openChat: function (buyAd) {
                 this.registerComponentStatistics('buyAdReply', 'openChat', 'click on open chatBox');
+                var self = this;
 
                 axios.post('/get_user_last_confirmed_profile_photo', {
                     'user_id': buyAd.myuser_id
@@ -401,7 +402,7 @@
 
                     axios.post('/set_last_chat_contact', contact)
                         .then(function (response) {
-                            window.location.href = '/dashboard/messages';
+                            self.$router.push('/seller/messages');
                         })
                         .catch(function (e) {
                             alert('Error');

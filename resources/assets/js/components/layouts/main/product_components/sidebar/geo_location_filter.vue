@@ -101,7 +101,7 @@ hr {
         </select>
       </div>
       <div class="sidebar-buttons">
-        <a href="#" class="btn green-button hidden-md hidden-lg" data-dismiss="modal">جستجو</a>
+        <router-link to="#" class="btn green-button hidden-md hidden-lg" data-dismiss="modal">جستجو</router-link>
 
         <a
           href="#"

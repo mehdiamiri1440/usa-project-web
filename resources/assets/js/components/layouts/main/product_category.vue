@@ -1,9 +1,9 @@
 
-<style >
+<style scoped>
 
     #main-content{
 
-          padding-top: 165px;
+        padding-top: 165px;
 
 
     }
@@ -12,7 +12,7 @@
 
         #main-content{
 
-              padding-top: 80px !important;
+            padding-top: 122px ;
         }
 
     }
@@ -25,10 +25,6 @@
         }
 
     }
-
-</style>
-<style scoped>
-
     .shadow-content{
         background: #fff;
     }
@@ -258,7 +254,7 @@
 
     .sub-header-fix {
         position: fixed;
-        top: 73px;
+        top: 56px;
         left: 0;
         right: 0;
         z-index: 2;
@@ -378,7 +374,7 @@
 
         .links-sub-header a{
 
-            padding: 23px 15px;
+            padding: 21px 15px 22px;
         }
 
         .sub-header {
@@ -388,7 +384,7 @@
         }
 
         .search-box {
-            margin: 10px auto ;
+            margin: 7px auto ;
         }
 
         .main-image {
@@ -402,7 +398,6 @@
         .sub-header {
 
             background: #f0f3f6;
-            padding-top: 7px;
 
         }
 
@@ -596,7 +591,7 @@
 
 
         <main id="main" class="container ">
-               
+
 
                     <div class="col-xs-12 col-lg-9">
                     <div class="row">
@@ -797,7 +792,7 @@
 <script>
     import ProductArticle from './product_components/product_article'
     import ProductAsideCategories from './product_components/sidebar/product_aside_categories'
-    import {eventBus} from "../../../../js/router/dashboard_router";
+    import {eventBus} from "../../../router/router";
     import StickySidebar from 'sticky-sidebar';
 
     var visible = false;
@@ -867,6 +862,7 @@
                 }
             },
             init: function () {
+                this.products = {};
                 this.scrollToTop();
                 var self = this;
                 var searchValue = this.searchValue;
@@ -905,7 +901,7 @@
 
             },
             feed() {
-            
+
                 var self = this;
                 if (this.searchText === '' && this.provinceId === '' && this.categoryId === '' && this.continueToLoadProducts) {
                     this.loadMoreActive = true;
@@ -1081,8 +1077,15 @@
             }
         },
         watch: {
+            '$route.params.categoryName':function(name){
+
+                 this.init();
+
+            },
+
             searchText: function () {
                 var self = this;
+
 
                 clearTimeout(this.searchTextTimeout);
 

@@ -286,7 +286,7 @@
 </template>
 
 <script>
-    import {eventBus} from "../../../../router/dashboard_router";
+    import {eventBus} from "../../../../router/router";
     import ProductCategory from './register-product-steps/product_category'
     import StartRegisterProduct from './register-product-steps/start_register_product'
     import StockAndPrice from './register-product-steps/stock_and_price'
@@ -743,6 +743,7 @@
             },
             openChat: function (buyAd) {
                 this.registerComponentStatistics('buyAdReplyAfterProductRegister', 'openChat', 'click on open chatBox');
+                var self = this;
 
                 axios.post('/get_user_last_confirmed_profile_photo', {
                     'user_id': buyAd.myuser_id
@@ -759,7 +760,11 @@
 
                     axios.post('/set_last_chat_contact', contact)
                         .then(function (response) {
-                            window.location.href = '/dashboard/messages';
+                            if (self.currentUser.user_info.is_seller == 1) {
+                                self.$router.push('/seller/messages');
+                            } else if (self.currentUser.user_info.is_buyer == 1) {
+                                self.$router.push('/buyer/messages');
+                            }
                         })
                         .catch(function (e) {
                             alert('Error');

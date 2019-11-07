@@ -1,5 +1,82 @@
-<style>
-.loading-height {
+<style scoped>
+  .green-button{
+    padding: 10px 35px;
+    width: initial;
+  }
+
+  .profile {
+
+    padding: 10px 15px 15px;
+    text-align: center;
+
+  }
+
+  .little_header .profile {
+
+    display: none;
+
+  }
+
+  .profile-img {
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    height: 55px;
+
+    width: 55px;
+
+    margin: 0 auto;
+
+    border: 2px solid #fff;
+
+    float: right;
+
+  }
+
+  .dark-profile-img {
+    overflow: hidden;
+    border-radius: 50%;
+    height: 85px;
+    width: 85px;
+    margin: 0 auto;
+    margin-left: 10px;
+    border: 2px solid #5B5C5D;
+    float: right;
+  }
+  .profile-img img {
+    height: 100%;
+  }
+
+  .profile-content {
+
+    width: calc(100% - 55px);
+
+    float: right;
+
+    text-align: right;
+
+    padding-right: 10px;
+
+  }
+
+  .profile-name {
+    margin: 8px 0;
+    font-size: 17px;
+  }
+
+  .profile-city {
+    font-size: 14px;
+    font-weight: 200;
+  }
+
+  .profile-city {
+    font-size: 14px;
+    font-weight: 200;
+  }
+
+  .loading-height {
   height: 10px !important;
   width: 100px;
 }
@@ -32,7 +109,7 @@
           <div class="profile-city" v-text="usercity"></div>
         </div>
 
-        <a :href="'/profile/'+ userprof" class="green-button">نمایش پروفایل من</a>
+        <router-link :to="'/profile/'+ userprof" class="green-button">نمایش پروفایل من</router-link>
       </div>
     </section>
 
@@ -46,7 +123,7 @@
           <div class="profile-city placeholder-content loading-height"></div>
         </div>
 
-        <a class="button-loading green-button placeholder-content"></a>
+        <span class="button-loading green-button placeholder-content"></span>
       </div>
     </section>
   </div>
