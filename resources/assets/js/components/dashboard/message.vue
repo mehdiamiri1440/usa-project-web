@@ -593,9 +593,9 @@
               <img v-else :src="defimgitem" />
             </div>
 
-            <a :href="'/profile/' + selectedContact.user_name">
+            <router-link :to="{path:'/profile/'+selectedContact.user_name}">
               <span v-text="selectedContact.first_name + ' ' + selectedContact.last_name"></span>
-            </a>
+            </router-link>
           </div>
           <div class="back-state pull-left">
             <a
@@ -972,33 +972,35 @@ export default {
       Push.Permission.request(function() {}, function() {});
     }
 
-    Echo.private("testChannel." + self.currentContactUserId).listen("newMessage", e => {
+    Echo.private("testChannel." + self.currentContactUserId).listen(
+      "newMessage",
+      e => {
+        var senderId = e.new_message.sender_id;
+        //update contact list
+        self.loadContactList();
 
-      var senderId = e.new_message.sender_id;
-      //update contact list
-      self.loadContactList();
+        if (self.currentContactUserId) {
+          if (self.currentContactUserId === senderId) {
+            self.chatMessages.push(e.new_message);
+            self.scrollToEnd(0);
 
-      if (self.currentContactUserId) {
-        if (self.currentContactUserId === senderId) {
-          self.chatMessages.push(e.new_message);
-          self.scrollToEnd(0);
-
-          if (self.isComponentActive == false) {
-            self.pushNotification(
-              "پیام جدید",
-              e.new_message.text,
-              "/dashboard/messages"
-            );
+            if (self.isComponentActive == false) {
+              self.pushNotification(
+                "پیام جدید",
+                e.new_message.text,
+                "/dashboard/messages"
+              );
+            }
           }
+        } else {
+          this.pushNotification(
+            "پیام جدید",
+            e.new_message.text,
+            "/dashboard/messages"
+          );
         }
-      } else {
-        this.pushNotification(
-          "پیام جدید",
-          e.new_message.text,
-          "/dashboard/messages"
-        );
       }
-    });
+    );
   },
   activated() {
     this.isComponentActive = true;

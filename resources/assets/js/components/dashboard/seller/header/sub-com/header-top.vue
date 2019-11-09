@@ -385,14 +385,14 @@ i.fa-home {
           <ul class="list-unstyled">
             <li class="list-item">
               <router-link
-                :to="{name : 'profileBasicBuyer'}"
+                :to="{name : 'profileBasicSeller'}"
                 @click="registerComponentStatistics('seller-dashboard-header','profile-link','click-on-profile-link-in-dashboard')"
               >پروفایل</router-link>
             </li>
 
             <li class="list-item">
               <router-link
-                :to="{name : 'passwordBuyer'}"
+                :to="{name : 'passwordSeller'}"
                 @click="registerComponentStatistics('seller-dashboard-header','change-password','click-on-change-password-dashboard')"
               >تغییر کلمه عبور</router-link>
             </li>
@@ -420,8 +420,8 @@ i.fa-home {
 
           <li>
             <router-link
-              :to="{name : 'indexPage'}"
               @click="registerComponentStatistics('dashboard-header','home-page-btn','click-on-home-page-in-dashboard')"
+              :to="{name : 'statusSeller'}"
             >
               <i class="fa fa-home" aria-hidden="true"></i>
             </router-link>

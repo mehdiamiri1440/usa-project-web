@@ -799,7 +799,7 @@
 
                             <p class="main-pop-up" v-text="popUpMsg"></p>
 
-                            <a href="/login" class="btn green-button">ورود/ثبت نام</a>
+                            <router-link data-dismiss='modal'  :to="{name : 'login'}" class="btn green-button">ورود/ثبت نام</router-link>
 
                             <br/>
                             <br/>

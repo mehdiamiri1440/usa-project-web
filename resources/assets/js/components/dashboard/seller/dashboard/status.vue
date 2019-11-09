@@ -4,8 +4,7 @@
 }
 
 .green-button {
-  margin: 0;
-  padding: 10px 35px;
+  padding: 12px 35px;
   width: initial;
 }
 
@@ -156,7 +155,6 @@
               class="green-button blue-brand-background"
             >
               <i class="far fa-credit-card"></i>
-
               مشاهده تعرفه ها
             </router-link>
           </div>
