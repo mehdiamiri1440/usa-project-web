@@ -136,7 +136,12 @@ i {
   }
 }
 
-@media screen and (max-width: 340px) {
+@media screen and (max-width: 370px) {
+  .article-action-buttons button{
+    margin-top: 7px;
+    width: 100%; 
+  }
+
   .article-action-buttons {
     float: none !important;
 

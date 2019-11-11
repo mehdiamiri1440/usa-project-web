@@ -274,7 +274,7 @@ ul {
                 </p>
                 <router-link
                   class="green-button"
-                  :to="{ name : 'dashboardPricingTable' }"
+                  :to="{ name : 'dashboardPricingTableSeller' }"
                 >مشاهده تعرفه ها</router-link>
               </div>
             </div>

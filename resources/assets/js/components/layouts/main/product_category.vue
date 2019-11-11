@@ -3,7 +3,7 @@
 
     #main-content{
 
-        padding-top: 165px;
+        padding-top: 122px;
 
 
     }
@@ -17,14 +17,7 @@
 
     }
 
-    @media screen and (max-width: 767px) {
 
-        #main-content{
-
-            padding-top: 150px !important;
-        }
-
-    }
     .shadow-content{
         background: #fff;
     }
@@ -372,11 +365,9 @@
 
     @media screen and (max-width: 767px) {
 
-        .links-sub-header a{
-
-            padding: 21px 15px 22px;
+        .main-content, #main {
+            padding: 0;
         }
-
         .sub-header {
             position: fixed;
             z-index: 1;
@@ -384,7 +375,8 @@
         }
 
         .search-box {
-            margin: 7px auto ;
+            margin: 7px auto;
+            padding: 0;
         }
 
         .main-image {
@@ -590,7 +582,7 @@
         </div>
 
 
-        <main id="main" class="container ">
+         <main id="main" class="container ">
 
 
                     <div class="col-xs-12 col-lg-9">
@@ -785,8 +777,8 @@
                     </aside>
 
 
-        </main>
 
+        </main>
     </div>
 </template>
 <script>

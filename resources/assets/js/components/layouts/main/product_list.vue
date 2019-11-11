@@ -323,6 +323,7 @@
         width: 56px;
         margin-top: -15px;
     }
+
     @media screen and (max-width: 1199px) {
         .search-box input {
             width: calc(100% - 75px);
@@ -790,7 +791,7 @@
                 categoryId: '',
                 subCategoryId: '',
                 cityId: '',
-                searchValue: this.$route.params.searchText,
+                searchValue: "",
                 scrolled: false,
                 productCountInPage: 10,
                 productCountInEachLoad: 10,
@@ -828,7 +829,8 @@
             },
             init: function () {
                 var self = this;
-                var searchValue = this.searchValue;
+
+                var searchValue = this.searchText;
                 var searchValueText = searchValue;
 
                 axios.post('/user/profile_info')
@@ -838,7 +840,7 @@
                         if (searchValueText) {
                             self.registerComponentStatistics('homePage', 'search-text', searchValueText);
                             self.searchText = searchValueText;
-                             eventBus.$emit('submiting', false);
+                            eventBus.$emit('submiting', false);
                         }
                         else {
                             self.loading = true;
@@ -847,12 +849,14 @@
                                 to_record_number: self.productCountInPage,
 
                             }).then(function (response) {
+                                window.localStorage.setItem('textSearch', "");
                                 self.products = response.data.products;
                                 self.loading = false;
-                                 eventBus.$emit('submiting', false);
+                                eventBus.$emit('submiting', false);
                                 setTimeout(function(){
                                     self.sidebarScroll();
                                 },500)
+
                             });
                         }
                     });
@@ -886,7 +890,7 @@
 
                 if (this.currentUser.profile) {
                     if (this.currentUser.user_info.is_buyer) {
-                        window.location.href = '/dashboard/register-request';
+                        this.$router.push({name : 'registerRequestBuyer'})
                     }
                     else {
                         this.popUpMsg = 'حساب کاربری شما از نوع خریدار نیست.';
@@ -912,12 +916,12 @@
                     if (this.currentUser.user_info.is_seller) {
                         this.registerComponentStatistics('product-list', 'register-product', 'seller clicks on plus button');
 
-                        window.location.href = '/dashboard/register-product';
+                        this.$router.push({name : 'registerProductSeller'})
                     }
                     else if (this.currentUser.user_info.is_buyer) {
                         this.registerComponentStatistics('product-list', 'register-request', 'seller clicks on plus button');
 
-                        window.location.href = '/dashboard/register-request';
+                        this.$router.push({name : 'registerProductSeller'})
                     }
                 }
                 else {
@@ -1175,8 +1179,11 @@
 
             },
         watch: {
-            searchText: function () {
+            searchText: function (value) {
+
                 var self = this;
+
+                eventBus.$emit('textSearch', value)
 
                 clearTimeout(this.searchTextTimeout);
 
@@ -1195,13 +1202,24 @@
             },
         },
         created() {
+
+            eventBus.$on("textSearch", event => {
+                this.searchText = event;
+
+            });
+
+            this.searchText = window.localStorage.getItem('textSearch');
+
             gtag('config', 'UA-129398000-1', {'page_path': '/product-list'});
 
             document.addEventListener('click', this.documentClick);
         },
         mounted() {
+
+
             this.scrollToTop();
             this.init();
+
 
             this.stopLoader();
 

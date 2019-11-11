@@ -169,7 +169,7 @@ span {
   }
 }
 
-@media screen and (max-width: 340px) {
+@media screen and (max-width: 370px) {
   .main-article-contents-image-wrapper,
   .main-article-contents,
   .main-article-contents > a {

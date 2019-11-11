@@ -1845,7 +1845,14 @@
             },
             search: function () {
                 if (this.mainSearchBoxText !== '') {
-                    this.$router.push('/product-list/' + this.mainSearchBoxText);
+
+                    eventBus.$emit('textSearch',this.mainSearchBoxText);
+
+                    window.localStorage.setItem('textSearch', this.mainSearchBoxText);
+
+                    this.$router.push({name : 'productList'});
+
+
                 }
             },
             generateProductLink: function (product) {
@@ -1920,6 +1927,10 @@
             this.$nextTick(this.stopLoader());
         },
         created() {
+            eventBus.$on("textSearch", event => {
+                this.mainSearchBoxText = event;
+            });
+
             gtag('config', 'UA-129398000-1', {'page_path': '/home-page'});
 
             document.addEventListener('click', this.documentClick);
@@ -1935,14 +1946,16 @@
             });
         },
         watch: {
-            mainSearchBoxText: function () {
+            mainSearchBoxText: function (value) {
                 this.enterKeyActiveForSearch = this.mainSearchBoxText !== '';
+                eventBus.$emit('textSearch', value)
+
             }
         },
         metaInfo() {
 
             return {
-                title: 'سامانه خرید و فروش عمده محصولات کشاورزی',
+                title: ' اینکوباک | بازار خرید و فروش عمده محصولات کشاورزی ',
                 titleTemplate: 'اینکوباک | %s',
                 meta: [
                     {
@@ -1963,7 +1976,7 @@
                     },
                     {
                         'property': 'og:title',
-                        'content': 'اینکوباک | سامانه خرید و فروش عمده محصولات کشاورزی'
+                        'content': ' اینکوباک | بازار خرید و فروش عمده محصولات کشاورزی '
                     },
 
                 ]

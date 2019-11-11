@@ -122,18 +122,20 @@
 
 @media screen and (max-width: 767px) {
   .box-upgrade-link {
-    margin-top: 45px;
+    margin-top: 0;
   }
 
   .green-button {
     padding: 13px 20px;
     font-size: 15px;
     font-weight: bold;
+    margin: 9px auto;
   }
 
   .header-links-wrapper a {
     margin-left: 0;
     width: 100%;
+
   }
 
   .title {

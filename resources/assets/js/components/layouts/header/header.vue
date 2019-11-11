@@ -1086,7 +1086,6 @@
                 </ul>
             </div>
         </nav>
-
     </div>
 </template>
 <script>
@@ -1236,9 +1235,17 @@
             },
             search: function () {
                 if (this.mainSearchBoxText !== '') {
-                    this.$router.push('/product-list/' + this.mainSearchBoxText);
+
+                    eventBus.$emit('textSearch',this.mainSearchBoxText);
+                    
+                    window.localStorage.setItem('textSearch', this.mainSearchBoxText);
+
+                    this.$router.push({name : 'productList'});
+
+
                 }
             },
+
         },
         mounted() {
 
@@ -1323,8 +1330,13 @@
             eventBus.$on("cancelButtonText", event => {
                 this.cancelButtonText = event;
             });
+
             eventBus.$on("productId", event => {
                 this.productId = event;
+            });
+
+            eventBus.$on("textSearch", event => {
+                this.mainSearchBoxText = event;
             });
 
             $(window).resize(this.jqUpdateSize); // When the browser changes size
@@ -1346,9 +1358,11 @@
             });
         },
         watch: {
-            mainSearchBoxText: function () {
+            mainSearchBoxText: function (value) {
                 this.enterKeyActiveForSearch = this.mainSearchBoxText !== '';
+                eventBus.$emit('textSearch', value)
             }
+
         },
     };
 </script>

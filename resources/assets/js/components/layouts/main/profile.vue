@@ -1,7 +1,7 @@
 <style scoped>
 
     .info_user_wrapper_mobile .green-button,
-    .back_page>.green-button {
+    .back_page  .green-button {
         margin: 3px 0;
         padding: 4px 0;
     }
@@ -685,20 +685,22 @@
 
                                 <div class="col-xs-12">
                                     <div v-if="currentUser.user_info">
+                                    
+                                        <div v-if="currentUser.user_info.id === profileOwner.user_info.id">
+                                            <router-link :to="{name : 'profileBasicSeller'}" class="green-button edit"
+                                               v-if="currentUser.user_info.is_seller == 1 ">
 
-                                        <router-link :to="{name : 'profileBasicSeller'}" class="green-button edit"
-                                           v-if="currentUser.user_info.is_seller == 1 && currentUser.user_info.id === profileOwner.user_info.id">
+                                                <i class="fa fa-pencil-alt"></i>
+                                                ویرایش پروفایل
+                                            </router-link>
 
-                                            <i class="fa fa-pencil-alt"></i>
-                                            ویرایش پروفایل
-                                        </router-link>
+                                            <router-link :to="{name : 'profileBasicBuyer'}" class="green-button edit"
+                                               v-if="currentUser.user_info.is_seller == 0 ">
 
-                                        <router-link :to="{name : 'profileBasicBuyer'}" class="green-button edit"
-                                           v-if="currentUser.user_info.is_seller == 0 && currentUser.user_info.id === profileOwner.user_info.id">
-
-                                            <i class="fa fa-pencil-alt"></i>
-                                            ویرایش پروفایل
-                                        </router-link>
+                                                <i class="fa fa-pencil-alt"></i>
+                                                ویرایش پروفایل
+                                            </router-link>
+                                        </div>
 
                                         <a v-else href="#" @click.prevent="openChat()" class="green-button edit">
 
@@ -760,24 +762,46 @@
 
                                 <div class="title_content col-xs-12">
                                     <div class="back_page col-xs-12 col-sm-4 col-md-3">
-                                        <router-link   :to="{name : 'profileBasicBuyer'}" class="green-button edit"
-                                           v-if="currentUser.user_info &&
-                                            currentUser.user_info.id ===
-                                            profileOwner.user_info.id"
-                                           @click="registerComponentStatistics('profileView','editProfile','click on edit profile')">
+                                        
+                                        <div v-if="currentUser.user_info">
+                                    
+                                            <div v-if="currentUser.user_info.id === profileOwner.user_info.id">
+                                                <router-link :to="{name : 'profileBasicSeller'}" 
+                                                @click="registerComponentStatistics('profileView','editProfile','click on edit profile')"
+                                                class="green-button edit"
+                                                   v-if="currentUser.user_info.is_seller == 1 ">
 
-                                            <i class="fa fa-pencil-alt"></i>
-                                            ویرایش پروفایل
+                                                    <i class="fa fa-pencil-alt"></i>
+                                                    ویرایش پروفایل
+                                                </router-link>
 
-                                        </router-link>
+                                                <router-link :to="{name : 'profileBasicBuyer'}" 
+                                                class="green-button edit"
+                                                @click="registerComponentStatistics('profileView','editProfile','click on edit profile')"
+                                                   v-if="currentUser.user_info.is_seller == 0 ">
 
-                                        <a href="" @click.prevent="openChat()"
-                                           class="green-button edit"
-                                           v-else>
+                                                    <i class="fa fa-pencil-alt"></i>
+                                                    ویرایش پروفایل
+                                                </router-link>
+                                            </div>
+                                            
+                                            <a v-else href="#" @click.prevent="openChat()" class="green-button edit">
+
+                                                <i class="fa fa-envelope"></i>
+                                                ارسال پیام
+                                            </a>
+
+                                        </div>
+                                        
+
+                                        <a v-else href="" @click.prevent="openChat()"
+                                            class="green-button edit"
+                                            v-else>
 
                                             <i class="fa fa-envelope"></i>
-                                            ارسال پیام
+                                                ارسال پیام
                                         </a>
+
 
                                         <button class="btn btn-copy"
                                                 @click="copyProfileLinkToClipBoard"
