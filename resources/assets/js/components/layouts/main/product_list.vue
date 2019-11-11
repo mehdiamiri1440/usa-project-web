@@ -607,7 +607,7 @@
                                 </div>
 
                         </section>
-
+<!-- test -->
                         <section class="main-content  col-xs-12"
                                  v-else-if="products.length === 0 && searchActive === true">
                             <p></p>
