@@ -104,7 +104,7 @@
                     is-seller = "{{session('is_seller')}}"
                     assets = "{{asset('')}}"
                     storage-path = "{{url('storage/')}}"
-                    profile-photo="{{session('profile_photo')}}"
+                    profile-photo="{{session('s_photo')}}"
                     user-full-name="{{session('full_name')}}"
                     user-logout-path="{{route('logout')}}"
             />

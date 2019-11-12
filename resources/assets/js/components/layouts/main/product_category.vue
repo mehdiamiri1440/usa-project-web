@@ -682,10 +682,10 @@
                             <br/>
 
                             <div class="text-center">
-                                <a class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">
+                                <router-link :to="{name:'registerRequestBuyer'}" class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">
                                     درخواست
                                     خرید
-                                </a>
+                                </router-link>
 
                                 <br/>
                                 <a class="green-button col-xs-4 " @click.prevent="resetFilter()">نمایش همه محصولات</a>
