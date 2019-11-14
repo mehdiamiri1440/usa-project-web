@@ -1118,7 +1118,7 @@
             "storage_path",
             "login_page_path",
             "loading",
-            "finish_load_img"
+            "finish_load_img",
         ],
         methods: {
             /*redirectToLogin: function () {
@@ -1235,14 +1235,16 @@
             },
             search: function () {
                 if (this.mainSearchBoxText !== '') {
-
-                    eventBus.$emit('textSearch',this.mainSearchBoxText);
                     
-                    window.localStorage.setItem('textSearch', this.mainSearchBoxText);
-
-                    this.$router.push({name : 'productList'});
-
-
+                    let searchValue = this.mainSearchBoxText;
+                    let queryValue = searchValue.replace(/ /g,'+');
+                    
+                    this.$router.push({
+                        name : 'productList',
+                        query :{
+                            s:queryValue
+                        }
+                    });
                 }
             },
 
@@ -1252,7 +1254,6 @@
 
 
             // scroll handeling hide in web
-
              var lastScroll = 0;
              var navbar = $('nav.navbar .incobac-sub-menu');
             $(window).scroll(function(){
@@ -1348,21 +1349,16 @@
 
             window.addEventListener('keydown', function (event) {
                 if (event.keyCode === 13) {
-                    if (self.enterKeyActiveForSearch) {
                         self.search();
                         $('#incobac-nav').collapse('hide');
                         $('#web-profile-items').collapse('hide');
-
-                    }
                 }
             });
         },
         watch: {
-            mainSearchBoxText: function (value) {
-                this.enterKeyActiveForSearch = this.mainSearchBoxText !== '';
-                eventBus.$emit('textSearch', value)
+            mainSearchBoxText:function(value){
+                eventBus.$emit('textSearch',value);
             }
-
         },
     };
 </script>

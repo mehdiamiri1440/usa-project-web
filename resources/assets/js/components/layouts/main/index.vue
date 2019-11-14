@@ -1845,14 +1845,18 @@
             },
             search: function () {
                 if (this.mainSearchBoxText !== '') {
-
+                    
                     eventBus.$emit('textSearch',this.mainSearchBoxText);
-
-                    window.localStorage.setItem('textSearch', this.mainSearchBoxText);
-
-                    this.$router.push({name : 'productList'});
-
-
+                    
+                    let searchValue = this.mainSearchBoxText;
+                    let queryValue = searchValue.replace(/ /g,'+');
+                    
+                    this.$router.push({
+                        name : 'productList',
+                        query :{
+                            s:queryValue
+                        }
+                    });
                 }
             },
             generateProductLink: function (product) {
