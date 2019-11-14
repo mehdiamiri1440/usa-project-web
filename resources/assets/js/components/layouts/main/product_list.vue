@@ -829,8 +829,14 @@
             },
             init: function () {
                 var self = this;
-
-                var searchValue = this.searchText;
+                
+                if(this.$route.query.s){
+                     var searchValue = this.$route.query.s.split('+').join(' ')  
+                }
+                else{
+                    var searchValue = '';
+                }
+                
                 var searchValueText = searchValue;
 
                 axios.post('/user/profile_info')
@@ -847,9 +853,7 @@
                             axios.post('/user/get_product_list', {
                                 from_record_number: 0,
                                 to_record_number: self.productCountInPage,
-
                             }).then(function (response) {
-                                window.localStorage.setItem('textSearch', "");
                                 self.products = response.data.products;
                                 self.loading = false;
                                 eventBus.$emit('submiting', false);
@@ -970,12 +974,24 @@
                     searchObject.city_id = this.cityId;
                 }
                 if (this.searchText) {
+                    this.$router.replace({
+                        name : 'productList',
+                        query :{
+                            s:this.searchText.replace(/ /g,'+')
+                        }
+                    });
                     searchObject.search_text = this.searchText;
                 }
+                
 
                 if (jQuery.isEmptyObject(searchObject)) {
                     searchObject.from_record_number = 0;
-                    searchObject.to_record_number = 5;
+                    searchObject.to_record_number = 10;
+                    if(this.searchText == ""){
+                        this.$router.push({
+                            name : 'productList'
+                        });
+                    }
                 }
 
                 axios.post('/user/get_product_list', searchObject)
@@ -985,7 +1001,7 @@
                         self.scrollToTop();
                     })
                     .catch(function (err) {
-                        alert('error');
+                        alert('خطایی رخ داده است. دوباره تلاش کنید.');
                     });
 
             },
@@ -1175,16 +1191,15 @@
 
                         }
 
-               }
-
+               },
             },
         watch: {
             searchText: function (value) {
 
                 var self = this;
-
-                eventBus.$emit('textSearch', value)
-
+                
+                eventBus.$emit('textSearch',value);
+        
                 clearTimeout(this.searchTextTimeout);
 
                 this.searchTextTimeout = setTimeout(function () {
@@ -1194,6 +1209,12 @@
                 }, 1500);
 
             },
+            '$route':function(){
+                
+                if(this.$route.query.s){
+                    this.searchText = this.$route.query.s.split('+').join(' ');
+                } 
+            },
 
             bottom(bottom) {
                 if (bottom) {
@@ -1202,21 +1223,15 @@
             },
         },
         created() {
-
+            gtag('config', 'UA-129398000-1', {'page_path': '/product-list'});
+            
             eventBus.$on("textSearch", event => {
                 this.searchText = event;
-
             });
-
-            this.searchText = window.localStorage.getItem('textSearch');
-
-            gtag('config', 'UA-129398000-1', {'page_path': '/product-list'});
 
             document.addEventListener('click', this.documentClick);
         },
         mounted() {
-
-
             this.scrollToTop();
             this.init();
 
