@@ -408,6 +408,7 @@ const router = new Router({
                     components: {
                         default: productList,
                     },
+                    props:true
                 },
                 {
                     path: 'product-view/:categoryName/:subCategoryName/:id',
