@@ -951,7 +951,7 @@
                 this.subCategoryId = '';
                 this.cityId = '';
 
-                this.init();
+                this.applyFilter();
 
             },
             applyFilter: function () {

@@ -1012,7 +1012,7 @@
 
                 if (jQuery.isEmptyObject(searchObject)) {
                     searchObject.from_record_number = 0;
-                    searchObject.to_record_number = 5;
+                    searchObject.to_record_number = 10;
                 }
 
                 axios.post('/user/get_product_list', searchObject)
