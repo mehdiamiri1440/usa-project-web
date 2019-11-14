@@ -22,7 +22,7 @@ hr {
   text-align: center;
 }
 
-.sidebar-buttons a {
+.sidebar-buttons a, .sidebar-buttons button{
   width: initial;
 
   border: none;
@@ -64,7 +64,7 @@ hr {
 }
 
 @media screen and (max-width: 992px) {
-  .sidebar-buttons a {
+  .sidebar-buttons a, .sidebar-buttons button{
     width: 150px;
     border: none;
     padding: 9px 0;
@@ -101,7 +101,7 @@ hr {
         </select>
       </div>
       <div class="sidebar-buttons">
-        <router-link to="#" class="btn green-button hidden-md hidden-lg" data-dismiss="modal">جستجو</router-link>
+        <button class="btn green-button hidden-md hidden-lg" data-dismiss="modal">جستجو</button>
 
         <a
           href="#"
