@@ -1093,13 +1093,13 @@
                                         class="list-group-item  col-xs-12">
                                         <p class="list-title col-sm-4 col-xs-12">
 
-                                            <span v-text="buyAd.category_name"></span>
+                                            <span v-if="buyAd.category_name" v-text="buyAd.category_name"></span>
 
-                                            <span> | </span>
+                                            <span v-if="buyAd.subcategory_name"> | </span>
 
-                                            <span v-text="buyAd.subcategory_name"></span>
+                                            <span v-if="buyAd.subcategory_name" v-text="buyAd.subcategory_name"></span>
 
-                                            <span v-text="'| ' + buyAd.name"></span>
+                                            <span v-if="buyAd.name" v-text="'| ' + buyAd.name"></span>
 
                                         </p>
 
@@ -1959,7 +1959,7 @@
         metaInfo() {
 
             return {
-                title: ' اینکوباک | بازار خرید و فروش عمده محصولات کشاورزی ',
+                title: ' بازار خرید و فروش عمده محصولات کشاورزی ',
                 titleTemplate: 'اینکوباک | %s',
                 meta: [
                     {

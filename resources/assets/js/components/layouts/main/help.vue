@@ -650,12 +650,36 @@
         updated: function () {
             this.$nextTick(this.stopLoader());
         },
+        metaInfo() {
 
-//        beforeCreate:function(){
-//            var self = this;
-//            window.addEventListener("load", function(event) {
-//                    self.stopLoader();
-//            });
-//        }
+            return {
+                title: ' اینکوباک چگونه کار می کند؟ ',
+                titleTemplate: 'اینکوباک | %s',
+                meta: [
+                    {
+                        name: 'description',
+                        content: 'مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
+                    },
+                    {
+                        name: 'author',
+                        content: 'اینکوباک'
+                    },
+                    {
+                        'property': 'og:description',
+                        'content': 'مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
+                    },
+                    {
+                        'property': 'og:site_name',
+                        'content': 'اینکوباک بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران'
+                    },
+                    {
+                        'property': 'og:title',
+                        'content': ' اینکوباک | بازار خرید و فروش عمده محصولات کشاورزی '
+                    },
+
+                ]
+
+            }
+        }
     }
 </script>

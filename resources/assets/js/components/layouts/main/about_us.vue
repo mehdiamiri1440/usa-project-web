@@ -205,5 +205,36 @@
         created() {
             gtag('config', 'UA-129398000-1', {'page_path': '/about-us'});
         },
+        metaInfo() {
+
+            return {
+                title: ' درباره ما ',
+                titleTemplate: 'اینکوباک | %s',
+                meta: [
+                    {
+                        name: 'description',
+                        content: 'مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
+                    },
+                    {
+                        name: 'author',
+                        content: 'اینکوباک'
+                    },
+                    {
+                        'property': 'og:description',
+                        'content': 'مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
+                    },
+                    {
+                        'property': 'og:site_name',
+                        'content': 'اینکوباک بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران'
+                    },
+                    {
+                        'property': 'og:title',
+                        'content': ' اینکوباک | بازار خرید و فروش عمده محصولات کشاورزی '
+                    },
+
+                ]
+
+            }
+        }
     }
 </script>
