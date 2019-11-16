@@ -1,17 +1,13 @@
 
-<style >
-
-    #main-content{
-
-          padding-top: 165px;
-
-
-    }
-
-</style>
 
 <style scoped>
 
+    #main-content{
+
+        padding-top: 122px;
+
+
+    }
     .shadow-content{
         background: #fff;
     }
@@ -88,7 +84,7 @@
         -webkit-box-shadow: 0 3px 15px rgba(0,0,0,0.30);
         box-shadow: 0 3px 15px rgba(0,0,0,0.30);
         text-align: center;
-        padding-top: 15px;
+        padding-top: 12px;
         font-size: 23px;
     }
 
@@ -159,7 +155,7 @@
         background: none;
         border: none;
         position: absolute;
-        right: 18px;
+        right: 3px;
         top: 6px;
         border-left: 1px solid;
         color: #666;
@@ -176,6 +172,7 @@
         background: #000546;
         color: #fff;
     }
+
 
     .links-sub-header {
         direction: rtl;
@@ -203,13 +200,6 @@
         height: 3px;
         width: 100%;
     }
-
-    #main {
-
-        position:relative;
-
-    }
-
 
     .main-content > h4 {
         margin: 30px auto;
@@ -241,7 +231,7 @@
 
     .sub-header-fix {
         position: fixed;
-        top: 73px;
+        top: 56px;
         left: 0;
         right: 0;
         z-index: 2;
@@ -333,6 +323,7 @@
         width: 56px;
         margin-top: -15px;
     }
+
     @media screen and (max-width: 1199px) {
         .search-box input {
             width: calc(100% - 75px);
@@ -358,6 +349,9 @@
 
     @media screen and (max-width: 767px) {
 
+        .main-content, #main {
+            padding: 0;
+        }
         .sub-header {
             position: fixed;
             z-index: 1;
@@ -365,7 +359,8 @@
         }
 
         .search-box {
-            margin: 4px auto 13px;
+            margin: 7px auto;
+            padding: 0;
         }
 
         .main-image {
@@ -379,7 +374,6 @@
         .sub-header {
 
             background: #f0f3f6;
-            padding-top: 20px;
 
         }
 
@@ -530,7 +524,7 @@
             <a href="#" @click.prevent="addProductOrRequest()"><i class="fa fa-plus"></i> </a>
         </div>
 
-        <div class="sub-header-fix sub-header container-fluid">
+        <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
             <div class="container">
 
                 <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
@@ -613,14 +607,14 @@
                                 </div>
 
                         </section>
-
+<!-- test -->
                         <section class="main-content  col-xs-12"
                                  v-else-if="products.length === 0 && searchActive === true">
                             <p></p>
 
                             <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
 
-                            <p>شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+                            <p>شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
 
                             <br/>
 
@@ -636,7 +630,7 @@
 
                             <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
 
-                            <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+                            <p class="text-center" dir="rtl">شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
                             <br/>
 
                             <div class="text-center">
@@ -658,7 +652,7 @@
 
                             <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
 
-                            <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+                            <p class="text-center" dir="rtl">شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
 
                             <br/>
 
@@ -757,7 +751,7 @@
 
                     </aside>
 
-               
+
 
         </main>
     </div>
@@ -765,7 +759,7 @@
 <script>
     import ProductArticle from './product_components/product_article'
     import ProductAsideCategories from './product_components/sidebar/product_aside_categories'
-    import {eventBus} from "../../../../js/router/dashboard_router";
+    import {eventBus} from "../../../router/router";
 
     var visible = false;
     export default {
@@ -797,7 +791,7 @@
                 categoryId: '',
                 subCategoryId: '',
                 cityId: '',
-                searchValue: this.$route.params.searchText,
+                searchValue: "",
                 scrolled: false,
                 productCountInPage: 10,
                 productCountInEachLoad: 10,
@@ -835,7 +829,14 @@
             },
             init: function () {
                 var self = this;
-                var searchValue = this.searchValue;
+                
+                if(this.$route.query.s){
+                     var searchValue = this.$route.query.s.split('+').join(' ')  
+                }
+                else{
+                    var searchValue = '';
+                }
+                
                 var searchValueText = searchValue;
 
                 axios.post('/user/profile_info')
@@ -845,21 +846,21 @@
                         if (searchValueText) {
                             self.registerComponentStatistics('homePage', 'search-text', searchValueText);
                             self.searchText = searchValueText;
-                             eventBus.$emit('submiting', false);
+                            eventBus.$emit('submiting', false);
                         }
                         else {
                             self.loading = true;
                             axios.post('/user/get_product_list', {
                                 from_record_number: 0,
                                 to_record_number: self.productCountInPage,
-
                             }).then(function (response) {
                                 self.products = response.data.products;
                                 self.loading = false;
-                                 eventBus.$emit('submiting', false);
+                                eventBus.$emit('submiting', false);
                                 setTimeout(function(){
                                     self.sidebarScroll();
                                 },500)
+
                             });
                         }
                     });
@@ -893,7 +894,7 @@
 
                 if (this.currentUser.profile) {
                     if (this.currentUser.user_info.is_buyer) {
-                        window.location.href = '/dashboard/register-request';
+                        this.$router.push({name : 'registerRequestBuyer'})
                     }
                     else {
                         this.popUpMsg = 'حساب کاربری شما از نوع خریدار نیست.';
@@ -919,12 +920,12 @@
                     if (this.currentUser.user_info.is_seller) {
                         this.registerComponentStatistics('product-list', 'register-product', 'seller clicks on plus button');
 
-                        window.location.href = '/dashboard/register-product';
+                        this.$router.push({name : 'registerProductSeller'})
                     }
                     else if (this.currentUser.user_info.is_buyer) {
                         this.registerComponentStatistics('product-list', 'register-request', 'seller clicks on plus button');
 
-                        window.location.href = '/dashboard/register-request';
+                        this.$router.push({name : 'registerProductSeller'})
                     }
                 }
                 else {
@@ -950,7 +951,7 @@
                 this.subCategoryId = '';
                 this.cityId = '';
 
-                this.init();
+                this.applyFilter();
 
             },
             applyFilter: function () {
@@ -973,12 +974,24 @@
                     searchObject.city_id = this.cityId;
                 }
                 if (this.searchText) {
+                    this.$router.replace({
+                        name : 'productList',
+                        query :{
+                            s:this.searchText.replace(/ /g,'+')
+                        }
+                    });
                     searchObject.search_text = this.searchText;
                 }
+                
 
                 if (jQuery.isEmptyObject(searchObject)) {
                     searchObject.from_record_number = 0;
-                    searchObject.to_record_number = 5;
+                    searchObject.to_record_number = 10;
+                    if(this.searchText == ""){
+                        this.$router.push({
+                            name : 'productList'
+                        });
+                    }
                 }
 
                 axios.post('/user/get_product_list', searchObject)
@@ -988,7 +1001,7 @@
                         self.scrollToTop();
                     })
                     .catch(function (err) {
-                        alert('error');
+                        alert('خطایی رخ داده است. دوباره تلاش کنید.');
                     });
 
             },
@@ -1022,7 +1035,7 @@
                    var sidebar = new StickySidebar('#sidebar', {
                         containerSelector: '#article-list',
                         innerWrapperSelector: '.sidebar__inner',
-                        topSpacing: 160,
+                        topSpacing: 122,
                         resizeSensor: true,
 
                     });
@@ -1178,13 +1191,15 @@
 
                         }
 
-               }
-
+               },
             },
         watch: {
-            searchText: function () {
-                var self = this;
+            searchText: function (value) {
 
+                var self = this;
+                
+                eventBus.$emit('textSearch',value);
+        
                 clearTimeout(this.searchTextTimeout);
 
                 this.searchTextTimeout = setTimeout(function () {
@@ -1193,6 +1208,12 @@
                     self.applyFilter();
                 }, 1500);
 
+            },
+            '$route':function(){
+                
+                if(this.$route.query.s){
+                    this.searchText = this.$route.query.s.split('+').join(' ');
+                } 
             },
 
             bottom(bottom) {
@@ -1203,12 +1224,17 @@
         },
         created() {
             gtag('config', 'UA-129398000-1', {'page_path': '/product-list'});
+            
+            eventBus.$on("textSearch", event => {
+                this.searchText = event;
+            });
 
             document.addEventListener('click', this.documentClick);
         },
         mounted() {
             this.scrollToTop();
             this.init();
+
 
             this.stopLoader();
 

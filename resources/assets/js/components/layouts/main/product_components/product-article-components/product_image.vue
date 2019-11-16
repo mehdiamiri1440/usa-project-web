@@ -115,7 +115,7 @@
         }
     }
 
-    @media screen and (max-width: 340px) {
+    @media screen and (max-width: 370px) {
         .main-article-image {
 
             width: initial;

@@ -6,7 +6,6 @@
 
     #faq {
         direction: rtl;
-        padding-top: 105px;
         padding-bottom: 0;
         background-position: 50% 60px;
         background: #f6f6f6;
@@ -18,26 +17,12 @@
         animation-delay: 0.9s;
         animation-name: fadeInUp;
     }
-  
+
 
 
 </style>
 <template>
-    <div>
-
-        <section id="intro" class="parallax-section">
-            <div class="container-fluid main_hero_section col-xs-12">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h1 class="wow fadeIn" data-wow-delay="1.2s">
-                                تعرفه ها
-                            </h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="main-content-index-pages">
 
         <section id="faq" class="parallax-section">
             <div class="container">
@@ -53,9 +38,9 @@
 
 
 <script>
-    import {eventBus} from "../../../router/dashboard_router";
+    import {eventBus} from "../../../router/router";
     import PricingTableComponent from './pricing-table-content'
- 
+
     export default {
         components:{
             PricingTableComponent
@@ -88,6 +73,37 @@
         },
         created() {
             gtag('config', 'UA-129398000-1', {'page_path': '/pricing'});
+        },
+        metaInfo() {
+
+            return {
+                title: ' تعرفه ها ',
+                titleTemplate: 'اینکوباک | %s',
+                meta: [
+                    {
+                        name: 'description',
+                        content: 'مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
+                    },
+                    {
+                        name: 'author',
+                        content: 'اینکوباک'
+                    },
+                    {
+                        'property': 'og:description',
+                        'content': 'مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
+                    },
+                    {
+                        'property': 'og:site_name',
+                        'content': 'اینکوباک بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران'
+                    },
+                    {
+                        'property': 'og:title',
+                        'content': ' اینکوباک | بازار خرید و فروش عمده محصولات کشاورزی '
+                    },
+
+                ]
+
+            }
         }
     }
 </script>

@@ -1,4 +1,8 @@
+
 <style scoped>
+    p, span, div, h3{
+        line-height: 1.618;
+    }
     .green-button {
         width: initial;
         padding: 13px 15px;
@@ -99,8 +103,8 @@
                             <br/>
 
                             <h3 class="text-center">
-                                <a href="/register" class="green-button"> هم اکنون عضو جامعه اینکوباک شوید
-                                </a>
+                                <router-link :to="{name : 'register'}" class="green-button"> هم اکنون عضو جامعه اینکوباک شوید
+                                </router-link>
                             </h3>
                             <p>
 
@@ -151,8 +155,8 @@
                                 </div>
                             </div>
                             <h3 class="text-center">
-                                <a href="/help" class="green-button"> اینکوباک چگونه کار میکند؟
-                                </a>
+                                <router-link :to="{name : 'help'}" class="green-button"> اینکوباک چگونه کار میکند؟
+                                </router-link>
                             </h3>
                             <p class="text-right">
                                 سوالات، انتقادات و پیشنهادات خود را از طریق آدرس ایمیل support@incobac.com با ما در میان
@@ -169,9 +173,11 @@
 </template>
 
 <script>
-    import {eventBus} from "../../../router/dashboard_router";
+    import {eventBus} from "../../../router/router";
+    import Route from "../../../router/components/route";
 
     export default {
+        components: {Route},
         props: [
             'img_about_us_1',
             'img_about_us_2',
@@ -199,5 +205,36 @@
         created() {
             gtag('config', 'UA-129398000-1', {'page_path': '/about-us'});
         },
+        metaInfo() {
+
+            return {
+                title: ' درباره ما ',
+                titleTemplate: 'اینکوباک | %s',
+                meta: [
+                    {
+                        name: 'description',
+                        content: 'مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
+                    },
+                    {
+                        name: 'author',
+                        content: 'اینکوباک'
+                    },
+                    {
+                        'property': 'og:description',
+                        'content': 'مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
+                    },
+                    {
+                        'property': 'og:site_name',
+                        'content': 'اینکوباک بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران'
+                    },
+                    {
+                        'property': 'og:title',
+                        'content': ' اینکوباک | بازار خرید و فروش عمده محصولات کشاورزی '
+                    },
+
+                ]
+
+            }
+        }
     }
 </script>

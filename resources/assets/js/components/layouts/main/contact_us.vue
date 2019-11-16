@@ -1,3 +1,8 @@
+<style scoped>
+    p, span, div, h3{
+        line-height: 1.618;
+    }
+</style>
 <template>
     <div class="main-content-index-pages">
         <section class="parallax-section policy">
@@ -29,7 +34,7 @@
 </template>
 
 <script>
-    import {eventBus} from "../../../router/dashboard_router";
+    import {eventBus} from "../../../router/router";
 
     export default {
         methods: {
@@ -52,6 +57,37 @@
         },
         created() {
             gtag('config', 'UA-129398000-1', {'page_path': '/contact-us'});
+        },
+        metaInfo() {
+
+            return {
+                title: ' تماس با ما ',
+                titleTemplate: 'اینکوباک | %s',
+                meta: [
+                    {
+                        name: 'description',
+                        content: 'مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
+                    },
+                    {
+                        name: 'author',
+                        content: 'اینکوباک'
+                    },
+                    {
+                        'property': 'og:description',
+                        'content': 'مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
+                    },
+                    {
+                        'property': 'og:site_name',
+                        'content': 'اینکوباک بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران'
+                    },
+                    {
+                        'property': 'og:title',
+                        'content': ' اینکوباک | بازار خرید و فروش عمده محصولات کشاورزی '
+                    },
+
+                ]
+
+            }
         }
     }
 </script>

@@ -281,7 +281,7 @@ Route::group(['middleware' => [login::class]],function(){
         ]);
     })->name('instant-back-to-basic');
 
-    Route::get('/dashboard/{any}',function(){
+/*    Route::get('/dashboard/{any}',function(){
         if(session('is_seller')){
             return view('layout.seller-dashboard');
         }
@@ -289,19 +289,19 @@ Route::group(['middleware' => [login::class]],function(){
             return view('layout.buyer-dashboard');
         }
     })->where('any','.*');
+*/
 
 
 
 
-
-    Route::group(['prefix' => 'dashboard'],function(){
+  /*  Route::group(['prefix' => 'dashboard'],function(){
         Route::get('/',function(){
             if(session('is_seller')){
                 return view('layout.seller-dashboard');
             }
-            /*     if(session('is_seller')){
+                 if(session('is_seller')){
                      return view('dashboard.seller.profile.profile_basic');
-                 }*/
+                 }
             else if(session('is_buyer')){
                 return view('layout.buyer-dashboard');
             }
@@ -439,7 +439,7 @@ Route::group(['middleware' => [login::class]],function(){
                 return view('dashboard.seller.privacy_and_policy.vue');
             }
         })->name('dashboard-privacy_and_policy.vue');
-    });
+    });*/
 
     Route::post('/user/profile_modification',[
         'uses' => 'profile_controller@profile_modification',
@@ -630,12 +630,12 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'payment_controller@payment_callback',
         'as' => 'payment_callback'
     ]);
-    
+
     Route::post('/is_user_allowed_to_register_product',[
         'uses' => 'product_controller@is_user_allowed_to_register_product',
         'as'   => 'is_user_allowed_to_register_product'
     ]);
-    
+
     Route::post('/get_seller_dashboard_required_data',[
         'uses' => 'user_controller@get_seller_dashboard_required_data',
         'as'   => 'get_seller_dashboard_required_data'
@@ -883,7 +883,7 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
         'uses' => 'admin_panel\admin_statistics_controller@load_statistics',
         'as' => 'admin_panel_load_statistics'
     ]);
-    
+
     Route::post('get_site_statistics',[
         'uses' => 'admin_panel\admin_statistics_controller@load_statistics',
         'as' => 'get_site_statistics'
@@ -1030,13 +1030,13 @@ Route::get('/{any}',function(Request $request){
     if(! $request->session()->has('user_id')){
         $user_phone = $request->cookie('user_phone');
         $user_hashed_password = $request->cookie('user_password');
-        
+
         if($user_phone && $user_hashed_password){
             $login_middleware_object = new login();
-            $status = $login_middleware_object->set_user_session($user_phone,$user_hashed_password); 
+            $status = $login_middleware_object->set_user_session($user_phone,$user_hashed_password);
         }
     }
-    
+
     return  view('layout.master');
 })->where('any','.*');
 //-----------------------------------------------------

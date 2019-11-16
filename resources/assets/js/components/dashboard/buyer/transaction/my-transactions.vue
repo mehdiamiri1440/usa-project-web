@@ -205,7 +205,7 @@
     </div>
 </template>
 <script>
-    import {eventBus} from "../../../../router/dashboard_router";
+    import {eventBus} from "../../../../router/router";
     export default {
         props: [
             'loading_img',

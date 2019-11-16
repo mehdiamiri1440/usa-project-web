@@ -25,6 +25,7 @@
 
     .content-sidebar .green-button {
         min-width: 130px;
+        width: 100%;
         font-size: 13px;
         padding: 6px 0;
         margin: 0;
@@ -69,10 +70,12 @@
         color: #00c569;
         transition: 300ms;
     }
-     .sub-category-product a.active {
+
+    .sub-category-product a.active {
         color: #00c569;
 
     }
+
     .list-open .button-toggle i {
         transform: rotate(180deg);
         transition: 300ms;
@@ -103,88 +106,90 @@
 
     }
 
-    .header-item-default{
-        margin:15px 0;
+    .header-item-default {
+        margin: 15px 0;
         padding: 15px;
     }
 
-    .sub-category-item h4 , .sub-category-item h1{
+    .sub-category-item h4, .sub-category-item h1 {
 
-      font-size: 14px;
-      line-height: 1.5;
+        font-size: 14px;
+        line-height: 1.5;
 
     }
 
 
 </style>
 <template>
-      <div v-if=" categoryList" class="content-sidebar">
+    <div v-if=" categoryList" class="content-sidebar">
 
-          <div class="title-widget">
-              <div>دسته بندی محصولات </div>
-              <hr>
-          </div>
-          
-          <div  class="category-products-widget">
-              <ul>
-                  <li v-for="(category, index) in categoryList" :key="category.id"
-                      :class="'collapse-category-' + category.id">
-                      <h2>
-                          <a
-                                  :class="'collapse-button-' + category.id"
-                                  href="#"
-                                  @click.prevent="collapseMethod(category.id,index,category.subcategories.length)"
+        <div class="title-widget">
+            <div>دسته بندی محصولات</div>
+            <hr>
+        </div>
 
-                          >
+        <div class="category-products-widget">
+            <ul>
+                <li v-for="(category, index) in categoryList" :key="category.id"
+                    :class="'collapse-category-' + category.id">
+                    <h2>
+                        <a
+                                :class="'collapse-button-' + category.id"
+                                href="#"
+                                @click.prevent="collapseMethod(category.id,index,category.subcategories.length)"
 
-                              <i class="fa fa-angle-left"></i>
+                        >
 
-                              <span v-text="category.category_name"></span>
+                            <i class="fa fa-angle-left"></i>
 
-                          </a>
-                      </h2>
+                            <span v-text="category.category_name"></span>
 
-                      <ul class=" sub-category-product little">
+                        </a>
+                    </h2>
 
-                          <li class="sub-category-item " v-for="subCategory in category.subcategories">
+                    <ul class=" sub-category-product little">
 
-                              <h1 v-if="getCategoryName() === subCategory.category_name">
-                                <a       :class="{'active' : getCategoryName() === subCategory.category_name}"
-                                      :href=getSubCategoryUrl(subCategory)
-                                      v-text="subCategory.category_name">
-                              </a>
-                              </h1>
+                        <li class="sub-category-item " v-for="subCategory in category.subcategories">
 
-                              <h4 v-else>
-                                <a       :class="{'active' : getCategoryName() === subCategory.category_name}"
-                                      :href=getSubCategoryUrl(subCategory)
-                                      v-text="subCategory.category_name">
-                              </a>
-                              </h4>
+                            <h1 v-if="getCategoryName() === subCategory.category_name">
+                                <router-link :class="{'active' : getCategoryName() === subCategory.category_name}"
+                                             :to=getSubCategoryUrl(subCategory)
+                                             v-text="subCategory.category_name"
+                                             data-dismiss="modal">
+                                </router-link>
+                            </h1>
+
+                            <h4 v-else>
+                                <router-link :class="{'active' : getCategoryName() === subCategory.category_name}"
+                                             :to=getSubCategoryUrl(subCategory)
+                                             v-text="subCategory.category_name"
+                                             data-dismiss="modal">
+                                </router-link>
+                            </h4>
 
 
-                          </li>
+                        </li>
 
-                      </ul>
+                    </ul>
 
-                      <div class="button-wrapper">
+                    <div class="button-wrapper">
 
-                          <button class="green-button button-toggle"
-                                  @click.prevent="collapseMethod(category.id,index,category.subcategories.length)">
+                        <button class="green-button button-toggle"
+                                @click.prevent="collapseMethod(category.id,index,category.subcategories.length)">
 
-                              <span>مشاهده بیشتر </span>
+                            <span>مشاهده بیشتر </span>
 
-                              <i class="fa fa-angle-down"></i>
+                            <i class="fa fa-angle-down"></i>
 
-                          </button>
+                        </button>
 
-                      </div>
-                  </li>
+                    </div>
+                </li>
 
-              </ul>
+            </ul>
 
-          </div>
-      </div>
+        </div>
+    </div>
 
     <div v-else class=" default-content content-sidebar">
         <div class="title-widget">
@@ -212,14 +217,17 @@
 </template>
 
 <script>
+    import Route from "../../../../../router/components/route";
+
     export default {
-        props:[
-          'fotnLoad'
+        components: {Route},
+        props: [
+            'fotnLoad'
         ],
         data() {
             return {
                 categoryList: '',
-                fontIsLoad :false
+                fontIsLoad: false
             }
         },
         methods: {
@@ -231,21 +239,21 @@
                 })
                     .then(function (response) {
                         self.categoryList = response.data.categories;
-                       setTimeout(function(){
-                         for (var i = 0 ; i < self.categoryList.length ; i++) {
-                                for (var j = 0 ; j < self.categoryList[i].subcategories.length; j++) {
-                                     if (self.categoryList[i].subcategories[j].category_name ===
+                        setTimeout(function () {
+                            for (var i = 0; i < self.categoryList.length; i++) {
+                                for (var j = 0; j < self.categoryList[i].subcategories.length; j++) {
+                                    if (self.categoryList[i].subcategories[j].category_name ===
                                         categoryParameterName) {
 
-                                        self.collapseMethod(self.categoryList[i].id , i , self.categoryList[i].subcategories.length);
+                                        self.collapseMethod(self.categoryList[i].id, i, self.categoryList[i].subcategories.length);
 
-                                     }
+                                    }
                                 }
 
-                              self.checkListHeight(self.categoryList[i].id, self.categoryList[i].subcategories.length);
+                                self.checkListHeight(self.categoryList[i].id, self.categoryList[i].subcategories.length);
                             }
-                       })
-                    },500);
+                        })
+                    }, 500);
             },
             collapseMethod: function (id, index, listItems) {
 
@@ -256,48 +264,47 @@
                 var initialHeight = this.categoryList[index].subcategories.length * 22;
 
 
-               if (this.checkListHeight(id,listItems) !==  true) {
+                if (this.checkListHeight(id, listItems) !== true) {
 
-                   if (listElemetn.hasClass('little')) {
+                    if (listElemetn.hasClass('little')) {
 
-                      listElemetn.css('height', initialHeight + 'px');
-                      listElemetn.removeClass('little', 500);
+                        listElemetn.css('height', initialHeight + 'px');
+                        listElemetn.removeClass('little', 500);
 
-                  } else {
-                      listElemetn.css('height', '68px');
-                      listElemetn.addClass('little', 500);
+                    } else {
+                        listElemetn.css('height', '68px');
+                        listElemetn.addClass('little', 500);
 
-                  }
-                  wrapperlistElemetn.toggleClass("list-open", 500);
-                  buttonElemetn.text(function (i, v) {
-                      return v === 'بستن' ? 'مشاهده بیشتر' : 'بستن'
-                  });
+                    }
+                    wrapperlistElemetn.toggleClass("list-open", 500);
+                    buttonElemetn.text(function (i, v) {
+                        return v === 'بستن' ? 'مشاهده بیشتر' : 'بستن'
+                    });
 
-                  var wrapperlistElemetnMobile = $(' #searchFilter .collapse-category-' + id);
-                  var listElemetnMobile = $('#searchFilter .collapse-category-' + id + ' .sub-category-product');
-                  var buttonElemetnMobile = $('#searchFilter .collapse-category-' + id + ' button span');
-
-
-                  if (listElemetnMobile.hasClass('little')) {
-
-                      listElemetnMobile.css('height', initialHeight + 'px');
-                      listElemetnMobile.removeClass('little', 500);
-                  } else {
-                      listElemetnMobile.css('height', '68px');
-                      listElemetnMobile.addClass('little', 500);
-                  }
-                  wrapperlistElemetnMobile.toggleClass("list-open", 500);
-                  buttonElemetnMobile.text(function (i, v) {
-                      return v === 'بستن' ? 'مشاهده بیشتر' : 'بستن'
-                  });
+                    var wrapperlistElemetnMobile = $(' #searchFilter .collapse-category-' + id);
+                    var listElemetnMobile = $('#searchFilter .collapse-category-' + id + ' .sub-category-product');
+                    var buttonElemetnMobile = $('#searchFilter .collapse-category-' + id + ' button span');
 
 
-               }
+                    if (listElemetnMobile.hasClass('little')) {
 
+                        listElemetnMobile.css('height', initialHeight + 'px');
+                        listElemetnMobile.removeClass('little', 500);
+                    } else {
+                        listElemetnMobile.css('height', '68px');
+                        listElemetnMobile.addClass('little', 500);
+                    }
+                    wrapperlistElemetnMobile.toggleClass("list-open", 500);
+                    buttonElemetnMobile.text(function (i, v) {
+                        return v === 'بستن' ? 'مشاهده بیشتر' : 'بستن'
+                    });
+
+
+                }
 
 
             },
-            checkListHeight(id,listItems){
+            checkListHeight(id, listItems) {
 
                 var buttonFilter = $(' aside .collapse-category-' + id + ' .green-button.button-toggle');
 
@@ -305,18 +312,18 @@
 
                 if (listItems < 3) {
 
-                   buttonFilter.css('display','none');
-                   mobileButton.css('display','none');
+                    buttonFilter.css('display', 'none');
+                    mobileButton.css('display', 'none');
 
-                  return true;
+                    return true;
 
-                }else{
+                } else {
 
-                   return false;
+                    return false;
 
                 }
             },
-            checkListHeightUpdate(){
+            checkListHeightUpdate() {
                 var elements = $(' .category-products-widget > ul > li');
                 var elementClass = '';
                 var elementLenght = null;
@@ -324,42 +331,42 @@
 
                 for (var i = 0; i < elements.length; i++) {
 
-                  elementClass  = $(elements[i]).attr('class');
-                  elementLenght = $('.' + elementClass + ' .sub-category-item').length ;
-                  buttonFilter = $(' .' + elementClass + ' .green-button.button-toggle');
+                    elementClass = $(elements[i]).attr('class');
+                    elementLenght = $('.' + elementClass + ' .sub-category-item').length;
+                    buttonFilter = $(' .' + elementClass + ' .green-button.button-toggle');
 
 
-                      if (elementLenght < 3) {
+                    if (elementLenght < 3) {
 
-                         buttonFilter.css('display','none');
+                        buttonFilter.css('display', 'none');
 
-                      }
+                    }
                 }
             },
-            getSubCategoryUrl: function(t){
+            getSubCategoryUrl: function (t) {
 
                 let url = '/product-list/category/'
                     + t.category_name.replace(' ', '-')
                 ;
-               
+
                 return url;
             },
-            getCategoryName:function(){
-                let name = this.$route.params.categoryName ? this.$route.params.categoryName :'';
-                
-                return name.replace('-',' ');
+            getCategoryName: function () {
+                let name = this.$route.params.categoryName ? this.$route.params.categoryName : '';
+
+                return name.replace('-', ' ');
             }
         },
         mounted() {
-              this.init();
-               var self = this;
+            this.init();
+            var self = this;
 
-              document.fonts.ready.then(function () {
-                   self.fontIsLoad = true;
-              });
+            document.fonts.ready.then(function () {
+                self.fontIsLoad = true;
+            });
 
         },
-        updated(){
+        updated() {
             this.checkListHeightUpdate();
 
         }

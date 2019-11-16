@@ -29,9 +29,10 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
     <link rel="stylesheet" href="{{asset('index/css/particleNetwork.css')}}">
     <link rel="stylesheet" href="{{asset('index/css/animate.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/profile/main-profile.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/master/style.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl-custom-style.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/imageuploadify.min.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/cropper.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/master/style.css')}}">
 
 
     <script src="{{asset('assets/cdn/axios.js')}}"></script>
@@ -95,64 +96,20 @@
 
 </head>
 <body >
-<div id="app"></div>
-<div id="appBuyer"></div>
-<div id="appSeller"></div>
-<div id="appLayouts">
 
+<div id="app">
 
-    <!-- =========================
- NAVIGATION LINKS
-============================== -->
-    <header-master-layouts
-            user_id="{{session('user_id')}}"
-            is_seller = "{{session('is_seller')}}"
-            user_default_image="{{asset('assets/img/user-defult.png')}}"
-            profile_photo="{{session('profile_photo')}}"
-            user_full_name="{{session('full_name')}}"
-            user_logout_path="{{route('logout')}}"
-            storage_path="{{url('storage/')}}"
-            login_page_path="{{route('logout')}}"
-            loading="{{asset('assets/img/gif/prload.gif')}}"
-            finish_load_img="{{asset('assets/img/gif/loading.gif')}}"
-            incobacicon="{{asset('assets/img/logo-Inco-mobile.png')}}"
-
-    ></header-master-layouts>
-
-
-    <router-view id="main-content"
-                 name="layouts"
-                 not_found_image="{{url('assets/img/def404.png')}}"
-                 loading_img="{{asset('assets/img/gif/loading.gif')}}"
-                 trans="{{url('dashboard/transaction-detail')}}"
-                 transRep="{{url('dashboard/transaction-report')}}"
-                 str="{{asset('storage/')}}"
-                 defimgitem="{{asset('/assets/img/product.jpg')}}"
-                 defultimg="{{asset('assets/img/user-defult.png')}}"
-                 site_logo="{{asset('assets/img/logo-incobac.png')}}"
-                 site_logo_white="{{asset('/index/images/logo_white.png')}}"
-                 incobaicon="{{asset('assets/img/lo.png')}}"
-                 assets = "{{asset('assets')}}"
-                 img_about_us_1="{{asset('assets/img/about-us/1.jpg')}}"
-                 img_about_us_2="{{asset('assets/img/about-us/2.jpg')}}"
-                 img_about_us_3="{{asset('assets/img/about-us/3.jpg')}}"
-                 img_about_us_4="{{asset('assets/img/about-us/4.jpg')}}"
-                 img_about_us_5="{{asset('assets/img/about-us/5.jpg')}}"
-                 img_about_us_6="{{asset('assets/img/about-us/6.jpg')}}"
-                 img_pricing_38="{{asset('index/images/Group_38.png')}}"
-                 img_pricing_36="{{asset('index/images/Group_36.png')}}"
-                 img_pricing_34="{{asset('index/images/Group_34.png')}}"
-                 img_pricing_32="{{asset('index/images/Group_32.png')}}"
-                 img_success_project="{{asset('index/images/current.png')}}"
-                 img_success_verified="{{asset('index/images/farmer.png')}}"
-                 is-user-login="{{session('user_id')}}"
-                 user-type = "{{session('is_seller')}}"
-    ></router-view>
-
-    <footer-master-layouts></footer-master-layouts>
-
-
+            <route-component
+                    user-id = "{{session('user_id')}}"
+                    is-seller = "{{session('is_seller')}}"
+                    assets = "{{asset('')}}"
+                    storage-path = "{{url('storage/')}}"
+                    profile-photo="{{session('s_photo')}}"
+                    user-full-name="{{session('full_name')}}"
+                    user-logout-path="{{route('logout')}}"
+            />
 </div>
+
 <script src="{{asset('js/app.js')}}"></script>
 <script src="{{asset('assets/js/idleTimer.js')}}"></script>
 

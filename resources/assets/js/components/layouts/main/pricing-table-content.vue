@@ -1,6 +1,8 @@
 <style scoped>
-   	.green-button{
-   		margin: 5px auto 0;
+
+    .green-button{
+        padding: 10px 35px;
+        margin: 5px auto 0;
         font-size: 16px;
         font-weight: bold;
         width: initial;
@@ -346,7 +348,7 @@
 
 </style>
 <template>
-        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2  ">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2  ">
                     <div class="row">
                         <div class="  col-xs-12">
                             <div class=" wrapper-background">
@@ -453,9 +455,9 @@
                                            در حال استفاده
                                         </p>
 
-                                        <a v-else href="/register" class="green-button">
+                                        <router-link v-else :to="{name : 'register'}" class="green-button">
                                            ثبت نام رایگان
-                                        </a>
+                                        </router-link>
 
                                     </div>
 

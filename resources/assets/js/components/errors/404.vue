@@ -122,19 +122,19 @@
     <div class="container-fluid">
         <div class="container">
             <div class="col-xs-12">
-                <img :src="not_found_image">
+                <img :src="assets + 'assets/img/def404.png'">
                 <p class="description-error">صفحه مورد نظر یافت نشد</p>
             </div>
 
             <div class="buttons col-xs-12">
                 <div class="col-xs-12 col-sm-6">
-                    <a href="/" class="green-button">
+                    <router-link :to="{name : 'indexPage'}" class="green-button">
                         صفحه نخست
-                    </a>
+                    </router-link>
                 </div>
 
                 <div class="col-xs-12 col-sm-6">
-                    <a href="javascript:history.back()" class="botton-inco">
+                    <a href="javascript:history.go(-2)" class="botton-inco">
                         بازگشت به صفحه قبل
                     </a>
                 </div>
@@ -144,11 +144,11 @@
 </template>
 
 <script>
-    import {eventBus} from "../../router/dashboard_router";
+    import {eventBus} from "../../router/router";
 
     export default {
         props: [
-            'not_found_image',
+            'assets',
         ],
         methods: {
             stopLoader: function () {

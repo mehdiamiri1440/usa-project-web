@@ -1,9 +1,9 @@
 
-<style >
+<style scoped>
 
     #main-content{
 
-          padding-top: 165px;
+        padding-top: 122px;
 
 
     }
@@ -12,22 +12,11 @@
 
         #main-content{
 
-              padding-top: 80px !important;
+            padding-top: 122px ;
         }
 
     }
 
-    @media screen and (max-width: 767px) {
-
-        #main-content{
-
-            padding-top: 150px !important;
-        }
-
-    }
-
-</style>
-<style scoped>
 
     .shadow-content{
         background: #fff;
@@ -258,7 +247,7 @@
 
     .sub-header-fix {
         position: fixed;
-        top: 73px;
+        top: 56px;
         left: 0;
         right: 0;
         z-index: 2;
@@ -376,11 +365,9 @@
 
     @media screen and (max-width: 767px) {
 
-        .links-sub-header a{
-
-            padding: 23px 15px;
+        .main-content, #main {
+            padding: 0;
         }
-
         .sub-header {
             position: fixed;
             z-index: 1;
@@ -388,7 +375,8 @@
         }
 
         .search-box {
-            margin: 10px auto ;
+            margin: 7px auto;
+            padding: 0;
         }
 
         .main-image {
@@ -402,7 +390,6 @@
         .sub-header {
 
             background: #f0f3f6;
-            padding-top: 7px;
 
         }
 
@@ -595,8 +582,8 @@
         </div>
 
 
-        <main id="main" class="container ">
-               
+         <main id="main" class="container ">
+
 
                     <div class="col-xs-12 col-lg-9">
                     <div class="row">
@@ -652,7 +639,7 @@
 
                             <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
 
-                            <p>شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+                            <p>شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
 
                             <br/>
 
@@ -668,7 +655,7 @@
 
                             <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
 
-                            <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+                            <p class="text-center" dir="rtl">شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
                             <br/>
 
                             <div class="text-center">
@@ -690,15 +677,15 @@
 
                             <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
 
-                            <p class="text-center" dir="rtl">شما میتوانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+                            <p class="text-center" dir="rtl">شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
 
                             <br/>
 
                             <div class="text-center">
-                                <a class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">
+                                <router-link :to="{name:'registerRequestBuyer'}" class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">
                                     درخواست
                                     خرید
-                                </a>
+                                </router-link>
 
                                 <br/>
                                 <a class="green-button col-xs-4 " @click.prevent="resetFilter()">نمایش همه محصولات</a>
@@ -790,14 +777,14 @@
                     </aside>
 
 
-        </main>
 
+        </main>
     </div>
 </template>
 <script>
     import ProductArticle from './product_components/product_article'
     import ProductAsideCategories from './product_components/sidebar/product_aside_categories'
-    import {eventBus} from "../../../../js/router/dashboard_router";
+    import {eventBus} from "../../../router/router";
     import StickySidebar from 'sticky-sidebar';
 
     var visible = false;
@@ -867,6 +854,7 @@
                 }
             },
             init: function () {
+                this.products = {};
                 this.scrollToTop();
                 var self = this;
                 var searchValue = this.searchValue;
@@ -905,7 +893,7 @@
 
             },
             feed() {
-            
+
                 var self = this;
                 if (this.searchText === '' && this.provinceId === '' && this.categoryId === '' && this.continueToLoadProducts) {
                     this.loadMoreActive = true;
@@ -1024,7 +1012,7 @@
 
                 if (jQuery.isEmptyObject(searchObject)) {
                     searchObject.from_record_number = 0;
-                    searchObject.to_record_number = 5;
+                    searchObject.to_record_number = 10;
                 }
 
                 axios.post('/user/get_product_list', searchObject)
@@ -1081,8 +1069,15 @@
             }
         },
         watch: {
+            '$route.params.categoryName':function(name){
+
+                 this.init();
+
+            },
+
             searchText: function () {
                 var self = this;
+
 
                 clearTimeout(this.searchTextTimeout);
 
