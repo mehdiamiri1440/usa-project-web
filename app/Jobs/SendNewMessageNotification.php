@@ -10,6 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 
 use App\Events\newMessage;
 use App\message;
+use App\Controllers\fcm_controller;
 
 class SendNewMessageNotification implements ShouldQueue
 {
@@ -35,5 +36,20 @@ class SendNewMessageNotification implements ShouldQueue
     public function handle()
     {
         event(new newMessage($this->msg));
+        $this->send_notification_via_FCM($this->msg);
+    }
+    
+    protected function send_notification_via_FCM($msg)
+    {
+        $fcm_controller_object = new fcm_controller();
+        
+        $data = [
+            'title' => 'اینکوباک',
+            'message' => 'یک پیام جدید در اینکوباک'
+        ];
+        
+        $topic_name = 'FCM'.$msg->receiver_id;
+        
+        $fcm_controller_object->send_notification_to_the_given_topic($data,$topic_name);
     }
 }
