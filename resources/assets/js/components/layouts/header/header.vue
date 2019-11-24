@@ -1091,7 +1091,7 @@
 <script>
     var visible = false;
     import {eventBus} from "../../../router/router";
-    import Cookies from "js-cookie";
+
 
     export default {
         data() {
@@ -1121,29 +1121,8 @@
             "finish_load_img",
         ],
         methods: {
-            /*redirectToLogin: function () {
-                        window.location.href = '/login';
-                    },*/
-            isDeviceMobile: function () {
-                if (
-                    navigator.userAgent.match(/Android/i) ||
-                    navigator.userAgent.match(/webOS/i) ||
-                    navigator.userAgent.match(/iPhone/i) ||
-                    navigator.userAgent.match(/iPad/i) ||
-                    navigator.userAgent.match(/iPod/i) ||
-                    navigator.userAgent.match(/BlackBerry/i) ||
-                    navigator.userAgent.match(/Windows Phone/i)
-                ) {
-                    return true;
-                } else {
-                    return false;
-                }
-            },
-            getAndroidVersion: function (ua) {
-                ua = (ua || navigator.userAgent).toLowerCase();
-                var match = ua.match(/android\s([0-9\.]*)/);
-                return match ? match[1] : undefined;
-            },
+       
+           
             // jQuery
             jqUpdateSize: function () {
                 // Get the dimensions of the viewport
@@ -1154,39 +1133,6 @@
                         $(".navbar-toggle").click(); //bootstrap 3.x by Richard
                         $(".navbar-toggler").click(); //bootstrap 4.x
                     });
-                }
-            },
-            DownloadApp: function () {
-                $("#DownloadApp").modal();
-            },
-            doDownload: function () {
-                //ga
-                this.registerComponentStatistics(
-                    "download",
-                    "app download btn",
-                    "download app btn in popUp"
-                );
-                // code here
-                Cookies.set("appDownloaded", true);
-                window.location.href = "/storage/download/incobac.apk";
-            },
-            isOsIOS: function () {
-                var userAgent = window.navigator.userAgent.toLowerCase(),
-                    safari = /safari/.test(userAgent),
-                    ios = /iphone|ipod|ipad/.test(userAgent);
-
-                // simplify condition if
-                /*if (ios) {
-                              return true
-                          } else {
-                              return false;
-                          };*/
-                return ios;
-            },
-            activateDownloadAppPopUp: function () {
-                this.jqUpdateSize();
-                if (this.isDeviceMobile() && !Cookies.get("appDownloaded")) {
-                    setTimeout(this.DownloadApp, 5000);
                 }
             },
             logUserOut: function () {
@@ -1250,8 +1196,6 @@
 
         },
         mounted() {
-
-
 
             // scroll handeling hide in web
              var lastScroll = 0;
