@@ -165,6 +165,7 @@ return [
 		phplusir\smsir\SmsirServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Larabookir\Gateway\GatewayServiceProvider::class,
+        LaravelFCM\FCMServiceProvider::class,
         
         
 
@@ -236,6 +237,8 @@ return [
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Gateway' => \Larabookir\Gateway\Gateway::class, 
+        'FCM'      => LaravelFCM\Facades\FCM::class,
+	    'FCMGroup' => LaravelFCM\Facades\FCMGroup::class,
 
     ],
 
