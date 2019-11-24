@@ -10,7 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 
 use App\Events\newMessage;
 use App\message;
-use App\Controllers\fcm_controller;
+use App\Http\Controllers\fcm_controller;
 
 class SendNewMessageNotification implements ShouldQueue
 {

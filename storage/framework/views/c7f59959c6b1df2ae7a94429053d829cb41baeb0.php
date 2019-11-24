@@ -115,12 +115,16 @@
 
 <script>
     $(document).ready(function () {
-        $(document).idleTimer(7200000);
+//        $(document).idleTimer(7200000);
+        
     });
 
-    $(document).on("idle.idleTimer", function () {
-        window.location.href = '/login'
-    });
+//    $(document).on("idle.idleTimer", function () {
+//        window.location.href = '/login'
+//    });
+    function getUserId(){
+        return  <?php echo e(session('user_id')); ?>;
+    }
 </script>
 </body>
 
