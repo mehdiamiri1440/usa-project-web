@@ -123,8 +123,8 @@
     });
 
     function getUserId(){
-        return {{session('user_id')}};
-
+        let userId= {{session('user_id')}};
+        return userId===undifiend?-1 :userId
     }
 </script>
 </body>
