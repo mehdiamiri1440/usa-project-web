@@ -121,6 +121,11 @@
     $(document).on("idle.idleTimer", function () {
         window.location.href = '/login'
     });
+
+    function getUserId(){
+        return {{session('user_id')}};
+
+    }
 </script>
 </body>
 
