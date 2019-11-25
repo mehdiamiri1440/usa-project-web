@@ -191,7 +191,7 @@ class sms_controller extends Controller
     public function send_new_generated_password($password,$user_phone)
     {
         try{
-            Smsir::sendToCustomerClub('گذرواژه ی جدید' . "\n" . $password,$user_phone);
+            Smsir::ultraFastSend(['newPassword' => $password],17697,$user_phone);
         }
         catch(\Exception $e){
             //
@@ -240,6 +240,16 @@ class sms_controller extends Controller
         try{
             Smsir::sendToCustomerClub($final_msg,$phone_number);
             return $phone_number;
+        }
+        catch(\Exception $e){
+            //
+        }
+    }
+    
+    public function send_new_message_sms_notification($phone_number)
+    {
+        try{
+            Smsir::ultraFastSend(['name' => 'کاربر'],17705,$phone_number);
         }
         catch(\Exception $e){
             //
