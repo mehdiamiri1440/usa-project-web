@@ -37,6 +37,6 @@ class sendSMS implements ShouldQueue
     {
         $sms_controller_object = new sms_controller();
         
-        $sms_controller_object->send_notify_sms_to_phone_number($this->message_array,$this->phone_number);
+        $sms_controller_object->send_new_message_sms_notification($this->phone_number);
     }
 }

@@ -842,8 +842,7 @@
                         <li>
                             <a class="profile-info-wrapper" data-toggle="collapse" href="#web-profile-items" role="button" >
                                 <div class="profile-image-wrapper">
-
-                                    <img v-if="profile_photo != ''" :src="storage_path + '/' + profile_photo" :alt="user_full_name"/>
+                                    <img v-if="profile_photo" :src="storage_path + '/' + profile_photo" :alt="user_full_name"/>
                                     <img v-else :src="user_default_image" :alt="user_full_name"/>
 
                                 </div>

@@ -104,7 +104,7 @@
                     is-seller = "{{session('is_seller')}}"
                     assets = "{{asset('')}}"
                     storage-path = "{{url('storage/')}}"
-                    profile-photo="{{session('s_photo')}}"
+                    profile-photo="{{session('profile_photo')}}"
                     user-full-name="{{session('full_name')}}"
                     user-logout-path="{{route('logout')}}"
             />
@@ -123,8 +123,8 @@
     });
 
     function getUserId(){
-        let userId= {{session('user_id')}};
-        return userId===undifiend?-1 :userId
+        let userId = <?php if(session('user_id')){echo session('user_id');} else echo -1; ?>;
+        return userId;
     }
 </script>
 </body>
