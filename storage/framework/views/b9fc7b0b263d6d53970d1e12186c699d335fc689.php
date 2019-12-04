@@ -104,7 +104,7 @@
                     is-seller = "<?php echo e(session('is_seller')); ?>"
                     assets = "<?php echo e(asset('')); ?>"
                     storage-path = "<?php echo e(url('storage/')); ?>"
-                    profile-photo="<?php echo e(session('s_photo')); ?>"
+                    profile-photo="<?php echo e(session('profile_photo')); ?>"
                     user-full-name="<?php echo e(session('full_name')); ?>"
                     user-logout-path="<?php echo e(route('logout')); ?>"
             />
@@ -121,6 +121,11 @@
     $(document).on("idle.idleTimer", function () {
         window.location.href = '/login'
     });
+
+    function getUserId(){
+        let userId = <?php if(session('user_id')){echo session('user_id');} else echo -1; ?>;
+        return userId;
+    }
 </script>
 </body>
 
