@@ -91,13 +91,13 @@ const router = new Router({
             },
             redirect: '/404',
             children: [
-                 {
-                     path: 'password',
-                     name: 'passwordSeller',
-                     components: {
-                         default: sellerChangePassword,
-                     },
-                 },
+                {
+                    path: 'password',
+                    name: 'passwordSeller',
+                    components: {
+                        default: sellerChangePassword,
+                    },
+                },
                 {
                     path: 'status',
                     name: 'statusSeller',
@@ -232,13 +232,13 @@ const router = new Router({
             },
             redirect: '/404',
             children: [
-                 {
-                     path: 'password',
-                     name: 'passwordBuyer',
-                     components: {
-                         default: buyerChangePassword,
-                     },
-                 },
+                {
+                    path: 'password',
+                    name: 'passwordBuyer',
+                    components: {
+                        default: buyerChangePassword,
+                    },
+                },
                 {
                     path: 'profile',
                     name: 'profileBasicBuyer',
@@ -267,7 +267,7 @@ const router = new Router({
                         default: buyerRgisterRequest,
                     },
                 },
-                 {
+                {
                     path: 'sell-offer-detail/:id',
                     name: 'buyerSellOfferDetailBuyer',
                     components: {
@@ -357,7 +357,7 @@ const router = new Router({
             beforeEnter: (to, from, next) => {
                 var userId = window.localStorage.getItem('userId');
                 var userType = window.localStorage.getItem('userType');
-                 if (userId && userType == 0 ) next();
+                if (userId && userType == 0) next();
                 else next('/login');
             }
         },
@@ -408,7 +408,7 @@ const router = new Router({
                     components: {
                         default: productList,
                     },
-                    props:true
+                    props: true
                 },
                 {
                     path: 'product-view/:categoryName/:subCategoryName/:id',
@@ -477,7 +477,11 @@ const router = new Router({
 
     ],
     scrollBehavior(to, from, savedPosition) {
-        return {x: 0, y: 0}
+        if (savedPosition) {
+            JSON.stringify(localStorage.setItem('scroll', savedPosition.y));
+            return savedPosition
+        }
+        return { x: 0, y: 0 }
     }
 
 
