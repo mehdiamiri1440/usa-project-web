@@ -168,10 +168,10 @@ class date_convertor
 			$month = array('فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند');       	
 			
 			$splited_date = explode('/',$persianDate_string);
+            
+            $month_index = array_search($splited_date[1],$num);
 			
-			$month_name = str_replace($num,$month,$splited_date[1]);
-			
-			$final_format = $splited_date[2].'  '.$month_name.' , '.$splited_date[0];
+			$final_format = $splited_date[2].'  '.$month[$month_index].' , '.$splited_date[0];
 			
 			return $final_format;
 		}

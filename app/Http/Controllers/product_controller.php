@@ -17,6 +17,7 @@ use App\Http\Controllers\sms_controller;
 use App\Jobs\NotifyBuyersBySMS;
 use App\buyAd;
 use App\Http\Library\date_convertor;
+use App\message;
 
 
 class product_controller extends Controller
@@ -199,10 +200,11 @@ class product_controller extends Controller
             'province_id'           => 'integer|min:1',
             'city_id'               => 'integer|min:1',
             'search_text'           => 'string',
+            'response_rate'         => 'boolean'
         ]);
 
         $all_products = NULL ; 
-
+        $response_rate_filter = $request->response_rate;
 //        if($request->filled('from_record_number') && $request->filled('to_record_number')){
 //            $all_products = $this->get_all_products_with_related_media($request->from_record_number,$request->to_record_number);
 //        }
@@ -235,18 +237,43 @@ class product_controller extends Controller
 //            var_dump($test);
             return $result;
         });
+        
+        foreach($all_products as $product){
+            $product['user_info']->response_rate = $this->get_user_response_rate($product['user_info']->id);
+        }
 
         //changing view priority according to owners pakage type
-        usort($all_products,function($item1, $item2){
-            $a = $item1['user_info']->active_pakage_type;
-            $b = $item2['user_info']->active_pakage_type;
+        if($response_rate_filter == true){
+             usort($all_products,function($item1, $item2){
+                $a = $item1['user_info']->response_rate;
+                $b = $item2['user_info']->response_rate;
 
-            if($a == $b){
-                return $item1['main']->updated_at < $item2['main']->updated_at;
-            }
+                if($a == $b){
+                    $c = $item1['user_info']->active_pakage_type;
+                    $d = $item2['user_info']->active_pakage_type;
+                    
+                    if($c == $d){
+                        return $item1['main']->updated_at < $item2['main']->updated_at;
+                    }
+                    return ($c < $d) ? 1 : -1;
+                }
 
-            return ($a < $b) ? 1 : -1;
-        });
+                return ($a < $b) ? 1 : -1;
+            });
+        }
+        else{
+            usort($all_products,function($item1, $item2){
+                $a = $item1['user_info']->active_pakage_type;
+                $b = $item2['user_info']->active_pakage_type;
+
+                if($a == $b){
+                    return $item1['main']->updated_at < $item2['main']->updated_at;
+                }
+
+                return ($a < $b) ? 1 : -1;
+            });
+        }
+        
         
         if($request->filled('from_record_number') && $request->filled('to_record_number')){
             $all_products = array_slice($all_products,$request->from_record_number,$request->to_record_number,true);   
@@ -1046,6 +1073,27 @@ class product_controller extends Controller
             'products' => $products
         ],200);  
     }
-            
+    
+    
+    protected function get_user_response_rate($user_id)
+    {
+        $total_contacts_count = message::where('receiver_id',$user_id)
+                                            ->select('sender_id')
+                                            ->distinct()
+                                            ->get()
+                                            ->count();
+        if($total_contacts_count == 0){
+            return 0;
+        }
+        $seen_by_user_contacts_count = message::where('receiver_id',$user_id)
+                                            ->where('is_read',true)
+                                            ->select('sender_id')
+                                            ->distinct()
+                                            ->get()
+                                            ->count();
+        
+        return round(($seen_by_user_contacts_count / $total_contacts_count) * 100,2);
+                                            
+    }       
 	
 }

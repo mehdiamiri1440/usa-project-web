@@ -1,760 +1,695 @@
 
 
 <style scoped>
+#main-content {
+  padding-top: 122px;
+}
+.shadow-content {
+  background: #fff;
+}
 
-    #main-content{
+.sidebar {
+  will-change: min-height;
+}
 
-        padding-top: 122px;
+.sidebar__inner {
+  transform: translate(0, 0); /* For browsers don't support translate3d. */
+  transform: translate3d(0, 0, 0);
+  will-change: position, transform;
+}
 
+#wrap-footer {
+  display: none;
+}
 
-    }
-    .shadow-content{
-        background: #fff;
-    }
+.loading_images {
+  padding-top: 115px;
+}
 
-    .sidebar{
-    will-change: min-height;
-    }
+#searchFilter {
+  background: #fff;
+  padding-left: 0 !important;
+}
 
-    .sidebar__inner{
-        transform: translate(0, 0); /* For browsers don't support translate3d. */
-        transform: translate3d(0, 0, 0);
-        will-change: position, transform;
-    }
+#searchFilter .modal-dialog {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
 
+#searchFilter .main_popup_content {
+  padding: 0;
+}
 
-    #wrap-footer {
-        display: none;
-    }
+a.close-dialog-popup {
+  display: block;
 
-    .loading_images {
-        padding-top: 115px;
-    }
+  padding: 15px;
 
-    #searchFilter {
-        background: #fff;
-        padding-left: 0 !important;
-    }
+  font-size: 22px;
 
-    #searchFilter .modal-dialog {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-    }
+  color: #e41c38;
 
-    #searchFilter .main_popup_content {
-        padding: 0;
+  text-align: right;
 
-    }
+  background: #000546;
+}
 
-    a.close-dialog-popup {
-        display: block;
+.filter-mobile-sidebar {
+  max-width: 500px;
+  margin: 0 auto;
+}
 
-        padding: 15px;
+.flat-plust-icon {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  z-index: 2;
+}
 
-        font-size: 22px;
+.flat-plust-icon a {
+  background: #e41c38;
+  width: 50px;
+  height: 50px;
+  display: block;
+  border-radius: 50px;
+  color: #fff;
+  -webkit-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  padding-top: 12px;
+  font-size: 23px;
+}
 
-        color: #e41c38;
+.owl-carousel img {
+  border-radius: 3px;
+}
 
-        text-align: right;
+.image-header-profile img {
+  height: 100%;
+}
 
-        background: #000546;
-    }
+.header-nav {
+  direction: rtl;
+  text-align: right;
+  padding: 20px 30px;
+  font-size: 17px;
+}
 
-    .filter-mobile-sidebar {
-        max-width: 500px;
-        margin: 0 auto;
-    }
+.header-nav a {
+  color: #777;
+}
 
-    .flat-plust-icon {
-        position: fixed;
-        right: 15px;
-        bottom: 15px;
-        z-index: 2;
-    }
+.header-nav a:hover {
+  color: #333;
+}
 
-    .flat-plust-icon a {
-        background: #e41c38;
-        width: 50px;
-        height: 50px;
-        display: block;
-        border-radius: 50px;
-        color: #fff;
-        -webkit-box-shadow: 0 3px 15px rgba(0,0,0,0.30);
-        box-shadow: 0 3px 15px rgba(0,0,0,0.30);
-        text-align: center;
-        padding-top: 12px;
-        font-size: 23px;
-    }
+#header {
+  background: url("../../../../../../public/assets/img/topheader.jpg");
+  background-position: 50% 30%;
+  color: #fff;
+  background-size: cover;
+  overflow: hidden;
+  padding-top: 64px;
+  padding-bottom: 0;
+}
 
-    .owl-carousel img {
-        border-radius: 3px;
-    }
+.title-page {
+  text-align: center;
 
-    .image-header-profile img {
-        height: 100%;
+  margin: 40px auto 35px;
+}
 
-    }
+.sub-header {
+  background: #f0f3f6;
+  padding: 0 15px;
+}
 
-    .header-nav {
-        direction: rtl;
-        text-align: right;
-        padding: 20px 30px;
-        font-size: 17px;
-    }
+.search-box {
+  position: relative;
+  margin-top: 14px;
+  border: none;
+}
 
-    .header-nav a {
-        color: #777;
-    }
+.search-box input {
+  width: 100%;
+  text-align: right;
+  direction: rtl;
+  border: 1px solid #666666;
+  border-radius: 6px;
+  padding: 10px 45px 9px 15px;
+  background: #f8f8f8;
+  font-size: 12px;
+  float: right;
+}
 
-    .header-nav a:hover {
-        color: #333;
-    }
+.search-box button.btn-search {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 3px;
+  top: 6px;
+  border-left: 1px solid;
+  color: #666;
+  height: 77%;
+  padding: 5px 8px;
+  font-size: 18px;
+}
 
-    #header {
-        background: url("../../../../../../public/assets/img/topheader.jpg");
-        background-position: 50% 30%;
-        color: #fff;
-        background-size: cover;
-        overflow: hidden;
-        padding-top: 64px;
-        padding-bottom: 0;
-    }
+.search-box button.btn-filter {
+  float: left;
+  padding: 10px 14px;
+  border-radius: 5px;
+  border: none;
+  background: #000546;
+  color: #fff;
+}
 
-    .title-page {
-        text-align: center;
+.links-sub-header {
+  direction: rtl;
+}
 
-        margin: 40px auto 35px;
-    }
+.links-sub-header a {
+  padding: 25px 15px;
+  display: inline-block;
+  color: #808c9b;
+  font-weight: bold;
+  font-size: 14px;
+  position: relative;
+}
 
-    .sub-header {
-        background: #f0f3f6;
-        padding: 0 15PX;
-    }
+.links-sub-header a:hover {
+  color: #313942;
+}
 
-    .search-box {
-        position: relative;
-        margin-top: 14px;
-        border:none;
-    }
+.links-sub-header a:hover:after {
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #00c569;
+  height: 3px;
+  width: 100%;
+}
 
-    .search-box input {
-        width: 100%;
-        text-align: right;
-        direction: rtl;
-        border: 1px solid #666666;
-        border-radius: 6px;
-        padding: 10px 45px 9px 15px;
-        background: #f8f8f8;
-        font-size: 12px;
-        float: right;
-    }
+.main-content > h4 {
+  margin: 30px auto;
+}
 
-    .search-box button.btn-search {
-        background: none;
-        border: none;
-        position: absolute;
-        right: 3px;
-        top: 6px;
-        border-left: 1px solid;
-        color: #666;
-        height: 77%;
-        padding: 5px 8px;
-        font-size: 18px;
-    }
+.green-button {
+  margin: 5px 0;
+  display: inline-block;
+  background: #00c569;
+  color: #fff;
+  padding: 10px 0;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 12px;
+  width: 100%;
+  line-height: 21px;
+}
 
-    .search-box button.btn-filter {
-        float: left;
-        padding: 10px 14px;
-        border-radius: 5px;
-        border: none;
-        background: #000546;
-        color: #fff;
-    }
+.red_bot {
+  background: #e41c38;
+  color: #fff;
+}
 
+.green-button:hover {
+  background: #279b41;
+  color: #fff;
+  cursor: pointer;
+}
 
-    .links-sub-header {
-        direction: rtl;
-    }
+.sub-header-fix {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: #f0f3f6;
+  padding: 0 15px;
+  border-bottom: 3px solid #ececec;
+}
 
-    .links-sub-header a {
-        padding: 25px 15px;
-        display: inline-block;
-        color: #808c9b;
-        font-weight: bold;
-        font-size: 14px;
-        position: relative;
-    }
-
-    .links-sub-header a:hover {
-        color: #313942;
-    }
-
-    .links-sub-header a:hover:after {
-        content: " ";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        background: #00c569;
-        height: 3px;
-        width: 100%;
-    }
-
-    .main-content > h4 {
-        margin: 30px auto;
-    }
-
-    .green-button {
-        margin: 5px 0;
-        display: inline-block;
-        background: #00c569;
-        color: #fff;
-        padding: 10px 0;
-        border-radius: 3px;
-        text-align: center;
-        font-size: 12px;
-        width: 100%;
-        line-height: 21px;
-    }
-
-    .red_bot {
-        background: #e41c38;
-        color: #fff;
-    }
-
-    .green-button:hover {
-        background: #279b41;
-        color: #fff;
-        cursor: pointer;
-    }
-
-    .sub-header-fix {
-        position: fixed;
-        top: 56px;
-        left: 0;
-        right: 0;
-        z-index: 2;
-        background: #f0f3f6;
-        padding: 0 15PX;
-        border-bottom: 3px solid #ececec;
-    }
-
-    /*  .main-padding-fix {
+/*  .main-padding-fix {
           padding-top: 72px;
       }*/
 
-    li.active a {
-        color: #313942;
-    }
+li.active a {
+  color: #313942;
+}
 
-    li.active a::after {
-        content: " ";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        background: #00c569;
-        height: 3px;
-        width: 100%;
-    }
+li.active a::after {
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #00c569;
+  height: 3px;
+  width: 100%;
+}
+
+.image-wrapper {
+  height: 300px;
+  overflow: hidden;
+}
 
-    .image-wrapper {
+.main-image {
+  float: right;
+}
+
+.load-more-button {
+  text-align: center;
+
+  margin: 15px auto;
+}
 
-        height: 300px;
-        overflow: hidden;
+.load-more-button button {
+  border: 2px solid;
 
-    }
+  padding: 15px 30px;
 
-    .main-image {
-        float: right;
+  height: initial;
 
-    }
+  background: #fff;
 
-    .load-more-button {
+  position: relative;
 
-        text-align: center;
+  top: 0;
 
-        margin: 15px auto;
-    }
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 
-    .load-more-button button {
+  transition: 200ms;
 
-        border: 2px solid;
+  color: #00c569;
+}
 
-        padding: 15px 30px;
+.load-more-button button:hover {
+  top: -3px;
 
-        height: initial;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 
-        background: #fff;
+  transition: 200ms;
+}
 
-        position: relative;
+.btn-loader {
+  overflow: hidden;
+}
 
-        top: 0;
+.btn-loader-active-wrapper {
+  height: 26px;
+}
 
-        box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+.btn-loader img {
+  width: 56px;
+  margin-top: -15px;
+}
 
-        transition: 200ms;
+@media screen and (max-width: 1199px) {
+  .search-box input {
+    width: calc(100% - 75px);
+  }
+}
 
-        color: #00c569;
+@media screen and (max-width: 991px) {
+  .title-page {
+    text-align: center;
+  }
 
-    }
+  .right-sidebar {
+    display: none;
+  }
 
-    .load-more-button button:hover {
-        top: -3px;
+  .filter-mobile-sidebar .right-sidebar {
+    display: block;
+  }
+}
 
-        box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+@media screen and (max-width: 767px) {
+  .main-content,
+  #main {
+    padding: 0;
+  }
+  .sub-header {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+  }
 
-        transition: 200ms;
+  .search-box {
+    margin: 7px auto;
+    padding: 0;
+  }
 
-    }
-
-    .btn-loader {
-
-        overflow: hidden;
-    }
-
-    .btn-loader-active-wrapper{
-
-        height: 26px;
-
-    }
-
-    .btn-loader img {
-        width: 56px;
-        margin-top: -15px;
-    }
-
-    @media screen and (max-width: 1199px) {
-        .search-box input {
-            width: calc(100% - 75px);
-        }
-
-    }
-
-    @media screen and (max-width: 991px) {
-
-
-        .title-page {
-            text-align: center;
-        }
-
-        .right-sidebar {
-            display: none;
-        }
-
-        .filter-mobile-sidebar .right-sidebar {
-            display: block;
-        }
-    }
-
-    @media screen and (max-width: 767px) {
-
-        .main-content, #main {
-            padding: 0;
-        }
-        .sub-header {
-            position: fixed;
-            z-index: 1;
-            width: 100%;
-        }
-
-        .search-box {
-            margin: 7px auto;
-            padding: 0;
-        }
-
-        .main-image {
-            padding: 0;
-        }
-
-        .main-content > .row {
-            margin: 0;
-        }
-
-        .sub-header {
-
-            background: #f0f3f6;
-
-        }
-
-        .links-sub-header {
-            direction: rtl;
-            text-align: center;
-        }
-
-        .logo img {
-            width: 100%;
-        }
-
-        .user-image {
-            float: right;
-
-            width: 100px;
-
-            height: 100px;
-        }
-
-        .user-contents > p {
-            float: right;
-
-            font-size: 18px;
-
-            padding-top: 40px;
-
-            padding-right: 20px;
-        }
-
-        .user-contents > .green-button {
-            float: left;
-
-            width: initial;
-            padding: 10px 25px;
-
-            margin-top: 28px;
-        }
-
-        .create_buy {
-            display: none;
-        }
-    }
-
-    @media screen and (max-width: 715px) {
-        .name-header-profile {
-            display: none;
-        }
-
-        .profile-menu-header i {
-            position: absolute;
-            left: -75px;
-            top: 22px;
-            font-size: 20px;
-        }
-    }
-
-    @media screen and (max-width: 555px) {
-        .user-image {
-            float: right;
-
-            width: 60px;
-
-            height: 60px;
-        }
-
-        .user-contents > .green-button {
-
-            float: left;
-            width: initial;
-            padding: 10px;
-            margin-top: 11px;
-
-        }
-
-        .user-contents > p {
-            float: right;
-            font-size: inherit;
-            padding-top: 18px;
-            padding-right: 5px;
-        }
-
-        .logo {
-            padding: 6px 10px;
-        }
-
-        #article-list > div{
-            padding: 0
-        }
-    }
-
-    @media screen and (max-width: 430px) {
-        .logo {
-            padding: 6px 63px;
-            width: 100%;
-            height: 109px;
-        }
-
-        .profile-menu-header {
-
-            padding: 3px;
-            padding-left: 35px;
-            float: left;
-
-        }
-
-    }
-
+  .main-image {
+    padding: 0;
+  }
+
+  .main-content > .row {
+    margin: 0;
+  }
+
+  .sub-header {
+    background: #f0f3f6;
+  }
+
+  .links-sub-header {
+    direction: rtl;
+    text-align: center;
+  }
+
+  .logo img {
+    width: 100%;
+  }
+
+  .user-image {
+    float: right;
+
+    width: 100px;
+
+    height: 100px;
+  }
+
+  .user-contents > p {
+    float: right;
+
+    font-size: 18px;
+
+    padding-top: 40px;
+
+    padding-right: 20px;
+  }
+
+  .user-contents > .green-button {
+    float: left;
+
+    width: initial;
+    padding: 10px 25px;
+
+    margin-top: 28px;
+  }
+
+  .create_buy {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 715px) {
+  .name-header-profile {
+    display: none;
+  }
+
+  .profile-menu-header i {
+    position: absolute;
+    left: -75px;
+    top: 22px;
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 555px) {
+  .user-image {
+    float: right;
+
+    width: 60px;
+
+    height: 60px;
+  }
+
+  .user-contents > .green-button {
+    float: left;
+    width: initial;
+    padding: 10px;
+    margin-top: 11px;
+  }
+
+  .user-contents > p {
+    float: right;
+    font-size: inherit;
+    padding-top: 18px;
+    padding-right: 5px;
+  }
+
+  .logo {
+    padding: 6px 10px;
+  }
+
+  #article-list > div {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .logo {
+    padding: 6px 63px;
+    width: 100%;
+    height: 109px;
+  }
+
+  .profile-menu-header {
+    padding: 3px;
+    padding-left: 35px;
+    float: left;
+  }
+}
 </style>
 
 <template>
+  <div>
+    <!--modal-->
+    <div class="container">
+      <div
+        class="modal"
+        id="searchFilter"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="searchFilter"
+      >
+        <div class="modal-dialog">
+          <a href="#" class="close-dialog-popup" data-dismiss="modal">
+            <i class="fa fa-times"></i>
+          </a>
 
-    <div>
-        <!--modal-->
-
-        <div class="container">
-            <div class="modal"
-                 id="searchFilter"
-                 tabindex="-1" role="dialog"
-                 aria-labelledby="searchFilter">
-
-                <div class="modal-dialog">
-
-                    <a href="#" class="close-dialog-popup" data-dismiss="modal">
-                        <i class="fa fa-times"></i>
-                    </a>
-
-                    <div class="main_popup_content">
-
-                        <div class="col-xs-12">
-                            <div class="filter-mobile-sidebar ">
-                                <ProductAsideCategories
-                                        :productsInfo="products"
-                                        :categoryId="categoryId"
-                                        :subCategoryId="subCategoryId"
-                                        :provinceId="provinceId"
-                                        :cityId="cityId"
-                                        v-on:productsToParent="filterProducts($event)"/>
-
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- /.modal-dialog -->
+          <div class="main_popup_content">
+            <div class="col-xs-12">
+              <div class="filter-mobile-sidebar">
+                <ProductAsideCategories
+                  :productsInfo="products"
+                  :categoryId="categoryId"
+                  :subCategoryId="subCategoryId"
+                  :provinceId="provinceId"
+                  :cityId="cityId"
+                  v-on:productsToParent="filterProducts($event)"
+                />
+              </div>
             </div>
+          </div>
         </div>
-
-        <div class="flat-plust-icon hidden-lg hidden-md">
-            <a href="#" @click.prevent="addProductOrRequest()"><i class="fa fa-plus"></i> </a>
-        </div>
-
-        <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
-            <div class="container">
-
-                <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
-                    <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید">
-
-                    <button class="btn-search">
-                        <i class="fa-search fa"></i>
-                    </button>
-
-                    <button class="btn-filter  hidden-lg "
-                            data-toggle="modal" data-target="#searchFilter">
-                        فیلتر
-                        <i class="fa fa-filter"></i>
-                    </button>
-
-                </div>
-
-                <div class="links-sub-header   hidden-xs col-sm-4 pull-left">
-                    <ul class="list-inline">
-                        <li class="list-item active">
-                            <h1 >
-                                <a href="">
-                                    لیست محصولات
-                                </a>
-                            </h1>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-
-      <main id="main" class="container ">
-
-
-                    <div class="col-xs-12 col-lg-9">
-                    <div class="row">
-                        <section class="main-content col-xs-12" v-if="products.length > 0  ">
-
-                               <div id="article-list" class="row" >
-                                <div class="col-xs-12"  v-for="(product,productIndex) in products">
-                                    <ProductArticle
-                                            v-if="products.length >= productIndex"
-                                            :key="product.main.id"
-                                            :product="product"
-                                            :loading_img="loading_img"
-                                            :defultimg="defultimg"
-                                            :str="str"
-                                            :loading="loading"
-                                            :currentUser="currentUser"
-                                    />
-                                </div>
-
-                                <div class="load-more-button col-xs-12 "
-                                     v-if="searchText === '' && continueToLoadProducts === true ">
-
-
-                                            <button class="btn btn-loader " @click.prevent="feed()">
-                                                <div class="btn-content">
-                                                    <span class="hidden-xs  text-rtl" v-show="!loadMoreActive">
-                                                        مشاهده محصولات بیشتر
-                                                        <i class="fa fa-plus"></i>
-
-                                                    </span>
-
-                                                    <span class="hidden-sm hidden-md hidden-lg text-rtl" v-show="!loadMoreActive">
-                                                        محصولات بیشتر
-                                                        <i class="fa fa-plus"></i>
-                                                    </span>
-
-
-
-                                                    <div v-show="loadMoreActive" class="btn-loader-active-wrapper ">
-                                                        <img  :src="loading_img">
-                                                    </div>
-                                                </div>
-                                            </button>
-
-                                  </div>
-                                </div>
-
-                        </section>
-<!-- test -->
-                        <section class="main-content  col-xs-12"
-                                 v-else-if="products.length === 0 && searchActive === true">
-                            <p></p>
-
-                            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-
-                            <p>شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-
-                            <br/>
-
-                            <div class="text-center">
-                                <button class="btn btn-success">درخواست خرید</button>
-                            </div>
-
-                        </section>
-
-                        <section class="main-content  col-xs-12 "
-                                 v-else-if="products.length === 0 && searchText !== '' ">
-                            <p></p>
-
-                            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-
-                            <p class="text-center" dir="rtl">شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-                            <br/>
-
-                            <div class="text-center">
-                                <a class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">درخواست
-                                    خرید
-                                </a>
-                                <br/>
-
-                                <a class="green-button col-xs-4 " @click="resetFilter()">نمایش همه محصولات</a>
-
-                            </div>
-
-                            <br/>
-                        </section>
-
-                        <section class="main-content  col-xs-12 "
-                                 v-else-if="products.length === 0 && searchText === '' ">
-                            <p></p>
-
-                            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-
-                            <p class="text-center" dir="rtl">شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-
-                            <br/>
-
-                            <div class="text-center">
-                                <a class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">
-                                    درخواست
-                                    خرید
-                                </a>
-
-                                <br/>
-                                <a class="green-button col-xs-4 " @click.prevent="resetFilter()">نمایش همه محصولات</a>
-                            </div>
-
-                            <br/>
-                        </section>
-
-
-
-
-                        <section v-else  class=" col-xs-12"
-
-                                 >
-                                <div class="row">
-                                     <div  v-for="(defaultItem ,index) in 8" :key="index" class="col-xs-12">
-                                         <div class=" col-xs-12 padding-15 margin-15-0  default-item-wrapper shadow-content ">
-
-                                             <div class="default-user-contents  col-xs-12 padding-0">
-
-                                                 <div class="  placeholder-content default-article-user-image  pull-right"></div>
-
-
-                                                     <span class="padding-top-5 placeholder-content margin-15 pull-right content-min-width "></span>
-
-
-
-                                                    <span class="margin-0 placeholder-content  default-button-min-with  pull-left"></span>
-
-
-
-
-                                             </div>
-
-                                             <div class="default-article-contents padding-0 margin-15-0 col-xs-12 ">
-
-                                                 <div class="default-wrapper-main-image pull-right ">
-
-                                                     <span class="default-main-image  placeholder-content"></span>
-
-                                                 </div>
-
-
-                                                <div class=" default-main-article-content ">
-
-
-                                                        <span class=" content-half-width placeholder-content "></span>
-
-                                                        <span class=" content-default-width placeholder-content "></span>
-
-                                                         <span class=" content-min-width placeholder-content "></span>
-
-                                                        <span class=" content-half-width placeholder-content "></span>
-
-                                                     </div>
-                                             </div>
-                                         </div>
-
-                                     </div>
-                                </div>
-
-
-
-                        </section>
-                          </div>
-                    </div>
-
-                    <aside id="sidebar" class=" product-sidebar sidebar hidden-xs  hidden-sm hidden-md col-lg-3">
-
-                        <div class="row">
-
-                            <div class="sidebar__inner col-xs-12" style="position: relative;">
-
-
-                                <ProductAsideCategories
-                                        :productsInfo="products"
-                                        :categoryId="categoryId"
-                                        :subCategoryId="subCategoryId"
-                                        :provinceId="provinceId"
-                                        :cityId="cityId"
-                                        v-on:productsToParent="filterProducts($event)"
-                                />
-
-
-                         </div>
-
-                        </div>
-
-                    </aside>
-
-
-
-        </main>
+        <!-- /.modal-dialog -->
+      </div>
     </div>
+
+    <div class="flat-plust-icon hidden-lg hidden-md">
+      <a href="#" @click.prevent="addProductOrRequest()">
+        <i class="fa fa-plus"></i>
+      </a>
+    </div>
+
+    <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
+      <div class="container">
+        <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
+          <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید" />
+
+          <button class="btn-search">
+            <i class="fa-search fa"></i>
+          </button>
+
+          <button class="btn-filter hidden-lg" data-toggle="modal" data-target="#searchFilter">
+            فیلتر
+            <i class="fa fa-filter"></i>
+          </button>
+        </div>
+
+        <div class="links-sub-header hidden-xs col-sm-4 pull-left">
+          <ul class="list-inline">
+            <li class="list-item active">
+              <h1>
+                <a href>لیست محصولات</a>
+              </h1>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <main id="main" class="container">
+      <div class="col-xs-12 col-lg-9">
+        <div class="row">
+          <section class="main-content col-xs-12" v-if="products.length > 0  ">
+            <div id="article-list" class="row">
+              <div class="col-xs-12" :key="productIndex" v-for="(product,productIndex) in products">
+                <ProductArticle
+                  :productIndex="productIndex"
+                  v-if="products.length >= productIndex"
+                  :key="product.main.id"
+                  :product="product"
+                  :loading_img="loading_img"
+                  :defultimg="defultimg"
+                  :str="str"
+                  :loading="loading"
+                  :currentUser="currentUser"
+                />
+              </div>
+              <div
+                class="load-more-button col-xs-12"
+                v-if="searchText === '' && continueToLoadProducts === true "
+              >
+                <button class="btn btn-loader" @click.prevent="feed()">
+                  <div class="btn-content">
+                    <span class="hidden-xs text-rtl" v-show="!loadMoreActive">
+                      مشاهده محصولات بیشتر
+                      <i class="fa fa-plus"></i>
+                    </span>
+
+                    <span class="hidden-sm hidden-md hidden-lg text-rtl" v-show="!loadMoreActive">
+                      محصولات بیشتر
+                      <i class="fa fa-plus"></i>
+                    </span>
+
+                    <div v-show="loadMoreActive" class="btn-loader-active-wrapper">
+                      <img :src="loading_img" />
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </section>
+          <!-- test -->
+          <section
+            class="main-content col-xs-12"
+            v-else-if="products.length === 0 && searchActive === true"
+          >
+            <p></p>
+
+            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+
+            <p>شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+
+            <br />
+
+            <div class="text-center">
+              <button class="btn btn-success">درخواست خرید</button>
+            </div>
+          </section>
+
+          <section
+            class="main-content col-xs-12"
+            v-else-if="products.length === 0 && searchText !== '' "
+          >
+            <p></p>
+
+            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+
+            <p class="text-center" dir="rtl">شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+            <br />
+
+            <div class="text-center">
+              <a
+                class="green-button col-xs-4"
+                @click.prevent="registerRequestInSearchNotFoundCase()"
+              >
+                درخواست
+                خرید
+              </a>
+              <br />
+
+              <a class="green-button col-xs-4" @click="resetFilter()">نمایش همه محصولات</a>
+            </div>
+
+            <br />
+          </section>
+
+          <section
+            class="main-content col-xs-12"
+            v-else-if="products.length === 0 && searchText === '' "
+          >
+            <p></p>
+
+            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+
+            <p class="text-center" dir="rtl">شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+
+            <br />
+
+            <div class="text-center">
+              <a
+                class="green-button col-xs-4"
+                @click.prevent="registerRequestInSearchNotFoundCase()"
+              >
+                درخواست
+                خرید
+              </a>
+
+              <br />
+              <a class="green-button col-xs-4" @click.prevent="resetFilter()">نمایش همه محصولات</a>
+            </div>
+
+            <br />
+          </section>
+
+          <section v-else class="col-xs-12">
+            <div class="row">
+              <div v-for="(defaultItem ,index) in 8" :key="index" class="col-xs-12">
+                <div class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content">
+                  <div class="default-user-contents col-xs-12 padding-0">
+                    <div class="placeholder-content default-article-user-image pull-right"></div>
+
+                    <span
+                      class="padding-top-5 placeholder-content margin-15 pull-right content-min-width"
+                    ></span>
+
+                    <span class="margin-0 placeholder-content default-button-min-with pull-left"></span>
+                  </div>
+
+                  <div class="default-article-contents padding-0 margin-15-0 col-xs-12">
+                    <div class="default-wrapper-main-image pull-right">
+                      <span class="default-main-image placeholder-content"></span>
+                    </div>
+
+                    <div class="default-main-article-content">
+                      <span class="content-half-width placeholder-content"></span>
+
+                      <span class="content-default-width placeholder-content"></span>
+
+                      <span class="content-min-width placeholder-content"></span>
+
+                      <span class="content-half-width placeholder-content"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <aside id="sidebar" class="product-sidebar sidebar hidden-xs hidden-sm hidden-md col-lg-3">
+        <div class="row">
+          <div class="sidebar__inner col-xs-12" style="position: relative;">
+            <ProductAsideCategories
+              :productsInfo="products"
+              :categoryId="categoryId"
+              :subCategoryId="subCategoryId"
+              :provinceId="provinceId"
+              :cityId="cityId"
+              v-on:productsToParent="filterProducts($event)"
+            />
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
 </template>
 <script>
     import ProductArticle from './product_components/product_article'
@@ -763,7 +698,7 @@
 
     var visible = false;
     export default {
-        components: {
+      components: {
             ProductArticle,
             ProductAsideCategories,
         },
@@ -793,7 +728,7 @@
                 cityId: '',
                 searchValue: "",
                 scrolled: false,
-                productCountInPage: 10,
+                productCountInPage:JSON.parse(localStorage.getItem('productCountInPage'))|| 10,
                 productCountInEachLoad: 10,
                 continueToLoadProducts: true,
                 searchActive: false,
@@ -828,6 +763,7 @@
                 }
             },
             init: function () {
+              return new Promise((resolve,reject)=>{
                 var self = this;
                 
                 if(this.$route.query.s){
@@ -855,7 +791,8 @@
                                 to_record_number: self.productCountInPage,
                             }).then(function (response) {
                                 self.products = response.data.products;
-                                self.loading = false;
+                                localStorage.removeItem('productCountInPage')
+                                resolve(self.loading = false);
                                 eventBus.$emit('submiting', false);
                                 setTimeout(function(){
                                     self.sidebarScroll();
@@ -863,8 +800,8 @@
 
                             });
                         }
-                    });
-
+                    }).catch(error=>reject(error));
+})
             },
             feed() {
 
@@ -876,7 +813,8 @@
                         from_record_number: 0,
                         to_record_number: this.productCountInPage,
                     }).then(function (response) {
-                        self.products = response.data.products;
+                      self.products=response.data.products;
+                      localStorage.productCountInPage=JSON.stringify(self.productCountInPage) 
                         eventBus.$emit('submiting', false);
                         if (self.products.length + 1 < self.productCountInPage) {
                             self.continueToLoadProducts = false;
@@ -996,9 +934,9 @@
 
                 axios.post('/user/get_product_list', searchObject)
                     .then(function (response) {
-                        self.products = response.data.products;
-                        eventBus.$emit('submiting', false);
-                        self.scrollToTop();
+                      self.products=response.data.products
+                      eventBus.$emit('submiting', false);
+                        // self.scrollToTop();
                     })
                     .catch(function (err) {
                         alert('خطایی رخ داده است. دوباره تلاش کنید.');
@@ -1224,21 +1162,23 @@
         },
         created() {
             gtag('config', 'UA-129398000-1', {'page_path': '/product-list'});
-            
             eventBus.$on("textSearch", event => {
                 this.searchText = event;
             });
 
-            document.addEventListener('click', this.documentClick);
+            // document.addEventListener('click', this.documentClick);
         },
-        mounted() {
-            this.scrollToTop();
-            this.init();
-
-
+              mounted() {
+                let self=this
+            this.init().then(loading=>{
+              if(!loading){
+                   let scrollPosition=(localStorage.getItem('scroll'))||{x:0,y:0};
+                   window.scrollTo(0,scrollPosition);
+                   localStorage.removeItem('scroll')
+                   }
+            });
             this.stopLoader();
-
-        },
+            },
         metaInfo() {
 
             return {

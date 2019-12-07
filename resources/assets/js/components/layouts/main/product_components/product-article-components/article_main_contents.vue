@@ -184,14 +184,14 @@ span {
     top: 15px;
   }
 }
+.pointer-class {
+  cursor: pointer;
+}
 </style>
 <template>
-  <router-link
-    class="main-article-contents-wrapper"
-    :to="$parent.productUrl"
-    @click="$parent.registerComponentStatistics('product',
-                           'show-product-in-seperate-page',
-                           'show-product-in-seperate-page')"
+  <div
+    class="main-article-contents-wrapper pointer-class"
+    @click="setScroll()"
     :class="{ 'is-user-valid-content': $parent.product.user_info.active_pakage_type != 0 }"
   >
     <div class="main-article-contents-image-wrapper">
@@ -291,17 +291,27 @@ span {
         <span>اشتراک گذاری</span>
       </router-link>
     </div>
-  </router-link>
+  </div>
 </template>
 
 <script>
 import ProductImage from "./product_image";
 
 export default {
+  props: ["productIndex"],
   components: {
     ProductImage
   },
   methods: {
+    setScroll: function() {
+      localStorage.setItem("scrollIndex", this.$props.productIndex);
+      this.$router.push(this.$parent.productUrl);
+      this.$parent.registerComponentStatistics(
+        "product",
+        "show-product-in-seperate-page",
+        "show-product-in-seperate-page"
+      );
+    },
     getProductName: function() {
       var productName = "";
       productName =

@@ -120,7 +120,7 @@ i {
 
   text-overflow: ellipsis;
 }
-
+    
 .user-image img,
 .user-image > div {
   height: 100%;
@@ -181,6 +181,7 @@ i {
         @click.prevent="deleteProduct()"
         class="user-action-link red-text"
       >حذف محصول</a>
+        
     </div>
     <div class="article-action-buttons">
       <button
