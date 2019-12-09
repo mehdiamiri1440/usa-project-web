@@ -11,6 +11,7 @@ use App\buyAd;
 use App\sell_offer;
 use App\Http\Controllers\reputation_controller;
 use DB;
+use App\message;
 
 class profile_controller extends Controller
 {
@@ -528,11 +529,14 @@ class profile_controller extends Controller
         $reputation_controller_object = new reputation_controller();
 
         $reputation_score = $reputation_controller_object->calculate_user_reputation_score($user_id);
+        
+        $response_rate = $this->get_user_response_rate($user_id);
 
         $result_array = [
             'buyAd_count' => $buyAd_count,
             'transaction_count' => $transaction_count,
-            'reputation_score' => $reputation_score
+            'reputation_score' => $reputation_score,
+            'response_rate'   => $response_rate
         ];
 
         return $result_array;
@@ -554,12 +558,15 @@ class profile_controller extends Controller
         $reputation_controller_object = new reputation_controller();
 
         $reputation_score = $reputation_controller_object->calculate_user_reputation_score($user_id);
+        
+        $response_rate = $this->get_user_response_rate($user_id);
 
         $result_array = [
             'product_count' => $product_count,
             'transaction_count' => $transaction_count,
             'reputation_score' => $reputation_score,
             'validated_seller' => config("subscriptionPakage.type-$user_active_pakage_type.validated-seller"),
+            'response_rate' => $response_rate
         ];
 
         return $result_array;
@@ -717,5 +724,26 @@ class profile_controller extends Controller
         }
 
     }
+    
+    protected function get_user_response_rate($user_id)
+    {
+        $total_contacts_count = message::where('receiver_id',$user_id)
+                                            ->select('sender_id')
+                                            ->distinct()
+                                            ->get()
+                                            ->count();
+        if($total_contacts_count == 0){
+            return 0;
+        }
+        $seen_by_user_contacts_count = message::where('receiver_id',$user_id)
+                                            ->where('is_read',true)
+                                            ->select('sender_id')
+                                            ->distinct()
+                                            ->get()
+                                            ->count();
+        
+        return round(($seen_by_user_contacts_count / $total_contacts_count) * 100,2);
+                                            
+    }       
 
 }

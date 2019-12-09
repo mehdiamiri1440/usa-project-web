@@ -460,6 +460,7 @@ class product_controller extends Controller
             ->last();
 
         $product_related_data['user_info'] = $product_related_user_info;
+        $product_related_data['user_info']->response_rate = $this->get_user_response_rate($product->myuser_id);
         $product_related_data['profile_info'] = $product_related_profile_info;  
 		
 //		if(session()->has('user_id'))
