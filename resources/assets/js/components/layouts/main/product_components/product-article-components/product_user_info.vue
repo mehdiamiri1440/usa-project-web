@@ -94,7 +94,7 @@ i {
 }
 
 .user-action-link {
-  padding-top: 9px;
+  padding-top: 19px;
 
   padding-right: 8px;
 
@@ -112,9 +112,9 @@ i {
 
   color: #777;
 
-  height: 28px;
+  height: 21px;
 
-  padding-top: 5px;
+  padding-top: 0;
 
   white-space: nowrap;
 
@@ -126,10 +126,21 @@ i {
   height: 100%;
 }
 
+p.response-rate{
+
+  font-size : 10px;
+  height: 21px;
+  padding: 0;
+
+}
+.response-rate span{
+  color: #e41c38;
+}
+
 @media screen and (max-width: 400px) {
   .user-information-contents p {
     max-width: 100px;
-    font-size: 13px;
+
   }
   .user-action-link {
     padding-right: 3px;
@@ -166,6 +177,8 @@ i {
 
         <div class="user-information-content">
           <p v-if="user_info" v-text="user_full_name"></p>
+          <p v-if="user_info" class="response-rate" > احتمال پاسخ گویی <span v-text="user_info.response_rate"></span><span>%</span></p>
+
         </div>
       </router-link>
 

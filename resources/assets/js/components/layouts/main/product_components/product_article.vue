@@ -211,6 +211,66 @@ label {
 
   display: block;
 }
+
+.article-features{
+  
+  text-align: left;
+  
+  direction: rtl;
+  
+  padding: 0 15px 15px;
+
+  position: absolute;
+
+  left: 15px;
+
+  bottom: 15px;
+
+  right: 0;
+}
+
+.article-features button{
+  background: none;
+  border:none;
+
+}
+
+.article-features button.disable{
+  background: #777;
+  border:none;
+}
+
+.article-features button.elevator-event{
+  background: #e41c38;
+  color: #fff;
+  border-radius: 4px;
+  padding: 5px 14px 1px;
+}
+
+.article-features button.elevator-event{
+  background: #e41c38;
+  color: #fff;
+  border-radius: 4px;
+  padding: 4px 14px;
+}
+
+.article-features button.disable{
+  background: #777;
+  border:none;
+}
+
+
+@media screen and (max-width: 555px) {
+
+  .article-features{
+   
+    position: relative;
+   
+    padding: 0 15px;
+ 
+  }
+
+}
 </style>
 
 <template>
@@ -329,6 +389,19 @@ label {
     />
 
     <ArticleMainContents :productIndex="productIndex" />
+      
+    <div class="article-features">
+      <button v-if="isMyProfile"  class="elevator-event" @click.prevent="elevatorEvent()">
+        <i class="fas fa-chart-line"></i>
+    
+          اعمال نردبان
+      
+      </button>
+
+      <button data-toggle="tooltip" data-placement="bottom"  title="نردبان اعمال شده است"  class="elevator-event active disable">
+        <i class="fas fa-chart-line"></i>
+      </button>
+    </div>
 
     <!--google codes-->
     <script v-html="jsonLDObject" type="application/ld+json"></script>
@@ -648,10 +721,18 @@ export default {
         description: description,
         fatal: fatal
       });
+    },
+    elevatorEvent:function () {
+        eventBus.$emit("elevatorText", "با استفاده از نردبان، آگهی شما تا زمان دریافت آگهی تازه تر در همان دسته بندی، به عنوان اولین آگهی نمایش داده می‌شود.");
+
+        $("#elevator-modal").modal("show")
+
     }
   },
   mounted() {
     this.init();
+    $('.elevator-event.active').tooltip()
+    
   }
 };
 </script>

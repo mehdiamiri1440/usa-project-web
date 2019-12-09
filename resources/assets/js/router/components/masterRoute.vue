@@ -1,5 +1,8 @@
 <template>
     <div>
+
+        
+
        <header-master-layouts
                 :assets= "assets"
                 :user_id="userId"
@@ -59,6 +62,13 @@
         components: {
             HeaderMasterLayouts,
             FooterMasterLayouts
+        },
+        data:function(){
+
+          return{
+            productByResponseRate : false
+          }
+
         },
         props: [
             'userId',

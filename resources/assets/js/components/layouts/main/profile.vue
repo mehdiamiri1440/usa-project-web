@@ -37,7 +37,8 @@
 
     .profile-main-content-item {
         direction: rtl;
-        overflow: hidden;
+        float: right;
+        width: 100%;
         margin: -100px auto 24px;
         border-radius: 5px;
         box-shadow: 0 0 5px #cfcfcf;
@@ -336,6 +337,18 @@
         margin-top: 10px;
     }
 
+    p.response-rate{
+      color: #777;
+      font-size : 12px;
+      margin: 7px auto 0;
+      padding: 0;
+
+    }
+
+    p.response-rate span{
+      color: #e41c38;
+    }
+
     @media screen and (max-width: 992px) {
 
         .title-page {
@@ -472,6 +485,7 @@
 
         }
 
+
     }
 
     @media screen and (max-width: 715px) {
@@ -579,6 +593,20 @@
             margin: 0;
         }
 
+        p.response-rate{
+          color: #777;
+          font-size : 12px;
+          margin: 7px auto 0;
+          padding: 0;
+          width: 100%;
+
+        }
+
+        p.response-rate span{
+          color: #e41c38;
+        }
+
+
     }
 
     @media screen and (max-width: 500px) {
@@ -599,19 +627,19 @@
         }
     }
     .green-button {
-  margin: 15px 0 0;
-  display: inline-block;
-  background: #00c569;
-  color: #fff;
-  padding: 10px 35px;
-  width: 100%;
-  border-radius: 3px;
-  text-align: center;
-  font-size: 13px;
-  font-weight: bold;
-  line-height: 21px;
-  border: none;
-}
+      margin: 15px 0 0;
+      display: inline-block;
+      background: #00c569;
+      color: #fff;
+      padding: 10px 35px;
+      width: 100%;
+      border-radius: 3px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: bold;
+      line-height: 21px;
+      border: none;
+    }
 </style>
 
 <template>
@@ -741,7 +769,8 @@
                                         </a>
                                     </div>
 
-                                    <h1 class="content_title col-xs-12 col-sm-8 col-md-9"
+                         
+                                        <h1 class="content_title col-xs-12 col-sm-8 col-md-9"
                                         itemprop="name">
                                         <span v-text="
                                         profileOwner.user_info.first_name +
@@ -749,14 +778,19 @@
                                         + profileOwner.user_info.last_name"
                                         >
                                         </span>
-
+                                        
                                         <span class="valid-seller"
-                                              v-if="profileOwnerStatistics.validated_seller">
+                                              v-if="!profileOwnerStatistics.validated_seller">
 
                                             <i class="fa fa-check-circle"></i>
                                             فروشنده معتبر
                                         </span>
+                                         <p  class="response-rate" > احتمال پاسخ گویی <span>86</span><span>%</span>
+                                   </p>
                                     </h1>
+
+                                    
+ 
 
                                 </div>
 
@@ -900,12 +934,13 @@
                                         </span>
 
                                         <span class="valid-seller"
-                                              v-if="profileOwnerStatistics.validated_seller">
+                                              v-if="!profileOwnerStatistics.validated_seller">
 
                                             <i class="fa fa-check-circle"></i>
                                             فروشنده معتبر
                                         </span>
-
+                                    <p  class="response-rate" > احتمال پاسخ گویی <span>86</span><span>%</span>
+                                   </p>
                                     </h1>
                                     <div class="content_user_info col-xs-12 col-sm-8">
 

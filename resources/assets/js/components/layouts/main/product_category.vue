@@ -340,6 +340,52 @@
         margin-top: -15px;
     }
 
+
+
+.response-rate-filter-desktop-wrapper, .response-rate-filter-mobile-wrapper{
+
+  background: #fff;
+  direction: rtl;
+  margin: 15px auto;
+  padding: 7px 15px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+  box-shadow: 0 3px 6px
+  rgba(0,0,0,0.16);
+  overflow: hidden;
+
+}
+
+.response-rate-filter-desktop-wrapper .checkbox, .response-rate-filter-mobile-wrapper .chekbox{
+
+  margin: 0;
+  float: right;
+
+}
+
+.response-rate-filter-mobile-wrapper .checkbox-slider--b-flat{
+    margin: 0 auto 5px;
+}
+
+.response-rate-filter-mobile-wrapper .checkbox-slider--b-flat input + span::before, .response-rate-filter-mobile-wrapper .checkbox-slider--b-flat input + span::after{
+    top: 0;
+}
+
+.response-rate-filter-mobile-wrapper{
+    padding: 7px 0;
+
+    margin: 0;
+
+    overflow: hidden;
+
+    float: right;
+
+    width: initial;
+
+   box-shadow: none;
+   background: none;
+}
+
     @media screen and (max-width: 1199px) {
         .search-box input {
             width: calc(100% - 75px);
@@ -375,7 +421,7 @@
         }
 
         .search-box {
-            margin: 7px auto;
+            margin: 9px auto 0;
             padding: 0;
         }
 
@@ -539,34 +585,28 @@
             <a href="#" @click.prevent="addProductOrRequest()"><i class="fa fa-plus"></i> </a>
         </div>
 
-        <div class="sub-header-fix sub-header hidden-lg container-fluid">
+       <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
+        <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
+          <div class="response-rate-filter-mobile-wrapper pull-right"> 
+              <div class="response-rate-filter">
 
-            <div class="container">
-                <div class="search-box hidden col-md-8 col-xs-12 col-lg-5">
-                    <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید">
+                    <div class="checkbox checkbox-slider--b-flat">
+                      <label>
+                        <input type="checkbox" v-model="$parent.productByResponseRate"><span>                  مرتب سازی بر اساس احتمال پاسخ گویی
+    </span>
+                      </label>
+                    </div>
 
-                    <button class="btn-search ">
-                        <i class="fa-search fa"></i>
-                    </button>
-
-                    <button class="btn-filter "
-                            data-toggle="modal" data-target="#searchFilter">
-                        فیلتر
-                        <i class="fa fa-filter"></i>
-                    </button>
-
-                </div>
-
-                <div class="search-box col-xs-6">
-
-                    <button class="btn-filter "
-                            data-toggle="modal" data-target="#searchFilter">
-                        فیلتر
-                        <i class="fa fa-filter"></i>
-                    </button>
-
-                </div>
-
+                  </div>
+            </div>
+          
+          <button class="btn-filter pull-left" data-toggle="modal" data-target="#searchFilter">
+            فیلتر
+            <i class="fa fa-filter"></i>
+          </button>
+        </div>
+       
+<!-- 
                 <div class="links-sub-header   col-xs-6 col-md-3 pull-right  ">
                     <ul class="list-inline">
                         <li class="list-item active">
@@ -577,8 +617,8 @@
                             </h1>
                         </li>
                     </ul>
-                </div>
-            </div>
+                </div> -->
+
         </div>
 
 
@@ -587,6 +627,22 @@
 
                     <div class="col-xs-12 col-lg-9">
                     <div class="row">
+                        <section class="hidden-xs  col-xs-12">
+            
+                      
+                          <div class="response-rate-filter-desktop-wrapper">
+
+                            <div class="checkbox checkbox-slider--b-flat">
+                              <label>
+                                <input type="checkbox" v-model="$parent.productByResponseRate"><span>                  مرتب سازی بر اساس احتمال پاسخ گویی
+            </span>
+                              </label>
+                            </div>
+
+                          </div>
+                       
+
+                      </section>
                         <section class="main-content col-xs-12" v-if="products.length > 0  ">
 
                                <div id="article-list" class="row" >
@@ -876,6 +932,7 @@
                             self.loading = true;
                             axios.post('/user/get_product_list', {
                                 from_record_number: 0,
+                                response_rate: self.$parent.productByResponseRate,
                                 to_record_number: self.productCountInPage,
                                 search_text:categoryName
 
@@ -902,6 +959,7 @@
 
                     axios.post('/user/get_product_list', {
                         from_record_number: 0,
+                        response_rate: self.$parent.productByResponseRate,
                         to_record_number: this.productCountInPage,
                         search_text:this.getCategoryName()
                     }).then(function (response) {
@@ -993,6 +1051,9 @@
                 eventBus.$emit('submiting', true);
 
                 var searchObject = {};
+
+                searchObject.response_rate = self.$parent.productByResponseRate;
+
 
                 if (this.categoryId) {
                     searchObject.category_id = this.categoryId;
@@ -1087,6 +1148,20 @@
                     self.applyFilter();
 
                 }, 1500);
+
+            },
+            '$parent.productByResponseRate':function(){
+                this.products = {};
+                
+                if (this.searchText) {
+                  
+                  this.applyFilter();
+                  
+                }else{
+                  
+                  this.init();
+                  
+                }
 
             },
 

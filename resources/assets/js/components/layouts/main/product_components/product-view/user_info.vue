@@ -48,11 +48,13 @@ i {
 }
 
 .user-information-content-image img {
-  width: initial;
-  height: 100%;
+  width: 100%;
+  min-height: 100%;
   position: relative;
   left: 50%;
-  transform: translate(-50%, 0);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  top: 50%;
 }
 .valid-icon {
   background: #00c569;
@@ -97,6 +99,19 @@ p.user-valid-text {
 
   color: #00c569;
 }
+
+    p.response-rate{
+      color: #777;
+      font-size : 12px;
+      margin: 7px auto 0;
+      padding: 0;
+      direction: rtl;
+
+    }
+
+    p.response-rate span{
+      color: #e41c38;
+    }
 
 @media screen and (max-width: 1199px) {
   .user-info-wrapper {
@@ -285,6 +300,10 @@ p.user-valid-text {
           class="user-valid-text"
         >کاربر تایید شده</p>
       </div>
+
+         <p  class="response-rate" > احتمال پاسخ گویی <span >85</span><span>%</span></p>
+   
+
     </router-link>
     <div class="user-info-actions">
       <router-link

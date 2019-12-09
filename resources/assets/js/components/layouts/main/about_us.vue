@@ -14,6 +14,16 @@
         text-align: center;
     }
 
+    .about-us-icon {
+    background: 
+    #fff;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 3px 6px
+        rgba(0,0,0,0.1);
+    }
+    
     .about-us-icons .row > div {
         min-height: 310px;
         float: right;
@@ -26,6 +36,7 @@
     .about-us-icons img {
         max-width: 130px;
     }
+
 </style>
 
 <template>
