@@ -99,6 +99,10 @@ section {
     display: block;
 }
 
+.green-text{
+  color: #00c569;
+}
+
 .green-button:focus,
 .green-button:hover {
     color: #fff !important;
@@ -253,6 +257,8 @@ select {
     background: #279b41 !important;
 }
 
+
+
 .blue-button {
     margin: 15px 0;
     display: inline-block;
@@ -267,10 +273,30 @@ select {
 }
 
 .blue-button:hover,
-.blue-button:focus {
+.blue-button:focus,
+.bg-blue:hover,
+.bg-blue:focus {
     color: #fff;
     background: #1d1060;
 }
+
+.bg-blue{
+
+    background: #150e47;
+
+}
+
+.bg-gray:hover,
+.bg-gray:focus {
+    color: #fff;
+    background: #555;
+}
+.bg-gray{
+
+    background: #777;
+
+}
+
 
 .message-wrapper .chat-page ul {
     background: url('../../img/whatsappbg.jpg') repeat;

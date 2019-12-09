@@ -1,4 +1,5 @@
 <style scoped>
+    
 
     .android-download-alert-wrapper{
 
@@ -57,6 +58,47 @@
 <template>
     <div>
 
+
+         <div class="container">
+            <div
+                    id="elevator-modal"
+                    class="modal fade"
+                    tabindex="-1"
+                    role="dialog"
+             
+            >
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="main_popup_content">
+                            <a href="#" data-dismiss="modal">
+                                <i class="fa fa-times"></i>
+                            </a>
+                            <h1 class="green-text">
+                                 <span >25,000</span>
+                                  تومان
+                            </h1>
+                            <br/>
+                            <p class="main-pop-up" v-text="elevatorText"></p>
+
+                            <a href="#" class="btn green-button bg-gray" data-dismiss="modal"> متوجه شدم</a>
+
+                            <a
+                                    href="#"
+                                    class="btn green-button "
+                                    data-dismiss="modal"
+                            >
+                            خرید نردبان
+                            </a>
+
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+        </div>
+
+
         <router-view
                 :user-id="userId"
                 :is-seller="isSeller"
@@ -110,8 +152,9 @@
 
 
 <script>
-
+    
     import router from '../router.js'
+    import {eventBus} from '../router.js'
     import Cookies from "js-cookie";
     import IsWebview from "is-webview";
 
@@ -120,7 +163,8 @@
 
             return{
                 iswebview : navigator.userAgent == "webView" ? true : false, 
-                isConditionSatisfied : false
+                isConditionSatisfied : false,
+                elevatorText:""
             }
 
         },
@@ -136,6 +180,10 @@
         created:function () {
             window.localStorage.setItem('userId', this.userId);
             window.localStorage.setItem('userType', this.isSeller);
+
+            eventBus.$on("elevatorText", $event => {
+                this.elevatorText = $event;
+            });
         },
         router,
         methods:{

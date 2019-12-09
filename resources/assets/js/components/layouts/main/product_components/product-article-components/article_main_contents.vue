@@ -127,6 +127,7 @@ span {
   height: 24px;
 }
 
+
 @media screen and (max-width: 767px) {
   .main-article-contents a p {
     max-width: 300px;
@@ -282,6 +283,8 @@ span {
                       <span>تومان</span>
         </p>-->
       </div>
+
+
       <router-link
         to="#"
         @click.prevent="$parent.copyProductLinkToClipBoard"
@@ -291,6 +294,7 @@ span {
         <span>اشتراک گذاری</span>
       </router-link>
     </div>
+ 
   </div>
 </template>
 

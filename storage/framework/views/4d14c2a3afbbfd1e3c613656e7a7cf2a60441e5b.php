@@ -17,6 +17,7 @@
     <script src="<?php echo e(asset('assets/js/jquery-3.3.1.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/jquery-ui.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/ResizeSensor.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/bootstrap.min.js')); ?>"></script>
 
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/placeholder-content.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/fontiran.css')); ?>">

@@ -37,7 +37,8 @@
 
     .profile-main-content-item {
         direction: rtl;
-        overflow: hidden;
+        float: right;
+        width: 100%;
         margin: -100px auto 24px;
         border-radius: 5px;
         box-shadow: 0 0 5px #cfcfcf;
