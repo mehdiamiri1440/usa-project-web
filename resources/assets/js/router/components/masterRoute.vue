@@ -60,6 +60,13 @@
             HeaderMasterLayouts,
             FooterMasterLayouts
         },
+        data:function(){
+
+          return{
+            productByResponseRate : false
+          }
+
+        },
         props: [
             'userId',
             'isSeller',

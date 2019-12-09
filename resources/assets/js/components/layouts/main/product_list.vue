@@ -138,7 +138,7 @@ a.close-dialog-popup {
   direction: rtl;
   border: 1px solid #666666;
   border-radius: 6px;
-  padding: 10px 45px 9px 15px;
+  padding: 6px 35px 5px 15px;
   background: #f8f8f8;
   font-size: 12px;
   float: right;
@@ -149,17 +149,18 @@ a.close-dialog-popup {
   border: none;
   position: absolute;
   right: 3px;
-  top: 6px;
+  top: 9px;
   border-left: 1px solid;
-  color: #666;
-  height: 77%;
-  padding: 5px 8px;
-  font-size: 18px;
+  color:
+  #777;
+  padding: 0 7px;
+  font-size: 12px;
+  height: 20px;
 }
 
 .search-box button.btn-filter {
   float: left;
-  padding: 10px 14px;
+  padding: 7px 10px;
   border-radius: 5px;
   border: none;
   background: #000546;
@@ -294,16 +295,67 @@ li.active a::after {
 }
 
 .btn-loader {
+
   overflow: hidden;
+
 }
 
 .btn-loader-active-wrapper {
+
   height: 26px;
+
 }
 
 .btn-loader img {
+
   width: 56px;
+
   margin-top: -15px;
+
+}
+
+.response-rate-filter-desktop-wrapper, .response-rate-filter-mobile-wrapper{
+
+  background: #fff;
+  direction: rtl;
+  margin: 15px auto;
+  padding: 7px 15px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+  box-shadow: 0 3px 6px
+  rgba(0,0,0,0.16);
+  overflow: hidden;
+
+}
+
+.response-rate-filter-desktop-wrapper .checkbox, .response-rate-filter-mobile-wrapper .chekbox{
+
+  margin: 0;
+  float: right;
+
+}
+
+.response-rate-filter-mobile-wrapper .checkbox-slider--b-flat{
+    margin: 0 auto 5px;
+}
+
+.response-rate-filter-mobile-wrapper .checkbox-slider--b-flat input + span::before, .response-rate-filter-mobile-wrapper .checkbox-slider--b-flat input + span::after{
+    top: 0;
+}
+
+.response-rate-filter-mobile-wrapper{
+   padding: 0px;
+
+    margin: 0;
+
+    overflow: hidden;
+
+    float: right;
+
+    width: 100%;
+
+   box-shadow: none;
+   background: none;
 }
 
 @media screen and (max-width: 1199px) {
@@ -327,9 +379,13 @@ li.active a::after {
 }
 
 @media screen and (max-width: 767px) {
+
   .main-content,
   #main {
     padding: 0;
+  }
+  .main-content {
+    padding-top: 32px;
   }
   .sub-header {
     position: fixed;
@@ -338,7 +394,7 @@ li.active a::after {
   }
 
   .search-box {
-    margin: 7px auto;
+    margin: 7px auto 0;
     padding: 0;
   }
 
@@ -497,7 +553,6 @@ li.active a::after {
     </div>
 
     <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
-      <div class="container">
         <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
           <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید" />
 
@@ -510,8 +565,19 @@ li.active a::after {
             <i class="fa fa-filter"></i>
           </button>
         </div>
+        <div class="response-rate-filter-mobile-wrapper"> 
+          <div class="response-rate-filter">
 
-        <div class="links-sub-header hidden-xs col-sm-4 pull-left">
+                <div class="checkbox checkbox-slider--b-flat">
+                  <label>
+                    <input type="checkbox" v-model="$parent.productByResponseRate"><span>                  مرتب سازی بر اساس احتمال پاسخ گویی
+</span>
+                  </label>
+                </div>
+
+              </div>
+        </div>
+       <!--  <div class="links-sub-header hidden-xs col-sm-4 pull-left">
           <ul class="list-inline">
             <li class="list-item active">
               <h1>
@@ -519,13 +585,30 @@ li.active a::after {
               </h1>
             </li>
           </ul>
-        </div>
-      </div>
+        </div> -->
     </div>
 
     <main id="main" class="container">
       <div class="col-xs-12 col-lg-9">
         <div class="row">
+
+          <section class="hidden-xs  col-xs-12">
+            
+          
+              <div class="response-rate-filter-desktop-wrapper">
+
+                <div class="checkbox checkbox-slider--b-flat">
+                  <label>
+                    <input type="checkbox" v-model="$parent.productByResponseRate"><span>                  مرتب سازی بر اساس احتمال پاسخ گویی
+</span>
+                  </label>
+                </div>
+
+              </div>
+           
+
+          </section>
+
           <section class="main-content col-xs-12" v-if="products.length > 0  ">
             <div id="article-list" class="row">
               <div class="col-xs-12" :key="productIndex" v-for="(product,productIndex) in products">
@@ -638,7 +721,7 @@ li.active a::after {
             <br />
           </section>
 
-          <section v-else class="col-xs-12">
+          <section v-else class=" main-content col-xs-12">
             <div class="row">
               <div v-for="(defaultItem ,index) in 8" :key="index" class="col-xs-12">
                 <div class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content">
@@ -695,6 +778,8 @@ li.active a::after {
     import ProductArticle from './product_components/product_article'
     import ProductAsideCategories from './product_components/sidebar/product_aside_categories'
     import {eventBus} from "../../../router/router";
+  
+
 
     var visible = false;
     export default {
@@ -739,6 +824,7 @@ li.active a::after {
                 bottom: false,
                 loadMoreActive: false,
                 searchTextTimeout: null,
+
             }
         },
         methods: {
@@ -788,7 +874,9 @@ li.active a::after {
                             self.loading = true;
                             axios.post('/user/get_product_list', {
                                 from_record_number: 0,
+                                response_rate: self.$parent.productByResponseRate,
                                 to_record_number: self.productCountInPage,
+
                             }).then(function (response) {
                                 self.products = response.data.products;
                                 localStorage.removeItem('productCountInPage')
@@ -811,6 +899,7 @@ li.active a::after {
                     this.productCountInPage += this.productCountInEachLoad;
                     axios.post('/user/get_product_list', {
                         from_record_number: 0,
+                        response_rate: self.$parent.productByResponseRate,
                         to_record_number: this.productCountInPage,
                     }).then(function (response) {
                       self.products=response.data.products;
@@ -898,6 +987,8 @@ li.active a::after {
                 eventBus.$emit('submiting', true);
 
                 var searchObject = {};
+
+                searchObject.response_rate = self.$parent.productByResponseRate;
 
                 if (this.categoryId) {
                     searchObject.category_id = this.categoryId;
@@ -1153,7 +1244,20 @@ li.active a::after {
                     this.searchText = this.$route.query.s.split('+').join(' ');
                 } 
             },
+            '$parent.productByResponseRate':function(){
+                this.products = {};
+                
+                if (this.searchText) {
+                  
+                  this.applyFilter();
+                  
+                }else{
+                  
+                  this.init();
+                  
+                }
 
+            },
             bottom(bottom) {
                 if (bottom) {
                     //this.feed()
