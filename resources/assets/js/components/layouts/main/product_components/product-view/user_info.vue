@@ -103,7 +103,6 @@ p.user-valid-text {
     p.response-rate{
       color: #777;
       font-size : 12px;
-      margin: 7px auto 0;
       padding: 0;
       direction: rtl;
 
@@ -299,10 +298,12 @@ p.user-valid-text {
           v-if="$parent.product.user_info.active_pakage_type != 0"
           class="user-valid-text"
         >کاربر تایید شده</p>
+
+               <p  class="response-rate" > احتمال پاسخ گویی <span v-text="$parent.product.user_info.response_rate + '%' "></span></p>
+   
       </div>
 
-         <p  class="response-rate" > احتمال پاسخ گویی <span >85</span><span>%</span></p>
-   
+  
 
     </router-link>
     <div class="user-info-actions">

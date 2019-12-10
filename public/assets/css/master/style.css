@@ -1048,6 +1048,8 @@ Sizes
 .title-page {
     text-align: center;
     margin: -10px auto 90px;
+    position: relative;
+    z-index: 10;
 }
 
 .des {
