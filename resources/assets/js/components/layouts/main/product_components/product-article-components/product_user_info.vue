@@ -101,6 +101,11 @@ i {
   font-size: 11px;
 }
 
+.user-action-link.default {
+  padding-top: 9px;
+
+}
+
 .user-information-contents p {
   max-width: 120px;
 
@@ -119,6 +124,10 @@ i {
   white-space: nowrap;
 
   text-overflow: ellipsis;
+}
+
+.user-information-content.default{
+  padding-top: 5px;
 }
     
 .user-image img,
@@ -175,16 +184,21 @@ p.response-rate{
           </div>
         </div>
 
-        <div class="user-information-content">
+        <div v-if="user_info.response_rate" class="user-information-content">
           <p v-if="user_info" v-text="user_full_name"></p>
           <p v-if="user_info" class="response-rate" > احتمال پاسخ گویی <span v-text="user_info.response_rate"></span><span>%</span></p>
 
+        </div>
+
+        <div v-else class="user-information-content default">
+          <p v-if="user_info" v-text="user_full_name"></p>
         </div>
       </router-link>
 
       <router-link
         v-if="!is_my_profile_status"
         :to="'/profile/'+ user_name"
+        :class="{'default' : !user_info.response_rate}"
         @click="registerComponentStatistics('product','showUserProfile','show profile')"
         class="user-action-link green-text"
       >مشاهده پروفایل</router-link>
@@ -192,6 +206,7 @@ p.response-rate{
         v-else
         href="#"
         @click.prevent="deleteProduct()"
+        :class="{'default' : !user_info.response_rate}"
         class="user-action-link red-text"
       >حذف محصول</a>
         

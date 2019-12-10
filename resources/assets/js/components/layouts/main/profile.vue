@@ -31,10 +31,6 @@
         padding: 5px 15px;
     }
 
-    .main-content {
-        padding: 0 11px;
-    }
-
     .profile-main-content-item {
         direction: rtl;
         overflow: hidden;
@@ -784,7 +780,7 @@
                                             <i class="fa fa-check-circle"></i>
                                             فروشنده معتبر
                                         </span>
-                                         <p  class="response-rate" > احتمال پاسخ گویی <span>86</span><span>%</span>
+                                         <p  class="response-rate" > احتمال پاسخ گویی <span v-text="profileOwnerStatistics.response_rate + '%'"></span>
                                    </p>
                                     </h1>
 
