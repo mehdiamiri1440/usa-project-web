@@ -156,7 +156,7 @@ export default {
       isImageLoad: false
     };
   },
-  props: ["img", "title", "link", "stock"],
+  props: ["img", "title", "link", "stock","column"],
   mounted: function() {
     $("#product-section .owl-carousel").owlCarousel({
       autoplay: true,
@@ -186,8 +186,12 @@ export default {
           navText: false,
           dots: true
         },
-        767: {
+        992: {
           items: 3,
+          stagePadding: 15
+        },
+        1199: {
+          items: this.column,
           stagePadding: 15
         }
       }
