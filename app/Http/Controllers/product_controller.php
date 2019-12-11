@@ -955,8 +955,8 @@ class product_controller extends Controller
             }
             
             if($score > $max_mached_score){
-                    $most_related_record = $buyAd;
-                    $max_mached_score = $score;
+                $most_related_record = $buyAd;
+                $max_mached_score = $score;
             }
         }
         
@@ -1095,6 +1095,85 @@ class product_controller extends Controller
         
         return round(($seen_by_user_contacts_count / $total_contacts_count) * 100,2);
                                             
-    }       
-	
+    }    
+    
+    
+	public function get_related_products_to_given_the_product(Request $request)
+    {
+        $this->validate($request,[
+            'product_id' => 'required|integer|min:1'
+        ]);
+        
+        $product_id = $request->product_id;
+        
+        $product = product::find($product_id);
+        
+        if(is_null($product)){
+            return response()->json([
+                'status' => false,
+                'msg'    => 'product not found!'
+            ],404);
+        }
+        
+        $subcategory_related_products = $this->get_related_products_to_the_given_subcategory($product->category_id);
+        
+        $related_products = $this->get_related_products_to_the_given_product_from_given_products($product,$subcategory_related_products);
+        
+        return response()->json([
+            'status' => true,
+            'related_products' => $related_products
+        ],200); 
+    }
+    
+    protected function get_related_products_to_the_given_subcategory($subcategory_id)
+    {
+//        $until_date = Carbon::now();
+//        $from_date = Carbon::now()->subDays(28); // last 2 weeks
+        
+        $related_subcategory_products = product::where('category_id',$subcategory_id)
+                                            ->where('confirmed',true)
+                                            ->where('is_elevated',false)
+//                                            ->whereBetween('created_at',[$from_date,$until_date])
+                                            ->orderBy('created_at','desc')
+                                            ->get();
+        
+        return $related_subcategory_products;
+    }
+    
+    protected function get_related_products_to_the_given_product_from_given_products($product,&$products)
+    {
+        $result_products = [];
+        
+        $product_name_array = array_filter(array_map('trim',explode(' ',str_replace('،',' ',$product->product_name ))));
+    
+        foreach($products as $product_item){
+            
+            if($product->id == $product_item->id){
+                continue;
+            }
+            
+            $matched = false;
+            
+            $current_product_name_array = array_filter(array_map('trim',explode(' ',str_replace('،',' ',$product_item->product_name))));
+            
+            
+            foreach($current_product_name_array as $word){
+                $index = array_search($word,$product_name_array);
+                if($index !== false){
+                    $matched = true;
+                }
+            }
+            
+            if($matched == true){
+                $result_products[] = $product_item;
+                
+                if(count($result_products) > 10){
+                    break;
+                }
+            }
+        }
+        
+        return $result_products;
+        
+    }
 }
