@@ -154,6 +154,11 @@ Route::post('/get_buy_ad_by_id',[
     'as' => 'get_buy_ad_by_id'
 ]);
 
+Route::post('/get_related_products',[
+    'uses' => 'product_controller@get_related_products_to_given_the_product',
+    'as'   => 'get_related_products'
+]);
+
 
 //Route::get('/product/{id?}',function(){
 //
