@@ -28,6 +28,83 @@
 
     }
 
+
+
+    .box-content {
+        overflow: hidden;
+        background: #fff;
+        padding: 0;
+        text-align: center;
+        padding-bottom: 10px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+        border-radius: 4px;
+    }
+
+    .title-box {
+        text-align: center;
+    }
+
+    .title-box h3 {
+        font-size: 17px;
+        font-weight: bold;
+        color: #4b4b4b;
+        margin-bottom: 12px;
+    }
+
+    .title-box a {
+
+        margin: 20px auto 10px;
+
+        width: inherit;
+
+        font-size: 14px;
+
+        font-weight: bold;
+
+        padding: 9px 22px 6px;
+
+    }
+
+    .title-section {
+        direction: rtl;
+        margin-bottom: 8px;
+    }
+
+    .title-section h3 {
+        font-size: 16px;
+        color: #00c569;
+        float: right;
+    }
+
+    .title-section hr {
+        margin: 15px 15px 10px auto;
+        position: relative;
+    }
+
+    .title-section hr::after {
+
+        content: ' ';
+        height: 3px;
+        width: 50px;
+        background: #00c569;
+        position: absolute;
+        top: -4px;
+        right: 0;
+
+    }
+
+    .section-wrapper {
+        margin-top: 30px;
+    }
+
+    .section-wrapper .title-box {
+
+        text-align: center;
+
+        margin-top: 35px;
+
+    }
+      
     @media screen and (max-width: 767px) {
 
         #main {
@@ -68,12 +145,86 @@
                     </router-link>
                 </div>
             </div>
+
+        
+
+        <section id="product-section" class="section-wrapper container-fluid">
+            <div class=" container">
+                <div class="row">
+                    <div class=" col-xs-12 ">
+
+                        <div class="title-section col-xs-12">
+                            <div class="row">
+
+                                <h3>
+
+                                    آخرین محصولات ثبت شده
+
+                                </h3>
+                                <hr/>
+
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 products-contents ">
+                           
+                            <div v-show="relatedProducts && !isLoading" class="row">
+                                <div class="owl-carousel">
+
+                                    <ProductCarousel
+                                            v-for="(product , index) in relatedProducts"
+                                            :key="index"
+                                            :img="str + '/' + product.photos[0].file_path"
+                                            :title="product.main.product_name"
+                                            :stock="product.main.stock"
+                                            :link='getProductUrl(product)'
+                                            column='4'
+                                    />
+
+                                </div>
+                            </div>
+
+
+                            <!-- <div v-show="!relatedProducts  || relatedProducts && isLoading" class="row"> -->
+                            <div v-show="relatedProducts" class="row">
+                                <div v-for="(item, index) in 4" :class="{ 'hidden-xs' : index >= 2}"
+                                     class="col-lg-3 col-md-4 col-sm-6  col-xs-12 ">
+
+                                    <article class='carousel-item box-content col-xs-12'>
+
+                                        <span class="default-index-product-image placeholder-content col-xs-12"></span>
+
+                                        <span class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"></span>
+
+                                        <span class="content-default-width placeholder-content  col-xs-8 col-xs-offset-2"></span>
+
+                                        <span class="margin-10"></span>
+
+                                    </article>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+            </div>
+        </section>
+
+
+
+
         </main>
     </div>
 </template>
 
 
 <script>
+    import ProductCarousel from '../landing_page_components/product-list-carousel'
     import ProductContents from "./product-view/product";
     import UserInfo from "./product-view/user_info";
     import {eventBus} from "../../../../router/router";
@@ -81,7 +232,8 @@
     export default {
         components: {
             ProductContents,
-            UserInfo
+            UserInfo,
+            ProductCarousel
         },
         props:
             [
@@ -107,16 +259,17 @@
                     },
                     photos: [],
                 },
+                relatedProducts: "",
                 errors: "",
                 popUpMsg: "",
                 submiting: false,
-                loading: false,
+                isLoading: false,
                 isMyProfile: false,
             };
         },
         methods: {
             init: function () {
-
+                this.isLoading = true;
                 var self = this;
                 axios.post("/user/profile_info").then(function (response) {
 
@@ -134,11 +287,23 @@
                                     self.$emit('isMyProfile', self.isMyProfile);
                                 }
                             }
+
+                            self.isLoading = false;
                         })
                         .catch(function (err) {
                             window.location.href = "/404";
                         });
                 });
+
+                axios.post('/user/get_product_list', {
+                    from_record_number: 0,
+                    response_rate: false,
+                    to_record_number: 6
+                })
+                    .then(function (response) {
+                        self.relatedProducts = response.data.products;
+                        self.isLoading = false;
+                    });
             },
             openChat: function (product) {
                 this.registerComponentStatistics('product', 'openChat', 'click on open chatBox');
@@ -319,7 +484,17 @@
             },
             stopLoader: function () {
                 eventBus.$emit("isLoading", false);
-            }
+            },
+            getProductUrl: function (product) {
+
+                return '/product-view/خرید-عمده-'
+                    + product.main.sub_category_name.replace(' ', '-')
+                    + '/'
+                    + product.main.category_name.replace(' ', '-')
+                    + '/'
+                    + product.main.id;
+
+            },
         },
         created() {
             gtag("config", "UA-129398000-1", {page_path: "/product-view"});
@@ -337,6 +512,36 @@
         },
         updated() {
             this.$nextTick(this.stopLoader());
+           
+        },
+        watch:{
+            $route (to, from){
+                this.currentUser = "";
+                this.product.user_info = "";
+                this.errors= "";
+                this.popUpMsg= "";
+                this.submiting= false;
+                this.loading= false;
+                this.isMyProfile= false;
+                this.product.main.id = "";
+                this.init();
+              /*  this.currentUser = {};
+                this.product = {};
+                this.relatedProducts= '';
+                this.errors= "";
+                this.popUpMsg= "";
+                this.submiting= false;
+                this.loading= false;
+                this.isMyProfile= false;
+             
+                var self = this;
+                document.onreadystatechange = () => {
+                    if (document.readyState === "complete") {
+                        self.$nextTick(self.stopLoader());
+                    }
+                };
+                console.log('update')*/
+            }
         },
         metaInfo() {
             let productSubCategory = this.product.main.sub_category_name;
@@ -415,22 +620,11 @@
                 ]
             };
         },
-        created() {
-            gtag("config", "UA-129398000-1", {page_path: "/product-view"});
-
-            document.addEventListener("click", this.documentClick);
-        },
-        mounted() {
-            this.init();
-            var self = this;
-            document.onreadystatechange = () => {
-                if (document.readyState === "complete") {
-                    self.$nextTick(self.stopLoader());
-                }
-            };
-        },
-        updated() {
-            this.$nextTick(this.stopLoader());
-        }
+        
     };
 </script>
+
+
+
+
+ 
