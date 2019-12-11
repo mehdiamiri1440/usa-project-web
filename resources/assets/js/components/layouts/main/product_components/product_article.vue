@@ -724,7 +724,8 @@ export default {
     },
     elevatorEvent:function () {
         eventBus.$emit("elevatorText", "با استفاده از نردبان، آگهی شما تا زمان دریافت آگهی تازه تر در همان دسته بندی، به عنوان اولین آگهی نمایش داده می‌شود.");
-
+        
+        eventBus.$emit("productId", this.product.main.id);
         $("#elevator-modal").modal("show")
 
     }
