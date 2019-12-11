@@ -1119,6 +1119,19 @@ class product_controller extends Controller
         
         $related_products = $this->get_related_products_to_the_given_product_from_given_products($product,$subcategory_related_products);
         
+        $category_info = $this->get_category_and_subcategory_name($product->category_id);
+           
+        
+        foreach($related_products as $product){
+            
+            $product->category_name = $category_info['category_name'];
+            $product->subcategory_name = $category_info['subcategory_name'];
+            $product->photo = product_media::where('product_id',$product->id)
+                                                ->get()
+                                                ->first()
+                                                ->file_path;
+        }
+        
         return response()->json([
             'status' => true,
             'related_products' => $related_products
@@ -1134,6 +1147,7 @@ class product_controller extends Controller
                                             ->where('confirmed',true)
                                             ->where('is_elevated',false)
 //                                            ->whereBetween('created_at',[$from_date,$until_date])
+                                            ->select(['id','product_name','category_id','stock'])
                                             ->orderBy('created_at','desc')
                                             ->get();
         
