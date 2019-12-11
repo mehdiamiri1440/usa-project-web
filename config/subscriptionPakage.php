@@ -53,4 +53,9 @@ return [
         'buyAd-count' => 2000,
         'price' => 4890000
     ],
+    
+    'elevator' => [
+        'price' => 250000,
+        'expiration-time-in-days' => 14
+    ],
 ];

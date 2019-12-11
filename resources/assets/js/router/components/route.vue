@@ -80,12 +80,12 @@
                             <br/>
                             <p class="main-pop-up" v-text="elevatorText"></p>
 
-                            <a href="#" class="btn green-button bg-gray" data-dismiss="modal"> متوجه شدم</a>
+                            <a href="" class="btn green-button bg-gray" data-dismiss="modal"> متوجه شدم</a>
 
                             <a
-                                    href="#"
+                                    :href="'/payment/elevator/' + productId"
                                     class="btn green-button "
-                                    data-dismiss="modal"
+                                  
                             >
                             خرید نردبان
                             </a>
@@ -164,7 +164,8 @@
             return{
                 iswebview : navigator.userAgent == "webView" ? true : false, 
                 isConditionSatisfied : false,
-                elevatorText:""
+                elevatorText:"",
+                productId:""
             }
 
         },
@@ -183,6 +184,10 @@
 
             eventBus.$on("elevatorText", $event => {
                 this.elevatorText = $event;
+            });
+            
+            eventBus.$on("productId", $event => {
+                this.productId = $event;
             });
         },
         router,

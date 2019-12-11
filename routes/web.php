@@ -625,10 +625,20 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'payment_controller@do_payment',
         'as' => 'do_payment',
     ]);
+    
+    Route::get('/payment/elevator/{product_id}',[
+        'uses' => 'payment_controller@do_elevator_payment',
+        'as' => 'do_payment',
+    ])->where('product_id','[0-9]+');
 
     Route::any('/payment_callback',[
         'uses' => 'payment_controller@payment_callback',
         'as' => 'payment_callback'
+    ]);
+    
+    Route::any('/elevator_payment_callback',[
+        'uses' => 'payment_controller@elevator_payment_callback',
+        'as'   => 'elevator_payment_callback'
     ]);
 
     Route::post('/is_user_allowed_to_register_product',[

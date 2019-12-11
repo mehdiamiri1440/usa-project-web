@@ -249,8 +249,8 @@ class product_controller extends Controller
                 $b = $item2['user_info']->response_rate;
 
                 if($a == $b){
-                    $c = $item1['user_info']->active_pakage_type;
-                    $d = $item2['user_info']->active_pakage_type;
+                    $c = $item1['main']->is_elevated;
+                    $d = $item2['main']->is_elevated;;
                     
                     if($c == $d){
                         return $item1['main']->updated_at < $item2['main']->updated_at;
@@ -263,8 +263,8 @@ class product_controller extends Controller
         }
         else{
             usort($all_products,function($item1, $item2){
-                $a = $item1['user_info']->active_pakage_type;
-                $b = $item2['user_info']->active_pakage_type;
+                $a = $item1['main']->is_elevated;
+                $b = $item2['main']->is_elevated;
 
                 if($a == $b){
                     return $item1['main']->updated_at < $item2['main']->updated_at;
@@ -406,15 +406,15 @@ class product_controller extends Controller
 	protected function get_product_related_data($product_id)
 	{
 		$product_with_related_data = DB::table('products')
-												->join('categories','products.category_id','=','categories.id')	   											
-													->leftJoin('cities','cities.id','=','products.city_id')
-													->leftJoin('provinces','provinces.id','=','cities.province_id')
-													->select('products.id','products.updated_at','products.product_name','products.stock','products.min_sale_price','products.max_sale_price','products.min_sale_amount','products.description','products.address','products.myuser_id','products.category_id as sub_category_id','products.confirmed','provinces.province_name','provinces.id as province_id','cities.city_name','cities.id as city_id','categories.category_name as sub_category_name')
-													->where('products.id',$product_id)
-                                                    ->where('confirmed',true)
-													->get()
-													->first();
-		
+                    ->join('categories','products.category_id','=','categories.id')	   											
+                    ->leftJoin('cities','cities.id','=','products.city_id')
+                    ->leftJoin('provinces','provinces.id','=','cities.province_id')
+                    ->select('products.id','products.updated_at','products.product_name','products.stock','products.min_sale_price','products.max_sale_price','products.min_sale_amount','products.description','products.address','products.myuser_id','products.category_id as sub_category_id','products.confirmed','provinces.province_name','provinces.id as province_id','cities.city_name','cities.id as city_id','categories.category_name as sub_category_name','products.is_elevated')
+                    ->where('products.id',$product_id)
+                    ->where('confirmed',true)
+                    ->get()
+                    ->first();
+
 		
 		
 		return $product_with_related_data;
