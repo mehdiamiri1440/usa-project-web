@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 use App\Jobs\sendNewMessageSMSNotification;
 use App\Jobs\CheckPakageExpiry;
+use App\Jobs\SendReminderSMSToSellers;
 use DB;
 
 class Kernel extends ConsoleKernel
@@ -43,6 +44,11 @@ class Kernel extends ConsoleKernel
         
         $schedule->job($check_pakage_expiry_time_job)
                 ->dailyAt('3:00');
+        
+        $send_sms_for_sellers_who_did_not_registered_product_job = new SendReminderSMSToSellers();
+        
+        $schedule->job($send_sms_for_sellers_who_did_not_registered_product_job)
+                ->dailyAt('13:30');
     }
 
     /**

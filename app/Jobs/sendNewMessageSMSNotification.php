@@ -34,17 +34,12 @@ class sendNewMessageSMSNotification implements ShouldQueue
     {   
         $msg_controller_object = new message_controller();
         
-        $msg_array = [
-            'شما پیام خوانده نشده در اینکوباک دارید',
-            'برای مشاهده به وبسایت مراجعه کنید'
-        ];
-        
         $users_to_notify = $msg_controller_object->get_users_who_have_unread_messages();
         
         $msg_controller_object->update_daily_sms_black_list($users_to_notify);
         
-        $users_to_notify->each(function($user) use($msg_array){
-            sendSMS::dispatch($msg_array,$user->phone)->onQueue('sms');
+        $users_to_notify->each(function($user){
+            sendSMS::dispatch($user->phone,17705)->onQueue('sms');
         });
     }
 }

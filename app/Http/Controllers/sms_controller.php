@@ -255,4 +255,14 @@ class sms_controller extends Controller
             //
         }
     }
+    
+    public function send_sms_to_given_phone_number($phone_number,$pattern_code)
+    {
+        try{
+            Smsir::ultraFastSend(['name' => 'کاربر'],$pattern_code,$phone_number);
+        }
+        catch(\Exception $e){
+            //
+        }
+    }
 }

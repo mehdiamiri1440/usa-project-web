@@ -43,23 +43,23 @@ class NotifyBuyersBySMS implements ShouldQueue
      */
     public function handle()
     {
-        if($this->product != null){
-            $matched_buyers_phone_number_array = $this->get_the_list_of_matched_buyers_for_the_product($this->product);
-        
-            $product_owner_user_name = $this->get_product_owner_user_name();
-        
-            $link = "www.incobac.com/profile/$product_owner_user_name";
-        
-            $msg_array = [
-              'یک محصول مشابه محصول درخواستی شما یافت شد',
-              'مشخصات محصول و فروشنده در لینک زیر',
-              $link
-            ];
-
-            foreach($matched_buyers_phone_number_array  as $phone_number){
-                 sendSMS::dispatch($msg_array, $phone_number)->onQueue('sms');
-            }
-        }
+//        if($this->product != null){
+//            $matched_buyers_phone_number_array = $this->get_the_list_of_matched_buyers_for_the_product($this->product);
+//        
+//            $product_owner_user_name = $this->get_product_owner_user_name();
+//        
+//            $link = "www.incobac.com/profile/$product_owner_user_name";
+//        
+//            $msg_array = [
+//              'یک محصول مشابه محصول درخواستی شما یافت شد',
+//              'مشخصات محصول و فروشنده در لینک زیر',
+//              $link
+//            ];
+//
+//            foreach($matched_buyers_phone_number_array  as $phone_number){
+//                 sendSMS::dispatch($msg_array, $phone_number)->onQueue('sms');
+//            }
+//        }
         
     }
     
