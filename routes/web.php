@@ -154,6 +154,11 @@ Route::post('/get_buy_ad_by_id',[
     'as' => 'get_buy_ad_by_id'
 ]);
 
+Route::post('/get_related_products',[
+    'uses' => 'product_controller@get_related_products_to_given_the_product',
+    'as'   => 'get_related_products'
+]);
+
 
 //Route::get('/product/{id?}',function(){
 //
@@ -625,10 +630,20 @@ Route::group(['middleware' => [login::class]],function(){
         'uses' => 'payment_controller@do_payment',
         'as' => 'do_payment',
     ]);
+    
+    Route::get('/payment/elevator/{product_id}',[
+        'uses' => 'payment_controller@do_elevator_payment',
+        'as' => 'do_payment',
+    ])->where('product_id','[0-9]+');
 
     Route::any('/payment_callback',[
         'uses' => 'payment_controller@payment_callback',
         'as' => 'payment_callback'
+    ]);
+    
+    Route::any('/elevator_payment_callback',[
+        'uses' => 'payment_controller@elevator_payment_callback',
+        'as'   => 'elevator_payment_callback'
     ]);
 
     Route::post('/is_user_allowed_to_register_product',[

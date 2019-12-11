@@ -13,6 +13,7 @@ use App\Http\Controllers\instant_transaction_controller;
 use SoapClient;
 use App\myuser;
 use Carbon\Carbon;
+use App\product;
     
 
 class payment_controller extends Controller
@@ -184,12 +185,12 @@ class payment_controller extends Controller
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
             $this->do_after_payment_changes_for_subscription();
             
-            return redirect('/pricing');
+            return redirect('/seller/pricing');
 
         } 
         catch (\Exception $e)
         {
-            return redirect('/pricing');
+            return redirect('/seller/pricing');
             //return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
         }
 //         catch (PortNotFoundException $e) 
@@ -250,6 +251,18 @@ class payment_controller extends Controller
         $user_record->pakage_end   = $now->addMonths(session()->pull('pakage_duration_in_months'));
         
         $user_record->save();
+        
+        $user_product_records = product::where('myuser_id',$user_id)
+                                    ->where('confirmed',true)
+                                    ->get();
+        
+        foreach($user_product_records as $product)
+        {
+            $product->is_elevated = true;
+            $product->elevator_expiry = $now->addDays(14);
+            
+            $product->save();
+        }
     }
     
     public function do_my_payment($type,$transaction_id)
@@ -692,6 +705,90 @@ class payment_controller extends Controller
     }
         
 }
+    
+    public function do_elevator_payment($product_id)
+    {
+        $payment_amount = config("subscriptionPakage.elevator.price");
+        try{
+            $gateway = \Gateway::zarinpal();
+            $gateway->setCallback(url('/elevator_payment_callback'));
+            $gateway->price($payment_amount)->ready();
+            $refId =  $gateway->refId();
+            $transID = $gateway->transactionId();
+
+            // Your code here
+            session(['gateway_transaction_id' => $transID]);
+            session(['product_id' => $product_id]);
+
+            return $gateway->redirect(); 
+        }catch (Exception $e){ 
+            echo $e->getMessage();
+        }   
+        
+        
+        //do payment stuff
+        //return redirect()->back();
+    }  
+    
+    public function elevator_payment_callback()
+    {
+        try{ 
+            $gateway = \Gateway::verify();
+            $trackingCode = $gateway->trackingCode();
+            $refId = $gateway->refId();
+            $cardNumber = $gateway->cardNumber();
+
+            // عملیات خرید با موفقیت انجام شده است
+            // در اینجا کالا درخواستی را به کاربر ارائه میکنم
+            $this->do_after_payment_changes_for_elevator();
+            
+            return redirect('/product-list');
+
+        } 
+        catch (\Exception $e)
+        {
+            return redirect('/product-list');
+            //return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
+        }
+//         catch (PortNotFoundException $e) 
+//        {
+//            return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
+//        }
+//         catch (InvalidRequestException $e)
+//        {
+//            return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
+//        }
+//         catch (NotFoundTransactionException $e)
+//        {
+//            return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
+//        }
+//         catch (\Exception $e) 
+//        {
+//            return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
+//        }
+    }
+    
+    protected function do_after_payment_changes_for_elevator()
+    {
+        $product_id = session()->pull('product_id');
+        
+        try{
+            $product_record = product::findOrFail($product_id);
+        
+            $now = Carbon::now();
+            
+            $expiration_time_in_days = config("subscriptionPakage.elevator.expiration-time-in-days");
+            
+            $product_record->is_elevated = true;
+            $product_record->elevator_expiry = $now->addDays($expiration_time_in_days);
+
+            $product_record->save();
+        }
+        catch(\Exception $e){
+            //
+        }
+        
+    }
     
     
 }
