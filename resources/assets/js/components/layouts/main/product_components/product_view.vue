@@ -104,10 +104,10 @@
         margin-top: 35px;
 
     }
-      
+
     @media screen and (max-width: 1199px) {
 
-  
+
         .default-carousel-item:last-of-type{
             display: none;
         }
@@ -115,7 +115,7 @@
 
     @media screen and (max-width: 992) {
 
-    
+
         .default-carousel-item:nth-child(3){
             display: none;
         }
@@ -132,7 +132,7 @@
             display: none;
         }
 
-        
+
         .default-carousel-item:first-of-type{
             display: block;
         }
@@ -171,8 +171,9 @@
                 </div>
             </div>
 
-        
 
+
+        <!-- <section v-show="relatedProducts.length > 0" id="product-section" class="section-wrapper container-fluid"> -->
         <section v-if="relatedProducts.length > 0" id="product-section" class="section-wrapper container-fluid">
             <div class=" container">
                 <div class="row">
@@ -183,7 +184,7 @@
 
                                 <h3>
 
-                                    آخرین محصولات ثبت شده
+                                    محصولات مرتبط
 
                                 </h3>
                                 <hr/>
@@ -191,9 +192,9 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-12 products-contents ">
-                            
-                            <div v-show="relatedProducts && !isLoading" class="row">
+                        <div  class="col-xs-12 products-contents ">
+
+                            <div  class="row">
                                 <div class="owl-carousel">
 
                                      <ProductCarousel
@@ -204,39 +205,39 @@
                                             :stock="product.stock"
                                             :link='getRelatedProductUrl(product)'
                                             column='4'
-                                    /> 
+                                    />
 
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    
+
 
                 </div>
             </div>
         </section>
 
-         <section v-else-if="!relatedProducts" id="product-section" class="section-wrapper container-fluid">
+          <section v-show="!relatedProducts" id="product-section" class="section-wrapper container-fluid">
                     <div class=" container">
                         <div class="row">
                             <div class=" col-xs-12 ">
 
                                 <div class="title-section col-xs-12">
-                                    
+
 
                                         <span class="placeholder-content content-full-width ">
 
-                                        
+
                                         </span>
                                         <br/>
-                                 
+
                                 </div>
 
                                 <div class="col-xs-12 products-contents ">
-                                    
+
                                     <div  class="row">
-                                        <!-- <div v-show="relatedProducts" class="row"> -->
+
                                             <div v-for="(item, index) in 4" :class="{ 'hidden-xs' : index >= 2}"
                                                  class="col-lg-3 col-md-4 col-sm-6  col-xs-12 default-carousel-item">
 
@@ -258,12 +259,12 @@
                                 </div>
                             </div>
 
-                            
+
 
                         </div>
                     </div>
                 </section>
-   
+
 
 
 
@@ -321,7 +322,6 @@
                 this.isLoading = true;
                 var self = this;
                 axios.post("/user/profile_info").then(function (response) {
-
                     self.currentUser = response.data;
                     axios
                         .post("/get_product_by_id", {
@@ -335,21 +335,22 @@
                                     self.$emit('isMyProfile', self.isMyProfile);
                                 }
                             }
-                             
-                           
+
+                            axios.post('/get_related_products', {
+                                product_id : self.product.main.id
+                            })
+                                .then(function (response) {
+                                    self.relatedProducts = response.data.related_products;
+                                    self.isLoading = false;
+                                });
+
                         })
                         .catch(function (err) {
                             window.location.href = "/404";
                         });
                 });
 
-                axios.post('/get_related_products', {
-                                product_id : self.$route.params.id
-                            })
-                                .then(function (response) {
-                                    self.relatedProducts = response.data.related_products;
-                                    self.isLoading = false;
-                                });
+
             },
             openChat: function (product) {
                 this.registerComponentStatistics('product', 'openChat', 'click on open chatBox');
@@ -543,7 +544,7 @@
             },
             elevatorEvent:function () {
                 eventBus.$emit("elevatorText", "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود.");
-                
+
                 eventBus.$emit("productId", this.product.main.id);
                 $("#elevator-modal").modal("show")
 
@@ -565,11 +566,12 @@
         },
         updated() {
             this.$nextTick(this.stopLoader());
-           
+
         },
         watch:{
             $route (to, from){
                 this.currentUser = "";
+                this.relatedProducts = "";
                 this.product.user_info = "";
                 this.errors= "";
                 this.popUpMsg= "";
@@ -658,11 +660,10 @@
                 ]
             };
         },
-        
+
     };
 </script>
 
 
 
 
- 

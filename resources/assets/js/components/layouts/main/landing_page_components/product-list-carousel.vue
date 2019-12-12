@@ -159,49 +159,49 @@ export default {
     };
   },
   props: ["img", "title", "link", "stock","column"],
-  mounted: function() {
-    $("#product-section .owl-carousel").owlCarousel({
-      autoplay: true,
-      autoplayTimeout: 3000,
-      loop: false,
-      rewind: true,
-      nav: true,
-      navText: [
-        '<span class="fa fa-angle-left"></span>',
-        '<span class="fa fa-angle-right"></span>'
-      ],
-      mouseDrag: true,
-      margin: 30,
-      dots: true,
-      stagePadding: 15,
-      rtl:true,
-      responsive: {
-        0: {
-          items: 1,
-          stagePadding: 15,
-          navText: false,
-          dots: true
-        },
-        450: {
-          items: 2,
-          stagePadding: 15,
-          navText: false,
-          dots: true,
-          
-        },
-        992: {
-          items: 3,
-          stagePadding: 15,
-          
-        },
-        1199: {
-          items: this.column,
-          stagePadding: 15,
-          
-        }
-      }
-    });
-  },
+    mounted:function(){
+        $("#product-section .owl-carousel").owlCarousel({
+            autoplay: true,
+            autoplayTimeout: 3000,
+            loop: false,
+            rewind: true,
+            nav: true,
+            navText: [
+                '<span class="fa fa-angle-left"></span>',
+                '<span class="fa fa-angle-right"></span>'
+            ],
+            mouseDrag: true,
+            margin: 30,
+            dots: true,
+            stagePadding: 15,
+            rtl:true,
+            responsive: {
+                0: {
+                    items: 1,
+                    stagePadding: 15,
+                    navText: false,
+                    dots: true
+                },
+                450: {
+                    items: 2,
+                    stagePadding: 15,
+                    navText: false,
+                    dots: true,
+
+                },
+                992: {
+                    items: 3,
+                    stagePadding: 15,
+
+                },
+                1199: {
+                    items: this.column,
+                    stagePadding: 15,
+
+                }
+            }
+        });
+    },
   methods: {
     created: function() {
       this.loadImage();

@@ -1639,7 +1639,7 @@
             + '</article>',
 
         mounted: function () {
-            $("#mobile-requests-section .owl-carousel").owlCarousel({
+           /* $("#mobile-requests-section .owl-carousel").owlCarousel({
                 autoplay: true,
                 autoplayTimeout: 4000,
                 loop: true,
@@ -1650,7 +1650,7 @@
                 margin: 30,
                 dots: true,
                 stagePadding: 15,
-            });
+            });*/
         }
     };
 
