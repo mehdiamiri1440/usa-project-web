@@ -53,11 +53,11 @@ use Carbon\Carbon;
 		 try{
 			 $user->save();
 
-             $sms_controller_object->add_to_customer_club($user->firs_name,$user->last_name,$user->phone);
+//             $sms_controller_object->add_to_customer_club($user->firs_name,$user->last_name,$user->phone);
 
-             $profile_controller_object ->add_a_confirmed_profile_record_for_user($user);
+//             $profile_controller_object->add_a_confirmed_profile_record_for_user($user);
 
-             $this->register_user_in_wp_forum($request);
+//             $this->register_user_in_wp_forum($request);
 
 			 return response()->json([
                  'status' => true,
