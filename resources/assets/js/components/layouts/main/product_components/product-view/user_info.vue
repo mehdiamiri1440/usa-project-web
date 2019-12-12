@@ -299,7 +299,7 @@ p.user-valid-text {
           class="user-valid-text"
         >کاربر تایید شده</p>
 
-               <p  class="response-rate" > احتمال پاسخ گویی <span v-text="$parent.product.user_info.response_rate + '%' "></span></p>
+               <p v-if="$parent.product.user_info.response_rate"  class="response-rate" > احتمال پاسخ گویی <span v-text="'%' + $parent.product.user_info.response_rate "></span></p>
    
       </div>
 

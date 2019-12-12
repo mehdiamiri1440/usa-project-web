@@ -344,7 +344,7 @@ li.active a::after {
 }
 
 .response-rate-filter-mobile-wrapper{
-   padding: 0px;
+    padding: 10px 0;
 
     margin: 0;
 
@@ -449,6 +449,8 @@ li.active a::after {
   .create_buy {
     display: none;
   }
+
+
 }
 
 @media screen and (max-width: 715px) {
@@ -494,6 +496,10 @@ li.active a::after {
   #article-list > div {
     padding: 0;
   }
+
+  .default-items{
+    padding: 0;
+  }
 }
 
 @media screen and (max-width: 430px) {
@@ -508,6 +514,31 @@ li.active a::after {
     padding-left: 35px;
     float: left;
   }
+}
+
+@media screen and (max-width: 370px) {
+  .default-wrapper-main-image{
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+  .default-main-article-content{
+    width: 100% ;
+
+    position: relative;
+
+    top: 15px;
+
+  }
+
+  .default-item-wrapper .default-button-min-with{
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+
 }
 </style>
 
@@ -723,7 +754,7 @@ li.active a::after {
 
           <section v-else class=" main-content col-xs-12">
             <div class="row">
-              <div v-for="(defaultItem ,index) in 8" :key="index" class="col-xs-12">
+              <div v-for="(defaultItem ,index) in 8" :key="index" class="default-items col-xs-12">
                 <div class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content">
                   <div class="default-user-contents col-xs-12 padding-0">
                     <div class="placeholder-content default-article-user-image pull-right"></div>

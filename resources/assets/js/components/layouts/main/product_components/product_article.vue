@@ -226,7 +226,7 @@ label {
 
   bottom: 15px;
 
-  right: 0;
+  min-width: 150px;
 }
 
 .article-features button{
@@ -238,13 +238,6 @@ label {
 .article-features button.disable{
   background: #777;
   border:none;
-}
-
-.article-features button.elevator-event{
-  background: #e41c38;
-  color: #fff;
-  border-radius: 4px;
-  padding: 5px 14px 1px;
 }
 
 .article-features button.elevator-event{
@@ -398,7 +391,7 @@ label {
       
       </button>
 
-      <button data-toggle="tooltip" data-placement="bottom"  title="نردبان اعمال شده است"  class="elevator-event active disable">
+      <button v-if="product.main.is_elevated == 1" data-toggle="tooltip" data-placement="bottom"  title="نردبان اعمال شده است"  class="elevator-event active disable">
         <i class="fas fa-chart-line"></i>
       </button>
     </div>
@@ -723,7 +716,7 @@ export default {
       });
     },
     elevatorEvent:function () {
-        eventBus.$emit("elevatorText", "با استفاده از نردبان، آگهی شما تا زمان دریافت آگهی تازه تر در همان دسته بندی، به عنوان اولین آگهی نمایش داده می‌شود.");
+        eventBus.$emit("elevatorText", "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود.");
         
         eventBus.$emit("productId", this.product.main.id);
         $("#elevator-modal").modal("show")

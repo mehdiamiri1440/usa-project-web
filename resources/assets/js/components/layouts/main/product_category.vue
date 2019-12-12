@@ -372,7 +372,7 @@
 }
 
 .response-rate-filter-mobile-wrapper{
-    padding: 7px 0;
+    padding: 10px 0;
 
     margin: 0;
 
@@ -494,6 +494,11 @@
     }
 
     @media screen and (max-width: 555px) {
+        .checkbox-slider--b-flat input + span{
+            font-size: 12px;
+
+        }
+
         .user-image {
             float: right;
 
@@ -525,6 +530,10 @@
         #article-list > div{
             padding: 0
         }
+
+        .default-items{
+          padding: 0;
+        }
     }
 
     @media screen and (max-width: 430px) {
@@ -542,6 +551,40 @@
 
         }
 
+    }
+
+
+    @media screen and (max-width: 370px) {
+      .default-wrapper-main-image{
+        position: relative;
+        width: 100%;
+        height: 250px;
+        overflow: hidden;
+        border-radius: 4px;
+      }
+      .default-main-article-content{
+        width: 100% ;
+
+        position: relative;
+
+        top: 15px;
+
+      }
+
+      .default-item-wrapper .default-button-min-with{
+        width: 100%;
+        margin-bottom: 15px;
+      }
+
+      .search-box button.btn-filter{
+        padding: 3px 6px;
+        margin-top: 12px;
+        font-size: 12px;
+      }
+
+       .sub-header{
+            padding: 0 5px;
+       }
     }
 
 </style>
@@ -757,7 +800,7 @@
 
                                  >
                                 <div class="row">
-                                     <div  v-for="(defaultItem ,index) in 8" :key="index" class="col-xs-12">
+                                     <div  v-for="(defaultItem ,index) in 8" :key="index" class="default-items col-xs-12">
                                          <div class=" col-xs-12 padding-15 margin-15-0  default-item-wrapper shadow-content ">
 
                                              <div class="default-user-contents  col-xs-12 padding-0">

@@ -148,7 +148,7 @@ p.response-rate{
 
 @media screen and (max-width: 400px) {
   .user-information-contents p {
-    max-width: 100px;
+    max-width: 105px;
 
   }
   .user-action-link {
@@ -186,7 +186,7 @@ p.response-rate{
 
         <div v-if="user_info.response_rate" class="user-information-content">
           <p v-if="user_info" v-text="user_full_name"></p>
-          <p v-if="user_info" class="response-rate" > احتمال پاسخ گویی <span v-text="user_info.response_rate"></span><span>%</span></p>
+          <p v-if="user_info" class="response-rate" > احتمال پاسخ گویی <span v-text="'%' + user_info.response_rate"></span></p>
 
         </div>
 

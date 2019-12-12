@@ -105,6 +105,22 @@
 
     }
       
+    @media screen and (max-width: 1199px) {
+
+  
+        .default-carousel-item:last-of-type{
+            display: none;
+        }
+    }
+
+    @media screen and (max-width: 992) {
+
+    
+        .default-carousel-item:nth-child(3){
+            display: none;
+        }
+    }
+
     @media screen and (max-width: 767px) {
 
         #main {
@@ -112,6 +128,15 @@
             padding-top: 56px;
 
         }
+        .default-carousel-item{
+            display: none;
+        }
+
+        
+        .default-carousel-item:first-of-type{
+            display: block;
+        }
+
 
     }
 </style>
@@ -148,7 +173,7 @@
 
         
 
-        <section id="product-section" class="section-wrapper container-fluid">
+        <section v-if="relatedProducts.length > 0" id="product-section" class="section-wrapper container-fluid">
             <div class=" container">
                 <div class="row">
                     <div class=" col-xs-12 ">
@@ -167,45 +192,22 @@
                         </div>
 
                         <div class="col-xs-12 products-contents ">
-                           
+                            
                             <div v-show="relatedProducts && !isLoading" class="row">
                                 <div class="owl-carousel">
 
-                                    <ProductCarousel
+                                     <ProductCarousel
                                             v-for="(product , index) in relatedProducts"
                                             :key="index"
-                                            :img="str + '/' + product.photos[0].file_path"
-                                            :title="product.main.product_name"
-                                            :stock="product.main.stock"
-                                            :link='getProductUrl(product)'
+                                            :img="str + '/' + product.photo"
+                                            :title="product.product_name"
+                                            :stock="product.stock"
+                                            :link='getRelatedProductUrl(product)'
                                             column='4'
-                                    />
+                                    /> 
 
                                 </div>
                             </div>
-
-
-                            <!-- <div v-show="!relatedProducts  || relatedProducts && isLoading" class="row"> -->
-                            <div v-show="relatedProducts" class="row">
-                                <div v-for="(item, index) in 4" :class="{ 'hidden-xs' : index >= 2}"
-                                     class="col-lg-3 col-md-4 col-sm-6  col-xs-12 ">
-
-                                    <article class='carousel-item box-content col-xs-12'>
-
-                                        <span class="default-index-product-image placeholder-content col-xs-12"></span>
-
-                                        <span class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"></span>
-
-                                        <span class="content-default-width placeholder-content  col-xs-8 col-xs-offset-2"></span>
-
-                                        <span class="margin-10"></span>
-
-                                    </article>
-
-                                </div>
-
-                            </div>
-
                         </div>
                     </div>
 
@@ -215,6 +217,53 @@
             </div>
         </section>
 
+         <section v-else-if="!relatedProducts" id="product-section" class="section-wrapper container-fluid">
+                    <div class=" container">
+                        <div class="row">
+                            <div class=" col-xs-12 ">
+
+                                <div class="title-section col-xs-12">
+                                    
+
+                                        <span class="placeholder-content content-full-width ">
+
+                                        
+                                        </span>
+                                        <br/>
+                                 
+                                </div>
+
+                                <div class="col-xs-12 products-contents ">
+                                    
+                                    <div  class="row">
+                                        <!-- <div v-show="relatedProducts" class="row"> -->
+                                            <div v-for="(item, index) in 4" :class="{ 'hidden-xs' : index >= 2}"
+                                                 class="col-lg-3 col-md-4 col-sm-6  col-xs-12 default-carousel-item">
+
+                                                <article class='carousel-item box-content col-xs-12'>
+
+                                                    <span class="default-index-product-image placeholder-content col-xs-12"></span>
+
+                                                    <span class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"></span>
+
+                                                    <span class="content-default-width placeholder-content  col-xs-8 col-xs-offset-2"></span>
+
+                                                    <span class="margin-10"></span>
+
+                                                </article>
+
+                                            </div>
+
+                                        </div>
+                                </div>
+                            </div>
+
+                            
+
+                        </div>
+                    </div>
+                </section>
+   
 
 
 
@@ -280,30 +329,27 @@
                         })
                         .then(function (response) {
                             self.product = response.data.product;
-                            self.loading = false;
                             if (self.currentUser.user_info) {
                                 if (self.currentUser.user_info.id === self.product.main.myuser_id) {
                                     self.isMyProfile = true;
                                     self.$emit('isMyProfile', self.isMyProfile);
                                 }
                             }
-
-                            self.isLoading = false;
+                             
+                           
                         })
                         .catch(function (err) {
                             window.location.href = "/404";
                         });
                 });
 
-                axios.post('/user/get_product_list', {
-                    from_record_number: 0,
-                    response_rate: false,
-                    to_record_number: 6
-                })
-                    .then(function (response) {
-                        self.relatedProducts = response.data.products;
-                        self.isLoading = false;
-                    });
+                axios.post('/get_related_products', {
+                                product_id : self.$route.params.id
+                            })
+                                .then(function (response) {
+                                    self.relatedProducts = response.data.related_products;
+                                    self.isLoading = false;
+                                });
             },
             openChat: function (product) {
                 this.registerComponentStatistics('product', 'openChat', 'click on open chatBox');
@@ -485,16 +531,23 @@
             stopLoader: function () {
                 eventBus.$emit("isLoading", false);
             },
-            getProductUrl: function (product) {
+           getRelatedProductUrl: function (product) {
 
                 return '/product-view/خرید-عمده-'
-                    + product.main.sub_category_name.replace(' ', '-')
+                    + product.subcategory_name.replace(' ', '-')
                     + '/'
-                    + product.main.category_name.replace(' ', '-')
+                    + product.category_name.replace(' ', '-')
                     + '/'
-                    + product.main.id;
+                    + product.id;
 
             },
+            elevatorEvent:function () {
+                eventBus.$emit("elevatorText", "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود.");
+                
+                eventBus.$emit("productId", this.product.main.id);
+                $("#elevator-modal").modal("show")
+
+            }
         },
         created() {
             gtag("config", "UA-129398000-1", {page_path: "/product-view"});
@@ -525,22 +578,7 @@
                 this.isMyProfile= false;
                 this.product.main.id = "";
                 this.init();
-              /*  this.currentUser = {};
-                this.product = {};
-                this.relatedProducts= '';
-                this.errors= "";
-                this.popUpMsg= "";
-                this.submiting= false;
-                this.loading= false;
-                this.isMyProfile= false;
-             
-                var self = this;
-                document.onreadystatechange = () => {
-                    if (document.readyState === "complete") {
-                        self.$nextTick(self.stopLoader());
-                    }
-                };
-                console.log('update')*/
+
             }
         },
         metaInfo() {
