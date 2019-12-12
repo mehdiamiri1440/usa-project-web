@@ -200,24 +200,29 @@ class product_controller extends Controller
             'province_id'           => 'integer|min:1',
             'city_id'               => 'integer|min:1',
             'search_text'           => 'string',
-            'response_rate'         => 'boolean'
+            'response_rate'         => 'boolean',
+            'special_products'      => 'boolean',
         ]);
 
         $all_products = NULL ; 
         $response_rate_filter = $request->response_rate;
-//        if($request->filled('from_record_number') && $request->filled('to_record_number')){
-//            $all_products = $this->get_all_products_with_related_media($request->from_record_number,$request->to_record_number);
-//        }
-//        else{
-            $all_products = $this->get_all_products_with_related_media();  
-//        } 
+//        $special_products = $request->special_products;
+
+        if($request->has('special_products')){
+            $all_products = $this->get_all_products_with_related_media($request->special_products); 
+        }
+        else{
+            $all_products = $this->get_all_products_with_related_media(); 
+        }
+             
+
         
         //applying filters
         $all_products = array_filter($all_products, function($product) use($request){
             $category_flag = $sub_category_flag = $province_flag = $city_flag = $search_text_flag = true;
             
             if($request->filled('category_id')){
-                $category_flag = ( $request->category_id == $product['main']->category_id);
+                $category_flag = ($request->category_id == $product['main']->category_id);
             }
             if($request->filled('sub_category_id')){
                 $sub_category_flag = ( $request->sub_category_id == $product['main']->sub_category_id);
@@ -346,7 +351,7 @@ class product_controller extends Controller
 		
 	}
 	
-	protected function get_all_products_with_related_media($from_record_number = NULL, $to_record_number = NULL)
+	protected function get_all_products_with_related_media($special_products = false ,$from_record_number = NULL, $to_record_number = NULL)
 	{
 		$products = NULL ;
         
@@ -355,17 +360,33 @@ class product_controller extends Controller
 		if($from_record_number !== null)
 		{			
 			$take_count = abs($to_record_number - $from_record_number) ;
+            
+            $query = product::where('confirmed',true);
+            
+            if($special_products == true){
+                $package_buyers_user_id = $this->get_package_buyers_user_id_array();
+                
+                $query = $query->whereIn('myuser_id',$package_buyers_user_id);
+            }
 			
-			$products = product::where('confirmed',true)
-                ->skip($from_record_number)
+			$query = $query->skip($from_record_number)
 				->take($take_count)
-                ->orderBy('updated_at','desc')
-				->get();
+                ->orderBy('updated_at','desc');
+            
+            $products = $query->get();
 		}
 		else{
-			$products = product::where('confirmed',true)
-                ->orderBy('updated_at','desc')
-                ->get();
+            $query =  product::where('confirmed',true);
+            
+            if($special_products == true){
+                $package_buyers_user_id = $this->get_package_buyers_user_id_array();
+                
+                $query = $query->whereIn('myuser_id',$package_buyers_user_id);
+            }
+            
+			$query = $query->orderBy('updated_at','desc');
+            
+            $products = $query->get();
 		}
 		
 		$result_products = array();
@@ -419,6 +440,16 @@ class product_controller extends Controller
 		
 		return $product_with_related_data;
 	}
+    
+    protected function get_package_buyers_user_id_array()
+    {
+        $user_id_array = myuser::where('active_pakage_type','<>',0)
+                                    ->select('id')
+                                    ->get()
+                                    ->toArray();
+        
+        return $user_id_array;
+    }
 	
 	//public method 
 	public function get_product_by_id(Request $request)
@@ -1097,7 +1128,7 @@ class product_controller extends Controller
                                             
     }    
     
-    
+    //public method   
 	public function get_related_products_to_given_the_product(Request $request)
     {
         $this->validate($request,[
