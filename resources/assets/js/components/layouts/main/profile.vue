@@ -781,7 +781,7 @@
                                             <i class="fa fa-check-circle"></i>
                                             فروشنده معتبر
                                         </span>
-                                         <p  class="response-rate" > احتمال پاسخ گویی <span v-text="profileOwnerStatistics.response_rate + '%'"></span>
+                                         <p v-if="profileOwnerStatistics.response_rate" class="response-rate" > احتمال پاسخ گویی <span v-text="'%' + profileOwnerStatistics.response_rate "></span>
                                    </p>
                                     </h1>
 

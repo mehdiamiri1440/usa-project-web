@@ -127,6 +127,13 @@
 
 	}
 
+	.actions button.elevator-event{
+	  background: #e41c38;
+	  color: #fff;
+	  border-radius: 4px;
+	  float: left;
+	}
+
 	.product-info-table{
 		padding-top: 10px;
 	}
@@ -192,6 +199,11 @@
 
 		  .default-product-list{
 		    padding: 9px 0;
+		  }
+
+		  .actions button.elevator-event, .actions .green-button{
+		    float: right;
+		    margin-left: 10px;
 		  }
 	}
 
@@ -341,6 +353,14 @@
                         <i class="fa fa-pencil-alt"></i>
 
                     </button>
+
+                    <button v-if="$parent.isMyProfile"  class="elevator-event  green-button " @click.prevent="$parent.elevatorEvent()">
+				        <i class="fas fa-chart-line"></i>
+				    
+				          اعمال نردبان
+				      
+				    </button>
+
 
 					<div class="share hidden-md hidden-lg pull-left ">
 						<button @click.prevent="$parent.copyProductLinkToClipBoard" class="share-button">

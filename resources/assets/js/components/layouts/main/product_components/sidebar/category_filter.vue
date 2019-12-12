@@ -151,15 +151,8 @@
 
                         <li class="sub-category-item " v-for="subCategory in category.subcategories">
 
-                            <h1 v-if="getCategoryName() === subCategory.category_name">
-                                <router-link :class="{'active' : getCategoryName() === subCategory.category_name}"
-                                             :to=getSubCategoryUrl(subCategory)
-                                             v-text="subCategory.category_name"
-                                             data-dismiss="modal">
-                                </router-link>
-                            </h1>
-
-                            <h4 v-else>
+                          
+                            <h4>
                                 <router-link :class="{'active' : getCategoryName() === subCategory.category_name}"
                                              :to=getSubCategoryUrl(subCategory)
                                              v-text="subCategory.category_name"
@@ -217,10 +210,8 @@
 </template>
 
 <script>
-    import Route from "../../../../../router/components/route";
 
     export default {
-        components: {Route},
         props: [
             'fotnLoad'
         ],

@@ -65,6 +65,8 @@
   overflow: hidden;
 
   position: relative;
+
+  display: block;
 }
 
 .main-image {
@@ -118,13 +120,13 @@
 </style>
 
 <template>
-  <article class="carousel-item box-content">
-    <div class="carousel-img">
-      <router-link v-show="isImageLoad" :to="link">
+  <article class="carousel-item box-content ">
+    <router-link :to="link" class="carousel-img">
+      <div v-show="isImageLoad" >
         <transition>
           <img @load="ImageLoaded" :src="img" class="main-image" />
         </transition>
-      </router-link>
+      </div>
 
       <div v-show="!isImageLoad" class="lds-ring">
         <div></div>
@@ -132,14 +134,14 @@
         <div></div>
         <div></div>
       </div>
-    </div>
+    </router-link>
 
     <router-link class="carousel-title" :to="link" v-if="title.length>=20">
       <h4 v-text="title.substring(0,15) + ' ...'"></h4>
     </router-link>
-    <a :href="link" class="carousel-title" v-else>
+    <router-link :to="link" class="carousel-title" v-else>
       <h4 v-text="title"></h4>
-    </a>
+    </router-link>
 
     <router-link :to="link" class="stock-wrapper">
       <span>موجودی</span>
@@ -156,7 +158,7 @@ export default {
       isImageLoad: false
     };
   },
-  props: ["img", "title", "link", "stock"],
+  props: ["img", "title", "link", "stock","column"],
   mounted: function() {
     $("#product-section .owl-carousel").owlCarousel({
       autoplay: true,
@@ -168,11 +170,11 @@ export default {
         '<span class="fa fa-angle-left"></span>',
         '<span class="fa fa-angle-right"></span>'
       ],
-      items: 6,
       mouseDrag: true,
       margin: 30,
       dots: true,
       stagePadding: 15,
+      rtl:true,
       responsive: {
         0: {
           items: 1,
@@ -184,11 +186,18 @@ export default {
           items: 2,
           stagePadding: 15,
           navText: false,
-          dots: true
+          dots: true,
+          
         },
-        767: {
+        992: {
           items: 3,
-          stagePadding: 15
+          stagePadding: 15,
+          
+        },
+        1199: {
+          items: this.column,
+          stagePadding: 15,
+          
         }
       }
     });
