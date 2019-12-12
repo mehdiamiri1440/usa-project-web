@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Http\Controllers\profile_controller;
 
 class myuser extends Authenticatable
 {
@@ -47,35 +48,17 @@ class myuser extends Authenticatable
     {
         return myuser::find(session('user_id'));
     }
+    
+    public static function boot()
+    {
+        parent::boot();
+        
+        self::created(function($user){
+            $profile_controller_object = new profile_controller();
+            
+            $profile_controller_object->add_a_confirmed_profile_record_for_user($user);
+        });
+    }
 }
 
-//<?php
-
-//namespace App;
-//
-//use Illuminate\Notifications\Notifiable;
-//use Illuminate\Foundation\Auth\User as Authenticatable;
-//
-//class User //extends Authenticatable
-//{
-//    //use Notifiable;
-//
-//    /**
-//     * The attributes that are mass assignable.
-//     *
-//     * @var array
-//     */
-//    protected $fillable = [
-//        'name', 'email', 'password',
-//    ];
-//
-//    /**
-//     * The attributes that should be hidden for arrays.
-//     *
-//     * @var array
-//     */
-////    protected $hidden = [
-////        'password', 'remember_token',
-////    ];
-//}
 
