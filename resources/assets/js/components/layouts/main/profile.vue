@@ -709,7 +709,7 @@
 
                                 <div class="col-xs-12">
                                     <div v-if="currentUser.user_info">
-                                    
+
                                         <div v-if="currentUser.user_info.id === profileOwner.user_info.id">
                                             <router-link :to="{name : 'profileBasicSeller'}" class="green-button edit"
                                                v-if="currentUser.user_info.is_seller == 1 ">
@@ -765,7 +765,7 @@
                                         </a>
                                     </div>
 
-                         
+
                                         <h1 class="content_title col-xs-12 col-sm-8 col-md-9"
                                         itemprop="name">
                                         <span v-text="
@@ -774,7 +774,7 @@
                                         + profileOwner.user_info.last_name"
                                         >
                                         </span>
-                                        
+
                                         <span class="valid-seller"
                                               v-if="!profileOwnerStatistics.validated_seller">
 
@@ -785,18 +785,18 @@
                                    </p>
                                     </h1>
 
-                                    
- 
+
+
 
                                 </div>
 
                                 <div class="title_content col-xs-12">
                                     <div class="back_page col-xs-12 col-sm-4 col-md-3">
-                                        
+
                                         <div v-if="currentUser.user_info">
-                                    
+
                                             <div v-if="currentUser.user_info.id === profileOwner.user_info.id">
-                                                <router-link :to="{name : 'profileBasicSeller'}" 
+                                                <router-link :to="{name : 'profileBasicSeller'}"
                                                 @click="registerComponentStatistics('profileView','editProfile','click on edit profile')"
                                                 class="green-button edit"
                                                    v-if="currentUser.user_info.is_seller == 1 ">
@@ -805,7 +805,7 @@
                                                     ویرایش پروفایل
                                                 </router-link>
 
-                                                <router-link :to="{name : 'profileBasicBuyer'}" 
+                                                <router-link :to="{name : 'profileBasicBuyer'}"
                                                 class="green-button edit"
                                                 @click="registerComponentStatistics('profileView','editProfile','click on edit profile')"
                                                    v-if="currentUser.user_info.is_seller == 0 ">
@@ -814,7 +814,7 @@
                                                     ویرایش پروفایل
                                                 </router-link>
                                             </div>
-                                            
+
                                             <a v-else href="#" @click.prevent="openChat()" class="green-button edit">
 
                                                 <i class="fa fa-envelope"></i>
@@ -822,7 +822,7 @@
                                             </a>
 
                                         </div>
-                                        
+
 
                                         <a v-else href="" @click.prevent="openChat()"
                                             class="green-button edit"
@@ -1222,13 +1222,13 @@
             '</a>' +
             '</div>',
         mounted: function () {
-            $(".owl-carousel").owlCarousel({
+            /*$(".owl-carousel").owlCarousel({
                 loop: false,
                 items: 1,
                 margin: 10,
                 nav: false,
                 dots: true
-            });
+            });*/
             $(this.$el).parent().parent().parent().magnificPopup({
                 delegate: 'a',
                 type: 'image',
@@ -1254,12 +1254,12 @@
             '</a>' +
             '</div>',
         mounted: function () {
-            $(".owl-carousel").owlCarousel({
+           /* $(".owl-carousel").owlCarousel({
                 loop: false,
                 margin: 10,
                 nav: true,
                 dots: false
-            });
+            });*/
             $(this.$el).parent().parent().parent().magnificPopup({
                 delegate: 'a',
                 type: 'image',

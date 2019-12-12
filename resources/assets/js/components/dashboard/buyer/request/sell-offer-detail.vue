@@ -523,11 +523,11 @@
             '</a>' +
             '</div>',
         mounted: function () {
-            $(".owl-carousel").owlCarousel({
+            /*$(".owl-carousel").owlCarousel({
                 loop: false,
                 margin: 10,
                 nav: false
-            });
+            });*/
 
             $(this.$el).parent().parent().parent().magnificPopup({
                 delegate: 'a',
