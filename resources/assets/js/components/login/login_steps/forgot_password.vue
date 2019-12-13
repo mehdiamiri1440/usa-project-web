@@ -125,12 +125,13 @@ input.error:focus + i {
   <div>
     <div class="form-contents col-xs-12">
       <div class="row">
+         <br/>
         <label for="phone-number">لطفا شماره موبایل خود را وارد کنید</label>
 
         <div class="input-wrapper phone-number-wrapper">
           <input
             v-model="phoneNumber"
-            :class="{'error' : $parent.errors.phone , 'active' : phoneNumber.length >= 11}"
+            :class="{'error' : $parent.errors[0] , 'active' : phoneNumber.length >= 11}"
             id="phone-number"
             type="tel"
             class="dire"
@@ -140,18 +141,21 @@ input.error:focus + i {
 
           <i class="fa fa-phone-square-alt"></i>
         </div>
-
-        <span
-          class="small-description"
-        >پس از وارد کردن شماره موبایل ما یک کد برای شما ارسال میکنیم تا از صحت شماره وارد شده اطمینان حاصل کنیم</span>
-
         <p class="error-message">
           <span v-if="$parent.errors" v-text="$parent.errors[0]"></span>
         </p>
+        <span
+          class="small-description"
+        >پس از وارد کردن شماره موبایل ما یک کد برای شما ارسال میکنیم تا از صحت شماره وارد شده اطمینان حاصل کنیم</span>
+      
+        <p>
+            <br/> 
+        </p>
         <button
           class="submit-button disabled"
-          :class="{'active' : phoneNumber.length >= 11}"
+          :class="{'active' : phoneNumber.length >= 11 && $parent.step2.sendCode}"
           @click.prevent="getPhoneNumber()"
+          :disabled="!$parent.step2.sendCode"
         >ارسال کد تایید</button>
       </div>
     </div>
@@ -173,7 +177,7 @@ export default {
   },
   watch: {
     phoneNumber: function(value) {
-      this.$parent.errors.phone = "";
+      this.$parent.errors[0] = "";
       if (this.phoneNumber.length >= 11) {
         this.phoneNumber = this.phoneNumber.substring(0, 11);
       }
