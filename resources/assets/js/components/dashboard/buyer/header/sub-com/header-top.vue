@@ -217,131 +217,241 @@ i.fa-home {
   display: inline-block;
   color: #fff !important;
 }
+/*start style sub-header*/
+    .sub-header {
+        position: absolute;
+        left: 0;
+        background: #eff3f6;
+        top: 63px;
+        right: 0;
+        text-align: center;
+        border-bottom: 1px solid #e6e6e6;
+        border-top: 1px solid #e6e6e6;
+    }
 
-@media screen and (max-width: 994px) {
-  .content-header {
-    display: none;
-  }
+    .sub-header ul {
+        text-align: center;
+    }
 
-  .main-header,
-  .little-main-header {
-    right: 0 !important;
-  }
-}
+    .sub-header a {
+        padding: 16px;
 
-@media screen and (max-width: 768px) {
-  span.min {
-    display: inherit;
-  }
+        display: inline-block;
 
-  span.full {
-    display: none;
-  }
-  .mobile-header .green-button {
-    margin: 15px 0 0;
-  }
+        color: #808c9b;
 
-  .mobile-header ul a {
-    padding: 15px 20px;
-  }
+        font-weight: bold;
 
-  .profile-menu-header {
-    padding: 7px;
-    padding-left: 36px;
-  }
-}
+        font-size: 14px;
 
-@media screen and (max-width: 555px) {
-  .user_name {
-    display: none !important;
-  }
+        position: relative;
+    }
 
-  .right-menu-header {
-    padding: 6px;
-    border-right: 1px solid #eff3f6;
-  }
+    .sub-header a:hover {
+        color: #313942;
+    }
 
-  .profile-menu-header .user_name {
-    display: none;
-  }
+    .sub-header a:hover::after {
+        content: " ";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: #00C569;
+        height: 3px;
+        width: 100%;
+    }
 
-  .content-header {
-    display: none;
-  }
+    .sub-header a.active {
+        color: #313942;
+    }
 
-  .right-menu-header .green-button {
-    padding: 10px 15px;
-  }
-}
+    .sub-header a.active::after {
+        content: " ";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: #00C569;
+        height: 3px;
+        width: 100%;
+    }
 
-@media screen and (max-width: 345px) {
-  .sub-header a {
-    font-size: 10px;
-  }
 
-  .show-header button {
-    padding: 19px 26px 19px 19px;
-  }
 
-  .right-menu-header {
-    padding: 6px;
-  }
-}
-@media only screen and (max-width: 992px) {
-  .message-notification {
-    top: 4px;
-    cursor: pointer;
-    border: 1px solid white;
-    right: 35px;
-    z-index: 10;
-    position: absolute;
-    background-color: #e41c38;
-    border-radius: 50%;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: wheat;
-  }
-}
-@media only screen and (min-width: 992px) {
-  .hide-message-notification {
-    display: none;
-  }
-}
-.rotation {
-  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
+    .search-box {
+        position: relative;
+        margin: 10px auto;
+        border: none;
+    }
 
-@keyframes shake {
-  10%,
-  90% {
-    transform: translate3d(-1px, 0, 0);
-  }
+    .search-box input {
+        width: 100%;
+        text-align: right;
+        direction: rtl;
+        border: 1px solid #666666;
+        border-radius: 6px;
+        padding: 6px 35px 5px 15px;
+        background: #f8f8f8;
+        font-size: 12px;
+        float: right;
+    }
 
-  20%,
-  80% {
-    transform: translate3d(2px, 0, 0);
-  }
+    .search-box button.btn-search {
+        background: none;
+        border: none;
+        position: absolute;
+        right: 16px;
+        top: 9px;
+        border-left: 1px solid;
+        color: #777;
+        padding: 0 7px;
+        font-size: 12px;
+        height: 20px;
+    }
 
-  30%,
-  50%,
-  70% {
-    transform: translate3d(-4px, 0, 0);
-  }
+    .button-height {
+      line-height: 1;
+    }
 
-  40%,
-  60% {
-    transform: translate3d(4px, 0, 0);
-  }
-}
-.button-height {
-  line-height: 1;
-}
+    @media screen and (max-width: 994px) {
+      .content-header {
+        display: none;
+      }
+
+      .main-header,
+      .little-main-header {
+        right: 0 !important;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      span.min {
+        display: inherit;
+      }
+
+      span.full {
+        display: none;
+      }
+      .mobile-header .green-button {
+        margin: 15px 0 0;
+      }
+
+      .mobile-header ul a {
+        padding: 15px 20px;
+      }
+
+      .profile-menu-header {
+        padding: 7px;
+        padding-left: 36px;
+      }
+    }
+
+    @media screen and (max-width: 555px) {
+      .user_name {
+        display: none !important;
+      }
+
+      .right-menu-header {
+        padding: 6px;
+        border-right: 1px solid #eff3f6;
+      }
+
+      .profile-menu-header .user_name {
+        display: none;
+      }
+
+      .content-header {
+        display: none;
+      }
+
+      .right-menu-header .green-button {
+        padding: 10px 15px;
+      }
+    }
+
+    @media screen and (max-width: 345px) {
+      .sub-header a {
+        font-size: 10px;
+      }
+
+      .show-header button {
+        padding: 19px 26px 19px 19px;
+      }
+
+      .right-menu-header {
+        padding: 6px;
+      }
+    }
+    @media only screen and (max-width: 992px) {
+      .message-notification {
+        top: 4px;
+        cursor: pointer;
+        border: 1px solid white;
+        right: 35px;
+        z-index: 10;
+        position: absolute;
+        background-color: #e41c38;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: wheat;
+      }
+    }
+    @media only screen and (min-width: 992px) {
+      .hide-message-notification {
+        display: none;
+      }
+    }
+    .rotation {
+      animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+      perspective: 1000px;
+    }
+
+    @keyframes shake {
+      10%,
+      90% {
+        transform: translate3d(-1px, 0, 0);
+      }
+
+      20%,
+      80% {
+        transform: translate3d(2px, 0, 0);
+      }
+
+      30%,
+      50%,
+      70% {
+        transform: translate3d(-4px, 0, 0);
+      }
+
+      40%,
+      60% {
+        transform: translate3d(4px, 0, 0);
+      }
+    }
+
+
+    /*end style sub-header*/
+    @media screen and (max-width: 768px) {
+        .sub-header {
+
+            padding: 0;
+
+        }
+    }
+    /*end style sub-header*/
+    @media screen and (max-width: 345px) {
+        .sub-header a {
+            font-size: 10px;
+
+        }
+
+    }
+
 </style>
 
 <template>
@@ -429,7 +539,18 @@ i.fa-home {
         </ul>
       </div>
 
-      <SubMenu />
+      <div v-if="$route.path==='/buyer/special-products'" class="sub-header col-xs-12">
+
+         <div  class="search-box col-sm-6 col-xs-12 col-lg-4 pull-right">
+             <input type="text" v-model="$parent.searchValueText" placeholder="اینجا جستجو کنید" />
+
+             <button class="btn-search">
+                 <i class="fa-search fa"></i>
+             </button>
+
+         </div>
+
+    </div>
     </header>
   </div>
 </template>
@@ -437,16 +558,12 @@ i.fa-home {
 
 <script>
 var visible = false;
-import SubMenu from "./sub-menu/sub-menu.vue";
 import { eventBus } from "../../../../../router/router";
 export default {
   data: function() {
     return {
-      messageCount: 0
+      messageCount: 0,
     };
-  },
-  components: {
-    SubMenu
   },
   props: [
     "menuClosed",
@@ -456,7 +573,7 @@ export default {
     "username",
     "out",
     "routeHome",
-    "isLoading"
+    "isLoading",
   ],
   methods: {
     logUserOut: function() {

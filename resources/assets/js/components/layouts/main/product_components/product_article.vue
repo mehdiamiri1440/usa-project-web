@@ -260,6 +260,8 @@ label {
     position: relative;
    
     padding: 0 15px;
+
+    right: 0;
  
   }
 

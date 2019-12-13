@@ -1638,20 +1638,6 @@
             + '</div>'
             + '</article>',
 
-        mounted: function () {
-           /* $("#mobile-requests-section .owl-carousel").owlCarousel({
-                autoplay: true,
-                autoplayTimeout: 4000,
-                loop: true,
-                nav: true,
-                navText: false,
-                items: 1,
-                mouseDrag: true,
-                margin: 30,
-                dots: true,
-                stagePadding: 15,
-            });*/
-        }
     };
 
 

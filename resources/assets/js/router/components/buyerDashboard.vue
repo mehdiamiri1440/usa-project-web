@@ -27,6 +27,7 @@
                 :defultimg="assets + 'assets/img/user-defult.png'"
                 :logout="'/logout'"
                 :loading="assets + 'assets/img/gif/prload.gif'"
+                :search-text="searchText"
         ></header-dash-buyer>
 
         <div id="main">
@@ -57,5 +58,10 @@
             'assets',
             'storagePath',
         ],
+        data:function(){
+            return{
+                searchText : ""
+            }
+        }
     }
 </script>
