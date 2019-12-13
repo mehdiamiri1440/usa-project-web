@@ -150,6 +150,7 @@ input.error:focus + i {
 
 <template>
   <div>
+    <br/>
     <h2 class="title-contents">تایید موبایل</h2>
 
     <div class="form-contents col-xs-12">
@@ -166,7 +167,7 @@ input.error:focus + i {
             <div class="col-xs-3">
               <input
                 v-model="verifycode1"
-                :class="{'error' : this.$parent.errors.verification_code|| $parent.step3.msg, 'active' : verifycode1.length}"
+                :class="{'error' : this.$parent.errors.verification_code, 'active' : verifycode1.length}"
                 id="verify-code-1"
                 type="number"
                 class="dire"
@@ -181,7 +182,7 @@ input.error:focus + i {
             <div class="col-xs-3">
               <input
                 v-model="verifycode2"
-                :class="{'error' : $parent.errors.verification_code || $parent.step3.msg, 'active' : verifycode2.length}"
+                :class="{'error' : $parent.errors.verification_code , 'active' : verifycode2.length}"
                 id="verify-code-2"
                 type="number"
                 class="dire"
@@ -196,7 +197,7 @@ input.error:focus + i {
             <div class="col-xs-3">
               <input
                 v-model="verifycode3"
-                :class="{'error' : $parent.errors.verification_code || $parent.step3.msg, 'active' : verifycode3.length }"
+                :class="{'error' : $parent.errors.verification_code , 'active' : verifycode3.length }"
                 id="verify-code-3"
                 type="number"
                 class="dire"
@@ -211,7 +212,7 @@ input.error:focus + i {
             <div class="col-xs-3">
               <input
                 v-model="verifycode4"
-                :class="{'error' : $parent.errors.verification_code|| $parent.step3.msg, 'active' : verifycode4.length}"
+                :class="{'error' : $parent.errors.verification_code, 'active' : verifycode4.length}"
                 id="verify-code-4"
                 type="number"
                 class="dire"
@@ -228,10 +229,9 @@ input.error:focus + i {
         <p class="error-message">
           <span
             v-if="$parent.errors.verification_code "
-            v-text="$parent.errors.verification_code[0]"
+            v-text="$parent.errors.verification_code"
           ></span>
 
-          <span v-if=" $parent.step3.msg " v-text=" $parent.step3.msg"></span>
         </p>
 
         <div class="timer-wrapper">
@@ -243,11 +243,15 @@ input.error:focus + i {
             :value="$parent.step2.timeCounterDown"
           >ارسال مجدد کد فعال سازی</button>
         </div>
+        <p>
+          <br>
+        </p>
 
         <button
           class="submit-button disabled"
-          :class="{'active' : currentCode.length == 4}"
+          :class="{'active' : currentCode.length == 4 && !$parent.createPassword }"
           @click.prevent="getVerificationCode()"
+          :disabled="$parent.createPassword"
         >بررسی کد</button>
       </div>
     </div>
