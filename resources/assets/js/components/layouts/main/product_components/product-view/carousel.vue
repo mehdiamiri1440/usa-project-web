@@ -102,14 +102,14 @@
 		],
         mounted: function () {
 
-            /*$(".owl-carousel").owlCarousel({
+            $(".owl-carousel").owlCarousel({
                 loop:false,
                 items:1,
                 margin:10,
                 nav:true,
                 navText: ['<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>'],
                 dots:true
-            });*/
+            });
             $(this.$el).parent().parent().parent().magnificPopup({
                 delegate: 'a',
                 type: 'image',
