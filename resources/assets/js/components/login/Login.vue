@@ -440,8 +440,10 @@ export default {
       step3: {
         verification_code: "",
         msg: "",
-        reSendCode: false
-      }
+        reSendCode: false,
+      },
+      createPassword : false,
+      popUpMsg: ""
     };
   },
   methods: {
@@ -552,7 +554,7 @@ export default {
     verifyCode: function() {
       var self = this;
       this.showMsg = false;
-
+      this.createPassword = true;
       axios
         .post("/reset_password", {
           phone: this.toLatinNumbers(this.step2.phone),
@@ -561,13 +563,16 @@ export default {
         .then(function(response) {
           if (response.data.status === true) {
             self.errors = [];
-            self.showMsg = true;
-            self.step3.msg = "گذر واژه ی جدید به تلفن همراهتان ارسال شد.";
-            self.$router.push("/login");
+            self.popUpMsg ="گذر واژه ی جدید به تلفن همراهتان ارسال شد.";
+            eventBus.$emit("submitSuccess", self.popUpMsg);
+            $("#custom-main-modal").modal("show");
+            self.currentStep = 1;
+            self.createPassword = false;
+
           } else {
             self.errors = [];
-            self.showMsg = true;
-            self.step3.msg = "کد اشتباه است یا منقضی شده";
+            self.errors.verification_code = "کد اشتباه است یا منقضی شده";
+            self.createPassword = false;
           }
         })
         .catch(function(err) {

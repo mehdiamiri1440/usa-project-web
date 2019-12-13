@@ -51,6 +51,7 @@ import buyerProfileContract from '../components/dashboard/buyer/profile/profile_
 //import buyerRequests from '../components/dashboard/buyer/request/request'
 import buyerMyBuyAd from '../components/dashboard/buyer/request/my-buyAd'
 import buyerRgisterRequest from '../components/dashboard/buyer/request/register-request'
+import specialProducts from '../components/dashboard/buyer/products/special-products'
 import buyerSellOfferDetail from '../components/dashboard/buyer/request/sell-offer-detail'
 import buyerMyTransactions from '../components/dashboard/buyer/transaction/my-transactions.vue';
 import buyerPayedFactorList from '../components/dashboard/buyer/transaction/payed-factor-list';
@@ -265,6 +266,13 @@ const router = new Router({
                     name: 'registerRequestBuyer',
                     components: {
                         default: buyerRgisterRequest,
+                    },
+                },
+                {
+                    path: 'special-products',
+                    name: 'specialProducts',
+                    components: {
+                        default: specialProducts,
                     },
                 },
                 {

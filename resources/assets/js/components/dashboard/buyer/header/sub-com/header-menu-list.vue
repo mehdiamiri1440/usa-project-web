@@ -127,6 +127,14 @@ a.active {
           </router-link>
         </li>
 
+
+        <li class="list-item">
+          <router-link :to="{ name : 'specialProducts' }">
+            <i class="fa fa-list-alt" aria-hidden="true"></i>
+            <span>محصولات ویژه</span>
+          </router-link>
+        </li>
+
         <li class="list-item">
           <router-link :to="{ name : 'guideBuyer' }">
             <i class="fa fa-question-circle" aria-hidden="true"></i>
