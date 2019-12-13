@@ -718,6 +718,7 @@ export default {
     elevatorEvent:function () {
         eventBus.$emit("elevatorText", "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود.");
         
+        console.log(this.product.main.id);
         eventBus.$emit("productId", this.product.main.id);
         $("#elevator-modal").modal("show")
 

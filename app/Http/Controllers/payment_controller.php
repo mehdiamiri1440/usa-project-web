@@ -124,7 +124,7 @@ class payment_controller extends Controller
         
     }
     
-     protected function get_instant_transaction_payment_amount($type,$transaction_id)
+    protected function get_instant_transaction_payment_amount($type,$transaction_id)
     {
         $transaction_id = (int) $transaction_id;
         
@@ -708,6 +708,7 @@ class payment_controller extends Controller
     
     public function do_elevator_payment($product_id)
     {
+//        return $product_id;
         $payment_amount = config("subscriptionPakage.elevator.price");
         try{
             $gateway = \Gateway::zarinpal();
@@ -719,7 +720,8 @@ class payment_controller extends Controller
             // Your code here
             session(['gateway_transaction_id' => $transID]);
             session(['product_id' => $product_id]);
-
+            
+//            return 'id'.session()->pull('product_id');
             return $gateway->redirect(); 
         }catch (Exception $e){ 
             echo $e->getMessage();
@@ -740,14 +742,18 @@ class payment_controller extends Controller
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
-            $this->do_after_payment_changes_for_elevator();
             
-            return redirect('/product-list');
+            echo "product:";
+            echo '<pre>';
+            var_dump($this->do_after_payment_changes_for_elevator());
+            echo '</pre>';
+//            return redirect('/product-list');
 
         } 
         catch (\Exception $e)
         {
-            return redirect('/product-list');
+            echo $e->getMessage();
+//            return redirect('/product-list');
             //return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
         }
 //         catch (PortNotFoundException $e) 
@@ -772,9 +778,9 @@ class payment_controller extends Controller
     {
         $product_id = session()->pull('product_id');
         
-        try{
-            $product_record = product::findOrFail($product_id);
-        
+//        try{
+            $product_record = product::find($product_id);
+            return $product_record;
             $now = Carbon::now();
             
             $expiration_time_in_days = config("subscriptionPakage.elevator.expiration-time-in-days");
@@ -783,10 +789,12 @@ class payment_controller extends Controller
             $product_record->elevator_expiry = $now->addDays($expiration_time_in_days);
 
             $product_record->save();
-        }
-        catch(\Exception $e){
-            //
-        }
+        
+            return $product_record;
+//        }
+//        catch(\Exception $e){
+//            //
+//        }
         
     }
     

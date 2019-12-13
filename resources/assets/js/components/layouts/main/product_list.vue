@@ -920,7 +920,7 @@ li.active a::after {
                             });
                         }
                     }).catch(error=>reject(error));
-})
+                });
             },
             feed() {
 
@@ -1019,8 +1019,9 @@ li.active a::after {
 
                 var searchObject = {};
 
-                searchObject.response_rate = self.$parent.productByResponseRate;
-
+                if(self.$parent.productByResponseRate){
+                    searchObject.response_rate = self.$parent.productByResponseRate;   
+                }
                 if (this.categoryId) {
                     searchObject.category_id = this.categoryId;
                 }
@@ -1056,7 +1057,7 @@ li.active a::after {
 
                 axios.post('/user/get_product_list', searchObject)
                     .then(function (response) {
-                      self.products=response.data.products
+                      self.products=response.data.products;
                       eventBus.$emit('submiting', false);
                         // self.scrollToTop();
                     })

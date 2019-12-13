@@ -55,7 +55,7 @@ return [
     ],
     
     'elevator' => [
-        'price' => 250000,
+        'price' => 1000,
         'expiration-time-in-days' => 14
     ],
 ];
