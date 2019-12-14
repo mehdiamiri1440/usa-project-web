@@ -166,12 +166,19 @@
         width: 200px;
         color: #fff;
         background: #000546;
-        padding: 6px 15px;
         border-radius: 4px;
         font-size: 12px;
         font-weight: bold;
         transition: 300ms;
         z-index: 1;
+    }
+
+    .item-help-content > span{
+
+       
+        display: block;
+        padding: 6px 15px;
+        
     }
 
 /*    .item-help-content::after {
@@ -187,8 +194,9 @@
         top: -7px;
         border-radius: 3px;
 
-    }*/
+        }*/
 
+   
     .item-help{
 
         transition: 300ms;
@@ -204,7 +212,7 @@
 
         float: right;
 
-        font-size: 15px;
+        font-size: 14px;
 
         color: #777;
 
@@ -215,7 +223,7 @@
     .item-content-amount{
         float: left;
         font-weight: bold;
-        min-width: 50px;
+        min-width: 45px;
         text-align: center;
     }
 
@@ -248,6 +256,11 @@
 
     @media screen and (max-width: 992px) {
 
+        .main-content-wrapper > .row > div {
+
+                padding: 0 7px;
+
+        }
         .list-title, .needs, .list-time {
             padding: 15px;
         }
@@ -255,7 +268,7 @@
     }
 
     @media screen and (max-width: 767px) {
-
+        
         .header-icon-wrapper {
             float: right;
             width: 50px;
@@ -427,7 +440,8 @@
 
                                                      <i class="fa fa-question-circle"></i>
 
-                                                     <div class="item-help-content collapse" :id="'content-item-' + index" v-text="item.helpDescription">
+                                                     <div class="item-help-content collapse" :id="'content-item-' + index" >
+                                                        <span v-text="item.helpDescription">  </span>
 
                                                      </div>
 
@@ -509,7 +523,9 @@
 
                                                      <i class="fa fa-question-circle"></i>
 
-                                                     <div class="item-help-content collapse" :id="'content-item-pro-' + index" v-text="item.helpDescription">
+                                                     <div class="item-help-content collapse" :id="'content-item-pro-' + index" >
+
+                                                        <span v-text="item.helpDescription">  </span>
 
                                                      </div>
 
@@ -569,14 +585,14 @@
                         helpDescription : ' تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. '
                     },
                     {
-                        title:'اولویت نمایش',
+                        title:'تعداد پله ها',
                         contentUnit : '1',
-                        helpDescription : ' اولویت نمایش در لیست محصولات و جستجو ها '
+                        helpDescription : 'بر روی اولین محصول ثبت شده ویژگی پله به صورت خودکار اعمال خواهد شد'
                     },
                     {
-                        title:' ارسال پیامک به خریداران ',
+                        title:'نمایش در لیست محصولات ویژه',
                         contentUnit : '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
-                        helpDescription : ' پس از ثبت آگهی فروش به صورت خودکار به خریداران متقاضی آن محصول پیامک ارسال می شود. '
+                        helpDescription : 'محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود'
                     },
                     {
                         title:'تایید فوری ',
@@ -606,14 +622,14 @@
                         helpDescription : ' تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. '
                     },
                     {
-                        title:'اولویت نمایش',
-                        contentUnit : '2',
-                        helpDescription : ' اولویت نمایش در لیست محصولات و جستجو ها '
+                        title:'تعداد پله ها',
+                        contentUnit : '0',
+                        helpDescription : 'بر روی اولین محصول ثبت شده ویژگی پله به صورت خودکار اعمال خواهد شد'
                     },
                     {
-                        title:' ارسال پیامک به خریداران ',
+                         title:'نمایش در لیست محصولات ویژه',
                         contentUnit : '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
-                        helpDescription : ' پس از ثبت آگهی فروش به صورت خودکار به خریداران متقاضی آن محصول پیامک ارسال می شود. '
+                        helpDescription : 'محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود'
                     },
                     {
                         title:'تایید فوری ',
