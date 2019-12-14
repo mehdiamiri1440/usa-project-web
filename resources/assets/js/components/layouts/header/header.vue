@@ -391,6 +391,8 @@
 
         box-shadow: 0 3px 15px
         rgba(0, 0, 0, 0.2);
+
+        z-index: 1;
     }
 
 

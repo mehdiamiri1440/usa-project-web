@@ -543,7 +543,15 @@ export default {
     HeaderMenuList,
     HeaderTop
   },
-  props: ["defultimg", "logo", "loading", "storage", "logout", "userId"],
+  props: [
+   "defultimg",
+   "logo", 
+   "loading",
+   "storage",
+   "logout",
+   "userId",
+   "searchText"
+   ],
   data: function() {
     return {
       menuClosed: false,
@@ -578,7 +586,9 @@ export default {
       deleteText: "",
       deleteButtonText: "",
       cancelButtonText: "",
-      ProductId: ""
+      ProductId: "",
+      searchValueText:"",
+      resetTextSearch:false
     };
   },
   methods: {
@@ -898,6 +908,22 @@ export default {
     eventBus.$on("productId", event => {
       this.productId = event;
     });
+
+    eventBus.$on("resetTextSearch", event => {
+      this.resetTextSearch = event;
+    });
+
+  },
+  watch:{
+    'searchValueText':function(value){
+      this.resetTextSearch = false;
+      this.$parent.searchText = value;
+    },
+    'resetTextSearch':function(value){
+      if (value == true) {
+          this.searchValueText = "";
+      }
+    }
   },
   metaInfo() {
     return {

@@ -4,6 +4,7 @@
 #main-content {
   padding-top: 122px;
 }
+
 .shadow-content {
   background: #fff;
 }
@@ -1303,8 +1304,8 @@ li.active a::after {
             });
 
             // document.addEventListener('click', this.documentClick);
-        },
-              mounted() {
+        }, 
+        mounted() {
                 let self=this
             this.init().then(loading=>{
               if(!loading){

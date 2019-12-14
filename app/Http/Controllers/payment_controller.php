@@ -21,8 +21,8 @@ class payment_controller extends Controller
     
     public function __construct()
     {
-        session_start();
-        ini_set("soap.wsdl_cache_enabled", "0");
+//        session_start();
+//        ini_set("soap.wsdl_cache_enabled", "0");
     }
     
     protected $transaction_id_increase_amount_proportional_to_real_id = 100000 ;
@@ -743,17 +743,15 @@ class payment_controller extends Controller
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
             
-            echo "product:";
-            echo '<pre>';
-            var_dump($this->do_after_payment_changes_for_elevator());
-            echo '</pre>';
-//            return redirect('/product-list');
+            $this->do_after_payment_changes_for_elevator();
+            
+            return redirect('/product-list');
 
         } 
         catch (\Exception $e)
         {
-            echo $e->getMessage();
-//            return redirect('/product-list');
+//            echo $e->getMessage();
+            return redirect('/product-list');
             //return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
         }
 //         catch (PortNotFoundException $e) 
@@ -778,9 +776,9 @@ class payment_controller extends Controller
     {
         $product_id = session()->pull('product_id');
         
-//        try{
+        try{
             $product_record = product::find($product_id);
-            return $product_record;
+        
             $now = Carbon::now();
             
             $expiration_time_in_days = config("subscriptionPakage.elevator.expiration-time-in-days");
@@ -790,11 +788,10 @@ class payment_controller extends Controller
 
             $product_record->save();
         
-            return $product_record;
-//        }
-//        catch(\Exception $e){
-//            //
-//        }
+        }
+        catch(\Exception $e){
+            //
+        }
         
     }
     

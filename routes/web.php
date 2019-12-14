@@ -633,7 +633,7 @@ Route::group(['middleware' => [login::class]],function(){
     
     Route::get('/payment/elevator/{product_id}',[
         'uses' => 'payment_controller@do_elevator_payment',
-        'as' => 'do_payment',
+        'as' => 'do_elevator_payment',
     ])->where('product_id','[0-9]+');
 
     Route::any('/payment_callback',[

@@ -106,18 +106,18 @@ class product_controller extends Controller
                 }
             }
             
-            if($this->is_immediate_product_confirm_active()){
-                $product->confirmed = true;
-            }
+//            if($this->is_immediate_product_confirm_active()){
+//                $product->confirmed = true;
+//            }
 			
 			$user->product()->save($product);			
 			
 			$files_path_array = $this->save_product_photos($request,$request->images_count);
 			$this->register_photos_path_in_DB($files_path_array,$product);
             
-            if($this->is_send_sms_to_buyers_active()){
-                NotifyBuyersBySMS::dispatch($product->id)->onQueue('default');
-            }
+//            if($this->is_send_sms_to_buyers_active()){
+//                NotifyBuyersBySMS::dispatch($product->id)->onQueue('default');
+//            }
             
 			
 			return $product;
@@ -207,19 +207,30 @@ class product_controller extends Controller
         $all_products = NULL ; 
         $response_rate_filter = $request->response_rate;
 //        $special_products = $request->special_products;
-
+        $search_text = $request->search_text;
+        
         if($request->has('special_products')){
-            $all_products = $this->get_all_products_with_related_media($request->special_products); 
+            if($request->filled('search_text')){
+                $all_products = $this->get_all_products_with_related_media($search_text,$request->special_products); 
+            }
+            else{
+                $all_products = $this->get_all_products_with_related_media(null,$request->special_products); 
+            } 
         }
         else{
-            $all_products = $this->get_all_products_with_related_media(); 
+            if($request->filled('search_text')){
+                $all_products = $this->get_all_products_with_related_media($search_text); 
+            }
+            else{
+                $all_products = $this->get_all_products_with_related_media(); 
+            }  
         }
              
 
         
         //applying filters
         $all_products = array_filter($all_products, function($product) use($request){
-            $category_flag = $sub_category_flag = $province_flag = $city_flag = $search_text_flag = true;
+            $category_flag = $sub_category_flag = $province_flag = $city_flag = true;
             
             if($request->filled('category_id')){
                 $category_flag = ($request->category_id == $product['main']->category_id);
@@ -233,12 +244,12 @@ class product_controller extends Controller
             if($request->filled('city_id')){
                 $city_flag = ( $request->city_id == $product['main']->city_id);
             }
-            if($request->filled('search_text')){
-                $search_text = $request->search_text;
-                
-                $search_text_flag = $this->does_search_text_matche_the_product($search_text,$product);
-            }
-            $result = $category_flag && $sub_category_flag && $province_flag && $city_flag &&  $search_text_flag;
+//            if($request->filled('search_text')){
+//                $search_text = $request->search_text;
+//                
+//                $search_text_flag = $this->does_search_text_matche_the_product($search_text,$product);
+//            }
+            $result = $category_flag && $sub_category_flag && $province_flag && $city_flag;
 //            var_dump($test);
             return $result;
         });
@@ -351,7 +362,7 @@ class product_controller extends Controller
 		
 	}
 	
-	protected function get_all_products_with_related_media($special_products = false ,$from_record_number = NULL, $to_record_number = NULL)
+	protected function get_all_products_with_related_media($search_text = null,$special_products = false ,$from_record_number = NULL, $to_record_number = NULL)
 	{
 		$products = NULL ;
         
@@ -388,10 +399,30 @@ class product_controller extends Controller
             
             $products = $query->get();
 		}
+        
+        $temp_products = [];
+        
+        if( ! is_null($search_text)){
+            foreach($products as $product){
+                $product->subcategory_name = category::find($product->category_id)->category_name;
+                if($this->does_search_text_matche_the_product($search_text,$product)){
+                    $temp_products[] = $product;
+                }
+            }
+            
+            $products = $temp_products;
+        }
 		
-		$result_products = array();
+        $result_products = $this->append_related_data_to_given_products($products);
 		
-		foreach($products as $product)
+		return $result_products;
+	}
+    
+    protected function append_related_data_to_given_products($products)
+    {
+        $result_products = [];
+        
+        foreach($products as $product)
 		{		
 			$temp = array();
 			$product_related_photos = $product->product_media()
@@ -421,8 +452,8 @@ class product_controller extends Controller
 			$result_products[] = $product_related_data; 
 		}
 		
-		return $result_products;
-	}
+        return $result_products;
+    }
 	
 	protected function get_product_related_data($product_id)
 	{
@@ -852,7 +883,7 @@ class product_controller extends Controller
         return config("subscriptionPakage.type-$user_active_pakage_type.sms-to-buyers");
     }
     
-    protected function does_search_text_matche_the_product($search_text,&$product)
+    protected function does_search_text_matche_the_product($search_text,$product)
     {
         $search_text = str_replace('\\','',$search_text);
         $search_text = str_replace('/','',$search_text);
@@ -863,8 +894,12 @@ class product_controller extends Controller
         foreach($search_text_array as $text){
             $search_expresion .= "($text)(.*)";
         }
-
-        $result = array_filter(collect($product['main'])->toArray(),function($item) use($search_text,$search_expresion){
+        
+        $product_info[] = $product->product_name;
+        $product_info[] = $product->description;
+        $product_info[] = $product->subcategory_name;
+        
+        $result = array_filter($product_info,function($item) use($search_text,$search_expresion){
             return preg_match("/$search_expresion/", $item);
         });
 
