@@ -148,7 +148,7 @@ p.response-rate{
 
 @media screen and (max-width: 400px) {
   .user-information-contents p {
-    max-width: 110px;
+    max-width: 115px;
 
   }
   .user-action-link {
