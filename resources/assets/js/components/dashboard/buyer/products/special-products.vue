@@ -365,7 +365,7 @@
                 subCategoryId: '',
                 searchValue: '',
                 productCountInEachLoad: 10,
-                productCountInPage: 3,
+                productCountInPage: 10,
                 continueToLoadProducts: true,
                 loadMoreActive: false,
                 loading: false,
