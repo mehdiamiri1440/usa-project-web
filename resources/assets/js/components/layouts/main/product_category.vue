@@ -959,7 +959,7 @@
                 var searchValue = this.searchValue;
                 var searchValueText = searchValue;
                 let categoryName = this.getCategoryName();
-
+//                this.productCountInPage = this.productCountInEachLoad;
 
                 axios.post('/user/profile_info')
                     .then(function (response) {
@@ -1170,7 +1170,25 @@
                 let name = this.$route.params.categoryName;
 
                 return name.replace('-',' ');
-            }
+            },
+            infiniteScrollHandler:function(){
+                let lastOffset = 0;
+                
+                window.onscroll = () => {
+
+                var bottom = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - (document.documentElement.scrollTop / 2);
+
+                let newOffset = document.documentElement.offsetHeight;
+
+                if(bottom){
+                    if(newOffset > lastOffset + 100){
+                            lastOffset = document.documentElement.offsetHeight;
+                            this.feed();
+                        }
+
+                    }
+                }
+            },
         },
         watch: {
             '$route.params.categoryName':function(name){
@@ -1221,6 +1239,8 @@
         },
         mounted() {
             this.scrollToTop();
+            
+//            this.infiniteScrollHandler();
 
             this.init();
 

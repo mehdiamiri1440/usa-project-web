@@ -485,10 +485,10 @@ const router = new Router({
 
     ],
     scrollBehavior(to, from, savedPosition) {
-        if (savedPosition) {
-            JSON.stringify(localStorage.setItem('scroll', savedPosition.y));
-            return savedPosition
-        }
+//        if (savedPosition) {
+//            JSON.stringify(localStorage.setItem('scroll', savedPosition.y));
+//            return savedPosition
+//        }
         return { x: 0, y: 0 }
     }
 

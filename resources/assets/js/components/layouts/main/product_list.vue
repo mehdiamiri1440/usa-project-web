@@ -845,7 +845,7 @@ li.active a::after {
                 cityId: '',
                 searchValue: "",
                 scrolled: false,
-                productCountInPage:JSON.parse(localStorage.getItem('productCountInPage'))|| 10,
+                productCountInPage: 10,
                 productCountInEachLoad: 10,
                 continueToLoadProducts: true,
                 searchActive: false,
@@ -881,9 +881,9 @@ li.active a::after {
                 }
             },
             init: function () {
-              return new Promise((resolve,reject)=>{
+//              return new Promise((resolve,reject)=>{
                 var self = this;
-                
+                this.scrollToTop();
                 if(this.$route.query.s){
                      var searchValue = this.$route.query.s.split('+').join(' ')  
                 }
@@ -911,8 +911,8 @@ li.active a::after {
 
                             }).then(function (response) {
                                 self.products = response.data.products;
-                                localStorage.removeItem('productCountInPage')
-                                resolve(self.loading = false);
+//                                localStorage.removeItem('productCountInPage')
+//                                resolve(self.loading = false);
                                 eventBus.$emit('submiting', false);
                                 setTimeout(function(){
                                     self.sidebarScroll();
@@ -920,7 +920,7 @@ li.active a::after {
 
                             });
                         }
-                    }).catch(error=>reject(error));
+//                    }).catch(error=>reject(error));
                 });
             },
             feed() {
@@ -935,7 +935,7 @@ li.active a::after {
                         to_record_number: this.productCountInPage,
                     }).then(function (response) {
                       self.products=response.data.products;
-                      localStorage.productCountInPage=JSON.stringify(self.productCountInPage) 
+//                      localStorage.productCountInPage=JSON.stringify(self.productCountInPage) 
                         eventBus.$emit('submiting', false);
                         if (self.products.length + 1 < self.productCountInPage) {
                             self.continueToLoadProducts = false;
@@ -1060,7 +1060,7 @@ li.active a::after {
                     .then(function (response) {
                       self.products=response.data.products;
                       eventBus.$emit('submiting', false);
-                        // self.scrollToTop();
+                         self.scrollToTop();
                     })
                     .catch(function (err) {
                         alert('خطایی رخ داده است. دوباره تلاش کنید.');
@@ -1084,6 +1084,24 @@ li.active a::after {
                     'description': description,
                     'fatal': fatal
                 });
+            },
+            infiniteScrollHandler:function(){
+                let lastOffset = 0;
+                
+                window.onscroll = () => {
+
+                var bottom = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - (document.documentElement.scrollTop / 2);
+
+                let newOffset = document.documentElement.offsetHeight;
+
+                if(bottom){
+                    if(newOffset > lastOffset + 100){
+                            lastOffset = document.documentElement.offsetHeight;
+                            this.feed();
+                        }
+
+                    }
+                }
             },
             sidebarScroll() {
 
@@ -1306,14 +1324,17 @@ li.active a::after {
             // document.addEventListener('click', this.documentClick);
         }, 
         mounted() {
-                let self=this
-            this.init().then(loading=>{
-              if(!loading){
-                   let scrollPosition=(localStorage.getItem('scroll'))||{x:0,y:0};
-                   window.scrollTo(0,scrollPosition);
-                   localStorage.removeItem('scroll')
-                   }
-            });
+            let self=this
+            
+//            this.infiniteScrollHandler();
+            this.scrollToTop();
+            this.init();//.then(loading=>{
+//              if(!loading){
+//                   let scrollPosition=(localStorage.getItem('scroll'))||{x:0,y:0};
+//                   window.scrollTo(0,scrollPosition);
+//                   localStorage.removeItem('scroll')
+//                   }
+//            });
             this.stopLoader();
             },
         metaInfo() {

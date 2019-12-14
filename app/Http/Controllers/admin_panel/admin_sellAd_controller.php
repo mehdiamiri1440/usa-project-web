@@ -11,6 +11,7 @@ use DB;
 use App\Http\Controllers\sms_controller;
 use App\myuser;
 use App\Http\Library\date_convertor;
+use Carbon\Carbon;
 
 class admin_sellAd_controller extends Controller
 {
@@ -192,13 +193,22 @@ class admin_sellAd_controller extends Controller
                 }
             }
             
+            if($this->is_user_package_active($user_id)){
+                if($this->is_it_user_first_confirmed_product($user_id)){
+                    $now = Carbon::now();
+                    
+                    $sellAd_record->is_elevated = true;
+                    $sellAd_record->elevator_expiry = $now->addDays(14);
+                }
+            }
+            
             $sellAd_record->confirmed = true;
             
             $sellAd_record->save();
             
             //send SMS
-            $sms_controller_object = new sms_controller();            
-            $sms_controller_object->send_status_sms_message($sellAd_record,$this->sellAd_confirmation_sms_text);
+//            $sms_controller_object = new sms_controller();            
+//            $sms_controller_object->send_status_sms_message($sellAd_record,$this->sellAd_confirmation_sms_text);
             
             return redirect()->route('admin_panel_sellAd');
         }
@@ -254,6 +264,30 @@ class admin_sellAd_controller extends Controller
             'status' => true,
            'msg' => 'photo deleted', 
         ]);
+    }
+    
+    protected function is_user_package_active($user_id)
+    {
+        $user_record = myuser::find($user_id);
+        
+        if($user_record->active_pakage_type > 0){
+            return true;
+        }
+        
+        return false;
+    }
+    
+    protected function is_it_user_first_confirmed_product($user_id)
+    {
+        $products = product::where('myuser_id',$user_id)
+                            ->where('confirmed',true)
+                            ->get();
+        
+        if($products->count() > 0){
+            return false;
+        }
+        
+        return true;
     }
     
 }

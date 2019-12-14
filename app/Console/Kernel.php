@@ -49,7 +49,7 @@ class Kernel extends ConsoleKernel
         $send_sms_for_sellers_who_did_not_registered_product_job = new SendReminderSMSToSellers();
         
         $schedule->job($send_sms_for_sellers_who_did_not_registered_product_job)
-                ->dailyAt('13:30');
+                ->dailyAt('10:30');
         
         $check_product_elevator_expiry_time_job = new CheckElevatorExpiry();
         

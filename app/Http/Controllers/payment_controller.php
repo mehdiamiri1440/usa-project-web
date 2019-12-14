@@ -252,17 +252,18 @@ class payment_controller extends Controller
         
         $user_record->save();
         
-        $user_product_records = product::where('myuser_id',$user_id)
+        $user_product_record = product::where('myuser_id',$user_id)
                                     ->where('confirmed',true)
-                                    ->get();
+                                    ->get() 
+                                    ->first();
         
-        foreach($user_product_records as $product)
-        {
-            $product->is_elevated = true;
-            $product->elevator_expiry = $now->addDays(14);
-            
-            $product->save();
+        if($user_product_record){
+            $user_product_record->is_elevated = true;
+            $user_product_record->elevator_expiry = $now->addDays(14);
+
+            $user_product_record->save();
         }
+        
     }
     
     public function do_my_payment($type,$transaction_id)
