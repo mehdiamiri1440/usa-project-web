@@ -776,7 +776,7 @@
                                         </span>
 
                                         <span class="valid-seller"
-                                              v-if="!profileOwnerStatistics.validated_seller">
+                                              v-if="profileOwnerStatistics.validated_seller">
 
                                             <i class="fa fa-check-circle"></i>
                                             فروشنده معتبر
@@ -930,7 +930,7 @@
                                         </span>
 
                                         <span class="valid-seller"
-                                              v-if="!profileOwnerStatistics.validated_seller">
+                                              v-if="profileOwnerStatistics.validated_seller">
 
                                             <i class="fa fa-check-circle"></i>
                                             فروشنده معتبر
