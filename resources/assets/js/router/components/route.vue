@@ -130,7 +130,6 @@
 
         <!-- add android app download  -->
 
-<!--
         <div v-if="isConditionSatisfied"  class="android-download-alert-wrapper hidden-lg hidden-md">
 
             <button class="close-android-download-alert-wrapper" @click.prevent="isConditionSatisfied = false">
@@ -144,7 +143,6 @@
         
             </button>
         </div>
--->
 
 
     </div>

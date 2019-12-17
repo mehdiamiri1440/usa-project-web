@@ -1222,13 +1222,13 @@
             '</a>' +
             '</div>',
         mounted: function () {
-            /*$(".owl-carousel").owlCarousel({
+            $(".owl-carousel").owlCarousel({
                 loop: false,
                 items: 1,
                 margin: 10,
                 nav: false,
                 dots: true
-            });*/
+            });
             $(this.$el).parent().parent().parent().magnificPopup({
                 delegate: 'a',
                 type: 'image',
@@ -1254,12 +1254,12 @@
             '</a>' +
             '</div>',
         mounted: function () {
-           /* $(".owl-carousel").owlCarousel({
+           $(".owl-carousel").owlCarousel({
                 loop: false,
                 margin: 10,
                 nav: true,
                 dots: false
-            });*/
+            });
             $(this.$el).parent().parent().parent().magnificPopup({
                 delegate: 'a',
                 type: 'image',
