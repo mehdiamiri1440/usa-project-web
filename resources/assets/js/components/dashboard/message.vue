@@ -931,33 +931,7 @@ export default {
       }
     }
   },
-  updated() {},
-  mounted: function() {
-    this.init();
-    eventBus.$emit("subHeader", this.items);
-  },
-  /* created: function() {
-    gtag("config", "UA-129398000-1", { page_path: "/messages" });
 
-    var self = this;
-
-    if (Push.Permission.has() === false) {
-      Push.Permission.request(function() {}, function() {});
-    }
-
-    Echo.private("testChannel." + userId).listen("newMessage", e => {
-      var senderId = e.new_message.sender_id;
-      //update contact list
-      self.loadContactList();
-
-      if (self.currentContactUserId) {
-        if (self.currentContactUserId === senderId) {
-          self.chatMessages.push(e.new_message);
-          self.scrollToEnd(0);
-
-
-            }
-        }, */
   mounted: function() {
     this.init();
     eventBus.$emit("subHeader", this.items);
