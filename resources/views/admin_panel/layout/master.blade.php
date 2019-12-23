@@ -81,6 +81,9 @@
         <li class="{{Request::is('admin/statistics') ? 'active':''}}">
                 <a href="{{route('admin_panel_load_statistics')}}"><i class="fa fa-envelope"></i><span>آمار سایت</span></a>      
         </li>
+        <li class="{{Request::is('admin/statisticsCharts') ? 'active':''}}">
+                <a href="{{route('admin_panel_load_statistics_chart')}}"><i class="fa fa-envelope"></i><span>نمودارها</span></a>      
+        </li>
         <li class="{{Request::is('admin/user-list') || Request::is('admin/user-list-detail/*') ? 'active':''}}">
                 <a href="{{route('admin_panel_load_user_list')}}"><i class="fa fa-envelope"></i><span> لیست کاربران</span></a>      
         </li>

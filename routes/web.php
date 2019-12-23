@@ -916,6 +916,11 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
     Route::get('generate-manual-payment-url',function(){
         return view('admin_panel.generateManualPaymentUrl');
     })->name('generate_manual_payment_url');
+    
+    Route::match(['get','post'],'/statisticsCharts',[
+        'uses' => 'admin_panel\admin_chart_controller@chart_loader',
+        'as' => 'admin_panel_load_statistics_chart'
+    ]);
 
 //    Route::get('factor-issuance-detail/{id}',[
 //        'uses' => 'admin_panel\admin_transaction_controller@'
