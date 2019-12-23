@@ -371,13 +371,13 @@ class admin_statistics_controller extends Controller
     
     protected function get_returning_users_count($from_date,$until_date,$user_type)
     {
-        if($user_type = 'seller'){
+        if($user_type == 'seller'){
             $tmp = DB::select("SELECT COUNT(DISTINCT(m1.id)) as cnt FROM myusers m1,products p1,messages msg1 where m1.id = p1.myuser_id and m1.id = msg1.sender_id and p1.confirmed = true and m1.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and p1.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and msg1.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and EXISTS (SELECT * FROM myusers m2,products p2,messages msg2 where m2.id = p2.myuser_id and m2.id = msg2.sender_id and p2.confirmed = true and m2.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and p2.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and msg2.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and date_add(p2.created_at,INTERVAL 8 HOUR) > p1.created_at and date_add(msg2.created_at,INTERVAL 8 HOUR) > msg1.created_at
             )");
             
             return $tmp[0]->cnt;
         }
-        else if($user_type = 'buyer'){
+        else if($user_type == 'buyer'){
             $tmp = DB::select("SELECT COUNT(DISTINCT(m1.id)) as cnt FROM myusers m1,buy_ads p1,messages msg1 where m1.id = p1.myuser_id and m1.id = msg1.sender_id and p1.confirmed = true and m1.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and p1.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and msg1.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and EXISTS ( SELECT * FROM myusers m2,buy_ads p2,messages msg2 where m2.id = p2.myuser_id and m2.id = msg2.sender_id and p2.confirmed = true and m2.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and p2.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and msg2.created_at BETWEEN '". $from_date ."' and "."'". $until_date ."' and date_add(p2.created_at,INTERVAL 8 HOUR) > p1.created_at and date_add(msg2.created_at,INTERVAL 8 HOUR) > msg1.created_at )");
             
             return $tmp[0]->cnt;;
