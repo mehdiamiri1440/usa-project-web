@@ -107,7 +107,10 @@
         <li class="<?php echo e(Request::is('admin/sellAd-list') || Request::is('admin/sellAd-list-detail/*') ? 'active':''); ?>">
             <a href="<?php echo e(route('admin_panel_sellAd_list')); ?>"><i class="fa fa-envelope"></i><span>آگهی های فروش تایید شده</span></a>      
         </li>
-        <li class="<?php echo e(Request::is('admin/sell-offers') || Request::is('admin/sell-offer-detail/*') ? 'active':''); ?>">
+        <li class="<?php echo e(Request::is('admin/messages') ? 'active':''); ?>">
+            <a href="<?php echo e(route('admin_panel_message_list')); ?>"><i class="fa fa-envelope"></i><span>پیام ها</span></a>      
+        </li>
+        <!-- <li class="<?php echo e(Request::is('admin/sell-offers') || Request::is('admin/sell-offer-detail/*') ? 'active':''); ?>">
             <a href="<?php echo e(route('admin_panel_sell_offer_list')); ?>"><i class="fa fa-envelope"></i><span>پیشنهادات فروش</span></a>     
         </li>
         <hr/>
@@ -141,7 +144,7 @@
         </li>
         <li class="<?php echo e(Request::is('admin/generate-manual-payment-url') ? 'active':''); ?>">
             <a href="<?php echo e(route('generate_manual_payment_url')); ?>"><i class="fa fa-envelope"></i><span>صدور لینک پرداخت</span></a>
-        </li>
+        </li> -->
       </ul>
     </section>
     <!-- /.sidebar -->

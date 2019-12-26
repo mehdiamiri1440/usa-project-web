@@ -922,6 +922,15 @@ Route::group(['prefix' => 'admin','middleware' => [admin_login::class]],function
         'as' => 'admin_panel_load_statistics_chart'
     ]);
 
+    Route::get('/messages',function(){
+        return view('admin_panel.message');
+    })->name('admin_panel_message_list');
+
+    Route::post('/messages',[
+        'uses' => 'admin_panel\admin_message_controller@get_all_user_contacts_with_related_messages',
+        'as'   => 'admin_panel_load_user_messages'
+    ]);
+
 //    Route::get('factor-issuance-detail/{id}',[
 //        'uses' => 'admin_panel\admin_transaction_controller@'
 //    ])
