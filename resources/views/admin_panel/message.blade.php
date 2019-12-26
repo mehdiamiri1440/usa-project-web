@@ -92,9 +92,6 @@
                             <div class="panel-heading" role="tab" id="{{$msg['contact_info']->contact_id}}">
                             <h4 class="panel-title">
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="{{'#collapse' . $msg['contact_info']->contact_id}}" aria-expanded="false" aria-controls="{{'collapse' . $msg['contact_info']->contact_id}}">
-                                    @if($msg['contact_info']->profile_photo)
-                                        <img src="{{asset('storage/' . $msg['contact_info']->profile_photo)}}">
-                                    @endif
                                     {{$msg['contact_info']->first_name . ' ' . $msg['contact_info']->last_name}}
                                 </a>
                                 <div class="row">

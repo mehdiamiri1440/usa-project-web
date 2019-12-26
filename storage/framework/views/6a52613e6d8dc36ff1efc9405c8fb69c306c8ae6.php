@@ -90,9 +90,6 @@
                             <div class="panel-heading" role="tab" id="<?php echo e($msg['contact_info']->contact_id); ?>">
                             <h4 class="panel-title">
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="<?php echo e('#collapse' . $msg['contact_info']->contact_id); ?>" aria-expanded="false" aria-controls="<?php echo e('collapse' . $msg['contact_info']->contact_id); ?>">
-                                    <?php if($msg['contact_info']->profile_photo): ?>
-                                        <img src="<?php echo e(asset('storage/' . $msg['contact_info']->profile_photo)); ?>">
-                                    <?php endif; ?>
                                     <?php echo e($msg['contact_info']->first_name . ' ' . $msg['contact_info']->last_name); ?>
 
                                 </a>
