@@ -106,7 +106,10 @@
         <li class="{{Request::is('admin/sellAd-list') || Request::is('admin/sellAd-list-detail/*') ? 'active':''}}">
             <a href="{{route('admin_panel_sellAd_list')}}"><i class="fa fa-envelope"></i><span>آگهی های فروش تایید شده</span></a>      
         </li>
-        <li class="{{Request::is('admin/sell-offers') || Request::is('admin/sell-offer-detail/*') ? 'active':''}}">
+        <li class="{{Request::is('admin/messages') ? 'active':''}}">
+            <a href="{{route('admin_panel_message_list')}}"><i class="fa fa-envelope"></i><span>پیام ها</span></a>      
+        </li>
+        <!-- <li class="{{Request::is('admin/sell-offers') || Request::is('admin/sell-offer-detail/*') ? 'active':''}}">
             <a href="{{route('admin_panel_sell_offer_list')}}"><i class="fa fa-envelope"></i><span>پیشنهادات فروش</span></a>     
         </li>
         <hr/>
@@ -140,7 +143,7 @@
         </li>
         <li class="{{Request::is('admin/generate-manual-payment-url') ? 'active':''}}">
             <a href="{{route('generate_manual_payment_url')}}"><i class="fa fa-envelope"></i><span>صدور لینک پرداخت</span></a>
-        </li>
+        </li> -->
       </ul>
     </section>
     <!-- /.sidebar -->
