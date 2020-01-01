@@ -1,5 +1,5 @@
 <style scoped>
-    
+
 
     .android-download-alert-wrapper{
 
@@ -16,13 +16,13 @@
         color: #fff;
 
         direction: rtl;
-        
+
         z-index: 1020;
 
     }
 
     .android-apk-download{
-        
+
         padding: 15px;
 
         background: none;
@@ -53,51 +53,59 @@
 
     }
 
+
+
 </style>
 
 <template>
     <div>
 
 
-         <div class="container">
-            <div
-                    id="elevator-modal"
-                    class="modal fade"
-                    tabindex="-1"
-                    role="dialog"
-             
-            >
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="main_popup_content">
-                            <a href="#" data-dismiss="modal">
-                                <i class="fa fa-times"></i>
-                            </a>
-                            <h1 class="green-text">
-                                 <span >25,000</span>
-                                  تومان
-                            </h1>
-                            <br/>
-                            <p class="main-pop-up" v-text="elevatorText"></p>
+        <!--  #regex elevator modal  -->
 
-                            <a href="" class="btn green-button bg-gray" data-dismiss="modal"> متوجه شدم</a>
 
-                            <a
-                                    :href="'/payment/elevator/' + productId"
-                                    class="btn green-button "
-                                  
-                            >
-                            خرید نردبان
-                            </a>
+             <div class="container">
+                <div
+                        id="elevator-modal"
+                        class="modal fade"
+                        tabindex="-1"
+                        role="dialog"
 
+                >
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="main_popup_content">
+                                <a href="#" data-dismiss="modal">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                                <h1 class="green-text">
+                                     <span >25,000</span>
+                                      تومان
+                                </h1>
+                                <br/>
+                                <p class="main-pop-up" v-text="elevatorText"></p>
+
+                                <a href="" class="btn green-button bg-gray" data-dismiss="modal"> متوجه شدم</a>
+
+                                <a
+                                        :href="'/payment/elevator/' + productId"
+                                        class="btn green-button "
+
+                                >
+                                خرید نردبان
+                                </a>
+
+                            </div>
                         </div>
+                        <!-- /.modal-content -->
                     </div>
-                    <!-- /.modal-content -->
+                    <!-- /.modal-dialog -->
                 </div>
-                <!-- /.modal-dialog -->
             </div>
-        </div>
 
+        <!-- end regex elevator modal -->
+
+        <chat-modal/>
 
         <router-view
                 :user-id="userId"
@@ -139,8 +147,8 @@
             <button class="android-apk-download" @click.prevent="doDownload">
                 <i class="fas fa-download"></i>
             دانلود اپلیکیشن اینکوباک
-            
-        
+
+
             </button>
         </div>
 
@@ -150,20 +158,24 @@
 
 
 <script>
-    
+
     import router from '../router.js'
     import {eventBus} from '../router.js'
     import Cookies from "js-cookie";
     import IsWebview from "is-webview";
+    import ChatModal from '../../components/layouts/main/main_components/chat_modal'
 
     export default {
+        components: {
+            ChatModal,
+        },
         data:function(){
 
             return{
-                iswebview : navigator.userAgent == "webView" ? true : false, 
+                iswebview : navigator.userAgent == "webView" ? true : false,
                 isConditionSatisfied : false,
                 elevatorText:"",
-                productId:""
+                productId:"",
             }
 
         },
@@ -183,10 +195,11 @@
             eventBus.$on("elevatorText", $event => {
                 this.elevatorText = $event;
             });
-            
+
             eventBus.$on("productId", $event => {
                 this.productId = $event;
             });
+
         },
         router,
         methods:{

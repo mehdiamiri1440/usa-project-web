@@ -274,7 +274,7 @@
 
 
 <script>
-    import ProductCarousel from '../landing_page_components/product-list-carousel'
+    import ProductCarousel from '../main_components/product-list-carousel'
     import ProductContents from "./product-view/product";
     import UserInfo from "./product-view/user_info";
     import {eventBus} from "../../../../router/router";
@@ -353,7 +353,8 @@
 
             },
             openChat: function (product) {
-                this.registerComponentStatistics('product', 'openChat', 'click on open chatBox');
+                eventBus.$emit('openChat',true);
+                /*this.registerComponentStatistics('product', 'openChat', 'click on open chatBox');
 
                 var contact = {
                     contact_id: product.user_info.id,
@@ -387,7 +388,7 @@
                     this.popUpMsg = 'اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
                     eventBus.$emit('submitSuccess', this.popUpMsg);
                     $('#auth-popup').modal('show');
-                }
+                }*/
             },
             registerComponentStatistics: function (categoryName, actionName, labelName) {
                 gtag('event', actionName, {
