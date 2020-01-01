@@ -172,6 +172,8 @@ class message_controller extends Controller
 
         $unread_msgs_count = sizeof($unread_msgs);
 
+        $last_msg_time_date = null;
+
         if ($msgs->count() > 0) {
             $last_msg_time_date = $msgs->last()
                 ->created_at
