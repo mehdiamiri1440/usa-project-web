@@ -658,7 +658,7 @@ li.active a::after {
               </div>
               <div
                 class="load-more-button col-xs-12"
-                v-if="searchText === '' && continueToLoadProducts === true "
+                v-if="continueToLoadProducts === true "
               >
                 <button class="btn btn-loader" @click.prevent="feed()">
                   <div class="btn-content">
@@ -847,6 +847,7 @@ li.active a::after {
                 scrolled: false,
                 productCountInPage: 10,
                 productCountInEachLoad: 10,
+                fromProductCount:0,
                 continueToLoadProducts: true,
                 searchActive: false,
                 errors: '',
@@ -904,8 +905,12 @@ li.active a::after {
                         }
                         else {
                             self.loading = true;
+
+                            self.fromProductCount = 0;
+                            self.productCountInPage = 10;
+
                             axios.post('/user/get_product_list', {
-                                from_record_number: 0,
+                                from_record_number: self.fromProductCount,
                                 response_rate: self.$parent.productByResponseRate,
                                 to_record_number: self.productCountInPage,
 
@@ -925,16 +930,23 @@ li.active a::after {
             },
             feed() {
 
+                if(this.products.isEmptyObject == true){
+                  return false;
+                }
+
                 var self = this;
                 if (this.searchText === '' && this.provinceId === '' && this.categoryId === '' && this.continueToLoadProducts) {
                     this.loadMoreActive = true;
+                    this.fromProductCount = this.productCountInPage;
                     this.productCountInPage += this.productCountInEachLoad;
                     axios.post('/user/get_product_list', {
-                        from_record_number: 0,
+                        from_record_number: self.fromProductCount,
                         response_rate: self.$parent.productByResponseRate,
-                        to_record_number: this.productCountInPage,
+                        to_record_number: self.productCountInPage,
                     }).then(function (response) {
-                      self.products=response.data.products;
+                      if(self.products && self.products.length){
+                          self.products = self.products.concat([...response.data.products]);
+                      }
 //                      localStorage.productCountInPage=JSON.stringify(self.productCountInPage) 
                         eventBus.$emit('submiting', false);
                         if (self.products.length + 1 < self.productCountInPage) {
@@ -944,8 +956,66 @@ li.active a::after {
                         self.loadMoreActive = false;
                         setTimeout(function(){
                             self.sidebarScroll();
-                        },500)
+                        },500);
                     });
+                }
+                else{
+
+                    this.loadMoreActive = true;
+
+                    var searchObject = {};
+
+                    if(self.$parent.productByResponseRate){
+                        searchObject.response_rate = self.$parent.productByResponseRate;   
+                    }
+                    if (this.categoryId) {
+                        searchObject.category_id = this.categoryId;
+                    }
+                    if (this.subCategoryId) {
+                        searchObject.sub_category_id = this.subCategoryId;
+                    }
+                    if (this.provinceId) {
+                        searchObject.province_id = this.provinceId;
+                    }
+                    if (this.cityId) {
+                        searchObject.city_id = this.cityId;
+                    }
+                    if (this.searchText) {
+                        this.$router.replace({
+                            name : 'productList',
+                            query :{
+                                s:this.searchText.replace(/ /g,'+')
+                            }
+                        });
+                        searchObject.search_text = this.searchText;
+                    }
+                    
+
+                    if (jQuery.isEmptyObject(searchObject)) {
+                        if(this.searchText == ""){
+                            this.$router.push({
+                                name : 'productList'
+                            });
+                        }
+                    }
+
+                    searchObject.from_record_number = self.productCountInPage;
+                    self.productCountInPage += self.productCountInEachLoad;
+                    searchObject.to_record_number = self.productCountInPage;
+
+                    axios.post('/user/get_product_list', searchObject)
+                      .then(function (response) {
+                        self.products = self.products.concat(response.data.products);
+
+                        self.loadMoreActive = false;
+                        
+                        setTimeout(function(){
+                            self.sidebarScroll();
+                        },500);
+                      })
+                      .catch(function (err) {
+                          alert('خطایی رخ داده است. دوباره تلاش کنید.');
+                      });
                 }
 
             },
@@ -1015,8 +1085,11 @@ li.active a::after {
             },
             applyFilter: function () {
                 var self = this;
-
+  
                 eventBus.$emit('submiting', true);
+
+                self.fromProductCount = 0;
+                self.productCountInPage = 10;
 
                 var searchObject = {};
 
@@ -1047,14 +1120,15 @@ li.active a::after {
                 
 
                 if (jQuery.isEmptyObject(searchObject)) {
-                    searchObject.from_record_number = 0;
-                    searchObject.to_record_number = 10;
                     if(this.searchText == ""){
                         this.$router.push({
                             name : 'productList'
                         });
                     }
                 }
+
+                searchObject.from_record_number = self.fromProductCount;
+                searchObject.to_record_number = self.productCountInPage;
 
                 axios.post('/user/get_product_list', searchObject)
                     .then(function (response) {
@@ -1097,6 +1171,7 @@ li.active a::after {
                 if(bottom){
                     if(newOffset > lastOffset + 100){
                             lastOffset = document.documentElement.offsetHeight;
+                            console.log('Triggered');
                             this.feed();
                         }
 
@@ -1298,6 +1373,8 @@ li.active a::after {
             '$parent.productByResponseRate':function(){
                 this.products = {};
                 
+                this.infiniteScrollHandler();
+
                 if (this.searchText) {
                   
                   this.applyFilter();
@@ -1324,10 +1401,12 @@ li.active a::after {
             // document.addEventListener('click', this.documentClick);
         }, 
         mounted() {
-            let self=this
-            
-//            this.infiniteScrollHandler();
+            let self=this;
+          
             this.scrollToTop();
+
+            this.infiniteScrollHandler();
+
             this.init();//.then(loading=>{
 //              if(!loading){
 //                   let scrollPosition=(localStorage.getItem('scroll'))||{x:0,y:0};

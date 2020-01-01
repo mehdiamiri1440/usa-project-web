@@ -921,6 +921,7 @@
                 productCountInPage: 10,
                 productCountInEachLoad: 10,
                 continueToLoadProducts: true,
+                fromProductCount:0,
                 searchActive: false,
                 errors: '',
                 popUpMsg: '',
@@ -973,8 +974,12 @@
                         }
                         else {
                             self.loading = true;
+
+                            self.fromProductCount = 0;
+                            self.productCountInPage = 10;
+
                             axios.post('/user/get_product_list', {
-                                from_record_number: 0,
+                                from_record_number: self.fromProductCount,
                                 response_rate: self.$parent.productByResponseRate,
                                 to_record_number: self.productCountInPage,
                                 search_text:categoryName
@@ -994,33 +999,120 @@
             },
             feed() {
 
+                // var self = this;
+                // if (this.searchText === '' && this.provinceId === '' && this.categoryId === '' && this.continueToLoadProducts) {
+                //     this.loadMoreActive = true;
+
+                //     this.productCountInPage += this.productCountInEachLoad;
+
+                //     axios.post('/user/get_product_list', {
+                //         from_record_number: 0,
+                //         response_rate: self.$parent.productByResponseRate,
+                //         to_record_number: this.productCountInPage,
+                //         search_text:this.getCategoryName()
+                //     }).then(function (response) {
+                //         self.products = response.data.products;
+
+                //         if (self.products.length + 1 < self.productCountInPage) {
+                //             self.continueToLoadProducts = false;
+                //         }
+
+                //         self.loadMoreActive = false;
+
+                //         setTimeout(function(){
+                //             self.sidebarScroll();
+                //         },500)
+                //     });
+
+                //   eventBus.$emit('submiting', false);
+
+                // }
+
+
                 var self = this;
                 if (this.searchText === '' && this.provinceId === '' && this.categoryId === '' && this.continueToLoadProducts) {
                     this.loadMoreActive = true;
-
+                    this.fromProductCount = this.productCountInPage;
                     this.productCountInPage += this.productCountInEachLoad;
-
                     axios.post('/user/get_product_list', {
-                        from_record_number: 0,
+                        from_record_number: this.fromProductCount,
                         response_rate: self.$parent.productByResponseRate,
                         to_record_number: this.productCountInPage,
                         search_text:this.getCategoryName()
                     }).then(function (response) {
-                        self.products = response.data.products;
-
+                      self.products= self.products.concat(response.data.products);
+//                      localStorage.productCountInPage=JSON.stringify(self.productCountInPage) 
+                        eventBus.$emit('submiting', false);
                         if (self.products.length + 1 < self.productCountInPage) {
                             self.continueToLoadProducts = false;
                         }
 
                         self.loadMoreActive = false;
-
                         setTimeout(function(){
                             self.sidebarScroll();
-                        },500)
+                        },500);
                     });
+                }
+                else{
+                    let self = this;
 
-                  eventBus.$emit('submiting', false);
+                    this.loadMoreActive = true;
 
+                    var searchObject = {};
+
+                    if(self.$parent.productByResponseRate){
+                        searchObject.response_rate = self.$parent.productByResponseRate;   
+                    }
+                    if (this.categoryId) {
+                        searchObject.category_id = this.categoryId;
+                    }
+                    if (this.subCategoryId) {
+                        searchObject.sub_category_id = this.subCategoryId;
+                    }
+                    if (this.provinceId) {
+                        searchObject.province_id = this.provinceId;
+                    }
+                    if (this.cityId) {
+                        searchObject.city_id = this.cityId;
+                    }
+                    // if (this.searchText) {
+                    //     this.$router.replace({
+                    //         name : 'productList',
+                    //         query :{
+                    //             s:this.searchText.replace(/ /g,'+')
+                    //         }
+                    //     });
+                    //     searchObject.search_text = this.searchText;
+                    // }
+                    
+
+                    if (jQuery.isEmptyObject(searchObject)) {
+                        if(this.searchText == ""){
+                            this.$router.push({
+                                name : 'productList'
+                            });
+                        }
+                    }
+
+                    searchObject.search_text = this.getCategoryName();
+
+                    searchObject.from_record_number = self.productCountInPage;
+                    self.productCountInPage += self.productCountInEachLoad;
+                    searchObject.to_record_number = self.productCountInPage;
+
+                    axios.post('/user/get_product_list', searchObject)
+                      .then(function (response) {
+                        self.products= self.products.concat(response.data.products);
+                        
+                        self.loadMoreActive = false;
+                        
+                        setTimeout(function(){
+                            self.sidebarScroll();
+                        },500);
+                      })
+                      .catch(function (err) {
+                          alert('خطایی رخ داده است. دوباره تلاش کنید.');
+                      });
                 }
 
             },
@@ -1090,14 +1182,17 @@
             },
             applyFilter: function () {
                 var self = this;
-
+  
                 eventBus.$emit('submiting', true);
+
+                self.fromProductCount = 0;
+                self.productCountInPage = 10;
 
                 var searchObject = {};
 
-                searchObject.response_rate = self.$parent.productByResponseRate;
-
-
+                if(self.$parent.productByResponseRate){
+                    searchObject.response_rate = self.$parent.productByResponseRate;   
+                }
                 if (this.categoryId) {
                     searchObject.category_id = this.categoryId;
                 }
@@ -1113,24 +1208,22 @@
 
                 searchObject.search_text = this.getCategoryName();
 
-
-                if (jQuery.isEmptyObject(searchObject)) {
-                    searchObject.from_record_number = 0;
-                    searchObject.to_record_number = 10;
-                }
+                searchObject.from_record_number = self.fromProductCount;
+                searchObject.to_record_number = self.productCountInPage;
 
                 axios.post('/user/get_product_list', searchObject)
                     .then(function (response) {
-                        self.products = response.data.products;
+                        self.products=response.data.products;
                         eventBus.$emit('submiting', false);
+                        
                         self.scrollToTop();
 
-                        setTimeout(function () {
-                            self.sidebarScroll()
-                        },500)
+                        setTimeout(function(){
+                            self.sidebarScroll();
+                        },500);
                     })
                     .catch(function (err) {
-                        alert('error');
+                        alert('خطایی رخ داده است. دوباره تلاش کنید.');
                     });
 
             },
@@ -1214,6 +1307,8 @@
             '$parent.productByResponseRate':function(){
                 this.products = {};
                 
+                this.infiniteScrollHandler();
+                
                 if (this.searchText) {
                   
                   this.applyFilter();
@@ -1240,7 +1335,7 @@
         mounted() {
             this.scrollToTop();
             
-//            this.infiniteScrollHandler();
+           this.infiniteScrollHandler();
 
             this.init();
 
