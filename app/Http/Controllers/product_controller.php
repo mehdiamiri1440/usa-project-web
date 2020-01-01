@@ -269,7 +269,9 @@ class product_controller extends Controller
         }
 
         if ($request->filled('from_record_number') && $request->filled('to_record_number')) {
-            $all_products = array_slice($all_products, $request->from_record_number, $request->to_record_number, true);
+            $offset = abs($request->from_record_number - $request->to_record_number);
+
+            $all_products = array_slice($all_products, $request->from_record_number, $offset, true);
         }
 
         return response()->json([
