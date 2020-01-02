@@ -292,18 +292,21 @@
 
     <div class="chat-modal-wrapper" :class="{'open-chat' : openChatBox}">
 
-        <div class="header-chat-modal">
+        <div class="header-chat-modal" v-if="contactInfo">
 
             <a href="#" class="header-info-wrapper">
-                <div class="header-chat-image">
+                <div class="header-chat-image" v-if="contactInfo.profile_photo">
+                    <img :src="contactInfo.profile_photo">
+                </div>
+                <div class="header-chat-image" v-else>
                     <img src="http://localhost:8000/assets/img/user-defult.png">
                 </div>
 
-                <p class="header-chat-content">
-
-                    محمدامین دلداری
-
-                </p>
+                <router-link :to="{path:'/profile/' + contactInfo.user_name}">
+                    <p class="header-chat-content">
+                        {{contactInfo.first_name + ' ' + contactInfo.last_name}}
+                    </p>
+                </router-link>
             </a>
 
             <button @click.prevent="openChatBox = false" class="close-chat-modal ">
@@ -315,9 +318,25 @@
 
 
         <div class="main-modal-chat">
-            <ul>
+            <ul v-if="chatMessages">
+                    <li :key="msg.id" v-for="msg in chatMessages" :class="[msg.sender_id == currentUserId ? 'sender' : 'resiver']">
+                        <div> 
+                        <p v-text="msg.text"></p>
+                        <div class="message-info">
+                            <span class="time">
+                                    {{msg.created_at | moment("jYY/jMM/jDD, h:mm A") }} &nbsp
+                            </span>
+                            <span class="visited" v-if="msg.sender_id === currentUserId">
+                                <i class="fa fa-check"></i>
+                                <i class="fa fa-check" v-if="msg.is_read"></i>
+                            </span>
 
-                <li class="sender">
+                        </div>
+                        </div>
+                    </li>
+                
+
+                <!-- <li class="resiver">
                     <div>
                         <p>
                             سلام، بله در حال حاظر وجود دارد
@@ -326,28 +345,10 @@
                                     <span class="time">
                                          98/09/27, 2:09 PM
                                     </span>
-                            <span class="visited">
-                                        <i class="fa fa-check"></i>
-                                        <i class="fa fa-check"></i>
-                                    </span>
 
                         </div>
                     </div>
-                </li>
-
-                <li class="resiver">
-                    <div>
-                        <p>
-                            سلام، بله در حال حاظر وجود دارد
-                        </p>
-                        <div class="message-info">
-                                    <span class="time">
-                                         98/09/27, 2:09 PM
-                                    </span>
-
-                        </div>
-                    </div>
-                </li>
+                </li> -->
 
             </ul>
         </div>
@@ -355,10 +356,10 @@
 
         <div class="footer-modal-chat">
 
-            <button class="send-message-button">
+            <button class="send-message-button" @click.prevent="sendMessage">
                 <i class="fa fa-paper-plane"></i>
             </button>
-            <input type="text" placeholder="پیغامی بگارید">
+            <input type="text"  v-model="msgToSend" placeholder="پیغامی بگذارید">
         </div>
 
     </div>
@@ -372,14 +373,94 @@
     export default {
         data: function () {
             return {
-                openChatBox: false
+                openChatBox: false,
+                contactInfo:"",
+                chatMessages:"",
+                currentContactUserId:"",
+                currentUserId:"",
+                msgToSend:"",
             }
 
         },
-        created: function () {
+        methods:{
+            setUpChat:function(){
+                this.handleBackBtnClickOnDevices();
 
-            eventBus.$on("openChat", $event => {
-                this.openChatBox = $event;
+                this.loadChatHistory(this.contactInfo);
+            },
+            loadChatHistory: function(contact) {
+                var self = this;
+                // self.isChatMessagesLoaded = true;
+                // if (index !== -10) self.isFirstMessageLoading = true;
+                // self.selectedIndex = index;
+                // this.selectedContact = contact;
+                this.currentContactUserId = contact.contact_id;
+
+                axios
+                    .post("/get_user_chat_history", {
+                        user_id: contact.contact_id
+                    })
+                    .then(function(response) {
+                        self.chatMessages = response.data.messages;
+                        self.currentUserId = response.data.current_user_id;
+                        // self.scrollToEnd(0);
+                    })
+                    .catch(function(e) {
+                    //
+                    });
+            },
+            sendMessage: function() {
+                var self = this;
+
+                axios
+                    .post("/messanger/send_message", {
+                        sender_id: self.currentUserId,
+                        receiver_id: self.currentContactUserId,
+                        text: self.msgToSend
+                    })
+                    .then(function(response) {
+                        self.msgToSend = "";
+                        self.chatMessages.push(response.data.message);
+                        // self.isFirstMessageLoading = false;
+                        self.loadChatHistory(self.contactInfo);
+                    })
+                    .catch(function(e) {
+                        //
+                    });
+            },
+            handleBackBtnClickOnDevices:function(){
+                var self = this;
+
+                if (window.history.state) {
+                    history.pushState(null, null,window.location.pathname);
+                }
+                
+                $(window).on('popstate', function (e) {
+                    self.openChatBox = false;
+                });
+            },
+            isDeviceMobile: function () {
+                if (
+                    navigator.userAgent.match(/Android/i) ||
+                    navigator.userAgent.match(/webOS/i) ||
+                    navigator.userAgent.match(/iPhone/i) ||
+                    navigator.userAgent.match(/iPad/i) ||
+                    navigator.userAgent.match(/iPod/i) ||
+                    navigator.userAgent.match(/BlackBerry/i) ||
+                    navigator.userAgent.match(/Windows Phone/i)
+                ) {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+        },
+        created: function () {
+            eventBus.$on("ChatInfo", $event => {
+                this.contactInfo = $event;
+                this.chatMessages = "";
+                this.openChatBox = true;
+                this.setUpChat();
             });
         },
     }

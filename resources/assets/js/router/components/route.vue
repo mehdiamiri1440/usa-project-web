@@ -200,6 +200,13 @@
                 this.productId = $event;
             });
 
+            // if (!window.history.state) {
+            //     window.history.pushState({pushed: true}, '', '/product-list');
+            // }
+
+            // $(window).on('popstate', function (e) {
+            //     eventBus.$emit("ChatBoxStatus",false);
+            // });
         },
         router,
         methods:{
@@ -251,6 +258,9 @@
 
 
                 }
+            },
+            closeGlobalChatBox(){
+                eventBus.$emit("ChatBoxStatus",false);
             },
             registerComponentStatistics: function (categoryName, actionName, labelName) {
                 gtag("event", actionName, {

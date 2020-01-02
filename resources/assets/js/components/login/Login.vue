@@ -463,48 +463,23 @@ export default {
         })
         .then(function(response) {
           if (response.data.status === true) {
-            if (response.data.confirmed_profile_record === true) {
-              if (response.data.is_buyer) {
-                window.location.href = "/buyer/register-request";
-                localStorage.setItem("showSnapShot", true);
-                localStorage.userRoute = JSON.stringify(
-                  "buyer/register-request"
-                );
-                // test
-                self.registerComponentStatistics(
-                  "Login",
-                  "seller-login",
-                  "seller-logged-in-successfully"
-                );
-              } else if (response.data.is_seller) {
-                window.location.href = "/seller/register-product";
-                localStorage.setItem("showSnapShot", true);
-                localStorage.userRoute = JSON.stringify(
-                  "seller/register-product"
-                );
-                self.registerComponentStatistics(
-                  "Login",
-                  "buyer-login",
-                  "buyer-logged-in-succeccfully"
-                );
-              } else {
-                self.registerComponentExceptions(
-                  "Login-page: Undefined user type user phone nubmer is: " +
-                    response.data.phone,
-                  true
-                );
+                if (response.data.confirmed_profile_record === true) {
+                      if(self.isUserComeFromChatBoxOpen()){
+                          window.localStorage.setItem('userId', response.data.id);
+                          window.localStorage.setItem('userType', response.data.is_seller);
 
-                alert(
-                  "نوع کاربری شما مشخص نشده است لطفا با پشتیبانی اینکوباک تماس بگیرید"
-                );
-              }
-            } else {
-              self.registerComponentExceptions(
-                "Login-page: User does not have confirmed profile record",
-                true
-              );
-              // window.location.href = "/seller/profile"; // Edit Profile Page
-            }
+                          self.returnUserToPreviousPageAndChatBox(response.data);
+                      }
+                      else{
+                          self.redirectUserToPanel(response.data);
+                      }
+                } else {
+                      self.registerComponentExceptions(
+                        "Login-page: User does not have confirmed profile record",
+                        true
+                      );
+                  // window.location.href = "/seller/profile"; // Edit Profile Page
+                }
           } else {
             self.showMsg = true;
             self.errors = [];
@@ -621,6 +596,76 @@ export default {
         ios = /iphone|ipod|ipad/.test(userAgent);
 
       return ios;
+    },
+    isUserComeFromChatBoxOpen:function()
+    {
+      if(window.localStorage.getItem('contact') && window.localStorage.getItem('pathname')){
+        return true;
+      }
+      return false;
+    },
+    returnUserToPreviousPageAndChatBox:function(userInfo)
+    {
+        if(window.localStorage.getItem('contact') && window.localStorage.getItem('pathname')){
+            
+            let contact = JSON.parse(window.localStorage.getItem('contact'));
+            let pathname = window.localStorage.getItem('pathname');
+
+            window.localStorage.removeItem('contact');
+            window.localStorage.removeItem('pathname');
+
+            if(userInfo.id != contact.contact_id){
+                this.$router.push({
+                    path : pathname
+                },function(){
+                    eventBus.$emit("ChatInfo",contact);
+                });
+            }
+            else {
+              this.redirectUserToPanel(userInfo);
+            }
+        }
+        else{
+            this.redirectUserToPanel(userInfo);
+        }
+    },
+    redirectUserToPanel:function(userInfo){
+      var self = this;
+
+      if (userInfo.is_buyer) {
+          window.location.href = "/buyer/register-request";
+          localStorage.setItem("showSnapShot", true);
+          localStorage.userRoute = JSON.stringify(
+            "buyer/register-request"
+          );
+          // test
+          self.registerComponentStatistics(
+            "Login",
+            "seller-login",
+            "seller-logged-in-successfully"
+          );
+      } else if (userInfo.is_seller) {
+          window.location.href = "/seller/register-product";
+          localStorage.setItem("showSnapShot", true);
+          localStorage.userRoute = JSON.stringify(
+            "seller/register-product"
+          );
+          self.registerComponentStatistics(
+            "Login",
+            "buyer-login",
+            "buyer-logged-in-succeccfully"
+          );
+      } else {
+          self.registerComponentExceptions(
+            "Login-page: Undefined user type user phone nubmer is: " +
+              userInfo.phone,
+            true
+          );
+
+          alert(
+            "نوع کاربری شما مشخص نشده است لطفا با پشتیبانی اینکوباک تماس بگیرید"
+          );
+        }
     }
   },
   created() {

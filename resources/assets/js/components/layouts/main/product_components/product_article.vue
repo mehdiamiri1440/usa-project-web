@@ -577,24 +577,16 @@ export default {
 
       if (this.currentUser.user_info) {
         if (this.currentUser.user_info.id !== product.user_info.id) {
-          axios
-            .post("/set_last_chat_contact", contact)
-            .then(function(response) {
-              if (self.currentUser.user_info.is_seller == 1) {
-                self.$router.push("/seller/messages");
-              } else if (self.currentUser.user_info.is_buyer == 1) {
-                self.$router.push("/buyer/messages");
-              }
-            })
-            .catch(function(e) {
-              alert("Error");
-            });
+            eventBus.$emit("ChatInfo",contact);
         } else {
           this.popUpMsg = "شما نمیتوانید به خودتان پیام دهید.";
           eventBus.$emit("submitSuccess", this.popUpMsg);
           $("#custom-main-modal").modal("show");
         }
       } else {
+        window.localStorage.setItem('contact',JSON.stringify(contact));
+        window.localStorage.setItem('pathname',window.location.pathname);
+        
         this.popUpMsg =
           "اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.";
         eventBus.$emit("submitSuccess", this.popUpMsg);
