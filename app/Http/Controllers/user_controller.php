@@ -37,11 +37,12 @@ class user_controller extends Controller
 
             return response()->json([
                 'status' => true,
-                 'is_buyer' => $user->is_buyer,
-                 'is_seller' => $user->is_seller,
-                 'confirmed_profile_record' => $user_confirmed_profile_record_status,
-                 'msg' => 'Login successfull',
-                 'token' => $jwt_token,
+                'id' => $user->id,
+                'is_buyer' => $user->is_buyer,
+                'is_seller' => $user->is_seller,
+                'confirmed_profile_record' => $user_confirmed_profile_record_status,
+                'msg' => 'Login successfull',
+                'token' => $jwt_token,
              ], 200)
                  ->withCookie(cookie(
                         'user_phone', $user->phone, 43200 // 30 days in minutes

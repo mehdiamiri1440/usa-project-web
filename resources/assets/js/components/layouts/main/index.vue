@@ -1612,7 +1612,7 @@
     var visible = false;
 
 
-    import ProductCarousel from './landing_page_components/product-list-carousel'
+    import ProductCarousel from './main_components/product-list-carousel'
     import Route from "../../../router/components/route";
 
 
@@ -1637,7 +1637,7 @@
             + '<p class="list-time col-sm-4 col-xs-12" v-text="date"></p>'
             + '</div>'
             + '</article>',
-        
+
             mounted: function () {
                         $("#mobile-requests-section .owl-carousel").owlCarousel({
                             autoplay: true,
@@ -1846,12 +1846,12 @@
             },
             search: function () {
                 if (this.mainSearchBoxText !== '') {
-                    
+
                     eventBus.$emit('textSearch',this.mainSearchBoxText);
-                    
+
                     let searchValue = this.mainSearchBoxText;
                     let queryValue = searchValue.replace(/ /g,'+');
-                    
+
                     this.$router.push({
                         name : 'productList',
                         query :{

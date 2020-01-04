@@ -454,13 +454,7 @@
                         user_name: product.user_name,
                     };
 
-                    axios.post('/set_last_chat_contact', contact)
-                        .then(function (response) {
-                            self.$router.push('/buyer/messages');
-                        })
-                        .catch(function (e) {
-                            alert('Error');
-                        });
+                    eventBus.$emit("ChatInfo",contact);
                 })
                     .catch(function (err) {
                         //

@@ -312,6 +312,15 @@ p.user-valid-text {
         class="green-button green-button-o"
       >مشاهده پروفایل</router-link>
 
+    <!--   <button
+        v-if="!$parent.isMyProfile"
+        @click.prevent="$parent.openChat($parent.product)"
+        class="green-button"
+      >
+        ارسال پیام
+        <i class="fa fa-envelope"></i>
+      </button> -->
+      
       <button
         v-if="!$parent.isMyProfile"
         @click.prevent="$parent.openChat($parent.product)"
