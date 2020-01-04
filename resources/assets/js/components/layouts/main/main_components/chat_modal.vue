@@ -437,6 +437,15 @@
                 
                 $(window).on('popstate', function (e) {
                     self.openChatBox = false;
+
+                    if(self.doesUserComeFromAuthenticationPages()){
+                        
+                        console.log(window.location.pathname);
+                        if(window.location.pathname == '/login' || window.location.pathname == '/register'){
+                            window.localStorage.removeItem('comeFromAuthentication');
+                            window.location.href = "/login";
+                        }
+                    }
                 });
             },
             isDeviceMobile: function () {
@@ -454,6 +463,14 @@
                     return false;
                 }
             },
+            doesUserComeFromAuthenticationPages:function(){
+                if(window.localStorage.getItem('comeFromAuthentication')){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
         },
         created: function () {
             eventBus.$on("ChatInfo", $event => {

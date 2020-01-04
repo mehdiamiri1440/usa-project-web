@@ -615,6 +615,8 @@ export default {
             window.localStorage.removeItem('pathname');
 
             if(userInfo.id != contact.contact_id){
+                window.localStorage.setItem('comeFromAuthentication',true);
+
                 this.$router.push({
                     path : pathname
                 },function(){

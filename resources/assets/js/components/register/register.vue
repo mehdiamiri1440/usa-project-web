@@ -748,7 +748,7 @@
                         .then(function (response) {
                             if (response.status === 201) {
                                 self.popUpMsg =
-                                    "ثبت نام با موفقیت انجام شد.در حال انتقال به پنل کاربری هستید ...";
+                                    "ثبت نام با موفقیت انجام شد.کمی صبر کنید ...";
                                 eventBus.$emit("submitSuccess", self.popUpMsg);
                                 $("#custom-main-modal").modal("show");
                                 axios
@@ -756,13 +756,16 @@
                                         phone: object.phone,
                                         password: object.password
                                     })
-                                    .then(result => {
-                                        if (object.activity_type === "1"){
-                                            localStorage.setItem("showSnapShot", true);
-                                            window.location.href=('/seller/register-product');}
-                                        else{
-                                            localStorage.setItem("showSnapShot", true);
-                                            window.location.href=('/buyer/register-request');}
+                                    .then(response => {
+                                        if(response.data.status){
+                                            if(self.isUserComeFromChatBoxOpen()){
+                                                $("#custom-main-modal").modal("hide");
+                                                self.returnUserToPreviousPageAndChatBox(response.data);
+                                            }
+                                            else{
+                                                self.redirectUserToPanel(response.data);
+                                            }
+                                        }
                                     })
                                     .catch(err => {
                                         console.log("err");
@@ -1112,7 +1115,47 @@
                     ios = /iphone|ipod|ipad/.test(userAgent);
 
                 return ios;
-            }
+            },
+            isUserComeFromChatBoxOpen:function()
+            {
+                if(window.localStorage.getItem('contact') && window.localStorage.getItem('pathname')){
+                    return true;
+                }
+
+                return false;
+            },
+            returnUserToPreviousPageAndChatBox:function(userInfo)
+            {
+                if(window.localStorage.getItem('contact') && window.localStorage.getItem('pathname')){
+                    
+                    let contact = JSON.parse(window.localStorage.getItem('contact'));
+                    let pathname = window.localStorage.getItem('pathname');
+
+                    window.localStorage.removeItem('contact');
+                    window.localStorage.removeItem('pathname');
+
+                    window.localStorage.setItem('comeFromAuthentication',true);
+
+                    this.$router.push({
+                        path : pathname
+                    },function(){
+                        eventBus.$emit("ChatInfo",contact);
+                    });
+                }
+                else{
+                    this.redirectUserToPanel(userInfo);
+                }
+            },
+            redirectUserToPanel:function(userInfo){
+                if(userInfo.is_seller == true){
+                    localStorage.setItem("showSnapShot", true);
+                    window.location.href = '/seller/register-product';
+                }
+                else if(userInfo.is_buyer == true){
+                    localStorage.setItem("showSnapShot", true);
+                    window.location.href = '/buyer/register-buyAd';
+                }
+            }   
         },
         watch: {
             "step2.timeCounterDown": function () {
