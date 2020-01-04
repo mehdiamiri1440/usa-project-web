@@ -152,8 +152,7 @@ a.close-dialog-popup {
   right: 3px;
   top: 9px;
   border-left: 1px solid;
-  color:
-  #777;
+  color: #777;
   padding: 0 7px;
   font-size: 12px;
   height: 20px;
@@ -296,67 +295,65 @@ li.active a::after {
 }
 
 .btn-loader {
-
   overflow: hidden;
-
 }
 
 .btn-loader-active-wrapper {
-
   height: 26px;
-
 }
 
 .btn-loader img {
-
   width: 56px;
 
   margin-top: -15px;
-
 }
 
-.response-rate-filter-desktop-wrapper, .response-rate-filter-mobile-wrapper{
-
+.response-rate-filter-desktop-wrapper,
+.response-rate-filter-mobile-wrapper {
   background: #fff;
   direction: rtl;
   margin: 15px auto;
   padding: 7px 15px;
   border-radius: 5px;
-  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16);
-  box-shadow: 0 3px 6px
-  rgba(0,0,0,0.16);
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   overflow: hidden;
-
 }
 
-.response-rate-filter-desktop-wrapper .checkbox, .response-rate-filter-mobile-wrapper .chekbox{
-
+.response-rate-filter-desktop-wrapper .checkbox,
+.response-rate-filter-mobile-wrapper .chekbox {
   margin: 0;
   float: right;
-
 }
 
-.response-rate-filter-mobile-wrapper .checkbox-slider--b-flat{
-    margin: 0 auto 5px;
+.response-rate-filter-mobile-wrapper .checkbox-slider--b-flat {
+  margin: 0 auto 5px;
 }
 
-.response-rate-filter-mobile-wrapper .checkbox-slider--b-flat input + span::before, .response-rate-filter-mobile-wrapper .checkbox-slider--b-flat input + span::after{
-    top: 0;
+.response-rate-filter-mobile-wrapper
+  .checkbox-slider--b-flat
+  input
+  + span::before,
+.response-rate-filter-mobile-wrapper
+  .checkbox-slider--b-flat
+  input
+  + span::after {
+  top: 0;
 }
 
-.response-rate-filter-mobile-wrapper{
-    padding: 10px 0;
+.response-rate-filter-mobile-wrapper {
+  padding: 10px 0;
 
-    margin: 0;
+  margin: 0;
 
-    overflow: hidden;
+  overflow: hidden;
 
-    float: right;
+  float: right;
 
-    width: 100%;
+  width: 100%;
 
-   box-shadow: none;
-   background: none;
+  box-shadow: none;
+  background: none;
 }
 
 @media screen and (max-width: 1199px) {
@@ -380,7 +377,6 @@ li.active a::after {
 }
 
 @media screen and (max-width: 767px) {
-
   .main-content,
   #main {
     padding: 0;
@@ -450,8 +446,6 @@ li.active a::after {
   .create_buy {
     display: none;
   }
-
-
 }
 
 @media screen and (max-width: 715px) {
@@ -498,7 +492,7 @@ li.active a::after {
     padding: 0;
   }
 
-  .default-items{
+  .default-items {
     padding: 0;
   }
 }
@@ -518,33 +512,31 @@ li.active a::after {
 }
 
 @media screen and (max-width: 370px) {
-  .default-wrapper-main-image{
+  .default-wrapper-main-image {
     position: relative;
     width: 100%;
     height: 250px;
     overflow: hidden;
     border-radius: 4px;
   }
-  .default-main-article-content{
-    width: 100% ;
+  .default-main-article-content {
+    width: 100%;
 
     position: relative;
 
     top: 15px;
-
   }
 
-  .default-item-wrapper .default-button-min-with{
+  .default-item-wrapper .default-button-min-with {
     width: 100%;
     margin-bottom: 15px;
   }
-
-
 }
 </style>
 
 <template>
   <div>
+    <div v-for='(item,index) in allProducts' :key='index'>{{item}}</div>
     <!--modal-->
     <div class="container">
       <div
@@ -585,31 +577,29 @@ li.active a::after {
     </div>
 
     <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
-        <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
-          <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید" />
+      <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
+        <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید" />
 
-          <button class="btn-search">
-            <i class="fa-search fa"></i>
-          </button>
+        <button class="btn-search">
+          <i class="fa-search fa"></i>
+        </button>
 
-          <button class="btn-filter hidden-lg" data-toggle="modal" data-target="#searchFilter">
-            فیلتر
-            <i class="fa fa-filter"></i>
-          </button>
+        <button class="btn-filter hidden-lg" data-toggle="modal" data-target="#searchFilter">
+          فیلتر
+          <i class="fa fa-filter"></i>
+        </button>
+      </div>
+      <div class="response-rate-filter-mobile-wrapper">
+        <div class="response-rate-filter">
+          <div class="checkbox checkbox-slider--b-flat">
+            <label>
+              <input type="checkbox" v-model="$parent.productByResponseRate" />
+              <span>مرتب سازی بر اساس احتمال پاسخ گویی</span>
+            </label>
+          </div>
         </div>
-        <div class="response-rate-filter-mobile-wrapper"> 
-          <div class="response-rate-filter">
-
-                <div class="checkbox checkbox-slider--b-flat">
-                  <label>
-                    <input type="checkbox" v-model="$parent.productByResponseRate"><span>                  مرتب سازی بر اساس احتمال پاسخ گویی
-</span>
-                  </label>
-                </div>
-
-              </div>
-        </div>
-       <!--  <div class="links-sub-header hidden-xs col-sm-4 pull-left">
+      </div>
+      <!--  <div class="links-sub-header hidden-xs col-sm-4 pull-left">
           <ul class="list-inline">
             <li class="list-item active">
               <h1>
@@ -617,28 +607,21 @@ li.active a::after {
               </h1>
             </li>
           </ul>
-        </div> -->
+      </div>-->
     </div>
 
     <main id="main" class="container">
       <div class="col-xs-12 col-lg-9">
         <div class="row">
-
-          <section class="hidden-xs  col-xs-12">
-            
-          
-              <div class="response-rate-filter-desktop-wrapper">
-
-                <div class="checkbox checkbox-slider--b-flat">
-                  <label>
-                    <input type="checkbox" v-model="$parent.productByResponseRate"><span>                  مرتب سازی بر اساس احتمال پاسخ گویی
-</span>
-                  </label>
-                </div>
-
+          <section class="hidden-xs col-xs-12">
+            <div class="response-rate-filter-desktop-wrapper">
+              <div class="checkbox checkbox-slider--b-flat">
+                <label>
+                  <input type="checkbox" v-model="$parent.productByResponseRate" />
+                  <span>مرتب سازی بر اساس احتمال پاسخ گویی</span>
+                </label>
               </div>
-           
-
+            </div>
           </section>
 
           <section class="main-content col-xs-12" v-if="products.length > 0  ">
@@ -656,10 +639,7 @@ li.active a::after {
                   :currentUser="currentUser"
                 />
               </div>
-              <div
-                class="load-more-button col-xs-12"
-                v-if="continueToLoadProducts === true "
-              >
+              <div class="load-more-button col-xs-12" v-if="continueToLoadProducts === true ">
                 <button class="btn btn-loader" @click.prevent="feed()">
                   <div class="btn-content">
                     <span class="hidden-xs text-rtl" v-show="!loadMoreActive">
@@ -753,7 +733,7 @@ li.active a::after {
             <br />
           </section>
 
-          <section v-else class=" main-content col-xs-12">
+          <section v-else class="main-content col-xs-12">
             <div class="row">
               <div v-for="(defaultItem ,index) in 8" :key="index" class="default-items col-xs-12">
                 <div class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content">
@@ -810,11 +790,12 @@ li.active a::after {
     import ProductArticle from './product_components/product_article'
     import ProductAsideCategories from './product_components/sidebar/product_aside_categories'
     import {eventBus} from "../../../router/router";
-  
+    import {mapGetters,mapActions} from 'vuex'  
 
 
     var visible = false;
     export default {
+      computed:mapGetters(['allProducts']),
       components: {
             ProductArticle,
             ProductAsideCategories,
@@ -861,6 +842,7 @@ li.active a::after {
             }
         },
         methods: {
+          ...mapActions(['fetchProductsList']),
             filterProducts: function (productsFilter) {
                 this.products = productsFilter;
             },
@@ -916,6 +898,7 @@ li.active a::after {
 
                             }).then(function (response) {
                                 self.products = response.data.products;
+                                self.fetchProductsList(self.products)
 //                                localStorage.removeItem('productCountInPage')
 //                                resolve(self.loading = false);
                                 eventBus.$emit('submiting', false);
@@ -1406,7 +1389,7 @@ li.active a::after {
             this.scrollToTop();
 
             this.infiniteScrollHandler();
-
+console.log('allProducts======>>>>',self.allProducts)
             this.init();//.then(loading=>{
 //              if(!loading){
 //                   let scrollPosition=(localStorage.getItem('scroll'))||{x:0,y:0};
