@@ -738,16 +738,16 @@
 
                                     <div v-else>
 
-                                        <div v-if="currentUser.user_info">
+                                        <div v-if="currentUser.user_info && currentUser.user_info.id === profileOwner.user_info.id ">
                                             <router-link :to="{name : 'profileBasicSeller'}" class="green-button edit"
-                                                         v-if="currentUser.user_info.id === profileOwner.user_info.id && currentUser.user_info.is_seller == 1 ">
+                                                         v-if=" currentUser.user_info.is_seller == 1 ">
 
                                                 <i class="fa fa-pencil-alt"></i>
                                                 ویرایش پروفایل
                                             </router-link>
 
                                             <router-link :to="{name : 'profileBasicBuyer'}" class="green-button edit"
-                                                         v-if="currentUser.user_info.id === profileOwner.user_info.id && currentUser.user_info.is_seller == 0 ">
+                                                         v-if="currentUser.user_info.is_seller == 0 ">
 
                                                 <i class="fa fa-pencil-alt"></i>
                                                 ویرایش پروفایل
@@ -762,7 +762,7 @@
 
                                     </div>
 
-                                   
+
                                     <div v-if="!profileOwner.user_info.id">
                                         <div class=" placeholder-content padding-15-0 content-full-width ">
 
@@ -860,7 +860,7 @@
                                         </div>
 
 
-                             
+
 
                                         <div v-if="!profileOwner.user_info.id">
                                             <div class="default-boxing-size placeholder-content content-full-width ">

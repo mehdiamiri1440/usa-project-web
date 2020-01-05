@@ -866,7 +866,21 @@ a.profile-info-wrapper:hover {
                   نخست
                 </router-link>
               </li>
+              <li v-if="user_id !== ''">
+                <router-link
+                        v-if="is_seller == 1"
+                        class="smoothScroll"
+                        :to="{name : 'messagesSeller'}"
+                        @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
+                >پیام ها</router-link>
 
+                <router-link
+                        v-else
+                        class="smoothScroll"
+                        :to="{name : 'messagesBuyer'}"
+                        @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
+                >پیام ها</router-link>
+              </li>
               <li v-if="user_id !== ''">
                 <router-link
                   v-if="is_seller == 1"
@@ -933,6 +947,22 @@ a.profile-info-wrapper:hover {
               صفحه
               نخست
             </router-link>
+          </li>
+
+          <li v-if="user_id !== ''">
+            <router-link
+              v-if="is_seller == 1"
+              class="smoothScroll"
+              :to="{name : 'messagesSeller'}"
+              @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
+            >پیام ها</router-link>
+
+            <router-link
+              v-else
+              class="smoothScroll"
+              :to="{name : 'messagesBuyer'}"
+              @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
+            >پیام ها</router-link>
           </li>
 
           <li v-if="user_id !== ''">
