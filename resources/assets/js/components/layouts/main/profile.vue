@@ -730,24 +730,24 @@
                                 </div>
 
                                 <div class="col-xs-12">
-                                    <div v-if="!currentUser.user_info">
+                                    <div v-if="!profileOwner.user_info.id">
                                         <div class="default-boxing-size placeholder-content content-full-width ">
 
                                         </div>
                                     </div>
 
-                                    <div v-else-if="currentUser.user_info">
+                                    <div v-else>
 
-                                        <div v-if="currentUser.user_info.id === profileOwner.user_info.id">
+                                        <div v-if="currentUser.user_info">
                                             <router-link :to="{name : 'profileBasicSeller'}" class="green-button edit"
-                                                         v-if="currentUser.user_info.is_seller == 1 ">
+                                                         v-if="currentUser.user_info.id === profileOwner.user_info.id && currentUser.user_info.is_seller == 1 ">
 
                                                 <i class="fa fa-pencil-alt"></i>
                                                 ویرایش پروفایل
                                             </router-link>
 
                                             <router-link :to="{name : 'profileBasicBuyer'}" class="green-button edit"
-                                                         v-if="currentUser.user_info.is_seller == 0 ">
+                                                         v-if="currentUser.user_info.id === profileOwner.user_info.id && currentUser.user_info.is_seller == 0 ">
 
                                                 <i class="fa fa-pencil-alt"></i>
                                                 ویرایش پروفایل
@@ -762,14 +762,8 @@
 
                                     </div>
 
-                                    <div v-else>
-                                        <a href="#" @click.prevent="openChat()" class="green-button edit">
-                                            <i class="fa fa-envelope"></i>
-                                            ارسال پیام
-                                        </a>
-                                    </div>
-
-                                    <div v-if="!currentUser.user_info">
+                                   
+                                    <div v-if="!profileOwner.user_info.id">
                                         <div class=" placeholder-content padding-15-0 content-full-width ">
 
                                         </div>
@@ -830,18 +824,18 @@
 
                                 <div class="title_content col-xs-12">
                                     <div class="back_page col-xs-12 col-sm-4 col-md-3">
-                                        <div v-if="!currentUser.user_info">
+                                        <div v-if="!profileOwner.user_info.id">
                                             <div class="default-boxing-size placeholder-content content-full-width ">
 
                                             </div>
                                         </div>
-                                        <div v-else-if="currentUser.user_info">
+                                        <div v-else>
 
-                                            <div v-if="currentUser.user_info.id === profileOwner.user_info.id">
+                                            <div v-if="currentUser.user_info">
                                                 <router-link :to="{name : 'profileBasicSeller'}"
                                                              @click="registerComponentStatistics('profileView','editProfile','click on edit profile')"
                                                              class="green-button edit"
-                                                             v-if="currentUser.user_info.is_seller == 1 ">
+                                                             v-if="currentUser.user_info.id === profileOwner.user_info.id && currentUser.user_info.is_seller == 1 ">
 
                                                     <i class="fa fa-pencil-alt"></i>
                                                     ویرایش پروفایل
@@ -850,7 +844,7 @@
                                                 <router-link :to="{name : 'profileBasicBuyer'}"
                                                              class="green-button edit"
                                                              @click="registerComponentStatistics('profileView','editProfile','click on edit profile')"
-                                                             v-if="currentUser.user_info.is_seller == 0 ">
+                                                             v-if="currentUser.user_info.id === profileOwner.user_info.id && currentUser.user_info.is_seller == 0 ">
 
                                                     <i class="fa fa-pencil-alt"></i>
                                                     ویرایش پروفایل
@@ -866,15 +860,9 @@
                                         </div>
 
 
-                                        <a v-else href="" @click.prevent="openChat()"
-                                           class="green-button edit"
-                                        >
+                             
 
-                                            <i class="fa fa-envelope"></i>
-                                            ارسال پیام
-                                        </a>
-
-                                        <div v-if="!currentUser.user_info">
+                                        <div v-if="!profileOwner.user_info.id">
                                             <div class="default-boxing-size placeholder-content content-full-width ">
 
                                             </div>
@@ -1192,7 +1180,7 @@
                     <div class="contents" v-else>
 
                         <div class="row">
-                            <div v-for="(product,productIndex) in products" :key="product.main.id"
+                            <!-- <div v-for="(product,productIndex) in products" :key="productIndex"
                                  class="col-xs-12 pull-right">
                                 <ProductArticle
                                         :product="product"
@@ -1201,6 +1189,20 @@
                                         :str="str"
                                         :loading="loading"
                                         :currentUser="currentUser"
+                                />
+                            </div> -->
+
+                             <div class="col-xs-12 pull-right" :key="productIndex" v-for="(product,productIndex) in products">
+                                <ProductArticle
+                                :productIndex="productIndex"
+                                v-if="products.length >= productIndex"
+                                :key="product.main.id"
+                                :product="product"
+                                :loading_img="loading_img"
+                                :defultimg="defultimg"
+                                :str="str"
+                                :loading="loading"
+                                :currentUser="currentUser"
                                 />
                             </div>
                         </div>
