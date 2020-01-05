@@ -171,14 +171,16 @@
         font-weight: bold;
         transition: 300ms;
         z-index: 1;
+        direction: rtl;
+        text-align: right;
     }
 
     .item-help-content > span{
 
-       
+
         display: block;
         padding: 6px 15px;
-        
+
     }
 
 /*    .item-help-content::after {
@@ -196,7 +198,7 @@
 
         }*/
 
-   
+
     .item-help{
 
         transition: 300ms;
@@ -268,7 +270,7 @@
     }
 
     @media screen and (max-width: 767px) {
-        
+
         .header-icon-wrapper {
             float: right;
             width: 50px;

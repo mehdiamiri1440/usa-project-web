@@ -27,11 +27,13 @@ i {
   padding: 30px 20px;
   text-align: center;
   font-weight: bold;
+  margin-bottom: 30px;
 }
 
 .user-info-wrapper.active {
   padding: 28px 20px;
   border: 2px solid #00c569;
+
 }
 
 .user-information-content-image {
@@ -300,10 +302,10 @@ p.user-valid-text {
         >کاربر تایید شده</p>
 
                <p v-if="$parent.product.user_info.response_rate"  class="response-rate" > احتمال پاسخ گویی <span v-text="'%' + $parent.product.user_info.response_rate "></span></p>
-   
+
       </div>
 
-  
+
 
     </router-link>
     <div class="user-info-actions">
@@ -320,7 +322,7 @@ p.user-valid-text {
         ارسال پیام
         <i class="fa fa-envelope"></i>
       </button> -->
-      
+
       <button
         v-if="!$parent.isMyProfile"
         @click.prevent="$parent.openChat($parent.product)"

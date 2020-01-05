@@ -1,7 +1,10 @@
 <style scoped>
 
     /*main chat modal styles*/
+    .loading-container, .image-wrapper{
+        height:100%;
 
+    }
     .chat-modal-wrapper {
 
         position: fixed;
@@ -49,6 +52,8 @@
     .header-info-wrapper {
         float: right;
         padding: 7px 18px 7px 0;
+        background: none;
+        border: none;
     }
 
     .header-chat-image {
@@ -93,13 +98,17 @@
     }
 
     /*main chat modal styles*/
+    .main-modal-chat{
+        float: right;
+        width: 100%;
+        height: calc(100% - 110px);
+    }
 
     .main-modal-chat ul {
-        overflow-x: scroll;
-
-        height: 350px;
-
+        overflow: auto;
         padding: 20px;
+        max-height: 100%;
+        height: 100%;
     }
 
     .main-modal-chat li {
@@ -110,7 +119,7 @@
 
     .main-modal-chat li > div {
 
-        background: #EEF3F6;
+        background: #fff;
 
         border-radius: 5px;
 
@@ -126,11 +135,16 @@
 
         text-align: right;
 
+        max-width: calc(100% - 50px);
+
+        line-height: 1.618;
+
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
 
     .main-modal-chat li.sender > div {
 
-        background: #D1F2E3;
+        background: #dcf8c6;
 
         float: right;
 
@@ -146,13 +160,17 @@
 
         padding-top: 5px;
 
+        display: inline-block;
+
     }
 
     .message-info span.visited {
 
-        font-size: 14px;
+        font-size: 11px;
 
         color: #00C569;
+
+        margin-left:5px;
 
         float: right;
 
@@ -179,9 +197,7 @@
 
         right: 0;
 
-        background: #fff;
-
-        box-shadow: -3px 0 6px rgba(0, 0, 0, 0.15);
+        background: #f0f0f0;
 
         padding: 10px 20px;
     }
@@ -200,16 +216,22 @@
         border: none;
 
         border-radius: 35px;
+        
+        padding: 0 10px;
+    }
+
+    .send-message-button i{
+        display: block;
     }
 
     .footer-modal-chat input {
         float: left;
 
-        width: calc(100% - 40px);
+        width: calc(100% - 50px);
 
         border-radius: 4px;
 
-        background: #FAFAFA;
+        background: #fff;
 
         border: none;
 
@@ -255,7 +277,7 @@
 
             left: -2000px;
 
-            bottom: 0px;
+            bottom: 0;
 
             border-radius: 0;
 
@@ -294,20 +316,18 @@
 
         <div class="header-chat-modal" v-if="contactInfo">
 
-            <a href="#" class="header-info-wrapper">
-                <div class="header-chat-image" v-if="contactInfo.profile_photo">
-                    <img :src="contactInfo.profile_photo">
-                </div>
-                <div class="header-chat-image" v-else>
-                    <img src="http://localhost:8000/assets/img/user-defult.png">
-                </div>
+            <button @click.prevent="routeToProfile" class="header-info-wrapper">
+                <span class="header-chat-image" v-if="contactInfo.profile_photo">
+                    <img :src="$parent.assets + 'storage/' + contactInfo.profile_photo">
+                </span>
+                <span class="header-chat-image" v-else>
+                    <img :src="$parent.assets + 'assets/img/user-defult.png'">
+                </span>
 
-                <router-link :to="{path:'/profile/' + contactInfo.user_name}">
-                    <p class="header-chat-content">
+                    <span class="header-chat-content">
                         {{contactInfo.first_name + ' ' + contactInfo.last_name}}
-                    </p>
-                </router-link>
-            </a>
+                    </span>
+            </button>
 
             <button @click.prevent="openChatBox = false" class="close-chat-modal ">
                 <i class="fa fa-times-circle hidden-xs "></i>
@@ -317,24 +337,34 @@
         </div>
 
 
-        <div class="main-modal-chat">
-            <ul v-if="chatMessages">
+        <div class="main-modal-chat" >
+            <div class="loading-container" v-show="isChatMessagesLoaded&&isFirstMessageLoading">
+                <div class="image-wrapper">
+                    <div class="lds-ring">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
+                </div>
+            </div>
+            <ul v-show="chatMessages">
                     <li :key="msg.id" v-for="msg in chatMessages" :class="[msg.sender_id == currentUserId ? 'sender' : 'resiver']">
-                        <div> 
+                        <div>
                         <p v-text="msg.text"></p>
                         <div class="message-info">
                             <span class="time">
                                     {{msg.created_at | moment("jYY/jMM/jDD, h:mm A") }} &nbsp
                             </span>
                             <span class="visited" v-if="msg.sender_id === currentUserId">
-                                <i class="fa fa-check"></i>
-                                <i class="fa fa-check" v-if="msg.is_read"></i>
+                                <i class="fa fa-check"></i><i class="fa fa-check" v-if="msg.is_read"></i>
                             </span>
 
                         </div>
                         </div>
                     </li>
-                
+
 
                 <!-- <li class="resiver">
                     <div>
@@ -351,6 +381,7 @@
                 </li> -->
 
             </ul>
+
         </div>
 
 
@@ -373,6 +404,8 @@
     export default {
         data: function () {
             return {
+                isChatMessagesLoaded: true,
+                isFirstMessageLoading: true,
                 openChatBox: false,
                 contactInfo:"",
                 chatMessages:"",
@@ -388,10 +421,10 @@
 
                 this.loadChatHistory(this.contactInfo);
             },
-            loadChatHistory: function(contact) {
+            loadChatHistory: function(contact,index) {
                 var self = this;
-                // self.isChatMessagesLoaded = true;
-                // if (index !== -10) self.isFirstMessageLoading = true;
+                self.isChatMessagesLoaded = true;
+                if (index !== -10) self.isFirstMessageLoading = true;
                 // self.selectedIndex = index;
                 // this.selectedContact = contact;
                 this.currentContactUserId = contact.contact_id;
@@ -403,11 +436,26 @@
                     .then(function(response) {
                         self.chatMessages = response.data.messages;
                         self.currentUserId = response.data.current_user_id;
-                        // self.scrollToEnd(0);
+                        self.scrollToEnd(0);
                     })
                     .catch(function(e) {
                     //
                     });
+            },
+            scrollToEnd: function(time) {
+                var chatPageElementList = $(".main-modal-chat ul");
+
+                var self = this;
+                setTimeout(function() {
+                    chatPageElementList.animate(
+                        { scrollTop: chatPageElementList.prop("scrollHeight") },
+                        500,
+                        "swing",
+                        function(){
+                            self.isChatMessagesLoaded = false;
+                        }
+                    );
+                }, time);
             },
             sendMessage: function() {
                 var self = this;
@@ -421,8 +469,8 @@
                     .then(function(response) {
                         self.msgToSend = "";
                         self.chatMessages.push(response.data.message);
-                        // self.isFirstMessageLoading = false;
-                        self.loadChatHistory(self.contactInfo);
+                        self.isFirstMessageLoading = false;
+                        self.loadChatHistory(self.contactInfo,-10);
                     })
                     .catch(function(e) {
                         //
@@ -434,17 +482,16 @@
                 if (window.history.state) {
                     history.pushState(null, null,window.location.pathname);
                 }
-                
+
                 $(window).on('popstate', function (e) {
                     self.openChatBox = false;
 
                     if(self.doesUserComeFromAuthenticationPages()){
-                        
-                        console.log(window.location.pathname);
-                        if(window.location.pathname == '/login' || window.location.pathname == '/register'){
+
+                        // if(window.location.pathname == '/login' || window.location.pathname == '/register'){
                             window.localStorage.removeItem('comeFromAuthentication');
-                            window.location.href = "/login";
-                        }
+                            window.location.href = window.location.pathname;
+                        // }
                     }
                 });
             },
@@ -470,6 +517,10 @@
                 else{
                     return false;
                 }
+            },
+            routeToProfile:function () {
+                this.openChatBox = false;
+                this.$router.push({path:'/profile/' + this.contactInfo.user_name})
             }
         },
         created: function () {
@@ -480,6 +531,15 @@
                 this.setUpChat();
             });
         },
+        watch:{
+            'openChatBox':function (value) {
+                if (value == true){
+                    $('body').addClass('overflow-hidden')
+                } else {
+                    $('body').removeClass('overflow-hidden')
+                }
+            }
+        }
     }
 </script>
 

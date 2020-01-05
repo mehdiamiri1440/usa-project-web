@@ -1181,11 +1181,13 @@ export default {
     var self = this;
 
     window.addEventListener("keydown", function(event) {
-      if (event.keyCode === 13) {
-        self.search();
-        $("#incobac-nav").collapse("hide");
-        $("#web-profile-items").collapse("hide");
-      }
+        if( ! window.location.pathname.includes('seller') &&  !window.location.pathname.includes('buyer') &&  !window.location.pathname('login')){
+            if (event.keyCode === 13){
+                self.search();
+                $("#incobac-nav").collapse("hide");
+                $("#web-profile-items").collapse("hide");
+            }
+        }
     });
   },
   watch: {

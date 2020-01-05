@@ -868,12 +868,12 @@ li.active a::after {
                 var self = this;
                 this.scrollToTop();
                 if(this.$route.query.s){
-                     var searchValue = this.$route.query.s.split('+').join(' ')  
+                     var searchValue = this.$route.query.s.split('+').join(' ')
                 }
                 else{
                     var searchValue = '';
                 }
-                
+
                 var searchValueText = searchValue;
 
                 axios.post('/user/profile_info')
@@ -930,7 +930,7 @@ li.active a::after {
                       if(self.products && self.products.length){
                           self.products = self.products.concat([...response.data.products]);
                       }
-//                      localStorage.productCountInPage=JSON.stringify(self.productCountInPage) 
+//                      localStorage.productCountInPage=JSON.stringify(self.productCountInPage)
                         eventBus.$emit('submiting', false);
                         if (self.products.length + 1 < self.productCountInPage) {
                             self.continueToLoadProducts = false;
@@ -949,7 +949,7 @@ li.active a::after {
                     var searchObject = {};
 
                     if(self.$parent.productByResponseRate){
-                        searchObject.response_rate = self.$parent.productByResponseRate;   
+                        searchObject.response_rate = self.$parent.productByResponseRate;
                     }
                     if (this.categoryId) {
                         searchObject.category_id = this.categoryId;
@@ -964,15 +964,15 @@ li.active a::after {
                         searchObject.city_id = this.cityId;
                     }
                     if (this.searchText) {
-                        this.$router.replace({
-                            name : 'productList',
-                            query :{
-                                s:this.searchText.replace(/ /g,'+')
-                            }
-                        });
+                        // this.$router.replace({
+                        //     name : 'productList',
+                        //     query :{
+                        //         s:this.searchText.replace(/ /g,'+')
+                        //     }
+                        // });
                         searchObject.search_text = this.searchText;
                     }
-                    
+
 
                     if (jQuery.isEmptyObject(searchObject)) {
                         if(this.searchText == ""){
@@ -991,7 +991,7 @@ li.active a::after {
                         self.products = self.products.concat(response.data.products);
 
                         self.loadMoreActive = false;
-                        
+
                         setTimeout(function(){
                             self.sidebarScroll();
                         },500);
@@ -1068,7 +1068,7 @@ li.active a::after {
             },
             applyFilter: function () {
                 var self = this;
-  
+
                 eventBus.$emit('submiting', true);
 
                 self.fromProductCount = 0;
@@ -1077,7 +1077,7 @@ li.active a::after {
                 var searchObject = {};
 
                 if(self.$parent.productByResponseRate){
-                    searchObject.response_rate = self.$parent.productByResponseRate;   
+                    searchObject.response_rate = self.$parent.productByResponseRate;
                 }
                 if (this.categoryId) {
                     searchObject.category_id = this.categoryId;
@@ -1100,7 +1100,7 @@ li.active a::after {
                     });
                     searchObject.search_text = this.searchText;
                 }
-                
+
 
                 if (jQuery.isEmptyObject(searchObject)) {
                     if(this.searchText == ""){
@@ -1144,22 +1144,21 @@ li.active a::after {
             },
             infiniteScrollHandler:function(){
                 let lastOffset = 0;
-                
+
                 window.onscroll = () => {
+                    if(window.location.pathname.includes('product-list')){
+                          var bottom = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - (document.documentElement.scrollTop / 2);
 
-                var bottom = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - (document.documentElement.scrollTop / 2);
+                          let newOffset = document.documentElement.offsetHeight;
 
-                let newOffset = document.documentElement.offsetHeight;
-
-                if(bottom){
-                    if(newOffset > lastOffset + 100){
-                            lastOffset = document.documentElement.offsetHeight;
-                            console.log('Triggered');
-                            this.feed();
-                        }
-
+                          if(bottom){
+                              if(newOffset > lastOffset + 100){
+                                      lastOffset = document.documentElement.offsetHeight;
+                                      this.feed();
+                                  }
+                              }
+                          }
                     }
-                }
             },
             sidebarScroll() {
 
@@ -1335,9 +1334,9 @@ li.active a::after {
             searchText: function (value) {
 
                 var self = this;
-                
+
                 eventBus.$emit('textSearch',value);
-        
+
                 clearTimeout(this.searchTextTimeout);
 
                 this.searchTextTimeout = setTimeout(function () {
@@ -1348,24 +1347,24 @@ li.active a::after {
 
             },
             '$route':function(){
-                
+
                 if(this.$route.query.s){
                     this.searchText = this.$route.query.s.split('+').join(' ');
-                } 
+                }
             },
             '$parent.productByResponseRate':function(){
                 this.products = {};
-                
+
                 this.infiniteScrollHandler();
 
                 if (this.searchText) {
-                  
+
                   this.applyFilter();
-                  
+
                 }else{
-                  
+
                   this.init();
-                  
+
                 }
 
             },
@@ -1382,10 +1381,10 @@ li.active a::after {
             });
 
             // document.addEventListener('click', this.documentClick);
-        }, 
+        },
         mounted() {
             let self=this;
-          
+
             this.scrollToTop();
 
             this.infiniteScrollHandler();

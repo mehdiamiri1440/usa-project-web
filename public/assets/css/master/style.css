@@ -82,7 +82,7 @@ video {
     padding: 0;
     vertical-align: baseline;
     font-family: IRANSans, sans-serif;
-
+    word-wrap: break-word;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -298,7 +298,7 @@ select {
 }
 
 
-.message-wrapper .chat-page ul {
+.message-wrapper .chat-page ul, .main-modal-chat ul {
     background: url('../../img/whatsappbg.jpg') repeat;
 }
 
@@ -1050,6 +1050,8 @@ Sizes
     margin: -10px auto 90px;
     position: relative;
     z-index: 10;
+    font-size: 30px;
+    font-weight: bold;
 }
 
 .des {
@@ -1236,5 +1238,9 @@ span.min {
 
     .main-content-index-pages {
         padding-top: 70px;
+    }
+
+    .overflow-hidden{
+        overflow: hidden;
     }
 }
