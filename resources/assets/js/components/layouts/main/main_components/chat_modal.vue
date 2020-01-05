@@ -216,6 +216,12 @@
         border: none;
 
         border-radius: 35px;
+        
+        padding: 0 10px;
+    }
+
+    .send-message-button i{
+        display: block;
     }
 
     .footer-modal-chat input {
