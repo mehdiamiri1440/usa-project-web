@@ -1,10 +1,11 @@
 <style scoped>
 
     .info_user_wrapper_mobile .green-button,
-    .back_page  .green-button {
+    .back_page .green-button {
         margin: 3px 0;
         padding: 4px 0;
     }
+
     .owl-carousel {
         direction: ltr;
     }
@@ -12,7 +13,6 @@
     .owl-carousel img {
         border-radius: 3px;
     }
-
 
     .filter-mobile-sidebar .box-sidebar i {
         text-align: center;
@@ -111,6 +111,7 @@
     .title_content:last-of-type {
         border-bottom: none;
     }
+
     .info-section {
         color: #fff;
         background: #3a3c39;
@@ -234,8 +235,8 @@
     }
 
     .user-image {
-        width: 135px;
-        height: 135px;
+        width: 120px;
+        height: 120px;
         overflow: hidden;
         border-radius: 50%;
         margin: 0 auto 10px;
@@ -322,27 +323,27 @@
         padding: 4px 0;
 
     }
-    .back_page  .btn.btn-copy {
+
+    .back_page .btn.btn-copy {
         width: 100%;
 
     }
-
 
     .content_user_wrapper_mobile {
         border-top: 1px solid #eee;
         margin-top: 10px;
     }
 
-    p.response-rate{
-      color: #777;
-      font-size : 12px;
-      margin: 7px auto 0;
-      padding: 0;
+    p.response-rate {
+        color: #777;
+        font-size: 12px;
+        margin: 7px auto 0;
+        padding: 0;
 
     }
 
-    p.response-rate span{
-      color: #e41c38;
+    p.response-rate span {
+        color: #e41c38;
     }
 
     @media screen and (max-width: 992px) {
@@ -363,7 +364,7 @@
         }
 
         .profile-main-content-item {
-            padding:  0;
+            padding: 0;
             margin: 63px auto 24px;
         }
 
@@ -377,10 +378,6 @@
 
         .main-article-content {
             padding: 15px;
-        }
-
-        .description {
-            padding: 0 15px;
         }
 
         .ceteficate-image {
@@ -408,10 +405,6 @@
             padding: 15px;
             border-bottom: 1px solid #ededed;
 
-        }
-
-        .description {
-            text-align: right;
         }
 
         .logo img {
@@ -481,7 +474,6 @@
 
         }
 
-
     }
 
     @media screen and (max-width: 715px) {
@@ -514,6 +506,7 @@
     @media screen and (max-width: 345px) {
 
     }
+
     .profile-header {
         color: #fff;
         background-size: cover;
@@ -521,10 +514,9 @@
         padding: 140px 0 65px;
     }
 
-    .main-content-index-pages h1 ,.main-content-index-pages h2,.main-content-index-pages h3,.main-content-index-pages h4,.main-content-index-pages h5 {
+    .main-content-index-pages h1, .main-content-index-pages h2, .main-content-index-pages h3, .main-content-index-pages h4, .main-content-index-pages h5 {
         margin: 15px 0;
     }
-
 
     #wrap-footer {
         display: none;
@@ -555,7 +547,10 @@
     }
 
     .description {
-        white-space: pre-wrap
+        padding: 0 15px;
+        text-align: right;
+        white-space: pre-wrap;
+        line-height: 1.618;
     }
 
     @media screen and (max-width: 767px) {
@@ -564,6 +559,10 @@
 
         }
 
+        .user-contents {
+            padding: 0 15px;
+
+        }
 
         .user-contents .user-image, .user-contents p {
             float: right;
@@ -585,23 +584,23 @@
             width: initial;
             padding: 15px;
         }
-        .contents > .row{
+
+        .contents > .row {
             margin: 0;
         }
 
-        p.response-rate{
-          color: #777;
-          font-size : 12px;
-          margin: 7px auto 0;
-          padding: 0;
-          width: 100%;
+        p.response-rate {
+            color: #777;
+            font-size: 12px;
+            margin: 7px auto 0;
+            padding: 0;
+            width: 100%;
 
         }
 
-        p.response-rate span{
-          color: #e41c38;
+        p.response-rate span {
+            color: #e41c38;
         }
-
 
     }
 
@@ -622,19 +621,20 @@
             padding: 15px;
         }
     }
+
     .green-button {
-      margin: 15px 0 0;
-      display: inline-block;
-      background: #00c569;
-      color: #fff;
-      padding: 10px 35px;
-      width: 100%;
-      border-radius: 3px;
-      text-align: center;
-      font-size: 13px;
-      font-weight: bold;
-      line-height: 21px;
-      border: none;
+        margin: 15px 0 0;
+        display: inline-block;
+        background: #00c569;
+        color: #fff;
+        padding: 10px 35px;
+        width: 100%;
+        border-radius: 3px;
+        text-align: center;
+        font-size: 13px;
+        font-weight: bold;
+        line-height: 21px;
+        border: none;
     }
 </style>
 
@@ -643,9 +643,9 @@
         <script v-html="jsonLDObject" type="application/ld+json"></script>
 
         <header class="hidden-xs profile-header  main-header">
-            <h1 class="title-page col-xs-12">
+            <div class="title-page col-xs-12">
                 پروفایل
-            </h1>
+            </div>
         </header>
 
         <main id="main" class="container">
@@ -653,10 +653,10 @@
                      itemscope itemprop="Person"
                      itemtype="http://schema.org/Person">
 
-                <div class="profile-main-content-item" v-if="profileOwner.user_info">
+                <div class="profile-main-content-item">
                     <div class="header-content col-xs-12">
                         <div class="image_user_wrapper col-xs-4 col-sm-3 col-md-2">
-                            <div class="user-image">
+                            <div v-if="profileOwner.user_info" class="user-image">
                                 <div v-if="profileOwner.profile.profile_photo">
                                     <img v-bind:src=" str + '/' +
                                       profileOwner.profile.profile_photo"
@@ -674,11 +674,19 @@
                                           profileOwner.user_info.last_name">
                                 </div>
                             </div>
+
+                            <div v-else class="user-image">
+
+                                <div class="placeholder-content default-wrapper-main-image">
+
+                                </div>
+
+                            </div>
                         </div>
 
                         <div class="info_user_wrapper_mobile  hidden-sm hidden-md hidden-lg col-xs-8 col-sm-4">
-                            <div class="row" v-if="profileOwnerStatistics">
-                                <div class="col-xs-6 text-center">
+                            <div class="row">
+                                <div class="col-xs-6 text-center" v-if="profileOwnerStatistics.reputation_score">
 
                                     <div class="info-num"
                                          v-text="profileOwnerStatistics.reputation_score"
@@ -687,9 +695,15 @@
 
                                     اعتبار
                                 </div>
+                                <div class="col-xs-6 text-center" v-else>
+
+                                    <div class="info-num placeholder-content content-min-width margin-auto">
+                                    </div>
+
+                                </div>
 
                                 <div class="col-xs-6 text-center"
-                                     v-if="profileOwner.user_info.is_seller"
+                                     v-if="profileOwner.user_info.is_seller && profileOwnerStatistics"
                                 >
                                     <div class="info-num" v-text="profileOwnerStatistics.product_count">
                                     </div>
@@ -697,8 +711,9 @@
                                     محصولات
                                 </div>
 
+
                                 <div class="col-xs-6 text-center"
-                                     v-else-if="profileOwner.user_info.is_buyer"
+                                     v-else-if="profileOwner.user_info.is_buyer && profileOwnerStatistics"
                                 >
 
                                     <div class="info-num" v-text="profileOwnerStatistics.buyAd_count">
@@ -707,19 +722,32 @@
                                     درخواست ها
                                 </div>
 
-                                <div class="col-xs-12">
-                                    <div v-if="currentUser.user_info">
+                                <div class="col-xs-6 text-center" v-else>
 
-                                        <div v-if="currentUser.user_info.id === profileOwner.user_info.id">
+                                    <div class="info-num placeholder-content content-min-width margin-auto">
+                                    </div>
+
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <div v-if="!profileOwner.user_info.id">
+                                        <div class="default-boxing-size placeholder-content content-full-width ">
+
+                                        </div>
+                                    </div>
+
+                                    <div v-else>
+
+                                        <div v-if="currentUser.user_info">
                                             <router-link :to="{name : 'profileBasicSeller'}" class="green-button edit"
-                                               v-if="currentUser.user_info.is_seller == 1 ">
+                                                         v-if="currentUser.user_info.id === profileOwner.user_info.id && currentUser.user_info.is_seller == 1 ">
 
                                                 <i class="fa fa-pencil-alt"></i>
                                                 ویرایش پروفایل
                                             </router-link>
 
                                             <router-link :to="{name : 'profileBasicBuyer'}" class="green-button edit"
-                                               v-if="currentUser.user_info.is_seller == 0 ">
+                                                         v-if="currentUser.user_info.id === profileOwner.user_info.id && currentUser.user_info.is_seller == 0 ">
 
                                                 <i class="fa fa-pencil-alt"></i>
                                                 ویرایش پروفایل
@@ -734,14 +762,14 @@
 
                                     </div>
 
-                                    <div v-else>
-                                        <a href="#" @click.prevent="openChat()" class="green-button edit">
-                                            <i class="fa fa-envelope"></i>
-                                            ارسال پیام
-                                        </a>
+                                   
+                                    <div v-if="!profileOwner.user_info.id">
+                                        <div class=" placeholder-content padding-15-0 content-full-width ">
+
+                                        </div>
                                     </div>
 
-                                    <a href='#' class="green-button"
+                                    <a v-else href='#' class="green-button"
                                        @click.prevent="copyProfileLinkToClipBoard">
 
                                         <i class="fab fa-whatsapp"></i>
@@ -766,7 +794,7 @@
                                     </div>
 
 
-                                        <h1 class="content_title col-xs-12 col-sm-8 col-md-9"
+                                    <h1 v-if="profileOwner.user_info" class="content_title col-xs-12 col-sm-8 col-md-9"
                                         itemprop="name">
                                         <span v-text="
                                         profileOwner.user_info.first_name +
@@ -781,34 +809,42 @@
                                             <i class="fa fa-check-circle"></i>
                                             فروشنده معتبر
                                         </span>
-                                         <p v-if="profileOwnerStatistics.response_rate" class="response-rate" > احتمال پاسخ گویی <span v-text="'%' + profileOwnerStatistics.response_rate "></span>
-                                   </p>
+
+                                        <p v-if="profileOwnerStatistics.response_rate" class="response-rate"> احتمال
+                                            پاسخ گویی <span v-text="'%' + profileOwnerStatistics.response_rate "></span>
+                                        </p>
                                     </h1>
 
+                                    <h1 v-else class="h-20  placeholder-content content-half-width ">
 
+                                    </h1>
 
 
                                 </div>
 
                                 <div class="title_content col-xs-12">
                                     <div class="back_page col-xs-12 col-sm-4 col-md-3">
+                                        <div v-if="!profileOwner.user_info.id">
+                                            <div class="default-boxing-size placeholder-content content-full-width ">
 
-                                        <div v-if="currentUser.user_info">
+                                            </div>
+                                        </div>
+                                        <div v-else>
 
-                                            <div v-if="currentUser.user_info.id === profileOwner.user_info.id">
+                                            <div v-if="currentUser.user_info">
                                                 <router-link :to="{name : 'profileBasicSeller'}"
-                                                @click="registerComponentStatistics('profileView','editProfile','click on edit profile')"
-                                                class="green-button edit"
-                                                   v-if="currentUser.user_info.is_seller == 1 ">
+                                                             @click="registerComponentStatistics('profileView','editProfile','click on edit profile')"
+                                                             class="green-button edit"
+                                                             v-if="currentUser.user_info.id === profileOwner.user_info.id && currentUser.user_info.is_seller == 1 ">
 
                                                     <i class="fa fa-pencil-alt"></i>
                                                     ویرایش پروفایل
                                                 </router-link>
 
                                                 <router-link :to="{name : 'profileBasicBuyer'}"
-                                                class="green-button edit"
-                                                @click="registerComponentStatistics('profileView','editProfile','click on edit profile')"
-                                                   v-if="currentUser.user_info.is_seller == 0 ">
+                                                             class="green-button edit"
+                                                             @click="registerComponentStatistics('profileView','editProfile','click on edit profile')"
+                                                             v-if="currentUser.user_info.id === profileOwner.user_info.id && currentUser.user_info.is_seller == 0 ">
 
                                                     <i class="fa fa-pencil-alt"></i>
                                                     ویرایش پروفایل
@@ -824,16 +860,14 @@
                                         </div>
 
 
-                                        <a v-else href="" @click.prevent="openChat()"
-                                            class="green-button edit"
-                                            v-else>
+                             
 
-                                            <i class="fa fa-envelope"></i>
-                                                ارسال پیام
-                                        </a>
+                                        <div v-if="!profileOwner.user_info.id">
+                                            <div class="default-boxing-size placeholder-content content-full-width ">
 
-
-                                        <button class="btn btn-copy"
+                                            </div>
+                                        </div>
+                                        <button v-else class="btn btn-copy"
                                                 @click="copyProfileLinkToClipBoard"
                                                 :value="copyLinkText">
 
@@ -848,18 +882,22 @@
                                         <div class="row">
                                             <div class="col-xs-6 pull-right">
 
-                                               <p >
-                                                حوزه ی فعالیت :
+                                                <p v-if="profileOwner.activity_domain">
+                                                    حوزه ی فعالیت :
 
-                                                <span v-text="profileOwner.activity_domain"></span>
-                                               </p>
+                                                    <span v-text="profileOwner.activity_domain"></span>
+                                                </p>
+                                                <p v-else>
+
+                                                    <span class=" h-20 placeholder-content content-full-width "></span>
+                                                </p>
 
                                             </div>
 
                                             <div class="col-xs-6 ">
 
 
-                                                <p>
+                                                <p v-if="profileOwner.user_info">
                                                     آدرس :
                                                     <span itemprop="address"
                                                           v-text="profileOwner.user_info.province +
@@ -869,9 +907,14 @@
 
                                                 </p>
 
+                                                <p v-else>
+
+                                                    <span class="h-20 placeholder-content content-full-width "></span>
+                                                </p>
+
                                             </div>
 
-                                            <div   class="col-xs-6 pull-right">
+                                            <div class="col-xs-6 pull-right">
 
                                                 <p v-if="profileOwner.profile.is_company">
                                                     نام شرکت
@@ -879,19 +922,18 @@
                                                     <span v-text="profileOwner.profile.company_name"></span>
                                                 </p>
 
+
                                             </div>
 
                                             <div class="col-xs-6 ">
 
-                                                <p  v-if="profileOwner.profile.is_company" >
-                                                   شماره ثبت
+                                                <p v-if="profileOwner.profile.is_company">
+                                                    شماره ثبت
 
                                                     <span v-text="profileOwner.profile.company_register_code"></span>
                                                 </p>
 
                                             </div>
-
-
 
 
                                         </div>
@@ -923,7 +965,7 @@
 
                                     </div>
 
-                                    <h1 class="content_title col-xs-12 col-sm-8">
+                                    <h1 v-if="profileOwner.user_info" class="content_title col-xs-12 col-sm-8">
                                         <span v-text="profileOwner.user_info.first_name +
                                          ' ' +
                                          profileOwner.user_info.last_name">
@@ -935,29 +977,32 @@
                                             <i class="fa fa-check-circle"></i>
                                             فروشنده معتبر
                                         </span>
-                                     <p v-if="profileOwnerStatistics.response_rate" class="response-rate" > احتمال پاسخ گویی <span v-text="'%' + profileOwnerStatistics.response_rate "></span>
-                                   </p>
+                                        <p v-if="profileOwnerStatistics.response_rate" class="response-rate"> احتمال
+                                            پاسخ گویی <span v-text="'%' + profileOwnerStatistics.response_rate "></span>
+                                        </p>
                                     </h1>
+                                    <h1 v-else class="placeholder-content margin-15-0 content-half-width padding-15-0">
+
+                                    </h1>
+
                                     <div class="content_user_info col-xs-12 col-sm-8">
-
-
 
 
                                         <div class="row">
                                             <div class="col-xs-6 pull-right">
 
-                                               <p >
-                                                حوزه ی فعالیت :
+                                                <p v-if="profileOwner.activity_domain">
+                                                    حوزه ی فعالیت :
 
-                                                <span v-text="profileOwner.activity_domain"></span>
-                                               </p>
-
+                                                    <span v-text="profileOwner.activity_domain"></span>
+                                                </p>
+                                                <span v-else class="placeholder-content content-full-width "></span>
                                             </div>
 
                                             <div class="col-xs-6 ">
 
 
-                                                <p>
+                                                <p v-if="profileOwner.user_info">
                                                     آدرس :
                                                     <span itemprop="address"
                                                           v-text="profileOwner.user_info.province +
@@ -966,10 +1011,10 @@
                                                     </span>
 
                                                 </p>
-
+                                                <span v-else class="placeholder-content content-full-width "></span>
                                             </div>
 
-                                            <div   class="col-xs-6 pull-right">
+                                            <div class="col-xs-6 pull-right">
 
                                                 <p v-if="profileOwner.profile.is_company">
                                                     نام شرکت :
@@ -981,15 +1026,13 @@
 
                                             <div class="col-xs-6 ">
 
-                                                <p  v-if="profileOwner.profile.is_company" >
-                                                   شماره ثبت :
+                                                <p v-if="profileOwner.profile.is_company">
+                                                    شماره ثبت :
 
                                                     <span v-text="profileOwner.profile.company_register_code"></span>
                                                 </p>
 
                                             </div>
-
-
 
 
                                         </div>
@@ -1041,15 +1084,26 @@
                         </ul>
                     </div>
                     <div class="contents col-xs-12" v-if="profileDescription === true">
-                        <div class="des col-xs-12">
+                        <div  class="des col-xs-12">
                             <p class="title-content">
                                 توضیحات
                             </p>
 
-                            <div class="description"
+                            <div v-if="profileOwner.profile.description" class="description"
                                  v-text="profileOwner.profile.description">
                             </div>
+                            <div v-else>
+                            <span class="content-default-width
+ placeholder-content margin-15 h-20"></span>
+                            <span class="content-half-width
+ placeholder-content margin-0-15 h-20"></span>
+                            <span class="content-full-width
+ placeholder-content margin-15"></span>
+                            </div>
                         </div>
+
+
+
 
                         <div class="cerificates col-xs-12">
                             <p class="title-content">
@@ -1079,7 +1133,7 @@
 
                             <div class="wrapper_no_pic" v-else>
                                 <div class="content_no_pic">
-                                    <i class="fa fa-picture-o"></i>
+                                    <i class="far fa-images"></i>
                                 </div>
 
                                 <div class="text_no_pic">
@@ -1115,7 +1169,7 @@
                             </div>
 
                             <div class="wrapper_no_pic" v-else>
-                                <div class="content_no_pic"><i class="fa fa-picture-o"></i></div>
+                                <div class="content_no_pic"><i class="far fa-images"></i></div>
                                 <div class="text_no_pic"><p>مدارکی ثبت نشده است</p></div>
                             </div>
                         </div>
@@ -1125,18 +1179,33 @@
 
                     <div class="contents" v-else>
 
-                          <div class="row">
-                              <div v-for="(product,productIndex) in products" :key="product.main.id" class="col-xs-12 pull-right">
+                        <div class="row">
+                            <!-- <div v-for="(product,productIndex) in products" :key="productIndex"
+                                 class="col-xs-12 pull-right">
                                 <ProductArticle
-                                    :product="product"
-                                    :loading_img="loading_img"
-                                    :defultimg="defultimg"
-                                    :str="str"
-                                    :loading="loading"
-                                    :currentUser="currentUser"
+                                        :product="product"
+                                        :loading_img="loading_img"
+                                        :defultimg="defultimg"
+                                        :str="str"
+                                        :loading="loading"
+                                        :currentUser="currentUser"
                                 />
-                              </div>
-                          </div>
+                            </div> -->
+
+                             <div class="col-xs-12 pull-right" :key="productIndex" v-for="(product,productIndex) in products">
+                                <ProductArticle
+                                :productIndex="productIndex"
+                                v-if="products.length >= productIndex"
+                                :key="product.main.id"
+                                :product="product"
+                                :loading_img="loading_img"
+                                :defultimg="defultimg"
+                                :str="str"
+                                :loading="loading"
+                                :currentUser="currentUser"
+                                />
+                            </div>
+                        </div>
 
                         <div class="col-xs-12" v-if="products.length === 0 && !loading">
                             <div class="col-xs-12" v-if="products.length === 0 && !loading">
@@ -1254,7 +1323,7 @@
             '</a>' +
             '</div>',
         mounted: function () {
-           $(".owl-carousel").owlCarousel({
+            $(".owl-carousel").owlCarousel({
                 loop: false,
                 margin: 10,
                 nav: true,
@@ -1509,11 +1578,11 @@
                 var self = this;
 
                 if (this.currentUser.user_info) {
-                    eventBus.$emit("ChatInfo",contact);
+                    eventBus.$emit("ChatInfo", contact);
                 }
                 else {
-                    window.localStorage.setItem('contact',JSON.stringify(contact));
-                    window.localStorage.setItem('pathname',window.location.pathname);
+                    window.localStorage.setItem('contact', JSON.stringify(contact));
+                    window.localStorage.setItem('pathname', window.location.pathname);
 
                     this.popUpMsg = 'اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
                     eventBus.$emit('submitSuccess', this.popUpMsg);

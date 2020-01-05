@@ -160,11 +160,7 @@
 
                 <UserInfo/>
 
-                <div class="buttons-wrapper  hidden-lg">
-                    <router-link :to="{name : 'productList'}" class="green-button blue-button">
-                        مشاهده همه محصولات
-                    </router-link>
-                </div>
+
             </div>
 
 
@@ -261,7 +257,7 @@
                     </div>
                 </section>
 
-            <div class="buttons-wrapper  hidden-xs  hidden-sm hidden-md">
+            <div class="buttons-wrapper  col-xs-12">
                 <router-link :to="{name : 'productList'}" class="green-button blue-button">
                     مشاهده همه محصولات
                 </router-link>
