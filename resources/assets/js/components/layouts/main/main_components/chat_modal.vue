@@ -482,10 +482,10 @@
 
                     if(self.doesUserComeFromAuthenticationPages()){
 
-                        if(window.location.pathname == '/login' || window.location.pathname == '/register'){
+                        // if(window.location.pathname == '/login' || window.location.pathname == '/register'){
                             window.localStorage.removeItem('comeFromAuthentication');
-                            window.location.href = "/login";
-                        }
+                            window.location.href = window.location.pathname;
+                        // }
                     }
                 });
             },

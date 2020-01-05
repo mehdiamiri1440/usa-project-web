@@ -684,8 +684,10 @@ export default {
       self.loginCheckerLoading = false;
     }
     window.addEventListener("keydown", function(event) {
-      if (event.keyCode === 13) {
-        self.doLogin();
+      if(window.location.pathname == '/login'){
+          if (event.keyCode === 13) {
+              self.doLogin();
+          }
       }
     });
   },
