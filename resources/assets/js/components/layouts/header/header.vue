@@ -1211,7 +1211,7 @@ export default {
     var self = this;
 
     window.addEventListener("keydown", function(event) {
-        if( ! window.location.pathname.includes('seller') &&  !window.location.pathname.includes('buyer') &&  !window.location.pathname('login')){
+        if( ! window.location.pathname.includes('seller') &&  !window.location.pathname.includes('buyer') &&  !window.location.pathname.includes('login')){
             if (event.keyCode === 13){
                 self.search();
                 $("#incobac-nav").collapse("hide");
