@@ -536,7 +536,6 @@ li.active a::after {
 
 <template>
   <div>
-    <div v-for='(item,index) in allProducts' :key='index'>{{item}}</div>
     <!--modal-->
     <div class="container">
       <div
@@ -787,648 +786,629 @@ li.active a::after {
   </div>
 </template>
 <script>
-    import ProductArticle from './product_components/product_article'
-    import ProductAsideCategories from './product_components/sidebar/product_aside_categories'
-    import {eventBus} from "../../../router/router";
-    import {mapGetters,mapActions} from 'vuex'  
+import ProductArticle from "./product_components/product_article";
+import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
+import { eventBus } from "../../../router/router";
+import { mapGetters, mapActions } from "vuex";
 
-
-    var visible = false;
-    export default {
-      computed:mapGetters(['allProducts']),
-      components: {
-            ProductArticle,
-            ProductAsideCategories,
+var visible = false;
+export default {
+  computed: mapGetters(["allProducts"]),
+  components: {
+    ProductArticle,
+    ProductAsideCategories
+  },
+  props: ["str", "defultimg", "loading_img"],
+  data: function() {
+    return {
+      currentUser: {
+        profile: "",
+        user_info: ""
+      },
+      products: {
+        main: "",
+        user_info: "",
+        profile_info: {
+          profile_photo: ""
         },
-        props: [
-            'str',
-            'defultimg',
-            'loading_img',
-        ],
-        data: function () {
-            return {
-                currentUser: {
-                    profile: '',
-                    user_info: ''
-                },
-                products: {
-                    main: '',
-                    user_info: '',
-                    profile_info: {
-                        profile_photo: ''
-                    },
-                    photos: [],
-                },
-                searchText: '',
-                provinceId: '',
-                categoryId: '',
-                subCategoryId: '',
-                cityId: '',
-                searchValue: "",
-                scrolled: false,
-                productCountInPage: 10,
-                productCountInEachLoad: 10,
-                fromProductCount:0,
-                continueToLoadProducts: true,
-                searchActive: false,
-                errors: '',
-                popUpMsg: '',
-                submiting: false,
-                loading: false,
-                bottom: false,
-                loadMoreActive: false,
-                searchTextTimeout: null,
-
-            }
-        },
-        methods: {
-          ...mapActions(['fetchProductsList']),
-            filterProducts: function (productsFilter) {
-                this.products = productsFilter;
-            },
-            collapseDropDown: function () {
-                $(".profile-list").fadeIn("slow", function () {
-                    visible = true;
-                });
-            },
-            collapseDropDownList: function () {
-                $(".icon-header-list").fadeIn("slow", function () {
-                    visible = true;
-                });
-            },
-            documentClick(e) {
-                if (visible) {
-                    $('.profile-list').fadeOut("slow");
-                    $('.icon-header-list').fadeOut("slow");
-                    visible = false;
-                }
-            },
-            init: function () {
-//              return new Promise((resolve,reject)=>{
-                var self = this;
-                this.scrollToTop();
-                if(this.$route.query.s){
-                     var searchValue = this.$route.query.s.split('+').join(' ')
-                }
-                else{
-                    var searchValue = '';
-                }
-
-                var searchValueText = searchValue;
-
-                axios.post('/user/profile_info')
-                    .then(function (response) {
-                        self.currentUser = response.data;
-
-                        if (searchValueText) {
-                            self.registerComponentStatistics('homePage', 'search-text', searchValueText);
-                            self.searchText = searchValueText;
-                            eventBus.$emit('submiting', false);
-                        }
-                        else {
-                            self.loading = true;
-
-                            self.fromProductCount = 0;
-                            self.productCountInPage = 10;
-
-                            axios.post('/user/get_product_list', {
-                                from_record_number: self.fromProductCount,
-                                response_rate: self.$parent.productByResponseRate,
-                                to_record_number: self.productCountInPage,
-
-                            }).then(function (response) {
-                                self.products = response.data.products;
-                                self.fetchProductsList(self.products)
-//                                localStorage.removeItem('productCountInPage')
-//                                resolve(self.loading = false);
-                                eventBus.$emit('submiting', false);
-                                setTimeout(function(){
-                                    self.sidebarScroll();
-                                },500)
-
-                            });
-                        }
-//                    }).catch(error=>reject(error));
-                });
-            },
-            feed() {
-
-                if(this.products.isEmptyObject == true){
-                  return false;
-                }
-
-                var self = this;
-                if (this.searchText === '' && this.provinceId === '' && this.categoryId === '' && this.continueToLoadProducts) {
-                    this.loadMoreActive = true;
-                    this.fromProductCount = this.productCountInPage;
-                    this.productCountInPage += this.productCountInEachLoad;
-                    axios.post('/user/get_product_list', {
-                        from_record_number: self.fromProductCount,
-                        response_rate: self.$parent.productByResponseRate,
-                        to_record_number: self.productCountInPage,
-                    }).then(function (response) {
-                      if(self.products && self.products.length){
-                          self.products = self.products.concat([...response.data.products]);
-                      }
-//                      localStorage.productCountInPage=JSON.stringify(self.productCountInPage)
-                        eventBus.$emit('submiting', false);
-                        if (self.products.length + 1 < self.productCountInPage) {
-                            self.continueToLoadProducts = false;
-                        }
-
-                        self.loadMoreActive = false;
-                        setTimeout(function(){
-                            self.sidebarScroll();
-                        },500);
-                    });
-                }
-                else{
-
-                    this.loadMoreActive = true;
-
-                    var searchObject = {};
-
-                    if(self.$parent.productByResponseRate){
-                        searchObject.response_rate = self.$parent.productByResponseRate;
-                    }
-                    if (this.categoryId) {
-                        searchObject.category_id = this.categoryId;
-                    }
-                    if (this.subCategoryId) {
-                        searchObject.sub_category_id = this.subCategoryId;
-                    }
-                    if (this.provinceId) {
-                        searchObject.province_id = this.provinceId;
-                    }
-                    if (this.cityId) {
-                        searchObject.city_id = this.cityId;
-                    }
-                    if (this.searchText) {
-                        // this.$router.replace({
-                        //     name : 'productList',
-                        //     query :{
-                        //         s:this.searchText.replace(/ /g,'+')
-                        //     }
-                        // });
-                        searchObject.search_text = this.searchText;
-                    }
-
-
-                    if (jQuery.isEmptyObject(searchObject)) {
-                        if(this.searchText == ""){
-                            this.$router.push({
-                                name : 'productList'
-                            });
-                        }
-                    }
-
-                    searchObject.from_record_number = self.productCountInPage;
-                    self.productCountInPage += self.productCountInEachLoad;
-                    searchObject.to_record_number = self.productCountInPage;
-
-                    axios.post('/user/get_product_list', searchObject)
-                      .then(function (response) {
-                        self.products = self.products.concat(response.data.products);
-
-                        self.loadMoreActive = false;
-
-                        setTimeout(function(){
-                            self.sidebarScroll();
-                        },500);
-                      })
-                      .catch(function (err) {
-                          alert('خطایی رخ داده است. دوباره تلاش کنید.');
-                      });
-                }
-
-            },
-            registerRequestInSearchNotFoundCase: function () {
-
-                if (this.currentUser.profile) {
-                    if (this.currentUser.user_info.is_buyer) {
-                        this.$router.push({name : 'registerRequestBuyer'})
-                    }
-                    else {
-                        this.popUpMsg = 'حساب کاربری شما از نوع خریدار نیست.';
-                        eventBus.$emit('submitSuccess', this.popUpMsg);
-                        $('#custom-main-modal').modal('show');
-                    }
-                }
-                else {
-                    this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
-                    eventBus.$emit('submitSuccess', this.popUpMsg);
-                    $('#auth-popup').modal('show');
-                }
-            },
-            bottomVisible: function () {
-                const scrollY = window.scrollY;
-                const visible = document.documentElement.clientHeight;
-                const pageHeight = document.documentElement.scrollHeight;
-                const bottomOfPage = visible + scrollY >= pageHeight;
-                return bottomOfPage || pageHeight < visible;
-            },
-            addProductOrRequest: function () {
-                if (this.currentUser.user_info) {
-                    if (this.currentUser.user_info.is_seller) {
-                        this.registerComponentStatistics('product-list', 'register-product', 'seller clicks on plus button');
-
-                        this.$router.push({name : 'registerProductSeller'})
-                    }
-                    else if (this.currentUser.user_info.is_buyer) {
-                        this.registerComponentStatistics('product-list', 'register-request', 'seller clicks on plus button');
-
-                        this.$router.push({name : 'registerProductSeller'})
-                    }
-                }
-                else {
-                    this.registerComponentStatistics('product-list', 'unauthorized-user-clicks-on-plus-btn', 'unauthorized-user-clicks-on-plus-btn');
-
-                    this.popUpMsg = 'برای ثبت آگهی خرید یا فروش  ابتدا وارد سامانه شوید یا ثبت نام کنید.';
-                    eventBus.$emit('submitSuccess', this.popUpMsg);
-                    $('#auth-popup').modal('show');
-                }
-            },
-            resetFilter: function () {
-
-
-                eventBus.$emit('submiting', true);
-
-                $('.box-sidebar option').prop('selected', function () {
-                    return this.defaultSelected;
-                });
-
-                this.searchText = '';
-                this.provinceId = '';
-                this.categoryId = '';
-                this.subCategoryId = '';
-                this.cityId = '';
-
-                this.applyFilter();
-
-            },
-            applyFilter: function () {
-                var self = this;
-
-                eventBus.$emit('submiting', true);
-
-                self.fromProductCount = 0;
-                self.productCountInPage = 10;
-
-                var searchObject = {};
-
-                if(self.$parent.productByResponseRate){
-                    searchObject.response_rate = self.$parent.productByResponseRate;
-                }
-                if (this.categoryId) {
-                    searchObject.category_id = this.categoryId;
-                }
-                if (this.subCategoryId) {
-                    searchObject.sub_category_id = this.subCategoryId;
-                }
-                if (this.provinceId) {
-                    searchObject.province_id = this.provinceId;
-                }
-                if (this.cityId) {
-                    searchObject.city_id = this.cityId;
-                }
-                if (this.searchText) {
-                    this.$router.replace({
-                        name : 'productList',
-                        query :{
-                            s:this.searchText.replace(/ /g,'+')
-                        }
-                    });
-                    searchObject.search_text = this.searchText;
-                }
-
-
-                if (jQuery.isEmptyObject(searchObject)) {
-                    if(this.searchText == ""){
-                        this.$router.push({
-                            name : 'productList'
-                        });
-                    }
-                }
-
-                searchObject.from_record_number = self.fromProductCount;
-                searchObject.to_record_number = self.productCountInPage;
-
-                axios.post('/user/get_product_list', searchObject)
-                    .then(function (response) {
-                      self.products=response.data.products;
-                      eventBus.$emit('submiting', false);
-                         self.scrollToTop();
-                    })
-                    .catch(function (err) {
-                        alert('خطایی رخ داده است. دوباره تلاش کنید.');
-                    });
-
-            },
-            scrollToTop() {
-                window.scrollTo(0, 0);
-            },
-            stopLoader: function () {
-                eventBus.$emit('isLoading', false);
-            },
-            registerComponentStatistics: function (categoryName, actionName, labelName) {
-                gtag('event', actionName, {
-                    'event_category': categoryName,
-                    'event_label': labelName
-                });
-            },
-            registerComponentExceptions: function (description, fatal = false) {
-                gtag('event', 'exception', {
-                    'description': description,
-                    'fatal': fatal
-                });
-            },
-            infiniteScrollHandler:function(){
-                let lastOffset = 0;
-
-                window.onscroll = () => {
-                    if(window.location.pathname.includes('product-list')){
-                          var bottom = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - (document.documentElement.scrollTop / 2);
-
-                          let newOffset = document.documentElement.offsetHeight;
-
-                          if(bottom){
-                              if(newOffset > lastOffset + 100){
-                                      lastOffset = document.documentElement.offsetHeight;
-                                      this.feed();
-                                  }
-                              }
-                          }
-                    }
-            },
-            sidebarScroll() {
-
-                var $sticky = $('.sticky');
-                var stickyrStopper = $('#wrap-footer');
-                var lastScrollTop = 0;
-
-
-                var sidebarStopper = $('#wrap-footer').height();
-
-                   var sidebar = new StickySidebar('#sidebar', {
-                        containerSelector: '#article-list',
-                        innerWrapperSelector: '.sidebar__inner',
-                        topSpacing: 122,
-                        resizeSensor: true,
-
-                    });
-
-
-
-                    var documentHeight = $(document).height();
-                    var wHeight = $(window).height();
-                    var generalSidebarHeight = $sticky.innerHeight();
-                    var stickyTop = 162;
-                    var stickOffset = 0;
-                    var stickPositionToContent = 115;
-                    var stickyStopperPosition = stickyrStopper.offset().top;
-                    var stopPoint = documentHeight - (wHeight + stickyrStopper.innerHeight() + 130);
-                    var differences = (stickyStopperPosition - stickPositionToContent) - (generalSidebarHeight - stickOffset);
-                    var diff = differences + stickOffset ;
-                    var sidebarHeightToTop = generalSidebarHeight + stickyTop;
-
-
-                        if (generalSidebarHeight > wHeight) {
-
-
-                            if(wHeight < sidebarHeightToTop){
-
-                                $(window).scroll(function(){ // scroll event
-                                      var windowTop = $(window).scrollTop(); // returns number
-
-                                           if (windowTop > lastScrollTop){
-
-                                                if ((dynamicScroll + generalSidebarHeight) < windowTop + wHeight) {
-
-                                                      if (stopPoint + 13  < windowTop  ) {
-                                                          $sticky.css({
-                                                              position: 'absolute',
-                                                              top: diff,
-                                                              right:'0'
-                                                          });
-                                                      } else if (windowTop + wHeight > sidebarHeightToTop) {
-                                                          $sticky.css({
-                                                              position: 'fixed',
-                                                              bottom: stickOffset,
-                                                              top:'initial',
-                                                              right:'0'
-                                                          });
-                                                      } else {
-                                                          $sticky.css({
-                                                              position: 'absolute',
-                                                              top: 'initial',
-                                                              right:'0',
-                                                              bottom:'initial'
-                                                          });
-                                                      }
-
-                                                }else{
-
-                                                      if (stopPoint  < windowTop) {
-                                                          $sticky.css({
-                                                              position: 'absolute',
-                                                              top: diff,
-                                                              right:'0'
-                                                          });
-                                                      } else {
-                                                          $sticky.css({
-                                                              position: 'absolute',
-                                                              top: dynamicScroll + stickOffset,
-                                                              right:'0',
-                                                              bottom:'initial'
-                                                          });
-                                                      }
-
-
-                                                }
-
-                                      dynamicScroll = $sticky.offset().top;
-
-                                    }else{
-
-                                 if ((dynamicScroll - stickyTop) < windowTop) {
-                                        $sticky.css({
-                                              position: 'absolute',
-                                              top: dynamicScroll + 'px' ,
-                                              right:'0',
-                                              bottom:'initial'
-                                          });
-                                    }else{
-                                          $sticky.css({
-                                              position: 'fixed',
-                                              bottom: 'initial',
-                                              top:stickyTop,
-                                              right:'0'
-                                          });
-                                    }
-
-
-
-
-                                    }
-                                  dynamicScroll = $sticky.offset().top;
-
-                                  lastScrollTop = windowTop;
-                                 });
-
-                            }else{
-
-                                  $(window).scroll(function(){ // scroll event
-                                      var windowTop = $(window).scrollTop(); // returns number
-                                      if (windowTop < lastScrollTop){
-
-
-                                         if (stopPoint  < windowTop) {
-                                                  $sticky.css({
-                                                      position: 'absolute',
-                                                      top: diff,
-                                                      right:'0'
-                                                  });
-                                              }else{
-                                                  $sticky.css({
-                                                      position: 'fixed',
-                                                      bottom: 'initial',
-                                                      top:stickyTop,
-                                                      right:'0'
-                                                  });
-                                              }
-                                          }
-                                       lastScrollTop = windowTop;
-                                    });
-
-                            }; //end all if
-
-
-                        } else {
-
-
-
-                             $(window).scroll(function(){ // scroll event
-                                      var windowTop = $(window).scrollTop(); // returns number'
-                                      var getHeightFooter = documentHeight - (stickyrStopper.innerHeight() + stickPositionToContent +  stickyTop + generalSidebarHeight);
-                                        if (getHeightFooter  < windowTop) {
-                                                  $sticky.css({
-                                                      position: 'absolute',
-                                                      top: diff,
-                                                      right:'0'
-                                                  });
-                                              }else{
-                                                  $sticky.css({
-                                                      position: 'fixed',
-                                                      bottom: 'initial',
-                                                      top:stickyTop,
-                                                      right:'0'
-                                                  });
-                                              }
-                            });
-
-                        }
-
-               },
-            },
-        watch: {
-            searchText: function (value) {
-
-                var self = this;
-
-                eventBus.$emit('textSearch',value);
-
-                clearTimeout(this.searchTextTimeout);
-
-                this.searchTextTimeout = setTimeout(function () {
-                    self.registerComponentStatistics('product-list', 'search-text', self.searchText);
-
-                    self.applyFilter();
-                }, 1500);
-
-            },
-            '$route':function(){
-
-                if(this.$route.query.s){
-                    this.searchText = this.$route.query.s.split('+').join(' ');
-                }
-            },
-            '$parent.productByResponseRate':function(){
-                this.products = {};
-
-                this.infiniteScrollHandler();
-
-                if (this.searchText) {
-
-                  this.applyFilter();
-
-                }else{
-
-                  this.init();
-
-                }
-
-            },
-            bottom(bottom) {
-                if (bottom) {
-                    //this.feed()
-                }
-            },
-        },
-        created() {
-            gtag('config', 'UA-129398000-1', {'page_path': '/product-list'});
-            eventBus.$on("textSearch", event => {
-                this.searchText = event;
+        photos: []
+      },
+      searchText: "",
+      provinceId: "",
+      categoryId: "",
+      subCategoryId: "",
+      cityId: "",
+      searchValue: "",
+      scrolled: false,
+      productCountInPage: 10,
+      productCountInEachLoad: 10,
+      fromProductCount: 0,
+      continueToLoadProducts: true,
+      searchActive: false,
+      errors: "",
+      popUpMsg: "",
+      submiting: false,
+      loading: false,
+      bottom: false,
+      loadMoreActive: false,
+      searchTextTimeout: null
+    };
+  },
+  methods: {
+    ...mapActions(["fetchProductsList"]),
+    filterProducts: function(productsFilter) {
+      this.products = productsFilter;
+    },
+    collapseDropDown: function() {
+      $(".profile-list").fadeIn("slow", function() {
+        visible = true;
+      });
+    },
+    collapseDropDownList: function() {
+      $(".icon-header-list").fadeIn("slow", function() {
+        visible = true;
+      });
+    },
+    documentClick(e) {
+      if (visible) {
+        $(".profile-list").fadeOut("slow");
+        $(".icon-header-list").fadeOut("slow");
+        visible = false;
+      }
+    },
+    init: function() {
+      //              return new Promise((resolve,reject)=>{
+      var self = this;
+      this.scrollToTop();
+      if (this.$route.query.s) {
+        var searchValue = this.$route.query.s.split("+").join(" ");
+      } else {
+        var searchValue = "";
+      }
+
+      var searchValueText = searchValue;
+
+      axios.post("/user/profile_info").then(function(response) {
+        self.currentUser = response.data;
+
+        if (searchValueText) {
+          self.registerComponentStatistics(
+            "homePage",
+            "search-text",
+            searchValueText
+          );
+          self.searchText = searchValueText;
+          eventBus.$emit("submiting", false);
+        } else {
+          self.loading = true;
+
+          self.fromProductCount = 0;
+          self.productCountInPage = 10;
+
+          axios
+            .post("/user/get_product_list", {
+              from_record_number: self.fromProductCount,
+              response_rate: self.$parent.productByResponseRate,
+              to_record_number: self.productCountInPage
+            })
+            .then(function(response) {
+              self.products = response.data.products;
+              self.fetchProductsList(self.products);
+              //                                localStorage.removeItem('productCountInPage')
+              //                                resolve(self.loading = false);
+              eventBus.$emit("submiting", false);
+              setTimeout(function() {
+                self.sidebarScroll();
+              }, 500);
             });
-
-            // document.addEventListener('click', this.documentClick);
-        },
-        mounted() {
-            let self=this;
-
-            this.scrollToTop();
-
-            this.infiniteScrollHandler();
-console.log('allProducts======>>>>',self.allProducts)
-            this.init();//.then(loading=>{
-//              if(!loading){
-//                   let scrollPosition=(localStorage.getItem('scroll'))||{x:0,y:0};
-//                   window.scrollTo(0,scrollPosition);
-//                   localStorage.removeItem('scroll')
-//                   }
-//            });
-            this.stopLoader();
-            },
-        metaInfo() {
-
-            return {
-                title: 'لیست محصولات و قیمت عمده محصولات کشاورزی',
-                titleTemplate: 'اینکوباک | %s',
-                meta: [
-                    {
-                        name: 'description',
-                        content: 'خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار'
-                    },
-                    {
-                        name: 'author',
-                        content: 'اینکوباک'
-                    },
-                    {
-                        property: 'og:description',
-                        content: 'مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
-                    },
-                    {
-                        property: 'og:site_name',
-                        content: 'اینکوباک بازارآنلاین خرید و فروش محصولات کشاورزی ایران'
-                    },
-                    {
-                        'property': 'og:title',
-                        'content': 'اینکوباک | لیست محصولات و قیمت محصولات کشاورزی'
-                    },
-
-                ]
-
-            }
         }
-    }
+        //                    }).catch(error=>reject(error));
+      });
+    },
+    feed() {
+      if (this.products.isEmptyObject == true) {
+        return false;
+      }
 
+      var self = this;
+      if (
+        this.searchText === "" &&
+        this.provinceId === "" &&
+        this.categoryId === "" &&
+        this.continueToLoadProducts
+      ) {
+        this.loadMoreActive = true;
+        this.fromProductCount = this.productCountInPage;
+        this.productCountInPage += this.productCountInEachLoad;
+        axios
+          .post("/user/get_product_list", {
+            from_record_number: self.fromProductCount,
+            response_rate: self.$parent.productByResponseRate,
+            to_record_number: self.productCountInPage
+          })
+          .then(function(response) {
+            if (self.products && self.products.length) {
+              self.products = self.products.concat([...response.data.products]);
+            }
+            //                      localStorage.productCountInPage=JSON.stringify(self.productCountInPage)
+            eventBus.$emit("submiting", false);
+            if (self.products.length + 1 < self.productCountInPage) {
+              self.continueToLoadProducts = false;
+            }
+
+            self.loadMoreActive = false;
+            setTimeout(function() {
+              self.sidebarScroll();
+            }, 500);
+          });
+      } else {
+        this.loadMoreActive = true;
+
+        var searchObject = {};
+
+        if (self.$parent.productByResponseRate) {
+          searchObject.response_rate = self.$parent.productByResponseRate;
+        }
+        if (this.categoryId) {
+          searchObject.category_id = this.categoryId;
+        }
+        if (this.subCategoryId) {
+          searchObject.sub_category_id = this.subCategoryId;
+        }
+        if (this.provinceId) {
+          searchObject.province_id = this.provinceId;
+        }
+        if (this.cityId) {
+          searchObject.city_id = this.cityId;
+        }
+        if (this.searchText) {
+          // this.$router.replace({
+          //     name : 'productList',
+          //     query :{
+          //         s:this.searchText.replace(/ /g,'+')
+          //     }
+          // });
+          searchObject.search_text = this.searchText;
+        }
+
+        if (jQuery.isEmptyObject(searchObject)) {
+          if (this.searchText == "") {
+            this.$router.push({
+              name: "productList"
+            });
+          }
+        }
+
+        searchObject.from_record_number = self.productCountInPage;
+        self.productCountInPage += self.productCountInEachLoad;
+        searchObject.to_record_number = self.productCountInPage;
+
+        axios
+          .post("/user/get_product_list", searchObject)
+          .then(function(response) {
+            self.products = self.products.concat(response.data.products);
+
+            self.loadMoreActive = false;
+
+            setTimeout(function() {
+              self.sidebarScroll();
+            }, 500);
+          })
+          .catch(function(err) {
+            alert("خطایی رخ داده است. دوباره تلاش کنید.");
+          });
+      }
+    },
+    registerRequestInSearchNotFoundCase: function() {
+      if (this.currentUser.profile) {
+        if (this.currentUser.user_info.is_buyer) {
+          this.$router.push({ name: "registerRequestBuyer" });
+        } else {
+          this.popUpMsg = "حساب کاربری شما از نوع خریدار نیست.";
+          eventBus.$emit("submitSuccess", this.popUpMsg);
+          $("#custom-main-modal").modal("show");
+        }
+      } else {
+        this.popUpMsg =
+          "تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.";
+        eventBus.$emit("submitSuccess", this.popUpMsg);
+        $("#auth-popup").modal("show");
+      }
+    },
+    bottomVisible: function() {
+      const scrollY = window.scrollY;
+      const visible = document.documentElement.clientHeight;
+      const pageHeight = document.documentElement.scrollHeight;
+      const bottomOfPage = visible + scrollY >= pageHeight;
+      return bottomOfPage || pageHeight < visible;
+    },
+    addProductOrRequest: function() {
+      if (this.currentUser.user_info) {
+        if (this.currentUser.user_info.is_seller) {
+          this.registerComponentStatistics(
+            "product-list",
+            "register-product",
+            "seller clicks on plus button"
+          );
+
+          this.$router.push({ name: "registerProductSeller" });
+        } else if (this.currentUser.user_info.is_buyer) {
+          this.registerComponentStatistics(
+            "product-list",
+            "register-request",
+            "seller clicks on plus button"
+          );
+
+          this.$router.push({ name: "registerProductSeller" });
+        }
+      } else {
+        this.registerComponentStatistics(
+          "product-list",
+          "unauthorized-user-clicks-on-plus-btn",
+          "unauthorized-user-clicks-on-plus-btn"
+        );
+
+        this.popUpMsg =
+          "برای ثبت آگهی خرید یا فروش  ابتدا وارد سامانه شوید یا ثبت نام کنید.";
+        eventBus.$emit("submitSuccess", this.popUpMsg);
+        $("#auth-popup").modal("show");
+      }
+    },
+    resetFilter: function() {
+      eventBus.$emit("submiting", true);
+
+      $(".box-sidebar option").prop("selected", function() {
+        return this.defaultSelected;
+      });
+
+      this.searchText = "";
+      this.provinceId = "";
+      this.categoryId = "";
+      this.subCategoryId = "";
+      this.cityId = "";
+
+      this.applyFilter();
+    },
+    applyFilter: function() {
+      var self = this;
+
+      eventBus.$emit("submiting", true);
+
+      self.fromProductCount = 0;
+      self.productCountInPage = 10;
+
+      var searchObject = {};
+
+      if (self.$parent.productByResponseRate) {
+        searchObject.response_rate = self.$parent.productByResponseRate;
+      }
+      if (this.categoryId) {
+        searchObject.category_id = this.categoryId;
+      }
+      if (this.subCategoryId) {
+        searchObject.sub_category_id = this.subCategoryId;
+      }
+      if (this.provinceId) {
+        searchObject.province_id = this.provinceId;
+      }
+      if (this.cityId) {
+        searchObject.city_id = this.cityId;
+      }
+      if (this.searchText) {
+        this.$router.replace({
+          name: "productList",
+          query: {
+            s: this.searchText.replace(/ /g, "+")
+          }
+        });
+        searchObject.search_text = this.searchText;
+      }
+
+      if (jQuery.isEmptyObject(searchObject)) {
+        if (this.searchText == "") {
+          this.$router.push({
+            name: "productList"
+          });
+        }
+      }
+
+      searchObject.from_record_number = self.fromProductCount;
+      searchObject.to_record_number = self.productCountInPage;
+
+      axios
+        .post("/user/get_product_list", searchObject)
+        .then(function(response) {
+          self.products = response.data.products;
+          eventBus.$emit("submiting", false);
+          self.scrollToTop();
+        })
+        .catch(function(err) {
+          alert("خطایی رخ داده است. دوباره تلاش کنید.");
+        });
+    },
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    },
+    stopLoader: function() {
+      eventBus.$emit("isLoading", false);
+    },
+    registerComponentStatistics: function(categoryName, actionName, labelName) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName
+      });
+    },
+    registerComponentExceptions: function(description, fatal = false) {
+      gtag("event", "exception", {
+        description: description,
+        fatal: fatal
+      });
+    },
+    infiniteScrollHandler: function() {
+      let lastOffset = 0;
+
+      window.onscroll = () => {
+        if (window.location.pathname.includes("product-list")) {
+          var bottom =
+            document.documentElement.scrollTop + window.innerHeight >
+            document.documentElement.offsetHeight -
+              document.documentElement.scrollTop / 2;
+
+          let newOffset = document.documentElement.offsetHeight;
+
+          if (bottom) {
+            if (newOffset > lastOffset + 100) {
+              lastOffset = document.documentElement.offsetHeight;
+              this.feed();
+            }
+          }
+        }
+      };
+    },
+    sidebarScroll() {
+      var $sticky = $(".sticky");
+      var stickyrStopper = $("#wrap-footer");
+      var lastScrollTop = 0;
+
+      var sidebarStopper = $("#wrap-footer").height();
+
+      var sidebar = new StickySidebar("#sidebar", {
+        containerSelector: "#article-list",
+        innerWrapperSelector: ".sidebar__inner",
+        topSpacing: 122,
+        resizeSensor: true
+      });
+
+      var documentHeight = $(document).height();
+      var wHeight = $(window).height();
+      var generalSidebarHeight = $sticky.innerHeight();
+      var stickyTop = 162;
+      var stickOffset = 0;
+      var stickPositionToContent = 115;
+      var stickyStopperPosition = stickyrStopper.offset().top;
+      var stopPoint =
+        documentHeight - (wHeight + stickyrStopper.innerHeight() + 130);
+      var differences =
+        stickyStopperPosition -
+        stickPositionToContent -
+        (generalSidebarHeight - stickOffset);
+      var diff = differences + stickOffset;
+      var sidebarHeightToTop = generalSidebarHeight + stickyTop;
+
+      if (generalSidebarHeight > wHeight) {
+        if (wHeight < sidebarHeightToTop) {
+          $(window).scroll(function() {
+            // scroll event
+            var windowTop = $(window).scrollTop(); // returns number
+
+            if (windowTop > lastScrollTop) {
+              if (dynamicScroll + generalSidebarHeight < windowTop + wHeight) {
+                if (stopPoint + 13 < windowTop) {
+                  $sticky.css({
+                    position: "absolute",
+                    top: diff,
+                    right: "0"
+                  });
+                } else if (windowTop + wHeight > sidebarHeightToTop) {
+                  $sticky.css({
+                    position: "fixed",
+                    bottom: stickOffset,
+                    top: "initial",
+                    right: "0"
+                  });
+                } else {
+                  $sticky.css({
+                    position: "absolute",
+                    top: "initial",
+                    right: "0",
+                    bottom: "initial"
+                  });
+                }
+              } else {
+                if (stopPoint < windowTop) {
+                  $sticky.css({
+                    position: "absolute",
+                    top: diff,
+                    right: "0"
+                  });
+                } else {
+                  $sticky.css({
+                    position: "absolute",
+                    top: dynamicScroll + stickOffset,
+                    right: "0",
+                    bottom: "initial"
+                  });
+                }
+              }
+
+              dynamicScroll = $sticky.offset().top;
+            } else {
+              if (dynamicScroll - stickyTop < windowTop) {
+                $sticky.css({
+                  position: "absolute",
+                  top: dynamicScroll + "px",
+                  right: "0",
+                  bottom: "initial"
+                });
+              } else {
+                $sticky.css({
+                  position: "fixed",
+                  bottom: "initial",
+                  top: stickyTop,
+                  right: "0"
+                });
+              }
+            }
+            dynamicScroll = $sticky.offset().top;
+
+            lastScrollTop = windowTop;
+          });
+        } else {
+          $(window).scroll(function() {
+            // scroll event
+            var windowTop = $(window).scrollTop(); // returns number
+            if (windowTop < lastScrollTop) {
+              if (stopPoint < windowTop) {
+                $sticky.css({
+                  position: "absolute",
+                  top: diff,
+                  right: "0"
+                });
+              } else {
+                $sticky.css({
+                  position: "fixed",
+                  bottom: "initial",
+                  top: stickyTop,
+                  right: "0"
+                });
+              }
+            }
+            lastScrollTop = windowTop;
+          });
+        } //end all if
+      } else {
+        $(window).scroll(function() {
+          // scroll event
+          var windowTop = $(window).scrollTop(); // returns number'
+          var getHeightFooter =
+            documentHeight -
+            (stickyrStopper.innerHeight() +
+              stickPositionToContent +
+              stickyTop +
+              generalSidebarHeight);
+          if (getHeightFooter < windowTop) {
+            $sticky.css({
+              position: "absolute",
+              top: diff,
+              right: "0"
+            });
+          } else {
+            $sticky.css({
+              position: "fixed",
+              bottom: "initial",
+              top: stickyTop,
+              right: "0"
+            });
+          }
+        });
+      }
+    }
+  },
+  watch: {
+    searchText: function(value) {
+      var self = this;
+
+      eventBus.$emit("textSearch", value);
+
+      clearTimeout(this.searchTextTimeout);
+
+      this.searchTextTimeout = setTimeout(function() {
+        self.registerComponentStatistics(
+          "product-list",
+          "search-text",
+          self.searchText
+        );
+
+        self.applyFilter();
+      }, 1500);
+    },
+    $route: function() {
+      if (this.$route.query.s) {
+        this.searchText = this.$route.query.s.split("+").join(" ");
+      }
+    },
+    "$parent.productByResponseRate": function() {
+      this.products = {};
+
+      this.infiniteScrollHandler();
+
+      if (this.searchText) {
+        this.applyFilter();
+      } else {
+        this.init();
+      }
+    },
+    bottom(bottom) {
+      if (bottom) {
+        //this.feed()
+      }
+    }
+  },
+  created() {
+    gtag("config", "UA-129398000-1", { page_path: "/product-list" });
+    eventBus.$on("textSearch", event => {
+      this.searchText = event;
+    });
+
+    // document.addEventListener('click', this.documentClick);
+  },
+  mounted() {
+    let self = this;
+
+    this.scrollToTop();
+
+    this.infiniteScrollHandler();
+    console.log("allProducts======>>>>", self.allProducts);
+    if (self.allProducts && self.allProducts.length)
+      self.products = [...self.allProducts];
+    else this.init(); //.then(loading=>{
+    //              if(!loading){
+    //                   let scrollPosition=(localStorage.getItem('scroll'))||{x:0,y:0};
+    //                   window.scrollTo(0,scrollPosition);
+    //                   localStorage.removeItem('scroll')
+    //                   }
+    //            });
+    this.stopLoader();
+  },
+  metaInfo() {
+    return {
+      title: "لیست محصولات و قیمت عمده محصولات کشاورزی",
+      titleTemplate: "اینکوباک | %s",
+      meta: [
+        {
+          name: "description",
+          content:
+            "خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار"
+        },
+        {
+          name: "author",
+          content: "اینکوباک"
+        },
+        {
+          property: "og:description",
+          content:
+            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی"
+        },
+        {
+          property: "og:site_name",
+          content: "اینکوباک بازارآنلاین خرید و فروش محصولات کشاورزی ایران"
+        },
+        {
+          property: "og:title",
+          content: "اینکوباک | لیست محصولات و قیمت محصولات کشاورزی"
+        }
+      ]
+    };
+  }
+};
 </script>
