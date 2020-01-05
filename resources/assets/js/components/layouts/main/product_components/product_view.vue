@@ -150,11 +150,7 @@
                 <section class="main-content">
                     <div class="row">
                         <ProductContents/>
-                        <div class="buttons-wrapper  hidden-xs  hidden-sm hidden-md">
-                            <router-link :to="{name : 'productList'}" class="green-button blue-button">
-                                مشاهده همه محصولات
-                            </router-link>
-                        </div>
+
                     </div>
                 </section>
 
@@ -173,7 +169,7 @@
 
 
 
-        <!-- <section v-show="relatedProducts.length > 0" id="product-section" class="section-wrapper container-fluid"> -->
+
         <section v-if="relatedProducts.length > 0" id="product-section" class="section-wrapper container-fluid">
             <div class=" container">
                 <div class="row">
@@ -218,7 +214,7 @@
             </div>
         </section>
 
-          <section v-show="!relatedProducts" id="product-section" class="section-wrapper container-fluid">
+          <section v-show="!relatedProducts"  class="section-wrapper container-fluid">
                     <div class=" container">
                         <div class="row">
                             <div class=" col-xs-12 ">
@@ -265,6 +261,11 @@
                     </div>
                 </section>
 
+            <div class="buttons-wrapper  hidden-xs  hidden-sm hidden-md">
+                <router-link :to="{name : 'productList'}" class="green-button blue-button">
+                    مشاهده همه محصولات
+                </router-link>
+            </div>
 
 
 
@@ -366,7 +367,7 @@
                 var self = this;
                 if (this.currentUser.user_info) {
                     if (this.currentUser.user_info.id !== product.user_info.id) {
-                        eventBus.$emit('ChatInfo',contact); 
+                        eventBus.$emit('ChatInfo',contact);
                     }
                     else {
                         this.popUpMsg = 'شما نمیتوانید به خودتان پیام دهید.';
@@ -377,7 +378,7 @@
                 else {
                     window.localStorage.setItem('contact',JSON.stringify(contact));
                     window.localStorage.setItem('pathname',window.location.pathname);
-                    
+
                     this.popUpMsg = 'اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
                     eventBus.$emit('submitSuccess', this.popUpMsg);
                     $('#auth-popup').modal('show');

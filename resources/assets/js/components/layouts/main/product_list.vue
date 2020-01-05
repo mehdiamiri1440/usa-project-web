@@ -597,7 +597,7 @@ li.active a::after {
             <i class="fa fa-filter"></i>
           </button>
         </div>
-        <div class="response-rate-filter-mobile-wrapper"> 
+        <div class="response-rate-filter-mobile-wrapper">
           <div class="response-rate-filter">
 
                 <div class="checkbox checkbox-slider--b-flat">
@@ -625,8 +625,8 @@ li.active a::after {
         <div class="row">
 
           <section class="hidden-xs  col-xs-12">
-            
-          
+
+
               <div class="response-rate-filter-desktop-wrapper">
 
                 <div class="checkbox checkbox-slider--b-flat">
@@ -637,7 +637,7 @@ li.active a::after {
                 </div>
 
               </div>
-           
+
 
           </section>
 
@@ -810,7 +810,7 @@ li.active a::after {
     import ProductArticle from './product_components/product_article'
     import ProductAsideCategories from './product_components/sidebar/product_aside_categories'
     import {eventBus} from "../../../router/router";
-  
+
 
 
     var visible = false;
@@ -886,12 +886,12 @@ li.active a::after {
                 var self = this;
                 this.scrollToTop();
                 if(this.$route.query.s){
-                     var searchValue = this.$route.query.s.split('+').join(' ')  
+                     var searchValue = this.$route.query.s.split('+').join(' ')
                 }
                 else{
                     var searchValue = '';
                 }
-                
+
                 var searchValueText = searchValue;
 
                 axios.post('/user/profile_info')
@@ -947,7 +947,7 @@ li.active a::after {
                       if(self.products && self.products.length){
                           self.products = self.products.concat([...response.data.products]);
                       }
-//                      localStorage.productCountInPage=JSON.stringify(self.productCountInPage) 
+//                      localStorage.productCountInPage=JSON.stringify(self.productCountInPage)
                         eventBus.$emit('submiting', false);
                         if (self.products.length + 1 < self.productCountInPage) {
                             self.continueToLoadProducts = false;
@@ -966,7 +966,7 @@ li.active a::after {
                     var searchObject = {};
 
                     if(self.$parent.productByResponseRate){
-                        searchObject.response_rate = self.$parent.productByResponseRate;   
+                        searchObject.response_rate = self.$parent.productByResponseRate;
                     }
                     if (this.categoryId) {
                         searchObject.category_id = this.categoryId;
@@ -989,7 +989,7 @@ li.active a::after {
                         });
                         searchObject.search_text = this.searchText;
                     }
-                    
+
 
                     if (jQuery.isEmptyObject(searchObject)) {
                         if(this.searchText == ""){
@@ -1008,7 +1008,7 @@ li.active a::after {
                         self.products = self.products.concat(response.data.products);
 
                         self.loadMoreActive = false;
-                        
+
                         setTimeout(function(){
                             self.sidebarScroll();
                         },500);
@@ -1085,7 +1085,7 @@ li.active a::after {
             },
             applyFilter: function () {
                 var self = this;
-  
+
                 eventBus.$emit('submiting', true);
 
                 self.fromProductCount = 0;
@@ -1094,7 +1094,7 @@ li.active a::after {
                 var searchObject = {};
 
                 if(self.$parent.productByResponseRate){
-                    searchObject.response_rate = self.$parent.productByResponseRate;   
+                    searchObject.response_rate = self.$parent.productByResponseRate;
                 }
                 if (this.categoryId) {
                     searchObject.category_id = this.categoryId;
@@ -1117,7 +1117,7 @@ li.active a::after {
                     });
                     searchObject.search_text = this.searchText;
                 }
-                
+
 
                 if (jQuery.isEmptyObject(searchObject)) {
                     if(this.searchText == ""){
@@ -1161,7 +1161,7 @@ li.active a::after {
             },
             infiniteScrollHandler:function(){
                 let lastOffset = 0;
-                
+
                 window.onscroll = () => {
 
                 var bottom = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - (document.documentElement.scrollTop / 2);
@@ -1171,7 +1171,6 @@ li.active a::after {
                 if(bottom){
                     if(newOffset > lastOffset + 100){
                             lastOffset = document.documentElement.offsetHeight;
-                            console.log('Triggered');
                             this.feed();
                         }
 
@@ -1352,9 +1351,9 @@ li.active a::after {
             searchText: function (value) {
 
                 var self = this;
-                
+
                 eventBus.$emit('textSearch',value);
-        
+
                 clearTimeout(this.searchTextTimeout);
 
                 this.searchTextTimeout = setTimeout(function () {
@@ -1365,24 +1364,24 @@ li.active a::after {
 
             },
             '$route':function(){
-                
+
                 if(this.$route.query.s){
                     this.searchText = this.$route.query.s.split('+').join(' ');
-                } 
+                }
             },
             '$parent.productByResponseRate':function(){
                 this.products = {};
-                
+
                 this.infiniteScrollHandler();
 
                 if (this.searchText) {
-                  
+
                   this.applyFilter();
-                  
+
                 }else{
-                  
+
                   this.init();
-                  
+
                 }
 
             },
@@ -1399,10 +1398,10 @@ li.active a::after {
             });
 
             // document.addEventListener('click', this.documentClick);
-        }, 
+        },
         mounted() {
             let self=this;
-          
+
             this.scrollToTop();
 
             this.infiniteScrollHandler();
