@@ -216,7 +216,7 @@
         border: none;
 
         border-radius: 35px;
-        
+
         padding: 0 10px;
     }
 
