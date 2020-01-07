@@ -747,7 +747,7 @@
                                             </router-link>
 
                                             <router-link :to="{name : 'profileBasicBuyer'}" class="green-button edit"
-                                                         v-if="currentUser.user_info.is_seller == 0 ">
+                                                         v-else-if="currentUser.user_info.is_seller == 0 ">
 
                                                 <i class="fa fa-pencil-alt"></i>
                                                 ویرایش پروفایل
@@ -831,11 +831,10 @@
                                         </div>
                                         <div v-else>
 
-                                            <div v-if="currentUser.user_info">
+                                            <div v-if="currentUser.user_info && currentUser.user_info.id === profileOwner.user_info.id ">
                                                 <router-link :to="{name : 'profileBasicSeller'}"
-                                                             @click="registerComponentStatistics('profileView','editProfile','click on edit profile')"
                                                              class="green-button edit"
-                                                             v-if="currentUser.user_info.id === profileOwner.user_info.id && currentUser.user_info.is_seller == 1 ">
+                                                             v-if=" currentUser.user_info.is_seller == 1 ">
 
                                                     <i class="fa fa-pencil-alt"></i>
                                                     ویرایش پروفایل
@@ -843,8 +842,7 @@
 
                                                 <router-link :to="{name : 'profileBasicBuyer'}"
                                                              class="green-button edit"
-                                                             @click="registerComponentStatistics('profileView','editProfile','click on edit profile')"
-                                                             v-if="currentUser.user_info.id === profileOwner.user_info.id && currentUser.user_info.is_seller == 0 ">
+                                                             v-else-if="currentUser.user_info.is_seller == 0 ">
 
                                                     <i class="fa fa-pencil-alt"></i>
                                                     ویرایش پروفایل
@@ -858,8 +856,6 @@
                                             </a>
 
                                         </div>
-
-
 
 
                                         <div v-if="!profileOwner.user_info.id">
@@ -1084,7 +1080,7 @@
                         </ul>
                     </div>
                     <div class="contents col-xs-12" v-if="profileDescription === true">
-                        <div  class="des col-xs-12">
+                        <div class="des col-xs-12">
                             <p class="title-content">
                                 توضیحات
                             </p>
@@ -1095,14 +1091,12 @@
                             <div v-else>
                             <span class="content-default-width
  placeholder-content margin-15 h-20"></span>
-                            <span class="content-half-width
+                                <span class="content-half-width
  placeholder-content margin-0-15 h-20"></span>
-                            <span class="content-full-width
+                                <span class="content-full-width
  placeholder-content margin-15"></span>
                             </div>
                         </div>
-
-
 
 
                         <div class="cerificates col-xs-12">
@@ -1192,17 +1186,18 @@
                                 />
                             </div> -->
 
-                             <div class="col-xs-12 pull-right" :key="productIndex" v-for="(product,productIndex) in products">
+                            <div class="col-xs-12 pull-right" :key="productIndex"
+                                 v-for="(product,productIndex) in products">
                                 <ProductArticle
-                                :productIndex="productIndex"
-                                v-if="products.length >= productIndex"
-                                :key="product.main.id"
-                                :product="product"
-                                :loading_img="loading_img"
-                                :defultimg="defultimg"
-                                :str="str"
-                                :loading="loading"
-                                :currentUser="currentUser"
+                                        :productIndex="productIndex"
+                                        v-if="products.length >= productIndex"
+                                        :key="product.main.id"
+                                        :product="product"
+                                        :loading_img="loading_img"
+                                        :defultimg="defultimg"
+                                        :str="str"
+                                        :loading="loading"
+                                        :currentUser="currentUser"
                                 />
                             </div>
                         </div>
