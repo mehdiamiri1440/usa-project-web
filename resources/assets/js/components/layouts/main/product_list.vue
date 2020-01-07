@@ -929,6 +929,7 @@ export default {
           .then(function(response) {
             if (self.products && self.products.length) {
               self.products = self.products.concat([...response.data.products]);
+              self.fetchProductsList(self.products);
             }
             //                      localStorage.productCountInPage=JSON.stringify(self.productCountInPage)
             eventBus.$emit("submiting", false);
@@ -987,7 +988,7 @@ export default {
           .post("/user/get_product_list", searchObject)
           .then(function(response) {
             self.products = self.products.concat(response.data.products);
-
+            self.fetchProductsList(self.products);
             self.loadMoreActive = false;
 
             setTimeout(function() {
@@ -1368,16 +1369,9 @@ export default {
     this.scrollToTop();
 
     this.infiniteScrollHandler();
-    console.log("allProducts======>>>>", self.allProducts);
     if (self.allProducts && self.allProducts.length)
       self.products = [...self.allProducts];
-    else this.init(); //.then(loading=>{
-    //              if(!loading){
-    //                   let scrollPosition=(localStorage.getItem('scroll'))||{x:0,y:0};
-    //                   window.scrollTo(0,scrollPosition);
-    //                   localStorage.removeItem('scroll')
-    //                   }
-    //            });
+    else this.init();
     this.stopLoader();
   },
   metaInfo() {
