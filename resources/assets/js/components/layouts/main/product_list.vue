@@ -1379,7 +1379,7 @@ li.active a::after {
                   this.applyFilter();
 
                 }else{
-
+// comment for test
                   this.init();
 
                 }
