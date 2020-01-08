@@ -480,7 +480,7 @@
                 var self = this;
 
                 if (window.history.state) {
-                    history.pushState(null, null,window.location.pathname);
+                    history.pushState(null, null,window.location);
                 }
 
                 $(window).on('popstate', function (e) {
@@ -528,6 +528,7 @@
                 this.contactInfo = $event;
                 this.chatMessages = "";
                 this.openChatBox = true;
+                this.msgToSend = "";
                 this.setUpChat();
             });
         },
