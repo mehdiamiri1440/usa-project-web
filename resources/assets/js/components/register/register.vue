@@ -1149,11 +1149,11 @@
             redirectUserToPanel:function(userInfo){
                 if(userInfo.is_seller == true){
                     localStorage.setItem("showSnapShot", true);
-                    window.location.href = '/seller/register-product';
+                    window.location.href = "/seller/register-product";
                 }
                 else if(userInfo.is_buyer == true){
                     localStorage.setItem("showSnapShot", true);
-                    window.location.href = '/buyer/register-buyAd';
+                    window.location.href = "/buyer/register-request";
                 }
             }   
         },
