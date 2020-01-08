@@ -562,7 +562,7 @@ import { eventBus } from "../../../../../router/router";
 export default {
   data: function() {
     return {
-      messageCount: 0,
+      messageCount: "",
     };
   },
   props: [
@@ -608,6 +608,9 @@ export default {
       .post("/get_total_unread_messages_for_current_user")
       .then(function(response) {
         self.messageCount = response.data.msg_count;
+          if (self.messageCount >= 100) {
+              self.messageCount = "+99"
+          }
       })
       .catch(function(error) {
         console.log("error", error);
