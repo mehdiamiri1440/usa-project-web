@@ -597,11 +597,7 @@ li.active a::after {
             <i class="fa fa-filter"></i>
           </button>
         </div>
-<<<<<<< HEAD
-        <div class="response-rate-filter-mobile-wrapper"> 
-=======
         <div class="response-rate-filter-mobile-wrapper">
->>>>>>> cd032abbc6550d02087dd5d816a494d05cd6db36
           <div class="response-rate-filter">
 
                 <div class="checkbox checkbox-slider--b-flat">
@@ -629,13 +625,8 @@ li.active a::after {
         <div class="row">
 
           <section class="hidden-xs  col-xs-12">
-<<<<<<< HEAD
-            
-          
-=======
 
 
->>>>>>> cd032abbc6550d02087dd5d816a494d05cd6db36
               <div class="response-rate-filter-desktop-wrapper">
 
                 <div class="checkbox checkbox-slider--b-flat">
@@ -646,11 +637,6 @@ li.active a::after {
                 </div>
 
               </div>
-<<<<<<< HEAD
-           
-=======
-
->>>>>>> cd032abbc6550d02087dd5d816a494d05cd6db36
 
           </section>
 
@@ -1389,6 +1375,7 @@ li.active a::after {
                   this.applyFilter();
                   
                 }else{
+// comment for test
                   this.init();
                 }
             },
