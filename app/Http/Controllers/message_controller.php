@@ -300,15 +300,47 @@ class message_controller extends Controller
             $black_list_users = daily_sms_blacklist::all();
 
             $user_info = $users_info->filter(function ($user) use ($black_list_users) {
+                $black_list_insertion_date_time = null;
+
                 $is_user_in_black_list = $black_list_users
-                    ->filter(function ($black_list_user) use ($user) {
-                        return $user->user_id == $black_list_user->myuser_id;
+                    ->filter(function ($black_list_user) use ($user,&$black_list_insertion_date_time) {
+                        if ($user->user_id == $black_list_user->myuser_id) {
+                            $black_list_insertion_date_time = $black_list_user->updated_at;
+
+                            return true;
+                        } else {
+                            return false;
+                        }
                     })->count() > 0;
 
-                return !$is_user_in_black_list;
+                if ($is_user_in_black_list) {
+                    $last_unread_msg_date_time = $this->get_user_last_unread_msg_date_time($user->user_id);
+
+                    if ($last_unread_msg_date_time) {
+                        return $last_unread_msg_date_time > $black_list_insertion_date_time;
+                    } else {
+                        return true;
+                    }
+                } else {
+                    return true;
+                }
             });
 
             return $user_info;
+        }
+    }
+
+    protected function get_user_last_unread_msg_date_time($user_id)
+    {
+        $last_unread_message_recored = message::where('receiver_id', $user_id)
+                                                ->where('is_read', false)
+                                                ->orderBy('created_at')
+                                                ->get()
+                                                ->last();
+        if ($last_unread_message_recored) {
+            return $last_unread_message_recored->created_at;
+        } else {
+            return null;
         }
     }
 
@@ -317,18 +349,41 @@ class message_controller extends Controller
         if ($user_list->count() > 0) {
             $user_list_array = $this->get_user_id_array_from_user_list_collection($user_list);
 
-            DB::table('daily_sms_blacklists')
+            if (count($user_list_array) > 0) {
+                DB::table('daily_sms_blacklists')
                     ->insert($user_list_array);
+            }
         }
     }
 
-    protected function get_user_id_array_from_user_list_collection(&$user_list)
+    protected function get_user_id_array_from_user_list_collection(&$user_list, $with_time_stamps = true)
     {
         $user_array = [];
 
-        $user_list->each(function ($user) use (&$user_array) {
-            $user_array[] = ['myuser_id' => $user->user_id];
-        });
+        if ($with_time_stamps) {
+            $now = Carbon::now();
+
+            foreach ($user_list as $user) {
+                $user_black_list_record = daily_sms_blacklist::where('myuser_id', $user->user_id)
+                                                ->get()
+                                                ->last();
+
+                if ($user_black_list_record) {
+                    $user_black_list_record->updated_at = $now;
+                    $user_black_list_record->save();
+                } else {
+                    $user_array[] = [
+                        'myuser_id' => $user->user_id,
+                        'created_at' => $now,
+                        'updated_at' => $now,
+                    ];
+                }
+            }
+        } else {
+            $user_list->each(function ($user) use (&$user_array) {
+                $user_array[] = ['myuser_id' => $user->user_id];
+            });
+        }
 
         return $user_array;
     }
