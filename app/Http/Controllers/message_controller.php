@@ -163,7 +163,7 @@ class message_controller extends Controller
                 ['sender_id', '=', $user_id],
                 ['receiver_id', '=', $contact_id],
             ])->get();
-
+            
         $unread_msgs = [];
 
         $msgs->each(function ($msg) use (&$unread_msgs,$contact_id) {
@@ -177,8 +177,7 @@ class message_controller extends Controller
         $last_msg_time_date = null;
 
         if ($msgs->count() > 0) {
-            $last_msg_time_date = $msgs->last()
-                ->created_at
+            $last_msg_time_date = $msgs->max('created_at')
                 ->format('Y-m-d H:i:s');
         }
         //get the last msg time here in order to arrange contact list(regardless of read or not)

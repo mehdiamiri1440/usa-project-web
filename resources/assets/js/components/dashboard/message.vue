@@ -24,7 +24,9 @@
   width: 60px;
   margin: 18px auto;
 }
-
+.clock-icon{
+  font-size:14px;
+}
 .check-items {
   padding-left: 10px;
   color: #00a65a;
@@ -614,12 +616,18 @@
               <div :class="[msg.sender_id == currentUserId ? 'message-send' : 'message-receive']">
                 <span v-text="msg.text"></span>
                 <span class="message-chat-date">
-                  {{msg.created_at | moment("jYY/jMM/jDD, h:mm A") }}
+                  <span v-if="msg.created_at">
+                  {{ msg.created_at | moment("jYY/jMM/jDD, h:mm A") }}
+                  </span>
+                  <span v-else>
+                    {{Date() | moment("jYY/jMM/jDD, h:mm A")}}
+                  </span>
                   <span
                     class="check-items"
                     v-if="msg.sender_id === currentUserId"
                   >
-                    <i class="fa fa-check"></i>
+                    <i class="fa fa-check" v-if="msg.created_at"></i>
+                    <i class="far fa-clock" v-else></i>
                     <i class="fa fa-check" v-if="msg.is_read"></i>
                   </span>
                 </span>
@@ -746,6 +754,7 @@ export default {
     },
     loadChatHistory: function(contact, index) {
       var self = this;
+      self.handleBackBtnClickOnDevices();
       self.isChatMessagesLoaded = true;
       if (index !== -10) self.isFirstMessageLoading = true;
       self.selectedIndex = index;
@@ -792,23 +801,30 @@ export default {
     },
     sendMessage: function() {
       var self = this;
-      axios
-        .post("/messanger/send_message", {
-          sender_id: self.currentUserId,
-          receiver_id: self.currentContactUserId,
-          text: self.msgToSend
-        })
-        .then(function(response) {
-          self.msgToSend = "";
-          self.chatMessages.push(response.data.message);
 
-          self.scrollToEnd(0);
-          self.isFirstMessageLoading = false;
-          self.loadChatHistory(self.selectedContact, -10);
-        })
-        .catch(function(e) {
-          //
-        });
+      let tempMsg = self.msgToSend;
+      self.msgToSend = "";
+
+      if(tempMsg){
+          let msgObject = {
+            sender_id: self.currentUserId,
+            receiver_id: self.currentContactUserId,
+            text:tempMsg
+        }
+
+        self.chatMessages.push(msgObject);
+        self.scrollToEnd(0);
+
+        axios
+          .post("/messanger/send_message",msgObject)
+          .then(function(response) {
+            self.isFirstMessageLoading = false;
+            self.loadChatHistory(self.selectedContact, -10);
+          })
+          .catch(function(e) {
+            //
+          });
+      }
     },
     keepChatUpdated: function(contact) {
       var self = this;
@@ -870,6 +886,24 @@ export default {
         return false;
       }
     },
+    handleBackBtnClickOnDevices:function(){
+      var self = this;
+
+      if (window.history.state) {
+          history.pushState(null, null,window.location);
+      }
+
+      $(window).on('popstate', function (e) {
+          if(self.isDeviceMobile()){
+              if(window.location.pathname == '/seller/messages' || window.location.pathname == '/buyer/messages'){
+                if(self.selectedContact){
+                    self.selectedContact = "";
+                }
+            }
+          }
+          
+      });
+  },
     registerComponentStatistics: function(categoryName, actionName, labelName) {
       gtag("event", actionName, {
         event_category: categoryName,

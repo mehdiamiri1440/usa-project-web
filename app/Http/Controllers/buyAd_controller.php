@@ -13,6 +13,7 @@ use DB;
 use App\sell_offer;
 use App\buyAd_media;
 use Carbon\Carbon;
+use App\product_media;
 
 class buyAd_controller extends Controller
 {
@@ -83,6 +84,21 @@ class buyAd_controller extends Controller
         'myuser_id',
     ];
 
+    protected $related_products_fields = [
+        'product_name',
+        'stock',
+        'description',
+        'category_id',
+        'created_at',
+        'myuser_id'
+    ];
+
+    protected $words_blacklist = [
+        'در', 'به', 'را', 'از', 'و', 'برای', 'تا', 'که', 'بر', 'بی', 'مگر',
+    ];
+
+    protected $offered_products_count_after_buyAd_register = 6;
+
     protected $max_factorial_input_number = 10;
 
     public function __construct()
@@ -99,12 +115,12 @@ class buyAd_controller extends Controller
         $buyAd_object_or_failuire_message = $this->add_buyAd_to_DB($request);
 
         if (is_object($buyAd_object_or_failuire_message)) {
-            $most_related_product = $this->get_the_most_related_product_to_the_given_buyAd_if_any($buyAd_object_or_failuire_message);
+            $most_related_products = $this->get_the_most_related_products_to_the_given_buyAd_if_any($buyAd_object_or_failuire_message);
 
-            if ($most_related_product) {
+            if ($most_related_products) {
                 return response()->json([
                     'status' => true,
-                    'product' => $most_related_product,
+                    'products' => $most_related_products,
                 ], 201);
             } else {
                 return response()->json([
@@ -736,19 +752,32 @@ class buyAd_controller extends Controller
         ], 200);
     }
 
-    protected function get_the_most_related_product_to_the_given_buyAd_if_any(&$buyAd)
+    protected function get_the_most_related_products_to_the_given_buyAd_if_any(&$buyAd)
     {
-        $until_date = Carbon::now();
-        $from_date = Carbon::now()->subDays(14); // last 2 weeks
+        if($buyAd->name){
+            $until_date = Carbon::now();
+            $from_date = Carbon::now()->subDays(14); // last 2 weeks
+        }
+        else{
+            $until_date = Carbon::now()->subDays(14);
+            $from_date = Carbon::now()->subDays(28); // first 2 weeks of last month
+        }
+        
 
         $related_subcategory_products = product::where('category_id', $buyAd->category_id)
                                             ->where('confirmed', true)
                                             ->whereBetween('created_at', [$from_date, $until_date])
+                                            ->select($this->related_products_fields)
                                             ->orderBy('created_at')
                                             ->get();
 
         if ($related_subcategory_products) {
-            $the_most_related_product_record = $this->get_the_most_related_product_to_given_buyAd($buyAd, $related_subcategory_products);
+            if($buyAd->name){
+                $the_most_related_product_record = $this->get_the_most_related_products_to_given_buyAd($buyAd, $related_subcategory_products);
+            }
+            else{
+                $the_most_related_product_record = $this->get_the_most_related_products_to_given_buyAd($buyAd, $related_subcategory_products,$skip_filtering = true);
+            }
 
             return $the_most_related_product_record ? $the_most_related_product_record : null;
         } else {
@@ -756,61 +785,75 @@ class buyAd_controller extends Controller
         }
     }
 
-    protected function get_the_most_related_product_to_given_buyAd(&$buyAd, &$products)
+    protected function get_the_most_related_products_to_given_buyAd(&$buyAd, &$products,$skip_filtering = false)
     {
-        $most_related_record = null;
-        $max_mached_score = 0;
-
-        $buyAd_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $buyAd->name)))); //PHP is for professionals,not for kids
+        $most_related_records = null;
 
         $category_info = $this->get_category_and_subcategory_name($buyAd->category_id);
 
-        if (count($buyAd_name_array)) {
-            if ($buyAd_name_array[0] == $category_info['subcategory_name']) {
-                array_splice($buyAd_name_array, 0, 1);
-            }
-        }
+        if($skip_filtering == false){
+            $buyAd_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $buyAd->name)))); //PHP is for professionals,not for kids
 
-        $buyAd_name_array_count = count($buyAd_name_array);
-
-        foreach ($products as $product) {
-            $score = 0;
-
-            $product_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $product->product_name))));
-
-            foreach ($product_name_array as $word) {
-                $index = array_search($word, $buyAd_name_array); //$index will be false if the array doesn't contain the word
-                if ($index !== false) {//warning:don't change it to !=
-                    $score += $this->factorial($buyAd_name_array_count - $index);
+            if (count($buyAd_name_array)) {
+                if ($buyAd_name_array[0] == $category_info['subcategory_name']) {
+                    array_splice($buyAd_name_array, 0, 1);
                 }
             }
 
-            if ($score > 0) {
-                if ($product->min_sale_amount < $buyAd->requirement_amount) {
-                    ++$score;
-                } elseif ($product->min_sale_amount == $buyAd->requirement_amount) {
-                    $score += 2;
+            $buyAd_name_array = $this->remove_black_list_words($buyAd_name_array);
+
+            $buyAd_name_array_count = count($buyAd_name_array);
+
+            foreach ($products as $product) {
+                $score = 0;
+
+                $product_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $product->product_name))));
+
+                foreach ($product_name_array as $word) {
+                    $index = array_search($word, $buyAd_name_array); //$index will be false if the array doesn't contain the word
+                    if ($index !== false) {//warning:don't change it to !=
+                        $most_related_records[] = $product;
+                        break;
+                    }
                 }
-                if ($product->stock == $buyAd->requirement_amount) {
-                    $score += 3;
+
+                if(count($most_related_records) > $this->offered_products_count_after_buyAd_register){
+                    break;
                 }
             }
-
-            if ($score > $max_mached_score) {
-                $most_related_record = $product;
-                $max_mached_score = $score;
+        }
+        else{
+            foreach($products as $product){
+                $most_related_records[] = $product;
+                if(count($most_related_records) > $this->offered_products_count_after_buyAd_register){
+                    break;
+                }
+                
             }
         }
+        
 
-        if ($most_related_record) {
-            $this->append_category_info_to_product($most_related_record, $category_info);
-            $this->append_user_info_to_most_related_product_record($most_related_record, $buyAd); //append using reference
+        // if(count($most_related_records) > $this->offered_products_count_after_buyAd_register){
+        //     $most_related_records = array_slice($most_related_records,0,$this->offered_products_count_after_buyAd_register);
+        // }
+
+        if(count($most_related_records)){
+            $this->append_related_info_to_most_related_products($most_related_records);
         }
-
-        return $most_related_record;
+        
+        return $most_related_records;
     }
 
-    protected function append_user_info_to_most_related_product_record($product, $buyAd)
+    protected function append_related_info_to_most_related_products($products)
+    {
+        foreach($products as $product){
+            $this->append_category_info_to_product($product, $category_info);
+            $this->append_user_info_to_most_related_product_record($product, $buyAd); //append using reference
+            $this->append_related_media_to_most_related_product_record($product);
+        }
+    }
+
+    protected function append_user_info_to_most_related_product_record($product)
     {
         $product_owner_user_record = myuser::where('id', $product->myuser_id)
                                             ->select(['user_name', 'first_name', 'last_name'])
@@ -830,6 +873,27 @@ class buyAd_controller extends Controller
     {
         $product['category_name'] = $category_info['category_name'];
         $product['subcategory_name'] = $category_info['subcategory_name'];
+    }
+
+    protected function append_related_media_to_most_related_product_record($product)
+    {
+        $product['photo'] = product_media::where('product_id',$product->id)
+                                            ->select('file_path')
+                                            ->first();
+    }
+
+    protected function remove_black_list_words(&$words)
+    {
+        $result = [];
+
+        foreach ($words as $word) {
+            $index = array_search($word, $this->words_blacklist);
+            if ($index === false) {
+                $result[] = $word;
+            }
+        }
+
+        return $result;
     }
 
     private function factorial($number)

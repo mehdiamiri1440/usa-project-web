@@ -354,31 +354,21 @@
                         <div>
                         <p v-text="msg.text"></p>
                         <div class="message-info">
-                            <span class="time">
+                            <span class="time" v-if="msg.created_at">
                                     {{msg.created_at | moment("jYY/jMM/jDD, h:mm A") }} &nbsp
                             </span>
+                            <span v-else>
+                                {{Date() | moment("jYY/jMM/jDD, h:mm A")}}
+                            </span>
                             <span class="visited" v-if="msg.sender_id === currentUserId">
-                                <i class="fa fa-check"></i><i class="fa fa-check" v-if="msg.is_read"></i>
+                                <i class="fa fa-check" v-if="msg.created_at"></i>
+                                <i class="far fa-clock" v-else></i>
+                                <i class="fa fa-check" v-if="msg.is_read"></i>
                             </span>
 
                         </div>
                         </div>
                     </li>
-
-
-                <!-- <li class="resiver">
-                    <div>
-                        <p>
-                            سلام، بله در حال حاظر وجود دارد
-                        </p>
-                        <div class="message-info">
-                                    <span class="time">
-                                         98/09/27, 2:09 PM
-                                    </span>
-
-                        </div>
-                    </div>
-                </li> -->
 
             </ul>
 
@@ -460,21 +450,29 @@
             sendMessage: function() {
                 var self = this;
 
-                axios
-                    .post("/messanger/send_message", {
+                let tempMsg = self.msgToSend;
+                self.msgToSend = "";
+
+                if(tempMsg){
+                    let msgObject = {
                         sender_id: self.currentUserId,
                         receiver_id: self.currentContactUserId,
-                        text: self.msgToSend
-                    })
-                    .then(function(response) {
-                        self.msgToSend = "";
-                        self.chatMessages.push(response.data.message);
-                        self.isFirstMessageLoading = false;
-                        self.loadChatHistory(self.contactInfo,-10);
-                    })
-                    .catch(function(e) {
-                        //
-                    });
+                        text:tempMsg
+                    }
+
+                    self.chatMessages.push(msgObject);
+                    self.scrollToEnd(0);
+
+                    axios
+                        .post("/messanger/send_message",msgObject)
+                        .then(function(response) {
+                            self.isFirstMessageLoading = false;
+                            self.loadChatHistory(self.contactInfo,-10);
+                        })
+                        .catch(function(e) {
+                            //
+                        });
+                }
             },
             handleBackBtnClickOnDevices:function(){
                 var self = this;
