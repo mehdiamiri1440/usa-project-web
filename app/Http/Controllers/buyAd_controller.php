@@ -14,6 +14,7 @@ use App\sell_offer;
 use App\buyAd_media;
 use Carbon\Carbon;
 use App\product_media;
+use App\message;
 
 class buyAd_controller extends Controller
 {
@@ -85,6 +86,7 @@ class buyAd_controller extends Controller
     ];
 
     protected $related_products_fields = [
+        'id',
         'product_name',
         'stock',
         'description',
@@ -791,60 +793,93 @@ class buyAd_controller extends Controller
 
         $category_info = $this->get_category_and_subcategory_name($buyAd->category_id);
 
+        $avg_message_senders_count = $this->get_average_message_senders_count_to_sellers($buyAd->category_id,Carbon::now()->subMonths(1),Carbon::now());
+
+        $reserved_products = [];
+
         if($skip_filtering == false){
             $buyAd_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $buyAd->name)))); //PHP is for professionals,not for kids
 
-            if (count($buyAd_name_array)) {
-                if ($buyAd_name_array[0] == $category_info['subcategory_name']) {
-                    array_splice($buyAd_name_array, 0, 1);
-                }
-            }
+            $buyAd_name_array = $this->remove_subcategory_name_from_first_word_of_the_buyAd_name_array($buyAd_name_array,$category_info['subcategory_name']);
 
             $buyAd_name_array = $this->remove_black_list_words($buyAd_name_array);
 
             $buyAd_name_array_count = count($buyAd_name_array);
 
-            foreach ($products as $product) {
-                $score = 0;
-
-                $product_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $product->product_name))));
-
-                foreach ($product_name_array as $word) {
-                    $index = array_search($word, $buyAd_name_array); //$index will be false if the array doesn't contain the word
-                    if ($index !== false) {//warning:don't change it to !=
-                        $most_related_records[] = $product;
+            if($products){
+                foreach ($products as $product) {
+    
+                    $product_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $product->product_name))));
+    
+                    foreach ($product_name_array as $word) {
+                        $index = array_search($word, $buyAd_name_array); //$index will be false if the array doesn't contain the word
+                        if ($index !== false) {//warning:don't change it to !=
+                            $message_senders_to_product_owner_count = $this->get_user_message_senders_count($product->myuser_id);
+                            
+                            if($message_senders_to_product_owner_count > $avg_message_senders_count){
+                                $reserved_products[] = $product; 
+                            }
+                            else{
+                                $most_related_records[] = $product;
+                            }
+                            
+                            break;
+                        }
+                    }
+    
+                    if(count($most_related_records) > $this->offered_products_count_after_buyAd_register){
                         break;
                     }
-                }
-
-                if(count($most_related_records) > $this->offered_products_count_after_buyAd_register){
-                    break;
                 }
             }
         }
         else{
-            foreach($products as $product){
-                $most_related_records[] = $product;
-                if(count($most_related_records) > $this->offered_products_count_after_buyAd_register){
-                    break;
+            if($products){
+                foreach($products as $product){
+                    $message_senders_to_product_owner_count = $this->get_user_message_senders_count($product->myuser_id);
+
+                    if($message_senders_to_product_owner_count > $avg_message_senders_count){
+                        $reserved_products[] = $product; 
+                    }
+                    else{
+                        $most_related_records[] = $product;
+                    }
+
+                    if(count($most_related_records) > $this->offered_products_count_after_buyAd_register){
+                        break;
+                    }
                 }
-                
             }
         }
-        
 
-        // if(count($most_related_records) > $this->offered_products_count_after_buyAd_register){
-        //     $most_related_records = array_slice($most_related_records,0,$this->offered_products_count_after_buyAd_register);
-        // }
+        if(($product_shortage_count = $this->offered_products_count_after_buyAd_register - count($most_related_records)) > 0){
+            if($product_shortage_count <= count($reserved_products)){
+                $most_related_records = array_merge($most_related_records,array_slice($reserved_products,0,$product_shortage_count - 1));
+            }
+            else if(count($reserved_products)){
+                $most_related_records = array_merge($most_related_records,$reserved_products);
+            }
+        }
 
         if(count($most_related_records)){
-            $this->append_related_info_to_most_related_products($most_related_records);
+            $this->append_related_info_to_most_related_products($most_related_records,$buyAd,$category_info);
         }
         
         return $most_related_records;
     }
 
-    protected function append_related_info_to_most_related_products($products)
+    protected function remove_subcategory_name_from_first_word_of_the_buyAd_name_array($buyAd_name_array,$subcategory_name)
+    {
+        if (count($buyAd_name_array)) {
+            if ($buyAd_name_array[0] == $subcategory_name) {
+                array_splice($buyAd_name_array, 0, 1);
+            }
+        }
+
+        return $buyAd_name_array;
+    }
+
+    protected function append_related_info_to_most_related_products($products,$buyAd,$category_info)
     {
         foreach($products as $product){
             $this->append_category_info_to_product($product, $category_info);
@@ -879,7 +914,25 @@ class buyAd_controller extends Controller
     {
         $product['photo'] = product_media::where('product_id',$product->id)
                                             ->select('file_path')
-                                            ->first();
+                                            ->first()
+                                            ->file_path;
+    }
+
+    protected function get_average_message_senders_count_to_sellers($subcategory_id,$from_date,$until_date)
+    {
+        $product_owners_in_category = product::where('category_id',$subcategory_id)
+                                                ->select('myuser_id')
+                                                ->distinct()
+                                                ->get();
+        
+        $temp = message::whereIn('receiver_id',$product_owners_in_category)
+                            ->whereBetween('created_at',[$from_date,$until_date])
+                            ->select(DB::raw("receiver_id,count(distinct(sender_id)) as cnt"))
+                            ->groupBy('receiver_id')
+                            ->get();
+
+        return (integer) $temp->avg('cnt');
+
     }
 
     protected function remove_black_list_words(&$words)
@@ -896,18 +949,14 @@ class buyAd_controller extends Controller
         return $result;
     }
 
-    private function factorial($number)
+    protected function get_user_message_senders_count($user_id)
     {
-        if ($number > $this->max_factorial_input_number) {
-            return 1;
-        }
-
-        $factorial = 1;
-        for ($i = 1; $i < $number; ++$i) {
-            $factorial = $factorial * $i;
-        }
-
-        return $factorial;
+        $msg_senders_count = message::where('receiver_id',$user_id)
+                                        ->select('sender_id')
+                                        ->distinct()
+                                        ->get()
+                                        ->count();
+        return $msg_senders_count;
     }
 
     //public method

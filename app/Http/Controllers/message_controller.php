@@ -177,11 +177,13 @@ class message_controller extends Controller
         $last_msg_time_date = null;
 
         if ($msgs->count() > 0) {
+            $last_msg_record = $msgs->sortBy('created_at')->last();
             $last_msg_time_date = $msgs->max('created_at')
                 ->format('Y-m-d H:i:s');
         }
         //get the last msg time here in order to arrange contact list(regardless of read or not)
         return [
+            'last_msg_text' => $last_msg_record->text, 
             'unread_msgs_count' => $unread_msgs_count,
             'last_msg_time_date' => $last_msg_time_date,
         ];

@@ -197,7 +197,23 @@
 
   padding-right: 15px;
   width: calc(100% - 95px);
-  padding-top: 16px;
+  padding-top: 6px;
+  font-weight: bold;
+}
+
+.contact-body .contact-item span.contact-last-message {
+  float: right;
+
+  padding-right: 15px;
+  width: calc(100% - 95px);
+  padding-top: 10px;
+
+  font-weight: lighter;
+  font-size: 12px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .contact-body .contact-item .contact-date {
@@ -206,6 +222,24 @@
   width: 50px;
   direction: ltr;
   text-align: center;
+}
+
+.contact-body .contact-item .my-contact-date {
+  float: left;
+  padding-top: 3px;
+  width: 50px;
+  direction: ltr;
+  text-align: center;
+}
+
+.last-message-date{
+  display: inline-block;
+  height: 17px;
+
+  width: 100px;
+
+  font-size: 10px;
+  line-height: 2;
 }
 
 .count-number {
@@ -563,6 +597,12 @@
                     <img v-else :src="defimgitem" />
                   </div>
                   <span class="contact-name" v-text="contact.first_name + ' ' + contact.last_name"></span>
+                  <div class="my-contact-date">
+                    <p
+                      class="last-message-date"
+                    >{{contact.last_msg_time_date | moment("jYY/jMM/jDD")}}</p>
+                  </div>
+                  <span class="contact-last-message" v-text="contact.last_msg.last_msg_text"></span>
                   <div class="contact-date">
                     <p
                       class="count-number"
