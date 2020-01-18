@@ -7,9 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-
 use App\Http\Controllers\message_controller;
-use App\Jobs\sendSMS;
 
 class sendNewMessageSMSNotification implements ShouldQueue
 {
@@ -17,29 +15,25 @@ class sendNewMessageSMSNotification implements ShouldQueue
 
     /**
      * Create a new job instance.
-     *
-     * @return void
      */
     public function __construct()
     {
-        //
     }
 
     /**
      * Execute the job.
-     *
-     * @return void
      */
     public function handle()
-    {   
+    {
         $msg_controller_object = new message_controller();
-        
+
         $users_to_notify = $msg_controller_object->get_users_who_have_unread_messages();
-        
+
         $msg_controller_object->update_daily_sms_black_list($users_to_notify);
-        
-        $users_to_notify->each(function($user){
-            sendSMS::dispatch($user->phone,17705)->onQueue('sms');
+
+        $users_to_notify->each(function ($user) {
+            echo "done\n";
+            // sendSMS::dispatch($user->phone,17705)->onQueue('sms');
         });
     }
 }

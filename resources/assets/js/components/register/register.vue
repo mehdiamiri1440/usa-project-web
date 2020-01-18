@@ -1149,11 +1149,11 @@
             redirectUserToPanel:function(userInfo){
                 if(userInfo.is_seller == true){
                     localStorage.setItem("showSnapShot", true);
-                    window.location.href = '/seller/register-product';
+                    window.location.href = "/seller/register-product";
                 }
                 else if(userInfo.is_buyer == true){
                     localStorage.setItem("showSnapShot", true);
-                    window.location.href = '/buyer/register-buyAd';
+                    window.location.href = "/buyer/register-request";
                 }
             }   
         },
@@ -1254,6 +1254,37 @@
         },
         updated: function () {
             this.$nextTick(this.stopLoader());
-        }
+        },  
+        metaInfo() {
+
+            return {
+                title: 'ثبت نام',
+                titleTemplate: 'اینکوباک | %s',
+                meta: [
+                    {
+                        name: 'description',
+                        content: 'خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار'
+                    },
+                    {
+                        name: 'author',
+                        content: 'اینکوباک'
+                    },
+                    {
+                        property: 'og:description',
+                        content: 'مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
+                    },
+                    {
+                        property: 'og:site_name',
+                        content: 'اینکوباک بازارآنلاین خرید و فروش محصولات کشاورزی ایران'
+                    },
+                    {
+                        'property': 'og:title',
+                        'content': 'اینکوباک | ثبت نام'
+                    },
+
+                ]
+
+            }
+  }
     };
 </script>

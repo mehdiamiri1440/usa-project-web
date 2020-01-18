@@ -181,11 +181,27 @@
 
 <template>
     <div>
-        <section class="main-content col-xs-12">
+        <section v-if="currentStep == 2" class="finish-state-main-content col-xs-12">
+
+
+
+
+                <main class="finish-state-wrapper">
+
+                    <FnishRegisterRequest
+
+                    />
+                </main>
+
+
+
+        </section>
+
+        <section v-else-if="currentStep == 0 || currentStep == 1" class="main-content col-xs-12">
 
             <div class="row">
                 <header class="header-section">
-                    <div v-if="currentStep == 0 || currentStep == 1" class="wrapper-progressbar title">
+                    <div class="wrapper-progressbar title">
 
                         <h2>
                             ثبت درخواست خرید
@@ -193,11 +209,11 @@
 
                     </div>
 
-                    <div v-else class="wrapper-progressbar title">
+                   <!--  <div v-else class="wrapper-progressbar title">
 
                         <h2>درخواست شما با موفقیت ثبت شد</h2>
 
-                    </div>
+                    </div> -->
 
                 </header>
 
@@ -221,6 +237,9 @@
     import FnishRegisterRequest from './register-request-steps/fnish-register-request'
 
     export default {
+        props:[
+          "defimgitem"
+        ],
         components: {
             StartRegisterRequest,
             RegisterRequest,
@@ -228,7 +247,7 @@
         },
         data: function () {
             return {
-                currentStep: 0,
+                currentStep: 2,
                 errors: {
                     categorySelected: '',
                     category_id: '',

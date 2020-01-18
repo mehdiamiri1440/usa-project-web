@@ -34,7 +34,7 @@
             <router-view
                     :loading_img="assets + 'assets/img/gif/loading.gif'"
                     :str="storagePath"
-                    :defimgitem="assets + '/assets/img/product.jpg'"
+                    :defimgitem="assets + 'assets/img/product.jpg'"
                     :defultimg="assets + 'assets/img/user-defult.png'"
             ></router-view>
 

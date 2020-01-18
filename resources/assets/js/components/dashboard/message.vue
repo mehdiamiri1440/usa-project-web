@@ -24,7 +24,9 @@
   width: 60px;
   margin: 18px auto;
 }
-
+.clock-icon{
+  font-size:14px;
+}
 .check-items {
   padding-left: 10px;
   color: #00a65a;
@@ -195,7 +197,23 @@
 
   padding-right: 15px;
   width: calc(100% - 95px);
-  padding-top: 16px;
+  padding-top: 6px;
+  font-weight: bold;
+}
+
+.contact-body .contact-item span.contact-last-message {
+  float: right;
+
+  padding-right: 15px;
+  width: calc(100% - 95px);
+  padding-top: 10px;
+
+  font-weight: lighter;
+  font-size: 12px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .contact-body .contact-item .contact-date {
@@ -204,6 +222,24 @@
   width: 50px;
   direction: ltr;
   text-align: center;
+}
+
+.contact-body .contact-item .my-contact-date {
+  float: left;
+  padding-top: 3px;
+  width: 50px;
+  direction: ltr;
+  text-align: center;
+}
+
+.last-message-date{
+  display: inline-block;
+  height: 17px;
+
+  width: 100px;
+
+  font-size: 10px;
+  line-height: 2;
 }
 
 .count-number {
@@ -536,15 +572,33 @@
               </div>
             </form>
           </div>
-          <div v-if="contactList.length === 0" class="contact-not-found">
-            <p>
-              <i class="fa fa-user"></i>
-            </p>
+          <div v-if="contactList.length === 0" class="loading-container">
+            <div class="image-wrapper" v-if="!contactNameSearchText">
+              <a v-show="isImageLoad">
+                <transition>
+                  <img src @load="ImageLoaded" alt="alt" />
+                </transition>
+              </a>
 
-            <p>مخاطب یافت نشد</p>
-          </div>
-          <div v-else-if="isSearchingContact" class="contact-is-search">
-            <img :src="loading_img" />
+              <div v-show="!isImageLoad" class="lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
+            </div>
+
+            <div v-else-if="contactNameSearchText && !isSearchingContact">
+              <p>
+                <i class="fa fa-user"></i>
+                <span>مخاطب یافت نشد</span>
+              </p>
+            </div>
+
+            <div v-else-if="isSearchingContact" class="contact-is-search">
+              <img :src="loading_img" />
+            </div>
           </div>
 
           <div v-else class="contact-items">
@@ -561,6 +615,12 @@
                     <img v-else :src="defimgitem" />
                   </div>
                   <span class="contact-name" v-text="contact.first_name + ' ' + contact.last_name"></span>
+                  <div class="my-contact-date">
+                    <p
+                      class="last-message-date"
+                    >{{contact.last_msg_time_date | moment("jYY/jMM/jDD")}}</p>
+                  </div>
+                  <span class="contact-last-message" v-text="contact.last_msg.last_msg_text"></span>
                   <div class="contact-date">
                     <p
                       class="count-number"
@@ -614,12 +674,18 @@
               <div :class="[msg.sender_id == currentUserId ? 'message-send' : 'message-receive']">
                 <span v-text="msg.text"></span>
                 <span class="message-chat-date">
-                  {{msg.created_at | moment("jYY/jMM/jDD, h:mm A") }}
+                  <span v-if="msg.created_at">
+                  {{ msg.created_at | moment("jYY/jMM/jDD, h:mm A") }}
+                  </span>
+                  <span v-else>
+                    {{Date() | moment("jYY/jMM/jDD, h:mm A")}}
+                  </span>
                   <span
                     class="check-items"
                     v-if="msg.sender_id === currentUserId"
                   >
-                    <i class="fa fa-check"></i>
+                    <i class="fa fa-check" v-if="msg.created_at"></i>
+                    <i class="far fa-clock" v-else></i>
                     <i class="fa fa-check" v-if="msg.is_read"></i>
                   </span>
                 </span>
@@ -715,30 +781,6 @@ export default {
         .then(function(response) {
           self.contactList = response.data.contact_list;
           self.currentUserId = response.data.user_id;
-
-          axios
-            .post("/get_last_chat_contact_info_from_session")
-            .then(function(response) {
-              var contact = response.data.contact;
-
-              if (
-                contact != null &&
-                //self.pageHasBeenReloaded() === false &&
-                self.selectedContact === ""
-              ) {
-                self.contactList.unshift(contact);
-                //removing duplicate contacts
-                self.contactList = self.contactList.filter(
-                  (thing, index, self) =>
-                    index ===
-                    self.findIndex(t => t.contact_id === thing.contact_id)
-                );
-                self.loadChatHistory(contact);
-              }
-            })
-            .catch(function(e) {
-              alert("error");
-            });
         })
         .catch(function(e) {
           //
@@ -746,6 +788,7 @@ export default {
     },
     loadChatHistory: function(contact, index) {
       var self = this;
+      self.handleBackBtnClickOnDevices();
       self.isChatMessagesLoaded = true;
       if (index !== -10) self.isFirstMessageLoading = true;
       self.selectedIndex = index;
@@ -792,23 +835,30 @@ export default {
     },
     sendMessage: function() {
       var self = this;
-      axios
-        .post("/messanger/send_message", {
-          sender_id: self.currentUserId,
-          receiver_id: self.currentContactUserId,
-          text: self.msgToSend
-        })
-        .then(function(response) {
-          self.msgToSend = "";
-          self.chatMessages.push(response.data.message);
 
-          self.scrollToEnd(0);
-          self.isFirstMessageLoading = false;
-          self.loadChatHistory(self.selectedContact, -10);
-        })
-        .catch(function(e) {
-          //
-        });
+      let tempMsg = self.msgToSend;
+      self.msgToSend = "";
+
+      if(tempMsg){
+          let msgObject = {
+            sender_id: self.currentUserId,
+            receiver_id: self.currentContactUserId,
+            text:tempMsg
+        }
+
+        self.chatMessages.push(msgObject);
+        self.scrollToEnd(0);
+
+        axios
+          .post("/messanger/send_message",msgObject)
+          .then(function(response) {
+            self.isFirstMessageLoading = false;
+            self.loadChatHistory(self.selectedContact, -10);
+          })
+          .catch(function(e) {
+            //
+          });
+      }
     },
     keepChatUpdated: function(contact) {
       var self = this;
@@ -870,6 +920,24 @@ export default {
         return false;
       }
     },
+    handleBackBtnClickOnDevices:function(){
+      var self = this;
+
+      if (window.history.state) {
+          history.pushState(null, null,window.location);
+      }
+
+      $(window).on('popstate', function (e) {
+          if(self.isDeviceMobile()){
+              if(window.location.pathname == '/seller/messages' || window.location.pathname == '/buyer/messages'){
+                if(self.selectedContact){
+                    self.selectedContact = "";
+                }
+            }
+          }
+          
+      });
+  },
     registerComponentStatistics: function(categoryName, actionName, labelName) {
       gtag("event", actionName, {
         event_category: categoryName,
@@ -887,25 +955,8 @@ export default {
           .then(function(response) {
             self.contactList = response.data.contact_list;
             self.currentUserId = response.data.user_id;
-            axios
-              .post("/get_last_chat_contact_info_from_session")
-              .then(function(response) {
-                var contact = response.data.contact;
-                if (
-                  contact != null &&
-                  self.pageHasBeenReloaded() === false &&
-                  self.selectedContact === ""
-                ) {
-                  self.contactList.unshift(contact);
-                  //removing duplicate contacts
-                  self.contactList = self.contactList.filter(
-                    (thing, index, self) =>
-                      index ===
-                      self.findIndex(t => t.contact_id === thing.contact_id)
-                  );
-                }
 
-                var text = self.contactNameSearchText.split(" ");
+            var text = self.contactNameSearchText.split(" ");
                 self.contactList = self.contactList.filter(function(contact) {
                   return text.every(function(el) {
                     if (
@@ -918,10 +969,6 @@ export default {
                 });
 
                 self.isSearchingContact = false;
-              })
-              .catch(function(e) {
-                alert("error");
-              });
           })
           .catch(function(e) {
             //
