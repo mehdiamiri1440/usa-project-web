@@ -241,7 +241,7 @@ ul {
           </ul>
           <div class="list-placeholder-wrapper" v-if="buyAds.length <= 5">
             <ul class="list-placeholder">
-              <li v-for="item in 3" class="list-group-item col-xs-12">
+              <li v-for="item in 5" class="list-group-item col-xs-12">
                 <p class="list-title col-sm-3 col-xs-12">
                   <span>میوه</span>
                   <span>|</span>
@@ -259,7 +259,7 @@ ul {
 
                 <a href class="col-sm-3 col-xs-12">
                   <p class="detail-success">
-                    <span class="fas fa-comment-alt"></span> پیام به خریدار
+                    <span class="fas fa-comment-alt"></span> پیام به اینکوباک
                   </p>
                 </a>
               </li>
@@ -295,9 +295,42 @@ ul {
       </div>
     </section>
 
-    <section class="main-content col-xs-12 loading_images" v-show="load">
-      <img :src="loading_img" style="width:200px;height:200px" />
+    <section class="main-content col-xs-12" v-if="load">
+      <div class="title col-xs-12">
+        <div class="row">
+          <div class="col-xs-12 col-sm-4 pull-right">
+            <h1>درخواست ها</h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12">
+        <div class="row">
+          <ul class="list-unstyled">
+            <li v-for="item in 5" class="list-group-item col-xs-12">
+              <p class="list-title col-sm-3 col-xs-12">
+                <span class="placeholder-content content-full-width h-20"></span>
+              </p>
+
+              <p class="needs col-sm-4 col-xs-12">
+                <span class="placeholder-content content-full-width h-20"></span>
+
+              </p>
+
+              <p class="list-time col-sm-2 col-xs-12" >
+                <span class="placeholder-content content-full-width h-20"></span>
+
+              </p>
+
+              <p class="col-sm-3 col-xs-12" >
+                <span class="placeholder-content content-full-width h-20"></span>
+
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
     </section>
+
   </div>
 </template>
 
