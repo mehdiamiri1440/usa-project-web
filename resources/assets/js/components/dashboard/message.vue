@@ -572,15 +572,33 @@
               </div>
             </form>
           </div>
-          <div v-if="contactList.length === 0" class="contact-not-found">
-            <p>
-              <i class="fa fa-user"></i>
-            </p>
+          <div v-if="contactList.length === 0" class="loading-container">
+            <div class="image-wrapper" v-if="!contactNameSearchText">
+              <a v-show="isImageLoad">
+                <transition>
+                  <img src @load="ImageLoaded" alt="alt" />
+                </transition>
+              </a>
 
-            <p>مخاطب یافت نشد</p>
-          </div>
-          <div v-else-if="isSearchingContact" class="contact-is-search">
-            <img :src="loading_img" />
+              <div v-show="!isImageLoad" class="lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
+            </div>
+
+            <div v-else-if="contactNameSearchText && !isSearchingContact">
+              <p>
+                <i class="fa fa-user"></i>
+                <span>مخاطب یافت نشد</span>
+              </p>
+            </div>
+
+            <div v-else-if="isSearchingContact" class="contact-is-search">
+              <img :src="loading_img" />
+            </div>
           </div>
 
           <div v-else class="contact-items">
@@ -763,30 +781,6 @@ export default {
         .then(function(response) {
           self.contactList = response.data.contact_list;
           self.currentUserId = response.data.user_id;
-
-          axios
-            .post("/get_last_chat_contact_info_from_session")
-            .then(function(response) {
-              var contact = response.data.contact;
-
-              if (
-                contact != null &&
-                //self.pageHasBeenReloaded() === false &&
-                self.selectedContact === ""
-              ) {
-                self.contactList.unshift(contact);
-                //removing duplicate contacts
-                self.contactList = self.contactList.filter(
-                  (thing, index, self) =>
-                    index ===
-                    self.findIndex(t => t.contact_id === thing.contact_id)
-                );
-                self.loadChatHistory(contact);
-              }
-            })
-            .catch(function(e) {
-              alert("error");
-            });
         })
         .catch(function(e) {
           //
@@ -961,25 +955,8 @@ export default {
           .then(function(response) {
             self.contactList = response.data.contact_list;
             self.currentUserId = response.data.user_id;
-            axios
-              .post("/get_last_chat_contact_info_from_session")
-              .then(function(response) {
-                var contact = response.data.contact;
-                if (
-                  contact != null &&
-                  self.pageHasBeenReloaded() === false &&
-                  self.selectedContact === ""
-                ) {
-                  self.contactList.unshift(contact);
-                  //removing duplicate contacts
-                  self.contactList = self.contactList.filter(
-                    (thing, index, self) =>
-                      index ===
-                      self.findIndex(t => t.contact_id === thing.contact_id)
-                  );
-                }
 
-                var text = self.contactNameSearchText.split(" ");
+            var text = self.contactNameSearchText.split(" ");
                 self.contactList = self.contactList.filter(function(contact) {
                   return text.every(function(el) {
                     if (
@@ -992,10 +969,6 @@ export default {
                 });
 
                 self.isSearchingContact = false;
-              })
-              .catch(function(e) {
-                alert("error");
-              });
           })
           .catch(function(e) {
             //
