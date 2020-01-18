@@ -1,5 +1,9 @@
 <style scoped>
 
+    .shadow-content{
+        background: #fff;
+    }
+
     .wrapper_no_pic {
         text-align: center;
         font-size: 23px;
@@ -10,8 +14,8 @@
 
     .wrapper_no_pro {
         text-align: center;
-        font-size: 23px;
         padding: 15px 0;
+        margin: 15px auto;
     }
 
     .content_no_pic {
@@ -21,10 +25,17 @@
     }
 
     .text_no_pic {
-        margin: 30px auto;
+        margin: 15px auto;
         color: #bdbdbd;
+        font-size: 23px;
+        font-weight: bold;
     }
 
+    .my-products-info-text{
+        line-height: 1.618;
+        padding: 15px;
+        margin: 15px auto;
+    }
     .main-content-item {
         box-shadow: none;
     }
@@ -125,6 +136,9 @@
                     </div>
 
                    <div class="col-xs-12 product-wrapper">
+                       <div class="col-xs-12 shadow-content text-center my-products-info-text">
+                           دو خط محتوا میخایم اینجا اضاف کنیمدو خط محتوا میخایم اینجا اضاف کنیمدو خط محتوا میخایم اینجا اضاف کنیمدو خط محتوا میخایم اینجا اضاف کنیم
+                       </div>
                        <div class="row">
 
                         <div v-for="(product,productIndex) in products" :key="product.main.id" class="col-xs-12  pull-right">
@@ -142,7 +156,7 @@
                 </div>
 
                 <div class="col-xs-12" v-if="products.length === 0 && !loading">
-                    <div class="wrapper_no_pro">
+                    <div class="shadow-content wrapper_no_pro">
                         <div class="content_no_pic">
                             <i class="fa fa-list-alt"></i>
                         </div>
@@ -152,9 +166,41 @@
                         </div>
                     </div>
                 </div>
-                <div class="loading_images  col-xs-12" v-show="loading">
-                    <img :src="loading_img" style="width:200px;height:200px">
-                </div>
+
+                <section v-else class=" main-content col-xs-12" v-if="loading">
+                    <div class="row">
+                        <div v-for="(defaultItem ,index) in 1" :key="index" class="default-items col-xs-12">
+                            <div class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content">
+                                <div class="default-user-contents col-xs-12 padding-0">
+                                    <div class="placeholder-content default-article-user-image pull-right"></div>
+
+                                    <span
+                                            class="padding-top-5 placeholder-content margin-15 pull-right content-min-width"
+                                    ></span>
+
+                                    <span class="margin-0 placeholder-content default-button-min-with pull-left"></span>
+                                </div>
+
+                                <div class="default-article-contents padding-0 margin-15-0 col-xs-12">
+                                    <div class="default-wrapper-main-image pull-right">
+                                        <span class="default-main-image placeholder-content"></span>
+                                    </div>
+
+                                    <div class="default-main-article-content">
+                                        <span class="content-half-width placeholder-content"></span>
+
+                                        <span class="content-default-width placeholder-content"></span>
+
+                                        <span class="content-min-width placeholder-content"></span>
+
+                                        <span class="content-half-width placeholder-content"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
             </div>
         </main>
     </div>
