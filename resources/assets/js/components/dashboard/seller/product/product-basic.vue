@@ -158,8 +158,8 @@
 
          .active-progress-wrapper .custom-progressbar{
 
-            right: 0px;
-            left: 0px;
+            right: 0;
+            left: 0;
             top: 8px;
 
          }
@@ -445,7 +445,6 @@
                 }
             },
             productImageSubmited(){
-
                 if (!this.productFiles[0]) {
                     this.errors.images_count.push('لطفا تصویر محصول را وارد کنید')
                 }else{
@@ -805,11 +804,15 @@
 
                                   }
 
-                                  if (files[i].size > 5000000) {
+                                  if (files[i].size > 5242880) {
                                     errorsStatus = true;
-                                    this.errors.images_size = 'حجم تصویر باید کمتر از 5 مگابایت باشد.';
+                                    this.errors.images_size = 'حجم تصویر بالا است، باید کمتر از 5 مگابایت باشد.';
+                                  }else if(files[i].size < 20480){
+
+                                      errorsStatus = true;
+                                      this.errors.images_size = 'حجم تصویر پایین است، باید بیشتر از 20 کیلوبایت باشد.';
                                   }
-                             }
+                              }
                         }
                              if (!errorsStatus) {
 
