@@ -5,6 +5,7 @@
  .default-user-contents{
     border-bottom: 2px solid #EEEEEE;
  }
+
  .content-full-width{
     height: 20px;
     display: block;
@@ -14,6 +15,7 @@
     border-radius: 3px;
 
 }
+
  .content-half-width{
     height: 15px;
     display: block;
@@ -71,6 +73,12 @@
     height: 120px;
     overflow: hidden;
     border-radius: 4px;
+}
+
+ .default-finish-step-image{
+
+    height: 130px;
+
 }
 
 .default-user-content{
@@ -166,8 +174,13 @@
 .margin-10-0{
     margin: 10px 0;
 }
+
 .margin-10{
     margin: 10px;
+}
+
+.margin-10-auto{
+    margin: 10px auto;
 }
 
 .margin-15{
