@@ -254,7 +254,7 @@ class payment_controller extends Controller
         
         $user_product_record = product::where('myuser_id',$user_id)
                                     ->where('confirmed',true)
-                                    ->get() 
+                                    ->orderBy('created_at') 
                                     ->first();
         
         if($user_product_record){
