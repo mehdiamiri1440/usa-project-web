@@ -178,6 +178,16 @@ ul {
   .list-time {
     padding: 15px;
   }
+
+  .default-list-title {
+        padding: 4px 0;
+
+  }
+
+  .detail-success{
+    margin-top: 9px;
+  }
+
 }
 
 @media screen and (max-width: 767px) {
@@ -192,9 +202,13 @@ ul {
     text-align: center;
   }
 
-  .detail-success {
+  .detail-success{
     max-width: 300px;
     margin: 0 auto;
+  }
+
+   .default-button-full-with {
+    max-width: 300px;
   }
 }
 </style>
@@ -295,7 +309,8 @@ ul {
       </div>
     </section>
 
-    <section class="main-content col-xs-12" v-if="load">
+    <section class="main-content col-xs-12" >
+    <!-- <section class="main-content col-xs-12" v-if="load"> -->
       <div class="title col-xs-12">
         <div class="row">
           <div class="col-xs-12 col-sm-4 pull-right">
@@ -307,22 +322,26 @@ ul {
         <div class="row">
           <ul class="list-unstyled">
             <li v-for="item in 5" class="list-group-item col-xs-12">
-              <p class="list-title col-sm-3 col-xs-12">
+              <p class="default-list-title pull-right col-sm-9 hidden-xs margin-10-0">
                 <span class="placeholder-content content-full-width h-20"></span>
               </p>
 
-              <p class="needs col-sm-4 col-xs-12">
-                <span class="placeholder-content content-full-width h-20"></span>
+              <p class="list-title col-sm-3 col-xs-12 hidden-md hidden-lg hidden-sm">
+                <span class="placeholder-content content-half-width h-20 margin-auto"></span>
+              </p>
+
+              <p class="needs col-sm-4 col-xs-12 hidden-md hidden-lg hidden-sm">
+                <span class="placeholder-content content-default-width h-20 margin-auto"></span>
 
               </p>
 
-              <p class="list-time col-sm-2 col-xs-12" >
-                <span class="placeholder-content content-full-width h-20"></span>
+              <p class="list-time col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm" >
+                <span class="placeholder-content content-min-width h-20 margin-auto"></span>
 
               </p>
 
               <p class="col-sm-3 col-xs-12" >
-                <span class="placeholder-content content-full-width h-20"></span>
+                <span class="placeholder-content default-button-full-with margin-10-auto"></span>
 
               </p>
             </li>

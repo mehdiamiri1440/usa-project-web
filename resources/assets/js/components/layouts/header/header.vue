@@ -1066,7 +1066,7 @@ export default {
     },
     logUserOut: function() {
       localStorage.removeItem("userRoute");
-      registerComponentStatistics(
+      this.registerComponentStatistics(
         "header",
         "register-login",
         "click-on-register-login"

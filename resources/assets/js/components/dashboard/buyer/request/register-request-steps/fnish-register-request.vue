@@ -1,163 +1,365 @@
 
 <style scoped>
-	.buttons-wrapper {
-        margin: 15px auto;
-        text-align: center;
+
+	p{
+		line-height: 1.618;
+		text-align: center;
+	}
+
+	label{
+		margin: 0 auto 9px auto;
+	}
+
+	.submit-button{
+
+		background: #DDDDDD;
+		color: #fff;
+		border: none;
+		border-radius: 4px;
+		display: inline-block;
+		font-size: 16px;
+		padding: 10px 30px 9px;
+		transition: 200ms;
+		cursor: default;
+		margin: 8px 0;
+
     }
 
-    .buttons-wrapper .green-button {
-        width: initial;
-        font-size: 16px;
-        padding: 8px 20px;
-
+    .submit-button.active{
+		background: #00C569;
+		cursor: pointer;
     }
 
-	.main-article-wrapper{
-        margin-bottom:35px ;
-    }
-    h2{
-    	font-size: 23px;
-		font-weight: bold;
-    }
+    .title-contents{
 
-    .main-text{
-    	font-size: 17px;
-    }
-
-    p{
-    	line-height: 1.618;
     	font-weight: bold;
+    	font-size: 19px;
+		margin-bottom: 15px;
+
     }
 
-    .header-contents{
-    	background: #fff;
-    	margin: 15px auto 30px;
-    	padding: 15px;
+    .form-contents{
+    	margin: 5px auto;
     }
 
-	.main-content-wrapper{
-		padding: 0 50px;
-	}
+    .form-contents lable{
+    	font-size: 12px;
+    }
 
-	.default-main-article{
+    .input-wrapper,.text-input-wrapper{
+   		margin: 6px auto;
+
+    	position: relative;
+
+    }
+
+    .input-wrapper:after{
+		content: "\F107";
+
+		color: #777;
+
+		position: absolute;
+
+		display: inline-block;
+
+		top: 6px;
+
+		font-family: "Font Awesome 5 Free",sans-serif;
+
+		font-weight: 900;
+
+		left: 15px;
+
+		font-size: 20px;
+
+		z-index: 0;
+
+    }
+
+    input{
+    	width: 100%;
+
+		border-radius: 4px;
+
+		border: 1px solid;
+
+		padding: 8px 15px ;
+
+		color: #BEBEBE;
+
+		border-color: #BEBEBE;
+
+		direction: rtl;
+
+		transition: 300ms;
+
 		background: #fff;
-	}
+    }
 
-	@media screen and (max-width: 1199px){
-		.main-content-wrapper{
-			padding: 0;
+    .input-wrapper i {
+
+    	display: inline-block;
+
+		position: absolute;
+
+		left: 15px;
+
+		font-size: 20px;
+
+		color: #BEBEBE;
+
+		top: 9px;
+
+		transition: 300ms;
+    }
+
+
+    input:focus ,  input:focus + i{
+		color: #333;
+		border-color: #333;
+
+    }
+
+    input.active{
+		border-color: #00C569;
+		color: #333;
+    }
+
+    input.active + i{
+		color: #00C569;
+    }
+
+    input.active:focus ,  input.active:focus + i , input.active + i {
+		border-color: #00C569;
+    }
+
+    input.error {
+    	color: #333;
+		border-color: #e41c38;
+    }
+
+    input.error + i{
+		color: #e41c38;
+    }
+
+
+    input.error:focus ,  input.error:focus + i  {
+		border-color: #e41c38;
+    }
+
+    select{
+
+    	width: 100%;
+
+		border-radius: 4px;
+
+		border: 1px solid;
+
+		padding: 8px 15px;
+
+		position: relative;
+
+		z-index: 1;
+
+		color: #777777;
+
+		direction: rtl;
+
+		transition: 200ms;
+
+		background: none;
+
+		appearance:none;
+		-webkit-appearance:none;
+		-moz-appearance:none;
+		-ms-appearance:none;
+
+
+
+    }
+
+    .input-wrapper i {
+    	display: inline-block;
+
+		position: absolute;
+
+		left: 15px;
+
+		font-size: 20px;
+
+		color: #BEBEBE;
+
+		top: 9px;
+
+		transition: 200ms;
+    }
+
+     select option{
+		color: #333;
+    }
+
+    select:focus{
+		color: #333;
+    }
+
+    select.active{
+    		color: #333;
+		color: #00C569;
+    }
+
+    select.active:focus {
+		color: #00C569;
+    }
+
+    select.error {
+    		color: #333;
+		color: #e41c38;
+    }
+
+    select.error:focus{
+		color: #e41c38;
+    }
+    .error-message{
+
+    	text-align: center;
+
+		color: #e41c38;
+
+		font-weight: bold;
+
+		height: 15px;
+
+	    direction: rtl;
+
+		font-size: 11px;
+    }
+
+    .background-blue{
+
+        background: #000546 !important;
+
+    }
+
+    .small-description{
+
+         font-size: 11px;
+
+         font-weight: bold;
+
+         color: #777777;
+
+         line-height: 1.618;
+
+    }
+
+    .list-item-wrapper{
+
+		background: #f8f8f8;
+		box-shadow: 0 5px 10px #c5c5c5;
+		border: none;
+		margin: 20px auto;
+		padding: 4px 0;
+
+    }
+    .list-item-wrapper > p{
+
+		float: right;
+		padding: 0;
+		padding-top: 12px;
+
+    }
+    .send-message{
+
+    	padding: 0;
+    	text-align: center;
+
+    }
+    .send-message .submit-button{
+
+        display: inline-block;
+    	font-size: 14px;
+		padding: 7px 15px;
+
+    }
+
+    .send-message a.submit-button:before{
+
+        content: none;
+
+    }
+    .main-description{
+    	margin-top: 25px;
+    }
+    .red-text{
+		color: #e41c38;
+
+    }
+
+    .blue-background{
+
+        background: #000546 !important;
+
+    }
+    @media screen and (max-width: 767px){
+		.input-wrapper {
+		    padding: 0 5px;
+
+		}
+		select{
+			font-size: 12px;
+		}
+		.input-wrapper::after {
+		    left: 14px;
 		}
 	}
 </style>
 
 <template>
 	<div>
-		
 
-		<div>
-			<header class="header-contents-wrapper text-center text-rtl  col-xs-12" v-if="products">
-					<div class="header-contents shadow-content">
-						<h2>
-						<i class="fa fa-check green-text"></i>  درخواست شما با موفقیت ثبت شد
-						</h2>
-						<p class="main-text">
-							تعدادی از مرتبط ترین محصولات برای درخواست خرید شما در زیر نمایش داده شده است
 
-						</p>
-						<p class="red-text ">
-							 در صورت عدم ارسال پیام به فروشنده ها دیگر به این محصولات دسترسی نخواهید داشت.
-						</p>
-					</div>
-			</header>
+		 <div class="form-contents ">
 
-			<header class="header-contents-wrapper text-center text-rtl  col-xs-12" v-else>
-					<div class="header-contents shadow-content">
-						<h2>
-						<i class="fa fa-check green-text"></i>  درخواست شما با موفقیت ثبت شد
-						</h2>
-						<!-- <p class="main-text">
-							تعدادی از مرتبط ترین محصولات برای درخواست خرید شما در زیر نمایش داده شده است
+			    	<div class=" col-xs-12 ">
 
-						</p> -->
-						<p class="red-text ">
-							 در صورت عدم ارسال پیام به فروشنده ها دیگر به این محصولات دسترسی نخواهید داشت.
-						</p>
-					</div>
-			</header>
+				     	<div class="text-input-wrapper">
 
-			<main class="main-content-wrapper">
 
-				<div v-if="products">
-					<finish-step-article v-for="(product , index) in products" :key="index"
-						:product="product"
-						:str="str"
-					/>
-				</div>
+				     		<p class="main-description text-rtl">
+                                درخواست خرید شما پس از تایید کارشناسان اینکوباک برای کشاورزان و تامین کنندگان مرتبط ارسال میشود.
+				     		</p>
 
-				<!-- <div v-else>
-					<div class="default-placeholder-content" v-for="(item , index) in 6" :key="index">
-						<article class="main-article-wrapper col-xs-12 col-sm-6 col-md-4 pull-right  ">
-							<div class="default-main-article text-center shadow-content">
-								<div class=" placeholder-content default-finish-step-image">
-									
-								</div>
+                           
 
-								<div class="default-main-content text-center  padding-10">
-									<p class="placeholder-content content-default-width margin-10-auto"></p>
-									<p class=" placeholder-content content-half-width margin-auto">
-									
-									</p>
-									<p class="placeholder-content default-button-full-with	"></p>
-								</div>
+                            <div class="text-center margin-15-0" >
+                            	   <router-link class="submit-button active" :to="{name : 'productList'}">
+                       		    		  لیست محصولات
+                     				</router-link>
 
-							</div>
-						</article>
-					</div>
-				</div> -->
+                            </div>
 
-				<div class="buttons-wrapper  col-xs-12">
-					<router-link :to="{name : 'productList'}" class="green-button blue-button">
-						مشاهده همه محصولات
-					</router-link>
-				</div>
-			</main>
 
+				     	</div>
+
+				    </div>
+
+			      <!--  <div class="col-xs-12">
+			       	<div class="text-center">
+			       		 <button class="submit-button active "
+
+			       		 	@click.prevent="$parent.reLoadPage()"
+			       		   >
+			        		ثبت درخواست جدید
+
+		        	  </button>
+			       	</div>
+			       </div> -->
 		</div>
-
-
-		
-
-
-
-
 
     </div>
 </template>
 
 <script>
 
-	import	FinishStepArticle from './finish-step-components/finish-step-article'
-
-	export default{
-		props:[
-		  'products',
-		  'str'
-        ],
-		components:{
-			FinishStepArticle
-		},
-		data(){
-            return{
-                assetsUrl : this.$parent.defimgitem
-            }
-		},
-		methods:{
-			openChat:function(product){
-				this.$parent.openChat(product);
-			}
-		}
-
-
-	}
 
 </script>

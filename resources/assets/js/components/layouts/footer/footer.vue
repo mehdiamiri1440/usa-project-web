@@ -328,7 +328,7 @@ img.image-blur:hover {
             <p>آدرس</p>
             <p class="vertical-padding">شیراز، خیابان ارم کوچه 15 پلاک 264</p>
             <br />
-            <p>تماس با ما</p>
+            <p>تماس با پشتیبانی اینکوباک</p>
             <p class="vertical-padding">‌09118413054 / 09178928266</p>
           </div>
         </div>

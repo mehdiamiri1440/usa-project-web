@@ -124,6 +124,12 @@
 
     }
 
+    @media screen and (max-width: 992px){
+        .finish-state-main-content{
+            padding: 0;
+        }
+    }
+
     @media screen and (max-width: 767px) {
         .main-section-wrapper {
             max-width: 600px;
@@ -176,32 +182,18 @@
     }
 
 
+
 </style>
 
 
 <template>
     <div>
-        <section v-if="currentStep == 2" class="finish-state-main-content col-xs-12">
-
-
-
-
-                <main class="finish-state-wrapper">
-                    <FnishRegisterRequest
-                        :products="relatedProducts"
-                        :str="str"
-                    />
-                </main>
-
-
-
-        </section>
-
-        <section v-if="currentStep == 0 || currentStep == 1" class="main-content col-xs-12">
+       
+        <section v-if="!relatedProducts && currentStep <= 2" class="main-content col-xs-12">
 
             <div class="row">
                 <header class="header-section">
-                    <div class="wrapper-progressbar title">
+                    <div v-if="currentStep <= 1" class="wrapper-progressbar title">
 
                         <h2>
                             ثبت درخواست خرید
@@ -209,25 +201,36 @@
 
                     </div>
 
-                   <!--  <div v-else class="wrapper-progressbar title">
+                     <div v-else class="wrapper-progressbar title">
 
                         <h2>درخواست شما با موفقیت ثبت شد</h2>
 
-                    </div> -->
+                    </div>
 
                 </header>
 
                 <main class="main-section-wrapper">
-                    <StartRegisterRequest v-show="currentStep == 0"/>
-                    <RegisterRequest v-show="currentStep == 1"/>
-                    <FnishRegisterRequest v-if="currentStep == 2"
-                        :products="relatedProducts"
+                    <StartRegisterRequest v-if="currentStep == 0"/>
+                    <RegisterRequest v-else-if="currentStep == 1"/>
+                    <FinishRegisterRequest v-else="currentStep == 2"
                     />
                 </main>
 
             </div>
 
         </section>
+
+         <section v-else-if="currentStep == 2 && relatedProducts" class="finish-state-main-content col-xs-12">
+
+                <main class="finish-state-wrapper">
+                    <FinishRegisterRequestRelated
+                        :products="relatedProducts"
+                        :str="str"
+                    />
+                </main>
+
+        </section>
+
 
     </div>
 </template>
@@ -236,7 +239,8 @@
     import {eventBus} from "../../../../router/router";
     import StartRegisterRequest from './register-request-steps/start-register-request'
     import RegisterRequest from './register-request-steps/register-request-content'
-    import FnishRegisterRequest from './register-request-steps/fnish-register-request'
+    import FinishRegisterRequestRelated from './register-request-steps/fnish-register-request-related'
+    import FinishRegisterRequest from './register-request-steps/fnish-register-request'
 
     export default {
         props:[
@@ -246,7 +250,8 @@
         components: {
             StartRegisterRequest,
             RegisterRequest,
-            FnishRegisterRequest
+            FinishRegisterRequestRelated,
+            FinishRegisterRequest
         },
         data: function () {
             return {

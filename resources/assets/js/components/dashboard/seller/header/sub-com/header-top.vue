@@ -461,7 +461,7 @@ export default {
   methods: {
     logUserOut: function() {
       localStorage.removeItem("userRoute");
-      registerComponentStatistics(
+      this.registerComponentStatistics(
         "seller-dashboard-header",
         "logout",
         "click-on-logout-in-dashboard"
