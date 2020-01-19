@@ -61,28 +61,32 @@
 
 <template>
     <div>
-
-        <article class="main-article-wrapper col-xs-12 col-sm-6 col-md-4 pull-right ">
-            <div class="main-article text-center shadow-content">
-                <div class="article-image">
-                    <img v-show="isImageLoad" :src="$parent.assetsUrl"  @load="ImageLoaded" alt="">
-                    <div v-show="!isImageLoad" class="lds-ring">
-                        <div></div><div></div><div></div><div></div>
-
+            <article class="main-article-wrapper col-xs-12 col-sm-6 col-md-4 pull-right ">
+                <div class="main-article text-center shadow-content">
+                    <div class="article-image">
+                        <div v-show="isImageLoad">
+                            <transition>
+                                <img  :src="str + '/' +  product.photo"  @load="ImageLoaded" alt="">
+                            </transition>
+                        </div>
+                        <div v-show="!isImageLoad" class="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="main-content text-rtl">
+                        <h3 class="article-title">
+                            {{product.subcategory_name + ' | ' + product.product_name}}
+                        </h3>
+                        <p class=" green-text">
+                            <span> {{product.stock}}</span> <span>کیلوگرم</span>
+                        </p>
+                        <button class="green-button " @click.prevent="$parent.openChat(product)"><i class="fa fa-envelope"></i> پیام به فروشنده</button>
                     </div>
                 </div>
-                <div class="main-content text-rtl">
-                    <h3 class="article-title ">
-                        خرمای مضافتی اصل
-                    </h3>
-                    <p class=" green-text">
-                        <span> 500</span> <span>کیلوگرم</span>
-                    </p>
-                    <button class="green-button "><i class="fa fa-envelope"></i> پیام به فروشنده</button>
-                </div>
-            </div>
-        </article>
-
+            </article>
 
     </div>
 </template>
@@ -90,6 +94,10 @@
 <script>
 
     export default {
+        props:[
+            'product',
+            'str',
+        ],
         data:function () {
             return{
                 isImageLoad:false,

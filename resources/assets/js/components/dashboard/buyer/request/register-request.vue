@@ -187,9 +187,9 @@
 
 
                 <main class="finish-state-wrapper">
-
                     <FnishRegisterRequest
-
+                        :products="relatedProducts"
+                        :str="str"
                     />
                 </main>
 
@@ -197,7 +197,7 @@
 
         </section>
 
-        <section v-else-if="currentStep == 0 || currentStep == 1" class="main-content col-xs-12">
+        <section v-if="currentStep == 0 || currentStep == 1" class="main-content col-xs-12">
 
             <div class="row">
                 <header class="header-section">
@@ -220,7 +220,9 @@
                 <main class="main-section-wrapper">
                     <StartRegisterRequest v-show="currentStep == 0"/>
                     <RegisterRequest v-show="currentStep == 1"/>
-                    <FnishRegisterRequest v-show="currentStep == 2"/>
+                    <FnishRegisterRequest v-if="currentStep == 2"
+                        :products="relatedProducts"
+                    />
                 </main>
 
             </div>
@@ -238,7 +240,8 @@
 
     export default {
         props:[
-          "defimgitem"
+          "defimgitem",
+          "str"
         ],
         components: {
             StartRegisterRequest,
@@ -247,12 +250,12 @@
         },
         data: function () {
             return {
-                currentStep: 2,
+                currentStep: 0,
                 errors: {
                     categorySelected: '',
                     category_id: '',
                     requirement_amount: '',
-                    name: ''
+                    name: '',
                 },
                 currentUser: {
                     profile: '',
@@ -282,7 +285,7 @@
                 profileConfirmed: false,
                 disableSubmit: false,
                 submiting: false,
-                relatedProduct: null,
+                relatedProducts: null,
                 items: [
                     {
                         message: ' ثبت درخواست جدید',
@@ -348,8 +351,8 @@
 
                             self.registerComponentStatistics('buyAd-register', 'buyAd-registered-successfully', 'buyAd-registered-successfully');
 
-                            if (response.data.product) {
-                                self.relatedProduct = response.data.product;
+                            if (response.data.products) {
+                                self.relatedProducts = response.data.products;
                             }
 
                             self.goToStep(2);
@@ -441,7 +444,7 @@
                 }
             },
             requirementAmountValidator: function (number) {
-                this.errors.stock = '';
+                this.errors.requirement_amount = '';
                 var standardNumber = this.toLatinNumbers(number);
                 if (standardNumber == '') {
                     this.errors.requirement_amount = 'فیلد میزان نیاز الزامی است';

@@ -770,7 +770,7 @@ class buyAd_controller extends Controller
                                             ->where('confirmed', true)
                                             ->whereBetween('created_at', [$from_date, $until_date])
                                             ->select($this->related_products_fields)
-                                            ->orderBy('created_at')
+                                            ->orderBy('created_at','desc')
                                             ->get();
 
         if ($related_subcategory_products) {
@@ -827,7 +827,7 @@ class buyAd_controller extends Controller
                         }
                     }
     
-                    if(count($most_related_records) > $this->offered_products_count_after_buyAd_register){
+                    if(count($most_related_records) >= $this->offered_products_count_after_buyAd_register){
                         break;
                     }
                 }
@@ -845,7 +845,7 @@ class buyAd_controller extends Controller
                         $most_related_records[] = $product;
                     }
 
-                    if(count($most_related_records) > $this->offered_products_count_after_buyAd_register){
+                    if(count($most_related_records) >= $this->offered_products_count_after_buyAd_register){
                         break;
                     }
                 }
@@ -857,7 +857,12 @@ class buyAd_controller extends Controller
                 $most_related_records = array_merge($most_related_records,array_slice($reserved_products,0,$product_shortage_count - 1));
             }
             else if(count($reserved_products)){
-                $most_related_records = array_merge($most_related_records,$reserved_products);
+                if($most_related_records){
+                    $most_related_records = array_merge($most_related_records,$reserved_products);
+                }
+                else{
+                    $most_related_records = $reserved_products;
+                }
             }
         }
 

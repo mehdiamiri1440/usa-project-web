@@ -229,7 +229,7 @@
   padding-top: 3px;
   width: 50px;
   direction: ltr;
-  text-align: center;
+  text-align: left;
 }
 
 .last-message-date{
