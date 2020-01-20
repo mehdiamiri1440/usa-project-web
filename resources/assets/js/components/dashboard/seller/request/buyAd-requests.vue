@@ -133,9 +133,7 @@ ul {
 
   text-align: center;
 
-  /*top: calc(50% - 82px); if center content */
-  
-  top: 45px;
+  top: calc(50% - 82px);
 
 
   padding: 15px;
@@ -258,7 +256,7 @@ ul {
           </ul>
           <div class="list-placeholder-wrapper" v-if="buyAds.length <= 5">
             <ul class="list-placeholder">
-              <li v-for="item in 5" class="list-group-item col-xs-12">
+              <li v-for="item in 3" class="list-group-item col-xs-12">
                 <p class="list-title col-sm-3 col-xs-12">
                   <span>میوه</span>
                   <span>|</span>

@@ -1275,6 +1275,7 @@
 
                 if(bottom){
                     if(newOffset > lastOffset + 100){
+                            console.log('detected');
                             lastOffset = document.documentElement.offsetHeight;
                             this.feed();
                         }

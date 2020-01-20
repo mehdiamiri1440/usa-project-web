@@ -757,21 +757,12 @@
                         user_name: buyAd.user_name,
                     };
 
-                    axios.post('/set_last_chat_contact', contact)
-                        .then(function (response) {
-                            if (self.currentUser.user_info.is_seller == 1) {
-                                self.$router.push('/seller/messages');
-                            } else if (self.currentUser.user_info.is_buyer == 1) {
-                                self.$router.push('/buyer/messages');
-                            }
-                        })
-                        .catch(function (e) {
-                            alert('Error');
-                        });
+                    eventBus.$emit("ChatInfo",contact);
+                    
                 })
-                    .catch(function (err) {
-                        //
-                    });
+                .catch(function (err) {
+                    //
+                });
             },
 
 
