@@ -409,7 +409,7 @@
 
                                 <div class="detail-wrapper">
 
-                                    <div class="item-price">
+                                    <div class="item-price text-rtl">
 
                                         <span class="item-price-content">رایگان</span>
                                         <span class="item-currency"></span>
@@ -492,7 +492,7 @@
 
                                 <div class="detail-wrapper">
 
-                                    <div class="item-price">
+                                    <div class="item-price text-rtl">
 
                                         <span class="item-price-content">489,000</span>
                                         <span class="item-currency"> تومان </span>

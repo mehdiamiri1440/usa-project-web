@@ -133,7 +133,10 @@ ul {
 
   text-align: center;
 
-  top: calc(50% - 82px);
+  /*top: calc(50% - 82px); if center content */
+  
+  top: 45px;
+
 
   padding: 15px;
 }
@@ -309,8 +312,7 @@ ul {
       </div>
     </section>
 
-    <section class="main-content col-xs-12" >
-    <!-- <section class="main-content col-xs-12" v-if="load"> -->
+    <section class="main-content col-xs-12" v-if="load">
       <div class="title col-xs-12">
         <div class="row">
           <div class="col-xs-12 col-sm-4 pull-right">
