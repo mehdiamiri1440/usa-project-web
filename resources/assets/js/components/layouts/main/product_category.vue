@@ -1268,18 +1268,18 @@
                 let lastOffset = 0;
                 
                 window.onscroll = () => {
+                if(window.location.pathname.includes('product-list')){
+                    var bottom = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - (document.documentElement.scrollTop / 2);
 
-                var bottom = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - (document.documentElement.scrollTop / 2);
+                    let newOffset = document.documentElement.offsetHeight;
 
-                let newOffset = document.documentElement.offsetHeight;
+                    if(bottom){
+                        if(newOffset > lastOffset + 100){
+                                lastOffset = document.documentElement.offsetHeight;
+                                this.feed();
+                            }
 
-                if(bottom){
-                    if(newOffset > lastOffset + 100){
-                            console.log('detected');
-                            lastOffset = document.documentElement.offsetHeight;
-                            this.feed();
                         }
-
                     }
                 }
             },
