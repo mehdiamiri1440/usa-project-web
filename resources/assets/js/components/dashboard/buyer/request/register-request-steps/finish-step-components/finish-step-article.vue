@@ -63,7 +63,7 @@
     <div>
             <article class="main-article-wrapper col-xs-12 col-sm-6 col-md-4 pull-right ">
                 <div class="main-article text-center shadow-content">
-                    <div class="article-image">
+                    <router-link class="article-image" :to="getProductUrl()" target="_blank">
                         <div v-show="isImageLoad">
                             <transition>
                                 <img  :src="str + '/' +  product.photo"  @load="ImageLoaded" alt="">
@@ -75,7 +75,7 @@
                             <div></div>
                             <div></div>
                         </div>
-                    </div>
+                    </router-link>
                     <div class="main-content text-rtl">
                         <h3 class="article-title">
                             {{product.subcategory_name + ' | ' + product.product_name}}
@@ -96,7 +96,7 @@
     export default {
         props:[
             'product',
-            'str',
+            'str'
         ],
         data:function () {
             return{
@@ -112,7 +112,17 @@
             },
             ImageLoaded: function (){
                 this.isImageLoad = true;
-            }
+            },
+            getProductUrl: function () {
+
+                return '/product-view/خرید-عمده-'
+                    + this.product.subcategory_name.replace(' ', '-')
+                    + '/'
+                    + this.product.category_name.replace(' ', '-')
+                    + '/'
+                    + this.product.id;
+
+            },
         }
     }
 

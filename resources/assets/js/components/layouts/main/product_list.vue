@@ -638,6 +638,7 @@ li.active a::after {
 
               </div>
 
+
           </section>
 
           <section class="main-content col-xs-12" v-if="products.length > 0  ">
@@ -809,6 +810,8 @@ li.active a::after {
     import ProductArticle from './product_components/product_article'
     import ProductAsideCategories from './product_components/sidebar/product_aside_categories'
     import {eventBus} from "../../../router/router";
+
+
 
     var visible = false;
     export default {
@@ -1115,6 +1118,7 @@ li.active a::after {
                     searchObject.search_text = this.searchText;
                 }
 
+
                 if (jQuery.isEmptyObject(searchObject)) {
                     if(this.searchText == ""){
                         this.$router.push({
@@ -1159,19 +1163,19 @@ li.active a::after {
                 let lastOffset = 0;
 
                 window.onscroll = () => {
+                    if(window.location.pathname.includes('product-list')){
+                          var bottom = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - (document.documentElement.scrollTop / 2);
 
-                var bottom = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - (document.documentElement.scrollTop / 2);
+                          let newOffset = document.documentElement.offsetHeight;
 
-                let newOffset = document.documentElement.offsetHeight;
-
-                if(bottom){
-                    if(newOffset > lastOffset + 100){
-                            lastOffset = document.documentElement.offsetHeight;
-                            this.feed();
-                        }
-
+                          if(bottom){
+                              if(newOffset > lastOffset + 100){
+                                      lastOffset = document.documentElement.offsetHeight;
+                                      this.feed();
+                                  }
+                              }
+                          }
                     }
-                }
             },
             sidebarScroll() {
 
@@ -1347,7 +1351,7 @@ li.active a::after {
             searchText: function (value) {
 
                 var self = this;
-                
+
                 eventBus.$emit('textSearch',value);
 
                 clearTimeout(this.searchTextTimeout);
@@ -1360,24 +1364,26 @@ li.active a::after {
 
             },
             '$route':function(){
-                
+
                 if(this.$route.query.s){
                     this.searchText = this.$route.query.s.split('+').join(' ');
-                } 
+                }
             },
             '$parent.productByResponseRate':function(){
                 this.products = {};
-                
+
                 this.infiniteScrollHandler();
 
                 if (this.searchText) {
-                  
+
                   this.applyFilter();
-                  
+
                 }else{
-// comment for test
+
                   this.init();
+
                 }
+
             },
             bottom(bottom) {
                 if (bottom) {
@@ -1392,7 +1398,7 @@ li.active a::after {
             });
 
             // document.addEventListener('click', this.documentClick);
-        }, 
+        },
         mounted() {
             let self=this;
 

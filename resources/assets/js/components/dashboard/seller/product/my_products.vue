@@ -156,7 +156,7 @@
                 </div>
 
                 <div class="col-xs-12" v-if="products.length === 0 && !loading">
-                    <div class="shadow-content wrapper_no_pro">
+                    <div class="wrapper_no_pro">
                         <div class="content_no_pic">
                             <i class="fa fa-list-alt"></i>
                         </div>
@@ -167,7 +167,7 @@
                     </div>
                 </div>
 
-                <section v-else class=" main-content col-xs-12" v-if="loading">
+                <section  class=" main-content col-xs-12" v-if="loading">
                     <div class="row">
                         <div v-for="(defaultItem ,index) in 1" :key="index" class="default-items col-xs-12">
                             <div class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content">
