@@ -573,7 +573,7 @@
             </form>
           </div>
           <div v-if="contactList.length === 0" class="loading-container">
-            <div class="image-wrapper" v-if="!contactNameSearchText">
+            <div class="image-wrapper" v-if="!contactNameSearchText && !isContactListLoaded">
               <a v-show="isImageLoad">
                 <transition>
                   <img src @load="ImageLoaded" alt="alt" />
@@ -598,6 +598,12 @@
 
             <div v-else-if="isSearchingContact" class="contact-is-search">
               <img :src="loading_img" />
+            </div>
+            <div v-else-if="isContactListLoaded">
+              <p>
+                <i class="fa fa-user"></i>
+                <span>مخاطب یافت نشد</span>
+              </p>
             </div>
           </div>
 
@@ -760,7 +766,8 @@ export default {
       currentContactUserId: "",
       msgToSend: "",
       isComponentActive: false,
-      contactNameSearchText: ""
+      contactNameSearchText: "",
+      isContactListLoaded: false,
     };
   },
   methods: {
@@ -776,11 +783,15 @@ export default {
     loadContactList: function() {
       var self = this;
 
+      this.isContactListLoaded = false;
+
       axios
         .post("/get_contact_list")
         .then(function(response) {
           self.contactList = response.data.contact_list;
           self.currentUserId = response.data.user_id;
+
+          self.isContactListLoaded = true;
         })
         .catch(function(e) {
           //

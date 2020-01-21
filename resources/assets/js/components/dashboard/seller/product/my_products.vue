@@ -35,6 +35,7 @@
         line-height: 1.618;
         padding: 15px;
         margin: 15px auto;
+        direction: rtl;
     }
     .main-content-item {
         box-shadow: none;
@@ -137,7 +138,8 @@
 
                    <div class="col-xs-12 product-wrapper">
                        <div class="col-xs-12 shadow-content text-center my-products-info-text">
-                           با اعمال نردبان روی محصولات بیشتر دیده شوید و با خریداران بیشتری ارتباط برقرار کنید
+                           <i class="fas fa-chart-line"></i>
+                           <span>با اعمال نردبان روی محصولات خود بیشتر دیده شوید و با خریداران بیشتری ارتباط برقرار کنید.</span>
                        </div>
                        <div class="row">
 
