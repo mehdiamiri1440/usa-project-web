@@ -54,7 +54,7 @@ class product_controller extends Controller
         if ($this->is_user_allowed_to_register_another_product() == false) {
             return response()->json([
                 'status' => true,
-                'msg' => ' سقف تعداد محصولات ثبت شده شما پر شده است.برای اضافه کردن محصولات بیشتر بخش تعرفه ها را بررسی کنید.',
+                'msg' => ' سقف تعداد محصولات ثبت شده شما پر شده است.برای اضافه کردن محصولات بیشتر بخش ارتقا عضویت را بررسی کنید.',
             ], 200);
         }
         $rules = $this->set_product_validation_rules($request);
@@ -1038,7 +1038,7 @@ class product_controller extends Controller
             return response()->json([
                 'status' => true,
                 'is_limited' => true,
-                'msg' => ' سقف تعداد محصولات ثبت شده شما پر شده است.برای اضافه کردن محصولات بیشتر بخش تعرفه ها را بررسی کنید.',
+                'msg' => ' سقف تعداد محصولات ثبت شده شما پر شده است.برای اضافه کردن محصولات بیشتر بخش ارتقا عضویت را بررسی کنید.',
             ], 200);
         } else {
             return response()->json([

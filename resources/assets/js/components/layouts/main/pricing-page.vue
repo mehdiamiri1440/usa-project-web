@@ -77,7 +77,7 @@
         metaInfo() {
 
             return {
-                title: ' تعرفه ها ',
+                title: 'ارتقا عضویت ',
                 titleTemplate: 'اینکوباک | %s',
                 meta: [
                     {

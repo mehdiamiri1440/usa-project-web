@@ -157,7 +157,7 @@
               class="green-button blue-brand-background"
             >
               <i class="far fa-credit-card"></i>
-              مشاهده تعرفه ها
+              ارتقا عضویت
             </router-link>
           </div>
         </div>

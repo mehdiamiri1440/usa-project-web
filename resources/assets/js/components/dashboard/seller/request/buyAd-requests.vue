@@ -289,7 +289,7 @@ ul {
                 <router-link
                   class="green-button"
                   :to="{ name : 'dashboardPricingTableSeller' }"
-                >مشاهده تعرفه ها</router-link>
+                >ارتقا عضویت</router-link>
               </div>
             </div>
           </div>
