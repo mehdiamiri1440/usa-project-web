@@ -274,8 +274,7 @@ img.image-blur:hover {
                   to="/pricing"
                   @click="registerComponentStatistics('footer','pricing','click-on-pricing')"
                 >
-                  تعرفه
-                  ها
+                  ارتقا عضویت
                 </router-link>
               </li>
               <li>

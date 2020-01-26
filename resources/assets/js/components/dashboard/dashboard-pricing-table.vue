@@ -42,7 +42,7 @@
                 <div  class="row">
                     <div  class="col-xs-12 col-sm-4 pull-right">
                         <h1>
-                          تعرفه ها
+                            ارتقا عضویت
                         </h1>
                     </div>
                 </div>

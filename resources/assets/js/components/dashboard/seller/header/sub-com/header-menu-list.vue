@@ -92,6 +92,31 @@
     .header-menu i {
         margin: 5px;
     }
+
+    .pricing-table{
+
+        background: #00c569;
+
+        border-top: 2px solid;
+
+        border-bottom: 2px solid;
+
+        color: #fff !important;
+
+    }
+
+    .pricing-table:hover, a.pricing-table.router-link-exact-active{
+
+        background: #fff !important;
+
+        color: #00c569 !important;
+
+    }
+
+    .pricing-table .custom-badge{
+        padding: 7px;
+        width:initial;
+    }
 </style>
 <template>
     <div>
@@ -149,6 +174,15 @@
                         <router-link :to="{ name : 'guideSeller' }">
                             <i class="fa fa-question" aria-hidden="true"></i>
                             <span>راهنما</span>
+                        </router-link>
+                    </li>
+
+                    <li class="list-item">
+                        <router-link class="pricing-table" :to="{ name : 'dashboardPricingTableSeller' }">
+                            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                            <span>ارتقا عضویت</span>
+                            <span class="custom-badge">ویژه</span>
+
                         </router-link>
                     </li>
                 </ul>

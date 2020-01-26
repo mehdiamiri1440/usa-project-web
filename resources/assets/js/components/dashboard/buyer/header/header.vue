@@ -333,7 +333,7 @@ span.min {
               </a>
               <p class="main-pop-up" v-text="popUpMsg"></p>
               <button class="btn green-button" data-dismiss="modal">متوجه شدم</button>
-              <a class="btn green-button" href="/pricing">مشاهده تعرفه ها</a>
+              <a class="btn green-button" href="/pricing">ارتقا عضویت</a>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -545,7 +545,7 @@ export default {
   },
   props: [
    "defultimg",
-   "logo", 
+   "logo",
    "loading",
    "storage",
    "logout",

@@ -918,7 +918,7 @@ a.profile-info-wrapper:hover {
                               class="smoothScroll"
                               :to="{ name: 'pricing'}"
                               @click="registerComponentStatistics('header','pricing','click-on-pricing')"
-                            >تعرفه ها</router-link>
+                            >ارتقا عضویت</router-link>
                           </li>
               -->
               <li>
@@ -1002,7 +1002,7 @@ a.profile-info-wrapper:hover {
                           class="smoothScroll"
                           :to="{ name: 'pricing'}"
                           @click="registerComponentStatistics('header','pricing','click-on-pricing')"
-                        >تعرفه ها</router-link>
+                        >ارتقا عضویت</router-link>
                       </li>
           -->
           <li>

@@ -29,7 +29,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <h1 class="wow fadeIn" data-wow-delay="1.2s">
-                            تعرفه ها
+                            ارتقا عضویت
                         </h1>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                     <table class="wow fadeInUp   pricing-table ">
                         <thead>
                         <tr>
-                            <th class="head-package">تعرفه ها</th>
+                            <th class="head-package">ارتقا عضویت</th>
                             <th class="head-secend-package">
                                 <div class="main-pricing-icon">
                                     <img src="<?php echo e(asset('index/images/Group_32.png')); ?>">

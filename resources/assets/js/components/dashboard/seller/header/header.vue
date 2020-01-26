@@ -337,7 +337,7 @@ span.min {
                 data-dismiss="modal"
                 class="btn green-button"
                 :to="{name:'dashboardPricingTableSeller'}"
-              >مشاهده تعرفه ها</router-link>
+              >ارتقا عضویت</router-link>
             </div>
           </div>
           <!-- /.modal-content -->
