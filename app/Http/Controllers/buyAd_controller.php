@@ -588,6 +588,7 @@ class buyAd_controller extends Controller
         $date_convertor_object = new date_convertor();
         $buyAd_recommender_object = new buyAd_recommender_controller();
 
+
         if ($user->is_seller) {
             $result_buyAds = array();
 
@@ -595,12 +596,12 @@ class buyAd_controller extends Controller
 
             $record_count = config("subscriptionPakage.type-$user->active_pakage_type.buyAd-count");
 
-            if ($record_count <= 5) {
+            if ($record_count <= config("subscriptionPakage.type-2.buyAd-count")) {
                 $buyAd_recommender_object->buyAd_list_recommender_for_seller($related_buyAds, $seller_id); //check out the method for more details
             } else {
                 $related_buyAds = $related_buyAds->toArray();
             }
-
+            
             $related_buyAds = array_slice($related_buyAds, 0, $record_count);
 
             foreach ($related_buyAds as $buyAd) {
@@ -626,29 +627,25 @@ class buyAd_controller extends Controller
 
     protected function get_related_buyAds_list_to_the_user(&$user)
     {
-//        $record_count = config("subscriptionPakage.type-$user->active_pakage_type.buyAd-count");
-
-        $buyAds = DB::table('buy_ads')
+        $query = DB::table('buy_ads')
                     ->join('myusers', 'buy_ads.myuser_id', '=', 'myusers.id')
-                    ->where('buy_ads.confirmed', true)
-                    ->select($this->related_buyAd_list_required_fields)
-                    ->orderBy('buy_ads.created_at', 'desc')
-//                    ->limit($record_count)
-                    ->get();
+                    ->where('buy_ads.confirmed', true);
+        
+        if($user->active_pakage_type == 0){
+            $query = $query->where('buy_ads.created_at','<',Carbon::now()->subHours(2));
+        }
 
+        $query = $query->select($this->related_buyAd_list_required_fields)
+                    ->orderBy('buy_ads.created_at', 'desc');
+
+        $buyAds = $query->get();
+                    
         //relevance
         $buyAds = $buyAds->filter(function ($buyAd) {
             $user_id = session('user_id');
 
             $category_record = category::find($buyAd->category_id);
             $user_record = myuser::find($user_id);
-
-//            $buyAd->profile_photo = profile::where('myuser_id',$buyAd->myuser_id)
-//                ->where('confirmed',true)
-//                ->select('profile_photo')
-//                ->get()
-//                ->last()
-//                ->profile_photo;
 
             $relevence = ($user_record->category_id == $category_record->parent_id) ? true : false;
             $user_already_offered_for_buyAd = false;
