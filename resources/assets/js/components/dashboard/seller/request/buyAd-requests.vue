@@ -254,7 +254,7 @@ ul {
               </a>
             </li>
           </ul>
-          <div class="list-placeholder-wrapper" v-if="buyAds.length <= 5">
+          <div class="list-placeholder-wrapper" v-if="buyAds.length <= 15">
             <ul class="list-placeholder">
               <li v-for="item in 3" class="list-group-item col-xs-12">
                 <p class="list-title col-sm-3 col-xs-12">
@@ -284,7 +284,7 @@ ul {
               <div class="link-wrapper-content">
                 <p>
                   سقف تعداد درخواست های خریدی که به شما نمایش داده میشود
-                  <span class="text-red">5</span>
+                  <span class="text-red">{{buyAds.length}}</span>
                   است
                 </p>
                 <router-link
