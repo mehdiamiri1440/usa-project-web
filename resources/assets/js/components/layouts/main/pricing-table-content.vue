@@ -82,7 +82,7 @@
     }
 
     .item-wrapper {
-
+        position: relative;
         padding: 8px 15px 15px;
         float: left;
     }
@@ -252,6 +252,19 @@
         margin-left: 5px;
     }
 
+    .special-badge{
+        position: absolute;
+        left: -29px;
+        background:#e41c38;
+        color:#fff;
+        font-size: 17px;
+        font-weight: bold;
+        width: 120px;
+        text-align: center;
+        padding: 3px;
+        transform: rotate(-45deg);
+        top: 14px;
+    }
     @media screen and (max-width: 992px) {
 
         .main-content-wrapper > .row > div {
@@ -354,15 +367,25 @@
         }
 
         .item-help-content {
-            right: 0px;
+            right: 0;
             top: 45px;
         }
 
+        .special-badge{
+            padding: 0 3px 3px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-right: 3px;
+            position: initial;
+            font-size: 14px;
+            width: initial;
+            transform: rotate(0);
+        }
     }
 
 </style>
 <template>
-    <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2  ">
+    <div class="col-xs-12  ">
         <div class="row">
             <div class="  col-xs-12">
                 <div class=" wrapper-background">
@@ -397,7 +420,247 @@
             <div class="main-content-wrapper  col-xs-12">
                 <div class="row">
 
-                    <div class=" pull-right col-xs-12 col-sm-6">
+
+                    <div class="pull-right col-xs-12 col-sm-6 col-md-4">
+
+                        <div class="item-wrapper  wrapper-background ">
+
+                            <div class="item-header">
+
+                                <div class="item-title">
+                                     عضویت  یک ماهه
+                                </div>
+
+                                <div class="detail-wrapper">
+
+                                    <div class="item-price text-rtl">
+
+                                        <span class="item-price-content">189,000</span>
+                                        <span class="item-currency"> تومان </span>
+
+                                    </div>
+<!--                                    <div class="item-date">
+                                        <span class="hidden-sm hidden-md hidden-lg">/</span>یک ماهه
+                                    </div>-->
+                                </div>
+
+                            </div>
+
+                            <hr/>
+
+                            <div class="item-content">
+
+                                <ul class="item-content-list">
+
+                                    <li v-for="(item, index) in priceItemOne">
+
+                                        <a data-toggle="collapse"
+                                           :href="'#content-item-one-' + index"
+                                           @click.prevent="collapseControl($event)"
+                                           class="item-help"
+                                           :title="item.helpDescription"
+                                        >
+
+                                            <i class="fa fa-question-circle"></i>
+
+                                            <div class="item-help-content collapse" :id="'content-item-one-' + index">
+
+                                                <span v-text="item.helpDescription">  </span>
+
+                                            </div>
+
+                                        </a>
+
+                                        <p class="item-content-title" v-text="item.title">
+
+                                        </p>
+
+                                        <p class="item-content-amount" v-html="item.contentUnit">
+
+                                        </p>
+
+                                    </li>
+
+
+                                </ul>
+
+                            </div>
+
+                            <div class="item-action">
+                                <p v-if="statusData.active_pakage_type >= 1" class="text-green">
+                                    در حال استفاده
+                                </p>
+
+                                <a v-else href="/payment/1" class="green-button">
+                                    ارتقاء حساب
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="pull-right col-xs-12 col-sm-6 col-md-4">
+
+                        <div class="item-wrapper  wrapper-background ">
+
+                            <div class="item-header">
+
+                                <div class="item-title">
+                                    عضویت شش ماهه
+                                </div>
+
+                                <div class="detail-wrapper">
+
+                                    <div class="item-price text-rtl">
+
+                                        <span class="item-price-content">649,000</span>
+                                        <span class="item-currency"> تومان </span>
+
+                                    </div>
+
+                                  <!--  <div class="item-date">
+                                        <span class="hidden-sm hidden-md hidden-lg">/</span>شش ماهه
+                                    </div>-->
+                                </div>
+
+                            </div>
+
+                            <hr/>
+
+                            <div class="item-content">
+
+                                <ul class="item-content-list">
+
+                                    <li v-for="(item, index) in priceItemSix">
+
+                                        <a data-toggle="collapse"
+                                           :href="'#content-item-two-' + index"
+                                           @click.prevent="collapseControl($event)"
+                                           class="item-help"
+                                           :title="item.helpDescription"
+                                        >
+
+                                            <i class="fa fa-question-circle"></i>
+
+                                            <div class="item-help-content collapse" :id="'content-item-two-' + index">
+
+                                                <span v-text="item.helpDescription">  </span>
+
+                                            </div>
+
+                                        </a>
+
+                                        <p class="item-content-title" v-text="item.title">
+
+                                        </p>
+
+                                        <p class="item-content-amount" v-html="item.contentUnit">
+
+                                        </p>
+
+                                    </li>
+
+
+                                </ul>
+
+                            </div>
+
+                            <div class="item-action">
+                                <p v-if="statusData.active_pakage_type >= 2  " class="text-green">
+                                    در حال استفاده
+                                </p>
+
+                                <a v-else href="/payment/2" class="green-button">
+                                    ارتقاء حساب
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="pull-right col-xs-12 col-sm-6 col-md-4">
+
+                        <div class="item-wrapper pro-version wrapper-background ">
+
+                            <div class="item-header">
+                                <span class="special-badge">ویژه</span>
+                                <div class="item-title">
+                                    عضویت سالانه
+                                </div>
+
+                                <div class="detail-wrapper">
+
+                                    <div class="item-price text-rtl">
+
+                                        <span class="item-price-content">689,000</span>
+                                        <span class="item-currency"> تومان </span>
+
+                                    </div>
+
+                                 <!--   <div class="item-date">
+                                        <span class="hidden-sm hidden-md hidden-lg">/</span>سالانه
+                                    </div>-->
+                                </div>
+
+                            </div>
+
+                            <hr/>
+
+                            <div class="item-content">
+
+                                <ul class="item-content-list">
+
+                                    <li v-for="(item, index) in priceItemPro">
+
+                                        <a data-toggle="collapse"
+                                           :href="'#content-item-pro-' + index"
+                                           @click.prevent="collapseControl($event)"
+                                           class="item-help"
+                                           :title="item.helpDescription"
+                                        >
+
+                                            <i class="fa fa-question-circle"></i>
+
+                                            <div class="item-help-content collapse" :id="'content-item-pro-' + index">
+
+                                                <span v-text="item.helpDescription">  </span>
+
+                                            </div>
+
+                                        </a>
+
+                                        <p class="item-content-title" v-text="item.title">
+
+                                        </p>
+
+                                        <p class="item-content-amount" v-html="item.contentUnit">
+
+                                        </p>
+
+                                    </li>
+
+
+                                </ul>
+
+                            </div>
+
+                            <div class="item-action">
+                                <p v-if="statusData.active_pakage_type >= 3" class="text-green">
+                                    در حال استفاده
+                                </p>
+
+                                <a v-else href="/payment/3" class="green-button">
+                                    ارتقاء حساب
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                 <!--   <div class=" pull-right col-xs-12 col-sm-6">
 
                         <div class="item-wrapper wrapper-background ">
 
@@ -477,89 +740,8 @@
 
                         </div>
 
-                    </div>
+                    </div>-->
 
-
-                    <div class=" col-xs-12 col-sm-6">
-
-                        <div class="item-wrapper pro-version wrapper-background ">
-
-                            <div class="item-header">
-
-                                <div class="item-title">
-                                    عضویت ویژه
-                                </div>
-
-                                <div class="detail-wrapper">
-
-                                    <div class="item-price text-rtl">
-
-                                        <span class="item-price-content">489,000</span>
-                                        <span class="item-currency"> تومان </span>
-
-                                    </div>
-
-                                    <div class="item-date">
-                                        <span class="hidden-sm hidden-md hidden-lg">/</span>سالانه
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <hr/>
-
-                            <div class="item-content">
-
-                                <ul class="item-content-list">
-
-                                    <li v-for="(item, index) in priceItemPro">
-
-                                        <a data-toggle="collapse"
-                                           :href="'#content-item-pro-' + index"
-                                           @click.prevent="collapseControl($event)"
-                                           class="item-help"
-                                           :title="item.helpDescription"
-                                        >
-
-                                            <i class="fa fa-question-circle"></i>
-
-                                            <div class="item-help-content collapse" :id="'content-item-pro-' + index">
-
-                                                <span v-text="item.helpDescription">  </span>
-
-                                            </div>
-
-                                        </a>
-
-                                        <p class="item-content-title" v-text="item.title">
-
-                                        </p>
-
-                                        <p class="item-content-amount" v-html="item.contentUnit">
-
-                                        </p>
-
-                                    </li>
-
-
-                                </ul>
-
-                            </div>
-
-                            <div class="item-action">
-                                <p v-if="statusData.active_pakage_type >= 3" class="text-green">
-                                    در حال استفاده
-                                </p>
-
-                                <a v-else href="/payment/3" class="green-button">
-                                    ارتقاء حساب
-                                </a>
-
-                            </div>
-
-                        </div>
-
-                    </div>
 
                 </div>
             </div>
@@ -576,7 +758,80 @@
         data: function () {
             return {
                 statusData: '',
-
+                priceItemOne: [
+                    {
+                        title: 'تعداد آگهی ها',
+                        contentUnit: '1',
+                        helpDescription: ' تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. '
+                    },
+                    {
+                        title: 'تعداد نردبان ',
+                        contentUnit: '0',
+                        helpDescription: 'بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد'
+                    },
+                    {
+                        title: 'نمایش در لیست محصولات ویژه',
+                        contentUnit: '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
+                        helpDescription: 'محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود'
+                    },
+                    {
+                        title: 'تایید فوری ',
+                        contentUnit: '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
+                        helpDescription: ' آگهی های فروش ثبت شده بلافاصله پس از ثبت در لیست محصولات نمایش داده می شود. '
+                    },
+                    {
+                        title: ' میزان افزایش خوشنامی ',
+                        contentUnit: '0',
+                        helpDescription: ' مقدار اعتبار اضافه شده به صفحه پروفایل شما '
+                    },
+                    {
+                        title: ' نشان فروشنده معتبر ',
+                        contentUnit: '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
+                        helpDescription: ' این نشان در صفحه پروفایل فروشنده نمایش داده می شود. '
+                    },
+                    {
+                        title: ' تعداد درخواستهای خرید ',
+                        contentUnit: '10',
+                        helpDescription: ' سقف تعداد درخواست های خریدی که به کاربر نمایش داده می شود. '
+                    }
+                ],
+                priceItemSix: [
+                    {
+                        title: 'تعداد آگهی ها',
+                        contentUnit: '2',
+                        helpDescription: ' تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. '
+                    },
+                    {
+                        title: 'تعداد نردبان ',
+                        contentUnit: '1',
+                        helpDescription: 'بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد'
+                    },
+                    {
+                        title: 'نمایش در لیست محصولات ویژه',
+                        contentUnit: '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
+                        helpDescription: 'محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود'
+                    },
+                    {
+                        title: 'تایید فوری ',
+                        contentUnit: '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
+                        helpDescription: ' آگهی های فروش ثبت شده بلافاصله پس از ثبت در لیست محصولات نمایش داده می شود. '
+                    },
+                    {
+                        title: ' میزان افزایش خوشنامی ',
+                        contentUnit: '100',
+                        helpDescription: ' مقدار اعتبار اضافه شده به صفحه پروفایل شما '
+                    },
+                    {
+                        title: ' نشان فروشنده معتبر ',
+                        contentUnit: '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
+                        helpDescription: ' این نشان در صفحه پروفایل فروشنده نمایش داده می شود. '
+                    },
+                    {
+                        title: ' تعداد درخواستهای خرید ',
+                        contentUnit: '15',
+                        helpDescription: ' سقف تعداد درخواست های خریدی که به کاربر نمایش داده می شود. '
+                    }
+                ],
                 priceItemPro: [
                     {
                         title: 'تعداد آگهی ها',
@@ -614,7 +869,8 @@
                         helpDescription: ' سقف تعداد درخواست های خریدی که به کاربر نمایش داده می شود. '
                     }
                 ],
-                priceItem: [
+
+                /*priceItem: [
                     {
                         title: 'تعداد آگهی ها',
                         contentUnit: '1',
@@ -650,7 +906,7 @@
                         contentUnit: '5',
                         helpDescription: ' سقف تعداد درخواست های خریدی که به کاربر نمایش داده می شود. '
                     }
-                ]
+                ]*/
             }
         },
         methods: {

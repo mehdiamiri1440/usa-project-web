@@ -441,7 +441,7 @@ class product_controller extends Controller
 
     protected function get_package_buyers_user_id_array()
     {
-        $user_id_array = myuser::where('active_pakage_type', 3)
+        $user_id_array = myuser::where('active_pakage_type', '<>', 0)
                                     ->select('id')
                                     ->get()
                                     ->toArray();

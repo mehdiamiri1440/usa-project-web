@@ -1,4 +1,8 @@
 <style scoped>
+.requests .main-content {
+  padding-top: 50px;
+}
+
 ul {
   overflow: hidden;
 }
@@ -135,7 +139,6 @@ ul {
 
   top: calc(50% - 82px);
 
-
   padding: 15px;
 }
 
@@ -173,6 +176,39 @@ ul {
   margin-top: 4px;
 }
 
+.fix-request-header-box {
+  background: #fff;
+  position: fixed;
+  right: 250px;
+  left: 0;
+  z-index: 1;
+  border-radius: 0;
+  padding: 10px 0;
+}
+
+.fix-request-header-box > p {
+  display: inline-block;
+}
+
+.fix-request-header-box > button {
+  margin: 0 5px 0 0;
+  padding: 1px 18px 3px;
+  max-width: 100px;
+}
+
+#main.little-main .fix-request-header-box {
+  right: 80px;
+}
+
+.detail-contents {
+  margin: 15px auto;
+}
+.detail-contents > div {
+  background: #fff;
+  padding: 7px 15px;
+  margin-bottom: 15px;
+}
+
 @media screen and (max-width: 992px) {
   .list-title,
   .needs,
@@ -181,20 +217,24 @@ ul {
   }
 
   .default-list-title {
-        padding: 4px 0;
-
+    padding: 4px 0;
   }
 
-  .detail-success{
+  .detail-success {
     margin-top: 9px;
   }
 
+  .fix-request-header-box,
+  #main.little-main .fix-request-header-box {
+    right: 0;
+  }
 }
 
 @media screen and (max-width: 767px) {
   .main-content {
     padding: 0;
   }
+
   .green-button {
     width: 100%;
   }
@@ -203,153 +243,185 @@ ul {
     text-align: center;
   }
 
-  .detail-success{
+  .detail-success {
     max-width: 300px;
     margin: 0 auto;
   }
 
-   .default-button-full-with {
+  .default-button-full-with {
     max-width: 300px;
   }
 }
 </style>
 <template>
   <div>
-    <section class="main-content col-xs-12" v-if="buyAds.length != 0">
-      <div class="title col-xs-12">
-        <div class="row">
-          <div class="col-xs-12 col-sm-4 pull-right">
-            <h1>درخواست ها</h1>
+    <div class="requests" v-show="isRequests">
+      <div class="fix-request-header-box shadow-content text-center text-rtl">
+        <p>یه متن خیلی خوب باید اینجا بنویسیم</p>
+        <button class="green-button" @click="isRequests = !isRequests">بیشتر...</button>
+      </div>
+      <section class="main-content col-xs-12" v-if="buyAds.length != 0">
+        <div class="title col-xs-12">
+          <div class="row">
+            <div class="col-xs-12 col-sm-4 pull-right">
+              <h1>درخواست ها</h1>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-xs-12">
-        <div class="row">
-          <ul class="list-unstyled">
-            <li v-for="buyAd in buyAds" class="list-group-item col-xs-12">
-              <p class="list-title col-sm-3 col-xs-12">
-                <span v-text="buyAd.category_name"></span>
-
-                <span>|</span>
-
-                <span v-text="buyAd.subcategory_name"></span>
-
-                <span v-if="buyAd.name" v-text="' | ' + buyAd.name"></span>
-              </p>
-
-              <p class="needs col-sm-4 col-xs-12">
-                <span class="static-content">میزان نیازمندی :</span>
-
-                <span v-text="buyAd.requirement_amount"></span>
-
-                <span class="static-content">کیلوگرم</span>
-              </p>
-
-              <p class="list-time col-sm-2 col-xs-12" v-text="buyAd.register_date"></p>
-
-              <a class="col-sm-3 col-xs-12" href @click.prevent="openChat(buyAd)">
-                <p class="detail-success">
-                  <span class="fas fa-comment-alt"></span> پیام به خریدار
-                </p>
-              </a>
-            </li>
-          </ul>
-          <div class="list-placeholder-wrapper" v-if="buyAds.length <= 15">
-            <ul class="list-placeholder">
-              <li v-for="item in 3" class="list-group-item col-xs-12">
+        <div class="col-xs-12">
+          <div class="row">
+            <ul class="list-unstyled">
+              <li v-for="buyAd in buyAds" class="list-group-item col-xs-12">
                 <p class="list-title col-sm-3 col-xs-12">
-                  <span>میوه</span>
+                  <span v-text="buyAd.category_name"></span>
+
                   <span>|</span>
-                  <span>خرما</span>
-                  <span>| زاهدی</span>
+
+                  <span v-text="buyAd.subcategory_name"></span>
+
+                  <span v-if="buyAd.name" v-text="' | ' + buyAd.name"></span>
                 </p>
 
                 <p class="needs col-sm-4 col-xs-12">
                   <span class="static-content">میزان نیازمندی :</span>
-                  <span>1000</span>
+
+                  <span v-text="buyAd.requirement_amount"></span>
+
                   <span class="static-content">کیلوگرم</span>
                 </p>
 
-                <p class="list-time col-sm-2 col-xs-12">۱۲ آبان , ۱۳۹۷</p>
+                <p class="list-time col-sm-2 col-xs-12" v-text="buyAd.register_date"></p>
 
-                <a href class="col-sm-3 col-xs-12">
+                <a class="col-sm-3 col-xs-12" href @click.prevent="openChat(buyAd)">
                   <p class="detail-success">
-                    <span class="fas fa-comment-alt"></span> پیام به اینکوباک
+                    <span class="fas fa-comment-alt"></span> پیام به خریدار
                   </p>
                 </a>
               </li>
             </ul>
+            <div class="list-placeholder-wrapper" v-if="buyAds.length <= 15">
+              <ul class="list-placeholder">
+                <li v-for="item in 3" class="list-group-item col-xs-12">
+                  <p class="list-title col-sm-3 col-xs-12">
+                    <span>میوه</span>
+                    <span>|</span>
+                    <span>خرما</span>
+                    <span>| زاهدی</span>
+                  </p>
 
-            <div class="link">
-              <div class="link-wrapper-content">
-                <p>
-                  سقف تعداد درخواست های خریدی که به شما نمایش داده میشود
-                  <span class="text-red">{{buyAds.length}}</span>
-                  است
-                </p>
-                <router-link
-                  class="green-button"
-                  :to="{ name : 'dashboardPricingTableSeller' }"
-                >ارتقا عضویت</router-link>
+                  <p class="needs col-sm-4 col-xs-12">
+                    <span class="static-content">میزان نیازمندی :</span>
+                    <span>1000</span>
+                    <span class="static-content">کیلوگرم</span>
+                  </p>
+
+                  <p class="list-time col-sm-2 col-xs-12">۱۲ آبان , ۱۳۹۷</p>
+
+                  <a href class="col-sm-3 col-xs-12">
+                    <p class="detail-success">
+                      <span class="fas fa-comment-alt"></span> پیام به اینکوباک
+                    </p>
+                  </a>
+                </li>
+              </ul>
+              <!-- test -->
+              <div class="link">
+                <div class="link-wrapper-content">
+                  <p>
+                    سقف تعداد درخواست های خریدی که به شما نمایش داده میشود
+                    <span
+                      class="text-red"
+                    >{{buyAds.length}}</span>
+                    است
+                  </p>
+                  <router-link
+                    class="green-button"
+                    :to="{ name : 'dashboardPricingTableSeller' }"
+                  >ارتقا عضویت</router-link>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="main-content col-xs-12 loading_images" v-else-if="buyAds.length === 0 && !load">
-      <div class="wrapper_no_pro">
-        <div class="content_no_pic">
-          <i class="fa fa-list-alt"></i>
-        </div>
+      <section
+        class="main-content col-xs-12 loading_images"
+        v-else-if="buyAds.length === 0 && !load"
+      >
+        <div class="wrapper_no_pro">
+          <div class="content_no_pic">
+            <i class="fa fa-list-alt"></i>
+          </div>
 
-        <div class="text_no_pic">
-          <p>درخواست خرید مرتبط با شما وجود ندارد</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="main-content col-xs-12" v-if="load">
-      <div class="title col-xs-12">
-        <div class="row">
-          <div class="col-xs-12 col-sm-4 pull-right">
-            <h1>درخواست ها</h1>
+          <div class="text_no_pic">
+            <p>درخواست خرید مرتبط با شما وجود ندارد</p>
           </div>
         </div>
-      </div>
-      <div class="col-xs-12">
-        <div class="row">
-          <ul class="list-unstyled">
-            <li v-for="item in 5" class="list-group-item col-xs-12">
-              <p class="default-list-title pull-right col-sm-9 hidden-xs margin-10-0">
-                <span class="placeholder-content content-full-width h-20"></span>
-              </p>
+      </section>
 
-              <p class="list-title col-sm-3 col-xs-12 hidden-md hidden-lg hidden-sm">
-                <span class="placeholder-content content-half-width h-20 margin-auto"></span>
-              </p>
-
-              <p class="needs col-sm-4 col-xs-12 hidden-md hidden-lg hidden-sm">
-                <span class="placeholder-content content-default-width h-20 margin-auto"></span>
-
-              </p>
-
-              <p class="list-time col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm" >
-                <span class="placeholder-content content-min-width h-20 margin-auto"></span>
-
-              </p>
-
-              <p class="col-sm-3 col-xs-12" >
-                <span class="placeholder-content default-button-full-with margin-10-auto"></span>
-
-              </p>
-            </li>
-          </ul>
+      <section class="main-content col-xs-12" v-if="load">
+        <div class="title col-xs-12">
+          <div class="row">
+            <div class="col-xs-12 col-sm-4 pull-right">
+              <h1>درخواست ها</h1>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+        <div class="col-xs-12">
+          <div class="row">
+            <ul class="list-unstyled">
+              <li v-for="item in 5" class="list-group-item col-xs-12">
+                <p class="default-list-title pull-right col-sm-9 hidden-xs margin-10-0">
+                  <span class="placeholder-content content-full-width h-20"></span>
+                </p>
 
+                <p class="list-title col-sm-3 col-xs-12 hidden-md hidden-lg hidden-sm">
+                  <span class="placeholder-content content-half-width h-20 margin-auto"></span>
+                </p>
+
+                <p class="needs col-sm-4 col-xs-12 hidden-md hidden-lg hidden-sm">
+                  <span class="placeholder-content content-default-width h-20 margin-auto"></span>
+                </p>
+
+                <p class="list-time col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm">
+                  <span class="placeholder-content content-min-width h-20 margin-auto"></span>
+                </p>
+
+                <p class="col-sm-3 col-xs-12">
+                  <span class="placeholder-content default-button-full-with margin-10-auto"></span>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="request-detail" v-show="!isRequests">
+      <section class="main-content col-xs-12">
+        <div class="detail-contents text-center text-rtl">
+          <div class="shadow-content">
+            <p>
+              یه متن خیلی خوب باید اینجا بنویسیم
+              یه متن خیلی خوب باید اینجا بنویسیم
+              یه متن خیلی خوب باید اینجا بنویسیم
+              یه متن خیلی خوب باید اینجا بنویسیم
+              یه متن خیلی خوب باید اینجا بنویسیم
+              یه متن خیلی خوب باید اینجا بنویسیم
+              یه متن خیلی خوب باید اینجا بنویسیم
+              یه متن خیلی خوب باید اینجا بنویسیم
+              یه متن خیلی خوب باید اینجا بنویسیم
+              یه متن خیلی خوب باید اینجا بنویسیم
+              یه متن خیلی خوب باید اینجا بنویسیم
+              یه متن خیلی خوب باید اینجا بنویسیم
+            </p>
+
+            <button class="green-button" @click="isRequests = true">یه کاری انجام میده</button>
+          </div>
+        </div>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -373,7 +445,8 @@ export default {
           message: "درخواست های جدید",
           url: "buyAdRequests"
         }
-      ]
+      ],
+      isRequests: true
     };
   },
   methods: {
@@ -411,7 +484,7 @@ export default {
             user_name: buyAd.user_name
           };
 
-          eventBus.$emit("ChatInfo",contact);
+          eventBus.$emit("ChatInfo", contact);
         })
         .catch(function(err) {
           //
