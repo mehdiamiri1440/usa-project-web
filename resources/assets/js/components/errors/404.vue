@@ -162,6 +162,7 @@
                     self.$nextTick(self.stopLoader());
                 }
             }
+            
         },
         updated() {
             this.$nextTick(this.stopLoader());
