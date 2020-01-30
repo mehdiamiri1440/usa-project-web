@@ -176,8 +176,7 @@
                             <span>راهنما</span>
                         </router-link>
                     </li>
-
-                    <li class="list-item">
+                    <li class="list-item" v-if="$parent.currentUser.user_info.active_pakage_type != 3">
                         <router-link class="pricing-table" :to="{ name : 'dashboardPricingTableSeller' }">
                             <i class="fa fa-arrow-up" aria-hidden="true"></i>
                             <span>ارتقا عضویت</span>

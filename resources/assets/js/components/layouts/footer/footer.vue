@@ -268,7 +268,7 @@ img.image-blur:hover {
 
           <div class="col-xs-12 col-sm-6 col-md-4">
             <ul class="list-unstyled footer-list">
-              <li>
+           <!--   <li>
                 <router-link
                   class="smoothScroll"
                   to="/pricing"
@@ -276,7 +276,7 @@ img.image-blur:hover {
                 >
                   ارتقا عضویت
                 </router-link>
-              </li>
+              </li>-->
               <li>
                 <router-link class="smoothScroll" to="#">قیمت روزانه</router-link>
               </li>
