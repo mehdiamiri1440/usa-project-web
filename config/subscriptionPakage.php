@@ -17,7 +17,7 @@ return [
         'price' => 0
     ],
    'type-1' => [
-       'max-products' => 2,
+       'max-products' => 1,
        'view-priority' => 3,
        'sms-to-buyers' => true,
        'immediate-confirm' => true,
@@ -29,10 +29,10 @@ return [
        'pakage-duration-in-months' => 1,
        'buyAd-count' => 10,
        'elevetor-count' => 0,
-       'price' => 189000
+       'price' => 1890000
    ],
    'type-2' => [
-       'max-products' => 5,
+       'max-products' => 2,
        'view-priority' => 2,
        'sms-to-buyers' => true,
        'immediate-confirm' => true,
@@ -44,7 +44,7 @@ return [
        'pakage-duration-in-months' => 6,
        'elevetor-count' => 1,
        'buyAd-count' => 15,
-
+       'elevetor-count' => 1,
        'price' => 6490000
    ],
     'type-3' => [

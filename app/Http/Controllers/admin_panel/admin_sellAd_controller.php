@@ -270,7 +270,7 @@ class admin_sellAd_controller extends Controller
     {
         $user_record = myuser::find($user_id);
         
-        if($user_record->active_pakage_type > 0){
+        if($user_record->active_pakage_type >= 2){
             return true;
         }
         
@@ -279,7 +279,7 @@ class admin_sellAd_controller extends Controller
     
     protected function is_it_user_first_confirmed_product($user_id)
     {
-        $products = product::where('myuser_id',$user_id)
+        $products = DB::table('products')->where('myuser_id',$user_id)
                             ->where('confirmed',true)
                             ->get();
         
