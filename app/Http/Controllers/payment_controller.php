@@ -41,12 +41,13 @@ class payment_controller extends Controller
     ];
     
     protected $gateway_max_amount_to_pay_value = 500000000; //Rials -> 50 M Toman
+    protected $allowed_package_types_to_pay = [1,2,3];
     
     public function do_payment($pakage_type)
     {
         $payment_amount = config("subscriptionPakage.type-$pakage_type.price");//$this->get_payment_amount($type,$transaction_id);
         
-        if($pakage_type != 3){
+        if(!in_array($pakage_type,$this->allowed_package_types_to_pay)){
             return redirect()->back()->withErrors([
                'error' => 'شما مجاز به انجام این پرداخت نیستید' 
             ]);
@@ -63,6 +64,7 @@ class payment_controller extends Controller
                 session(['gateway_transaction_id' => $transID]);
                 session(['pakage_type' => $pakage_type]);
                 session(['pakage_duration_in_months' => config("subscriptionPakage.type-$pakage_type.pakage-duration-in-months")]);
+                session(['elevator_count' => config("subscriptionPakage.type-$pakage_type.elevetor-count")]);
 //                session(['transaction_id' => $transaction_id]);
 //                session(['payment_type' => $type]);
                 
@@ -244,24 +246,26 @@ class payment_controller extends Controller
         $user_id = session('user_id');
         $user_record = myuser::find($user_id);
         
-        $now = Carbon::now();
-        
         $user_record->active_pakage_type = session()->pull('pakage_type');
-        $user_record->pakage_start = $now;
-        $user_record->pakage_end   = $now->addMonths(session()->pull('pakage_duration_in_months'));
+        $user_record->pakage_start = Carbon::now();
+        $user_record->pakage_end   = Carbon::now()->addMonths(session()->pull('pakage_duration_in_months'));
         
         $user_record->save();
-        
-        $user_product_record = product::where('myuser_id',$user_id)
+
+        $elevator_count = session()->pull('elevator_count');
+
+        if($elevator_count){
+            $user_product_record = product::where('myuser_id',$user_id)
                                     ->where('confirmed',true)
                                     ->orderBy('created_at') 
                                     ->first();
-        
-        if($user_product_record){
-            $user_product_record->is_elevated = true;
-            $user_product_record->elevator_expiry = $now->addDays(14);
+            
+            if($user_product_record){
+                $user_product_record->is_elevated = true;
+                $user_product_record->elevator_expiry = Carbon::now()->addDays(7);
 
-            $user_product_record->save();
+                $user_product_record->save();
+            }
         }
         
     }
