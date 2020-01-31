@@ -242,7 +242,7 @@ p.user-valid-text {
   <div
     v-if="$parent.product.user_info"
     class="user-info-wrapper wrapper-bg"
-    :class="{ 'active': $parent.product.user_info.active_pakage_type != 0 }"
+    :class="{ 'active': $parent.product.user_info.active_pakage_type == 3 }"
   >
     <router-link
       :to="'/profile/'+ $parent.product.user_info.user_name"
@@ -256,7 +256,7 @@ p.user-valid-text {
         <div class="user-image" v-else>
           <img :src="$parent.defultimg" class="image_defult" />
         </div>
-        <div class="valid-icon" v-if="$parent.product.user_info.active_pakage_type != 0">
+        <div class="valid-icon" v-if="$parent.product.user_info.active_pakage_type == 3">
           <svg width="21.75" height="21.68" viewBox="0 0 24.965 30.574">
             <g id="incobac-icon" data-name="incobac" transform="translate(-273.1 -715.025)">
               <path
@@ -297,7 +297,7 @@ p.user-valid-text {
         ></p>
 
         <p
-          v-if="$parent.product.user_info.active_pakage_type != 0"
+          v-if="$parent.product.user_info.active_pakage_type == 3"
           class="user-valid-text"
         >کاربر تایید شده</p>
 

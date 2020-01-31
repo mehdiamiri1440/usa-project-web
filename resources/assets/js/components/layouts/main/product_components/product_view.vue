@@ -113,7 +113,7 @@
         }
     }
 
-    @media screen and (max-width: 992) {
+    @media screen and (max-width: 992px) {
 
 
         .default-carousel-item:nth-child(3){
@@ -366,7 +366,7 @@
                         eventBus.$emit('ChatInfo',contact);
                     }
                     else {
-                        this.popUpMsg = 'شما نمیتوانید به خودتان پیام دهید.';
+                        this.popUpMsg = 'شما نمی توانید به خودتان پیام دهید.';
                         eventBus.$emit('submitSuccess', this.popUpMsg);
                         $('#custom-main-modal').modal('show');
                     }

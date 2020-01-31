@@ -270,7 +270,7 @@ export default {
               icon: "fas fa-address-card",
               iconColor: "#19668E",
               staticName: "",
-              upgrade: response.data.active_pakage_type < 2 ? true : false,
+              upgrade: response.data.active_pakage_type < 3 ? true : false,
               status: self.checkPackage(response.data.active_pakage_type)
             },
             {
@@ -339,10 +339,10 @@ export default {
           packageName = "عضویت رایگان";
           break;
         case 1:
-          packageName = "شماره دو";
+          packageName = "اشتراک ماهانه";
           break;
         case 2:
-          packageName = "شماره سه";
+          packageName = "اشتراک شش ماهه";
           break;
         case 3:
           packageName = "عضویت ویژه";

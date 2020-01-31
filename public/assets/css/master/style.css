@@ -108,6 +108,7 @@ section {
     color: #fff !important;
 }
 
+
 body {
     line-height: 1.1;
     font-family: IRANSans, sans-serif;
@@ -226,7 +227,9 @@ select {
     background: #279b41;
     color: #fff;
 }
-
+.btn-disabled, .btn-disabled:hover, .btn-disabled:focus{
+    background: #ddd;
+}
 
 .main-article-title-content .main-green-button {
     float: left;

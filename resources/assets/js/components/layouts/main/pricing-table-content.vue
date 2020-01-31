@@ -428,7 +428,7 @@
                             <div class="item-header">
 
                                 <div class="item-title">
-                                     عضویت  یک ماهه
+                                     اشتراک ماهانه
                                 </div>
 
                                 <div class="detail-wrapper">
@@ -487,9 +487,13 @@
                             </div>
 
                             <div class="item-action">
-                                <p v-if="statusData.active_pakage_type >= 1" class="text-green">
+                                <p v-if="statusData.active_pakage_type == 1" class="text-green">
                                     در حال استفاده
                                 </p>
+
+                                <button v-else-if="statusData.active_pakage_type > 1"  class="green-button btn-disabled" disabled>
+                                    ارتقاء حساب
+                                </button>
 
                                 <a v-else href="/payment/1" class="green-button">
                                     ارتقاء حساب
@@ -507,7 +511,7 @@
                             <div class="item-header">
 
                                 <div class="item-title">
-                                    عضویت شش ماهه
+                                    اشتراک شش ماهه
                                 </div>
 
                                 <div class="detail-wrapper">
@@ -567,9 +571,13 @@
                             </div>
 
                             <div class="item-action">
-                                <p v-if="statusData.active_pakage_type >= 2  " class="text-green">
+                                <p v-if="statusData.active_pakage_type == 2  " class="text-green">
                                     در حال استفاده
                                 </p>
+
+                                <button v-else-if="statusData.active_pakage_type > 2"  class="green-button btn-disabled" disabled>
+                                    ارتقاء حساب
+                                </button>
 
                                 <a v-else href="/payment/2" class="green-button">
                                     ارتقاء حساب
@@ -587,7 +595,7 @@
                             <div class="item-header">
                                 <span class="special-badge">ویژه</span>
                                 <div class="item-title">
-                                    عضویت سالانه
+                                    عضویت ویژه
                                 </div>
 
                                 <div class="detail-wrapper">
@@ -647,9 +655,13 @@
                             </div>
 
                             <div class="item-action">
-                                <p v-if="statusData.active_pakage_type >= 3" class="text-green">
+                                <p v-if="statusData.active_pakage_type == 3" class="text-green">
                                     در حال استفاده
                                 </p>
+
+                                <button v-else-if="statusData.active_pakage_type > 3"  class="green-button btn-disabled" disabled>
+                                    ارتقاء حساب
+                                </button>
 
                                 <a v-else href="/payment/3" class="green-button">
                                     ارتقاء حساب

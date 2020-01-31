@@ -213,11 +213,11 @@ label {
 }
 
 .article-features{
-  
+
   text-align: left;
-  
+
   direction: rtl;
-  
+
   padding: 0 15px 15px;
 
   position: absolute;
@@ -256,13 +256,13 @@ label {
 @media screen and (max-width: 555px) {
 
   .article-features{
-   
+
     position: relative;
-   
+
     padding: 0 15px;
 
     right: 0;
- 
+
   }
 
 }
@@ -271,7 +271,7 @@ label {
 <template>
   <article
     class="main-content-item"
-    :class="{ 'is-user-valid': product.user_info.active_pakage_type != 0 }"
+    :class="{ 'is-user-valid': product.user_info.active_pakage_type == 3 }"
   >
     <!--article modal-->
 
@@ -384,13 +384,13 @@ label {
     />
 
     <ArticleMainContents :productIndex="productIndex" />
-      
+
     <div class="article-features">
       <button v-if="isMyProfile"  class="elevator-event" @click.prevent="elevatorEvent()">
         <i class="fas fa-chart-line"></i>
-    
+
           اعمال نردبان
-      
+
       </button>
 
       <button v-if="product.main.is_elevated == 1" data-toggle="tooltip" data-placement="bottom"  title="نردبان اعمال شده است"  class="elevator-event active disable">
@@ -586,7 +586,7 @@ export default {
       } else {
         window.localStorage.setItem('contact',JSON.stringify(contact));
         window.localStorage.setItem('pathname',window.location.pathname);
-        
+
         this.popUpMsg =
           "اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.";
         eventBus.$emit("submitSuccess", this.popUpMsg);
@@ -711,7 +711,7 @@ export default {
     },
     elevatorEvent:function () {
         eventBus.$emit("elevatorText", "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود.");
-        
+
         console.log(this.product.main.id);
         eventBus.$emit("productId", this.product.main.id);
         $("#elevator-modal").modal("show")
@@ -721,7 +721,7 @@ export default {
   mounted() {
     this.init();
     $('.elevator-event.active').tooltip()
-    
+
   }
 };
 </script>
