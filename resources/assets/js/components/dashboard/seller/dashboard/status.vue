@@ -157,7 +157,7 @@
               class="green-button blue-brand-background"
             >
               <i class="far fa-credit-card"></i>
-              ارتقا عضویت
+              ارتقاء عضویت
             </router-link>
           </div>
         </div>
@@ -196,7 +196,7 @@
                   class="green-button blue-brand-background"
                 >
                   <i class="fa fa-arrow-up"></i>
-                  ارتقاء به عضو ویژه
+                  ارتقاء عضویت
                 </router-link>
               </div>
             </div>
@@ -342,7 +342,7 @@ export default {
           packageName = "اشتراک ماهانه";
           break;
         case 2:
-          packageName = "اشتراک شش ماهه";
+          packageName = "اشتراک 6 ماهه";
           break;
         case 3:
           packageName = "عضویت ویژه";

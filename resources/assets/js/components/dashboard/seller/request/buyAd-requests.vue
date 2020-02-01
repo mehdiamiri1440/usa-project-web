@@ -74,6 +74,10 @@ ul {
   color: #e41c38;
 }
 
+.request-detail .green-button {
+  font-size: 16px;
+  padding: 8px 30px;
+}
 .title {
   text-align: right;
   padding: 13px 15px;
@@ -205,7 +209,7 @@ ul {
 }
 .detail-contents > div {
   background: #fff;
-  padding: 7px 15px;
+  padding:  15px;
   margin-bottom: 15px;
   line-height: 25px;
   font-size: 30px;
@@ -220,7 +224,7 @@ ul {
   border-radius: 3px;
   text-align: center;
   border: none;
-  transition: 300m
+  transition: 300ms
 }
 
 
@@ -418,8 +422,8 @@ ul {
     </div>
 
     <div class="request-detail" v-show="!isRequests">
-      <section class="main-content col-xs-12">
-        <div class="detail-contents text-center text-rtl">
+      <section class="main-content  col-xs-12">
+        <div class="detail-contents shadow-content text-center text-rtl">
           <div>
             <p>
              <b> درخواست های خرید با <span class="red-text"> ۲ ساعت تاخیر</span> به اطلاع شما می رسد.<br/> برای اطلاع آنی از درخواست ها و افزایش 5 برابری احتمال فروش محصولاتتان نوع عضویت خود را ارتقا دهید.</b>
@@ -468,7 +472,7 @@ export default {
           .post('/user/profile_info')
           .then(function (response) {
                   self.currentUser = response.data;
-              
+
           });
 
       axios

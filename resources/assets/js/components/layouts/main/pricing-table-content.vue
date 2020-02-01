@@ -440,7 +440,7 @@
 
                                     </div>
 <!--                                    <div class="item-date">
-                                        <span class="hidden-sm hidden-md hidden-lg">/</span>یک ماهه
+                                        <span class="hidden-sm hidden-md hidden-lg">/</span>1 ماهه
                                     </div>-->
                                 </div>
 
@@ -492,11 +492,11 @@
                                 </p>
 
                                 <button v-else-if="statusData.active_pakage_type > 1"  class="green-button btn-disabled" disabled>
-                                    ارتقاء حساب
+                                    ارتقاء عضویت
                                 </button>
 
                                 <a v-else href="/payment/1" class="green-button">
-                                    ارتقاء حساب
+                                    ارتقاء عضویت
                                 </a>
 
                             </div>
@@ -511,7 +511,7 @@
                             <div class="item-header">
 
                                 <div class="item-title">
-                                    اشتراک شش ماهه
+                                    اشتراک 6 ماهه
                                 </div>
 
                                 <div class="detail-wrapper">
@@ -524,7 +524,7 @@
                                     </div>
 
                                   <!--  <div class="item-date">
-                                        <span class="hidden-sm hidden-md hidden-lg">/</span>شش ماهه
+                                        <span class="hidden-sm hidden-md hidden-lg">/</span>6 ماهه
                                     </div>-->
                                 </div>
 
@@ -576,11 +576,11 @@
                                 </p>
 
                                 <button v-else-if="statusData.active_pakage_type > 2"  class="green-button btn-disabled" disabled>
-                                    ارتقاء حساب
+                                    ارتقاء عضویت
                                 </button>
 
                                 <a v-else href="/payment/2" class="green-button">
-                                    ارتقاء حساب
+                                    ارتقاء عضویت
                                 </a>
 
                             </div>
@@ -660,11 +660,11 @@
                                 </p>
 
                                 <button v-else-if="statusData.active_pakage_type > 3"  class="green-button btn-disabled" disabled>
-                                    ارتقاء حساب
+                                    ارتقاء عضویت
                                 </button>
 
                                 <a v-else href="/payment/3" class="green-button">
-                                    ارتقاء حساب
+                                    ارتقاء عضویت
                                 </a>
 
                             </div>
@@ -805,6 +805,16 @@
                         title: ' تعداد درخواستهای خرید ',
                         contentUnit: '10',
                         helpDescription: ' سقف تعداد درخواست های خریدی که به کاربر نمایش داده می شود. '
+                    },
+                    {
+                        title: 'مشاهده بلافاصله درخواست خرید ',
+                        contentUnit: '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
+                        helpDescription: ' درخواست های خرید جدید بدون تاخیر به شما نمایش داده می شود. '
+                    },
+                    {
+                        title: 'تضمین بازگشت وجه ',
+                        contentUnit: '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
+                        helpDescription: ' اگر پس از سه ماه از نتیجه آن رضایت نداشته باشید 100% مبلغ پرداختی به شما بازگردانده می شود. '
                     }
                 ],
                 priceItemSix: [
@@ -842,6 +852,16 @@
                         title: ' تعداد درخواستهای خرید ',
                         contentUnit: '15',
                         helpDescription: ' سقف تعداد درخواست های خریدی که به کاربر نمایش داده می شود. '
+                    },
+                    {
+                        title: 'مشاهده بلافاصله درخواست خرید ',
+                        contentUnit: '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
+                        helpDescription: ' درخواست های خرید جدید بدون تاخیر به شما نمایش داده می شود. '
+                    },
+                    {
+                        title: 'تضمین بازگشت وجه ',
+                        contentUnit: '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
+                        helpDescription: ' اگر پس از سه ماه از نتیجه آن رضایت نداشته باشید 100% مبلغ پرداختی به شما بازگردانده می شود. '
                     }
                 ],
                 priceItemPro: [
@@ -879,6 +899,16 @@
                         title: ' تعداد درخواستهای خرید ',
                         contentUnit: 'نامحدود',
                         helpDescription: ' سقف تعداد درخواست های خریدی که به کاربر نمایش داده می شود. '
+                    },
+                    {
+                        title: 'مشاهده بلافاصله درخواست خرید ',
+                        contentUnit: '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
+                        helpDescription: ' درخواست های خرید جدید بدون تاخیر به شما نمایش داده می شود. '
+                    },
+                    {
+                        title: 'تضمین بازگشت وجه ',
+                        contentUnit: '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
+                        helpDescription: ' اگر پس از سه ماه از نتیجه آن رضایت نداشته باشید 100% مبلغ پرداختی به شما بازگردانده می شود. '
                     }
                 ],
 
