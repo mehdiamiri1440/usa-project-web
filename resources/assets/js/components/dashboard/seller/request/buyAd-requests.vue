@@ -207,7 +207,22 @@ ul {
   background: #fff;
   padding: 7px 15px;
   margin-bottom: 15px;
+  line-height: 25px;
+  font-size: 30px;
 }
+
+.red-button {
+  background: #e41c38;
+  color: #fff;
+  margin: 15px 0;
+  display: inline-block;
+  padding: 10px 35px;
+  border-radius: 3px;
+  text-align: center;
+  border: none;
+  transition: 300m
+}
+
 
 @media screen and (max-width: 992px) {
   .list-title,
@@ -239,6 +254,10 @@ ul {
     width: 100%;
   }
 
+  .red-button{
+    width: 100%;
+  }
+
   .title {
     text-align: center;
   }
@@ -256,15 +275,15 @@ ul {
 <template>
   <div>
     <div class="requests" v-show="isRequests">
-      <div v-if="currentUser.user_info.activity_type == 0" class="fix-request-header-box shadow-content text-center text-rtl" >
+      <div v-if="currentUser.user_info.active_pakage_type == 0" class="fix-request-header-box shadow-content text-center text-rtl" >
         <p>این درخواست ها کمی قدیمی است </p>
-        <button class="green-button" @click="isRequests = !isRequests">بروز رسانی درخواست ها</button>
+        <button class="red-button" @click="isRequests = !isRequests">بروز رسانی</button>
       </div>
       <section class="main-content col-xs-12" v-if="buyAds.length != 0">
         <div class="title col-xs-12">
           <div class="row">
             <div class="col-xs-12 col-sm-4 pull-right">
-              <h1>درخواست ها</h1>
+              <h1> درخواست های خرید</h1>
             </div>
           </div>
         </div>
@@ -335,7 +354,7 @@ ul {
                     است
                   </p>
                   <router-link
-                    class="green-button"
+                    class="green-button bold-text"
                     :to="{ name : 'dashboardPricingTableSeller' }"
                   >ارتقا عضویت</router-link>
                 </div>
@@ -401,23 +420,14 @@ ul {
     <div class="request-detail" v-show="!isRequests">
       <section class="main-content col-xs-12">
         <div class="detail-contents text-center text-rtl">
-          <div class="shadow-content">
+          <div>
             <p>
-              یه متن خیلی خوب باید اینجا بنویسیم
-              یه متن خیلی خوب باید اینجا بنویسیم
-              یه متن خیلی خوب باید اینجا بنویسیم
-              یه متن خیلی خوب باید اینجا بنویسیم
-              یه متن خیلی خوب باید اینجا بنویسیم
-              یه متن خیلی خوب باید اینجا بنویسیم
-              یه متن خیلی خوب باید اینجا بنویسیم
-              یه متن خیلی خوب باید اینجا بنویسیم
-              یه متن خیلی خوب باید اینجا بنویسیم
-              یه متن خیلی خوب باید اینجا بنویسیم
-              یه متن خیلی خوب باید اینجا بنویسیم
-              یه متن خیلی خوب باید اینجا بنویسیم
+             <b> درخواست های خرید با <span class="red-text"> ۲ ساعت تاخیر</span> به اطلاع شما می رسد.<br/> برای اطلاع آنی از درخواست ها و افزایش 5 برابری احتمال فروش محصولاتتان نوع عضویت خود را ارتقا دهید.</b>
             </p>
-
-            <button class="green-button" @click="isRequests = true">یه کاری انجام میده</button>
+            <router-link
+                    class="green-button"
+                    :to="{ name : 'dashboardPricingTableSeller' }"
+                  >ارتقا عضویت</router-link>
           </div>
         </div>
       </section>
@@ -453,6 +463,13 @@ export default {
     init: function() {
       this.load = true;
       var self = this;
+
+      axios
+          .post('/user/profile_info')
+          .then(function (response) {
+                  self.currentUser = response.data;
+              
+          });
 
       axios
         .post("/get_related_buyAds_list_to_the_seller")
