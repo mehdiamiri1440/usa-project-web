@@ -177,7 +177,7 @@ ul {
 }
 
 .fix-request-header-box {
-  background: #fff;
+  background: #f5f5f5;
   position: fixed;
   right: 250px;
   left: 0;
@@ -256,9 +256,9 @@ ul {
 <template>
   <div>
     <div class="requests" v-show="isRequests">
-      <div class="fix-request-header-box shadow-content text-center text-rtl">
-        <p>یه متن خیلی خوب باید اینجا بنویسیم</p>
-        <button class="green-button" @click="isRequests = !isRequests">بیشتر...</button>
+      <div v-if="currentUser.user_info.activity_type == 0" class="fix-request-header-box shadow-content text-center text-rtl" >
+        <p>این درخواست ها کمی قدیمی است </p>
+        <button class="green-button" @click="isRequests = !isRequests">بروز رسانی درخواست ها</button>
       </div>
       <section class="main-content col-xs-12" v-if="buyAds.length != 0">
         <div class="title col-xs-12">
