@@ -13,6 +13,7 @@ use App\myuser;
 use App\product;
 use App\category;
 use Carbon\Carbon;
+use DB;
 
 class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
 {
@@ -56,6 +57,19 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
                                             ->orderBy('created_at')
                                             ->get();
 
+        $premium_users_id = myuser::where('active_pakage_type','>',0)
+                                ->select('id')
+                                ->get();
+
+        $premium_products = product::where('category_id',$buyAd->category_id)
+                                            ->where('confirmed',true)
+                                            ->whereIN('myuser_id',$premium_users_id)
+                                            ->orderBy('created_at')
+                                            ->get();
+
+
+        $related_subcategory_products = $related_subcategory_products->merge($premium_products)->unique();
+
         if ($related_subcategory_products) {
             $the_most_related_product_owners = $this->get_the_most_related_product_owners_id_to_given_buyAd($buyAd, $related_subcategory_products);
         } else {
@@ -98,7 +112,7 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
             }
         }
 
-        return $most_related_product_owners;
+        return array_unique($most_related_product_owners);
     }
 
     protected function get_category_and_subcategory_name($subcategory_id)
@@ -135,16 +149,28 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
 
     protected function notify_product_owner($user_id)
     {
-        $user_phone = myuser::find($user_id)->phone;
+        $user_record = myuser::find($user_id);
 
-        $this->notify_product_owner_via_sms($user_phone);
+        if($user_record->active_pakage_type != 3){
+            $this->notify_product_owner_via_sms($user_record->phone,$delayed = true);
+        }
+        else{
+            $this->notify_product_owner_via_sms($user_record->phone);
+        }
+        
 
         $this->notify_product_owner_via_app_notification($user_id);
     }
 
-    protected function notify_product_owner_via_sms($user_phone)
+    protected function notify_product_owner_via_sms($user_phone,$delayed = false)
     {
-        sendSMS::dispatch($user_phone, 19608)->onQueue('sms');
+        if($delayed){
+            sendSMS::dispatch($user_phone, 19608)->delay(Carbon::now()->addHours(2))->onQueue('sms');
+        }
+        else{
+            sendSMS::dispatch($user_phone, 19608)->onQueue('sms');
+        }
+        
     }
 
     protected function notify_product_owner_via_app_notification($user_id)

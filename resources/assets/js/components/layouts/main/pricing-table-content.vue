@@ -595,7 +595,7 @@
                             <div class="item-header">
                                 <span class="special-badge">ویژه</span>
                                 <div class="item-title">
-                                    عضویت ویژه
+                                   عضویت ویژه سالانه
                                 </div>
 
                                 <div class="detail-wrapper">
