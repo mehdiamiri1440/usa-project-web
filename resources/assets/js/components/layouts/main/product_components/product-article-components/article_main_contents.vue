@@ -210,7 +210,7 @@ span {
       />
     </div>
     <div class="main-article-contents">
-      <div class="valid-user-badge" v-if="$parent.product.user_info.active_pakage_type != 3">
+      <div class="valid-user-badge" v-if="$parent.product.user_info.active_pakage_type == 3">
         <div class="wrapper-icon">
           <svg width="24.965" height="30.574" viewBox="0 0 24.965 30.574">
             <g id="incobac-icon" data-name="incobac" transform="translate(-273.1 -715.025)">
