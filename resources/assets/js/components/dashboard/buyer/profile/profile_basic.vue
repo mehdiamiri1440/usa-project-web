@@ -999,7 +999,7 @@ console
                                     </div>
 
                                     <div class="link-help padding-0 col-xs-12  col-md-4">
-                                        <a target="_blank" href="https://www.incobac.com/profile/bincobac">
+                                        <a target="_blank" href="https://www.buskool.com/profile/bbuskool">
                                             نمونه پروفایل تکمیل شده
                                              <i class="fa fa-question-circle"></i>
                                         </a>

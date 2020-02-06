@@ -258,7 +258,7 @@ var vm = new Vue({
             if(this.isDeviceMobile()){
 
                 var linkElement = document.createElement('a');
-                linkElement.setAttribute('href','whatsapp://send?text=' + 'https://incobac.com/profile/' + this.profileOwner.user_info.user_name);
+                linkElement.setAttribute('href','whatsapp://send?text=' + 'https://buskool.com/profile/' + this.profileOwner.user_info.user_name);
                 linkElement.setAttribute('data-action','share/whatsapp/share');
                 document.body.appendChild(linkElement);
 
@@ -269,7 +269,7 @@ var vm = new Vue({
             }
             else{
                 var input = document.createElement('input');
-                input.setAttribute('value', 'https://incobac.com/profile/' + this.profileOwner.user_info.user_name);
+                input.setAttribute('value', 'https://buskool.com/profile/' + this.profileOwner.user_info.user_name);
                 document.body.appendChild(input);
                 input.select();
                 var result = document.execCommand('copy');

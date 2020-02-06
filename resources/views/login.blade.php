@@ -36,7 +36,7 @@
 </div>
 <body>
 <div id="app">
-    <login-component logo="{{asset('assets/img/logo-incobac.png')}}" homeUrl="{{url('/')}}"></login-component>
+    <login-component logo="{{asset('assets/img/logo-buskool.png')}}" homeUrl="{{url('/')}}"></login-component>
 </div>
 </body>
 <script src="{{asset('assets/js/login/api.js')}}"></script>

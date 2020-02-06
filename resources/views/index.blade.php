@@ -100,7 +100,7 @@ NAVIGATION LINKS
                 <a class="navbar-brand test" href="/">
                 </a>
                 <p class="logo-des hidden-xs hidden-sm">
-                    اینکوباک | بازارگاه آنلاین دنیای کشاورزی
+                    باسکول | بازارگاه آنلاین دنیای کشاورزی
                 </p>
 
             </div>
@@ -116,7 +116,7 @@ NAVIGATION LINKS
 
                     <li><a href="/product-list" class="smoothScroll">لیست محصولات </a></li>
 
-                    <li><a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
+                    <li><a href="http:\\www.blog.buskool.com" class="smoothScroll">وبلاگ</a></li>
                     <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
                     <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
                     @if(session('user_id'))
@@ -187,22 +187,22 @@ NAVIGATION LINKS
                 <div class=" col-xs-12">
                     <ul class="social-icon">
                         <li>
-                            <a href="https://www.instagram.com/incobac.ir/" class="fa fa-instagram wow "></a>
+                            <a href="https://www.instagram.com/buskool.ir/" class="fa fa-instagram wow "></a>
                         </li>
                         <li>
-                            <a href="https://t.me/Incobac" class="fa fa-telegram wow "></a>
+                            <a href="https://t.me/buskool" class="fa fa-telegram wow "></a>
                         </li>
                         <li>
                             <a href="https://www.linkedin.com/company/27058131/ " class="fa fa-linkedin wow "></a>
                         </li>
                         <li>
-                            <a href="https://twitter.com/incobac" class="fa fa-twitter wow "></a>
+                            <a href="https://twitter.com/buskool" class="fa fa-twitter wow "></a>
                         </li>
                         <li>
-                            <a href="https://www.facebook.com/incobac/" class="fa fa-facebook wow "></a>
+                            <a href="https://www.facebook.com/buskool/" class="fa fa-facebook wow "></a>
                         </li>
                     </ul>
-                    <p class="wow">تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.</p>
+                    <p class="wow">تمام حقوق مادی و معنوی سایت متعلق به باسکول است.</p>
 
                 </div>
             </div>

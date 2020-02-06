@@ -258,7 +258,7 @@ p.user-valid-text {
         </div>
         <div class="valid-icon" v-if="$parent.product.user_info.active_pakage_type == 3">
           <svg width="21.75" height="21.68" viewBox="0 0 24.965 30.574">
-            <g id="incobac-icon" data-name="incobac" transform="translate(-273.1 -715.025)">
+            <g id="buskool-icon" data-name="buskool" transform="translate(-273.1 -715.025)">
               <path
                 id="Subtraction_1"
                 data-name="Subtraction 1"

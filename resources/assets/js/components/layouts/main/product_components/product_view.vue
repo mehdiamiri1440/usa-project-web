@@ -403,7 +403,7 @@
                 if (this.isDeviceMobile()) {
 
                     var linkElement = document.createElement('a');
-                    var Message = "https://incobac.com" + this.getProductUrl();
+                    var Message = "https://buskool.com" + this.getProductUrl();
                     var messageToWhatsApp = encodeURIComponent(Message);
                     var url = "whatsapp://send?text=" + messageToWhatsApp;
 
@@ -419,7 +419,7 @@
                 }
                 else {
                     var input = document.createElement('input');
-                    input.setAttribute('value', 'https://incobac.com' + this.getProductUrl());
+                    input.setAttribute('value', 'https://buskool.com' + this.getProductUrl());
                     document.body.appendChild(input);
                     input.select();
                     var result = document.execCommand('copy');
@@ -600,7 +600,7 @@
                     productProvince +
                     " " +
                     productOwnerFullName,
-                titleTemplate: "اینکوباک | %s",
+                titleTemplate: "باسکول | %s",
                 meta: [
                     {
                         name: "description",
@@ -621,23 +621,23 @@
                     },
                     {
                         name: "author",
-                        content: "اینکوباک"
+                        content: "باسکول"
                     },
                     {
                         property: "og:description",
                         content:
                             "خرید و فروش عمده و قیمت " +
                             productSubCategory +
-                            " از بهترین تولیدکنندگان ایران - اینکوباک بازار آنلاین کشاورزی ایران"
+                            " از بهترین تولیدکنندگان ایران - باسکول بازار آنلاین کشاورزی ایران"
                     },
                     {
                         property: "og:site_name",
-                        content: "اینکوباک بازارآنلاین خرید و فروش محصولات کشاورزی ایران"
+                        content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران"
                     },
                     {
                         property: "og:title",
                         content:
-                            "اینکوباک | خرید و فروش عمده و قیمت " +
+                            "باسکول | خرید و فروش عمده و قیمت " +
                             productSubCategory +
                             " " +
                             productName +

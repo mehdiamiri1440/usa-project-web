@@ -54,7 +54,7 @@ class admin_buyAd_controller extends Controller
         'description',
     ];
 
-    protected $buyAd_confirmation_sms_text = 'آگهی خرید شما در سامانه ی اینکوباک تایید گردید.';
+    protected $buyAd_confirmation_sms_text = 'آگهی خرید شما در سامانه ی باسکول تایید گردید.';
 
     public function load_unconfirmed_buyAd_list()
     {

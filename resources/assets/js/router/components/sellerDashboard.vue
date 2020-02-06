@@ -20,7 +20,7 @@
 <template>
   <div>
     <header-dash-seller
-      :logo="assets + 'assets/img/logo-incobac-white-red.png'"
+      :logo="assets + 'assets/img/logo-buskool-white-red.png'"
       :storage="storagePath"
       :defultimg="assets + 'assets/img/user-defult.png'"
       :logout="'/logout'"

@@ -296,7 +296,7 @@ img.image-blur:hover {
                   to="/help"
                   @click="registerComponentStatistics('footer','help','click-on-help')"
                 >
-                  اینکوباک چگونه
+                  باسکول چگونه
                   کار می کند؟
                 </router-link>
               </li>
@@ -327,7 +327,7 @@ img.image-blur:hover {
             <p>آدرس</p>
             <p class="vertical-padding">شیراز، خیابان ارم کوچه 15 پلاک 264</p>
             <br />
-            <p>تماس با پشتیبانی اینکوباک</p>
+            <p>تماس با پشتیبانی باسکول</p>
             <p class="vertical-padding">‌09118413054 / 09178928266</p>
           </div>
         </div>
@@ -341,7 +341,7 @@ img.image-blur:hover {
             <ul class="social-icon">
               <li>
                 <a
-                  href="https://www.instagram.com/incobac.ir/"
+                  href="https://www.instagram.com/buskool.ir/"
                   class="fab fa-instagram wow"
                   @click="registerComponentStatistics('footer','instagram','click-on-instagram')"
                 ></a>
@@ -349,7 +349,7 @@ img.image-blur:hover {
 
               <li>
                 <a
-                  href="https://t.me/Incobac"
+                  href="https://t.me/buskool"
                   class="fab fa-telegram wow"
                   @click="registerComponentStatistics('footer','telegram','click-on-telegram')"
                 ></a>
@@ -365,7 +365,7 @@ img.image-blur:hover {
 
               <li>
                 <a
-                  href="https://twitter.com/incobac"
+                  href="https://twitter.com/buskool_BS"
                   class="fab fa-twitter wow"
                   @click="registerComponentStatistics('footer','twitter','click-on-twitter')"
                 ></a>
@@ -373,7 +373,7 @@ img.image-blur:hover {
 
               <li>
                 <a
-                  href="https://www.facebook.com/incobac/"
+                  href="https://www.facebook.com/buskool1/"
                   class="fab fa-facebook wow"
                   @click="registerComponentStatistics('footer','facebook','click-on-facebook')"
                 ></a>
@@ -382,7 +382,7 @@ img.image-blur:hover {
           </div>
 
           <div class="col-xs-12 col-sm-6">
-            <p class="wow copy-right">تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.</p>
+            <p class="wow copy-right">تمام حقوق مادی و معنوی سایت متعلق به باسکول است.</p>
           </div>
         </div>
       </div>

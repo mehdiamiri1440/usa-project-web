@@ -10,7 +10,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini">پنل</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>پنل مدیریت اینکوباک</b></span>
+      <span class="logo-lg"><b>پنل مدیریت باسکول</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -126,7 +126,7 @@
             <a href="{{route('admin_panel_waiting_for_termination_transaction_list')}}"><i class="fa fa-envelope"></i><span>در انتظاراتمام تراکنش</span></a>
         </li>
         <li class="{{Request::is('admin/transaction-checkout-list') ? 'active':''}}">
-            <a href="{{route('admin_panel_waiting_for_checkout_transaction_list')}}"><i class="fa fa-envelope"></i><span>درانتظار تسویه با اینکوباک</span></a>
+            <a href="{{route('admin_panel_waiting_for_checkout_transaction_list')}}"><i class="fa fa-envelope"></i><span>درانتظار تسویه با باسکول</span></a>
         </li>
         <hr/>
         <li class="{{Request::is('admin/initiate-instant-transaction') ? 'active':''}}">

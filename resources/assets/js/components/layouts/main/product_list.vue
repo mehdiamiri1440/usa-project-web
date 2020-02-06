@@ -1032,7 +1032,7 @@ li.active a::after {
                     }
                 }
                 else {
-                    this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
+                    this.popUpMsg = 'تنها کاربران تایید شده ی باسکول مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
                     eventBus.$emit('submitSuccess', this.popUpMsg);
                     $('#auth-popup').modal('show');
                 }
@@ -1419,7 +1419,7 @@ li.active a::after {
 
             return {
                 title: 'لیست محصولات و قیمت عمده محصولات کشاورزی',
-                titleTemplate: 'اینکوباک | %s',
+                titleTemplate: 'باسکول | %s',
                 meta: [
                     {
                         name: 'description',
@@ -1427,7 +1427,7 @@ li.active a::after {
                     },
                     {
                         name: 'author',
-                        content: 'اینکوباک'
+                        content: 'باسکول'
                     },
                     {
                         property: 'og:description',
@@ -1435,11 +1435,11 @@ li.active a::after {
                     },
                     {
                         property: 'og:site_name',
-                        content: 'اینکوباک بازارآنلاین خرید و فروش محصولات کشاورزی ایران'
+                        content: 'باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران'
                     },
                     {
                         'property': 'og:title',
-                        'content': 'اینکوباک | لیست محصولات و قیمت محصولات کشاورزی'
+                        'content': 'باسکول | لیست محصولات و قیمت محصولات کشاورزی'
                     },
 
                 ]

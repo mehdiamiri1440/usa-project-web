@@ -44,8 +44,8 @@ class SendNewMessageNotification implements ShouldQueue
         $fcm_controller_object = new fcm_controller();
         
         $data = [
-            'title' => 'اینکوباک',
-            'message' => 'یک پیام جدید در اینکوباک'
+            'title' => 'باسکول',
+            'message' => 'یک پیام جدید در باسکول'
         ];
         
         $topic_name = 'FCM'.$msg->receiver_id;

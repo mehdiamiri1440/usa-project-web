@@ -6,11 +6,11 @@
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl.theme.default.min.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/profile/main-profile.css')); ?>">
     <meta name="description"
-          content="صفحه ی شخصی پروفایل کاربران اینکوباک. محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید">
+          content="صفحه ی شخصی پروفایل کاربران باسکول. محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید">
 
-    <meta property="og:site_name" content="اینکوباک">
+    <meta property="og:site_name" content="باسکول">
     <meta property="og:title" content="<?php echo e($full_name); ?>"/>
-    <meta property="og:description" content="صفحه ی شخصی پروفایل کاربران اینکوباک"/>
+    <meta property="og:description" content="صفحه ی شخصی پروفایل کاربران باسکول"/>
 
     <?php if($profile_photo): ?>
         <meta property="og:image" itemprop="image" content="<?php echo e(asset('storage/'.$profile_photo)); ?>">
@@ -23,7 +23,7 @@
     <meta property="og:image:type" content="image/jpeg"/>
     <meta property="og:image:width" content="256"/>
     <meta property="og:image:height" content="256"/>
-    <meta property="og:url" content="<?php echo e('https://www.incobac.com/profile/' . $user_name); ?>"/>
+    <meta property="og:url" content="<?php echo e('https://www.buskool.com/profile/' . $user_name); ?>"/>
     <meta property="og:type" content="website"/>
 
 <?php $__env->stopSection(); ?>
@@ -163,7 +163,7 @@
                     </div>
                     <div class="contents-info col-sm-9">
                         <p>
-                            جهت برقراری ارتباط با این فرد لطفا با کارشناسان اینکوباک تماس بگیرید.
+                            جهت برقراری ارتباط با این فرد لطفا با کارشناسان باسکول تماس بگیرید.
                         </p>
                     </div>
                 </div>
@@ -183,7 +183,7 @@
                             showProfileOwnerProducts($event)" href="">
                             <div class="inside-links">
 
-                                <i class="incobac-icon" aria-hidden="true"><img
+                                <i class="buskool-icon" aria-hidden="true"><img
                                             src="<?php echo e(asset('assets/img/lo.png')); ?>"></i> محصولات من
                             </div>
                         </a>

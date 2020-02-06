@@ -18,7 +18,7 @@ return [
         'server'       => 'iran',                // Servers: [germany || iran || test]
         'email'        => 'ali_delkhosh@ymail.com',
         'mobile'       => '09118413054',
-        'description'  => 'اینکوباک',
+        'description'  => 'باسکول',
     ],
 
     //--------------------------------

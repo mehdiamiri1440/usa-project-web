@@ -14,10 +14,10 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('meta_keywords'); ?>
-    محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,اینکوباک
+    محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,باسکول
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('title'); ?>
-    اینکوباک | بازارگاه کشاورزی
+    باسکول | بازارگاه کشاورزی
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('main_content'); ?>

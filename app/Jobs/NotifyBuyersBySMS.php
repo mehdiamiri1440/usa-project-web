@@ -48,7 +48,7 @@ class NotifyBuyersBySMS implements ShouldQueue
 //        
 //            $product_owner_user_name = $this->get_product_owner_user_name();
 //        
-//            $link = "www.incobac.com/profile/$product_owner_user_name";
+//            $link = "www.buskool.com/profile/$product_owner_user_name";
 //        
 //            $msg_array = [
 //              'یک محصول مشابه محصول درخواستی شما یافت شد',

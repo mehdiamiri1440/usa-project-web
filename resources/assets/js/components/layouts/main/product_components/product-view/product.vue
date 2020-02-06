@@ -97,7 +97,7 @@
 		padding: 3px 5px 2px;
 	}
 
-	.incobac-default-text{
+	.buskool-default-text{
 		color: #777;
 		direction: rtl;
 		text-align: right;
@@ -325,10 +325,10 @@
 					<i class="fa fa-share"></i>
                 </button>
 			</div>
-			<p class="incobac-default-text hidden-xs hidden-sm">
-				اینکوباک هیچ‌گونه منفعت و مسئولیتی در قبال معامله شما ندارد.
+			<p class="buskool-default-text hidden-xs hidden-sm">
+				باسکول هیچ‌گونه منفعت و مسئولیتی در قبال معامله شما ندارد.
 با مطالعه‌ی راهنمای 
-	<a href="https://blog.incobac.com/%d8%b1%d8%a7%d9%87%d9%86%d9%85%d8%a7%db%8c-%d8%ae%d8%b1%db%8c%d8%af-%d8%a7%d9%85%d9%86/" target="_blank">
+	<a href="https://blog.buskool.com/%d8%b1%d8%a7%d9%87%d9%86%d9%85%d8%a7%db%8c-%d8%ae%d8%b1%db%8c%d8%af-%d8%a7%d9%85%d9%86/" target="_blank">
 		خرید امن
 	</a>
 ، آسوده‌تر معامله کنید.

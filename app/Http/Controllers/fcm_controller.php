@@ -16,7 +16,7 @@ class fcm_controller extends Controller
         $notificationBuilder = new PayloadNotificationBuilder($data_array['title']);
         $notificationBuilder->setBody($data_array['message'])                
                             ->setColor('#00c569')
-                            ->setTag('Incobac')
+                            ->setTag('buskool')
                             ->setSound('default');
 
         $notification = $notificationBuilder->build();

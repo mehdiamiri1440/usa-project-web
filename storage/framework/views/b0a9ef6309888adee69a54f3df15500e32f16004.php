@@ -2,7 +2,7 @@
     <html lang="fa">
     <head>
         <meta charset="UTF-8">
-        <title>اینکوباک | بازارگاه کشاورزی</title>
+        <title>باسکول | بازارگاه کشاورزی</title>
         <script src="<?php echo e(asset('assets/js/jquery-3.3.1.min.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/js/jquery-ui.min.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/js/jquery.easing.min.js')); ?>"></script>
@@ -80,7 +80,7 @@
     <div id="appSeller">
 
         <header-dash-seller
-                logo="<?php echo e(asset('assets/img/logo-incobac.png')); ?>"
+                logo="<?php echo e(asset('assets/img/logo-buskool.png')); ?>"
                 storage="<?php echo e(asset('storage/')); ?>"
                 defultimg="<?php echo e(asset('assets/img/user-defult.png')); ?>"
                 transactroute="<?php echo e(route('my-terminated-transaction-list')); ?>"

@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- site title -->
-    <title>اینکوباک | بازارگاه کشاورزی</title>
+    <title>باسکول | بازارگاه کشاورزی</title>
 
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="<?php echo e(asset('index/css/bootstrap.min.css')); ?>">
@@ -87,7 +87,7 @@
             <a class="navbar-brand test" href="">
             </a>
             <p class="logo-des hidden-xs hidden-sm">
-                اینکوباک | بازارگاه آنلاین دنیای کشاورزی
+                باسکول | بازارگاه آنلاین دنیای کشاورزی
             </p>
 
         </div>
@@ -100,7 +100,7 @@
                 <li><a href="/" class="smoothScroll">صفحه ی اصلی</a></li>
                 <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
                 <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
-                <li><a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
+                <li><a href="http:\\www.blog.buskool.com" class="smoothScroll">وبلاگ</a></li>
 
 
                 <?php if(session('user_id')): ?>
@@ -278,7 +278,7 @@ FOOTER SECTION
                         <a href="#" class="fa fa-google-plus wow "></a>
                     </li>
                 </ul>
-                <p class="wow">تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.</p>
+                <p class="wow">تمام حقوق مادی و معنوی سایت متعلق به باسکول است.</p>
 
             </div>
         </div>

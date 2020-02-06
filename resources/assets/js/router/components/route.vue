@@ -146,7 +146,7 @@
 
             <button class="android-apk-download" @click.prevent="doDownload">
                 <i class="fas fa-download"></i>
-            دانلود اپلیکیشن اینکوباک
+            دانلود اپلیکیشن باسکول
 
 
             </button>

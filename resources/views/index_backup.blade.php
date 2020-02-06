@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="description" content="خرید و فروش مستقیم محصولات کشاورزی">
-    <meta name="keywords" content="محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,اینکوباک">
+    <meta name="keywords" content="محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,باسکول">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- site title -->
-    <title>اینکوباک | بازارگاه کشاورزی</title>
+    <title>باسکول | بازارگاه کشاورزی</title>
 
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="{{asset('index/css/bootstrap.min.css')}}">
@@ -95,7 +95,7 @@
             <a class="navbar-brand test" href="">
             </a>
             <p class="logo-des hidden-xs hidden-sm">
-                اینکوباک | بازارگاه آنلاین دنیای کشاورزی
+                باسکول | بازارگاه آنلاین دنیای کشاورزی
             </p>
 
         </div>
@@ -108,7 +108,7 @@
                 <li><a href="" class="smoothScroll">صفحه ی اصلی</a></li>
                 <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
                 <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
-                <li><a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
+                <li><a href="http:\\www.blog.buskool.com" class="smoothScroll">وبلاگ</a></li>
                 <li><a href="/product-list" class="smoothScroll">لیست محصولات </a></li>
 
 
@@ -157,7 +157,7 @@ INTRO SECTION
                     <h1 class="wow fadeIn main-logo" data-wow-delay="1s"><img
                                 src="{{asset('/index/images/logo_white.png')}}">
                     </h1>
-                    <h2 class="wow fadeIn" data-wow-delay="1.2s">اینکوباک | سامانه خرید و فروش عمده محصولات
+                    <h2 class="wow fadeIn" data-wow-delay="1.2s">باسکول | سامانه خرید و فروش عمده محصولات
                         کشاورزی</h2>
                 </div>
                 <div class="col-xs-12">
@@ -248,7 +248,7 @@ SERVICES SECTION
 <section id="services" class="parallax-section">
     <div class="container">
         <div class="row">
-            <h2>خدمات اینکوباک</h2>
+            <h2>خدمات باسکول</h2>
             <div class="col-xs-12 col-sm-6">
                 <div class="title_image_service">
                     <img src="{{asset('index/images/buyer.jpg')}}" alt="">
@@ -292,7 +292,7 @@ SERVICES SECTION
                             </li>
                             <li><span>بهره گیری از پرداخت کاملا نقـدی برای معامـــلات</span>
                             </li>
-                            <li><span>بهره مندی از مشاوره تخصصی کارشناسان اینکوباک</span>
+                            <li><span>بهره مندی از مشاوره تخصصی کارشناسان باسکول</span>
                             </li>
 
                         </ul>
@@ -374,7 +374,7 @@ RECENT BLOG POSTS SECTION
 <section id="recent" class="parallax-section">
     <div class="container">
         <div class="row">
-            <h2 style="margin: 10px auto 20px ">وبلاگ اینکوباک</h2>
+            <h2 style="margin: 10px auto 20px ">وبلاگ باسکول</h2>
             <div class=" wow fadeIn  col-sm-4 animated" data-wow-delay="0.9s"
                  style="visibility: visible; animation-delay: 0.9s; animation-name: fadeIn;" v-for="post in posts">
                 <div class="detail-thumb">
@@ -383,7 +383,7 @@ RECENT BLOG POSTS SECTION
                     </div>
                     <h3>@{{post.post_title}}</h3>
                     <p v-html="post.post_content.substr(0,150) + '...'"></p>
-                    <a :href="post.guid" class="btn-incobac">بیشتر بخوانید ...</a>
+                    <a :href="post.guid" class="btn-buskool">بیشتر بخوانید ...</a>
                 </div>
             </div>
         </div>
@@ -433,7 +433,7 @@ FAQ SECTION
                             <h4 class="panel-title">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
                                    aria-expanded="false" aria-controls="collapseTwo">
-                                    تعرفه های ثبت آگهی در اینکوباک چگونه است؟
+                                    تعرفه های ثبت آگهی در باسکول چگونه است؟
                                 </a>
                             </h4>
                         </div>
@@ -441,7 +441,7 @@ FAQ SECTION
                              aria-labelledby="headingTwo">
                             <div class="panel-body">
                                 <p>تمامی خدمات از جمله ثبت آگهی،ساخت پروفایل شخصی، مشاهده ی اطلاعات افراد و مشاوره ی
-                                    خرید و فروش در سامانه اینکوباک رایگان است.</p>
+                                    خرید و فروش در سامانه باسکول رایگان است.</p>
                             </div>
                         </div>
                     </div>
@@ -459,7 +459,7 @@ FAQ SECTION
                              aria-labelledby="headingThree">
                             <div class="panel-body">
                                 <p>تکمیل پروفایل یکی از ارکان مهم اعتماد سازی و ایجاد تمایز نسب به رقبا، در تجارت است.
-                                    در اینکوباک این فضا فراهم شده تا خریداران و تامین کنندگان اطلاعات شخصی و شرکت خود،
+                                    در باسکول این فضا فراهم شده تا خریداران و تامین کنندگان اطلاعات شخصی و شرکت خود،
                                     سابقه فعالیت و توضیحات مربوط به کسب و کار خود را ارائه دهند. تمامی توضیحات و مواردی
                                     که برای جذب خریداران و فروشندگان بالقوه لازم است را می توانید در صفحه شخصی خود ارائه
                                     دهید.</p>
@@ -536,7 +536,7 @@ FAQ SECTION
                         <a href="#" class="fa fa-google-plus wow " ></a>
                     </li>
                 </ul>
-                <p class="wow" >تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.</p>
+                <p class="wow" >تمام حقوق مادی و معنوی سایت متعلق به باسکول است.</p>
 
             </div>
         </div>

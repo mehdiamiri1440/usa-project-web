@@ -7,10 +7,10 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('meta_keywords'); ?>
-    محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,اینکوباک
+    محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,باسکول
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('title'); ?>
-    اینکوباک | بازارگاه کشاورزی
+    باسکول | بازارگاه کشاورزی
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('main_content'); ?>
@@ -29,7 +29,7 @@
                         <h1 class="wow fadeIn main-logo" data-wow-delay="1s"><img
                                     src="<?php echo e(asset('/index/images/logo_white.png')); ?>">
                         </h1>
-                        <h2 class="wow fadeIn" data-wow-delay="1.2s">اینکوباک | سامانه خرید و فروش عمده محصولات
+                        <h2 class="wow fadeIn" data-wow-delay="1.2s">باسکول | سامانه خرید و فروش عمده محصولات
                             کشاورزی</h2>
                     </div>
                     <div class="col-xs-12">
@@ -188,7 +188,7 @@
     <section id="services" class="parallax-section">
         <div class="container">
             <div class="row">
-                <h2>خدمات اینکوباک</h2>
+                <h2>خدمات باسکول</h2>
                 <div class="col-xs-12 col-sm-6">
                     <div class="title_image_service">
                         <img src="<?php echo e(asset('index/images/buyer.jpg')); ?>" alt="">
@@ -232,7 +232,7 @@
                                 </li>
                                 <li><span>بهره گیری از پرداخت کاملا نقـدی برای معامـــلات</span>
                                 </li>
-                                <li><span>بهره مندی از مشاوره تخصصی کارشناسان اینکوباک</span>
+                                <li><span>بهره مندی از مشاوره تخصصی کارشناسان باسکول</span>
                                 </li>
 
                             </ul>
@@ -364,7 +364,7 @@
     <section  class="parallax-section ">
         <div class="container">
             <div class="row">
-                <h2 class="text-center col-xs-12"> وبلاگ اینکوباک</h3>
+                <h2 class="text-center col-xs-12"> وبلاگ باسکول</h3>
                 <div class="owl-carousel col-xs-12">
 
                     <article class="wow fadeIn " data-wow-delay="0.4s" v-for="product in homePageProducts">

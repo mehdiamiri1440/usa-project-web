@@ -76,7 +76,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    درحال بازگشت به اینکوباک...
+                    درحال بازگشت به باسکول...
                 </div>
 
             </div>

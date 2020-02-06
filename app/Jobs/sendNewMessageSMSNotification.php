@@ -32,7 +32,7 @@ class sendNewMessageSMSNotification implements ShouldQueue
         $msg_controller_object->update_daily_sms_black_list($users_to_notify);
 
         $users_to_notify->each(function ($user) {
-            sendSMS::dispatch($user->phone,17705)->onQueue('sms');
+            sendSMS::dispatch($user->phone,20691)->onQueue('sms');
         });
     }
 }

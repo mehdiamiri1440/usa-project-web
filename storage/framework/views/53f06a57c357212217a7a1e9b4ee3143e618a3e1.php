@@ -7,10 +7,10 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('meta_keywords'); ?>
-    محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,اینکوباک
+    محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,باسکول
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('title'); ?>
-    اینکوباک | بازارگاه کشاورزی
+    باسکول | بازارگاه کشاورزی
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('main_content'); ?>
@@ -44,13 +44,13 @@
                     <br/>
                     <ul class="text-right">
                         <li>شماره تماس  :‌09118413054 / 09178928266</li>
-                        <li>ایمیل پشتیبانی :‌support@incobac.com</li>
+                        <li>ایمیل پشتیبانی :‌support@buskool.com</li>
                         <li>ایمیل شخصی مدیر فنی :‌ ali_delkhosh@ymail.com</li>
                         <li></li>
                     </ul>
                     
                     <p class="text-right">
-                        سوالات، انتقادات و پیشنهادات خود را از طریق آدرس ایمیل support@incobac.com با ما در میان بگذارید.
+                        سوالات، انتقادات و پیشنهادات خود را از طریق آدرس ایمیل support@buskool.com با ما در میان بگذارید.
                     </p>
                 </div>
             </div>

@@ -65,7 +65,7 @@
         <section class="parallax-section policy">
             <div class="overlay"></div>
             <div class="container">
-                <h3 class="text-right ">اینکوباک چگونه کار می کند؟</h3>
+                <h3 class="text-right ">باسکول چگونه کار می کند؟</h3>
 
                 <div id="accordion" role="tablist" aria-multiselectable="true" class="panel-group">
 
@@ -73,13 +73,13 @@
                         <div role="tab" id="headingFirst" class="panel-heading"><h4 class="panel-title"><a
                                 data-toggle="collapse" data-parent="#accordion" href="#collapseFirst"
                                 aria-expanded="false" aria-controls="collapseFirst" class="collapsed">
-                            اینکوباک چیست؟
+                            باسکول چیست؟
                         </a></h4></div>
                         <div id="collapseFirst" role="tabpanel" aria-labelledby="headingFirst"
                              class="panel-collapse collapse">
                             <div class="panel-body">
                                 <p>
-                                    اینکوباک بازار خرید و فروش عمده محصولات کشاورزی است که خریداران را به فروشندگان دست
+                                    باسکول بازار خرید و فروش عمده محصولات کشاورزی است که خریداران را به فروشندگان دست
                                     اول محصولات کشاورزی متصل کرده و خریدار و فروشنده بدون واسطه می توانند با یکدیگر
                                     ارتباط بر قرار کنند.
                                 </p>
@@ -90,18 +90,18 @@
                         <div role="tab" id="headingTwo" class="panel-heading"><h4 class="panel-title"><a
                                 data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
                                 aria-expanded="false" aria-controls="collapseTwo" class="collapsed">
-                            خدمات اینکوباک برای فروشندگان چیست؟
+                            خدمات باسکول برای فروشندگان چیست؟
                         </a></h4></div>
                         <div id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo"
                              class="panel-collapse collapse">
                             <div class="panel-body">
                                 <p>
                                     اگر کشاورز، باغدار و تولید کننده محصولات کشاورزی هستید می توانید به عنوان فروشنده در
-                                    بازار اینکوباک فعالیت کنید. پس از ثبت محصول خود و تکمیل پروفایل، به جدید ترین
-                                    درخواست های خرید که توسط خریداران بر روی اینکوباک قرار گرفته است می توانید پاسخ
+                                    بازار باسکول فعالیت کنید. پس از ثبت محصول خود و تکمیل پروفایل، به جدید ترین
+                                    درخواست های خرید که توسط خریداران بر روی باسکول قرار گرفته است می توانید پاسخ
                                     دهید.
                                     <br/>
-                                    از طریق اینکوباک با خریداران در سراسر کشور آشنا شده و محصولات خود را راحت تر و با
+                                    از طریق باسکول با خریداران در سراسر کشور آشنا شده و محصولات خود را راحت تر و با
                                     قیمت مناسب تر به فروش برسانید.
                                 </p>
                             </div>
@@ -111,14 +111,14 @@
                         <div role="tab" id="headingThree" class="panel-heading"><h4 class="panel-title"><a
                                 data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
                                 aria-expanded="false" aria-controls="collapseThree" class="collapsed">
-                            خدمات اینکوباک برای خریداران چیست؟
+                            خدمات باسکول برای خریداران چیست؟
                         </a></h4></div>
                         <div id="collapseThree" role="tabpanel" aria-labelledby="headingThree"
                              class="panel-collapse collapse">
                             <div class="panel-body">
                                 <p>
                                     اگر صادر کننده، خریدار عمده و بنکدار هستید می توانید به عنوان خریدار در بازار
-                                    اینکوباک فعالیت کنید. شما میتوانید از طریق لیست محصولات، کالای مورد نظر خود را جستجو
+                                    باسکول فعالیت کنید. شما میتوانید از طریق لیست محصولات، کالای مورد نظر خود را جستجو
                                     کرده و از راه ارسال پیام همچنین استعلام قیمت با فروشندگان به صورت مستقیم و بدون
                                     واسطه ارتباط برقرار کنید.
                                     <br/>
@@ -134,20 +134,20 @@
                         <div role="tab" id="headingFour" class="panel-heading"><h4 class="panel-title"><a
                                 data-toggle="collapse" data-parent="#accordion" href="#collapseFour"
                                 aria-expanded="false" aria-controls="collapseFour" class="collapsed">
-                            چگونه در سامانه اینکوباک ثبت نام کنم؟
+                            چگونه در سامانه باسکول ثبت نام کنم؟
                         </a></h4></div>
                         <div id="collapseFour" role="tabpanel" aria-labelledby="headingFour"
                              class="panel-collapse collapse">
                             <div class="panel-body">
                                 <ul>
                                     <li>
-                                        جهت ثبت نام دکمه ورود به اینکوباک یا
+                                        جهت ثبت نام دکمه ورود به باسکول یا
                                         <router-link
                                                 :to="{name : 'login'}" target="_blank">ورود/ثبت نام</router-link>
                                         کلیک کنید
                                     </li>
                                     <li>سپس در صفحه ورود روی دکمه ی <router-link :to="{name : 'register'}" target="_blank">ثبت نام در
-                                        اینکوباک</router-link> کلیک
+                                        باسکول</router-link> کلیک
                                         کنید.
                                     </li>
                                     <li>
@@ -324,7 +324,7 @@
                         <div role="tab" id="headingFive" class="panel-heading"><h4 class="panel-title"><a
                                 data-toggle="collapse" data-parent="#accordion" href="#collapseFive"
                                 aria-expanded="false" aria-controls="collapseFive" class="collapsed">
-                            چگونه در اینکوباک محصول ثبت کنم؟ (فروشندگان)
+                            چگونه در باسکول محصول ثبت کنم؟ (فروشندگان)
                         </a></h4></div>
                         <div id="collapseFive" role="tabpanel" aria-labelledby="headingFive"
                              class="panel-collapse collapse">
@@ -436,7 +436,7 @@
                                     </li>
 
                                     <li>
-                                        محصول شما پس از تایید ناظران اینکوباک در صفحه ی <router-link :to="{name : 'productList'}"
+                                        محصول شما پس از تایید ناظران باسکول در صفحه ی <router-link :to="{name : 'productList'}"
                                                                                            target="_blank">لیست
                                         محصولات</router-link>
                                         نمایش داده می شود و خریداران می توانند درخواست های خرید خود را برای شما ارسال
@@ -452,7 +452,7 @@
                                 <a
                                         data-toggle="collapse" data-parent="#accordion" href="#collapseSix"
                                         aria-expanded="false" aria-controls="collapseSix" class="collapsed">
-                                    چگونه درخواست خرید خود را در اینکوباک ثبت کنم؟ (خریداران)
+                                    چگونه درخواست خرید خود را در باسکول ثبت کنم؟ (خریداران)
                                 </a>
                             </h4>
                         </div>
@@ -509,7 +509,7 @@
 
                                     </li>
                                     <li>
-                                        درخواست شما پس از تایید ناظران اینکوباک برای تامین کنندگان مربوطه ارسال می شود تا قیمت ، تصاویر و سایر جزییات محصولشان را برایتان ارسال کنند.
+                                        درخواست شما پس از تایید ناظران باسکول برای تامین کنندگان مربوطه ارسال می شود تا قیمت ، تصاویر و سایر جزییات محصولشان را برایتان ارسال کنند.
                                         <br>
                                         برای مشاهده ی پاسخ فروشندگان به قسمت پیام ها مراجعه کنید.
                                     </li>
@@ -560,13 +560,13 @@
                         <div role="tab" id="headingEight" class="panel-heading"><h4 class="panel-title"><a
                                 data-toggle="collapse" data-parent="#accordion" href="#collapseEight"
                                 aria-expanded="false" aria-controls="collapseEight" class="collapsed">
-                            پیام رسان اینکوباک
+                            پیام رسان باسکول
                         </a></h4></div>
                         <div id="collapseEight" role="tabpanel" aria-labelledby="headingEight"
                              class="panel-collapse collapse">
                             <div class="panel-body">
                                 <p>
-                                    خریداران و فروشندگان عزیز می توانند از طریق پیام رسان تجاری اینکوباک در هر لحظه (بدون ایجاد مزاحمت در اثر تعداد زیاد تماس) با یکدیگر ارتباط برقرار کنند، به صورت روزانه استعلام قیمت بگیرند و در صورت صلاح دید نسبت به تبادل شماره ی تماس و برقراری تماس تلفنی اقدام کنند.
+                                    خریداران و فروشندگان عزیز می توانند از طریق پیام رسان تجاری باسکول در هر لحظه (بدون ایجاد مزاحمت در اثر تعداد زیاد تماس) با یکدیگر ارتباط برقرار کنند، به صورت روزانه استعلام قیمت بگیرند و در صورت صلاح دید نسبت به تبادل شماره ی تماس و برقراری تماس تلفنی اقدام کنند.
                                 </p>
 
                                 <div class="desktop-image">
@@ -593,7 +593,7 @@
                              class="panel-collapse collapse">
                             <div class="panel-body">
                                 <p>
-                                    شما با عضویت رایگان می توانید به صورت محدود از خدمات اینکوباک استفاده کنید. برای استفاده نامحدود از خدمات اینکوباک ( ثبت محصولات بیشتر، دیدن همه درخواست های خرید اولویت در نمایش و...) می توانید حساب کاربری خود را به عضویت ویژه ارتقا دهید و به عنوان کاربر ویژه در جمع خریداران و فروشندگان فعالیت کنید.
+                                    شما با عضویت رایگان می توانید به صورت محدود از خدمات باسکول استفاده کنید. برای استفاده نامحدود از خدمات باسکول ( ثبت محصولات بیشتر، دیدن همه درخواست های خرید اولویت در نمایش و...) می توانید حساب کاربری خود را به عضویت ویژه ارتقا دهید و به عنوان کاربر ویژه در جمع خریداران و فروشندگان فعالیت کنید.
                                 </p>
                             </div>
                         </div>
@@ -611,7 +611,7 @@
                                 لیست درخواست های خرید
                             </router-link>
 
-                            <router-link v-else :to="{name : 'register'}" class="green-button">ثبت نام در اینکوباک</router-link>
+                            <router-link v-else :to="{name : 'register'}" class="green-button">ثبت نام در باسکول</router-link>
 
                         </h1>
                     </div>
@@ -653,8 +653,8 @@
         metaInfo() {
 
             return {
-                title: ' اینکوباک چگونه کار می کند؟ ',
-                titleTemplate: 'اینکوباک | %s',
+                title: ' باسکول چگونه کار می کند؟ ',
+                titleTemplate: 'باسکول | %s',
                 meta: [
                     {
                         name: 'description',
@@ -662,7 +662,7 @@
                     },
                     {
                         name: 'author',
-                        content: 'اینکوباک'
+                        content: 'باسکول'
                     },
                     {
                         'property': 'og:description',
@@ -670,11 +670,11 @@
                     },
                     {
                         'property': 'og:site_name',
-                        'content': 'اینکوباک بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران'
+                        'content': 'باسکول بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران'
                     },
                     {
                         'property': 'og:title',
-                        'content': ' اینکوباک | بازار خرید و فروش عمده محصولات کشاورزی '
+                        'content': ' باسکول | بازار خرید و فروش عمده محصولات کشاورزی '
                     },
 
                 ]

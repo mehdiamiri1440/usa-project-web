@@ -191,7 +191,7 @@ class sms_controller extends Controller
     public function send_new_generated_password($password,$user_phone)
     {
         try{
-            Smsir::ultraFastSend(['newPassword' => $password],17697,$user_phone);
+            Smsir::ultraFastSend(['newPassword' => $password],20694,$user_phone);
         }
         catch(\Exception $e){
             //
@@ -249,7 +249,7 @@ class sms_controller extends Controller
     public function send_new_message_sms_notification($phone_number)
     {
         try{
-            Smsir::ultraFastSend(['name' => 'کاربر'],17705,$phone_number);
+            Smsir::ultraFastSend(['name' => 'کاربر'],20691,$phone_number);
         }
         catch(\Exception $e){
             //

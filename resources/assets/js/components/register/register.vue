@@ -405,7 +405,7 @@
                                         <!-- <i class="fa fa-arrow-left"></i> -->
                                     </p>
 
-                                    <h1 class="col-xs-8">ثبت نام در اینکوباک</h1>
+                                    <h1 class="col-xs-8">ثبت نام در باسکول</h1>
 
                                     <a
                                             href="#"
@@ -1259,7 +1259,7 @@
 
             return {
                 title: 'ثبت نام',
-                titleTemplate: 'اینکوباک | %s',
+                titleTemplate: 'باسکول | %s',
                 meta: [
                     {
                         name: 'description',
@@ -1267,7 +1267,7 @@
                     },
                     {
                         name: 'author',
-                        content: 'اینکوباک'
+                        content: 'باسکول'
                     },
                     {
                         property: 'og:description',
@@ -1275,11 +1275,11 @@
                     },
                     {
                         property: 'og:site_name',
-                        content: 'اینکوباک بازارآنلاین خرید و فروش محصولات کشاورزی ایران'
+                        content: 'باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران'
                     },
                     {
                         'property': 'og:title',
-                        'content': 'اینکوباک | ثبت نام'
+                        'content': 'باسکول | ثبت نام'
                     },
 
                 ]
