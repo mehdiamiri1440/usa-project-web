@@ -36,7 +36,7 @@
 </div>
 <body>
 <div id="app">
-    <login-component logo="<?php echo e(asset('assets/img/logo-incobac.png')); ?>" homeUrl="<?php echo e(url('/')); ?>"></login-component>
+    <login-component logo="<?php echo e(asset('assets/img/logo-buskool.png')); ?>" homeUrl="<?php echo e(url('/')); ?>"></login-component>
 </div>
 </body>
 <script src="<?php echo e(asset('assets/js/login/api.js')); ?>"></script>

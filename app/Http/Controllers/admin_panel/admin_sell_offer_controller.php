@@ -148,9 +148,9 @@ class admin_sell_offer_controller extends Controller
         $buyer_user_id = $this->get_buyer_user_id_by_buyAd_id($buyAd_id);
         
         $msg_array = [
-            'خریدار محترم اینکوباک',
+            'خریدار محترم باسکول',
             'یک پیشنهاد فروش برای درخواست خرید شما ثبت شده',
-            'برای بررسی به www.incobac.com مراجعه کنید',
+            'برای بررسی به www.buskool.com مراجعه کنید',
         ];
         
         $sms_controller_object = new sms_controller();

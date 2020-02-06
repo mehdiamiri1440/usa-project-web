@@ -426,7 +426,7 @@ footer {
     background: rgba(20, 139, 0, 1);
 }
 
-.btn-incobac {
+.btn-buskool {
     background: #3c9544;
     border-radius: 3px;
     color: #ffffff;
@@ -437,7 +437,7 @@ footer {
     transition: 200ms;
 }
 
-.btn-incobac:hover {
+.btn-buskool:hover {
     background: #52ba27;;
     color: #fff;
     transition: 200ms;

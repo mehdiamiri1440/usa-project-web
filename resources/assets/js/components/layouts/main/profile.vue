@@ -209,7 +209,7 @@
         position: relative;
     }
 
-    .sub-header i.incobac-icon {
+    .sub-header i.buskool-icon {
         top: -6px;
     }
 
@@ -1055,7 +1055,7 @@
                             <a @click="showProfileOwnerProducts($event)" href="#">
 
                                 <div class="inside-links">
-                                    <i class="incobac-icon" aria-hidden="true"><img
+                                    <i class="buskool-icon" aria-hidden="true"><img
                                             :src="incobaicon"></i> محصولات من
                                 </div>
                             </a>
@@ -1518,7 +1518,7 @@
                 if (this.isDeviceMobile()) {
 
                     var linkElement = document.createElement('a');
-                    var Message = "https://incobac.com/profile/" + this.profileOwner.user_info.user_name;
+                    var Message = "https://buskool.com/profile/" + this.profileOwner.user_info.user_name;
                     var messageToWhatsApp = encodeURIComponent(Message);
                     var url = "whatsapp://send?text=" + messageToWhatsApp;
                     linkElement.setAttribute('href', url);
@@ -1531,7 +1531,7 @@
                 }
                 else {
                     var input = document.createElement('input');
-                    input.setAttribute('value', 'https://incobac.com/profile/' + this.profileOwner.user_info.user_name);
+                    input.setAttribute('value', 'https://buskool.com/profile/' + this.profileOwner.user_info.user_name);
                     document.body.appendChild(input);
                     input.select();
                     var result = document.execCommand('copy');
@@ -1591,14 +1591,14 @@
 
                 var images = [];
                 profileOwner.certificates.forEach(function (photo) {
-                    images.push("https://incobac.com/storage/" + photo);
+                    images.push("https://buskool.com/storage/" + photo);
                 });
                 profileOwner.relateds.forEach(function (photo) {
-                    images.push("https://incobac.com/storage/" + photo);
+                    images.push("https://buskool.com/storage/" + photo);
                 });
 
                 if (profileOwner.profile.profile_photo) {
-                    images.push("https://incobac.com/storage/" + profileOwner.profile.profile_photo)
+                    images.push("https://buskool.com/storage/" + profileOwner.profile.profile_photo)
                 }
 
                 if (profileOwner.user_info.is_seller) {
@@ -1622,7 +1622,7 @@
                     "name": fullName,
                     "gender": gender,
                     "nationality": "Iranian",
-                    "url": "http://www.incobac.com/profile/" + profileOwner.user_info.user_name
+                    "url": "http://www.buskool.com/profile/" + profileOwner.user_info.user_name
                 };
 
                 return jsondl;
@@ -1650,7 +1650,7 @@
         metaInfo() {
             let fullName = this.profileOwner.user_info.first_name + ' ' + this.profileOwner.user_info.last_name;
 
-            let url = 'https://incobac.com/profile/' + this.profileOwner.user_info.user_name;
+            let url = 'https://buskool.com/profile/' + this.profileOwner.user_info.user_name;
             let profilePhoto = '';
 
             if (this.profileOwner.profile.profile_photo) {
@@ -1662,7 +1662,7 @@
 
             return {
                 title: fullName,
-                titleTemplate: 'اینکوباک | %s',
+                titleTemplate: 'باسکول | %s',
                 meta: [
                     {name: 'description', content: ' محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید'},
                     {
@@ -1683,11 +1683,11 @@
                     },
                     {
                         'property': 'og:description',
-                        'content': 'صفحه ی پروفایل کاربران اینکوباک'
+                        'content': 'صفحه ی پروفایل کاربران باسکول'
                     },
                     {
                         'property': 'og:site_name',
-                        'content': 'اینکوباک'
+                        'content': 'باسکول'
                     },
                     {
                         'property': 'og:url',

@@ -358,7 +358,7 @@ i.fa-home {
       </div>
 
       <div class="content-header">
-        <span class="font-big">اینکوباک</span>
+        <span class="font-big">باسکول</span>
         <span>بازارگاه آنلاین کشاورزی</span>
       </div>
 

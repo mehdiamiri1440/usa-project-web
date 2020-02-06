@@ -511,7 +511,7 @@ class transaction_controller extends Controller
             switch($user_role){
                 case 'seller' :
                     //send sms to the seller
-                    $msg_array [] = 'فروشنده محترم اینکوباک';
+                    $msg_array [] = 'فروشنده محترم باسکول';
                     $msg_array [] =  $msg;
                     $msg_array [] = 'شماره تراکنش' . ' : ' . $transaction_id ;
                     
@@ -522,7 +522,7 @@ class transaction_controller extends Controller
                     //send sms to the buyer
                     $buyer_user_id = $this->get_buyAd_owner_user_id($buyAd_id);
                     
-                    $msg_array [] = 'خریدار محترم اینکوباک';
+                    $msg_array [] = 'خریدار محترم باسکول';
                     $msg_array [] =  $msg;
                     $msg_array [] = 'شماره تراکنش' . ' : ' . $transaction_id ;
                     

@@ -17,13 +17,13 @@
 
                         <ul class="text-right">
                             <li>شماره تماس :‌09118413054 / 09178928266</li>
-                            <li>ایمیل پشتیبانی :‌support@incobac.com</li>
+                            <li>ایمیل پشتیبانی :‌support@buskool.com</li>
                             <li>ایمیل شخصی مدیر فنی :‌ ali_delkhosh@ymail.com</li>
                             <li></li>
                         </ul>
 
                         <p class="text-right">
-                            سوالات، انتقادات و پیشنهادات خود را از طریق آدرس ایمیل support@incobac.com با ما در میان
+                            سوالات، انتقادات و پیشنهادات خود را از طریق آدرس ایمیل support@buskool.com با ما در میان
                             بگذارید.
                         </p>
                     </div>
@@ -62,7 +62,7 @@
 
             return {
                 title: ' تماس با ما ',
-                titleTemplate: 'اینکوباک | %s',
+                titleTemplate: 'باسکول | %s',
                 meta: [
                     {
                         name: 'description',
@@ -70,7 +70,7 @@
                     },
                     {
                         name: 'author',
-                        content: 'اینکوباک'
+                        content: 'باسکول'
                     },
                     {
                         'property': 'og:description',
@@ -78,11 +78,11 @@
                     },
                     {
                         'property': 'og:site_name',
-                        'content': 'اینکوباک بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران'
+                        'content': 'باسکول بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران'
                     },
                     {
                         'property': 'og:title',
-                        'content': ' اینکوباک | بازار خرید و فروش عمده محصولات کشاورزی '
+                        'content': ' باسکول | بازار خرید و فروش عمده محصولات کشاورزی '
                     },
 
                 ]

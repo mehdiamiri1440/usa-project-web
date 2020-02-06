@@ -30,7 +30,7 @@ use Illuminate\Http\Request;
 // Download Route
 Route::get('download/app', function () {
     // Check if file exists in app/storage/file folder
-    return redirect(asset('storage/download/incobac.apk'));
+    return redirect(asset('storage/download/buskool.apk'));
 })->name('download-app');
 
 Route::post('/dologin', [

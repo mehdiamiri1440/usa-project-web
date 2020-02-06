@@ -615,7 +615,7 @@ export default {
 
       if (this.isDeviceMobile()) {
         var linkElement = document.createElement("a");
-        var Message = "https://incobac.com" + this.getProductUrl();
+        var Message = "https://buskool.com" + this.getProductUrl();
         var messageToWhatsApp = encodeURIComponent(Message);
         var url = "whatsapp://send?text=" + messageToWhatsApp;
 
@@ -631,7 +631,7 @@ export default {
         var input = document.createElement("input");
         input.setAttribute(
           "value",
-          "https://incobac.com" + this.getProductUrl()
+          "https://buskool.com" + this.getProductUrl()
         );
         document.body.appendChild(input);
         input.select();
@@ -666,14 +666,14 @@ export default {
         this.product.user_info.last_name;
 
       var productOwnerProfilePageUrl =
-        "https://www.incobac.com/profile/" + this.product.user_info.user_name;
+        "https://www.buskool.com/profile/" + this.product.user_info.user_name;
 
       let jsonDL = {
         "@context": "https://schema.org/",
         "@type": "Product",
         name: this.product.main.product_name,
         image: this.product.photos.map(function(photo) {
-          return "https://www.incobac.com/storage/" + photo.file_path;
+          return "https://www.buskool.com/storage/" + photo.file_path;
         }),
         description: this.product.main.description,
         aggregateRating: {
@@ -683,7 +683,7 @@ export default {
         },
         offers: {
           "@type": "Offer",
-          url: "https://www.incobac.com" + this.getProductUrl(),
+          url: "https://www.buskool.com" + this.getProductUrl(),
           priceCurrency: "IRR",
           price: this.product.main.min_sale_price * 10,
           availability: "https://schema.org/InStock",

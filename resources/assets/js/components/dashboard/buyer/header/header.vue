@@ -387,7 +387,7 @@ span.min {
                 <i class="fa fa-times"></i>
               </a>
               <p class="main-pop-up" id="popUpMsg">
-                لطفا پس از تکمیل اطلاعات پروفایل خود، منتظر تماس کارشناسان اینکوباک جهت تکمیل اطلاعات
+                لطفا پس از تکمیل اطلاعات پروفایل خود، منتظر تماس کارشناسان باسکول جهت تکمیل اطلاعات
                 باشید. از شکیبایی شما سپاسگزاریم.
               </p>
               <button class="btn green-button" data-dismiss="modal">متوجه شدم</button>
@@ -416,7 +416,7 @@ span.min {
                 <i class="fa fa-times"></i>
               </a>
               <p class="main-pop-up" id="contractModal">
-                برای شروع استفاده از خدمات اینکوباک ابتدا در قسمت ویرایش پروفایل، قرارداد همکاری را
+                برای شروع استفاده از خدمات باسکول ابتدا در قسمت ویرایش پروفایل، قرارداد همکاری را
                 مطالعه و تایید کنید.
               </p>
               <button class="btn green-button" data-dismiss="modal">متوجه شدم</button>
@@ -515,7 +515,7 @@ span.min {
       </section>
 
       <div class="copy-right">
-        <p dir="rtl">تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.</p>
+        <p dir="rtl">تمام حقوق مادی و معنوی سایت متعلق به باسکول است.</p>
       </div>
     </section>
 
@@ -928,7 +928,7 @@ export default {
   metaInfo() {
     return {
       title: "بازارگاه کشاورزی",
-      titleTemplate: "اینکوباک | %s"
+      titleTemplate: "باسکول | %s"
     };
   }
 };

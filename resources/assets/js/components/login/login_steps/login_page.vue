@@ -241,11 +241,11 @@ input.error:focus + i {
 
         <div class="register-form">
           <p>
-            <span>برای ثبت نام در اینکوباک بر روی دکمه زیر کلیک کنید</span>
+            <span>برای ثبت نام در باسکول بر روی دکمه زیر کلیک کنید</span>
             <img src="./img/banner-arrow.png" />
           </p>
 
-          <router-link to="/register" class="register-button vertical-padding">ثبت نام در اینکوباک</router-link>
+          <router-link to="/register" class="register-button vertical-padding">ثبت نام در باسکول</router-link>
         </div>
       </div>
     </div>

@@ -165,10 +165,10 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
     protected function notify_product_owner_via_sms($user_phone,$delayed = false)
     {
         if($delayed){
-            sendSMS::dispatch($user_phone, 19608)->delay(Carbon::now()->addHours(2))->onQueue('sms');
+            sendSMS::dispatch($user_phone, 20689)->delay(Carbon::now()->addHours(2))->onQueue('sms');
         }
         else{
-            sendSMS::dispatch($user_phone, 19608)->onQueue('sms');
+            sendSMS::dispatch($user_phone, 20689)->onQueue('sms');
         }
         
     }
@@ -178,7 +178,7 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
         $fcm_controller_object = new fcm_controller();
 
         $data = [
-            'title' => 'اینکوباک',
+            'title' => 'باسکول',
             'message' => 'یک درخواست خرید مرتبط با محصول شما ثبت شد',
         ];
 

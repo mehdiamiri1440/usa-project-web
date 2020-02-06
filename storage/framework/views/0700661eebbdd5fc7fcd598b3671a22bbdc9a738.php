@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="description" content="خرید و فروش مستقیم محصولات کشاورزی">
-    <meta name="keywords" content="محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,اینکوباک">
+    <meta name="keywords" content="محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,باسکول">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="icon" href="<?php echo e(asset('assets/img/logo-Inco-mobile.png')); ?>">
 
-    <title>اینکوباک | بازارگاه کشاورزی </title>
+    <title>باسکول | بازارگاه کشاورزی </title>
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <script>
         window.Laravel = {csrfToken: '<?php echo e(csrf_token()); ?>'}
@@ -60,14 +60,14 @@
         {
             "@context" : "http://schema.org/",
             "@type" : "Organization",
-            "url" : "https://www.incobac.com",
-            "email": "support@incobac.com",
-            "logo":"https://www.incobac.com/assets/img/logo_dark.png",
-            "name" : "اینکوباک",
+            "url" : "https://www.buskool.com",
+            "email": "support@buskool.com",
+            "logo":"https://www.buskool.com/assets/img/logo_dark.png",
+            "name" : "باسکول",
             "foundingDate":"2017-09-14",
             "location" : {
                    "@type" : "Place",
-                   "name" : "اینکوباک",
+                   "name" : "باسکول",
                    "address" : "NO.264 - 15 - Eram Street - Shiraz - IR"
                 },
             "description":"خرید و فروش محصولات عمده کشاورزی، برنج و خرما",
@@ -84,10 +84,10 @@
         {
           "@context": "https://schema.org",
           "@type": "WebSite",
-          "url": "https://www.incobac.com/",
+          "url": "https://www.buskool.com/",
           "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://www.incobac.com/product-list/{search_term_string}",
+            "target": "https://www.buskool.com/product-list/{search_term_string}",
             "query-input": "required name=search_term_string"
           }
         }
@@ -115,7 +115,7 @@
             login_page_path="<?php echo e(route('logout')); ?>"
             loading="<?php echo e(asset('assets/img/gif/prload.gif')); ?>"
             finish_load_img="<?php echo e(asset('assets/img/gif/loading.gif')); ?>"
-            incobacicon="<?php echo e(asset('assets/img/logo-Inco-mobile.png')); ?>"
+            buskoolicon="<?php echo e(asset('assets/img/logo-Inco-mobile.png')); ?>"
 
     ></header-master-layouts>
 
@@ -129,7 +129,7 @@
                  str="<?php echo e(asset('storage/')); ?>"
                  defimgitem="<?php echo e(asset('/assets/img/product.jpg')); ?>"
                  defultimg="<?php echo e(asset('assets/img/user-defult.png')); ?>"
-                 site_logo="<?php echo e(asset('assets/img/logo-incobac.png')); ?>"
+                 site_logo="<?php echo e(asset('assets/img/logo-buskool.png')); ?>"
                  site_logo_white="<?php echo e(asset('/index/images/logo_white.png')); ?>"
                  incobaicon="<?php echo e(asset('assets/img/lo.png')); ?>"
                  assets = "<?php echo e(asset('assets')); ?>"

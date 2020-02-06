@@ -62,7 +62,7 @@ class admin_sellAd_controller extends Controller
     ];
     
     
-    protected $sellAd_confirmation_sms_text = 'آگهی فروش شما در سامانه ی اینکوباک تایید گردید.';
+    protected $sellAd_confirmation_sms_text = 'آگهی فروش شما در سامانه ی باسکول تایید گردید.';
     
     public function load_unconfirmed_sellAd_list()
     {

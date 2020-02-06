@@ -714,7 +714,7 @@ class product_controller extends Controller
 
             if ($product_record) {
                 $sms_controller_object = new sms_controller();
-                $sms_controller_object->send_status_sms_message($product_record, 'برای یکی از آگهی های شما در اینکوباک درخواست خرید ثبت شده است.برای بررسی به incobac.com مراجعه کنید.');
+                $sms_controller_object->send_status_sms_message($product_record, 'برای یکی از آگهی های شما در باسکول درخواست خرید ثبت شده است.برای بررسی به buskool.com مراجعه کنید.');
 
                 $user_id = session('user_id');
 

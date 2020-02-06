@@ -42,7 +42,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        تراکنش های منتظر اتمام از طرف اینکوباک
+        تراکنش های منتظر اتمام از طرف باسکول
       </h1>
     </section>
 

@@ -344,7 +344,7 @@ input[type="number"]::-webkit-outer-spin-button {
                     <!-- <i class="fa fa-arrow-left"></i> -->
                   </p>
                   <h1 class="col-xs-8">
-                    <span v-if="currentStep == 1">ورود به اینکوباک</span>
+                    <span v-if="currentStep == 1">ورود به باسکول</span>
                     <span v-if="currentStep == 2">بازیابی کلمه عبور</span>
                     <span v-if="currentStep == 3"></span>
                   </h1>
@@ -665,7 +665,7 @@ export default {
           );
 
           alert(
-            "نوع کاربری شما مشخص نشده است لطفا با پشتیبانی اینکوباک تماس بگیرید"
+            "نوع کاربری شما مشخص نشده است لطفا با پشتیبانی باسکول تماس بگیرید"
           );
         }
     }
@@ -706,7 +706,7 @@ export default {
 
       return {
           title: 'ورود',
-          titleTemplate: 'اینکوباک | %s',
+          titleTemplate: 'باسکول | %s',
           meta: [
               {
                   name: 'description',
@@ -714,7 +714,7 @@ export default {
               },
               {
                   name: 'author',
-                  content: 'اینکوباک'
+                  content: 'باسکول'
               },
               {
                   property: 'og:description',
@@ -722,11 +722,11 @@ export default {
               },
               {
                   property: 'og:site_name',
-                  content: 'اینکوباک بازارآنلاین خرید و فروش محصولات کشاورزی ایران'
+                  content: 'باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران'
               },
               {
                   'property': 'og:title',
-                  'content': 'اینکوباک | ورود'
+                  'content': 'باسکول | ورود'
               },
 
           ]

@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="description" content="خرید و فروش مستقیم محصولات کشاورزی">
-    <meta name="keywords" content="محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,اینکوباک">
+    <meta name="keywords" content="محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,باسکول">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="icon" href="<?php echo e(asset('assets/img/logo-Inco-mobile.png')); ?>">
 
-    <title>اینکوباک | بازارگاه کشاورزی </title>
+    <title>باسکول | بازارگاه کشاورزی </title>
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <script>
         window.Laravel = {csrfToken: '<?php echo e(csrf_token()); ?>'}
@@ -83,7 +83,7 @@
                 str="<?php echo e(asset('storage/')); ?>"
                 defimgitem="<?php echo e(asset('/assets/img/product.jpg')); ?>"
                 defultimg="<?php echo e(asset('assets/img/user-defult.png')); ?>"
-                siteLogo="<?php echo e(asset('assets/img/logo-incobac.png')); ?>"
+                siteLogo="<?php echo e(asset('assets/img/logo-buskool.png')); ?>"
                 incobaicon="<?php echo e(asset('assets/img/lo.png')); ?>"
         ></router-view>
 

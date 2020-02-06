@@ -605,7 +605,7 @@
                 })
                     .then(function (response) {
                         if (response.data.status == true) {
-                            self.popUpMsg = 'جهت تسهیل در ادامه ی فرآیند خرید شما کارشناسان اینکوباک برای هماهنگی های اولیه ی معامله با شما تماس خواهند گرفت.';
+                            self.popUpMsg = 'جهت تسهیل در ادامه ی فرآیند خرید شما کارشناسان باسکول برای هماهنگی های اولیه ی معامله با شما تماس خواهند گرفت.';
 
                             eventBus.$emit('submitSuccess', self.popUpMsg);
 

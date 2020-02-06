@@ -342,7 +342,7 @@ ul {
 
                   <a href class="col-sm-3 col-xs-12">
                     <p class="detail-success">
-                      <span class="fas fa-comment-alt"></span> پیام به اینکوباک
+                      <span class="fas fa-comment-alt"></span> پیام به باسکول
                     </p>
                   </a>
                 </li>

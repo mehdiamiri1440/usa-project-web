@@ -33,7 +33,7 @@ class admin_profile_controller extends Controller
       'file_path',  
     ];
     
-    protected $profile_confirmation_text = 'پروفایل کاربری شما در سامانه ی اینکوباک تایید شد.در صورت تمایل می توانید آگهی های خود را در سامانه ثبت کنید.';
+    protected $profile_confirmation_text = 'پروفایل کاربری شما در سامانه ی باسکول تایید شد.در صورت تمایل می توانید آگهی های خود را در سامانه ثبت کنید.';
     
     public function load_unconfirmed_profile_records()
     {

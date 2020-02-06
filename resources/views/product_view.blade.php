@@ -100,7 +100,7 @@
                 <a class="navbar-brand test" href="/">
                 </a>
                 <p class="logo-des hidden-xs hidden-sm">
-                    اینکوباک | بازارگاه آنلاین دنیای کشاورزی
+                    باسکول | بازارگاه آنلاین دنیای کشاورزی
                 </p>
 
             </div>
@@ -113,7 +113,7 @@
                     <li><a href="/" class="smoothScroll">صفحه ی اصلی</a></li>
                     <li><a href="/about-us" class="smoothScroll">درباره ما</a></li>
                     <li><a href="/privacy-and-policy" class="smoothScroll">قوانین و مقررات</a></li>
-                    <li><a href="http:\\www.blog.incobac.com" class="smoothScroll">وبلاگ</a></li>
+                    <li><a href="http:\\www.blog.buskool.com" class="smoothScroll">وبلاگ</a></li>
                     <li><a href="/product-list" class="smoothScroll">لیست محصولات </a></li>
 
 
@@ -148,7 +148,7 @@
         </div>
     </div>
 
-    <product-vue default-image="{{asset('assets/img/user-defult.png')}}" incobac-logo="{{asset('assets/img/logo-incobac.png')}}"></product-vue>
+    <product-vue default-image="{{asset('assets/img/user-defult.png')}}" buskool-logo="{{asset('assets/img/logo-buskool.png')}}"></product-vue>
 </div>
 
 <script src="{{asset('js/app.js')}}"></script>

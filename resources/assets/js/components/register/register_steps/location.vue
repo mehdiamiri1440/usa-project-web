@@ -194,7 +194,7 @@ select.error:focus {
 
         <span
           class="small-description"
-        >انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه اینکوباک کمک می کند</span>
+        >انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه باسکول کمک می کند</span>
 
         <p class="error-message">
           <span v-if="error " v-text="error"></span>

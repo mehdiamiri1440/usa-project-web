@@ -78,7 +78,7 @@
 
             return {
                 title: 'ارتقا عضویت ',
-                titleTemplate: 'اینکوباک | %s',
+                titleTemplate: 'باسکول | %s',
                 meta: [
                     {
                         name: 'description',
@@ -86,7 +86,7 @@
                     },
                     {
                         name: 'author',
-                        content: 'اینکوباک'
+                        content: 'باسکول'
                     },
                     {
                         'property': 'og:description',
@@ -94,11 +94,11 @@
                     },
                     {
                         'property': 'og:site_name',
-                        'content': 'اینکوباک بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران'
+                        'content': 'باسکول بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران'
                     },
                     {
                         'property': 'og:title',
-                        'content': ' اینکوباک | بازار خرید و فروش عمده محصولات کشاورزی '
+                        'content': ' باسکول | بازار خرید و فروش عمده محصولات کشاورزی '
                     },
 
                 ]

@@ -7,10 +7,10 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('meta_keywords'); ?>
-    محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,اینکوباک
+    محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,باسکول
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('title'); ?>
-    اینکوباک | بازارگاه کشاورزی
+    باسکول | بازارگاه کشاورزی
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('main_content'); ?>
@@ -29,7 +29,7 @@
                         <h1 class="wow fadeIn main-logo" data-wow-delay="1s"><img
                                     src="<?php echo e(asset('/index/images/logo_white.png')); ?>">
                         </h1>
-                        <h2 class="wow fadeIn" data-wow-delay="1.2s">اینکوباک | سامانه خرید و فروش عمده محصولات
+                        <h2 class="wow fadeIn" data-wow-delay="1.2s">باسکول | سامانه خرید و فروش عمده محصولات
                             کشاورزی</h2>
                     </div>
                     <div class="col-xs-12">
@@ -120,7 +120,7 @@
     <section id="services" class="parallax-section">
         <div class="container">
             <div class="row">
-                <h2>خدمات اینکوباک</h2>
+                <h2>خدمات باسکول</h2>
                 <div class="col-xs-12 col-sm-6">
                     <div class="title_image_service">
                         <img src="<?php echo e(asset('index/images/buyer.jpg')); ?>" alt="">
@@ -164,7 +164,7 @@
                                 </li>
                                 <li><span>بهره گیری از پرداخت کاملا نقـدی برای معامـــلات</span>
                                 </li>
-                                <li><span>بهره مندی از مشاوره تخصصی کارشناسان اینکوباک</span>
+                                <li><span>بهره مندی از مشاوره تخصصی کارشناسان باسکول</span>
                                 </li>
 
                             </ul>
@@ -246,7 +246,7 @@
     <section id="recent" class="parallax-section">
         <div class="container">
             <div class="row">
-                <h2 style="margin: 10px auto 20px ">وبلاگ اینکوباک</h2>
+                <h2 style="margin: 10px auto 20px ">وبلاگ باسکول</h2>
                 <div class=" wow fadeIn  col-sm-4 animated" data-wow-delay="0.9s"
                      style="visibility: visible; animation-delay: 0.9s; animation-name: fadeIn;" v-for="post in posts">
                     <div class="detail-thumb">
@@ -255,7 +255,7 @@
                         </div>
                         <h3>{{post.post_title}}</h3>
                         <p v-html="post.post_content.substr(0,150) + '...'"></p>
-                        <a :href="post.guid" class="btn-incobac">بیشتر بخوانید ...</a>
+                        <a :href="post.guid" class="btn-buskool">بیشتر بخوانید ...</a>
                     </div>
                 </div>
             </div>
@@ -305,7 +305,7 @@
                                 <h4 class="panel-title">
                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
                                        aria-expanded="false" aria-controls="collapseTwo">
-                                        تعرفه های ثبت آگهی در اینکوباک چگونه است؟
+                                        تعرفه های ثبت آگهی در باسکول چگونه است؟
                                     </a>
                                 </h4>
                             </div>
@@ -313,7 +313,7 @@
                                  aria-labelledby="headingTwo">
                                 <div class="panel-body">
                                     <p>تمامی خدمات از جمله ثبت آگهی،ساخت پروفایل شخصی، مشاهده ی اطلاعات افراد و مشاوره ی
-                                        خرید و فروش در سامانه اینکوباک رایگان است.</p>
+                                        خرید و فروش در سامانه باسکول رایگان است.</p>
                                 </div>
                             </div>
                         </div>
@@ -331,7 +331,7 @@
                                  aria-labelledby="headingThree">
                                 <div class="panel-body">
                                     <p>تکمیل پروفایل یکی از ارکان مهم اعتماد سازی و ایجاد تمایز نسب به رقبا، در تجارت است.
-                                        در اینکوباک این فضا فراهم شده تا خریداران و تامین کنندگان اطلاعات شخصی و شرکت خود،
+                                        در باسکول این فضا فراهم شده تا خریداران و تامین کنندگان اطلاعات شخصی و شرکت خود،
                                         سابقه فعالیت و توضیحات مربوط به کسب و کار خود را ارائه دهند. تمامی توضیحات و مواردی
                                         که برای جذب خریداران و فروشندگان بالقوه لازم است را می توانید در صفحه شخصی خود ارائه
                                         دهید.</p>

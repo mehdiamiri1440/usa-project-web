@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- site title -->
-    <title>اینکوباک | بازارگاه کشاورزی</title>
+    <title>باسکول | بازارگاه کشاورزی</title>
 
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="{{asset('index/css/bootstrap.min.css')}}">
@@ -56,7 +56,7 @@
         <div class="row">
             <div class="col-xs-12 col-md-6 col-md-offset-3">
                 <div class="well" style="margin-top:10%">
-                    <h3 class="text-center">تایید پرداخت در اینکوباک</h3>
+                    <h3 class="text-center">تایید پرداخت در باسکول</h3>
                     <hr/>
                     <p class="text-right"> مبلغ پرداخت شده : {{$payed_amount}} ریال</p>
                     <p class="text-right"> شناسه ارجاع : {{$reference_id}}</p>

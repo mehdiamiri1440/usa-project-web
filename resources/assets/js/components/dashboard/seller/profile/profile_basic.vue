@@ -1000,7 +1000,7 @@
                                     </div>
 
                                     <div class="link-help padding-0 col-xs-12  col-md-4">
-                                        <a target="_blank" href="https://www.incobac.com/profile/incobacs">
+                                        <a target="_blank" href="https://www.buskool.com/profile/buskools">
                                             نمونه پروفایل تکمیل شده
                                              <i class="fa fa-question-circle"></i>
                                         </a>

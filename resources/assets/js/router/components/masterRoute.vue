@@ -15,7 +15,7 @@
                 :login_page_path="userLogoutPath"
                 :loading="assets +  'assets/img/gif/prload.gif'"
                 :finish_load_img="assets +  'assets/img/gif/loading.gif'"
-                :incobacicon="assets +  'assets/img/logo-Inco-mobile.png'"
+                :buskoolicon="assets +  'assets/img/logo-Inco-mobile.png'"
 
 
         />
@@ -28,7 +28,7 @@
                       :str="storagePath"
                       :defimgitem="assets + 'assets/img/product.jpg'"
                       :defultimg="assets + 'assets/img/user-defult.png'"
-                      :site_logo="assets + 'assets/img/logo-incobac.png'"
+                      :site_logo="assets + 'assets/img/logo-buskool.png'"
                       :site_logo_white="assets + 'index/images/logo_white.png'"
                       :incobaicon="assets + 'assets/img/lo.png'"
                       :assets = "assets"

@@ -539,7 +539,7 @@ class profile_controller extends Controller
 
         $user_role = $this->get_user_role_string($user);
 
-        $profile_record->description = "من $user_role محصولات کشاورزی در سامانه ی اینکوباک هستم. برای ارتباط با من رو دکمه ی ارسال پیام کلیک کنید. خوشحال می شوم اگر پروفایل من را با دوستان خود به اشتراک بگذارید.";
+        $profile_record->description = "من $user_role محصولات کشاورزی در سامانه ی باسکول هستم. برای ارتباط با من رو دکمه ی ارسال پیام کلیک کنید. خوشحال می شوم اگر پروفایل من را با دوستان خود به اشتراک بگذارید.";
 
         $profile_record->save();
     }
@@ -587,7 +587,7 @@ class profile_controller extends Controller
 
             $user_role = $this->get_user_role_string($user);
 
-            $profile_record->description = "من $user_role محصولات کشاورزی در سامانه ی اینکوباک هستم. برای ارتباط با من رو دکمه ی ارسال پیام کلیک کنید. خوشحال می شوم اگر پروفایل من را با دوستان خود به اشتراک بگذارید.";
+            $profile_record->description = "من $user_role محصولات کشاورزی در سامانه ی باسکول هستم. برای ارتباط با من رو دکمه ی ارسال پیام کلیک کنید. خوشحال می شوم اگر پروفایل من را با دوستان خود به اشتراک بگذارید.";
 
             $profile_record->save();
         } else {
@@ -599,7 +599,7 @@ class profile_controller extends Controller
 
             $user_role = $this->get_user_role_string($user);
 
-            $profile_record->description = "من $user_role محصولات کشاورزی در سامانه ی اینکوباک هستم. برای ارتباط با من رو دکمه ی ارسال پیام کلیک کنید. خوشحال می شوم اگر پروفایل من را با دوستان خود به اشتراک بگذارید.";
+            $profile_record->description = "من $user_role محصولات کشاورزی در سامانه ی باسکول هستم. برای ارتباط با من رو دکمه ی ارسال پیام کلیک کنید. خوشحال می شوم اگر پروفایل من را با دوستان خود به اشتراک بگذارید.";
 
             $profile_record->save();
 

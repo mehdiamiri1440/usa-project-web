@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="<?php echo e(asset('assets/img/logo-Inco-mobile.png')); ?>">
-    <title>اینکوباک | بازارگاه کشاورزی</title>
+    <title>باسکول | بازارگاه کشاورزی</title>
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <script src="<?php echo e(asset('assets/js/jquery-3.3.1.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/jquery-ui.min.js')); ?>"></script>
@@ -80,7 +80,7 @@
 <div id="appBuyer" style="height: 100%">
 
    <header-dash-buyer
-            logo="<?php echo e(asset('assets/img/logo-incobac-white-red.png')); ?>"
+            logo="<?php echo e(asset('assets/img/logo-buskool-white-red.png')); ?>"
             storage="<?php echo e(asset('storage/')); ?>"
             defultimg="<?php echo e(asset('assets/img/user-defult.png')); ?>"
             transactroute="<?php echo e(route('my-terminated-transaction-list')); ?>"

@@ -187,7 +187,7 @@ nav.navbar {
   box-shadow: 0 7px 8px 0 rgba(0, 0, 0, 0.04);
 }
 
-.incobac-main-nav {
+.buskool-main-nav {
   padding: 10px 15px 8px;
   border-bottom: 2px solid #f8f9fa;
 }
@@ -226,13 +226,13 @@ nav > li > a.green-button.router-link-exact-active:hover {
   color: #fff !important;
 }
 
-.incobac-logo .navbar-brand {
+.buskool-logo .navbar-brand {
   overflow: hidden;
 
   width: 132px;
 }
 
-.incobac-logo .navbar-brand {
+.buskool-logo .navbar-brand {
   height: initial;
 
   margin: 0;
@@ -240,43 +240,43 @@ nav > li > a.green-button.router-link-exact-active:hover {
   padding: 0;
 }
 
-#incobac-nav {
+#buskool-nav {
   margin-right: 46px;
 }
 
-.incobac-sub-menu .navbar-right {
+.buskool-sub-menu .navbar-right {
   margin-right: 193px;
 }
 
-.incobac-sub-menu {
+.buskool-sub-menu {
   transition: 0.3s;
   height: 38px;
   overflow: hidden;
 }
 
-.incobac-sub-menu.scrollUp {
+.buskool-sub-menu.scrollUp {
   height: 0;
   transition: 0.3s;
 }
 
-.incobac-sub-menu li {
+.buskool-sub-menu li {
   float: right;
 }
 
-.incobac-sub-menu a {
+.buskool-sub-menu a {
   color: #777;
   padding: 9px 15px;
   position: relative;
 }
 
-.incobac-sub-menu a:hover,
-.incobac-sub-menu a.router-link-exact-active {
+.buskool-sub-menu a:hover,
+.buskool-sub-menu a.router-link-exact-active {
   color: #00c569;
   background: #fbfbfb;
 }
 
-.incobac-sub-menu a:hover:after,
-.incobac-sub-menu a.router-link-exact-active:after {
+.buskool-sub-menu a:hover:after,
+.buskool-sub-menu a.router-link-exact-active:after {
   content: "";
   background: #00c569;
   position: absolute;
@@ -419,11 +419,11 @@ a.profile-info-wrapper:hover {
 }
 
 @media screen and (max-width: 992px) {
-  #incobac-nav {
+  #buskool-nav {
     margin: 0;
   }
 
-  .incobac-sub-menu .navbar-right {
+  .buskool-sub-menu .navbar-right {
     margin-right: 149px;
   }
 
@@ -433,7 +433,7 @@ a.profile-info-wrapper:hover {
 }
 
 @media screen and (max-width: 767px) {
-  #incobac-nav {
+  #buskool-nav {
     padding: 0;
 
     overflow: hidden;
@@ -453,7 +453,7 @@ a.profile-info-wrapper:hover {
     border-top: 2px solid #00c569;
   }
 
-  #incobac-nav:after {
+  #buskool-nav:after {
     width: 0;
 
     height: 0;
@@ -473,11 +473,11 @@ a.profile-info-wrapper:hover {
     right: 29px;
   }
 
-  #incobac-nav .wrapper-nav {
+  #buskool-nav .wrapper-nav {
     padding: 30px 0 0;
   }
 
-  .incobac-logo {
+  .buskool-logo {
     margin: 0 auto;
 
     float: right;
@@ -497,7 +497,7 @@ a.profile-info-wrapper:hover {
     float: left;
   }
 
-  #incobac-nav .search-input {
+  #buskool-nav .search-input {
     max-width: 100%;
 
     width: 100%;
@@ -509,7 +509,7 @@ a.profile-info-wrapper:hover {
     float: none;
   }
 
-  #incobac-nav .search-input input {
+  #buskool-nav .search-input input {
     border: 1px solid #e6e6e6;
   }
 
@@ -521,7 +521,7 @@ a.profile-info-wrapper:hover {
     height: 100%;
   }
 
-  #incobac-nav ul.mobile-navigation a {
+  #buskool-nav ul.mobile-navigation a {
     color: #777;
 
     font-weight: bold;
@@ -533,9 +533,9 @@ a.profile-info-wrapper:hover {
     border-bottom: 1px solid #e6e6e6;
   }
 
-  #incobac-nav ul.mobile-navigation a:hover,
-  #incobac-nav ul.mobile-navigation a:focus,
-  #incobac-nav ul.mobile-navigation a.router-link-exact-active {
+  #buskool-nav ul.mobile-navigation a:hover,
+  #buskool-nav ul.mobile-navigation a:focus,
+  #buskool-nav ul.mobile-navigation a.router-link-exact-active {
     color: #00c569;
 
     background: #fbfbfb;
@@ -551,7 +551,7 @@ a.profile-info-wrapper:hover {
 }
 
 @media screen and (max-width: 550px) {
-  .incobac-logo {
+  .buskool-logo {
     margin: 0 auto;
 
     float: right;
@@ -561,7 +561,7 @@ a.profile-info-wrapper:hover {
     right: calc(50% - 95px);
   }
 
-  .incobac-logo .navbar-brand {
+  .buskool-logo .navbar-brand {
     width: 100px;
 
     margin-top: 5px;
@@ -682,11 +682,11 @@ a.profile-info-wrapper:hover {
           <div class="main_popup_content">
             <div>
               <div class="main-logo-popup">
-                <img :src="incobacicon" alt />
-                <p class="title">اینکوباک</p>
+                <img :src="buskoolicon" alt />
+                <p class="title">باسکول</p>
               </div>
 
-              <p class="main-pop-up">دانلود اپلیکیشن اندروید اینکوباک</p>
+              <p class="main-pop-up">دانلود اپلیکیشن اندروید باسکول</p>
 
               <a
                 href="#"
@@ -745,13 +745,13 @@ a.profile-info-wrapper:hover {
     <!--nav-->
     <div class="mobile-background-shadow"></div>
     <nav class="navbar text-rtl">
-      <div class="container-fluid incobac-main-nav">
+      <div class="container-fluid buskool-main-nav">
         <div class="hidden-md hidden-sm hidden-lg mobile-menu-button">
           <button
             type="button"
             class="navbar-toggle"
             data-toggle="collapse"
-            data-target="#incobac-nav"
+            data-target="#buskool-nav"
           >
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -759,11 +759,11 @@ a.profile-info-wrapper:hover {
           </button>
         </div>
 
-        <div class="incobac-logo navbar-header navbar-right">
+        <div class="buskool-logo navbar-header navbar-right">
           <router-link class="navbar-brand" :to="{name : 'indexPage'}">
             <img
               :src="assets + 'assets/img/logo_dark.png'"
-              alt="اینکوباک | بازارگاه آنلاین دنیای کشاورزی"
+              alt="باسکول | بازارگاه آنلاین دنیای کشاورزی"
             />
           </router-link>
         </div>
@@ -834,13 +834,13 @@ a.profile-info-wrapper:hover {
             <li class="hidden-xs">
               <router-link class="green-button green-button-alt" :to="{name : 'login'}">
                 <i class="fa fa-sign-in-alt"></i>
-                ورود به اینکوباک
+                ورود به باسکول
               </router-link>
             </li>
           </ul>
         </div>
 
-        <div class="collapse navbar-collapse navbar-right" id="incobac-nav">
+        <div class="collapse navbar-collapse navbar-right" id="buskool-nav">
           <div class="wrapper-nav">
             <div class="search-input">
               <input
@@ -908,7 +908,7 @@ a.profile-info-wrapper:hover {
               </li>
               <li>
                 <a
-                  href="http:\\www.blog.incobac.com"
+                  href="http:\\www.blog.buskool.com"
                   class="smoothScroll"
                   @click="registerComponentStatistics('header','blog','click-on-blog')"
                 >وبلاگ</a>
@@ -936,7 +936,7 @@ a.profile-info-wrapper:hover {
         </div>
       </div>
 
-      <div class="container-fluid incobac-sub-menu hidden-xs">
+      <div class="container-fluid buskool-sub-menu hidden-xs">
         <ul class="nav navbar-right navbar-nav">
           <li>
             <router-link
@@ -992,7 +992,7 @@ a.profile-info-wrapper:hover {
           </li>
           <li>
             <a
-              href="http:\\www.blog.incobac.com"
+              href="http:\\www.blog.buskool.com"
               class="smoothScroll"
               @click="registerComponentStatistics('header','blog','click-on-blog')"
             >وبلاگ</a>
@@ -1039,7 +1039,7 @@ export default {
   },
   props: [
     "assets",
-    "incobacicon",
+    "buskoolicon",
     "user_id",
     "is_seller",
     "user_default_image",
@@ -1129,7 +1129,7 @@ export default {
   mounted() {
     // scroll handeling hide in web
     var lastScroll = 0;
-    var navbar = $("nav.navbar .incobac-sub-menu");
+    var navbar = $("nav.navbar .buskool-sub-menu");
     $(window).scroll(function() {
       var state = $(window).scrollTop();
 
@@ -1145,13 +1145,13 @@ export default {
       lastScroll = state;
     });
 
-    $("#incobac-nav").on("hide.bs.collapse", function() {
+    $("#buskool-nav").on("hide.bs.collapse", function() {
       $(".mobile-background-shadow").fadeTo(0, 0, function() {
         $(this).css("display", "none");
       });
     });
 
-    $("#incobac-nav").on("show.bs.collapse", function() {
+    $("#buskool-nav").on("show.bs.collapse", function() {
       $(".mobile-background-shadow").fadeTo(0, 0.8);
     });
 
@@ -1170,10 +1170,10 @@ export default {
 
       /* bootstrap collapse js adds "in" class to your collapsible element*/
 
-      var menu_opened = $("#incobac-nav").hasClass("in");
+      var menu_opened = $("#buskool-nav").hasClass("in");
 
       if (!$(e.target).is(".search-input input") && menu_opened === true) {
-        $("#incobac-nav").collapse("toggle");
+        $("#buskool-nav").collapse("toggle");
       }
     });
 
@@ -1214,7 +1214,7 @@ export default {
         if( ! window.location.pathname.includes('seller') &&  !window.location.pathname.includes('buyer') &&  !window.location.pathname.includes('login')){
             if (event.keyCode === 13){
                 self.search();
-                $("#incobac-nav").collapse("hide");
+                $("#buskool-nav").collapse("hide");
                 $("#web-profile-items").collapse("hide");
             }
         }
