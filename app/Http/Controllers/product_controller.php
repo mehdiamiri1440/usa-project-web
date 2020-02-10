@@ -16,6 +16,7 @@ use App\Jobs\NotifyBuyersBySMS;
 use App\buyAd;
 use App\Http\Library\date_convertor;
 use App\message;
+use App\tag;
 
 class product_controller extends Controller
 {
@@ -1187,5 +1188,40 @@ class product_controller extends Controller
         }
 
         return $result_products;
+    }
+
+    public function get_category_tags_data_if_any(Request $request)
+    {
+         $this->validate($request,[
+             'category_name' => 'required|exists:categories,category_name'
+         ]);
+
+         $category_name = $request->category_name;
+
+         $category_record = category::where('category_name',$category_name)
+                                        ->first();
+
+        if($category_record){
+            $category_id = $category_record->id;
+        }
+        else{
+            return response()->json([
+                'status' => true,
+                'msg' => 'wrong category name given!'
+            ],404);
+        }
+
+        $tags_info = tag::where('category_id',$category_id)
+                            ->where('is_visible',true)
+                            ->select([
+                                'id',
+                                'header',
+                                'content'
+                            ])->get();
+                                
+        return response()->json([
+            'status' => true,
+            'category_info' => $tags_info
+        ]);
     }
 }
