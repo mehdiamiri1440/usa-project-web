@@ -69,6 +69,11 @@ Route::post('/get_category_list', [
     'as' => 'get_category_list',
 ]);
 
+Route::post('/get_category_meta_data',[
+    'uses' => 'product_controller@get_category_tags_data_if_any',
+    'as' => 'get_gategory_meta_data'
+]);
+
 Route::post('/user/get_product_list', [
     'uses' => 'product_controller@get_product_list',
     'as' => 'get_product_list',
