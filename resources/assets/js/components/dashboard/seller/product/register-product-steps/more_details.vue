@@ -1,342 +1,311 @@
 <style scoped>
+p {
+  line-height: 1.618;
+  text-align: center;
+}
 
+label {
+  margin: 0 auto 9px auto;
+}
 
-    p {
-        line-height: 1.618;
-        text-align: center;
-    }
+.submit-button {
+  background: #dddddd;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 16px;
+  padding: 10px 30px 9px;
+  transition: 200ms;
+  cursor: default;
+  margin: 8px 0;
+}
 
-    label {
-        margin: 0 auto 9px auto;
-    }
+.submit-button.active {
+  background: #00c569;
+  cursor: pointer;
+}
 
-    .submit-button {
+.title-contents {
+  font-weight: bold;
+  font-size: 19px;
+  margin-bottom: 15px;
+}
 
-        background: #DDDDDD;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        display: inline-block;
-        font-size: 16px;
-        padding: 10px 30px 9px;
-        transition: 200ms;
-        cursor: default;
-        margin: 8px 0;
+.form-contents {
+  margin: 5px auto;
+}
 
-    }
+.form-contents lable {
+  font-size: 12px;
+}
 
-    .submit-button.active {
-        background: #00C569;
-        cursor: pointer;
-    }
+.input-wrapper,
+.text-input-wrapper {
+  margin: 6px auto;
 
-    .title-contents {
+  position: relative;
+}
 
-        font-weight: bold;
-        font-size: 19px;
-        margin-bottom: 15px;
+.input-wrapper:after {
+  content: "\F107";
 
-    }
+  color: #777;
 
-    .form-contents {
-        margin: 5px auto;
-    }
+  position: absolute;
 
-    .form-contents lable {
-        font-size: 12px;
-    }
+  display: inline-block;
 
-    .input-wrapper, .text-input-wrapper {
-        margin: 6px auto;
+  top: 6px;
 
-        position: relative;
+  font-family: "Font Awesome 5 Free", sans-serif;
 
-    }
+  font-weight: 900;
 
-    .input-wrapper:after {
-        content: "\F107";
+  left: 15px;
 
-        color: #777;
+  font-size: 20px;
 
-        position: absolute;
+  z-index: 0;
+}
 
-        display: inline-block;
+input {
+  width: 100%;
 
-        top: 6px;
+  border-radius: 4px;
 
-        font-family: "Font Awesome 5 Free", sans-serif;
+  border: 1px solid;
 
-        font-weight: 900;
+  padding: 8px 15px;
 
-        left: 15px;
+  color: #bebebe;
 
-        font-size: 20px;
+  border-color: #bebebe;
 
-        z-index: 0;
+  direction: rtl;
 
-    }
+  transition: 300ms;
 
-    input {
-        width: 100%;
+  background: #fff;
+}
 
-        border-radius: 4px;
+.input-wrapper i {
+  display: inline-block;
 
-        border: 1px solid;
+  position: absolute;
 
-        padding: 8px 15px;
+  left: 15px;
 
-        color: #BEBEBE;
+  font-size: 20px;
 
-        border-color: #BEBEBE;
+  color: #bebebe;
 
-        direction: rtl;
+  top: 9px;
 
-        transition: 300ms;
+  transition: 300ms;
+}
 
-        background: #fff;
-    }
+input:focus,
+input:focus + i {
+  color: #333;
+  border-color: #333;
+}
 
-    .input-wrapper i {
+input.active {
+  border-color: #00c569;
+  color: #333;
+}
 
-        display: inline-block;
+input.active + i {
+  color: #00c569;
+}
 
-        position: absolute;
+input.active:focus,
+input.active:focus + i,
+input.active + i {
+  border-color: #00c569;
+}
 
-        left: 15px;
+input.error {
+  color: #333;
+  border-color: #e41c38;
+}
 
-        font-size: 20px;
+input.error + i {
+  color: #e41c38;
+}
 
-        color: #BEBEBE;
+input.error:focus,
+input.error:focus + i {
+  border-color: #e41c38;
+}
 
-        top: 9px;
+select {
+  width: 100%;
 
-        transition: 300ms;
-    }
+  border-radius: 4px;
 
+  border: 1px solid;
 
-    input:focus, input:focus + i {
-        color: #333;
-        border-color: #333;
+  padding: 8px 15px;
 
-    }
+  position: relative;
 
-    input.active {
-        border-color: #00C569;
-        color: #333;
-    }
+  z-index: 1;
 
-    input.active + i {
-        color: #00C569;
-    }
+  color: #777777;
 
-    input.active:focus, input.active:focus + i, input.active + i {
-        border-color: #00C569;
-    }
+  direction: rtl;
 
-    input.error {
-        color: #333;
-        border-color: #e41c38;
-    }
+  transition: 200ms;
 
-    input.error + i {
-        color: #e41c38;
-    }
+  background: none;
 
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+}
 
-    input.error:focus, input.error:focus + i {
-        border-color: #e41c38;
-    }
+.input-wrapper i {
+  display: inline-block;
 
-    select {
+  position: absolute;
 
-        width: 100%;
+  left: 15px;
 
-        border-radius: 4px;
+  font-size: 20px;
 
-        border: 1px solid;
+  color: #bebebe;
 
-        padding: 8px 15px;
+  top: 9px;
 
-        position: relative;
+  transition: 200ms;
+}
 
-        z-index: 1;
+select option {
+  color: #333;
+}
 
-        color: #777777;
+select:focus {
+  color: #333;
+}
 
-        direction: rtl;
+select.active {
+  color: #333;
+  color: #00c569;
+}
 
-        transition: 200ms;
+select.active:focus {
+  color: #00c569;
+}
 
-        background: none;
+select.error {
+  color: #333;
+  color: #e41c38;
+}
 
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        -ms-appearance: none;
+select.error:focus {
+  color: #e41c38;
+}
 
+.error-message {
+  text-align: center;
 
-    }
+  color: #e41c38;
 
-    .input-wrapper i {
-        display: inline-block;
+  font-weight: bold;
 
-        position: absolute;
+  height: 15px;
 
-        left: 15px;
+  direction: rtl;
 
-        font-size: 20px;
+  font-size: 11px;
+}
 
-        color: #BEBEBE;
+.small-description {
+  font-size: 11px;
 
-        top: 9px;
+  font-weight: bold;
 
-        transition: 200ms;
-    }
+  color: #777777;
 
-    select option {
-        color: #333;
-    }
+  line-height: 1.618;
+}
 
-    select:focus {
-        color: #333;
-    }
+.list-item-wrapper {
+  background: #f8f8f8;
+  box-shadow: 0 5px 10px #c5c5c5;
+  border: none;
+  margin: 50px auto;
+  padding: 4px 0;
+}
 
-    select.active {
-        color: #333;
-        color: #00C569;
-    }
+.list-item-wrapper > p {
+  float: right;
+  padding: 0;
+  padding-top: 12px;
+}
 
-    select.active:focus {
-        color: #00C569;
-    }
+.send-message {
+  padding: 0;
+  text-align: center;
+}
 
-    select.error {
-        color: #333;
-        color: #e41c38;
-    }
+.send-message button {
+  font-size: 14px;
+  padding: 7px 15px;
+}
 
-    select.error:focus {
-        color: #e41c38;
-    }
+.main-description {
+  margin-top: 25px;
+}
 
-    .error-message {
+.red-text {
+  color: #e41c38;
+}
 
-        text-align: center;
+@media screen and (max-width: 767px) {
+  .list-item-wrapper {
+    margin: 15px auto;
+  }
 
-        color: #e41c38;
+  .input-wrapper {
+    padding: 0 5px;
+  }
 
-        font-weight: bold;
+  select {
+    font-size: 12px;
+  }
 
-        height: 15px;
-
-        direction: rtl;
-
-        font-size: 11px;
-    }
-
-    .small-description {
-
-        font-size: 11px;
-
-        font-weight: bold;
-
-        color: #777777;
-
-        line-height: 1.618;
-
-    }
-
-    .list-item-wrapper {
-
-        background: #f8f8f8;
-        box-shadow: 0 5px 10px #c5c5c5;
-        border: none;
-        margin: 50px auto;
-        padding: 4px 0;
-
-    }
-
-    .list-item-wrapper > p {
-
-        float: right;
-        padding: 0;
-        padding-top: 12px;
-
-    }
-
-    .send-message {
-
-        padding: 0;
-        text-align: center;
-
-    }
-
-    .send-message button {
-
-        font-size: 14px;
-        padding: 7px 15px;
-
-    }
-
-    .main-description {
-        margin-top: 25px;
-    }
-
-    .red-text {
-        color: #e41c38;
-
-    }
-
-    @media screen and (max-width: 767px) {
-        .list-item-wrapper {
-
-            margin: 15px auto;
-
-        }
-
-        .input-wrapper {
-            padding: 0 5px;
-
-        }
-
-        select {
-            font-size: 12px;
-        }
-
-        .input-wrapper::after {
-            left: 14px;
-        }
-    }
+  .input-wrapper::after {
+    left: 14px;
+  }
+}
 </style>
 
 <template>
-    <div>
+  <div>
+    <div class="form-contents">
+      <div class="text-input-wrapper">
+        <div class="border" v-for="field in fieldsData">
+          <input v-model="field.name" placeholder="Enter First Name" />
+          <select v-model="field.optionId" id="deptList" @change="manageFieldsOption">
+            <!--                        <option v-for="dept in defaultFieldsOptions"  v-bind:value="dept.id" v-text="dept.name">-->
+            <option
+              v-for="(dept,index) in defaultFieldsOptions"
+              v-if="checkSelectData(dept.id, index)"
+              v-bind:value="dept.id"
+              v-text="dept.name"
+            ></option>
+          </select>
+        </div>
 
-
-        <div class="form-contents ">
-
-
-            <div class="text-input-wrapper">
-
-                <div class="border" v-for="field in fieldsData">
-                    <input v-model="field.name" placeholder="Enter First Name">
-                    <select v-model="field.optionId" id="deptList" @change="manageFieldsOption">
-<!--                        <option v-for="dept in defaultFieldsOptions"  v-bind:value="dept.id" v-text="dept.name">-->
-                        <option v-for="(dept,index) in defaultFieldsOptions" v-if="checkSelectData(dept.id, index)" v-bind:value="dept.id" v-text="dept.name">
-
-                        </option>
-                    </select>
-                </div>
-
-                <button @click="manageFieldsOption">
-                    merge
-                </button>
-                <button @click="AddField">
-                    New Field
-                </button>
-            </div>
-            <pre>{{ $data | json }}</pre>
-            <!-- <div class="col-xs-12">
+        <button @click="manageFieldsOption">merge</button>
+        <button @click="AddField">New Field</button>
+      </div>
+      <pre>{{ $data || json }}</pre>
+      <!-- <div class="col-xs-12">
                 <div class="text-center">
                      <button class="submit-button active "
 
@@ -346,96 +315,80 @@
 
                </button>
                 </div>
-            </div> -->
-        </div>
-
+      </div>-->
     </div>
+  </div>
 </template>
 
 <script>
-
-    export default {
-        data: function () {
-            return {
-                fieldsData: [
-                    {
-                        name: '',
-                        optionId: ''
-                    }
-                ],
-                defaultFieldsOptions: [
-                    {
-                        id: 1,
-                        name: 'yek'
-                    },
-                    {
-                        id: 2,
-                        name: 'do'
-                    },
-                    {
-                        id: 3,
-                        name: 'se'
-                    },
-                ],
-                fieldsOptions: ''
-
-            }
+export default {
+  data: function() {
+    return {
+      fieldsData: [
+        {
+          name: "",
+          optionId: ""
+        }
+      ],
+      defaultFieldsOptions: [
+        {
+          id: "1",
+          name: "yek"
         },
-        methods: {
-            arr_diff: function (a1, a2) {
-
-
-                var diff = [];
-                for (var i in a2) {
-
-                    var found = false;
-                    for (var j in a1) {
-
-                        if (a2[i] === a1[j]) found = true;
-                    }
-                    if (found === false) diff.push(a2[i]);
-                }
-
-                return diff;
-            },
-            AddField: function () {
-                this.fieldsData.push({name: '', optionId: ''});
-            },
-            manageFieldsOption: function () {
-
-                var defaultFieldsOptionsData = [];
-                var defaultFildsData = [];
-
-                this.defaultFieldsOptions.forEach(function (value, key) {
-                    defaultFieldsOptionsData.push(value.id);
-
-                });
-
-                this.fieldsData.forEach(function (value, key) {
-                    defaultFildsData.push(value.optionId);
-                });
-
-                 console.log(defaultFieldsOptionsData);
-                 console.log(defaultFildsData);
-                 this.fieldsOptions = this.arr_diff( defaultFildsData,defaultFieldsOptionsData);
-                console.log(this.fieldsOptions);
-
-
-            },
-            checkSelectData:function (id, index) {
-
-                /*var length = this.fieldsOptions.length;
+        {
+          id: "2",
+          name: "do"
+        },
+        {
+          id: "3",
+          name: "se"
+        }
+      ],
+      fieldsOptions: ""
+    };
+  },
+  methods: {
+    arr_diff: function(defaultArray, selectedArray) {
+      let diff = [];
+      for (let firstIndex = 0; firstIndex < defaultArray.length; firstIndex++) {
+        for (
+          let secondIndex = 0;
+          secondIndex < selectedArray.length;
+          secondIndex++
+        ) {
+          if (
+            defaultArray[firstIndex].id != selectedArray[secondIndex].optionId
+          ) {
+            diff.push(selectedArray[secondIndex].optionId);
+          }
+        }
+      }
+      console.log("difff=>>>", diff);
+      return diff;
+    },
+    AddField: function() {
+      this.fieldsData.push({ name: "", optionId: "" });
+    },
+    manageFieldsOption: function() {
+      this.fieldsOptions = this.arr_diff(
+        this.defaultFieldsOptions,
+        this.fieldsData
+      );
+      console.log(this.fieldsOptions);
+    },
+    checkSelectData: function(id, index) {
+      /*var length = this.fieldsOptions.length;
                 for(var i = 0; i < length; i++) {
                     if(this.fieldsOptions[i] != id) return true;
                 }
 
                 return false;*/
-               /* console.log( this.fieldsOptions );
-*/
-                console.log(id);
-                console.log(index);
-                return true
-               /* var flag = false;
+      /* console.log( this.fieldsOptions );
+       */
+      console.log(id);
+      console.log(index);
+      return true;
+      /* var flag = false;
 
 
                 for(var i=0; i < this.fieldsOptions.length ; i++){
@@ -451,11 +404,10 @@
                 }
                 console.log(flag);
                 return false*/
-            }
-        },
-        mounted:function(){
-            this.manageFieldsOption()
-        }
     }
-
+  },
+  mounted: function() {
+    this.manageFieldsOption();
+  }
+};
 </script>
