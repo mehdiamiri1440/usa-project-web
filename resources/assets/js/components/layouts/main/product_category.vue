@@ -1045,7 +1045,7 @@
                     category_name : categoryName
                 }).then(function (response) {
                     self.categoryMetaData = response.data.category_info
-                   
+
                 });
                 axios.post('/user/profile_info')
                     .then(function (response) {

@@ -181,6 +181,12 @@
 
                     </div>
 
+                    <div v-else-if="currentStep == 6" class="wrapper-progressbar title">
+
+                        <h2> اطلاعات بیشتر  </h2>
+
+                    </div>
+
                     <div v-else-if="currentStep > 0 && currentStep < 6" class="wrapper-progressbar">
 
                         <div class="custom-progressbar">
@@ -275,7 +281,8 @@
                     <Location v-show="currentStep == 3" />
                     <ProductImage v-show="currentStep == 4" />
                     <Terms v-show="currentStep == 5" />
-                    <FinishStage v-show="currentStep == 6" />
+                    <MoreDetails v-show="currentStep == 6" />
+                    <FinishStage v-show="currentStep == 7" />
                 </main>
 
             </div>
@@ -293,6 +300,7 @@
     import Location from './register-product-steps/location'
     import ProductImage from './register-product-steps/product_image'
     import Terms from './register-product-steps/terms'
+    import MoreDetails from './register-product-steps/more_details'
     import FinishStage from './register-product-steps/finish_stage'
 
     export default {
@@ -303,6 +311,7 @@
             Location,
             ProductImage,
             Terms,
+            MoreDetails,
             FinishStage
         },
         props:[
@@ -310,7 +319,7 @@
         ],
         data: function () {
             return {
-                currentStep: 0,
+                currentStep:6,
                 currentUser: {
                     profile: '',
                     user_info: '',
