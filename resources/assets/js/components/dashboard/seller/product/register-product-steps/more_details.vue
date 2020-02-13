@@ -1,413 +1,484 @@
 <style scoped>
-p {
-  line-height: 1.618;
-  text-align: center;
-}
+    input[type="tel"] {
+        box-shadow: none !important;
+    }
 
-label {
-  margin: 0 auto 9px auto;
-}
+    label {
+        margin: 0 auto 9px auto;
+    }
 
-.submit-button {
-  background: #dddddd;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  display: inline-block;
-  font-size: 16px;
-  padding: 10px 30px 9px;
-  transition: 200ms;
-  cursor: default;
-  margin: 8px 0;
-}
+    .submit-button {
+        background: #dddddd;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        display: inline-block;
+        font-size: 16px;
+        padding: 10px 30px 9px;
+        transition: 200ms;
+        cursor: default;
+        margin: 8px 0;
+    }
 
-.submit-button.active {
-  background: #00c569;
-  cursor: pointer;
-}
+    .submit-button.default-back-button {
+        background: #fff;
+        color: #777;
+        border: 1px solid #777;
+        border-radius: 4px;
+        cursor: pointer;
+    }
 
-.title-contents {
-  font-weight: bold;
-  font-size: 19px;
-  margin-bottom: 15px;
-}
+    .submit-button.active {
+        background: #00c569;
+        cursor: pointer;
+    }
 
-.form-contents {
-  margin: 5px auto;
-}
+    .title-contents {
+        font-weight: bold;
+        font-size: 19px;
+        margin-bottom: 15px;
+    }
 
-.form-contents lable {
-  font-size: 12px;
-}
+    .form-contents {
+        margin: 5px auto;
+    }
 
-.input-wrapper,
-.text-input-wrapper {
-  margin: 6px auto;
+    .form-contents lable {
+        font-size: 12px;
+    }
 
-  position: relative;
-}
+    .input-wrapper,
+    .text-input-wrapper {
+        margin: 6px auto;
 
-.input-wrapper:after {
-  content: "\F107";
+        position: relative;
+    }
 
-  color: #777;
+    .input-wrapper:after {
+        content: "\F107";
 
-  position: absolute;
+        color: #777;
 
-  display: inline-block;
+        position: absolute;
 
-  top: 6px;
+        display: inline-block;
 
-  font-family: "Font Awesome 5 Free", sans-serif;
+        top: 6px;
 
-  font-weight: 900;
+        font-family: "Font Awesome 5 Free", sans-serif;
 
-  left: 15px;
+        font-weight: 900;
 
-  font-size: 20px;
+        left: 15px;
 
-  z-index: 0;
-}
+        font-size: 20px;
 
-input {
-  width: 100%;
+        z-index: 0;
+    }
 
-  border-radius: 4px;
+    input {
+        width: 100%;
 
-  border: 1px solid;
+        border-radius: 4px;
 
-  padding: 8px 15px;
+        border: 1px solid;
 
-  color: #bebebe;
+        padding: 8px 15px;
 
-  border-color: #bebebe;
+        color: #bebebe;
 
-  direction: rtl;
+        border-color: #bebebe;
 
-  transition: 300ms;
+        direction: rtl;
 
-  background: #fff;
-}
+        transition: 300ms;
 
-.input-wrapper i {
-  display: inline-block;
+        background: #fff;
+    }
 
-  position: absolute;
+    .input-wrapper i {
+        display: inline-block;
 
-  left: 15px;
+        position: absolute;
 
-  font-size: 20px;
+        left: 15px;
 
-  color: #bebebe;
+        font-size: 20px;
 
-  top: 9px;
+        color: #bebebe;
 
-  transition: 300ms;
-}
+        top: 9px;
 
-input:focus,
-input:focus + i {
-  color: #333;
-  border-color: #333;
-}
+        transition: 300ms;
+    }
 
-input.active {
-  border-color: #00c569;
-  color: #333;
-}
+    input:focus,
+    input:focus + i {
+        color: #333;
+        border-color: #333;
+    }
 
-input.active + i {
-  color: #00c569;
-}
+    input.active {
+        border-color: #00c569;
+        color: #333;
+    }
 
-input.active:focus,
-input.active:focus + i,
-input.active + i {
-  border-color: #00c569;
-}
+    input.active + i {
+        color: #00c569;
+    }
 
-input.error {
-  color: #333;
-  border-color: #e41c38;
-}
+    input.active:focus,
+    input.active:focus + i,
+    input.active + i {
+        border-color: #00c569;
+    }
 
-input.error + i {
-  color: #e41c38;
-}
+    input.error {
+        color: #333;
+        border-color: #e41c38;
+    }
 
-input.error:focus,
-input.error:focus + i {
-  border-color: #e41c38;
-}
+    input.error + i {
+        color: #e41c38;
+    }
 
-select {
-  width: 100%;
+    input.error:focus,
+    input.error:focus + i {
+        border-color: #e41c38;
+    }
 
-  border-radius: 4px;
+    select {
+        width: 100%;
 
-  border: 1px solid;
+        border-radius: 4px;
 
-  padding: 8px 15px;
+        border: 1px solid;
 
-  position: relative;
+        padding: 8px 15px;
 
-  z-index: 1;
+        position: relative;
 
-  color: #777777;
+        z-index: 1;
 
-  direction: rtl;
+        color: #777777;
 
-  transition: 200ms;
+        direction: rtl;
 
-  background: none;
+        transition: 200ms;
 
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-}
+        background: none;
 
-.input-wrapper i {
-  display: inline-block;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+    }
 
-  position: absolute;
+    .input-wrapper i {
+        display: inline-block;
 
-  left: 15px;
+        position: absolute;
 
-  font-size: 20px;
+        left: 15px;
 
-  color: #bebebe;
+        font-size: 20px;
 
-  top: 9px;
+        color: #bebebe;
 
-  transition: 200ms;
-}
+        top: 9px;
 
-select option {
-  color: #333;
-}
+        transition: 200ms;
+    }
 
-select:focus {
-  color: #333;
-}
+    select option {
+        color: #333;
+    }
 
-select.active {
-  color: #333;
-  color: #00c569;
-}
+    select:focus {
+        color: #333;
+    }
 
-select.active:focus {
-  color: #00c569;
-}
+    select.active {
+        color: #333;
+        color: #00c569;
+    }
 
-select.error {
-  color: #333;
-  color: #e41c38;
-}
+    select.active:focus {
+        color: #00c569;
+    }
 
-select.error:focus {
-  color: #e41c38;
-}
+    select.error {
+        color: #333;
+        color: #e41c38;
+    }
 
-.error-message {
-  text-align: center;
+    select.error:focus {
+        color: #e41c38;
+    }
 
-  color: #e41c38;
+    .error-message {
+        text-align: center;
 
-  font-weight: bold;
+        color: #e41c38;
 
-  height: 15px;
+        font-weight: bold;
 
-  direction: rtl;
+        height: 15px;
 
-  font-size: 11px;
-}
+        direction: rtl;
 
-.small-description {
-  font-size: 11px;
+        font-size: 11px;
+    }
 
-  font-weight: bold;
+    .small-description {
+        font-size: 11px;
 
-  color: #777777;
+        font-weight: bold;
 
-  line-height: 1.618;
-}
+        color: #777777;
 
-.list-item-wrapper {
-  background: #f8f8f8;
-  box-shadow: 0 5px 10px #c5c5c5;
-  border: none;
-  margin: 50px auto;
-  padding: 4px 0;
-}
+        line-height: 1.618;
+    }
 
-.list-item-wrapper > p {
-  float: right;
-  padding: 0;
-  padding-top: 12px;
-}
+    .add-button {
+        float: left;
+        background: #fff;
+        border: 1.5px solid;
+        color: #00c569;
+        border-radius: 3px;
+        padding: 2px 15px 1px;
+        font-size: 13px;
+        transition: 200ms;
+    }
 
-.send-message {
-  padding: 0;
-  text-align: center;
-}
+    .add-button:hover {
 
-.send-message button {
-  font-size: 14px;
-  padding: 7px 15px;
-}
+        background: #00c569;
+        transition: 200ms;
+        color: #fff;
 
-.main-description {
-  margin-top: 25px;
-}
+    }
 
-.red-text {
-  color: #e41c38;
-}
 
-@media screen and (max-width: 767px) {
-  .list-item-wrapper {
-    margin: 15px auto;
-  }
+    .wrapper-fields{
+        margin-bottom: 10px;
+    }
 
-  .input-wrapper {
-    padding: 0 5px;
-  }
+    label .small-label {
+        font-size: 12px;
+    }
 
-  select {
-    font-size: 12px;
-  }
+    @media screen and (max-width: 767px) {
+        select {
+            font-size: 12px;
+        }
 
-  .input-wrapper::after {
-    left: 14px;
-  }
-}
+        .input-wrapper::after {
+            left: 14px;
+        }
+    }
 </style>
 
 <template>
-  <div>
-    <div class="form-contents">
-      <div class="text-input-wrapper">
-        <div class="border" v-for="field in fieldsData">
-          <input v-model="field.name" placeholder="Enter First Name" />
-          <select v-model="field.optionId" id="deptList" @change="manageFieldsOption">
-            <!--                        <option v-for="dept in defaultFieldsOptions"  v-bind:value="dept.id" v-text="dept.name">-->
-            <option
-              v-for="(dept,index) in defaultFieldsOptions"
-              v-if="checkSelectData(dept.id, index)"
-              v-bind:value="dept.id"
-              v-text="dept.name"
-            ></option>
-          </select>
-        </div>
+    <div>
+        <h2 class="title-contents col-xs-12">ثبت جزییات بیشتر</h2>
 
-        <button @click="manageFieldsOption">merge</button>
-        <button @click="AddField">New Field</button>
-      </div>
-      <pre>{{ $data || json }}</pre>
-      <!-- <div class="col-xs-12">
-                <div class="text-center">
-                     <button class="submit-button active "
+        <div class="form-contents col-xs-12">
+            <div class="wrapper-fields">
+                <div class="row" v-for="field in fieldsData">
+                    <div class="col-xs-6 pull-right">
 
-                         @click.prevent="$parent.reLoadPage()"
-                       >
-                     ثبت محصول جدید
+                        <div class="input-wrapper">
+                            <!-- input type tel because we have some limmitation for processes -->
 
-               </button>
+                            <select
+                                    v-model="field.optionId"
+                                    :class="{'error' :  $parent.errors.provinceSelected , 'active' : $parent.provinceSelected}"
+
+                            >
+                                <option selected disabled>یک مورد را انتخاب کنید</option>
+
+                                <option
+                                        v-for="item in defaultFieldsOptions"
+                                        v-bind:value="item.id"
+                                        v-text="item.name"
+                                ></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+
+                        <div class="text-input-wrapper">
+                            <input type="text" placeholder="مقدار" v-model="field.name">
+                        </div>
+
+                    </div>
                 </div>
-      </div>-->
+            </div>
+            <button class="add-button" @click="AddField"><i class="fa fa-plus"></i> افزودن مورد</button>
+            <span class="small-description">
+
+ انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه باسکول کمک می کند
+
+      </span>
+
+            <div class="col-xs-12  margin-15-auto">
+                <div class="row">
+                    <button
+                            class="submit-button disabled pull-left active"
+
+                            @click.prevent="$parent.submitProduct()"
+                    >
+                        ثبت نهایی
+                    </button>
+
+                    <button
+                            class="submit-button default-back-button pull-right"
+                            @click.prevent="$parent.currentStep--"
+                    >
+                        <i class="fa fa-arrow-right"></i>
+
+                        مرحله قبل
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
+
+<!--
+<div class="form-contents">
+  <div class="text-input-wrapper">
+    <div class="border" v-for="field in fieldsData">
+      <input v-model="field.name" placeholder="Enter First Name" />
+      <select v-model="field.optionId" id="deptList" @change="manageFieldsOption">
+        &lt;!&ndash;                        <option v-for="dept in defaultFieldsOptions"  v-bind:value="dept.id" v-text="dept.name">&ndash;&gt;
+        <option
+                v-for="(dept,index) in defaultFieldsOptions"
+                v-if="checkSelectData(dept.id, index)"
+                v-bind:value="dept.id"
+                v-text="dept.name"
+        ></option>
+      </select>
+    </div>
+
+    <button @click="manageFieldsOption">merge</button>
+    <button @click="AddField">New Field</button>
+  </div>
+  <pre>{{ $data || json }}</pre>
+  &lt;!&ndash; <div class="col-xs-12">
+            <div class="text-center">
+                 <button class="submit-button active "
+
+                     @click.prevent="$parent.reLoadPage()"
+                   >
+                 ثبت محصول جدید
+
+           </button>
+            </div>
+  </div>&ndash;&gt;
+</div>
+</div>-->
+
+
 <script>
-export default {
-  data: function() {
-    return {
-      fieldsData: [
-        {
-          name: "",
-          optionId: ""
-        }
-      ],
-      defaultFieldsOptions: [
-        {
-          id: "1",
-          name: "yek"
+    export default {
+        data: function () {
+            return {
+                fieldsData: [
+                    {
+                        name: "",
+                        optionId: ""
+                    },
+                    {
+                        name: "",
+                        optionId: ""
+                    },
+                    {
+                        name: "",
+                        optionId: ""
+                    }
+                ],
+                defaultFieldsOptions: [
+                    {
+                        id: "1",
+                        name: "yek"
+                    },
+                    {
+                        id: "2",
+                        name: "do"
+                    },
+                    {
+                        id: "3",
+                        name: "se"
+                    }
+                ],
+                fieldsOptions: ""
+            };
         },
-        {
-          id: "2",
-          name: "do"
-        },
-        {
-          id: "3",
-          name: "se"
-        }
-      ],
-      fieldsOptions: ""
-    };
-  },
-  methods: {
-    arr_diff: function(defaultArray, selectedArray) {
-      let diff = [];
-      for (let firstIndex = 0; firstIndex < defaultArray.length; firstIndex++) {
-        for (
-          let secondIndex = 0;
-          secondIndex < selectedArray.length;
-          secondIndex++
-        ) {
-          if (
-            defaultArray[firstIndex].id != selectedArray[secondIndex].optionId
-          ) {
-            diff.push(selectedArray[secondIndex].optionId);
-          }
-        }
-      }
-      console.log("difff=>>>", diff);
-      return diff;
-    },
-    AddField: function() {
-      this.fieldsData.push({ name: "", optionId: "" });
-    },
-    manageFieldsOption: function() {
-      this.fieldsOptions = this.arr_diff(
-        this.defaultFieldsOptions,
-        this.fieldsData
-      );
-      console.log(this.fieldsOptions);
-    },
-    checkSelectData: function(id, index) {
-      /*var length = this.fieldsOptions.length;
-                for(var i = 0; i < length; i++) {
-                    if(this.fieldsOptions[i] != id) return true;
-                }
-
-                return false;*/
-      /* console.log( this.fieldsOptions );
-       */
-      console.log(id);
-      console.log(index);
-      return true;
-      /* var flag = false;
-
-
-                for(var i=0; i < this.fieldsOptions.length ; i++){
-                    console.log(this.fieldsOptions[i]);
-                    console.log(id);
-                    if(this.fieldsOptions[i] == id){
-                        flag = true
-                        return true
-                    }else{
-                        flag = false
-
+        methods: {
+            arr_diff: function (defaultArray, selectedArray) {
+                let diff = [];
+                for (let firstIndex = 0; firstIndex < defaultArray.length; firstIndex++) {
+                    for (
+                        let secondIndex = 0;
+                        secondIndex < selectedArray.length;
+                        secondIndex++
+                    ) {
+                        if (
+                            defaultArray[firstIndex].id != selectedArray[secondIndex].optionId
+                        ) {
+                            diff.push(selectedArray[secondIndex].optionId);
+                        }
                     }
                 }
-                console.log(flag);
-                return false*/
-    }
-  },
-  mounted: function() {
-    this.manageFieldsOption();
-  }
-};
+                console.log("difff=>>>", diff);
+                return diff;
+            },
+            AddField: function () {
+                this.fieldsData.push({name: "", optionId: ""});
+            },
+            manageFieldsOption: function () {
+                this.fieldsOptions = this.arr_diff(
+                    this.defaultFieldsOptions,
+                    this.fieldsData
+                );
+                console.log(this.fieldsOptions);
+            },
+            checkSelectData: function (id, index) {
+                /*var length = this.fieldsOptions.length;
+                          for(var i = 0; i < length; i++) {
+                              if(this.fieldsOptions[i] != id) return true;
+                          }
+
+                          return false;*/
+                /* console.log( this.fieldsOptions );
+                 */
+                console.log(id);
+                console.log(index);
+                return true;
+                /* var flag = false;
+
+
+                          for(var i=0; i < this.fieldsOptions.length ; i++){
+                              console.log(this.fieldsOptions[i]);
+                              console.log(id);
+                              if(this.fieldsOptions[i] == id){
+                                  flag = true
+                                  return true
+                              }else{
+                                  flag = false
+
+                              }
+                          }
+                          console.log(flag);
+                          return false*/
+            }
+        },
+        mounted: function () {
+            this.manageFieldsOption();
+        }
+    };
 </script>

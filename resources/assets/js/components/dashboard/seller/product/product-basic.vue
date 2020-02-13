@@ -131,8 +131,7 @@
             min-height: 500px;
             direction: rtl;
             transform: translate(0,0);
-            height: 100%;
-            bottom: 0;
+
             top: 0;
             width: 100%;
             left: 0;
@@ -181,13 +180,8 @@
 
                     </div>
 
-                    <div v-else-if="currentStep == 6" class="wrapper-progressbar title">
 
-                        <h2> اطلاعات بیشتر  </h2>
-
-                    </div>
-
-                    <div v-else-if="currentStep > 0 && currentStep < 6" class="wrapper-progressbar">
+                    <div v-else-if="currentStep > 0 && currentStep < 7" class="wrapper-progressbar">
 
                         <div class="custom-progressbar">
 
@@ -255,6 +249,14 @@
                                 <a class="progrees-item" :class="{'active-item' : currentStep >= 5}">
 
                                         <span>5</span>
+                                        <p>توضیحات </p>
+
+
+                                </a>
+
+                                <a class="progrees-item" :class="{'active-item' : currentStep >= 6}">
+
+                                        <span>6</span>
                                         <p>ثبت نهایی</p>
 
 
@@ -274,7 +276,7 @@
 
                 </header>
 
-                <main class="main-section-wrapper" :class="{'main-section-wrapper-full-width' : currentStep == 4 || currentStep == 6}">
+                <main class="main-section-wrapper" :class="{'main-section-wrapper-full-width' : currentStep == 4 || currentStep == 7}">
                     <StartRegisterProduct v-show="currentStep == 0" />
                     <ProductCategory v-show="currentStep == 1" />
                     <StockAndPrice v-show="currentStep == 2" />
@@ -319,7 +321,7 @@
         ],
         data: function () {
             return {
-                currentStep:6,
+                currentStep:0,
                 currentUser: {
                     profile: '',
                     user_info: '',
@@ -518,14 +520,14 @@
                                     self.relatedBuyAd = response.data.buyAd;
                                 }
 
-                                self.goToStep(6);
+                                self.goToStep(7);
                             }
                             else if(response.status === 200){
                                 self.popUpMsg = response.data.msg;
                                 eventBus.$emit('submitSuccess', self.popUpMsg);
                                 eventBus.$emit('submiting', false);
                                 // $('#modal-buttons').modal('show');
-                                  self.goToStep(6);
+                                  self.goToStep(7);
                             }
                         })
                         .catch(function (err) {
@@ -828,20 +830,25 @@
 
             },
             currentStep:function(step){
+                console.log(step)
                 switch(step){
                     case 2:
-                    $('.custom-progressbar.active-item').css('width','25%');
+                    $('.custom-progressbar.active-item').css('width','21%');
                     break;
 
                     case 3:
-                    $('.custom-progressbar.active-item').css('width','50%');
+                    $('.custom-progressbar.active-item').css('width','43%');
                     break;
 
                     case 4:
-                    $('.custom-progressbar.active-item').css('width','75%');
+                    $('.custom-progressbar.active-item').css('width','64%');
                     break;
 
                     case 5:
+                    $('.custom-progressbar.active-item').css('width','82%');
+                    break;
+
+                    case 6:
                     $('.custom-progressbar.active-item').css('width','100%');
                     break;
 
