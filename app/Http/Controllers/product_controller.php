@@ -16,6 +16,8 @@ use App\Jobs\NotifyBuyersBySMS;
 use App\buyAd;
 use App\Http\Library\date_convertor;
 use App\message;
+use App\province;
+use App\cities;
 
 class product_controller extends Controller
 {
@@ -178,59 +180,18 @@ class product_controller extends Controller
         $this->validate($request, [
             'from_record_number' => 'integer|min:0',
             'to_record_number' => 'integer|min:1',
-            'category_id' => 'integer|min:1',
-            'sub_category_id' => 'integer|min:1',
-            'province_id' => 'integer|min:1',
-            'city_id' => 'integer|min:1',
+            'category_id' => 'integer|exists:categories,id',
+            'sub_category_id' => 'integer|exists:categories,id',
+            'province_id' => 'integer|exists:provinces,id',
+            'city_id' => 'integer|exists:cities,id',
             'search_text' => 'string',
             'response_rate' => 'boolean',
             'special_products' => 'boolean',
         ]);
 
-        $all_products = null;
         $response_rate_filter = $request->response_rate;
-//        $special_products = $request->special_products;
-        $search_text = $request->search_text;
 
-        if ($request->has('special_products')) {
-            if ($request->filled('search_text')) {
-                $all_products = $this->get_all_products_with_related_media($search_text, $request->special_products);
-            } else {
-                $all_products = $this->get_all_products_with_related_media(null, $request->special_products);
-            }
-        } else {
-            if ($request->filled('search_text')) {
-                $all_products = $this->get_all_products_with_related_media($search_text);
-            } else {
-                $all_products = $this->get_all_products_with_related_media();
-            }
-        }
-
-        //applying filters
-        $all_products = array_filter($all_products, function ($product) use ($request) {
-            $category_flag = $sub_category_flag = $province_flag = $city_flag = true;
-
-            if ($request->filled('category_id')) {
-                $category_flag = ($request->category_id == $product['main']->category_id);
-            }
-            if ($request->filled('sub_category_id')) {
-                $sub_category_flag = ($request->sub_category_id == $product['main']->sub_category_id);
-            }
-            if ($request->filled('province_id')) {
-                $province_flag = ($request->province_id == $product['main']->province_id);
-            }
-            if ($request->filled('city_id')) {
-                $city_flag = ($request->city_id == $product['main']->city_id);
-            }
-//            if($request->filled('search_text')){
-//                $search_text = $request->search_text;
-//
-//                $search_text_flag = $this->does_search_text_matche_the_product($search_text,$product);
-//            }
-            $result = $category_flag && $sub_category_flag && $province_flag && $city_flag;
-//            var_dump($test);
-            return $result;
-        });
+        $all_products = $this->get_all_products_with_related_media($request);
 
         foreach ($all_products as $product) {
             $product['user_info']->response_rate = $this->get_user_response_rate($product['user_info']->id);
@@ -335,53 +296,64 @@ class product_controller extends Controller
         return $result_products;
     }
 
-    protected function get_all_products_with_related_media($search_text = null, $special_products = false, $from_record_number = null, $to_record_number = null)
+    protected function get_all_products_with_related_media($request = null)
     {
-        $products = null;
+        if(is_null($request)){
+            $products = product::where('confirmed',true)
+                                    ->orderBy('updated_at','desc')
+                                    ->get();
+            $result_products = $this->append_related_data_to_given_products($products);
 
-        $product_recommender_object = new product_recommender_controller();
-
-        if ($from_record_number !== null) {
-            $take_count = abs($to_record_number - $from_record_number);
-
-            $query = product::where('confirmed', true);
-
-            if ($special_products == true) {
-                $package_buyers_user_id = $this->get_package_buyers_user_id_array();
-
-                $query = $query->whereIn('myuser_id', $package_buyers_user_id);
-            }
-
-            $query = $query->skip($from_record_number)
-                ->take($take_count)
-                ->orderBy('updated_at', 'desc');
-
-            $products = $query->get();
-        } else {
-            $query = product::where('confirmed', true);
-
-            if ($special_products == true) {
-                $package_buyers_user_id = $this->get_package_buyers_user_id_array();
-
-                $query = $query->whereIn('myuser_id', $package_buyers_user_id);
-            }
-
-            $query = $query->orderBy('updated_at', 'desc');
-
-            $products = $query->get();
+            return $result_products;
         }
 
-        $temp_products = [];
+        $products = null;
 
-        if (!is_null($search_text)) {
-            foreach ($products as $product) {
-                $product->subcategory_name = category::find($product->category_id)->category_name;
-                if ($this->does_search_text_matche_the_product($search_text, $product)) {
-                    $temp_products[] = $product;
+        $query = product::where('confirmed', true);
+
+        if ($request->special_products == true) {
+            $package_buyers_user_id = $this->get_package_buyers_user_id_array();
+
+            $query = $query->whereIn('myuser_id', $package_buyers_user_id);
+        }
+        if($request->has('sub_category_id')){
+            $query->where('category_id',$request->sub_category_id);
+        }
+        if($request->has('city_id')){
+            $query->where('city_id',$request->city_id);
+        }
+        if($request->has('province_id')){
+            $province_id = $request->province_id;
+
+            $query = $this->apply_province_filter($query,$province_id);
+        }
+        if($request->has('category_id')){
+            $category_id = $request->category_id;
+
+            $query = $this->apply_category_filter($query,$category_id);
+        }
+        if($request->has('search_text')){
+            $search_text = $request->search_text;
+            
+            $query = $this->apply_search_text_filter($query,$search_text);
+        }
+
+        $query = $query->orderBy('updated_at', 'desc');
+
+        if($request->has('to_record_number')){
+            $to_record_number = $request->to_record_number;
+
+            if($request->response_rate == false){
+                $helper_query = clone $query;
+
+                $products = $query->whereBetween('updated_at',[Carbon::now()->subDays(((integer) $to_record_number/10) * 7),Carbon::now()])->get();
+                if($products->count() < $to_record_number){
+                    $products = $helper_query->get();
                 }
             }
-
-            $products = $temp_products;
+            else{
+                $products = $query->get();
+            }
         }
 
         $result_products = $this->append_related_data_to_given_products($products);
@@ -447,6 +419,63 @@ class product_controller extends Controller
                                     ->toArray();
 
         return $user_id_array;
+    }
+
+    protected function apply_province_filter($query,$province_id)
+    {
+        $province_cities = cities::where('province_id',$province_id)->select('id')->get();
+            
+        $query = $query->where(function($q) use($province_cities){
+            foreach($province_cities as $city){
+                $q = $q->orWhere('city_id',$city->id);
+            }
+
+            return $q;
+        });
+
+        return $query;
+    }
+
+    protected function apply_search_text_filter($query,$search_text)
+    {
+        $search_text = str_replace('\\', '', $search_text);
+        $search_text = str_replace('/', '', $search_text);
+        $search_text_array = explode(' ', $search_text);
+
+        $category_record = category::where('category_name',$search_text)->first();
+
+        if($category_record){
+            $query = $query->where('category_id',$category_record->id);
+        }
+        else{
+            $search_expresion = '';
+
+            foreach ($search_text_array as $text) {
+                $search_expresion .= "%$text%";
+            }
+
+            $query = $query->where(function($q) use($search_expresion){
+                    return $q = $q->where('product_name','like',$search_expresion)
+                            ->orWhere('description','like',$search_expresion);
+            });
+        }
+
+        return $query;
+    }
+
+    protected function apply_category_filter($query,$category_id)
+    {
+        $subcategories = category::where('parent_id',$category_id)->select('id')->get();
+
+        $query = $query->where(function($q) use($subcategories){
+            foreach($subcategories as $subcategory_id){
+                $q = $q->orWhere('category_id',$subcategory_id);
+            }
+
+            return $q;
+        });
+
+        return $query;
     }
 
     //public method
@@ -906,8 +935,6 @@ class product_controller extends Controller
     public function get_all_products_url_for_sitemap()
     {
         $products = collect($this->get_all_products_with_related_media());
-
-//        var_dump($products);
 
         return $products;
     }

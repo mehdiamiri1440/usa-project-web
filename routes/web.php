@@ -138,7 +138,7 @@ Route::group(['middleware' => [login::class]], function () {
     Route::post('/user/add_product', [
         'uses' => 'product_controller@add_product',
         'as' => 'add_product',
-    ]);
+    ])->middleware('optimizeImages');
 
     Route::post('/user/add_buyAd', [
         'uses' => 'buyAd_controller@add_buyAd',
@@ -160,7 +160,7 @@ Route::group(['middleware' => [login::class]], function () {
     Route::post('/user/profile_modification', [
         'uses' => 'profile_controller@profile_modification',
         'as' => 'profile_modification',
-    ]);
+    ])->middleware('optimizeImages');
 
     Route::post('/delete_product_by_id', [
         'uses' => 'product_controller@delete_product_by_id',
