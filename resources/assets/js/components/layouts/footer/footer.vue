@@ -251,6 +251,30 @@
         }
     }
 
+    #note-text.collapse[aria-expanded="false"] {
+        display: block;
+        height: 44px !important;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        direction:rtl;
+    }
+
+    #note-text.collapsing[aria-expanded="false"] {
+        height: 44px !important;
+    }
+
+    .content-wrapper a.collapsed  {
+        color: #000122;
+    }
+    .content-wrapper a.collapsed:after  {
+        content: 'مشاهده بیشتر +';
+    }
+
+    .content-wrapper a:not(.collapsed):after {
+        content: 'بستن -';
+    }
 
 </style>
 
@@ -259,11 +283,24 @@
 
         <div class="footer-note ">
             <div class="container">
-                <div class="contetn-wrapper">
-                    <p>
-                        هفت روز هفته ، ۲۴ ساعت شبانه‌روز پاسخگوی شما هستیم
+                <div class="content-wrapper">
+                    <div id="note-text" class="collapse " aria-expanded="false">
+                        باسکول بازار خرید و فروش عمده محصولات کشاورزی
+                        است  که خریداران را به
+                        فروشندگان عمده متصل کرده
+                        باسکول بازار خرید و فروش عمده محصولات کشاورزی
+                        است  که خریداران را به
+                        فروشندگان عمده متصل کرده
+                        باسکول بازار خرید و فروش عمده محصولات کشاورزی
+                        است  که خریداران را به
+                        فروشندگان عمده متصل کرده
+                        باسکول بازار خرید و فروش عمده محصولات کشاورزی
+                        است  که خریداران را به
+                        فروشندگان عمده متصل کرده
+                    </div>
+                    <a role="button" class="collapsed" data-toggle="collapse" href="#note-text" aria-expanded="false" aria-controls="collapseExample">
 
-                    </p>
+                    </a>
                 </div>
             </div>
         </div>
