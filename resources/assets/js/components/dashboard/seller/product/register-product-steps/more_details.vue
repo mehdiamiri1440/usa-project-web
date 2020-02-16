@@ -268,6 +268,10 @@
         font-size: 12px;
     }
 
+    .hide-option{
+        display: none;
+    }
+
     @media screen and (max-width: 767px) {
         select {
             font-size: 12px;
@@ -285,34 +289,42 @@
 
         <div class="form-contents col-xs-12">
             <div class="wrapper-fields">
-                <div class="row" v-for="field in fieldsData">
+                <div class="row" v-for="(i,index) in itemsCount" :key="i" v-if="isValidRow(index)">
                     <div class="col-xs-6 pull-right">
-
+    
                         <div class="input-wrapper">
                             <!-- input type tel because we have some limmitation for processes -->
 
                             <select
-                                    v-model="field.optionId"
-                                    :class="{'error' :  $parent.errors.provinceSelected , 'active' : $parent.provinceSelected}"
-
+                                v-on:change="setItem($event)"
+                                :class="{'error' :  fieldsData[index].errorMsg , 'active' : fieldsData[index].errorMsg}"
                             >
                                 <option selected disabled>یک مورد را انتخاب کنید</option>
 
                                 <option
-                                        v-for="item in defaultFieldsOptions"
-                                        v-bind:value="item.id"
-                                        v-text="item.name"
+                                    v-for="(item,id) in defaultFieldsOptions"
+                                    :key="id"
+                                    v-bind:value="item.name + '-' + index"
+                                    v-text="item.name"
+                                    :class="{'hide-option': item.alreadySelected}"
                                 ></option>
                             </select>
                         </div>
                     </div>
 
                     <div class="col-xs-6">
-
-                        <div class="text-input-wrapper">
-                            <input type="text" placeholder="مقدار" v-model="field.name">
+                        <div class='text-input-wrapper'>
+                            <input
+                                type="text"
+                                placeholder="مقدار" v-model="fieldsData[index].itemValue"
+                                :class="{'error' :  fieldsData[index].errorMsg , 'active' : fieldsData[index].errorMsg}"
+                                
+                            />
+                            <p class="error-message">
+                                <span v-if="fieldsData[index].errorMsg" v-text="fieldsData[index].errorMsg"></span>
+                            </p>
                         </div>
-
+                        <button class="btn btn-danger" @click="deleteRow(fieldsData[index].itemKey,index)">حذف</button>
                     </div>
                 </div>
             </div>
@@ -328,7 +340,7 @@
                     <button
                             class="submit-button disabled pull-left active"
 
-                            @click.prevent="$parent.submitProduct()"
+                            @click.prevent="submitProduct()"
                     >
                         ثبت نهایی
                     </button>
@@ -348,137 +360,252 @@
 </template>
 
 
-<!--
-<div class="form-contents">
-  <div class="text-input-wrapper">
-    <div class="border" v-for="field in fieldsData">
-      <input v-model="field.name" placeholder="Enter First Name" />
-      <select v-model="field.optionId" id="deptList" @change="manageFieldsOption">
-        &lt;!&ndash;                        <option v-for="dept in defaultFieldsOptions"  v-bind:value="dept.id" v-text="dept.name">&ndash;&gt;
-        <option
-                v-for="(dept,index) in defaultFieldsOptions"
-                v-if="checkSelectData(dept.id, index)"
-                v-bind:value="dept.id"
-                v-text="dept.name"
-        ></option>
-      </select>
-    </div>
-
-    <button @click="manageFieldsOption">merge</button>
-    <button @click="AddField">New Field</button>
-  </div>
-  <pre>{{ $data || json }}</pre>
-  &lt;!&ndash; <div class="col-xs-12">
-            <div class="text-center">
-                 <button class="submit-button active "
-
-                     @click.prevent="$parent.reLoadPage()"
-                   >
-                 ثبت محصول جدید
-
-           </button>
-            </div>
-  </div>&ndash;&gt;
-</div>
-</div>-->
-
-
 <script>
     export default {
         data: function () {
             return {
                 fieldsData: [
                     {
-                        name: "",
-                        optionId: ""
+                        itemKey:'',
+                        itemValue:'',
+                        errorMsg:'',
                     },
                     {
-                        name: "",
-                        optionId: ""
+                        itemKey:'',
+                        itemValue:'',
+                        errorMsg:'',
                     },
                     {
-                        name: "",
-                        optionId: ""
+                        itemKey:'',
+                        itemValue:'',
+                        errorMsg:'',
                     }
                 ],
                 defaultFieldsOptions: [
                     {
-                        id: "1",
-                        name: "yek"
+                        id: 1,
+                        name: "بسته بندی",
+                        description:'',
+                        itemValue:'',
+                        alreadySelected:false,
+                        selectedIndex:null,
                     },
                     {
-                        id: "2",
-                        name: "do"
+                        id: 2,
+                        name: "کیفیت",
+                        description:'sdf sdfsadf',
+                        itemValue:'',
+                        alreadySelected:false,
+                        selectedIndex:null,
                     },
                     {
-                        id: "3",
-                        name: "se"
-                    }
+                        id: 3,
+                        name: "رنگ",
+                        description:'sdf sdfsadf',
+                        itemValue:'',
+                        alreadySelected:false,
+                        selectedIndex:null,
+                    },
+                    {
+                        id: 4,
+                        name: "وزن",
+                        description:'sdf sdfsadf',
+                        itemValue:'',
+                        alreadySelected:false,
+                        selectedIndex:null,
+                    },
+                    {
+                        id: 5,
+                        name: "اندازه",
+                        description:'sdf sdfsadf',
+                        itemValue:'',
+                        alreadySelected:false,
+                        selectedIndex:null,
+                    },
+                    {
+                        id: 6,
+                        name: "گواهی سلامت",
+                        description:'sdf sdfsadf',
+                        itemValue:'',
+                        alreadySelected:false,
+                        selectedIndex:null,
+                    },
+                    {
+                        id: 7,
+                        name: "تازگی",
+                        description:'sdf sdfsadf',
+                        itemValue:'',
+                        alreadySelected:false,
+                        selectedIndex:null,
+                    },
+                    {
+                        id: 8,
+                        name: "نوع فروش",
+                        description:'sdf sdfsadf',
+                        itemValue:'',
+                        alreadySelected:false,
+                        selectedIndex:null,
+                    },
+                    {
+                        id: 9,
+                        name: "ماندگاری",
+                        description:'sdf sdfsadf',
+                        itemValue:'',
+                        alreadySelected:false,
+                        selectedIndex:null,
+                    },
+                    {
+                        id: 10,
+                        name: "مزایا",
+                        description:'sdf sdfsadf',
+                        itemValue:'',
+                        alreadySelected:false,
+                        selectedIndex:null,
+                    },
+
                 ],
-                fieldsOptions: ""
+                selectedItems:[],
+                fieldsOptions: "",
+                itemsCount:3,
+                itemValue:"",
+                deletedRows:[],
             };
         },
         methods: {
-            arr_diff: function (defaultArray, selectedArray) {
-                let diff = [];
-                for (let firstIndex = 0; firstIndex < defaultArray.length; firstIndex++) {
-                    for (
-                        let secondIndex = 0;
-                        secondIndex < selectedArray.length;
-                        secondIndex++
-                    ) {
-                        if (
-                            defaultArray[firstIndex].id != selectedArray[secondIndex].optionId
-                        ) {
-                            diff.push(selectedArray[secondIndex].optionId);
-                        }
+            AddField: function () {
+                if(this.fieldsData.length < this.defaultFieldsOptions.length){
+                    this.fieldsData.push({itemKey: '', itemValue: '',errorMsg:''});
+                    this.itemsCount++;
+                }
+            },
+            setItem:function(e){
+                e.preventDefault();
+                var itemKey = $(e.target).val();
+                
+                let itemKeyArray = itemKey.split('-');
+
+                itemKey = itemKeyArray[0];
+                let selectedIndex = itemKeyArray[1];
+                
+                this.fieldsData[selectedIndex].itemKey = itemKey;
+
+                this.removeItemKeyFromList(itemKey,selectedIndex);
+                
+            },
+            removeItemKeyFromList:function(itemKey,selectedIndex){   
+                let selectedItem = this.defaultFieldsOptions.filter(function(el) { return el.name == itemKey})[0];
+                
+                let index = this.defaultFieldsOptions.findIndex((item) => itemKey === item.name);
+                let tempIndex = this.defaultFieldsOptions.findIndex((item) => selectedIndex === item.selectedIndex);
+                
+                if(tempIndex !== -1){
+                    (this.defaultFieldsOptions[tempIndex]).alreadySelected = false;
+                    (this.defaultFieldsOptions[tempIndex]).selectedIndex = null;
+                }
+
+                if(selectedItem.alreadySelected == false){
+                    (this.defaultFieldsOptions[index]).alreadySelected = true;
+                    (this.defaultFieldsOptions[index]).selectedIndex = selectedIndex;
+                }
+            },
+            appendFieldsDataToDescription:function(){
+                let cnt = this.fieldsData.length + this.deletedRows.length;
+
+                for(let i = 0 ; i < cnt ; i++){
+                    if(this.fieldsData[i].itemValue){
+                        let itemDescription = this.getItemDescription(this.fieldsData[i].itemKey);
+                        this.$parent.product.description = this.$parent.product.description + ' ' + this.fieldsData[i].itemKey + '  ' + itemDescription + ' ' + this.fieldsData[i].itemValue;
                     }
                 }
-                console.log("difff=>>>", diff);
-                return diff;
-            },
-            AddField: function () {
-                this.fieldsData.push({name: "", optionId: ""});
-            },
-            manageFieldsOption: function () {
-                this.fieldsOptions = this.arr_diff(
-                    this.defaultFieldsOptions,
-                    this.fieldsData
-                );
-                console.log(this.fieldsOptions);
-            },
-            checkSelectData: function (id, index) {
-                /*var length = this.fieldsOptions.length;
-                          for(var i = 0; i < length; i++) {
-                              if(this.fieldsOptions[i] != id) return true;
-                          }
 
-                          return false;*/
-                /* console.log( this.fieldsOptions );
-                 */
-                console.log(id);
-                console.log(index);
+                console.log(this.$parent.product.description);
+            },
+            getItemDescription(itemKey){
+                let index = this.defaultFieldsOptions.findIndex((item) => itemKey === item.name);
+
+                return  (this.defaultFieldsOptions[index]).description;
+            },
+            submitProduct:function(){
+                var self = this;
+                this.validateItemValues();
+                
+                if(this.isItemValuesAreValidatedInputs() === true){
+                    this.appendFieldsDataToDescription();
+                    setTimeout(function(){
+                        self.$parent.submitProduct();
+                    },2000);
+                }
+            },
+            isItemValuesAreValidatedInputs:function(){
+                let cnt = this.fieldsData.length;
+
+                for(let i = 0; i < cnt; i++){
+                    if(this.fieldsData[i].errorMsg){
+                        return false;
+                    }
+                }
+
                 return true;
-                /* var flag = false;
+            },
+            itemValueValidator: function (itemValue) {
+                let msg = '';
 
+                if (!this.$parent.validateRegx(itemValue, /^[\u0600-\u06FF\s]+$/)) {
+                    msg = 'متن فرمت مناسبی ندارد';
+                    return msg;
+                }
 
-                          for(var i=0; i < this.fieldsOptions.length ; i++){
-                              console.log(this.fieldsOptions[i]);
-                              console.log(id);
-                              if(this.fieldsOptions[i] == id){
-                                  flag = true
-                                  return true
-                              }else{
-                                  flag = false
+                return true;
+            },
+            validateItemValues:function(){
+                let cnt = this.fieldsData.length;
+                for(let i = 0; i < cnt; i++){
+                    this.fieldsData[i].errorMsg = '';
 
-                              }
-                          }
-                          console.log(flag);
-                          return false*/
+                    if(this.fieldsData[i].itemValue){
+                        let result = this.itemValueValidator(this.fieldsData[i].itemValue);
+                        if(result !== true){
+                            this.fieldsData[i].errorMsg = result;
+                        }
+                    }
+                    else if(this.fieldsData[i].itemKey){
+                        this.fieldsData[i].errorMsg = 'این فیلد نمی تواند خالی باشد';
+                    }
+                }
+            },
+            deleteRow:function(itemKey,rowId){
+                let i = this.fieldsData.findIndex((item) => itemKey === item.itemKey);
+                let selectedItem = this.defaultFieldsOptions.filter(function(el) { return el.name == itemKey})[0];
+                
+                let myIndex = this.defaultFieldsOptions.findIndex((item) => itemKey === item.name);
+
+                if(selectedItem.alreadySelected === true){
+                    this.defaultFieldsOptions[myIndex].alreadySelected = false;
+                    this.defaultFieldsOptions[myIndex].selectedIndex = null;
+                }
+                
+                //back to default
+                this.fieldsData[i].itemKey = '';
+                this.fieldsData[i].itemValue = '';
+                this.fieldsData[i].errorMsg = '';
+
+                this.deletedRows.push(rowId);
+            },
+            isValidRow(index){
+                if(this.deletedRows.findIndex((item) => item == index) === -1) return true;
+                else return false;
             }
         },
         mounted: function () {
-            this.manageFieldsOption();
+            //this.manageFieldsOption();
+        },
+        watch:{
+            fieldsData:{
+                handler:function(value,oldValue){
+                    //
+                },
+                deep:true
+            }
         }
     };
 </script>

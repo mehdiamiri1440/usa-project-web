@@ -321,7 +321,7 @@
         ],
         data: function () {
             return {
-                currentStep:0,
+                currentStep:6,
                 currentUser: {
                     profile: '',
                     user_info: '',
