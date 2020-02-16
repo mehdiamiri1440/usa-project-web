@@ -1,685 +1,710 @@
 <style scoped>
-.loading-container {
-  display: flex;
-  width: 100%;
-  min-height: 60vh;
-  justify-content: center;
-  align-items: center;
-}
-.whatsapp-loading-gif {
-  justify-content: center;
-  align-items: center;
-  width: 20%;
-  height: 0%;
-  display: flex;
-}
-.chat-not-loaded {
-  opacity: 0;
-}
-.chat-loaded {
-  opacity: 1;
-}
-.contact-is-search img {
-  display: block;
-  width: 60px;
-  margin: 18px auto;
-}
-.clock-icon{
-  font-size:14px;
-}
-.check-items {
-  padding-left: 10px;
-  color: #00a65a;
-}
-
-.main-content {
-  padding: 65px 250px 0 0;
-
-  direction: rtl;
-
-  border-bottom: 2px solid #f2f2f2;
-  height: 100%;
-  position: fixed;
-
-  /*right: 0;*/
-  background: #fff;
-
-  left: 0;
-
-  bottom: 0;
-
-  top: 0;
-}
-
-.little-main .main-content {
-  padding: 65px 80px 0 0;
-}
-.lds-ring {
-  display: inline-block;
-
-  position: absolute;
-
-  width: 64px;
-
-  height: 64px;
-
-  left: 50%;
-
-  top: 50%;
-
-  transform: translate(-50%, -50%);
-}
-.lds-ring div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 51px;
-  height: 51px;
-  margin: 6px;
-  border: 5px solid #00c569;
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #00c569 transparent transparent transparent;
-}
-.lds-ring-alt {
-  display: block;
-  margin-top: 50px;
-  direction: rtl;
-  text-align: center;
-}
-.lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
-}
-.lds-ring div:nth-child(2) {
-  animation-delay: -0.3s;
-}
-.lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
-}
-@keyframes lds-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/*preloader image style*/
-
-.contact-title {
-  font-size: 16px;
-  padding: 18px 8px 23px;
-  border-bottom: 2px solid #f2f2f2;
-}
-
-.contact-title i {
-  font-size: 26px;
-  position: relative;
-  top: 5px;
-}
-
-.contact-title span {
-  font-size: 16px;
-  padding-right: 4px;
-}
-
-.contact-body .contact-search {
-  padding: 9px 7px;
-
-  background: #eef3f3;
-}
-
-.contact-body .contact-search .contact-search-input-wrapper {
-  position: relative;
-}
-
-.contact-body .contact-search .contact-search-input-wrapper i {
-  position: absolute;
-
-  left: 12px;
-
-  font-size: 20px;
-
-  color: #c1c1c1;
-
-  top: 8px;
-}
-
-.contact-body .contact-search .contact-search-input-wrapper input {
-  padding: 9px 15px;
-  border-radius: 50px;
-  background: #fff;
-  border: none;
-}
-
-.contact-body .contact-image {
-  width: 45px;
-  height: 45px;
-  float: right;
-  border-radius: 50px;
-  overflow: hidden;
-  border: 1px solid #f2f2f2;
-  position: relative;
-}
-
-.contact-body .contact-image img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  height: 100%;
-  width: initial;
-  transform: translate(-50%, -50%);
-}
-
-.contact-body .contact-item a {
-  font-size: 13px;
-  color: #595959;
-  overflow: hidden;
-  padding: 9px 7px;
-  border-bottom: 1px solid #b6b6b6;
-  display: block;
-  transition: 200ms;
-}
-
-.contact-body .contact-item a:hover,
-.contact-body .contact-item a.active {
-  background: #f6f6f6;
-  transition: 200ms;
-}
-
-.contact-body .contact-item:last-of-type a {
-  border-bottom: none;
-}
-
-.contact-body .contact-item span.contact-name {
-  float: right;
-
-  padding-right: 15px;
-  width: calc(100% - 95px);
-  padding-top: 6px;
-  font-weight: bold;
-}
-
-.contact-body .contact-item span.contact-last-message {
-  float: right;
-
-  padding-right: 15px;
-  width: calc(100% - 95px);
-  padding-top: 10px;
-
-  font-weight: lighter;
-  font-size: 12px;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.contact-body .contact-item .contact-date {
-  float: left;
-  padding-top: 5px;
-  width: 50px;
-  direction: ltr;
-  text-align: center;
-}
-
-.contact-body .contact-item .my-contact-date {
-  float: left;
-  padding-top: 3px;
-  width: 50px;
-  direction: ltr;
-  text-align: left;
-}
-
-.last-message-date{
-  display: inline-block;
-  height: 17px;
-
-  width: 100px;
-
-  font-size: 10px;
-  line-height: 2;
-}
-
-.count-number {
-  display: inline-block;
-
-  height: 17px;
-
-  width: 17px;
-
-  background: #00c569;
-
-  color: #fff;
-
-  border-radius: 50px;
-  font-size: 10px;
-  line-height: 2;
-  margin: 5px auto;
-}
-
-.contact-wrapper,
-.contact-wrapper > div {
-  height: 100%;
-}
-
-.contact-wrapper .contact-body {
-  height: calc(100% - 100px);
-}
-
-.contact-wrapper .contact-items {
-  position: relative;
-  overflow-y: scroll;
-  height: calc(100% - 30px);
-}
-
-.contact-wrapper .contact-items > ul {
-  position: absolute;
-  right: 0;
-  left: 0;
-  top: 0;
-  bottom: 0;
-}
-
-.message-wrapper {
-  border-right: 2px solid #f2f2f2;
-  position: relative;
-  height: 100%;
-}
-
-.message-wrapper .message-contact-title {
-  overflow: hidden;
-  font-size: 16px;
-  padding: 7px 0 6px;
-  border-bottom: 2px solid #f2f2f2;
-}
-
-.message-contact-title a {
-  color: #333;
-  transition: 300ms;
-}
-
-.message-contact-title a:hover {
-  color: #00c569;
-  transition: 300ms;
-}
-
-.message-wrapper .message-contact-title-img {
-  width: 55px;
-  height: 55px;
-  float: right;
-  border-radius: 50px;
-  overflow: hidden;
-  border: 1px solid #b5b5b5;
-  position: relative;
-  margin: 0 22px 0 17px;
-}
-
-.message-wrapper .message-contact-title img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  height: 100%;
-  width: initial;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
-.message-wrapper .message-contact-title span {
-  float: right;
-  display: block;
-  padding-top: 17px;
-}
-
-.back-state .green-button {
-  margin: 14px 0 0 25px;
-  display: inline-block;
-  background: #00c569;
-  color: #fff;
-  padding: 5px 18px;
-  border-radius: 3px;
-  text-align: center;
-  border: none;
-  -webkit-transition: 300ms;
-  transition: 300ms;
-  font-size: 12px;
-}
-
-.back-state {
-  display: none;
-}
-
-.message-wrapper .chat-page ul {
-  padding: 20px;
-  overflow-x: hidden;
-  position: absolute;
-
-  left: 0;
-
-  right: 0;
-
-  bottom: 75px;
-  top: 70px;
-}
-
-.message-wrapper .chat-page ul li {
-  overflow: hidden;
-}
-
-.message-wrapper .chat-page li div {
-  max-width: 455px;
-  font-size: 12px;
-  line-height: 1.612;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
-  border-radius: 8px;
-  padding: 12px 10px 3px;
-  margin: 12px auto;
-  display: inline-block;
-}
-
-.message-wrapper .chat-page .message-receive {
-  float: left;
-  background: #f7f7f7;
-}
-
-.message-wrapper .chat-page .message-send {
-  float: right;
-  background: #dcf8c6;
-}
-
-.message-wrapper .chat-page span.message-chat-date {
-  text-align: left;
-  font-size: 10px;
-  padding-top: 15px;
-  width: 100%;
-  direction: ltr;
-  display: block;
-}
-
-.send-message-form {
-  background: #eef3f3;
-  overflow: hidden;
-  padding: 12px 15px 13px;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-
-.message-input {
-  float: left;
-  width: calc(100% - 60px);
-}
-
-.default-message-wrapper {
-  position: relative;
-  height: 100%;
-  background: #f6f6f6;
-}
-
-.default-message-wrapper .default-main-contents {
-  width: 250px;
-
-  height: 250px;
-
-  background: #fff;
-
-  border-radius: 250px;
-
-  position: absolute;
-
-  left: 50%;
-
-  top: 50%;
-
-  transform: translate(-50%, -50%);
-
-  text-align: center;
-
-  padding-top: 60px;
-  box-shadow: 0 0 10px #ebebeb;
-}
-
-.default-message-wrapper .default-main-contents i {
-  font-size: 55px;
-}
-
-.default-message-wrapper .default-main-contents p {
-  font-size: 16px;
-
-  margin: 20px 0;
-}
-
-.send-message-form .message-input input {
-  border-radius: 50px;
-  background: #fff;
-  border: none;
-}
-
-.button-wrapper {
-  float: right;
-  line-height: 1.1;
-}
-
-.send-message-form .button-wrapper button {
-  border: none;
-  background: #00c569;
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
-  font-size: 22px;
-  color: #fff;
-  padding-left: 5px;
-}
-
-.contact-not-found {
-  text-align: center;
-  margin: 15px auto;
-}
-
-.contact-not-found i {
-  font-size: 26px;
-}
-
-.contact-not-found p {
-  margin-bottom: 7px;
-}
-
-@media screen and (max-width: 992px) {
-  .main-content {
-    padding: 65px 0 0;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .send-message-form .button-wrapper button {
-    padding: 12px 13px;
-    font-size: inherit;
-  }
-
-  .send-message-form .message-input input {
-    padding: 13px 15px;
-  }
-
-  .default-main-contents {
-    display: none;
-  }
-
-  .main-content {
-    padding: 65px 0 0;
-  }
-
-  .hidden_element {
-    display: none;
-  }
-
-  .back-state {
-    display: block;
-  }
-  .message-wrapper .message-contact-title span {
-    padding-top: 14px;
-
-    width: 170px;
-
-    overflow: hidden;
-
-    height: 40px;
-
-    line-height: 1.618;
-
-    text-overflow: ellipsis;
-
-    white-space: nowrap;
-  }
-}
-
-@media screen and (max-width: 370px) {
-  .message-wrapper .message-contact-title span {
-    width: 130px;
-  }
-}
-
-@media screen and (max-width: 330px) {
-  .message-wrapper .message-contact-title-img {
-    margin: 0 15px;
-  }
-
-  .message-wrapper .message-contact-title span {
-    font-size: 13px;
-  }
-}
+    .loading-container {
+        display: flex;
+        width: 100%;
+        min-height: 86vh;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        background: #fff;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        position: relative;
+        align-items: center;
+        z-index: 1;
+    }
+
+    .whatsapp-loading-gif {
+        justify-content: center;
+        align-items: center;
+        width: 20%;
+        height: 0%;
+        display: flex;
+    }
+
+    .chat-not-loaded {
+        opacity: 0;
+    }
+
+    .chat-loaded {
+        opacity: 1;
+    }
+
+    .contact-is-search img {
+        display: block;
+        width: 60px;
+        margin: 18px auto;
+    }
+
+    .clock-icon {
+        font-size: 14px;
+    }
+
+    .check-items {
+        padding-left: 10px;
+        color: #00a65a;
+    }
+
+    .main-content {
+        padding: 65px 250px 0 0;
+
+        direction: rtl;
+
+        border-bottom: 2px solid #f2f2f2;
+        height: 100%;
+        position: fixed;
+
+        /*right: 0;*/
+        background: #fff;
+
+        left: 0;
+
+        bottom: 0;
+
+        top: 0;
+    }
+
+    .little-main .main-content {
+        padding: 65px 80px 0 0;
+    }
+
+    .lds-ring {
+        display: inline-block;
+
+        position: absolute;
+
+        width: 64px;
+
+        height: 64px;
+
+        left: 50%;
+
+        top: 50%;
+
+        transform: translate(-50%, -50%);
+    }
+
+    .lds-ring div {
+        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        width: 51px;
+        height: 51px;
+        margin: 6px;
+        border: 5px solid #00c569;
+        border-radius: 50%;
+        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: #00c569 transparent transparent transparent;
+    }
+
+    .lds-ring-alt {
+        display: block;
+        margin-top: 50px;
+        direction: rtl;
+        text-align: center;
+    }
+
+    .lds-ring div:nth-child(1) {
+        animation-delay: -0.45s;
+    }
+
+    .lds-ring div:nth-child(2) {
+        animation-delay: -0.3s;
+    }
+
+    .lds-ring div:nth-child(3) {
+        animation-delay: -0.15s;
+    }
+
+    @keyframes lds-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    /*preloader image style*/
+
+    .contact-title {
+        font-size: 16px;
+        padding: 18px 8px 23px;
+        border-bottom: 2px solid #f2f2f2;
+    }
+
+    .contact-title i {
+        font-size: 26px;
+        position: relative;
+        top: 5px;
+    }
+
+    .contact-title span {
+        font-size: 16px;
+        padding-right: 4px;
+    }
+
+    .contact-body .contact-search {
+        padding: 9px 7px;
+
+        background: #eef3f3;
+    }
+
+    .contact-body .contact-search .contact-search-input-wrapper {
+        position: relative;
+    }
+
+    .contact-body .contact-search .contact-search-input-wrapper i {
+        position: absolute;
+
+        left: 12px;
+
+        font-size: 20px;
+
+        color: #c1c1c1;
+
+        top: 8px;
+    }
+
+    .contact-body .contact-search .contact-search-input-wrapper input {
+        padding: 9px 15px;
+        border-radius: 50px;
+        background: #fff;
+        border: none;
+    }
+
+    .contact-body .contact-image {
+        width: 45px;
+        height: 45px;
+        float: right;
+        border-radius: 50px;
+        overflow: hidden;
+        border: 1px solid #f2f2f2;
+        position: relative;
+    }
+
+    .contact-body .contact-image img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        height: 100%;
+        width: initial;
+        transform: translate(-50%, -50%);
+    }
+
+    .contact-body .contact-item a {
+        font-size: 13px;
+        color: #595959;
+        overflow: hidden;
+        padding: 9px 7px;
+        border-bottom: 1px solid #b6b6b6;
+        display: block;
+        transition: 200ms;
+    }
+
+    .contact-body .contact-item a:hover,
+    .contact-body .contact-item a.active {
+        background: #f6f6f6;
+        transition: 200ms;
+    }
+
+    .contact-body .contact-item:last-of-type a {
+        border-bottom: none;
+    }
+
+    .contact-body .contact-item span.contact-name {
+        float: right;
+
+        padding-right: 15px;
+        width: calc(100% - 95px);
+        padding-top: 6px;
+        font-weight: bold;
+    }
+
+    .contact-body .contact-item span.contact-last-message {
+        float: right;
+
+        padding-right: 15px;
+        width: calc(100% - 95px);
+        padding-top: 10px;
+
+        font-weight: lighter;
+        font-size: 12px;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .contact-body .contact-item .contact-date {
+        float: left;
+        padding-top: 5px;
+        width: 50px;
+        direction: ltr;
+        text-align: center;
+    }
+
+    .contact-body .contact-item .my-contact-date {
+        float: left;
+        padding-top: 3px;
+        width: 50px;
+        direction: ltr;
+        text-align: left;
+    }
+
+    .last-message-date {
+        display: inline-block;
+        height: 17px;
+
+        width: 100px;
+
+        font-size: 10px;
+        line-height: 2;
+    }
+
+    .count-number {
+        display: inline-block;
+
+        height: 17px;
+
+        width: 17px;
+
+        background: #00c569;
+
+        color: #fff;
+
+        border-radius: 50px;
+        font-size: 10px;
+        line-height: 2;
+        margin: 5px auto;
+    }
+
+    .contact-wrapper,
+    .contact-wrapper > div {
+        height: 100%;
+    }
+
+    .contact-wrapper .contact-body {
+        height: calc(100% - 100px);
+    }
+
+    .contact-wrapper .contact-items {
+        position: relative;
+        overflow-y: scroll;
+        height: calc(100% - 30px);
+    }
+
+    .contact-wrapper .contact-items > ul {
+        position: absolute;
+        right: 0;
+        left: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    .message-wrapper {
+        border-right: 2px solid #f2f2f2;
+        position: relative;
+        height: 100%;
+    }
+
+    .message-wrapper .message-contact-title {
+        overflow: hidden;
+        font-size: 16px;
+        padding: 7px 0 6px;
+        border-bottom: 2px solid #f2f2f2;
+    }
+
+    .message-contact-title a {
+        color: #333;
+        transition: 300ms;
+    }
+
+    .message-contact-title a:hover {
+        color: #00c569;
+        transition: 300ms;
+    }
+
+    .message-wrapper .message-contact-title-img {
+        width: 35px;
+        height: 35px;
+        float: right;
+        border-radius: 50px;
+        overflow: hidden;
+        border: 1px solid #b5b5b5;
+        position: relative;
+        margin: 0 22px 0 17px;
+    }
+
+    .message-wrapper .message-contact-title img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        height: 100%;
+        width: initial;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    .message-wrapper .message-contact-title span {
+        float: right;
+        display: block;
+        padding-top: 17px;
+    }
+
+    .back-state .green-button {
+        margin: 8px 0 0 25px;
+        display: inline-block;
+        background: #00c569;
+        color: #fff;
+        padding: 5px 18px;
+        border-radius: 3px;
+        text-align: center;
+        border: none;
+        -webkit-transition: 300ms;
+        transition: 300ms;
+        font-size: 12px;
+    }
+
+    .back-state {
+        display: none;
+    }
+
+    .message-wrapper .chat-page ul {
+        padding: 20px;
+
+        overflow-x: hidden;
+
+        position: absolute;
+
+        left: 0;
+
+        right: 0;
+
+        bottom: 57px;
+
+        top: 50px;
+    }
+
+    .message-wrapper .chat-page ul li {
+        overflow: hidden;
+    }
+
+    .message-wrapper .chat-page li div {
+        max-width: 455px;
+        font-size: 12px;
+        line-height: 1.612;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+        border-radius: 8px;
+        padding: 12px 10px 3px;
+        margin: 12px auto;
+        display: inline-block;
+    }
+
+    .message-wrapper .chat-page .message-receive {
+        float: left;
+        background: #f7f7f7;
+    }
+
+    .message-wrapper .chat-page .message-send {
+        float: right;
+        background: #dcf8c6;
+    }
+
+    .message-wrapper .chat-page span.message-chat-date {
+        text-align: left;
+        font-size: 10px;
+        padding-top: 15px;
+        width: 100%;
+        direction: ltr;
+        display: block;
+    }
+
+    .send-message-form {
+
+        overflow: hidden;
+        padding: 0 15px 7px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .message-input {
+        float: left;
+        width: calc(100% - 60px);
+    }
+
+    .default-message-wrapper {
+        position: relative;
+        height: 100%;
+        background: #f6f6f6;
+    }
+
+    .default-message-wrapper .default-main-contents {
+        width: 250px;
+
+        height: 250px;
+
+        background: #fff;
+
+        border-radius: 250px;
+
+        position: absolute;
+
+        left: 50%;
+
+        top: 50%;
+
+        transform: translate(-50%, -50%);
+
+        text-align: center;
+
+        padding-top: 60px;
+        box-shadow: 0 0 10px #ebebeb;
+    }
+
+    .default-message-wrapper .default-main-contents i {
+        font-size: 55px;
+    }
+
+    .default-message-wrapper .default-main-contents p {
+        font-size: 16px;
+
+        margin: 20px 0;
+    }
+
+    .send-message-form .message-input input {
+        border-radius: 50px;
+        background: #fff;
+        border: none;
+    }
+
+    .button-wrapper {
+        float: right;
+        line-height: 1.1;
+    }
+
+    .send-message-form .button-wrapper button {
+        border: none;
+        background: #00c569;
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        font-size: 22px;
+        color: #fff;
+        padding-left: 5px;
+    }
+
+    .contact-not-found {
+        text-align: center;
+        margin: 15px auto;
+    }
+
+    .contact-not-found i {
+        font-size: 26px;
+    }
+
+    .contact-not-found p {
+        margin-bottom: 7px;
+    }
+
+    @media screen and (max-width: 992px) {
+        .main-content {
+            padding: 65px 0 0;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .send-message-form .button-wrapper button {
+            padding: 12px 13px;
+            font-size: inherit;
+        }
+
+        .send-message-form .message-input input {
+            padding: 13px 15px;
+        }
+
+        .default-main-contents {
+            display: none;
+        }
+
+        .main-content {
+            padding: 65px 0 0;
+        }
+
+        .hidden_element {
+            display: none;
+        }
+
+        .back-state {
+            display: block;
+        }
+
+        .message-wrapper .message-contact-title span {
+            padding-top: 6px;
+
+            width: 170px;
+
+            overflow: hidden;
+
+            height: 40px;
+
+            line-height: 1.618;
+
+            text-overflow: ellipsis;
+
+            white-space: nowrap;
+        }
+    }
+
+    @media screen and (max-width: 370px) {
+        .message-wrapper .message-contact-title span {
+            width: 130px;
+        }
+    }
+
+    @media screen and (max-width: 330px) {
+        .message-wrapper .message-contact-title-img {
+            margin: 0 15px;
+        }
+
+        .message-wrapper .message-contact-title span {
+            font-size: 13px;
+        }
+    }
 </style>
 
 <template>
-  <section class="main-content col-xs-12">
-    <div
-      class="col-xs-12 contact-wrapper pull-right col-sm-4 col-md-3"
-      v-bind:class="{ hidden_element: selectedContact }"
-    >
-      <div class="row">
-        <div class="contact-title">
-          <i class="fa fa-user-circle"></i>
-          <span>لیست مخاطبین</span>
+    <section class="main-content col-xs-12">
+        <div
+                class="col-xs-12 contact-wrapper pull-right col-sm-4 col-md-3"
+                v-bind:class="{ hidden_element: selectedContact }"
+        >
+            <div class="row">
+                <!--<div class="contact-title">
+                  <i class="fa fa-user-circle"></i>
+                  <span>لیست مخاطبین</span>
+                </div>-->
+
+                <div class="contact-body">
+                    <div class="contact-search">
+                        <form action>
+                            <div class="contact-search-input-wrapper">
+                                <input type="text" placeholder="جستجوی مخاطبین" v-model="contactNameSearchText"/>
+
+                                <i class="fa fa-search"></i>
+                            </div>
+                        </form>
+                    </div>
+                    <div v-if="contactList.length === 0" class="loading-container">
+                        <div class="image-wrapper" v-if="!contactNameSearchText && !isContactListLoaded">
+                            <a v-show="isImageLoad">
+                                <transition>
+                                    <img src @load="ImageLoaded" alt="alt"/>
+                                </transition>
+                            </a>
+
+                            <div v-show="!isImageLoad" class="lds-ring">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
+                        </div>
+
+                        <div v-else-if="contactNameSearchText && !isSearchingContact">
+                            <p>
+                                <i class="fa fa-user"></i>
+                                <span>مخاطب یافت نشد</span>
+                            </p>
+                        </div>
+
+                        <div v-else-if="isSearchingContact" class="contact-is-search">
+                            <img :src="loading_img"/>
+                        </div>
+                        <div v-else-if="isContactListLoaded">
+                            <p>
+                                <i class="fa fa-user"></i>
+                                <span>مخاطب یافت نشد</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div v-else class="contact-items">
+                        <ul>
+                            <li class="contact-item" v-for="(contact,index) in contactList" :key="index">
+                                <a href="#" @click.prevent="loadChatHistory(contact,index)">
+                                    <div class="contact-image">
+                                        <img
+                                                v-if="contact.profile_photo"
+                                                :src="str + '/' + contact.profile_photo"
+                                                :alt="contact.first_name[0]"
+                                        />
+
+                                        <img v-else :src="defultimg"/>
+                                    </div>
+                                    <span class="contact-name"
+                                          v-text="contact.first_name + ' ' + contact.last_name"></span>
+                                    <div class="my-contact-date">
+                                        <p
+                                                class="last-message-date"
+                                        >{{contact.last_msg_time_date | moment("jYY/jMM/jDD")}}</p>
+                                    </div>
+                                    <span class="contact-last-message" v-text="contact.last_msg.last_msg_text"></span>
+                                    <div class="contact-date">
+                                        <p
+                                                class="count-number"
+                                                v-if="contact.unread_msgs_count !== 0"
+                                                v-text="contact.unread_msgs_count"
+                                        ></p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div
+                class="col-xs-12 message-wrapper col-sm-8 col-md-9"
+                v-bind:class="{ hidden_element: !selectedContact }"
+                v-if="selectedContact"
+        >
+            <div class="row">
+                <div class="message-contact-title">
+                    <div class="contact-title-contents pull-right">
+                        <div class="message-contact-title-img">
+                            <img
+                                    v-if="selectedContact.profile_photo"
+                                    :src="str + '/' + selectedContact.profile_photo"
+                                    :alt="selectedContact.first_name[0]"
+                            />
 
-        <div class="contact-body">
-          <div class="contact-search">
-            <form action>
-              <div class="contact-search-input-wrapper">
-                <input type="text" placeholder="جستجوی مخاطبین" v-model="contactNameSearchText" />
+                            <img v-else :src="defultimg"/>
+                        </div>
 
-                <i class="fa fa-search"></i>
-              </div>
-            </form>
-          </div>
-          <div v-if="contactList.length === 0" class="loading-container">
-            <div class="image-wrapper" v-if="!contactNameSearchText && !isContactListLoaded">
-              <a v-show="isImageLoad">
-                <transition>
-                  <img src @load="ImageLoaded" alt="alt" />
-                </transition>
-              </a>
+                        <router-link :to="{path:'/profile/'+selectedContact.user_name}">
+                            <span v-text="selectedContact.first_name + ' ' + selectedContact.last_name"></span>
+                        </router-link>
+                    </div>
+                    <div class="back-state pull-left">
+                        <a
+                                href="#"
+                                @click.prevent="selectedContact = !selectedContact"
+                                class="green-button"
+                        >بازگشت</a>
+                    </div>
+                </div>
 
-              <div v-show="!isImageLoad" class="lds-ring">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-              <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
-            </div>
-
-            <div v-else-if="contactNameSearchText && !isSearchingContact">
-              <p>
-                <i class="fa fa-user"></i>
-                <span>مخاطب یافت نشد</span>
-              </p>
-            </div>
-
-            <div v-else-if="isSearchingContact" class="contact-is-search">
-              <img :src="loading_img" />
-            </div>
-            <div v-else-if="isContactListLoaded">
-              <p>
-                <i class="fa fa-user"></i>
-                <span>مخاطب یافت نشد</span>
-              </p>
-            </div>
-          </div>
-
-          <div v-else class="contact-items">
-            <ul>
-              <li class="contact-item" v-for="(contact,index) in contactList" :key="index">
-                <a href="#" @click.prevent="loadChatHistory(contact,index)">
-                  <div class="contact-image">
-                    <img
-                      v-if="contact.profile_photo"
-                      :src="str + '/' + contact.profile_photo"
-                      :alt="contact.first_name[0]"
-                    />
-
-                    <img v-else :src="defimgitem" />
-                  </div>
-                  <span class="contact-name" v-text="contact.first_name + ' ' + contact.last_name"></span>
-                  <div class="my-contact-date">
-                    <p
-                      class="last-message-date"
-                    >{{contact.last_msg_time_date | moment("jYY/jMM/jDD")}}</p>
-                  </div>
-                  <span class="contact-last-message" v-text="contact.last_msg.last_msg_text"></span>
-                  <div class="contact-date">
-                    <p
-                      class="count-number"
-                      v-if="contact.unread_msgs_count !== 0"
-                      v-text="contact.unread_msgs_count"
-                    ></p>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      class="col-xs-12 message-wrapper col-sm-8 col-md-9"
-      v-bind:class="{ hidden_element: !selectedContact }"
-      v-if="selectedContact"
-    >
-      <div class="row">
-        <div class="message-contact-title">
-          <div class="contact-title-contents pull-right">
-            <div class="message-contact-title-img">
-              <img
-                v-if="selectedContact.profile_photo"
-                :src="str + '/' + selectedContact.profile_photo"
-                :alt="selectedContact.first_name[0]"
-              />
-
-              <img v-else :src="defimgitem" />
-            </div>
-
-            <router-link :to="{path:'/profile/'+selectedContact.user_name}">
-              <span v-text="selectedContact.first_name + ' ' + selectedContact.last_name"></span>
-            </router-link>
-          </div>
-          <div class="back-state pull-left">
-            <a
-              href="#"
-              @click.prevent="selectedContact = !selectedContact"
-              class="green-button"
-            >بازگشت</a>
-          </div>
-        </div>
-
-        <div class="chat-page" v-if="selectedContact">
-          <ul
-            :class="[(isChatMessagesLoaded&&isFirstMessageLoading)?'chat-not-loaded':'chat-loaded']"
-          >
-            <li :key="msg.id" v-for="msg in chatMessages">
-              <div :class="[msg.sender_id == currentUserId ? 'message-send' : 'message-receive']">
-                <span v-text="msg.text"></span>
-                <span class="message-chat-date">
+                <div class="chat-page" v-if="selectedContact">
+                    <ul
+                            :class="[(isChatMessagesLoaded&&isFirstMessageLoading)?'chat-not-loaded':'chat-loaded']"
+                    >
+                        <li :key="msg.id" v-for="msg in chatMessages">
+                            <div :class="[msg.sender_id == currentUserId ? 'message-send' : 'message-receive']">
+                                <span v-text="msg.text"></span>
+                                <span class="message-chat-date">
                   <span v-if="msg.created_at">
                   {{ msg.created_at | moment("jYY/jMM/jDD, h:mm A") }}
                   </span>
@@ -687,360 +712,362 @@
                     {{Date() | moment("jYY/jMM/jDD, h:mm A")}}
                   </span>
                   <span
-                    class="check-items"
-                    v-if="msg.sender_id === currentUserId"
+                          class="check-items"
+                          v-if="msg.sender_id === currentUserId"
                   >
                     <i class="fa fa-check" v-if="msg.created_at"></i>
                     <i class="far fa-clock" v-else></i>
                     <i class="fa fa-check" v-if="msg.is_read"></i>
                   </span>
                 </span>
-              </div>
-            </li>
-          </ul>
-          <div class="loading-container" v-if="isChatMessagesLoaded&&isFirstMessageLoading">
-            <div class="image-wrapper">
-              <a v-show="isImageLoad">
-                <transition>
-                  <img src @load="ImageLoaded" alt="alt" />
-                </transition>
-              </a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="loading-container" v-if="isChatMessagesLoaded&&isFirstMessageLoading">
+                        <div class="image-wrapper">
+                            <a v-show="isImageLoad">
+                                <transition>
+                                    <img src @load="ImageLoaded" alt="alt"/>
+                                </transition>
+                            </a>
 
-              <div v-show="!isImageLoad" class="lds-ring">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-              <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
+                            <div v-show="!isImageLoad" class="lds-ring">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
+                        </div>
+                    </div>
+                    <div class="send-message-form">
+                        <form>
+                            <div class="message-input">
+                                <input type="text" placeholder="پیغامی بگذارید " v-model="msgToSend"/>
+                            </div>
+
+                            <div class="button-wrapper">
+                                <button type="submit" @click.prevent="sendMessage()">
+                                    <i class="fa fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="send-message-form">
-            <form>
-              <div class="message-input">
-                <input type="text" placeholder="پیغامی بگذارید " v-model="msgToSend" />
-              </div>
-
-              <div class="button-wrapper">
-                <button type="submit" @click.prevent="sendMessage()">
-                  <i class="fa fa-paper-plane"></i>
-                </button>
-              </div>
-            </form>
-          </div>
         </div>
-      </div>
-    </div>
-    <div class="col-xs-12 default-message-wrapper col-sm-8 col-md-9" v-if="!selectedContact">
-      <div class="default-main-contents">
-        <i class="fa fa-users"></i>
-        <p>برای شروع چت لطفا یک مخاطب انتخاب کنید</p>
-      </div>
-    </div>
-  </section>
+        <div class="col-xs-12 default-message-wrapper col-sm-8 col-md-9" v-if="!selectedContact">
+            <div class="default-main-contents">
+                <i class="fa fa-users"></i>
+                <p>برای شروع چت لطفا یک مخاطب انتخاب کنید</p>
+            </div>
+        </div>
+    </section>
 </template>
 
 <script>
-import { eventBus } from "../../router/router";
-import Push from "push.js";
+    import {eventBus} from "../../router/router";
+    import Push from "push.js";
 
-export default {
-  props: ["defimgitem", "str", "loading_img"],
-  data: function() {
-    return {
-      isImageLoad: false,
-      isChatMessagesLoaded: true,
-      isFirstMessageLoading: true,
-      selectedIndex: -1,
-      items: [
-        {
-          message: "پیام ها",
-          url: "messages"
-        }
-      ],
-      isSearchingContact: false,
-      contactList: [],
-      chatMessages: "",
-      selectedContact: "",
-      currentUserId: "",
-      currentContactUserId: "",
-      msgToSend: "",
-      isComponentActive: false,
-      contactNameSearchText: "",
-      isContactListLoaded: false,
-    };
-  },
-  methods: {
-    init: function() {
-      this.loadContactList();
-    },
-    loadImage: function() {
-      this.isImageLoad = false;
-    },
-    ImageLoaded: function() {
-      this.isImageLoad = true;
-    },
-    loadContactList: function() {
-      var self = this;
+    export default {
+        props: ["defultimg", "str", "loading_img"],
+        data: function () {
+            return {
+                isImageLoad: false,
+                isChatMessagesLoaded: true,
+                isFirstMessageLoading: true,
+                selectedIndex: -1,
+                items: [
+                    {
+                        message: "پیام ها",
+                        url: "messages"
+                    }
+                ],
+                isSearchingContact: false,
+                contactList: [],
+                chatMessages: "",
+                selectedContact: "",
+                currentUserId: "",
+                currentContactUserId: "",
+                msgToSend: "",
+                isComponentActive: false,
+                contactNameSearchText: "",
+                isContactListLoaded: false,
+            };
+        },
+        methods: {
+            init: function () {
+                this.loadContactList();
+            },
+            loadImage: function () {
+                this.isImageLoad = false;
+            },
+            ImageLoaded: function () {
+                this.isImageLoad = true;
+            },
+            loadContactList: function () {
+                var self = this;
 
-      this.isContactListLoaded = false;
+                this.isContactListLoaded = false;
 
-      axios
-        .post("/get_contact_list")
-        .then(function(response) {
-          self.contactList = response.data.contact_list;
-          self.currentUserId = response.data.user_id;
+                axios
+                    .post("/get_contact_list")
+                    .then(function (response) {
+                        self.contactList = response.data.contact_list;
+                        self.currentUserId = response.data.user_id;
 
-          self.isContactListLoaded = true;
-        })
-        .catch(function(e) {
-          //
-        });
-    },
-    loadChatHistory: function(contact, index) {
-      var self = this;
-      self.handleBackBtnClickOnDevices();
-      self.isChatMessagesLoaded = true;
-      if (index !== -10) self.isFirstMessageLoading = true;
-      self.selectedIndex = index;
-      this.selectedContact = contact;
-      this.currentContactUserId = contact.contact_id;
+                        self.isContactListLoaded = true;
+                    })
+                    .catch(function (e) {
+                        //
+                    });
+            },
+            loadChatHistory: function (contact, index) {
+                var self = this;
+                self.handleBackBtnClickOnDevices();
+                self.isChatMessagesLoaded = true;
+                if (index !== -10) self.isFirstMessageLoading = true;
+                self.selectedIndex = index;
+                this.selectedContact = contact;
+                this.currentContactUserId = contact.contact_id;
 
-      axios
-        .post("/get_user_chat_history", {
-          user_id: contact.contact_id
-        })
-        .then(function(response) {
-          self.chatMessages = response.data.messages;
-          self.currentUserId = response.data.current_user_id;
-          self.scrollToEnd(0);
-        })
-        .catch(function(e) {
-          //
-        });
+                axios
+                    .post("/get_user_chat_history", {
+                        user_id: contact.contact_id
+                    })
+                    .then(function (response) {
+                        self.chatMessages = response.data.messages;
+                        self.currentUserId = response.data.current_user_id;
+                        self.scrollToEnd(0);
+                    })
+                    .catch(function (e) {
+                        //
+                    });
 
-      var index = this.searchForObjectIndexInArray(
-        contact.contact_id,
-        this.contactList
-      );
+                var index = this.searchForObjectIndexInArray(
+                    contact.contact_id,
+                    this.contactList
+                );
 
-      eventBus.$emit("messageCount", -1 * contact.unread_msgs_count);
+                eventBus.$emit("messageCount", -1 * contact.unread_msgs_count);
 
-      contact.unread_msgs_count = 0;
+                contact.unread_msgs_count = 0;
 
-      this.contactList.splice(index, 1, contact);
-    },
-    scrollToEnd: function(time) {
-      var chatPageElementList = $(".chat-page ul");
-      var self = this;
-      setTimeout(function() {
-        chatPageElementList.animate(
-          { scrollTop: chatPageElementList.prop("scrollHeight") },
-          500,
-          "swing",
-          () => {
-            self.isChatMessagesLoaded = false;
-          }
-        );
-      }, time);
-    },
-    sendMessage: function() {
-      var self = this;
+                this.contactList.splice(index, 1, contact);
+            },
+            scrollToEnd: function (time) {
+                var chatPageElementList = $(".chat-page ul");
+                var self = this;
+                setTimeout(function () {
+                    chatPageElementList.animate(
+                        {scrollTop: chatPageElementList.prop("scrollHeight")},
+                        500,
+                        "swing",
+                        () => {
+                            self.isChatMessagesLoaded = false;
+                        }
+                    );
+                }, time);
+            },
+            sendMessage: function () {
+                var self = this;
 
-      let tempMsg = self.msgToSend;
-      self.msgToSend = "";
+                let tempMsg = self.msgToSend;
+                self.msgToSend = "";
 
-      if(tempMsg){
-          let msgObject = {
-            sender_id: self.currentUserId,
-            receiver_id: self.currentContactUserId,
-            text:tempMsg
-        }
+                if (tempMsg) {
+                    let msgObject = {
+                        sender_id: self.currentUserId,
+                        receiver_id: self.currentContactUserId,
+                        text: tempMsg
+                    }
 
-        self.chatMessages.push(msgObject);
-        self.scrollToEnd(0);
+                    self.chatMessages.push(msgObject);
+                    self.scrollToEnd(0);
 
-        axios
-          .post("/messanger/send_message",msgObject)
-          .then(function(response) {
-            self.isFirstMessageLoading = false;
-            self.loadChatHistory(self.selectedContact, -10);
-          })
-          .catch(function(e) {
-            //
-          });
-      }
-    },
-    keepChatUpdated: function(contact) {
-      var self = this;
-      setTimeout(function() {
-        self.loadChatHistory(contact);
-      }, 20000);
-    },
-    pushNotification: function(header, body, link) {
-      Push.create(header, {
-        body: body,
-        timeout: 4000,
-        link: link,
-        onClick: function() {
-          window.focus();
-          this.close();
-        }
-      });
-    },
-    goToButtomOfChat: function() {
-      $(".chat-page ul").animate(
-        { scrollTop: $(".chat-page ul").prop("scrollHeight") },
-        1000
-      );
-    },
-    searchForObjectIndexInArray: function search(contactId, myArray) {
-      for (var i = 0; i < myArray.length; i++) {
-        if (myArray[i].contact_id === contactId) {
-          return i;
-        }
-      }
-    },
-    pageHasBeenReloaded: function() {
-      if (window.performance) {
-        //                  TYPE_BACK_FORWARD
-        if (
-          performance.navigation.type === performance.navigation.TYPE_RELOAD
-        ) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-    },
-    parseDateTime: function(dateTimeString) {
-      //
-    },
-    isDeviceMobile: function() {
-      if (
-        navigator.userAgent.match(/Android/i) ||
-        navigator.userAgent.match(/webOS/i) ||
-        navigator.userAgent.match(/iPhone/i) ||
-        navigator.userAgent.match(/iPad/i) ||
-        navigator.userAgent.match(/iPod/i) ||
-        navigator.userAgent.match(/BlackBerry/i) ||
-        navigator.userAgent.match(/Windows Phone/i)
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    handleBackBtnClickOnDevices:function(){
-      var self = this;
+                    axios
+                        .post("/messanger/send_message", msgObject)
+                        .then(function (response) {
+                            self.isFirstMessageLoading = false;
+                            self.loadChatHistory(self.selectedContact, -10);
+                        })
+                        .catch(function (e) {
+                            //
+                        });
+                }
+            },
+            keepChatUpdated: function (contact) {
+                var self = this;
+                setTimeout(function () {
+                    self.loadChatHistory(contact);
+                }, 20000);
+            },
+            pushNotification: function (header, body, link) {
+                Push.create(header, {
+                    body: body,
+                    timeout: 4000,
+                    link: link,
+                    onClick: function () {
+                        window.focus();
+                        this.close();
+                    }
+                });
+            },
+            goToButtomOfChat: function () {
+                $(".chat-page ul").animate(
+                    {scrollTop: $(".chat-page ul").prop("scrollHeight")},
+                    1000
+                );
+            },
+            searchForObjectIndexInArray: function search(contactId, myArray) {
+                for (var i = 0; i < myArray.length; i++) {
+                    if (myArray[i].contact_id === contactId) {
+                        return i;
+                    }
+                }
+            },
+            pageHasBeenReloaded: function () {
+                if (window.performance) {
+                    //                  TYPE_BACK_FORWARD
+                    if (
+                        performance.navigation.type === performance.navigation.TYPE_RELOAD
+                    ) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
+            parseDateTime: function (dateTimeString) {
+                //
+            },
+            isDeviceMobile: function () {
+                if (
+                    navigator.userAgent.match(/Android/i) ||
+                    navigator.userAgent.match(/webOS/i) ||
+                    navigator.userAgent.match(/iPhone/i) ||
+                    navigator.userAgent.match(/iPad/i) ||
+                    navigator.userAgent.match(/iPod/i) ||
+                    navigator.userAgent.match(/BlackBerry/i) ||
+                    navigator.userAgent.match(/Windows Phone/i)
+                ) {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+            handleBackBtnClickOnDevices: function () {
+                var self = this;
 
-      if (window.history.state) {
-          history.pushState(null, null,window.location);
-      }
+                if (window.history.state) {
+                    history.pushState(null, null, window.location);
+                }
 
-      $(window).on('popstate', function (e) {
-          if(self.isDeviceMobile()){
-              if(window.location.pathname == '/seller/messages' || window.location.pathname == '/buyer/messages'){
-                if(self.selectedContact){
-                    self.selectedContact = "";
+                $(window).on('popstate', function (e) {
+                    if (self.isDeviceMobile()) {
+                        if (window.location.pathname == '/seller/messages' || window.location.pathname == '/buyer/messages') {
+                            if (self.selectedContact) {
+                                self.selectedContact = "";
+                            }
+                        }
+                    }
+
+                });
+            },
+            registerComponentStatistics: function (categoryName, actionName, labelName) {
+                gtag("event", actionName, {
+                    event_category: categoryName,
+                    event_label: labelName
+                });
+            }
+        },
+        watch: {
+            contactNameSearchText: function () {
+                var self = this;
+                if (self.contactNameSearchText !== "") {
+                    self.isSearchingContact = true;
+                    axios
+                        .post("/get_contact_list")
+                        .then(function (response) {
+                            self.contactList = response.data.contact_list;
+                            self.currentUserId = response.data.user_id;
+
+                            var text = self.contactNameSearchText.split(" ");
+                            self.contactList = self.contactList.filter(function (contact) {
+                                return text.every(function (el) {
+                                    if (
+                                        contact.first_name.indexOf(el) > -1 ||
+                                        contact.last_name.indexOf(el) > -1
+                                    ) {
+                                        return true;
+                                    } else return false;
+                                });
+                            });
+
+                            self.isSearchingContact = false;
+                        })
+                        .catch(function (e) {
+                            //
+                        });
+                } else {
+                    self.loadContactList();
                 }
             }
-          }
-          
-      });
-  },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
-      gtag("event", actionName, {
-        event_category: categoryName,
-        event_label: labelName
-      });
-    }
-  },
-  watch: {
-    contactNameSearchText: function() {
-      var self = this;
-      if (self.contactNameSearchText !== "") {
-        self.isSearchingContact = true;
-        axios
-          .post("/get_contact_list")
-          .then(function(response) {
-            self.contactList = response.data.contact_list;
-            self.currentUserId = response.data.user_id;
+        },
 
-            var text = self.contactNameSearchText.split(" ");
-                self.contactList = self.contactList.filter(function(contact) {
-                  return text.every(function(el) {
-                    if (
-                      contact.first_name.indexOf(el) > -1 ||
-                      contact.last_name.indexOf(el) > -1
-                    ) {
-                      return true;
-                    } else return false;
-                  });
+        mounted: function () {
+            this.init();
+            eventBus.$emit("subHeader", this.items);
+        },
+
+        created: function () {
+            gtag("config", "UA-129398000-1", {page_path: "/messages"});
+
+            var self = this;
+
+            if (Push.Permission.has() === false) {
+                Push.Permission.request(function () {
+                }, function () {
                 });
-
-                self.isSearchingContact = false;
-          })
-          .catch(function(e) {
-            //
-          });
-      } else {
-        self.loadContactList();
-      }
-    }
-  },
-
-  mounted: function() {
-    this.init();
-    eventBus.$emit("subHeader", this.items);
-  },
-
-  created: function() {
-    gtag("config", "UA-129398000-1", { page_path: "/messages" });
-
-    var self = this;
-
-    if (Push.Permission.has() === false) {
-      Push.Permission.request(function() {}, function() {});
-    }
-
-    Echo.private("testChannel." + self.currentContactUserId).listen(
-      "newMessage",
-      e => {
-        var senderId = e.new_message.sender_id;
-        //update contact list
-        self.loadContactList();
-
-        if (self.currentContactUserId) {
-          if (self.currentContactUserId === senderId) {
-            self.chatMessages.push(e.new_message);
-            self.scrollToEnd(0);
-
-            if (self.isComponentActive == false) {
-              self.pushNotification(
-                "پیام جدید",
-                e.new_message.text,
-                "/dashboard/messages"
-              );
             }
-          }
-        } else {
-          this.pushNotification(
-            "پیام جدید",
-            e.new_message.text,
-            "/dashboard/messages"
-          );
+
+            Echo.private("testChannel." + self.currentContactUserId).listen(
+                "newMessage",
+                e => {
+                    var senderId = e.new_message.sender_id;
+                    //update contact list
+                    self.loadContactList();
+
+                    if (self.currentContactUserId) {
+                        if (self.currentContactUserId === senderId) {
+                            self.chatMessages.push(e.new_message);
+                            self.scrollToEnd(0);
+
+                            if (self.isComponentActive == false) {
+                                self.pushNotification(
+                                    "پیام جدید",
+                                    e.new_message.text,
+                                    "/dashboard/messages"
+                                );
+                            }
+                        }
+                    } else {
+                        this.pushNotification(
+                            "پیام جدید",
+                            e.new_message.text,
+                            "/dashboard/messages"
+                        );
+                    }
+                }
+            );
+        },
+        activated() {
+            this.isComponentActive = true;
+        },
+        deactivated() {
+            this.isComponentActive = false;
         }
-      }
-    );
-  },
-  activated() {
-    this.isComponentActive = true;
-  },
-  deactivated() {
-    this.isComponentActive = false;
-  }
-};
+    };
 </script>
 
 

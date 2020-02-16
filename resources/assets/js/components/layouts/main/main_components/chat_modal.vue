@@ -5,6 +5,13 @@
         height:100%;
 
     }
+
+    .loading-container{
+        height: calc(100% + 56px);
+        background: #fff;
+        z-index: 1;
+        position: relative;
+    }
     .chat-modal-wrapper {
 
         position: fixed;
@@ -28,6 +35,8 @@
         transition: 1s;
 
         box-shadow: 0 0 22px rgba(0, 0, 0, 0.15);
+
+        overflow:hidden;
 
     }
 
@@ -197,8 +206,6 @@
 
         right: 0;
 
-        background: #f0f0f0;
-
         padding: 10px 20px;
     }
 
@@ -229,7 +236,7 @@
 
         width: calc(100% - 50px);
 
-        border-radius: 4px;
+        border-radius: 50px;
 
         background: #fff;
 

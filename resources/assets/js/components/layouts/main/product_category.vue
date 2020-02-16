@@ -7,6 +7,10 @@
 
     }
 
+    #main {
+        padding-top: 32px;
+    }
+
     @media screen and (min-width: 1200px) {
 
         #main-content {
@@ -149,14 +153,13 @@
     }
 
     .search-box input {
-        width: 100%;
         text-align: right;
         direction: rtl;
-        border: 1px solid #666666;
+        border: 1px solid #777;
         border-radius: 6px;
-        padding: 10px 45px 9px 15px;
-        background: #f8f8f8;
-        font-size: 12px;
+        padding: 6px 50px 5px 15px;
+        background: #fff;
+        font-size: 14px;
         float: right;
     }
 
@@ -165,17 +168,17 @@
         border: none;
         position: absolute;
         right: 18px;
-        top: 6px;
+        top: 15px;
         border-left: 1px solid;
-        color: #666;
-        height: 77%;
-        padding: 5px 8px;
-        font-size: 18px;
+        color: #777;
+        padding: 0 7px;
+        font-size: 22px;
+        height: 20px;
     }
 
     .search-box button.btn-filter {
         float: left;
-        padding: 10px 14px;
+        padding: 7px 10px;
         border-radius: 5px;
         border: none;
         background: #000546;
@@ -246,13 +249,12 @@
 
     .sub-header-fix {
         position: fixed;
-        top: 56px;
+        top: 60px;
         left: 0;
         right: 0;
         z-index: 2;
         background: #f0f3f6;
-        padding: 0 15PX;
-        border-bottom: 3px solid #ececec;
+        padding: 0;
     }
 
     /*  .main-padding-fix {
@@ -369,20 +371,12 @@
     }
 
     .response-rate-filter-mobile-wrapper {
-        padding: 10px 0;
-
+        padding: 7px 15px;
         margin: 0;
-
         overflow: hidden;
-
         float: right;
-
-        width: initial;
-
-        box-shadow: none;
-        background: none;
+        width: 100%;
     }
-
     .footer-note-wrapper {
         background: #fff;
         direction: rtl;
@@ -468,6 +462,10 @@
             padding: 0;
         }
 
+        #main {
+            padding-top:  52px;
+        }
+
         .sub-header {
             position: fixed;
             z-index: 1;
@@ -475,8 +473,9 @@
         }
 
         .search-box {
-            margin: 9px auto 0;
-            padding: 0;
+            margin: 0 auto;
+            padding: 7px 15px;
+            background: #fbfbfb;
         }
 
         .main-image {
@@ -548,10 +547,7 @@
     }
 
     @media screen and (max-width: 555px) {
-        .checkbox-slider--b-flat input + span {
-            font-size: 12px;
 
-        }
 
         .user-image {
             float: right;
@@ -683,12 +679,50 @@
             <a href="#" @click.prevent="addProductOrRequest()"><i class="fa fa-plus"></i> </a>
         </div>
 
+
+
         <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
+            <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
+                <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید" />
+
+                <button class="btn-search">
+                    <i class="fa-search fa"></i>
+                </button>
+
+                <button class="btn-filter hidden-lg" data-toggle="modal" data-target="#searchFilter">
+                    فیلتر
+                    <i class="fa fa-filter"></i>
+                </button>
+            </div>
+            <div class="response-rate-filter-mobile-wrapper">
+                <div class="response-rate-filter">
+
+                    <div class="checkbox checkbox-slider--b-flat">
+                        <label>
+                            <input type="checkbox" v-model="$parent.productByResponseRate"><span>                  مرتب سازی بر اساس احتمال پاسخ گویی
+</span>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+            <!--  <div class="links-sub-header hidden-xs col-sm-4 pull-left">
+               <ul class="list-inline">
+                 <li class="list-item active">
+                   <h1>
+                     <a href>لیست محصولات</a>
+                   </h1>
+                 </li>
+               </ul>
+             </div> -->
+        </div>
+
+     <!--   <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
             <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
                 <div class="response-rate-filter-mobile-wrapper pull-right">
                     <div class="response-rate-filter">
 
-                        <div class="checkbox checkbox-slider--b-flat">
+                        <div class="checkbox checkbox-slider&#45;&#45;b-flat">
                             <label>
                                 <input type="checkbox" v-model="$parent.productByResponseRate"><span>                  مرتب سازی بر اساس احتمال پاسخ گویی
     </span>
@@ -704,7 +738,7 @@
                 </button>
             </div>
 
-            <!--
+
                             <div class="links-sub-header   col-xs-6 col-md-3 pull-right  ">
                                 <ul class="list-inline">
                                     <li class="list-item active">
@@ -715,9 +749,9 @@
                                         </h1>
                                     </li>
                                 </ul>
-                            </div> -->
+                            </div>
 
-        </div>
+        </div>-->
 
 
         <main id="main" class="container ">

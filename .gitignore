@@ -18,3 +18,5 @@ public/mix-manifest\.json
 public/assets/img/help/buyad/mobile/2.JPG
 
 public/assets/img/help/buyad/mobile/
+/composer
+/composer.phar

@@ -163,6 +163,12 @@
 
 	}
 
+	.product-description > p{
+
+		font-size: 16px;
+
+	}
+
 	.product-description > span{
 
 		font-weight: bold;
