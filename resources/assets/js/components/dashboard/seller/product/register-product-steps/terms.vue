@@ -209,11 +209,11 @@ textarea .small-label {
 <template>
   <div>
     <div class="col-xs-12">
-      <h2 class="title-contents">ثبت نهایی محصول</h2>
+      <h2 class="title-contents">توضیحات محصول</h2>
     </div>
 
     <div class="form-contents col-xs-12">
-      <label for="province">توضیحات نهایی محصول خود را بنویسید</label>
+      <label >توضیحات  محصول خود را بنویسید</label>
 
       <div class="text-input-wrapper">
         <!-- input type tel because we have some limmitation for processes -->
@@ -252,8 +252,11 @@ textarea .small-label {
     <div class="col-xs-12">
       <button
         class="submit-button active pull-left"
-        @click.prevent="$parent.submitProduct()"
-      >ثبت نهایی</button>
+        @click.prevent="$parent.currentStep++"
+      >                        مرحله بعد
+
+        <i class="fa fa-arrow-left"></i>
+      </button>
 
       <button
         class="submit-button default-back-button pull-right"

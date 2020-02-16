@@ -968,7 +968,7 @@
                     <div data-v-c5ebe4ce="" class="row">
                         <h3 data-v-c5ebe4ce="">
 
-                            آخرین محصولات ثبت شده
+                             درباره  <span v-text="this.getCategoryName()"></span>
 
                         </h3>
                         <hr data-v-c5ebe4ce="">
@@ -978,43 +978,13 @@
                 <div class="footer-note-wrapper main-box-shadow">
 
                     <div class="wrapper-contents">
+                        <div class="contents" v-for="categoryMeta in categoryMetaData" :key="categoryMeta.id">
 
-                        <h3>
-                            <strong>
-                                تجهیزات کشاورزی
-                            </strong>
-                        </h3>
-                        <p>
-                            برای این که کار پرورش آبزیان، دامپروری ها، گاوداری ها و مرغداری و ... به خوبی انجام گیرد، صنایع
-                            دام و طیور و آبزیان تجهیزات مختلفی را به بازار عرضه کرده است که انواع مختلفی دارند.
-                        </p>
-                        <h3>
-                            <strong>
-                                تجهیزات کشاورزی
-                            </strong>
-                        </h3>
-                        <p>
-                            برای این که کار پرورش آبزیان، دامپروری ها، گاوداری ها و مرغداری و ... به خوبی انجام گیرد، صنایع
-                            دام و طیور و آبزیان تجهیزات مختلفی را به بازار عرضه کرده است که انواع مختلفی دارند.
-                        </p>
-                        <h3>
-                            <strong>
-                                تجهیزات کشاورزی
-                            </strong>
-                        </h3>
-                        <p>
-                            برای این که کار پرورش آبزیان، دامپروری ها، گاوداری ها و مرغداری و ... به خوبی انجام گیرد، صنایع
-                            دام و طیور و آبزیان تجهیزات مختلفی را به بازار عرضه کرده است که انواع مختلفی دارند.
-                        </p>
-                        <h3>
-                            <strong>
-                                تجهیزات کشاورزی
-                            </strong>
-                        </h3>
-                        <p>
-                            برای این که کار پرورش آبزیان، دامپروری ها، گاوداری ها و مرغداری و ... به خوبی انجام گیرد، صنایع
-                            دام و طیور و آبزیان تجهیزات مختلفی را به بازار عرضه کرده است که انواع مختلفی دارند.
-                        </p>
+                            <h3>
+                                <strong v-text="categoryMeta.header"></strong>
+                            </h3>
+                            <p v-text="categoryMeta.content"> </p>
+                        </div>
 
                     </div>
                 </div>
@@ -1058,6 +1028,7 @@
                 categoryId: '',
                 subCategoryId: '',
                 cityId: '',
+                categoryMetaData : '',
                 searchValue: this.$route.params.searchText,
                 scrolled: false,
                 productCountInPage: 10,
@@ -1104,6 +1075,12 @@
                 let categoryName = this.getCategoryName();
 //                this.productCountInPage = this.productCountInEachLoad;
 
+                axios.post('/get_category_meta_data',{
+                    category_name : categoryName
+                }).then(function (response) {
+                    self.categoryMetaData = response.data.category_info
+
+                });
                 axios.post('/user/profile_info')
                     .then(function (response) {
                         self.currentUser = response.data;
