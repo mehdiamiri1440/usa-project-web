@@ -376,7 +376,9 @@
         overflow: hidden;
         float: right;
         width: 100%;
+        border-radius: 0;
     }
+
     .footer-note-wrapper {
         background: #fff;
         direction: rtl;
@@ -627,15 +629,6 @@
             margin-bottom: 15px;
         }
 
-        .search-box button.btn-filter {
-            padding: 3px 6px;
-            margin-top: 12px;
-            font-size: 12px;
-        }
-
-        .sub-header {
-            padding: 0 5px;
-        }
     }
 
 </style>

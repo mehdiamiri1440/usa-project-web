@@ -420,28 +420,28 @@
             <div class="main-content-wrapper  col-xs-12">
                 <div class="row">
 
+                    <div class="pull-left col-xs-12 col-sm-6 col-md-4">
 
-                    <div class="pull-right col-xs-12 col-sm-6 col-md-4">
-
-                        <div class="item-wrapper  wrapper-background ">
+                        <div class="item-wrapper pro-version wrapper-background ">
 
                             <div class="item-header">
-
+                                <span class="special-badge">ویژه</span>
                                 <div class="item-title">
-                                     اشتراک ماهانه
+                                    عضویت ویژه سالانه
                                 </div>
 
                                 <div class="detail-wrapper">
 
                                     <div class="item-price text-rtl">
 
-                                        <span class="item-price-content">189,000</span>
+                                        <span class="item-price-content">689,000</span>
                                         <span class="item-currency"> تومان </span>
 
                                     </div>
-<!--                                    <div class="item-date">
-                                        <span class="hidden-sm hidden-md hidden-lg">/</span>1 ماهه
-                                    </div>-->
+
+                                    <!--   <div class="item-date">
+                                           <span class="hidden-sm hidden-md hidden-lg">/</span>سالانه
+                                       </div>-->
                                 </div>
 
                             </div>
@@ -452,10 +452,10 @@
 
                                 <ul class="item-content-list">
 
-                                    <li v-for="(item, index) in priceItemOne">
+                                    <li v-for="(item, index) in priceItemPro">
 
                                         <a data-toggle="collapse"
-                                           :href="'#content-item-one-' + index"
+                                           :href="'#content-item-pro-' + index"
                                            @click.prevent="collapseControl($event)"
                                            class="item-help"
                                            :title="item.helpDescription"
@@ -463,7 +463,7 @@
 
                                             <i class="fa fa-question-circle"></i>
 
-                                            <div class="item-help-content collapse" :id="'content-item-one-' + index">
+                                            <div class="item-help-content collapse" :id="'content-item-pro-' + index">
 
                                                 <span v-text="item.helpDescription">  </span>
 
@@ -487,15 +487,15 @@
                             </div>
 
                             <div class="item-action">
-                                <p v-if="statusData.active_pakage_type == 1" class="text-green">
+                                <p v-if="statusData.active_pakage_type == 3" class="text-green">
                                     در حال استفاده
                                 </p>
 
-                                <button v-else-if="statusData.active_pakage_type > 1"  class="green-button btn-disabled" disabled>
+                                <button v-else-if="statusData.active_pakage_type > 3"  class="green-button btn-disabled" disabled>
                                     ارتقاء عضویت
                                 </button>
 
-                                <a v-else href="/payment/1" class="green-button">
+                                <a v-else href="/payment/3" class="green-button">
                                     ارتقاء عضویت
                                 </a>
 
@@ -504,7 +504,7 @@
                         </div>
 
                     </div>
-                    <div class="pull-right col-xs-12 col-sm-6 col-md-4">
+                    <div class="pull-left col-xs-12 col-sm-6 col-md-4">
 
                         <div class="item-wrapper  wrapper-background ">
 
@@ -590,26 +590,25 @@
                     </div>
                     <div class="pull-right col-xs-12 col-sm-6 col-md-4">
 
-                        <div class="item-wrapper pro-version wrapper-background ">
+                        <div class="item-wrapper  wrapper-background ">
 
                             <div class="item-header">
-                                <span class="special-badge">ویژه</span>
+
                                 <div class="item-title">
-                                   عضویت ویژه سالانه
+                                    اشتراک ماهانه
                                 </div>
 
                                 <div class="detail-wrapper">
 
                                     <div class="item-price text-rtl">
 
-                                        <span class="item-price-content">689,000</span>
+                                        <span class="item-price-content">189,000</span>
                                         <span class="item-currency"> تومان </span>
 
                                     </div>
-
-                                 <!--   <div class="item-date">
-                                        <span class="hidden-sm hidden-md hidden-lg">/</span>سالانه
-                                    </div>-->
+                                    <!--                                    <div class="item-date">
+                                                                            <span class="hidden-sm hidden-md hidden-lg">/</span>1 ماهه
+                                                                        </div>-->
                                 </div>
 
                             </div>
@@ -620,10 +619,10 @@
 
                                 <ul class="item-content-list">
 
-                                    <li v-for="(item, index) in priceItemPro">
+                                    <li v-for="(item, index) in priceItemOne">
 
                                         <a data-toggle="collapse"
-                                           :href="'#content-item-pro-' + index"
+                                           :href="'#content-item-one-' + index"
                                            @click.prevent="collapseControl($event)"
                                            class="item-help"
                                            :title="item.helpDescription"
@@ -631,7 +630,7 @@
 
                                             <i class="fa fa-question-circle"></i>
 
-                                            <div class="item-help-content collapse" :id="'content-item-pro-' + index">
+                                            <div class="item-help-content collapse" :id="'content-item-one-' + index">
 
                                                 <span v-text="item.helpDescription">  </span>
 
@@ -655,15 +654,15 @@
                             </div>
 
                             <div class="item-action">
-                                <p v-if="statusData.active_pakage_type == 3" class="text-green">
+                                <p v-if="statusData.active_pakage_type == 1" class="text-green">
                                     در حال استفاده
                                 </p>
 
-                                <button v-else-if="statusData.active_pakage_type > 3"  class="green-button btn-disabled" disabled>
+                                <button v-else-if="statusData.active_pakage_type > 1"  class="green-button btn-disabled" disabled>
                                     ارتقاء عضویت
                                 </button>
 
-                                <a v-else href="/payment/3" class="green-button">
+                                <a v-else href="/payment/1" class="green-button">
                                     ارتقاء عضویت
                                 </a>
 
@@ -672,6 +671,7 @@
                         </div>
 
                     </div>
+
                  <!--   <div class=" pull-right col-xs-12 col-sm-6">
 
                         <div class="item-wrapper wrapper-background ">

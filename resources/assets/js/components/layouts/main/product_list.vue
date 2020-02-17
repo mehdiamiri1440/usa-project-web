@@ -344,6 +344,7 @@
         overflow: hidden;
         float: right;
         width: 100%;
+        border-radius: 0;
     }
 
     @media screen and (max-width: 1199px) {

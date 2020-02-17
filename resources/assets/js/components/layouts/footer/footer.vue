@@ -217,7 +217,7 @@
     .enamad img {
         width: 120px;
         text-align: center;
-        background: #fff;
+        background: #eceff8;
         padding: 9px;
         border-radius: 5px;
         position: relative;
@@ -295,12 +295,13 @@
                                             target="_blank"
                                             href="https://trustseal.enamad.ir/?id=129504&amp;Code=I3flHhEiFZPLWVe9vTFK"
                                     >
-                                        <img
-                                                src="https://Trustseal.eNamad.ir/logo.aspx?id=129504&amp;Code=I3flHhEiFZPLWVe9vTFK"
-                                                alt
-                                                style="cursor:pointer"
-                                                id="I3flHhEiFZPLWVe9vTFK"
-                                        />
+                                        <img :src="$parent.assets + 'assets/img/enamad.jpg'" alt="">
+<!--                                        <img-->
+<!--                                                src="https://Trustseal.eNamad.ir/logo.aspx?id=129504&amp;Code=I3flHhEiFZPLWVe9vTFK"-->
+<!--                                                alt-->
+<!--                                                style="cursor:pointer"-->
+<!--                                                id="I3flHhEiFZPLWVe9vTFK"-->
+<!--                                        />-->
                                     </a>
                                 </div>
                             </li>
