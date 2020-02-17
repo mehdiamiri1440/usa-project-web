@@ -349,7 +349,7 @@
     .message-wrapper .message-contact-title span {
         float: right;
         display: block;
-        padding-top: 17px;
+        padding-top: 9px;
     }
 
     .back-state .green-button {

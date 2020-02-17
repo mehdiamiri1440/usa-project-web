@@ -46,7 +46,7 @@ class product_controller extends Controller
     ];
 
     protected $product_register_nullable_fields_array_with_validation_rules = array(
-        'description' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}\x{060C}\x{061B}\x{061F}\x{0640}\x{066A}\x{066B}\x{066C}_\.\-\:\(\)\A-Za-z0-9 ]+$/u',
+        'description' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}\x{060C}\x{061B}\x{061F}\x{0640}\x{066A}\x{066B}\x{066C}\x{0E}_\.\-\،\:\(\)\A-Za-z0-9 ]+$/u',
     );
 
     protected $max_factorial_input_number = 10;

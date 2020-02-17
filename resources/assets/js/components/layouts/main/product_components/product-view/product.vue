@@ -160,6 +160,8 @@
 
 		padding: 15px 0;
 		direction: rtl;
+		white-space: pre-line;
+		line-height: 30px;
 
 	}
 

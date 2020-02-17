@@ -683,7 +683,7 @@
 
         <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
             <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
-                <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید" />
+                <input type="text" v-model="headerSearchText" placeholder="اینجا جستجو کنید" />
 
                 <button class="btn-search">
                     <i class="fa-search fa"></i>
@@ -968,7 +968,7 @@
                     <div data-v-c5ebe4ce="" class="row">
                         <h3 data-v-c5ebe4ce="">
 
-                            آخرین محصولات ثبت شده
+                             درباره  <span v-text="this.getCategoryName()"></span>
 
                         </h3>
                         <hr data-v-c5ebe4ce="">
@@ -978,43 +978,13 @@
                 <div class="footer-note-wrapper main-box-shadow">
 
                     <div class="wrapper-contents">
+                        <div class="contents" v-for="categoryMeta in categoryMetaData" :key="categoryMeta.id">
 
-                        <h3>
-                            <strong>
-                                تجهیزات کشاورزی
-                            </strong>
-                        </h3>
-                        <p>
-                            برای این که کار پرورش آبزیان، دامپروری ها، گاوداری ها و مرغداری و ... به خوبی انجام گیرد، صنایع
-                            دام و طیور و آبزیان تجهیزات مختلفی را به بازار عرضه کرده است که انواع مختلفی دارند.
-                        </p>
-                        <h3>
-                            <strong>
-                                تجهیزات کشاورزی
-                            </strong>
-                        </h3>
-                        <p>
-                            برای این که کار پرورش آبزیان، دامپروری ها، گاوداری ها و مرغداری و ... به خوبی انجام گیرد، صنایع
-                            دام و طیور و آبزیان تجهیزات مختلفی را به بازار عرضه کرده است که انواع مختلفی دارند.
-                        </p>
-                        <h3>
-                            <strong>
-                                تجهیزات کشاورزی
-                            </strong>
-                        </h3>
-                        <p>
-                            برای این که کار پرورش آبزیان، دامپروری ها، گاوداری ها و مرغداری و ... به خوبی انجام گیرد، صنایع
-                            دام و طیور و آبزیان تجهیزات مختلفی را به بازار عرضه کرده است که انواع مختلفی دارند.
-                        </p>
-                        <h3>
-                            <strong>
-                                تجهیزات کشاورزی
-                            </strong>
-                        </h3>
-                        <p>
-                            برای این که کار پرورش آبزیان، دامپروری ها، گاوداری ها و مرغداری و ... به خوبی انجام گیرد، صنایع
-                            دام و طیور و آبزیان تجهیزات مختلفی را به بازار عرضه کرده است که انواع مختلفی دارند.
-                        </p>
+                            <h3>
+                                <strong v-text="categoryMeta.header"></strong>
+                            </h3>
+                            <p v-text="categoryMeta.content"> </p>
+                        </div>
 
                     </div>
                 </div>
@@ -1058,6 +1028,7 @@
                 categoryId: '',
                 subCategoryId: '',
                 cityId: '',
+                categoryMetaData : '',
                 searchValue: this.$route.params.searchText,
                 scrolled: false,
                 productCountInPage: 10,
@@ -1072,6 +1043,7 @@
                 bottom: false,
                 loadMoreActive: false,
                 searchTextTimeout: null,
+                headerSearchText:'',
             }
         },
         methods: {
@@ -1104,6 +1076,12 @@
                 let categoryName = this.getCategoryName();
 //                this.productCountInPage = this.productCountInEachLoad;
 
+                axios.post('/get_category_meta_data',{
+                    category_name : categoryName
+                }).then(function (response) {
+                    self.categoryMetaData = response.data.category_info
+
+                });
                 axios.post('/user/profile_info')
                     .then(function (response) {
                         self.currentUser = response.data;
@@ -1404,7 +1382,7 @@
                 let lastOffset = 0;
 
                 window.onscroll = () => {
-                    if (window.location.pathname.includes('product-list')) {
+                    if (window.location.pathname.includes('product-list/category')) {
                         var bottom = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - (document.documentElement.scrollTop / 2);
 
                         let newOffset = document.documentElement.offsetHeight;
@@ -1427,7 +1405,7 @@
 
             },
 
-            searchText: function () {
+            headerSearchText: function (value) {
                 var self = this;
 
 
@@ -1436,7 +1414,14 @@
                 this.searchTextTimeout = setTimeout(function () {
                     self.registerComponentStatistics('product-list', 'search-text', self.searchText);
 
-                    self.applyFilter();
+                    eventBus.$emit('textSearch', value);
+
+                    self.$router.replace({
+                        name: 'productList',
+                        query: {
+                            s: self.headerSearchText.replace(/ /g, '+')
+                        }
+                    });
 
                 }, 1500);
 
