@@ -1147,7 +1147,7 @@
                 let lastOffset = 0;
 
                 window.onscroll = () => {
-                    if (window.location.pathname.includes('product-list')) {
+                    if (window.location.pathname.includes('product-list') && !window.location.pathname.includes('category')) {
                         var bottom = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - (document.documentElement.scrollTop / 2);
 
                         let newOffset = document.documentElement.offsetHeight;

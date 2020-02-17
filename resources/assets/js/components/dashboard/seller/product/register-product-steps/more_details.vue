@@ -385,7 +385,7 @@
                     {
                         id: 1,
                         name: "بسته بندی",
-                        description:'',
+                        description:'نوع بسته بندی و وزن ارایه شده توسط فروشنده برای این محصول',
                         itemValue:'',
                         alreadySelected:false,
                         selectedIndex:null,
@@ -393,7 +393,7 @@
                     {
                         id: 2,
                         name: "کیفیت",
-                        description:'sdf sdfsadf',
+                        description:'میزان مرغوبیت و کیفیت ظاهری محصول ارایه شده',
                         itemValue:'',
                         alreadySelected:false,
                         selectedIndex:null,
@@ -401,7 +401,7 @@
                     {
                         id: 3,
                         name: "رنگ",
-                        description:'sdf sdfsadf',
+                        description:'رنگ ظاهری این محصول',
                         itemValue:'',
                         alreadySelected:false,
                         selectedIndex:null,
@@ -416,16 +416,16 @@
                     },
                     {
                         id: 5,
-                        name: "اندازه",
-                        description:'sdf sdfsadf',
+                        name: "اندازه یا ابعاد",
+                        description:'اندازه یا ابعاد محصول',
                         itemValue:'',
                         alreadySelected:false,
                         selectedIndex:null,
                     },
                     {
                         id: 6,
-                        name: "گواهی سلامت",
-                        description:'sdf sdfsadf',
+                        name: "گواهی کیفی،سلامت",
+                        description:'تاییدیه های کیفی، بهداشتی و سلامت کالا موجود برای این محصول',
                         itemValue:'',
                         alreadySelected:false,
                         selectedIndex:null,
@@ -433,7 +433,7 @@
                     {
                         id: 7,
                         name: "تازگی",
-                        description:'sdf sdfsadf',
+                        description:'میزان تازه بودن و زمان تولید این محصول',
                         itemValue:'',
                         alreadySelected:false,
                         selectedIndex:null,
@@ -441,23 +441,23 @@
                     {
                         id: 8,
                         name: "نوع فروش",
-                        description:'sdf sdfsadf',
+                        description:'شرایط پرداخت پول در معامله طبق نظر فروشنده برای فروش این محصول',
                         itemValue:'',
                         alreadySelected:false,
                         selectedIndex:null,
                     },
                     {
                         id: 9,
-                        name: "ماندگاری",
-                        description:'sdf sdfsadf',
+                        name: "روش نگهداری یا ماندگاری",
+                        description:'میزان ماندگاری و شرایط نگهداری این محصول',
                         itemValue:'',
                         alreadySelected:false,
                         selectedIndex:null,
                     },
                     {
                         id: 10,
-                        name: "مزایا",
-                        description:'sdf sdfsadf',
+                        name: "مزیا نسبت به محصولات مشابه",
+                        description:'مزایا (مزیت این محصول نسبت به سایر محصولات مشابه)',
                         itemValue:'',
                         alreadySelected:false,
                         selectedIndex:null,
@@ -509,16 +509,24 @@
                 }
             },
             appendFieldsDataToDescription:function(){
-                let cnt = this.fieldsData.length + this.deletedRows.length;
+                return new Promise((resolve,reject) => {
+                    let cnt = this.fieldsData.length + this.deletedRows.length;
+                    let description = '';
 
-                for(let i = 0 ; i < cnt ; i++){
-                    if(this.fieldsData[i].itemValue){
-                        let itemDescription = this.getItemDescription(this.fieldsData[i].itemKey);
-                        this.$parent.product.description = this.$parent.product.description + ' ' + this.fieldsData[i].itemKey + '  ' + itemDescription + ' ' + this.fieldsData[i].itemValue;
+                    for(let i = 0 ; i < cnt ; i++){
+                        console.log(i);
+                        if(this.fieldsData[i].itemValue){
+                            let itemDescription = this.getItemDescription(this.fieldsData[i].itemKey);
+                            itemDescription = itemDescription + ' : ' + this.fieldsData[i].itemValue + "\n";
+                            this.$parent.product.description.replace(itemDescription,""); //remove when text is duplicated
+                            description = description + itemDescription ;
+                        }
                     }
-                }
 
-                console.log(this.$parent.product.description);
+                    this.$parent.product.description = "\n\n" + this.$parent.product.description + description;
+
+                    resolve(true);
+                })
             },
             getItemDescription(itemKey){
                 let index = this.defaultFieldsOptions.findIndex((item) => itemKey === item.name);
@@ -530,10 +538,9 @@
                 this.validateItemValues();
                 
                 if(this.isItemValuesAreValidatedInputs() === true){
-                    this.appendFieldsDataToDescription();
-                    setTimeout(function(){
+                    this.appendFieldsDataToDescription().then((result) => {
                         self.$parent.submitProduct();
-                    },2000);
+                    });
                 }
             },
             isItemValuesAreValidatedInputs:function(){

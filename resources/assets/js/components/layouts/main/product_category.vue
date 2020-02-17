@@ -683,7 +683,7 @@
 
         <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
             <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
-                <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید" />
+                <input type="text" v-model="headerSearchText" placeholder="اینجا جستجو کنید" />
 
                 <button class="btn-search">
                     <i class="fa-search fa"></i>
@@ -1043,6 +1043,7 @@
                 bottom: false,
                 loadMoreActive: false,
                 searchTextTimeout: null,
+                headerSearchText:'',
             }
         },
         methods: {
@@ -1381,7 +1382,7 @@
                 let lastOffset = 0;
 
                 window.onscroll = () => {
-                    if (window.location.pathname.includes('product-list')) {
+                    if (window.location.pathname.includes('product-list/category')) {
                         var bottom = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - (document.documentElement.scrollTop / 2);
 
                         let newOffset = document.documentElement.offsetHeight;
@@ -1404,7 +1405,7 @@
 
             },
 
-            searchText: function () {
+            headerSearchText: function (value) {
                 var self = this;
 
 
@@ -1413,7 +1414,14 @@
                 this.searchTextTimeout = setTimeout(function () {
                     self.registerComponentStatistics('product-list', 'search-text', self.searchText);
 
-                    self.applyFilter();
+                    eventBus.$emit('textSearch', value);
+
+                    self.$router.replace({
+                        name: 'productList',
+                        query: {
+                            s: self.headerSearchText.replace(/ /g, '+')
+                        }
+                    });
 
                 }, 1500);
 
