@@ -235,21 +235,13 @@
     }
 
     .footer-note {
-        background: #fff;
         padding: 30px 15px;
         text-align: right;
-        color: #777;
+        color: #f1f1f1;
         line-height: 1.618;
-        border-top: 2px solid #f7f7f7;
+        border-top: 2px solid #000235;
     }
 
-    @media screen and (max-width: 767px) {
-        .contact-us {
-            border-top: 2px solid #f8f8f8;
-            padding: 15px;
-            margin: 15px 0;
-        }
-    }
 
     #note-text.collapse[aria-expanded="false"] {
         display: block;
@@ -258,17 +250,19 @@
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
-        direction:rtl;
+        direction: rtl;
+        color: #f1f1f1;
     }
 
     #note-text.collapsing[aria-expanded="false"] {
         height: 44px !important;
     }
 
-    .content-wrapper a.collapsed  {
-        color: #000122;
+    .content-wrapper a.collapsed {
+        color: #fff;
     }
-    .content-wrapper a.collapsed:after  {
+
+    .content-wrapper a.collapsed:after {
         content: 'مشاهده بیشتر +';
     }
 
@@ -276,34 +270,19 @@
         content: 'بستن -';
     }
 
+    @media screen and (max-width: 767px) {
+        .contact-us {
+            border-top: 2px solid #000111;
+            padding: 15px;
+            margin: 15px 0;
+        }
+    }
+
 </style>
 
 <template>
     <div id="wrap-footer">
 
-        <div class="footer-note ">
-            <div class="container">
-                <div class="content-wrapper">
-                    <div id="note-text" class="collapse " aria-expanded="false">
-                        باسکول بازار خرید و فروش عمده محصولات کشاورزی
-                        است  که خریداران را به
-                        فروشندگان عمده متصل کرده
-                        باسکول بازار خرید و فروش عمده محصولات کشاورزی
-                        است  که خریداران را به
-                        فروشندگان عمده متصل کرده
-                        باسکول بازار خرید و فروش عمده محصولات کشاورزی
-                        است  که خریداران را به
-                        فروشندگان عمده متصل کرده
-                        باسکول بازار خرید و فروش عمده محصولات کشاورزی
-                        است  که خریداران را به
-                        فروشندگان عمده متصل کرده
-                    </div>
-                    <a role="button" class="collapsed" data-toggle="collapse" href="#note-text" aria-expanded="false" aria-controls="collapseExample">
-
-                    </a>
-                </div>
-            </div>
-        </div>
 
         <footer id="footer">
             <div class="container">
@@ -391,6 +370,30 @@
                         <br/>
                         <p>تماس با پشتیبانی باسکول</p>
                         <p class="vertical-padding">‌09118413054 / 09178928266</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-note ">
+                <div class="container">
+                    <div class="content-wrapper">
+                        <div id="note-text" class="collapse " aria-expanded="false">
+                            باسکول بازار خرید و فروش عمده محصولات کشاورزی
+                            است که خریداران را به
+                            فروشندگان عمده متصل کرده
+                            باسکول بازار خرید و فروش عمده محصولات کشاورزی
+                            است که خریداران را به
+                            فروشندگان عمده متصل کرده
+                            باسکول بازار خرید و فروش عمده محصولات کشاورزی
+                            است که خریداران را به
+                            فروشندگان عمده متصل کرده
+                            باسکول بازار خرید و فروش عمده محصولات کشاورزی
+                            است که خریداران را به
+                            فروشندگان عمده متصل کرده
+                        </div>
+                        <a role="button" class="collapsed" data-toggle="collapse" href="#note-text"
+                           aria-expanded="false" aria-controls="collapseExample">
+
+                        </a>
                     </div>
                 </div>
             </div>
