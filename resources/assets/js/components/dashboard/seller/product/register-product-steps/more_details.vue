@@ -272,6 +272,25 @@
         display: none;
     }
 
+    .remove-button{
+        background:#e51c38;
+
+        border: none;
+
+        color:#fff;
+        
+        border-radius: 3px;
+
+        position: absolute;
+
+        left: 3px;
+
+        top: 13px;
+
+        padding: 5px 8px 2px;
+    }
+
+
     @media screen and (max-width: 767px) {
         select {
             font-size: 12px;
@@ -316,7 +335,7 @@
                         <div class='text-input-wrapper'>
                             <input
                                 type="text"
-                                placeholder="مقدار" v-model="fieldsData[index].itemValue"
+                                placeholder="توضیح دهید..." v-model="fieldsData[index].itemValue"
                                 :class="{'error' :  fieldsData[index].errorMsg , 'active' : fieldsData[index].errorMsg}"
                                 
                             />
@@ -324,16 +343,11 @@
                                 <span v-if="fieldsData[index].errorMsg" v-text="fieldsData[index].errorMsg"></span>
                             </p>
                         </div>
-                        <button class="btn btn-danger" @click="deleteRow(fieldsData[index].itemKey,index)">حذف</button>
+                        <button class="remove-button" @click="deleteRow(fieldsData[index].itemKey,index)"><i class="fa fa-trash"></i></button>
                     </div>
                 </div>
             </div>
             <button class="add-button" @click="AddField"><i class="fa fa-plus"></i> افزودن مورد</button>
-            <span class="small-description">
-
- انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه باسکول کمک می کند
-
-      </span>
 
             <div class="col-xs-12  margin-15-auto">
                 <div class="row">
@@ -586,22 +600,24 @@
                 }
             },
             deleteRow:function(itemKey,rowId){
-                let i = this.fieldsData.findIndex((item) => itemKey === item.itemKey);
-                let selectedItem = this.defaultFieldsOptions.filter(function(el) { return el.name == itemKey})[0];
-                
-                let myIndex = this.defaultFieldsOptions.findIndex((item) => itemKey === item.name);
+                if(itemKey !== ''){
+                    let i = this.fieldsData.findIndex((item) => itemKey === item.itemKey);
+                    let selectedItem = this.defaultFieldsOptions.filter(function(el) { return el.name == itemKey})[0];
+                    
+                    let myIndex = this.defaultFieldsOptions.findIndex((item) => itemKey === item.name);
 
-                if(selectedItem.alreadySelected === true){
-                    this.defaultFieldsOptions[myIndex].alreadySelected = false;
-                    this.defaultFieldsOptions[myIndex].selectedIndex = null;
+                    if(selectedItem.alreadySelected === true){
+                        this.defaultFieldsOptions[myIndex].alreadySelected = false;
+                        this.defaultFieldsOptions[myIndex].selectedIndex = null;
+                    }
+                    
+                    //back to default
+                    this.fieldsData[i].itemKey = '';
+                    this.fieldsData[i].itemValue = '';
+                    this.fieldsData[i].errorMsg = '';
+
+                    this.deletedRows.push(rowId);
                 }
-                
-                //back to default
-                this.fieldsData[i].itemKey = '';
-                this.fieldsData[i].itemValue = '';
-                this.fieldsData[i].errorMsg = '';
-
-                this.deletedRows.push(rowId);
             },
             isValidRow(index){
                 if(this.deletedRows.findIndex((item) => item == index) === -1) return true;

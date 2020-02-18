@@ -972,11 +972,8 @@
 
                     <div class="wrapper-contents">
                         <div class="contents" v-for="categoryMeta in categoryMetaData" :key="categoryMeta.id">
-
-                            <h3>
-                                <strong v-text="categoryMeta.header"></strong>
-                            </h3>
-                            <p v-text="categoryMeta.content"> </p>
+                            <div v-html="categoryMeta.header"></div>
+                            <div v-html="categoryMeta.content"></div>
                         </div>
 
                     </div>
