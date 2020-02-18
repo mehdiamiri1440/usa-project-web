@@ -376,7 +376,9 @@
         overflow: hidden;
         float: right;
         width: 100%;
+        border-radius: 0;
     }
+
     .footer-note-wrapper {
         background: #fff;
         direction: rtl;
@@ -627,15 +629,6 @@
             margin-bottom: 15px;
         }
 
-        .search-box button.btn-filter {
-            padding: 3px 6px;
-            margin-top: 12px;
-            font-size: 12px;
-        }
-
-        .sub-header {
-            padding: 0 5px;
-        }
     }
 
 </style>
@@ -683,7 +676,7 @@
 
         <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
             <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
-                <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید" />
+                <input type="text" v-model="headerSearchText" placeholder="اینجا جستجو کنید" />
 
                 <button class="btn-search">
                     <i class="fa-search fa"></i>
@@ -979,11 +972,8 @@
 
                     <div class="wrapper-contents">
                         <div class="contents" v-for="categoryMeta in categoryMetaData" :key="categoryMeta.id">
-
-                            <h3>
-                                <strong v-text="categoryMeta.header"></strong>
-                            </h3>
-                            <p v-text="categoryMeta.content"> </p>
+                            <div v-html="categoryMeta.header"></div>
+                            <div v-html="categoryMeta.content"></div>
                         </div>
 
                     </div>
@@ -1043,6 +1033,7 @@
                 bottom: false,
                 loadMoreActive: false,
                 searchTextTimeout: null,
+                headerSearchText:'',
             }
         },
         methods: {
@@ -1381,7 +1372,7 @@
                 let lastOffset = 0;
 
                 window.onscroll = () => {
-                    if (window.location.pathname.includes('product-list')) {
+                    if (window.location.pathname.includes('product-list/category')) {
                         var bottom = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - (document.documentElement.scrollTop / 2);
 
                         let newOffset = document.documentElement.offsetHeight;
@@ -1404,7 +1395,7 @@
 
             },
 
-            searchText: function () {
+            headerSearchText: function (value) {
                 var self = this;
 
 
@@ -1413,7 +1404,14 @@
                 this.searchTextTimeout = setTimeout(function () {
                     self.registerComponentStatistics('product-list', 'search-text', self.searchText);
 
-                    self.applyFilter();
+                    eventBus.$emit('textSearch', value);
+
+                    self.$router.replace({
+                        name: 'productList',
+                        query: {
+                            s: self.headerSearchText.replace(/ /g, '+')
+                        }
+                    });
 
                 }, 1500);
 

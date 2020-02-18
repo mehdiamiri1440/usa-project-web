@@ -291,7 +291,7 @@
     .contact-wrapper .contact-items {
         position: relative;
         overflow-y: scroll;
-        height: calc(100% - 30px);
+        height: calc(100% + 40px);
     }
 
     .contact-wrapper .contact-items > ul {
@@ -309,19 +309,23 @@
     }
 
     .message-wrapper .message-contact-title {
-        overflow: hidden;
         font-size: 16px;
-        padding: 7px 0 6px;
-        border-bottom: 2px solid #f2f2f2;
+        padding: 7px 0 8px;
+        background: -webkit-gradient(linear, left top, right top, from(#00C569), to(#21AD93));
+        background: linear-gradient(90deg,
+        #00C569 0%,
+        #21AD93 100%);
+        overflow: hidden;
+        color: #fff;
     }
 
     .message-contact-title a {
-        color: #333;
+        color: #fafafa;
         transition: 300ms;
     }
 
     .message-contact-title a:hover {
-        color: #00c569;
+        color: #fff;
         transition: 300ms;
     }
 
@@ -331,7 +335,6 @@
         float: right;
         border-radius: 50px;
         overflow: hidden;
-        border: 1px solid #b5b5b5;
         position: relative;
         margin: 0 22px 0 17px;
     }
@@ -349,7 +352,7 @@
     .message-wrapper .message-contact-title span {
         float: right;
         display: block;
-        padding-top: 17px;
+        padding-top: 9px;
     }
 
     .back-state .green-button {
@@ -482,6 +485,13 @@
     .button-wrapper {
         float: right;
         line-height: 1.1;
+    }
+
+    .button-wrapper svg{
+        height: 21px;
+        position: relative;
+        right: -3px;
+        top: 3px;
     }
 
     .send-message-form .button-wrapper button {
@@ -748,7 +758,10 @@
 
                             <div class="button-wrapper">
                                 <button type="submit" @click.prevent="sendMessage()">
-                                    <i class="fa fa-paper-plane"></i>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13.347" height="12.766" viewBox="0 0 13.347 12.766">
+                                        <path id="send-message-icon" data-name="send-message-icon" d="M2511.158-3909.893l12.347-5.929-12.347-5.837.235,4.51,10.029,1.327-10.029,1.477Z" transform="translate(-2510.658 3922.159)" fill="#fff" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+                                    </svg>
+
                                 </button>
                             </div>
                         </form>

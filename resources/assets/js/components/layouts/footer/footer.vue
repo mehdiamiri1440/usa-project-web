@@ -217,7 +217,7 @@
     .enamad img {
         width: 120px;
         text-align: center;
-        background: #fff;
+        background: #eceff8;
         padding: 9px;
         border-radius: 5px;
         position: relative;
@@ -235,38 +235,54 @@
     }
 
     .footer-note {
-        background: #fff;
         padding: 30px 15px;
         text-align: right;
-        color: #777;
+        color: #f1f1f1;
         line-height: 1.618;
-        border-top: 2px solid #f7f7f7;
+        border-top: 2px solid #000235;
+    }
+
+
+    #note-text.collapse[aria-expanded="false"] {
+        display: block;
+        height: 44px !important;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        direction: rtl;
+        color: #f1f1f1;
+    }
+
+    #note-text.collapsing[aria-expanded="false"] {
+        height: 44px !important;
+    }
+
+    .content-wrapper a.collapsed {
+        color: #fff;
+    }
+
+    .content-wrapper a.collapsed:after {
+        content: 'مشاهده بیشتر +';
+    }
+
+    .content-wrapper a:not(.collapsed):after {
+        content: 'بستن -';
     }
 
     @media screen and (max-width: 767px) {
         .contact-us {
-            border-top: 2px solid #f8f8f8;
+            border-top: 2px solid #000111;
             padding: 15px;
             margin: 15px 0;
         }
     }
-
 
 </style>
 
 <template>
     <div id="wrap-footer">
 
-        <div class="footer-note ">
-            <div class="container">
-                <div class="contetn-wrapper">
-                    <p>
-                        هفت روز هفته ، ۲۴ ساعت شبانه‌روز پاسخگوی شما هستیم
-
-                    </p>
-                </div>
-            </div>
-        </div>
 
         <footer id="footer">
             <div class="container">
@@ -279,12 +295,13 @@
                                             target="_blank"
                                             href="https://trustseal.enamad.ir/?id=129504&amp;Code=I3flHhEiFZPLWVe9vTFK"
                                     >
-                                        <img
-                                                src="https://Trustseal.eNamad.ir/logo.aspx?id=129504&amp;Code=I3flHhEiFZPLWVe9vTFK"
-                                                alt
-                                                style="cursor:pointer"
-                                                id="I3flHhEiFZPLWVe9vTFK"
-                                        />
+                                        <img :src="$parent.assets + 'assets/img/enamad.jpg'" alt="">
+<!--                                        <img-->
+<!--                                                src="https://Trustseal.eNamad.ir/logo.aspx?id=129504&amp;Code=I3flHhEiFZPLWVe9vTFK"-->
+<!--                                                alt-->
+<!--                                                style="cursor:pointer"-->
+<!--                                                id="I3flHhEiFZPLWVe9vTFK"-->
+<!--                                        />-->
                                     </a>
                                 </div>
                             </li>
@@ -354,6 +371,30 @@
                         <br/>
                         <p>تماس با پشتیبانی باسکول</p>
                         <p class="vertical-padding">‌09118413054 / 09178928266</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-note ">
+                <div class="container">
+                    <div class="content-wrapper">
+                        <div id="note-text" class="collapse " aria-expanded="false">
+                            باسکول بازار خرید و فروش عمده محصولات کشاورزی
+                            است که خریداران را به
+                            فروشندگان عمده متصل کرده
+                            باسکول بازار خرید و فروش عمده محصولات کشاورزی
+                            است که خریداران را به
+                            فروشندگان عمده متصل کرده
+                            باسکول بازار خرید و فروش عمده محصولات کشاورزی
+                            است که خریداران را به
+                            فروشندگان عمده متصل کرده
+                            باسکول بازار خرید و فروش عمده محصولات کشاورزی
+                            است که خریداران را به
+                            فروشندگان عمده متصل کرده
+                        </div>
+                        <a role="button" class="collapsed" data-toggle="collapse" href="#note-text"
+                           aria-expanded="false" aria-controls="collapseExample">
+
+                        </a>
                     </div>
                 </div>
             </div>

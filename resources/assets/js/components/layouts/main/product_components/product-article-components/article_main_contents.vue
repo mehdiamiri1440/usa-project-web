@@ -257,7 +257,7 @@ span {
 
         <p v-if="$parent.product.main.description">
           توضیحات
-          <span v-text="$parent.product.main.description"></span>
+          <span v-html="$parent.product.main.description"></span>
         </p>
         <!--
                 <p >

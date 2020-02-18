@@ -272,6 +272,25 @@
         display: none;
     }
 
+    .remove-button{
+        background:#e51c38;
+
+        border: none;
+
+        color:#fff;
+        
+        border-radius: 3px;
+
+        position: absolute;
+
+        left: 3px;
+
+        top: 13px;
+
+        padding: 5px 8px 2px;
+    }
+
+
     @media screen and (max-width: 767px) {
         select {
             font-size: 12px;
@@ -316,7 +335,7 @@
                         <div class='text-input-wrapper'>
                             <input
                                 type="text"
-                                placeholder="مقدار" v-model="fieldsData[index].itemValue"
+                                placeholder="توضیح دهید..." v-model="fieldsData[index].itemValue"
                                 :class="{'error' :  fieldsData[index].errorMsg , 'active' : fieldsData[index].errorMsg}"
                                 
                             />
@@ -324,16 +343,11 @@
                                 <span v-if="fieldsData[index].errorMsg" v-text="fieldsData[index].errorMsg"></span>
                             </p>
                         </div>
-                        <button class="btn btn-danger" @click="deleteRow(fieldsData[index].itemKey,index)">حذف</button>
+                        <button class="remove-button" @click="deleteRow(fieldsData[index].itemKey,index)"><i class="fa fa-trash"></i></button>
                     </div>
                 </div>
             </div>
             <button class="add-button" @click="AddField"><i class="fa fa-plus"></i> افزودن مورد</button>
-            <span class="small-description">
-
- انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه باسکول کمک می کند
-
-      </span>
 
             <div class="col-xs-12  margin-15-auto">
                 <div class="row">
@@ -385,7 +399,7 @@
                     {
                         id: 1,
                         name: "بسته بندی",
-                        description:'',
+                        description:'نوع بسته بندی و وزن ارایه شده توسط فروشنده برای این محصول',
                         itemValue:'',
                         alreadySelected:false,
                         selectedIndex:null,
@@ -393,7 +407,7 @@
                     {
                         id: 2,
                         name: "کیفیت",
-                        description:'sdf sdfsadf',
+                        description:'میزان مرغوبیت و کیفیت ظاهری محصول ارایه شده',
                         itemValue:'',
                         alreadySelected:false,
                         selectedIndex:null,
@@ -401,7 +415,7 @@
                     {
                         id: 3,
                         name: "رنگ",
-                        description:'sdf sdfsadf',
+                        description:'رنگ ظاهری این محصول',
                         itemValue:'',
                         alreadySelected:false,
                         selectedIndex:null,
@@ -416,16 +430,16 @@
                     },
                     {
                         id: 5,
-                        name: "اندازه",
-                        description:'sdf sdfsadf',
+                        name: "اندازه یا ابعاد",
+                        description:'اندازه یا ابعاد محصول',
                         itemValue:'',
                         alreadySelected:false,
                         selectedIndex:null,
                     },
                     {
                         id: 6,
-                        name: "گواهی سلامت",
-                        description:'sdf sdfsadf',
+                        name: "گواهی کیفی،سلامت",
+                        description:'تاییدیه های کیفی، بهداشتی و سلامت کالا موجود برای این محصول',
                         itemValue:'',
                         alreadySelected:false,
                         selectedIndex:null,
@@ -433,7 +447,7 @@
                     {
                         id: 7,
                         name: "تازگی",
-                        description:'sdf sdfsadf',
+                        description:'میزان تازه بودن و زمان تولید این محصول',
                         itemValue:'',
                         alreadySelected:false,
                         selectedIndex:null,
@@ -441,23 +455,23 @@
                     {
                         id: 8,
                         name: "نوع فروش",
-                        description:'sdf sdfsadf',
+                        description:'شرایط پرداخت پول در معامله طبق نظر فروشنده برای فروش این محصول',
                         itemValue:'',
                         alreadySelected:false,
                         selectedIndex:null,
                     },
                     {
                         id: 9,
-                        name: "ماندگاری",
-                        description:'sdf sdfsadf',
+                        name: "روش نگهداری یا ماندگاری",
+                        description:'میزان ماندگاری و شرایط نگهداری این محصول',
                         itemValue:'',
                         alreadySelected:false,
                         selectedIndex:null,
                     },
                     {
                         id: 10,
-                        name: "مزایا",
-                        description:'sdf sdfsadf',
+                        name: "مزیا نسبت به محصولات مشابه",
+                        description:'مزایا (مزیت این محصول نسبت به سایر محصولات مشابه)',
                         itemValue:'',
                         alreadySelected:false,
                         selectedIndex:null,
@@ -473,7 +487,9 @@
         },
         methods: {
             AddField: function () {
-                if(this.fieldsData.length < this.defaultFieldsOptions.length){
+                let cnt = this.defaultFieldsOptions.length + this.deletedRows.length;
+
+                if(this.fieldsData.length < cnt){
                     this.fieldsData.push({itemKey: '', itemValue: '',errorMsg:''});
                     this.itemsCount++;
                 }
@@ -509,16 +525,27 @@
                 }
             },
             appendFieldsDataToDescription:function(){
-                let cnt = this.fieldsData.length + this.deletedRows.length;
+                return new Promise((resolve,reject) => {
+                    let cnt = this.fieldsData.length;
 
-                for(let i = 0 ; i < cnt ; i++){
-                    if(this.fieldsData[i].itemValue){
-                        let itemDescription = this.getItemDescription(this.fieldsData[i].itemKey);
-                        this.$parent.product.description = this.$parent.product.description + ' ' + this.fieldsData[i].itemKey + '  ' + itemDescription + ' ' + this.fieldsData[i].itemValue;
+                    let description = '<hr/>';
+
+                    for(let i = 0 ; i < cnt ; i++){
+                        if(this.fieldsData[i].itemValue){
+                            let itemDescription = this.getItemDescription(this.fieldsData[i].itemKey);
+                            itemDescription = itemDescription + ' : ' + this.fieldsData[i].itemValue + "<hr/>";
+                            this.$parent.product.description = this.$parent.product.description.replace(itemDescription,""); //remove when text is duplicated
+                            description = description + itemDescription ;
+                        }
                     }
-                }
+                    description = description + 'برای اطلاع از قیمت روز ' + this.$parent.product.product_name + ' و خرید مستقیم پیام ارسال کنید.' +  "<hr/>";
+                    description = description + 'مقدار موجودی آماده فروش برای این محصول : ' + this.$parent.product.stock +  ' کیلوگرم' +  "<hr/>";
+                    description = description + 'حداقل مقدار فروش این محصول توسط فروشنده در یک معامله : ' + this.$parent.product.min_sale_amount + ' کیلوگرم' +  "<hr/>";
 
-                console.log(this.$parent.product.description);
+                    this.$parent.product.description =  this.$parent.product.description + "\n\n" + description;
+
+                    resolve(true);
+                });
             },
             getItemDescription(itemKey){
                 let index = this.defaultFieldsOptions.findIndex((item) => itemKey === item.name);
@@ -530,10 +557,9 @@
                 this.validateItemValues();
                 
                 if(this.isItemValuesAreValidatedInputs() === true){
-                    this.appendFieldsDataToDescription();
-                    setTimeout(function(){
+                    this.appendFieldsDataToDescription().then((result) => {
                         self.$parent.submitProduct();
-                    },2000);
+                    });
                 }
             },
             isItemValuesAreValidatedInputs:function(){
@@ -550,7 +576,7 @@
             itemValueValidator: function (itemValue) {
                 let msg = '';
 
-                if (!this.$parent.validateRegx(itemValue, /^[\u0600-\u06FF\s]+$/)) {
+                if (!this.$parent.validateRegx(itemValue, /^(?!.*[(@#!%$&*)])[s\u{0600}-\u{06FF}\u{060C}\u{061B}\u{061F}\u{0640}\u{066A}\u{066B}\u{066C}\u{0E}_.-،:()A-Za-z0-9 ]+$/u)) {
                     msg = 'متن فرمت مناسبی ندارد';
                     return msg;
                 }
@@ -574,22 +600,24 @@
                 }
             },
             deleteRow:function(itemKey,rowId){
-                let i = this.fieldsData.findIndex((item) => itemKey === item.itemKey);
-                let selectedItem = this.defaultFieldsOptions.filter(function(el) { return el.name == itemKey})[0];
-                
-                let myIndex = this.defaultFieldsOptions.findIndex((item) => itemKey === item.name);
+                if(itemKey !== ''){
+                    let i = this.fieldsData.findIndex((item) => itemKey === item.itemKey);
+                    let selectedItem = this.defaultFieldsOptions.filter(function(el) { return el.name == itemKey})[0];
+                    
+                    let myIndex = this.defaultFieldsOptions.findIndex((item) => itemKey === item.name);
 
-                if(selectedItem.alreadySelected === true){
-                    this.defaultFieldsOptions[myIndex].alreadySelected = false;
-                    this.defaultFieldsOptions[myIndex].selectedIndex = null;
+                    if(selectedItem.alreadySelected === true){
+                        this.defaultFieldsOptions[myIndex].alreadySelected = false;
+                        this.defaultFieldsOptions[myIndex].selectedIndex = null;
+                    }
+                    
+                    //back to default
+                    this.fieldsData[i].itemKey = '';
+                    this.fieldsData[i].itemValue = '';
+                    this.fieldsData[i].errorMsg = '';
+
+                    this.deletedRows.push(rowId);
                 }
-                
-                //back to default
-                this.fieldsData[i].itemKey = '';
-                this.fieldsData[i].itemValue = '';
-                this.fieldsData[i].errorMsg = '';
-
-                this.deletedRows.push(rowId);
             },
             isValidRow(index){
                 if(this.deletedRows.findIndex((item) => item == index) === -1) return true;
