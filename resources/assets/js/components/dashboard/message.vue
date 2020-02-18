@@ -356,17 +356,12 @@
     }
 
     .back-state .green-button {
-        margin: 8px 0 0 25px;
-        display: inline-block;
-        background: #00c569;
-        color: #fff;
-        padding: 5px 18px;
-        border-radius: 3px;
-        text-align: center;
-        border: none;
-        -webkit-transition: 300ms;
-        transition: 300ms;
+        background: #fff;
+        color: #00c569;
+        padding: 5px 14px;
+        border-radius: 5px;
         font-size: 12px;
+        margin: 6px 0 0 25px;
     }
 
     .back-state {
@@ -426,7 +421,7 @@
     .send-message-form {
 
         overflow: hidden;
-        padding: 0 15px 7px;
+        padding: 4px 15px;
         position: absolute;
         bottom: 0;
         width: 100%;

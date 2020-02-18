@@ -207,15 +207,15 @@
 
         right: 0;
 
-        padding: 10px 20px;
+        padding: 4px 15px;
     }
 
     .send-message-button {
         float: right;
 
-        width: 35px;
+        width: 50px;
 
-        height: 35px;
+        height: 50px;
 
         color: #fff;
 
@@ -245,7 +245,7 @@
     .footer-modal-chat input {
         float: left;
 
-        width: calc(100% - 50px);
+        width: calc(100% - 60px);
 
         border-radius: 50px;
 
@@ -253,7 +253,7 @@
 
         border: none;
 
-        padding: 6px 15px;
+        padding: 13px 15px;
 
         direction: rtl;
 

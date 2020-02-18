@@ -147,6 +147,10 @@
         border-color: #e41c38;
     }
 
+    .text-red{
+        color: #e51c38;
+    }
+
     select {
         width: 100%;
 
@@ -228,6 +232,8 @@
         direction: rtl;
 
         font-size: 11px;
+
+        padding-top: 2px;
     }
 
     .small-description {
@@ -264,6 +270,10 @@
         margin-bottom: 10px;
     }
 
+    .wrapper-fields > .row{
+        position:relative;
+    }
+
     label .small-label {
         font-size: 12px;
     }
@@ -273,25 +283,25 @@
     }
 
     .remove-button{
-        background:#e51c38;
 
+        background: none;
         border: none;
-
-        color:#fff;
-        
+        color: #e51c38;
         border-radius: 3px;
-
         position: absolute;
-
-        left: 3px;
-
         top: 13px;
-
         padding: 5px 8px 2px;
+        right: -14px;
     }
 
 
     @media screen and (max-width: 767px) {
+        .remove-button{
+            right: 0;
+        }
+        .select-wrapper{
+            padding: 0 30px 0 0;
+        }
         select {
             font-size: 12px;
         }
@@ -307,9 +317,23 @@
         <h2 class="title-contents col-xs-12">ثبت جزییات بیشتر</h2>
 
         <div class="form-contents col-xs-12">
+            <div class="col-xs-6 pull-right ">
+                <p class="small-description ">
+                    <span class="text-red">مثال :</span> بسته بندی
+                </p>
+            </div>
+            <div class="col-xs-6  ">
+                <p class="small-description ">
+                    <span class="text-red">مثال :</span> کارتن مادر ۸ کیلویی
+                </p>
+            </div>
+        </div>
+
+        <div class="form-contents col-xs-12">
+
             <div class="wrapper-fields">
                 <div class="row" v-for="(i,index) in itemsCount" :key="i" v-if="isValidRow(index)">
-                    <div class="col-xs-6 pull-right">
+                    <div class="col-xs-6 pull-right select-wrapper">
     
                         <div class="input-wrapper">
                             <!-- input type tel because we have some limmitation for processes -->
@@ -343,8 +367,9 @@
                                 <span v-if="fieldsData[index].errorMsg" v-text="fieldsData[index].errorMsg"></span>
                             </p>
                         </div>
-                        <button class="remove-button" @click="deleteRow(fieldsData[index].itemKey,index)"><i class="fa fa-trash"></i></button>
                     </div>
+                    <button class="remove-button" @click="deleteRow(fieldsData[index].itemKey,index)"><i class="fa fa-trash"></i></button>
+
                 </div>
             </div>
             <button class="add-button" @click="AddField"><i class="fa fa-plus"></i> افزودن مورد</button>
