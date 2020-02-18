@@ -161,13 +161,13 @@
 		padding: 15px 0;
 		direction: rtl;
 		white-space: pre-line;
-		line-height: 30px;
 
 	}
 
 	.product-description > p{
 
 		font-size: 16px;
+		line-height: 30px;
 
 	}
 
@@ -422,7 +422,7 @@
 						<span class="gray-text">
 							توضیحات
 						</span>
-						<p v-text="$parent.product.main.description">
+						<p v-html="$parent.product.main.description">
 
 						</p>
 					</div>

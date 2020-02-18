@@ -321,7 +321,7 @@
         ],
         data: function () {
             return {
-                currentStep:6,
+                currentStep:0,
                 currentUser: {
                     profile: '',
                     user_info: '',
@@ -463,6 +463,13 @@
                 }
                 if (!this.errors.images_count[0] && this.productFiles[0] && !this.errors.images_type && !this.errors.images_size) {
                     this.goToStep(5);
+                }
+            },
+            descriptionSubmited(){
+                this.descriptionValidator(this.product.description);
+
+                if(!this.errors.description){
+                    this.goToStep(6);
                 }
             },
             loadSubCategoryList: function (e) {
@@ -735,6 +742,20 @@
                 }
 
             },
+            descriptionValidator:function(description){
+                this.errors.description = '';
+                
+                if (description != '') {
+                    if (!this.validateRegx(description, /^(?!.*[(@#!%$&*)])[s\u{0600}-\u{06FF}\u{060C}\u{061B}\u{061F}\u{0640}\u{066A}\u{066B}\u{066C}\u{0E}\u{0A}_.-،:()A-Za-z0-9 ]+$/u)) {
+                        this.errors.description = 'توضیحات شامل کاراکتر های غیرمجاز است';
+                    }   
+                }
+
+                if(this.errors.description){
+                    this.registerComponentStatistics('product-register-error','description','input:' + description + ' error:' + this.errors.description);
+                }
+
+            },
             validateRegx: function (input, regx) {
                 return regx.test(input);
             },
@@ -830,7 +851,6 @@
 
             },
             currentStep:function(step){
-                console.log(step)
                 switch(step){
                     case 2:
                     $('.custom-progressbar.active-item').css('width','21%');
