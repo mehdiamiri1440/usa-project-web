@@ -2,9 +2,7 @@
     .footer-note-wrapper h1, .footer-note-wrapper h2, .footer-note-wrapper h3, .footer-note-wrapper h4, .footer-note-wrapper p, .footer-note-wrapper div, .footer-note-wrapper span
     {
         font-size: 14px;
-
         line-height: 1.618;
-
         margin: 10px auto;
     }
 
