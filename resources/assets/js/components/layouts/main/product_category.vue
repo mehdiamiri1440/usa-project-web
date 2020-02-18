@@ -6,6 +6,8 @@
         margin: 10px auto;
     }
 
+
+
 </style>
 
 <style scoped>
