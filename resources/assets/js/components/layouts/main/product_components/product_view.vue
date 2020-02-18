@@ -585,7 +585,7 @@
                 this.product.user_info.last_name;
             let productStock = this.product.main.stock;
             let productDescription = this.product.main.description
-                ? this.product.main.description
+                ? this.product.main.description.split("<hr/>").join("")
                 : "";
             //
             return {

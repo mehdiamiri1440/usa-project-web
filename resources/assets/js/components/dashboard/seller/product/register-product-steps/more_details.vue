@@ -473,7 +473,9 @@
         },
         methods: {
             AddField: function () {
-                if(this.fieldsData.length < this.defaultFieldsOptions.length){
+                let cnt = this.defaultFieldsOptions.length + this.deletedRows.length;
+
+                if(this.fieldsData.length < cnt){
                     this.fieldsData.push({itemKey: '', itemValue: '',errorMsg:''});
                     this.itemsCount++;
                 }
@@ -510,23 +512,26 @@
             },
             appendFieldsDataToDescription:function(){
                 return new Promise((resolve,reject) => {
-                    let cnt = this.fieldsData.length + this.deletedRows.length;
-                    let description = '';
+                    let cnt = this.fieldsData.length;
+
+                    let description = '<hr/>';
 
                     for(let i = 0 ; i < cnt ; i++){
-                        console.log(i);
                         if(this.fieldsData[i].itemValue){
                             let itemDescription = this.getItemDescription(this.fieldsData[i].itemKey);
-                            itemDescription = itemDescription + ' : ' + this.fieldsData[i].itemValue + "\n";
-                            this.$parent.product.description.replace(itemDescription,""); //remove when text is duplicated
+                            itemDescription = itemDescription + ' : ' + this.fieldsData[i].itemValue + "<hr/>";
+                            this.$parent.product.description = this.$parent.product.description.replace(itemDescription,""); //remove when text is duplicated
                             description = description + itemDescription ;
                         }
                     }
+                    description = description + 'برای اطلاع از قیمت روز ' + this.$parent.product.product_name + ' و خرید مستقیم پیام ارسال کنید.' +  "<hr/>";
+                    description = description + 'مقدار موجودی آماده فروش برای این محصول : ' + this.$parent.product.stock +  ' کیلوگرم' +  "<hr/>";
+                    description = description + 'حداقل مقدار فروش این محصول توسط فروشنده در یک معامله : ' + this.$parent.product.min_sale_amount + ' کیلوگرم' +  "<hr/>";
 
-                    this.$parent.product.description = "\n\n" + this.$parent.product.description + description;
+                    this.$parent.product.description =  this.$parent.product.description + "\n\n" + description;
 
                     resolve(true);
-                })
+                });
             },
             getItemDescription(itemKey){
                 let index = this.defaultFieldsOptions.findIndex((item) => itemKey === item.name);
@@ -557,7 +562,7 @@
             itemValueValidator: function (itemValue) {
                 let msg = '';
 
-                if (!this.$parent.validateRegx(itemValue, /^[\u0600-\u06FF\s]+$/)) {
+                if (!this.$parent.validateRegx(itemValue, /^(?!.*[(@#!%$&*)])[s\u{0600}-\u{06FF}\u{060C}\u{061B}\u{061F}\u{0640}\u{066A}\u{066B}\u{066C}\u{0E}_.-،:()A-Za-z0-9 ]+$/u)) {
                     msg = 'متن فرمت مناسبی ندارد';
                     return msg;
                 }
