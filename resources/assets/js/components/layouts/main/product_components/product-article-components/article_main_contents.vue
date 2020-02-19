@@ -4,17 +4,19 @@ body {
 }
 </style>
 <style scoped>
-span {
+.main-article-contents p a, span {
   color: #777;
 }
 
-.main-article-contents h1,
+.main-article-contents h3 a{
+ color: #474747;
+}
 .main-article-contents h3 {
   font-size: 16px;
 
   font-weight: bold;
 
-  color: #474747;
+ 
 
   max-width: 240px;
 
@@ -207,6 +209,7 @@ span {
                                              ' - ' +
                                             $parent.product.main.province_name"
         :image-count="$parent.product.photos.length"
+        :product-url="this.$parent.productUrl"
       />
     </div>
     <div class="main-article-contents">
@@ -242,9 +245,14 @@ span {
         </div>
       </div>
       <div>
-        <h1 v-if="$route.params.id" class="article-title" v-html="getProductName()"></h1>
 
-        <h3 v-else class="article-title" v-html="getProductName()"></h3>
+        <h3 class="article-title">
+
+        <router-link :to="this.$parent.productUrl"  v-html="getProductName()">
+         
+        </router-link>
+        </h3>
+        
 
         <p>
           استان / شهر:
@@ -255,10 +263,16 @@ span {
           ></span>
         </p>
 
-        <p v-if="$parent.product.main.description">
-          توضیحات
-          <span v-html="$parent.product.main.description"></span>
-        </p>
+       <p v-if="$parent.product.main.description">
+                   توضیحات
+
+           
+          <router-link v-if="$parent.product.main.description<100"  :to="this.$parent.productUrl" v-html="$parent.product.main.description">
+          </router-link>
+
+          <router-link  v-else :to="this.$parent.productUrl" v-html="$parent.product.main.description.substring(0,100)">
+          </router-link>
+       </p>
         <!--
                 <p >
                     حداقل سفارش:

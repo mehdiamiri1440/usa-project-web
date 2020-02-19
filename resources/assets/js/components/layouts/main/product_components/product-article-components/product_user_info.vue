@@ -106,7 +106,7 @@ i {
 
 }
 
-.user-information-contents p {
+.user-information-contents p, a.user-name-link {
   max-width: 120px;
 
   overflow: hidden;
@@ -147,7 +147,7 @@ p.response-rate{
 }
 
 @media screen and (max-width: 400px) {
-  .user-information-contents p {
+  .user-information-contents p, a.user-name-link {
     max-width: 100px;
 
   } 
@@ -189,13 +189,14 @@ p.response-rate{
         </div>
 
         <div v-if="user_info.response_rate" class="user-information-content">
-          <p v-if="user_info" v-text="user_full_name"></p>
+          <router-link class="user-name-link" :to="'/profile/'+ user_name"  v-if="user_info" v-text="user_full_name"></router-link>
+
           <p v-if="user_info" class="response-rate" > احتمال پاسخ گویی <span v-text="'%' + user_info.response_rate"></span></p>
 
         </div>
 
         <div v-else class="user-information-content default">
-          <p v-if="user_info" v-text="user_full_name"></p>
+            <router-link class="user-name-link" :to="'/profile/'+ user_name"  v-if="user_info" v-text="user_full_name"></router-link>
         </div>
       </router-link>
 

@@ -129,8 +129,10 @@
 
 <template>
     <div class="main-article-image">
+          <router-link v-show="isImageLoad" :to="productUrl">
+                      <img  :src="base + img" @load="ImageLoaded" :alt="alt">
 
-        <img v-show="isImageLoad" :src="base + img" @load="ImageLoaded" :alt="alt">
+          </router-link>
 
         <div v-show="!isImageLoad" class="lds-ring">
             <div></div>
@@ -157,7 +159,7 @@
                 isImageLoad: false,
             };
         },
-        props: ['img', 'base', 'popUpLoaded', 'alt', 'imageCount'],
+        props: ['img', 'base', 'popUpLoaded', 'alt', 'imageCount','productUrl'],
 
         created: function () {
             this.loadImage();
