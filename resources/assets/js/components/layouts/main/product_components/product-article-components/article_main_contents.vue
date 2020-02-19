@@ -265,7 +265,6 @@ body {
 
        <p v-if="$parent.product.main.description">
                    توضیحات
-
            
           <router-link v-if="$parent.product.main.description<100"  :to="this.$parent.productUrl" v-html="$parent.product.main.description">
           </router-link>
