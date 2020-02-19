@@ -87,10 +87,12 @@ console
 
     textarea{
         background: none;
-        min-height: 70px;
-        max-height: 80px;
+        min-height: 120px;
+        max-height: 140px;
         transition: 300ms;
         line-height: 1.618;
+        max-width:100%;
+        min-width:100%;
     }
 
     .error-message{
@@ -977,7 +979,7 @@ console
                                          >
 
                                              <textarea
-                                             rows="4"
+                                             rows="6"
                                              id="description"
                                              class="dire "
                                              placeholder=" درباره کسب و کارتان بنویسید "

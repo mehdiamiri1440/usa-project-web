@@ -1,32 +1,47 @@
+<style>
+    .footer-note-wrapper h1, .footer-note-wrapper h2, .footer-note-wrapper h3, .footer-note-wrapper h4, .footer-note-wrapper p, .footer-note-wrapper div, .footer-note-wrapper span
+    {
+        font-size: 14px;
+        line-height: 1.618;
+        margin: 10px auto;
+    }
+
+
+
+</style>
 
 <style scoped>
 
-    #main-content{
+    #main-content {
 
         padding-top: 122px;
 
 
     }
 
+    #main {
+        padding-top: 32px;
+    }
+
     @media screen and (min-width: 1200px) {
 
-        #main-content{
+        #main-content {
 
-            padding-top: 122px ;
+            padding-top: 122px;
         }
 
     }
 
 
-    .shadow-content{
+    .shadow-content {
         background: #fff;
     }
 
-    .sidebar{
-    will-change: min-height;
+    .sidebar {
+        will-change: min-height;
     }
 
-    .sidebar__inner{
+    .sidebar__inner {
         transform: translate(0, 0); /* For browsers don't support translate3d. */
         transform: translate3d(0, 0, 0);
         will-change: position, transform;
@@ -91,8 +106,8 @@
         display: block;
         border-radius: 50px;
         color: #fff;
-        -webkit-box-shadow: 0 3px 15px rgba(0,0,0,0.30);
-        box-shadow: 0 3px 15px rgba(0,0,0,0.30);
+        -webkit-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.30);
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.30);
         text-align: center;
         padding-top: 15px;
         font-size: 23px;
@@ -146,18 +161,17 @@
     .search-box {
         position: relative;
         margin-top: 14px;
-        border:none;
+        border: none;
     }
 
     .search-box input {
-        width: 100%;
         text-align: right;
         direction: rtl;
-        border: 1px solid #666666;
+        border: 1px solid #777;
         border-radius: 6px;
-        padding: 10px 45px 9px 15px;
-        background: #f8f8f8;
-        font-size: 12px;
+        padding: 6px 50px 5px 15px;
+        background: #fff;
+        font-size: 14px;
         float: right;
     }
 
@@ -166,17 +180,17 @@
         border: none;
         position: absolute;
         right: 18px;
-        top: 6px;
+        top: 15px;
         border-left: 1px solid;
-        color: #666;
-        height: 77%;
-        padding: 5px 8px;
-        font-size: 18px;
+        color: #777;
+        padding: 0 7px;
+        font-size: 22px;
+        height: 20px;
     }
 
     .search-box button.btn-filter {
         float: left;
-        padding: 10px 14px;
+        padding: 7px 10px;
         border-radius: 5px;
         border: none;
         background: #000546;
@@ -212,7 +226,7 @@
 
     #main {
 
-        position:relative;
+        position: relative;
 
     }
 
@@ -252,8 +266,7 @@
         right: 0;
         z-index: 2;
         background: #f0f3f6;
-        padding: 0 15PX;
-        border-bottom: 3px solid #ececec;
+        padding: 0;
     }
 
     /*  .main-padding-fix {
@@ -307,7 +320,7 @@
 
         top: 0;
 
-        box-shadow: 0 3px 6px rgba(0,0,0,0,0.2);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0, 0.2);
 
         transition: 200ms;
 
@@ -318,7 +331,7 @@
     .load-more-button button:hover {
         top: -3px;
 
-        box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 
         transition: 200ms;
 
@@ -329,7 +342,7 @@
         overflow: hidden;
     }
 
-    .btn-loader-active-wrapper{
+    .btn-loader-active-wrapper {
 
         height: 26px;
 
@@ -341,50 +354,99 @@
     }
 
 
+    .response-rate-filter-desktop-wrapper, .response-rate-filter-mobile-wrapper {
 
-.response-rate-filter-desktop-wrapper, .response-rate-filter-mobile-wrapper{
+        background: #fff;
+        direction: rtl;
+        margin: 15px auto;
+        padding: 7px 15px;
+        border-radius: 5px;
+        -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+        overflow: hidden;
 
-  background: #fff;
-  direction: rtl;
-  margin: 15px auto;
-  padding: 7px 15px;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16);
-  box-shadow: 0 3px 6px
-  rgba(0,0,0,0.16);
-  overflow: hidden;
+    }
 
-}
+    .response-rate-filter-desktop-wrapper .checkbox, .response-rate-filter-mobile-wrapper .chekbox {
 
-.response-rate-filter-desktop-wrapper .checkbox, .response-rate-filter-mobile-wrapper .chekbox{
+        margin: 0;
+        float: right;
 
-  margin: 0;
-  float: right;
+    }
 
-}
+    .response-rate-filter-mobile-wrapper .checkbox-slider--b-flat {
+        margin: 0 auto 5px;
+    }
 
-.response-rate-filter-mobile-wrapper .checkbox-slider--b-flat{
-    margin: 0 auto 5px;
-}
+    .response-rate-filter-mobile-wrapper .checkbox-slider--b-flat input + span::before, .response-rate-filter-mobile-wrapper .checkbox-slider--b-flat input + span::after {
+        top: 0;
+    }
 
-.response-rate-filter-mobile-wrapper .checkbox-slider--b-flat input + span::before, .response-rate-filter-mobile-wrapper .checkbox-slider--b-flat input + span::after{
-    top: 0;
-}
+    .response-rate-filter-mobile-wrapper {
+        padding: 7px 15px;
+        margin: 0;
+        overflow: hidden;
+        float: right;
+        width: 100%;
+        border-radius: 0;
+    }
 
-.response-rate-filter-mobile-wrapper{
-    padding: 10px 0;
+    .footer-note-wrapper {
+        background: #fff;
+        direction: rtl;
+        margin: 15px auto;
+        padding: 7px 15px;
+        border-radius: 5px;
+        -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+        overflow: hidden;
+        max-height: 220px;
 
-    margin: 0;
+        overflow-y: auto;
 
-    overflow: hidden;
+        line-height: 1.628;
+    }
 
-    float: right;
+    .wrapper-contents{
+        margin-bottom: 20px;
+    }
 
-    width: initial;
+    .footer-note-wrapper h3 {
 
-   box-shadow: none;
-   background: none;
-}
+        font-size: 15px;
+        margin: 8px auto;
+
+    }
+
+    .title-section {
+        direction: rtl;
+        margin: 50px auto 10px;
+    }
+
+    .title-section h1 {
+        font-size: 16px;
+        color: #00c569;
+        float: right;
+    }
+
+    .title-section hr {
+        margin: 15px 15px 10px auto;
+        position: relative;
+    }
+
+    .title-section hr::after {
+
+        content: ' ';
+        height: 3px;
+        width: 50px;
+        background: #00c569;
+        position: absolute;
+        top: -4px;
+        right: 0;
+
+    }
+
+
 
     @media screen and (max-width: 1199px) {
         .search-box input {
@@ -411,9 +473,14 @@
 
     @media screen and (max-width: 767px) {
 
-        .main-content, #main {
+        .main-content, #main, .category-footer {
             padding: 0;
         }
+
+        #main {
+            padding-top:  52px;
+        }
+
         .sub-header {
             position: fixed;
             z-index: 1;
@@ -421,8 +488,9 @@
         }
 
         .search-box {
-            margin: 9px auto 0;
-            padding: 0;
+            margin: 0 auto;
+            padding: 7px 15px;
+            background: #fbfbfb;
         }
 
         .main-image {
@@ -494,10 +562,7 @@
     }
 
     @media screen and (max-width: 555px) {
-        .checkbox-slider--b-flat input + span{
-            font-size: 12px;
 
-        }
 
         .user-image {
             float: right;
@@ -527,12 +592,12 @@
             padding: 6px 10px;
         }
 
-        #article-list > div{
+        #article-list > div {
             padding: 0
         }
 
-        .default-items{
-          padding: 0;
+        .default-items {
+            padding: 0;
         }
     }
 
@@ -555,36 +620,28 @@
 
 
     @media screen and (max-width: 370px) {
-      .default-wrapper-main-image{
-        position: relative;
-        width: 100%;
-        height: 250px;
-        overflow: hidden;
-        border-radius: 4px;
-      }
-      .default-main-article-content{
-        width: 100% ;
+        .default-wrapper-main-image {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 4px;
+        }
 
-        position: relative;
+        .default-main-article-content {
+            width: 100%;
 
-        top: 15px;
+            position: relative;
 
-      }
+            top: 15px;
 
-      .default-item-wrapper .default-button-min-with{
-        width: 100%;
-        margin-bottom: 15px;
-      }
+        }
 
-      .search-box button.btn-filter{
-        padding: 3px 6px;
-        margin-top: 12px;
-        font-size: 12px;
-      }
+        .default-item-wrapper .default-button-min-with {
+            width: 100%;
+            margin-bottom: 15px;
+        }
 
-       .sub-header{
-            padding: 0 5px;
-       }
     }
 
 </style>
@@ -628,256 +685,314 @@
             <a href="#" @click.prevent="addProductOrRequest()"><i class="fa fa-plus"></i> </a>
         </div>
 
-       <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
-        <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
-          <div class="response-rate-filter-mobile-wrapper pull-right"> 
-              <div class="response-rate-filter">
+
+
+        <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
+            <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
+                <input type="text" v-model="headerSearchText" placeholder="اینجا جستجو کنید" />
+
+                <button class="btn-search">
+                    <i class="fa-search fa"></i>
+                </button>
+
+                <button class="btn-filter hidden-lg" data-toggle="modal" data-target="#searchFilter">
+                    فیلتر
+                    <i class="fa fa-filter"></i>
+                </button>
+            </div>
+            <div class="response-rate-filter-mobile-wrapper">
+                <div class="response-rate-filter">
 
                     <div class="checkbox checkbox-slider--b-flat">
-                      <label>
-                        <input type="checkbox" v-model="$parent.productByResponseRate"><span>                  مرتب سازی بر اساس احتمال پاسخ گویی
-    </span>
-                      </label>
+                        <label>
+                            <input type="checkbox" v-model="$parent.productByResponseRate"><span>                  مرتب سازی بر اساس احتمال پاسخ گویی
+</span>
+                        </label>
                     </div>
 
-                  </div>
+                </div>
             </div>
-          
-          <button class="btn-filter pull-left" data-toggle="modal" data-target="#searchFilter">
-            فیلتر
-            <i class="fa fa-filter"></i>
-          </button>
-        </div>
-       
-<!-- 
-                <div class="links-sub-header   col-xs-6 col-md-3 pull-right  ">
-                    <ul class="list-inline">
-                        <li class="list-item active">
-                           <h1 class="main-title">
-                            <a href="">
-                                {{this.getCategoryName()}}
-                            </a>
-                            </h1>
-                        </li>
-                    </ul>
-                </div> -->
-
+            <!--  <div class="links-sub-header hidden-xs col-sm-4 pull-left">
+               <ul class="list-inline">
+                 <li class="list-item active">
+                   <h1>
+                     <a href>لیست محصولات</a>
+                   </h1>
+                 </li>
+               </ul>
+             </div> -->
         </div>
 
+     <!--   <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
+            <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
+                <div class="response-rate-filter-mobile-wrapper pull-right">
+                    <div class="response-rate-filter">
 
-         <main id="main" class="container ">
-
-
-                    <div class="col-xs-12 col-lg-9">
-                    <div class="row">
-                        <section class="hidden-xs  col-xs-12">
-            
-                      
-                          <div class="response-rate-filter-desktop-wrapper">
-
-                            <div class="checkbox checkbox-slider--b-flat">
-                              <label>
+                        <div class="checkbox checkbox-slider&#45;&#45;b-flat">
+                            <label>
                                 <input type="checkbox" v-model="$parent.productByResponseRate"><span>                  مرتب سازی بر اساس احتمال پاسخ گویی
-            </span>
-                              </label>
+    </span>
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <button class="btn-filter pull-left" data-toggle="modal" data-target="#searchFilter">
+                    فیلتر
+                    <i class="fa fa-filter"></i>
+                </button>
+            </div>
+
+
+                            <div class="links-sub-header   col-xs-6 col-md-3 pull-right  ">
+                                <ul class="list-inline">
+                                    <li class="list-item active">
+                                       <h1 class="main-title">
+                                        <a href="">
+                                            {{this.getCategoryName()}}
+                                        </a>
+                                        </h1>
+                                    </li>
+                                </ul>
                             </div>
 
-                          </div>
-                       
-
-                      </section>
-                        <section class="main-content col-xs-12" v-if="products.length > 0  ">
-
-                               <div id="article-list" class="row" >
-                                <div class="col-xs-12"  v-for="(product,productIndex) in products">
-                                    <ProductArticle
-                                            v-if="products.length >= productIndex"
-                                            :key="product.main.id"
-                                            :product="product"
-                                            :loading_img="loading_img"
-                                            :defultimg="defultimg"
-                                            :str="str"
-                                            :loading="loading"
-                                            :currentUser="currentUser"
-                                    />
-                                </div>
-
-                                <div class="load-more-button col-xs-12 "
-                                     v-if="searchText === '' && continueToLoadProducts === true ">
+        </div>-->
 
 
-                                            <button class="btn btn-loader " @click.prevent="feed()">
-                                                <div class="btn-content">
+        <main id="main" class="container ">
+
+
+            <div class="col-xs-12 col-lg-9">
+                <div class="row">
+                    <section class="hidden-xs  col-xs-12">
+
+
+                        <div class="response-rate-filter-desktop-wrapper">
+
+                            <div class="checkbox checkbox-slider--b-flat">
+                                <label>
+                                    <input type="checkbox" v-model="$parent.productByResponseRate"><span>                  مرتب سازی بر اساس احتمال پاسخ گویی
+            </span>
+                                </label>
+                            </div>
+
+                        </div>
+
+
+                    </section>
+                    <section class="main-content col-xs-12" v-if="products.length > 0  ">
+
+                        <div id="article-list" class="row">
+                            <div class="col-xs-12" v-for="(product,productIndex) in products">
+                                <ProductArticle
+                                        v-if="products.length >= productIndex"
+                                        :key="product.main.id"
+                                        :product="product"
+                                        :loading_img="loading_img"
+                                        :defultimg="defultimg"
+                                        :str="str"
+                                        :loading="loading"
+                                        :currentUser="currentUser"
+                                />
+                            </div>
+
+                            <div class="load-more-button col-xs-12 "
+                                 v-if="searchText === '' && continueToLoadProducts === true ">
+
+
+                                <button class="btn btn-loader " @click.prevent="feed()">
+                                    <div class="btn-content">
                                                     <span class="hidden-xs  text-rtl" v-show="!loadMoreActive">
                                                         مشاهده محصولات بیشتر
                                                         <i class="fa fa-plus"></i>
 
                                                     </span>
 
-                                                    <span class="hidden-sm hidden-md hidden-lg text-rtl" v-show="!loadMoreActive">
+                                        <span class="hidden-sm hidden-md hidden-lg text-rtl" v-show="!loadMoreActive">
                                                         محصولات بیشتر
                                                         <i class="fa fa-plus"></i>
                                                     </span>
 
 
-
-                                                    <div v-show="loadMoreActive" class="btn-loader-active-wrapper ">
-                                                        <img  :src="loading_img">
-                                                    </div>
-                                                </div>
-                                            </button>
-
-                                  </div>
-                                </div>
-
-                        </section>
-
-                        <section class="main-content  col-xs-12"
-                                 v-else-if="products.length === 0 && searchActive === true">
-                            <p></p>
-
-                            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-
-                            <p>شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-
-                            <br/>
-
-                            <div class="text-center">
-                                <button class="btn btn-success">درخواست خرید</button>
-                            </div>
-
-                        </section>
-
-                        <section class="main-content  col-xs-12 "
-                                 v-else-if="products.length === 0 && searchText !== '' ">
-                            <p></p>
-
-                            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-
-                            <p class="text-center" dir="rtl">شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-                            <br/>
-
-                            <div class="text-center">
-                                <a class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">درخواست
-                                    خرید
-                                </a>
-                                <br/>
-
-                                <a class="green-button col-xs-4 " @click="resetFilter()">نمایش همه محصولات</a>
+                                        <div v-show="loadMoreActive" class="btn-loader-active-wrapper ">
+                                            <img :src="loading_img">
+                                        </div>
+                                    </div>
+                                </button>
 
                             </div>
+                        </div>
 
+                    </section>
+
+                    <section class="main-content  col-xs-12"
+                             v-else-if="products.length === 0 && searchActive === true">
+                        <p></p>
+
+                        <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+
+                        <p>شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+
+                        <br/>
+
+                        <div class="text-center">
+                            <button class="btn btn-success">درخواست خرید</button>
+                        </div>
+
+                    </section>
+
+                    <section class="main-content  col-xs-12 "
+                             v-else-if="products.length === 0 && searchText !== '' ">
+                        <p></p>
+
+                        <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+
+                        <p class="text-center" dir="rtl">شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+                        <br/>
+
+                        <div class="text-center">
+                            <a class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">درخواست
+                                خرید
+                            </a>
                             <br/>
-                        </section>
 
-                        <section class="main-content  col-xs-12 "
-                                 v-else-if="products.length === 0 && searchText === '' ">
-                            <p></p>
-
-                            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-
-                            <p class="text-center" dir="rtl">شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-
-                            <br/>
-
-                            <div class="text-center">
-                                <router-link :to="{name:'registerRequestBuyer'}" class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">
-                                    درخواست
-                                    خرید
-                                </router-link>
-
-                                <br/>
-                                <a class="green-button col-xs-4 " @click.prevent="resetFilter()">نمایش همه محصولات</a>
-                            </div>
-
-                            <br/>
-                        </section>
-
-
-
-
-                        <section v-else  class=" col-xs-12"
-
-                                 >
-                                <div class="row">
-                                     <div  v-for="(defaultItem ,index) in 8" :key="index" class="default-items col-xs-12">
-                                         <div class=" col-xs-12 padding-15 margin-15-0  default-item-wrapper shadow-content ">
-
-                                             <div class="default-user-contents  col-xs-12 padding-0">
-
-                                                 <div class="  placeholder-content default-article-user-image  pull-right"></div>
-
-
-                                                     <span class="padding-top-5 placeholder-content margin-15 pull-right content-min-width "></span>
-
-
-
-                                                    <span class="margin-0 placeholder-content  default-button-min-with  pull-left"></span>
-
-
-
-
-                                             </div>
-
-                                             <div class="default-article-contents padding-0 margin-15-0 col-xs-12 ">
-
-                                                 <div class="default-wrapper-main-image pull-right ">
-
-                                                     <span class="default-main-image  placeholder-content"></span>
-
-                                                 </div>
-
-
-                                                <div class=" default-main-article-content ">
-
-
-                                                        <span class=" content-half-width placeholder-content "></span>
-
-                                                        <span class=" content-default-width placeholder-content "></span>
-
-                                                         <span class=" content-min-width placeholder-content "></span>
-
-                                                        <span class=" content-half-width placeholder-content "></span>
-
-                                                     </div>
-                                             </div>
-                                         </div>
-
-                                     </div>
-                                </div>
-
-
-
-                        </section>
-                          </div>
-                    </div>
-
-                    <aside id="sidebar" class=" product-sidebar sidebar hidden-xs  hidden-sm hidden-md col-lg-3">
-
-                        <div class="row">
-
-                            <div class="sidebar__inner col-xs-12" style="position: relative;">
-
-
-                                <ProductAsideCategories
-                                        :productsInfo="products"
-                                        :categoryId="categoryId"
-                                        :subCategoryId="subCategoryId"
-                                        :provinceId="provinceId"
-                                        :cityId="cityId"
-                                        v-on:productsToParent="filterProducts($event)"
-                                />
-
-
-                         </div>
+                            <a class="green-button col-xs-4 " @click="resetFilter()">نمایش همه محصولات</a>
 
                         </div>
 
-                    </aside>
+                        <br/>
+                    </section>
 
+                    <section class="main-content  col-xs-12 "
+                             v-else-if="products.length === 0 && searchText === '' ">
+                        <p></p>
+
+                        <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+
+                        <p class="text-center" dir="rtl">شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+
+                        <br/>
+
+                        <div class="text-center">
+                            <router-link :to="{name:'registerRequestBuyer'}" class="green-button col-xs-4 "
+                                         @click.prevent="registerRequestInSearchNotFoundCase()">
+                                درخواست
+                                خرید
+                            </router-link>
+
+                            <br/>
+                            <a class="green-button col-xs-4 " @click.prevent="resetFilter()">نمایش همه محصولات</a>
+                        </div>
+
+                        <br/>
+                    </section>
+
+
+                    <section v-else class=" col-xs-12"
+
+                    >
+                        <div class="row">
+                            <div v-for="(defaultItem ,index) in 8" :key="index" class="default-items col-xs-12">
+                                <div class=" col-xs-12 padding-15 margin-15-0  default-item-wrapper shadow-content ">
+
+                                    <div class="default-user-contents  col-xs-12 padding-0">
+
+                                        <div class="  placeholder-content default-article-user-image  pull-right"></div>
+
+
+                                        <span class="padding-top-5 placeholder-content margin-15 pull-right content-min-width "></span>
+
+
+                                        <span class="margin-0 placeholder-content  default-button-min-with  pull-left"></span>
+
+
+                                    </div>
+
+                                    <div class="default-article-contents padding-0 margin-15-0 col-xs-12 ">
+
+                                        <div class="default-wrapper-main-image pull-right ">
+
+                                            <span class="default-main-image  placeholder-content"></span>
+
+                                        </div>
+
+
+                                        <div class=" default-main-article-content ">
+
+
+                                            <span class=" content-half-width placeholder-content "></span>
+
+                                            <span class=" content-default-width placeholder-content "></span>
+
+                                            <span class=" content-min-width placeholder-content "></span>
+
+                                            <span class=" content-half-width placeholder-content "></span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </section>
+                </div>
+            </div>
+
+            <aside id="sidebar" class=" product-sidebar sidebar hidden-xs  hidden-sm hidden-md col-lg-3">
+
+                <div class="row">
+
+                    <div class="sidebar__inner col-xs-12" style="position: relative;">
+
+
+                        <ProductAsideCategories
+                                :productsInfo="products"
+                                :categoryId="categoryId"
+                                :subCategoryId="subCategoryId"
+                                :provinceId="provinceId"
+                                :cityId="cityId"
+                                v-on:productsToParent="filterProducts($event)"
+                        />
+
+
+                    </div>
+
+                </div>
+
+            </aside>
 
 
         </main>
+
+        <footer class="category-footer container" v-if="categoryMetaData.length > 0">
+            <div class="col-xs-12">
+
+                <div data-v-c5ebe4ce="" class="title-section col-xs-12">
+                    <div data-v-c5ebe4ce="" class="row">
+                        <h1 data-v-c5ebe4ce="">
+
+                            خرید عمده  <span v-text="this.getCategoryName()"></span>
+
+                        </h1>
+                        <hr data-v-c5ebe4ce="">
+                    </div>
+                </div>
+
+                <div class="footer-note-wrapper main-box-shadow">
+
+                    <div class="wrapper-contents">
+                        <div class="contents" v-for="categoryMeta in categoryMetaData" :key="categoryMeta.id">
+                            <div v-html="categoryMeta.header"></div>
+                            <div v-html="categoryMeta.content"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 </template>
 <script>
@@ -916,12 +1031,13 @@
                 categoryId: '',
                 subCategoryId: '',
                 cityId: '',
+                categoryMetaData : '',
                 searchValue: this.$route.params.searchText,
                 scrolled: false,
                 productCountInPage: 10,
                 productCountInEachLoad: 10,
                 continueToLoadProducts: true,
-                fromProductCount:0,
+                fromProductCount: 0,
                 searchActive: false,
                 errors: '',
                 popUpMsg: '',
@@ -930,6 +1046,7 @@
                 bottom: false,
                 loadMoreActive: false,
                 searchTextTimeout: null,
+                headerSearchText:'',
             }
         },
         methods: {
@@ -962,17 +1079,22 @@
                 let categoryName = this.getCategoryName();
 //                this.productCountInPage = this.productCountInEachLoad;
 
+                axios.post('/get_category_meta_data',{
+                    category_name : categoryName
+                }).then(function (response) {
+                    self.categoryMetaData = response.data.category_info
+
+                });
                 axios.post('/user/profile_info')
                     .then(function (response) {
                         self.currentUser = response.data;
                         if (searchValueText) {
                             self.registerComponentStatistics('homePage', 'search-text', searchValueText);
                             self.searchText = searchValueText;
-                             setTimeout(function(){
-                                    self.sidebarScroll();
-                                },500)
-                        }
-                        else {
+                            setTimeout(function () {
+                                self.sidebarScroll();
+                            }, 500)
+                        } else {
                             self.loading = true;
 
                             self.fromProductCount = 0;
@@ -982,14 +1104,14 @@
                                 from_record_number: self.fromProductCount,
                                 response_rate: self.$parent.productByResponseRate,
                                 to_record_number: self.productCountInPage,
-                                search_text:categoryName
+                                search_text: categoryName
 
                             }).then(function (response) {
                                 self.products = response.data.products;
                                 self.loading = false;
-                                setTimeout(function(){
+                                setTimeout(function () {
                                     self.sidebarScroll();
-                                },500)
+                                }, 500)
                                 eventBus.$emit('submiting', false);
 
                             });
@@ -1038,9 +1160,9 @@
                         from_record_number: this.fromProductCount,
                         response_rate: self.$parent.productByResponseRate,
                         to_record_number: this.productCountInPage,
-                        search_text:this.getCategoryName()
+                        search_text: this.getCategoryName()
                     }).then(function (response) {
-                      self.products= self.products.concat(response.data.products);
+                        self.products = self.products.concat(response.data.products);
 //                      localStorage.productCountInPage=JSON.stringify(self.productCountInPage) 
                         eventBus.$emit('submiting', false);
                         if (self.products.length + 1 < self.productCountInPage) {
@@ -1048,20 +1170,19 @@
                         }
 
                         self.loadMoreActive = false;
-                        setTimeout(function(){
+                        setTimeout(function () {
                             self.sidebarScroll();
-                        },500);
+                        }, 500);
                     });
-                }
-                else{
+                } else {
                     let self = this;
 
                     this.loadMoreActive = true;
 
                     var searchObject = {};
 
-                    if(self.$parent.productByResponseRate){
-                        searchObject.response_rate = self.$parent.productByResponseRate;   
+                    if (self.$parent.productByResponseRate) {
+                        searchObject.response_rate = self.$parent.productByResponseRate;
                     }
                     if (this.categoryId) {
                         searchObject.category_id = this.categoryId;
@@ -1084,12 +1205,12 @@
                     //     });
                     //     searchObject.search_text = this.searchText;
                     // }
-                    
+
 
                     if (jQuery.isEmptyObject(searchObject)) {
-                        if(this.searchText == ""){
+                        if (this.searchText == "") {
                             this.$router.push({
-                                name : 'productList'
+                                name: 'productList'
                             });
                         }
                     }
@@ -1101,18 +1222,18 @@
                     searchObject.to_record_number = self.productCountInPage;
 
                     axios.post('/user/get_product_list', searchObject)
-                      .then(function (response) {
-                        self.products= self.products.concat(response.data.products);
-                        
-                        self.loadMoreActive = false;
-                        
-                        setTimeout(function(){
-                            self.sidebarScroll();
-                        },500);
-                      })
-                      .catch(function (err) {
-                          alert('خطایی رخ داده است. دوباره تلاش کنید.');
-                      });
+                        .then(function (response) {
+                            self.products = self.products.concat(response.data.products);
+
+                            self.loadMoreActive = false;
+
+                            setTimeout(function () {
+                                self.sidebarScroll();
+                            }, 500);
+                        })
+                        .catch(function (err) {
+                            alert('خطایی رخ داده است. دوباره تلاش کنید.');
+                        });
                 }
 
             },
@@ -1121,14 +1242,12 @@
                 if (this.currentUser.profile) {
                     if (this.currentUser.user_info.is_buyer) {
                         window.location.href = '/dashboard/register-request';
-                    }
-                    else {
+                    } else {
                         this.popUpMsg = 'حساب کاربری شما از نوع خریدار نیست.';
                         eventBus.$emit('submitSuccess', this.popUpMsg);
                         $('#custom-main-modal').modal('show');
                     }
-                }
-                else {
+                } else {
                     this.popUpMsg = 'تنها کاربران تایید شده ی باسکول مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
                     eventBus.$emit('submitSuccess', this.popUpMsg);
                     $('#auth-popup').modal('show');
@@ -1147,14 +1266,12 @@
                         this.registerComponentStatistics('product-list', 'register-product', 'seller clicks on plus button');
 
                         window.location.href = '/dashboard/register-product';
-                    }
-                    else if (this.currentUser.user_info.is_buyer) {
+                    } else if (this.currentUser.user_info.is_buyer) {
                         this.registerComponentStatistics('product-list', 'register-request', 'seller clicks on plus button');
 
                         window.location.href = '/dashboard/register-request';
                     }
-                }
-                else {
+                } else {
                     this.registerComponentStatistics('product-list', 'unauthorized-user-clicks-on-plus-btn', 'unauthorized-user-clicks-on-plus-btn');
 
                     this.popUpMsg = 'برای ثبت آگهی خرید یا فروش  ابتدا وارد سامانه شوید یا ثبت نام کنید.';
@@ -1182,7 +1299,7 @@
             },
             applyFilter: function () {
                 var self = this;
-  
+
                 eventBus.$emit('submiting', true);
 
                 self.fromProductCount = 0;
@@ -1190,8 +1307,8 @@
 
                 var searchObject = {};
 
-                if(self.$parent.productByResponseRate){
-                    searchObject.response_rate = self.$parent.productByResponseRate;   
+                if (self.$parent.productByResponseRate) {
+                    searchObject.response_rate = self.$parent.productByResponseRate;
                 }
                 if (this.categoryId) {
                     searchObject.category_id = this.categoryId;
@@ -1213,14 +1330,14 @@
 
                 axios.post('/user/get_product_list', searchObject)
                     .then(function (response) {
-                        self.products=response.data.products;
+                        self.products = response.data.products;
                         eventBus.$emit('submiting', false);
-                        
+
                         self.scrollToTop();
 
-                        setTimeout(function(){
+                        setTimeout(function () {
                             self.sidebarScroll();
-                        },500);
+                        }, 500);
                     })
                     .catch(function (err) {
                         alert('خطایی رخ داده است. دوباره تلاش کنید.');
@@ -1250,31 +1367,31 @@
 
                 var sidebarStopper = $('#wrap-footer').height();
 
-                   var sidebar = new StickySidebar('#sidebar', {
-                        containerSelector: '#article-list',
-                        innerWrapperSelector: '.sidebar__inner',
-                        topSpacing: 80,
-                        resizeSensor: true,
+                var sidebar = new StickySidebar('#sidebar', {
+                    containerSelector: '#article-list',
+                    innerWrapperSelector: '.sidebar__inner',
+                    topSpacing: 80,
+                    resizeSensor: true,
 
-                    });
+                });
 
             },
-            getCategoryName:function(){
+            getCategoryName: function () {
                 let name = this.$route.params.categoryName;
 
-                return name.replace('-',' ');
+                return name.replace('-', ' ');
             },
-            infiniteScrollHandler:function(){
+            infiniteScrollHandler: function () {
                 let lastOffset = 0;
-                
+
                 window.onscroll = () => {
-                if(window.location.pathname.includes('product-list')){
-                    var bottom = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - (document.documentElement.scrollTop / 2);
+                    if (window.location.pathname.includes('product-list/category')) {
+                        var bottom = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - (document.documentElement.scrollTop / 2);
 
-                    let newOffset = document.documentElement.offsetHeight;
+                        let newOffset = document.documentElement.offsetHeight;
 
-                    if(bottom){
-                        if(newOffset > lastOffset + 100){
+                        if (bottom) {
+                            if (newOffset > lastOffset + 100) {
                                 lastOffset = document.documentElement.offsetHeight;
                                 this.feed();
                             }
@@ -1285,39 +1402,46 @@
             },
         },
         watch: {
-            '$route.params.categoryName':function(name){
+            '$route.params.categoryName': function (name) {
 
-                 this.init();
+                this.init();
 
             },
 
-            searchText: function () {
+            headerSearchText: function (value) {
                 var self = this;
 
 
                 clearTimeout(this.searchTextTimeout);
 
                 this.searchTextTimeout = setTimeout(function () {
-                self.registerComponentStatistics('product-list', 'search-text', self.searchText);
+                    self.registerComponentStatistics('product-list', 'search-text', self.searchText);
 
-                    self.applyFilter();
+                    eventBus.$emit('textSearch', value);
+
+                    self.$router.replace({
+                        name: 'productList',
+                        query: {
+                            s: self.headerSearchText.replace(/ /g, '+')
+                        }
+                    });
 
                 }, 1500);
 
             },
-            '$parent.productByResponseRate':function(){
+            '$parent.productByResponseRate': function () {
                 this.products = {};
-                
+
                 this.infiniteScrollHandler();
-                
+
                 if (this.searchText) {
-                  
-                  this.applyFilter();
-                  
-                }else{
-                  
-                  this.init();
-                  
+
+                    this.applyFilter();
+
+                } else {
+
+                    this.init();
+
                 }
 
             },
@@ -1335,8 +1459,8 @@
         },
         mounted() {
             this.scrollToTop();
-            
-           this.infiniteScrollHandler();
+
+            this.infiniteScrollHandler();
 
             this.init();
 

@@ -170,6 +170,7 @@ label {
 
 input[type="number"] {
     -moz-appearance: textfield;
+    outline: none;
 }
 
 input[type="text"],
@@ -177,10 +178,11 @@ select,
 input[type="button"],
 textarea {
     width: 100%;
-
+    outline: none;
 }
 button, input, select, textarea{
     line-height: 24px;
+    outline: none;
 }
 input[type="text"],
 select,
@@ -188,16 +190,19 @@ textarea {
     border: 1px solid #cfcfcf;
     border-radius: 3px;
     width: 100%;
+    outline: none;
 }
 
 input[type="text"],
 textarea {
     padding: 13px 15px;
     width: 100%;
+    outline: none;
 }
 
 select {
     padding: 7px 15px;
+    outline: none;
 }
 
 
@@ -301,7 +306,7 @@ select {
 }
 
 
-.message-wrapper .chat-page ul, .main-modal-chat ul {
+.message-wrapper .chat-page ul, .main-modal-chat ul, .send-message-form, .footer-modal-chat {
     background: url('../../img/whatsappbg.jpg') repeat;
 }
 

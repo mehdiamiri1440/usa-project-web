@@ -471,6 +471,9 @@ export default {
                           self.returnUserToPreviousPageAndChatBox(response.data);
                       }
                       else{
+                          window.localStorage.setItem('userId', response.data.id);
+                          window.localStorage.setItem('userType', response.data.is_seller);
+                          
                           self.redirectUserToPanel(response.data);
                       }
                 } else {
@@ -635,7 +638,22 @@ export default {
       var self = this;
 
       if (userInfo.is_buyer) {
-          window.location.href = "/buyer/register-request";
+          axios
+              .post("/get_total_unread_messages_for_current_user")
+              .then(function (response) {
+                  if(response.data.msg_count){
+                      console.log('messages');
+                      window.location.href = "/buyer/messages"
+                  }
+                  else{
+                      console.log('test');
+                      window.location.href = "/buyer/register-request";
+                  }
+              })
+              .catch(function (err) {
+                  //
+              });
+          
           localStorage.setItem("showSnapShot", true);
           localStorage.userRoute = JSON.stringify(
             "buyer/register-request"
@@ -647,7 +665,29 @@ export default {
             "seller-logged-in-successfully"
           );
       } else if (userInfo.is_seller) {
-          window.location.href = "/seller/register-product";
+          axios
+              .post("/get_total_unread_messages_for_current_user")
+              .then(function (response) {
+                  if(response.data.msg_count){
+                      window.location.href = "/seller/messages"
+                  }
+                  else{
+                      axios
+                        .post("/get_seller_dashboard_required_data")
+                        .then(function(response) {
+                            if(response.data.confirmed_products_count !== 0){
+                                window.location.href = "/seller/buyAd-requests";
+                            }
+                            else{
+                                window.location.href = "/seller/register-product";
+                            }
+                        });
+                  }
+              })
+              .catch(function (err) {
+                  //
+              });
+  
           localStorage.setItem("showSnapShot", true);
           localStorage.userRoute = JSON.stringify(
             "seller/register-product"
