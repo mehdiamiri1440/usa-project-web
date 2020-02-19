@@ -129,27 +129,27 @@
 
     .main-modal-chat li > div {
 
-        background: #fff;
+        background: #f7f7f7;
 
-        border-radius: 5px;
+        border-radius: 8px;;
 
-        padding: 10px 15px;
+        padding: 12px 10px 3px;
 
         float: left;
 
         direction: rtl;
 
-        font-size: 14px;
+        font-size: 12px;
 
-        margin-bottom: 15px;
+        margin: 12px auto;
 
         text-align: right;
 
         max-width: calc(100% - 50px);
 
-        line-height: 1.618;
+        line-height: 1.612;
 
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
     }
 
     .main-modal-chat li.sender > div {
@@ -164,13 +164,15 @@
 
         font-size: 10px;
 
-        color: #AAA;
+        color: #333;
 
         overflow: hidden;
 
         padding-top: 5px;
 
         display: inline-block;
+
+        line-height: 1.618;
 
     }
 
@@ -207,15 +209,15 @@
 
         right: 0;
 
-        padding: 10px 20px;
+        padding: 4px 15px;
     }
 
     .send-message-button {
         float: right;
 
-        width: 35px;
+        width: 50px;
 
-        height: 35px;
+        height: 50px;
 
         color: #fff;
 
@@ -245,7 +247,7 @@
     .footer-modal-chat input {
         float: left;
 
-        width: calc(100% - 50px);
+        width: calc(100% - 60px);
 
         border-radius: 50px;
 
@@ -253,7 +255,7 @@
 
         border: none;
 
-        padding: 6px 15px;
+        padding: 13px 15px;
 
         direction: rtl;
 

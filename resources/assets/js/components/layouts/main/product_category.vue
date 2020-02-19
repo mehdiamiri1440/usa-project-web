@@ -1,3 +1,15 @@
+<style>
+    .footer-note-wrapper h1, .footer-note-wrapper h2, .footer-note-wrapper h3, .footer-note-wrapper h4, .footer-note-wrapper p, .footer-note-wrapper div, .footer-note-wrapper span
+    {
+        font-size: 14px;
+        line-height: 1.618;
+        margin: 10px auto;
+    }
+
+
+
+</style>
+
 <style scoped>
 
     #main-content {
@@ -408,10 +420,10 @@
 
     .title-section {
         direction: rtl;
-        margin: 20px auto 10px;
+        margin: 50px auto 10px;
     }
 
-    .title-section h3 {
+    .title-section h1 {
         font-size: 16px;
         color: #00c569;
         float: right;
@@ -433,6 +445,7 @@
         right: 0;
 
     }
+
 
 
     @media screen and (max-width: 1199px) {
@@ -954,16 +967,16 @@
 
         </main>
 
-        <footer class="category-footer container">
+        <footer class="category-footer container" v-if="categoryMetaData.length > 0">
             <div class="col-xs-12">
 
                 <div data-v-c5ebe4ce="" class="title-section col-xs-12">
                     <div data-v-c5ebe4ce="" class="row">
-                        <h3 data-v-c5ebe4ce="">
+                        <h1 data-v-c5ebe4ce="">
 
-                             درباره  <span v-text="this.getCategoryName()"></span>
+                            خرید عمده  <span v-text="this.getCategoryName()"></span>
 
-                        </h3>
+                        </h1>
                         <hr data-v-c5ebe4ce="">
                     </div>
                 </div>
