@@ -5,7 +5,7 @@
 .box-sidebar {
   text-align: center;
   direction: rtl;
-  margin: 15px auto;
+  margin: 15px auto 0;
   position: relative;
 }
 hr {
@@ -29,7 +29,7 @@ hr {
 
   padding: 9px 18px;
 
-  margin: 0 auto;
+  margin: 10px auto 0;
 
   display: inline-block;
 }

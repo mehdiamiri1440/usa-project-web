@@ -1,3 +1,8 @@
+<style>
+	.product-description hr{
+		margin:12px auto;
+	}
+</style>
 <style scoped>
     i{
         position: relative;
@@ -163,6 +168,7 @@
 		white-space: pre-line;
 
 	}
+
 
 	.product-description > p{
 

@@ -221,7 +221,7 @@
 
     .sub-header-fix {
         position: fixed;
-        top: 60px;
+        top: 56px;
         left: 0;
         right: 0;
         z-index: 2;

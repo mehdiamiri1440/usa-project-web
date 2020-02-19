@@ -445,14 +445,14 @@
                         alreadySelected:false,
                         selectedIndex:null,
                     },
-                    {
-                        id: 4,
-                        name: "وزن",
-                        description:'sdf sdfsadf',
-                        itemValue:'',
-                        alreadySelected:false,
-                        selectedIndex:null,
-                    },
+                    // {
+                    //     id: 4,
+                    //     name: "وزن",
+                    //     description:'sdf sdfsadf',
+                    //     itemValue:'',
+                    //     alreadySelected:false,
+                    //     selectedIndex:null,
+                    // },
                     {
                         id: 5,
                         name: "اندازه یا ابعاد",
@@ -496,7 +496,7 @@
                     {
                         id: 10,
                         name: "مزیا نسبت به محصولات مشابه",
-                        description:'مزایا (مزیت این محصول نسبت به سایر محصولات مشابه)',
+                        description:'مزیت این محصول نسبت به محصولات مشابه',
                         itemValue:'',
                         alreadySelected:false,
                         selectedIndex:null,
@@ -555,28 +555,29 @@
 
                     let description = '<hr/>';
 
+                    let temp =  'برای اطلاع از قیمت روز ' + this.$parent.product.product_name + ' و خرید مستقیم پیام ارسال کنید.' + '<hr/>';
+                    this.$parent.product.description = this.$parent.product.description.replace(temp,"");
+                    description = description + temp;
+
                     for(let i = 0 ; i < cnt ; i++){
                         if(this.fieldsData[i].itemValue){
                             let itemDescription = this.getItemDescription(this.fieldsData[i].itemKey);
-                            itemDescription = itemDescription + ' : ' + this.fieldsData[i].itemValue + "<hr/>";
+                            itemDescription = itemDescription + ' : ' + this.fieldsData[i].itemValue + '<hr/>';
                             this.$parent.product.description = this.$parent.product.description.replace(itemDescription,""); //remove when text is duplicated
-                            description = description + itemDescription ;
+                            description = description +  itemDescription ;
                         }
                     }
-                    let temp = 'برای اطلاع از قیمت روز ' + this.$parent.product.product_name + ' و خرید مستقیم پیام ارسال کنید.' +  "<hr/>";
+
+                    temp =   'مقدار موجودی آماده فروش برای این محصول : ' + this.$parent.product.stock +  ' کیلوگرم' + '<hr/>' ;
                     this.$parent.product.description = this.$parent.product.description.replace(temp,"");
                     description = description + temp;
 
-                    temp = 'مقدار موجودی آماده فروش برای این محصول : ' + this.$parent.product.stock +  ' کیلوگرم' +  "<hr/>";
+
+                    temp =  'حداقل مقدار فروش این محصول توسط فروشنده در یک معامله : ' + this.$parent.product.min_sale_amount + ' کیلوگرم' + '<hr/>';
                     this.$parent.product.description = this.$parent.product.description.replace(temp,"");
                     description = description + temp;
 
-
-                    temp = 'حداقل مقدار فروش این محصول توسط فروشنده در یک معامله : ' + this.$parent.product.min_sale_amount + ' کیلوگرم' +  "<hr/>";
-                    this.$parent.product.description = this.$parent.product.description.replace(temp,"");
-                    description = description + temp;
-
-                    this.$parent.product.description =  this.$parent.product.description + "\n\n" + description;
+                    this.$parent.product.description =  this.$parent.product.description + description;
 
                     resolve(true);
                 });
