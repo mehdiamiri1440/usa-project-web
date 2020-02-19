@@ -261,6 +261,7 @@ body {
                             ' - ' +
                              $parent.product.main.city_name"
           ></span>
+          
         </p>
 
        <p v-if="$parent.product.main.description">
