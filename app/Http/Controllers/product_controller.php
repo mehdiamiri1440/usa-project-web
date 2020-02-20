@@ -142,7 +142,7 @@ class product_controller extends Controller
 
         $photos_count = $request->images_count;
         foreach (range(0, $photos_count - 1) as $index) {
-            $rules['image_'.$index] = 'image|mimes:png,jpg,jpeg|min:20|max:5000';
+            $rules['image_'.$index] = 'image|mimes:png,jpg,jpeg|min:2|max:5000';
         }
 
         return $rules;
