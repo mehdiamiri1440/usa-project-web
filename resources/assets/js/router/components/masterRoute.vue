@@ -28,7 +28,7 @@
                       :str="storagePath"
                       :defimgitem="assets + 'assets/img/product.jpg'"
                       :defultimg="assets + 'assets/img/user-defult.png'"
-                      :site_logo="assets + 'assets/img/logo-buskool.png'"
+                      :site_logo="assets + 'assets/img/new-logo-buskool.png'"
                       :site_logo_white="assets + 'index/images/logo_white.png'"
                       :incobaicon="assets + 'assets/img/lo.png'"
                       :assets = "assets"

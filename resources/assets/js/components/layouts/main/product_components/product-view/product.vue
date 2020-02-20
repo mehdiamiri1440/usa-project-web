@@ -172,7 +172,7 @@
 
 	.product-description > p{
 
-		font-size: 16px;
+		font-size: 14px;
 		line-height: 30px;
 
 	}
