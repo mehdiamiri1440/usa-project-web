@@ -1175,7 +1175,6 @@
                     //     });
                     //     searchObject.search_text = this.searchText;
                     // }
-                    console.log('search text',this.searchText);
 
                     // if (jQuery.isEmptyObject(searchObject)) {
                     //     if (this.searchText == "") {
