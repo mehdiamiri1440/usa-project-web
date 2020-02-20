@@ -1120,38 +1120,8 @@
 
             },
             feed() {
-
-                // var self = this;
-                // if (this.searchText === '' && this.provinceId === '' && this.categoryId === '' && this.continueToLoadProducts) {
-                //     this.loadMoreActive = true;
-
-                //     this.productCountInPage += this.productCountInEachLoad;
-
-                //     axios.post('/user/get_product_list', {
-                //         from_record_number: 0,
-                //         response_rate: self.$parent.productByResponseRate,
-                //         to_record_number: this.productCountInPage,
-                //         search_text:this.getCategoryName()
-                //     }).then(function (response) {
-                //         self.products = response.data.products;
-
-                //         if (self.products.length + 1 < self.productCountInPage) {
-                //             self.continueToLoadProducts = false;
-                //         }
-
-                //         self.loadMoreActive = false;
-
-                //         setTimeout(function(){
-                //             self.sidebarScroll();
-                //         },500)
-                //     });
-
-                //   eventBus.$emit('submiting', false);
-
-                // }
-
-
                 var self = this;
+
                 if (this.searchText === '' && this.provinceId === '' && this.categoryId === '' && this.continueToLoadProducts) {
                     this.loadMoreActive = true;
                     this.fromProductCount = this.productCountInPage;
@@ -1205,15 +1175,15 @@
                     //     });
                     //     searchObject.search_text = this.searchText;
                     // }
+                    console.log('search text',this.searchText);
 
-
-                    if (jQuery.isEmptyObject(searchObject)) {
-                        if (this.searchText == "") {
-                            this.$router.push({
-                                name: 'productList'
-                            });
-                        }
-                    }
+                    // if (jQuery.isEmptyObject(searchObject)) {
+                    //     if (this.searchText == "") {
+                    //         this.$router.push({
+                    //             name: 'productList'
+                    //         });
+                    //     }
+                    // }
 
                     searchObject.search_text = this.getCategoryName();
 
