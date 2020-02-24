@@ -275,6 +275,7 @@
                     pack_type: '',
                     category_id: '',
                     rules: false,
+                    categorySelected:'',
                 },
                 buyAdFields: [
                     'name',
@@ -312,10 +313,14 @@
                 var categoryId = $(e.target).val();
                 this.categorySelected = categoryId;
 
+                this.buyAd.categorySelected = '';
+                // this.buyAd.category_id = '';
+                console.log('id',this.buyAd.category_id);
+
                 axios.post('/get_category_list', {
                     parent_id: categoryId,
                 })
-                    .then(response => (this.subCategoryList = response.data.categories));
+                .then(response => (this.subCategoryList = response.data.categories));
 
             },
             formValidator: function () {
