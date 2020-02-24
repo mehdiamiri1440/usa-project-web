@@ -1398,14 +1398,25 @@
             this.stopLoader();
         },
         metaInfo() {
+            let title = '';
+            let description = '';
+
+            if(this.searchText){
+                title = 'لیست محصولات و قیمت عمده ' + this.searchText;
+                description = 'خرید و قیمت عمده ' + title;
+            }
+            else {
+                title = 'لیست محصولات و قیمت عمده محصولات کشاورزی';
+                description = 'خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار';
+            }
 
             return {
-                title: 'لیست محصولات و قیمت عمده محصولات کشاورزی',
+                title: title,
                 titleTemplate: 'باسکول | %s',
                 meta: [
                     {
                         name: 'description',
-                        content: 'خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار'
+                        content: description
                     },
                     {
                         name: 'author',
@@ -1421,7 +1432,7 @@
                     },
                     {
                         'property': 'og:title',
-                        'content': 'باسکول | لیست محصولات و قیمت محصولات کشاورزی'
+                        'content': 'باسکول | لیست محصولات و قیمت ' + title
                     },
 
                 ]

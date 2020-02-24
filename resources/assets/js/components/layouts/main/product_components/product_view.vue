@@ -591,6 +591,8 @@
             let productDescription = this.product.main.description
                 ? this.product.main.description.split("<hr/>").join("")
                 : "";
+            
+            let canonicalLink = window.location.host + '/product-list/category/' + productSubCategory.split(' ').join('-');
             //
             return {
                 title:
@@ -652,6 +654,9 @@
                             " " +
                             productOwnerFullName
                     }
+                ],
+                link: [
+                    {rel: 'canonical', href: canonicalLink}
                 ]
             };
         },
