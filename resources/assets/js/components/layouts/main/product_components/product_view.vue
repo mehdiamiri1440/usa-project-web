@@ -263,6 +263,8 @@
                 </router-link>
             </div>
 
+           <main-register-request />  
+
 
 
         </main>
@@ -271,16 +273,18 @@
 
 
 <script>
+    import {eventBus} from "../../../../router/router";
     import ProductCarousel from '../main_components/product-list-carousel'
     import ProductContents from "./product-view/product";
     import UserInfo from "./product-view/user_info";
-    import {eventBus} from "../../../../router/router";
+    import MainRegisterRequest from "../main-register-request";
 
     export default {
         components: {
             ProductContents,
             UserInfo,
-            ProductCarousel
+            ProductCarousel,
+            MainRegisterRequest
         },
         props:
             [
