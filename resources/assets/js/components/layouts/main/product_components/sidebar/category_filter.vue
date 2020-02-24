@@ -337,7 +337,7 @@
             getSubCategoryUrl: function (t) {
 
                 let url = '/product-list/category/'
-                    + t.category_name.replace(' ', '-')
+                    + t.category_name.split(' ').join('-')
                 ;
 
                 return url;
@@ -345,7 +345,7 @@
             getCategoryName: function () {
                 let name = this.$route.params.categoryName ? this.$route.params.categoryName : '';
 
-                return name.replace('-', ' ');
+                return name.split('-').join(' ');
             }
         },
         mounted() {

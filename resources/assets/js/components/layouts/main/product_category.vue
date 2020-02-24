@@ -1348,7 +1348,7 @@
             getCategoryName: function () {
                 let name = this.$route.params.categoryName;
 
-                return name.replace('-', ' ');
+                return name.split('-').join(' ');
             },
             infiniteScrollHandler: function () {
                 let lastOffset = 0;
