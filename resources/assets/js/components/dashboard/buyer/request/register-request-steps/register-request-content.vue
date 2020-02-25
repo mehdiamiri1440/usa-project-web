@@ -266,14 +266,17 @@ label .small-label {
               <select
                 :class="{'active' :  $parent.categorySelected , 'error' : $parent.errors.categorySelected}"
                 id="category"
-                v-on:change="$parent.loadSubCategoryList($event)"
+                v-model="$parent.buyAd.categorySelected"
+                v-on:change="loadSubCategoryList($event)"
               >
-                <option selected disabled>انتخاب دسته بندی</option>
+                <option  selected disabled value="">انتخاب دسته بندی</option>
                 <option
                   v-for="category in $parent.categoryList"
-                  v-bind:value="category.id"
+                  :selected="category.id == $parent.buyAd.categorySelected ?  'selected' : ''"
+                  :value="category.id"
                   v-text="category.category_name"
                 ></option>
+              
               </select>
 
           </div>
@@ -290,11 +293,13 @@ label .small-label {
           <div class="input-wrapper">
             <select
               v-on:change="$parent.setCategoryId($event)"
+              v-model="$parent.buyAd.category_id"
               :class="{'active' :  $parent.buyAd.category_id , 'error' : $parent.errors.category_id}"
               id="sub-category"
             >
-              <option disabled selected>لطفا انتخاب کنید</option>
+              <option  disabled selected value="">لطفا انتخاب کنید</option>
               <option
+                :selected="$parent.buyAd.category_id == category.id"
                 v-for="category in $parent.subCategoryList"
                 v-bind:value="category.id"
                 v-text="category.category_name"
@@ -376,10 +381,43 @@ label .small-label {
 </template>
 <script>
 export default {
+  data:function(){
+    return {
+      selectedOption:'',
+    }
+    
+  },
   mounted() {
     if (this.$parent.isOsIOS()) {
       $('input[type="tel"]').attr("type", "text");
     }
+    let buyAd = JSON.parse(window.localStorage.getItem('buyAd'));
+
+    if(buyAd){
+        this.$parent.buyAd = buyAd;
+        
+        let categoryId = buyAd.categorySelected;
+
+        this.$parent.categorySelected = categoryId;
+
+        axios.post('/get_category_list', {
+            parent_id: categoryId,
+        })
+        .then(response => (this.$parent.subCategoryList = response.data.categories));
+    }
+  },
+  methods:{
+      loadSubCategoryList:function(e){
+
+          window.localStorage.removeItem('buyAd');
+          
+          this.$parent.buyAd.category_id = '';
+         
+          this.$parent.loadSubCategoryList(e);
+      },
+      showCategory:function(categoryId){
+          return this.$parent.buyAd.categorySelected == categoryId;
+      }
   },
   watch: {
     "$parent.categorySelected": function() {

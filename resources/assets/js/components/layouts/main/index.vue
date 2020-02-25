@@ -1546,6 +1546,12 @@
             </div>
 
         </section>
+
+
+                   <main-register-request v-if="userType != 1" />  
+
+
+
         <section id="benefit-links" class="container-fluid ">
             <div class="container">
                 <div class="row">
@@ -1607,6 +1613,7 @@
 <script>
     import {eventBus} from "../../../router/router";
     import VueWow from 'vue-wow';
+    import MainRegisterRequest from "./main-register-request";
     import {UAnimateContainer, UAnimate} from 'vue-wow'
 
     var visible = false;
@@ -1661,7 +1668,8 @@
             ProductCarousel,
             RequestCarousel,
             UAnimateContainer,
-            UAnimate
+            UAnimate,
+            MainRegisterRequest
         },
         props: [
             'isUserLogin',

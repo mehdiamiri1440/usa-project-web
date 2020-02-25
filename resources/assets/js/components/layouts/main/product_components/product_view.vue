@@ -263,6 +263,8 @@
                 </router-link>
             </div>
 
+           <main-register-request v-if="showRegisterRequestBox"/>  
+
 
 
         </main>
@@ -271,16 +273,18 @@
 
 
 <script>
+    import {eventBus} from "../../../../router/router";
     import ProductCarousel from '../main_components/product-list-carousel'
     import ProductContents from "./product-view/product";
     import UserInfo from "./product-view/user_info";
-    import {eventBus} from "../../../../router/router";
+    import MainRegisterRequest from "../main-register-request";
 
     export default {
         components: {
             ProductContents,
             UserInfo,
-            ProductCarousel
+            ProductCarousel,
+            MainRegisterRequest
         },
         props:
             [
@@ -312,6 +316,7 @@
                 submiting: false,
                 isLoading: false,
                 isMyProfile: false,
+                showRegisterRequestBox:true,
             };
         },
         methods: {
@@ -320,6 +325,13 @@
                 var self = this;
                 axios.post("/user/profile_info").then(function (response) {
                     self.currentUser = response.data;
+
+                    if(self.currentUser.user_info){
+                        if(self.currentUser.user_info.is_seller == true){
+                            self.showRegisterRequestBox = false;
+                        }
+                    }
+
                     axios
                         .post("/get_product_by_id", {
                             product_id: self.$route.params.id
@@ -587,6 +599,8 @@
             let productDescription = this.product.main.description
                 ? this.product.main.description.split("<hr/>").join("")
                 : "";
+            
+            let canonicalLink = window.location.host + '/product-list/category/' + productSubCategory.split(' ').join('-');
             //
             return {
                 title:
@@ -648,6 +662,9 @@
                             " " +
                             productOwnerFullName
                     }
+                ],
+                link: [
+                    {rel: 'canonical', href: canonicalLink}
                 ]
             };
         },

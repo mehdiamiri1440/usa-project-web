@@ -1650,7 +1650,7 @@
         metaInfo() {
             let fullName = this.profileOwner.user_info.first_name + ' ' + this.profileOwner.user_info.last_name;
 
-            let url = 'https://buskool.com/profile/' + this.profileOwner.user_info.user_name;
+            let url = window.location.host + '/profile/' + this.profileOwner.user_info.user_name;
             let profilePhoto = '';
 
             if (this.profileOwner.profile.profile_photo) {
@@ -1702,6 +1702,9 @@
                         'content': profilePhoto
                     }
 
+                ],
+                link: [
+                    {rel: 'canonical', href: url}
                 ]
 
             }

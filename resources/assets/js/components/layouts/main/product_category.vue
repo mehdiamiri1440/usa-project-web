@@ -1348,7 +1348,7 @@
             getCategoryName: function () {
                 let name = this.$route.params.categoryName;
 
-                return name.replace('-', ' ');
+                return name.split('-').join(' ');
             },
             infiniteScrollHandler: function () {
                 let lastOffset = 0;
@@ -1440,6 +1440,8 @@
 
             let categoryName = this.getCategoryName();
 
+            let canonicalLink = window.location.host + '/product-list/category/' + categoryName.split(' ').join('-');
+
             return {
                 title: 'خرید و فروش عمده و قیمت ' + categoryName,
                 titleTemplate: 'باسکول | %s',
@@ -1464,7 +1466,9 @@
                         'property': 'og:title',
                         'content': 'باسکول | خرید و فروش عمده و قیمت ' + categoryName
                     },
-
+                ],
+                link: [
+                    {rel: 'canonical', href: canonicalLink}
                 ]
 
             }
