@@ -264,19 +264,19 @@ label .small-label {
           <div class="input-wrapper">
 
               <select
-                @click="$parent.buyAd.categorySelected = ''"
                 :class="{'active' :  $parent.categorySelected , 'error' : $parent.errors.categorySelected}"
                 id="category"
+                v-model="$parent.buyAd.categorySelected"
                 v-on:change="loadSubCategoryList($event)"
               >
-                <option  v-if="!$parent.buyAd.categorySelected" selected disabled>انتخاب دسته بندی</option>
+                <option  selected disabled value="">انتخاب دسته بندی</option>
                 <option
-                  v-for="(category,index) in $parent.categoryList"
-                  :key="index"
-                  :selected="$parent.buyAd.categorySelected == category.id ? 'selected' : ''"
+                  v-for="category in $parent.categoryList"
+                  :selected="category.id == $parent.buyAd.categorySelected ?  'selected' : ''"
                   :value="category.id"
                   v-text="category.category_name"
                 ></option>
+              
               </select>
 
           </div>
@@ -293,10 +293,11 @@ label .small-label {
           <div class="input-wrapper">
             <select
               v-on:change="$parent.setCategoryId($event)"
+              v-model="$parent.buyAd.category_id"
               :class="{'active' :  $parent.buyAd.category_id , 'error' : $parent.errors.category_id}"
               id="sub-category"
             >
-              <option v-if="!$parent.buyAd.category_id" disabled selected>لطفا انتخاب کنید</option>
+              <option  disabled selected value="">لطفا انتخاب کنید</option>
               <option
                 :selected="$parent.buyAd.category_id == category.id"
                 v-for="category in $parent.subCategoryList"
@@ -380,6 +381,12 @@ label .small-label {
 </template>
 <script>
 export default {
+  data:function(){
+    return {
+      selectedOption:'',
+    }
+    
+  },
   mounted() {
     if (this.$parent.isOsIOS()) {
       $('input[type="tel"]').attr("type", "text");
@@ -387,10 +394,11 @@ export default {
     let buyAd = JSON.parse(window.localStorage.getItem('buyAd'));
 
     if(buyAd){
-        console.log(buyAd);
         this.$parent.buyAd = buyAd;
         
         let categoryId = buyAd.categorySelected;
+
+        this.$parent.categorySelected = categoryId;
 
         axios.post('/get_category_list', {
             parent_id: categoryId,
@@ -400,8 +408,11 @@ export default {
   },
   methods:{
       loadSubCategoryList:function(e){
-          this.$parent.buyAd.categorySelected = '';
+
+          window.localStorage.removeItem('buyAd');
+          
           this.$parent.buyAd.category_id = '';
+         
           this.$parent.loadSubCategoryList(e);
       },
       showCategory:function(categoryId){

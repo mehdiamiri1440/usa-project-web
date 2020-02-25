@@ -255,7 +255,7 @@
         },
         data: function () {
             return {
-                currentStep: 0,
+                currentStep: 1,
                 errors: {
                     categorySelected: '',
                     category_id: '',
@@ -313,9 +313,7 @@
                 var categoryId = $(e.target).val();
                 this.categorySelected = categoryId;
 
-                this.buyAd.categorySelected = '';
-                // this.buyAd.category_id = '';
-                console.log('id',this.buyAd.category_id);
+                this.buyAd.categorySelected = categoryId;
 
                 axios.post('/get_category_list', {
                     parent_id: categoryId,

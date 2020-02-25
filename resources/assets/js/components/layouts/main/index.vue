@@ -1548,7 +1548,7 @@
         </section>
 
 
-                   <main-register-request />  
+                   <main-register-request v-if="userType != 1" />  
 
 
 
