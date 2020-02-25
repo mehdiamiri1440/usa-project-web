@@ -1398,6 +1398,8 @@
             this.stopLoader();
         },
         metaInfo() {
+            let canonicalLink = window.location.host + '/product-list';
+
             let title = '';
             let description = '';
 
@@ -1435,6 +1437,9 @@
                         'content': 'باسکول | لیست محصولات و قیمت ' + title
                     },
 
+                ],
+                link: [
+                    {rel: 'canonical', href: canonicalLink}
                 ]
 
             }

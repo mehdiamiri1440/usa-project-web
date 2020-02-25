@@ -335,15 +335,21 @@ label .small-label {
                                         <div class="input-wrapper">
 
                                             <select
+                                                :class="{'active' :  categorySelected , 'error' : errors.categorySelected}"
                                                 id="category"
+                                                v-on:change="loadSubCategoryList($event)"
                                             >
                                                 <option selected disabled>انتخاب دسته بندی</option>
-                                    
+                                                <option
+                                                    v-for="category in categoryList"
+                                                    v-bind:value="category.id"
+                                                    v-text="category.category_name"
+                                                ></option>
                                             </select>
 
                                         </div>
                                         <p class="error-message col-xs-12">
-                                            <!-- <span v-if="$parent.errors.categorySelected" v-text="$parent.errors.categorySelected"></span> -->
+                                            <span v-if="errors.categorySelected" v-text="errors.categorySelected"></span>
                                         </p>
                                     </div>
 
@@ -354,14 +360,20 @@ label .small-label {
 
                                         <div class="input-wrapper">
                                             <select
-                                            id="sub-category"
+                                                v-on:change="setCategoryId($event)"
+                                                :class="{'active' :  buyAd.category_id , 'error' :errors.category_id}"
+                                                id="sub-category"
                                             >
-                                            <option disabled selected>لطفا انتخاب کنید</option>
-                                    
+                                            <option disabled selected>انتخاب زیر دسته بندی</option>
+                                            <option
+                                                v-for="category in subCategoryList"
+                                                v-bind:value="category.id"
+                                                v-text="category.category_name"
+                                            ></option>
                                             </select>
                                         </div>
                                         <p class="error-message">
-                                            <!-- <span v-if="$parent.errors.category_id" v-text="$parent.errors.category_id"></span> -->
+                                            <span v-if="errors.category_id" v-text="errors.category_id"></span>
                                         </p>
                                     </div>
 
@@ -374,13 +386,15 @@ label .small-label {
 
                                         <div class="text-input-wrapper">
                                             <input
+                                            v-model="buyAd.name"
                                             id="product-type"
                                             type="text"
+                                            :class="{'active' :  buyAd.name , 'error':errors.name}"
                                             placeholder="مثلا : مضافتی "
                                             />
                                         </div>
                                         <p class="error-message">
-                                            <!-- <span v-if="$parent.errors.name" v-text="$parent.errors.name"></span> -->
+                                            <span v-if="errors.name" v-text="errors.name"></span>
                                         </p>
                                     </div>
 
@@ -392,15 +406,17 @@ label .small-label {
 
                                         <div class="text-input-wrapper">
                                             <input
-                                            id="max-sale-price"
-                                            type="tel"
-                                            placeholder="مثلا : 500000"
-                                            pattern="[0-9]*"
+                                                v-model="buyAd.requirement_amount"
+                                                id="max-sale-price"
+                                                type="tel"
+                                                :class="{'active' :  buyAd.requirement_amount , 'error': errors.requirement_amount}"
+                                                placeholder="مثلا : 500000"
+                                                pattern="[0-9]*"
                                             />
                                         </div>
 
                                         <p class="error-message">
-                                            <!-- <span v-if="$parent.errors.requirement_amount" v-text="$parent.errors.requirement_amount"></span> -->
+                                            <span v-if="errors.requirement_amount" v-text="errors.requirement_amount"></span>
                                         </p>
 
                                     </div>
@@ -411,7 +427,8 @@ label .small-label {
                                     <div class="row">
                                     <button
                                         class="submit-button disabled"
-                                 
+                                        :class="{'active' : buyAd.category_id && buyAd.requirement_amount}"
+                                        @click.prevent="formValidator"
                                     >
                                         ثبت درخواست
                                     </button>
@@ -454,6 +471,7 @@ label .small-label {
                     pack_type: '',
                     category_id: '',
                     rules: false,
+                    categorySelected:'',
                 },
                 buyAdFields: [
                     'name',
@@ -478,7 +496,7 @@ label .small-label {
                 ]
             };
         },
-       /* methods: {
+        methods: {
             init: function () {
                 axios.post('/user/profile_info')
                     .then(response => (this.currentUser = response.data));
@@ -505,8 +523,8 @@ label .small-label {
                     this.errors.category_id = "نام محصول الزامی است"
                 }
 
-                // this.nameValidator(this.buyAd.name);
-                //console.log(this.nameValidator(this.buyAd.name));
+                this.nameValidator(this.buyAd.name);
+            
                 this.requirementAmountValidator(this.buyAd.requirement_amount);
 
                 if (!this.errors.categorySelected && !this.errors.category_id && !this.errors.name && !this.errors.requirement_amount) {
@@ -517,43 +535,13 @@ label .small-label {
                 this.errors = '';
                 var self = this;
 
-                eventBus.$emit('submitingEvent', true);
-
                 let formData = this.getBuyAdFormFields();
 
-                axios.post('/user/add_buyAd', formData)
-                    .then(function (response) {
-                        if (response.status === 201) {
-                            self.disableSubmit = true;
-                            self.popUpMsg = 'درخواست شما با موفقیت ثبت شد';
+                this.buyAd.categorySelected = this.categorySelected;
 
-                            eventBus.$emit('submitSuccess', self.popUpMsg);
+                window.localStorage.setItem('buyAd',JSON.stringify(this.buyAd));
 
-                            // $('#custom-main-modal').modal('show');
-
-                            eventBus.$emit('submitingEvent', false);
-
-                            self.registerComponentStatistics('buyAd-register', 'buyAd-registered-successfully', 'buyAd-registered-successfully');
-
-                            if (response.data.products) {
-                                self.relatedProducts = response.data.products;
-                            }
-
-                            self.goToStep(2);
-
-                        }
-                        eventBus.$emit('submitingEvent', false);
-
-                    })
-                    .catch(function (err) {
-
-                        self.errors = err.response.data.errors;
-
-                        eventBus.$emit('submitingEvent', false);
-
-                        self.registerComponentExceptions('validation error in buyAd-request');
-
-                    });
+                window.location.href = '/buyer/register-request';
 
             },
             getBuyAdFormFields: function () {
@@ -603,10 +591,6 @@ label .small-label {
                     'fatal': fatal
                 });
             },
-            goToStep: function (step) {
-                this.currentStep = step;
-                this.scrollToTop();
-            },
             isOsIOS: function () {
                 var userAgent = window.navigator.userAgent.toLowerCase(),
                     safari = /safari/.test(userAgent),
@@ -640,51 +624,30 @@ label .small-label {
             validateRegx: function (input, regx) {
                 return regx.test(input);
             },
-            reLoadPage() {
-                location.reload(true);
-            },
-            openChat: function (product) {
-                this.registerComponentStatistics('productReplyAfterBuyAdRegister', 'openChat', 'click on open chatBox');
-                var self = this;
-
-                axios.post('/get_user_last_confirmed_profile_photo', {
-                    'user_id': product.myuser_id
-                }).then(function (response) {
-                    var profile_photo = response.data.profile_photo;
-
-                    var contact = {
-                        contact_id: product.myuser_id,
-                        first_name: product.first_name,
-                        last_name: product.last_name,
-                        profile_photo: profile_photo,
-                        user_name: product.user_name,
-                    };
-
-                    eventBus.$emit("ChatInfo",contact);
-                })
-                    .catch(function (err) {
-                        //
-                    });
-            },
-            getProductUrl: function () {
-
-                return '/product-view/خرید-عمده-'
-                    + this.relatedProduct.subcategory_name.replace(' ', '-')
-                    + '/'
-                    + this.relatedProduct.category_name.replace(' ', '-')
-                    + '/'
-                    + this.relatedProduct.id;
-
-            },
         },
         mounted() {
+            if (this.isOsIOS()) {
+                $('input[type="tel"]').attr("type", "text");
+            }
+
             this.init();
 
-            eventBus.$emit('subHeader', this.items);
+            // eventBus.$emit('subHeader', this.items);
         },
-        created() {
-            gtag('config', 'UA-129398000-1', {'page_path': '/register-request'});
-        }
-        */
+        watch: {
+            "categorySelected": function() {
+                this.errors.categorySelected = "";
+            },
+            "buyAd.category_id": function() {
+                this.errors.category_id = "";
+            },
+            "buyAd.requirement_amount": function() {
+                this.errors.requirement_amount = "";
+            },
+            "buyAd.name": function() {
+                this.errors.name = "";
+        },
+  }
+        
     }
 </script>

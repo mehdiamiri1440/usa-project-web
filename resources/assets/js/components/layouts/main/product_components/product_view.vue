@@ -263,7 +263,7 @@
                 </router-link>
             </div>
 
-           <main-register-request />  
+           <main-register-request v-if="showRegisterRequestBox"/>  
 
 
 
@@ -316,6 +316,7 @@
                 submiting: false,
                 isLoading: false,
                 isMyProfile: false,
+                showRegisterRequestBox:true,
             };
         },
         methods: {
@@ -324,6 +325,13 @@
                 var self = this;
                 axios.post("/user/profile_info").then(function (response) {
                     self.currentUser = response.data;
+
+                    if(self.currentUser.user_info){
+                        if(self.currentUser.user_info.is_seller == true){
+                            self.showRegisterRequestBox = false;
+                        }
+                    }
+
                     axios
                         .post("/get_product_by_id", {
                             product_id: self.$route.params.id

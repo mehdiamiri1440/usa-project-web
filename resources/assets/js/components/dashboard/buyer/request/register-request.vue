@@ -255,7 +255,7 @@
         },
         data: function () {
             return {
-                currentStep: 0,
+                currentStep: 1,
                 errors: {
                     categorySelected: '',
                     category_id: '',
@@ -275,6 +275,7 @@
                     pack_type: '',
                     category_id: '',
                     rules: false,
+                    categorySelected:'',
                 },
                 buyAdFields: [
                     'name',
@@ -312,10 +313,12 @@
                 var categoryId = $(e.target).val();
                 this.categorySelected = categoryId;
 
+                this.buyAd.categorySelected = categoryId;
+
                 axios.post('/get_category_list', {
                     parent_id: categoryId,
                 })
-                    .then(response => (this.subCategoryList = response.data.categories));
+                .then(response => (this.subCategoryList = response.data.categories));
 
             },
             formValidator: function () {
@@ -347,7 +350,9 @@
                         if (response.status === 201) {
                             self.disableSubmit = true;
                             self.popUpMsg = 'درخواست شما با موفقیت ثبت شد';
-
+                            
+                            window.localStorage.removeItem('buyAd');
+                            
                             eventBus.$emit('submitSuccess', self.popUpMsg);
 
                             // $('#custom-main-modal').modal('show');
