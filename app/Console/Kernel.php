@@ -57,7 +57,7 @@ class Kernel extends ConsoleKernel
         $send_sms_to_potential_sellers_for_upgrading_account_job = new SendUpgradeAccoutnSMSToSellers();
 
         $schedule->job($send_sms_to_potential_sellers_for_upgrading_account_job)
-                ->dailyAt('21:38');
+                ->dailyAt('9:30');
     }
 
     /**
