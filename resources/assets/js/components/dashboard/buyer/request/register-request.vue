@@ -350,7 +350,9 @@
                         if (response.status === 201) {
                             self.disableSubmit = true;
                             self.popUpMsg = 'درخواست شما با موفقیت ثبت شد';
-
+                            
+                            window.localStorage.removeItem('buyAd');
+                            
                             eventBus.$emit('submitSuccess', self.popUpMsg);
 
                             // $('#custom-main-modal').modal('show');
