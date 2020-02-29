@@ -881,21 +881,20 @@ a.profile-info-wrapper:hover {
                         @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
                 >پیام ها</router-link>
               </li>
-              <li v-if="user_id !== ''">
+               <li v-if="user_id !== ''">
                 <router-link
                   v-if="is_seller == 1"
                   class="smoothScroll"
-                  :to="{name : 'statusSeller'}"
+                  :to="{name : 'buyAdRequestsSeller'}"
                   @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
-                >داشبورد</router-link>
+                >درخواست های خرید</router-link>
                 <router-link
                   v-else
                   class="smoothScroll"
-                  :to="{name : 'profileBasicBuyer'}"
+                  :to="{name : 'registerRequestBuyer'}"
                   @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
-                >داشبورد</router-link>
-              </li>
-
+                >ثبت درخواست خرید</router-link>
+              </li> 
               <li>
                 <router-link
                   class="smoothScroll"
@@ -966,19 +965,19 @@ a.profile-info-wrapper:hover {
           </li>
 
           <li v-if="user_id !== ''">
-            <router-link
-              v-if="is_seller == 1"
-              class="smoothScroll"
-              :to="{name : 'statusSeller'}"
-              @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
-            >داشبورد</router-link>
-            <router-link
-              v-else
-              class="smoothScroll"
-              :to="{name : 'profileBasicBuyer'}"
-              @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
-            >داشبورد</router-link>
-          </li>
+                <router-link
+                  v-if="is_seller == 1"
+                  class="smoothScroll"
+                  :to="{name : 'buyAdRequestsSeller'}"
+                  @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
+                >درخواست های خرید</router-link>
+                <router-link
+                  v-else
+                  class="smoothScroll"
+                  :to="{name : 'registerRequestBuyer'}"
+                  @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
+                >ثبت درخواست خرید</router-link>
+              </li> 
 
           <li>
             <router-link
