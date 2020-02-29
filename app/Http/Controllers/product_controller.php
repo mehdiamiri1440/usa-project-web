@@ -414,7 +414,10 @@ class product_controller extends Controller
 
     protected function get_package_buyers_user_id_array()
     {
+        $user_id = session('user_is');
+
         $user_id_array = myuser::where('active_pakage_type', 3)
+                                    ->where('id','<>',$user_id)
                                     ->select('id')
                                     ->get()
                                     ->toArray();
@@ -948,6 +951,7 @@ class product_controller extends Controller
         $related_subcategory_buyAds = buyAd::where('category_id', $product->category_id)
                                             ->where('confirmed', true)
                                             ->whereBetween('created_at', [$from_date, $until_date])
+                                            ->where('myuser_id','<>',$product->myuser_id)
                                             ->orderBy('created_at', 'desc')
                                             ->get();
 

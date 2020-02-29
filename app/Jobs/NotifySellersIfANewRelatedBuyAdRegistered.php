@@ -54,6 +54,7 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
         $related_subcategory_products = product::where('category_id', $buyAd->category_id)
                                             ->where('confirmed', true)
                                             ->whereBetween('created_at', [$from_date, $until_date])
+                                            ->where('myuser_id','<>'.$buyAd->myuser_id)
                                             ->orderBy('created_at')
                                             ->get();
 
@@ -64,6 +65,7 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
         $premium_products = product::where('category_id',$buyAd->category_id)
                                             ->where('confirmed',true)
                                             ->whereIN('myuser_id',$premium_users_id)
+                                            ->where('myuser_id','<>',$buyAd->myuser_id)
                                             ->orderBy('created_at')
                                             ->get();
 
