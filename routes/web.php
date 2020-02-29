@@ -361,6 +361,11 @@ Route::group(['middleware' => [login::class]], function () {
         'uses' => 'user_controller@get_seller_dashboard_required_data',
         'as' => 'get_seller_dashboard_required_data',
     ]);
+
+    Route::get('/switch-role',[
+        'uses' => 'user_controller@switch_user_role',
+        'as' => 'swith_user_role'
+    ]);
 });
 
 Route::post('/send_phone_verification_code_for_password_reset', [

@@ -629,7 +629,8 @@ class buyAd_controller extends Controller
     {
         $query = DB::table('buy_ads')
                     ->join('myusers', 'buy_ads.myuser_id', '=', 'myusers.id')
-                    ->where('buy_ads.confirmed', true);
+                    ->where('buy_ads.confirmed', true)
+                    ->where('buy_ads.myuser_id','<>',$user->id);
         
         if($user->active_pakage_type == 0){
             $query = $query->where('buy_ads.created_at','<',Carbon::now()->subHours(2));
@@ -766,6 +767,7 @@ class buyAd_controller extends Controller
         $related_subcategory_products = product::where('category_id', $buyAd->category_id)
                                             ->where('confirmed', true)
                                             ->whereBetween('created_at', [$from_date, $until_date])
+                                            ->where('myuser_id','<>',$buyAd->myuser_id)
                                             ->select($this->related_products_fields)
                                             ->orderBy('created_at','desc')
                                             ->get();
