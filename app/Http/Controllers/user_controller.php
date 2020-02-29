@@ -355,4 +355,34 @@ class user_controller extends Controller
 
         return $confirmed_products_count;
     }
+
+    public function switch_user_role()
+    {
+        $user_id = session('user_id');
+
+        $user = myuser::find($user_id);
+        
+        if(session('is_seller') == true){
+            session([
+                'is_seller' => false,
+                'is_buyer' => true
+            ]);
+
+            $user->is_seller = false;
+            $user->is_buyer = true;
+        }
+        else if(session('is_buyer') == true){
+            session([
+                'is_buyer' => false,
+                'is_seller' => true
+            ]);
+
+            $user->is_buyer  = false;
+            $user->is_seller = true;
+        }
+
+        $user->save();
+
+        return redirect('/login');
+    }
 }

@@ -16,7 +16,7 @@ class buyAd_recommender_controller extends Controller
     {
         $registered_product_sub_category_array = $this->get_seller_registered_products_sub_category_array($seller_user_id);
         
-        $this->apply_registered_product_filter_to_buyAd_list($buyAd_list,$registered_product_sub_category_array);
+        $this->apply_registered_product_filter_to_buyAd_list($buyAd_list,$registered_product_sub_category_array,$seller_user_id);
         
         $buyAd_list = $buyAd_list->toArray();
         
@@ -38,7 +38,7 @@ class buyAd_recommender_controller extends Controller
     protected function get_seller_registered_products_sub_category_array($seller_user_id)
     {
         $category_array = product::where('myuser_id',$seller_user_id)
-                            ->where('confirmed',true)
+                            // ->where('confirmed',true)
                             ->select('category_id as sub_category_id') 
                             ->distinct()
                             ->get();

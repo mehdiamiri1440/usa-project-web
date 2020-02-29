@@ -117,9 +117,11 @@
         padding: 7px;
         width:initial;
     }
+
 </style>
 <template>
     <div>
+       
         <section v-if="isLoading">
             <div class="header-menu">
                 <ul class="list-unstyled">

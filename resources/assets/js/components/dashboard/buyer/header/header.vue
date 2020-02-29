@@ -476,6 +476,7 @@ span.min {
           :userprof="currentUser.user_info.user_name"
         />
 
+        <SwitchButtons mobile="1" />
         <HeaderMenuList />
       </section>
     </section>
@@ -511,6 +512,7 @@ span.min {
           :userprof="currentUser.user_info.user_name"
         />
 
+        <SwitchButtons />
         <HeaderMenuList />
       </section>
 
@@ -535,13 +537,15 @@ span.min {
 import ProfileInfo from "./sub-com/profile_info.vue";
 import HeaderMenuList from "./sub-com/header-menu-list.vue";
 import HeaderTop from "./sub-com/header-top.vue";
+import SwitchButtons from "./sub-com/swith-buttons.vue";
 import { eventBus } from "../../../../router/router";
 
 export default {
   components: {
     ProfileInfo,
     HeaderMenuList,
-    HeaderTop
+    HeaderTop,
+    SwitchButtons
   },
   props: [
    "defultimg",

@@ -63,7 +63,7 @@ class SendUpgradeAccoutnSMSToSellers implements ShouldQueue
     protected function get_non_free_sellers_user_id_list()
     {
         $user_ids = myuser::where('active_pakage_type','<>',0)
-                            ->where('is_seller',true)
+                            // ->where('is_seller',true)
                             ->select('id')
                             ->get();
 
