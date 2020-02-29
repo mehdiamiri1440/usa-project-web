@@ -256,9 +256,9 @@
                     <input
                     type="radio"
                     value="0"
-                    name="radio"
+                    name="myRadio"
                     :checked="'1'  == $parent.currentUser.user_info.is_seller"
-
+@click="switchRole()"
                     />
                     <span class="checkmark"></span>
                     <label>
@@ -296,9 +296,9 @@
                     <input
                     type="radio"
                     value="1"
-                    name="radio"
+                    name="myRadio"
                     :checked="'1'  == $parent.currentUser.user_info.is_buyer"
-
+                
                     />
 
                     <span class="checkmark"></span>
@@ -446,6 +446,9 @@
                         this.activeElement = null;
                     }
                 }
+            },
+            switchRole(){
+                window.location.href = '/switch-role';
             }
         },
         watch: {
