@@ -1050,7 +1050,7 @@
                             </a>
                         </div>
 
-                        <div v-if="profileOwner.user_info.is_seller === 1" class="col-xs-6"
+                        <div  class="col-xs-6"
                              :class="{'active':!profileDescription}">
                             <a @click="showProfileOwnerProducts($event)" href="#">
 
@@ -1065,7 +1065,7 @@
 
                     <div class="sub-header hidden-xs col-xs-12">
                         <ul class="list-inline">
-                            <li v-if="profileOwner.user_info.is_seller === 1" class="list-item"
+                            <li class="list-item"
                                 :class="{'active':!profileDescription}">
                                 <a @click="showProfileOwnerProducts($event)" href="">
                                     محصولات من
