@@ -1224,7 +1224,7 @@ class product_controller extends Controller
     public function get_category_tags_data_if_any(Request $request)
     {
          $this->validate($request,[
-             'category_name' => 'required|exists:categories,category_name'
+             'category_name' => 'required|string'
          ]);
 
          $category_name = $request->category_name;
@@ -1234,14 +1234,37 @@ class product_controller extends Controller
 
         if($category_record){
             $category_id = $category_record->id;
-        }
-        else{
+
+            $tags_info = $this->get_category_meta_data($category_id);
+
             return response()->json([
                 'status' => true,
-                'msg' => 'wrong category name given!'
-            ],404);
+                'category_info' => $tags_info
+            ]);
         }
+        else{
+            $tags_info = tag::where('header',$request->category_name)
+                                ->where('is_visible',true)
+                                ->get();
 
+            if($tags_info){
+                return response()->json([
+                    'status' => true,
+                    'category_info' => $tags_info
+                ]);
+            }
+            else{
+                return response()->json([
+                    'status' => true,
+                    'msg' => 'wrong category name given!'
+                ],404);
+            }
+
+        }  
+    }
+
+    protected function get_category_meta_data($category_id)
+    {
         $tags_info = tag::where('category_id',$category_id)
                             ->where('is_visible',true)
                             ->select([
@@ -1249,10 +1272,7 @@ class product_controller extends Controller
                                 'header',
                                 'content'
                             ])->get();
-                                
-        return response()->json([
-            'status' => true,
-            'category_info' => $tags_info
-        ]);
+
+        return $tags_info;
     }
 }
