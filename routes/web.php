@@ -366,6 +366,33 @@ Route::group(['middleware' => [login::class]], function () {
         'uses' => 'user_controller@switch_user_role',
         'as' => 'swith_user_role'
     ]);
+    Route::group(['prefix' => 'group'],function(){
+        Route::post('/subscribe_user',[
+            'uses' => 'group_message_controller@subscribe_user_in_group',
+            'as' => 'user_subscriber_in_group'
+        ]);
+
+        Route::post('/send_message',[
+            'uses' => 'group_message_controller@send_message',
+            'as' => 'send_message_to_group'
+        ]);
+
+        Route::post('/get_groups_list',[
+            'uses' => 'group_message_controller@get_user_groups_list',
+            'as' => 'get_user_subscribed_groups_list'
+        ]);
+
+        Route::post('/get_group_chats',[
+            'uses' => 'group_message_controller@get_group_chats',
+            'as' => 'get_group_chats'
+        ]);
+
+        Route::delete('/unsubscribe_user',[
+            'uses' => 'group_message_controller@unsubscribe_user_from_group',
+            'as' => 'unsubscribe_user_from_group'
+        ]);
+    });
+    
 });
 
 Route::post('/send_phone_verification_code_for_password_reset', [
