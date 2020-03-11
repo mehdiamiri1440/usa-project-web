@@ -964,7 +964,7 @@
 
             </aside>
 
-
+            <script v-if="jsonLDObject" v-html="jsonLDObject" type="application/ld+json"></script>
         </main>
 
         <footer class="category-footer container" v-if="categoryMetaData.length > 0">
@@ -1047,6 +1047,7 @@
                 loadMoreActive: false,
                 searchTextTimeout: null,
                 headerSearchText:'',
+                jsonLDObject:'',
             }
         },
         methods: {
@@ -1077,12 +1078,12 @@
                 var searchValue = this.searchValue;
                 var searchValueText = searchValue;
                 let categoryName = this.getCategoryName();
-//                this.productCountInPage = this.productCountInEachLoad;
 
                 axios.post('/get_category_meta_data',{
                     category_name : categoryName
                 }).then(function (response) {
-                    self.categoryMetaData = response.data.category_info
+                    self.categoryMetaData = response.data.category_info;
+                    self.jsonLDObject = response.data.schema_object;
 
                 });
                 axios.post('/user/profile_info')
@@ -1133,7 +1134,7 @@
                         search_text: this.getCategoryName()
                     }).then(function (response) {
                         self.products = self.products.concat(response.data.products);
-//                      localStorage.productCountInPage=JSON.stringify(self.productCountInPage) 
+
                         eventBus.$emit('submiting', false);
                         if (self.products.length + 1 < self.productCountInPage) {
                             self.continueToLoadProducts = false;
@@ -1166,23 +1167,6 @@
                     if (this.cityId) {
                         searchObject.city_id = this.cityId;
                     }
-                    // if (this.searchText) {
-                    //     this.$router.replace({
-                    //         name : 'productList',
-                    //         query :{
-                    //             s:this.searchText.replace(/ /g,'+')
-                    //         }
-                    //     });
-                    //     searchObject.search_text = this.searchText;
-                    // }
-
-                    // if (jQuery.isEmptyObject(searchObject)) {
-                    //     if (this.searchText == "") {
-                    //         this.$router.push({
-                    //             name: 'productList'
-                    //         });
-                    //     }
-                    // }
 
                     searchObject.search_text = this.getCategoryName();
 
@@ -1369,6 +1353,44 @@
                     }
                 }
             },
+            createJsonLDObject: function() {
+                var fullName =
+                    this.product.user_info.first_name +
+                    " " +
+                    this.product.user_info.last_name;
+
+                var productOwnerProfilePageUrl =
+                    "https://www.buskool.com/profile/" + this.product.user_info.user_name;
+
+                let jsonDL = {
+                    "@context": "https://schema.org/",
+                    "@type": "Product",
+                    name: this.product.main.product_name,
+                    image: this.product.photos.map(function(photo) {
+                    return "https://www.buskool.com/storage/" + photo.file_path;
+                    }),
+                    description: this.product.main.description,
+                    aggregateRating: {
+                    "@type": "AggregateRating",
+                    ratingValue: "4.4",
+                    reviewCount: "3"
+                    },
+                    offers: {
+                    "@type": "Offer",
+                    url: "https://www.buskool.com" + this.getProductUrl(),
+                    priceCurrency: "IRR",
+                    price: this.product.main.min_sale_price * 10,
+                    availability: "https://schema.org/InStock",
+                    seller: {
+                        "@type": "Person",
+                        name: fullName,
+                        url: productOwnerProfilePageUrl
+                    }
+                    }
+                };
+
+      return jsonDL;
+    },
         },
         watch: {
             '$route.params.categoryName': function (name) {
@@ -1448,7 +1470,7 @@
                 meta: [
                     {
                         name: 'description',
-                        content: 'خرید و فروش عمده و قیمت ' + categoryName + ' از بهترین تولیدکنندگان ایران - باسکول بازار آنلاین کشاورزی'
+                        content: 'خرید و فروش عمده ' + categoryName + ' به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان | آگاهی از آخرین قیمت ' + categoryName + ' عمده در بازار عمده باسکول ' 
                     },
                     {
                         name: 'author',
@@ -1456,7 +1478,7 @@
                     },
                     {
                         property: 'og:description',
-                        content: 'خرید و فروش عمده و قیمت ' + categoryName + ' از بهترین تولیدکنندگان ایران - باسکول بازار آنلاین کشاورزی ایران'
+                        content: 'خرید و فروش عمده ' + categoryName + ' به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان | آگاهی از آخرین قیمت ' + categoryName + ' عمده در بازار عمده باسکول ' 
                     },
                     {
                         property: 'og:site_name',

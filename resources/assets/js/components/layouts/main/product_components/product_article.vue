@@ -445,7 +445,7 @@ export default {
         }
       }
 
-      this.jsonLDObject = this.createJsonLDObject();
+      // this.jsonLDObject = this.createJsonLDObject();
     },
     toLatinNumbers: function(num) {
       if (num == null) {
