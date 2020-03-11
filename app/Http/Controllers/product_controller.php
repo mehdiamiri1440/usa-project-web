@@ -1231,26 +1231,52 @@ class product_controller extends Controller
 
          $category_record = category::where('category_name',$category_name)
                                         ->first();
+        $schema_object = '';
 
         if($category_record){
             $category_id = $category_record->id;
 
             $tags_info = $this->get_category_meta_data($category_id);
 
+            $tags_info->each(function($item) use(&$schema_object){
+                if(! is_null($item->schema_object)){
+                    if(!$schema_object){
+                        $schema_object = $item->schema_object;
+                    }
+                }
+                unset($item->schema_object);
+            });
+
             return response()->json([
                 'status' => true,
-                'category_info' => $tags_info
+                'category_info' => $tags_info,
+                'schema_object' => $schema_object
             ]);
         }
         else{
             $tags_info = tag::where('header',$request->category_name)
                                 ->where('is_visible',true)
-                                ->get();
+                                ->select([
+                                    'id',
+                                    'header',
+                                    'content',
+                                    'schema_object'
+                                ])->get();
+
+            if(sizeof($tags_info) > 0){
+                $temp = $tags_info->first();
+                $schema_object = $temp->schema_object;
+                
+                unset($temp->schema_object);
+            }
+                                
+            
 
             if($tags_info){
                 return response()->json([
                     'status' => true,
-                    'category_info' => $tags_info
+                    'category_info' => $tags_info,
+                    'schema_object' => $schema_object,
                 ]);
             }
             else{
@@ -1270,7 +1296,8 @@ class product_controller extends Controller
                             ->select([
                                 'id',
                                 'header',
-                                'content'
+                                'content',
+                                'schema_object'
                             ])->get();
 
         return $tags_info;
