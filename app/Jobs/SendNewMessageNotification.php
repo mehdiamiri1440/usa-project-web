@@ -50,6 +50,6 @@ class SendNewMessageNotification implements ShouldQueue
         
         $topic_name = 'FCM'.$msg->receiver_id;
         
-        $fcm_controller_object->send_notification_to_the_given_topic($data,$topic_name);
+        // $fcm_controller_object->send_notification_to_the_given_topic($data,$topic_name);
     }
 }

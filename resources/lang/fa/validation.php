@@ -122,6 +122,7 @@ return array(
         'postal_code' => 'کد پستی',
         'shaba_code' => 'شماره شبا',
         'verification_code' => 'کد',
-        'min_sale_amount' => 'حداقل سفارش'
+		'min_sale_amount' => 'حداقل سفارش',
+		'text' => 'متن',
     ),
 );
