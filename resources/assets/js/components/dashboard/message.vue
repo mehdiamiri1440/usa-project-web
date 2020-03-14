@@ -1118,6 +1118,7 @@ export default {
       ],
       isSearchingContact: false,
       contactList: [],
+      groupList: [],
       chatMessages: "",
       selectedContact: "",
       currentUserId: "",
@@ -1131,6 +1132,7 @@ export default {
   methods: {
     init: function() {
       this.loadContactList();
+      this.loadGroupList();
     },
     loadImage: function() {
       this.isImageLoad = false;
@@ -1150,6 +1152,18 @@ export default {
           self.currentUserId = response.data.user_id;
 
           self.isContactListLoaded = true;
+        })
+        .catch(function(e) {
+          //
+        });
+    },
+    loadGroupList: function() {
+      var self = this;
+      axios
+        .post("/get_groups_list")
+        .then(function(response) {
+          self.groupList = response.data;
+          console.log(self.groupList);
         })
         .catch(function(e) {
           //
