@@ -144,140 +144,6 @@
   padding-right: 4px;
 }
 
-.contact-body .contact-search {
-  padding: 9px 7px;
-
-  background: #eef3f3;
-}
-
-.contact-body .contact-search .contact-search-input-wrapper {
-  position: relative;
-}
-
-.contact-body .contact-search .contact-search-input-wrapper i {
-  position: absolute;
-
-  left: 12px;
-
-  font-size: 20px;
-
-  color: #c1c1c1;
-
-  top: 8px;
-}
-
-.contact-body .contact-search .contact-search-input-wrapper input {
-  padding: 9px 15px;
-  border-radius: 50px;
-  background: #fff;
-  border: none;
-}
-
-.contact-body .contact-image {
-  width: 45px;
-  height: 45px;
-  float: right;
-  border-radius: 50px;
-  overflow: hidden;
-  border: 1px solid #f2f2f2;
-  position: relative;
-}
-
-.contact-body .contact-image img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  height: 100%;
-  width: initial;
-  transform: translate(-50%, -50%);
-}
-
-.contact-body .contact-item a {
-  font-size: 13px;
-  color: #595959;
-  overflow: hidden;
-  padding: 9px 7px;
-  border-bottom: 1px solid #b6b6b6;
-  display: block;
-  transition: 200ms;
-}
-
-.contact-body .contact-item a:hover,
-.contact-body .contact-item a.active {
-  background: #f6f6f6;
-  transition: 200ms;
-}
-
-.contact-body .contact-item:last-of-type a {
-  border-bottom: none;
-}
-
-.contact-body .contact-item span.contact-name {
-  float: right;
-
-  padding-right: 15px;
-  padding-top: 6px;
-  font-weight: bold;
-}
-
-.contact-body .contact-item span.contact-last-message {
-  float: right;
-
-  padding-right: 15px;
-  width: calc(100% - 95px);
-  padding-top: 10px;
-
-  font-weight: lighter;
-  font-size: 12px;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.contact-body .contact-item .contact-date {
-  float: left;
-  padding-top: 5px;
-  width: 50px;
-  direction: ltr;
-  text-align: center;
-}
-
-.contact-body .contact-item .my-contact-date {
-  float: left;
-  padding-top: 3px;
-  width: 50px;
-  direction: ltr;
-  text-align: left;
-}
-
-.last-message-date {
-  display: inline-block;
-  height: 17px;
-
-  width: 100px;
-
-  font-size: 10px;
-  line-height: 2;
-}
-
-.count-number {
-  display: inline-block;
-
-  height: 17px;
-
-  width: 17px;
-
-  background: #00c569;
-
-  color: #fff;
-
-  border-radius: 50px;
-  font-size: 10px;
-  line-height: 2;
-  margin: 5px auto;
-}
-
 .contact-wrapper,
 .contact-wrapper > div {
   height: 100%;
@@ -554,10 +420,6 @@
   z-index: 1;
 }
 
-.contact-body .contact-item span.contact-name {
-  padding-top: 16px;
-}
-
 .contact-item .green-button {
   margin-top: 8px;
   float: left;
@@ -697,21 +559,33 @@
 
         <div class="contacts-switch-buttons-wrapper">
           <div class="switch-button-item">
-            <button class="contact-button active">
+            <button
+              class="contact-button"
+              :class="{ 'active' : isCurrentStep == 0 }"
+              @click.prevent="isCurrentStep = 0"
+            >
               <i class="fa fa-user"></i>
               مخاطبین من
             </button>
           </div>
 
           <div class="switch-button-item">
-            <button class="contact-button">
+            <button
+              class="contact-button"
+              :class="{ 'active' : isCurrentStep == 1 }"
+              @click.prevent="isCurrentStep = 1"
+            >
               <i class="fa fa-users"></i>
               گروه های من
             </button>
           </div>
 
           <div class="switch-button-item hidden-lg hidden-md hidden-sm">
-            <button class="contact-button">
+            <button
+              class="contact-button"
+              :class="{ 'active' : isCurrentStep == 3 }"
+              @click.prevent="isCurrentStep = 3"
+            >
               <i class="fa fa-plus"></i>
               <i class="fa fa-users"></i>
               افزودن گروه
@@ -719,229 +593,9 @@
           </div>
         </div>
 
-        <div class="contact-body my-contacts hidden">
-          <div class="contact-search">
-            <form action>
-              <div class="contact-search-input-wrapper">
-                <input type="text" placeholder="جستجوی مخاطبین" v-model="contactNameSearchText" />
-
-                <i class="fa fa-search"></i>
-              </div>
-            </form>
-          </div>
-          <div v-if="contactList.length === 0" class="loading-container">
-            <div class="image-wrapper" v-if="!contactNameSearchText && !isContactListLoaded">
-              <a v-show="isImageLoad">
-                <transition>
-                  <img src @load="ImageLoaded" alt="alt" />
-                </transition>
-              </a>
-
-              <div v-show="!isImageLoad" class="lds-ring">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-              <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
-            </div>
-
-            <div v-else-if="contactNameSearchText && !isSearchingContact">
-              <p>
-                <i class="fa fa-user"></i>
-                <span>مخاطب یافت نشد</span>
-              </p>
-            </div>
-
-            <div v-else-if="isSearchingContact" class="contact-is-search">
-              <img :src="loading_img" />
-            </div>
-            <div v-else-if="isContactListLoaded">
-              <p>
-                <i class="fa fa-user"></i>
-                <span>مخاطب یافت نشد</span>
-              </p>
-            </div>
-          </div>
-
-          <div v-else class="contact-items">
-            <ul>
-              <li class="contact-item" v-for="(contact, index) in contactList" :key="index">
-                <a href="#" @click.prevent="loadChatHistory(contact, index)">
-                  <div class="contact-image">
-                    <img
-                      v-if="contact.profile_photo"
-                      :src="str + '/' + contact.profile_photo"
-                      :alt="contact.first_name[0]"
-                    />
-
-                    <img v-else :src="defultimg" />
-                  </div>
-                  <span class="contact-name" v-text="contact.first_name + ' ' + contact.last_name"></span>
-                  <div class="my-contact-date">
-                    <p
-                      class="last-message-date"
-                    >{{ contact.last_msg_time_date | moment("jYY/jMM/jDD") }}</p>
-                  </div>
-                  <span class="contact-last-message" v-text="contact.last_msg.last_msg_text"></span>
-                  <div class="contact-date">
-                    <p
-                      class="count-number"
-                      v-if="contact.unread_msgs_count !== 0"
-                      v-text="contact.unread_msgs_count"
-                    ></p>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="contact-body my-groups hidden">
-          <div class="contact-search">
-            <form action>
-              <div class="contact-search-input-wrapper">
-                <input type="text" placeholder="جستجوی گروه" v-model="contactNameSearchText" />
-
-                <i class="fa fa-search"></i>
-              </div>
-            </form>
-          </div>
-          <div v-if="contactList.length === 0" class="loading-container">
-            <div class="image-wrapper" v-if="!contactNameSearchText && !isContactListLoaded">
-              <a v-show="isImageLoad">
-                <transition>
-                  <img src @load="ImageLoaded" alt="alt" />
-                </transition>
-              </a>
-
-              <div v-show="!isImageLoad" class="lds-ring">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-              <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
-            </div>
-
-            <div v-else-if="contactNameSearchText && !isSearchingContact">
-              <p>
-                <i class="fa fa-user"></i>
-                <span>گروهی یافت نشد</span>
-              </p>
-            </div>
-
-            <div v-else-if="isSearchingContact" class="contact-is-search">
-              <img :src="loading_img" />
-            </div>
-            <div v-else-if="isContactListLoaded">
-              <p>
-                <i class="fa fa-user"></i>
-                <span>گروهی یافت نشد</span>
-              </p>
-            </div>
-          </div>
-
-          <div v-else class="contact-items">
-            <ul>
-              <li class="contact-item" v-for="(contact, index) in contactList" :key="index">
-                <a href="#" @click.prevent="loadChatHistory(contact, index)">
-                  <div class="contact-image">
-                    <img
-                      v-if="contact.profile_photo"
-                      :src="str + '/' + contact.profile_photo"
-                      :alt="contact.first_name[0]"
-                    />
-
-                    <img v-else :src="defultimg" />
-                  </div>
-                  <span class="contact-name" v-text="contact.first_name + ' ' + contact.last_name"></span>
-                  <div class="my-contact-date">
-                    <p
-                      class="last-message-date"
-                    >{{ contact.last_msg_time_date | moment("jYY/jMM/jDD") }}</p>
-                  </div>
-                  <div class="contact-date">
-                    <p
-                      class="count-number"
-                      v-if="contact.unread_msgs_count !== 0"
-                      v-text="contact.unread_msgs_count"
-                    ></p>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="contact-body add-new-group">
-          <!-- <div class="contact-search">
-            <form action>
-              <div class="contact-search-input-wrapper">
-                <input type="text" placeholder="جستجوی گروه" v-model="contactNameSearchText" />
-
-                <i class="fa fa-search"></i>
-              </div>
-            </form>
-          </div>-->
-          <div v-if="contactList.length === 0" class="loading-container">
-            <div class="image-wrapper" v-if="!contactNameSearchText && !isContactListLoaded">
-              <a v-show="isImageLoad">
-                <transition>
-                  <img src @load="ImageLoaded" alt="alt" />
-                </transition>
-              </a>
-
-              <div v-show="!isImageLoad" class="lds-ring">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-              <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
-            </div>
-
-            <!-- <div v-else-if="contactNameSearchText && !isSearchingContact">
-              <p>
-                <i class="fa fa-user"></i>
-                <span>گروهی یافت نشد</span>
-              </p>
-            </div>
-
-            <div v-else-if="isSearchingContact" class="contact-is-search">
-              <img :src="loading_img" />
-            </div>
-            <div v-else-if="isContactListLoaded">
-              <p>
-                <i class="fa fa-user"></i>
-                <span>گروهی یافت نشد</span>
-              </p>
-            </div>-->
-          </div>
-
-          <div v-else class="contact-items">
-            <ul>
-              <li class="contact-item" v-for="(contact, index) in contactList" :key="index">
-                <a href="#" @click.prevent="loadChatHistory(contact, index)">
-                  <div class="contact-image">
-                    <img
-                      v-if="contact.profile_photo"
-                      :src="str + '/' + contact.profile_photo"
-                      :alt="contact.first_name[0]"
-                    />
-
-                    <img v-else :src="defultimg" />
-                  </div>
-                  <span class="contact-name" v-text="contact.first_name + ' ' + contact.last_name"></span>
-                  <button class="green-button">
-                    عضویت در گروه
-                    <i class="fa fa-arrow-left"></i>
-                  </button>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <my-contact-list v-if="isCurrentStep == 0" />
+        <my-group-list v-else-if="isCurrentStep == 1" />
+        <group-list v-else-if="isCurrentStep == 2" />
       </div>
     </div>
 
@@ -1102,8 +756,17 @@
 import { eventBus } from "../../router/router";
 import Push from "push.js";
 
+import myContactList from "./message-components/myContactList";
+import myGroupList from "./message-components/myGroupList";
+import groupList from "./message-components/groupList";
+
 export default {
   props: ["defultimg", "str", "loading_img"],
+  components: {
+    myContactList,
+    myGroupList,
+    groupList
+  },
   data: function() {
     return {
       isImageLoad: false,
@@ -1126,7 +789,8 @@ export default {
       msgToSend: "",
       isComponentActive: false,
       contactNameSearchText: "",
-      isContactListLoaded: false
+      isContactListLoaded: false,
+      isCurrentStep: 0
     };
   },
   methods: {
@@ -1159,15 +823,15 @@ export default {
     },
     loadGroupList: function() {
       var self = this;
-      axios
-        .post("/get_groups_list")
-        .then(function(response) {
-          self.groupList = response.data;
-          console.log(self.groupList);
-        })
-        .catch(function(e) {
-          //
-        });
+      // axios
+      //   .post("/get_groups_list")
+      //   .then(function(response) {
+      //     self.groupList = response.data;
+      //     console.log(self.groupList);
+      //   })
+      //   .catch(function(e) {
+      //     //
+      //   });
     },
     loadChatHistory: function(contact, index) {
       var self = this;
