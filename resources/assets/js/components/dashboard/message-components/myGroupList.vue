@@ -128,17 +128,14 @@
     <div class="contact-search">
       <form action>
         <div class="contact-search-input-wrapper">
-          <input type="text" placeholder="جستجوی گروه" v-model="$parent.contactNameSearchText" />
+          <input type="text" placeholder="جستجوی گروه" v-model="$parent.groupNameSearchText" />
 
           <i class="fa fa-search"></i>
         </div>
       </form>
     </div>
-    <div v-if="$parent.contactList.length === 0" class="loading-container">
-      <div
-        class="image-wrapper"
-        v-if="!$parent.contactNameSearchText && !$parent.isContactListLoaded"
-      >
+    <div v-if="$parent.groupList.length === 0" class="loading-container">
+      <div class="image-wrapper" v-if="!$parent.groupNameSearchText && !$parent.isSearchingGroup">
         <a v-show="$parent.isImageLoad">
           <transition>
             <img src @load="$parent.ImageLoaded" alt="alt" />
@@ -154,17 +151,17 @@
         <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
       </div>
 
-      <div v-else-if="$parent.contactNameSearchText && !$parent.isSearchingContact">
+      <div v-else-if="$parent.groupNameSearchText && !$parent.isSearchingGroup">
         <p>
           <i class="fa fa-user"></i>
           <span>گروهی یافت نشد</span>
         </p>
       </div>
 
-      <div v-else-if="$parent.isSearchingContact" class="contact-is-search">
+      <div v-else-if="$parent.isSearchingGroup " class="contact-is-search">
         <img :src="$parent.loading_img" />
       </div>
-      <div v-else-if="$parent.isContactListLoaded">
+      <div v-else-if="$parent.isSearchingGroup">
         <p>
           <i class="fa fa-user"></i>
           <span>گروهی یافت نشد</span>
@@ -174,26 +171,22 @@
 
     <div v-else class="contact-items">
       <ul>
-        <li class="contact-item" v-for="(contact, index) in $parent.contactList" :key="index">
-          <a href="#" @click.prevent="loadChatHistory(contact, index)">
+        <li class="contact-item" v-for="(group, index) in $parent.groupList" :key="index">
+          <a href="#" @click.prevent="$parent.loadGroupChatHistory(group, index)">
             <div class="contact-image">
-              <img
-                v-if="contact.profile_photo"
-                :src="$parent.str + '/' + contact.profile_photo"
-                :alt="contact.first_name[0]"
-              />
+              <img v-if="group.photo" :src="$parent.str + '/' + group.photo" :alt="group.name" />
 
-              <img v-else :src="$parent.defultimg" />
+              <img v-else :src="$parent.assets + 'assets/img/group-category.jpg'" />
             </div>
-            <span class="contact-name" v-text="contact.first_name + ' ' + contact.last_name"></span>
-            <div class="my-contact-date">
-              <p class="last-message-date">{{ contact.last_msg_time_date | moment("jYY/jMM/jDD") }}</p>
-            </div>
+            <span class="contact-name" v-text="group.name"></span>
+            <!-- <div class="my-contact-date">
+              <p class="last-message-date">{{ group.last_msg_time_date | moment("jYY/jMM/jDD") }}</p>
+            </div>-->
             <div class="contact-date">
               <p
                 class="count-number"
-                v-if="contact.unread_msgs_count !== 0"
-                v-text="contact.unread_msgs_count"
+                v-if="group.unread_messages !== 0"
+                v-text="group.unread_msgs_count"
               ></p>
             </div>
           </a>

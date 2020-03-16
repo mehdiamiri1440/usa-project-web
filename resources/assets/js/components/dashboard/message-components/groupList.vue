@@ -174,8 +174,57 @@
 
     <div v-else class="contact-items">
       <ul>
-        <li class="contact-item" v-for="(contact, index) in $parent.contactList" :key="index">
-          <a href="#" @click.prevent="loadChatHistory(contact, index)">
+        <li class="contact-item">
+          <a href="#">
+            <div class="contact-image">
+              <img :src="$parent.assets + 'assets/img/group-category.jpg'" />
+            </div>
+            <span class="contact-name" v-text="'پیاز'"></span>
+            <button class="green-button" @click="$parent.subscribeUser(1)">
+              عضویت در گروه
+              <i class="fa fa-arrow-left"></i>
+            </button>
+          </a>
+        </li>
+        <li class="contact-item">
+          <a href="#">
+            <div class="contact-image">
+              <img :src="$parent.assets + 'assets/img/group-category.jpg'" />
+            </div>
+            <span class="contact-name" v-text="'گوجه'"></span>
+            <button class="green-button" @click="$parent.subscribeUser(2)">
+              عضویت در گروه
+              <i class="fa fa-arrow-left"></i>
+            </button>
+          </a>
+        </li>
+        <li class="contact-item">
+          <a href="#">
+            <div class="contact-image">
+              <img :src="$parent.assets + 'assets/img/group-category.jpg'" />
+            </div>
+            <span class="contact-name" v-text="'خیار'"></span>
+            <button class="green-button">
+              عضویت در گروه
+              <i class="fa fa-arrow-left"></i>
+            </button>
+          </a>
+        </li>
+        <li class="contact-item">
+          <a href="#">
+            <div class="contact-image">
+              <img :src="$parent.assets + 'assets/img/group-category.jpg'" />
+            </div>
+            <span class="contact-name" v-text="'پیاز'"></span>
+            <button class="green-button">
+              عضویت در گروه
+              <i class="fa fa-arrow-left"></i>
+            </button>
+          </a>
+        </li>
+
+        <!-- <li class="contact-item" v-for="(contact, index) in $parent.contactList" :key="index">
+          <a href="#" @click.prevent="$parent.loadChatHistory(contact, index)">
             <div class="contact-image">
               <img
                 v-if="contact.profile_photo"
@@ -183,7 +232,7 @@
                 :alt="contact.first_name[0]"
               />
 
-              <img v-else :src="$parent.defultimg" />
+              <img v-else :src="$parent.assets + 'assets/img/group-category.jpg'" />
             </div>
             <span class="contact-name" v-text="contact.first_name + ' ' + contact.last_name"></span>
             <button class="green-button">
@@ -191,7 +240,7 @@
               <i class="fa fa-arrow-left"></i>
             </button>
           </a>
-        </li>
+        </li>-->
       </ul>
     </div>
   </div>

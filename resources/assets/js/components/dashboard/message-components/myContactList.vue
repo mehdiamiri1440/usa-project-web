@@ -129,7 +129,6 @@
       <form action>
         <div class="contact-search-input-wrapper">
           <input type="text" placeholder="جستجوی مخاطبین" v-model="$parent.contactNameSearchText" />
-
           <i class="fa fa-search"></i>
         </div>
       </form>
@@ -154,14 +153,14 @@
         <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
       </div>
 
-      <div v-else-if="$parent.contactNameSearchText && !i$parent.sSearchingContact">
+      <div v-else-if="$parent.contactNameSearchText && !$parent.isSearchingContact">
         <p>
           <i class="fa fa-user"></i>
           <span>مخاطب یافت نشد</span>
         </p>
       </div>
 
-      <div v-else-if="i$parent.sSearchingContact" class="contact-is-search">
+      <div v-else-if="$parent.isSearchingContact" class="contact-is-search">
         <img :src="$parent.loading_img" />
       </div>
       <div v-else-if="$parent.isContactListLoaded">
@@ -175,7 +174,7 @@
     <div v-else class="contact-items">
       <ul>
         <li class="contact-item" v-for="(contact, index) in $parent.contactList" :key="index">
-          <a href="#" @click.prevent="loadChatHistory(contact, index)">
+          <a href="#" @click.prevent="$parent.loadChatHistory(contact, index)">
             <div class="contact-image">
               <img
                 v-if="contact.profile_photo"
