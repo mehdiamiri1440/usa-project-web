@@ -339,6 +339,17 @@ class group_message_controller extends Controller
 
     }
 
+    public function get_all_groups()
+    {
+        $groups = messenger_group::select('id','name','photo')
+                            ->get();
+
+        return response()->json([
+            'status' => true,
+            'all_groups' => $groups
+        ],200);
+    }
+
     protected function validate_rules($request,$rules)
     {
         $this->validate($request,$rules);
