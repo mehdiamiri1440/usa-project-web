@@ -235,7 +235,7 @@ class group_message_controller extends Controller
                             ->join('myusers','myusers.id','=','group_messages.sender_id')
                             ->where('messenger_group_subscribers.group_id',$group_id)
                             ->where('messenger_group_subscribers.myuser_id',$user_id)
-                            ->select('group_messages.id','group_messages.created_at','group_messages.text','group_messages.parent_id','group_messages.is_link','myusers.first_name','myusers.last_name','myusers.user_name','myusers.active_pakage_type')
+                            ->select('group_messages.id','group_messages.created_at','group_messages.text','group_messages.parent_id','group_messages.is_link','myusers.first_name','myusers.last_name','myusers.user_name','myusers.active_pakage_type','myusers.id as user_id')
                             ->orderBy('group_messages.created_at')
                             ->take($msg_count)
                             ->get();
@@ -337,6 +337,17 @@ class group_message_controller extends Controller
 
         DB::table('group_message_receivers')->insert($result);
 
+    }
+
+    public function get_all_groups()
+    {
+        $groups = messenger_group::select('id','name','photo')
+                            ->get();
+
+        return response()->json([
+            'status' => true,
+            'all_groups' => $groups
+        ],200);
     }
 
     protected function validate_rules($request,$rules)

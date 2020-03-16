@@ -387,6 +387,11 @@ Route::group(['middleware' => [login::class]], function () {
             'as' => 'get_group_chats'
         ]);
 
+        Route::post('/get_all_groups',[
+            'uses' => 'group_message_controller@get_all_groups',
+            'as' => 'get_all_groups'
+        ]);
+
         Route::delete('/unsubscribe_user',[
             'uses' => 'group_message_controller@unsubscribe_user_from_group',
             'as' => 'unsubscribe_user_from_group'
