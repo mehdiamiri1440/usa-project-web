@@ -237,8 +237,9 @@ class group_message_controller extends Controller
                             ->where('messenger_group_subscribers.myuser_id',$user_id)
                             ->select('group_messages.id','group_messages.created_at','group_messages.text','group_messages.parent_id','group_messages.is_link','myusers.first_name','myusers.last_name','myusers.user_name','myusers.active_pakage_type','myusers.id as user_id')
                             ->orderBy('group_messages.created_at')
-                            ->take($msg_count)
                             ->get();
+
+        $messages = $messages->take($msg_count * -1)->all();
         
         return response()->json([
             'status' => true,
