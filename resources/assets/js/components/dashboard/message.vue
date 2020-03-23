@@ -754,7 +754,7 @@
     <!-- #rigex group message wrapper -->
 
     <div
-      class="col-xs-12 message-wrapper col-sm-8 col-md-9"
+      class="col-xs-12 message-wrapper group-messages col-sm-8 col-md-9"
       v-bind:class="{ hidden_element: !selectedGroup }"
       v-if="selectedGroup"
     >
@@ -992,13 +992,15 @@ export default {
       assets: this.$parent.assets,
       groupList: [],
       isGroupChatMessagesLoaded: true,
-      groupChatMessages: "",
+      groupChatMessages: [],
       selectedGroup: "",
       isSearchingGroup: false,
       groupNameSearchText: "",
       popUpMsg: "",
       isChatLoadeMore: false,
-      groupMessageCount: 50
+      groupMessageCount: 50,
+      groupMessageLoading: false,
+      lastGroupMessage: false
     };
   },
 
@@ -1015,7 +1017,6 @@ export default {
     },
     loadContactList: function() {
       var self = this;
-
       this.isContactListLoaded = false;
 
       axios
@@ -1079,6 +1080,9 @@ export default {
     loadGroupChatHistory: function(group, index) {
       var self = this;
 
+      this.groupMessageCount = 50;
+      this.lastGroupMessage = false;
+      this.groupMessageLoading = false;
       self.handleBackBtnClickOnDevices();
       self.isChatLoadeMore = false;
       self.isGroupChatMessagesLoaded = true;
@@ -1086,6 +1090,7 @@ export default {
       self.selectedIndex = index;
       self.selectedContact = "";
       self.selectedGroup = group;
+      this.isChatMessagesLoaded = true;
 
       axios
         .post("/group/get_group_chats", {
@@ -1095,6 +1100,7 @@ export default {
         .then(function(response) {
           self.groupChatMessages = response.data.messages;
           self.isGroupChatMessagesLoaded = false;
+
           self.scrollToEnd(0);
         })
         .catch(function(e) {
@@ -1280,7 +1286,7 @@ export default {
     },
     checkMessageName: function(index, prevIndex) {
       var isMessageName = false;
-      if (this.groupChatMessages && prevIndex >= 0) {
+      if (this.groupChatMessages[prevIndex] && prevIndex >= 0) {
         if (
           this.groupChatMessages[index].user_id !=
           this.groupChatMessages[prevIndex].user_id
@@ -1302,37 +1308,61 @@ export default {
       this.groupNameSearchText = "";
       this.init();
     },
-    messageAutoLoader: function() {
+    groupMessageAutoLoader: function() {
       var self = this;
-      $(".message-wrapper ul").scroll(function() {
+      $(".message-wrapper.group-messages ul").scroll(function() {
         var scroll = $(this).scrollTop();
-        console.log(scroll);
-        if (scroll <= 1000) {
-          console.log("true");
+
+        if (
+          scroll <= 1000 &&
+          !self.groupMessageLoading &&
+          !self.lastGroupMessage
+        ) {
           self.isChatLoadeMore = true;
           self.loadMoreGroupMessage();
         }
       });
     },
+
     loadMoreGroupMessage: function() {
-      console.log("load more is run");
       var self = this;
-      self.groupMessageCount = self.groupMessageCount + 50;
+      self.groupMessageLoading = true;
+      if (self.groupMessageCount < 2000) {
+        self.groupMessageCount = self.groupMessageCount + 50;
+      }
       axios
         .post("/group/get_group_chats", {
           group_id: self.selectedGroup.id,
           message_count: self.groupMessageCount
         })
         .then(function(response) {
-          self.groupChatMessages = response.data.messages;
+          var currentDataSize = Object.keys(self.groupChatMessages).length;
+          var newDataSize = Object.keys(response.data.messages).length;
+          if (currentDataSize == newDataSize) {
+            self.groupMessageCount - 50;
+            self.lastGroupMessage = true;
+          } else {
+            self.groupChatMessages = response.data.messages;
+            self.lastGroupMessage = false;
+          }
           self.isGroupChatMessagesLoaded = false;
-          self.groupMessageCount = self.groupMessageCount + 50;
+          self.groupMessageLoading = false;
+          self.isChatLoadeMore = false;
 
           // self.scrollToEnd(0);
         })
         .catch(function(e) {
           //
         });
+    },
+    loadChatHistoryReset: function() {
+      self.isChatLoadeMore = false;
+      self.selectedIndex = "";
+      self.selectedGroup = "";
+      self.chatMessages = "";
+      self.currentUserId = "";
+      this.selectedContact = "";
+      this.currentContactUserId = "";
     }
   },
   watch: {
@@ -1393,9 +1423,9 @@ export default {
         self.loadGroupList();
       }
     },
-    isChatMessagesLoaded: function(event) {
+    isGroupChatMessagesLoaded: function(event) {
       if (event == false) {
-        this.messageAutoLoader();
+        this.groupMessageAutoLoader();
       }
     }
   },
