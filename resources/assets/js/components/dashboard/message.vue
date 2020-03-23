@@ -797,7 +797,7 @@
             ]"
           >
             <li
-              v-for="(msg, index) in groupChatMessages"
+              v-for="(msg, index) in groupChatMessages "
               :class="{ 'margin-top-10': checkMessageName(index, index - 1) }"
               :key="msg.id"
               v-if="msg.id"
@@ -997,9 +997,11 @@ export default {
       isSearchingGroup: false,
       groupNameSearchText: "",
       popUpMsg: "",
-      isChatLoadeMore: false
+      isChatLoadeMore: false,
+      groupMessageCount: 50
     };
   },
+
   methods: {
     init: function() {
       this.loadContactList();
@@ -1084,10 +1086,11 @@ export default {
       self.selectedIndex = index;
       self.selectedContact = "";
       self.selectedGroup = group;
+
       axios
         .post("/group/get_group_chats", {
           group_id: group.id,
-          message_count: 50
+          message_count: self.groupMessageCount
         })
         .then(function(response) {
           self.groupChatMessages = response.data.messages;
@@ -1311,7 +1314,26 @@ export default {
         }
       });
     },
-    loadMoreGroupMessage: function() {}
+    loadMoreGroupMessage: function() {
+      console.log("load more is run");
+      var self = this;
+      self.groupMessageCount = self.groupMessageCount + 50;
+      axios
+        .post("/group/get_group_chats", {
+          group_id: self.selectedGroup.id,
+          message_count: self.groupMessageCount
+        })
+        .then(function(response) {
+          self.groupChatMessages = response.data.messages;
+          self.isGroupChatMessagesLoaded = false;
+          self.groupMessageCount = self.groupMessageCount + 50;
+
+          // self.scrollToEnd(0);
+        })
+        .catch(function(e) {
+          //
+        });
+    }
   },
   watch: {
     contactNameSearchText: function() {
@@ -1377,7 +1399,6 @@ export default {
       }
     }
   },
-
   mounted: function() {
     this.init();
     eventBus.$emit("subHeader", this.items);
