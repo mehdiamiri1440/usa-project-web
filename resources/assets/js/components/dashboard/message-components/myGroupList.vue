@@ -1,5 +1,4 @@
-
-<style  scoped>
+<style scoped>
 .contact-body .contact-search {
   padding: 9px 7px;
   background: #eef3f3;
@@ -121,6 +120,29 @@
 .contact-body .contact-item span.contact-name {
   padding-top: 16px;
 }
+
+.not-found-item {
+  text-align: center;
+  padding: 40px 15px;
+}
+.not-found-item p {
+  font-size: 16px;
+  font-weight: bold;
+  color: #777;
+}
+.not-found-item i {
+  margin: 5px;
+}
+
+li.add-group-button-wrapper {
+  padding: 10px 5px;
+}
+
+.add-group-button.green-button {
+  width: 100%;
+  margin: 0;
+  padding: 7px 5px;
+}
 </style>
 
 <template>
@@ -128,21 +150,36 @@
     <div class="contact-search">
       <form action>
         <div class="contact-search-input-wrapper">
-          <input type="text" placeholder="جستجوی گروه" v-model="$parent.groupNameSearchText" />
+          <input
+            type="text"
+            placeholder="جستجوی گروه"
+            v-model="$parent.groupNameSearchText"
+          />
 
           <i class="fa fa-search"></i>
         </div>
       </form>
     </div>
-    <div v-if="$parent.groupList.length === 0" class="loading-container">
-      <div class="image-wrapper" v-if="!$parent.groupNameSearchText && !$parent.isSearchingGroup">
-        <a v-show="$parent.isImageLoad">
-          <transition>
-            <img src @load="$parent.ImageLoaded" alt="alt" />
-          </transition>
-        </a>
 
-        <div v-show="!$parent.isImageLoad" class="lds-ring">
+    <div
+      v-if="$parent.groupList.length === 0 && $parent.allGroupsIsUnSubscribe"
+      class="not-found-item"
+    >
+      <p>
+        <i class="fa fa-user"></i>
+        <span>شما هنوز در گروهی عضو نیستید</span>
+      </p>
+    </div>
+
+    <div v-else-if="$parent.groupList.length === 0" class="not-found-item">
+      <div
+        class="image-wrapper"
+        v-if="!$parent.groupNameSearchText && !$parent.isSearchingGroup"
+      >
+        <div
+          v-show="!$parent.isImageLoad || $parent.isImageLoad"
+          class="lds-ring"
+        >
           <div></div>
           <div></div>
           <div></div>
@@ -152,14 +189,19 @@
       </div>
 
       <div v-else-if="$parent.groupNameSearchText && !$parent.isSearchingGroup">
-        <p>
+        <p class>
           <i class="fa fa-user"></i>
           <span>گروهی یافت نشد</span>
         </p>
       </div>
 
-      <div v-else-if="$parent.isSearchingGroup " class="contact-is-search">
-        <img :src="$parent.loading_img" />
+      <div v-else-if="$parent.isSearchingGroup" class="contact-is-search">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
       <div v-else-if="$parent.isSearchingGroup">
         <p>
@@ -171,14 +213,43 @@
 
     <div v-else class="contact-items">
       <ul>
-        <li class="contact-item" v-for="(group, index) in $parent.groupList" :key="index">
-          <a href="#" @click.prevent="$parent.loadGroupChatHistory(group, index)">
+        <li
+          class="add-group-button-wrapper hidden-xs"
+          v-if="$parent.selectedGroup || $parent.selectedContact"
+        >
+          <button
+            class="add-group-button green-button"
+            @click.prevent="
+              ($parent.selectedGroup = ''), ($parent.selectedContact = '')
+            "
+          >
+            <i class="fa fa-plus"></i>
+            <i class="fa fa-users"></i>
+            افزودن گروه
+          </button>
+        </li>
+        <li
+          class="contact-item"
+          v-for="(group, index) in $parent.groupList"
+          :key="index"
+        >
+          <a
+            href="#"
+            @click.prevent="$parent.loadGroupChatHistory(group, index)"
+          >
             <div class="contact-image">
-              <img v-if="group.photo" :src="$parent.str + '/' + group.photo" :alt="group.name" />
+              <img
+                v-if="group.photo"
+                :src="$parent.str + '/' + group.photo"
+                :alt="group.name"
+              />
 
-              <img v-else :src="$parent.assets + 'assets/img/group-category.jpg'" />
+              <img
+                v-else
+                :src="$parent.assets + 'assets/img/group-category.jpg'"
+              />
             </div>
-            <span class="contact-name" v-text="group.name"></span>
+            <span class="contact-name" v-text="'گروه ' + group.name"></span>
             <!-- <div class="my-contact-date">
               <p class="last-message-date">{{ group.last_msg_time_date | moment("jYY/jMM/jDD") }}</p>
             </div>-->
@@ -186,7 +257,7 @@
               <p
                 class="count-number"
                 v-if="group.unread_messages !== 0"
-                v-text="group.unread_msgs_count"
+                v-text="group.unread_messages"
               ></p>
             </div>
           </a>
@@ -195,5 +266,3 @@
     </div>
   </div>
 </template>
-
-

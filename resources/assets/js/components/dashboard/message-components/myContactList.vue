@@ -121,6 +121,18 @@
 .contact-body .contact-item span.contact-name {
   padding-top: 16px;
 }
+.not-found-item {
+  text-align: center;
+  padding: 40px 15px;
+}
+.not-found-item p {
+  font-size: 16px;
+  font-weight: bold;
+  color: #777;
+}
+.not-found-item i {
+  margin: 5px;
+}
 </style>
 
 <template>
@@ -133,18 +145,12 @@
         </div>
       </form>
     </div>
-    <div v-if="$parent.contactList.length === 0" class="loading-container">
+    <div v-if="$parent.contactList.length === 0" class="not-found-item">
       <div
         class="image-wrapper"
         v-if="!$parent.contactNameSearchText && !$parent.isContactListLoaded"
       >
-        <a v-show="$parent.isImageLoad">
-          <transition>
-            <img src @load="$parent.ImageLoaded" alt="alt" />
-          </transition>
-        </a>
-
-        <div v-show="!$parent.isImageLoad" class="lds-ring">
+        <div v-show="!$parent.isImageLoad || $parent.isImageLoad" class="lds-ring">
           <div></div>
           <div></div>
           <div></div>
@@ -161,7 +167,12 @@
       </div>
 
       <div v-else-if="$parent.isSearchingContact" class="contact-is-search">
-        <img :src="$parent.loading_img" />
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
       <div v-else-if="$parent.isContactListLoaded">
         <p>

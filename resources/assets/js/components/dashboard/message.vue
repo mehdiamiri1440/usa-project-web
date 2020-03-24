@@ -423,11 +423,10 @@
 }
 
 .group-message-wrapper {
-  background: #f6f6f6;
   height: 100%;
 }
 
-.main-group-message {
+.group-message-wrapper h2 {
   margin: 30px 15px;
 
   overflow: hidden;
@@ -439,19 +438,33 @@
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 
   padding: 15px;
+  text-align: center;
+  font-size: 23px;
+}
+
+.main-group-message {
+  position: relative;
 }
 
 .main-group-message .group-item {
-  padding: 15px 0 13px;
-
-  display: block;
-
-  transition: 300ms;
-
-  border-bottom: 2px solid #fff;
+  margin-bottom: 20px;
 }
 
-.main-group-message .group-item:hover {
+.main-group-message .group-item button {
+  padding: 5px 6px;
+  display: block;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+  border: none;
+  border-bottom: 2px solid #fff;
+  text-align: right;
+  width: 100%;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.main-group-message .group-item:hover button {
   transition: 300ms;
   border-bottom: 2px solid #00a65a;
 }
@@ -468,16 +481,6 @@
   left: 0;
   top: 0;
   bottom: 0;
-}
-
-.contact-item .green-button {
-  margin-top: 8px;
-  float: left;
-  padding: 2px 15px;
-}
-
-.contact-item .green-button i {
-  margin-right: 3px;
 }
 
 .group-item img {
@@ -504,6 +507,11 @@
   left: calc(50% - 30px);
 }
 
+.group-item-icon {
+  color: #00c569;
+  padding-top: 15px;
+  padding-left: 5px;
+}
 @media screen and (max-width: 992px) {
   .main-content {
     padding: 65px 0 0;
@@ -578,7 +586,7 @@
   <section class="main-content col-xs-12">
     <div
       class="col-xs-12 contact-wrapper pull-right col-sm-4 col-md-3"
-      v-bind:class="{ hidden_element: selectedContact }"
+      v-bind:class="{ hidden_element: selectedContact || selectedGroup }"
     >
       <div class="row">
         <!-- <div class="contact-title">
@@ -646,7 +654,9 @@
               <img v-else :src="defultimg" />
             </div>
 
-            <router-link :to="{ path: '/profile/' + selectedContact.user_name }">
+            <router-link
+              :to="{ path: '/profile/' + selectedContact.user_name }"
+            >
               <span
                 v-text="
                   selectedContact.first_name + ' ' + selectedContact.last_name
@@ -659,7 +669,8 @@
               href="#"
               @click.prevent="selectedContact = !selectedContact"
               class="green-button"
-            >بازگشت</a>
+              >بازگشت</a
+            >
           </div>
         </div>
 
@@ -682,16 +693,15 @@
                 <span v-text="msg.text"></span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">
-                    {{
-                    msg.created_at | moment("jYY/jMM/jDD, h:mm A")
-                    }}
+                    {{ msg.created_at | moment("jYY/jMM/jDD, h:mm A") }}
                   </span>
                   <span v-else>
-                    {{
-                    Date() | moment("jYY/jMM/jDD, h:mm A")
-                    }}
+                    {{ Date() | moment("jYY/jMM/jDD, h:mm A") }}
                   </span>
-                  <span class="check-items" v-if="msg.sender_id === currentUserId">
+                  <span
+                    class="check-items"
+                    v-if="msg.sender_id === currentUserId"
+                  >
                     <i class="fa fa-check" v-if="msg.created_at"></i>
                     <i class="far fa-clock" v-else></i>
                     <i class="fa fa-check" v-if="msg.is_read"></i>
@@ -700,15 +710,12 @@
               </div>
             </li>
           </ul>
-          <div class="loading-container" v-if="isChatMessagesLoaded && isFirstMessageLoading">
+          <div
+            class="loading-container"
+            v-if="isChatMessagesLoaded && isFirstMessageLoading"
+          >
             <div class="image-wrapper">
-              <a v-show="isImageLoad">
-                <transition>
-                  <img src @load="ImageLoaded" alt="alt" />
-                </transition>
-              </a>
-
-              <div v-show="!isImageLoad" class="lds-ring">
+              <div v-show="!isImageLoad || isImageLoad" class="lds-ring">
                 <div></div>
                 <div></div>
                 <div></div>
@@ -720,7 +727,11 @@
           <div class="send-message-form">
             <form>
               <div class="message-input">
-                <input type="text" placeholder="پیغامی بگذارید " v-model="msgToSend" />
+                <input
+                  type="text"
+                  placeholder="پیغامی بگذارید "
+                  v-model="msgToSend"
+                />
               </div>
 
               <div class="button-wrapper">
@@ -772,11 +783,19 @@
             </div>
 
             <!-- <router-link :to="{ path: '/profile/' + selectedContact.user_name }"> -->
-            <span v-if="selectedGroup.name" v-text="selectedGroup.name"></span>
+            <span
+              v-if="selectedGroup.name"
+              v-text="'گروه ' + selectedGroup.name"
+            ></span>
             <!-- </router-link> -->
           </div>
           <div class="back-state pull-left">
-            <a href="#" @click.prevent="selectedGroup = !selectedGroup" class="green-button">بازگشت</a>
+            <a
+              href="#"
+              @click.prevent="selectedGroup = !selectedGroup"
+              class="green-button"
+              >بازگشت</a
+            >
           </div>
         </div>
 
@@ -797,7 +816,7 @@
             ]"
           >
             <li
-              v-for="(msg, index) in groupChatMessages "
+              v-for="(msg, index) in groupChatMessages"
               :class="{ 'margin-top-10': checkMessageName(index, index - 1) }"
               :key="msg.id"
               v-if="msg.id"
@@ -818,16 +837,15 @@
                 <span v-text="msg.text"></span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">
-                    {{
-                    msg.created_at | moment("jYY/jMM/jDD, h:mm A")
-                    }}
+                    {{ msg.created_at | moment("jYY/jMM/jDD, h:mm A") }}
                   </span>
                   <span v-else>
-                    {{
-                    Date() | moment("jYY/jMM/jDD, h:mm A")
-                    }}
+                    {{ Date() | moment("jYY/jMM/jDD, h:mm A") }}
                   </span>
-                  <span class="check-items" v-if="msg.sender_id === currentUserId">
+                  <span
+                    class="check-items"
+                    v-if="msg.sender_id === currentUserId"
+                  >
                     <i class="fa fa-check" v-if="msg.created_at"></i>
                     <i class="far fa-clock" v-else></i>
                     <i class="fa fa-check" v-if="msg.is_read"></i>
@@ -837,7 +855,10 @@
             </li>
           </ul>
 
-          <div class="loading-container" v-if="isGroupChatMessagesLoaded && isFirstMessageLoading">
+          <div
+            class="loading-container"
+            v-if="isGroupChatMessagesLoaded && isFirstMessageLoading"
+          >
             <div class="image-wrapper">
               <a v-show="isImageLoad">
                 <transition>
@@ -857,7 +878,11 @@
           <div class="send-message-form">
             <form>
               <div class="message-input">
-                <input type="text" placeholder="پیغامی بگذارید " v-model="msgToSend" />
+                <input
+                  type="text"
+                  placeholder="پیغامی بگذارید "
+                  v-model="msgToSend"
+                />
               </div>
 
               <div class="button-wrapper">
@@ -889,63 +914,71 @@
     </div>
     <!-- #end rigex group message wrapper -->
 
-    <!-- <div class="col-xs-12 default-message-wrapper col-sm-8 col-md-9" v-if="!selectedContact">
+    <div
+      class="col-xs-12 default-message-wrapper col-sm-8 col-md-9"
+      v-if="!selectedContact && isCurrentStep == 0"
+    >
       <div class="default-main-contents">
-        <i class="fa fa-users"></i>
+        <i class="fa fa-user"></i>
         <p>برای شروع چت لطفا یک مخاطب انتخاب کنید</p>
       </div>
-    </div>-->
+    </div>
 
-    <div class="col-xs-12 group-message-wrapper col-sm-8 col-md-9" v-if="!selectedContact">
+    <div
+      class="col-xs-12 default-message-wrapper col-sm-8 col-md-9"
+      v-if="
+        !selectedGroup &&
+          isCurrentStep == 1 &&
+          UnsubscribeGroups.length == 0 &&
+          allGroupsIsSubscribe
+      "
+    >
+      <div class="default-main-contents">
+        <i class="fa fa-users"></i>
+        <p>شما در همه گروه ها عضو شده اید</p>
+      </div>
+    </div>
+    <div
+      class="col-xs-12 group-message-wrapper col-sm-8 col-md-9"
+      v-if="!selectedGroup && isCurrentStep == 1"
+    >
+      <h2>برای عضویت در گروه کلیک کنید</h2>
       <div class="main-group-message">
-        <a
-          href="#"
-          @click.prevent="subscribeUser(1)"
-          class="group-item col-xs-4 col-lg-3 pull-right"
+        <div
+          v-if="UnsubscribeGroups.length == 0 && !allGroupsIsSubscribe"
+          class="loade-more-messages"
         >
-          <img :src="$parent.assets + 'assets/img/group-category.jpg'" alt />
-          <p>گروه خرما</p>
-        </a>
-        <a
-          href="#"
-          @click.prevent="subscribeUser(2)"
-          class="group-item col-xs-4 col-lg-3 pull-right"
+          <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <div
+          class="group-item col-xs-4 pull-right"
+          v-else
+          v-for="(group, index) in UnsubscribeGroups"
+          :key="index"
         >
-          <img :src="$parent.assets + 'assets/img/group-category.jpg'" alt />
-          <p>گروه خرما</p>
-        </a>
-        <a
-          href="#"
-          @click.prevent="subscribeUser(3)"
-          class="group-item col-xs-4 col-lg-3 pull-right"
-        >
-          <img :src="$parent.assets + 'assets/img/group-category.jpg'" alt />
-          <p>گروه خرما</p>
-        </a>
-        <a
-          href="#"
-          @click.prevent="subscribeUser(4)"
-          class="group-item col-xs-4 col-lg-3 pull-right"
-        >
-          <img :src="$parent.assets + 'assets/img/group-category.jpg'" alt />
-          <p>گروه خرما</p>
-        </a>
-        <a
-          href="#"
-          @click.prevent="subscribeUser(5)"
-          class="group-item col-xs-4 col-lg-3 pull-right"
-        >
-          <img :src="$parent.assets + 'assets/img/group-category.jpg'" alt />
-          <p>گروه خرما</p>
-        </a>
-        <a
-          href="#"
-          @click.prevent="subscribeUser(1)"
-          class="group-item col-xs-4 col-lg-3 pull-right"
-        >
-          <img :src="$parent.assets + 'assets/img/group-category.jpg'" alt />
-          <p>گروه خرما</p>
-        </a>
+          <button @click.prevent="subscribeUser(group.id)">
+            <img
+              v-if="group.photo"
+              :src="$parent.str + group.photo"
+              :alt="'گروه ' + group.name"
+            />
+            <img
+              v-else
+              :src="$parent.assets + 'assets/img/group-category.jpg'"
+              alt
+            />
+
+            <p class="pull-right" v-text="'گروه ' + group.name"></p>
+            <span class="group-item-icon pull-left">
+              <i class="fa fa-arrow-left"></i>
+            </span>
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -1000,7 +1033,12 @@ export default {
       isChatLoadeMore: false,
       groupMessageCount: 50,
       groupMessageLoading: false,
-      lastGroupMessage: false
+      lastGroupMessage: false,
+      UnsubscribeGroups: [],
+      reloadGroupList: false,
+      allGroupsIsSubscribe: false,
+      allGroupsIsUnSubscribe: false,
+      allGroupIsload: false
     };
   },
 
@@ -1032,10 +1070,20 @@ export default {
     },
     loadGroupList: function() {
       var self = this;
+      self.allGroupIsload = true;
+
       axios
         .post("/group/get_groups_list")
         .then(function(response) {
           self.groupList = response.data.groups;
+          if (self.groupList.length == 0) {
+            self.allGroupsIsUnSubscribe = true;
+          } else {
+            self.allGroupsIsUnSubscribe = false;
+          }
+          console.log("group list count", self.groupList.length);
+
+          self.getUnsubscribeGroups();
         })
         .catch(function(e) {
           //
@@ -1124,7 +1172,7 @@ export default {
       setTimeout(function() {
         chatPageElementList.animate(
           { scrollTop: chatPageElementList.prop("scrollHeight") },
-          500,
+          0,
           "swing",
           () => {
             self.isChatMessagesLoaded = false;
@@ -1204,7 +1252,7 @@ export default {
     goToButtomOfChat: function() {
       $(".chat-page ul").animate(
         { scrollTop: $(".chat-page ul").prop("scrollHeight") },
-        1000
+        0
       );
     },
     searchForObjectIndexInArray: function search(contactId, myArray) {
@@ -1271,18 +1319,10 @@ export default {
       });
     },
     subscribeUser: function(groupId) {
-      var self = this;
-
-      axios
-        .post("/group/subscribe_user", {
-          group_id: groupId
-        })
-        .then(function(response) {
-          self.popUpMsg = response.data.msg;
-          eventBus.$emit("submitSuccess", self.popUpMsg);
-          $("#custom-main-modal").modal("show");
-          self.loadGroupList();
-        });
+      this.popUpMsg = "آیا میخواهید در گروه عضو شوید؟";
+      eventBus.$emit("joinGroupMessage", this.popUpMsg);
+      eventBus.$emit("joinGroupId", groupId);
+      $("#join-to-group").modal("show");
     },
     checkMessageName: function(index, prevIndex) {
       var isMessageName = false;
@@ -1336,8 +1376,8 @@ export default {
           message_count: self.groupMessageCount
         })
         .then(function(response) {
-          var currentDataSize = Object.keys(self.groupChatMessages).length;
-          var newDataSize = Object.keys(response.data.messages).length;
+          var currentDataSize = self.groupChatMessages.length;
+          var newDataSize = response.data.messages.length;
           if (currentDataSize == newDataSize) {
             self.groupMessageCount - 50;
             self.lastGroupMessage = true;
@@ -1355,14 +1395,31 @@ export default {
           //
         });
     },
-    loadChatHistoryReset: function() {
-      self.isChatLoadeMore = false;
-      self.selectedIndex = "";
-      self.selectedGroup = "";
-      self.chatMessages = "";
-      self.currentUserId = "";
-      this.selectedContact = "";
-      this.currentContactUserId = "";
+    getUnsubscribeGroups: function() {
+      var self = this;
+      axios.post("/group/get_all_groups").then(function(response) {
+        self.checkUserIsSubscribe(response.data.all_groups);
+      });
+    },
+    checkUserIsSubscribe: function(groups) {
+      var subscribeGroups = this.groupList;
+      var self = this;
+
+      for (var i = 0, len = subscribeGroups.length; i < len; i++) {
+        for (var j = 0, len2 = groups.length; j < len2; j++) {
+          if (subscribeGroups[i].id === groups[j].id) {
+            groups.splice(j, 1);
+            len2 = groups.length;
+          }
+        }
+      }
+      if (groups == 0) {
+        this.allGroupsIsSubscribe = true;
+      } else {
+        this.allGroupsIsSubscribe = false;
+      }
+      self.allGroupIsload = false;
+      self.UnsubscribeGroups = groups;
     }
   },
   watch: {
@@ -1427,6 +1484,10 @@ export default {
       if (event == false) {
         this.groupMessageAutoLoader();
       }
+    },
+    reloadGroupList: function(event) {
+      this.reloadGroupList = false;
+      this.loadGroupList();
     }
   },
   mounted: function() {
@@ -1445,6 +1506,9 @@ export default {
         function() {}
       );
     }
+    eventBus.$on("reloadAllGroupLists", $event => {
+      this.reloadGroupList = $event;
+    });
 
     Echo.private("testChannel." + self.currentContactUserId).listen(
       "newMessage",

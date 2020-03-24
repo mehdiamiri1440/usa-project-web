@@ -1,5 +1,4 @@
-
-<style  scoped>
+<style scoped>
 .contact-body .contact-search {
   padding: 9px 7px;
   background: #eef3f3;
@@ -121,19 +120,55 @@
 .contact-body .contact-item span.contact-name {
   padding-top: 16px;
 }
+
+.contact-item {
+  overflow: hidden;
+  width: 100%;
+  padding: 10px 5px;
+  border-bottom: 1px solid #b6b6b6;
+}
+
+.contact-item:last-of-type {
+  border-bottom: none;
+}
+.contact-item .green-button {
+  margin-top: 8px;
+  float: left;
+  padding: 2px 15px;
+}
+
+.contact-item .green-button i {
+  margin-right: 3px;
+}
+
+.not-found-item {
+  text-align: center;
+  padding: 40px 15px;
+}
+.not-found-item p {
+  font-size: 16px;
+  font-weight: bold;
+  color: #777;
+}
+.not-found-item i {
+  margin: 5px;
+}
 </style>
 
 <template>
   <div class="contact-body add-new-group">
-    <!-- <div class="contact-search">
-            <form action>
-              <div class="contact-search-input-wrapper">
-                <input type="text" placeholder="جستجوی گروه" v-model="contactNameSearchText" />
+    <div
+      class="not-found-item"
+      v-if="
+        $parent.UnsubscribeGroups.length == 0 && $parent.allGroupsIsSubscribe
+      "
+    >
+      <p>
+        <i class="fa fa-users"></i>
+        <span>شما در همه گروه ها عضو هستید</span>
+      </p>
+    </div>
 
-                <i class="fa fa-search"></i>
-              </div>
-            </form>
-    </div>-->
     <div v-if="$parent.contactList.length === 0" class="loading-container">
       <div
         class="image-wrapper"
@@ -153,97 +188,37 @@
         </div>
         <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
       </div>
-
-      <!-- <div v-else-if="contactNameSearchText && !isSearchingContact">
-              <p>
-                <i class="fa fa-user"></i>
-                <span>گروهی یافت نشد</span>
-              </p>
-            </div>
-
-            <div v-else-if="isSearchingContact" class="contact-is-search">
-              <img :src="loading_img" />
-            </div>
-            <div v-else-if="isContactListLoaded">
-              <p>
-                <i class="fa fa-user"></i>
-                <span>گروهی یافت نشد</span>
-              </p>
-      </div>-->
     </div>
 
     <div v-else class="contact-items">
       <ul>
-        <li class="contact-item">
-          <a href="#">
-            <div class="contact-image">
-              <img :src="$parent.assets + 'assets/img/group-category.jpg'" />
-            </div>
-            <span class="contact-name" v-text="'پیاز'"></span>
-            <button class="green-button" @click="$parent.subscribeUser(1)">
-              عضویت در گروه
-              <i class="fa fa-arrow-left"></i>
-            </button>
-          </a>
+        <li
+          class="contact-item"
+          v-for="(group, index) in $parent.UnsubscribeGroups"
+          :key="index"
+        >
+          <div class="contact-image">
+            <img
+              v-if="group.photo"
+              :src="$parent.str + group.photo"
+              :alt="group.name"
+            />
+            <img
+              v-else
+              :src="$parent.assets + 'assets/img/group-category.jpg'"
+              alt
+            />
+          </div>
+          <span class="contact-name" v-text="group.name"></span>
+          <button
+            class="green-button"
+            @click.prevent="$parent.subscribeUser(group.id)"
+          >
+            عضویت در گروه
+            <i class="fa fa-arrow-left"></i>
+          </button>
         </li>
-        <li class="contact-item">
-          <a href="#">
-            <div class="contact-image">
-              <img :src="$parent.assets + 'assets/img/group-category.jpg'" />
-            </div>
-            <span class="contact-name" v-text="'گوجه'"></span>
-            <button class="green-button" @click="$parent.subscribeUser(2)">
-              عضویت در گروه
-              <i class="fa fa-arrow-left"></i>
-            </button>
-          </a>
-        </li>
-        <li class="contact-item">
-          <a href="#">
-            <div class="contact-image">
-              <img :src="$parent.assets + 'assets/img/group-category.jpg'" />
-            </div>
-            <span class="contact-name" v-text="'خیار'"></span>
-            <button class="green-button">
-              عضویت در گروه
-              <i class="fa fa-arrow-left"></i>
-            </button>
-          </a>
-        </li>
-        <li class="contact-item">
-          <a href="#">
-            <div class="contact-image">
-              <img :src="$parent.assets + 'assets/img/group-category.jpg'" />
-            </div>
-            <span class="contact-name" v-text="'پیاز'"></span>
-            <button class="green-button">
-              عضویت در گروه
-              <i class="fa fa-arrow-left"></i>
-            </button>
-          </a>
-        </li>
-
-        <!-- <li class="contact-item" v-for="(contact, index) in $parent.contactList" :key="index">
-          <a href="#" @click.prevent="$parent.loadChatHistory(contact, index)">
-            <div class="contact-image">
-              <img
-                v-if="contact.profile_photo"
-                :src="$parent.str + '/' + contact.profile_photo"
-                :alt="contact.first_name[0]"
-              />
-
-              <img v-else :src="$parent.assets + 'assets/img/group-category.jpg'" />
-            </div>
-            <span class="contact-name" v-text="contact.first_name + ' ' + contact.last_name"></span>
-            <button class="green-button">
-              عضویت در گروه
-              <i class="fa fa-arrow-left"></i>
-            </button>
-          </a>
-        </li>-->
       </ul>
     </div>
   </div>
 </template>
-
-

@@ -239,7 +239,7 @@ class group_message_controller extends Controller
                             ->orderBy('group_messages.created_at')
                             ->get();
 
-        $messages = $messages->take($msg_count * -1)->all();
+        $messages = $messages->take($msg_count * -1)->values()->all();
         
         return response()->json([
             'status' => true,
@@ -339,6 +339,17 @@ class group_message_controller extends Controller
 
         DB::table('group_message_receivers')->insert($result);
 
+    }
+
+    public function get_all_groups()
+    {
+        $groups = messenger_group::select('id','name','photo')
+                            ->get();
+
+        return response()->json([
+            'status' => true,
+            'all_groups' => $groups
+        ],200);
     }
 
     protected function validate_rules($request,$rules)
