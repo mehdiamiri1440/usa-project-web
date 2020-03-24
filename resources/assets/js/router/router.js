@@ -7,16 +7,16 @@ Vue.use(Router);
 
 
 // Layout Components
-import indexPage from '../components/layouts/main/index'
-import productList from '../components/layouts/main/product_list'
-import productCategory from '../components/layouts/main/product_category'
-import productView from '../components/layouts/main/product_components/product_view'
-import indexPrivacyAndPolicy from '../components/layouts/main/privacy_and_policy'
-import indexAboutUs from '../components/layouts/main/about_us'
-import help from '../components/layouts/main/help'
-import contactUs from '../components/layouts/main/contact_us'
-import profile from '../components/layouts/main/profile'
-import pricingTable from '../components/layouts/main/pricing-page'
+// import indexPage from '../components/layouts/main/index'
+// import productList from '../components/layouts/main/product_list.vue'
+// import productCategory from '../components/layouts/main/product_category.vue'
+// import productView from '../components/layouts/main/product_components/product_view.vue'
+// import indexPrivacyAndPolicy from '../components/layouts/main/privacy_and_policy.vue'
+// import indexAboutUs from '../components/layouts/main/about_us.vue'
+// import help from '../components/layouts/main/help.vue'
+// import contactUs from '../components/layouts/main/contact_us.vue'
+// import profile from '../components/layouts/main/profile.vue'
+import pricingTable from '../components/layouts/main/pricing-page.vue'
 
 // Login & Register Components
 import register from '../components/register/register'
@@ -69,9 +69,9 @@ import messages from '../components/dashboard/message'
 import dashboardPricingTable from '../components/dashboard/dashboard-pricing-table';
 
 
-import MasterRoute from './components/masterRoute'
-import BuyerDashboard from './components/buyerDashboard'
-import SellerDashboard from './components/sellerDashboard'
+// import MasterRoute from './components/masterRoute'
+// import BuyerDashboard from './components/buyerDashboard'
+// import SellerDashboard from './components/sellerDashboard'
 
 
 // Errors Components
@@ -88,7 +88,7 @@ const router = new Router({
         {
             path: '/seller',
             components: {
-                seller: SellerDashboard
+                seller: getComponent('sellerDashboard')
             },
             redirect: '/404',
             children: [
@@ -229,7 +229,7 @@ const router = new Router({
         {
             path: '/buyer',
             components: {
-                buyer: BuyerDashboard
+                buyer: getComponent('buyerDashboard')
             },
             redirect: '/404',
             children: [
@@ -372,49 +372,61 @@ const router = new Router({
         {
             path: '/',
             components: {
-                default: MasterRoute,
+                default: getComponent('masterRoute'),
             },
             children: [
                 {
                     path: '/',
                     name: 'indexPage',
                     components: {
-                        default: indexPage,
+                        default: (resolve) => {
+                            require([ '../components/layouts/main/index.vue'], resolve);
+                        }
                     }
                 },
                 {
                     path: 'about-us',
                     name: 'aboutUs',
                     components: {
-                        default: indexAboutUs,
+                        default: (resolve) => {
+                            require([ '../components/layouts/main/about_us.vue'], resolve);
+                        }
                     },
                 },
                 {
                     path: 'help',
                     name: 'help',
                     components: {
-                        default: help,
+                        default: (resolve) => {
+                            require([ '../components/layouts/main/help.vue'], resolve);
+                        }
                     },
                 },
                 {
                     path: 'contact-us',
                     name: 'contactUs',
                     components: {
-                        default: contactUs,
+                        default: (resolve) => {
+                            require([ '../components/layouts/main/contact_us.vue'], resolve);
+                        }
                     },
                 },
                 {
                     path: 'privacy-and-policy',
                     name: 'privacyAndPolicy',
                     components: {
-                        default: indexPrivacyAndPolicy,
+                        default: (resolve) => {
+                            require([ '../components/layouts/main/privacy_and_policy.vue'], resolve);
+                        }
                     },
                 },
                 {
                     path: 'product-list',
                     name: 'productList',
                     components: {
-                        default: productList,
+                        default: (resolve) => {
+                            require([ '../components/layouts/main/product_list.vue'], resolve);
+                        }
                     },
                     props: true
                 },
@@ -422,28 +434,36 @@ const router = new Router({
                     path: 'product-view/:categoryName/:subCategoryName/:id',
                     name: 'productView',
                     components: {
-                        default: productView,
+                        default: (resolve) => {
+                            require([ '../components/layouts/main/product_components/product_view.vue'], resolve);
+                        }
                     },
                 },
                 {
                     path: 'product-list/:searchText',
                     name: 'productListSearch',
                     components: {
-                        default: productList,
+                        default: (resolve) => {
+                            require([ '../components/layouts/main/index.vue'], resolve);
+                        }
                     },
                 },
                 {
                     path: 'product-list/category/:categoryName',
                     name: 'productCategory',
                     components: {
-                        default: productCategory,
+                        default: (resolve) => {
+                            require([ '../components/layouts/main/product_category.vue'], resolve);
+                        }
                     },
                 },
                 {
                     path: 'profile/:user_name',
                     name: 'profile',
                     components: {
-                        default: profile,
+                        default: (resolve) => {
+                            require([ '../components/layouts/main/profile.vue'], resolve);
+                        }
                     },
                 },
                 {
@@ -494,6 +514,17 @@ const router = new Router({
 
 
 });
+
+/**
+ * Asynchronously load view (Webpack Lazy loading compatible)
+ * @param  {string}   name     the filename (basename) of the view to load.
+ */
+function getComponent(name) {
+    return function(resolve) {
+        require([ `./components/${name}.vue`], resolve);
+    }
+};
+
 export default router;
 
 
