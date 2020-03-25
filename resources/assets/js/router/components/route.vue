@@ -1,278 +1,301 @@
 <style scoped>
+.android-download-alert-wrapper {
+  position: fixed;
 
+  bottom: 0;
 
-    .android-download-alert-wrapper{
+  width: 100%;
 
-        position: fixed;
+  background: #e41c38;
 
-        bottom: 0;
+  text-align: center;
 
-        width: 100%;
+  color: #fff;
 
-        background: #e41c38;
+  direction: rtl;
 
-        text-align: center;
+  z-index: 1020;
+}
 
-        color: #fff;
+.android-apk-download {
+  padding: 15px;
 
-        direction: rtl;
+  background: none;
 
-        z-index: 1020;
+  border: none;
 
-    }
+  width: 100%;
 
-    .android-apk-download{
+  height: 100%;
+}
 
-        padding: 15px;
+.close-android-download-alert-wrapper {
+  background: none;
 
-        background: none;
+  border: none;
 
-        border: none;
+  font-size: 20px;
 
-        width: 100%;
+  position: absolute;
 
-        height: 100%;
+  right: 15px;
 
-    }
+  top: 13px;
 
-    .close-android-download-alert-wrapper{
-
-        background: none;
-
-        border: none;
-
-        font-size: 20px;
-
-        position: absolute;
-
-        right: 15px;
-
-        top: 13px;
-
-        z-index: 1021;
-
-    }
-
-
-
+  z-index: 1021;
+}
 </style>
 
 <template>
-    <div>
+  <div>
+    <!-- Chat Join Modals -->
+    <div class="container">
+      <div id="join-to-group" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="main_popup_content">
+              <a href="#" data-dismiss="modal">
+                <i class="fa fa-times"></i>
+              </a>
+              <p class="main-pop-up" v-text="joinGroupMessage"></p>
 
+              <a
+                href="#"
+                class="btn green-button delete"
+                data-dismiss="modal"
+                @click.prevent="subscribeUserToGroup()"
+                v-text="'عضویت در گروه'"
+              ></a>
 
-        <!--  #regex elevator modal  -->
-
-
-             <div class="container">
-                <div
-                        id="elevator-modal"
-                        class="modal fade"
-                        tabindex="-1"
-                        role="dialog"
-
-                >
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="main_popup_content">
-                                <a href="#" data-dismiss="modal">
-                                    <i class="fa fa-times"></i>
-                                </a>
-                                <h1 class="green-text">
-                                     <span >25,000</span>
-                                      تومان
-                                </h1>
-                                <br/>
-                                <p class="main-pop-up" v-text="elevatorText"></p>
-
-                                <a href="" class="btn green-button bg-gray" data-dismiss="modal"> متوجه شدم</a>
-
-                                <a
-                                        :href="'/payment/elevator/' + productId"
-                                        class="btn green-button "
-
-                                >
-                                خرید نردبان
-                                </a>
-
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
+              <a
+                href="#"
+                class="btn green-button"
+                data-dismiss="modal"
+                v-text="'انصراف'"
+              ></a>
             </div>
-
-        <!-- end regex elevator modal -->
-
-        <chat-modal/>
-
-        <router-view
-                :user-id="userId"
-                :is-seller="isSeller"
-                :assets="assets"
-                :storage-path="storagePath"
-                :profile-photo="profilePhoto"
-                :user-full-name="userFullName"
-                :user-logout-path="userLogoutPath"
-        />
-
-
-        <router-view
-                name="buyer"
-                :user-id="userId"
-                :is-seller="isSeller"
-                :assets="assets"
-                :storage-path="storagePath"
-
-        />
-
-        <router-view
-                name="seller"
-                :user-id="userId"
-                :is-seller="isSeller"
-                :assets="assets"
-                :storage-path="storagePath"
-
-        />
-
-        <!-- add android app download  -->
-
-        <div v-if="isConditionSatisfied"  class="android-download-alert-wrapper hidden-lg hidden-md">
-
-            <button class="close-android-download-alert-wrapper" @click.prevent="isConditionSatisfied = false">
-                <i class="fa fa-times-circle"></i>
-            </button>
-
-            <button class="android-apk-download" @click.prevent="doDownload">
-                <i class="fas fa-download"></i>
-            دانلود اپلیکیشن باسکول
-
-
-            </button>
+          </div>
+          <!-- /.modal-content -->
         </div>
-
-
+        <!-- /.modal-dialog -->
+      </div>
     </div>
+
+    <!--  #regex elevator modal  -->
+
+    <div class="container">
+      <div id="elevator-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="main_popup_content">
+              <a href="#" data-dismiss="modal">
+                <i class="fa fa-times"></i>
+              </a>
+              <h1 class="green-text">
+                <span>25,000</span>
+                تومان
+              </h1>
+              <br />
+              <p class="main-pop-up" v-text="elevatorText"></p>
+
+              <a href="" class="btn green-button bg-gray" data-dismiss="modal">
+                متوجه شدم</a
+              >
+
+              <a
+                :href="'/payment/elevator/' + productId"
+                class="btn green-button "
+              >
+                خرید نردبان
+              </a>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+    </div>
+
+    <!-- end regex elevator modal -->
+
+    <chat-modal />
+
+    <router-view
+      :user-id="userId"
+      :is-seller="isSeller"
+      :assets="assets"
+      :storage-path="storagePath"
+      :profile-photo="profilePhoto"
+      :user-full-name="userFullName"
+      :user-logout-path="userLogoutPath"
+    />
+
+    <router-view
+      name="buyer"
+      :user-id="userId"
+      :is-seller="isSeller"
+      :assets="assets"
+      :storage-path="storagePath"
+    />
+
+    <router-view
+      name="seller"
+      :user-id="userId"
+      :is-seller="isSeller"
+      :assets="assets"
+      :storage-path="storagePath"
+    />
+
+    <!-- add android app download  -->
+
+    <div
+      v-if="isConditionSatisfied"
+      class="android-download-alert-wrapper hidden-lg hidden-md"
+    >
+      <button
+        class="close-android-download-alert-wrapper"
+        @click.prevent="isConditionSatisfied = false"
+      >
+        <i class="fa fa-times-circle"></i>
+      </button>
+
+      <button class="android-apk-download" @click.prevent="doDownload">
+        <i class="fas fa-download"></i>
+        دانلود اپلیکیشن باسکول
+      </button>
+    </div>
+  </div>
 </template>
 
-
 <script>
+import router from "../router.js";
+import { eventBus } from "../router.js";
+import Cookies from "js-cookie";
+import IsWebview from "is-webview";
+import ChatModal from "../../components/layouts/main/main_components/chat_modal";
 
-    import router from '../router.js'
-    import {eventBus} from '../router.js'
-    import Cookies from "js-cookie";
-    import IsWebview from "is-webview";
-    import ChatModal from '../../components/layouts/main/main_components/chat_modal'
+export default {
+  components: {
+    ChatModal
+  },
+  data: function() {
+    return {
+      iswebview: navigator.userAgent == "webView" ? true : false,
+      isConditionSatisfied: false,
+      elevatorText: "",
+      productId: "",
+      joinGroupMessage: "",
+      joinGroupId: ""
+    };
+  },
+  props: [
+    "userId",
+    "isSeller",
+    "assets",
+    "storagePath",
+    "profilePhoto",
+    "userFullName",
+    "userLogoutPath"
+  ],
+  created: function() {
+    window.localStorage.setItem("userId", this.userId);
+    window.localStorage.setItem("userType", this.isSeller);
 
-    export default {
-        components: {
-            ChatModal,
-        },
-        data:function(){
+    eventBus.$on("elevatorText", $event => {
+      this.elevatorText = $event;
+    });
 
-            return{
-                iswebview : navigator.userAgent == "webView" ? true : false,
-                isConditionSatisfied : false,
-                elevatorText:"",
-                productId:"",
-            }
+    eventBus.$on("productId", $event => {
+      this.productId = $event;
+    });
 
-        },
-        props: [
-            'userId',
-            'isSeller',
-            'assets',
-            'storagePath',
-            'profilePhoto',
-            'userFullName',
-            'userLogoutPath',
-        ],
-        created:function () {
-            window.localStorage.setItem('userId', this.userId);
-            window.localStorage.setItem('userType', this.isSeller);
+    eventBus.$on("joinGroupId", $event => {
+      this.joinGroupId = $event;
+    });
+    eventBus.$on("joinGroupMessage", $event => {
+      this.joinGroupMessage = $event;
+    });
 
-            eventBus.$on("elevatorText", $event => {
-                this.elevatorText = $event;
-            });
+    // if (!window.history.state) {
+    //     window.history.pushState({pushed: true}, '', '/product-list');
+    // }
 
-            eventBus.$on("productId", $event => {
-                this.productId = $event;
-            });
-
-            // if (!window.history.state) {
-            //     window.history.pushState({pushed: true}, '', '/product-list');
-            // }
-
-            // $(window).on('popstate', function (e) {
-            //     eventBus.$emit("ChatBoxStatus",false);
-            // });
-        },
-        router,
-        methods:{
-            isDeviceMobile: function () {
-                if (
-                    navigator.userAgent.match(/Android/i) ||
-                    navigator.userAgent.match(/webOS/i) ||
-                    navigator.userAgent.match(/iPhone/i) ||
-                    navigator.userAgent.match(/iPad/i) ||
-                    navigator.userAgent.match(/iPod/i) ||
-                    navigator.userAgent.match(/BlackBerry/i) ||
-                    navigator.userAgent.match(/Windows Phone/i)
-                ) {
-                    return true;
-                } else {
-                    return false;
-                }
-            },
-            getAndroidVersion: function (ua) {
-                ua = (ua || navigator.userAgent).toLowerCase();
-                var match = ua.match(/android\s([0-9\.]*)/);
-                return match ? match[1] : undefined;
-            },
-            doDownload: function () {
-                //ga
-                this.registerComponentStatistics(
-                    "download",
-                    "app download btn",
-                    "download app btn in popUp"
-                );
-                // code here
-                Cookies.set("appDownloaded", true);
-                window.location.href = '/download/app';
-            },
-            isOsIOS: function () {
-                var userAgent = window.navigator.userAgent.toLowerCase(),
-                    safari = /safari/.test(userAgent),
-                    ios = /iphone|ipod|ipad/.test(userAgent);
-                return ios;
-            },
-            activateDownloadApp: function () {
-
-               if (!this.iswebview &&  this.isDeviceMobile() && !this.isOsIOS()) {
-                    if(this.getAndroidVersion() >= 4.4){
-
-                         this.isConditionSatisfied = true;
-
-                    }
-
-
-                }
-            },
-            closeGlobalChatBox(){
-                eventBus.$emit("ChatBoxStatus",false);
-            },
-            registerComponentStatistics: function (categoryName, actionName, labelName) {
-                gtag("event", actionName, {
-                    event_category: categoryName,
-                    event_label: labelName
-                });
-            },
-        },
-        mounted(){
-            this.activateDownloadApp();
+    // $(window).on('popstate', function (e) {
+    //     eventBus.$emit("ChatBoxStatus",false);
+    // });
+  },
+  router,
+  methods: {
+    isDeviceMobile: function() {
+      if (
+        navigator.userAgent.match(/Android/i) ||
+        navigator.userAgent.match(/webOS/i) ||
+        navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/iPod/i) ||
+        navigator.userAgent.match(/BlackBerry/i) ||
+        navigator.userAgent.match(/Windows Phone/i)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    getAndroidVersion: function(ua) {
+      ua = (ua || navigator.userAgent).toLowerCase();
+      var match = ua.match(/android\s([0-9\.]*)/);
+      return match ? match[1] : undefined;
+    },
+    doDownload: function() {
+      //ga
+      this.registerComponentStatistics(
+        "download",
+        "app download btn",
+        "download app btn in popUp"
+      );
+      // code here
+      Cookies.set("appDownloaded", true);
+      window.location.href = "/download/app";
+    },
+    isOsIOS: function() {
+      var userAgent = window.navigator.userAgent.toLowerCase(),
+        safari = /safari/.test(userAgent),
+        ios = /iphone|ipod|ipad/.test(userAgent);
+      return ios;
+    },
+    activateDownloadApp: function() {
+      if (!this.iswebview && this.isDeviceMobile() && !this.isOsIOS()) {
+        if (this.getAndroidVersion() >= 4.4) {
+          this.isConditionSatisfied = true;
         }
-
+      }
+    },
+    closeGlobalChatBox() {
+      eventBus.$emit("ChatBoxStatus", false);
+    },
+    registerComponentStatistics: function(categoryName, actionName, labelName) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName
+      });
+    },
+    subscribeUserToGroup: function() {
+      var self = this;
+      var groupId = this.joinGroupId;
+      axios
+        .post("/group/subscribe_user", {
+          group_id: groupId
+        })
+        .then(function(response) {
+          self.popUpMsg = "شما با موفقییت در گروه عضو شدید";
+          eventBus.$emit("submitSuccess", self.popUpMsg);
+          $("#custom-main-modal").modal("show");
+          eventBus.$emit("reloadAllGroupLists", true);
+        });
     }
+  },
+  mounted() {
+    this.activateDownloadApp();
+  }
+};
 </script>
-
