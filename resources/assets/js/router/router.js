@@ -16,57 +16,53 @@ Vue.use(Router);
 // import help from '../components/layouts/main/help.vue'
 // import contactUs from '../components/layouts/main/contact_us.vue'
 // import profile from '../components/layouts/main/profile.vue'
-import pricingTable from '../components/layouts/main/pricing-page.vue'
+// import pricingTable from '../components/layouts/main/pricing-page.vue'
 
 // Login & Register Components
-import register from '../components/register/register'
-import login from '../components/login/Login'
+// import register from '../components/register/register.vue'
+// import login from '../components/login/Login.vue'
 
 
 // Seller Components
-import sellerProfileBasic from '../components/dashboard/seller/profile/profile_basic.vue'
-import sellerChangePassword from '../components/dashboard/seller/profile/change_password.vue'
-import sellerComplementary from '../components/dashboard/seller/profile/profile_complete.vue'
-import sellerProfileContract from '../components/dashboard/seller/profile/profile_contract.vue'
-import sellerBuyAdRequests from '../components/dashboard/seller/request/buyAd-requests.vue'
-import sellerBuyAdRequestsDetail
-    from '../components/dashboard/seller/request/buyAd-requests-detail.vue'
-import sellerMySellOffers from '../components/dashboard/seller/request/my-sell-offers.vue'
-import sellerRegisterProduct from '../components/dashboard/seller/product/product-basic.vue'
-import sellerMyTransactions from '../components/dashboard/seller/transaction/my-transactions.vue';
-import sellerMyTerminatedTransactions
-    from '../components/dashboard/seller/transaction/my-terminated-transactions.vue';
-import sellerTransactionDetail from '../components/dashboard/seller/transaction/transaction.vue';
-import sellerTransactionReport from '../components/dashboard/seller/transaction/transactionReport';
-import sellerGuide from '../components/dashboard/seller/guide.vue';
-import myProducts from '../components/dashboard/seller/product/my_products';
-import sellerStatus from '../components/dashboard/seller/dashboard/status.vue';
+// import sellerProfileBasic from '../components/dashboard/seller/profile/profile_basic.vue'
+// import sellerChangePassword from '../components/dashboard/seller/profile/change_password.vue'
+// import sellerComplementary from '../components/dashboard/seller/profile/profile_complete.vue'
+// import sellerProfileContract from '../components/dashboard/seller/profile/profile_contract.vue'
+// import sellerBuyAdRequests from '../components/dashboard/seller/request/buyAd-requests.vue'
+// import sellerBuyAdRequestsDetail from '../components/dashboard/seller/request/buyAd-requests-detail.vue'
+// import sellerMySellOffers from '../components/dashboard/seller/request/my-sell-offers.vue'
+// import sellerRegisterProduct from '../components/dashboard/seller/product/product-basic.vue'
+// import sellerMyTransactions from '../components/dashboard/seller/transaction/my-transactions.vue';
+// import sellerMyTerminatedTransactions from '../components/dashboard/seller/transaction/my-terminated-transactions.vue';
+// import sellerTransactionDetail from '../components/dashboard/seller/transaction/transaction.vue';
+// import sellerTransactionReport from '../components/dashboard/seller/transaction/transactionReport';
+// import sellerGuide from '../components/dashboard/seller/guide.vue';
+// import myProducts from '../components/dashboard/seller/product/my_products';
+// import sellerStatus from '../components/dashboard/seller/dashboard/status.vue';
 
 
 // Buyer Components
-import buyerProfileBasic from '../components/dashboard/buyer/profile/profile_basic.vue'
-import buyerChangePassword from '../components/dashboard/seller/profile/change_password.vue'
-import buyerComplementary from '../components/dashboard/buyer/profile/profile_complete.vue'
-import buyerProfileContract from '../components/dashboard/buyer/profile/profile_contract.vue'
+// import buyerProfileBasic from '../components/dashboard/buyer/profile/profile_basic.vue'
+// import buyerChangePassword from '../components/dashboard/seller/profile/change_password.vue'
+// import buyerComplementary from '../components/dashboard/buyer/profile/profile_complete.vue'
+// import buyerProfileContract from '../components/dashboard/buyer/profile/profile_contract.vue'
 //import buyerRequests from '../components/dashboard/buyer/request/request'
-import buyerMyBuyAd from '../components/dashboard/buyer/request/my-buyAd'
-import buyerRgisterRequest from '../components/dashboard/buyer/request/register-request'
-import specialProducts from '../components/dashboard/buyer/products/special-products'
-import buyerSellOfferDetail from '../components/dashboard/buyer/request/sell-offer-detail'
-import buyerMyTransactions from '../components/dashboard/buyer/transaction/my-transactions.vue';
-import buyerPayedFactorList from '../components/dashboard/buyer/transaction/payed-factor-list';
-import buyerFactorDetail from '../components/dashboard/buyer/transaction/factor-detail';
-import buyerPaymentError from '../components/dashboard/buyer/transaction/payment-error';
-import buyerMyTerminatedTransactions
-    from '../components/dashboard/buyer/transaction/my-terminated-transactions.vue';
-import buyerTransactionDetail from '../components/dashboard/buyer/transaction/transaction.vue';
-import buyerTransactionReport
-    from '../components/dashboard/buyer/transaction/transaction-report-detail';
-import buyerGuide from '../components/dashboard/buyer/guide.vue';
+// import buyerMyBuyAd from '../components/dashboard/buyer/request/my-buyAd'
+// import buyerRgisterRequest from '../components/dashboard/buyer/request/register-request'
+// import specialProducts from '../components/dashboard/buyer/products/special-products'
+// import buyerSellOfferDetail from '../components/dashboard/buyer/request/sell-offer-detail'
+// import buyerMyTransactions from '../components/dashboard/buyer/transaction/my-transactions.vue';
+// import buyerPayedFactorList from '../components/dashboard/buyer/transaction/payed-factor-list';
+// import buyerFactorDetail from '../components/dashboard/buyer/transaction/factor-detail';
+// import buyerPaymentError from '../components/dashboard/buyer/transaction/payment-error';
+// import buyerMyTerminatedTransactions from '../components/dashboard/buyer/transaction/my-terminated-transactions.vue';
+// import buyerTransactionDetail from '../components/dashboard/buyer/transaction/transaction.vue';
+// import buyerTransactionReport from '../components/dashboard/buyer/transaction/transaction-report-detail';
+// import buyerGuide from '../components/dashboard/buyer/guide.vue';
 
 // dashboard main
-import messages from '../components/dashboard/message'
-import dashboardPricingTable from '../components/dashboard/dashboard-pricing-table';
+// import messages from '../components/dashboard/message'
+// import dashboardPricingTable from '../components/dashboard/dashboard-pricing-table';
 
 
 // import MasterRoute from './components/masterRoute'
@@ -96,14 +92,18 @@ const router = new Router({
                     path: 'password',
                     name: 'passwordSeller',
                     components: {
-                        default: sellerChangePassword,
+                        default: (resolve) => {
+                            require([ '../components/dashboard/seller/profile/change_password.vue'], resolve);
+                        }
                     },
                 },
                 {
                     path: 'status',
                     name: 'statusSeller',
                     components: {
-                        default: sellerStatus,
+                        default: (resolve) => {
+                            require([ '../components/dashboard/seller/dashboard/status.vue'], resolve);
+                        }
                     }
 
                 },
@@ -111,111 +111,134 @@ const router = new Router({
                     path: 'pricing',
                     name: 'dashboardPricingTableSeller',
                     components: {
-                        default: dashboardPricingTable,
+                        default: (resolve) => {
+                            require(['../components/dashboard/dashboard-pricing-table'], resolve);
+                        }
                     },
                 },
                 {
                     path: 'profile',
                     name: 'profileBasicSeller',
                     components: {
-                        default: sellerProfileBasic,
-                    },
-                }
-                , {
-                    path: 'complementary',
-                    name: 'complementarySeller',
-                    components: {
-                        default: sellerComplementary,
+                        default: (resolve) => {
+                            require([ '../components/dashboard/seller/profile/profile_basic.vue'], resolve);
+                        }
                     },
                 },
+                // , {
+                //     path: 'complementary',
+                //     name: 'complementarySeller',
+                //     components: {
+                //         default: (resolve) => {
+                //             require([ '../components/layouts/main/index.vue'], resolve);
+                //         }
+                //     },
+                // },
                 {
                     path: 'messages',
                     name: 'messagesSeller',
                     components: {
-                        default: messages,
+                        default: (resolve) => {
+                            require([ '../components/dashboard/message'], resolve);
+                        }
                     },
                 },
                 {
                     path: 'buyAd-requests',
                     name: 'buyAdRequestsSeller',
                     components: {
-                        default: sellerBuyAdRequests,
+                        default: (resolve) => {
+                            require([ '../components/dashboard/seller/request/buyAd-requests.vue'], resolve);
+                        }
                     },
                 },
                 {
                     path: 'my-products',
                     name: 'myProductsSeller',
                     components: {
-                        default: myProducts,
+                        default: (resolve) => {
+                            require([ '../components/dashboard/seller/product/my_products'], resolve);
+                        }
                     },
-                }, {
-                    path: 'buyAd-request-detail/:id',
-                    name: 'buyAdRequestsDetailSeller',
-                    components: {
-                        default: sellerBuyAdRequestsDetail,
-                    },
-                }
-                , {
-                    path: 'my-sell-offers',
-                    name: 'mySellOffersSeller',
-                    components: {
-                        default: sellerMySellOffers,
-                    },
-                }
+                }, 
+                // {
+                //     path: 'buyAd-request-detail/:id',
+                //     name: 'buyAdRequestsDetailSeller',
+                //     components: {
+                //         default: (resolve) => {
+                //             require([ '../components/layouts/main/index.vue'], resolve);
+                //         }
+                //     },
+                // }
+                // , {
+                //     path: 'my-sell-offers',
+                //     name: 'mySellOffersSeller',
+                //     components: {
+                //         default: (resolve) => {
+                //             require([ '../components/layouts/main/index.vue'], resolve);
+                //         }
+                //     },
+                // }
                 , {
                     path: 'register-product',
                     name: 'registerProductSeller',
                     components: {
-                        default: sellerRegisterProduct,
-                    },
-                }
-                , {
-                    path: 'transaction-list',
-                    name: 'myTransactionsSeller',
-                    components: {
-                        default: sellerMyTransactions,
-                    },
-                }
-                , {
-                    path: 'terminated-transaction-list',
-                    name: 'myTerminatedTransactionsSeller',
-                    components: {
-                        default: sellerMyTerminatedTransactions,
-                    },
-                }
-                , {
-                    path: 'transaction-detail/:id',
-                    name: 'transactionDetailSeller',
-                    components: {
-                        default: sellerTransactionDetail,
-                    }
-                },
-                {
-                    path: 'instant-transaction-detail/:id',
-                    name: 'instantTransactionDetailSeller',
-                    components: {
-                        default: sellerTransactionDetail,
+                        default: (resolve) => {
+                            require([ '../components/dashboard/seller/product/product-basic.vue'], resolve);
+                        }
                     },
                 },
-                {
-                    path: 'transaction-report/:id',
-                    name: 'transactionReportSeller',
-                    components: {
-                        default: sellerTransactionReport,
-                    }
-                },
-                {
-                    path: 'instant-transaction-report/:id',
-                    name: 'instantTransactionReportSeller',
-                    components: {
-                        default: sellerTransactionReport,
-                    }
-                },
+                // , {
+                //     path: 'transaction-list',
+                //     name: 'myTransactionsSeller',
+                //     components: {
+                //         default: (resolve) => {
+                //             require([ '../components/layouts/main/index.vue'], resolve);
+                //         }
+                //     },
+                // }
+                // , {
+                //     path: 'terminated-transaction-list',
+                //     name: 'myTerminatedTransactionsSeller',
+                //     components: {
+                //         default: sellerMyTerminatedTransactions,
+                //     },
+                // }
+                // , {
+                //     path: 'transaction-detail/:id',
+                //     name: 'transactionDetailSeller',
+                //     components: {
+                //         default: sellerTransactionDetail,
+                //     }
+                // },
+                // {
+                //     path: 'instant-transaction-detail/:id',
+                //     name: 'instantTransactionDetailSeller',
+                //     components: {
+                //         default: sellerTransactionDetail,
+                //     },
+                // },
+                // {
+                //     path: 'transaction-report/:id',
+                //     name: 'transactionReportSeller',
+                //     components: {
+                //         default: sellerTransactionReport,
+                //     }
+                // },
+                // {
+                //     path: 'instant-transaction-report/:id',
+                //     name: 'instantTransactionReportSeller',
+                //     components: {
+                //         default: sellerTransactionReport,
+                //     }
+                // },
                 {
                     path: 'guide',
                     name: 'guideSeller',
                     components: {
-                        default: sellerGuide,
+                        default: (resolve) => {
+                            require([ '../components/dashboard/seller/guide.vue'], resolve);
+                        }
                     },
                 }
             ],
@@ -237,128 +260,142 @@ const router = new Router({
                     path: 'password',
                     name: 'passwordBuyer',
                     components: {
-                        default: buyerChangePassword,
+                        default: (resolve) => {
+                            require(['../components/dashboard/seller/profile/change_password.vue'], resolve);
+                        }
                     },
                 },
                 {
                     path: 'profile',
                     name: 'profileBasicBuyer',
                     components: {
-                        default: buyerProfileBasic,
+                        default: (resolve) => {
+                            require([ '../components/dashboard/buyer/profile/profile_basic.vue'], resolve);
+                        }
                     },
                 },
-                {
-                    path: 'complementary',
-                    name: 'complementaryBuyer',
-                    components: {
-                        default: buyerComplementary,
-                    },
-                },
+                // {
+                //     path: 'complementary',
+                //     name: 'complementaryBuyer',
+                //     components: {
+                //         default: (resolve) => {
+                //             require([ '../components/dashboard/seller/profile/change_password.vue'], resolve);
+                //         }
+                //     },
+                // },
                 {
                     path: 'messages',
                     name: 'messagesBuyer',
                     components: {
-                        default: messages,
+                        default: (resolve) => {
+                            require([ '../components/dashboard/message'], resolve);
+                        }
                     },
                 },
                 {
                     path: 'register-request',
                     name: 'registerRequestBuyer',
                     components: {
-                        default: buyerRgisterRequest,
+                        default: (resolve) => {
+                            require([ '../components/dashboard/buyer/request/register-request'], resolve);
+                        }
                     },
                 },
                 {
                     path: 'special-products',
                     name: 'specialProducts',
                     components: {
-                        default: specialProducts,
+                        default: (resolve) => {
+                            require([ '../components/dashboard/buyer/products/special-products'], resolve);
+                        }
                     },
                 },
-                {
-                    path: 'sell-offer-detail/:id',
-                    name: 'buyerSellOfferDetailBuyer',
-                    components: {
-                        default: buyerSellOfferDetail,
-                    },
+                // {
+                //     path: 'sell-offer-detail/:id',
+                //     name: 'buyerSellOfferDetailBuyer',
+                //     components: {
+                //         default: buyerSellOfferDetail,
+                //     },
 
-                },
-                {
-                    path: 'my-buyAds',
-                    name: 'myBuyAdsBuyer',
-                    components: {
-                        default: buyerMyBuyAd,
-                    },
-                }
+                // },
+                // {
+                //     path: 'my-buyAds',
+                //     name: 'myBuyAdsBuyer',
+                //     components: {
+                //         default: buyerMyBuyAd,
+                //     },
+                // },
 
-                , {
-                    path: 'transaction-list',
-                    name: 'myTransactionsBuyer',
-                    components: {
-                        default: buyerMyTransactions,
-                    },
-                }
-                , {
-                    path: 'terminated-transaction-list',
-                    name: 'myTerminatedTransactionsBuyer',
-                    components: {
-                        default: buyerMyTerminatedTransactions,
-                    },
-                }
-                , {
-                    path: 'payed-factor-list',
-                    name: 'PayedFactorListBuyer',
-                    components: {
-                        default: buyerPayedFactorList,
-                    },
-                }
-                , {
-                    path: 'factor-detail/:id',
-                    name: 'buyerFactorDetailBuyer',
-                    components: {
-                        default: buyerFactorDetail,
-                    },
-                }
-                , {
-                    path: 'instant-factor-detail/:id',
-                    name: 'buyerInstantFactorDetailBuyer',
-                    components: {
-                        default: buyerFactorDetail,
-                    },
-                }
-                , {
-                    path: 'transaction-detail/:id',
-                    name: 'transactionDetailBuyer',
-                    components: {
-                        default: buyerTransactionDetail,
-                    }
-                },
-                {
-                    path: 'instant-transaction-detail/:id',
-                    name: 'instantTransactionDetailBuyer',
-                    components: {
-                        default: buyerTransactionDetail,
-                    },
-                },
-                {
-                    path: 'transaction-report/:id',
-                    name: 'transactionReportBuyer',
-                    components: {
-                        default: buyerTransactionReport,
-                    }
-                },
-                {
-                    path: 'instant-transaction-report/:id',
-                    name: 'instantTransactionReportBuyer',
-                    components: {
-                        default: buyerTransactionReport,
-                    }
-                },
+                //  {
+                //     path: 'transaction-list',
+                //     name: 'myTransactionsBuyer',
+                //     components: {
+                //         default: buyerMyTransactions,
+                //     },
+                // }
+                // , {
+                //     path: 'terminated-transaction-list',
+                //     name: 'myTerminatedTransactionsBuyer',
+                //     components: {
+                //         default: buyerMyTerminatedTransactions,
+                //     },
+                // }
+                // , {
+                //     path: 'payed-factor-list',
+                //     name: 'PayedFactorListBuyer',
+                //     components: {
+                //         default: buyerPayedFactorList,
+                //     },
+                // }
+                // , {
+                //     path: 'factor-detail/:id',
+                //     name: 'buyerFactorDetailBuyer',
+                //     components: {
+                //         default: buyerFactorDetail,
+                //     },
+                // }
+                // , {
+                //     path: 'instant-factor-detail/:id',
+                //     name: 'buyerInstantFactorDetailBuyer',
+                //     components: {
+                //         default: buyerFactorDetail,
+                //     },
+                // }
+                // , {
+                //     path: 'transaction-detail/:id',
+                //     name: 'transactionDetailBuyer',
+                //     components: {
+                //         default: buyerTransactionDetail,
+                //     }
+                // },
+                // {
+                //     path: 'instant-transaction-detail/:id',
+                //     name: 'instantTransactionDetailBuyer',
+                //     components: {
+                //         default: buyerTransactionDetail,
+                //     },
+                // },
+                // {
+                //     path: 'transaction-report/:id',
+                //     name: 'transactionReportBuyer',
+                //     components: {
+                //         default: buyerTransactionReport,
+                //     }
+                // },
+                // {
+                //     path: 'instant-transaction-report/:id',
+                //     name: 'instantTransactionReportBuyer',
+                //     components: {
+                //         default: buyerTransactionReport,
+                //     }
+                // },
                 {
                     path: 'guide',
                     name: 'guideBuyer',
                     components: {
-                        default: buyerGuide,
+                        default: (resolve) => {
+                            require([ '../components/dashboard/buyer/guide.vue'], resolve);
+                        }
                     },
                 }
             ],
@@ -470,23 +507,27 @@ const router = new Router({
                     path: 'login',
                     name: 'login',
                     components: {
-                        default: login,
+                        default: (resolve) => {
+                            require([ '../components/login/Login.vue'], resolve);
+                        }
                     },
                 },
                 {
                     path: 'register',
                     name: 'register',
                     components: {
-                        default: register,
+                        default: (resolve) => {
+                            require([ '../components/register/register.vue'], resolve);
+                        }
                     },
                 },
-                {
-                    path: 'pricing',
-                    name: 'pricing',
-                    components: {
-                        default: pricingTable,
-                    },
-                },
+                // {
+                //     path: 'pricing',
+                //     name: 'pricing',
+                //     components: {
+                //         default: pricingTable,
+                //     },
+                // },
             ],
         },
         {
