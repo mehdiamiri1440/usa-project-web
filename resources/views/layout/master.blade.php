@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 <head>
-
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="keywords" content="محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,باسکول">
@@ -14,23 +14,23 @@
         window.Laravel = {csrfToken: '{{csrf_token()}}'}
     </script>
     <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
-    <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
+    <script  src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
     <script src="{{asset('assets/js/ResizeSensor.js')}}"></script>
 
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/placeholder-content.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/fontiran.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/all.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/all.css')}}" async>
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap-theme.min.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap-theme.min.css')}}" async>
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
-    <link rel="stylesheet" href="{{asset('index/css/particleNetwork.css')}}">
+    <link type="text/css" rel="preload" href="{{asset('assets/css/popup.css')}}">
+    <link type="text/css" rel="preload" href="{{asset('assets/css/magnific-popup.css')}}">
+    <link rel="preload" href="{{asset('index/css/particleNetwork.css')}}">
     <link rel="stylesheet" href="{{asset('index/css/animate.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl-custom-style.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/imageuploadify.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/cropper.css')}}">
+    <link type="text/css" rel="preload" href="{{asset('assets/css/imageuploadify.min.css')}}">
+    <link type="text/css" rel="preload" href="{{asset('assets/css/cropper.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/master/style.css')}}">
 
 
