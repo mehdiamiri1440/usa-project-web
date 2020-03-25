@@ -14,6 +14,22 @@ use DB;
 
 class group_message_controller extends Controller
 {
+    protected $group_chat_fields = [
+        'group_messages.id',
+        'group_messages.created_at',
+        'group_messages.text',
+        'group_messages.is_link',
+        'myusers.first_name',
+        'myusers.last_name',
+        'myusers.user_name',
+        'myusers.active_pakage_type',
+        'myusers.id as user_id',
+        'group_messages.parent_id',
+        'msgs.text as parent_text',
+        'users.first_name as parent_author_first_name',
+        'users.last_name as parent_author_last_name',
+    ];
+
     public function send_message(Request $request)
     {
         $this->validate_rules($request,[
@@ -41,16 +57,16 @@ class group_message_controller extends Controller
             ],200);
         }
 
-        try{ 
+        // try{ 
             $message_record = new group_message([],$group_id);
             $message_record->sender_id = $user_id;
             $message_record->text = $text_processing_result['text'];
             if($request->has('replied_msg_id')){
                 $message_record->parent_id = $request->replied_msg_id;
             }
-            // if($text_processing_result['has_link'] == true){
-            //     $message_record->is_link = true;
-            // }
+            if($text_processing_result['has_link'] == true){
+                $message_record->is_link = true;
+            }
             $message_record->save();
 
             return response()->json([
@@ -58,13 +74,13 @@ class group_message_controller extends Controller
                 'msg' => 'message sent'
             ],201);
 
-        }
-        catch(\Exception $e){
-            return response()->json([
-                'status' => false,
-                'msg' => 'send message failed'
-            ],500);
-        }
+        // }
+        // catch(\Exception $e){
+        //     return response()->json([
+        //         'status' => false,
+        //         'msg' => 'send message failed'
+        //     ],500);
+        // }
     }
 
     protected function is_user_allowed_to_send_message_in_this_group($user_id,$group_id)
@@ -85,16 +101,12 @@ class group_message_controller extends Controller
             $result['errors'][] = 'ارسال شماره تماس در گروه مجاز نیست';
         }
         else{
-            $has_link = $this->does_text_contain_external_link($text);
+            $has_link = $this->does_text_contain_our_link($text);
         }
 
-        if($has_link){
-            $result['errors'][] = 'ارسال لینک های خارج از وبسایت باسکول ممنوع است';
-        }
-        else{
-            $has_taboo_words = $this->does_text_contain_taboo_words($text);
-        }
-
+        
+        $has_taboo_words = $this->does_text_contain_taboo_words($text);
+        
         if($has_taboo_words){
             $result['errors'][] = 'استفاده از کلمات نامتعارف ممنوع است';
         }
@@ -104,22 +116,51 @@ class group_message_controller extends Controller
         }
         else{
             $result['is_allowed_to_send'] = true;
+            $result['has_link'] = $has_link;
             $result['text'] = $text;
         }
 
         return $result;
     }
 
-    protected function does_text_contain_phone_number($text)
+    protected function does_text_contain_phone_number(&$text)
     {
-        $status = preg_match('/^((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))$/u',$text);
+        // $status = preg_match('/((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))/u',$text,$result);
+        $tmp_text = preg_replace('/((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))/u','[شماره تماس غیرمجاز]',$text);
+
+        if($tmp_text){
+            $text = $tmp_text;
+        }
 
         return false;
     }
 
-    protected function does_text_contain_external_link($text)
+    protected function does_text_contain_our_link(&$text)
     {
-        return false;
+        preg_match_all('/[-A-Z0-9+&@#\/%=~_|$?!:,.]*[A-Z0-9+&@#\/%=~_|$]/i', $text, $result, PREG_PATTERN_ORDER);
+
+        $links = [];
+        $link_flag = false;
+
+        foreach($result[0] as $possible_link)
+        {
+            if(stripos($possible_link,'.com') !== false || stripos($possible_link,'.ir') !== false)
+            {
+                if(stripos($possible_link,'buskool.com') === false)
+                {
+                    $links[] = $possible_link;
+                }
+                else{
+                    $text = str_replace($possible_link," <a href='{$possible_link}'> $possible_link </a> ",$text);
+                    $text = strip_tags($text,'<a>');
+                    $link_flag = true;
+                }
+            }
+        }
+
+        $text = str_replace($links,'[لینک غیر مجاز]',$text);
+
+        return $link_flag;
     }
 
     protected function does_text_contain_taboo_words($text)
@@ -139,7 +180,7 @@ class group_message_controller extends Controller
     protected function get_group_subscription_ids($group_id)
     {
         $group_subscibers_ids = messenger_group_subscriber::where('group_id',$group_id)
-                                                            ->select('id')
+                                                            ->select('id','myuser_id')
                                                             ->distinct()
                                                             ->get();
         return $group_subscibers_ids;
@@ -152,15 +193,16 @@ class group_message_controller extends Controller
 
         $user_id = session('user_id');
 
-        $group_subscription_ids->each(function($subscription_record) use(&$result,$now,$msg,$user_id){
+        $group_subscription_ids->each(function($subscription_record) use(&$result,$now,$msg){
             $temp = [
                 'created_at' => $now,
                 'updated_at' => $now,
                 'subscription_id' => $subscription_record->id,
-                'message_id' => $msg->id
+                'message_id' => $msg->id,
+                'is_read' => false,
             ];
 
-            if($user_id == $msg->sender_id){
+            if($msg->sender_id == $subscription_record->myuser_id){
                 $temp['is_read'] = true;
             }
 
@@ -233,11 +275,16 @@ class group_message_controller extends Controller
                             ->join('group_message_receivers','group_message_receivers.subscription_id','=','messenger_group_subscribers.id')
                             ->join('group_messages','group_messages.id','=','group_message_receivers.message_id')
                             ->join('myusers','myusers.id','=','group_messages.sender_id')
+                            ->leftJoin('group_messages as msgs','group_messages.parent_id','=','msgs.id')
+                            ->leftJoin('myusers as users','msgs.sender_id','=','users.id')
                             ->where('messenger_group_subscribers.group_id',$group_id)
                             ->where('messenger_group_subscribers.myuser_id',$user_id)
-                            ->select('group_messages.id','group_messages.created_at','group_messages.text','group_messages.parent_id','group_messages.is_link','myusers.first_name','myusers.last_name','myusers.user_name','myusers.active_pakage_type','myusers.id as user_id')
+                            ->select($this->group_chat_fields)
                             ->orderBy('group_messages.created_at')
                             ->get();
+
+        
+        $this->mark_group_messages_as_read($user_id,$group_id);
 
         $messages = $messages->take($msg_count * -1)->values()->all();
         
@@ -245,6 +292,27 @@ class group_message_controller extends Controller
             'status' => true,
             'messages' => $messages
         ],200);
+    }
+
+    protected function mark_group_messages_as_read($user_id,$group_id)
+    {
+        $subsciption_id = $this->get_user_subscription_id_in_the_group($user_id,$group_id);
+
+        DB::table('group_message_receivers')->where('subscription_id',$subsciption_id)
+                                        ->where('is_read',false)
+                                        ->update([
+                                            'is_read' => true,
+                                            'updated_at' => Carbon::now()
+                                        ]);
+    }
+
+    protected function get_user_subscription_id_in_the_group($user_id,$group_id)
+    {
+        $subsciption_id = messenger_group_subscriber::where('myuser_id',$user_id)
+                                                        ->where('group_id',$group_id)
+                                                        ->first()
+                                                        ->id;
+        return $subsciption_id;
     }
 
 
