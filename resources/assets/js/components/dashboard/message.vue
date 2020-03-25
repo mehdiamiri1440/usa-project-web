@@ -251,13 +251,15 @@
   bottom: 57px;
 
   top: 50px;
+
+  transition: 100ms;
 }
 
 .message-wrapper .chat-page ul li {
   overflow: hidden;
 }
 
-.message-wrapper .chat-page li div {
+.message-wrapper .chat-page li > div {
   max-width: 455px;
   font-size: 14px;
   line-height: 1.612;
@@ -266,10 +268,7 @@
   padding: 5px 10px;
   margin: 0 auto 3px;
   display: inline-block;
-}
-.message-wrapper .chat-page div p {
-  font-size: 16px;
-  font-weight: bold;
+  position: relative;
 }
 
 .message-wrapper .chat-page .message-receive {
@@ -512,6 +511,122 @@
   padding-top: 15px;
   padding-left: 5px;
 }
+
+.reply-icon {
+  display: none;
+  padding: 5px;
+  padding-top: 5px;
+  background: #fff;
+  border-radius: 50px;
+  height: 30px;
+  width: 30px;
+  font-size: 14px;
+  text-align: center;
+  padding-top: 6px;
+  color: #00c569;
+  position: absolute;
+  top: 11px;
+}
+
+.message-send .reply-icon {
+  left: -45px;
+}
+
+.message-receive .reply-icon {
+  right: -45px;
+}
+
+.group-chat-list-item > div:hover {
+  cursor: pointer;
+}
+
+.group-chat-list-item > div:hover .reply-icon {
+  display: inline-block;
+}
+
+.reply-message-wrapper {
+  transition: 100ms;
+  overflow: hidden;
+  height: 0;
+}
+
+.reply-message-wrapper.reply-active {
+  height: 55px;
+}
+
+.reply-message-wrapper .cancle-reply button {
+  background: none;
+  border: none;
+  padding: 14px 19px;
+  font-size: 18px;
+  color: #666;
+}
+
+.cancle-reply {
+  width: 50px;
+
+  height: 50px;
+
+  float: right;
+}
+
+.reply-info {
+  width: calc(100% - 58px);
+
+  float: left;
+
+  border-right: 3px solid #00c569;
+
+  background: #fff;
+
+  border-radius: 5px;
+
+  padding: 7px 15px;
+}
+.reply-info p {
+  height: 15px;
+}
+.reply-info p,
+.replied-message-item-wrapper p {
+  width: calc(100% - 15px);
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  font-size: 12px;
+}
+.reply-info p:first-of-type,
+.replied-message-item-wrapper p:first-of-type {
+  margin-bottom: 4px;
+  color: #00c569;
+  font-size: 13px;
+}
+
+.message-wrapper .chat-page ul.reply-is-true {
+  bottom: 113px;
+}
+
+.replied-message-item-wrapper {
+  border-radius: 5px;
+
+  font-size: 13px;
+  padding: 5px;
+
+  border-right: 3px solid #00c569;
+
+  margin-bottom: 5px;
+}
+
+.message-send .replied-message-item-wrapper {
+  background: #cfe9ba;
+}
+.message-receive .replied-message-item-wrapper {
+  background: #f0f0f0;
+}
+
 @media screen and (max-width: 992px) {
   .main-content {
     padding: 65px 0 0;
@@ -562,6 +677,9 @@
 
   .contacts-switch-buttons-wrapper .switch-button-item {
     width: 33.3333%;
+  }
+  .reply-info p {
+    width: 100%;
   }
 }
 
@@ -654,9 +772,7 @@
               <img v-else :src="defultimg" />
             </div>
 
-            <router-link
-              :to="{ path: '/profile/' + selectedContact.user_name }"
-            >
+            <router-link :to="{ path: '/profile/' + selectedContact.user_name }">
               <span
                 v-text="
                   selectedContact.first_name + ' ' + selectedContact.last_name
@@ -669,8 +785,7 @@
               href="#"
               @click.prevent="selectedContact = !selectedContact"
               class="green-button"
-              >بازگشت</a
-            >
+            >بازگشت</a>
           </div>
         </div>
 
@@ -692,16 +807,9 @@
               >
                 <span v-text="msg.text"></span>
                 <span class="message-chat-date">
-                  <span v-if="msg.created_at">
-                    {{ msg.created_at | moment("jYY/jMM/jDD, h:mm A") }}
-                  </span>
-                  <span v-else>
-                    {{ Date() | moment("jYY/jMM/jDD, h:mm A") }}
-                  </span>
-                  <span
-                    class="check-items"
-                    v-if="msg.sender_id === currentUserId"
-                  >
+                  <span v-if="msg.created_at">{{ msg.created_at | moment("jYY/jMM/jDD, h:mm A") }}</span>
+                  <span v-else>{{ Date() | moment("jYY/jMM/jDD, h:mm A") }}</span>
+                  <span class="check-items" v-if="msg.sender_id === currentUserId">
                     <i class="fa fa-check" v-if="msg.created_at"></i>
                     <i class="far fa-clock" v-else></i>
                     <i class="fa fa-check" v-if="msg.is_read"></i>
@@ -710,10 +818,7 @@
               </div>
             </li>
           </ul>
-          <div
-            class="loading-container"
-            v-if="isChatMessagesLoaded && isFirstMessageLoading"
-          >
+          <div class="loading-container" v-if="isChatMessagesLoaded && isFirstMessageLoading">
             <div class="image-wrapper">
               <div v-show="!isImageLoad || isImageLoad" class="lds-ring">
                 <div></div>
@@ -727,11 +832,7 @@
           <div class="send-message-form">
             <form>
               <div class="message-input">
-                <input
-                  type="text"
-                  placeholder="پیغامی بگذارید "
-                  v-model="msgToSend"
-                />
+                <input type="text" placeholder="پیغامی بگذارید " v-model="msgToSend" />
               </div>
 
               <div class="button-wrapper">
@@ -783,19 +884,11 @@
             </div>
 
             <!-- <router-link :to="{ path: '/profile/' + selectedContact.user_name }"> -->
-            <span
-              v-if="selectedGroup.name"
-              v-text="'گروه ' + selectedGroup.name"
-            ></span>
+            <span v-if="selectedGroup.name" v-text="'گروه ' + selectedGroup.name"></span>
             <!-- </router-link> -->
           </div>
           <div class="back-state pull-left">
-            <a
-              href="#"
-              @click.prevent="selectedGroup = !selectedGroup"
-              class="green-button"
-              >بازگشت</a
-            >
+            <a href="#" @click.prevent="selectedGroup = !selectedGroup" class="green-button">بازگشت</a>
           </div>
         </div>
 
@@ -812,22 +905,32 @@
             :class="[
               isGroupChatMessagesLoaded && isFirstMessageLoading
                 ? 'chat-not-loaded'
-                : 'chat-loaded'
+                : 'chat-loaded',
+                {'reply-is-true' :loadReplyData}
             ]"
           >
             <li
               v-for="(msg, index) in groupChatMessages"
+              class="group-chat-list-item"
               :class="{ 'margin-top-10': checkMessageName(index, index - 1) }"
               :key="msg.id"
               v-if="msg.id"
             >
               <div
+                @click.prevent="replyMessageData(msg)"
                 :class="[
                   msg.user_id == currentUserId
                     ? 'message-send'
                     : 'message-receive'
                 ]"
               >
+                <span class="reply-icon">
+                  <i class="fa fa-reply"></i>
+                </span>
+                <div class="replied-message-item-wrapper">
+                  <p>علی دلخوش</p>
+                  <p>این یک پیام متنی است</p>
+                </div>
                 <router-link
                   v-if="checkMessageName(index, index - 1)"
                   :to="{ path: '/profile/' + msg.user_name }"
@@ -836,16 +939,9 @@
                 </router-link>
                 <span v-text="msg.text"></span>
                 <span class="message-chat-date">
-                  <span v-if="msg.created_at">
-                    {{ msg.created_at | moment("jYY/jMM/jDD, h:mm A") }}
-                  </span>
-                  <span v-else>
-                    {{ Date() | moment("jYY/jMM/jDD, h:mm A") }}
-                  </span>
-                  <span
-                    class="check-items"
-                    v-if="msg.sender_id === currentUserId"
-                  >
+                  <span v-if="msg.created_at">{{ msg.created_at | moment("jYY/jMM/jDD, h:mm A") }}</span>
+                  <span v-else>{{ Date() | moment("jYY/jMM/jDD, h:mm A") }}</span>
+                  <span class="check-items" v-if="msg.sender_id === currentUserId">
                     <i class="fa fa-check" v-if="msg.created_at"></i>
                     <i class="far fa-clock" v-else></i>
                     <i class="fa fa-check" v-if="msg.is_read"></i>
@@ -855,10 +951,7 @@
             </li>
           </ul>
 
-          <div
-            class="loading-container"
-            v-if="isGroupChatMessagesLoaded && isFirstMessageLoading"
-          >
+          <div class="loading-container" v-if="isGroupChatMessagesLoaded && isFirstMessageLoading">
             <div class="image-wrapper">
               <a v-show="isImageLoad">
                 <transition>
@@ -876,13 +969,20 @@
             </div>
           </div>
           <div class="send-message-form">
+            <div class="reply-message-wrapper" :class="{ 'reply-active' : this.loadReplyData}">
+              <div class="cancle-reply">
+                <button @click.prevent="resetReplyMessage()">
+                  <i class="fa fa-times"></i>
+                </button>
+              </div>
+              <div class="reply-info">
+                <p v-text="replyMessage.first_name + ' ' + replyMessage.last_name"></p>
+                <p v-text="replyMessage.text"></p>
+              </div>
+            </div>
             <form>
               <div class="message-input">
-                <input
-                  type="text"
-                  placeholder="پیغامی بگذارید "
-                  v-model="msgToSend"
-                />
+                <input type="text" placeholder="پیغامی بگذارید " v-model="msgToSend" />
               </div>
 
               <div class="button-wrapper">
@@ -962,16 +1062,8 @@
           :key="index"
         >
           <button @click.prevent="subscribeUser(group.id)">
-            <img
-              v-if="group.photo"
-              :src="$parent.str + group.photo"
-              :alt="'گروه ' + group.name"
-            />
-            <img
-              v-else
-              :src="$parent.assets + 'assets/img/group-category.jpg'"
-              alt
-            />
+            <img v-if="group.photo" :src="$parent.str + group.photo" :alt="'گروه ' + group.name" />
+            <img v-else :src="$parent.assets + 'assets/img/group-category.jpg'" alt />
 
             <p class="pull-right" v-text="'گروه ' + group.name"></p>
             <span class="group-item-icon pull-left">
@@ -1038,7 +1130,9 @@ export default {
       reloadGroupList: false,
       allGroupsIsSubscribe: false,
       allGroupsIsUnSubscribe: false,
-      allGroupIsload: false
+      allGroupIsload: false,
+      replyMessage: "",
+      loadReplyData: false
     };
   },
 
@@ -1081,7 +1175,6 @@ export default {
           } else {
             self.allGroupsIsUnSubscribe = false;
           }
-          console.log("group list count", self.groupList.length);
 
           self.getUnsubscribeGroups();
         })
@@ -1215,7 +1308,8 @@ export default {
       if (tempMsg) {
         let msgObject = {
           text: tempMsg,
-          group_id: self.selectedGroup.id
+          group_id: self.selectedGroup.id,
+          replied_msg_id: self.replyMessage.id ? self.replyMessage.id : null
         };
 
         self.groupChatMessages.push(msgObject);
@@ -1420,6 +1514,29 @@ export default {
       }
       self.allGroupIsload = false;
       self.UnsubscribeGroups = groups;
+    },
+    replyMessageData: function(msg) {
+      this.loadReplyData = true;
+      this.replyMessage = msg;
+      var chatPageElementList = $(".chat-page ul");
+      var self = this;
+      setTimeout(function() {
+        chatPageElementList.animate(
+          { scrollTop: chatPageElementList.prop("scrollHeight") },
+          100,
+          "swing",
+          () => {
+            self.isChatMessagesLoaded = false;
+          }
+        );
+      }, 0);
+    },
+    resetReplyMessage() {
+      this.loadReplyData = false;
+
+      setTimeout(function() {
+        this.replyMessage = "";
+      }, 100);
     }
   },
   watch: {
