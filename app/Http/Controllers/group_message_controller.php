@@ -57,7 +57,7 @@ class group_message_controller extends Controller
             ],200);
         }
 
-        // try{ 
+        try{ 
             $message_record = new group_message([],$group_id);
             $message_record->sender_id = $user_id;
             $message_record->text = $text_processing_result['text'];
@@ -74,13 +74,13 @@ class group_message_controller extends Controller
                 'msg' => 'message sent'
             ],201);
 
-        // }
-        // catch(\Exception $e){
-        //     return response()->json([
-        //         'status' => false,
-        //         'msg' => 'send message failed'
-        //     ],500);
-        // }
+        }
+        catch(\Exception $e){
+            return response()->json([
+                'status' => false,
+                'msg' => 'send message failed'
+            ],500);
+        }
     }
 
     protected function is_user_allowed_to_send_message_in_this_group($user_id,$group_id)
@@ -150,8 +150,22 @@ class group_message_controller extends Controller
                 {
                     $links[] = $possible_link;
                 }
-                else{
-                    $text = str_replace($possible_link," <a href='{$possible_link}'> $possible_link </a> ",$text);
+                else if($link_flag == false){
+                    $real_link = $possible_link;
+                    
+                    $has_http = stripos($possible_link,'http://');
+                    $has_https = stripos($possible_link,'https://');
+
+                    if($has_http === false){
+                        if($has_https === false)
+                            $real_link = 'https://'.$real_link;
+                    }
+                    else if($has_https === false){
+                        if($has_http === false)
+                            $real_link = 'https://'.$real_link;
+                    }
+
+                    $text = preg_replace("/$possible_link/"," <a target='_blank' href='".$real_link."'>$possible_link</a> ",$text,1);
                     $text = strip_tags($text,'<a>');
                     $link_flag = true;
                 }

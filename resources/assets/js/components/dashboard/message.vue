@@ -939,15 +939,15 @@
               class="group-chat-list-item"
               :class="{ 'margin-top-10': checkMessageName(index, index - 1) }"
               :key="msg.id"
-              v-if="msg.id"
+             
             >
               <div
-                @click.prevent="replyMessageData(msg)"
                 :class="[
                   msg.user_id == currentUserId
                     ? 'message-send'
                     : 'message-receive'
                 ]"
+                
               >
                 <span class="reply-icon">
                   <i class="fa fa-reply"></i>
@@ -968,7 +968,8 @@
                 >
                   <p v-text="msg.first_name + ' ' + msg.last_name"></p>
                 </router-link>
-                <span v-text="msg.text"></span>
+                <span v-if="msg.is_link" v-html="msg.text"></span>
+                <span v-else v-text="msg.text" @click.prevent="replyMessageData(msg)"></span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">{{
                     msg.created_at | moment("jYY/jMM/jDD, h:mm A")
@@ -978,11 +979,10 @@
                   }}</span>
                   <span
                     class="check-items"
-                    v-if="msg.sender_id === currentUserId"
+                    v-if="msg.user_id === currentUserId"
                   >
                     <i class="fa fa-check" v-if="msg.created_at"></i>
                     <i class="far fa-clock" v-else></i>
-                    <i class="fa fa-check" v-if="msg.is_read"></i>
                   </span>
                 </span>
               </div>
@@ -1308,16 +1308,14 @@ export default {
           //
         });
 
-      // var index = this.searchForObjectIndexInArray(
-      //   contact.contact_id,
-      //   this.contactList
-      // );
+      var index = this.searchForObjectIndexInArray(
+        group.id,
+        this.groupList
+      );
 
-      eventBus.$emit("messageCount", -1 * group.unread_msgs_count);
+      group.unread_messages = 0;
 
-      // contact.unread_msgs_count = 0;
-
-      // this.contactList.splice(index, 1, contact);
+      this.groupList.splice(index, 1, group);
     },
     scrollToEnd: function(time) {
       var chatPageElementList = $(".chat-page ul");
@@ -1368,15 +1366,28 @@ export default {
       if (tempMsg) {
         let msgObject = {
           text: tempMsg,
-          group_id: self.selectedGroup.id
+          group_id: self.selectedGroup.id,
         };
+
+        let tempMsgObject = {
+          text: tempMsg,
+          is_link: false,
+          user_name: 'test',
+          first_name: 'kjlk',
+          last_name: 'family',
+          user_id: self.currentUserId,
+          parent_id: null ,
+          parent_text:null,
+          parent_author_first_name:null,
+          parent_author_last_name:null,
+        }
         
-        console.log(self.replyMessage.id)
         if (self.replyMessage.id && self.loadReplyData) {
           msgObject.replied_msg_id = self.replyMessage.id;
         }
 
-        self.groupChatMessages.push(msgObject);
+        self.groupChatMessages.push(tempMsgObject);
+        
         self.scrollToEnd(0);
 
         axios
@@ -1584,7 +1595,7 @@ export default {
     replyMessageData: function(msg) {
       this.loadReplyData = true;
       this.replyMessage = msg;
-      console.log(this.replyMessage);
+  
       var chatPageElementList = $(".chat-page ul");
       var self = this;
       setTimeout(function() {
@@ -1603,7 +1614,6 @@ export default {
 
       setTimeout(function() {
         this.replyMessage = "";
-        console.log(this.replyMessage);
       }, 100);
     }
   },
