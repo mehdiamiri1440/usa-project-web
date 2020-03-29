@@ -178,12 +178,12 @@
 
 .total-unread-messages-badge {
   position: absolute;
-  top: 5px;
+  top: 1px;
   background: red;
   height: 23px;
-  width: 23px;
+  width: 33px;
   color: #fff;
-  border-radius: 50px;
+  border-radius: 10px;
   left: 5px;
   font-size: 12px;
 }
@@ -299,9 +299,6 @@
               :to="{ path: 'messages' }"
               tag="button"
             >
-              <span class="total-unread-messages-badge">
-                +99
-              </span>
               <i class="fa fa-user"></i>
               مخاطبین من
             </router-link>
@@ -314,7 +311,7 @@
               :class="{ active: isCurrentStep == 0 }"
             >
               <span class="total-unread-messages-badge">
-                +99
+                  جدید
               </span>
               <i class="fa fa-users"></i>
               گروه های من
@@ -393,7 +390,8 @@ export default {
       allGroupsIsUnSubscribe: false,
       allGroupIsload: false,
       replyMessage: "",
-      loadReplyData: false
+      loadReplyData: false,
+      messageCount:0,
     };
   },
 
@@ -463,6 +461,28 @@ export default {
 
       // this.groupList.splice(index, 1, group);
     },
+    appendMessageToGroupHistory: function(group){
+        var self = this;
+
+        this.groupMessageCount = 50;
+        self.isGroupChatMessagesLoaded = false;
+        self.selectedGroup = group;
+
+        axios
+          .post("/group/get_group_chats", {
+            group_id: group.id,
+            message_count: self.groupMessageCount
+          })
+          .then(function(response) {
+            self.groupChatMessages = response.data.messages;
+            self.isGroupChatMessagesLoaded = false;
+
+            self.scrollToEnd(0);
+          })
+          .catch(function(e) {
+            //
+          });
+    },
     scrollToEnd: function(time) {
       var chatPageElementList = $(".chat-page ul");
       var self = this;
@@ -491,9 +511,9 @@ export default {
         let tempMsgObject = {
           text: tempMsg,
           is_link: false,
-          user_name: "test",
-          first_name: "kjlk",
-          last_name: "family",
+          user_name: "buskool",
+          first_name: "نام",
+          last_name: "...",
           user_id: self.currentUserId,
           parent_id: null,
           parent_text: null,
@@ -580,11 +600,11 @@ export default {
       $(window).on("popstate", function(e) {
         if (self.isDeviceMobile()) {
           if (
-            window.location.pathname == "/seller/messages" ||
-            window.location.pathname == "/buyer/messages"
+            window.location.pathname == "/seller/group-messages" ||
+            window.location.pathname == "/buyer/group-messages"
           ) {
-            if (self.selectedContact) {
-              self.selectedContact = "";
+            if (self.selectedGroup) {
+              self.selectedGroup = "";
             }
           }
         }
@@ -690,22 +710,27 @@ export default {
       self.allGroupIsload = false;
       self.UnsubscribeGroups = groups;
     },
-    replyMessageData: function(msg) {
-      this.loadReplyData = true;
-      this.replyMessage = msg;
+    replyMessageData: function(e,msg) {
+      if(this.isTargetALink(e.target)){
+          window.open(e.target.href,'_blank');
+      }
+      else{
+        this.loadReplyData = true;
+        this.replyMessage = msg;
 
-      var chatPageElementList = $(".chat-page ul");
-      var self = this;
-      setTimeout(function() {
-        chatPageElementList.animate(
-          { scrollTop: chatPageElementList.prop("scrollHeight") },
-          100,
-          "swing",
-          () => {
-            self.isChatMessagesLoaded = false;
-          }
-        );
-      }, 0);
+        var chatPageElementList = $(".chat-page ul");
+        var self = this;
+        setTimeout(function() {
+          chatPageElementList.animate(
+            { scrollTop: chatPageElementList.prop("scrollHeight") },
+            100,
+            "swing",
+            () => {
+              self.isChatMessagesLoaded = false;
+            }
+          );
+        }, 0);
+      }
     },
     resetReplyMessage() {
       this.loadReplyData = false;
@@ -713,6 +738,20 @@ export default {
       setTimeout(function() {
         this.replyMessage = "";
       }, 100);
+    },
+    isTargetALink:function(target){
+        if(target.href) return true;
+
+        return false;
+    },
+    sendTokenToServer: function(token){
+        axios.post('/fcm/register_token_in_groups',{
+            'token' : token
+        }).then(function(response){
+            let token = response.data.token;
+
+            window.localStorage.setItem('storedToken',JSON.stringify(token));
+        });
     }
   },
   watch: {
@@ -750,7 +789,7 @@ export default {
     reloadGroupList: function(event) {
       this.reloadGroupList = false;
       this.loadGroupList();
-    }
+    },
   },
   mounted: function() {
     this.init();
@@ -758,7 +797,11 @@ export default {
   },
 
   created: function() {
-    gtag("config", "UA-129398000-1", { page_path: "/messages" });
+    gtag("config", "UA-129398000-1", { page_path: "/group-messages" });
+
+    eventBus.$on("messageCount", event => {
+      this.messageCount += event;
+    });
 
     var self = this;
 
@@ -772,35 +815,66 @@ export default {
       this.reloadGroupList = $event;
     });
 
-    Echo.private("testChannel." + self.currentContactUserId).listen(
-      "newMessage",
-      e => {
-        var senderId = e.new_message.sender_id;
-        //update contact list
-        self.loadContactList();
+    if(messaging){
+      messaging.requestPermission()
+        .then(function() {
+            console.log('Notification permission granted.');
+            return messaging.getToken();
+        })
+        .then(function(currentToken) {
+            let sotoredToken = JSON.parse(window.localStorage.getItem('storedToken'));
 
-        if (self.currentContactUserId) {
-          if (self.currentContactUserId === senderId) {
-            self.chatMessages.push(e.new_message);
-            self.scrollToEnd(0);
-
-            if (self.isComponentActive == false) {
-              self.pushNotification(
-                "پیام جدید",
-                e.new_message.text,
-                "/dashboard/messages"
-              );
+            if(sotoredToken != currentToken){
+                self.sendTokenToServer(currentToken);
             }
+       
+        })
+        .catch(function(err) { // Happen if user deney permission
+            console.log('Unable to get permission to notify.', err);
+        });
+
+      messaging.onMessage(function(payload){
+          console.log(self.selectedContact);
+          if (self.selectedGroup) {
+            self.appendMessageToGroupHistory(self.selectedGroup);
           }
-        } else {
-          this.pushNotification(
-            "پیام جدید",
-            e.new_message.text,
-            "/dashboard/messages"
-          );
-        }
-      }
-    );
+          else{
+            // eventBus.$emit("messageCount",1);
+            self.loadGroupList();
+          }
+      });
+
+    }
+
+    // Echo.private("testChannel." + self.currentContactUserId).listen(
+    //   "newMessage",
+    //   e => {
+    //     var senderId = e.new_message.sender_id;
+    //     //update contact list
+    //     self.loadContactList();
+
+    //     if (self.currentContactUserId) {
+    //       if (self.currentContactUserId === senderId) {
+    //         self.chatMessages.push(e.new_message);
+    //         self.scrollToEnd(0);
+
+    //         if (self.isComponentActive == false) {
+    //           self.pushNotification(
+    //             "پیام جدید",
+    //             e.new_message.text,
+    //             "/dashboard/messages"
+    //           );
+    //         }
+    //       }
+    //     } else {
+    //       this.pushNotification(
+    //         "پیام جدید",
+    //         e.new_message.text,
+    //         "/dashboard/messages"
+    //       );
+    //     }
+    //   }
+    // );
   },
   activated() {
     this.isComponentActive = true;

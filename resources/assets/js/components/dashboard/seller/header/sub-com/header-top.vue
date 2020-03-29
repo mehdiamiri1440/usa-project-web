@@ -442,7 +442,7 @@ import { eventBus } from "../../../../../router/router";
 export default {
   data: function() {
     return {
-      messageCount: ""
+      messageCount:0,
     };
   },
   components: {
@@ -456,7 +456,7 @@ export default {
     "username",
     "out",
     "routeHome",
-    "isLoading"
+    "isLoading",
   ],
   methods: {
     logUserOut: function() {
@@ -487,17 +487,17 @@ export default {
   },
   mounted() {
     var self = this;
-    axios
-      .post("/get_total_unread_messages_for_current_user")
-      .then(function(response) {
-        self.messageCount = response.data.msg_count;
-          if (self.messageCount >= 100) {
-              self.messageCount = "+99"
-          }
-      })
-      .catch(function(error) {
-        console.log("error", error);
-      });
+    // axios
+    //   .post("/get_total_unread_messages_for_current_user")
+    //   .then(function(response) {
+    //     self.messageCount = response.data.msg_count;
+    //       if (self.messageCount >= 100) {
+    //           self.messageCount = "+99"
+    //       }
+    //   })
+    //   .catch(function(error) {
+    //     console.log("error", error);
+    //   });
   },
   created() {
     var self = this;
@@ -507,14 +507,7 @@ export default {
     eventBus.$on("active", event => {
       this.activeElement = event;
     });
-    Echo.private("testChannel." + this.$parent.userId).listen(
-      "newMessage",
-      e => {
-        var senderId = e.new_message.sender_id;
-
-        self.messageCount += 1;
-      }
-    );
+    
     document.addEventListener("click", this.documentClick);
   },
   registerComponentStatistics: function(categoryName, actionName, labelName) {

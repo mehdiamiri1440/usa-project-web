@@ -191,7 +191,7 @@ export default {
       elevatorText: "",
       productId: "",
       joinGroupMessage: "",
-      joinGroupId: ""
+      joinGroupId: "",
     };
   },
   props: [
@@ -222,13 +222,14 @@ export default {
       this.joinGroupMessage = $event;
     });
 
-    // if (!window.history.state) {
-    //     window.history.pushState({pushed: true}, '', '/product-list');
-    // }
-
-    // $(window).on('popstate', function (e) {
-    //     eventBus.$emit("ChatBoxStatus",false);
-    // });
+    if(messaging){
+        messaging.onMessage(function(payload){
+            console.log('route: ',payload.notification.tag);
+            if(payload.notification.tag == 'buskool'){
+                eventBus.$emit("messageCount",1);
+            }
+        })
+    }
   },
   router,
   methods: {
@@ -298,7 +299,7 @@ export default {
           $("#custom-main-modal").modal("show");
           eventBus.$emit("reloadAllGroupLists", true);
         });
-    }
+    },
   },
   mounted() {
     this.activateDownloadApp();

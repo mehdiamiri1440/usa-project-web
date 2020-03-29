@@ -216,12 +216,12 @@
 
 .total-unread-messages-badge {
   position: absolute;
-  top: 5px;
+  top: 1px;
   background: red;
   height: 23px;
-  width: 23px;
+  width: 33px;
   color: #fff;
-  border-radius: 50px;
+  border-radius: 10px;
   left: 5px;
   font-size: 12px;
 }
@@ -319,9 +319,6 @@
         <div class="contacts-switch-buttons-wrapper">
           <div class="switch-button-item">
             <button class="contact-button active">
-              <span class="total-unread-messages-badge">
-                5
-              </span>
               <i class="fa fa-user"></i>
               مخاطبین من
             </button>
@@ -334,7 +331,7 @@
               tag="button"
             >
               <span class="total-unread-messages-badge">
-                +99
+                جدید
               </span>
               <i class="fa fa-users"></i>
               گروه های من
@@ -478,6 +475,26 @@ export default {
 
       this.contactList.splice(index, 1, contact);
     },
+    appendMessageToChatHistory: function(contact){
+      var self = this;
+      self.isChatMessagesLoaded = false;
+
+      this.selectedContact = contact;
+      this.currentContactUserId = contact.contact_id;
+
+      axios
+        .post("/get_user_chat_history", {
+          user_id: contact.contact_id
+        })
+        .then(function(response) {
+          self.chatMessages = response.data.messages;
+          self.currentUserId = response.data.current_user_id;
+          self.scrollToEnd(0);
+        })
+        .catch(function(e) {
+          //
+        });
+    },
     scrollToEnd: function(time) {
       var chatPageElementList = $(".chat-page ul");
       var self = this;
@@ -604,6 +621,15 @@ export default {
         event_category: categoryName,
         event_label: labelName
       });
+    },
+    sendTokenToServer: function(token){
+        axios.post('/fcm/register_token',{
+            'token' : token
+        }).then(function(response){
+            let token = response.data.token;
+
+            window.localStorage.setItem('storedToken',JSON.stringify(token));
+        });
     }
   },
   watch: {
@@ -648,42 +674,43 @@ export default {
     gtag("config", "UA-129398000-1", { page_path: "/messages" });
 
     var self = this;
-
+    
     if (Push.Permission.has() === false) {
       Push.Permission.request(
         function() {},
         function() {}
       );
     }
-    Echo.private("testChannel." + self.currentContactUserId).listen(
-      "newMessage",
-      e => {
-        var senderId = e.new_message.sender_id;
-        //update contact list
-        self.loadContactList();
 
-        if (self.currentContactUserId) {
-          if (self.currentContactUserId === senderId) {
-            self.chatMessages.push(e.new_message);
-            self.scrollToEnd(0);
+    if(messaging){
+      messaging.requestPermission()
+        .then(function() {
+            console.log('Notification permission granted.');
+            return messaging.getToken();
+        })
+        .then(function(currentToken) {
+            let sotoredToken = JSON.parse(window.localStorage.getItem('storedToken'));
 
-            if (self.isComponentActive == false) {
-              self.pushNotification(
-                "پیام جدید",
-                e.new_message.text,
-                "/dashboard/messages"
-              );
+            if(sotoredToken != currentToken){
+                self.sendTokenToServer(currentToken);
             }
+        })
+        .catch(function(err) { // Happen if user deney permission
+            console.log('Unable to get permission to notify.', err);
+        });
+
+      messaging.onMessage(function(payload){
+          console.log(payload);
+          if (self.selectedContact) {
+            self.appendMessageToChatHistory(self.selectedContact);
           }
-        } else {
-          this.pushNotification(
-            "پیام جدید",
-            e.new_message.text,
-            "/dashboard/messages"
-          );
-        }
-      }
-    );
+          else{
+            eventBus.$emit("messageCount",1);
+            self.loadContactList();
+          }
+      });
+
+    }
   },
   activated() {
     this.isComponentActive = true;

@@ -624,14 +624,6 @@ export default {
     eventBus.$on("active", event => {
       this.activeElement = event;
     });
-    Echo.private("testChannel." + this.$parent.userId).listen(
-      "newMessage",
-      e => {
-        var senderId = e.new_message.sender_id;
-
-        self.messageCount += 1;
-      }
-    );
     document.addEventListener("click", this.documentClick);
   },
   registerComponentStatistics: function(categoryName, actionName, labelName) {

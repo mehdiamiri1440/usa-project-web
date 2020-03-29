@@ -154,7 +154,7 @@
                             <i class="fas fa-comment-alt" aria-hidden="true"></i>
 
                             <span>پیام ها</span>
-                            <span class="custom-badge" v-if="messageCount" v-text="messageCount"></span>
+                            <span class="custom-badge" v-if="messageCount > 0" v-text="messageCount"></span>
                         </router-link>
                     </li>
 
@@ -208,7 +208,7 @@
             return {
                 activeElement: null,
                 isLoading: true,
-                messageCount: "",
+                messageCount: 0,
                 linksPath: ["/dashboard/complementary"]
             };
         },
@@ -216,17 +216,17 @@
             init: function () {
                 var self = this;
 
-                axios
-                    .post("/get_total_unread_messages_for_current_user")
-                    .then(function (response) {
-                        self.messageCount = response.data.msg_count;
-                        if (self.messageCount >= 100) {
-                            self.messageCount = "+99"
-                        }
-                    })
-                    .catch(function (err) {
-                        //
-                    });
+                // axios
+                //     .post("/get_total_unread_messages_for_current_user")
+                //     .then(function (response) {
+                //         self.messageCount = response.data.msg_count;
+                //         if (self.messageCount >= 100) {
+                //             self.messageCount = "+99"
+                //         }
+                //     })
+                //     .catch(function (err) {
+                //         //
+                //     });
             },
             subIsActive(input) {
                 const paths = Array.isArray(input) ? input : [input];
@@ -262,12 +262,6 @@
             });
             eventBus.$on("active", event => {
                 this.activeElement = event;
-            });
-
-            Echo.private("testChannel." + userId).listen("newMessage", e => {
-                var senderId = e.new_message.sender_id;
-
-                self.messageCount += 1;
             });
         }
     };

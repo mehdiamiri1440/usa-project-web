@@ -131,7 +131,7 @@
                     <router-link :to="{ name : 'messagesBuyer' }">
                         <i class="fas fa-comment-alt" aria-hidden="true"></i>
                         <span>پیام ها</span>
-                        <span class="custom-badge" v-if="messageCount" v-text="messageCount"></span>
+                        <span class="custom-badge" v-if="messageCount > 0" v-text="messageCount"></span>
                     </router-link>
                 </li>
 
@@ -223,11 +223,6 @@
             });
             eventBus.$on("active", event => {
                 this.activeElement = event;
-            });
-            Echo.private("testChannel." + userId).listen("newMessage", e => {
-                var senderId = e.new_message.sender_id;
-
-                self.messageCount += 1;
             });
         }
     };

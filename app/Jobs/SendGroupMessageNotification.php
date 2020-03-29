@@ -7,12 +7,9 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-
-use App\Events\newMessage;
-use App\message;
 use App\Http\Controllers\fcm_controller;
 
-class SendNewMessageNotification implements ShouldQueue
+class SendGroupMessageNotification implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -21,11 +18,12 @@ class SendNewMessageNotification implements ShouldQueue
      *
      * @return void
      */
-    protected $msg;
-    
-    public function __construct(message $msg)
+
+    protected $topic;
+
+    public function __construct($topic)
     {
-        $this->msg = $msg;
+        $this->topic = $topic;
     }
 
     /**
@@ -36,20 +34,18 @@ class SendNewMessageNotification implements ShouldQueue
     public function handle()
     {
         // event(new newMessage($this->msg));
-        $this->send_notification_via_FCM($this->msg);
+        $this->send_notification_via_FCM($this->topic);
     }
     
-    protected function send_notification_via_FCM($msg)
+    protected function send_notification_via_FCM($topic)
     {
         $fcm_controller_object = new fcm_controller();
         
         $data = [
             'title' => 'باسکول',
-            'message' => 'یک پیام جدید در باسکول'
+            'message' => 'پیام جدید در گروه'
         ];
         
-        $topic_name = 'FCM'.$msg->receiver_id;
-        
-        $fcm_controller_object->send_notification_to_the_given_topic($data,$topic_name);
+        $fcm_controller_object->send_notification_to_the_given_topic($data,$topic);
     }
 }

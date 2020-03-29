@@ -9,6 +9,7 @@ use App\messenger_group;
 use App\group_message;
 use App\group_message_receiver;
 use App\Jobs\InsertGroupMessagesToReceiversTable;
+use App\Jobs\SendGroupMessageNotification;
 use Carbon\Carbon;
 use DB;
 
@@ -68,6 +69,8 @@ class group_message_controller extends Controller
                 $message_record->is_link = true;
             }
             $message_record->save();
+
+            $this->notify_group_members($group_id);
 
             return response()->json([
                 'status' => true,
@@ -164,8 +167,8 @@ class group_message_controller extends Controller
                         if($has_http === false)
                             $real_link = 'https://'.$real_link;
                     }
-
-                    $text = preg_replace("/$possible_link/"," <a target='_blank' href='".$real_link."'>$possible_link</a> ",$text,1);
+                    //it's buggy fix it
+                    $text = $this->str_replace_once("$possible_link"," <a target='_blank' href='".$real_link."'>$possible_link</a> ",$text);
                     $text = strip_tags($text,'<a>');
                     $link_flag = true;
                 }
@@ -180,6 +183,23 @@ class group_message_controller extends Controller
     protected function does_text_contain_taboo_words($text)
     {
         return false;
+    }
+
+    protected function str_replace_once($str_pattern, $str_replacement, $string){
+
+        if (strpos($string, $str_pattern) !== false){
+            $occurrence = strpos($string, $str_pattern);
+            return substr_replace($string, $str_replacement, strpos($string, $str_pattern), strlen($str_pattern));
+        }
+    
+        return $string;
+    }
+
+    protected function notify_group_members($group_id)
+    {
+        $group_record = messenger_group::find($group_id);
+
+        SendGroupMessageNotification::dispatch($group_record->topic_name);
     }
 
     public function make_message_accessible_for_group_subscribers($msg,$group_id)

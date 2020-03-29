@@ -400,6 +400,20 @@ Route::group(['middleware' => [login::class]], function () {
             'as' => 'unsubscribe_user_from_group'
         ]);
      });
+
+     Route::group(['prefix' => 'fcm'],function(){
+
+        Route::post('/register_token',[
+            'uses' => 'fcm_controller@subscribe_token_in_topic',
+            'as' => 'register_token'
+        ]);
+
+        Route::post('/register_token_in_groups',[
+            'uses' => 'fcm_controller@subscribe_token_in_groups',
+            'as' => 'register_token_in_groups'
+        ]);
+
+     });
     
 });
 
@@ -687,6 +701,8 @@ Route::post('/get_wp_posts', [
     'uses' => 'index_controller@get_wp_posts',
     'as' => 'get_wp_posts',
 ]);
+
+Route::get('/get-class','fcm_controller@test');
 
 Route::group(['middleware' => [cors::class]], function () {
     Route::options('/broadcastAuth', function () {

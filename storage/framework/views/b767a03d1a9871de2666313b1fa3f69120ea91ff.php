@@ -24,7 +24,6 @@
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap-theme.min.css')); ?>" async>
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl.carousel.min.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl.theme.default.min.css')); ?>">
-    <link type="text/css" rel="preload" href="<?php echo e(asset('assets/css/popup.css')); ?>">
     <link type="text/css" rel="preload" href="<?php echo e(asset('assets/css/magnific-popup.css')); ?>">
     <link rel="preload" href="<?php echo e(asset('index/css/particleNetwork.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('index/css/animate.css')); ?>">
@@ -32,6 +31,7 @@
     <link type="text/css" rel="preload" href="<?php echo e(asset('assets/css/imageuploadify.min.css')); ?>">
     <link type="text/css" rel="preload" href="<?php echo e(asset('assets/css/cropper.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/master/style.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/popup.css')); ?>">
 
 
     <script src="<?php echo e(asset('assets/cdn/axios.js')); ?>"></script>
@@ -110,6 +110,27 @@
                     user-logout-path="<?php echo e(route('logout')); ?>"
             />
 </div>
+
+<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-messaging.js"></script> 
+
+<script>
+
+    var firebaseConfig = {
+        apiKey: "AIzaSyDHAonYamODsV034KRTjzd4_C_z4YpzaRo",
+        authDomain: "incobac-64ec9.firebaseapp.com",
+        databaseURL: "https://incobac-64ec9.firebaseio.com",
+        projectId: "incobac-64ec9",
+        storageBucket: "incobac-64ec9.appspot.com",
+        messagingSenderId: "946346601127",
+        appId: "1:946346601127:web:74e870ed6dd09f369bc982",
+        measurementId: "G-ZXCG6RTHC7"
+    };
+    // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        const messaging = firebase.messaging();
+</script>
 
 <script src="<?php echo e(asset('js/app.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/js/idleTimer.js')); ?>"></script>

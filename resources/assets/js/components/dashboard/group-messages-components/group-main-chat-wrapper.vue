@@ -526,6 +526,7 @@
               :key="msg.id"
             >
               <div
+                @click.prevent="$parent.replyMessageData($event,msg)"
                 :class="[
                   msg.user_id == $parent.currentUserId
                     ? 'message-send'
@@ -551,11 +552,13 @@
                 >
                   <p v-text="msg.first_name + ' ' + msg.last_name"></p>
                 </router-link>
-                <span v-if="msg.is_link" v-html="msg.text"></span>
+                <span 
+                      v-if="msg.is_link" 
+                      v-html="msg.text">
+                </span>
                 <span
                   v-else
-                  v-text="msg.text"
-                  @click.prevent="$parent.replyMessageData(msg)"
+                  v-html="msg.text"
                 ></span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">{{
