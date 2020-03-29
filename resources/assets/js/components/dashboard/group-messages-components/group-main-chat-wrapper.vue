@@ -342,9 +342,7 @@ div {
 .group-chat-list-item > div:hover {
   cursor: pointer;
 }
-.group-chat-list-item span a {
-  text-decoration: underline;
-}
+
 .group-chat-list-item > div:hover .reply-icon {
   display: inline-block;
 }
@@ -564,7 +562,7 @@ div {
                 >
                   <p v-text="msg.first_name + ' ' + msg.last_name"></p>
                 </router-link>
-                <span v-if="msg.is_link" v-html="msg.text"></span>
+                <span class="message-has-link" v-if="msg.is_link" v-html="msg.text"></span>
                 <span v-else v-html="msg.text"></span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">

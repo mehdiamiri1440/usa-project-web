@@ -1203,6 +1203,9 @@ span.min {
   display: none;
 }
 
+.message-has-link a {
+  text-decoration: underline !important;
+}
 @media screen and (max-width: 338px) {
   .custom-navbar .navbar-brand {
     width: 55%;
