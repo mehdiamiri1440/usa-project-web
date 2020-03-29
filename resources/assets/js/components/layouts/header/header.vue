@@ -382,8 +382,14 @@ a.profile-info-wrapper:hover {
 
 .mobile-menu-button {
   float: right;
+  position: relative;
 }
 
+.mobile-menu-button .message-count {
+  padding-top: 5px;
+  left: -10px;
+  top: -8px;
+}
 .navbar-toggle {
   margin: 0;
 
@@ -411,7 +417,29 @@ a.profile-info-wrapper:hover {
 
   z-index: 10;
 }
-
+.message-count {
+  background: #e41c39;
+  border-radius: 50px;
+  font-size: 12px;
+  width: 24px;
+  height: 20px;
+  display: inline-block;
+  position: absolute;
+  top: 0px;
+  color: #fff;
+  left: -9px;
+  padding-top: 1px;
+  text-align: center;
+  z-index: 1;
+}
+.mobile-navigation li {
+  position: relative;
+}
+.mobile-navigation li .message-count {
+  position: relative;
+  top: 0px;
+  padding-top: 5px;
+}
 @media screen and (min-width: 767px) {
   .mobile-background-shadow {
     display: none !important;
@@ -747,6 +775,7 @@ a.profile-info-wrapper:hover {
     <nav class="navbar text-rtl">
       <div class="container-fluid buskool-main-nav">
         <div class="hidden-md hidden-sm hidden-lg mobile-menu-button">
+          <span class="message-count">+99</span>
           <button
             type="button"
             class="navbar-toggle"
@@ -868,20 +897,26 @@ a.profile-info-wrapper:hover {
               </li>
               <li v-if="user_id !== ''">
                 <router-link
-                        v-if="is_seller == 1"
-                        class="smoothScroll"
-                        :to="{name : 'messagesSeller'}"
-                        @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
-                >پیام ها</router-link>
+                  v-if="is_seller == 1"
+                  class="smoothScroll"
+                  :to="{name : 'messagesSeller'}"
+                  @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
+                >
+                  پیام ها
+                  <span class="message-count">+99</span>
+                </router-link>
 
                 <router-link
-                        v-else
-                        class="smoothScroll"
-                        :to="{name : 'messagesBuyer'}"
-                        @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
-                >پیام ها</router-link>
+                  v-else
+                  class="smoothScroll"
+                  :to="{name : 'messagesBuyer'}"
+                  @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
+                >
+                  پیام ها
+                  <span class="message-count">+99</span>
+                </router-link>
               </li>
-               <li v-if="user_id !== ''">
+              <li v-if="user_id !== ''">
                 <router-link
                   v-if="is_seller == 1"
                   class="smoothScroll"
@@ -894,7 +929,7 @@ a.profile-info-wrapper:hover {
                   :to="{name : 'registerRequestBuyer'}"
                   @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
                 >ثبت درخواست خرید</router-link>
-              </li> 
+              </li>
               <li>
                 <router-link
                   class="smoothScroll"
@@ -954,30 +989,36 @@ a.profile-info-wrapper:hover {
               class="smoothScroll"
               :to="{name : 'messagesSeller'}"
               @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
-            >پیام ها</router-link>
+            >
+              پیام ها
+              <span class="message-count">+99</span>
+            </router-link>
 
             <router-link
               v-else
               class="smoothScroll"
               :to="{name : 'messagesBuyer'}"
               @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
-            >پیام ها</router-link>
+            >
+              پیام ها
+              <span class="message-count">+99</span>
+            </router-link>
           </li>
 
           <li v-if="user_id !== ''">
-                <router-link
-                  v-if="is_seller == 1"
-                  class="smoothScroll"
-                  :to="{name : 'buyAdRequestsSeller'}"
-                  @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
-                >درخواست های خرید</router-link>
-                <router-link
-                  v-else
-                  class="smoothScroll"
-                  :to="{name : 'registerRequestBuyer'}"
-                  @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
-                >ثبت درخواست خرید</router-link>
-              </li> 
+            <router-link
+              v-if="is_seller == 1"
+              class="smoothScroll"
+              :to="{name : 'buyAdRequestsSeller'}"
+              @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
+            >درخواست های خرید</router-link>
+            <router-link
+              v-else
+              class="smoothScroll"
+              :to="{name : 'registerRequestBuyer'}"
+              @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
+            >ثبت درخواست خرید</router-link>
+          </li>
 
           <li>
             <router-link
@@ -1210,13 +1251,17 @@ export default {
     var self = this;
 
     window.addEventListener("keydown", function(event) {
-        if( ! window.location.pathname.includes('seller') &&  !window.location.pathname.includes('buyer') &&  !window.location.pathname.includes('login')){
-            if (event.keyCode === 13){
-                self.search();
-                $("#buskool-nav").collapse("hide");
-                $("#web-profile-items").collapse("hide");
-            }
+      if (
+        !window.location.pathname.includes("seller") &&
+        !window.location.pathname.includes("buyer") &&
+        !window.location.pathname.includes("login")
+      ) {
+        if (event.keyCode === 13) {
+          self.search();
+          $("#buskool-nav").collapse("hide");
+          $("#web-profile-items").collapse("hide");
         }
+      }
     });
   },
   watch: {

@@ -134,23 +134,36 @@ const router = new Router({
         //         }
         //     },
         // },
+
         {
-          path: "messages",
-          name: "messagesSeller",
+          path: "messenger",
           components: {
             default: resolve => {
-              require(["../components/dashboard/messages"], resolve);
+              require(["../components/dashboard/messenger.vue"], resolve);
             }
-          }
-        },
-        {
-          path: "group-messages",
-          name: "groupMessagesSeller",
-          components: {
-            default: resolve => {
-              require(["../components/dashboard/group-messages"], resolve);
+          },
+          children: [
+            {
+              path: "contacts",
+              name: "messagesSeller",
+              components: {
+                "contact-list": resolve => {
+                  require(["../components/dashboard/messages.vue"], resolve);
+                }
+              }
+            },
+            {
+              path: "group-messages",
+              name: "groupMessagesSeller",
+              components: {
+                "group-list": resolve => {
+                  require([
+                    "../components/dashboard/group-messages.vue"
+                  ], resolve);
+                }
+              }
             }
-          }
+          ]
         },
         {
           path: "buyAd-requests",
@@ -303,23 +316,36 @@ const router = new Router({
         //         }
         //     },
         // },
+
         {
-          path: "messages",
-          name: "messagesBuyer",
+          path: "messenger",
           components: {
             default: resolve => {
-              require(["../components/dashboard/messages"], resolve);
+              require(["../components/dashboard/messenger.vue"], resolve);
             }
-          }
-        },
-        {
-          path: "group-messages",
-          name: "groupMessagesBuyer",
-          components: {
-            default: resolve => {
-              require(["../components/dashboard/group-messages"], resolve);
+          },
+          children: [
+            {
+              path: "contacts",
+              name: "messagesBuyer",
+              components: {
+                "contact-list": resolve => {
+                  require(["../components/dashboard/messages.vue"], resolve);
+                }
+              }
+            },
+            {
+              path: "group-messages",
+              name: "groupMessagesBuyer",
+              components: {
+                "group-list": resolve => {
+                  require([
+                    "../components/dashboard/group-messages.vue"
+                  ], resolve);
+                }
+              }
             }
-          }
+          ]
         },
         {
           path: "register-request",

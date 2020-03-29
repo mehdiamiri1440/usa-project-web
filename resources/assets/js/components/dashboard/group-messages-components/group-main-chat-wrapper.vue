@@ -1,4 +1,9 @@
 <style scoped>
+span,
+p,
+div {
+  word-break: break-all;
+}
 .loading-container {
   display: flex;
   width: 100%;
@@ -337,7 +342,9 @@
 .group-chat-list-item > div:hover {
   cursor: pointer;
 }
-
+.group-chat-list-item span a {
+  text-decoration: underline;
+}
 .group-chat-list-item > div:hover .reply-icon {
   display: inline-block;
 }
@@ -381,9 +388,7 @@
 
   padding: 7px 15px;
 }
-.reply-info p {
-  height: 15px;
-}
+
 .reply-info p,
 .replied-message-item-wrapper p {
   width: calc(100% - 15px);
@@ -392,13 +397,17 @@
 
   text-overflow: ellipsis;
 
-  white-space: nowrap;
+  word-break: break-all;
+
+  height: 21px;
 
   font-size: 12px;
 }
+.reply-info p:last-of-type {
+  height: 12px;
+}
 .reply-info p:first-of-type,
 .replied-message-item-wrapper p:first-of-type {
-  margin-bottom: 4px;
   color: #00c569;
   font-size: 13px;
 }
@@ -482,21 +491,23 @@
         <div class="message-contact-title">
           <div class="contact-title-contents pull-right">
             <div class="message-contact-title-img">
-              <img :src="$parent.defultimg" />
+              <img
+                v-if="$parent.selectedGroup.photo"
+                :src="$parent.str + '/' + $parent.selectedGroup.photo"
+                :alt="$parent.selectedGroup.name"
+              />
+
+              <img v-else :src="$parent.assets + 'assets/img/group-category.jpg'" />
             </div>
 
-            <span
-              v-if="$parent.selectedGroup.name"
-              v-text="'گروه ' + $parent.selectedGroup.name"
-            ></span>
+            <span v-if="$parent.selectedGroup.name" v-text="'گروه ' + $parent.selectedGroup.name"></span>
           </div>
-          <div class="back-state hidden-sm hidden-md hidden-lg  pull-left">
+          <div class="back-state hidden-sm hidden-md hidden-lg pull-left">
             <a
               href="#"
               @click.prevent="$parent.selectedGroup = !$parent.selectedGroup"
               class="green-button"
-              >بازگشت</a
-            >
+            >بازگشت</a>
           </div>
         </div>
 
@@ -520,15 +531,16 @@
             <li
               v-for="(msg, index) in $parent.groupChatMessages"
               class="group-chat-list-item"
-              :class="{
-                'margin-top-10': $parent.checkMessageName(index, index - 1)
-              }"
+              :class="[
+            
+                $parent.checkMessageName(index, index - 1) ? 'margin-top-10' : ''
+              ]"
               :key="msg.id"
             >
               <div
                 @click.prevent="$parent.replyMessageData($event,msg)"
                 :class="[
-                  msg.user_id == $parent.currentUserId
+                 msg.user_id == $parent.currentUserId
                     ? 'message-send'
                     : 'message-receive'
                 ]"
@@ -552,25 +564,20 @@
                 >
                   <p v-text="msg.first_name + ' ' + msg.last_name"></p>
                 </router-link>
-                <span 
-                      v-if="msg.is_link" 
-                      v-html="msg.text">
-                </span>
-                <span
-                  v-else
-                  v-html="msg.text"
-                ></span>
+                <span v-if="msg.is_link" v-html="msg.text"></span>
+                <span v-else v-html="msg.text"></span>
                 <span class="message-chat-date">
-                  <span v-if="msg.created_at">{{
+                  <span v-if="msg.created_at">
+                    {{
                     msg.created_at | moment("jYY/jMM/jDD, h:mm A")
-                  }}</span>
-                  <span v-else>{{
+                    }}
+                  </span>
+                  <span v-else>
+                    {{
                     Date() | moment("jYY/jMM/jDD, h:mm A")
-                  }}</span>
-                  <span
-                    class="check-items"
-                    v-if="msg.user_id === $parent.currentUserId"
-                  >
+                    }}
+                  </span>
+                  <span class="check-items" v-if="msg.user_id === $parent.currentUserId">
                     <i class="fa fa-check" v-if="msg.created_at"></i>
                     <i class="far fa-clock" v-else></i>
                   </span>
@@ -602,10 +609,7 @@
             </div>
           </div>
           <div class="send-message-form">
-            <div
-              class="reply-message-wrapper"
-              :class="{ 'reply-active': $parent.loadReplyData }"
-            >
+            <div class="reply-message-wrapper" :class="{ 'reply-active': $parent.loadReplyData }">
               <div class="cancle-reply">
                 <button @click.prevent="$parent.resetReplyMessage()">
                   <i class="fa fa-times"></i>
@@ -624,18 +628,11 @@
             </div>
             <form>
               <div class="message-input">
-                <input
-                  type="text"
-                  placeholder="پیغامی بگذارید "
-                  v-model="$parent.msgToSend"
-                />
+                <input type="text" placeholder="پیغامی بگذارید " v-model="$parent.msgToSend" />
               </div>
 
               <div class="button-wrapper">
-                <button
-                  type="submit"
-                  @click.prevent="$parent.sendMessageToGroup()"
-                >
+                <button type="submit" @click.prevent="$parent.sendMessageToGroup()">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="13.347"
@@ -676,10 +673,7 @@
       </div>
     </div>
 
-    <div
-      class="col-xs-12 group-message-wrapper col-sm-8 col-md-9"
-      v-if="!$parent.selectedGroup"
-    >
+    <div class="col-xs-12 group-message-wrapper col-sm-8 col-md-9" v-if="!$parent.selectedGroup">
       <h2>برای عضویت در گروه کلیک کنید</h2>
       <div class="main-group-message">
         <div
@@ -703,16 +697,8 @@
           :key="index"
         >
           <button @click.prevent="$parent.subscribeUser(group.id)">
-            <img
-              v-if="group.photo"
-              :src="$parent.str + group.photo"
-              :alt="'گروه ' + group.name"
-            />
-            <img
-              v-else
-              :src="$parent.assets + 'assets/img/group-category.jpg'"
-              alt
-            />
+            <img v-if="group.photo" :src="$parent.str + group.photo" :alt="'گروه ' + group.name" />
+            <img v-else :src="$parent.assets + 'assets/img/group-category.jpg'" alt />
 
             <p class="pull-right" v-text="'گروه ' + group.name"></p>
             <span class="group-item-icon pull-left">

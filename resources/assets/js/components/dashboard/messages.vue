@@ -325,29 +325,19 @@
           </div>
 
           <div class="switch-button-item">
-            <router-link
-              class="contact-button"
-              :to="{ path: 'group-messages' }"
-              tag="button"
-            >
-              <span class="total-unread-messages-badge">
-                جدید
-              </span>
+            <router-link class="contact-button" :to="{ path: 'group-messages' }" tag="button">
+              <span class="total-unread-messages-badge">جدید</span>
               <i class="fa fa-users"></i>
               گروه های من
             </router-link>
           </div>
 
           <div class="switch-button-item hidden-lg hidden-md hidden-sm">
-            <router-link
-              class="contact-button"
-              :to="{ path: 'add-new-group' }"
-              tag="button"
-            >
+            <button class="contact-button" @click="goToGroupList()">
               <i class="fa fa-plus"></i>
               <i class="fa fa-users"></i>
               افزودن گروه
-            </router-link>
+            </button>
           </div>
         </div>
 
@@ -475,7 +465,7 @@ export default {
 
       this.contactList.splice(index, 1, contact);
     },
-    appendMessageToChatHistory: function(contact){
+    appendMessageToChatHistory: function(contact) {
       var self = this;
       self.isChatMessagesLoaded = false;
 
@@ -622,14 +612,20 @@ export default {
         event_label: labelName
       });
     },
-    sendTokenToServer: function(token){
-        axios.post('/fcm/register_token',{
-            'token' : token
-        }).then(function(response){
-            let token = response.data.token;
+    sendTokenToServer: function(token) {
+      axios
+        .post("/fcm/register_token", {
+          token: token
+        })
+        .then(function(response) {
+          let token = response.data.token;
 
-            window.localStorage.setItem('storedToken',JSON.stringify(token));
+          window.localStorage.setItem("storedToken", JSON.stringify(token));
         });
+    },
+    goToGroupList: function() {
+      this.$router.push("group-messages");
+      this.$parent.groupStep = 1;
     }
   },
   watch: {
@@ -674,7 +670,7 @@ export default {
     gtag("config", "UA-129398000-1", { page_path: "/messages" });
 
     var self = this;
-    
+
     if (Push.Permission.has() === false) {
       Push.Permission.request(
         function() {},
@@ -682,34 +678,36 @@ export default {
       );
     }
 
-    if(messaging){
-      messaging.requestPermission()
+    if (messaging) {
+      messaging
+        .requestPermission()
         .then(function() {
-            console.log('Notification permission granted.');
-            return messaging.getToken();
+          console.log("Notification permission granted.");
+          return messaging.getToken();
         })
         .then(function(currentToken) {
-            let sotoredToken = JSON.parse(window.localStorage.getItem('storedToken'));
+          let sotoredToken = JSON.parse(
+            window.localStorage.getItem("storedToken")
+          );
 
-            if(sotoredToken != currentToken){
-                self.sendTokenToServer(currentToken);
-            }
+          if (sotoredToken != currentToken) {
+            self.sendTokenToServer(currentToken);
+          }
         })
-        .catch(function(err) { // Happen if user deney permission
-            console.log('Unable to get permission to notify.', err);
+        .catch(function(err) {
+          // Happen if user deney permission
+          console.log("Unable to get permission to notify.", err);
         });
 
-      messaging.onMessage(function(payload){
-          console.log(payload);
-          if (self.selectedContact) {
-            self.appendMessageToChatHistory(self.selectedContact);
-          }
-          else{
-            eventBus.$emit("messageCount",1);
-            self.loadContactList();
-          }
+      messaging.onMessage(function(payload) {
+        console.log(payload);
+        if (self.selectedContact) {
+          self.appendMessageToChatHistory(self.selectedContact);
+        } else {
+          eventBus.$emit("messageCount", 1);
+          self.loadContactList();
+        }
       });
-
     }
   },
   activated() {

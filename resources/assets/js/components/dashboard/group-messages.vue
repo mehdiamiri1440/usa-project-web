@@ -265,6 +265,7 @@
   }
   .reply-info p {
     width: 100%;
+    word-wrap: break-word;
   }
 }
 
@@ -294,25 +295,19 @@
       <div class="row">
         <div class="contacts-switch-buttons-wrapper">
           <div class="switch-button-item">
-            <router-link
-              class="contact-button"
-              :to="{ path: 'messages' }"
-              tag="button"
-            >
+            <button class="contact-button" @click="goToContactList()">
               <i class="fa fa-user"></i>
               مخاطبین من
-            </router-link>
+            </button>
           </div>
 
           <div class="switch-button-item">
             <button
-              class="contact-button "
-              @click.prevent="isCurrentStep = 0"
-              :class="{ active: isCurrentStep == 0 }"
+              class="contact-button"
+              @click.prevent="$parent.groupStep = 0"
+              :class="{ active: $parent.groupStep == 0 }"
             >
-              <span class="total-unread-messages-badge">
-                  جدید
-              </span>
+              <span class="total-unread-messages-badge">جدید</span>
               <i class="fa fa-users"></i>
               گروه های من
             </button>
@@ -321,8 +316,8 @@
           <div class="switch-button-item hidden-lg hidden-md hidden-sm">
             <button
               class="contact-button"
-              @click.prevent="isCurrentStep = 1"
-              :class="{ active: isCurrentStep == 1 }"
+              @click.prevent="$parent.groupStep = 1"
+              :class="{ active: $parent.groupStep == 1 }"
             >
               <i class="fa fa-plus"></i>
               <i class="fa fa-users"></i>
@@ -331,7 +326,7 @@
           </div>
         </div>
 
-        <my-group-list v-if="isCurrentStep == 0" />
+        <my-group-list v-if="$parent.groupStep == 0" />
         <group-list v-else />
       </div>
     </div>
@@ -349,7 +344,7 @@ import MainChatWrapper from "./group-messages-components/group-main-chat-wrapper
 import GroupList from "./group-messages-components/group-list";
 
 export default {
-  props: ["defultimg", "str", "loading_img"],
+  props: ["defultimg", "str", "loading_img", "getUserId"],
   components: {
     MyGroupList,
     MainChatWrapper,
@@ -391,13 +386,14 @@ export default {
       allGroupIsload: false,
       replyMessage: "",
       loadReplyData: false,
-      messageCount:0,
+      messageCount: 0
     };
   },
 
   methods: {
     init: function() {
-      this.currentUserId = this.$parent.userId;
+      this.currentUserId = this.getUserId;
+
       this.loadGroupList();
     },
     loadImage: function() {
@@ -461,27 +457,27 @@ export default {
 
       // this.groupList.splice(index, 1, group);
     },
-    appendMessageToGroupHistory: function(group){
-        var self = this;
+    appendMessageToGroupHistory: function(group) {
+      var self = this;
 
-        this.groupMessageCount = 50;
-        self.isGroupChatMessagesLoaded = false;
-        self.selectedGroup = group;
+      this.groupMessageCount = 50;
+      self.isGroupChatMessagesLoaded = false;
+      self.selectedGroup = group;
 
-        axios
-          .post("/group/get_group_chats", {
-            group_id: group.id,
-            message_count: self.groupMessageCount
-          })
-          .then(function(response) {
-            self.groupChatMessages = response.data.messages;
-            self.isGroupChatMessagesLoaded = false;
+      axios
+        .post("/group/get_group_chats", {
+          group_id: group.id,
+          message_count: self.groupMessageCount
+        })
+        .then(function(response) {
+          self.groupChatMessages = response.data.messages;
+          self.isGroupChatMessagesLoaded = false;
 
-            self.scrollToEnd(0);
-          })
-          .catch(function(e) {
-            //
-          });
+          self.scrollToEnd(0);
+        })
+        .catch(function(e) {
+          //
+        });
     },
     scrollToEnd: function(time) {
       var chatPageElementList = $(".chat-page ul");
@@ -710,11 +706,10 @@ export default {
       self.allGroupIsload = false;
       self.UnsubscribeGroups = groups;
     },
-    replyMessageData: function(e,msg) {
-      if(this.isTargetALink(e.target)){
-          window.open(e.target.href,'_blank');
-      }
-      else{
+    replyMessageData: function(e, msg) {
+      if (this.isTargetALink(e.target)) {
+        window.open(e.target.href, "_blank");
+      } else {
         this.loadReplyData = true;
         this.replyMessage = msg;
 
@@ -739,19 +734,25 @@ export default {
         this.replyMessage = "";
       }, 100);
     },
-    isTargetALink:function(target){
-        if(target.href) return true;
+    isTargetALink: function(target) {
+      if (target.href) return true;
 
-        return false;
+      return false;
     },
-    sendTokenToServer: function(token){
-        axios.post('/fcm/register_token_in_groups',{
-            'token' : token
-        }).then(function(response){
-            let token = response.data.token;
+    sendTokenToServer: function(token) {
+      axios
+        .post("/fcm/register_token_in_groups", {
+          token: token
+        })
+        .then(function(response) {
+          let token = response.data.token;
 
-            window.localStorage.setItem('storedToken',JSON.stringify(token));
+          window.localStorage.setItem("storedToken", JSON.stringify(token));
         });
+    },
+    goToContactList: function() {
+      this.$router.push("contacts");
+      this.$parent.groupStep = 0;
     }
   },
   watch: {
@@ -789,7 +790,7 @@ export default {
     reloadGroupList: function(event) {
       this.reloadGroupList = false;
       this.loadGroupList();
-    },
+    }
   },
   mounted: function() {
     this.init();
@@ -815,35 +816,36 @@ export default {
       this.reloadGroupList = $event;
     });
 
-    if(messaging){
-      messaging.requestPermission()
+    if (messaging) {
+      messaging
+        .requestPermission()
         .then(function() {
-            console.log('Notification permission granted.');
-            return messaging.getToken();
+          console.log("Notification permission granted.");
+          return messaging.getToken();
         })
         .then(function(currentToken) {
-            let sotoredToken = JSON.parse(window.localStorage.getItem('storedToken'));
+          let sotoredToken = JSON.parse(
+            window.localStorage.getItem("storedToken")
+          );
 
-            if(sotoredToken != currentToken){
-                self.sendTokenToServer(currentToken);
-            }
-       
+          if (sotoredToken != currentToken) {
+            self.sendTokenToServer(currentToken);
+          }
         })
-        .catch(function(err) { // Happen if user deney permission
-            console.log('Unable to get permission to notify.', err);
+        .catch(function(err) {
+          // Happen if user deney permission
+          console.log("Unable to get permission to notify.", err);
         });
 
-      messaging.onMessage(function(payload){
-          console.log(self.selectedContact);
-          if (self.selectedGroup) {
-            self.appendMessageToGroupHistory(self.selectedGroup);
-          }
-          else{
-            // eventBus.$emit("messageCount",1);
-            self.loadGroupList();
-          }
+      messaging.onMessage(function(payload) {
+        console.log(self.selectedContact);
+        if (self.selectedGroup) {
+          self.appendMessageToGroupHistory(self.selectedGroup);
+        } else {
+          // eventBus.$emit("messageCount",1);
+          self.loadGroupList();
+        }
       });
-
     }
 
     // Echo.private("testChannel." + self.currentContactUserId).listen(
