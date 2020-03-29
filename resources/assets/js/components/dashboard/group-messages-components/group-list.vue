@@ -173,8 +173,16 @@
       <ul>
         <li class="contact-item" v-for="(group, index) in $parent.UnsubscribeGroups" :key="index">
           <div class="contact-image">
-            <img v-if="group.photo" :src="$parent.str + group.photo" :alt="group.name" />
-            <img v-else :src="$parent.assets + 'assets/img/group-images/group-category.jpg'" />
+            <img
+              v-if="group.photo"
+              :src="$parent.assets + 'assets/img/group-images/'+ group.photo"
+              :alt="'گروه ' + group.name"
+            />
+            <img
+              v-else
+              :src="$parent.assets + 'assets/img/group-images/group-category.jpg'"
+              :alt="'گروه ' + group.name"
+            />
           </div>
           <span class="contact-name" v-text="group.name"></span>
           <button class="green-button" @click.prevent="$parent.subscribeUser(group.id)">
