@@ -497,7 +497,7 @@ div {
                 :alt="$parent.selectedGroup.name"
               />
 
-              <img v-else :src="$parent.assets + 'assets/img/group-category.jpg'" />
+              <img v-else :src="$parent.assets + 'assets/img/group-images/group-category.jpg'" />
             </div>
 
             <span v-if="$parent.selectedGroup.name" v-text="'گروه ' + $parent.selectedGroup.name"></span>
@@ -698,7 +698,7 @@ div {
         >
           <button @click.prevent="$parent.subscribeUser(group.id)">
             <img v-if="group.photo" :src="$parent.str + group.photo" :alt="'گروه ' + group.name" />
-            <img v-else :src="$parent.assets + 'assets/img/group-category.jpg'" alt />
+            <img v-else :src="$parent.assets + 'assets/img/group-images/group-category.jpg'" />
 
             <p class="pull-right" v-text="'گروه ' + group.name"></p>
             <span class="group-item-icon pull-left">

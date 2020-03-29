@@ -139,11 +139,7 @@
     <div class="contact-search">
       <form action>
         <div class="contact-search-input-wrapper">
-          <input
-            type="text"
-            placeholder="جستجوی مخاطبین"
-            v-model="$parent.contactNameSearchText"
-          />
+          <input type="text" placeholder="جستجوی مخاطبین" v-model="$parent.contactNameSearchText" />
           <i class="fa fa-search"></i>
         </div>
       </form>
@@ -153,10 +149,7 @@
         class="image-wrapper"
         v-if="!$parent.contactNameSearchText && !$parent.isContactListLoaded"
       >
-        <div
-          v-show="!$parent.isImageLoad || $parent.isImageLoad"
-          class="lds-ring"
-        >
+        <div v-show="!$parent.isImageLoad || $parent.isImageLoad" class="lds-ring">
           <div></div>
           <div></div>
           <div></div>
@@ -165,9 +158,7 @@
         <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
       </div>
 
-      <div
-        v-else-if="$parent.contactNameSearchText && !$parent.isSearchingContact"
-      >
+      <div v-else-if="$parent.contactNameSearchText && !$parent.isSearchingContact">
         <p>
           <i class="fa fa-user"></i>
           <span>مخاطب یافت نشد</span>
@@ -192,11 +183,7 @@
 
     <div v-else class="contact-items">
       <ul>
-        <li
-          class="contact-item"
-          v-for="(contact, index) in $parent.contactList"
-          :key="index"
-        >
+        <li class="contact-item" v-for="(contact, index) in $parent.contactList" :key="index">
           <a href="#" @click.prevent="$parent.loadChatHistory(contact, index)">
             <div class="contact-image">
               <img
@@ -205,24 +192,16 @@
                 :alt="contact.first_name[0]"
               />
 
-              <img v-else :src="$parent.defultimg" />
+              <img v-else :src="$parent.defultImg" />
             </div>
             <div class="my-contact-info-wrapper">
-              <span
-                class="contact-name"
-                v-text="contact.first_name + ' ' + contact.last_name"
-              ></span>
+              <span class="contact-name" v-text="contact.first_name + ' ' + contact.last_name"></span>
 
-              <p class="last-message-date">
-                {{ contact.last_msg_time_date | moment("jYY/jMM/jDD") }}
-              </p>
+              <p class="last-message-date">{{ contact.last_msg_time_date | moment("jYY/jMM/jDD") }}</p>
             </div>
 
             <div class="my-contact-info-wrapper">
-              <span
-                class="contact-last-message"
-                v-text="contact.last_msg.last_msg_text"
-              ></span>
+              <span class="contact-last-message" v-text="contact.last_msg.last_msg_text"></span>
 
               <div class="count-number-wrapper">
                 <p

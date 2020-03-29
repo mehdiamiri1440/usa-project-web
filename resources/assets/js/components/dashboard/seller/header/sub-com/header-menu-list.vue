@@ -203,7 +203,7 @@ export default {
       activeElement: null,
       isLoading: true,
       messageCount: 0,
-      linksPath: ["/seller/group-messages"]
+      linksPath: ["/seller/messenger/group-messages"]
     };
   },
   methods: {

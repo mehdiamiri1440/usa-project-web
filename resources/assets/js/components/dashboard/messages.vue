@@ -373,7 +373,7 @@ import myContactList from "./messages-components/my-contact-list";
 import MainChatWrapper from "./messages-components/main-chat-wrapper";
 
 export default {
-  props: ["defultimg", "str", "loading_img"],
+  props: ["str", "loading_img"],
   components: {
     myContactList,
     MainChatWrapper
@@ -401,12 +401,14 @@ export default {
       contactNameSearchText: "",
       isContactListLoaded: false,
       isCurrentStep: 0,
-      assets: this.$parent.assets
+      assets: this.$parent.assets,
+      defultImg: this.$parent.defultimg
     };
   },
 
   methods: {
     init: function() {
+      console.log(this.defultImg);
       this.loadContactList();
     },
     loadImage: function() {

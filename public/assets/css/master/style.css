@@ -1199,6 +1199,10 @@ span.min {
   display: none;
 }
 
+.right-header.little_header .label-radio label span {
+  display: none;
+}
+
 @media screen and (max-width: 338px) {
   .custom-navbar .navbar-brand {
     width: 55%;

@@ -212,12 +212,10 @@
             :alt="$parent.selectedContact.first_name[0]"
           />
 
-          <img v-else :src="$parent.defultimg" />
+          <img v-else :src="$parent.defultImg" />
         </div>
 
-        <router-link
-          :to="{ path: '/profile/' + $parent.selectedContact.user_name }"
-        >
+        <router-link :to="{ path: '/profile/' + $parent.selectedContact.user_name }">
           <span
             v-text="
               $parent.selectedContact.first_name +
@@ -227,13 +225,12 @@
           ></span>
         </router-link>
       </div>
-      <div class="back-state hidden-sm hidden-md hidden-lg  pull-left">
+      <div class="back-state hidden-sm hidden-md hidden-lg pull-left">
         <a
           href="#"
           @click.prevent="$parent.selectedContact = !$parent.selectedContact"
           class="green-button"
-          >بازگشت</a
-        >
+        >بازگشت</a>
       </div>
     </div>
 
@@ -255,14 +252,13 @@
           >
             <span v-text="msg.text"></span>
             <span class="message-chat-date">
-              <span v-if="msg.created_at">{{
+              <span v-if="msg.created_at">
+                {{
                 msg.created_at | moment("jYY/jMM/jDD, h:mm A")
-              }}</span>
+                }}
+              </span>
               <span v-else>{{ Date() | moment("jYY/jMM/jDD, h:mm A") }}</span>
-              <span
-                class="check-items"
-                v-if="msg.sender_id === $parent.currentUserId"
-              >
+              <span class="check-items" v-if="msg.sender_id === $parent.currentUserId">
                 <i class="fa fa-check" v-if="msg.created_at"></i>
                 <i class="far fa-clock" v-else></i>
                 <i class="fa fa-check" v-if="msg.is_read"></i>
@@ -276,10 +272,7 @@
         v-if="$parent.isChatMessagesLoaded && $parent.isFirstMessageLoading"
       >
         <div class="image-wrapper">
-          <div
-            v-show="!$parent.isImageLoad || $parent.isImageLoad"
-            class="lds-ring"
-          >
+          <div v-show="!$parent.isImageLoad || $parent.isImageLoad" class="lds-ring">
             <div></div>
             <div></div>
             <div></div>
@@ -291,11 +284,7 @@
       <div class="send-message-form">
         <form>
           <div class="message-input">
-            <input
-              type="text"
-              placeholder="پیغامی بگذارید "
-              v-model="$parent.msgToSend"
-            />
+            <input type="text" placeholder="پیغامی بگذارید " v-model="$parent.msgToSend" />
           </div>
 
           <div class="button-wrapper">

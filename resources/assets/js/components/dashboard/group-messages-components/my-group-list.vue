@@ -150,11 +150,7 @@ li.add-group-button-wrapper {
     <div class="contact-search">
       <form action>
         <div class="contact-search-input-wrapper">
-          <input
-            type="text"
-            placeholder="جستجوی گروه"
-            v-model="$parent.groupNameSearchText"
-          />
+          <input type="text" placeholder="جستجوی گروه" v-model="$parent.groupNameSearchText" />
 
           <i class="fa fa-search"></i>
         </div>
@@ -172,14 +168,8 @@ li.add-group-button-wrapper {
     </div>
 
     <div v-else-if="$parent.groupList.length === 0" class="not-found-item">
-      <div
-        class="image-wrapper"
-        v-if="!$parent.groupNameSearchText && !$parent.isSearchingGroup"
-      >
-        <div
-          v-show="!$parent.isImageLoad || $parent.isImageLoad"
-          class="lds-ring"
-        >
+      <div class="image-wrapper" v-if="!$parent.groupNameSearchText && !$parent.isSearchingGroup">
+        <div v-show="!$parent.isImageLoad || $parent.isImageLoad" class="lds-ring">
           <div></div>
           <div></div>
           <div></div>
@@ -228,26 +218,12 @@ li.add-group-button-wrapper {
             افزودن گروه
           </button>
         </li>
-        <li
-          class="contact-item"
-          v-for="(group, index) in $parent.groupList"
-          :key="index"
-        >
-          <a
-            href="#"
-            @click.prevent="$parent.loadGroupChatHistory(group, index)"
-          >
+        <li class="contact-item" v-for="(group, index) in $parent.groupList" :key="index">
+          <a href="#" @click.prevent="$parent.loadGroupChatHistory(group, index)">
             <div class="contact-image">
-              <img
-                v-if="group.photo"
-                :src="$parent.str + '/' + group.photo"
-                :alt="group.name"
-              />
+              <img v-if="group.photo" :src="$parent.str + '/' + group.photo" :alt="group.name" />
 
-              <img
-                v-else
-                :src="$parent.assets + 'assets/img/group-category.jpg'"
-              />
+              <img v-else :src="$parent.assets + 'assets/img/group-images/group-category.jpg'" />
             </div>
             <span class="contact-name" v-text="'گروه ' + group.name"></span>
             <!-- <div class="my-contact-date">
