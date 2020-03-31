@@ -775,7 +775,7 @@ a.profile-info-wrapper:hover {
     <nav class="navbar text-rtl">
       <div class="container-fluid buskool-main-nav">
         <div class="hidden-md hidden-sm hidden-lg mobile-menu-button">
-          <span class="message-count">+99</span>
+          <span class="message-count" v-if="messageCount > 0" v-text="messageCount"></span>
           <button
             type="button"
             class="navbar-toggle"
@@ -903,7 +903,7 @@ a.profile-info-wrapper:hover {
                   @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
                 >
                   پیام ها
-                  <span class="message-count">+99</span>
+                  <span class="message-count" v-if="messageCount > 0" v-text="messageCount"></span>
                 </router-link>
 
                 <router-link
@@ -913,7 +913,7 @@ a.profile-info-wrapper:hover {
                   @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
                 >
                   پیام ها
-                  <span class="message-count">+99</span>
+                  <span class="message-count" v-if="messageCount > 0" v-text="messageCount"></span>
                 </router-link>
               </li>
               <li v-if="user_id !== ''">
@@ -991,7 +991,7 @@ a.profile-info-wrapper:hover {
               @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
             >
               پیام ها
-              <span class="message-count">+99</span>
+              <span class="message-count" v-if="messageCount > 0" v-text="messageCount"></span>
             </router-link>
 
             <router-link
@@ -1001,7 +1001,7 @@ a.profile-info-wrapper:hover {
               @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
             >
               پیام ها
-              <span class="message-count">+99</span>
+              <span class="message-count" v-if="messageCount > 0" v-text="messageCount"></span>
             </router-link>
           </li>
 
@@ -1074,7 +1074,8 @@ export default {
       deleteButtonText: "",
       cancelButtonText: "",
       ProductId: "",
-      mainSearchBoxText: ""
+      mainSearchBoxText: "",
+      messageCount:0,
     };
   },
   props: [
@@ -1167,6 +1168,18 @@ export default {
     }
   },
   mounted() {
+
+    if(this.user_id){
+        axios
+          .post("/get_total_unread_messages_for_current_user")
+          .then(function(response) {
+              let messageCount = response.data.msg_count;
+              eventBus.$emit("messageCount",messageCount);
+          })
+          .catch(function(error) {
+              console.log("error", error);
+          });
+    }
     // scroll handeling hide in web
     var lastScroll = 0;
     var navbar = $("nav.navbar .buskool-sub-menu");
@@ -1241,6 +1254,10 @@ export default {
 
     eventBus.$on("textSearch", event => {
       this.mainSearchBoxText = event;
+    });
+
+    eventBus.$on("messageCount", event => {
+      this.messageCount += event;
     });
 
     $(window).resize(this.jqUpdateSize); // When the browser changes size

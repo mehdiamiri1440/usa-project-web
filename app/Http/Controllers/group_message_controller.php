@@ -167,7 +167,7 @@ class group_message_controller extends Controller
                         if($has_http === false)
                             $real_link = 'https://'.$real_link;
                     }
-                    //it's buggy fix it
+                    
                     $text = $this->str_replace_once("$possible_link"," <a target='_blank' href='".$real_link."'>$possible_link</a> ",$text);
                     $text = strip_tags($text,'<a>');
                     $link_flag = true;
@@ -199,7 +199,7 @@ class group_message_controller extends Controller
     {
         $group_record = messenger_group::find($group_id);
 
-        SendGroupMessageNotification::dispatch($group_record->topic_name);
+        SendGroupMessageNotification::dispatch($group_record->topic_name)->onQueue('fcm');
     }
 
     public function make_message_accessible_for_group_subscribers($msg,$group_id)

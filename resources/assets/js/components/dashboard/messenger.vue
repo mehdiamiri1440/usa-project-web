@@ -7,10 +7,12 @@
 
 <script>
 export default {
+  props: ["defultimg"],
   data: function() {
     return {
       groupStep: 0,
-      userId: this.$parent.userId
+      userId: this.$parent.userId,
+      assets: this.$parent.assets
     };
   }
 };

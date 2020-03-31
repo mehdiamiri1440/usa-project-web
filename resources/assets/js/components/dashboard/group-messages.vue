@@ -386,15 +386,40 @@ export default {
       allGroupIsload: false,
       replyMessage: "",
       loadReplyData: false,
-      messageCount: 0
+      messageCount: 0,
+      groupMessageReceived:false,
     };
   },
 
   methods: {
     init: function() {
+      let self = this;
       this.currentUserId = this.getUserId;
 
-      this.loadGroupList();
+      return new Promise((resolve,reject) => {
+        self.loadGroupList();
+        resolve(true);
+      }).then(() => {
+          self.getUnsubscribeGroups();
+      }).then(()=>{
+        console.log('inti');
+        if (messaging) {
+          messaging
+            .requestPermission()
+            .then(function() {
+              return messaging.getToken();
+            })
+            .then(function(currentToken) {
+                self.sendTokenToServer(currentToken);
+            })
+            .catch(function(err) {
+              // Happen if user deney permission
+              alert('برای استفاده بهتر از این سرویس دریافت پیام از این سایت را باز کنید.');
+              console.log(err);
+            });
+        }
+      });
+      
     },
     loadImage: function() {
       this.isImageLoad = false;
@@ -416,7 +441,7 @@ export default {
             self.allGroupsIsUnSubscribe = false;
           }
 
-          self.getUnsubscribeGroups();
+          // self.getUnsubscribeGroups();
         })
         .catch(function(e) {
           //
@@ -747,7 +772,17 @@ export default {
         .then(function(response) {
           let token = response.data.token;
 
-          window.localStorage.setItem("storedToken", JSON.stringify(token));
+          window.localStorage.setItem("storedToken", token);
+        });
+    },
+    unsubscribeToeknFromGroups:function(){
+        let storedToken = window.localStorage.getItem('storedToken');
+
+        axios.post('/fcm/unregister_token',{
+            token: storedToken
+        })
+        .then(function(response){
+            //
         });
     },
     goToContactList: function() {
@@ -788,8 +823,34 @@ export default {
       }
     },
     reloadGroupList: function(event) {
+      let self = this;
       this.reloadGroupList = false;
-      this.loadGroupList();
+      return new Promise((resolve,reject) => {
+          self.loadGroupList();
+          resolve(true);
+      }).then(()=>{
+          console.log('updating');
+          self.getUnsubscribeGroups();
+      }).then(() => {
+          let token = window.localStorage.getItem('storedToken');
+
+          self.sendTokenToServer(token);
+      })
+    
+    },
+    groupMessageReceived: function(value){
+        let self = this;
+
+        if(value == true){
+            if (self.selectedGroup) {
+              self.appendMessageToGroupHistory(self.selectedGroup);
+            } else {
+              // eventBus.$emit("messageCount",1);
+              console.log('loading group list');
+              self.loadGroupList();
+            }
+            self.groupMessageReceived = false;
+          }
     }
   },
   mounted: function() {
@@ -816,73 +877,25 @@ export default {
       this.reloadGroupList = $event;
     });
 
-    if (messaging) {
-      messaging
-        .requestPermission()
-        .then(function() {
-          console.log("Notification permission granted.");
-          return messaging.getToken();
-        })
-        .then(function(currentToken) {
-          let sotoredToken = JSON.parse(
-            window.localStorage.getItem("storedToken")
-          );
+    eventBus.$on("groupMessageReceived", $event => {
+        self.groupMessageReceived = $event;
+    });
+    
 
-          if (sotoredToken != currentToken) {
-            self.sendTokenToServer(currentToken);
-          }
-        })
-        .catch(function(err) {
-          // Happen if user deney permission
-          console.log("Unable to get permission to notify.", err);
-        });
-
-      messaging.onMessage(function(payload) {
-        console.log(self.selectedContact);
-        if (self.selectedGroup) {
-          self.appendMessageToGroupHistory(self.selectedGroup);
-        } else {
-          // eventBus.$emit("messageCount",1);
-          self.loadGroupList();
-        }
-      });
-    }
-
-    // Echo.private("testChannel." + self.currentContactUserId).listen(
-    //   "newMessage",
-    //   e => {
-    //     var senderId = e.new_message.sender_id;
-    //     //update contact list
-    //     self.loadContactList();
-
-    //     if (self.currentContactUserId) {
-    //       if (self.currentContactUserId === senderId) {
-    //         self.chatMessages.push(e.new_message);
-    //         self.scrollToEnd(0);
-
-    //         if (self.isComponentActive == false) {
-    //           self.pushNotification(
-    //             "پیام جدید",
-    //             e.new_message.text,
-    //             "/dashboard/messages"
-    //           );
-    //         }
-    //       }
-    //     } else {
-    //       this.pushNotification(
-    //         "پیام جدید",
-    //         e.new_message.text,
-    //         "/dashboard/messages"
-    //       );
-    //     }
-    //   }
-    // );
   },
   activated() {
     this.isComponentActive = true;
   },
   deactivated() {
     this.isComponentActive = false;
+  },
+  beforeDestroy(){
+      let self = this;
+
+      setTimeout(function(){
+        self.unsubscribeToeknFromGroups();
+      },1000);
+      
   }
 };
 </script>

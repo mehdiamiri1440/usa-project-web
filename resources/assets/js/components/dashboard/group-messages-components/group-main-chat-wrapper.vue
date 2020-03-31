@@ -342,9 +342,7 @@ div {
 .group-chat-list-item > div:hover {
   cursor: pointer;
 }
-.group-chat-list-item span a {
-  text-decoration: underline;
-}
+
 .group-chat-list-item > div:hover .reply-icon {
   display: inline-block;
 }
@@ -493,11 +491,11 @@ div {
             <div class="message-contact-title-img">
               <img
                 v-if="$parent.selectedGroup.photo"
-                :src="$parent.str + '/' + $parent.selectedGroup.photo"
-                :alt="$parent.selectedGroup.name"
+                :src="$parent.assets + 'assets/img/group-images/'+ $parent.selectedGroup.photo"
+                :alt="'گروه ' + $parent.selectedGroup.name"
               />
 
-              <img v-else :src="$parent.assets + 'assets/img/group-category.jpg'" />
+              <img v-else :src="$parent.assets + 'assets/img/group-images/group-category.jpg'" />
             </div>
 
             <span v-if="$parent.selectedGroup.name" v-text="'گروه ' + $parent.selectedGroup.name"></span>
@@ -564,7 +562,7 @@ div {
                 >
                   <p v-text="msg.first_name + ' ' + msg.last_name"></p>
                 </router-link>
-                <span v-if="msg.is_link" v-html="msg.text"></span>
+                <span class="message-has-link" v-if="msg.is_link" v-html="msg.text"></span>
                 <span v-else v-html="msg.text"></span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">
@@ -577,7 +575,7 @@ div {
                     Date() | moment("jYY/jMM/jDD, h:mm A")
                     }}
                   </span>
-                  <span class="check-items" v-if="msg.user_id === $parent.currentUserId">
+                  <span class="check-items" v-if="msg.user_id == $parent.currentUserId">
                     <i class="fa fa-check" v-if="msg.created_at"></i>
                     <i class="far fa-clock" v-else></i>
                   </span>
@@ -691,14 +689,22 @@ div {
           </div>
         </div>
         <div
-          class="group-item col-sm-6 col-md-4 pull-right"
+          class="group-item col-sm-6 col-lg-4 pull-right"
           v-else
           v-for="(group, index) in $parent.UnsubscribeGroups"
           :key="index"
         >
           <button @click.prevent="$parent.subscribeUser(group.id)">
-            <img v-if="group.photo" :src="$parent.str + group.photo" :alt="'گروه ' + group.name" />
-            <img v-else :src="$parent.assets + 'assets/img/group-category.jpg'" alt />
+            <img
+              v-if="group.photo"
+              :src="$parent.assets + 'assets/img/group-images/'+ group.photo"
+              :alt="'گروه ' + group.name"
+            />
+            <img
+              v-else
+              :src="$parent.assets + 'assets/img/group-images/group-category.jpg'"
+              :alt="'گروه ' + group.name"
+            />
 
             <p class="pull-right" v-text="'گروه ' + group.name"></p>
             <span class="group-item-icon pull-left">

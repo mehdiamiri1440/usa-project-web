@@ -373,7 +373,7 @@ import myContactList from "./messages-components/my-contact-list";
 import MainChatWrapper from "./messages-components/main-chat-wrapper";
 
 export default {
-  props: ["defultimg", "str", "loading_img"],
+  props: ["str", "loading_img"],
   components: {
     myContactList,
     MainChatWrapper
@@ -397,16 +397,18 @@ export default {
       currentUserId: "",
       currentContactUserId: "",
       msgToSend: "",
-      isComponentActive: false,
+      isComponentActive: true,
       contactNameSearchText: "",
       isContactListLoaded: false,
       isCurrentStep: 0,
-      assets: this.$parent.assets
+      assets: this.$parent.assets,
+      defultImg: this.$parent.defultimg
     };
   },
 
   methods: {
     init: function() {
+      console.log(this.defultImg);
       this.loadContactList();
     },
     loadImage: function() {
@@ -620,7 +622,7 @@ export default {
         .then(function(response) {
           let token = response.data.token;
 
-          window.localStorage.setItem("storedToken", JSON.stringify(token));
+          window.localStorage.setItem("storedToken", token);
         });
     },
     goToGroupList: function() {
@@ -686,11 +688,9 @@ export default {
           return messaging.getToken();
         })
         .then(function(currentToken) {
-          let sotoredToken = JSON.parse(
-            window.localStorage.getItem("storedToken")
-          );
+          let storedToken = window.localStorage.getItem("storedToken");
 
-          if (sotoredToken != currentToken) {
+          if (storedToken != currentToken) {
             self.sendTokenToServer(currentToken);
           }
         })
@@ -699,15 +699,25 @@ export default {
           console.log("Unable to get permission to notify.", err);
         });
 
-      messaging.onMessage(function(payload) {
-        console.log(payload);
-        if (self.selectedContact) {
-          self.appendMessageToChatHistory(self.selectedContact);
-        } else {
-          eventBus.$emit("messageCount", 1);
-          self.loadContactList();
-        }
-      });
+        eventBus.$on("contanctMessageReceived", $event => {
+            console.log('contact message');
+            console.log(self.isComponentActive);
+            if (self.selectedContact) {
+              self.appendMessageToChatHistory(self.selectedContact);
+            } else if(self.isComponentActive) {
+              self.loadContactList();
+            }
+        
+    });
+
+      // messaging.onMessage(function(payload) {
+        
+      // });
+    }
+  },
+  watch:{
+    selectedContact:function(value){
+        eventBus.$emit('activeContactId',value.contact_id);
     }
   },
   activated() {
@@ -715,6 +725,11 @@ export default {
   },
   deactivated() {
     this.isComponentActive = false;
+  },
+  beforeDestroy(){
+      this.isComponentActive = false;
+      this.selectedContact = "";
+      eventBus.$emit('activeContactId',"")
   }
 };
 </script>

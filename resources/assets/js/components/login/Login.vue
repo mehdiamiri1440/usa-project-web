@@ -642,8 +642,7 @@ export default {
               .post("/get_total_unread_messages_for_current_user")
               .then(function (response) {
                   if(response.data.msg_count){
-                      console.log('messages');
-                      window.location.href = "/buyer/messages"
+                      window.location.href = "/buyer/messenger/contacts"
                   }
                   else{
                       console.log('test');
@@ -669,7 +668,7 @@ export default {
               .post("/get_total_unread_messages_for_current_user")
               .then(function (response) {
                   if(response.data.msg_count){
-                      window.location.href = "/seller/messages"
+                      window.location.href = "/seller/messenger/contacts"
                   }
                   else{
                       axios

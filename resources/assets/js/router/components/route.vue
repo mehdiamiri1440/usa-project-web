@@ -192,6 +192,7 @@ export default {
       productId: "",
       joinGroupMessage: "",
       joinGroupId: "",
+      activeContactId:"",
     };
   },
   props: [
@@ -222,14 +223,30 @@ export default {
       this.joinGroupMessage = $event;
     });
 
+    eventBus.$on("activeContactId", $event => {
+      this.activeContactId = $event;
+    });
+
+    let self = this;
+
     if(messaging){
         messaging.onMessage(function(payload){
-            console.log('route: ',payload.notification.tag);
+            // console.log('route: ',payload.notification.tag);
             if(payload.notification.tag == 'buskool'){
-                eventBus.$emit("messageCount",1);
+                // console.log('contactId:',self.activeContactId);
+                if(!self.activeContactId){
+                    // console.log('upMessage');
+                    eventBus.$emit("messageCount",1);
+                }
+                eventBus.$emit("contanctMessageReceived",true);
+            }
+            else{
+                eventBus.$emit("groupMessageReceived",true);
             }
         })
     }
+
+    
   },
   router,
   methods: {
@@ -300,6 +317,9 @@ export default {
           eventBus.$emit("reloadAllGroupLists", true);
         });
     },
+    extractSenderIdFromTag:function(tag){
+        return tag.split('FCM')[1];
+    }
   },
   mounted() {
     this.activateDownloadApp();

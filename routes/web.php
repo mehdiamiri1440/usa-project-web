@@ -413,6 +413,11 @@ Route::group(['middleware' => [login::class]], function () {
             'as' => 'register_token_in_groups'
         ]);
 
+        Route::post('/unregister_token',[
+            'uses' => 'fcm_controller@unsubscribe_token_from_groups',
+            'as' => 'unsubscribe_token_from_groups'
+        ]);
+
      });
     
 });
@@ -702,23 +707,21 @@ Route::post('/get_wp_posts', [
     'as' => 'get_wp_posts',
 ]);
 
-Route::get('/get-class','fcm_controller@test');
+// Route::group(['middleware' => [cors::class]], function () {
+//     Route::options('/broadcastAuth', function () {
+//         return response('OK', \Illuminate\Http\Response::HTTP_NO_CONTENT)
+//             ->header('Access-Control-Allow-Methods', 'POST, DELETE, OPTIONS');
+//     });
+//     Route::post('/broadcastAuth', function (Request $request) {
+//         $pusher = new Pusher('f04fb3210cdacabb3540', 'a2ffc348382adf93ea19', '710900', array('cluster' => 'ap1'));
+//         $temp = [];
+//         $temp = $pusher->socket_auth($_POST['channel_name'], $_POST['socket_id']);
 
-Route::group(['middleware' => [cors::class]], function () {
-    Route::options('/broadcastAuth', function () {
-        return response('OK', \Illuminate\Http\Response::HTTP_NO_CONTENT)
-            ->header('Access-Control-Allow-Methods', 'POST, DELETE, OPTIONS');
-    });
-    Route::post('/broadcastAuth', function (Request $request) {
-        $pusher = new Pusher('f04fb3210cdacabb3540', 'a2ffc348382adf93ea19', '710900', array('cluster' => 'ap1'));
-        $temp = [];
-        $temp = $pusher->socket_auth($_POST['channel_name'], $_POST['socket_id']);
-
-        return response()->json([
-            'auth' => json_decode($temp)->auth,
-        ]);
-    });
-});
+//         return response()->json([
+//             'auth' => json_decode($temp)->auth,
+//         ]);
+//     });
+// });
 
 Route::post('/is_user_from_webview', [
     'uses' => 'user_controller@is_user_from_webview',
