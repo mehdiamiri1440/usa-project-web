@@ -5,7 +5,6 @@ window.Vue = require("vue");
 
 Vue.use(Router);
 
-
 // Errors Components
 import notFound from "../components/errors/404";
 
@@ -82,18 +81,18 @@ const router = new Router({
                   require(["../components/dashboard/messages.vue"], resolve);
                 }
               }
-            },
-            {
-              path: "group-messages",
-              name: "groupMessagesSeller",
-              components: {
-                "group-list": resolve => {
-                  require([
-                    "../components/dashboard/group-messages.vue"
-                  ], resolve);
-                }
-              }
             }
+            // {
+            //   path: "group-messages",
+            //   name: "groupMessagesSeller",
+            //   components: {
+            //     "group-list": resolve => {
+            //       require([
+            //         "../components/dashboard/group-messages.vue"
+            //       ], resolve);
+            //     }
+            //   }
+            // }
           ]
         },
         {
@@ -191,18 +190,18 @@ const router = new Router({
                   require(["../components/dashboard/messages.vue"], resolve);
                 }
               }
-            },
-            {
-              path: "group-messages",
-              name: "groupMessagesBuyer",
-              components: {
-                "group-list": resolve => {
-                  require([
-                    "../components/dashboard/group-messages.vue"
-                  ], resolve);
-                }
-              }
             }
+            // {
+            //   path: "group-messages",
+            //   name: "groupMessagesBuyer",
+            //   components: {
+            //     "group-list": resolve => {
+            //       require([
+            //         "../components/dashboard/group-messages.vue"
+            //       ], resolve);
+            //     }
+            //   }
+            // }
           ]
         },
         {

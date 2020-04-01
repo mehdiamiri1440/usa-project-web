@@ -316,7 +316,7 @@
       v-bind:class="{ hidden_element: selectedContact }"
     >
       <div class="row">
-        <div class="contacts-switch-buttons-wrapper">
+        <!-- <div class="contacts-switch-buttons-wrapper">
           <div class="switch-button-item">
             <button class="contact-button active">
               <i class="fa fa-user"></i>
@@ -339,7 +339,7 @@
               افزودن گروه
             </button>
           </div>
-        </div>
+        </div>-->
 
         <my-contact-list />
       </div>
@@ -699,21 +699,20 @@ export default {
           console.log("Unable to get permission to notify.", err);
         });
 
-        eventBus.$on("contanctMessageReceived", $event => {
-            console.log('contact message');
-            console.log(self.isComponentActive);
-            if (self.selectedContact) {
-              self.appendMessageToChatHistory(self.selectedContact);
-            } else if(self.isComponentActive) {
-              self.loadContactList();
-            }
-        
-    });
+      eventBus.$on("contanctMessageReceived", $event => {
+        console.log("contact message");
+        console.log(self.isComponentActive);
+        if (self.selectedContact) {
+          self.appendMessageToChatHistory(self.selectedContact);
+        } else if (self.isComponentActive) {
+          self.loadContactList();
+        }
+      });
     }
   },
-  watch:{
-    selectedContact:function(value){
-        eventBus.$emit('activeContactId',value.contact_id);
+  watch: {
+    selectedContact: function(value) {
+      eventBus.$emit("activeContactId", value.contact_id);
     }
   },
   activated() {
@@ -722,10 +721,10 @@ export default {
   deactivated() {
     this.isComponentActive = false;
   },
-  beforeDestroy(){
-      this.isComponentActive = false;
-      this.selectedContact = "";
-      eventBus.$emit('activeContactId',"")
+  beforeDestroy() {
+    this.isComponentActive = false;
+    this.selectedContact = "";
+    eventBus.$emit("activeContactId", "");
   }
 };
 </script>
