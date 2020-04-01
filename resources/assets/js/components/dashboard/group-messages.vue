@@ -397,12 +397,9 @@ export default {
       this.currentUserId = this.getUserId;
 
       return new Promise((resolve,reject) => {
-        self.loadGroupList();
+        self.loadGroupList(true);
         resolve(true);
-      }).then(() => {
-          self.getUnsubscribeGroups();
       }).then(()=>{
-        console.log('inti');
         if (messaging) {
           messaging
             .requestPermission()
@@ -427,7 +424,7 @@ export default {
     ImageLoaded: function() {
       this.isImageLoad = true;
     },
-    loadGroupList: function() {
+    loadGroupList: function(loadAllGroups = false) {
       var self = this;
       self.allGroupIsload = true;
 
@@ -435,13 +432,15 @@ export default {
         .post("/group/get_groups_list")
         .then(function(response) {
           self.groupList = response.data.groups;
-          if (self.groupList.length == 0) {
+          if (response.data.groups.length == 0) {
             self.allGroupsIsUnSubscribe = true;
           } else {
             self.allGroupsIsUnSubscribe = false;
           }
 
-          // self.getUnsubscribeGroups();
+          if(loadAllGroups){
+            self.getUnsubscribeGroups();
+          }
         })
         .catch(function(e) {
           //
@@ -621,8 +620,8 @@ export default {
       $(window).on("popstate", function(e) {
         if (self.isDeviceMobile()) {
           if (
-            window.location.pathname == "/seller/group-messages" ||
-            window.location.pathname == "/buyer/group-messages"
+            window.location.pathname == "/seller/messenger/group-messages" ||
+            window.location.pathname == "/buyer/messenger/group-messages"
           ) {
             if (self.selectedGroup) {
               self.selectedGroup = "";
@@ -707,9 +706,10 @@ export default {
     },
     getUnsubscribeGroups: function() {
       var self = this;
-      axios.post("/group/get_all_groups").then(function(response) {
-        self.checkUserIsSubscribe(response.data.all_groups);
-      });
+      axios.post("/group/get_all_groups")
+        .then(function(response) {
+          self.checkUserIsSubscribe(response.data.all_groups);
+        });
     },
     checkUserIsSubscribe: function(groups) {
       var subscribeGroups = this.groupList;
@@ -834,7 +834,9 @@ export default {
       }).then(() => {
           let token = window.localStorage.getItem('storedToken');
 
-          self.sendTokenToServer(token);
+          if(token){
+            self.sendTokenToServer(token);
+          }
       })
     
     },

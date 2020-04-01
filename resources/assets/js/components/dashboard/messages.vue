@@ -598,8 +598,8 @@ export default {
       $(window).on("popstate", function(e) {
         if (self.isDeviceMobile()) {
           if (
-            window.location.pathname == "/seller/messages" ||
-            window.location.pathname == "/buyer/messages"
+            window.location.pathname == "/seller/messenger/contacts" ||
+            window.location.pathname == "/buyer/messenger/contacts"
           ) {
             if (self.selectedContact) {
               self.selectedContact = "";
@@ -709,10 +709,6 @@ export default {
             }
         
     });
-
-      // messaging.onMessage(function(payload) {
-        
-      // });
     }
   },
   watch:{
