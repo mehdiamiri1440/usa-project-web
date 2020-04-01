@@ -803,7 +803,7 @@
     import ProductArticle from './product_components/product_article'
     import ProductAsideCategories from './product_components/sidebar/product_aside_categories'
     import {eventBus} from "../../../router/router";
-
+    import StickySidebar from "sticky-sidebar";
 
     var visible = false;
     export default {

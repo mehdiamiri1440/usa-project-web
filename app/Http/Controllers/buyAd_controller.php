@@ -788,7 +788,7 @@ class buyAd_controller extends Controller
 
     protected function get_the_most_related_products_to_given_buyAd(&$buyAd, &$products,$skip_filtering = false)
     {
-        $most_related_records = null;
+        $most_related_records = [];
 
         $category_info = $this->get_category_and_subcategory_name($buyAd->category_id);
 
