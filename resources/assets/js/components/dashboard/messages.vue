@@ -256,10 +256,6 @@
     padding: 13px 15px;
   }
 
-  .default-main-contents {
-    display: none;
-  }
-
   .main-content {
     padding: 65px 0 0;
   }
@@ -340,7 +336,6 @@
             </button>
           </div>
         </div>-->
-
         <my-contact-list />
       </div>
     </div>
@@ -354,7 +349,7 @@
     </div>
 
     <div
-      class="col-xs-12 default-message-wrapper col-sm-8 col-md-9"
+      class="col-xs-12 default-message-wrapper hidden-xs col-sm-8 col-md-9"
       v-if="!selectedContact && isCurrentStep == 0"
     >
       <div class="default-main-contents">
@@ -408,7 +403,6 @@ export default {
 
   methods: {
     init: function() {
-      console.log(this.defultImg);
       this.loadContactList();
     },
     loadImage: function() {
@@ -630,8 +624,55 @@ export default {
       this.$parent.groupStep = 1;
     }
   },
+
+  mounted: function() {
+    this.init();
+    eventBus.$emit("subHeader", this.items);
+  },
+
+  created: function() {
+    gtag("config", "UA-129398000-1", { page_path: "/messages" });
+
+    var self = this;
+
+    if (Push.Permission.has() === false) {
+      Push.Permission.request(
+        function() {},
+        function() {}
+      );
+    }
+
+    if (messaging) {
+      messaging
+        .requestPermission()
+        .then(function() {
+          // console.log("Notification permission granted.");
+          return messaging.getToken();
+        })
+        .then(function(currentToken) {
+          let storedToken = window.localStorage.getItem("storedToken");
+
+          if (storedToken != currentToken) {
+            // self.sendTokenToServer(currentToken);
+          }
+        })
+        .catch(function(err) {
+          // Happen if user deney permission
+          console.log("Unable to get permission to notify.", err);
+        });
+
+      eventBus.$on("contanctMessageReceived", $event => {
+        // console.log("contact message");
+        if (self.selectedContact) {
+          self.appendMessageToChatHistory(self.selectedContact);
+        } else if (self.isComponentActive) {
+          self.loadContactList();
+        }
+      });
+    }
+  },
   watch: {
-    contactNameSearchText: function() {
+    contactNameSearchText: function(value) {
       var self = this;
       if (self.contactNameSearchText !== "") {
         self.isSearchingContact = true;
@@ -661,60 +702,12 @@ export default {
       } else {
         self.loadContactList();
       }
-    }
-  },
-  mounted: function() {
-    this.init();
-    eventBus.$emit("subHeader", this.items);
-  },
-
-  created: function() {
-    gtag("config", "UA-129398000-1", { page_path: "/messages" });
-
-    var self = this;
-
-    if (Push.Permission.has() === false) {
-      Push.Permission.request(
-        function() {},
-        function() {}
-      );
-    }
-
-    if (messaging) {
-      messaging
-        .requestPermission()
-        .then(function() {
-          console.log("Notification permission granted.");
-          return messaging.getToken();
-        })
-        .then(function(currentToken) {
-          let storedToken = window.localStorage.getItem("storedToken");
-
-          if (storedToken != currentToken) {
-            self.sendTokenToServer(currentToken);
-          }
-        })
-        .catch(function(err) {
-          // Happen if user deney permission
-          console.log("Unable to get permission to notify.", err);
-        });
-
-      eventBus.$on("contanctMessageReceived", $event => {
-        console.log("contact message");
-        console.log(self.isComponentActive);
-        if (self.selectedContact) {
-          self.appendMessageToChatHistory(self.selectedContact);
-        } else if (self.isComponentActive) {
-          self.loadContactList();
-        }
-      });
-    }
-  },
-  watch: {
+    },
     selectedContact: function(value) {
       eventBus.$emit("activeContactId", value.contact_id);
     }
   },
+
   activated() {
     this.isComponentActive = true;
   },

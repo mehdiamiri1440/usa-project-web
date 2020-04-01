@@ -232,9 +232,9 @@
     padding: 13px 15px;
   }
 
-  .default-main-contents {
+  /* .default-main-contents {
     display: none;
-  }
+  } */
 
   .main-content {
     padding: 65px 0 0;
@@ -387,7 +387,7 @@ export default {
       replyMessage: "",
       loadReplyData: false,
       messageCount: 0,
-      groupMessageReceived:false,
+      groupMessageReceived: false
     };
   },
 
@@ -396,10 +396,10 @@ export default {
       let self = this;
       this.currentUserId = this.getUserId;
 
-      return new Promise((resolve,reject) => {
+      return new Promise((resolve, reject) => {
         self.loadGroupList(true);
         resolve(true);
-      }).then(()=>{
+      }).then(() => {
         if (messaging) {
           messaging
             .requestPermission()
@@ -407,16 +407,17 @@ export default {
               return messaging.getToken();
             })
             .then(function(currentToken) {
-                self.sendTokenToServer(currentToken);
+              self.sendTokenToServer(currentToken);
             })
             .catch(function(err) {
               // Happen if user deney permission
-              alert('برای استفاده بهتر از این سرویس دریافت پیام از این سایت را باز کنید.');
+              alert(
+                "برای استفاده بهتر از این سرویس دریافت پیام از این سایت را باز کنید."
+              );
               console.log(err);
             });
         }
       });
-      
     },
     loadImage: function() {
       this.isImageLoad = false;
@@ -438,7 +439,7 @@ export default {
             self.allGroupsIsUnSubscribe = false;
           }
 
-          if(loadAllGroups){
+          if (loadAllGroups) {
             self.getUnsubscribeGroups();
           }
         })
@@ -706,10 +707,9 @@ export default {
     },
     getUnsubscribeGroups: function() {
       var self = this;
-      axios.post("/group/get_all_groups")
-        .then(function(response) {
-          self.checkUserIsSubscribe(response.data.all_groups);
-        });
+      axios.post("/group/get_all_groups").then(function(response) {
+        self.checkUserIsSubscribe(response.data.all_groups);
+      });
     },
     checkUserIsSubscribe: function(groups) {
       var subscribeGroups = this.groupList;
@@ -775,14 +775,15 @@ export default {
           window.localStorage.setItem("storedToken", token);
         });
     },
-    unsubscribeToeknFromGroups:function(){
-        let storedToken = window.localStorage.getItem('storedToken');
+    unsubscribeToeknFromGroups: function() {
+      let storedToken = window.localStorage.getItem("storedToken");
 
-        axios.post('/fcm/unregister_token',{
-            token: storedToken
+      axios
+        .post("/fcm/unregister_token", {
+          token: storedToken
         })
-        .then(function(response){
-            //
+        .then(function(response) {
+          //
         });
     },
     goToContactList: function() {
@@ -825,34 +826,35 @@ export default {
     reloadGroupList: function(event) {
       let self = this;
       this.reloadGroupList = false;
-      return new Promise((resolve,reject) => {
-          self.loadGroupList();
-          resolve(true);
-      }).then(()=>{
-          console.log('updating');
+      return new Promise((resolve, reject) => {
+        self.loadGroupList();
+        resolve(true);
+      })
+        .then(() => {
+          console.log("updating");
           self.getUnsubscribeGroups();
-      }).then(() => {
-          let token = window.localStorage.getItem('storedToken');
+        })
+        .then(() => {
+          let token = window.localStorage.getItem("storedToken");
 
-          if(token){
+          if (token) {
             self.sendTokenToServer(token);
           }
-      })
-    
+        });
     },
-    groupMessageReceived: function(value){
-        let self = this;
+    groupMessageReceived: function(value) {
+      let self = this;
 
-        if(value == true){
-            if (self.selectedGroup) {
-              self.appendMessageToGroupHistory(self.selectedGroup);
-            } else {
-              // eventBus.$emit("messageCount",1);
-              console.log('loading group list');
-              self.loadGroupList();
-            }
-            self.groupMessageReceived = false;
-          }
+      if (value == true) {
+        if (self.selectedGroup) {
+          self.appendMessageToGroupHistory(self.selectedGroup);
+        } else {
+          // eventBus.$emit("messageCount",1);
+          console.log("loading group list");
+          self.loadGroupList();
+        }
+        self.groupMessageReceived = false;
+      }
     }
   },
   mounted: function() {
@@ -880,10 +882,8 @@ export default {
     });
 
     eventBus.$on("groupMessageReceived", $event => {
-        self.groupMessageReceived = $event;
+      self.groupMessageReceived = $event;
     });
-    
-
   },
   activated() {
     this.isComponentActive = true;
@@ -891,13 +891,12 @@ export default {
   deactivated() {
     this.isComponentActive = false;
   },
-  beforeDestroy(){
-      let self = this;
+  beforeDestroy() {
+    let self = this;
 
-      setTimeout(function(){
-        self.unsubscribeToeknFromGroups();
-      },1000);
-      
+    setTimeout(function() {
+      self.unsubscribeToeknFromGroups();
+    }, 1000);
   }
 };
 </script>

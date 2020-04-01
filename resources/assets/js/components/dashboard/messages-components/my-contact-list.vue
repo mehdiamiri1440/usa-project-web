@@ -137,12 +137,10 @@
 <template>
   <div class="contact-body my-contacts">
     <div class="contact-search">
-      <form action>
-        <div class="contact-search-input-wrapper">
-          <input type="text" placeholder="جستجوی مخاطبین" v-model="$parent.contactNameSearchText" />
-          <i class="fa fa-search"></i>
-        </div>
-      </form>
+      <div class="contact-search-input-wrapper">
+        <input type="text" placeholder="جستجوی مخاطبین" v-model="$parent.contactNameSearchText" />
+        <i class="fa fa-search"></i>
+      </div>
     </div>
     <div v-if="$parent.contactList.length === 0" class="not-found-item">
       <div

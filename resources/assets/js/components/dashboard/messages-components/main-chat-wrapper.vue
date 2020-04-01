@@ -128,17 +128,19 @@
 }
 
 .message-wrapper .chat-page li > div {
-  max-width: 455px;
   font-size: 14px;
   line-height: 1.612;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
   border-radius: 8px;
-  padding: 5px 10px;
   margin: 0 auto 3px;
   display: inline-block;
   position: relative;
+  max-width: 100%;
 }
-
+.message-content-wrapper {
+  max-width: 455px;
+  padding: 5px 10px;
+}
 .message-wrapper .chat-page .message-receive {
   float: left;
   background: #f7f7f7;
@@ -250,20 +252,22 @@
                 : 'message-receive'
             ]"
           >
-            <span v-text="msg.text"></span>
-            <span class="message-chat-date">
-              <span v-if="msg.created_at">
-                {{
-                msg.created_at | moment("jYY/jMM/jDD, h:mm A")
-                }}
+            <div class="message-content-wrapper">
+              <span v-text="msg.text"></span>
+              <span class="message-chat-date">
+                <span v-if="msg.created_at">
+                  {{
+                  msg.created_at | moment("jYY/jMM/jDD, h:mm A")
+                  }}
+                </span>
+                <span v-else>{{ Date() | moment("jYY/jMM/jDD, h:mm A") }}</span>
+                <span class="check-items" v-if="msg.sender_id === $parent.currentUserId">
+                  <i class="fa fa-check" v-if="msg.created_at"></i>
+                  <i class="far fa-clock" v-else></i>
+                  <i class="fa fa-check" v-if="msg.is_read"></i>
+                </span>
               </span>
-              <span v-else>{{ Date() | moment("jYY/jMM/jDD, h:mm A") }}</span>
-              <span class="check-items" v-if="msg.sender_id === $parent.currentUserId">
-                <i class="fa fa-check" v-if="msg.created_at"></i>
-                <i class="far fa-clock" v-else></i>
-                <i class="fa fa-check" v-if="msg.is_read"></i>
-              </span>
-            </span>
+            </div>
           </div>
         </li>
       </ul>
