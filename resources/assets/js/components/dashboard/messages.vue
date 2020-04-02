@@ -121,7 +121,8 @@
 }
 
 .contact-wrapper .contact-body {
-  height: calc(100% - 100px);
+  height: 100%;
+  overflow-y:scroll;
   float: right;
   width: 100%;
 }
