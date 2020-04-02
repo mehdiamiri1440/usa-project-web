@@ -2,6 +2,14 @@
 .contact-body .contact-search {
   padding: 9px 7px;
   background: #eef3f3;
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.contact-items {
+  padding-top: 60px;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper {
@@ -122,7 +130,7 @@
 }
 .not-found-item {
   text-align: center;
-  padding: 40px 15px;
+  padding: 100px 15px 0;
 }
 .not-found-item p {
   font-size: 16px;
