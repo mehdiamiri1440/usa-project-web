@@ -356,6 +356,9 @@ class product_controller extends Controller
                 $products = $query->get();
             }
         }
+        else {
+            $products = $query->get();
+        }
 
         $result_products = $this->append_related_data_to_given_products($products);
 
