@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  props: ["defultimg"],
+  props: ["str","defultimg"],
   data: function() {
     return {
       groupStep: 0,

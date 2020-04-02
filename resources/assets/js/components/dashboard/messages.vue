@@ -368,7 +368,7 @@ import myContactList from "./messages-components/my-contact-list";
 import MainChatWrapper from "./messages-components/main-chat-wrapper";
 
 export default {
-  props: ["str", "loading_img"],
+  props: ["loading_img"],
   components: {
     myContactList,
     MainChatWrapper
@@ -397,7 +397,8 @@ export default {
       isContactListLoaded: false,
       isCurrentStep: 0,
       assets: this.$parent.assets,
-      defultImg: this.$parent.defultimg
+      defultImg: this.$parent.defultimg,
+      str: this.$parent.str,
     };
   },
 
