@@ -68,6 +68,29 @@ class fcm_controller extends Controller
         ]);
     }
 
+    protected function subscribe_token_in_fcm_server($token,$topic)
+    {
+        $url = "https://iid.googleapis.com/iid/v1/$token/rel/topics/$topic";
+
+        $client = new Client();
+        $api_key = 'key=' . config("fcm.http.server_key");
+
+        $res = $client->request('POST', $url , [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' =>  $api_key
+            ],
+        ]);
+
+        $response_code =  $res->getStatusCode();
+        
+        if($response_code == 200){
+            return true;
+        }
+
+        return false;
+    }
+
     public function subscribe_token_in_groups(Request $request)
     {
         $this->validate($request,[
