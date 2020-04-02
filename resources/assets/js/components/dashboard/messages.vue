@@ -654,7 +654,7 @@ export default {
           let storedToken = window.localStorage.getItem("storedToken");
 
           if (storedToken != currentToken) {
-            // self.sendTokenToServer(currentToken);
+            self.sendTokenToServer(currentToken);
           }
         })
         .catch(function(err) {
