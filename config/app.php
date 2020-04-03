@@ -166,6 +166,7 @@ return [
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Larabookir\Gateway\GatewayServiceProvider::class,
         LaravelFCM\FCMServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
         
         
 
@@ -238,7 +239,8 @@ return [
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Gateway' => \Larabookir\Gateway\Gateway::class, 
         'FCM'      => LaravelFCM\Facades\FCM::class,
-	    'FCMGroup' => LaravelFCM\Facades\FCMGroup::class,
+        'FCMGroup' => LaravelFCM\Facades\FCMGroup::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

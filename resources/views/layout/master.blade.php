@@ -24,8 +24,8 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap-theme.min.css')}}" async>
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">
-    <link type="text/css" rel="preload" href="{{asset('assets/css/magnific-popup.css')}}">
-    <link rel="preload" href="{{asset('index/css/particleNetwork.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
+    <!-- <link rel="preload" href="{{asset('index/css/particleNetwork.css')}}"> -->
     <link rel="stylesheet" href="{{asset('index/css/animate.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl-custom-style.css')}}">
     <link type="text/css" rel="preload" href="{{asset('assets/css/imageuploadify.min.css')}}">

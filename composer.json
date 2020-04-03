@@ -9,6 +9,7 @@
         "brozot/laravel-fcm": "^1.2",
         "consoletvs/charts": "6.*",
         "doctrine/dbal": "^2.6",
+        "intervention/image": "^2.5",
         "larabook/gateway": "^3.3",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",

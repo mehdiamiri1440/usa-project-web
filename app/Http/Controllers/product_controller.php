@@ -19,6 +19,7 @@ use App\message;
 use App\tag;
 use App\province;
 use App\cities;
+use App\Http\Controllers\media_controller;
 
 class product_controller extends Controller
 {
@@ -151,12 +152,22 @@ class product_controller extends Controller
     protected function save_product_photos($request, $image_count)
     {
         $files_path = [];
+        $media_controller_object = new media_controller();
 
         for ($i = 0; $i < $image_count; ++$i) {
             $image_name = 'image_'.$i;
             $img = $request->$image_name;
 
             $path = $img->store('products');
+
+            // $file_name = explode('/',$path)[1];
+            // $tmp_path = $img->storeAs('thumbnails/products',$file_name);
+
+            // $thumbnail_path = storage_path('app/public/'.$tmp_path);
+            // $media_controller_object->create_thumbnail($thumbnail_path,230,335);
+
+            // $media_controller_object->create_thumbnail(storage_path('app/public/'.$path),700,700);
+            // $media_controller_object->put_water_mark_on_photo(storage_path('app/public/'.$path),'bottom');
 
             $files_path[] = $path;
         }

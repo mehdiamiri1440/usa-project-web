@@ -12,6 +12,7 @@ use App\buyAd;
 use App\sell_offer;
 use DB;
 use App\message;
+use App\Http\Controllers\media_controller;
 
 class profile_controller extends Controller
 {
@@ -183,6 +184,13 @@ class profile_controller extends Controller
     {
         $file_path = $photo_data->store($directory_to_save);
 
+        // if($directory_to_save == 'profile_photos'){
+        //     $media_controller_object = new media_controller();
+
+        //     $thumbnail_path = public_path('storage/'.$file_path);
+        //     $media_controller_object->create_thumbnail($thumbnail_path,150,150);
+        // }
+        
         return $file_path;
     }
 
