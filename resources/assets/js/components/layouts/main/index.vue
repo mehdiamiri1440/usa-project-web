@@ -1363,7 +1363,7 @@
                                     <ProductCarousel
                                             v-for="(product , index) in lastProducts"
                                             :key="index"
-                                            :img="str + '/' + product.photo"
+                                            :img="str + '/thumbnails/' + product.photo"
                                             :title="product.product_name"
                                             :stock="product.stock"
                                             :link='getProductUrl(product)'

@@ -130,7 +130,7 @@
 <template>
     <div class="main-article-image">
           <router-link v-show="isImageLoad" :to="productUrl">
-                      <img  :src="base + img" @load="ImageLoaded" :alt="alt">
+                      <img  :src="base + '/thumbnails/' +  img" @load="ImageLoaded" :alt="alt">
 
           </router-link>
 

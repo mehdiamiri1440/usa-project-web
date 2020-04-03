@@ -184,12 +184,12 @@ class profile_controller extends Controller
     {
         $file_path = $photo_data->store($directory_to_save);
 
-        // if($directory_to_save == 'profile_photos'){
-        //     $media_controller_object = new media_controller();
+        if($directory_to_save == 'profile_photos'){
+            $media_controller_object = new media_controller();
 
-        //     $thumbnail_path = public_path('storage/'.$file_path);
-        //     $media_controller_object->create_thumbnail($thumbnail_path,150,150);
-        // }
+            $thumbnail_path = storage_path('app/public/'.$file_path);
+            $media_controller_object->create_thumbnail($thumbnail_path,150,150);
+        }
         
         return $file_path;
     }

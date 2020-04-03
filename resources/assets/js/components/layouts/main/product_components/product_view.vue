@@ -192,7 +192,7 @@
                                      <ProductCarousel
                                             v-for="(product , index) in relatedProducts"
                                             :key="index"
-                                            :img="str + '/' + product.photo"
+                                            :img="str + '/thumbnails/' + product.photo"
                                             :title="product.product_name"
                                             :stock="product.stock"
                                             :link='getRelatedProductUrl(product)'
