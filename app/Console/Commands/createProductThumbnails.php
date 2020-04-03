@@ -13,7 +13,7 @@ class createProductThumbnails extends Command
      *
      * @var string
      */
-    protected $signature = 'create:thumbnail';
+    protected $signature = 'create:thumbnail {--chunk=}';
 
     /**
      * The console command description.
@@ -39,17 +39,23 @@ class createProductThumbnails extends Command
      */
     public function handle()
     {
+        $skip = $this->option('chunk') * 100;
+        $take = 100;
         $photos = DB::table('products')
                         ->join('product_media','products.id','=','product_media.product_id')
                         ->where('products.confirmed',true)
                         ->whereNull('products.deleted_at')
-                        ->select('product_media.file_path')
+                        ->select('product_media.file_path','product_media.id')
+                        ->orderBy('product_media.id')
+                        ->skip($skip)
+                        ->take($take)
                         ->get();
         
         $bar = $this->output->createProgressBar(count($photos));
 
         foreach($photos as $photo)
         {
+            $this->info($photo->id .' is doing........');
             $file_path = storage_path('app/public/'.$photo->file_path);//should be changed for production run
             $thumbnail_path = storage_path('app/public/thumbnails/'.$photo->file_path);
 
@@ -68,7 +74,7 @@ class createProductThumbnails extends Command
                 $img_orginal->save($file_path);
                 $img_thumb->save($thumbnail_path);
 
-                $this->info('done');
+                $this->info($photo->id .' is done.');
             }
             else{
                 // $this->line('skipping....');
