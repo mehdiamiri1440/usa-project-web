@@ -122,7 +122,7 @@
 
 .contact-wrapper .contact-body {
   height: 100%;
-  overflow-y:scroll;
+  overflow-y: scroll;
   float: right;
   width: 100%;
 }
@@ -400,6 +400,8 @@ export default {
       assets: this.$parent.assets,
       defultImg: this.$parent.defultimg,
       str: this.$parent.str,
+      messageImage: "",
+      imageData: ""
     };
   },
 
@@ -496,6 +498,27 @@ export default {
           }
         );
       }, time);
+    },
+    previewImage: function(event) {
+      var input = event.target;
+      var tempMsg = "";
+      if (input.files && input.files[0]) {
+        if (this.msgToSend) {
+          tempMsg = this.msgToSend;
+          this.msgToSend = "";
+        }
+        for (var i = 0; i < input.files.length; i++) {
+          var reader = new FileReader();
+          reader.onload = e => {
+            this.msgToSend = "<img src='" + e.target.result + "' />";
+            this.sendMessage();
+            if (input.files.length == i) {
+              this.msgToSend = tempMsg;
+            }
+          };
+          reader.readAsDataURL(input.files[i]);
+        }
+      }
     },
     sendMessage: function() {
       var self = this;

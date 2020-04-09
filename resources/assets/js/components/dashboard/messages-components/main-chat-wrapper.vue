@@ -137,10 +137,39 @@
   position: relative;
   max-width: 100%;
 }
+
+.image-details {
+  float: right;
+  width: 100%;
+}
+
 .message-content-wrapper {
   max-width: 455px;
   padding: 5px 10px;
 }
+
+.message-content-wrapper span {
+  white-space: pre-wrap;
+}
+
+.message-content-wrapper .chat-image {
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 5px;
+  float: right;
+  margin-left: 10px;
+}
+
+.message-content-wrapper .chat-image img {
+  width: initial;
+  height: 100%;
+  transform: translate(50%, 50%);
+  position: relative;
+  top: -50%;
+  left: -50%;
+}
+
 .message-wrapper .chat-page .message-receive {
   float: left;
   background: #f7f7f7;
@@ -171,12 +200,52 @@
 .message-input {
   float: left;
   width: calc(100% - 60px);
+  position: relative;
 }
 
-.send-message-form .message-input input {
-  border-radius: 50px;
+.message-input .add-image-button {
+  width: 50px;
+
+  position: absolute;
+
+  height: 50px;
+
+  overflow: hidden;
+
+  left: 0;
+}
+.message-input .add-image-button i {
+  background: none;
+  border: none;
+  padding: 11px 15px;
+  font-size: 23px;
+  color: #777;
+}
+
+.message-input .add-image-button input[type="file"] {
+  position: absolute;
+
+  top: 0;
+
+  right: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  opacity: 0;
+}
+
+.send-message-form .message-input textarea {
+  border-radius: 25px;
   background: #fff;
   border: none;
+  max-width: 100%;
+  min-width: 100%;
+  max-height: 98px;
+  height: 50px;
+  box-sizing: border-box;
+  resize: none;
 }
 
 .button-wrapper {
@@ -253,7 +322,7 @@
             ]"
           >
             <div class="message-content-wrapper">
-              <span v-text="msg.text"></span>
+              <span v-html="msg.text"></span>
               <span class="message-chat-date">
                 <span v-if="msg.created_at">
                   {{
@@ -285,10 +354,22 @@
           <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
         </div>
       </div>
+
       <div class="send-message-form">
         <form>
           <div class="message-input">
-            <input type="text" placeholder="پیغامی بگذارید " v-model="$parent.msgToSend" />
+            <div class="add-image-button">
+              <span class="send-file-icon">
+                <i class="fas fa-paperclip"></i>
+              </span>
+              <input type="file" @change="$parent.previewImage" multiple accept="image/*" />
+            </div>
+            <textarea
+              data-autoresize
+              rows="1"
+              placeholder="پیغامی بگذارید "
+              v-model="$parent.msgToSend"
+            ></textarea>
           </div>
 
           <div class="button-wrapper">
@@ -320,7 +401,82 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    init: function() {
+      var self = this;
+
+      var caret = "";
+      $("textarea").keydown(function(event) {
+        if ($(this).val().length === 0 && event.keyCode == 13) {
+          event.preventDefault();
+        } else {
+          if (event.keyCode == 13 && event.shiftKey) {
+            var content = this.value;
+            caret = self.getCaret(this);
+            self.textareaAutoSize($("textarea"));
+
+            event.stopPropagation();
+          } else if (event.keyCode == 13) {
+            self.$parent.sendMessage();
+            $("button").focus();
+            setTimeout(function() {
+              $("textarea").focus();
+            }, 100);
+          }
+        }
+      });
+    },
+    getCaret: function(el) {
+      if (el.selectionStart) {
+        return el.selectionStart;
+      } else if (document.selection) {
+        el.focus();
+
+        var r = document.selection.createRange();
+        if (r == null) {
+          return 0;
+        }
+
+        var re = el.createTextRange(),
+          rc = re.duplicate();
+        re.moveToBookmark(r.getBookmark());
+        rc.setEndPoint("EndToStart", re);
+
+        return rc.text.length;
+      }
+      return 0;
+    },
+    textareaAutoSize: function(element) {
+      var self = this;
+      $.each(element, function() {
+        var offset = this.offsetHeight - this.clientHeight;
+        var resizeTextarea = function(el) {
+          $(el)
+            .css("height", "auto")
+            .css("height", el.scrollHeight + offset);
+          if (el.scrollHeight + 8 < 106) {
+            $(".message-wrapper .chat-page ul").css(
+              "bottom",
+              +(el.scrollHeight + 8)
+            );
+          } else {
+            $(".message-wrapper .chat-page ul").css("bottom", 106);
+          }
+          self.$parent.scrollToEnd(0);
+        };
+        $(this)
+          .on("keyup input", function() {
+            resizeTextarea(this);
+          })
+          .removeAttr("data-autoresize");
+      });
+    }
+  },
+  mounted: function() {
+    this.init();
+  }
+};
 </script>
 
 <style></style>

@@ -301,9 +301,8 @@ select {
   background: #777;
 }
 
-.message-wrapper .chat-page ul,
+.message-wrapper,
 .main-modal-chat ul,
-.send-message-form,
 .footer-modal-chat,
 .group-message-wrapper {
   background: url("../../img/whatsappbg.jpg") repeat;
