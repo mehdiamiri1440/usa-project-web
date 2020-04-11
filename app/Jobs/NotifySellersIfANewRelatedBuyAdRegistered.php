@@ -153,11 +153,11 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
     {
         $user_record = myuser::find($user_id);
 
-        if($user_record->active_pakage_type != 3){
-            $this->notify_product_owner_via_sms($user_record->phone,$delayed = true);
+        if($user_record->active_pakage_type > 0){
+            $this->notify_product_owner_via_sms($user_record->phone);
         }
         else{
-            $this->notify_product_owner_via_sms($user_record->phone);
+            $this->notify_product_owner_via_sms($user_record->phone,$delayed = true);
         }
         
 

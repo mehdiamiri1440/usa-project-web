@@ -344,7 +344,7 @@
                                     self.$emit('isMyProfile', self.isMyProfile);
                                 }
                             }
-
+                            
                             axios.post('/get_related_products', {
                                 product_id : self.product.main.id
                             })
