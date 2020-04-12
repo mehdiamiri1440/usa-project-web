@@ -73,12 +73,7 @@
                 v-text="'عضویت در گروه'"
               ></a>
 
-              <a
-                href="#"
-                class="btn green-button bg-gray"
-                data-dismiss="modal"
-                v-text="'انصراف'"
-              ></a>
+              <a href="#" class="btn green-button bg-gray" data-dismiss="modal" v-text="'انصراف'"></a>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -104,16 +99,9 @@
               <br />
               <p class="main-pop-up" v-text="elevatorText"></p>
 
-              <a href="" class="btn green-button bg-gray" data-dismiss="modal">
-                متوجه شدم</a
-              >
+              <a href class="btn green-button bg-gray" data-dismiss="modal">متوجه شدم</a>
 
-              <a
-                :href="'/payment/elevator/' + productId"
-                class="btn green-button "
-              >
-                خرید نردبان
-              </a>
+              <a :href="'/payment/elevator/' + productId" class="btn green-button">خرید نردبان</a>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -125,6 +113,8 @@
     <!-- end regex elevator modal -->
 
     <chat-modal />
+
+    <review-modal :review-user-data="reviewUserData" />
 
     <router-view
       :user-id="userId"
@@ -154,10 +144,7 @@
 
     <!-- add android app download  -->
 
-    <div
-      v-if="isConditionSatisfied"
-      class="android-download-alert-wrapper hidden-lg hidden-md"
-    >
+    <div v-if="isConditionSatisfied" class="android-download-alert-wrapper hidden-lg hidden-md">
       <button
         class="close-android-download-alert-wrapper"
         @click.prevent="isConditionSatisfied = false"
@@ -179,10 +166,12 @@ import { eventBus } from "../router.js";
 import Cookies from "js-cookie";
 import IsWebview from "is-webview";
 import ChatModal from "../../components/layouts/main/main_components/chat_modal";
+import ReviewModal from "./review-component/review";
 
 export default {
   components: {
-    ChatModal
+    ChatModal,
+    ReviewModal
   },
   data: function() {
     return {
@@ -192,7 +181,9 @@ export default {
       productId: "",
       joinGroupMessage: "",
       joinGroupId: "",
-      activeContactId:"",
+      activeContactId: "",
+      reviewUserData: "",
+      reviewCurrentStep: 0
     };
   },
   props: [
@@ -227,26 +218,28 @@ export default {
       this.activeContactId = $event;
     });
 
+    eventBus.$on("reviewUserData", $event => {
+      this.reviewUserData = $event;
+      $("#review-modal").modal("show");
+    });
+
     let self = this;
 
-    if(messaging){
-        messaging.onMessage(function(payload){
-            // console.log('route: ',payload.notification.tag);
-            if(payload.notification.tag == 'buskool'){
-                // console.log('contactId:',self.activeContactId);
-                if(!self.activeContactId){
-                    // console.log('upMessage');
-                    eventBus.$emit("messageCount",1);
-                }
-                eventBus.$emit("contanctMessageReceived",true);
-            }
-            else{
-                eventBus.$emit("groupMessageReceived",true);
-            }
-        })
+    if (messaging) {
+      messaging.onMessage(function(payload) {
+        // console.log('route: ',payload.notification.tag);
+        if (payload.notification.tag == "buskool") {
+          // console.log('contactId:',self.activeContactId);
+          if (!self.activeContactId) {
+            // console.log('upMessage');
+            eventBus.$emit("messageCount", 1);
+          }
+          eventBus.$emit("contanctMessageReceived", true);
+        } else {
+          eventBus.$emit("groupMessageReceived", true);
+        }
+      });
     }
-
-    
   },
   router,
   methods: {
@@ -317,8 +310,8 @@ export default {
           eventBus.$emit("reloadAllGroupLists", true);
         });
     },
-    extractSenderIdFromTag:function(tag){
-        return tag.split('FCM')[1];
+    extractSenderIdFromTag: function(tag) {
+      return tag.split("FCM")[1];
     }
   },
   mounted() {

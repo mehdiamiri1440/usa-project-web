@@ -47,7 +47,7 @@
 
 .message-wrapper .message-contact-title {
   font-size: 16px;
-  padding: 7px 0 8px;
+  padding: 7px 15px 8px;
   background: -webkit-gradient(
     linear,
     left top,
@@ -77,7 +77,7 @@
   border-radius: 50px;
   overflow: hidden;
   position: relative;
-  margin: 0 22px 0 17px;
+  margin-left: 20px;
 }
 
 .message-wrapper .message-contact-title img {
@@ -96,13 +96,30 @@
   padding-top: 9px;
 }
 
-.back-state .green-button {
+.back-state {
+  background: none;
+  color: #fff;
+  border: none;
+  font-size: 22px;
+  position: relative;
+  top: 5px;
+}
+
+.review-button {
   background: #fff;
   color: #00c569;
-  padding: 5px 14px;
+  padding: 0px 10px;
   border-radius: 5px;
   font-size: 12px;
-  margin: 6px 0 0 25px;
+  margin-top: 5px;
+}
+
+.review-button:hover {
+  color: #00c569;
+}
+
+.review-button i {
+  color: #ffbb00;
 }
 
 .message-wrapper .chat-page ul {
@@ -227,12 +244,21 @@
           ></span>
         </router-link>
       </div>
-      <div class="back-state hidden-sm hidden-md hidden-lg pull-left">
-        <a
-          href="#"
+      <div class="head-action-buttons pull-left">
+        <button
+          type="button"
+          class="green-button review-button"
+          @click.prevent="$parent.activeReviewModal()"
+        >
+          <i class="fa fa-star"></i>
+          ارسال نظر
+        </button>
+        <button
           @click.prevent="$parent.selectedContact = !$parent.selectedContact"
-          class="green-button"
-        >بازگشت</a>
+          class="back-state hidden-sm hidden-md hidden-lg"
+        >
+          <i class="fa fa-arrow-left"></i>
+        </button>
       </div>
     </div>
 

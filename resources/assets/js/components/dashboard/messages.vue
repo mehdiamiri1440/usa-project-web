@@ -122,7 +122,7 @@
 
 .contact-wrapper .contact-body {
   height: 100%;
-  overflow-y:scroll;
+  overflow-y: scroll;
   float: right;
   width: 100%;
 }
@@ -399,7 +399,7 @@ export default {
       isCurrentStep: 0,
       assets: this.$parent.assets,
       defultImg: this.$parent.defultimg,
-      str: this.$parent.str,
+      str: this.$parent.str
     };
   },
 
@@ -624,6 +624,24 @@ export default {
     goToGroupList: function() {
       this.$router.push("group-messages");
       this.$parent.groupStep = 1;
+    },
+    activeReviewModal: function() {
+      var userImage = "";
+
+      if (this.selectedContact.profile_photo) {
+        userImage = this.str + "/" + this.selectedContact.profile_photo;
+      } else {
+        userImage = this.defultImg;
+      }
+
+      var selectedUserData = {
+        name:
+          this.selectedContact.first_name +
+          " " +
+          this.selectedContact.last_name,
+        img: userImage
+      };
+      eventBus.$emit("reviewUserData", selectedUserData);
     }
   },
 
