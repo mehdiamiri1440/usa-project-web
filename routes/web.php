@@ -75,7 +75,7 @@ Route::post('/get_category_meta_data',[
 ]);
 
 Route::post('/user/get_product_list', [
-    'uses' => 'product_controller@get_product_list',
+    'uses' => 'product_list_controller@get_product_list',
     'as' => 'get_product_list',
 ]);
 
@@ -247,10 +247,10 @@ Route::group(['middleware' => [login::class]], function () {
     //     'as' => 'get_instant_factor_info_by_factor_id',
     // ]);
 
-    Route::post('/does_buyer_already_had_requested_the_produtct', [
-        'uses' => 'product_controller@does_buyer_already_had_requested_the_product',
-        'as' => 'does_buyer_already_had_requested_the_product',
-    ]);
+    // Route::post('/does_buyer_already_had_requested_the_produtct', [
+    //     'uses' => 'product_controller@does_buyer_already_had_requested_the_product',
+    //     'as' => 'does_buyer_already_had_requested_the_product',
+    // ]);
 
     // Route::post('/register_buyer_request_for_the_product', [
     //     'uses' => 'product_controller@register_buyer_request_for_the_product',
