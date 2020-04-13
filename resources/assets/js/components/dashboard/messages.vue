@@ -625,23 +625,8 @@ export default {
       this.$router.push("group-messages");
       this.$parent.groupStep = 1;
     },
-    activeReviewModal: function() {
-      var userImage = "";
-
-      if (this.selectedContact.profile_photo) {
-        userImage = this.str + "/" + this.selectedContact.profile_photo;
-      } else {
-        userImage = this.defultImg;
-      }
-
-      var selectedUserData = {
-        name:
-          this.selectedContact.first_name +
-          " " +
-          this.selectedContact.last_name,
-        img: userImage
-      };
-      eventBus.$emit("reviewUserData", selectedUserData);
+    activeReportModal: function() {
+      eventBus.$emit("reoprtModal", true);
     }
   },
 

@@ -43,10 +43,10 @@
       <div class="success-icon">
         <i class="fa fa-check"></i>
       </div>
-      <p>از ثبت نظر شما متشکریم</p>
+      <p>از ثبت گزارش شما متشکریم</p>
 
       <div class="report-button-wrapper">
-        <button class="green-button register-report" @click.prevent="$parent.reviewResetData()">بستن</button>
+        <button class="green-button register-report" @click.prevent="$parent.reportResetData()">بستن</button>
       </div>
     </div>
   </div>

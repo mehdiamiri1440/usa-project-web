@@ -105,23 +105,18 @@
   top: 5px;
 }
 
-.review-button {
+.report-button {
   background: #fff;
-  color: #00c569;
+  color: #777;
   padding: 0px 10px;
   border-radius: 5px;
   font-size: 12px;
   margin-top: 5px;
 }
 
-.review-button:hover {
+.report-button:hover {
   color: #00c569;
 }
-
-.review-button i {
-  color: #ffbb00;
-}
-
 .message-wrapper .chat-page ul {
   padding: 20px;
 
@@ -247,12 +242,9 @@
       <div class="head-action-buttons pull-left">
         <button
           type="button"
-          class="green-button review-button"
-          @click.prevent="$parent.activeReviewModal()"
-        >
-          <i class="fa fa-star"></i>
-          ارسال نظر
-        </button>
+          class="green-button report-button"
+          @click.prevent="$parent.activeReportModal()"
+        >گزارش تخلف</button>
         <button
           @click.prevent="$parent.selectedContact = !$parent.selectedContact"
           class="back-state hidden-sm hidden-md hidden-lg"

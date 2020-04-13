@@ -114,7 +114,7 @@
 
     <chat-modal />
 
-    <review-modal :review-user-data="reviewUserData" />
+    <report-modal />
 
     <router-view
       :user-id="userId"
@@ -166,12 +166,12 @@ import { eventBus } from "../router.js";
 import Cookies from "js-cookie";
 import IsWebview from "is-webview";
 import ChatModal from "../../components/layouts/main/main_components/chat_modal";
-import ReviewModal from "./review-component/review";
+import ReportModal from "./report-component/report";
 
 export default {
   components: {
     ChatModal,
-    ReviewModal
+    ReportModal
   },
   data: function() {
     return {
@@ -181,9 +181,7 @@ export default {
       productId: "",
       joinGroupMessage: "",
       joinGroupId: "",
-      activeContactId: "",
-      reviewUserData: "",
-      reviewCurrentStep: 0
+      activeContactId: ""
     };
   },
   props: [
@@ -218,9 +216,8 @@ export default {
       this.activeContactId = $event;
     });
 
-    eventBus.$on("reviewUserData", $event => {
-      this.reviewUserData = $event;
-      $("#review-modal").modal("show");
+    eventBus.$on("reoprtModal", $event => {
+      $("#report-modal").modal("show");
     });
 
     let self = this;
