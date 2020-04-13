@@ -185,20 +185,10 @@
   width: calc(100% - 60px);
 }
 
-.send-message-form .message-input textarea {
-  border-radius: 25px;
+.send-message-form .message-input input {
+  border-radius: 50px;
   background: #fff;
   border: none;
-  max-width: 100%;
-  min-width: 100%;
-  max-height: 98px;
-  min-height: 50px;
-  height: 50px;
-  box-sizing: border-box;
-  resize: none;
-  -webkit-transition: height 0.1s;
-  -moz-transition: height 0.1s;
-  transition: height 0.1s;
 }
 
 .button-wrapper {
@@ -324,18 +314,11 @@
       <div class="send-message-form">
         <form>
           <div class="message-input">
-            <!-- <textarea
-              data-autoresize
-              rows="1"
+            <input
+              type="text"
               placeholder="پیغامی بگذارید "
               v-model="$parent.msgToSend"
-            ></textarea> -->
-
-            <textarea
-              class="txta"
-              placeholder="پیغامی بگذارید "
-              v-model="$parent.msgToSend"
-            ></textarea>
+            />
           </div>
 
           <div class="button-wrapper">
@@ -367,172 +350,5 @@
 </template>
 
 <script>
-export default {
-  methods: {
-    init: function () {
-      var self = this;
-      this.textareaAutoSize();
-      $("textarea").keydown(function (event) {
-        if ($(this).val().length === 0 && event.keyCode == 13) {
-          event.preventDefault();
-        }
-      });
-      $("textarea").keyup(function (event) {
-        if ($(this).val().length === 0 && event.keyCode == 13) {
-          event.preventDefault();
-        } else {
-          if (event.keyCode == 13 && event.shiftKey) {
-          } else if (event.keyCode == 13) {
-            console.log("send");
-
-            self.$parent.sendMessage();
-          }
-        }
-      });
-    },
-    textareaAutoSize: function () {
-      let textareas = document.querySelectorAll(".txta"),
-        hiddenDiv = document.createElement("div"),
-        content = null;
-
-      // Adds a class to all textareas
-      for (let j of textareas) {
-        j.classList.add("txtstuff");
-      }
-
-      // Build the hidden div's attributes
-
-      // The line below is needed if you move the style lines to CSS
-      // hiddenDiv.classList.add('hiddendiv');
-
-      // Add the "txta" styles, which are common to both textarea and hiddendiv
-      // If you want, you can remove those from CSS and add them via JS
-      hiddenDiv.classList.add("txta");
-
-      // Add the styles for the hidden div
-      // These can be in the CSS, just remove these three lines and uncomment the CSS
-      hiddenDiv.style.display = "none";
-      hiddenDiv.style.whiteSpace = "pre-wrap";
-      hiddenDiv.style.wordWrap = "break-word";
-
-      // Loop through all the textareas and add the event listener
-      for (let i of textareas) {
-        (function (i) {
-          // Note: Use 'keyup' instead of 'input'
-          // if you want older IE support
-          i.addEventListener("input", function () {
-            // Append hiddendiv to parent of textarea, so the size is correct
-            i.parentNode.appendChild(hiddenDiv);
-
-            // Remove this if you want the user to be able to resize it in modern browsers
-            i.style.resize = "none";
-
-            // This removes scrollbars
-            i.style.overflow = "hidden";
-
-            // Every input/change, grab the content
-            content = i.value;
-
-            // Add the same content to the hidden div
-
-            // This is for old IE
-            content = content.replace(/\n/g, "<br>");
-
-            // The <br ..> part is for old IE
-            // This also fixes the jumpy way the textarea grows if line-height isn't included
-            hiddenDiv.innerHTML = content + '<br style="line-height: 3px;">';
-
-            // Briefly make the hidden div block but invisible
-            // This is in order to read the height
-            hiddenDiv.style.visibility = "hidden";
-            hiddenDiv.style.display = "block";
-            i.style.height = hiddenDiv.offsetHeight + 50 + "px";
-
-            // Make the hidden div display:none again
-            hiddenDiv.style.visibility = "visible";
-            hiddenDiv.style.display = "none";
-          });
-        })(i);
-      }
-    },
-    // init: function () {
-    //   var self = this;
-    //   self.textareaAutoSize($("textarea"));
-
-    //   var caret = "";
-    //   $("textarea").keydown(function (event) {
-    //     if ($(this).val().length === 0 && event.keyCode == 13) {
-    //       event.preventDefault();
-    //     }
-    //   });
-    //   $("textarea").keyup(function (event) {
-    //     if ($(this).val().length === 0 && event.keyCode == 13) {
-    //       event.preventDefault();
-    //     } else {
-    //       if (event.keyCode == 13 && event.shiftKey) {
-    //         var content = this.value;
-    //         caret = self.getCaret(this);
-    //         self.textareaAutoSize($("textarea"));
-
-    //         event.stopPropagation();
-    //       } else if (event.keyCode == 13) {
-    //         self.$parent.sendMessage();
-    //         $("button").focus();
-    //         setTimeout(function () {
-    //           $("textarea").focus();
-    //         }, 100);
-    //       }
-    //     }
-    //   });
-    // },
-    // getCaret: function (el) {
-    //   if (el.selectionStart) {
-    //     return el.selectionStart;
-    //   } else if (document.selection) {
-    //     el.focus();
-
-    //     var r = document.selection.createRange();
-    //     if (r == null) {
-    //       return 0;
-    //     }
-
-    //     var re = el.createTextRange(),
-    //       rc = re.duplicate();
-    //     re.moveToBookmark(r.getBookmark());
-    //     rc.setEndPoint("EndToStart", re);
-
-    //     return rc.text.length;
-    //   }
-    //   return 0;
-    // },
-    // textareaAutoSize: function (element) {
-    //   var self = this;
-    //   $.each(element, function () {
-    //     var offset = this.offsetHeight - this.clientHeight;
-    //     var resizeTextarea = function (el) {
-    //       $(el)
-    //         .css("height", "auto")
-    //         .css("height", el.scrollHeight + offset);
-    //       if (el.scrollHeight + 8 < 106) {
-    //         $(".message-wrapper .chat-page ul").css(
-    //           "bottom",
-    //           +(el.scrollHeight + 8)
-    //         );
-    //       } else {
-    //         $(".message-wrapper .chat-page ul").css("bottom", 106);
-    //       }
-    //       self.$parent.scrollToEnd(0);
-    //     };
-    //     $(this)
-    //       .on("keyup input", function () {
-    //         resizeTextarea(this);
-    //       })
-    //       .removeAttr("data-autoresize");
-    //   });
-    // },
-  },
-  mounted: function () {
-    this.init();
-  },
-};
+export default {};
 </script>
