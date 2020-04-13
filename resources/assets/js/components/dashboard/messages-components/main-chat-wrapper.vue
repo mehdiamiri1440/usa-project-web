@@ -185,10 +185,20 @@
   width: calc(100% - 60px);
 }
 
-.send-message-form .message-input input {
-  border-radius: 50px;
+.send-message-form .message-input textarea {
+  border-radius: 25px;
   background: #fff;
   border: none;
+  max-width: 100%;
+  min-width: 100%;
+  max-height: 98px;
+  min-height: 50px;
+  height: 50px;
+  box-sizing: border-box;
+  resize: none;
+  -webkit-transition: height 0.1s;
+  -moz-transition: height 0.1s;
+  transition: height 0.1s;
 }
 
 .button-wrapper {
@@ -229,12 +239,14 @@
           <img v-else :src="$parent.defultImg" />
         </div>
 
-        <router-link :to="{ path: '/profile/' + $parent.selectedContact.user_name }">
+        <router-link
+          :to="{ path: '/profile/' + $parent.selectedContact.user_name }"
+        >
           <span
             v-text="
               $parent.selectedContact.first_name +
-                ' ' +
-                $parent.selectedContact.last_name
+              ' ' +
+              $parent.selectedContact.last_name
             "
           ></span>
         </router-link>
@@ -244,7 +256,9 @@
           type="button"
           class="green-button report-button"
           @click.prevent="$parent.activeReportModal()"
-        >گزارش تخلف</button>
+        >
+          گزارش تخلف
+        </button>
         <button
           @click.prevent="$parent.selectedContact = !$parent.selectedContact"
           class="back-state hidden-sm hidden-md hidden-lg"
@@ -259,7 +273,7 @@
         :class="[
           $parent.isChatMessagesLoaded && $parent.isFirstMessageLoading
             ? 'chat-not-loaded'
-            : 'chat-loaded'
+            : 'chat-loaded',
         ]"
       >
         <li :key="msg.id" v-for="msg in $parent.chatMessages">
@@ -267,19 +281,20 @@
             :class="[
               msg.sender_id == $parent.currentUserId
                 ? 'message-send'
-                : 'message-receive'
+                : 'message-receive',
             ]"
           >
             <div class="message-content-wrapper">
               <span v-text="msg.text"></span>
               <span class="message-chat-date">
                 <span v-if="msg.created_at">
-                  {{
-                  msg.created_at | moment("jYY/jMM/jDD, h:mm A")
-                  }}
+                  {{ msg.created_at | moment("jYY/jMM/jDD, h:mm A") }}
                 </span>
                 <span v-else>{{ Date() | moment("jYY/jMM/jDD, h:mm A") }}</span>
-                <span class="check-items" v-if="msg.sender_id === $parent.currentUserId">
+                <span
+                  class="check-items"
+                  v-if="msg.sender_id === $parent.currentUserId"
+                >
                   <i class="fa fa-check" v-if="msg.created_at"></i>
                   <i class="far fa-clock" v-else></i>
                   <i class="fa fa-check" v-if="msg.is_read"></i>
@@ -294,7 +309,10 @@
         v-if="$parent.isChatMessagesLoaded && $parent.isFirstMessageLoading"
       >
         <div class="image-wrapper">
-          <div v-show="!$parent.isImageLoad || $parent.isImageLoad" class="lds-ring">
+          <div
+            v-show="!$parent.isImageLoad || $parent.isImageLoad"
+            class="lds-ring"
+          >
             <div></div>
             <div></div>
             <div></div>
@@ -306,7 +324,18 @@
       <div class="send-message-form">
         <form>
           <div class="message-input">
-            <input type="text" placeholder="پیغامی بگذارید " v-model="$parent.msgToSend" />
+            <!-- <textarea
+              data-autoresize
+              rows="1"
+              placeholder="پیغامی بگذارید "
+              v-model="$parent.msgToSend"
+            ></textarea> -->
+
+            <textarea
+              class="txta"
+              placeholder="پیغامی بگذارید "
+              v-model="$parent.msgToSend"
+            ></textarea>
           </div>
 
           <div class="button-wrapper">
@@ -338,7 +367,172 @@
 </template>
 
 <script>
-export default {};
-</script>
+export default {
+  methods: {
+    init: function () {
+      var self = this;
+      this.textareaAutoSize();
+      $("textarea").keydown(function (event) {
+        if ($(this).val().length === 0 && event.keyCode == 13) {
+          event.preventDefault();
+        }
+      });
+      $("textarea").keyup(function (event) {
+        if ($(this).val().length === 0 && event.keyCode == 13) {
+          event.preventDefault();
+        } else {
+          if (event.keyCode == 13 && event.shiftKey) {
+          } else if (event.keyCode == 13) {
+            console.log("send");
 
-<style></style>
+            self.$parent.sendMessage();
+          }
+        }
+      });
+    },
+    textareaAutoSize: function () {
+      let textareas = document.querySelectorAll(".txta"),
+        hiddenDiv = document.createElement("div"),
+        content = null;
+
+      // Adds a class to all textareas
+      for (let j of textareas) {
+        j.classList.add("txtstuff");
+      }
+
+      // Build the hidden div's attributes
+
+      // The line below is needed if you move the style lines to CSS
+      // hiddenDiv.classList.add('hiddendiv');
+
+      // Add the "txta" styles, which are common to both textarea and hiddendiv
+      // If you want, you can remove those from CSS and add them via JS
+      hiddenDiv.classList.add("txta");
+
+      // Add the styles for the hidden div
+      // These can be in the CSS, just remove these three lines and uncomment the CSS
+      hiddenDiv.style.display = "none";
+      hiddenDiv.style.whiteSpace = "pre-wrap";
+      hiddenDiv.style.wordWrap = "break-word";
+
+      // Loop through all the textareas and add the event listener
+      for (let i of textareas) {
+        (function (i) {
+          // Note: Use 'keyup' instead of 'input'
+          // if you want older IE support
+          i.addEventListener("input", function () {
+            // Append hiddendiv to parent of textarea, so the size is correct
+            i.parentNode.appendChild(hiddenDiv);
+
+            // Remove this if you want the user to be able to resize it in modern browsers
+            i.style.resize = "none";
+
+            // This removes scrollbars
+            i.style.overflow = "hidden";
+
+            // Every input/change, grab the content
+            content = i.value;
+
+            // Add the same content to the hidden div
+
+            // This is for old IE
+            content = content.replace(/\n/g, "<br>");
+
+            // The <br ..> part is for old IE
+            // This also fixes the jumpy way the textarea grows if line-height isn't included
+            hiddenDiv.innerHTML = content + '<br style="line-height: 3px;">';
+
+            // Briefly make the hidden div block but invisible
+            // This is in order to read the height
+            hiddenDiv.style.visibility = "hidden";
+            hiddenDiv.style.display = "block";
+            i.style.height = hiddenDiv.offsetHeight + 50 + "px";
+
+            // Make the hidden div display:none again
+            hiddenDiv.style.visibility = "visible";
+            hiddenDiv.style.display = "none";
+          });
+        })(i);
+      }
+    },
+    // init: function () {
+    //   var self = this;
+    //   self.textareaAutoSize($("textarea"));
+
+    //   var caret = "";
+    //   $("textarea").keydown(function (event) {
+    //     if ($(this).val().length === 0 && event.keyCode == 13) {
+    //       event.preventDefault();
+    //     }
+    //   });
+    //   $("textarea").keyup(function (event) {
+    //     if ($(this).val().length === 0 && event.keyCode == 13) {
+    //       event.preventDefault();
+    //     } else {
+    //       if (event.keyCode == 13 && event.shiftKey) {
+    //         var content = this.value;
+    //         caret = self.getCaret(this);
+    //         self.textareaAutoSize($("textarea"));
+
+    //         event.stopPropagation();
+    //       } else if (event.keyCode == 13) {
+    //         self.$parent.sendMessage();
+    //         $("button").focus();
+    //         setTimeout(function () {
+    //           $("textarea").focus();
+    //         }, 100);
+    //       }
+    //     }
+    //   });
+    // },
+    // getCaret: function (el) {
+    //   if (el.selectionStart) {
+    //     return el.selectionStart;
+    //   } else if (document.selection) {
+    //     el.focus();
+
+    //     var r = document.selection.createRange();
+    //     if (r == null) {
+    //       return 0;
+    //     }
+
+    //     var re = el.createTextRange(),
+    //       rc = re.duplicate();
+    //     re.moveToBookmark(r.getBookmark());
+    //     rc.setEndPoint("EndToStart", re);
+
+    //     return rc.text.length;
+    //   }
+    //   return 0;
+    // },
+    // textareaAutoSize: function (element) {
+    //   var self = this;
+    //   $.each(element, function () {
+    //     var offset = this.offsetHeight - this.clientHeight;
+    //     var resizeTextarea = function (el) {
+    //       $(el)
+    //         .css("height", "auto")
+    //         .css("height", el.scrollHeight + offset);
+    //       if (el.scrollHeight + 8 < 106) {
+    //         $(".message-wrapper .chat-page ul").css(
+    //           "bottom",
+    //           +(el.scrollHeight + 8)
+    //         );
+    //       } else {
+    //         $(".message-wrapper .chat-page ul").css("bottom", 106);
+    //       }
+    //       self.$parent.scrollToEnd(0);
+    //     };
+    //     $(this)
+    //       .on("keyup input", function () {
+    //         resizeTextarea(this);
+    //       })
+    //       .removeAttr("data-autoresize");
+    //   });
+    // },
+  },
+  mounted: function () {
+    this.init();
+  },
+};
+</script>

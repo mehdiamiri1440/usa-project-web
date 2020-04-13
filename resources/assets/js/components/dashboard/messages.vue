@@ -372,9 +372,9 @@ export default {
   props: ["loading_img"],
   components: {
     myContactList,
-    MainChatWrapper
+    MainChatWrapper,
   },
-  data: function() {
+  data: function () {
     return {
       isImageLoad: false,
       isChatMessagesLoaded: true,
@@ -383,8 +383,8 @@ export default {
       items: [
         {
           message: "پیام ها",
-          url: "messages"
-        }
+          url: "messages",
+        },
       ],
       isSearchingContact: false,
       contactList: [],
@@ -399,36 +399,36 @@ export default {
       isCurrentStep: 0,
       assets: this.$parent.assets,
       defultImg: this.$parent.defultimg,
-      str: this.$parent.str
+      str: this.$parent.str,
     };
   },
 
   methods: {
-    init: function() {
+    init: function () {
       this.loadContactList();
     },
-    loadImage: function() {
+    loadImage: function () {
       this.isImageLoad = false;
     },
-    ImageLoaded: function() {
+    ImageLoaded: function () {
       this.isImageLoad = true;
     },
-    loadContactList: function() {
+    loadContactList: function () {
       var self = this;
       this.isContactListLoaded = false;
 
       axios
         .post("/get_contact_list")
-        .then(function(response) {
+        .then(function (response) {
           self.contactList = response.data.contact_list;
           self.currentUserId = response.data.user_id;
           self.isContactListLoaded = true;
         })
-        .catch(function(e) {
+        .catch(function (e) {
           //
         });
     },
-    loadChatHistory: function(contact, index) {
+    loadChatHistory: function (contact, index) {
       var self = this;
       self.isChatLoadeMore = false;
       self.handleBackBtnClickOnDevices();
@@ -441,14 +441,14 @@ export default {
 
       axios
         .post("/get_user_chat_history", {
-          user_id: contact.contact_id
+          user_id: contact.contact_id,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.chatMessages = response.data.messages;
           self.currentUserId = response.data.current_user_id;
           self.scrollToEnd(0);
         })
-        .catch(function(e) {
+        .catch(function (e) {
           //
         });
 
@@ -463,7 +463,7 @@ export default {
 
       this.contactList.splice(index, 1, contact);
     },
-    appendMessageToChatHistory: function(contact) {
+    appendMessageToChatHistory: function (contact) {
       var self = this;
       self.isChatMessagesLoaded = false;
 
@@ -472,21 +472,21 @@ export default {
 
       axios
         .post("/get_user_chat_history", {
-          user_id: contact.contact_id
+          user_id: contact.contact_id,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.chatMessages = response.data.messages;
           self.currentUserId = response.data.current_user_id;
           self.scrollToEnd(0);
         })
-        .catch(function(e) {
+        .catch(function (e) {
           //
         });
     },
-    scrollToEnd: function(time) {
+    scrollToEnd: function (time) {
       var chatPageElementList = $(".chat-page ul");
       var self = this;
-      setTimeout(function() {
+      setTimeout(function () {
         chatPageElementList.animate(
           { scrollTop: chatPageElementList.prop("scrollHeight") },
           0,
@@ -497,7 +497,7 @@ export default {
         );
       }, time);
     },
-    sendMessage: function() {
+    sendMessage: function () {
       var self = this;
 
       let tempMsg = self.msgToSend;
@@ -507,7 +507,7 @@ export default {
         let msgObject = {
           sender_id: self.currentUserId,
           receiver_id: self.currentContactUserId,
-          text: tempMsg
+          text: tempMsg,
         };
 
         self.chatMessages.push(msgObject);
@@ -515,33 +515,33 @@ export default {
 
         axios
           .post("/messanger/send_message", msgObject)
-          .then(function(response) {
+          .then(function (response) {
             self.isFirstMessageLoading = false;
             self.loadChatHistory(self.selectedContact, -10);
           })
-          .catch(function(e) {
+          .catch(function (e) {
             //
           });
       }
     },
-    keepChatUpdated: function(contact) {
+    keepChatUpdated: function (contact) {
       var self = this;
-      setTimeout(function() {
+      setTimeout(function () {
         self.loadChatHistory(contact);
       }, 20000);
     },
-    pushNotification: function(header, body, link) {
+    pushNotification: function (header, body, link) {
       Push.create(header, {
         body: body,
         timeout: 4000,
         link: link,
-        onClick: function() {
+        onClick: function () {
           window.focus();
           this.close();
-        }
+        },
       });
     },
-    goToButtomOfChat: function() {
+    goToButtomOfChat: function () {
       $(".chat-page ul").animate(
         { scrollTop: $(".chat-page ul").prop("scrollHeight") },
         0
@@ -554,7 +554,7 @@ export default {
         }
       }
     },
-    pageHasBeenReloaded: function() {
+    pageHasBeenReloaded: function () {
       if (window.performance) {
         //                  TYPE_BACK_FORWARD
         if (
@@ -566,10 +566,10 @@ export default {
         }
       }
     },
-    parseDateTime: function(dateTimeString) {
+    parseDateTime: function (dateTimeString) {
       //
     },
-    isDeviceMobile: function() {
+    isDeviceMobile: function () {
       if (
         navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -584,14 +584,14 @@ export default {
         return false;
       }
     },
-    handleBackBtnClickOnDevices: function() {
+    handleBackBtnClickOnDevices: function () {
       var self = this;
 
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
 
-      $(window).on("popstate", function(e) {
+      $(window).on("popstate", function (e) {
         if (self.isDeviceMobile()) {
           if (
             window.location.pathname == "/seller/messenger/contacts" ||
@@ -604,69 +604,73 @@ export default {
         }
       });
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
     },
-    sendTokenToServer: function(token) {
+    sendTokenToServer: function (token) {
       axios
         .post("/fcm/register_token", {
-          token: token
+          token: token,
         })
-        .then(function(response) {
+        .then(function (response) {
           let token = response.data.token;
 
           window.localStorage.setItem("storedToken", token);
         });
     },
-    goToGroupList: function() {
+    goToGroupList: function () {
       this.$router.push("group-messages");
       this.$parent.groupStep = 1;
     },
-    activeReportModal: function() {
+    activeReportModal: function () {
       eventBus.$emit("reoprtModal", true);
-    }
+    },
   },
 
-  mounted: function() {
+  mounted: function () {
     this.init();
     eventBus.$emit("subHeader", this.items);
   },
 
-  created: function() {
+  created: function () {
     gtag("config", "UA-129398000-1", { page_path: "/messages" });
 
     var self = this;
 
     if (Push.Permission.has() === false) {
       Push.Permission.request(
-        function() {},
-        function() {}
+        function () {},
+        function () {}
       );
     }
 
     if (messaging) {
       messaging
         .requestPermission()
-        .then(function() {
+        .then(function () {
           // console.log("Notification permission granted.");
           return messaging.getToken();
         })
-        .then(function(currentToken) {
+        .then(function (currentToken) {
           let storedToken = window.localStorage.getItem("storedToken");
 
           if (storedToken != currentToken) {
             self.sendTokenToServer(currentToken);
           }
         })
-        .catch(function(err) {
+        .catch(function (err) {
           // Happen if user deney permission
           console.log("Unable to get permission to notify.", err);
         });
 
-      eventBus.$on("contanctMessageReceived", $event => {
+      eventBus.$on("contanctMessageReceived", ($event) => {
         // console.log("contact message");
         if (self.selectedContact) {
           self.appendMessageToChatHistory(self.selectedContact);
@@ -677,19 +681,19 @@ export default {
     }
   },
   watch: {
-    contactNameSearchText: function(value) {
+    contactNameSearchText: function (value) {
       var self = this;
       if (self.contactNameSearchText !== "") {
         self.isSearchingContact = true;
         axios
           .post("/get_contact_list")
-          .then(function(response) {
+          .then(function (response) {
             self.contactList = response.data.contact_list;
             self.currentUserId = response.data.user_id;
 
             var text = self.contactNameSearchText.split(" ");
-            self.contactList = self.contactList.filter(function(contact) {
-              return text.every(function(el) {
+            self.contactList = self.contactList.filter(function (contact) {
+              return text.every(function (el) {
                 if (
                   contact.first_name.indexOf(el) > -1 ||
                   contact.last_name.indexOf(el) > -1
@@ -701,16 +705,16 @@ export default {
 
             self.isSearchingContact = false;
           })
-          .catch(function(e) {
+          .catch(function (e) {
             //
           });
       } else {
         self.loadContactList();
       }
     },
-    selectedContact: function(value) {
+    selectedContact: function (value) {
       eventBus.$emit("activeContactId", value.contact_id);
-    }
+    },
   },
 
   activated() {
@@ -723,6 +727,6 @@ export default {
     this.isComponentActive = false;
     this.selectedContact = "";
     eventBus.$emit("activeContactId", "");
-  }
+  },
 };
 </script>
