@@ -9,6 +9,7 @@ use App\Jobs\CheckPakageExpiry;
 use App\Jobs\SendReminderSMSToSellers;
 use App\Jobs\CheckElevatorExpiry;
 use App\Jobs\SendUpgradeAccoutnSMSToSellers;
+use App\Jobs\CacheProductList;
 use DB;
 
 class Kernel extends ConsoleKernel
@@ -59,6 +60,11 @@ class Kernel extends ConsoleKernel
 
         $schedule->job($send_sms_to_potential_sellers_for_upgrading_account_job)
                 ->dailyAt('9:30');
+
+        $cache_product_list_job = new CacheProductList();
+
+        $schedule->job($cache_product_list_job)
+                ->everyFiveMinutes();
     }
 
     /**

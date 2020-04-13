@@ -119,16 +119,29 @@ class buyAd_controller extends Controller
         if (is_object($buyAd_object_or_failuire_message)) {
             $most_related_products = $this->get_the_most_related_products_to_the_given_buyAd_if_any($buyAd_object_or_failuire_message);
 
+            $interested_categories = '';
+
+            if($request->cookie('interestedCategories')){
+                $interested_categories_array = explode(',',$request->cookie('interested_categories'));
+                $interested_categories_array[] = $request->category_id;
+                $interested_categories_array = array_unique($interested_categories_array);
+
+                $interested_categories = implode(',',$interested_categories_array);
+            }
+            else{
+                $interested_categories = $request->category_id;
+            }
+
             if ($most_related_products) {
                 return response()->json([
                     'status' => true,
                     'products' => $most_related_products,
-                ], 201);
+                ], 201)->withCookie(cookie('interestedCategories',$interested_categories,43200));
             } else {
                 return response()->json([
                     'status' => true,
                     'buyAd' => $buyAd_object_or_failuire_message,
-                 ], 201);
+                    ], 201)->withCookie(cookie('interestedCategories',$interested_categories,43200));
             }
         } else {
             return response()->json([

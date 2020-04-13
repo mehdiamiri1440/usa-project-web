@@ -20,19 +20,21 @@ use App\tag;
 use App\province;
 use App\cities;
 use App\Http\Controllers\media_controller;
+use Illuminate\Support\Facades\Cache;
 
 class product_controller extends Controller
 {
     protected $current_user;
     protected $user_info_sent_by_product_array = [
-        'id',
-        'user_name',
-        'first_name',
-        'last_name',
-        'active_pakage_type',
+        'myusers.id as user_id',
+        'myusers.user_name',
+        'myusers.first_name',
+        'myusers.last_name',
+        'myusers.active_pakage_type',
+        'myusers.created_at',
     ];
     protected $profile_info_sent_by_product_array = [
-        'profile_photo',
+        'profiles.profile_photo',
     ];
 
     protected $product_register_fields_array = [
@@ -44,6 +46,27 @@ class product_controller extends Controller
         'description',
         'category_id', //->sub_catrgory in fact
         'city_id',
+    ];
+
+    protected $product_info_sent_by_product_array = [
+        'products.id as product_id',
+        'products.updated_at', 
+        'products.product_name', 
+        'products.stock', 
+        'products.min_sale_price', 
+        'products.max_sale_price', 
+        'products.min_sale_amount', 
+        'products.description',
+        'products.address', 
+        'products.myuser_id', 
+        'products.category_id as sub_category_id', 
+        'products.confirmed',
+        'provinces.province_name',
+        'provinces.id as province_id', 
+        'cities.city_name', 
+        'cities.id as city_id', 
+        'categories.category_name as sub_category_name', 
+        'products.is_elevated',
     ];
 
     protected $product_register_nullable_fields_array_with_validation_rules = array(
@@ -101,18 +124,10 @@ class product_controller extends Controller
                 }
             }
 
-//            if($this->is_immediate_product_confirm_active()){
-//                $product->confirmed = true;
-//            }
-
             $user->product()->save($product);
 
             $files_path_array = $this->save_product_photos($request, $request->images_count);
             $this->register_photos_path_in_DB($files_path_array, $product);
-
-//            if($this->is_send_sms_to_buyers_active()){
-//                NotifyBuyersBySMS::dispatch($product->id)->onQueue('default');
-//            }
 
             return $product;
         } catch (\Exception $e) {
@@ -128,8 +143,6 @@ class product_controller extends Controller
             'max_sale_price' => 'required|integer|min:0',
             'min_sale_amount' => 'required|integer|min:0',
             'product_name' => 'required|regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u',
-//			'rules' => 'required',
-            //'address' => 'required',
             'category_id' => 'required',
             'city_id' => 'required',
             'images_count' => 'required|integer|min:1',
@@ -184,73 +197,6 @@ class product_controller extends Controller
 
             $product->product_media()->save($media);
         }
-    }
-
-    // public method
-    public function get_product_list(Request $request)
-    {
-        $this->validate($request, [
-            'from_record_number' => 'integer|min:0',
-            'to_record_number' => 'integer|min:1',
-            'category_id' => 'integer|exists:categories,id',
-            'sub_category_id' => 'integer|exists:categories,id',
-            'province_id' => 'integer|exists:provinces,id',
-            'city_id' => 'integer|exists:cities,id',
-            'search_text' => 'string',
-            'response_rate' => 'boolean',
-            'special_products' => 'boolean',
-        ]);
-
-        $response_rate_filter = $request->response_rate;
-
-        $all_products = $this->get_all_products_with_related_media($request);
-
-        foreach ($all_products as $product) {
-            $product['user_info']->response_rate = $this->get_user_response_rate($product['user_info']->id);
-        }
-
-        //changing view priority according to owners pakage type
-        if ($response_rate_filter == true) {
-            usort($all_products, function ($item1, $item2) {
-                $a = $item1['user_info']->response_rate;
-                $b = $item2['user_info']->response_rate;
-
-                if ($a == $b) {
-                    $c = $item1['main']->is_elevated;
-                    $d = $item2['main']->is_elevated;
-
-                    if ($c == $d) {
-                        return $item1['main']->updated_at < $item2['main']->updated_at;
-                    }
-
-                    return ($c < $d) ? 1 : -1;
-                }
-
-                return ($a < $b) ? 1 : -1;
-            });
-        } else {
-            usort($all_products, function ($item1, $item2) {
-                $a = $item1['main']->is_elevated;
-                $b = $item2['main']->is_elevated;
-
-                if ($a == $b) {
-                    return $item1['main']->updated_at < $item2['main']->updated_at;
-                }
-
-                return ($a < $b) ? 1 : -1;
-            });
-        }
-
-        if ($request->filled('from_record_number') && $request->filled('to_record_number')) {
-            $offset = abs($request->from_record_number - $request->to_record_number);
-
-            $all_products = array_slice($all_products, $request->from_record_number, $offset, true);
-        }
-
-        return response()->json([
-            'status' => true,
-            'products' => array_values($all_products),
-        ], 200);
     }
 
     protected function get_current_user_products_with_related_media($user_id = null, $from_record_number = null, $to_record_number = null)
@@ -308,96 +254,114 @@ class product_controller extends Controller
         return $result_products;
     }
 
-    protected function get_all_products_with_related_media($request = null)
+    protected function get_user_response_info($user_id,$product_last_uptade_date = null,$viewer_response_time = 0)
     {
-        if(is_null($request)){
-            $products = product::where('confirmed',true)
-                                    ->orderBy('updated_at','desc')
+        $contacts = DB::table('messages')
+                                    ->where('receiver_id',$user_id)
+                                    ->select(DB::raw("DISTINCT(sender_id) as sender_id,sum(TIMESTAMPDIFF(SECOND,created_at,updated_at)) as delay"))
+                                    ->whereBetween('created_at',[Carbon::now()->subMonths(3),Carbon::now()])
+                                    ->groupBy('sender_id')
                                     ->get();
-            $result_products = $this->append_related_data_to_given_products($products);
-
-            return $result_products;
-        }
-
-        $products = null;
-
-        $query = product::where('confirmed', true);
-
-        if ($request->special_products == true) {
-            $package_buyers_user_id = $this->get_package_buyers_user_id_array();
-
-            $query = $query->whereIn('myuser_id', $package_buyers_user_id);
-        }
-        if($request->has('sub_category_id')){
-            $query->where('category_id',$request->sub_category_id);
-        }
-        if($request->has('city_id')){
-            $query->where('city_id',$request->city_id);
-        }
-        if($request->has('province_id')){
-            $province_id = $request->province_id;
-
-            $query = $this->apply_province_filter($query,$province_id);
-        }
-        if($request->has('category_id')){
-            $category_id = $request->category_id;
-
-            $query = $this->apply_category_filter($query,$category_id);
-        }
-        if($request->has('search_text')){
-            $search_text = $request->search_text;
-            
-            $query = $this->apply_search_text_filter($query,$search_text);
-        }
-
-        $query = $query->orderBy('updated_at', 'desc');
-
-        if($request->has('to_record_number')){
-            $to_record_number = $request->to_record_number;
-
-            if($request->response_rate == false){
-                $helper_query = clone $query;
-
-                $products = $query->whereBetween('updated_at',[Carbon::now()->subDays(((integer) $to_record_number/10) * 7),Carbon::now()])->get();
-                if($products->count() < $to_record_number){
-                    $products = $helper_query->get();
-                }
+        
+        $total_contacts_count = $contacts->count();
+        if ($total_contacts_count == 0) {
+            if(is_null($product_last_uptade_date)){
+                return [
+                    'response_rate' => 100,
+                    'response_time' => 0,
+                    'ums' => 0
+                ];
             }
             else{
-                $products = $query->get();
+                return [
+                    'response_rate' => 100,
+                    'response_time' => pow(Carbon::now()->diffInDays($product_last_uptade_date),2),
+                    'ums' => 0
+                ];
             }
-        }
-        else {
-            $products = $query->get();
+            
         }
 
-        $result_products = $this->append_related_data_to_given_products($products);
+        $seen_by_user_contacts_count = $contacts->filter(function($msg){
+            return $msg->delay != 0;
+        })->count();
 
-        return $result_products;
+        $response_rate = round(($seen_by_user_contacts_count / $total_contacts_count) * 100, 2);
+
+        $total_delay = (integer) ($contacts->sum('delay')/3600); //converting to hours
+
+        if($total_delay == 0){ // it means user have messages but did not read any of them
+            $response_time = -1;
+        }
+        else{
+            $response_time =  round($total_delay/$total_contacts_count);
+        }
+
+        $ums = $total_contacts_count;
+
+        return compact('response_rate','response_time','ums'); // UMS stands for unique message senders to this user
     }
 
     protected function append_related_data_to_given_products($products)
     {
+        $main_records = $this->product_info_sent_by_product_array;
+        array_walk($main_records,function(&$property_name){
+            $new_value = explode('.',$property_name)[1];
+            $new_value_array = explode(' as ',$new_value);
+            $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
+        });
+        
+        $user_records = $this->user_info_sent_by_product_array;
+        array_walk($user_records,function(&$property_name){
+            $new_value = explode('.',$property_name)[1];
+            $new_value_array = explode(' as ',$new_value);
+            $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
+        });
+
+        $profile_records = $this->profile_info_sent_by_product_array;
+        array_walk($profile_records,function(&$property_name){
+            $new_value = explode('.',$property_name)[1];
+            $new_value_array = explode(' as ',$new_value);
+            $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
+        });
+
         $result_products = [];
 
         foreach ($products as $product) {
             $temp = array();
-            $product_related_photos = $product->product_media()
+            $product_related_photos = product_media::where('product_id',$product->id)
                 ->select('file_path')
                 ->get();
 
-            $product_related_data['main'] = $this->get_product_related_data($product->id);
-            $product_related_user_info = myuser::where('id', $product->myuser_id)
-                ->get($this->user_info_sent_by_product_array)
-                ->first();
+            $product_related_data_tmp = $this->get_product_related_data($product->id);
+    
+            $product_related_data['main'] = new \StdClass;
+            foreach($main_records as $property_name)
+            {
+                if($property_name == 'product_id'){
+                    $product_related_data['main']->id = $product_related_data_tmp->$property_name;
+                }
+                else{
+                    $product_related_data['main']->$property_name = $product_related_data_tmp->$property_name;
+                }
+            }
 
-            $product_related_profile_info = profile::where('myuser_id', $product->myuser_id)
-                ->where('confirmed', true)
-                ->get($this->profile_info_sent_by_product_array)
-                ->last();
+            $product_related_data['user_info'] = new \StdClass;
+            foreach($user_records as $property_name)
+            {
+                if($property_name == 'user_id'){
+                    $product_related_data['user_info']->id = $product_related_data_tmp->$property_name;
+                }   
+                else{
+                    $product_related_data['user_info']->$property_name = $product_related_data_tmp->$property_name;
+                }
+            }
 
-            $product_related_data['user_info'] = $product_related_user_info;
-            $product_related_data['profile_info'] = $product_related_profile_info;
+            $product_related_data['profile_info'] = new \StdClass;
+            foreach($profile_records as $property_name)
+            {
+                $product_related_data['profile_info']->$property_name = $product_related_data_tmp->$property_name;
+            }
 
             $product_related_data['photos'] = $product_related_photos;
 
@@ -413,15 +377,24 @@ class product_controller extends Controller
 
     protected function get_product_related_data($product_id)
     {
+        $selected_items = array_merge($this->product_info_sent_by_product_array,
+                                        $this->user_info_sent_by_product_array,
+                                        $this->profile_info_sent_by_product_array);
+
+        // var_dump($selected_items);
+
         $product_with_related_data = DB::table('products')
                     ->join('categories', 'products.category_id', '=', 'categories.id')
+                    ->join('myusers','products.myuser_id','=','myusers.id')
+                    ->join('profiles','myusers.id','=','profiles.myuser_id')
                     ->leftJoin('cities', 'cities.id', '=', 'products.city_id')
                     ->leftJoin('provinces', 'provinces.id', '=', 'cities.province_id')
-                    ->select('products.id', 'products.updated_at', 'products.product_name', 'products.stock', 'products.min_sale_price', 'products.max_sale_price', 'products.min_sale_amount', 'products.description', 'products.address', 'products.myuser_id', 'products.category_id as sub_category_id', 'products.confirmed', 'provinces.province_name', 'provinces.id as province_id', 'cities.city_name', 'cities.id as city_id', 'categories.category_name as sub_category_name', 'products.is_elevated')
+                    ->select($selected_items)
+                    ->where('profiles.confirmed',true)
                     ->where('products.id', $product_id)
-                    ->where('confirmed', true)
+                    ->where('products.confirmed', true)
                     ->get()
-                    ->first();
+                    ->last();
 
         return $product_with_related_data;
     }
@@ -437,63 +410,6 @@ class product_controller extends Controller
                                     ->toArray();
 
         return $user_id_array;
-    }
-
-    protected function apply_province_filter($query,$province_id)
-    {
-        $province_cities = cities::where('province_id',$province_id)->select('id')->get();
-            
-        $query = $query->where(function($q) use($province_cities){
-            foreach($province_cities as $city){
-                $q = $q->orWhere('city_id',$city->id);
-            }
-
-            return $q;
-        });
-
-        return $query;
-    }
-
-    protected function apply_search_text_filter($query,$search_text)
-    {
-        $search_text = str_replace('\\', '', $search_text);
-        $search_text = str_replace('/', '', $search_text);
-        $search_text_array = explode(' ', $search_text);
-
-        $category_record = category::where('category_name',$search_text)->first();
-
-        if($category_record){
-            $query = $query->where('category_id',$category_record->id);
-        }
-        else{
-            $search_expresion = '';
-
-            foreach ($search_text_array as $text) {
-                $search_expresion .= "%$text%";
-            }
-
-            $query = $query->where(function($q) use($search_expresion){
-                    return $q = $q->where('product_name','like',$search_expresion)
-                            ->orWhere('description','like',$search_expresion);
-            });
-        }
-
-        return $query;
-    }
-
-    protected function apply_category_filter($query,$category_id)
-    {
-        $subcategories = category::where('parent_id',$category_id)->select('id')->get();
-
-        $query = $query->where(function($q) use($subcategories){
-            foreach($subcategories as $subcategory_id){
-                $q = $q->orWhere('category_id',$subcategory_id);
-            }
-
-            return $q;
-        });
-
-        return $query;
     }
 
     //public method
@@ -515,105 +431,71 @@ class product_controller extends Controller
             ], 404);
         }
 
-        $product_related_data['main'] = $this->get_product_related_data($product_id);
+        $main_records = $this->product_info_sent_by_product_array;
+        array_walk($main_records,function(&$property_name){
+            $new_value = explode('.',$property_name)[1];
+            $new_value_array = explode(' as ',$new_value);
+            $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
+        });
+        
+        $user_records = $this->user_info_sent_by_product_array;
+        array_walk($user_records,function(&$property_name){
+            $new_value = explode('.',$property_name)[1];
+            $new_value_array = explode(' as ',$new_value);
+            $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
+        });
 
-        $product = product::find($product_id);
+        $profile_records = $this->profile_info_sent_by_product_array;
+        array_walk($profile_records,function(&$property_name){
+            $new_value = explode('.',$property_name)[1];
+            $new_value_array = explode(' as ',$new_value);
+            $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
+        });
 
-        $product_related_photos = $product->product_media()
-            ->select('file_path')
-            ->get();
+        $product_related_photos = product_media::where('product_id',$product->id)
+                ->select('file_path')
+                ->get();
 
-        $product_related_data['photos'] = $product_related_photos;
+        $product_related_data_tmp = $this->get_product_related_data($product->id);
 
-        $product_related_user_info = myuser::where('id', $product->myuser_id)
-                ->get($this->user_info_sent_by_product_array)
-                ->first();
+        $product_related_data['main'] = new \StdClass;
+        foreach($main_records as $property_name)
+        {
+            if($property_name == 'product_id'){
+                $product_related_data['main']->id = $product_related_data_tmp->$property_name;
+            }
+            else{
+                $product_related_data['main']->$property_name = $product_related_data_tmp->$property_name;
+            }
+        }
 
-        $product_related_profile_info = profile::where('myuser_id', $product->myuser_id)
-            ->where('confirmed', true)
-            ->get($this->profile_info_sent_by_product_array)
-            ->last();
+        $product_related_data['user_info'] = new \StdClass;
+        foreach($user_records as $property_name)
+        {
+            if($property_name == 'user_id'){
+                $product_related_data['user_info']->id = $product_related_data_tmp->$property_name;
+            }   
+            else{
+                $product_related_data['user_info']->$property_name = $product_related_data_tmp->$property_name;
+            }
+        }
 
-        $product_related_data['user_info'] = $product_related_user_info;
-        $product_related_data['user_info']->response_rate = $this->get_user_response_rate($product->myuser_id);
-        $product_related_data['profile_info'] = $product_related_profile_info;
+        $product_related_data['profile_info'] = new \StdClass;
+        foreach($profile_records as $property_name)
+        {
+            $product_related_data['profile_info']->$property_name = $product_related_data_tmp->$property_name;
+        }
 
-        //		if(session()->has('user_id'))
-        //		{
-        //			$product_related_user_info = myuser::find(session('user_id'));
-        //			$product_related_data['phone'] = $product_related_user_info->phone ;
-        //		}
+        $product_related_data['user_info']->response_rate = $this->get_user_response_info($product->myuser_id)['response_rate'];
 
         $product_parent_category_data = $product->category;
         $product_related_data['main']->category_id = $product_parent_category_data['parent_id'];
         $product_related_data['main']->category_name = (category::find($product_parent_category_data['parent_id']))['category_name'];
 
-        $this->increment_product_view_count($product, session('user_id'));
-
         return response()->json([
             'status' => true,
             'product' => $product_related_data,
         ], 201);
-    }
-
-    protected function increment_product_view_count($product, $current_user_id)
-    {
-        if (($pivot_record = $this->does_the_user_already_attached_to_this_product($product->id, $current_user_id))) {
-            $pivot_record->updated_at = Carbon::now();
-            $pivot_record->save();
-        } else {
-            $product->product_statistic()->attach($current_user_id, [
-                'at_least_one_view' => true,
-                'created_at' => Carbon::now(),
-            ]);
-        }
-    }
-
-    protected function does_the_user_already_attached_to_this_product($product_id, $user_id)
-    {
-        $pivot_record = product_statistics::where('myuser_id', $user_id)
-            ->where('product_id', $product_id)
-            ->get()
-            ->first();
-
-        if ($pivot_record) {
-            return $pivot_record;
-        } else {
-            return false;
-        }
-    }
-
-    //public method
-    public function increment_product_phone_view_count(Request $request)
-    {
-        $this->validate($request, [
-            'product_id' => 'required|numeric',
-        ]);
-
-        $product_id = $request->product_id;
-
-        try {
-            $product = product::findOrFail($product_id);
-            $product_owner_info = myuser::findOrFail($product->myuser_id);
-        } catch (\Exception $e) {
-            return response()->json([
-               'status' => false,
-                'msg' => 'the product does not exist or application can not access database now',
-            ], 500);
-        }
-
-        $phone_view_count_before_increment = $product->phone_view_count;
-
-        $product->phone_view_count = $phone_view_count_before_increment + 1;
-
-        $product->save();
-
-        return response()->json([
-            'status' => true,
-            'phone' => $product_owner_info->phone,
-            'count_before_increment' => $phone_view_count_before_increment,
-            'count_after_increment' => $product->phone_view_count,
-        ]);
     }
 
     //public method
@@ -712,85 +594,6 @@ class product_controller extends Controller
     }
 
     //public method
-    public function does_buyer_already_had_requested_the_product(Request $request)
-    {
-        if (session('is_buyer')) {
-            $this->validate($request, [
-                'product_id' => 'required|integer|min:1',
-            ]);
-
-            $product_id = $request->product_id;
-
-            $user_id = session('user_id');
-
-            $user_record = myuser::find($user_id);
-
-            $user_product_table_record = user_product::where('product_id', $product_id)
-                                                ->where('myuser_id', $user_id)
-                                                ->get()
-                                                ->first();
-
-            if ($user_product_table_record) { //user already had sent buy request for the product
-                return response()->json([
-                   'status' => true,
-                ], 200);
-            } else {
-                return response()->json([
-                    'status' => false,
-                ], 200);
-            }
-        } else {
-            return response()->json([
-               'status' => true,
-               'msg' => 'Not Autorized!',
-            ], 404);
-        }
-    }
-
-    //public method
-    public function register_buyer_request_for_the_product(Request $request)
-    {
-        if (session('is_buyer')) {
-            $this->validate($request, [
-                'product_id' => 'required|integer|min:1',
-            ]);
-
-            $product_id = $request->product_id;
-
-            $product_record = product::find($product_id);
-
-            if ($product_record) {
-                $sms_controller_object = new sms_controller();
-                $sms_controller_object->send_status_sms_message($product_record, 'برای یکی از آگهی های شما در باسکول درخواست خرید ثبت شده است.برای بررسی به buskool.com مراجعه کنید.');
-
-                $user_id = session('user_id');
-
-                $user_product_record = new user_product();
-
-                $user_product_record->myuser_id = $user_id;
-                $user_product_record->product_id = $product_id;
-
-                $user_product_record->save();
-
-                return response()->json([
-                    'status' => true,
-                    'msg' => 'record added!',
-                ], 201);
-            } else {
-                return response()->json([
-                    'status' => false,
-                    'msg' => 'product Id is not valid',
-                ], 404);
-            }
-        } else {
-            return response()->json([
-                'status' => false,
-                'msg' => 'Not Authorized!',
-            ], 404);
-        }
-    }
-
-    //public method
     public function refresh_product_updated_at_time(Request $request)
     {
         $this->validate($request, [
@@ -835,15 +638,6 @@ class product_controller extends Controller
         }
     }
 
-    protected function is_immediate_product_confirm_active()
-    {
-        $user_id = session('user_id');
-
-        $user_active_pakage_type = myuser::find($user_id)->active_pakage_type;
-
-        return config("subscriptionPakage.type-$user_active_pakage_type.immediate-confirm");
-    }
-
     protected function is_user_allowed_to_register_another_product()
     {
         $user_id = session('user_id');
@@ -858,42 +652,6 @@ class product_controller extends Controller
                                             ->count();
 
         if ($max_allowed_prodcut_register > $user_confirmed_products_count) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    protected function is_send_sms_to_buyers_active()
-    {
-        $user_id = session('user_id');
-
-        $user_active_pakage_type = myuser::find($user_id)->active_pakage_type;
-
-        return config("subscriptionPakage.type-$user_active_pakage_type.sms-to-buyers");
-    }
-
-    protected function does_search_text_matche_the_product($search_text, $product)
-    {
-        $search_text = str_replace('\\', '', $search_text);
-        $search_text = str_replace('/', '', $search_text);
-        $search_text_array = explode(' ', $search_text);
-
-        $search_expresion = '(.*)';
-
-        foreach ($search_text_array as $text) {
-            $search_expresion .= "($text)(.*)";
-        }
-
-        $product_info[] = $product->product_name;
-        $product_info[] = $product->description;
-        $product_info[] = $product->subcategory_name;
-
-        $result = array_filter($product_info, function ($item) use ($search_text,$search_expresion) {
-            return preg_match("/$search_expresion/", $item);
-        });
-
-        if (sizeof($result) > 0) {
             return true;
         } else {
             return false;
@@ -924,7 +682,6 @@ class product_controller extends Controller
                     'max_sale_price' => $request->max_sale_price,
                     'min_sale_amount' => $request->min_sale_amount,
                     'stock' => $request->stock,
-//                    'description' => $request->description,
                 ];
 
                 DB::table('products')
@@ -952,9 +709,12 @@ class product_controller extends Controller
     //public method
     public function get_all_products_url_for_sitemap()
     {
-        $products = collect($this->get_all_products_with_related_media());
+        $products = product::where('confirmed',true)
+                                    ->orderBy('updated_at','desc')
+                                    ->get();
+        $result_products = $this->append_related_data_to_given_products($products);
 
-        return $products;
+        return $result_products;
     }
 
     protected function get_the_most_related_buyAd_to_the_given_product_if_there_is_any(&$product)
@@ -1124,26 +884,6 @@ class product_controller extends Controller
             'status' => true,
             'products' => $products,
         ], 200);
-    }
-
-    protected function get_user_response_rate($user_id)
-    {
-        $total_contacts_count = message::where('receiver_id', $user_id)
-                                            ->select('sender_id')
-                                            ->distinct()
-                                            ->get()
-                                            ->count();
-        if ($total_contacts_count == 0) {
-            return 0;
-        }
-        $seen_by_user_contacts_count = message::where('receiver_id', $user_id)
-                                            ->where('is_read', true)
-                                            ->select('sender_id')
-                                            ->distinct()
-                                            ->get()
-                                            ->count();
-
-        return round(($seen_by_user_contacts_count / $total_contacts_count) * 100, 2);
     }
 
     //public method

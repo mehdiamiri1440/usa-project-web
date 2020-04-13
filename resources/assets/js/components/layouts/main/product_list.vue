@@ -903,6 +903,7 @@
                                 from_record_number: self.fromProductCount,
                                 response_rate: self.$parent.productByResponseRate,
                                 to_record_number: self.productCountInPage,
+                                sort_by:'BM',
 
                             }).then(function (response) {
                                 self.products = response.data.products;
@@ -933,6 +934,7 @@
                         from_record_number: self.fromProductCount,
                         response_rate: self.$parent.productByResponseRate,
                         to_record_number: self.productCountInPage,
+                        sort_by:'BM',
                     }).then(function (response) {
                         if (self.products && self.products.length) {
                             self.products = self.products.concat([...response.data.products]);
@@ -991,6 +993,7 @@
                     searchObject.from_record_number = self.productCountInPage;
                     self.productCountInPage += self.productCountInEachLoad;
                     searchObject.to_record_number = self.productCountInPage;
+                    searchObject.sort_by = 'BM';
 
                     axios.post('/user/get_product_list', searchObject)
                         .then(function (response) {
@@ -1114,6 +1117,7 @@
 
                 searchObject.from_record_number = self.fromProductCount;
                 searchObject.to_record_number = self.productCountInPage;
+                searchObject.sort_by = 'BM';
 
                 axios.post('/user/get_product_list', searchObject)
                     .then(function (response) {
