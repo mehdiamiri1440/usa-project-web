@@ -135,7 +135,6 @@ class product_list_controller extends Controller
             $products = Cache::get($cache_key);
         }
         else{
-            echo 'not in cache';
             $products = $this->get_all_products_with_related_media();
 
             Cache::put($cache_key,$products,30);  

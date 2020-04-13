@@ -367,6 +367,16 @@ Route::group(['middleware' => [login::class]], function () {
         'as' => 'swith_user_role'
     ]);
 
+    Route::post('/get_report_options',[
+        'uses' => 'report_controller@get_report_options',
+        'as'   => 'get_report_options'
+    ]);
+
+    Route::post('/send_user_report',[
+        'uses' => 'report_controller@send_user_report',
+        'as'   => 'send_user_report'
+    ]);
+
 
      Route::group(['prefix' => 'group'],function(){
         Route::post('/get_groups_list',[
