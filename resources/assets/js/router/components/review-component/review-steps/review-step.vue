@@ -34,7 +34,7 @@
 
   margin-left: 10px;
 }
-.rate:not(:checked) > label:last-of-type {
+.rate:not(:checked) > label:first-of-type {
   margin-left: 0;
 }
 .rate:not(:checked) > label:before {
@@ -94,6 +94,7 @@
 
 .buttons-wrapper {
   display: inline-block;
+  margin-bottom: 15px;
 }
 
 .report-form {
@@ -102,8 +103,6 @@
   direction: rtl;
 
   overflow: hidden;
-
-  margin-top: 15px;
 }
 
 .report-form .form-wrapper {
@@ -146,9 +145,9 @@
 
   font-weight: bold;
 
-  padding: 5px 30px;
-
+  padding: 5px;
   margin: 15px;
+  width: 138px;
 }
 
 .buttons-wrapper .green-button:hover {
@@ -172,7 +171,7 @@
 <template>
   <div class="row">
     <div class="main-text">
-      <p>میزان رضایت خود را از 1 تا 10 ثبت کنید</p>
+      <p>میزان رضایت خود را از 1 تا 5 ثبت کنید</p>
 
       <div class="rate">
         <input type="radio" id="star5" name="rate" value="5" v-model="stars" />
@@ -204,7 +203,7 @@
 
       <div id="report-form" class="report-form collapse">
         <div class="form-wrapper">
-          <p>فرم ثبت شکایت</p>
+          <p>توضیحات شکایت خود را اینجا بنویسید</p>
           <textarea placeholder="شکایت خود را بنویسید" v-model="reportFormText"></textarea>
           <div class="report-button-wrapper">
             <button class="green-button register-report" @click.prevent="submitReport()">ثبت نهایی</button>

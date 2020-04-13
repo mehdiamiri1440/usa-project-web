@@ -52,7 +52,7 @@
 
   border-radius: 5px;
 
-  padding: 15px 20px;
+  padding: 15px 53px 15px 20px;
 
   margin: 0;
 
@@ -86,20 +86,21 @@
 
 .input-check {
   display: inline-block;
-
-  width: 15px;
-
-  height: 15px;
-
+  width: 25px;
+  height: 25px;
   background: #777;
-
-  border-radius: 50px;
-
+  border-radius: 3px;
   position: absolute;
+  top: 11px;
+  right: 30px;
+}
 
-  top: 15px;
+.input-check i {
+  color: #777;
 
-  left: 30px;
+  font-size: 17px;
+
+  padding: 4px;
 }
 
 input[type="checkbox"]:checked + label {
@@ -109,6 +110,10 @@ input[type="checkbox"]:checked + label {
 
 input[type="checkbox"]:checked + label span.input-check {
   background: #00c569;
+}
+
+input[type="checkbox"]:checked + label span.input-check i {
+  color: #fff;
 }
 </style>
 
@@ -127,7 +132,9 @@ input[type="checkbox"]:checked + label span.input-check {
           />
           <label class="form-check-label" :for="'inlineCheckbox' + index">
             <span v-text="'آپشن شماره ' + index"></span>
-            <span class="input-check"></span>
+            <span class="input-check">
+              <i class="fa fa-check"></i>
+            </span>
           </label>
         </div>
       </div>
