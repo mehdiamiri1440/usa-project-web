@@ -245,7 +245,9 @@
         <button
           type="button"
           class="green-button report-button"
-          @click.prevent="$parent.activeReportModal()"
+          @click.prevent="
+            $parent.activeReportModal($parent.selectedContact.contact_id)
+          "
         >
           گزارش تخلف
         </button>

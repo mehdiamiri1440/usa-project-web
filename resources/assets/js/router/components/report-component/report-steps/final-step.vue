@@ -1,4 +1,3 @@
-
 <style scoped>
 .main-text p {
   font-weight: 800;
@@ -30,6 +29,19 @@
 
   padding-top: 18px;
 }
+
+p.small-text {
+  padding: 15px;
+
+  color: #777;
+
+  font-size: 14px;
+
+  font-weight: 400;
+
+  direction: rtl;
+}
+
 @media screen and (max-width: 768px) {
   .success-icon {
     margin-top: 80px;
@@ -44,9 +56,17 @@
         <i class="fa fa-check"></i>
       </div>
       <p>از ثبت گزارش شما متشکریم</p>
-
+      <p class="small-text">
+        ثبت گزارش تخلفات به باسکول کمک می کند تا فضای امن تری برای انجام معاملات
+        شما ایجاد کند.
+      </p>
       <div class="report-button-wrapper">
-        <button class="green-button register-report" @click.prevent="$parent.reportResetData()">بستن</button>
+        <button
+          class="green-button register-report"
+          @click.prevent="$parent.reportResetData()"
+        >
+          بستن
+        </button>
       </div>
     </div>
   </div>
@@ -54,13 +74,12 @@
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
       reportFormData: "",
       reportFormActive: false,
-      stars: ""
+      stars: "",
     };
-  }
+  },
 };
 </script>
-

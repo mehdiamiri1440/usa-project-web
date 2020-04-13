@@ -1,4 +1,3 @@
-
 <style scoped>
 .form-check-wrapper {
   direction: rtl;
@@ -58,37 +57,62 @@
 
   color: #777;
 }
+
+.loading-list {
+  padding: 90px 0 130px;
+}
 </style>
 
 <template>
   <div class="row">
     <div class="main-text">
-      <ul class="form-check-wrapper">
-        <li v-for="(item,index) in 6 " :key="index">
+      <ul v-if="reportOptions" class="form-check-wrapper">
+        <li v-for="(item, index) in reportOptions" :key="index">
           <button
             class="default-button-list"
-            @click.prevent="$parent.checkReportSubmit(index , index > 3 ? true : false)"
-          >این یک جمله خفنه ها {{index }}</button>
+            @click.prevent="
+              $parent.checkReportSubmit(item.id, item.is_description_needed)
+            "
+          >
+            {{ item.option_text }}
+          </button>
           <i class="fa fa-angle-left"></i>
         </li>
       </ul>
+
+      <div v-else class="loading-list">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
+      reportOptions: "",
       textsData: {
         reviewItems: [],
-        reviewText: ""
-      }
+        reviewText: "",
+      },
     };
   },
   methods: {
-    nextStep: function() {}
-  }
+    init: function () {
+      let self = this;
+      axios.post("/get_report_options").then(function (response) {
+        self.reportOptions = response.data.options;
+      });
+    },
+  },
+  mounted: function () {
+    this.init();
+  },
 };
 </script>
-

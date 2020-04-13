@@ -651,17 +651,24 @@ p.response-rate span {
     </header>
 
     <main id="main" class="container">
-      <section class="main-content" itemscope itemprop="Person" itemtype="http://schema.org/Person">
+      <section
+        class="main-content"
+        itemscope
+        itemprop="Person"
+        itemtype="http://schema.org/Person"
+      >
         <div class="profile-main-content-item">
           <div class="header-content col-xs-12">
             <div class="image_user_wrapper col-xs-4 col-sm-3 col-md-2">
               <div v-if="profileOwner.user_info" class="user-image">
                 <div v-if="profileOwner.profile.profile_photo">
                   <img
-                    v-bind:src=" str + '/' +
-                                      profileOwner.profile.profile_photo"
-                    :alt="profileOwner.user_info.first_name +
-                                          ' ' + profileOwner.user_info.last_name"
+                    v-bind:src="str + '/' + profileOwner.profile.profile_photo"
+                    :alt="
+                      profileOwner.user_info.first_name +
+                      ' ' +
+                      profileOwner.user_info.last_name
+                    "
                   />
                 </div>
 
@@ -669,81 +676,122 @@ p.response-rate span {
                   <img
                     :src="defultimg"
                     class="image_defult"
-                    :alt="profileOwner.user_info.first_name +
-                                         ' ' +
-                                          profileOwner.user_info.last_name"
+                    :alt="
+                      profileOwner.user_info.first_name +
+                      ' ' +
+                      profileOwner.user_info.last_name
+                    "
                   />
                 </div>
               </div>
 
               <div v-else class="user-image">
-                <div class="placeholder-content default-wrapper-main-image"></div>
+                <div
+                  class="placeholder-content default-wrapper-main-image"
+                ></div>
               </div>
             </div>
 
-            <div class="info_user_wrapper_mobile hidden-sm hidden-md hidden-lg col-xs-8 col-sm-4">
+            <div
+              class="info_user_wrapper_mobile hidden-sm hidden-md hidden-lg col-xs-8 col-sm-4"
+            >
               <div class="row">
-                <div class="col-xs-6 text-center" v-if="profileOwnerStatistics.reputation_score">
-                  <div class="info-num" v-text="profileOwnerStatistics.reputation_score"></div>اعتبار
+                <div
+                  class="col-xs-6 text-center"
+                  v-if="profileOwnerStatistics.reputation_score"
+                >
+                  <div
+                    class="info-num"
+                    v-text="profileOwnerStatistics.reputation_score"
+                  ></div>
+                  اعتبار
                 </div>
                 <div class="col-xs-6 text-center" v-else>
-                  <div class="info-num placeholder-content content-min-width margin-auto"></div>
+                  <div
+                    class="info-num placeholder-content content-min-width margin-auto"
+                  ></div>
                 </div>
 
                 <div
                   class="col-xs-6 text-center"
-                  v-if="profileOwner.user_info.is_seller && profileOwnerStatistics"
+                  v-if="
+                    profileOwner.user_info.is_seller && profileOwnerStatistics
+                  "
                 >
-                  <div class="info-num" v-text="profileOwnerStatistics.product_count"></div>محصولات
+                  <div
+                    class="info-num"
+                    v-text="profileOwnerStatistics.product_count"
+                  ></div>
+                  محصولات
                 </div>
 
                 <div
                   class="col-xs-6 text-center"
-                  v-else-if="profileOwner.user_info.is_buyer && profileOwnerStatistics"
+                  v-else-if="
+                    profileOwner.user_info.is_buyer && profileOwnerStatistics
+                  "
                 >
-                  <div class="info-num" v-text="profileOwnerStatistics.buyAd_count"></div>درخواست ها
+                  <div
+                    class="info-num"
+                    v-text="profileOwnerStatistics.buyAd_count"
+                  ></div>
+                  درخواست ها
                 </div>
 
                 <div class="col-xs-6 text-center" v-else>
-                  <div class="info-num placeholder-content content-min-width margin-auto"></div>
+                  <div
+                    class="info-num placeholder-content content-min-width margin-auto"
+                  ></div>
                 </div>
 
                 <div class="col-xs-12">
                   <div v-if="!profileOwner.user_info.id">
-                    <div class="default-boxing-size placeholder-content content-full-width"></div>
+                    <div
+                      class="default-boxing-size placeholder-content content-full-width"
+                    ></div>
                   </div>
 
                   <div v-else>
                     <div
-                      v-if="currentUser.user_info && currentUser.user_info.id === profileOwner.user_info.id "
+                      v-if="
+                        currentUser.user_info &&
+                        currentUser.user_info.id === profileOwner.user_info.id
+                      "
                     >
                       <router-link
-                        :to="{name : 'profileBasicSeller'}"
+                        :to="{ name: 'profileBasicSeller' }"
                         class="green-button edit"
-                        v-if=" currentUser.user_info.is_seller == 1 "
+                        v-if="currentUser.user_info.is_seller == 1"
                       >
                         <i class="fa fa-pencil-alt"></i>
                         ویرایش پروفایل
                       </router-link>
 
                       <router-link
-                        :to="{name : 'profileBasicBuyer'}"
+                        :to="{ name: 'profileBasicBuyer' }"
                         class="green-button edit"
-                        v-else-if="currentUser.user_info.is_seller == 0 "
+                        v-else-if="currentUser.user_info.is_seller == 0"
                       >
                         <i class="fa fa-pencil-alt"></i>
                         ویرایش پروفایل
                       </router-link>
                     </div>
 
-                    <a v-else href="#" @click.prevent="openChat()" class="green-button edit">
+                    <a
+                      v-else
+                      href="#"
+                      @click.prevent="openChat()"
+                      class="green-button edit"
+                    >
                       <i class="fa fa-envelope"></i>
                       ارسال پیام
                     </a>
                   </div>
 
                   <div v-if="!profileOwner.user_info.id">
-                    <div class="placeholder-content padding-15-0 content-full-width"></div>
+                    <div
+                      class="placeholder-content padding-15-0 content-full-width"
+                    ></div>
                   </div>
 
                   <a
@@ -759,17 +807,24 @@ p.response-rate span {
               </div>
             </div>
 
-            <div class="content_user_wrapper hidden-xs col-xs-6 col-sm-9 col-md-10">
+            <div
+              class="content_user_wrapper hidden-xs col-xs-6 col-sm-9 col-md-10"
+            >
               <div class="user-contents row">
                 <div class="title_content col-xs-12">
                   <div class="back_page first-back col-xs-12 col-sm-4 col-md-3">
                     <a
                       href="javascript:history.back()"
                       class="green-button"
-                      @click="registerComponentStatistics('profileView','BackButton','click on back button')"
+                      @click="
+                        registerComponentStatistics(
+                          'profileView',
+                          'BackButton',
+                          'click on back button'
+                        )
+                      "
                     >
-                      بازگشت
-                      به صفحه قبل
+                      بازگشت به صفحه قبل
                     </a>
                   </div>
 
@@ -780,71 +835,92 @@ p.response-rate span {
                   >
                     <span
                       v-text="
-                                        profileOwner.user_info.first_name +
-                                        ' '
-                                        + profileOwner.user_info.last_name"
+                        profileOwner.user_info.first_name +
+                        ' ' +
+                        profileOwner.user_info.last_name
+                      "
                     ></span>
 
-                    <span class="valid-seller" v-if="profileOwnerStatistics.validated_seller">
+                    <span
+                      class="valid-seller"
+                      v-if="profileOwnerStatistics.validated_seller"
+                    >
                       <i class="fa fa-check-circle"></i>
                       فروشنده معتبر
                     </span>
-                    <button
+                    <!-- <button
                       type="button"
                       class="green-button review-button"
                       @click.prevent="activeReviewModal()"
                     >
                       <i class="fa fa-star"></i>
                       ارسال نظر
-                    </button>
-                    <p v-if="profileOwnerStatistics.response_rate" class="response-rate">
-                      احتمال
-                      پاسخ گویی
+                    </button> -->
+                    <p
+                      v-if="profileOwnerStatistics.response_rate"
+                      class="response-rate"
+                    >
+                      احتمال پاسخ گویی
                       <span
-                        v-text="'%' + profileOwnerStatistics.response_rate "
+                        v-text="'%' + profileOwnerStatistics.response_rate"
                       ></span>
                     </p>
                   </h1>
 
-                  <h1 v-else class="h-20 placeholder-content content-half-width"></h1>
+                  <h1
+                    v-else
+                    class="h-20 placeholder-content content-half-width"
+                  ></h1>
                 </div>
 
                 <div class="title_content col-xs-12">
                   <div class="back_page col-xs-12 col-sm-4 col-md-3">
                     <div v-if="!profileOwner.user_info.id">
-                      <div class="default-boxing-size placeholder-content content-full-width"></div>
+                      <div
+                        class="default-boxing-size placeholder-content content-full-width"
+                      ></div>
                     </div>
                     <div v-else>
                       <div
-                        v-if="currentUser.user_info && currentUser.user_info.id === profileOwner.user_info.id "
+                        v-if="
+                          currentUser.user_info &&
+                          currentUser.user_info.id === profileOwner.user_info.id
+                        "
                       >
                         <router-link
-                          :to="{name : 'profileBasicSeller'}"
+                          :to="{ name: 'profileBasicSeller' }"
                           class="green-button edit"
-                          v-if=" currentUser.user_info.is_seller == 1 "
+                          v-if="currentUser.user_info.is_seller == 1"
                         >
                           <i class="fa fa-pencil-alt"></i>
                           ویرایش پروفایل
                         </router-link>
 
                         <router-link
-                          :to="{name : 'profileBasicBuyer'}"
+                          :to="{ name: 'profileBasicBuyer' }"
                           class="green-button edit"
-                          v-else-if="currentUser.user_info.is_seller == 0 "
+                          v-else-if="currentUser.user_info.is_seller == 0"
                         >
                           <i class="fa fa-pencil-alt"></i>
                           ویرایش پروفایل
                         </router-link>
                       </div>
 
-                      <a v-else href="#" @click.prevent="openChat()" class="green-button edit">
+                      <a
+                        v-else
+                        href="#"
+                        @click.prevent="openChat()"
+                        class="green-button edit"
+                      >
                         <i class="fa fa-envelope"></i>
                         ارسال پیام
                       </a>
                     </div>
 
                     <div v-if="!profileOwner.user_info.id">
-                      <div class="default-boxing-size placeholder-content content-full-width"></div>
+                      <div
+                        class="default-boxing-size placeholder-content content-full-width"
+                      ></div>
                     </div>
                     <button
                       v-else
@@ -865,7 +941,9 @@ p.response-rate span {
                           <span v-text="profileOwner.activity_domain"></span>
                         </p>
                         <p v-else>
-                          <span class="h-20 placeholder-content content-full-width"></span>
+                          <span
+                            class="h-20 placeholder-content content-full-width"
+                          ></span>
                         </p>
                       </div>
 
@@ -874,28 +952,36 @@ p.response-rate span {
                           آدرس :
                           <span
                             itemprop="address"
-                            v-text="profileOwner.user_info.province +
-                                                           ' - ' +
-                                                            profileOwner.user_info.city"
+                            v-text="
+                              profileOwner.user_info.province +
+                              ' - ' +
+                              profileOwner.user_info.city
+                            "
                           ></span>
                         </p>
 
                         <p v-else>
-                          <span class="h-20 placeholder-content content-full-width"></span>
+                          <span
+                            class="h-20 placeholder-content content-full-width"
+                          ></span>
                         </p>
                       </div>
 
                       <div class="col-xs-6 pull-right">
                         <p v-if="profileOwner.profile.is_company">
                           نام شرکت
-                          <span v-text="profileOwner.profile.company_name"></span>
+                          <span
+                            v-text="profileOwner.profile.company_name"
+                          ></span>
                         </p>
                       </div>
 
                       <div class="col-xs-6">
                         <p v-if="profileOwner.profile.is_company">
                           شماره ثبت
-                          <span v-text="profileOwner.profile.company_register_code"></span>
+                          <span
+                            v-text="profileOwner.profile.company_register_code"
+                          ></span>
                         </p>
                       </div>
                     </div>
@@ -904,7 +990,9 @@ p.response-rate span {
               </div>
             </div>
 
-            <div class="content_user_wrapper_mobile hidden-sm hidden-md hidden-lg col-xs-12">
+            <div
+              class="content_user_wrapper_mobile hidden-sm hidden-md hidden-lg col-xs-12"
+            >
               <div class="user-contents row">
                 <div class="title_content col-xs-12">
                   <div class="back_page col-xs-12 col-sm-4">
@@ -917,36 +1005,50 @@ p.response-rate span {
                       <span v-text="copyLinkText"></span>
                     </button>
 
-                    <a href="#" class="green-button edit" @click="copyProfileLinkToClipBoard">
+                    <a
+                      href="#"
+                      class="green-button edit"
+                      @click="copyProfileLinkToClipBoard"
+                    >
                       <i class="fa fa-pencil-alt"></i>
                       ویرایش پروفایل
                     </a>
                   </div>
 
-                  <h1 v-if="profileOwner.user_info" class="content_title col-xs-12 col-sm-8">
+                  <h1
+                    v-if="profileOwner.user_info"
+                    class="content_title col-xs-12 col-sm-8"
+                  >
                     <span
-                      v-text="profileOwner.user_info.first_name +
-                                         ' ' +
-                                         profileOwner.user_info.last_name"
+                      v-text="
+                        profileOwner.user_info.first_name +
+                        ' ' +
+                        profileOwner.user_info.last_name
+                      "
                     ></span>
 
-                    <span class="valid-seller" v-if="profileOwnerStatistics.validated_seller">
+                    <span
+                      class="valid-seller"
+                      v-if="profileOwnerStatistics.validated_seller"
+                    >
                       <i class="fa fa-check-circle"></i>
                       فروشنده معتبر
                     </span>
-                    <button
+                    <!-- <button
                       type="button"
                       class="green-button review-button"
                       @click.prevent="activeReviewModal()"
                     >
                       <i class="fa fa-star"></i>
                       ارسال نظر
-                    </button>
-                    <p v-if="profileOwnerStatistics.response_rate" class="response-rate">
-                      احتمال
-                      پاسخ گویی
+                    </button> -->
+                    <p
+                      v-if="profileOwnerStatistics.response_rate"
+                      class="response-rate"
+                    >
+                      احتمال پاسخ گویی
                       <span
-                        v-text="'%' + profileOwnerStatistics.response_rate "
+                        v-text="'%' + profileOwnerStatistics.response_rate"
                       ></span>
                     </p>
                   </h1>
@@ -962,7 +1064,10 @@ p.response-rate span {
                           حوزه ی فعالیت :
                           <span v-text="profileOwner.activity_domain"></span>
                         </p>
-                        <span v-else class="placeholder-content content-full-width"></span>
+                        <span
+                          v-else
+                          class="placeholder-content content-full-width"
+                        ></span>
                       </div>
 
                       <div class="col-xs-6">
@@ -970,25 +1075,34 @@ p.response-rate span {
                           آدرس :
                           <span
                             itemprop="address"
-                            v-text="profileOwner.user_info.province +
-                                                           ' - ' +
-                                                            profileOwner.user_info.city"
+                            v-text="
+                              profileOwner.user_info.province +
+                              ' - ' +
+                              profileOwner.user_info.city
+                            "
                           ></span>
                         </p>
-                        <span v-else class="placeholder-content content-full-width"></span>
+                        <span
+                          v-else
+                          class="placeholder-content content-full-width"
+                        ></span>
                       </div>
 
                       <div class="col-xs-6 pull-right">
                         <p v-if="profileOwner.profile.is_company">
                           نام شرکت :
-                          <span v-text="profileOwner.profile.company_name"></span>
+                          <span
+                            v-text="profileOwner.profile.company_name"
+                          ></span>
                         </p>
                       </div>
 
                       <div class="col-xs-6">
                         <p v-if="profileOwner.profile.is_company">
                           شماره ثبت :
-                          <span v-text="profileOwner.profile.company_register_code"></span>
+                          <span
+                            v-text="profileOwner.profile.company_register_code"
+                          ></span>
                         </p>
                       </div>
                     </div>
@@ -999,7 +1113,7 @@ p.response-rate span {
           </div>
 
           <div class="sub-header hidden-sm hidden-md hidden-lg col-xs-12">
-            <div class="col-xs-6" :class="{'active':profileDescription}">
+            <div class="col-xs-6" :class="{ active: profileDescription }">
               <a @click="showProfileOwnerDescription($event)" href>
                 <div class="inside-links">
                   <i class="fa fa-edit" aria-hidden="true"></i> توضیحات من
@@ -1007,12 +1121,13 @@ p.response-rate span {
               </a>
             </div>
 
-            <div class="col-xs-6" :class="{'active':!profileDescription}">
+            <div class="col-xs-6" :class="{ active: !profileDescription }">
               <a @click="showProfileOwnerProducts($event)" href="#">
                 <div class="inside-links">
                   <i class="buskool-icon" aria-hidden="true">
                     <img :src="incobaicon" />
-                  </i> محصولات من
+                  </i>
+                  محصولات من
                 </div>
               </a>
             </div>
@@ -1020,12 +1135,14 @@ p.response-rate span {
 
           <div class="sub-header hidden-xs col-xs-12">
             <ul class="list-inline">
-              <li class="list-item" :class="{'active':!profileDescription}">
+              <li class="list-item" :class="{ active: !profileDescription }">
                 <a @click="showProfileOwnerProducts($event)" href>محصولات من</a>
               </li>
 
-              <li class="list-item" :class="{'active':profileDescription}">
-                <a @click="showProfileOwnerDescription($event)" href>توضیحات من</a>
+              <li class="list-item" :class="{ active: profileDescription }">
+                <a @click="showProfileOwnerDescription($event)" href
+                  >توضیحات من</a
+                >
               </li>
             </ul>
           </div>
@@ -1039,9 +1156,15 @@ p.response-rate span {
                 v-text="profileOwner.profile.description"
               ></div>
               <div v-else>
-                <span class="content-default-width placeholder-content margin-15 h-20"></span>
-                <span class="content-half-width placeholder-content margin-0-15 h-20"></span>
-                <span class="content-full-width placeholder-content margin-15"></span>
+                <span
+                  class="content-default-width placeholder-content margin-15 h-20"
+                ></span>
+                <span
+                  class="content-half-width placeholder-content margin-0-15 h-20"
+                ></span>
+                <span
+                  class="content-full-width placeholder-content margin-15"
+                ></span>
               </div>
             </div>
 
@@ -1059,7 +1182,13 @@ p.response-rate span {
 
                 <div class="owl-carousel hidden-xs">
                   <OwlCarousel
-                    @click="registerComponentStatistics('profileView','RelatedView','click on related photos')"
+                    @click="
+                      registerComponentStatistics(
+                        'profileView',
+                        'RelatedView',
+                        'click on related photos'
+                      )
+                    "
                     v-for="photo in profileOwner.relateds"
                     :key="photo.id"
                     :base="str + '/'"
@@ -1094,7 +1223,13 @@ p.response-rate span {
 
                 <div class="owl-carousel hidden-xs">
                   <OwlCarousel
-                    @click="registerComponentStatistics('profileView','CertificateView','click on certificate photos')"
+                    @click="
+                      registerComponentStatistics(
+                        'profileView',
+                        'CertificateView',
+                        'click on certificate photos'
+                      )
+                    "
                     v-for="photo in profileOwner.certificates"
                     :base="str + '/'"
                     :key="photo.id"
@@ -1131,7 +1266,7 @@ p.response-rate span {
               <div
                 class="col-xs-12 pull-right"
                 :key="productIndex"
-                v-for="(product,productIndex) in products"
+                v-for="(product, productIndex) in products"
               >
                 <ProductArticle
                   :productIndex="productIndex"
@@ -1161,7 +1296,7 @@ p.response-rate span {
             </div>
 
             <div class="loading_images col-xs-12" v-show="loading">
-              <img :src="loading_img" style="width:200px;height:200px" />
+              <img :src="loading_img" style="width: 200px; height: 200px;" />
             </div>
           </div>
         </div>
@@ -1176,9 +1311,9 @@ import { eventBus } from "../../../router/router";
 
 var visible = false;
 var PopupImage = {
-  data: function() {
+  data: function () {
     return {
-      imgSrcs: ""
+      imgSrcs: "",
     };
   },
   props: ["img", "base"],
@@ -1188,7 +1323,7 @@ var PopupImage = {
     '<img :src="base + img">' +
     "</a>" +
     "</div>",
-  mounted: function() {
+  mounted: function () {
     $(this.$el)
       .parent()
       .magnificPopup({
@@ -1198,31 +1333,31 @@ var PopupImage = {
         gallery: {
           enabled: true,
           navigateByImgClick: true,
-          preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
-        }
+          preload: [0, 1], // Will preload 0 - before current, and 1 after the current image
+        },
       });
-  }
+  },
 };
 var PopupImageCertificate = {
   props: ["img", "base"],
   template: '<a   :href="base + img">' + '<img :src="base + img">' + "</a>",
-  mounted: function() {
-    $(".cerificates > div").each(function() {
+  mounted: function () {
+    $(".cerificates > div").each(function () {
       // the containers for all your galleries
       $(this).magnificPopup({
         delegate: "a", // the selector for gallery item
         type: "image",
         gallery: {
-          enabled: true
-        }
+          enabled: true,
+        },
       });
     });
-  }
+  },
 };
 var OwlCarouselLists = {
-  data: function() {
+  data: function () {
     return {
-      imgSrcs: ""
+      imgSrcs: "",
     };
   },
   props: ["img", "base"],
@@ -1232,13 +1367,13 @@ var OwlCarouselLists = {
     '<img :src="base + img">' +
     "</a>" +
     "</div>",
-  mounted: function() {
+  mounted: function () {
     $(".owl-carousel").owlCarousel({
       loop: false,
       items: 1,
       margin: 10,
       nav: false,
-      dots: true
+      dots: true,
     });
     $(this.$el)
       .parent()
@@ -1250,15 +1385,15 @@ var OwlCarouselLists = {
         gallery: {
           enabled: true,
           navigateByImgClick: true,
-          preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
-        }
+          preload: [0, 1], // Will preload 0 - before current, and 1 after the current image
+        },
       });
-  }
+  },
 };
 var OwlCarousel = {
-  data: function() {
+  data: function () {
     return {
-      imgSrcs: ""
+      imgSrcs: "",
     };
   },
   props: ["img", "base"],
@@ -1268,12 +1403,12 @@ var OwlCarousel = {
     '<img :src="base + img">' +
     "</a>" +
     "</div>",
-  mounted: function() {
+  mounted: function () {
     $(".owl-carousel").owlCarousel({
       loop: false,
       margin: 10,
       nav: true,
-      dots: false
+      dots: false,
     });
     $(this.$el)
       .parent()
@@ -1285,10 +1420,10 @@ var OwlCarousel = {
         gallery: {
           enabled: true,
           navigateByImgClick: true,
-          preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
-        }
+          preload: [0, 1], // Will preload 0 - before current, and 1 after the current image
+        },
       });
-  }
+  },
 };
 
 export default {
@@ -1297,22 +1432,22 @@ export default {
     OwlCarouselLists,
     PopupImage,
     PopupImageCertificate,
-    ProductArticle
+    ProductArticle,
   },
   props: ["defultimg", "incobaicon", "str", "loading_img"],
-  data: function() {
+  data: function () {
     return {
       products: {
         main: "",
         user_info: "",
         profile_info: {
-          profile_photo: ""
+          profile_photo: "",
         },
-        photos: []
+        photos: [],
       },
       currentUser: {
         profile: "",
-        user_info: ""
+        user_info: "",
       },
       profileOwner: {
         profile: "",
@@ -1320,7 +1455,7 @@ export default {
         certificates: "",
         relateds: "",
         activity_domain: "",
-        is_buyer: ""
+        is_buyer: "",
       },
       profileDescription: true,
       noProductMsgSignal: false,
@@ -1333,23 +1468,23 @@ export default {
       profileOwnerStatistics: {
         transaction_count: "",
         product_count: "",
-        buyAd_count: ""
+        buyAd_count: "",
       },
       getUserName: this.$route.params.user_name,
-      jsonLDObject: ""
+      jsonLDObject: "",
     };
   },
   methods: {
-    stopLoader: function() {
+    stopLoader: function () {
       eventBus.$emit("isLoading", false);
     },
-    collapseDropDown: function() {
-      $(".profile-list").fadeIn("slow", function() {
+    collapseDropDown: function () {
+      $(".profile-list").fadeIn("slow", function () {
         visible = true;
       });
     },
-    collapseDropDownList: function() {
-      $(".icon-header-list").fadeIn("slow", function() {
+    collapseDropDownList: function () {
+      $(".icon-header-list").fadeIn("slow", function () {
         visible = true;
       });
     },
@@ -1360,7 +1495,7 @@ export default {
         visible = false;
       }
     },
-    init: function() {
+    init: function () {
       var self = this;
 
       if (this.isDeviceMobile()) {
@@ -1373,33 +1508,33 @@ export default {
 
       axios
         .post("/get_user_statistics_by_user_name", {
-          user_name: this.$route.params.user_name
+          user_name: this.$route.params.user_name,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.profileOwnerStatistics = response.data.statistics;
         })
-        .catch(function(err) {
+        .catch(function (err) {
           //
         });
       axios
         .post("/user/profile_info")
-        .then(response => (this.currentUser = response.data));
+        .then((response) => (this.currentUser = response.data));
 
       axios
         .post("/load_profile_by_user_name", {
-          user_name: this.$route.params.user_name
+          user_name: this.$route.params.user_name,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.profileOwner = response.data;
           self.jsonLDObject = self.createJsonLDObject(self.profileOwner);
         })
-        .catch(function(err) {
+        .catch(function (err) {
           if (err.response.status === 404) {
             window.location.href = "/404";
           }
         });
     },
-    showProfileOwnerProducts: function(e) {
+    showProfileOwnerProducts: function (e) {
       this.registerComponentStatistics(
         "profileView",
         "showUserProducts",
@@ -1414,15 +1549,15 @@ export default {
       var self = this;
       axios
         .post("/get_product_list_by_user_name", {
-          user_name: this.$route.params.user_name
+          user_name: this.$route.params.user_name,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.products = response.data.products;
 
           self.loading = false;
         });
     },
-    showProfileOwnerDescription: function(e) {
+    showProfileOwnerDescription: function (e) {
       this.registerComponentStatistics(
         "profileView",
         "profileDescription",
@@ -1435,16 +1570,16 @@ export default {
 
       axios
         .post("/load_profile_by_user_name", {
-          user_name: this.$route.params.user_name
+          user_name: this.$route.params.user_name,
         })
-        .then(response => (this.profileOwner = response.data))
-        .catch(function(err) {
+        .then((response) => (this.profileOwner = response.data))
+        .catch(function (err) {
           if (err.response.status == 404) {
             window.location.href = "/404";
           }
         });
     },
-    refreshProduct: function(productId) {
+    refreshProduct: function (productId) {
       this.registerComponentStatistics(
         "profileView",
         "RefreshProduct",
@@ -1455,9 +1590,9 @@ export default {
 
       axios
         .post("/refresh_my_product_by_id", {
-          product_id: productId
+          product_id: productId,
         })
-        .then(function(response) {
+        .then(function (response) {
           if (response.data.status === true) {
             self.popUpMsg =
               "محصول شما بروز رسانی شد و در صدر لیست محصولات قرار گرفت.";
@@ -1470,14 +1605,14 @@ export default {
             $("#custom-main-modal").modal("show");
           }
         })
-        .catch(function(err) {
+        .catch(function (err) {
           self.popUpMsg =
             "هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.";
           eventBus.$emit("submitSuccess", self.popUpMsg);
           $("#custom-main-modal").modal("show");
         });
     },
-    copyProfileLinkToClipBoard: function() {
+    copyProfileLinkToClipBoard: function () {
       this.registerComponentStatistics(
         "profileView",
         "CopyProfileLink",
@@ -1515,7 +1650,7 @@ export default {
         }
       }
     },
-    isDeviceMobile: function() {
+    isDeviceMobile: function () {
       if (
         navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -1530,7 +1665,7 @@ export default {
         return false;
       }
     },
-    openChat: function() {
+    openChat: function () {
       this.registerComponentStatistics(
         "profileView",
         "openChat",
@@ -1542,7 +1677,7 @@ export default {
         first_name: this.profileOwner.user_info.first_name,
         last_name: this.profileOwner.user_info.last_name,
         profile_photo: this.profileOwner.profile.profile_photo,
-        user_name: this.profileOwner.user_info.user_name
+        user_name: this.profileOwner.user_info.user_name,
       };
       var self = this;
 
@@ -1558,7 +1693,7 @@ export default {
         $("#auth-popup").modal("show");
       }
     },
-    createJsonLDObject: function(profileOwner) {
+    createJsonLDObject: function (profileOwner) {
       var fullName =
         profileOwner.user_info.first_name +
         " " +
@@ -1567,10 +1702,10 @@ export default {
         profileOwner.user_info.province + " - " + profileOwner.user_info.city;
 
       var images = [];
-      profileOwner.certificates.forEach(function(photo) {
+      profileOwner.certificates.forEach(function (photo) {
         images.push("https://buskool.com/storage/" + photo);
       });
-      profileOwner.relateds.forEach(function(photo) {
+      profileOwner.relateds.forEach(function (photo) {
         images.push("https://buskool.com/storage/" + photo);
       });
 
@@ -1593,7 +1728,7 @@ export default {
         "@type": "Person",
         address: {
           "@type": "PostalAddress",
-          addressLocality: address
+          addressLocality: address,
         },
         image: images,
         jobTitle: jobTitle,
@@ -1601,18 +1736,22 @@ export default {
         gender: gender,
         nationality: "Iranian",
         url:
-          "http://www.buskool.com/profile/" + profileOwner.user_info.user_name
+          "http://www.buskool.com/profile/" + profileOwner.user_info.user_name,
       };
 
       return jsondl;
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
     },
-    activeReviewModal: function() {
+    activeReviewModal: function () {
       var userImage = "";
 
       if (this.profileOwner.profile.profile_photo) {
@@ -1626,16 +1765,16 @@ export default {
           this.profileOwner.user_info.first_name +
           " " +
           this.profileOwner.user_info.last_name,
-        img: userImage
+        img: userImage,
       };
       eventBus.$emit("reviewUserData", selectedUserData);
-    }
+    },
   },
   mounted() {
     this.init();
     this.$nextTick(this.stopLoader());
   },
-  updated: function() {
+  updated: function () {
     this.$nextTick(this.stopLoader());
   },
   created() {
@@ -1668,47 +1807,47 @@ export default {
         {
           name: "description",
           content:
-            " محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید"
+            " محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید",
         },
         {
           property: "og:type",
-          content: "website"
+          content: "website",
         },
         {
           property: "og:image:height",
-          content: "256"
+          content: "256",
         },
         {
           property: "og:image:width",
-          content: "256"
+          content: "256",
         },
         {
           property: "og:image:type",
-          content: "image/jpeg"
+          content: "image/jpeg",
         },
         {
           property: "og:description",
-          content: "صفحه ی پروفایل کاربران باسکول"
+          content: "صفحه ی پروفایل کاربران باسکول",
         },
         {
           property: "og:site_name",
-          content: "باسکول"
+          content: "باسکول",
         },
         {
           property: "og:url",
-          content: url
+          content: url,
         },
         {
           property: "og:title",
-          content: fullName
+          content: fullName,
         },
         {
           property: "og:image",
-          content: profilePhoto
-        }
+          content: profilePhoto,
+        },
       ],
-      link: [{ rel: "canonical", href: url }]
+      link: [{ rel: "canonical", href: url }],
     };
-  }
+  },
 };
 </script>

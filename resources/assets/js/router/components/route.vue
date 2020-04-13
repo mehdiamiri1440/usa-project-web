@@ -73,7 +73,12 @@
                 v-text="'عضویت در گروه'"
               ></a>
 
-              <a href="#" class="btn green-button bg-gray" data-dismiss="modal" v-text="'انصراف'"></a>
+              <a
+                href="#"
+                class="btn green-button bg-gray"
+                data-dismiss="modal"
+                v-text="'انصراف'"
+              ></a>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -99,9 +104,15 @@
               <br />
               <p class="main-pop-up" v-text="elevatorText"></p>
 
-              <a href class="btn green-button bg-gray" data-dismiss="modal">متوجه شدم</a>
+              <a href class="btn green-button bg-gray" data-dismiss="modal"
+                >متوجه شدم</a
+              >
 
-              <a :href="'/payment/elevator/' + productId" class="btn green-button">خرید نردبان</a>
+              <a
+                :href="'/payment/elevator/' + productId"
+                class="btn green-button"
+                >خرید نردبان</a
+              >
             </div>
           </div>
           <!-- /.modal-content -->
@@ -114,7 +125,7 @@
 
     <chat-modal />
 
-    <report-modal />
+    <report-modal :reported-user-id="reportedUserId" />
 
     <router-view
       :user-id="userId"
@@ -144,7 +155,10 @@
 
     <!-- add android app download  -->
 
-    <div v-if="isConditionSatisfied" class="android-download-alert-wrapper hidden-lg hidden-md">
+    <div
+      v-if="isConditionSatisfied"
+      class="android-download-alert-wrapper hidden-lg hidden-md"
+    >
       <button
         class="close-android-download-alert-wrapper"
         @click.prevent="isConditionSatisfied = false"
@@ -171,9 +185,9 @@ import ReportModal from "./report-component/report";
 export default {
   components: {
     ChatModal,
-    ReportModal
+    ReportModal,
   },
-  data: function() {
+  data: function () {
     return {
       iswebview: navigator.userAgent == "webView" ? true : false,
       isConditionSatisfied: false,
@@ -181,7 +195,8 @@ export default {
       productId: "",
       joinGroupMessage: "",
       joinGroupId: "",
-      activeContactId: ""
+      activeContactId: "",
+      reportedUserId: "",
     };
   },
   props: [
@@ -191,39 +206,40 @@ export default {
     "storagePath",
     "profilePhoto",
     "userFullName",
-    "userLogoutPath"
+    "userLogoutPath",
   ],
-  created: function() {
+  created: function () {
     window.localStorage.setItem("userId", this.userId);
     window.localStorage.setItem("userType", this.isSeller);
 
-    eventBus.$on("elevatorText", $event => {
+    eventBus.$on("elevatorText", ($event) => {
       this.elevatorText = $event;
     });
 
-    eventBus.$on("productId", $event => {
+    eventBus.$on("productId", ($event) => {
       this.productId = $event;
     });
 
-    eventBus.$on("joinGroupId", $event => {
+    eventBus.$on("joinGroupId", ($event) => {
       this.joinGroupId = $event;
     });
-    eventBus.$on("joinGroupMessage", $event => {
+    eventBus.$on("joinGroupMessage", ($event) => {
       this.joinGroupMessage = $event;
     });
 
-    eventBus.$on("activeContactId", $event => {
+    eventBus.$on("activeContactId", ($event) => {
       this.activeContactId = $event;
     });
 
-    eventBus.$on("reoprtModal", $event => {
+    eventBus.$on("reoprtModal", ($event) => {
+      this.reportedUserId = $event;
       $("#report-modal").modal("show");
     });
 
     let self = this;
 
     if (messaging) {
-      messaging.onMessage(function(payload) {
+      messaging.onMessage(function (payload) {
         // console.log('route: ',payload.notification.tag);
         if (payload.notification.tag == "buskool") {
           // console.log('contactId:',self.activeContactId);
@@ -240,7 +256,7 @@ export default {
   },
   router,
   methods: {
-    isDeviceMobile: function() {
+    isDeviceMobile: function () {
       if (
         navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -255,12 +271,12 @@ export default {
         return false;
       }
     },
-    getAndroidVersion: function(ua) {
+    getAndroidVersion: function (ua) {
       ua = (ua || navigator.userAgent).toLowerCase();
       var match = ua.match(/android\s([0-9\.]*)/);
       return match ? match[1] : undefined;
     },
-    doDownload: function() {
+    doDownload: function () {
       //ga
       this.registerComponentStatistics(
         "download",
@@ -271,13 +287,13 @@ export default {
       Cookies.set("appDownloaded", true);
       window.location.href = "/download/app";
     },
-    isOsIOS: function() {
+    isOsIOS: function () {
       var userAgent = window.navigator.userAgent.toLowerCase(),
         safari = /safari/.test(userAgent),
         ios = /iphone|ipod|ipad/.test(userAgent);
       return ios;
     },
-    activateDownloadApp: function() {
+    activateDownloadApp: function () {
       if (!this.iswebview && this.isDeviceMobile() && !this.isOsIOS()) {
         if (this.getAndroidVersion() >= 4.4) {
           this.isConditionSatisfied = true;
@@ -287,32 +303,36 @@ export default {
     closeGlobalChatBox() {
       eventBus.$emit("ChatBoxStatus", false);
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
     },
-    subscribeUserToGroup: function() {
+    subscribeUserToGroup: function () {
       var self = this;
       var groupId = this.joinGroupId;
       axios
         .post("/group/subscribe_user", {
-          group_id: groupId
+          group_id: groupId,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.popUpMsg = "شما با موفقییت در گروه عضو شدید";
           eventBus.$emit("submitSuccess", self.popUpMsg);
           $("#custom-main-modal").modal("show");
           eventBus.$emit("reloadAllGroupLists", true);
         });
     },
-    extractSenderIdFromTag: function(tag) {
+    extractSenderIdFromTag: function (tag) {
       return tag.split("FCM")[1];
-    }
+    },
   },
   mounted() {
     this.activateDownloadApp();
-  }
+  },
 };
 </script>

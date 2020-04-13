@@ -1,4 +1,3 @@
-
 <style scoped>
 .buttons-wrapper {
   display: inline-block;
@@ -76,25 +75,35 @@ textarea.active {
     <div class="main-text">
       <div class="report-form">
         <div class="form-wrapper">
-          <p>توضیحات گزارش خود را اینجا بنویسید</p>
+          <p>توضیحات گزارش تخلف خود را اینجا بنویسید</p>
           <textarea
             placeholder="گزارش خود را بنویسید"
             v-model="$parent.reportData.reportText"
-            :class="{'active' : $parent.reportData.reportText && !$parent.errors.reportText}"
+            :class="{
+              active:
+                $parent.reportData.reportText && !$parent.errors.reportText,
+            }"
           ></textarea>
-          <p v-if="$parent.errors.reportText" v-text="$parent.errors.reportText" class="text-error"></p>
+          <p
+            v-if="$parent.errors.reportText"
+            v-text="$parent.errors.reportText"
+            class="text-error"
+          ></p>
           <div class="report-button-wrapper">
             <button
               class="green-button register-report"
-              :class="{ 'disabled' : !$parent.reportData.reportText }"
+              :class="{
+                disabled:
+                  !$parent.reportData.reportText || !$parent.sendLinkActive,
+              }"
+              :disabled="!$parent.sendLinkActive"
               @click.prevent="$parent.reportTextCheck()"
-            >ثبت نهایی</button>
+            >
+              ثبت گزارش
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-
-

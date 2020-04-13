@@ -629,8 +629,8 @@ export default {
       this.$router.push("group-messages");
       this.$parent.groupStep = 1;
     },
-    activeReportModal: function () {
-      eventBus.$emit("reoprtModal", true);
+    activeReportModal: function (reportedUserId) {
+      eventBus.$emit("reoprtModal", reportedUserId);
     },
   },
 

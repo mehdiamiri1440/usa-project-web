@@ -59,7 +59,12 @@
 
 <template>
   <div class="container">
-    <div id="report-modal" class="report-modal modal fade" tabindex="-1" role="dialog">
+    <div
+      id="report-modal"
+      class="report-modal modal fade"
+      tabindex="-1"
+      role="dialog"
+    >
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -67,7 +72,17 @@
               <i class="fa fa-times"></i>
             </a>
 
-            <div class="modal-title" v-text="'گزارش تخلف'"></div>
+            <div class="modal-title">
+              <span v-if="reportCurrentStep == 0">
+                دلیل گزارش تخلف چیست؟
+              </span>
+              <span v-if="reportCurrentStep == 1">
+                دلیل گزارش تخلف چیست؟
+              </span>
+              <span v-if="reportCurrentStep == 2">
+                گزارش تخلف شما ثبت شد
+              </span>
+            </div>
           </div>
           <div class="modal-body col-xs-12">
             <ReportContent v-if="reportCurrentStep == 0" />
@@ -82,79 +97,91 @@
   </div>
 </template>
 
-
 <script>
 import ReportContent from "./report-steps/report-content";
 import ReportDescription from "./report-steps/report-description";
 import FinalStep from "./report-steps/final-step";
 
 export default {
+  props: ["reportedUserId"],
   components: {
     ReportContent,
     ReportDescription,
-    FinalStep
+    FinalStep,
   },
-  data: function() {
+  data: function () {
     return {
       errors: {
-        reportText: ""
+        reportText: "",
       },
       reportData: {
         reportTitle: "",
-        reportText: ""
+        reportText: "",
       },
-      reportCurrentStep: 0
+      reportCurrentStep: 0,
+      sendLinkActive: true,
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       var self = this;
 
-      $("#report-modal").on("hide.bs.modal", function(e) {
+      $("#report-modal").on("hide.bs.modal", function (e) {
         self.resetData();
       });
     },
-    checkReportSubmit: function(reportTitle, textRequired) {
+    checkReportSubmit: function (reportTitle, textRequired) {
       this.reportData.reportTitle = reportTitle;
-      console.log(reportTitle, textRequired);
       if (textRequired) {
         this.reportCurrentStep = 1;
       } else {
-        this.reportCurrentStep = 2;
+        this.sendReport();
       }
     },
-    reportTextCheck: function() {
+    reportTextCheck: function () {
       if (this.reportData.reportText) {
-        console.log("submit");
-        this.reportCurrentStep = 2;
+        this.sendReport();
       } else {
         this.errors.reportText = "لطفا توضیحات مربوط به گزارش خود را بنویسید";
       }
     },
-    resetData: function() {
+    sendReport: function () {
+      let self = this;
+      self.sendLinkActive = false;
+      axios
+        .post("/send_user_report", {
+          reported_id: self.reportedUserId,
+          option_id: self.reportData.reportTitle,
+          description: self.reportData.reportText,
+        })
+        .then(function (response) {
+          self.sendLinkActive = true;
+          self.reportCurrentStep = 2;
+        });
+    },
+    resetData: function () {
       var self = this;
 
-      setTimeout(function() {
+      setTimeout(function () {
         self.reportData = {
           reportTitle: "",
-          reportText: ""
+          reportText: "",
         };
         self.reportCurrentStep = 0;
       }, 200);
     },
-    reportResetData: function() {
+    reportResetData: function () {
       $("#report-modal").modal("hide");
       this.resetData();
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.init();
   },
   watch: {
-    "reportData.reportText": function(value) {
+    "reportData.reportText": function (value) {
       this.errors.reportText = "";
-    }
-  }
+    },
+  },
 };
 </script>
-
