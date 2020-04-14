@@ -48,8 +48,8 @@ class product_list_controller extends Controller
 
     protected $sorting_options_array = [
         'RR' => 'sort_products_by_response_rate', // response rate
-        'RT' => 'sort_products_by_respone_time', // response time
-        'RS' => 'sort_products_by_review_score', //review score
+        'RT' => 'sort_products_by_response_time', // response time
+        // 'RS' => 'sort_products_by_review_score', //review score
         'RD' => 'sort_products_by_registeration_date',// product owner registration date
         'BM' => 'sort_products_by_best_match'
     ];
@@ -81,7 +81,7 @@ class product_list_controller extends Controller
             
             if($this->is_sorting_option_valid($request->sort_by)){
                 
-                if($request->sort_by = 'BM'){
+                if($request->sort_by == 'BM'){
                     $products = $this->{$this->sorting_options_array[$request->sort_by]}($products);
                 }
                 else{
@@ -407,21 +407,15 @@ class product_list_controller extends Controller
 
     protected function get_users_similarity($user1,$user2)
     {
-        // $c1 = Carbon::now()->diffInWeeks($user1->created_at);
         $v1 = [
             $user1->response_rate,
             $user1->response_time,
-            // $c1
         ];
 
-        // $c2 = Carbon::now()->diffInWeeks($user2['created_at']);
         $v2 = [
             $user2['response_rate'],
             $user2['response_time'],
-            // $c2
         ];
-
-        // dd($v2);
 
         $inner_product_value = $this->get_inner_product_value($v1,$v2);
         $v1_size = $this->get_vector_size($v1);
@@ -624,4 +618,59 @@ class product_list_controller extends Controller
             return false;
         }
     }
+
+    protected function sort_products_by_response_rate(&$products)
+    {
+        usort($products,function($item1,$item2){
+            $a = $item1['user_info']->response_rate;
+            $b = $item2['user_info']->response_rate;
+
+            if($a == $b){
+                $c = $item1['user_info']->active_pakage_type;
+                $d = $item2['user_info']->active_pakage_type;
+
+                if($c == $d){
+                    return $item1['main']->updated_at < $item2['main']->updated_at;
+                }
+                return ($c < $d) ? 1 : -1;
+            }
+
+            return ($a < $b) ? 1 : -1;
+        });
+
+        return $products;
+    }
+
+    protected function sort_products_by_response_time(&$products)
+    {
+        usort($products,function($item1,$item2){
+            $a = $item1['user_info']->response_time > 0 ? ($item1['user_info']->response_time + ((100 - $item1['user_info']->response_rate) * $item1['user_info']->ums)) : 10000;
+            $b = $item2['user_info']->response_time > 0 ? ($item2['user_info']->response_time + ((100 - $item2['user_info']->response_rate) * $item2['user_info']->ums)) : 10000;
+
+            if($a == $b){
+                $c = $item1['user_info']->response_rate > 70 ? $item1['user_info']->response_rate : 0;
+                $d = $item2['user_info']->response_rate > 70 ? $item2['user_info']->response_rate : 0;
+
+                if($c == $d){
+                    return $item1['main']->updated_at < $item2['main']->updated_at;
+                }
+                return ($c < $d) ? 1 : -1;
+            }
+
+            return ($a > $b) ? 1 : -1;
+        });
+
+        return $products;
+    }
+
+    protected function sort_products_by_registeration_date(&$products)
+    {
+        usort($products,function($item1,$item2){
+            return $item1['main']->updated_at < $item2['main']->updated_at;
+        });
+
+        return $products;
+    }
+
+
 }

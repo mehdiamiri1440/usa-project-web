@@ -126,6 +126,8 @@ export default {
     init: function () {
       var self = this;
 
+      self.handleBackBtnClickOnDevices();
+
       $("#report-modal").on("hide.bs.modal", function (e) {
         self.resetData();
       });
@@ -174,6 +176,33 @@ export default {
       $("#report-modal").modal("hide");
       this.resetData();
     },
+    handleBackBtnClickOnDevices: function () {
+        var self = this;
+
+        if (window.history.state) {
+            history.pushState(null, null, window.location);
+        }
+
+        $(window).on('popstate', function (e) {
+            self.reportResetData();
+        });
+    },
+    isDeviceMobile: function () {
+        if (
+            navigator.userAgent.match(/Android/i) ||
+            navigator.userAgent.match(/webOS/i) ||
+            navigator.userAgent.match(/iPhone/i) ||
+            navigator.userAgent.match(/iPad/i) ||
+            navigator.userAgent.match(/iPod/i) ||
+            navigator.userAgent.match(/BlackBerry/i) ||
+            navigator.userAgent.match(/Windows Phone/i)
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+
   },
   mounted: function () {
     this.init();
