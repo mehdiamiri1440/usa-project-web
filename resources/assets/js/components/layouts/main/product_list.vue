@@ -792,32 +792,32 @@ end filter modal styles
             <div class="modal-body col-xs-12">
               <ul class="form-check-wrapper">
                 <li>
-                  <button class="default-button-list active">
-                    پر بازدید ترین
+                  <button
+                    @click="setSortOption('RR')"
+                    class="default-button-list"
+                    :class="{ active: sortOption == 'RR' }"
+                  >
+                    احتمال پاسخ گویی
                   </button>
                   <i class="fa fa-angle-left"></i>
                 </li>
                 <li>
-                  <button class="default-button-list">
-                    بهترین
+                  <button
+                    @click="setSortOption('RT')"
+                    class="default-button-list"
+                    :class="{ active: sortOption == 'RT' }"
+                  >
+                    سرعت پاسخگویی
                   </button>
                   <i class="fa fa-angle-left"></i>
                 </li>
                 <li>
-                  <button class="default-button-list active">
-                    بر اساس نیاز
-                  </button>
-                  <i class="fa fa-angle-left"></i>
-                </li>
-                <li>
-                  <button class="default-button-list">
-                    بهترین
-                  </button>
-                  <i class="fa fa-angle-left"></i>
-                </li>
-                <li>
-                  <button class="default-button-list">
-                    بر اساس نیاز
+                  <button
+                    @click="setSortOption('RD')"
+                    class="default-button-list"
+                    :class="{ active: sortOption == 'RD' }"
+                  >
+                    جدید ترین ها
                   </button>
                   <i class="fa fa-angle-left"></i>
                 </li>
@@ -880,10 +880,30 @@ end filter modal styles
           <section class="hidden-xs col-xs-12">
             <div class="rate-filter-desktop-wrapper">
               <ul class="list-unstiled list-inline">
-                <li><button class="text-green">پربازدید ترین ها</button></li>
-                <li><button>بهترین ها</button></li>
-                <li><button>قیمت مناسب</button></li>
-                <li><button>مناسب ترین ها</button></li>
+                <li>
+                  <button
+                    @click="setSortOption('RR')"
+                    :class="{ 'text-green': sortOption == 'RR' }"
+                  >
+                    احتمال پاسخ گویی
+                  </button>
+                </li>
+                <li>
+                  <button
+                    @click="setSortOption('RT')"
+                    :class="{ 'text-green': sortOption == 'RT' }"
+                  >
+                    سرعت پاسخگویی
+                  </button>
+                </li>
+                <li>
+                  <button
+                    @click="setSortOption('RD')"
+                    :class="{ 'text-green': sortOption == 'RD' }"
+                  >
+                    جدید ترین ها
+                  </button>
+                </li>
               </ul>
               <button
                 class="btn-filter hidden-lg"
@@ -1147,6 +1167,7 @@ export default {
       bottom: false,
       loadMoreActive: false,
       searchTextTimeout: null,
+      sortOption: "BM",
     };
   },
   methods: {
@@ -1173,6 +1194,7 @@ export default {
     init: function () {
       //              return new Promise((resolve,reject)=>{
       var self = this;
+      self.products = {};
       this.scrollToTop();
       if (this.$route.query.s) {
         var searchValue = this.$route.query.s.split("+").join(" ");
@@ -1204,7 +1226,7 @@ export default {
               from_record_number: self.fromProductCount,
               response_rate: self.$parent.productByResponseRate,
               to_record_number: self.productCountInPage,
-              sort_by: "RD",
+              sort_by: self.sortOption,
             })
             .then(function (response) {
               self.products = response.data.products;
@@ -1239,7 +1261,7 @@ export default {
             from_record_number: self.fromProductCount,
             response_rate: self.$parent.productByResponseRate,
             to_record_number: self.productCountInPage,
-            sort_by: "RD",
+            sort_by: self.sortOption,
           })
           .then(function (response) {
             if (self.products && self.products.length) {
@@ -1297,7 +1319,7 @@ export default {
         searchObject.from_record_number = self.productCountInPage;
         self.productCountInPage += self.productCountInEachLoad;
         searchObject.to_record_number = self.productCountInPage;
-        searchObject.sort_by = "RD";
+        searchObject.sort_by = self.sortOption;
 
         axios
           .post("/user/get_product_list", searchObject)
@@ -1430,7 +1452,7 @@ export default {
 
       searchObject.from_record_number = self.fromProductCount;
       searchObject.to_record_number = self.productCountInPage;
-      searchObject.sort_by = "RD";
+      searchObject.sort_by = self.sortOption;
 
       axios
         .post("/user/get_product_list", searchObject)
@@ -1442,6 +1464,13 @@ export default {
         .catch(function (err) {
           alert("خطایی رخ داده است. دوباره تلاش کنید.");
         });
+    },
+    setSortOption: function (sortOption) {
+      $("#filter-modal").modal("hide");
+      if (this.sortOption != sortOption) {
+        this.sortOption = sortOption;
+        this.init();
+      }
     },
     scrollToTop() {
       window.scrollTo(0, 0);

@@ -180,7 +180,7 @@ import { eventBus } from "../router.js";
 import Cookies from "js-cookie";
 import IsWebview from "is-webview";
 import ChatModal from "../../components/layouts/main/main_components/chat_modal";
-import ReportModal from "./report-component/report";
+import ReportModal from "../../components/layouts/main/main_components/report";
 
 export default {
   components: {
