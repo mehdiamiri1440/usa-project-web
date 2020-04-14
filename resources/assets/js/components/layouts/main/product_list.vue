@@ -1016,7 +1016,7 @@ export default {
               from_record_number: self.fromProductCount,
               response_rate: self.$parent.productByResponseRate,
               to_record_number: self.productCountInPage,
-              sort_by: "BM",
+              sort_by: "RD",
             })
             .then(function (response) {
               self.products = response.data.products;
@@ -1051,7 +1051,7 @@ export default {
             from_record_number: self.fromProductCount,
             response_rate: self.$parent.productByResponseRate,
             to_record_number: self.productCountInPage,
-            sort_by: "BM",
+            sort_by: "RD",
           })
           .then(function (response) {
             if (self.products && self.products.length) {
@@ -1109,7 +1109,7 @@ export default {
         searchObject.from_record_number = self.productCountInPage;
         self.productCountInPage += self.productCountInEachLoad;
         searchObject.to_record_number = self.productCountInPage;
-        searchObject.sort_by = "BM";
+        searchObject.sort_by = "RD";
 
         axios
           .post("/user/get_product_list", searchObject)
@@ -1242,7 +1242,7 @@ export default {
 
       searchObject.from_record_number = self.fromProductCount;
       searchObject.to_record_number = self.productCountInPage;
-      searchObject.sort_by = "BM";
+      searchObject.sort_by = "RD";
 
       axios
         .post("/user/get_product_list", searchObject)
