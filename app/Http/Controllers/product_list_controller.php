@@ -185,7 +185,7 @@ class product_list_controller extends Controller
             $product['user_info']->response_time =  $response_info['response_time'];
             $product['user_info']->response_rate = $response_info['response_rate'];
             if($product['user_info']->active_pakage_type > 0){
-                $product['user_info']->ums = (integer) ($response_info['ums']/(Carbon::now()->diffInWeeks($product['user_info']->created_at)));
+                $product['user_info']->ums = (integer) ($response_info['ums']/(Carbon::now()->diffInWeeks($product['user_info']->created_at) + 1));
             }
             else if($product['main']->is_elevated){
                 $product['user_info']->ums = 0;

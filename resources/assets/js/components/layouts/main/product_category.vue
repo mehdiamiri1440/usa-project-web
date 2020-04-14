@@ -843,7 +843,7 @@ end filter modal styles
                     class="default-button-list"
                     :class="{ active: sortOption == 'RR' }"
                   >
-                    احتمال پاسخ گویی
+                    احتمال پاسخگویی
                   </button>
                   <i class="fa fa-angle-left"></i>
                 </li>
@@ -931,7 +931,7 @@ end filter modal styles
                     @click="setSortOption('RR')"
                     :class="{ 'text-green': sortOption == 'RR' }"
                   >
-                    احتمال پاسخ گویی
+                    احتمال پاسخگویی
                   </button>
                 </li>
                 <li>

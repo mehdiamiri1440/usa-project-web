@@ -93,10 +93,13 @@
 </template>
 
 <script>
+import { eventBus } from "../../../../../router/router.js";
+
 export default {
   data: function () {
     return {
       reportOptions: "",
+      loadReportOptions:false,
       textsData: {
         reviewItems: [],
         reviewText: "",
@@ -112,7 +115,23 @@ export default {
     },
   },
   mounted: function () {
-    this.init();
+    //
   },
+  created:function(){
+    let self = this;
+
+    eventBus.$on("reoprtModal", ($event) => {
+      if($event){
+        self.loadReportOptions = true;
+      }
+    });
+  },
+  watch:{
+    "loadReportOptions":function(value){
+        if(value){
+            this.init();
+        }
+    }
+  }
 };
 </script>

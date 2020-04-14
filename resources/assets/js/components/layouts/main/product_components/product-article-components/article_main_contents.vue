@@ -248,7 +248,7 @@ body {
 
         <h3 class="article-title">
 
-        <router-link :to="this.$parent.productUrl"  v-html="getProductName()">
+        <router-link :to="this.$parent.productUrl"  v-html="getProductName()" :target="getProductLinkTarget()">
          
         </router-link>
         </h3>
@@ -267,10 +267,10 @@ body {
        <p v-if="$parent.product.main.description">
                    توضیحات
            
-          <router-link v-if="$parent.product.main.description<100"  :to="this.$parent.productUrl" v-html="$parent.product.main.description">
+          <router-link v-if="$parent.product.main.description<100"  :to="this.$parent.productUrl" v-html="$parent.product.main.description" :target="getProductLinkTarget()">
           </router-link>
 
-          <router-link  v-else :to="this.$parent.productUrl" v-html="$parent.product.main.description.substring(0,100)">
+          <router-link  v-else :to="this.$parent.productUrl" v-html="$parent.product.main.description.substring(0,100)" :target="getProductLinkTarget()">
           </router-link>
        </p>
         <!--
@@ -323,7 +323,14 @@ export default {
   methods: {
     setScroll: function() {
       localStorage.setItem("scrollIndex", this.$props.productIndex);
-      this.$router.push(this.$parent.productUrl);
+  
+      if(this.isDeviceMobile()){
+        // let productRoute = this.$router.resolve(this.$parent.productUrl);
+        window.open(this.$parent.productUrl, '_blank');
+      }
+      else{
+        this.$router.push(this.$parent.productUrl);
+      }
       this.$parent.registerComponentStatistics(
         "product",
         "show-product-in-seperate-page",
@@ -358,7 +365,30 @@ export default {
       // }
 
       return productName;
+    },
+    isDeviceMobile: function () {
+        if (
+            navigator.userAgent.match(/Android/i) ||
+            navigator.userAgent.match(/webOS/i) ||
+            navigator.userAgent.match(/iPhone/i) ||
+            navigator.userAgent.match(/iPad/i) ||
+            navigator.userAgent.match(/iPod/i) ||
+            navigator.userAgent.match(/BlackBerry/i) ||
+            navigator.userAgent.match(/Windows Phone/i)
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+    getProductLinkTarget: function(){
+      if(this.isDeviceMobile()){
+            return '_blank';
+      }
+
+      return '_self';
     }
-  }
+        
+    }
 };
 </script>
