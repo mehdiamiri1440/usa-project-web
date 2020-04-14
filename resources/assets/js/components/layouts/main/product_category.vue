@@ -331,23 +331,15 @@ li.active a::after {
   margin-top: -15px;
 }
 
-.response-rate-filter-desktop-wrapper,
-.response-rate-filter-mobile-wrapper {
-  background: #fff;
-  direction: rtl;
-  margin: 15px auto;
-  padding: 7px 15px;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  overflow: hidden;
+.rate-filter {
+  float: right;
 }
 
 .rate-filter-desktop-wrapper,
 .rate-filter-mobile-wrapper {
   background: #fff;
   direction: rtl;
-  margin: 15px auto;
+  margin: 15px auto 0;
   padding: 7px 15px;
   border-radius: 5px;
   -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
@@ -369,10 +361,24 @@ li.active a::after {
 
   border: none;
 }
+.bg-gray {
+  background: #777;
+}
 .rate-filter label {
   float: right;
   margin-left: 7px;
 }
+
+.rate-filter > button {
+  padding: 8px 0;
+
+  font-size: 14px;
+
+  margin: 0;
+
+  width: 140px;
+}
+
 .filter-select-input-wrapper {
   float: right;
   max-width: 138px;
@@ -426,6 +432,9 @@ li.active a::after {
   -moz-appearance: none;
   -ms-appearance: none;
 }
+.text-green {
+  color: #00c569 !important;
+}
 
 .footer-note-wrapper {
   background: #fff;
@@ -478,13 +487,98 @@ li.active a::after {
   right: 0;
 }
 
-.text-green {
-  color: #00c569 !important;
+/* 
+---------------------------------------------------------------------------------
+
+filter modal styles
+*/
+
+#filter-modal .modal-content {
+  overflow: hidden;
+  border-radius: 12px;
 }
-select.active {
-  color: #00c569 !important;
-  border-color: #00c569 !important;
+#filter-modal .close-modal {
+  font-size: 20px;
+
+  color: #777;
+
+  position: absolute;
+
+  right: 0;
+
+  padding: 8px 15px 2px;
+
+  top: 0;
 }
+
+#filter-modal .modal-title {
+  font-size: 16px;
+
+  font-weight: 800;
+
+  color: #474747;
+
+  text-align: center;
+}
+
+#filter-modal .modal-header {
+  padding: 9px 15px 10px;
+}
+
+#filter-modal .modal-body {
+  padding: 0 15px;
+}
+.form-check-wrapper button {
+  width: 100%;
+
+  border: none;
+
+  background: none;
+
+  border-bottom: 1px solid #eee;
+
+  text-align: right;
+
+  padding: 12px 15px 13px;
+}
+.form-check-wrapper button.active {
+  color: #00c569;
+}
+.form-check-wrapper button.active + i {
+  color: #00c569;
+  content: "\f00c";
+}
+.form-check-wrapper button.active + i:before {
+  content: "\f00c";
+}
+.form-check-wrapper button:hover {
+  background: #fafafa;
+  cursor: pointer;
+}
+
+.form-check-wrapper li {
+  position: relative;
+}
+
+.form-check-wrapper li:last-of-type button {
+  border: none;
+}
+.form-check-wrapper li i {
+  position: absolute;
+
+  top: 15px;
+
+  left: 20px;
+
+  font-size: 18px;
+
+  color: #777;
+}
+
+/* 
+end filter modal styles
+---------------------------------------------------------------------------------
+*/
 
 @media screen and (max-width: 1199px) {
   .search-box input {
@@ -503,6 +597,24 @@ select.active {
 
   .filter-mobile-sidebar .right-sidebar {
     display: block;
+  }
+}
+@media screen and (max-width: 768px) {
+  #filter-modal > div {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+  #filter-modal .modal-content {
+    min-height: 100%;
+
+    border-radius: 0;
+
+    border: none;
+
+    float: right;
+
+    width: 100%;
   }
 }
 
@@ -703,6 +815,66 @@ select.active {
         <!-- /.modal-dialog -->
       </div>
     </div>
+    <div class="container">
+      <div
+        id="filter-modal"
+        class="filter-modal modal fade"
+        tabindex="-1"
+        role="dialog"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <a href="#" class="close-modal" data-dismiss="modal">
+                <i class="fa fa-times"></i>
+              </a>
+              <div class="modal-title">
+                <span>
+                  مرتب سازی بر اساس
+                </span>
+              </div>
+            </div>
+
+            <div class="modal-body col-xs-12">
+              <ul class="form-check-wrapper">
+                <li>
+                  <button class="default-button-list active">
+                    پر بازدید ترین
+                  </button>
+                  <i class="fa fa-angle-left"></i>
+                </li>
+                <li>
+                  <button class="default-button-list">
+                    بهترین
+                  </button>
+                  <i class="fa fa-angle-left"></i>
+                </li>
+                <li>
+                  <button class="default-button-list active">
+                    بر اساس نیاز
+                  </button>
+                  <i class="fa fa-angle-left"></i>
+                </li>
+                <li>
+                  <button class="default-button-list">
+                    بهترین
+                  </button>
+                  <i class="fa fa-angle-left"></i>
+                </li>
+                <li>
+                  <button class="default-button-list">
+                    بر اساس نیاز
+                  </button>
+                  <i class="fa fa-angle-left"></i>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+    </div>
 
     <div class="flat-plust-icon hidden-lg hidden-md">
       <a href="#" @click.prevent="addProductOrRequest()"
@@ -726,71 +898,27 @@ select.active {
       </div>
       <div class="rate-filter-mobile-wrapper">
         <div class="rate-filter">
-          <label for="filter-select">
-            مرتب سازی بر اساس
-          </label>
-          <div class="filter-select-input-wrapper">
-            <select id="filter-select">
-              <option value="0">احتمال پاسخ گویی</option>
-              <option value="1">تاریخ</option>
-            </select>
-          </div>
+          <button
+            class="green-button bg-gray"
+            data-toggle="modal"
+            data-target="#filter-modal"
+          >
+            <i class="fas fa-sort-amount-down-alt"></i>
+
+            مرتب سازی
+          </button>
         </div>
         <button
           class="btn-filter hidden-lg"
           data-toggle="modal"
           data-target="#searchFilter"
         >
-          فیلتر
           <i class="fa fa-filter"></i>
+
+          دسته ها و فیلتر
         </button>
       </div>
-      <!--  <div class="links-sub-header hidden-xs col-sm-4 pull-left">
-               <ul class="list-inline">
-                 <li class="list-item active">
-                   <h1>
-                     <a href>لیست محصولات</a>
-                   </h1>
-                 </li>
-               </ul>
-             </div> -->
     </div>
-
-    <!--   <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
-            <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
-                <div class="response-rate-filter-mobile-wrapper pull-right">
-                    <div class="response-rate-filter">
-
-                        <div class="checkbox checkbox-slider&#45;&#45;b-flat">
-                            <label>
-                                <input type="checkbox" v-model="$parent.productByResponseRate"><span>                  مرتب سازی بر اساس احتمال پاسخ گویی
-    </span>
-                            </label>
-                        </div>
-
-                    </div>
-                </div>
-
-                <button class="btn-filter pull-left" data-toggle="modal" data-target="#searchFilter">
-                    فیلتر
-                    <i class="fa fa-filter"></i>
-                </button>
-            </div>
-
-
-                            <div class="links-sub-header   col-xs-6 col-md-3 pull-right  ">
-                                <ul class="list-inline">
-                                    <li class="list-item active">
-                                       <h1 class="main-title">
-                                        <a href="">
-                                            {{this.getCategoryName()}}
-                                        </a>
-                                        </h1>
-                                    </li>
-                                </ul>
-                            </div>
-
-        </div>-->
 
     <main id="main" class="container">
       <div class="col-xs-12 col-lg-9">
@@ -808,8 +936,7 @@ select.active {
                 data-toggle="modal"
                 data-target="#searchFilter"
               >
-                فیلتر
-                <i class="fa fa-filter"></i>
+                دسته ها و فیلتر <i class="fa fa-filter"></i>
               </button>
             </div>
           </section>
