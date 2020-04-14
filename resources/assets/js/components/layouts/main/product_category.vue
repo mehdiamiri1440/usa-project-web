@@ -1,718 +1,751 @@
 <style>
-    .footer-note-wrapper h1, .footer-note-wrapper h2, .footer-note-wrapper h3, .footer-note-wrapper h4, .footer-note-wrapper p, .footer-note-wrapper div, .footer-note-wrapper span
-    {
-        font-size: 14px;
-        line-height: 1.618;
-        margin: 10px auto;
-    }
-
-
-
+.footer-note-wrapper h1,
+.footer-note-wrapper h2,
+.footer-note-wrapper h3,
+.footer-note-wrapper h4,
+.footer-note-wrapper p,
+.footer-note-wrapper div,
+.footer-note-wrapper span {
+  font-size: 14px;
+  line-height: 1.618;
+  margin: 10px auto;
+}
 </style>
 
 <style scoped>
+#main-content {
+  padding-top: 122px;
+}
 
-    #main-content {
+#main {
+  padding-top: 32px;
+}
 
-        padding-top: 122px;
+@media screen and (min-width: 1200px) {
+  #main-content {
+    padding-top: 122px;
+  }
+}
 
+.shadow-content {
+  background: #fff;
+}
 
-    }
+.sidebar {
+  will-change: min-height;
+}
 
-    #main {
-        padding-top: 32px;
-    }
+.sidebar__inner {
+  transform: translate(0, 0); /* For browsers don't support translate3d. */
+  transform: translate3d(0, 0, 0);
+  will-change: position, transform;
+}
 
-    @media screen and (min-width: 1200px) {
+#wrap-footer {
+  display: none;
+}
 
-        #main-content {
+.loading_images {
+  padding-top: 115px;
+}
 
-            padding-top: 122px;
-        }
+#searchFilter {
+  background: #fff;
+  padding-left: 0 !important;
+}
 
-    }
+#searchFilter .modal-dialog {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
 
+#searchFilter .main_popup_content {
+  padding: 0;
+}
 
-    .shadow-content {
-        background: #fff;
-    }
+a.close-dialog-popup {
+  display: block;
 
-    .sidebar {
-        will-change: min-height;
-    }
+  padding: 15px;
 
-    .sidebar__inner {
-        transform: translate(0, 0); /* For browsers don't support translate3d. */
-        transform: translate3d(0, 0, 0);
-        will-change: position, transform;
-    }
+  font-size: 22px;
 
+  color: #e41c38;
 
-    #wrap-footer {
-        display: none;
-    }
+  text-align: right;
 
-    .loading_images {
-        padding-top: 115px;
-    }
+  background: #000546;
+}
 
-    #searchFilter {
-        background: #fff;
-        padding-left: 0 !important;
-    }
+.filter-mobile-sidebar {
+  max-width: 500px;
+  margin: 0 auto;
+}
 
-    #searchFilter .modal-dialog {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-    }
+.flat-plust-icon {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  z-index: 2;
+}
 
-    #searchFilter .main_popup_content {
-        padding: 0;
+.flat-plust-icon a {
+  background: #e41c38;
+  width: 50px;
+  height: 50px;
+  display: block;
+  border-radius: 50px;
+  color: #fff;
+  -webkit-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  padding-top: 15px;
+  font-size: 23px;
+}
 
-    }
+.owl-carousel img {
+  border-radius: 3px;
+}
 
-    a.close-dialog-popup {
-        display: block;
+.image-header-profile img {
+  height: 100%;
+}
 
-        padding: 15px;
+.header-nav {
+  direction: rtl;
+  text-align: right;
+  padding: 20px 30px;
+  font-size: 17px;
+}
 
-        font-size: 22px;
+.header-nav a {
+  color: #777;
+}
 
-        color: #e41c38;
+.header-nav a:hover {
+  color: #333;
+}
 
-        text-align: right;
+#header {
+  background: url("../../../../../../public/assets/img/topheader.jpg");
+  background-position: 50% 30%;
+  color: #fff;
+  background-size: cover;
+  overflow: hidden;
+  padding-top: 64px;
+  padding-bottom: 0;
+}
 
-        background: #000546;
-    }
+.title-page {
+  text-align: center;
 
-    .filter-mobile-sidebar {
-        max-width: 500px;
-        margin: 0 auto;
-    }
+  margin: 40px auto 35px;
+}
 
-    .flat-plust-icon {
-        position: fixed;
-        right: 15px;
-        bottom: 15px;
-        z-index: 2;
-    }
+.sub-header {
+  background: #f0f3f6;
+  padding: 0 15px;
+}
 
-    .flat-plust-icon a {
-        background: #e41c38;
-        width: 50px;
-        height: 50px;
-        display: block;
-        border-radius: 50px;
-        color: #fff;
-        -webkit-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.30);
-        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.30);
-        text-align: center;
-        padding-top: 15px;
-        font-size: 23px;
-    }
+.search-box {
+  position: relative;
+  margin-top: 14px;
+  border: none;
+}
 
-    .owl-carousel img {
-        border-radius: 3px;
-    }
+.search-box input {
+  text-align: right;
+  direction: rtl;
+  border: 1px solid #777;
+  border-radius: 6px;
+  padding: 6px 50px 5px 15px;
+  background: #fff;
+  font-size: 14px;
+  float: right;
+}
 
-    .image-header-profile img {
-        height: 100%;
+.search-box button.btn-search {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 18px;
+  top: 15px;
+  border-left: 1px solid;
+  color: #777;
+  padding: 0 7px;
+  font-size: 22px;
+  height: 20px;
+}
 
-    }
+button.btn-filter {
+  float: left;
+  padding: 7px 10px;
+  border-radius: 5px;
+  border: none;
+  background: #000546;
+  color: #fff;
+}
 
-    .header-nav {
-        direction: rtl;
-        text-align: right;
-        padding: 20px 30px;
-        font-size: 17px;
-    }
+.links-sub-header {
+  direction: rtl;
+}
 
-    .header-nav a {
-        color: #777;
-    }
+.links-sub-header a {
+  padding: 25px 15px;
+  display: inline-block;
+  color: #808c9b;
+  font-weight: bold;
+  font-size: 14px;
+  position: relative;
+}
 
-    .header-nav a:hover {
-        color: #333;
-    }
+.links-sub-header a:hover {
+  color: #313942;
+}
 
-    #header {
-        background: url("../../../../../../public/assets/img/topheader.jpg");
-        background-position: 50% 30%;
-        color: #fff;
-        background-size: cover;
-        overflow: hidden;
-        padding-top: 64px;
-        padding-bottom: 0;
-    }
+.links-sub-header a:hover:after {
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #00c569;
+  height: 3px;
+  width: 100%;
+}
 
-    .title-page {
-        text-align: center;
+#main {
+  position: relative;
+}
 
-        margin: 40px auto 35px;
-    }
+.main-content > h4 {
+  margin: 30px auto;
+}
 
-    .sub-header {
-        background: #f0f3f6;
-        padding: 0 15PX;
-    }
+.green-button {
+  margin: 5px 0;
+  display: inline-block;
+  background: #00c569;
+  color: #fff;
+  padding: 10px 0;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 12px;
+  width: 100%;
+  line-height: 21px;
+}
 
-    .search-box {
-        position: relative;
-        margin-top: 14px;
-        border: none;
-    }
+.red_bot {
+  background: #e41c38;
+  color: #fff;
+}
 
-    .search-box input {
-        text-align: right;
-        direction: rtl;
-        border: 1px solid #777;
-        border-radius: 6px;
-        padding: 6px 50px 5px 15px;
-        background: #fff;
-        font-size: 14px;
-        float: right;
-    }
+.green-button:hover {
+  background: #279b41;
+  color: #fff;
+  cursor: pointer;
+}
 
-    .search-box button.btn-search {
-        background: none;
-        border: none;
-        position: absolute;
-        right: 18px;
-        top: 15px;
-        border-left: 1px solid;
-        color: #777;
-        padding: 0 7px;
-        font-size: 22px;
-        height: 20px;
-    }
+.sub-header-fix {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: #f0f3f6;
+  padding: 0;
+}
 
-    .search-box button.btn-filter {
-        float: left;
-        padding: 7px 10px;
-        border-radius: 5px;
-        border: none;
-        background: #000546;
-        color: #fff;
-    }
-
-    .links-sub-header {
-        direction: rtl;
-    }
-
-    .links-sub-header a {
-        padding: 25px 15px;
-        display: inline-block;
-        color: #808c9b;
-        font-weight: bold;
-        font-size: 14px;
-        position: relative;
-    }
-
-    .links-sub-header a:hover {
-        color: #313942;
-    }
-
-    .links-sub-header a:hover:after {
-        content: " ";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        background: #00c569;
-        height: 3px;
-        width: 100%;
-    }
-
-    #main {
-
-        position: relative;
-
-    }
-
-
-    .main-content > h4 {
-        margin: 30px auto;
-    }
-
-    .green-button {
-        margin: 5px 0;
-        display: inline-block;
-        background: #00c569;
-        color: #fff;
-        padding: 10px 0;
-        border-radius: 3px;
-        text-align: center;
-        font-size: 12px;
-        width: 100%;
-        line-height: 21px;
-    }
-
-    .red_bot {
-        background: #e41c38;
-        color: #fff;
-    }
-
-    .green-button:hover {
-        background: #279b41;
-        color: #fff;
-        cursor: pointer;
-    }
-
-    .sub-header-fix {
-        position: fixed;
-        top: 56px;
-        left: 0;
-        right: 0;
-        z-index: 2;
-        background: #f0f3f6;
-        padding: 0;
-    }
-
-    /*  .main-padding-fix {
+/*  .main-padding-fix {
           padding-top: 72px;
       }*/
 
-    li.active a {
-        color: #313942;
-    }
+li.active a {
+  color: #313942;
+}
+
+li.active a::after {
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #00c569;
+  height: 3px;
+  width: 100%;
+}
+
+.image-wrapper {
+  height: 300px;
+  overflow: hidden;
+}
+
+.main-image {
+  float: right;
+}
+
+.load-more-button {
+  text-align: center;
+
+  margin: 15px auto;
+}
+
+.load-more-button button {
+  border: 2px solid;
 
-    li.active a::after {
-        content: " ";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        background: #00c569;
-        height: 3px;
-        width: 100%;
-    }
+  padding: 15px 30px;
 
-    .image-wrapper {
+  height: initial;
 
-        height: 300px;
-        overflow: hidden;
+  background: #fff;
 
-    }
+  position: relative;
 
-    .main-image {
-        float: right;
+  top: 0;
 
-    }
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0, 0.2);
 
-    .load-more-button {
+  transition: 200ms;
 
-        text-align: center;
+  color: #00c569;
+}
 
-        margin: 15px auto;
-    }
+.load-more-button button:hover {
+  top: -3px;
 
-    .load-more-button button {
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 
-        border: 2px solid;
+  transition: 200ms;
+}
 
-        padding: 15px 30px;
+.btn-loader {
+  overflow: hidden;
+}
 
-        height: initial;
+.btn-loader-active-wrapper {
+  height: 26px;
+}
 
-        background: #fff;
+.btn-loader img {
+  width: 56px;
+  margin-top: -15px;
+}
 
-        position: relative;
+.response-rate-filter-desktop-wrapper,
+.response-rate-filter-mobile-wrapper {
+  background: #fff;
+  direction: rtl;
+  margin: 15px auto;
+  padding: 7px 15px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  overflow: hidden;
+}
 
-        top: 0;
+.rate-filter-desktop-wrapper,
+.rate-filter-mobile-wrapper {
+  background: #fff;
+  direction: rtl;
+  margin: 15px auto;
+  padding: 7px 15px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  overflow: hidden;
+}
 
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0, 0.2);
+.rate-filter-desktop-wrapper > ul {
+  float: right;
+  padding: 7px 0;
+}
 
-        transition: 200ms;
+.rate-filter-desktop-wrapper > ul li {
+  padding: 0;
+}
 
-        color: #00c569;
+.rate-filter-desktop-wrapper ul button {
+  background: none;
 
-    }
+  border: none;
+}
+.rate-filter label {
+  float: right;
+  margin-left: 7px;
+}
+.filter-select-input-wrapper {
+  float: right;
+  max-width: 138px;
+  position: relative;
+}
 
-    .load-more-button button:hover {
-        top: -3px;
+.filter-select-input-wrapper:after {
+  content: "\F107";
 
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  color: #777;
 
-        transition: 200ms;
+  position: absolute;
 
-    }
+  display: inline-block;
 
-    .btn-loader {
+  top: 9px;
 
-        overflow: hidden;
-    }
+  font-family: "Font Awesome 5 Free", sans-serif;
 
-    .btn-loader-active-wrapper {
+  font-weight: 900;
 
-        height: 26px;
+  left: 6px;
 
-    }
+  font-size: 20px;
 
-    .btn-loader img {
-        width: 56px;
-        margin-top: -15px;
-    }
+  z-index: 0;
+}
+.filter-select-input-wrapper select {
+  width: 100%;
 
+  border-radius: 4px;
 
-    .response-rate-filter-desktop-wrapper, .response-rate-filter-mobile-wrapper {
+  border: 1px solid;
 
-        background: #fff;
-        direction: rtl;
-        margin: 15px auto;
-        padding: 7px 15px;
-        border-radius: 5px;
-        -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-        overflow: hidden;
+  padding: 6px 3px 6px 22px;
 
-    }
+  position: relative;
+
+  z-index: 1;
+
+  color: #777777;
+
+  direction: rtl;
+
+  transition: 200ms;
+
+  background: none;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+}
+
+.footer-note-wrapper {
+  background: #fff;
+  direction: rtl;
+  margin: 15px auto;
+  padding: 7px 15px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  overflow: hidden;
+  max-height: 220px;
+
+  overflow-y: auto;
+
+  line-height: 1.628;
+}
+
+.wrapper-contents {
+  margin-bottom: 20px;
+}
+
+.footer-note-wrapper h3 {
+  font-size: 15px;
+  margin: 8px auto;
+}
+
+.title-section {
+  direction: rtl;
+  margin: 50px auto 10px;
+}
+
+.title-section h1 {
+  font-size: 16px;
+  color: #00c569;
+  float: right;
+}
+
+.title-section hr {
+  margin: 15px 15px 10px auto;
+  position: relative;
+}
 
-    .response-rate-filter-desktop-wrapper .checkbox, .response-rate-filter-mobile-wrapper .chekbox {
+.title-section hr::after {
+  content: " ";
+  height: 3px;
+  width: 50px;
+  background: #00c569;
+  position: absolute;
+  top: -4px;
+  right: 0;
+}
 
-        margin: 0;
-        float: right;
+.text-green {
+  color: #00c569 !important;
+}
+select.active {
+  color: #00c569 !important;
+  border-color: #00c569 !important;
+}
 
-    }
+@media screen and (max-width: 1199px) {
+  .search-box input {
+    width: 100%;
+  }
+}
 
-    .response-rate-filter-mobile-wrapper .checkbox-slider--b-flat {
-        margin: 0 auto 5px;
-    }
+@media screen and (max-width: 991px) {
+  .title-page {
+    text-align: center;
+  }
 
-    .response-rate-filter-mobile-wrapper .checkbox-slider--b-flat input + span::before, .response-rate-filter-mobile-wrapper .checkbox-slider--b-flat input + span::after {
-        top: 0;
-    }
+  .right-sidebar {
+    display: none;
+  }
 
-    .response-rate-filter-mobile-wrapper {
-        padding: 7px 15px;
-        margin: 0;
-        overflow: hidden;
-        float: right;
-        width: 100%;
-        border-radius: 0;
-    }
+  .filter-mobile-sidebar .right-sidebar {
+    display: block;
+  }
+}
 
-    .footer-note-wrapper {
-        background: #fff;
-        direction: rtl;
-        margin: 15px auto;
-        padding: 7px 15px;
-        border-radius: 5px;
-        -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-        overflow: hidden;
-        max-height: 220px;
+@media screen and (max-width: 767px) {
+  .main-content,
+  #main,
+  .category-footer {
+    padding: 0;
+  }
 
-        overflow-y: auto;
-
-        line-height: 1.628;
-    }
-
-    .wrapper-contents{
-        margin-bottom: 20px;
-    }
-
-    .footer-note-wrapper h3 {
-
-        font-size: 15px;
-        margin: 8px auto;
-
-    }
-
-    .title-section {
-        direction: rtl;
-        margin: 50px auto 10px;
-    }
-
-    .title-section h1 {
-        font-size: 16px;
-        color: #00c569;
-        float: right;
-    }
-
-    .title-section hr {
-        margin: 15px 15px 10px auto;
-        position: relative;
-    }
-
-    .title-section hr::after {
-
-        content: ' ';
-        height: 3px;
-        width: 50px;
-        background: #00c569;
-        position: absolute;
-        top: -4px;
-        right: 0;
-
-    }
-
-
-
-    @media screen and (max-width: 1199px) {
-        .search-box input {
-            width: calc(100% - 75px);
-        }
-
-    }
-
-    @media screen and (max-width: 991px) {
-
-
-        .title-page {
-            text-align: center;
-        }
-
-        .right-sidebar {
-            display: none;
-        }
-
-        .filter-mobile-sidebar .right-sidebar {
-            display: block;
-        }
-    }
-
-    @media screen and (max-width: 767px) {
-
-        .main-content, #main, .category-footer {
-            padding: 0;
-        }
-
-        #main {
-            padding-top:  52px;
-        }
-
-        .sub-header {
-            position: fixed;
-            z-index: 1;
-            width: 100%;
-        }
-
-        .search-box {
-            margin: 0 auto;
-            padding: 7px 15px;
-            background: #fbfbfb;
-        }
-
-        .main-image {
-            padding: 0;
-        }
-
-        .main-content > .row {
-            margin: 0;
-        }
-
-        .sub-header {
-
-            background: #f0f3f6;
-
-        }
-
-        .links-sub-header {
-            direction: rtl;
-            text-align: center;
-        }
-
-        .logo img {
-            width: 100%;
-        }
-
-        .user-image {
-            float: right;
-
-            width: 100px;
-
-            height: 100px;
-        }
-
-        .user-contents > p {
-            float: right;
-
-            font-size: 18px;
-
-            padding-top: 40px;
-
-            padding-right: 20px;
-        }
-
-        .user-contents > .green-button {
-            float: left;
-
-            width: initial;
-            padding: 10px 25px;
-
-            margin-top: 28px;
-        }
-
-        .create_buy {
-            display: none;
-        }
-    }
-
-    @media screen and (max-width: 715px) {
-        .name-header-profile {
-            display: none;
-        }
-
-        .profile-menu-header i {
-            position: absolute;
-            left: -75px;
-            top: 22px;
-            font-size: 20px;
-        }
-    }
-
-    @media screen and (max-width: 555px) {
-
-
-        .user-image {
-            float: right;
-
-            width: 60px;
-
-            height: 60px;
-        }
-
-        .user-contents > .green-button {
-
-            float: left;
-            width: initial;
-            padding: 10px;
-            margin-top: 11px;
-
-        }
-
-        .user-contents > p {
-            float: right;
-            font-size: inherit;
-            padding-top: 18px;
-            padding-right: 5px;
-        }
-
-        .logo {
-            padding: 6px 10px;
-        }
-
-        #article-list > div {
-            padding: 0
-        }
-
-        .default-items {
-            padding: 0;
-        }
-    }
-
-    @media screen and (max-width: 430px) {
-        .logo {
-            padding: 6px 63px;
-            width: 100%;
-            height: 109px;
-        }
-
-        .profile-menu-header {
-
-            padding: 3px;
-            padding-left: 35px;
-            float: left;
-
-        }
-
-    }
-
-
-    @media screen and (max-width: 370px) {
-        .default-wrapper-main-image {
-            position: relative;
-            width: 100%;
-            height: 250px;
-            overflow: hidden;
-            border-radius: 4px;
-        }
-
-        .default-main-article-content {
-            width: 100%;
-
-            position: relative;
-
-            top: 15px;
-
-        }
-
-        .default-item-wrapper .default-button-min-with {
-            width: 100%;
-            margin-bottom: 15px;
-        }
-
-    }
-
+  #main {
+    padding-top: 52px;
+  }
+
+  .sub-header {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .search-box {
+    margin: 0 auto;
+    padding: 7px 15px;
+    background: #fbfbfb;
+  }
+
+  .main-image {
+    padding: 0;
+  }
+
+  .main-content > .row {
+    margin: 0;
+  }
+
+  .sub-header {
+    background: #f0f3f6;
+  }
+
+  .links-sub-header {
+    direction: rtl;
+    text-align: center;
+  }
+
+  .logo img {
+    width: 100%;
+  }
+
+  .user-image {
+    float: right;
+
+    width: 100px;
+
+    height: 100px;
+  }
+
+  .user-contents > p {
+    float: right;
+
+    font-size: 18px;
+
+    padding-top: 40px;
+
+    padding-right: 20px;
+  }
+
+  .user-contents > .green-button {
+    float: left;
+
+    width: initial;
+    padding: 10px 25px;
+
+    margin-top: 28px;
+  }
+
+  .create_buy {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 715px) {
+  .name-header-profile {
+    display: none;
+  }
+
+  .profile-menu-header i {
+    position: absolute;
+    left: -75px;
+    top: 22px;
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 555px) {
+  .user-image {
+    float: right;
+
+    width: 60px;
+
+    height: 60px;
+  }
+
+  .user-contents > .green-button {
+    float: left;
+    width: initial;
+    padding: 10px;
+    margin-top: 11px;
+  }
+
+  .user-contents > p {
+    float: right;
+    font-size: inherit;
+    padding-top: 18px;
+    padding-right: 5px;
+  }
+
+  .logo {
+    padding: 6px 10px;
+  }
+
+  #article-list > div {
+    padding: 0;
+  }
+
+  .default-items {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .logo {
+    padding: 6px 63px;
+    width: 100%;
+    height: 109px;
+  }
+
+  .profile-menu-header {
+    padding: 3px;
+    padding-left: 35px;
+    float: left;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .default-wrapper-main-image {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  .default-main-article-content {
+    width: 100%;
+
+    position: relative;
+
+    top: 15px;
+  }
+
+  .default-item-wrapper .default-button-min-with {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+}
 </style>
 <template>
+  <div>
+    <!--modal-->
 
-    <div>
-        <!--modal-->
+    <div class="container">
+      <div
+        class="modal"
+        id="searchFilter"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="searchFilter"
+      >
+        <div class="modal-dialog">
+          <a href="#" class="close-dialog-popup" data-dismiss="modal">
+            <i class="fa fa-times"></i>
+          </a>
 
-        <div class="container">
-            <div class="modal"
-                 id="searchFilter"
-                 tabindex="-1" role="dialog"
-                 aria-labelledby="searchFilter">
-
-                <div class="modal-dialog">
-
-                    <a href="#" class="close-dialog-popup" data-dismiss="modal">
-                        <i class="fa fa-times"></i>
-                    </a>
-
-                    <div class="main_popup_content">
-
-                        <div class="col-xs-12">
-                            <div class="filter-mobile-sidebar ">
-                                <ProductAsideCategories
-                                        :productsInfo="products"
-                                        :categoryId="categoryId"
-                                        :subCategoryId="subCategoryId"
-                                        :provinceId="provinceId"
-                                        :cityId="cityId"
-                                        v-on:productsToParent="filterProducts($event)"/>
-
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- /.modal-dialog -->
+          <div class="main_popup_content">
+            <div class="col-xs-12">
+              <div class="filter-mobile-sidebar">
+                <ProductAsideCategories
+                  :productsInfo="products"
+                  :categoryId="categoryId"
+                  :subCategoryId="subCategoryId"
+                  :provinceId="provinceId"
+                  :cityId="cityId"
+                  v-on:productsToParent="filterProducts($event)"
+                />
+              </div>
             </div>
+          </div>
         </div>
+        <!-- /.modal-dialog -->
+      </div>
+    </div>
 
-        <div class="flat-plust-icon hidden-lg hidden-md">
-            <a href="#" @click.prevent="addProductOrRequest()"><i class="fa fa-plus"></i> </a>
+    <div class="flat-plust-icon hidden-lg hidden-md">
+      <a href="#" @click.prevent="addProductOrRequest()"
+        ><i class="fa fa-plus"></i>
+      </a>
+    </div>
+
+    <div
+      class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid"
+    >
+      <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
+        <input
+          type="text"
+          v-model="headerSearchText"
+          placeholder="اینجا جستجو کنید"
+        />
+
+        <button class="btn-search">
+          <i class="fa-search fa"></i>
+        </button>
+      </div>
+      <div class="rate-filter-mobile-wrapper">
+        <div class="rate-filter">
+          <label for="filter-select">
+            مرتب سازی بر اساس
+          </label>
+          <div class="filter-select-input-wrapper">
+            <select id="filter-select">
+              <option value="0">احتمال پاسخ گویی</option>
+              <option value="1">تاریخ</option>
+            </select>
+          </div>
         </div>
-
-
-
-        <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
-            <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
-                <input type="text" v-model="headerSearchText" placeholder="اینجا جستجو کنید" />
-
-                <button class="btn-search">
-                    <i class="fa-search fa"></i>
-                </button>
-
-                <button class="btn-filter hidden-lg" data-toggle="modal" data-target="#searchFilter">
-                    فیلتر
-                    <i class="fa fa-filter"></i>
-                </button>
-            </div>
-            <div class="response-rate-filter-mobile-wrapper">
-                <div class="response-rate-filter">
-
-                    <div class="checkbox checkbox-slider--b-flat">
-                        <label>
-                            <input type="checkbox" v-model="$parent.productByResponseRate"><span>                  مرتب سازی بر اساس احتمال پاسخ گویی
-</span>
-                        </label>
-                    </div>
-
-                </div>
-            </div>
-            <!--  <div class="links-sub-header hidden-xs col-sm-4 pull-left">
+        <button
+          class="btn-filter hidden-lg"
+          data-toggle="modal"
+          data-target="#searchFilter"
+        >
+          فیلتر
+          <i class="fa fa-filter"></i>
+        </button>
+      </div>
+      <!--  <div class="links-sub-header hidden-xs col-sm-4 pull-left">
                <ul class="list-inline">
                  <li class="list-item active">
                    <h1>
@@ -721,9 +754,9 @@
                  </li>
                </ul>
              </div> -->
-        </div>
+    </div>
 
-     <!--   <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
+    <!--   <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
             <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
                 <div class="response-rate-filter-mobile-wrapper pull-right">
                     <div class="response-rate-filter">
@@ -759,742 +792,786 @@
 
         </div>-->
 
+    <main id="main" class="container">
+      <div class="col-xs-12 col-lg-9">
+        <div class="row">
+          <section class="hidden-xs col-xs-12">
+            <div class="rate-filter-desktop-wrapper">
+              <ul class="list-unstiled list-inline">
+                <li><button>پربازدید ترین ها</button></li>
+                <li><button>بهترین ها</button></li>
+                <li><button>قیمت مناسب</button></li>
+                <li><button>مناسب ترین ها</button></li>
+              </ul>
+              <button
+                class="btn-filter hidden-lg"
+                data-toggle="modal"
+                data-target="#searchFilter"
+              >
+                فیلتر
+                <i class="fa fa-filter"></i>
+              </button>
+            </div>
+          </section>
+          <section class="main-content col-xs-12" v-if="products.length > 0">
+            <div id="article-list" class="row">
+              <div
+                class="col-xs-12"
+                v-for="(product, productIndex) in products"
+              >
+                <ProductArticle
+                  v-if="products.length >= productIndex"
+                  :key="product.main.id"
+                  :product="product"
+                  :loading_img="loading_img"
+                  :defultimg="defultimg"
+                  :str="str"
+                  :loading="loading"
+                  :currentUser="currentUser"
+                />
+              </div>
 
-        <main id="main" class="container ">
+              <div
+                class="load-more-button col-xs-12"
+                v-if="searchText === '' && continueToLoadProducts === true"
+              >
+                <button class="btn btn-loader" @click.prevent="feed()">
+                  <div class="btn-content">
+                    <span class="hidden-xs text-rtl" v-show="!loadMoreActive">
+                      مشاهده محصولات بیشتر
+                      <i class="fa fa-plus"></i>
+                    </span>
 
-
-            <div class="col-xs-12 col-lg-9">
-                <div class="row">
-                    <section class="hidden-xs  col-xs-12">
-
-
-                        <div class="response-rate-filter-desktop-wrapper">
-
-                            <div class="checkbox checkbox-slider--b-flat">
-                                <label>
-                                    <input type="checkbox" v-model="$parent.productByResponseRate"><span>                  مرتب سازی بر اساس احتمال پاسخ گویی
-            </span>
-                                </label>
-                            </div>
-
-                        </div>
-
-
-                    </section>
-                    <section class="main-content col-xs-12" v-if="products.length > 0  ">
-
-                        <div id="article-list" class="row">
-                            <div class="col-xs-12" v-for="(product,productIndex) in products">
-                                <ProductArticle
-                                        v-if="products.length >= productIndex"
-                                        :key="product.main.id"
-                                        :product="product"
-                                        :loading_img="loading_img"
-                                        :defultimg="defultimg"
-                                        :str="str"
-                                        :loading="loading"
-                                        :currentUser="currentUser"
-                                />
-                            </div>
-
-                            <div class="load-more-button col-xs-12 "
-                                 v-if="searchText === '' && continueToLoadProducts === true ">
-
-
-                                <button class="btn btn-loader " @click.prevent="feed()">
-                                    <div class="btn-content">
-                                                    <span class="hidden-xs  text-rtl" v-show="!loadMoreActive">
-                                                        مشاهده محصولات بیشتر
-                                                        <i class="fa fa-plus"></i>
-
-                                                    </span>
-
-                                        <span class="hidden-sm hidden-md hidden-lg text-rtl" v-show="!loadMoreActive">
-                                                        محصولات بیشتر
-                                                        <i class="fa fa-plus"></i>
-                                                    </span>
-
-
-                                        <div v-show="loadMoreActive" class="btn-loader-active-wrapper ">
-                                            <img :src="loading_img">
-                                        </div>
-                                    </div>
-                                </button>
-
-                            </div>
-                        </div>
-
-                    </section>
-
-                    <section class="main-content  col-xs-12"
-                             v-else-if="products.length === 0 && searchActive === true">
-                        <p></p>
-
-                        <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-
-                        <p>شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-
-                        <br/>
-
-                        <div class="text-center">
-                            <button class="btn btn-success">درخواست خرید</button>
-                        </div>
-
-                    </section>
-
-                    <section class="main-content  col-xs-12 "
-                             v-else-if="products.length === 0 && searchText !== '' ">
-                        <p></p>
-
-                        <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-
-                        <p class="text-center" dir="rtl">شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-                        <br/>
-
-                        <div class="text-center">
-                            <a class="green-button col-xs-4 " @click.prevent="registerRequestInSearchNotFoundCase()">درخواست
-                                خرید
-                            </a>
-                            <br/>
-
-                            <a class="green-button col-xs-4 " @click="resetFilter()">نمایش همه محصولات</a>
-
-                        </div>
-
-                        <br/>
-                    </section>
-
-                    <section class="main-content  col-xs-12 "
-                             v-else-if="products.length === 0 && searchText === '' ">
-                        <p></p>
-
-                        <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-
-                        <p class="text-center" dir="rtl">شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-
-                        <br/>
-
-                        <div class="text-center">
-                            <router-link :to="{name:'registerRequestBuyer'}" class="green-button col-xs-4 "
-                                         @click.prevent="registerRequestInSearchNotFoundCase()">
-                                درخواست
-                                خرید
-                            </router-link>
-
-                            <br/>
-                            <a class="green-button col-xs-4 " @click.prevent="resetFilter()">نمایش همه محصولات</a>
-                        </div>
-
-                        <br/>
-                    </section>
-
-
-                    <section v-else class=" col-xs-12"
-
+                    <span
+                      class="hidden-sm hidden-md hidden-lg text-rtl"
+                      v-show="!loadMoreActive"
                     >
-                        <div class="row">
-                            <div v-for="(defaultItem ,index) in 8" :key="index" class="default-items col-xs-12">
-                                <div class=" col-xs-12 padding-15 margin-15-0  default-item-wrapper shadow-content ">
+                      محصولات بیشتر
+                      <i class="fa fa-plus"></i>
+                    </span>
 
-                                    <div class="default-user-contents  col-xs-12 padding-0">
+                    <div
+                      v-show="loadMoreActive"
+                      class="btn-loader-active-wrapper"
+                    >
+                      <img :src="loading_img" />
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </section>
 
-                                        <div class="  placeholder-content default-article-user-image  pull-right"></div>
+          <section
+            class="main-content col-xs-12"
+            v-else-if="products.length === 0 && searchActive === true"
+          >
+            <p></p>
 
+            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
 
-                                        <span class="padding-top-5 placeholder-content margin-15 pull-right content-min-width "></span>
+            <p>شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
 
+            <br />
 
-                                        <span class="margin-0 placeholder-content  default-button-min-with  pull-left"></span>
+            <div class="text-center">
+              <button class="btn btn-success">درخواست خرید</button>
+            </div>
+          </section>
 
+          <section
+            class="main-content col-xs-12"
+            v-else-if="products.length === 0 && searchText !== ''"
+          >
+            <p></p>
 
-                                    </div>
+            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
 
-                                    <div class="default-article-contents padding-0 margin-15-0 col-xs-12 ">
+            <p class="text-center" dir="rtl">
+              شما می توانید درخواست خرید خود را در اینجا ثبت کنید.
+            </p>
+            <br />
 
-                                        <div class="default-wrapper-main-image pull-right ">
+            <div class="text-center">
+              <a
+                class="green-button col-xs-4"
+                @click.prevent="registerRequestInSearchNotFoundCase()"
+                >درخواست خرید
+              </a>
+              <br />
 
-                                            <span class="default-main-image  placeholder-content"></span>
-
-                                        </div>
-
-
-                                        <div class=" default-main-article-content ">
-
-
-                                            <span class=" content-half-width placeholder-content "></span>
-
-                                            <span class=" content-default-width placeholder-content "></span>
-
-                                            <span class=" content-min-width placeholder-content "></span>
-
-                                            <span class=" content-half-width placeholder-content "></span>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                    </section>
-                </div>
+              <a class="green-button col-xs-4" @click="resetFilter()"
+                >نمایش همه محصولات</a
+              >
             </div>
 
-            <aside id="sidebar" class=" product-sidebar sidebar hidden-xs  hidden-sm hidden-md col-lg-3">
+            <br />
+          </section>
 
-                <div class="row">
+          <section
+            class="main-content col-xs-12"
+            v-else-if="products.length === 0 && searchText === ''"
+          >
+            <p></p>
 
-                    <div class="sidebar__inner col-xs-12" style="position: relative;">
+            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
 
+            <p class="text-center" dir="rtl">
+              شما می توانید درخواست خرید خود را در اینجا ثبت کنید.
+            </p>
 
-                        <ProductAsideCategories
-                                :productsInfo="products"
-                                :categoryId="categoryId"
-                                :subCategoryId="subCategoryId"
-                                :provinceId="provinceId"
-                                :cityId="cityId"
-                                v-on:productsToParent="filterProducts($event)"
-                        />
+            <br />
 
+            <div class="text-center">
+              <router-link
+                :to="{ name: 'registerRequestBuyer' }"
+                class="green-button col-xs-4"
+                @click.prevent="registerRequestInSearchNotFoundCase()"
+              >
+                درخواست خرید
+              </router-link>
 
-                    </div>
-
-                </div>
-
-            </aside>
-
-            <script v-if="jsonLDObject" v-html="jsonLDObject" type="application/ld+json"></script>
-        </main>
-
-        <footer class="category-footer container" v-if="categoryMetaData.length > 0">
-            <div class="col-xs-12">
-
-                <div data-v-c5ebe4ce="" class="title-section col-xs-12">
-                    <div data-v-c5ebe4ce="" class="row">
-                        <h1 data-v-c5ebe4ce="">
-
-                            خرید عمده  <span v-text="this.getCategoryName()"></span>
-
-                        </h1>
-                        <hr data-v-c5ebe4ce="">
-                    </div>
-                </div>
-
-                <div class="footer-note-wrapper main-box-shadow">
-
-                    <div class="wrapper-contents">
-                        <div class="contents" v-for="categoryMeta in categoryMetaData" :key="categoryMeta.id">
-                            <div v-html="categoryMeta.header"></div>
-                            <div v-html="categoryMeta.content"></div>
-                        </div>
-
-                    </div>
-                </div>
+              <br />
+              <a class="green-button col-xs-4" @click.prevent="resetFilter()"
+                >نمایش همه محصولات</a
+              >
             </div>
-        </footer>
-    </div>
+
+            <br />
+          </section>
+
+          <section v-else class="col-xs-12">
+            <div class="row">
+              <div
+                v-for="(defaultItem, index) in 8"
+                :key="index"
+                class="default-items col-xs-12"
+              >
+                <div
+                  class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content"
+                >
+                  <div class="default-user-contents col-xs-12 padding-0">
+                    <div
+                      class="placeholder-content default-article-user-image pull-right"
+                    ></div>
+
+                    <span
+                      class="padding-top-5 placeholder-content margin-15 pull-right content-min-width"
+                    ></span>
+
+                    <span
+                      class="margin-0 placeholder-content default-button-min-with pull-left"
+                    ></span>
+                  </div>
+
+                  <div
+                    class="default-article-contents padding-0 margin-15-0 col-xs-12"
+                  >
+                    <div class="default-wrapper-main-image pull-right">
+                      <span
+                        class="default-main-image placeholder-content"
+                      ></span>
+                    </div>
+
+                    <div class="default-main-article-content">
+                      <span
+                        class="content-half-width placeholder-content"
+                      ></span>
+
+                      <span
+                        class="content-default-width placeholder-content"
+                      ></span>
+
+                      <span
+                        class="content-min-width placeholder-content"
+                      ></span>
+
+                      <span
+                        class="content-half-width placeholder-content"
+                      ></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <aside
+        id="sidebar"
+        class="product-sidebar sidebar hidden-xs hidden-sm hidden-md col-lg-3"
+      >
+        <div class="row">
+          <div class="sidebar__inner col-xs-12" style="position: relative;">
+            <ProductAsideCategories
+              :productsInfo="products"
+              :categoryId="categoryId"
+              :subCategoryId="subCategoryId"
+              :provinceId="provinceId"
+              :cityId="cityId"
+              v-on:productsToParent="filterProducts($event)"
+            />
+          </div>
+        </div>
+      </aside>
+
+      <script
+        v-if="jsonLDObject"
+        v-html="jsonLDObject"
+        type="application/ld+json"
+      ></script>
+    </main>
+
+    <footer
+      class="category-footer container"
+      v-if="categoryMetaData.length > 0"
+    >
+      <div class="col-xs-12">
+        <div data-v-c5ebe4ce="" class="title-section col-xs-12">
+          <div data-v-c5ebe4ce="" class="row">
+            <h1 data-v-c5ebe4ce="">
+              خرید عمده <span v-text="this.getCategoryName()"></span>
+            </h1>
+            <hr data-v-c5ebe4ce="" />
+          </div>
+        </div>
+
+        <div class="footer-note-wrapper main-box-shadow">
+          <div class="wrapper-contents">
+            <div
+              class="contents"
+              v-for="categoryMeta in categoryMetaData"
+              :key="categoryMeta.id"
+            >
+              <div v-html="categoryMeta.header"></div>
+              <div v-html="categoryMeta.content"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
 </template>
 <script>
-    import ProductArticle from './product_components/product_article'
-    import ProductAsideCategories from './product_components/sidebar/product_aside_categories'
-    import {eventBus} from "../../../router/router";
-    import StickySidebar from 'sticky-sidebar';
+import ProductArticle from "./product_components/product_article";
+import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
+import { eventBus } from "../../../router/router";
+import StickySidebar from "sticky-sidebar";
 
-    var visible = false;
-    export default {
-        components: {
-            ProductArticle,
-            ProductAsideCategories,
+var visible = false;
+export default {
+  components: {
+    ProductArticle,
+    ProductAsideCategories,
+  },
+  props: ["str", "defultimg", "loading_img"],
+  data: function () {
+    return {
+      currentUser: {
+        profile: "",
+        user_info: "",
+      },
+      products: {
+        main: "",
+        user_info: "",
+        profile_info: {
+          profile_photo: "",
         },
-        props: [
-            'str',
-            'defultimg',
-            'loading_img',
-        ],
-        data: function () {
-            return {
-                currentUser: {
-                    profile: '',
-                    user_info: ''
-                },
-                products: {
-                    main: '',
-                    user_info: '',
-                    profile_info: {
-                        profile_photo: ''
-                    },
-                    photos: [],
-                },
-                searchText: '',
-                provinceId: '',
-                categoryId: '',
-                subCategoryId: '',
-                cityId: '',
-                categoryMetaData : '',
-                searchValue: this.$route.params.searchText,
-                scrolled: false,
-                productCountInPage: 10,
-                productCountInEachLoad: 10,
-                continueToLoadProducts: true,
-                fromProductCount: 0,
-                searchActive: false,
-                errors: '',
-                popUpMsg: '',
-                submiting: false,
-                loading: false,
-                bottom: false,
-                loadMoreActive: false,
-                searchTextTimeout: null,
-                headerSearchText:'',
-                jsonLDObject:'',
+        photos: [],
+      },
+      searchText: "",
+      provinceId: "",
+      categoryId: "",
+      subCategoryId: "",
+      cityId: "",
+      categoryMetaData: "",
+      searchValue: this.$route.params.searchText,
+      scrolled: false,
+      productCountInPage: 10,
+      productCountInEachLoad: 10,
+      continueToLoadProducts: true,
+      fromProductCount: 0,
+      searchActive: false,
+      errors: "",
+      popUpMsg: "",
+      submiting: false,
+      loading: false,
+      bottom: false,
+      loadMoreActive: false,
+      searchTextTimeout: null,
+      headerSearchText: "",
+      jsonLDObject: "",
+    };
+  },
+  methods: {
+    filterProducts: function (productsFilter) {
+      this.products = productsFilter;
+    },
+    collapseDropDown: function () {
+      $(".profile-list").fadeIn("slow", function () {
+        visible = true;
+      });
+    },
+    collapseDropDownList: function () {
+      $(".icon-header-list").fadeIn("slow", function () {
+        visible = true;
+      });
+    },
+    documentClick(e) {
+      if (visible) {
+        $(".profile-list").fadeOut("slow");
+        $(".icon-header-list").fadeOut("slow");
+        visible = false;
+      }
+    },
+    init: function () {
+      this.products = {};
+      this.scrollToTop();
+      var self = this;
+      var searchValue = this.searchValue;
+      var searchValueText = searchValue;
+      let categoryName = this.getCategoryName();
+
+      axios
+        .post("/get_category_meta_data", {
+          category_name: categoryName,
+        })
+        .then(function (response) {
+          self.categoryMetaData = response.data.category_info;
+          self.jsonLDObject = response.data.schema_object;
+        });
+      axios.post("/user/profile_info").then(function (response) {
+        self.currentUser = response.data;
+        if (searchValueText) {
+          self.registerComponentStatistics(
+            "homePage",
+            "search-text",
+            searchValueText
+          );
+          self.searchText = searchValueText;
+          setTimeout(function () {
+            self.sidebarScroll();
+          }, 500);
+        } else {
+          self.loading = true;
+
+          self.fromProductCount = 0;
+          self.productCountInPage = 10;
+
+          axios
+            .post("/user/get_product_list", {
+              from_record_number: self.fromProductCount,
+              response_rate: self.$parent.productByResponseRate,
+              to_record_number: self.productCountInPage,
+              search_text: categoryName,
+            })
+            .then(function (response) {
+              self.products = response.data.products;
+              self.loading = false;
+              setTimeout(function () {
+                self.sidebarScroll();
+              }, 500);
+              eventBus.$emit("submiting", false);
+            });
+        }
+      });
+    },
+    feed() {
+      var self = this;
+
+      if (
+        this.searchText === "" &&
+        this.provinceId === "" &&
+        this.categoryId === "" &&
+        this.continueToLoadProducts
+      ) {
+        this.loadMoreActive = true;
+        this.fromProductCount = this.productCountInPage;
+        this.productCountInPage += this.productCountInEachLoad;
+        axios
+          .post("/user/get_product_list", {
+            from_record_number: this.fromProductCount,
+            response_rate: self.$parent.productByResponseRate,
+            to_record_number: this.productCountInPage,
+            search_text: this.getCategoryName(),
+          })
+          .then(function (response) {
+            self.products = self.products.concat(response.data.products);
+
+            eventBus.$emit("submiting", false);
+            if (self.products.length + 1 < self.productCountInPage) {
+              self.continueToLoadProducts = false;
             }
+
+            self.loadMoreActive = false;
+            setTimeout(function () {
+              self.sidebarScroll();
+            }, 500);
+          });
+      } else {
+        let self = this;
+
+        this.loadMoreActive = true;
+
+        var searchObject = {};
+
+        if (self.$parent.productByResponseRate) {
+          searchObject.response_rate = self.$parent.productByResponseRate;
+        }
+        if (this.categoryId) {
+          searchObject.category_id = this.categoryId;
+        }
+        if (this.subCategoryId) {
+          searchObject.sub_category_id = this.subCategoryId;
+        }
+        if (this.provinceId) {
+          searchObject.province_id = this.provinceId;
+        }
+        if (this.cityId) {
+          searchObject.city_id = this.cityId;
+        }
+
+        searchObject.search_text = this.getCategoryName();
+
+        searchObject.from_record_number = self.productCountInPage;
+        self.productCountInPage += self.productCountInEachLoad;
+        searchObject.to_record_number = self.productCountInPage;
+
+        axios
+          .post("/user/get_product_list", searchObject)
+          .then(function (response) {
+            self.products = self.products.concat(response.data.products);
+
+            self.loadMoreActive = false;
+
+            setTimeout(function () {
+              self.sidebarScroll();
+            }, 500);
+          })
+          .catch(function (err) {
+            alert("خطایی رخ داده است. دوباره تلاش کنید.");
+          });
+      }
+    },
+    registerRequestInSearchNotFoundCase: function () {
+      if (this.currentUser.profile) {
+        if (this.currentUser.user_info.is_buyer) {
+          window.location.href = "/dashboard/register-request";
+        } else {
+          this.popUpMsg = "حساب کاربری شما از نوع خریدار نیست.";
+          eventBus.$emit("submitSuccess", this.popUpMsg);
+          $("#custom-main-modal").modal("show");
+        }
+      } else {
+        this.popUpMsg =
+          "تنها کاربران تایید شده ی باسکول مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.";
+        eventBus.$emit("submitSuccess", this.popUpMsg);
+        $("#auth-popup").modal("show");
+      }
+    },
+    bottomVisible: function () {
+      const scrollY = window.scrollY;
+      const visible = document.documentElement.clientHeight;
+      const pageHeight = document.documentElement.scrollHeight;
+      const bottomOfPage = visible + scrollY >= pageHeight;
+      return bottomOfPage || pageHeight < visible;
+    },
+    addProductOrRequest: function () {
+      if (this.currentUser.user_info) {
+        if (this.currentUser.user_info.is_seller) {
+          this.registerComponentStatistics(
+            "product-list",
+            "register-product",
+            "seller clicks on plus button"
+          );
+
+          window.location.href = "/dashboard/register-product";
+        } else if (this.currentUser.user_info.is_buyer) {
+          this.registerComponentStatistics(
+            "product-list",
+            "register-request",
+            "seller clicks on plus button"
+          );
+
+          window.location.href = "/dashboard/register-request";
+        }
+      } else {
+        this.registerComponentStatistics(
+          "product-list",
+          "unauthorized-user-clicks-on-plus-btn",
+          "unauthorized-user-clicks-on-plus-btn"
+        );
+
+        this.popUpMsg =
+          "برای ثبت آگهی خرید یا فروش  ابتدا وارد سامانه شوید یا ثبت نام کنید.";
+        eventBus.$emit("submitSuccess", this.popUpMsg);
+        $("#auth-popup").modal("show");
+      }
+    },
+    resetFilter: function () {
+      eventBus.$emit("submiting", true);
+
+      $(".box-sidebar option").prop("selected", function () {
+        return this.defaultSelected;
+      });
+
+      this.searchText = "";
+      this.provinceId = "";
+      this.categoryId = "";
+      this.subCategoryId = "";
+      this.cityId = "";
+
+      this.init();
+    },
+    applyFilter: function () {
+      var self = this;
+
+      eventBus.$emit("submiting", true);
+
+      self.fromProductCount = 0;
+      self.productCountInPage = 10;
+
+      var searchObject = {};
+
+      if (self.$parent.productByResponseRate) {
+        searchObject.response_rate = self.$parent.productByResponseRate;
+      }
+      if (this.categoryId) {
+        searchObject.category_id = this.categoryId;
+      }
+      if (this.subCategoryId) {
+        searchObject.sub_category_id = this.subCategoryId;
+      }
+      if (this.provinceId) {
+        searchObject.province_id = this.provinceId;
+      }
+      if (this.cityId) {
+        searchObject.city_id = this.cityId;
+      }
+
+      searchObject.search_text = this.getCategoryName();
+
+      searchObject.from_record_number = self.fromProductCount;
+      searchObject.to_record_number = self.productCountInPage;
+
+      axios
+        .post("/user/get_product_list", searchObject)
+        .then(function (response) {
+          self.products = response.data.products;
+          eventBus.$emit("submiting", false);
+
+          self.scrollToTop();
+
+          setTimeout(function () {
+            self.sidebarScroll();
+          }, 500);
+        })
+        .catch(function (err) {
+          alert("خطایی رخ داده است. دوباره تلاش کنید.");
+        });
+    },
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    },
+    stopLoader: function () {
+      eventBus.$emit("isLoading", false);
+    },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
+    },
+    registerComponentExceptions: function (description, fatal = false) {
+      gtag("event", "exception", {
+        description: description,
+        fatal: fatal,
+      });
+    },
+    sidebarScroll() {
+      var sidebarStopper = $("#wrap-footer").height();
+
+      var sidebar = new StickySidebar("#sidebar", {
+        containerSelector: "#article-list",
+        innerWrapperSelector: ".sidebar__inner",
+        topSpacing: 80,
+        resizeSensor: true,
+      });
+    },
+    getCategoryName: function () {
+      let name = this.$route.params.categoryName;
+
+      return name.split("-").join(" ");
+    },
+    infiniteScrollHandler: function () {
+      let lastOffset = 0;
+
+      window.onscroll = () => {
+        if (window.location.pathname.includes("product-list/category")) {
+          var bottom =
+            document.documentElement.scrollTop + window.innerHeight >
+            document.documentElement.offsetHeight -
+              document.documentElement.scrollTop / 2;
+
+          let newOffset = document.documentElement.offsetHeight;
+
+          if (bottom) {
+            if (newOffset > lastOffset + 100) {
+              lastOffset = document.documentElement.offsetHeight;
+              this.feed();
+            }
+          }
+        }
+      };
+    },
+    createJsonLDObject: function () {
+      var fullName =
+        this.product.user_info.first_name +
+        " " +
+        this.product.user_info.last_name;
+
+      var productOwnerProfilePageUrl =
+        "https://www.buskool.com/profile/" + this.product.user_info.user_name;
+
+      let jsonDL = {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        name: this.product.main.product_name,
+        image: this.product.photos.map(function (photo) {
+          return "https://www.buskool.com/storage/" + photo.file_path;
+        }),
+        description: this.product.main.description,
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "4.4",
+          reviewCount: "3",
         },
-        methods: {
-            filterProducts: function (productsFilter) {
-                this.products = productsFilter;
-            },
-            collapseDropDown: function () {
-                $(".profile-list").fadeIn("slow", function () {
-                    visible = true;
-                });
-            },
-            collapseDropDownList: function () {
-                $(".icon-header-list").fadeIn("slow", function () {
-                    visible = true;
-                });
-            },
-            documentClick(e) {
-                if (visible) {
-                    $('.profile-list').fadeOut("slow");
-                    $('.icon-header-list').fadeOut("slow");
-                    visible = false;
-                }
-            },
-            init: function () {
-                this.products = {};
-                this.scrollToTop();
-                var self = this;
-                var searchValue = this.searchValue;
-                var searchValueText = searchValue;
-                let categoryName = this.getCategoryName();
-
-                axios.post('/get_category_meta_data',{
-                    category_name : categoryName
-                }).then(function (response) {
-                    self.categoryMetaData = response.data.category_info;
-                    self.jsonLDObject = response.data.schema_object;
-
-                });
-                axios.post('/user/profile_info')
-                    .then(function (response) {
-                        self.currentUser = response.data;
-                        if (searchValueText) {
-                            self.registerComponentStatistics('homePage', 'search-text', searchValueText);
-                            self.searchText = searchValueText;
-                            setTimeout(function () {
-                                self.sidebarScroll();
-                            }, 500)
-                        } else {
-                            self.loading = true;
-
-                            self.fromProductCount = 0;
-                            self.productCountInPage = 10;
-
-                            axios.post('/user/get_product_list', {
-                                from_record_number: self.fromProductCount,
-                                response_rate: self.$parent.productByResponseRate,
-                                to_record_number: self.productCountInPage,
-                                search_text: categoryName
-
-                            }).then(function (response) {
-                                self.products = response.data.products;
-                                self.loading = false;
-                                setTimeout(function () {
-                                    self.sidebarScroll();
-                                }, 500)
-                                eventBus.$emit('submiting', false);
-
-                            });
-                        }
-                    });
-
-            },
-            feed() {
-                var self = this;
-
-                if (this.searchText === '' && this.provinceId === '' && this.categoryId === '' && this.continueToLoadProducts) {
-                    this.loadMoreActive = true;
-                    this.fromProductCount = this.productCountInPage;
-                    this.productCountInPage += this.productCountInEachLoad;
-                    axios.post('/user/get_product_list', {
-                        from_record_number: this.fromProductCount,
-                        response_rate: self.$parent.productByResponseRate,
-                        to_record_number: this.productCountInPage,
-                        search_text: this.getCategoryName()
-                    }).then(function (response) {
-                        self.products = self.products.concat(response.data.products);
-
-                        eventBus.$emit('submiting', false);
-                        if (self.products.length + 1 < self.productCountInPage) {
-                            self.continueToLoadProducts = false;
-                        }
-
-                        self.loadMoreActive = false;
-                        setTimeout(function () {
-                            self.sidebarScroll();
-                        }, 500);
-                    });
-                } else {
-                    let self = this;
-
-                    this.loadMoreActive = true;
-
-                    var searchObject = {};
-
-                    if (self.$parent.productByResponseRate) {
-                        searchObject.response_rate = self.$parent.productByResponseRate;
-                    }
-                    if (this.categoryId) {
-                        searchObject.category_id = this.categoryId;
-                    }
-                    if (this.subCategoryId) {
-                        searchObject.sub_category_id = this.subCategoryId;
-                    }
-                    if (this.provinceId) {
-                        searchObject.province_id = this.provinceId;
-                    }
-                    if (this.cityId) {
-                        searchObject.city_id = this.cityId;
-                    }
-
-                    searchObject.search_text = this.getCategoryName();
-
-                    searchObject.from_record_number = self.productCountInPage;
-                    self.productCountInPage += self.productCountInEachLoad;
-                    searchObject.to_record_number = self.productCountInPage;
-
-                    axios.post('/user/get_product_list', searchObject)
-                        .then(function (response) {
-                            self.products = self.products.concat(response.data.products);
-
-                            self.loadMoreActive = false;
-
-                            setTimeout(function () {
-                                self.sidebarScroll();
-                            }, 500);
-                        })
-                        .catch(function (err) {
-                            alert('خطایی رخ داده است. دوباره تلاش کنید.');
-                        });
-                }
-
-            },
-            registerRequestInSearchNotFoundCase: function () {
-
-                if (this.currentUser.profile) {
-                    if (this.currentUser.user_info.is_buyer) {
-                        window.location.href = '/dashboard/register-request';
-                    } else {
-                        this.popUpMsg = 'حساب کاربری شما از نوع خریدار نیست.';
-                        eventBus.$emit('submitSuccess', this.popUpMsg);
-                        $('#custom-main-modal').modal('show');
-                    }
-                } else {
-                    this.popUpMsg = 'تنها کاربران تایید شده ی باسکول مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
-                    eventBus.$emit('submitSuccess', this.popUpMsg);
-                    $('#auth-popup').modal('show');
-                }
-            },
-            bottomVisible: function () {
-                const scrollY = window.scrollY;
-                const visible = document.documentElement.clientHeight;
-                const pageHeight = document.documentElement.scrollHeight;
-                const bottomOfPage = visible + scrollY >= pageHeight;
-                return bottomOfPage || pageHeight < visible;
-            },
-            addProductOrRequest: function () {
-                if (this.currentUser.user_info) {
-                    if (this.currentUser.user_info.is_seller) {
-                        this.registerComponentStatistics('product-list', 'register-product', 'seller clicks on plus button');
-
-                        window.location.href = '/dashboard/register-product';
-                    } else if (this.currentUser.user_info.is_buyer) {
-                        this.registerComponentStatistics('product-list', 'register-request', 'seller clicks on plus button');
-
-                        window.location.href = '/dashboard/register-request';
-                    }
-                } else {
-                    this.registerComponentStatistics('product-list', 'unauthorized-user-clicks-on-plus-btn', 'unauthorized-user-clicks-on-plus-btn');
-
-                    this.popUpMsg = 'برای ثبت آگهی خرید یا فروش  ابتدا وارد سامانه شوید یا ثبت نام کنید.';
-                    eventBus.$emit('submitSuccess', this.popUpMsg);
-                    $('#auth-popup').modal('show');
-                }
-            },
-            resetFilter: function () {
-
-
-                eventBus.$emit('submiting', true);
-
-                $('.box-sidebar option').prop('selected', function () {
-                    return this.defaultSelected;
-                });
-
-                this.searchText = '';
-                this.provinceId = '';
-                this.categoryId = '';
-                this.subCategoryId = '';
-                this.cityId = '';
-
-                this.init();
-
-            },
-            applyFilter: function () {
-                var self = this;
-
-                eventBus.$emit('submiting', true);
-
-                self.fromProductCount = 0;
-                self.productCountInPage = 10;
-
-                var searchObject = {};
-
-                if (self.$parent.productByResponseRate) {
-                    searchObject.response_rate = self.$parent.productByResponseRate;
-                }
-                if (this.categoryId) {
-                    searchObject.category_id = this.categoryId;
-                }
-                if (this.subCategoryId) {
-                    searchObject.sub_category_id = this.subCategoryId;
-                }
-                if (this.provinceId) {
-                    searchObject.province_id = this.provinceId;
-                }
-                if (this.cityId) {
-                    searchObject.city_id = this.cityId;
-                }
-
-                searchObject.search_text = this.getCategoryName();
-
-                searchObject.from_record_number = self.fromProductCount;
-                searchObject.to_record_number = self.productCountInPage;
-
-                axios.post('/user/get_product_list', searchObject)
-                    .then(function (response) {
-                        self.products = response.data.products;
-                        eventBus.$emit('submiting', false);
-
-                        self.scrollToTop();
-
-                        setTimeout(function () {
-                            self.sidebarScroll();
-                        }, 500);
-                    })
-                    .catch(function (err) {
-                        alert('خطایی رخ داده است. دوباره تلاش کنید.');
-                    });
-
-            },
-            scrollToTop() {
-                window.scrollTo(0, 0);
-            },
-            stopLoader: function () {
-                eventBus.$emit('isLoading', false);
-            },
-            registerComponentStatistics: function (categoryName, actionName, labelName) {
-                gtag('event', actionName, {
-                    'event_category': categoryName,
-                    'event_label': labelName
-                });
-            },
-            registerComponentExceptions: function (description, fatal = false) {
-                gtag('event', 'exception', {
-                    'description': description,
-                    'fatal': fatal
-                });
-            },
-            sidebarScroll() {
-
-
-                var sidebarStopper = $('#wrap-footer').height();
-
-                var sidebar = new StickySidebar('#sidebar', {
-                    containerSelector: '#article-list',
-                    innerWrapperSelector: '.sidebar__inner',
-                    topSpacing: 80,
-                    resizeSensor: true,
-
-                });
-
-            },
-            getCategoryName: function () {
-                let name = this.$route.params.categoryName;
-
-                return name.split('-').join(' ');
-            },
-            infiniteScrollHandler: function () {
-                let lastOffset = 0;
-
-                window.onscroll = () => {
-                    if (window.location.pathname.includes('product-list/category')) {
-                        var bottom = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - (document.documentElement.scrollTop / 2);
-
-                        let newOffset = document.documentElement.offsetHeight;
-
-                        if (bottom) {
-                            if (newOffset > lastOffset + 100) {
-                                lastOffset = document.documentElement.offsetHeight;
-                                this.feed();
-                            }
-
-                        }
-                    }
-                }
-            },
-            createJsonLDObject: function() {
-                var fullName =
-                    this.product.user_info.first_name +
-                    " " +
-                    this.product.user_info.last_name;
-
-                var productOwnerProfilePageUrl =
-                    "https://www.buskool.com/profile/" + this.product.user_info.user_name;
-
-                let jsonDL = {
-                    "@context": "https://schema.org/",
-                    "@type": "Product",
-                    name: this.product.main.product_name,
-                    image: this.product.photos.map(function(photo) {
-                    return "https://www.buskool.com/storage/" + photo.file_path;
-                    }),
-                    description: this.product.main.description,
-                    aggregateRating: {
-                    "@type": "AggregateRating",
-                    ratingValue: "4.4",
-                    reviewCount: "3"
-                    },
-                    offers: {
-                    "@type": "Offer",
-                    url: "https://www.buskool.com" + this.getProductUrl(),
-                    priceCurrency: "IRR",
-                    price: this.product.main.min_sale_price * 10,
-                    availability: "https://schema.org/InStock",
-                    seller: {
-                        "@type": "Person",
-                        name: fullName,
-                        url: productOwnerProfilePageUrl
-                    }
-                    }
-                };
+        offers: {
+          "@type": "Offer",
+          url: "https://www.buskool.com" + this.getProductUrl(),
+          priceCurrency: "IRR",
+          price: this.product.main.min_sale_price * 10,
+          availability: "https://schema.org/InStock",
+          seller: {
+            "@type": "Person",
+            name: fullName,
+            url: productOwnerProfilePageUrl,
+          },
+        },
+      };
 
       return jsonDL;
     },
+  },
+  watch: {
+    "$route.params.categoryName": function (name) {
+      this.init();
+    },
+
+    headerSearchText: function (value) {
+      var self = this;
+
+      clearTimeout(this.searchTextTimeout);
+
+      this.searchTextTimeout = setTimeout(function () {
+        self.registerComponentStatistics(
+          "product-list",
+          "search-text",
+          self.searchText
+        );
+
+        eventBus.$emit("textSearch", value);
+
+        self.$router.replace({
+          name: "productList",
+          query: {
+            s: self.headerSearchText.replace(/ /g, "+"),
+          },
+        });
+      }, 1500);
+    },
+    "$parent.productByResponseRate": function () {
+      this.products = {};
+
+      this.infiniteScrollHandler();
+
+      if (this.searchText) {
+        this.applyFilter();
+      } else {
+        this.init();
+      }
+    },
+
+    bottom(bottom) {
+      if (bottom) {
+        this.feed();
+      }
+    },
+  },
+  created() {
+    gtag("config", "UA-129398000-1", { page_path: "/product-list" });
+
+    document.addEventListener("click", this.documentClick);
+  },
+  mounted() {
+    this.scrollToTop();
+
+    this.infiniteScrollHandler();
+
+    this.init();
+
+    this.stopLoader();
+  },
+  metaInfo() {
+    let categoryName = this.getCategoryName();
+
+    let canonicalLink =
+      window.location.host +
+      "/product-list/category/" +
+      categoryName.split(" ").join("-");
+
+    return {
+      title: "خرید و فروش عمده و قیمت " + categoryName,
+      titleTemplate: "باسکول | %s",
+      meta: [
+        {
+          name: "description",
+          content:
+            "خرید و فروش عمده " +
+            categoryName +
+            " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان | آگاهی از آخرین قیمت " +
+            categoryName +
+            " عمده در بازار عمده باسکول ",
         },
-        watch: {
-            '$route.params.categoryName': function (name) {
-
-                this.init();
-
-            },
-
-            headerSearchText: function (value) {
-                var self = this;
-
-
-                clearTimeout(this.searchTextTimeout);
-
-                this.searchTextTimeout = setTimeout(function () {
-                    self.registerComponentStatistics('product-list', 'search-text', self.searchText);
-
-                    eventBus.$emit('textSearch', value);
-
-                    self.$router.replace({
-                        name: 'productList',
-                        query: {
-                            s: self.headerSearchText.replace(/ /g, '+')
-                        }
-                    });
-
-                }, 1500);
-
-            },
-            '$parent.productByResponseRate': function () {
-                this.products = {};
-
-                this.infiniteScrollHandler();
-
-                if (this.searchText) {
-
-                    this.applyFilter();
-
-                } else {
-
-                    this.init();
-
-                }
-
-            },
-
-            bottom(bottom) {
-                if (bottom) {
-                    this.feed()
-                }
-            },
+        {
+          name: "author",
+          content: "باسکول",
         },
-        created() {
-            gtag('config', 'UA-129398000-1', {'page_path': '/product-list'});
-
-            document.addEventListener('click', this.documentClick);
+        {
+          property: "og:description",
+          content:
+            "خرید و فروش عمده " +
+            categoryName +
+            " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان | آگاهی از آخرین قیمت " +
+            categoryName +
+            " عمده در بازار عمده باسکول ",
         },
-        mounted() {
-            this.scrollToTop();
-
-            this.infiniteScrollHandler();
-
-            this.init();
-
-            this.stopLoader();
-
+        {
+          property: "og:site_name",
+          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
         },
-        metaInfo() {
-
-            let categoryName = this.getCategoryName();
-
-            let canonicalLink = window.location.host + '/product-list/category/' + categoryName.split(' ').join('-');
-
-            return {
-                title: 'خرید و فروش عمده و قیمت ' + categoryName,
-                titleTemplate: 'باسکول | %s',
-                meta: [
-                    {
-                        name: 'description',
-                        content: 'خرید و فروش عمده ' + categoryName + ' به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان | آگاهی از آخرین قیمت ' + categoryName + ' عمده در بازار عمده باسکول ' 
-                    },
-                    {
-                        name: 'author',
-                        content: 'باسکول'
-                    },
-                    {
-                        property: 'og:description',
-                        content: 'خرید و فروش عمده ' + categoryName + ' به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان | آگاهی از آخرین قیمت ' + categoryName + ' عمده در بازار عمده باسکول ' 
-                    },
-                    {
-                        property: 'og:site_name',
-                        content: 'باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران'
-                    },
-                    {
-                        'property': 'og:title',
-                        'content': 'باسکول | خرید و فروش عمده و قیمت ' + categoryName
-                    },
-                ],
-                link: [
-                    {rel: 'canonical', href: canonicalLink}
-                ]
-
-            }
-        }
-    }
-
+        {
+          property: "og:title",
+          content: "باسکول | خرید و فروش عمده و قیمت " + categoryName,
+        },
+      ],
+      link: [{ rel: "canonical", href: canonicalLink }],
+    };
+  },
+};
 </script>

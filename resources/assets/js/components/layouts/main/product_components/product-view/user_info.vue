@@ -21,6 +21,7 @@ i {
 
 .green-button-o:hover {
   background: #00c569;
+  color: #fff;
 }
 
 .user-info-wrapper {
@@ -33,7 +34,6 @@ i {
 .user-info-wrapper.active {
   padding: 28px 20px;
   border: 2px solid #00c569;
-
 }
 
 .user-information-content-image {
@@ -54,8 +54,8 @@ i {
   min-height: 100%;
   position: relative;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   top: 50%;
 }
 .valid-icon {
@@ -102,17 +102,16 @@ p.user-valid-text {
   color: #00c569;
 }
 
-    p.response-rate{
-      color: #777;
-      font-size : 12px;
-      padding: 0;
-      direction: rtl;
+p.response-rate {
+  color: #777;
+  font-size: 12px;
+  padding: 0;
+  direction: rtl;
+}
 
-    }
-
-    p.response-rate span{
-      color: #e41c38;
-    }
+p.response-rate span {
+  color: #e41c38;
+}
 
 @media screen and (max-width: 1199px) {
   .user-info-wrapper {
@@ -242,23 +241,37 @@ p.user-valid-text {
   <div
     v-if="$parent.product.user_info"
     class="user-info-wrapper wrapper-bg"
-    :class="{ 'active': $parent.product.user_info.active_pakage_type == 3 }"
+    :class="{ active: $parent.product.user_info.active_pakage_type == 3 }"
   >
     <router-link
-      :to="'/profile/'+ $parent.product.user_info.user_name"
+      :to="'/profile/' + $parent.product.user_info.user_name"
       class="user-information-link"
     >
       <div class="user-information-content-image">
-        <div class="user-image" v-if="$parent.product.profile_info.profile_photo">
-          <img v-bind:src=" '/storage/' + $parent.product.profile_info.profile_photo" />
+        <div
+          class="user-image"
+          v-if="$parent.product.profile_info.profile_photo"
+        >
+          <img
+            v-bind:src="
+              '/storage/' + $parent.product.profile_info.profile_photo
+            "
+          />
         </div>
 
         <div class="user-image" v-else>
           <img :src="$parent.defultimg" class="image_defult" />
         </div>
-        <div class="valid-icon" v-if="$parent.product.user_info.active_pakage_type == 3">
+        <div
+          class="valid-icon"
+          v-if="$parent.product.user_info.active_pakage_type == 3"
+        >
           <svg width="21.75" height="21.68" viewBox="0 0 24.965 30.574">
-            <g id="buskool-icon" data-name="buskool" transform="translate(-273.1 -715.025)">
+            <g
+              id="buskool-icon"
+              data-name="buskool"
+              transform="translate(-273.1 -715.025)"
+            >
               <path
                 id="Subtraction_1"
                 data-name="Subtraction 1"
@@ -292,29 +305,34 @@ p.user-valid-text {
 
         <p
           v-if="$parent.product.user_info"
-          v-text="$parent.product.user_info.first_name + ' ' +
-            $parent.product.user_info.last_name"
+          v-text="
+            $parent.product.user_info.first_name +
+            ' ' +
+            $parent.product.user_info.last_name
+          "
         ></p>
 
         <p
           v-if="$parent.product.user_info.active_pakage_type == 3"
           class="user-valid-text"
-        >کاربر تایید شده</p>
+        >
+          کاربر تایید شده
+        </p>
 
-               <p v-if="$parent.product.user_info.response_rate"  class="response-rate" > احتمال پاسخ گویی <span v-text="'%' + $parent.product.user_info.response_rate "></span></p>
-
+        <p v-if="$parent.product.user_info.response_rate" class="response-rate">
+          احتمال پاسخ گویی
+          <span v-text="'%' + $parent.product.user_info.response_rate"></span>
+        </p>
       </div>
-
-
-
     </router-link>
     <div class="user-info-actions">
       <router-link
-        :to="'/profile/'+ $parent.product.user_info.user_name"
+        :to="'/profile/' + $parent.product.user_info.user_name"
         class="green-button green-button-o"
-      >مشاهده پروفایل</router-link>
+        >مشاهده پروفایل</router-link
+      >
 
-    <!--   <button
+      <!--   <button
         v-if="!$parent.isMyProfile"
         @click.prevent="$parent.openChat($parent.product)"
         class="green-button"
@@ -334,7 +352,7 @@ p.user-valid-text {
 
       <router-link
         v-else-if="$parent.userType == 0"
-        :to="{name : 'profileBasicBuyer'}"
+        :to="{ name: 'profileBasicBuyer' }"
         class="green-button"
       >
         ویرایش پروفایل
@@ -343,7 +361,7 @@ p.user-valid-text {
 
       <router-link
         v-else-if="$parent.userType == 1"
-        :to="{name : 'profileBasicSeller'}"
+        :to="{ name: 'profileBasicSeller' }"
         class="green-button"
       >
         ویرایش پروفایل
@@ -353,15 +371,21 @@ p.user-valid-text {
   </div>
 
   <div class="user-info-wrapper default-user-info-wrapper wrapper-bg" v-else>
-    <div class="default-wrapper-main-image placeholder-content text-center"></div>
+    <div
+      class="default-wrapper-main-image placeholder-content text-center"
+    ></div>
 
     <div class="default-image-info text-rtl text-center margin-15-0">
       <span class="placeholder-content content-half-width inline-block"></span>
-      <span class="placeholder-content content-default-width inline-block"></span>
+      <span
+        class="placeholder-content content-default-width inline-block"
+      ></span>
     </div>
     <div class="default-user-action-buttons">
       <div class="placeholder-content default-button-full-with margin-0"></div>
-      <div class="placeholder-content default-button-full-with margin-10-0"></div>
+      <div
+        class="placeholder-content default-button-full-with margin-10-0"
+      ></div>
     </div>
   </div>
 </template>
