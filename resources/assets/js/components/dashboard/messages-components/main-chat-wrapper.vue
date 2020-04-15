@@ -273,7 +273,11 @@
             : 'chat-loaded',
         ]"
       >
-        <li :key="msg.id" v-for="msg in $parent.chatMessages">
+        <li
+          :key="msg.id"
+          v-for="(msg, index) in $parent.chatMessages"
+          :class="{ 'margin-top-10': checkMessageName(index, index - 1) }"
+        >
           <div
             :class="[
               msg.sender_id == $parent.currentUserId
@@ -357,5 +361,24 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    checkMessageName: function (index, prevIndex) {
+      var isMessageName = false;
+      console.log(this.$parent.chatMessages);
+      if (this.$parent.chatMessages[prevIndex] && prevIndex >= 0) {
+        if (
+          this.$parent.chatMessages[index].sender_id !=
+          this.$parent.chatMessages[prevIndex].sender_id
+        ) {
+          isMessageName = true;
+        }
+      } else {
+        isMessageName = true;
+      }
+
+      return isMessageName;
+    },
+  },
+};
 </script>

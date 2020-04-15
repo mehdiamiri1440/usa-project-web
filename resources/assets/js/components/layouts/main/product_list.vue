@@ -350,6 +350,8 @@ li.active a::after {
 
   margin: 0;
 
+  font-weight: 400;
+
   width: 140px;
 }
 
