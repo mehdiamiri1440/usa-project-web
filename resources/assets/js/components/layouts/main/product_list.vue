@@ -37,7 +37,7 @@
   margin: 0;
 }
 
-#searchFilter .main_popup_content {
+#searchFilter .main_popup_content > div {
   padding: 0;
 }
 
@@ -350,6 +350,8 @@ li.active a::after {
 
   margin: 0;
 
+  font-weight: 400;
+
   width: 140px;
 }
 
@@ -447,11 +449,11 @@ li.active a::after {
 filter modal styles
 */
 
-#filter-modal .modal-content {
+.modal-content {
   overflow: hidden;
   border-radius: 12px;
 }
-#filter-modal .close-modal {
+.close-modal {
   font-size: 20px;
 
   color: #777;
@@ -465,7 +467,7 @@ filter modal styles
   top: 0;
 }
 
-#filter-modal .modal-title {
+.modal-title {
   font-size: 16px;
 
   font-weight: 800;
@@ -475,11 +477,11 @@ filter modal styles
   text-align: center;
 }
 
-#filter-modal .modal-header {
+.modal-header {
   padding: 9px 15px 10px;
 }
 
-#filter-modal .modal-body {
+.modal-body {
   padding: 0 15px;
 }
 .form-check-wrapper button {
@@ -560,7 +562,7 @@ end filter modal styles
     width: 100%;
     height: 100%;
   }
-  #filter-modal .modal-content {
+  .modal-content {
     min-height: 100%;
 
     border-radius: 0;
@@ -570,6 +572,12 @@ end filter modal styles
     float: right;
 
     width: 100%;
+  }
+  .main_popup_content > div {
+    padding: 0;
+  }
+  .main_popup_content {
+    padding: 0;
   }
 }
 
@@ -740,16 +748,21 @@ end filter modal styles
     <!--modal-->
     <div class="container">
       <div
-        class="modal"
+        class="modal fade"
         id="searchFilter"
         tabindex="-1"
         role="dialog"
         aria-labelledby="searchFilter"
       >
         <div class="modal-dialog">
-          <a href="#" class="close-dialog-popup" data-dismiss="modal">
-            <i class="fa fa-times"></i>
-          </a>
+          <div class="modal-header">
+            <a href="#" class="close-modal" @click.prevent="reportResetData()">
+              <i class="fa fa-times"></i>
+            </a>
+            <div class="modal-title">
+              <span> دسته ها و فیلتر </span>
+            </div>
+          </div>
 
           <div class="main_popup_content">
             <div class="col-xs-12">
@@ -852,21 +865,13 @@ end filter modal styles
       </div>
       <div class="rate-filter-mobile-wrapper">
         <div class="rate-filter">
-          <button
-            class="green-button bg-gray"
-            data-toggle="modal"
-            data-target="#filter-modal"
-          >
+          <button class="green-button bg-gray" @click.prevent="sortModal()">
             <i class="fas fa-sort-amount-down-alt"></i>
 
             مرتب سازی
           </button>
         </div>
-        <button
-          class="btn-filter hidden-lg"
-          data-toggle="modal"
-          data-target="#searchFilter"
-        >
+        <button class="btn-filter hidden-lg" @click.prevent="filterModal()">
           <i class="fa fa-filter"></i>
 
           دسته ها و فیلتر
@@ -1168,6 +1173,8 @@ export default {
       loadMoreActive: false,
       searchTextTimeout: null,
       sortOption: "BM",
+      isSortModalActive: false,
+      isFilterModalActive: false,
     };
   },
   methods: {
@@ -1194,7 +1201,9 @@ export default {
     init: function () {
       //              return new Promise((resolve,reject)=>{
       var self = this;
-      
+
+      self.handleBackBtnClickOnDevices();
+
       this.scrollToTop();
       if (this.$route.query.s) {
         var searchValue = this.$route.query.s.split("+").join(" ");
@@ -1468,8 +1477,12 @@ export default {
     setSortOption: function (sortOption) {
       $("#filter-modal").modal("hide");
       if (this.sortOption != sortOption) {
-        this.registerComponentStatistics('product-list','apply-sort',sortOption);
-        
+        this.registerComponentStatistics(
+          "product-list",
+          "apply-sort",
+          sortOption
+        );
+
         this.sortOption = sortOption;
         this.applyFilter();
       }
@@ -1519,6 +1532,39 @@ export default {
           }
         }
       };
+    },
+    reportResetData: function () {
+      $(".modal").modal("hide");
+      this.isFilterModalActive = false;
+      this.isSortModalActive = false;
+    },
+    handleBackBtnClickOnDevices: function () {
+      var self = this;
+      //   console.log(
+      //     window.history.state &&
+      //       !this.isFilterModalActive &&
+      //       !this.isSortModalActive
+      //   );
+      if (
+        window.history.state &&
+        !self.isFilterModalActive &&
+        !self.isSortModalActive
+      ) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        self.reportResetData();
+        console.log("this.isFilterModalActive", self.isFilterModalActive);
+      });
+    },
+    sortModal() {
+      $("#filter-modal").modal("show");
+      this.isSortModalActive = true;
+    },
+    filterModal() {
+      $("#searchFilter").modal("show");
+      this.isFilterModalActive = true;
+      console.log("this.isFilterModalActive", this.isFilterModalActive);
     },
     sidebarScroll() {
       var $sticky = $(".sticky");

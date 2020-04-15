@@ -186,6 +186,7 @@ button.btn-filter {
   border: none;
   background: #000546;
   color: #fff;
+  width: 140px;
 }
 
 .links-sub-header {
@@ -376,6 +377,8 @@ li.active a::after {
 
   margin: 0;
 
+  font-weight: 400;
+
   width: 140px;
 }
 
@@ -493,11 +496,11 @@ li.active a::after {
 filter modal styles
 */
 
-#filter-modal .modal-content {
+.modal-content {
   overflow: hidden;
   border-radius: 12px;
 }
-#filter-modal .close-modal {
+.close-modal {
   font-size: 20px;
 
   color: #777;
@@ -511,7 +514,7 @@ filter modal styles
   top: 0;
 }
 
-#filter-modal .modal-title {
+.modal-title {
   font-size: 16px;
 
   font-weight: 800;
@@ -521,11 +524,11 @@ filter modal styles
   text-align: center;
 }
 
-#filter-modal .modal-header {
+.modal-header {
   padding: 9px 15px 10px;
 }
 
-#filter-modal .modal-body {
+.modal-body {
   padding: 0 15px;
 }
 .form-check-wrapper button {
@@ -615,6 +618,12 @@ end filter modal styles
     float: right;
 
     width: 100%;
+  }
+  .main_popup_content > div {
+    padding: 0;
+  }
+  .main_popup_content {
+    padding: 0;
   }
 }
 
@@ -793,10 +802,14 @@ end filter modal styles
         aria-labelledby="searchFilter"
       >
         <div class="modal-dialog">
-          <a href="#" class="close-dialog-popup" data-dismiss="modal">
-            <i class="fa fa-times"></i>
-          </a>
-
+          <div class="modal-header">
+            <a href="#" class="close-modal" data-dismiss="modal">
+              <i class="fa fa-times"></i>
+            </a>
+            <div class="modal-title">
+              <span> دسته ها و فیلتر </span>
+            </div>
+          </div>
           <div class="main_popup_content">
             <div class="col-xs-12">
               <div class="filter-mobile-sidebar">

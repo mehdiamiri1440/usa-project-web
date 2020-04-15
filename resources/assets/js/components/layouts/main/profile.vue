@@ -320,7 +320,7 @@
   padding: 4px 0;
 }
 
-.back_page .btn.btn-copy {
+.btn.btn-copy {
   width: 100%;
 }
 
@@ -794,15 +794,15 @@ p.response-rate span {
                     ></div>
                   </div>
 
-                  <a
+                  <button
                     v-else
                     href="#"
-                    class="green-button"
+                    class="btn btn-copy"
                     @click.prevent="copyProfileLinkToClipBoard"
                   >
                     <i class="fab fa-whatsapp"></i>
                     اشتراک در واتس آپ
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
