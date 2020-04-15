@@ -171,6 +171,10 @@ class product_list_controller extends Controller
         if($request->has('search_text')){
             $this->apply_search_text_filter($products,$request->search_text);
         }
+
+        if($request->has('special_products')){
+            $this->apply_special_products_filter($products,$request->special_products);
+        }
     }
 
     public function get_all_products_with_related_media()
@@ -616,6 +620,15 @@ class product_list_controller extends Controller
             return true;
         } else {
             return false;
+        }
+    }
+
+    protected function apply_special_products_filter(&$products,$special_products)
+    {
+        if($special_products == true){
+            $products = array_filter($products,function($product){
+                return $product['user_info']->active_pakage_type == 3;
+            });
         }
     }
 

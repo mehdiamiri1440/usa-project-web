@@ -863,7 +863,7 @@ end filter modal styles
                     class="default-button-list"
                     :class="{ active: sortOption == 'RD' }"
                   >
-                    جدید ترین ها
+                    جدیدترین ها
                   </button>
                   <i class="fa fa-angle-left"></i>
                 </li>
@@ -947,7 +947,7 @@ end filter modal styles
                     @click="setSortOption('RD')"
                     :class="{ 'text-green': sortOption == 'RD' }"
                   >
-                    جدید ترین ها
+                    جدیدترین ها
                   </button>
                 </li>
               </ul>
@@ -1526,6 +1526,8 @@ export default {
     setSortOption: function (sortOption) {
       $("#filter-modal").modal("hide");
       if (this.sortOption != sortOption) {
+        this.registerComponentStatistics('product-category','apply-sort',sortOption);
+
         this.sortOption = sortOption;
         this.init();
       }

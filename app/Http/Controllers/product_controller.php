@@ -220,27 +220,64 @@ class product_controller extends Controller
                         ->get();
         }
 
+        $main_records = $this->product_info_sent_by_product_array;
+        array_walk($main_records,function(&$property_name){
+            $new_value = explode('.',$property_name)[1];
+            $new_value_array = explode(' as ',$new_value);
+            $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
+        });
+        
+        $user_records = $this->user_info_sent_by_product_array;
+        array_walk($user_records,function(&$property_name){
+            $new_value = explode('.',$property_name)[1];
+            $new_value_array = explode(' as ',$new_value);
+            $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
+        });
+
+        $profile_records = $this->profile_info_sent_by_product_array;
+        array_walk($profile_records,function(&$property_name){
+            $new_value = explode('.',$property_name)[1];
+            $new_value_array = explode(' as ',$new_value);
+            $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
+        });
+
         $result_products = array();
 
         foreach ($products as $product) {
             $temp = array();
-            $product_related_photos = $product->product_media()
+            $product_related_photos = product_media::where('product_id',$product->id)
                 ->select('file_path')
                 ->get();
 
-            $product_related_data['main'] = $this->get_product_related_data($product->id);
+            $product_related_data_tmp = $this->get_product_related_data($product->id);
 
-            $product_related_user_info = myuser::where('id', $product->myuser_id)
-                ->get($this->user_info_sent_by_product_array)
-                ->first();
+            $product_related_data['main'] = new \StdClass;
+            foreach($main_records as $property_name)
+            {
+                if($property_name == 'product_id'){
+                    $product_related_data['main']->id = $product_related_data_tmp->$property_name;
+                }
+                else{
+                    $product_related_data['main']->$property_name = $product_related_data_tmp->$property_name;
+                }
+            }
 
-            $product_related_profile_info = profile::where('myuser_id', $product->myuser_id)
-                ->where('confirmed', true)
-                ->get($this->profile_info_sent_by_product_array)
-                ->last();
+            $product_related_data['user_info'] = new \StdClass;
+            foreach($user_records as $property_name)
+            {
+                if($property_name == 'user_id'){
+                    $product_related_data['user_info']->id = $product_related_data_tmp->$property_name;
+                }   
+                else{
+                    $product_related_data['user_info']->$property_name = $product_related_data_tmp->$property_name;
+                }
+            }
 
-            $product_related_data['user_info'] = $product_related_user_info;
-            $product_related_data['profile_info'] = $product_related_profile_info;
+            $product_related_data['profile_info'] = new \StdClass;
+            foreach($profile_records as $property_name)
+            {
+                $product_related_data['profile_info']->$property_name = $product_related_data_tmp->$property_name;
+            }
 
             $product_related_data['photos'] = $product_related_photos;
 
@@ -487,6 +524,8 @@ class product_controller extends Controller
         }
 
         $product_related_data['user_info']->response_rate = $this->get_user_response_info($product->myuser_id)['response_rate'];
+
+        $product_related_data['photos'] = $product_related_photos;
 
         $product_parent_category_data = $product->category;
         $product_related_data['main']->category_id = $product_parent_category_data['parent_id'];

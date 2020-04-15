@@ -324,8 +324,7 @@ export default {
     setScroll: function() {
       localStorage.setItem("scrollIndex", this.$props.productIndex);
   
-      if(this.isDeviceMobile()){
-        // let productRoute = this.$router.resolve(this.$parent.productUrl);
+      if(this.isDeviceMobile() && window.location.pathname.includes('product-list')){
         window.open(this.$parent.productUrl, '_blank');
       }
       else{
