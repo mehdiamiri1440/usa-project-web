@@ -1,7 +1,7 @@
 <style>
- .content-sidebar {
-        text-align: right;
- }
+.content-sidebar {
+  text-align: right;
+}
 .box-sidebar {
   text-align: center;
   direction: rtl;
@@ -22,7 +22,8 @@ hr {
   text-align: center;
 }
 
-.sidebar-buttons a, .sidebar-buttons button{
+.sidebar-buttons a,
+.sidebar-buttons button {
   width: initial;
 
   border: none;
@@ -36,8 +37,11 @@ hr {
 
 .box-sidebar select {
   border-radius: 3px;
+
   border: 1px solid #4c5058;
-  width: 80%;
+
+  width: calc(100% - 94px);
+
   padding: 5px 15px;
 }
 .sidebar-buttons {
@@ -63,11 +67,23 @@ hr {
   padding: 25px;
 }
 
-@media screen and (max-width: 992px) {
-  .sidebar-buttons a, .sidebar-buttons button{
+.box-sidebar i {
+  width: 20px;
+}
+
+@media screen and (max-width: 1199px) {
+  .sidebar-buttons a,
+  .sidebar-buttons button {
     width: 150px;
     border: none;
     padding: 9px 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .content-sidebar {
+    margin: 0 auto;
+    box-shadow: none;
+    margin-top: -60px;
   }
 }
 </style>
@@ -97,40 +113,48 @@ hr {
         <i class="fa-home fa"></i>
         <select v-on:change="setCityFilter($event)">
           <option disabled selected>شهر</option>
-          <option v-for="city in cityList" v-bind:value="city.id">{{city.city_name}}</option>
+          <option v-for="city in cityList" v-bind:value="city.id">{{
+            city.city_name
+          }}</option>
         </select>
       </div>
       <div class="sidebar-buttons">
-        <button class="btn green-button hidden-md hidden-lg" data-dismiss="modal">جستجو</button>
+        <button class="btn green-button hidden-lg" data-dismiss="modal">
+          جستجو
+        </button>
 
         <a
           href="#"
           @click.prevent="$parent.resetFilterChild()"
           data-dismiss="modal"
           class="btn red-button"
-        >حذف فیلتر ها</a>
+          >حذف فیلتر ها</a
+        >
       </div>
     </div>
 
     <div v-else class="content-sidebar">
-        <div class="title-widget">
-          <span class="placeholder-content content-half-width"></span>
-          <hr />
-        </div>
-        <div class="category-products-widget-default">
-          <ul>
-            <li>
-              <span class="placeholder-content default-boxing-size content-full-width"></span>
-              <span class="placeholder-content default-boxing-size content-full-width"></span>
-              <div class="text-center">
-                <span class="placeholder-content default-button"></span>
-              </div>
-            </li>
-          </ul>
-        </div>
+      <div class="title-widget">
+        <span class="placeholder-content content-half-width"></span>
+        <hr />
+      </div>
+      <div class="category-products-widget-default">
+        <ul>
+          <li>
+            <span
+              class="placeholder-content default-boxing-size content-full-width"
+            ></span>
+            <span
+              class="placeholder-content default-boxing-size content-full-width"
+            ></span>
+            <div class="text-center">
+              <span class="placeholder-content default-button"></span>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
-
-   </div>
+  </div>
 </template>
 
 <script>
@@ -139,16 +163,16 @@ export default {
     return {
       provinceList: "",
       cityList: "",
-      fontIsLoad: false
+      fontIsLoad: false,
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       axios
         .post("/location/get_location_info")
-        .then(response => (this.provinceList = response.data.provinces));
+        .then((response) => (this.provinceList = response.data.provinces));
     },
-    setProvinceFilter: function(e) {
+    setProvinceFilter: function (e) {
       e.preventDefault();
       var provinceId = $(e.target).val();
 
@@ -162,11 +186,11 @@ export default {
 
       axios
         .post("/location/get_location_info", {
-          province_id: provinceId
+          province_id: provinceId,
         })
-        .then(response => (this.cityList = response.data.cities));
+        .then((response) => (this.cityList = response.data.cities));
     },
-    setCityFilter: function(e) {
+    setCityFilter: function (e) {
       e.preventDefault();
       var cityId = $(e.target).val();
 
@@ -180,11 +204,11 @@ export default {
 
       axios
         .post("/location/get_location_info", {
-          province_id: provinceId
+          province_id: provinceId,
         })
-        .then(response => (this.cityList = response.data.cities));
+        .then((response) => (this.cityList = response.data.cities));
     },
-    setCityFilter: function(e) {
+    setCityFilter: function (e) {
       e.preventDefault();
       var cityId = $(e.target).val();
 
@@ -194,19 +218,23 @@ export default {
       this.$parent.setCityFilterChild();
       this.loading = false;
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
-    }
+    },
   },
   mounted() {
     this.init();
     var self = this;
     // this.$parent.scrollSet();
-    document.fonts.ready.then(function() {
-      setTimeout(function() {
+    document.fonts.ready.then(function () {
+      setTimeout(function () {
         self.fontIsLoad = true;
       }, 500);
     });
@@ -215,11 +243,11 @@ export default {
     this.init();
     var self = this;
     // this.$parent.scrollSet();
-    document.fonts.ready.then(function() {
-      setTimeout(function() {
+    document.fonts.ready.then(function () {
+      setTimeout(function () {
         self.fontIsLoad = true;
       }, 500);
     });
-  }
+  },
 };
 </script>

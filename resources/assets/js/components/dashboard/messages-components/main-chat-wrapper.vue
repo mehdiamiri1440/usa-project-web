@@ -94,6 +94,11 @@
   float: right;
   display: block;
   padding-top: 9px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  height: 30px;
+  overflow: hidden;
+  width: 135px;
 }
 
 .back-state {
