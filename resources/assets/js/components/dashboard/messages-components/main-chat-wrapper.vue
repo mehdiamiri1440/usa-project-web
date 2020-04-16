@@ -158,6 +158,10 @@
   max-width: 455px;
   padding: 5px 10px;
 }
+.message-content-wrapper > span:first-of-type {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
 .message-wrapper .chat-page .message-receive {
   float: left;
   background: #f7f7f7;
@@ -190,10 +194,27 @@
   width: calc(100% - 60px);
 }
 
-.send-message-form .message-input input {
+/* .send-message-form .message-input input {
   border-radius: 50px;
   background: #fff;
   border: none;
+} */
+
+.send-message-form .message-input textarea {
+  border-radius: 25px;
+  background: #fff;
+  border: none;
+  max-width: 100%;
+  min-width: 100%;
+  max-height: 98px;
+  min-height: 50px;
+  height: 50px;
+  box-sizing: border-box;
+  resize: none;
+  -webkit-transition: height 0.1s;
+  -moz-transition: height 0.1s;
+  transition: height 0.1s;
+  padding: 9px 15px;
 }
 
 .button-wrapper {
@@ -324,12 +345,20 @@
       </div>
       <div class="send-message-form">
         <form>
-          <div class="message-input">
+          <!-- <div class="message-input">
             <input
               type="text"
               placeholder="پیغامی بگذارید "
               v-model="$parent.msgToSend"
             />
+          </div> -->
+
+          <div class="message-input">
+            <textarea
+              class="txta"
+              placeholder="پیغامی بگذارید "
+              v-model="$parent.msgToSend"
+            ></textarea>
           </div>
 
           <div class="button-wrapper">
@@ -363,9 +392,97 @@
 <script>
 export default {
   methods: {
+    init: function () {
+      var self = this;
+      this.textareaAutoSize();
+      $("textarea").keydown(function (event) {
+        if ($(this).val().length === 0 && event.keyCode == 13) {
+          event.preventDefault();
+        }
+      });
+      $("textarea").keyup(function (event) {
+        if ($(this).val().length === 0 && event.keyCode == 13) {
+          event.preventDefault();
+        } else {
+          if (event.keyCode == 13 && event.shiftKey) {
+          } else if (event.keyCode == 13) {
+            console.log("send");
+
+            self.$parent.sendMessage();
+            $("textarea").css("height", "50px");
+          }
+        }
+      });
+    },
+    textareaAutoSize: function () {
+      let textareas = document.querySelectorAll(".txta"),
+        hiddenDiv = document.createElement("div"),
+        content = null;
+
+      // Adds a class to all textareas
+      for (let j of textareas) {
+        j.classList.add("txtstuff");
+      }
+
+      // Build the hidden div's attributes
+
+      // The line below is needed if you move the style lines to CSS
+      // hiddenDiv.classList.add('hiddendiv');
+
+      // Add the "txta" styles, which are common to both textarea and hiddendiv
+      // If you want, you can remove those from CSS and add them via JS
+      hiddenDiv.classList.add("txta");
+
+      // Add the styles for the hidden div
+      // These can be in the CSS, just remove these three lines and uncomment the CSS
+      hiddenDiv.style.display = "none";
+      hiddenDiv.style.whiteSpace = "pre-wrap";
+      hiddenDiv.style.wordWrap = "break-word";
+      hiddenDiv.style.lineHeight = "1.618";
+
+      // Loop through all the textareas and add the event listener
+      for (let i of textareas) {
+        (function (i) {
+          // Note: Use 'keyup' instead of 'input'
+          // if you want older IE support
+          i.addEventListener("input", function () {
+            // Append hiddendiv to parent of textarea, so the size is correct
+            i.parentNode.appendChild(hiddenDiv);
+
+            // Remove this if you want the user to be able to resize it in modern browsers
+            i.style.resize = "none";
+
+            // This removes scrollbars
+            i.style.overflow = "hidden";
+
+            // Every input/change, grab the content
+            content = i.value;
+
+            // Add the same content to the hidden div
+
+            // This is for old IE
+            content = content.replace(/\n/g, "<br>");
+
+            // The <br ..> part is for old IE
+            // This also fixes the jumpy way the textarea grows if line-height isn't included
+            hiddenDiv.innerHTML = content + "<br/>";
+
+            // Briefly make the hidden div block but invisible
+            // This is in order to read the height
+            hiddenDiv.style.visibility = "hidden";
+            hiddenDiv.style.display = "block";
+            i.style.height = hiddenDiv.offsetHeight + 27 + "px";
+
+            // Make the hidden div display:none again
+            hiddenDiv.style.visibility = "visible";
+            hiddenDiv.style.display = "none";
+          });
+        })(i);
+      }
+    },
     checkMessageName: function (index, prevIndex) {
       var isMessageName = false;
-      
+
       if (this.$parent.chatMessages[prevIndex] && prevIndex >= 0) {
         if (
           this.$parent.chatMessages[index].sender_id !=
@@ -379,6 +496,9 @@ export default {
 
       return isMessageName;
     },
+  },
+  mounted: function () {
+    this.init();
   },
 };
 </script>
