@@ -506,7 +506,7 @@ export default {
     getProductFormFields: function() {
       let formData = new FormData();
       let cnt = this.productFields.length;
-      console.log("here---->>", this.productFields);
+      
       for (var i = 0; i < cnt; i++) {
         formData.append(
           this.productFields[i],

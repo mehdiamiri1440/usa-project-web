@@ -645,7 +645,6 @@ export default {
                       window.location.href = "/buyer/messenger/contacts"
                   }
                   else{
-                      console.log('test');
                       window.location.href = "/buyer/register-request";
                   }
               })

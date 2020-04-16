@@ -240,11 +240,8 @@ export default {
 
     if (messaging) {
       messaging.onMessage(function (payload) {
-        // console.log('route: ',payload.notification.tag);
         if (payload.notification.tag == "buskool") {
-          // console.log('contactId:',self.activeContactId);
           if (!self.activeContactId) {
-            // console.log('upMessage');
             eventBus.$emit("messageCount", 1);
           }
           eventBus.$emit("contanctMessageReceived", true);

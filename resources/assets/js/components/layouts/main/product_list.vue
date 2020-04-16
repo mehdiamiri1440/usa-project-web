@@ -756,7 +756,7 @@ end filter modal styles
       >
         <div class="modal-dialog">
           <div class="modal-header">
-            <a href="#" class="close-modal" @click.prevent="reportResetData()">
+            <a href="#" class="close-modal" @click.prevent="closeFilterModal()">
               <i class="fa fa-times"></i>
             </a>
             <div class="modal-title">
@@ -792,7 +792,7 @@ end filter modal styles
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <a href="#" class="close-modal" data-dismiss="modal">
+              <a href="#" class="close-modal" @click.prevent="closeSortModal()">
                 <i class="fa fa-times"></i>
               </a>
               <div class="modal-title">
@@ -865,13 +865,13 @@ end filter modal styles
       </div>
       <div class="rate-filter-mobile-wrapper">
         <div class="rate-filter">
-          <button class="green-button bg-gray" @click.prevent="sortModal()">
+          <button class="green-button bg-gray" @click.prevent="openSortModal()">
             <i class="fas fa-sort-amount-down-alt"></i>
 
             مرتب سازی
           </button>
         </div>
-        <button class="btn-filter hidden-lg" @click.prevent="filterModal()">
+        <button class="btn-filter hidden-lg" @click.prevent="openFilterModal()">
           <i class="fa fa-filter"></i>
 
           دسته ها و فیلتر
@@ -1173,8 +1173,6 @@ export default {
       loadMoreActive: false,
       searchTextTimeout: null,
       sortOption: "BM",
-      isSortModalActive: false,
-      isFilterModalActive: false,
     };
   },
   methods: {
@@ -1201,8 +1199,6 @@ export default {
     init: function () {
       //              return new Promise((resolve,reject)=>{
       var self = this;
-
-      self.handleBackBtnClickOnDevices();
 
       this.scrollToTop();
       if (this.$route.query.s) {
@@ -1476,6 +1472,10 @@ export default {
     },
     setSortOption: function (sortOption) {
       $("#filter-modal").modal("hide");
+      if(this.isDeviceMobile()){
+        history.go(-1);
+      }
+
       if (this.sortOption != sortOption) {
         this.registerComponentStatistics(
           "product-list",
@@ -1485,6 +1485,21 @@ export default {
 
         this.sortOption = sortOption;
         this.applyFilter();
+      }
+    },
+    isDeviceMobile: function () {
+      if (
+        navigator.userAgent.match(/Android/i) ||
+        navigator.userAgent.match(/webOS/i) ||
+        navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/iPod/i) ||
+        navigator.userAgent.match(/BlackBerry/i) ||
+        navigator.userAgent.match(/Windows Phone/i)
+      ) {
+        return true;
+      } else {
+        return false;
       }
     },
     scrollToTop() {
@@ -1533,38 +1548,33 @@ export default {
         }
       };
     },
-    reportResetData: function () {
-      $(".modal").modal("hide");
-      this.isFilterModalActive = false;
-      this.isSortModalActive = false;
-    },
-    handleBackBtnClickOnDevices: function () {
-      var self = this;
-      //   console.log(
-      //     window.history.state &&
-      //       !this.isFilterModalActive &&
-      //       !this.isSortModalActive
-      //   );
-      if (
-        window.history.state &&
-        !self.isFilterModalActive &&
-        !self.isSortModalActive
-      ) {
+    openSortModal() {
+      $("#filter-modal").modal("show");
+
+      if (window.history.state) {
         history.pushState(null, null, window.location);
       }
       $(window).on("popstate", function (e) {
-        self.reportResetData();
-        console.log("this.isFilterModalActive", self.isFilterModalActive);
+        $("#filter-modal").modal("hide");
       });
     },
-    sortModal() {
-      $("#filter-modal").modal("show");
-      this.isSortModalActive = true;
+    closeSortModal:function(){
+      $("#filter-modal").modal("hide");
+      history.go(-1);
     },
-    filterModal() {
+    openFilterModal() {
       $("#searchFilter").modal("show");
-      this.isFilterModalActive = true;
-      console.log("this.isFilterModalActive", this.isFilterModalActive);
+      
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $("#searchFilter").modal("hide");
+      });
+    },
+    closeFilterModal:function(){
+      $("#searchFilter").modal("hide");
+      history.go(-1);
     },
     sidebarScroll() {
       var $sticky = $(".sticky");

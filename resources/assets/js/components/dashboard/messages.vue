@@ -655,7 +655,7 @@ export default {
       messaging
         .requestPermission()
         .then(function () {
-          // console.log("Notification permission granted.");
+          
           return messaging.getToken();
         })
         .then(function (currentToken) {

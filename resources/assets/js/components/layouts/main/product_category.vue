@@ -803,7 +803,7 @@ end filter modal styles
       >
         <div class="modal-dialog">
           <div class="modal-header">
-            <a href="#" class="close-modal" data-dismiss="modal">
+            <a href="#" class="close-modal" @clcik.prevent="closeFilterModal()">
               <i class="fa fa-times"></i>
             </a>
             <div class="modal-title">
@@ -838,7 +838,7 @@ end filter modal styles
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <a href="#" class="close-modal" data-dismiss="modal">
+              <a href="#" class="close-modal" @click.prevent="closeSortModal()">
                 <i class="fa fa-times"></i>
               </a>
               <div class="modal-title">
@@ -911,21 +911,13 @@ end filter modal styles
       </div>
       <div class="rate-filter-mobile-wrapper">
         <div class="rate-filter">
-          <button
-            class="green-button bg-gray"
-            data-toggle="modal"
-            data-target="#filter-modal"
-          >
+          <button class="green-button bg-gray" @click.prevent="openSortModal()">
             <i class="fas fa-sort-amount-down-alt"></i>
 
             مرتب سازی
           </button>
         </div>
-        <button
-          class="btn-filter hidden-lg"
-          data-toggle="modal"
-          data-target="#searchFilter"
-        >
+        <button class="btn-filter hidden-lg" @click.prevent="openFilterModal()" >
           <i class="fa fa-filter"></i>
 
           دسته ها و فیلتر
@@ -1538,11 +1530,30 @@ export default {
     },
     setSortOption: function (sortOption) {
       $("#filter-modal").modal("hide");
+      if(this.isDeviceMobile()){
+        history.go(-1);
+      }
+
       if (this.sortOption != sortOption) {
         this.registerComponentStatistics('product-category','apply-sort',sortOption);
 
         this.sortOption = sortOption;
         this.init();
+      }
+    },
+    isDeviceMobile: function () {
+      if (
+        navigator.userAgent.match(/Android/i) ||
+        navigator.userAgent.match(/webOS/i) ||
+        navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/iPod/i) ||
+        navigator.userAgent.match(/BlackBerry/i) ||
+        navigator.userAgent.match(/Windows Phone/i)
+      ) {
+        return true;
+      } else {
+        return false;
       }
     },
     scrollToTop() {
@@ -1602,6 +1613,34 @@ export default {
           }
         }
       };
+    },
+    openSortModal() {
+      $("#filter-modal").modal("show");
+
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $("#filter-modal").modal("hide");
+      });
+    },
+    closeSortModal:function(){
+      $("#filter-modal").modal("hide");
+      history.go(-1);
+    },
+    openFilterModal() {
+      $("#searchFilter").modal("show");
+      
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $("#searchFilter").modal("hide");
+      });
+    },
+    closeFilterModal:function(){
+      $("#searchFilter").modal("hide");
+      history.go(-1);
     },
     createJsonLDObject: function () {
       var fullName =

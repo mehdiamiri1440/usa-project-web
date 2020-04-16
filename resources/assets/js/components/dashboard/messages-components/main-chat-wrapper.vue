@@ -365,7 +365,7 @@ export default {
   methods: {
     checkMessageName: function (index, prevIndex) {
       var isMessageName = false;
-      console.log(this.$parent.chatMessages);
+      
       if (this.$parent.chatMessages[prevIndex] && prevIndex >= 0) {
         if (
           this.$parent.chatMessages[index].sender_id !=
