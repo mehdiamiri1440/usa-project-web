@@ -383,24 +383,28 @@ class product_list_controller extends Controller
         $user_response_info['created_at'] = myuser::find($user_id)->created_at;
 
         usort($products,function($item1,$item2) use($user_response_info){
-            $a = $item1['main']->is_elevated ? 1 : $this->get_users_similarity($item1['user_info'],$user_response_info);
-            $b = $item2['main']->is_elevated ? 1 : $this->get_users_similarity($item2['user_info'],$user_response_info);
+            $a = $item1['main']->is_elevated ;
+            $b = $item2['main']->is_elevated ;
 
             if($a == $b){
-                $c = $item1['user_info']->ums;
-                $d = $item2['user_info']->ums;
-
+                $c = $this->get_users_similarity($item1['user_info'],$user_response_info);
+                $d = $this->get_users_similarity($item2['user_info'],$user_response_info);
                 if($c == $d){
-                    $e = $item1['user_info']->active_pakage_type;
-                    $f = $item2['user_info']->active_pakage_type;
+                    $d = $item1['user_info']->ums;
+                    $e = $item2['user_info']->ums;
 
-                    if($e == $f){
-                        return $item1['main']->updated_at < $item2['main']->updated_at;
+                    if($d == $e){
+                        $f = $item1['user_info']->active_pakage_type;
+                        $g = $item2['user_info']->active_pakage_type;
+
+                        if($f == $g){
+                            return $item1['main']->updated_at < $item2['main']->updated_at;
+                        }
+                        return ($d > $e) ? 1 : -1;
                     }
-                    return ($e > $f) ? 1 : -1;
                 }
 
-                return ($c > $d) ? 1 : -1;
+                return ($c < $d) ? 1 : -1;
             }
 
             return ($a < $b) ? 1 : -1;
