@@ -35,7 +35,7 @@ class report_controller extends Controller
                                 ])->first();
 
         if($report_record){
-            $report_record->option_id = $report_record->option_id;
+            $report_record->option_id = $request->option_id;
 
             if($request->has('description')){
                 $report_record->description = $request->description;
