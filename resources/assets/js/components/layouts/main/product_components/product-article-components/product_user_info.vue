@@ -103,10 +103,10 @@ i {
 
 .user-action-link.default {
   padding-top: 9px;
-
 }
 
-.user-information-contents p, a.user-name-link {
+.user-information-contents p,
+a.user-name-link {
   max-width: 120px;
 
   overflow: hidden;
@@ -126,34 +126,31 @@ i {
   text-overflow: ellipsis;
 }
 
-.user-information-content.default{
+.user-information-content.default {
   padding-top: 5px;
 }
-    
+
 .user-image img,
 .user-image > div {
   height: 100%;
 }
 
-p.response-rate{
-
-  font-size : 10px;
+p.response-rate {
+  font-size: 10px;
   height: 21px;
   padding: 0;
-
 }
-.response-rate span{
+.response-rate span {
   color: #e41c38;
 }
 
 @media screen and (max-width: 400px) {
-  .user-information-contents p, a.user-name-link {
+  .user-information-contents p,
+  a.user-name-link {
     max-width: 100px;
-
-  } 
+  }
   .user-information-contents p.response-rate {
     max-width: 115px;
-
   }
   .user-action-link {
     padding-right: 3px;
@@ -161,15 +158,13 @@ p.response-rate{
 }
 
 @media screen and (max-width: 370px) {
-  .article-action-buttons button{
+  .article-action-buttons button {
     margin-top: 7px;
-    width: 100%; 
+    width: 100%;
   }
 
   .article-action-buttons {
-    float: none !important;
-
-    width: 100%;
+    display: none !important;
   }
 }
 </style>
@@ -189,14 +184,26 @@ p.response-rate{
         </div>
 
         <div v-if="user_info.response_rate" class="user-information-content">
-          <router-link class="user-name-link" :to="'/profile/'+ user_name"  v-if="user_info" v-text="user_full_name"></router-link>
+          <router-link
+            class="user-name-link"
+            :to="'/profile/'+ user_name"
+            v-if="user_info"
+            v-text="user_full_name"
+          ></router-link>
 
-          <p v-if="user_info" class="response-rate" > احتمال پاسخ گویی <span v-text="'%' + user_info.response_rate"></span></p>
-
+          <p v-if="user_info" class="response-rate">
+            احتمال پاسخ گویی
+            <span v-text="'%' + user_info.response_rate"></span>
+          </p>
         </div>
 
         <div v-else class="user-information-content default">
-            <router-link class="user-name-link" :to="'/profile/'+ user_name"  v-if="user_info" v-text="user_full_name"></router-link>
+          <router-link
+            class="user-name-link"
+            :to="'/profile/'+ user_name"
+            v-if="user_info"
+            v-text="user_full_name"
+          ></router-link>
         </div>
       </router-link>
 
@@ -214,7 +221,6 @@ p.response-rate{
         :class="{'default' : !user_info.response_rate}"
         class="user-action-link red-text"
       >حذف محصول</a>
-        
     </div>
     <div class="article-action-buttons">
       <button
@@ -236,28 +242,6 @@ p.response-rate{
         ویرایش
       </button>
     </div>
-    <!--   <p v-if="user_info" v-text="user_full_name"></p>
-
-
-              <div v-if="!is_my_profile_status" class="create_buy  ">
-                  <a :href=" '/profile/'+ user_name" class="green-button"
-                     @click="registerComponentStatistics('product','showUserProfile','show profile')">
-                      مشاهده پروفایل
-                  </a>
-                  <a class="green-button hidden-xs" href="#" @click.prevent="openChat()">
-                      <span class="fas fa-comment-alt"></span> استعلام قیمت
-                  </a>
-              </div>
-
-              <div v-else class="create_buy">
-                  <a href="" class="green-button delete-product"
-                     @click.prevent="deleteProduct()"> <span class="fa fa-trash"></span> حذف </a>
-
-                  <a class="green-button edit-product hidden-xs" href="#" @click.prevent="$parent.openEditBox($event)">
-                      <span class="fa fa-pencil-alt"></span> ویرایش
-                  </a>
-    </div>-->
-    <!--</div>-->
   </div>
 </template>
 
@@ -303,16 +287,16 @@ export default {
 
       if (this.current_user.user_info) {
         if (this.current_user.user_info.id !== this.user_info.id) {
-            eventBus.$emit("ChatInfo",contact);
+          eventBus.$emit("ChatInfo", contact);
         } else {
           this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
           eventBus.$emit("submitSuccess", this.popUpMsg);
           $("#custom-main-modal").modal("show");
         }
       } else {
-        window.localStorage.setItem('contact',JSON.stringify(contact));
-        window.localStorage.setItem('pathname',window.location.pathname);
-        
+        window.localStorage.setItem("contact", JSON.stringify(contact));
+        window.localStorage.setItem("pathname", window.location.pathname);
+
         this.popUpMsg =
           "اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.";
         eventBus.$emit("submitSuccess", this.popUpMsg);

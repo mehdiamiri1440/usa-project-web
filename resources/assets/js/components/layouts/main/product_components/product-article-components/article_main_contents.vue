@@ -4,19 +4,18 @@ body {
 }
 </style>
 <style scoped>
-.main-article-contents p a, span {
+.main-article-contents p a,
+span {
   color: #777;
 }
 
-.main-article-contents h3 a{
- color: #474747;
+.main-article-contents h3 a {
+  color: #474747;
 }
 .main-article-contents h3 {
   font-size: 16px;
 
   font-weight: bold;
-
- 
 
   max-width: 240px;
 
@@ -34,7 +33,6 @@ body {
 }
 
 .main-article-contents-wrapper {
-  padding: 15px;
   overflow: hidden;
   display: block;
 }
@@ -42,13 +40,18 @@ body {
 .main-article-contents-image-wrapper,
 .main-article-contents {
   float: right;
+
+  padding: 15px;
+
+  padding-left: 0;
 }
 
 .main-article-contents {
   float: right;
-  width: calc(100% - 140px);
-  padding-right: 10px;
+  width: calc(100% - 155px);
   position: relative;
+  padding: 15px;
+  padding-right: 10px;
 }
 
 .main-article-contents > a {
@@ -121,14 +124,13 @@ body {
   bottom: -14px;
 }
 
-.is-user-valid-content {
+/* .is-user-valid-content {
   padding: 15px;
-}
+} */
 
 .text-danger {
   height: 24px;
 }
-
 
 @media screen and (max-width: 767px) {
   .main-article-contents a p {
@@ -164,27 +166,44 @@ body {
     display: none;
   }
 
+  .main-article-contents-image-wrapper,
+  .main-article-contents {
+    padding-right: 10px;
+  }
+
   .main-article-contents {
     float: right;
-    width: calc(100% - 90px);
+
+    width: calc(100% - 100px);
+
     padding-right: 10px;
+
     position: relative;
   }
 }
 
 @media screen and (max-width: 370px) {
-  .main-article-contents-image-wrapper,
-  .main-article-contents,
-  .main-article-contents > a {
-    float: initial;
+  .product-description {
+    display: none;
   }
 
+  .main-article-contents-image-wrapper,
   .main-article-contents {
-    width: 100%;
-    padding: 15px 0 0;
+    padding-bottom: 0;
   }
-  .valid-user-badge {
-    top: 15px;
+
+  .article-action-buttons {
+    padding: 15px;
+  }
+  .article-action-buttons button {
+    width: 100%;
+    margin: 0;
+    padding: 6px;
+  }
+}
+@media screen and (min-width: 370px) {
+  .article-action-buttons {
+    display: none;
   }
 }
 .pointer-class {
@@ -194,10 +213,9 @@ body {
 <template>
   <div
     class="main-article-contents-wrapper pointer-class"
-    @click="setScroll()"
     :class="{ 'is-user-valid-content': $parent.product.user_info.active_pakage_type != 3 }"
   >
-    <div class="main-article-contents-image-wrapper">
+    <div class="main-article-contents-image-wrapper" @click="setScroll()">
       <ProductImage
         :base="$parent.str + '/'"
         :img="$parent.product.photos[0].file_path"
@@ -212,7 +230,7 @@ body {
         :product-url="this.$parent.productUrl"
       />
     </div>
-    <div class="main-article-contents">
+    <div class="main-article-contents" @click="setScroll()">
       <div class="valid-user-badge" v-if="$parent.product.user_info.active_pakage_type == 3">
         <div class="wrapper-icon">
           <svg width="24.965" height="30.574" viewBox="0 0 24.965 30.574">
@@ -245,14 +263,13 @@ body {
         </div>
       </div>
       <div>
-
         <h3 class="article-title">
-
-        <router-link :to="this.$parent.productUrl"  v-html="getProductName()" :target="getProductLinkTarget()">
-         
-        </router-link>
+          <router-link
+            :to="this.$parent.productUrl"
+            v-html="getProductName()"
+            :target="getProductLinkTarget()"
+          ></router-link>
         </h3>
-        
 
         <p>
           استان / شهر:
@@ -261,43 +278,30 @@ body {
                             ' - ' +
                              $parent.product.main.city_name"
           ></span>
-          
         </p>
 
-       <p v-if="$parent.product.main.description">
-                   توضیحات
-           
-          <router-link v-if="$parent.product.main.description<100"  :to="this.$parent.productUrl" v-html="$parent.product.main.description" :target="getProductLinkTarget()">
-          </router-link>
+        <p v-if="$parent.product.main.description" class="product-description">
+          توضیحات
+          <router-link
+            v-if="$parent.product.main.description<100"
+            :to="this.$parent.productUrl"
+            v-html="$parent.product.main.description"
+            :target="getProductLinkTarget()"
+          ></router-link>
 
-          <router-link  v-else :to="this.$parent.productUrl" v-html="$parent.product.main.description.substring(0,100)" :target="getProductLinkTarget()">
-          </router-link>
-       </p>
-        <!--
-                <p >
-                    حداقل سفارش:
+          <router-link
+            v-else
+            :to="this.$parent.productUrl"
+            v-html="$parent.product.main.description.substring(0,100)"
+            :target="getProductLinkTarget()"
+          ></router-link>
+        </p>
 
-                    <span v-text="$parent.product.main.min_sale_amount"> </span>
-
-                    <span>کیلوگرم</span>
-        </p>-->
         <p>
           مقدار موجودی:
           <span v-text="$parent.product.main.stock + ' کیلوگرم'"></span>
         </p>
-
-        <!-- <p v-if="!$parent.isMyProfile">قیمت:
-                    <a href="#" @click.prevent="$parent.openChat($parent.product)">استعلام بگیرید</a>
-                     <span v-text="product.main.min_sale_price +
-                       ' - ' +
-                       product.main.max_sale_price"
-                      >
-                      </span>
-
-                      <span>تومان</span>
-        </p>-->
       </div>
-
 
       <router-link
         to="#"
@@ -308,7 +312,26 @@ body {
         <span>اشتراک گذاری</span>
       </router-link>
     </div>
+    <div class="article-action-buttons">
+      <button
+        v-if="!is_my_profile_status"
+        @click.prevent="$parent.openChat($parent.product)"
+        class="green-button"
+      >
+        <i class="fa fa-envelope"></i>
+        استعلام قیمت
+      </button>
 
+      <button
+        v-else
+        class="blue-button"
+        data-toggle="modal"
+        :data-target="'#article-modal' + $parent.product.main.id"
+      >
+        <i class="fa fa-pencil-alt"></i>
+        ویرایش
+      </button>
+    </div>
   </div>
 </template>
 
@@ -316,18 +339,20 @@ body {
 import ProductImage from "./product_image";
 
 export default {
-  props: ["productIndex"],
+  props: ["productIndex", "is_my_profile_status"],
   components: {
     ProductImage
   },
   methods: {
     setScroll: function() {
       localStorage.setItem("scrollIndex", this.$props.productIndex);
-  
-      if(this.isDeviceMobile() && window.location.pathname.includes('product-list')){
-        window.open(this.$parent.productUrl, '_blank');
-      }
-      else{
+
+      if (
+        this.isDeviceMobile() &&
+        window.location.pathname.includes("product-list")
+      ) {
+        window.open(this.$parent.productUrl, "_blank");
+      } else {
         this.$router.push(this.$parent.productUrl);
       }
       this.$parent.registerComponentStatistics(
@@ -365,29 +390,28 @@ export default {
 
       return productName;
     },
-    isDeviceMobile: function () {
-        if (
-            navigator.userAgent.match(/Android/i) ||
-            navigator.userAgent.match(/webOS/i) ||
-            navigator.userAgent.match(/iPhone/i) ||
-            navigator.userAgent.match(/iPad/i) ||
-            navigator.userAgent.match(/iPod/i) ||
-            navigator.userAgent.match(/BlackBerry/i) ||
-            navigator.userAgent.match(/Windows Phone/i)
-        ) {
-            return true;
-        } else {
-            return false;
-        }
+    isDeviceMobile: function() {
+      if (
+        navigator.userAgent.match(/Android/i) ||
+        navigator.userAgent.match(/webOS/i) ||
+        navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/iPod/i) ||
+        navigator.userAgent.match(/BlackBerry/i) ||
+        navigator.userAgent.match(/Windows Phone/i)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     },
-    getProductLinkTarget: function(){
-      if(this.isDeviceMobile()){
-            return '_blank';
+    getProductLinkTarget: function() {
+      if (this.isDeviceMobile()) {
+        return "_blank";
       }
 
-      return '_self';
+      return "_self";
     }
-        
-    }
+  }
 };
 </script>
