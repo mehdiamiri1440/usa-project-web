@@ -186,13 +186,15 @@ class product_list_controller extends Controller
         foreach($products as $product)
         {
             $response_info = $this->get_user_response_info($product['user_info']->id);
-            $product['user_info']->response_time =  $response_info['response_time'];
-            $product['user_info']->response_rate = $response_info['response_rate'];
-            if($product['user_info']->active_pakage_type > 0){
-                $product['user_info']->ums = (integer) ($response_info['ums']/(Carbon::now()->diffInWeeks($product['user_info']->created_at) + 1));
+            if(Carbon::now()->diffInMonths($product['main']->updated_at) >= 3){
+                $product['user_info']->response_time =  -1;
             }
-            else if($product['main']->is_elevated){
-                $product['user_info']->ums = 0;
+            else{
+                $product['user_info']->response_time =  $response_info['response_time'];
+            }
+            $product['user_info']->response_rate = $response_info['response_rate'];
+            if($product['user_info']->active_pakage_type > 0 && $product['user_info']->response_rate > 70){
+                $product['user_info']->ums = (integer) ($response_info['ums']/(Carbon::now()->diffInWeeks($product['main']->updated_at) + 1));
             }
             else{
                 $product['user_info']->ums = $response_info['ums'];
@@ -382,36 +384,73 @@ class product_list_controller extends Controller
         $user_response_info = $this->get_user_response_info($user_id);
         $user_response_info['created_at'] = myuser::find($user_id)->created_at;
 
-        usort($products,function($item1,$item2) use($user_response_info){
-            $a = $item1['main']->is_elevated ;
-            $b = $item2['main']->is_elevated ;
+        $sorting_callback_function = $this->get_best_match_call_back_function($user_response_info);
 
-            if($a == $b){
-                $c = $this->get_users_similarity($item1['user_info'],$user_response_info);
-                $d = $this->get_users_similarity($item2['user_info'],$user_response_info);
-                if($c == $d){
-                    $d = $item1['user_info']->ums;
-                    $e = $item2['user_info']->ums;
+        usort($products,$sorting_callback_function);
 
-                    if($d == $e){
-                        $f = $item1['user_info']->active_pakage_type;
-                        $g = $item2['user_info']->active_pakage_type;
-
-                        if($f == $g){
-                            return $item1['main']->updated_at < $item2['main']->updated_at;
-                        }
-                        return ($d > $e) ? 1 : -1;
-                    }
-                }
-
-                return ($c < $d) ? 1 : -1;
-            }
-
-            return ($a < $b) ? 1 : -1;
-        });
 
         return $products;
     }
+
+    protected function get_best_match_call_back_function(&$user_response_info)
+    {
+        if($user_response_info['response_time'] == 0 && $user_response_info['response_rate'] == 100){
+
+            return function($item1,$item2) use($user_response_info){
+                $a = $item1['main']->is_elevated ;
+                $b = $item2['main']->is_elevated ;
+    
+                if($a == $b){
+                    $c = $item1['user_info']->response_time != -1 ? Carbon::now()->diffInDays($item1['main']->updated_at) : 100;
+                    $d = $item2['user_info']->response_time != -1 ? Carbon::now()->diffInDays($item2['main']->updated_at) : 100;
+                
+                    if($c == $d){
+                        $e = $item1['user_info']->active_pakage_type;
+                        $f = $item2['user_info']->active_pakage_type;
+
+                        if($e == $f){
+                            return $item1['main']->updated_at < $item2['main']->updated_at;
+                        }
+        
+                        return ($e > $f) ? 1 : -1;
+                    }
+                    return ($c > $d) ? 1 : -1;
+                }
+                return ($a < $b) ? 1 : -1;
+            };
+        }
+        else{
+            return function($item1,$item2) use($user_response_info){
+                $a = $item1['main']->is_elevated ;
+                $b = $item2['main']->is_elevated ;
+    
+                if($a == $b){
+                    $c = (Carbon::now()->diffInDays($item1['main']->updated_at) < 3) ? 1 : $this->get_users_similarity($item1['user_info'],$user_response_info);
+                    $d = (Carbon::now()->diffInDays($item2['main']->updated_at) < 3) ? 1 : $this->get_users_similarity($item2['user_info'],$user_response_info);
+    
+                    if($c == $d){
+                        $e = (((Carbon::now()->diffInDays($item1['main']->updated_at) < 2)) || ($item1['user_info']->response_time > 0 )) ? $item1['user_info']->ums : 10000;
+                        $f = (((Carbon::now()->diffInDays($item2['main']->updated_at) < 2)) || ($item2['user_info']->response_time > 0 )) ? $item2['user_info']->ums : 10000;
+    
+                        if($e == $f){
+                            $g = $item1['user_info']->active_pakage_type;
+                            $h = $item2['user_info']->active_pakage_type;
+    
+                            if($g == $h){
+                                return $item1['main']->updated_at < $item2['main']->updated_at;
+                            }
+                            return ($g > $h) ? 1 : -1;
+                        }
+                        return ($e > $f) ? 1 : -1;
+                    }
+    
+                    return ($c < $d) ? 1 : -1;
+                }
+    
+                return ($a < $b) ? 1 : -1;
+            };
+        }
+}
 
     protected function get_users_similarity($user1,$user2)
     {
@@ -675,8 +714,8 @@ class product_list_controller extends Controller
     protected function sort_products_by_response_time(&$products)
     {
         usort($products,function($item1,$item2){
-            $a = $item1['user_info']->response_time > 0 ? ($item1['user_info']->response_time + ((100 - $item1['user_info']->response_rate) * $item1['user_info']->ums)) : 10000;
-            $b = $item2['user_info']->response_time > 0 ? ($item2['user_info']->response_time + ((100 - $item2['user_info']->response_rate) * $item2['user_info']->ums)) : 10000;
+            $a = ($item1['user_info']->response_time > 0 && $item1['user_info']->response_rate > 70) ? ($item1['user_info']->response_time + ((100 - $item1['user_info']->response_rate) * $item1['user_info']->ums)) : 10000;
+            $b = ($item2['user_info']->response_time > 0 && $item2['user_info']->response_rate > 70) ? ($item2['user_info']->response_time + ((100 - $item2['user_info']->response_rate) * $item2['user_info']->ums)) : 10000;
 
             if($a == $b){
                 $c = $item1['user_info']->response_rate > 70 ? $item1['user_info']->response_rate : 0;
