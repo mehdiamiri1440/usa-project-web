@@ -396,18 +396,16 @@ export default {
       var self = this;
       this.textareaAutoSize();
       $("textarea").keydown(function (event) {
-        if ($(this).val().length === 0 && event.keyCode == 13) {
+        if (event.keyCode == 13 && $(this).val().length === 0) {
           event.preventDefault();
         }
       });
       $("textarea").keyup(function (event) {
-        if ($(this).val().length === 0 && event.keyCode == 13) {
-          event.preventDefault();
-        } else {
-          if (event.keyCode == 13 && event.shiftKey) {
-          } else if (event.keyCode == 13) {
-            console.log("send");
-
+        if(event.keyCode == 13){
+          if ($(this).val().length === 0) {
+            event.preventDefault();
+          } 
+          else if(!event.shiftKey){
             self.$parent.sendMessage();
             $("textarea").css("height", "50px");
           }
