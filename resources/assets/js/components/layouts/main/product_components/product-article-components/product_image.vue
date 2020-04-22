@@ -1,121 +1,112 @@
 <style scoped>
+/* preloader image style*/
+.lds-ring {
+  display: inline-block;
 
-    /* preloader image style*/
-    .lds-ring {
-        display: inline-block;
+  position: absolute;
 
-        position: absolute;
+  width: 64px;
 
-        width: 64px;
+  height: 64px;
 
-        height: 64px;
+  left: 50%;
 
-        left: 50%;
+  top: 50%;
 
-        top: 50%;
+  transform: translate(-50%, -50%);
+}
 
-        transform: translate(-50%, -50%);
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  margin: 6px;
+  border: 5px solid #00c569;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #00c569 transparent transparent transparent;
+}
 
-    }
+.lds-ring-alt {
+  display: block;
+  margin-top: 50px;
+  direction: rtl;
+  text-align: center;
+}
 
-    .lds-ring div {
-        box-sizing: border-box;
-        display: block;
-        position: absolute;
-        width: 51px;
-        height: 51px;
-        margin: 6px;
-        border: 5px solid #00c569;
-        border-radius: 50%;
-        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        border-color: #00c569 transparent transparent transparent;
-    }
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
 
-    .lds-ring-alt {
-        display: block;
-        margin-top: 50px;
-        direction: rtl;
-        text-align: center;
-    }
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
 
-    .lds-ring div:nth-child(1) {
-        animation-delay: -0.45s;
-    }
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
 
-    .lds-ring div:nth-child(2) {
-        animation-delay: -0.3s;
-    }
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
-    .lds-ring div:nth-child(3) {
-        animation-delay: -0.15s;
-    }
+/*preloader image style*/
+.main-article-image {
+  width: 140px;
 
-    @keyframes lds-ring {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
+  height: 140px;
 
-    /*preloader image style*/
-    .main-article-image {
+  overflow: hidden;
 
-        width: 140px;
+  position: relative;
 
-        height: 140px;
+  background: #f6f6f6;
 
-        overflow: hidden;
+  border-radius: 4px;
+}
 
-        position: relative;
+.main-article-image img {
+  width: initial;
 
-        background: #F6F6F6;
+  height: 100%;
 
-        border-radius: 4px;
+  position: relative;
 
-    }
+  transform: translate(50%, 0);
 
-    .main-article-image img {
+  right: 50%;
+}
 
-        width: initial;
+.image-count-item {
+  position: absolute;
 
-        height: 100%;
+  bottom: 0;
 
-        position: relative;
+  right: 0;
 
-        transform: translate(50%, 0);
+  background: rgba(0, 0, 0, 0.5);
 
-        right: 50%;
-    }
+  padding: 5px 9px 3px;
 
-    .image-count-item {
+  color: #fff;
+}
 
-        position: absolute;
+@media screen and (max-width: 400px) {
+  .main-article-image {
+    width: 90px;
 
-        bottom: 0;
+    height: 90px;
+  }
+}
 
-        right: 0;
-
-        background: rgba(0, 0, 0, 0.5);
-
-        padding: 5px 9px 3px;
-
-        color: #fff;
-
-    }
-
-    @media screen and (max-width: 400px) {
-        .main-article-image {
-
-            width: 90px;
-
-            height: 90px;
-
-        }
-    }
-
-    @media screen and (max-width: 370px) {
+/* @media screen and (max-width: 370px) {
         .main-article-image {
 
             width: initial;
@@ -124,54 +115,49 @@
 
         }
 
-    }
+    } */
 </style>
 
 <template>
-    <div class="main-article-image">
-          <router-link v-show="isImageLoad" :to="productUrl">
-                      <img  :src="base + '/thumbnails/' +  img" @load="ImageLoaded" :alt="alt">
+  <div class="main-article-image">
+    <router-link v-show="isImageLoad" :to="productUrl">
+      <img :src="base + '/thumbnails/' +  img" @load="ImageLoaded" :alt="alt" />
+    </router-link>
 
-          </router-link>
-
-        <div v-show="!isImageLoad" class="lds-ring">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-
-        </div>
-
-        <div v-if="imageCount" class="image-count-item">
-            <i class="fas fa-images"></i>
-            <span v-text="imageCount"></span>
-
-        </div>
+    <div v-show="!isImageLoad" class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
+
+    <div v-if="imageCount" class="image-count-item">
+      <i class="fas fa-images"></i>
+      <span v-text="imageCount"></span>
+    </div>
+  </div>
 </template>
 
 <script>
+export default {
+  data: function() {
+    return {
+      imgSrcs: "",
+      isImageLoad: false
+    };
+  },
+  props: ["img", "base", "popUpLoaded", "alt", "imageCount", "productUrl"],
 
-    export default {
-        data: function () {
-            return {
-                imgSrcs: '',
-                isImageLoad: false,
-            };
-        },
-        props: ['img', 'base', 'popUpLoaded', 'alt', 'imageCount','productUrl'],
-
-        created: function () {
-            this.loadImage();
-        },
-        methods: {
-            loadImage: function () {
-                this.isImageLoad = false;
-            },
-            ImageLoaded: function () {
-                this.isImageLoad = true;
-            }
-        }
+  created: function() {
+    this.loadImage();
+  },
+  methods: {
+    loadImage: function() {
+      this.isImageLoad = false;
+    },
+    ImageLoaded: function() {
+      this.isImageLoad = true;
     }
-
+  }
+};
 </script>
