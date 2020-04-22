@@ -611,9 +611,9 @@ class product_list_controller extends Controller
             $search_expresion .= "($text)(.*)";
         }
 
+        $product_info[] = $product['main']->sub_category_name;
         $product_info[] = $product['main']->product_name;
         $product_info[] = $product['main']->description;
-        $product_info[] = $product['main']->sub_category_name;
         $product_info[] = $product['user_info']->first_name . $product['user_info']->last_name;
 
         $result = array_filter($product_info, function ($item) use ($search_text,$search_expresion) {
@@ -623,6 +623,20 @@ class product_list_controller extends Controller
         if (sizeof($result) > 0) {
             return true;
         } else {
+            $whole_searchable_string = '';
+            $product_info[] = $product['main']->city_name;
+            $product_info[] = $product['main']->province_name;
+            
+            foreach($product_info as $text){
+                $whole_searchable_string .= " $text";
+            }
+
+            $is_there_any_match = preg_match("/$search_expresion/", $whole_searchable_string);
+
+            if($is_there_any_match !== 0 && $is_there_any_match !== false){
+                return true;
+            }
+
             return false;
         }
     }
