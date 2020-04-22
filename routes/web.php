@@ -292,6 +292,11 @@ Route::group(['middleware' => [login::class]], function () {
         'as' => 'send_message',
     ]);
 
+    Route::post('/send_reply_to_buyAd',[
+        'uses' => 'message_controller@send_reply_message_to_the_buyAd',
+        'as' => 'send_reply_to_buyAd'
+    ]);
+
     Route::post('/get_contact_list', [
         'uses' => 'message_controller@get_current_user_contact_list',
         'as' => 'get_current_user_contact_list',
