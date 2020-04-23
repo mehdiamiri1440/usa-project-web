@@ -29,6 +29,8 @@
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.16);
   padding: 0;
   background: #fff;
+  float: right;
+  width: 100%;
 }
 
 .main-article-title {
@@ -233,6 +235,11 @@ label {
   border: none;
 }
 
+.article-action-buttons > button {
+  margin: 0;
+  padding: 4px 15px;
+}
+
 .article-features button.disable {
   background: #777;
   border: none;
@@ -250,19 +257,35 @@ label {
   border: none;
 }
 
+.article-action-buttons {
+  display: none;
+}
+.full-width-button,
+.full-width-button button {
+  width: 100% !important;
+}
+.calc-width-button {
+  width: calc(100% - 72px) !important;
+}
+.calc-width-button button {
+  width: 100% !important;
+}
 @media screen and (max-width: 555px) {
+  .article-action-buttons {
+    padding: 0 15px 15px;
+    display: block;
+  }
   .article-features {
     position: relative;
 
     padding: 0 15px;
 
     right: 0;
-  }
-}
 
-@media screen and (max-width: 370px) {
+    bottom: 0;
+  }
   .article-features {
-    padding: 15px 15px 0;
+    min-width: initial;
   }
 }
 </style>
@@ -384,23 +407,43 @@ label {
 
     <ArticleMainContents :productIndex="productIndex" :is_my_profile_status="isMyProfile" />
 
-    <div class="article-features">
-      <button v-if="isMyProfile" class="elevator-event" @click.prevent="elevatorEvent()">
-        <i class="fas fa-chart-line"></i>
-        اعمال نردبان
-      </button>
+    <div class="footer-article">
+      <div class="article-features pull-left" v-if="product.main.is_elevated == 1 || isMyProfile">
+        <button v-if="isMyProfile" class="elevator-event" @click.prevent="elevatorEvent()">
+          <i class="fas fa-chart-line"></i>
+          اعمال نردبان
+        </button>
 
-      <button
-        v-if="product.main.is_elevated == 1"
-        data-toggle="tooltip"
-        data-placement="bottom"
-        title="نردبان اعمال شده است"
-        class="elevator-event active disable"
+        <button
+          v-if="product.main.is_elevated == 1"
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="نردبان اعمال شده است"
+          class="elevator-event active disable"
+        >
+          <i class="fas fa-chart-line"></i>
+        </button>
+      </div>
+      <div
+        class="article-action-buttons pull-right"
+        :class="[{'full-width-button' : product.main.is_elevated == 0 && !isMyProfile},{'calc-width-button' : product.main.is_elevated == 1 && !isMyProfile}]"
       >
-        <i class="fas fa-chart-line"></i>
-      </button>
-    </div>
+        <button v-if="!isMyProfile" @click.prevent="openChat(product)" class="green-button">
+          <i class="fa fa-envelope"></i>
+          استعلام قیمت
+        </button>
 
+        <button
+          v-else
+          class="blue-button"
+          data-toggle="modal"
+          :data-target="'#article-modal' + product.main.id"
+        >
+          <i class="fa fa-pencil-alt"></i>
+          ویرایش
+        </button>
+      </div>
+    </div>
     <!--google codes-->
     <script v-html="jsonLDObject" type="application/ld+json"></script>
     <!--end google codes-->
