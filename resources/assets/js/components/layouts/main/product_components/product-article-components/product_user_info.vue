@@ -76,8 +76,9 @@ i {
 }
 
 .user-information-wrapper {
-  padding: 8px 15px;
+  padding: 5px 15px 0px;
   border-bottom: 2px solid #eeeeee;
+  margin: 0;
 }
 
 .user-information-wrapper > div,
@@ -91,6 +92,7 @@ i {
 
 .article-action-buttons {
   float: left !important;
+  padding-bottom: 5px;
 }
 
 .user-action-link {
@@ -144,6 +146,17 @@ p.response-rate {
   color: #e41c38;
 }
 
+@media screen and (max-width: 555px) {
+  .article-action-buttons button {
+    margin-top: 7px;
+    width: 100%;
+  }
+
+  .article-action-buttons {
+    display: none !important;
+  }
+}
+
 @media screen and (max-width: 400px) {
   .user-information-contents p,
   a.user-name-link {
@@ -154,17 +167,6 @@ p.response-rate {
   }
   .user-action-link {
     padding-right: 3px;
-  }
-}
-
-@media screen and (max-width: 370px) {
-  .article-action-buttons button {
-    margin-top: 7px;
-    width: 100%;
-  }
-
-  .article-action-buttons {
-    display: none !important;
   }
 }
 </style>

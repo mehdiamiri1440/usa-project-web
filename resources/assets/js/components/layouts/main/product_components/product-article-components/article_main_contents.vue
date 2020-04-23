@@ -100,8 +100,8 @@ span {
   height: 38px;
   background: #00c569;
   position: absolute;
-  left: 0;
-  top: -15px;
+  left: 14px;
+  top: 0;
   padding: 2px;
   border-top: 3px solid #00b761;
   text-align: center;
@@ -124,10 +124,6 @@ span {
   bottom: -14px;
 }
 
-/* .is-user-valid-content {
-  padding: 15px;
-} */
-
 .text-danger {
   height: 24px;
 }
@@ -137,20 +133,7 @@ span {
     max-width: 300px;
   }
 }
-
-@media screen and (max-width: 480px) {
-  .main-article-contents h1,
-  .main-article-contents h3,
-  .main-article-contents a p {
-    max-width: 170px;
-  }
-
-  .share-link span {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 555px) {
   .main-article-contents h1,
   .main-article-contents h3,
   .main-article-contents a p {
@@ -179,33 +162,25 @@ span {
     padding-right: 10px;
 
     position: relative;
-  }
-}
 
-@media screen and (max-width: 370px) {
+    padding-bottom: 0;
+  }
   .product-description {
     display: none;
   }
-
-  .main-article-contents-image-wrapper,
-  .main-article-contents {
-    padding-bottom: 0;
-  }
-
-  .article-action-buttons {
-    padding: 15px;
-  }
-  .article-action-buttons button {
-    width: 100%;
-    margin: 0;
-    padding: 6px;
-  }
 }
-@media screen and (min-width: 370px) {
-  .article-action-buttons {
+@media screen and (max-width: 480px) {
+  .main-article-contents h1,
+  .main-article-contents h3,
+  .main-article-contents a p {
+    max-width: 300px;
+  }
+
+  .share-link span {
     display: none;
   }
 }
+
 .pointer-class {
   cursor: pointer;
 }
@@ -311,26 +286,6 @@ span {
         <i class="fa fa-share"></i>
         <span>اشتراک گذاری</span>
       </router-link>
-    </div>
-    <div class="article-action-buttons">
-      <button
-        v-if="!is_my_profile_status"
-        @click.prevent="$parent.openChat($parent.product)"
-        class="green-button"
-      >
-        <i class="fa fa-envelope"></i>
-        استعلام قیمت
-      </button>
-
-      <button
-        v-else
-        class="blue-button"
-        data-toggle="modal"
-        :data-target="'#article-modal' + $parent.product.main.id"
-      >
-        <i class="fa fa-pencil-alt"></i>
-        ویرایش
-      </button>
     </div>
   </div>
 </template>

@@ -98,7 +98,7 @@
   color: #fff;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 555px) {
   .main-article-image {
     width: 90px;
 
