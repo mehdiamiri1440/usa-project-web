@@ -113,16 +113,29 @@ class message_controller extends Controller
         
     }
 
-    protected function is_user_allowed_to_reply_the_buyAd($user_id,$buyAd_id)
+    protected function is_user_allowed_to_reply_the_buyAd($sender_id,$buyAd_id)
     {
+        $today = Carbon::today();
+        $tomorrow = Carbon::tomorrow();
+
+        $data_records = DB::table('messages')
+                        ->join('buy_ads','buy_ads.myuser_id','=','messages.receiver_id')
+                        ->where('buy_ads.id',$buyAd_id)
+                        ->where('messages.sender_id',$sender_id)
+                        ->whereBetween('messages.created_at',[$today, $tomorrow])
+                        ->select('buy_ads.myuser_id as buyer_id')
+                        ->get();
+
+        if($data_records->count() > 0){
+            return $data_records->first()->buyer_id;
+        }
+
         $user_reply_records = DB::table('buy_ad_reply_meta_datas')
                                     ->join('myusers','myusers.id','=','buy_ad_reply_meta_datas.replier_id')
-                                    ->where('replier_id',$user_id)
-                                    ->whereBetween('buy_ad_reply_meta_datas.created_at',[Carbon::today(),Carbon::tomorrow()])
-                                    // ->select(DB::raw('myusers.active_pakage_type','buy_ad_reply_meta_datas.*')
+                                    ->where('replier_id',$sender_id)
+                                    ->whereBetween('buy_ad_reply_meta_datas.created_at',[$today, $tomorrow])
                                     ->get();
-
-        //check user send reply capacity
+        
         $today_replies_count = $user_reply_records->count();
         if($today_replies_count > 0){
             $user_daily_reply_capacity = pow($user_reply_records->first()->active_pakage_type,3); // change it later
@@ -131,60 +144,36 @@ class message_controller extends Controller
                 return false;
             }
         }
-        else{
-            //check buyAd capacity
-            $buyAd_record = buyAd::where('id',$buyAd_id)
-                                    ->where([
-                                        ['confirmed','=',true],
-                                        ['is_valid','=',true],
-                                        ['reply_capacity','<>',0],
-                                    ])->first();
 
-            if($buyAd_record){
+        $buyAd_record = buyAd::find($buyAd_id);
+        $already_replied_to_the_buyAd = false;
 
-                DB::table('buy_ad_reply_meta_datas')->insert([
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now(),
-                    'replier_id' => $user_id,
-                    'buy_ad_id'  => $buyAd_record->id
-                ]);
-
-                return $buyAd_record->myuser_id;
-            }
-
-            return false;
-        }
-        
-        //check if user already replied to this buyAd
-        foreach($user_reply_records as $record)
+        foreach($user_reply_records as $reply_record)
         {
-            if($record->buy_ad_id == $buyAd_id){
-                return false;
+            if($reply_record->buy_ad_id == $buyAd_record->id)
+            {
+                $already_replied_to_the_buyAd = true;
             }
+
         }
 
-        //check buyAd capacity
-        $buyAd_record = buyAd::where('id',$buyAd_id)
-                                ->where([
-                                    ['confirmed','=',true],
-                                    ['is_valid','=',true],
-                                    ['reply_capacity','<>',0],
-                                ])->first();
-
-        if($buyAd_record){
-            
-            DB::table('buy_ad_reply_meta_datas')->insert([
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-                'replier_id' => $user_id,
-                'buy_ad_id'  => $buyAd_record->id
-            ]);
-
+        if($already_replied_to_the_buyAd == true)
+        {
             return $buyAd_record->myuser_id;
         }
+        
+        $now = Carbon::now();
 
-        return false;
+        DB::table('buy_ad_reply_meta_datas')->insert([
+            'created_at' => $now,
+            'updated_at' => $now,
+            'replier_id' => $sender_id,
+            'buy_ad_id'  => $buyAd_record->id
+        ]);
 
+        DB::table('buy_ads')->where('id',$buyAd_record->id)->decrement('reply_capacity', 1);
+
+        return $buyAd_record->myuser_id;
     }
 
     //public method

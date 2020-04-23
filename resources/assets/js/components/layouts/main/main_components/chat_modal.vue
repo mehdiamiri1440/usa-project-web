@@ -459,15 +459,31 @@ export default {
         self.chatMessages.push(msgObject);
         self.scrollToEnd(0);
 
-        axios
-          .post("/messanger/send_message", msgObject)
-          .then(function (response) {
-            self.isFirstMessageLoading = false;
-            self.loadChatHistory(self.contactInfo, -10);
-          })
-          .catch(function (e) {
-            //
-          });
+        if(window.location.pathname.includes('buyAd-requests')){
+            axios
+              .post("/send_reply_to_buyAd", {
+                  buy_ad_id : self.contactInfo.buyAd_id,
+                  text: msgObject.text
+              })
+              .then(function (response) {
+                self.isFirstMessageLoading = false;
+                self.loadChatHistory(self.contactInfo, -10);
+              })
+              .catch(function (e) {
+                //
+              });
+        }
+        else{
+          axios
+            .post("/messanger/send_message", msgObject)
+            .then(function (response) {
+              self.isFirstMessageLoading = false;
+              self.loadChatHistory(self.contactInfo, -10);
+            })
+            .catch(function (e) {
+              //
+            });
+        }
       }
     },
     handleBackBtnClickOnDevices: function () {
@@ -511,8 +527,10 @@ export default {
       }
     },
     routeToProfile: function () {
-      this.openChatBox = false;
-      this.$router.push({ path: "/profile/" + this.contactInfo.user_name });
+      if(this.contactInfo.user_name){
+        this.openChatBox = false;
+        this.$router.push({ path: "/profile/" + this.contactInfo.user_name });
+      }
     },
   },
   created: function () {

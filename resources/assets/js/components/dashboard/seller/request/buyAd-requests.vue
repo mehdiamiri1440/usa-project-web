@@ -490,26 +490,36 @@ export default {
       );
       var self = this;
 
-      axios
-        .post("/get_user_last_confirmed_profile_photo", {
-          user_id: buyAd.myuser_id
-        })
-        .then(function(response) {
-          var profile_photo = response.data.profile_photo;
+      axios.post('/get_user_permission_for_buyAd_reply',{
+          buy_ad_id : buyAd.id
+      }).then(function(response){
+          if(response.data.permission == true){
+              axios
+                .post("/get_user_last_confirmed_profile_photo", {
+                  user_id: buyAd.myuser_id
+                })
+                .then(function(response) {
+                  var profile_photo = response.data.profile_photo;
 
-          var contact = {
-            contact_id: buyAd.myuser_id,
-            first_name: buyAd.first_name,
-            last_name: buyAd.last_name,
-            profile_photo: profile_photo,
-            user_name: buyAd.user_name
-          };
+                  var contact = {
+                    contact_id: buyAd.myuser_id,
+                    first_name: buyAd.first_name,
+                    last_name: buyAd.last_name,
+                    profile_photo: profile_photo,
+                    user_name: buyAd.user_name,
+                    buyAd_id : buyAd.id
+                  };
 
-          eventBus.$emit("ChatInfo", contact);
-        })
-        .catch(function(err) {
-          //
-        });
+                  eventBus.$emit("ChatInfo", contact);
+                })
+                .catch(function(err) {
+                  //
+                });
+          }
+          else{
+            alert('permission denied!');
+          }
+      });
     },
     registerComponentStatistics: function(categoryName, actionName, labelName) {
       gtag("event", actionName, {
