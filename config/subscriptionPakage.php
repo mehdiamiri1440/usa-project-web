@@ -13,6 +13,7 @@ return [
         'show-profile-link-in-blog' => false,
         'pakage-duration-in-months' => 12,
         'buyAd-count' => 5,
+        'buyAd-reply-count' => 3,
         'elevator-count' => 0,
         'price' => 0
     ],
@@ -28,6 +29,7 @@ return [
        'show-profile-link-in-blog' => false,
        'pakage-duration-in-months' => 1,
        'buyAd-count' => 10,
+       'buyAd-reply-count' => 5,
        'elevetor-count' => 0,
        'price' => 1890000
    ],
@@ -44,6 +46,7 @@ return [
        'pakage-duration-in-months' => 6,
        'elevetor-count' => 1,
        'buyAd-count' => 15,
+       'buyAd-reply-count' => 10,
        'elevetor-count' => 1,
        'price' => 6490000
    ],
@@ -59,6 +62,7 @@ return [
         'show-profile-link-in-blog' => true,
         'pakage-duration-in-months' => 12,
         'buyAd-count' => 2000,
+        'buyAd-reply-count' => 200,
         'elevetor-count' => 1,
         'price' => 6890000
     ],

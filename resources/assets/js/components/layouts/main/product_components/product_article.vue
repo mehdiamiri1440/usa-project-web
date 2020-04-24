@@ -212,8 +212,7 @@ label {
   display: block;
 }
 
-.article-features{
-
+.article-features {
   text-align: left;
 
   direction: rtl;
@@ -229,42 +228,42 @@ label {
   min-width: 150px;
 }
 
-.article-features button{
+.article-features button {
   background: none;
-  border:none;
-
+  border: none;
 }
 
-.article-features button.disable{
+.article-features button.disable {
   background: #777;
-  border:none;
+  border: none;
 }
 
-.article-features button.elevator-event{
+.article-features button.elevator-event {
   background: #e41c38;
   color: #fff;
   border-radius: 4px;
   padding: 4px 14px;
 }
 
-.article-features button.disable{
+.article-features button.disable {
   background: #777;
-  border:none;
+  border: none;
 }
 
-
 @media screen and (max-width: 555px) {
-
-  .article-features{
-
+  .article-features {
     position: relative;
 
     padding: 0 15px;
 
     right: 0;
-
   }
+}
 
+@media screen and (max-width: 370px) {
+  .article-features {
+    padding: 15px 15px 0;
+  }
 }
 </style>
 
@@ -383,17 +382,21 @@ label {
       :is_my_profile_status="isMyProfile"
     />
 
-    <ArticleMainContents :productIndex="productIndex" />
+    <ArticleMainContents :productIndex="productIndex" :is_my_profile_status="isMyProfile" />
 
     <div class="article-features">
-      <button v-if="isMyProfile"  class="elevator-event" @click.prevent="elevatorEvent()">
+      <button v-if="isMyProfile" class="elevator-event" @click.prevent="elevatorEvent()">
         <i class="fas fa-chart-line"></i>
-
-          اعمال نردبان
-
+        اعمال نردبان
       </button>
 
-      <button v-if="product.main.is_elevated == 1" data-toggle="tooltip" data-placement="bottom"  title="نردبان اعمال شده است"  class="elevator-event active disable">
+      <button
+        v-if="product.main.is_elevated == 1"
+        data-toggle="tooltip"
+        data-placement="bottom"
+        title="نردبان اعمال شده است"
+        class="elevator-event active disable"
+      >
         <i class="fas fa-chart-line"></i>
       </button>
     </div>
@@ -577,15 +580,15 @@ export default {
 
       if (this.currentUser.user_info) {
         if (this.currentUser.user_info.id !== product.user_info.id) {
-            eventBus.$emit("ChatInfo",contact);
+          eventBus.$emit("ChatInfo", contact);
         } else {
           this.popUpMsg = "شما نمیتوانید به خودتان پیام دهید.";
           eventBus.$emit("submitSuccess", this.popUpMsg);
           $("#custom-main-modal").modal("show");
         }
       } else {
-        window.localStorage.setItem('contact',JSON.stringify(contact));
-        window.localStorage.setItem('pathname',window.location.pathname);
+        window.localStorage.setItem("contact", JSON.stringify(contact));
+        window.localStorage.setItem("pathname", window.location.pathname);
 
         this.popUpMsg =
           "اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.";
@@ -709,18 +712,19 @@ export default {
         fatal: fatal
       });
     },
-    elevatorEvent:function () {
-        eventBus.$emit("elevatorText", "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود.");
+    elevatorEvent: function() {
+      eventBus.$emit(
+        "elevatorText",
+        "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود."
+      );
 
-        eventBus.$emit("productId", this.product.main.id);
-        $("#elevator-modal").modal("show")
-
+      eventBus.$emit("productId", this.product.main.id);
+      $("#elevator-modal").modal("show");
     }
   },
   mounted() {
     this.init();
-    $('.elevator-event.active').tooltip()
-
+    $(".elevator-event.active").tooltip();
   }
 };
 </script>

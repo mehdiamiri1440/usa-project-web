@@ -331,13 +331,20 @@ span.min {
               <a href="#" data-dismiss="modal">
                 <i class="fa fa-close"></i>
               </a>
-              <p class="main-pop-up" v-text="popUpMsg"></p>
-              <button class="btn green-button" data-dismiss="modal">متوجه شدم</button>
-              <router-link
-                data-dismiss="modal"
-                class="btn green-button"
-                :to="{name:'dashboardPricingTableSeller'}"
-              >ارتقا عضویت</router-link>
+              <p class="main-pop-up">{{popUpMsg}}</p>
+              <p class="main-pop-up red-text"><b>برای افزایش ظرفیت لطفا عضویت خود را ارتقا دهید.</b></p>
+              <div class="row">
+                <div class="col-xs-6">
+                  <button class="btn gray-button" data-dismiss="modal">متوجه شدم</button>
+                </div>
+                <div class="col-xs-6">
+                  <router-link
+                    data-dismiss="modal"
+                    class="btn green-button"
+                    :to="{name:'dashboardPricingTableSeller'}"
+                  >ارتقا عضویت</router-link>
+                </div>
+              </div>
             </div>
           </div>
           <!-- /.modal-content -->

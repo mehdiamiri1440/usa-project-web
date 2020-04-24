@@ -231,15 +231,28 @@ class buyAd_controller extends Controller
         $today = Carbon::today();
         $tomorrow = Carbon::tomorrow();
 
-        $data_records = DB::table('messages')
-                        ->join('buy_ads','buy_ads.myuser_id','=','messages.receiver_id')
-                        ->where('buy_ads.id',$buyAd_id)
-                        ->where('messages.sender_id',$sender_id)
-                        ->whereBetween('messages.created_at',[$today, $tomorrow])
-                        ->get()
-                        ->count();
+        // $data_records = DB::table('messages')
+        //                 ->join('buy_ads','buy_ads.myuser_id','=','messages.receiver_id')
+        //                 ->where('buy_ads.id',$buyAd_id)
+        //                 ->where('messages.sender_id',$sender_id)
+        //                 ->whereBetween('messages.created_at',[$today, $tomorrow])
+        //                 ->get()
+        //                 ->count();
 
-        if($data_records > 0){
+        // if($data_records > 0){
+        //     return response()->json([
+        //         'status' => true,
+        //         'permission' => true
+        //     ],200);
+        // }
+
+        $already_replied_to_the_buyAd = DB::table('buy_ad_reply_meta_datas')
+                ->where([
+                    ['buy_ad_id','=',$buyAd_id],
+                    ['replier_id','=',$sender_id],
+                ])->get()->count();
+
+        if($already_replied_to_the_buyAd > 0){
             return response()->json([
                 'status' => true,
                 'permission' => true
@@ -255,8 +268,8 @@ class buyAd_controller extends Controller
         $today_replies_count = $user_reply_records->count();
         if($today_replies_count > 0){
             
-            $user_daily_reply_capacity = pow($user_reply_records->first()->active_pakage_type,3); // change it later
-            var_dump($user_daily_reply_capacity);
+            $user_daily_reply_capacity = config("subscriptionPakage.type-{$user_reply_records->first()->active_pakage_type}.buyAd-reply-count");
+            // var_dump($user_daily_reply_capacity);
             if($today_replies_count >= $user_daily_reply_capacity){
                 return response()->json([
                     'status' => false,
