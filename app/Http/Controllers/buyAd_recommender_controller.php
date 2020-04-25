@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\product;
+use Carbon\Carbon;
 
 class buyAd_recommender_controller extends Controller
 {
-    protected $registered_product_coef = 2;
+    protected $registered_product_coef = 5;
     protected $registered_sell_offer_coef = 2;
     protected $sold_coef = 1;
     protected $previous_transaction_with_buyer_coef = 1 ;
@@ -64,7 +65,16 @@ class buyAd_recommender_controller extends Controller
         });
         
         $filtered_buyAd_list->each(function(&$buyAd){
-             $this->increase_buyAd_score($buyAd,$this->registered_product_coef);
+            $response_score = $this->get_user_response_score($buyAd->myuser_id);
+
+            if(Carbon::now()->diffInHours($buyAd->created_at) > 24){
+                $score =  $this->registered_product_coef - $response_score;
+            }
+            else{
+                $score = $this->registered_product_coef;
+            }
+            
+             $this->increase_buyAd_score($buyAd,$score);
         });
     }
     
@@ -140,5 +150,33 @@ class buyAd_recommender_controller extends Controller
     protected function increase_buyAd_score($buyAd,$score)
     {
         $buyAd->score += $score;
+    }
+
+    protected function get_user_response_score($user_id)
+    {
+        $contacts = DB::table('messages')
+                                    ->where('receiver_id',$user_id)
+                                    ->select(DB::raw("DISTINCT(sender_id) as sender_id,sum(TIMESTAMPDIFF(SECOND,created_at,updated_at)) as delay"))
+                                    ->whereBetween('created_at',[Carbon::now()->subMonths(3),Carbon::now()])
+                                    ->groupBy('sender_id')
+                                    ->get();
+        
+        $total_contacts_count = $contacts->count();
+        if ($total_contacts_count == 0) {
+           return 0;
+        }
+
+        $seen_by_user_contacts_count = $contacts->filter(function($msg){
+            return $msg->delay != 0;
+        })->count();
+
+        $total_delay = (integer) ($contacts->sum('delay')/3600); //converting to hours
+
+        if($total_delay == 0){ // it means user have messages but did not read any of them
+            return $total_contacts_count ;
+        }
+        else{
+            return ($total_contacts_count - $seen_by_user_contacts_count);
+        }
     }
 }

@@ -3,10 +3,6 @@
   padding-top: 50px;
 }
 
-ul {
-  overflow: hidden;
-}
-
 .wrapper_no_pro {
   text-align: center;
   font-size: 23px;
@@ -26,16 +22,21 @@ ul {
 
 .list-title,
 .needs,
-.list-time {
+.list-time,
+.list-notice {
   float: right;
   text-align: center;
   line-height: 1.618;
   font-weight: bold;
-  padding-top: 5px;
+  padding: 5px;
 }
 
 .list-group-item {
   border: 1px solid #ddd;
+  padding: 11px 0;
+}
+.list-group-item:nth-last-of-type(2n + 1) {
+  background: #fdfdfd !important;
 }
 
 .detail-success {
@@ -46,6 +47,7 @@ ul {
   text-align: center;
   border-radius: 5px;
   font-size: 13px;
+  font-weight: bold;
 }
 
 .main-content > ul {
@@ -88,98 +90,6 @@ ul {
   font-weight: bold;
 }
 
-.list-placeholder-wrapper {
-  border: 1px solid rgb(221, 221, 221);
-
-  position: relative;
-
-  overflow: hidden;
-
-  border-radius: 0 0 3px 3px;
-
-  margin-bottom: 20px;
-
-  border-top: none;
-
-  background: #f6f6f6;
-}
-
-.list-placeholder-wrapper ul {
-  margin: 0;
-
-  overflow: hidden;
-
-  border: none;
-}
-
-.list-placeholder-wrapper li {
-  background: none;
-
-  -webkit-filter: blur(8px);
-
-  filter: blur(8px);
-}
-
-.list-placeholder::after {
-  position: absolute;
-
-  width: 100%;
-
-  height: 100%;
-
-  content: "";
-
-  left: 0;
-
-  top: 0;
-}
-
-.list-placeholder-wrapper .link {
-  position: absolute;
-
-  width: 100%;
-
-  text-align: center;
-
-  top: calc(50% - 82px);
-
-  padding: 15px;
-}
-
-.list-placeholder-wrapper .link-wrapper-content {
-  max-width: 500px;
-
-  background: white;
-
-  padding: 15px;
-
-  border-radius: 4px;
-
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-
-  margin: 0 auto;
-}
-
-.list-placeholder-wrapper .link p {
-  font-size: 19px;
-
-  font-weight: bold;
-
-  color: #333;
-
-  margin-bottom: 4px;
-
-  line-height: 1.618;
-}
-
-.list-placeholder-wrapper .link a {
-  font-size: 14px;
-
-  font-weight: bold;
-
-  margin-top: 4px;
-}
-
 .fix-request-header-box {
   background: #f5f5f5;
   position: fixed;
@@ -209,7 +119,7 @@ ul {
 }
 .detail-contents > div {
   background: #fff;
-  padding:  15px;
+  padding: 15px;
   margin-bottom: 15px;
   line-height: 25px;
   font-size: 30px;
@@ -224,23 +134,51 @@ ul {
   border-radius: 3px;
   text-align: center;
   border: none;
-  transition: 300ms
+  transition: 300ms;
 }
+.list-notice {
+  text-align: right;
+  height: 32px;
+}
+.list-notice button {
+  background: none;
 
+  border: none;
 
+  color: #777;
+
+  padding: 0;
+
+  position: relative;
+
+  top: -5px;
+}
+.list-notice button > span:first-of-type {
+  position: relative;
+
+  font-size: 26px;
+}
+.list-notice button > span.request-count {
+  font-size: 18px;
+
+  position: relative;
+
+  top: -5px;
+}
+.list-notice button > span > i:last-of-type {
+  position: absolute;
+
+  left: 17px;
+
+  color: #fff;
+
+  font-size: 15px;
+
+  top: 7px;
+}
 @media screen and (max-width: 992px) {
-  .list-title,
-  .needs,
-  .list-time {
-    padding: 15px;
-  }
-
   .default-list-title {
     padding: 4px 0;
-  }
-
-  .detail-success {
-    margin-top: 9px;
   }
 
   .fix-request-header-box,
@@ -258,7 +196,7 @@ ul {
     width: 100%;
   }
 
-  .red-button{
+  .red-button {
     width: 100%;
   }
 
@@ -274,20 +212,40 @@ ul {
   .default-button-full-with {
     max-width: 300px;
   }
+
+  .list-notice button > span.request-count {
+    font-size: 15px;
+    top: -5px;
+  }
+  .list-notice button > span > i:last-of-type {
+    left: 16px;
+
+    font-size: 12px;
+    top: 7px;
+  }
+  .list-notice button > span:first-of-type {
+    font-size: 23px;
+  }
+  .list-notice button > span.request-count {
+    font-size: 15px;
+  }
 }
 </style>
 <template>
   <div>
     <div class="requests" v-show="isRequests">
-      <div v-if="currentUser.user_info.active_pakage_type == 0" class="fix-request-header-box shadow-content text-center text-rtl" >
-        <p>این درخواست ها کمی قدیمی است </p>
+      <div
+        v-if="currentUser.user_info.active_pakage_type == 0"
+        class="fix-request-header-box shadow-content text-center text-rtl"
+      >
+        <p>این درخواست ها کمی قدیمی است</p>
         <button class="red-button" @click="isRequests = !isRequests">بروز رسانی</button>
       </div>
       <section class="main-content col-xs-12" v-if="buyAds.length != 0">
         <div class="title col-xs-12">
           <div class="row">
             <div class="col-xs-12 col-sm-4 pull-right">
-              <h1> درخواست های خرید</h1>
+              <h1>درخواست های خرید</h1>
             </div>
           </div>
         </div>
@@ -305,7 +263,7 @@ ul {
                   <span v-if="buyAd.name" v-text="' | ' + buyAd.name"></span>
                 </p>
 
-                <p class="needs col-sm-4 col-xs-12">
+                <p class="needs col-sm-3 col-xs-12">
                   <span class="static-content">میزان نیازمندی :</span>
 
                   <span v-text="buyAd.requirement_amount"></span>
@@ -314,56 +272,28 @@ ul {
                 </p>
 
                 <p class="list-time col-sm-2 col-xs-12" v-text="buyAd.register_date"></p>
-
-                <a class="col-sm-3 col-xs-12" href @click.prevent="openChat(buyAd)">
+                <p class="list-notice col-sm-1 col-xs-12 pull-right">
+                  <button
+                    class="btn"
+                    type="button"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="ظرفیت باقی مانده برای ارسال پیام به خریدار این محصول"
+                  >
+                    <span>
+                      <i class="fas fa-comment-alt"></i>
+                      <i class="fas fa-exclamation"></i>
+                    </span>
+                    <span class="request-count red-text">{{buyAd.reply_capacity + '+'}}</span>
+                  </button>
+                </p>
+                <a class="col-sm-3 col-xs-12 pull-left" href @click.prevent="openChat(buyAd)">
                   <p class="detail-success">
                     <span class="fas fa-comment-alt"></span> پیام به خریدار
                   </p>
                 </a>
               </li>
             </ul>
-            <div class="list-placeholder-wrapper" v-if="buyAds.length <= 15">
-              <ul class="list-placeholder">
-                <li v-for="item in 3" class="list-group-item col-xs-12">
-                  <p class="list-title col-sm-3 col-xs-12">
-                    <span>میوه</span>
-                    <span>|</span>
-                    <span>خرما</span>
-                    <span>| زاهدی</span>
-                  </p>
-
-                  <p class="needs col-sm-4 col-xs-12">
-                    <span class="static-content">میزان نیازمندی :</span>
-                    <span>1000</span>
-                    <span class="static-content">کیلوگرم</span>
-                  </p>
-
-                  <p class="list-time col-sm-2 col-xs-12">۱۲ آبان , ۱۳۹۷</p>
-
-                  <a href class="col-sm-3 col-xs-12">
-                    <p class="detail-success">
-                      <span class="fas fa-comment-alt"></span> پیام به باسکول
-                    </p>
-                  </a>
-                </li>
-              </ul>
-              <!-- test -->
-              <div class="link">
-                <div class="link-wrapper-content">
-                  <p>
-                    سقف تعداد درخواست های خریدی که به شما نمایش داده میشود
-                    <span
-                      class="text-red"
-                    >{{buyAds.length}}</span>
-                    است
-                  </p>
-                  <router-link
-                    class="green-button bold-text"
-                    :to="{ name : 'dashboardPricingTableSeller' }"
-                  >ارتقا عضویت</router-link>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -399,7 +329,7 @@ ul {
                   <span class="placeholder-content content-full-width h-20"></span>
                 </p>
 
-                <p class="list-title col-sm-3 col-xs-12 hidden-md hidden-lg hidden-sm">
+                <p class="list-title col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm">
                   <span class="placeholder-content content-half-width h-20 margin-auto"></span>
                 </p>
 
@@ -422,16 +352,20 @@ ul {
     </div>
 
     <div class="request-detail" v-show="!isRequests">
-      <section class="main-content  col-xs-12">
+      <section class="main-content col-xs-12">
         <div class="detail-contents shadow-content text-center text-rtl">
           <div>
             <p>
-             <b> درخواست های خرید با <span class="red-text"> ۲ ساعت تاخیر</span> به اطلاع شما می رسد.<br/> برای اطلاع آنی از درخواست ها و افزایش 5 برابری احتمال فروش محصولاتتان نوع عضویت خود را ارتقا دهید.</b>
+              <b>
+                درخواست های خرید با
+                <span class="red-text">۲ ساعت تاخیر</span> به اطلاع شما می رسد.
+                <br />برای اطلاع آنی از درخواست ها و افزایش 5 برابری احتمال فروش محصولاتتان نوع عضویت خود را ارتقا دهید.
+              </b>
             </p>
             <router-link
-                    class="green-button"
-                    :to="{ name : 'dashboardPricingTableSeller' }"
-                  >ارتقا عضویت</router-link>
+              class="green-button"
+              :to="{ name : 'dashboardPricingTableSeller' }"
+            >ارتقا عضویت</router-link>
           </div>
         </div>
       </section>
@@ -468,54 +402,65 @@ export default {
       this.load = true;
       var self = this;
 
-      axios
-          .post('/user/profile_info')
-          .then(function (response) {
-                  self.currentUser = response.data;
-
-          });
+      axios.post("/user/profile_info").then(function(response) {
+        self.currentUser = response.data;
+      });
 
       axios
         .post("/get_related_buyAds_list_to_the_seller")
         .then(function(response) {
           self.buyAds = response.data.buyAds;
           self.load = false;
+          setTimeout(function() {
+            $(".list-notice button").tooltip();
+          }, 100);
         });
     },
     openChat: function(buyAd) {
-      this.registerComponentStatistics(
-        "buyAdReply",
-        "openChat",
-        "click on open chatBox"
-      );
       var self = this;
 
-      axios
-        .post("/get_user_last_confirmed_profile_photo", {
-          user_id: buyAd.myuser_id
-        })
-        .then(function(response) {
-          var profile_photo = response.data.profile_photo;
+      axios.post('/get_user_permission_for_buyAd_reply',{
+          buy_ad_id : buyAd.id
+      }).then(function(response){
+          if(response.data.permission == true){
+                
+            var contact = {
+              contact_id: buyAd.myuser_id,
+              first_name: buyAd.first_name,
+              last_name: buyAd.last_name,
+              profile_photo: null,
+              user_name: buyAd.user_name,
+              buyAd_id : buyAd.id
+            };
 
-          var contact = {
-            contact_id: buyAd.myuser_id,
-            first_name: buyAd.first_name,
-            last_name: buyAd.last_name,
-            profile_photo: profile_photo,
-            user_name: buyAd.user_name
-          };
+            eventBus.$emit("ChatInfo", contact);
 
-          eventBus.$emit("ChatInfo", contact);
-        })
-        .catch(function(err) {
-          //
-        });
+            self.registerComponentStatistics(
+              "buyAdReply",
+              "openChat",
+              "click on open chatBox"
+            );
+               
+          }
+          else{
+            self.openModal('ظرفیت روزانه پاسخ به درخواست های خرید شما پر شده است.');
+            self.registerComponentStatistics(
+              "buyAdReply",
+              "openChat",
+              "permission denied"
+            );
+          }
+      });
     },
     registerComponentStatistics: function(categoryName, actionName, labelName) {
       gtag("event", actionName, {
         event_category: categoryName,
         event_label: labelName
       });
+    },
+    openModal(popUpMsg) {
+      eventBus.$emit("submitSuccess", popUpMsg);
+      $("#modal-buttons").modal("show");
     }
   },
   mounted() {

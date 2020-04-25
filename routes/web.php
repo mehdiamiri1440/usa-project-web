@@ -197,6 +197,11 @@ Route::group(['middleware' => [login::class]], function () {
         'as' => 'get_related_buyAds_list_to_the_seller',
     ]);
 
+    Route::post('/get_user_permission_for_buyAd_reply',[
+        'uses' => 'buyAd_controller@check_user_permisson_for_sending_buyAd_reply',
+        'as'   => 'check_user_permisson_for_sending_buyAd_reply'
+    ]);
+
     // Route::post('/get_my_sell_offer_list', [
     //     'uses' => 'sell_offer_controller@get_my_sell_offer_list',
     //     'as' => 'get_my_sell_offer_list',
@@ -290,6 +295,11 @@ Route::group(['middleware' => [login::class]], function () {
     Route::post('/messanger/send_message', [
         'uses' => 'message_controller@send_message',
         'as' => 'send_message',
+    ]);
+
+    Route::post('/send_reply_to_buyAd',[
+        'uses' => 'message_controller@send_reply_message_to_the_buyAd',
+        'as' => 'send_reply_to_buyAd'
     ]);
 
     Route::post('/get_contact_list', [

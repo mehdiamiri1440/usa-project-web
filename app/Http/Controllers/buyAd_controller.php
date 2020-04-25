@@ -75,7 +75,8 @@ class buyAd_controller extends Controller
         'buy_ads.requirement_amount',
         'buy_ads.confirmed',
         'buy_ads.myuser_id',
-        'myusers.user_name',
+        'buy_ads.reply_capacity',
+        // 'myusers.user_name',
         'myusers.first_name',
         'myusers.last_name',
     ];
@@ -218,6 +219,72 @@ class buyAd_controller extends Controller
     }
 
     //public method
+    public function check_user_permisson_for_sending_buyAd_reply(Request $request)
+    {
+        $this->validate($request,[
+            'buy_ad_id' => 'required|exists:buy_ads,id'
+        ]);
+
+        $sender_id = session('user_id');
+        $buyAd_id = $request->buy_ad_id;
+
+        $today = Carbon::today();
+        $tomorrow = Carbon::tomorrow();
+
+        // $data_records = DB::table('messages')
+        //                 ->join('buy_ads','buy_ads.myuser_id','=','messages.receiver_id')
+        //                 ->where('buy_ads.id',$buyAd_id)
+        //                 ->where('messages.sender_id',$sender_id)
+        //                 ->whereBetween('messages.created_at',[$today, $tomorrow])
+        //                 ->get()
+        //                 ->count();
+
+        // if($data_records > 0){
+        //     return response()->json([
+        //         'status' => true,
+        //         'permission' => true
+        //     ],200);
+        // }
+
+        $already_replied_to_the_buyAd = DB::table('buy_ad_reply_meta_datas')
+                ->where([
+                    ['buy_ad_id','=',$buyAd_id],
+                    ['replier_id','=',$sender_id],
+                ])->get()->count();
+
+        if($already_replied_to_the_buyAd > 0){
+            return response()->json([
+                'status' => true,
+                'permission' => true
+            ],200);
+        }
+
+        $user_reply_records = DB::table('buy_ad_reply_meta_datas')
+                                    ->join('myusers','myusers.id','=','buy_ad_reply_meta_datas.replier_id')
+                                    ->where('replier_id',$sender_id)
+                                    ->whereBetween('buy_ad_reply_meta_datas.created_at',[$today, $tomorrow])
+                                    ->get();
+        
+        $today_replies_count = $user_reply_records->count();
+        if($today_replies_count > 0){
+            
+            $user_daily_reply_capacity = config("subscriptionPakage.type-{$user_reply_records->first()->active_pakage_type}.buyAd-reply-count");
+            // var_dump($user_daily_reply_capacity);
+            if($today_replies_count >= $user_daily_reply_capacity){
+                return response()->json([
+                    'status' => false,
+                    'permission' => false,
+                ],200);
+            }
+        }
+    
+        return response()->json([
+            'status' => true,
+            'permission' => true
+        ],200);
+    }
+
+    //public method
     public function get_buyAd_list(Request $request)
     {
         $this->validate($request, [
@@ -301,6 +368,7 @@ class buyAd_controller extends Controller
                 ->get();
         } else {
             $buy_ads = buyAd::where('confirmed', true)
+                ->where('reply_capacity','>',0)
                 ->get();
         }
 
@@ -329,7 +397,7 @@ class buyAd_controller extends Controller
                                                     ->join('categories', 'buy_ads.category_id', '=', 'categories.id')
                                                     ->leftJoin('cities', 'cities.id', '=', 'buy_ads.city_id')
                                                     ->leftJoin('provinces', 'provinces.id', '=', 'cities.province_id')
-                                                    ->select('buy_ads.id', 'buy_ads.name', 'buy_ads.requirement_amount', 'buy_ads.address', 'buy_ads.description', 'buy_ads.address', 'buy_ads.price', 'buy_ads.category_id as sub_category_id', 'provinces.province_name', 'provinces.id as province_id', 'cities.city_name', 'cities.id as city_id', 'categories.category_name as sub_category_name')
+                                                    ->select('buy_ads.id', 'buy_ads.name', 'buy_ads.requirement_amount', 'buy_ads.address', 'buy_ads.description', 'buy_ads.address', 'buy_ads.price', 'buy_ads.category_id as sub_category_id', 'buy_ads.reply_capacity', 'provinces.province_name', 'provinces.id as province_id', 'cities.city_name', 'cities.id as city_id', 'categories.category_name as sub_category_name')
                                                     ->where('buy_ads.id', $buy_ad_id)
                                                     ->where('confirmed', true)
                                                     ->get()
@@ -607,15 +675,15 @@ class buyAd_controller extends Controller
 
             $related_buyAds = $this->get_related_buyAds_list_to_the_user($user);
 
-            $record_count = config("subscriptionPakage.type-$user->active_pakage_type.buyAd-count");
+            // $record_count = config("subscriptionPakage.type-$user->active_pakage_type.buyAd-count");
 
-            if ($record_count <= config("subscriptionPakage.type-2.buyAd-count")) {
+            // if ($record_count <= config("subscriptionPakage.type-2.buyAd-count")) {
                 $buyAd_recommender_object->buyAd_list_recommender_for_seller($related_buyAds, $seller_id); //check out the method for more details
-            } else {
-                $related_buyAds = $related_buyAds->toArray();
-            }
+            // } else {
+            //     $related_buyAds = $related_buyAds->toArray();
+            // }
             
-            $related_buyAds = array_slice($related_buyAds, 0, $record_count);
+            // $related_buyAds = array_slice($related_buyAds, 0, $record_count);
 
             foreach ($related_buyAds as $buyAd) {
                 $category_array = $this->get_category_and_subcategory_name($buyAd->category_id);
@@ -643,6 +711,8 @@ class buyAd_controller extends Controller
         $query = DB::table('buy_ads')
                     ->join('myusers', 'buy_ads.myuser_id', '=', 'myusers.id')
                     ->where('buy_ads.confirmed', true)
+                    ->where('buy_ads.reply_capacity','>',0)
+                    ->whereBetween('buy_ads.created_at',[Carbon::now()->subMonths(1),Carbon::now()])
                     ->where('buy_ads.myuser_id','<>',$user->id);
         
         if($user->active_pakage_type == 0){
@@ -655,17 +725,17 @@ class buyAd_controller extends Controller
         $buyAds = $query->get();
                     
         //relevance
-        $buyAds = $buyAds->filter(function ($buyAd) {
-            $user_id = session('user_id');
+        // $buyAds = $buyAds->filter(function ($buyAd) {
+        //     $user_id = session('user_id');
 
-            $category_record = category::find($buyAd->category_id);
-            $user_record = myuser::find($user_id);
+        //     $category_record = category::find($buyAd->category_id);
+        //     $user_record = myuser::find($user_id);
 
-            $relevence = ($user_record->category_id == $category_record->parent_id) ? true : false;
-            $user_already_offered_for_buyAd = false;
+        //     $relevence = ($user_record->category_id == $category_record->parent_id) ? true : false;
+        //     // $user_already_offered_for_buyAd = false;
 
-            return  $relevence;
-        });
+        //     return  $relevence;
+        // });
 
         return $buyAds;
     }

@@ -9,15 +9,21 @@ use DB;
 use App\Jobs\SendNewMessageNotification;
 use Carbon\Carbon;
 use App\daily_sms_blacklist;
+use App\buyAd;
 
 class message_controller extends Controller
 {
     //properties
     //
     protected $sendig_msg_validation_rules = [
-        'sender_id' => 'required|integer',
-        'receiver_id' => 'required|integer',
+        'sender_id' => 'required|integer|min:1',
+        'receiver_id' => 'required|exists:myusers,id',
         'text' => 'required|string',
+    ];
+
+    protected $buyAd_reply_validation_rules = [
+        'buy_ad_id' => 'required|exists:buy_ads,id',
+        'text' => 'required|string'
     ];
 
     //methods
@@ -25,9 +31,9 @@ class message_controller extends Controller
     {
         $this->validate_input($request, $this->sendig_msg_validation_rules);
 
-        $users_are_valid = $this->are_users_valid($request->sender_id, $request->receiver_id);
+        $is_sender_valid = $this->is_sender_valid($request->sender_id);
 
-        if ($users_are_valid) {
+        if ($is_sender_valid) {
             $msg = $this->save_msg_in_database($request);
 
             $this->notify_msg_receiver($msg);
@@ -45,16 +51,10 @@ class message_controller extends Controller
         }
     }
 
-    protected function are_users_valid($sender_user_id, $receiver_user_id)
+    protected function is_sender_valid($sender_user_id)
     {
         if ($sender_user_id == session('user_id')) {
-            $reciver_record = myuser::find($receiver_user_id);
-
-            if ($reciver_record) {
-                return true;
-            }
-
-            return false;
+            return true;
         }
 
         return false;
@@ -84,6 +84,98 @@ class message_controller extends Controller
     protected function notify_msg_receiver($msg)
     {
         SendNewMessageNotification::dispatch($msg);
+    }
+
+    //public method
+    public function send_reply_message_to_the_buyAd(Request $request)
+    {
+        $this->validate($request,$this->buyAd_reply_validation_rules);
+
+        $sender_id = session('user_id');
+
+        $false_or_receiver_id = $this->is_user_allowed_to_reply_the_buyAd($sender_id,$request->buy_ad_id);
+
+        if($false_or_receiver_id !== false){
+            $req = Request::create('/messanger/send_message', 'POST',[
+                'sender_id' => $sender_id,
+                'receiver_id' => $false_or_receiver_id,
+                'text' => $request->text
+            ]);
+
+            return $this->send_message($req);
+        }
+        else{
+            return response()->json([
+                'status' => false,
+                'msg' => 'access denied!'
+            ],500);
+        }
+        
+    }
+
+    protected function is_user_allowed_to_reply_the_buyAd($sender_id,$buyAd_id)
+    {
+        $today = Carbon::today();
+        $tomorrow = Carbon::tomorrow();
+
+        // $data_records = DB::table('messages')
+        //                 ->join('buy_ads','buy_ads.myuser_id','=','messages.receiver_id')
+        //                 ->where('buy_ads.id',$buyAd_id)
+        //                 ->where('messages.sender_id',$sender_id)
+        //                 ->whereBetween('messages.created_at',[$today, $tomorrow])
+        //                 ->select('buy_ads.myuser_id as buyer_id')
+        //                 ->get();
+
+        // if($data_records->count() > 0){
+        //     return $data_records->first()->buyer_id;
+        // }
+
+        $already_replied_to_the_buyAd = DB::table('buy_ad_reply_meta_datas')
+                                                ->where([
+                                                    ['buy_ad_id','=',$buyAd_id],
+                                                    ['replier_id','=',$sender_id],
+                                                ])->get()->count();
+
+        if($already_replied_to_the_buyAd > 0){
+            $buyAd_record = buyAd::find($buyAd_id);
+
+            return $buyAd_record->myuser_id;
+        }
+
+        $user_reply_records = DB::table('buy_ad_reply_meta_datas')
+                                    ->join('myusers','myusers.id','=','buy_ad_reply_meta_datas.replier_id')
+                                    ->where('replier_id',$sender_id)
+                                    ->whereBetween('buy_ad_reply_meta_datas.created_at',[$today, $tomorrow])
+                                    ->get();
+        
+        $today_replies_count = $user_reply_records->count();
+        if($today_replies_count > 0){
+            $user_daily_reply_capacity = config("subscriptionPakage.type-{$user_reply_records->first()->active_pakage_type}.buyAd-reply-count");
+
+            if($today_replies_count > $user_daily_reply_capacity){
+                return false;
+            }
+        }
+
+        $buyAd_record = buyAd::find($buyAd_id);
+
+        if($already_replied_to_the_buyAd == true)
+        {
+            return $buyAd_record->myuser_id;
+        }
+        
+        $now = Carbon::now();
+
+        DB::table('buy_ad_reply_meta_datas')->insert([
+            'created_at' => $now,
+            'updated_at' => $now,
+            'replier_id' => $sender_id,
+            'buy_ad_id'  => $buyAd_record->id
+        ]);
+
+        DB::table('buy_ads')->where('id',$buyAd_record->id)->decrement('reply_capacity', 1);
+
+        return $buyAd_record->myuser_id;
     }
 
     //public method
