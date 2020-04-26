@@ -218,6 +218,16 @@
   color: #fff;
   padding-left: 5px;
 }
+
+@media screen and (max-width: 345px) {
+  .message-wrapper .message-contact-title-img {
+    margin-left: 10px;
+  }
+
+  .message-wrapper .message-contact-title span {
+    width: 115px;
+  }
+}
 </style>
 
 <template>
@@ -234,9 +244,7 @@
           <img v-else :src="$parent.defultImg" />
         </div>
 
-        <router-link
-          :to="{ path: '/profile/' + $parent.selectedContact.user_name }"
-        >
+        <router-link :to="{ path: '/profile/' + $parent.selectedContact.user_name }">
           <span
             v-text="
               $parent.selectedContact.first_name +
@@ -253,9 +261,7 @@
           @click.prevent="
             $parent.activeReportModal($parent.selectedContact.contact_id)
           "
-        >
-          گزارش تخلف
-        </button>
+        >گزارش تخلف</button>
         <button
           @click.prevent="$parent.selectedContact = !$parent.selectedContact"
           class="back-state hidden-sm hidden-md hidden-lg"
@@ -288,14 +294,9 @@
             <div class="message-content-wrapper">
               <span v-text="msg.text"></span>
               <span class="message-chat-date">
-                <span v-if="msg.created_at">
-                  {{ msg.created_at | moment("jYY/jMM/jDD, h:mm A") }}
-                </span>
+                <span v-if="msg.created_at">{{ msg.created_at | moment("jYY/jMM/jDD, h:mm A") }}</span>
                 <span v-else>{{ Date() | moment("jYY/jMM/jDD, h:mm A") }}</span>
-                <span
-                  class="check-items"
-                  v-if="msg.sender_id === $parent.currentUserId"
-                >
+                <span class="check-items" v-if="msg.sender_id === $parent.currentUserId">
                   <i class="fa fa-check" v-if="msg.created_at"></i>
                   <i class="far fa-clock" v-else></i>
                   <i class="fa fa-check" v-if="msg.is_read"></i>
@@ -310,10 +311,7 @@
         v-if="$parent.isChatMessagesLoaded && $parent.isFirstMessageLoading"
       >
         <div class="image-wrapper">
-          <div
-            v-show="!$parent.isImageLoad || $parent.isImageLoad"
-            class="lds-ring"
-          >
+          <div v-show="!$parent.isImageLoad || $parent.isImageLoad" class="lds-ring">
             <div></div>
             <div></div>
             <div></div>
@@ -325,11 +323,7 @@
       <div class="send-message-form">
         <form>
           <div class="message-input">
-            <input
-              type="text"
-              placeholder="پیغامی بگذارید "
-              v-model="$parent.msgToSend"
-            />
+            <input type="text" placeholder="پیغامی بگذارید " v-model="$parent.msgToSend" />
           </div>
 
           <div class="button-wrapper">
@@ -363,9 +357,9 @@
 <script>
 export default {
   methods: {
-    checkMessageName: function (index, prevIndex) {
+    checkMessageName: function(index, prevIndex) {
       var isMessageName = false;
-      
+
       if (this.$parent.chatMessages[prevIndex] && prevIndex >= 0) {
         if (
           this.$parent.chatMessages[index].sender_id !=
@@ -378,7 +372,7 @@ export default {
       }
 
       return isMessageName;
-    },
-  },
+    }
+  }
 };
 </script>
