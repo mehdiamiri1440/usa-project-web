@@ -220,7 +220,7 @@ select {
   display: inline-block;
   background: #00c569;
   color: #fff;
-  padding: 10px 35px;
+  padding: 10px 25px;
   border-radius: 3px;
   text-align: center;
   font-size: 13px;
@@ -233,7 +233,7 @@ select {
   display: inline-block;
   background:#808080;
   color: #fff;
-  padding: 10px 35px;
+  padding: 10px 25px;
   border-radius: 3px;
   text-align: center;
   font-size: 13px;

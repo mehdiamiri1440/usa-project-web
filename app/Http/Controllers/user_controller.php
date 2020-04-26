@@ -319,14 +319,14 @@ class user_controller extends Controller
 
         $active_pakage_type = $user_pakage_type;
         $reputation_score = $this->get_user_reputation_score();
-        $accessable_buyAds = $pakage_info['buyAd-count'];
+        $max_buyAds_reply = $pakage_info['buyAd-reply-count'];
         $is_valid = $pakage_info['validated-seller'];
         $max_allowed_product_register_count = $pakage_info['max-products'] - $confirmed_products_count;
 
         return response()->json(compact([
             'active_pakage_type',
             'reputation_score',
-            'accessable_buyAds',
+            'max_buyAds_reply',
             'is_valid',
             'max_allowed_product_register_count',
             'confirmed_products_count',

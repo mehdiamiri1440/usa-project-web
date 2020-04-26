@@ -285,12 +285,12 @@ export default {
                   : response.data.max_allowed_product_register_count + " محصول"
             },
             {
-              title: "درخواست های خرید قابل مشاهده",
+              title: "سقف روزانه تعداد پاسخ ها به درخواست های خرید",
               icon: "fas fa-list-alt",
               iconColor: "#D8A679",
               staticName: "",
               upgrade: false,
-              status: self.checkRequest(response.data.accessable_buyAds)
+              status: self.checkRequest(response.data.max_buyAds_reply)
             },
             {
               title: "فروشنده معتبر",
@@ -358,7 +358,7 @@ export default {
       } else if (requestNumber == 0) {
         setRequest = "بدون درخواست";
       } else {
-        setRequest = requestNumber + " درخواست";
+        setRequest = requestNumber + " پاسخ";
       }
       return setRequest;
     }

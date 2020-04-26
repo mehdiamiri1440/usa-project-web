@@ -759,7 +759,7 @@ a.profile-info-wrapper:hover {
               <br />
               <br />
 
-              <button class="btn green-button" data-dismiss="modal">متوجه شدم</button>
+              <button class="btn gray-button" data-dismiss="modal">متوجه شدم</button>
             </div>
           </div>
           <!-- /.modal-content -->
