@@ -767,25 +767,25 @@ end filter modal styles
 }
 
 @media screen and (max-width: 370px) {
+  .mobile-hidden {
+    display: none;
+  }
   .default-wrapper-main-image {
-    position: relative;
-    width: 100%;
-    height: 250px;
-    overflow: hidden;
-    border-radius: 4px;
-  }
+    width: 90px;
 
+    height: 90px;
+  }
   .default-main-article-content {
-    width: 100%;
-
-    position: relative;
-
-    top: 15px;
+    width: calc(100% - 90px);
   }
-
-  .default-item-wrapper .default-button-min-with {
+  .default-button-min-with {
     width: 100%;
-    margin-bottom: 15px;
+  }
+}
+
+@media screen and (min-width: 370px) {
+  .hidden-afetr-mobile-hidden {
+    display: none;
   }
 }
 </style>
@@ -803,11 +803,11 @@ end filter modal styles
       >
         <div class="modal-dialog">
           <div class="modal-header">
-            <a href="#" class="close-modal" @clcik.prevent="closeFilterModal()">
+            <a href="#" class="close-modal" @click.prevent="closeFilterModal()">
               <i class="fa fa-times"></i>
             </a>
             <div class="modal-title">
-              <span> دسته ها و فیلتر </span>
+              <span>دسته ها و فیلتر</span>
             </div>
           </div>
           <div class="main_popup_content">
@@ -829,12 +829,7 @@ end filter modal styles
       </div>
     </div>
     <div class="container">
-      <div
-        id="filter-modal"
-        class="filter-modal modal fade"
-        tabindex="-1"
-        role="dialog"
-      >
+      <div id="filter-modal" class="filter-modal modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -842,9 +837,7 @@ end filter modal styles
                 <i class="fa fa-times"></i>
               </a>
               <div class="modal-title">
-                <span>
-                  مرتب سازی بر اساس
-                </span>
+                <span>مرتب سازی بر اساس</span>
               </div>
             </div>
 
@@ -855,9 +848,7 @@ end filter modal styles
                     @click="setSortOption('RR')"
                     class="default-button-list"
                     :class="{ active: sortOption == 'RR' }"
-                  >
-                    احتمال پاسخگویی
-                  </button>
+                  >احتمال پاسخگویی</button>
                   <i class="fa fa-angle-left"></i>
                 </li>
                 <li>
@@ -865,9 +856,7 @@ end filter modal styles
                     @click="setSortOption('RT')"
                     class="default-button-list"
                     :class="{ active: sortOption == 'RT' }"
-                  >
-                    سرعت پاسخگویی
-                  </button>
+                  >سرعت پاسخگویی</button>
                   <i class="fa fa-angle-left"></i>
                 </li>
                 <li>
@@ -875,9 +864,7 @@ end filter modal styles
                     @click="setSortOption('RD')"
                     class="default-button-list"
                     :class="{ active: sortOption == 'RD' }"
-                  >
-                    جدیدترین ها
-                  </button>
+                  >جدیدترین ها</button>
                   <i class="fa fa-angle-left"></i>
                 </li>
               </ul>
@@ -890,20 +877,14 @@ end filter modal styles
     </div>
 
     <div class="flat-plust-icon hidden-lg hidden-md">
-      <a href="#" @click.prevent="addProductOrRequest()"
-        ><i class="fa fa-plus"></i>
+      <a href="#" @click.prevent="addProductOrRequest()">
+        <i class="fa fa-plus"></i>
       </a>
     </div>
 
-    <div
-      class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid"
-    >
+    <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
       <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
-        <input
-          type="text"
-          v-model="headerSearchText"
-          placeholder="اینجا جستجو کنید"
-        />
+        <input type="text" v-model="headerSearchText" placeholder="اینجا جستجو کنید" />
 
         <button class="btn-search">
           <i class="fa-search fa"></i>
@@ -913,13 +894,11 @@ end filter modal styles
         <div class="rate-filter">
           <button class="green-button bg-gray" @click.prevent="openSortModal()">
             <i class="fas fa-sort-amount-down-alt"></i>
-
             مرتب سازی
           </button>
         </div>
-        <button class="btn-filter hidden-lg" @click.prevent="openFilterModal()" >
+        <button class="btn-filter hidden-lg" @click.prevent="openFilterModal()">
           <i class="fa fa-filter"></i>
-
           دسته ها و فیلتر
         </button>
       </div>
@@ -935,42 +914,30 @@ end filter modal styles
                   <button
                     @click="setSortOption('RR')"
                     :class="{ 'text-green': sortOption == 'RR' }"
-                  >
-                    احتمال پاسخگویی
-                  </button>
+                  >احتمال پاسخگویی</button>
                 </li>
                 <li>
                   <button
                     @click="setSortOption('RT')"
                     :class="{ 'text-green': sortOption == 'RT' }"
-                  >
-                    سرعت پاسخگویی
-                  </button>
+                  >سرعت پاسخگویی</button>
                 </li>
                 <li>
                   <button
                     @click="setSortOption('RD')"
                     :class="{ 'text-green': sortOption == 'RD' }"
-                  >
-                    جدیدترین ها
-                  </button>
+                  >جدیدترین ها</button>
                 </li>
               </ul>
-              <button
-                class="btn-filter hidden-lg"
-                data-toggle="modal"
-                data-target="#searchFilter"
-              >
-                دسته ها و فیلتر <i class="fa fa-filter"></i>
+              <button class="btn-filter hidden-lg" data-toggle="modal" data-target="#searchFilter">
+                دسته ها و فیلتر
+                <i class="fa fa-filter"></i>
               </button>
             </div>
           </section>
           <section class="main-content col-xs-12" v-if="products.length > 0">
             <div id="article-list" class="row">
-              <div
-                class="col-xs-12"
-                v-for="(product, productIndex) in products"
-              >
+              <div class="col-xs-12" v-for="(product, productIndex) in products">
                 <ProductArticle
                   v-if="products.length >= productIndex"
                   :key="product.main.id"
@@ -994,18 +961,12 @@ end filter modal styles
                       <i class="fa fa-plus"></i>
                     </span>
 
-                    <span
-                      class="hidden-sm hidden-md hidden-lg text-rtl"
-                      v-show="!loadMoreActive"
-                    >
+                    <span class="hidden-sm hidden-md hidden-lg text-rtl" v-show="!loadMoreActive">
                       محصولات بیشتر
                       <i class="fa fa-plus"></i>
                     </span>
 
-                    <div
-                      v-show="loadMoreActive"
-                      class="btn-loader-active-wrapper"
-                    >
+                    <div v-show="loadMoreActive" class="btn-loader-active-wrapper">
                       <img :src="loading_img" />
                     </div>
                   </div>
@@ -1039,22 +1000,17 @@ end filter modal styles
 
             <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
 
-            <p class="text-center" dir="rtl">
-              شما می توانید درخواست خرید خود را در اینجا ثبت کنید.
-            </p>
+            <p class="text-center" dir="rtl">شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
             <br />
 
             <div class="text-center">
               <a
                 class="green-button col-xs-4"
                 @click.prevent="registerRequestInSearchNotFoundCase()"
-                >درخواست خرید
-              </a>
+              >درخواست خرید</a>
               <br />
 
-              <a class="green-button col-xs-4" @click="resetFilter()"
-                >نمایش همه محصولات</a
-              >
+              <a class="green-button col-xs-4" @click="resetFilter()">نمایش همه محصولات</a>
             </div>
 
             <br />
@@ -1068,9 +1024,7 @@ end filter modal styles
 
             <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
 
-            <p class="text-center" dir="rtl">
-              شما می توانید درخواست خرید خود را در اینجا ثبت کنید.
-            </p>
+            <p class="text-center" dir="rtl">شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
 
             <br />
 
@@ -1079,69 +1033,48 @@ end filter modal styles
                 :to="{ name: 'registerRequestBuyer' }"
                 class="green-button col-xs-4"
                 @click.prevent="registerRequestInSearchNotFoundCase()"
-              >
-                درخواست خرید
-              </router-link>
+              >درخواست خرید</router-link>
 
               <br />
-              <a class="green-button col-xs-4" @click.prevent="resetFilter()"
-                >نمایش همه محصولات</a
-              >
+              <a class="green-button col-xs-4" @click.prevent="resetFilter()">نمایش همه محصولات</a>
             </div>
 
             <br />
           </section>
 
-          <section v-else class="col-xs-12">
+          <section v-else class="main-content col-xs-12">
             <div class="row">
-              <div
-                v-for="(defaultItem, index) in 8"
-                :key="index"
-                class="default-items col-xs-12"
-              >
-                <div
-                  class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content"
-                >
+              <div v-for="(defaultItem, index) in 8" :key="index" class="default-items col-xs-12">
+                <div class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content">
                   <div class="default-user-contents col-xs-12 padding-0">
-                    <div
-                      class="placeholder-content default-article-user-image pull-right"
-                    ></div>
+                    <div class="placeholder-content default-article-user-image pull-right"></div>
 
                     <span
                       class="padding-top-5 placeholder-content margin-15 pull-right content-min-width"
                     ></span>
 
                     <span
-                      class="margin-0 placeholder-content default-button-min-with pull-left"
+                      class="margin-0 placeholder-content default-button-min-with pull-left mobile-hidden"
                     ></span>
                   </div>
 
-                  <div
-                    class="default-article-contents padding-0 margin-15-0 col-xs-12"
-                  >
+                  <div class="default-article-contents padding-0 margin-top-10 col-xs-12">
                     <div class="default-wrapper-main-image pull-right">
-                      <span
-                        class="default-main-image placeholder-content"
-                      ></span>
+                      <span class="default-main-image placeholder-content"></span>
                     </div>
 
                     <div class="default-main-article-content">
-                      <span
-                        class="content-half-width placeholder-content"
-                      ></span>
+                      <span class="content-half-width placeholder-content"></span>
 
-                      <span
-                        class="content-default-width placeholder-content"
-                      ></span>
+                      <span class="content-default-width placeholder-content"></span>
 
-                      <span
-                        class="content-min-width placeholder-content"
-                      ></span>
+                      <span class="content-min-width placeholder-content mobile-hidden"></span>
 
-                      <span
-                        class="content-half-width placeholder-content"
-                      ></span>
+                      <span class="content-half-width placeholder-content"></span>
                     </div>
+                    <span
+                      class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
+                    ></span>
                   </div>
                 </div>
               </div>
@@ -1150,10 +1083,7 @@ end filter modal styles
         </div>
       </div>
 
-      <aside
-        id="sidebar"
-        class="product-sidebar sidebar hidden-xs hidden-sm hidden-md col-lg-3"
-      >
+      <aside id="sidebar" class="product-sidebar sidebar hidden-xs hidden-sm hidden-md col-lg-3">
         <div class="row">
           <div class="sidebar__inner col-xs-12" style="position: relative;">
             <ProductAsideCategories
@@ -1168,34 +1098,24 @@ end filter modal styles
         </div>
       </aside>
 
-      <script
-        v-if="jsonLDObject"
-        v-html="jsonLDObject"
-        type="application/ld+json"
-      ></script>
+      <script v-if="jsonLDObject" v-html="jsonLDObject" type="application/ld+json"></script>
     </main>
 
-    <footer
-      class="category-footer container"
-      v-if="categoryMetaData.length > 0"
-    >
+    <footer class="category-footer container" v-if="categoryMetaData.length > 0">
       <div class="col-xs-12">
-        <div data-v-c5ebe4ce="" class="title-section col-xs-12">
-          <div data-v-c5ebe4ce="" class="row">
-            <h1 data-v-c5ebe4ce="">
-              خرید عمده <span v-text="this.getCategoryName()"></span>
+        <div data-v-c5ebe4ce class="title-section col-xs-12">
+          <div data-v-c5ebe4ce class="row">
+            <h1 data-v-c5ebe4ce>
+              خرید عمده
+              <span v-text="this.getCategoryName()"></span>
             </h1>
-            <hr data-v-c5ebe4ce="" />
+            <hr data-v-c5ebe4ce />
           </div>
         </div>
 
         <div class="footer-note-wrapper main-box-shadow">
           <div class="wrapper-contents">
-            <div
-              class="contents"
-              v-for="categoryMeta in categoryMetaData"
-              :key="categoryMeta.id"
-            >
+            <div class="contents" v-for="categoryMeta in categoryMetaData" :key="categoryMeta.id">
               <div v-html="categoryMeta.header"></div>
               <div v-html="categoryMeta.content"></div>
             </div>
@@ -1215,22 +1135,22 @@ var visible = false;
 export default {
   components: {
     ProductArticle,
-    ProductAsideCategories,
+    ProductAsideCategories
   },
   props: ["str", "defultimg", "loading_img"],
-  data: function () {
+  data: function() {
     return {
       currentUser: {
         profile: "",
-        user_info: "",
+        user_info: ""
       },
       products: {
         main: "",
         user_info: "",
         profile_info: {
-          profile_photo: "",
+          profile_photo: ""
         },
-        photos: [],
+        photos: []
       },
       searchText: "",
       provinceId: "",
@@ -1254,20 +1174,20 @@ export default {
       searchTextTimeout: null,
       headerSearchText: "",
       jsonLDObject: "",
-      sortOption: "BM",
+      sortOption: "BM"
     };
   },
   methods: {
-    filterProducts: function (productsFilter) {
+    filterProducts: function(productsFilter) {
       this.products = productsFilter;
     },
-    collapseDropDown: function () {
-      $(".profile-list").fadeIn("slow", function () {
+    collapseDropDown: function() {
+      $(".profile-list").fadeIn("slow", function() {
         visible = true;
       });
     },
-    collapseDropDownList: function () {
-      $(".icon-header-list").fadeIn("slow", function () {
+    collapseDropDownList: function() {
+      $(".icon-header-list").fadeIn("slow", function() {
         visible = true;
       });
     },
@@ -1278,7 +1198,7 @@ export default {
         visible = false;
       }
     },
-    init: function () {
+    init: function() {
       this.products = {};
       this.scrollToTop();
       var self = this;
@@ -1288,13 +1208,13 @@ export default {
 
       axios
         .post("/get_category_meta_data", {
-          category_name: categoryName,
+          category_name: categoryName
         })
-        .then(function (response) {
+        .then(function(response) {
           self.categoryMetaData = response.data.category_info;
           self.jsonLDObject = response.data.schema_object;
         });
-      axios.post("/user/profile_info").then(function (response) {
+      axios.post("/user/profile_info").then(function(response) {
         self.currentUser = response.data;
         if (searchValueText) {
           self.registerComponentStatistics(
@@ -1303,7 +1223,7 @@ export default {
             searchValueText
           );
           self.searchText = searchValueText;
-          setTimeout(function () {
+          setTimeout(function() {
             self.sidebarScroll();
           }, 500);
         } else {
@@ -1318,12 +1238,12 @@ export default {
               response_rate: self.$parent.productByResponseRate,
               to_record_number: self.productCountInPage,
               search_text: categoryName,
-              sort_by: self.sortOption,
+              sort_by: self.sortOption
             })
-            .then(function (response) {
+            .then(function(response) {
               self.products = response.data.products;
               self.loading = false;
-              setTimeout(function () {
+              setTimeout(function() {
                 self.sidebarScroll();
               }, 500);
               eventBus.$emit("submiting", false);
@@ -1349,9 +1269,9 @@ export default {
             response_rate: self.$parent.productByResponseRate,
             to_record_number: this.productCountInPage,
             search_text: this.getCategoryName(),
-            sort_by: self.sortOption,
+            sort_by: self.sortOption
           })
-          .then(function (response) {
+          .then(function(response) {
             self.products = self.products.concat(response.data.products);
 
             eventBus.$emit("submiting", false);
@@ -1360,7 +1280,7 @@ export default {
             }
 
             self.loadMoreActive = false;
-            setTimeout(function () {
+            setTimeout(function() {
               self.sidebarScroll();
             }, 500);
           });
@@ -1396,21 +1316,21 @@ export default {
 
         axios
           .post("/user/get_product_list", searchObject)
-          .then(function (response) {
+          .then(function(response) {
             self.products = self.products.concat(response.data.products);
 
             self.loadMoreActive = false;
 
-            setTimeout(function () {
+            setTimeout(function() {
               self.sidebarScroll();
             }, 500);
           })
-          .catch(function (err) {
+          .catch(function(err) {
             alert("خطایی رخ داده است. دوباره تلاش کنید.");
           });
       }
     },
-    registerRequestInSearchNotFoundCase: function () {
+    registerRequestInSearchNotFoundCase: function() {
       if (this.currentUser.profile) {
         if (this.currentUser.user_info.is_buyer) {
           window.location.href = "/dashboard/register-request";
@@ -1426,14 +1346,14 @@ export default {
         $("#auth-popup").modal("show");
       }
     },
-    bottomVisible: function () {
+    bottomVisible: function() {
       const scrollY = window.scrollY;
       const visible = document.documentElement.clientHeight;
       const pageHeight = document.documentElement.scrollHeight;
       const bottomOfPage = visible + scrollY >= pageHeight;
       return bottomOfPage || pageHeight < visible;
     },
-    addProductOrRequest: function () {
+    addProductOrRequest: function() {
       if (this.currentUser.user_info) {
         if (this.currentUser.user_info.is_seller) {
           this.registerComponentStatistics(
@@ -1465,10 +1385,10 @@ export default {
         $("#auth-popup").modal("show");
       }
     },
-    resetFilter: function () {
+    resetFilter: function() {
       eventBus.$emit("submiting", true);
 
-      $(".box-sidebar option").prop("selected", function () {
+      $(".box-sidebar option").prop("selected", function() {
         return this.defaultSelected;
       });
 
@@ -1480,7 +1400,7 @@ export default {
 
       this.init();
     },
-    applyFilter: function () {
+    applyFilter: function() {
       var self = this;
 
       eventBus.$emit("submiting", true);
@@ -1514,34 +1434,38 @@ export default {
 
       axios
         .post("/user/get_product_list", searchObject)
-        .then(function (response) {
+        .then(function(response) {
           self.products = response.data.products;
           eventBus.$emit("submiting", false);
 
           self.scrollToTop();
 
-          setTimeout(function () {
+          setTimeout(function() {
             self.sidebarScroll();
           }, 500);
         })
-        .catch(function (err) {
+        .catch(function(err) {
           alert("خطایی رخ داده است. دوباره تلاش کنید.");
         });
     },
-    setSortOption: function (sortOption) {
+    setSortOption: function(sortOption) {
       $("#filter-modal").modal("hide");
-      if(this.isDeviceMobile()){
+      if (this.isDeviceMobile()) {
         history.go(-1);
       }
 
       if (this.sortOption != sortOption) {
-        this.registerComponentStatistics('product-category','apply-sort',sortOption);
+        this.registerComponentStatistics(
+          "product-category",
+          "apply-sort",
+          sortOption
+        );
 
         this.sortOption = sortOption;
         this.init();
       }
     },
-    isDeviceMobile: function () {
+    isDeviceMobile: function() {
       if (
         navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -1559,23 +1483,19 @@ export default {
     scrollToTop() {
       window.scrollTo(0, 0);
     },
-    stopLoader: function () {
+    stopLoader: function() {
       eventBus.$emit("isLoading", false);
     },
-    registerComponentStatistics: function (
-      categoryName,
-      actionName,
-      labelName
-    ) {
+    registerComponentStatistics: function(categoryName, actionName, labelName) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName,
+        event_label: labelName
       });
     },
-    registerComponentExceptions: function (description, fatal = false) {
+    registerComponentExceptions: function(description, fatal = false) {
       gtag("event", "exception", {
         description: description,
-        fatal: fatal,
+        fatal: fatal
       });
     },
     sidebarScroll() {
@@ -1585,15 +1505,15 @@ export default {
         containerSelector: "#article-list",
         innerWrapperSelector: ".sidebar__inner",
         topSpacing: 80,
-        resizeSensor: true,
+        resizeSensor: true
       });
     },
-    getCategoryName: function () {
+    getCategoryName: function() {
       let name = this.$route.params.categoryName;
 
       return name.split("-").join(" ");
     },
-    infiniteScrollHandler: function () {
+    infiniteScrollHandler: function() {
       let lastOffset = 0;
 
       window.onscroll = () => {
@@ -1620,29 +1540,29 @@ export default {
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
-      $(window).on("popstate", function (e) {
+      $(window).on("popstate", function(e) {
         $("#filter-modal").modal("hide");
       });
     },
-    closeSortModal:function(){
+    closeSortModal: function() {
       $("#filter-modal").modal("hide");
       history.go(-1);
     },
     openFilterModal() {
       $("#searchFilter").modal("show");
-      
+
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
-      $(window).on("popstate", function (e) {
+      $(window).on("popstate", function(e) {
         $("#searchFilter").modal("hide");
       });
     },
-    closeFilterModal:function(){
+    closeFilterModal: function() {
       $("#searchFilter").modal("hide");
       history.go(-1);
     },
-    createJsonLDObject: function () {
+    createJsonLDObject: function() {
       var fullName =
         this.product.user_info.first_name +
         " " +
@@ -1655,14 +1575,14 @@ export default {
         "@context": "https://schema.org/",
         "@type": "Product",
         name: this.product.main.product_name,
-        image: this.product.photos.map(function (photo) {
+        image: this.product.photos.map(function(photo) {
           return "https://www.buskool.com/storage/" + photo.file_path;
         }),
         description: this.product.main.description,
         aggregateRating: {
           "@type": "AggregateRating",
           ratingValue: "4.4",
-          reviewCount: "3",
+          reviewCount: "3"
         },
         offers: {
           "@type": "Offer",
@@ -1673,25 +1593,25 @@ export default {
           seller: {
             "@type": "Person",
             name: fullName,
-            url: productOwnerProfilePageUrl,
-          },
-        },
+            url: productOwnerProfilePageUrl
+          }
+        }
       };
 
       return jsonDL;
-    },
+    }
   },
   watch: {
-    "$route.params.categoryName": function (name) {
+    "$route.params.categoryName": function(name) {
       this.init();
     },
 
-    headerSearchText: function (value) {
+    headerSearchText: function(value) {
       var self = this;
 
       clearTimeout(this.searchTextTimeout);
 
-      this.searchTextTimeout = setTimeout(function () {
+      this.searchTextTimeout = setTimeout(function() {
         self.registerComponentStatistics(
           "product-list",
           "search-text",
@@ -1703,12 +1623,12 @@ export default {
         self.$router.replace({
           name: "productList",
           query: {
-            s: self.headerSearchText.replace(/ /g, "+"),
-          },
+            s: self.headerSearchText.replace(/ /g, "+")
+          }
         });
       }, 1500);
     },
-    "$parent.productByResponseRate": function () {
+    "$parent.productByResponseRate": function() {
       this.products = {};
 
       this.infiniteScrollHandler();
@@ -1724,7 +1644,7 @@ export default {
       if (bottom) {
         this.feed();
       }
-    },
+    }
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/product-list" });
@@ -1759,11 +1679,11 @@ export default {
             categoryName +
             " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان | آگاهی از آخرین قیمت " +
             categoryName +
-            " عمده در بازار عمده باسکول ",
+            " عمده در بازار عمده باسکول "
         },
         {
           name: "author",
-          content: "باسکول",
+          content: "باسکول"
         },
         {
           property: "og:description",
@@ -1772,19 +1692,19 @@ export default {
             categoryName +
             " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان | آگاهی از آخرین قیمت " +
             categoryName +
-            " عمده در بازار عمده باسکول ",
+            " عمده در بازار عمده باسکول "
         },
         {
           property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
+          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران"
         },
         {
           property: "og:title",
-          content: "باسکول | خرید و فروش عمده و قیمت " + categoryName,
-        },
+          content: "باسکول | خرید و فروش عمده و قیمت " + categoryName
+        }
       ],
-      link: [{ rel: "canonical", href: canonicalLink }],
+      link: [{ rel: "canonical", href: canonicalLink }]
     };
-  },
+  }
 };
 </script>
