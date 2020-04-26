@@ -297,29 +297,33 @@ class message_controller extends Controller
         ], 200);
     }
 
+    //public method
     public function get_user_chat_history(Request $request)
     {
         $this->validate($request, [
             'user_id' => 'required|integer',
+            'msg_count' => 'integer|min:10'
         ]);
 
         $user_id = session('user_id');
 
-        $sent_msg_records = message::where('sender_id', $user_id)
-                            ->where('receiver_id', $request->user_id)
-                            ->get();
-
-        $received_msg_records = message::where('sender_id', $request->user_id)
-                            ->where('receiver_id', $user_id)
-                            ->get();
-
-        $messages = $received_msg_records->merge($sent_msg_records)
-            ->sortBy('created_at')
-            ->values()
-            ->all();
+        $messages = message::where(function($q) use($user_id,$request){
+                                        $q->where('sender_id',$user_id)
+                                            ->where('receiver_id',$request->user_id);
+                                     })
+                                    ->orWhere(function($q) use($user_id,$request){
+                                        $q->where('sender_id',$request->user_id)
+                                            ->where('receiver_id',$user_id);
+                                    })
+                                    ->orderBy('created_at')
+                                    ->get();
 
         $this->mark_all_messages_as_read($user_id, $request->user_id);
 
+        if($request->filled('msg_count')){
+            $messages = $messages->take($request->msg_count * -1);
+        }
+        
         return response()->json([
             'status' => true,
             'messages' => $messages,
