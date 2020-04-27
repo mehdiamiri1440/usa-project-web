@@ -1333,7 +1333,7 @@ export default {
     registerRequestInSearchNotFoundCase: function() {
       if (this.currentUser.profile) {
         if (this.currentUser.user_info.is_buyer) {
-          window.location.href = "/dashboard/register-request";
+          window.location.href = "/buyer/register-request";
         } else {
           this.popUpMsg = "حساب کاربری شما از نوع خریدار نیست.";
           eventBus.$emit("submitSuccess", this.popUpMsg);
@@ -1362,7 +1362,7 @@ export default {
             "seller clicks on plus button"
           );
 
-          window.location.href = "/dashboard/register-product";
+          window.location.href = "/seller/register-product";
         } else if (this.currentUser.user_info.is_buyer) {
           this.registerComponentStatistics(
             "product-list",
@@ -1370,7 +1370,7 @@ export default {
             "seller clicks on plus button"
           );
 
-          window.location.href = "/dashboard/register-request";
+          window.location.href = "/buyer/register-request";
         }
       } else {
         this.registerComponentStatistics(

@@ -91,7 +91,7 @@ class product_controller extends Controller
         $product_object_or_failuire_message = $this->add_product_to_DB($request);
 
         if (is_object($product_object_or_failuire_message)) {
-            $most_related_buyAd = $this->get_the_most_related_buyAd_to_the_given_product_if_there_is_any($product_object_or_failuire_message);
+            $most_related_buyAd = null; //$this->get_the_most_related_buyAd_to_the_given_product_if_there_is_any($product_object_or_failuire_message);
 
             if ($most_related_buyAd) {
                 return response()->json([

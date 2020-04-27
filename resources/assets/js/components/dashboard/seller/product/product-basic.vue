@@ -483,9 +483,9 @@ export default {
                 "product-registered-successfully"
               );
 
-              if (response.data.buyAd) {
-                self.relatedBuyAd = response.data.buyAd;
-              }
+              // if (response.data.buyAd) {
+              //   self.relatedBuyAd = response.data.buyAd;
+              // }
 
               self.goToStep(7);
             } else if (response.status === 200) {

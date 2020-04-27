@@ -176,6 +176,11 @@
 
   top: 7px;
 }
+
+.hide-reply{
+  display: none;
+}
+
 @media screen and (max-width: 992px) {
   .default-list-title {
     padding: 4px 0;
@@ -287,9 +292,12 @@
                     <span class="request-count red-text">{{buyAd.reply_capacity + '+'}}</span>
                   </button>
                 </p>
-                <a class="col-sm-3 col-xs-12 pull-left" href @click.prevent="openChat(buyAd)">
+                <a class="col-sm-3 col-xs-12 pull-left" href @click.prevent="openChat(buyAd,$event)">
                   <p class="detail-success">
                     <span class="fas fa-comment-alt"></span> پیام به خریدار
+                  </p>
+                  <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
+                    کمی صبر کنید...
                   </p>
                 </a>
               </li>
@@ -416,12 +424,18 @@ export default {
           }, 100);
         });
     },
-    openChat: function(buyAd) {
+    openChat: function(buyAd,event) {
       var self = this;
+
+      let id = '#loader-' + buyAd.id;
+      self.hideReplyBtn(event,id);
 
       axios.post('/get_user_permission_for_buyAd_reply',{
           buy_ad_id : buyAd.id
       }).then(function(response){
+        
+          self.showReplyBtn(event,id);
+
           if(response.data.permission == true){
                 
             var contact = {
@@ -450,6 +464,22 @@ export default {
               "permission denied"
             );
           }
+      });
+    },
+    hideReplyBtn:function(e,id){
+      return new Promise((resolve,reject) => {
+        $(e.target).hide();
+        resolve(true);
+      }).then(()=>{
+        $(id).show();
+      });
+    },
+    showReplyBtn:function(e,id){
+      return new Promise((resolve,reject) => {
+        $(id).hide();
+        resolve(true);
+      }).then(()=>{
+        $(e.target).show();
       });
     },
     registerComponentStatistics: function(categoryName, actionName, labelName) {
