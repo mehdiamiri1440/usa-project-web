@@ -525,7 +525,13 @@ export default {
           }
         })
         .catch(function(err) {
-          self.errors = err.response.data.errors.phone;
+          if(err.response.status === 500){
+            self.errors[0] = err.response.data.msg;
+          }
+          else{
+            self.errors = err.response.data.errors.phone;
+          }
+
           self.step2.sendCode = true;
         });
     },
