@@ -323,6 +323,8 @@ class message_controller extends Controller
         if($request->filled('msg_count')){
             $messages = $messages->take($request->msg_count * -1);
         }
+
+        $messages = $messages->values()->all();
         
         return response()->json([
             'status' => true,
