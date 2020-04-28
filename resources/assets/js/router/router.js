@@ -17,7 +17,7 @@ const router = new Router({
     {
       path: "/seller",
       components: {
-        seller: getComponent("sellerDashboard")
+        seller: getComponent("sellerDashboard"),
       },
       redirect: "/404",
       children: [
@@ -25,63 +25,63 @@ const router = new Router({
           path: "password",
           name: "passwordSeller",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require([
-                "../components/dashboard/seller/profile/change_password.vue"
+                "../components/dashboard/seller/profile/change_password.vue",
               ], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "status",
           name: "statusSeller",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require([
-                "../components/dashboard/seller/dashboard/status.vue"
+                "../components/dashboard/seller/dashboard/status.vue",
               ], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "pricing",
           name: "dashboardPricingTableSeller",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require([
-                "../components/dashboard/dashboard-pricing-table"
+                "../components/dashboard/dashboard-pricing-table",
               ], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "profile",
           name: "profileBasicSeller",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require([
-                "../components/dashboard/seller/profile/profile_basic.vue"
+                "../components/dashboard/seller/profile/profile_basic.vue",
               ], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "messenger",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require(["../components/dashboard/messenger.vue"], resolve);
-            }
+            },
           },
           children: [
             {
               path: "contacts",
               name: "messagesSeller",
               components: {
-                "contact-list": resolve => {
+                "contact-list": (resolve) => {
                   require(["../components/dashboard/messages.vue"], resolve);
-                }
-              }
-            }
+                },
+              },
+            },
             // {
             //   path: "group-messages",
             //   name: "groupMessagesSeller",
@@ -93,62 +93,62 @@ const router = new Router({
             //     }
             //   }
             // }
-          ]
+          ],
         },
         {
           path: "buyAd-requests",
           name: "buyAdRequestsSeller",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require([
-                "../components/dashboard/seller/request/buyAd-requests.vue"
+                "../components/dashboard/seller/request/buyAd-requests.vue",
               ], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "my-products",
           name: "myProductsSeller",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require([
-                "../components/dashboard/seller/product/my_products"
+                "../components/dashboard/seller/product/my_products",
               ], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "register-product",
           name: "registerProductSeller",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require([
-                "../components/dashboard/seller/product/product-basic.vue"
+                "../components/dashboard/seller/product/product-basic.vue",
               ], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "guide",
           name: "guideSeller",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require(["../components/dashboard/seller/guide.vue"], resolve);
-            }
-          }
-        }
+            },
+          },
+        },
       ],
       beforeEnter: (to, from, next) => {
         var userId = window.localStorage.getItem("userId");
         var userType = window.localStorage.getItem("userType");
         if (userId && userType == 1) next();
         else next("/login");
-      }
+      },
     },
     {
       path: "/buyer",
       components: {
-        buyer: getComponent("buyerDashboard")
+        buyer: getComponent("buyerDashboard"),
       },
       redirect: "/404",
       children: [
@@ -156,41 +156,41 @@ const router = new Router({
           path: "password",
           name: "passwordBuyer",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require([
-                "../components/dashboard/seller/profile/change_password.vue"
+                "../components/dashboard/seller/profile/change_password.vue",
               ], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "profile",
           name: "profileBasicBuyer",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require([
-                "../components/dashboard/buyer/profile/profile_basic.vue"
+                "../components/dashboard/buyer/profile/profile_basic.vue",
               ], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "messenger",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require(["../components/dashboard/messenger.vue"], resolve);
-            }
+            },
           },
           children: [
             {
               path: "contacts",
               name: "messagesBuyer",
               components: {
-                "contact-list": resolve => {
+                "contact-list": (resolve) => {
                   require(["../components/dashboard/messages.vue"], resolve);
-                }
-              }
-            }
+                },
+              },
+            },
             // {
             //   path: "group-messages",
             //   name: "groupMessagesBuyer",
@@ -202,168 +202,168 @@ const router = new Router({
             //     }
             //   }
             // }
-          ]
+          ],
         },
         {
           path: "register-request",
           name: "registerRequestBuyer",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require([
-                "../components/dashboard/buyer/request/register-request"
+                "../components/dashboard/buyer/request/register-request",
               ], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "special-products",
           name: "specialProducts",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require([
-                "../components/dashboard/buyer/products/special-products"
+                "../components/dashboard/buyer/products/special-products",
               ], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "guide",
           name: "guideBuyer",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require(["../components/dashboard/buyer/guide.vue"], resolve);
-            }
-          }
-        }
+            },
+          },
+        },
       ],
       beforeEnter: (to, from, next) => {
         var userId = window.localStorage.getItem("userId");
         var userType = window.localStorage.getItem("userType");
         if (userId && userType == 0) next();
         else next("/login");
-      }
+      },
     },
     {
       path: "/",
       components: {
-        default: getComponent("masterRoute")
+        default: getComponent("masterRoute"),
       },
       children: [
         {
           path: "/",
           name: "indexPage",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require(["../components/layouts/main/index.vue"], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "about-us",
           name: "aboutUs",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require(["../components/layouts/main/about_us.vue"], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "help",
           name: "help",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require(["../components/layouts/main/help.vue"], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "contact-us",
           name: "contactUs",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require(["../components/layouts/main/contact_us.vue"], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "privacy-and-policy",
           name: "privacyAndPolicy",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require([
-                "../components/layouts/main/privacy_and_policy.vue"
+                "../components/layouts/main/privacy_and_policy.vue",
               ], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "product-list",
           name: "productList",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require(["../components/layouts/main/product_list.vue"], resolve);
-            }
+            },
           },
-          props: true
+          props: true,
         },
         {
           path: "product-view/:categoryName/:subCategoryName/:id",
           name: "productView",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require([
-                "../components/layouts/main/product_components/product_view.vue"
+                "../components/layouts/main/product_components/product_view.vue",
               ], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "product-list/:searchText",
           name: "productListSearch",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require(["../components/layouts/main/index.vue"], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "product-list/category/:categoryName",
           name: "productCategory",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require([
-                "../components/layouts/main/product_category.vue"
+                "../components/layouts/main/product_category.vue",
               ], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "profile/:user_name",
           name: "profile",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require(["../components/layouts/main/profile.vue"], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "login",
           name: "login",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require(["../components/login/Login.vue"], resolve);
-            }
-          }
+            },
+          },
         },
         {
           path: "register",
           name: "register",
           components: {
-            default: resolve => {
+            default: (resolve) => {
               require(["../components/register/register.vue"], resolve);
-            }
-          }
-        }
+            },
+          },
+        },
         // {
         //     path: 'pricing',
         //     name: 'pricing',
@@ -371,21 +371,21 @@ const router = new Router({
         //         default: pricingTable,
         //     },
         // },
-      ]
+      ],
     },
     {
       path: "/404",
       name: "notFound",
       components: {
-        default: notFound
-      }
+        default: notFound,
+      },
     },
     {
       path: "/*",
       beforeEnter: (to, from, next) => {
         next("/404");
-      }
-    }
+      },
+    },
   ],
   scrollBehavior(to, from, savedPosition) {
     // if (savedPosition) {
@@ -393,7 +393,7 @@ const router = new Router({
     //     return savedPosition
     // }
     return { x: 0, y: 0 };
-  }
+  },
 });
 
 /**
@@ -401,7 +401,7 @@ const router = new Router({
  * @param  {string}   name     the filename (basename) of the view to load.
  */
 function getComponent(name) {
-  return function(resolve) {
+  return function (resolve) {
     require([`./components/${name}.vue`], resolve);
   };
 }
