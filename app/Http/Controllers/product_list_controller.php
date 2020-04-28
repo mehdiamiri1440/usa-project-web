@@ -397,8 +397,8 @@ class product_list_controller extends Controller
         if($user_response_info['response_time'] == 0 && $user_response_info['response_rate'] == 100){
 
             return function($item1,$item2) use($user_response_info){
-                $a = $item1['main']->is_elevated ;
-                $b = $item2['main']->is_elevated ;
+                $a = $item1['main']->is_elevated == true ? $item1['main']->updated_at :  $item1['main']->is_elevated;
+                $b = $item2['main']->is_elevated == true ? $item2['main']->updated_at :  $item2['main']->is_elevated;
     
                 if($a == $b){
                     $c = $item1['user_info']->response_time != -1 ? Carbon::now()->diffInDays($item1['main']->updated_at) : 100;
@@ -421,8 +421,8 @@ class product_list_controller extends Controller
         }
         else{
             return function($item1,$item2) use($user_response_info){
-                $a = $item1['main']->is_elevated ;
-                $b = $item2['main']->is_elevated ;
+                $a = $item1['main']->is_elevated == true ? $item1['main']->updated_at :  $item1['main']->is_elevated;
+                $b = $item2['main']->is_elevated == true ? $item2['main']->updated_at :  $item2['main']->is_elevated;
     
                 if($a == $b){
                     $c = (Carbon::now()->diffInDays($item1['main']->updated_at) < 3) ? 1 : $this->get_users_similarity($item1['user_info'],$user_response_info);

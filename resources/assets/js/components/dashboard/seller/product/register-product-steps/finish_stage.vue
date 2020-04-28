@@ -283,6 +283,16 @@
 		color: #e41c38;
 
     }
+
+	.bold-text{
+		font-weight: bolder;
+	}
+
+	.large-text{
+		font-size: 20px;
+		font-weight: bolder;
+	}
+
     @media screen and (max-width: 767px){
         .list-item-wrapper{
 
@@ -316,10 +326,10 @@
 
 
 				     		<p class="main-description">
-				     			در صورت استفاده از طرح عضویت رایگان محصول شما پس از تایید کارشناسان در لیست محصولات قرار می گیرید و از طریق پیامک به شما اطلاع رسانی خواهد شد.
+				     			در صورت استفاده از طرح عضویت رایگان محصول شما پس از تایید کارشناسان در لیست محصولات قرار می گیرد 
 				     		</p>
 
-                           <div v-if="$parent.relatedBuyAd">
+                           <!-- <div v-if="$parent.relatedBuyAd">
 	                           	 <p class="main-description"  ><strong>یکی از مرتبط ترین درخواست های خرید برای محصول شما در زیر نمایش داده شده است.
 	                            	<br/>
 	                            	<span class="red-text">در صورت عدم ارسال پیام به خریدار دیگر به این درخواست خرید دسترسی نخواهید داشت.</span></strong>
@@ -350,12 +360,12 @@
 
 	                   				</div>
 	                			</div>
-                           </div>
+                           </div> -->
 
-                           <div class="text-center margin-15-0" v-else>
-
+                           <div class="text-center margin-15-0">
+							   	<p class="red-text large-text">چه خریدارنی به دنبال محصول شما هستند؟</p>
                            		<router-link class="green-button" :to="{ name : 'buyAdRequestsSeller'}">
-                           			مشاهده درخواست های خرید
+                           			<span class="bold-text">مشاهده درخواست های خرید</span>
                            		</router-link>
 
                            </div>

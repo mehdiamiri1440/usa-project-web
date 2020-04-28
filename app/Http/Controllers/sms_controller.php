@@ -81,7 +81,7 @@ class sms_controller extends Controller
 		else{
             return response()->json([
                 'status' => false,
-                'msg' => 'phone number is not correct!',
+                'msg' => 'این شماره در باسکول ثبت نشده است. شاید با شماره دیگری ثبت نام کرده اید.',
             ],500);
         }
 		
