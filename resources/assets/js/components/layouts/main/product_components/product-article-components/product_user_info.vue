@@ -298,37 +298,7 @@ export default {
       } else {
         window.localStorage.setItem("contact", JSON.stringify(contact));
         window.localStorage.setItem("pathname", window.location.pathname);
-        let self = this;
-        let closeIconBtn = document.createElement("button");
-        closeIconBtn.classList.add("sweet-alert-close-button");
-        closeIconBtn.innerHTML = "<i class='fa fa-times'></i>";
-        closeIconBtn.addEventListener("click", function() {
-          swal.close();
-        });
 
-        swal({
-          title: "استعلام قیمت",
-          text:
-            "اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.",
-          content: closeIconBtn,
-          className: "custom-sweet-alert",
-          buttons: {
-            catch: {
-              text: "یه کاری کن خوورود/ثبت نام",
-              value: "success"
-            },
-            close: {
-              text: "متوجه شدم",
-              className: "close-sweet-alert-btn"
-            }
-          }
-        }).then(value => {
-          switch (value) {
-            case "success":
-              self.$router.push({ name: "login" });
-              break;
-          }
-        });
         this.popUpMsg =
           "اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.";
         eventBus.$emit("submitSuccess", this.popUpMsg);

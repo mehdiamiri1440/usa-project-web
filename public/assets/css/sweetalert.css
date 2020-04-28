@@ -1,4 +1,14 @@
-.custom-sweet-alert {
+/*
+         .custom-swal -> custom styles for default swal wrapper
+         .custom-swal-with-cancel -> custom styles for  swal wrapper with cancel button (Always the last button most be cancel button)
+         .custom-swal-full-size  -> custom style for default swal wrapper but it is full size in mobile 
+         .custom-swal-full-size-with-cancel  -> custom style for default swal wrapper but it is full size in mobile  with cancel button (Always the last button most be cancel button)
+         */
+
+.custom-swal,
+.custom-swal-with-cancel,
+.custom-swal-full-size,
+.custom-swal-full-size-with-cancel {
   overflow: hidden;
   border-radius: 13px;
 }
@@ -6,13 +16,26 @@
 .swal-button {
   background-color: #00c569;
 }
+.swal-button:not([disabled]):hover {
+  background-color: #279b41;
+}
+.swal-button:focus {
+  outline: none;
+
+  box-shadow: none;
+}
 
 .swal-title {
   font-size: 16px;
-  margin: 0;
   padding: 7px;
   border-bottom: 1px solid #e5e5e5;
 }
+
+.swal-title:not(:last-child),
+.swal-content {
+  margin: 0 auto 30px;
+}
+
 .swal-title:first-child {
   margin-top: 0;
 }
@@ -35,7 +58,34 @@
   border: none;
 }
 
-.swal-footer .swal-button-container:last-of-type {
+.swal-text {
+  text-align: center;
+  direction: rtl;
+  margin: 0 auto;
+  font-size: 14px;
+}
+
+.custom-swal-with-cancel
+  .swal-footer
+  .swal-button-container:last-of-type
+  button,
+.custom-swal-full-size-with-cancel
+  .swal-footer
+  .swal-button-container:last-of-type
+  button {
+  border-radius: 0;
+
+  width: 100%;
+
+  color: #555;
+
+  transition: 200ms;
+}
+
+.custom-swal-with-cancel .swal-footer .swal-button-container:last-of-type,
+.custom-swal-full-size-with-cancel
+  .swal-footer
+  .swal-button-container:last-of-type {
   margin: 0;
 
   width: 100%;
@@ -45,48 +95,45 @@
   margin-top: 30px;
 }
 
-.swal-text {
-  text-align: center;
-  direction: rtl;
-  margin: 30px;
-}
-
-.close-sweet-alert-btn {
-  background: #eee;
-
-  border-radius: 0;
-
-  width: 100%;
-
-  color: #555;
-
-  transition: 200ms;
-
-  outline: none;
-}
-
-.swal-button:not([disabled]):hover {
-  background-color: #279b41;
-}
-
+/* 
 .close-sweet-alert-btn:hover {
   background-color: #ddd !important;
-}
+} */
 
 .swal-footer {
   text-align: center;
+  direction: rtl;
   padding: 0;
+  margin-top: 30px;
+}
+.custom-swal .swal-footer,
+.custom-swal-full-size .swal-footer {
+  margin-bottom: 30px;
+}
+
+.swal-button-container .swal-button {
+  font-size: 14px;
+}
+
+.bg-cancel {
+  background-color: #ddd !important;
+  color: #555;
+}
+.bg-cancel:hover {
+  background-color: #eee !important;
 }
 
 @media screen and (max-width: 768px) {
-  .custom-sweet-alert {
+  .custom-swal-full-size,
+  .custom-swal-full-size-with-cancel {
     border-radius: 0;
     margin: 0;
     height: 100%;
     width: 100%;
   }
 
-  .swal-footer {
+  .custom-swal-full-size .swal-footer,
+  .custom-swal-full-size-with-cancel .swal-footer {
     padding: 0;
 
     margin: 0;

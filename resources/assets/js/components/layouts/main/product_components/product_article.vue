@@ -633,34 +633,56 @@ export default {
         window.localStorage.setItem("contact", JSON.stringify(contact));
         window.localStorage.setItem("pathname", window.location.pathname);
 
+        /*
+        ##### add close icon to header for swal modal
+
         let closeIconBtn = document.createElement("button");
         closeIconBtn.classList.add("sweet-alert-close-button");
         closeIconBtn.innerHTML = "<i class='fa fa-times'></i>";
         closeIconBtn.addEventListener("click", function() {
           swal.close();
         });
+        
+        */
+
+        /*
+        ##### swal wrapper classes 
+
+         .custom-swal -> custom styles for default swal wrapper
+         .custom-swal-with-cancel -> custom styles for  swal wrapper with cancel button (Always the last button most be cancel button)
+         .custom-swal-full-size  -> custom style for default swal wrapper but it is full size in mobile 
+         .custom-swal-full-size-with-cancel  -> custom style for default swal wrapper but it is full size in mobile  with cancel button (Always the last button most be cancel button)
+         */
 
         swal({
           title: "استعلام قیمت",
           text:
             "اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.",
-          content: closeIconBtn,
-          className: "custom-sweet-alert",
+          // content: closeIconBtn,
+          className: "custom-swal-with-cancel",
           buttons: {
-            catch: {
+            success: {
               text: "ورود/ثبت نام",
-              value: "success",
-              className: "bg-green"
+              value: "success"
+            },
+            regect: {
+              text: "دکمه دوم",
+              className: "bg-red"
+            },
+            test: {
+              visible: false,
+              text: "test"
             },
             close: {
-              text: "متوجه شدم",
-              className: "close-sweet-alert-btn"
+              text: "بستن",
+              className: "bg-cancel"
             }
           }
         }).then(value => {
           switch (value) {
             case "success":
-              self.$router.push({ name: "login" });
+              // self.$router.push({ name: "login" });
+
               break;
           }
         });

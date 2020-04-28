@@ -313,8 +313,18 @@ select {
 .bg-gray {
   background: #777;
 }
+
 .bg-green {
-  background: #00c569;
+  background-color: #00c569;
+}
+.bg-green:hover {
+  background-color: #279b41;
+}
+.bg-red {
+  background-color: #e41c39 !important;
+}
+.bg-red:hover:hover {
+  background-color: #d71a34 !important;
 }
 
 .message-wrapper .chat-page ul,
