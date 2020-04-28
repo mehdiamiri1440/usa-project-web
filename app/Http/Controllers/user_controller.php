@@ -23,11 +23,19 @@ class user_controller extends Controller
         $rules = array(
             'phone' => 'required',
             'password' => 'required',
+            'plain' => 'boolean'
         );
 
         $this->validate($request, $rules);
 
-        $user = $this->users->get_user(null, $request->phone, sha1($request->password));
+        if($request->has('plain') && $request->plain === false){
+            $user = $this->users->get_user(null, $request->phone,$request->password);
+            $redirection_status = true;
+        }
+        else{
+            $user = $this->users->get_user(null, $request->phone, sha1($request->password));
+            $redirection_status = false;
+        }
 
         if ($user) {
             $user_confirmed_profile_record_status = $this->does_user_have_confirmed_profile_record($user->id);
@@ -35,12 +43,15 @@ class user_controller extends Controller
             $this->set_user_session($user);
             $jwt_token = JWTAuth::fromUser($user);
 
+            
+
             return response()->json([
                 'status' => true,
                 'id' => $user->id,
                 'is_buyer' => $user->is_buyer,
                 'is_seller' => $user->is_seller,
                 'confirmed_profile_record' => $user_confirmed_profile_record_status,
+                'redirected' => $redirection_status,
                 'msg' => 'Login successfull',
                 'token' => $jwt_token,
              ], 200)

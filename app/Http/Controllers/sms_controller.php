@@ -6,6 +6,8 @@ use App\myuser;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use phplusir\smsir\Smsir;
+use App\Http\Controllers\user_controller;
+use App\services\v1\userService;
 
 class sms_controller extends Controller
 {
@@ -17,7 +19,7 @@ class sms_controller extends Controller
 	public function send_phone_verification_code(Request $request)
 	{
 		$rules = [
-			'phone' => ['required','regex:/^((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))$/u','unique:myusers']
+			'phone' => ['required','regex:/^((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))$/u']
 		];
 		
 		$this->validate($request,$rules);
@@ -104,15 +106,35 @@ class sms_controller extends Controller
 	public function verify_code(Request $request)
 	{
 		$rules = [
-			'verification_code' => 'required'
+            'verification_code' => 'required',
+            'phone' => ['regex:/^((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))$/u'],
 		];
 		
 		$this->validate($request,$rules);
 		
 		if((session('OTP_start') + 20 * 60) >= time() && session('sms_OTP') == $request->verification_code)
 		{
+            if($request->filled('phone')){
+                $phone = $request->phone;
+
+                $user_record = myuser::where('phone',$phone)->first();
+                if($user_record){
+                    $req = Request::create('/dologin', 'POST',[
+                        'phone' => $user_record->phone,
+                        'password' => $user_record->password,
+                        'plain' => false
+                    ]);
+
+                    $user_controller_object = new user_controller(new userService);
+                    
+                    return $user_controller_object->login($req);
+                }
+                
+            }
+
 			return response()->json([
-				'status' => TRUE,
+                'status' => true,
+                'redirected' => false,
 				'msg' => 'verification code is correct.'
 			]);
 		}

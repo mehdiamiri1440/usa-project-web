@@ -584,12 +584,12 @@
                 this.goToStep(5);
             },
             setAccount() {
-                this.userNameValidator(this.step3.user_name);
-                this.passwordValidator(this.step3.password, this.step3.re_password);
+                // this.userNameValidator(this.step3.user_name);
+                this.passwordValidator(this.step3.password);
                 if (
-                    !this.errors.user_name[0] &&
-                    !this.errors.password[0] &&
-                    !this.errors.password_conf[0]
+                    // !this.errors.user_name[0] &&
+                    !this.errors.password[0] 
+                    //&& !this.errors.password_conf[0]
                 ) {
                     this.register_details();
                 }
@@ -678,12 +678,18 @@
 
                 axios
                     .post("/verify_code", {
-                        verification_code: this.toLatinNumbers(this.step2.verification_code)
+                        verification_code: this.toLatinNumbers(this.step2.verification_code),
+                        phone : this.toLatinNumbers(this.step1.phone)
                     })
                     .then(function (response) {
                         if (response.data.status === true) {
-                            self.goToStep(3);
-                            self.getProvinceList();
+                            if(response.data.redirected){ // it's very tricky condition, be careful
+                                window.location.href = '/login';
+                            }
+                            else{
+                                self.goToStep(3);
+                                self.getProvinceList();
+                            }
                         } else if (response.data.status === false) {
                             self.goToStep(2);
                             self.errors.verification_code = [];
@@ -789,13 +795,13 @@
                 this.step4.categoryId = $(e.target).val();
             },
             checkStep3: function () {
-                this.userNameValidator(this.step3.user_name);
+                // this.userNameValidator(this.step3.user_name);
                 this.firstNameValidator(this.step3.first_name);
                 this.lastNameValidator(this.step3.last_name);
                 this.provinceValidator(this.step3.province);
                 this.cityValidator(this.step3.city);
                 this.nationalCodeValidator(this.step3.national_code);
-                this.passwordValidator(this.step3.password, this.step3.re_password);
+                this.passwordValidator(this.step3.password);
                 this.sexValidator(this.step3.sex);
 
                 if (this.errorFlag) {
@@ -949,7 +955,7 @@
 
                 return (sum < 2 && check == sum) || (sum >= 2 && check + sum == 11);
             },
-            passwordValidator: function (pass, passConf) {
+            passwordValidator: function (pass) {
                 this.errors.password = [];
                 this.errors.password_conf = [];
 
@@ -961,14 +967,14 @@
                     this.errors.password.push("رمز عبور حداقل ۸ کاراکتر باشد");
                     this.errorFlag = true;
                 }
-                if (passConf === "") {
-                    this.errors.password_conf.push("تکرار رمز عبور الزامی است");
-                    this.errorFlag = true;
-                }
-                if (passConf !== pass) {
-                    this.errors.password_conf.push("رمز عبور مطابقت ندارد");
-                    this.errorFlag = true;
-                }
+                // if (passConf === "") {
+                //     this.errors.password_conf.push("تکرار رمز عبور الزامی است");
+                //     this.errorFlag = true;
+                // }
+                // if (passConf !== pass) {
+                //     this.errors.password_conf.push("رمز عبور مطابقت ندارد");
+                //     this.errorFlag = true;
+                // }
 
                 if (this.errors.password[0]) {
                     this.registerComponentStatistics(
@@ -977,13 +983,13 @@
                         "input:" + pass + " Error:" + this.errors.password[0]
                     );
                 }
-                if (this.errors.password_conf[0]) {
-                    this.registerComponentStatistics(
-                        "Register-Error",
-                        "passwordConfirmation",
-                        "input:" + passConf + " Error:" + this.errors.password_conf[0]
-                    );
-                }
+                // if (this.errors.password_conf[0]) {
+                //     this.registerComponentStatistics(
+                //         "Register-Error",
+                //         "passwordConfirmation",
+                //         "input:" + passConf + " Error:" + this.errors.password_conf[0]
+                //     );
+                // }
             },
             sexValidator: function (sex) {
                 this.errors.sex = [];
