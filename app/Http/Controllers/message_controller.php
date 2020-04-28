@@ -179,11 +179,20 @@ class message_controller extends Controller
     }
 
     //public method
-    public function get_current_user_contact_list()
+    public function get_current_user_contact_list(Request $request)
     {
+        $this->validate($request,[
+            'from' => 'integer|min:0',
+            'to'   => 'required_with:from|integer|min:15'
+        ]);
+
         $user_id = session('user_id');
 
         $contacts_id = $this->get_contacts_id_array($user_id);
+
+        if($request->filled('from')){
+            $contacts_id = array_splice($contacts_id,$request->from,$request->to);
+        }
 
         $contact_list = [];
 
@@ -215,10 +224,12 @@ class message_controller extends Controller
     {
         $related_records = message::where('sender_id', $user_id)
                                 ->orWhere('receiver_id', $user_id)
-                                ->select('sender_id', 'receiver_id')
+                                ->select(DB::raw('MAX(created_at) as created_at,sender_id,receiver_id'))
                                 ->distinct()
-                                ->orderBy('created_at')
+                                ->groupBy('created_at','sender_id','receiver_id')
+                                ->orderBy('created_at','desc')
                                 ->get();
+                                
         $contact_id_array = [];
 
         $related_records->each(function ($record) use (&$contact_id_array,$user_id) {

@@ -400,6 +400,10 @@ export default {
       assets: this.$parent.assets,
       defultImg: this.$parent.defultimg,
       str: this.$parent.str,
+      fromContact: 0,
+      toContact:15,
+      contactsCountInEachLoad:20,
+      showLoadMoreBtn:false,
     };
   },
 
@@ -418,15 +422,30 @@ export default {
       this.isContactListLoaded = false;
 
       axios
-        .post("/get_contact_list")
+        .post("/get_contact_list",{
+            from : self.fromContact,
+            to   : self.toContact
+        })
         .then(function (response) {
           self.contactList = response.data.contact_list;
           self.currentUserId = response.data.user_id;
           self.isContactListLoaded = true;
+
+          if(self.contactList.length >= self.toContact){
+            self.showLoadMoreBtn = true;
+          }
+          else{
+            self.showLoadMoreBtn = false;
+          }
         })
         .catch(function (e) {
           //
         });
+    },
+    loadMoreContacts: function(){
+        this.toContact = this.toContact + this.contactsCountInEachLoad;
+
+        this.loadContactList();
     },
     loadChatHistory: function (contact, index) {
       var self = this;
@@ -709,7 +728,8 @@ export default {
             //
           });
       } else {
-        self.loadContactList();
+          self.contactList = [];
+          self.loadContactList();
       }
     },
     selectedContact: function (value) {
