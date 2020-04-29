@@ -41,7 +41,6 @@
     <script src="{{asset('index/js/owl.carousel.min.js')}}"></script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> --}}
    
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
