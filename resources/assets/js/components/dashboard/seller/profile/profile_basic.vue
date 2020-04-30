@@ -1311,9 +1311,8 @@
                         if (response.status === 200) {
 
                             eventBus.$emit('submiting', false);
-                            self.popUpMsg = 'تغییرات با موفقیت اعمال شد';
-                            eventBus.$emit('submitSuccess', self.popUpMsg);
-                            $('#custom-main-modal').modal('show');
+                
+                            eventBus.$emit('modal', 'profileEditSuccess');
                         }
                         self.submiting = false;
                     })

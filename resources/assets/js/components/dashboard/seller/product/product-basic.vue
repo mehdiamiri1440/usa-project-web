@@ -356,9 +356,7 @@ export default {
           self.isStartLoading = false;
 
           if (self.limited.isLimited) {
-            self.popUpMsg = self.limited.msg;
-            eventBus.$emit("submitSuccess", self.popUpMsg);
-            $("#modal-buttons").modal("show");
+            eventBus.$emit('modal', 'registerProductLimit');
           } else {
             self.goToStep(1);
           }

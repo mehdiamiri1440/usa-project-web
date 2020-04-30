@@ -405,6 +405,12 @@ export default {
     setUpChat: function () {
       this.handleBackBtnClickOnDevices();
 
+      let msg = window.localStorage.getItem('msgToSend');
+      if(msg){
+        window.localStorage.removeItem('msgToSend');
+        this.msgToSend = msg;
+      }
+      
       this.loadChatHistory(this.contactInfo);
     },
     loadChatHistory: function (contact, index) {
@@ -423,6 +429,10 @@ export default {
           self.chatMessages = response.data.messages;
           self.currentUserId = response.data.current_user_id;
           self.scrollToEnd(0);
+
+          if(self.msgToSend){
+            self.sendMessage();
+          }
         })
         .catch(function (e) {
           //
@@ -485,6 +495,16 @@ export default {
             });
         }
       }
+    },
+    handleInitialMessage: function(){
+      let self = this;
+
+      return new Promise((resolve,reject) => {
+        self.loadChatHistory(self.contactInfo)
+        resolve(true);
+      }).then(() => {
+        self.sendMessage();
+      });
     },
     handleBackBtnClickOnDevices: function () {
       var self = this;

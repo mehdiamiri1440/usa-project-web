@@ -747,10 +747,9 @@
                         .post("api/v1/users", object)
                         .then(function (response) {
                             if (response.status === 201) {
-                                self.popUpMsg =
-                                    "ثبت نام با موفقیت انجام شد.کمی صبر کنید ...";
-                                eventBus.$emit("submitSuccess", self.popUpMsg);
-                                $("#custom-main-modal").modal("show");
+                                
+                                eventBus.$emit('modal', 'userRegisterSuccess');
+                                
                                 axios
                                     .post("/dologin", {
                                         phone: object.phone,
@@ -759,7 +758,8 @@
                                     .then(response => {
                                         if(response.data.status){
                                             if(self.isUserComeFromChatBoxOpen()){
-                                                $("#custom-main-modal").modal("hide");
+                                                swal.close(); //close modal
+                                                
                                                 self.returnUserToPreviousPageAndChatBox(response.data);
                                             }
                                             else{

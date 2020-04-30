@@ -580,14 +580,9 @@ export default {
         .post("/edit_product", request)
         .then(function(response) {
           $(".modal").modal("hide");
-          self.popUpMsg = "محصول شما با موفقیت ویرایش شد.";
-          eventBus.$emit("submitSuccess", self.popUpMsg);
-          setTimeout(function() {
-            $("#custom-main-modal").modal("show");
-            $("#custom-main-modal").on("hidden.bs.modal", function(e) {
-              location.reload();
-            });
-          }, 300);
+          
+          eventBus.$emit('modal', 'productEditDone');
+
           self.registerComponentStatistics(
             "product",
             "register-product-edit",
@@ -633,10 +628,28 @@ export default {
         window.localStorage.setItem("contact", JSON.stringify(contact));
         window.localStorage.setItem("pathname", window.location.pathname);
 
-        this.popUpMsg =
-          "اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.";
-        eventBus.$emit("submitSuccess", this.popUpMsg);
-        $("#auth-popup").modal("show");
+        /*
+        ##### add close icon to header for swal modal
+
+        let closeIconBtn = document.createElement("button");
+        closeIconBtn.classList.add("sweet-alert-close-button");
+        closeIconBtn.innerHTML = "<i class='fa fa-times'></i>";
+        closeIconBtn.addEventListener("click", function() {
+          swal.close();
+        });
+        
+        */
+
+        /*
+        ##### swal wrapper classes 
+
+         .custom-swal -> custom styles for default swal wrapper
+         .custom-swal-with-cancel -> custom styles for  swal wrapper with cancel button (Always the last button most be cancel button)
+         .custom-swal-full-size  -> custom style for default swal wrapper but it is full size in mobile 
+         .custom-swal-full-size-with-cancel  -> custom style for default swal wrapper but it is full size in mobile  with cancel button (Always the last button most be cancel button)
+         */
+
+        eventBus.$emit('modal','sendMsg');
       }
     },
     updatePopUpStatus: function(popUpOpenStatus) {
@@ -756,13 +769,14 @@ export default {
       });
     },
     elevatorEvent: function() {
-      eventBus.$emit(
-        "elevatorText",
-        "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود."
-      );
+      // eventBus.$emit(
+      //   "elevatorText",
+      //   "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود."
+      // );
 
       eventBus.$emit("productId", this.product.main.id);
-      $("#elevator-modal").modal("show");
+      eventBus.$emit('modal', 'elevator');
+      // $("#elevator-modal").modal("show");
     }
   },
   mounted() {

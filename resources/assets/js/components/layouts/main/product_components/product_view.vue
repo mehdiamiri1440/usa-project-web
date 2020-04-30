@@ -306,250 +306,233 @@ export default {
       showRegisterRequestBox: true,
     };
   },
-  methods: {
-    init: function () {
-      this.isLoading = true;
-      var self = this;
-      axios.post("/user/profile_info").then(function (response) {
-        self.currentUser = response.data;
+    methods: {
+        init: function () {
+            this.isLoading = true;
+            var self = this;
+            axios.post("/user/profile_info").then(function (response) {
+                self.currentUser = response.data;
 
-        if (self.currentUser.user_info) {
-          if (self.currentUser.user_info.is_seller == true) {
-            self.showRegisterRequestBox = false;
-          }
-        }
+                if(self.currentUser.user_info){
+                    if(self.currentUser.user_info.is_seller == true){
+                        self.showRegisterRequestBox = false;
+                    }
+                }
 
-        axios
-          .post("/get_product_by_id", {
-            product_id: self.$route.params.id,
-          })
-          .then(function (response) {
-            self.product = response.data.product;
-            if (self.currentUser.user_info) {
-              if (
-                self.currentUser.user_info.id === self.product.main.myuser_id
-              ) {
-                self.isMyProfile = true;
-                self.$emit("isMyProfile", self.isMyProfile);
-              }
+                axios
+                    .post("/get_product_by_id", {
+                        product_id: self.$route.params.id
+                    })
+                    .then(function (response) {
+                        self.product = response.data.product;
+                        if (self.currentUser.user_info) {
+                            if (self.currentUser.user_info.id === self.product.main.myuser_id) {
+                                self.isMyProfile = true;
+                                self.$emit('isMyProfile', self.isMyProfile);
+                            }
+                        }
+                        
+                        axios.post('/get_related_products', {
+                            product_id : self.product.main.id
+                        })
+                            .then(function (response) {
+                                self.relatedProducts = response.data.related_products;
+                                self.isLoading = false;
+                            });
+
+                    })
+                    .catch(function (err) {
+                        window.location.href = "/404";
+                    });
+            });
+
+
+        },
+        openChat: function (product) {
+            this.registerComponentStatistics('product', 'openChat', 'click on open chatBox');
+
+            var contact = {
+                contact_id: product.user_info.id,
+                first_name: product.user_info.first_name,
+                last_name: product.user_info.last_name,
+                profile_photo: product.profile_info.profile_photo,
+                user_name: product.user_info.user_name,
+            };
+
+            var self = this;
+            if (this.currentUser.user_info) {
+                if (this.currentUser.user_info.id !== product.user_info.id) {
+                    eventBus.$emit('ChatInfo',contact);
+                }
+                else {
+                    this.popUpMsg = 'شما نمی توانید به خودتان پیام دهید.';
+                    eventBus.$emit('submitSuccess', this.popUpMsg);
+                    $('#custom-main-modal').modal('show');
+                }
+            }
+            else {
+                window.localStorage.setItem('contact',JSON.stringify(contact));
+                window.localStorage.setItem('pathname',window.location.pathname);
+
+                eventBus.$emit('modal', 'sendMsg');
+            }
+        },
+        registerComponentStatistics: function (categoryName, actionName, labelName) {
+            gtag('event', actionName, {
+                'event_category': categoryName,
+                'event_label': labelName
+            });
+        },
+        getProductUrl: function () {
+
+            return '/product-view/خرید-عمده-'
+                + this.product.main.sub_category_name.replace(' ', '-')
+                + '/'
+                + this.product.main.category_name.replace(' ', '-')
+                + '/'
+                + this.product.main.id;
+
+        },
+        copyProductLinkToClipBoard: function () {
+
+            this.registerComponentStatistics('product', 'copy-product-link', 'click on copy poduct link');
+
+            if (this.isDeviceMobile()) {
+
+                var linkElement = document.createElement('a');
+                var Message = "https://buskool.com" + this.getProductUrl();
+                var messageToWhatsApp = encodeURIComponent(Message);
+                var url = "whatsapp://send?text=" + messageToWhatsApp;
+
+                linkElement.setAttribute('href', url);
+                linkElement.setAttribute('data-action', 'share/whatsapp/share');
+
+                document.body.appendChild(linkElement);
+
+                linkElement.click();
+
+                document.body.removeChild(linkElement);
+
+            }
+            else {
+                var input = document.createElement('input');
+                input.setAttribute('value', 'https://buskool.com' + this.getProductUrl());
+                document.body.appendChild(input);
+                input.select();
+                var result = document.execCommand('copy');
+                document.body.removeChild(input);
+                if (result) {
+                    this.popUpMsg = 'آدرس محصول کپی شد.';
+                    eventBus.$emit('submitSuccess', this.popUpMsg);
+                    $('#custom-main-modal').modal('show');
+                }
             }
 
-            axios
-              .post("/get_related_products", {
-                product_id: self.product.main.id,
-              })
-              .then(function (response) {
-                self.relatedProducts = response.data.related_products;
-                self.isLoading = false;
-              });
-          })
-          .catch(function (err) {
-            window.location.href = "/404";
-          });
-      });
-    },
-    openChat: function (product) {
-      this.registerComponentStatistics(
-        "product",
-        "openChat",
-        "click on open chatBox"
-      );
+        },
+        isDeviceMobile: function () {
+            if (navigator.userAgent.match(/Android/i)
+                || navigator.userAgent.match(/webOS/i)
+                || navigator.userAgent.match(/iPhone/i)
+                || navigator.userAgent.match(/iPad/i)
+                || navigator.userAgent.match(/iPod/i)
+                || navigator.userAgent.match(/BlackBerry/i)
+                || navigator.userAgent.match(/Windows Phone/i)
+            ) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        },
+        toLatinNumbers: function (num) {
+            if (num == null) {
+                return null;
+            }
 
-      var contact = {
-        contact_id: product.user_info.id,
-        first_name: product.user_info.first_name,
-        last_name: product.user_info.last_name,
-        profile_photo: product.profile_info.profile_photo,
-        user_name: product.user_info.user_name,
-      };
+            num = num.toString().replace(/^0+/, '');
+            num = num.toString().replace(/^\u0660+/, '');
+            num = num.toString().replace(/^\u06f0+/, '');
 
-      var self = this;
-      if (this.currentUser.user_info) {
-        if (this.currentUser.user_info.id !== product.user_info.id) {
-          eventBus.$emit("ChatInfo", contact);
-        } else {
-          this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
-          eventBus.$emit("submitSuccess", this.popUpMsg);
-          $("#custom-main-modal").modal("show");
-        }
-      } else {
-        window.localStorage.setItem("contact", JSON.stringify(contact));
-        window.localStorage.setItem("pathname", window.location.pathname);
+            return num.toString()
+                .replace(/[\u0660-\u0669]/g, function (c) {
+                    return c.charCodeAt(0) - 0x0660;
+                }).replace(/[\u06f0-\u06f9]/g, function (c) {
+                    return c.charCodeAt(0) - 0x06f0;
+                });
+        },
+        editProduct: function (getProductWrapper) {
 
-        this.popUpMsg =
-          "اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.";
-        eventBus.$emit("submitSuccess", this.popUpMsg);
-        $("#auth-popup").modal("show");
-      }
-    },
-    registerComponentStatistics: function (
-      categoryName,
-      actionName,
-      labelName
-    ) {
-      gtag("event", actionName, {
-        event_category: categoryName,
-        event_label: labelName,
-      });
-    },
-    getProductUrl: function () {
-      return (
-        "/product-view/خرید-عمده-" +
-        this.product.main.sub_category_name.replace(" ", "-") +
-        "/" +
-        this.product.main.category_name.replace(" ", "-") +
-        "/" +
-        this.product.main.id
-      );
-    },
-    copyProductLinkToClipBoard: function () {
-      this.registerComponentStatistics(
-        "product",
-        "copy-product-link",
-        "click on copy poduct link"
-      );
 
-      if (this.isDeviceMobile()) {
-        var linkElement = document.createElement("a");
-        var Message = "https://buskool.com" + this.getProductUrl();
-        var messageToWhatsApp = encodeURIComponent(Message);
-        var url = "whatsapp://send?text=" + messageToWhatsApp;
+            this.submiting = true;
+            this.errors = '';
 
-        linkElement.setAttribute("href", url);
-        linkElement.setAttribute("data-action", "share/whatsapp/share");
+            var stock = '#' + getProductWrapper + ' input.stock';
+            var getProductId = '#' + getProductWrapper + ' .product-id';
+            var minSalePrice = '#' + getProductWrapper + ' input.min-sale-price';
+            var maxSalePrice = '#' + getProductWrapper + ' input.max-sale-price';
+            var minSaleAmount = '#' + getProductWrapper + ' input.min-sale-amount';
+            var description = '#' + getProductWrapper + ' textarea.description';
 
-        document.body.appendChild(linkElement);
 
-        linkElement.click();
+            stock = this.toLatinNumbers($(stock).val());
+            getProductId = this.toLatinNumbers($(getProductId).val());
+            minSalePrice = this.toLatinNumbers($(minSalePrice).val());
+            maxSalePrice = this.toLatinNumbers($(maxSalePrice).val());
+            minSaleAmount = this.toLatinNumbers($(minSaleAmount).val());
+            description = $(description).val();
 
-        document.body.removeChild(linkElement);
-      } else {
-        var input = document.createElement("input");
-        input.setAttribute(
-          "value",
-          "https://buskool.com" + this.getProductUrl()
-        );
-        document.body.appendChild(input);
-        input.select();
-        var result = document.execCommand("copy");
-        document.body.removeChild(input);
-        if (result) {
-          this.popUpMsg = "آدرس محصول کپی شد.";
-          eventBus.$emit("submitSuccess", this.popUpMsg);
-          $("#custom-main-modal").modal("show");
-        }
-      }
-    },
-    isDeviceMobile: function () {
-      if (
-        navigator.userAgent.match(/Android/i) ||
-        navigator.userAgent.match(/webOS/i) ||
-        navigator.userAgent.match(/iPhone/i) ||
-        navigator.userAgent.match(/iPad/i) ||
-        navigator.userAgent.match(/iPod/i) ||
-        navigator.userAgent.match(/BlackBerry/i) ||
-        navigator.userAgent.match(/Windows Phone/i)
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    toLatinNumbers: function (num) {
-      if (num == null) {
-        return null;
-      }
 
-      num = num.toString().replace(/^0+/, "");
-      num = num.toString().replace(/^\u0660+/, "");
-      num = num.toString().replace(/^\u06f0+/, "");
+            var request = {
+                product_id: getProductId,
+                stock: stock,
+                min_sale_price: minSalePrice,
+                max_sale_price: maxSalePrice,
+                min_sale_amount: minSaleAmount,
+            };
 
-      return num
-        .toString()
-        .replace(/[\u0660-\u0669]/g, function (c) {
-          return c.charCodeAt(0) - 0x0660;
-        })
-        .replace(/[\u06f0-\u06f9]/g, function (c) {
-          return c.charCodeAt(0) - 0x06f0;
-        });
-    },
-    editProduct: function (getProductWrapper) {
-      this.submiting = true;
-      this.errors = "";
 
-      var stock = "#" + getProductWrapper + " input.stock";
-      var getProductId = "#" + getProductWrapper + " .product-id";
-      var minSalePrice = "#" + getProductWrapper + " input.min-sale-price";
-      var maxSalePrice = "#" + getProductWrapper + " input.max-sale-price";
-      var minSaleAmount = "#" + getProductWrapper + " input.min-sale-amount";
-      var description = "#" + getProductWrapper + " textarea.description";
+            if (description !== '') {
+                request.description = description;
+            }
 
-      stock = this.toLatinNumbers($(stock).val());
-      getProductId = this.toLatinNumbers($(getProductId).val());
-      minSalePrice = this.toLatinNumbers($(minSalePrice).val());
-      maxSalePrice = this.toLatinNumbers($(maxSalePrice).val());
-      minSaleAmount = this.toLatinNumbers($(minSaleAmount).val());
-      description = $(description).val();
+            var self = this;
 
-      var request = {
-        product_id: getProductId,
-        stock: stock,
-        min_sale_price: minSalePrice,
-        max_sale_price: maxSalePrice,
-        min_sale_amount: minSaleAmount,
-      };
 
-      if (description !== "") {
-        request.description = description;
-      }
+            axios.post('/edit_product', request)
+                .then(function (response) {
+                    $('.modal').modal('hide');
 
-      var self = this;
+                    eventBus.$emit('modal', 'productEditDone');
 
-      axios
-        .post("/edit_product", request)
-        .then(function (response) {
-          $(".modal").modal("hide");
-          self.popUpMsg = "محصول شما با موفقیت ویرایش شد.";
-          eventBus.$emit("submitSuccess", self.popUpMsg);
-          setTimeout(function () {
-            $("#custom-main-modal").modal("show");
-            $("#custom-main-modal").on("hidden.bs.modal", function (e) {
-              location.reload();
-            });
-          }, 300);
-          self.registerComponentStatistics(
-            "product",
-            "register-product-edit",
-            "product-edited-successfully"
-          );
-        })
-        .catch(function (err) {
-          self.errors = "";
-          self.errors = err.response.data.errors;
-          // self.registerComponentExceptions('Product-component: validation errors in edit product API');
-        });
-    },
-    stopLoader: function () {
-      eventBus.$emit("isLoading", false);
-    },
-    getRelatedProductUrl: function (product) {
-      return (
-        "/product-view/خرید-عمده-" +
-        product.subcategory_name.replace(" ", "-") +
-        "/" +
-        product.category_name.replace(" ", "-") +
-        "/" +
-        product.id
-      );
-    },
-    elevatorEvent: function () {
-      eventBus.$emit(
-        "elevatorText",
-        "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود."
-      );
+                    self.registerComponentStatistics('product', 'register-product-edit', 'product-edited-successfully');
+                })
+                .catch(function (err) {
+                    self.errors = '';
+                    self.errors = err.response.data.errors;
+                    // self.registerComponentExceptions('Product-component: validation errors in edit product API');
+                });
+        },
+        stopLoader: function () {
+            eventBus.$emit("isLoading", false);
+        },
+        getRelatedProductUrl: function (product) {
 
-      eventBus.$emit("productId", this.product.main.id);
-      $("#elevator-modal").modal("show");
+            return '/product-view/خرید-عمده-'
+                + product.subcategory_name.replace(' ', '-')
+                + '/'
+                + product.category_name.replace(' ', '-')
+                + '/'
+                + product.id;
+
+        },
+        elevatorEvent:function () {
+            // eventBus.$emit("elevatorText", "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود.");
+
+            eventBus.$emit("productId", this.product.main.id);
+            eventBus.$emit('modal','elevator');
+            // $("#elevator-modal").modal("show")
+
+            
     },
   },
   created() {
