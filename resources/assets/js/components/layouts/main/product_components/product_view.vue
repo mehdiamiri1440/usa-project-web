@@ -387,9 +387,7 @@
                     window.localStorage.setItem('contact',JSON.stringify(contact));
                     window.localStorage.setItem('pathname',window.location.pathname);
 
-                    this.popUpMsg = 'اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
-                    eventBus.$emit('submitSuccess', this.popUpMsg);
-                    $('#auth-popup').modal('show');
+                    eventBus.$emit('modal', 'sendMsg');
                 }
             },
             registerComponentStatistics: function (categoryName, actionName, labelName) {
@@ -516,14 +514,9 @@
                 axios.post('/edit_product', request)
                     .then(function (response) {
                         $('.modal').modal('hide');
-                        self.popUpMsg = 'محصول شما با موفقیت ویرایش شد.';
-                        eventBus.$emit('submitSuccess', self.popUpMsg);
-                        setTimeout(function () {
-                            $('#custom-main-modal').modal('show');
-                            $('#custom-main-modal').on('hidden.bs.modal', function (e) {
-                                location.reload();
-                            });
-                        }, 300);
+
+                        eventBus.$emit('modal', 'productEditDone');
+
                         self.registerComponentStatistics('product', 'register-product-edit', 'product-edited-successfully');
                     })
                     .catch(function (err) {
@@ -546,10 +539,11 @@
 
             },
             elevatorEvent:function () {
-                eventBus.$emit("elevatorText", "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود.");
+                // eventBus.$emit("elevatorText", "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود.");
 
                 eventBus.$emit("productId", this.product.main.id);
-                $("#elevator-modal").modal("show")
+                eventBus.$emit('modal','elevator');
+                // $("#elevator-modal").modal("show")
 
             }
         },

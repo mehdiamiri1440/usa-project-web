@@ -299,10 +299,7 @@ export default {
         window.localStorage.setItem("contact", JSON.stringify(contact));
         window.localStorage.setItem("pathname", window.location.pathname);
 
-        this.popUpMsg =
-          "اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.";
-        eventBus.$emit("submitSuccess", this.popUpMsg);
-        $("#auth-popup").modal("show");
+        eventBus.$emit('modal', 'sendMsg');
       }
     },
     scrollToTheRequestRegisterBox: function(element) {
@@ -313,16 +310,17 @@ export default {
     },
     deleteProduct: function() {
       //show modal
-      this.popUpMsg = "آیا محصول حذف شود؟";
-      this.deleteButtonText = "حذف";
-      this.cancelButtonText = "انصراف";
+      // this.popUpMsg = "آیا محصول حذف شود؟";
+      // this.deleteButtonText = "حذف";
+      // this.cancelButtonText = "انصراف";
 
-      eventBus.$emit("submitSuccess", this.popUpMsg);
-      eventBus.$emit("deleteButtonText", this.deleteButtonText);
-      eventBus.$emit("cancelButtonText", this.cancelButtonText);
+      // eventBus.$emit("submitSuccess", this.popUpMsg);
+      // eventBus.$emit("deleteButtonText", this.deleteButtonText);
+      // eventBus.$emit("cancelButtonText", this.cancelButtonText);
       eventBus.$emit("productId", this.product_id);
+      eventBus.$emit('modal', 'deleteProduct');
 
-      $("#deleteModal").modal("show");
+      // $("#deleteModal").modal("show");
 
       this.registerComponentStatistics(
         "product",

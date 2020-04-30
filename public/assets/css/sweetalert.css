@@ -63,6 +63,7 @@
   direction: rtl;
   margin: 0 auto;
   font-size: 14px;
+  line-height: normal;
 }
 
 .custom-swal-with-cancel

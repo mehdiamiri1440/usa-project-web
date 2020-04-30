@@ -580,14 +580,9 @@ export default {
         .post("/edit_product", request)
         .then(function(response) {
           $(".modal").modal("hide");
-          self.popUpMsg = "محصول شما با موفقیت ویرایش شد.";
-          eventBus.$emit("submitSuccess", self.popUpMsg);
-          setTimeout(function() {
-            $("#custom-main-modal").modal("show");
-            $("#custom-main-modal").on("hidden.bs.modal", function(e) {
-              location.reload();
-            });
-          }, 300);
+          
+          eventBus.$emit('modal', 'productEditDone');
+
           self.registerComponentStatistics(
             "product",
             "register-product-edit",
@@ -654,38 +649,7 @@ export default {
          .custom-swal-full-size-with-cancel  -> custom style for default swal wrapper but it is full size in mobile  with cancel button (Always the last button most be cancel button)
          */
 
-        swal({
-          title: "استعلام قیمت",
-          text:
-            "اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.",
-          // content: closeIconBtn,
-          className: "custom-swal-with-cancel",
-          buttons: {
-            success: {
-              text: "ورود/ثبت نام",
-              value: "success"
-            },
-            regect: {
-              text: "دکمه دوم",
-              className: "bg-red"
-            },
-            test: {
-              visible: false,
-              text: "test"
-            },
-            close: {
-              text: "بستن",
-              className: "bg-cancel"
-            }
-          }
-        }).then(value => {
-          switch (value) {
-            case "success":
-              // self.$router.push({ name: "login" });
-
-              break;
-          }
-        });
+        eventBus.$emit('modal','sendMsg');
       }
     },
     updatePopUpStatus: function(popUpOpenStatus) {
@@ -805,13 +769,14 @@ export default {
       });
     },
     elevatorEvent: function() {
-      eventBus.$emit(
-        "elevatorText",
-        "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود."
-      );
+      // eventBus.$emit(
+      //   "elevatorText",
+      //   "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود."
+      // );
 
       eventBus.$emit("productId", this.product.main.id);
-      $("#elevator-modal").modal("show");
+      eventBus.$emit('modal', 'elevator');
+      // $("#elevator-modal").modal("show");
     }
   },
   mounted() {

@@ -1687,10 +1687,7 @@ export default {
         window.localStorage.setItem("contact", JSON.stringify(contact));
         window.localStorage.setItem("pathname", window.location.pathname);
 
-        this.popUpMsg =
-          "اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.";
-        eventBus.$emit("submitSuccess", this.popUpMsg);
-        $("#auth-popup").modal("show");
+        eventBus.$emit('modal','sendMsg');
       }
     },
     createJsonLDObject: function (profileOwner) {

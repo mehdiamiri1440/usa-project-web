@@ -140,6 +140,20 @@
 .not-found-item i {
   margin: 5px;
 }
+
+.load-more {
+  margin: 0px 0 0;
+  display: inline-block;
+  background: #00c569;
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 0px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  width: 100%;
+}
 </style>
 
 <template>
@@ -218,6 +232,9 @@
               </div>
             </div>
           </a>
+        </li>
+        <li v-if="$parent.showLoadMoreBtn && !$parent.contactNameSearchText" class="contact-item">
+            <button class="btn load-more" @click.prevent="$parent.loadMoreContacts()">ادامه مخاطبین</button>
         </li>
       </ul>
     </div>

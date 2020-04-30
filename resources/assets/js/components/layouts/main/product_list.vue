@@ -842,15 +842,10 @@ end filter modal styles
     </div>
 
     <div class="flat-plust-icon hidden-lg hidden-md">
-      <a href="#" @click.prevent="showAlert()">
-        <i class="fa fa-plus"></i>
-      </a>
-    </div>
-    <!-- <div class="flat-plust-icon hidden-lg hidden-md">
       <a href="#" @click.prevent="addProductOrRequest()">
         <i class="fa fa-plus"></i>
       </a>
-    </div>-->
+    </div>
 
     <div
       class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid"
@@ -1179,45 +1174,6 @@ export default {
     };
   },
   methods: {
-    showAlert() {
-      var closeIconBtn = document.createElement("button");
-      closeIconBtn.classList.add("sweet-alert-close-button");
-      closeIconBtn.innerHTML = "<i class='fa fa-times'></i>";
-      closeIconBtn.addEventListener("click", function () {
-        swal.close();
-      });
-
-      swal({
-        title: "Here's a title!",
-        text: "Hello world!",
-        content: closeIconBtn,
-        className: "custom-sweet-alert",
-        buttons: {
-          catch: {
-            text: "یه کاری کن خو",
-            value: "catch",
-          },
-          defeat: {
-            text: "کار دوم انجام بده",
-            value: "defeat",
-          },
-          close: {
-            text: "متوجه شدم",
-            className: "close-sweet-alert-btn",
-          },
-        },
-      }).then((value) => {
-        switch (value) {
-          case "defeat":
-            swal("Pikachu fainted! You gained 500 XP!");
-            break;
-
-          case "catch":
-            swal("Gotcha!", "Pikachu was caught!", "success");
-            break;
-        }
-      });
-    },
     filterProducts: function (productsFilter) {
       this.products = productsFilter;
     },
