@@ -364,6 +364,17 @@ const router = new Router({
             },
           },
         },
+        {
+          path: "register-request",
+          name: "mainRegisterRequest",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/layouts/main/main_components/main-register-request.vue",
+              ], resolve);
+            },
+          },
+        },
         // {
         //     path: 'pricing',
         //     name: 'pricing',
