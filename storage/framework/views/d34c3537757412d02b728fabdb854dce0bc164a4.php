@@ -37,6 +37,14 @@
   <priority>0.5</priority>
 </url>
 
+<?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <url>
+      <loc><?php echo e(url("product-list/category/".$item->category_name)); ?></loc>
+      <changefreq>daily</changefreq>
+      <priority>0.5</priority>
+    </url>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
 <?php $__currentLoopData = $user_names; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user_name): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <url>
       <loc><?php echo e(url("profile/".$user_name->user_name)); ?></loc>

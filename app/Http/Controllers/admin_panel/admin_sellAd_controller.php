@@ -4,12 +4,12 @@ namespace App\Http\Controllers\admin_panel;
 
 use \Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\product;
-use App\category;
-use App\product_media;
+use App\Models\product;
+use App\Models\category;
+use App\Models\product_media;
 use DB;
-use App\Http\Controllers\sms_controller;
-use App\myuser;
+use App\Http\Controllers\Notification\sms_controller;
+use App\Models\myuser;
 use App\Http\Library\date_convertor;
 use Carbon\Carbon;
 

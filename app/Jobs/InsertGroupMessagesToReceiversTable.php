@@ -7,8 +7,8 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\group_message_receiver;
-use App\messenger_group_subscriber;
+use App\Models\group_message_receiver;
+use App\Models\messenger_group_subscriber;
 use Carbon\Carbon;
 use DB;
 

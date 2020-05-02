@@ -5,13 +5,13 @@ namespace App\Http\Controllers\admin_panel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Charts\general;
-use App\message;
+use App\Models\message;
 use Carbon\Carbon;
 use DB;
 use App\Http\Library\date_convertor;
-use App\myuser;
-use App\product;
-use App\buyAd;
+use App\Models\myuser;
+use App\Models\product;
+use App\Models\buyAd;
 
 class admin_chart_controller extends Controller
 {

@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\sell_offer;
+use App\Models\sell_offer;
 use App\Http\Library\date_convertor;
-use App\sell_offer_media;
-use App\buyAd;
-use App\category;
-use App\myuser;
-use App\profile;
+use App\Models\sell_offer_media;
+use App\Models\buyAd;
+use App\Models\category;
+use App\Models\myuser;
+use App\Models\profile;
 use Carbon\Carbon;
 use JWTAuth;
 

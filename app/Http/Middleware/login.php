@@ -3,8 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\profile;
-use App\myuser;
+use App\Models\profile;
+use App\Models\myuser;
 use JWTAuth;
 
 class login

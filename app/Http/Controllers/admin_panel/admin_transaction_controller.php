@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\admin_panel;
 
 use App\Http\Controllers\Controller;
-use App\sell_offer;
-use App\sell_offer_media;
+use App\Models\sell_offer;
+use App\Models\sell_offer_media;
 use App\Http\Library\date_convertor;
-use App\category;
-use App\buyAd;
-use App\myuser;
-use App\factor;
-use App\profile;
+use App\Models\category;
+use App\Models\buyAd;
+use App\Models\myuser;
+use App\Models\factor;
+use App\Models\profile;
 use Illuminate\Http\Request;
-use App\instant_transaction;
+use App\Models\instant_transaction;
 use Carbon\Carbon;
-use App\instant_factor;
+use App\Models\instant_factor;
 
 class admin_transaction_controller extends Controller
 {

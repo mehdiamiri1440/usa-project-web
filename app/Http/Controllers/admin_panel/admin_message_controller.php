@@ -4,9 +4,9 @@ namespace App\Http\Controllers\admin_panel;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\myuser;
-use App\message;
-use App\profile_info;
+use App\Models\myuser;
+use App\Models\message;
+use App\Models\profile_info;
 use DB;
 
 class admin_message_controller extends Controller
