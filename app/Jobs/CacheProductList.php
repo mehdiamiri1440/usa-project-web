@@ -7,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Http\Controllers\product_list_controller;
+use App\Http\Controllers\Product\product_list_controller;
 use Illuminate\Support\Facades\Cache;
 
 class CacheProductList implements ShouldQueue

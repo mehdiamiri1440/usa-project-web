@@ -8,8 +8,8 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Carbon\Carbon;
-use App\product;
-use App\myuser;
+use App\Models\product;
+use App\Models\myuser;
 use App\Jobs\sendSMS;
 use DB;
 

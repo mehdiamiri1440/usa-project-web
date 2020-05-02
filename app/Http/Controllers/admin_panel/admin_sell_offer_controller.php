@@ -4,13 +4,13 @@ namespace App\Http\Controllers\admin_panel;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\sell_offer;
-use App\sell_offer_media;
+use App\Models\sell_offer;
+use App\Models\sell_offer_media;
 use App\Http\Library\date_convertor;
-use App\category;
-use App\buyAd;
-use App\myuser;
-use App\Http\Controllers\sms_controller;
+use App\Models\category;
+use App\Models\buyAd;
+use App\Models\myuser;
+use App\Http\Controllers\Notification\sms_controller;
 use DB;
 
 class admin_sell_offer_controller extends Controller

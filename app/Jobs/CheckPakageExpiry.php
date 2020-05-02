@@ -7,9 +7,9 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\myuser;
+use App\Models\myuser;
 use Carbon\Carbon;
-use App\product;
+use App\Models\product;
 
 class CheckPakageExpiry implements ShouldQueue
 {

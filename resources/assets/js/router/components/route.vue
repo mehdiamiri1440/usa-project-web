@@ -360,6 +360,9 @@ export default {
           case 'profileEditSuccess' :
             this.raiseProfileEditSuccessModal();
             break;
+          case 'passwordResetSuccess' :
+            this.raisePasswordResetSuccessModal();
+            break;
         }
     },
     raiseSendMessageModal: function(){
@@ -662,6 +665,21 @@ export default {
             }
           }
         });
+    },
+    raisePasswordResetSuccessModal: function(){
+        this.handleBackBtn();
+        swal({
+            title: "بازیابی کلمه عبور",
+            text: "کلمه عبور جدید به تلفن همراهتان ارسال شد.",
+            className: "custom-swal-with-cancel",
+            icon: "success",
+            buttons: {
+              close: {
+                text: "بستن",
+                className: "bg-cancel"
+              }
+            }
+          });
     },
     isModalOpen:function(){
       return swal.getState().isOpen;

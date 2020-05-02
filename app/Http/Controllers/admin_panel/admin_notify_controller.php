@@ -4,9 +4,9 @@ namespace App\Http\Controllers\admin_panel;
 
 use App\Http\Controllers\Controller;
 use \Illuminate\Http\Response;
-use App\profile;
-use App\buyAd;
-use App\product;
+use App\Models\profile;
+use App\Models\buyAd;
+use App\Models\product;
 
 class admin_notify_controller extends Controller
 {

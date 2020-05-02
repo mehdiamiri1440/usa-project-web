@@ -2,10 +2,10 @@
 
 namespace App\services\v1;
 
-use App\myuser;
+use App\Models\myuser;
 use phplusir\smsir\Smsir;
-use App\Http\Controllers\sms_controller;
-use App\Http\Controllers\profile_controller;
+use App\Http\Controllers\Notification\sms_controller;
+use App\Http\Controllers\Accounting\profile_controller;
 use DB;
 use MikeMcLin\WpPassword\Facades\WpPassword;
 use Carbon\Carbon;
@@ -35,7 +35,7 @@ use Carbon\Carbon;
 		 $user->province = $request->province;
 		 $user->city = $request->city;
 		 $user->national_code = $request->national_code;
-         $user->user_name = strtolower($request->user_name);
+         $user->user_name = $this->generate_unique_user_name();
          $user->activity_type = $request->activity_type;
          $user->category_id = $request->category_id;
 		 $user->credit = 10;
@@ -127,7 +127,32 @@ use Carbon\Carbon;
          ];
 
          DB::connection('forum')->table('wp_usermeta')->insert($user_meta_record);
-     }
+	 }
+	 
+	 protected function generate_unique_user_name()
+	 {
+		 $smallCharacters = range('a','z');
+		 $bigCharacters = range('A','Z');
+		 $digits = range(1,20);
+		 $alphanum_array = array_merge($smallCharacters,$digits,['_'],$bigCharacters);
+		
+		 shuffle($alphanum_array);
+
+		 $origin_string = implode('',$alphanum_array);
+
+		 for(;;){
+			 $user_name_length = rand(4,8);
+			 $generated_user_name = strtolower(substr($origin_string,0,$user_name_length));
+
+			 $user_record = myuser::where('user_name',$generated_user_name)->first();
+
+			 if($user_record){
+				 continue;
+			 }
+
+			 return $generated_user_name;
+		 }
+	 }
 
 
  }
