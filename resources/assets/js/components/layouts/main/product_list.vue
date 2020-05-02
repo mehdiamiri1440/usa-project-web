@@ -967,81 +967,16 @@ end filter modal styles
             </div>
           </section>
           <!-- test -->
-          <section
-            class="main-content col-xs-12"
+
+          <searchNotFound
             v-else-if="products.length === 0 && searchActive === true"
-          >
-            <p></p>
-
-            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-
-            <p>شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-
-            <br />
-
-            <div class="text-center">
-              <button class="btn btn-success">درخواست خرید</button>
-            </div>
-          </section>
-
-          <section
-            class="main-content col-xs-12"
+          />
+          <searchNotFound
             v-else-if="products.length === 0 && searchText !== ''"
-          >
-            <p></p>
-
-            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-
-            <p class="text-center" dir="rtl">
-              شما می توانید درخواست خرید خود را در اینجا ثبت کنید.
-            </p>
-            <br />
-
-            <div class="text-center">
-              <a
-                class="green-button col-xs-4"
-                @click.prevent="registerRequestInSearchNotFoundCase()"
-                >درخواست خرید</a
-              >
-              <br />
-
-              <a class="green-button col-xs-4" @click="resetFilter()"
-                >نمایش همه محصولات</a
-              >
-            </div>
-
-            <br />
-          </section>
-
-          <section
-            class="main-content col-xs-12"
+          />
+          <searchNotFound
             v-else-if="products.length === 0 && searchText === ''"
-          >
-            <p></p>
-
-            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-
-            <p class="text-center" dir="rtl">
-              شما می توانید درخواست خرید خود را در اینجا ثبت کنید.
-            </p>
-
-            <br />
-
-            <div class="text-center">
-              <a
-                class="green-button col-xs-4"
-                @click.prevent="registerRequestInSearchNotFoundCase()"
-                >درخواست خرید</a
-              >
-
-              <br />
-              <a class="green-button col-xs-4" @click.prevent="resetFilter()"
-                >نمایش همه محصولات</a
-              >
-            </div>
-
-            <br />
-          </section>
+          />
 
           <section v-else class="main-content col-xs-12">
             <div class="row">
@@ -1127,6 +1062,7 @@ end filter modal styles
 <script>
 import ProductArticle from "./product_components/product_article";
 import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
+import searchNotFound from "./main_components/search-not-found";
 import { eventBus } from "../../../router/router";
 import StickySidebar from "sticky-sidebar";
 
@@ -1135,8 +1071,9 @@ export default {
   components: {
     ProductArticle,
     ProductAsideCategories,
+    searchNotFound,
   },
-  props: ["str", "defultimg", "loading_img"],
+  props: ["assets", "str", "defultimg", "loading_img"],
   data: function () {
     return {
       currentUser: {
