@@ -298,7 +298,9 @@ export default {
     activateDownloadApp: function () {
       if (!this.iswebview && this.isDeviceMobile() && !this.isOsIOS()) {
         if (this.getAndroidVersion() >= 4.4) {
-          this.isConditionSatisfied = true;
+          if(window.location.pathname == '/'){
+            this.isConditionSatisfied = true;
+          }
         }
       }
     },
