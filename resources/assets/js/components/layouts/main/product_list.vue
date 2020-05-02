@@ -968,13 +968,13 @@ end filter modal styles
           </section>
           <!-- test -->
 
-          <searchNotFound
+          <search-not-found
             v-else-if="products.length === 0 && searchActive === true"
           />
-          <searchNotFound
+          <search-not-found
             v-else-if="products.length === 0 && searchText !== ''"
           />
-          <searchNotFound
+          <search-not-found
             v-else-if="products.length === 0 && searchText === ''"
           />
 
