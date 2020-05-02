@@ -547,9 +547,9 @@ export default {
         .then(function(response) {
           if (response.data.status === true) {
             self.errors = [];
-            self.popUpMsg ="گذر واژه ی جدید به تلفن همراهتان ارسال شد.";
-            eventBus.$emit("submitSuccess", self.popUpMsg);
-            $("#custom-main-modal").modal("show");
+            
+            eventBus.$emit('modal', 'passwordResetSuccess');
+
             self.currentStep = 1;
             self.createPassword = false;
 

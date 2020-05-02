@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\sell_offer;
-use App\factor;
-use App\buyAd;
+use App\Models\sell_offer;
+use App\Models\factor;
+use App\Models\buyAd;
 use App\Http\Library\date_convertor;
 use DB;
-use App\Http\Controllers\sms_controller;
+use App\Http\Controllers\Notification\sms_controller;
 
 class transaction_controller extends Controller
 {

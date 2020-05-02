@@ -4,10 +4,10 @@ namespace App\Http\Controllers\admin_panel;
 
 
 use \Illuminate\Http\Request;
-use App\admin_user;
+use App\Models\admin_user;
 use App\Http\Controllers\Controller;
-use App\myuser;
-use App\admin_note;
+use App\Models\myuser;
+use App\Models\admin_note;
 use DB;
 use Carbon\carbon;
 use App\Http\Library\date_convertor;

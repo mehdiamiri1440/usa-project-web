@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\myuser;
+use App\Models\myuser;
 use App\Http\Response;
 
 class broadcastAuth
