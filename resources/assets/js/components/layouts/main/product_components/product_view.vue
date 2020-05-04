@@ -240,7 +240,16 @@ span {
         </router-link>
       </div>
 
-      <main-register-request v-if="showRegisterRequestBox" wrapper-bg="true" />
+      <register-inquer-form
+        v-if="showRegisterRequestBox"
+        wrapper-bg="true"
+        :user-profile-info="product.user_info"
+        :user-profile-photo="
+          product.profile_info.profile_photo
+            ? str + '/' + product.profile_info.profile_photo
+            : defultimg
+        "
+      />
 
       <div
         v-if="product.main.product_name && !isMyProfile"
@@ -270,14 +279,14 @@ import { eventBus } from "../../../../router/router";
 import ProductCarousel from "../main_components/product-list-carousel";
 import ProductContents from "./product-view/product";
 import UserInfo from "./product-view/user_info";
-import MainRegisterRequest from "../main-register-request";
+import registerInquerForm from "../main_components/register-inquery-form.vue";
 
 export default {
   components: {
     ProductContents,
     UserInfo,
     ProductCarousel,
-    MainRegisterRequest,
+    registerInquerForm,
   },
   props: ["str", "defultimg", "loading_img", "userType"],
   data: function () {
@@ -349,35 +358,36 @@ export default {
       });
     },
     openChat: function (product) {
-      this.registerComponentStatistics(
-        "product",
-        "openChat",
-        "click on open chatBox"
-      );
+      this.inquery();
+      // this.registerComponentStatistics(
+      //   "product",
+      //   "openChat",
+      //   "click on open chatBox"
+      // );
 
-      var contact = {
-        contact_id: product.user_info.id,
-        first_name: product.user_info.first_name,
-        last_name: product.user_info.last_name,
-        profile_photo: product.profile_info.profile_photo,
-        user_name: product.user_info.user_name,
-      };
+      // var contact = {
+      //   contact_id: product.user_info.id,
+      //   first_name: product.user_info.first_name,
+      //   last_name: product.user_info.last_name,
+      //   profile_photo: product.profile_info.profile_photo,
+      //   user_name: product.user_info.user_name,
+      // };
 
-      var self = this;
-      if (this.currentUser.user_info) {
-        if (this.currentUser.user_info.id !== product.user_info.id) {
-          eventBus.$emit("ChatInfo", contact);
-        } else {
-          this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
-          eventBus.$emit("submitSuccess", this.popUpMsg);
-          $("#custom-main-modal").modal("show");
-        }
-      } else {
-        window.localStorage.setItem("contact", JSON.stringify(contact));
-        window.localStorage.setItem("pathname", window.location.pathname);
+      // var self = this;
+      // if (this.currentUser.user_info) {
+      //   if (this.currentUser.user_info.id !== product.user_info.id) {
+      //     eventBus.$emit("ChatInfo", contact);
+      //   } else {
+      //     this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
+      //     eventBus.$emit("submitSuccess", this.popUpMsg);
+      //     $("#custom-main-modal").modal("show");
+      //   }
+      // } else {
+      //   window.localStorage.setItem("contact", JSON.stringify(contact));
+      //   window.localStorage.setItem("pathname", window.location.pathname);
 
-        eventBus.$emit("modal", "sendMsg");
-      }
+      //   eventBus.$emit("modal", "sendMsg");
+      // }
     },
     registerComponentStatistics: function (
       categoryName,
@@ -540,6 +550,10 @@ export default {
       eventBus.$emit("productId", this.product.main.id);
       eventBus.$emit("modal", "elevator");
       // $("#elevator-modal").modal("show")
+    },
+    inquery: function () {
+      eventBus.$emit("productUserInfo", this.product);
+      this.$router.push({ name: "registerInquery" });
     },
   },
   created() {

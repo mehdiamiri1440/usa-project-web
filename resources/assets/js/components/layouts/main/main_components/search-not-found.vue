@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 .contents .green-button {
   padding: 4px 12px;
   margin-top: 40px;
@@ -168,12 +168,7 @@
 </template>
 
 <script>
-import MainRegisterRequest from "../main-register-request";
-
 export default {
-  components: {
-    MainRegisterRequest,
-  },
   data: function () {
     return {
       categories: "",

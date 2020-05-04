@@ -375,6 +375,17 @@ const router = new Router({
             },
           },
         },
+        {
+          path: "register-inquery",
+          name: "registerInquery",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/layouts/main/main_components/register-inquery.vue",
+              ], resolve);
+            },
+          },
+        },
         // {
         //     path: 'pricing',
         //     name: 'pricing',

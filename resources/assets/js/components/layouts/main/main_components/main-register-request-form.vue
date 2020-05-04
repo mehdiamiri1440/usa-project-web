@@ -51,6 +51,7 @@ label {
   font-size: 16px;
   color: #00c569;
   float: right;
+  margin: 0;
 }
 
 .title-section hr {

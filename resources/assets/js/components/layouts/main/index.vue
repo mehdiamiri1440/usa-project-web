@@ -1434,7 +1434,7 @@ li > ul > li.active > ul > li {
     </section>
 
     <section class="container" v-if="userType != 1">
-      <main-register-request wrapper-bg="true" />
+      <main-register-request-form wrapper-bg="true" />
     </section>
 
     <section id="benefit-links" class="container-fluid">
@@ -1501,7 +1501,7 @@ li > ul > li.active > ul > li {
 <script>
 import { eventBus } from "../../../router/router";
 import VueWow from "vue-wow";
-import MainRegisterRequest from "./main-register-request";
+import mainRegisterRequestForm from "./main_components/main-register-request-form";
 import { UAnimateContainer, UAnimate } from "vue-wow";
 
 var visible = false;
@@ -1554,7 +1554,7 @@ export default {
     RequestCarousel,
     UAnimateContainer,
     UAnimate,
-    MainRegisterRequest,
+    mainRegisterRequestForm,
   },
   props: [
     "isUserLogin",
