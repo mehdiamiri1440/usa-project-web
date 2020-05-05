@@ -117,12 +117,16 @@
 
   display: inline-block;
 }
+.inquery-button.green-button {
+  padding: 4px 15px;
+  margin: 10px auto 15px;
+}
 </style>
 
 <template>
-  <article class="carousel-item box-content ">
+  <article class="carousel-item box-content">
     <router-link :to="link" class="carousel-img">
-      <div v-show="isImageLoad" >
+      <div v-show="isImageLoad">
         <transition>
           <img @load="ImageLoaded" :src="img" class="main-image" />
         </transition>
@@ -136,8 +140,8 @@
       </div>
     </router-link>
 
-    <router-link class="carousel-title" :to="link" v-if="title.length>=20">
-      <h4 v-text="title.substring(0,15) + ' ...'"></h4>
+    <router-link class="carousel-title" :to="link" v-if="title.length >= 20">
+      <h4 v-text="title.substring(0, 15) + ' ...'"></h4>
     </router-link>
     <router-link :to="link" class="carousel-title" v-else>
       <h4 v-text="title"></h4>
@@ -148,70 +152,81 @@
       <span v-text="stock"></span>
       <span>کیلوگرم</span>
     </router-link>
+    <div class="inquery-button-wrapper">
+      <button class="inquery-button green-button" v-if="inqueryButtonActive">
+        استعلام شرایط فروش
+      </button>
+    </div>
   </article>
 </template>
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
-      isImageLoad: false
+      isImageLoad: false,
+      inqueryButtonActive: this.inqueryButton ? true : false,
     };
   },
-  props: ["img", "title", "link", "stock","column"],
-    mounted:function(){
-        $("#product-section .owl-carousel").owlCarousel({
-            autoplay: true,
-            autoplayTimeout: 3000,
-            loop: false,
-            rewind: true,
-            nav: true,
-            navText: [
-                '<span class="fa fa-angle-left"></span>',
-                '<span class="fa fa-angle-right"></span>'
-            ],
-            mouseDrag: true,
-            margin: 30,
-            dots: true,
-            stagePadding: 15,
-            rtl:true,
-            responsive: {
-                0: {
-                    items: 1,
-                    stagePadding: 15,
-                    navText: false,
-                    dots: true
-                },
-                450: {
-                    items: 2,
-                    stagePadding: 15,
-                    navText: false,
-                    dots: true,
-
-                },
-                992: {
-                    items: 3,
-                    stagePadding: 15,
-
-                },
-                1199: {
-                    items: this.column,
-                    stagePadding: 15,
-
-                }
-            }
-        });
-    },
+  props: [
+    "img",
+    "title",
+    "link",
+    "stock",
+    "column",
+    "autoPlay",
+    "inqueryButton",
+  ],
+  mounted: function () {
+    $(".latest-product .owl-carousel").owlCarousel({
+      autoplay: this.autoplay ? this.autoplay : true,
+      autoplayTimeout: 3000,
+      loop: false,
+      rewind: true,
+      nav: true,
+      navText: [
+        '<span class="fa fa-angle-left"></span>',
+        '<span class="fa fa-angle-right"></span>',
+      ],
+      mouseDrag: true,
+      margin: 30,
+      dots: true,
+      stagePadding: 15,
+      rtl: true,
+      responsive: {
+        0: {
+          items: 1,
+          stagePadding: 15,
+          navText: false,
+          dots: true,
+        },
+        450: {
+          items: 2,
+          stagePadding: 15,
+          navText: false,
+          dots: true,
+        },
+        992: {
+          items: 3,
+          stagePadding: 15,
+        },
+        1199: {
+          items: this.column,
+          stagePadding: 15,
+        },
+      },
+    });
+  },
   methods: {
-    created: function() {
+    created: function () {
       this.loadImage();
     },
-    loadImage: function() {
+    loadImage: function () {
       this.isImageLoad = false;
     },
-    ImageLoaded: function() {
+    ImageLoaded: function () {
       this.isImageLoad = true;
-    }
-  }
+    },
+  },
 };
 </script>

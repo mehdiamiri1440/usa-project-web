@@ -1,4 +1,3 @@
-
 <style scoped>
 input {
   box-shadow: none !important;
@@ -58,7 +57,7 @@ label {
 
   top: 6px;
 
-  font-family: "Font Awesome 5 Free",sans-serif;
+  font-family: "Font Awesome 5 Free", sans-serif;
 
   font-weight: 900;
 
@@ -256,36 +255,43 @@ label .small-label {
 
     <div class="form-contents col-xs-12">
       <div class="row">
-        <div class="col-xs-6 pull-right">
+        <div class="col-xs-12 col-sm-6 pull-right">
           <label for="stock">
             دسته بندی محصول
           </label>
 
           <div class="input-wrapper">
-
-              <select
-                :class="{'active' :  $parent.categorySelected , 'error' : $parent.errors.categorySelected}"
-                id="category"
-                v-model="$parent.buyAd.categorySelected"
-                v-on:change="loadSubCategoryList($event)"
-              >
-                <option  selected disabled value="">انتخاب دسته بندی</option>
-                <option
-                  v-for="category in $parent.categoryList"
-                  :selected="category.id == $parent.buyAd.categorySelected ?  'selected' : ''"
-                  :value="category.id"
-                  v-text="category.category_name"
-                ></option>
-              
-              </select>
-
+            <select
+              :class="{
+                active: $parent.categorySelected,
+                error: $parent.errors.categorySelected,
+              }"
+              id="category"
+              v-model="$parent.buyAd.categorySelected"
+              v-on:change="loadSubCategoryList($event)"
+            >
+              <option selected disabled value="">انتخاب دسته بندی</option>
+              <option
+                v-for="category in $parent.categoryList"
+                :selected="
+                  category.id == $parent.buyAd.categorySelected
+                    ? 'selected'
+                    : ''
+                "
+                :value="category.id"
+                v-text="category.category_name"
+              ></option>
+            </select>
           </div>
           <p class="error-message col-xs-12">
-            <span v-if="$parent.errors.categorySelected" v-text="$parent.errors.categorySelected"></span>
+            <span
+              v-if="$parent.errors.categorySelected"
+              v-text="$parent.errors.categorySelected"
+            ></span>
           </p>
         </div>
 
-        <div class="col-xs-6">
+        <div class="col-xs-12 col-sm-6">
           <label for="min-sale-amount">
             نام محصول
           </label>
@@ -294,10 +300,13 @@ label .small-label {
             <select
               v-on:change="$parent.setCategoryId($event)"
               v-model="$parent.buyAd.category_id"
-              :class="{'active' :  $parent.buyAd.category_id , 'error' : $parent.errors.category_id}"
+              :class="{
+                active: $parent.buyAd.category_id,
+                error: $parent.errors.category_id,
+              }"
               id="sub-category"
             >
-              <option  disabled selected value="">لطفا انتخاب کنید</option>
+              <option disabled selected value="">لطفا انتخاب کنید</option>
               <option
                 :selected="$parent.buyAd.category_id == category.id"
                 v-for="category in $parent.subCategoryList"
@@ -307,15 +316,16 @@ label .small-label {
             </select>
           </div>
           <p class="error-message">
-            <span v-if="$parent.errors.category_id" v-text="$parent.errors.category_id"></span>
+            <span
+              v-if="$parent.errors.category_id"
+              v-text="$parent.errors.category_id"
+            ></span>
           </p>
         </div>
 
-        <div class="col-xs-6 pull-right">
+        <div class="col-xs-12 col-sm-6 pull-right">
           <label for="min-sale-price">
             نوع محصول
-
-
           </label>
 
           <div class="text-input-wrapper">
@@ -323,16 +333,22 @@ label .small-label {
               v-model="$parent.buyAd.name"
               id="product-type"
               type="text"
-              :class="{'active' :  $parent.buyAd.name , 'error':$parent.errors.name}"
+              :class="{
+                active: $parent.buyAd.name,
+                error: $parent.errors.name,
+              }"
               placeholder="مثلا : مضافتی "
             />
           </div>
           <p class="error-message">
-            <span v-if="$parent.errors.name" v-text="$parent.errors.name"></span>
+            <span
+              v-if="$parent.errors.name"
+              v-text="$parent.errors.name"
+            ></span>
           </p>
         </div>
 
-        <div class="col-xs-6">
+        <div class="col-xs-12 col-sm-6">
           <label for="max-sale-price">
             میزان نیاز مندی
             <span class="small-label">(به کیلوگرم)</span>
@@ -343,16 +359,21 @@ label .small-label {
               v-model="$parent.buyAd.requirement_amount"
               id="max-sale-price"
               type="tel"
-              :class="{'active' :  $parent.buyAd.requirement_amount , 'error': $parent.errors.requirement_amount}"
+              :class="{
+                active: $parent.buyAd.requirement_amount,
+                error: $parent.errors.requirement_amount,
+              }"
               placeholder="مثلا : 500000"
               pattern="[0-9]*"
             />
           </div>
 
           <p class="error-message">
-            <span v-if="$parent.errors.requirement_amount" v-text="$parent.errors.requirement_amount"></span>
+            <span
+              v-if="$parent.errors.requirement_amount"
+              v-text="$parent.errors.requirement_amount"
+            ></span>
           </p>
-
         </div>
       </div>
 
@@ -367,13 +388,14 @@ label .small-label {
         <div class="row">
           <button
             class="submit-button disabled"
-            :class="{'active' : $parent.buyAd.category_id && $parent.buyAd.requirement_amount}"
+            :class="{
+              active:
+                $parent.buyAd.category_id && $parent.buyAd.requirement_amount,
+            }"
             @click.prevent="$parent.formValidator"
           >
             ثبت درخواست
           </button>
-
-
         </div>
       </div>
     </div>
@@ -381,57 +403,59 @@ label .small-label {
 </template>
 <script>
 export default {
-  data:function(){
+  data: function () {
     return {
-      selectedOption:'',
-    }
-    
+      selectedOption: "",
+    };
   },
   mounted() {
     if (this.$parent.isOsIOS()) {
       $('input[type="tel"]').attr("type", "text");
     }
-    let buyAd = JSON.parse(window.localStorage.getItem('buyAd'));
+    let buyAd = JSON.parse(window.localStorage.getItem("buyAd"));
 
-    if(buyAd){
-        this.$parent.buyAd = buyAd;
-        
-        let categoryId = buyAd.categorySelected;
+    if (buyAd) {
+      this.$parent.buyAd = buyAd;
 
-        this.$parent.categorySelected = categoryId;
+      let categoryId = buyAd.categorySelected;
 
-        axios.post('/get_category_list', {
-            parent_id: categoryId,
+      this.$parent.categorySelected = categoryId;
+
+      axios
+        .post("/get_category_list", {
+          parent_id: categoryId,
         })
-        .then(response => (this.$parent.subCategoryList = response.data.categories));
+        .then(
+          (response) =>
+            (this.$parent.subCategoryList = response.data.categories)
+        );
     }
   },
-  methods:{
-      loadSubCategoryList:function(e){
+  methods: {
+    loadSubCategoryList: function (e) {
+      window.localStorage.removeItem("buyAd");
 
-          window.localStorage.removeItem('buyAd');
-          
-          this.$parent.buyAd.category_id = '';
-         
-          this.$parent.loadSubCategoryList(e);
-      },
-      showCategory:function(categoryId){
-          return this.$parent.buyAd.categorySelected == categoryId;
-      }
+      this.$parent.buyAd.category_id = "";
+
+      this.$parent.loadSubCategoryList(e);
+    },
+    showCategory: function (categoryId) {
+      return this.$parent.buyAd.categorySelected == categoryId;
+    },
   },
   watch: {
-    "$parent.categorySelected": function() {
+    "$parent.categorySelected": function () {
       this.$parent.errors.categorySelected = "";
     },
-    "$parent.buyAd.category_id": function() {
+    "$parent.buyAd.category_id": function () {
       this.$parent.errors.category_id = "";
     },
-    "$parent.buyAd.requirement_amount": function() {
+    "$parent.buyAd.requirement_amount": function () {
       this.$parent.errors.requirement_amount = "";
     },
-    "$parent.buyAd.name": function() {
+    "$parent.buyAd.name": function () {
       this.$parent.errors.name = "";
     },
-  }
+  },
 };
 </script>

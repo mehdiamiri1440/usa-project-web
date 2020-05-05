@@ -1255,7 +1255,10 @@ li > ul > li.active > ul > li {
     <!-- =========================
         Product SECTION
         ============================== -->
-    <section id="product-section" class="section-wrapper container-fluid">
+    <section
+      id="product-section"
+      class="section-wrapper container-fluid latest-product"
+    >
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-md-9">
