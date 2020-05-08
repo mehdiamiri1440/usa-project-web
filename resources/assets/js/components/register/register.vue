@@ -675,7 +675,7 @@
             },
             verify_code: function () {
                 var self = this;
-                console.log(this.step1.phone);
+                
                 axios
                     .post("/verify_code", {
                         verification_code: this.toLatinNumbers(this.step2.verification_code),
@@ -1132,21 +1132,43 @@
             },
             returnUserToPreviousPageAndChatBox:function(userInfo)
             {
-                if(window.localStorage.getItem('contact') && window.localStorage.getItem('pathname')){
+                if(this.isUserInInquirySubmissionProcess()){
                     
+                    let contact = JSON.parse(window.localStorage.getItem('contact'));
+                    let pathname = window.localStorage.getItem('msgToSend');
+
+                    if(userInfo.is_buyer){
+                        window.location.href = "/buyer/register-request";
+                    }
+                    else if(userInfo.is_seller){
+                        window.location.href = '/switch-role';
+                    }
+                    else{
+                        window.localStorage.removeItem('contact');
+                        window.localStorage.removeItem('msgToSend');
+
+                        this.redirectUserToPanel(userInfo);
+                    }
+                }
+                else if(this.isUserComeFromChatBoxOpen()){
+            
                     let contact = JSON.parse(window.localStorage.getItem('contact'));
                     let pathname = window.localStorage.getItem('pathname');
 
                     window.localStorage.removeItem('contact');
                     window.localStorage.removeItem('pathname');
 
-                    window.localStorage.setItem('comeFromAuthentication',true);
+                    if(userInfo.id != contact.contact_id){
+                        window.localStorage.setItem('comeFromAuthentication',true);
 
-                    this.$router.push({
-                        path : pathname
-                    },function(){
-                        eventBus.$emit("ChatInfo",contact);
-                    });
+                        this.$router.push({path: pathname});
+
+                        eventBus.$emit('ChatInfo',contact);
+                        
+                    }
+                    else {
+                        this.redirectUserToPanel(userInfo);
+                    }
                 }
                 else{
                     this.redirectUserToPanel(userInfo);
@@ -1161,7 +1183,14 @@
                     localStorage.setItem("showSnapShot", true);
                     window.location.href = "/buyer/register-request";
                 }
-            }   
+            },
+            isUserInInquirySubmissionProcess: function(){
+                if(window.localStorage.getItem('contact') && window.localStorage.getItem('msgToSend')){
+                    return true;
+                }
+                return false;
+            }
+
         },
         watch: {
             "step2.timeCounterDown": function () {
@@ -1234,15 +1263,21 @@
         },
         created() {
             var self = this;
-//    if (localStorage.userRoute) {
-//      window.location.href = JSON.parse(localStorage.userRoute);
-//    }
-//      else {
-//      self.loginCheckerLoading = false;
-//    }
+
+            let userInfo = {
+              is_buyer: ! self.userType,
+                is_seller: self.userType
+            };
+
             if (self.isUserLogin && self.userType == 1) {
-                self.$router.push('/seller/register-product');
+                if(self.isUserInInquirySubmissionProcess()){
+                    self.returnUserToPreviousPageAndChatBox(userInfo);
+                }
+                else{
+                    self.$router.push('/seller/register-product');
+                }
             } else if (self.isUserLogin && self.userType != 1) {
+                // self.returnUserToPreviousPageAndChatBox(userInfo);
                 self.$router.push('/buyer/register-request');
             }
             else {

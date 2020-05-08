@@ -376,12 +376,12 @@ const router = new Router({
           },
         },
         {
-          path: "register-inquery",
-          name: "registerInquery",
+          path: "register-inquiry",
+          name: "registerInquiry",
           components: {
             default: (resolve) => {
               require([
-                "../components/layouts/main/main_components/register-inquery.vue",
+                "../components/layouts/main/main_components/register-inquiry.vue",
               ], resolve);
             },
           },

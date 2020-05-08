@@ -190,7 +190,7 @@ span {
       </section>
 
       <section
-        v-show="!relatedProducts"
+        v-else
         class="section-wrapper container-fluid"
       >
         <div class="container">
@@ -243,6 +243,7 @@ span {
       <register-inquer-form
         v-if="showRegisterRequestBox"
         wrapper-bg="true"
+        :str="str"
         :user-profile-info="product.user_info"
         :user-profile-photo="
           product.profile_info.profile_photo
@@ -260,7 +261,7 @@ span {
           @click.prevent="openChat(product)"
           class="green-button"
         >
-          استعلام قیمت
+          استعلام شرایط فروش
           <i class="fa fa-envelope"></i>
         </button>
       </div>
@@ -279,7 +280,7 @@ import { eventBus } from "../../../../router/router";
 import ProductCarousel from "../main_components/product-list-carousel";
 import ProductContents from "./product-view/product";
 import UserInfo from "./product-view/user_info";
-import registerInquerForm from "../main_components/register-inquery-form.vue";
+import registerInquerForm from "../main_components/register-inquiry-form.vue";
 
 export default {
   components: {
@@ -358,36 +359,73 @@ export default {
       });
     },
     openChat: function (product) {
-      this.inquery();
-      // this.registerComponentStatistics(
-      //   "product",
-      //   "openChat",
-      //   "click on open chatBox"
-      // );
+      
+      this.registerComponentStatistics(
+        "product",
+        "openChat",
+        "click on open chatBox"
+      );
 
-      // var contact = {
-      //   contact_id: product.user_info.id,
-      //   first_name: product.user_info.first_name,
-      //   last_name: product.user_info.last_name,
-      //   profile_photo: product.profile_info.profile_photo,
-      //   user_name: product.user_info.user_name,
-      // };
+      let productName = product.main.sub_category_name + ' ' + product.main.product_name;
+      var contact = {
+        contact_id: product.user_info.id,
+        first_name: product.user_info.first_name,
+        last_name: product.user_info.last_name,
+        profile_photo: product.profile_info.profile_photo,
+        user_name: product.user_info.user_name,
+        product_name :productName,
+      };
 
-      // var self = this;
-      // if (this.currentUser.user_info) {
-      //   if (this.currentUser.user_info.id !== product.user_info.id) {
-      //     eventBus.$emit("ChatInfo", contact);
-      //   } else {
-      //     this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
-      //     eventBus.$emit("submitSuccess", this.popUpMsg);
-      //     $("#custom-main-modal").modal("show");
-      //   }
-      // } else {
-      //   window.localStorage.setItem("contact", JSON.stringify(contact));
-      //   window.localStorage.setItem("pathname", window.location.pathname);
+      var self = this;
+      if (this.currentUser.user_info) {
+        if (this.currentUser.user_info.id !== product.user_info.id) {
+            window.localStorage.setItem("contact", JSON.stringify(contact));
+        
+            this.$router.push({name : 'registerInquiry'});
+        } else {
+          this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
+          eventBus.$emit("submitSuccess", this.popUpMsg);
+          $("#custom-main-modal").modal("show");
+        }
+      } else {
+        window.localStorage.setItem("contact", JSON.stringify(contact));
 
-      //   eventBus.$emit("modal", "sendMsg");
-      // }
+        this.$router.push({name : 'registerInquiry'});
+      }
+    },
+    openChatModal: function (product) {
+      
+      this.registerComponentStatistics(
+        "product",
+        "openChat",
+        "click on open chatBox"
+      );
+
+      var contact = {
+        contact_id: product.user_info.id,
+        first_name: product.user_info.first_name,
+        last_name: product.user_info.last_name,
+        profile_photo: product.profile_info.profile_photo,
+        user_name: product.user_info.user_name,
+      };
+
+      var self = this;
+      if (this.currentUser.user_info) {
+        if (this.currentUser.user_info.id !== product.user_info.id) {
+            window.localStorage.setItem("contact", JSON.stringify(contact));
+
+            eventBus.$emit("ChatInfo",contact);
+        } else {
+          this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
+          eventBus.$emit("submitSuccess", this.popUpMsg);
+          $("#custom-main-modal").modal("show");
+        }
+      } else {
+          window.localStorage.setItem("contact", JSON.stringify(contact));
+          window.localStorage.setItem("pathname",window.location.pathname);
+
+          eventBus.$emit('modal','sendMsg');
+      }
     },
     registerComponentStatistics: function (
       categoryName,
@@ -551,9 +589,9 @@ export default {
       eventBus.$emit("modal", "elevator");
       // $("#elevator-modal").modal("show")
     },
-    inquery: function () {
-      eventBus.$emit("productUserInfo", this.product);
-      this.$router.push({ name: "registerInquery" });
+    inquiry: function () {
+      //eventBus.$emit("productUserInfo", this.product);
+      this.$router.push({ name: "registerinquiry" });
     },
   },
   created() {

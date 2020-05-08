@@ -117,7 +117,7 @@
 
   display: inline-block;
 }
-.inquery-button.green-button {
+.inquiry-button.green-button {
   padding: 4px 15px;
   margin: 10px auto 15px;
 }
@@ -152,8 +152,8 @@
       <span v-text="stock"></span>
       <span>کیلوگرم</span>
     </router-link>
-    <div class="inquery-button-wrapper">
-      <button class="inquery-button green-button" v-if="inqueryButtonActive">
+    <div class="inquiry-button-wrapper">
+      <button class="inquiry-button green-button" v-if="inquiryButtonActive">
         استعلام شرایط فروش
       </button>
     </div>
@@ -165,7 +165,7 @@ export default {
   data: function () {
     return {
       isImageLoad: false,
-      inqueryButtonActive: this.inqueryButton ? true : false,
+      inquiryButtonActive: this.inquiryButton ? true : false,
     };
   },
   props: [
@@ -175,7 +175,7 @@ export default {
     "stock",
     "column",
     "autoPlay",
-    "inqueryButton",
+    "inquiryButton",
   ],
   mounted: function () {
     $(".latest-product .owl-carousel").owlCarousel({

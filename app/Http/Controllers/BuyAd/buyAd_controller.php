@@ -232,21 +232,6 @@ class buyAd_controller extends Controller
         $today = Carbon::today();
         $tomorrow = Carbon::tomorrow();
 
-        // $data_records = DB::table('messages')
-        //                 ->join('buy_ads','buy_ads.myuser_id','=','messages.receiver_id')
-        //                 ->where('buy_ads.id',$buyAd_id)
-        //                 ->where('messages.sender_id',$sender_id)
-        //                 ->whereBetween('messages.created_at',[$today, $tomorrow])
-        //                 ->get()
-        //                 ->count();
-
-        // if($data_records > 0){
-        //     return response()->json([
-        //         'status' => true,
-        //         'permission' => true
-        //     ],200);
-        // }
-
         $already_replied_to_the_buyAd = DB::table('buy_ad_reply_meta_datas')
                 ->where([
                     ['buy_ad_id','=',$buyAd_id],

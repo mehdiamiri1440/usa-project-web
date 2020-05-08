@@ -430,7 +430,7 @@ label {
       >
         <button v-if="!isMyProfile" @click.prevent="openChat(product)" class="green-button">
           <i class="fa fa-envelope"></i>
-          استعلام قیمت
+          استعلام شرایط فروش
         </button>
 
         <button
@@ -606,19 +606,25 @@ export default {
         "click on open chatBox"
       );
 
+      let productName = product.main.sub_category_name + ' ' + product.main.product_name;
+
       var contact = {
         contact_id: product.user_info.id,
         first_name: product.user_info.first_name,
         last_name: product.user_info.last_name,
         profile_photo: product.profile_info.profile_photo,
-        user_name: product.user_info.user_name
+        user_name: product.user_info.user_name,
+        product_name: productName,
       };
 
       var self = this;
 
       if (this.currentUser.user_info) {
         if (this.currentUser.user_info.id !== product.user_info.id) {
-          eventBus.$emit("ChatInfo", contact);
+          // eventBus.$emit("ChatInfo", contact);
+          window.localStorage.setItem("contact", JSON.stringify(contact));
+
+          this.$router.push({name : 'registerInquiry'});
         } else {
           this.popUpMsg = "شما نمیتوانید به خودتان پیام دهید.";
           eventBus.$emit("submitSuccess", this.popUpMsg);
@@ -626,30 +632,9 @@ export default {
         }
       } else {
         window.localStorage.setItem("contact", JSON.stringify(contact));
-        window.localStorage.setItem("pathname", window.location.pathname);
 
-        /*
-        ##### add close icon to header for swal modal
-
-        let closeIconBtn = document.createElement("button");
-        closeIconBtn.classList.add("sweet-alert-close-button");
-        closeIconBtn.innerHTML = "<i class='fa fa-times'></i>";
-        closeIconBtn.addEventListener("click", function() {
-          swal.close();
-        });
-        
-        */
-
-        /*
-        ##### swal wrapper classes 
-
-         .custom-swal -> custom styles for default swal wrapper
-         .custom-swal-with-cancel -> custom styles for  swal wrapper with cancel button (Always the last button most be cancel button)
-         .custom-swal-full-size  -> custom style for default swal wrapper but it is full size in mobile 
-         .custom-swal-full-size-with-cancel  -> custom style for default swal wrapper but it is full size in mobile  with cancel button (Always the last button most be cancel button)
-         */
-
-        eventBus.$emit('modal','sendMsg');
+        this.$router.push({name : 'registerInquiry'});
+        // eventBus.$emit('modal','sendMsg');
       }
     },
     updatePopUpStatus: function(popUpOpenStatus) {

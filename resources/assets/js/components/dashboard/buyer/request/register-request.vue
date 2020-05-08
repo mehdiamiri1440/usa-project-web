@@ -5,7 +5,7 @@
   padding: 30px;
 }
 
-.success-inquery-wrapper,
+.success-inquiry-wrapper,
 .main-content,
 .recent-products-wrapper {
   margin-bottom: 30px;
@@ -212,7 +212,7 @@
   padding: 9px 22px 6px;
 }
 
-.inquery-button {
+.inquiry-button {
   padding: 4px 15px;
   margin: 10px auto 15px;
   transition: 200ms;
@@ -265,7 +265,7 @@
     class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2 main-content-wrapper"
   >
     <div class="row">
-      <section class="success-inquery-wrapper wrapper-bg col-xs-12">
+      <section v-if="currentStep == 1 && inquirySent" class="success-inquiry-wrapper wrapper-bg col-xs-12">
         <p class="success-message-wrapper text-rtl pull-right">
           <span class="fa fa-check-circle"></span>
           <span class="success-message">
@@ -283,6 +283,11 @@
             مشاهده پیام ها
           </router-link>
         </div>
+      </section>
+
+      <section v-if="currentStep == 1" class="success-inquiry-wrapper wrapper-bg col-xs-12">
+        <p class="red-text success-message-wrapper text-rtl pull-right"> &nbsp&nbsp&nbspآیا قصد خرید عمده محصولی را دارید؟ </p>
+        <p class="success-message-wrapper text-rtl"> همین حالا درخواست خرید ثبت کنید&nbsp .</p>
       </section>
 
       <section
@@ -322,11 +327,11 @@
         </main>
       </section>
 
-      <section class="recent-products-wrapper">
+      <!-- <section v-if="currentStep == 1 && inquirySent && relatedProductsToInquiry" class="recent-products-wrapper">
         <div class="title-section col-xs-12">
           <div class="row">
             <h3>
-              آخرین محصولات ثبت شده
+              محصولاتی که شاید بخواهید بخرید
             </h3>
             <hr />
           </div>
@@ -343,10 +348,10 @@
                 link=""
                 column="3"
                 auto-play="false"
-                inquery-button="true"
+                inquiry-button="true"
               />
             </div>
-          </div>
+          </div> -->
 
           <!-- <div v-else class="row">
             <div
@@ -372,8 +377,8 @@
               </article>
             </div>
           </div> -->
-        </div>
-      </section>
+        <!-- </div>
+      </section> -->
     </div>
   </div>
 </template>
@@ -430,6 +435,8 @@ export default {
       disableSubmit: false,
       submiting: false,
       relatedProducts: null,
+      inquirySent: false,
+      relatedProductsToInquiry: null,
       items: [
         {
           message: " ثبت درخواست جدید",
@@ -440,9 +447,17 @@ export default {
   },
   methods: {
     init: function () {
+      let self = this;
+
       axios
         .post("/user/profile_info")
-        .then((response) => (this.currentUser = response.data));
+        .then(function(response){
+            self.currentUser = response.data;
+
+            if(self.isThereInquiryToSend()){
+              self.sendInquiry();
+            }
+        });
 
       axios
         .post("/get_category_list")
@@ -495,11 +510,11 @@ export default {
         .then(function (response) {
           if (response.status === 201) {
             self.disableSubmit = true;
-            self.popUpMsg = "درخواست شما با موفقیت ثبت شد";
+            // self.popUpMsg = "درخواست شما با موفقیت ثبت شد";
 
             window.localStorage.removeItem("buyAd");
 
-            eventBus.$emit("submitSuccess", self.popUpMsg);
+            // eventBus.$emit("submitSuccess", self.popUpMsg);
 
             // $('#custom-main-modal').modal('show');
 
@@ -657,6 +672,42 @@ export default {
         this.relatedProduct.id
       );
     },
+    isThereInquiryToSend: function(){
+      if(window.localStorage.getItem('contact') && window.localStorage.getItem('msgToSend')){
+        return true;
+      }
+
+      return false;
+    },
+    sendInquiry: function(){
+      var self = this;
+
+      let tempMsg = window.localStorage.getItem('msgToSend');
+
+      let contact = JSON.parse(window.localStorage.getItem('contact'));
+
+      if (tempMsg) {
+        let msgObject = {
+          sender_id: self.currentUser.user_info.id,
+          receiver_id: contact.contact_id ? contact.contact_id : contact.id,
+          text: tempMsg,
+        };
+
+        axios
+          .post("/messanger/send_message", msgObject)
+          .then(function (response) {
+            self.inquirySent = true;
+            self.clearLocalStorage();
+          })
+          .catch(function (e) {
+            //
+          });
+      }
+    },
+    clearLocalStorage: function(){
+      window.localStorage.removeItem('contact');
+      window.localStorage.removeItem('msgToSend');
+    }
   },
   mounted() {
     this.init();

@@ -131,7 +131,7 @@
             <span class="red-text">آیا قصد خرید عمده دارید؟</span>
             همین حالا درخواست خرید ثبت کنید.
           </p>
-          <button class="green-button" type="button">
+          <button class="green-button" type="button" @click="openBuyAdRequestPage()">
             ثبت درخواست خرید
           </button>
         </div>
@@ -191,6 +191,9 @@ export default {
         "/product-list/category/" + t.category_name.split(" ").join("-");
       return url;
     },
+    openBuyAdRequestPage: function(){
+      this.$router.push({name: 'mainRegisterRequest'});
+    }
   },
   mounted: function () {
     this.init();

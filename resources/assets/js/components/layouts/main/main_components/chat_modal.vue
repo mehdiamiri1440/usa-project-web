@@ -404,12 +404,6 @@ export default {
   methods: {
     setUpChat: function () {
       this.handleBackBtnClickOnDevices();
-
-      let msg = window.localStorage.getItem('msgToSend');
-      if(msg){
-        window.localStorage.removeItem('msgToSend');
-        this.msgToSend = msg;
-      }
       
       this.loadChatHistory(this.contactInfo);
     },
@@ -429,10 +423,6 @@ export default {
           self.chatMessages = response.data.messages;
           self.currentUserId = response.data.current_user_id;
           self.scrollToEnd(0);
-
-          if(self.msgToSend){
-            self.sendMessage();
-          }
         })
         .catch(function (e) {
           //
@@ -518,8 +508,8 @@ export default {
 
         if (self.doesUserComeFromAuthenticationPages()) {
           // if(window.location.pathname == '/login' || window.location.pathname == '/register'){
-          window.localStorage.removeItem("comeFromAuthentication");
-          window.location.href = window.location.pathname;
+            window.localStorage.removeItem("comeFromAuthentication");
+            window.location.href = window.location.pathname;
           // }
         }
       });

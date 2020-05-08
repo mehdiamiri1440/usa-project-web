@@ -103,6 +103,7 @@ label {
 }
 .form-contents {
   margin: 5px auto;
+  line-height: 30px;
 }
 
 .form-contents lable {
@@ -210,7 +211,7 @@ input.error:focus + i {
   border-color: #e41c38;
 }
 
-#inquery-text {
+#inquiry-text {
   background: #fefefe;
 }
 
@@ -269,7 +270,7 @@ label .small-label {
 </style>
 
 <template>
-  <div v-if="userProfileInfo.first_name" class="section-wrapper col-xs-12">
+  <div v-if="userProfileInfo" class="section-wrapper col-xs-12">
     <div class="row">
       <div class="title-section col-xs-12">
         <h3>
@@ -286,38 +287,39 @@ label .small-label {
       >
         <div class="title-contents">
           <div class="user-image">
-            <img :src="userProfilePhoto" alt="" />
+            <img  :src="userProfilePhoto" alt="" />
           </div>
           <div
             class="user-name"
-            v-text="
-              userProfileInfo.first_name + ' ' + userProfileInfo.last_name
-            "
+            v-text="'استعلام از ' + userProfileInfo.first_name + ' ' + userProfileInfo.last_name"
           ></div>
         </div>
 
         <div class="form-contents col-xs-12">
           <div class="row">
+            <div v-if="userProfileInfo.product_name" class="col-xs-12">
+                <p class="text-rtl">استعلام شرایط فروش <span class="red-text" v-text="userProfileInfo.product_name"></span></p>
+            </div>
             <div class="col-xs-12 pull-right">
-              <label for="inquery-text" class="text-rtl">
-                توضیحات استعلام قیمت خود را بنویسید.
+              <label for="inquiry-text" class="text-rtl">
+               نیاز به دانستن چه جزییاتی درباره ی این محصول دارید؟(قیمت، بسته بندی و ...)
               </label>
 
               <div class="text-input-wrapper">
                 <textarea
-                  v-model="inquery.text"
-                  id="inquery-text"
+                  v-model="inquiry.text"
+                  id="inquiry-text"
                   type="text"
                   rows="3"
                   class="text-right text-rtl"
-                  :class="{ active: inquery.text, error: errors.inqueryText }"
-                  placeholder="توضیحات استعلام قیمت خود را بنویسید"
+                  :class="{ active: inquiry.text, error: errors.inquiryText }"
+                  placeholder="توضیحات مورد نیاز را از فروشنده بپرسید..."
                 ></textarea>
               </div>
               <p class="error-message">
                 <span
-                  v-if="errors.inqueryText"
-                  v-text="errors.inqueryText"
+                  v-if="errors.inquiryText"
+                  v-text="errors.inquiryText"
                 ></span>
               </p>
             </div>
@@ -328,11 +330,11 @@ label .small-label {
               <button
                 class="submit-button disabled"
                 :class="{
-                  active: inquery.text,
+                  active: inquiry.text,
                 }"
                 @click.prevent="submitForm"
               >
-                ثبت استعلام
+                ثبت
               </button>
             </div>
           </div>
@@ -369,7 +371,7 @@ label .small-label {
             <div class="col-xs-12 pull-right">
               <div class="row">
                 <label
-                  for="inquery-text"
+                  for="inquiry-text"
                   class="text-rtl col-xs-12 col-sm-4 col-md-3 pull-right"
                 >
                   <span class="placeholder-content content-full-width"></span>
@@ -377,7 +379,7 @@ label .small-label {
               </div>
 
               <div class="text-input-wrapper">
-                <textarea id="inquery-text" type="text" rows="3"></textarea>
+                <textarea id="inquiry-text" type="text" rows="3"></textarea>
               </div>
             </div>
           </div>
@@ -395,13 +397,13 @@ label .small-label {
 
 <script>
 export default {
-  props: ["wrapperBg", "userProfileInfo", "userProfilePhoto"],
+  props: ["wrapperBg", "userProfileInfo", "userProfilePhoto","str"],
   data: function () {
     return {
       errors: {
-        inqueryText: "",
+        inquiryText: "",
       },
-      inquery: {
+      inquiry: {
         text: "",
       },
     };
@@ -409,23 +411,27 @@ export default {
   methods: {
     init: function () {},
     submitForm: function () {
-      this.textValidator(this.inquery.text);
+      this.textValidator(this.inquiry.text);
 
-      if (!this.inquery.text || this.inquery.text == "") {
-        this.errors.inqueryText = "توضیحات استعلام الزامی است.";
+      if (!this.inquiry.text || this.inquiry.text == "") {
+        this.errors.inquiryText = "توضیحات استعلام الزامی است.";
       }
 
-      if (!this.errors.inqueryText) {
-        console.log("inquery submit");
+      if (!this.errors.inquiryText) {
+          window.localStorage.setItem('msgToSend',this.inquiry.text);
+          if(! window.localStorage.getItem('contact')){
+            window.localStorage.setItem('contact',JSON.stringify(this.userProfileInfo));
+          }
+          window.location.href = '/register';
       }
     },
 
     textValidator: function (text) {
       this.toLatinNumbers(text);
       if (!text) {
-        this.errors.inqueryText = "";
+        this.errors.inquiryText = "";
       } else if (!this.validateRegx(text, /^[\u0600-\u06FF\s\d]+$/)) {
-        this.errors.inqueryText = "لطفا توضیحات استعلام را به درستی وارد کنید";
+        this.errors.inquiryText = "لطفا توضیحات استعلام را به درستی وارد کنید";
       }
     },
     toLatinNumbers: function (num) {
@@ -454,8 +460,8 @@ export default {
     this.init();
   },
   watch: {
-    "inquery.text": function () {
-      this.errors.inqueryText = "";
+    "inquiry.text": function () {
+      this.errors.inquiryText = "";
     },
   },
 };

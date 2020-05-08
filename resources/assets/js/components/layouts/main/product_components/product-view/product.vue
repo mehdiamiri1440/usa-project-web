@@ -356,7 +356,7 @@
 				<div class="actions">
 					<button v-if="!$parent.isMyProfile" @click.prevent="$parent.openChat($parent.product)" class="green-button">
 
-                        استعلام قیمت
+                        استعلام شرایط فروش
                         <i class="fa fa-envelope"></i>
 
                     </button>

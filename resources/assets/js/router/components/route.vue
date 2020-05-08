@@ -370,78 +370,32 @@ export default {
       
       this.handleBackBtn();
       
-      if(window.localStorage.getItem('contact') && window.localStorage.getItem('pathname')){
-        let contact = JSON.parse(window.localStorage.getItem('contact'));
-
-        let modalText =  'پیامی برای ' + contact.first_name + ' ' + contact.last_name + ' ارسال کنید.';
-
-        let textInput = document.createElement("div");
-        if(contact.profile_photo){
-          textInput.innerHTML = '<div class="row swal-user-image"><img class="swal-img" src="/storage/' + contact.profile_photo + '"></div><p dir="rtl">' + modalText + '</p><br/><input id="inputMsg" type="text" placeholder="پیامی بگذارید..." dir="rtl"/>';
-        }
-        else{
-          textInput.innerHTML = '<div class="row swal-user-image"><img src="/assets/img/user-defult.png"' + contact.profile_photo + '"></div><p dir="rtl">' + modalText + '</p><br/><input id="inputMsg" type="text" placeholder="پیامی بگذارید..." dir="rtl"/>';
-        }
-
-        swal({
-          title: "ارتباط با مخاطب",
-          content: textInput,
-          // text: modalText,
-          // content: closeIconBtn,
-          className: "custom-swal-with-cancel",
-          buttons: {
-            success: {
-              text: "ارسال پیام",
-              value: "send"
-            },
-            close: {
-              text: "بستن",
-              className: "bg-cancel"
-            }
+      swal({
+        title: "ارتباط با مخاطب",
+        text: 'برای ارتباط با هزاران خریدار و فروشنده در باسکول ابتدا ثبت نام کنید.',
+        className: "custom-swal-with-cancel",
+        buttons: {
+          success: {
+            text: "ورود سریع / ثبت نام",
+            value: "register"
+          },
+          close: {
+            text: "بستن",
+            className: "bg-cancel"
           }
-        }).then(value => {
-          let msg = $('#inputMsg').val();
-
-          if(value == 'send'){
-            if(msg){
-              window.localStorage.setItem("msgToSend",msg);
+        }
+      }).then(value => {
+          switch(value){
+            case 'register':
               self.$router.push({ name: "register" });
-            }
-            else{
-              window.localStorage.removeItem("contact"); // it's been set before modal openning
-              window.localStorage.removeItem("msgToSend");
-            }
+              break;
+            default:
+              window.localStorage.removeItem('contact');
+              window.localStorage.removeItem('pathname');
+              break;
           }
-          else if(value == 'close'){
-            window.localStorage.removeItem("contact"); // it's been set before modal openning
-            window.localStorage.removeItem("msgToSend");
-          }
-        });
-
-      }
-      else{
-          swal({
-            title: "ارتباط با مخاطب",
-            text: 'برای ارتباط با هزاران خریدار و فروشنده در باسکول ابتدا ثبت نام کنید.',
-            className: "custom-swal-with-cancel",
-            buttons: {
-              success: {
-                text: "ورود سریع / ثبت نام",
-                value: "register"
-              },
-              close: {
-                text: "بستن",
-                className: "bg-cancel"
-              }
-            }
-          }).then(value => {
-              switch(value){
-                case 'register':
-                  self.$router.push({ name: "register" });
-                  break;
-              }
-          });
-      }
+      });
+      
       
     },
     raiseElevatorModal: function(){
@@ -696,6 +650,7 @@ export default {
           swal.close();
           window.localStorage.removeItem("contact"); // it's been set before modal openning
           window.localStorage.removeItem("msgToSend");
+          window.localStorage.removeItem("pathname");
           // window.location.href = window.location.pathname;
         }
       });
