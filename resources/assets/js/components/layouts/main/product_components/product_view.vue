@@ -153,7 +153,7 @@ span {
       </div>
 
       <section
-        v-if="relatedProducts.length > 0"
+        v-if="relatedProducts.length > 0 && isLoading == false"
         id="product-section"
         class="section-wrapper container-fluid latest-product"
       >
@@ -189,7 +189,10 @@ span {
         </div>
       </section>
 
-      <section v-else class="section-wrapper container-fluid">
+      <section
+        v-else-if="relatedProducts.length == 0 && isLoading == true"
+        class="section-wrapper container-fluid"
+      >
         <div class="container">
           <div class="row">
             <div class="col-xs-12">
@@ -305,6 +308,7 @@ export default {
         photos: [],
       },
       relatedProducts: "",
+      relatedLoad: false,
       errors: "",
       popUpMsg: "",
       submiting: false,
