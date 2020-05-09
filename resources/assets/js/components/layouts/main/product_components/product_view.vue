@@ -155,7 +155,7 @@ span {
       <section
         v-if="relatedProducts.length > 0"
         id="product-section"
-        class="section-wrapper container-fluid"
+        class="section-wrapper container-fluid latest-product"
       >
         <div class="container">
           <div class="row">
@@ -189,10 +189,7 @@ span {
         </div>
       </section>
 
-      <section
-        v-else
-        class="section-wrapper container-fluid"
-      >
+      <section v-else class="section-wrapper container-fluid">
         <div class="container">
           <div class="row">
             <div class="col-xs-12">
@@ -359,29 +356,29 @@ export default {
       });
     },
     openChat: function (product) {
-      
       this.registerComponentStatistics(
         "product",
         "openChat",
         "click on open chatBox"
       );
 
-      let productName = product.main.sub_category_name + ' ' + product.main.product_name;
+      let productName =
+        product.main.sub_category_name + " " + product.main.product_name;
       var contact = {
         contact_id: product.user_info.id,
         first_name: product.user_info.first_name,
         last_name: product.user_info.last_name,
         profile_photo: product.profile_info.profile_photo,
         user_name: product.user_info.user_name,
-        product_name :productName,
+        product_name: productName,
       };
 
       var self = this;
       if (this.currentUser.user_info) {
         if (this.currentUser.user_info.id !== product.user_info.id) {
-            window.localStorage.setItem("contact", JSON.stringify(contact));
-        
-            this.$router.push({name : 'registerInquiry'});
+          window.localStorage.setItem("contact", JSON.stringify(contact));
+
+          this.$router.push({ name: "registerInquiry" });
         } else {
           this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
           eventBus.$emit("submitSuccess", this.popUpMsg);
@@ -390,11 +387,10 @@ export default {
       } else {
         window.localStorage.setItem("contact", JSON.stringify(contact));
 
-        this.$router.push({name : 'registerInquiry'});
+        this.$router.push({ name: "registerInquiry" });
       }
     },
     openChatModal: function (product) {
-      
       this.registerComponentStatistics(
         "product",
         "openChat",
@@ -412,19 +408,19 @@ export default {
       var self = this;
       if (this.currentUser.user_info) {
         if (this.currentUser.user_info.id !== product.user_info.id) {
-            window.localStorage.setItem("contact", JSON.stringify(contact));
+          window.localStorage.setItem("contact", JSON.stringify(contact));
 
-            eventBus.$emit("ChatInfo",contact);
+          eventBus.$emit("ChatInfo", contact);
         } else {
           this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
           eventBus.$emit("submitSuccess", this.popUpMsg);
           $("#custom-main-modal").modal("show");
         }
       } else {
-          window.localStorage.setItem("contact", JSON.stringify(contact));
-          window.localStorage.setItem("pathname",window.location.pathname);
+        window.localStorage.setItem("contact", JSON.stringify(contact));
+        window.localStorage.setItem("pathname", window.location.pathname);
 
-          eventBus.$emit('modal','sendMsg');
+        eventBus.$emit("modal", "sendMsg");
       }
     },
     registerComponentStatistics: function (
