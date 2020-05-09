@@ -490,6 +490,25 @@ li.active a::after {
   right: 0;
 }
 
+.guide-button {
+    height:32px;
+    border:solid 1px white;
+    background:#e41c38;
+    width:100px;
+    line-height:32px; 
+    -webkit-transform:rotate(-90deg); 
+    font-weight:500;
+    color:white; transform:rotate(-90deg);  
+    -ms-transform:rotate(-90deg);  
+    -moz-transform:rotate(-90deg); 
+    text-align:center; 
+    font-size:17px;
+    position:fixed; 
+    left:-40px;
+    top:50%; 
+    z-index:999; 
+}
+
 /* 
 ---------------------------------------------------------------------------------
 
@@ -887,10 +906,14 @@ end filter modal styles
       </div>
     </div>
 
-    <div class="flat-plust-icon hidden-lg hidden-md">
-      <a href="#" @click.prevent="addProductOrRequest()">
-        <i class="fa fa-plus"></i>
+    <div v-if="!currentUser.user_info" class="flat-plust-icon hidden-lg hidden-md">
+      <a href="#" @click.prevent="openStickyGuide()">
+        <i class="fa fa-exclamation"></i>
       </a>
+    </div>
+
+    <div v-if="!currentUser.user_info">
+      <button class="guide-button hidden-sm hidden-xs" @click.prevent="openStickyGuide()">راهنما</button>
     </div>
 
     <div
@@ -1394,10 +1417,7 @@ export default {
           "unauthorized-user-clicks-on-plus-btn"
         );
 
-        this.popUpMsg =
-          "برای ثبت آگهی خرید یا فروش  ابتدا وارد سامانه شوید یا ثبت نام کنید.";
-        eventBus.$emit("submitSuccess", this.popUpMsg);
-        $("#auth-popup").modal("show");
+        eventBus.$emit('modal', 'guide');
       }
     },
     resetFilter: function () {
@@ -1619,6 +1639,9 @@ export default {
 
       return jsonDL;
     },
+    openStickyGuide:function(){
+      eventBus.$emit('modal','guide');
+    }
   },
   watch: {
     "$route.params.categoryName": function (name) {

@@ -363,6 +363,9 @@ export default {
           case 'passwordResetSuccess' :
             this.raisePasswordResetSuccessModal();
             break;
+          case 'guide':
+            this.raiseGuideModal();
+            break;
         }
     },
     raiseSendMessageModal: function(){
@@ -632,6 +635,42 @@ export default {
                 text: "بستن",
                 className: "bg-cancel"
               }
+            }
+          });
+    },
+    raiseGuideModal: function(){
+      let self = this;
+
+      this.handleBackBtn();
+
+        swal({
+            title: "راهنما",
+            text: "خریدار عمده هستید یا فروشنده عمده؟",
+            className: "custom-swal-with-cancel",
+            // icon: "success",
+            buttons: {
+              buyer:{
+                text:'خریدارم',
+                value:'buyer'
+              },
+              seller:{
+                text:'فروشنده ام',
+                value:'seller'
+              },
+              close: {
+                text: "بستن",
+                className: "bg-cancel"
+              }
+            }
+          }).then((value) => {
+            
+            switch(value){
+              case 'buyer':
+                self.$router.push({name:'mainRegisterRequest'});
+                break;
+              case 'seller':
+                self.$router.push({name:'register'});
+                break;
             }
           });
     },
