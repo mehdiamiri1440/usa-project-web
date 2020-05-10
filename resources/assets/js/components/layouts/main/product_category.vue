@@ -1712,7 +1712,7 @@ export default {
 
     return {
       title: "خرید و فروش عمده و قیمت " + categoryName,
-      titleTemplate: "باسکول | %s",
+      titleTemplate: "%s | باسکول",
       meta: [
         {
           name: "description",

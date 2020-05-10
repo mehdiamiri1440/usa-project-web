@@ -1766,7 +1766,7 @@ export default {
 
     return {
       title: title,
-      titleTemplate: "باسکول | %s",
+      titleTemplate: "%s | باسکول",
       meta: [
         {
           name: "description",

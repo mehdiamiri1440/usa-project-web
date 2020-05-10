@@ -656,7 +656,7 @@ export default {
         productProvince +
         " " +
         productOwnerFullName,
-      titleTemplate: "باسکول | %s",
+      titleTemplate: "%s | باسکول",
       meta: [
         {
           name: "description",
@@ -705,7 +705,7 @@ export default {
             productOwnerFullName,
         },
       ],
-      link: [{ rel: "canonical", href: canonicalLink }],
+    //   link: [{ rel: "canonical", href: canonicalLink }],
     };
   },
 };

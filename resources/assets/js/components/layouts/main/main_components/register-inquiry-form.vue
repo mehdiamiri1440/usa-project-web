@@ -302,7 +302,7 @@ label .small-label {
             </div>
             <div class="col-xs-12 pull-right">
               <label for="inquiry-text" class="text-rtl">
-               نیاز به دانستن چه جزییاتی درباره ی این محصول دارید؟(قیمت، بسته بندی و ...)
+               جزییات مورد نیاز را از فروشنده بپرسید (قیمت، بسته بندی و ...)
               </label>
 
               <div class="text-input-wrapper">
@@ -313,7 +313,7 @@ label .small-label {
                   rows="3"
                   class="text-right text-rtl"
                   :class="{ active: inquiry.text, error: errors.inquiryText }"
-                  placeholder="توضیحات مورد نیاز را از فروشنده بپرسید..."
+                  placeholder="جزییات مورد نیاز را از فروشنده بپرسید..."
                 ></textarea>
               </div>
               <p class="error-message">

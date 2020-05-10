@@ -1799,7 +1799,7 @@ export default {
 
     return {
       title: fullName,
-      titleTemplate: "باسکول | %s",
+      titleTemplate: "%s | باسکول",
       meta: [
         {
           name: "description",
