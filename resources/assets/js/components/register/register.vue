@@ -584,12 +584,12 @@
                 this.goToStep(5);
             },
             setAccount() {
-                this.userNameValidator(this.step3.user_name);
-                this.passwordValidator(this.step3.password, this.step3.re_password);
+                // this.userNameValidator(this.step3.user_name);
+                this.passwordValidator(this.step3.password);
                 if (
-                    !this.errors.user_name[0] &&
-                    !this.errors.password[0] &&
-                    !this.errors.password_conf[0]
+                    // !this.errors.user_name[0] &&
+                    !this.errors.password[0] 
+                    //&& !this.errors.password_conf[0]
                 ) {
                     this.register_details();
                 }
@@ -675,15 +675,21 @@
             },
             verify_code: function () {
                 var self = this;
-
+                
                 axios
                     .post("/verify_code", {
-                        verification_code: this.toLatinNumbers(this.step2.verification_code)
+                        verification_code: this.toLatinNumbers(this.step2.verification_code),
+                        phone : this.toLatinNumbers(this.step1.phone)
                     })
                     .then(function (response) {
                         if (response.data.status === true) {
-                            self.goToStep(3);
-                            self.getProvinceList();
+                            if(response.data.redirected){ // it's very tricky condition, be careful
+                                window.location.href = '/login';
+                            }
+                            else{
+                                self.goToStep(3);
+                                self.getProvinceList();
+                            }
                         } else if (response.data.status === false) {
                             self.goToStep(2);
                             self.errors.verification_code = [];
@@ -747,10 +753,9 @@
                         .post("api/v1/users", object)
                         .then(function (response) {
                             if (response.status === 201) {
-                                self.popUpMsg =
-                                    "ثبت نام با موفقیت انجام شد.کمی صبر کنید ...";
-                                eventBus.$emit("submitSuccess", self.popUpMsg);
-                                $("#custom-main-modal").modal("show");
+                                
+                                eventBus.$emit('modal', 'userRegisterSuccess');
+                                
                                 axios
                                     .post("/dologin", {
                                         phone: object.phone,
@@ -759,7 +764,8 @@
                                     .then(response => {
                                         if(response.data.status){
                                             if(self.isUserComeFromChatBoxOpen()){
-                                                $("#custom-main-modal").modal("hide");
+                                                swal.close(); //close modal
+                                                
                                                 self.returnUserToPreviousPageAndChatBox(response.data);
                                             }
                                             else{
@@ -789,13 +795,13 @@
                 this.step4.categoryId = $(e.target).val();
             },
             checkStep3: function () {
-                this.userNameValidator(this.step3.user_name);
+                // this.userNameValidator(this.step3.user_name);
                 this.firstNameValidator(this.step3.first_name);
                 this.lastNameValidator(this.step3.last_name);
                 this.provinceValidator(this.step3.province);
                 this.cityValidator(this.step3.city);
                 this.nationalCodeValidator(this.step3.national_code);
-                this.passwordValidator(this.step3.password, this.step3.re_password);
+                this.passwordValidator(this.step3.password);
                 this.sexValidator(this.step3.sex);
 
                 if (this.errorFlag) {
@@ -949,7 +955,7 @@
 
                 return (sum < 2 && check == sum) || (sum >= 2 && check + sum == 11);
             },
-            passwordValidator: function (pass, passConf) {
+            passwordValidator: function (pass) {
                 this.errors.password = [];
                 this.errors.password_conf = [];
 
@@ -961,14 +967,14 @@
                     this.errors.password.push("رمز عبور حداقل ۸ کاراکتر باشد");
                     this.errorFlag = true;
                 }
-                if (passConf === "") {
-                    this.errors.password_conf.push("تکرار رمز عبور الزامی است");
-                    this.errorFlag = true;
-                }
-                if (passConf !== pass) {
-                    this.errors.password_conf.push("رمز عبور مطابقت ندارد");
-                    this.errorFlag = true;
-                }
+                // if (passConf === "") {
+                //     this.errors.password_conf.push("تکرار رمز عبور الزامی است");
+                //     this.errorFlag = true;
+                // }
+                // if (passConf !== pass) {
+                //     this.errors.password_conf.push("رمز عبور مطابقت ندارد");
+                //     this.errorFlag = true;
+                // }
 
                 if (this.errors.password[0]) {
                     this.registerComponentStatistics(
@@ -977,13 +983,13 @@
                         "input:" + pass + " Error:" + this.errors.password[0]
                     );
                 }
-                if (this.errors.password_conf[0]) {
-                    this.registerComponentStatistics(
-                        "Register-Error",
-                        "passwordConfirmation",
-                        "input:" + passConf + " Error:" + this.errors.password_conf[0]
-                    );
-                }
+                // if (this.errors.password_conf[0]) {
+                //     this.registerComponentStatistics(
+                //         "Register-Error",
+                //         "passwordConfirmation",
+                //         "input:" + passConf + " Error:" + this.errors.password_conf[0]
+                //     );
+                // }
             },
             sexValidator: function (sex) {
                 this.errors.sex = [];
@@ -1126,21 +1132,43 @@
             },
             returnUserToPreviousPageAndChatBox:function(userInfo)
             {
-                if(window.localStorage.getItem('contact') && window.localStorage.getItem('pathname')){
+                if(this.isUserInInquirySubmissionProcess()){
                     
+                    let contact = JSON.parse(window.localStorage.getItem('contact'));
+                    let pathname = window.localStorage.getItem('msgToSend');
+
+                    if(userInfo.is_buyer){
+                        window.location.href = "/buyer/register-request";
+                    }
+                    else if(userInfo.is_seller){
+                        window.location.href = '/switch-role';
+                    }
+                    else{
+                        window.localStorage.removeItem('contact');
+                        window.localStorage.removeItem('msgToSend');
+
+                        this.redirectUserToPanel(userInfo);
+                    }
+                }
+                else if(this.isUserComeFromChatBoxOpen()){
+            
                     let contact = JSON.parse(window.localStorage.getItem('contact'));
                     let pathname = window.localStorage.getItem('pathname');
 
                     window.localStorage.removeItem('contact');
                     window.localStorage.removeItem('pathname');
 
-                    window.localStorage.setItem('comeFromAuthentication',true);
+                    if(userInfo.id != contact.contact_id){
+                        window.localStorage.setItem('comeFromAuthentication',true);
 
-                    this.$router.push({
-                        path : pathname
-                    },function(){
-                        eventBus.$emit("ChatInfo",contact);
-                    });
+                        this.$router.push({path: pathname});
+
+                        eventBus.$emit('ChatInfo',contact);
+                        
+                    }
+                    else {
+                        this.redirectUserToPanel(userInfo);
+                    }
                 }
                 else{
                     this.redirectUserToPanel(userInfo);
@@ -1155,7 +1183,14 @@
                     localStorage.setItem("showSnapShot", true);
                     window.location.href = "/buyer/register-request";
                 }
-            }   
+            },
+            isUserInInquirySubmissionProcess: function(){
+                if(window.localStorage.getItem('contact') && window.localStorage.getItem('msgToSend')){
+                    return true;
+                }
+                return false;
+            }
+
         },
         watch: {
             "step2.timeCounterDown": function () {
@@ -1228,15 +1263,21 @@
         },
         created() {
             var self = this;
-//    if (localStorage.userRoute) {
-//      window.location.href = JSON.parse(localStorage.userRoute);
-//    }
-//      else {
-//      self.loginCheckerLoading = false;
-//    }
+
+            let userInfo = {
+              is_buyer: ! self.userType,
+                is_seller: self.userType
+            };
+
             if (self.isUserLogin && self.userType == 1) {
-                self.$router.push('/seller/register-product');
+                if(self.isUserInInquirySubmissionProcess()){
+                    self.returnUserToPreviousPageAndChatBox(userInfo);
+                }
+                else{
+                    self.$router.push('/seller/register-product');
+                }
             } else if (self.isUserLogin && self.userType != 1) {
+                // self.returnUserToPreviousPageAndChatBox(userInfo);
                 self.$router.push('/buyer/register-request');
             }
             else {

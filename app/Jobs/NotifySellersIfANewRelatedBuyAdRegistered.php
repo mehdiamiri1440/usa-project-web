@@ -7,11 +7,11 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\buyAd;
-use App\Http\Controllers\fcm_controller;
-use App\myuser;
-use App\product;
-use App\category;
+use App\Models\buyAd;
+use App\Http\Controllers\Notification\fcm_controller;
+use App\Models\myuser;
+use App\Models\product;
+use App\Models\category;
 use Carbon\Carbon;
 use DB;
 

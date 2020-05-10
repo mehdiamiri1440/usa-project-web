@@ -4,10 +4,10 @@ namespace App\Http\Controllers\admin_panel;
 
 use \Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\profile;
-use App\profile_media;
-use App\Http\Controllers\sms_controller;
-use App\myuser;
+use App\Models\profile;
+use App\Models\profile_media;
+use App\Http\Controllers\Notification\sms_controller;
+use App\Models\myuser;
 use App\Http\Library\date_convertor;
 
 class admin_profile_controller extends Controller

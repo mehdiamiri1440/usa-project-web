@@ -4,14 +4,14 @@ namespace App\Http\Controllers\admin_panel;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\buyAd;
-use App\sell_offer;
+use App\Models\buyAd;
+use App\Models\sell_offer;
 use Carbon\Carbon;
-use App\product;
-use App\myuser;
-use App\profile;
+use App\Models\product;
+use App\Models\myuser;
+use App\Models\profile;
 use App\Http\Library\date_convertor;
-use App\message;
+use App\Models\message;
 use DB;
 
 

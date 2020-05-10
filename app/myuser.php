@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Http\Controllers\profile_controller;
+use App\Http\Controllers\Accounting\profile_controller;
 
 class myuser extends Authenticatable
 {
@@ -12,17 +12,17 @@ class myuser extends Authenticatable
 
     public function product()
     {
-        return $this->hasMany('App\product');
+        return $this->hasMany('App\Models\product');
     }
 
     public function buyAd()
     {
-        return $this->hasMany('App\buyAd');
+        return $this->hasMany('App\Models\buyAd');
     }
 
     public function product_statistic()
     {
-        return $this->belongsToMany('App\product', 'product_statistics')
+        return $this->belongsToMany('App\Models\product', 'product_statistics')
             ->withPivot(
                 'at_least_one_view',
                 'at_least_one_phone_view'

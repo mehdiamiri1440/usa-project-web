@@ -430,7 +430,7 @@ label {
       >
         <button v-if="!isMyProfile" @click.prevent="openChat(product)" class="green-button">
           <i class="fa fa-envelope"></i>
-          استعلام قیمت
+          استعلام شرایط فروش
         </button>
 
         <button
@@ -580,14 +580,9 @@ export default {
         .post("/edit_product", request)
         .then(function(response) {
           $(".modal").modal("hide");
-          self.popUpMsg = "محصول شما با موفقیت ویرایش شد.";
-          eventBus.$emit("submitSuccess", self.popUpMsg);
-          setTimeout(function() {
-            $("#custom-main-modal").modal("show");
-            $("#custom-main-modal").on("hidden.bs.modal", function(e) {
-              location.reload();
-            });
-          }, 300);
+          
+          eventBus.$emit('modal', 'productEditDone');
+
           self.registerComponentStatistics(
             "product",
             "register-product-edit",
@@ -611,19 +606,25 @@ export default {
         "click on open chatBox"
       );
 
+      let productName = product.main.sub_category_name + ' ' + product.main.product_name;
+
       var contact = {
         contact_id: product.user_info.id,
         first_name: product.user_info.first_name,
         last_name: product.user_info.last_name,
         profile_photo: product.profile_info.profile_photo,
-        user_name: product.user_info.user_name
+        user_name: product.user_info.user_name,
+        product_name: productName,
       };
 
       var self = this;
 
       if (this.currentUser.user_info) {
         if (this.currentUser.user_info.id !== product.user_info.id) {
-          eventBus.$emit("ChatInfo", contact);
+          // eventBus.$emit("ChatInfo", contact);
+          window.localStorage.setItem("contact", JSON.stringify(contact));
+
+          this.$router.push({name : 'registerInquiry'});
         } else {
           this.popUpMsg = "شما نمیتوانید به خودتان پیام دهید.";
           eventBus.$emit("submitSuccess", this.popUpMsg);
@@ -631,12 +632,9 @@ export default {
         }
       } else {
         window.localStorage.setItem("contact", JSON.stringify(contact));
-        window.localStorage.setItem("pathname", window.location.pathname);
 
-        this.popUpMsg =
-          "اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.";
-        eventBus.$emit("submitSuccess", this.popUpMsg);
-        $("#auth-popup").modal("show");
+        this.$router.push({name : 'registerInquiry'});
+        // eventBus.$emit('modal','sendMsg');
       }
     },
     updatePopUpStatus: function(popUpOpenStatus) {
@@ -756,13 +754,14 @@ export default {
       });
     },
     elevatorEvent: function() {
-      eventBus.$emit(
-        "elevatorText",
-        "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود."
-      );
+      // eventBus.$emit(
+      //   "elevatorText",
+      //   "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود."
+      // );
 
       eventBus.$emit("productId", this.product.main.id);
-      $("#elevator-modal").modal("show");
+      eventBus.$emit('modal', 'elevator');
+      // $("#elevator-modal").modal("show");
     }
   },
   mounted() {

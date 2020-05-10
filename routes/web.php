@@ -13,7 +13,7 @@
 use App\Http\Middleware\login;
 use App\Http\Middleware\admin_login;
 use App\Http\Middleware\cors;
-use App\profile;
+use App\Models\profile;
 use Illuminate\Http\Request;
 
 // Route::group(['prefix' => 'master'], function () {
@@ -34,7 +34,7 @@ Route::get('download/app', function () {
 })->name('download-app');
 
 Route::post('/dologin', [
-    'uses' => 'user_controller@login',
+    'uses' => 'Accounting\user_controller@login',
     'as' => 'login',
 ]);
 
@@ -45,108 +45,108 @@ Route::get('/register-from-blog', function () {
 });
 
 Route::post('/user/is_user_name_unique', [
-    'uses' => 'user_controller@does_user_name_already_exists',
+    'uses' => 'Accounting\user_controller@does_user_name_already_exists',
     'as' => 'does_user_name_already_exists',
 ]);
 
 Route::post('/user/is_national_code_unique', [
-    'uses' => 'user_controller@does_national_code_already_exists',
+    'uses' => 'Accounting\user_controller@does_national_code_already_exists',
     'as' => 'does_national_code_already_exists',
 ]);
 
 Route::post('send_verification_code', [
-    'uses' => 'sms_controller@send_phone_verification_code',
+    'uses' => 'Notification\sms_controller@send_phone_verification_code',
     'as' => 'send_verification_code',
 ]);
 
 Route::post('/verify_code', [
-    'uses' => 'sms_controller@verify_code',
+    'uses' => 'Notification\sms_controller@verify_code',
     'as' => 'verify_code',
 ]);
 
 Route::post('/get_category_list', [
-    'uses' => 'category_controller@get_all_categories',
+    'uses' => 'General\category_controller@get_all_categories',
     'as' => 'get_category_list',
 ]);
 
 Route::post('/get_category_meta_data',[
-    'uses' => 'product_controller@get_category_tags_data_if_any',
+    'uses' => 'Product\product_controller@get_category_tags_data_if_any',
     'as' => 'get_gategory_meta_data'
 ]);
 
 Route::post('/user/get_product_list', [
-    'uses' => 'product_list_controller@get_product_list',
+    'uses' => 'Product\product_list_controller@get_product_list',
     'as' => 'get_product_list',
 ]);
 
 // Route::post('/user/get_buyAd_list',[
-//     'uses' => 'buyAd_controller@get_buyAd_list',
+//     'uses' => 'BuyAd\buyAd_controller@get_buyAd_list',
 //     'as' => 'get_buyAd_list'
 // ]);
 
 Route::post('/location/get_location_info', [
-    'uses' => 'location_controller@get_all_provinces_or_cities_in_the_province_in_iran',
+    'uses' => 'General\location_controller@get_all_provinces_or_cities_in_the_province_in_iran',
     'as' => 'get_location_info',
 ]);
 
 Route::post('/get_product_by_id', [
-    'uses' => 'product_controller@get_product_by_id',
+    'uses' => 'Product\product_controller@get_product_by_id',
     'as' => 'get_product_by_id',
 ]);
 
 // Route::post('/get_buy_ad_by_id', [
-//     'uses' => 'buyAd_controller@get_buy_ad_by_id',
+//     'uses' => 'BuyAd\buyAd_controller@get_buy_ad_by_id',
 //     'as' => 'get_buy_ad_by_id',
 // ]);
 
 Route::post('/get_related_products', [
-    'uses' => 'product_controller@get_related_products_to_given_the_product',
+    'uses' => 'Product\product_controller@get_related_products_to_given_the_product',
     'as' => 'get_related_products',
 ]);
 
 Route::post('/load_profile_by_user_name', [
-    'uses' => 'profile_controller@get_last_profile_info_with_all_related_content_by_user_name',
+    'uses' => 'Accounting\profile_controller@get_last_profile_info_with_all_related_content_by_user_name',
     'as' => 'load_profile_by_user_name',
 ]);
 
 Route::post('/get_product_list_by_user_name', [
-    'uses' => 'product_controller@get_product_list_by_user_name',
+    'uses' => 'Product\product_controller@get_product_list_by_user_name',
     'as' => 'get_product_list_by_user_name',
 ]);
 
 Route::post('/get_user_statistics_by_user_name', [
-    'uses' => 'profile_controller@get_user_statistics_by_user_name',
+    'uses' => 'Accounting\profile_controller@get_user_statistics_by_user_name',
     'as' => 'get_user_statistics_by_user_name',
 ]);
 
 Route::post('/get_user_reputation_score', [
-    'uses' => 'reputation_controller@calculate_user_reputation_score',
+    'uses' => 'Accounting\reputation_controller@calculate_user_reputation_score',
     'as' => 'get_user_reputation_score',
 ]);
 
 // Route::post('/increment_user_profile_visit_count', [
-//     'uses' => 'profile_controller@increment_user_profile_visit_count',
+//     'uses' => 'Accounting\profile_controller@increment_user_profile_visit_count',
 //     'as' => 'increment_user_profile_visit_count',
 // ]);
 
 Route::post('/get_sample_products', [
-    'uses' => 'product_controller@get_sample_products',
+    'uses' => 'Product\product_controller@get_sample_products',
     'as' => 'get_sample_products',
 ]);
 
 Route::post('/get_sample_buyAds', [
-    'uses' => 'buyAd_controller@get_sample_buyAds',
+    'uses' => 'BuyAd\buyAd_controller@get_sample_buyAds',
     'as' => 'get_sample_buyAds',
 ]);
 
 Route::group(['middleware' => [login::class]], function () {
     Route::post('/user/add_product', [
-        'uses' => 'product_controller@add_product',
+        'uses' => 'Product\product_controller@add_product',
         'as' => 'add_product',
     ])->middleware('optimizeImages');
 
     Route::post('/user/add_buyAd', [
-        'uses' => 'buyAd_controller@add_buyAd',
+        'uses' => 'BuyAd\buyAd_controller@add_buyAd',
         'as' => 'add_buyAd',
     ]);
 
@@ -163,17 +163,17 @@ Route::group(['middleware' => [login::class]], function () {
     })->name('instant-back-to-basic');
 
     Route::post('/user/profile_modification', [
-        'uses' => 'profile_controller@profile_modification',
+        'uses' => 'Accounting\profile_controller@profile_modification',
         'as' => 'profile_modification',
     ])->middleware('optimizeImages');
 
     Route::post('/delete_product_by_id', [
-        'uses' => 'product_controller@delete_product_by_id',
+        'uses' => 'Product\product_controller@delete_product_by_id',
         'as' => 'delete_product_by_id',
     ]);
 
     // Route::delete('/delete_buy_ad_by_id', [
-    //     'uses' => 'buyAd_controller@delete_buy_ad_by_id',
+    //     'uses' => 'BuyAd\buyAd_controller@delete_buy_ad_by_id',
     //     'as' => 'delete_buy_ad_by_id',
     // ]);
 
@@ -188,17 +188,17 @@ Route::group(['middleware' => [login::class]], function () {
     // ]);
 
     // Route::post('/get_my_buyAds_with_related_sell_offers', [
-    //     'uses' => 'buyAd_controller@get_my_buyAds_with_related_sell_offers',
+    //     'uses' => 'BuyAd\buyAd_controller@get_my_buyAds_with_related_sell_offers',
     //     'as' => 'get_my_buyAds_with_related_sell_offers',
     // ]);
 
     Route::post('/get_related_buyAds_list_to_the_seller', [
-        'uses' => 'buyAd_controller@get_related_buyAds_list_to_the_seller',
+        'uses' => 'BuyAd\buyAd_controller@get_related_buyAds_list_to_the_seller',
         'as' => 'get_related_buyAds_list_to_the_seller',
     ]);
 
     Route::post('/get_user_permission_for_buyAd_reply',[
-        'uses' => 'buyAd_controller@check_user_permisson_for_sending_buyAd_reply',
+        'uses' => 'BuyAd\buyAd_controller@check_user_permisson_for_sending_buyAd_reply',
         'as'   => 'check_user_permisson_for_sending_buyAd_reply'
     ]);
 
@@ -218,7 +218,7 @@ Route::group(['middleware' => [login::class]], function () {
     // ]);
 
     Route::post('/user/profile_info', [
-        'uses' => 'profile_controller@get_last_profile_info_with_all_related_content',
+        'uses' => 'Accounting\profile_controller@get_last_profile_info_with_all_related_content',
         'as' => 'profile_controller_info',
     ]);
 
@@ -228,7 +228,7 @@ Route::group(['middleware' => [login::class]], function () {
     // ]);
 
     // Route::post('/confirm_initial_contract', [
-    //     'uses' => 'user_controller@initial_contract_confirmation_by_user',
+    //     'uses' => 'Accounting\user_controller@initial_contract_confirmation_by_user',
     //     'as' => 'initial_contract_confirmation_by_user',
     // ]);
 
@@ -253,27 +253,27 @@ Route::group(['middleware' => [login::class]], function () {
     // ]);
 
     // Route::post('/does_buyer_already_had_requested_the_produtct', [
-    //     'uses' => 'product_controller@does_buyer_already_had_requested_the_product',
+    //     'uses' => 'Product\product_controller@does_buyer_already_had_requested_the_product',
     //     'as' => 'does_buyer_already_had_requested_the_product',
     // ]);
 
     // Route::post('/register_buyer_request_for_the_product', [
-    //     'uses' => 'product_controller@register_buyer_request_for_the_product',
+    //     'uses' => 'Product\product_controller@register_buyer_request_for_the_product',
     //     'as' => 'register_buyer_request_for_the_product',
     // ]);
 
     Route::post('/change_password', [
-        'uses' => 'user_controller@change_password',
+        'uses' => 'Accounting\user_controller@change_password',
         'as' => 'change_user_password',
     ]);
 
     // Route::post('/get_buyAd_owner_user_id', [
-    //     'uses' => 'buyAd_controller@get_buyAd_owner_user_id',
+    //     'uses' => 'BuyAd\buyAd_controller@get_buyAd_owner_user_id',
     //     'as' => 'get_buyAd_owner_user_id',
     // ]);
 
     // Route::post('/get_contract_sides_user_info', [
-    //     'uses' => 'user_controller@get_contract_sides_user_info',
+    //     'uses' => 'Accounting\user_controller@get_contract_sides_user_info',
     //     'as' => 'get_contract_sides_user_info',
     // ]);
 
@@ -293,130 +293,130 @@ Route::group(['middleware' => [login::class]], function () {
     // ]);
 
     Route::post('/messanger/send_message', [
-        'uses' => 'message_controller@send_message',
+        'uses' => 'Messenger\message_controller@send_message',
         'as' => 'send_message',
     ]);
 
     Route::post('/send_reply_to_buyAd',[
-        'uses' => 'message_controller@send_reply_message_to_the_buyAd',
+        'uses' => 'Messenger\message_controller@send_reply_message_to_the_buyAd',
         'as' => 'send_reply_to_buyAd'
     ]);
 
     Route::post('/get_contact_list', [
-        'uses' => 'message_controller@get_current_user_contact_list',
+        'uses' => 'Messenger\message_controller@get_current_user_contact_list',
         'as' => 'get_current_user_contact_list',
     ]);
 
     Route::post('/get_total_unread_messages_for_current_user', [
-        'uses' => 'message_controller@get_total_unread_messages_for_current_user',
-        'as' => 'message_controller@get_total_unread_messages_for_current_user',
+        'uses' => 'Messenger\message_controller@get_total_unread_messages_for_current_user',
+        'as' => 'Messenger\message_controller@get_total_unread_messages_for_current_user',
     ]);
 
     Route::post('/get_user_chat_history', [
-        'uses' => 'message_controller@get_user_chat_history',
+        'uses' => 'Messenger\message_controller@get_user_chat_history',
         'as' => 'get_user_chat_history',
     ]);
 
     Route::post('/set_last_chat_contact', [
-        'uses' => 'message_controller@set_last_chat_contact',
+        'uses' => 'Messenger\message_controller@set_last_chat_contact',
         'as' => 'set_last_chat_contact',
     ]);
 
     Route::post('/get_last_chat_contact_info_from_session', [
-        'uses' => 'message_controller@get_last_chat_contact_info_from_session',
+        'uses' => 'Messenger\message_controller@get_last_chat_contact_info_from_session',
         'as' => 'get_last_chat_contact_info_from_session',
     ]);
 
     Route::post('/get_user_last_confirmed_profile_photo', [
-        'uses' => 'profile_controller@get_user_last_confirmed_profile_photo',
+        'uses' => 'Accounting\profile_controller@get_user_last_confirmed_profile_photo',
         'as' => 'get_user_last_confirmed_profile_photo',
     ]);
 
     // Route::post('/is_allowed_to_access_buyAd_requests', [
-    //     'uses' => 'buyAd_controller@is_user_allowed_to_access_buyAd_requests',
+    //     'uses' => 'BuyAd\buyAd_controller@is_user_allowed_to_access_buyAd_requests',
     //     'as' => 'is_allowed_to_access_buyAd_requests',
     // ]);
 
     Route::post('/edit_product', [
-        'uses' => 'product_controller@edit_product_by_id',
+        'uses' => 'Product\product_controller@edit_product_by_id',
         'as' => 'edit_product_by_id',
     ]);
 
     Route::get('/payment/{pakageType}', [
-        'uses' => 'payment_controller@do_payment',
+        'uses' => 'Payment\payment_controller@do_payment',
         'as' => 'do_payment',
     ]);
 
     Route::get('/payment/elevator/{product_id}', [
-        'uses' => 'payment_controller@do_elevator_payment',
+        'uses' => 'Payment\payment_controller@do_elevator_payment',
         'as' => 'do_elevator_payment',
     ])->where('product_id', '[0-9]+');
 
     Route::any('/payment_callback', [
-        'uses' => 'payment_controller@payment_callback',
+        'uses' => 'Payment\payment_controller@payment_callback',
         'as' => 'payment_callback',
     ]);
 
     Route::any('/elevator_payment_callback', [
-        'uses' => 'payment_controller@elevator_payment_callback',
+        'uses' => 'Payment\payment_controller@elevator_payment_callback',
         'as' => 'elevator_payment_callback',
     ]);
 
     Route::post('/is_user_allowed_to_register_product', [
-        'uses' => 'product_controller@is_user_allowed_to_register_product',
+        'uses' => 'Product\product_controller@is_user_allowed_to_register_product',
         'as' => 'is_user_allowed_to_register_product',
     ]);
 
     Route::post('/get_seller_dashboard_required_data', [
-        'uses' => 'user_controller@get_seller_dashboard_required_data',
+        'uses' => 'Accounting\user_controller@get_seller_dashboard_required_data',
         'as' => 'get_seller_dashboard_required_data',
     ]);
 
     Route::get('/switch-role',[
-        'uses' => 'user_controller@switch_user_role',
+        'uses' => 'Accounting\user_controller@switch_user_role',
         'as' => 'swith_user_role'
     ]);
 
     Route::post('/get_report_options',[
-        'uses' => 'report_controller@get_report_options',
+        'uses' => 'Messenger\report_controller@get_report_options',
         'as'   => 'get_report_options'
     ]);
 
     Route::post('/send_user_report',[
-        'uses' => 'report_controller@send_user_report',
+        'uses' => 'Messenger\report_controller@send_user_report',
         'as'   => 'send_user_report'
     ]);
 
 
      Route::group(['prefix' => 'group'],function(){
         Route::post('/get_groups_list',[
-            'uses' => 'group_message_controller@get_user_groups_list',
+            'uses' => 'Messenger\group_message_controller@get_user_groups_list',
             'as' => 'get_user_subscribed_groups_list'
         ]);
         Route::post('/subscribe_user',[
-            'uses' => 'group_message_controller@subscribe_user_in_group',
+            'uses' => 'Messenger\group_message_controller@subscribe_user_in_group',
             'as' => 'user_subscriber_in_group'
         ]);
     
         Route::post('/send_message',[
-            'uses' => 'group_message_controller@send_message',
+            'uses' => 'Messenger\group_message_controller@send_message',
             'as' => 'send_message_to_group'
         ]);
     
     
         Route::post('/get_group_chats',[
-            'uses' => 'group_message_controller@get_group_chats',
+            'uses' => 'Messenger\group_message_controller@get_group_chats',
             'as' => 'get_group_chats'
         ]);
     
 
         Route::post('/get_all_groups',[
-            'uses' => 'group_message_controller@get_all_groups',
+            'uses' => 'Messenger\group_message_controller@get_all_groups',
             'as' => 'get_all_groups'
         ]);
 
         Route::delete('/unsubscribe_user',[
-            'uses' => 'group_message_controller@unsubscribe_user_from_group',
+            'uses' => 'Messenger\group_message_controller@unsubscribe_user_from_group',
             'as' => 'unsubscribe_user_from_group'
         ]);
      });
@@ -424,17 +424,17 @@ Route::group(['middleware' => [login::class]], function () {
      Route::group(['prefix' => 'fcm'],function(){
 
         Route::post('/register_token',[
-            'uses' => 'fcm_controller@subscribe_token_in_topic',
+            'uses' => 'Notification\fcm_controller@subscribe_token_in_topic',
             'as' => 'register_token'
         ]);
 
         Route::post('/register_token_in_groups',[
-            'uses' => 'fcm_controller@subscribe_token_in_groups',
+            'uses' => 'Notification\fcm_controller@subscribe_token_in_groups',
             'as' => 'register_token_in_groups'
         ]);
 
         Route::post('/unregister_token',[
-            'uses' => 'fcm_controller@unsubscribe_token_from_groups',
+            'uses' => 'Notification\fcm_controller@unsubscribe_token_from_groups',
             'as' => 'unsubscribe_token_from_groups'
         ]);
 
@@ -443,17 +443,17 @@ Route::group(['middleware' => [login::class]], function () {
 });
 
 Route::post('/send_phone_verification_code_for_password_reset', [
-    'uses' => 'sms_controller@send_phone_verification_code_for_password_reset',
+    'uses' => 'Notification\sms_controller@send_phone_verification_code_for_password_reset',
     'as' => 'send_reset_password_verification_code',
 ]);
 
 Route::post('/reset_password', [
-    'uses' => 'user_controller@reset_password',
+    'uses' => 'Accounting\user_controller@reset_password',
     'as' => 'reset_password',
 ]);
 
 // Route::post('/get_buyAd_list_by_user_name', [
-//     'uses' => 'buyAd_controller@get_buyAd_list_by_user_name',
+//     'uses' => 'BuyAd\buyAd_controller@get_buyAd_list_by_user_name',
 //     'as' => 'get_buyAd_list_by_user_name',
 // ]);
 
@@ -713,12 +713,12 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
 });
 
 //Route::any('/payment_callback',[
-//    'uses' => 'payment_controller@my_payment_callback',
+//    'uses' => 'Payment\payment_controller@my_payment_callback',
 //    'as' => 'payment_callback'
 //]);
 
 Route::any('/instant_payment_callback', [
-    'uses' => 'payment_controller@instant_transaction_payment_callback',
+    'uses' => 'Payment\payment_controller@instant_transaction_payment_callback',
     'as' => 'instant_transaction_payment_callback',
 ]);
 
@@ -744,11 +744,11 @@ Route::post('/get_wp_posts', [
 // });
 
 Route::post('/is_user_from_webview', [
-    'uses' => 'user_controller@is_user_from_webview',
+    'uses' => 'Accounting\user_controller@is_user_from_webview',
 ]);
 
 Route::get('/sitemap.xml', [
-    'uses' => 'sitemap_controller@get_required_data_for_sitemap',
+    'uses' => 'General\sitemap_controller@get_required_data_for_sitemap',
     'as' => 'get_sitemap',
 ]);
 

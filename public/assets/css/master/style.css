@@ -231,7 +231,7 @@ select {
 .gray-button {
   margin: 15px 0 0;
   display: inline-block;
-  background:#808080;
+  background: #808080;
   color: #fff;
   padding: 10px 25px;
   border-radius: 3px;
@@ -312,6 +312,19 @@ select {
 }
 .bg-gray {
   background: #777;
+}
+
+.bg-green {
+  background-color: #00c569;
+}
+.bg-green:hover {
+  background-color: #279b41;
+}
+.bg-red {
+  background-color: #e41c39 !important;
+}
+.bg-red:hover:hover {
+  background-color: #d71a34 !important;
 }
 
 .message-wrapper .chat-page ul,

@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\product::class, function (Faker $faker) {
+$factory->define(App\Models\product::class, function (Faker $faker) {
     return [
         'stock' => 300,
         'min_sale_price' => 400,

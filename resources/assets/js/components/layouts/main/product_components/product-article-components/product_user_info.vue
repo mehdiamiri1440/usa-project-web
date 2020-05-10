@@ -231,7 +231,7 @@ p.response-rate {
         class="green-button"
       >
         <i class="fa fa-envelope"></i>
-        استعلام قیمت
+        استعلام شرایط فروش
       </button>
 
       <button
@@ -271,38 +271,38 @@ export default {
     };
   },
   methods: {
-    openChat: function() {
+    openChat: function(product) {
+      
       this.registerComponentStatistics(
         "product",
         "openChat",
         "click on open chatBox"
       );
-
+      
+      let productName = product.main.sub_category_name + ' ' + product.main.product_name;
       var contact = {
         contact_id: this.user_info.id,
         first_name: this.user_info.first_name,
         last_name: this.user_info.last_name,
         profile_photo: this.profile_photo,
-        user_name: this.user_info.user_name
+        user_name: this.user_info.user_name,
+        product_name:productName,
       };
       var self = this;
 
       if (this.current_user.user_info) {
         if (this.current_user.user_info.id !== this.user_info.id) {
-          eventBus.$emit("ChatInfo", contact);
+            window.localStorage.setItem("contact", JSON.stringify(contact));
+
+            this.$router.push({name : 'registerInquiry'});
         } else {
           this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
           eventBus.$emit("submitSuccess", this.popUpMsg);
           $("#custom-main-modal").modal("show");
         }
       } else {
-        window.localStorage.setItem("contact", JSON.stringify(contact));
-        window.localStorage.setItem("pathname", window.location.pathname);
-
-        this.popUpMsg =
-          "اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.";
-        eventBus.$emit("submitSuccess", this.popUpMsg);
-        $("#auth-popup").modal("show");
+          window.localStorage.setItem("contact", JSON.stringify(contact));
+          this.$router.push({name : 'registerInquiry'});
       }
     },
     scrollToTheRequestRegisterBox: function(element) {
@@ -313,16 +313,17 @@ export default {
     },
     deleteProduct: function() {
       //show modal
-      this.popUpMsg = "آیا محصول حذف شود؟";
-      this.deleteButtonText = "حذف";
-      this.cancelButtonText = "انصراف";
+      // this.popUpMsg = "آیا محصول حذف شود؟";
+      // this.deleteButtonText = "حذف";
+      // this.cancelButtonText = "انصراف";
 
-      eventBus.$emit("submitSuccess", this.popUpMsg);
-      eventBus.$emit("deleteButtonText", this.deleteButtonText);
-      eventBus.$emit("cancelButtonText", this.cancelButtonText);
+      // eventBus.$emit("submitSuccess", this.popUpMsg);
+      // eventBus.$emit("deleteButtonText", this.deleteButtonText);
+      // eventBus.$emit("cancelButtonText", this.cancelButtonText);
       eventBus.$emit("productId", this.product_id);
+      eventBus.$emit('modal', 'deleteProduct');
 
-      $("#deleteModal").modal("show");
+      // $("#deleteModal").modal("show");
 
       this.registerComponentStatistics(
         "product",

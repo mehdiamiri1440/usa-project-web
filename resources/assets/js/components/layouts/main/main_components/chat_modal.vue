@@ -404,7 +404,7 @@ export default {
   methods: {
     setUpChat: function () {
       this.handleBackBtnClickOnDevices();
-
+      
       this.loadChatHistory(this.contactInfo);
     },
     loadChatHistory: function (contact, index) {
@@ -486,6 +486,16 @@ export default {
         }
       }
     },
+    handleInitialMessage: function(){
+      let self = this;
+
+      return new Promise((resolve,reject) => {
+        self.loadChatHistory(self.contactInfo)
+        resolve(true);
+      }).then(() => {
+        self.sendMessage();
+      });
+    },
     handleBackBtnClickOnDevices: function () {
       var self = this;
 
@@ -498,8 +508,8 @@ export default {
 
         if (self.doesUserComeFromAuthenticationPages()) {
           // if(window.location.pathname == '/login' || window.location.pathname == '/register'){
-          window.localStorage.removeItem("comeFromAuthentication");
-          window.location.href = window.location.pathname;
+            window.localStorage.removeItem("comeFromAuthentication");
+            window.location.href = window.location.pathname;
           // }
         }
       });

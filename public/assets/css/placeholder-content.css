@@ -234,6 +234,10 @@
   height: 20px;
 }
 
+.h-40 {
+  height: 40px;
+}
+
 .red-text {
   color: #e41c38;
 }

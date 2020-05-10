@@ -457,7 +457,7 @@ export default {
                
           }
           else{
-            self.openModal('ظرفیت روزانه پاسخ به درخواست های خرید شما پر شده است.');
+            eventBus.$emit('modal', 'buyAdReplyLimit');
             self.registerComponentStatistics(
               "buyAdReply",
               "openChat",
@@ -488,10 +488,6 @@ export default {
         event_label: labelName
       });
     },
-    openModal(popUpMsg) {
-      eventBus.$emit("submitSuccess", popUpMsg);
-      $("#modal-buttons").modal("show");
-    }
   },
   mounted() {
     this.init();

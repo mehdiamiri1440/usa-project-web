@@ -464,10 +464,10 @@ export default {
         .then(function(response) {
           if (response.data.status === true) {
                 if (response.data.confirmed_profile_record === true) {
-                      if(self.isUserComeFromChatBoxOpen()){
+                      if(self.isUserComeFromChatBoxOpen() || self.isUserInInquirySubmissionProcess()){
                           window.localStorage.setItem('userId', response.data.id);
                           window.localStorage.setItem('userType', response.data.is_seller);
-
+      
                           self.returnUserToPreviousPageAndChatBox(response.data);
                       }
                       else{
@@ -547,9 +547,9 @@ export default {
         .then(function(response) {
           if (response.data.status === true) {
             self.errors = [];
-            self.popUpMsg ="گذر واژه ی جدید به تلفن همراهتان ارسال شد.";
-            eventBus.$emit("submitSuccess", self.popUpMsg);
-            $("#custom-main-modal").modal("show");
+            
+            eventBus.$emit('modal', 'passwordResetSuccess');
+
             self.currentStep = 1;
             self.createPassword = false;
 
@@ -615,7 +615,32 @@ export default {
     },
     returnUserToPreviousPageAndChatBox:function(userInfo)
     {
-        if(window.localStorage.getItem('contact') && window.localStorage.getItem('pathname')){
+        if(this.isUserInInquirySubmissionProcess()){
+            
+            let contact = JSON.parse(window.localStorage.getItem('contact'));
+            let msg = window.localStorage.getItem('msgToSend');
+
+            if(userInfo.id != contact.contact_id){
+
+                if(userInfo.is_buyer){
+                  window.location.href = "/buyer/register-request";
+                }
+                else if(userInfo.is_seller){
+                  window.location.href = '/switch-role';
+                }
+                else{
+                  window.localStorage.removeItem('contact');
+                  window.localStorage.removeItem('msgToSend');
+
+                  this.redirectUserToPanel(userInfo);
+                }
+                
+            }
+            else {
+              this.redirectUserToPanel(userInfo);
+            }
+        }
+        else if(this.isUserComeFromChatBoxOpen()){
             
             let contact = JSON.parse(window.localStorage.getItem('contact'));
             let pathname = window.localStorage.getItem('pathname');
@@ -626,11 +651,10 @@ export default {
             if(userInfo.id != contact.contact_id){
                 window.localStorage.setItem('comeFromAuthentication',true);
 
-                this.$router.push({
-                    path : pathname
-                },function(){
-                    eventBus.$emit("ChatInfo",contact);
-                });
+                this.$router.push({path: pathname});
+
+                eventBus.$emit('ChatInfo',contact);
+                
             }
             else {
               this.redirectUserToPanel(userInfo);
@@ -712,17 +736,32 @@ export default {
             "نوع کاربری شما مشخص نشده است لطفا با پشتیبانی باسکول تماس بگیرید"
           );
         }
+    },
+    isUserInInquirySubmissionProcess: function(){
+      if(window.localStorage.getItem('contact') && window.localStorage.getItem('msgToSend')){
+        return true;
+      }
+      return false;
     }
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/login" });
     var self = this;
-    //    if (localStorage.userRoute) {
-    //      window.location.href = JSON.parse(localStorage.userRoute);
-    //    }
+    
+    let userInfo = {
+      is_buyer: ! self.userType,
+      is_seller: self.userType
+    };
+
     if (self.isUserLogin && self.userType == 1) {
-      self.$router.push("seller/register-product");
+      if(self.isUserInInquirySubmissionProcess()){
+        self.returnUserToPreviousPageAndChatBox(userInfo);
+      }
+      else{
+        self.$router.push("seller/register-product");
+      }
     } else if (self.isUserLogin && self.userType != 1) {
+      // self.returnUserToPreviousPageAndChatBox(userInfo);
       self.$router.push("buyer/register-request");
     } else {
       self.loginCheckerLoading = false;

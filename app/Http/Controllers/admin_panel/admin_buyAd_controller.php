@@ -4,11 +4,11 @@ namespace App\Http\Controllers\admin_panel;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\buyAd;
-use App\buyAd_media;
-use App\category;
+use App\Models\buyAd;
+use App\Models\buyAd_media;
+use App\Models\category;
 use DB;
-use App\Http\Controllers\sms_controller;
+use App\Http\Controllers\Notification\sms_controller;
 use App\Http\Library\date_convertor;
 use App\Jobs\NotifySellersIfANewRelatedBuyAdRegistered;
 

@@ -7,7 +7,7 @@ use App\instant_transaction;
 use App\instant_factor;
 use App\Http\Library\date_convertor;
 use DB;
-use App\Http\Controllers\sms_controller;
+use App\Http\Controllers\Notification\sms_controller;
 
 class instant_transaction_controller extends Controller
 {

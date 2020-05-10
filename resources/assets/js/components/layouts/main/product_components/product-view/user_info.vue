@@ -343,7 +343,7 @@ p.response-rate span {
 
       <button
         v-if="!$parent.isMyProfile"
-        @click.prevent="$parent.openChat($parent.product)"
+        @click.prevent="$parent.openChatModal($parent.product)"
         class="green-button"
       >
         ارسال پیام
