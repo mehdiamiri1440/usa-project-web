@@ -1,325 +1,297 @@
 
 <style scoped>
+p {
+  line-height: 1.618;
+  margin: 45px auto 55px;
+  text-align: center;
+}
 
-	p{
-		line-height: 1.618;
-		margin: 45px auto 55px;
-		text-align: center;
-	}
+.red-text {
+  color: #e41c38;
+}
 
-	.red-text{
-		color: #e41c38;
-	}
+.event-text {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
 
-	.event-text{
+label {
+  margin: 0 auto 9px auto;
+}
 
-		font-size: 18px;
-		margin-bottom: 15px;
+.submit-button {
+  background: #dddddd;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 16px;
+  padding: 10px 30px 9px;
+  transition: 200ms;
+  cursor: default;
+  margin: 8px 0;
+}
 
-	}
+.submit-button.active {
+  background: #00c569;
+  cursor: pointer;
+}
 
-	label{
-		margin: 0 auto 9px auto;
-	}
+.title-contents {
+  font-weight: bold;
+  font-size: 19px;
+  margin-bottom: 15px;
+}
 
-	.submit-button{
+.form-contents {
+  margin: 5px auto;
+}
 
-		background: #DDDDDD;
-		color: #fff;
-		border: none;
-		border-radius: 4px;
-		display: inline-block;
-		font-size: 16px;
-		padding: 10px 30px 9px;
-		transition: 200ms;
-		cursor: default;
-		margin: 8px 0;
+.form-contents lable {
+  font-size: 12px;
+}
 
-    }
+.input-wrapper,
+.text-input-wrapper {
+  margin: 6px auto;
 
-    .submit-button.active{
-		background: #00C569;
-		cursor: pointer;
-    }
+  position: relative;
+}
 
-    .title-contents{
+.input-wrapper:after {
+  content: "\F107";
 
-    	font-weight: bold;
-    	font-size: 19px;
-		margin-bottom: 15px;
+  color: #777;
 
-    }
+  position: absolute;
 
-    .form-contents{
-    	margin: 5px auto;
-    }
+  display: inline-block;
 
-    .form-contents lable{
-    	font-size: 12px;
-    }
+  top: 6px;
 
-    .input-wrapper,.text-input-wrapper{
-   		margin: 6px auto;
+  font-family: "Font Awesome 5 Free", sans-serif;
 
-    	position: relative;
+  font-weight: 900;
 
-    }
+  left: 15px;
 
-    .input-wrapper:after{
-		content: "\F107";
+  font-size: 20px;
 
-		color: #777;
+  z-index: 0;
+}
 
-		position: absolute;
+input {
+  width: 100%;
 
-		display: inline-block;
+  border-radius: 4px;
 
-		top: 6px;
+  border: 1px solid;
 
-		font-family: "Font Awesome 5 Free",sans-serif;
+  padding: 8px 15px;
 
-		font-weight: 900;
+  color: #bebebe;
 
-		left: 15px;
+  border-color: #bebebe;
 
-		font-size: 20px;
+  direction: rtl;
 
-		z-index: 0;
+  transition: 300ms;
 
-    }
+  background: #fff;
+}
 
-    input{
-    	width: 100%;
+.input-wrapper i {
+  display: inline-block;
 
-		border-radius: 4px;
+  position: absolute;
 
-		border: 1px solid;
+  left: 15px;
 
-		padding: 8px 15px ;
+  font-size: 20px;
 
-		color: #BEBEBE;
+  color: #bebebe;
 
-		border-color: #BEBEBE;
+  top: 9px;
 
-		direction: rtl;
+  transition: 300ms;
+}
 
-		transition: 300ms;
+input:focus,
+input:focus + i {
+  color: #333;
+  border-color: #333;
+}
 
-		background: #fff;
-    }
+input.active {
+  border-color: #00c569;
+  color: #333;
+}
 
-    .input-wrapper i {
+input.active + i {
+  color: #00c569;
+}
 
-    	display: inline-block;
+input.active:focus,
+input.active:focus + i,
+input.active + i {
+  border-color: #00c569;
+}
 
-		position: absolute;
+input.error {
+  color: #333;
+  border-color: #e41c38;
+}
 
-		left: 15px;
+input.error + i {
+  color: #e41c38;
+}
 
-		font-size: 20px;
+input.error:focus,
+input.error:focus + i {
+  border-color: #e41c38;
+}
 
-		color: #BEBEBE;
+select {
+  width: 100%;
 
-		top: 9px;
+  border-radius: 4px;
 
-		transition: 300ms;
-    }
+  border: 1px solid;
 
+  padding: 8px 15px;
 
-    input:focus ,  input:focus + i{
-		color: #333;
-		border-color: #333;
+  position: relative;
 
-    }
+  z-index: 1;
 
-    input.active{
-		border-color: #00C569;
-		color: #333;
-    }
+  color: #777777;
 
-    input.active + i{
-		color: #00C569;
-    }
+  direction: rtl;
 
-    input.active:focus ,  input.active:focus + i , input.active + i {
-		border-color: #00C569;
-    }
+  transition: 200ms;
 
-    input.error {
-    	color: #333;
-		border-color: #e41c38;
-    }
+  background: none;
 
-    input.error + i{
-		color: #e41c38;
-    }
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+}
 
+.input-wrapper i {
+  display: inline-block;
 
-    input.error:focus ,  input.error:focus + i  {
-		border-color: #e41c38;
-    }
+  position: absolute;
 
-    select{
+  left: 15px;
 
-    	width: 100%;
+  font-size: 20px;
 
-		border-radius: 4px;
+  color: #bebebe;
 
-		border: 1px solid;
+  top: 9px;
 
-		padding: 8px 15px;
+  transition: 200ms;
+}
 
-		position: relative;
+select option {
+  color: #333;
+}
 
-		z-index: 1;
+select:focus {
+  color: #333;
+}
 
-		color: #777777;
+select.active {
+  color: #333;
+  color: #00c569;
+}
 
-		direction: rtl;
+select.active:focus {
+  color: #00c569;
+}
 
-		transition: 200ms;
+select.error {
+  color: #333;
+  color: #e41c38;
+}
 
-		background: none;
+select.error:focus {
+  color: #e41c38;
+}
+.error-message {
+  text-align: center;
 
-		appearance:none;
-		-webkit-appearance:none;
-		-moz-appearance:none;
-		-ms-appearance:none;
+  color: #e41c38;
 
+  font-weight: bold;
 
+  height: 15px;
 
-    }
+  direction: rtl;
 
-    .input-wrapper i {
-    	display: inline-block;
+  font-size: 11px;
+}
 
-		position: absolute;
+.small-description {
+  font-size: 11px;
 
-		left: 15px;
+  font-weight: bold;
 
-		font-size: 20px;
+  color: #777777;
 
-		color: #BEBEBE;
-
-		top: 9px;
-
-		transition: 200ms;
-    }
-
-     select option{
-		color: #333;
-    }
-
-    select:focus{
-		color: #333;
-    }
-
-    select.active{
-    		color: #333;
-		color: #00C569;
-    }
-
-    select.active:focus {
-		color: #00C569;
-    }
-
-    select.error {
-    		color: #333;
-		color: #e41c38;
-    }
-
-    select.error:focus{
-		color: #e41c38;
-    }
-    .error-message{
-
-    	text-align: center;
-
-		color: #e41c38;
-
-		font-weight: bold;
-
-		height: 15px;
-
-	    direction: rtl;
-
-		font-size: 11px;
-    }
-
-    .small-description{
-
-         font-size: 11px;
-
-         font-weight: bold;
-
-         color: #777777;
-
-         line-height: 1.618;
-
-    }
-    .loading-submit{
-    	width: 50px;
-		margin: 0 auto;
-    }
-    @media screen and (max-width: 767px){
-		.input-wrapper {
-		    padding: 0 5px;
-
-		}
-		select{
-			font-size: 12px;
-		}
-		.input-wrapper::after {
-		    left: 14px;
-		}
-	}
+  line-height: 1.618;
+}
+.loading-submit {
+  width: 50px;
+  margin: 0 auto;
+}
+@media screen and (max-width: 767px) {
+  .input-wrapper {
+    padding: 0 5px;
+  }
+  select {
+    font-size: 12px;
+  }
+  .input-wrapper::after {
+    left: 14px;
+  }
+}
 </style>
 
 <template>
-	<div>
+  <div>
+    <div class="form-contents">
+      <div class="col-xs-12">
+        <div class="text-input-wrapper">
+          <p>
+            فروشنده محترم برای استفاده از خدمات باسکول و ارتباط مستقیم با خریداران ابتدا باید محصولات خود را در سامانه باسکول ثبت کنید.
+            <br />
+            <br />
 
+            <strong>
+              <span class="red-text">تنها</span>پس از ثبت محصول اطلاعات شما بر روی سامانه به خریداران نمایش داده می شود
+            </strong>
+          </p>
+        </div>
+      </div>
 
-		 <div class="form-contents ">
+      <div class="col-xs-12">
+        <div class="text-center">
+          <div class="event-text">
+            <strong>همین حالا محصول خود را ثبت کنید</strong>
+          </div>
 
-			    	<div class=" col-xs-12 ">
-
-
-
-				     	<div class="text-input-wrapper  ">
-
-
-				     		<p>
-				     			فروشنده محترم برای استفاده از خدمات باسکول و ارتباط مستقیم با خریداران ابتدا باید محصولات خود را در سامانه باسکول ثبت کنید.
-
-				     			<br/>
-				     			<br/>
-
-				     			<strong>
-				     				<span class="red-text">تنها </span>پس از ثبت محصول اطلاعات شما بر روی سامانه به خریداران نمایش داده می شود
-				     			</strong>
-				     		</p>
-
-				     	</div>
-
-				    </div>
-
-			       <div class="col-xs-12">
-			       	<div class="text-center">
-			       		<div class="event-text"><strong>همین حالا محصول خود را ثبت کنید</strong></div>
-
-			       		 <button v-if="!$parent.isStartLoading" class="submit-button active "
-
-			       		 	@click.prevent="$parent.startRegisterProductSubmited()"
-			       		   >
-			        		ثبت محصول
-						 </button>
-						  <div v-else class="loading-submit  ">
-			        		<img :src="$parent.loading_img">
-			        		</div>
-			       	</div>
-			       	</div>
-			       </div>
-		</div>
-
+          <button
+            v-if="!$parent.isStartLoading"
+            class="submit-button active"
+            @click.prevent="$parent.startRegisterProductSubmited()"
+          >ثبت محصول</button>
+          <div v-else class="loading-submit">
+            <img :src="$parent.loading_img" />
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
