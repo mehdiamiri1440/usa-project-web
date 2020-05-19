@@ -17,7 +17,7 @@ Vue.use(require('vue-jalali-moment'));
 Vue.use(Meta);
 
 
-import RouteComponent from './router/components/route'
+import RouteComponent from './router/components/route';
 
 new Vue({
     el: '#app',
