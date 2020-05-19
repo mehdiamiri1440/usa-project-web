@@ -430,7 +430,7 @@ label {
       >
         <button v-if="!isMyProfile" @click.prevent="openChat(product)" class="green-button">
           <i class="fa fa-envelope"></i>
-          استعلام شرایط فروش
+          ارتباط با فروشنده
         </button>
 
         <button
@@ -621,10 +621,10 @@ export default {
 
       if (this.currentUser.user_info) {
         if (this.currentUser.user_info.id !== product.user_info.id) {
-          // eventBus.$emit("ChatInfo", contact);
-          window.localStorage.setItem("contact", JSON.stringify(contact));
+          eventBus.$emit("ChatInfo", contact);
+          // window.localStorage.setItem("contact", JSON.stringify(contact));
 
-          this.$router.push({name : 'registerInquiry'});
+          // this.$router.push({name : 'registerInquiry'});
         } else {
           this.popUpMsg = "شما نمیتوانید به خودتان پیام دهید.";
           eventBus.$emit("submitSuccess", this.popUpMsg);

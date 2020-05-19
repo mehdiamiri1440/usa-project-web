@@ -231,7 +231,7 @@ p.response-rate {
         class="green-button"
       >
         <i class="fa fa-envelope"></i>
-        استعلام شرایط فروش
+        ارتباط با فروشنده
       </button>
 
       <button
@@ -292,9 +292,10 @@ export default {
 
       if (this.current_user.user_info) {
         if (this.current_user.user_info.id !== this.user_info.id) {
-            window.localStorage.setItem("contact", JSON.stringify(contact));
+            eventBus.$emit("ChatInfo", contact);
+            // window.localStorage.setItem("contact", JSON.stringify(contact));
 
-            this.$router.push({name : 'registerInquiry'});
+            // this.$router.push({name : 'registerInquiry'});
         } else {
           this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
           eventBus.$emit("submitSuccess", this.popUpMsg);

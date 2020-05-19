@@ -23,7 +23,7 @@
       :logo="assets + 'assets/img/logo-buskool-white-red.png'"
       :storage="storagePath"
       :defultimg="assets + 'assets/img/user-defult.png'"
-      :logout="'/logout'"
+      :logout="'/logout'" 
       :loading="assets + 'assets/img/gif/prload.gif'"
       :search-text="searchText"
     ></header-dash-buyer>

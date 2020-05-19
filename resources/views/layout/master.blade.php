@@ -135,11 +135,12 @@
 </script>
 
 <script src="{{asset('js/app.js')}}"></script>
-<script src="{{asset('assets/js/idleTimer.js')}}"></script>
+<!-- <script async src="{{asset('js/sw/app.js')}}"></script> -->
+<!-- <script src="{{asset('assets/js/idleTimer.js')}}"></script> -->
 
 <script>
     $(document).ready(function () {
-        $(document).idleTimer(7200000);
+        // $(document).idleTimer(7200000);
         
         $('.main-loader-wrapper').css('display','none');
     });

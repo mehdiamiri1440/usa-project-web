@@ -380,9 +380,10 @@ export default {
       var self = this;
       if (this.currentUser.user_info) {
         if (this.currentUser.user_info.id !== product.user_info.id) {
-          window.localStorage.setItem("contact", JSON.stringify(contact));
+            eventBus.$emit("ChatInfo", contact);
+        //   window.localStorage.setItem("contact", JSON.stringify(contact));
 
-          this.$router.push({ name: "registerInquiry" });
+        //   this.$router.push({ name: "registerInquiry" });
         } else {
           this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
           eventBus.$emit("submitSuccess", this.popUpMsg);
