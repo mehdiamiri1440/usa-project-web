@@ -167,6 +167,7 @@ return [
         Larabookir\Gateway\GatewayServiceProvider::class,
         LaravelFCM\FCMServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Aws\Laravel\AwsServiceProvider::class,
         
         
 
@@ -241,6 +242,7 @@ return [
         'FCM'      => LaravelFCM\Facades\FCM::class,
         'FCMGroup' => LaravelFCM\Facades\FCMGroup::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'AWS' => Aws\Laravel\AwsFacade::class,
 
     ],
 
