@@ -14,6 +14,7 @@ use App\Models\sell_offer;
 use DB;
 use App\Models\message;
 use App\Http\Controllers\General\media_controller;
+use App\Http\Controllers\Accounting\comment_controller;
 
 class profile_controller extends Controller
 {
@@ -520,10 +521,12 @@ class profile_controller extends Controller
                                             ->count();
 
         $reputation_controller_object = new reputation_controller();
-
         $reputation_score = $reputation_controller_object->calculate_user_reputation_score($user_id);
 
         $response_rate = $this->get_user_response_rate($user_id);
+
+        $user_comment_controller = new comment_controller();
+        $rating_info = $user_comment_controller->get_user_avg_rating_score($user_id);
 
         $result_array = [
             'product_count' => $product_count,
@@ -531,6 +534,7 @@ class profile_controller extends Controller
             'reputation_score' => $reputation_score,
             'validated_seller' => config("subscriptionPakage.type-$user_active_pakage_type.validated-seller"),
             'response_rate' => $response_rate,
+            'rating_info' => $rating_info
         ];
 
         return $result_array;

@@ -439,6 +439,31 @@ Route::group(['middleware' => [login::class]], function () {
         ]);
 
      });
+
+     Route::post('/profile/add-comment',[
+        'uses' => 'Accounting\comment_controller@post_comment',
+        'as' => 'post_comment_on_user_porfile'
+     ]);
+
+     Route::post('/profile/get-user-comments',[
+         'uses' => 'Accounting\comment_controller@get_user_comments',
+         'as' => 'get_user_comments'
+     ]);
+
+     Route::post('/profile/do-like',[
+        'uses' => 'Accounting\comment_controller@do_like_actions',
+        'as' => 'get_user_comments'
+    ]);
+
+    Route::post('/profile/is-user-authorized-to-post-comment',[
+        'uses' => 'Accounting\comment_controller@is_user_authorized_to_post_comment_on_the_user',
+        'as' => 'is_user_authorized_to_post_comment_on_the_user'
+    ]);
+
+    Route::post('/profile/delete-user-comment',[
+        'uses' => 'Accounting\comment_controller@delete_comment',
+        'as'   => 'delete_user_comment'
+    ]);
     
 });
 
