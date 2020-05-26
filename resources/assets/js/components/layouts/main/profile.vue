@@ -750,22 +750,27 @@ p.response-rate span {
                 <div class="placeholder-content default-wrapper-main-image"></div>
               </div>
 
-              <div class="profile-rating-box-wrapper hidden-xs">
+              <div
+                class="profile-rating-box-wrapper hidden-xs"
+                v-if="profileOwnerStatistics.rating_info.total_count > 0"
+              >
                 <div class="profile-rating-box">
                   <div class="rating-stars pull-left">
                     <p class="stars-wrapper">
                       <span v-for="(star,index) in 5" :key="index">
                         <span v-text="index + 1"></span>
 
-                        <i class="fa fa-star" :class="{ 'yellow-text' : index < 5}"></i>
+                        <i class="fa fa-star" :class="{ 'yellow-text' : index < starScore}"></i>
                       </span>
                     </p>
                     <p class="review-count-wrapper">
-                      <span>۱۳۰۰</span>
+                      <span v-text="profileOwnerStatistics.rating_info.total_count"></span>
                       نظر
                     </p>
                   </div>
-                  <div class="rating-score pull-right">۴.۵</div>
+                  <span class="rating-score pull-right">
+                    <span v-text="profileOwnerStatistics.rating_info.avg_score"></span>
+                  </span>
                 </div>
               </div>
             </div>
@@ -1042,22 +1047,27 @@ p.response-rate span {
                     v-else
                     class="placeholder-content margin-15-0 content-half-width padding-15-0"
                   ></h1>
-                  <div class="profile-rating-box-wrapper hidden-sm hidden-md hidden-lg">
+                  <div
+                    class="profile-rating-box-wrapper hidden-sm hidden-md hidden-lg"
+                    v-if="profileOwnerStatistics.rating_info.total_count > 0"
+                  >
                     <div class="profile-rating-box">
                       <div class="rating-stars pull-left">
                         <p class="stars-wrapper">
                           <span v-for="(star,index) in 5" :key="index">
                             <span v-text="index + 1"></span>
 
-                            <i class="fa fa-star" :class="{ 'yellow-text' : index < 5}"></i>
+                            <i class="fa fa-star" :class="{ 'yellow-text' : index < starScore}"></i>
                           </span>
                         </p>
                         <p class="review-count-wrapper">
-                          <span>۱۳۰۰</span>
+                          <span v-text="profileOwnerStatistics.rating_info.total_count"></span>
                           نظر
                         </p>
                       </div>
-                      <div class="rating-score pull-right">۴.۵</div>
+                      <div class="rating-score pull-right">
+                        <span v-text="profileOwnerStatistics.rating_info.avg_score"></span>
+                      </div>
                     </div>
                   </div>
                   <div class="content_user_info col-xs-12 col-sm-8">
@@ -1471,10 +1481,12 @@ export default {
       profileOwnerStatistics: {
         transaction_count: "",
         product_count: "",
-        buyAd_count: ""
+        buyAd_count: "",
+        rating_info: ""
       },
       getUserName: this.$route.params.user_name,
-      jsonLDObject: ""
+      jsonLDObject: "",
+      starScore: ""
     };
   },
   methods: {
@@ -1515,6 +1527,9 @@ export default {
         })
         .then(function(response) {
           self.profileOwnerStatistics = response.data.statistics;
+          self.starScore = Math.floor(
+            self.profileOwnerStatistics.rating_info.avg_score
+          );
         })
         .catch(function(err) {
           //
