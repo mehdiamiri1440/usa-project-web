@@ -1797,6 +1797,14 @@ export default {
       profilePhoto = this.defultimg;
     }
 
+    let indexingStatus = "";
+    if(!!this.profileOwner.profile.description && this.profileOwner.profile.description.length > 500){
+      indexingStatus = 'index';
+    }
+    else{
+      indexingStatus = 'noindex';
+    }
+
     return {
       title: fullName,
       titleTemplate: "%s | باسکول",
@@ -1805,6 +1813,10 @@ export default {
           name: "description",
           content:
             " محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید",
+        },
+        {
+          name: "robots",
+          content : indexingStatus
         },
         {
           property: "og:type",

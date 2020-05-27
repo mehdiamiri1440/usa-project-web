@@ -735,6 +735,21 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
         'uses' => 'admin_panel\admin_message_controller@get_all_user_contacts_with_related_messages',
         'as' => 'admin_panel_load_user_messages',
     ]);
+
+    Route::get('/user-comment-list',[
+        'uses' => 'admin_panel\admin_user_comment_controller@load_unconfirmed_comments',
+        'as' => 'load_users_unconfirmed_comments'
+    ]);
+
+    Route::get('/user-comment-detail/{id}',[
+        'uses' => 'admin_panel\admin_user_comment_controller@get_user_comment_by_id',
+        'as'   => 'admin_panel_load_user_comment_by_id'
+    ]);
+
+    Route::post('/confirm_user_comment_by_id',[
+        'uses' => 'admin_panel\admin_user_comment_controller@confirm_user_comment_by_id',
+        'as'   => 'admin_panel_confirm_user_comment_by_id'
+    ]);
 });
 
 //Route::any('/payment_callback',[

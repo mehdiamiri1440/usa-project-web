@@ -55,7 +55,7 @@ class comment_controller extends Controller
     {
         
         $this->validate($request,[
-            'user_id' => 'required|exists:user_comments,myuser_id'
+            'user_id' => 'required|exists:myusers,id'
         ]);
 
         $user_id = $request->user_id;

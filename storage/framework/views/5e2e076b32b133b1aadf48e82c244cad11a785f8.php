@@ -110,6 +110,9 @@
         <li class="<?php echo e(Request::is('admin/messages') ? 'active':''); ?>">
             <a href="<?php echo e(route('admin_panel_message_list')); ?>"><i class="fa fa-envelope"></i><span>پیام ها</span></a>      
         </li>
+        <li class="<?php echo e(Request::is('admin/user-comment-list') || Request::is('admin/user-comment-detail/*')? 'active':''); ?>">
+            <a href="<?php echo e(route('load_users_unconfirmed_comments')); ?>"><i class="fa fa-envelope"></i><span>کامنت های تایید نشده</span></a>      
+        </li>
         <!-- <li class="<?php echo e(Request::is('admin/sell-offers') || Request::is('admin/sell-offer-detail/*') ? 'active':''); ?>">
             <a href="<?php echo e(route('admin_panel_sell_offer_list')); ?>"><i class="fa fa-envelope"></i><span>پیشنهادات فروش</span></a>     
         </li>
