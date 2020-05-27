@@ -1651,7 +1651,7 @@ export default {
         transaction_count: "",
         product_count: "",
         buyAd_count: "",
-        rating_info: ""
+        rating_info: {}
       },
       statisticsLoader: false,
       getUserName: this.$route.params.user_name,
@@ -1705,9 +1705,14 @@ export default {
         })
         .then(function(response) {
           self.profileOwnerStatistics = response.data.statistics;
-          self.starScore = Math.floor(
-            self.profileOwnerStatistics.rating_info.avg_score
-          );
+
+          if (self.profileOwnerStatistics.rating_info) {
+            self.starScore = Math.floor(
+              self.profileOwnerStatistics.rating_info.avg_score
+            );
+          } else {
+            self.profileOwnerStatistics.rating_info = {};
+          }
           self.statisticsLoader = false;
         })
         .catch(function(err) {
