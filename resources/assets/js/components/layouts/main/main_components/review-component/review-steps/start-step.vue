@@ -152,13 +152,13 @@
   margin-bottom: 15px;
 }
 
-.report-form {
+.report-form-wrapper {
   direction: rtl;
 
   overflow: hidden;
 }
 
-.report-form textarea {
+.report-form-wrapper textarea {
   max-width: 600px;
 
   margin: 15px auto 0px;
@@ -217,11 +217,14 @@
 .btn-disable {
   background: #dbdbdb;
 }
+#report-form {
+  padding: 0 15px;
+}
 @media screen and (max-width: 768px) {
   .user-image {
     margin-top: 40px;
   }
-  .report-form {
+  .report-form-wrapper {
     padding: 0 10px;
   }
 }
@@ -240,50 +243,20 @@
         <p>میزان رضایت خود را از 1 تا 5 ثبت کنید</p>
 
         <div class="rate">
-          <input
-            type="radio"
-            id="star5"
-            name="rate"
-            value="5"
-            v-model="$parent.reviewData.rate"
-          />
-          <label id="lable-star5" for="star5" title="text">5 stars</label>
-          <input
-            type="radio"
-            id="star4"
-            name="rate"
-            value="4"
-            v-model="$parent.reviewData.rate"
-          />
-          <label id="lable-star4" for="star4" title="text">4 stars</label>
-          <input
-            type="radio"
-            id="star3"
-            name="rate"
-            value="3"
-            v-model="$parent.reviewData.rate"
-          />
-          <label id="lable-star3" for="star3" title="text">3 stars</label>
-          <input
-            type="radio"
-            id="star2"
-            name="rate"
-            value="2"
-            v-model="$parent.reviewData.rate"
-          />
-          <label id="lable-star2" for="star2" title="text">2 stars</label>
-          <input
-            type="radio"
-            id="star1"
-            name="rate"
-            value="1"
-            v-model="$parent.reviewData.rate"
-          />
-          <label id="lable-star1" for="star1" title="text">1 star</label>
+          <input type="radio" id="star5" name="rate" value="5" v-model="$parent.reviewData.rate" />
+          <label @click="showReviewText()" id="lable-star5" for="star5" title="text">5 stars</label>
+          <input type="radio" id="star4" name="rate" value="4" v-model="$parent.reviewData.rate" />
+          <label @click="showReviewText()" id="lable-star4" for="star4" title="text">4 stars</label>
+          <input type="radio" id="star3" name="rate" value="3" v-model="$parent.reviewData.rate" />
+          <label @click="showReviewText()" id="lable-star3" for="star3" title="text">3 stars</label>
+          <input type="radio" id="star2" name="rate" value="2" v-model="$parent.reviewData.rate" />
+          <label @click="showReviewText()" id="lable-star2" for="star2" title="text">2 stars</label>
+          <input type="radio" id="star1" name="rate" value="1" v-model="$parent.reviewData.rate" />
+          <label @click="showReviewText()" id="lable-star1" for="star1" title="text">1 star</label>
         </div>
 
-        <div id="report-form" class="report-form">
-          <div class="form-wrapper">
+        <div class="report-form-wrapper">
+          <div id="report-form" class="form-wrapper collapse">
             <p>نظر خود را اینجا بنویسید</p>
             <textarea
               placeholder="نظر خود را بنویسید"
@@ -294,13 +267,13 @@
               <span
                 v-if="$parent.errors.reviewText || $parent.errors.reviewData"
                 v-text="$parent.errors.reviewText || $parent.errors.reviewData"
-              >
-              </span>
+              ></span>
             </p>
-            <div class="report-button-wrapper">
-              <button
-                class="green-button register-report hover-effect"
-                :class="{
+          </div>
+          <div class="report-button-wrapper">
+            <button
+              class="green-button register-report hover-effect"
+              :class="{
                   'btn-disable':
                     $parent.errors.reviewText ||
                     $parent.errors.reviewData ||
@@ -308,12 +281,9 @@
                       !$parent.reviewData.rate) ||
                     $parent.submitLoader,
                 }"
-                :disabled="$parent.submitLoader"
-                @click.prevent="$parent.submitReview()"
-              >
-                ثبت نظر
-              </button>
-            </div>
+              :disabled="$parent.submitLoader"
+              @click.prevent="$parent.submitReview()"
+            >ثبت نظر</button>
           </div>
         </div>
       </div>
@@ -322,5 +292,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    showReviewText: function() {
+      $("#report-form").collapse("show");
+    }
+  }
+};
 </script>

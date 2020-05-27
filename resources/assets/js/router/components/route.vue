@@ -73,12 +73,7 @@
                 v-text="'عضویت در گروه'"
               ></a>
 
-              <a
-                href="#"
-                class="btn green-button bg-gray"
-                data-dismiss="modal"
-                v-text="'انصراف'"
-              ></a>
+              <a href="#" class="btn green-button bg-gray" data-dismiss="modal" v-text="'انصراف'"></a>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -104,15 +99,9 @@
               <br />
               <p class="main-pop-up" v-text="elevatorText"></p>
 
-              <a href class="btn green-button bg-gray" data-dismiss="modal"
-                >متوجه شدم</a
-              >
+              <a href class="btn green-button bg-gray" data-dismiss="modal">متوجه شدم</a>
 
-              <a
-                :href="'/payment/elevator/' + productId"
-                class="btn green-button"
-                >خرید نردبان</a
-              >
+              <a :href="'/payment/elevator/' + productId" class="btn green-button">خرید نردبان</a>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -137,7 +126,6 @@
       :user-full-name="userFullName"
       :user-logout-path="userLogoutPath"
       :key="$route.fullPath"
-      :user-allowed-review-data="userAllowedReview"
     />
 
     <router-view
@@ -158,10 +146,7 @@
 
     <!-- add android app download  -->
 
-    <div
-      v-if="isConditionSatisfied"
-      class="android-download-alert-wrapper hidden-lg hidden-md"
-    >
+    <div v-if="isConditionSatisfied" class="android-download-alert-wrapper hidden-lg hidden-md">
       <button
         class="close-android-download-alert-wrapper"
         @click.prevent="isConditionSatisfied = false"
@@ -190,9 +175,9 @@ export default {
   components: {
     ChatModal,
     ReportModal,
-    ReviewModal,
+    ReviewModal
   },
-  data: function () {
+  data: function() {
     return {
       iswebview: navigator.userAgent == "webView" ? true : false,
       isConditionSatisfied: false,
@@ -205,8 +190,7 @@ export default {
       msg: "",
       reviewCurrentStep: 0,
       reviewUserData: "",
-      reviewUserPrfileId: "",
-      userAllowedReview: false,
+      reviewUserPrfileId: ""
     };
   },
   props: [
@@ -216,49 +200,49 @@ export default {
     "storagePath",
     "profilePhoto",
     "userFullName",
-    "userLogoutPath",
+    "userLogoutPath"
   ],
-  created: function () {
+  created: function() {
     window.localStorage.setItem("userId", this.userId);
     window.localStorage.setItem("userType", this.isSeller);
 
-    eventBus.$on("elevatorText", ($event) => {
+    eventBus.$on("elevatorText", $event => {
       this.elevatorText = $event;
     });
 
-    eventBus.$on("productId", ($event) => {
+    eventBus.$on("productId", $event => {
       this.productId = $event;
     });
 
-    eventBus.$on("joinGroupId", ($event) => {
+    eventBus.$on("joinGroupId", $event => {
       this.joinGroupId = $event;
     });
-    eventBus.$on("joinGroupMessage", ($event) => {
+    eventBus.$on("joinGroupMessage", $event => {
       this.joinGroupMessage = $event;
     });
 
-    eventBus.$on("activeContactId", ($event) => {
+    eventBus.$on("activeContactId", $event => {
       this.activeContactId = $event;
     });
 
-    eventBus.$on("reoprtModal", ($event) => {
+    eventBus.$on("reoprtModal", $event => {
       this.reportedUserId = $event;
       $("#report-modal").modal("show");
     });
-    eventBus.$on("reviewUserData", ($event) => {
+    eventBus.$on("reviewUserData", $event => {
       this.reviewUserData = $event;
       this.reviewUserPrfileId = $event.id;
       $("#review-modal").modal("show");
     });
 
-    eventBus.$on("modal", ($event) => {
+    eventBus.$on("modal", $event => {
       this.openRelatedSwalModal($event);
     });
 
     let self = this;
 
     if (messaging) {
-      messaging.onMessage(function (payload) {
+      messaging.onMessage(function(payload) {
         if (payload.notification.tag == "buskool") {
           if (!self.activeContactId) {
             eventBus.$emit("messageCount", 1);
@@ -272,7 +256,7 @@ export default {
   },
   router,
   methods: {
-    isDeviceMobile: function () {
+    isDeviceMobile: function() {
       if (
         navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -287,12 +271,12 @@ export default {
         return false;
       }
     },
-    getAndroidVersion: function (ua) {
+    getAndroidVersion: function(ua) {
       ua = (ua || navigator.userAgent).toLowerCase();
       var match = ua.match(/android\s([0-9\.]*)/);
       return match ? match[1] : undefined;
     },
-    doDownload: function () {
+    doDownload: function() {
       //ga
       this.registerComponentStatistics(
         "download",
@@ -303,13 +287,13 @@ export default {
       Cookies.set("appDownloaded", true);
       window.location.href = "/download/app";
     },
-    isOsIOS: function () {
+    isOsIOS: function() {
       var userAgent = window.navigator.userAgent.toLowerCase(),
         safari = /safari/.test(userAgent),
         ios = /iphone|ipod|ipad/.test(userAgent);
       return ios;
     },
-    activateDownloadApp: function () {
+    activateDownloadApp: function() {
       if (!this.iswebview && this.isDeviceMobile() && !this.isOsIOS()) {
         if (this.getAndroidVersion() >= 4.4) {
           if (window.location.pathname == "/") {
@@ -321,34 +305,30 @@ export default {
     closeGlobalChatBox() {
       eventBus.$emit("ChatBoxStatus", false);
     },
-    registerComponentStatistics: function (
-      categoryName,
-      actionName,
-      labelName
-    ) {
+    registerComponentStatistics: function(categoryName, actionName, labelName) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName,
+        event_label: labelName
       });
     },
-    subscribeUserToGroup: function () {
+    subscribeUserToGroup: function() {
       var self = this;
       var groupId = this.joinGroupId;
       axios
         .post("/group/subscribe_user", {
-          group_id: groupId,
+          group_id: groupId
         })
-        .then(function (response) {
+        .then(function(response) {
           self.popUpMsg = "شما با موفقییت در گروه عضو شدید";
           eventBus.$emit("submitSuccess", self.popUpMsg);
           $("#custom-main-modal").modal("show");
           eventBus.$emit("reloadAllGroupLists", true);
         });
     },
-    extractSenderIdFromTag: function (tag) {
+    extractSenderIdFromTag: function(tag) {
       return tag.split("FCM")[1];
     },
-    openRelatedSwalModal: function (modalName) {
+    openRelatedSwalModal: function(modalName) {
       switch (modalName) {
         case "sendMsg":
           this.raiseSendMessageModal();
@@ -382,7 +362,7 @@ export default {
           break;
       }
     },
-    raiseSendMessageModal: function () {
+    raiseSendMessageModal: function() {
       let self = this;
 
       this.handleBackBtn();
@@ -395,14 +375,14 @@ export default {
         buttons: {
           success: {
             text: "ورود سریع / ثبت نام",
-            value: "register",
+            value: "register"
           },
           close: {
             text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
+            className: "bg-cancel"
+          }
+        }
+      }).then(value => {
         switch (value) {
           case "register":
             self.$router.push({ name: "register" });
@@ -414,7 +394,7 @@ export default {
         }
       });
     },
-    raiseElevatorModal: function () {
+    raiseElevatorModal: function() {
       let self = this;
 
       this.handleBackBtn();
@@ -430,14 +410,14 @@ export default {
         buttons: {
           success: {
             text: "پرداخت",
-            value: "pay",
+            value: "pay"
           },
           close: {
             text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
+            className: "bg-cancel"
+          }
+        }
+      }).then(value => {
         switch (value) {
           case "pay":
             window.location.href = "/payment/elevator/" + self.productId;
@@ -446,7 +426,7 @@ export default {
         }
       });
     },
-    raiseDeleteProductModal: function () {
+    raiseDeleteProductModal: function() {
       let self = this;
 
       this.handleBackBtn();
@@ -460,24 +440,24 @@ export default {
           delete: {
             text: "حذف کن",
             value: "delete",
-            className: "bg-red",
+            className: "bg-red"
           },
           reject: {
-            text: "انصراف",
+            text: "انصراف"
           },
           close: {
             text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
+            className: "bg-cancel"
+          }
+        }
+      }).then(value => {
         switch (value) {
           case "delete":
             axios
               .post("/delete_product_by_id", {
-                product_id: self.productId,
+                product_id: self.productId
               })
-              .then(function (response) {
+              .then(function(response) {
                 swal({
                   title: "حذف شد",
                   text: "محصول شما از لیست محصولات باسکول حذف شد.",
@@ -487,10 +467,10 @@ export default {
                     close: {
                       text: "بستن",
                       value: "close",
-                      className: "bg-cancel",
-                    },
-                  },
-                }).then((value) => {
+                      className: "bg-cancel"
+                    }
+                  }
+                }).then(value => {
                   if (value == "close") {
                     window.location.reload();
                   }
@@ -502,7 +482,7 @@ export default {
                   "product-deleted-successfully"
                 );
               })
-              .catch(function (err) {
+              .catch(function(err) {
                 console.log(err);
                 self.registerComponentStatistics(
                   "product",
@@ -519,9 +499,9 @@ export default {
                     close: {
                       text: "بستن",
                       value: "close",
-                      className: "bg-cancel",
-                    },
-                  },
+                      className: "bg-cancel"
+                    }
+                  }
                 });
               });
 
@@ -529,7 +509,7 @@ export default {
         }
       });
     },
-    raiseProductEditSuccessModal: function () {
+    raiseProductEditSuccessModal: function() {
       this.handleBackBtn();
       swal({
         title: "ویرایش محصول",
@@ -539,12 +519,12 @@ export default {
         buttons: {
           close: {
             text: "بستن",
-            className: "bg-cancel",
-          },
-        },
+            className: "bg-cancel"
+          }
+        }
       });
     },
-    raiseUserRegisterSuccessModal: function () {
+    raiseUserRegisterSuccessModal: function() {
       this.handleBackBtn();
       swal({
         title: "ثبت نام موفق",
@@ -554,12 +534,12 @@ export default {
         buttons: {
           close: {
             text: "بستن",
-            className: "bg-cancel",
-          },
-        },
+            className: "bg-cancel"
+          }
+        }
       });
     },
-    raiseRegisterProductLimitModal: function () {
+    raiseRegisterProductLimitModal: function() {
       let self = this;
 
       this.handleBackBtn();
@@ -575,14 +555,14 @@ export default {
         buttons: {
           success: {
             text: "ارتقا عضویت",
-            value: "promote",
+            value: "promote"
           },
           close: {
             text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
+            className: "bg-cancel"
+          }
+        }
+      }).then(value => {
         switch (value) {
           case "promote":
             self.$router.push({ name: "dashboardPricingTableSeller" });
@@ -590,7 +570,7 @@ export default {
         }
       });
     },
-    raiseBuyAdReplyLimitModal: function () {
+    raiseBuyAdReplyLimitModal: function() {
       let self = this;
 
       this.handleBackBtn();
@@ -606,14 +586,14 @@ export default {
         buttons: {
           success: {
             text: "ارتقا عضویت",
-            value: "promote",
+            value: "promote"
           },
           close: {
             text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
+            className: "bg-cancel"
+          }
+        }
+      }).then(value => {
         switch (value) {
           case "promote":
             self.$router.push({ name: "dashboardPricingTableSeller" });
@@ -621,7 +601,7 @@ export default {
         }
       });
     },
-    raiseProfileEditSuccessModal: function () {
+    raiseProfileEditSuccessModal: function() {
       this.handleBackBtn();
       swal({
         title: "ویرایش پروفایل",
@@ -632,12 +612,12 @@ export default {
         buttons: {
           close: {
             text: "بستن",
-            className: "bg-cancel",
-          },
-        },
+            className: "bg-cancel"
+          }
+        }
       });
     },
-    raisePasswordResetSuccessModal: function () {
+    raisePasswordResetSuccessModal: function() {
       this.handleBackBtn();
       swal({
         title: "بازیابی کلمه عبور",
@@ -647,12 +627,12 @@ export default {
         buttons: {
           close: {
             text: "بستن",
-            className: "bg-cancel",
-          },
-        },
+            className: "bg-cancel"
+          }
+        }
       });
     },
-    raiseGuideModal: function () {
+    raiseGuideModal: function() {
       let self = this;
 
       this.handleBackBtn();
@@ -665,18 +645,18 @@ export default {
         buttons: {
           buyer: {
             text: "خریدارم",
-            value: "buyer",
+            value: "buyer"
           },
           seller: {
             text: "فروشنده ام",
-            value: "seller",
+            value: "seller"
           },
           close: {
             text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
+            className: "bg-cancel"
+          }
+        }
+      }).then(value => {
         switch (value) {
           case "buyer":
             self.$router.push({ name: "mainRegisterRequest" });
@@ -687,17 +667,17 @@ export default {
         }
       });
     },
-    isModalOpen: function () {
+    isModalOpen: function() {
       return swal.getState().isOpen;
     },
-    handleBackBtn: function () {
+    handleBackBtn: function() {
       var self = this;
 
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
 
-      $(window).on("popstate", function (e) {
+      $(window).on("popstate", function(e) {
         if (self.isModalOpen()) {
           swal.close();
           window.localStorage.removeItem("contact"); // it's been set before modal openning
@@ -707,20 +687,20 @@ export default {
         }
       });
     },
-    isUserAuthorizedToPostComment: function () {
+    isUserAuthorizedToPostComment: function() {
       let self = this;
       let userObg = {
-        user_id: this.reviewUserPrfileId,
+        user_id: this.reviewUserPrfileId
       };
       axios
         .post("/profile/is-user-authorized-to-post-comment", userObg)
-        .then(function (response) {
-          self.userAllowedReview = response.data.is_allowed;
+        .then(function(response) {
+          eventBus.$emit("userAllowedReview", response.data.is_allowed);
         });
-    },
+    }
   },
   mounted() {
     this.activateDownloadApp();
-  },
+  }
 };
 </script>

@@ -1,15 +1,16 @@
 <style scoped>
+.main-text {
+  text-align: center;
+  margin: 20px 0 40px;
+}
 .main-text p {
   font-weight: 800;
   font-size: 16px;
   color: #474747;
   text-align: center;
   margin: 15px auto;
-}
-
-.main-text {
-  text-align: center;
-  margin: 20px 0 40px;
+  padding: 0 30px;
+  line-height: 1.618;
 }
 
 .success-icon i {
@@ -45,12 +46,7 @@
       <p v-text="$parent.successMessage"></p>
 
       <div class="report-button-wrapper">
-        <button
-          class="green-button register-report"
-          @click.prevent="$parent.reviewResetData()"
-        >
-          بستن
-        </button>
+        <button class="green-button register-report" @click.prevent="$parent.reviewResetData()">بستن</button>
       </div>
     </div>
   </div>
@@ -58,12 +54,12 @@
 
 <script>
 export default {
-  data: function () {
+  data: function() {
     return {
       reportFormData: "",
       reportFormActive: false,
-      stars: "",
+      stars: ""
     };
-  },
+  }
 };
 </script>

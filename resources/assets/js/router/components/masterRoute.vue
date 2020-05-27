@@ -52,12 +52,11 @@ import FooterMasterLayouts from "../../components/layouts/footer/footer";
 export default {
   components: {
     HeaderMasterLayouts,
-    FooterMasterLayouts,
+    FooterMasterLayouts
   },
-  data: function () {
+  data: function() {
     return {
-      productByResponseRate: false,
-      setReviewUserPrfileId: this.$parent.reviewUserPrfileId,
+      productByResponseRate: false
     };
   },
   props: [
@@ -67,14 +66,7 @@ export default {
     "storagePath",
     "profilePhoto",
     "userFullName",
-    "userLogoutPath",
-    "userAllowedReviewData",
-  ],
-  methods: {
-    getUserAutorizeForReview: function () {
-      this.$parent.reviewUserPrfileId = this.setReviewUserPrfileId;
-      this.$parent.isUserAuthorizedToPostComment();
-    },
-  },
+    "userLogoutPath"
+  ]
 };
 </script>
