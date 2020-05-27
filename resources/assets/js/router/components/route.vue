@@ -126,6 +126,7 @@
     <chat-modal />
 
     <report-modal :reported-user-id="reportedUserId" />
+    <review-modal :review-user-data="reviewUserData" />
 
     <router-view
       :user-id="userId"
@@ -136,6 +137,7 @@
       :user-full-name="userFullName"
       :user-logout-path="userLogoutPath"
       :key="$route.fullPath"
+      :user-allowed-review-data="userAllowedReview"
     />
 
     <router-view
@@ -182,11 +184,13 @@ import Cookies from "js-cookie";
 import IsWebview from "is-webview";
 import ChatModal from "../../components/layouts/main/main_components/chat_modal";
 import ReportModal from "../../components/layouts/main/main_components/report";
+import ReviewModal from "../../components/layouts/main/main_components/review-component/review";
 
 export default {
   components: {
     ChatModal,
     ReportModal,
+    ReviewModal,
   },
   data: function () {
     return {
@@ -199,6 +203,10 @@ export default {
       activeContactId: "",
       reportedUserId: "",
       msg: "",
+      reviewCurrentStep: 0,
+      reviewUserData: "",
+      reviewUserPrfileId: "",
+      userAllowedReview: false,
     };
   },
   props: [
@@ -236,6 +244,11 @@ export default {
     eventBus.$on("reoprtModal", ($event) => {
       this.reportedUserId = $event;
       $("#report-modal").modal("show");
+    });
+    eventBus.$on("reviewUserData", ($event) => {
+      this.reviewUserData = $event;
+      this.reviewUserPrfileId = $event.id;
+      $("#review-modal").modal("show");
     });
 
     eventBus.$on("modal", ($event) => {
@@ -693,6 +706,17 @@ export default {
           // window.location.href = window.location.pathname;
         }
       });
+    },
+    isUserAuthorizedToPostComment: function () {
+      let self = this;
+      let userObg = {
+        user_id: this.reviewUserPrfileId,
+      };
+      axios
+        .post("/profile/is-user-authorized-to-post-comment", userObg)
+        .then(function (response) {
+          self.userAllowedReview = response.data.is_allowed;
+        });
     },
   },
   mounted() {

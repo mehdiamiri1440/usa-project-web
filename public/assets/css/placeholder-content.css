@@ -248,13 +248,16 @@ button.hover-effect:hover {
 }
 
 .red-text {
-  color: #e41c38;
+  color: #e41c38 !important;
 }
 .yellow-text {
   color: #ffbb00 !important;
 }
 .green-text {
   color: #00c569;
+}
+.disable-text {
+  color: #dbdbdb !important;
 }
 /*product view user info styles*/
 

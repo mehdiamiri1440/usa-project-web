@@ -55,7 +55,7 @@ class comment_controller extends Controller
     {
         
         $this->validate($request,[
-            'user_id' => 'required|exists:user_comments,myuser_id'
+            'user_id' => 'required|exists:myusers,id'
         ]);
 
         $user_id = $request->user_id;
@@ -83,7 +83,9 @@ class comment_controller extends Controller
                         ->get();
 
         $comments->each(function($item){
-            $item->likes = $this->get_comment_likes_count($item->c_id);
+            $likes_info = $this->get_comment_likes_count($item->c_id);
+            $item->likes = $likes_info['likes'];
+            $item->already_liked = $likes_info['already_liked'];
         });
 
         $deleted_comments_count = $this->get_deleted_comments_count($user_id);
@@ -100,12 +102,32 @@ class comment_controller extends Controller
 
     protected function get_comment_likes_count($comment_id)
     {
-        $record = DB::table('user_comment_likes')
-                                ->selectRaw('count(distinct(myuser_id)) as likes')
+        $records = DB::table('user_comment_likes')
+                                // ->selectRaw('count(distinct(myuser_id)) as likes')
                                 ->where('comment_id',$comment_id)
-                                ->first();
+                                ->get();
 
-        return $record->likes;
+        $result['likes'] = $records->count();
+        if(session()->has('user_id')){
+            $user_id = session('user_id');
+
+            $tmp = $records->filter(function($comment) use($user_id){
+                return $comment->myuser_id == $user_id;
+            });
+
+            if($tmp->count() > 0){
+                $result['already_liked'] = true;
+            }
+            else{
+                $result['already_liked'] = false;
+            }
+        }
+        else{
+            $result['already_liked'] = null;
+        }
+         
+
+        return $result;
     }
 
     protected function get_deleted_comments_count($user_id)
@@ -268,7 +290,7 @@ class comment_controller extends Controller
         
         $result = [
             'total_count' => $records->count(),
-            'avg_score' => $records->avg('rating_score')
+            'avg_score' => round($records->avg('rating_score'),1)
         ];
 
         return $result;
