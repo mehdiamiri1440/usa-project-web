@@ -207,7 +207,7 @@ class admin_sellAd_controller extends Controller
             
             $sellAd_record->save();
 
-            SaveProductPhotosInCloud::dispatch($sellAd_record->id);
+            // SaveProductPhotosInCloud::dispatch($sellAd_record->id);
             //send SMS
 //            $sms_controller_object = new sms_controller();            
 //            $sms_controller_object->send_status_sms_message($sellAd_record,$this->sellAd_confirmation_sms_text);
