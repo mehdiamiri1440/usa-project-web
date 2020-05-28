@@ -497,11 +497,15 @@ class profile_controller extends Controller
 
         $response_rate = $this->get_user_response_rate($user_id);
 
+        $user_comment_controller = new comment_controller();
+        $rating_info = $user_comment_controller->get_user_avg_rating_score($user_id);
+
         $result_array = [
             'buyAd_count' => $buyAd_count,
             'transaction_count' => $transaction_count,
             'reputation_score' => $reputation_score,
             'response_rate' => $response_rate,
+            'rating_info' => $rating_info,
         ];
 
         return $result_array;

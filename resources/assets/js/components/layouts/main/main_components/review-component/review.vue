@@ -99,12 +99,16 @@ export default {
   methods: {
     init: function() {
       let self = this;
-
+      
       $("#review-modal").on("hide.bs.modal", function(e) {
         setTimeout(() => {
           self.reviewSteps(0);
         }, 200);
         self.resetData();
+      });
+
+      $("#review-modal").on("show.bs.modal", function(e) {
+        self.handleBackBtnClickOnDevices();
       });
     },
     reviewSteps: function(step) {
@@ -191,7 +195,18 @@ export default {
           self.errors.reviewData = "خطایی رخ داده است لطفا دوباره تلاش کنید";
         }
       });
-    }
+    },
+    handleBackBtnClickOnDevices: function() {
+      let self = this;
+
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+
+      $(window).on("popstate", function(e) {
+          self.reviewResetData();
+      });
+    },
   },
   mounted: function() {
     this.init();
