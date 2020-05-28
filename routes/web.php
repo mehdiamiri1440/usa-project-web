@@ -439,6 +439,31 @@ Route::group(['middleware' => [login::class]], function () {
         ]);
 
      });
+
+     Route::post('/profile/add-comment',[
+        'uses' => 'Accounting\comment_controller@post_comment',
+        'as' => 'post_comment_on_user_porfile'
+     ]);
+
+     Route::post('/profile/get-user-comments',[
+         'uses' => 'Accounting\comment_controller@get_user_comments',
+         'as' => 'get_user_comments'
+     ]);
+
+     Route::post('/profile/do-like',[
+        'uses' => 'Accounting\comment_controller@do_like_actions',
+        'as' => 'get_user_comments'
+    ]);
+
+    Route::post('/profile/is-user-authorized-to-post-comment',[
+        'uses' => 'Accounting\comment_controller@is_user_authorized_to_post_comment_on_the_user',
+        'as' => 'is_user_authorized_to_post_comment_on_the_user'
+    ]);
+
+    Route::post('/profile/delete-user-comment',[
+        'uses' => 'Accounting\comment_controller@delete_comment',
+        'as'   => 'delete_user_comment'
+    ]);
     
 });
 
@@ -709,6 +734,21 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
     Route::post('/messages', [
         'uses' => 'admin_panel\admin_message_controller@get_all_user_contacts_with_related_messages',
         'as' => 'admin_panel_load_user_messages',
+    ]);
+
+    Route::get('/user-comment-list',[
+        'uses' => 'admin_panel\admin_user_comment_controller@load_unconfirmed_comments',
+        'as' => 'load_users_unconfirmed_comments'
+    ]);
+
+    Route::get('/user-comment-detail/{id}',[
+        'uses' => 'admin_panel\admin_user_comment_controller@get_user_comment_by_id',
+        'as'   => 'admin_panel_load_user_comment_by_id'
+    ]);
+
+    Route::post('/confirm_user_comment_by_id',[
+        'uses' => 'admin_panel\admin_user_comment_controller@confirm_user_comment_by_id',
+        'as'   => 'admin_panel_confirm_user_comment_by_id'
     ]);
 });
 

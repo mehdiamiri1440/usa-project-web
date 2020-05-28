@@ -9,6 +9,34 @@
   margin-right: 80px;
 }
 
+.fixed-action-button-wrapper {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  right: 25px;
+  bottom: 25px;
+  font-weight: bold;
+  font-size: 10px;
+  background: #e51c38;
+  border-radius: 50px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
+}
+
+.fixed-action-button-wrapper .fixed-action {
+  background: none;
+  border: none;
+  text-align: center;
+  color: #fff;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.fixed-action-button-wrapper .fixed-action i {
+  display: block;
+  font-size: 18px;
+}
+
 @media screen and (max-width: 994px) {
   #main,
   #main.little-main {
@@ -38,6 +66,16 @@
         :defultimg="assets + 'assets/img/user-defult.png'"
       ></router-view>
     </div>
+
+    <div
+      v-if="buttonIsActive && buttonActiveInSteps"
+      class="fixed-action-button-wrapper hidden-sm hidden-md hidden-lg"
+    >
+      <router-link tag="button" :to="{name : 'buyAdRequestsSeller'}" class="fixed-action">
+        <i class="fa fa-list-alt"></i>
+        <span>درخواست ها</span>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -50,17 +88,56 @@ export default {
   components: {
     "header-dash-seller": HeaderDashSeller
   },
-  props: ["userId", "isSeller", "assets", "storagePath","messageCount"],
-  mounted:function(){
+  props: ["userId", "isSeller", "assets", "storagePath", "messageCount"],
+  data: function() {
+    return {
+      linkHideStates: ["buyAd-requests", "messenger/contacts"],
+      buttonIsActive: true,
+      buttonActiveInSteps: true
+    };
+  },
+  methods: {
+    init: function() {
+      this.checkButtonIsHide();
+
       axios
-          .post("/get_total_unread_messages_for_current_user")
-          .then(function(response) {
-              let messageCount = response.data.msg_count;
-              eventBus.$emit("messageCount",messageCount);
-          })
-          .catch(function(error) {
-              console.log("error", error);
-          });
+        .post("/get_total_unread_messages_for_current_user")
+        .then(function(response) {
+          let messageCount = response.data.msg_count;
+          eventBus.$emit("messageCount", messageCount);
+        })
+        .catch(function(error) {
+          console.log("error", error);
+        });
+    },
+    subIsActive: function(input) {
+      const paths = Array.isArray(input) ? input : [input];
+      return paths.some(path => {
+        return this.$route.path.indexOf(path) === 0; // current path starts with this path string
+      });
+    },
+    checkButtonIsHide: function() {
+      let buttonActive = true;
+      for (var i = 0; i < this.linkHideStates.length; i++) {
+        if (this.subIsActive("/seller/" + this.linkHideStates[i])) {
+          buttonActive = false;
+        }
+      }
+      this.buttonIsActive = buttonActive ? true : false;
     }
+  },
+  watch: {
+    $route() {
+      this.checkButtonIsHide();
+      this.buttonActiveInSteps = true;
+    }
+  },
+  mounted: function() {
+    this.init();
+
+    eventBus.$on("buyAdbuttonActive", event => {
+      this.buttonActiveInSteps = event;
+    });
+  }
 };
 </script>

@@ -126,10 +126,14 @@ export default {
     init: function () {
       var self = this;
 
-      self.handleBackBtnClickOnDevices();
+      // self.handleBackBtnClickOnDevices();
 
       $("#report-modal").on("hide.bs.modal", function (e) {
         self.resetData();
+      });
+
+      $("#review-modal").on("show.bs.modal", function(e) {
+        self.handleBackBtnClickOnDevices();
       });
     },
     checkReportSubmit: function (reportTitle, textRequired) {

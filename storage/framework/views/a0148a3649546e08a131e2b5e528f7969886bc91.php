@@ -135,11 +135,12 @@
 </script>
 
 <script src="<?php echo e(asset('js/app.js')); ?>"></script>
-<script src="<?php echo e(asset('assets/js/idleTimer.js')); ?>"></script>
+<!-- <script async src="<?php echo e(asset('js/sw/app.js')); ?>"></script> -->
+<!-- <script src="<?php echo e(asset('assets/js/idleTimer.js')); ?>"></script> -->
 
 <script>
     $(document).ready(function () {
-        $(document).idleTimer(7200000);
+        // $(document).idleTimer(7200000);
         
         $('.main-loader-wrapper').css('display','none');
     });
