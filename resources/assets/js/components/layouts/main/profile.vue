@@ -183,19 +183,13 @@
 }
 
 .sub-header button i {
-  font-size: 20px;
-
-  position: absolute;
-
-  top: -6px;
-
-  right: -30px;
-
+  font-size: 18px;
+  position: relative;
+  right: -3px;
   display: inline-block;
-
   width: 20px;
-
-  height: 30px;
+  height: 16px;
+  top: 1px;
 }
 
 .inside-links {
@@ -203,13 +197,15 @@
 
   position: relative;
 }
-
-.sub-header i.buskool-icon {
+.sub-header i.buskool-icon > img {
+  position: absolute;
   top: -6px;
+  height: initial;
+  left: 0;
 }
 
 .sub-header button {
-  padding: 16px;
+  padding: 12px 0 19px;
   color: #808c9b;
   font-weight: bold;
   font-size: 14px;
@@ -839,7 +835,7 @@ p.response-rate span {
                   </span>
                 </div>
               </div>
-              <div class="col-xs-12" v-else-if="statisticsLoader">
+              <div class="col-xs-12 hidden-xs" v-else-if="statisticsLoader">
                 <div class="placeholder-content content-full-width h-40">
                   <p class="placeholder-stars">
                     <span v-for="(star, index) in 5" :key="index">
@@ -1198,7 +1194,10 @@ p.response-rate span {
             <div class="col-xs-6" :class="{ active: profileDescription }">
               <button @click.prevent="showProfileOwnerDescription()">
                 <div class="inside-links">
-                  <i class="fa fa-edit" aria-hidden="true"></i> اطلاعات پایه
+                  <i class="buskool-icon" aria-hidden="true">
+                    <img :src="incobaicon" />
+                  </i>
+                  اطلاعات پایه
                 </div>
               </button>
             </div>
@@ -1246,9 +1245,9 @@ p.response-rate span {
               </div>
             </div>
             <div class="my-products col-xs-12">
-              <section class="row" v-if="products.length > 0">
-                <p class="title-content">محصولات من</p>
+              <p class="title-content">محصولات من</p>
 
+              <section class="row" v-if="products.length > 0">
                 <div
                   class="col-xs-12 pull-right"
                   :key="productIndex"
@@ -2033,11 +2032,13 @@ export default {
     }
 
     let indexingStatus = "";
-    if(!!this.profileOwner.profile.description && this.profileOwner.profile.description.length > 500){
-      indexingStatus = 'index';
-    }
-    else{
-      indexingStatus = 'noindex';
+    if (
+      !!this.profileOwner.profile.description &&
+      this.profileOwner.profile.description.length > 500
+    ) {
+      indexingStatus = "index";
+    } else {
+      indexingStatus = "noindex";
     }
 
     return {
@@ -2051,7 +2052,7 @@ export default {
         },
         {
           name: "robots",
-          content : indexingStatus
+          content: indexingStatus
         },
         {
           property: "og:type",

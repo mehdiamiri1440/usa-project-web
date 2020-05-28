@@ -112,12 +112,14 @@
 }
 
 .report-button {
-  background: #556080;
-  color: #fff;
-  padding: 6px 17px 3px;
+  background: #fff;
+  color: #777;
+  padding: 3px 12px 0px;
   border-radius: 5px;
   font-size: 20px;
   border: none;
+  position: relative;
+  top: 3px;
 }
 
 .message-wrapper .chat-page ul {
@@ -221,7 +223,7 @@
   position: absolute;
   left: 15px;
   z-index: 10;
-  width: 130px;
+  width: 170px;
   background: #fff;
   text-align: right;
   direction: rtl;
@@ -229,19 +231,29 @@
   line-height: 1.618;
   -webkit-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
-  top: 46px;
+  top: 48px;
   overflow: hidden;
   padding: 0 !important;
 }
+
+#chat-menu-items li:last-of-type button {
+  border: none;
+}
+
+#chat-menu-items li button i {
+  margin-left: 6px;
+}
+
 #chat-menu-items li button {
   background: none;
   color: #777;
   font-size: 14px;
   border: none;
   width: 100%;
-  padding: 4px 15px;
+  padding: 10px;
   text-align: right;
   transition: 200ms;
+  border-bottom: 1px solid #dbdbdb;
 }
 #chat-menu-items li button:hover {
   color: #333;
@@ -294,11 +306,11 @@
             type="button"
             class="report-button hover-effect"
             data-toggle="collapse"
-            id="#button-collapse-chat-menu"
+            id="button-collapse-chat-menu"
             href="#chat-menu-items"
             role="button"
           >
-            <i class="fa fa-ellipsis-v"></i>
+            <i class="fa fa-ellipsis-h"></i>
           </button>
           <button
             @click.prevent="$parent.selectedContact = !$parent.selectedContact"
@@ -314,7 +326,10 @@
                 @click.prevent="
                 $parent.activeReportModal($parent.selectedContact.contact_id)
               "
-              >گزارش تخلف</button>
+              >
+                <i class="fas fa-exclamation-circle"></i>
+                گزارش تخلف
+              </button>
             </li>
             <li v-if="$parent.userAllowedReview" class="list-item">
               <button
@@ -322,7 +337,10 @@
                 @click.prevent="
                 $parent.activeReviewModal()
               "
-              >ثبت نظر</button>
+              >
+                <i class="fas fa-star"></i>
+                ثبت نظر
+              </button>
             </li>
           </ul>
         </div>

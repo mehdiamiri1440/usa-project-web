@@ -366,18 +366,28 @@ a.profile-info-wrapper:hover {
   z-index: 1;
 }
 
-#web-profile-items > li a {
-  padding: 7px 15px;
+#web-profile-items a {
+  background: none;
+  color: #777;
+  font-size: 13px;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  text-align: right;
+  -webkit-transition: 200ms;
+  transition: 200ms;
+  border-bottom: 1px solid #dbdbdb;
   display: block;
 }
-
-#web-profile-items a {
-  color: #777;
+#web-profile-items > li:last-of-type a {
+  border: none;
 }
-
 #web-profile-items a:hover {
   color: #333;
   background: #eee;
+}
+#web-profile-items li a i {
+  margin-left: 6px;
 }
 
 .mobile-menu-button {
@@ -822,24 +832,42 @@ a.profile-info-wrapper:hover {
 
               <ul v-if="is_seller == 1" id="web-profile-items" class="collapse">
                 <li class="list-item">
-                  <router-link :to="{ name: 'statusSeller'}">داشبورد</router-link>
+                  <router-link :to="{ name: 'statusSeller'}">
+                    <i class="fa fa-cog"></i>
+                    داشبورد
+                  </router-link>
                 </li>
                 <li class="list-item">
-                  <router-link :to="{ name: 'passwordSeller'}">تغییر کلمه عبور</router-link>
+                  <router-link :to="{ name: 'passwordSeller'}">
+                    <i class="fa fa-lock"></i>
+                    تغییر کلمه عبور
+                  </router-link>
                 </li>
                 <li class="list-item">
-                  <a href="/logout">خروج</a>
+                  <a href="/logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    خروج
+                  </a>
                 </li>
               </ul>
               <ul v-else id="web-profile-items" class="collapse">
                 <li class="list-item">
-                  <router-link :to="{ name: 'profileBasicBuyer'}">داشبورد</router-link>
+                  <router-link :to="{ name: 'profileBasicBuyer'}">
+                    <i class="fa fa-cog"></i>
+                    داشبورد
+                  </router-link>
                 </li>
                 <li class="list-item">
-                  <router-link :to="{ name: 'passwordBuyer'}">تغییر کلمه عبور</router-link>
+                  <router-link :to="{ name: 'passwordBuyer'}">
+                    <i class="fa fa-lock"></i>
+                    تغییر کلمه عبور
+                  </router-link>
                 </li>
                 <li class="list-item">
-                  <a href="/logout">خروج</a>
+                  <a href="/logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    خروج
+                  </a>
                 </li>
               </ul>
             </li>
@@ -1075,7 +1103,7 @@ export default {
       cancelButtonText: "",
       ProductId: "",
       mainSearchBoxText: "",
-      messageCount:0,
+      messageCount: 0
     };
   },
   props: [
@@ -1168,17 +1196,16 @@ export default {
     }
   },
   mounted() {
-
-    if(this.user_id){
-        axios
-          .post("/get_total_unread_messages_for_current_user")
-          .then(function(response) {
-              let messageCount = response.data.msg_count;
-              eventBus.$emit("messageCount",messageCount);
-          })
-          .catch(function(error) {
-              console.log("error", error);
-          });
+    if (this.user_id) {
+      axios
+        .post("/get_total_unread_messages_for_current_user")
+        .then(function(response) {
+          let messageCount = response.data.msg_count;
+          eventBus.$emit("messageCount", messageCount);
+        })
+        .catch(function(error) {
+          console.log("error", error);
+        });
     }
     // scroll handeling hide in web
     var lastScroll = 0;
