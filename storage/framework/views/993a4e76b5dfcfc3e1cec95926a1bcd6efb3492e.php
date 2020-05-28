@@ -25,21 +25,23 @@
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl.carousel.min.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl.theme.default.min.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/magnific-popup.css')); ?>">
-    <!-- <link rel="preload" href="<?php echo e(asset('index/css/particleNetwork.css')); ?>"> -->
     <link rel="stylesheet" href="<?php echo e(asset('index/css/animate.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl-custom-style.css')); ?>">
     <link type="text/css" rel="preload" href="<?php echo e(asset('assets/css/imageuploadify.min.css')); ?>">
     <link type="text/css" rel="preload" href="<?php echo e(asset('assets/css/cropper.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/master/style.css')); ?>">
     <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/popup.css')); ?>">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/sweetalert.css')); ?>">
 
 
     <script src="<?php echo e(asset('assets/cdn/axios.js')); ?>"></script>
 
+
     <script src="<?php echo e(asset('index/js/jquery.magnific-popup.min.js')); ?>"></script>
     <script src="<?php echo e(asset('index/js/owl.carousel.min.js')); ?>"></script>
 
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
     <script>
@@ -133,11 +135,12 @@
 </script>
 
 <script src="<?php echo e(asset('js/app.js')); ?>"></script>
-<script src="<?php echo e(asset('assets/js/idleTimer.js')); ?>"></script>
+<!-- <script async src="<?php echo e(asset('js/sw/app.js')); ?>"></script> -->
+<!-- <script src="<?php echo e(asset('assets/js/idleTimer.js')); ?>"></script> -->
 
 <script>
     $(document).ready(function () {
-        $(document).idleTimer(7200000);
+        // $(document).idleTimer(7200000);
         
         $('.main-loader-wrapper').css('display','none');
     });
