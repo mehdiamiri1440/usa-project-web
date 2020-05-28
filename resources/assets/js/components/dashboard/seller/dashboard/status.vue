@@ -135,11 +135,14 @@
   .header-links-wrapper a {
     margin-left: 0;
     width: 100%;
-
   }
 
   .title {
     float: right;
+  }
+
+  .main-content {
+    padding-bottom: 80px;
   }
 }
 </style>

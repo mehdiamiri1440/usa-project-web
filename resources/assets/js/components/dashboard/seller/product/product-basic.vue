@@ -347,6 +347,7 @@ export default {
 
     startRegisterProductSubmited() {
       this.isStartLoading = true;
+
       var self = this;
       axios
         .post("/is_user_allowed_to_register_product")
@@ -356,8 +357,9 @@ export default {
           self.isStartLoading = false;
 
           if (self.limited.isLimited) {
-            eventBus.$emit('modal', 'registerProductLimit');
+            eventBus.$emit("modal", "registerProductLimit");
           } else {
+            eventBus.$emit("buyAdbuttonActive", false);
             self.goToStep(1);
           }
         });
@@ -504,7 +506,7 @@ export default {
     getProductFormFields: function() {
       let formData = new FormData();
       let cnt = this.productFields.length;
-      
+
       for (var i = 0; i < cnt; i++) {
         formData.append(
           this.productFields[i],

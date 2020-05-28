@@ -23,7 +23,7 @@
       :logo="assets + 'assets/img/logo-buskool-white-red.png'"
       :storage="storagePath"
       :defultimg="assets + 'assets/img/user-defult.png'"
-      :logout="'/logout'" 
+      :logout="'/logout'"
       :loading="assets + 'assets/img/gif/prload.gif'"
       :search-text="searchText"
     ></header-dash-buyer>
@@ -54,16 +54,16 @@ export default {
       searchText: ""
     };
   },
-  mounted:function(){
-      axios
-          .post("/get_total_unread_messages_for_current_user")
-          .then(function(response) {
-              let messageCount = response.data.msg_count;
-              eventBus.$emit("messageCount",messageCount);
-          })
-          .catch(function(error) {
-              console.log("error", error);
-          });
-    }
+  mounted: function() {
+    axios
+      .post("/get_total_unread_messages_for_current_user")
+      .then(function(response) {
+        let messageCount = response.data.msg_count;
+        eventBus.$emit("messageCount", messageCount);
+      })
+      .catch(function(error) {
+        console.log("error", error);
+      });
+  }
 };
 </script>

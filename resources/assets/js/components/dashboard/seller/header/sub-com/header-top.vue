@@ -4,7 +4,7 @@
   border: none;
   background: none;
   font-size: 25px;
-  padding: 19px 30px 17px 24px;
+  padding: 19px 30px 16px 24px;
   display: none;
 }
 
@@ -20,13 +20,10 @@
   align-items: center;
 }
 
-.margin-loading {
-  margin: 3%;
-}
-
-.loading-height {
+.placeholder-user-name {
   height: 10px !important;
   width: 60px;
+  border-radius: 6px;
 }
 
 #main {
@@ -56,15 +53,16 @@
   right: 80px;
 }
 
-.image-header-profile {
-  width: 50px;
-  height: 50px;
+.placeholder-image-header-profile {
+  width: 40px;
+  height: 40px;
   overflow: hidden;
-  border-radius: 50%;
+  border-radius: 50px;
   float: left;
+  margin-left: 10px;
 }
 
-.image-header-profile img {
+.placeholder-image-header-profile img {
   height: 100%;
 }
 
@@ -72,8 +70,7 @@
   float: left;
 }
 
-.right-menu-header,
-.content-header {
+.right-menu-header {
   float: right;
 }
 
@@ -104,28 +101,9 @@
   font-size: 17px;
 }
 
-.right-menu-header a,
-.profile-menu-header a {
-  color: #7f8c9b;
-  margin: 5px;
-}
-
 .right-menu-header a {
   font-size: 30px;
 }
-
-.content-header {
-  background: #00c569;
-  color: #fff;
-  height: 100%;
-  padding: 20px 20px 0;
-  display: none;
-}
-
-/*.content-header span{
-    display: block;
-    text-align: right;
-  }*/
 
 .right-menu-header {
   position: relative;
@@ -147,36 +125,13 @@
 }
 
 .right-menu-header a,
-.profile-menu-header a {
+.profile-menu-header > a {
   color: #7f8c9b;
   margin: 5px;
 }
 
 .profile-menu-header > a {
   position: relative;
-}
-
-.profile-list {
-  position: absolute;
-  width: 165px;
-  background: #fff;
-  padding: 8px 10px;
-  border-radius: 3px;
-  box-shadow: 0 0 3px #313a43;
-  text-align: right;
-  left: 40px;
-  top: 65px;
-  display: none;
-  z-index: 999;
-}
-
-.profile-list li {
-  margin: 5px;
-}
-
-.profile-list a {
-  width: 100%;
-  display: inline-block;
 }
 
 .font-big {
@@ -218,11 +173,90 @@ i.fa-home {
   color: #fff !important;
 }
 
-@media screen and (max-width: 994px) {
-  .content-header {
-    display: none;
-  }
+/* profile info styles */
 
+a.profile-info-wrapper {
+  overflow: hidden;
+  padding: 0;
+  font-size: 14px;
+  color: #777;
+  font-weight: bold;
+}
+
+a.profile-info-wrapper:hover,
+a.profile-info-wrapper:focus {
+  background: none;
+}
+
+.profile-image-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  overflow: hidden;
+  float: right;
+  margin-left: 10px;
+}
+
+.profile-information {
+  float: left;
+  padding-top: 10px;
+  direction: rtl;
+}
+
+.profile-information i {
+  position: relative;
+  top: 3px;
+  margin-right: 7px;
+}
+
+#web-profile-items {
+  position: absolute;
+  top: 50px;
+  background: #fff;
+  width: 100%;
+  min-width: 150px;
+  text-align: right;
+  direction: rtl;
+  border-radius: 4px;
+  line-height: 1.618;
+  -webkit-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+#web-profile-items > li a {
+  background: none;
+  color: #777;
+  font-size: 13px;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  text-align: right;
+  -webkit-transition: 200ms;
+  transition: 200ms;
+  border-bottom: 1px solid #dbdbdb;
+  display: block;
+}
+#web-profile-items > li:last-of-type a {
+  border: none;
+}
+#web-profile-items li a:hover {
+  color: #333;
+  background: #eee;
+}
+#web-profile-items li a i {
+  margin-left: 6px;
+}
+
+.user-auth-info-wrapper {
+  margin-top: 10px;
+  margin-left: 10px;
+  float: left;
+}
+.user-auth-info-wrapper > ul {
+  margin: 0;
+}
+
+@media screen and (max-width: 994px) {
   .main-header,
   .little-main-header {
     right: 0 !important;
@@ -255,7 +289,9 @@ i.fa-home {
   .user_name {
     display: none !important;
   }
-
+  .profile-image-wrapper {
+    margin: 0;
+  }
   .right-menu-header {
     padding: 6px;
     border-right: 1px solid #eff3f6;
@@ -264,11 +300,6 @@ i.fa-home {
   .profile-menu-header .user_name {
     display: none;
   }
-
-  .content-header {
-    display: none;
-  }
-
   .right-menu-header .green-button {
     padding: 10px 15px;
   }
@@ -280,7 +311,7 @@ i.fa-home {
   }
 
   .show-header button {
-    padding: 19px 26px 19px 19px;
+    padding: 19px 17px 16px 17px;
   }
 
   .right-menu-header {
@@ -357,52 +388,69 @@ i.fa-home {
         </button>
       </div>
 
-      <div class="content-header">
-        <span class="font-big">باسکول</span>
-        <span>بازارگاه آنلاین کشاورزی</span>
+      <div class="user-auth-info-wrapper">
+        <ul v-if="!isLoading" class="nav navbar-nav">
+          <li>
+            <a
+              class="profile-info-wrapper"
+              data-toggle="collapse"
+              href="#web-profile-items"
+              role="button"
+            >
+              <div class="profile-image-wrapper">
+                <img v-if="photoLink" :src="storage + '/' + photoLink" />
+                <img v-else :src="def" />
+              </div>
+
+              <div class="profile-information">
+                <span class="user_name" v-text="username"></span>
+                <i class="fa fa-angle-down"></i>
+              </div>
+            </a>
+
+            <ul id="web-profile-items" class="collapse">
+              <li class="list-item">
+                <router-link
+                  data-toggle="collapse"
+                  href="#web-profile-items"
+                  :to="{name : 'profileBasicSeller'}"
+                  @click="registerComponentStatistics('seller-dashboard-header','profile-link','click-on-profile-link-in-dashboard')"
+                >
+                  <i class="fa fa-user"></i>
+                  پروفایل
+                </router-link>
+              </li>
+
+              <li class="list-item">
+                <router-link
+                  data-toggle="collapse"
+                  href="#web-profile-items"
+                  :to="{name : 'passwordSeller'}"
+                  @click="registerComponentStatistics('seller-dashboard-header','change-password','click-on-change-password-dashboard')"
+                >
+                  <i class="fa fa-lock"></i>
+                  تغییر کلمه عبور
+                </router-link>
+              </li>
+
+              <li class="list-item">
+                <a :href="out" @click="logUserOut()">
+                  <i class="fas fa-sign-out-alt"></i> خروج
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul v-else class="nav navbar-nav">
+          <li>
+            <div class="col display-loading">
+              <div class="user_name placeholder-content placeholder-user-name margin-loading"></div>
+              <div class="placeholder-image-header-profile placeholder-content"></div>
+            </div>
+          </li>
+        </ul>
       </div>
 
-      <div class="profile-menu-header">
-        <a v-if="!isLoading" href="#" @click.prevent="collapseDropDown()">
-          <div class="image-header-profile" v-if="photoLink">
-            <img :src="storage + '/' + photoLink" />
-          </div>
-
-          <div class="image-header-profile" v-else>
-            <img :src="def" />
-          </div>
-
-          <i class="fa fa-angle-down" aria-hidden="true"></i>
-
-          <span class="user_name" v-text="username"></span>
-        </a>
-        <div class="col display-loading" v-else>
-          <div class="image-header-profile shadow-content placeholder-content"></div>
-          <div class="user_name shadow-content placeholder-content loading-height margin-loading"></div>
-        </div>
-
-        <div class="profile-list">
-          <ul class="list-unstyled">
-            <li class="list-item">
-              <router-link
-                :to="{name : 'profileBasicSeller'}"
-                @click="registerComponentStatistics('seller-dashboard-header','profile-link','click-on-profile-link-in-dashboard')"
-              >پروفایل</router-link>
-            </li>
-
-            <li class="list-item">
-              <router-link
-                :to="{name : 'passwordSeller'}"
-                @click="registerComponentStatistics('seller-dashboard-header','change-password','click-on-change-password-dashboard')"
-              >تغییر کلمه عبور</router-link>
-            </li>
-
-            <li class="list-item">
-              <a :href="out" @click="logUserOut()">خروج</a>
-            </li>
-          </ul>
-        </div>
-      </div>
       <div class="right-menu-header">
         <ul class="list-inline">
           <li>
@@ -442,7 +490,7 @@ import { eventBus } from "../../../../../router/router";
 export default {
   data: function() {
     return {
-      messageCount:0,
+      messageCount: 0
     };
   },
   components: {
@@ -456,9 +504,12 @@ export default {
     "username",
     "out",
     "routeHome",
-    "isLoading",
+    "isLoading"
   ],
   methods: {
+    init: function() {
+      this.closeCollapses();
+    },
     logUserOut: function() {
       localStorage.removeItem("userRoute");
       this.registerComponentStatistics(
@@ -467,26 +518,24 @@ export default {
         "click-on-logout-in-dashboard"
       );
     },
-    collapseDropDown: function() {
-      $(".profile-list").fadeIn("slow", function() {
-        visible = true;
+    closeCollapses: function() {
+      $(document).on("click", function(e) {
+        /* bootstrap collapse js adds "in" class to your collapsible element*/
+
+        var user_menu_opened = $("#web-profile-items").hasClass("in");
+
+        if (
+          !$(e.target).closest("#web-profile-items").length &&
+          !$(e.target).is("#web-profile-items") &&
+          user_menu_opened === true
+        ) {
+          $("#web-profile-items").collapse("toggle");
+        }
       });
-    },
-    collapseDropDownList: function() {
-      $(".icon-header-list").fadeIn("slow", function() {
-        visible = true;
-      });
-    },
-    documentClick(e) {
-      if (visible) {
-        $(".profile-list").fadeOut("slow");
-        $(".icon-header-list").fadeOut("slow");
-        visible = false;
-      }
     }
   },
   mounted() {
-    //
+    this.init();
   },
   created() {
     var self = this;
@@ -496,8 +545,6 @@ export default {
     eventBus.$on("active", event => {
       this.activeElement = event;
     });
-    
-    document.addEventListener("click", this.documentClick);
   },
   registerComponentStatistics: function(categoryName, actionName, labelName) {
     gtag("event", actionName, {

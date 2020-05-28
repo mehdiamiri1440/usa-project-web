@@ -495,7 +495,7 @@
                                     ارتقاء عضویت
                                 </button>
 
-                                <a v-else href="/payment/3" class="green-button">
+                                <a v-else href="" @click.prevent="doPayment(3)" class="green-button">
                                     ارتقاء عضویت
                                 </a>
 
@@ -579,7 +579,7 @@
                                     ارتقاء عضویت
                                 </button>
 
-                                <a v-else href="/payment/2" class="green-button">
+                                <a v-else href="" @click.prevent="doPayment(2)" class="green-button">
                                     ارتقاء عضویت
                                 </a>
 
@@ -662,7 +662,7 @@
                                     ارتقاء عضویت
                                 </button>
 
-                                <a v-else href="/payment/1" class="green-button">
+                                <a v-else href="" @click.prevent="doPayment(1)" class="green-button">
                                     ارتقاء عضویت
                                 </a>
 
@@ -966,7 +966,20 @@
 
                 var $myGroup = $('.item-content');
                 $myGroup.find('.collapse.in').collapse('hide')
-            }
+            },
+            doPayment: function(packageType){
+                let userId = getUserId();
+
+                this.registerComponentStatistics('payment','type-' + packageType,'userId: ' + userId);
+
+                window.location.href = '/payment/' + packageType; 
+            },
+            registerComponentStatistics: function(categoryName, actionName, labelName) {
+                gtag("event", actionName, {
+                    event_category: categoryName,
+                    event_label: labelName
+                });
+            },
 
         },
         mounted() {
