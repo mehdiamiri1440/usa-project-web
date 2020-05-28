@@ -1,3 +1,12 @@
+button.hover-effect {
+  transition: 200ms !important;
+}
+button.hover-effect:hover {
+  transition: 200ms !important;
+
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
 .standard-line {
   line-height: 1.618;
 }
@@ -239,11 +248,16 @@
 }
 
 .red-text {
-  color: #e41c38;
+  color: #e41c38 !important;
 }
-
+.yellow-text {
+  color: #ffbb00 !important;
+}
 .green-text {
   color: #00c569;
+}
+.disable-text {
+  color: #dbdbdb !important;
 }
 /*product view user info styles*/
 

@@ -56,7 +56,8 @@
     to(#21ad93)
   );
   background: linear-gradient(90deg, #00c569 0%, #21ad93 100%);
-  overflow: hidden;
+  float: right;
+  width: 100%;
   color: #fff;
 }
 
@@ -111,17 +112,14 @@
 }
 
 .report-button {
-  background: #fff;
-  color: #777;
-  padding: 0px 10px;
+  background: #556080;
+  color: #fff;
+  padding: 6px 17px 3px;
   border-radius: 5px;
-  font-size: 12px;
-  margin-top: 5px;
+  font-size: 20px;
+  border: none;
 }
 
-.report-button:hover {
-  color: #00c569;
-}
 .message-wrapper .chat-page ul {
   padding: 20px;
 
@@ -219,6 +217,42 @@
   padding-left: 5px;
 }
 
+#chat-menu-items {
+  position: absolute;
+  left: 15px;
+  z-index: 10;
+  width: 130px;
+  background: #fff;
+  text-align: right;
+  direction: rtl;
+  border-radius: 4px;
+  line-height: 1.618;
+  -webkit-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+  top: 46px;
+  overflow: hidden;
+  padding: 0 !important;
+}
+#chat-menu-items li button {
+  background: none;
+  color: #777;
+  font-size: 14px;
+  border: none;
+  width: 100%;
+  padding: 4px 15px;
+  text-align: right;
+  transition: 200ms;
+}
+#chat-menu-items li button:hover {
+  color: #333;
+  background: #eee;
+  transition: 200ms;
+}
+@media screen and (max-width: 767px) {
+  #chat-menu-items {
+    left: 54px;
+  }
+}
 @media screen and (max-width: 345px) {
   .message-wrapper .message-contact-title-img {
     margin-left: 10px;
@@ -255,19 +289,43 @@
         </router-link>
       </div>
       <div class="head-action-buttons pull-left">
-        <button
-          type="button"
-          class="green-button report-button"
-          @click.prevent="
-            $parent.activeReportModal($parent.selectedContact.contact_id)
-          "
-        >گزارش تخلف</button>
-        <button
-          @click.prevent="$parent.selectedContact = !$parent.selectedContact"
-          class="back-state hidden-sm hidden-md hidden-lg"
-        >
-          <i class="fa fa-arrow-left"></i>
-        </button>
+        <div class="head-action-buttons pull-left">
+          <button
+            type="button"
+            class="report-button hover-effect"
+            data-toggle="collapse"
+            id="#button-collapse-chat-menu"
+            href="#chat-menu-items"
+            role="button"
+          >
+            <i class="fa fa-ellipsis-v"></i>
+          </button>
+          <button
+            @click.prevent="$parent.selectedContact = !$parent.selectedContact"
+            class="back-state hidden-sm hidden-md hidden-lg"
+          >
+            <i class="fa fa-arrow-left"></i>
+          </button>
+
+          <ul id="chat-menu-items" class="collapse">
+            <li class="list-item">
+              <button
+                type="button"
+                @click.prevent="
+                $parent.activeReportModal($parent.selectedContact.contact_id)
+              "
+              >گزارش تخلف</button>
+            </li>
+            <li v-if="$parent.userAllowedReview" class="list-item">
+              <button
+                type="button"
+                @click.prevent="
+                $parent.activeReviewModal()
+              "
+              >ثبت نظر</button>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -357,6 +415,26 @@
 <script>
 export default {
   methods: {
+    init: function() {
+      this.hideCollapses();
+    },
+    hideCollapses: function() {
+      $(document).on("click", function(e) {
+        /* bootstrap collapse js adds "in" class to your collapsible element*/
+
+        var user_menu_opened = $("#chat-menu-items").hasClass("in");
+
+        if (
+          !$(e.target).closest("#chat-menu-items").length &&
+          !$(e.target).is("#button-collapse-chat-menu") &&
+          user_menu_opened === true
+        ) {
+          $("#chat-menu-items").collapse("toggle");
+        }
+
+        /* bootstrap collapse js adds "in" class to your collapsible element*/
+      });
+    },
     checkMessageName: function(index, prevIndex) {
       var isMessageName = false;
 
@@ -373,6 +451,9 @@ export default {
 
       return isMessageName;
     }
+  },
+  mounted: function() {
+    this.init();
   }
 };
 </script>
