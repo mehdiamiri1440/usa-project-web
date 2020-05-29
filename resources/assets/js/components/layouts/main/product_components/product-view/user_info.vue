@@ -387,23 +387,26 @@ p.response-rate span {
           </svg>
         </div>
 
-        <div class="profile-rating-box-wrapper hidden-xs hidden-lg">
+        <div
+          class="profile-rating-box-wrapper hidden-xs hidden-lg"
+          v-if="$parent.product.user_info.review_info.avg_score > 0"
+        >
           <div class="profile-rating-box">
             <div class="rating-stars pull-left">
               <p class="stars-wrapper">
                 <span v-for="(star, index) in 5" :key="index">
                   <span v-text="index + 1"></span>
 
-                  <i class="fa fa-star" :class="{ 'yellow-text': index < 4 }"></i>
+                  <i class="fa fa-star" :class="{ 'yellow-text': index < $parent.starScore }"></i>
                 </span>
               </p>
               <p class="review-count-wrapper">
-                <span v-text="'4'"></span>
+                <span v-text="$parent.product.user_info.review_info.total_count"></span>
                 نظر
               </p>
             </div>
             <span class="rating-score pull-right">
-              <span v-text="'4.2'"></span>
+              <span v-text="$parent.product.user_info.review_info.avg_score"></span>
             </span>
           </div>
         </div>
@@ -426,23 +429,26 @@ p.response-rate span {
           class="user-valid-text"
         >کاربر تایید شده</p>
 
-        <div class="profile-rating-box-wrapper hidden-sm hidden-md">
+        <div
+          class="profile-rating-box-wrapper hidden-sm hidden-md"
+          v-if="$parent.product.user_info.review_info.avg_score > 0"
+        >
           <div class="profile-rating-box">
             <div class="rating-stars pull-left">
               <p class="stars-wrapper">
                 <span v-for="(star, index) in 5" :key="index">
                   <span v-text="index + 1"></span>
 
-                  <i class="fa fa-star" :class="{ 'yellow-text': index < 4 }"></i>
+                  <i class="fa fa-star" :class="{ 'yellow-text': index < $parent.starScore }"></i>
                 </span>
               </p>
               <p class="review-count-wrapper">
-                <span v-text="'4'"></span>
+                <span v-text="$parent.product.user_info.review_info.total_count"></span>
                 نظر
               </p>
             </div>
             <span class="rating-score pull-right">
-              <span v-text="'4.2'"></span>
+              <span v-text="$parent.product.user_info.review_info.avg_score"></span>
             </span>
           </div>
         </div>
@@ -458,15 +464,6 @@ p.response-rate span {
         :to="'/profile/' + $parent.product.user_info.user_name"
         class="green-button green-button-o"
       >مشاهده پروفایل</router-link>
-
-      <!--   <button
-        v-if="!$parent.isMyProfile"
-        @click.prevent="$parent.openChat($parent.product)"
-        class="green-button"
-      >
-        ارسال پیام
-        <i class="fa fa-envelope"></i>
-      </button>-->
 
       <button
         v-if="!$parent.isMyProfile"
