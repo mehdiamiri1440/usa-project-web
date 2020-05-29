@@ -132,7 +132,7 @@ export default {
         self.resetData();
       });
 
-      $("#review-modal").on("show.bs.modal", function(e) {
+      $("#report-modal").on("show.bs.modal", function(e) {
         self.handleBackBtnClickOnDevices();
       });
     },
