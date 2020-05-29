@@ -230,7 +230,7 @@ p.response-rate {
         class="green-button"
       >
         <i class="fa fa-envelope"></i>
-        ارتباط با فروشنده
+        استعلام قیمت
       </button>
 
       <button

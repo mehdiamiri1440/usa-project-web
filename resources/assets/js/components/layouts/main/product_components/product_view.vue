@@ -102,12 +102,14 @@ span {
   left: 0;
   width: 100%;
   z-index: 1;
+  padding: 5px;
   box-shadow: 0 -6px 15px rgba(0, 0, 0, 0.16);
+  background: #fff;
 }
 
 .fix-send-message-wrapper button {
   width: 100%;
-  border-radius: 0;
+  border-radius: 6px;
   margin: 0;
 }
 
@@ -251,7 +253,7 @@ span {
         class="fix-send-message-wrapper hidden-lg hidden-md hidden-sm"
       >
         <button v-if="!isMyProfile" @click.prevent="openChat(product)" class="green-button">
-          استعلام شرایط فروش
+          استعلام قیمت
           <i class="fa fa-envelope"></i>
         </button>
       </div>
