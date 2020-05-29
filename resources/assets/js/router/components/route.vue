@@ -360,6 +360,9 @@ export default {
         case "guide":
           this.raiseGuideModal();
           break;
+        case "deleteUserComment":
+          this.raiseDeleteUserCommentModal();
+          break;
       }
     },
     raiseSendMessageModal: function() {
@@ -663,6 +666,38 @@ export default {
             break;
           case "seller":
             self.$router.push({ name: "register" });
+            break;
+        }
+      });
+    },
+    raiseDeleteUserCommentModal: function(){
+      let self = this;
+
+      this.handleBackBtn();
+
+      swal({
+        title: "حذف نظر",
+        text: "تعداد نظرات حذف شده توسط شما به کاربران نمایش داده خواهد شد. آیا می خواهید این نظر را حذف کنید؟",
+        className: "custom-swal-with-cancel",
+        icon: "warning",
+        buttons: {
+          delete: {
+            text: "حذف کن",
+            value: "delete",
+            className: "bg-red"
+          },
+          reject: {
+            text: "انصراف"
+          },
+          close: {
+            text: "بستن",
+            className: "bg-cancel"
+          }
+        }
+      }).then(value => {
+        switch (value) {
+          case "delete":
+            self.$router.push({ name: "mainRegisterRequest" });
             break;
         }
       });

@@ -22,6 +22,7 @@ use App\Models\province;
 use App\Models\cities;
 use App\Http\Controllers\General\media_controller;
 use Illuminate\Support\Facades\Cache;
+use App\Http\Controllers\Accounting\comment_controller;
 
 class product_controller extends Controller
 {
@@ -525,6 +526,10 @@ class product_controller extends Controller
         }
 
         $product_related_data['user_info']->response_rate = $this->get_user_response_info($product->myuser_id)['response_rate'];
+
+        $comment_controller_object = new comment_controller();
+        $product_related_data['user_info']->review_info = $comment_controller_object->get_user_avg_rating_score($product->myuser_id);
+
 
         $product_related_data['photos'] = $product_related_photos;
 

@@ -259,7 +259,7 @@
           <div id="report-form" class="form-wrapper collapse">
             <p>نظر خود را اینجا بنویسید</p>
             <textarea
-              placeholder="نظر خود را بنویسید"
+              placeholder="نظرتان درباره این کاربر را با بقیه به اشتراک بگذارید..."
               v-model="$parent.reviewData.reviewText"
               :class="{ 'error-input': $parent.errors.reviewText }"
             ></textarea>

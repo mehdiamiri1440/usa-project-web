@@ -256,6 +256,106 @@ a.profile-info-wrapper:focus {
   margin: 0;
 }
 
+
+
+
+/*start style sub-header*/
+    .sub-header {
+        position: absolute;
+        left: 0;
+        background: #eff3f6;
+        top: 63px;
+        right: 0;
+        text-align: center;
+        border-bottom: 1px solid #e6e6e6;
+        border-top: 1px solid #e6e6e6;
+    }
+
+    .sub-header ul {
+        text-align: center;
+    }
+
+    .sub-header a {
+        padding: 16px;
+
+        display: inline-block;
+
+        color: #808c9b;
+
+        font-weight: bold;
+
+        font-size: 14px;
+
+        position: relative;
+    }
+
+    .sub-header a:hover {
+        color: #313942;
+    }
+
+    .sub-header a:hover::after {
+        content: " ";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: #00C569;
+        height: 3px;
+        width: 100%;
+    }
+
+    .sub-header a.active {
+        color: #313942;
+    }
+
+    .sub-header a.active::after {
+        content: " ";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: #00C569;
+        height: 3px;
+        width: 100%;
+    }
+
+
+
+    .search-box {
+        position: relative;
+        margin: 10px auto;
+        border: none;
+    }
+
+    .search-box input {
+        width: 100%;
+        text-align: right;
+        direction: rtl;
+        border: 1px solid #666666;
+        border-radius: 6px;
+        padding: 6px 35px 5px 15px;
+        background: #f8f8f8;
+        font-size: 12px;
+        float: right;
+    }
+
+    .search-box button.btn-search {
+        background: none;
+        border: none;
+        position: absolute;
+        right: 16px;
+        top: 9px;
+        border-left: 1px solid;
+        color: #777;
+        padding: 0 7px;
+        font-size: 12px;
+        height: 20px;
+    }
+
+    .button-height {
+      line-height: 1;
+    }
+
+
+
 @media screen and (max-width: 994px) {
   .main-header,
   .little-main-header {

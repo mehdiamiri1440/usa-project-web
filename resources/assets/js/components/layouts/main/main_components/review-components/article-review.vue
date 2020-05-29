@@ -237,13 +237,70 @@ export default {
     },
     deleteComment: function () {
       this.$parent.doDeletereview = true;
-      axios
-        .post("/profile/delete-user-comment", {
-          c_id: this.review.c_id,
-        })
-        .then((response) => {
-          this.$parent.getReviews();
-        });
+      let self = this;
+
+      self.handleBackBtn();
+
+      swal({
+        title: "حذف نظر",
+        text: "تعداد نظرات حذف شده توسط شما به کاربران نمایش داده خواهد شد. آیا می خواهید این نظر را حذف کنید؟",
+        className: "custom-swal-with-cancel",
+        icon: "warning",
+        buttons: {
+          delete: {
+            text: "حذف کن",
+            value: "delete",
+            className: "bg-red"
+          },
+          reject: {
+            text: "انصراف"
+          },
+          close: {
+            text: "بستن",
+            className: "bg-cancel"
+          }
+        }
+      }).then(value => {
+        switch (value) {
+          case "delete":
+            axios
+              .post("/profile/delete-user-comment", {
+                c_id: self.review.c_id,
+              })
+              .then((response) => {
+                self.$parent.getReviews();
+                self.$parent.doDeletereview = false;
+              });
+            break;
+            case "reject":
+              self.$parent.doDeletereview = false;
+              break;
+            case "close":
+              self.$parent.doDeletereview = false;
+              break;
+        }
+      });
+    },
+    isModalOpen: function() {
+      return swal.getState().isOpen;
+    },
+    handleBackBtn: function() {
+      var self = this;
+
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+
+      $(window).on("popstate", function(e) {
+        if (self.isModalOpen()) {
+          swal.close();
+          self.$parent.doDeletereview = false;
+          window.localStorage.removeItem("contact"); // it's been set before modal openning
+          window.localStorage.removeItem("msgToSend");
+          window.localStorage.removeItem("pathname");
+          // window.location.href = window.location.pathname;
+        }
+      });
     },
   },
   mounted: function () {
