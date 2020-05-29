@@ -242,7 +242,6 @@ span {
           <router-link
             :to="this.$parent.productUrl"
             v-html="getProductName()"
-            :target="getProductLinkTarget()"
           ></router-link>
         </h3>
 
@@ -261,14 +260,12 @@ span {
             v-if="$parent.product.main.description<100"
             :to="this.$parent.productUrl"
             v-html="$parent.product.main.description"
-            :target="getProductLinkTarget()"
           ></router-link>
 
           <router-link
             v-else
             :to="this.$parent.productUrl"
             v-html="$parent.product.main.description.substring(0,100)"
-            :target="getProductLinkTarget()"
           ></router-link>
         </p>
 
@@ -361,9 +358,9 @@ export default {
       }
     },
     getProductLinkTarget: function() {
-      if (this.isDeviceMobile()) {
-        return "_blank";
-      }
+      // if (this.isDeviceMobile()) {
+      //   return "_blank";
+      // }
 
       return "_self";
     }

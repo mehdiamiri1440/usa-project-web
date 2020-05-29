@@ -430,7 +430,7 @@ label {
       >
         <button v-if="!isMyProfile" @click.prevent="openChat(product)" class="green-button">
           <i class="fa fa-envelope"></i>
-          ارتباط با فروشنده
+          استعلام قیمت
         </button>
 
         <button

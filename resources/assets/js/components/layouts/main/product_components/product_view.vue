@@ -111,6 +111,8 @@ span {
   width: 100%;
   border-radius: 6px;
   margin: 0;
+  font-size: 18px;
+  padding: 15px;
 }
 
 @media screen and (max-width: 1199px) {
