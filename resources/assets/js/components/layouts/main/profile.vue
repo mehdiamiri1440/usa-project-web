@@ -1057,14 +1057,14 @@ p.response-rate span {
                         </p>
                       </div>
 
-                      <div class="col-xs-6 pull-right">
+                      <div class="col-xs-6 margin-15-0 pull-right">
                         <p v-if="profileOwner.profile.is_company">
                           نام شرکت
                           <span v-text="profileOwner.profile.company_name"></span>
                         </p>
                       </div>
 
-                      <div class="col-xs-6">
+                      <div class="col-xs-6 margin-15-0">
                         <p v-if="profileOwner.profile.is_company">
                           شماره ثبت
                           <span v-text="profileOwner.profile.company_register_code"></span>
@@ -1170,14 +1170,14 @@ p.response-rate span {
                         <span v-else class="placeholder-content content-full-width"></span>
                       </div>
 
-                      <div class="col-xs-6 pull-right">
+                      <div class="col-xs-6 pull-right margin-15-0">
                         <p v-if="profileOwner.profile.is_company">
                           نام شرکت :
                           <span v-text="profileOwner.profile.company_name"></span>
                         </p>
                       </div>
 
-                      <div class="col-xs-6">
+                      <div class="col-xs-6 margin-15-0">
                         <p v-if="profileOwner.profile.is_company">
                           شماره ثبت :
                           <span v-text="profileOwner.profile.company_register_code"></span>
