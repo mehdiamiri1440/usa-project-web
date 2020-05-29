@@ -32,12 +32,13 @@ i {
 }
 
 .user-info-wrapper.active {
-  padding: 28px 20px;
+  padding: 15px 20px;
   border: 2px solid #00c569;
 }
 
 .user-information-content-image {
   position: relative;
+  min-width: 110px;
 }
 
 .user-information-content-image .user-image {
@@ -80,12 +81,14 @@ i {
   margin-left: -15px;
 }
 
-.user-information-content p {
+.user-information-content > p {
   font-size: 18px;
 
   font-weight: bold;
 
   color: #333;
+
+  direction: rtl;
 }
 
 .user-information-content p.user-position {
@@ -113,11 +116,84 @@ p.response-rate span {
   color: #e41c38;
 }
 
+/* stars styles */
+
+.profile-rating-box-wrapper {
+  padding-left: 10px;
+}
+
+.profile-rating-box {
+  border: 1px solid #f6f6f6;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 180px;
+  margin: 5px auto;
+  overflow: hidden;
+}
+.stars-wrapper {
+  padding-right: 2px;
+}
+.rating-stars {
+  width: calc(100% - 40px);
+  padding: 3px 0;
+  text-align: center;
+}
+.rating-stars p > span {
+  position: relative;
+  display: inline-block;
+}
+.rating-stars p > span i {
+  position: absolute;
+  left: 2px;
+  font-size: 17px;
+  z-index: 0;
+  top: 0px;
+  color: #bdc4cc;
+}
+.rating-stars p > span > span {
+  display: block;
+  position: relative;
+  z-index: 1;
+  font-size: 9px;
+  width: 18px;
+  text-align: center;
+  margin-left: 5px;
+  color: #777;
+}
+.rating-stars .review-count-wrapper {
+  color: #556080;
+  line-height: 1;
+  font-size: 11px;
+}
+.rating-score {
+  width: 40px;
+  background: #f6f6f6;
+  height: 100%;
+  text-align: center;
+  padding: 9px 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #556080;
+}
+
 @media screen and (max-width: 1199px) {
   .user-info-wrapper {
     overflow: hidden;
   }
+  .user-information-content-image .user-image {
+    width: 70px;
+    height: 70px;
+  }
+  .rating-stars p > span > span {
+    margin: 0 1px;
+  }
+  .rating-stars p > span i {
+    left: -1px;
+  }
 
+  .rating-score {
+    padding: 9px 0;
+  }
   .user-information-content-image,
   .default-wrapper-main-image,
   .default-image-info {
@@ -147,7 +223,7 @@ p.response-rate span {
 
     bottom: initial;
     top: -2px;
-    right: -6px;
+    right: 15px;
     left: initial;
     border: 2px solid white;
   }
@@ -173,6 +249,20 @@ p.response-rate span {
   .default-user-action-buttons {
     width: 160px;
   }
+
+  .user-information-content p {
+    margin-bottom: 5px;
+  }
+  .user-information-content p:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .user-info-actions {
+    margin-top: 5px;
+  }
+  .profile-rating-box-wrapper {
+    padding-left: 0;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -183,7 +273,15 @@ p.response-rate span {
   .user-info-wrapper {
     overflow: inherit;
   }
-
+  .user-information-content p {
+    margin-bottom: 0;
+  }
+  .user-information-content {
+    padding-top: 6px;
+  }
+  .user-info-actions {
+    margin-top: 0;
+  }
   .user-information-content-image,
   .default-user-action-buttons,
   .default-wrapper-main-image,
@@ -245,13 +343,10 @@ p.response-rate span {
   >
     <router-link
       :to="'/profile/' + $parent.product.user_info.user_name"
-      class="user-information-link"
+      class="user-information-link text-rtl"
     >
       <div class="user-information-content-image">
-        <div
-          class="user-image"
-          v-if="$parent.product.profile_info.profile_photo"
-        >
+        <div class="user-image" v-if="$parent.product.profile_info.profile_photo">
           <img
             v-bind:src="
               '/storage/' + $parent.product.profile_info.profile_photo
@@ -262,16 +357,9 @@ p.response-rate span {
         <div class="user-image" v-else>
           <img :src="$parent.defultimg" class="image_defult" />
         </div>
-        <div
-          class="valid-icon"
-          v-if="$parent.product.user_info.active_pakage_type == 3"
-        >
+        <div class="valid-icon" v-if="$parent.product.user_info.active_pakage_type == 3">
           <svg width="21.75" height="21.68" viewBox="0 0 24.965 30.574">
-            <g
-              id="buskool-icon"
-              data-name="buskool"
-              transform="translate(-273.1 -715.025)"
-            >
+            <g id="buskool-icon" data-name="buskool" transform="translate(-273.1 -715.025)">
               <path
                 id="Subtraction_1"
                 data-name="Subtraction 1"
@@ -298,6 +386,27 @@ p.response-rate span {
             </g>
           </svg>
         </div>
+
+        <div class="profile-rating-box-wrapper hidden-xs hidden-lg">
+          <div class="profile-rating-box">
+            <div class="rating-stars pull-left">
+              <p class="stars-wrapper">
+                <span v-for="(star, index) in 5" :key="index">
+                  <span v-text="index + 1"></span>
+
+                  <i class="fa fa-star" :class="{ 'yellow-text': index < 4 }"></i>
+                </span>
+              </p>
+              <p class="review-count-wrapper">
+                <span v-text="'4'"></span>
+                نظر
+              </p>
+            </div>
+            <span class="rating-score pull-right">
+              <span v-text="'4.2'"></span>
+            </span>
+          </div>
+        </div>
       </div>
 
       <div class="user-information-content">
@@ -315,9 +424,28 @@ p.response-rate span {
         <p
           v-if="$parent.product.user_info.active_pakage_type == 3"
           class="user-valid-text"
-        >
-          کاربر تایید شده
-        </p>
+        >کاربر تایید شده</p>
+
+        <div class="profile-rating-box-wrapper hidden-sm hidden-md">
+          <div class="profile-rating-box">
+            <div class="rating-stars pull-left">
+              <p class="stars-wrapper">
+                <span v-for="(star, index) in 5" :key="index">
+                  <span v-text="index + 1"></span>
+
+                  <i class="fa fa-star" :class="{ 'yellow-text': index < 4 }"></i>
+                </span>
+              </p>
+              <p class="review-count-wrapper">
+                <span v-text="'4'"></span>
+                نظر
+              </p>
+            </div>
+            <span class="rating-score pull-right">
+              <span v-text="'4.2'"></span>
+            </span>
+          </div>
+        </div>
 
         <p v-if="$parent.product.user_info.response_rate" class="response-rate">
           احتمال پاسخ گویی
@@ -329,8 +457,7 @@ p.response-rate span {
       <router-link
         :to="'/profile/' + $parent.product.user_info.user_name"
         class="green-button green-button-o"
-        >مشاهده پروفایل</router-link
-      >
+      >مشاهده پروفایل</router-link>
 
       <!--   <button
         v-if="!$parent.isMyProfile"
@@ -339,7 +466,7 @@ p.response-rate span {
       >
         ارسال پیام
         <i class="fa fa-envelope"></i>
-      </button> -->
+      </button>-->
 
       <button
         v-if="!$parent.isMyProfile"
@@ -371,21 +498,15 @@ p.response-rate span {
   </div>
 
   <div class="user-info-wrapper default-user-info-wrapper wrapper-bg" v-else>
-    <div
-      class="default-wrapper-main-image placeholder-content text-center"
-    ></div>
+    <div class="default-wrapper-main-image placeholder-content text-center"></div>
 
     <div class="default-image-info text-rtl text-center margin-15-0">
       <span class="placeholder-content content-half-width inline-block"></span>
-      <span
-        class="placeholder-content content-default-width inline-block"
-      ></span>
+      <span class="placeholder-content content-default-width inline-block"></span>
     </div>
     <div class="default-user-action-buttons">
       <div class="placeholder-content default-button-full-with margin-0"></div>
-      <div
-        class="placeholder-content default-button-full-with margin-10-0"
-      ></div>
+      <div class="placeholder-content default-button-full-with margin-10-0"></div>
     </div>
   </div>
 </template>
