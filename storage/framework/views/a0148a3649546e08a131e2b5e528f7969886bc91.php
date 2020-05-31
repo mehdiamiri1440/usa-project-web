@@ -10,38 +10,28 @@
 
     <title>باسکول | بازارگاه کشاورزی </title>
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
-    <script>
+     <script>
         window.Laravel = {csrfToken: '<?php echo e(csrf_token()); ?>'}
     </script>
-    <script src="<?php echo e(asset('assets/js/jquery-3.3.1.min.js')); ?>"></script>
-    <script  src="<?php echo e(asset('assets/js/jquery-ui.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/ResizeSensor.js')); ?>"></script>
-
-    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/placeholder-content.css')); ?>">
-    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/fontiran.css')); ?>">
-    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/all.css')); ?>" async>
-    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap.min.css')); ?>">
-    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap-theme.min.css')); ?>" async>
-    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl.carousel.min.css')); ?>">
-    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl.theme.default.min.css')); ?>">
-    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/magnific-popup.css')); ?>">
-    <link rel="stylesheet" href="<?php echo e(asset('index/css/animate.css')); ?>">
-    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl-custom-style.css')); ?>">
-    <link type="text/css" rel="preload" href="<?php echo e(asset('assets/css/imageuploadify.min.css')); ?>">
-    <link type="text/css" rel="preload" href="<?php echo e(asset('assets/css/cropper.css')); ?>">
-    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/master/style.css')); ?>">
-    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/popup.css')); ?>">
-    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/sweetalert.css')); ?>">
 
 
-    <script src="<?php echo e(asset('assets/cdn/axios.js')); ?>"></script>
+<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/placeholder-content.css')); ?>">
+<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/fontiran.css')); ?>">
+<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/all.css')); ?>" async>
+<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap.min.css')); ?>">
+<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap-theme.min.css')); ?>" async>
+<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl.carousel.min.css')); ?>">
+<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl.theme.default.min.css')); ?>">
+<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/magnific-popup.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('index/css/animate.css')); ?>">
+<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl-custom-style.css')); ?>">
+<link type="text/css" rel="preload" href="<?php echo e(asset('assets/css/imageuploadify.min.css')); ?>">
+<link type="text/css" rel="preload" href="<?php echo e(asset('assets/css/cropper.css')); ?>">
+<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/master/style.css')); ?>">
+<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/popup.css')); ?>">
+<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/sweetalert.css')); ?>">
 
-
-    <script src="<?php echo e(asset('index/js/jquery.magnific-popup.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('index/js/owl.carousel.min.js')); ?>"></script>
-
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-   
+  
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
     <script>
