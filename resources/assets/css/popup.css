@@ -1,0 +1,30 @@
+
+.main_popup_content .main-pop-up {
+    font-size: 15px;
+    line-height: 1.618;
+    margin-bottom: 15px;
+}
+
+
+.main_popup_content {
+    position: relative;
+    text-align: center;
+    background: #fff;
+    border-radius: 3px;
+    padding: 50px;
+    margin: 0;
+    direction: rtl;
+}
+.main_popup_content i.fa-times {
+    color: #fff;
+    position: absolute;
+    top: -16px;
+    right: -14px;
+    font-size: 18px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 50px;
+    height: 30px;
+    width: 30px;
+    padding-top: 5px;
+}
+

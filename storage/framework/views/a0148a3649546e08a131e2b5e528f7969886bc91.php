@@ -15,22 +15,6 @@
     </script>
 
 
-<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/placeholder-content.css')); ?>">
-<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/fontiran.css')); ?>">
-<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/all.css')); ?>" async>
-<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap.min.css')); ?>">
-<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap-theme.min.css')); ?>" async>
-<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl.carousel.min.css')); ?>">
-<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl.theme.default.min.css')); ?>">
-<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/magnific-popup.css')); ?>">
-<link rel="stylesheet" href="<?php echo e(asset('index/css/animate.css')); ?>">
-<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/owl-custom-style.css')); ?>">
-<link type="text/css" rel="preload" href="<?php echo e(asset('assets/css/imageuploadify.min.css')); ?>">
-<link type="text/css" rel="preload" href="<?php echo e(asset('assets/css/cropper.css')); ?>">
-<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/master/style.css')); ?>">
-<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/popup.css')); ?>">
-<link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/css/sweetalert.css')); ?>">
-
   
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>

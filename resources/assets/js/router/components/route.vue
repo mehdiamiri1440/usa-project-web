@@ -670,14 +670,15 @@ export default {
         }
       });
     },
-    raiseDeleteUserCommentModal: function(){
+    raiseDeleteUserCommentModal: function() {
       let self = this;
 
       this.handleBackBtn();
 
       swal({
         title: "حذف نظر",
-        text: "تعداد نظرات حذف شده توسط شما به کاربران نمایش داده خواهد شد. آیا می خواهید این نظر را حذف کنید؟",
+        text:
+          "تعداد نظرات حذف شده توسط شما به کاربران نمایش داده خواهد شد. آیا می خواهید این نظر را حذف کنید؟",
         className: "custom-swal-with-cancel",
         icon: "warning",
         buttons: {

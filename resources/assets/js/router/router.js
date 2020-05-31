@@ -5,6 +5,36 @@ window.Vue = require("vue");
 
 Vue.use(Router);
 
+require('../../css/placeholder-content.css')
+require('../../css/fontiran.css')
+require('../../css/all.css')
+require('../../css/bootstrap.min.css')
+require('../../css/bootstrap-theme.min.css')
+require('../../css/owl.carousel.min.css')
+require('../../css/owl.theme.default.min.css')
+require('../../css/magnific-popup.css')
+require('../../css/owl-custom-style.css')
+require('../../css/imageuploadify.min.css')
+require('../../css/cropper.css')
+require('../../css/master/style.css')
+require('../../css/popup.css')
+require('../../css/sweetalert.css')
+
+
+// <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
+//     <script  src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
+//     <script src="{{asset('assets/js/ResizeSensor.js')}}"></script>
+
+
+//     <script src="{{asset('assets/cdn/axios.js')}}"></script>
+
+
+//     <script src="{{asset('index/js/jquery.magnific-popup.min.js')}}"></script>
+//     <script src="{{asset('index/js/owl.carousel.min.js')}}"></script>
+
+
+
+
 // Errors Components
 import notFound from "../components/errors/404";
 

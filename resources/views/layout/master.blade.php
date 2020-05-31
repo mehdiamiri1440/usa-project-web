@@ -14,23 +14,7 @@
         window.Laravel = {csrfToken: '{{csrf_token()}}'}
     </script>
 
-
-<link type="text/css" rel="stylesheet" href="{{asset('assets/css/placeholder-content.css')}}">
-<link type="text/css" rel="stylesheet" href="{{asset('assets/css/fontiran.css')}}">
-<link type="text/css" rel="stylesheet" href="{{asset('assets/css/all.css')}}" async>
-<link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
-<link type="text/css" rel="stylesheet" href="{{asset('assets/css/bootstrap-theme.min.css')}}" async>
-<link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
-<link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">
-<link type="text/css" rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
-<link rel="stylesheet" href="{{asset('index/css/animate.css')}}">
-<link type="text/css" rel="stylesheet" href="{{asset('assets/css/owl-custom-style.css')}}">
-<link type="text/css" rel="preload" href="{{asset('assets/css/imageuploadify.min.css')}}">
-<link type="text/css" rel="preload" href="{{asset('assets/css/cropper.css')}}">
-<link type="text/css" rel="stylesheet" href="{{asset('assets/css/master/style.css')}}">
-<link type="text/css" rel="stylesheet" href="{{asset('assets/css/popup.css')}}">
-<link type="text/css" rel="stylesheet" href="{{asset('assets/css/sweetalert.css')}}">
-
+{{-- <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script> --}}
   {{--  <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
     <script  src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
     <script src="{{asset('assets/js/ResizeSensor.js')}}"></script>
