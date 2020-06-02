@@ -425,6 +425,7 @@ export default {
       loginCheckerLoading: true,
       isImageLoad: false,
       currentStep: 1,
+      loginBtnLoading:false,
       errors: [],
       showMsg: false,
       step1: {
@@ -456,6 +457,9 @@ export default {
     },
     doLogin: function() {
       var self = this;
+
+      self.loginBtnLoading = true;
+
       axios
         .post("/dologin", {
           phone: this.step1.phone,
@@ -464,19 +468,22 @@ export default {
         .then(function(response) {
           if (response.data.status === true) {
                 if (response.data.confirmed_profile_record === true) {
+
                       if(self.isUserComeFromChatBoxOpen() || self.isUserInInquirySubmissionProcess()){
                           window.localStorage.setItem('userId', response.data.id);
                           window.localStorage.setItem('userType', response.data.is_seller);
-      
+
                           self.returnUserToPreviousPageAndChatBox(response.data);
                       }
                       else{
                           window.localStorage.setItem('userId', response.data.id);
                           window.localStorage.setItem('userType', response.data.is_seller);
-                          
+                        
                           self.redirectUserToPanel(response.data);
                       }
                 } else {
+                      self.loginBtnLoading = false;
+
                       self.registerComponentExceptions(
                         "Login-page: User does not have confirmed profile record",
                         true
@@ -484,6 +491,8 @@ export default {
                   // window.location.href = "/seller/profile"; // Edit Profile Page
                 }
           } else {
+            self.loginBtnLoading = false;
+
             self.showMsg = true;
             self.errors = [];
             self.step1.msg = response.data.msg;
@@ -494,6 +503,8 @@ export default {
           }
         })
         .catch(function(err) {
+          self.loginBtnLoading = false;
+          
           self.errors = [];
           self.showMsg = false;
           self.errors = err.response.data.errors;

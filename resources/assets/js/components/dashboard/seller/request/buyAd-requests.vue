@@ -271,7 +271,7 @@
                 <p class="needs col-sm-3 col-xs-12">
                   <span class="static-content">میزان نیازمندی :</span>
 
-                  <span v-text="buyAd.requirement_amount"></span>
+                  <span v-text="getNumberWithCommas(buyAd.requirement_amount)"></span>
 
                   <span class="static-content">کیلوگرم</span>
                 </p>
@@ -482,6 +482,11 @@ export default {
         $(e.target).show();
       });
     },
+    getNumberWithCommas:function(number){
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
+	  },
     registerComponentStatistics: function(categoryName, actionName, labelName) {
       gtag("event", actionName, {
         event_category: categoryName,

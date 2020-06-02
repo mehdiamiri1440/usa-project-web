@@ -271,7 +271,7 @@ span {
 
         <p>
           مقدار موجودی:
-          <span v-text="$parent.product.main.stock + ' کیلوگرم'"></span>
+          <span v-text="getNumberWithCommas($parent.product.main.stock) + ' کیلوگرم'"></span>
         </p>
       </div>
 
@@ -363,6 +363,11 @@ export default {
       // }
 
       return "_self";
+    },
+    getNumberWithCommas:function(number){
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
     }
   }
 };
