@@ -22,19 +22,13 @@
     <header-dash-buyer
       :logo="assets + 'assets/img/logo-buskool-white-red.png'"
       :storage="storagePath"
-      :defultimg="assets + 'assets/img/user-defult.png'"
       :logout="'/logout'"
       :loading="assets + 'assets/img/gif/prload.gif'"
       :search-text="searchText"
     ></header-dash-buyer>
 
     <div id="main">
-      <router-view
-        :loading_img="assets + 'assets/img/gif/loading.gif'"
-        :str="storagePath"
-        :defimgitem="assets + 'assets/img/product.jpg'"
-        :defultimg="assets + 'assets/img/user-defult.png'"
-      ></router-view>
+      <router-view :str="storagePath"></router-view>
     </div>
   </div>
 </template>

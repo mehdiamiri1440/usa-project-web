@@ -177,7 +177,7 @@
   top: 7px;
 }
 
-.hide-reply{
+.hide-reply {
   display: none;
 }
 
@@ -292,13 +292,15 @@
                     <span class="request-count red-text">{{buyAd.reply_capacity + '+'}}</span>
                   </button>
                 </p>
-                <a class="col-sm-3 col-xs-12 pull-left" href @click.prevent="openChat(buyAd,$event)">
+                <a
+                  class="col-sm-3 col-xs-12 pull-left"
+                  href
+                  @click.prevent="openChat(buyAd,$event)"
+                >
                   <p class="detail-success">
                     <span class="fas fa-comment-alt"></span> پیام به خریدار
                   </p>
-                  <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
-                    کمی صبر کنید...
-                  </p>
+                  <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">کمی صبر کنید...</p>
                 </a>
               </li>
             </ul>
@@ -385,7 +387,7 @@
 import { eventBus } from "../../../../router/router";
 
 export default {
-  props: ["loading_img", "storage", "defultimg"],
+  props: ["storage"],
   data: function() {
     return {
       currentUser: {
@@ -424,27 +426,27 @@ export default {
           }, 100);
         });
     },
-    openChat: function(buyAd,event) {
+    openChat: function(buyAd, event) {
       var self = this;
 
-      let id = '#loader-' + buyAd.id;
-      self.hideReplyBtn(event,id);
+      let id = "#loader-" + buyAd.id;
+      self.hideReplyBtn(event, id);
 
-      axios.post('/get_user_permission_for_buyAd_reply',{
-          buy_ad_id : buyAd.id
-      }).then(function(response){
-        
-          self.showReplyBtn(event,id);
+      axios
+        .post("/get_user_permission_for_buyAd_reply", {
+          buy_ad_id: buyAd.id
+        })
+        .then(function(response) {
+          self.showReplyBtn(event, id);
 
-          if(response.data.permission == true){
-                
+          if (response.data.permission == true) {
             var contact = {
               contact_id: buyAd.myuser_id,
               first_name: buyAd.first_name,
               last_name: buyAd.last_name,
               profile_photo: null,
               user_name: buyAd.user_name,
-              buyAd_id : buyAd.id
+              buyAd_id: buyAd.id
             };
 
             eventBus.$emit("ChatInfo", contact);
@@ -454,31 +456,29 @@ export default {
               "openChat",
               "click on open chatBox"
             );
-               
-          }
-          else{
-            eventBus.$emit('modal', 'buyAdReplyLimit');
+          } else {
+            eventBus.$emit("modal", "buyAdReplyLimit");
             self.registerComponentStatistics(
               "buyAdReply",
               "openChat",
               "permission denied"
             );
           }
-      });
+        });
     },
-    hideReplyBtn:function(e,id){
-      return new Promise((resolve,reject) => {
+    hideReplyBtn: function(e, id) {
+      return new Promise((resolve, reject) => {
         $(e.target).hide();
         resolve(true);
-      }).then(()=>{
+      }).then(() => {
         $(id).show();
       });
     },
-    showReplyBtn:function(e,id){
-      return new Promise((resolve,reject) => {
+    showReplyBtn: function(e, id) {
+      return new Promise((resolve, reject) => {
         $(id).hide();
         resolve(true);
-      }).then(()=>{
+      }).then(() => {
         $(e.target).show();
       });
     },
@@ -487,7 +487,7 @@ export default {
         event_category: categoryName,
         event_label: labelName
       });
-    },
+    }
   },
   mounted() {
     this.init();

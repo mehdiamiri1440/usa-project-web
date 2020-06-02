@@ -1048,15 +1048,6 @@ Sizes
   text-align: center;
 }
 
-/*header logo image*/
-.test {
-  background-image: url("../../img/logo_dark.png");
-  background-repeat: no-repeat;
-  background-size: 180px 75px;
-  border-left: 10px;
-}
-
-/*end header logo image*/
 
 .main-content-index-pages {
   padding-top: 122px;
@@ -1238,11 +1229,7 @@ span.min {
   }
 }
 
-/*profile global style */
-.profile-header {
-  background: url("../../img/topheader.jpg");
-  background-position: 50% 30%;
-}
+
 
 @media only screen and (max-width: 991px) {
   .imageuploadify .imageuploadify-images-list {

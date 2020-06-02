@@ -419,7 +419,7 @@ export default {
     ForgotPassword,
     VerifyCode
   },
-  props: ["site_logo", "isUserLogin", "userType"],
+  props: ["isUserLogin", "userType"],
   data: function() {
     return {
       loginCheckerLoading: true,
@@ -440,9 +440,9 @@ export default {
       step3: {
         verification_code: "",
         msg: "",
-        reSendCode: false,
+        reSendCode: false
       },
-      createPassword : false,
+      createPassword: false,
       popUpMsg: ""
     };
   },
@@ -463,26 +463,34 @@ export default {
         })
         .then(function(response) {
           if (response.data.status === true) {
-                if (response.data.confirmed_profile_record === true) {
-                      if(self.isUserComeFromChatBoxOpen() || self.isUserInInquirySubmissionProcess()){
-                          window.localStorage.setItem('userId', response.data.id);
-                          window.localStorage.setItem('userType', response.data.is_seller);
-      
-                          self.returnUserToPreviousPageAndChatBox(response.data);
-                      }
-                      else{
-                          window.localStorage.setItem('userId', response.data.id);
-                          window.localStorage.setItem('userType', response.data.is_seller);
-                          
-                          self.redirectUserToPanel(response.data);
-                      }
-                } else {
-                      self.registerComponentExceptions(
-                        "Login-page: User does not have confirmed profile record",
-                        true
-                      );
-                  // window.location.href = "/seller/profile"; // Edit Profile Page
-                }
+            if (response.data.confirmed_profile_record === true) {
+              if (
+                self.isUserComeFromChatBoxOpen() ||
+                self.isUserInInquirySubmissionProcess()
+              ) {
+                window.localStorage.setItem("userId", response.data.id);
+                window.localStorage.setItem(
+                  "userType",
+                  response.data.is_seller
+                );
+
+                self.returnUserToPreviousPageAndChatBox(response.data);
+              } else {
+                window.localStorage.setItem("userId", response.data.id);
+                window.localStorage.setItem(
+                  "userType",
+                  response.data.is_seller
+                );
+
+                self.redirectUserToPanel(response.data);
+              }
+            } else {
+              self.registerComponentExceptions(
+                "Login-page: User does not have confirmed profile record",
+                true
+              );
+              // window.location.href = "/seller/profile"; // Edit Profile Page
+            }
           } else {
             self.showMsg = true;
             self.errors = [];
@@ -525,10 +533,9 @@ export default {
           }
         })
         .catch(function(err) {
-          if(err.response.status === 500){
+          if (err.response.status === 500) {
             self.errors[0] = err.response.data.msg;
-          }
-          else{
+          } else {
             self.errors = err.response.data.errors.phone;
           }
 
@@ -547,12 +554,11 @@ export default {
         .then(function(response) {
           if (response.data.status === true) {
             self.errors = [];
-            
-            eventBus.$emit('modal', 'passwordResetSuccess');
+
+            eventBus.$emit("modal", "passwordResetSuccess");
 
             self.currentStep = 1;
             self.createPassword = false;
-
           } else {
             self.errors = [];
             self.errors.verification_code = "کد اشتباه است یا منقضی شده";
@@ -606,139 +612,125 @@ export default {
 
       return ios;
     },
-    isUserComeFromChatBoxOpen:function()
-    {
-      if(window.localStorage.getItem('contact') && window.localStorage.getItem('pathname')){
+    isUserComeFromChatBoxOpen: function() {
+      if (
+        window.localStorage.getItem("contact") &&
+        window.localStorage.getItem("pathname")
+      ) {
         return true;
       }
       return false;
     },
-    returnUserToPreviousPageAndChatBox:function(userInfo)
-    {
-        if(this.isUserInInquirySubmissionProcess()){
-            
-            let contact = JSON.parse(window.localStorage.getItem('contact'));
-            let msg = window.localStorage.getItem('msgToSend');
+    returnUserToPreviousPageAndChatBox: function(userInfo) {
+      if (this.isUserInInquirySubmissionProcess()) {
+        let contact = JSON.parse(window.localStorage.getItem("contact"));
+        let msg = window.localStorage.getItem("msgToSend");
 
-            if(userInfo.id != contact.contact_id){
+        if (userInfo.id != contact.contact_id) {
+          if (userInfo.is_buyer) {
+            window.location.href = "/buyer/register-request";
+          } else if (userInfo.is_seller) {
+            window.location.href = "/switch-role";
+          } else {
+            window.localStorage.removeItem("contact");
+            window.localStorage.removeItem("msgToSend");
 
-                if(userInfo.is_buyer){
-                  window.location.href = "/buyer/register-request";
-                }
-                else if(userInfo.is_seller){
-                  window.location.href = '/switch-role';
-                }
-                else{
-                  window.localStorage.removeItem('contact');
-                  window.localStorage.removeItem('msgToSend');
-
-                  this.redirectUserToPanel(userInfo);
-                }
-                
-            }
-            else {
-              this.redirectUserToPanel(userInfo);
-            }
-        }
-        else if(this.isUserComeFromChatBoxOpen()){
-            
-            let contact = JSON.parse(window.localStorage.getItem('contact'));
-            let pathname = window.localStorage.getItem('pathname');
-
-            window.localStorage.removeItem('contact');
-            window.localStorage.removeItem('pathname');
-
-            if(userInfo.id != contact.contact_id){
-                window.localStorage.setItem('comeFromAuthentication',true);
-
-                this.$router.push({path: pathname});
-
-                eventBus.$emit('ChatInfo',contact);
-                
-            }
-            else {
-              this.redirectUserToPanel(userInfo);
-            }
-        }
-        else{
             this.redirectUserToPanel(userInfo);
+          }
+        } else {
+          this.redirectUserToPanel(userInfo);
         }
+      } else if (this.isUserComeFromChatBoxOpen()) {
+        let contact = JSON.parse(window.localStorage.getItem("contact"));
+        let pathname = window.localStorage.getItem("pathname");
+
+        window.localStorage.removeItem("contact");
+        window.localStorage.removeItem("pathname");
+
+        if (userInfo.id != contact.contact_id) {
+          window.localStorage.setItem("comeFromAuthentication", true);
+
+          this.$router.push({ path: pathname });
+
+          eventBus.$emit("ChatInfo", contact);
+        } else {
+          this.redirectUserToPanel(userInfo);
+        }
+      } else {
+        this.redirectUserToPanel(userInfo);
+      }
     },
-    redirectUserToPanel:function(userInfo){
+    redirectUserToPanel: function(userInfo) {
       var self = this;
 
       if (userInfo.is_buyer) {
-          axios
-              .post("/get_total_unread_messages_for_current_user")
-              .then(function (response) {
-                  if(response.data.msg_count){
-                      window.location.href = "/buyer/messenger/contacts"
-                  }
-                  else{
-                      window.location.href = "/buyer/register-request";
-                  }
-              })
-              .catch(function (err) {
-                  //
-              });
-          
-          localStorage.setItem("showSnapShot", true);
-          localStorage.userRoute = JSON.stringify(
-            "buyer/register-request"
-          );
-          // test
-          self.registerComponentStatistics(
-            "Login",
-            "seller-login",
-            "seller-logged-in-successfully"
-          );
-      } else if (userInfo.is_seller) {
-          axios
-              .post("/get_total_unread_messages_for_current_user")
-              .then(function (response) {
-                  if(response.data.msg_count){
-                      window.location.href = "/seller/messenger/contacts"
-                  }
-                  else{
-                      axios
-                        .post("/get_seller_dashboard_required_data")
-                        .then(function(response) {
-                            if(response.data.confirmed_products_count !== 0){
-                                window.location.href = "/seller/buyAd-requests";
-                            }
-                            else{
-                                window.location.href = "/seller/register-product";
-                            }
-                        });
-                  }
-              })
-              .catch(function (err) {
-                  //
-              });
-  
-          localStorage.setItem("showSnapShot", true);
-          localStorage.userRoute = JSON.stringify(
-            "seller/register-product"
-          );
-          self.registerComponentStatistics(
-            "Login",
-            "buyer-login",
-            "buyer-logged-in-succeccfully"
-          );
-      } else {
-          self.registerComponentExceptions(
-            "Login-page: Undefined user type user phone nubmer is: " +
-              userInfo.phone,
-            true
-          );
+        axios
+          .post("/get_total_unread_messages_for_current_user")
+          .then(function(response) {
+            if (response.data.msg_count) {
+              window.location.href = "/buyer/messenger/contacts";
+            } else {
+              window.location.href = "/buyer/register-request";
+            }
+          })
+          .catch(function(err) {
+            //
+          });
 
-          alert(
-            "نوع کاربری شما مشخص نشده است لطفا با پشتیبانی باسکول تماس بگیرید"
-          );
-        }
+        localStorage.setItem("showSnapShot", true);
+        localStorage.userRoute = JSON.stringify("buyer/register-request");
+        // test
+        self.registerComponentStatistics(
+          "Login",
+          "seller-login",
+          "seller-logged-in-successfully"
+        );
+      } else if (userInfo.is_seller) {
+        axios
+          .post("/get_total_unread_messages_for_current_user")
+          .then(function(response) {
+            if (response.data.msg_count) {
+              window.location.href = "/seller/messenger/contacts";
+            } else {
+              axios
+                .post("/get_seller_dashboard_required_data")
+                .then(function(response) {
+                  if (response.data.confirmed_products_count !== 0) {
+                    window.location.href = "/seller/buyAd-requests";
+                  } else {
+                    window.location.href = "/seller/register-product";
+                  }
+                });
+            }
+          })
+          .catch(function(err) {
+            //
+          });
+
+        localStorage.setItem("showSnapShot", true);
+        localStorage.userRoute = JSON.stringify("seller/register-product");
+        self.registerComponentStatistics(
+          "Login",
+          "buyer-login",
+          "buyer-logged-in-succeccfully"
+        );
+      } else {
+        self.registerComponentExceptions(
+          "Login-page: Undefined user type user phone nubmer is: " +
+            userInfo.phone,
+          true
+        );
+
+        alert(
+          "نوع کاربری شما مشخص نشده است لطفا با پشتیبانی باسکول تماس بگیرید"
+        );
+      }
     },
-    isUserInInquirySubmissionProcess: function(){
-      if(window.localStorage.getItem('contact') && window.localStorage.getItem('msgToSend')){
+    isUserInInquirySubmissionProcess: function() {
+      if (
+        window.localStorage.getItem("contact") &&
+        window.localStorage.getItem("msgToSend")
+      ) {
         return true;
       }
       return false;
@@ -747,17 +739,16 @@ export default {
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/login" });
     var self = this;
-    
+
     let userInfo = {
-      is_buyer: ! self.userType,
+      is_buyer: !self.userType,
       is_seller: self.userType
     };
 
     if (self.isUserLogin && self.userType == 1) {
-      if(self.isUserInInquirySubmissionProcess()){
+      if (self.isUserInInquirySubmissionProcess()) {
         self.returnUserToPreviousPageAndChatBox(userInfo);
-      }
-      else{
+      } else {
         self.$router.push("seller/register-product");
       }
     } else if (self.isUserLogin && self.userType != 1) {
@@ -767,10 +758,10 @@ export default {
       self.loginCheckerLoading = false;
     }
     window.addEventListener("keydown", function(event) {
-      if(window.location.pathname == '/login'){
-          if (event.keyCode === 13) {
-              self.doLogin();
-          }
+      if (window.location.pathname == "/login") {
+        if (event.keyCode === 13) {
+          self.doLogin();
+        }
       }
     });
   },
@@ -786,35 +777,34 @@ export default {
     this.$nextTick(this.stopLoader());
   },
   metaInfo() {
-
-      return {
-          title: 'ورود',
-          titleTemplate: 'باسکول | %s',
-          meta: [
-              {
-                  name: 'description',
-                  content: 'خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار'
-              },
-              {
-                  name: 'author',
-                  content: 'باسکول'
-              },
-              {
-                  property: 'og:description',
-                  content: 'مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
-              },
-              {
-                  property: 'og:site_name',
-                  content: 'باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران'
-              },
-              {
-                  'property': 'og:title',
-                  'content': 'باسکول | ورود'
-              },
-
-          ]
-
-      }
+    return {
+      title: "ورود",
+      titleTemplate: "باسکول | %s",
+      meta: [
+        {
+          name: "description",
+          content:
+            "خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار"
+        },
+        {
+          name: "author",
+          content: "باسکول"
+        },
+        {
+          property: "og:description",
+          content:
+            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی"
+        },
+        {
+          property: "og:site_name",
+          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران"
+        },
+        {
+          property: "og:title",
+          content: "باسکول | ورود"
+        }
+      ]
+    };
   }
 };
 </script>

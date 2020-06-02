@@ -355,7 +355,7 @@ p.response-rate span {
         </div>
 
         <div class="user-image" v-else>
-          <img :src="$parent.defultimg" class="image_defult" />
+          <img src="../../../../../../img/user-defult.png" class="image_defult" />
         </div>
         <div class="valid-icon" v-if="$parent.product.user_info.active_pakage_type == 3">
           <svg width="21.75" height="21.68" viewBox="0 0 24.965 30.574">

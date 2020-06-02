@@ -287,7 +287,7 @@
             :alt="$parent.selectedContact.first_name[0]"
           />
 
-          <img v-else :src="$parent.defultImg" />
+          <img v-else src="../../../../img/user-defult.png" />
         </div>
 
         <router-link :to="{ path: '/profile/' + $parent.selectedContact.user_name }">

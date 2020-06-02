@@ -344,6 +344,8 @@ p.response-rate span {
 }
 
 .profile-header {
+  background: url("../../../../img/topheader.jpg");
+  background-position: 50% 30%;
   color: #fff;
   background-size: cover;
   overflow: hidden;
@@ -796,7 +798,7 @@ p.response-rate span {
 
                 <div v-else>
                   <img
-                    :src="defultimg"
+                    src="../../../../img/user-defult.png"
                     class="image_defult"
                     :alt="
                       profileOwner.user_info.first_name +
@@ -1258,10 +1260,7 @@ p.response-rate span {
                     v-if="products.length >= productIndex"
                     :key="product.main.id"
                     :product="product"
-                    :loading_img="loading_img"
-                    :defultimg="defultimg"
                     :str="str"
-                    :loading="loading"
                     :currentUser="currentUser"
                   />
                 </div>
@@ -1615,7 +1614,7 @@ export default {
     ArticleReview,
     PlaceholderArticleReview
   },
-  props: ["defultimg", "incobaicon", "str", "loading_img"],
+  props: ["assets", "incobaicon", "str"],
   data: function() {
     return {
       products: {
@@ -1956,22 +1955,20 @@ export default {
       });
     },
     activeReviewModal: function() {
-      var userImage = "";
-
-      if (this.profileOwner.profile.profile_photo) {
-        userImage = this.str + "/" + this.profileOwner.profile.profile_photo;
-      } else {
-        userImage = this.defultimg;
-      }
-
-      var selectedUserData = {
+      let userImage = "";
+      let selectedUserData = {
         id: this.profileOwner.user_info.id,
         name:
           this.profileOwner.user_info.first_name +
           " " +
-          this.profileOwner.user_info.last_name,
-        img: userImage
+          this.profileOwner.user_info.last_name
       };
+
+      if (this.profileOwner.profile.profile_photo) {
+        userImage = this.str + "/" + this.profileOwner.profile.profile_photo;
+        selectedUserData.img = userImage;
+      }
+
       eventBus.$emit("reviewUserData", selectedUserData);
     },
     isUserAuthorizedToPostComment: function() {
@@ -2028,7 +2025,7 @@ export default {
     if (this.profileOwner.profile.profile_photo) {
       profilePhoto = this.str + "/" + this.profileOwner.profile.profile_photo;
     } else {
-      profilePhoto = this.defultimg;
+      profilePhoto = this.assets + "assets/img/user-defult.png";
     }
 
     let indexingStatus = "";

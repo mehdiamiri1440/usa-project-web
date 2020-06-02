@@ -260,7 +260,6 @@ export default {
     MoreDetails,
     FinishStage
   },
-  props: ["loading_img"],
   data: function() {
     return {
       currentStep: 0,

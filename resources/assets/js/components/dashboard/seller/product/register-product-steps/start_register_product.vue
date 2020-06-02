@@ -288,7 +288,7 @@ select.error:focus {
             @click.prevent="$parent.startRegisterProductSubmited()"
           >ثبت محصول</button>
           <div v-else class="loading-submit">
-            <img :src="$parent.loading_img" />
+            <img src="../../../../../../img/gif/loading.gif" />
           </div>
         </div>
       </div>

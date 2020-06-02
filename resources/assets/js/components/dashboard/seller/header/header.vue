@@ -332,7 +332,9 @@ span.min {
                 <i class="fa fa-close"></i>
               </a>
               <p class="main-pop-up">{{popUpMsg}}</p>
-              <p class="main-pop-up red-text"><b>برای افزایش ظرفیت لطفا عضویت خود را ارتقا دهید.</b></p>
+              <p class="main-pop-up red-text">
+                <b>برای افزایش ظرفیت لطفا عضویت خود را ارتقا دهید.</b>
+              </p>
               <div class="row">
                 <div class="col-xs-6">
                   <button class="btn gray-button" data-dismiss="modal">متوجه شدم</button>
@@ -450,11 +452,11 @@ span.min {
       </div>
     </div>
 
-    <!--    <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
-                <div class="main-loader">
-                    <img :src="loading">
-                    <p dir="rtl">در حال بارگذاری...</p>
-                </div>
+    <!-- <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
+      <div class="main-loader">
+        <img src="../../../../../img/gif/prload.gif" />
+        <p dir="rtl">در حال بارگذاری...</p>
+      </div>
     </div>-->
     <!--end loader-->
 
@@ -481,7 +483,6 @@ span.min {
           :isLoading="isLoading"
           :photoLink="currentUser.profile.profile_photo"
           :storage="storage"
-          :def="defultimg"
           :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
           :usercity="currentUser.user_info.province + ' - ' + currentUser.user_info.city"
           :userprof="currentUser.user_info.user_name"
@@ -517,7 +518,6 @@ span.min {
           :isLoading="isLoading"
           :photoLink="currentUser.profile.profile_photo"
           :storage="storage"
-          :def="defultimg"
           :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
           :usercity="currentUser.user_info.province + ' - ' + currentUser.user_info.city"
           :userprof="currentUser.user_info.user_name"
@@ -536,7 +536,6 @@ span.min {
       :isLoading="isLoading"
       :photoLink="currentUser.profile.profile_photo"
       :storage="storage"
-      :def="defultimg"
       :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
       :out="logout"
       :menuClosed="menuClosed"
@@ -559,7 +558,7 @@ export default {
     HeaderTop,
     SwitchButtons
   },
-  props: ["defultimg", "logo", "loading", "storage", "logout", "userId"],
+  props: ["logo", "storage", "logout", "userId"],
   data: function() {
     return {
       showSnapShot: false,

@@ -17,7 +17,7 @@
           <p>
             برای ثبت استعلام شرایط فروش فرم زیر را کامل کنید
           </p>
-        </div> -->
+        </div>-->
 
         <div class="main-request-content">
           <register-inquiry-form
@@ -27,7 +27,7 @@
             :user-profile-photo="
               productUserInfo.profile_photo
                 ? str + '/' + productUserInfo.profile_photo
-                : defultimg
+                : assets + 'assets/img/user-defult.png'
             "
           />
         </div>
@@ -42,32 +42,32 @@ import { eventBus } from "../../../../router/router";
 
 export default {
   components: {
-    registerInquiryForm,
+    registerInquiryForm
   },
-  props:['str','defultimg'],
-  data: function () {
+  props: ["str"],
+  data: function() {
     return {
-      productUserInfo: "",
+      productUserInfo: ""
     };
   },
-  methods:{
-    setUpProductOwnerInfo:function(){
-      let contact = JSON.parse(window.localStorage.getItem('contact'));
-      if(contact){
+  methods: {
+    setUpProductOwnerInfo: function() {
+      let contact = JSON.parse(window.localStorage.getItem("contact"));
+      if (contact) {
         this.productUserInfo = contact;
         // console.log(this.productUserInfo.first_name);
       }
     }
   },
-  mounted: function () {
-      this.setUpProductOwnerInfo();
+  mounted: function() {
+    this.setUpProductOwnerInfo();
   },
-  created: function () {
+  created: function() {
     this.setUpProductOwnerInfo();
     // eventBus.$on("productUserInfo", ($event) => {
     //   this.productUserInfo = $event;
     //   console.log(productUserInfo);
     // });
-  },
+  }
 };
 </script>

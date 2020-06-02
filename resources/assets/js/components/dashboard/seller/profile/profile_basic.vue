@@ -621,7 +621,12 @@ textarea {
                   alt="تصویر پروفایل"
                 />
 
-                <img v-else :src="defultimg" align="تصویر پروفایل" class="image-preview" />
+                <img
+                  v-else
+                  src="../../../../../img/user-defult.png"
+                  align="تصویر پروفایل"
+                  class="image-preview"
+                />
               </div>
 
               <div class="submit">
@@ -928,7 +933,7 @@ import { eventBus } from "../../../../router/router";
 import UploadFile from "../../upload-image";
 
 export default {
-  props: ["str", "defultimg"],
+  props: ["str"],
   components: {
     UploadFile
   },

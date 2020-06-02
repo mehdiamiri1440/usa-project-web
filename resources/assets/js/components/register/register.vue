@@ -498,7 +498,7 @@
             UserAccount,
             ActivityDomain
         },
-        props: ["site_logo", "isUserLogin", "userType"],
+        props: ["isUserLogin", "userType"],
         data: function () {
             return {
                 isImageLoad: false,

@@ -131,13 +131,11 @@
             <div class="row">
               <div
                 v-for="(product,productIndex) in products"
-                :key="product.main.id"
+                :key="productIndex"
                 class="col-xs-12 pull-right"
               >
                 <ProductArticle
                   :product="product"
-                  :loading_img="loading_img"
-                  :defultimg="defultimg"
                   :str="str"
                   :loading="loading"
                   :currentUser="currentUser"
@@ -205,7 +203,7 @@ export default {
   components: {
     ProductArticle
   },
-  props: ["defultimg", "incobaicon", "str", "loading_img"],
+  props: ["incobaicon", "str"],
   data: function() {
     return {
       products: {

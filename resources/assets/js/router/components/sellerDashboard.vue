@@ -50,7 +50,6 @@
     <header-dash-seller
       :logo="assets + 'assets/img/logo-buskool-white-red.png'"
       :storage="storagePath"
-      :defultimg="assets + 'assets/img/user-defult.png'"
       :logout="'/logout'"
       :loading="assets + 'assets/img/gif/prload.gif'"
       :user-id="userId"
@@ -58,13 +57,7 @@
     ></header-dash-seller>
 
     <div id="main">
-      <router-view
-        :loading_img="assets + 'assets/img/gif/loading.gif'"
-        :str="storagePath"
-        :user-type="isSeller"
-        :defimgitem="assets + 'assets/img/product.jpg'"
-        :defultimg="assets + 'assets/img/user-defult.png'"
-      ></router-view>
+      <router-view :str="storagePath" :user-type="isSeller"></router-view>
     </div>
 
     <div
