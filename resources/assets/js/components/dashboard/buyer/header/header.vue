@@ -32,10 +32,7 @@ body,
 
 .logo img {
   width: 100px;
-}
-
-.logo a p {
-  margin-top: -6px;
+  padding: 9px 0 4px;
 }
 
 .right-header {

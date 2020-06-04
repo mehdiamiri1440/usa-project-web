@@ -188,7 +188,7 @@
   right: -3px;
   display: inline-block;
   width: 20px;
-  height: 16px;
+  height: 25px;
   top: 1px;
 }
 
@@ -197,15 +197,14 @@
 
   position: relative;
 }
-.sub-header i.buskool-icon > img {
-  position: absolute;
-  top: -6px;
-  height: initial;
-  left: 0;
+
+.inside-links.buskool-icon > span {
+  top: -4px;
+  position: relative;
 }
 
 .sub-header button {
-  padding: 12px 0 19px;
+  padding: 12px 0 14px;
   color: #808c9b;
   font-weight: bold;
   font-size: 14px;
@@ -1195,8 +1194,8 @@ p.response-rate span {
           <div class="sub-header hidden-sm hidden-md hidden-lg col-xs-12">
             <div class="col-xs-6" :class="{ active: profileDescription }">
               <button @click.prevent="showProfileOwnerDescription()">
-                <div class="inside-links">
-                  <i class="buskool-icon" aria-hidden="true">
+                <div class="inside-links buskool-icon">
+                  <i aria-hidden="true">
                     <svg width="21.75" height="21.68" viewBox="0 0 24.965 30.574">
                       <g
                         id="buskool-icon"
@@ -1232,7 +1231,7 @@ p.response-rate span {
                       </g>
                     </svg>
                   </i>
-                  اطلاعات پایه
+                  <span>اطلاعات پایه</span>
                 </div>
               </button>
             </div>
