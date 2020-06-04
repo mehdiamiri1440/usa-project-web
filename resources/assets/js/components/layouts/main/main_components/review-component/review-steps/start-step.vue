@@ -234,7 +234,8 @@
   <div class="row">
     <div class="user-data">
       <div class="user-image">
-        <img :src="$parent.reviewUserData.img" alt />
+        <img v-if="$parent.reviewUserData.img" :src="$parent.reviewUserData.img" alt />
+        <img v-else src="../../../../../../../img/user-defult.png" />
       </div>
       <p class="user-name" v-text="$parent.reviewUserData.name"></p>
     </div>

@@ -489,13 +489,13 @@ div {
         <div class="message-contact-title">
           <div class="contact-title-contents pull-right">
             <div class="message-contact-title-img">
-              <img
+              <!-- <img
                 v-if="$parent.selectedGroup.photo"
                 :src="$parent.assets + 'assets/img/group-images/'+ $parent.selectedGroup.photo"
                 :alt="'گروه ' + $parent.selectedGroup.name"
               />
 
-              <img v-else :src="$parent.assets + 'assets/img/group-images/group-category.jpg'" />
+              <img v-else :src="$parent.assets + 'assets/img/group-images/group-category.jpg'" />-->
             </div>
 
             <span v-if="$parent.selectedGroup.name" v-text="'گروه ' + $parent.selectedGroup.name"></span>
@@ -695,7 +695,7 @@ div {
           :key="index"
         >
           <button @click.prevent="$parent.subscribeUser(group.id)">
-            <img
+            <!-- <img
               v-if="group.photo"
               :src="$parent.assets + 'assets/img/group-images/'+ group.photo"
               :alt="'گروه ' + group.name"
@@ -704,7 +704,7 @@ div {
               v-else
               :src="$parent.assets + 'assets/img/group-images/group-category.jpg'"
               :alt="'گروه ' + group.name"
-            />
+            />-->
 
             <p class="pull-right" v-text="'گروه ' + group.name"></p>
             <span class="group-item-icon pull-left">

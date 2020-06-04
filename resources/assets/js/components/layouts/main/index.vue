@@ -792,6 +792,9 @@ li > ul > li.active > ul > li {
   margin: 25px 0 0;
 }
 
+.main-incobac-logo img {
+  width: 200px;
+}
 @media screen and (max-width: 767px) {
   #intro {
     margin-top: 57px;
@@ -1267,7 +1270,7 @@ li > ul > li.active > ul > li {
           <div class="service-boxs-wrapper col-xs-12">
             <div class="row">
               <div class="col-xs-12 col-sm-4 pull-right">
-                <article class="service-box box-content">
+                <article class="service-box box-content main-incobac-logo">
                   <router-link :to="{ name: 'help' }">
                     <div class="box-image">
                       <img src="../../../../img/logo/web-logo.svg" />

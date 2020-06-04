@@ -19,13 +19,7 @@
 
 <template>
   <div>
-    <header-dash-buyer
-      :logo="assets + 'assets/img/logo-buskool-white-red.png'"
-      :storage="storagePath"
-      :logout="'/logout'"
-      :loading="assets + 'assets/img/gif/prload.gif'"
-      :search-text="searchText"
-    ></header-dash-buyer>
+    <header-dash-buyer :storage="storagePath" :logout="'/logout'" :search-text="searchText"></header-dash-buyer>
 
     <div id="main">
       <router-view :str="storagePath"></router-view>

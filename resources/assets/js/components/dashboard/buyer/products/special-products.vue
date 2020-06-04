@@ -308,7 +308,7 @@ export default {
   components: {
     ProductArticle
   },
-  props: ["incobaicon", "str"],
+  props: ["str"],
   data: function() {
     return {
       products: {

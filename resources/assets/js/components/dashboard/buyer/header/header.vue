@@ -460,7 +460,7 @@ span.min {
 
         <span class="logo">
           <router-link :to="{name : 'indexPage'}">
-            <img :src="logo" alt="incoboc" />
+            <img src="../../../../../img/logo/web-logo-white.svg" alt="buskool" />
             <p>بازارگاه آنلاین کشاورزی</p>
           </router-link>
         </span>
@@ -495,7 +495,7 @@ span.min {
 
         <span class="logo">
           <router-link :to="{name : 'indexPage'}">
-            <img :src="logo" alt="incoboc" />
+            <img src="../../../../../img/logo/web-logo-white.svg" alt="buskool" />
             <p>بازارگاه آنلاین کشاورزی</p>
           </router-link>
         </span>
@@ -545,7 +545,7 @@ export default {
     HeaderTop,
     SwitchButtons
   },
-  props: ["logo", "storage", "logout", "userId", "searchText"],
+  props: ["storage", "logout", "userId", "searchText"],
   data: function() {
     return {
       menuClosed: false,
