@@ -193,7 +193,7 @@ button.hover-effect:hover {
   margin: 0 15px;
 }
 .margin-0 {
-  margin: 0;
+  margin: 0 !important;
 }
 
 .margin-auto {
@@ -207,13 +207,7 @@ button.hover-effect:hover {
 .margin-top-10 {
   margin-top: 10px;
 }
-.category-products-widget-default {
-  padding: 15px;
-}
-.shadow-content {
-  box-shadow: 0 0 15px #dbdbdb;
-  border-radius: 5px;
-}
+
 
 .padding-top-5 {
   padding-top: 5px;
@@ -232,11 +226,11 @@ button.hover-effect:hover {
 }
 
 .padding-15-0 {
-  padding: 15px 0;
+  padding: 15px 0 !important;
 }
 
 .padding-0-15 {
-  padding: 0 15px;
+  padding: 0 15px !important;
 }
 
 .h-20 {
@@ -245,6 +239,10 @@ button.hover-effect:hover {
 
 .h-40 {
   height: 40px;
+}
+
+.w-100{
+  width: 100%;
 }
 
 .red-text {
@@ -259,7 +257,32 @@ button.hover-effect:hover {
 .disable-text {
   color: #dbdbdb !important;
 }
+
+.bg-red{
+  background-color: #e41c38 !important;
+}
+
+.bg-green{
+  background-color: #00c569 !important;
+}
+
+.bg-gray{
+  background-color: #556080 !important;
+
+}
+
+
+
+.category-products-widget-default {
+  padding: 15px;
+}
+.shadow-content {
+  box-shadow: 0 0 15px #dbdbdb;
+  border-radius: 5px;
+}
+
 /*product view user info styles*/
+
 
 .user-info-wrapper .default-wrapper-main-image {
   width: 90px;

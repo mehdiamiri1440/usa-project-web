@@ -81,36 +81,48 @@
   padding: 8px 30px;
 }
 .title {
-  text-align: right;
-  padding: 13px 15px;
-}
-
-.title h1 {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.fix-request-header-box {
-  background: #f5f5f5;
+  background: #f6f6f6;
   position: fixed;
   right: 250px;
   left: 0;
   z-index: 1;
   border-radius: 0;
+  padding: 13px 15px;
+}
+
+.placeholder-title h1,
+.title h1 {
+  font-size: 18px;
+  font-weight: bold;
+}
+.fix-request-header-box {
+  background: #eff3f6;
+  position: fixed;
+  right: 250px;
+  left: 0;
+  z-index: 2;
+  border-radius: 0;
   padding: 10px 0;
 }
 
-.fix-request-header-box > p {
-  display: inline-block;
+.fix-request-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  background: #fff;
+  border-radius: 0;
+  padding: 10px 0;
+}
+.request-update button {
+  margin: 0;
+  padding: 3px 14px;
+  margin-right: 6px;
 }
 
-.fix-request-header-box > button {
-  margin: 0 5px 0 0;
-  padding: 1px 18px 3px;
-  max-width: 100px;
-}
-
-#main.little-main .fix-request-header-box {
+#main.little-main .fix-request-header-box,
+#main.little-main .title {
   right: 80px;
 }
 
@@ -123,18 +135,6 @@
   margin-bottom: 15px;
   line-height: 25px;
   font-size: 30px;
-}
-
-.red-button {
-  background: #e41c38;
-  color: #fff;
-  margin: 15px 0;
-  display: inline-block;
-  padding: 10px 35px;
-  border-radius: 3px;
-  text-align: center;
-  border: none;
-  transition: 300ms;
 }
 .list-notice {
   text-align: right;
@@ -183,11 +183,11 @@
 
 @media screen and (max-width: 992px) {
   .default-list-title {
-    padding: 4px 0;
+    padding: 4px 15px;
   }
 
   .fix-request-header-box,
-  #main.little-main .fix-request-header-box {
+  .title {
     right: 0;
   }
 }
@@ -197,15 +197,10 @@
     padding: 0;
   }
 
-  .green-button {
-    width: 100%;
-  }
-
-  .red-button {
-    width: 100%;
-  }
-
   .title {
+    position: relative;
+  }
+  .title h1 {
     text-align: center;
   }
 
@@ -241,23 +236,44 @@
     <div class="requests" v-show="isRequests">
       <div
         v-if="currentUser.user_info.active_pakage_type == 0"
-        class="fix-request-header-box shadow-content text-center text-rtl"
+        class="fix-request-header-box request-update shadow-content text-center text-rtl"
       >
-        <p>این درخواست ها کمی قدیمی است</p>
-        <button class="red-button" @click="isRequests = !isRequests">بروز رسانی</button>
+        <span>این درخواست ها کمی قدیمی است</span>
+        <button
+          class="green-button bg-red hover-effect"
+          @click="isRequests = !isRequests"
+        >بروز رسانی</button>
       </div>
-      <section class="main-content col-xs-12" v-if="buyAds.length != 0">
-        <div class="title col-xs-12">
+      <div class="fix-request-bottom hidden-sm hidden-md hidden-lg shadow-content text-center">
+        <div class="col-xs-12 text-right">
+          <button class="green-button bg-gray w-100 margin-0 hover-effect">
+            <i class="fas fa-filter"></i>
+            دسته بندی ها
+          </button>
+        </div>
+      </div>
+      <section
+        class="main-content col-xs-12"
+        :class="{'padding-0-15' : currentUser.user_info.active_pakage_type != 0}"
+        v-if="buyAds.length != 0"
+      >
+        <div class="title">
           <div class="row">
-            <div class="col-xs-12 col-sm-4 pull-right">
+            <div class="col-xs-12 text-right col-sm-4 pull-right">
               <h1>درخواست های خرید</h1>
+            </div>
+            <div class="col-xs-12 col-sm-4 hidden-xs request-update pull-left text-left">
+              <button class="green-button bg-gray hover-effect">
+                <i class="fas fa-filter"></i>
+                دسته بندی ها
+              </button>
             </div>
           </div>
         </div>
         <div class="col-xs-12">
           <div class="row">
             <ul class="list-unstyled">
-              <li v-for="buyAd in buyAds" class="list-group-item col-xs-12">
+              <li v-for="(buyAd,index) in buyAds" :key="index" class="list-group-item col-xs-12">
                 <p class="list-title col-sm-3 col-xs-12">
                   <span v-text="buyAd.category_name"></span>
 
@@ -324,17 +340,17 @@
       </section>
 
       <section class="main-content col-xs-12" v-if="load">
-        <div class="title col-xs-12">
+        <div class="placeholder-title col-xs-12">
           <div class="row">
-            <div class="col-xs-12 col-sm-4 pull-right">
-              <h1>درخواست ها</h1>
+            <div class="col-xs-12 col-sm-4 text-right pull-right">
+              <h1 class="padding-15-0">درخواست های خرید</h1>
             </div>
           </div>
         </div>
         <div class="col-xs-12">
           <div class="row">
             <ul class="list-unstyled">
-              <li v-for="item in 5" class="list-group-item col-xs-12">
+              <li v-for="(item,index) in 5" :key="index" class="list-group-item col-xs-12">
                 <p class="default-list-title pull-right col-sm-9 hidden-xs margin-10-0">
                   <span class="placeholder-content content-full-width h-20"></span>
                 </p>
