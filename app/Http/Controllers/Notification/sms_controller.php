@@ -285,7 +285,7 @@ class sms_controller extends Controller
             Smsir::ultraFastSend(['name' => 'کاربر'],$pattern_code,$phone_number);
         }
         catch(\Exception $e){
-            //
+            echo $e->getMessage();
         }
     }
 }

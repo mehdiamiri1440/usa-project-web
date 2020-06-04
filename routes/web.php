@@ -16,6 +16,8 @@ use App\Http\Middleware\cors;
 use App\Models\profile;
 use Illuminate\Http\Request;
 
+use App\Jobs\sendSMS;
+
 // Route::group(['prefix' => 'master'], function () {
 //     Route::get('/', function () {
 //         return view('layout.master');
@@ -750,6 +752,11 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
         'uses' => 'admin_panel\admin_user_comment_controller@confirm_user_comment_by_id',
         'as'   => 'admin_panel_confirm_user_comment_by_id'
     ]);
+
+    Route::get('/suspicious-messages-list',[
+        'uses' => 'admin_panel\AnomalyDetector\messaging_anomaly_controller@load_messaging_anomaly',
+        'as'   => 'admin_panel_load_messaging_anomaly'
+    ]);
 });
 
 //Route::any('/payment_callback',[
@@ -766,6 +773,10 @@ Route::post('/get_wp_posts', [
     'uses' => 'index_controller@get_wp_posts',
     'as' => 'get_wp_posts',
 ]);
+
+// Route::get('/anomaly',function(){
+//     MessagingAnomalyDetection::dispatch();
+// });
 
 // Route::group(['middleware' => [cors::class]], function () {
 //     Route::options('/broadcastAuth', function () {

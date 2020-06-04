@@ -43,7 +43,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        پیام ها
+        پیام های غیر نرمال
       </h1>
     </section>
 
@@ -56,43 +56,64 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            
+             
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
 
              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                 @isset($abnormal_messages)
-                    <p>پیام های مشکوک</p>
+             @isset($abnormal_users)
+                    <p>افراد مشکوک</p>
                     
-                    @foreach($abnormal_messages as $msg)
+                    @foreach($abnormal_users as $user)
                         <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="{{$msg['contact_info']->contact_id}}">
+                            <div class="panel-heading" role="tab" id="{{$user->id}}">
                             <h4 class="panel-title">
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="{{'#collapse' . $msg['contact_info']->contact_id}}" aria-expanded="false" aria-controls="{{'collapse' . $msg['contact_info']->contact_id}}">
-                                    {{$msg->sender_first_name}}
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="{{'#collapse' . $user->id}}" aria-expanded="false" aria-controls="{{'collapse' . $user->id}}">
+                                    {{$user->first_name . ' ' . $user->last_name}}
                                 </a>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <a href="{{'/profile/' . $msg['contact_info']->user_name}}" target="_blank"> <small>&nbsp مشاهده پروفایل &nbsp</small> </a>
+                                        
                                     </div>
                                 </div>
                             </h4>
                             </div>
-                            <!-- <div id="{{'collapse' . $msg['contact_info']->contact_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{$msg['contact_info']->contact_id}}">
+                            <div id="{{'collapse' . $user->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{$user->id}}">
                             <div class="panel-body">
-                                @foreach($msg['messages'] as $msgItem)
-                                    @if($msgItem->sender_id == $user_record->id)
-                                        <p class="text text-right">{{$msgItem->text}}</p>
-                                        <p class="text text-right text-green"><small>{{$msgItem->created_at}} @if($msgItem->is_read)<span class="fa fa-check text text-red"></span>@endif</small></p>
-                                    @else
-                                        <p class="text text-left">{{$msgItem->text}}</p>
-                                        <p class="text text-left text-green"><small>{{$msgItem->created_at}} @if($msgItem->is_read)<span class="fa fa-check text text-red"></span>@endif</small></p>
-                                    @endif
-                                @endforeach
+                                        <p class="text text-danger">شماره تماس :‌ {{$user->phone}}</p>
+                                        <p class="text text-danger">زمان ثبت نام :‌ {{$user->created_at}}</p>
+                                        <a class="text" href="{{'/profile/'. $user->user_name}}" target="_blank">مشاهده پروفایل</p>
                             </div>
-                            </div> -->
+                            </div>
+                        </div>
+                    @endforeach
+                @endisset
+                 @isset($abnormal_messages)
+                    <p>پیام های غیر نرمال کشف شده</p>
+                    
+                    @foreach($abnormal_messages as $msg)
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="{{$msg->id}}">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="{{'#collapse' . $msg->id}}" aria-expanded="false" aria-controls="{{'collapse' . $msg->id}}">
+                                    {{$msg->sender_first_name . ' ' . $msg->sender_last_name . '  ------> ' . $msg->receiver_first_name . ' ' . $msg->receiver_last_name}}
+                                </a>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        
+                                    </div>
+                                </div>
+                            </h4>
+                            </div>
+                            <div id="{{'collapse' . $msg->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{$msg->id}}">
+                            <div class="panel-body">
+                                        <p class="text text-danger">شماره تماس ارسال کننده :‌ {{$msg->sender_phone}}</p>
+                                        <p class="text text-danger">زمان ارسال :‌ {{$msg->created_at}}</p>
+                                        <p class="text text-right">{{$msg->text}}</p>
+                            </div>
+                            </div>
                         </div>
                     @endforeach
                 @endisset
