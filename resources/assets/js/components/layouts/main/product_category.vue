@@ -352,9 +352,7 @@ li.active a::after {
 
   border: none;
 }
-.bg-gray {
-  background: #777;
-}
+
 .rate-filter label {
   float: right;
   margin-left: 7px;
@@ -907,13 +905,13 @@ end filter modal styles
       <div class="rate-filter-mobile-wrapper">
         <div class="rate-filter">
           <button class="green-button bg-gray" @click.prevent="openSortModal()">
-            <i class="fas fa-sort-amount-down-alt"></i>
             مرتب سازی
+            <i class="fas fa-sort-amount-down-alt"></i>
           </button>
         </div>
         <button class="btn-filter hidden-lg" @click.prevent="openFilterModal()">
-          <i class="fa fa-filter"></i>
           دسته ها و فیلتر
+          <i class="fa fa-filter"></i>
         </button>
       </div>
     </div>

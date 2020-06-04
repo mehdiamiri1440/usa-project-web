@@ -324,9 +324,6 @@ li.active a::after {
 
   border: none;
 }
-.bg-gray {
-  background: #777;
-}
 .rate-filter label {
   float: right;
   margin-left: 7px;

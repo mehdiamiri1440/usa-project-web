@@ -92,8 +92,9 @@
 
 .placeholder-title h1,
 .title h1 {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
+  line-height: 1.9;
 }
 .fix-request-header-box {
   background: #eff3f6;
@@ -181,6 +182,23 @@
   display: none;
 }
 
+.wrapper-items {
+  padding-top: 60px;
+}
+.remove-filter-button {
+  background: #fff;
+  border-radius: 50px;
+  border: 1px solid #e41c39;
+  color: #777;
+  margin: 0;
+  padding: 2px 15px;
+  margin-right: 10px;
+}
+.remove-filter-icon {
+  position: relative;
+  top: 2px;
+  right: -6px;
+}
 @media screen and (max-width: 992px) {
   .default-list-title {
     padding: 4px 15px;
@@ -193,10 +211,13 @@
 }
 
 @media screen and (max-width: 767px) {
-  .main-content {
+  .main-content,
+  .wrapper-items {
     padding: 0;
   }
-
+  .requests .main-content {
+    padding-bottom: 100px;
+  }
   .title {
     position: relative;
   }
@@ -233,6 +254,19 @@
 </style>
 <template>
   <div>
+    <category-filter v-if="categoryModal" />
+    <div class="fix-request-bottom hidden-sm hidden-md hidden-lg shadow-content text-center">
+      <div class="col-xs-12 text-right">
+        <button
+          type="button"
+          @click.prevent="openCategoryModal()"
+          class="green-button bg-gray w-100 margin-0 hover-effect"
+        >
+          <i class="fas fa-filter"></i>
+          دسته بندی ها
+        </button>
+      </div>
+    </div>
     <div class="requests" v-show="isRequests">
       <div
         v-if="currentUser.user_info.active_pakage_type == 0"
@@ -244,35 +278,43 @@
           @click="isRequests = !isRequests"
         >بروز رسانی</button>
       </div>
-      <div class="fix-request-bottom hidden-sm hidden-md hidden-lg shadow-content text-center">
-        <div class="col-xs-12 text-right">
-          <button class="green-button bg-gray w-100 margin-0 hover-effect">
-            <i class="fas fa-filter"></i>
-            دسته بندی ها
-          </button>
-        </div>
-      </div>
+
       <section
         class="main-content col-xs-12"
         :class="{'padding-0-15' : currentUser.user_info.active_pakage_type != 0}"
-        v-if="buyAds.length != 0"
       >
         <div class="title">
           <div class="row">
-            <div class="col-xs-12 text-right col-sm-4 pull-right">
-              <h1>درخواست های خرید</h1>
+            <div class="col-xs-12 text-rtl text-right col-sm-8 pull-right">
+              <h1>
+                درخواست های خرید
+                <button
+                  v-if="filterCategory"
+                  class="green-button remove-filter-button"
+                  @click.prevent="filterCategory = ''"
+                >
+                  <span class="text-red remove-filter-icon">
+                    <i class="fa fa-times"></i>
+                  </span>
+                  <span v-text=" 'دسته بندی : ' + filterCategory.category_name"></span>
+                </button>
+              </h1>
             </div>
             <div class="col-xs-12 col-sm-4 hidden-xs request-update pull-left text-left">
-              <button class="green-button bg-gray hover-effect">
+              <button
+                type="button"
+                @click.prevent="openCategoryModal()"
+                class="green-button bg-gray hover-effect"
+              >
                 <i class="fas fa-filter"></i>
                 دسته بندی ها
               </button>
             </div>
           </div>
         </div>
-        <div class="col-xs-12">
+        <div v-if="buyAds.length != 0" class="col-xs-12">
           <div class="row">
-            <ul class="list-unstyled">
+            <ul class="list-unstyled wrapper-items">
               <li v-for="(buyAd,index) in buyAds" :key="index" class="list-group-item col-xs-12">
                 <p class="list-title col-sm-3 col-xs-12">
                   <span v-text="buyAd.category_name"></span>
@@ -322,32 +364,18 @@
             </ul>
           </div>
         </div>
-      </section>
+        <div class="col-xs-12 wrapper-items" v-else-if="buyAds.length === 0 && !load">
+          <div class="wrapper_no_pro">
+            <div class="content_no_pic">
+              <i class="fa fa-list-alt"></i>
+            </div>
 
-      <section
-        class="main-content col-xs-12 loading_images"
-        v-else-if="buyAds.length === 0 && !load"
-      >
-        <div class="wrapper_no_pro">
-          <div class="content_no_pic">
-            <i class="fa fa-list-alt"></i>
-          </div>
-
-          <div class="text_no_pic">
-            <p>درخواست خرید مرتبط با شما وجود ندارد</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="main-content col-xs-12" v-if="load">
-        <div class="placeholder-title col-xs-12">
-          <div class="row">
-            <div class="col-xs-12 col-sm-4 text-right pull-right">
-              <h1 class="padding-15-0">درخواست های خرید</h1>
+            <div class="text_no_pic">
+              <p>درخواست خرید مرتبط با شما وجود ندارد</p>
             </div>
           </div>
         </div>
-        <div class="col-xs-12">
+        <div class="col-xs-12 wrapper-items" v-else-if="load">
           <div class="row">
             <ul class="list-unstyled">
               <li v-for="(item,index) in 5" :key="index" class="list-group-item col-xs-12">
@@ -401,9 +429,12 @@
 
 <script>
 import { eventBus } from "../../../../router/router";
-
+import CategoryFilter from "./category-filter";
 export default {
   props: ["storage"],
+  components: {
+    CategoryFilter
+  },
   data: function() {
     return {
       currentUser: {
@@ -411,6 +442,7 @@ export default {
         user_info: ""
       },
       buyAds: "",
+      allBuyAds: "",
       popUpMsg: "",
       load: false,
       textActive: false,
@@ -420,14 +452,16 @@ export default {
           url: "buyAdRequests"
         }
       ],
-      isRequests: true
+      isRequests: true,
+      categoryModal: false,
+      filterCategory: ""
     };
   },
   methods: {
     init: function() {
       this.load = true;
       var self = this;
-
+      this.filterBuyAdByCategory();
       axios.post("/user/profile_info").then(function(response) {
         self.currentUser = response.data;
       });
@@ -435,7 +469,9 @@ export default {
       axios
         .post("/get_related_buyAds_list_to_the_seller")
         .then(function(response) {
-          self.buyAds = response.data.buyAds;
+          self.allBuyAds = response.data.buyAds;
+          self.buyAds = self.allBuyAds;
+
           self.load = false;
           setTimeout(function() {
             $(".list-notice button").tooltip();
@@ -503,6 +539,24 @@ export default {
         event_category: categoryName,
         event_label: labelName
       });
+    },
+    openCategoryModal: function() {
+      this.categoryModal = true;
+      setTimeout(function() {
+        $("#fitler-modal").modal("show");
+      }, 200);
+    },
+    filterBuyAdByCategory: function() {
+      this.buyAds = "";
+      if (this.filterCategory.id) {
+        let filterBuyAd = this.allBuyAds;
+        filterBuyAd = filterBuyAd.filter(
+          buyAd => buyAd.category_id == this.filterCategory.id
+        );
+        this.buyAds = filterBuyAd;
+      } else {
+        this.buyAds = this.allBuyAds;
+      }
     }
   },
   mounted() {
@@ -511,6 +565,11 @@ export default {
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/buyAd-requests" });
+  },
+  watch: {
+    filterCategory: function() {
+      this.filterBuyAdByCategory();
+    }
   }
 };
 </script>
