@@ -262,8 +262,8 @@
           @click.prevent="openCategoryModal()"
           class="green-button bg-gray w-100 margin-0 hover-effect"
         >
-          <i class="fas fa-filter"></i>
           دسته بندی ها
+          <i class="fas fa-filter"></i>
         </button>
       </div>
     </div>
@@ -306,63 +306,57 @@
                 @click.prevent="openCategoryModal()"
                 class="green-button bg-gray hover-effect"
               >
-                <i class="fas fa-filter"></i>
                 دسته بندی ها
+                <i class="fas fa-filter"></i>
               </button>
             </div>
           </div>
         </div>
-        <div v-if="buyAds.length != 0" class="col-xs-12">
-          <div class="row">
-            <ul class="list-unstyled wrapper-items">
-              <li v-for="(buyAd,index) in buyAds" :key="index" class="list-group-item col-xs-12">
-                <p class="list-title col-sm-3 col-xs-12">
-                  <span v-text="buyAd.category_name"></span>
+        <div v-if="buyAds.length != 0">
+          <ul class="list-unstyled wrapper-items">
+            <li v-for="(buyAd,index) in buyAds" :key="index" class="list-group-item col-xs-12">
+              <p class="list-title col-sm-3 col-xs-12">
+                <span v-text="buyAd.category_name"></span>
 
-                  <span>|</span>
+                <span>|</span>
 
-                  <span v-text="buyAd.subcategory_name"></span>
+                <span v-text="buyAd.subcategory_name"></span>
 
-                  <span v-if="buyAd.name" v-text="' | ' + buyAd.name"></span>
-                </p>
+                <span v-if="buyAd.name" v-text="' | ' + buyAd.name"></span>
+              </p>
 
-                <p class="needs col-sm-3 col-xs-12">
-                  <span class="static-content">میزان نیازمندی :</span>
+              <p class="needs col-sm-3 col-xs-12">
+                <span class="static-content">میزان نیازمندی :</span>
 
-                  <span v-text="buyAd.requirement_amount"></span>
+                <span v-text="buyAd.requirement_amount"></span>
 
-                  <span class="static-content">کیلوگرم</span>
-                </p>
+                <span class="static-content">کیلوگرم</span>
+              </p>
 
-                <p class="list-time col-sm-2 col-xs-12" v-text="buyAd.register_date"></p>
-                <p class="list-notice col-sm-1 col-xs-12 pull-right">
-                  <button
-                    class="btn"
-                    type="button"
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title="ظرفیت باقی مانده برای ارسال پیام به خریدار این محصول"
-                  >
-                    <span>
-                      <i class="fas fa-comment-alt"></i>
-                      <i class="fas fa-exclamation"></i>
-                    </span>
-                    <span class="request-count red-text">{{buyAd.reply_capacity + '+'}}</span>
-                  </button>
-                </p>
-                <a
-                  class="col-sm-3 col-xs-12 pull-left"
-                  href
-                  @click.prevent="openChat(buyAd,$event)"
+              <p class="list-time col-sm-2 col-xs-12" v-text="buyAd.register_date"></p>
+              <p class="list-notice col-sm-1 col-xs-12 pull-right">
+                <button
+                  class="btn"
+                  type="button"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="ظرفیت باقی مانده برای ارسال پیام به خریدار این محصول"
                 >
-                  <p class="detail-success">
-                    <span class="fas fa-comment-alt"></span> پیام به خریدار
-                  </p>
-                  <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">کمی صبر کنید...</p>
-                </a>
-              </li>
-            </ul>
-          </div>
+                  <span>
+                    <i class="fas fa-comment-alt"></i>
+                    <i class="fas fa-exclamation"></i>
+                  </span>
+                  <span class="request-count red-text">{{buyAd.reply_capacity + '+'}}</span>
+                </button>
+              </p>
+              <a class="col-sm-3 col-xs-12 pull-left" href @click.prevent="openChat(buyAd,$event)">
+                <p class="detail-success">
+                  <span class="fas fa-comment-alt"></span> پیام به خریدار
+                </p>
+                <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">کمی صبر کنید...</p>
+              </a>
+            </li>
+          </ul>
         </div>
         <div class="col-xs-12 wrapper-items" v-else-if="buyAds.length === 0 && !load">
           <div class="wrapper_no_pro">
@@ -376,31 +370,29 @@
           </div>
         </div>
         <div class="col-xs-12 wrapper-items" v-else-if="load">
-          <div class="row">
-            <ul class="list-unstyled">
-              <li v-for="(item,index) in 5" :key="index" class="list-group-item col-xs-12">
-                <p class="default-list-title pull-right col-sm-9 hidden-xs margin-10-0">
-                  <span class="placeholder-content content-full-width h-20"></span>
-                </p>
+          <ul class="list-unstyled">
+            <li v-for="(item,index) in 5" :key="index" class="list-group-item col-xs-12">
+              <p class="default-list-title pull-right col-sm-9 hidden-xs margin-10-0">
+                <span class="placeholder-content content-full-width h-20"></span>
+              </p>
 
-                <p class="list-title col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm">
-                  <span class="placeholder-content content-half-width h-20 margin-auto"></span>
-                </p>
+              <p class="list-title col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm">
+                <span class="placeholder-content content-half-width h-20 margin-auto"></span>
+              </p>
 
-                <p class="needs col-sm-4 col-xs-12 hidden-md hidden-lg hidden-sm">
-                  <span class="placeholder-content content-default-width h-20 margin-auto"></span>
-                </p>
+              <p class="needs col-sm-4 col-xs-12 hidden-md hidden-lg hidden-sm">
+                <span class="placeholder-content content-default-width h-20 margin-auto"></span>
+              </p>
 
-                <p class="list-time col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm">
-                  <span class="placeholder-content content-min-width h-20 margin-auto"></span>
-                </p>
+              <p class="list-time col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm">
+                <span class="placeholder-content content-min-width h-20 margin-auto"></span>
+              </p>
 
-                <p class="col-sm-3 col-xs-12">
-                  <span class="placeholder-content default-button-full-with margin-10-auto"></span>
-                </p>
-              </li>
-            </ul>
-          </div>
+              <p class="col-sm-3 col-xs-12">
+                <span class="placeholder-content default-button-full-with margin-10-auto"></span>
+              </p>
+            </li>
+          </ul>
         </div>
       </section>
     </div>
@@ -548,6 +540,7 @@ export default {
     },
     filterBuyAdByCategory: function() {
       this.buyAds = "";
+      this.isRequests = true;
       if (this.filterCategory.id) {
         let filterBuyAd = this.allBuyAds;
         filterBuyAd = filterBuyAd.filter(

@@ -857,13 +857,13 @@ end filter modal styles
       <div class="rate-filter-mobile-wrapper">
         <div class="rate-filter">
           <button class="green-button bg-gray" @click.prevent="openSortModal()">
-            مرتب سازی
             <i class="fas fa-sort-amount-down-alt"></i>
+            مرتب سازی
           </button>
         </div>
         <button class="btn-filter hidden-lg" @click.prevent="openFilterModal()">
-          دسته ها و فیلتر
           <i class="fa fa-filter"></i>
+          دسته ها و فیلتر
         </button>
       </div>
     </div>
@@ -894,8 +894,8 @@ end filter modal styles
                 </li>
               </ul>
               <button class="btn-filter hidden-lg" data-toggle="modal" data-target="#searchFilter">
-                دسته ها و فیلتر
                 <i class="fa fa-filter"></i>
+                دسته ها و فیلتر
               </button>
             </div>
           </section>
