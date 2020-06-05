@@ -55,6 +55,14 @@ class message_controller extends Controller
     protected function is_sender_valid($sender_user_id)
     {
         if ($sender_user_id == session('user_id')) {
+            $is_blocked = myuser::find($sender_user_id)->is_blocked;
+
+            if($is_blocked == true){
+                session()->flush();
+
+                return false;
+            }
+
             return true;
         }
 
@@ -188,6 +196,16 @@ class message_controller extends Controller
         ]);
 
         $user_id = session('user_id');
+
+        //check block status
+        $block_status = DB::table('myusers')
+                        ->where('id',$user_id)
+                        ->first()
+                        ->is_blocked;
+
+        if($block_status == true){
+            return redirect('/logout');
+        }
 
         $contacts_id = $this->get_contacts_id_array($user_id);
 

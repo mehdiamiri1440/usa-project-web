@@ -634,10 +634,9 @@ export default {
       ? this.product.main.description.split("<hr/>").join("")
       : "";
 
-    let canonicalLink =
-      window.location.host +
-      "/product-list/category/" +
-      productSubCategory.split(" ").join("-");
+    let pageUrl = this.getProductUrl();
+    let canonicalLink = window.location.host + pageUrl;
+        
     //
     return {
       title:
@@ -699,8 +698,8 @@ export default {
             " " +
             productOwnerFullName
         }
-      ]
-      //   link: [{ rel: "canonical", href: canonicalLink }],
+      ],
+        link: [{ rel: "canonical", href: canonicalLink }],
     };
   }
 };

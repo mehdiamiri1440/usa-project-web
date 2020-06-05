@@ -10,6 +10,7 @@ use App\Jobs\SendReminderSMSToSellers;
 use App\Jobs\CheckElevatorExpiry;
 use App\Jobs\SendUpgradeAccoutnSMSToSellers;
 use App\Jobs\CacheProductList;
+use App\Jobs\AnomalyDetectors\MessagingAnomalyDetection;
 use DB;
 
 class Kernel extends ConsoleKernel
@@ -65,6 +66,11 @@ class Kernel extends ConsoleKernel
 
         $schedule->job($cache_product_list_job)
                 ->everyFiveMinutes();
+
+        $messenger_anomaly_detector_job = new MessagingAnomalyDetection();
+
+        $schedule->job($messenger_anomaly_detector_job)
+                    ->hourlyAt('45');
     }
 
     /**

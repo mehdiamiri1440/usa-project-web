@@ -163,6 +163,8 @@
 			                @click.prevent="getPhoneNumber()"
 			                :disabled="!$parent.step1.sendCode"
 			                >
+						<span v-if="$parent.verifyCodeBtnLoading" class="fas fa-circle-notch fa-spin"></span>
+						
 			        	ارسال کد تایید
 					</button>
 

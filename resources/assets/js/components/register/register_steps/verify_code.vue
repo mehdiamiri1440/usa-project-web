@@ -281,6 +281,8 @@
 			        <button class="submit-button disabled "
 			        :class="{'active' : currentCode.length == 4}"
 			        @click.prevent="getVerificationCode()" >
+						<span v-if="$parent.verifyCodeBtnLoading" class="fas fa-circle-notch fa-spin"></span>
+						
 			        	بررسی کد
 					</button>
 
