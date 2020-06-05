@@ -42,6 +42,13 @@ class user_controller extends Controller
 
 
         if ($user) {
+            if($user->is_blocked == true){
+                return response()->json([
+                    'status' => false,
+                    'msg' => 'حساب کاربری شما مسدود شده است. برای پیگیری با پشتیبانی باسکول تماس بگیرید.'
+                ],200);
+            }
+
             $user_confirmed_profile_record_status = $this->does_user_have_confirmed_profile_record($user->id);
 
             $this->set_user_session($user);

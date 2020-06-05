@@ -108,7 +108,7 @@ class MessagingAnomalyDetection implements ShouldQueue
         $userIds = [];
 
         $messages = DB::table('messages')
-                        ->whereBetween('created_at',[Carbon::now()->subDays(3),Carbon::now()])
+                        ->whereBetween('created_at',[Carbon::now()->subDays(1),Carbon::now()])
                         ->get();
 
         $msg_senders = array_unique(array_column($messages->toArray(),'sender_id'));

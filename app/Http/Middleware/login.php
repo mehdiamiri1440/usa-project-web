@@ -64,6 +64,9 @@ class login
                                 ->first();
 
         if($user_info){
+            if($user_info->is_blocked == true){
+                return false;
+            }
 
             $user_profile_record = profile::where('myuser_id',$user_info->id)
                 ->select('profile_photo')

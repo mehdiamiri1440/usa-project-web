@@ -757,6 +757,11 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
         'uses' => 'admin_panel\AnomalyDetector\messaging_anomaly_controller@load_messaging_anomaly',
         'as'   => 'admin_panel_load_messaging_anomaly'
     ]);
+
+    Route::post('/block-operator',[
+        'uses' => 'admin_panel\AnomalyDetector\messaging_anomaly_controller@block_operator',
+        'as'  => 'admin_panel_block_operator'
+    ]);
 });
 
 //Route::any('/payment_callback',[

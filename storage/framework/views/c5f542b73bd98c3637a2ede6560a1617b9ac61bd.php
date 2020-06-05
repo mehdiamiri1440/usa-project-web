@@ -83,7 +83,12 @@
                             <div class="panel-body">
                                         <p class="text text-danger">شماره تماس :‌ <?php echo e($user->phone); ?></p>
                                         <p class="text text-danger">زمان ثبت نام :‌ <?php echo e($user->created_at); ?></p>
-                                        <a class="text" href="<?php echo e('/profile/'. $user->user_name); ?>" target="_blank">مشاهده پروفایل</p>
+                                        <a class="text" href="<?php echo e('/profile/'. $user->user_name); ?>" target="_blank">مشاهده پروفایل</a>
+                                        <?php if($user->is_blocked == false): ?>
+                                            <button class="btn btn-danger" id="<?php echo e($user->id); ?>" onclick="block_user(event)">مسدود کردن حساب کاربر</button>
+                                        <?php else: ?>
+                                            <button class="btn btn-success" id="<?php echo e($user->id); ?>" onclick="unblock_user(event)">خارج کردن از بلاک</button>
+                                        <?php endif; ?>
                             </div>
                             </div>
                         </div>
@@ -111,7 +116,13 @@
                             <div class="panel-body">
                                         <p class="text text-danger">شماره تماس ارسال کننده :‌ <?php echo e($msg->sender_phone); ?></p>
                                         <p class="text text-danger">زمان ارسال :‌ <?php echo e($msg->created_at); ?></p>
+                                        <?php if($msg->sender_blocked == false): ?>
+                                            <button class="btn btn-danger" id="<?php echo e($msg->sender_id); ?>" onclick="block_user(event)">مسدود کردن حساب کاربر</button>
+                                        <?php else: ?>
+                                            <button class="btn btn-success" id="<?php echo e($msg->sender_id); ?>" onclick="unblock_user(event)">خارج کردن از بلاک</button>
+                                        <?php endif; ?>
                                         <p class="text text-right"><?php echo e($msg->text); ?></p>
+                                        
                             </div>
                             </div>
                         </div>
@@ -151,6 +162,58 @@
 <script src="<?php echo e(asset('admin-panel/dist/js/demo.js')); ?>"></script>
 <!-- page script -->
 <script>
+    
+    function block_user(event)
+    {
+        event.preventDefault();
+        var e = event.currentTarget;
+
+        var user_id = $(e).attr('id');
+
+        $.ajax({
+            url:"<?php echo e(route('admin_panel_block_operator')); ?>",
+            data:{
+                user_id:user_id,
+                block:1
+            },
+            type:"POST",
+            datatype:'json'
+        })
+        .done(function(json){
+            alert(json.msg); 
+            window.location.reload();          
+        })
+        .fail(function(xhr,status,errorThrown){
+
+        });   
+    }
+
+    function unblock_user(event)
+    {
+        event.preventDefault();
+        var e = event.currentTarget;
+
+        var user_id = $(e).attr('id');
+
+        $.ajax({
+            url:"<?php echo e(route('admin_panel_block_operator')); ?>",
+            data:{
+                user_id:user_id,
+                block:0
+            },
+            type:"POST",
+            datatype:'json'
+        })
+        .done(function(json){
+            alert(json.msg); 
+            window.location.reload();          
+        })
+        .fail(function(xhr,status,errorThrown){
+
+        });   
+    }
+
+</script>
  
 <?php $__env->stopSection(); ?>
 

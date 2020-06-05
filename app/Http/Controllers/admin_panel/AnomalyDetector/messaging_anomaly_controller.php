@@ -14,7 +14,7 @@ class messaging_anomaly_controller extends Controller
         'detect_links_anomaly',
         'detect_copy_paste',
     ];
-    protected $contacts_max = 15;
+    protected $contacts_max = 10;
 
     public function load_messaging_anomaly(Request $request)
     {
@@ -31,6 +31,7 @@ class messaging_anomaly_controller extends Controller
                             'myusers.first_name as sender_first_name',
                             'myusers.last_name as sender_last_name',
                             'myusers.created_at as sender_created_at',
+                            'myusers.is_blocked as sender_blocked',
                             'users.id as receiver_id',
                             'users.phone as receiver_phone',
                             'users.first_name as receiver_first_name',
@@ -149,5 +150,27 @@ class messaging_anomaly_controller extends Controller
         });
 
         return count(array_unique($contact_id_array));
+    }
+
+    public function block_operator(Request $request)
+    {
+        $this->validate($request,[
+            'block' => 'required|boolean',
+            'user_id' => 'required|exists:myusers,id'
+        ]);
+
+        $block_status = $request->block;
+        $user_id = $request->user_id;
+
+        DB::table('myusers')
+            ->where('id',$user_id)
+            ->update([
+                'is_blocked' => $block_status
+            ]);
+
+        return response()->json([
+            'status' => true,
+            'msg' => $block_status == true ? 'حساب کاربری معلق شد' : 'حساب کاربری باز یابی شد'
+        ],200);
     }
 }

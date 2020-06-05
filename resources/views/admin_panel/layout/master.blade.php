@@ -113,7 +113,7 @@
             <a href="{{route('load_users_unconfirmed_comments')}}"><i class="fa fa-envelope"></i><span>کامنت های تایید نشده</span></a>      
         </li>
         <li class="{{Request::is('admin/suspicious-messages-list') ? 'active':''}}">
-            <a href="{{route('load_users_unconfirmed_comments')}}"><i class="fa fa-envelope"></i><span>آنومالی در پیام ها</span></a>      
+            <a href="{{route('admin_panel_load_messaging_anomaly')}}"><i class="fa fa-envelope"></i><span>آنومالی در پیام ها</span></a>      
         </li>
         <!-- <li class="{{Request::is('admin/sell-offers') || Request::is('admin/sell-offer-detail/*') ? 'active':''}}">
             <a href="{{route('admin_panel_sell_offer_list')}}"><i class="fa fa-envelope"></i><span>پیشنهادات فروش</span></a>     
