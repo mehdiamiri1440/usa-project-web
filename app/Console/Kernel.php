@@ -70,7 +70,7 @@ class Kernel extends ConsoleKernel
         $messenger_anomaly_detector_job = new MessagingAnomalyDetection();
 
         $schedule->job($messenger_anomaly_detector_job)
-                    ->hourlyAt('45');
+                    ->everyFifteenMinutes();
     }
 
     /**
