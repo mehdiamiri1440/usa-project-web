@@ -369,7 +369,6 @@ import myContactList from "./messages-components/my-contact-list";
 import MainChatWrapper from "./messages-components/main-chat-wrapper";
 
 export default {
-  props: ["loading_img"],
   components: {
     myContactList,
     MainChatWrapper
@@ -398,7 +397,6 @@ export default {
       isContactListLoaded: false,
       isCurrentStep: 0,
       assets: this.$parent.assets,
-      defultImg: this.$parent.defultimg,
       str: this.$parent.str,
       fromContact: 0,
       toContact: 15,
@@ -650,22 +648,19 @@ export default {
       eventBus.$emit("reoprtModal", reportedUserId);
     },
     activeReviewModal: function() {
-      var userImage = "";
+      let userImage = "";
+
+      let selectedUserData = {
+        id: this.selectedContact.contact_id,
+        name:
+          this.selectedContact.first_name + " " + this.selectedContact.last_name
+      };
 
       if (this.selectedContact.profile_photo) {
         userImage = this.str + "/" + this.selectedContact.profile_photo;
-      } else {
-        userImage = this.defultImg;
+        selectedUserData.img = userImage;
       }
 
-      var selectedUserData = {
-        id: this.selectedContact.contact_id,
-        name:
-          this.selectedContact.first_name +
-          " " +
-          this.selectedContact.last_name,
-        img: userImage
-      };
       eventBus.$emit("reviewUserData", selectedUserData);
     },
     isUserAuthorizedToPostComment: function() {

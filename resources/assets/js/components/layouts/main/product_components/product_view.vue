@@ -246,7 +246,7 @@ span {
         :user-profile-photo="
           product.profile_info.profile_photo
             ? str + '/' + product.profile_info.profile_photo
-            : defultimg
+            : assets + 'assets/img/user-defult.png'
         "
       />
 
@@ -283,7 +283,7 @@ export default {
     ProductCarousel,
     registerInquerForm
   },
-  props: ["str", "defultimg", "loading_img", "userType"],
+  props: ["str", "assets", "userType"],
   data: function() {
     return {
       currentUser: {
@@ -634,10 +634,9 @@ export default {
       ? this.product.main.description.split("<hr/>").join("")
       : "";
 
-    let canonicalLink =
-      window.location.host +
-      "/product-list/category/" +
-      productSubCategory.split(" ").join("-");
+    let pageUrl = this.getProductUrl();
+    let canonicalLink = window.location.host + pageUrl;
+        
     //
     return {
       title:
@@ -699,8 +698,8 @@ export default {
             " " +
             productOwnerFullName
         }
-      ]
-      //   link: [{ rel: "canonical", href: canonicalLink }],
+      ],
+        link: [{ rel: "canonical", href: canonicalLink }],
     };
   }
 };

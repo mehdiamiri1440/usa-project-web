@@ -118,31 +118,24 @@
     <div class="search-not-found">
       <div class="main-content-wrapper">
         <div class="main-content-icon">
-          <img
-            :src="$parent.assets + 'assets/img/search-not-found.svg'"
-            alt=""
-          />
+          <img src="../../../../../img/search-not-found.svg" alt />
         </div>
         <div class="contents">
-          <p class="header-content">
-            متاسفانه نتیجه‌ای پیدا نشد.
-          </p>
+          <p class="header-content">متاسفانه نتیجه‌ای پیدا نشد.</p>
           <p class="text-content">
             <span class="red-text">آیا قصد خرید عمده دارید؟</span>
             همین حالا درخواست خرید ثبت کنید.
           </p>
-          <button class="green-button" type="button" @click="openBuyAdRequestPage()">
-            ثبت درخواست خرید
-          </button>
+          <button
+            class="green-button"
+            type="button"
+            @click="openBuyAdRequestPage()"
+          >ثبت درخواست خرید</button>
         </div>
       </div>
 
       <div class="categories-content-wrapper">
-        <div
-          class="category-item"
-          v-for="(category, index) in categories"
-          :key="index"
-        >
+        <div class="category-item" v-for="(category, index) in categories" :key="index">
           <div class="title-section col-xs-12">
             <p class="category-title" v-text="category.category_name"></p>
             <hr />
@@ -154,11 +147,7 @@
               :key="catIndex"
               class="list-item col-xs-4 col-sm-3 col-md-2 pull-right"
             >
-              <router-link
-                :to="getSubCategoryUrl(subCategory)"
-                v-text="subCategory.category_name"
-              >
-              </router-link>
+              <router-link :to="getSubCategoryUrl(subCategory)" v-text="subCategory.category_name"></router-link>
             </li>
           </ul>
         </div>
@@ -169,34 +158,34 @@
 
 <script>
 export default {
-  data: function () {
+  data: function() {
     return {
-      categories: "",
+      categories: ""
     };
   },
   methods: {
-    init: function () {
+    init: function() {
       let self = this;
 
       axios
         .post("/get_category_list", {
-          cascade_list: true,
+          cascade_list: true
         })
-        .then(function (response) {
+        .then(function(response) {
           self.categories = response.data.categories;
         });
     },
-    getSubCategoryUrl: function (t) {
+    getSubCategoryUrl: function(t) {
       let url =
         "/product-list/category/" + t.category_name.split(" ").join("-");
       return url;
     },
-    openBuyAdRequestPage: function(){
-      this.$router.push({name: 'mainRegisterRequest'});
+    openBuyAdRequestPage: function() {
+      this.$router.push({ name: "mainRegisterRequest" });
     }
   },
-  mounted: function () {
+  mounted: function() {
     this.init();
-  },
+  }
 };
 </script>

@@ -498,7 +498,7 @@
             UserAccount,
             ActivityDomain
         },
-        props: ["site_logo", "isUserLogin", "userType"],
+        props: ["isUserLogin", "userType"],
         data: function () {
             return {
                 isImageLoad: false,
@@ -552,7 +552,8 @@
                 errorFlag: false,
                 userNameUnique: true,
                 nationalCodeUnique: true,
-                popUpMsg: ""
+                popUpMsg: "",
+                verifyCodeBtnLoading: false,
             };
         },
         methods: {
@@ -632,6 +633,8 @@
                 }
             },
             send_verification_code: function () {
+                this.verifyCodeBtnLoading = true;
+
                 this.step2.reSendCode = false;
                 this.step1.sendCode = false;
 
@@ -645,6 +648,8 @@
                         phone: this.toLatinNumbers(this.step1.phone)
                     })
                     .then(function (response) {
+                        self.verifyCodeBtnLoading = false;
+
                         self.goToStep(2);
                         self.step1.sendCode = true;
 
@@ -662,6 +667,8 @@
                         );
                     })
                     .catch(function (err) {
+                        self.verifyCodeBtnLoading = false;
+
                         self.errors.phone = err.response.data.errors.phone;
 
                         self.step1.sendCode = true;
@@ -675,13 +682,17 @@
             },
             verify_code: function () {
                 var self = this;
-                
+
+                self.verifyCodeBtnLoading = true;
+
                 axios
                     .post("/verify_code", {
                         verification_code: this.toLatinNumbers(this.step2.verification_code),
                         phone : this.toLatinNumbers(this.step1.phone)
                     })
                     .then(function (response) {
+                        self.verifyCodeBtnLoading = false;
+
                         if (response.data.status === true) {
                             if(response.data.redirected){ // it's very tricky condition, be careful
                                 window.location.href = '/login';
@@ -704,6 +715,8 @@
                         }
                     })
                     .catch(function (error) {
+                        self.verifyCodeBtnLoading = false;
+                        
                         self.goToStep(2);
                         self.errors.verification_code = [];
                         self.errors.verification_code.push("وارد کردن کد الزامی است.");

@@ -221,7 +221,7 @@ li.add-group-button-wrapper {
         <li class="contact-item" v-for="(group, index) in $parent.groupList" :key="index">
           <a href="#" @click.prevent="$parent.loadGroupChatHistory(group, index)">
             <div class="contact-image">
-              <img
+              <!-- <img
                 v-if="group.photo"
                 :src="$parent.assets + 'assets/img/group-images/'+ group.photo"
                 :alt="'گروه ' + group.name"
@@ -230,7 +230,7 @@ li.add-group-button-wrapper {
                 v-else
                 :src="$parent.assets + 'assets/img/group-images/group-category.jpg'"
                 :alt="'گروه ' + group.name"
-              />
+              />-->
             </div>
             <span class="contact-name" v-text="'گروه ' + group.name"></span>
             <!-- <div class="my-contact-date">

@@ -640,7 +640,7 @@ a.profile-info-wrapper:hover {
     <!-- loading -->
     <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
       <div class="main-loader">
-        <img :src="loading" />
+        <img src="../../../../img/gif/prload.gif" />
         <p dir="rtl">در حال بارگذاری...</p>
       </div>
     </div>
@@ -704,7 +704,7 @@ a.profile-info-wrapper:hover {
       </div>
     </div>
 
-    <div class="container">
+    <!-- <div class="container">
       <div
         id="DownloadApp"
         class="modal fade"
@@ -720,7 +720,7 @@ a.profile-info-wrapper:hover {
           <div class="main_popup_content">
             <div>
               <div class="main-logo-popup">
-                <img :src="buskoolicon" alt />
+                <img src="../../../../img/logo/mobile-logo-white.svg" alt />
                 <p class="title">باسکول</p>
               </div>
 
@@ -737,9 +737,9 @@ a.profile-info-wrapper:hover {
             </div>
           </div>
         </div>
-        <!-- /.modal-dialog -->
+        //.modal-dialog
       </div>
-    </div>
+    </div>-->
 
     <div class="container">
       <div
@@ -801,7 +801,7 @@ a.profile-info-wrapper:hover {
         <div class="buskool-logo navbar-header navbar-right">
           <router-link class="navbar-brand" :to="{name : 'indexPage'}">
             <img
-              :src="assets + 'assets/img/logo_dark.png'"
+              src="../../../../img/logo/web-logo.svg"
               alt="باسکول | بازارگاه آنلاین دنیای کشاورزی"
             />
           </router-link>
@@ -822,7 +822,7 @@ a.profile-info-wrapper:hover {
                     :src="storage_path + '/' + profile_photo"
                     :alt="user_full_name"
                   />
-                  <img v-else :src="user_default_image" :alt="user_full_name" />
+                  <img v-else src="../../../../img/user-defult.png" :alt="user_full_name" />
                 </div>
                 <div class="profile-information">
                   <span class="hidden-xs" v-text="user_full_name"></span>
@@ -1108,17 +1108,13 @@ export default {
   },
   props: [
     "assets",
-    "buskoolicon",
     "user_id",
     "is_seller",
-    "user_default_image",
     "profile_photo",
     "user_full_name",
     "user_logout_path",
     "storage_path",
-    "login_page_path",
-    "loading",
-    "finish_load_img"
+    "login_page_path"
   ],
   methods: {
     // jQuery

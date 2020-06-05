@@ -32,10 +32,7 @@ body,
 
 .logo img {
   width: 100px;
-}
-
-.logo a p {
-  margin-top: -6px;
+  padding: 9px 0 4px;
 }
 
 .right-header {
@@ -439,12 +436,13 @@ span.min {
       </div>
     </div>
 
-    <!--    <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
-                <div class="main-loader">
-                    <img :src="loading">
-                    <p dir="rtl">در حال بارگذاری...</p>
-                </div>
+    <!-- <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
+      <div class="main-loader">
+        <img src="../../../../../img/gif/prload.gif" />
+        <p dir="rtl">در حال بارگذاری...</p>
+      </div>
     </div>-->
+
     <!--end loader-->
 
     <section class="right-header mobile-header">
@@ -459,7 +457,7 @@ span.min {
 
         <span class="logo">
           <router-link :to="{name : 'indexPage'}">
-            <img :src="logo" alt="incoboc" />
+            <img src="../../../../../img/logo/web-logo-white.svg" alt="buskool" />
             <p>بازارگاه آنلاین کشاورزی</p>
           </router-link>
         </span>
@@ -470,7 +468,6 @@ span.min {
           :isLoading="isLoading"
           :photoLink="currentUser.profile.profile_photo"
           :storage="storage"
-          :def="defultimg"
           :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
           :usercity="currentUser.user_info.province + ' - ' + currentUser.user_info.city"
           :userprof="currentUser.user_info.user_name"
@@ -495,7 +492,7 @@ span.min {
 
         <span class="logo">
           <router-link :to="{name : 'indexPage'}">
-            <img :src="logo" alt="incoboc" />
+            <img src="../../../../../img/logo/web-logo-white.svg" alt="buskool" />
             <p>بازارگاه آنلاین کشاورزی</p>
           </router-link>
         </span>
@@ -506,7 +503,6 @@ span.min {
           :isLoading="isLoading"
           :photoLink="currentUser.profile.profile_photo"
           :storage="storage"
-          :def="defultimg"
           :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
           :usercity="currentUser.user_info.province + ' - ' + currentUser.user_info.city"
           :userprof="currentUser.user_info.user_name"
@@ -525,7 +521,6 @@ span.min {
       :isLoading="isLoading"
       :photoLink="currentUser.profile.profile_photo"
       :storage="storage"
-      :def="defultimg"
       :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
       :out="logout"
       :menuClosed="menuClosed"
@@ -547,15 +542,7 @@ export default {
     HeaderTop,
     SwitchButtons
   },
-  props: [
-   "defultimg",
-   "logo",
-   "loading",
-   "storage",
-   "logout",
-   "userId",
-   "searchText"
-   ],
+  props: ["storage", "logout", "userId", "searchText"],
   data: function() {
     return {
       menuClosed: false,
@@ -591,8 +578,8 @@ export default {
       deleteButtonText: "",
       cancelButtonText: "",
       ProductId: "",
-      searchValueText:"",
-      resetTextSearch:false
+      searchValueText: "",
+      resetTextSearch: false
     };
   },
   methods: {
@@ -916,16 +903,15 @@ export default {
     eventBus.$on("resetTextSearch", event => {
       this.resetTextSearch = event;
     });
-
   },
-  watch:{
-    'searchValueText':function(value){
+  watch: {
+    searchValueText: function(value) {
       this.resetTextSearch = false;
       this.$parent.searchText = value;
     },
-    'resetTextSearch':function(value){
+    resetTextSearch: function(value) {
       if (value == true) {
-          this.searchValueText = "";
+        this.searchValueText = "";
       }
     }
   },

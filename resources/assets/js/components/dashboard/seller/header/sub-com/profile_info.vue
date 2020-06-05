@@ -1,90 +1,82 @@
 <style scoped>
-  .profile {
+.profile {
+  padding: 10px 15px 15px;
+  text-align: center;
+}
 
-    padding: 10px 15px 15px;
-    text-align: center;
+.little_header .profile {
+  display: none;
+}
 
-  }
+.profile-img {
+  overflow: hidden;
 
-  .little_header .profile {
+  border-radius: 50%;
 
-    display: none;
+  height: 55px;
 
-  }
+  width: 55px;
 
-  .profile-img {
+  margin: 0 auto;
 
-    overflow: hidden;
+  border: 2px solid #fff;
 
-    border-radius: 50%;
+  float: right;
+}
 
-    height: 55px;
+.dark-profile-img {
+  overflow: hidden;
+  border-radius: 50%;
+  height: 85px;
+  width: 85px;
+  margin: 0 auto;
+  margin-left: 10px;
+  border: 2px solid #5b5c5d;
+  float: right;
+}
+.profile-img img {
+  height: 100%;
+}
 
-    width: 55px;
+.profile-content {
+  width: calc(100% - 55px);
 
-    margin: 0 auto;
+  float: right;
 
-    border: 2px solid #fff;
+  text-align: right;
 
-    float: right;
+  padding-right: 10px;
+}
 
-  }
+.profile-name {
+  margin: 8px 0;
+  font-size: 17px;
+}
 
-  .dark-profile-img {
-    overflow: hidden;
-    border-radius: 50%;
-    height: 85px;
-    width: 85px;
-    margin: 0 auto;
-    margin-left: 10px;
-    border: 2px solid #5B5C5D;
-    float: right;
-  }
-  .profile-img img {
-    height: 100%;
-  }
+.profile-city {
+  font-size: 14px;
+  font-weight: 200;
+}
 
-  .profile-content {
+.profile-city {
+  font-size: 14px;
+  font-weight: 200;
+}
 
-    width: calc(100% - 55px);
-
-    float: right;
-
-    text-align: right;
-
-    padding-right: 10px;
-
-  }
-
-  .profile-name {
-    margin: 8px 0;
-    font-size: 17px;
-  }
-
-  .profile-city {
-    font-size: 14px;
-    font-weight: 200;
-  }
-
-  .profile-city {
-    font-size: 14px;
-    font-weight: 200;
-  }
-
-  .loading-height {
-    height: 10px !important;
-    width: 100px;
-  }
-  .button-loading {
-    height: 33px !important;
-    width: 150px;
-    background-color: #dfdfe0;
-  }
-  .button-loading:hover {
-    height: 33px !important;
-    width: 150px;
-    background-color: #dfdfe0 !important;
-  }
+.loading-height {
+  height: 10px !important;
+  width: 100px;
+}
+.button-loading {
+  height: 33px !important;
+  width: 150px;
+  background-color: #dfdfe0;
+}
+.button-loading:hover {
+  height: 33px !important;
+  width: 150px;
+  background-color: #dfdfe0 !important;
+}
 </style>
 <template>
   <div>
@@ -95,7 +87,7 @@
         </div>
 
         <div class="profile-img" v-else>
-          <img :src="def" />
+          <img src="../../../../../../img/user-defult.png" />
         </div>
 
         <div class="profile-content">
@@ -125,15 +117,14 @@
 </template>
 
 <script>
-    export default {
-        props: [
-            "photoLink",
-            "storage",
-            "def",
-            "username",
-            "usercity",
-            "isLoading",
-            "userprof"
-        ]
-    };
+export default {
+  props: [
+    "photoLink",
+    "storage",
+    "username",
+    "usercity",
+    "isLoading",
+    "userprof"
+  ]
+};
 </script>

@@ -50,13 +50,7 @@
   <div>
     <!-- Chat Join Modals -->
     <div class="container">
-      <div
-        id="join-to-group"
-        class="modal fade"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="myLargeModalLabel"
-      >
+      <div id="join-to-group" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="main_popup_content">
@@ -670,14 +664,15 @@ export default {
         }
       });
     },
-    raiseDeleteUserCommentModal: function(){
+    raiseDeleteUserCommentModal: function() {
       let self = this;
 
       this.handleBackBtn();
 
       swal({
         title: "حذف نظر",
-        text: "تعداد نظرات حذف شده توسط شما به کاربران نمایش داده خواهد شد. آیا می خواهید این نظر را حذف کنید؟",
+        text:
+          "تعداد نظرات حذف شده توسط شما به کاربران نمایش داده خواهد شد. آیا می خواهید این نظر را حذف کنید؟",
         className: "custom-swal-with-cancel",
         icon: "warning",
         buttons: {

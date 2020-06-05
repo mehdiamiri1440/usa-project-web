@@ -5,6 +5,7 @@ window.Vue = require("vue");
 
 Vue.use(Router);
 
+
 // Errors Components
 import notFound from "../components/errors/404";
 

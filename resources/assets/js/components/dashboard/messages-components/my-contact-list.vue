@@ -212,7 +212,7 @@
                 :alt="contact.first_name[0]"
               />
 
-              <img v-else :src="$parent.defultImg" />
+              <img v-else src="../../../../img/user-defult.png" />
             </div>
             <div class="my-contact-info-wrapper">
               <span class="contact-name" v-text="contact.first_name + ' ' + contact.last_name"></span>
@@ -234,7 +234,7 @@
           </a>
         </li>
         <li v-if="$parent.showLoadMoreBtn && !$parent.contactNameSearchText" class="contact-item">
-            <button class="btn load-more" @click.prevent="$parent.loadMoreContacts()">ادامه مخاطبین</button>
+          <button class="btn load-more" @click.prevent="$parent.loadMoreContacts()">ادامه مخاطبین</button>
         </li>
       </ul>
     </div>

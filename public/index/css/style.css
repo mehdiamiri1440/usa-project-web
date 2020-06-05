@@ -284,13 +284,6 @@ footer {
         box-shadow: 0 2px 8px 0 rgba(50, 50, 50, 0.04);
         padding: 0;
     }
-
-    .test {
-        background-image: url(../images/logo_dark.png);
-        background-repeat: no-repeat;
-        background-size: 180px 75px;
-        border-left: 10px;
-    }
 }
 
 @media ( max-width: 768px) {
@@ -320,16 +313,6 @@ footer {
         background: #ffffff;
         box-shadow: 0 2px 8px 0 rgba(50, 50, 50, 0.04);
         padding: 0;
-    }
-
-    .test {
-        background-image: url(../images/logo_dark.png);
-        background-repeat: no-repeat;
-        background-size: 200px 75px;
-        background-position: center;
-        /*        background-color:aqua;*/
-        /*        margin-right: 15%;*/
-        margin-right: 18%;
     }
 }
 
@@ -686,54 +669,6 @@ footer {
     text-align: center;
     vertical-align: middle;
     margin-left: 12px;
-}
-
-/*---------------------------------------
-    Video section
------------------------------------------*/
-
-#video {
-    background: url('../images/feature-img1.jpg') 50% 0 repeat-y fixed;
-    -webkit-background-size: cover;
-    background-size: cover;
-    background-position: center center;
-    position: relative;
-    color: #999;
-}
-
-#video .overlay {
-    background: rgba(03, 03, 03, 0.7);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-}
-
-#video h2 {
-    color: #ffffff;
-    padding-top: 20px;
-    padding-bottom: 16px;
-}
-
-#video .fa {
-    position: relative;
-    background-color: #00c569;
-    border-radius: 100%;
-    color: #ffffff;
-    font-size: 38px;
-    width: 80px;
-    height: 80px;
-    line-height: 80px;
-    text-align: center;
-    vertical-align: middle;
-    padding-left: 12px;
-    margin-top: 22px;
-}
-
-#video p {
-    font-size: 20px;
-
-    line-height: 32px;
 }
 
 /*---------------------------------------

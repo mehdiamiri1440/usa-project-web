@@ -399,7 +399,7 @@ a.profile-info-wrapper:focus {
             >
               <div class="profile-image-wrapper">
                 <img v-if="photoLink" :src="storage + '/' + photoLink" />
-                <img v-else :src="def" />
+                <img v-else src="../../../../../../img/user-defult.png" />
               </div>
 
               <div class="profile-information">
@@ -500,7 +500,6 @@ export default {
     "menuClosed",
     "photoLink",
     "storage",
-    "def",
     "username",
     "out",
     "routeHome",

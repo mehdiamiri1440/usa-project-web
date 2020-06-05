@@ -260,6 +260,18 @@
   background: #eee;
   transition: 200ms;
 }
+
+.new-badge {
+  position: absolute;
+  right: -16px;
+  background: #e51c38;
+  border-radius: 50px;
+  font-size: 12px;
+  color: #fff;
+  top: -8px;
+  line-height: 1;
+  padding: 4px 2px;
+}
 @media screen and (max-width: 767px) {
   #chat-menu-items {
     left: 54px;
@@ -287,7 +299,7 @@
             :alt="$parent.selectedContact.first_name[0]"
           />
 
-          <img v-else :src="$parent.defultImg" />
+          <img v-else src="../../../../img/user-defult.png" />
         </div>
 
         <router-link :to="{ path: '/profile/' + $parent.selectedContact.user_name }">
@@ -311,6 +323,7 @@
             role="button"
           >
             <i class="fa fa-ellipsis-h"></i>
+            <i class="new-badge">جدید</i>
           </button>
           <button
             @click.prevent="$parent.selectedContact = !$parent.selectedContact"

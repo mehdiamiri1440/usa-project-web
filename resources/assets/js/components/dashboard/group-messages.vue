@@ -344,7 +344,7 @@ import MainChatWrapper from "./group-messages-components/group-main-chat-wrapper
 import GroupList from "./group-messages-components/group-list";
 
 export default {
-  props: ["defultimg", "str", "loading_img", "getUserId"],
+  props: ["str", "getUserId"],
   components: {
     MyGroupList,
     MainChatWrapper,

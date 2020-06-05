@@ -180,7 +180,7 @@ p.response-rate {
           </div>
 
           <div class="user-image" v-else>
-            <img :src="defultimg" class="image_defult" />
+            <img src="../../../../../../img/user-defult.png" class="image_defult" />
           </div>
         </div>
 
@@ -257,7 +257,6 @@ export default {
     "user_info",
     "user_full_name",
     "user_name",
-    "defultimg",
     "current_user",
     "product_id",
     "is_my_profile_status"

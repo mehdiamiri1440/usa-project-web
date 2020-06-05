@@ -81,36 +81,49 @@
   padding: 8px 30px;
 }
 .title {
-  text-align: right;
-  padding: 13px 15px;
-}
-
-.title h1 {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.fix-request-header-box {
-  background: #f5f5f5;
+  background: #f6f6f6;
   position: fixed;
   right: 250px;
   left: 0;
   z-index: 1;
   border-radius: 0;
+  padding: 13px 15px;
+}
+
+.placeholder-title h1,
+.title h1 {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.9;
+}
+.fix-request-header-box {
+  background: #eff3f6;
+  position: fixed;
+  right: 250px;
+  left: 0;
+  z-index: 2;
+  border-radius: 0;
   padding: 10px 0;
 }
 
-.fix-request-header-box > p {
-  display: inline-block;
+.fix-request-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  background: #fff;
+  border-radius: 0;
+  padding: 10px 0;
+}
+.request-update button {
+  margin: 0;
+  padding: 3px 14px;
+  margin-right: 6px;
 }
 
-.fix-request-header-box > button {
-  margin: 0 5px 0 0;
-  padding: 1px 18px 3px;
-  max-width: 100px;
-}
-
-#main.little-main .fix-request-header-box {
+#main.little-main .fix-request-header-box,
+#main.little-main .title {
   right: 80px;
 }
 
@@ -123,18 +136,6 @@
   margin-bottom: 15px;
   line-height: 25px;
   font-size: 30px;
-}
-
-.red-button {
-  background: #e41c38;
-  color: #fff;
-  margin: 15px 0;
-  display: inline-block;
-  padding: 10px 35px;
-  border-radius: 3px;
-  text-align: center;
-  border: none;
-  transition: 300ms;
 }
 .list-notice {
   text-align: right;
@@ -177,35 +178,50 @@
   top: 7px;
 }
 
-.hide-reply{
+.hide-reply {
   display: none;
 }
 
+.wrapper-items {
+  padding-top: 60px;
+}
+.remove-filter-button {
+  background: #fff;
+  border-radius: 50px;
+  border: 1px solid #e41c39;
+  color: #777;
+  margin: 0;
+  padding: 2px 15px;
+  margin-right: 10px;
+}
+.remove-filter-icon {
+  position: relative;
+  top: 2px;
+  right: -6px;
+}
 @media screen and (max-width: 992px) {
   .default-list-title {
-    padding: 4px 0;
+    padding: 4px 15px;
   }
 
   .fix-request-header-box,
-  #main.little-main .fix-request-header-box {
+  .title {
     right: 0;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .main-content {
+  .main-content,
+  .wrapper-items {
     padding: 0;
   }
-
-  .green-button {
-    width: 100%;
+  .requests .main-content {
+    padding-bottom: 100px;
   }
-
-  .red-button {
-    width: 100%;
-  }
-
   .title {
+    position: relative;
+  }
+  .title h1 {
     text-align: center;
   }
 
@@ -238,123 +254,145 @@
 </style>
 <template>
   <div>
+    <category-filter v-if="categoryModal" />
+    <div class="fix-request-bottom hidden-sm hidden-md hidden-lg shadow-content text-center">
+      <div class="col-xs-12 text-right">
+        <button
+          type="button"
+          @click.prevent="openCategoryModal()"
+          class="green-button bg-gray w-100 margin-0 hover-effect"
+        >
+          دسته بندی ها
+          <i class="fas fa-filter"></i>
+        </button>
+      </div>
+    </div>
     <div class="requests" v-show="isRequests">
       <div
         v-if="currentUser.user_info.active_pakage_type == 0"
-        class="fix-request-header-box shadow-content text-center text-rtl"
+        class="fix-request-header-box request-update shadow-content text-center text-rtl"
       >
-        <p>این درخواست ها کمی قدیمی است</p>
-        <button class="red-button" @click="isRequests = !isRequests">بروز رسانی</button>
+        <span>این درخواست ها کمی قدیمی است</span>
+        <button
+          class="green-button bg-red hover-effect"
+          @click="isRequests = !isRequests"
+        >بروز رسانی</button>
       </div>
-      <section class="main-content col-xs-12" v-if="buyAds.length != 0">
-        <div class="title col-xs-12">
-          <div class="row">
-            <div class="col-xs-12 col-sm-4 pull-right">
-              <h1>درخواست های خرید</h1>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12">
-          <div class="row">
-            <ul class="list-unstyled">
-              <li v-for="buyAd in buyAds" class="list-group-item col-xs-12">
-                <p class="list-title col-sm-3 col-xs-12">
-                  <span v-text="buyAd.category_name"></span>
-
-                  <span>|</span>
-
-                  <span v-text="buyAd.subcategory_name"></span>
-
-                  <span v-if="buyAd.name" v-text="' | ' + buyAd.name"></span>
-                </p>
-
-                <p class="needs col-sm-3 col-xs-12">
-                  <span class="static-content">میزان نیازمندی :</span>
-
-                  <span v-text="buyAd.requirement_amount"></span>
-
-                  <span class="static-content">کیلوگرم</span>
-                </p>
-
-                <p class="list-time col-sm-2 col-xs-12" v-text="buyAd.register_date"></p>
-                <p class="list-notice col-sm-1 col-xs-12 pull-right">
-                  <button
-                    class="btn"
-                    type="button"
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title="ظرفیت باقی مانده برای ارسال پیام به خریدار این محصول"
-                  >
-                    <span>
-                      <i class="fas fa-comment-alt"></i>
-                      <i class="fas fa-exclamation"></i>
-                    </span>
-                    <span class="request-count red-text">{{buyAd.reply_capacity + '+'}}</span>
-                  </button>
-                </p>
-                <a class="col-sm-3 col-xs-12 pull-left" href @click.prevent="openChat(buyAd,$event)">
-                  <p class="detail-success">
-                    <span class="fas fa-comment-alt"></span> پیام به خریدار
-                  </p>
-                  <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
-                    کمی صبر کنید...
-                  </p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
 
       <section
-        class="main-content col-xs-12 loading_images"
-        v-else-if="buyAds.length === 0 && !load"
+        class="main-content col-xs-12"
+        :class="{'padding-0-15' : currentUser.user_info.active_pakage_type != 0}"
       >
-        <div class="wrapper_no_pro">
-          <div class="content_no_pic">
-            <i class="fa fa-list-alt"></i>
-          </div>
-
-          <div class="text_no_pic">
-            <p>درخواست خرید مرتبط با شما وجود ندارد</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="main-content col-xs-12" v-if="load">
-        <div class="title col-xs-12">
+        <div class="title">
           <div class="row">
-            <div class="col-xs-12 col-sm-4 pull-right">
-              <h1>درخواست ها</h1>
+            <div class="col-xs-12 text-rtl text-right col-sm-8 pull-right">
+              <h1>
+                درخواست های خرید
+                <button
+                  v-if="filterCategory"
+                  class="green-button remove-filter-button"
+                  @click.prevent="filterCategory = ''"
+                >
+                  <span class="text-red remove-filter-icon">
+                    <i class="fa fa-times"></i>
+                  </span>
+                  <span v-text=" 'دسته بندی : ' + filterCategory.category_name"></span>
+                </button>
+              </h1>
+            </div>
+            <div class="col-xs-12 col-sm-4 hidden-xs request-update pull-left text-left">
+              <button
+                type="button"
+                @click.prevent="openCategoryModal()"
+                class="green-button bg-gray hover-effect"
+              >
+                دسته بندی ها
+                <i class="fas fa-filter"></i>
+              </button>
             </div>
           </div>
         </div>
-        <div class="col-xs-12">
-          <div class="row">
-            <ul class="list-unstyled">
-              <li v-for="item in 5" class="list-group-item col-xs-12">
-                <p class="default-list-title pull-right col-sm-9 hidden-xs margin-10-0">
-                  <span class="placeholder-content content-full-width h-20"></span>
-                </p>
+        <div v-if="buyAds.length != 0">
+          <ul class="list-unstyled wrapper-items">
+            <li v-for="(buyAd,index) in buyAds" :key="index" class="list-group-item col-xs-12">
+              <p class="list-title col-sm-3 col-xs-12">
+                <span v-text="buyAd.category_name"></span>
 
-                <p class="list-title col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm">
-                  <span class="placeholder-content content-half-width h-20 margin-auto"></span>
-                </p>
+                <span>|</span>
 
-                <p class="needs col-sm-4 col-xs-12 hidden-md hidden-lg hidden-sm">
-                  <span class="placeholder-content content-default-width h-20 margin-auto"></span>
-                </p>
+                <span v-text="buyAd.subcategory_name"></span>
 
-                <p class="list-time col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm">
-                  <span class="placeholder-content content-min-width h-20 margin-auto"></span>
-                </p>
+                <span v-if="buyAd.name" v-text="' | ' + buyAd.name"></span>
+              </p>
 
-                <p class="col-sm-3 col-xs-12">
-                  <span class="placeholder-content default-button-full-with margin-10-auto"></span>
+              <p class="needs col-sm-3 col-xs-12">
+                <span class="static-content">میزان نیازمندی :</span>
+
+                <span v-text="buyAd.requirement_amount"></span>
+
+                <span class="static-content">کیلوگرم</span>
+              </p>
+
+              <p class="list-time col-sm-2 col-xs-12" v-text="buyAd.register_date"></p>
+              <p class="list-notice col-sm-1 col-xs-12 pull-right">
+                <button
+                  class="btn"
+                  type="button"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="ظرفیت باقی مانده برای ارسال پیام به خریدار این محصول"
+                >
+                  <span>
+                    <i class="fas fa-comment-alt"></i>
+                    <i class="fas fa-exclamation"></i>
+                  </span>
+                  <span class="request-count red-text">{{buyAd.reply_capacity + '+'}}</span>
+                </button>
+              </p>
+              <a class="col-sm-3 col-xs-12 pull-left" href @click.prevent="openChat(buyAd,$event)">
+                <p class="detail-success">
+                  <span class="fas fa-comment-alt"></span> پیام به خریدار
                 </p>
-              </li>
-            </ul>
+                <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">کمی صبر کنید...</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-xs-12 wrapper-items" v-else-if="buyAds.length === 0 && !load">
+          <div class="wrapper_no_pro">
+            <div class="content_no_pic">
+              <i class="fa fa-list-alt"></i>
+            </div>
+
+            <div class="text_no_pic">
+              <p>درخواست خرید مرتبط با شما وجود ندارد</p>
+            </div>
           </div>
+        </div>
+        <div class="col-xs-12 wrapper-items" v-else-if="load">
+          <ul class="list-unstyled">
+            <li v-for="(item,index) in 5" :key="index" class="list-group-item col-xs-12">
+              <p class="default-list-title pull-right col-sm-9 hidden-xs margin-10-0">
+                <span class="placeholder-content content-full-width h-20"></span>
+              </p>
+
+              <p class="list-title col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm">
+                <span class="placeholder-content content-half-width h-20 margin-auto"></span>
+              </p>
+
+              <p class="needs col-sm-4 col-xs-12 hidden-md hidden-lg hidden-sm">
+                <span class="placeholder-content content-default-width h-20 margin-auto"></span>
+              </p>
+
+              <p class="list-time col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm">
+                <span class="placeholder-content content-min-width h-20 margin-auto"></span>
+              </p>
+
+              <p class="col-sm-3 col-xs-12">
+                <span class="placeholder-content default-button-full-with margin-10-auto"></span>
+              </p>
+            </li>
+          </ul>
         </div>
       </section>
     </div>
@@ -383,9 +421,12 @@
 
 <script>
 import { eventBus } from "../../../../router/router";
-
+import CategoryFilter from "./category-filter";
 export default {
-  props: ["loading_img", "storage", "defultimg"],
+  props: ["storage"],
+  components: {
+    CategoryFilter
+  },
   data: function() {
     return {
       currentUser: {
@@ -393,6 +434,7 @@ export default {
         user_info: ""
       },
       buyAds: "",
+      allBuyAds: "",
       popUpMsg: "",
       load: false,
       textActive: false,
@@ -402,14 +444,16 @@ export default {
           url: "buyAdRequests"
         }
       ],
-      isRequests: true
+      isRequests: true,
+      categoryModal: false,
+      filterCategory: ""
     };
   },
   methods: {
     init: function() {
       this.load = true;
       var self = this;
-
+      this.filterBuyAdByCategory();
       axios.post("/user/profile_info").then(function(response) {
         self.currentUser = response.data;
       });
@@ -417,34 +461,36 @@ export default {
       axios
         .post("/get_related_buyAds_list_to_the_seller")
         .then(function(response) {
-          self.buyAds = response.data.buyAds;
+          self.allBuyAds = response.data.buyAds;
+          self.buyAds = self.allBuyAds;
+
           self.load = false;
           setTimeout(function() {
             $(".list-notice button").tooltip();
           }, 100);
         });
     },
-    openChat: function(buyAd,event) {
+    openChat: function(buyAd, event) {
       var self = this;
 
-      let id = '#loader-' + buyAd.id;
-      self.hideReplyBtn(event,id);
+      let id = "#loader-" + buyAd.id;
+      self.hideReplyBtn(event, id);
 
-      axios.post('/get_user_permission_for_buyAd_reply',{
-          buy_ad_id : buyAd.id
-      }).then(function(response){
-        
-          self.showReplyBtn(event,id);
+      axios
+        .post("/get_user_permission_for_buyAd_reply", {
+          buy_ad_id: buyAd.id
+        })
+        .then(function(response) {
+          self.showReplyBtn(event, id);
 
-          if(response.data.permission == true){
-                
+          if (response.data.permission == true) {
             var contact = {
               contact_id: buyAd.myuser_id,
               first_name: buyAd.first_name,
               last_name: buyAd.last_name,
               profile_photo: null,
               user_name: buyAd.user_name,
-              buyAd_id : buyAd.id
+              buyAd_id: buyAd.id
             };
 
             eventBus.$emit("ChatInfo", contact);
@@ -454,33 +500,36 @@ export default {
               "openChat",
               "click on open chatBox"
             );
-               
-          }
-          else{
-            eventBus.$emit('modal', 'buyAdReplyLimit');
+          } else {
+            eventBus.$emit("modal", "buyAdReplyLimit");
             self.registerComponentStatistics(
               "buyAdReply",
               "openChat",
               "permission denied"
             );
           }
-      });
+        });
     },
-    hideReplyBtn:function(e,id){
-      return new Promise((resolve,reject) => {
+    hideReplyBtn: function(e, id) {
+      return new Promise((resolve, reject) => {
         $(e.target).hide();
         resolve(true);
-      }).then(()=>{
+      }).then(() => {
         $(id).show();
       });
     },
-    showReplyBtn:function(e,id){
-      return new Promise((resolve,reject) => {
+    showReplyBtn: function(e, id) {
+      return new Promise((resolve, reject) => {
         $(id).hide();
         resolve(true);
-      }).then(()=>{
+      }).then(() => {
         $(e.target).show();
       });
+    },
+    getNumberWithCommas: function(number) {
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
     },
     registerComponentStatistics: function(categoryName, actionName, labelName) {
       gtag("event", actionName, {
@@ -488,6 +537,28 @@ export default {
         event_label: labelName
       });
     },
+    openCategoryModal: function() {
+      this.categoryModal = true;
+      setTimeout(function() {
+        $("#fitler-modal").modal("show");
+      }, 200);
+    },
+    filterBuyAdByCategory: function() {
+      this.buyAds = "";
+      this.isRequests = true;
+      if (this.filterCategory.id) {
+        let filterBuyAd = this.allBuyAds;
+        filterBuyAd = filterBuyAd.filter(
+          buyAd => buyAd.category_id == this.filterCategory.id
+        );
+        this.buyAds = filterBuyAd;
+      } else {
+        this.buyAds = this.allBuyAds;
+      }
+      setTimeout(function() {
+        $(".list-notice button").tooltip();
+      }, 100);
+    }
   },
   mounted() {
     this.init();
@@ -495,6 +566,11 @@ export default {
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/buyAd-requests" });
+  },
+  watch: {
+    filterCategory: function() {
+      this.filterBuyAdByCategory();
+    }
   }
 };
 </script>

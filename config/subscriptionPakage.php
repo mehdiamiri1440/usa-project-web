@@ -62,7 +62,7 @@ return [
         'show-profile-link-in-blog' => true,
         'pakage-duration-in-months' => 12,
         'buyAd-count' => 2000,
-        'buyAd-reply-count' => 15,
+        'buyAd-reply-count' => 30,
         'elevetor-count' => 1,
         'price' => 6890000
     ],

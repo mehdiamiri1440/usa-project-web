@@ -414,12 +414,12 @@ label {
             <li>
               <span class="gray-text">مقدار موجودی</span>
 
-              <span v-text="$parent.product.main.stock + ' کیلوگرم '"></span>
+              <span v-text="getNumberWithCommas($parent.product.main.stock) + ' کیلوگرم '"></span>
             </li>
             <li>
               <span class="gray-text">حداقل سفارش</span>
 
-              <span v-text="$parent.product.main.min_sale_amount + ' کیلوگرم '"></span>
+              <span v-text="getNumberWithCommas($parent.product.main.min_sale_amount) + ' کیلوگرم '"></span>
             </li>
             <li v-if="!$parent.isMyProfile">
               <span class="gray-text">قیمت</span>
@@ -487,6 +487,13 @@ import Carousel from "./carousel";
 export default {
   components: {
     Carousel
+  },
+  methods:{
+	  getNumberWithCommas:function(number){
+		if (number || typeof number === "number")
+			return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		else return "";
+	}
   }
 };
 </script>

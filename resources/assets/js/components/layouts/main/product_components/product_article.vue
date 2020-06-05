@@ -399,7 +399,6 @@ label {
       :user_full_name="product.user_info.first_name + ' ' +
             product.user_info.last_name"
       :user_name="product.user_info.user_name"
-      :defultimg="defultimg"
       :current_user="currentUser"
       :product_id="product.main.id"
       :is_my_profile_status="isMyProfile"
@@ -460,15 +459,7 @@ export default {
     ProductUserInfo,
     ArticleMainContents
   },
-  props: [
-    "productIndex",
-    "product",
-    "defultimg",
-    "str",
-    "loading",
-    "loading_img",
-    "currentUser"
-  ],
+  props: ["productIndex", "product", "str", "currentUser"],
   data: function() {
     return {
       submiting: false,
@@ -580,8 +571,8 @@ export default {
         .post("/edit_product", request)
         .then(function(response) {
           $(".modal").modal("hide");
-          
-          eventBus.$emit('modal', 'productEditDone');
+
+          eventBus.$emit("modal", "productEditDone");
 
           self.registerComponentStatistics(
             "product",
@@ -606,7 +597,8 @@ export default {
         "click on open chatBox"
       );
 
-      let productName = product.main.sub_category_name + ' ' + product.main.product_name;
+      let productName =
+        product.main.sub_category_name + " " + product.main.product_name;
 
       var contact = {
         contact_id: product.user_info.id,
@@ -614,7 +606,7 @@ export default {
         last_name: product.user_info.last_name,
         profile_photo: product.profile_info.profile_photo,
         user_name: product.user_info.user_name,
-        product_name: productName,
+        product_name: productName
       };
 
       var self = this;
@@ -633,7 +625,7 @@ export default {
       } else {
         window.localStorage.setItem("contact", JSON.stringify(contact));
 
-        this.$router.push({name : 'registerInquiry'});
+        this.$router.push({ name: "registerInquiry" });
         // eventBus.$emit('modal','sendMsg');
       }
     },
@@ -760,7 +752,7 @@ export default {
       // );
 
       eventBus.$emit("productId", this.product.main.id);
-      eventBus.$emit('modal', 'elevator');
+      eventBus.$emit("modal", "elevator");
       // $("#elevator-modal").modal("show");
     }
   },
