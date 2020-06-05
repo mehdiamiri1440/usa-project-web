@@ -557,6 +557,9 @@ export default {
       } else {
         this.buyAds = this.allBuyAds;
       }
+      setTimeout(function() {
+        $(".list-notice button").tooltip();
+      }, 100);
     }
   },
   mounted() {

@@ -1,7 +1,7 @@
 <style scoped>
 .form-check-wrapper {
   direction: rtl;
-  max-height: 700px;
+  max-height: 600px;
   overflow: auto;
 }
 
@@ -62,6 +62,12 @@
 
 .loading-list {
   padding: 90px 0 130px;
+}
+
+@media screen and (max-width: 767px) {
+  .form-check-wrapper {
+    max-height: 100%;
+  }
 }
 </style>
 
