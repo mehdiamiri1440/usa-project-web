@@ -56,22 +56,43 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            
+            <form method="post" action="{{route('admin_panel_load_user_messages')}}">
+                     <div class="row">
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label>شماره تلفن به انگلیسی</label>
+                                </div>
+                                <div class="col-xs-12">
+                                    <input class="form-control" type="text" name="phone" placeholder="شماره تلفن">
+                                    @if($errors->has('phone'))
+                                        <p class="text text-red">{{$errors->phone}}</p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <br/>
+                            <button type="submit" class="btn btn-primary">مشاهده پیام ها</button>
+                        </div>    
+                    </div>
+                    <br/>
+                </form> 
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
 
              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                 @isset($abnormal_messages)
-                    <p>پیام های مشکوک</p>
+                 @isset($messages)
+                    <p class="text">مخاطبین {{$user_record->first_name.' '.$user_record->last_name}} {{$user_record->is_seller ? 'فروشنده' : 'خریدار' }}</p>  
                     
-                    @foreach($abnormal_messages as $msg)
+                    @foreach($messages as $msg)
                         <div class="panel panel-default">
                             <div class="panel-heading" role="tab" id="{{$msg['contact_info']->contact_id}}">
                             <h4 class="panel-title">
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="{{'#collapse' . $msg['contact_info']->contact_id}}" aria-expanded="false" aria-controls="{{'collapse' . $msg['contact_info']->contact_id}}">
-                                    {{$msg->sender_first_name}}
+                                    {{$msg['contact_info']->first_name . ' ' . $msg['contact_info']->last_name}}
                                 </a>
                                 <div class="row">
                                     <div class="col-xs-12">
@@ -80,7 +101,7 @@
                                 </div>
                             </h4>
                             </div>
-                            <!-- <div id="{{'collapse' . $msg['contact_info']->contact_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{$msg['contact_info']->contact_id}}">
+                            <div id="{{'collapse' . $msg['contact_info']->contact_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{$msg['contact_info']->contact_id}}">
                             <div class="panel-body">
                                 @foreach($msg['messages'] as $msgItem)
                                     @if($msgItem->sender_id == $user_record->id)
@@ -92,7 +113,7 @@
                                     @endif
                                 @endforeach
                             </div>
-                            </div> -->
+                            </div>
                         </div>
                     @endforeach
                 @endisset
