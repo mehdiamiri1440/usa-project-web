@@ -1049,7 +1049,7 @@ export default {
       bottom: false,
       loadMoreActive: false,
       searchTextTimeout: null,
-      sortOption: "BM"
+      sortOption: this.$abtest("split-test") == "A" ? "BM" : "RR"
     };
   },
   methods: {
@@ -1102,7 +1102,7 @@ export default {
 
           self.fromProductCount = 0;
           self.productCountInPage = 10;
-
+          console.log(self.sortOption);
           axios
             .post("/user/get_product_list", {
               from_record_number: self.fromProductCount,
@@ -1138,6 +1138,8 @@ export default {
         this.loadMoreActive = true;
         this.fromProductCount = this.productCountInPage;
         this.productCountInPage += this.productCountInEachLoad;
+        console.log(self.sortOption);
+
         axios
           .post("/user/get_product_list", {
             from_record_number: self.fromProductCount,

@@ -224,14 +224,28 @@
           class="main-section-wrapper"
           :class="{'main-section-wrapper-full-width' : currentStep == 4 || currentStep == 7}"
         >
-          <StartRegisterProduct v-show="currentStep == 0" />
-          <ProductCategory v-show="currentStep == 1" />
-          <StockAndPrice v-show="currentStep == 2" />
-          <Location v-show="currentStep == 3" />
-          <ProductImage v-show="currentStep == 4" />
-          <Terms v-show="currentStep == 5" />
-          <MoreDetails v-show="currentStep == 6" />
-          <FinishStage v-show="currentStep == 7" />
+          <split-test name="split-test">
+            <template slot="B">
+              <StartRegisterProduct v-show="currentStep == 1" />
+              <ProductCategory v-show="currentStep == 0" />
+              <StockAndPrice v-show="currentStep == 2" />
+              <Location v-show="currentStep == 3" />
+              <ProductImage v-show="currentStep == 4" />
+              <Terms v-show="currentStep == 5" />
+              <MoreDetails v-show="currentStep == 6" />
+              <FinishStage v-show="currentStep == 7" />
+            </template>
+            <template slot="A">
+              <StartRegisterProduct v-show="currentStep == 0" />
+              <ProductCategory v-show="currentStep == 1" />
+              <StockAndPrice v-show="currentStep == 2" />
+              <Location v-show="currentStep == 3" />
+              <ProductImage v-show="currentStep == 4" />
+              <Terms v-show="currentStep == 5" />
+              <MoreDetails v-show="currentStep == 6" />
+              <FinishStage v-show="currentStep == 7" />
+            </template>
+          </split-test>
         </main>
       </div>
     </section>
@@ -359,7 +373,7 @@ export default {
             eventBus.$emit("modal", "registerProductLimit");
           } else {
             eventBus.$emit("buyAdbuttonActive", false);
-            self.goToStep(1);
+            self.goToStep(++self.currentStep);
           }
         });
     },
@@ -373,7 +387,7 @@ export default {
         !this.errors.category_id &&
         !this.errors.product_name
       ) {
-        this.goToStep(2);
+        this.goToStep(++this.currentStep);
       }
     },
     stockAndPriceSubmited() {

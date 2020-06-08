@@ -278,18 +278,21 @@ select.error:focus {
 
       <div class="col-xs-12">
         <div class="text-center">
-          <div class="event-text">
-            <strong>همین حالا محصول خود را ثبت کنید</strong>
-          </div>
-
-          <button
-            v-if="!$parent.isStartLoading"
-            class="submit-button active"
-            @click.prevent="$parent.startRegisterProductSubmited()"
-          >ثبت محصول</button>
-          <div v-else class="loading-submit">
-            <img src="../../../../../../img/gif/loading.gif" />
-          </div>
+          <split-test name="split-test-x">
+            <div class="event-text">
+              <strong>همین حالا محصول خود را ثبت کنید</strong>
+            </div>
+          </split-test>
+          <split-test name="split-test">
+            <button
+              v-if="!$parent.isStartLoading"
+              class="submit-button active"
+              @click.prevent="$parent.startRegisterProductSubmited()"
+            >ثبت محصول</button>
+            <div v-else class="loading-submit">
+              <img src="../../../../../../img/gif/loading.gif" />
+            </div>
+          </split-test>
         </div>
       </div>
     </div>

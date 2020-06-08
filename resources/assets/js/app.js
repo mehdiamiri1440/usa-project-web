@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Axios from 'axios'
 import Meta from 'vue-meta'
 import store from './store'
+import VueAB from 'vue-a2b'
 
 require('./bootstrap');
 require('./imageuploadify.min');
@@ -35,7 +36,12 @@ Vue.prototype.$http = Axios;
 Vue.config.productionTip = false;
 Vue.use(require('vue-jalali-moment'));
 Vue.use(Meta);
-
+Vue.use(VueAB, {
+    storage: {
+        method: 'cookie',
+        //expiry: 7 // one week until the cookie expires
+    }
+});
 
 import RouteComponent from './router/components/route';
 

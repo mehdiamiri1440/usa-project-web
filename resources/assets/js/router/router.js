@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
+import { abtest } from 'vue-a2b'
 
 window.Vue = require("vue");
 
@@ -302,7 +303,7 @@ const router = new Router({
           name: "productList",
           components: {
             default: (resolve) => {
-              require(["../components/layouts/main/product_list.vue"], resolve);
+              abtest("split-test") == "A" ? require(["../components/layouts/main/product_list.vue"], resolve) : require(["../components/layouts/main/contact_us.vue"], resolve);
             },
           },
           props: true,

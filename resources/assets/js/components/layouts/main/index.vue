@@ -828,7 +828,7 @@ li > ul > li.active > ul > li {
   }
 
   .category-item i::before {
-    position: relative;
+    position: ;
     right: 1px;
     top: 4px;
   }

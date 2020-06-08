@@ -92,6 +92,7 @@
     "sweetalert": "^2.1.2",
     "vendor": "^1.7.0",
     "vue": "^2.5.17",
+    "vue-a2b": "^0.2.2",
     "vue-cropperjs": "^3.0.0",
     "vue-jalali-moment": "^1.0.0",
     "vue-meta": "^1.6.0",
