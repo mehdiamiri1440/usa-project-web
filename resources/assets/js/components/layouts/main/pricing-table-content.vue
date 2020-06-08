@@ -525,14 +525,15 @@ hr {
       </div>
 
       <div class="users-review-carousel-wrapper pricing-content col-xs-12">
-        <div class="title-section">کاربران دارای عضویت ویژه</div>
+        <div class="title-section">تعدادی از فروشندگان ویژه ی باسکول</div>
         <div class="owl-carousel">
           <pricing-user-carousel
             v-for="(userItem,index) in $parent.activeUsers"
             :key="index"
-            :img="userItem.img"
-            :title="userItem.name"
-            :city="userItem.city"
+            parent-class=".users-review-carousel-wrapper.pricing-content .owl-carousel"
+            :img="userItem.profile_photo ? userItem.profile_photo : ''"
+            :title="userItem.first_name + ' ' + userItem.last_name"
+            :city="userItem.province + ' - ' + userItem.city "
           />
         </div>
       </div>
@@ -776,7 +777,6 @@ export default {
             self.statusData = response.data;
           }
         });
-      this.runOwlCarousel();
     },
     collapseControl: function(link) {
       var $myGroup = $(".item-content");
@@ -797,50 +797,6 @@ export default {
       gtag("event", actionName, {
         event_category: categoryName,
         event_label: labelName
-      });
-    },
-    runOwlCarousel: function() {
-      $(".pricing-content .owl-carousel").owlCarousel({
-        autoplayTimeout: 3000,
-        autoplay: true,
-        loop: false,
-        rewind: true,
-        nav: true,
-        navText: [
-          '<span class="fa fa-angle-left"></span>',
-          '<span class="fa fa-angle-right"></span>'
-        ],
-        mouseDrag: true,
-        margin: 30,
-        dots: true,
-        stagePadding: 15,
-        rtl: true,
-        responsive: {
-          0: {
-            items: 1,
-            stagePadding: 15,
-            navText: false,
-            dots: true
-          },
-          400: {
-            items: 2,
-            stagePadding: 15,
-            navText: false,
-            dots: true
-          },
-          600: {
-            items: 3,
-            stagePadding: 15
-          },
-          992: {
-            items: 4,
-            stagePadding: 15
-          },
-          1199: {
-            items: 5,
-            stagePadding: 15
-          }
-        }
       });
     }
   },

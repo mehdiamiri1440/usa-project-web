@@ -272,7 +272,8 @@ hr {
     text-align: center;
     padding: 15px 50px;
     float: left;
-    width: 100%;
+    width: calc(100% - 100px);
+    padding: 0;
   }
 
   .header-icon-wrapper i::after {
@@ -291,10 +292,6 @@ hr {
 
   .header-title {
     margin-bottom: 0;
-  }
-
-  .header-wrapper {
-    padding: 0;
   }
 
   .item-title,
@@ -383,19 +380,79 @@ hr {
         </div>
       </div>
 
+      <div class="main-content-wrapper col-xs-12 hidden-sm hidden-md hidden-lg">
+        <div class="pull-left col-xs-12 col-sm-6 col-lg-4">
+          <div class="item-wrapper pro-version wrapper-background">
+            <div class="item-header">
+              <span class="special-badge">ویژه</span>
+              <div class="item-title">عضویت ویژه سالانه</div>
+
+              <div class="detail-wrapper">
+                <div class="item-price text-rtl">
+                  <span class="item-price-content">689,000</span>
+                  <span class="item-currency">تومان</span>
+                </div>
+
+                <!--   <div class="item-date">
+                                           <span class="hidden-sm hidden-md hidden-lg">/</span>سالانه
+                </div>-->
+              </div>
+            </div>
+
+            <hr />
+
+            <div class="item-content">
+              <ul class="item-content-list">
+                <li v-for="(item, index) in priceItemPro">
+                  <a
+                    data-toggle="collapse"
+                    :href="'#content-item-pro-' + index"
+                    @click.prevent="collapseControl($event)"
+                    class="item-help"
+                    :title="item.helpDescription"
+                  >
+                    <i class="fa fa-question-circle"></i>
+
+                    <div class="item-help-content collapse" :id="'content-item-pro-' + index">
+                      <span v-text="item.helpDescription"></span>
+                    </div>
+                  </a>
+
+                  <p class="item-content-title" v-text="item.title"></p>
+
+                  <p class="item-content-amount" v-html="item.contentUnit"></p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="item-action">
+              <p v-if="statusData.active_pakage_type == 3" class="text-green">در حال استفاده</p>
+
+              <button
+                v-else-if="statusData.active_pakage_type > 3"
+                class="green-button btn-disabled"
+                disabled
+              >ارتقاء عضویت</button>
+
+              <a v-else href @click.prevent="doPayment(3)" class="green-button">ارتقاء عضویت</a>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="users-review-carousel-wrapper col-xs-12">
-        <div class="title-section">کاربران دارای عضویت ویژه</div>
+        <div class="title-section">تعدادی از اعضای ویژه در باسکول</div>
         <div class="owl-carousel">
           <pricing-user-carousel
             v-for="(userItem,index) in $parent.activeUsers"
             :key="index"
-            :img="userItem.img"
-            :title="userItem.name"
-            :city="userItem.city"
+            parent-class=".users-review-carousel-wrapper .owl-carousel"
+            :img="userItem.profile_photo ? $parent.str + '/' + userItem.profile_photo : ''"
+            :title="userItem.first_name + ' ' + userItem.last_name"
+            :city="userItem.province + ' - ' + userItem.city "
           />
         </div>
       </div>
-      <div class="main-content-wrapper col-xs-12">
+      <div class="main-content-wrapper col-xs-12 hidden-xs">
         <div class="pull-left col-xs-12 col-sm-6 col-lg-4">
           <div class="item-wrapper pro-version wrapper-background">
             <div class="item-header">
@@ -768,7 +825,6 @@ export default {
             self.statusData = response.data;
           }
         });
-      this.runOwlCarousel();
     },
     collapseControl: function(link) {
       var $myGroup = $(".item-content");
@@ -789,50 +845,6 @@ export default {
       gtag("event", actionName, {
         event_category: categoryName,
         event_label: labelName
-      });
-    },
-    runOwlCarousel: function() {
-      $(".users-review-carousel-wrapper .owl-carousel").owlCarousel({
-        autoplayTimeout: 3000,
-        autoplay: true,
-        loop: false,
-        rewind: true,
-        nav: true,
-        navText: [
-          '<span class="fa fa-angle-left"></span>',
-          '<span class="fa fa-angle-right"></span>'
-        ],
-        mouseDrag: true,
-        margin: 30,
-        dots: true,
-        stagePadding: 15,
-        rtl: true,
-        responsive: {
-          0: {
-            items: 1,
-            stagePadding: 15,
-            navText: false,
-            dots: true
-          },
-          400: {
-            items: 2,
-            stagePadding: 15,
-            navText: false,
-            dots: true
-          },
-          600: {
-            items: 3,
-            stagePadding: 15
-          },
-          992: {
-            items: 4,
-            stagePadding: 15
-          },
-          1199: {
-            items: 5,
-            stagePadding: 15
-          }
-        }
       });
     }
   },

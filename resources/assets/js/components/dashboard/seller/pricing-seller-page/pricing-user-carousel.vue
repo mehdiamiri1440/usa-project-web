@@ -138,18 +138,16 @@
 <template>
   <article class="carousel-item box-content">
     <div class="carousel-img">
-      <div v-if="isImageLoad && img">
-        <transition>
+      <div v-show="isImageLoad ">
+        <transition v-if="img">
           <img @load="ImageLoaded" :src="img" class="main-image" />
         </transition>
-      </div>
-      <div v-else-if=" !img">
-        <transition>
+        <transition v-else>
           <img @load="ImageLoaded" src="../../../../../img/user-defult.png" />
         </transition>
       </div>
 
-      <div v-else-if="!isImageLoad" class="lds-ring">
+      <div v-show="!isImageLoad" class="lds-ring">
         <div></div>
         <div></div>
         <div></div>
@@ -177,7 +175,7 @@ export default {
       isImageLoad: false
     };
   },
-  props: ["img", "title", "city"],
+  props: ["img", "title", "city", "parentClass"],
   methods: {
     created: function() {
       this.loadImage();
@@ -185,9 +183,56 @@ export default {
     loadImage: function() {
       this.isImageLoad = false;
     },
+    runOwlCarousel: function() {
+      $(this.parentClass).owlCarousel({
+        autoplayTimeout: 3000,
+        autoplay: true,
+        loop: false,
+        rewind: true,
+        nav: true,
+        navText: [
+          '<span class="fa fa-angle-left"></span>',
+          '<span class="fa fa-angle-right"></span>'
+        ],
+        mouseDrag: true,
+        margin: 30,
+        dots: true,
+        stagePadding: 15,
+        rtl: true,
+        responsive: {
+          0: {
+            items: 1,
+            stagePadding: 15,
+            navText: false,
+            dots: true
+          },
+          400: {
+            items: 2,
+            stagePadding: 15,
+            navText: false,
+            dots: true
+          },
+          600: {
+            items: 3,
+            stagePadding: 15
+          },
+          992: {
+            items: 4,
+            stagePadding: 15
+          },
+          1199: {
+            items: 5,
+            stagePadding: 15
+          }
+        }
+      });
+    },
     ImageLoaded: function() {
       this.isImageLoad = true;
     }
+  },
+  mounted: function() {
+    this.runOwlCarousel();
   }
 };
 </script>
