@@ -66,11 +66,6 @@ class Kernel extends ConsoleKernel
 
         $schedule->job($cache_product_list_job)
                 ->everyFiveMinutes();
-
-        $messenger_anomaly_detector_job = new MessagingAnomalyDetection();
-
-        $schedule->job($messenger_anomaly_detector_job)
-                    ->everyFifteenMinutes();
     }
 
     /**

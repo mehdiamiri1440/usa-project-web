@@ -101,8 +101,8 @@ export default {
       linkHideStates: ["buyAd-requests", "messenger/contacts"],
       buttonIsActive: true,
       buttonActiveInSteps: true,
-      isRequiredFixAlert: true,
-      active_pakage_type: 0
+      isRequiredFixAlert: false,
+      active_pakage_type: 3
     };
   },
   methods: {
