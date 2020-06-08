@@ -22,6 +22,9 @@
 
   top: 0;
 }
+.main-content.is-fix-alert {
+  padding: 85px 250px 0 0;
+}
 
 .little-main .main-content {
   padding: 65px 80px 0 0;
@@ -245,6 +248,9 @@
   .main-content {
     padding: 65px 0 0;
   }
+  .main-content.is-fix-alert {
+    padding: 95px 0 0;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -257,7 +263,8 @@
     padding: 13px 15px;
   }
 
-  .main-content {
+  .main-content,
+  .main-content.is-fix-alert {
     padding: 65px 0 0;
   }
 
@@ -307,7 +314,7 @@
 </style>
 
 <template>
-  <section class="main-content col-xs-12">
+  <section class="main-content col-xs-12" :class="{ 'is-fix-alert' : isRequiredFixAlert}">
     <div
       class="col-xs-12 contact-wrapper pull-right col-sm-4 col-md-3"
       v-bind:class="{ hidden_element: selectedContact }"
@@ -369,6 +376,7 @@ import myContactList from "./messages-components/my-contact-list";
 import MainChatWrapper from "./messages-components/main-chat-wrapper";
 
 export default {
+  props: ["isRequiredFixAlert"],
   components: {
     myContactList,
     MainChatWrapper

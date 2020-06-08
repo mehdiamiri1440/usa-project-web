@@ -1,6 +1,10 @@
 <template>
   <div>
-    <router-view :get-user-id="userId" name="contact-list" />
+    <router-view
+      :get-user-id="userId"
+      :is-required-fix-alert="this.$parent.isRequiredFixAlert"
+      name="contact-list"
+    />
     <router-view :get-user-id="userId" name="group-list" />
   </div>
 </template>

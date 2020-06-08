@@ -20,6 +20,7 @@
   background: #e51c38;
   border-radius: 50px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
+  z-index: 1;
 }
 
 .fixed-action-button-wrapper .fixed-action {
@@ -36,11 +37,19 @@
   display: block;
   font-size: 18px;
 }
-
+#main.is-required-fix-alert {
+  margin-top: 85px !important;
+}
 @media screen and (max-width: 994px) {
   #main,
   #main.little-main {
     margin-right: 0 !important;
+  }
+}
+
+@media screen and (max-width: 767) {
+  #main.is-required-fix-alert {
+    margin-top: 0 !important;
   }
 }
 </style>
@@ -52,9 +61,10 @@
       :logout="'/logout'"
       :user-id="userId"
       :messageCount="messageCount"
+      :is-required-fix-alert="this.isRequiredFixAlert"
     ></header-dash-seller>
 
-    <div id="main">
+    <div id="main" :class="{ 'is-required-fix-alert' : isRequiredFixAlert}">
       <router-view :str="storagePath" :user-type="isSeller"></router-view>
     </div>
 
@@ -84,7 +94,9 @@ export default {
     return {
       linkHideStates: ["buyAd-requests", "messenger/contacts"],
       buttonIsActive: true,
-      buttonActiveInSteps: true
+      buttonActiveInSteps: true,
+      isRequiredFixAlert: true,
+      active_pakage_type: 0
     };
   },
   methods: {
@@ -109,18 +121,50 @@ export default {
     },
     checkButtonIsHide: function() {
       let buttonActive = true;
+      if (this.subIsActive("/seller/pricing")) {
+        this.isRequiredFixAlert = false;
+      } else {
+        this.checkCookie();
+      }
       for (var i = 0; i < this.linkHideStates.length; i++) {
         if (this.subIsActive("/seller/" + this.linkHideStates[i])) {
           buttonActive = false;
         }
       }
       this.buttonIsActive = buttonActive ? true : false;
+    },
+    getCookie: function(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    },
+    checkCookie: function() {
+      if (
+        this.active_pakage_type == 3 ||
+        this.getCookie("closeSellerFixModal") == "false"
+      ) {
+        this.isRequiredFixAlert = false;
+      } else {
+        this.isRequiredFixAlert = true;
+      }
     }
   },
   watch: {
     $route() {
       this.checkButtonIsHide();
       this.buttonActiveInSteps = true;
+    },
+    active_pakage_type: function() {
+      this.checkCookie();
     }
   },
   mounted: function() {
@@ -129,6 +173,9 @@ export default {
     eventBus.$on("buyAdbuttonActive", event => {
       this.buttonActiveInSteps = event;
     });
+  },
+  created: function() {
+    this.checkCookie();
   }
 };
 </script>

@@ -39,7 +39,7 @@
 }
 
 .main-header {
-  height: 65px;
+  min-height: 65px;
   position: fixed;
   left: 0;
   right: 250px;
@@ -51,6 +51,39 @@
 
 .little-main-header {
   right: 80px;
+}
+
+.required-fix-alert {
+  background: #e41c38;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+}
+
+.fix-alert-wrapper > a {
+  line-height: 1;
+  display: inline-block;
+  width: calc(100% - 60px);
+  color: #fff;
+  padding: 6px 0 8px;
+}
+
+.fix-alert-wrapper span.button {
+  font-size: 13px;
+  background: #fff;
+  color: red;
+  padding: 0 18px;
+  margin: 0 12px;
+  border-radius: 4px;
+}
+
+.close-required-fix-alert {
+  float: right;
+  height: 100%;
+  background: none;
+  border: none;
+  line-height: 1;
+  padding: 5px 15px;
 }
 
 .placeholder-image-header-profile {
@@ -378,6 +411,19 @@ a.profile-info-wrapper:focus {
 <template>
   <div>
     <header id="header" class="main-header">
+      <div v-if="$parent.isRequiredFixAlert" class="hidden-xs required-fix-alert">
+        <div class="fix-alert-wrapper">
+          <router-link :to="{name : 'dashboardPricingTableSeller'}">
+            تعداد زیادی از فروشندگان موفق باسکول از عضویت ویژه استفاده میکنند
+            <span
+              class="button"
+            >میخواهم عضو ویژه شوم</span>
+          </router-link>
+          <button @click.prevent="$parent.closeRequiredFixAlert()" class="close-required-fix-alert">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
       <div class="show-header hidden-md hidden-lg">
         <div
           v-if="messageCount>0"

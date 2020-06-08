@@ -555,7 +555,7 @@ export default {
     HeaderTop,
     SwitchButtons
   },
-  props: ["storage", "logout", "userId"],
+  props: ["storage", "logout", "userId", "isRequiredFixAlert"],
   data: function() {
     return {
       showSnapShot: false,
@@ -599,6 +599,8 @@ export default {
       this.isLoaded = true;
       axios.post("/user/profile_info").then(response => {
         this.isLoading = false;
+        this.$parent.active_pakage_type =
+          response.data.user_info.active_pakage_type;
         return (this.currentUser = response.data);
       });
     },
@@ -877,6 +879,21 @@ export default {
         event_category: categoryName,
         event_label: labelName
       });
+    },
+    closeRequiredFixAlert: function() {
+      this.createCookie("closeSellerFixModal", "false", 30);
+      this.isFixAlert = false;
+      this.$parent.checkCookie();
+    },
+    createCookie: function(name, value, minutes) {
+      if (minutes) {
+        var date = new Date();
+        date.setTime(date.getTime() + minutes * 60 * 1000);
+        var expires = "; expires=" + date.toGMTString();
+      } else {
+        var expires = "";
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
     }
   },
   mounted() {
