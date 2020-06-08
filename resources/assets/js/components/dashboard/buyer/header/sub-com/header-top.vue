@@ -4,7 +4,7 @@
   border: none;
   background: none;
   font-size: 25px;
-  padding: 19px 30px 16px 24px;
+  padding: 17px 30px 11px 24px;
   display: none;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .main-header {
-  height: 65px;
+  height: 59px;
   position: fixed;
   left: 0;
   right: 250px;
@@ -127,7 +127,7 @@
 .right-menu-header a,
 .profile-menu-header > a {
   color: #7f8c9b;
-  margin: 5px;
+  margin: 0 5px;
 }
 
 .profile-menu-header > a {
@@ -261,7 +261,7 @@ a.profile-info-wrapper:focus {
   position: absolute;
   left: 0;
   background: #eff3f6;
-  top: 63px;
+  top: 59px;
   right: 0;
   text-align: center;
   border-bottom: 1px solid #e6e6e6;

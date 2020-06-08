@@ -5,7 +5,7 @@
   height: 100%;
 }
 .main-content {
-  padding: 65px 250px 0 0;
+  padding: 59px 250px 0 0;
 
   direction: rtl;
 
@@ -27,7 +27,7 @@
 }
 
 .little-main .main-content {
-  padding: 65px 80px 0 0;
+  padding: 59px 80px 0 0;
 }
 
 .lds-ring {
@@ -246,10 +246,10 @@
 
 @media screen and (max-width: 992px) {
   .main-content {
-    padding: 65px 0 0;
+    padding: 59px 0 0;
   }
   .main-content.is-fix-alert {
-    padding: 95px 0 0;
+    padding: 89px 0 0;
   }
 }
 
@@ -265,7 +265,7 @@
 
   .main-content,
   .main-content.is-fix-alert {
-    padding: 65px 0 0;
+    padding: 59px 0 0;
   }
 
   .hidden_element {

@@ -199,14 +199,15 @@
   top: 2px;
   right: -6px;
 }
-@media screen and (max-width: 992px) {
-  .default-list-title {
-    padding: 4px 15px;
-  }
-
+@media screen and (max-width: 994px) {
   .fix-request-header-box,
   .title {
     right: 0;
+  }
+}
+@media screen and (max-width: 992px) {
+  .default-list-title {
+    padding: 4px 15px;
   }
 }
 

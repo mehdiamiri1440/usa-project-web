@@ -1,7 +1,7 @@
 <style scoped>
 #main {
   margin-right: 250px;
-  margin-top: 65px;
+  margin-top: 59px;
   position: relative;
 }
 
@@ -38,18 +38,24 @@
   font-size: 18px;
 }
 #main.is-required-fix-alert {
-  margin-top: 95px !important;
+  margin-top: 85px !important;
 }
 @media screen and (max-width: 994px) {
   #main,
-  #main.little-main {
+  #main.little-main,
+  #main.is-required-fix-alert {
     margin-right: 0 !important;
+  }
+}
+@media screen and (max-width: 992px) {
+  #main.is-required-fix-alert {
+    margin-top: 89px !important;
   }
 }
 
 @media screen and (max-width: 767px) {
   #main.is-required-fix-alert {
-    margin-top: 65px !important;
+    margin-top: 59px !important;
   }
 }
 </style>

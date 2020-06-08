@@ -4,7 +4,7 @@
   border: none;
   background: none;
   font-size: 25px;
-  padding: 19px 30px 16px 24px;
+  padding: 17px 30px 11px 24px;
   display: none;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .main-header {
-  min-height: 65px;
+  min-height: 59px;
   position: fixed;
   left: 0;
   right: 250px;
@@ -160,7 +160,7 @@
 .right-menu-header a,
 .profile-menu-header > a {
   color: #7f8c9b;
-  margin: 5px;
+  margin: 0 5px;
 }
 
 .profile-menu-header > a {
