@@ -51,40 +51,25 @@ import PricingTableSellerContent from "./seller/pricing-seller-page/pricing-tabl
 import PricingTableContent from "../layouts/main/pricing-table-content";
 
 export default {
+    props:[
+            'str'
+    ],
   components: {
     PricingTableContent,
     PricingTableSellerContent
   },
   data: function() {
     return {
-      activeUsers: [
-        {
-          img: "",
-          name: "محمدامین",
-          city: "ایران - تهران"
-        },
-        {
-          img: "",
-          name: "علی دلخوش",
-          city: "ایران - تهران"
-        },
-        {
-          img: "",
-          name: "رضا یزداین",
-          city: "ایران - تهران"
-        },
-        {
-          img: "",
-          name: "علی قاسمی ",
-          city: "ایران - تهران"
-        },
-        {
-          img: "",
-          name: "مهدی امیری  ",
-          city: "ایران - تهران"
-        }
-      ]
+      activeUsers: ""
     };
+  },
+  mounted:function(){
+      let self = this;
+
+      axios.post('/get_special_users_info')
+                .then(function(resposne){
+                    self.activeUsers = resposne.data.users;
+                });
   }
 };
 </script>

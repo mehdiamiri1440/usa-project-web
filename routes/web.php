@@ -466,6 +466,11 @@ Route::group(['middleware' => [login::class]], function () {
         'uses' => 'Accounting\comment_controller@delete_comment',
         'as'   => 'delete_user_comment'
     ]);
+
+    Route::post('/get_special_users_info',[
+        'uses' => 'General\marketing_data_controller@get_special_users_info',
+        'as'   => 'get_special_users_info'
+    ]);
     
 });
 

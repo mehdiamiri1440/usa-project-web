@@ -525,7 +525,7 @@ hr {
       </div>
 
       <div class="users-review-carousel-wrapper pricing-content col-xs-12">
-        <div class="title-section">کاربران دارای عضویت ویژه</div>
+        <div class="title-section">تعدادی از فروشندگان ویژه ی باسکول</div>
         <div class="owl-carousel">
           <pricing-user-carousel
             v-for="(userItem,index) in $parent.activeUsers"

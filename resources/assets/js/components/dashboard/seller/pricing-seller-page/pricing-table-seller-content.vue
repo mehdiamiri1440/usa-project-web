@@ -384,14 +384,14 @@ hr {
       </div>
 
       <div class="users-review-carousel-wrapper col-xs-12">
-        <div class="title-section">کاربران دارای عضویت ویژه</div>
+        <div class="title-section">تعدادی از اعضای ویژه در باسکول</div>
         <div class="owl-carousel">
           <pricing-user-carousel
             v-for="(userItem,index) in $parent.activeUsers"
             :key="index"
-            :img="userItem.img"
-            :title="userItem.name"
-            :city="userItem.city"
+            :img="userItem.profile_photo ? userItem.profile_photo : ''"
+            :title="userItem.first_name + ' ' + userItem.last_name"
+            :city="userItem.province + ' - ' + userItem.city "
           />
         </div>
       </div>
