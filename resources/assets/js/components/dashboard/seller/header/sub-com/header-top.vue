@@ -414,10 +414,10 @@ a.profile-info-wrapper:focus {
       <div v-if="$parent.isRequiredFixAlert" class="hidden-xs required-fix-alert">
         <div class="fix-alert-wrapper">
           <router-link :to="{name : 'dashboardPricingTableSeller'}">
-            تعداد زیادی از فروشندگان موفق باسکول از عضویت ویژه استفاده میکنند
+            تعداد زیادی از فروشندگان موفق باسکول از عضویت ویژه استفاده می کنند
             <span
               class="button"
-            >میخواهم عضو ویژه شوم</span>
+            >می خواهم عضو ویژه شوم</span>
           </router-link>
           <button @click.prevent="$parent.closeRequiredFixAlert()" class="close-required-fix-alert">
             <i class="fa fa-times"></i>

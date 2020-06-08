@@ -38,7 +38,7 @@
   font-size: 18px;
 }
 #main.is-required-fix-alert {
-  margin-top: 85px !important;
+  margin-top: 95px !important;
 }
 @media screen and (max-width: 994px) {
   #main,
@@ -47,9 +47,9 @@
   }
 }
 
-@media screen and (max-width: 767) {
+@media screen and (max-width: 767px) {
   #main.is-required-fix-alert {
-    margin-top: 0 !important;
+    margin-top: 65px !important;
   }
 }
 </style>
