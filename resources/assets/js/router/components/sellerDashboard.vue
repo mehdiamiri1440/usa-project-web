@@ -38,7 +38,7 @@
   font-size: 18px;
 }
 #main.is-required-fix-alert {
-  margin-top: 85px !important;
+  margin-top: 84px !important;
 }
 @media screen and (max-width: 994px) {
   #main,
