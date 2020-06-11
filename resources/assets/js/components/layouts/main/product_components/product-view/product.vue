@@ -127,6 +127,8 @@ label {
   width: initial;
 
   padding: 8px 15px;
+
+  line-height: 1.618;
 }
 
 .actions button.elevator-event {
@@ -205,7 +207,6 @@ label {
 
   .actions button.elevator-event,
   .actions .green-button {
-    float: right;
     margin-left: 10px;
   }
 }
@@ -361,40 +362,50 @@ label {
         <h1 v-text="$parent.product.main.product_name"></h1>
 
         <div class="actions">
-          <button
-            v-if="!$parent.isMyProfile"
-            @click.prevent="$parent.openChat($parent.product)"
-            class="green-button"
-          >
-            استعلام قیمت
-            <i class="fa fa-envelope"></i>
-          </button>
+          <div class="main-actions pull-right">
+            <router-link
+              :to="{ name : 'confirmProduct', id: $parent.product.main.id}"
+              class="buy-button green-button bg-red hover-effect"
+            >
+              خرید مستقیم
+              <i class="fa fa-truck"></i>
+            </router-link>
 
-          <button
-            v-else
-            class="green-button blue-button"
-            data-toggle="modal"
-            :data-target="'#article-modal' + $parent.product.main.id"
-          >
-            ویرایش
-            <i class="fa fa-pencil-alt"></i>
-          </button>
-
-          <button
-            v-if="$parent.isMyProfile"
-            class="elevator-event green-button"
-            @click.prevent="$parent.elevatorEvent()"
-          >
-            <i class="fas fa-chart-line"></i>
-
-            اعمال نردبان
-          </button>
-
-          <div class="share hidden-md hidden-lg pull-left">
-            <button @click.prevent="$parent.copyProductLinkToClipBoard" class="share-button">
-              <span>اشتراک گذاری</span>
-              <i class="fa fa-share"></i>
+            <button
+              v-if="!$parent.isMyProfile"
+              @click.prevent="$parent.openChat($parent.product)"
+              class="green-button"
+            >
+              استعلام قیمت
+              <i class="fa fa-envelope"></i>
             </button>
+
+            <button
+              v-else
+              class="green-button blue-button"
+              data-toggle="modal"
+              :data-target="'#article-modal' + $parent.product.main.id"
+            >
+              ویرایش
+              <i class="fa fa-pencil-alt"></i>
+            </button>
+          </div>
+          <div class="default-actions pull-left">
+            <button
+              v-if="$parent.isMyProfile"
+              class="elevator-event green-button pull-right"
+              @click.prevent="$parent.elevatorEvent()"
+            >
+              <i class="fas fa-chart-line"></i>
+              اعمال نردبان
+            </button>
+
+            <div class="share hidden-md hidden-lg pull-left">
+              <button @click.prevent="$parent.copyProductLinkToClipBoard" class="share-button">
+                <span>اشتراک گذاری</span>
+                <i class="fa fa-share"></i>
+              </button>
+            </div>
           </div>
         </div>
         <div class="product-info-table">
@@ -419,7 +430,9 @@ label {
             <li>
               <span class="gray-text">حداقل سفارش</span>
 
-              <span v-text="getNumberWithCommas($parent.product.main.min_sale_amount) + ' کیلوگرم '"></span>
+              <span
+                v-text="getNumberWithCommas($parent.product.main.min_sale_amount) + ' کیلوگرم '"
+              ></span>
             </li>
             <li v-if="!$parent.isMyProfile">
               <span class="gray-text">قیمت</span>
@@ -488,12 +501,12 @@ export default {
   components: {
     Carousel
   },
-  methods:{
-	  getNumberWithCommas:function(number){
-		if (number || typeof number === "number")
-			return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		else return "";
-	}
+  methods: {
+    getNumberWithCommas: function(number) {
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
+    }
   }
 };
 </script>

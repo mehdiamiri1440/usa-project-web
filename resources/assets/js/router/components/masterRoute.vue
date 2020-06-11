@@ -1,6 +1,7 @@
 <template>
   <div>
     <header-master-layouts
+      v-if="!checkoutPage"
       :assets="assets"
       :user_id="userId"
       :is_seller="isSeller"
@@ -33,7 +34,8 @@ export default {
   },
   data: function() {
     return {
-      productByResponseRate: false
+      productByResponseRate: false,
+      checkoutPage: false
     };
   },
   props: [
@@ -44,6 +46,16 @@ export default {
     "profilePhoto",
     "userFullName",
     "userLogoutPath"
-  ]
+  ],
+  methods: {
+    pageIsCheckout: function() {
+      if (this.$route.matched[1].name == "checkoutProduct") {
+        this.checkoutPage = true;
+      }
+    }
+  },
+  mounted: function() {
+    this.pageIsCheckout();
+  }
 };
 </script>

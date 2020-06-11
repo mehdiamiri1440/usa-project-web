@@ -225,6 +225,10 @@ button.hover-effect:hover {
   padding: 10px !important;
 }
 
+.padding-15 {
+  padding: 15px !important;
+}
+
 .padding-15-0 {
   padding: 15px 0 !important;
 }
@@ -254,6 +258,10 @@ button.hover-effect:hover {
 .green-text {
   color: #00c569;
 }
+.gray-text{
+  color: #777 !important;
+
+}
 .disable-text {
   color: #dbdbdb !important;
 }
@@ -268,6 +276,11 @@ button.hover-effect:hover {
 
 .bg-gray{
   background-color: #556080 !important;
+
+}
+
+.bg-white{
+  background-color: #fff !important;
 
 }
 

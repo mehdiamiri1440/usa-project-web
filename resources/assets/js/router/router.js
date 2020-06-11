@@ -319,6 +319,64 @@ const router = new Router({
           },
         },
         {
+          path: "checkout-product/",
+          name: "checkoutProduct",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/layouts/main/checkout/checkout-product.vue",
+              ], resolve);
+            },
+          },
+          children: [
+            {
+              path: "confirm-product/:id",
+              name: "confirmProduct",
+              components: {
+                'checkout-product': (resolve) => {
+                  require(["../components/layouts/main/checkout/steps/confirm-product.vue"], resolve);
+                },
+              },
+            },
+            {
+              path: "phone-number",
+              name: "checkoutPhoneNumber",
+              components: {
+                'checkout-product': (resolve) => {
+                  require(["../components/layouts/main/checkout/steps/phone-number.vue"], resolve);
+                },
+              },
+            },
+            {
+              path: "register-information",
+              name: "registerInformation",
+              components: {
+                'checkout-product': (resolve) => {
+                  require(["../components/layouts/main/checkout/steps/user-information.vue"], resolve);
+                },
+              },
+            },
+            {
+              path: "payment-success/:paymentId",
+              name: "paymentSuccess",
+              components: {
+                'checkout-product': (resolve) => {
+                  require(["../components/layouts/main/checkout/steps/payment-success.vue"], resolve);
+                },
+              },
+            },
+            {
+              path: "payment-failed/:paymentId",
+              name: "paymentFailed",
+              components: {
+                'checkout-product': (resolve) => {
+                  require(["../components/layouts/main/checkout/steps/payment-failed.vue"], resolve);
+                },
+              },
+            },
+          ]
+        },
+        {
           path: "product-list/:searchText",
           name: "productListSearch",
           components: {
