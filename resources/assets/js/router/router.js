@@ -374,6 +374,15 @@ const router = new Router({
                 },
               },
             },
+            {
+              path: "payment-expire",
+              name: "paymentExpire",
+              components: {
+                'checkout-product': (resolve) => {
+                  require(["../components/layouts/main/checkout/steps/payment-expire.vue"], resolve);
+                },
+              },
+            },
           ]
         },
         {

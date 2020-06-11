@@ -274,10 +274,13 @@ select.error:focus {
 <template>
   <div class="confirm-product-contents">
     <section class="product-section-wrapper">
-      <div class="header-section">
+      <div v-if="!$parent.currentUser.user_info && !$parent.profileIsLoad" class="header-section">
         <p>اطلاعات کاربری</p>
       </div>
-      <div class="main-form-wrapper">
+      <div
+        v-if="!$parent.currentUser.user_info && !$parent.profileIsLoad"
+        class="main-form-wrapper"
+      >
         <div class="form-contents col-xs-12">
           <div class="row">
             <div class="radio-wrapper col-xs-12 col-sm-8 text-right col-md-4 pull-right">
@@ -379,25 +382,31 @@ select.error:focus {
       <div class="main-form-wrapper">
         <div class="form-contents text-rtl col-xs-12">
           <div class="row">
-            <div class="input-wrapper select-wrapper col-xs-12 col-md-4 pull-right">
+            <div
+              v-if="!$parent.currentUser.user_info && !$parent.profileIsLoad"
+              class="input-wrapper select-wrapper col-xs-12 col-md-4 pull-right"
+            >
               <label for="first-name">
                 استان را انتخاب کنید
                 <span class="red-text">*</span>
               </label>
 
-              <select :class="{'error' :  error}" id="province" class="dire">
+              <select :class="{'error' :  errors}" id="province" class="dire">
                 <option selected disabled>استان را انتخاب کنید</option>
 
                 <option>یک استان انتخاب کنید</option>
               </select>
             </div>
-            <div class="input-wrapper select-wrapper col-xs-12 col-md-4 pull-right">
+            <div
+              v-if="!$parent.currentUser.user_info && !$parent.profileIsLoad"
+              class="input-wrapper select-wrapper col-xs-12 col-md-4 pull-right"
+            >
               <label for="first-name">
                 شهر خود را انتخاب کنید
                 <span class="red-text">*</span>
               </label>
 
-              <select :class="{'error' :  error}" id="province" class="dire">
+              <select :class="{'error' :  errors}" id="province" class="dire">
                 <option selected disabled>شهر را انتخاب کنید</option>
 
                 <option>یک شهر انتخاب کنید</option>
@@ -456,7 +465,9 @@ select.error:focus {
             <div class="price-contents text-left col-xs-12 col-sm-6 col-md-8 pull-right">
               <p class="price-item">
                 قیمت :
-                <span v-text=" getNumberWithCommas($parent.totalPrice) + ' تومان'"></span>
+                <span
+                  v-text=" $parent.getNumberWithCommas($parent.productData.product_total_price) + ' تومان'"
+                ></span>
               </p>
             </div>
             <div class="change-step col-xs-12 col-md-3 pull-left">
@@ -489,11 +500,11 @@ export default {
     };
   },
   methods: {
-    init: function() {},
-    getNumberWithCommas: function(number) {
-      if (number || typeof number === "number")
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      else return "";
+    init: function() {
+      this.$parent.getCurrentUser();
+      // if (this.$parent.checkCookie()) {
+      // } else {
+      // }
     }
   },
   mounted: function() {

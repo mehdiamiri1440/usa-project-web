@@ -429,7 +429,7 @@ export default {
         sendCode: true
       },
       step2: {
-        verification_code: "",
+        // verification_code: "",
         reSendCode: false,
         timeCounterDown: 120,
         showTimer: false,
@@ -459,93 +459,85 @@ export default {
       this.step2.showTimer = true;
       this.step2.timeCounterDown = 119;
 
-      setTimeout(function() {
-        self.verifyCodeBtnLoading = false;
-        self.currentStep = 1;
-        self.step1.sendCode = true;
-        self.step2.verification_code = "";
-        self.errors.verification_code = [];
-      }, 500);
-      //   axios
-      //     .post("/send_verification_code", {
-      //       phone: this.toLatinNumbers(this.step1.phoneNumber)
-      //     })
-      //     .then(function(response) {
-      //       self.verifyCodeBtnLoading = false;
+      axios
+        .post("/send_verification_code", {
+          phone: this.toLatinNumbers(this.step1.phoneNumber)
+        })
+        .then(function(response) {
+          self.verifyCodeBtnLoading = false;
 
-      //       self.currentStep = 1;
-      //       self.step1.sendCode = true;
+          self.currentStep = 1;
+          self.step1.sendCode = true;
 
-      //       self.step2.verification_code = "";
-      //       self.errors.verification_code = [];
+          self.step2.verification.currentCode = "";
+          self.errors.verification_code = [];
 
-      //       setTimeout(function() {
-      //         self.step2.reSendCode = true;
-      //       }, 120000);
+          setTimeout(function() {
+            self.step2.reSendCode = true;
+          }, 120000);
 
-      //       self.registerComponentStatistics(
-      //         "Register",
-      //         "send-verification-code",
-      //         "verification-code-sent-to-user"
-      //       );
-      //     })
-      //     .catch(function(err) {
-      //       self.verifyCodeBtnLoading = false;
+          self.registerComponentStatistics(
+            "Register",
+            "send-verification-code",
+            "verification-code-sent-to-user"
+          );
+        })
+        .catch(function(err) {
+          self.verifyCodeBtnLoading = false;
 
-      //       self.errors.phoneNumber = err.response.data.errors.phone;
+          self.errors.phoneNumber = err.response.data.errors.phone;
 
-      //       self.step1.sendCode = true;
+          self.step1.sendCode = true;
 
-      //       self.registerComponentStatistics(
-      //         "Register-Error",
-      //         "phone-number-verification",
-      //         "error:" + self.errors.phoneNumber[0]
-      //       );
-      //     });
+          self.registerComponentStatistics(
+            "Register-Error",
+            "phone-number-verification",
+            "error:" + self.errors.phoneNumber[0]
+          );
+        });
     },
     verify_code: function() {
       var self = this;
       this.sumCodeNumbers();
-      self.verifyCodeBtnLoading = true;
-      this.$router.push({ name: "registerInformation" });
+      axios
+        .post("/verify_code", {
+          verification_code: this.toLatinNumbers(
+            this.step2.verification.currentCode
+          ),
+          phone: this.toLatinNumbers(this.step1.phoneNumber)
+        })
+        .then(function(response) {
+          self.verifyCodeBtnLoading = false;
 
-      //   axios
-      //     .post("/verify_code", {
-      //       verification_code: this.toLatinNumbers(this.step2.verification_code),
-      //       phone: this.toLatinNumbers(this.step1.phoneNumber)
-      //     })
-      //     .then(function(response) {
-      //       self.verifyCodeBtnLoading = false;
-
-      //       if (response.data.status === true) {
-      //         if (response.data.redirected) {
-      //           // it's very tricky condition, be careful
-      //           window.location.href = "/login";
-      //         } else {
-      //           this.$router.push({ name });
-      //         }
-      //       } else if (response.data.status === false) {
-      //         self.errors.verification_code = [];
-      //         self.errors.verification_code.push(
-      //           "کد وارد شده صحیح نیست یا منقضی شده است"
-      //         );
-      //         self.registerComponentStatistics(
-      //           "Register-Error",
-      //           "verification-code-wrong",
-      //           "error:" + self.errors.verification_code[0]
-      //         );
-      //       }
-      //     })
-      //     .catch(function(error) {
-      //       self.verifyCodeBtnLoading = false;
-      //       self.errors.verification_code = [];
-      //       self.errors.verification_code.push("وارد کردن کد الزامی است.");
-      //       self.registerComponentStatistics(
-      //         "Register-Error",
-      //         "verification-code-empty",
-      //         "error:" + self.errors.verification_code[0]
-      //       );
-      //     });
+          if (response.data.status === true) {
+            if (response.data.redirected) {
+              // it's very tricky condition, be careful
+              window.location.href = "/login";
+            } else {
+              this.$router.push({ name: "registerInformation" });
+            }
+          } else if (response.data.status === false) {
+            self.errors.verification_code = [];
+            self.errors.verification_code.push(
+              "کد وارد شده صحیح نیست یا منقضی شده است"
+            );
+            self.registerComponentStatistics(
+              "Register-Error",
+              "verification-code-wrong",
+              "error:" + self.errors.verification_code[0]
+            );
+          }
+        })
+        .catch(function(error) {
+          self.verifyCodeBtnLoading = false;
+          self.errors.verification_code = [];
+          self.errors.verification_code.push("وارد کردن کد الزامی است.");
+          self.registerComponentStatistics(
+            "Register-Error",
+            "verification-code-empty",
+            "error:" + self.errors.verification_code[0]
+          );
+        });
     },
     isOsIOS: function() {
       var userAgent = window.navigator.userAgent.toLowerCase(),

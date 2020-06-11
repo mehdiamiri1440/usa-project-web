@@ -88,7 +88,9 @@ p.step-item .step-index.active {
         <section class="header col-xs-12">
           <div class="logo-page">
             <div class="logo-wrapper">
-              <img src="../../../../../img/logo/web-logo.svg" alt />
+              <router-link :to="{name:'productList'}">
+                <img src="../../../../../img/logo/web-logo.svg" alt />
+              </router-link>
             </div>
           </div>
           <div class="steps-progress-wrapper">
@@ -103,11 +105,11 @@ p.step-item .step-index.active {
                   <span class="step-text">اطلاعات محصول</span>
                 </p>
                 <p class="step-item">
-                  <span class="step-index">2</span>
+                  <span class="step-index" :class="{'active' : paymentStep > 0}">2</span>
                   <span class="step-text">ثبت اطلاعات</span>
                 </p>
                 <p class="step-item">
-                  <span class="step-index">3</span>
+                  <span class="step-index" :class="{'active' : paymentStep > 1}">3</span>
                   <span class="step-text">ثبت نهایی</span>
                 </p>
               </div>
@@ -135,13 +137,109 @@ export default {
   data: function() {
     return {
       currentStep: 0,
-      totalPrice: "",
-      verification_code: ""
+      paymentStep: 0,
+      productData: "",
+      profileIsLoad: true,
+      currentUser: {
+        profile: "",
+        user_info: ""
+      }
     };
   },
   methods: {
-    swithStep(step) {
-      this.currentStep = step;
+    init: function() {
+      this.checkRouteActive();
+      this.getCurrentUser();
+    },
+    getCurrentUser() {
+      axios.post("/user/profile_info").then(response => {
+        this.currentUser = response.data;
+        this.profileIsLoad = false;
+      });
+    },
+    createCookie: function(name, value, minutes) {
+      if (minutes) {
+        var date = new Date();
+        date.setTime(date.getTime() + minutes * 60 * 1000);
+        var expires = "; expires=" + date.toGMTString();
+      } else {
+        var expires = "";
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
+    },
+    getCookie: function(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    },
+    checkCookie: function() {
+      let isActivePage = false;
+      if (this.getCookie("confirmProduct")) {
+        isActivePage = true;
+      }
+      return isActivePage;
+    },
+    setProductData() {
+      if (this.checkCookie()) {
+        this.productData = JSON.parse(this.getCookie("confirmProduct"));
+      } else {
+        this.$router.push({ name: "paymentExpire" });
+      }
+    },
+    getNumberWithCommas: function(number) {
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
+    },
+    checkRouteActive: function() {
+      let progress = $(".progress-item.active");
+      let level = 0;
+      switch (this.$route.name) {
+        case "checkoutPhoneNumber":
+          level = 1;
+          break;
+        case "registerInformation":
+          level = 1;
+          break;
+        case "paymentSuccess":
+          level = 2;
+          break;
+        case "paymentFailed":
+          level = 2;
+          break;
+        case "paymentExpire":
+          level = 2;
+          break;
+        default:
+          level = 0;
+          break;
+      }
+
+      if (level > 1) {
+        progress.css("left", "50px");
+      } else if (level > 0) {
+        progress.css("left", "50%");
+      } else {
+        progress.css("left", "calc(100% - 50px)");
+      }
+      this.paymentStep = level;
+    }
+  },
+  mounted: function() {
+    this.init();
+  },
+  watch: {
+    $route() {
+      this.checkRouteActive();
     }
   }
 };
