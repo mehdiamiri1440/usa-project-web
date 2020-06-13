@@ -55,7 +55,7 @@
 
 @media screen and (max-width: 767px) {
   #main.is-required-fix-alert {
-    margin-top: 59px !important;
+    margin-top: 84px !important;
   }
 }
 </style>
