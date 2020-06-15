@@ -280,6 +280,19 @@ select {
   background: #279b41 !important;
 }
 
+.item-wrapper button.item-guid {
+  float: right;
+  border: none;
+  background: #556080;
+  color: #fff;
+  border-radius: 50px;
+  height: 17px;
+  width: 17px;
+  text-align: center;
+  padding: 0 1px;
+  font-size: 11px;
+  line-height: 1;
+}
 .blue-button {
   margin: 15px 0;
   display: inline-block;
