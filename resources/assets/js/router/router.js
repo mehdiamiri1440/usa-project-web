@@ -56,6 +56,28 @@ const router = new Router({
           },
         },
         {
+          path: "product-pricing",
+          name: "dashboardProductPricing",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/pricing-seller-page/product-pricing.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "buyad-pricing",
+          name: "dashboardBuyAdPricing",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/pricing-seller-page/buyad-pricing.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
           path: "profile",
           name: "profileBasicSeller",
           components: {

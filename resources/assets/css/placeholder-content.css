@@ -254,6 +254,9 @@ button.hover-effect:hover {
 .green-text {
   color: #00c569;
 }
+.gray-text {
+  color: #777;
+}
 .disable-text {
   color: #dbdbdb !important;
 }
