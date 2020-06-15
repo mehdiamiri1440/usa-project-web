@@ -687,7 +687,8 @@ class product_controller extends Controller
     {
         $user_id = session('user_id');
 
-        $user_active_pakage_type = myuser::find($user_id)->active_pakage_type;
+        $user_record = myuser::find($user_id);
+        $user_active_pakage_type = $user_record->active_pakage_type;
 
         $max_allowed_prodcut_register = config("subscriptionPakage.type-$user_active_pakage_type.max-products");
 
@@ -696,7 +697,7 @@ class product_controller extends Controller
                                             ->get()
                                             ->count();
 
-        if ($max_allowed_prodcut_register > $user_confirmed_products_count) {
+        if ($max_allowed_prodcut_register + $user_record->extra_product_capacity > $user_confirmed_products_count) {
             return true;
         } else {
             return false;

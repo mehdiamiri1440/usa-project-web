@@ -353,6 +353,16 @@ Route::group(['middleware' => [login::class]], function () {
         'uses' => 'Payment\payment_controller@do_elevator_payment',
         'as' => 'do_elevator_payment',
     ])->where('product_id', '[0-9]+');
+    
+    Route::get('/payment/product-capacity/{extra_pacacity}', [
+        'uses' => 'Payment\payment_controller@do_product_capacity_payment',
+        'as' => 'do_product_capacity_payment',
+    ])->where('extra_pacacity', '[0-9]+');
+
+    Route::get('/payment/buyAd-reply-capacity/{extra_pacacity}', [
+        'uses' => 'Payment\payment_controller@do_buyAd_reply_capacity_payment',
+        'as' => 'do_buyAd_reply_capacity_payment',
+    ])->where('extra_pacacity', '[0-9]+');
 
     Route::any('/payment_callback', [
         'uses' => 'Payment\payment_controller@payment_callback',
@@ -362,6 +372,16 @@ Route::group(['middleware' => [login::class]], function () {
     Route::any('/elevator_payment_callback', [
         'uses' => 'Payment\payment_controller@elevator_payment_callback',
         'as' => 'elevator_payment_callback',
+    ]);
+    
+    Route::any('/product_capacity_payment_callback', [
+        'uses' => 'Payment\payment_controller@product_capacity_payment_callback',
+        'as' => 'product_capacity_payment_callback',
+    ]);
+    
+    Route::any('/buyAd_reply_capacity_payment_callback', [
+        'uses' => 'Payment\payment_controller@buyAd_reply_capacity_payment_callback',
+        'as' => 'buyAd_reply_capacity_payment_callback',
     ]);
 
     Route::post('/is_user_allowed_to_register_product', [

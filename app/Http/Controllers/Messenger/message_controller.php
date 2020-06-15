@@ -160,8 +160,8 @@ class message_controller extends Controller
         $today_replies_count = $user_reply_records->count();
         if($today_replies_count > 0){
             $user_daily_reply_capacity = config("subscriptionPakage.type-{$user_reply_records->first()->active_pakage_type}.buyAd-reply-count");
-
-            if($today_replies_count > $user_daily_reply_capacity){
+            
+            if($today_replies_count > $user_daily_reply_capacity + $user_reply_records->first()->extra_buyAd_reply_capacity){
                 return false;
             }
         }

@@ -15,6 +15,7 @@ use SoapClient;
 use App\Models\myuser;
 use Carbon\Carbon;
 use App\Models\product;
+use DB;
     
 
 class payment_controller extends Controller
@@ -799,6 +800,167 @@ class payment_controller extends Controller
             //
         }
         
+    }
+
+    public function do_product_capacity_payment($extra_capacity)
+    {
+        if(!session()->has('user_id')){
+            return redirect()->back()->withErrors([
+                'error' => 'شما مجاز به انجام این پرداخت نیستید' 
+             ]);
+        }
+
+        if(is_integer((integer) $extra_capacity) && $extra_capacity > 0)
+        {
+            $payment_amount = config("subscriptionPakage.elevator.price");
+
+            $payment_amount = $payment_amount * $extra_capacity;
+
+            $user_id = session('user_id');
+
+            try{
+                $gateway = \Gateway::zarinpal();
+                $gateway->setCallback(url('/product_capacity_payment_callback'));
+                $gateway->price($payment_amount)->ready();
+                $refId =  $gateway->refId();
+                $transID = $gateway->transactionId();
+
+                // Your code here
+                session(['gateway_transaction_id' => $transID]);
+                session(['extra_capacity' => $extra_capacity]);
+                session(['uid' => $user_id]);
+
+                
+                return $gateway->redirect(); 
+            }catch (Exception $e){ 
+                echo $e->getMessage();
+            }  
+        }
+        else{
+            return redirect()->back()->withErrors([
+                'error' => 'شما مجاز به انجام این پرداخت نیستید' 
+             ]);
+        }
+    }
+
+    public function product_capacity_payment_callback()
+    {
+        try{ 
+            $gateway = \Gateway::verify();
+            $trackingCode = $gateway->trackingCode();
+            $refId = $gateway->refId();
+            $cardNumber = $gateway->cardNumber();
+
+            // عملیات خرید با موفقیت انجام شده است
+            // در اینجا کالا درخواستی را به کاربر ارائه میکنم
+            
+            $this->do_after_payment_changes_for_product_capacity();
+            
+            return redirect('/product-list');
+
+        } 
+        catch (\Exception $e)
+        {
+//            echo $e->getMessage();
+            return redirect('/product-list');
+            //return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
+        }
+    }
+
+    protected function do_after_payment_changes_for_product_capacity()
+    {
+        $extra_capacity = session()->pull('extra_capacity');
+        $user_id = session()->pull('uid');
+
+        try{
+            DB::table('myusers')
+                        ->increment('extra_product_capacity',$extra_capacity,[
+                            'id' => $user_id
+                        ]);
+        }
+        catch(\Exception $e){
+            //
+        }
+    }
+
+    public function do_buyAd_reply_capacity_payment($extra_reply_capacity)
+    {
+        if(!session()->has('user_id')){
+            return redirect()->back()->withErrors([
+                'error' => 'شما مجاز به انجام این پرداخت نیستید' 
+             ]);
+        }
+
+        if(is_integer((integer) $extra_reply_capacity) && $extra_reply_capacity > 0)
+        {
+            $payment_amount = 10000;//config("subscriptionPakage.elevator.price");
+            $payment_amount = $payment_amount * $extra_reply_capacity;
+
+            $user_id = session('user_id');
+
+            try{
+                $gateway = \Gateway::zarinpal();
+                $gateway->setCallback(url('/buyAd_reply_capacity_payment_callback'));
+                $gateway->price($payment_amount)->ready();
+                $refId =  $gateway->refId();
+                $transID = $gateway->transactionId();
+
+                // Your code here
+                session(['gateway_transaction_id' => $transID]);
+                session(['extra_reply_capacity' => $extra_reply_capacity]);
+                session(['uid' => $user_id]);
+
+                
+                return $gateway->redirect(); 
+            }catch (Exception $e){ 
+                echo $e->getMessage();
+            } 
+        }
+        else{
+            return redirect()->back()->withErrors([
+                'error' => 'شما مجاز به انجام این پرداخت نیستید' 
+             ]);
+        }
+    }
+
+    public function buyAd_reply_capacity_payment_callback()
+    {
+        try{ 
+            $gateway = \Gateway::verify();
+            $trackingCode = $gateway->trackingCode();
+            $refId = $gateway->refId();
+            $cardNumber = $gateway->cardNumber();
+
+            // عملیات خرید با موفقیت انجام شده است
+            // در اینجا کالا درخواستی را به کاربر ارائه میکنم
+            
+            $this->do_after_payment_changes_for_buyAd_reply_capacity();
+            
+            return redirect('/product-list');
+
+        } 
+        catch (\Exception $e)
+        {
+//            echo $e->getMessage();
+            return redirect('/product-list');
+            //return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
+        }
+    }
+
+    protected function do_after_payment_changes_for_buyAd_reply_capacity()
+    {
+        $extra_capacity = session()->pull('extra_reply_capacity');
+        $user_id = session()->pull('uid');
+
+        try{
+            DB::table('myusers')
+                        ->increment('extra_buyAd_reply_capacity',$extra_capacity,[
+                            'id' => $user_id
+                        ]);
+        }
+        catch(\Exception $e){
+            //
+        }
     }
     
     
