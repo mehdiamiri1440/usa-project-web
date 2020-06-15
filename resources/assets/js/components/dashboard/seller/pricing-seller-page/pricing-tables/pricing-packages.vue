@@ -183,6 +183,9 @@
 }
 
 @media screen and (max-width: 767px) {
+  .product-pricing > div {
+    padding: 0;
+  }
   .title-section p {
     text-align: center;
   }
@@ -312,17 +315,17 @@ export default {
       });
     });
   },
-  methods:{
+  methods: {
     doPayment: function(packageType) {
-
-      this.registerComponentStatistics(
+      this.$parent.doPaymentLoader = true;
+      this.$parent.registerComponentStatistics(
         "payment",
-        "type-" + packageType + "-from-capacity-page", 
-        "userId: " + userId
+        "type-" + packageType + "-from-capacity-page",
+        "userId: " + this.$parent.userId
       );
 
       window.location.href = "/payment/" + packageType;
-    },
+    }
   }
 };
 </script>

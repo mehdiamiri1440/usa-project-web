@@ -324,12 +324,26 @@ input[type="number"] {
   }
 
   .product-pricing > div {
-    padding: 0;
+    padding: 0 15px;
   }
 }
 </style>
 <template>
   <div class="col-xs-12 pricing-section-wrapper">
+    <!-- payment loader -->
+    <div v-if="doPaymentLoader" class="main-loader-content">
+      <div class="pricing-loader-icon">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <p class="pricing-loader-text text-rtl">در حال انتقال به درگاه پرداخت . . .</p>
+      </div>
+    </div>
+
+    <!-- end payment loader -->
     <div class="row">
       <div class="col-xs-12">
         <div class="header-section">
@@ -464,6 +478,8 @@ export default {
         totalPrice: ""
       },
       statusData: "",
+      doPaymentLoader: false,
+
       productPricing: [
         {
           priceName: "عضویت ویژه",
@@ -557,6 +573,8 @@ export default {
       $myGroup.find(".collapse.in").collapse("hide");
     },
     doPayment: function() {
+      this.doPaymentLoader = true;
+
       let self = this;
 
       this.registerComponentStatistics(
@@ -565,7 +583,8 @@ export default {
         self.productPriceData.count
       );
 
-      window.location.href = "/payment/buyAd-reply-capacity/" + this.productPriceData.count;
+      window.location.href =
+        "/payment/buyAd-reply-capacity/" + this.productPriceData.count;
     },
     registerComponentStatistics: function(categoryName, actionName, labelName) {
       gtag("event", actionName, {

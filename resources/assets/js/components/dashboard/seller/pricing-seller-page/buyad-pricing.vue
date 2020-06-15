@@ -88,7 +88,7 @@ input[type="number"] {
   background: #fcfcfc;
   border-radius: 4px;
   padding: 7px 10px;
-  max-width: 245px;
+  max-width: 260px;
   width: 100%;
   margin-left: 15px;
   float: right;
@@ -225,9 +225,22 @@ input[type="number"] {
   .arrow-icon {
     display: none;
   }
+
+  .input-wrapper input {
+    width: 120px;
+  }
+  .count-input-wrapper button {
+    padding: 10px;
+  }
 }
 
 @media screen and (max-width: 992px) {
+  .input-wrapper input {
+    width: 140px;
+  }
+  .count-input-wrapper button {
+    padding: 15px;
+  }
   .main-content-wrapper > .row > div {
     padding: 0 7px;
   }
@@ -324,12 +337,27 @@ input[type="number"] {
   }
 
   .product-pricing > div {
-    padding: 0;
+    padding: 0 15px;
   }
 }
 </style>
 <template>
   <div class="col-xs-12 pricing-section-wrapper">
+    <!-- payment loader -->
+    <div v-if="doPaymentLoader" class="main-loader-content">
+      <div class="pricing-loader-icon">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <p class="pricing-loader-text text-rtl">در حال انتقال به درگاه پرداخت . . .</p>
+      </div>
+    </div>
+
+    <!-- end payment loader -->
+
     <div class="row">
       <div class="col-xs-12">
         <div class="header-section">
@@ -340,10 +368,10 @@ input[type="number"] {
           <div class="product-pricing">
             <div class="col-xs-12 col-sm-8 pull-right">
               <div class="title-section">
-                <p>افزایش سقف روزانه پاسخ به درخواست ها </p>
+                <p>افزایش سقف روزانه پاسخ به درخواست ها</p>
               </div>
               <div class="description-section gray-text">
-                <p> تعداد اضافی ظرفیت پاسخ های روزانه به درخواست های خرید را انتخاب کنید و دکمه افزایش ظرفیت را بزنید.</p>
+                <p>تعداد اضافی ظرفیت پاسخ های روزانه به درخواست های خرید را انتخاب کنید و دکمه افزایش ظرفیت را بزنید.</p>
               </div>
               <div class="form-wrapper">
                 <div class="item-wrapper active">
@@ -461,6 +489,7 @@ export default {
         totalPrice: ""
       },
       statusData: "",
+      doPaymentLoader: false,
       productPricing: [
         {
           priceName: "عضویت ویژه",
@@ -554,6 +583,7 @@ export default {
       $myGroup.find(".collapse.in").collapse("hide");
     },
     doPayment: function() {
+      this.doPaymentLoader = true;
       let self = this;
 
       this.registerComponentStatistics(
@@ -562,7 +592,8 @@ export default {
         self.productPriceData.count
       );
 
-      window.location.href = "/payment/buyAd-reply-capacity/" + this.productPriceData.count;
+      window.location.href =
+        "/payment/buyAd-reply-capacity/" + this.productPriceData.count;
     },
     registerComponentStatistics: function(categoryName, actionName, labelName) {
       gtag("event", actionName, {

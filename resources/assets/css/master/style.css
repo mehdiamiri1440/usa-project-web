@@ -773,6 +773,40 @@ select#bd-month-end-date-id option {
   background: #ececec;
 }
 
+
+.main-loader-content{
+  position: fixed;
+  z-index: 999;
+  background: rgba(0,0,0,0.8);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.main-loader-content .pricing-loader-icon{
+  position: relative;
+  text-align: center;
+  color: #fff;
+  margin: 0 auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.main-loader-content .pricing-loader-icon .lds-ring{
+  background: #fff;
+  border-radius: 50px;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+  width: 90px;
+  height: 90px;
+  padding: 13px;
+}
+
+.main-loader-content .pricing-loader-icon .pricing-loader-text{
+  padding-top: 150px;
+  font-size: 16px;
+}
 /*******************************************************
 Slider B-flat
 *******************************************************/
