@@ -870,7 +870,7 @@ class payment_controller extends Controller
     protected function do_after_payment_changes_for_product_capacity()
     {
         $extra_capacity = session()->pull('extra_capacity');
-        $user_id = session()->pull('uid');
+        $user_id = session('user_id');
 
         try{
             DB::table('myusers')
@@ -950,7 +950,7 @@ class payment_controller extends Controller
     protected function do_after_payment_changes_for_buyAd_reply_capacity()
     {
         $extra_capacity = session()->pull('extra_reply_capacity');
-        $user_id = session()->pull('uid');
+        $user_id = session('user_id');
 
         try{
             DB::table('myusers')
