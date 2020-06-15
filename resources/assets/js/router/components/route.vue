@@ -543,7 +543,7 @@ export default {
 
       let content = document.createElement("div");
       content.innerHTML =
-        '<p dir="rtl">سقف تعداد محصولات ثبت شده شما پر شده است.</p><br/><p class="red-text" dir="rtl"><b>برای ثبت محصولات جدید، لطفا عضویت خود را ارتقا دهید.</b></p>';
+        '<p dir="rtl">سقف تعداد محصولات ثبت شده شما پر شده است.</p><br/><p class="red-text" dir="rtl"><b>برای ثبت محصولات جدید، لطفا رو دکمه افزایش ظرفیت بزنید.</b></p>';
       swal({
         title: "محدودیت ثبت محصول جدید",
         content: content,
@@ -551,7 +551,7 @@ export default {
         icon: "warning",
         buttons: {
           success: {
-            text: "ارتقا عضویت",
+            text: "افزایش ظرفیت",
             value: "promote"
           },
           close: {
@@ -562,7 +562,7 @@ export default {
       }).then(value => {
         switch (value) {
           case "promote":
-            self.$router.push({ name: "dashboardPricingTableSeller" });
+            self.$router.push({ name: "dashboardProductPricing" });
             break;
         }
       });
@@ -574,7 +574,7 @@ export default {
 
       let content = document.createElement("div");
       content.innerHTML =
-        '<p dir="rtl">ظرفیت روزانه پاسخ به درخواست های خرید شما پر شده است.</p><br/><p class="red-text" dir="rtl"><b>برای افزایش ظرفیت، لطفا عضویت خود را ارتقا دهید.</b></p>';
+        '<p dir="rtl">ظرفیت روزانه پاسخ به درخواست های خرید شما پر شده است.</p><br/><p class="red-text" dir="rtl"><b>برای افزایش ظرفیت، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
       swal({
         title: "محدودیت پاسخ به درخواست ها",
         content: content,
@@ -582,7 +582,7 @@ export default {
         icon: "warning",
         buttons: {
           success: {
-            text: "ارتقا عضویت",
+            text: "افزایش ظرفیت",
             value: "promote"
           },
           close: {
@@ -593,7 +593,7 @@ export default {
       }).then(value => {
         switch (value) {
           case "promote":
-            self.$router.push({ name: "dashboardPricingTableSeller" });
+            self.$router.push({ name: "dashboardBuyAdPricing" });
             break;
         }
       });

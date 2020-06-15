@@ -343,7 +343,7 @@ input[type="number"] {
                 <p>افزایش ظرفیت ثبت محصول</p>
               </div>
               <div class="description-section gray-text">
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از</p>
+                <p>تعداد ظرفیت اضافی برای ثبت محصول را انتخاب کنید سپس دکمه افزایش ظرفیت را بزنید.</p>
               </div>
               <div class="form-wrapper">
                 <div class="item-wrapper active">
@@ -405,7 +405,7 @@ input[type="number"] {
                   <span class="currency">تومان</span>
                   <span class="price-date">(سالانه)</span>
                 </p>
-                <button class="green-button">افزایش ظرفیت</button>
+                <button class="green-button" @click.prevent="doPayment()">افزایش ظرفیت</button>
               </div>
             </div>
           </div>
@@ -414,6 +414,16 @@ input[type="number"] {
       <div class="col-xs-12">
         <div class="header-section">
           <p>ارتقا عضویت</p>
+        </div>
+
+        <div class="col-xs-12">
+          <div class="row">
+            <product-pricing
+              v-for="(priceItem, index) in productPricing"
+              :key="index"
+              :price-item="priceItem"
+            />
+          </div>
         </div>
 
         <div class="wrapper-background notice-content">
@@ -433,15 +443,6 @@ input[type="number"] {
                 >100% مبلغ پرداختی به شما بازگردانده می شود</span>
               </strong>
             </p>
-          </div>
-        </div>
-        <div class="col-xs-12">
-          <div class="row">
-            <product-pricing
-              v-for="(priceItem, index) in productPricing"
-              :key="index"
-              :price-item="priceItem"
-            />
           </div>
         </div>
       </div>
@@ -555,16 +556,16 @@ export default {
       var $myGroup = $(".item-content");
       $myGroup.find(".collapse.in").collapse("hide");
     },
-    doPayment: function(packageType) {
-      let userId = getUserId();
+    doPayment: function() {
+      let self = this;
 
       this.registerComponentStatistics(
         "payment",
-        "type-" + packageType,
-        "userId: " + userId
+        "product-capacity",
+        self.productPriceData.count
       );
 
-      window.location.href = "/payment/" + packageType;
+      window.location.href = "/payment/buyAd-reply-capacity/" + this.productPriceData.count;
     },
     registerComponentStatistics: function(categoryName, actionName, labelName) {
       gtag("event", actionName, {

@@ -27,7 +27,7 @@ class RenamePanelVisibilityColumnInMyusersTable extends Migration
     public function down()
     {
         Schema::table('myusers', function (Blueprint $table) {
-            $table->renameColumn('interview_request','extra_buyAd_reply_capacity');
+            $table->renameColumn('extra_buyAd_reply_capacity','interview_request');
             $table->renameColumn('extra_product_capacity','panel_visisbility');
         });
     }

@@ -278,7 +278,7 @@
               <span class="currency">تومان</span>
               <span class="price-date">(سالانه)</span>
             </p>
-            <button class="green-button">ارتقا عضویت</button>
+            <button class="green-button" @click.prevent="doPayment(3)">ارتقا عضویت</button>
           </div>
         </div>
       </div>
@@ -311,6 +311,18 @@ export default {
         $(".item-guid").tooltip();
       });
     });
+  },
+  methods:{
+    doPayment: function(packageType) {
+
+      this.registerComponentStatistics(
+        "payment",
+        "type-" + packageType + "-from-capacity-page", 
+        "userId: " + userId
+      );
+
+      window.location.href = "/payment/" + packageType;
+    },
   }
 };
 </script>

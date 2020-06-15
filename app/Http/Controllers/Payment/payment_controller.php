@@ -856,13 +856,13 @@ class payment_controller extends Controller
             
             $this->do_after_payment_changes_for_product_capacity();
             
-            return redirect('/product-list');
+            return redirect('/seller/register-product');
 
         } 
         catch (\Exception $e)
         {
 //            echo $e->getMessage();
-            return redirect('/product-list');
+            return redirect('/seller/register-product');
             //return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
         }
     }
@@ -874,9 +874,8 @@ class payment_controller extends Controller
 
         try{
             DB::table('myusers')
-                        ->increment('extra_product_capacity',$extra_capacity,[
-                            'id' => $user_id
-                        ]);
+                        ->where('id',$user_id)
+                        ->increment('extra_product_capacity',$extra_capacity);
         }
         catch(\Exception $e){
             //
@@ -893,7 +892,7 @@ class payment_controller extends Controller
 
         if(is_integer((integer) $extra_reply_capacity) && $extra_reply_capacity > 0)
         {
-            $payment_amount = 10000;//config("subscriptionPakage.elevator.price");
+            $payment_amount = config("subscriptionPakage.elevator.price");
             $payment_amount = $payment_amount * $extra_reply_capacity;
 
             $user_id = session('user_id');
@@ -936,13 +935,13 @@ class payment_controller extends Controller
             
             $this->do_after_payment_changes_for_buyAd_reply_capacity();
             
-            return redirect('/product-list');
+            return redirect('/seller/buyAd-requests');
 
         } 
         catch (\Exception $e)
         {
 //            echo $e->getMessage();
-            return redirect('/product-list');
+            return redirect('/seller/buyAd-requests');   
             //return redirect()->route('show-transaction-detail',['id' => $transaction_id]);
         }
     }
@@ -954,9 +953,8 @@ class payment_controller extends Controller
 
         try{
             DB::table('myusers')
-                        ->increment('extra_buyAd_reply_capacity',$extra_capacity,[
-                            'id' => $user_id
-                        ]);
+                        ->where('id',$user_id)
+                        ->increment('extra_buyAd_reply_capacity',$extra_capacity);
         }
         catch(\Exception $e){
             //

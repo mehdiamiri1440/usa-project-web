@@ -340,10 +340,10 @@ input[type="number"] {
           <div class="product-pricing">
             <div class="col-xs-12 col-sm-8 pull-right">
               <div class="title-section">
-                <p>سقف روزانه پاسخ به درخواست ها</p>
+                <p>افزایش سقف روزانه پاسخ به درخواست ها </p>
               </div>
               <div class="description-section gray-text">
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از</p>
+                <p> تعداد اضافی ظرفیت پاسخ های روزانه به درخواست های خرید را انتخاب کنید و دکمه افزایش ظرفیت را بزنید.</p>
               </div>
               <div class="form-wrapper">
                 <div class="item-wrapper active">
@@ -355,7 +355,7 @@ input[type="number"] {
                   >
                     <i class="fa fa-question"></i>
                   </button>
-                  <p class="item-text">سقف روزانه پاسخ به درخواست ها</p>
+                  <p class="item-text">افزایش روزانه پاسخ به درخواست ها</p>
                   <p class="item-count">{{productPriceData.count}}</p>
                 </div>
 
@@ -402,7 +402,7 @@ input[type="number"] {
                   <span class="currency">تومان</span>
                   <span class="price-date">(سالانه)</span>
                 </p>
-                <button class="green-button">افزایش ظرفیت</button>
+                <button class="green-button" @click.prevent="doPayment()">افزایش ظرفیت</button>
               </div>
             </div>
           </div>
@@ -553,16 +553,16 @@ export default {
       var $myGroup = $(".item-content");
       $myGroup.find(".collapse.in").collapse("hide");
     },
-    doPayment: function(packageType) {
-      let userId = getUserId();
+    doPayment: function() {
+      let self = this;
 
       this.registerComponentStatistics(
         "payment",
-        "type-" + packageType,
-        "userId: " + userId
+        "buyAd-reply-capacity",
+        self.productPriceData.count
       );
 
-      window.location.href = "/payment/" + packageType;
+      window.location.href = "/payment/buyAd-reply-capacity/" + this.productPriceData.count;
     },
     registerComponentStatistics: function(categoryName, actionName, labelName) {
       gtag("event", actionName, {

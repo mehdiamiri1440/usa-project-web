@@ -332,16 +332,17 @@ class user_controller extends Controller
     //public method
     public function get_seller_dashboard_required_data(Request $request)
     {
-        $user_pakage_type = myuser::find(session('user_id'))->active_pakage_type;
+        $user_record = myuser::find(session('user_id'));
+        $user_pakage_type = $user_record->active_pakage_type;
 
         $pakage_info = config("subscriptionPakage.type-$user_pakage_type");
         $confirmed_products_count = $this->get_user_confirmed_products_count();
 
         $active_pakage_type = $user_pakage_type;
         $reputation_score = $this->get_user_reputation_score();
-        $max_buyAds_reply = $pakage_info['buyAd-reply-count'];
+        $max_buyAds_reply = $pakage_info['buyAd-reply-count'] + $user_record->extra_buyAd_reply_capacity;
         $is_valid = $pakage_info['validated-seller'];
-        $max_allowed_product_register_count = $pakage_info['max-products'] - $confirmed_products_count;
+        $max_allowed_product_register_count = $pakage_info['max-products'] + $user_record->extra_product_capacity - $confirmed_products_count;
 
         return response()->json(compact([
             'active_pakage_type',
