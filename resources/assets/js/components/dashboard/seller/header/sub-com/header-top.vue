@@ -447,7 +447,7 @@ a.profile-info-wrapper:focus {
               class="hidden-xs"
             >تعداد زیادی از فروشندگان موفق باسکول از عضویت ویژه استفاده می کنند</span>
 
-            <span class="hidden-sm hidden-md hidden-lg">تعداد زیادی از فروشندگان موفق</span>
+            <span class="hidden-sm hidden-md hidden-lg">پنج برابر سریع تر بفروشید!</span>
             <span class="button">می خواهم عضو ویژه شوم</span>
           </router-link>
           <button @click.prevent="$parent.closeRequiredFixAlert()" class="close-required-fix-alert">
