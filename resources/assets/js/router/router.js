@@ -330,15 +330,28 @@ const router = new Router({
           props: true,
         },
         {
-          path: "product-view/:categoryName/:subCategoryName/:id",
-          name: "productView",
+          path: "product-view-route",
+          name: "productViewRoute",
           components: {
             default: (resolve) => {
               require([
-                "../components/layouts/main/product_components/product_view.vue",
+                "../components/layouts/main/product_components/product-view-route.vue",
               ], resolve);
             },
           },
+          children: [
+            {
+              path: "product-view/:categoryName/:subCategoryName/:id",
+              name: "productView",
+              components: {
+                default: (resolve) => {
+                  require([
+                    "../components/layouts/main/product_components/product-view-route.vue",
+                  ], resolve);
+                },
+              },
+            }
+          ]
         },
         {
           path: "product-list/:searchText",

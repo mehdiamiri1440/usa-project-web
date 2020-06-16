@@ -119,7 +119,6 @@
       :profile-photo="profilePhoto"
       :user-full-name="userFullName"
       :user-logout-path="userLogoutPath"
-      :key="$route.fullPath"
     />
 
     <router-view

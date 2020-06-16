@@ -270,11 +270,11 @@ span {
 </template>
 
 <script>
-import { eventBus } from "../../../../router/router";
-import ProductCarousel from "../main_components/product-list-carousel";
-import ProductContents from "./product-view/product";
-import UserInfo from "./product-view/user_info";
-import registerInquerForm from "../main_components/register-inquiry-form.vue";
+import { eventBus } from "../../../../../router/router";
+import ProductCarousel from "../../main_components/product-list-carousel";
+import ProductContents from "./product";
+import UserInfo from "./user_info";
+import registerInquerForm from "../../main_components/register-inquiry-form.vue";
 
 export default {
   components: {
@@ -636,7 +636,7 @@ export default {
 
     let pageUrl = this.getProductUrl();
     let canonicalLink = window.location.host + pageUrl;
-        
+
     //
     return {
       title:
@@ -699,7 +699,7 @@ export default {
             productOwnerFullName
         }
       ],
-        link: [{ rel: "canonical", href: canonicalLink }],
+      link: [{ rel: "canonical", href: canonicalLink }]
     };
   }
 };
