@@ -318,6 +318,35 @@ a.profile-info-wrapper:focus {
   }
 }
 
+@media screen and (max-width: 767px) {
+  .fix-alert-wrapper > a {
+    line-height: 1;
+    display: inline-block;
+    width: calc(100% - 21px);
+    color: #fff;
+    padding: 6px 0 8px;
+    font-size: 12px;
+  }
+  .close-required-fix-alert {
+    float: right;
+    height: 100%;
+    background: none;
+    border: none;
+    line-height: 1;
+    padding: 4px 5px 3px;
+  }
+  .fix-alert-wrapper span.button {
+    font-size: 11px;
+    background: #fff;
+    color: red;
+    padding: 0 5px;
+    margin: 0;
+    margin-right: 0px;
+    border-radius: 4px;
+    margin-right: 6px;
+  }
+}
+
 @media screen and (max-width: 555px) {
   .user_name {
     display: none !important;
@@ -411,13 +440,15 @@ a.profile-info-wrapper:focus {
 <template>
   <div>
     <header id="header" class="main-header">
-      <div v-if="$parent.isRequiredFixAlert" class="hidden-xs required-fix-alert">
+      <div v-if="$parent.isRequiredFixAlert" class="required-fix-alert">
         <div class="fix-alert-wrapper">
           <router-link :to="{name : 'dashboardPricingTableSeller'}">
-            تعداد زیادی از فروشندگان موفق باسکول از عضویت ویژه استفاده می کنند
             <span
-              class="button"
-            >می خواهم عضو ویژه شوم</span>
+              class="hidden-xs"
+            >تعداد زیادی از فروشندگان موفق باسکول از عضویت ویژه استفاده می کنند</span>
+
+            <span class="hidden-sm hidden-md hidden-lg">تعداد زیادی از فروشندگان موفق</span>
+            <span class="button">می خواهم عضو ویژه شوم</span>
           </router-link>
           <button @click.prevent="$parent.closeRequiredFixAlert()" class="close-required-fix-alert">
             <i class="fa fa-times"></i>

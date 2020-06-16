@@ -263,9 +263,12 @@
     padding: 13px 15px;
   }
 
-  .main-content,
-  .main-content.is-fix-alert {
+  .main-content {
     padding: 59px 0 0;
+  }
+
+  .main-content.is-fix-alert {
+    padding: 85px 0 0;
   }
 
   .hidden_element {
