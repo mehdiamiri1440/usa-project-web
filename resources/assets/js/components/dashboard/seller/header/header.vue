@@ -881,7 +881,7 @@ export default {
       });
     },
     closeRequiredFixAlert: function() {
-      this.createCookie("closeSellerFixModal", "false", 30);
+      this.createCookie("closeSellerFixModal", "false", 10080); //for 7 days
       this.isFixAlert = false;
       this.$parent.checkCookie();
     },

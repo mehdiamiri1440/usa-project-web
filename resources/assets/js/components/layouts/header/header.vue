@@ -1179,6 +1179,7 @@ export default {
     },
     search: function() {
       if (this.mainSearchBoxText !== "") {
+       
         let searchValue = this.mainSearchBoxText;
         let queryValue = searchValue.replace(/ /g, "+");
 
@@ -1306,6 +1307,7 @@ export default {
   },
   watch: {
     mainSearchBoxText: function(value) {
+      console.log('header watch');
       eventBus.$emit("textSearch", value);
     }
   }

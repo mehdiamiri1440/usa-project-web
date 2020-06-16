@@ -552,7 +552,8 @@ export default {
         buttons: {
           success: {
             text: "افزایش ظرفیت",
-            value: "promote"
+            value: "promote",
+            className: "button-new-badge",
           },
           close: {
             text: "بستن",
@@ -583,7 +584,9 @@ export default {
         buttons: {
           success: {
             text: "افزایش ظرفیت",
-            value: "promote"
+            value: "promote",
+            className: "button-new-badge",
+
           },
           close: {
             text: "بستن",
