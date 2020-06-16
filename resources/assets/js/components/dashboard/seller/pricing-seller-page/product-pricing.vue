@@ -584,7 +584,7 @@ export default {
       );
 
       window.location.href =
-        "/payment/buyAd-reply-capacity/" + this.productPriceData.count;
+        "/payment/product-capacity/" + this.productPriceData.count;
     },
     registerComponentStatistics: function(categoryName, actionName, labelName) {
       gtag("event", actionName, {
