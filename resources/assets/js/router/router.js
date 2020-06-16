@@ -330,7 +330,7 @@ const router = new Router({
           props: true,
         },
         {
-          path: "product-view-route",
+          path: "product-view",
           name: "productViewRoute",
           components: {
             default: (resolve) => {
@@ -341,12 +341,12 @@ const router = new Router({
           },
           children: [
             {
-              path: "product-view/:categoryName/:subCategoryName/:id",
+              path: ":categoryName/:subCategoryName/:id",
               name: "productView",
               components: {
                 default: (resolve) => {
                   require([
-                    "../components/layouts/main/product_components/product-view-route.vue",
+                    "../components/layouts/main/product_components/product-view/product-view.vue",
                   ], resolve);
                 },
               },
