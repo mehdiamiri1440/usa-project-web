@@ -1307,7 +1307,6 @@ export default {
   },
   watch: {
     mainSearchBoxText: function(value) {
-      console.log('header watch');
       eventBus.$emit("textSearch", value);
     }
   }
