@@ -168,10 +168,7 @@ hr {
           </h2>
 
           <ul class="sub-category-product little">
-            <li
-              class="sub-category-item"
-              v-for="subCategory in category.subcategories"
-            >
+            <li class="sub-category-item" v-for="subCategory in category.subcategories">
               <h4>
                 <router-link
                   :class="{
@@ -180,8 +177,7 @@ hr {
                   :to="getSubCategoryUrl(subCategory)"
                   v-text="subCategory.category_name"
                   data-dismiss="modal"
-                >
-                </router-link>
+                ></router-link>
               </h4>
             </li>
           </ul>
@@ -197,7 +193,7 @@ hr {
                 )
               "
             >
-              <span>مشاهده بیشتر </span>
+              <span>مشاهده بیشتر</span>
 
               <i class="fa fa-angle-down"></i>
             </button>
@@ -216,18 +212,9 @@ hr {
     <div class="category-products-widget-default">
       <ul>
         <li>
-          <span
-            class="placeholder-content default-boxing-size content-full-width"
-          >
-          </span>
-          <span
-            class="placeholder-content default-boxing-size content-full-width"
-          >
-          </span>
-          <span
-            class="placeholder-content default-boxing-size content-full-width"
-          >
-          </span>
+          <span class="placeholder-content default-boxing-size content-full-width"></span>
+          <span class="placeholder-content default-boxing-size content-full-width"></span>
+          <span class="placeholder-content default-boxing-size content-full-width"></span>
         </li>
       </ul>
     </div>
@@ -240,20 +227,20 @@ export default {
   data() {
     return {
       categoryList: "",
-      fontIsLoad: false,
+      fontIsLoad: false
     };
   },
   methods: {
-    init: function () {
+    init: function() {
       var self = this;
       var categoryParameterName = this.getCategoryName();
       axios
         .post("/get_category_list", {
-          cascade_list: true,
+          cascade_list: true
         })
-        .then(function (response) {
+        .then(function(response) {
           self.categoryList = response.data.categories;
-          setTimeout(function () {
+          setTimeout(function() {
             for (var i = 0; i < self.categoryList.length; i++) {
               for (
                 var j = 0;
@@ -280,13 +267,16 @@ export default {
           });
         }, 500);
     },
-    collapseMethod: function (id, index, listItems) {
+    collapseMethod: function(id, index, listItems) {
       var wrapperlistElemetn = $(" aside .collapse-category-" + id);
       var listElemetn = $(
         "aside .collapse-category-" + id + " .sub-category-product"
       );
       var buttonElemetn = $("aside .collapse-category-" + id + " button span");
-      var initialHeight = this.categoryList[index].subcategories.length * 47;
+      let subCategoryLength = Object.keys(
+        this.categoryList[index].subcategories
+      ).length;
+      var initialHeight = subCategoryLength * 47;
 
       if (this.checkListHeight(id, listItems) !== true) {
         if (listElemetn.hasClass("little")) {
@@ -297,7 +287,7 @@ export default {
           listElemetn.addClass("little", 500);
         }
         wrapperlistElemetn.toggleClass("list-open", 500);
-        buttonElemetn.text(function (i, v) {
+        buttonElemetn.text(function(i, v) {
           return v === "بستن" ? "مشاهده بیشتر" : "بستن";
         });
 
@@ -319,7 +309,7 @@ export default {
           listElemetnMobile.addClass("little", 500);
         }
         wrapperlistElemetnMobile.toggleClass("list-open", 500);
-        buttonElemetnMobile.text(function (i, v) {
+        buttonElemetnMobile.text(function(i, v) {
           return v === "بستن" ? "مشاهده بیشتر" : "بستن";
         });
       }
@@ -360,29 +350,29 @@ export default {
         }
       }
     },
-    getSubCategoryUrl: function (t) {
+    getSubCategoryUrl: function(t) {
       let url =
         "/product-list/category/" + t.category_name.split(" ").join("-");
       return url;
     },
-    getCategoryName: function () {
+    getCategoryName: function() {
       let name = this.$route.params.categoryName
         ? this.$route.params.categoryName
         : "";
 
       return name.split("-").join(" ");
-    },
+    }
   },
   mounted() {
     this.init();
     var self = this;
 
-    document.fonts.ready.then(function () {
+    document.fonts.ready.then(function() {
       self.fontIsLoad = true;
     });
   },
   updated() {
     this.checkListHeightUpdate();
-  },
+  }
 };
 </script>
