@@ -399,6 +399,7 @@ export default {
       isSearchingContact: false,
       contactList: [],
       chatMessages: "",
+      isNoticeActive: true,
       selectedContact: "",
       currentUserId: "",
       currentContactUserId: "",
@@ -474,7 +475,12 @@ export default {
           user_id: contact.contact_id
         })
         .then(function(response) {
+          self.isNoticeActive = true;
           self.chatMessages = response.data.messages;
+          if (!self.chatMessages.length) {
+            self.isNoticeActive = false;
+          }
+          self.userHasNotice();
           self.currentUserId = response.data.current_user_id;
           self.scrollToEnd(0);
         })
@@ -492,6 +498,75 @@ export default {
       contact.unread_msgs_count = 0;
 
       this.contactList.splice(index, 1, contact);
+    },
+    userHasNotice() {
+      let cookie = this.getCookie("messengerNoticeData");
+      if (cookie) {
+        let getAlCookies = JSON.parse(cookie).userNoticeCloed;
+        if (getAlCookies.find(this.cookieHasUser)) {
+          this.isNoticeActive = false;
+        }
+      }
+    },
+    cookieHasUser(userId) {
+      return userId == this.selectedContact.contact_id;
+    },
+    setNoticeCookie() {
+      let contactUserId = this.selectedContact.contact_id;
+      let cookie = this.getCookie("messengerNoticeData");
+      if (cookie) {
+        let getAlCookies = JSON.parse(cookie).userNoticeCloed;
+        if (!getAlCookies.find(this.cookieHasUser)) {
+          getAlCookies.push(contactUserId);
+          this.createCookie(
+            "messengerNoticeData",
+            JSON.stringify({ userNoticeCloed: getAlCookies }),
+            1000
+          );
+        }
+      } else {
+        this.createCookie(
+          "messengerNoticeData",
+          JSON.stringify({ userNoticeCloed: [contactUserId] }),
+          1000
+        );
+      }
+      this.isNoticeActive = false;
+    },
+    createCookie: function(name, value, minutes) {
+      if (minutes) {
+        var date = new Date();
+        date.setTime(date.getTime() + minutes * 60 * 1000);
+        var expires = "; expires=" + date.toGMTString();
+      } else {
+        var expires = "";
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
+    },
+    getCookie: function(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    },
+    checkCookie: function() {
+      if (
+        this.active_pakage_type == 3 ||
+        this.getCookie("closeSellerFixModal") == "false" ||
+        this.checkPricingRoute()
+      ) {
+        this.isRequiredFixAlert = false;
+      } else {
+        this.isRequiredFixAlert = true;
+      }
     },
     appendMessageToChatHistory: function(contact) {
       var self = this;

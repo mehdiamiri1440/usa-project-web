@@ -272,9 +272,68 @@
   line-height: 1;
   padding: 4px 2px;
 }
+
+.messenger-notice {
+  text-align: center;
+  background: #fff8c1;
+  padding: 7px;
+  border-radius: 8px;
+  margin-top: 20px;
+  line-height: 1.618;
+  color: #777;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+}
+
+.messenger-notice .notice-title {
+  font-size: 13px;
+}
+
+.message-wrapper .chat-page li > div.notice-actions {
+  margin: 3px auto 0;
+  box-shadow: none;
+}
+.messenger-notice .notice-actions button {
+  border: none;
+  color: #21ad92;
+  border-radius: 4px;
+  margin: 2px 7px 0;
+  background: #fff;
+  padding: 2px 15px;
+}
+
+.messenger-notice .notice-actions button:hover {
+  background: #21ad93;
+  border-color: #21ad93;
+  color: #fff;
+}
+.messenger-notice .notice-actions button i {
+  margin-left: 7px;
+}
 @media screen and (max-width: 767px) {
   #chat-menu-items {
     left: 54px;
+  }
+
+  .messenger-notice {
+    margin: 20px -20px;
+    border-radius: 0;
+    background: #fcfaf8;
+    text-align: right;
+    padding: 7px 15px;
+  }
+  .notice-actions {
+    width: 100%;
+  }
+  .messenger-notice .notice-actions button {
+    width: 100%;
+    text-align: right;
+    background: none;
+    padding: 5px 0;
+  }
+  .messenger-notice .notice-actions button:hover {
+    background: initial;
+    border-color: initial;
+    color: #21ad92;
   }
 }
 @media screen and (max-width: 345px) {
@@ -375,7 +434,7 @@
         >
           <div
             :class="[
-              msg.sender_id == $parent.currentUserId
+              checkMessageListClass(msg.sender_id)
                 ? 'message-send'
                 : 'message-receive',
             ]"
@@ -392,6 +451,18 @@
                 </span>
               </span>
             </div>
+          </div>
+        </li>
+        <li v-if="$parent.isNoticeActive" class="messenger-notice">
+          <p
+            class="notice-title"
+          >لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود</p>
+          <div class="notice-actions">
+            <button @click="$parent.setNoticeCookie()">متوجه شدم</button>
+            <button>
+              <i class="fa fa-info"></i>
+              اطلاعات بیشتر
+            </button>
           </div>
         </li>
       </ul>
@@ -448,6 +519,7 @@ export default {
   methods: {
     init: function() {
       this.hideCollapses();
+      this.$parent.userHasNotice();
     },
     hideCollapses: function() {
       $(document).on("click", function(e) {
@@ -481,6 +553,17 @@ export default {
       }
 
       return isMessageName;
+    },
+    checkMessageListClass(senderId) {
+      let myMessage = false;
+
+      if (senderId == this.$parent.currentUserId) {
+        this.$parent.isNoticeActive = false;
+        myMessage = true;
+      } else {
+        myMessage = false;
+      }
+      return myMessage;
     }
   },
   mounted: function() {
