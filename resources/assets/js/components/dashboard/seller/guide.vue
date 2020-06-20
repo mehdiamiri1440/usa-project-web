@@ -112,7 +112,7 @@ export default {
     };
   },
   mounted() {
-    eventBus.$emit("subHeader", this.items);
+    eventBus.$emit("subHeader", false);
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/guide" });

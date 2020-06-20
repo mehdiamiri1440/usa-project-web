@@ -239,7 +239,7 @@ span {
       </div>
 
       <register-inquer-form
-        v-if="showRegisterRequestBox"
+        v-if="!showRegisterRequestBox"
         wrapper-bg="true"
         :str="str"
         :user-profile-info="product.user_info"
@@ -309,7 +309,8 @@ export default {
       isLoading: false,
       isMyProfile: false,
       showRegisterRequestBox: true,
-      starScore: ""
+      starScore: "",
+      verifiedUserContent: this.$parent.verifiedUserContent
     };
   },
   methods: {

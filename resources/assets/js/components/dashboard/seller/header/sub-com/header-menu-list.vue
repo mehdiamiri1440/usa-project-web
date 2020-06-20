@@ -154,7 +154,10 @@ a.pricing-table.router-link-exact-active {
           </li>
 
           <li class="list-item">
-            <router-link :to="{ name : 'profileBasicSeller' }">
+            <router-link
+              :to="{ name : 'profileBasicSeller' }"
+              :class="{ 'router-link-exact-active' : $route.name == 'profileBasicSellerVeficiation'}"
+            >
               <i class="fa fa-user" aria-hidden="true"></i>
               <span>ویرایش پروفایل</span>
             </router-link>

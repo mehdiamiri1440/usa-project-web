@@ -234,6 +234,8 @@
 
 
 <script>
+import { eventBus } from "../../../../router/router";
+
 export default {
   data: function() {
     return {
@@ -256,11 +258,14 @@ export default {
         }
       ],
 
-      boxes: ""
+      boxes: "",
+      items: []
     };
   },
   methods: {
     init: function() {
+      eventBus.$emit("subHeader", false);
+
       var self = this;
       axios
         .post("/get_seller_dashboard_required_data")

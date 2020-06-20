@@ -62,7 +62,7 @@ label {
 .user-name {
   float: right;
 
-  padding-top: 7px;
+  margin-top: 7px;
 
   padding-right: 10px;
 
@@ -273,37 +273,46 @@ label .small-label {
   <div v-if="userProfileInfo" class="section-wrapper col-xs-12">
     <div class="row">
       <div class="title-section col-xs-12">
-        <h3>
-          استعلام شرایط فروش
-        </h3>
+        <h3>استعلام شرایط فروش</h3>
         <hr />
       </div>
     </div>
 
     <div class="row">
-      <div
-        class="text-right col-xs-12 form-contents-wrapper"
-        :class="{ 'wrapper-bg': wrapperBg }"
-      >
+      <div class="text-right col-xs-12 form-contents-wrapper" :class="{ 'wrapper-bg': wrapperBg }">
         <div class="title-contents">
           <div class="user-image">
-            <img  :src="userProfilePhoto" alt="" />
+            <img :src="userProfilePhoto" alt />
           </div>
-          <div
-            class="user-name"
-            v-text="'استعلام از ' + userProfileInfo.first_name + ' ' + userProfileInfo.last_name"
-          ></div>
+          <div class="user-name text-rtl">
+            {{'استعلام از ' + userProfileInfo.first_name + ' ' + userProfileInfo.last_name}}
+            <button
+              @click.prevent
+              class="verified-user"
+              data-container="body"
+              data-toggle="popover"
+              data-placement="bottom"
+              :data-content="$parent.verifiedUserContent"
+              title
+            >
+              <i class="fa fa-certificate"></i>
+            </button>
+          </div>
         </div>
 
         <div class="form-contents col-xs-12">
           <div class="row">
             <div v-if="userProfileInfo.product_name" class="col-xs-12">
-                <p class="text-rtl">استعلام شرایط فروش <span class="red-text" v-text="userProfileInfo.product_name"></span></p>
+              <p class="text-rtl">
+                استعلام شرایط فروش
+                <span class="red-text" v-text="userProfileInfo.product_name"></span>
+              </p>
             </div>
             <div class="col-xs-12 pull-right">
-              <label for="inquiry-text" class="text-rtl">
-               جزییات مورد نیاز را از فروشنده بپرسید (قیمت، بسته بندی و ...)
-              </label>
+              <label
+                for="inquiry-text"
+                class="text-rtl"
+              >جزییات مورد نیاز را از فروشنده بپرسید (قیمت، بسته بندی و ...)</label>
 
               <div class="text-input-wrapper">
                 <textarea
@@ -317,10 +326,7 @@ label .small-label {
                 ></textarea>
               </div>
               <p class="error-message">
-                <span
-                  v-if="errors.inquiryText"
-                  v-text="errors.inquiryText"
-                ></span>
+                <span v-if="errors.inquiryText" v-text="errors.inquiryText"></span>
               </p>
             </div>
           </div>
@@ -333,9 +339,7 @@ label .small-label {
                   active: inquiry.text,
                 }"
                 @click.prevent="submitForm"
-              >
-                ثبت
-              </button>
+              >ثبت</button>
             </div>
           </div>
         </div>
@@ -345,9 +349,7 @@ label .small-label {
   <div v-else class="section-wrapper col-xs-12">
     <div class="row">
       <div class="title-section col-xs-12">
-        <h3>
-          استعلام شرایط فروش
-        </h3>
+        <h3>استعلام شرایط فروش</h3>
         <hr />
       </div>
     </div>
@@ -370,10 +372,7 @@ label .small-label {
           <div class="row">
             <div class="col-xs-12 pull-right">
               <div class="row">
-                <label
-                  for="inquiry-text"
-                  class="text-rtl col-xs-12 col-sm-4 col-md-3 pull-right"
-                >
+                <label for="inquiry-text" class="text-rtl col-xs-12 col-sm-4 col-md-3 pull-right">
                   <span class="placeholder-content content-full-width"></span>
                 </label>
               </div>
@@ -386,7 +385,7 @@ label .small-label {
 
           <div class="submit-button-wrapper col-xs-12">
             <div class="row">
-              <span class="placeholder-content default-button h-40"> </span>
+              <span class="placeholder-content default-button h-40"></span>
             </div>
           </div>
         </div>
@@ -397,20 +396,20 @@ label .small-label {
 
 <script>
 export default {
-  props: ["wrapperBg", "userProfileInfo", "userProfilePhoto","str"],
-  data: function () {
+  props: ["wrapperBg", "userProfileInfo", "userProfilePhoto", "str"],
+  data: function() {
     return {
       errors: {
-        inquiryText: "",
+        inquiryText: ""
       },
       inquiry: {
-        text: "",
-      },
+        text: ""
+      }
     };
   },
   methods: {
-    init: function () {},
-    submitForm: function () {
+    init: function() {},
+    submitForm: function() {
       this.textValidator(this.inquiry.text);
 
       if (!this.inquiry.text || this.inquiry.text == "") {
@@ -418,15 +417,18 @@ export default {
       }
 
       if (!this.errors.inquiryText) {
-          window.localStorage.setItem('msgToSend',this.inquiry.text);
-          if(! window.localStorage.getItem('contact')){
-            window.localStorage.setItem('contact',JSON.stringify(this.userProfileInfo));
-          }
-          window.location.href = '/register';
+        window.localStorage.setItem("msgToSend", this.inquiry.text);
+        if (!window.localStorage.getItem("contact")) {
+          window.localStorage.setItem(
+            "contact",
+            JSON.stringify(this.userProfileInfo)
+          );
+        }
+        window.location.href = "/register";
       }
     },
 
-    textValidator: function (text) {
+    textValidator: function(text) {
       this.toLatinNumbers(text);
       if (!text) {
         this.errors.inquiryText = "";
@@ -434,7 +436,7 @@ export default {
         this.errors.inquiryText = "لطفا توضیحات استعلام را به درستی وارد کنید";
       }
     },
-    toLatinNumbers: function (num) {
+    toLatinNumbers: function(num) {
       if (num == null) {
         return null;
       }
@@ -445,24 +447,50 @@ export default {
 
       return num
         .toString()
-        .replace(/[\u0660-\u0669]/g, function (c) {
+        .replace(/[\u0660-\u0669]/g, function(c) {
           return c.charCodeAt(0) - 0x0660;
         })
-        .replace(/[\u06f0-\u06f9]/g, function (c) {
+        .replace(/[\u06f0-\u06f9]/g, function(c) {
           return c.charCodeAt(0) - 0x06f0;
         });
     },
-    validateRegx: function (input, regx) {
+    validateRegx: function(input, regx) {
       return regx.test(input);
     },
+    activeComponentTooltip() {
+      $(".verified-user")
+        .popover({ trigger: "manual", html: true, animation: false })
+        .on("mouseenter", function() {
+          var _this = this;
+          $(this).popover("show");
+          $(".popover").on("mouseleave", function() {
+            $(_this).popover("hide");
+          });
+        })
+        .on("mouseleave", function() {
+          var _this = this;
+          setTimeout(function() {
+            if (!$(".popover:hover").length) {
+              $(_this).popover("hide");
+            }
+          }, 300);
+        });
+    }
   },
   mounted() {
     this.init();
   },
   watch: {
-    "inquiry.text": function () {
+    "inquiry.text": function() {
       this.errors.inquiryText = "";
     },
-  },
+    userProfileInfo: function() {
+      if (this.$parent.product.user_info) {
+        setTimeout(() => {
+          this.activeComponentTooltip();
+        }, 10);
+      }
+    }
+  }
 };
 </script>

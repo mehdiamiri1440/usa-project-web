@@ -328,7 +328,8 @@ export default {
       continueToLoadProducts: true,
       loadMoreActive: false,
       loading: false,
-      searchTextTimeout: null
+      searchTextTimeout: null,
+      verifiedUserContent: this.$parent.verifiedUserContent
     };
   },
   methods: {
@@ -445,6 +446,7 @@ export default {
   },
   mounted() {
     this.init();
+    eventBus.$emit("subHeader", false);
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/my-products" });
