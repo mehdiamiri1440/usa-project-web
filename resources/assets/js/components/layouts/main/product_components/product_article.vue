@@ -468,7 +468,8 @@ export default {
       popUpLoaded: false,
       isMyProfile: false,
       productUrl: "",
-      jsonLDObject: ""
+      jsonLDObject: "",
+      verifiedUserContent: this.$parent.verifiedUserContent
     };
   },
   methods: {

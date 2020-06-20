@@ -680,7 +680,7 @@ export default {
   },
   mounted() {
     this.init();
-    eventBus.$emit("subHeader", this.items);
+    eventBus.$emit("subHeader", false);
     $(".main-image").magnificPopup({
       delegate: "a",
       type: "image",

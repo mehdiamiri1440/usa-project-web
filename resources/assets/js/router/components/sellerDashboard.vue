@@ -95,7 +95,14 @@ export default {
   components: {
     "header-dash-seller": HeaderDashSeller
   },
-  props: ["userId", "isSeller", "assets", "storagePath", "messageCount"],
+  props: [
+    "userId",
+    "isSeller",
+    "assets",
+    "storagePath",
+    "messageCount",
+    "verifiedUserContent"
+  ],
   data: function() {
     return {
       linkHideStates: ["buyAd-requests", "messenger/contacts"],

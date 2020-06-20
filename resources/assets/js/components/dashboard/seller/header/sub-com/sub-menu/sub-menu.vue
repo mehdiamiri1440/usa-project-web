@@ -4,7 +4,7 @@
   position: absolute;
   left: 0;
   background: #eff3f6;
-  top: 63px;
+  top: 57px;
   right: 0;
   text-align: center;
   border-bottom: 1px solid #e6e6e6;
@@ -43,11 +43,11 @@
   width: 100%;
 }
 
-.sub-header a.active {
+.sub-header a.router-link-exact-active {
   color: #313942;
 }
 
-.sub-header a.active::after {
+.sub-header a.router-link-exact-active::after {
   content: " ";
   position: absolute;
   bottom: 0;
@@ -59,9 +59,9 @@
 
 /*end style sub-header*/
 @media screen and (max-width: 345px) {
-  .sub-header a {
+  /* .sub-header a {
     font-size: 10px;
-  }
+  } */
   .sub-header {
     bottom: -44px;
   }
@@ -69,12 +69,12 @@
 </style>
 
 <template>
-  <div>
-    <!-- <ul class="list-inline">
-                <li class="list-item" v-for="item in items" :class="item.active">
-                    <router-link :to="{ name : item.url }" v-text="item.message" />
-                </li>
-    </ul>-->
+  <div class="sub-header text-rtl" v-if="items">
+    <ul class="list-inline">
+      <li class="list-item" v-for="(item,index) in items" :class="item.active" :key="index">
+        <router-link :to="{ name : item.url }" v-text="item.message" />
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -84,7 +84,7 @@ import { eventBus } from "../../../../../../router/router";
 export default {
   data: function() {
     return {
-      items: []
+      items: ""
     };
   },
   created() {

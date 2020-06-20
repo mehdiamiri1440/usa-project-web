@@ -78,7 +78,7 @@
   border-radius: 50px;
   overflow: hidden;
   position: relative;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .message-wrapper .message-contact-title img {
@@ -94,12 +94,12 @@
 .message-wrapper .message-contact-title span {
   float: right;
   display: block;
-  padding-top: 9px;
+  margin-top: 9px;
   white-space: nowrap;
   text-overflow: ellipsis;
   height: 30px;
   overflow: hidden;
-  width: 135px;
+  max-width: 135px;
 }
 
 .back-state {
@@ -362,13 +362,22 @@
         </div>
 
         <router-link :to="{ path: '/profile/' + $parent.selectedContact.user_name }">
-          <span
-            v-text="
-              $parent.selectedContact.first_name +
-              ' ' +
-              $parent.selectedContact.last_name
-            "
-          ></span>
+          <span>
+            {{ $parent.selectedContact.first_name +
+            ' ' +
+            $parent.selectedContact.last_name}}
+            <button
+              @click.prevent
+              class="verified-user"
+              data-container="body"
+              data-toggle="popover"
+              data-placement="bottom"
+              :data-content="$parent.verifiedUserContent"
+              title
+            >
+              <i class="fa fa-certificate"></i>
+            </button>
+          </span>
         </router-link>
       </div>
       <div class="head-action-buttons pull-left">

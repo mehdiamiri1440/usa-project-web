@@ -414,7 +414,8 @@ export default {
       toContact: 15,
       contactsCountInEachLoad: 20,
       showLoadMoreBtn: false,
-      userAllowedReview: false
+      userAllowedReview: false,
+      verifiedUserContent: this.$parent.verifiedUserContent
     };
   },
 
@@ -764,7 +765,7 @@ export default {
 
   mounted: function() {
     this.init();
-    eventBus.$emit("subHeader", this.items);
+    eventBus.$emit("subHeader", false);
   },
 
   created: function() {

@@ -89,6 +89,17 @@ const router = new Router({
           },
         },
         {
+          path: "profile/verification",
+          name: "profileBasicSellerVeficiation",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/profile/profile_verification.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
           path: "messenger",
           components: {
             default: (resolve) => {
