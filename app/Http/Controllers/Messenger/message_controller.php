@@ -268,7 +268,7 @@ class message_controller extends Controller
                             ->Join('profiles', 'myusers.id', '=', 'profiles.myuser_id')
                             ->where('profiles.confirmed', true)
                             ->where('myusers.id', $contact_id)
-                            ->select(['myusers.id as contact_id', 'first_name', 'last_name', 'profile_photo', 'user_name'])
+                            ->select(['myusers.id as contact_id', 'first_name', 'last_name', 'profile_photo', 'user_name','is_verified'])
                             ->get()
                             ->last();
 
@@ -330,7 +330,7 @@ class message_controller extends Controller
     public function get_user_chat_history(Request $request)
     {
         $this->validate($request, [
-            'user_id' => 'required|integer',
+            'user_id' => 'required|integer|exists:myusers,id',
         ]);
 
         $user_id = session('user_id');
@@ -350,9 +350,12 @@ class message_controller extends Controller
 
         $this->mark_all_messages_as_read($user_id, $request->user_id);
 
+        $is_verified = myuser::find($request->user_id)->is_verified;
+
         return response()->json([
             'status' => true,
             'messages' => $messages,
+            'is_verified' => $is_verified,
             'current_user_id' => $user_id,
         ], 200);
     }

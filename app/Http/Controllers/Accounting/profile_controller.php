@@ -46,6 +46,8 @@ class profile_controller extends Controller
         'created_at',
         'updated_at',
         'extra_product_capacity',
+        'profile_visit',
+        'is_blocked'
     ];
 
     protected $profile_fields_exclude_array = [

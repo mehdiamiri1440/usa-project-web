@@ -234,6 +234,19 @@ export default {
 
     let self = this;
 
+    $(document).on("mouseleave", function () {
+       if(!self.userId){
+         if(!window.localStorage.getItem('guideShowed')){
+           self.openRelatedSwalModal('guide');
+
+           window.localStorage.setItem('guideShowed',true);
+         }
+         
+       }
+    });
+
+    
+
     if (messaging) {
       messaging.onMessage(function(payload) {
         if (payload.notification.tag == "buskool") {

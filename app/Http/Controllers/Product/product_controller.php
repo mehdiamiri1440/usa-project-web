@@ -34,6 +34,7 @@ class product_controller extends Controller
         'myusers.last_name',
         'myusers.active_pakage_type',
         'myusers.created_at',
+        'myusers.is_verified'
     ];
     protected $profile_info_sent_by_product_array = [
         'profiles.profile_photo',

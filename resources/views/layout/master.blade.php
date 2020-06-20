@@ -133,7 +133,7 @@
         
         $('.main-loader-wrapper').css('display','none');
     });
-
+    
     $(document).on("idle.idleTimer", function () {
         window.location.href = '/login'
     });
@@ -142,7 +142,15 @@
         let userId = <?php if(session('user_id')){echo session('user_id');} else echo -1; ?>;
         return userId;
     }
+
+   
+    //     addEvent(window, "load", function (e) {
+            
+    //         });
+    //     });
 </script>
+
+
 </body>
 
 </html>
