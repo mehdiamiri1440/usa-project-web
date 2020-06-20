@@ -556,7 +556,6 @@ textarea {
     text-align: center;
   }
 
-  .main-wrapper,
   main,
   .form-wrapper {
     padding: 0;

@@ -57,7 +57,7 @@
 </style>
 
 <template>
-  <div class="main-wrapper col-xs-12">
+  <div class="main-wrapper col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
     <header class="col-xs-12">
       <div class="title col-xs-12">
         <div class="row">
@@ -68,68 +68,70 @@
       </div>
     </header>
     <main class="col-xs-12">
-      <section class="wrapper-section">
-        <div class="content-wrapper row">
-          <div class="col-xs-12 pull-right">
-            <div class="main-title-wrapper">
-              ۱ -
-              نمونه تصویر از کارت ملی
+      <div class="row">
+        <section class="wrapper-section">
+          <div class="content-wrapper row">
+            <div class="col-xs-12 pull-right">
+              <div class="main-title-wrapper">
+                ۱ -
+                نمونه تصویر از کارت ملی
+              </div>
+              <div class="image-file-wrapper">
+                <img src="../../../../../img/product.jpg" alt="send file" />
+              </div>
             </div>
-            <div class="image-file-wrapper">
-              <img src="../../../../../img/product.jpg" alt="send file" />
+            <div class="col-xs-12 pull-right">
+              <div class="main-title-wrapper">
+                ۲ -
+                نمونه تصویر از کارت ملی
+              </div>
+              <div class="image-file-wrapper">
+                <img src="../../../../../img/product.jpg" alt="send file" />
+              </div>
+            </div>
+            <div class="col-xs-12 pull-right">
+              <div class="main-title-wrapper">
+                ۳ -
+                نمونه تصویر از کارت ملی
+              </div>
+              <div class="image-file-wrapper">
+                <img src="../../../../../img/product.jpg" alt="send file" />
+              </div>
             </div>
           </div>
-          <div class="col-xs-12 pull-right">
-            <div class="main-title-wrapper">
-              ۲ -
-              نمونه تصویر از کارت ملی
-            </div>
-            <div class="image-file-wrapper">
-              <img src="../../../../../img/product.jpg" alt="send file" />
-            </div>
-          </div>
-          <div class="col-xs-12 pull-right">
-            <div class="main-title-wrapper">
-              ۳ -
-              نمونه تصویر از کارت ملی
-            </div>
-            <div class="image-file-wrapper">
-              <img src="../../../../../img/product.jpg" alt="send file" />
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="wrapper-section">
-        <div class="content-wrapper row">
-          <div class="col-xs-12 pull-right">
-            <label>
-              افزودن تصاویر مربوطه
-              <span class="small-description">(ارسال مدارک مورد نیاز)</span>
-            </label>
+        </section>
+        <section class="wrapper-section">
+          <div class="content-wrapper row">
+            <div class="col-xs-12 pull-right">
+              <label>
+                افزودن تصاویر مربوطه
+                <span class="small-description">(ارسال مدارک مورد نیاز)</span>
+              </label>
 
-            <UploadFile
-              uploadName="id_cart_files"
-              uploadAccept="image/*"
-              :uploadMinSize="1024"
-              :uploadSize="1024 * 1024 * 10"
-              :uploadMultiple="true"
-              :uploadDrop="true"
-              :uploadDropDirectory="true"
-              :uploadAddIndex="false"
-              :uploadThread="2"
-              :uploadOCompress="1024 * 1024"
-              :uploadUploadAuto="false"
-              :uploadRef="idCartFiles"
-            />
+              <UploadFile
+                uploadName="id_cart_files"
+                uploadAccept="image/*"
+                :uploadMinSize="1024"
+                :uploadSize="1024 * 1024 * 10"
+                :uploadMultiple="true"
+                :uploadDrop="true"
+                :uploadDropDirectory="true"
+                :uploadAddIndex="false"
+                :uploadThread="2"
+                :uploadOCompress="1024 * 1024"
+                :uploadUploadAuto="false"
+                :uploadRef="idCartFiles"
+              />
+            </div>
           </div>
-        </div>
 
-        <div class="col-xs-12 text-center">
-          <div class="row">
-            <button class="green-button" @click.prevent>ثبت تغییرات</button>
+          <div class="col-xs-12 text-center">
+            <div class="row">
+              <button class="green-button" @click.prevent>ثبت مدارک</button>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
   </div>
 </template>

@@ -75,6 +75,22 @@ a.active {
   display: block;
 }
 
+.header-menu li.active a.router-link-exact-active {
+  color: #fff;
+  background: #637484;
+}
+
+.header-menu li.active a.router-link-exact-active:before {
+  content: " ";
+  height: 100%;
+  width: 2px;
+  background: #00c569;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+}
+
 .custom-badge {
   position: absolute;
   left: 20px;
@@ -97,17 +113,11 @@ a.active {
   <div>
     <div class="header-menu">
       <ul class="list-unstyled">
-        <!--                 <li class="list-item">
-                          <router-link
-                            :class="{'active' : this.activeElement === 0}"
-                            :to="{ name : 'status' }"
-                          >
-                            <span>داشبورد</span>
-                            <i class="fa fa-chart-line"></i>
-                          </router-link>
-        </li>-->
         <li class="list-item">
-          <router-link :to="{ name : 'profileBasicBuyer' }">
+          <router-link
+            :to="{ name : 'profileBasicBuyer' }"
+            :class="{ 'router-link-exact-active' : $route.name == 'profileBasicBuyerVeficiation'}"
+          >
             <i class="fa fa-user" aria-hidden="true"></i>
             <span>ویرایش پروفایل</span>
           </router-link>
@@ -171,16 +181,6 @@ export default {
   methods: {
     init: function() {
       var self = this;
-
-    //   axios
-    //     .post("/get_total_unread_messages_for_current_user")
-    //     .then(function(response) {
-    //       self.messageCount = response.data.msg_count;
-    //       if (self.messageCount >= 100) {
-    //         self.messageCount = "+99";
-    //       }
-    //     })
-    //     .catch(function(err) {});
     },
     subIsActive(input) {
       const paths = Array.isArray(input) ? input : [input];

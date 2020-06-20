@@ -578,6 +578,7 @@ a.profile-info-wrapper:focus {
           </button>
         </div>
       </div>
+      <SubMenu />
     </header>
   </div>
 </template>
@@ -585,12 +586,16 @@ a.profile-info-wrapper:focus {
 
 <script>
 var visible = false;
+import SubMenu from "./sub-menu/sub-menu.vue";
 import { eventBus } from "../../../../../router/router";
 export default {
   data: function() {
     return {
       messageCount: ""
     };
+  },
+  components: {
+    SubMenu
   },
   props: [
     "menuClosed",
