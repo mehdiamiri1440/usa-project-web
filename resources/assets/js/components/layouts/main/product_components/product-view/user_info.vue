@@ -420,6 +420,7 @@ p.response-rate span {
           ' ' +
           $parent.product.user_info.last_name}}
           <button
+            v-if="$parent.product.user_info.is_verified"
             @click.prevent
             class="verified-user"
             data-container="body"

@@ -1039,14 +1039,20 @@ class product_controller extends Controller
 
             $tags_info = $this->get_category_meta_data($category_id);
 
-            $tags_info->each(function($item) use(&$schema_object){
-                if(! is_null($item->schema_object)){
-                    if(!$schema_object){
-                        $schema_object = $item->schema_object;
-                    }
-                }
-                unset($item->schema_object);
-            });
+            // $tags_info->each(function($item) use(&$schema_object){
+            //     if(! is_null($item->schema_object)){
+            //         if(!$schema_object){
+            //             $schema_object = $item->schema_object;
+            //         }
+            //     }
+            //     unset($item->schema_object);
+            // });
+
+            if(! is_null($tags_info->schema_object)){
+                $schema_object = $tags_info->schema_object;
+                unset($tags_info->schema_object);
+            }
+            
 
             return response()->json([
                 'status' => true,
@@ -1099,7 +1105,7 @@ class product_controller extends Controller
                                 'header',
                                 'content',
                                 'schema_object'
-                            ])->get();
+                            ])->get()->first();
 
         return $tags_info;
     }

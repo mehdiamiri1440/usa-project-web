@@ -198,12 +198,11 @@ class message_controller extends Controller
         $user_id = session('user_id');
 
         //check block status
-        $block_status = DB::table('myusers')
+        $user_record = DB::table('myusers')
                         ->where('id',$user_id)
-                        ->first()
-                        ->is_blocked;
+                        ->first();
 
-        if($block_status == true){
+        if($user_record->is_blocked == true){
             return redirect('/logout');
         }
 
@@ -236,6 +235,7 @@ class message_controller extends Controller
             'status' => true,
             'contact_list' => $contact_list,
             'user_id' => $user_id,
+            'is_verified' => $user_record->is_verified
         ], 200);
     }
 

@@ -188,7 +188,7 @@ export default {
       reviewUserData: "",
       reviewUserPrfileId: "",
       verifiedUserContent:
-        "<div class='tooltip-wrapper'>Tooltip on top <a href='#'>show all</a> </div>"
+        "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='#'>اطلاعات بیشتر</a> </div>"
     };
   },
   props: [

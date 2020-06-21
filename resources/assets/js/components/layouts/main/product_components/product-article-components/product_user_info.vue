@@ -188,6 +188,7 @@ p.response-rate {
           <router-link class="user-name-link" :to="'/profile/'+ user_name" v-if="user_info">
             {{user_full_name}}
             <button
+              v-if="user_info.is_verified"
               @click.prevent
               class="verified-user"
               data-container="body"
@@ -196,7 +197,7 @@ p.response-rate {
               :data-content="$parent.verifiedUserContent"
               title
             >
-              <i class="fa fa-certificate"></i>
+              <i v-if="user_info.is_verified" class="fa fa-certificate"></i>
             </button>
           </router-link>
 
@@ -210,6 +211,7 @@ p.response-rate {
           <router-link class="user-name-link" :to="'/profile/'+ user_name" v-if="user_info">
             {{user_full_name}}
             <button
+              v-if="user_info.is_verified"
               @click.prevent
               class="verified-user"
               data-container="body"
@@ -218,7 +220,7 @@ p.response-rate {
               :data-content="$parent.verifiedUserContent"
               title
             >
-              <i class="fa fa-certificate"></i>
+              <i  class="fa fa-certificate"></i>
             </button>
           </router-link>
         </div>
