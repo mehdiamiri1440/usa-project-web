@@ -36,7 +36,7 @@ export default {
   components: {
     "header-dash-buyer": HeaderDashBuyer
   },
-  props: ["userId", "isSeller", "assets", "storagePath"],
+  props: ["userId", "isSeller", "assets", "storagePath", "verifiedUserContent"],
   data: function() {
     return {
       searchText: ""

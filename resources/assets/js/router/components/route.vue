@@ -119,6 +119,7 @@
       :profile-photo="profilePhoto"
       :user-full-name="userFullName"
       :user-logout-path="userLogoutPath"
+      :verified-user-content="verifiedUserContent"
     />
 
     <router-view
@@ -127,6 +128,7 @@
       :is-seller="isSeller"
       :assets="assets"
       :storage-path="storagePath"
+      :verified-user-content="verifiedUserContent"
     />
 
     <router-view
@@ -135,6 +137,7 @@
       :is-seller="isSeller"
       :assets="assets"
       :storage-path="storagePath"
+      :verified-user-content="verifiedUserContent"
     />
 
     <!-- add android app download  -->
@@ -183,7 +186,9 @@ export default {
       msg: "",
       reviewCurrentStep: 0,
       reviewUserData: "",
-      reviewUserPrfileId: ""
+      reviewUserPrfileId: "",
+      verifiedUserContent:
+        "<div class='tooltip-wrapper'>Tooltip on top <a href='#'>show all</a> </div>"
     };
   },
   props: [
@@ -552,7 +557,7 @@ export default {
           success: {
             text: "افزایش ظرفیت",
             value: "promote",
-            className: "button-new-badge",
+            className: "button-new-badge"
           },
           close: {
             text: "بستن",
@@ -584,8 +589,7 @@ export default {
           success: {
             text: "افزایش ظرفیت",
             value: "promote",
-            className: "button-new-badge",
-
+            className: "button-new-badge"
           },
           close: {
             text: "بستن",
@@ -733,6 +737,8 @@ export default {
   },
   mounted() {
     this.activateDownloadApp();
+    // eventBus.$emit("globalVerifiedBadgeContents", this.verifiedUserContent);
+    eventBus.$emit("globalVerifiedBadgeContents", 1);
   }
 };
 </script>

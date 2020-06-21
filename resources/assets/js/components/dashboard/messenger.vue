@@ -16,7 +16,8 @@ export default {
     return {
       groupStep: 0,
       userId: this.$parent.userId,
-      assets: this.$parent.assets
+      assets: this.$parent.assets,
+      verifiedUserContent: this.$parent.verifiedUserContent
     };
   }
 };

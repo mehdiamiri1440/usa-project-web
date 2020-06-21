@@ -579,7 +579,7 @@ end filter modal styles
 
   .sub-header {
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
   }
 
@@ -1049,7 +1049,8 @@ export default {
       bottom: false,
       loadMoreActive: false,
       searchTextTimeout: null,
-      sortOption: "BM"
+      sortOption: "BM",
+      verifiedUserContent: this.$parent.verifiedUserContent
     };
   },
   methods: {

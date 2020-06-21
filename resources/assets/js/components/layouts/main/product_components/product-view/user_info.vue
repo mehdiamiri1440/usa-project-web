@@ -415,14 +415,22 @@ p.response-rate span {
       <div class="user-information-content">
         <p class="user-position">فروشنده</p>
 
-        <p
-          v-if="$parent.product.user_info"
-          v-text="
-            $parent.product.user_info.first_name +
-            ' ' +
-            $parent.product.user_info.last_name
-          "
-        ></p>
+        <p v-show="$parent.product.user_info">
+          {{ $parent.product.user_info.first_name +
+          ' ' +
+          $parent.product.user_info.last_name}}
+          <button
+            @click.prevent
+            class="verified-user"
+            data-container="body"
+            data-toggle="popover"
+            data-placement="bottom"
+            :data-content="$parent.verifiedUserContent"
+            title
+          >
+            <i class="fa fa-certificate"></i>
+          </button>
+        </p>
 
         <p
           v-if="$parent.product.user_info.active_pakage_type == 3"
@@ -507,3 +515,38 @@ p.response-rate span {
     </div>
   </div>
 </template>
+
+<script >
+export default {
+  methods: {
+    activeComponentTooltip() {
+      $(".verified-user")
+        .popover({ trigger: "manual", html: true, animation: false })
+        .on("mouseenter", function() {
+          var _this = this;
+          $(this).popover("show");
+          $(".popover").on("mouseleave", function() {
+            $(_this).popover("hide");
+          });
+        })
+        .on("mouseleave", function() {
+          var _this = this;
+          setTimeout(function() {
+            if (!$(".popover:hover").length) {
+              $(_this).popover("hide");
+            }
+          }, 300);
+        });
+    }
+  },
+  watch: {
+    "$parent.product.user_info": function() {
+      if (this.$parent.product.user_info) {
+        setTimeout(() => {
+          this.activeComponentTooltip();
+        }, 10);
+      }
+    }
+  }
+};
+</script>

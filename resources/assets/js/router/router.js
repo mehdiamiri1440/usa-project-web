@@ -89,6 +89,17 @@ const router = new Router({
           },
         },
         {
+          path: "profile/verification",
+          name: "profileBasicSellerVeficiation",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/profile/profile_verification.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
           path: "messenger",
           components: {
             default: (resolve) => {
@@ -193,6 +204,17 @@ const router = new Router({
             default: (resolve) => {
               require([
                 "../components/dashboard/buyer/profile/profile_basic.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "profile/verification",
+          name: "profileBasicBuyerVeficiation",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/buyer/profile/profile_verification.vue",
               ], resolve);
             },
           },
@@ -305,6 +327,15 @@ const router = new Router({
           components: {
             default: (resolve) => {
               require(["../components/layouts/main/contact_us.vue"], resolve);
+            },
+          },
+        },
+        {
+          path: "verfication-info",
+          name: "verificationInfo",
+          components: {
+            default: (resolve) => {
+              require(["../components/layouts/main/verfication-info.vue"], resolve);
             },
           },
         },

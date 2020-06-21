@@ -1,4 +1,4 @@
-console
+
 <style scoped>
 .main-wrapper main {
   padding-bottom: 50px;
@@ -105,6 +105,7 @@ textarea {
   direction: rtl;
   background: #f6f6f6;
   font-size: 13px;
+  padding-top: 50px;
 }
 
 .title {
@@ -556,7 +557,6 @@ textarea {
     text-align: center;
   }
 
-  .main-wrapper,
   main,
   .form-wrapper {
     padding: 0;
@@ -868,7 +868,9 @@ textarea {
           <div class="col-xs-12 col-sm-6 pull-right">
             <label>
               افزودن گواهی های مربوطه
-              <span class="small-description">(گواهی های ثبت شرکت | استاندارد محصول)</span>
+              <span
+                class="small-description"
+              >(گواهی های ثبت شرکت | استاندارد محصول)</span>
             </label>
 
             <UploadFile
@@ -968,7 +970,16 @@ export default {
       profilePhoto: "",
       errors: "",
       popUpMsg: "",
-      items: [],
+      items: [
+        {
+          message: "پروفایل",
+          url: "profileBasicBuyer"
+        },
+        {
+          message: "احراز هویت",
+          url: "profileBasicBuyerVeficiation"
+        }
+      ],
       relatedFiles: [],
       certificateFiles: [],
       formEnabled: false,

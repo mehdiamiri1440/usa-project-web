@@ -838,7 +838,9 @@
                 <span>
                   <b>
                     مهلت بارگیری محصول تا تاریخ
-                    <span class="text-danger">{{transactionInfo.loading_dead_line}}</span> خواهد بود.
+                    <span
+                      class="text-danger"
+                    >{{transactionInfo.loading_dead_line}}</span> خواهد بود.
                   </b>
                 </span>
                 <br />
@@ -846,13 +848,17 @@
                 <span v-if="transactionInfo.commission_persentage">
                   <b>
                     کمسیون باسکول برابر
-                    <span class="text-danger">{{transactionInfo.commission_persentage}}</span> درصد است.
+                    <span
+                      class="text-danger"
+                    >{{transactionInfo.commission_persentage}}</span> درصد است.
                   </b>
                 </span>
                 <span v-if="transactionInfo.commission_percentage">
                   <b>
                     کمسیون باسکول برابر
-                    <span class="text-danger">{{transactionInfo.commission_percentage}}</span>درصد است.
+                    <span
+                      class="text-danger"
+                    >{{transactionInfo.commission_percentage}}</span>درصد است.
                   </b>
                 </span>
                 <br />
@@ -1071,7 +1077,7 @@ export default {
     }
   },
   mounted: function() {
-    eventBus.$emit("subHeader", this.items);
+    eventBus.$emit("subHeader", false);
     this.init();
   }
 };

@@ -233,7 +233,7 @@ export default {
     }
   },
   mounted: function() {
-    eventBus.$emit("subHeader", this.items);
+    eventBus.$emit("subHeader", false);
     this.init();
   }
 };

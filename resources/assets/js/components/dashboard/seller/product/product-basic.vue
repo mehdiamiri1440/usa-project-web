@@ -803,7 +803,7 @@ export default {
   mounted() {
     this.init();
     $('input[type="file"]').imageuploadify();
-    eventBus.$emit("subHeader", this.items);
+    eventBus.$emit("subHeader", false);
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/register-product" });

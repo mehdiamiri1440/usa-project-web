@@ -309,7 +309,8 @@ export default {
       isLoading: false,
       isMyProfile: false,
       showRegisterRequestBox: true,
-      starScore: ""
+      starScore: "",
+      verifiedUserContent: this.$parent.verifiedUserContent
     };
   },
   methods: {
