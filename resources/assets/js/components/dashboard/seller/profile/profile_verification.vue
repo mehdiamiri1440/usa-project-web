@@ -12,7 +12,7 @@
 }
 
 .title {
-  padding: 13px 15px;
+  padding: 13px 0;
 }
 
 .title h1 {
@@ -120,7 +120,7 @@
                 :uploadThread="2"
                 :uploadOCompress="1024 * 1024"
                 :uploadUploadAuto="false"
-                :uploadRef="idCartFiles"
+                :uploadRef="autorizationFiles"
               />
             </div>
           </div>
@@ -146,7 +146,7 @@ export default {
   },
   data: function() {
     return {
-      idCartFiles: [],
+      autorizationFiles: [],
 
       items: [
         {

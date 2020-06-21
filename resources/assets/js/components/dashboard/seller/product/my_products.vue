@@ -233,7 +233,8 @@ export default {
           url: "myProducts"
         }
       ],
-      loading: false
+      loading: false,
+      verifiedUserContent: this.$parent.verifiedUserContent
     };
   },
   methods: {

@@ -490,6 +490,11 @@ p.response-rate span {
   margin: 20px auto;
 }
 
+.verified-user::before {
+  top: 3px;
+  left: 3px;
+}
+
 /* products placeholder styles */
 .shadow-content {
   background: #fff;

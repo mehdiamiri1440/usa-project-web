@@ -331,6 +331,15 @@ const router = new Router({
           },
         },
         {
+          path: "verfication-info",
+          name: "verificationInfo",
+          components: {
+            default: (resolve) => {
+              require(["../components/layouts/main/verfication-info.vue"], resolve);
+            },
+          },
+        },
+        {
           path: "privacy-and-policy",
           name: "privacyAndPolicy",
           components: {
