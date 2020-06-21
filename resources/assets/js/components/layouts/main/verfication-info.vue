@@ -31,6 +31,10 @@ h3 {
   font-size: 17px;
   margin-top: 17px;
 }
+.info-text {
+  margin-top: 30px;
+  font-size: 12px;
+}
 </style>
 
 <template>
@@ -43,28 +47,27 @@ h3 {
             <h3 class="text-right">کاربران تایید شده چه کسانی هستند؟</h3>
             <div class="col-xs-12">
               <div class="col-xs-12 about-us-icon">
-                <img src="../../../../img/about-us/5.jpg" alt />
+                <img src="../../../../img/verification-icons/verify-icon-1.jpg" alt />
 
                 <p>اطلاعات کارت ملی آن ها نزد باسکول است.</p>
               </div>
               <div class="col-xs-12 about-us-icon">
-                <img src="../../../../img/about-us/5.jpg" alt />
+                <img src="../../../../img/verification-icons/verify-icon-3.jpg" alt />
 
-                <p>مطابقت تصویر کارت ملی با تصویر کارت ملی انجام شده است.</p>
+                <p>مطابقت تصویر کارت ملی با تصویر خودشان انجام شده است.</p>
               </div>
               <div class="col-xs-12 about-us-icon">
-                <img src="../../../../img/about-us/5.jpg" alt />
+                <img src="../../../../img/verification-icons/verify-icon-2.jpg" alt />
 
-                <p>اطلاعات آدرس انها به کمک قبض آب، برق، گاز، اجاره نامه، سند مالکیت یا پروانه کسب احراز شده است.</p>
+                <p>اطلاعات آدرس مکانی انها احراز شده است.</p>
               </div>
 
               <h3 class="text-center">
                 <router-link :to="{name : 'help'}" class="green-button">شما هم احراز هویت کنید</router-link>
               </h3>
-              <p class="text-center">
-                <span class="red-text">*</span>
-                باسکول هیچ مسئولیتی در قبال سو رفتار کاربران تایید شده به عهده نمی گیرد و صرفا اطلاعات هویتی آنها را مطابث توضیحات بالا تایید میکند.
-              </p>
+              <p
+                class="text-center gray-text info-text"
+              >باسکول هیچ مسئولیتی در قبال سو رفتار کاربران تایید شده به عهده نمی گیرد و صرفا اطلاعات هویتی آنها را مطابق توضیحات بالا تایید می کند.</p>
             </div>
           </div>
         </div>

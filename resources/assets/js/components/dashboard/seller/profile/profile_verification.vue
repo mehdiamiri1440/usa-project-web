@@ -44,7 +44,7 @@
 }
 
 .main-title-wrapper {
-  margin: 9px auto 20px;
+  margin: 20px auto;
   border-bottom: 2px solid whitesmoke;
   padding-bottom: 10px;
   font-size: 15px;
@@ -57,7 +57,7 @@
 </style>
 
 <template>
-  <div class="main-wrapper col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
+  <div class="main-wrapper col-sm-10 col-sm-offset-1">
     <header class="col-xs-12">
       <div class="title col-xs-12">
         <div class="row">
@@ -75,27 +75,54 @@
               <div class="main-title-wrapper">
                 ۱ -
                 نمونه تصویر از کارت ملی
+                <span class="red-text">*</span>
               </div>
               <div class="image-file-wrapper">
-                <img src="../../../../../img/product.jpg" alt="send file" />
+                <img src="../../../../../img/user-id-card.jpg" alt="send file" />
               </div>
             </div>
             <div class="col-xs-12 pull-right">
               <div class="main-title-wrapper">
                 ۲ -
-                نمونه تصویر از کارت ملی
+                نمونه تصویر کارت ملی در کنار تصویر شما
+                <span class="red-text">*</span>
               </div>
               <div class="image-file-wrapper">
-                <img src="../../../../../img/product.jpg" alt="send file" />
+                <img src="../../../../../img/verifi-user-image.jpg" alt="send file" />
               </div>
             </div>
             <div class="col-xs-12 pull-right">
               <div class="main-title-wrapper">
                 ۳ -
-                نمونه تصویر از کارت ملی
+                تصویر یکی از این اسناد (اجاره نامه یا جواز کسب یا سند مالکیت ) که به نام فرد دارنده کارت ملی است.
+                <span
+                  class="red-text"
+                >*</span>
               </div>
-              <div class="image-file-wrapper">
-                <img src="../../../../../img/product.jpg" alt="send file" />
+              <div class="col-xs-12 text-center">
+                <div class="row">
+                  <div class="col-xs-12 col-md-4 pull-right">
+                    <p class="margin-10">اجاره نامه</p>
+                    <div class="image-file-wrapper">
+                      <img src="../../../../../img/profile-verification/ejare-name.png" alt="img" />
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-md-4 pull-right">
+                    <p class="margin-10">جواز کسب</p>
+                    <div class="image-file-wrapper">
+                      <img src="../../../../../img/profile-verification/javaz-kasp.jpg" alt="img" />
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-md-4 pull-right">
+                    <p class="margin-10">سند مالکیت</p>
+                    <div class="image-file-wrapper">
+                      <img
+                        src="../../../../../img/profile-verification/sanad-malekiat.jpg"
+                        alt="img"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
