@@ -188,7 +188,7 @@ export default {
       reviewUserData: "",
       reviewUserPrfileId: "",
       verifiedUserContent:
-        "<div class='tooltip-wrapper'>Tooltip on top <a href='#'>show all</a> </div>"
+        "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='#'>اطلاعات بیشتر</a> </div>"
     };
   },
   props: [
@@ -238,6 +238,19 @@ export default {
     });
 
     let self = this;
+
+    $(document).on("mouseleave", function () {
+       if(!self.userId){
+         if(!window.localStorage.getItem('guideShowed')){
+           self.openRelatedSwalModal('guide');
+
+           window.localStorage.setItem('guideShowed',true);
+         }
+         
+       }
+    });
+
+    
 
     if (messaging) {
       messaging.onMessage(function(payload) {

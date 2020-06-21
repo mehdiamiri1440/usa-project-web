@@ -491,6 +491,11 @@ Route::group(['middleware' => [login::class]], function () {
         'uses' => 'General\marketing_data_controller@get_special_users_info',
         'as'   => 'get_special_users_info'
     ]);
+
+    Route::post('/verify/upload-photos',[
+        'uses' => 'Accounting\verification_controller@upload_verification_photos',
+        'as' => 'upload_user_verification_photos'
+    ]);
     
 });
 
@@ -786,6 +791,26 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
     Route::post('/block-operator',[
         'uses' => 'admin_panel\AnomalyDetector\messaging_anomaly_controller@block_operator',
         'as'  => 'admin_panel_block_operator'
+    ]);
+
+    Route::get('/unverified-user-list',[
+        'uses' => 'admin_panel\admin_verification_controller@load_unverified_documents',
+        'as' => 'admin_load_unverified_documents'
+    ]);
+
+    Route::get('/document-detail/{user_id}', [
+        'uses' => 'admin_panel\admin_verification_controller@load_user_documents_by_id',
+        'as' => 'admin_panel_load_user_document_by_id',
+    ]);
+    
+    Route::delete('/d-verifivation-photo', [
+        'uses' => 'admin_panel\admin_verification_controller@delete_verification_photo_by_id',
+        'as' => 'delete_verification_photo_by_id',
+    ]);
+    
+    Route::post('/verifiy-user-account', [
+        'uses' => 'admin_panel\admin_verification_controller@verify_user_account',
+        'as' => 'verify_user_account_by_id',
     ]);
 });
 

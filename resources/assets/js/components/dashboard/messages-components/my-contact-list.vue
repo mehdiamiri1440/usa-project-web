@@ -223,6 +223,7 @@
               <span class="contact-name text-rtl">
                 {{contact.first_name + ' ' + contact.last_name}}
                 <button
+                  v-if="contact.is_verified"
                   @click.prevent
                   class="verified-user"
                   data-container="body"

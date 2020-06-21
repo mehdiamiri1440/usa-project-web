@@ -367,6 +367,7 @@
             ' ' +
             $parent.selectedContact.last_name}}
             <button
+              v-if="$parent.selectedContact.is_verified"
               @click.prevent
               class="verified-user"
               data-container="body"
@@ -465,7 +466,7 @@
         <li v-if="$parent.isNoticeActive" class="messenger-notice">
           <p
             class="notice-title"
-          >لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود</p>
+          >اطلاعات هویتی این کاربر <span class="red-text" v-if="!$parent.isCurrentUserVerified">مانند اطلاعات هویتی شما</span> نزد باسکول احراز نشده است.</p>
           <div class="notice-actions">
             <button @click="$parent.setNoticeCookie()">متوجه شدم</button>
             <button>
@@ -566,7 +567,7 @@ export default {
     checkMessageListClass(senderId) {
       let myMessage = false;
 
-      if (senderId == this.$parent.currentUserId) {
+      if (senderId == this.$parent.currentUserId || this.$parent.selectedContact.is_verified == true) {
         this.$parent.isNoticeActive = false;
         myMessage = true;
       } else {

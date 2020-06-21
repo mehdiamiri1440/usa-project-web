@@ -966,6 +966,7 @@ p.response-rate span {
                       ' ' +
                       profileOwner.user_info.last_name}}
                       <button
+                        v-if="profileOwner.user_info.is_verified"
                         @click.prevent
                         class="verified-user"
                         data-container="body"
@@ -1116,6 +1117,7 @@ p.response-rate span {
                       ' ' +
                       profileOwner.user_info.last_name}}
                       <button
+                        v-if="profileOwner.user_info.is_verified"
                         @click.prevent
                         class="verified-user"
                         data-container="body"

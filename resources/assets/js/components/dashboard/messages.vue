@@ -415,7 +415,8 @@ export default {
       contactsCountInEachLoad: 20,
       showLoadMoreBtn: false,
       userAllowedReview: false,
-      verifiedUserContent: this.$parent.verifiedUserContent
+      verifiedUserContent: this.$parent.verifiedUserContent,
+      isCurrentUserVerified: false,
     };
   },
 
@@ -441,6 +442,7 @@ export default {
         .then(function(response) {
           self.contactList = response.data.contact_list;
           self.currentUserId = response.data.user_id;
+          self.isCurrentUserVerified = response.data.is_verified;
           self.isContactListLoaded = true;
 
           if (self.contactList.length >= self.toContact) {
