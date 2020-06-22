@@ -575,11 +575,10 @@ export default {
     },
     checkMessageListClass(senderId) {
       let myMessage = false;
-
-      if (
-        senderId == this.$parent.currentUserId ||
-        this.$parent.selectedContact.is_verified == true
-      ) {
+      if (this.$parent.selectedContact.is_verified == true) {
+        this.$parent.isNoticeActive = false;
+      }
+      if (senderId == this.$parent.currentUserId) {
         this.$parent.isNoticeActive = false;
         myMessage = true;
       } else {
