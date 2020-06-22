@@ -331,11 +331,11 @@ const router = new Router({
           },
         },
         {
-          path: "verfication-info",
+          path: "verification-info",
           name: "verificationInfo",
           components: {
             default: (resolve) => {
-              require(["../components/layouts/main/verfication-info.vue"], resolve);
+              require(["../components/layouts/main/verification-info.vue"], resolve);
             },
           },
         },

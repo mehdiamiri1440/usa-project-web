@@ -53,6 +53,13 @@
 .green-button {
   max-width: 300px;
   width: 100%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+}
+
+.disabled {
+  color: #fff;
+  background: #eee;
 }
 </style>
 
@@ -101,26 +108,8 @@
               </div>
               <div class="col-xs-12 text-center">
                 <div class="row">
-                  <div class="col-xs-12 col-md-4 pull-right">
-                    <p class="margin-10">اجاره نامه</p>
-                    <div class="image-file-wrapper">
-                      <img src="../../../../../img/profile-verification/ejare-name.png" alt="img" />
-                    </div>
-                  </div>
-                  <div class="col-xs-12 col-md-4 pull-right">
-                    <p class="margin-10">جواز کسب</p>
-                    <div class="image-file-wrapper">
-                      <img src="../../../../../img/profile-verification/javaz-kasp.jpg" alt="img" />
-                    </div>
-                  </div>
-                  <div class="col-xs-12 col-md-4 pull-right">
-                    <p class="margin-10">سند مالکیت</p>
-                    <div class="image-file-wrapper">
-                      <img
-                        src="../../../../../img/profile-verification/sanad-malekiat.jpg"
-                        alt="img"
-                      />
-                    </div>
+                  <div class="col-xs-12 pull-right">
+                    <img src="../../../../../img/profile-verification/madarek.jpg" alt="img" />
                   </div>
                 </div>
               </div>
@@ -133,10 +122,11 @@
               <label>
                 افزودن تصاویر مربوطه
                 <span class="small-description">(ارسال مدارک مورد نیاز)</span>
+                <p class="upload-error margin-10-0 red-text" v-text="errors.autorizationFiles"></p>
               </label>
 
               <UploadFile
-                uploadName="id_cart_files"
+                uploadName="autorization-files"
                 uploadAccept="image/*"
                 :uploadMinSize="1024"
                 :uploadSize="1024 * 1024 * 10"
@@ -154,7 +144,11 @@
 
           <div class="col-xs-12 text-center">
             <div class="row">
-              <button class="green-button" @click.prevent>ثبت مدارک</button>
+              <button
+                class="green-button"
+                :class="{'disabled' : autorizationFiles.length <= 2 || errors.autorizationFiles}"
+                @click.prevent="uploadFiles"
+              >ثبت مدارک</button>
             </div>
           </div>
         </section>
@@ -174,22 +168,77 @@ export default {
   data: function() {
     return {
       autorizationFiles: [],
+      uploadPercentage: 0,
+      errors: {
+        autorizationFiles: ""
+      },
       items: [
         {
           message: "پروفایل",
-          url: "profileBasicSeller"
+          url: "profileBasicBuyer"
         },
         {
           message: "احراز هویت",
-          url: "profileBasicSellerVeficiation"
+          url: "profileBasicBuyerVeficiation"
         }
       ]
     };
+  },
+  methods: {
+    uploadFiles: function() {
+      if (!this.filesDataHasError()) {
+        let data = new FormData();
+        let imagesCount = this.autorizationFiles.length;
+        data.append("images_count", imagesCount);
+        for (let i = 0; i < imagesCount; i++) {
+          let file = this.autorizationFiles[i];
+          data.append("image_" + i, file);
+        }
+
+        axios
+          .post("/verify/upload-photos", data, {
+            headers: {
+              "X-Requested-With": "XMLHttpRequest",
+              "Content-Type": "application/json"
+            },
+            onUploadProgress: function(progressEvent) {
+              this.uploadPercentage = parseInt(
+                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              );
+            }.bind(this)
+          })
+          .then(response => {
+            alert("ارسال شد");
+          });
+      }
+    },
+    filesDataHasError: function() {
+      let imagesCount = this.autorizationFiles.length;
+      let hasError = false;
+      if (imagesCount == 0) {
+        hasError = true;
+        this.errors.autorizationFiles = " لطفا تصاویر مربوطه را بارگذاری کنید";
+      } else if (imagesCount <= 2) {
+        hasError = true;
+        this.errors.autorizationFiles =
+          " لطفا همه تصاویر (تصویر کارت ملی، تصویر کارت ملی در کنار تصویر خودتان و یکی از اسناد بالا را بارگذاری کنید ";
+      }
+
+      return hasError;
+    }
   },
   mounted() {
     eventBus.$emit("subHeader", this.items);
 
     $('input[type="file"]').imageuploadify();
+  },
+  watch: {
+    uploadPercentage: function() {
+      eventBus.$emit("uploadPercentage", this.uploadPercentage);
+    },
+    autorizationFiles: function() {
+      this.errors.autorizationFiles = "";
+    }
   }
 };
 </script>

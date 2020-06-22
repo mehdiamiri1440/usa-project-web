@@ -35,6 +35,20 @@ h3 {
   margin-top: 30px;
   font-size: 12px;
 }
+
+@media screen and (max-width: 767px) {
+  .about-us-icon {
+    text-align: center;
+  }
+  .about-us-icon img {
+    margin: 0 auto;
+    float: none;
+  }
+  .about-us-icon p {
+    float: none;
+    width: 100%;
+  }
+}
 </style>
 
 <template>
@@ -63,7 +77,21 @@ h3 {
               </div>
 
               <h3 class="text-center">
-                <router-link :to="{name : 'help'}" class="green-button">شما هم احراز هویت کنید</router-link>
+                <router-link
+                  v-if="$parent.userId && $parent.isSeller"
+                  :to="{name : 'profileBasicSellerVeficiation'}"
+                  class="green-button"
+                >شما هم احراز هویت کنید</router-link>
+                <router-link
+                  v-else-if="$parent.userId && !$parent.isSeller"
+                  :to="{name : 'profileBasicBuyerVeficiation'}"
+                  class="green-button"
+                >شما هم احراز هویت کنید</router-link>
+                <router-link
+                  v-else
+                  :to="{name : 'login'}"
+                  class="green-button"
+                >شما هم احراز هویت کنید</router-link>
               </h3>
               <p
                 class="text-center gray-text info-text"
@@ -103,7 +131,7 @@ export default {
   },
   metaInfo() {
     return {
-      title: " درباره ما ",
+      title: "احراز هویت ",
       titleTemplate: "باسکول | %s",
       meta: [
         {
