@@ -214,6 +214,30 @@ span.min {
   color: #fff;
 }
 
+.progress-upload-files {
+  position: absolute;
+  top: 50%;
+  text-align: center;
+  display: block;
+  width: 100%;
+  color: #333;
+  font-size: 23px;
+  max-width: 400px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0 15px;
+}
+
+.progress-upload-files > p {
+  color: #555;
+  font-size: 16px;
+  margin: 15px auto;
+  font-weight: bold;
+}
+
 @media screen and (max-width: 994px) {
   .right-header.desktop-header {
     display: none;
@@ -442,10 +466,20 @@ span.min {
     <!--loading upload-->
 
     <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
-      <div class="main-loader">
-        <p dir="rtl">{{uploadPercentage}}%</p>
-        <progress max="100" :value="uploadPercentage"></progress>
+      <div class="main-loader progress-upload-files">
         <p dir="rtl">در حال بارگذاری...</p>
+        <div class="progress-upload-wrapper">
+          <div class="progress">
+            <div
+              class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+              role="progressbar"
+              :aria-valuenow="uploadPercentage"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              :style="{width: uploadPercentage + '%'}"
+            ></div>
+          </div>
+        </div>
       </div>
     </div>
 

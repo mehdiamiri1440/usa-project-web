@@ -308,7 +308,7 @@
 
         <span class="header-chat-content">
           {{contactInfo.first_name + ' ' + contactInfo.last_name}}
-          <button
+          <!-- <button
             @click.prevent
             class="verified-user"
             data-container="body"
@@ -318,7 +318,7 @@
             title
           >
             <i class="fa fa-certificate"></i>
-          </button>
+          </button>-->
         </span>
       </button>
 

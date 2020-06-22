@@ -55,7 +55,7 @@
     from(#00c569),
     to(#21ad93)
   );
-  background: linear-gradient(90deg, #00c569 0%, #21ad93 100%);
+  background: linear-gradient(-90deg, #00c569 0%, #21ad93 100%);
   float: right;
   width: 100%;
   color: #fff;
@@ -309,6 +309,11 @@
 .messenger-notice .notice-actions button i {
   margin-left: 7px;
 }
+
+.verified-user::before {
+  top: 3px;
+  left: 3px;
+}
 @media screen and (max-width: 767px) {
   #chat-menu-items {
     left: 54px;
@@ -464,9 +469,13 @@
           </div>
         </li>
         <li v-if="$parent.isNoticeActive" class="messenger-notice">
-          <p
-            class="notice-title"
-          >اطلاعات هویتی این کاربر <span class="red-text" v-if="!$parent.isCurrentUserVerified">مانند اطلاعات هویتی شما</span> نزد باسکول احراز نشده است.</p>
+          <p class="notice-title">
+            اطلاعات هویتی این کاربر
+            <span
+              class="red-text"
+              v-if="!$parent.isCurrentUserVerified"
+            >مانند اطلاعات هویتی شما</span> نزد باسکول احراز نشده است.
+          </p>
           <div class="notice-actions">
             <button @click="$parent.setNoticeCookie()">متوجه شدم</button>
             <button>
@@ -567,7 +576,10 @@ export default {
     checkMessageListClass(senderId) {
       let myMessage = false;
 
-      if (senderId == this.$parent.currentUserId || this.$parent.selectedContact.is_verified == true) {
+      if (
+        senderId == this.$parent.currentUserId ||
+        this.$parent.selectedContact.is_verified == true
+      ) {
         this.$parent.isNoticeActive = false;
         myMessage = true;
       } else {

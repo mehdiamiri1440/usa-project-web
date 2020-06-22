@@ -186,6 +186,8 @@ export default {
   },
   methods: {
     uploadFiles: function() {
+      eventBus.$emit("submiting", true);
+
       if (!this.filesDataHasError()) {
         let data = new FormData();
         let imagesCount = this.autorizationFiles.length;
@@ -208,8 +210,14 @@ export default {
             }.bind(this)
           })
           .then(response => {
+            eventBus.$emit("submiting", false);
+            eventBus.$emit("uploadPercentage", 0);
+
             alert("ارسال شد");
           });
+      } else {
+        eventBus.$emit("submiting", false);
+        eventBus.$emit("uploadPercentage", 0);
       }
     },
     filesDataHasError: function() {
