@@ -238,7 +238,11 @@ export default {
             eventBus.$emit("submiting", false);
             eventBus.$emit("uploadPercentage", 0);
 
-            alert("ارسال شد");
+            eventBus.$emit('modal','verificationInfoUploadDone');
+          })
+          .catch(e => {
+              eventBus.$emit("submiting", false);
+              eventBus.$emit("uploadPercentage", 0);
           });
       } else {
         eventBus.$emit("submiting", false);

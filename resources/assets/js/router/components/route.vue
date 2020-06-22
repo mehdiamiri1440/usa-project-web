@@ -374,6 +374,9 @@ export default {
         case "deleteUserComment":
           this.raiseDeleteUserCommentModal();
           break;
+        case "verificationInfoUploadDone":
+          this.raiseVerificationUploadSuccessModal();
+          break;
       }
     },
     raiseSendMessageModal: function() {
@@ -715,6 +718,22 @@ export default {
             break;
         }
       });
+    },
+    raiseVerificationUploadSuccessModal: function(){
+        this.handleBackBtn();
+        swal({
+          title: "احراز هویت",
+          text:
+            "اطلاعات شما با موفقیت ارسال شد. در صورت تایید کارشناسان باسکول نشان احراز هویت به حساب کاربری شما داده می شود.",
+          className: "custom-swal-with-cancel",
+          icon: "success",
+          buttons: {
+            close: {
+              text: "بستن",
+              className: "bg-cancel"
+            }
+          }
+        });
     },
     isModalOpen: function() {
       return swal.getState().isOpen;
