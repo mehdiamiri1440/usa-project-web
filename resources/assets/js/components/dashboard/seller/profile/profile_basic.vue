@@ -470,6 +470,11 @@ textarea {
 .progressbar {
   margin-top: 20px;
 }
+.progressbar .progress-title {
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #777;
+}
 
 @media screen and (max-width: 1120px) {
   .label-radio {
@@ -589,6 +594,8 @@ textarea {
   <div class="main-wrapper col-xs-12">
     <header class="col-xs-12">
       <div class="progressbar col-xs-12">
+        <p class="text-center progress-title hidden-sm hidden-md hidden-lg">میزان تکمیل پروفایل</p>
+
         <div class="progress-wrapper row">
           <div class="custom-progress">
             <p class="hidden-xs">میزان تکمیل پروفایل</p>
