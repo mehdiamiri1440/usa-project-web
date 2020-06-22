@@ -43,13 +43,17 @@
   overflow: hidden;
 }
 
+
 .main-title-wrapper {
   margin: 20px auto;
   border-bottom: 2px solid whitesmoke;
   padding-bottom: 10px;
   font-size: 15px;
+  line-height: 1.618
 }
-
+.upload-error{
+  line-height: 1.618
+}
 .green-button {
   max-width: 300px;
   width: 100%;
@@ -115,7 +119,7 @@
             <div class="col-xs-12 pull-right">
               <div class="main-title-wrapper">
                 ۳ -
-                تصویر یکی از این اسناد (اجاره نامه یا جواز کسب یا سند مالکیت ) که به نام فرد دارنده کارت ملی است.
+                تصویر یکی از این اسناد (اجاره نامه یا جواز کسب یا سند مالکیت) که به نام فرد دارنده کارت ملی است.
                 <span
                   class="red-text"
                 >*</span>
@@ -134,8 +138,7 @@
           <div class="content-wrapper row">
             <div class="col-xs-12 pull-right">
               <label>
-                افزودن تصاویر مربوطه
-                <span class="small-description">(ارسال مدارک مورد نیاز)</span>
+                تمام موارد فوق را بارگذاری کنید
                 <p class="upload-error margin-10-0 red-text" v-text="errors.autorizationFiles"></p>
               </label>
 
@@ -239,6 +242,10 @@ export default {
             eventBus.$emit("uploadPercentage", 0);
 
             eventBus.$emit('modal','verificationInfoUploadDone');
+
+            setTimeout(function() {
+              window.location.href = '/seller/profile';
+            }, 3000);
           })
           .catch(e => {
               eventBus.$emit("submiting", false);

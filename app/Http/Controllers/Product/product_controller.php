@@ -1038,16 +1038,18 @@ class product_controller extends Controller
         if($category_record){
             $category_id = $category_record->id;
 
-            $tags_info = $this->get_category_meta_data($category_id);
+            $tags_info = $this->get_category_meta_data($category_id)->first();
 
-            // $tags_info->each(function($item) use(&$schema_object){
+            // foreach($tags_info as $item){
             //     if(! is_null($item->schema_object)){
             //         if(!$schema_object){
             //             $schema_object = $item->schema_object;
             //         }
             //     }
             //     unset($item->schema_object);
-            // });
+
+            //     break;
+            // }
 
             if(! is_null($tags_info->schema_object)){
                 $schema_object = $tags_info->schema_object;
@@ -1057,7 +1059,7 @@ class product_controller extends Controller
 
             return response()->json([
                 'status' => true,
-                'category_info' => $tags_info,
+                'category_info' => array($tags_info),
                 'schema_object' => $schema_object
             ]);
         }
@@ -1106,7 +1108,7 @@ class product_controller extends Controller
                                 'header',
                                 'content',
                                 'schema_object'
-                            ])->get()->first();
+                            ])->get();
 
         return $tags_info;
     }

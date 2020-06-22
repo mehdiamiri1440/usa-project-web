@@ -58,7 +58,7 @@ h3 {
       <div class="container">
         <div class="row">
           <div class="col-md-12 col-sm-12">
-            <h3 class="text-right">کاربران تایید شده چه کسانی هستند؟</h3>
+            <h3 class="text-right">کاربران احراز هویت شده چه کسانی هستند؟</h3>
             <div class="col-xs-12">
               <div class="col-xs-12 about-us-icon">
                 <img src="../../../../img/verification-icons/verify-icon-1.jpg" alt />
@@ -78,12 +78,12 @@ h3 {
 
               <h3 class="text-center">
                 <router-link
-                  v-if="$parent.userId && $parent.isSeller"
+                  v-if="$parent.userId && $parent.isSeller == 1"
                   :to="{name : 'profileBasicSellerVeficiation'}"
                   class="green-button"
                 >شما هم احراز هویت کنید</router-link>
                 <router-link
-                  v-else-if="$parent.userId && !$parent.isSeller"
+                  v-else-if="$parent.userId && $parent.isSeller == 0"
                   :to="{name : 'profileBasicBuyerVeficiation'}"
                   class="green-button"
                 >شما هم احراز هویت کنید</router-link>
@@ -95,7 +95,7 @@ h3 {
               </h3>
               <p
                 class="text-center gray-text info-text"
-              >باسکول هیچ مسئولیتی در قبال سو رفتار کاربران تایید شده به عهده نمی گیرد و صرفا اطلاعات هویتی آنها را مطابق توضیحات بالا تایید می کند.</p>
+              >باسکول هیچ مسئولیتی در قبال سو رفتار کاربران احراز هویت شده به عهده نمی گیرد و صرفا اطلاعات هویتی آنها را مطابق توضیحات بالا تایید می کند.</p>
             </div>
           </div>
         </div>
