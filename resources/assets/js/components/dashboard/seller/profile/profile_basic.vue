@@ -466,6 +466,11 @@ textarea {
   height: 100%;
   min-width: 100%;
 }
+
+.progressbar {
+  margin-top: 20px;
+}
+
 @media screen and (max-width: 1120px) {
   .label-radio {
     padding: 0 25px 0 11px;
@@ -583,19 +588,6 @@ textarea {
 <template>
   <div class="main-wrapper col-xs-12">
     <header class="col-xs-12">
-      <div class="title col-xs-12">
-        <div class="row">
-          <div class="col-xs-12 col-sm-3 pull-right">
-            <h1>ویرایش پروفایل</h1>
-          </div>
-          <div class="col-xs-12 col-sm-9">
-            <p
-              v-if="completeProfileProgress <= 85"
-            >برای ارتباط مستقیم با خریداران و صادر کنندگان و فروش بیشتر محصولات، پروفایل خود را تکمیل کنید</p>
-          </div>
-        </div>
-      </div>
-
       <div class="progressbar col-xs-12">
         <div class="progress-wrapper row">
           <div class="custom-progress">

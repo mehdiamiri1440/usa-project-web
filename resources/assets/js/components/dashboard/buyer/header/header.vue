@@ -464,7 +464,7 @@ span.min {
               aria-valuemin="0"
               aria-valuemax="100"
               :style="{width: uploadPercentage + '%'}"
-            ></div>
+            >{{uploadPercentage + '%'}}</div>
           </div>
         </div>
       </div>
@@ -621,6 +621,7 @@ export default {
       this.isLoaded = true;
       axios.post("/user/profile_info").then(response => {
         this.isLoading = false;
+        this.$parent.currentUser = response.data;
         return (this.currentUser = response.data);
       });
     },

@@ -477,7 +477,7 @@ span.min {
               aria-valuemin="0"
               aria-valuemax="100"
               :style="{width: uploadPercentage + '%'}"
-            ></div>
+            >{{uploadPercentage + '%'}}</div>
           </div>
         </div>
       </div>
@@ -635,6 +635,7 @@ export default {
         this.isLoading = false;
         this.$parent.active_pakage_type =
           response.data.user_info.active_pakage_type;
+        this.$parent.currentUser = response.data;
         return (this.currentUser = response.data);
       });
     },
