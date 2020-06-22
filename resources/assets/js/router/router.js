@@ -331,7 +331,7 @@ const router = new Router({
           },
         },
         {
-          path: "verification-info",
+          path: "verification",
           name: "verificationInfo",
           components: {
             default: (resolve) => {
