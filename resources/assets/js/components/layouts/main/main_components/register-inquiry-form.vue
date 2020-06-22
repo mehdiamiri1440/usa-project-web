@@ -288,6 +288,7 @@ label .small-label {
             {{'استعلام از ' + userProfileInfo.first_name + ' ' + userProfileInfo.last_name}}
             <button
               @click.prevent
+              v-if="$parent.product.user_info.is_verified"
               class="verified-user"
               data-container="body"
               data-toggle="popover"

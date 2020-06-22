@@ -107,6 +107,19 @@ export default {
     return {
       linkHideStates: ["buyAd-requests", "messenger/contacts"],
       buttonIsActive: true,
+      currentUser: {
+        profile: {
+          is_company: "",
+          company_name: "",
+          company_register_code: "",
+          address: "",
+          public_phone: "",
+          profile_photo: this.storage + "",
+          postal_code: "",
+          shaba_code: ""
+        },
+        user_info: ""
+      },
       buttonActiveInSteps: true,
       isRequiredFixAlert: false,
       active_pakage_type: 3

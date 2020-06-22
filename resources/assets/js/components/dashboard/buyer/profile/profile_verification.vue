@@ -61,21 +61,35 @@
   color: #fff;
   background: #eee;
 }
+
+.user-verified-icon-wrapper {
+  margin-top: 50px;
+}
+
+.user-verified-icon {
+  position: relative;
+  font-size: 95px;
+  color: #1da1f2;
+}
+
+.user-verified-icon::before {
+  content: "\F00C";
+  position: absolute;
+  left: 22px;
+  font-family: "Font Awesome 5 Free";
+  color: #fff;
+  top: 37px;
+  font-size: 52px;
+  z-index: 1;
+  line-height: 1;
+  font-weight: 900;
+}
 </style>
 
 <template>
   <div class="main-wrapper col-sm-10 col-sm-offset-1">
-    <header class="col-xs-12">
-      <div class="title col-xs-12">
-        <div class="row">
-          <div class="col-xs-12 col-sm-3 pull-right">
-            <h1>احراز هویت</h1>
-          </div>
-        </div>
-      </div>
-    </header>
     <main class="col-xs-12">
-      <div class="row">
+      <div class="row" v-if="!$parent.currentUser.user_info.is_verified">
         <section class="wrapper-section">
           <div class="content-wrapper row">
             <div class="col-xs-12 pull-right">
@@ -151,6 +165,17 @@
               >ثبت مدارک</button>
             </div>
           </div>
+        </section>
+      </div>
+      <div class="row" v-else>
+        <section class="wrapper-section user-verified-wrapper text-center">
+          <div class="user-verified-icon-wrapper">
+            <span class="user-verified-icon">
+              <i class="fa fa-certificate"></i>
+            </span>
+          </div>
+          <h3>اطلاعات هویتی شما احراز شده است.</h3>
+          <!-- <p class="gray-text margin-10-0">توضیحات اضافه در صورت لزوم</p> -->
         </section>
       </div>
     </main>
