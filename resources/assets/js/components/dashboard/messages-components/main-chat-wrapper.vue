@@ -474,14 +474,14 @@
             <span
               class="red-text"
               v-if="!$parent.isCurrentUserVerified"
-            >مانند اطلاعات هویتی شما</span> نزد باسکول احراز نشده است.
+            >مانند اطلاعات هویتی شما</span> نزد باسکول احراز <span class="red-text"> نشده </span> است.
           </p>
           <div class="notice-actions">
             <button @click="$parent.setNoticeCookie()">متوجه شدم</button>
-            <button>
+            <router-link :tag="button" :to="{'name':'verificationInfo'}">
               <i class="fa fa-info"></i>
               اطلاعات بیشتر
-            </button>
+            </router-link>
           </div>
         </li>
       </ul>
