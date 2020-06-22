@@ -284,21 +284,9 @@ label .small-label {
           <div class="user-image">
             <img :src="userProfilePhoto" alt />
           </div>
-          <div class="user-name text-rtl">
-            {{'استعلام از ' + userProfileInfo.first_name + ' ' + userProfileInfo.last_name}}
-            <button
-              @click.prevent
-              v-if="$parent.product.user_info.is_verified"
-              class="verified-user"
-              data-container="body"
-              data-toggle="popover"
-              data-placement="bottom"
-              :data-content="$parent.verifiedUserContent"
-              title
-            >
-              <i class="fa fa-certificate"></i>
-            </button>
-          </div>
+          <div
+            class="user-name text-rtl"
+          >{{'استعلام از ' + userProfileInfo.first_name + ' ' + userProfileInfo.last_name}}</div>
         </div>
 
         <div class="form-contents col-xs-12">
@@ -457,25 +445,6 @@ export default {
     },
     validateRegx: function(input, regx) {
       return regx.test(input);
-    },
-    activeComponentTooltip() {
-      $(".verified-user")
-        .popover({ trigger: "manual", html: true, animation: false })
-        .on("mouseenter", function() {
-          var _this = this;
-          $(this).popover("show");
-          $(".popover").on("mouseleave", function() {
-            $(_this).popover("hide");
-          });
-        })
-        .on("mouseleave", function() {
-          var _this = this;
-          setTimeout(function() {
-            if (!$(".popover:hover").length) {
-              $(_this).popover("hide");
-            }
-          }, 300);
-        });
     }
   },
   mounted() {
@@ -484,13 +453,6 @@ export default {
   watch: {
     "inquiry.text": function() {
       this.errors.inquiryText = "";
-    },
-    userProfileInfo: function() {
-      if (this.$parent.product.user_info) {
-        setTimeout(() => {
-          this.activeComponentTooltip();
-        }, 10);
-      }
     }
   }
 };
