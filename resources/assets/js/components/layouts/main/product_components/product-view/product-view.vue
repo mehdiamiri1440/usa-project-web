@@ -641,6 +641,8 @@ export default {
     //
     return {
       title:
+        productOwnerFullName + 
+        " " + 
         "خرید و فروش عمده و قیمت " +
         productSubCategory +
         " " +
@@ -648,14 +650,14 @@ export default {
         " " +
         productCity +
         " " +
-        productProvince +
-        " " +
-        productOwnerFullName,
+        productProvince,
       titleTemplate: "%s | باسکول",
       meta: [
         {
           name: "description",
           content:
+            productOwnerFullName + 
+            " " +
             "خرید و فروش عمده و قیمت " +
             productSubCategory +
             " " +

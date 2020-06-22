@@ -757,6 +757,7 @@ class product_controller extends Controller
     public function get_all_products_url_for_sitemap()
     {
         $products = product::where('confirmed',true)
+                                    // ->whereRaw("LENGTH(products.description) > 700")
                                     ->orderBy('updated_at','desc')
                                     ->get();
         $result_products = $this->append_related_data_to_given_products($products);
