@@ -335,7 +335,7 @@ const router = new Router({
           name: "verificationInfo",
           components: {
             default: (resolve) => {
-              require(["../components/layouts/main/verfication-info.vue"], resolve);
+              require(["../components/layouts/main/verification-info.vue"], resolve);
             },
           },
         },

@@ -57,6 +57,18 @@
   width: 100%;
 }
 
+.new-badge::before {
+  content: "\62C\62F\6CC\62F";
+  position: absolute;
+  left: -10px;
+  color: #fff;
+  font-size: 11px;
+  background: #e41c38;
+  padding: 2px 3px 3px;
+  border-radius: 50px;
+  top: 4px;
+}
+
 /*end style sub-header*/
 @media screen and (max-width: 345px) {
   /* .sub-header a {
@@ -72,7 +84,11 @@
   <div class="sub-header text-rtl" v-if="items">
     <ul class="list-inline">
       <li class="list-item" v-for="(item,index) in items" :class="item.active" :key="index">
-        <router-link :to="{ name : item.url }" v-text="item.message" />
+        <router-link
+          :to="{ name : item.url }"
+          v-text="item.message"
+          :class="{'new-badge' : item.url == 'profileBasicSellerVeficiation' || item.url == 'profileBasicBuyerVeficiation'}"
+        />
       </li>
     </ul>
   </div>
