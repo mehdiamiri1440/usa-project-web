@@ -1079,6 +1079,7 @@ export default {
         .then(function(response) {
           if (response.status === 200) {
             eventBus.$emit("submiting", false);
+            eventBus.$emit("uploadPercentage", 0);
 
             eventBus.$emit("modal", "profileEditSuccess");
           }
@@ -1102,12 +1103,15 @@ export default {
             (tmpArray.join() + "").includes("related") ||
             (tmpArray.join() + "").includes("certificate")
           ) {
+            eventBus.$emit("submiting", false);
+            eventBus.$emit("uploadPercentage", 0);
             self.popUpMsg =
               "اندازه تصاویر بزرگ تر 5  از مگابایت است یا فرمت مناسبی ندارد";
             eventBus.$emit("submitSuccess", self.popUpMsg);
             $("#custom-main-modal").modal("show");
           }
           eventBus.$emit("submiting", false);
+          eventBus.$emit("uploadPercentage", 0);
         });
     },
     toLatinNumbers: function(num) {
