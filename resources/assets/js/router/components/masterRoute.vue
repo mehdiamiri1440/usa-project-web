@@ -52,11 +52,18 @@ export default {
     pageIsCheckout: function() {
       if (this.$route.matched[1].name == "checkoutProduct") {
         this.checkoutPage = true;
+      } else {
+        this.checkoutPage = false;
       }
     }
   },
   mounted: function() {
     this.pageIsCheckout();
+  },
+  watch: {
+    $route: function() {
+      this.pageIsCheckout();
+    }
   }
 };
 </script>

@@ -2,6 +2,8 @@
 /* input styles  */
 
 input[type="text"],
+input[type="tel"],
+input[type="password"],
 textarea {
   padding: 7px 15px;
 }
@@ -79,9 +81,11 @@ select:focus {
   color: #333;
 }
 
-select.active {
+select.active,
+input.active,
+textarea.active {
   color: #333;
-  color: #00c569;
+  border-color: #00c569;
 }
 
 select.active:focus {
@@ -90,26 +94,24 @@ select.active:focus {
 
 select.error {
   color: #333;
-  color: #e41c38;
+  border-color: #e41c38;
 }
 
-select.error:focus {
-  color: #e41c38;
+select.error,
+input.error,
+textarea.error {
+  color: #333;
+  border-color: #e41c38;
 }
+
 .error-message {
-  text-align: center;
-
   color: #e41c38;
-
   font-weight: bold;
-
-  height: 25px;
-
   margin-bottom: 5px;
-
   direction: rtl;
-
   font-size: 12px;
+  padding: 7px 0;
+  text-align: right;
 }
 
 .form-contents {
@@ -274,11 +276,11 @@ select.error:focus {
 <template>
   <div class="confirm-product-contents">
     <section class="product-section-wrapper">
-      <div v-if="!$parent.currentUser.user_info && !$parent.profileIsLoad" class="header-section">
+      <div v-if="!$parent.currentUser.user_info && $parent.isProfileLoaded" class="header-section">
         <p>اطلاعات کاربری</p>
       </div>
       <div
-        v-if="!$parent.currentUser.user_info && !$parent.profileIsLoad"
+        v-if="!$parent.currentUser.user_info && $parent.isProfileLoaded"
         class="main-form-wrapper"
       >
         <div class="form-contents col-xs-12">
@@ -311,6 +313,9 @@ select.error:focus {
                   آقا
                 </label>
               </div>
+              <p class="error-message">
+                <span v-if="errors.sex" v-text="errors.sex"></span>
+              </p>
             </div>
           </div>
         </div>
@@ -324,7 +329,7 @@ select.error:focus {
 
               <input
                 v-model="firstName"
-                :class="{'error' : errors.first_name[0] , 'active' : firstName.length}"
+                :class="{'error' : errors.firstName , 'active' : firstName.length}"
                 id="first-name"
                 type="text"
                 class="dire"
@@ -332,7 +337,7 @@ select.error:focus {
               />
 
               <p class="error-message">
-                <span v-if="errors.first_name[0]" v-text="errors.first_name[0]"></span>
+                <span v-if="errors.firstName" v-text="errors.firstName"></span>
               </p>
             </div>
             <div class="input-wrapper col-xs-12 col-md-4 pull-right">
@@ -342,8 +347,8 @@ select.error:focus {
               </label>
 
               <input
-                v-model="firstName"
-                :class="{'error' : errors.first_name[0] , 'active' : firstName.length}"
+                v-model="lastName"
+                :class="{'error' : errors.lastName , 'active' : lastName.length}"
                 id="first-name"
                 type="text"
                 class="dire"
@@ -351,7 +356,7 @@ select.error:focus {
               />
 
               <p class="error-message">
-                <span v-if="errors.first_name[0]" v-text="errors.first_name[0]"></span>
+                <span v-if="errors.lastName" v-text="errors.lastName"></span>
               </p>
             </div>
             <div class="input-wrapper col-xs-12 col-md-4 pull-right">
@@ -361,16 +366,16 @@ select.error:focus {
               </label>
 
               <input
-                v-model="firstName"
-                :class="{'error' : errors.first_name[0] , 'active' : firstName.length}"
+                v-model="password"
+                :class="{'error' : errors.password , 'active' : password.length}"
                 id="first-name"
-                type="text"
+                type="password"
                 class="dire"
                 placeholder="گذرواژه"
               />
 
               <p class="error-message">
-                <span v-if="errors.first_name[0]" v-text="errors.first_name[0]"></span>
+                <span v-if="errors.password" v-text="errors.password"></span>
               </p>
             </div>
           </div>
@@ -383,7 +388,7 @@ select.error:focus {
         <div class="form-contents text-rtl col-xs-12">
           <div class="row">
             <div
-              v-if="!$parent.currentUser.user_info && !$parent.profileIsLoad"
+              v-if="!$parent.currentUser.user_info && $parent.isProfileLoaded"
               class="input-wrapper select-wrapper col-xs-12 col-md-4 pull-right"
             >
               <label for="first-name">
@@ -391,14 +396,26 @@ select.error:focus {
                 <span class="red-text">*</span>
               </label>
 
-              <select :class="{'error' :  errors}" id="province" class="dire">
-                <option selected disabled>استان را انتخاب کنید</option>
-
-                <option>یک استان انتخاب کنید</option>
+              <select
+                v-model="provinceId"
+                :class="{'error' :  errors.provinces, 'active' : provinceId}"
+                id="province"
+                class="dire"
+              >
+                <option selected disabled value>یک استان انتخاب کنید</option>
+                <option
+                  v-for="(province,intex) in provinces"
+                  :key="intex"
+                  v-text="province.province_name"
+                  :value="province.id"
+                >یک استان انتخاب کنید</option>
               </select>
+              <p class="error-message">
+                <span v-if="errors.provinceId" v-text="errors.provinceId"></span>
+              </p>
             </div>
             <div
-              v-if="!$parent.currentUser.user_info && !$parent.profileIsLoad"
+              v-if="!$parent.currentUser.user_info && $parent.isProfileLoaded"
               class="input-wrapper select-wrapper col-xs-12 col-md-4 pull-right"
             >
               <label for="first-name">
@@ -406,48 +423,61 @@ select.error:focus {
                 <span class="red-text">*</span>
               </label>
 
-              <select :class="{'error' :  errors}" id="province" class="dire">
-                <option selected disabled>شهر را انتخاب کنید</option>
-
-                <option>یک شهر انتخاب کنید</option>
-              </select>
-            </div>
-            <div class="input-wrapper col-xs-12 col-md-4 pull-left">
-              <label for="first-name">
-                کد پستی وارد کنید
-                <span class="gray-text">(اختیاری)</span>
-              </label>
-
-              <input
-                v-model="firstName"
-                :class="{'error' : errors.first_name[0] , 'active' : firstName.length}"
-                id="first-name"
-                type="text"
+              <select
+                @change="setCityId($event)"
+                :class="{'error' :  errors.cityId, 'active' : cityId}"
+                id="province"
                 class="dire"
-                placeholder="کد پستی"
-              />
-
+              >
+                <option disabled selected>شهر را انتخاب کنید</option>
+                <option
+                  v-for="(city,intex) in cities"
+                  :key="intex"
+                  v-text="city.city_name"
+                  :value="city.id"
+                >یک شهر انتخاب کنید</option>
+              </select>
               <p class="error-message">
-                <span v-if="errors.first_name[0]" v-text="errors.first_name[0]"></span>
+                <span v-if="errors.cityId" v-text="errors.cityId"></span>
               </p>
             </div>
+
             <div class="input-wrapper margin-0 col-xs-12 col-md-8 pull-right">
-              <label for="first-name">
+              <label for="address">
                 آدرس کامل
                 <span class="red-text">*</span>
               </label>
 
               <input
-                v-model="firstName"
-                :class="{'error' : errors.first_name[0] , 'active' : firstName.length}"
-                id="first-name"
+                v-model="address"
+                :class="{'error' : errors.address , 'active' : address.length}"
+                id="address"
                 type="text"
                 class="dire"
                 placeholder="آدرس کامل"
               />
 
               <p class="error-message">
-                <span v-if="errors.first_name[0]" v-text="errors.first_name[0]"></span>
+                <span v-if="errors.address" v-text="errors.address"></span>
+              </p>
+            </div>
+            <div class="input-wrapper col-xs-12 col-md-4 pull-left">
+              <label for="postal-code">
+                کد پستی وارد کنید
+                <span class="gray-text">(اختیاری)</span>
+              </label>
+
+              <input
+                v-model="postalCode"
+                :class="{'error' : errors.postalCode , 'active' : postalCode.length}"
+                id="postal-code"
+                type="tel"
+                class="dire"
+                placeholder="کد پستی"
+              />
+
+              <p class="error-message">
+                <span v-if="errors.postalCode" v-text="errors.postalCode"></span>
               </p>
             </div>
           </div>
@@ -471,7 +501,7 @@ select.error:focus {
               </p>
             </div>
             <div class="change-step col-xs-12 col-md-3 pull-left">
-              <button class="green-button hover-effect">
+              <button @click.prevent="setInformationData()" class="green-button hover-effect">
                 <i class="fa fa-arrow-left"></i>
                 <span>ادامه فرایند خرید</span>
               </button>
@@ -489,26 +519,177 @@ export default {
     return {
       firstName: "",
       lastName: "",
+      password: "",
       sex: "",
+      provinces: "",
+      provinceId: "",
+      cities: "",
+      cityId: "",
+      address: "",
+      postalCode: "",
       errors: {
-        first_name: [],
-        last_name: [],
-        sex: [],
-        city: [],
-        password: []
-      }
+        firstName: "",
+        lastName: "",
+        password: "",
+        sex: "",
+        provinceId: "",
+        cityId: "",
+        address: "",
+        postalCode: ""
+      },
+      fileds: [
+        "firstName",
+        "lastName",
+        "password",
+        "sex",
+        "provinces",
+        "city",
+        "address",
+        "postalCode"
+      ]
     };
   },
   methods: {
     init: function() {
       this.$parent.getCurrentUser();
-      // if (this.$parent.checkCookie()) {
-      // } else {
-      // }
+      this.$parent.setProductData();
+      this.getProvinces();
+    },
+    setInformationData: function() {
+      if (this.$parent.currentUser.user_info && this.$parent.profileIsLoad) {
+        this.addressValidator();
+        this.postalCodeValidator();
+      } else {
+        this.sexValidator();
+        this.nameValidator();
+        this.familyValidator();
+        this.passwordValidator();
+        this.provinceValidator();
+        this.cityValidator();
+        this.addressValidator();
+        this.postalCodeValidator();
+      }
+    },
+    getProvinces: function() {
+      axios
+        .post("/location/get_location_info")
+        .then(response => (this.provinces = response.data.provinces));
+    },
+    getCities() {
+      axios
+        .post("/location/get_location_info", {
+          province_id: this.provinceId
+        })
+        .then(response => (this.cities = response.data.cities));
+    },
+    setCityId(e) {
+      this.cityId = $(e.target).val();
+    },
+    sexValidator: function() {
+      this.errors.sex = "";
+      if (this.sex === "") {
+        this.errors.sex = "لطفا جنسیت را انتخاب کنید";
+      }
+    },
+    nameValidator: function() {
+      this.errors.firstName = "";
+      let hasError = this.textHasError(this.firstName, "نام");
+      this.errors.firstName = hasError ? hasError : "";
+    },
+    familyValidator: function() {
+      this.errors.lastName = "";
+      let hasError = this.textHasError(this.lastName, "نام خانوادگی");
+      this.errors.lastName = hasError ? hasError : "";
+    },
+    passwordValidator: function() {
+      this.errors.password = "";
+      if (this.password === "") {
+        this.errors.password = "رمز عبور الزامی است";
+      } else if (this.password.length < 8) {
+        this.errors.password = "رمز عبور حداقل ۸ کاراکتر باشد";
+      }
+    },
+    provinceValidator: function() {
+      this.errors.provinceId = "";
+      if (this.provinceId === "") {
+        this.errors.provinceId = "لطفا استان را انتخاب کنید";
+      }
+    },
+    cityValidator: function() {
+      this.errors.cityId = "";
+      if (this.provinceId === "") {
+        this.errors.cityId = "لطفا شهر را انتخاب کنید";
+      }
+    },
+    addressValidator: function() {
+      this.errors.address = "";
+      let hasError = this.textHasError(this.address, "آدرس");
+      this.errors.address = hasError ? hasError : "";
+    },
+    postalCodeValidator: function() {
+      this.errors.postalCode = "";
+      if (this.postalCode) {
+        if (!this.validateRegx(this.postalCode, /^[0-9٠-٩۰-۹\s]+$/)) {
+          this.errors.postalCode =
+            " کد پستی فقط می تواند اعداد فارسی یا لاتین باشد با فرمت مناسب باشد.";
+        } else if (this.postalCode.length <= 9) {
+          this.errors.postalCode = "کد پستی باید ۱۰ رقم باشد.";
+        }
+      }
+    },
+    textHasError: function(text, type) {
+      let error = "";
+      if (text == "") {
+        error = "لطفا " + type + " را وارد کنید";
+      } else if (!this.validateRegx(text, /^[\u0600-\u06FF0-9\s]+$/)) {
+        error = type + " فرمت مناسبی نیست";
+      } else {
+        return false;
+      }
+
+      return error;
+    },
+    validateRegx: function(input, regx) {
+      return regx.test(input);
     }
   },
   mounted: function() {
     this.init();
+    if (this.$parent.isOsIOS()) {
+      $("#postal-code").attr("type", "text");
+    }
+  },
+  watch: {
+    provinceId: function(id) {
+      this.errors.provinceId = "";
+
+      this.getCities();
+    },
+    sex: function() {
+      this.errors.sex = "";
+    },
+    firstName: function() {
+      this.errors.firstName = "";
+    },
+    lastName: function() {
+      this.errors.lastName = "";
+    },
+
+    cityId: function() {
+      this.errors.cityId = "";
+    },
+    address: function() {
+      this.errors.address = "";
+    },
+    password: function() {
+      this.errors.password = "";
+    },
+    postalCode: function(value) {
+      this.errors.postalCode = "";
+      if (this.postalCode.length >= 10) {
+        this.postalCode = this.postalCode.substring(0, 10);
+      }
+    }
   }
 };
 </script>

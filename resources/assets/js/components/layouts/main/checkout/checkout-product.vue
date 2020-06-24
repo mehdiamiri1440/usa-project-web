@@ -139,7 +139,7 @@ export default {
       currentStep: 0,
       paymentStep: 0,
       productData: "",
-      profileIsLoad: true,
+      isProfileLoaded: false,
       currentUser: {
         profile: "",
         user_info: ""
@@ -154,7 +154,7 @@ export default {
     getCurrentUser() {
       axios.post("/user/profile_info").then(response => {
         this.currentUser = response.data;
-        this.profileIsLoad = false;
+        this.isProfileLoaded = true;
       });
     },
     createCookie: function(name, value, minutes) {
@@ -232,6 +232,13 @@ export default {
         progress.css("left", "calc(100% - 50px)");
       }
       this.paymentStep = level;
+    },
+    isOsIOS: function() {
+      var userAgent = window.navigator.userAgent.toLowerCase(),
+        safari = /safari/.test(userAgent),
+        ios = /iphone|ipod|ipad/.test(userAgent);
+
+      return ios;
     }
   },
   mounted: function() {
