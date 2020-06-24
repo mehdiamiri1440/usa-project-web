@@ -263,9 +263,12 @@
     padding: 13px 15px;
   }
 
-  .main-content,
-  .main-content.is-fix-alert {
+  .main-content {
     padding: 59px 0 0;
+  }
+
+  .main-content.is-fix-alert {
+    padding: 85px 0 0;
   }
 
   .hidden_element {
@@ -396,6 +399,7 @@ export default {
       isSearchingContact: false,
       contactList: [],
       chatMessages: "",
+      isNoticeActive: true,
       selectedContact: "",
       currentUserId: "",
       currentContactUserId: "",
@@ -410,7 +414,9 @@ export default {
       toContact: 15,
       contactsCountInEachLoad: 20,
       showLoadMoreBtn: false,
-      userAllowedReview: false
+      userAllowedReview: false,
+      verifiedUserContent: this.$parent.verifiedUserContent,
+      isCurrentUserVerified: false,
     };
   },
 
@@ -436,6 +442,7 @@ export default {
         .then(function(response) {
           self.contactList = response.data.contact_list;
           self.currentUserId = response.data.user_id;
+          self.isCurrentUserVerified = response.data.is_verified;
           self.isContactListLoaded = true;
 
           if (self.contactList.length >= self.toContact) {
@@ -471,7 +478,12 @@ export default {
           user_id: contact.contact_id
         })
         .then(function(response) {
+          self.isNoticeActive = true;
           self.chatMessages = response.data.messages;
+          if (!self.chatMessages.length) {
+            self.isNoticeActive = false;
+          }
+          self.userHasNotice();
           self.currentUserId = response.data.current_user_id;
           self.scrollToEnd(0);
         })
@@ -489,6 +501,75 @@ export default {
       contact.unread_msgs_count = 0;
 
       this.contactList.splice(index, 1, contact);
+    },
+    userHasNotice() {
+      let cookie = this.getCookie("messengerNoticeData");
+      if (cookie) {
+        let getAlCookies = JSON.parse(cookie).userNoticeCloed;
+        if (getAlCookies.find(this.cookieHasUser)) {
+          this.isNoticeActive = false;
+        }
+      }
+    },
+    cookieHasUser(userId) {
+      return userId == this.selectedContact.contact_id;
+    },
+    setNoticeCookie() {
+      let contactUserId = this.selectedContact.contact_id;
+      let cookie = this.getCookie("messengerNoticeData");
+      if (cookie) {
+        let getAlCookies = JSON.parse(cookie).userNoticeCloed;
+        if (!getAlCookies.find(this.cookieHasUser)) {
+          getAlCookies.push(contactUserId);
+          this.createCookie(
+            "messengerNoticeData",
+            JSON.stringify({ userNoticeCloed: getAlCookies }),
+            1000
+          );
+        }
+      } else {
+        this.createCookie(
+          "messengerNoticeData",
+          JSON.stringify({ userNoticeCloed: [contactUserId] }),
+          1000
+        );
+      }
+      this.isNoticeActive = false;
+    },
+    createCookie: function(name, value, minutes) {
+      if (minutes) {
+        var date = new Date();
+        date.setTime(date.getTime() + minutes * 60 * 1000);
+        var expires = "; expires=" + date.toGMTString();
+      } else {
+        var expires = "";
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
+    },
+    getCookie: function(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    },
+    checkCookie: function() {
+      if (
+        this.active_pakage_type == 3 ||
+        this.getCookie("closeSellerFixModal") == "false" ||
+        this.checkPricingRoute()
+      ) {
+        this.isRequiredFixAlert = false;
+      } else {
+        this.isRequiredFixAlert = true;
+      }
     },
     appendMessageToChatHistory: function(contact) {
       var self = this;
@@ -686,7 +767,7 @@ export default {
 
   mounted: function() {
     this.init();
-    eventBus.$emit("subHeader", this.items);
+    eventBus.$emit("subHeader", false);
   },
 
   created: function() {

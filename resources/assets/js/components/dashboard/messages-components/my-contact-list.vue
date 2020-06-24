@@ -154,6 +154,11 @@
   border: none;
   width: 100%;
 }
+
+.verified-user::before {
+  top: 3px;
+  left: 3px;
+}
 </style>
 
 <template>
@@ -215,7 +220,21 @@
               <img v-else src="../../../../img/user-defult.png" />
             </div>
             <div class="my-contact-info-wrapper">
-              <span class="contact-name" v-text="contact.first_name + ' ' + contact.last_name"></span>
+              <span class="contact-name text-rtl">
+                {{contact.first_name + ' ' + contact.last_name}}
+                <button
+                  v-if="contact.is_verified"
+                  @click.prevent
+                  class="verified-user"
+                  data-container="body"
+                  data-toggle="popover"
+                  data-placement="bottom"
+                  :data-content="$parent.verifiedUserContent"
+                  title
+                >
+                  <i class="fa fa-certificate"></i>
+                </button>
+              </span>
 
               <p class="last-message-date">{{ contact.last_msg_time_date | moment("jYY/jMM/jDD") }}</p>
             </div>
@@ -240,3 +259,39 @@
     </div>
   </div>
 </template>
+
+
+<script >
+export default {
+  methods: {
+    activeComponentTooltip() {
+      $(".verified-user")
+        .popover({ trigger: "manual", html: true, animation: false })
+        .on("mouseenter", function() {
+          var _this = this;
+          $(this).popover("show");
+          $(".popover").on("mouseleave", function() {
+            $(_this).popover("hide");
+          });
+        })
+        .on("mouseleave", function() {
+          var _this = this;
+          setTimeout(function() {
+            if (!$(".popover:hover").length) {
+              $(_this).popover("hide");
+            }
+          }, 300);
+        });
+    }
+  },
+  watch: {
+    "$parent.contactList": function() {
+      if (this.$parent.contactList) {
+        setTimeout(() => {
+          this.activeComponentTooltip();
+        }, 10);
+      }
+    }
+  }
+};
+</script>

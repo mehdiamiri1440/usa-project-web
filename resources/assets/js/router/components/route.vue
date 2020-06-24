@@ -119,7 +119,7 @@
       :profile-photo="profilePhoto"
       :user-full-name="userFullName"
       :user-logout-path="userLogoutPath"
-      :key="$route.fullPath"
+      :verified-user-content="verifiedUserContent"
     />
 
     <router-view
@@ -128,6 +128,7 @@
       :is-seller="isSeller"
       :assets="assets"
       :storage-path="storagePath"
+      :verified-user-content="verifiedUserContent"
     />
 
     <router-view
@@ -136,6 +137,7 @@
       :is-seller="isSeller"
       :assets="assets"
       :storage-path="storagePath"
+      :verified-user-content="verifiedUserContent"
     />
 
     <!-- add android app download  -->
@@ -184,7 +186,9 @@ export default {
       msg: "",
       reviewCurrentStep: 0,
       reviewUserData: "",
-      reviewUserPrfileId: ""
+      reviewUserPrfileId: "",
+      verifiedUserContent:
+        "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>"
     };
   },
   props: [
@@ -234,6 +238,19 @@ export default {
     });
 
     let self = this;
+
+    $(document).on("mouseleave", function () {
+       if(!self.userId){
+         if(!window.localStorage.getItem('guideShowed')){
+           self.openRelatedSwalModal('guide');
+
+           window.localStorage.setItem('guideShowed',true);
+         }
+         
+       }
+    });
+
+    
 
     if (messaging) {
       messaging.onMessage(function(payload) {
@@ -356,6 +373,9 @@ export default {
           break;
         case "deleteUserComment":
           this.raiseDeleteUserCommentModal();
+          break;
+        case "verificationInfoUploadDone":
+          this.raiseVerificationUploadSuccessModal();
           break;
       }
     },
@@ -543,7 +563,7 @@ export default {
 
       let content = document.createElement("div");
       content.innerHTML =
-        '<p dir="rtl">سقف تعداد محصولات ثبت شده شما پر شده است.</p><br/><p class="red-text" dir="rtl"><b>برای ثبت محصولات جدید، لطفا عضویت خود را ارتقا دهید.</b></p>';
+        '<p dir="rtl">سقف تعداد محصولات ثبت شده شما پر شده است.</p><br/><p class="red-text" dir="rtl"><b>برای ثبت محصولات جدید، لطفا رو دکمه افزایش ظرفیت بزنید.</b></p>';
       swal({
         title: "محدودیت ثبت محصول جدید",
         content: content,
@@ -551,8 +571,9 @@ export default {
         icon: "warning",
         buttons: {
           success: {
-            text: "ارتقا عضویت",
-            value: "promote"
+            text: "افزایش ظرفیت",
+            value: "promote",
+            className: "button-new-badge"
           },
           close: {
             text: "بستن",
@@ -562,7 +583,7 @@ export default {
       }).then(value => {
         switch (value) {
           case "promote":
-            self.$router.push({ name: "dashboardPricingTableSeller" });
+            self.$router.push({ name: "dashboardProductPricing" });
             break;
         }
       });
@@ -574,7 +595,7 @@ export default {
 
       let content = document.createElement("div");
       content.innerHTML =
-        '<p dir="rtl">ظرفیت روزانه پاسخ به درخواست های خرید شما پر شده است.</p><br/><p class="red-text" dir="rtl"><b>برای افزایش ظرفیت، لطفا عضویت خود را ارتقا دهید.</b></p>';
+        '<p dir="rtl">ظرفیت روزانه پاسخ به درخواست های خرید شما پر شده است.</p><br/><p class="red-text" dir="rtl"><b>برای افزایش ظرفیت، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
       swal({
         title: "محدودیت پاسخ به درخواست ها",
         content: content,
@@ -582,8 +603,9 @@ export default {
         icon: "warning",
         buttons: {
           success: {
-            text: "ارتقا عضویت",
-            value: "promote"
+            text: "افزایش ظرفیت",
+            value: "promote",
+            className: "button-new-badge"
           },
           close: {
             text: "بستن",
@@ -593,7 +615,7 @@ export default {
       }).then(value => {
         switch (value) {
           case "promote":
-            self.$router.push({ name: "dashboardPricingTableSeller" });
+            self.$router.push({ name: "dashboardBuyAdPricing" });
             break;
         }
       });
@@ -697,6 +719,22 @@ export default {
         }
       });
     },
+    raiseVerificationUploadSuccessModal: function(){
+        this.handleBackBtn();
+        swal({
+          title: "احراز هویت",
+          text:
+            "اطلاعات شما با موفقیت ارسال شد. در صورت تایید کارشناسان باسکول نشان احراز هویت به حساب کاربری شما داده می شود.",
+          className: "custom-swal-with-cancel",
+          icon: "success",
+          buttons: {
+            close: {
+              text: "بستن",
+              className: "bg-cancel"
+            }
+          }
+        });
+    },
     isModalOpen: function() {
       return swal.getState().isOpen;
     },
@@ -731,6 +769,8 @@ export default {
   },
   mounted() {
     this.activateDownloadApp();
+    // eventBus.$emit("globalVerifiedBadgeContents", this.verifiedUserContent);
+    eventBus.$emit("globalVerifiedBadgeContents", 1);
   }
 };
 </script>

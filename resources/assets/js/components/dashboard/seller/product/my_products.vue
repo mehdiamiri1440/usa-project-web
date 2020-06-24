@@ -233,7 +233,8 @@ export default {
           url: "myProducts"
         }
       ],
-      loading: false
+      loading: false,
+      verifiedUserContent: this.$parent.verifiedUserContent
     };
   },
   methods: {
@@ -257,7 +258,7 @@ export default {
   },
   mounted() {
     this.init();
-    eventBus.$emit("subHeader", this.items);
+    eventBus.$emit("subHeader", false);
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/my-products" });

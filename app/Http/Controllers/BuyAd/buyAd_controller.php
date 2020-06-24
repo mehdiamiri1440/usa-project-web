@@ -256,7 +256,7 @@ class buyAd_controller extends Controller
             
             $user_daily_reply_capacity = config("subscriptionPakage.type-{$user_reply_records->first()->active_pakage_type}.buyAd-reply-count");
             // var_dump($user_daily_reply_capacity);
-            if($today_replies_count >= $user_daily_reply_capacity){
+            if($today_replies_count >= $user_daily_reply_capacity + $user_reply_records->first()->extra_buyAd_reply_capacity){
                 return response()->json([
                     'status' => false,
                     'permission' => false,

@@ -185,12 +185,21 @@ p.response-rate {
         </div>
 
         <div v-if="user_info.response_rate" class="user-information-content">
-          <router-link
-            class="user-name-link"
-            :to="'/profile/'+ user_name"
-            v-if="user_info"
-            v-text="user_full_name"
-          ></router-link>
+          <router-link class="user-name-link" :to="'/profile/'+ user_name" v-if="user_info">
+            {{user_full_name}}
+            <button
+              v-if="user_info.is_verified"
+              @click.prevent
+              class="verified-user"
+              data-container="body"
+              data-toggle="popover"
+              data-placement="bottom"
+              :data-content="$parent.verifiedUserContent"
+              title
+            >
+              <i v-if="user_info.is_verified" class="fa fa-certificate"></i>
+            </button>
+          </router-link>
 
           <p v-if="user_info" class="response-rate">
             احتمال پاسخ گویی
@@ -199,12 +208,21 @@ p.response-rate {
         </div>
 
         <div v-else class="user-information-content default">
-          <router-link
-            class="user-name-link"
-            :to="'/profile/'+ user_name"
-            v-if="user_info"
-            v-text="user_full_name"
-          ></router-link>
+          <router-link class="user-name-link" :to="'/profile/'+ user_name" v-if="user_info">
+            {{user_full_name}}
+            <button
+              v-if="user_info.is_verified"
+              @click.prevent
+              class="verified-user"
+              data-container="body"
+              data-toggle="popover"
+              data-placement="bottom"
+              :data-content="$parent.verifiedUserContent"
+              title
+            >
+              <i  class="fa fa-certificate"></i>
+            </button>
+          </router-link>
         </div>
       </router-link>
 
@@ -341,7 +359,29 @@ export default {
         description: description,
         fatal: fatal
       });
+    },
+    activeComponentTooltip() {
+      $(".verified-user")
+        .popover({ trigger: "manual", html: true, animation: false })
+        .on("mouseenter", function() {
+          var _this = this;
+          $(this).popover("show");
+          $(".popover").on("mouseleave", function() {
+            $(_this).popover("hide");
+          });
+        })
+        .on("mouseleave", function() {
+          var _this = this;
+          setTimeout(function() {
+            if (!$(".popover:hover").length) {
+              $(_this).popover("hide");
+            }
+          }, 300);
+        });
     }
+  },
+  mounted: function() {
+    this.activeComponentTooltip();
   }
 };
 </script>

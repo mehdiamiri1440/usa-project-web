@@ -36,10 +36,23 @@ export default {
   components: {
     "header-dash-buyer": HeaderDashBuyer
   },
-  props: ["userId", "isSeller", "assets", "storagePath"],
+  props: ["userId", "isSeller", "assets", "storagePath", "verifiedUserContent"],
   data: function() {
     return {
-      searchText: ""
+      searchText: "",
+      currentUser: {
+        profile: {
+          is_company: "",
+          company_name: "",
+          company_register_code: "",
+          address: "",
+          public_phone: "",
+          profile_photo: this.storage + "",
+          postal_code: "",
+          shaba_code: ""
+        },
+        user_info: ""
+      }
     };
   },
   mounted: function() {

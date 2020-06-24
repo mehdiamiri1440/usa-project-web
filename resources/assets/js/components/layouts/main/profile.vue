@@ -490,6 +490,11 @@ p.response-rate span {
   margin: 20px auto;
 }
 
+.verified-user::before {
+  top: 3px;
+  left: 3px;
+}
+
 /* products placeholder styles */
 .shadow-content {
   background: #fff;
@@ -956,13 +961,23 @@ p.response-rate span {
                     class="content_title col-xs-12 col-sm-8 col-md-9"
                     itemprop="name"
                   >
-                    <span
-                      v-text="
-                        profileOwner.user_info.first_name +
-                        ' ' +
-                        profileOwner.user_info.last_name
-                      "
-                    ></span>
+                    <span>
+                      {{ profileOwner.user_info.first_name +
+                      ' ' +
+                      profileOwner.user_info.last_name}}
+                      <button
+                        v-if="profileOwner.user_info.is_verified"
+                        @click.prevent
+                        class="verified-user"
+                        data-container="body"
+                        data-toggle="popover"
+                        data-placement="bottom"
+                        :data-content="verifiedUserContent"
+                        title
+                      >
+                        <i class="fa fa-certificate"></i>
+                      </button>
+                    </span>
 
                     <span class="valid-seller" v-if="profileOwnerStatistics.validated_seller">
                       <i class="fa fa-check-circle"></i>
@@ -1097,13 +1112,23 @@ p.response-rate span {
                   </div>
 
                   <h1 v-if="profileOwner.user_info" class="content_title col-xs-12 col-sm-8">
-                    <span
-                      v-text="
-                        profileOwner.user_info.first_name +
-                        ' ' +
-                        profileOwner.user_info.last_name
-                      "
-                    ></span>
+                    <span>
+                      {{ profileOwner.user_info.first_name +
+                      ' ' +
+                      profileOwner.user_info.last_name}}
+                      <button
+                        v-if="profileOwner.user_info.is_verified"
+                        @click.prevent
+                        class="verified-user"
+                        data-container="body"
+                        data-toggle="popover"
+                        data-placement="bottom"
+                        :data-content="verifiedUserContent"
+                        title
+                      >
+                        <i class="fa fa-certificate"></i>
+                      </button>
+                    </span>
 
                     <span class="valid-seller" v-if="profileOwnerStatistics.validated_seller">
                       <i class="fa fa-check-circle"></i>
@@ -1694,7 +1719,8 @@ export default {
       doDeletereview: false,
       reviewsLoader: false,
       userLogin: true,
-      userAllowedReview: false
+      userAllowedReview: false,
+      verifiedUserContent: this.$parent.verifiedUserContent
     };
   },
   methods: {
@@ -2025,6 +2051,25 @@ export default {
           this.reviewsLoader = false;
           this.reviews = response.data;
         });
+    },
+    activeComponentTooltip() {
+      $(".verified-user")
+        .popover({ trigger: "manual", html: true, animation: false })
+        .on("mouseenter", function() {
+          var _this = this;
+          $(this).popover("show");
+          $(".popover").on("mouseleave", function() {
+            $(_this).popover("hide");
+          });
+        })
+        .on("mouseleave", function() {
+          var _this = this;
+          setTimeout(function() {
+            if (!$(".popover:hover").length) {
+              $(_this).popover("hide");
+            }
+          }, 300);
+        });
     }
   },
   mounted() {
@@ -2041,6 +2086,15 @@ export default {
     eventBus.$on("userAllowedReview", $event => {
       this.userAllowedReview = $event;
     });
+  },
+  watch: {
+    "profileOwner.user_info": function() {
+      if (this.profileOwner.user_info) {
+        setTimeout(() => {
+          this.activeComponentTooltip();
+        }, 10);
+      }
+    }
   },
   metaInfo() {
     let fullName =

@@ -280,6 +280,19 @@ select {
   background: #279b41 !important;
 }
 
+.item-wrapper button.item-guid {
+  float: right;
+  border: none;
+  background: #556080;
+  color: #fff;
+  border-radius: 50px;
+  height: 17px;
+  width: 17px;
+  text-align: center;
+  padding: 0 1px;
+  font-size: 11px;
+  line-height: 1;
+}
 .blue-button {
   margin: 15px 0;
   display: inline-block;
@@ -760,6 +773,78 @@ select#bd-month-end-date-id option {
   background: #ececec;
 }
 
+
+.main-loader-content{
+  position: fixed;
+  z-index: 999;
+  background: rgba(0,0,0,0.8);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.main-loader-content .pricing-loader-icon{
+  position: relative;
+  text-align: center;
+  color: #fff;
+  margin: 0 auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.main-loader-content .pricing-loader-icon .lds-ring{
+  background: #fff;
+  border-radius: 50px;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+  width: 90px;
+  height: 90px;
+  padding: 13px;
+}
+
+.main-loader-content .pricing-loader-icon .pricing-loader-text{
+  padding-top: 150px;
+  font-size: 16px;
+}
+
+
+
+/* vefied user icon */
+
+.verified-user {
+  position: relative;
+  display: inline-block;
+  overflow: initial !important;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #1da1f2;
+  top: 1px;
+  line-height: 1.3;
+  font-weight: 900;
+  padding: 0;
+}
+
+.verified-user::before {
+  content: "\F00C";
+  position: absolute;
+  left: 5px;
+  font-family: "Font Awesome 5 Free";
+  color: #fff;
+  top: 4px;
+  font-size: 12px;
+  z-index: 1;
+  line-height: 1;
+  font-weight: 900;
+}
+
+/* bootstrap progress animation */
+.progress-bar-animated {
+  -webkit-animation: progress-bar-stripes 1s linear infinite;
+  animation: progress-bar-stripes 1s linear infinite;
+}
+
 /*******************************************************
 Slider B-flat
 *******************************************************/
@@ -1223,6 +1308,8 @@ span.min {
 .message-has-link a {
   text-decoration: underline !important;
 }
+
+
 @media screen and (max-width: 338px) {
   .custom-navbar .navbar-brand {
     width: 55%;

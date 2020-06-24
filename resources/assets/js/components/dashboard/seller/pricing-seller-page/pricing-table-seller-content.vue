@@ -357,6 +357,20 @@ hr {
 </style>
 <template>
   <div class="col-xs-12">
+    <!-- payment loader -->
+    <div v-if="doPaymentLoader" class="main-loader-content">
+      <div class="pricing-loader-icon">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <p class="pricing-loader-text text-rtl">در حال انتقال به درگاه پرداخت . . .</p>
+      </div>
+    </div>
+
+    <!-- end payment loader -->
     <div class="row">
       <div class="col-xs-12">
         <div class="wrapper-background">
@@ -635,6 +649,7 @@ export default {
   data: function() {
     return {
       statusData: "",
+      doPaymentLoader: false,
 
       priceItemOne: [
         {
@@ -831,6 +846,8 @@ export default {
       $myGroup.find(".collapse.in").collapse("hide");
     },
     doPayment: function(packageType) {
+      this.doPaymentLoader = true;
+
       let userId = getUserId();
 
       this.registerComponentStatistics(

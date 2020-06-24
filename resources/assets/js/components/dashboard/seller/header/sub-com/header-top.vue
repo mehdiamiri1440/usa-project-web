@@ -289,6 +289,9 @@ a.profile-info-wrapper:focus {
   margin: 0;
 }
 
+.header-with-fix-alert {
+  top: 83px !important;
+}
 @media screen and (max-width: 994px) {
   .main-header,
   .little-main-header {
@@ -315,6 +318,35 @@ a.profile-info-wrapper:focus {
   .profile-menu-header {
     padding: 7px;
     padding-left: 36px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .fix-alert-wrapper > a {
+    line-height: 1;
+    display: inline-block;
+    width: calc(100% - 21px);
+    color: #fff;
+    padding: 6px 0 8px;
+    font-size: 12px;
+  }
+  .close-required-fix-alert {
+    float: right;
+    height: 100%;
+    background: none;
+    border: none;
+    line-height: 1;
+    padding: 4px 5px 3px;
+  }
+  .fix-alert-wrapper span.button {
+    font-size: 11px;
+    background: #fff;
+    color: red;
+    padding: 0 5px;
+    margin: 0;
+    margin-right: 0px;
+    border-radius: 4px;
+    margin-right: 6px;
   }
 }
 
@@ -411,13 +443,15 @@ a.profile-info-wrapper:focus {
 <template>
   <div>
     <header id="header" class="main-header">
-      <div v-if="$parent.isRequiredFixAlert" class="hidden-xs required-fix-alert">
+      <div v-if="$parent.isRequiredFixAlert" class="required-fix-alert">
         <div class="fix-alert-wrapper">
           <router-link :to="{name : 'dashboardPricingTableSeller'}">
-            تعداد زیادی از فروشندگان موفق باسکول از عضویت ویژه استفاده می کنند
             <span
-              class="button"
-            >می خواهم عضو ویژه شوم</span>
+              class="hidden-xs"
+            >تعداد زیادی از فروشندگان موفق باسکول از عضویت ویژه استفاده می کنند</span>
+
+            <span class="hidden-sm hidden-md hidden-lg">پنج برابر سریع تر بفروشید!</span>
+            <span class="button">می خواهم عضو ویژه شوم</span>
           </router-link>
           <button @click.prevent="$parent.closeRequiredFixAlert()" class="close-required-fix-alert">
             <i class="fa fa-times"></i>
@@ -523,7 +557,7 @@ a.profile-info-wrapper:focus {
         </ul>
       </div>
 
-      <SubMenu />
+      <SubMenu :class="{ 'header-with-fix-alert' : $parent.isRequiredFixAlert}" />
     </header>
   </div>
 </template>

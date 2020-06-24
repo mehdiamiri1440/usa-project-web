@@ -55,7 +55,7 @@
 
 @media screen and (max-width: 767px) {
   #main.is-required-fix-alert {
-    margin-top: 59px !important;
+    margin-top: 84px !important;
   }
 }
 </style>
@@ -95,11 +95,31 @@ export default {
   components: {
     "header-dash-seller": HeaderDashSeller
   },
-  props: ["userId", "isSeller", "assets", "storagePath", "messageCount"],
+  props: [
+    "userId",
+    "isSeller",
+    "assets",
+    "storagePath",
+    "messageCount",
+    "verifiedUserContent"
+  ],
   data: function() {
     return {
       linkHideStates: ["buyAd-requests", "messenger/contacts"],
       buttonIsActive: true,
+      currentUser: {
+        profile: {
+          is_company: "",
+          company_name: "",
+          company_register_code: "",
+          address: "",
+          public_phone: "",
+          profile_photo: this.storage + "",
+          postal_code: "",
+          shaba_code: ""
+        },
+        user_info: ""
+      },
       buttonActiveInSteps: true,
       isRequiredFixAlert: false,
       active_pakage_type: 3
@@ -127,7 +147,7 @@ export default {
     },
     checkButtonIsHide: function() {
       let buttonActive = true;
-      if (this.subIsActive("/seller/pricing")) {
+      if (this.checkPricingRoute()) {
         this.isRequiredFixAlert = false;
       } else {
         this.checkCookie();
@@ -156,11 +176,30 @@ export default {
     checkCookie: function() {
       if (
         this.active_pakage_type == 3 ||
-        this.getCookie("closeSellerFixModal") == "false"
+        this.getCookie("closeSellerFixModal") == "false" ||
+        this.checkPricingRoute()
       ) {
         this.isRequiredFixAlert = false;
       } else {
         this.isRequiredFixAlert = true;
+      }
+    },
+    checkPricingRoute: function() {
+      let pageIsPricing = false;
+      if (
+        this.urlIsPricing("dashboardPricingTableSeller") ||
+        this.urlIsPricing("dashboardBuyAdPricing") ||
+        this.urlIsPricing("dashboardProductPricing")
+      ) {
+        pageIsPricing = true;
+      }
+      return pageIsPricing;
+    },
+    urlIsPricing(pricingName) {
+      if (this.$route.name == pricingName) {
+        return true;
+      } else {
+        return false;
       }
     }
   },

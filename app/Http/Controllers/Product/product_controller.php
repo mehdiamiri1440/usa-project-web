@@ -34,6 +34,7 @@ class product_controller extends Controller
         'myusers.last_name',
         'myusers.active_pakage_type',
         'myusers.created_at',
+        'myusers.is_verified'
     ];
     protected $profile_info_sent_by_product_array = [
         'profiles.profile_photo',
@@ -687,7 +688,8 @@ class product_controller extends Controller
     {
         $user_id = session('user_id');
 
-        $user_active_pakage_type = myuser::find($user_id)->active_pakage_type;
+        $user_record = myuser::find($user_id);
+        $user_active_pakage_type = $user_record->active_pakage_type;
 
         $max_allowed_prodcut_register = config("subscriptionPakage.type-$user_active_pakage_type.max-products");
 
@@ -696,7 +698,7 @@ class product_controller extends Controller
                                             ->get()
                                             ->count();
 
-        if ($max_allowed_prodcut_register > $user_confirmed_products_count) {
+        if ($max_allowed_prodcut_register + $user_record->extra_product_capacity > $user_confirmed_products_count) {
             return true;
         } else {
             return false;
@@ -755,6 +757,7 @@ class product_controller extends Controller
     public function get_all_products_url_for_sitemap()
     {
         $products = product::where('confirmed',true)
+                                    // ->whereRaw("LENGTH(products.description) > 700")
                                     ->orderBy('updated_at','desc')
                                     ->get();
         $result_products = $this->append_related_data_to_given_products($products);
@@ -1035,20 +1038,28 @@ class product_controller extends Controller
         if($category_record){
             $category_id = $category_record->id;
 
-            $tags_info = $this->get_category_meta_data($category_id);
+            $tags_info = $this->get_category_meta_data($category_id)->first();
 
-            $tags_info->each(function($item) use(&$schema_object){
-                if(! is_null($item->schema_object)){
-                    if(!$schema_object){
-                        $schema_object = $item->schema_object;
-                    }
-                }
-                unset($item->schema_object);
-            });
+            // foreach($tags_info as $item){
+            //     if(! is_null($item->schema_object)){
+            //         if(!$schema_object){
+            //             $schema_object = $item->schema_object;
+            //         }
+            //     }
+            //     unset($item->schema_object);
+
+            //     break;
+            // }
+
+            if(! is_null($tags_info->schema_object)){
+                $schema_object = $tags_info->schema_object;
+                unset($tags_info->schema_object);
+            }
+            
 
             return response()->json([
                 'status' => true,
-                'category_info' => $tags_info,
+                'category_info' => array($tags_info),
                 'schema_object' => $schema_object
             ]);
         }

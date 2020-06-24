@@ -80,7 +80,8 @@
 
 .header-chat-content {
   float: right;
-  padding: 7px 10px;
+  margin-top: 8px;
+  margin-right: 10px;
   color: #fff;
   font-weight: bold;
   max-width: 200px;
@@ -305,7 +306,20 @@
           <img :src="$parent.assets + 'assets/img/user-defult.png'" />
         </span>
 
-        <span class="header-chat-content">{{ contactInfo.first_name + " " + contactInfo.last_name }}</span>
+        <span class="header-chat-content">
+          {{contactInfo.first_name + ' ' + contactInfo.last_name}}
+          <!-- <button
+            @click.prevent
+            class="verified-user"
+            data-container="body"
+            data-toggle="popover"
+            data-placement="bottom"
+            :data-content="$parent.verifiedUserContent"
+            title
+          >
+            <i class="fa fa-certificate"></i>
+          </button>-->
+        </span>
       </button>
 
       <button @click.prevent="openChatBox = false" class="close-chat-modal">
@@ -534,8 +548,28 @@ export default {
         this.openChatBox = false;
         this.$router.push({ path: "/profile/" + this.contactInfo.user_name });
       }
+    },
+    activeComponentTooltip() {
+      $(".verified-user")
+        .popover({ trigger: "manual", html: true, animation: false })
+        .on("mouseenter", function() {
+          var _this = this;
+          $(this).popover("show");
+          $(".popover").on("mouseleave", function() {
+            $(_this).popover("hide");
+          });
+        })
+        .on("mouseleave", function() {
+          var _this = this;
+          setTimeout(function() {
+            if (!$(".popover:hover").length) {
+              $(_this).popover("hide");
+            }
+          }, 300);
+        });
     }
   },
+
   created: function() {
     eventBus.$on("ChatInfo", $event => {
       this.contactInfo = $event;
@@ -549,6 +583,9 @@ export default {
     openChatBox: function(value) {
       if (value == true) {
         $("body").addClass("overflow-hidden");
+        setTimeout(() => {
+          this.activeComponentTooltip();
+        }, 10);
       } else {
         $("body").removeClass("overflow-hidden");
       }

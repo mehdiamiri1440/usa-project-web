@@ -348,7 +348,9 @@ a.profile-info-wrapper:focus {
 .button-height {
   line-height: 1;
 }
-
+.header-with-fix-alert {
+  top: 83px !important;
+}
 @media screen and (max-width: 994px) {
   .main-header,
   .little-main-header {
@@ -578,6 +580,7 @@ a.profile-info-wrapper:focus {
           </button>
         </div>
       </div>
+      <SubMenu :class="{ 'header-with-fix-alert' : $parent.isRequiredFixAlert}" />
     </header>
   </div>
 </template>
@@ -585,12 +588,16 @@ a.profile-info-wrapper:focus {
 
 <script>
 var visible = false;
+import SubMenu from "./sub-menu/sub-menu.vue";
 import { eventBus } from "../../../../../router/router";
 export default {
   data: function() {
     return {
       messageCount: ""
     };
+  },
+  components: {
+    SubMenu
   },
   props: [
     "menuClosed",

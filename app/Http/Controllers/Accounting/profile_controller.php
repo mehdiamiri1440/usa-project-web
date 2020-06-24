@@ -39,13 +39,15 @@ class profile_controller extends Controller
         'phone',
         'password',
         'national_code',
-        'interview_request',
+        'extra_buyAd_reply_capacity',
         'pakage_start',
         'pakage_end',
         'credit',
         'created_at',
         'updated_at',
-        'panel_visisbility',
+        'extra_product_capacity',
+        'profile_visit',
+        'is_blocked'
     ];
 
     protected $profile_fields_exclude_array = [

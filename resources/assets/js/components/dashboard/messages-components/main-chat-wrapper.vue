@@ -55,7 +55,7 @@
     from(#00c569),
     to(#21ad93)
   );
-  background: linear-gradient(90deg, #00c569 0%, #21ad93 100%);
+  background: linear-gradient(-90deg, #00c569 0%, #21ad93 100%);
   float: right;
   width: 100%;
   color: #fff;
@@ -78,7 +78,7 @@
   border-radius: 50px;
   overflow: hidden;
   position: relative;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .message-wrapper .message-contact-title img {
@@ -94,12 +94,12 @@
 .message-wrapper .message-contact-title span {
   float: right;
   display: block;
-  padding-top: 9px;
+  margin-top: 9px;
   white-space: nowrap;
   text-overflow: ellipsis;
   height: 30px;
   overflow: hidden;
-  width: 135px;
+  max-width: 135px;
 }
 
 .back-state {
@@ -272,9 +272,73 @@
   line-height: 1;
   padding: 4px 2px;
 }
+
+.messenger-notice {
+  text-align: center;
+  background: #fff8c1;
+  padding: 7px;
+  border-radius: 8px;
+  margin-top: 20px;
+  line-height: 1.618;
+  color: #777;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+}
+
+.messenger-notice .notice-title {
+  font-size: 13px;
+}
+
+.message-wrapper .chat-page li > div.notice-actions {
+  margin: 3px auto 0;
+  box-shadow: none;
+}
+.messenger-notice .notice-actions button {
+  border: none;
+  color: #21ad92;
+  border-radius: 4px;
+  margin: 2px 7px 0;
+  background: #fff;
+  padding: 2px 15px;
+}
+
+.messenger-notice .notice-actions button:hover {
+  background: #21ad93;
+  border-color: #21ad93;
+  color: #fff;
+}
+.messenger-notice .notice-actions button i {
+  margin-left: 7px;
+}
+
+.verified-user::before {
+  top: 3px;
+  left: 3px;
+}
 @media screen and (max-width: 767px) {
   #chat-menu-items {
     left: 54px;
+  }
+
+  .messenger-notice {
+    margin: 20px -20px;
+    border-radius: 0;
+    background: #fcfaf8;
+    text-align: right;
+    padding: 7px 15px;
+  }
+  .notice-actions {
+    width: 100%;
+  }
+  .messenger-notice .notice-actions button {
+    width: 100%;
+    text-align: right;
+    background: none;
+    padding: 5px 0;
+  }
+  .messenger-notice .notice-actions button:hover {
+    background: initial;
+    border-color: initial;
+    color: #21ad92;
   }
 }
 @media screen and (max-width: 345px) {
@@ -303,13 +367,23 @@
         </div>
 
         <router-link :to="{ path: '/profile/' + $parent.selectedContact.user_name }">
-          <span
-            v-text="
-              $parent.selectedContact.first_name +
-              ' ' +
-              $parent.selectedContact.last_name
-            "
-          ></span>
+          <span>
+            {{ $parent.selectedContact.first_name +
+            ' ' +
+            $parent.selectedContact.last_name}}
+            <button
+              v-if="$parent.selectedContact.is_verified"
+              @click.prevent
+              class="verified-user"
+              data-container="body"
+              data-toggle="popover"
+              data-placement="bottom"
+              :data-content="$parent.verifiedUserContent"
+              title
+            >
+              <i class="fa fa-certificate"></i>
+            </button>
+          </span>
         </router-link>
       </div>
       <div class="head-action-buttons pull-left">
@@ -375,7 +449,7 @@
         >
           <div
             :class="[
-              msg.sender_id == $parent.currentUserId
+              checkMessageListClass(msg.sender_id)
                 ? 'message-send'
                 : 'message-receive',
             ]"
@@ -392,6 +466,22 @@
                 </span>
               </span>
             </div>
+          </div>
+        </li>
+        <li v-if="$parent.isNoticeActive" class="messenger-notice">
+          <p class="notice-title">
+            اطلاعات هویتی این کاربر
+            <span
+              class="red-text"
+              v-if="!$parent.isCurrentUserVerified"
+            >مانند اطلاعات هویتی شما</span> نزد باسکول احراز <span class="red-text"> نشده </span> است.
+          </p>
+          <div class="notice-actions">
+            <button @click="$parent.setNoticeCookie()">متوجه شدم</button>
+            <router-link :tag="button" :to="{'name':'verificationInfo'}">
+              <i class="fa fa-info"></i>
+              اطلاعات بیشتر
+            </router-link>
           </div>
         </li>
       </ul>
@@ -448,6 +538,7 @@ export default {
   methods: {
     init: function() {
       this.hideCollapses();
+      this.$parent.userHasNotice();
     },
     hideCollapses: function() {
       $(document).on("click", function(e) {
@@ -481,6 +572,19 @@ export default {
       }
 
       return isMessageName;
+    },
+    checkMessageListClass(senderId) {
+      let myMessage = false;
+      if (this.$parent.selectedContact.is_verified == true) {
+        this.$parent.isNoticeActive = false;
+      }
+      if (senderId == this.$parent.currentUserId) {
+        this.$parent.isNoticeActive = false;
+        myMessage = true;
+      } else {
+        myMessage = false;
+      }
+      return myMessage;
     }
   },
   mounted: function() {

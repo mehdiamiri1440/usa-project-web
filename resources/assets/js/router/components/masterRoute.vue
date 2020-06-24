@@ -45,7 +45,8 @@ export default {
     "storagePath",
     "profilePhoto",
     "userFullName",
-    "userLogoutPath"
+    "userLogoutPath",
+    "verifiedUserContent"
   ],
   methods: {
     pageIsCheckout: function() {

@@ -105,6 +105,7 @@ textarea {
   direction: rtl;
   background: #f6f6f6;
   font-size: 13px;
+  padding-top: 50px;
 }
 
 .title {
@@ -465,6 +466,16 @@ textarea {
   height: 100%;
   min-width: 100%;
 }
+
+.progressbar {
+  margin-top: 20px;
+}
+.progressbar .progress-title {
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #777;
+}
+
 @media screen and (max-width: 1120px) {
   .label-radio {
     padding: 0 25px 0 11px;
@@ -555,7 +566,6 @@ textarea {
     text-align: center;
   }
 
-  .main-wrapper,
   main,
   .form-wrapper {
     padding: 0;
@@ -583,20 +593,9 @@ textarea {
 <template>
   <div class="main-wrapper col-xs-12">
     <header class="col-xs-12">
-      <div class="title col-xs-12">
-        <div class="row">
-          <div class="col-xs-12 col-sm-3 pull-right">
-            <h1>ویرایش پروفایل</h1>
-          </div>
-          <div class="col-xs-12 col-sm-9">
-            <p
-              v-if="completeProfileProgress <= 85"
-            >برای ارتباط مستقیم با خریداران و صادر کنندگان و فروش بیشتر محصولات، پروفایل خود را تکمیل کنید</p>
-          </div>
-        </div>
-      </div>
-
       <div class="progressbar col-xs-12">
+        <p class="text-center progress-title hidden-sm hidden-md hidden-lg">میزان تکمیل پروفایل</p>
+
         <div class="progress-wrapper row">
           <div class="custom-progress">
             <p class="hidden-xs">میزان تکمیل پروفایل</p>
@@ -973,7 +972,16 @@ export default {
       profilePhoto: "",
       errors: "",
       popUpMsg: "",
-      items: [],
+      items: [
+        {
+          message: "پروفایل",
+          url: "profileBasicSeller"
+        },
+        {
+          message: "احراز هویت",
+          url: "profileBasicSellerVeficiation"
+        }
+      ],
       relatedFiles: [],
       certificateFiles: [],
       formEnabled: false,
@@ -1070,6 +1078,7 @@ export default {
         .then(function(response) {
           if (response.status === 200) {
             eventBus.$emit("submiting", false);
+            eventBus.$emit("uploadPercentage", 0);
 
             eventBus.$emit("modal", "profileEditSuccess");
           }
@@ -1093,12 +1102,15 @@ export default {
             (tmpArray.join() + "").includes("related") ||
             (tmpArray.join() + "").includes("certificate")
           ) {
+            eventBus.$emit("submiting", false);
+            eventBus.$emit("uploadPercentage", 0);
             self.popUpMsg =
               "اندازه تصاویر بزرگ تر 5  از مگابایت است یا فرمت مناسبی ندارد";
             eventBus.$emit("submitSuccess", self.popUpMsg);
             $("#custom-main-modal").modal("show");
           }
           eventBus.$emit("submiting", false);
+          eventBus.$emit("uploadPercentage", 0);
         });
     },
     toLatinNumbers: function(num) {

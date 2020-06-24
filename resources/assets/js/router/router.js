@@ -56,12 +56,45 @@ const router = new Router({
           },
         },
         {
+          path: "product-pricing",
+          name: "dashboardProductPricing",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/pricing-seller-page/product-pricing.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "buyad-pricing",
+          name: "dashboardBuyAdPricing",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/pricing-seller-page/buyad-pricing.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
           path: "profile",
           name: "profileBasicSeller",
           components: {
             default: (resolve) => {
               require([
                 "../components/dashboard/seller/profile/profile_basic.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "profile/verification",
+          name: "profileBasicSellerVeficiation",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/profile/profile_verification.vue",
               ], resolve);
             },
           },
@@ -171,6 +204,17 @@ const router = new Router({
             default: (resolve) => {
               require([
                 "../components/dashboard/buyer/profile/profile_basic.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "profile/verification",
+          name: "profileBasicBuyerVeficiation",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/buyer/profile/profile_verification.vue",
               ], resolve);
             },
           },
@@ -287,6 +331,15 @@ const router = new Router({
           },
         },
         {
+          path: "verification",
+          name: "verificationInfo",
+          components: {
+            default: (resolve) => {
+              require(["../components/layouts/main/verification-info.vue"], resolve);
+            },
+          },
+        },
+        {
           path: "privacy-and-policy",
           name: "privacyAndPolicy",
           components: {
@@ -308,15 +361,28 @@ const router = new Router({
           props: true,
         },
         {
-          path: "product-view/:categoryName/:subCategoryName/:id",
-          name: "productView",
+          path: "product-view",
+          name: "productViewRoute",
           components: {
             default: (resolve) => {
               require([
-                "../components/layouts/main/product_components/product_view.vue",
+                "../components/layouts/main/product_components/product-view-route.vue",
               ], resolve);
             },
           },
+          children: [
+            {
+              path: ":categoryName/:subCategoryName/:id",
+              name: "productView",
+              components: {
+                default: (resolve) => {
+                  require([
+                    "../components/layouts/main/product_components/product-view/product-view.vue",
+                  ], resolve);
+                },
+              },
+            }
+          ]
         },
         {
           path: "checkout-product/",

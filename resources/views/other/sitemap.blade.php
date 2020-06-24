@@ -27,27 +27,19 @@
 
 <url>
   <loc>{{url("login")}}</loc>
-  <changefreq>daily</changefreq>
+  <changefreq>monthly</changefreq>
   <priority>0.5</priority>
 </url>
 
 <url>
   <loc>{{url("register")}}</loc>
-  <changefreq>daily</changefreq>
+  <changefreq>monthly</changefreq>
   <priority>0.5</priority>
 </url>
 
 @foreach($categories as $item)
     <url>
       <loc>{{url("product-list/category/".$item->category_name)}}</loc>
-      <changefreq>daily</changefreq>
-      <priority>0.5</priority>
-    </url>
-@endforeach
-
-@foreach($user_names as $user_name)
-    <url>
-      <loc>{{url("profile/".$user_name->user_name)}}</loc>
       <changefreq>daily</changefreq>
       <priority>0.5</priority>
     </url>

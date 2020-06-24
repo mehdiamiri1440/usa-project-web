@@ -859,7 +859,7 @@ export default {
   },
   mounted: function() {
     this.init();
-    eventBus.$emit("subHeader", this.items);
+    eventBus.$emit("subHeader", false);
   },
 
   created: function() {
