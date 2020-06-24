@@ -497,6 +497,21 @@ Route::group(['middleware' => [login::class]], function () {
         'as' => 'upload_user_verification_photos'
     ]);
     
+    Route::get('/payment/order_payment/{order_id}',[
+        'uses' => 'Payment\order_payment_controller@do_order_payment',
+        'as'   => 'order_payment_controller'
+    ]);
+
+    Route::any('/payment/do_order_payment_callback',[
+        'uses' => 'Payment\order_payment_controller@do_order_payment_callback',
+        'as'   => 'do_order_payment_controller'
+    ]);
+
+    Route::post('/order/create_new_order',[
+        'uses' => 'Order\light_order_controller@create_new_order',
+        'as'   => 'create_new_light_order'
+    ]);
+    
 });
 
 Route::post('/send_phone_verification_code_for_password_reset', [
