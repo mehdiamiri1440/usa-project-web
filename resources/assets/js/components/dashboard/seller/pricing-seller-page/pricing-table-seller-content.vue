@@ -323,126 +323,10 @@
 </style>
 <template>
   <div class="col-xs-12">
-    <!-- payment loader -->
-    <div v-if="doPaymentLoader" class="main-loader-content">
-      <div class="pricing-loader-icon">
-        <div class="lds-ring">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <p class="pricing-loader-text text-rtl">در حال انتقال به درگاه پرداخت . . .</p>
-      </div>
-    </div>
-
-    <!-- end payment loader -->
     <div class="row">
       <div class="main-content-wrapper col-xs-12 col-lg-10 col-lg-offset-1">
         <div class="row">
-          <div class="pull-right col-xs-12 col-sm-6 col-lg-6">
-            <div class="item-wrapper wrapper-background">
-              <div class="item-header text-center">
-                <div class="item-title">
-                  عضویت پایه
-                  <span>۳ ماهه</span>
-                </div>
-
-                <div class="detail-wrapper">
-                  <div class="item-price text-rtl">
-                    <span class="item-price-content">689,000</span>
-                    <span class="item-currency">تومان</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="item-content">
-                <ul class="item-content-list col-xs-12">
-                  <li v-for="(item, index) in priceItemBasic" :key="index">
-                    <a
-                      data-toggle="collapse"
-                      :href="'#content-item-' + index"
-                      @click.prevent="collapseControl($event)"
-                      class="item-help"
-                      :title="item.helpDescription"
-                    ></a>
-
-                    <p class="item-content-title" v-text="item.title"></p>
-
-                    <p class="item-content-amount" v-html="item.contentUnit"></p>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="item-action">
-                <p v-if="statusData.active_pakage_type == 3" class="text-green">در حال استفاده</p>
-
-                <button
-                  v-else-if="statusData.active_pakage_type > 3"
-                  class="green-button btn-disabled text-rtl"
-                  disabled
-                >
-                  پرداخت
-                  <i class="fa fa-angle-left"></i>
-                </button>
-
-                <a v-else href @click.prevent="doPayment(3)" class="green-button text-rtl">
-                  پرداخت
-                  <i class="fa fa-angle-left"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="pull-left col-xs-12 col-sm-6 col-lg-6">
-            <div class="item-wrapper wrapper-background">
-              <div class="item-header pro-version text-center">
-                <div class="item-title">عضویت ویژه سالانه</div>
-
-                <div class="detail-wrapper">
-                  <div class="item-price text-rtl">
-                    <span class="item-price-content">689,000</span>
-                    <span class="item-currency">تومان</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="item-content">
-                <ul class="item-content-list col-xs-12">
-                  <li v-for="(item, index) in priceItemPro" :key="index">
-                    <a
-                      data-toggle="collapse"
-                      :href="'#content-item-pro-' + index"
-                      @click.prevent="collapseControl($event)"
-                      class="item-help"
-                      :title="item.helpDescription"
-                    ></a>
-
-                    <p class="item-content-title" v-text="item.title"></p>
-
-                    <p class="item-content-amount" v-html="item.contentUnit"></p>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="item-action">
-                <p v-if="statusData.active_pakage_type == 3" class="text-green">در حال استفاده</p>
-
-                <button
-                  v-else-if="statusData.active_pakage_type > 3"
-                  class="green-button btn-disabled text-rtl"
-                  disabled
-                >
-                  پرداخت
-                  <i class="fa fa-angle-left"></i>
-                </button>
-
-                <a v-else href @click.prevent="doPayment(3)" class="green-button text-rtl">
-                  پرداخت
-                  <i class="fa fa-angle-left"></i>
-                </a>
-              </div>
-            </div>
-          </div>
+          <pricing-contents />
         </div>
       </div>
       <div class="col-xs-12">
@@ -483,157 +367,79 @@
 
 <script>
 import pricingUserCarousel from "./pricing-user-carousel";
-
+import pricingContents from "./pricing-tables/pricing-package-contents";
 export default {
-  components: { pricingUserCarousel },
+  components: { pricingUserCarousel, pricingContents },
   data: function() {
     return {
-      statusData: "",
-      doPaymentLoader: false,
-
-      priceItemBasic: [
-        {
-          title: "تعداد آگهی ها",
-          contentUnit: "1",
-          helpDescription:
-            " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "
-        },
-        {
-          title: "تعداد درخواست های خرید",
-          contentUnit: "10",
-          helpDescription:
-            "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد"
-        },
-        {
-          title: "ارسال پیامک به خریداران",
-          contentUnit:
-            '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
-          helpDescription:
-            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود"
-        }
-      ],
-      priceItemSix: [
-        {
-          title: "تعداد آگهی ها",
-          contentUnit: "2",
-          helpDescription:
-            " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "
-        },
-        {
-          title: "تعداد نردبان ",
-          contentUnit: "1",
-          helpDescription:
-            "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد"
-        },
-        {
-          title: "نمایش در لیست محصولات ویژه",
-          contentUnit:
-            '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
-          helpDescription:
-            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود"
-        },
-        {
-          title: "تایید فوری ",
-          contentUnit:
-            '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
-          helpDescription:
-            " آگهی های فروش ثبت شده بلافاصله پس از ثبت در لیست محصولات نمایش داده می شود. "
-        },
-        {
-          title: " میزان افزایش خوشنامی ",
-          contentUnit: "100",
-          helpDescription: " مقدار اعتبار اضافه شده به صفحه پروفایل شما "
-        },
-        {
-          title: " نشان فروشنده معتبر ",
-          contentUnit:
-            '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
-          helpDescription:
-            " این نشان در صفحه پروفایل فروشنده نمایش داده می شود. "
-        },
-        {
-          title: " سقف روزانه پاسخ به درخواست ها ",
-          contentUnit: "10",
-          helpDescription: "سقف تعداد روزانه پاسخگویی به درخواست های خرید"
-        },
-        {
-          title: "مشاهده بلافاصله درخواست خرید ",
-          contentUnit:
-            '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
-          helpDescription:
-            " درخواست های خرید جدید بدون تاخیر به شما نمایش داده می شود. "
-        },
-        {
-          title: "تضمین بازگشت وجه ",
-          contentUnit:
-            '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
-          helpDescription:
-            " اگر پس از سه ماه از نتیجه آن رضایت نداشته باشید 100% مبلغ پرداختی به شما بازگردانده می شود. "
-        }
-      ],
-      priceItemPro: [
-        {
-          title: "تعداد آگهی ها",
-          contentUnit: "7",
-          helpDescription:
-            " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "
-        },
-        {
-          title: "تعداد درخواست های خرید",
-          contentUnit: "30",
-          helpDescription:
-            "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد"
-        },
-        {
-          title: "ارسال پیامک به خریداران",
-          contentUnit:
-            '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
-          helpDescription:
-            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود"
-        }
-      ]
+      // statusData: "",
+      // doPaymentLoader: false
+      //  priceItemSix: [
+      //   {
+      //     title: "تعداد آگهی ها",
+      //     contentUnit: "2",
+      //     helpDescription:
+      //       " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "
+      //   },
+      //   {
+      //     title: "تعداد نردبان ",
+      //     contentUnit: "1",
+      //     helpDescription:
+      //       "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد"
+      //   },
+      //   {
+      //     title: "نمایش در لیست محصولات ویژه",
+      //     contentUnit:
+      //       '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
+      //     helpDescription:
+      //       "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود"
+      //   },
+      //   {
+      //     title: "تایید فوری ",
+      //     contentUnit:
+      //       '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
+      //     helpDescription:
+      //       " آگهی های فروش ثبت شده بلافاصله پس از ثبت در لیست محصولات نمایش داده می شود. "
+      //   },
+      //   {
+      //     title: " میزان افزایش خوشنامی ",
+      //     contentUnit: "100",
+      //     helpDescription: " مقدار اعتبار اضافه شده به صفحه پروفایل شما "
+      //   },
+      //   {
+      //     title: " نشان فروشنده معتبر ",
+      //     contentUnit:
+      //       '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
+      //     helpDescription:
+      //       " این نشان در صفحه پروفایل فروشنده نمایش داده می شود. "
+      //   },
+      //   {
+      //     title: " سقف روزانه پاسخ به درخواست ها ",
+      //     contentUnit: "10",
+      //     helpDescription: "سقف تعداد روزانه پاسخگویی به درخواست های خرید"
+      //   },
+      //   {
+      //     title: "مشاهده بلافاصله درخواست خرید ",
+      //     contentUnit:
+      //       '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
+      //     helpDescription:
+      //       " درخواست های خرید جدید بدون تاخیر به شما نمایش داده می شود. "
+      //   },
+      //   {
+      //     title: "تضمین بازگشت وجه ",
+      //     contentUnit:
+      //       '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
+      //     helpDescription:
+      //       " اگر پس از سه ماه از نتیجه آن رضایت نداشته باشید 100% مبلغ پرداختی به شما بازگردانده می شود. "
+      //   }
+      // ],
     };
   },
   methods: {
-    init: function() {
-      var self = this;
-      axios
-        .post("/get_seller_dashboard_required_data")
-        .then(function(response) {
-          if (response.data.is_valid || response.data.is_valid == false) {
-            self.statusData = response.data;
-          }
-        });
-    },
-    collapseControl: function(link) {
-      var $myGroup = $(".item-content");
-      $myGroup.find(".collapse.in").collapse("hide");
-    },
-    doPayment: function(packageType) {
-      this.doPaymentLoader = true;
-
-      let userId = getUserId();
-
-      this.registerComponentStatistics(
-        "payment",
-        "type-" + packageType,
-        "userId: " + userId
-      );
-
-      window.location.href = "/payment/" + packageType;
-    },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
-      gtag("event", actionName, {
-        event_category: categoryName,
-        event_label: labelName
-      });
-    }
+    init: function() {}
   },
   mounted() {
     this.init();
-    $(document).on("click", function() {
-      $(".collapse").collapse("hide");
-    });
   }
 };
 </script>
