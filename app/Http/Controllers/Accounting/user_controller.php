@@ -10,6 +10,8 @@ use App\Models\myuser;
 use JWTAuth;
 use App\Models\product;
 use App\Http\Controllers\Notification\sms_controller;
+use DB;
+use Carbon\Carbon;
 
 class user_controller extends Controller
 {
@@ -405,5 +407,37 @@ class user_controller extends Controller
         $user->save();
 
         return redirect('/login');
+    }
+
+    public function get_pricing_page_visit_status()
+    {
+        $user_id = session('user_id');
+
+        $user_record = DB::table('myusers')
+                            ->where('id',$user_id)
+                            ->get()
+                            ->first();
+
+        $received_contacts_count = DB::table('messages')
+                                    ->where('receiver_id',$user_id)
+                                    ->select('sender_id')
+                                    ->distinct()
+                                    ->get()
+                                    ->count();
+
+        if(  $user_record->active_pakage_type == 0 &&
+             Carbon::now()->diffInDays($user_record->created_at) < 30 && 
+             $received_contacts_count > 3 )
+        {
+            return response()->json([
+                'status' => true,
+                'show' => true 
+            ],200);
+        }
+        
+        return response()->json([
+            'status' => false,
+            'show' => false
+        ],200);
     }
 }

@@ -496,6 +496,11 @@ Route::group(['middleware' => [login::class]], function () {
         'uses' => 'Accounting\verification_controller@upload_verification_photos',
         'as' => 'upload_user_verification_photos'
     ]);
+
+    Route::post('/get_show_pricing_page_status',[
+        'uses' => 'Accounting\user_controller@get_pricing_page_visit_status',
+        'as' => 'get_show_pricing_page_status'
+    ]);
     
 });
 
