@@ -228,6 +228,7 @@ export default {
       axios.post("/get_show_pricing_page_status").then(response => {
         if (!this.getCookie("closePricingModal") && response.data.show) {
           this.is_pricing_active = true;
+          this.checkPricingModal();
         }
       });
     },
@@ -311,11 +312,18 @@ export default {
       $(window).on("popstate", function(e) {
         $("#pricing-modal").modal("hide");
       });
+    },
+    checkPricingModal: function() {
+      if (this.$route.name == "dashboardPricingTableSeller") {
+        this.is_pricing_active = false;
+      } else {
+      }
     }
   },
   watch: {
     $route() {
       this.checkButtonIsHide();
+      this.checkPricingModal();
       this.buttonActiveInSteps = true;
     },
     active_pakage_type: function() {
