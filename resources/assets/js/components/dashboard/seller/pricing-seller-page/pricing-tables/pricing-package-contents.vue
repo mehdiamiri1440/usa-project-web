@@ -303,7 +303,7 @@
               <i class="fa fa-angle-left"></i>
             </button>
 
-            <a v-else href @click.prevent="doPayment(2)" class="green-button text-rtl">
+            <a v-else href @click.prevent="doPayment(1)" class="green-button text-rtl">
               پرداخت
               <i class="fa fa-angle-left"></i>
             </a>
@@ -374,18 +374,18 @@ export default {
       priceItemBasic: [
         {
           title: "تعداد آگهی ها",
-          contentUnit: "1",
+          contentUnit: "3",
           helpDescription:
             " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "
         },
         {
-          title: "تعداد درخواست های خرید",
+          title: "ظرفیت درخواستهای خرید روزانه",
           contentUnit: "10",
           helpDescription:
             "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد"
         },
         {
-          title: "ارسال پیامک به خریداران",
+          title: "بسته ی ویژه فروش",
           contentUnit:
             '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
           helpDescription:
@@ -400,13 +400,13 @@ export default {
             " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "
         },
         {
-          title: "تعداد درخواست های خرید",
+          title: "ظرفیت درخواستهای خرید روزانه",
           contentUnit: "30",
           helpDescription:
             "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد"
         },
         {
-          title: "ارسال پیامک به خریداران",
+          title: "بسته ی ویژه فروش",
           contentUnit:
             '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
           helpDescription:

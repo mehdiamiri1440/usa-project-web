@@ -333,15 +333,15 @@
         <div class="wrapper-background">
           <div class="header-wrapper">
             <div class="header-title">
-              <span>یه توضیحاتی</span>
+              <span>بسته ی ویژه فروش چیست؟</span>
             </div>
 
             <p class="header-description">
               <strong>
-                در صورت ارتقاء به عضویت ویژه اگر پس از سه ماه از نتیجه آن رضایت نداشته باشید
+                این بسته شامل مجموعه امکاناتی مانند اعمال پله رایگان، مشاهده بدون تاخیر درخواست های خرید و ... است که
                 <span
                   class="text-green"
-                >100% مبلغ پرداختی به شما بازگردانده می شود</span>
+                >باعث فروش محصولات شما در سریعترین زمان ممکن میشود</span>
               </strong>
             </p>
           </div>

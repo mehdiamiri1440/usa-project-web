@@ -129,6 +129,7 @@
             <div class="modal-body col-xs-12 col-lg-8 col-lg-offset-2">
               <pricing-contents />
             </div>
+            
           </div>
           <!-- /.modal-content -->
         </div>
@@ -226,7 +227,7 @@ export default {
         });
 
       axios.post("/get_show_pricing_page_status").then(response => {
-        if (!this.getCookie("closePricingModal") && response.data.show) {
+        if (!this.getCookie("closePricingModal") && response.data.show && window.location.pathname != '/seller/register-product') {
           this.is_pricing_active = true;
           this.checkPricingModal();
         }
