@@ -53,12 +53,15 @@
   border: none;
   float: right;
   width: 100%;
+  background: #f6f6f6;
 }
 
 .modal-header {
   padding: 9px 15px 10px;
   border-bottom: 1px solid #e5e5e5;
+  background: #fff;
 }
+
 .modal-dialog {
   margin: 0;
   height: 100%;
@@ -127,9 +130,8 @@
             </div>
 
             <div class="modal-body col-xs-12 col-lg-8 col-lg-offset-2">
-              <pricing-contents />
+              <pricing-contents justPro="false" />
             </div>
-            
           </div>
           <!-- /.modal-content -->
         </div>
@@ -227,7 +229,11 @@ export default {
         });
 
       axios.post("/get_show_pricing_page_status").then(response => {
-        if (!this.getCookie("closePricingModal") && response.data.show && window.location.pathname != '/seller/register-product') {
+        if (
+          !this.getCookie("closePricingModal") &&
+          response.data.show &&
+          window.location.pathname != "/seller/register-product"
+        ) {
           this.is_pricing_active = true;
           this.checkPricingModal();
         }
@@ -315,7 +321,11 @@ export default {
       });
     },
     checkPricingModal: function() {
-      if (this.$route.name == "dashboardPricingTableSeller") {
+      if (
+        this.$route.name == "dashboardPricingTableSeller" ||
+        this.$route.name == "dashboardProductPricing" ||
+        this.$route.name == "dashboardBuyAdPricing"
+      ) {
         this.is_pricing_active = false;
       } else {
       }

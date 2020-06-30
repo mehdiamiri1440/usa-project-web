@@ -40,6 +40,7 @@
   position: relative;
   padding: 0;
   float: left;
+  width: 100%;
 }
 
 .item-title {
@@ -68,6 +69,7 @@
 .item-content {
   position: relative;
   float: left;
+  width: 100%;
 }
 
 .item-action {
@@ -147,6 +149,54 @@
   background: linear-gradient(90deg, #00c569 0%, #21ad93 100%);
 
   color: #fff;
+}
+
+.wrapper-background {
+  background: #fff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 4px;
+  padding: 15px;
+  line-height: 1.618;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.header-wrapper {
+  text-align: center;
+  padding: 15px 115px;
+  float: left;
+  width: 100%;
+}
+
+.header-title {
+  margin-bottom: 9px;
+}
+
+.header-title span {
+  font-size: 20px;
+  color: #333;
+  font-weight: bold;
+}
+
+.item-wrapper {
+  position: relative;
+  padding: 0;
+  float: left;
+}
+
+.special-badge {
+  position: absolute;
+  left: -29px;
+  background: #e41c38;
+  color: #fff;
+  font-size: 17px;
+  font-weight: bold;
+  width: 120px;
+  text-align: center;
+  padding: 3px;
+  transform: rotate(-45deg);
+  top: 14px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
 }
 
 @media screen and (max-width: 992px) {
@@ -230,16 +280,8 @@
     right: 0;
     top: 45px;
   }
-
-  .special-badge {
-    padding: 0 3px 3px;
-    border-radius: 4px;
-    display: inline-block;
-    margin-right: 3px;
-    position: initial;
-    font-size: 14px;
-    width: initial;
-    transform: rotate(0);
+  .mobile-padding-0 {
+    padding: 0 !important;
   }
 }
 </style>
@@ -258,7 +300,10 @@
     </div>
 
     <div class="row">
-      <div class="pull-right col-xs-12 col-sm-6 col-lg-6">
+      <div
+        v-if="justPro == 'false'"
+        class="pull-right mobile-padding-0 col-xs-12 col-sm-6 col-lg-6"
+      >
         <div class="item-wrapper wrapper-background">
           <div class="item-header text-center">
             <div class="item-title">
@@ -310,9 +355,13 @@
           </div>
         </div>
       </div>
-      <div class="pull-left col-xs-12 col-sm-6 col-lg-6">
+      <div
+        :class="{'col-sm-offset-3' : justPro == 'true'}"
+        class="pull-left mobile-padding-0 col-xs-12 col-sm-6 col-lg-6"
+      >
         <div class="item-wrapper wrapper-background">
           <div class="item-header pro-version text-center">
+            <span class="special-badge">ویژه</span>
             <div class="item-title">عضویت ویژه سالانه</div>
 
             <div class="detail-wrapper">
@@ -359,6 +408,25 @@
           </div>
         </div>
       </div>
+
+      <div class="col-xs-12 text-center mobile-padding-0">
+        <div class="wrapper-background">
+          <div class="header-wrapper">
+            <div class="header-title">
+              <span>بسته ی ویژه فروش چیست؟</span>
+            </div>
+
+            <p class="header-description">
+              <strong>
+                این بسته شامل مجموعه امکاناتی مانند اعمال پله رایگان، مشاهده بدون تاخیر درخواست های خرید و ... است که
+                <span
+                  class="green-text"
+                >باعث فروش محصولات شما در سریع ترین زمان ممکن می شود</span>
+              </strong>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -366,6 +434,7 @@
 
 <script>
 export default {
+  props: ["justPro"],
   data: function() {
     return {
       statusData: "",

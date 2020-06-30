@@ -326,27 +326,10 @@
     <div class="row">
       <div class="main-content-wrapper col-xs-12 col-lg-10 col-lg-offset-1">
         <div class="row">
-          <pricing-contents />
+          <pricing-contents justPro="false" />
         </div>
       </div>
-      <div class="col-xs-12">
-        <div class="wrapper-background">
-          <div class="header-wrapper">
-            <div class="header-title">
-              <span>بسته ی ویژه فروش چیست؟</span>
-            </div>
 
-            <p class="header-description">
-              <strong>
-                این بسته شامل مجموعه امکاناتی مانند اعمال پله رایگان، مشاهده بدون تاخیر درخواست های خرید و ... است که
-                <span
-                  class="text-green"
-                >باعث فروش محصولات شما در سریعترین زمان ممکن میشود</span>
-              </strong>
-            </p>
-          </div>
-        </div>
-      </div>
       <div class="users-review-carousel-wrapper col-xs-12">
         <div class="title-section">تعدادی از اعضای ویژه در باسکول</div>
         <div class="owl-carousel">
