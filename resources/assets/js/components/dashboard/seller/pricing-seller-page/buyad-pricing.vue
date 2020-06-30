@@ -440,36 +440,7 @@ input[type="number"] {
         <div class="header-section">
           <p>ارتقا عضویت</p>
         </div>
-
-        <div class="col-xs-12">
-          <div class="row">
-            <product-pricing
-              v-for="(priceItem, index) in productPricing"
-              :key="index"
-              :price-item="priceItem"
-            />
-          </div>
-        </div>
-
-        <div class="wrapper-background notice-content">
-          <div class="header-icon-wrapper">
-            <i class="fas fa-award"></i>
-          </div>
-          <div class="header-wrapper">
-            <div class="header-title">
-              <span>ضمانت بازگشت وجه</span>
-            </div>
-
-            <p class="header-description gray-text">
-              <strong>
-                در صورت ارتقاء به عضویت ویژه اگر پس از سه ماه از نتیجه آن رضایت نداشته باشید
-                <span
-                  class="green-text"
-                >100% مبلغ پرداختی به شما بازگردانده می شود</span>
-              </strong>
-            </p>
-          </div>
-        </div>
+        <product-pricing-contents justPro="true" />
       </div>
     </div>
   </div>
@@ -478,9 +449,10 @@ input[type="number"] {
 
 <script>
 import ProductPricing from "./pricing-tables/pricing-packages.vue";
+import productPricingContents from "./pricing-tables/pricing-package-contents";
 
 export default {
-  components: { ProductPricing },
+  components: { ProductPricing, productPricingContents },
   data: function() {
     return {
       productPriceData: {
