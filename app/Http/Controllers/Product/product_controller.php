@@ -132,6 +132,8 @@ class product_controller extends Controller
             $files_path_array = $this->save_product_photos($request, $request->images_count);
             $this->register_photos_path_in_DB($files_path_array, $product);
 
+            $product['active_package_type'] = $user->active_pakage_type;
+
             return $product;
         } catch (\Exception $e) {
             return $e->getMessage();

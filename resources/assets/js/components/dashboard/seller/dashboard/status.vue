@@ -347,7 +347,7 @@ export default {
           packageName = "عضویت رایگان";
           break;
         case 1:
-          packageName = "اشتراک ماهانه";
+          packageName = "عضویت پایه";
           break;
         case 2:
           packageName = "اشتراک 6 ماهه";
