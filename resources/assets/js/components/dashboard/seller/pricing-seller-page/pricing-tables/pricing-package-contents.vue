@@ -337,10 +337,10 @@
           </div>
 
           <div class="item-action">
-            <p v-if="statusData.active_pakage_type == 2" class="text-green">در حال استفاده</p>
+            <p v-if="statusData.active_pakage_type == 1" class="green-text">در حال استفاده</p>
 
             <button
-              v-else-if="statusData.active_pakage_type > 2"
+              v-else-if="statusData.active_pakage_type > 1"
               class="green-button btn-disabled text-rtl"
               disabled
             >
