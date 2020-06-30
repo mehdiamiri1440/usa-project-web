@@ -18,7 +18,7 @@ return [
         'price' => 0
     ],
    'type-1' => [
-       'max-products' => 1,
+       'max-products' => 3,
        'view-priority' => 3,
        'sms-to-buyers' => true,
        'immediate-confirm' => true,
@@ -27,11 +27,11 @@ return [
        'validated-seller' => false,
        'access-to-buy-requests' => false,
        'show-profile-link-in-blog' => false,
-       'pakage-duration-in-months' => 1,
+       'pakage-duration-in-months' => 3,
        'buyAd-count' => 10,
-       'buyAd-reply-count' => 5,
+       'buyAd-reply-count' => 10,
        'elevetor-count' => 0,
-       'price' => 1890000
+       'price' => 2490000
    ],
    'type-2' => [
        'max-products' => 2,

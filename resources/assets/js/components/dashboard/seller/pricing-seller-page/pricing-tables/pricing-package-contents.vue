@@ -313,7 +313,7 @@
 
             <div class="detail-wrapper">
               <div class="item-price text-rtl">
-                <span class="item-price-content">689,000</span>
+                <span class="item-price-content">249,000</span>
                 <span class="item-currency">تومان</span>
               </div>
             </div>
@@ -442,7 +442,7 @@ export default {
 
       priceItemBasic: [
         {
-          title: "تعداد آگهی ها",
+          title: "تعداد محصولات",
           contentUnit: "3",
           helpDescription:
             " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "
@@ -463,7 +463,7 @@ export default {
       ],
       priceItemPro: [
         {
-          title: "تعداد آگهی ها",
+          title: "تعداد محصولات",
           contentUnit: "7",
           helpDescription:
             " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "
