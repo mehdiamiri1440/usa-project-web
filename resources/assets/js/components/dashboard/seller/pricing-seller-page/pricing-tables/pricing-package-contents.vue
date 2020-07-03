@@ -199,6 +199,18 @@
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
 }
 
+.offer-price {
+  position: absolute;
+  text-align: center;
+  top: -23px;
+  left: 15px;
+  right: 15px;
+}
+.offser-item-price-content {
+  font-weight: 400;
+  text-decoration: line-through double;
+  color: #fefefe;
+}
 @media screen and (max-width: 992px) {
   .list-title,
   .needs,
@@ -359,6 +371,10 @@
         :class="{'col-sm-offset-3' : justPro == 'true'}"
         class="pull-left mobile-padding-0 col-xs-12 col-sm-6 col-lg-6"
       >
+        <div class="offer-price green-text text-rtl">
+          <i class="fa fa-check"></i>
+          <span>تخفیف این پکیج برای روز اول فعال است</span>
+        </div>
         <div class="item-wrapper wrapper-background">
           <div class="item-header pro-version text-center">
             <span class="special-badge">ویژه</span>
@@ -366,7 +382,8 @@
 
             <div class="detail-wrapper">
               <div class="item-price text-rtl">
-                <span class="item-price-content">689,000</span>
+                <span class="offser-item-price-content">689,000</span>
+                <span class="item-price-content">500,000</span>
                 <span class="item-currency">تومان</span>
               </div>
             </div>

@@ -445,13 +445,26 @@ a.profile-info-wrapper:focus {
     <header id="header" class="main-header">
       <div v-if="$parent.isRequiredFixAlert" class="required-fix-alert">
         <div class="fix-alert-wrapper">
-          <router-link :to="{name : 'dashboardPricingTableSeller'}">
+          <!-- <router-link :to="{name : 'dashboardPricingTableSeller'}">
             <span
               class="hidden-xs"
             >تعداد زیادی از فروشندگان موفق باسکول از عضویت ویژه استفاده می کنند</span>
 
             <span class="hidden-sm hidden-md hidden-lg">پنج برابر سریع تر بفروشید!</span>
             <span class="button">می خواهم عضو ویژه شوم</span>
+          </router-link>-->
+
+          <router-link :to="{name : 'dashboardPricingTableSeller'}">
+            <span>
+              ارتقا به عضویت ویژه با تخفیف
+              <CountDown
+                starttime="Sep 5, 2018 15:37:25"
+                endtime="Sep 8, 2021 16:37:25"
+                :trans="trans"
+              ></CountDown>
+              <span>دقیقه تا پایان تخفیف</span>
+            </span>
+            <span class="button">جزئیات بیشتر</span>
           </router-link>
           <button @click.prevent="$parent.closeRequiredFixAlert()" class="close-required-fix-alert">
             <i class="fa fa-times"></i>
@@ -566,15 +579,31 @@ a.profile-info-wrapper:focus {
 <script>
 var visible = false;
 import SubMenu from "./sub-menu/sub-menu.vue";
+import CountDown from "./count-down";
 import { eventBus } from "../../../../../router/router";
 export default {
   data: function() {
     return {
-      messageCount: 0
+      messageCount: 0,
+      trans: {
+        day: "Day",
+        hours: "Hours",
+        minutes: "Minuts",
+        seconds: "Seconds",
+        expired: "Event has been expired.",
+        running: "Till the end of event.",
+        upcoming: "Till start of event.",
+        status: {
+          expired: "Expired",
+          running: "Running",
+          upcoming: "Future"
+        }
+      }
     };
   },
   components: {
-    SubMenu
+    SubMenu,
+    CountDown
   },
   props: [
     "menuClosed",
