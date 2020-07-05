@@ -45,25 +45,35 @@
 
 .item-title {
   font-size: 16px;
+  padding: 3px 0 4px;
   font-weight: bold;
-}
-
-.item-title > span {
-  font-size: 12px;
 }
 
 .item-price {
   font-size: 16px;
-
   font-weight: bold;
+  color: #00c569;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 5px;
 }
 
+.detail-wrapper {
+  float: right;
+  width: 100%;
+}
 .item-price .item-currency {
   font-size: 13px;
 
   font-weight: 400;
 
   position: relative;
+}
+
+.item-price .item-date {
+  color: #777;
+  font-weight: 400;
+  font-size: 14px;
 }
 
 .item-content {
@@ -77,10 +87,13 @@
 }
 
 .item-action p {
-  margin: 5px auto 0;
+  margin: 0 auto 15px;
   font-size: 16px;
   padding: 12px;
   display: inline-block;
+  height: 45px;
+  background: #f6f6f6;
+  border-radius: 4px;
 }
 
 .item-help-content > span {
@@ -151,6 +164,10 @@
   color: #fff;
 }
 
+.item-title > span {
+  font-size: 13px;
+}
+
 .wrapper-background {
   background: #fff;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
@@ -186,7 +203,7 @@
 
 .special-badge {
   position: absolute;
-  left: -29px;
+  left: -38px;
   background: #e41c38;
   color: #fff;
   font-size: 17px;
@@ -195,7 +212,7 @@
   text-align: center;
   padding: 3px;
   transform: rotate(-45deg);
-  top: 14px;
+  top: 8px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
 }
 
@@ -206,10 +223,19 @@
   left: 15px;
   right: 15px;
 }
-.offser-item-price-content {
+
+.offer-notice > span {
+  background: #e41c38;
+  color: #fff;
+  border-radius: 4px;
+  padding: 0 15px;
+}
+
+.offer-item-price-content {
   font-weight: 400;
-  text-decoration: line-through double;
-  color: #fefefe;
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: #777;
 }
 @media screen and (max-width: 992px) {
   .list-title,
@@ -313,79 +339,15 @@
 
     <div class="row">
       <div
-        v-if="justPro == 'false'"
-        class="pull-right mobile-padding-0 col-xs-12 col-sm-6 col-lg-6"
-      >
-        <div class="item-wrapper wrapper-background">
-          <div class="item-header text-center">
-            <div class="item-title">
-              عضویت پایه
-              <span>۳ ماهه</span>
-            </div>
-
-            <div class="detail-wrapper">
-              <div class="item-price text-rtl">
-                <span class="item-price-content">249,000</span>
-                <span class="item-currency">تومان</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="item-content">
-            <ul class="item-content-list col-xs-12">
-              <li v-for="(item, index) in priceItemBasic" :key="index">
-                <a
-                  data-toggle="collapse"
-                  :href="'#content-item-' + index"
-                  class="item-help"
-                  :title="item.helpDescription"
-                ></a>
-
-                <p class="item-content-title" v-text="item.title"></p>
-
-                <p class="item-content-amount" v-html="item.contentUnit"></p>
-              </li>
-            </ul>
-          </div>
-
-          <div class="item-action">
-            <p v-if="statusData.active_pakage_type == 1" class="green-text">در حال استفاده</p>
-
-            <button
-              v-else-if="statusData.active_pakage_type > 1"
-              class="green-button btn-disabled text-rtl"
-              disabled
-            >
-              پرداخت
-              <i class="fa fa-angle-left"></i>
-            </button>
-
-            <a v-else href @click.prevent="doPayment(1)" class="green-button text-rtl">
-              پرداخت
-              <i class="fa fa-angle-left"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div
         :class="{'col-sm-offset-3' : justPro == 'true'}"
         class="pull-left mobile-padding-0 col-xs-12 col-sm-6 col-lg-6"
       >
-        <div class="offer-price green-text text-rtl">
-          <i class="fa fa-check"></i>
-          <span>تخفیف این پکیج برای روز اول فعال است</span>
-        </div>
         <div class="item-wrapper wrapper-background">
           <div class="item-header pro-version text-center">
             <span class="special-badge">ویژه</span>
-            <div class="item-title">عضویت ویژه سالانه</div>
-
-            <div class="detail-wrapper">
-              <div class="item-price text-rtl">
-                <span class="offser-item-price-content">689,000</span>
-                <span class="item-price-content">500,000</span>
-                <span class="item-currency">تومان</span>
-              </div>
+            <div class="item-title">
+              عضویت ویژه
+              <span>/ سالانه</span>
             </div>
           </div>
 
@@ -405,7 +367,21 @@
               </li>
             </ul>
           </div>
+          <div class="detail-wrapper">
+            <div class="offer-notice text-center text-rtl">
+              <span>
+                <span>4</span>
+                ساعت تا پایان تخفیف
+              </span>
+            </div>
 
+            <div class="item-price text-rtl">
+              <span class="offer-item-price-content">689,000</span>
+              <span class="item-price-content">500,000</span>
+              <span class="item-currency">تومان</span>
+              <span class="item-date">/ سالانه</span>
+            </div>
+          </div>
           <div class="item-action">
             <p v-if="statusData.active_pakage_type == 3" class="text-green">در حال استفاده</p>
 
@@ -419,6 +395,61 @@
             </button>
 
             <a v-else href @click.prevent="doPayment(3)" class="green-button text-rtl">
+              پرداخت
+              <i class="fa fa-angle-left"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div
+        v-if="justPro == 'false'"
+        class="pull-right mobile-padding-0 col-xs-12 col-sm-6 col-lg-6"
+      >
+        <div class="item-wrapper wrapper-background">
+          <div class="item-header text-center">
+            <div class="item-title">
+              عضویت پایه
+              <span>/ سه ماهه</span>
+            </div>
+          </div>
+
+          <div class="item-content">
+            <ul class="item-content-list col-xs-12">
+              <li v-for="(item, index) in priceItemBasic" :key="index">
+                <a
+                  data-toggle="collapse"
+                  :href="'#content-item-' + index"
+                  class="item-help"
+                  :title="item.helpDescription"
+                ></a>
+
+                <p class="item-content-title" v-text="item.title"></p>
+
+                <p class="item-content-amount" v-html="item.contentUnit"></p>
+              </li>
+            </ul>
+          </div>
+          <div class="detail-wrapper">
+            <br class="hidden-xs" />
+            <div class="item-price text-rtl">
+              <span class="item-price-content">249,000</span>
+              <span class="item-currency">تومان</span>
+              <span class="item-date">/ سه ماهه</span>
+            </div>
+          </div>
+          <div class="item-action">
+            <p v-if="statusData.active_pakage_type == 1" class="green-text">در حال استفاده</p>
+
+            <button
+              v-else-if="statusData.active_pakage_type > 1"
+              class="green-button btn-disabled text-rtl"
+              disabled
+            >
+              پرداخت
+              <i class="fa fa-angle-left"></i>
+            </button>
+
+            <a v-else href @click.prevent="doPayment(1)" class="green-button text-rtl">
               پرداخت
               <i class="fa fa-angle-left"></i>
             </a>

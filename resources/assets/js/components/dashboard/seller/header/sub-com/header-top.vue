@@ -456,13 +456,10 @@ a.profile-info-wrapper:focus {
 
           <router-link :to="{name : 'dashboardPricingTableSeller'}">
             <span>
-              ارتقا به عضویت ویژه با تخفیف
-              <CountDown
-                starttime="Sep 5, 2018 15:37:25"
-                endtime="Sep 8, 2021 16:37:25"
-                :trans="trans"
-              ></CountDown>
-              <span>دقیقه تا پایان تخفیف</span>
+              ارتقا به عضویت ویژه
+              <i class="fa fa-clock"></i>
+              4
+              <span>ساعت تا پایان تخفیف</span>
             </span>
             <span class="button">جزئیات بیشتر</span>
           </router-link>
@@ -579,31 +576,15 @@ a.profile-info-wrapper:focus {
 <script>
 var visible = false;
 import SubMenu from "./sub-menu/sub-menu.vue";
-import CountDown from "./count-down";
 import { eventBus } from "../../../../../router/router";
 export default {
   data: function() {
     return {
-      messageCount: 0,
-      trans: {
-        day: "Day",
-        hours: "Hours",
-        minutes: "Minuts",
-        seconds: "Seconds",
-        expired: "Event has been expired.",
-        running: "Till the end of event.",
-        upcoming: "Till start of event.",
-        status: {
-          expired: "Expired",
-          running: "Running",
-          upcoming: "Future"
-        }
-      }
+      messageCount: 0
     };
   },
   components: {
-    SubMenu,
-    CountDown
+    SubMenu
   },
   props: [
     "menuClosed",
