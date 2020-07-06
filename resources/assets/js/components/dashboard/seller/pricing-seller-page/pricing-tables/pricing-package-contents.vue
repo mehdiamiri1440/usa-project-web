@@ -367,14 +367,13 @@
               </li>
             </ul>
           </div>
-          <div class="detail-wrapper">
+          <div class="detail-wrapper" v-if="offerTime">
             <div class="offer-notice text-center text-rtl">
               <span>
                 <span>4</span>
                 ساعت تا پایان تخفیف
               </span>
             </div>
-
             <div class="item-price text-rtl">
               <span class="offer-item-price-content">689,000</span>
               <span class="item-price-content">500,000</span>
@@ -382,6 +381,15 @@
               <span class="item-date">/ سالانه</span>
             </div>
           </div>
+          <div class="detail-wrapper" v-else>
+            <br class="hidden-xs" />
+            <div class="item-price text-rtl">
+              <span class="item-price-content">689,000</span>
+              <span class="item-currency">تومان</span>
+              <span class="item-date">/ سالانه</span>
+            </div>
+          </div>
+
           <div class="item-action">
             <p v-if="statusData.active_pakage_type == 3" class="text-green">در حال استفاده</p>
 
@@ -393,6 +401,16 @@
               پرداخت
               <i class="fa fa-angle-left"></i>
             </button>
+
+            <a
+              v-else-if="offerTime"
+              href
+              @click.prevent="doPayment(4)"
+              class="green-button text-rtl"
+            >
+              پرداخت
+              <i class="fa fa-angle-left"></i>
+            </a>
 
             <a v-else href @click.prevent="doPayment(3)" class="green-button text-rtl">
               پرداخت
@@ -482,7 +500,7 @@
 
 <script>
 export default {
-  props: ["justPro"],
+  props: ["justPro", "offerTime"],
   data: function() {
     return {
       statusData: "",

@@ -589,7 +589,7 @@ export default {
     HeaderTop,
     SwitchButtons
   },
-  props: ["storage", "logout", "userId", "isRequiredFixAlert"],
+  props: ["storage", "logout", "userId", "isRequiredFixAlert", "offerTime"],
   data: function() {
     return {
       showSnapShot: false,

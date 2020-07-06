@@ -130,7 +130,7 @@
             </div>
 
             <div class="modal-body col-xs-12 col-lg-8 col-lg-offset-2">
-              <pricing-contents justPro="false" />
+              <pricing-contents justPro="false" :offer-time="this.offerTime" />
             </div>
           </div>
           <!-- /.modal-content -->
@@ -147,10 +147,11 @@
       :user-id="userId"
       :messageCount="messageCount"
       :is-required-fix-alert="this.isRequiredFixAlert"
+      :offer-time="this.offerTime"
     ></header-dash-seller>
 
     <div id="main" :class="{ 'is-required-fix-alert' : isRequiredFixAlert}">
-      <router-view :str="storagePath" :user-type="isSeller"></router-view>
+      <router-view :str="storagePath" :user-type="isSeller" :offer-time="this.offerTime"></router-view>
     </div>
 
     <div
@@ -203,6 +204,7 @@ export default {
       },
       buttonActiveInSteps: true,
       isRequiredFixAlert: false,
+      offerTime: "",
       active_pakage_type: 3,
       is_pricing_active: false
     };
@@ -215,7 +217,7 @@ export default {
         this.handleBackKeys();
       });
       $("#pricing-modal").on("hidden.bs.modal", e => {
-        this.createCookie("closePricingModal", "true", 30 * (24 * 60)); //for 30 days
+        this.createCookie("closePricingModal", "true", 24 * 60); //for one day
       });
 
       axios
@@ -229,6 +231,7 @@ export default {
         });
 
       axios.post("/get_show_pricing_page_status").then(response => {
+        this.offerTime = response.data.show_off;
         if (
           !this.getCookie("closePricingModal") &&
           response.data.show &&
