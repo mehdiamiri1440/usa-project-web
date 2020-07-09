@@ -8,7 +8,8 @@ require('./bootstrap');
 require('./imageuploadify.min');
 require('./owl.carousel.min.js');
 require('./jquery.magnific-popup.min');
-require('./ResizeSensor.js');
+require('./stickySidebar');
+// require('./ResizeSensor.js');
 require('./sweetalert.min.js');
 
 
