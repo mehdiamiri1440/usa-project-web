@@ -217,7 +217,21 @@ export default {
         this.handleBackKeys();
       });
       $("#pricing-modal").on("hidden.bs.modal", e => {
-        this.createCookie("closePricingModal", "true", 24 * 60); //for one day
+        if (this.getCookie("closePricingModalCount")) {
+          if (this.getCookie("closePricingModalCount") < 10) {
+            let closeCount = this.getCookie("closePricingModalCount");
+            closeCount = parseInt(closeCount) + 1;
+            this.createCookie(
+              "closePricingModalCount",
+              closeCount,
+              (30 - closeCount) * (24 * 60)
+            ); // for 30 day
+            this.createCookie("closePricingModal", true, 24 * 60); //for one day
+          }
+        } else {
+          this.createCookie("closePricingModal", true, 24 * 60); //for one day
+          this.createCookie("closePricingModalCount", 1, 29 * (24 * 60)); // for 30 day
+        }
       });
 
       axios
@@ -237,8 +251,13 @@ export default {
           response.data.show &&
           window.location.pathname != "/seller/register-product"
         ) {
-          this.is_pricing_active = true;
-          this.checkPricingModal();
+          if (
+            !this.getCookie("closePricingModalCount") ||
+            this.getCookie("closePricingModalCount") < 10
+          ) {
+            this.is_pricing_active = true;
+            this.checkPricingModal();
+          }
         }
       });
     },

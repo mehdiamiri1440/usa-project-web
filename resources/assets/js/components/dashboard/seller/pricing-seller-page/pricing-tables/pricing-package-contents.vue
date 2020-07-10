@@ -367,7 +367,9 @@
               </li>
             </ul>
           </div>
-          <div class="detail-wrapper" v-if="offerTime">
+
+          <!-- remove pricing offer contents -->
+          <!-- <div class="detail-wrapper" v-if="offerTime">
             <div class="offer-notice text-center text-rtl">
               <span>
                 <span>4</span>
@@ -380,9 +382,11 @@
               <span class="item-currency">تومان</span>
               <span class="item-date">/ سالانه</span>
             </div>
-          </div>
-          <div class="detail-wrapper" v-else>
-            <br class="hidden-xs" />
+          </div>-->
+
+          <div class="detail-wrapper">
+            <!-- remove pricing offer contents -->
+            <!-- <br class="hidden-xs" /> -->
             <div class="item-price text-rtl">
               <span class="item-price-content">689,000</span>
               <span class="item-currency">تومان</span>
@@ -448,7 +452,6 @@
             </ul>
           </div>
           <div class="detail-wrapper">
-            <br class="hidden-xs" />
             <div class="item-price text-rtl">
               <span class="item-price-content">249,000</span>
               <span class="item-currency">تومان</span>

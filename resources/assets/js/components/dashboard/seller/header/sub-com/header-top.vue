@@ -445,7 +445,10 @@ a.profile-info-wrapper:focus {
     <header id="header" class="main-header">
       <div v-if="$parent.isRequiredFixAlert" class="required-fix-alert">
         <div class="fix-alert-wrapper">
-          <router-link v-if="!$parent.offerTime" :to="{name : 'dashboardPricingTableSeller'}">
+          <!-- remove pricing offer -->
+          <!-- <router-link v-if="!$parent.offerTime" :to="{name : 'dashboardPricingTableSeller'}"> -->
+
+          <router-link :to="{name : 'dashboardPricingTableSeller'}">
             <span
               class="hidden-xs"
             >تعداد زیادی از فروشندگان موفق باسکول از عضویت ویژه استفاده می کنند</span>
@@ -454,7 +457,8 @@ a.profile-info-wrapper:focus {
             <span class="button">می خواهم عضو ویژه شوم</span>
           </router-link>
 
-          <router-link v-else :to="{name : 'dashboardPricingTableSeller'}">
+          <!-- remove pricing offer -->
+          <!-- <router-link v-else :to="{name : 'dashboardPricingTableSeller'}">
             <span>
               ارتقا به عضویت ویژه
               <i class="fa fa-clock"></i>
@@ -462,7 +466,7 @@ a.profile-info-wrapper:focus {
               <span>ساعت تا پایان تخفیف</span>
             </span>
             <span class="button">جزئیات بیشتر</span>
-          </router-link>
+          </router-link>-->
           <button @click.prevent="$parent.closeRequiredFixAlert()" class="close-required-fix-alert">
             <i class="fa fa-times"></i>
           </button>
