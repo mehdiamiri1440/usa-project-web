@@ -60,8 +60,8 @@ class admin_profile_controller extends Controller
         try{
            $profile_records = profile::where('confirmed',$confirm_status)
                                             ->select($this->profile_list_neccessary_fields)
-                                            ->orderBy('created_at','desc')
-                                            ->get(); 
+                                            ->orderBy('updated_at','desc')
+                                            ->paginate(10); 
             
             $this->add_user_info_to_each_profile_record($profile_records,$this->neccessary_user_fields_for_profile_list);
             

@@ -60,20 +60,40 @@ class admin_user_controller extends Controller
         ]);
     }
 
-    public function load_user_list()
+    public function load_user_list(Request $request)
     {
         $users = [];
         $date_convertor_object = new date_convertor();
 
         try{
-            $users = myuser::orderBy('created_at','desc')
-                                ->get();
+            if($request->filled('search')){
+                $search = $request->search;
+
+                $search_array = explode(' ',$search);
+
+                $search_expresion = '';
+                foreach ($search_array as $text) {
+                    $search_expresion .= "%$text%";
+                }
+
+                $users = DB::table('myusers')
+                                ->where(DB::raw("concat(first_name,'',last_name)"),'like',$search_expresion)
+                                ->orWhere('phone','like',$search_expresion)
+                                ->orWhere('province','like',$search_expresion)
+                                ->orWhere('city','like',$search_expresion)
+                                ->orderBy('created_at','desc')
+                                ->paginate(10);
+            }
+            else{
+                $users = DB::table('myusers')->orderBy('created_at','desc')
+                                ->paginate(10);
+            }
 
             $users->each(function($user) use($date_convertor_object){
-                $user['note_count'] = admin_note::where('myuser_id',$user->id)
-                    ->get()
-                    ->count();
-                $user['register_date'] = $date_convertor_object->get_persian_date($user->created_at);
+                // $user['note_count'] = admin_note::where('myuser_id',$user->id)
+                //     ->get()
+                //     ->count();
+                $user->register_date = $date_convertor_object->get_persian_date($user->created_at);
             });
         }
         catch(\Exception $e){

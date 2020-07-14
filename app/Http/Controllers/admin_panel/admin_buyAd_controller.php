@@ -56,9 +56,9 @@ class admin_buyAd_controller extends Controller
 
     protected $buyAd_confirmation_sms_text = 'آگهی خرید شما در سامانه ی باسکول تایید گردید.';
 
-    public function load_unconfirmed_buyAd_list()
+    public function load_unconfirmed_buyAd_list(Request $request)
     {
-        $unconfirmed_buyAd_list = $this->get_buyAd_list($confirm_status = 0);
+        $unconfirmed_buyAd_list = $this->get_buyAd_list($confirm_status = 0,$request);
 
         $this->add_categories_to_buyAd_list($unconfirmed_buyAd_list);
 
@@ -68,9 +68,9 @@ class admin_buyAd_controller extends Controller
         ]);
     }
 
-    public function load_confirmed_buyAd_list()
+    public function load_confirmed_buyAd_list(Request $request)
     {
-        $confirmed_buyAd_list = $this->get_buyAd_list($confirm_status = 1);
+        $confirmed_buyAd_list = $this->get_buyAd_list($confirm_status = 1,$request);
 
         $this->add_categories_to_buyAd_list($confirmed_buyAd_list);
 
@@ -80,14 +80,38 @@ class admin_buyAd_controller extends Controller
         ]);
     }
 
-    protected function get_buyAd_list($confirm_status)
+    protected function get_buyAd_list($confirm_status,&$request)
     {
-        $list = DB::table('buy_ads')
+        if($request->filled('search')){
+            $search = $request->search;
+
+            $search_array = explode(' ',$search);
+
+            $search_expresion = '';
+            foreach ($search_array as $text) {
+                $search_expresion .= "%$text%";
+            }
+
+            $list = DB::table('buy_ads')
+                        ->join('myusers', 'buy_ads.myuser_id', '=', 'myusers.id')
+                        ->where('buy_ads.confirmed', $confirm_status)
+                        ->where(function($q) use($search_expresion){
+                            return $q = $q->where('name','like',$search_expresion)
+                                            ->orWhere(DB::raw("CONCAT(myusers.first_name,' ',myusers.last_name)"),'like',$search_expresion);
+                        })
+                        ->select($this->buyAd_list_neccessary_fields_array)
+                        ->orderBy('buy_ads.created_at', 'desc')
+                        ->paginate(10);
+
+        }
+        else{
+            $list = DB::table('buy_ads')
                         ->join('myusers', 'buy_ads.myuser_id', '=', 'myusers.id')
                         ->where('buy_ads.confirmed', $confirm_status)
                         ->select($this->buyAd_list_neccessary_fields_array)
                         ->orderBy('buy_ads.created_at', 'desc')
-                        ->get();
+                        ->paginate(10);
+        }
 
         return $list;
     }

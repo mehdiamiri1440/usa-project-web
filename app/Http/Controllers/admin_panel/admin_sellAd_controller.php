@@ -65,9 +65,9 @@ class admin_sellAd_controller extends Controller
     
     protected $sellAd_confirmation_sms_text = 'آگهی فروش شما در سامانه ی باسکول تایید گردید.';
     
-    public function load_unconfirmed_sellAd_list()
+    public function load_unconfirmed_sellAd_list(Request $request)
     {
-        $unconfirmed_sellAd_list = $this->get_sellAd_list(0);
+        $unconfirmed_sellAd_list = $this->get_sellAd_list(0,$request);
         
         $this->add_categories_to_sellAd_list($unconfirmed_sellAd_list);
         
@@ -77,9 +77,9 @@ class admin_sellAd_controller extends Controller
         ]);
     }
     
-    public function load_confirmed_sellAd_list()
+    public function load_confirmed_sellAd_list(Request $request)
     {
-        $confirmed_sellAd_list = $this->get_sellAd_list(1);
+        $confirmed_sellAd_list = $this->get_sellAd_list(1,$request);
         
         $this->add_categories_to_sellAd_list($confirmed_sellAd_list);
         
@@ -89,16 +89,41 @@ class admin_sellAd_controller extends Controller
         ]);
     }
     
-    protected function get_sellAd_list($confirm_status)
+    protected function get_sellAd_list($confirm_status,&$request)
     {
-        $list = DB::table('products')
+        if($request->filled('search'))
+        {
+            $search = $request->search;
+
+            $search_array = explode(' ',$search);
+
+            $search_expresion = '';
+            foreach ($search_array as $text) {
+                $search_expresion .= "%$text%";
+            }
+
+            $list = DB::table('products')
+                        ->leftJoin('myusers','products.myuser_id','=','myusers.id') 
+                        ->where('products.confirmed',$confirm_status)
+                        ->where(function($q) use($search_expresion){
+                            return $q = $q->where('product_name','like',$search_expresion)
+                                            ->orWhere(DB::raw("CONCAT(myusers.first_name,' ',myusers.last_name)"),'like',$search_expresion);
+                        })
+                        ->select($this->sellAd_list_neccessary_fields_array)
+                        ->orderBy('products.created_at','desc')
+                        ->paginate(10);
+        }
+        else{
+            $list = DB::table('products')
                         ->leftJoin('myusers','products.myuser_id','=','myusers.id') 
                         ->where('products.confirmed',$confirm_status)
                         ->select($this->sellAd_list_neccessary_fields_array)
                         ->orderBy('products.created_at','desc')
-                        ->get();
+                        ->paginate(10);
+        }
+        
 
-        return collect($list);
+        return $list;
     }
     
     protected function add_categories_to_sellAd_list(&$sellAd_list)
