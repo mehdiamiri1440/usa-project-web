@@ -39,11 +39,23 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
     {
         $the_most_related_product_owners_ids = $this->get_the_most_related_product_owners_id_to_the_given_buyAd_if_any($this->buyAd);
 
+        $old_related_product_owners_ids = $this->get_old_related_product_owners_id_to_the_given_buyAd_if_any($this->buyAd);
+
         if (count($the_most_related_product_owners_ids) > 0) {
             foreach ($the_most_related_product_owners_ids as $user_id) {
                 $this->notify_product_owner($user_id);
             }
         }
+
+        $topics = $this->generate_related_topics($users);
+
+        $data = [
+            'title' => 'باسکول',
+            'message' => 'یک درخواست خرید مرتبط با محصول شما ثبت شد',
+        ];
+
+        $fcm_controller_object = new fcm_controller();
+        $fcm_controller_object->send_notification_to_given_topic_group($data, $topics);
     }
 
     protected function get_the_most_related_product_owners_id_to_the_given_buyAd_if_any(&$buyAd)
@@ -188,4 +200,39 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
 
         $fcm_controller_object->send_notification_to_the_given_topic($data, $topic_name);
     }
+
+    protected function get_old_related_product_owners_id_to_the_given_buyAd_if_any(&$buyAd)
+    {
+        $until_date = Carbon::now()->subDays(15); // last 2 weeks;
+        $from_date = Carbon::now()->subMonths(3); // last 3 months
+
+        $related_subcategory_products = product::where('category_id', $buyAd->category_id)
+                                            ->where('confirmed', true)
+                                            ->whereBetween('created_at', [$from_date, $until_date])
+                                            ->where('myuser_id','<>'.$buyAd->myuser_id)
+                                            ->orderBy('created_at')
+                                            ->get();
+
+        if ($related_subcategory_products) {
+            $the_most_related_product_owners = $this->get_the_most_related_product_owners_id_to_given_buyAd($buyAd, $related_subcategory_products);
+        } else {
+            $the_most_related_product_owners = [];
+        }
+
+        return $the_most_related_product_owners;
+    }
+
+    protected function generate_related_topics(&$users)
+    {
+        $topics = [];
+
+        foreach($users as $user)
+        {
+            $topics[] = 'FCM' . $user->id;
+        }
+
+        return $topics;
+    }
+
+    
 }

@@ -13,6 +13,7 @@ use App\Models\myuser;
 use App\Http\Library\date_convertor;
 use Carbon\Carbon;
 use App\Jobs\Backups\SaveProductPhotosInCloud;
+use App\Jobs\Notifiers\NotifyBuyersIfAnyNewRelatedProductRegistered;
 
 class admin_sellAd_controller extends Controller
 {
@@ -231,6 +232,8 @@ class admin_sellAd_controller extends Controller
             $sellAd_record->confirmed = true;
             
             $sellAd_record->save();
+
+            NotifyBuyersIfAnyNewRelatedProductRegistered::dispatch($sellAd_record);
 
             // SaveProductPhotosInCloud::dispatch($sellAd_record->id);
             //send SMS

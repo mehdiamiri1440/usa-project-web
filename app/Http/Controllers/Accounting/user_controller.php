@@ -379,7 +379,7 @@ class user_controller extends Controller
         return $confirmed_products_count;
     }
 
-    public function switch_user_role()
+    public function switch_user_role(Request $request)
     {
         $user_id = session('user_id');
 
@@ -406,7 +406,16 @@ class user_controller extends Controller
 
         $user->save();
 
-        return redirect('/login');
+        if($request->isMethod('get')){
+            return redirect('/login');
+        }
+        else{
+            return response()->json([
+                'status' => true,
+                'is_seller' => $user->is_seller
+            ]);
+        }
+        
     }
 
     public function get_pricing_page_visit_status(Request $request)

@@ -13,6 +13,7 @@ use LaravelFCM\Message\Topics;
 use GuzzleHttp\Client;
 use DB;
 use App\Jobs\FCMSubscriber;
+use App\Jobs\SendFCMNotification;
 
 class fcm_controller extends Controller
 {
@@ -24,7 +25,7 @@ class fcm_controller extends Controller
         $notificationBuilder->setBody($data_array['message'])                
                             ->setColor('#00c569')
                             ->setIcon("$this->baseUrl/assets/img/logo-Inco-mobile.png")
-                            ->setClickAction("$this->baseUrl/login")
+                            // ->setClickAction("$this->baseUrl/login")
                             ->setSound('default');
 
         if(stristr($topic_name,'fcm')){
@@ -44,6 +45,27 @@ class fcm_controller extends Controller
         $topicResponse->isSuccess();
         $topicResponse->shouldRetry();
         $topicResponse->error();
+    }
+
+    public function send_notification_to_given_topic_group($data,$topics)
+    {
+        $notificationBuilder = new PayloadNotificationBuilder($data['title']);
+        $notificationBuilder->setBody($data['message']) 
+                            ->setColor('#00c569')               
+                            ->setSound('default')
+                            // ->setImage('test.jpg')
+                            ->setTag("buskool");
+
+        $notification = $notificationBuilder->build();
+        
+        foreach($topics as $topic)
+        {
+            $tpc = new Topics();
+            $tpc->topic($topic);
+
+            SendFCMNotification::dispatch($tpc,$notification);
+        }
+                
     }
 
     public function subscribe_token_in_topic(Request $request)

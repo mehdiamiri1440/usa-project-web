@@ -394,7 +394,7 @@ Route::group(['middleware' => [login::class]], function () {
         'as' => 'get_seller_dashboard_required_data',
     ]);
 
-    Route::get('/switch-role',[
+    Route::match(['POST','GET'],'/switch-role',[
         'uses' => 'Accounting\user_controller@switch_user_role',
         'as' => 'swith_user_role'
     ]);
@@ -834,9 +834,6 @@ Route::post('/get_wp_posts', [
     'as' => 'get_wp_posts',
 ]);
 
-// Route::get('/anomaly',function(){
-//     MessagingAnomalyDetection::dispatch();
-// });
 
 // Route::group(['middleware' => [cors::class]], function () {
 //     Route::options('/broadcastAuth', function () {
