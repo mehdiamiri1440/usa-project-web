@@ -572,7 +572,7 @@ Route::get('app/payment/{user_id}/{pakageType}', [
 
 Route::get('app/payment/elevator/{product_id}', [
     'uses' => 'Payment\payment_controller@app_do_elevator_payment',
-    'as' => 'do_elevator_payment',
+    'as' => 'app_do_elevator_payment',
 ])->where('product_id', '[0-9]+');
 
 Route::get('app/payment/product-capacity/{user_id}/{extra_pacacity}', [
