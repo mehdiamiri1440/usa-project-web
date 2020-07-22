@@ -570,37 +570,37 @@ Route::get('app/payment/{user_id}/{pakageType}', [
     'as' => 'app_do_payment',
 ]);
 
-Route::get('app/payment/elevator/{product_id}', [
+Route::get('app-payment/elevator/{product_id}', [
     'uses' => 'Payment\payment_controller@app_do_elevator_payment',
     'as' => 'app_do_elevator_payment',
 ])->where('product_id', '[0-9]+');
 
-Route::get('app/payment/product-capacity/{user_id}/{extra_pacacity}', [
-    'uses' => 'Payment\payment_controller@do_product_capacity_payment',
-    'as' => 'do_product_capacity_payment',
-])->where('extra_pacacity', '[0-9]+');
+Route::get('app-payment/product-capacity/{user_id}/{extra_capacity}', [
+    'uses' => 'Payment\payment_controller@app_do_product_capacity_payment',
+    'as' => 'app_do_product_capacity_payment',
+])->where('extra_capacity', '[0-9]+');
 
-Route::get('app/payment/buyAd-reply-capacity/{user_id}/{extra_pacacity}', [
-    'uses' => 'Payment\payment_controller@do_buyAd_reply_capacity_payment',
-    'as' => 'do_buyAd_reply_capacity_payment',
-])->where('extra_pacacity', '[0-9]+');
+Route::get('app-payment/buyAd-reply-capacity/{user_id}/{extra_capacity}', [
+    'uses' => 'Payment\payment_controller@app_do_buyAd_reply_capacity_payment',
+    'as' => 'app_do_buyAd_reply_capacity_payment',
+])->where('extra_capacity', '[0-9]+');
 
-Route::any('app/payment_callback', [
+Route::any('app-payment/payment_callback', [
     'uses' => 'Payment\payment_controller@app_payment_callback',
     'as' => 'app_payment_callback',
 ]);
 
-Route::any('app/elevator_payment_callback', [
+Route::any('app-payment/elevator_payment_callback', [
     'uses' => 'Payment\payment_controller@app_elevator_payment_callback',
     'as' => 'app_elevator_payment_callback',
 ]);
 
-Route::any('app/product_capacity_payment_callback', [
+Route::any('app-payment/product_capacity_payment_callback', [
     'uses' => 'Payment\payment_controller@app_product_capacity_payment_callback',
     'as' => 'app_product_capacity_payment_callback',
 ]);
 
-Route::any('app/buyAd_reply_capacity_payment_callback', [
+Route::any('app-payment/buyAd_reply_capacity_payment_callback', [
     'uses' => 'Payment\payment_controller@app_buyAd_reply_capacity_payment_callback',
     'as' => 'app_buyAd_reply_capacity_payment_callback',
 ]);

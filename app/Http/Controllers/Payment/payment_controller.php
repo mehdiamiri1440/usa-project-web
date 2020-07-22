@@ -71,7 +71,7 @@ class payment_controller extends Controller
         else{
             try{
                 $gateway = \Gateway::zarinpal();
-                $gateway->setCallback(url('app/payment_callback'));
+                $gateway->setCallback(url('app-payment/payment_callback'));
                 $gateway->price($payment_amount)->ready();
                 $refId =  $gateway->refId();
                 $transID = $gateway->transactionId();
@@ -304,7 +304,7 @@ class payment_controller extends Controller
         $payment_amount = config("subscriptionPakage.elevator.price");
         try{
             $gateway = \Gateway::zarinpal();
-            $gateway->setCallback(url('app/elevator_payment_callback'));
+            $gateway->setCallback(url('app-payment/elevator_payment_callback'));
             $gateway->price($payment_amount)->ready();
             $refId =  $gateway->refId();
             $transID = $gateway->transactionId();
@@ -437,7 +437,7 @@ class payment_controller extends Controller
 
             try{
                 $gateway = \Gateway::zarinpal();
-                $gateway->setCallback(url('app/product_capacity_payment_callback'));
+                $gateway->setCallback(url('app-payment/product_capacity_payment_callback'));
                 $gateway->price($payment_amount)->ready();
                 $refId =  $gateway->refId();
                 $transID = $gateway->transactionId();
@@ -569,7 +569,7 @@ class payment_controller extends Controller
 
             try{
                 $gateway = \Gateway::zarinpal();
-                $gateway->setCallback(url('app/buyAd_reply_capacity_payment_callback'));
+                $gateway->setCallback(url('app-payment/buyAd_reply_capacity_payment_callback'));
                 $gateway->price($payment_amount)->ready();
                 $refId =  $gateway->refId();
                 $transID = $gateway->transactionId();
