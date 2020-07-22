@@ -364,6 +364,26 @@ Route::group(['middleware' => [login::class]], function () {
         'as' => 'do_buyAd_reply_capacity_payment',
     ])->where('extra_pacacity', '[0-9]+');
 
+    // Route::get('app/payment/{user_id}/{pakageType}', [
+    //     'uses' => 'Payment\payment_controller@app_do_payment',
+    //     'as' => 'app_do_payment',
+    // ]);
+
+    // Route::get('app/payment/elevator/{product_id}', [
+    //     'uses' => 'Payment\payment_controller@app_do_elevator_payment',
+    //     'as' => 'do_elevator_payment',
+    // ])->where('product_id', '[0-9]+');
+    
+    // Route::get('app/payment/product-capacity/{user_id}/{extra_pacacity}', [
+    //     'uses' => 'Payment\payment_controller@do_product_capacity_payment',
+    //     'as' => 'do_product_capacity_payment',
+    // ])->where('extra_pacacity', '[0-9]+');
+
+    // Route::get('app/payment/buyAd-reply-capacity/{user_id}/{extra_pacacity}', [
+    //     'uses' => 'Payment\payment_controller@do_buyAd_reply_capacity_payment',
+    //     'as' => 'do_buyAd_reply_capacity_payment',
+    // ])->where('extra_pacacity', '[0-9]+');
+
     Route::any('/payment_callback', [
         'uses' => 'Payment\payment_controller@payment_callback',
         'as' => 'payment_callback',
@@ -383,6 +403,26 @@ Route::group(['middleware' => [login::class]], function () {
         'uses' => 'Payment\payment_controller@buyAd_reply_capacity_payment_callback',
         'as' => 'buyAd_reply_capacity_payment_callback',
     ]);
+
+    // Route::any('app/payment_callback', [
+    //     'uses' => 'Payment\payment_controller@app_payment_callback',
+    //     'as' => 'app_payment_callback',
+    // ]);
+
+    // Route::any('app/elevator_payment_callback', [
+    //     'uses' => 'Payment\payment_controller@app_elevator_payment_callback',
+    //     'as' => 'app_elevator_payment_callback',
+    // ]);
+    
+    // Route::any('app/product_capacity_payment_callback', [
+    //     'uses' => 'Payment\payment_controller@app_product_capacity_payment_callback',
+    //     'as' => 'app_product_capacity_payment_callback',
+    // ]);
+    
+    // Route::any('app/buyAd_reply_capacity_payment_callback', [
+    //     'uses' => 'Payment\payment_controller@app_buyAd_reply_capacity_payment_callback',
+    //     'as' => 'app_buyAd_reply_capacity_payment_callback',
+    // ]);
 
     Route::post('/is_user_allowed_to_register_product', [
         'uses' => 'Product\product_controller@is_user_allowed_to_register_product',
@@ -523,6 +563,49 @@ Route::post('/reset_password', [
 //     return view('dashboard.product.sell_offer_list');
 // });
 
+//--------------- App payment routes ---------------------------------------------------
+
+Route::get('app/payment/{user_id}/{pakageType}', [
+    'uses' => 'Payment\payment_controller@app_do_payment',
+    'as' => 'app_do_payment',
+]);
+
+Route::get('app/payment/elevator/{product_id}', [
+    'uses' => 'Payment\payment_controller@app_do_elevator_payment',
+    'as' => 'do_elevator_payment',
+])->where('product_id', '[0-9]+');
+
+Route::get('app/payment/product-capacity/{user_id}/{extra_pacacity}', [
+    'uses' => 'Payment\payment_controller@do_product_capacity_payment',
+    'as' => 'do_product_capacity_payment',
+])->where('extra_pacacity', '[0-9]+');
+
+Route::get('app/payment/buyAd-reply-capacity/{user_id}/{extra_pacacity}', [
+    'uses' => 'Payment\payment_controller@do_buyAd_reply_capacity_payment',
+    'as' => 'do_buyAd_reply_capacity_payment',
+])->where('extra_pacacity', '[0-9]+');
+
+Route::any('app/payment_callback', [
+    'uses' => 'Payment\payment_controller@app_payment_callback',
+    'as' => 'app_payment_callback',
+]);
+
+Route::any('app/elevator_payment_callback', [
+    'uses' => 'Payment\payment_controller@app_elevator_payment_callback',
+    'as' => 'app_elevator_payment_callback',
+]);
+
+Route::any('app/product_capacity_payment_callback', [
+    'uses' => 'Payment\payment_controller@app_product_capacity_payment_callback',
+    'as' => 'app_product_capacity_payment_callback',
+]);
+
+Route::any('app/buyAd_reply_capacity_payment_callback', [
+    'uses' => 'Payment\payment_controller@app_buyAd_reply_capacity_payment_callback',
+    'as' => 'app_buyAd_reply_capacity_payment_callback',
+]);
+
+//------------------------- End of app payment routes-------------------------------------------------------
 Route::get('/logout', function () {
     Session::flush();
     Session::save();
