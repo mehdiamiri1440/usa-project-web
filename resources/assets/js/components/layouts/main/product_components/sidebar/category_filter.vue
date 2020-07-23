@@ -312,6 +312,8 @@ export default {
           return v === "بستن" ? "مشاهده بیشتر" : "بستن";
         });
       }
+
+      this.$parent.setSidebarHeight();
     },
     checkListHeight(id, listItems) {
       var buttonFilter = $(
