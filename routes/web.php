@@ -565,7 +565,7 @@ Route::post('/reset_password', [
 
 //--------------- App payment routes ---------------------------------------------------
 
-Route::get('app/payment/{user_id}/{pakageType}', [
+Route::get('app-payment/payment/{user_id}/{pakageType}', [
     'uses' => 'Payment\payment_controller@app_do_payment',
     'as' => 'app_do_payment',
 ]);
