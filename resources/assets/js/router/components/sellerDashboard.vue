@@ -211,7 +211,7 @@ export default {
   },
   methods: {
     init: function() {
-      this.checkButtonIsHide();
+      // this.checkButtonIsHide();
 
       $("#pricing-modal").on("show.bs.modal", e => {
         this.handleBackKeys();
@@ -355,12 +355,12 @@ export default {
   },
   watch: {
     $route() {
-      this.checkButtonIsHide();
+      // this.checkButtonIsHide();
       this.checkPricingModal();
       this.buttonActiveInSteps = true;
     },
     active_pakage_type: function() {
-      this.checkCookie();
+      // this.checkCookie();
     },
     is_pricing_active: function() {
       if (this.is_pricing_active == true) {
@@ -376,7 +376,7 @@ export default {
     });
   },
   created: function() {
-    this.checkCookie();
+    // this.checkCookie();
   }
 };
 </script>

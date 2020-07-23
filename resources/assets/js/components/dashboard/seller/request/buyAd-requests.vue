@@ -1,7 +1,7 @@
 <style scoped>
-.requests .main-content {
+/* .requests .main-content {
   padding-top: 50px;
-}
+} */
 
 .wrapper_no_pro {
   text-align: center;
@@ -217,7 +217,6 @@
   border-image-slice: 100%;
   border-image-slice: 1;
   position: relative;
-  overflow: hidden;
 }
 .golden::after {
   background: linear-gradient(
@@ -338,7 +337,7 @@
       </div>
     </div>
     <div class="requests" v-show="isRequests">
-      <div
+      <!-- <div
         v-if="currentUser.user_info.active_pakage_type == 0"
         class="fix-request-header-box request-update shadow-content text-center text-rtl"
       >
@@ -347,12 +346,9 @@
           class="green-button bg-red hover-effect"
           @click="isRequests = !isRequests"
         >بروز رسانی</button>
-      </div>
-
-      <section
-        class="main-content col-xs-12"
-        :class="{'padding-0-15' : currentUser.user_info.active_pakage_type != 0}"
-      >
+      </div>-->
+      <!-- :class="{'padding-0-15' : currentUser.user_info.active_pakage_type != 0}" -->
+      <section class="main-content col-xs-12 padding-0-15'">
         <div class="title">
           <div class="row">
             <div class="col-xs-12 text-rtl text-right col-sm-8 pull-right">
@@ -387,9 +383,14 @@
             <li
               v-for="(buyAd,index) in buyAds"
               :key="index"
-              class="list-group-item col-xs-12 golden lock"
+              class="list-group-item col-xs-12"
+              :class="{'golden' : buyAd.is_golden, 'lock' :  buyAd.is_golden && currentUser.user_info.active_pakage_type != 3}"
             >
-              <span class="lock-text" v-text="buyAd.category_name"></span>
+              <span
+                v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type != 3"
+                class="lock-text"
+                v-text="buyAd.category_name + ' | ' +buyAd.subcategory_name"
+              ></span>
               <p class="list-title col-sm-3 col-xs-12">
                 <span v-text="buyAd.category_name"></span>
 
@@ -397,20 +398,45 @@
 
                 <span v-text="buyAd.subcategory_name"></span>
 
-                <span v-if="buyAd.name" v-text="' | ' + buyAd.name"></span>
+                <span
+                  v-if="buyAd.name && buyAd.is_golden && currentUser.user_info.active_pakage_type != 3"
+                ></span>
+                <span v-else v-text="' | ' + buyAd.subcategory_name"></span>
               </p>
 
               <p class="needs col-sm-3 col-xs-12">
                 <span class="static-content">میزان نیازمندی :</span>
 
-                <span v-text="buyAd.requirement_amount"></span>
+                <span
+                  v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type != 3"
+                  v-text="'0000'"
+                ></span>
+                <span v-else v-text="buyAd.requirement_amount"></span>
 
                 <span class="static-content">کیلوگرم</span>
               </p>
 
-              <p class="list-time col-sm-2 col-xs-12" v-text="buyAd.register_date"></p>
+              <p
+                class="list-time col-sm-2 col-xs-12"
+                v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type != 3"
+                v-text="'۱۳ تیر , ۱۳۰۴'"
+              ></p>
+              <p class="list-time col-sm-2 col-xs-12" v-else v-text="buyAd.register_date"></p>
+
               <p class="list-notice col-sm-1 col-xs-12 pull-right">
                 <button
+                  v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type != 3"
+                  class="btn"
+                  type="button"
+                >
+                  <span>
+                    <i class="fas fa-comment-alt"></i>
+                    <i class="fas fa-exclamation"></i>
+                  </span>
+                  <span class="request-count red-text">{{'0+'}}</span>
+                </button>
+                <button
+                  v-else
                   class="btn"
                   type="button"
                   data-toggle="tooltip"
@@ -424,8 +450,25 @@
                   <span class="request-count red-text">{{buyAd.reply_capacity + '+'}}</span>
                 </button>
               </p>
-              <a class="col-sm-3 col-xs-12 pull-left" href @click.prevent="openChat(buyAd,$event)">
-                <p class="detail-success">
+
+              <a
+                v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type != 3"
+                class="col-sm-3 col-xs-12 pull-left"
+                href
+                @click.prevent
+              >
+                <p class="detail-success hover-effect">
+                  <span class="fas fa-comment-alt"></span> پیام به خریدار
+                </p>
+                <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">کمی صبر کنید...</p>
+              </a>
+              <a
+                v-else
+                class="col-sm-3 col-xs-12 pull-left"
+                href
+                @click.prevent="openChat(buyAd,$event)"
+              >
+                <p class="detail-success hover-effect">
                   <span class="fas fa-comment-alt"></span> پیام به خریدار
                 </p>
                 <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">کمی صبر کنید...</p>
