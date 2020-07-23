@@ -512,7 +512,7 @@ a.profile-info-wrapper:focus {
 
       <div class="user-auth-info-wrapper">
         <router-link
-          v-if="$route.name != 'dashboardPricingTableSeller'"
+          v-if="$route.name != 'dashboardPricingTableSeller' && $parent.currentUser.user_info.active_pakage_type != 3"
           class="upgrade-account hidden-xs"
           :to="{name:'dashboardPricingTableSeller'}"
         >
