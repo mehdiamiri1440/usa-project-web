@@ -199,6 +199,64 @@
   top: 2px;
   right: -6px;
 }
+.golden {
+  border: 2px solid transparent;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  -moz-border-image: -moz-linear-gradient(left, #3acfd5 0%, #3a4ed5 100%);
+  -webkit-border-image: -webkit-linear-gradient(left, #3acfd5 0%, #3a4ed5 100%);
+  border-image: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  border-image-slice: 100%;
+  border-image-slice: 1;
+  position: relative;
+  overflow: hidden;
+}
+.golden::after {
+  background: linear-gradient(
+    44deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  width: 20px;
+  height: 100%;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.golden .detail-success {
+  background: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  color: #333;
+}
+
+.lock > p {
+  filter: blur(7px);
+}
+
+.lock > span.lock-text {
+  position: absolute;
+  left: 0;
+  text-align: right;
+  right: 90px;
+  font-size: 20px;
+  font-weight: bold;
+  top: 14px;
+}
+
 @media screen and (max-width: 994px) {
   .fix-request-header-box,
   .title {
@@ -212,6 +270,17 @@
 }
 
 @media screen and (max-width: 767px) {
+  .lock > span.lock-text {
+    text-align: center;
+    right: 0;
+    top: 60px;
+  }
+  .golden {
+    padding: 25px 0;
+  }
+  .golden::after {
+    display: none;
+  }
   .main-content,
   .wrapper-items {
     padding: 0;
@@ -315,7 +384,12 @@
         </div>
         <div v-if="buyAds.length != 0">
           <ul class="list-unstyled wrapper-items">
-            <li v-for="(buyAd,index) in buyAds" :key="index" class="list-group-item col-xs-12">
+            <li
+              v-for="(buyAd,index) in buyAds"
+              :key="index"
+              class="list-group-item col-xs-12 golden lock"
+            >
+              <span class="lock-text" v-text="buyAd.category_name"></span>
               <p class="list-title col-sm-3 col-xs-12">
                 <span v-text="buyAd.category_name"></span>
 
