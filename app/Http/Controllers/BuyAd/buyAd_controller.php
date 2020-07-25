@@ -713,7 +713,6 @@ class buyAd_controller extends Controller
 
         $golden_buyAds_update_date = Carbon::now()->subHours(2);
         $buyAds->each(function($buyAd) use($golden_buyAds_update_date){
-            // var_dump($buyAd);
             if($buyAd->updated_at > $golden_buyAds_update_date)
             {
                 $buyAd->is_golden = true;

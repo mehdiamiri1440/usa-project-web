@@ -389,7 +389,7 @@
               <span
                 v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type != 3"
                 class="lock-text"
-                v-text="buyAd.category_name + ' | ' +buyAd.subcategory_name"
+                v-text="buyAd.subcategory_name"
               ></span>
               <p class="list-title col-sm-3 col-xs-12">
                 <span v-text="buyAd.category_name"></span>
@@ -399,9 +399,10 @@
                 <span v-text="buyAd.subcategory_name"></span>
 
                 <span
-                  v-if="buyAd.name && buyAd.is_golden && currentUser.user_info.active_pakage_type != 3"
+                  v-if="buyAd.name"
+                  v-text="' | ' + buyAd.name"
                 ></span>
-                <span v-else v-text="' | ' + buyAd.subcategory_name"></span>
+                <!-- <span v-else v-text="' | ' + buyAd.name"></span> -->
               </p>
 
               <p class="needs col-sm-3 col-xs-12">
@@ -411,7 +412,7 @@
                   v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type != 3"
                   v-text="'0000'"
                 ></span>
-                <span v-else v-text="buyAd.requirement_amount"></span>
+                <span v-else v-text="getNumberWithCommas(buyAd.requirement_amount)"></span>
 
                 <span class="static-content">کیلوگرم</span>
               </p>
@@ -452,10 +453,10 @@
               </p>
 
               <a
-                v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type != 3"
+                v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type < 3"
                 class="col-sm-3 col-xs-12 pull-left"
                 href
-                @click.prevent
+                @click.prevent="openGoldenChatRestrictionModal()"
               >
                 <p class="detail-success hover-effect">
                   <span class="fas fa-comment-alt"></span> پیام به خریدار
@@ -643,6 +644,15 @@ export default {
       }).then(() => {
         $(e.target).show();
       });
+    },
+    openGoldenChatRestrictionModal: function(){
+        eventBus.$emit("modal", "goldenBuyAdReplyLimit");
+
+        self.registerComponentStatistics(
+          "buyAdReply",
+          "openChat",
+          "permission denied"
+        );
     },
     getNumberWithCommas: function(number) {
       if (number || typeof number === "number")

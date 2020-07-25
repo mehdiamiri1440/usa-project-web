@@ -377,6 +377,9 @@ export default {
         case "verificationInfoUploadDone":
           this.raiseVerificationUploadSuccessModal();
           break;
+        case "goldenBuyAdReplyLimit":
+          this.raiseGoldenBuyAdReplyLimitModal();
+          break;
       }
     },
     raiseSendMessageModal: function() {
@@ -734,6 +737,37 @@ export default {
             }
           }
         });
+    },
+    raiseGoldenBuyAdReplyLimitModal: function() {
+      let self = this;
+
+      this.handleBackBtn();
+
+      let content = document.createElement("div");
+      content.innerHTML =
+        '<p dir="rtl">شما به درخواست هایی طلایی دسترسی ندارید.</p><br/><p class="red-text" dir="rtl"><b>برای دسترسی به تمام درخواست های طلایی، عضویت خود را ارتقا دهید.</b></p>';
+      swal({
+        title: "درخواست های طلایی",
+        content: content,
+        className: "custom-swal-with-cancel",
+        icon: "warning",
+        buttons: {
+          success: {
+            text: "ارتقا عضوبت",
+            value: "promote",
+          },
+          close: {
+            text: "بستن",
+            className: "bg-cancel"
+          }
+        }
+      }).then(value => {
+        switch (value) {
+          case "promote":
+            self.$router.push({ name: "dashboardPricingTableSeller" });
+            break;
+        }
+      });
     },
     isModalOpen: function() {
       return swal.getState().isOpen;
