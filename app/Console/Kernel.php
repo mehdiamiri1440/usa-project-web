@@ -83,11 +83,11 @@ class Kernel extends ConsoleKernel
         // $schedule->job($buyAd_register_reminder_job)
         //         ->dailyAt('11:30');
 
-        // $expiry_reminder_job = new ExpiryReminder();
-        // $schedule->job($expiry_reminder_job)
-        //     ->weekly()
-        //     ->tuesdays()
-        //     ->at('11:45');
+        $expiry_reminder_job = new ExpiryReminder();
+        $schedule->job($expiry_reminder_job)
+            ->weekly()
+            ->tuesdays()
+            ->at('11:45');
     }
 
     /**

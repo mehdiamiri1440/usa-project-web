@@ -384,10 +384,10 @@
               v-for="(buyAd,index) in buyAds"
               :key="index"
               class="list-group-item col-xs-12"
-              :class="{'golden' : buyAd.is_golden, 'lock' :  buyAd.is_golden && currentUser.user_info.active_pakage_type != 3}"
+              :class="{'golden' : buyAd.is_golden, 'lock' :  buyAd.is_golden && currentUser.user_info.active_pakage_type == 0}"
             >
               <span
-                v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type != 3"
+                v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type == 0"
                 class="lock-text"
                 v-text="buyAd.subcategory_name"
               ></span>
@@ -409,7 +409,7 @@
                 <span class="static-content">میزان نیازمندی :</span>
 
                 <span
-                  v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type != 3"
+                  v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type == 0"
                   v-text="'0000'"
                 ></span>
                 <span v-else v-text="getNumberWithCommas(buyAd.requirement_amount)"></span>
@@ -419,14 +419,14 @@
 
               <p
                 class="list-time col-sm-2 col-xs-12"
-                v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type != 3"
+                v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type == 0"
                 v-text="'۱۳ تیر , ۱۳۰۴'"
               ></p>
               <p class="list-time col-sm-2 col-xs-12" v-else v-text="buyAd.register_date"></p>
 
               <p class="list-notice col-sm-1 col-xs-12 pull-right">
                 <button
-                  v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type != 3"
+                  v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type == 0"
                   class="btn"
                   type="button"
                 >
@@ -453,7 +453,7 @@
               </p>
 
               <a
-                v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type < 3"
+                v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type == 0"
                 class="col-sm-3 col-xs-12 pull-left"
                 href
                 @click.prevent="openGoldenChatRestrictionModal()"
