@@ -127,8 +127,11 @@
   font-weight: bold;
   min-width: 45px;
   text-align: center;
+  font-size: 20px;
 }
-
+.item-content-amount > i {
+  font-size: 20px;
+}
 .item-content-list li {
   float: left;
   width: 100%;
@@ -504,7 +507,7 @@
 <script>
 export default {
   props: ["justPro", "offerTime"],
-  data: function() {
+  data: function () {
     return {
       statusData: "",
       doPaymentLoader: false,
@@ -514,57 +517,69 @@ export default {
           title: "تعداد محصولات",
           contentUnit: "3",
           helpDescription:
-            " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "
+            " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. ",
         },
         {
           title: "ظرفیت درخواستهای خرید روزانه",
           contentUnit: "10",
           helpDescription:
-            "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد"
+            "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد",
         },
         {
           title: "بسته ی ویژه فروش",
           contentUnit:
             '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
           helpDescription:
-            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود"
-        }
+            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود",
+        },
+        {
+          title: "دسترسی به درخواست های خرید طلایی",
+          contentUnit:
+            '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
+          helpDescription: "",
+        },
       ],
       priceItemPro: [
         {
           title: "تعداد محصولات",
           contentUnit: "7",
           helpDescription:
-            " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "
+            " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. ",
         },
         {
           title: "ظرفیت درخواستهای خرید روزانه",
           contentUnit: "30",
           helpDescription:
-            "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد"
+            "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد",
         },
         {
           title: "بسته ی ویژه فروش",
           contentUnit:
             '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
           helpDescription:
-            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود"
-        }
-      ]
+            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود",
+        },
+        {
+          title: "دسترسی به درخواست های خرید طلایی",
+          contentUnit:
+            '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
+          helpDescription: "",
+        },
+      ],
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       var self = this;
       axios
         .post("/get_seller_dashboard_required_data")
-        .then(function(response) {
+        .then(function (response) {
           if (response.data.is_valid || response.data.is_valid == false) {
             self.statusData = response.data;
           }
         });
     },
-    doPayment: function(packageType) {
+    doPayment: function (packageType) {
       this.doPaymentLoader = true;
 
       let userId = getUserId();
@@ -577,15 +592,19 @@ export default {
 
       window.location.href = "/payment/" + packageType;
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
-    }
+    },
   },
   mounted() {
     this.init();
-  }
+  },
 };
 </script>
