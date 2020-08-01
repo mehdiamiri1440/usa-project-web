@@ -194,6 +194,8 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
         $data = [
             'title' => 'باسکول',
             'message' => 'یک درخواست خرید مرتبط با محصول شما ثبت شد',
+            'target' => 'buyAds',
+            'sound' => 'buskool_voice.mp3'
         ];
 
         $topic_name = 'FCM'.$user_id;

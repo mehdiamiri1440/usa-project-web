@@ -26,7 +26,7 @@ class fcm_controller extends Controller
                             ->setColor('#00c569')
                             ->setIcon("$this->baseUrl/assets/img/logo-Inco-mobile.png")
                             // ->setClickAction("$this->baseUrl/login")
-                            ->setSound('default');
+                            ->setSound($data_array['sound']);
 
         if(stristr($topic_name,'fcm')){
             $notificationBuilder->setTag("buskool");
@@ -36,12 +36,19 @@ class fcm_controller extends Controller
         }
 
         $notification = $notificationBuilder->build();
+
+        $dataBuilder = new PayloadDataBuilder();
+        $dataBuilder->addData([
+            'BTarget' =>  $data_array['target'],
+        ]);
+
+        $data = $dataBuilder->build();
         
         $topic = new Topics();
         $topic->topic($topic_name);
         
-        $topicResponse = FCM::sendToTopic($topic, null, $notification, null);
-
+        $topicResponse = FCM::sendToTopic($topic, null, $notification, $data);
+        
         $topicResponse->isSuccess();
         $topicResponse->shouldRetry();
         $topicResponse->error();

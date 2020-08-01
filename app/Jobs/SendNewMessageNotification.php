@@ -45,7 +45,9 @@ class SendNewMessageNotification implements ShouldQueue
         
         $data = [
             'title' => 'باسکول',
-            'message' => 'یک پیام جدید از مخاطبین'
+            'message' => $msg->text,
+            'target' => 'messages',
+            'sound'  => 'default'
         ];
         
         $topic_name = 'FCM'.$msg->receiver_id;

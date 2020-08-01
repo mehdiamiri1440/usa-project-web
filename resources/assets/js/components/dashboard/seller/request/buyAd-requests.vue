@@ -341,12 +341,12 @@
         v-if="currentUser.user_info.active_pakage_type == 0"
         class="fix-request-header-box request-update shadow-content text-center text-rtl"
       >
-        <span>این درخواست ها کمی قدیمی است</span>
+        <span>شما به درخواست های طلایی دسترسی ندارید</span>
         <button
           class="green-button bg-red hover-effect"
           @click="isRequests = !isRequests"
-        >بروز رسانی</button>
-      </div>-->
+        >جزییات</button>
+      </div> -->
       <!-- :class="{'padding-0-15' : currentUser.user_info.active_pakage_type != 0}" -->
       <section class="main-content col-xs-12 padding-0-15'">
         <div class="title">
@@ -516,16 +516,12 @@
       </section>
     </div>
 
-    <div class="request-detail" v-show="!isRequests">
+    <!-- <div class="request-detail" v-show="!isRequests">
       <section class="main-content col-xs-12">
         <div class="detail-contents shadow-content text-center text-rtl">
           <div>
             <p>
-              <b>
-                درخواست های خرید با
-                <span class="red-text">۲ ساعت تاخیر</span> به اطلاع شما می رسد.
-                <br />برای اطلاع آنی از درخواست ها و افزایش 5 برابری احتمال فروش محصولاتتان نوع عضویت خود را ارتقا دهید.
-              </b>
+              درخواست های خرید طلایی درخواست هایی است که احتمال خرید از سوی خریدار آن وجود بالاست. برای دسترسی به این درخواست ها نوع عضویت خود را ارتقا دهید.
             </p>
             <router-link
               class="green-button"
@@ -534,7 +530,7 @@
           </div>
         </div>
       </section>
-    </div>
+    </div> -->
   </div>
 </template>
 
