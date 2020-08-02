@@ -753,7 +753,7 @@ export default {
         icon: "warning",
         buttons: {
           success: {
-            text: "ارتقا عضوبت",
+            text: "ارتقا عضویت",
             value: "promote",
           },
           close: {
