@@ -233,7 +233,7 @@ class admin_sellAd_controller extends Controller
             
             $sellAd_record->save();
 
-            NotifyBuyersIfAnyNewRelatedProductRegistered::dispatch($sellAd_record);
+            // NotifyBuyersIfAnyNewRelatedProductRegistered::dispatch($sellAd_record);
 
             // SaveProductPhotosInCloud::dispatch($sellAd_record->id);
             //send SMS
