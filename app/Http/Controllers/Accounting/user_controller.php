@@ -379,7 +379,7 @@ class user_controller extends Controller
         return $confirmed_products_count;
     }
 
-    public function switch_user_role()
+    public function switch_user_role(Request $request)
     {
         $user_id = session('user_id');
 
@@ -406,10 +406,19 @@ class user_controller extends Controller
 
         $user->save();
 
-        return redirect('/login');
+        if($request->isMethod('get')){
+            return redirect('/login');
+        }
+        else{
+            return response()->json([
+                'status' => true,
+                'is_seller' => $user->is_seller
+            ]);
+        }
+        
     }
 
-    public function get_pricing_page_visit_status()
+    public function get_pricing_page_visit_status(Request $request)
     {
         $user_id = session('user_id');
 
@@ -425,19 +434,32 @@ class user_controller extends Controller
                                     ->get()
                                     ->count();
 
+        if($request->cookie('pricingViewCount')){
+            $pricing_view_count = $request->cookie('pricingViewCount');
+        }
+        else{
+            $pricing_view_count = 0;
+        }
+
+        $show_off = $pricing_view_count + 1 == 2 ;
+
         if(  $user_record->active_pakage_type == 0 &&
              Carbon::now()->diffInDays($user_record->created_at) < 30 && 
-             $received_contacts_count > 3 )
+             $received_contacts_count > 1)
         {
             return response()->json([
                 'status' => true,
-                'show' => true 
-            ],200);
+                'show' => true,
+                'show_off' => $show_off
+            ],200)->withCookie(cookie(
+                'pricingViewCount', $pricing_view_count + 1, 46400 // 60 days in minutes
+            ));
         }
         
         return response()->json([
             'status' => false,
-            'show' => false
+            'show' => false,
+            'show_off' => false
         ],200);
     }
 }

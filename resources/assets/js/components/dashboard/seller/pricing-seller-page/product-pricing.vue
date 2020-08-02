@@ -429,7 +429,7 @@ input[type="number"] {
         <div class="header-section">
           <p>ارتقا عضویت</p>
         </div>
-        <product-pricing-contents justPro="true" />
+        <product-pricing-contents justPro="true" :offer-time="this.offerTime" />
       </div>
     </div>
   </div>
@@ -440,6 +440,7 @@ input[type="number"] {
 import ProductPricing from "./pricing-tables/pricing-packages.vue";
 import productPricingContents from "./pricing-tables/pricing-package-contents";
 export default {
+  props: ["offerTime"],
   components: { ProductPricing, productPricingContents },
   data: function() {
     return {

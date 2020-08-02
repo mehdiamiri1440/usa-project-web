@@ -75,6 +75,10 @@
                 </tr>
                 @endforeach
               </table>
+
+              <div align="center">
+                    {{ $profiles->appends($_GET)->render("pagination::default")}}
+              </div>
             </div>
             <!-- /.box-body -->
           </div>
@@ -110,9 +114,9 @@
 <!-- page script -->
 <script>
   $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
+    // $('#example1').DataTable()
+    $('#example1').DataTable({
+      'paging'      : false,
       'lengthChange': false,
       'searching'   : false,
       'ordering'    : true,

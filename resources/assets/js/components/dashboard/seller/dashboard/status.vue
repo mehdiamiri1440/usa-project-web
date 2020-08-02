@@ -159,8 +159,8 @@
               :to="{ name : 'dashboardPricingTableSeller'}"
               class="green-button blue-brand-background"
             >
-              <i class="far fa-credit-card"></i>
-              ارتقاء عضویت
+              <i class="fa fa-arrow-up"></i>
+              ارتقا عضویت
             </router-link>
           </div>
         </div>
@@ -199,7 +199,7 @@
                   class="green-button blue-brand-background"
                 >
                   <i class="fa fa-arrow-up"></i>
-                  ارتقاء عضویت
+                  ارتقا عضویت
                 </router-link>
               </div>
             </div>
@@ -347,7 +347,7 @@ export default {
           packageName = "عضویت رایگان";
           break;
         case 1:
-          packageName = "اشتراک ماهانه";
+          packageName = "عضویت پایه";
           break;
         case 2:
           packageName = "اشتراک 6 ماهه";

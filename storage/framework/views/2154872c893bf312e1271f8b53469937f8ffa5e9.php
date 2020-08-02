@@ -73,6 +73,11 @@
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
               </table>
+
+              <div align="center">
+                    <?php echo e($profiles->appends($_GET)->render("pagination::default")); ?>
+
+              </div>
             </div>
             <!-- /.box-body -->
           </div>
@@ -108,9 +113,9 @@
 <!-- page script -->
 <script>
   $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
+    // $('#example1').DataTable()
+    $('#example1').DataTable({
+      'paging'      : false,
       'lengthChange': false,
       'searching'   : false,
       'ordering'    : true,

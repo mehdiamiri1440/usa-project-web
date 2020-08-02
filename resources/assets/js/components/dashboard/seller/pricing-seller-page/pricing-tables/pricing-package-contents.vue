@@ -45,25 +45,35 @@
 
 .item-title {
   font-size: 16px;
+  padding: 3px 0 4px;
   font-weight: bold;
-}
-
-.item-title > span {
-  font-size: 12px;
 }
 
 .item-price {
   font-size: 16px;
-
   font-weight: bold;
+  color: #00c569;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 5px;
 }
 
+.detail-wrapper {
+  float: right;
+  width: 100%;
+}
 .item-price .item-currency {
   font-size: 13px;
 
   font-weight: 400;
 
   position: relative;
+}
+
+.item-price .item-date {
+  color: #777;
+  font-weight: 400;
+  font-size: 14px;
 }
 
 .item-content {
@@ -77,10 +87,13 @@
 }
 
 .item-action p {
-  margin: 5px auto 0;
+  margin: 0 auto 15px;
   font-size: 16px;
   padding: 12px;
   display: inline-block;
+  height: 45px;
+  background: #f6f6f6;
+  border-radius: 4px;
 }
 
 .item-help-content > span {
@@ -114,8 +127,11 @@
   font-weight: bold;
   min-width: 45px;
   text-align: center;
+  font-size: 20px;
 }
-
+.item-content-amount > i {
+  font-size: 20px;
+}
 .item-content-list li {
   float: left;
   width: 100%;
@@ -149,6 +165,10 @@
   background: linear-gradient(90deg, #00c569 0%, #21ad93 100%);
 
   color: #fff;
+}
+
+.item-title > span {
+  font-size: 13px;
 }
 
 .wrapper-background {
@@ -186,7 +206,7 @@
 
 .special-badge {
   position: absolute;
-  left: -29px;
+  left: -38px;
   background: #e41c38;
   color: #fff;
   font-size: 17px;
@@ -195,10 +215,31 @@
   text-align: center;
   padding: 3px;
   transform: rotate(-45deg);
-  top: 14px;
+  top: 8px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
 }
 
+.offer-price {
+  position: absolute;
+  text-align: center;
+  top: -23px;
+  left: 15px;
+  right: 15px;
+}
+
+.offer-notice > span {
+  background: #e41c38;
+  color: #fff;
+  border-radius: 4px;
+  padding: 0 15px;
+}
+
+.offer-item-price-content {
+  font-weight: 400;
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: #777;
+}
 @media screen and (max-width: 992px) {
   .list-title,
   .needs,
@@ -301,74 +342,15 @@
 
     <div class="row">
       <div
-        v-if="justPro == 'false'"
-        class="pull-right mobile-padding-0 col-xs-12 col-sm-6 col-lg-6"
-      >
-        <div class="item-wrapper wrapper-background">
-          <div class="item-header text-center">
-            <div class="item-title">
-              عضویت پایه
-              <span>۳ ماهه</span>
-            </div>
-
-            <div class="detail-wrapper">
-              <div class="item-price text-rtl">
-                <span class="item-price-content">249,000</span>
-                <span class="item-currency">تومان</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="item-content">
-            <ul class="item-content-list col-xs-12">
-              <li v-for="(item, index) in priceItemBasic" :key="index">
-                <a
-                  data-toggle="collapse"
-                  :href="'#content-item-' + index"
-                  class="item-help"
-                  :title="item.helpDescription"
-                ></a>
-
-                <p class="item-content-title" v-text="item.title"></p>
-
-                <p class="item-content-amount" v-html="item.contentUnit"></p>
-              </li>
-            </ul>
-          </div>
-
-          <div class="item-action">
-            <p v-if="statusData.active_pakage_type == 1" class="green-text">در حال استفاده</p>
-
-            <button
-              v-else-if="statusData.active_pakage_type > 1"
-              class="green-button btn-disabled text-rtl"
-              disabled
-            >
-              پرداخت
-              <i class="fa fa-angle-left"></i>
-            </button>
-
-            <a v-else href @click.prevent="doPayment(1)" class="green-button text-rtl">
-              پرداخت
-              <i class="fa fa-angle-left"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div
         :class="{'col-sm-offset-3' : justPro == 'true'}"
         class="pull-left mobile-padding-0 col-xs-12 col-sm-6 col-lg-6"
       >
         <div class="item-wrapper wrapper-background">
           <div class="item-header pro-version text-center">
             <span class="special-badge">ویژه</span>
-            <div class="item-title">عضویت ویژه سالانه</div>
-
-            <div class="detail-wrapper">
-              <div class="item-price text-rtl">
-                <span class="item-price-content">689,000</span>
-                <span class="item-currency">تومان</span>
-              </div>
+            <div class="item-title">
+              عضویت ویژه
+              <span>/ سالانه</span>
             </div>
           </div>
 
@@ -389,6 +371,32 @@
             </ul>
           </div>
 
+          <!-- remove pricing offer contents -->
+          <!-- <div class="detail-wrapper" v-if="offerTime">
+            <div class="offer-notice text-center text-rtl">
+              <span>
+                <span>4</span>
+                ساعت تا پایان تخفیف
+              </span>
+            </div>
+            <div class="item-price text-rtl">
+              <span class="offer-item-price-content">689,000</span>
+              <span class="item-price-content">500,000</span>
+              <span class="item-currency">تومان</span>
+              <span class="item-date">/ سالانه</span>
+            </div>
+          </div>-->
+
+          <div class="detail-wrapper">
+            <!-- remove pricing offer contents -->
+            <!-- <br class="hidden-xs" /> -->
+            <div class="item-price text-rtl">
+              <span class="item-price-content">689,000</span>
+              <span class="item-currency">تومان</span>
+              <span class="item-date">/ سالانه</span>
+            </div>
+          </div>
+
           <div class="item-action">
             <p v-if="statusData.active_pakage_type == 3" class="text-green">در حال استفاده</p>
 
@@ -401,7 +409,71 @@
               <i class="fa fa-angle-left"></i>
             </button>
 
+            <a
+              v-else-if="offerTime"
+              href
+              @click.prevent="doPayment(4)"
+              class="green-button text-rtl"
+            >
+              پرداخت
+              <i class="fa fa-angle-left"></i>
+            </a>
+
             <a v-else href @click.prevent="doPayment(3)" class="green-button text-rtl">
+              پرداخت
+              <i class="fa fa-angle-left"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div
+        v-if="justPro == 'false'"
+        class="pull-right mobile-padding-0 col-xs-12 col-sm-6 col-lg-6"
+      >
+        <div class="item-wrapper wrapper-background">
+          <div class="item-header text-center">
+            <div class="item-title">
+              عضویت پایه
+              <span>/ سه ماهه</span>
+            </div>
+          </div>
+
+          <div class="item-content">
+            <ul class="item-content-list col-xs-12">
+              <li v-for="(item, index) in priceItemBasic" :key="index">
+                <a
+                  data-toggle="collapse"
+                  :href="'#content-item-' + index"
+                  class="item-help"
+                  :title="item.helpDescription"
+                ></a>
+
+                <p class="item-content-title" v-text="item.title"></p>
+
+                <p class="item-content-amount" v-html="item.contentUnit"></p>
+              </li>
+            </ul>
+          </div>
+          <div class="detail-wrapper">
+            <div class="item-price text-rtl">
+              <span class="item-price-content">249,000</span>
+              <span class="item-currency">تومان</span>
+              <span class="item-date">/ سه ماهه</span>
+            </div>
+          </div>
+          <div class="item-action">
+            <p v-if="statusData.active_pakage_type == 1" class="green-text">در حال استفاده</p>
+
+            <button
+              v-else-if="statusData.active_pakage_type > 1"
+              class="green-button btn-disabled text-rtl"
+              disabled
+            >
+              پرداخت
+              <i class="fa fa-angle-left"></i>
+            </button>
+
+            <a v-else href @click.prevent="doPayment(1)" class="green-button text-rtl">
               پرداخت
               <i class="fa fa-angle-left"></i>
             </a>
@@ -418,7 +490,7 @@
 
             <p class="header-description">
               <strong>
-                این بسته شامل مجموعه امکاناتی مانند اعمال پله رایگان، مشاهده بدون تاخیر درخواست های خرید و ... است که
+                این بسته شامل مجموعه امکاناتی مانند اعمال نردبان رایگان، مشاهده بدون تاخیر درخواست های خرید، دریافت پیامک درخواست های خرید مرتبط و ... است که
                 <span
                   class="green-text"
                 >باعث فروش محصولات شما در سریع ترین زمان ممکن می شود</span>
@@ -434,8 +506,8 @@
 
 <script>
 export default {
-  props: ["justPro"],
-  data: function() {
+  props: ["justPro", "offerTime"],
+  data: function () {
     return {
       statusData: "",
       doPaymentLoader: false,
@@ -445,57 +517,69 @@ export default {
           title: "تعداد محصولات",
           contentUnit: "3",
           helpDescription:
-            " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "
+            " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. ",
         },
         {
           title: "ظرفیت درخواستهای خرید روزانه",
           contentUnit: "10",
           helpDescription:
-            "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد"
+            "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد",
         },
         {
           title: "بسته ی ویژه فروش",
           contentUnit:
             '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
           helpDescription:
-            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود"
-        }
+            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود",
+        },
+        {
+          title: "دسترسی به درخواست های خرید طلایی",
+          contentUnit:
+            '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
+          helpDescription: "",
+        },
       ],
       priceItemPro: [
         {
           title: "تعداد محصولات",
           contentUnit: "7",
           helpDescription:
-            " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "
+            " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. ",
         },
         {
           title: "ظرفیت درخواستهای خرید روزانه",
           contentUnit: "30",
           helpDescription:
-            "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد"
+            "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد",
         },
         {
           title: "بسته ی ویژه فروش",
           contentUnit:
             '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
           helpDescription:
-            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود"
-        }
-      ]
+            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود",
+        },
+        {
+          title: "دسترسی به درخواست های خرید طلایی",
+          contentUnit:
+            '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
+          helpDescription: "",
+        },
+      ],
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       var self = this;
       axios
         .post("/get_seller_dashboard_required_data")
-        .then(function(response) {
+        .then(function (response) {
           if (response.data.is_valid || response.data.is_valid == false) {
             self.statusData = response.data;
           }
         });
     },
-    doPayment: function(packageType) {
+    doPayment: function (packageType) {
       this.doPaymentLoader = true;
 
       let userId = getUserId();
@@ -508,15 +592,19 @@ export default {
 
       window.location.href = "/payment/" + packageType;
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
-    }
+    },
   },
   mounted() {
     this.init();
-  }
+  },
 };
 </script>

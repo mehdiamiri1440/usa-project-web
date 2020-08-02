@@ -326,7 +326,7 @@
     <div class="row">
       <div class="main-content-wrapper col-xs-12 col-lg-10 col-lg-offset-1">
         <div class="row">
-          <pricing-contents justPro="false" />
+          <pricing-contents justPro="false" :offer-time="this.offerTime" />
         </div>
       </div>
 
@@ -352,6 +352,7 @@
 import pricingUserCarousel from "./pricing-user-carousel";
 import pricingContents from "./pricing-tables/pricing-package-contents";
 export default {
+  props: ["offerTime"],
   components: { pricingUserCarousel, pricingContents },
   data: function() {
     return {

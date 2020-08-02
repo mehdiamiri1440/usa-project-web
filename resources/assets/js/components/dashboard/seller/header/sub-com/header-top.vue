@@ -228,6 +228,16 @@ a.profile-info-wrapper:focus {
   overflow: hidden;
   float: right;
   margin-left: 10px;
+  position: relative;
+}
+
+.profile-image-wrapper > img {
+  width: initial;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .profile-information {
@@ -281,7 +291,7 @@ a.profile-info-wrapper:focus {
 }
 
 .user-auth-info-wrapper {
-  margin-top: 10px;
+  margin-top: 6px;
   margin-left: 10px;
   float: left;
 }
@@ -292,6 +302,24 @@ a.profile-info-wrapper:focus {
 .header-with-fix-alert {
   top: 83px !important;
 }
+
+.upgrade-account {
+  color: #556080;
+  border: 1px solid;
+  padding: 2px 15px;
+  border-radius: 4px;
+  position: relative;
+  margin-left: 20px;
+  top: 10px;
+  transition: 300ms;
+}
+
+.upgrade-account:hover {
+  color: #fff;
+  background: #556080;
+  transition: 300ms;
+}
+
 @media screen and (max-width: 994px) {
   .main-header,
   .little-main-header {
@@ -445,6 +473,9 @@ a.profile-info-wrapper:focus {
     <header id="header" class="main-header">
       <div v-if="$parent.isRequiredFixAlert" class="required-fix-alert">
         <div class="fix-alert-wrapper">
+          <!-- remove pricing offer -->
+          <!-- <router-link v-if="!$parent.offerTime" :to="{name : 'dashboardPricingTableSeller'}"> -->
+
           <router-link :to="{name : 'dashboardPricingTableSeller'}">
             <span
               class="hidden-xs"
@@ -453,6 +484,17 @@ a.profile-info-wrapper:focus {
             <span class="hidden-sm hidden-md hidden-lg">پنج برابر سریع تر بفروشید!</span>
             <span class="button">می خواهم عضو ویژه شوم</span>
           </router-link>
+
+          <!-- remove pricing offer -->
+          <!-- <router-link v-else :to="{name : 'dashboardPricingTableSeller'}">
+            <span>
+              ارتقا به عضویت ویژه
+              <i class="fa fa-clock"></i>
+              4
+              <span>ساعت تا پایان تخفیف</span>
+            </span>
+            <span class="button">جزئیات بیشتر</span>
+          </router-link>-->
           <button @click.prevent="$parent.closeRequiredFixAlert()" class="close-required-fix-alert">
             <i class="fa fa-times"></i>
           </button>
@@ -469,6 +511,15 @@ a.profile-info-wrapper:focus {
       </div>
 
       <div class="user-auth-info-wrapper">
+        <router-link
+          v-if="$route.name != 'dashboardPricingTableSeller' && $parent.currentUser.user_info.active_pakage_type != 3"
+          class="upgrade-account hidden-xs"
+          :to="{name:'dashboardPricingTableSeller'}"
+        >
+          ارتقا عضویت
+          <i class="fa fa-arrow-up"></i>
+        </router-link>
+
         <ul v-if="!isLoading" class="nav navbar-nav">
           <li>
             <a

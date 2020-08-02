@@ -487,18 +487,29 @@ export default {
               // }
 
               self.goToStep(7);
-              setTimeout(function(){
-                self.$parent.is_pricing_active = true;
-              },1000);
+
+              if(response.data.product){
+                if(response.data.product.active_package_type == 0){
+                  setTimeout(function(){
+                    self.$parent.is_pricing_active = true;
+                  },1000);
+                }
+              }
+              
             } else if (response.status === 200) {
               self.popUpMsg = response.data.msg;
               eventBus.$emit("submitSuccess", self.popUpMsg);
               eventBus.$emit("submiting", false);
               // $('#modal-buttons').modal('show');
-              setTimeout(function(){
-                self.$parent.is_pricing_active = true;
-              },1000);
               self.goToStep(7);
+
+              if(response.data.product){
+                if(response.data.product.active_package_type == 0){
+                  setTimeout(function(){
+                    self.$parent.is_pricing_active = true;
+                  },1000);
+                }
+              }
             }
           })
           .catch(function(err) {

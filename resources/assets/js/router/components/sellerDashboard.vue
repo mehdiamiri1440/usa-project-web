@@ -130,7 +130,7 @@
             </div>
 
             <div class="modal-body col-xs-12 col-lg-8 col-lg-offset-2">
-              <pricing-contents justPro="false" />
+              <pricing-contents justPro="false" :offer-time="this.offerTime" />
             </div>
           </div>
           <!-- /.modal-content -->
@@ -147,10 +147,11 @@
       :user-id="userId"
       :messageCount="messageCount"
       :is-required-fix-alert="this.isRequiredFixAlert"
+      :offer-time="this.offerTime"
     ></header-dash-seller>
 
     <div id="main" :class="{ 'is-required-fix-alert' : isRequiredFixAlert}">
-      <router-view :str="storagePath" :user-type="isSeller"></router-view>
+      <router-view :str="storagePath" :user-type="isSeller" :offer-time="this.offerTime"></router-view>
     </div>
 
     <div
@@ -174,7 +175,7 @@ import { eventBus } from "../router.js";
 export default {
   components: {
     "header-dash-seller": HeaderDashSeller,
-    "pricing-contents": pricingContents
+    "pricing-contents": pricingContents,
   },
   props: [
     "userId",
@@ -182,9 +183,9 @@ export default {
     "assets",
     "storagePath",
     "messageCount",
-    "verifiedUserContent"
+    "verifiedUserContent",
   ],
-  data: function() {
+  data: function () {
     return {
       linkHideStates: ["buyAd-requests", "messenger/contacts"],
       buttonIsActive: true,
@@ -197,61 +198,82 @@ export default {
           public_phone: "",
           profile_photo: this.storage + "",
           postal_code: "",
-          shaba_code: ""
+          shaba_code: "",
         },
-        user_info: ""
+        user_info: "",
       },
       buttonActiveInSteps: true,
       isRequiredFixAlert: false,
+      offerTime: "",
       active_pakage_type: 3,
-      is_pricing_active: false
+      is_pricing_active: false,
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       this.checkButtonIsHide();
 
-      $("#pricing-modal").on("show.bs.modal", e => {
+      $("#pricing-modal").on("show.bs.modal", (e) => {
         this.handleBackKeys();
       });
-      $("#pricing-modal").on("hidden.bs.modal", e => {
-        this.createCookie("closePricingModal", "true", 30 * (24 * 60)); //for 30 days
+      $("#pricing-modal").on("hidden.bs.modal", (e) => {
+        if (this.getCookie("closePricingModalCount")) {
+          if (this.getCookie("closePricingModalCount") < 10) {
+            let closeCount = this.getCookie("closePricingModalCount");
+            closeCount = parseInt(closeCount) + 1;
+            this.createCookie(
+              "closePricingModalCount",
+              closeCount,
+              (30 - closeCount) * (24 * 60)
+            ); // for 30 day
+            this.createCookie("closePricingModal", true, 24 * 60); //for one day
+          }
+        } else {
+          this.createCookie("closePricingModal", true, 24 * 60); //for one day
+          this.createCookie("closePricingModalCount", 1, 29 * (24 * 60)); // for 30 day
+        }
       });
 
       axios
         .post("/get_total_unread_messages_for_current_user")
-        .then(function(response) {
+        .then(function (response) {
           let messageCount = response.data.msg_count;
           eventBus.$emit("messageCount", messageCount);
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log("error", error);
         });
 
-      axios.post("/get_show_pricing_page_status").then(response => {
+      axios.post("/get_show_pricing_page_status").then((response) => {
+        this.offerTime = response.data.show_off;
         if (
           !this.getCookie("closePricingModal") &&
           response.data.show &&
           window.location.pathname != "/seller/register-product"
         ) {
-          this.is_pricing_active = true;
-          this.checkPricingModal();
+          if (
+            !this.getCookie("closePricingModalCount") ||
+            this.getCookie("closePricingModalCount") < 10
+          ) {
+            this.is_pricing_active = true;
+            this.checkPricingModal();
+          }
         }
       });
     },
-    subIsActive: function(input) {
+    subIsActive: function (input) {
       const paths = Array.isArray(input) ? input : [input];
-      return paths.some(path => {
+      return paths.some((path) => {
         return this.$route.path.indexOf(path) === 0; // current path starts with this path string
       });
     },
-    checkButtonIsHide: function() {
+    checkButtonIsHide: function () {
       let buttonActive = true;
-      if (this.checkPricingRoute()) {
-        this.isRequiredFixAlert = false;
-      } else {
-        this.checkCookie();
-      }
+      // if (this.checkPricingRoute()) {
+      //   this.isRequiredFixAlert = false;
+      // } else {
+      //   this.checkCookie();
+      // }
       for (var i = 0; i < this.linkHideStates.length; i++) {
         if (this.subIsActive("/seller/" + this.linkHideStates[i])) {
           buttonActive = false;
@@ -259,7 +281,7 @@ export default {
       }
       this.buttonIsActive = buttonActive ? true : false;
     },
-    createCookie: function(name, value, minutes) {
+    createCookie: function (name, value, minutes) {
       if (minutes) {
         var date = new Date();
         date.setTime(date.getTime() + minutes * 60 * 1000);
@@ -269,7 +291,7 @@ export default {
       }
       document.cookie = name + "=" + value + expires + "; path=/";
     },
-    getCookie: function(cname) {
+    getCookie: function (cname) {
       var name = cname + "=";
       var ca = document.cookie.split(";");
       for (var i = 0; i < ca.length; i++) {
@@ -283,7 +305,7 @@ export default {
       }
       return "";
     },
-    checkCookie: function() {
+    checkCookie: function () {
       if (
         this.active_pakage_type == 3 ||
         this.getCookie("closeSellerFixModal") == "false" ||
@@ -294,7 +316,7 @@ export default {
         this.isRequiredFixAlert = true;
       }
     },
-    checkPricingRoute: function() {
+    checkPricingRoute: function () {
       let pageIsPricing = false;
       if (
         this.urlIsPricing("dashboardPricingTableSeller") ||
@@ -312,15 +334,15 @@ export default {
         return false;
       }
     },
-    handleBackKeys: function() {
+    handleBackKeys: function () {
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
-      $(window).on("popstate", function(e) {
+      $(window).on("popstate", function (e) {
         $("#pricing-modal").modal("hide");
       });
     },
-    checkPricingModal: function() {
+    checkPricingModal: function () {
       if (
         this.$route.name == "dashboardPricingTableSeller" ||
         this.$route.name == "dashboardProductPricing" ||
@@ -329,7 +351,7 @@ export default {
         this.is_pricing_active = false;
       } else {
       }
-    }
+    },
   },
   watch: {
     $route() {
@@ -337,24 +359,24 @@ export default {
       this.checkPricingModal();
       this.buttonActiveInSteps = true;
     },
-    active_pakage_type: function() {
-      this.checkCookie();
+    active_pakage_type: function () {
+      // this.checkCookie();
     },
-    is_pricing_active: function() {
+    is_pricing_active: function () {
       if (this.is_pricing_active == true) {
         $("#pricing-modal").modal("show");
       }
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.init();
 
-    eventBus.$on("buyAdbuttonActive", event => {
+    eventBus.$on("buyAdbuttonActive", (event) => {
       this.buttonActiveInSteps = event;
     });
   },
-  created: function() {
-    this.checkCookie();
-  }
+  created: function () {
+    // this.checkCookie();
+  },
 };
 </script>

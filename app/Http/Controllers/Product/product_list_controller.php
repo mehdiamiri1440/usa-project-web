@@ -79,6 +79,13 @@ class product_list_controller extends Controller
 
         $this->apply_product_filters($request,$products);
 
+        if(is_null($products)){
+            return response()->json([
+                'status' => false,
+                'msg' => 'Try again later!'
+            ],500);
+        }
+
         if($request->has('sort_by')){
             
             if($this->is_sorting_option_valid($request->sort_by)){

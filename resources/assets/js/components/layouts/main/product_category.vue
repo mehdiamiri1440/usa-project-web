@@ -1080,7 +1080,6 @@ import ProductArticle from "./product_components/product_article";
 import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
 import searchNotFound from "./main_components/search-not-found";
 import { eventBus } from "../../../router/router";
-import StickySidebar from "sticky-sidebar";
 
 var visible = false;
 export default {
@@ -1448,13 +1447,11 @@ export default {
       });
     },
     sidebarScroll() {
-      var sidebarStopper = $("#wrap-footer").height();
-
-      var sidebar = new StickySidebar("#sidebar", {
-        containerSelector: "#article-list",
-        innerWrapperSelector: ".sidebar__inner",
-        topSpacing: 80,
-        resizeSensor: true
+      let sidebarHeight = $("#sidebar").outerHeight();
+      $("#main .main-content").css("min-height", sidebarHeight);
+      $("#sidebar").StickySidebar({
+        // Settings
+        additionalMarginTop: 120
       });
     },
     getCategoryName: function() {
