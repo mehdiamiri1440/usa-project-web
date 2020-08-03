@@ -39,7 +39,7 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
     {
         $the_most_related_product_owners_ids = $this->get_the_most_related_product_owners_id_to_the_given_buyAd_if_any($this->buyAd);
 
-        $old_related_product_owners_ids = $this->get_old_related_product_owners_id_to_the_given_buyAd_if_any($this->buyAd);
+        // $old_related_product_owners_ids = $this->get_old_related_product_owners_id_to_the_given_buyAd_if_any($this->buyAd);
 
         if (count($the_most_related_product_owners_ids) > 0) {
             foreach ($the_most_related_product_owners_ids as $user_id) {
@@ -47,15 +47,16 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
             }
         }
 
-        $topics = $this->generate_related_topics($users);
+        // $topics = $this->generate_related_topics($old_related_product_owners_ids);
 
-        $data = [
-            'title' => 'باسکول',
-            'message' => 'یک درخواست خرید مرتبط با محصول شما ثبت شد',
-        ];
+        // $data = [
+        //     'title' => 'باسکول',
+        //     'message' => 'یک درخواست خرید مرتبط با محصول شما ثبت شد',
+        // ];
 
-        $fcm_controller_object = new fcm_controller();
-        $fcm_controller_object->send_notification_to_given_topic_group($data, $topics);
+
+        // $fcm_controller_object = new fcm_controller();
+        // $fcm_controller_object->send_notification_to_given_topic_group($data, $topics);
     }
 
     protected function get_the_most_related_product_owners_id_to_the_given_buyAd_if_any(&$buyAd)
