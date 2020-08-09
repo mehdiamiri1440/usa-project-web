@@ -28,7 +28,8 @@
                     بروز رسانی
                 </h1>
                 <p>
-                    وب سایت باسکول در حال بروز رسانی می باشد
+                  <?php echo e(json_decode(file_get_contents(storage_path('framework/down')), true)['message']); ?>
+
                 </p>
             </div>
             <div class="main-content-wrapper">
