@@ -88,7 +88,6 @@
     "redux": "^3.7.2",
     "redux-promise-middleware": "^5.0.0",
     "redux-thunk": "^2.2.0",
-    "sticky-sidebar": "^3.3.1",
     "sweetalert": "^2.1.2",
     "vendor": "^1.7.0",
     "vue": "^2.5.17",

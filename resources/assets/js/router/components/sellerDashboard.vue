@@ -40,11 +40,62 @@
 #main.is-required-fix-alert {
   margin-top: 84px !important;
 }
+
+#pricing-modal {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 !important ;
+}
+#pricing-modal .modal-content {
+  min-height: 100%;
+  border-radius: 0;
+  border: none;
+  float: right;
+  width: 100%;
+  background: #f6f6f6;
+}
+
+.modal-header {
+  padding: 9px 15px 10px;
+  border-bottom: 1px solid #e5e5e5;
+  background: #fff;
+}
+
+.modal-dialog {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+.close-modal {
+  font-size: 20px;
+  color: #777;
+  position: absolute;
+  right: 0;
+  padding: 8px 15px 2px;
+  top: 0;
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #474747;
+  text-align: center;
+}
+
+.modal-body {
+  position: relative;
+  padding: 80px 15px 0;
+}
+
 @media screen and (max-width: 994px) {
   #main,
   #main.little-main,
   #main.is-required-fix-alert {
     margin-right: 0 !important;
+  }
+  .modal-body {
+    padding-top: 40px;
   }
 }
 @media screen and (max-width: 992px) {
@@ -62,16 +113,45 @@
 
 <template>
   <div>
+    <!--  #regex pricing modal  -->
+
+    <!--modal-->
+    <div class="container" v-show="is_pricing_active">
+      <div id="pricing-modal" class="pricing-modal modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <a href="#" class="close-modal" data-dismiss="modal">
+                <i class="fa fa-times"></i>
+              </a>
+              <div class="modal-title">
+                <span>ارتقا عضویت</span>
+              </div>
+            </div>
+
+            <div class="modal-body col-xs-12 col-lg-8 col-lg-offset-2">
+              <pricing-contents justPro="false" :offer-time="this.offerTime" />
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+    </div>
+
+    <!-- end regex pricing modal -->
+
     <header-dash-seller
       :storage="storagePath"
       :logout="'/logout'"
       :user-id="userId"
       :messageCount="messageCount"
       :is-required-fix-alert="this.isRequiredFixAlert"
+      :offer-time="this.offerTime"
     ></header-dash-seller>
 
     <div id="main" :class="{ 'is-required-fix-alert' : isRequiredFixAlert}">
-      <router-view :str="storagePath" :user-type="isSeller"></router-view>
+      <router-view :str="storagePath" :user-type="isSeller" :offer-time="this.offerTime"></router-view>
     </div>
 
     <div
@@ -89,11 +169,13 @@
 
 <script>
 import HeaderDashSeller from "../../components/dashboard/seller/header/header";
+import pricingContents from "../../components/dashboard/seller/pricing-seller-page/pricing-tables/pricing-package-contents";
 import { eventBus } from "../router.js";
 
 export default {
   components: {
-    "header-dash-seller": HeaderDashSeller
+    "header-dash-seller": HeaderDashSeller,
+    "pricing-contents": pricingContents,
   },
   props: [
     "userId",
@@ -101,9 +183,9 @@ export default {
     "assets",
     "storagePath",
     "messageCount",
-    "verifiedUserContent"
+    "verifiedUserContent",
   ],
-  data: function() {
+  data: function () {
     return {
       linkHideStates: ["buyAd-requests", "messenger/contacts"],
       buttonIsActive: true,
@@ -116,42 +198,82 @@ export default {
           public_phone: "",
           profile_photo: this.storage + "",
           postal_code: "",
-          shaba_code: ""
+          shaba_code: "",
         },
-        user_info: ""
+        user_info: "",
       },
       buttonActiveInSteps: true,
       isRequiredFixAlert: false,
-      active_pakage_type: 3
+      offerTime: "",
+      active_pakage_type: 3,
+      is_pricing_active: false,
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       this.checkButtonIsHide();
+
+      $("#pricing-modal").on("show.bs.modal", (e) => {
+        this.handleBackKeys();
+      });
+      $("#pricing-modal").on("hidden.bs.modal", (e) => {
+        if (this.getCookie("closePricingModalCount")) {
+          if (this.getCookie("closePricingModalCount") < 10) {
+            let closeCount = this.getCookie("closePricingModalCount");
+            closeCount = parseInt(closeCount) + 1;
+            this.createCookie(
+              "closePricingModalCount",
+              closeCount,
+              (30 - closeCount) * (24 * 60)
+            ); // for 30 day
+            this.createCookie("closePricingModal", true, 24 * 60); //for one day
+          }
+        } else {
+          this.createCookie("closePricingModal", true, 24 * 60); //for one day
+          this.createCookie("closePricingModalCount", 1, 29 * (24 * 60)); // for 30 day
+        }
+      });
 
       axios
         .post("/get_total_unread_messages_for_current_user")
-        .then(function(response) {
+        .then(function (response) {
           let messageCount = response.data.msg_count;
           eventBus.$emit("messageCount", messageCount);
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log("error", error);
         });
+
+      axios.post("/get_show_pricing_page_status").then((response) => {
+        this.offerTime = response.data.show_off;
+        if (
+          !this.getCookie("closePricingModal") &&
+          response.data.show &&
+          window.location.pathname != "/seller/register-product"
+        ) {
+          if (
+            !this.getCookie("closePricingModalCount") ||
+            this.getCookie("closePricingModalCount") < 10
+          ) {
+            this.is_pricing_active = true;
+            this.checkPricingModal();
+          }
+        }
+      });
     },
-    subIsActive: function(input) {
+    subIsActive: function (input) {
       const paths = Array.isArray(input) ? input : [input];
-      return paths.some(path => {
+      return paths.some((path) => {
         return this.$route.path.indexOf(path) === 0; // current path starts with this path string
       });
     },
-    checkButtonIsHide: function() {
+    checkButtonIsHide: function () {
       let buttonActive = true;
-      if (this.checkPricingRoute()) {
-        this.isRequiredFixAlert = false;
-      } else {
-        this.checkCookie();
-      }
+      // if (this.checkPricingRoute()) {
+      //   this.isRequiredFixAlert = false;
+      // } else {
+      //   this.checkCookie();
+      // }
       for (var i = 0; i < this.linkHideStates.length; i++) {
         if (this.subIsActive("/seller/" + this.linkHideStates[i])) {
           buttonActive = false;
@@ -159,7 +281,17 @@ export default {
       }
       this.buttonIsActive = buttonActive ? true : false;
     },
-    getCookie: function(cname) {
+    createCookie: function (name, value, minutes) {
+      if (minutes) {
+        var date = new Date();
+        date.setTime(date.getTime() + minutes * 60 * 1000);
+        var expires = "; expires=" + date.toGMTString();
+      } else {
+        var expires = "";
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
+    },
+    getCookie: function (cname) {
       var name = cname + "=";
       var ca = document.cookie.split(";");
       for (var i = 0; i < ca.length; i++) {
@@ -173,7 +305,7 @@ export default {
       }
       return "";
     },
-    checkCookie: function() {
+    checkCookie: function () {
       if (
         this.active_pakage_type == 3 ||
         this.getCookie("closeSellerFixModal") == "false" ||
@@ -184,7 +316,7 @@ export default {
         this.isRequiredFixAlert = true;
       }
     },
-    checkPricingRoute: function() {
+    checkPricingRoute: function () {
       let pageIsPricing = false;
       if (
         this.urlIsPricing("dashboardPricingTableSeller") ||
@@ -201,26 +333,50 @@ export default {
       } else {
         return false;
       }
-    }
+    },
+    handleBackKeys: function () {
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $("#pricing-modal").modal("hide");
+      });
+    },
+    checkPricingModal: function () {
+      if (
+        this.$route.name == "dashboardPricingTableSeller" ||
+        this.$route.name == "dashboardProductPricing" ||
+        this.$route.name == "dashboardBuyAdPricing"
+      ) {
+        this.is_pricing_active = false;
+      } else {
+      }
+    },
   },
   watch: {
     $route() {
       this.checkButtonIsHide();
+      this.checkPricingModal();
       this.buttonActiveInSteps = true;
     },
-    active_pakage_type: function() {
-      this.checkCookie();
-    }
+    active_pakage_type: function () {
+      // this.checkCookie();
+    },
+    is_pricing_active: function () {
+      if (this.is_pricing_active == true) {
+        $("#pricing-modal").modal("show");
+      }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.init();
 
-    eventBus.$on("buyAdbuttonActive", event => {
+    eventBus.$on("buyAdbuttonActive", (event) => {
       this.buttonActiveInSteps = event;
     });
   },
-  created: function() {
-    this.checkCookie();
-  }
+  created: function () {
+    // this.checkCookie();
+  },
 };
 </script>

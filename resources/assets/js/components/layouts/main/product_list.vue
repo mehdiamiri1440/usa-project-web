@@ -1006,7 +1006,6 @@ import ProductArticle from "./product_components/product_article";
 import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
 import searchNotFound from "./main_components/search-not-found";
 import { eventBus } from "../../../router/router";
-import StickySidebar from "sticky-sidebar";
 
 var visible = false;
 export default {
@@ -1448,152 +1447,12 @@ export default {
       history.go(-1);
     },
     sidebarScroll() {
-      var $sticky = $(".sticky");
-      var stickyrStopper = $("#wrap-footer");
-      var lastScrollTop = 0;
-
-      var sidebarStopper = $("#wrap-footer").height();
-
-      var sidebar = new StickySidebar("#sidebar", {
-        containerSelector: "#article-list",
-        innerWrapperSelector: ".sidebar__inner",
-        topSpacing: 122,
-        resizeSensor: true
+      let sidebarHeight = $("#sidebar").outerHeight();
+      $("#main .main-content").css("min-height", sidebarHeight);
+      $("#sidebar").StickySidebar({
+        // Settings
+        additionalMarginTop: 120
       });
-
-      var documentHeight = $(document).height();
-      var wHeight = $(window).height();
-      var generalSidebarHeight = $sticky.innerHeight();
-      var stickyTop = 162;
-      var stickOffset = 0;
-      var stickPositionToContent = 115;
-      var stickyStopperPosition = stickyrStopper.offset().top;
-      var stopPoint =
-        documentHeight - (wHeight + stickyrStopper.innerHeight() + 130);
-      var differences =
-        stickyStopperPosition -
-        stickPositionToContent -
-        (generalSidebarHeight - stickOffset);
-      var diff = differences + stickOffset;
-      var sidebarHeightToTop = generalSidebarHeight + stickyTop;
-
-      if (generalSidebarHeight > wHeight) {
-        if (wHeight < sidebarHeightToTop) {
-          $(window).scroll(function() {
-            // scroll event
-            var windowTop = $(window).scrollTop(); // returns number
-
-            if (windowTop > lastScrollTop) {
-              if (dynamicScroll + generalSidebarHeight < windowTop + wHeight) {
-                if (stopPoint + 13 < windowTop) {
-                  $sticky.css({
-                    position: "absolute",
-                    top: diff,
-                    right: "0"
-                  });
-                } else if (windowTop + wHeight > sidebarHeightToTop) {
-                  $sticky.css({
-                    position: "fixed",
-                    bottom: stickOffset,
-                    top: "initial",
-                    right: "0"
-                  });
-                } else {
-                  $sticky.css({
-                    position: "absolute",
-                    top: "initial",
-                    right: "0",
-                    bottom: "initial"
-                  });
-                }
-              } else {
-                if (stopPoint < windowTop) {
-                  $sticky.css({
-                    position: "absolute",
-                    top: diff,
-                    right: "0"
-                  });
-                } else {
-                  $sticky.css({
-                    position: "absolute",
-                    top: dynamicScroll + stickOffset,
-                    right: "0",
-                    bottom: "initial"
-                  });
-                }
-              }
-
-              dynamicScroll = $sticky.offset().top;
-            } else {
-              if (dynamicScroll - stickyTop < windowTop) {
-                $sticky.css({
-                  position: "absolute",
-                  top: dynamicScroll + "px",
-                  right: "0",
-                  bottom: "initial"
-                });
-              } else {
-                $sticky.css({
-                  position: "fixed",
-                  bottom: "initial",
-                  top: stickyTop,
-                  right: "0"
-                });
-              }
-            }
-            dynamicScroll = $sticky.offset().top;
-
-            lastScrollTop = windowTop;
-          });
-        } else {
-          $(window).scroll(function() {
-            // scroll event
-            var windowTop = $(window).scrollTop(); // returns number
-            if (windowTop < lastScrollTop) {
-              if (stopPoint < windowTop) {
-                $sticky.css({
-                  position: "absolute",
-                  top: diff,
-                  right: "0"
-                });
-              } else {
-                $sticky.css({
-                  position: "fixed",
-                  bottom: "initial",
-                  top: stickyTop,
-                  right: "0"
-                });
-              }
-            }
-            lastScrollTop = windowTop;
-          });
-        } //end all if
-      } else {
-        $(window).scroll(function() {
-          // scroll event
-          var windowTop = $(window).scrollTop(); // returns number'
-          var getHeightFooter =
-            documentHeight -
-            (stickyrStopper.innerHeight() +
-              stickPositionToContent +
-              stickyTop +
-              generalSidebarHeight);
-          if (getHeightFooter < windowTop) {
-            $sticky.css({
-              position: "absolute",
-              top: diff,
-              right: "0"
-            });
-          } else {
-            $sticky.css({
-              position: "fixed",
-              bottom: "initial",
-              top: stickyTop,
-              right: "0"
-            });
-          }
-        });
-      }
     },
     openStickyGuide: function() {
       eventBus.$emit("modal", "guide");

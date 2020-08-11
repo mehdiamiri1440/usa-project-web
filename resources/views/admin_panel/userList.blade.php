@@ -53,6 +53,16 @@
               <h3 class="box-title">جدول داده ها</h3>
             </div>
             <!-- /.box-header -->
+            <form method="GET" action="{{route('admin_panel_load_user_list')}}">
+              <div class="row">
+                <div class="col-xs-4 col-xs-offset-4">
+                  <label>جستوجو‌ :‌ </label>
+                  <input type="text" name="search" placeholder="نام یا شماره تماس">
+                  <input type="submit" class="btn btn-primary" value="برو">
+                </div>
+              </div>
+              
+            </form>
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
@@ -61,10 +71,10 @@
                   <th>نام و نام خانوادگی</th>
                   <th>نوع کاربری</th>
                   <th>استان-شهر</th>
-                  <th>کدملی</th>
                   <th>تاریخ ثبت نام</th>
                   <th>تلفن</th>
-                  <th>توضیحات</th>
+                  <th>نوع عضوبت</th>
+                  <th>آی دی</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -74,17 +84,24 @@
                         <td>{{$user->first_name . ' ' . $user->last_name}}</td>
                         <td>{{$user->is_seller ? "فروشنده" : "خریدار"}}</td>
                         <td>{{$user->province}} | {{$user->city}}</td>                    
-                        <td>{{$user->national_code}}</td>  
-                        <td>{{$user['register_date']}}</td>
+                        <td>{{$user->register_date}}</td>
                         <td>{{$user->phone}}</td>
-                        <td><a href="{{route('admin_panel_load_user_notes_by_id',['user_id' => $user->id])}}">ثبت/مشاهده  توضیحات</a>
-                        <span class="pull-left-container">
-                            <span class="label pull-left bg-red"><b>{{$user->note_count}}</b></span>
-                        </span>
-                        </td>
+                        @if($user->active_pakage_type == 0)
+                          <td>رایگان</td>
+                        @elseif($user->active_pakage_type == 1)
+                          <td>سه ماهه</td>
+                        @elseif($user->active_pakage_type == 2)
+                          <td>نوع دو</td>
+                        @elseif($user->active_pakage_type == 3)
+                          <td>ویژه</td>
+                        @endif
+                        <td>{{$user->id}}</td>
                     </tr>
                     @endforeach
               </table>
+              <div align="center">
+                {{ $users->appends($_GET)->render("pagination::default")}}
+              </div>
             </div>
             <!-- /.box-body -->
           </div>
@@ -123,10 +140,10 @@
 <!-- page script -->
 <script>
   $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
+    // $('#example1').DataTable()
+    $('#example1').DataTable({
+      'paging'      : false,
+      'lengthChange': true,
       'searching'   : false,
       'ordering'    : true,
       'info'        : true,

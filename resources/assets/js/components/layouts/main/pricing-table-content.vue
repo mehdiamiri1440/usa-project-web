@@ -552,7 +552,7 @@ export default {
       statusData: "",
       priceItemOne: [
         {
-          title: "تعداد آگهی ها",
+          title: "تعداد محصولات",
           contentUnit: "1",
           helpDescription:
             " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "
@@ -611,7 +611,7 @@ export default {
       ],
       priceItemSix: [
         {
-          title: "تعداد آگهی ها",
+          title: "تعداد محصولات",
           contentUnit: "2",
           helpDescription:
             " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "
@@ -670,7 +670,7 @@ export default {
       ],
       priceItemPro: [
         {
-          title: "تعداد آگهی ها",
+          title: "تعداد محصولات",
           contentUnit: "7",
           helpDescription:
             " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "

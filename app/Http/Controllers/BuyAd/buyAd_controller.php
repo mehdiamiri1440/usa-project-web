@@ -72,6 +72,7 @@ class buyAd_controller extends Controller
         'buy_ads.id',
         'buy_ads.name',
         'buy_ads.created_at',
+        'buy_ads.updated_at',
         'buy_ads.category_id',
         'buy_ads.requirement_amount',
         'buy_ads.confirmed',
@@ -698,17 +699,28 @@ class buyAd_controller extends Controller
                     ->join('myusers', 'buy_ads.myuser_id', '=', 'myusers.id')
                     ->where('buy_ads.confirmed', true)
                     ->where('buy_ads.reply_capacity','>',0)
-                    ->whereBetween('buy_ads.created_at',[Carbon::now()->subMonths(1),Carbon::now()])
+                    ->whereBetween('buy_ads.updated_at',[Carbon::now()->subMonths(1),Carbon::now()])
                     ->where('buy_ads.myuser_id','<>',$user->id);
         
-        if($user->active_pakage_type == 0){
-            $query = $query->where('buy_ads.created_at','<',Carbon::now()->subHours(2));
-        }
+        // if($user->active_pakage_type == 0){
+        //     $query = $query->where('buy_ads.updated_at','<',Carbon::now()->subHours(2));
+        // }
 
         $query = $query->select($this->related_buyAd_list_required_fields)
-                    ->orderBy('buy_ads.created_at', 'desc');
+                    ->orderBy('buy_ads.updated_at', 'desc');
 
         $buyAds = $query->get();
+
+        $golden_buyAds_update_date = Carbon::now()->subHours(2);
+        $buyAds->each(function($buyAd) use($golden_buyAds_update_date){
+            if($buyAd->updated_at > $golden_buyAds_update_date)
+            {
+                $buyAd->is_golden = true;
+            }
+            else{
+                $buyAd->is_golden = false;
+            }
+        });
                     
         //relevance
         // $buyAds = $buyAds->filter(function ($buyAd) {

@@ -1,7 +1,7 @@
 <style scoped>
-.requests .main-content {
+/* .requests .main-content {
   padding-top: 50px;
-}
+} */
 
 .wrapper_no_pro {
   text-align: center;
@@ -199,6 +199,63 @@
   top: 2px;
   right: -6px;
 }
+.golden {
+  border: 2px solid transparent;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  -moz-border-image: -moz-linear-gradient(left, #3acfd5 0%, #3a4ed5 100%);
+  -webkit-border-image: -webkit-linear-gradient(left, #3acfd5 0%, #3a4ed5 100%);
+  border-image: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  border-image-slice: 100%;
+  border-image-slice: 1;
+  position: relative;
+}
+.golden::after {
+  background: linear-gradient(
+    44deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  width: 20px;
+  height: 100%;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.golden .detail-success {
+  background: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  color: #333;
+}
+
+.lock > p {
+  filter: blur(7px);
+}
+
+.lock > span.lock-text {
+  position: absolute;
+  left: 0;
+  text-align: right;
+  right: 90px;
+  font-size: 20px;
+  font-weight: bold;
+  top: 14px;
+}
+
 @media screen and (max-width: 994px) {
   .fix-request-header-box,
   .title {
@@ -212,12 +269,23 @@
 }
 
 @media screen and (max-width: 767px) {
+  .lock > span.lock-text {
+    text-align: center;
+    right: 0;
+    top: 60px;
+  }
+  .golden {
+    padding: 25px 0;
+  }
+  .golden::after {
+    display: none;
+  }
   .main-content,
   .wrapper-items {
     padding: 0;
   }
   .requests .main-content {
-    padding-bottom: 100px;
+    padding: 0 0 100px !important;
   }
   .title {
     position: relative;
@@ -269,21 +337,18 @@
       </div>
     </div>
     <div class="requests" v-show="isRequests">
-      <div
+      <!-- <div
         v-if="currentUser.user_info.active_pakage_type == 0"
         class="fix-request-header-box request-update shadow-content text-center text-rtl"
       >
-        <span>این درخواست ها کمی قدیمی است</span>
+        <span>شما به درخواست های طلایی دسترسی ندارید</span>
         <button
           class="green-button bg-red hover-effect"
           @click="isRequests = !isRequests"
-        >بروز رسانی</button>
-      </div>
-
-      <section
-        class="main-content col-xs-12"
-        :class="{'padding-0-15' : currentUser.user_info.active_pakage_type != 0}"
-      >
+        >جزییات</button>
+      </div> -->
+      <!-- :class="{'padding-0-15' : currentUser.user_info.active_pakage_type != 0}" -->
+      <section class="main-content col-xs-12 padding-0-15'">
         <div class="title">
           <div class="row">
             <div class="col-xs-12 text-rtl text-right col-sm-8 pull-right">
@@ -315,7 +380,17 @@
         </div>
         <div v-if="buyAds.length != 0">
           <ul class="list-unstyled wrapper-items">
-            <li v-for="(buyAd,index) in buyAds" :key="index" class="list-group-item col-xs-12">
+            <li
+              v-for="(buyAd,index) in buyAds"
+              :key="index"
+              class="list-group-item col-xs-12"
+              :class="{'golden' : buyAd.is_golden, 'lock' :  buyAd.is_golden && currentUser.user_info.active_pakage_type == 0}"
+            >
+              <span
+                v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type == 0"
+                class="lock-text"
+                v-text="buyAd.subcategory_name"
+              ></span>
               <p class="list-title col-sm-3 col-xs-12">
                 <span v-text="buyAd.category_name"></span>
 
@@ -323,20 +398,46 @@
 
                 <span v-text="buyAd.subcategory_name"></span>
 
-                <span v-if="buyAd.name" v-text="' | ' + buyAd.name"></span>
+                <span
+                  v-if="buyAd.name"
+                  v-text="' | ' + buyAd.name"
+                ></span>
+                <!-- <span v-else v-text="' | ' + buyAd.name"></span> -->
               </p>
 
               <p class="needs col-sm-3 col-xs-12">
                 <span class="static-content">میزان نیازمندی :</span>
 
-                <span v-text="buyAd.requirement_amount"></span>
+                <span
+                  v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type == 0"
+                  v-text="'0000'"
+                ></span>
+                <span v-else v-text="getNumberWithCommas(buyAd.requirement_amount)"></span>
 
                 <span class="static-content">کیلوگرم</span>
               </p>
 
-              <p class="list-time col-sm-2 col-xs-12" v-text="buyAd.register_date"></p>
+              <p
+                class="list-time col-sm-2 col-xs-12"
+                v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type == 0"
+                v-text="'۱۳ تیر , ۱۳۰۴'"
+              ></p>
+              <p class="list-time col-sm-2 col-xs-12" v-else v-text="buyAd.register_date"></p>
+
               <p class="list-notice col-sm-1 col-xs-12 pull-right">
                 <button
+                  v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type == 0"
+                  class="btn"
+                  type="button"
+                >
+                  <span>
+                    <i class="fas fa-comment-alt"></i>
+                    <i class="fas fa-exclamation"></i>
+                  </span>
+                  <span class="request-count red-text">{{'0+'}}</span>
+                </button>
+                <button
+                  v-else
                   class="btn"
                   type="button"
                   data-toggle="tooltip"
@@ -350,8 +451,25 @@
                   <span class="request-count red-text">{{buyAd.reply_capacity + '+'}}</span>
                 </button>
               </p>
-              <a class="col-sm-3 col-xs-12 pull-left" href @click.prevent="openChat(buyAd,$event)">
-                <p class="detail-success">
+
+              <a
+                v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type == 0"
+                class="col-sm-3 col-xs-12 pull-left"
+                href
+                @click.prevent="openGoldenChatRestrictionModal()"
+              >
+                <p class="detail-success hover-effect">
+                  <span class="fas fa-comment-alt"></span> پیام به خریدار
+                </p>
+                <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">کمی صبر کنید...</p>
+              </a>
+              <a
+                v-else
+                class="col-sm-3 col-xs-12 pull-left"
+                href
+                @click.prevent="openChat(buyAd,$event)"
+              >
+                <p class="detail-success hover-effect">
                   <span class="fas fa-comment-alt"></span> پیام به خریدار
                 </p>
                 <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">کمی صبر کنید...</p>
@@ -398,16 +516,12 @@
       </section>
     </div>
 
-    <div class="request-detail" v-show="!isRequests">
+    <!-- <div class="request-detail" v-show="!isRequests">
       <section class="main-content col-xs-12">
         <div class="detail-contents shadow-content text-center text-rtl">
           <div>
             <p>
-              <b>
-                درخواست های خرید با
-                <span class="red-text">۲ ساعت تاخیر</span> به اطلاع شما می رسد.
-                <br />برای اطلاع آنی از درخواست ها و افزایش 5 برابری احتمال فروش محصولاتتان نوع عضویت خود را ارتقا دهید.
-              </b>
+              درخواست های خرید طلایی درخواست هایی است که احتمال خرید از سوی خریدار آن وجود بالاست. برای دسترسی به این درخواست ها نوع عضویت خود را ارتقا دهید.
             </p>
             <router-link
               class="green-button"
@@ -416,7 +530,7 @@
           </div>
         </div>
       </section>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -526,6 +640,15 @@ export default {
       }).then(() => {
         $(e.target).show();
       });
+    },
+    openGoldenChatRestrictionModal: function(){
+        eventBus.$emit("modal", "goldenBuyAdReplyLimit");
+
+        self.registerComponentStatistics(
+          "buyAdReply",
+          "openChat",
+          "permission denied"
+        );
     },
     getNumberWithCommas: function(number) {
       if (number || typeof number === "number")

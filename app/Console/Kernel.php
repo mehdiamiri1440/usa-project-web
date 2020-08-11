@@ -10,6 +10,10 @@ use App\Jobs\SendReminderSMSToSellers;
 use App\Jobs\CheckElevatorExpiry;
 use App\Jobs\SendUpgradeAccoutnSMSToSellers;
 use App\Jobs\CacheProductList;
+use App\Jobs\Notifiers\RetentionReminder;
+use App\Jobs\Notifiers\BuyAdRegisterReminder;
+use App\Jobs\Notifiers\ProductRegisterReminder;
+use App\Jobs\Notifiers\ExpiryReminder;
 use App\Jobs\AnomalyDetectors\MessagingAnomalyDetection;
 use DB;
 
@@ -66,6 +70,24 @@ class Kernel extends ConsoleKernel
 
         $schedule->job($cache_product_list_job)
                 ->everyFiveMinutes();
+
+        // $retention_reminder_notifier_job = new RetentionReminder();
+        // $schedule->job($retention_reminder_notifier_job)
+        //         ->monthlyOn(15, '14:30');
+
+        // $product_register_reminder_job = new ProductRegisterReminder();
+        // $schedule->job($product_register_reminder_job)
+        //         ->dailyAt('12:30');
+
+        // $buyAd_register_reminder_job = new BuyAdRegisterReminder();
+        // $schedule->job($buyAd_register_reminder_job)
+        //         ->dailyAt('11:30');
+
+        $expiry_reminder_job = new ExpiryReminder();
+        $schedule->job($expiry_reminder_job)
+            ->weekly()
+            ->tuesdays()
+            ->at('11:45');
     }
 
     /**
