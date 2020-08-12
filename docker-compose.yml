@@ -1,0 +1,82 @@
+version: '3.5'
+
+services:
+  laravel-app:
+    image: buskool-app
+    build:
+      context: '.'
+    container_name: bsukool-app
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      backend:
+        aliases:
+          - laravel-app
+  mysql-db:
+    image: mysql:5.6
+    container_name: mysql-db
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=abc123
+      - MYSQL_DATABASE=db
+      - MYSQL_USER=dbuser
+      - MYSQL_PASSWORD=abc123
+    networks:
+      backend:
+        aliases:
+          - db
+
+  my-phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    build:
+         context: '.'
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql-db
+      - MYSQL_ROOT_PASSWORD=abc123
+      - PMA_POST=3306
+    depends_on:
+      - mysql-db
+    ports:
+      - 8080:80
+      - 3030:443
+    networks:
+      - backend
+    
+  scheduler:
+    image: buskool-app
+    container_name: laravel-scheduler
+    volumes:
+       - .:/var/www/html
+    depends_on:
+      - laravel-app
+    environment:
+      CONTAINER_ROLE: scheduler
+    networks:
+      -  backend
+
+  queue:
+    image: buskool-app
+    container_name: laravel-queue
+    depends_on:
+      - laravel-app
+    volumes:
+      - .:/var/www/html
+    environment:
+      CONTAINER_ROLE: queue
+    networks:
+      - backend
+        
+ 
+networks:
+  backend:
+    name: backend-network
+
+volumes:
+    dbdata:
+       driver: local
