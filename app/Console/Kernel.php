@@ -26,6 +26,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\createProductThumbnails::class,
+        Commands\backupUserFiles::class,
     ];
 
     /**
@@ -88,6 +89,10 @@ class Kernel extends ConsoleKernel
             ->weekly()
             ->tuesdays()
             ->at('11:45');
+
+        $schedule->command('backup:clean')->daily()->at('12:30');
+        $schedule->command('backup:run --only-db')->daily()->at('01:30');
+         
     }
 
     /**

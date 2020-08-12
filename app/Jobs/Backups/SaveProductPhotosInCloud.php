@@ -67,7 +67,7 @@ class SaveProductPhotosInCloud implements ShouldQueue
 
         $client = \AWS::createClient('s3');
         $client->putObject(array(
-            'Bucket'     => 'bus-product-photos',
+            'Bucket'     => 'product-photos',
             'Key'        => $file_name,
             'SourceFile' => $path,
         ));
