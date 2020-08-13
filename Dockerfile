@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -qq -y \
 # 2. apache configs + document root
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN a2enmod ssl
-COPY ./main-configs/000-default-ssl.conf /etc/apache2/sites-enabled
+#COPY ./main-configs/000-default-ssl.conf /etc/apache2/sites-enabled
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
@@ -53,7 +53,7 @@ COPY ./start.sh  /usr/local/bin/start
 
 RUN  chmod u+x /usr/local/bin/start
 
-COPY ./ssl.crt /etc/apache2/ssl/ssl.crt
-COPY ./ssl.key /etc/apache2/ssl/ssl.key
+#COPY ./ssl.crt /etc/apache2/ssl/ssl.crt
+#COPY ./ssl.key /etc/apache2/ssl/ssl.key
 
 CMD ["/usr/local/bin/start"]
