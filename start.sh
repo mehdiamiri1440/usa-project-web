@@ -8,6 +8,7 @@ env=${APP_ENV:-production}
 if [ "$role" = "app" ]; then
 
     exec apache2-foreground
+    php /var/www/html/artisan config:cache
 
 elif [ "$role" = "queue" ]; then
 
