@@ -31,7 +31,7 @@ services:
           - db
 
   my-phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin/phpmyadmin:5.0.2
     container_name: phpmyadmin
     environment:
       - PMA_ARBITRARY=1
