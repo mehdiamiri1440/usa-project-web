@@ -8,6 +8,11 @@ env=${APP_ENV:-production}
 if [ "$role" = "app" ]; then
 
     exec apache2-foreground
+    php /var/www/html/artisan config:cache
+    php /var/www/html/artisan migrate 
+    php /var/www/html/artisan storage:link
+    php /var/www/html/artisan fetch:media
+
 
 elif [ "$role" = "queue" ]; then
 

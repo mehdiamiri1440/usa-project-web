@@ -27,20 +27,16 @@ class media_controller extends Controller
 
     public function download_media()
     {
-        // $client = \AWS::createClient('s3');
-        ini_set('memory_limit', '-1');
+        $client = \AWS::createClient('s3');
 
-        DB::unprepared(file_get_contents('/Users/deli/Downloads/2020_07_22.sql'));
-
-        // $bucket_name = 'product-photos';
+        $bucket_name = 'product-photos';
         
-        // $objectsListResponse = $client->listObjects(['Bucket' => $bucket_name]);
-        // $objects = $objectsListResponse['Contents'] ?? [];
-        // foreach ($objects as $object) {
-        //     $object_content = $client->getObject(['Bucket' => $bucket_name, 'Key' => $object['Key']]);
+        $objectsListResponse = $client->listObjects(['Bucket' => $bucket_name]);
+        $objects = $objectsListResponse['Contents'] ?? [];
+        foreach ($objects as $object) {
+            $object_content = $client->getObject(['Bucket' => $bucket_name, 'Key' => $object['Key']]);
             
-        //     file_put_contents(public_path('storage/products' . '/' . $object['Key']), $object_content['Body']->getContents());
-        // }
-
+            file_put_contents(public_path('storage/products' . '/' . $object['Key']), $object_content['Body']->getContents());
+        }
     }
 }

@@ -27,6 +27,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\createProductThumbnails::class,
         Commands\backupUserFiles::class,
+        Commands\downloadMediaFromCloud::class,
     ];
 
     /**
