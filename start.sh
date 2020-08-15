@@ -16,11 +16,15 @@ if [ "$role" = "app" ]; then
 
 elif [ "$role" = "queue" ]; then
 
+    php /var/www/html/artisan config:cache
+    php /var/www/html/artisan migrate 
     echo "Running the queue..."
     php /var/www/html/artisan queue:work --verbose --tries=3 --timeout=90
 
 elif [ "$role" = "scheduler" ]; then
 
+    php /var/www/html/artisan config:cache
+    php /var/www/html/artisan migrate 
     while [ true ]
     do
       php /var/www/html/artisan schedule:run --verbose --no-interaction &

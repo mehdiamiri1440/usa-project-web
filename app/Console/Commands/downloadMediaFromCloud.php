@@ -34,9 +34,9 @@ class downloadMediaFromCloud extends Command
         'product-photos' => 'storage/products',
         'product-thumbnails' =>  'storage/thumbnails/products',
         'profile-photos' =>  'storage/profile_photos', 
-        // 'certificate-photos' =>  'storage/certificates',
+        'certificate-photos' =>  'storage/certificates',
         'related-photos' =>  'storage/relateds',
-        // 'verification-photos' =>  'storage/verification_photos'
+        'verification-photos' =>  'storage/verification_photos'
     ];
     /**
      * Execute the console command.

@@ -24,19 +24,4 @@ class media_controller extends Controller
         $img = Image::make($path)->insert($water_mark_img,$position);
         $img->save($path);
     }
-
-    public function download_media()
-    {
-        $client = \AWS::createClient('s3');
-
-        $bucket_name = 'product-photos';
-        
-        $objectsListResponse = $client->listObjects(['Bucket' => $bucket_name]);
-        $objects = $objectsListResponse['Contents'] ?? [];
-        foreach ($objects as $object) {
-            $object_content = $client->getObject(['Bucket' => $bucket_name, 'Key' => $object['Key']]);
-            
-            file_put_contents(public_path('storage/products' . '/' . $object['Key']), $object_content['Body']->getContents());
-        }
-    }
 }

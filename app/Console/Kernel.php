@@ -93,6 +93,10 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('backup:clean')->daily()->at('12:30');
         $schedule->command('backup:run --only-db')->daily()->at('01:30');
+        $schedule->command('create:backup --bucket=product-photos --days=1')->daily()->at('2:00');
+        $schedule->command('create:backup --bucket=product-thumbnails --days=1')->daily()->at('2:15');
+        $schedule->command('create:backup --bucket=profile-photos --days=1')->daily()->at('2:30');
+        $schedule->command('create:backup --bucket=verification-photos --days=1')->daily()->at('2:45');
          
     }
 
