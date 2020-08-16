@@ -53,6 +53,10 @@ COPY ./start.sh  /usr/local/bin/start
 
 RUN  chmod u+x /usr/local/bin/start
 
+RUN mkdir -p /storage/framework/{sessions,views,cache}
+
+RUN chown -R www-data:www-data storage
+
 #COPY ./ssl.crt /etc/apache2/ssl/ssl.crt
 #COPY ./ssl.key /etc/apache2/ssl/ssl.key
 
