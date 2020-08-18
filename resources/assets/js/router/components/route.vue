@@ -441,9 +441,12 @@ export default {
         self.createCookie("downloadAppModal", true, 60 * 24);
       });
 
-      if (this.isDeviceMobile() && !this.isOsIOS() && this.userId) {
+      if (this.isDeviceMobile() && !this.isOsIOS()) {
         if (this.getAndroidVersion() >= 5) {
-          if (!this.checkCookie()) {
+          if (window.location.pathname == "/" && !this.iswebview) {
+            this.isConditionSatisfied = true;
+          }
+          if (!this.checkCookie() && this.userId && !this.iswebview) {
             setTimeout(() => {
               $("#download-app-modal").modal("show");
             }, 100);
