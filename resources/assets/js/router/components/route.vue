@@ -159,12 +159,7 @@
                 v-text="'عضویت در گروه'"
               ></a>
 
-              <a
-                href="#"
-                class="btn green-button bg-gray"
-                data-dismiss="modal"
-                v-text="'انصراف'"
-              ></a>
+              <a href="#" class="btn green-button bg-gray" data-dismiss="modal" v-text="'انصراف'"></a>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -190,15 +185,9 @@
               <br />
               <p class="main-pop-up" v-text="elevatorText"></p>
 
-              <a href class="btn green-button bg-gray" data-dismiss="modal"
-                >متوجه شدم</a
-              >
+              <a href class="btn green-button bg-gray" data-dismiss="modal">متوجه شدم</a>
 
-              <a
-                :href="'/payment/elevator/' + productId"
-                class="btn green-button"
-                >خرید نردبان</a
-              >
+              <a :href="'/payment/elevator/' + productId" class="btn green-button">خرید نردبان</a>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -221,7 +210,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <a class="close-modal" data-dismis="modal">
+              <a class="close-modal" data-dismiss="modal">
                 <i class="fa fa-times"></i>
               </a>
 
@@ -229,11 +218,9 @@
             </div>
             <div class="modal-body col-xs-12">
               <div class="download-app-logo-wrapper">
-                <img src="../../../img/logo/mobile-logo.svg" alt="" />
+                <img src="../../../img/logo/mobile-logo.svg" alt />
               </div>
-              <h3>
-                اپلیکیشن باسکول
-              </h3>
+              <h3>اپلیکیشن باسکول</h3>
               <p>
                 با دانلود اپلیکیشن باسکول به راحتی و با دسترسی سریع تر می توانید
                 معامله کنید
@@ -288,10 +275,7 @@
 
     <!-- add android app download  -->
 
-    <div
-      v-if="isConditionSatisfied"
-      class="android-download-alert-wrapper hidden-lg hidden-md"
-    >
+    <div v-if="isConditionSatisfied" class="android-download-alert-wrapper hidden-lg hidden-md">
       <button
         class="close-android-download-alert-wrapper"
         @click.prevent="isConditionSatisfied = false"
@@ -434,6 +418,7 @@ export default {
       return match ? match[1] : undefined;
     },
     doDownload: function () {
+      $("#download-app-modal").modal("hide");
       //ga
       this.registerComponentStatistics(
         "download",
@@ -441,7 +426,7 @@ export default {
         "download app btn in popUp"
       );
       // code here
-      this.createCookie("downloadAppModal", true, 60 * 24);
+
       window.location.href = "/download/app";
     },
     isOsIOS: function () {
@@ -451,7 +436,12 @@ export default {
       return ios;
     },
     activateDownloadApp: function () {
-      if (this.isDeviceMobile() && !this.isOsIOS()) {
+      let self = this;
+      $("#download-app-modal").on("hidden.bs.modal", function () {
+        self.createCookie("downloadAppModal", true, 60 * 24);
+      });
+
+      if (this.isDeviceMobile() && !this.isOsIOS() && this.userId) {
         if (this.getAndroidVersion() >= 5) {
           if (!this.checkCookie()) {
             setTimeout(() => {
@@ -986,6 +976,7 @@ export default {
   },
   mounted() {
     this.activateDownloadApp();
+
     // eventBus.$emit("globalVerifiedBadgeContents", this.verifiedUserContent);
     eventBus.$emit("globalVerifiedBadgeContents", 1);
   },
