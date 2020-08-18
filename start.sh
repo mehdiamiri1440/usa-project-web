@@ -2,7 +2,7 @@
 
 set -e
 
-role=${CONTAINER_ROLE:-app}
+role=${CONTAINER_ROLE:app}
 env=${APP_ENV:-production}
 
 if [ "$role" = "app" ]; then
