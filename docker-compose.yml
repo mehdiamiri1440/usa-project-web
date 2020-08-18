@@ -50,20 +50,20 @@ services:
     volumes:
       - .:/var/www/html
     ports:
-      - 5050:4040
+      - 5050:4576
     #   - 4403:443
     labels:
         #### Labels define the behavior and rules of the traefik proxy for this container ####
       - "traefik.enable=true" # <== Enable traefik to proxy this container
-      - "traefik.http.routers.nginx-web.rule=Host(`app.localhost`)" # <== Your Domain Name goes here for the http rule
-      - "traefik.http.routers.nginx-web.entrypoints=web" # <== Defining the entrypoint for http, **ref: line 30
+      - "traefik.http.routers.nginx.rule=Host(`app.localhost`)" # <== Your Domain Name goes here for the http rule
+      - "traefik.http.routers.nginx.entrypoints=web" # <== Defining the entrypoint for http, **ref: line 30
       #- "traefik.http.routers.nginx-web.middlewares=redirect@file" # <== This is a middleware to redirect to https
       #- "traefik.http.routers.nginx-secured.rule=Host(`example.com`)" # <== Your Domain Name for the https rule 
       #- "traefik.http.routers.nginx-secured.entrypoints=web-secured" # <== Defining entrypoint for https, **ref: line 31
       #- "traefik.http.routers.nginx-secured.tls.certresolver=mytlschallenge" # <== Defining certsresolvers for https
     networks:
-      - backend
       - web
+      - backend
   mysql-db:
     image: mysql:5.6
     container_name: mysql-db
