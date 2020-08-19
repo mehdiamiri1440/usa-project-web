@@ -442,7 +442,7 @@ export default {
       );
       // code here
       this.createCookie("downloadAppModal", true, 60 * 24);
-      window.location.href = "/download/app";
+      window.location.href = "https://app-download.s3.ir-thr-at1.arvanstorage.com/buskool.apk";
     },
     isOsIOS: function () {
       var userAgent = window.navigator.userAgent.toLowerCase(),
@@ -451,9 +451,16 @@ export default {
       return ios;
     },
     activateDownloadApp: function () {
+      let self = this;
+      $("#download-app-modal").on("hidden.bs.modal", function () {
+        self.createCookie("downloadAppModal", true, 60 * 24);
+      });
       if (this.isDeviceMobile() && !this.isOsIOS()) {
         if (this.getAndroidVersion() >= 5) {
-          if (!this.checkCookie()) {
+          if (window.location.pathname == "/" && !this.iswebview) {
+            this.isConditionSatisfied = true;
+          }
+          if (!this.checkCookie() && this.userId && !this.iswebview) {
             setTimeout(() => {
               $("#download-app-modal").modal("show");
             }, 100);
