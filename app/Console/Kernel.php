@@ -28,6 +28,7 @@ class Kernel extends ConsoleKernel
         Commands\createProductThumbnails::class,
         Commands\backupUserFiles::class,
         Commands\downloadMediaFromCloud::class,
+        Commands\takeBlogBackup::class,
     ];
 
     /**
