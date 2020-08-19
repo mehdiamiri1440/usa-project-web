@@ -44,6 +44,98 @@
 
   z-index: 1021;
 }
+
+.modal-dialog {
+  width: 400px;
+}
+.modal-content {
+  overflow: hidden;
+  border-radius: 12px;
+}
+.close-modal {
+  font-size: 20px;
+
+  color: #777;
+
+  position: absolute;
+
+  right: 0;
+
+  padding: 8px 15px 2px;
+
+  top: 0;
+}
+
+.modal-title {
+  font-size: 16px;
+
+  font-weight: 800;
+
+  color: #474747;
+
+  text-align: center;
+}
+
+.modal-header {
+  padding: 9px 15px 10px;
+}
+
+.modal-body {
+  padding: 0 15px;
+}
+
+.download-app-logo-wrapper {
+  width: 73px;
+  margin: 0 auto;
+}
+
+#download-app-modal .modal-body {
+  padding-top: 100px;
+  text-align: center;
+}
+
+#download-app-modal h3 {
+  font-size: 23px;
+  color: #666;
+  margin-top: 5px;
+}
+
+#download-app-modal .modal-body p {
+  font-size: 15px;
+  font-weight: bold;
+  color: #7e7e7e;
+  margin: 20px 0;
+  line-height: 1.618;
+}
+
+#download-app-modal .modal-body a {
+  background: #00c569;
+  color: #fff;
+  border-radius: 10px;
+  padding: 12px 0;
+  font-size: 20px;
+  max-width: 350px;
+  display: block;
+  margin: 50px auto;
+}
+@media screen and (max-width: 768px) {
+  #download-app-modal > div {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .modal-content {
+    min-height: 100%;
+
+    border-radius: 0;
+
+    border: none;
+
+    float: right;
+
+    width: 100%;
+  }
+}
 </style>
 
 <template>
@@ -67,7 +159,12 @@
                 v-text="'عضویت در گروه'"
               ></a>
 
-              <a href="#" class="btn green-button bg-gray" data-dismiss="modal" v-text="'انصراف'"></a>
+              <a
+                href="#"
+                class="btn green-button bg-gray"
+                data-dismiss="modal"
+                v-text="'انصراف'"
+              ></a>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -93,9 +190,15 @@
               <br />
               <p class="main-pop-up" v-text="elevatorText"></p>
 
-              <a href class="btn green-button bg-gray" data-dismiss="modal">متوجه شدم</a>
+              <a href class="btn green-button bg-gray" data-dismiss="modal"
+                >متوجه شدم</a
+              >
 
-              <a :href="'/payment/elevator/' + productId" class="btn green-button">خرید نردبان</a>
+              <a
+                :href="'/payment/elevator/' + productId"
+                class="btn green-button"
+                >خرید نردبان</a
+              >
             </div>
           </div>
           <!-- /.modal-content -->
@@ -105,6 +208,48 @@
     </div>
 
     <!-- end regex elevator modal -->
+
+    <!--  #regex download App modal  -->
+
+    <div class="container">
+      <div
+        id="download-app-modal"
+        class="download-app-modal modal fade"
+        tabindex="-1"
+        role="dialog"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <a class="close-modal" data-dismis="modal">
+                <i class="fa fa-times"></i>
+              </a>
+
+              <div class="modal-title">دانلود اپلیکیشن باسکول</div>
+            </div>
+            <div class="modal-body col-xs-12">
+              <div class="download-app-logo-wrapper">
+                <img src="../../../img/logo/mobile-logo.svg" alt="" />
+              </div>
+              <h3>
+                اپلیکیشن جدید باسکول
+              </h3>
+              <p>
+                برای دسترسی سریعتر و راحت تر به خریداران و فروشندگان عمده برنامه جدید باسکول را نصب کنید.
+              </p>
+              <a href="" @click.prevent="doDownload()">
+                دانلود اپلیکیشن باسکول
+                <i class="fa fa-download"></i>
+              </a>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+    </div>
+
+    <!-- end regex download App modal  -->
 
     <chat-modal />
 
@@ -142,7 +287,10 @@
 
     <!-- add android app download  -->
 
-    <div v-if="isConditionSatisfied" class="android-download-alert-wrapper hidden-lg hidden-md">
+    <div
+      v-if="isConditionSatisfied"
+      class="android-download-alert-wrapper hidden-lg hidden-md"
+    >
       <button
         class="close-android-download-alert-wrapper"
         @click.prevent="isConditionSatisfied = false"
@@ -171,9 +319,9 @@ export default {
   components: {
     ChatModal,
     ReportModal,
-    ReviewModal
+    ReviewModal,
   },
-  data: function() {
+  data: function () {
     return {
       iswebview: navigator.userAgent == "webView" ? true : false,
       isConditionSatisfied: false,
@@ -188,7 +336,7 @@ export default {
       reviewUserData: "",
       reviewUserPrfileId: "",
       verifiedUserContent:
-        "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>"
+        "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>",
     };
   },
   props: [
@@ -198,62 +346,59 @@ export default {
     "storagePath",
     "profilePhoto",
     "userFullName",
-    "userLogoutPath"
+    "userLogoutPath",
   ],
-  created: function() {
+  created: function () {
     window.localStorage.setItem("userId", this.userId);
     window.localStorage.setItem("userType", this.isSeller);
 
-    eventBus.$on("elevatorText", $event => {
+    eventBus.$on("elevatorText", ($event) => {
       this.elevatorText = $event;
     });
 
-    eventBus.$on("productId", $event => {
+    eventBus.$on("productId", ($event) => {
       this.productId = $event;
     });
 
-    eventBus.$on("joinGroupId", $event => {
+    eventBus.$on("joinGroupId", ($event) => {
       this.joinGroupId = $event;
     });
-    eventBus.$on("joinGroupMessage", $event => {
+    eventBus.$on("joinGroupMessage", ($event) => {
       this.joinGroupMessage = $event;
     });
 
-    eventBus.$on("activeContactId", $event => {
+    eventBus.$on("activeContactId", ($event) => {
       this.activeContactId = $event;
     });
 
-    eventBus.$on("reoprtModal", $event => {
+    eventBus.$on("reoprtModal", ($event) => {
       this.reportedUserId = $event;
       $("#report-modal").modal("show");
     });
-    eventBus.$on("reviewUserData", $event => {
+    eventBus.$on("reviewUserData", ($event) => {
       this.reviewUserData = $event;
       this.reviewUserPrfileId = $event.id;
       $("#review-modal").modal("show");
     });
 
-    eventBus.$on("modal", $event => {
+    eventBus.$on("modal", ($event) => {
       this.openRelatedSwalModal($event);
     });
 
     let self = this;
 
     $(document).on("mouseleave", function () {
-       if(!self.userId){
-         if(!window.localStorage.getItem('guideShowed')){
-           self.openRelatedSwalModal('guide');
+      if (!self.userId) {
+        if (!window.localStorage.getItem("guideShowed")) {
+          self.openRelatedSwalModal("guide");
 
-           window.localStorage.setItem('guideShowed',true);
-         }
-         
-       }
+          window.localStorage.setItem("guideShowed", true);
+        }
+      }
     });
 
-    
-
     if (messaging) {
-      messaging.onMessage(function(payload) {
+      messaging.onMessage(function (payload) {
         if (payload.notification.tag == "buskool") {
           if (!self.activeContactId) {
             eventBus.$emit("messageCount", 1);
@@ -267,7 +412,7 @@ export default {
   },
   router,
   methods: {
-    isDeviceMobile: function() {
+    isDeviceMobile: function () {
       if (
         navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -282,12 +427,12 @@ export default {
         return false;
       }
     },
-    getAndroidVersion: function(ua) {
+    getAndroidVersion: function (ua) {
       ua = (ua || navigator.userAgent).toLowerCase();
       var match = ua.match(/android\s([0-9\.]*)/);
       return match ? match[1] : undefined;
     },
-    doDownload: function() {
+    doDownload: function () {
       //ga
       this.registerComponentStatistics(
         "download",
@@ -295,20 +440,29 @@ export default {
         "download app btn in popUp"
       );
       // code here
-      Cookies.set("appDownloaded", true);
-      window.location.href = "/download/app";
+      this.createCookie("downloadAppModal", true, 60 * 24);
+      window.location.href = "https://app-download.s3.ir-thr-at1.arvanstorage.com/buskool.apk";
     },
-    isOsIOS: function() {
+    isOsIOS: function () {
       var userAgent = window.navigator.userAgent.toLowerCase(),
         safari = /safari/.test(userAgent),
         ios = /iphone|ipod|ipad/.test(userAgent);
       return ios;
     },
-    activateDownloadApp: function() {
-      if (!this.iswebview && this.isDeviceMobile() && !this.isOsIOS()) {
-        if (this.getAndroidVersion() >= 4.4) {
-          if (window.location.pathname == "/") {
+    activateDownloadApp: function () {
+      let self = this;
+      $("#download-app-modal").on("hidden.bs.modal", function () {
+        self.createCookie("downloadAppModal", true, 60 * 24);
+      });
+      if (this.isDeviceMobile() && !this.isOsIOS()) {
+        if (this.getAndroidVersion() >= 5) {
+          if (window.location.pathname != "/buyer/messenger/contacts" && window.location.pathname != "/seller/messenger/contacts" && !this.iswebview) {
             this.isConditionSatisfied = true;
+          }
+          if (!this.checkCookie() && this.userId && !this.iswebview) {
+            setTimeout(() => {
+              $("#download-app-modal").modal("show");
+            }, 100);
           }
         }
       }
@@ -316,30 +470,34 @@ export default {
     closeGlobalChatBox() {
       eventBus.$emit("ChatBoxStatus", false);
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
     },
-    subscribeUserToGroup: function() {
+    subscribeUserToGroup: function () {
       var self = this;
       var groupId = this.joinGroupId;
       axios
         .post("/group/subscribe_user", {
-          group_id: groupId
+          group_id: groupId,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.popUpMsg = "شما با موفقییت در گروه عضو شدید";
           eventBus.$emit("submitSuccess", self.popUpMsg);
           $("#custom-main-modal").modal("show");
           eventBus.$emit("reloadAllGroupLists", true);
         });
     },
-    extractSenderIdFromTag: function(tag) {
+    extractSenderIdFromTag: function (tag) {
       return tag.split("FCM")[1];
     },
-    openRelatedSwalModal: function(modalName) {
+    openRelatedSwalModal: function (modalName) {
       switch (modalName) {
         case "sendMsg":
           this.raiseSendMessageModal();
@@ -382,7 +540,7 @@ export default {
           break;
       }
     },
-    raiseSendMessageModal: function() {
+    raiseSendMessageModal: function () {
       let self = this;
 
       this.handleBackBtn();
@@ -395,14 +553,14 @@ export default {
         buttons: {
           success: {
             text: "ورود سریع / ثبت نام",
-            value: "register"
+            value: "register",
           },
           close: {
             text: "بستن",
-            className: "bg-cancel"
-          }
-        }
-      }).then(value => {
+            className: "bg-cancel",
+          },
+        },
+      }).then((value) => {
         switch (value) {
           case "register":
             self.$router.push({ name: "register" });
@@ -414,7 +572,7 @@ export default {
         }
       });
     },
-    raiseElevatorModal: function() {
+    raiseElevatorModal: function () {
       let self = this;
 
       this.handleBackBtn();
@@ -430,14 +588,14 @@ export default {
         buttons: {
           success: {
             text: "پرداخت",
-            value: "pay"
+            value: "pay",
           },
           close: {
             text: "بستن",
-            className: "bg-cancel"
-          }
-        }
-      }).then(value => {
+            className: "bg-cancel",
+          },
+        },
+      }).then((value) => {
         switch (value) {
           case "pay":
             window.location.href = "/payment/elevator/" + self.productId;
@@ -446,7 +604,7 @@ export default {
         }
       });
     },
-    raiseDeleteProductModal: function() {
+    raiseDeleteProductModal: function () {
       let self = this;
 
       this.handleBackBtn();
@@ -460,24 +618,24 @@ export default {
           delete: {
             text: "حذف کن",
             value: "delete",
-            className: "bg-red"
+            className: "bg-red",
           },
           reject: {
-            text: "انصراف"
+            text: "انصراف",
           },
           close: {
             text: "بستن",
-            className: "bg-cancel"
-          }
-        }
-      }).then(value => {
+            className: "bg-cancel",
+          },
+        },
+      }).then((value) => {
         switch (value) {
           case "delete":
             axios
               .post("/delete_product_by_id", {
-                product_id: self.productId
+                product_id: self.productId,
               })
-              .then(function(response) {
+              .then(function (response) {
                 swal({
                   title: "حذف شد",
                   text: "محصول شما از لیست محصولات باسکول حذف شد.",
@@ -487,10 +645,10 @@ export default {
                     close: {
                       text: "بستن",
                       value: "close",
-                      className: "bg-cancel"
-                    }
-                  }
-                }).then(value => {
+                      className: "bg-cancel",
+                    },
+                  },
+                }).then((value) => {
                   if (value == "close") {
                     window.location.reload();
                   }
@@ -502,7 +660,7 @@ export default {
                   "product-deleted-successfully"
                 );
               })
-              .catch(function(err) {
+              .catch(function (err) {
                 console.log(err);
                 self.registerComponentStatistics(
                   "product",
@@ -519,9 +677,9 @@ export default {
                     close: {
                       text: "بستن",
                       value: "close",
-                      className: "bg-cancel"
-                    }
-                  }
+                      className: "bg-cancel",
+                    },
+                  },
                 });
               });
 
@@ -529,7 +687,7 @@ export default {
         }
       });
     },
-    raiseProductEditSuccessModal: function() {
+    raiseProductEditSuccessModal: function () {
       this.handleBackBtn();
       swal({
         title: "ویرایش محصول",
@@ -539,12 +697,12 @@ export default {
         buttons: {
           close: {
             text: "بستن",
-            className: "bg-cancel"
-          }
-        }
+            className: "bg-cancel",
+          },
+        },
       });
     },
-    raiseUserRegisterSuccessModal: function() {
+    raiseUserRegisterSuccessModal: function () {
       this.handleBackBtn();
       swal({
         title: "ثبت نام موفق",
@@ -554,12 +712,12 @@ export default {
         buttons: {
           close: {
             text: "بستن",
-            className: "bg-cancel"
-          }
-        }
+            className: "bg-cancel",
+          },
+        },
       });
     },
-    raiseRegisterProductLimitModal: function() {
+    raiseRegisterProductLimitModal: function () {
       let self = this;
 
       this.handleBackBtn();
@@ -576,14 +734,14 @@ export default {
           success: {
             text: "افزایش ظرفیت",
             value: "promote",
-            className: "button-new-badge"
+            className: "button-new-badge",
           },
           close: {
             text: "بستن",
-            className: "bg-cancel"
-          }
-        }
-      }).then(value => {
+            className: "bg-cancel",
+          },
+        },
+      }).then((value) => {
         switch (value) {
           case "promote":
             self.$router.push({ name: "dashboardProductPricing" });
@@ -591,7 +749,7 @@ export default {
         }
       });
     },
-    raiseBuyAdReplyLimitModal: function() {
+    raiseBuyAdReplyLimitModal: function () {
       let self = this;
 
       this.handleBackBtn();
@@ -608,14 +766,14 @@ export default {
           success: {
             text: "افزایش ظرفیت",
             value: "promote",
-            className: "button-new-badge"
+            className: "button-new-badge",
           },
           close: {
             text: "بستن",
-            className: "bg-cancel"
-          }
-        }
-      }).then(value => {
+            className: "bg-cancel",
+          },
+        },
+      }).then((value) => {
         switch (value) {
           case "promote":
             self.$router.push({ name: "dashboardBuyAdPricing" });
@@ -623,7 +781,7 @@ export default {
         }
       });
     },
-    raiseProfileEditSuccessModal: function() {
+    raiseProfileEditSuccessModal: function () {
       this.handleBackBtn();
       swal({
         title: "ویرایش پروفایل",
@@ -634,12 +792,12 @@ export default {
         buttons: {
           close: {
             text: "بستن",
-            className: "bg-cancel"
-          }
-        }
+            className: "bg-cancel",
+          },
+        },
       });
     },
-    raisePasswordResetSuccessModal: function() {
+    raisePasswordResetSuccessModal: function () {
       this.handleBackBtn();
       swal({
         title: "بازیابی کلمه عبور",
@@ -649,12 +807,12 @@ export default {
         buttons: {
           close: {
             text: "بستن",
-            className: "bg-cancel"
-          }
-        }
+            className: "bg-cancel",
+          },
+        },
       });
     },
-    raiseGuideModal: function() {
+    raiseGuideModal: function () {
       let self = this;
 
       this.handleBackBtn();
@@ -667,18 +825,18 @@ export default {
         buttons: {
           buyer: {
             text: "خریدارم",
-            value: "buyer"
+            value: "buyer",
           },
           seller: {
             text: "فروشنده ام",
-            value: "seller"
+            value: "seller",
           },
           close: {
             text: "بستن",
-            className: "bg-cancel"
-          }
-        }
-      }).then(value => {
+            className: "bg-cancel",
+          },
+        },
+      }).then((value) => {
         switch (value) {
           case "buyer":
             self.$router.push({ name: "mainRegisterRequest" });
@@ -689,7 +847,7 @@ export default {
         }
       });
     },
-    raiseDeleteUserCommentModal: function() {
+    raiseDeleteUserCommentModal: function () {
       let self = this;
 
       this.handleBackBtn();
@@ -704,17 +862,17 @@ export default {
           delete: {
             text: "حذف کن",
             value: "delete",
-            className: "bg-red"
+            className: "bg-red",
           },
           reject: {
-            text: "انصراف"
+            text: "انصراف",
           },
           close: {
             text: "بستن",
-            className: "bg-cancel"
-          }
-        }
-      }).then(value => {
+            className: "bg-cancel",
+          },
+        },
+      }).then((value) => {
         switch (value) {
           case "delete":
             self.$router.push({ name: "mainRegisterRequest" });
@@ -722,23 +880,23 @@ export default {
         }
       });
     },
-    raiseVerificationUploadSuccessModal: function(){
-        this.handleBackBtn();
-        swal({
-          title: "احراز هویت",
-          text:
-            "اطلاعات شما با موفقیت ارسال شد. در صورت تایید کارشناسان باسکول نشان احراز هویت به حساب کاربری شما داده می شود.",
-          className: "custom-swal-with-cancel",
-          icon: "success",
-          buttons: {
-            close: {
-              text: "بستن",
-              className: "bg-cancel"
-            }
-          }
-        });
+    raiseVerificationUploadSuccessModal: function () {
+      this.handleBackBtn();
+      swal({
+        title: "احراز هویت",
+        text:
+          "اطلاعات شما با موفقیت ارسال شد. در صورت تایید کارشناسان باسکول نشان احراز هویت به حساب کاربری شما داده می شود.",
+        className: "custom-swal-with-cancel",
+        icon: "success",
+        buttons: {
+          close: {
+            text: "بستن",
+            className: "bg-cancel",
+          },
+        },
+      });
     },
-    raiseGoldenBuyAdReplyLimitModal: function() {
+    raiseGoldenBuyAdReplyLimitModal: function () {
       let self = this;
 
       this.handleBackBtn();
@@ -758,10 +916,10 @@ export default {
           },
           close: {
             text: "بستن",
-            className: "bg-cancel"
-          }
-        }
-      }).then(value => {
+            className: "bg-cancel",
+          },
+        },
+      }).then((value) => {
         switch (value) {
           case "promote":
             self.$router.push({ name: "dashboardPricingTableSeller" });
@@ -769,17 +927,17 @@ export default {
         }
       });
     },
-    isModalOpen: function() {
+    isModalOpen: function () {
       return swal.getState().isOpen;
     },
-    handleBackBtn: function() {
+    handleBackBtn: function () {
       var self = this;
 
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
 
-      $(window).on("popstate", function(e) {
+      $(window).on("popstate", function (e) {
         if (self.isModalOpen()) {
           swal.close();
           window.localStorage.removeItem("contact"); // it's been set before modal openning
@@ -789,22 +947,53 @@ export default {
         }
       });
     },
-    isUserAuthorizedToPostComment: function() {
+    isUserAuthorizedToPostComment: function () {
       let self = this;
       let userObg = {
-        user_id: this.reviewUserPrfileId
+        user_id: this.reviewUserPrfileId,
       };
       axios
         .post("/profile/is-user-authorized-to-post-comment", userObg)
-        .then(function(response) {
+        .then(function (response) {
           eventBus.$emit("userAllowedReview", response.data.is_allowed);
         });
-    }
+    },
+    createCookie: function (name, value, minutes) {
+      if (minutes) {
+        var date = new Date();
+        date.setTime(date.getTime() + minutes * 60 * 1000);
+        var expires = "; expires=" + date.toGMTString();
+      } else {
+        var expires = "";
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
+    },
+    getCookie: function (cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    },
+    checkCookie: function () {
+      if (!!this.getCookie("downloadAppModal")) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
   mounted() {
     this.activateDownloadApp();
     // eventBus.$emit("globalVerifiedBadgeContents", this.verifiedUserContent);
     eventBus.$emit("globalVerifiedBadgeContents", 1);
-  }
+  },
 };
 </script>
