@@ -917,9 +917,7 @@ Route::post('/get_wp_posts', [
     'as' => 'get_wp_posts',
 ]);
 
-Route::get('/sendsms',function(){
-    sendSMS::dispatch('09118413054',20691);
-});
+
 // Route::group(['middleware' => [cors::class]], function () {
 //     Route::options('/broadcastAuth', function () {
 //         return response('OK', \Illuminate\Http\Response::HTTP_NO_CONTENT)
