@@ -159,12 +159,7 @@
                 v-text="'عضویت در گروه'"
               ></a>
 
-              <a
-                href="#"
-                class="btn green-button bg-gray"
-                data-dismiss="modal"
-                v-text="'انصراف'"
-              ></a>
+              <a href="#" class="btn green-button bg-gray" data-dismiss="modal" v-text="'انصراف'"></a>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -190,15 +185,9 @@
               <br />
               <p class="main-pop-up" v-text="elevatorText"></p>
 
-              <a href class="btn green-button bg-gray" data-dismiss="modal"
-                >متوجه شدم</a
-              >
+              <a href class="btn green-button bg-gray" data-dismiss="modal">متوجه شدم</a>
 
-              <a
-                :href="'/payment/elevator/' + productId"
-                class="btn green-button"
-                >خرید نردبان</a
-              >
+              <a :href="'/payment/elevator/' + productId" class="btn green-button">خرید نردبان</a>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -221,7 +210,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <a class="close-modal" data-dismis="modal">
+              <a class="close-modal" data-dismiss="modal">
                 <i class="fa fa-times"></i>
               </a>
 
@@ -229,15 +218,11 @@
             </div>
             <div class="modal-body col-xs-12">
               <div class="download-app-logo-wrapper">
-                <img src="../../../img/logo/mobile-logo.svg" alt="" />
+                <img src="../../../img/logo/mobile-logo.svg" alt />
               </div>
-              <h3>
-                اپلیکیشن جدید باسکول
-              </h3>
-              <p>
-                برای دسترسی سریعتر و راحت تر به خریداران و فروشندگان عمده برنامه جدید باسکول را نصب کنید.
-              </p>
-              <a href="" @click.prevent="doDownload()">
+              <h3>اپلیکیشن جدید باسکول</h3>
+              <p>برای دسترسی سریعتر و راحت تر به خریداران و فروشندگان عمده برنامه جدید باسکول را نصب کنید.</p>
+              <a href @click.prevent="doDownload()">
                 دانلود اپلیکیشن باسکول
                 <i class="fa fa-download"></i>
               </a>
@@ -287,10 +272,7 @@
 
     <!-- add android app download  -->
 
-    <div
-      v-if="isConditionSatisfied"
-      class="android-download-alert-wrapper hidden-lg hidden-md"
-    >
+    <div v-if="isConditionSatisfied" class="android-download-alert-wrapper hidden-lg hidden-md">
       <button
         class="close-android-download-alert-wrapper"
         @click.prevent="isConditionSatisfied = false"
@@ -441,7 +423,8 @@ export default {
       );
       // code here
       this.createCookie("downloadAppModal", true, 60 * 24);
-      window.location.href = "https://app-download.s3.ir-thr-at1.arvanstorage.com/buskool.apk";
+      window.location.href =
+        "https://app-download.s3.ir-thr-at1.arvanstorage.com/buskool.apk";
     },
     isOsIOS: function () {
       var userAgent = window.navigator.userAgent.toLowerCase(),
@@ -451,18 +434,26 @@ export default {
     },
     activateDownloadApp: function () {
       let self = this;
+      $("#download-app-modal").on("show.bs.modal", (e) => {
+        this.handleBackKeys();
+      });
       $("#download-app-modal").on("hidden.bs.modal", function () {
         self.createCookie("downloadAppModal", true, 60 * 24);
       });
       if (this.isDeviceMobile() && !this.isOsIOS()) {
         if (this.getAndroidVersion() >= 5) {
-          if (window.location.pathname != "/buyer/messenger/contacts" && window.location.pathname != "/seller/messenger/contacts" && !this.iswebview) {
+          if (
+            window.location.pathname != "/buyer/messenger/contacts" &&
+            window.location.pathname != "/seller/messenger/contacts" &&
+            window.location.pathname != "/seller/buyAd-requests" &&
+            !this.iswebview
+          ) {
             this.isConditionSatisfied = true;
           }
           if (!this.checkCookie() && this.userId && !this.iswebview) {
             setTimeout(() => {
               $("#download-app-modal").modal("show");
-            }, 100);
+            }, 5000);
           }
         }
       }
@@ -945,6 +936,14 @@ export default {
           window.localStorage.removeItem("pathname");
           // window.location.href = window.location.pathname;
         }
+      });
+    },
+    handleBackKeys: function () {
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $("#download-app-modal").modal("hide");
       });
     },
     isUserAuthorizedToPostComment: function () {
