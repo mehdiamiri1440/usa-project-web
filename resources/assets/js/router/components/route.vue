@@ -457,7 +457,7 @@ export default {
       });
       if (this.isDeviceMobile() && !this.isOsIOS()) {
         if (this.getAndroidVersion() >= 5) {
-          if (window.location.pathname == "/" && !this.iswebview) {
+          if (window.location.pathname != "/buyer/messenger/contacts" && window.location.pathname != "/seller/messenger/contacts" && !this.iswebview) {
             this.isConditionSatisfied = true;
           }
           if (!this.checkCookie() && this.userId && !this.iswebview) {
