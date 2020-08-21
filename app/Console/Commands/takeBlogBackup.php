@@ -19,7 +19,7 @@ class takeBlogBackup extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'usage: php artisan blog:backup --fullpath=blog/full/real/path';
 
     /**
      * Create a new command instance.
