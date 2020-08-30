@@ -26,6 +26,8 @@ services:
           ## Entrypoints Settings - https://docs.traefik.io/routing/entrypoints/#configuration ##
         - --entrypoints.web.address=:80 # <== Defining an entrypoint for port :80 named web
         - --entrypoints.web-secured.address=:443 # <== Defining an entrypoint for https on port :443 named web-secured
+        - --entrypoints.web.http.redirections.entryPoint.to=web-secured
+        - --entrypoints.web.http.redirections.entryPoint.scheme=https
           ## Certificate Settings (Let's Encrypt) -  https://docs.traefik.io/https/acme/#configuration-examples ##
        # - --certificatesresolvers.mytlschallenge.acme.tlschallenge=true # <== Enable TLS-ALPN-01 to generate and renew ACME certs
        # - --certificatesresolvers.mytlschallenge.acme.email=theafkdeveloper@gmail.com # <== Setting email for certs
@@ -51,11 +53,11 @@ services:
         - "traefik.http.routers.api.entrypoints=web"
         # - "traefik.http.routers.api.service=api@internal"
         # middleware redirect
-        - "traefik.http.middlewares.api-secured.redirectscheme.scheme=https"
+        # - "traefik.http.middlewares.api-secured.redirectscheme.scheme=https"
       # global redirect to https
-        - "traefik.http.routers.redirs.rule=hostregexp(`{alidelkhosh.ir:.+}`)"
-        - "traefik.http.routers.redirs.entrypoints=web"
-        - "traefik.http.routers.redirs.middlewares=redirect-to-https"
+        # - "traefik.http.routers.redirs.rule=hostregexp(`{alidelkhosh.ir:.+}`)"
+        # - "traefik.http.routers.redirs.entrypoints=web"
+        # - "traefik.http.routers.redirs.middlewares=redirect-to-https"
       # global http compressor
         - "traefik.http.middlewares.packet-compressor.compress=true"
         - "traefik.http.middlewares.testHeader.headers.customrequestheaders.X-Forwarded-Proto=https"
