@@ -158,7 +158,7 @@ services:
       - backend
 
   blog:
-    image: wordpress
+    image: wordpress:php7.2
     container_name: blog
     depends_on:
       - mysql-db
@@ -176,7 +176,7 @@ services:
         #### Labels define the behavior and rules of the traefik proxy for this container ####
       - "traefik.enable=true" # <== Enable traefik to proxy this container
       - "traefik.http.routers.nginx-blog-secured.tls=true"
-      # - "traefik.http.routers.nginx-blog-web.rule=Host(`blog.alidelkhosh.ir`)" # <== Your Domain Name goes here for the http rule
+      - "traefik.http.routers.nginx-blog-web.rule=Host(`blog.alidelkhosh.ir`)" # <== Your Domain Name goes here for the http rule
       - "traefik.http.routers.nginx-blog-web.entrypoints=web" # <== Defining the entrypoint for http, **ref: line 30
    #   - "traefik.http.routers.nginx-web.middlewares=redirect@file" # <== This is a middleware to redirect to https
       - "traefik.http.routers.nginx-blog-secured.rule=Host(`blog.alidelkhosh.ir`) || Host(`www.blog.alidelkhosh.ir`)" # <== Your Domain Name for the https rule
