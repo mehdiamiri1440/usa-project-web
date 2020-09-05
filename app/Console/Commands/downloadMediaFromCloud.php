@@ -47,7 +47,31 @@ class downloadMediaFromCloud extends Command
     {
         foreach($this->buckets as $bucket_name => $path_to_save)
         {
-            $this->download_media_files_from_bucket($bucket_name,$path_to_save);
+            $client = \AWS::createClient('s3');
+            
+            $results = $client->getPaginator('ListObjects', [
+                'Bucket' => $bucket_name
+            ]);
+
+            foreach($results as $result)
+            {
+                $objects = $result['Contents'] ?? [];
+
+                $this->info("downloading $bucket_name files ...");
+                $bar = $this->output->createProgressBar(count($objects));
+
+                foreach ($objects as $object) {
+                    $object_content = $client->getObject(['Bucket' => $bucket_name, 'Key' => $object['Key']]);
+                    
+                    file_put_contents(public_path( $path_to_save . '/' . $object['Key']), $object_content['Body']->getContents());
+
+                    $bar->advance();
+                }
+
+                $bar->finish();
+            }
+
+            $this->info("downloading from $bucket_name finished.");
         }
     }
 

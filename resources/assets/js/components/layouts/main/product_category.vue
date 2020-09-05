@@ -1086,22 +1086,22 @@ export default {
   components: {
     ProductArticle,
     ProductAsideCategories,
-    searchNotFound
+    searchNotFound,
   },
   props: ["assets", "str"],
-  data: function() {
+  data: function () {
     return {
       currentUser: {
         profile: "",
-        user_info: ""
+        user_info: "",
       },
       products: {
         main: "",
         user_info: "",
         profile_info: {
-          profile_photo: ""
+          profile_photo: "",
         },
-        photos: []
+        photos: [],
       },
       searchText: "",
       provinceId: "",
@@ -1125,20 +1125,21 @@ export default {
       searchTextTimeout: null,
       headerSearchText: "",
       jsonLDObject: "",
-      sortOption: "BM"
+      sortOption: "BM",
+      verifiedUserContent: this.$parent.verifiedUserContent,
     };
   },
   methods: {
-    filterProducts: function(productsFilter) {
+    filterProducts: function (productsFilter) {
       this.products = productsFilter;
     },
-    collapseDropDown: function() {
-      $(".profile-list").fadeIn("slow", function() {
+    collapseDropDown: function () {
+      $(".profile-list").fadeIn("slow", function () {
         visible = true;
       });
     },
-    collapseDropDownList: function() {
-      $(".icon-header-list").fadeIn("slow", function() {
+    collapseDropDownList: function () {
+      $(".icon-header-list").fadeIn("slow", function () {
         visible = true;
       });
     },
@@ -1149,7 +1150,7 @@ export default {
         visible = false;
       }
     },
-    init: function() {
+    init: function () {
       this.products = {};
       this.scrollToTop();
       var self = this;
@@ -1159,13 +1160,13 @@ export default {
 
       axios
         .post("/get_category_meta_data", {
-          category_name: categoryName
+          category_name: categoryName,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.categoryMetaData = response.data.category_info;
           self.jsonLDObject = response.data.schema_object;
         });
-      axios.post("/user/profile_info").then(function(response) {
+      axios.post("/user/profile_info").then(function (response) {
         self.currentUser = response.data;
         if (searchValueText) {
           self.registerComponentStatistics(
@@ -1174,7 +1175,7 @@ export default {
             searchValueText
           );
           self.searchText = searchValueText;
-          setTimeout(function() {
+          setTimeout(function () {
             self.sidebarScroll();
           }, 500);
         } else {
@@ -1189,12 +1190,12 @@ export default {
               response_rate: self.$parent.productByResponseRate,
               to_record_number: self.productCountInPage,
               search_text: categoryName,
-              sort_by: self.sortOption
+              sort_by: self.sortOption,
             })
-            .then(function(response) {
+            .then(function (response) {
               self.products = response.data.products;
               self.loading = false;
-              setTimeout(function() {
+              setTimeout(function () {
                 self.sidebarScroll();
               }, 500);
               eventBus.$emit("submiting", false);
@@ -1220,9 +1221,9 @@ export default {
             response_rate: self.$parent.productByResponseRate,
             to_record_number: this.productCountInPage,
             search_text: this.getCategoryName(),
-            sort_by: self.sortOption
+            sort_by: self.sortOption,
           })
-          .then(function(response) {
+          .then(function (response) {
             self.products = self.products.concat(response.data.products);
 
             eventBus.$emit("submiting", false);
@@ -1231,7 +1232,7 @@ export default {
             }
 
             self.loadMoreActive = false;
-            setTimeout(function() {
+            setTimeout(function () {
               self.sidebarScroll();
             }, 500);
           });
@@ -1267,21 +1268,21 @@ export default {
 
         axios
           .post("/user/get_product_list", searchObject)
-          .then(function(response) {
+          .then(function (response) {
             self.products = self.products.concat(response.data.products);
 
             self.loadMoreActive = false;
 
-            setTimeout(function() {
+            setTimeout(function () {
               self.sidebarScroll();
             }, 500);
           })
-          .catch(function(err) {
+          .catch(function (err) {
             alert("خطایی رخ داده است. دوباره تلاش کنید.");
           });
       }
     },
-    registerRequestInSearchNotFoundCase: function() {
+    registerRequestInSearchNotFoundCase: function () {
       if (this.currentUser.profile) {
         if (this.currentUser.user_info.is_buyer) {
           window.location.href = "/buyer/register-request";
@@ -1297,14 +1298,14 @@ export default {
         $("#auth-popup").modal("show");
       }
     },
-    bottomVisible: function() {
+    bottomVisible: function () {
       const scrollY = window.scrollY;
       const visible = document.documentElement.clientHeight;
       const pageHeight = document.documentElement.scrollHeight;
       const bottomOfPage = visible + scrollY >= pageHeight;
       return bottomOfPage || pageHeight < visible;
     },
-    addProductOrRequest: function() {
+    addProductOrRequest: function () {
       if (this.currentUser.user_info) {
         if (this.currentUser.user_info.is_seller) {
           this.registerComponentStatistics(
@@ -1333,10 +1334,10 @@ export default {
         eventBus.$emit("modal", "guide");
       }
     },
-    resetFilter: function() {
+    resetFilter: function () {
       eventBus.$emit("submiting", true);
 
-      $(".box-sidebar option").prop("selected", function() {
+      $(".box-sidebar option").prop("selected", function () {
         return this.defaultSelected;
       });
 
@@ -1348,7 +1349,7 @@ export default {
 
       this.init();
     },
-    applyFilter: function() {
+    applyFilter: function () {
       var self = this;
 
       eventBus.$emit("submiting", true);
@@ -1382,21 +1383,21 @@ export default {
 
       axios
         .post("/user/get_product_list", searchObject)
-        .then(function(response) {
+        .then(function (response) {
           self.products = response.data.products;
           eventBus.$emit("submiting", false);
 
           self.scrollToTop();
 
-          setTimeout(function() {
+          setTimeout(function () {
             self.sidebarScroll();
           }, 500);
         })
-        .catch(function(err) {
+        .catch(function (err) {
           alert("خطایی رخ داده است. دوباره تلاش کنید.");
         });
     },
-    setSortOption: function(sortOption) {
+    setSortOption: function (sortOption) {
       $("#filter-modal").modal("hide");
       if (this.isDeviceMobile()) {
         history.go(-1);
@@ -1413,7 +1414,7 @@ export default {
         this.init();
       }
     },
-    isDeviceMobile: function() {
+    isDeviceMobile: function () {
       if (
         navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -1431,19 +1432,23 @@ export default {
     scrollToTop() {
       window.scrollTo(0, 0);
     },
-    stopLoader: function() {
+    stopLoader: function () {
       eventBus.$emit("isLoading", false);
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
     },
-    registerComponentExceptions: function(description, fatal = false) {
+    registerComponentExceptions: function (description, fatal = false) {
       gtag("event", "exception", {
         description: description,
-        fatal: fatal
+        fatal: fatal,
       });
     },
     sidebarScroll() {
@@ -1451,15 +1456,15 @@ export default {
       $("#main .main-content").css("min-height", sidebarHeight);
       $("#sidebar").StickySidebar({
         // Settings
-        additionalMarginTop: 120
+        additionalMarginTop: 120,
       });
     },
-    getCategoryName: function() {
+    getCategoryName: function () {
       let name = this.$route.params.categoryName;
 
       return name.split("-").join(" ");
     },
-    infiniteScrollHandler: function() {
+    infiniteScrollHandler: function () {
       let lastOffset = 0;
 
       window.onscroll = () => {
@@ -1486,11 +1491,11 @@ export default {
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
-      $(window).on("popstate", function(e) {
+      $(window).on("popstate", function (e) {
         $("#filter-modal").modal("hide");
       });
     },
-    closeSortModal: function() {
+    closeSortModal: function () {
       $("#filter-modal").modal("hide");
       history.go(-1);
     },
@@ -1500,15 +1505,15 @@ export default {
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
-      $(window).on("popstate", function(e) {
+      $(window).on("popstate", function (e) {
         $("#searchFilter").modal("hide");
       });
     },
-    closeFilterModal: function() {
+    closeFilterModal: function () {
       $("#searchFilter").modal("hide");
       history.go(-1);
     },
-    createJsonLDObject: function() {
+    createJsonLDObject: function () {
       var fullName =
         this.product.user_info.first_name +
         " " +
@@ -1521,14 +1526,14 @@ export default {
         "@context": "https://schema.org/",
         "@type": "Product",
         name: this.product.main.product_name,
-        image: this.product.photos.map(function(photo) {
+        image: this.product.photos.map(function (photo) {
           return "https://www.buskool.com/storage/" + photo.file_path;
         }),
         description: this.product.main.description,
         aggregateRating: {
           "@type": "AggregateRating",
           ratingValue: "4.4",
-          reviewCount: "3"
+          reviewCount: "3",
         },
         offers: {
           "@type": "Offer",
@@ -1539,28 +1544,28 @@ export default {
           seller: {
             "@type": "Person",
             name: fullName,
-            url: productOwnerProfilePageUrl
-          }
-        }
+            url: productOwnerProfilePageUrl,
+          },
+        },
       };
 
       return jsonDL;
     },
-    openStickyGuide: function() {
+    openStickyGuide: function () {
       eventBus.$emit("modal", "guide");
-    }
+    },
   },
   watch: {
-    "$route.params.categoryName": function(name) {
+    "$route.params.categoryName": function (name) {
       this.init();
     },
 
-    headerSearchText: function(value) {
+    headerSearchText: function (value) {
       var self = this;
 
       clearTimeout(this.searchTextTimeout);
 
-      this.searchTextTimeout = setTimeout(function() {
+      this.searchTextTimeout = setTimeout(function () {
         self.registerComponentStatistics(
           "product-list",
           "search-text",
@@ -1572,12 +1577,12 @@ export default {
         self.$router.replace({
           name: "productList",
           query: {
-            s: self.headerSearchText.replace(/ /g, "+")
-          }
+            s: self.headerSearchText.replace(/ /g, "+"),
+          },
         });
       }, 1500);
     },
-    "$parent.productByResponseRate": function() {
+    "$parent.productByResponseRate": function () {
       this.products = {};
 
       this.infiniteScrollHandler();
@@ -1593,7 +1598,7 @@ export default {
       if (bottom) {
         this.feed();
       }
-    }
+    },
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/product-list" });
@@ -1628,11 +1633,11 @@ export default {
             categoryName +
             " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان | آگاهی از آخرین قیمت " +
             categoryName +
-            " عمده در بازار عمده باسکول "
+            " عمده در بازار عمده باسکول ",
         },
         {
           name: "author",
-          content: "باسکول"
+          content: "باسکول",
         },
         {
           property: "og:description",
@@ -1641,19 +1646,19 @@ export default {
             categoryName +
             " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان | آگاهی از آخرین قیمت " +
             categoryName +
-            " عمده در بازار عمده باسکول "
+            " عمده در بازار عمده باسکول ",
         },
         {
           property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران"
+          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
         },
         {
           property: "og:title",
-          content: "باسکول | خرید و فروش عمده و قیمت " + categoryName
-        }
+          content: "باسکول | خرید و فروش عمده و قیمت " + categoryName,
+        },
       ],
-      link: [{ rel: "canonical", href: canonicalLink }]
+      link: [{ rel: "canonical", href: canonicalLink }],
     };
-  }
+  },
 };
 </script>

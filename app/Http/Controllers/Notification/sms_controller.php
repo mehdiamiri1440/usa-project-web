@@ -9,6 +9,7 @@ use Illuminate\Http\Response;
 use phplusir\smsir\Smsir;
 use App\Http\Controllers\Accounting\user_controller;
 use App\services\v1\userService;
+use DB;
 
 class sms_controller extends Controller
 {
@@ -281,8 +282,15 @@ class sms_controller extends Controller
     
     public function send_sms_to_given_phone_number($phone_number,$pattern_code)
     {
+        $user_first_name = DB::table('myusers')
+                            ->where('phone',$phone_number)
+                            ->select('first_name')
+                            ->get()->first()
+                            ->first_name;
+
+        var_dump($user_first_name);
         try{
-            Smsir::ultraFastSend(['name' => 'کاربر'],$pattern_code,$phone_number);
+            Smsir::ultraFastSend(['name' => $user_first_name],$pattern_code,$phone_number);
         }
         catch(\Exception $e){
             echo $e->getMessage();
