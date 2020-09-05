@@ -71,7 +71,7 @@ class downloadMediaFromCloud extends Command
                 $bar->finish();
             }
 
-            $this->info("downloading from $bucket_name finished.");
+            $this->info("\n downloading from $bucket_name finished.");
         }
     }
 
