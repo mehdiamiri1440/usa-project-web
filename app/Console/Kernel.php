@@ -26,6 +26,9 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\createProductThumbnails::class,
+        Commands\backupUserFiles::class,
+        Commands\downloadMediaFromCloud::class,
+        Commands\takeBlogBackup::class,
     ];
 
     /**
@@ -88,6 +91,16 @@ class Kernel extends ConsoleKernel
             ->weekly()
             ->tuesdays()
             ->at('11:45');
+
+        $schedule->command('backup:clean')->daily()->at('12:30');
+        $schedule->command('backup:run --only-db')->daily()->at('01:30');
+        $schedule->command('create:backup --bucket=product-photos --days=1')->daily()->at('02:00');
+        $schedule->command('create:backup --bucket=product-thumbnails --days=1')->daily()->at('02:10');
+        $schedule->command('create:backup --bucket=profile-photos --days=1')->daily()->at('02:20');
+        $schedule->command('create:backup --bucket=verification-photos --days=1')->daily()->at('02:30');
+        $schedule->command('create:backup --bucket=related-photos --days=1')->daily()->at('02:30');
+        $schedule->command('create:backup --bucket=certificate-photos --days=1')->daily()->at('02:30');
+         
     }
 
     /**
