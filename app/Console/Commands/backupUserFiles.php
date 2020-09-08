@@ -190,7 +190,7 @@ class backupUserFiles extends Command
             $photos = $photos->get();
         }
         else{
-            $photos = $photos->whereBetween('product_media.created_at',[Carbon::today(),Carbon::yesterday()])->get();
+            $photos = $photos->whereBetween('product_media.created_at',[Carbon::yesterday(),Carbon::today()])->get();
         }
 
         $result = [];
@@ -214,7 +214,7 @@ class backupUserFiles extends Command
             $photos = $photos->get();
         }
         else{
-            $photos = $photos->whereBetween('products.created_at',[Carbon::today(),Carbon::yesterday()])->get();
+            $photos = $photos->whereBetween('products.created_at',[Carbon::yesterday(),Carbon::today()])->get();
         }
 
         $result = [];
@@ -237,7 +237,7 @@ class backupUserFiles extends Command
             $photos = $photos->get();
         }
         else{
-            $photos = $photos->whereBetween('profiles.created_at',[Carbon::today(),Carbon::yesterday()])->get();
+            $photos = $photos->whereBetween('profiles.created_at',[Carbon::yesterday(),Carbon::today()])->get();
         }
 
         $result = [];
@@ -259,7 +259,7 @@ class backupUserFiles extends Command
             $photos = $photos->get();
         }
         else{
-            $photos = $photos->whereBetween('verification_photos.created_at',[Carbon::today(),Carbon::yesterday()])->get();
+            $photos = $photos->whereBetween('verification_photos.created_at',[Carbon::yesterday(),Carbon::today()])->get();
         }
 
         $result = [];
@@ -281,7 +281,7 @@ class backupUserFiles extends Command
             $photos = $photos->get();
         }
         else{
-            $photos = $photos->whereBetween('created_at',[Carbon::today(),Carbon::yesterday()])->get();
+            $photos = $photos->whereBetween('created_at',[Carbon::yesterday(),Carbon::today()])->get();
         }
 
         $result = [];
@@ -305,7 +305,7 @@ class backupUserFiles extends Command
             $photos = $photos->get();
         }
         else{
-            $photos = $photos->whereBetween('created_at',[Carbon::today(),Carbon::yesterday()])->get();
+            $photos = $photos->whereBetween('created_at',[Carbon::yesterday(),Carbon::today()])->get();
         }
 
         $result = [];

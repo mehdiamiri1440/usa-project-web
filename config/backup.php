@@ -93,7 +93,7 @@ return [
         /*
          * The directory where the temporary files will be stored.
          */
-        'temporary_directory' => storage_path('app/backup-temp'),
+        'temporary_directory' => base_path('../backups'),
     ],
 
     /*
@@ -179,7 +179,7 @@ return [
             /*
              * The number of days for which backups must be kept.
              */
-            'keepAllBackupsForDays' => 7,
+            'keepAllBackupsForDays' => 6,
 
             /*
              * The number of days for which daily backups must be kept.

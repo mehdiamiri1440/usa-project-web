@@ -15,15 +15,17 @@ class SendFCMNotification implements ShouldQueue
 
     protected $topic;
     protected $notification;
+    protected $data;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($topic,$notification)
+    public function __construct($topic,$notification,$data)
     {
         $this->topic = $topic;
         $this->notification = $notification;
+        $this->data = $data;
     }
 
     /**
@@ -33,7 +35,7 @@ class SendFCMNotification implements ShouldQueue
      */
     public function handle()
     {
-        $topicResponse = FCM::sendToTopic($this->topic, null, $this->notification, null);
+        $topicResponse = FCM::sendToTopic($this->topic, null, $this->notification, $this->data);
 
         $topicResponse->isSuccess();
         $topicResponse->shouldRetry();
