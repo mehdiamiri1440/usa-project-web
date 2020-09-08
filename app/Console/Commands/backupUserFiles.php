@@ -52,12 +52,12 @@ class backupUserFiles extends Command
             case 'profile-photos':
                 $this->upload_original_profile_photos($bucket_name,$days);
                 break;
-            // case 'certificate-photos':
-            //     $this->upload_original_certificate_photos($bucket_name,$days);
-            //     break;
-            // case 'related-photos':
-            //     $this->upload_original_related_photos($bucket_name,$days);
-            //     break;
+            case 'certificate-photos':
+                $this->upload_original_certificate_photos($bucket_name,$days);
+                break;
+            case 'related-photos':
+                $this->upload_original_related_photos($bucket_name,$days);
+                break;
             case 'verification-photos':
                 $this->upload_original_verification_photos($bucket_name,$days);
                 break;
@@ -143,7 +143,20 @@ class backupUserFiles extends Command
 
     protected function upload_original_related_photos($bucket_name,$days)
     {
+        $photos = $this->get_related_photos($days);
 
+        $bar = $this->output->createProgressBar(count($photos));
+
+        foreach($photos as $path)
+        {
+            $this->save_photo_on_cloud($path,$bucket_name);
+
+            $bar->advance();
+        }
+
+        $bar->finish();
+
+        echo "\n";
     }
 
     protected function upload_original_verification_photos($bucket_name,$days)
@@ -177,7 +190,7 @@ class backupUserFiles extends Command
             $photos = $photos->get();
         }
         else{
-            $photos = $photos->whereBetween('products.created_at',[Carbon::today(),Carbon::yesterday()])->get();
+            $photos = $photos->whereBetween('product_media.created_at',[Carbon::yesterday(),Carbon::today()])->get();
         }
 
         $result = [];
@@ -201,7 +214,7 @@ class backupUserFiles extends Command
             $photos = $photos->get();
         }
         else{
-            $photos = $photos->whereBetween('products.created_at',[Carbon::today(),Carbon::yesterday()])->get();
+            $photos = $photos->whereBetween('products.created_at',[Carbon::yesterday(),Carbon::today()])->get();
         }
 
         $result = [];
@@ -217,13 +230,14 @@ class backupUserFiles extends Command
     protected function get_profile_photos($days)
     {
         $photos = DB::table('profiles')
+                            ->whereNotNull('profile_photo')
                             ->select('profile_photo');
 
         if($days == 0){
             $photos = $photos->get();
         }
         else{
-            $photos = $photos->whereBetween('profiles.created_at',[Carbon::today(),Carbon::yesterday()])->get();
+            $photos = $photos->whereBetween('profiles.created_at',[Carbon::yesterday(),Carbon::today()])->get();
         }
 
         $result = [];
@@ -245,7 +259,7 @@ class backupUserFiles extends Command
             $photos = $photos->get();
         }
         else{
-            $photos = $photos->whereBetween('verification_photos.created_at',[Carbon::today(),Carbon::yesterday()])->get();
+            $photos = $photos->whereBetween('verification_photos.created_at',[Carbon::yesterday(),Carbon::today()])->get();
         }
 
         $result = [];
@@ -257,6 +271,55 @@ class backupUserFiles extends Command
 
         return $result;
     }
+
+    protected function get_certificate_photos($days)
+    {
+        $photos = DB::table('profile_media')
+                            ->select('file_path');
+
+        if($days == 0){
+            $photos = $photos->get();
+        }
+        else{
+            $photos = $photos->whereBetween('created_at',[Carbon::yesterday(),Carbon::today()])->get();
+        }
+
+        $result = [];
+        foreach($photos as $photo)
+        {
+            if(explode('/',$photo->file_path)[0] == 'certificates'){
+                $tmp = "/storage". "/" . $photo->file_path;
+                $result[] = public_path($tmp);
+            }
+        }
+
+        return $result;
+    }
+
+    protected function get_related_photos($days)
+    {
+        $photos = DB::table('profile_media')
+                            ->select('file_path');
+
+        if($days == 0){
+            $photos = $photos->get();
+        }
+        else{
+            $photos = $photos->whereBetween('created_at',[Carbon::yesterday(),Carbon::today()])->get();
+        }
+
+        $result = [];
+        foreach($photos as $photo)
+        {
+            if(explode('/',$photo->file_path)[0] == 'relateds'){
+                $tmp = "/storage". "/" . $photo->file_path;
+                $result[] = public_path($tmp);
+            } 
+        }
+
+        return $result;
+    }
+
 
     protected function save_photo_on_cloud($path,$bucket_name)
     {

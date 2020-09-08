@@ -78,13 +78,13 @@ class Kernel extends ConsoleKernel
         // $schedule->job($retention_reminder_notifier_job)
         //         ->monthlyOn(15, '14:30');
 
-        // $product_register_reminder_job = new ProductRegisterReminder();
-        // $schedule->job($product_register_reminder_job)
-        //         ->dailyAt('12:30');
+        $product_register_reminder_job = new ProductRegisterReminder();
+        $schedule->job($product_register_reminder_job)
+                ->dailyAt('11:30');
 
-        // $buyAd_register_reminder_job = new BuyAdRegisterReminder();
-        // $schedule->job($buyAd_register_reminder_job)
-        //         ->dailyAt('11:30');
+        $buyAd_register_reminder_job = new BuyAdRegisterReminder();
+        $schedule->job($buyAd_register_reminder_job)
+                ->dailyAt('12:30');
 
         $expiry_reminder_job = new ExpiryReminder();
         $schedule->job($expiry_reminder_job)
@@ -92,12 +92,14 @@ class Kernel extends ConsoleKernel
             ->tuesdays()
             ->at('11:45');
 
-        // $schedule->command('backup:clean')->daily()->at('12:30');
-        // $schedule->command('backup:run --only-db')->daily()->at('01:30');
-        $schedule->command('create:backup --bucket=product-photos --days=1')->daily()->at('2:00');
-        $schedule->command('create:backup --bucket=product-thumbnails --days=1')->daily()->at('2:15');
-        $schedule->command('create:backup --bucket=profile-photos --days=1')->daily()->at('2:30');
-        $schedule->command('create:backup --bucket=verification-photos --days=1')->daily()->at('2:45');
+        // $schedule->command('backup:clean')->daily()->at('12:27');
+        $schedule->command('backup:run --only-db')->daily()->at('01:15');
+        $schedule->command('create:backup --bucket=product-photos --days=1')->daily()->at('01:30');
+        $schedule->command('create:backup --bucket=product-thumbnails --days=1')->daily()->at('01:40');
+        $schedule->command('create:backup --bucket=profile-photos --days=1')->daily()->at('01:50');
+        $schedule->command('create:backup --bucket=verification-photos --days=1')->daily()->at('01:55');
+        $schedule->command('create:backup --bucket=related-photos --days=1')->daily()->at('02:00');
+        $schedule->command('create:backup --bucket=certificate-photos --days=1')->daily()->at('02:05');
          
     }
 
