@@ -441,7 +441,8 @@ export default {
         self.createCookie("downloadAppModal", true, 60 * 24);
       });
       if (this.isDeviceMobile() && !this.isOsIOS()) {
-        if (this.getAndroidVersion() >= 5) {
+        let androidVersion = this.getAndroidVersion();
+        if (parseInt(androidVersion) >= 5) {
           if (
             window.location.pathname != "/buyer/messenger/contacts" &&
             window.location.pathname != "/seller/messenger/contacts" &&

@@ -917,6 +917,8 @@ Route::post('/get_wp_posts', [
     'as' => 'get_wp_posts',
 ]);
 
+Route::get('download-media','General\media_controller@download_media');
+
 
 // Route::group(['middleware' => [cors::class]], function () {
 //     Route::options('/broadcastAuth', function () {

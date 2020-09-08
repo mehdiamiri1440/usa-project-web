@@ -410,7 +410,7 @@ class message_controller extends Controller
     public function get_users_who_have_unread_messages($exclude_users_from_sms_daily_black_list = true)
     {
         $to = Carbon::now();
-        $from = Carbon::now()->subDays(2);
+        $from = Carbon::now()->subDays(1);
 
         $users_info = DB::table('myusers')
                             ->join('messages', 'messages.receiver_id', '=', 'myusers.id')

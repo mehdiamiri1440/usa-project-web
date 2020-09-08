@@ -38,7 +38,8 @@ class RetentionReminder implements ShouldQueue
 
         $data = [
             'title' => 'باسکول',
-            'message' => 'هزاران خریدار و فروشنده عمده در بازار باسکول منتظر شما هستند'
+            'message' => 'هزاران خریدار و فروشنده عمده در بازار باسکول منتظر شما هستند',
+            'target' => 'productList'
         ];
 
         $fcm_object = new fcm_controller();
@@ -66,11 +67,11 @@ class RetentionReminder implements ShouldQueue
         return $topics;
     }
 
-    protected function send_sms_notification_reminder(&$users)
-    {
-        foreach($users as $user)
-        {
-            sendSMS::dispatch($user->phone, defineCode);
-        }
-    }
+    // protected function send_sms_notification_reminder(&$users)
+    // {
+    //     foreach($users as $user)
+    //     {
+    //         sendSMS::dispatch($user->phone, defineCode);
+    //     }
+    // }
 }

@@ -64,13 +64,21 @@ class fcm_controller extends Controller
                             ->setTag("buskool");
 
         $notification = $notificationBuilder->build();
+
+        $dataBuilder = new PayloadDataBuilder();
+        $dataBuilder->addData([
+            'BTarget' =>  $data['target'],
+        ]);
+
+        $payloadData = $dataBuilder->build();
+
         
         foreach($topics as $topic)
         {
             $tpc = new Topics();
             $tpc->topic($topic);
 
-            SendFCMNotification::dispatch($tpc,$notification);
+            SendFCMNotification::dispatch($tpc,$notification,$payloadData);
         }
                 
     }

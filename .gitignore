@@ -1,7 +1,7 @@
 /node_modules
 /public/hot
 /public/storage
-/storage/*.key
+/storage
 /vendor
 /.idea
 /.vagrant
@@ -10,6 +10,7 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .env
+*/.DS_Store
 
 public/js/app\.js
 
@@ -20,3 +21,4 @@ public/assets/img/help/buyad/mobile/2.JPG
 public/assets/img/help/buyad/mobile/
 /composer
 /composer.phar
+.DS_Store

@@ -38,7 +38,8 @@ class ProductRegisterReminder implements ShouldQueue
 
         $data = [
             'title' => 'باسکول',
-            'message' => 'با ثبت محصولات خود با هزاران خریدار در بازار کشاورزی باسکول ارتباط برقرار کنید'
+            'message' => 'با ثبت محصولات خود با هزاران خریدار در بازار کشاورزی باسکول ارتباط برقرار کنید',
+            'target' => 'registerProduct'
         ];
         
         $fcm_object = new fcm_controller();
@@ -53,8 +54,8 @@ class ProductRegisterReminder implements ShouldQueue
                         ['is_seller','=',true],
                         ['is_blocked','=',false],
                     ])
-                    ->whereBetween('created_at',[Carbon::today()->subDays(7),Carbon::today()])
-                    ->whereRaw(DB::raw("myusers.id not in (select distinct(myuser_id) as id from products) and myusers.id not in (select distinct(myuser_id) as id from buy_ads)"))
+                    ->whereBetween('created_at',[Carbon::today()->subDays(3),Carbon::today()])
+                    ->whereRaw(DB::raw("myusers.id not in (select distinct(myuser_id) as id from products where confirmed=true) and myusers.id not in (select distinct(myuser_id) as id from buy_ads where confirmed=true)"))
                     ->select('id')
                     ->get();
 
