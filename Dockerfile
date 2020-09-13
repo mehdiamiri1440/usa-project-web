@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -qq -y \
     libmcrypt-dev \
     libreadline-dev \
     libfreetype6-dev \
+    libxml2-dev \
     g++
 
 # 2. apache configs + document root
@@ -32,7 +33,7 @@ RUN a2enmod rewrite headers
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 #COPY /etc/php.ini /usr/local/etc/php/php.ini
 
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ && --with-jpeg-dir=/usr/include/
 
 RUN docker-php-ext-install \
     bz2 \
@@ -44,7 +45,8 @@ RUN docker-php-ext-install \
     mbstring \
     pdo_mysql \
     zip \
-    gd
+    gd \
+    soap
 
 # 5. composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
