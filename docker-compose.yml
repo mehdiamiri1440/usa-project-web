@@ -42,20 +42,20 @@ services:
     labels:
         #### Labels define the behavior and rules of the traefik proxy for this container ####
         - "traefik.enable=true" # <== Enable traefik on itself to view dashboard and assign subdomain to view it
-        - "traefik.http.routers.api-secured.rule=Host(`monitor.localhost`)" # <== Setting the domain for the dashboard
+        - "traefik.http.routers.api-secured.rule=Host(`monitor.alidelkhosh.ir`)" # <== Setting the domain for the dashboard
         - "traefik.http.routers.api-secured.tls=true"
         - "traefik.http.routers.api-secured.entrypoints=web-secured" # <== Setting the domain for the dashboard
         - "traefik.http.routers.api-secured.service=api@internal" # <== Enabling the api to be a service to access    
         - "traefik.http.routers.api-secured.middlewares=auth"
         - "traefik.http.middlewares.auth.basicauth.users=admin:$$apr1$$nAvAKtX4$$ivvLR54W1xVHWsxi5EoLf0"
 
-        - "traefik.http.routers.api.rule=Host(`monitor.localhost`)" # <== Your Domain Name for the https rule
+        - "traefik.http.routers.api.rule=Host(`monitor.alidelkhosh.ir`)" # <== Your Domain Name for the https rule
         - "traefik.http.routers.api.entrypoints=web"
         # - "traefik.http.routers.api.service=api@internal"
         # middleware redirect
         # - "traefik.http.middlewares.api-secured.redirectscheme.scheme=https"
       # global redirect to https
-        # - "traefik.http.routers.redirs.rule=hostregexp(`{localhost:.+}`)"
+        # - "traefik.http.routers.redirs.rule=hostregexp(`{alidelkhosh.ir:.+}`)"
         # - "traefik.http.routers.redirs.entrypoints=web"
         # - "traefik.http.routers.redirs.middlewares=redirect-to-https"
       # global http compressor
@@ -79,18 +79,18 @@ services:
         #### Labels define the behavior and rules of the traefik proxy for this container ####
       - "traefik.enable=true" # <== Enable traefik to proxy this container
       - "traefik.http.routers.nginx-secured.tls=true"
-      - "traefik.http.routers.nginx-web.rule=Host(`localhost`)" # <== Your Domain Name goes here for the http rule
+      - "traefik.http.routers.nginx-web.rule=Host(`alidelkhosh.ir`)" # <== Your Domain Name goes here for the http rule
       - "traefik.http.routers.nginx-web.entrypoints=web" # <== Defining the entrypoint for http, **ref: line 30
    #   - "traefik.http.routers.nginx-web.middlewares=redirect@file" # <== This is a middleware to redirect to https
-      - "traefik.http.routers.nginx-secured.rule=Host(`localhost`) || Host(`www.localhost`)" # <== Your Domain Name for the https rule
+      - "traefik.http.routers.nginx-secured.rule=Host(`alidelkhosh.ir`) || Host(`www.alidelkhosh.ir`)" # <== Your Domain Name for the https rule
       - "traefik.http.routers.nginx-secured.entrypoints=web-secured" # <== Defining entrypoint for https, **ref: line 31
 #      - "traefik.http.routers.nginx-secured.tls.certresolver=mytlschallenge" # <== Defining certsresolvers for https    
       - "traefik.http.routers.nginx-secured.middlewares=packet-compressor"
       - "traefik.http.middlewares.packet-compressor.compress=true"
 
       - "traefik.http.routers.nginx-secured.middlewares=web-redirectregex"
-      - "traefik.http.middlewares.web-redirectregex.redirectregex.regex=^https://localhost/(.*)"
-      - "traefik.http.middlewares.web-redirectregex.redirectregex.replacement=https://www.localhost/$${1}"
+      - "traefik.http.middlewares.web-redirectregex.redirectregex.regex=^https://alidelkhosh.ir/(.*)"
+      - "traefik.http.middlewares.web-redirectregex.redirectregex.replacement=https://www.alidelkhosh.ir/$${1}"
       - "traefik.http.middlewares.web-redirectregex.redirectregex.permanent=true"
     networks:
       - backend
@@ -126,9 +126,9 @@ services:
         #### Labels define the behavior and rules of the traefik proxy for this container ####
       - "traefik.enable=true" # <== Enable traefik to proxy this container
       - "traefik.http.routers.phpmyadmin-secured.tls=true"
-      - "traefik.http.routers.phpmyadmin-web.rule=Host(`php-admin.localhost`)"  # <== Your Domain Name goes here for the http rule
+      - "traefik.http.routers.phpmyadmin-web.rule=Host(`php-admin.alidelkhosh.ir`)"  # <== Your Domain Name goes here for the http rule
       - "traefik.http.routers.phpmyadmin-web.entrypoints=web" # <== Defining the entrypoint for http, **ref: line 30
-      - "traefik.http.routers.phpmyadmin-secured.rule=Host(`php-admin.localhost`)" # <== Your Domain Name for the https rule
+      - "traefik.http.routers.phpmyadmin-secured.rule=Host(`php-admin.alidelkhosh.ir`)" # <== Your Domain Name for the https rule
       - "traefik.http.routers.phpmyadmin-secured.entrypoints=web-secured" # <== Defining entrypoint for https, **ref: line 31
     networks:
       - backend
@@ -177,18 +177,18 @@ services:
         #### Labels define the behavior and rules of the traefik proxy for this container ####
       - "traefik.enable=true" # <== Enable traefik to proxy this container
       - "traefik.http.routers.nginx-blog-secured.tls=true"
-      - "traefik.http.routers.nginx-blog-web.rule=Host(`blog.localhost`)" # <== Your Domain Name goes here for the http rule
+      - "traefik.http.routers.nginx-blog-web.rule=Host(`blog.alidelkhosh.ir`)" # <== Your Domain Name goes here for the http rule
       - "traefik.http.routers.nginx-blog-web.entrypoints=web" # <== Defining the entrypoint for http, **ref: line 30
    #   - "traefik.http.routers.nginx-web.middlewares=redirect@file" # <== This is a middleware to redirect to https
-      - "traefik.http.routers.nginx-blog-secured.rule=Host(`blog.localhost`) || Host(`www.blog.localhost`)" # <== Your Domain Name for the https rule
+      - "traefik.http.routers.nginx-blog-secured.rule=Host(`blog.alidelkhosh.ir`) || Host(`www.blog.alidelkhosh.ir`)" # <== Your Domain Name for the https rule
       - "traefik.http.routers.nginx-blog-secured.entrypoints=web-secured" # <== Defining entrypoint for https, **ref: line 31
 
       - "traefik.http.routers.nginx-blog-secured.middlewares=packet-compressor"
       - "traefik.http.middlewares.packet-compressor.compress=true"
 
       - "traefik.http.routers.nginx-blog-secured.middlewares=blog-redirectregex"
-      - "traefik.http.middlewares.blog-redirectregex.redirectregex.regex=^https://www.blog.localhost/(.*)"
-      - "traefik.http.middlewares.blog-redirectregex.redirectregex.replacement=https://blog.localhost/$${1}"
+      - "traefik.http.middlewares.blog-redirectregex.redirectregex.regex=^https://www.blog.alidelkhosh.ir/(.*)"
+      - "traefik.http.middlewares.blog-redirectregex.redirectregex.replacement=https://blog.alidelkhosh.ir/$${1}"
       - "traefik.http.middlewares.blog-redirectregex.redirectregex.permanent=true"
 
     networks:
