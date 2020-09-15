@@ -33,7 +33,7 @@ RUN a2enmod rewrite headers
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 #COPY /etc/php.ini /usr/local/etc/php/php.ini
 
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ && --with-jpeg-dir=/usr/include/
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/  --with-jpeg-dir=/usr/include/
 
 RUN docker-php-ext-install \
     bz2 \
@@ -61,6 +61,9 @@ RUN mkdir -p /var/www/html/storage/framework/{sessions,views,cache} \
 RUN chown -R www-data:www-data /var/www/html/storage
 
 RUN chown -R www-data:www-data storage
+# seting containers timezone to Tehran
+ENV TZ=Asia/Tehran
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 #COPY ./ssl.crt /etc/apache2/ssl/ssl.crt
 #COPY ./ssl.key /etc/apache2/ssl/ssl.key
