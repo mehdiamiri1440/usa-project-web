@@ -12,7 +12,7 @@ if [ "$role" = "app" ]; then
     php /var/www/html/artisan view:clear
     php /var/www/html/artisan migrate 
     php /var/www/html/artisan storage:link
-    php /var/www/html/artisan fetch:media
+    # php /var/www/html/artisan fetch:media
 
 
 elif [ "$role" = "queue" ]; then
@@ -20,7 +20,8 @@ elif [ "$role" = "queue" ]; then
     php /var/www/html/artisan config:cache
     php /var/www/html/artisan migrate 
     echo "Running the queue..."
-    php /var/www/html/artisan queue:work --verbose --tries=3 --timeout=90
+    php /var/www/html/artisan queue:work --verbose --tries=3 --timeout=90 --queue=sms,fcm,default
+
 
 elif [ "$role" = "scheduler" ]; then
 

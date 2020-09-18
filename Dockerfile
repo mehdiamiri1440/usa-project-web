@@ -17,7 +17,8 @@ RUN apt-get update && apt-get install -qq -y \
     libreadline-dev \
     libfreetype6-dev \
     libxml2-dev \
-    g++
+    g++ \
+    mysql-client
 
 # 2. apache configs + document root
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
@@ -65,7 +66,6 @@ RUN chown -R www-data:www-data storage
 ENV TZ=Asia/Tehran
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-#COPY ./ssl.crt /etc/apache2/ssl/ssl.crt
-#COPY ./ssl.key /etc/apache2/ssl/ssl.key
+RUN cp /usr/bin/mysqldump /usr/local/bin/
 
 CMD ["/usr/local/bin/start"]
