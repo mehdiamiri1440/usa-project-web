@@ -1,0 +1,5 @@
+[tls.options]
+
+[[tls.certificates]]
+  certFile = "/etc/certs/full_chain.pem"
+  keyFile = "/etc/certs/private.pem"

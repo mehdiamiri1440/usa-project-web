@@ -1,0 +1,213 @@
+version: '3.5'
+
+services:
+  traefik:
+    image: traefik:v2.2
+    restart: always
+    container_name: traefik
+    ports:
+        #- "80:80" # <== http
+        # - "8080:8080" # <== :8080 is where the dashboard runs on
+        - "443:443" # <== https
+    command:
+    #### These are the CLI commands that will configure Traefik and tell it how to work! ####
+        ## API Settings - https://docs.traefik.io/operations/api/, endpoints - https://docs.traefik.io/operations/api/#endpoints ##
+        # - --api.insecure=false # <== Enabling insecure api, NOT RECOMMENDED FOR PRODUCTION
+        - --api=true
+        - --api.dashboard=true # <== Enabling the dashboard to view services, middlewares, routers, etc...
+        - --api.debug=true # <== Enabling additional endpoints for debugging and profiling
+          ## Log Settings (options: ERROR, DEBUG, PANIC, FATAL, WARN, INFO) - https://docs.traefik.io/observability/logs/ ##
+        - --log.level=DEBUG # <== Setting the level of the logs from traefik
+          ## Provider Settings - https://docs.traefik.io/providers/docker/#provider-configuration ##
+        - --providers.docker=true # <== Enabling docker as the provider for traefik
+        - --providers.docker.exposedbydefault=false # <== Don't expose every container to traefik, only expose enabled ones
+        - --providers.file.directory=/etc/certs # <== Referring to a dynamic configuration file
+        - --providers.docker.network=web # <== Operate on the docker network named web
+          ## Entrypoints Settings - https://docs.traefik.io/routing/entrypoints/#configuration ##
+        - --entrypoints.web.address=:80 # <== Defining an entrypoint for port :80 named web
+        - --entrypoints.web-secured.address=:443 # <== Defining an entrypoint for https on port :443 named web-secured
+        - --entrypoints.web.http.redirections.entryPoint.to=web-secured
+        - --entrypoints.web.http.redirections.entryPoint.scheme=https
+          ## Certificate Settings (Let's Encrypt) -  https://docs.traefik.io/https/acme/#configuration-examples ##
+       # - --certificatesresolvers.mytlschallenge.acme.tlschallenge=true # <== Enable TLS-ALPN-01 to generate and renew ACME certs
+       # - --certificatesresolvers.mytlschallenge.acme.email=theafkdeveloper@gmail.com # <== Setting email for certs
+       # - --certificatesresolvers.mytlschallenge.acme.storage=/letsencrypt/acme.json # <== Defining acme file to store cert information
+    volumes:
+       # - ./letsencrypt:/letsencrypt # <== Volume for certs (TLS)
+        - /var/run/docker.sock:/var/run/docker.sock # <== Volume for docker admin
+        - ./dynamic/dynamic.yaml:/etc/certs/dynamic.yaml # <== Volume for dynamic conf file, **ref: line 27
+        # - /etc/certs:/etc/certs
+    networks:
+        - web # <== Placing traefik on the network named web, to access containers on this network
+    labels:
+        #### Labels define the behavior and rules of the traefik proxy for this container ####
+        - "traefik.enable=true" # <== Enable traefik on itself to view dashboard and assign subdomain to view it
+        - "traefik.http.routers.api-secured.rule=Host(`monitor.alidelkhosh.ir`)" # <== Setting the domain for the dashboard
+        - "traefik.http.routers.api-secured.tls=true"
+        - "traefik.http.routers.api-secured.entrypoints=web-secured" # <== Setting the domain for the dashboard
+        - "traefik.http.routers.api-secured.service=api@internal" # <== Enabling the api to be a service to access    
+        - "traefik.http.routers.api-secured.middlewares=auth"
+        - "traefik.http.middlewares.auth.basicauth.users=admin:$$apr1$$nAvAKtX4$$ivvLR54W1xVHWsxi5EoLf0"
+
+        - "traefik.http.routers.api.rule=Host(`monitor.alidelkhosh.ir`)" # <== Your Domain Name for the https rule
+        - "traefik.http.routers.api.entrypoints=web"
+        # - "traefik.http.routers.api.service=api@internal"
+        # middleware redirect
+        # - "traefik.http.middlewares.api-secured.redirectscheme.scheme=https"
+      # global redirect to https
+        # - "traefik.http.routers.redirs.rule=hostregexp(`{alidelkhosh.ir:.+}`)"
+        # - "traefik.http.routers.redirs.entrypoints=web"
+        # - "traefik.http.routers.redirs.middlewares=redirect-to-https"
+      # global http compressor
+        - "traefik.http.middlewares.packet-compressor.compress=true"
+        - "traefik.http.middlewares.testHeader.headers.customrequestheaders.X-Forwarded-Proto=https"
+
+  laravel-app:
+    image: buskool-app
+    build:
+      context: '.'
+    restart: always
+    container_name: bsukool-app
+    environment:
+        CONTAINER_ROLE: app
+    volumes:
+      - .:/var/www/html
+      # - /usr/local/etc/php/7.3/php.ini:/usr/local/etc/php/php.ini
+   #ports:
+      #- 5050:4040
+     # - 4433:443
+    labels:
+        #### Labels define the behavior and rules of the traefik proxy for this container ####
+      - "traefik.enable=true" # <== Enable traefik to proxy this container
+      - "traefik.http.routers.nginx-secured.tls=true"
+      - "traefik.http.routers.nginx-web.rule=Host(`alidelkhosh.ir`)" # <== Your Domain Name goes here for the http rule
+      - "traefik.http.routers.nginx-web.entrypoints=web" # <== Defining the entrypoint for http, **ref: line 30
+   #   - "traefik.http.routers.nginx-web.middlewares=redirect@file" # <== This is a middleware to redirect to https
+      - "traefik.http.routers.nginx-secured.rule=Host(`alidelkhosh.ir`) || Host(`www.alidelkhosh.ir`)" # <== Your Domain Name for the https rule
+      - "traefik.http.routers.nginx-secured.entrypoints=web-secured" # <== Defining entrypoint for https, **ref: line 31
+#      - "traefik.http.routers.nginx-secured.tls.certresolver=mytlschallenge" # <== Defining certsresolvers for https    
+      - "traefik.http.routers.nginx-secured.middlewares=packet-compressor"
+      - "traefik.http.middlewares.packet-compressor.compress=true"
+
+      - "traefik.http.routers.nginx-secured.middlewares=web-redirectregex"
+      - "traefik.http.middlewares.web-redirectregex.redirectregex.regex=^https://alidelkhosh.ir/(.*)"
+      - "traefik.http.middlewares.web-redirectregex.redirectregex.replacement=https://www.alidelkhosh.ir/$${1}"
+      - "traefik.http.middlewares.web-redirectregex.redirectregex.permanent=true"
+    networks:
+      - backend
+      - web
+  mysql-db:
+    image: mysql:5.6
+    container_name: mysql-db
+    restart: always
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=abc123
+      - MYSQL_DATABASE=dataAnalysis
+      - MYSQL_USER=dbuser
+      - MYSQL_PASSWORD=abc123
+    networks:
+      backend:
+        aliases:
+          - db
+
+  my-phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.0.2
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql-db
+      - MYSQL_ROOT_PASSWORD=abc123
+      - PMA_POST=3306
+    depends_on:
+      - mysql-db
+    ports:
+      - 6060:3035
+    labels:
+        #### Labels define the behavior and rules of the traefik proxy for this container ####
+      - "traefik.enable=true" # <== Enable traefik to proxy this container
+      - "traefik.http.routers.phpmyadmin-secured.tls=true"
+      - "traefik.http.routers.phpmyadmin-web.rule=Host(`php-admin.alidelkhosh.ir`)"  # <== Your Domain Name goes here for the http rule
+      - "traefik.http.routers.phpmyadmin-web.entrypoints=web" # <== Defining the entrypoint for http, **ref: line 30
+      - "traefik.http.routers.phpmyadmin-secured.rule=Host(`php-admin.alidelkhosh.ir`)" # <== Your Domain Name for the https rule
+      - "traefik.http.routers.phpmyadmin-secured.entrypoints=web-secured" # <== Defining entrypoint for https, **ref: line 31
+    networks:
+      - backend
+      - web
+    
+  scheduler:
+    image: buskool-app
+    container_name: laravel-scheduler
+    restart: always
+    volumes:
+       - .:/var/www/html
+    depends_on:
+      - laravel-app
+    environment:
+      CONTAINER_ROLE: scheduler
+    networks:
+      -  backend
+
+  queue:
+    image: buskool-app
+    container_name: laravel-queue
+    restart: always
+    depends_on:
+      - laravel-app
+    volumes:
+      - .:/var/www/html
+    environment:
+      CONTAINER_ROLE: queue
+    networks:
+      - backend
+
+  blog:
+    image: wordpress:php7.2
+    container_name: blog
+    depends_on:
+      - mysql-db
+    ports:
+      - 4030:80
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: abc123
+      WORDPRESS_DB_NAME: blog
+    volumes:
+      - ../../blog:/var/www/html
+    labels:
+        #### Labels define the behavior and rules of the traefik proxy for this container ####
+      - "traefik.enable=true" # <== Enable traefik to proxy this container
+      - "traefik.http.routers.nginx-blog-secured.tls=true"
+      - "traefik.http.routers.nginx-blog-web.rule=Host(`blog.alidelkhosh.ir`)" # <== Your Domain Name goes here for the http rule
+      - "traefik.http.routers.nginx-blog-web.entrypoints=web" # <== Defining the entrypoint for http, **ref: line 30
+   #   - "traefik.http.routers.nginx-web.middlewares=redirect@file" # <== This is a middleware to redirect to https
+      - "traefik.http.routers.nginx-blog-secured.rule=Host(`blog.alidelkhosh.ir`) || Host(`www.blog.alidelkhosh.ir`)" # <== Your Domain Name for the https rule
+      - "traefik.http.routers.nginx-blog-secured.entrypoints=web-secured" # <== Defining entrypoint for https, **ref: line 31
+
+      - "traefik.http.routers.nginx-blog-secured.middlewares=packet-compressor"
+      - "traefik.http.middlewares.packet-compressor.compress=true"
+
+      - "traefik.http.routers.nginx-blog-secured.middlewares=blog-redirectregex"
+      - "traefik.http.middlewares.blog-redirectregex.redirectregex.regex=^https://www.blog.alidelkhosh.ir/(.*)"
+      - "traefik.http.middlewares.blog-redirectregex.redirectregex.replacement=https://blog.alidelkhosh.ir/$${1}"
+      - "traefik.http.middlewares.blog-redirectregex.redirectregex.permanent=true"
+
+    networks:
+      - backend
+      - web
+        
+ 
+networks:
+  backend:
+    name: backend-network
+    external: false
+  web:
+    external: true
+
+volumes:
+    dbdata:
+       driver: local
