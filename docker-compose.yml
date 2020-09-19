@@ -103,10 +103,10 @@ services:
     volumes:
       - dbdata:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=abc123
-      - MYSQL_DATABASE=dataAnalysis
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
       - MYSQL_USER=dbuser
-      - MYSQL_PASSWORD=abc123
+      - MYSQL_PASSWORD=${DB_PASSWORD}
     networks:
       backend:
         aliases:
@@ -118,9 +118,9 @@ services:
     restart: always
     environment:
       - PMA_ARBITRARY=1
-      - PMA_HOST=mysql-db
-      - MYSQL_ROOT_PASSWORD=abc123
-      - PMA_POST=3306
+      - PMA_HOST=${DB_HOST}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - PMA_POST=${DB_PORT}
     depends_on:
       - mysql-db
     ports:
@@ -173,9 +173,9 @@ services:
     restart: always
     environment:
       WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: root
-      WORDPRESS_DB_PASSWORD: abc123
-      WORDPRESS_DB_NAME: blog
+      WORDPRESS_DB_USER: ${DB_USERNAME}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+      WORDPRESS_DB_NAME: ${DB_BLOG_DATABASE}
     volumes:
       - ../../blog:/var/www/html
     labels:
