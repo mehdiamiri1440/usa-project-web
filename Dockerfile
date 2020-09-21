@@ -18,7 +18,8 @@ RUN apt-get update && apt-get install -qq -y \
     libfreetype6-dev \
     libxml2-dev \
     g++ \
-    mysql-client
+    mysql-client \
+    jpegoptim
 
 # 2. apache configs + document root
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
