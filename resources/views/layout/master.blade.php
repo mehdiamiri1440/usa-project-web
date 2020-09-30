@@ -6,13 +6,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="keywords" content="محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,باسکول">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
     <meta name="csrf-token" content="{{csrf_token()}}">
 
     <link rel="icon" href="{{asset('assets/img/logo/mobile-logo.svg')}}">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{asset('assets/img/favicon/apple-icon-57x57.png')}}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{asset('assets/img/favicon/apple-icon-60x60.png')}}" >
+    <link rel="apple-touch-icon" sizes="72x72" href="{{asset('assets/img/favicon/apple-icon-72x72.png')}}" >
+    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('assets/img/favicon/apple-icon-76x76.png')}}" >
+    <link rel="apple-touch-icon" sizes="114x114" href="{{asset('assets/img/favicon/apple-icon-114x114.png')}}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{asset('assets/img/favicon/apple-icon-120x120.png')}}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{asset('assets/img/favicon/apple-icon-144x144.png')}}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{asset('assets/img/favicon/apple-icon-152x152.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/img/favicon/apple-icon-180x180.png')}}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{asset('assets/img/favicon/android-icon-192x192.png')}}" href="">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/img/favicon/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{asset('assets/img/favicon/favicon-96x96.png')}}" >
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/img/favicon/favicon-16x16.png')}}" >
+   
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="بازار باسکول" />
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{asset('assets/img/favicon//ms-icon-144x144.png')}}">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="manifest" href="{{asset('assets/img/favicon/manifest.json')}}">
 
     <title>باسکول | بازارگاه کشاورزی </title>
 
+    <link rel="stylesheet" href="{{asset('assets/css/addtohomescreen.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/main-loader.css')}}">
 
 
@@ -121,13 +145,21 @@
 
         const messaging = firebase.messaging();
 </script>
-
+<script src="{{asset('assets/js/addtohomescreen.min.js')}}"></script>
 <script src="{{asset('js/app.js')}}"></script>
 
  {{-- <script async src="{{asset('js/sw/app.js')}}"></script> 
  <script src="{{asset('assets/js/idleTimer.js')}}"></script>  --}}
 
 <script>
+  if(
+      (("standalone" in window.navigator) && !window.navigator.standalone) // ios
+      ||
+      (!window.matchMedia('display-mode:standalone').matches) // android
+    ){
+      addToHomescreen();
+    }
+
     $(document).ready(function () {
         // $(document).idleTimer(7200000);
         
