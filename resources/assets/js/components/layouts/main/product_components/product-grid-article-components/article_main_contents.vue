@@ -310,6 +310,7 @@ export default {
     getProductName: function () {
       var productName = "";
       productName =
+        this.$parent.product.main.sub_category_name +
         ' <span style="color: #777">' +
         this.$parent.product.main.product_name +
         "</span>";
