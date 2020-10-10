@@ -541,6 +541,11 @@ Route::group(['middleware' => [login::class]], function () {
         'uses' => 'Accounting\user_controller@get_pricing_page_visit_status',
         'as' => 'get_show_pricing_page_status'
     ]);
+
+    Route::post('/get_my_buyAd_suggestions',[
+        'uses' => 'BuyAd\buyAd_controller@get_my_buyAd_suggestions',
+        'as'   => 'get_my_buyAd_suggestions'
+    ]);
     
 });
 

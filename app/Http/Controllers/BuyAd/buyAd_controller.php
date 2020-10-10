@@ -1075,4 +1075,47 @@ class buyAd_controller extends Controller
             'buyAds' => $buyAds,
         ], 200);
     }
+
+    //public method
+    public function get_my_buyAd_suggestions(Request $request)
+    {
+        $user_id = session('user_id');
+
+        $my_buyAd_suggestions = DB::table('buy_ad_suggestions')
+                                        ->join('buy_ads','buy_ads.id','=','buy_ad_suggestions.buy_ad_id')
+                                        ->join('myusers','myusers.id','=','buy_ads.myuser_id')
+                                        ->join('categories','buy_ads.category_id','=','categories.id')
+                                        ->where('buy_ad_suggestions.seller_id',$user_id)
+                                        ->select('myusers.first_name', 'myusers.last_name' ,'buy_ads.name', 'buy_ads.requirement_amount' ,'categories.category_name as subcategory_name' ,'buy_ads.myuser_id as buyer_id' ,'buy_ad_suggestions.created_at')
+                                        ->get();
+
+        $my_buyAd_suggestions->each(function($buyAd){
+            $buyAd->remaining_time = 4 - Carbon::now()->diffInHours($buyAd->created_at);
+            unset($buyAd->created_at);
+        });
+
+        $my_buyAd_suggestions = $my_buyAd_suggestions->filter(function($buyAd){
+            if($buyAd->remaining_time > 0 && $buyAd->remaining_time <= 4){
+                $buyAd->expired = false;
+
+                return true;
+            }
+            else if($buyAd->remaining_time > 4 && $buyAd->remaining_time <=12){
+                $buyAd->expired = true;
+
+                unset($buyAd->remaining_time);
+                
+                return true;
+            }
+            else{
+                return false;
+            }
+        });
+
+        return response()->json([
+            'status' => true,
+            'buyAds' => $my_buyAd_suggestions->values()
+        ],200);
+
+    }
 }

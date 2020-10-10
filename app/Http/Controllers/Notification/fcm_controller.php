@@ -72,7 +72,6 @@ class fcm_controller extends Controller
 
         $payloadData = $dataBuilder->build();
 
-        
         foreach($topics as $topic)
         {
             $tpc = new Topics();

@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use App\Models\product;
 use App\Models\buyAd;
 use App\Models\category;
+use App\Http\Controllers\Notification\fcm_controller;
 
 class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
 {
@@ -45,7 +46,8 @@ class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
 
         $data = [
             'title' => 'باسکول',
-            'message' => "یک فروشنده جدید {$this->product->product_name} برای شما پیدا کردیم"
+            'message' => "یک فروشنده جدید {$this->product->product_name} برای شما پیدا کردیم",
+            'target' => 'productList'
         ];
 
         $fcm_object = new fcm_controller();
@@ -56,7 +58,7 @@ class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
     protected function get_the_most_related_buyAd_owners_id_to_the_given_product_if_any(&$product)
     {
         $until_date = Carbon::now();
-        $from_date = Carbon::now()->subDays(14); // last 2 weeks
+        $from_date = Carbon::now()->subDays(60); // last 2 months
 
         $related_subcategory_buyAds = buyAd::where('category_id', $product->category_id)
                                             ->where('confirmed', true)

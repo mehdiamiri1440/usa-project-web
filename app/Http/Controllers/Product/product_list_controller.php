@@ -390,8 +390,15 @@ class product_list_controller extends Controller
     {
         $user_id = session('user_id');
 
+        $user_info = myuser::find($user_id);
+
+        //this condition has been added for buyers good first impression
+        if($user_info->created_at->diffInHours(Carbon::now()) < 6 ) {// for new users
+            return $this->sort_products_by_response_time($products);
+        }
+
         $user_response_info = $this->get_user_response_info($user_id);
-        $user_response_info['created_at'] = myuser::find($user_id)->created_at;
+        $user_response_info['created_at'] = $user_info->created_at;
 
         $sorting_callback_function = $this->get_best_match_call_back_function($user_response_info);
 

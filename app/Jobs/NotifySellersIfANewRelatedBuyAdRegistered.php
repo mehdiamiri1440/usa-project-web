@@ -14,6 +14,7 @@ use App\Models\product;
 use App\Models\category;
 use Carbon\Carbon;
 use DB;
+use App\Http\Controllers\MatchMaker\seller_finder_controller;
 
 class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
 {
@@ -37,14 +38,27 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
      */
     public function handle()
     {
-        $the_most_related_product_owners_ids = $this->get_the_most_related_product_owners_id_to_the_given_buyAd_if_any($this->buyAd);
-
-        // $old_related_product_owners_ids = $this->get_old_related_product_owners_id_to_the_given_buyAd_if_any($this->buyAd);
+        $seller_finder_controller_object = new seller_finder_controller();
+        $the_most_related_product_owners_ids = $seller_finder_controller_object->get_the_most_related_product_owners_id_to_the_given_buyAd_if_any($this->buyAd);
+        
+        $now = Carbon::now();
 
         if (count($the_most_related_product_owners_ids) > 0) {
+            $buyAd_suggestion_records = [];
+
             foreach ($the_most_related_product_owners_ids as $user_id) {
+                
+                $buyAd_suggestion_records[] = [
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                    'seller_id'  => $user_id,
+                    'buy_ad_id'  => $this->buyAd->id,
+                ];
+
                 $this->notify_product_owner($user_id);
             }
+            
+            DB::table('buy_ad_suggestions')->insert($buyAd_suggestion_records);
         }
 
         // $topics = $this->generate_related_topics($old_related_product_owners_ids);
@@ -62,7 +76,7 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
     protected function get_the_most_related_product_owners_id_to_the_given_buyAd_if_any(&$buyAd)
     {
         $until_date = Carbon::now();
-        $from_date = Carbon::now()->subDays(14); // last 2 weeks
+        $from_date = Carbon::now()->subDays(30); // last month
 
         $related_subcategory_products = product::where('category_id', $buyAd->category_id)
                                             ->where('confirmed', true)
@@ -194,7 +208,7 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
 
         $data = [
             'title' => 'باسکول',
-            'message' => 'یک درخواست خرید مرتبط با محصول شما ثبت شد',
+            'message' => 'یک خریدار جدید برای محصول شما پیدا شد. خریدار فقط تا چهار ساعت دیگر منتظر پاسخ شما می ماند ',
             'target' => 'buyAds',
             'sound' => 'buskool_voice.mp3'
         ];
