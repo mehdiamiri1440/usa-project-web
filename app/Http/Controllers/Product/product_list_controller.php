@@ -9,6 +9,7 @@ use App\Models\myuser;
 use DB;
 use App\Models\product_media;
 use App\Models\product;
+use App\Models\buyAd;
 use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
 
@@ -393,8 +394,23 @@ class product_list_controller extends Controller
         $user_info = myuser::find($user_id);
 
         //this condition has been added for buyers good first impression
-        if($user_info->created_at->diffInHours(Carbon::now()) < 6 ) {// for new users
+        if($user_info->created_at->diffInHours(Carbon::now()) < 6 ) { // for new users
             return $this->sort_products_by_response_time($products);
+        }
+
+        //this condition checks if buyer has buyAd request to show five related products at top list
+        if($user_info->is_buyer == true){
+            $the_buyer_last_buyAd_request = buyAd::where('myuser_id',$user_id)
+                                                    ->where('confirmed',true)
+                                                    ->orderBy('updated_at')
+                                                    ->get()
+                                                    ->last();
+
+            if($the_buyer_last_buyAd_request){
+                $tmp_products =  $products;
+                $tmp_products = $this->get_the_most_related_products_to_buyer($the_buyer_last_buyAd_request,$tmp_products);
+                $tmp_products = array_slice($tmp_products,0,5);
+            }
         }
 
         $user_response_info = $this->get_user_response_info($user_id);
@@ -404,6 +420,9 @@ class product_list_controller extends Controller
 
         usort($products,$sorting_callback_function);
 
+        if($tmp_products){
+            $products = array_merge($tmp_products,$products);
+        }
 
         return $products;
     }
@@ -755,6 +774,17 @@ class product_list_controller extends Controller
             return $item1['main']->updated_at < $item2['main']->updated_at;
         });
 
+        return $products;
+    }
+
+    protected function get_the_most_related_products_to_buyer(&$buyAd_record,&$products)
+    {
+        $this->apply_category_filter($products,$buyAd_record->category_id);
+
+        // if($buyAd_record->name){
+        //     $this->apply_search_text_filter($products,$buyAd_record->name);
+        // }
+        
         return $products;
     }
 
