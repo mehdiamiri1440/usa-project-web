@@ -31,6 +31,7 @@
   background: #fff;
   float: right;
   width: 100%;
+  border: 2px solid transparent;
 }
 
 .main-article-title {
@@ -213,31 +214,26 @@ label {
 
   display: block;
 }
-
+.footer-article {
+  overflow: hidden;
+  padding: 0 10px 10px;
+}
 .article-features {
-  text-align: left;
-
-  direction: rtl;
-
-  padding: 0 15px 15px;
-
-  position: absolute;
-
-  left: 15px;
-
-  bottom: 15px;
-
-  min-width: 150px;
+  width: 42px;
 }
 
 .article-features button {
   background: none;
   border: none;
 }
-
+.article-action-buttons {
+  width: calc(100% - 42px);
+  padding-left: 10px;
+}
 .article-action-buttons > button {
   margin: 0;
   padding: 4px 15px;
+  width: 100%;
 }
 
 .article-features button.disable {
@@ -256,29 +252,41 @@ label {
   background: #777;
   border: none;
 }
-
-.article-action-buttons {
-  display: none;
-}
 .full-width-button,
 .full-width-button button {
   width: 100% !important;
+  padding-left: 0;
 }
-.calc-width-button {
-  width: calc(100% - 72px) !important;
+
+.owner-product .article-action-buttons {
+  width: calc(100% - 114px);
+  padding-left: 5px;
 }
-.calc-width-button button {
-  width: 100% !important;
+
+.owner-product .article-features button.elevator-event:first-of-type {
+  font-size: 11px;
+  padding: 4px 4px 3px;
 }
+
+.owner-product .article-features button.elevator-event {
+  color: #fff;
+  border-radius: 4px;
+  padding: 4px 10px;
+}
+
+.owner-product .article-features {
+  width: 114px;
+}
+
 @media screen and (max-width: 555px) {
   .article-action-buttons {
-    padding: 0 10px 15px;
+    padding: 0 15px 15px;
     display: block;
   }
   .article-features {
     position: relative;
 
-    padding: 0 0 0 10px;
+    padding: 0 15px;
 
     right: 0;
 
@@ -430,7 +438,12 @@ label {
       :is_my_profile_status="isMyProfile"
     />
 
-    <div class="footer-article">
+    <div
+      class="footer-article"
+      :class="{
+        'owner-product': isMyProfile,
+      }"
+    >
       <div
         class="article-features pull-left"
         v-if="product.main.is_elevated == 1 || isMyProfile"
@@ -493,8 +506,8 @@ label {
 <script>
 import { eventBus } from "../../../../router/router";
 
-import ProductUserInfo from "./product-article-components/product_user_info";
-import ArticleMainContents from "./product-article-components/article_main_contents";
+import ProductUserInfo from "./product-grid-article-components/product_user_info";
+import ArticleMainContents from "./product-grid-article-components/article_main_contents";
 
 export default {
   components: {
