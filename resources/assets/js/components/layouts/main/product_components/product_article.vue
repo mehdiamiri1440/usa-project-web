@@ -272,13 +272,13 @@ label {
 }
 @media screen and (max-width: 555px) {
   .article-action-buttons {
-    padding: 0 15px 15px;
+    padding: 0 10px 15px;
     display: block;
   }
   .article-features {
     position: relative;
 
-    padding: 0 15px;
+    padding: 0 0 0 10px;
 
     right: 0;
 
@@ -314,12 +314,21 @@ label {
 
             <div
               class="modal-title"
-              v-text="'ویرایش ' + product.main.category_name + ' | ' + product.main.sub_category_name "
+              v-text="
+                'ویرایش ' +
+                product.main.category_name +
+                ' | ' +
+                product.main.sub_category_name
+              "
             ></div>
           </div>
           <div class="modal-body col-xs-12">
             <div class="row">
-              <input type="hidden" class="product-id" :value="product.main.id" />
+              <input
+                type="hidden"
+                class="product-id"
+                :value="product.main.id"
+              />
               <div class="col-xs-12 col-sm-6 pull-right">
                 <label class="content-label">مقدار موجودی (کیلوگرم)</label>
 
@@ -346,7 +355,10 @@ label {
                 />
 
                 <div class="text-danger">
-                  <span v-if="errors.min_sale_amount" v-text="errors.min_sale_amount[0]"></span>
+                  <span
+                    v-if="errors.min_sale_amount"
+                    v-text="errors.min_sale_amount[0]"
+                  ></span>
                 </div>
               </div>
 
@@ -361,7 +373,10 @@ label {
                 />
 
                 <div class="text-danger">
-                  <span v-if="errors.min_sale_price" v-text="errors.min_sale_price[0]"></span>
+                  <span
+                    v-if="errors.min_sale_price"
+                    v-text="errors.min_sale_price[0]"
+                  ></span>
                 </div>
               </div>
 
@@ -376,16 +391,21 @@ label {
                 />
 
                 <div class="text-danger">
-                  <span v-if="errors.max_sale_price" v-text="errors.max_sale_price[0]"></span>
+                  <span
+                    v-if="errors.max_sale_price"
+                    v-text="errors.max_sale_price[0]"
+                  ></span>
                 </div>
               </div>
             </div>
             <button
               @click="editProduct('article-modal' + product.main.id)"
               type="submit"
-              style="border:none"
+              style="border: none"
               class="green-button"
-            >ثبت ویرایش</button>
+            >
+              ثبت ویرایش
+            </button>
           </div>
         </div>
       </div>
@@ -396,19 +416,30 @@ label {
     <ProductUserInfo
       :profile_photo="product.profile_info.profile_photo"
       :user_info="product.user_info"
-      :user_full_name="product.user_info.first_name + ' ' +
-            product.user_info.last_name"
+      :user_full_name="
+        product.user_info.first_name + ' ' + product.user_info.last_name
+      "
       :user_name="product.user_info.user_name"
       :current_user="currentUser"
       :product_id="product.main.id"
       :is_my_profile_status="isMyProfile"
     />
 
-    <ArticleMainContents :productIndex="productIndex" :is_my_profile_status="isMyProfile" />
+    <ArticleMainContents
+      :productIndex="productIndex"
+      :is_my_profile_status="isMyProfile"
+    />
 
     <div class="footer-article">
-      <div class="article-features pull-left" v-if="product.main.is_elevated == 1 || isMyProfile">
-        <button v-if="isMyProfile" class="elevator-event" @click.prevent="elevatorEvent()">
+      <div
+        class="article-features pull-left"
+        v-if="product.main.is_elevated == 1 || isMyProfile"
+      >
+        <button
+          v-if="isMyProfile"
+          class="elevator-event"
+          @click.prevent="elevatorEvent()"
+        >
           <i class="fas fa-chart-line"></i>
           اعمال نردبان
         </button>
@@ -425,9 +456,20 @@ label {
       </div>
       <div
         class="article-action-buttons pull-right"
-        :class="[{'full-width-button' : product.main.is_elevated == 0 && !isMyProfile},{'calc-width-button' : product.main.is_elevated == 1 && !isMyProfile}]"
+        :class="[
+          {
+            'full-width-button': product.main.is_elevated == 0 && !isMyProfile,
+          },
+          {
+            'calc-width-button': product.main.is_elevated == 1 && !isMyProfile,
+          },
+        ]"
       >
-        <button v-if="!isMyProfile" @click.prevent="openChat(product)" class="green-button">
+        <button
+          v-if="!isMyProfile"
+          @click.prevent="openChat(product)"
+          class="green-button"
+        >
           <i class="fa fa-envelope"></i>
           استعلام قیمت
         </button>
@@ -457,10 +499,10 @@ import ArticleMainContents from "./product-article-components/article_main_conte
 export default {
   components: {
     ProductUserInfo,
-    ArticleMainContents
+    ArticleMainContents,
   },
   props: ["productIndex", "product", "str", "currentUser"],
-  data: function() {
+  data: function () {
     return {
       submiting: false,
       errors: "",
@@ -469,11 +511,11 @@ export default {
       isMyProfile: false,
       productUrl: "",
       jsonLDObject: "",
-      verifiedUserContent: this.$parent.verifiedUserContent
+      verifiedUserContent: this.$parent.verifiedUserContent,
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       this.productUrl = this.getProductUrl();
 
       if (this.currentUser.user_info) {
@@ -485,7 +527,7 @@ export default {
 
       // this.jsonLDObject = this.createJsonLDObject();
     },
-    toLatinNumbers: function(num) {
+    toLatinNumbers: function (num) {
       if (num == null) {
         return null;
       }
@@ -496,14 +538,14 @@ export default {
 
       return num
         .toString()
-        .replace(/[\u0660-\u0669]/g, function(c) {
+        .replace(/[\u0660-\u0669]/g, function (c) {
           return c.charCodeAt(0) - 0x0660;
         })
-        .replace(/[\u06f0-\u06f9]/g, function(c) {
+        .replace(/[\u06f0-\u06f9]/g, function (c) {
           return c.charCodeAt(0) - 0x06f0;
         });
     },
-    openEditBox: function(e) {
+    openEditBox: function (e) {
       e.preventDefault();
 
       if (this.currentUser.profile) {
@@ -512,9 +554,7 @@ export default {
         var element = event.parents("article").find(".buy_details");
 
         element.slideToggle("125", "swing");
-        $(".buy_details")
-          .not(element)
-          .slideUp();
+        $(".buy_details").not(element).slideUp();
 
         this.scrollToTheRequestRegisterBox(element);
 
@@ -530,13 +570,13 @@ export default {
         );
       }
     },
-    scrollToTheRequestRegisterBox: function(element) {
+    scrollToTheRequestRegisterBox: function (element) {
       var newPosition = $(element).offset();
       $("html, body")
         .stop()
         .animate({ scrollTop: newPosition.top - 380 }, 1000);
     },
-    editProduct: function(getProductWrapper) {
+    editProduct: function (getProductWrapper) {
       this.submiting = true;
       this.errors = "";
 
@@ -559,7 +599,7 @@ export default {
         stock: stock,
         min_sale_price: minSalePrice,
         max_sale_price: maxSalePrice,
-        min_sale_amount: minSaleAmount
+        min_sale_amount: minSaleAmount,
       };
 
       if (description !== "") {
@@ -570,7 +610,7 @@ export default {
 
       axios
         .post("/edit_product", request)
-        .then(function(response) {
+        .then(function (response) {
           $(".modal").modal("hide");
 
           eventBus.$emit("modal", "productEditDone");
@@ -581,7 +621,7 @@ export default {
             "product-edited-successfully"
           );
         })
-        .catch(function(err) {
+        .catch(function (err) {
           self.errors = "";
           self.errors = err.response.data.errors;
 
@@ -591,7 +631,7 @@ export default {
         });
     },
 
-    openChat: function(product) {
+    openChat: function (product) {
       this.registerComponentStatistics(
         "product",
         "openChat",
@@ -607,7 +647,7 @@ export default {
         last_name: product.user_info.last_name,
         profile_photo: product.profile_info.profile_photo,
         user_name: product.user_info.user_name,
-        product_name: productName
+        product_name: productName,
       };
 
       var self = this;
@@ -630,10 +670,10 @@ export default {
         // eventBus.$emit('modal','sendMsg');
       }
     },
-    updatePopUpStatus: function(popUpOpenStatus) {
+    updatePopUpStatus: function (popUpOpenStatus) {
       this.popUpLoaded = popUpOpenStatus;
     },
-    getProductUrl: function() {
+    getProductUrl: function () {
       return (
         "/product-view/خرید-عمده-" +
         this.product.main.sub_category_name.replace(" ", "-") +
@@ -643,7 +683,7 @@ export default {
         this.product.main.id
       );
     },
-    copyProductLinkToClipBoard: function() {
+    copyProductLinkToClipBoard: function () {
       this.registerComponentStatistics(
         "product",
         "copy-product-link",
@@ -681,7 +721,7 @@ export default {
         }
       }
     },
-    isDeviceMobile: function() {
+    isDeviceMobile: function () {
       if (
         navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -696,7 +736,7 @@ export default {
         return false;
       }
     },
-    createJsonLDObject: function() {
+    createJsonLDObject: function () {
       var fullName =
         this.product.user_info.first_name +
         " " +
@@ -709,14 +749,14 @@ export default {
         "@context": "https://schema.org/",
         "@type": "Product",
         name: this.product.main.product_name,
-        image: this.product.photos.map(function(photo) {
+        image: this.product.photos.map(function (photo) {
           return "https://www.buskool.com/storage/" + photo.file_path;
         }),
         description: this.product.main.description,
         aggregateRating: {
           "@type": "AggregateRating",
           ratingValue: "4.4",
-          reviewCount: "3"
+          reviewCount: "3",
         },
         offers: {
           "@type": "Offer",
@@ -727,26 +767,30 @@ export default {
           seller: {
             "@type": "Person",
             name: fullName,
-            url: productOwnerProfilePageUrl
-          }
-        }
+            url: productOwnerProfilePageUrl,
+          },
+        },
       };
 
       return jsonDL;
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
     },
-    registerComponentExceptions: function(description, fatal = false) {
+    registerComponentExceptions: function (description, fatal = false) {
       gtag("event", "exception", {
         description: description,
-        fatal: fatal
+        fatal: fatal,
       });
     },
-    elevatorEvent: function() {
+    elevatorEvent: function () {
       // eventBus.$emit(
       //   "elevatorText",
       //   "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود."
@@ -755,11 +799,11 @@ export default {
       eventBus.$emit("productId", this.product.main.id);
       eventBus.$emit("modal", "elevator");
       // $("#elevator-modal").modal("show");
-    }
+    },
   },
   mounted() {
     this.init();
     $(".elevator-event.active").tooltip();
-  }
+  },
 };
 </script>

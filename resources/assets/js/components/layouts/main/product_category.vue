@@ -171,12 +171,13 @@ a.close-dialog-popup {
 
 button.btn-filter {
   float: left;
-  padding: 7px 10px;
+  padding: 4px 10px;
   border-radius: 5px;
   border: none;
   background: #000546;
   color: #fff;
   width: 140px;
+  margin-right: 15px;
 }
 
 .links-sub-header {
@@ -340,7 +341,7 @@ li.active a::after {
 
 .rate-filter-desktop-wrapper > ul {
   float: right;
-  padding: 7px 0;
+  padding: 4px 0;
 }
 
 .rate-filter-desktop-wrapper > ul li {
@@ -425,6 +426,30 @@ li.active a::after {
 }
 .text-green {
   color: #00c569 !important;
+}
+
+.show-list-items {
+  float: left;
+  padding-top: 2px;
+}
+.show-list-items button {
+  background: #eee;
+  border: 1px solid #999;
+  border-radius: 5px;
+  padding: 3px 14px 0;
+  transition: 300ms;
+}
+.show-list-items button:hover {
+  background: #556080;
+  color: #fff;
+  border-color: #556080;
+  transition: 300ms;
+}
+.show-list-items button.active {
+  background: #556080;
+  color: #fff;
+  border-color: #556080;
+  transition: 300ms;
 }
 
 .footer-note-wrapper {
@@ -586,6 +611,16 @@ filter modal styles
   color: #777;
 }
 
+.default-grid .default-main-article-content {
+  width: calc(100% - 90px);
+}
+.default-grid .default-wrapper-main-image {
+  width: 80px;
+  height: 80px;
+}
+.default-grid > div {
+  padding-bottom: 0;
+}
 /* 
 end filter modal styles
 ---------------------------------------------------------------------------------
@@ -837,7 +872,12 @@ end filter modal styles
       </div>
     </div>
     <div class="container">
-      <div id="filter-modal" class="filter-modal modal fade" tabindex="-1" role="dialog">
+      <div
+        id="filter-modal"
+        class="filter-modal modal fade"
+        tabindex="-1"
+        role="dialog"
+      >
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -856,7 +896,9 @@ end filter modal styles
                     @click="setSortOption('RR')"
                     class="default-button-list"
                     :class="{ active: sortOption == 'RR' }"
-                  >احتمال پاسخگویی</button>
+                  >
+                    احتمال پاسخگویی
+                  </button>
                   <i class="fa fa-angle-left"></i>
                 </li>
                 <li>
@@ -864,7 +906,9 @@ end filter modal styles
                     @click="setSortOption('RT')"
                     class="default-button-list"
                     :class="{ active: sortOption == 'RT' }"
-                  >سرعت پاسخگویی</button>
+                  >
+                    سرعت پاسخگویی
+                  </button>
                   <i class="fa fa-angle-left"></i>
                 </li>
                 <li>
@@ -872,7 +916,9 @@ end filter modal styles
                     @click="setSortOption('RD')"
                     class="default-button-list"
                     :class="{ active: sortOption == 'RD' }"
-                  >جدیدترین ها</button>
+                  >
+                    جدیدترین ها
+                  </button>
                   <i class="fa fa-angle-left"></i>
                 </li>
               </ul>
@@ -884,19 +930,33 @@ end filter modal styles
       </div>
     </div>
 
-    <div v-if="!currentUser.user_info" class="flat-plust-icon hidden-lg hidden-md">
+    <div
+      v-if="!currentUser.user_info"
+      class="flat-plust-icon hidden-lg hidden-md"
+    >
       <a href="#" @click.prevent="openStickyGuide()">
         <i class="fa fa-exclamation"></i>
       </a>
     </div>
 
     <div v-if="!currentUser.user_info">
-      <button class="guide-button hidden-sm hidden-xs" @click.prevent="openStickyGuide()">راهنما</button>
+      <button
+        class="guide-button hidden-sm hidden-xs"
+        @click.prevent="openStickyGuide()"
+      >
+        راهنما
+      </button>
     </div>
 
-    <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
+    <div
+      class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid"
+    >
       <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
-        <input type="text" v-model="headerSearchText" placeholder="اینجا جستجو کنید" />
+        <input
+          type="text"
+          v-model="headerSearchText"
+          placeholder="اینجا جستجو کنید"
+        />
 
         <button class="btn-search">
           <i class="fa-search fa"></i>
@@ -926,41 +986,90 @@ end filter modal styles
                   <button
                     @click="setSortOption('RR')"
                     :class="{ 'text-green': sortOption == 'RR' }"
-                  >احتمال پاسخگویی</button>
+                  >
+                    احتمال پاسخگویی
+                  </button>
                 </li>
                 <li>
                   <button
                     @click="setSortOption('RT')"
                     :class="{ 'text-green': sortOption == 'RT' }"
-                  >سرعت پاسخگویی</button>
+                  >
+                    سرعت پاسخگویی
+                  </button>
                 </li>
                 <li>
                   <button
                     @click="setSortOption('RD')"
                     :class="{ 'text-green': sortOption == 'RD' }"
-                  >جدیدترین ها</button>
+                  >
+                    جدیدترین ها
+                  </button>
                 </li>
               </ul>
-              <button class="btn-filter hidden-lg" data-toggle="modal" data-target="#searchFilter">
+              <button
+                class="btn-filter hidden-lg"
+                data-toggle="modal"
+                data-target="#searchFilter"
+              >
                 <i class="fa fa-filter"></i>
                 دسته ها و فیلتر
               </button>
+              <div class="show-list-items hidden-xs hidden-sm">
+                <button
+                  @click.prevent="listIsGrid = true"
+                  :class="{ active: listIsGrid }"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="نمایش ستونی"
+                >
+                  <i class="fas fa-grip-horizontal"></i>
+                </button>
+
+                <button
+                  @click.prevent="listIsGrid = false"
+                  :class="{ active: !listIsGrid }"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="نمایش لیستی"
+                >
+                  <i class="fa fa-list"></i>
+                </button>
+              </div>
             </div>
           </section>
           <section class="main-content col-xs-12" v-if="products.length > 0">
             <div id="article-list" class="row">
-              <div
-                class="col-xs-12"
-                v-for="(product, productIndex) in products"
-                :key="productIndex"
-              >
-                <ProductArticle
-                  v-if="products.length >= productIndex"
-                  :key="product.main.id"
-                  :product="product"
-                  :str="str"
-                  :currentUser="currentUser"
-                />
+              <div v-if="!listIsGrid">
+                <div
+                  class="col-xs-12"
+                  v-for="(product, productIndex) in products"
+                  :key="productIndex"
+                >
+                  <ProductArticle
+                    v-if="products.length >= productIndex"
+                    :key="product.main.id"
+                    :product="product"
+                    :str="str"
+                    :currentUser="currentUser"
+                  />
+                </div>
+              </div>
+              <div v-else>
+                <div
+                  class="col-xs-12 col-md-4 pull-right"
+                  :key="productIndex"
+                  v-for="(product, productIndex) in products"
+                >
+                  <ProductGridArticle
+                    :productIndex="productIndex"
+                    v-if="products.length >= productIndex"
+                    :key="product.main.id"
+                    :product="product"
+                    :str="str"
+                    :currentUser="currentUser"
+                  />
+                </div>
               </div>
 
               <div
@@ -974,12 +1083,18 @@ end filter modal styles
                       <i class="fa fa-plus"></i>
                     </span>
 
-                    <span class="hidden-sm hidden-md hidden-lg text-rtl" v-show="!loadMoreActive">
+                    <span
+                      class="hidden-sm hidden-md hidden-lg text-rtl"
+                      v-show="!loadMoreActive"
+                    >
                       محصولات بیشتر
                       <i class="fa fa-plus"></i>
                     </span>
 
-                    <div v-show="loadMoreActive" class="btn-loader-active-wrapper">
+                    <div
+                      v-show="loadMoreActive"
+                      class="btn-loader-active-wrapper"
+                    >
                       <img src="../../../../img/gif/loading.gif" />
                     </div>
                   </div>
@@ -988,16 +1103,30 @@ end filter modal styles
             </div>
           </section>
 
-          <search-not-found v-else-if="products.length === 0 && searchActive === true" />
-          <search-not-found v-else-if="products.length === 0 && searchText !== ''" />
-          <search-not-found v-else-if="products.length === 0 && searchText === ''" />
+          <search-not-found
+            v-else-if="products.length === 0 && searchActive === true"
+          />
+          <search-not-found
+            v-else-if="products.length === 0 && searchText !== ''"
+          />
+          <search-not-found
+            v-else-if="products.length === 0 && searchText === ''"
+          />
 
           <section v-else class="main-content col-xs-12">
-            <div class="row">
-              <div v-for="(defaultItem, index) in 8" :key="index" class="default-items col-xs-12">
-                <div class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content">
+            <div class="row" v-if="!listIsGrid">
+              <div
+                v-for="(defaultItem, index) in 8"
+                :key="index"
+                class="default-items col-xs-12"
+              >
+                <div
+                  class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content"
+                >
                   <div class="default-user-contents col-xs-12 padding-0">
-                    <div class="placeholder-content default-article-user-image pull-right"></div>
+                    <div
+                      class="placeholder-content default-article-user-image pull-right"
+                    ></div>
 
                     <span
                       class="padding-top-5 placeholder-content margin-15 pull-right content-min-width"
@@ -1008,19 +1137,31 @@ end filter modal styles
                     ></span>
                   </div>
 
-                  <div class="default-article-contents padding-0 margin-top-10 col-xs-12">
+                  <div
+                    class="default-article-contents padding-0 margin-top-10 col-xs-12"
+                  >
                     <div class="default-wrapper-main-image pull-right">
-                      <span class="default-main-image placeholder-content"></span>
+                      <span
+                        class="default-main-image placeholder-content"
+                      ></span>
                     </div>
 
                     <div class="default-main-article-content">
-                      <span class="content-half-width placeholder-content"></span>
+                      <span
+                        class="content-half-width placeholder-content"
+                      ></span>
 
-                      <span class="content-default-width placeholder-content"></span>
+                      <span
+                        class="content-default-width placeholder-content"
+                      ></span>
 
-                      <span class="content-min-width placeholder-content mobile-hidden"></span>
+                      <span
+                        class="content-min-width placeholder-content mobile-hidden"
+                      ></span>
 
-                      <span class="content-half-width placeholder-content"></span>
+                      <span
+                        class="content-half-width placeholder-content"
+                      ></span>
                     </div>
                     <span
                       class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
@@ -1029,13 +1170,65 @@ end filter modal styles
                 </div>
               </div>
             </div>
+            <div class="row" v-else>
+              <div
+                v-for="(defaultItem, index) in 12"
+                :key="index"
+                class="default-items col-md-4 default-grid"
+              >
+                <div
+                  class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content"
+                >
+                  <div
+                    class="default-user-contents col-xs-12 padding-0 padding-10-0"
+                  >
+                    <div
+                      class="placeholder-content default-article-user-image pull-right"
+                    ></div>
+
+                    <span
+                      class="placeholder-content margin-10 pull-right content-half-width"
+                    ></span>
+                  </div>
+
+                  <div
+                    class="default-article-contents padding-0 margin-top-10 col-xs-12"
+                  >
+                    <div class="default-wrapper-main-image pull-right">
+                      <span
+                        class="default-main-image placeholder-content"
+                      ></span>
+                    </div>
+
+                    <div class="default-main-article-content">
+                      <span
+                        class="content-half-width placeholder-content"
+                      ></span>
+
+                      <span
+                        class="content-default-width placeholder-content"
+                      ></span>
+                    </div>
+                    <span
+                      class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
+                    ></span>
+                  </div>
+                  <span
+                    class="placeholder-content default-button-full-with pull-left mobile-hidden"
+                  ></span>
+                </div>
+              </div>
+            </div>
           </section>
         </div>
       </div>
 
-      <aside id="sidebar" class="product-sidebar sidebar hidden-xs hidden-sm hidden-md col-lg-3">
+      <aside
+        id="sidebar"
+        class="product-sidebar sidebar hidden-xs hidden-sm hidden-md col-lg-3"
+      >
         <div class="row">
-          <div class="sidebar__inner col-xs-12" style="position: relative;">
+          <div class="sidebar__inner col-xs-12" style="position: relative">
             <ProductAsideCategories
               :productsInfo="products"
               :categoryId="categoryId"
@@ -1048,10 +1241,17 @@ end filter modal styles
         </div>
       </aside>
 
-      <script v-if="jsonLDObject" v-html="jsonLDObject" type="application/ld+json"></script>
+      <script
+        v-if="jsonLDObject"
+        v-html="jsonLDObject"
+        type="application/ld+json"
+      ></script>
     </main>
 
-    <footer class="category-footer container" v-if="categoryMetaData.length > 0">
+    <footer
+      class="category-footer container"
+      v-if="categoryMetaData.length > 0"
+    >
       <div class="col-xs-12">
         <div data-v-c5ebe4ce class="title-section col-xs-12">
           <div data-v-c5ebe4ce class="row">
@@ -1065,7 +1265,11 @@ end filter modal styles
 
         <div class="footer-note-wrapper main-box-shadow">
           <div class="wrapper-contents">
-            <div class="contents" v-for="categoryMeta in categoryMetaData" :key="categoryMeta.id">
+            <div
+              class="contents"
+              v-for="categoryMeta in categoryMetaData"
+              :key="categoryMeta.id"
+            >
               <div v-html="categoryMeta.header"></div>
               <div v-html="categoryMeta.content"></div>
             </div>
@@ -1077,6 +1281,7 @@ end filter modal styles
 </template>
 <script>
 import ProductArticle from "./product_components/product_article";
+import ProductGridArticle from "./product_components/Product_grid_article";
 import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
 import searchNotFound from "./main_components/search-not-found";
 import { eventBus } from "../../../router/router";
@@ -1085,6 +1290,7 @@ var visible = false;
 export default {
   components: {
     ProductArticle,
+    ProductGridArticle,
     ProductAsideCategories,
     searchNotFound,
   },
@@ -1111,8 +1317,8 @@ export default {
       categoryMetaData: "",
       searchValue: this.$route.params.searchText,
       scrolled: false,
-      productCountInPage: 10,
-      productCountInEachLoad: 10,
+      productCountInPage: 12,
+      productCountInEachLoad: 12,
       continueToLoadProducts: true,
       fromProductCount: 0,
       searchActive: false,
@@ -1127,6 +1333,7 @@ export default {
       jsonLDObject: "",
       sortOption: "BM",
       verifiedUserContent: this.$parent.verifiedUserContent,
+      listIsGrid: true,
     };
   },
   methods: {
@@ -1153,6 +1360,9 @@ export default {
     init: function () {
       this.products = {};
       this.scrollToTop();
+      $(".show-list-items button").tooltip();
+      this.swithToListOnMobile();
+      this.cehckPageWidth();
       var self = this;
       var searchValue = this.searchValue;
       var searchValueText = searchValue;
@@ -1182,7 +1392,7 @@ export default {
           self.loading = true;
 
           self.fromProductCount = 0;
-          self.productCountInPage = 10;
+          self.productCountInPage = 12;
 
           axios
             .post("/user/get_product_list", {
@@ -1553,6 +1763,19 @@ export default {
     },
     openStickyGuide: function () {
       eventBus.$emit("modal", "guide");
+    },
+    swithToListOnMobile() {
+      window.addEventListener("resize", (event) => {
+        this.cehckPageWidth();
+      });
+    },
+    cehckPageWidth() {
+      let pageWidth = window.outerWidth;
+      if (pageWidth <= 991) {
+        this.listIsGrid = false;
+      } else {
+        this.listIsGrid = true;
+      }
     },
   },
   watch: {
