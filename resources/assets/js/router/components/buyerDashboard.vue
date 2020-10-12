@@ -19,10 +19,14 @@
 
 <template>
   <div>
-    <header-dash-buyer :storage="storagePath" :logout="'/logout'" :search-text="searchText"></header-dash-buyer>
+    <header-dash-buyer
+      :storage="storagePath"
+      :logout="'/logout'"
+      :search-text="searchText"
+    ></header-dash-buyer>
 
     <div id="main">
-      <router-view :str="storagePath"></router-view>
+      <router-view :str="storagePath" :user-type="isSeller"></router-view>
     </div>
   </div>
 </template>
@@ -34,10 +38,10 @@ import { eventBus } from "../router.js";
 
 export default {
   components: {
-    "header-dash-buyer": HeaderDashBuyer
+    "header-dash-buyer": HeaderDashBuyer,
   },
   props: ["userId", "isSeller", "assets", "storagePath", "verifiedUserContent"],
-  data: function() {
+  data: function () {
     return {
       searchText: "",
       currentUser: {
@@ -49,22 +53,22 @@ export default {
           public_phone: "",
           profile_photo: this.storage + "",
           postal_code: "",
-          shaba_code: ""
+          shaba_code: "",
         },
-        user_info: ""
-      }
+        user_info: "",
+      },
     };
   },
-  mounted: function() {
+  mounted: function () {
     axios
       .post("/get_total_unread_messages_for_current_user")
-      .then(function(response) {
+      .then(function (response) {
         let messageCount = response.data.msg_count;
         eventBus.$emit("messageCount", messageCount);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log("error", error);
       });
-  }
+  },
 };
 </script>
