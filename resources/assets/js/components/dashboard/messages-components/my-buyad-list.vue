@@ -12,6 +12,10 @@
   padding-top: 95px;
 }
 
+li.contact-item {
+  min-height: 230px;
+}
+
 .contact-items.is-buyer-list {
   padding-top: 60px;
 }
@@ -79,7 +83,6 @@
   float: right;
   font-weight: bold;
 }
-
 .contact-body .contact-item span.contact-last-message {
   float: right;
   width: calc(100% - 60px);
@@ -230,6 +233,7 @@
 }
 .buyad-notice {
   color: #aeaeae;
+  min-height: 40px;
 }
 .request-contact-image {
   width: 30px;
@@ -238,9 +242,14 @@
 }
 .buyad-info {
   font-size: 15px;
-  padding: 5px 0;
+  padding: 5px;
   font-weight: bold;
   color: #777;
+  min-height: 58px;
+  padding-top: 15px;
+}
+.buyad-notice.red-text {
+  padding-top: 15px;
 }
 .buyad-info span {
   color: #556080;
@@ -426,31 +435,24 @@
 
     <div v-else class="contact-items buyad-lists-wrapper">
       <ul>
-        <li class="contact-item" v-for="(contact, index) in 1" :key="index">
-          <button>
+        <li class="contact-item" v-for="(buyAd, index) in buyAds" :key="index">
+          <button @click="openChat(buyAd, $event)" v-if="!buyAd.expired">
             <div class="buyad-header">
               <div class="request-contact-image">
-                <img
+                <!-- <img
                   v-if="contact.profile_photo"
                   :src="$parent.str + '/' + contact.profile_photo"
                   :alt="contact.first_name[0]"
-                />
+                /> -->
 
-                <img v-else src="../../../../img/user-defult.png" />
+                <!-- <img v-else src="../../../../img/user-defult.png" /> -->
+                <img src="../../../../img/user-defult.png" />
               </div>
               <div class="my-contact-info-wrapper">
-                <span class="contact-name text-rtl">
-                  محمدامین دلداری
-                  <button
-                    @click.prevent
-                    class="verified-user"
-                    data-container="body"
-                    data-toggle="popover"
-                    data-placement="bottom"
-                    title
-                  >
-                    <i class="fa fa-certificate"></i>
-                  </button>
+                <span
+                  class="contact-name text-rtl"
+                  v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                >
                 </span>
               </div>
             </div>
@@ -458,14 +460,15 @@
               <div class="row">
                 <p class="buyad-info">
                   خریدار
-                  <span>۲۰ تن</span>
-                  <span>خرما</span>
+                  <span v-text="buyAd.requirement_amount + 'کیلو گرم'"></span>
+                  <span v-text="buyAd.subcategory_name">خرما</span>
                   از نوع
-                  <span>مضافتی</span>
+                  <span v-text="buyAd.name">مضافتی</span>
                 </p>
                 <p class="buyad-expier">
                   <span class="red-text">
-                    <i class="fas fa-hourglass-half"></i> ۵ ساعت
+                    <i class="fas fa-hourglass-half"></i>
+                    <span v-text="buyAd.remaining_time + ' ساعت '"></span>
                   </span>
                   دیگر فرصت پاسخ گویی شما به این درخواست
                 </p>
@@ -478,32 +481,16 @@
               </div>
             </div>
           </button>
-        </li>
-        <li class="contact-item" v-for="(contact, index) in 1" :key="index">
-          <button>
+          <button v-else disabled>
             <div class="buyad-header">
               <div class="request-contact-image">
-                <img
-                  v-if="contact.profile_photo"
-                  :src="$parent.str + '/' + contact.profile_photo"
-                  :alt="contact.first_name[0]"
-                />
-
-                <img v-else src="../../../../img/user-defult.png" />
+                <img src="../../../../img/user-defult.png" />
               </div>
               <div class="my-contact-info-wrapper">
-                <span class="contact-name text-rtl">
-                  محمدامین دلداری
-                  <button
-                    @click.prevent
-                    class="verified-user"
-                    data-container="body"
-                    data-toggle="popover"
-                    data-placement="bottom"
-                    title
-                  >
-                    <i class="fa fa-certificate"></i>
-                  </button>
+                <span
+                  class="contact-name text-rtl"
+                  v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                >
                 </span>
               </div>
             </div>
@@ -514,14 +501,14 @@
                 </p>
                 <p class="buyad-info">
                   خریدار
-                  <span>۲۰ تن</span>
-                  <span>خرما</span>
+                  <span v-text="buyAd.requirement_amount + 'کیلو گرم'"></span>
+                  <span v-text="buyAd.subcategory_name">خرما</span>
                   از نوع
-                  <span>مضافتی</span>
+                  <span v-text="buyAd.name">مضافتی</span>
                 </p>
 
                 <p class="buyad-notice red-text">
-                  دیگر فرصت پاسخ گویی شما به این درخواست
+                  فرصت پاسخ گویی شما به این درخواست به پایان رسیده است
                 </p>
                 <div class="buyad-button disable">
                   <p>پیام به خریدار</p>
@@ -540,17 +527,25 @@
 export default {
   data: function () {
     return {
-      is_contact: true,
+      buyAds: "",
     };
   },
   methods: {
+    init() {
+      this.getBuyAds();
+    },
+    getBuyAds() {
+      axios.post("/get_my_buyAd_suggestions").then((response) => {
+        this.buyAds = response.data.buyAds;
+      });
+    },
     activeComponentTooltip() {
       $(".verified-user")
         .popover({ trigger: "manual", html: true, animation: false })
         .on("mouseenter", function () {
           var _this = this;
-          $(this).popover("show");
           $(".popover").on("mouseleave", function () {
+            $(this).popover("show");
             $(_this).popover("hide");
           });
         })
@@ -563,6 +558,62 @@ export default {
           }, 300);
         });
     },
+    openChat: function (buyAd, event) {
+      var self = this;
+
+      let id = "#loader-" + buyAd.buyAd;
+      self.hideReplyBtn(event, id);
+
+      axios
+        .post("/get_user_permission_for_buyAd_reply", {
+          buy_ad_id: buyAd.buyAd,
+        })
+        .then(function (response) {
+          self.showReplyBtn(event, id);
+
+          if (response.data.permission == true) {
+            var contact = {
+              contact_id: buyAd.myuser_id,
+              first_name: buyAd.first_name,
+              last_name: buyAd.last_name,
+              profile_photo: null,
+              user_name: buyAd.user_name,
+              buyAd_id: buyAd.buyAd,
+            };
+
+            eventBus.$emit("ChatInfo", contact);
+
+            self.registerComponentStatistics(
+              "buyAdReply",
+              "openChat",
+              "click on open chatBox"
+            );
+          } else {
+            eventBus.$emit("modal", "buyAdReplyLimit");
+            self.registerComponentStatistics(
+              "buyAdReply",
+              "openChat",
+              "permission denied"
+            );
+          }
+        });
+    },
+    hideReplyBtn: function (e, id) {
+      return new Promise((resolve, reject) => {
+        $(e.target).hide();
+        resolve(true);
+      }).then(() => {
+        $(id).show();
+      });
+    },
+    showReplyBtn: function (e, id) {
+      return new Promise((resolve, reject) => {
+        $(id).hide();
+        resolve(true);
+      }).then(() => {
+        $(e.target).show();
+      });
+    },
   },
   watch: {
     "$parent.contactList": function () {
@@ -572,6 +623,9 @@ export default {
         }, 10);
       }
     },
+  },
+  mounted() {
+    this.init();
   },
 };
 </script>
