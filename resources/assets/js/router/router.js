@@ -111,8 +111,17 @@ const router = new Router({
               path: "contacts",
               name: "messagesSeller",
               components: {
-                "contact-list": (resolve) => {
-                  require(["../components/dashboard/messages.vue"], resolve);
+                "messenger-list": (resolve) => {
+                  require(["../components/dashboard/messages-components/my-contact-list.vue"], resolve);
+                },
+              },
+            },
+            {
+              path: 'buy-ads',
+              name: "messagesRequestSeller",
+              components: {
+                "messenger-list": (resolve) => {
+                  require(["../components/dashboard/messages-components/my-buyad-list.vue"], resolve);
                 },
               },
             },
@@ -231,8 +240,8 @@ const router = new Router({
               path: "contacts",
               name: "messagesBuyer",
               components: {
-                "contact-list": (resolve) => {
-                  require(["../components/dashboard/messages.vue"], resolve);
+                "messenger-list": (resolve) => {
+                  require(["../components/dashboard/messages-components/my-contact-list.vue"], resolve);
                 },
               },
             },

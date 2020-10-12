@@ -362,22 +362,22 @@
       </div>
       <div v-if="$parent.userType" class="contacts-switch-buttons-wrapper">
         <div class="switch-button-item">
-          <router-link
-            :to="{ name: 'messagesRequestSeller' }"
-            tag="button"
-            class="contact-button"
-          >
+          <button class="contact-button active">
             <span class="total-unread-messages-badge">جدید</span>
             <i class="fa fa-list-alt"></i>
             درخواست ها
-          </router-link>
+          </button>
         </div>
 
         <div class="switch-button-item">
-          <button class="contact-button active">
+          <router-link
+            :to="{ name: 'messagesSeller' }"
+            tag="button"
+            class="contact-button"
+          >
             <i class="fa fa-user"></i>
             مخاطبین من
-          </button>
+          </router-link>
         </div>
       </div>
     </div>
@@ -424,74 +424,110 @@
       </div>
     </div>
 
-    <div
-      v-else
-      class="contact-items"
-      :class="{ 'is-buyer-list': !$parent.userType }"
-    >
+    <div v-else class="contact-items buyad-lists-wrapper">
       <ul>
-        <li
-          class="contact-item"
-          v-for="(contact, index) in $parent.contactList"
-          :key="index"
-        >
-          <a href="#" @click.prevent="$parent.loadChatHistory(contact, index)">
-            <div class="contact-image">
-              <img
-                v-if="contact.profile_photo"
-                :src="$parent.str + '/' + contact.profile_photo"
-                :alt="contact.first_name[0]"
-              />
+        <li class="contact-item" v-for="(contact, index) in 1" :key="index">
+          <button>
+            <div class="buyad-header">
+              <div class="request-contact-image">
+                <img
+                  v-if="contact.profile_photo"
+                  :src="$parent.str + '/' + contact.profile_photo"
+                  :alt="contact.first_name[0]"
+                />
 
-              <img v-else src="../../../../img/user-defult.png" />
-            </div>
-            <div class="my-contact-info-wrapper">
-              <span class="contact-name text-rtl">
-                {{ contact.first_name + " " + contact.last_name }}
-                <button
-                  v-if="contact.is_verified"
-                  @click.prevent
-                  class="verified-user"
-                  data-container="body"
-                  data-toggle="popover"
-                  data-placement="bottom"
-                  :data-content="$parent.verifiedUserContent"
-                  title
-                >
-                  <i class="fa fa-certificate"></i>
-                </button>
-              </span>
-
-              <p class="last-message-date">
-                {{ contact.last_msg_time_date | moment("jYY/jMM/jDD") }}
-              </p>
-            </div>
-
-            <div class="my-contact-info-wrapper">
-              <span
-                class="contact-last-message"
-                v-text="contact.last_msg.last_msg_text"
-              ></span>
-
-              <div class="count-number-wrapper">
-                <p
-                  class="count-number"
-                  v-if="contact.unread_msgs_count !== 0"
-                  v-text="contact.unread_msgs_count"
-                ></p>
+                <img v-else src="../../../../img/user-defult.png" />
+              </div>
+              <div class="my-contact-info-wrapper">
+                <span class="contact-name text-rtl">
+                  محمدامین دلداری
+                  <button
+                    @click.prevent
+                    class="verified-user"
+                    data-container="body"
+                    data-toggle="popover"
+                    data-placement="bottom"
+                    title
+                  >
+                    <i class="fa fa-certificate"></i>
+                  </button>
+                </span>
               </div>
             </div>
-          </a>
+            <div class="buyad-main col-xs-12">
+              <div class="row">
+                <p class="buyad-info">
+                  خریدار
+                  <span>۲۰ تن</span>
+                  <span>خرما</span>
+                  از نوع
+                  <span>مضافتی</span>
+                </p>
+                <p class="buyad-expier">
+                  <span class="red-text">
+                    <i class="fas fa-hourglass-half"></i> ۵ ساعت
+                  </span>
+                  دیگر فرصت پاسخ گویی شما به این درخواست
+                </p>
+                <p class="buyad-notice">
+                  درصورت داشتن این محصول به من پیام بده
+                </p>
+                <div class="buyad-button">
+                  <p>پیام به خریدار</p>
+                </div>
+              </div>
+            </div>
+          </button>
         </li>
-        <li
-          v-if="$parent.showLoadMoreBtn && !$parent.contactNameSearchText"
-          class="contact-item"
-        >
-          <button
-            class="btn load-more"
-            @click.prevent="$parent.loadMoreContacts()"
-          >
-            ادامه مخاطبین
+        <li class="contact-item" v-for="(contact, index) in 1" :key="index">
+          <button>
+            <div class="buyad-header">
+              <div class="request-contact-image">
+                <img
+                  v-if="contact.profile_photo"
+                  :src="$parent.str + '/' + contact.profile_photo"
+                  :alt="contact.first_name[0]"
+                />
+
+                <img v-else src="../../../../img/user-defult.png" />
+              </div>
+              <div class="my-contact-info-wrapper">
+                <span class="contact-name text-rtl">
+                  محمدامین دلداری
+                  <button
+                    @click.prevent
+                    class="verified-user"
+                    data-container="body"
+                    data-toggle="popover"
+                    data-placement="bottom"
+                    title
+                  >
+                    <i class="fa fa-certificate"></i>
+                  </button>
+                </span>
+              </div>
+            </div>
+            <div class="buyad-main col-xs-12">
+              <div class="row">
+                <p class="buyad-expier">
+                  <br />
+                </p>
+                <p class="buyad-info">
+                  خریدار
+                  <span>۲۰ تن</span>
+                  <span>خرما</span>
+                  از نوع
+                  <span>مضافتی</span>
+                </p>
+
+                <p class="buyad-notice red-text">
+                  دیگر فرصت پاسخ گویی شما به این درخواست
+                </p>
+                <div class="buyad-button disable">
+                  <p>پیام به خریدار</p>
+                </div>
+              </div>
+            </div>
           </button>
         </li>
       </ul>
