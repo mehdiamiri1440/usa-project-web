@@ -326,12 +326,9 @@ class seller_finder_controller extends Controller
 
         $premium_seller_ids = $tmp;
 
-        var_dump($filtered_sellers_helper);
         $filtered_sellers_helper['responsers'] = array_filter($filtered_sellers_helper['responsers'],function($seller_id) use($premium_seller_ids){
             return in_array($seller_id,$premium_seller_ids) === false;
         });
-
-        var_dump($filtered_sellers_helper);
 
         $filtered_sellers_helper['others'] = array_filter($filtered_sellers_helper['others'],function($seller_id) use($premium_seller_ids){
             return in_array($seller_id,$premium_seller_ids) === false;
