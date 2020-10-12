@@ -1086,7 +1086,7 @@ class buyAd_controller extends Controller
                                         ->join('myusers','myusers.id','=','buy_ads.myuser_id')
                                         ->join('categories','buy_ads.category_id','=','categories.id')
                                         ->where('buy_ad_suggestions.seller_id',$user_id)
-                                        ->select('myusers.first_name', 'myusers.last_name' ,'buy_ads.name', 'buy_ads.requirement_amount' ,'categories.category_name as subcategory_name' ,'buy_ads.myuser_id as buyer_id' ,'buy_ad_suggestions.created_at')
+                                        ->select('buy_ads.id','myusers.first_name', 'myusers.last_name' ,'buy_ads.name', 'buy_ads.requirement_amount' ,'categories.category_name as subcategory_name' ,'buy_ads.myuser_id as buyer_id' ,'buy_ad_suggestions.created_at')
                                         ->get();
 
         $my_buyAd_suggestions->each(function($buyAd){
