@@ -196,7 +196,9 @@ li.contact-item {
   color: #00c569;
   font-size: 12px;
 }
-
+.hide-reply {
+  display: none;
+}
 .contacts-switch-buttons-wrapper .contact-button.active,
 .contacts-switch-buttons-wrapper .contact-button:hover {
   background-color: #fff;
@@ -227,6 +229,7 @@ li.contact-item {
   border-bottom: 2px solid #dddddd;
   padding: 0;
   text-align: center;
+  width: 100%;
 }
 .buyad-expier {
   color: #556080;
@@ -287,6 +290,38 @@ li.contact-item {
 .buyad-button.disable p {
   background: #dddddd;
   transition: 300ms;
+}
+.empty-list i {
+  color: #777;
+  margin-top: 50px;
+  font-size: 50px;
+  text-align: center;
+}
+.empty-list p:first-of-type {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.618;
+  margin-top: 11px;
+}
+.empty-list p:last-of-type {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.618;
+  margin-top: 11px;
+}
+
+.android-wrapper {
+  padding: 60px 5px 15px;
+}
+
+.android-wrapper .section-image i {
+  font-size: 50px;
+  margin: 20px 0;
+}
+
+.android-wrapper a {
+  padding: 12px 50px;
+  font-size: 16px;
 }
 
 @media screen and (max-width: 992px) {
@@ -391,15 +426,9 @@ li.contact-item {
       </div>
     </div>
 
-    <div v-if="$parent.contactList.length === 0" class="not-found-item">
-      <div
-        class="image-wrapper"
-        v-if="!$parent.contactNameSearchText && !$parent.isContactListLoaded"
-      >
-        <div
-          v-show="!$parent.isImageLoad || $parent.isImageLoad"
-          class="lds-ring"
-        >
+    <div v-if="buyAds.length === 0" class="not-found-item">
+      <div class="image-wrapper" v-if="isLoading">
+        <div class="lds-ring">
           <div></div>
           <div></div>
           <div></div>
@@ -408,28 +437,26 @@ li.contact-item {
         <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
       </div>
 
-      <div
-        v-else-if="$parent.contactNameSearchText && !$parent.isSearchingContact"
-      >
-        <p>
-          <i class="fa fa-user"></i>
-          <span>مخاطب یافت نشد</span>
-        </p>
-      </div>
-
-      <div v-else-if="$parent.isSearchingContact" class="contact-is-search">
-        <div class="lds-ring">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+      <div v-else>
+        <div v-if="isConditionSatisfied" class="android-wrapper">
+          <p class="section-title">لیست خریداران محصول خود را اینجا ببینید</p>
+          <p class="section-image">
+            <i class="fa fa-images"></i>
+          </p>
+          <p class="section-contents">
+            برای دسترسی به این قسمت لطفا اپلیکیشن موبایل باسکول را نصب کنید.
+          </p>
+          <a class="green-button " href="/download/app">
+            دانلود اپلیکیشن</a
+          >
         </div>
-      </div>
-      <div v-else-if="$parent.isContactListLoaded">
-        <p>
-          <i class="fa fa-user"></i>
-          <span>مخاطب یافت نشد</span>
-        </p>
+        <div v-else class="empty-list">
+          <i class="fa fa-list-alt"></i>
+          <p>در حال حاظر درخواست خریدی برای شما وجود ندارد</p>
+          <p class="red-text">
+            در صورت دریافت درخواست خرید، ما به شما اطلاع می دهیم.
+          </p>
+        </div>
       </div>
     </div>
 
@@ -477,6 +504,9 @@ li.contact-item {
                 </p>
                 <div class="buyad-button">
                   <p>پیام به خریدار</p>
+                  <p class="hide-reply" :id="'loader-' + buyAd.id">
+                    کمی صبر کنید...
+                  </p>
                 </div>
               </div>
             </div>
@@ -524,19 +554,26 @@ li.contact-item {
 
 
 <script >
+import { eventBus } from "../../../router/router";
+
 export default {
   data: function () {
     return {
       buyAds: "",
+      isLoading: false,
+      isConditionSatisfied: false,
     };
   },
   methods: {
     init() {
       this.getBuyAds();
+      this.isOsAndroid();
     },
     getBuyAds() {
+      this.isLoading = true;
       axios.post("/get_my_buyAd_suggestions").then((response) => {
         this.buyAds = response.data.buyAds;
+        this.isLoading = false;
       });
     },
     activeComponentTooltip() {
@@ -561,24 +598,24 @@ export default {
     openChat: function (buyAd, event) {
       var self = this;
 
-      let id = "#loader-" + buyAd.buyAd;
+      let id = "#loader-" + buyAd.id;
       self.hideReplyBtn(event, id);
 
       axios
         .post("/get_user_permission_for_buyAd_reply", {
-          buy_ad_id: buyAd.buyAd,
+          buy_ad_id: buyAd.id,
         })
         .then(function (response) {
           self.showReplyBtn(event, id);
 
           if (response.data.permission == true) {
             var contact = {
-              contact_id: buyAd.myuser_id,
+              contact_id: buyAd.buyer_id,
               first_name: buyAd.first_name,
               last_name: buyAd.last_name,
               profile_photo: null,
               user_name: buyAd.user_name,
-              buyAd_id: buyAd.buyAd,
+              buyAd_id: buyAd.id,
             };
 
             eventBus.$emit("ChatInfo", contact);
@@ -598,6 +635,16 @@ export default {
           }
         });
     },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
+    },
     hideReplyBtn: function (e, id) {
       return new Promise((resolve, reject) => {
         $(e.target).hide();
@@ -613,6 +660,41 @@ export default {
       }).then(() => {
         $(e.target).show();
       });
+    },
+    isOsIOS: function () {
+      var userAgent = window.navigator.userAgent.toLowerCase(),
+        safari = /safari/.test(userAgent),
+        ios = /iphone|ipod|ipad/.test(userAgent);
+      return ios;
+    },
+    isDeviceMobile: function () {
+      if (
+        navigator.userAgent.match(/Android/i) ||
+        navigator.userAgent.match(/webOS/i) ||
+        navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/iPod/i) ||
+        navigator.userAgent.match(/BlackBerry/i) ||
+        navigator.userAgent.match(/Windows Phone/i)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    getAndroidVersion: function (ua) {
+      ua = (ua || navigator.userAgent).toLowerCase();
+      var match = ua.match(/android\s([0-9\.]*)/);
+      return match ? match[1] : undefined;
+    },
+    isOsAndroid: function () {
+      let self = this;
+      if (this.isDeviceMobile() && !this.isOsIOS()) {
+        let androidVersion = this.getAndroidVersion();
+        if (parseInt(androidVersion) >= 5) {
+          this.isConditionSatisfied = true;
+        }
+      }
     },
   },
   watch: {
