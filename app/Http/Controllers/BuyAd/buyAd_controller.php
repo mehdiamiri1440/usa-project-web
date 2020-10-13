@@ -1103,7 +1103,7 @@ class buyAd_controller extends Controller
             else if($buyAd->remaining_time <= 0 && $buyAd->remaining_time > -8){
                 $buyAd->expired = true;
 
-                unset($buyAd->remaining_time);
+                // unset($buyAd->remaining_time);
                 
                 return true;
             }
@@ -1112,9 +1112,16 @@ class buyAd_controller extends Controller
             }
         });
 
+        if($my_buyAd_suggestions){
+            $my_buyAd_suggestions = $my_buyAd_suggestions->toArray();
+            usort($my_buyAd_suggestions,function($a,$b){
+                return $a->remaining_time <= $b->remaining_time;
+            });
+        }
+
         return response()->json([
             'status' => true,
-            'buyAds' => $my_buyAd_suggestions->values()
+            'buyAds' => $my_buyAd_suggestions
         ],200);
 
     }

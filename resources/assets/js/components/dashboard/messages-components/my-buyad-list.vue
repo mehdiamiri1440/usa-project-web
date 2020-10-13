@@ -231,7 +231,7 @@ li.contact-item {
   text-align: center;
   width: 100%;
 }
-.buyad-expier {
+.buyad-expire {
   color: #556080;
 }
 .buyad-notice {
@@ -487,12 +487,14 @@ li.contact-item {
               <div class="row">
                 <p class="buyad-info">
                   خریدار
-                  <span v-text="buyAd.requirement_amount + 'کیلو گرم'"></span>
-                  <span v-text="buyAd.subcategory_name">خرما</span>
-                  از نوع
-                  <span v-text="buyAd.name">مضافتی</span>
+                  <span v-if="buyAd.requirement_amount < 1000" v-text="buyAd.requirement_amount + 'کیلو گرم'"></span>
+                  <span v-else-if="buyAd.requirement_amount == 1000">یک تن</span>
+                  <span v-else class="red-text" v-text="getNumberWithCommas(buyAd.requirement_amount / 1000) + ' تن '"></span>
+                  <span v-text="buyAd.subcategory_name"></span>
+                  <span v-if="buyAd.name"> از نوع </span>
+                  <span v-if="buyAd.name" v-text="buyAd.name"></span>
                 </p>
-                <p class="buyad-expier">
+                <p class="buyad-expire">
                   <span class="red-text">
                     <i class="fas fa-hourglass-half"></i>
                     <span v-text="buyAd.remaining_time + ' ساعت '"></span>
@@ -500,7 +502,7 @@ li.contact-item {
                   دیگر فرصت پاسخ گویی شما به این درخواست
                 </p>
                 <p class="buyad-notice">
-                  درصورت داشتن این محصول به من پیام بده
+                  درصورت داشتن این محصول به من پیام دهید.
                 </p>
                 <div class="buyad-button">
                   <p>پیام به خریدار</p>
@@ -526,15 +528,17 @@ li.contact-item {
             </div>
             <div class="buyad-main col-xs-12">
               <div class="row">
-                <p class="buyad-expier">
+                <p class="buyad-expire">
                   <br />
                 </p>
                 <p class="buyad-info">
                   خریدار
-                  <span v-text="buyAd.requirement_amount + 'کیلو گرم'"></span>
-                  <span v-text="buyAd.subcategory_name">خرما</span>
-                  از نوع
-                  <span v-text="buyAd.name">مضافتی</span>
+                  <span v-if="buyAd.requirement_amount < 1000" v-text="buyAd.requirement_amount + 'کیلو گرم'"></span>
+                  <span v-else-if="buyAd.requirement_amount == 1000">یک تن</span>
+                  <span v-else class="red-text" v-text="getNumberWithCommas(buyAd.requirement_amount / 1000) + ' تن '"></span>
+                  <span v-text="buyAd.subcategory_name"></span>
+                  <span v-if="buyAd.name"> از نوع </span>
+                  <span v-if="buyAd.name" v-text="buyAd.name"></span>
                 </p>
 
                 <p class="buyad-notice red-text">
@@ -695,6 +699,11 @@ export default {
           this.isConditionSatisfied = true;
         }
       }
+    },
+    getNumberWithCommas: function(number) {
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
     },
   },
   watch: {
