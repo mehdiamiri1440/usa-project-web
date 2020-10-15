@@ -399,8 +399,8 @@ li.contact-item {
       <div class="contact-search-input-wrapper">
         <input
           type="text"
-          placeholder="جستجوی مخاطبین"
-          v-model="$parent.contactNameSearchText"
+          placeholder="جستجوی درخواست ها"
+          v-model="filterBuyAd"
         />
         <i class="fa fa-search"></i>
       </div>
@@ -446,9 +446,7 @@ li.contact-item {
           <p class="section-contents">
             برای دسترسی به این قسمت لطفا اپلیکیشن موبایل باسکول را نصب کنید.
           </p>
-          <a class="green-button " href="/download/app">
-            دانلود اپلیکیشن</a
-          >
+          <a class="green-button" href="/download/app"> دانلود اپلیکیشن</a>
         </div>
         <div v-else class="empty-list">
           <i class="fa fa-list-alt"></i>
@@ -461,97 +459,136 @@ li.contact-item {
     </div>
 
     <div v-else class="contact-items buyad-lists-wrapper">
-      <ul>
-        <li class="contact-item" v-for="(buyAd, index) in buyAds" :key="index">
-          <button @click="openChat(buyAd, $event)" v-if="!buyAd.expired">
-            <div class="buyad-header">
-              <div class="request-contact-image">
-                <!-- <img
+      <div v-if="isSearchingBuyAds == true && buyAdsFilter.length === 0">
+        <div class="empty-list text-center">
+          <i class="fa fa-search"></i>
+          <p>جستجو نتیجه ای نداشت.</p>
+          <p class="red-text">
+            در صورت دریافت درخواست خرید، ما به شما اطلاع می دهیم.
+          </p>
+        </div>
+      </div>
+      <div v-else>
+        <ul>
+          <li
+            class="contact-item"
+            v-for="(buyAd, index) in buyAdsFilter"
+            :key="index"
+          >
+            <button @click="openChat(buyAd, $event)" v-if="!buyAd.expired">
+              <div class="buyad-header">
+                <div class="request-contact-image">
+                  <!-- <img
                   v-if="contact.profile_photo"
                   :src="$parent.str + '/' + contact.profile_photo"
                   :alt="contact.first_name[0]"
                 /> -->
 
-                <!-- <img v-else src="../../../../img/user-defult.png" /> -->
-                <img src="../../../../img/user-defult.png" />
-              </div>
-              <div class="my-contact-info-wrapper">
-                <span
-                  class="contact-name text-rtl"
-                  v-text="buyAd.first_name + ' ' + buyAd.last_name"
-                >
-                </span>
-              </div>
-            </div>
-            <div class="buyad-main col-xs-12">
-              <div class="row">
-                <p class="buyad-info">
-                  خریدار
-                  <span v-if="buyAd.requirement_amount < 1000" v-text="buyAd.requirement_amount + 'کیلو گرم'"></span>
-                  <span v-else-if="buyAd.requirement_amount == 1000">یک تن</span>
-                  <span v-else class="red-text" v-text="getNumberWithCommas(buyAd.requirement_amount / 1000) + ' تن '"></span>
-                  <span v-text="buyAd.subcategory_name"></span>
-                  <span v-if="buyAd.name"> از نوع </span>
-                  <span v-if="buyAd.name" v-text="buyAd.name"></span>
-                </p>
-                <p class="buyad-expire">
-                  <span class="red-text">
-                    <i class="fas fa-hourglass-half"></i>
-                    <span v-text="buyAd.remaining_time + ' ساعت '"></span>
+                  <!-- <img v-else src="../../../../img/user-defult.png" /> -->
+                  <img src="../../../../img/user-defult.png" />
+                </div>
+                <div class="my-contact-info-wrapper">
+                  <span
+                    class="contact-name text-rtl"
+                    v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                  >
                   </span>
-                  دیگر فرصت پاسخ گویی شما به این درخواست
-                </p>
-                <p class="buyad-notice">
-                  درصورت داشتن این محصول به من پیام دهید.
-                </p>
-                <div class="buyad-button">
-                  <p>پیام به خریدار</p>
-                  <p class="hide-reply" :id="'loader-' + buyAd.id">
-                    کمی صبر کنید...
+                </div>
+              </div>
+              <div class="buyad-main col-xs-12">
+                <div class="row">
+                  <p class="buyad-info">
+                    خریدار
+                    <span
+                      v-if="buyAd.requirement_amount < 1000"
+                      v-text="buyAd.requirement_amount + 'کیلو گرم'"
+                    ></span>
+                    <span v-else-if="buyAd.requirement_amount == 1000"
+                      >یک تن</span
+                    >
+                    <span
+                      v-else
+                      class="red-text"
+                      v-text="
+                        getNumberWithCommas(buyAd.requirement_amount / 1000) +
+                        ' تن '
+                      "
+                    ></span>
+                    <span v-text="buyAd.subcategory_name"></span>
+                    <span v-if="buyAd.name"> از نوع </span>
+                    <span v-if="buyAd.name" v-text="buyAd.name"></span>
                   </p>
+                  <p class="buyad-expire">
+                    <span class="red-text">
+                      <i class="fas fa-hourglass-half"></i>
+                      <span v-text="buyAd.remaining_time + ' ساعت '"></span>
+                    </span>
+                    دیگر فرصت پاسخ گویی شما به این درخواست
+                  </p>
+                  <p class="buyad-notice">
+                    درصورت داشتن این محصول به من پیام دهید.
+                  </p>
+                  <div class="buyad-button">
+                    <p>پیام به خریدار</p>
+                    <p class="hide-reply" :id="'loader-' + buyAd.id">
+                      کمی صبر کنید...
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </button>
-          <button v-else disabled>
-            <div class="buyad-header">
-              <div class="request-contact-image">
-                <img src="../../../../img/user-defult.png" />
+            </button>
+            <button v-else disabled>
+              <div class="buyad-header">
+                <div class="request-contact-image">
+                  <img src="../../../../img/user-defult.png" />
+                </div>
+                <div class="my-contact-info-wrapper">
+                  <span
+                    class="contact-name text-rtl"
+                    v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                  >
+                  </span>
+                </div>
               </div>
-              <div class="my-contact-info-wrapper">
-                <span
-                  class="contact-name text-rtl"
-                  v-text="buyAd.first_name + ' ' + buyAd.last_name"
-                >
-                </span>
-              </div>
-            </div>
-            <div class="buyad-main col-xs-12">
-              <div class="row">
-                <p class="buyad-expire">
-                  <br />
-                </p>
-                <p class="buyad-info">
-                  خریدار
-                  <span v-if="buyAd.requirement_amount < 1000" v-text="buyAd.requirement_amount + 'کیلو گرم'"></span>
-                  <span v-else-if="buyAd.requirement_amount == 1000">یک تن</span>
-                  <span v-else class="red-text" v-text="getNumberWithCommas(buyAd.requirement_amount / 1000) + ' تن '"></span>
-                  <span v-text="buyAd.subcategory_name"></span>
-                  <span v-if="buyAd.name"> از نوع </span>
-                  <span v-if="buyAd.name" v-text="buyAd.name"></span>
-                </p>
+              <div class="buyad-main col-xs-12">
+                <div class="row">
+                  <p class="buyad-expire">
+                    <br />
+                  </p>
+                  <p class="buyad-info">
+                    خریدار
+                    <span
+                      v-if="buyAd.requirement_amount < 1000"
+                      v-text="buyAd.requirement_amount + 'کیلو گرم'"
+                    ></span>
+                    <span v-else-if="buyAd.requirement_amount == 1000"
+                      >یک تن</span
+                    >
+                    <span
+                      v-else
+                      class="red-text"
+                      v-text="
+                        getNumberWithCommas(buyAd.requirement_amount / 1000) +
+                        ' تن '
+                      "
+                    ></span>
+                    <span v-text="buyAd.subcategory_name"></span>
+                    <span v-if="buyAd.name"> از نوع </span>
+                    <span v-if="buyAd.name" v-text="buyAd.name"></span>
+                  </p>
 
-                <p class="buyad-notice red-text">
-                  فرصت پاسخ گویی شما به این درخواست به پایان رسیده است
-                </p>
-                <div class="buyad-button disable">
-                  <p>پیام به خریدار</p>
+                  <p class="buyad-notice red-text">
+                    فرصت پاسخ گویی شما به این درخواست به پایان رسیده است
+                  </p>
+                  <div class="buyad-button disable">
+                    <p>پیام به خریدار</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </button>
-        </li>
-      </ul>
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -564,8 +601,11 @@ export default {
   data: function () {
     return {
       buyAds: "",
+      buyAdsFilter: "",
       isLoading: false,
       isConditionSatisfied: false,
+      filterBuyAd: "",
+      isSearchingBuyAds: false,
     };
   },
   methods: {
@@ -577,6 +617,7 @@ export default {
       this.isLoading = true;
       axios.post("/get_my_buyAd_suggestions").then((response) => {
         this.buyAds = response.data.buyAds;
+        this.filterBuyAdBySearch();
         this.isLoading = false;
       });
     },
@@ -700,10 +741,25 @@ export default {
         }
       }
     },
-    getNumberWithCommas: function(number) {
+    getNumberWithCommas: function (number) {
       if (number || typeof number === "number")
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       else return "";
+    },
+    filterBuyAdBySearch: function () {
+      this.buyAdsFilter = this.buyAds.filter((buyAd) => {
+        var text = this.filterBuyAd.split(" ");
+        return text.every(function (el) {
+          if (
+            buyAd.first_name.indexOf(el) > -1 ||
+            buyAd.last_name.indexOf(el) > -1 ||
+            buyAd.name.indexOf(el) > -1 ||
+            buyAd.subcategory_name.indexOf(el) > -1
+          ) {
+            return true;
+          } else return false;
+        });
+      });
     },
   },
   watch: {
@@ -712,6 +768,15 @@ export default {
         setTimeout(() => {
           this.activeComponentTooltip();
         }, 10);
+      }
+    },
+    filterBuyAd: function () {
+      if (this.filterBuyAd != "") {
+        this.isSearchingBuyAds = true;
+        this.filterBuyAdBySearch();
+      } else {
+        this.buyAdsFilter = this.buyAds;
+        this.isSearchingBuyAds = false;
       }
     },
   },
