@@ -313,10 +313,19 @@ li.contact-item {
 .android-wrapper {
   padding: 60px 5px 15px;
 }
-
-.android-wrapper .section-image i {
-  font-size: 50px;
-  margin: 20px 0;
+.not-found-item .android-wrapper p {
+  font-size: 15px;
+  font-weight: bold;
+  color: #333;
+  line-height: 1.618;
+}
+.not-found-item .android-wrapper p.section-contents {
+  color: #e51c38;
+}
+.android-wrapper .section-image {
+  max-width: 190px;
+  margin: 15px auto;
+  padding-left: 25px;
 }
 
 .android-wrapper a {
@@ -441,7 +450,7 @@ li.contact-item {
         <div v-if="isConditionSatisfied" class="android-wrapper">
           <p class="section-title">لیست خریداران محصول خود را اینجا ببینید</p>
           <p class="section-image">
-            <i class="fa fa-images"></i>
+            <img src="../../../../img/hand-phone-icon-6.jpg" />
           </p>
           <p class="section-contents">
             برای دسترسی به این قسمت لطفا اپلیکیشن موبایل باسکول را نصب کنید.
