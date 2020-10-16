@@ -117,7 +117,12 @@
 
     <!--modal-->
     <div class="container" v-show="is_pricing_active">
-      <div id="pricing-modal" class="pricing-modal modal fade" tabindex="-1" role="dialog">
+      <div
+        id="pricing-modal"
+        class="pricing-modal modal fade"
+        tabindex="-1"
+        role="dialog"
+      >
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -150,15 +155,23 @@
       :offer-time="this.offerTime"
     ></header-dash-seller>
 
-    <div id="main" :class="{ 'is-required-fix-alert' : isRequiredFixAlert}">
-      <router-view :str="storagePath" :user-type="isSeller" :offer-time="this.offerTime"></router-view>
+    <div id="main" :class="{ 'is-required-fix-alert': isRequiredFixAlert }">
+      <router-view
+        :str="storagePath"
+        :user-type="currentUser.user_info.is_seller"
+        :offer-time="this.offerTime"
+      ></router-view>
     </div>
 
     <div
       v-if="buttonIsActive && buttonActiveInSteps"
       class="fixed-action-button-wrapper hidden-sm hidden-md hidden-lg"
     >
-      <router-link tag="button" :to="{name : 'buyAdRequestsSeller'}" class="fixed-action">
+      <router-link
+        tag="button"
+        :to="{ name: 'buyAdRequestsSeller' }"
+        class="fixed-action"
+      >
         <i class="fa fa-list-alt"></i>
         <span>درخواست ها</span>
       </router-link>
@@ -187,7 +200,11 @@ export default {
   ],
   data: function () {
     return {
-      linkHideStates: ["buyAd-requests", "messenger/contacts"],
+      linkHideStates: [
+        "buyAd-requests",
+        "messenger/contacts",
+        "messenger/buy-ads",
+      ],
       buttonIsActive: true,
       currentUser: {
         profile: {

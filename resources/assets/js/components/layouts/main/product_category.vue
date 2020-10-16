@@ -786,7 +786,7 @@ end filter modal styles
     padding: 6px 10px;
   }
 
-  #article-list > div {
+  #article-list > div > div {
     padding: 0;
   }
 

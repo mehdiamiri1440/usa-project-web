@@ -102,6 +102,9 @@ i {
   overflow: hidden;
 }
 
+.user-information-link {
+  min-height: 43px;
+}
 .user-action-link {
   padding-right: 10px;
   font-size: 11px;
@@ -139,10 +142,15 @@ a.user-name-link {
 .user-information-contents p.response-rate {
   max-width: 115px;
   float: right;
+  font-size: 10px;
+  height: 19px;
+  padding: 0;
+  line-height: 1;
+  margin-top: -5px;
 }
 
 .user-information-content.default {
-  padding-top: 5px;
+  padding-top: 8px;
 }
 
 .user-image img,
@@ -203,28 +211,6 @@ p.response-rate {
               احتمال پاسخ گویی
               <span v-text="'%' + user_info.response_rate"></span>
             </p>
-            <!-- <router-link
-              v-if="!is_my_profile_status"
-              :to="'/profile/' + user_name"
-              :class="{ default: !user_info.response_rate }"
-              @click="
-                registerComponentStatistics(
-                  'product',
-                  'showUserProfile',
-                  'show profile'
-                )
-              "
-              class="user-action-link green-text"
-              >مشاهده پروفایل</router-link
-            >
-            <a
-              v-else
-              href="#"
-              @click.prevent="deleteProduct()"
-              :class="{ default: !user_info.response_rate }"
-              class="user-action-link red-text"
-              >حذف محصول</a
-            > -->
           </div>
         </div>
 

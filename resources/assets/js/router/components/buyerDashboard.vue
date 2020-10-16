@@ -26,7 +26,10 @@
     ></header-dash-buyer>
 
     <div id="main">
-      <router-view :str="storagePath" :user-type="isSeller"></router-view>
+      <router-view
+        :str="storagePath"
+        :user-type="currentUser.user_info.is_seller"
+      ></router-view>
     </div>
   </div>
 </template>
