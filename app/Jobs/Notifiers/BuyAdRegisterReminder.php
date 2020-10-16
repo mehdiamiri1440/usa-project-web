@@ -39,7 +39,9 @@ class BuyAdRegisterReminder implements ShouldQueue
         $data = [
             'title' => 'باسکول',
             'message' => 'به دنبال فروشنده محصولات کشاورزی هستید؟ همین حالا در بازار کشاورزی باسکول درخواست خرید ثبت کنید',
-            'target' => 'registerBuyAd'
+            'payload' => [
+                'BTarget' => 'registerBuyAd'
+            ],
         ];
         
         $fcm_object = new fcm_controller();

@@ -39,7 +39,9 @@ class RetentionReminder implements ShouldQueue
         $data = [
             'title' => 'باسکول',
             'message' => 'هزاران خریدار و فروشنده عمده در بازار باسکول منتظر شما هستند',
-            'target' => 'productList'
+            'payload' => [
+                'BTarget' => 'productList',
+            ],
         ];
 
         $fcm_object = new fcm_controller();

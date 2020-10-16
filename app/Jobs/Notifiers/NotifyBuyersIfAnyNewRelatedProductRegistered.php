@@ -47,7 +47,10 @@ class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
         $data = [
             'title' => 'باسکول',
             'message' => "یک فروشنده جدید {$this->product->product_name} برای شما پیدا کردیم",
-            'target' => 'productList'
+            'payload' => [
+                'BTarget' => 'productList',
+                'productId' => $this->product->id,
+            ],
         ];
 
         $fcm_object = new fcm_controller();
