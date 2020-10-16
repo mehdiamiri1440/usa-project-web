@@ -103,15 +103,6 @@ li.contact-item {
   text-align: center;
 }
 
-.contact-body .contact-item .my-contact-info-wrapper {
-  float: right;
-  padding-top: 6px;
-  direction: ltr;
-  text-align: left;
-  width: calc(100% - 45px);
-  padding-right: 15px;
-}
-
 .last-message-date {
   display: inline-block;
   height: 17px;
@@ -196,9 +187,7 @@ li.contact-item {
   color: #00c569;
   font-size: 12px;
 }
-.hide-reply {
-  display: none;
-}
+
 .contacts-switch-buttons-wrapper .contact-button.active,
 .contacts-switch-buttons-wrapper .contact-button:hover {
   background-color: #fff;
@@ -223,7 +212,7 @@ li.contact-item {
 .contact-button.active {
   border-radius: 4px 4px 0 0;
 }
-.buyad-lists-wrapper .contact-item > button {
+.buyad-lists-wrapper .contact-item > div {
   background: #fff;
   border: none;
   border-bottom: 2px solid #dddddd;
@@ -253,6 +242,7 @@ li.contact-item {
 }
 .buyad-notice.red-text {
   padding-top: 15px;
+  padding-bottom: 15px;
 }
 .buyad-info span {
   color: #556080;
@@ -265,14 +255,14 @@ li.contact-item {
 }
 .contact-body .contact-item .my-contact-info-wrapper {
   float: right;
-  padding-top: 2px;
+  padding-top: 7px;
   direction: ltr;
   text-align: left;
   width: calc(100% - 45px);
   padding-right: 8px;
 }
 
-.buyad-button p {
+.buyad-button {
   background: #00c569;
   color: #fff;
   border-radius: 4px;
@@ -280,16 +270,22 @@ li.contact-item {
   max-width: 150px;
   margin: 7px auto 15px;
   transition: 300ms;
+  display: block;
+  border: none;
+  width: 100%;
 }
 
-.buyad-button p:hover {
+.buyad-button :hover {
   background: #00c569;
   transition: 300ms;
 }
 
-.buyad-button.disable p {
+.buyad-button.disable {
   background: #dddddd;
   transition: 300ms;
+}
+.hide-reply {
+  display: none;
 }
 .empty-list i {
   color: #777;
@@ -311,15 +307,16 @@ li.contact-item {
 }
 
 .android-wrapper {
-  padding: 60px 5px 15px;
+  padding: 150px 15px 15px;
+  text-align: center;
 }
-.not-found-item .android-wrapper p {
+.android-wrapper p {
   font-size: 15px;
   font-weight: bold;
   color: #333;
   line-height: 1.618;
 }
-.not-found-item .android-wrapper p.section-contents {
+.android-wrapper p.section-contents {
   color: #e51c38;
 }
 .android-wrapper .section-image {
@@ -434,36 +431,32 @@ li.contact-item {
         </div>
       </div>
     </div>
-
-    <div v-if="buyAds.length === 0" class="not-found-item">
-      <div class="image-wrapper" v-if="isLoading">
-        <div class="lds-ring">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
+    <div v-if="isConditionSatisfied" class="android-wrapper">
+      <p class="section-title">لیست خریداران محصول خود را اینجا ببینید</p>
+      <p class="section-image">
+        <img src="../../../../img/hand-phone-icon-6.jpg" />
+      </p>
+      <p class="section-contents">
+        برای دسترسی به این قسمت لطفا اپلیکیشن موبایل باسکول را نصب کنید.
+      </p>
+      <a class="green-button" href="/download/app"> دانلود اپلیکیشن</a>
+    </div>
+    <div class="image-wrapper" v-else-if="buyAds.length === 0 && isLoading">
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
-
-      <div v-else>
-        <div v-if="isConditionSatisfied" class="android-wrapper">
-          <p class="section-title">لیست خریداران محصول خود را اینجا ببینید</p>
-          <p class="section-image">
-            <img src="../../../../img/hand-phone-icon-6.jpg" />
-          </p>
-          <p class="section-contents">
-            برای دسترسی به این قسمت لطفا اپلیکیشن موبایل باسکول را نصب کنید.
-          </p>
-          <a class="green-button" href="/download/app"> دانلود اپلیکیشن</a>
-        </div>
-        <div v-else class="empty-list">
-          <i class="fa fa-list-alt"></i>
-          <p>در حال حاظر درخواست خریدی برای شما وجود ندارد</p>
-          <p class="red-text">
-            در صورت دریافت درخواست خرید، ما به شما اطلاع می دهیم.
-          </p>
-        </div>
+      <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
+    </div>
+    <div v-else-if="buyAds.length === 0 && !isLoading" class="not-found-item">
+      <div class="empty-list">
+        <i class="fa fa-list-alt"></i>
+        <p>در حال حاظر درخواست خریدی برای شما وجود ندارد</p>
+        <p class="red-text">
+          در صورت دریافت درخواست خرید، ما به شما اطلاع می دهیم.
+        </p>
       </div>
     </div>
 
@@ -484,7 +477,7 @@ li.contact-item {
             v-for="(buyAd, index) in buyAdsFilter"
             :key="index"
           >
-            <button @click="openChat(buyAd, $event)" v-if="!buyAd.expired">
+            <div v-if="!buyAd.expired">
               <div class="buyad-header">
                 <div class="request-contact-image">
                   <!-- <img
@@ -537,16 +530,20 @@ li.contact-item {
                   <p class="buyad-notice">
                     درصورت داشتن این محصول به من پیام دهید.
                   </p>
-                  <div class="buyad-button">
-                    <p>پیام به خریدار</p>
-                    <p class="hide-reply" :id="'loader-' + buyAd.id">
-                      کمی صبر کنید...
-                    </p>
-                  </div>
+                  <button @click="openChat(buyAd, $event)" class="buyad-button">
+                    پیام به خریدار
+                  </button>
+                  <button
+                    class="hide-reply buyad-button"
+                    :id="'loader-' + buyAd.id"
+                    disabled
+                  >
+                    کمی صبر کنید...
+                  </button>
                 </div>
               </div>
-            </button>
-            <button v-else disabled>
+            </div>
+            <div v-else>
               <div class="buyad-header">
                 <div class="request-contact-image">
                   <img src="../../../../img/user-defult.png" />
@@ -589,12 +586,10 @@ li.contact-item {
                   <p class="buyad-notice red-text">
                     فرصت پاسخ گویی شما به این درخواست به پایان رسیده است
                   </p>
-                  <div class="buyad-button disable">
-                    <p>پیام به خریدار</p>
-                  </div>
+                  <button class="buyad-button disable">پیام به خریدار</button>
                 </div>
               </div>
-            </button>
+            </div>
           </li>
         </ul>
       </div>
