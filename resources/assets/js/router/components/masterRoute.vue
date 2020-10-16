@@ -15,7 +15,7 @@
       :str="storagePath"
       :assets="assets"
       :is-user-login="userId"
-      :user-type="isSeller"
+      :is-seller="isSeller"
     ></router-view>
 
     <footer-master-layouts />
@@ -29,11 +29,11 @@ import FooterMasterLayouts from "../../components/layouts/footer/footer";
 export default {
   components: {
     HeaderMasterLayouts,
-    FooterMasterLayouts
+    FooterMasterLayouts,
   },
-  data: function() {
+  data: function () {
     return {
-      productByResponseRate: false
+      productByResponseRate: false,
     };
   },
   props: [
@@ -44,7 +44,7 @@ export default {
     "profilePhoto",
     "userFullName",
     "userLogoutPath",
-    "verifiedUserContent"
-  ]
+    "verifiedUserContent",
+  ],
 };
 </script>

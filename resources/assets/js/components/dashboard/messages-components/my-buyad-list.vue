@@ -247,6 +247,9 @@ li.contact-item {
 .buyad-info span {
   color: #556080;
 }
+.buyad-info span.gray-text {
+  color: #777;
+}
 .buyad-header {
   padding: 8px 5px;
   float: right;
@@ -410,7 +413,7 @@ li.contact-item {
         />
         <i class="fa fa-search"></i>
       </div>
-      <div v-if="$parent.userType" class="contacts-switch-buttons-wrapper">
+      <div v-if="$parent.isSeller" class="contacts-switch-buttons-wrapper">
         <div class="switch-button-item">
           <button class="contact-button active">
             <span class="total-unread-messages-badge">جدید</span>
@@ -517,7 +520,7 @@ li.contact-item {
                       "
                     ></span>
                     <span v-text="buyAd.subcategory_name"></span>
-                    <span v-if="buyAd.name"> از نوع </span>
+                    <span v-if="buyAd.name" class="gray-text"> از نوع </span>
                     <span v-if="buyAd.name" v-text="buyAd.name"></span>
                   </p>
                   <p class="buyad-expire">
@@ -579,7 +582,7 @@ li.contact-item {
                       "
                     ></span>
                     <span v-text="buyAd.subcategory_name"></span>
-                    <span v-if="buyAd.name"> از نوع </span>
+                    <span v-if="buyAd.name" class="gray-text"> از نوع </span>
                     <span v-if="buyAd.name" v-text="buyAd.name"></span>
                   </p>
 

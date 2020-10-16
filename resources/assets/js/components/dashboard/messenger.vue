@@ -365,11 +365,12 @@
       class="col-xs-12 default-message-wrapper hidden-xs col-sm-8 col-md-9"
       v-if="!selectedContact && isCurrentStep == 0"
     >
-      <div v-if="userType" class="default-main-contents seller-buyAd-picture">
+      <div v-if="isSeller" class="default-main-contents seller-buyAd-picture">
         <p class="red-text">
           برای دسترسی به درخواست های خرید مرتبط از این تب در منوی سمت راست اقدام
           کنید
         </p>
+        {{ isSeller }}
         <p>
           <img src="../../../img/messegs-buy-ads.jpg" alt="" />
         </p>
@@ -390,7 +391,7 @@ import myContactList from "./messages-components/my-contact-list";
 import MainChatWrapper from "./messages-components/main-chat-wrapper";
 
 export default {
-  props: ["isRequiredFixAlert", "userType"],
+  props: ["isRequiredFixAlert", "isSeller"],
   components: {
     myContactList,
     MainChatWrapper,
