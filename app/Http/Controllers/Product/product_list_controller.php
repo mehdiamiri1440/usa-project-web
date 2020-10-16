@@ -398,6 +398,7 @@ class product_list_controller extends Controller
             return $this->sort_products_by_response_time($products);
         }
 
+        $tmp_products = [];
         //this condition checks if buyer has buyAd request to show five related products at top list
         if($user_info->is_buyer == true){
             $the_buyer_last_buyAd_request = buyAd::where('myuser_id',$user_id)
