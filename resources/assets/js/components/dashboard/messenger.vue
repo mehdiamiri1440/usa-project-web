@@ -159,6 +159,29 @@
   box-shadow: 0 0 10px #ebebeb;
 }
 
+.default-message-wrapper .default-main-contents.seller-buyAd-picture {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  padding: 0;
+  height: 435px;
+}
+
+.default-message-wrapper .default-main-contents.seller-buyAd-picture .red-text {
+  margin: 30px 0px -24px;
+  z-index: 1;
+  padding: 0 15px;
+  line-height: 1.618;
+  position: relative;
+}
+
+.default-message-wrapper
+  .default-main-contents.seller-buyAd-picture
+  p:last-of-type {
+  max-width: 320px;
+  margin: 0 auto;
+}
+
 .default-message-wrapper .default-main-contents i {
   font-size: 55px;
 }
@@ -342,7 +365,16 @@
       class="col-xs-12 default-message-wrapper hidden-xs col-sm-8 col-md-9"
       v-if="!selectedContact && isCurrentStep == 0"
     >
-      <div class="default-main-contents">
+      <div v-if="userType" class="default-main-contents seller-buyAd-picture">
+        <p class="red-text">
+          برای دسترسی به درخواست های خرید مرتبط از این تب در منوی سمت راست اقدام
+          کنید
+        </p>
+        <p>
+          <img src="../../../img/messegs-buy-ads.jpg" alt="" />
+        </p>
+      </div>
+      <div v-else class="default-main-contents">
         <i class="fa fa-user"></i>
         <p>برای شروع چت لطفا یک مخاطب انتخاب کنید</p>
       </div>

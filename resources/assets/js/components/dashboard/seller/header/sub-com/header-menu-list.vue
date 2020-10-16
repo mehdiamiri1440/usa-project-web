@@ -121,21 +121,21 @@ a.pricing-table.router-link-exact-active {
       <div class="header-menu">
         <ul class="list-unstyled">
           <li class="list-item">
-            <router-link :to="{ name : 'statusSeller' }">
+            <router-link :to="{ name: 'statusSeller' }">
               <i class="fa fa-chart-line"></i>
               <span>داشبورد</span>
             </router-link>
           </li>
 
           <li class="list-item">
-            <router-link :to="{ name : 'buyAdRequestsSeller' }">
+            <router-link :to="{ name: 'buyAdRequestsSeller' }">
               <i class="fa fa-list-alt" aria-hidden="true"></i>
               <span>درخواست های خرید</span>
             </router-link>
           </li>
 
           <li class="list-item">
-            <router-link :to="{ name : 'registerProductSeller' }">
+            <router-link :to="{ name: 'registerProductSeller' }">
               <i class="fa fa-plus-square" aria-hidden="true"></i>
               <span>ثبت محصول</span>
             </router-link>
@@ -143,20 +143,31 @@ a.pricing-table.router-link-exact-active {
 
           <li class="list-item">
             <router-link
-              :to="{ name : 'messagesSeller' }"
-              :class="{'router-link-exact-active ' : this.activeElement === 0}"
+              :to="{ name: 'messagesSeller' }"
+              :class="{
+                'router-link-exact-active ':
+                  this.activeElement === 0 ||
+                  $route.name == 'messagesRequestSeller',
+              }"
             >
               <i class="fas fa-comment-alt" aria-hidden="true"></i>
 
               <span>پیام ها</span>
-              <span class="custom-badge" v-if="messageCount > 0" v-text="messageCount"></span>
+              <span
+                class="custom-badge"
+                v-if="messageCount > 0"
+                v-text="messageCount"
+              ></span>
             </router-link>
           </li>
 
           <li class="list-item">
             <router-link
-              :to="{ name : 'profileBasicSeller' }"
-              :class="{ 'router-link-exact-active' : $route.name == 'profileBasicSellerVeficiation'}"
+              :to="{ name: 'profileBasicSeller' }"
+              :class="{
+                'router-link-exact-active':
+                  $route.name == 'profileBasicSellerVeficiation',
+              }"
             >
               <i class="fa fa-user" aria-hidden="true"></i>
               <span>ویرایش پروفایل</span>
@@ -164,20 +175,26 @@ a.pricing-table.router-link-exact-active {
           </li>
 
           <li class="list-item">
-            <router-link :to="{ name : 'myProductsSeller' }">
+            <router-link :to="{ name: 'myProductsSeller' }">
               <i class="fas fa-list-ol" aria-hidden="true"></i>
               <span>محصولات من</span>
             </router-link>
           </li>
 
           <li class="list-item">
-            <router-link :to="{ name : 'guideSeller' }">
+            <router-link :to="{ name: 'guideSeller' }">
               <i class="fa fa-question" aria-hidden="true"></i>
               <span>راهنما</span>
             </router-link>
           </li>
-          <li class="list-item" v-if="$parent.currentUser.user_info.active_pakage_type != 3">
-            <router-link class="pricing-table" :to="{ name : 'dashboardPricingTableSeller' }">
+          <li
+            class="list-item"
+            v-if="$parent.currentUser.user_info.active_pakage_type != 3"
+          >
+            <router-link
+              class="pricing-table"
+              :to="{ name: 'dashboardPricingTableSeller' }"
+            >
               <i class="fa fa-arrow-up" aria-hidden="true"></i>
               <span>ارتقا عضویت</span>
               <span class="custom-badge">ویژه</span>
@@ -199,20 +216,19 @@ export default {
     "selregpro",
     "transactroute",
     "mytrans",
-    "guide"
+    "guide",
   ],
   data() {
     return {
       activeElement: null,
       isLoading: true,
       messageCount: 0,
-      linksPath: ["/seller/messenger/group-messages"]
+      linksPath: ["/seller/messenger/group-messages"],
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       var self = this;
-
       // axios
       //     .post("/get_total_unread_messages_for_current_user")
       //     .then(function (response) {
@@ -227,11 +243,11 @@ export default {
     },
     subIsActive(input) {
       const paths = Array.isArray(input) ? input : [input];
-      return paths.some(path => {
+      return paths.some((path) => {
         return this.$route.path.indexOf(path) === 0; // current path starts with this path string
       });
     },
-    checkLinkActive: function() {
+    checkLinkActive: function () {
       for (var i = 0; i < this.linksPath.length; i++) {
         if (this.subIsActive(this.linksPath[i])) {
           this.activeElement = i;
@@ -239,14 +255,14 @@ export default {
           this.activeElement = null;
         }
       }
-    }
+    },
   },
   watch: {
     $route() {
       this.checkLinkActive();
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.checkLinkActive();
     this.init();
   },
@@ -254,12 +270,12 @@ export default {
     var self = this;
     var userId = window.localStorage.getItem("userId");
 
-    eventBus.$on("messageCount", event => {
+    eventBus.$on("messageCount", (event) => {
       this.messageCount += event;
     });
-    eventBus.$on("active", event => {
+    eventBus.$on("active", (event) => {
       this.activeElement = event;
     });
-  }
+  },
 };
 </script>
