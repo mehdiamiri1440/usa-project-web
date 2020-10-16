@@ -360,7 +360,7 @@
         />
         <i class="fa fa-search"></i>
       </div>
-      <div v-if="$parent.isSeller" class="contacts-switch-buttons-wrapper">
+      <div v-if="$parent.userType" class="contacts-switch-buttons-wrapper">
         <div class="switch-button-item">
           <router-link
             :to="{ name: 'messagesRequestSeller' }"
@@ -427,7 +427,7 @@
     <div
       v-else
       class="contact-items"
-      :class="{ 'is-buyer-list': !$parent.isSeller }"
+      :class="{ 'is-buyer-list': !$parent.userType }"
     >
       <ul>
         <li

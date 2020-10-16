@@ -413,7 +413,7 @@ li.contact-item {
         />
         <i class="fa fa-search"></i>
       </div>
-      <div v-if="$parent.isSeller" class="contacts-switch-buttons-wrapper">
+      <div v-if="$parent.userType" class="contacts-switch-buttons-wrapper">
         <div class="switch-button-item">
           <button class="contact-button active">
             <span class="total-unread-messages-badge">جدید</span>

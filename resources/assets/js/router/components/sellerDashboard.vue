@@ -158,8 +158,7 @@
     <div id="main" :class="{ 'is-required-fix-alert': isRequiredFixAlert }">
       <router-view
         :str="storagePath"
-        :is-seller="isSeller"
-        :user-type="isSeller"
+        :user-type="currentUser.user_info.is_seller"
         :offer-time="this.offerTime"
       ></router-view>
     </div>

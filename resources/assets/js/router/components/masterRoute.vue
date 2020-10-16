@@ -15,7 +15,7 @@
       :str="storagePath"
       :assets="assets"
       :is-user-login="userId"
-      :is-seller="isSeller"
+      :user-type="isSeller"
     ></router-view>
 
     <footer-master-layouts />
