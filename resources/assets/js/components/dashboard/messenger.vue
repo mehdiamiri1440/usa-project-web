@@ -164,6 +164,7 @@
   max-width: 400px;
   border-radius: 10px;
   padding: 0;
+  padding-top: 30px;
   height: 435px;
 }
 
@@ -369,9 +370,6 @@
         <p class="red-text">
           برای دسترسی به درخواست های خرید مرتبط از این تب در منوی سمت راست اقدام
           کنید
-        </p>
-        {{ userType }}
-        <p>
           <img src="../../../img/messegs-buy-ads.jpg" alt="" />
         </p>
       </div>
