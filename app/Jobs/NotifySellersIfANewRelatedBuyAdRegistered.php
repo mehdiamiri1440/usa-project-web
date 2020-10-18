@@ -55,7 +55,7 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
                     'buy_ad_id'  => $this->buyAd->id,
                 ];
 
-                $this->notify_product_owner($user_id);
+                // $this->notify_product_owner($user_id);
             }
             
             DB::table('buy_ad_suggestions')->insert($buyAd_suggestion_records);

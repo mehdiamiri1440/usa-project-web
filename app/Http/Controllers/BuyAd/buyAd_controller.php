@@ -1094,7 +1094,7 @@ class buyAd_controller extends Controller
             unset($buyAd->created_at);
         });
 
-        $my_buyAd_suggestions = $my_buyAd_suggestions->filter(function($buyAd){
+        $my_buyAd_suggestions = $my_buyAd_suggestions->filter(function($buyAd){            
             if($buyAd->remaining_time > 0 && $buyAd->remaining_time <= 4){
                 $buyAd->expired = false;
 
@@ -1113,7 +1113,23 @@ class buyAd_controller extends Controller
         });
 
         if($my_buyAd_suggestions){
+            $golden_buyAds = $this->get_golden_buyAds_for_this_user($user_id);
+            $final_golden_buyAds = [];
+
             $my_buyAd_suggestions = $my_buyAd_suggestions->toArray();
+
+            if($golden_buyAds){
+                $my_buyAd_suggestion_ids = [];
+                foreach($my_buyAd_suggestions as $buyAd)
+                {
+                    $my_buyAd_suggestion_ids[] = $buyAd->id;
+                }
+
+                $final_golden_buyAds = array_filter($golden_buyAds,function($buyAd) use($my_buyAd_suggestion_ids){
+                    return in_array($buyAd->id,$my_buyAd_suggestion_ids) === false;
+                });
+            }
+            
             usort($my_buyAd_suggestions,function($a,$b){
                 return $a->remaining_time <= $b->remaining_time;
             });
@@ -1121,8 +1137,54 @@ class buyAd_controller extends Controller
 
         return response()->json([
             'status' => true,
-            'buyAds' => $my_buyAd_suggestions
+            'buyAds' => $my_buyAd_suggestions,
+            'golden_buyAds' => $final_golden_buyAds
         ],200);
 
+    }
+
+    protected function get_golden_buyAds_for_this_user($user_id)
+    {
+        $last_product = DB::table('products')
+                                ->where('confirmed',true)
+                                ->where('myuser_id',$user_id)
+                                ->orderBy('updated_at')
+                                ->get()
+                                ->last();
+
+        $product_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $last_product->product_name))));
+
+        $category_info = $this->get_category_and_subcategory_name($last_product->category_id);
+
+        if (count($product_name_array) > 1) {
+            if ($product_name_array[0] == $category_info['subcategory_name']) {
+                array_splice($product_name_array, 0, 1); //removes the first element
+            }
+        }
+
+        $product_name_array = $this->remove_black_list_words($product_name_array);
+
+        // var_dump($product_name_array);
+
+        $golden_buyAds = DB::table('buy_ads')
+                            ->join('categories','categories.id','=','buy_ads.category_id')
+                            ->join('myusers','myusers.id','=','buy_ads.myuser_id')
+                            ->where(function($q) use($product_name_array){
+                                foreach($product_name_array as $name){
+                                    $q = $q->orWhere('name','like',"%$name%");
+                                }
+
+                                return $q;
+                            })
+                            ->whereBetween('buy_ads.updated_at',[Carbon::now()->subHours(4),Carbon::now()])
+                            ->where('myuser_id','<>',$user_id)
+                            ->select('buy_ads.id','myusers.first_name', 'myusers.last_name' ,'buy_ads.name', 'buy_ads.requirement_amount' ,'categories.category_name as subcategory_name' ,'buy_ads.myuser_id as buyer_id' )
+                            ->get()
+                            ->values()
+                            ->toArray();
+
+        // var_dump($golden_buyAds);
+
+        return $golden_buyAds;
     }
 }

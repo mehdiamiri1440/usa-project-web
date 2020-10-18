@@ -393,16 +393,11 @@ class product_list_controller extends Controller
 
         $user_info = myuser::find($user_id);
 
-        //this condition has been added for buyers good first impression
-        if($user_info->created_at->diffInHours(Carbon::now()) < 6 ) { // for new users
-            return $this->sort_products_by_response_time($products);
-        }
-
         $tmp_products = [];
         //this condition checks if buyer has buyAd request to show five related products at top list
         if($user_info->is_buyer == true){
             $the_buyer_last_buyAd_request = buyAd::where('myuser_id',$user_id)
-                                                    ->where('confirmed',true)
+                                                    // ->where('confirmed',true)
                                                     ->orderBy('updated_at')
                                                     ->get()
                                                     ->last();
@@ -416,6 +411,19 @@ class product_list_controller extends Controller
 
         $user_response_info = $this->get_user_response_info($user_id);
         $user_response_info['created_at'] = $user_info->created_at;
+
+        if($tmp_products){
+            $tmp_product_ids = [];
+            foreach($tmp_products as $product)
+            {
+                $tmp_product_ids[] = $product['main']->id;
+            }
+
+            $products = array_filter($products,function($product) use($tmp_product_ids){
+                return in_array($product['main']->id,$tmp_product_ids) === false;
+            });
+        }
+        
 
         $sorting_callback_function = $this->get_best_match_call_back_function($user_response_info);
 
