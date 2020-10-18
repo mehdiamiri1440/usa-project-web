@@ -1151,40 +1151,44 @@ class buyAd_controller extends Controller
                                 ->orderBy('updated_at')
                                 ->get()
                                 ->last();
+        if($last_product){
+            $product_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $last_product->product_name))));
 
-        $product_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $last_product->product_name))));
+            $category_info = $this->get_category_and_subcategory_name($last_product->category_id);
 
-        $category_info = $this->get_category_and_subcategory_name($last_product->category_id);
-
-        if (count($product_name_array) > 1) {
-            if ($product_name_array[0] == $category_info['subcategory_name']) {
-                array_splice($product_name_array, 0, 1); //removes the first element
+            if (count($product_name_array) > 1) {
+                if ($product_name_array[0] == $category_info['subcategory_name']) {
+                    array_splice($product_name_array, 0, 1); //removes the first element
+                }
             }
+
+            $product_name_array = $this->remove_black_list_words($product_name_array);
+
+            // var_dump($product_name_array);
+
+            $golden_buyAds = DB::table('buy_ads')
+                                ->join('categories','categories.id','=','buy_ads.category_id')
+                                ->join('myusers','myusers.id','=','buy_ads.myuser_id')
+                                ->where(function($q) use($product_name_array){
+                                    foreach($product_name_array as $name){
+                                        $q = $q->orWhere('name','like',"%$name%");
+                                    }
+
+                                    return $q;
+                                })
+                                ->whereBetween('buy_ads.updated_at',[Carbon::now()->subHours(4),Carbon::now()])
+                                ->where('myuser_id','<>',$user_id)
+                                ->select('buy_ads.id','myusers.first_name', 'myusers.last_name' ,'buy_ads.name', 'buy_ads.requirement_amount' ,'categories.category_name as subcategory_name' ,'buy_ads.myuser_id as buyer_id' )
+                                ->get()
+                                ->values()
+                                ->toArray();
+
+            // var_dump($golden_buyAds);
+
+            return $golden_buyAds;
         }
 
-        $product_name_array = $this->remove_black_list_words($product_name_array);
-
-        // var_dump($product_name_array);
-
-        $golden_buyAds = DB::table('buy_ads')
-                            ->join('categories','categories.id','=','buy_ads.category_id')
-                            ->join('myusers','myusers.id','=','buy_ads.myuser_id')
-                            ->where(function($q) use($product_name_array){
-                                foreach($product_name_array as $name){
-                                    $q = $q->orWhere('name','like',"%$name%");
-                                }
-
-                                return $q;
-                            })
-                            ->whereBetween('buy_ads.updated_at',[Carbon::now()->subHours(4),Carbon::now()])
-                            ->where('myuser_id','<>',$user_id)
-                            ->select('buy_ads.id','myusers.first_name', 'myusers.last_name' ,'buy_ads.name', 'buy_ads.requirement_amount' ,'categories.category_name as subcategory_name' ,'buy_ads.myuser_id as buyer_id' )
-                            ->get()
-                            ->values()
-                            ->toArray();
-
-        // var_dump($golden_buyAds);
-
-        return $golden_buyAds;
+        return null;
+        
     }
 }
