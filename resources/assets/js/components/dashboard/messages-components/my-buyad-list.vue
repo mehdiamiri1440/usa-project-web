@@ -442,7 +442,9 @@ li.contact-item {
       <p class="section-contents">
         برای دسترسی به این قسمت لطفا اپلیکیشن موبایل باسکول را نصب کنید.
       </p>
-      <a class="green-button" href="/download/app"> دانلود اپلیکیشن</a>
+      <a class="green-button" href @click.prevent="doDownload()">
+        دانلود اپلیکیشن</a
+      >
     </div>
     <div class="image-wrapper" v-else-if="buyAds.length === 0 && isLoading">
       <div class="lds-ring">
@@ -456,7 +458,7 @@ li.contact-item {
     <div v-else-if="buyAds.length === 0 && !isLoading" class="not-found-item">
       <div class="empty-list">
         <i class="fa fa-list-alt"></i>
-        <p>در حال حاظر درخواست خریدی برای شما وجود ندارد</p>
+        <p>در حال حاضر درخواست خریدی برای شما وجود ندارد</p>
         <p class="red-text">
           در صورت دریافت درخواست خرید، ما به شما اطلاع می دهیم.
         </p>
@@ -766,6 +768,38 @@ export default {
             return true;
           } else return false;
         });
+      });
+    },
+    doDownload: function () {
+      //ga
+      this.registerComponentStatistics(
+        "download",
+        "app download btn",
+        "download app btn in popUp"
+      );
+      // code here
+      this.createCookie("downloadAppModal", true, 60 * 24);
+      window.location.href =
+        "https://app-download.s3.ir-thr-at1.arvanstorage.com/buskool.apk";
+    },
+    createCookie: function (name, value, minutes) {
+      if (minutes) {
+        var date = new Date();
+        date.setTime(date.getTime() + minutes * 60 * 1000);
+        var expires = "; expires=" + date.toGMTString();
+      } else {
+        var expires = "";
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
+    },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
       });
     },
   },

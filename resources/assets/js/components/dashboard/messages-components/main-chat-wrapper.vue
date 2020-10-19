@@ -366,11 +366,15 @@
           <img v-else src="../../../../img/user-defult.png" />
         </div>
 
-        <router-link :to="{ path: '/profile/' + $parent.selectedContact.user_name }">
+        <router-link
+          :to="{ path: '/profile/' + $parent.selectedContact.user_name }"
+        >
           <span>
-            {{ $parent.selectedContact.first_name +
-            ' ' +
-            $parent.selectedContact.last_name}}
+            {{
+              $parent.selectedContact.first_name +
+              " " +
+              $parent.selectedContact.last_name
+            }}
             <button
               v-if="$parent.selectedContact.is_verified"
               @click.prevent
@@ -411,8 +415,8 @@
               <button
                 type="button"
                 @click.prevent="
-                $parent.activeReportModal($parent.selectedContact.contact_id)
-              "
+                  $parent.activeReportModal($parent.selectedContact.contact_id)
+                "
               >
                 <i class="fas fa-exclamation-circle"></i>
                 گزارش تخلف
@@ -421,9 +425,7 @@
             <li v-if="$parent.userAllowedReview" class="list-item">
               <button
                 type="button"
-                @click.prevent="
-                $parent.activeReviewModal()
-              "
+                @click.prevent="$parent.activeReviewModal()"
               >
                 <i class="fas fa-star"></i>
                 ثبت نظر
@@ -457,9 +459,14 @@
             <div class="message-content-wrapper">
               <span v-text="msg.text"></span>
               <span class="message-chat-date">
-                <span v-if="msg.created_at">{{ msg.created_at | moment("jYY/jMM/jDD, h:mm A") }}</span>
+                <span v-if="msg.created_at">{{
+                  msg.created_at | moment("jYY/jMM/jDD, h:mm A")
+                }}</span>
                 <span v-else>{{ Date() | moment("jYY/jMM/jDD, h:mm A") }}</span>
-                <span class="check-items" v-if="msg.sender_id === $parent.currentUserId">
+                <span
+                  class="check-items"
+                  v-if="msg.sender_id === $parent.currentUserId"
+                >
                   <i class="fa fa-check" v-if="msg.created_at"></i>
                   <i class="far fa-clock" v-else></i>
                   <i class="fa fa-check" v-if="msg.is_read"></i>
@@ -471,14 +478,14 @@
         <li v-if="$parent.isNoticeActive" class="messenger-notice">
           <p class="notice-title">
             اطلاعات هویتی این کاربر
-            <span
-              class="red-text"
-              v-if="!$parent.isCurrentUserVerified"
-            >مانند اطلاعات هویتی شما</span> نزد باسکول احراز <span class="red-text"> نشده </span> است.
+            <span class="red-text" v-if="!$parent.isCurrentUserVerified"
+              >مانند اطلاعات هویتی شما</span
+            >
+            نزد باسکول احراز <span class="red-text"> نشده </span> است.
           </p>
           <div class="notice-actions">
             <button @click="$parent.setNoticeCookie()">متوجه شدم</button>
-            <router-link :tag="button" :to="{'name':'verificationInfo'}">
+            <router-link tag="button" :to="{ name: 'verificationInfo' }">
               <i class="fa fa-info"></i>
               اطلاعات بیشتر
             </router-link>
@@ -490,7 +497,10 @@
         v-if="$parent.isChatMessagesLoaded && $parent.isFirstMessageLoading"
       >
         <div class="image-wrapper">
-          <div v-show="!$parent.isImageLoad || $parent.isImageLoad" class="lds-ring">
+          <div
+            v-show="!$parent.isImageLoad || $parent.isImageLoad"
+            class="lds-ring"
+          >
             <div></div>
             <div></div>
             <div></div>
@@ -502,7 +512,11 @@
       <div class="send-message-form">
         <form>
           <div class="message-input">
-            <input type="text" placeholder="پیغامی بگذارید " v-model="$parent.msgToSend" />
+            <input
+              type="text"
+              placeholder="پیغامی بگذارید "
+              v-model="$parent.msgToSend"
+            />
           </div>
 
           <div class="button-wrapper">
@@ -536,12 +550,12 @@
 <script>
 export default {
   methods: {
-    init: function() {
+    init: function () {
       this.hideCollapses();
       this.$parent.userHasNotice();
     },
-    hideCollapses: function() {
-      $(document).on("click", function(e) {
+    hideCollapses: function () {
+      $(document).on("click", function (e) {
         /* bootstrap collapse js adds "in" class to your collapsible element*/
 
         var user_menu_opened = $("#chat-menu-items").hasClass("in");
@@ -557,7 +571,7 @@ export default {
         /* bootstrap collapse js adds "in" class to your collapsible element*/
       });
     },
-    checkMessageName: function(index, prevIndex) {
+    checkMessageName: function (index, prevIndex) {
       var isMessageName = false;
 
       if (this.$parent.chatMessages[prevIndex] && prevIndex >= 0) {
@@ -585,10 +599,10 @@ export default {
         myMessage = false;
       }
       return myMessage;
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.init();
-  }
+  },
 };
 </script>

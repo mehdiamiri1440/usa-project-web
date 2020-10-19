@@ -368,8 +368,8 @@
     >
       <div v-if="userType" class="default-main-contents seller-buyAd-picture">
         <p class="red-text">
-          برای دسترسی به درخواست های خرید مرتبط از این تب در منوی سمت راست اقدام
-          کنید
+          برای دسترسی به درخواست های خرید مرتبط از این قسمت در منوی سمت راست
+          اقدام کنید
           <img src="../../../img/messegs-buy-ads.jpg" alt="" />
         </p>
       </div>

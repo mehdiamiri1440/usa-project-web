@@ -279,7 +279,12 @@
   background: #dddddd;
   transition: 300ms;
 }
-
+.user-not-fount i {
+  margin-top: 50px;
+  font-size: 50px;
+  margin-bottom: 10px;
+  display: block;
+}
 @media screen and (max-width: 992px) {
   .main-content {
     padding: 59px 0 0;
@@ -402,7 +407,7 @@
       <div
         v-else-if="$parent.contactNameSearchText && !$parent.isSearchingContact"
       >
-        <p>
+        <p class="user-not-fount">
           <i class="fa fa-user"></i>
           <span>مخاطب یافت نشد</span>
         </p>
