@@ -39,7 +39,9 @@ class ProductRegisterReminder implements ShouldQueue
         $data = [
             'title' => 'باسکول',
             'message' => 'با ثبت محصولات خود با هزاران خریدار در بازار کشاورزی باسکول ارتباط برقرار کنید',
-            'target' => 'registerProduct'
+            'payload' => [
+                'BTarget' => 'registerProduct',
+            ],
         ];
         
         $fcm_object = new fcm_controller();

@@ -90,6 +90,8 @@ class seller_finder_controller extends Controller
         }
 
         return $the_most_related_product_owners;
+
+
     }
 
     protected function get_the_most_related_product_owners_id_to_given_buyAd(&$buyAd, &$products)
@@ -183,15 +185,15 @@ class seller_finder_controller extends Controller
             $filtered_sellers_helper['responsers'] = [];
             $filtered_sellers_helper['others'] = [];
 
-            if($response_info['response_rate'] >= 75 && $response_info['response_time'] <= 144)
+            if($response_info['response_rate'] >= 75) //&& $response_info['response_time'] <= 144)
             {
-                $suggested_buyAd_counts_sent_to_seller = $this->get_suggested_buyAd_counts_sent_to_seller($seller['user_id']);
+                $suggested_buyAds = $this->get_suggested_buyAds_sent_to_seller($seller['user_id']);
     
-                if($suggested_buyAd_counts_sent_to_seller < 4){
+                if(count($suggested_buyAds) < 4){
                     $filtered_sellers[] = $seller['user_id'];
                 }
                 else{
-                    $response_rate_to_previous_buyAd_suggestions = $this->get_seller_response_rate_to_previous_buyAd_suggestions($seller['user_id'],$suggested_buyAd_counts_sent_to_seller);
+                    $response_rate_to_previous_buyAd_suggestions = $this->get_seller_response_rate_to_previous_buyAd_suggestions($seller['user_id'],$suggested_buyAds);
                     
                     if($response_rate_to_previous_buyAd_suggestions >= 50){
                         $filtered_sellers[] = $seller['user_id'];
@@ -291,28 +293,25 @@ class seller_finder_controller extends Controller
         return compact('response_rate','response_time','ums'); // UMS stands for unique message senders to this user
     }
 
-    protected function get_suggested_buyAd_counts_sent_to_seller($seller_id)
+    protected function get_suggested_buyAds_sent_to_seller($seller_id)
     {
-        $suggested_buyAd_counts = DB::table('buy_ad_suggestions')
+        $suggested_buyAds = DB::table('buy_ad_suggestions')
                                         ->where('seller_id',$seller_id)
-                                        ->get()->count();
+                                        ->get();
         
-        return $suggested_buyAd_counts;
+        return $suggested_buyAds;
     }
 
-    protected function get_seller_response_rate_to_previous_buyAd_suggestions($seller_id,$suggested_buyAd_counts_sent_to_seller)
+    protected function get_seller_response_rate_to_previous_buyAd_suggestions($seller_id,$suggested_buyAds)
     {
-        $contacts_count_from_suggested_buyAd_reply = DB::table('buy_ad_suggestions')
-                                                            ->join('messages','messages.sender_id','=','buy_ad_suggestions.seller_id')
-                                                            ->where('messages.sender_id',$seller_id)
+        $contacts_count_from_suggested_buyAd_reply = DB::table('buy_ad_reply_meta_datas')
+                                                            ->whereIn('buy_ad_reply_meta_datas.buy_ad_id',$suggested_buyAds->pluck('buy_ad_id')->all())
+                                                            ->where('buy_ad_reply_meta_datas.replier_id',$seller_id)
                                                             ->get()
                                                             ->count();
 
-        if($contacts_count_from_suggested_buyAd_reply == 0){
-            return 100;
-        }
 
-        return round($contacts_count_from_suggested_buyAd_reply / $suggested_buyAd_counts_sent_to_seller);
+        return round(($contacts_count_from_suggested_buyAd_reply * 100) / count($suggested_buyAds));
     }
 
     protected function distribute_buyAd_suggestions_in_sellers($filtered_sellers,$filtered_sellers_helper,$premium_seller_ids)
@@ -358,7 +357,6 @@ class seller_finder_controller extends Controller
                 $premium_seller_ids = array_merge($premium_seller_ids,array_slice($alternative_premium_seller_ids,0,$shortage));
             }
         }
-        
 
         $final_filtered_sellers = array_slice($filtered_sellers_helper['responsers'],0,4); //40%
         $final_filtered_sellers = array_merge($final_filtered_sellers,array_slice($premium_seller_ids,0,3)); //30%

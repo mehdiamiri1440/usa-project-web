@@ -38,9 +38,8 @@ class fcm_controller extends Controller
         $notification = $notificationBuilder->build();
 
         $dataBuilder = new PayloadDataBuilder();
-        $dataBuilder->addData([
-            'BTarget' =>  $data_array['target'],
-        ]);
+        
+        $dataBuilder->addData($data_array['payload']);
 
         $data = $dataBuilder->build();
         
@@ -66,9 +65,7 @@ class fcm_controller extends Controller
         $notification = $notificationBuilder->build();
 
         $dataBuilder = new PayloadDataBuilder();
-        $dataBuilder->addData([
-            'BTarget' =>  $data['target'],
-        ]);
+        $dataBuilder->addData($data['payload']);
 
         $payloadData = $dataBuilder->build();
 

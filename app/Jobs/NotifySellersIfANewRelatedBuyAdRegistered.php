@@ -55,7 +55,7 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
                     'buy_ad_id'  => $this->buyAd->id,
                 ];
 
-                $this->notify_product_owner($user_id);
+                // $this->notify_product_owner($user_id);
             }
             
             DB::table('buy_ad_suggestions')->insert($buyAd_suggestion_records);
@@ -180,12 +180,13 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
     {
         $user_record = myuser::find($user_id);
 
-        if($user_record->active_pakage_type > 0){
-            $this->notify_product_owner_via_sms($user_record->phone);
-        }
-        else{
-            $this->notify_product_owner_via_sms($user_record->phone,$delayed = true);
-        }
+        $this->notify_product_owner_via_sms($user_record->phone);
+        // if($user_record->active_pakage_type > 0){
+        //     $this->notify_product_owner_via_sms($user_record->phone);
+        // }
+        // else{
+        //     $this->notify_product_owner_via_sms($user_record->phone,$delayed = true);
+        // }
         
 
         $this->notify_product_owner_via_app_notification($user_id);
@@ -209,8 +210,10 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
         $data = [
             'title' => 'باسکول',
             'message' => 'یک خریدار جدید برای محصول شما پیدا شد. خریدار فقط تا چهار ساعت دیگر منتظر پاسخ شما می ماند ',
-            'target' => 'buyAds',
-            'sound' => 'buskool_voice.mp3'
+            'sound' => 'buskool_voice.mp3',
+            'payload' => [
+                'BTarget' => 'buyAdSuggestion'
+            ]
         ];
 
         $topic_name = 'FCM'.$user_id;
