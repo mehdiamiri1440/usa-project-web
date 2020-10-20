@@ -39,7 +39,10 @@ class ExpiryReminder implements ShouldQueue
 
         $data = [
             'title' => 'باسکول',
-            'message' => ' بسته ی عضویت شما در باسکول به زودی به اتمام می رسد.'
+            'message' => ' بسته ی عضویت شما در باسکول به زودی به اتمام می رسد.',
+            'payload' => [
+                'BTarget' => 'productList'
+            ],
         ];
     
         $fcm_object = new fcm_controller();

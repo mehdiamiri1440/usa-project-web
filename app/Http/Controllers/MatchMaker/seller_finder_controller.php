@@ -21,9 +21,28 @@ class seller_finder_controller extends Controller
 
     public function get_the_most_related_product_owners_id_to_the_given_buyAd_if_any(&$buyAd)
     {
-        $until_date = Carbon::now();
-        $from_date = Carbon::now()->subDays(120); // last 4 months
+        $buyAd_name_array = $this->get_buyAd_name_array($buyAd);
+        
+        $related_subcategory_products = $this->get_related_products_to_the_given_buyAd($buyAd,$buyAd_name_array);
 
+        $premium_products = $this->get_premium_related_products($buyAd,$buyAd_name_array);
+
+        if($premium_products){
+            $related_subcategory_products = array_merge($related_subcategory_products,$premium_products);
+        }
+        
+        if ($related_subcategory_products) {
+            $the_most_related_product_owners = $this->apply_selection_algorithm($buyAd->id,$related_subcategory_products,$premium_products);
+        } 
+        else {
+            $the_most_related_product_owners = [];
+        }
+
+        return $the_most_related_product_owners;
+    }
+
+    protected function get_buyAd_name_array($buyAd)
+    {
         $buyAd_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $buyAd->name)))); //PHP is for professionals,not for kids
         
         $category_info = $this->get_category_and_subcategory_name($buyAd->category_id);
@@ -35,7 +54,15 @@ class seller_finder_controller extends Controller
         }
 
         $buyAd_name_array = $this->remove_black_list_words($buyAd_name_array);
-        
+
+        return $buyAd_name_array;
+    }
+
+    protected function get_related_products_to_the_given_buyAd($buyAd,$buyAd_name_array)
+    {
+        $until_date = Carbon::now();
+        $from_date = Carbon::now()->subDays(120); // last 4 months
+
         $related_subcategory_products = product::where('category_id', $buyAd->category_id)
                                             ->where('confirmed', true)
                                             ->whereBetween('updated_at', [$from_date, $until_date])
@@ -53,81 +80,37 @@ class seller_finder_controller extends Controller
                                             ->get()
                                             ->values()
                                             ->toArray();
+        
+        return $related_subcategory_products;
 
-        $related_subcategory_products = array_values($related_subcategory_products);
+    }
 
+    protected function get_premium_related_products($buyAd,$buyAd_name_array)
+    {
         $premium_users_id = myuser::where('active_pakage_type','>',0)
                                 ->select('id as user_id')
                                 ->get();
 
         $premium_products = product::where('category_id',$buyAd->category_id)
-                                            ->where('confirmed',true)
-                                            ->whereIN('myuser_id',$premium_users_id)
-                                            ->where('myuser_id','<>',$buyAd->myuser_id)
-                                            ->where(function($q) use($buyAd_name_array){
-                                                foreach($buyAd_name_array as $name){
-                                                    $q = $q->orWhere('product_name','like',"%$name%");
-                                                }
+                                ->where('confirmed',true)
+                                ->whereIN('myuser_id',$premium_users_id)
+                                ->where('myuser_id','<>',$buyAd->myuser_id)
+                                ->where(function($q) use($buyAd_name_array){
+                                    foreach($buyAd_name_array as $name){
+                                        $q = $q->orWhere('product_name','like',"%$name%");
+                                    }
 
-                                                return $q;
-                                            })
-                                            ->select('myuser_id as user_id')
-                                            ->distinct('myuser_id')
-                                            ->orderBy('created_at')
-                                            ->get()
-                                            ->values()
-                                            ->toArray();
-
-        if($premium_products){
-            $related_subcategory_products = array_merge($related_subcategory_products,$premium_products);
-        }
-        
-        if ($related_subcategory_products) {
-            $the_most_related_product_owners = $this->apply_selection_algorithm($buyAd->id,$related_subcategory_products,$premium_products);
-        } 
-        else {
-            $the_most_related_product_owners = [];
-        }
-
-        return $the_most_related_product_owners;
+                                    return $q;
+                                })
+                                ->select('myuser_id as user_id')
+                                ->distinct('myuser_id')
+                                ->orderBy('created_at')
+                                ->get()
+                                ->values()
+                                ->toArray();
 
 
-    }
-
-    protected function get_the_most_related_product_owners_id_to_given_buyAd(&$buyAd, &$products)
-    {
-        $most_related_product_owners = [];
-        // $max_mached_score = 0;
-
-        $buyAd_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $buyAd->name)))); //PHP is for professionals,not for kids
-
-        $category_info = $this->get_category_and_subcategory_name($buyAd->category_id);
-
-        if (count($buyAd_name_array)) {
-            if ($buyAd_name_array[0] == $category_info['subcategory_name']) {
-                array_splice($buyAd_name_array, 0, 1);
-            }
-        }
-
-        $buyAd_name_array_count = count($buyAd_name_array);
-
-        foreach ($products as $product) {
-            // $score = 0;
-
-            $product_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $product->product_name))));
-
-            $product_name_array = $this->remove_black_list_words($product_name_array);
-
-            foreach ($product_name_array as $word) {
-                $index = array_search($word, $buyAd_name_array); //$index will be false if the array doesn't contain the word
-                if ($index !== false) {//warning:don't change it to !=
-                    $most_related_product_owners[] = $product->myuser_id;
-                    // $score += $this->factorial($buyAd_name_array_count - $index);
-                }
-            }
-        }
-
-        return array_unique($most_related_product_owners);
+        return $premium_products;
     }
 
     protected function remove_black_list_words(&$words)
@@ -176,14 +159,13 @@ class seller_finder_controller extends Controller
     {
         $filtered_sellers = [];
         $filtered_sellers_helper = [];
+        $filtered_sellers_helper['responsers'] = [];
+        $filtered_sellers_helper['others'] = [];
 
-        //Check for basic conditions
+        //Check for basic algorithm conditions
         foreach($seller_ids as $seller)
         {
             $response_info = $this->get_user_response_info($seller['user_id']);
-
-            $filtered_sellers_helper['responsers'] = [];
-            $filtered_sellers_helper['others'] = [];
 
             if($response_info['response_rate'] >= 75) //&& $response_info['response_time'] <= 144)
             {
@@ -203,46 +185,55 @@ class seller_finder_controller extends Controller
             }
         }
 
-        //exclude based on algorithm conditions
-        if(count($filtered_sellers) > 10){
-            $tmp = buy_ad_suggestion::whereIn('seller_id',$filtered_sellers)
-                                        ->select(DB::raw('MAX(created_at) as date,seller_id as user_id'))
-                                        // ->distinct('seller_id')
-                                        ->groupBy('user_id')
-                                        ->orderBy('date')
-                                        ->get()
-                                        ->values()
-                                        ->toArray();
-
-            $related_previous_buyAd_suggestion_records= [];
-            foreach($tmp as $seller){
-                $related_previous_buyAd_suggestion_records[] = $seller['user_id'];
-            }
-            
-            if(count($related_previous_buyAd_suggestion_records) > 0){
-                $filtered_sellers = array_filter($filtered_sellers,function($seller_id) use($related_previous_buyAd_suggestion_records){
-                    return  in_array($seller_id,$related_previous_buyAd_suggestion_records) === false;
-                });
-                
-                if(count($filtered_sellers) < 10){
-                    $shortage_count = 10 - count($filtered_sellers);
-                    $filtered_sellers = array_merge($filtered_sellers,array_slice($related_previous_buyAd_suggestion_records,0,$shortage_count));
-                }
-                else{
-                    $filtered_sellers = array_slice($filtered_sellers,0,10);
-                    $filtered_sellers_helper['others'] = $filtered_sellers;
-                }
-            }
-            else{
-                $filtered_sellers = array_slice($filtered_sellers,0,10);
-            }
-
-            $filtered_sellers = $this->distribute_buyAd_suggestions_in_sellers($filtered_sellers,$filtered_sellers_helper,$premium_seller_ids);
-            
+        //check for detailed algorithm conditions
+        if(count($filtered_sellers) > 12){
+            $filtered_sellers = $this->apply_detailed_conditions_for_selecting_sellers($filtered_sellers,$filtered_sellers_helper,$premium_seller_ids);
         }
 
         return $filtered_sellers;
 
+    }
+
+    protected function apply_detailed_conditions_for_selecting_sellers($filtered_sellers,$filtered_sellers_helper,$premium_seller_ids)
+    {
+        
+        $tmp = buy_ad_suggestion::whereIn('seller_id',$filtered_sellers)
+                                    ->select(DB::raw('MAX(created_at) as date,seller_id as user_id'))
+                                    // ->distinct('seller_id')
+                                    ->groupBy('user_id')
+                                    ->orderBy('date')
+                                    ->get()
+                                    ->values()
+                                    ->toArray();
+
+        $related_previous_buyAd_suggestion_records = [];
+        foreach($tmp as $seller){
+            $related_previous_buyAd_suggestion_records[] = $seller['user_id'];
+        }
+        
+        if(count($related_previous_buyAd_suggestion_records) > 0){
+            $filtered_sellers = array_filter($filtered_sellers,function($seller_id) use($related_previous_buyAd_suggestion_records){
+                return  in_array($seller_id,$related_previous_buyAd_suggestion_records) === false;
+            });
+            
+            if(count($filtered_sellers) < 12){
+                $shortage_count = 12 - count($filtered_sellers);
+                $filtered_sellers = array_merge($filtered_sellers,array_slice($related_previous_buyAd_suggestion_records,0,$shortage_count));
+                $filtered_sellers_helper['others'] = $filtered_sellers;
+            }
+            else{
+                $filtered_sellers_helper['others'] = $filtered_sellers;
+                $filtered_sellers = array_slice($filtered_sellers,0,12);
+            }
+        }
+        else{
+            $filtered_sellers_helper['others'] = $filtered_sellers;
+            $filtered_sellers = array_slice($filtered_sellers,0,12);
+        }
+        
+        $filtered_sellers = $this->distribute_buyAd_suggestions_in_sellers($filtered_sellers,$filtered_sellers_helper,$premium_seller_ids);
+
+        return $filtered_sellers;
     }
 
     protected function get_user_response_info($user_id,$product_last_uptade_date = null,$viewer_response_time = 0)
@@ -325,13 +316,28 @@ class seller_finder_controller extends Controller
 
         $premium_seller_ids = $tmp;
 
-        $filtered_sellers_helper['responsers'] = array_filter($filtered_sellers_helper['responsers'],function($seller_id) use($premium_seller_ids){
+        $filtered_sellers_helper['others'] = array_filter($filtered_sellers_helper['others'],function($seller_id) use($premium_seller_ids,$filtered_sellers_helper){
+            return in_array($seller_id,$premium_seller_ids) === false && in_array($seller_id,$filtered_sellers_helper['responsers']) === false;
+        });
+        
+        $filtered_sellers_helper['responsers'] = array_filter($filtered_sellers_helper['responsers'],function($seller_id) use($premium_seller_ids,$filtered_sellers_helper){
             return in_array($seller_id,$premium_seller_ids) === false;
         });
 
-        $filtered_sellers_helper['others'] = array_filter($filtered_sellers_helper['others'],function($seller_id) use($premium_seller_ids){
-            return in_array($seller_id,$premium_seller_ids) === false;
-        });
+        $new_sellers = product::where('confirmed',true)
+                                    ->whereIn('myuser_id',$filtered_sellers_helper['others'])
+                                    ->whereBetween('updated_at',[Carbon::now()->subDays(90),Carbon::now()])
+                                    ->select('myuser_id as user_id')
+                                    ->distinct()
+                                    ->get();
+
+        $filtered_sellers_helper['new_sellers'] = [];
+        foreach($new_sellers as $seller)
+        {
+            $filtered_sellers_helper['new_sellers'][] = $seller->user_id;
+        }
+
+        $filtered_sellers_helper['others'] = array_diff($filtered_sellers_helper['others'],$filtered_sellers_helper['new_sellers']);
 
         if(count($premium_seller_ids) > 3){
             $tmp = buy_ad_suggestion::whereIn('seller_id',$premium_seller_ids)
@@ -358,16 +364,34 @@ class seller_finder_controller extends Controller
             }
         }
 
-        $final_filtered_sellers = array_slice($filtered_sellers_helper['responsers'],0,4); //40%
-        $final_filtered_sellers = array_merge($final_filtered_sellers,array_slice($premium_seller_ids,0,3)); //30%
-        $final_filtered_sellers = array_merge($final_filtered_sellers,array_slice($filtered_sellers_helper['others'],0,3)); //30%
+        $final_filtered_sellers = array_slice($filtered_sellers_helper['responsers'],0,4); //34%
+        $final_filtered_sellers = array_merge($final_filtered_sellers,array_slice($premium_seller_ids,0,3)); //25%
+        $final_filtered_sellers = array_merge($final_filtered_sellers,array_slice($filtered_sellers_helper['others'],0,3)); //25%
+        $final_filtered_sellers = array_merge($final_filtered_sellers,array_slice($filtered_sellers_helper['new_sellers'],0,2)); //16%
 
-        if(count($final_filtered_sellers) < 10){
-            $shortage_count = 10 - count($final_filtered_sellers);
-            $final_filtered_sellers = array_merge($final_filtered_sellers,array_slice($filtered_sellers,0,$shortage_count));
-        }
+        $final_filtered_sellers = $this->fill_the_array_required_size($final_filtered_sellers,$filtered_sellers,12);
 
         return $final_filtered_sellers;
+    }
+
+    protected function fill_the_array_required_size($shrinked_array,$main_array_source,$final_size)
+    {
+        if(count($shrinked_array) >= $final_size)
+        {
+            $result_array =  array_slice($shrinked_array,0,$final_size);
+        }
+        else{
+            $result_array = array_merge($shrinked_array,$main_array_source);
+        }
+
+        $result_array = array_unique($result_array);
+
+        if(count($result_array) >= $final_size)
+        {
+            $result_array =  array_slice($result_array,0,$final_size);
+        }
+
+        return $result_array;
     }
 
 
