@@ -389,7 +389,7 @@ import myContactList from "./messages-components/my-contact-list";
 import MainChatWrapper from "./messages-components/main-chat-wrapper";
 
 export default {
-  props: ["isRequiredFixAlert", "userType"],
+  props: ["isRequiredFixAlert", "userType", "currentUser"],
   components: {
     myContactList,
     MainChatWrapper,
