@@ -360,7 +360,7 @@
       <div class="contact-search-input-wrapper">
         <input
           type="text"
-          placeholder="جستجوی مخاطبین"
+          placeholder="جستجو"
           v-model="$parent.contactNameSearchText"
         />
         <i class="fa fa-search"></i>
@@ -374,7 +374,7 @@
           >
             <span class="total-unread-messages-badge">جدید</span>
             <i class="fa fa-list-alt"></i>
-            درخواست ها
+            خریداران پیشنهادی
           </router-link>
         </div>
 

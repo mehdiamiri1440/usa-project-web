@@ -453,7 +453,7 @@ li.contact-item {
       <div class="contact-search-input-wrapper">
         <input
           type="text"
-          placeholder="جستجوی درخواست ها"
+          placeholder="جستجو"
           v-model="filterBuyAd"
         />
         <i class="fa fa-search"></i>
@@ -463,7 +463,7 @@ li.contact-item {
           <button class="contact-button active">
             <span class="total-unread-messages-badge">جدید</span>
             <i class="fa fa-list-alt"></i>
-            درخواست ها
+            خریداران پیشنهادی
           </button>
         </div>
 
@@ -503,9 +503,9 @@ li.contact-item {
     <div v-else-if="buyAds.length === 0 && !isLoading" class="not-found-item">
       <div class="empty-list">
         <i class="fa fa-list-alt"></i>
-        <p>در حال حاضر درخواست خریدی برای شما وجود ندارد</p>
+        <p>در حال حاضر پیشنهادی برای شما وجود ندارد</p>
         <p class="red-text">
-          در صورت وجود درخواست خرید، به شما اطلاع داده می شود.
+          در صورت وجود خریدار پیشنهادی، به شما اطلاع داده می شود.
         </p>
       </div>
     </div>
@@ -551,10 +551,11 @@ li.contact-item {
                   <p class="buyad-info">
                     خریدار
                     <span
+                      class="red-text"
                       v-if="buyAd.requirement_amount < 1000"
-                      v-text="buyAd.requirement_amount + 'کیلو گرم'"
+                      v-text="buyAd.requirement_amount + 'کیلوگرم'"
                     ></span>
-                    <span v-else-if="buyAd.requirement_amount == 1000"
+                    <span class="red-text" v-else-if="buyAd.requirement_amount == 1000"
                       >یک تن</span
                     >
                     <span
@@ -568,6 +569,7 @@ li.contact-item {
                     <span v-text="buyAd.subcategory_name"></span>
                     <span v-if="buyAd.name" class="gray-text"> از نوع </span>
                     <span v-if="buyAd.name" v-text="buyAd.name"></span>
+                    <span v-if="buyAd.name" class="gray-text"> هستم </span>
                   </p>
                   <p class="buyad-notice">
                     درصورت داشتن این محصول به من پیام دهید.
@@ -620,6 +622,9 @@ li.contact-item {
                     خریدار
 
                     <span v-text="buyAd.subcategory_name"></span>
+                    <span v-if="buyAd.name" class="gray-text"> از نوع </span>
+                    <span v-if="buyAd.name" v-text="buyAd.name"></span>
+                    <span v-if="buyAd.name" class="gray-text"> هستم </span>
                   </p>
 
                   <button
@@ -662,10 +667,11 @@ li.contact-item {
                   <p class="buyad-info">
                     خریدار
                     <span
+                      class="red-text"
                       v-if="buyAd.requirement_amount < 1000"
-                      v-text="buyAd.requirement_amount + 'کیلو گرم'"
+                      v-text="buyAd.requirement_amount + ' کیلوگرم '"
                     ></span>
-                    <span v-else-if="buyAd.requirement_amount == 1000"
+                    <span class="red-text" v-else-if="buyAd.requirement_amount == 1000"
                       >یک تن</span
                     >
                     <span
@@ -679,13 +685,14 @@ li.contact-item {
                     <span v-text="buyAd.subcategory_name"></span>
                     <span v-if="buyAd.name" class="gray-text"> از نوع </span>
                     <span v-if="buyAd.name" v-text="buyAd.name"></span>
+                    <span v-if="buyAd.name" class="gray-text"> هستم </span>
                   </p>
                   <p class="buyad-expire">
                     <span class="red-text">
                       <i class="fas fa-hourglass-half"></i>
                       <span v-text="buyAd.remaining_time + ' ساعت '"></span>
                     </span>
-                    دیگر فرصت پاسخ گویی شما به این درخواست
+                    دیگر فرصت پاسخ گویی شما به این خریدار
                   </p>
                   <p class="buyad-notice">
                     درصورت داشتن این محصول به من پیام دهید.
@@ -724,10 +731,11 @@ li.contact-item {
                   <p class="buyad-info">
                     خریدار
                     <span
+                      class="red-text"
                       v-if="buyAd.requirement_amount < 1000"
-                      v-text="buyAd.requirement_amount + 'کیلو گرم'"
+                      v-text="buyAd.requirement_amount + ' کیلوگرم '"
                     ></span>
-                    <span v-else-if="buyAd.requirement_amount == 1000"
+                    <span class="red-text" v-else-if="buyAd.requirement_amount == 1000"
                       >یک تن</span
                     >
                     <span
@@ -741,10 +749,11 @@ li.contact-item {
                     <span v-text="buyAd.subcategory_name"></span>
                     <span v-if="buyAd.name" class="gray-text"> از نوع </span>
                     <span v-if="buyAd.name" v-text="buyAd.name"></span>
+                    <span v-if="buyAd.name" class="gray-text"> هستم </span>
                   </p>
 
                   <p class="buyad-notice red-text">
-                    فرصت پاسخ گویی شما به این درخواست به پایان رسیده است
+                    فرصت پاسخ گویی شما به این خریدار به پایان رسیده است
                   </p>
                   <button class="buyad-button disable">پیام به خریدار</button>
                 </div>
