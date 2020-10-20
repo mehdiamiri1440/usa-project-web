@@ -222,10 +222,10 @@ li.contact-item {
 }
 .buyad-expire {
   color: #556080;
+  min-height: 40px;
 }
 .buyad-notice {
   color: #aeaeae;
-  min-height: 40px;
 }
 .request-contact-image {
   width: 30px;
@@ -291,6 +291,11 @@ li.contact-item {
 
 .golden {
   border: 2px solid rgb(199, 168, 79);
+  border-top: transparent;
+}
+
+.golden:first-of-type {
+  border-top: 2px solid rgb(199, 168, 79);
 }
 
 .golden .buyad-info {
@@ -362,6 +367,9 @@ li.contact-item {
   -ms-user-select: none; /* IE 10+ and Edge */
   user-select: none; /* Standard syntax */
   z-index: 0;
+  width: 100%;
+  left: 0;
+  text-align: center;
 }
 .golden-info-text {
   position: relative;
@@ -605,7 +613,7 @@ li.contact-item {
                   </p>
                 </div>
                 <div class="row golden-info-text">
-                  <p class="buyad-expire">
+                  <p>
                     <br />
                   </p>
                   <p class="buyad-info">
@@ -710,7 +718,7 @@ li.contact-item {
               </div>
               <div class="buyad-main col-xs-12">
                 <div class="row">
-                  <p class="buyad-expire">
+                  <p>
                     <br />
                   </p>
                   <p class="buyad-info">
@@ -776,6 +784,7 @@ export default {
       axios.post("/get_my_buyAd_suggestions").then((response) => {
         this.buyAds = response.data.buyAds;
         this.buyAdsGolden = response.data.golden_buyAds;
+        this.buyAdsGoldenFilter = this.buyAdsGolden;
         this.filterBuyAdBySearch();
         this.isLoading = false;
       });
@@ -802,7 +811,6 @@ export default {
     openChat: function (buyAd, event) {
       var self = this;
       let id = "#loader-0";
-      console.log($(event.target).hasClass("golden-button"));
       if ($(event.target).hasClass("golden-button")) {
         id = "#golden-loader-" + buyAd.id;
       } else {
