@@ -49,6 +49,7 @@ class SendNewMessageNotification implements ShouldQueue
             'sound'  => 'default',
             'payload' => [
                 'BTarget' => 'messages',
+                'senderId' => $msg->sender_id,
             ],
         ];
         
