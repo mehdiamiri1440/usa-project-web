@@ -164,6 +164,7 @@
   max-width: 400px;
   border-radius: 10px;
   padding: 0;
+  padding-top: 30px;
   height: 435px;
 }
 
@@ -367,11 +368,8 @@
     >
       <div v-if="userType" class="default-main-contents seller-buyAd-picture">
         <p class="red-text">
-          برای دسترسی به درخواست های خرید مرتبط از این تب در منوی سمت راست اقدام
-          کنید
-        </p>
-        {{ userType }}
-        <p>
+          برای دسترسی به درخواست های خرید مرتبط از این قسمت در منوی سمت راست
+          اقدام کنید
           <img src="../../../img/messegs-buy-ads.jpg" alt="" />
         </p>
       </div>
@@ -391,7 +389,7 @@ import myContactList from "./messages-components/my-contact-list";
 import MainChatWrapper from "./messages-components/main-chat-wrapper";
 
 export default {
-  props: ["isRequiredFixAlert", "userType"],
+  props: ["isRequiredFixAlert", "userType", "currentUser"],
   components: {
     myContactList,
     MainChatWrapper,

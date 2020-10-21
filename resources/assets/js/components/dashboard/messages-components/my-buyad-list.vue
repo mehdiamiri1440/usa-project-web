@@ -9,7 +9,7 @@
 }
 
 .contact-items {
-  padding-top: 95px;
+  padding-top: 99px;
 }
 
 li.contact-item {
@@ -222,10 +222,10 @@ li.contact-item {
 }
 .buyad-expire {
   color: #556080;
+  min-height: 40px;
 }
 .buyad-notice {
   color: #aeaeae;
-  min-height: 40px;
 }
 .request-contact-image {
   width: 30px;
@@ -250,6 +250,7 @@ li.contact-item {
 .buyad-info span.gray-text {
   color: #777;
 }
+
 .buyad-header {
   padding: 8px 5px;
   float: right;
@@ -287,6 +288,31 @@ li.contact-item {
   background: #dddddd;
   transition: 300ms;
 }
+
+.golden {
+  border: 2px solid rgb(199, 168, 79);
+  border-top: transparent;
+}
+
+.golden:first-of-type {
+  border-top: 2px solid rgb(199, 168, 79);
+}
+
+.golden .buyad-info {
+  margin-top: 15px;
+}
+
+.golden .buyad-button,
+.golden .buyad-button:hover {
+  color: #333;
+  background: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+}
+
 .hide-reply {
   display: none;
 }
@@ -333,6 +359,25 @@ li.contact-item {
   font-size: 16px;
 }
 
+.main-background-buyad {
+  filter: blur(6px);
+  position: absolute;
+  top: 18px;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
+  z-index: 0;
+  width: 100%;
+  left: 0;
+  text-align: center;
+}
+.golden-info-text {
+  position: relative;
+  z-index: 1;
+}
+.golden-info-text .buyad-info {
+  font-size: 18px;
+}
 @media screen and (max-width: 992px) {
   .main-content {
     padding: 59px 0 0;
@@ -408,7 +453,7 @@ li.contact-item {
       <div class="contact-search-input-wrapper">
         <input
           type="text"
-          placeholder="جستجوی درخواست ها"
+          placeholder="جستجو"
           v-model="filterBuyAd"
         />
         <i class="fa fa-search"></i>
@@ -418,7 +463,7 @@ li.contact-item {
           <button class="contact-button active">
             <span class="total-unread-messages-badge">جدید</span>
             <i class="fa fa-list-alt"></i>
-            درخواست ها
+            خریداران پیشنهادی
           </button>
         </div>
 
@@ -442,7 +487,9 @@ li.contact-item {
       <p class="section-contents">
         برای دسترسی به این قسمت لطفا اپلیکیشن موبایل باسکول را نصب کنید.
       </p>
-      <a class="green-button" href="/download/app"> دانلود اپلیکیشن</a>
+      <a class="green-button" href @click.prevent="doDownload()">
+        دانلود اپلیکیشن</a
+      >
     </div>
     <div class="image-wrapper" v-else-if="buyAds.length === 0 && isLoading">
       <div class="lds-ring">
@@ -456,25 +503,140 @@ li.contact-item {
     <div v-else-if="buyAds.length === 0 && !isLoading" class="not-found-item">
       <div class="empty-list">
         <i class="fa fa-list-alt"></i>
-        <p>در حال حاظر درخواست خریدی برای شما وجود ندارد</p>
+        <p>در حال حاضر پیشنهادی برای شما وجود ندارد</p>
         <p class="red-text">
-          در صورت دریافت درخواست خرید، ما به شما اطلاع می دهیم.
+          در صورت وجود خریدار پیشنهادی، به شما اطلاع داده می شود.
         </p>
       </div>
     </div>
 
     <div v-else class="contact-items buyad-lists-wrapper">
-      <div v-if="isSearchingBuyAds == true && buyAdsFilter.length === 0">
+      <div
+        v-if="
+          isSearchingBuyAds == true &&
+          buyAdsFilter.length === 0 &&
+          buyAdsGoldenFilter.length == 0
+        "
+      >
         <div class="empty-list text-center">
           <i class="fa fa-search"></i>
           <p>جستجو نتیجه ای نداشت.</p>
           <p class="red-text">
-            در صورت دریافت درخواست خرید، ما به شما اطلاع می دهیم.
+            در صورت وجود درخواست خرید، به شما اطلاع داده می شود.
           </p>
         </div>
       </div>
       <div v-else>
         <ul>
+          <li
+            class="contact-item golden"
+            v-for="(buyAd, index) in buyAdsGoldenFilter"
+            :key="'golden-' + index"
+          >
+            <div v-if="$parent.currentUser.user_info.active_pakage_type > 0">
+              <div class="buyad-header">
+                <div class="request-contact-image">
+                  <img src="../../../../img/user-defult.png" />
+                </div>
+                <div class="my-contact-info-wrapper">
+                  <span
+                    class="contact-name text-rtl"
+                    v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                  >
+                  </span>
+                </div>
+              </div>
+              <div class="buyad-main col-xs-12">
+                <div class="row">
+                  <p class="buyad-info">
+                    خریدار
+                    <span
+                      class="red-text"
+                      v-if="buyAd.requirement_amount < 1000"
+                      v-text="buyAd.requirement_amount + 'کیلوگرم'"
+                    ></span>
+                    <span class="red-text" v-else-if="buyAd.requirement_amount == 1000"
+                      >یک تن</span
+                    >
+                    <span
+                      v-else
+                      class="red-text"
+                      v-text="
+                        getNumberWithCommas(buyAd.requirement_amount / 1000) +
+                        ' تن '
+                      "
+                    ></span>
+                    <span v-text="buyAd.subcategory_name"></span>
+                    <span v-if="buyAd.name" class="gray-text"> از نوع </span>
+                    <span v-if="buyAd.name" v-text="buyAd.name"></span>
+                    <span v-if="buyAd.name" class="gray-text"> هستم </span>
+                  </p>
+                  <p class="buyad-notice">
+                    درصورت داشتن این محصول به من پیام دهید.
+                  </p>
+                  <button
+                    @click="openChat(buyAd, $event)"
+                    class="buyad-button golden-button"
+                  >
+                    پیام به خریدار
+                  </button>
+                  <button
+                    class="hide-reply buyad-button"
+                    :id="'golden-loader-' + buyAd.id"
+                    disabled
+                  >
+                    کمی صبر کنید...
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div v-else>
+              <div class="buyad-header">
+                <div class="request-contact-image">
+                  <img src="../../../../img/user-defult.png" />
+                </div>
+                <div class="my-contact-info-wrapper">
+                  <span
+                    class="contact-name text-rtl"
+                    v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                  >
+                  </span>
+                </div>
+              </div>
+              <div class="buyad-main col-xs-12">
+                <div class="main-background-buyad">
+                  <p class="buyad-info">
+                    این درخواست فقط برای
+                    <span class="red-text"> کاربران ویژه </span>
+                    قابل نمایش است
+                  </p>
+                  <p class="buyad-notice">
+                    برای مشاهده لطفا حساب کاربری خود را ارتقا دهد
+                  </p>
+                </div>
+                <div class="row golden-info-text">
+                  <p>
+                    <br />
+                  </p>
+                  <p class="buyad-info">
+                    خریدار
+
+                    <span v-text="buyAd.subcategory_name"></span>
+                    <span v-if="buyAd.name" class="gray-text"> از نوع </span>
+                    <span v-if="buyAd.name" v-text="buyAd.name"></span>
+                    <span v-if="buyAd.name" class="gray-text"> هستم </span>
+                  </p>
+
+                  <button
+                    @click="openGoldenChatRestrictionModal()"
+                    class="buyad-button"
+                  >
+                    پیام به خریدار
+                  </button>
+                </div>
+              </div>
+            </div>
+          </li>
           <li
             class="contact-item"
             v-for="(buyAd, index) in buyAdsFilter"
@@ -505,10 +667,11 @@ li.contact-item {
                   <p class="buyad-info">
                     خریدار
                     <span
+                      class="red-text"
                       v-if="buyAd.requirement_amount < 1000"
-                      v-text="buyAd.requirement_amount + 'کیلو گرم'"
+                      v-text="buyAd.requirement_amount + ' کیلوگرم '"
                     ></span>
-                    <span v-else-if="buyAd.requirement_amount == 1000"
+                    <span class="red-text" v-else-if="buyAd.requirement_amount == 1000"
                       >یک تن</span
                     >
                     <span
@@ -522,13 +685,14 @@ li.contact-item {
                     <span v-text="buyAd.subcategory_name"></span>
                     <span v-if="buyAd.name" class="gray-text"> از نوع </span>
                     <span v-if="buyAd.name" v-text="buyAd.name"></span>
+                    <span v-if="buyAd.name" class="gray-text"> هستم </span>
                   </p>
                   <p class="buyad-expire">
                     <span class="red-text">
                       <i class="fas fa-hourglass-half"></i>
                       <span v-text="buyAd.remaining_time + ' ساعت '"></span>
                     </span>
-                    دیگر فرصت پاسخ گویی شما به این درخواست
+                    دیگر فرصت پاسخ گویی شما به این خریدار
                   </p>
                   <p class="buyad-notice">
                     درصورت داشتن این محصول به من پیام دهید.
@@ -561,16 +725,17 @@ li.contact-item {
               </div>
               <div class="buyad-main col-xs-12">
                 <div class="row">
-                  <p class="buyad-expire">
+                  <p>
                     <br />
                   </p>
                   <p class="buyad-info">
                     خریدار
                     <span
+                      class="red-text"
                       v-if="buyAd.requirement_amount < 1000"
-                      v-text="buyAd.requirement_amount + 'کیلو گرم'"
+                      v-text="buyAd.requirement_amount + ' کیلوگرم '"
                     ></span>
-                    <span v-else-if="buyAd.requirement_amount == 1000"
+                    <span class="red-text" v-else-if="buyAd.requirement_amount == 1000"
                       >یک تن</span
                     >
                     <span
@@ -584,10 +749,11 @@ li.contact-item {
                     <span v-text="buyAd.subcategory_name"></span>
                     <span v-if="buyAd.name" class="gray-text"> از نوع </span>
                     <span v-if="buyAd.name" v-text="buyAd.name"></span>
+                    <span v-if="buyAd.name" class="gray-text"> هستم </span>
                   </p>
 
                   <p class="buyad-notice red-text">
-                    فرصت پاسخ گویی شما به این درخواست به پایان رسیده است
+                    فرصت پاسخ گویی شما به این خریدار به پایان رسیده است
                   </p>
                   <button class="buyad-button disable">پیام به خریدار</button>
                 </div>
@@ -608,6 +774,8 @@ export default {
   data: function () {
     return {
       buyAds: "",
+      buyAdsGolden: "",
+      buyAdsGoldenFilter: "",
       buyAdsFilter: "",
       isLoading: false,
       isConditionSatisfied: false,
@@ -624,6 +792,8 @@ export default {
       this.isLoading = true;
       axios.post("/get_my_buyAd_suggestions").then((response) => {
         this.buyAds = response.data.buyAds;
+        this.buyAdsGolden = response.data.golden_buyAds;
+        this.buyAdsGoldenFilter = this.buyAdsGolden;
         this.filterBuyAdBySearch();
         this.isLoading = false;
       });
@@ -649,8 +819,12 @@ export default {
     },
     openChat: function (buyAd, event) {
       var self = this;
-
-      let id = "#loader-" + buyAd.id;
+      let id = "#loader-0";
+      if ($(event.target).hasClass("golden-button")) {
+        id = "#golden-loader-" + buyAd.id;
+      } else {
+        id = "#loader-" + buyAd.id;
+      }
       self.hideReplyBtn(event, id);
 
       axios
@@ -686,6 +860,15 @@ export default {
             );
           }
         });
+    },
+    openGoldenChatRestrictionModal: function () {
+      eventBus.$emit("modal", "goldenBuyAdReplyLimit");
+
+      self.registerComponentStatistics(
+        "buyAdReply",
+        "openChat",
+        "permission denied"
+      );
     },
     registerComponentStatistics: function (
       categoryName,
@@ -767,6 +950,51 @@ export default {
           } else return false;
         });
       });
+      this.buyAdsGoldenFilter = this.buyAdsGolden.filter((buyAd) => {
+        var text = this.filterBuyAd.split(" ");
+        return text.every(function (el) {
+          if (
+            buyAd.first_name.indexOf(el) > -1 ||
+            buyAd.last_name.indexOf(el) > -1 ||
+            buyAd.name.indexOf(el) > -1 ||
+            buyAd.subcategory_name.indexOf(el) > -1
+          ) {
+            return true;
+          } else return false;
+        });
+      });
+    },
+    doDownload: function () {
+      //ga
+      this.registerComponentStatistics(
+        "download",
+        "app download btn",
+        "download app btn in popUp"
+      );
+      // code here
+      this.createCookie("downloadAppModal", true, 60 * 24);
+      window.location.href =
+        "https://app-download.s3.ir-thr-at1.arvanstorage.com/buskool.apk";
+    },
+    createCookie: function (name, value, minutes) {
+      if (minutes) {
+        var date = new Date();
+        date.setTime(date.getTime() + minutes * 60 * 1000);
+        var expires = "; expires=" + date.toGMTString();
+      } else {
+        var expires = "";
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
+    },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
     },
   },
   watch: {
@@ -783,6 +1011,7 @@ export default {
         this.filterBuyAdBySearch();
       } else {
         this.buyAdsFilter = this.buyAds;
+        this.buyAdsGoldenFilter = this.buyAdsGolden;
         this.isSearchingBuyAds = false;
       }
     },
