@@ -467,19 +467,19 @@ export default {
         self.chatMessages.push(msgObject);
         self.scrollToEnd(0);
 
-        if (window.location.pathname.includes("buyAd-requests")) {
-          axios
-            .post("/send_reply_to_buyAd", {
-              buy_ad_id: self.contactInfo.buyAd_id,
-              text: msgObject.text
-            })
-            .then(function(response) {
-              self.isFirstMessageLoading = false;
-              self.loadChatHistory(self.contactInfo, -10);
-            })
-            .catch(function(e) {
-              //
-            });
+        if (self.contactInfo.buyAd_id !== undefined && self.contactInfo.buyAd_id != null) {
+            axios
+              .post("/send_reply_to_buyAd", {
+                buy_ad_id: self.contactInfo.buyAd_id,
+                text: msgObject.text
+              })
+              .then(function(response) {
+                self.isFirstMessageLoading = false;
+                self.loadChatHistory(self.contactInfo, -10);
+              })
+              .catch(function(e) {
+                //
+              });
         } else {
           axios
             .post("/messanger/send_message", msgObject)

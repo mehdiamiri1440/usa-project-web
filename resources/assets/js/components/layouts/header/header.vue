@@ -970,7 +970,7 @@ a.profile-info-wrapper:hover {
               </li>
               <li>
                 <a
-                  href="http:\\www.blog.buskool.com"
+                  href="https:\\blog.buskool.com"
                   class="smoothScroll"
                   @click="registerComponentStatistics('header','blog','click-on-blog')"
                 >وبلاگ</a>
@@ -1060,7 +1060,7 @@ a.profile-info-wrapper:hover {
           </li>
           <li>
             <a
-              href="http:\\www.blog.buskool.com"
+              href="https:\\blog.buskool.com"
               class="smoothScroll"
               @click="registerComponentStatistics('header','blog','click-on-blog')"
             >وبلاگ</a>
