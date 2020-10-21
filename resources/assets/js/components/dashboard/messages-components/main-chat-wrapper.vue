@@ -401,7 +401,7 @@
             role="button"
           >
             <i class="fa fa-ellipsis-h"></i>
-            <i class="new-badge">جدید</i>
+            <!-- <i class="new-badge">جدید</i> -->
           </button>
           <button
             @click.prevent="$parent.selectedContact = !$parent.selectedContact"

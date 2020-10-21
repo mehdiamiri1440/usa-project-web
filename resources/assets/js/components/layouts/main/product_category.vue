@@ -1565,7 +1565,7 @@ export default {
       eventBus.$emit("submiting", true);
 
       self.fromProductCount = 0;
-      self.productCountInPage = 10;
+      self.productCountInPage = 12;
 
       var searchObject = {};
 
