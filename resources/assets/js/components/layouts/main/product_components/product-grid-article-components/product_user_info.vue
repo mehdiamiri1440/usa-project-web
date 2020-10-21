@@ -121,7 +121,7 @@ i {
 
 .user-information-contents p,
 a.user-name-link {
-  display: inline-block;
+  display: block;
 
   max-width: 170px;
 
@@ -148,8 +148,6 @@ a.user-name-link {
   font-size: 10px;
   height: 19px;
   padding: 0;
-  line-height: 1;
-  margin-top: -5px;
 }
 
 .user-information-content.default {
