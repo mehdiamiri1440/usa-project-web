@@ -22,6 +22,9 @@ i {
   line-height: 1.618;
 }
 
+.user-information-wrapper {
+  height: 55px;
+}
 .article-action-buttons button {
   margin-top: 7px;
   width: 100%;

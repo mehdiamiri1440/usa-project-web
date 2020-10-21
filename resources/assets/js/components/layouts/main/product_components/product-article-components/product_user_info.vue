@@ -20,6 +20,10 @@ i {
   line-height: 1.618;
 }
 
+.user-information-wrapper {
+  height: 55px;
+}
+
 .green-text {
   color: #00c569;
 }
