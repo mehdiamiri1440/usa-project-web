@@ -55,7 +55,7 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
                     'buy_ad_id'  => $this->buyAd->id,
                 ];
 
-                // $this->notify_product_owner($user_id);
+                $this->notify_product_owner($user_id);
             }
             
             DB::table('buy_ad_suggestions')->insert($buyAd_suggestion_records);
@@ -180,16 +180,19 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
     {
         $user_record = myuser::find($user_id);
 
-        $this->notify_product_owner_via_sms($user_record->phone);
-        // if($user_record->active_pakage_type > 0){
-        //     $this->notify_product_owner_via_sms($user_record->phone);
-        // }
-        // else{
-        //     $this->notify_product_owner_via_sms($user_record->phone,$delayed = true);
-        // }
-        
+        if($user_record->id >= 15559){
+            $this->notify_product_owner_via_sms($user_record->phone);
+            if($user_record->active_pakage_type > 0){
+                $this->notify_product_owner_via_sms($user_record->phone);
+            }
+            else{
+                $this->notify_product_owner_via_sms($user_record->phone,$delayed = true);
+            }
+            
 
-        $this->notify_product_owner_via_app_notification($user_id);
+            $this->notify_product_owner_via_app_notification($user_id);
+        }
+        
     }
 
     protected function notify_product_owner_via_sms($user_phone,$delayed = false)
