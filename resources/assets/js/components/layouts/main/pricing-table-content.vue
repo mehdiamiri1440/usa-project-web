@@ -239,7 +239,7 @@ hr {
   transform: rotate(-45deg);
   top: 14px;
 }
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .main-content-wrapper > .row > div {
     padding: 0 7px;
   }
@@ -370,10 +370,11 @@ hr {
 
             <p class="header-description">
               <strong>
-                در صورت ارتقاء به عضویت ویژه اگر پس از سه ماه از نتیجه آن رضایت نداشته باشید
-                <span
-                  class="text-green"
-                >100% مبلغ پرداختی به شما بازگردانده می شود</span>
+                در صورت ارتقاء به عضویت ویژه اگر پس از سه ماه از نتیجه آن رضایت
+                نداشته باشید
+                <span class="text-green"
+                  >100% مبلغ پرداختی به شما بازگردانده می شود</span
+                >
               </strong>
             </p>
           </div>
@@ -414,28 +415,44 @@ hr {
                     >
                       <i class="fa fa-question-circle"></i>
 
-                      <div class="item-help-content collapse" :id="'content-item-pro-' + index">
+                      <div
+                        class="item-help-content collapse"
+                        :id="'content-item-pro-' + index"
+                      >
                         <span v-text="item.helpDescription"></span>
                       </div>
                     </a>
 
                     <p class="item-content-title" v-text="item.title"></p>
 
-                    <p class="item-content-amount" v-html="item.contentUnit"></p>
+                    <p
+                      class="item-content-amount"
+                      v-html="item.contentUnit"
+                    ></p>
                   </li>
                 </ul>
               </div>
 
               <div class="item-action">
-                <p v-if="statusData.active_pakage_type == 3" class="text-green">در حال استفاده</p>
+                <p v-if="statusData.active_pakage_type == 3" class="text-green">
+                  در حال استفاده
+                </p>
 
                 <button
                   v-else-if="statusData.active_pakage_type > 3"
                   class="green-button btn-disabled"
                   disabled
-                >ارتقاء عضویت</button>
+                >
+                  ارتقاء عضویت
+                </button>
 
-                <a v-else href @click.prevent="doPayment(3)" class="green-button">ارتقاء عضویت</a>
+                <a
+                  v-else
+                  href
+                  @click.prevent="doPayment(3)"
+                  class="green-button"
+                  >ارتقاء عضویت</a
+                >
               </div>
             </div>
           </div>
@@ -528,12 +545,12 @@ hr {
         <div class="title-section">تعدادی از فروشندگان ویژه ی باسکول</div>
         <div class="owl-carousel">
           <pricing-user-carousel
-            v-for="(userItem,index) in $parent.activeUsers"
+            v-for="(userItem, index) in $parent.activeUsers"
             :key="index"
             parent-class=".users-review-carousel-wrapper.pricing-content .owl-carousel"
             :img="userItem.profile_photo ? userItem.profile_photo : ''"
             :title="userItem.first_name + ' ' + userItem.last_name"
-            :city="userItem.province + ' - ' + userItem.city "
+            :city="userItem.province + ' - ' + userItem.city"
           />
         </div>
       </div>
@@ -547,7 +564,7 @@ import pricingUserCarousel from "../../dashboard/seller/pricing-seller-page/pric
 
 export default {
   components: { pricingUserCarousel },
-  data: function() {
+  data: function () {
     return {
       statusData: "",
       priceItemOne: [
@@ -555,178 +572,178 @@ export default {
           title: "تعداد محصولات",
           contentUnit: "1",
           helpDescription:
-            " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "
+            " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. ",
         },
         {
           title: "تعداد نردبان ",
           contentUnit: "0",
           helpDescription:
-            "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد"
+            "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد",
         },
         {
           title: "نمایش در لیست محصولات ویژه",
           contentUnit:
             '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
           helpDescription:
-            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود"
+            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود",
         },
         {
           title: "تایید فوری ",
           contentUnit:
             '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
           helpDescription:
-            " آگهی های فروش ثبت شده بلافاصله پس از ثبت در لیست محصولات نمایش داده می شود. "
+            " آگهی های فروش ثبت شده بلافاصله پس از ثبت در لیست محصولات نمایش داده می شود. ",
         },
         {
           title: " میزان افزایش خوشنامی ",
           contentUnit: "0",
-          helpDescription: " مقدار اعتبار اضافه شده به صفحه پروفایل شما "
+          helpDescription: " مقدار اعتبار اضافه شده به صفحه پروفایل شما ",
         },
         {
           title: " نشان فروشنده معتبر ",
           contentUnit:
             '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
           helpDescription:
-            " این نشان در صفحه پروفایل فروشنده نمایش داده می شود. "
+            " این نشان در صفحه پروفایل فروشنده نمایش داده می شود. ",
         },
         {
           title: " سقف روزانه پاسخ به درخواست ها ",
           contentUnit: "5",
-          helpDescription: "سقف تعداد روزانه پاسخگویی به درخواست های خرید"
+          helpDescription: "سقف تعداد روزانه پاسخگویی به درخواست های خرید",
         },
         {
           title: "مشاهده بلافاصله درخواست خرید ",
           contentUnit:
             '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
           helpDescription:
-            " درخواست های خرید جدید بدون تاخیر به شما نمایش داده می شود. "
+            " درخواست های خرید جدید بدون تاخیر به شما نمایش داده می شود. ",
         },
         {
           title: "تضمین بازگشت وجه ",
           contentUnit:
             '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
           helpDescription:
-            " اگر پس از سه ماه از نتیجه آن رضایت نداشته باشید 100% مبلغ پرداختی به شما بازگردانده می شود. "
-        }
+            " اگر پس از سه ماه از نتیجه آن رضایت نداشته باشید 100% مبلغ پرداختی به شما بازگردانده می شود. ",
+        },
       ],
       priceItemSix: [
         {
           title: "تعداد محصولات",
           contentUnit: "2",
           helpDescription:
-            " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "
+            " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. ",
         },
         {
           title: "تعداد نردبان ",
           contentUnit: "1",
           helpDescription:
-            "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد"
+            "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد",
         },
         {
           title: "نمایش در لیست محصولات ویژه",
           contentUnit:
             '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
           helpDescription:
-            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود"
+            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود",
         },
         {
           title: "تایید فوری ",
           contentUnit:
             '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
           helpDescription:
-            " آگهی های فروش ثبت شده بلافاصله پس از ثبت در لیست محصولات نمایش داده می شود. "
+            " آگهی های فروش ثبت شده بلافاصله پس از ثبت در لیست محصولات نمایش داده می شود. ",
         },
         {
           title: " میزان افزایش خوشنامی ",
           contentUnit: "100",
-          helpDescription: " مقدار اعتبار اضافه شده به صفحه پروفایل شما "
+          helpDescription: " مقدار اعتبار اضافه شده به صفحه پروفایل شما ",
         },
         {
           title: " نشان فروشنده معتبر ",
           contentUnit:
             '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
           helpDescription:
-            " این نشان در صفحه پروفایل فروشنده نمایش داده می شود. "
+            " این نشان در صفحه پروفایل فروشنده نمایش داده می شود. ",
         },
         {
           title: " سقف روزانه پاسخ به درخواست ها ",
           contentUnit: "10",
-          helpDescription: "سقف تعداد روزانه پاسخگویی به درخواست های خرید"
+          helpDescription: "سقف تعداد روزانه پاسخگویی به درخواست های خرید",
         },
         {
           title: "مشاهده بلافاصله درخواست خرید ",
           contentUnit:
             '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
           helpDescription:
-            " درخواست های خرید جدید بدون تاخیر به شما نمایش داده می شود. "
+            " درخواست های خرید جدید بدون تاخیر به شما نمایش داده می شود. ",
         },
         {
           title: "تضمین بازگشت وجه ",
           contentUnit:
             '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
           helpDescription:
-            " اگر پس از سه ماه از نتیجه آن رضایت نداشته باشید 100% مبلغ پرداختی به شما بازگردانده می شود. "
-        }
+            " اگر پس از سه ماه از نتیجه آن رضایت نداشته باشید 100% مبلغ پرداختی به شما بازگردانده می شود. ",
+        },
       ],
       priceItemPro: [
         {
           title: "تعداد محصولات",
           contentUnit: "7",
           helpDescription:
-            " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "
+            " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. ",
         },
         {
           title: "تعداد نردبان ",
           contentUnit: "1",
           helpDescription:
-            "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد"
+            "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد",
         },
         {
           title: "نمایش در لیست محصولات ویژه",
           contentUnit:
             '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
           helpDescription:
-            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود"
+            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود",
         },
         {
           title: "تایید فوری ",
           contentUnit:
             '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
           helpDescription:
-            " آگهی های فروش ثبت شده بلافاصله پس از ثبت در لیست محصولات نمایش داده می شود. "
+            " آگهی های فروش ثبت شده بلافاصله پس از ثبت در لیست محصولات نمایش داده می شود. ",
         },
         {
           title: " میزان افزایش خوشنامی ",
           contentUnit: "350",
-          helpDescription: " مقدار اعتبار اضافه شده به صفحه پروفایل شما "
+          helpDescription: " مقدار اعتبار اضافه شده به صفحه پروفایل شما ",
         },
         {
           title: " نشان فروشنده معتبر ",
           contentUnit:
             '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
           helpDescription:
-            " این نشان در صفحه پروفایل فروشنده نمایش داده می شود. "
+            " این نشان در صفحه پروفایل فروشنده نمایش داده می شود. ",
         },
         {
           title: " سقف روزانه پاسخ به درخواست ها ",
           contentUnit: "30",
-          helpDescription: "سقف تعداد روزانه پاسخگویی به درخواست های خرید"
+          helpDescription: "سقف تعداد روزانه پاسخگویی به درخواست های خرید",
         },
         {
           title: "مشاهده بلافاصله درخواست خرید ",
           contentUnit:
             '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
           helpDescription:
-            " درخواست های خرید جدید بدون تاخیر به شما نمایش داده می شود. "
+            " درخواست های خرید جدید بدون تاخیر به شما نمایش داده می شود. ",
         },
         {
           title: "تضمین بازگشت وجه ",
           contentUnit:
             '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
           helpDescription:
-            " اگر پس از سه ماه از نتیجه آن رضایت نداشته باشید 100% مبلغ پرداختی به شما بازگردانده می شود. "
-        }
-      ]
+            " اگر پس از سه ماه از نتیجه آن رضایت نداشته باشید 100% مبلغ پرداختی به شما بازگردانده می شود. ",
+        },
+      ],
 
       /*priceItem: [
                     {
@@ -768,21 +785,21 @@ export default {
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       var self = this;
       axios
         .post("/get_seller_dashboard_required_data")
-        .then(function(response) {
+        .then(function (response) {
           if (response.data.is_valid || response.data.is_valid == false) {
             self.statusData = response.data;
           }
         });
     },
-    collapseControl: function(link) {
+    collapseControl: function (link) {
       var $myGroup = $(".item-content");
       $myGroup.find(".collapse.in").collapse("hide");
     },
-    doPayment: function(packageType) {
+    doPayment: function (packageType) {
       let userId = getUserId();
 
       this.registerComponentStatistics(
@@ -793,18 +810,22 @@ export default {
 
       window.location.href = "/payment/" + packageType;
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
-    }
+    },
   },
   mounted() {
     this.init();
-    $(document).on("click", function() {
+    $(document).on("click", function () {
       $(".collapse").collapse("hide");
     });
-  }
+  },
 };
 </script>

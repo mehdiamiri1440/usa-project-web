@@ -256,18 +256,15 @@
   top: 14px;
 }
 
-@media screen and (max-width: 994px) {
+@media screen and (max-width: 991px) {
   .fix-request-header-box,
   .title {
     right: 0;
   }
-}
-@media screen and (max-width: 992px) {
   .default-list-title {
     padding: 4px 15px;
   }
 }
-
 @media screen and (max-width: 767px) {
   .lock > span.lock-text {
     text-align: center;
@@ -324,7 +321,9 @@
 <template>
   <div>
     <category-filter v-if="categoryModal" />
-    <div class="fix-request-bottom hidden-sm hidden-md hidden-lg shadow-content text-center">
+    <div
+      class="fix-request-bottom hidden-sm hidden-md hidden-lg shadow-content text-center"
+    >
       <div class="col-xs-12 text-right">
         <button
           type="button"
@@ -362,11 +361,15 @@
                   <span class="text-red remove-filter-icon">
                     <i class="fa fa-times"></i>
                   </span>
-                  <span v-text=" 'دسته بندی : ' + filterCategory.category_name"></span>
+                  <span
+                    v-text="'دسته بندی : ' + filterCategory.category_name"
+                  ></span>
                 </button>
               </h1>
             </div>
-            <div class="col-xs-12 col-sm-4 hidden-xs request-update pull-left text-left">
+            <div
+              class="col-xs-12 col-sm-4 hidden-xs request-update pull-left text-left"
+            >
               <button
                 type="button"
                 @click.prevent="openCategoryModal()"
@@ -381,13 +384,21 @@
         <div v-if="buyAds.length != 0">
           <ul class="list-unstyled wrapper-items">
             <li
-              v-for="(buyAd,index) in buyAds"
+              v-for="(buyAd, index) in buyAds"
               :key="index"
               class="list-group-item col-xs-12"
-              :class="{'golden' : buyAd.is_golden, 'lock' :  buyAd.is_golden && currentUser.user_info.active_pakage_type == 0}"
+              :class="{
+                golden: buyAd.is_golden,
+                lock:
+                  buyAd.is_golden &&
+                  currentUser.user_info.active_pakage_type == 0,
+              }"
             >
               <span
-                v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type == 0"
+                v-if="
+                  buyAd.is_golden &&
+                  currentUser.user_info.active_pakage_type == 0
+                "
                 class="lock-text"
                 v-text="buyAd.subcategory_name"
               ></span>
@@ -398,10 +409,7 @@
 
                 <span v-text="buyAd.subcategory_name"></span>
 
-                <span
-                  v-if="buyAd.name"
-                  v-text="' | ' + buyAd.name"
-                ></span>
+                <span v-if="buyAd.name" v-text="' | ' + buyAd.name"></span>
                 <!-- <span v-else v-text="' | ' + buyAd.name"></span> -->
               </p>
 
@@ -409,24 +417,40 @@
                 <span class="static-content">میزان نیازمندی :</span>
 
                 <span
-                  v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type == 0"
+                  v-if="
+                    buyAd.is_golden &&
+                    currentUser.user_info.active_pakage_type == 0
+                  "
                   v-text="'0000'"
                 ></span>
-                <span v-else v-text="getNumberWithCommas(buyAd.requirement_amount)"></span>
+                <span
+                  v-else
+                  v-text="getNumberWithCommas(buyAd.requirement_amount)"
+                ></span>
 
                 <span class="static-content">کیلوگرم</span>
               </p>
 
               <p
                 class="list-time col-sm-2 col-xs-12"
-                v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type == 0"
+                v-if="
+                  buyAd.is_golden &&
+                  currentUser.user_info.active_pakage_type == 0
+                "
                 v-text="'۱۳ تیر , ۱۳۰۴'"
               ></p>
-              <p class="list-time col-sm-2 col-xs-12" v-else v-text="buyAd.register_date"></p>
+              <p
+                class="list-time col-sm-2 col-xs-12"
+                v-else
+                v-text="buyAd.register_date"
+              ></p>
 
               <p class="list-notice col-sm-1 col-xs-12 pull-right">
                 <button
-                  v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type == 0"
+                  v-if="
+                    buyAd.is_golden &&
+                    currentUser.user_info.active_pakage_type == 0
+                  "
                   class="btn"
                   type="button"
                 >
@@ -434,7 +458,7 @@
                     <i class="fas fa-comment-alt"></i>
                     <i class="fas fa-exclamation"></i>
                   </span>
-                  <span class="request-count red-text">{{'0+'}}</span>
+                  <span class="request-count red-text">{{ "0+" }}</span>
                 </button>
                 <button
                   v-else
@@ -448,12 +472,17 @@
                     <i class="fas fa-comment-alt"></i>
                     <i class="fas fa-exclamation"></i>
                   </span>
-                  <span class="request-count red-text">{{buyAd.reply_capacity + '+'}}</span>
+                  <span class="request-count red-text">{{
+                    buyAd.reply_capacity + "+"
+                  }}</span>
                 </button>
               </p>
 
               <a
-                v-if="buyAd.is_golden && currentUser.user_info.active_pakage_type == 0"
+                v-if="
+                  buyAd.is_golden &&
+                  currentUser.user_info.active_pakage_type == 0
+                "
                 class="col-sm-3 col-xs-12 pull-left"
                 href
                 @click.prevent="openGoldenChatRestrictionModal()"
@@ -461,23 +490,30 @@
                 <p class="detail-success hover-effect">
                   <span class="fas fa-comment-alt"></span> پیام به خریدار
                 </p>
-                <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">کمی صبر کنید...</p>
+                <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
+                  کمی صبر کنید...
+                </p>
               </a>
               <a
                 v-else
                 class="col-sm-3 col-xs-12 pull-left"
                 href
-                @click.prevent="openChat(buyAd,$event)"
+                @click.prevent="openChat(buyAd, $event)"
               >
                 <p class="detail-success hover-effect">
                   <span class="fas fa-comment-alt"></span> پیام به خریدار
                 </p>
-                <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">کمی صبر کنید...</p>
+                <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
+                  کمی صبر کنید...
+                </p>
               </a>
             </li>
           </ul>
         </div>
-        <div class="col-xs-12 wrapper-items" v-else-if="buyAds.length === 0 && !load">
+        <div
+          class="col-xs-12 wrapper-items"
+          v-else-if="buyAds.length === 0 && !load"
+        >
           <div class="wrapper_no_pro">
             <div class="content_no_pic">
               <i class="fa fa-list-alt"></i>
@@ -490,25 +526,45 @@
         </div>
         <div class="col-xs-12 wrapper-items" v-else-if="load">
           <ul class="list-unstyled">
-            <li v-for="(item,index) in 5" :key="index" class="list-group-item col-xs-12">
-              <p class="default-list-title pull-right col-sm-9 hidden-xs margin-10-0">
-                <span class="placeholder-content content-full-width h-20"></span>
+            <li
+              v-for="(item, index) in 5"
+              :key="index"
+              class="list-group-item col-xs-12"
+            >
+              <p
+                class="default-list-title pull-right col-sm-9 hidden-xs margin-10-0"
+              >
+                <span
+                  class="placeholder-content content-full-width h-20"
+                ></span>
               </p>
 
-              <p class="list-title col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm">
-                <span class="placeholder-content content-half-width h-20 margin-auto"></span>
+              <p
+                class="list-title col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm"
+              >
+                <span
+                  class="placeholder-content content-half-width h-20 margin-auto"
+                ></span>
               </p>
 
               <p class="needs col-sm-4 col-xs-12 hidden-md hidden-lg hidden-sm">
-                <span class="placeholder-content content-default-width h-20 margin-auto"></span>
+                <span
+                  class="placeholder-content content-default-width h-20 margin-auto"
+                ></span>
               </p>
 
-              <p class="list-time col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm">
-                <span class="placeholder-content content-min-width h-20 margin-auto"></span>
+              <p
+                class="list-time col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm"
+              >
+                <span
+                  class="placeholder-content content-min-width h-20 margin-auto"
+                ></span>
               </p>
 
               <p class="col-sm-3 col-xs-12">
-                <span class="placeholder-content default-button-full-with margin-10-auto"></span>
+                <span
+                  class="placeholder-content default-button-full-with margin-10-auto"
+                ></span>
               </p>
             </li>
           </ul>
@@ -540,13 +596,13 @@ import CategoryFilter from "./category-filter";
 export default {
   props: ["storage"],
   components: {
-    CategoryFilter
+    CategoryFilter,
   },
-  data: function() {
+  data: function () {
     return {
       currentUser: {
         profile: "",
-        user_info: ""
+        user_info: "",
       },
       buyAds: "",
       allBuyAds: "",
@@ -556,36 +612,36 @@ export default {
       items: [
         {
           message: "درخواست های جدید",
-          url: "buyAdRequests"
-        }
+          url: "buyAdRequests",
+        },
       ],
       isRequests: true,
       categoryModal: false,
-      filterCategory: ""
+      filterCategory: "",
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       this.load = true;
       var self = this;
       this.filterBuyAdByCategory();
-      axios.post("/user/profile_info").then(function(response) {
+      axios.post("/user/profile_info").then(function (response) {
         self.currentUser = response.data;
       });
 
       axios
         .post("/get_related_buyAds_list_to_the_seller")
-        .then(function(response) {
+        .then(function (response) {
           self.allBuyAds = response.data.buyAds;
           self.buyAds = self.allBuyAds;
 
           self.load = false;
-          setTimeout(function() {
+          setTimeout(function () {
             $(".list-notice button").tooltip();
           }, 100);
         });
     },
-    openChat: function(buyAd, event) {
+    openChat: function (buyAd, event) {
       var self = this;
 
       let id = "#loader-" + buyAd.id;
@@ -593,9 +649,9 @@ export default {
 
       axios
         .post("/get_user_permission_for_buyAd_reply", {
-          buy_ad_id: buyAd.id
+          buy_ad_id: buyAd.id,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.showReplyBtn(event, id);
 
           if (response.data.permission == true) {
@@ -605,7 +661,7 @@ export default {
               last_name: buyAd.last_name,
               profile_photo: null,
               user_name: buyAd.user_name,
-              buyAd_id: buyAd.id
+              buyAd_id: buyAd.id,
             };
 
             eventBus.$emit("ChatInfo", contact);
@@ -625,7 +681,7 @@ export default {
           }
         });
     },
-    hideReplyBtn: function(e, id) {
+    hideReplyBtn: function (e, id) {
       return new Promise((resolve, reject) => {
         $(e.target).hide();
         resolve(true);
@@ -633,7 +689,7 @@ export default {
         $(id).show();
       });
     },
-    showReplyBtn: function(e, id) {
+    showReplyBtn: function (e, id) {
       return new Promise((resolve, reject) => {
         $(id).hide();
         resolve(true);
@@ -641,48 +697,52 @@ export default {
         $(e.target).show();
       });
     },
-    openGoldenChatRestrictionModal: function(){
-        eventBus.$emit("modal", "goldenBuyAdReplyLimit");
+    openGoldenChatRestrictionModal: function () {
+      eventBus.$emit("modal", "goldenBuyAdReplyLimit");
 
-        self.registerComponentStatistics(
-          "buyAdReply",
-          "openChat",
-          "permission denied"
-        );
+      self.registerComponentStatistics(
+        "buyAdReply",
+        "openChat",
+        "permission denied"
+      );
     },
-    getNumberWithCommas: function(number) {
+    getNumberWithCommas: function (number) {
       if (number || typeof number === "number")
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       else return "";
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
     },
-    openCategoryModal: function() {
+    openCategoryModal: function () {
       this.categoryModal = true;
-      setTimeout(function() {
+      setTimeout(function () {
         $("#fitler-modal").modal("show");
       }, 200);
     },
-    filterBuyAdByCategory: function() {
+    filterBuyAdByCategory: function () {
       this.buyAds = "";
       this.isRequests = true;
       if (this.filterCategory.id) {
         let filterBuyAd = this.allBuyAds;
         filterBuyAd = filterBuyAd.filter(
-          buyAd => buyAd.category_id == this.filterCategory.id
+          (buyAd) => buyAd.category_id == this.filterCategory.id
         );
         this.buyAds = filterBuyAd;
       } else {
         this.buyAds = this.allBuyAds;
       }
-      setTimeout(function() {
+      setTimeout(function () {
         $(".list-notice button").tooltip();
       }, 100);
-    }
+    },
   },
   mounted() {
     this.init();
@@ -692,9 +752,9 @@ export default {
     gtag("config", "UA-129398000-1", { page_path: "/buyAd-requests" });
   },
   watch: {
-    filterCategory: function() {
+    filterCategory: function () {
       this.filterBuyAdByCategory();
-    }
-  }
+    },
+  },
 };
 </script>

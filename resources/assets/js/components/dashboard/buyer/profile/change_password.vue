@@ -442,7 +442,7 @@ input[type="password"]:focus {
   float: right;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .img-profile {
     padding-top: 20px;
   }

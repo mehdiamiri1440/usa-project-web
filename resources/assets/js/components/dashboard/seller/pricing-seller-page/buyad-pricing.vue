@@ -234,7 +234,7 @@ input[type="number"] {
   }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .input-wrapper input {
     width: 140px;
   }

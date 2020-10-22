@@ -11,7 +11,7 @@
   font-weight: bold;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .list-title,
   .needs,
   .list-time {
@@ -38,7 +38,10 @@
       </div>
 
       <div class="row">
-        <PricingTableSellerContent :active-users="activeUsers" :offer-time="this.offerTime" />
+        <PricingTableSellerContent
+          :active-users="activeUsers"
+          :offer-time="this.offerTime"
+        />
       </div>
     </section>
   </div>
@@ -52,20 +55,20 @@ import PricingTableSellerContent from "./seller/pricing-seller-page/pricing-tabl
 export default {
   props: ["str", "offerTime"],
   components: {
-    PricingTableSellerContent
+    PricingTableSellerContent,
   },
-  data: function() {
+  data: function () {
     return {
-      activeUsers: ""
+      activeUsers: "",
     };
   },
-  mounted: function() {
+  mounted: function () {
     let self = this;
     eventBus.$emit("subHeader", false);
 
-    axios.post("/get_special_users_info").then(function(resposne) {
+    axios.post("/get_special_users_info").then(function (resposne) {
       self.activeUsers = resposne.data.users;
     });
-  }
+  },
 };
 </script>

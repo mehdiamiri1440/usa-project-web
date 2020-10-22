@@ -49,7 +49,7 @@
   width: 100%;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .buttons {
     width: 55%;
     margin: 0 auto;

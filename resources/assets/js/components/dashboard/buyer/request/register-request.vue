@@ -218,7 +218,7 @@
   transition: 200ms;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .finish-state-main-content {
     padding: 0;
   }
@@ -261,7 +261,9 @@
 </style>
 
 <template>
-  <div class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2 main-content-wrapper">
+  <div
+    class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2 main-content-wrapper"
+  >
     <div class="row">
       <section
         v-if="currentStep == 1 && inquirySent"
@@ -269,22 +271,33 @@
       >
         <p class="success-message-wrapper text-rtl pull-right">
           <span class="fa fa-check-circle"></span>
-          <span class="success-message">استعلام شرایط فروش با موفقیت ارسال شد</span>
+          <span class="success-message"
+            >استعلام شرایط فروش با موفقیت ارسال شد</span
+          >
         </p>
 
         <div class="success-actions pull-left">
-          <router-link class="text-rtl" :to="{ path: 'messenger/contacts' }" tag="button">
+          <router-link
+            class="text-rtl"
+            :to="{ path: 'messenger/contacts' }"
+            tag="button"
+          >
             <i class="fa fa-comment-alt"></i>
             مشاهده پیام ها
           </router-link>
         </div>
       </section>
 
-      <section v-if="currentStep == 1" class="success-inquiry-wrapper wrapper-bg col-xs-12">
-        <p
-          class="red-text success-message-wrapper text-rtl pull-right"
-        >&nbsp&nbsp&nbspآیا قصد خرید عمده محصولی را دارید؟</p>
-        <p class="success-message-wrapper text-rtl">همین حالا درخواست خرید ثبت کنید&nbsp .</p>
+      <section
+        v-if="currentStep == 1"
+        class="success-inquiry-wrapper wrapper-bg col-xs-12"
+      >
+        <p class="red-text success-message-wrapper text-rtl pull-right">
+          &nbsp&nbsp&nbspآیا قصد خرید عمده محصولی را دارید؟
+        </p>
+        <p class="success-message-wrapper text-rtl">
+          همین حالا درخواست خرید ثبت کنید&nbsp .
+        </p>
       </section>
 
       <section
@@ -315,7 +328,10 @@
         class="finish-state-main-content col-xs-12"
       >
         <main class="finish-state-wrapper">
-          <finish-register-request-related :products="relatedProducts" :str="str" />
+          <finish-register-request-related
+            :products="relatedProducts"
+            :str="str"
+          />
         </main>
       </section>
 
@@ -390,20 +406,20 @@ export default {
     RegisterRequest,
     FinishRegisterRequestRelated,
     FinishRegisterRequest,
-    ProductCarousel
+    ProductCarousel,
   },
-  data: function() {
+  data: function () {
     return {
       currentStep: 1,
       errors: {
         categorySelected: "",
         category_id: "",
         requirement_amount: "",
-        name: ""
+        name: "",
       },
       currentUser: {
         profile: "",
-        user_info: ""
+        user_info: "",
       },
       buyAd: {
         name: "",
@@ -414,7 +430,7 @@ export default {
         pack_type: "",
         category_id: "",
         rules: false,
-        categorySelected: ""
+        categorySelected: "",
       },
       buyAdFields: ["name", "requirement_amount", "category_id"],
       categorySelected: "",
@@ -432,16 +448,16 @@ export default {
       items: [
         {
           message: " ثبت درخواست جدید",
-          url: "registerRequest"
-        }
-      ]
+          url: "registerRequest",
+        },
+      ],
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       let self = this;
 
-      axios.post("/user/profile_info").then(function(response) {
+      axios.post("/user/profile_info").then(function (response) {
         self.currentUser = response.data;
 
         if (self.isThereInquiryToSend()) {
@@ -451,9 +467,9 @@ export default {
 
       axios
         .post("/get_category_list")
-        .then(response => (this.categoryList = response.data.categories));
+        .then((response) => (this.categoryList = response.data.categories));
     },
-    loadSubCategoryList: function(e) {
+    loadSubCategoryList: function (e) {
       e.preventDefault();
       var categoryId = $(e.target).val();
       this.categorySelected = categoryId;
@@ -462,11 +478,11 @@ export default {
 
       axios
         .post("/get_category_list", {
-          parent_id: categoryId
+          parent_id: categoryId,
         })
-        .then(response => (this.subCategoryList = response.data.categories));
+        .then((response) => (this.subCategoryList = response.data.categories));
     },
-    formValidator: function() {
+    formValidator: function () {
       if (!this.categorySelected) {
         this.errors.categorySelected = "دسته بندی الزامی است";
       }
@@ -487,7 +503,7 @@ export default {
         this.submitBuyAd();
       }
     },
-    submitBuyAd: function() {
+    submitBuyAd: function () {
       this.errors = "";
       var self = this;
 
@@ -497,7 +513,7 @@ export default {
 
       axios
         .post("/user/add_buyAd", formData)
-        .then(function(response) {
+        .then(function (response) {
           if (response.status === 201) {
             self.disableSubmit = true;
             // self.popUpMsg = "درخواست شما با موفقیت ثبت شد";
@@ -524,7 +540,7 @@ export default {
           }
           eventBus.$emit("submitingEvent", false);
         })
-        .catch(function(err) {
+        .catch(function (err) {
           self.errors = err.response.data.errors;
 
           eventBus.$emit("submitingEvent", false);
@@ -532,7 +548,7 @@ export default {
           self.registerComponentExceptions("validation error in buyAd-request");
         });
     },
-    getBuyAdFormFields: function() {
+    getBuyAdFormFields: function () {
       let formData = new FormData();
       let cnt = this.buyAdFields.length;
 
@@ -544,15 +560,15 @@ export default {
       }
       return formData;
     },
-    setCategoryId: function(e) {
+    setCategoryId: function (e) {
       e.preventDefault();
 
       this.buyAd.category_id = $(e.target).val();
     },
-    setCityId: function(cityId) {
+    setCityId: function (cityId) {
       this.buyAd.city_id = cityId;
     },
-    toLatinNumbers: function(num) {
+    toLatinNumbers: function (num) {
       if (num == null) {
         return null;
       }
@@ -563,30 +579,34 @@ export default {
 
       return num
         .toString()
-        .replace(/[\u0660-\u0669]/g, function(c) {
+        .replace(/[\u0660-\u0669]/g, function (c) {
           return c.charCodeAt(0) - 0x0660;
         })
-        .replace(/[\u06f0-\u06f9]/g, function(c) {
+        .replace(/[\u06f0-\u06f9]/g, function (c) {
           return c.charCodeAt(0) - 0x06f0;
         });
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
     },
-    registerComponentExceptions: function(description, fatal = false) {
+    registerComponentExceptions: function (description, fatal = false) {
       gtag("event", "exception", {
         description: description,
-        fatal: fatal
+        fatal: fatal,
       });
     },
-    goToStep: function(step) {
+    goToStep: function (step) {
       this.currentStep = step;
       this.scrollToTop();
     },
-    isOsIOS: function() {
+    isOsIOS: function () {
       var userAgent = window.navigator.userAgent.toLowerCase(),
         safari = /safari/.test(userAgent),
         ios = /iphone|ipod|ipad/.test(userAgent);
@@ -596,7 +616,7 @@ export default {
     scrollToTop() {
       window.scrollTo(0, 0);
     },
-    nameValidator: function(name) {
+    nameValidator: function (name) {
       this.toLatinNumbers(name);
       if (!name) {
         this.errors.name = "";
@@ -604,7 +624,7 @@ export default {
         this.errors.name = "نوع محصول فرمت مناسبی نیست";
       }
     },
-    requirementAmountValidator: function(number) {
+    requirementAmountValidator: function (number) {
       this.errors.requirement_amount = "";
       var standardNumber = this.toLatinNumbers(number);
       if (standardNumber == "") {
@@ -613,13 +633,13 @@ export default {
         this.errors.requirement_amount = "فقط عدد وارد کنید";
       }
     },
-    validateRegx: function(input, regx) {
+    validateRegx: function (input, regx) {
       return regx.test(input);
     },
     reLoadPage() {
       location.reload(true);
     },
-    openChat: function(product) {
+    openChat: function (product) {
       this.registerComponentStatistics(
         "productReplyAfterBuyAdRegister",
         "openChat",
@@ -629,9 +649,9 @@ export default {
 
       axios
         .post("/get_user_last_confirmed_profile_photo", {
-          user_id: product.myuser_id
+          user_id: product.myuser_id,
         })
-        .then(function(response) {
+        .then(function (response) {
           var profile_photo = response.data.profile_photo;
 
           var contact = {
@@ -639,16 +659,16 @@ export default {
             first_name: product.first_name,
             last_name: product.last_name,
             profile_photo: profile_photo,
-            user_name: product.user_name
+            user_name: product.user_name,
           };
 
           eventBus.$emit("ChatInfo", contact);
         })
-        .catch(function(err) {
+        .catch(function (err) {
           //
         });
     },
-    getProductUrl: function() {
+    getProductUrl: function () {
       return (
         "/product-view/خرید-عمده-" +
         this.relatedProduct.subcategory_name.replace(" ", "-") +
@@ -658,7 +678,7 @@ export default {
         this.relatedProduct.id
       );
     },
-    isThereInquiryToSend: function() {
+    isThereInquiryToSend: function () {
       if (
         window.localStorage.getItem("contact") &&
         window.localStorage.getItem("msgToSend")
@@ -668,7 +688,7 @@ export default {
 
       return false;
     },
-    sendInquiry: function() {
+    sendInquiry: function () {
       var self = this;
 
       let tempMsg = window.localStorage.getItem("msgToSend");
@@ -679,24 +699,24 @@ export default {
         let msgObject = {
           sender_id: self.currentUser.user_info.id,
           receiver_id: contact.contact_id ? contact.contact_id : contact.id,
-          text: tempMsg
+          text: tempMsg,
         };
 
         axios
           .post("/messanger/send_message", msgObject)
-          .then(function(response) {
+          .then(function (response) {
             self.inquirySent = true;
             self.clearLocalStorage();
           })
-          .catch(function(e) {
+          .catch(function (e) {
             //
           });
       }
     },
-    clearLocalStorage: function() {
+    clearLocalStorage: function () {
       window.localStorage.removeItem("contact");
       window.localStorage.removeItem("msgToSend");
-    }
+    },
   },
   mounted() {
     this.init();
@@ -705,6 +725,6 @@ export default {
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/register-request" });
-  }
+  },
 };
 </script>

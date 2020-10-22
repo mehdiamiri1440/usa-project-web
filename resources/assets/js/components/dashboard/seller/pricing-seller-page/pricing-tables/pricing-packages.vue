@@ -170,7 +170,7 @@
     width: 100%;
   }
 }
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .main-content-wrapper > .row > div {
     padding: 0 7px;
   }
@@ -249,11 +249,11 @@
         <div class="col-xs-12 col-lg-8 pull-right">
           <div class="title-section">
             <p>
-              {{priceItem.priceName}}
+              {{ priceItem.priceName }}
               <span
                 class="gray-text"
                 v-if="priceItem.priceDate"
-                v-text=" '(' + priceItem.priceDate + ')'"
+                v-text="'(' + priceItem.priceDate + ')'"
               ></span>
             </p>
           </div>
@@ -261,9 +261,9 @@
           <div class="form-wrapper">
             <div
               class="item-wrapper pricing-item-article"
-              v-for="(item,index) in priceItem.priceItems"
+              v-for="(item, index) in priceItem.priceItems"
               :key="index"
-              :class="{'active' : item.active}"
+              :class="{ active: item.active }"
             >
               <p class="item-text" v-text="item.title"></p>
               <p class="item-count" v-html="item.contentUnit"></p>
@@ -277,11 +277,13 @@
           <div class="pricing-section">
             <label>قیمت</label>
             <p class="price-content">
-              {{priceItem.price}}
+              {{ priceItem.price }}
               <span class="currency">تومان</span>
               <span class="price-date">(سالانه)</span>
             </p>
-            <button class="green-button" @click.prevent="doPayment(3)">ارتقا عضویت</button>
+            <button class="green-button" @click.prevent="doPayment(3)">
+              ارتقا عضویت
+            </button>
           </div>
         </div>
       </div>
@@ -293,10 +295,10 @@
 <script>
 export default {
   props: ["priceItem"],
-  mounted: function() {
+  mounted: function () {
     let self = this;
-    this.$nextTick(function() {
-      $(".product-pricing .item-wrapper.pricing-item-article").each(function(
+    this.$nextTick(function () {
+      $(".product-pricing .item-wrapper.pricing-item-article").each(function (
         index
       ) {
         $(this).prepend(
@@ -316,7 +318,7 @@ export default {
     });
   },
   methods: {
-    doPayment: function(packageType) {
+    doPayment: function (packageType) {
       this.$parent.doPaymentLoader = true;
       this.$parent.registerComponentStatistics(
         "payment",
@@ -325,7 +327,7 @@ export default {
       );
 
       window.location.href = "/payment/" + packageType;
-    }
-  }
+    },
+  },
 };
 </script>

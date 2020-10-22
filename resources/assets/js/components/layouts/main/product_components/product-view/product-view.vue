@@ -121,7 +121,7 @@ span {
   }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .default-carousel-item:nth-child(3) {
     display: none;
   }
@@ -211,7 +211,9 @@ span {
                     class="col-lg-3 col-md-4 col-sm-6 col-xs-12 default-carousel-item"
                   >
                     <article class="carousel-item box-content col-xs-12">
-                      <span class="default-index-product-image placeholder-content col-xs-12"></span>
+                      <span
+                        class="default-index-product-image placeholder-content col-xs-12"
+                      ></span>
 
                       <span
                         class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"
@@ -235,7 +237,8 @@ span {
         <router-link
           :to="{ name: 'productList' }"
           class="green-button blue-button"
-        >مشاهده همه محصولات</router-link>
+          >مشاهده همه محصولات</router-link
+        >
       </div>
 
       <register-inquer-form
@@ -254,7 +257,11 @@ span {
         v-if="product.main.product_name && !isMyProfile"
         class="fix-send-message-wrapper hidden-lg hidden-md hidden-sm"
       >
-        <button v-if="!isMyProfile" @click.prevent="openChat(product)" class="green-button">
+        <button
+          v-if="!isMyProfile"
+          @click.prevent="openChat(product)"
+          class="green-button"
+        >
           استعلام قیمت
           <i class="fa fa-envelope"></i>
         </button>
@@ -281,25 +288,25 @@ export default {
     ProductContents,
     UserInfo,
     ProductCarousel,
-    registerInquerForm
+    registerInquerForm,
   },
   props: ["str", "assets", "userType"],
-  data: function() {
+  data: function () {
     return {
       currentUser: {
         profile: "",
-        user_info: ""
+        user_info: "",
       },
       product: {
         main: {
           category_name: "",
-          sub_category_name: ""
+          sub_category_name: "",
         },
         user_info: "",
         profile_info: {
-          profile_photo: ""
+          profile_photo: "",
         },
-        photos: []
+        photos: [],
       },
       relatedProducts: "",
       relatedLoad: false,
@@ -310,14 +317,14 @@ export default {
       isMyProfile: false,
       showRegisterRequestBox: true,
       starScore: "",
-      verifiedUserContent: this.$parent.verifiedUserContent
+      verifiedUserContent: this.$parent.verifiedUserContent,
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       this.isLoading = true;
       var self = this;
-      axios.post("/user/profile_info").then(function(response) {
+      axios.post("/user/profile_info").then(function (response) {
         self.currentUser = response.data;
 
         if (self.currentUser.user_info) {
@@ -328,9 +335,9 @@ export default {
 
         axios
           .post("/get_product_by_id", {
-            product_id: self.$route.params.id
+            product_id: self.$route.params.id,
           })
-          .then(function(response) {
+          .then(function (response) {
             self.product = response.data.product;
             self.starScore = Math.floor(
               self.product.user_info.review_info.avg_score
@@ -346,19 +353,19 @@ export default {
 
             axios
               .post("/get_related_products", {
-                product_id: self.product.main.id
+                product_id: self.product.main.id,
               })
-              .then(function(response) {
+              .then(function (response) {
                 self.relatedProducts = response.data.related_products;
                 self.isLoading = false;
               });
           })
-          .catch(function(err) {
+          .catch(function (err) {
             window.location.href = "/404";
           });
       });
     },
-    openChat: function(product) {
+    openChat: function (product) {
       this.registerComponentStatistics(
         "product",
         "openChat",
@@ -373,7 +380,7 @@ export default {
         last_name: product.user_info.last_name,
         profile_photo: product.profile_info.profile_photo,
         user_name: product.user_info.user_name,
-        product_name: productName
+        product_name: productName,
       };
 
       var self = this;
@@ -394,7 +401,7 @@ export default {
         this.$router.push({ name: "registerInquiry" });
       }
     },
-    openChatModal: function(product) {
+    openChatModal: function (product) {
       this.registerComponentStatistics(
         "product",
         "openChat",
@@ -406,7 +413,7 @@ export default {
         first_name: product.user_info.first_name,
         last_name: product.user_info.last_name,
         profile_photo: product.profile_info.profile_photo,
-        user_name: product.user_info.user_name
+        user_name: product.user_info.user_name,
       };
 
       var self = this;
@@ -427,13 +434,17 @@ export default {
         eventBus.$emit("modal", "sendMsg");
       }
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
     },
-    getProductUrl: function() {
+    getProductUrl: function () {
       return (
         "/product-view/خرید-عمده-" +
         this.product.main.sub_category_name.replace(" ", "-") +
@@ -443,7 +454,7 @@ export default {
         this.product.main.id
       );
     },
-    copyProductLinkToClipBoard: function() {
+    copyProductLinkToClipBoard: function () {
       this.registerComponentStatistics(
         "product",
         "copy-product-link",
@@ -481,7 +492,7 @@ export default {
         }
       }
     },
-    isDeviceMobile: function() {
+    isDeviceMobile: function () {
       if (
         navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -496,7 +507,7 @@ export default {
         return false;
       }
     },
-    toLatinNumbers: function(num) {
+    toLatinNumbers: function (num) {
       if (num == null) {
         return null;
       }
@@ -507,14 +518,14 @@ export default {
 
       return num
         .toString()
-        .replace(/[\u0660-\u0669]/g, function(c) {
+        .replace(/[\u0660-\u0669]/g, function (c) {
           return c.charCodeAt(0) - 0x0660;
         })
-        .replace(/[\u06f0-\u06f9]/g, function(c) {
+        .replace(/[\u06f0-\u06f9]/g, function (c) {
           return c.charCodeAt(0) - 0x06f0;
         });
     },
-    editProduct: function(getProductWrapper) {
+    editProduct: function (getProductWrapper) {
       this.submiting = true;
       this.errors = "";
 
@@ -537,7 +548,7 @@ export default {
         stock: stock,
         min_sale_price: minSalePrice,
         max_sale_price: maxSalePrice,
-        min_sale_amount: minSaleAmount
+        min_sale_amount: minSaleAmount,
       };
 
       if (description !== "") {
@@ -548,7 +559,7 @@ export default {
 
       axios
         .post("/edit_product", request)
-        .then(function(response) {
+        .then(function (response) {
           $(".modal").modal("hide");
 
           eventBus.$emit("modal", "productEditDone");
@@ -559,16 +570,16 @@ export default {
             "product-edited-successfully"
           );
         })
-        .catch(function(err) {
+        .catch(function (err) {
           self.errors = "";
           self.errors = err.response.data.errors;
           // self.registerComponentExceptions('Product-component: validation errors in edit product API');
         });
     },
-    stopLoader: function() {
+    stopLoader: function () {
       eventBus.$emit("isLoading", false);
     },
-    getRelatedProductUrl: function(product) {
+    getRelatedProductUrl: function (product) {
       return (
         "/product-view/خرید-عمده-" +
         product.subcategory_name.replace(" ", "-") +
@@ -578,17 +589,17 @@ export default {
         product.id
       );
     },
-    elevatorEvent: function() {
+    elevatorEvent: function () {
       // eventBus.$emit("elevatorText", "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود.");
 
       eventBus.$emit("productId", this.product.main.id);
       eventBus.$emit("modal", "elevator");
       // $("#elevator-modal").modal("show")
     },
-    inquiry: function() {
+    inquiry: function () {
       //eventBus.$emit("productUserInfo", this.product);
       this.$router.push({ name: "registerinquiry" });
-    }
+    },
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/product-view" });
@@ -619,7 +630,7 @@ export default {
       this.isMyProfile = false;
       this.product.main.id = "";
       this.init();
-    }
+    },
   },
   metaInfo() {
     let productSubCategory = this.product.main.sub_category_name;
@@ -641,8 +652,8 @@ export default {
     //
     return {
       title:
-        productOwnerFullName + 
-        " " + 
+        productOwnerFullName +
+        " " +
         "خرید و فروش عمده و قیمت " +
         productSubCategory +
         " " +
@@ -656,7 +667,7 @@ export default {
         {
           name: "description",
           content:
-            productOwnerFullName + 
+            productOwnerFullName +
             " " +
             "خرید و فروش عمده و قیمت " +
             productSubCategory +
@@ -670,22 +681,22 @@ export default {
             "موجودی : " +
             productStock +
             " کیلوگرم" +
-            productDescription
+            productDescription,
         },
         {
           name: "author",
-          content: "باسکول"
+          content: "باسکول",
         },
         {
           property: "og:description",
           content:
             "خرید و فروش عمده و قیمت " +
             productSubCategory +
-            " از بهترین تولیدکنندگان ایران - باسکول بازار آنلاین کشاورزی ایران"
+            " از بهترین تولیدکنندگان ایران - باسکول بازار آنلاین کشاورزی ایران",
         },
         {
           property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران"
+          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
         },
         {
           property: "og:title",
@@ -699,11 +710,11 @@ export default {
             " " +
             productProvince +
             " " +
-            productOwnerFullName
-        }
+            productOwnerFullName,
+        },
       ],
-      link: [{ rel: "canonical", href: canonicalLink }]
+      link: [{ rel: "canonical", href: canonicalLink }],
     };
-  }
+  },
 };
 </script>

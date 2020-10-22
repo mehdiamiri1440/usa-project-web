@@ -227,7 +227,7 @@ input[type="number"] {
   }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .main-content-wrapper > .row > div {
     padding: 0 7px;
   }

@@ -238,6 +238,7 @@ a.profile-info-wrapper:focus {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  min-width: 100%;
 }
 
 .profile-information {
@@ -320,7 +321,7 @@ a.profile-info-wrapper:focus {
   transition: 300ms;
 }
 
-@media screen and (max-width: 994px) {
+@media screen and (max-width: 991px) {
   .main-header,
   .little-main-header {
     right: 0 !important;
@@ -411,7 +412,7 @@ a.profile-info-wrapper:focus {
     padding: 6px;
   }
 }
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 991px) {
   .message-notification {
     top: 4px;
     cursor: pointer;
@@ -429,7 +430,7 @@ a.profile-info-wrapper:focus {
     color: wheat;
   }
 }
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 991px) {
   .hide-message-notification {
     display: none;
   }
@@ -476,12 +477,15 @@ a.profile-info-wrapper:focus {
           <!-- remove pricing offer -->
           <!-- <router-link v-if="!$parent.offerTime" :to="{name : 'dashboardPricingTableSeller'}"> -->
 
-          <router-link :to="{name : 'dashboardPricingTableSeller'}">
-            <span
-              class="hidden-xs"
-            >تعداد زیادی از فروشندگان موفق باسکول از عضویت ویژه استفاده می کنند</span>
+          <router-link :to="{ name: 'dashboardPricingTableSeller' }">
+            <span class="hidden-xs"
+              >تعداد زیادی از فروشندگان موفق باسکول از عضویت ویژه استفاده می
+              کنند</span
+            >
 
-            <span class="hidden-sm hidden-md hidden-lg">پنج برابر سریع تر بفروشید!</span>
+            <span class="hidden-sm hidden-md hidden-lg"
+              >پنج برابر سریع تر بفروشید!</span
+            >
             <span class="button">می خواهم عضو ویژه شوم</span>
           </router-link>
 
@@ -495,26 +499,34 @@ a.profile-info-wrapper:focus {
             </span>
             <span class="button">جزئیات بیشتر</span>
           </router-link>-->
-          <button @click.prevent="$parent.closeRequiredFixAlert()" class="close-required-fix-alert">
+          <button
+            @click.prevent="$parent.closeRequiredFixAlert()"
+            class="close-required-fix-alert"
+          >
             <i class="fa fa-times"></i>
           </button>
         </div>
       </div>
       <div class="show-header hidden-md hidden-lg">
         <div
-          v-if="messageCount>0"
+          v-if="messageCount > 0"
           class="message-notification hide-message-notification"
-        >{{messageCount}}</div>
+        >
+          {{ messageCount }}
+        </div>
         <button class="button-height">
-          <span :class="menuClosed?'rotation':''" class="fa fa-bars"></span>
+          <span :class="menuClosed ? 'rotation' : ''" class="fa fa-bars"></span>
         </button>
       </div>
 
       <div class="user-auth-info-wrapper">
         <router-link
-          v-if="$route.name != 'dashboardPricingTableSeller' && $parent.currentUser.user_info.active_pakage_type != 3"
+          v-if="
+            $route.name != 'dashboardPricingTableSeller' &&
+            $parent.currentUser.user_info.active_pakage_type != 3
+          "
           class="upgrade-account hidden-xs"
-          :to="{name:'dashboardPricingTableSeller'}"
+          :to="{ name: 'dashboardPricingTableSeller' }"
         >
           ارتقا عضویت
           <i class="fa fa-arrow-up"></i>
@@ -544,8 +556,14 @@ a.profile-info-wrapper:focus {
                 <router-link
                   data-toggle="collapse"
                   href="#web-profile-items"
-                  :to="{name : 'profileBasicSeller'}"
-                  @click="registerComponentStatistics('seller-dashboard-header','profile-link','click-on-profile-link-in-dashboard')"
+                  :to="{ name: 'profileBasicSeller' }"
+                  @click="
+                    registerComponentStatistics(
+                      'seller-dashboard-header',
+                      'profile-link',
+                      'click-on-profile-link-in-dashboard'
+                    )
+                  "
                 >
                   <i class="fa fa-user"></i>
                   پروفایل
@@ -556,8 +574,14 @@ a.profile-info-wrapper:focus {
                 <router-link
                   data-toggle="collapse"
                   href="#web-profile-items"
-                  :to="{name : 'passwordSeller'}"
-                  @click="registerComponentStatistics('seller-dashboard-header','change-password','click-on-change-password-dashboard')"
+                  :to="{ name: 'passwordSeller' }"
+                  @click="
+                    registerComponentStatistics(
+                      'seller-dashboard-header',
+                      'change-password',
+                      'click-on-change-password-dashboard'
+                    )
+                  "
                 >
                   <i class="fa fa-lock"></i>
                   تغییر کلمه عبور
@@ -575,8 +599,12 @@ a.profile-info-wrapper:focus {
         <ul v-else class="nav navbar-nav">
           <li>
             <div class="col display-loading">
-              <div class="user_name placeholder-content placeholder-user-name margin-loading"></div>
-              <div class="placeholder-image-header-profile placeholder-content"></div>
+              <div
+                class="user_name placeholder-content placeholder-user-name margin-loading"
+              ></div>
+              <div
+                class="placeholder-image-header-profile placeholder-content"
+              ></div>
             </div>
           </li>
         </ul>
@@ -587,8 +615,14 @@ a.profile-info-wrapper:focus {
           <li>
             <router-link
               class="product-list-link"
-              :to="{ name : 'productList'}"
-              @click="registerComponentStatistics('dashboard-header','product-list-btn','click-on-product-list-in-dashboard')"
+              :to="{ name: 'productList' }"
+              @click="
+                registerComponentStatistics(
+                  'dashboard-header',
+                  'product-list-btn',
+                  'click-on-product-list-in-dashboard'
+                )
+              "
             >
               <span class="full">لیست محصولات</span>
               <span class="min">
@@ -599,8 +633,14 @@ a.profile-info-wrapper:focus {
 
           <li>
             <router-link
-              @click="registerComponentStatistics('dashboard-header','home-page-btn','click-on-home-page-in-dashboard')"
-              :to="{name : 'statusSeller'}"
+              @click="
+                registerComponentStatistics(
+                  'dashboard-header',
+                  'home-page-btn',
+                  'click-on-home-page-in-dashboard'
+                )
+              "
+              :to="{ name: 'statusSeller' }"
             >
               <i class="fa fa-home" aria-hidden="true"></i>
             </router-link>
@@ -608,7 +648,9 @@ a.profile-info-wrapper:focus {
         </ul>
       </div>
 
-      <SubMenu :class="{ 'header-with-fix-alert' : $parent.isRequiredFixAlert}" />
+      <SubMenu
+        :class="{ 'header-with-fix-alert': $parent.isRequiredFixAlert }"
+      />
     </header>
   </div>
 </template>
@@ -619,13 +661,13 @@ var visible = false;
 import SubMenu from "./sub-menu/sub-menu.vue";
 import { eventBus } from "../../../../../router/router";
 export default {
-  data: function() {
+  data: function () {
     return {
-      messageCount: 0
+      messageCount: 0,
     };
   },
   components: {
-    SubMenu
+    SubMenu,
   },
   props: [
     "menuClosed",
@@ -634,13 +676,13 @@ export default {
     "username",
     "out",
     "routeHome",
-    "isLoading"
+    "isLoading",
   ],
   methods: {
-    init: function() {
+    init: function () {
       this.closeCollapses();
     },
-    logUserOut: function() {
+    logUserOut: function () {
       localStorage.removeItem("userRoute");
       this.registerComponentStatistics(
         "seller-dashboard-header",
@@ -648,8 +690,8 @@ export default {
         "click-on-logout-in-dashboard"
       );
     },
-    closeCollapses: function() {
-      $(document).on("click", function(e) {
+    closeCollapses: function () {
+      $(document).on("click", function (e) {
         /* bootstrap collapse js adds "in" class to your collapsible element*/
 
         var user_menu_opened = $("#web-profile-items").hasClass("in");
@@ -662,25 +704,25 @@ export default {
           $("#web-profile-items").collapse("toggle");
         }
       });
-    }
+    },
   },
   mounted() {
     this.init();
   },
   created() {
     var self = this;
-    eventBus.$on("messageCount", event => {
+    eventBus.$on("messageCount", (event) => {
       this.messageCount += event;
     });
-    eventBus.$on("active", event => {
+    eventBus.$on("active", (event) => {
       this.activeElement = event;
     });
   },
-  registerComponentStatistics: function(categoryName, actionName, labelName) {
+  registerComponentStatistics: function (categoryName, actionName, labelName) {
     gtag("event", actionName, {
       event_category: categoryName,
-      event_label: labelName
+      event_label: labelName,
     });
-  }
+  },
 };
 </script>

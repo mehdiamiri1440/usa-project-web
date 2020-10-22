@@ -50,7 +50,7 @@ p {
   }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .header-contents-wrapper {
     padding: 0;
   }
@@ -70,21 +70,29 @@ p {
 <template>
   <div>
     <div>
-      <header class="header-contents-wrapper text-center text-rtl col-xs-12" v-if="products">
+      <header
+        class="header-contents-wrapper text-center text-rtl col-xs-12"
+        v-if="products"
+      >
         <div class="header-contents shadow-content">
           <h2>
             <i class="fa fa-check green-text"></i> درخواست شما با موفقیت ثبت شد
           </h2>
-          <p
-            class="main-text text-rtl"
-          >تعدادی از مرتبط ترین محصولات برای درخواست خرید شما در زیر نمایش داده شده است.</p>
-          <p
-            class="red-text"
-          >در صورت عدم ارسال پیام به فروشنده ها دیگر به این محصولات دسترسی نخواهید داشت.</p>
+          <p class="main-text text-rtl">
+            تعدادی از مرتبط ترین محصولات برای درخواست خرید شما در زیر نمایش داده
+            شده است.
+          </p>
+          <p class="red-text">
+            در صورت عدم ارسال پیام به فروشنده ها دیگر به این محصولات دسترسی
+            نخواهید داشت.
+          </p>
         </div>
       </header>
 
-      <header class="header-contents-wrapper text-center text-rtl col-xs-12" v-else>
+      <header
+        class="header-contents-wrapper text-center text-rtl col-xs-12"
+        v-else
+      >
         <div class="header-contents shadow-content">
           <h2>
             <i class="fa fa-check green-text"></i> درخواست شما با موفقیت ثبت شد
@@ -93,16 +101,17 @@ p {
 							تعدادی از مرتبط ترین محصولات برای درخواست خرید شما در زیر نمایش داده شده است
 
           </p>-->
-          <p
-            class="red-text"
-          >در صورت عدم ارسال پیام به فروشنده ها دیگر به این محصولات دسترسی نخواهید داشت.</p>
+          <p class="red-text">
+            در صورت عدم ارسال پیام به فروشنده ها دیگر به این محصولات دسترسی
+            نخواهید داشت.
+          </p>
         </div>
       </header>
 
       <main class="main-content-wrapper">
         <div v-if="products">
           <finish-step-article
-            v-for="(product , index) in products"
+            v-for="(product, index) in products"
             :key="index"
             :product="product"
             :str="str"
@@ -132,9 +141,10 @@ p {
 
         <div class="buttons-wrapper col-xs-12">
           <router-link
-            :to="{name : 'productList'}"
+            :to="{ name: 'productList' }"
             class="green-button blue-button"
-          >مشاهده همه محصولات</router-link>
+            >مشاهده همه محصولات</router-link
+          >
         </div>
       </main>
     </div>
@@ -147,12 +157,12 @@ import FinishStepArticle from "./finish-step-components/finish-step-article";
 export default {
   props: ["products", "str"],
   components: {
-    FinishStepArticle
+    FinishStepArticle,
   },
   methods: {
-    openChat: function(product) {
+    openChat: function (product) {
       this.$parent.openChat(product);
-    }
-  }
+    },
+  },
 };
 </script>

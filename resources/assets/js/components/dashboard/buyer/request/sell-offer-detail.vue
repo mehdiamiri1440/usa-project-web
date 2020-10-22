@@ -238,7 +238,7 @@
   text-align: right;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .owl-carousel {
     direction: ltr;
     padding: 0;

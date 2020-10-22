@@ -240,7 +240,7 @@
   text-decoration: line-through;
   color: #777;
 }
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .list-title,
   .needs,
   .list-time {
@@ -336,13 +336,15 @@
           <div></div>
           <div></div>
         </div>
-        <p class="pricing-loader-text text-rtl">در حال انتقال به درگاه پرداخت . . .</p>
+        <p class="pricing-loader-text text-rtl">
+          در حال انتقال به درگاه پرداخت . . .
+        </p>
       </div>
     </div>
 
     <div class="row">
       <div
-        :class="{'col-sm-offset-3' : justPro == 'true'}"
+        :class="{ 'col-sm-offset-3': justPro == 'true' }"
         class="pull-left mobile-padding-0 col-xs-12 col-sm-6 col-lg-6"
       >
         <div class="item-wrapper wrapper-background">
@@ -398,7 +400,9 @@
           </div>
 
           <div class="item-action">
-            <p v-if="statusData.active_pakage_type == 3" class="text-green">در حال استفاده</p>
+            <p v-if="statusData.active_pakage_type == 3" class="text-green">
+              در حال استفاده
+            </p>
 
             <button
               v-else-if="statusData.active_pakage_type > 3"
@@ -419,7 +423,12 @@
               <i class="fa fa-angle-left"></i>
             </a>
 
-            <a v-else href @click.prevent="doPayment(3)" class="green-button text-rtl">
+            <a
+              v-else
+              href
+              @click.prevent="doPayment(3)"
+              class="green-button text-rtl"
+            >
               پرداخت
               <i class="fa fa-angle-left"></i>
             </a>
@@ -462,7 +471,9 @@
             </div>
           </div>
           <div class="item-action">
-            <p v-if="statusData.active_pakage_type == 1" class="green-text">در حال استفاده</p>
+            <p v-if="statusData.active_pakage_type == 1" class="green-text">
+              در حال استفاده
+            </p>
 
             <button
               v-else-if="statusData.active_pakage_type > 1"
@@ -473,7 +484,12 @@
               <i class="fa fa-angle-left"></i>
             </button>
 
-            <a v-else href @click.prevent="doPayment(1)" class="green-button text-rtl">
+            <a
+              v-else
+              href
+              @click.prevent="doPayment(1)"
+              class="green-button text-rtl"
+            >
               پرداخت
               <i class="fa fa-angle-left"></i>
             </a>
@@ -490,10 +506,12 @@
 
             <p class="header-description">
               <strong>
-                این بسته شامل مجموعه امکاناتی مانند اعمال نردبان رایگان، مشاهده بدون تاخیر درخواست های خرید، دریافت پیامک درخواست های خرید مرتبط و ... است که
-                <span
-                  class="green-text"
-                >باعث فروش محصولات شما در سریع ترین زمان ممکن می شود</span>
+                این بسته شامل مجموعه امکاناتی مانند اعمال نردبان رایگان، مشاهده
+                بدون تاخیر درخواست های خرید، دریافت پیامک درخواست های خرید مرتبط
+                و ... است که
+                <span class="green-text"
+                  >باعث فروش محصولات شما در سریع ترین زمان ممکن می شود</span
+                >
               </strong>
             </p>
           </div>

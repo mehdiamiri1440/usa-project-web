@@ -1,6 +1,6 @@
 <style scoped>
 .contact-body .contact-search {
-  padding: 9px 7px 0;
+  padding: 9px 0 0;
   background: #eef3f3;
   position: absolute;
   left: 0;
@@ -22,15 +22,16 @@ li.contact-item {
 
 .contact-body .contact-search .contact-search-input-wrapper {
   position: relative;
+  padding: 0 7px;
   margin-bottom: 5px;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper i {
   position: absolute;
-  left: 12px;
+  left: 15px;
   font-size: 20px;
   color: #c1c1c1;
-  top: 8px;
+  top: 11px;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper input {
@@ -174,7 +175,7 @@ li.contact-item {
 .contacts-switch-buttons-wrapper .contact-button {
   border: none;
   width: 100%;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
   padding: 8px 0;
   position: relative;
@@ -378,7 +379,7 @@ li.contact-item {
 .golden-info-text .buyad-info {
   font-size: 18px;
 }
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .main-content {
     padding: 59px 0 0;
   }
@@ -451,11 +452,7 @@ li.contact-item {
   <div class="contact-body my-contacts">
     <div class="contact-search">
       <div class="contact-search-input-wrapper">
-        <input
-          type="text"
-          placeholder="جستجو"
-          v-model="filterBuyAd"
-        />
+        <input type="text" placeholder="جستجو" v-model="filterBuyAd" />
         <i class="fa fa-search"></i>
       </div>
       <div v-if="$parent.userType" class="contacts-switch-buttons-wrapper">
@@ -555,7 +552,9 @@ li.contact-item {
                       v-if="buyAd.requirement_amount < 1000"
                       v-text="buyAd.requirement_amount + 'کیلوگرم'"
                     ></span>
-                    <span class="red-text" v-else-if="buyAd.requirement_amount == 1000"
+                    <span
+                      class="red-text"
+                      v-else-if="buyAd.requirement_amount == 1000"
                       >یک تن</span
                     >
                     <span
@@ -671,7 +670,9 @@ li.contact-item {
                       v-if="buyAd.requirement_amount < 1000"
                       v-text="buyAd.requirement_amount + ' کیلوگرم '"
                     ></span>
-                    <span class="red-text" v-else-if="buyAd.requirement_amount == 1000"
+                    <span
+                      class="red-text"
+                      v-else-if="buyAd.requirement_amount == 1000"
                       >یک تن</span
                     >
                     <span
@@ -735,7 +736,9 @@ li.contact-item {
                       v-if="buyAd.requirement_amount < 1000"
                       v-text="buyAd.requirement_amount + ' کیلوگرم '"
                     ></span>
-                    <span class="red-text" v-else-if="buyAd.requirement_amount == 1000"
+                    <span
+                      class="red-text"
+                      v-else-if="buyAd.requirement_amount == 1000"
                       >یک تن</span
                     >
                     <span

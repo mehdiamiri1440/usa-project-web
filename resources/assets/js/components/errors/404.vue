@@ -62,7 +62,7 @@ img {
   width: 100%;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .buttons {
     width: 40%;
     margin: 0 auto;
@@ -124,11 +124,15 @@ img {
 
       <div class="buttons col-xs-12">
         <div class="col-xs-12 col-sm-6">
-          <router-link :to="{name : 'indexPage'}" class="green-button">صفحه نخست</router-link>
+          <router-link :to="{ name: 'indexPage' }" class="green-button"
+            >صفحه نخست</router-link
+          >
         </div>
 
         <div class="col-xs-12 col-sm-6">
-          <a href="javascript:history.go(-2)" class="botton-inco">بازگشت به صفحه قبل</a>
+          <a href="javascript:history.go(-2)" class="botton-inco"
+            >بازگشت به صفحه قبل</a
+          >
         </div>
       </div>
     </div>
@@ -141,11 +145,11 @@ import { eventBus } from "../../router/router";
 export default {
   props: ["assets"],
   methods: {
-    stopLoader: function() {
+    stopLoader: function () {
       eventBus.$emit("isLoading", false);
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     var self = this;
     document.onreadystatechange = () => {
       if (document.readyState === "complete") {
@@ -155,6 +159,6 @@ export default {
   },
   updated() {
     this.$nextTick(this.stopLoader());
-  }
+  },
 };
 </script>

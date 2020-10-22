@@ -227,7 +227,7 @@
   color: #fff;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .list-title,
   .needs,
   .list-time {
@@ -334,12 +334,16 @@
         <div class="title-section">تعدادی از اعضای ویژه در باسکول</div>
         <div class="owl-carousel">
           <pricing-user-carousel
-            v-for="(userItem,index) in $parent.activeUsers"
+            v-for="(userItem, index) in $parent.activeUsers"
             :key="index"
             parent-class=".users-review-carousel-wrapper .owl-carousel"
-            :img="userItem.profile_photo ? $parent.str + '/' + userItem.profile_photo : ''"
+            :img="
+              userItem.profile_photo
+                ? $parent.str + '/' + userItem.profile_photo
+                : ''
+            "
             :title="userItem.first_name + ' ' + userItem.last_name"
-            :city="userItem.province + ' - ' + userItem.city "
+            :city="userItem.province + ' - ' + userItem.city"
           />
         </div>
       </div>
@@ -354,7 +358,7 @@ import pricingContents from "./pricing-tables/pricing-package-contents";
 export default {
   props: ["offerTime"],
   components: { pricingUserCarousel, pricingContents },
-  data: function() {
+  data: function () {
     return {
       // statusData: "",
       // doPaymentLoader: false
@@ -420,10 +424,10 @@ export default {
     };
   },
   methods: {
-    init: function() {}
+    init: function () {},
   },
   mounted() {
     this.init();
-  }
+  },
 };
 </script>

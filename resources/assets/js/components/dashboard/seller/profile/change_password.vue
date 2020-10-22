@@ -442,7 +442,7 @@ input[type="password"]:focus {
   float: right;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .img-profile {
     padding-top: 20px;
   }
@@ -550,7 +550,9 @@ input[type="password"]:focus {
           <label class="header-label">تغییر کلمه عبور</label>
 
           <div class="col-sm-12">
-            <label for="old-password" class="content-label">کلمه عبور فعلی:</label>
+            <label for="old-password" class="content-label"
+              >کلمه عبور فعلی:</label
+            >
 
             <input
               id="old-password"
@@ -566,7 +568,9 @@ input[type="password"]:focus {
           </div>
 
           <div class="col-sm-12">
-            <label for="new-password" class="content-label">کلمه عبور جدید:</label>
+            <label for="new-password" class="content-label"
+              >کلمه عبور جدید:</label
+            >
 
             <input
               id="new-password"
@@ -575,10 +579,16 @@ input[type="password"]:focus {
               placeholder="کلمه عبور جدید"
             />
 
-            <span class="text-danger" v-if="errors.password" v-text="errors.password[0]"></span>
+            <span
+              class="text-danger"
+              v-if="errors.password"
+              v-text="errors.password[0]"
+            ></span>
           </div>
           <div class="col-sm-12">
-            <label for="repeat-new-password" class="content-label">تکرار کلمه عبور جدید:</label>
+            <label for="repeat-new-password" class="content-label"
+              >تکرار کلمه عبور جدید:</label
+            >
 
             <input
               id="repeat-new-password"
@@ -614,28 +624,28 @@ import { eventBus } from "../../../../router/router";
 
 export default {
   props: ["str"],
-  data: function() {
+  data: function () {
     return {
       errors: {
         current_password: [],
         password: [],
-        passwordRepeat: []
+        passwordRepeat: [],
       },
       errorFlag: false,
       popUpMsg: "",
       items: [
         {
           message: "تغییر کلمه عبور",
-          url: "password"
-        }
+          url: "password",
+        },
       ],
       currentPassword: "",
       newPassword: "",
-      newPasswordRepeat: ""
+      newPasswordRepeat: "",
     };
   },
   methods: {
-    changePassword: function() {
+    changePassword: function () {
       this.errorFlag = false;
       this.passwordValidator(
         this.currentPassword,
@@ -650,9 +660,9 @@ export default {
         axios
           .post("/change_password", {
             current_password: self.currentPassword,
-            new_password: self.newPassword
+            new_password: self.newPassword,
           })
-          .then(function(response) {
+          .then(function (response) {
             if (response.data.status === true) {
               self.popUpMsg = "کلمه عبور با موفقیت تغییر یافت";
               eventBus.$emit("submitSuccess", self.popUpMsg);
@@ -661,7 +671,7 @@ export default {
               self.errors.current_password.push("رمز عبور فعلی درست نیست");
             }
           })
-          .catch(function(err) {
+          .catch(function (err) {
             //failed for unknown reason try again later
             alert("خطایی رخ داده است.لطفا دوباره تلاش کنید.");
           });
@@ -669,7 +679,7 @@ export default {
         //
       }
     },
-    passwordValidator: function(currentPass, pass, passConf) {
+    passwordValidator: function (currentPass, pass, passConf) {
       this.errors.password = [];
       this.errors.password_repeat = [];
       this.errors.current_password = [];
@@ -695,26 +705,26 @@ export default {
         this.errorFlag = true;
       }
     },
-    toLatinNumbers: function(num) {
+    toLatinNumbers: function (num) {
       if (num == null) {
         return null;
       }
 
       return num
         .toString()
-        .replace(/[\u0660-\u0669]/g, function(c) {
+        .replace(/[\u0660-\u0669]/g, function (c) {
           return c.charCodeAt(0) - 0x0660;
         })
-        .replace(/[\u06f0-\u06f9]/g, function(c) {
+        .replace(/[\u06f0-\u06f9]/g, function (c) {
           return c.charCodeAt(0) - 0x06f0;
         });
-    }
+    },
   },
   mounted() {
     eventBus.$emit("subHeader", false);
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/change-password" });
-  }
+  },
 };
 </script>

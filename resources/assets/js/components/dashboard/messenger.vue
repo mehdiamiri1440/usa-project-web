@@ -220,7 +220,7 @@
 .contacts-switch-buttons-wrapper .contact-button {
   border: none;
   width: 100%;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
   padding: 15px 0;
   position: relative;
@@ -268,7 +268,7 @@
   bottom: 0;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .main-content {
     padding: 59px 0 0;
   }
@@ -346,7 +346,7 @@
     :class="{ 'is-fix-alert': isRequiredFixAlert }"
   >
     <div
-      class="col-xs-12 contact-wrapper pull-right col-sm-4 col-md-3"
+      class="col-xs-12 contact-wrapper pull-right col-sm-4 col-lg-3"
       v-bind:class="{ hidden_element: selectedContact }"
     >
       <div class="row">
@@ -355,7 +355,7 @@
     </div>
 
     <div
-      class="col-xs-12 message-wrapper col-sm-8 col-md-9"
+      class="col-xs-12 message-wrapper col-sm-8 col-lg-9"
       v-bind:class="{ hidden_element: !selectedContact }"
       v-if="selectedContact"
     >
@@ -363,7 +363,7 @@
     </div>
 
     <div
-      class="col-xs-12 default-message-wrapper hidden-xs col-sm-8 col-md-9"
+      class="col-xs-12 default-message-wrapper hidden-xs col-sm-8 col-lg-9"
       v-if="!selectedContact && isCurrentStep == 0"
     >
       <div v-if="userType" class="default-main-contents seller-buyAd-picture">

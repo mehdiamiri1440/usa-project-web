@@ -1,6 +1,6 @@
 <style scoped>
 .contact-body .contact-search {
-  padding: 9px 7px 0;
+  padding: 9px 0 0;
   background: #eef3f3;
   position: absolute;
   left: 0;
@@ -18,15 +18,16 @@
 
 .contact-body .contact-search .contact-search-input-wrapper {
   position: relative;
+  padding: 0 7px;
   margin-bottom: 5px;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper i {
   position: absolute;
-  left: 12px;
+  left: 15px;
   font-size: 20px;
   color: #c1c1c1;
-  top: 8px;
+  top: 11px;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper input {
@@ -180,7 +181,7 @@
 .contacts-switch-buttons-wrapper .contact-button {
   border: none;
   width: 100%;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
   padding: 8px 0;
   position: relative;
@@ -285,7 +286,7 @@
   margin-bottom: 10px;
   display: block;
 }
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .main-content {
     padding: 59px 0 0;
   }

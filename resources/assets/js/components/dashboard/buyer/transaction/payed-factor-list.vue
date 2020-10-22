@@ -83,7 +83,7 @@
   text-align: center;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .show-header button {
     display: block;
   }
@@ -145,11 +145,13 @@
           :to="'/dashboard/factor-detail/' + factor.id"
           class="list-group-item list-group-item-action col-xs-12"
         >
-          <p class="number col-xs-2">{{factor.sell_offer_id + 100000}}</p>
-          <p class="date col-xs-2" dir="rtl">{{factor.persian_date}}</p>
-          <p class="subject col-xs-5">{{factor.product_name}}</p>
+          <p class="number col-xs-2">{{ factor.sell_offer_id + 100000 }}</p>
+          <p class="date col-xs-2" dir="rtl">{{ factor.persian_date }}</p>
+          <p class="subject col-xs-5">{{ factor.product_name }}</p>
           <p class="col-xs-3">
-            <span class="green-button" dir="rtl">{{factor.amount_to_pay}} تومان</span>
+            <span class="green-button" dir="rtl"
+              >{{ factor.amount_to_pay }} تومان</span
+            >
           </p>
         </router-link>
       </div>
@@ -173,19 +175,27 @@
           :to="'/dashboard/instant-factor-detail/' + factor.id"
           class="list-group-item list-group-item-action col-xs-12"
         >
-          <p class="number col-xs-2">{{factor.transaction_id + 100000}}</p>
-          <p class="date col-xs-2" dir="rtl">{{factor.persian_date}}</p>
-          <p class="subject col-xs-5">{{factor.product_name}}</p>
+          <p class="number col-xs-2">{{ factor.transaction_id + 100000 }}</p>
+          <p class="date col-xs-2" dir="rtl">{{ factor.persian_date }}</p>
+          <p class="subject col-xs-5">{{ factor.product_name }}</p>
           <p class="col-xs-3">
-            <span class="green-button" dir="rtl">{{factor.amount_to_pay}} تومان</span>
+            <span class="green-button" dir="rtl"
+              >{{ factor.amount_to_pay }} تومان</span
+            >
           </p>
         </router-link>
       </div>
     </div>
     <div class="loading_images col-xs-12" v-else-if="isLoading">
-      <img src="../../../../../img/gif/loading.gif" style="width:200px;height:200px" />
+      <img
+        src="../../../../../img/gif/loading.gif"
+        style="width: 200px; height: 200px"
+      />
     </div>
-    <div class="col-xs-12" v-else-if="factors.length == 0 && instantFactors.length == 0">
+    <div
+      class="col-xs-12"
+      v-else-if="factors.length == 0 && instantFactors.length == 0"
+    >
       <h4 class="text-center" dir="rtl">فاکتوری در این قسمت وجود ندارد.</h4>
     </div>
   </section>
@@ -194,7 +204,7 @@
 import { eventBus } from "../../../../router/router";
 
 export default {
-  data: function() {
+  data: function () {
     return {
       factors: "",
       isLoading: true,
@@ -204,22 +214,22 @@ export default {
       items: [
         {
           message: "فاکتور های پرداخت شده",
-          url: "PayedFactorList"
-        }
-      ]
+          url: "PayedFactorList",
+        },
+      ],
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       var self = this;
 
       axios
         .post("/get_payed_factor_list")
-        .then(function(response) {
+        .then(function (response) {
           self.factors = response.data.factors;
           self.isLoading = false;
         })
-        .catch(function(err) {
+        .catch(function (err) {
           if (err.response.status == 404) {
             window.location.href = "/404";
           }
@@ -229,21 +239,21 @@ export default {
 
       axios
         .post("/get_payed_instant_factor_list")
-        .then(function(response) {
+        .then(function (response) {
           self.instantFactors = response.data.factors;
           self.isLoading = false;
         })
-        .catch(function(err) {
+        .catch(function (err) {
           if (err.response.status == 404) {
             window.location.href = "/404";
           }
           self.isLoading = false;
         });
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.init();
     eventBus.$emit("subHeader", false);
-  }
+  },
 };
 </script>

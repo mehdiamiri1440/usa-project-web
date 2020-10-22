@@ -88,7 +88,7 @@
   padding: 80px 15px 0;
 }
 
-@media screen and (max-width: 994px) {
+@media screen and (max-width: 991px) {
   #main,
   #main.little-main,
   #main.is-required-fix-alert {

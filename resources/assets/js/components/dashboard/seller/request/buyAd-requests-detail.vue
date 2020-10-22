@@ -157,7 +157,7 @@
   width: 100%;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .right-header.desktop-header {
     display: none;
   }
@@ -289,7 +289,14 @@
         <div class="info-contents col-xs-12">
           <div class="top-contentas col-xs-12">
             <div class="main-article-content col-md-7">
-              <h3>{{buyAd.category_name + ' | ' + buyAd.subcategory_name + ( buyAd.name != null ? " | " + buyAd.name : "" ) }}</h3>
+              <h3>
+                {{
+                  buyAd.category_name +
+                  " | " +
+                  buyAd.subcategory_name +
+                  (buyAd.name != null ? " | " + buyAd.name : "")
+                }}
+              </h3>
               <br />
               <table class="table table-striped">
                 <tbody>
@@ -298,30 +305,35 @@
                       قیمت واحد
                       <span class>(هر کیلو به تومان)</span> :
                     </td>
-                    <td>{{buyAd.price != null ? buyAd.price + " تومان " : "-" }}</td>
+                    <td>
+                      {{ buyAd.price != null ? buyAd.price + " تومان " : "-" }}
+                    </td>
                   </tr>
                   <tr>
                     <td>محل تحویل کالا:</td>
-                    <td>{{buyAd.address}}</td>
+                    <td>{{ buyAd.address }}</td>
                   </tr>
                   <tr>
                     <td>میزان نیازمندی</td>
-                    <td>{{buyAd.requirement_amount}} کیلوگرم</td>
+                    <td>{{ buyAd.requirement_amount }} کیلوگرم</td>
                   </tr>
                   <tr>
                     <td>زمان ثبت درخواست:</td>
-                    <td>{{buyAd.register_date}}</td>
+                    <td>{{ buyAd.register_date }}</td>
                   </tr>
                 </tbody>
               </table>
               <p>
                 توضیحات:
-                <span>{{buyAd.description}}</span>
+                <span>{{ buyAd.description }}</span>
               </p>
             </div>
             <div class="image-article-content col-md-5">
               <div class="main-image col-xs-12">
-                <a v-if="buyAd.photos[0] != null" :href="str + '/' + buyAd.photos[0]">
+                <a
+                  v-if="buyAd.photos[0] != null"
+                  :href="str + '/' + buyAd.photos[0]"
+                >
                   <img :src="str + '/' + buyAd.photos[0]" alt="photo" />
                 </a>
                 <a v-else href>
@@ -337,41 +349,61 @@
           </div>
           <div class="bottom-contents col-xs-12">
             <form>
-              <label
-                class="header-label"
-              >تمامی موارد خواسته شده را وارد کرده و برای خریدار ارسال نمایید.</label>
+              <label class="header-label"
+                >تمامی موارد خواسته شده را وارد کرده و برای خریدار ارسال
+                نمایید.</label
+              >
               <div class="fields col-xs-12">
                 <input type="hidden" :value="buyAd.id" ref="buyAdId" />
                 <div class="col-xs-12 col-sm-6">
                   <label class="content-label">محل تحویل</label>
                   <input type="text" v-model="sellOffer.deliver_at" />
-                  <span v-if="errors.deliver_at" class="text-danger">{{ errors.deliver_at[0] }}</span>
+                  <span v-if="errors.deliver_at" class="text-danger">{{
+                    errors.deliver_at[0]
+                  }}</span>
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                  <label class="content-label">قیمت پیشنهادی به ازای هر کیلو به تومان</label>
+                  <label class="content-label"
+                    >قیمت پیشنهادی به ازای هر کیلو به تومان</label
+                  >
                   <input type="text" v-model="sellOffer.price" />
-                  <span v-if="errors.price" class="text-danger">{{ errors.price[0] }}</span>
+                  <span v-if="errors.price" class="text-danger">{{
+                    errors.price[0]
+                  }}</span>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                   <label class="content-label">تاریخ موجودی</label>
-                  <input readonly="true" type="text" id="first-date-id" ref="validDateFrom" />
-                  <span
-                    v-if="errors.valid_date_to"
-                    class="text-danger"
-                  >{{ errors.valid_date_to[0] }}</span>
+                  <input
+                    readonly="true"
+                    type="text"
+                    id="first-date-id"
+                    ref="validDateFrom"
+                  />
+                  <span v-if="errors.valid_date_to" class="text-danger">{{
+                    errors.valid_date_to[0]
+                  }}</span>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                   <label class="content-label">انتهای تاریخ موجودی</label>
-                  <input readonly="true" type="text" id="end-date-id" ref="validDateTo" />
-                  <span
-                    v-if="errors.valid_date_from"
-                    class="text-danger"
-                  >{{ errors.valid_date_from[0] }}</span>
+                  <input
+                    readonly="true"
+                    type="text"
+                    id="end-date-id"
+                    ref="validDateTo"
+                  />
+                  <span v-if="errors.valid_date_from" class="text-danger">{{
+                    errors.valid_date_from[0]
+                  }}</span>
                 </div>
                 <div class="col-xs-12">
                   <label class="content-label">توضیحات:</label>
-                  <textarea placeholder v-model="sellOffer.description"></textarea>
-                  <span v-if="errors.description" class="text-danger">{{ errors.description[0] }}</span>
+                  <textarea
+                    placeholder
+                    v-model="sellOffer.description"
+                  ></textarea>
+                  <span v-if="errors.description" class="text-danger">{{
+                    errors.description[0]
+                  }}</span>
                 </div>
                 <div class="image_company col-xs-12">
                   <label class="content-label">تصاویر:</label>
@@ -389,21 +421,26 @@
                     :uploadUploadAuto="false"
                     :uploadRef="sellOfferFiles"
                   ></UploadFile>
-                  <span v-if="errors.photos_count" class="text-danger">{{ errors.photos_count[0] }}</span>
+                  <span v-if="errors.photos_count" class="text-danger">{{
+                    errors.photos_count[0]
+                  }}</span>
                 </div>
                 <div class="col-sm-6">
                   <button
                     type="button"
                     class="col-xs-12 green-button"
                     @click="submitSellOffer"
-                  >تایید</button>
+                  >
+                    تایید
+                  </button>
                 </div>
                 <div class="col-sm-6">
                   <!--<a href="{{route('seller-buyAd-requests')}}" class="black-bot col-xs-12 col-xs-6">بازگشت به صفحه قبل</a>-->
                   <a
                     href="javascript:history.back()"
                     class="black-bot col-xs-12 col-xs-6"
-                  >بازگشت به صفحه قبل</a>
+                    >بازگشت به صفحه قبل</a
+                  >
                 </div>
               </div>
             </form>
@@ -419,14 +456,14 @@ import { eventBus } from "../../../../router/router";
 import UploadFile from "../../upload-image";
 export default {
   components: {
-    UploadFile
+    UploadFile,
   },
   props: ["str"],
-  data: function() {
+  data: function () {
     return {
       currentUser: {
         profile: "",
-        user_info: ""
+        user_info: "",
       },
       sellOffer: {
         price: "",
@@ -434,7 +471,7 @@ export default {
         valid_date_from: "",
         valid_date_to: "",
         description: "",
-        buy_ad_id: ""
+        buy_ad_id: "",
       },
       sellOfferFields: ["price", "deliver_at", "description"],
       sellOfferFiles: [],
@@ -442,27 +479,27 @@ export default {
       popUpMsg: "",
       submiting: false,
       buyAd: {
-        photos: ""
+        photos: "",
       },
       buyAdId: this.$route.params.id,
       items: [
         {
           message: "درخواست من ",
-          url: "buyAdRequestsDetail"
-        }
-      ]
+          url: "buyAdRequestsDetail",
+        },
+      ],
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       var self = this;
       axios
         .post("/dashboard/buyAd-request-detail/" + this.buyAdId)
-        .then(function(response) {
+        .then(function (response) {
           self.buyAd = response.data.buyAd;
         });
     },
-    submitSellOffer: function() {
+    submitSellOffer: function () {
       var self = this;
 
       eventBus.$emit("submitingEvent", true);
@@ -471,18 +508,18 @@ export default {
 
       axios
         .post("/add_sell_offer", formData)
-        .then(function(response) {
+        .then(function (response) {
           if (response.status == 201) {
             self.popUpMsg = "پیشنهاد فروش شما ثبت شد.";
             eventBus.$emit("submitSuccess", self.popUpMsg);
             $("#custom-main-modal").modal("show");
-            setTimeout(function() {
+            setTimeout(function () {
               window.location.href = "/dashboard/my-sell-offers";
               eventBus.$emit("submitingEvent", false);
             }, 3000);
           }
         })
-        .catch(function(err) {
+        .catch(function (err) {
           self.errors = "";
           self.errors = err.response.data.errors;
 
@@ -494,7 +531,7 @@ export default {
           eventBus.$emit("submitingEvent", false);
         });
     },
-    handleSellOfferFileUpload: function() {
+    handleSellOfferFileUpload: function () {
       let uploadedFiles = this.$refs.sellOfferFiles.files;
       /*
                   Adds the uploaded file to the files array
@@ -503,7 +540,7 @@ export default {
         this.sellOfferFiles.push(uploadedFiles[i]);
       }
     },
-    getSellOfferFormFields: function() {
+    getSellOfferFormFields: function () {
       let formData = new FormData();
       let cnt = this.sellOfferFields.length;
 
@@ -535,7 +572,7 @@ export default {
 
       return formData;
     },
-    toLatinNumbers: function(num) {
+    toLatinNumbers: function (num) {
       var numDic = {
         "۰": "0",
         "۱": "1",
@@ -546,13 +583,13 @@ export default {
         "۶": "6",
         "۷": "7",
         "۸": "8",
-        "۹": "9"
+        "۹": "9",
       };
 
-      return num.toString().replace(/[۰-۹]/g, function(w) {
+      return num.toString().replace(/[۰-۹]/g, function (w) {
         return numDic[w];
       });
-    }
+    },
   },
   mounted() {
     this.init();
@@ -560,23 +597,23 @@ export default {
       forceFarsiDigits: true,
       markHolidays: true,
       gotoToday: true,
-      markToday: true
+      markToday: true,
     });
     kamaDatepicker("end-date-id", {
       forceFarsiDigits: true,
       markHolidays: true,
       gotoToday: true,
-      markToday: true
+      markToday: true,
     });
     $(".main-image").magnificPopup({
       delegate: "a",
-      type: "image"
+      type: "image",
     });
     $('input[type="file"]').imageuploadify();
     eventBus.$emit("subHeader", false);
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/buyAd-requests-detail" });
-  }
+  },
 };
 </script>

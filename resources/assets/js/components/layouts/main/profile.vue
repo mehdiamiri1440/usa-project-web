@@ -532,7 +532,7 @@ p.response-rate span {
     width: 100%;
   }
 }
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .title-page {
     text-align: center;
     margin: -10px auto 95px;

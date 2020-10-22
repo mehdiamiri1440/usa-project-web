@@ -173,7 +173,7 @@
   margin-top: 0;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .right-header.desktop-header {
     display: none;
   }
@@ -280,44 +280,56 @@
       <ul class="list-unstyled" v-if="buyAds" v-for="buyAd in buyAds">
         <!--start title list -->
         <li class="list-group-item title-list">
-          <span class="numbers">{{buyAd.sell_offers.length}}</span>
+          <span class="numbers">{{ buyAd.sell_offers.length }}</span>
           <p class="title-list-text">
-            {{buyAd.subcategory_name}}
+            {{ buyAd.subcategory_name }}
             <span class="seperator">|</span>
-            {{buyAd.name}}
+            {{ buyAd.name }}
           </p>
-          <p class="time-show">{{buyAd.register_date}}</p>
+          <p class="time-show">{{ buyAd.register_date }}</p>
         </li>
         <!--end title list -->
 
         <div v-if="buyAd.sell_offers.length > 0">
-          <li v-for="sellOffer in buyAd.sell_offers" class="list-group-item content-list">
+          <li
+            v-for="sellOffer in buyAd.sell_offers"
+            class="list-group-item content-list"
+          >
             <p class="price">
               <span class="static-price">قیمت:</span>
-              {{sellOffer.price + 'تومان'}}
+              {{ sellOffer.price + "تومان" }}
             </p>
             <p class="city">
               <span class="static-city">تحویل:</span>
-              {{sellOffer.deliver_at}}
+              {{ sellOffer.deliver_at }}
             </p>
             <router-link
               :to="'/dashboard/sell-offer-detail/' + sellOffer.id"
               class="show-detail green-button"
-            >جزئیات</router-link>
+              >جزئیات</router-link
+            >
           </li>
         </div>
         <div v-else>
           <li class="list-group-item content-list">
-            <p class="text-center">تاکنون پیشنهاد فروشی برای این درخواست نیامده است</p>
+            <p class="text-center">
+              تاکنون پیشنهاد فروشی برای این درخواست نیامده است
+            </p>
           </li>
         </div>
       </ul>
     </section>
-    <section class="main-content col-xs-12" v-if="buyAds.length == 0 && !loading">
+    <section
+      class="main-content col-xs-12"
+      v-if="buyAds.length == 0 && !loading"
+    >
       <h4 dir="rtl" class="text-center">تاکنون درخواست خریدی ثبت نکرده اید.</h4>
     </section>
     <section class="main-content col-xs-12 loading_images" v-show="loading">
-      <img src="../../../../../img/gif/loading.gif" style="width:200px;height:200px" />
+      <img
+        src="../../../../../img/gif/loading.gif"
+        style="width: 200px; height: 200px"
+      />
     </section>
   </div>
 </template>
@@ -326,11 +338,11 @@
 import { eventBus } from "../../../../router/router";
 
 export default {
-  data: function() {
+  data: function () {
     return {
       currentUser: {
         profile: "",
-        user_info: ""
+        user_info: "",
       },
       buyAds: "",
       popUpMsg: "",
@@ -339,28 +351,28 @@ export default {
       items: [
         {
           message: "درخواست های خرید من ",
-          url: "myBuyAds"
-        }
-      ]
+          url: "myBuyAds",
+        },
+      ],
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       this.loading = true;
 
       var self = this;
 
       axios
         .post("/user/profile_info")
-        .then(response => (this.currentUser = response.data));
+        .then((response) => (this.currentUser = response.data));
       axios
         .post("/get_my_buyAds_with_related_sell_offers")
-        .then(function(response) {
+        .then(function (response) {
           self.buyAds = response.data.buyAds;
 
           self.loading = false;
         });
-    }
+    },
   },
   mounted() {
     this.init();
@@ -368,6 +380,6 @@ export default {
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/my-buyAds" });
-  }
+  },
 };
 </script>

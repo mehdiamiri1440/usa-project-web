@@ -413,7 +413,7 @@
         color: #e41c38;
     }
 
-    @media screen and (max-width: 992px) {
+    @media screen and (max-width: 991px) {
         .right-header.desktop-header {
             display: none;
         }

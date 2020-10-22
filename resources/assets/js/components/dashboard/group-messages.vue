@@ -216,7 +216,7 @@
   width: 100%;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .main-content {
     padding: 65px 0 0;
   }
@@ -348,9 +348,9 @@ export default {
   components: {
     MyGroupList,
     MainChatWrapper,
-    GroupList
+    GroupList,
   },
-  data: function() {
+  data: function () {
     return {
       isImageLoad: false,
       isChatMessagesLoaded: true,
@@ -359,8 +359,8 @@ export default {
       items: [
         {
           message: "پیام ها",
-          url: "messages"
-        }
+          url: "messages",
+        },
       ],
       isCurrentStep: 0,
       currentUserId: "",
@@ -387,12 +387,12 @@ export default {
       replyMessage: "",
       loadReplyData: false,
       messageCount: 0,
-      groupMessageReceived: false
+      groupMessageReceived: false,
     };
   },
 
   methods: {
-    init: function() {
+    init: function () {
       let self = this;
       this.currentUserId = this.getUserId;
 
@@ -403,13 +403,13 @@ export default {
         if (messaging) {
           messaging
             .requestPermission()
-            .then(function() {
+            .then(function () {
               return messaging.getToken();
             })
-            .then(function(currentToken) {
+            .then(function (currentToken) {
               self.sendTokenToServer(currentToken);
             })
-            .catch(function(err) {
+            .catch(function (err) {
               // Happen if user deney permission
               alert(
                 "برای استفاده بهتر از این سرویس دریافت پیام از این سایت را باز کنید."
@@ -419,19 +419,19 @@ export default {
         }
       });
     },
-    loadImage: function() {
+    loadImage: function () {
       this.isImageLoad = false;
     },
-    ImageLoaded: function() {
+    ImageLoaded: function () {
       this.isImageLoad = true;
     },
-    loadGroupList: function(loadAllGroups = false) {
+    loadGroupList: function (loadAllGroups = false) {
       var self = this;
       self.allGroupIsload = true;
 
       axios
         .post("/group/get_groups_list")
-        .then(function(response) {
+        .then(function (response) {
           self.groupList = response.data.groups;
           if (response.data.groups.length == 0) {
             self.allGroupsIsUnSubscribe = true;
@@ -443,11 +443,11 @@ export default {
             self.getUnsubscribeGroups();
           }
         })
-        .catch(function(e) {
+        .catch(function (e) {
           //
         });
     },
-    loadGroupChatHistory: function(group, index) {
+    loadGroupChatHistory: function (group, index) {
       var self = this;
 
       this.groupMessageCount = 50;
@@ -464,15 +464,15 @@ export default {
       axios
         .post("/group/get_group_chats", {
           group_id: group.id,
-          message_count: self.groupMessageCount
+          message_count: self.groupMessageCount,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.groupChatMessages = response.data.messages;
           self.isGroupChatMessagesLoaded = false;
 
           self.scrollToEnd(0);
         })
-        .catch(function(e) {
+        .catch(function (e) {
           //
         });
 
@@ -482,7 +482,7 @@ export default {
 
       // this.groupList.splice(index, 1, group);
     },
-    appendMessageToGroupHistory: function(group) {
+    appendMessageToGroupHistory: function (group) {
       var self = this;
 
       this.groupMessageCount = 50;
@@ -492,22 +492,22 @@ export default {
       axios
         .post("/group/get_group_chats", {
           group_id: group.id,
-          message_count: self.groupMessageCount
+          message_count: self.groupMessageCount,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.groupChatMessages = response.data.messages;
           self.isGroupChatMessagesLoaded = false;
 
           self.scrollToEnd(0);
         })
-        .catch(function(e) {
+        .catch(function (e) {
           //
         });
     },
-    scrollToEnd: function(time) {
+    scrollToEnd: function (time) {
       var chatPageElementList = $(".chat-page ul");
       var self = this;
-      setTimeout(function() {
+      setTimeout(function () {
         chatPageElementList.animate(
           { scrollTop: chatPageElementList.prop("scrollHeight") },
           0,
@@ -518,7 +518,7 @@ export default {
         );
       }, time);
     },
-    sendMessageToGroup: function() {
+    sendMessageToGroup: function () {
       var self = this;
       let tempMsg = self.msgToSend;
       self.msgToSend = "";
@@ -526,7 +526,7 @@ export default {
       if (tempMsg) {
         let msgObject = {
           text: tempMsg,
-          group_id: self.selectedGroup.id
+          group_id: self.selectedGroup.id,
         };
 
         let tempMsgObject = {
@@ -539,7 +539,7 @@ export default {
           parent_id: null,
           parent_text: null,
           parent_author_first_name: null,
-          parent_author_last_name: null
+          parent_author_last_name: null,
         };
 
         if (self.replyMessage.id && self.loadReplyData) {
@@ -552,26 +552,26 @@ export default {
 
         axios
           .post("/group/send_message", msgObject)
-          .then(function(response) {
+          .then(function (response) {
             self.isFirstMessageLoading = false;
             self.resetReplyMessage();
 
             self.loadGroupChatHistory(self.selectedGroup, -10);
           })
-          .catch(function(e) {
+          .catch(function (e) {
             //
           });
       }
     },
-    pushNotification: function(header, body, link) {
+    pushNotification: function (header, body, link) {
       Push.create(header, {
         body: body,
         timeout: 4000,
         link: link,
-        onClick: function() {
+        onClick: function () {
           window.focus();
           this.close();
-        }
+        },
       });
     },
     searchForObjectIndexInArray: function search(contactId, myArray) {
@@ -581,7 +581,7 @@ export default {
         }
       }
     },
-    pageHasBeenReloaded: function() {
+    pageHasBeenReloaded: function () {
       if (window.performance) {
         //                  TYPE_BACK_FORWARD
         if (
@@ -593,10 +593,10 @@ export default {
         }
       }
     },
-    parseDateTime: function(dateTimeString) {
+    parseDateTime: function (dateTimeString) {
       //
     },
-    isDeviceMobile: function() {
+    isDeviceMobile: function () {
       if (
         navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -611,14 +611,14 @@ export default {
         return false;
       }
     },
-    handleBackBtnClickOnDevices: function() {
+    handleBackBtnClickOnDevices: function () {
       var self = this;
 
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
 
-      $(window).on("popstate", function(e) {
+      $(window).on("popstate", function (e) {
         if (self.isDeviceMobile()) {
           if (
             window.location.pathname == "/seller/messenger/group-messages" ||
@@ -631,19 +631,23 @@ export default {
         }
       });
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
     },
-    subscribeUser: function(groupId) {
+    subscribeUser: function (groupId) {
       this.popUpMsg = "آیا میخواهید در گروه عضو شوید؟";
       eventBus.$emit("joinGroupMessage", this.popUpMsg);
       eventBus.$emit("joinGroupId", groupId);
       $("#join-to-group").modal("show");
     },
-    checkMessageName: function(index, prevIndex) {
+    checkMessageName: function (index, prevIndex) {
       var isMessageName = false;
       if (this.groupChatMessages[prevIndex] && prevIndex >= 0) {
         if (
@@ -658,9 +662,9 @@ export default {
 
       return isMessageName;
     },
-    groupMessageAutoLoader: function() {
+    groupMessageAutoLoader: function () {
       var self = this;
-      $(".message-wrapper.group-messages ul").scroll(function() {
+      $(".message-wrapper.group-messages ul").scroll(function () {
         var scroll = $(this).scrollTop();
 
         if (
@@ -674,7 +678,7 @@ export default {
       });
     },
 
-    loadMoreGroupMessage: function() {
+    loadMoreGroupMessage: function () {
       var self = this;
       self.groupMessageLoading = true;
       if (self.groupMessageCount < 2000) {
@@ -683,9 +687,9 @@ export default {
       axios
         .post("/group/get_group_chats", {
           group_id: self.selectedGroup.id,
-          message_count: self.groupMessageCount
+          message_count: self.groupMessageCount,
         })
-        .then(function(response) {
+        .then(function (response) {
           var currentDataSize = self.groupChatMessages.length;
           var newDataSize = response.data.messages.length;
           if (currentDataSize == newDataSize) {
@@ -701,17 +705,17 @@ export default {
 
           // self.scrollToEnd(0);
         })
-        .catch(function(e) {
+        .catch(function (e) {
           //
         });
     },
-    getUnsubscribeGroups: function() {
+    getUnsubscribeGroups: function () {
       var self = this;
-      axios.post("/group/get_all_groups").then(function(response) {
+      axios.post("/group/get_all_groups").then(function (response) {
         self.checkUserIsSubscribe(response.data.all_groups);
       });
     },
-    checkUserIsSubscribe: function(groups) {
+    checkUserIsSubscribe: function (groups) {
       var subscribeGroups = this.groupList;
       var self = this;
 
@@ -731,7 +735,7 @@ export default {
       self.allGroupIsload = false;
       self.UnsubscribeGroups = groups;
     },
-    replyMessageData: function(e, msg) {
+    replyMessageData: function (e, msg) {
       if (this.isTargetALink(e.target)) {
         window.open(e.target.href, "_blank");
       } else {
@@ -740,7 +744,7 @@ export default {
 
         var chatPageElementList = $(".chat-page ul");
         var self = this;
-        setTimeout(function() {
+        setTimeout(function () {
           chatPageElementList.animate(
             { scrollTop: chatPageElementList.prop("scrollHeight") },
             100,
@@ -755,75 +759,75 @@ export default {
     resetReplyMessage() {
       this.loadReplyData = false;
 
-      setTimeout(function() {
+      setTimeout(function () {
         this.replyMessage = "";
       }, 100);
     },
-    isTargetALink: function(target) {
+    isTargetALink: function (target) {
       if (target.href) return true;
 
       return false;
     },
-    sendTokenToServer: function(token) {
+    sendTokenToServer: function (token) {
       axios
         .post("/fcm/register_token_in_groups", {
-          token: token
+          token: token,
         })
-        .then(function(response) {
+        .then(function (response) {
           let token = response.data.token;
 
           window.localStorage.setItem("storedToken", token);
         });
     },
-    unsubscribeToeknFromGroups: function() {
+    unsubscribeToeknFromGroups: function () {
       let storedToken = window.localStorage.getItem("storedToken");
 
       axios
         .post("/fcm/unregister_token", {
-          token: storedToken
+          token: storedToken,
         })
-        .then(function(response) {
+        .then(function (response) {
           //
         });
     },
-    goToContactList: function() {
+    goToContactList: function () {
       this.$router.push("contacts");
       this.$parent.groupStep = 0;
-    }
+    },
   },
   watch: {
-    groupNameSearchText: function() {
+    groupNameSearchText: function () {
       var self = this;
       // self.groupList = [];
       if (self.groupNameSearchText !== "") {
         self.isSearchingGroup = true;
         axios
           .post("/group/get_groups_list")
-          .then(function(response) {
+          .then(function (response) {
             self.groupList = response.data.groups;
             var text = self.groupNameSearchText.split(" ");
             self.isSearchingGroup = false;
-            self.groupList = self.groupList.filter(function(group) {
-              return text.every(function(el) {
+            self.groupList = self.groupList.filter(function (group) {
+              return text.every(function (el) {
                 if (group.name.indexOf(el) > -1) {
                   return true;
                 } else return false;
               });
             });
           })
-          .catch(function(e) {
+          .catch(function (e) {
             //
           });
       } else {
         self.loadGroupList();
       }
     },
-    isGroupChatMessagesLoaded: function(event) {
+    isGroupChatMessagesLoaded: function (event) {
       if (event == false) {
         this.groupMessageAutoLoader();
       }
     },
-    reloadGroupList: function(event) {
+    reloadGroupList: function (event) {
       let self = this;
       this.reloadGroupList = false;
       return new Promise((resolve, reject) => {
@@ -842,7 +846,7 @@ export default {
           }
         });
     },
-    groupMessageReceived: function(value) {
+    groupMessageReceived: function (value) {
       let self = this;
 
       if (value == true) {
@@ -855,17 +859,17 @@ export default {
         }
         self.groupMessageReceived = false;
       }
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.init();
     eventBus.$emit("subHeader", false);
   },
 
-  created: function() {
+  created: function () {
     gtag("config", "UA-129398000-1", { page_path: "/group-messages" });
 
-    eventBus.$on("messageCount", event => {
+    eventBus.$on("messageCount", (event) => {
       this.messageCount += event;
     });
 
@@ -873,15 +877,15 @@ export default {
 
     if (Push.Permission.has() === false) {
       Push.Permission.request(
-        function() {},
-        function() {}
+        function () {},
+        function () {}
       );
     }
-    eventBus.$on("reloadAllGroupLists", $event => {
+    eventBus.$on("reloadAllGroupLists", ($event) => {
       this.reloadGroupList = $event;
     });
 
-    eventBus.$on("groupMessageReceived", $event => {
+    eventBus.$on("groupMessageReceived", ($event) => {
       self.groupMessageReceived = $event;
     });
   },
@@ -894,9 +898,9 @@ export default {
   beforeDestroy() {
     let self = this;
 
-    setTimeout(function() {
+    setTimeout(function () {
       self.unsubscribeToeknFromGroups();
     }, 1000);
-  }
+  },
 };
 </script>

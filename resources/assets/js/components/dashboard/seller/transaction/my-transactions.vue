@@ -82,7 +82,7 @@
   text-align: center;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .show-header button {
     display: block;
   }
@@ -132,14 +132,21 @@
           <p class="time-show col-xs-3">وضعیت</p>
         </li>
         <!--end title list -->
-        <li class="list-group-item content-list col-xs-12" v-for="transaction in transactions">
+        <li
+          class="list-group-item content-list col-xs-12"
+          v-for="transaction in transactions"
+        >
           <!--{{this.transactionInfo['id']}}-->
-          <router-link :to="'/dashboard/transaction-detail/' + transaction.transaction_id">
-            <p class="number col-xs-2">{{transaction.transaction_id}}</p>
-            <p class="date col-xs-2" dir="rtl">{{transaction.deal_formation_date}}</p>
-            <p class="subject col-xs-5">{{transaction.product_name}}</p>
+          <router-link
+            :to="'/dashboard/transaction-detail/' + transaction.transaction_id"
+          >
+            <p class="number col-xs-2">{{ transaction.transaction_id }}</p>
+            <p class="date col-xs-2" dir="rtl">
+              {{ transaction.deal_formation_date }}
+            </p>
+            <p class="subject col-xs-5">{{ transaction.product_name }}</p>
             <p class="col-xs-3">
-              <span class="green-button">{{transaction.short_status}}</span>
+              <span class="green-button">{{ transaction.short_status }}</span>
             </p>
           </router-link>
           <!--   <a :href="trans + '/' + transaction.transaction_id">
@@ -158,7 +165,10 @@
           </a>-->
         </li>
       </ul>
-      <ul class="list-unstyled col-xs-12" v-if="instantTransactions.length != 0">
+      <ul
+        class="list-unstyled col-xs-12"
+        v-if="instantTransactions.length != 0"
+      >
         <!--start title list -->
         <li class="list-group-item title-list">
           <p class="title-list-text col-xs-2">شماره تراکنش</p>
@@ -172,18 +182,28 @@
           v-for="transaction in instantTransactions"
         >
           <!--{{this.transactionInfo['id']}}-->
-          <router-link :to="'/dashboard/instant-transaction-detail/' + transaction.transaction_id">
-            <p class="number col-xs-2">{{transaction.transaction_id}}</p>
-            <p class="date col-xs-2" dir="rtl">{{transaction.deal_formation_date}}</p>
-            <p class="subject col-xs-5">{{transaction.product_name}}</p>
+          <router-link
+            :to="
+              '/dashboard/instant-transaction-detail/' +
+              transaction.transaction_id
+            "
+          >
+            <p class="number col-xs-2">{{ transaction.transaction_id }}</p>
+            <p class="date col-xs-2" dir="rtl">
+              {{ transaction.deal_formation_date }}
+            </p>
+            <p class="subject col-xs-5">{{ transaction.product_name }}</p>
             <p class="col-xs-3">
-              <span class="green-button">{{transaction.short_status}}</span>
+              <span class="green-button">{{ transaction.short_status }}</span>
             </p>
           </router-link>
         </li>
       </ul>
       <div class="loading_images col-xs-12" v-else-if="isLoading">
-        <img src="../../../../../img/gif/prload.gif" style="width:200px;height:200px" />
+        <img
+          src="../../../../../img/gif/prload.gif"
+          style="width: 200px; height: 200px"
+        />
       </div>
       <div
         class="col-xs-12"
@@ -198,7 +218,7 @@
 import { eventBus } from "../../../../router/router";
 export default {
   props: ["trans"],
-  data: function() {
+  data: function () {
     return {
       transactions: "",
       instantTransactions: "",
@@ -208,22 +228,22 @@ export default {
       items: [
         {
           message: "لیست تراکنش ها",
-          url: "myTransactions"
-        }
-      ]
+          url: "myTransactions",
+        },
+      ],
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       var self = this;
 
       axios
         .post("/get_user_transaction_list")
-        .then(function(response) {
+        .then(function (response) {
           self.transactions = response.data.transactions;
           self.isLoading = false;
         })
-        .catch(function(err) {
+        .catch(function (err) {
           if (err.response.status == 404) {
             window.location.href = "/404";
           }
@@ -232,21 +252,21 @@ export default {
 
       axios
         .post("/get_user_instant_transaction_list")
-        .then(function(response) {
+        .then(function (response) {
           self.instantTransactions = response.data.transactions;
           self.isLoading = false;
         })
-        .catch(function(err) {
+        .catch(function (err) {
           if (err.response.status == 404) {
             window.location.href = "/404";
           }
           self.isLoading = false;
         });
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     eventBus.$emit("subHeader", false);
     this.init();
-  }
+  },
 };
 </script>

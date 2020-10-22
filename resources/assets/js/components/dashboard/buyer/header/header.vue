@@ -238,7 +238,7 @@ span.min {
   font-weight: bold;
 }
 
-@media screen and (max-width: 994px) {
+@media screen and (max-width: 991px) {
   .right-header.desktop-header {
     display: none;
   }
@@ -327,7 +327,12 @@ span.min {
                 v-text="deleteButtonText"
               ></a>
 
-              <a href="#" class="btn green-button" data-dismiss="modal" v-text="cancelButtonText"></a>
+              <a
+                href="#"
+                class="btn green-button"
+                data-dismiss="modal"
+                v-text="cancelButtonText"
+              ></a>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -353,7 +358,9 @@ span.min {
                 <i class="fa fa-close"></i>
               </a>
               <p class="main-pop-up" v-text="popUpMsg"></p>
-              <button class="btn green-button" data-dismiss="modal">متوجه شدم</button>
+              <button class="btn green-button" data-dismiss="modal">
+                متوجه شدم
+              </button>
               <a class="btn green-button" href="/pricing">ارتقا عضویت</a>
             </div>
           </div>
@@ -382,7 +389,13 @@ span.min {
 
               <p class="main-pop-up" v-text="popUpMsg"></p>
 
-              <button class="btn green-button" data-dismiss="modal" id="close-btn">متوجه شدم</button>
+              <button
+                class="btn green-button"
+                data-dismiss="modal"
+                id="close-btn"
+              >
+                متوجه شدم
+              </button>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -408,10 +421,12 @@ span.min {
                 <i class="fa fa-times"></i>
               </a>
               <p class="main-pop-up" id="popUpMsg">
-                لطفا پس از تکمیل اطلاعات پروفایل خود، منتظر تماس کارشناسان باسکول جهت تکمیل اطلاعات
-                باشید. از شکیبایی شما سپاسگزاریم.
+                لطفا پس از تکمیل اطلاعات پروفایل خود، منتظر تماس کارشناسان
+                باسکول جهت تکمیل اطلاعات باشید. از شکیبایی شما سپاسگزاریم.
               </p>
-              <button class="btn green-button" data-dismiss="modal">متوجه شدم</button>
+              <button class="btn green-button" data-dismiss="modal">
+                متوجه شدم
+              </button>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -437,10 +452,12 @@ span.min {
                 <i class="fa fa-times"></i>
               </a>
               <p class="main-pop-up" id="contractModal">
-                برای شروع استفاده از خدمات باسکول ابتدا در قسمت ویرایش پروفایل، قرارداد همکاری را
-                مطالعه و تایید کنید.
+                برای شروع استفاده از خدمات باسکول ابتدا در قسمت ویرایش پروفایل،
+                قرارداد همکاری را مطالعه و تایید کنید.
               </p>
-              <button class="btn green-button" data-dismiss="modal">متوجه شدم</button>
+              <button class="btn green-button" data-dismiss="modal">
+                متوجه شدم
+              </button>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -452,7 +469,7 @@ span.min {
     <!--loader-->
     <!--loading upload-->
 
-    <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
+    <div :class="{ 'loader-wrapper': !submiting, 'loader-display': submiting }">
       <div class="main-loader progress-upload-files">
         <p dir="rtl">در حال بارگذاری...</p>
         <div class="progress-upload-wrapper">
@@ -463,8 +480,10 @@ span.min {
               :aria-valuenow="uploadPercentage"
               aria-valuemin="0"
               aria-valuemax="100"
-              :style="{width: uploadPercentage + '%'}"
-            >{{uploadPercentage + '%'}}</div>
+              :style="{ width: uploadPercentage + '%' }"
+            >
+              {{ uploadPercentage + "%" }}
+            </div>
           </div>
         </div>
       </div>
@@ -490,8 +509,11 @@ span.min {
         </button>
 
         <span class="logo">
-          <router-link :to="{name : 'indexPage'}">
-            <img src="../../../../../img/logo/web-logo-white.svg" alt="buskool" />
+          <router-link :to="{ name: 'indexPage' }">
+            <img
+              src="../../../../../img/logo/web-logo-white.svg"
+              alt="buskool"
+            />
             <p>بازارگاه آنلاین کشاورزی</p>
           </router-link>
         </span>
@@ -502,8 +524,14 @@ span.min {
           :isLoading="isLoading"
           :photoLink="currentUser.profile.profile_photo"
           :storage="storage"
-          :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
-          :usercity="currentUser.user_info.province + ' - ' + currentUser.user_info.city"
+          :username="
+            currentUser.user_info.first_name +
+            ' ' +
+            currentUser.user_info.last_name
+          "
+          :usercity="
+            currentUser.user_info.province + ' - ' + currentUser.user_info.city
+          "
           :userprof="currentUser.user_info.user_name"
         />
 
@@ -525,8 +553,11 @@ span.min {
         </button>
 
         <span class="logo">
-          <router-link :to="{name : 'indexPage'}">
-            <img src="../../../../../img/logo/web-logo-white.svg" alt="buskool" />
+          <router-link :to="{ name: 'indexPage' }">
+            <img
+              src="../../../../../img/logo/web-logo-white.svg"
+              alt="buskool"
+            />
             <p>بازارگاه آنلاین کشاورزی</p>
           </router-link>
         </span>
@@ -537,8 +568,14 @@ span.min {
           :isLoading="isLoading"
           :photoLink="currentUser.profile.profile_photo"
           :storage="storage"
-          :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
-          :usercity="currentUser.user_info.province + ' - ' + currentUser.user_info.city"
+          :username="
+            currentUser.user_info.first_name +
+            ' ' +
+            currentUser.user_info.last_name
+          "
+          :usercity="
+            currentUser.user_info.province + ' - ' + currentUser.user_info.city
+          "
           :userprof="currentUser.user_info.user_name"
         />
 
@@ -555,7 +592,9 @@ span.min {
       :isLoading="isLoading"
       :photoLink="currentUser.profile.profile_photo"
       :storage="storage"
-      :username="currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name"
+      :username="
+        currentUser.user_info.first_name + ' ' + currentUser.user_info.last_name
+      "
       :out="logout"
       :menuClosed="menuClosed"
     />
@@ -574,10 +613,10 @@ export default {
     ProfileInfo,
     HeaderMenuList,
     HeaderTop,
-    SwitchButtons
+    SwitchButtons,
   },
   props: ["storage", "logout", "userId", "searchText"],
-  data: function() {
+  data: function () {
     return {
       menuClosed: false,
       isLoading: true,
@@ -590,9 +629,9 @@ export default {
           public_phone: "",
           profile_photo: this.storage + "",
           postal_code: "",
-          shaba_code: ""
+          shaba_code: "",
         },
-        user_info: ""
+        user_info: "",
       },
       profileBasicFields: [
         "is_company",
@@ -601,7 +640,7 @@ export default {
         "public_phone",
         "address",
         "postal_code",
-        "shaba_code"
+        "shaba_code",
       ],
       profilePhoto: "",
       errors: "",
@@ -613,19 +652,19 @@ export default {
       cancelButtonText: "",
       ProductId: "",
       searchValueText: "",
-      resetTextSearch: false
+      resetTextSearch: false,
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       this.isLoaded = true;
-      axios.post("/user/profile_info").then(response => {
+      axios.post("/user/profile_info").then((response) => {
         this.isLoading = false;
         this.$parent.currentUser = response.data;
         return (this.currentUser = response.data);
       });
     },
-    RegisterBasicProfileInfo: function() {
+    RegisterBasicProfileInfo: function () {
       this.submiting = true;
       this.errors = "";
       var self = this;
@@ -650,7 +689,7 @@ export default {
 
       axios
         .post("/user/profile_modification", data)
-        .then(function(response) {
+        .then(function (response) {
           if (response.status == 200) {
             self.submiting = false;
             eventBus.$emit("submitSuccess", self.popUpMsg);
@@ -660,23 +699,23 @@ export default {
           }
           self.submiting = false;
         })
-        .catch(function(err) {
+        .catch(function (err) {
           self.errors = "";
           self.errors = err.response.data.errors;
           self.submiting = false;
         });
     },
-    toLatinNumbers: function(num) {
+    toLatinNumbers: function (num) {
       if (num == null) {
         return null;
       }
 
       return num
         .toString()
-        .replace(/[\u0660-\u0669]/g, function(c) {
+        .replace(/[\u0660-\u0669]/g, function (c) {
           return c.charCodeAt(0) - 0x0660;
         })
-        .replace(/[\u06f0-\u06f9]/g, function(c) {
+        .replace(/[\u06f0-\u06f9]/g, function (c) {
           return c.charCodeAt(0) - 0x06f0;
         });
     },
@@ -692,13 +731,13 @@ export default {
       var littleMainHeader = $(".main-header");
       var main = $("#main");
       var nextMove = "shrink";
-      menuCloseButton.click(function() {
+      menuCloseButton.click(function () {
         if (nextMove == "expand") {
           $(this).css({
-            width: "30%"
+            width: "30%",
           });
           headerMenuLink.css({
-            "text-align": "right"
+            "text-align": "right",
           });
           copyRight.css("display", "block");
           headerMenu.css("display", "inline");
@@ -717,14 +756,14 @@ export default {
           logo.fadeIn();
         } else {
           $(this).css({
-            width: "100%"
+            width: "100%",
           });
           profile.css("display", "none");
           headerMenu.css("display", "none");
           copyRight.css("display", "none");
           logo.css("display", "none");
           headerMenuLink.css({
-            "text-align": "center"
+            "text-align": "center",
           });
 
           menuCloseButtonIcon
@@ -749,29 +788,29 @@ export default {
       var closeHeaderButtonMobileLinks = $(".mobile-header .header-menu a");
       rightHeader.animate(
         {
-          right: "0"
+          right: "0",
         },
         800
       );
       setTimeout(() => {
         rightHeader.animate(
           {
-            right: "-300"
+            right: "-300",
           },
           800,
           undefined,
-          function() {
+          function () {
             self.menuClosed = true;
           }
         );
       }, 2000);
-      showHeaderButtonElement.on("click", function() {
+      showHeaderButtonElement.on("click", function () {
         rightHeader.animate({ scrollTop: 0 }, "fast");
 
         if (flag === true) {
           rightHeader.animate(
             {
-              right: "0"
+              right: "0",
             },
             300
           );
@@ -782,7 +821,7 @@ export default {
         } else {
           rightHeader.animate(
             {
-              right: "-300px"
+              right: "-300px",
             },
             300
           );
@@ -790,11 +829,11 @@ export default {
           flag = true;
         }
       });
-      closeHeaderButtonMobile.on("click", function() {
+      closeHeaderButtonMobile.on("click", function () {
         if (flag === true) {
           rightHeader.animate(
             {
-              right: "0"
+              right: "0",
             },
             300
           );
@@ -803,7 +842,7 @@ export default {
         } else {
           rightHeader.animate(
             {
-              right: "-300px"
+              right: "-300px",
             },
             300
           );
@@ -813,11 +852,11 @@ export default {
           flag = true;
         }
       });
-      closeHeaderButtonMobileLinks.on("click", function() {
+      closeHeaderButtonMobileLinks.on("click", function () {
         if (flag === true) {
           rightHeader.animate(
             {
-              right: "0"
+              right: "0",
             },
             300
           );
@@ -826,7 +865,7 @@ export default {
         } else {
           rightHeader.animate(
             {
-              right: "-300px"
+              right: "-300px",
             },
             300
           );
@@ -836,11 +875,11 @@ export default {
           flag = true;
         }
       });
-      back.on("click", function() {
+      back.on("click", function () {
         if (flag === true) {
           rightHeader.animate(
             {
-              right: "0"
+              right: "0",
             },
             300
           );
@@ -849,7 +888,7 @@ export default {
         } else {
           rightHeader.animate(
             {
-              right: "-300px"
+              right: "-300px",
             },
             300
           );
@@ -860,14 +899,14 @@ export default {
         }
       });
     },
-    deleteProduct: function() {
+    deleteProduct: function () {
       var self = this;
 
       axios
         .post("/delete_product_by_id", {
-          product_id: self.productId
+          product_id: self.productId,
         })
-        .then(function(response) {
+        .then(function (response) {
           //show product deleted message
           //code
           self.popUpMsg = "حذف شد.";
@@ -879,11 +918,11 @@ export default {
             "product-deleted-successfully"
           );
 
-          setTimeout(function() {
+          setTimeout(function () {
             window.location.reload();
           }, 3000);
         })
-        .catch(function(err) {
+        .catch(function (err) {
           self.registerComponentStatistics(
             "product",
             "product-delete-failed",
@@ -894,16 +933,20 @@ export default {
           $("#custom-main-modal").modal("show");
         });
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
-    }
+    },
   },
   mounted() {
     var self = this;
-    eventBus.$on("firstDashboardSeen", event => {
+    eventBus.$on("firstDashboardSeen", (event) => {
       self.isfirstDashboardSeen = event;
     });
     this.init();
@@ -914,47 +957,47 @@ export default {
     var self = this;
     self.showSnapShot = localStorage.getItem("showSnapShot");
     localStorage.removeItem("showSnapShot");
-    eventBus.$on("submiting", event => {
+    eventBus.$on("submiting", (event) => {
       this.submiting = event;
     });
-    eventBus.$on("submitSuccess", event => {
+    eventBus.$on("submitSuccess", (event) => {
       this.popUpMsg = event;
     });
-    eventBus.$on("uploadPercentage", event => {
+    eventBus.$on("uploadPercentage", (event) => {
       this.uploadPercentage = event;
     });
-    eventBus.$on("deleteButtonText", event => {
+    eventBus.$on("deleteButtonText", (event) => {
       this.deleteButtonText = event;
     });
 
-    eventBus.$on("cancelButtonText", event => {
+    eventBus.$on("cancelButtonText", (event) => {
       this.cancelButtonText = event;
     });
 
-    eventBus.$on("productId", event => {
+    eventBus.$on("productId", (event) => {
       this.productId = event;
     });
 
-    eventBus.$on("resetTextSearch", event => {
+    eventBus.$on("resetTextSearch", (event) => {
       this.resetTextSearch = event;
     });
   },
   watch: {
-    searchValueText: function(value) {
+    searchValueText: function (value) {
       this.resetTextSearch = false;
       this.$parent.searchText = value;
     },
-    resetTextSearch: function(value) {
+    resetTextSearch: function (value) {
       if (value == true) {
         this.searchValueText = "";
       }
-    }
+    },
   },
   metaInfo() {
     return {
       title: "بازارگاه کشاورزی",
-      titleTemplate: "باسکول | %s"
+      titleTemplate: "باسکول | %s",
     };
-  }
+  },
 };
 </script>

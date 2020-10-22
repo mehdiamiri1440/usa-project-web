@@ -456,7 +456,7 @@ a.profile-info-wrapper:hover {
   }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   #buskool-nav {
     margin: 0;
   }
@@ -638,7 +638,7 @@ a.profile-info-wrapper:hover {
 <template>
   <div>
     <!-- loading -->
-    <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
+    <div :class="{ 'loader-wrapper': !submiting, 'loader-display': submiting }">
       <div class="main-loader">
         <img src="../../../../img/gif/prload.gif" />
         <p dir="rtl">در حال بارگذاری...</p>
@@ -669,7 +669,12 @@ a.profile-info-wrapper:hover {
                 v-text="deleteButtonText"
               ></a>
 
-              <a href="#" class="btn green-button" data-dismiss="modal" v-text="cancelButtonText"></a>
+              <a
+                href="#"
+                class="btn green-button"
+                data-dismiss="modal"
+                v-text="cancelButtonText"
+              ></a>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -695,7 +700,9 @@ a.profile-info-wrapper:hover {
 
               <p class="main-pop-up" v-text="popUpMsg"></p>
 
-              <button class="btn green-button" data-dismiss="modal">متوجه شدم</button>
+              <button class="btn green-button" data-dismiss="modal">
+                متوجه شدم
+              </button>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -762,14 +769,17 @@ a.profile-info-wrapper:hover {
 
               <router-link
                 data-dismiss="modal"
-                :to="{name : 'login'}"
+                :to="{ name: 'login' }"
                 class="btn green-button"
-              >ورود/ثبت نام</router-link>
+                >ورود/ثبت نام</router-link
+              >
 
               <br />
               <br />
 
-              <button class="btn gray-button" data-dismiss="modal">متوجه شدم</button>
+              <button class="btn gray-button" data-dismiss="modal">
+                متوجه شدم
+              </button>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -785,7 +795,11 @@ a.profile-info-wrapper:hover {
     <nav class="navbar text-rtl">
       <div class="container-fluid buskool-main-nav">
         <div class="hidden-md hidden-sm hidden-lg mobile-menu-button">
-          <span class="message-count" v-if="messageCount > 0" v-text="messageCount"></span>
+          <span
+            class="message-count"
+            v-if="messageCount > 0"
+            v-text="messageCount"
+          ></span>
           <button
             type="button"
             class="navbar-toggle"
@@ -799,7 +813,7 @@ a.profile-info-wrapper:hover {
         </div>
 
         <div class="buskool-logo navbar-header navbar-right">
-          <router-link class="navbar-brand" :to="{name : 'indexPage'}">
+          <router-link class="navbar-brand" :to="{ name: 'indexPage' }">
             <img
               src="../../../../img/logo/web-logo.svg"
               alt="باسکول | بازارگاه آنلاین دنیای کشاورزی"
@@ -822,7 +836,11 @@ a.profile-info-wrapper:hover {
                     :src="storage_path + '/' + profile_photo"
                     :alt="user_full_name"
                   />
-                  <img v-else src="../../../../img/user-defult.png" :alt="user_full_name" />
+                  <img
+                    v-else
+                    src="../../../../img/user-defult.png"
+                    :alt="user_full_name"
+                  />
                 </div>
                 <div class="profile-information">
                   <span class="hidden-xs" v-text="user_full_name"></span>
@@ -832,13 +850,13 @@ a.profile-info-wrapper:hover {
 
               <ul v-if="is_seller == 1" id="web-profile-items" class="collapse">
                 <li class="list-item">
-                  <router-link :to="{ name: 'statusSeller'}">
+                  <router-link :to="{ name: 'statusSeller' }">
                     <i class="fa fa-cog"></i>
                     داشبورد
                   </router-link>
                 </li>
                 <li class="list-item">
-                  <router-link :to="{ name: 'passwordSeller'}">
+                  <router-link :to="{ name: 'passwordSeller' }">
                     <i class="fa fa-lock"></i>
                     تغییر کلمه عبور
                   </router-link>
@@ -852,13 +870,13 @@ a.profile-info-wrapper:hover {
               </ul>
               <ul v-else id="web-profile-items" class="collapse">
                 <li class="list-item">
-                  <router-link :to="{ name: 'profileBasicBuyer'}">
+                  <router-link :to="{ name: 'profileBasicBuyer' }">
                     <i class="fa fa-cog"></i>
                     داشبورد
                   </router-link>
                 </li>
                 <li class="list-item">
-                  <router-link :to="{ name: 'passwordBuyer'}">
+                  <router-link :to="{ name: 'passwordBuyer' }">
                     <i class="fa fa-lock"></i>
                     تغییر کلمه عبور
                   </router-link>
@@ -874,14 +892,14 @@ a.profile-info-wrapper:hover {
           </ul>
           <ul v-else class="nav navbar-nav">
             <li class="hidden-xs">
-              <router-link class="green-button" :to="{name : 'register'}">
+              <router-link class="green-button" :to="{ name: 'register' }">
                 <i class="fa fa-user"></i>
                 ثبت نام رایگان
               </router-link>
             </li>
 
             <li class="mobile-login-link hidden-sm hidden-md hidden-lg">
-              <router-link class="green-button" :to="{name : 'login'}">
+              <router-link class="green-button" :to="{ name: 'login' }">
                 <i class="fa fa-user"></i>
 
                 <span>ورود / ثبت نام</span>
@@ -889,7 +907,10 @@ a.profile-info-wrapper:hover {
             </li>
 
             <li class="hidden-xs">
-              <router-link class="green-button green-button-alt" :to="{name : 'login'}">
+              <router-link
+                class="green-button green-button-alt"
+                :to="{ name: 'login' }"
+              >
                 <i class="fa fa-sign-in-alt"></i>
                 ورود به باسکول
               </router-link>
@@ -905,7 +926,10 @@ a.profile-info-wrapper:hover {
                 placeholder="محصول مورد نظر خود را جستجو کنید"
                 v-model="mainSearchBoxText"
               />
-              <button class="hidden-sm hidden-md hidden-lg fa fa-search" @click="search"></button>
+              <button
+                class="hidden-sm hidden-md hidden-lg fa fa-search"
+                @click="search"
+              ></button>
 
               <button class="hidden-xs" @click="search">
                 <i class="fa fa-search"></i>
@@ -916,64 +940,115 @@ a.profile-info-wrapper:hover {
               <li>
                 <router-link
                   class="smoothScroll"
-                  :to="{ name: 'indexPage'}"
-                  @click="registerComponentStatistics('header','home-page','click-on-home-page')"
+                  :to="{ name: 'indexPage' }"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'home-page',
+                      'click-on-home-page'
+                    )
+                  "
                 >
-                  صفحه
-                  نخست
+                  صفحه نخست
                 </router-link>
               </li>
               <li v-if="user_id !== ''">
                 <router-link
                   v-if="is_seller == 1"
                   class="smoothScroll"
-                  :to="{name : 'messagesSeller'}"
-                  @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
+                  :to="{ name: 'messagesSeller' }"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'dashboard',
+                      'click-on-dashboard'
+                    )
+                  "
                 >
                   پیام ها
-                  <span class="message-count" v-if="messageCount > 0" v-text="messageCount"></span>
+                  <span
+                    class="message-count"
+                    v-if="messageCount > 0"
+                    v-text="messageCount"
+                  ></span>
                 </router-link>
 
                 <router-link
                   v-else
                   class="smoothScroll"
-                  :to="{name : 'messagesBuyer'}"
-                  @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
+                  :to="{ name: 'messagesBuyer' }"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'dashboard',
+                      'click-on-dashboard'
+                    )
+                  "
                 >
                   پیام ها
-                  <span class="message-count" v-if="messageCount > 0" v-text="messageCount"></span>
+                  <span
+                    class="message-count"
+                    v-if="messageCount > 0"
+                    v-text="messageCount"
+                  ></span>
                 </router-link>
               </li>
               <li v-if="user_id !== ''">
                 <router-link
                   v-if="is_seller == 1"
                   class="smoothScroll"
-                  :to="{name : 'buyAdRequestsSeller'}"
-                  @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
-                >درخواست های خرید</router-link>
+                  :to="{ name: 'buyAdRequestsSeller' }"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'dashboard',
+                      'click-on-dashboard'
+                    )
+                  "
+                  >درخواست های خرید</router-link
+                >
                 <router-link
                   v-else
                   class="smoothScroll"
-                  :to="{name : 'registerRequestBuyer'}"
-                  @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
-                >ثبت درخواست خرید</router-link>
+                  :to="{ name: 'registerRequestBuyer' }"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'dashboard',
+                      'click-on-dashboard'
+                    )
+                  "
+                  >ثبت درخواست خرید</router-link
+                >
               </li>
               <li>
                 <router-link
                   class="smoothScroll"
-                  :to="{ name: 'productList'}"
-                  @click="registerComponentStatistics('header','product-list','click-on-product-list')"
+                  :to="{ name: 'productList' }"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'product-list',
+                      'click-on-product-list'
+                    )
+                  "
                 >
-                  لیست
-                  محصولات
+                  لیست محصولات
                 </router-link>
               </li>
               <li>
                 <a
                   href="https:\\blog.buskool.com"
                   class="smoothScroll"
-                  @click="registerComponentStatistics('header','blog','click-on-blog')"
-                >وبلاگ</a>
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'blog',
+                      'click-on-blog'
+                    )
+                  "
+                  >وبلاگ</a
+                >
               </li>
               <!--  <li>
                             <router-link
@@ -986,11 +1061,16 @@ a.profile-info-wrapper:hover {
               <li>
                 <router-link
                   class="smoothScroll"
-                  :to="{ name: 'aboutUs'}"
-                  @click="registerComponentStatistics('header','about-us','click-on-about-us')"
+                  :to="{ name: 'aboutUs' }"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'about-us',
+                      'click-on-about-us'
+                    )
+                  "
                 >
-                  درباره
-                  ما
+                  درباره ما
                 </router-link>
               </li>
             </ul>
@@ -1003,11 +1083,16 @@ a.profile-info-wrapper:hover {
           <li>
             <router-link
               class="smoothScroll"
-              :to="{ name: 'indexPage'}"
-              @click="registerComponentStatistics('header','home-page','click-on-home-page')"
+              :to="{ name: 'indexPage' }"
+              @click="
+                registerComponentStatistics(
+                  'header',
+                  'home-page',
+                  'click-on-home-page'
+                )
+              "
             >
-              صفحه
-              نخست
+              صفحه نخست
             </router-link>
           </li>
 
@@ -1015,21 +1100,41 @@ a.profile-info-wrapper:hover {
             <router-link
               v-if="is_seller == 1"
               class="smoothScroll"
-              :to="{name : 'messagesSeller'}"
-              @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
+              :to="{ name: 'messagesSeller' }"
+              @click="
+                registerComponentStatistics(
+                  'header',
+                  'dashboard',
+                  'click-on-dashboard'
+                )
+              "
             >
               پیام ها
-              <span class="message-count" v-if="messageCount > 0" v-text="messageCount"></span>
+              <span
+                class="message-count"
+                v-if="messageCount > 0"
+                v-text="messageCount"
+              ></span>
             </router-link>
 
             <router-link
               v-else
               class="smoothScroll"
-              :to="{name : 'messagesBuyer'}"
-              @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
+              :to="{ name: 'messagesBuyer' }"
+              @click="
+                registerComponentStatistics(
+                  'header',
+                  'dashboard',
+                  'click-on-dashboard'
+                )
+              "
             >
               پیام ها
-              <span class="message-count" v-if="messageCount > 0" v-text="messageCount"></span>
+              <span
+                class="message-count"
+                v-if="messageCount > 0"
+                v-text="messageCount"
+              ></span>
             </router-link>
           </li>
 
@@ -1037,33 +1142,55 @@ a.profile-info-wrapper:hover {
             <router-link
               v-if="is_seller == 1"
               class="smoothScroll"
-              :to="{name : 'buyAdRequestsSeller'}"
-              @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
-            >درخواست های خرید</router-link>
+              :to="{ name: 'buyAdRequestsSeller' }"
+              @click="
+                registerComponentStatistics(
+                  'header',
+                  'dashboard',
+                  'click-on-dashboard'
+                )
+              "
+              >درخواست های خرید</router-link
+            >
             <router-link
               v-else
               class="smoothScroll"
-              :to="{name : 'registerRequestBuyer'}"
-              @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
-            >ثبت درخواست خرید</router-link>
+              :to="{ name: 'registerRequestBuyer' }"
+              @click="
+                registerComponentStatistics(
+                  'header',
+                  'dashboard',
+                  'click-on-dashboard'
+                )
+              "
+              >ثبت درخواست خرید</router-link
+            >
           </li>
 
           <li>
             <router-link
               class="smoothScroll"
-              :to="{ name: 'productList'}"
-              @click="registerComponentStatistics('header','product-list','click-on-product-list')"
+              :to="{ name: 'productList' }"
+              @click="
+                registerComponentStatistics(
+                  'header',
+                  'product-list',
+                  'click-on-product-list'
+                )
+              "
             >
-              لیست
-              محصولات
+              لیست محصولات
             </router-link>
           </li>
           <li>
             <a
               href="https:\\blog.buskool.com"
               class="smoothScroll"
-              @click="registerComponentStatistics('header','blog','click-on-blog')"
-            >وبلاگ</a>
+              @click="
+                registerComponentStatistics('header', 'blog', 'click-on-blog')
+              "
+              >وبلاگ</a
+            >
           </li>
           <!--  <li>
                         <router-link
@@ -1076,11 +1203,16 @@ a.profile-info-wrapper:hover {
           <li>
             <router-link
               class="smoothScroll"
-              :to="{ name: 'aboutUs'}"
-              @click="registerComponentStatistics('header','about-us','click-on-about-us')"
+              :to="{ name: 'aboutUs' }"
+              @click="
+                registerComponentStatistics(
+                  'header',
+                  'about-us',
+                  'click-on-about-us'
+                )
+              "
             >
-              درباره
-              ما
+              درباره ما
             </router-link>
           </li>
         </ul>
@@ -1103,7 +1235,7 @@ export default {
       cancelButtonText: "",
       ProductId: "",
       mainSearchBoxText: "",
-      messageCount: 0
+      messageCount: 0,
     };
   },
   props: [
@@ -1114,22 +1246,22 @@ export default {
     "user_full_name",
     "user_logout_path",
     "storage_path",
-    "login_page_path"
+    "login_page_path",
   ],
   methods: {
     // jQuery
-    jqUpdateSize: function() {
+    jqUpdateSize: function () {
       // Get the dimensions of the viewport
       var width = $(window).width();
       if (width < 767) {
-        $("#collapseHeader a.smoothScroll").on("click", function() {
+        $("#collapseHeader a.smoothScroll").on("click", function () {
           $(".btn-navbar").click(); //bootstrap 2.x
           $(".navbar-toggle").click(); //bootstrap 3.x by Richard
           $(".navbar-toggler").click(); //bootstrap 4.x
         });
       }
     },
-    logUserOut: function() {
+    logUserOut: function () {
       localStorage.removeItem("userRoute");
       this.registerComponentStatistics(
         "header",
@@ -1137,20 +1269,24 @@ export default {
         "click-on-register-login"
       );
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
     },
-    deleteProduct: function() {
+    deleteProduct: function () {
       var self = this;
 
       axios
         .post("/delete_product_by_id", {
-          product_id: self.productId
+          product_id: self.productId,
         })
-        .then(function(response) {
+        .then(function (response) {
           //show product deleted message
           //code
           self.popUpMsg = "حذف شد.";
@@ -1162,11 +1298,11 @@ export default {
             "product-deleted-successfully"
           );
 
-          setTimeout(function() {
+          setTimeout(function () {
             window.location.reload();
           }, 3000);
         })
-        .catch(function(err) {
+        .catch(function (err) {
           self.registerComponentStatistics(
             "product",
             "product-delete-failed",
@@ -1177,37 +1313,36 @@ export default {
           $("#custom-main-modal").modal("show");
         });
     },
-    search: function() {
+    search: function () {
       if (this.mainSearchBoxText !== "") {
-       
         let searchValue = this.mainSearchBoxText;
         let queryValue = searchValue.replace(/ /g, "+");
 
         this.$router.push({
           name: "productList",
           query: {
-            s: queryValue
-          }
+            s: queryValue,
+          },
         });
       }
-    }
+    },
   },
   mounted() {
     if (this.user_id) {
       axios
         .post("/get_total_unread_messages_for_current_user")
-        .then(function(response) {
+        .then(function (response) {
           let messageCount = response.data.msg_count;
           eventBus.$emit("messageCount", messageCount);
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log("error", error);
         });
     }
     // scroll handeling hide in web
     var lastScroll = 0;
     var navbar = $("nav.navbar .buskool-sub-menu");
-    $(window).scroll(function() {
+    $(window).scroll(function () {
       var state = $(window).scrollTop();
 
       if ($(window).scrollTop() > 60 && state > lastScroll) {
@@ -1222,17 +1357,17 @@ export default {
       lastScroll = state;
     });
 
-    $("#buskool-nav").on("hide.bs.collapse", function() {
-      $(".mobile-background-shadow").fadeTo(0, 0, function() {
+    $("#buskool-nav").on("hide.bs.collapse", function () {
+      $(".mobile-background-shadow").fadeTo(0, 0, function () {
         $(this).css("display", "none");
       });
     });
 
-    $("#buskool-nav").on("show.bs.collapse", function() {
+    $("#buskool-nav").on("show.bs.collapse", function () {
       $(".mobile-background-shadow").fadeTo(0, 0.8);
     });
 
-    $(document).on("click", function(e) {
+    $(document).on("click", function (e) {
       /* bootstrap collapse js adds "in" class to your collapsible element*/
 
       var user_menu_opened = $("#web-profile-items").hasClass("in");
@@ -1254,33 +1389,33 @@ export default {
       }
     });
 
-    eventBus.$on("submitSuccess", $event => {
+    eventBus.$on("submitSuccess", ($event) => {
       this.popUpMsg = $event;
     });
-    eventBus.$on("submiting", $event => {
+    eventBus.$on("submiting", ($event) => {
       this.submiting = $event;
     });
-    eventBus.$on("isLoading", $event => {
+    eventBus.$on("isLoading", ($event) => {
       this.isLoading = $event;
     });
 
-    eventBus.$on("deleteButtonText", event => {
+    eventBus.$on("deleteButtonText", (event) => {
       this.deleteButtonText = event;
     });
 
-    eventBus.$on("cancelButtonText", event => {
+    eventBus.$on("cancelButtonText", (event) => {
       this.cancelButtonText = event;
     });
 
-    eventBus.$on("productId", event => {
+    eventBus.$on("productId", (event) => {
       this.productId = event;
     });
 
-    eventBus.$on("textSearch", event => {
+    eventBus.$on("textSearch", (event) => {
       this.mainSearchBoxText = event;
     });
 
-    eventBus.$on("messageCount", event => {
+    eventBus.$on("messageCount", (event) => {
       this.messageCount += event;
     });
 
@@ -1291,7 +1426,7 @@ export default {
 
     var self = this;
 
-    window.addEventListener("keydown", function(event) {
+    window.addEventListener("keydown", function (event) {
       if (
         !window.location.pathname.includes("seller") &&
         !window.location.pathname.includes("buyer") &&
@@ -1306,9 +1441,9 @@ export default {
     });
   },
   watch: {
-    mainSearchBoxText: function(value) {
+    mainSearchBoxText: function (value) {
       eventBus.$emit("textSearch", value);
-    }
-  }
+    },
+  },
 };
 </script>

@@ -10,10 +10,10 @@
 
 .contact-body .contact-search .contact-search-input-wrapper i {
   position: absolute;
-  left: 12px;
+  left: 15px;
   font-size: 20px;
   color: #c1c1c1;
-  top: 8px;
+  top: 11px;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper input {
@@ -171,7 +171,11 @@
 
     <div v-else class="contact-items">
       <ul>
-        <li class="contact-item" v-for="(group, index) in $parent.UnsubscribeGroups" :key="index">
+        <li
+          class="contact-item"
+          v-for="(group, index) in $parent.UnsubscribeGroups"
+          :key="index"
+        >
           <div class="contact-image">
             <!-- <img
               v-if="group.photo"
@@ -185,7 +189,10 @@
             />-->
           </div>
           <span class="contact-name" v-text="group.name"></span>
-          <button class="green-button" @click.prevent="$parent.subscribeUser(group.id)">
+          <button
+            class="green-button"
+            @click.prevent="$parent.subscribeUser(group.id)"
+          >
             عضویت در گروه
             <i class="fa fa-arrow-left"></i>
           </button>

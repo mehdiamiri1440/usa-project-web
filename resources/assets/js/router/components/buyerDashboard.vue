@@ -9,7 +9,7 @@
   margin-right: 80px;
 }
 
-@media screen and (max-width: 994px) {
+@media screen and (max-width: 991px) {
   #main,
   #main.little-main {
     margin-right: 0 !important;

@@ -177,7 +177,7 @@ label {
   padding: 15px;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .images-wrapper,
   .main-contents-wrapper {
     width: initial;
@@ -239,12 +239,21 @@ label {
 
             <div
               class="modal-title"
-              v-text="'ویرایش ' + $parent.product.main.category_name + ' | ' + $parent.product.main.sub_category_name "
+              v-text="
+                'ویرایش ' +
+                $parent.product.main.category_name +
+                ' | ' +
+                $parent.product.main.sub_category_name
+              "
             ></div>
           </div>
           <div class="modal-body col-xs-12">
             <div class="row">
-              <input type="hidden" class="product-id" :value="$parent.product.main.id" />
+              <input
+                type="hidden"
+                class="product-id"
+                :value="$parent.product.main.id"
+              />
               <div class="col-xs-12 col-sm-6 pull-right">
                 <label class="content-label">مقدار موجودی (کیلوگرم)</label>
 
@@ -256,7 +265,10 @@ label {
                 />
 
                 <div class="text-danger">
-                  <span v-if="$parent.errors.stock" v-text="$parent.errors.stock[0]"></span>
+                  <span
+                    v-if="$parent.errors.stock"
+                    v-text="$parent.errors.stock[0]"
+                  ></span>
                 </div>
               </div>
 
@@ -315,11 +327,15 @@ label {
               </div>
             </div>
             <button
-              @click="$parent.editProduct('article-modal' + $parent.product.main.id)"
+              @click="
+                $parent.editProduct('article-modal' + $parent.product.main.id)
+              "
               type="submit"
-              style="border:none"
+              style="border: none"
               class="green-button"
-            >ثبت ویرایش</button>
+            >
+              ثبت ویرایش
+            </button>
           </div>
         </div>
       </div>
@@ -335,23 +351,36 @@ label {
             :key="photo.id"
             :base="$parent.str + '/'"
             :img="photo.file_path"
-            :alt="'فروش عمده ی ' + $parent.product.main.sub_category_name + ' '  + $parent.product.main.product_name + ' ' + $parent.product.main.city_name + ' - ' + $parent.product.main.province_name"
+            :alt="
+              'فروش عمده ی ' +
+              $parent.product.main.sub_category_name +
+              ' ' +
+              $parent.product.main.product_name +
+              ' ' +
+              $parent.product.main.city_name +
+              ' - ' +
+              $parent.product.main.province_name
+            "
           />
         </div>
       </div>
       <div class="share hidden-xs hidden-sm">
-        <button @click.prevent="$parent.copyProductLinkToClipBoard" class="share-button">
+        <button
+          @click.prevent="$parent.copyProductLinkToClipBoard"
+          class="share-button"
+        >
           <span>اشتراک گذاری</span>
           <i class="fa fa-share"></i>
         </button>
       </div>
       <p class="buskool-default-text hidden-xs hidden-sm">
-        باسکول هیچ‌گونه منفعت و مسئولیتی در قبال معامله شما ندارد.
-        با مطالعه‌ی راهنمای
+        باسکول هیچ‌گونه منفعت و مسئولیتی در قبال معامله شما ندارد. با مطالعه‌ی
+        راهنمای
         <a
           href="https://blog.buskool.com/%d8%b1%d8%a7%d9%87%d9%86%d9%85%d8%a7%db%8c-%d8%ae%d8%b1%db%8c%d8%af-%d8%a7%d9%85%d9%86/"
           target="_blank"
-        >خرید امن</a>
+          >خرید امن</a
+        >
         ، آسوده‌تر معامله کنید.
       </p>
     </div>
@@ -391,7 +420,10 @@ label {
           </button>
 
           <div class="share hidden-md hidden-lg pull-left">
-            <button @click.prevent="$parent.copyProductLinkToClipBoard" class="share-button">
+            <button
+              @click.prevent="$parent.copyProductLinkToClipBoard"
+              class="share-button"
+            >
               <span>اشتراک گذاری</span>
               <i class="fa fa-share"></i>
             </button>
@@ -408,18 +440,31 @@ label {
               <span class="gray-text">استان / شهر</span>
 
               <span
-                v-text="$parent.product.main.province_name + ' - ' + $parent.product.main.city_name"
+                v-text="
+                  $parent.product.main.province_name +
+                  ' - ' +
+                  $parent.product.main.city_name
+                "
               ></span>
             </li>
             <li>
               <span class="gray-text">مقدار موجودی</span>
 
-              <span v-text="getNumberWithCommas($parent.product.main.stock) + ' کیلوگرم '"></span>
+              <span
+                v-text="
+                  getNumberWithCommas($parent.product.main.stock) + ' کیلوگرم '
+                "
+              ></span>
             </li>
             <li>
               <span class="gray-text">حداقل سفارش</span>
 
-              <span v-text="getNumberWithCommas($parent.product.main.min_sale_amount) + ' کیلوگرم '"></span>
+              <span
+                v-text="
+                  getNumberWithCommas($parent.product.main.min_sale_amount) +
+                  ' کیلوگرم '
+                "
+              ></span>
             </li>
             <li v-if="!$parent.isMyProfile">
               <span class="gray-text">قیمت</span>
@@ -427,7 +472,10 @@ label {
               <span>استعلام بگیرید</span>
             </li>
           </ul>
-          <div v-if="$parent.product.main.description" class="product-description">
+          <div
+            v-if="$parent.product.main.description"
+            class="product-description"
+          >
             <span class="gray-text">توضیحات</span>
             <p v-html="$parent.product.main.description"></p>
           </div>
@@ -436,17 +484,30 @@ label {
     </div>
   </div>
 
-  <div v-else class="wrapper-bg main-product-wrapper default-product-contents-wrapper">
+  <div
+    v-else
+    class="wrapper-bg main-product-wrapper default-product-contents-wrapper"
+  >
     <div class="default-image-wrapper text-right text-rtl pull-left">
-      <div class="default-product-image placeholder-content content-full-width padding-0"></div>
+      <div
+        class="default-product-image placeholder-content content-full-width padding-0"
+      ></div>
 
-      <div class="default-button-min-with placeholder-content margin-15-0 hidden-xs hidden-sm"></div>
-      <p class="content-default-width placeholder-content hidden-xs hidden-sm"></p>
-      <p class="content-half-width placeholder-content margin-15-0 hidden-xs hidden-sm"></p>
+      <div
+        class="default-button-min-with placeholder-content margin-15-0 hidden-xs hidden-sm"
+      ></div>
+      <p
+        class="content-default-width placeholder-content hidden-xs hidden-sm"
+      ></p>
+      <p
+        class="content-half-width placeholder-content margin-15-0 hidden-xs hidden-sm"
+      ></p>
     </div>
 
     <div class="default-product-contents text-rtl pull-right">
-      <div class="content-default-width placeholder-content padding-15-0 margin-15-0"></div>
+      <div
+        class="content-default-width placeholder-content padding-15-0 margin-15-0"
+      ></div>
       <div class="default-action-buttons hidden-md hidden-lg">
         <div class="default-button placeholder-content pull-right"></div>
         <div class="default-button placeholder-content pull-left"></div>
@@ -454,24 +515,44 @@ label {
 
       <ul class="default-product-list">
         <li>
-          <span class="placeholder-content content-min-width placeholder-content"></span>
-          <span class="placeholder-content content-min-width placeholder-content"></span>
+          <span
+            class="placeholder-content content-min-width placeholder-content"
+          ></span>
+          <span
+            class="placeholder-content content-min-width placeholder-content"
+          ></span>
         </li>
         <li>
-          <span class="placeholder-content content-min-width placeholder-content"></span>
-          <span class="placeholder-content content-min-width placeholder-content"></span>
+          <span
+            class="placeholder-content content-min-width placeholder-content"
+          ></span>
+          <span
+            class="placeholder-content content-min-width placeholder-content"
+          ></span>
         </li>
         <li>
-          <span class="placeholder-content content-min-width placeholder-content"></span>
-          <span class="placeholder-content content-min-width placeholder-content"></span>
+          <span
+            class="placeholder-content content-min-width placeholder-content"
+          ></span>
+          <span
+            class="placeholder-content content-min-width placeholder-content"
+          ></span>
         </li>
         <li>
-          <span class="placeholder-content content-min-width placeholder-content"></span>
-          <span class="placeholder-content content-min-width placeholder-content"></span>
+          <span
+            class="placeholder-content content-min-width placeholder-content"
+          ></span>
+          <span
+            class="placeholder-content content-min-width placeholder-content"
+          ></span>
         </li>
         <li>
-          <span class="placeholder-content content-min-width placeholder-content"></span>
-          <span class="placeholder-content content-min-width placeholder-content"></span>
+          <span
+            class="placeholder-content content-min-width placeholder-content"
+          ></span>
+          <span
+            class="placeholder-content content-min-width placeholder-content"
+          ></span>
         </li>
       </ul>
       <p class="content-default-width placeholder-content margin-15-0"></p>
@@ -486,14 +567,14 @@ label {
 import Carousel from "./carousel";
 export default {
   components: {
-    Carousel
+    Carousel,
   },
-  methods:{
-	  getNumberWithCommas:function(number){
-		if (number || typeof number === "number")
-			return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		else return "";
-	}
-  }
+  methods: {
+    getNumberWithCommas: function (number) {
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
+    },
+  },
 };
 </script>

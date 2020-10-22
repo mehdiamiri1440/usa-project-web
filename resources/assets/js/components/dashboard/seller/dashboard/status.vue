@@ -112,7 +112,7 @@
   }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .list-title,
   .needs,
   .list-time {
@@ -156,7 +156,7 @@
           </div>
           <div class="col-xs-9 col-sm-4 pull-left text-left">
             <router-link
-              :to="{ name : 'dashboardPricingTableSeller'}"
+              :to="{ name: 'dashboardPricingTableSeller' }"
               class="green-button blue-brand-background"
             >
               <i class="fa fa-arrow-up"></i>
@@ -168,9 +168,9 @@
       <div class="header-links col-xs-12">
         <div class="header-links-wrapper">
           <router-link
-            v-for="(link , index) in linkItems"
+            v-for="(link, index) in linkItems"
             :key="index"
-            :to="{name : link.href}"
+            :to="{ name: link.href }"
             class="green-button"
           >
             <i :class="link.icon"></i>
@@ -181,7 +181,10 @@
 
       <div v-if="statusData" class="boxes col-xs-12">
         <div class="row">
-          <div v-for="box in boxes" class="pull-right col-xs-12 col-sm-6 col-md-4 col-lg-3">
+          <div
+            v-for="box in boxes"
+            class="pull-right col-xs-12 col-sm-6 col-md-4 col-lg-3"
+          >
             <div class="box">
               <div class="box-title">
                 <span v-text="box.title"></span>
@@ -191,11 +194,15 @@
                   <span v-if="box.status" v-text="box.status"></span>
                   <span v-if="box.staticName" v-text="box.staticName"></span>
                 </div>
-                <i :class="box.icon" class="box-icon" :style="{ color : [box.iconColor]}"></i>
+                <i
+                  :class="box.icon"
+                  class="box-icon"
+                  :style="{ color: [box.iconColor] }"
+                ></i>
               </div>
               <div v-if="box.upgrade" class="box-upgrade-link">
                 <router-link
-                  :to="{ name:'dashboardPricingTableSeller'}"
+                  :to="{ name: 'dashboardPricingTableSeller' }"
                   class="green-button blue-brand-background"
                 >
                   <i class="fa fa-arrow-up"></i>
@@ -209,20 +216,29 @@
 
       <div v-else class="boxes col-xs-12">
         <div class="row">
-          <div v-for="items in 6" class="pull-right col-xs-12 col-sm-6 col-md-4 col-lg-3">
+          <div
+            v-for="items in 6"
+            class="pull-right col-xs-12 col-sm-6 col-md-4 col-lg-3"
+          >
             <div class="box">
               <div class="box-title-default">
-                <span class="content-half-width placeholder-content margin-15"></span>
+                <span
+                  class="content-half-width placeholder-content margin-15"
+                ></span>
               </div>
               <div class="box-main">
                 <div class="content-wrapper">
-                  <span class="content-full-width placeholder-content margin-15"></span>
+                  <span
+                    class="content-full-width placeholder-content margin-15"
+                  ></span>
                   <!-- <span v-if="box.staticName" v-text="box.staticName"></span> -->
                 </div>
                 <span class="default-icon pull-left placeholder-content"></span>
               </div>
               <div class="box-upgrade-link">
-                <span class="content-full-width placeholder-content default-item-wrapper col-xs-12"></span>
+                <span
+                  class="content-full-width placeholder-content default-item-wrapper col-xs-12"
+                ></span>
               </div>
             </div>
           </div>
@@ -237,39 +253,39 @@
 import { eventBus } from "../../../../router/router";
 
 export default {
-  data: function() {
+  data: function () {
     return {
       statusData: "",
       linkItems: [
         {
           href: "registerProductSeller",
           icon: "fa fa-plus",
-          text: "افزودن محصول"
+          text: "افزودن محصول",
         },
         {
           href: "buyAdRequestsSeller",
           icon: "fa fa-list-alt",
-          text: "درخواست های خرید"
+          text: "درخواست های خرید",
         },
         {
           href: "messagesSeller",
           icon: "fas fa-comment-alt",
-          text: "پیام ها"
-        }
+          text: "پیام ها",
+        },
       ],
 
       boxes: "",
-      items: []
+      items: [],
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       eventBus.$emit("subHeader", false);
 
       var self = this;
       axios
         .post("/get_seller_dashboard_required_data")
-        .then(function(response) {
+        .then(function (response) {
           self.statusData = response.data;
 
           self.boxes = [
@@ -279,7 +295,7 @@ export default {
               iconColor: "#19668E",
               staticName: "",
               upgrade: response.data.active_pakage_type < 3 ? true : false,
-              status: self.checkPackage(response.data.active_pakage_type)
+              status: self.checkPackage(response.data.active_pakage_type),
             },
             {
               title: "تعداد محصولات قابل ثبت",
@@ -290,7 +306,7 @@ export default {
               status:
                 response.data.max_allowed_product_register_count == 0
                   ? "صفر"
-                  : response.data.max_allowed_product_register_count + " محصول"
+                  : response.data.max_allowed_product_register_count + " محصول",
             },
             {
               title: "سقف روزانه تعداد پاسخ ها به درخواست های خرید",
@@ -298,7 +314,7 @@ export default {
               iconColor: "#D8A679",
               staticName: "",
               upgrade: false,
-              status: self.checkRequest(response.data.max_buyAds_reply)
+              status: self.checkRequest(response.data.max_buyAds_reply),
             },
             {
               title: "فروشنده معتبر",
@@ -306,7 +322,7 @@ export default {
               iconColor: "#21AD93",
               staticName: "",
               upgrade: false,
-              status: response.data.is_valid ? "بله" : "خیر"
+              status: response.data.is_valid ? "بله" : "خیر",
             },
             {
               title: "میزان اعتبار",
@@ -316,7 +332,7 @@ export default {
               upgrade: false,
               status: response.data.reputation_score
                 ? response.data.reputation_score
-                : "بدون اعتبار"
+                : "بدون اعتبار",
             },
             {
               title: "تعداد محصولات ثبت شده",
@@ -327,8 +343,8 @@ export default {
               status:
                 response.data.confirmed_products_count == 0
                   ? "صفر"
-                  : response.data.confirmed_products_count + " محصول"
-            }
+                  : response.data.confirmed_products_count + " محصول",
+            },
             /*					{
 								title : 'احتمال پاسخگویی به پیام',
 								icon : 'fa fa-chart-line',
@@ -369,10 +385,10 @@ export default {
         setRequest = requestNumber + " پاسخ";
       }
       return setRequest;
-    }
+    },
   },
   mounted() {
     this.init();
-  }
+  },
 };
 </script>
