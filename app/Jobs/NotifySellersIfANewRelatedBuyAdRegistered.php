@@ -182,12 +182,12 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
 
         if($user_record->id >= 15559){
             $this->notify_product_owner_via_sms($user_record->phone);
-            if($user_record->active_pakage_type > 0){
-                $this->notify_product_owner_via_sms($user_record->phone);
-            }
-            else{
-                $this->notify_product_owner_via_sms($user_record->phone,$delayed = true);
-            }
+            // if($user_record->active_pakage_type > 0){
+                // $this->notify_product_owner_via_sms($user_record->phone);
+            // }
+            // else{
+            //     $this->notify_product_owner_via_sms($user_record->phone,$delayed = true);
+            // }
             
 
             $this->notify_product_owner_via_app_notification($user_id);
