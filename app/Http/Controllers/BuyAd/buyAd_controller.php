@@ -1112,21 +1112,25 @@ class buyAd_controller extends Controller
             }
         });
 
-        if($my_buyAd_suggestions){
+        $final_golden_buyAds = [];
+        
+        if(count($my_buyAd_suggestions) > 0){
             $golden_buyAds = $this->get_golden_buyAds_for_this_user($user_id);
-            $final_golden_buyAds = [];
 
             $my_buyAd_suggestions = $my_buyAd_suggestions->toArray();
 
             if($golden_buyAds){
                 $my_buyAd_suggestion_ids = [];
+                $my_buyer_ids = [];
+
                 foreach($my_buyAd_suggestions as $buyAd)
                 {
                     $my_buyAd_suggestion_ids[] = $buyAd->id;
+                    $my_buyer_ids[] = $buyAd->buyer_id;
                 }
 
-                $final_golden_buyAds = array_filter($golden_buyAds,function($buyAd) use($my_buyAd_suggestion_ids){
-                    return in_array($buyAd->id,$my_buyAd_suggestion_ids) === false;
+                $final_golden_buyAds = array_filter($golden_buyAds,function($buyAd) use($my_buyAd_suggestion_ids,$my_buyer_ids){
+                    return in_array($buyAd->id,$my_buyAd_suggestion_ids) === false && in_array($buyAd->buyer_id,$my_buyer_ids) === false;
                 });
             }
             
@@ -1164,8 +1168,6 @@ class buyAd_controller extends Controller
 
             $product_name_array = $this->remove_black_list_words($product_name_array);
 
-            // var_dump($product_name_array);
-
             $golden_buyAds = DB::table('buy_ads')
                                 ->join('categories','categories.id','=','buy_ads.category_id')
                                 ->join('myusers','myusers.id','=','buy_ads.myuser_id')
@@ -1183,7 +1185,6 @@ class buyAd_controller extends Controller
                                 ->values()
                                 ->toArray();
 
-            // var_dump($golden_buyAds);
 
             return $golden_buyAds;
         }
