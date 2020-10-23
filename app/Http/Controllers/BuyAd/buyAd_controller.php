@@ -1112,9 +1112,10 @@ class buyAd_controller extends Controller
             }
         });
 
-        if($my_buyAd_suggestions){
+        $final_golden_buyAds = [];
+        
+        if(count($my_buyAd_suggestions) > 0){
             $golden_buyAds = $this->get_golden_buyAds_for_this_user($user_id);
-            $final_golden_buyAds = [];
 
             $my_buyAd_suggestions = $my_buyAd_suggestions->toArray();
 
