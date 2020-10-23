@@ -371,11 +371,11 @@ export default {
               icon: "fas fa-award	",
               iconColor: "#21AD93",
               staticName: "",
-              button: response.data.is_valid ? false : true,
+              button: response.data.is_verified ? false : true,
               routerName: "profileBasicSellerVeficiation",
               linkName: "احراز هویت",
               linkIcon: "fa fa-check",
-              status: response.data.is_valid ? "بله" : "خیر",
+              status: response.data.is_verified ? "بله" : "خیر",
             },
 
             {
@@ -383,11 +383,11 @@ export default {
               icon: "fas fa-star",
               iconColor: "#FFAC58",
               staticName: "",
-              button: response.data.active_pakage_type > 0 ? true : false,
+              button: response.data.access_to_golden_buyAds ? false : true,
               routerName: "dashboardPricingTableSeller",
               linkName: "ارتقا عضویت",
               linkIcon: "fa fa-arrow-up",
-              status: response.data.active_pakage_type > 0 ? "بله" : "خیر",
+              status: response.data.access_to_golden_buyAds ? "بله" : "خیر",
             },
 
             // {
