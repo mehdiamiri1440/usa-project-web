@@ -345,6 +345,8 @@ class user_controller extends Controller
         $max_buyAds_reply = $pakage_info['buyAd-reply-count'] + $user_record->extra_buyAd_reply_capacity;
         $is_valid = $pakage_info['validated-seller'];
         $max_allowed_product_register_count = $pakage_info['max-products'] + $user_record->extra_product_capacity - $confirmed_products_count;
+        $is_verified = $user_record->is_verified;
+        $access_to_golden_buyAds = $user_pakage_type > 0 ? true : false;
 
         return response()->json(compact([
             'active_pakage_type',
@@ -353,6 +355,8 @@ class user_controller extends Controller
             'is_valid',
             'max_allowed_product_register_count',
             'confirmed_products_count',
+            'is_verified',
+            'access_to_golden_buyAds'
         ]), 200);
     }
 
