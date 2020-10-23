@@ -97,8 +97,6 @@
   .modal-body {
     padding-top: 40px;
   }
-}
-@media screen and (max-width: 992px) {
   #main.is-required-fix-alert {
     margin-top: 89px !important;
   }
