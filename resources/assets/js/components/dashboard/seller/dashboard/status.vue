@@ -233,9 +233,10 @@
               <div v-if="box.button" class="box-upgrade-link">
                 <router-link
                   :to="{ name: box.routerName }"
-                  class="green-button gray-brand-background"
+                  class="green-button"
+                  :class="{'gray-brand-background' : index > 0}"
                 >
-                  <i :class="box.linkIcon"></i>
+                  <i v-if="box.linkIcon" :class="box.linkIcon"></i>
                   {{ box.linkName }}
                 </router-link>
               </div>
@@ -347,8 +348,8 @@ export default {
               iconColor: "#aa49c8",
               staticName: "",
               button: true,
-              routerName: "registerProductSeller",
-              linkName: "ثبت محصول",
+              routerName: "dashboardProductPricing",
+              linkName: "افزایش ظرفیت ثبت محصول",
               linkIcon: "fa fa-plus",
               status:
                 response.data.max_allowed_product_register_count == 0
@@ -362,7 +363,7 @@ export default {
               staticName: "",
               button: true,
               routerName: "dashboardBuyAdPricing",
-              linkName: "افزایش ضرفیت",
+              linkName: "افزایش ظرفیت پاسخ گویی",
               linkIcon: "fa fa-arrow-up",
               status: self.checkRequest(response.data.max_buyAds_reply),
             },
@@ -373,8 +374,8 @@ export default {
               staticName: "",
               button: response.data.is_verified ? false : true,
               routerName: "profileBasicSellerVeficiation",
-              linkName: "احراز هویت",
-              linkIcon: "fa fa-check",
+              linkName: "احراز هویت کنید",
+              linkIcon: "",
               status: response.data.is_verified ? "بله" : "خیر",
             },
 
@@ -385,8 +386,8 @@ export default {
               staticName: "",
               button: response.data.access_to_golden_buyAds ? false : true,
               routerName: "dashboardPricingTableSeller",
-              linkName: "ارتقا عضویت",
-              linkIcon: "fa fa-arrow-up",
+              linkName: "دسترسی به درخواست های طلایی",
+              linkIcon: "",
               status: response.data.access_to_golden_buyAds ? "بله" : "خیر",
             },
 
