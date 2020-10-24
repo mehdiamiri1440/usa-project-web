@@ -1180,6 +1180,7 @@ class buyAd_controller extends Controller
                                 })
                                 ->whereBetween('buy_ads.updated_at',[Carbon::now()->subHours(4),Carbon::now()])
                                 ->where('myuser_id','<>',$user_id)
+                                ->where('confirmed',true)
                                 ->select('buy_ads.id','myusers.first_name', 'myusers.last_name' ,'buy_ads.name', 'buy_ads.requirement_amount' ,'categories.category_name as subcategory_name' ,'buy_ads.myuser_id as buyer_id' )
                                 ->get()
                                 ->values()
