@@ -604,7 +604,7 @@ export default {
 
       swal({
         title: "حذف محصول",
-        text: "آیا میخواید این محصول را حذف کنید؟",
+        text: "آیا میخواهید این محصول را حذف کنید؟",
         // content: closeIconBtn,
         className: "custom-swal-with-cancel",
         buttons: {
@@ -717,7 +717,7 @@ export default {
 
       let content = document.createElement("div");
       content.innerHTML =
-        '<p dir="rtl">سقف تعداد محصولات ثبت شده شما پر شده است.</p><br/><p class="red-text" dir="rtl"><b>برای ثبت محصولات جدید، لطفا دکمه افزایش ظرفیت بزنید.</b></p>';
+        '<p dir="rtl">سقف تعداد محصولات ثبت شده شما پر شده است.</p><br/><p class="red-text" dir="rtl"><b>برای ثبت محصولات جدید، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
       swal({
         title: "محدودیت ثبت محصول جدید",
         content: content,
