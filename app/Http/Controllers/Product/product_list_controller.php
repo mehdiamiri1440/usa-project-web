@@ -407,6 +407,11 @@ class product_list_controller extends Controller
                 $tmp_products = $this->get_the_most_related_products_to_buyer($the_buyer_last_buyAd_request,$tmp_products);
                 $tmp_products = array_slice($tmp_products,0,5);
             }
+            else{
+                if($user_info->created_at->diffInHours(Carbon::now()) <= 6){
+                    return $this->sort_products_by_response_time($products);
+                }
+            }
         }
 
         $user_response_info = $this->get_user_response_info($user_id);
