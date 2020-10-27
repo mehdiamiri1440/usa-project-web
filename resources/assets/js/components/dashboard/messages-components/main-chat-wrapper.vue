@@ -109,6 +109,8 @@
   font-size: 22px;
   position: relative;
   top: 5px;
+  padding: 0;
+  padding-right: 10px;
 }
 
 .report-button {
@@ -209,14 +211,21 @@
 }
 
 .send-message-form .button-wrapper button {
-  border: none;
-  background: #00c569;
+  float: right;
+
   width: 50px;
+
   height: 50px;
-  border-radius: 50px;
-  font-size: 22px;
+
   color: #fff;
-  padding-left: 5px;
+
+  background: linear-gradient(90deg, #00c569 0%, #21ad93 100%);
+
+  border: none;
+
+  border-radius: 35px;
+
+  padding: 0 10px;
 }
 
 #chat-menu-items {
