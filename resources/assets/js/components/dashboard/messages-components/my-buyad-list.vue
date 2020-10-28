@@ -850,14 +850,14 @@ export default {
             eventBus.$emit("ChatInfo", contact);
 
             self.registerComponentStatistics(
-              "buyAdReply",
+              "suggestedBuyAdReply",
               "openChat",
               "click on open chatBox"
             );
           } else {
             eventBus.$emit("modal", "buyAdReplyLimit");
             self.registerComponentStatistics(
-              "buyAdReply",
+              "suggestedBuyAdReply",
               "openChat",
               "permission denied"
             );
@@ -867,8 +867,8 @@ export default {
     openGoldenChatRestrictionModal: function () {
       eventBus.$emit("modal", "goldenBuyAdReplyLimit");
 
-      self.registerComponentStatistics(
-        "buyAdReply",
+      this.registerComponentStatistics(
+        "suggestedBuyAdReply",
         "openChat",
         "permission denied"
       );

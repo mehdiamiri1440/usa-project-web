@@ -44,9 +44,14 @@ class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
 
         $topics = $this->generate_related_topics($the_most_related_buyAd_owners_ids);
 
+        $subcategory_record = category::where('id', $this->product->category_id)
+            ->select('category_name')
+            ->get()
+            ->first();
+
         $data = [
             'title' => 'باسکول',
-            'message' => "یک فروشنده جدید {$this->product->product_name} برای شما پیدا کردیم",
+            'message' => "یک فروشنده جدید {$subcategory_record->category_name} {$this->product->product_name} برای شما پیدا کردیم",
             'payload' => [
                 'BTarget' => 'productList',
                 'productId' => $this->product->id,
