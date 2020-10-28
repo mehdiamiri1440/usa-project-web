@@ -700,7 +700,7 @@ export default {
     openGoldenChatRestrictionModal: function () {
       eventBus.$emit("modal", "goldenBuyAdReplyLimit");
 
-      self.registerComponentStatistics(
+      this.registerComponentStatistics(
         "buyAdReply",
         "openChat",
         "permission denied"
