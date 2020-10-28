@@ -350,6 +350,8 @@ class message_controller extends Controller
 
         $this->mark_all_messages_as_read($user_id, $request->user_id);
 
+        $messages = $this->tag_phone_number_messages($messages);
+
         $is_verified = myuser::find($request->user_id)->is_verified;
 
         return response()->json([
@@ -358,6 +360,25 @@ class message_controller extends Controller
             'is_verified' => $is_verified,
             'current_user_id' => $user_id,
         ], 200);
+    }
+
+    protected function tag_phone_number_messages(&$messages)
+    {
+        foreach($messages as $msg){
+            if($this->is_this_string_a_valid_phone_number($msg->text)){
+                $msg->is_phone = true;
+            }
+            else{
+                $msg->is_phone = false;
+            }
+        }
+
+        return $messages;
+    }
+
+    protected function is_this_string_a_valid_phone_number($string)
+    {
+        return preg_match("/^((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))$/u",$string) === 1;
     }
 
     protected function mark_all_messages_as_read($reciver_id, $sender_id)
