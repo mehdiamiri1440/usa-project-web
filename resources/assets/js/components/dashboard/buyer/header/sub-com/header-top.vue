@@ -4,7 +4,7 @@
   border: none;
   background: none;
   font-size: 25px;
-  padding: 17px 30px 11px 24px;
+  padding: 19px 24px 11px;
   display: none;
 }
 

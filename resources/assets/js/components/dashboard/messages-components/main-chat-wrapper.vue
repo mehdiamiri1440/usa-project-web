@@ -159,6 +159,7 @@
 .message-content-wrapper {
   max-width: 455px;
   padding: 5px 10px;
+  display: block;
 }
 .message-wrapper .chat-page .message-receive {
   float: left;
@@ -349,6 +350,31 @@
     border-color: initial;
     color: #21ad92;
   }
+  .message-button-wrapper {
+    margin: 0 -10px -5px;
+    overflow: hidden;
+    border-radius: 0 0 4px 4px;
+  }
+  .message-button-wrapper button {
+    display: block;
+    width: 100%;
+    background: #21ad93;
+    text-align: center;
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    padding: 5px;
+    margin-top: 8px;
+  }
+  .message-button-wrapper button i {
+    font-size: 11px;
+  }
+  .is-phone-active-wrapper {
+    min-width: 200px;
+  }
+  .is-phone-active-text {
+    font-size: 18px;
+  }
 }
 @media screen and (max-width: 345px) {
   .message-wrapper .message-contact-title-img {
@@ -465,7 +491,62 @@
                 : 'message-receive',
             ]"
           >
-            <div class="message-content-wrapper">
+            <div
+              v-if="msg.is_phone && !checkMessageListClass(msg.sender_id)"
+              class="message-content-wrapper is-phone-active-wrapper"
+            >
+              <a
+                :href="'tel:' + msg.text"
+                class="hidden-sm hidden-md hidden-lg"
+              >
+                <span class="is-phone-active-text">
+                  {{ msg.text }}
+                </span>
+                <span class="message-chat-date">
+                  <span v-if="msg.created_at">{{
+                    msg.created_at | moment("jYY/jMM/jDD, h:mm A")
+                  }}</span>
+                  <span v-else>{{
+                    Date() | moment("jYY/jMM/jDD, h:mm A")
+                  }}</span>
+                  <span
+                    class="check-items"
+                    v-if="msg.sender_id === $parent.currentUserId"
+                  >
+                    <i class="fa fa-check" v-if="msg.created_at"></i>
+                    <i class="far fa-clock" v-else></i>
+                    <i class="fa fa-check" v-if="msg.is_read"></i>
+                  </span>
+                  <div class="message-button-wrapper">
+                    <button>
+                      <i class="fa fa-phone-alt"></i>
+                      تماس
+                    </button>
+                  </div>
+                </span>
+              </a>
+              <div class="message-content-wrapper hidden-xs">
+                <span v-text="msg.text"></span>
+                <span class="message-chat-date">
+                  <span v-if="msg.created_at">{{
+                    msg.created_at | moment("jYY/jMM/jDD, h:mm A")
+                  }}</span>
+                  <span v-else>{{
+                    Date() | moment("jYY/jMM/jDD, h:mm A")
+                  }}</span>
+                  <span
+                    class="check-items"
+                    v-if="msg.sender_id === $parent.currentUserId"
+                  >
+                    <i class="fa fa-check" v-if="msg.created_at"></i>
+                    <i class="far fa-clock" v-else></i>
+                    <i class="fa fa-check" v-if="msg.is_read"></i>
+                  </span>
+                </span>
+              </div>
+            </div>
+
+            <div v-else class="message-content-wrapper">
               <span v-text="msg.text"></span>
               <span class="message-chat-date">
                 <span v-if="msg.created_at">{{
