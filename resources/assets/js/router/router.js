@@ -281,6 +281,17 @@ const router = new Router({
           },
         },
         {
+          path: "my-buyAd-requests",
+          name: "myBuyAdRequestsBuyer",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/buyer/my-requests/buyAd-requests.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
           path: "guide",
           name: "guideBuyer",
           components: {
