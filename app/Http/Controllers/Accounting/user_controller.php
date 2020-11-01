@@ -27,6 +27,7 @@ class user_controller extends Controller
         $rules = array(
             'phone' => 'required',
             'password' => 'required',
+            'client' => 'string',
             'plain' => 'boolean'
         );
 
@@ -54,6 +55,7 @@ class user_controller extends Controller
             $user_confirmed_profile_record_status = $this->does_user_have_confirmed_profile_record($user->id);
 
             $this->set_user_session($user);
+            $this->set_last_login_info($user->id,$request);
             $jwt_token = JWTAuth::fromUser($user);
 
             return response()->json([
@@ -97,6 +99,24 @@ class user_controller extends Controller
             'province' => $user_info->province,
             'profile_photo' => $user_profile_record ? $user_profile_record->profile_photo : null,
         ]);
+    }
+
+    protected function set_last_login_info($user_id,&$request)
+    {
+        if($request->has('client') && $request->client == 'mobile')
+        {
+            $last_login_client = 'mobile';
+        }
+        else {
+            $last_login_client = 'web';
+        }
+
+        DB::table('myusers')
+            ->where('id',$user_id)
+            ->update([
+                'last_login_client' => $last_login_client,
+                'last_login_date'   => Carbon::now()
+            ]);
     }
 
     public function does_user_name_already_exists(Request $request)
