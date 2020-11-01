@@ -9,7 +9,7 @@
 }
 
 .contact-items {
-  padding-top: 99px;
+  padding-top: 97px;
 }
 
 li.contact-item {
@@ -789,7 +789,7 @@ export default {
   methods: {
     init() {
       this.getBuyAds();
-      this.isOsAndroid();
+      // this.isOsAndroid();
     },
     getBuyAds() {
       this.isLoading = true;
