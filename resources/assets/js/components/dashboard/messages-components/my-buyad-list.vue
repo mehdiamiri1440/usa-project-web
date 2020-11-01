@@ -789,7 +789,7 @@ export default {
   methods: {
     init() {
       this.getBuyAds();
-      // this.isOsAndroid();
+      this.isOsAndroid();
     },
     getBuyAds() {
       this.isLoading = true;
