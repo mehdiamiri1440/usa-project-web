@@ -109,7 +109,8 @@ class sms_controller extends Controller
 	{
 		$rules = [
             'verification_code' => 'required',
-            'phone' => ['required','regex:/^((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))$/u']
+            'phone' => ['required','regex:/^((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))$/u'],
+            'client' => 'string'
 		];
 		
 		$this->validate($request,$rules);
@@ -121,10 +122,18 @@ class sms_controller extends Controller
 
                 $user_record = myuser::where('phone',$phone)->first();
                 if($user_record){
+                    if($request->filled('client') && $request->client == 'mobile'){
+                        $last_login_client = 'mobile';
+                    }
+                    else{
+                        $last_login_client = 'web';
+                    }
+
                     $req = Request::create('/dologin', 'POST',[
                         'phone' => $user_record->phone,
                         'password' => $user_record->password,
-                        'plain' => false
+                        'client' => $last_login_client,
+                        'plain' => false,
                     ]);
 
                     $user_controller_object = new user_controller(new userService);
