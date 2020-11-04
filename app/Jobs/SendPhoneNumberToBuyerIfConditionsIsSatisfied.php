@@ -111,7 +111,7 @@ class SendPhoneNumberToBuyerIfConditionsIsSatisfied implements ShouldQueue
     {
         $response_info = $this->get_user_response_info($seller_id);
 
-        if($response_info['response_rate'] >= 70)
+        if($response_info['response_rate'] >= 70 || $response_info['response_rate'] == 0)
         {
             return true;
         }
