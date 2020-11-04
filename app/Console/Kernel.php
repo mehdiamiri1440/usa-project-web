@@ -10,6 +10,7 @@ use App\Jobs\SendReminderSMSToSellers;
 use App\Jobs\CheckElevatorExpiry;
 use App\Jobs\SendUpgradeAccoutnSMSToSellers;
 use App\Jobs\CacheProductList;
+use App\Jobs\SendPhoneNumberToBuyerIfConditionsIsSatisfied;
 use App\Jobs\Notifiers\RetentionReminder;
 use App\Jobs\Notifiers\BuyAdRegisterReminder;
 use App\Jobs\Notifiers\ProductRegisterReminder;
@@ -91,6 +92,12 @@ class Kernel extends ConsoleKernel
             ->weekly()
             ->tuesdays()
             ->at('11:45');
+
+        $phone_number_auto_sending_job = new SendPhoneNumberToBuyerIfConditionsIsSatisfied();
+        $schedule->job($phone_number_auto_sending_job)
+                ->hourlyAt(22)
+                ->between('6:00', '22:00');
+
 
         // $schedule->command('backup:clean')->daily()->at('12:27');
         $schedule->command('backup:run --only-db')->daily()->at('01:00');

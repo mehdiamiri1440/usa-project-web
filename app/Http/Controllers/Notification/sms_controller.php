@@ -288,7 +288,7 @@ class sms_controller extends Controller
                             ->get()->first()
                             ->first_name;
 
-        var_dump($user_first_name);
+        
         try{
             Smsir::ultraFastSend(['name' => $user_first_name],$pattern_code,$phone_number);
         }
