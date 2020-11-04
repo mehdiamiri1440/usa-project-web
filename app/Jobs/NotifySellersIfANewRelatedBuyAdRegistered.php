@@ -40,6 +40,7 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
     {
         $seller_finder_controller_object = new seller_finder_controller();
         $the_most_related_product_owners_ids = $seller_finder_controller_object->get_the_most_related_product_owners_id_to_the_given_buyAd_if_any($this->buyAd);
+        $the_most_related_product_owners_ids = array_unique($the_most_related_product_owners_ids);
         
         $now = Carbon::now();
 

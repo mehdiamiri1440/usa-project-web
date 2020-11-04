@@ -46,7 +46,7 @@ class SendPhoneNumberToBuyerIfConditionsIsSatisfied implements ShouldQueue
 
     protected function get_array_of_arrays_for_phone_number_sending_from_sellers_to_buyers()
     {
-        $from_time = Carbon::now()->subMinutes(10);
+        $from_time = Carbon::now()->subMinutes(60); //last hour
         $to_time = Carbon::now();
 
         $data = DB::table('messages')
@@ -89,8 +89,7 @@ class SendPhoneNumberToBuyerIfConditionsIsSatisfied implements ShouldQueue
         $is_seller_qualified = $this->is_seller_have_required_response_rate($item['seller_id']);
         $is_buyer_allowed = $this->is_buyer_allowed_to_receive_phone_number($item['buyer_id']);
 
-        return $is_buyer_allowed;
-        return true;
+        return $is_buyer_allowed && $is_seller_qualified;
     }
 
     protected function is_buyer_allowed_to_receive_phone_number($buyer_id)
