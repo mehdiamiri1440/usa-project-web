@@ -40,8 +40,10 @@ class SendPhoneNumberToBuyerIfConditionsIsSatisfied implements ShouldQueue
         $filtered_items = array_filter($array_of_arrays_for_phone_number_sending_from_sellers_to_buyers,function($item){
             return $this->are_conditions_satisfied_for_phone_number_auto_sending($item);
         });
-        
-        $this->send_phone_number_from_sellers_to_associated_buyers($filtered_items);
+
+        if(count($filtered_items) <= $this->max_daily_auto_sent_phone_numbers_to_buyer){
+            $this->send_phone_number_from_sellers_to_associated_buyers($filtered_items);
+        }
     }
 
     protected function get_array_of_arrays_for_phone_number_sending_from_sellers_to_buyers()
@@ -61,7 +63,7 @@ class SendPhoneNumberToBuyerIfConditionsIsSatisfied implements ShouldQueue
                                     ->whereRaw('messages.sender_id = m2.sender_id')
                                     ->whereRaw('messages.receiver_id = m2.receiver_id')
                                     ->where("m2.created_at", "<", $from_time);
-                        })->whereNotExists(function($q){
+                        })->whereNotExists(function($q){ //prevent douplication
                             $q->select(DB::raw(1))
                                     ->from('auto_sent_phone_numbers_meta_datas as tmp')
                                     ->whereRaw('messages.sender_id = tmp.receiver_id')
