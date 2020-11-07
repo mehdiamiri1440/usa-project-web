@@ -40,10 +40,10 @@ class SendPhoneNumberToBuyerIfConditionsIsSatisfied implements ShouldQueue
         $filtered_items = array_filter($array_of_arrays_for_phone_number_sending_from_sellers_to_buyers,function($item){
             return $this->are_conditions_satisfied_for_phone_number_auto_sending($item);
         });
-
-        if(count($filtered_items) <= $this->max_daily_auto_sent_phone_numbers_to_buyer){
-            $this->send_phone_number_from_sellers_to_associated_buyers($filtered_items);
-        }
+    
+        
+        $this->send_phone_number_from_sellers_to_associated_buyers($filtered_items);
+        
     }
 
     protected function get_array_of_arrays_for_phone_number_sending_from_sellers_to_buyers()
@@ -63,7 +63,7 @@ class SendPhoneNumberToBuyerIfConditionsIsSatisfied implements ShouldQueue
                                     ->whereRaw('messages.sender_id = m2.sender_id')
                                     ->whereRaw('messages.receiver_id = m2.receiver_id')
                                     ->where("m2.created_at", "<", $from_time);
-                        })->whereNotExists(function($q){ //prevent douplication
+                        })->whereNotExists(function($q){ //prevent duplication
                             $q->select(DB::raw(1))
                                     ->from('auto_sent_phone_numbers_meta_datas as tmp')
                                     ->whereRaw('messages.sender_id = tmp.receiver_id')
@@ -72,18 +72,40 @@ class SendPhoneNumberToBuyerIfConditionsIsSatisfied implements ShouldQueue
                         ->get();
 
         $result = [];
+        $buyer_ids = [];
         foreach($data as $item)
         {
-            $result[] = [
-                'buyer_id' => $item->buyer_id,
-                'seller_id' => $item->seller_id
-            ];
+            if(in_array($item->buyer_id,$buyer_ids) == true){
+                $tmp = array_count_values($buyer_ids);
+                if($tmp[$buyer_id] <= $this->max_daily_auto_sent_phone_numbers_to_buyer)
+                {
+                    $result[] = [
+                        'buyer_id' => $item->buyer_id,
+                        'seller_id' => $item->seller_id
+                    ];
+                }
+            }
+            else{
+                $result[] = [
+                    'buyer_id' => $item->buyer_id,
+                    'seller_id' => $item->seller_id
+                ];
+            }
+            
+            $buyer_ids[] = $item->buyer_id;
         }
 
 
         $result = array_unique($result,SORT_REGULAR);
 
+        $result = $this->restrict_sending_numbers_to_buyers($result);
+
         return $result;
+    }
+
+    protected function restrict_sending_numbers_to_buyers($items)
+    {
+
     }
 
     protected function are_conditions_satisfied_for_phone_number_auto_sending($item)
