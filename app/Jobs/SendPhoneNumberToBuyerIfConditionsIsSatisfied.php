@@ -77,7 +77,7 @@ class SendPhoneNumberToBuyerIfConditionsIsSatisfied implements ShouldQueue
         {
             if(in_array($item->buyer_id,$buyer_ids) == true){
                 $tmp = array_count_values($buyer_ids);
-                if($tmp[$buyer_id] <= $this->max_daily_auto_sent_phone_numbers_to_buyer)
+                if($tmp[$item->buyer_id] <= $this->max_daily_auto_sent_phone_numbers_to_buyer)
                 {
                     $result[] = [
                         'buyer_id' => $item->buyer_id,
@@ -98,14 +98,7 @@ class SendPhoneNumberToBuyerIfConditionsIsSatisfied implements ShouldQueue
 
         $result = array_unique($result,SORT_REGULAR);
 
-        $result = $this->restrict_sending_numbers_to_buyers($result);
-
         return $result;
-    }
-
-    protected function restrict_sending_numbers_to_buyers($items)
-    {
-
     }
 
     protected function are_conditions_satisfied_for_phone_number_auto_sending($item)

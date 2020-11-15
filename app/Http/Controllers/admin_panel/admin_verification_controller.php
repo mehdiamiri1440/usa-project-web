@@ -21,7 +21,7 @@ class admin_verification_controller extends Controller
         // dd(array_values($user_ids->toArray()[0]));
 
         $users = DB::table('myusers')
-                        ->whereIn('id',array_values($user_ids->toArray()[0]))
+                        ->whereIn('id',array_values($user_ids->toArray()))
                         ->where('is_verified',false)
                         ->select([
                             'id',
