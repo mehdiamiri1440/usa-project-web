@@ -1171,6 +1171,7 @@ class buyAd_controller extends Controller
             $golden_buyAds = DB::table('buy_ads')
                                 ->join('categories','categories.id','=','buy_ads.category_id')
                                 ->join('myusers','myusers.id','=','buy_ads.myuser_id')
+                                ->where('buy_ads.category_id',$last_product->category_id)
                                 ->where(function($q) use($product_name_array){
                                     foreach($product_name_array as $name){
                                         $q = $q->orWhere('name','like',"%$name%");
