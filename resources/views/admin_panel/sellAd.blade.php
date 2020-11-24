@@ -73,6 +73,7 @@
                   <th>نام محصول</th>
                   <th>نام و نام خانوادگی</th>
                   <th>زمان ثبت</th>
+                  <th>ظرفیت باقیمانده</th>
                   <th>مشاهده</th>
                 </tr>
                 </thead>
@@ -85,6 +86,7 @@
                         <td>{{$sellAd->product_name}}</td>                    
                         <td>{{$sellAd->first_name . ' ' . $sellAd->last_name}}</td>                    
                         <td>{{$sellAd->created_at}}</td>                    
+                        <td>{{$sellAd->remained_capacity}}</td>                    
                         <td><a href="{{route($sellAd->confirmed ? 'admin_panel_load_confirmed_sellAd_by_id' : 'admin_panel_load_unconfirmed_sellAd_by_id',['sellAd_id' => $sellAd->id])}}">مشاهده جزییات</a></td>
                     </tr>
                 @endforeach

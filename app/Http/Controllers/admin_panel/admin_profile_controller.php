@@ -150,13 +150,17 @@ class admin_profile_controller extends Controller
             
             //confirm profile
             $profile_record = profile::find($profile_id);
+
+            if($request->has('description')){
+                $profile_record->description = strip_tags($request->description);
+            }
             
             $profile_record->confirmed  = true;
             $profile_record->save();
             
             //send sms
-            $sms_controller_object = new sms_controller();
-            $sms_controller_object->send_status_sms_message($profile_record,$this->profile_confirmation_text);
+            // $sms_controller_object = new sms_controller();
+            // $sms_controller_object->send_status_sms_message($profile_record,$this->profile_confirmation_text);
             
             return redirect()->route('admin_panel_profile');
         }
