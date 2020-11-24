@@ -23,8 +23,11 @@ class admin_sellAd_controller extends Controller
         'products.confirmed',
         'products.created_at',
         'products.category_id',
+        'products.myuser_id',
         'myusers.first_name',
         'myusers.last_name',
+        'myusers.active_pakage_type',
+        'myusers.extra_product_capacity',
     ];
     
     protected $sellAd_detail_fields_array = [
@@ -70,7 +73,7 @@ class admin_sellAd_controller extends Controller
     {
         $unconfirmed_sellAd_list = $this->get_sellAd_list(0,$request);
         
-        $this->add_categories_to_sellAd_list($unconfirmed_sellAd_list);
+        $this->add_meta_data_to_sellAd_list($unconfirmed_sellAd_list);
         
         return view('admin_panel.sellAd',[
             'sellAds' => $unconfirmed_sellAd_list, 
@@ -82,7 +85,7 @@ class admin_sellAd_controller extends Controller
     {
         $confirmed_sellAd_list = $this->get_sellAd_list(1,$request);
         
-        $this->add_categories_to_sellAd_list($confirmed_sellAd_list);
+        $this->add_meta_data_to_sellAd_list($confirmed_sellAd_list);
         
         return view('admin_panel.sellAd',[
             'sellAds' => $confirmed_sellAd_list, 
@@ -127,7 +130,7 @@ class admin_sellAd_controller extends Controller
         return $list;
     }
     
-    protected function add_categories_to_sellAd_list(&$sellAd_list)
+    protected function add_meta_data_to_sellAd_list(&$sellAd_list)
     {
         $date_convertor_object = new date_convertor();
          
@@ -139,6 +142,10 @@ class admin_sellAd_controller extends Controller
             
             $sellAd->sub_category_name = $sub_category_record->category_name;
             $sellAd->category_name = $category_record->category_name;
+
+            $sellAd_owner_confirmed_products = $this->get_seller_confirmed_products_count($sellAd->myuser_id);
+
+            $sellAd->remained_capacity = (config("subscriptionPakage.type-{$sellAd->active_pakage_type}.max-products") + $sellAd->extra_product_capacity ) - $sellAd_owner_confirmed_products;
         });
     }
     
@@ -162,6 +169,18 @@ class admin_sellAd_controller extends Controller
            'category_name' => $category_name,
            'related_media' => $product_related_media,
         ]);
+    }
+
+    protected function get_seller_confirmed_products_count($seller_id)
+    {
+        $count = DB::table('products')
+                        ->where('myuser_id',$seller_id)
+                        ->where('confirmed',true)
+                        ->whereNull('deleted_at')
+                        ->get()
+                        ->count();
+
+        return $count;
     }
     
     public function load_confirmed_sellAd_by_id($sellAd_id)

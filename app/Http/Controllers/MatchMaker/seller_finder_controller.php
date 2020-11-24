@@ -27,6 +27,12 @@ class seller_finder_controller extends Controller
 
         $premium_products = $this->get_premium_related_products($buyAd,$buyAd_name_array);
 
+        $related_buyAd_repliers_only = $this->get_related_buyAd_repliers($buyAd,$buyAd_name_array);
+
+        if($related_buyAd_repliers_only){
+            $related_subcategory_products = array_merge($related_subcategory_products,$related_buyAd_repliers_only);
+        }
+
         if($premium_products){
             $related_subcategory_products = array_merge($related_subcategory_products,$premium_products);
         }
@@ -111,6 +117,44 @@ class seller_finder_controller extends Controller
 
 
         return $premium_products;
+    }
+
+    protected function get_related_buyAd_repliers($buyAd,$buyAd_name_array)
+    {
+        $until_date = Carbon::now();
+        $from_date = Carbon::now()->subDays(60); // last 4 months
+
+        $related_buyAd_repliers = DB::table('buy_ads')
+                                        ->join('buy_ad_reply_meta_datas as meta','meta.buy_ad_id','=','buy_ads.id')
+                                        ->where('buy_ads.confirmed',true)
+                                        ->whereNotNull('buy_ads.name')
+                                        ->whereBetween('meta.created_at',[$from_date,$until_date])
+                                        ->where('buy_ads.category_id',$buyAd->category_id)
+                                        ->where(function($q) use($buyAd_name_array){
+                                            foreach($buyAd_name_array as $name){
+                                                $q = $q->orWhere('buy_ads.name','like',"%$name%");
+                                            }
+
+                                            return $q;
+                                        })->whereNotExists(function($q){
+                                            $q->select(DB::raw(1))
+                                                ->from('products')
+                                                ->whereRaw("products.confirmed = true")
+                                                ->whereRaw('products.myuser_id = meta.replier_id');
+                                        })->select('replier_id as user_id')
+                                        ->distinct('user_id')
+                                        ->orderBy('meta.created_at')
+                                        ->get()
+                                        ->values()
+                                        ->toArray();
+
+        $result = [];
+        foreach($related_buyAd_repliers as $item)
+        {
+            $result[]['user_id'] = $item->user_id;
+        }
+
+        return $result;
     }
 
     protected function remove_black_list_words(&$words)

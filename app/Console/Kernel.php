@@ -10,7 +10,7 @@ use App\Jobs\SendReminderSMSToSellers;
 use App\Jobs\CheckElevatorExpiry;
 use App\Jobs\SendUpgradeAccoutnSMSToSellers;
 use App\Jobs\CacheProductList;
-use App\Jobs\SendPhoneNumberToBuyerIfConditionsIsSatisfied;
+use App\Jobs\PhoneNumberAutoSend\SendPhoneNumberToBuyerIfConditionsIsSatisfied;
 use App\Jobs\Notifiers\RetentionReminder;
 use App\Jobs\Notifiers\BuyAdRegisterReminder;
 use App\Jobs\Notifiers\ProductRegisterReminder;

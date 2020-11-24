@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\PhoneNumberAutoSend;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -12,6 +12,7 @@ use App\Http\Controllers\Messenger\message_controller;
 use App\Models\message;
 use Carbon\Carbon;
 use DB;
+use App\Jobs\SendNewMessageNotification;
 
 class AutoSendPhoneNumber implements ShouldQueue
 {
