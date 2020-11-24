@@ -486,4 +486,32 @@ class user_controller extends Controller
             'show_off' => false
         ],200);
     }
+
+    public function is_user_credential_valid(Request $request)
+    {
+        $this->validate($request,[
+            'phone' => 'required',
+            'password' => 'required'
+        ]);
+
+        $user_record = DB::table('myusers')->where('phone',$request->phone)
+                                        ->where('password',sha1($request->password))
+                                        ->select('id')
+                                        ->get()
+                                        ->first();
+        
+        if($user_record)
+        {
+            return response()->json([
+                'status' => true,
+                'id' => $user_record->id
+            ]);
+        }
+
+        return response()->json([
+            'status' => false
+        ]);
+
+        
+    }
 }

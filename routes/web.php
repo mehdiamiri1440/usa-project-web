@@ -622,6 +622,11 @@ Route::get('/logout', function () {
     return redirect('/')->withCookie($cookie);
 })->name('logout');
 
+
+Route::post('/is-user-authorized-to-upload-file-on-storage',[
+    'uses' => 'Accounting\user_controller@is_user_credential_valid'
+]);
+
 //-------------------------------- ADMIN PANEL---------------------------------------
 //Admin Panel
 Route::group(['prefix' => 'admin'], function () {
