@@ -51,6 +51,13 @@ class payment_controller extends Controller
                 session(['pakage_type' => $pakage_type]);
                 session(['pakage_duration_in_months' => config("subscriptionPakage.type-$pakage_type.pakage-duration-in-months")]);
                 session(['elevator_count' => config("subscriptionPakage.type-$pakage_type.elevetor-count")]);
+
+                $this->record_payment_log([
+                    'myuser_id' => session('user_id'),
+                    'transaction_id' => $transID,
+                    'pay_for' => "package-type-$pakage_type",
+                    'client' => 'web'
+                ]);
                 
                 return $gateway->redirect(); 
             }catch (Exception $e){ 
@@ -82,6 +89,13 @@ class payment_controller extends Controller
                 session(['pakage_duration_in_months' => config("subscriptionPakage.type-$pakage_type.pakage-duration-in-months")]);
                 session(['elevator_count' => config("subscriptionPakage.type-$pakage_type.elevetor-count")]);
                 session(['app_user_id' => $user_id]);
+
+                $this->record_payment_log([
+                    'myuser_id' => $user_id,
+                    'transaction_id' => $transID,
+                    'pay_for' => "package-type-$pakage_type",
+                    'client' => 'mobile'
+                ]);
                 
                 return $gateway->redirect(); 
             }catch (Exception $e){ 
@@ -292,7 +306,15 @@ class payment_controller extends Controller
             session(['gateway_transaction_id' => $transID]);
             session(['product_id' => $product_id]);
             
-//            return 'id'.session()->pull('product_id');
+            $user_id = product::find($product_id)->myuser_id;
+
+            $this->record_payment_log([
+                'myuser_id' => $user_id,
+                'transaction_id' => $transID,
+                'pay_for' => "elevator",
+                'client' => 'web'
+            ]);
+
             return $gateway->redirect(); 
         }catch (Exception $e){ 
             echo $e->getMessage();
@@ -312,6 +334,15 @@ class payment_controller extends Controller
             // Your code here
             session(['gateway_transaction_id' => $transID]);
             session(['product_id' => $product_id]);
+
+            $user_id = product::find($product_id)->myuser_id;
+
+            $this->record_payment_log([
+                'myuser_id' => $user_id,
+                'transaction_id' => $transID,
+                'pay_for' => "elevator",
+                'client' => 'mobile'
+            ]);
  
             return $gateway->redirect(); 
         }catch (Exception $e){ 
@@ -414,6 +445,14 @@ class payment_controller extends Controller
                 session(['extra_capacity' => $extra_capacity]);
                 session(['uid' => $user_id]);
 
+
+                $this->record_payment_log([
+                    'myuser_id' => $user_id,
+                    'transaction_id' => $transID,
+                    'pay_for' => "product-capacity",
+                    'client' => 'web'
+                ]);
+
                 
                 return $gateway->redirect(); 
             }catch (Exception $e){ 
@@ -446,6 +485,13 @@ class payment_controller extends Controller
                 session(['gateway_transaction_id' => $transID]);
                 session(['extra_capacity' => $extra_capacity]);
                 session(['app_user_id' => $user_id]);
+
+                $this->record_payment_log([
+                    'myuser_id' => $user_id,
+                    'transaction_id' => $transID,
+                    'pay_for' => "product-capacity",
+                    'client' => 'mobile'
+                ]);
 
                 
                 return $gateway->redirect(); 
@@ -546,6 +592,13 @@ class payment_controller extends Controller
                 session(['extra_reply_capacity' => $extra_reply_capacity]);
                 session(['uid' => $user_id]);
 
+                $this->record_payment_log([
+                    'myuser_id' => $user_id,
+                    'transaction_id' => $transID,
+                    'pay_for' => "buyAd-capacity",
+                    'client' => 'web'
+                ]);
+
                 
                 return $gateway->redirect(); 
             }catch (Exception $e){ 
@@ -578,6 +631,13 @@ class payment_controller extends Controller
                 session(['gateway_transaction_id' => $transID]);
                 session(['extra_reply_capacity' => $extra_reply_capacity]);
                 session(['app_user_id' => $user_id]);
+
+                $this->record_payment_log([
+                    'myuser_id' => $user_id,
+                    'transaction_id' => $transID,
+                    'pay_for' => "buyAd-capacity",
+                    'client' => 'mobile'
+                ]);
 
                 
                 return $gateway->redirect(); 
@@ -651,6 +711,12 @@ class payment_controller extends Controller
         catch(\Exception $e){
             //
         }
+    }
+
+
+    protected function record_payment_log($payment)
+    {
+        DB::table('payment_logs')->insert($payment);
     }
     
     

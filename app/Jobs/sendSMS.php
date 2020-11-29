@@ -21,11 +21,13 @@ class sendSMS implements ShouldQueue
      */
     public $phone_number;
     public $pattern_code;
+    public $data;
     
-    public function __construct($phone_number,$pattern_code)
+    public function __construct($phone_number,$pattern_code,$data = [])
     {
         $this->phone_number = $phone_number;
         $this->pattern_code = $pattern_code;
+        $this->data = $data;
     }
 
     /**
@@ -36,6 +38,6 @@ class sendSMS implements ShouldQueue
     public function handle()
     {
         $sms_controller_object = new sms_controller();
-        $sms_controller_object->send_sms_to_given_phone_number($this->phone_number,$this->pattern_code);
+        $sms_controller_object->send_sms_to_given_phone_number($this->phone_number,$this->pattern_code,$this->data);
     }
 }

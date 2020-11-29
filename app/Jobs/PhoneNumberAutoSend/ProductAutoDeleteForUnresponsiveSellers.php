@@ -39,14 +39,14 @@ class ProductAutoDeleteForUnresponsiveSellers implements ShouldQueue
                                         ->get();
 
         $deleting_products->each(function($product){
-            // $product->delete();
+            $product->delete();
         });
     }
 
     protected function get_unresponding_sellers_ids()
     {
         $sellers_ids = DB::table('auto_sent_phone_numbers_meta_datas')
-                                ->whereBetween('created_at',[Carbon::yesterday(),Carbon::tomorrow()])
+                                ->whereBetween('created_at',[Carbon::yesterday(),Carbon::today()])
                                 ->select('sender_id as seller_id')
                                 ->distinct()
                                 ->get()
@@ -71,12 +71,12 @@ class ProductAutoDeleteForUnresponsiveSellers implements ShouldQueue
 
         $seller_auto_sent_phone_numbers_count = DB::table('auto_sent_phone_numbers_meta_datas')
                                                     ->where('sender_id',$user_id)
-                                                    ->whereBetween('created_at',[$last_activity_date,Carbon::tomorrow()])
+                                                    ->whereBetween('created_at',[$last_activity_date,Carbon::today()])
                                                     ->get()
                                                     ->count();
 
         if($seller_auto_sent_phone_numbers_count >= 5){
-            if(Carbon::now()->diffInWeeks($last_activity_date) > 2){
+            if(Carbon::now()->diffInWeeks($last_activity_date) >= 2){
                 return true;
             }
         }

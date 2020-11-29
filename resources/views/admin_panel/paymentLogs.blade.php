@@ -1,38 +1,38 @@
 @extends('admin_panel.layout.master')
 
 @section('header_links')
-    <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <title>جدول ها | کنترل پنل</title>
-      <!-- Tell the browser to be responsive to screen width -->
-      <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-      <!-- Bootstrap 3.3.7 -->
-      <link rel="stylesheet" href="{{asset('admin-panel/dist/css/bootstrap-theme.css')}}">
-      <!-- Bootstrap rtl -->
-      <link rel="stylesheet" href="{{asset('admin-panel/dist/css/rtl.css')}}">
-      <!-- Font Awesome -->
-      <link rel="stylesheet" href="{{asset('admin-panel/bower_components/font-awesome/css/font-awesome.min.css')}}">
-      <!-- Ionicons -->
-      <link rel="stylesheet" href="{{asset('admin-panel/bower_components/Ionicons/css/ionicons.min.css')}}">
-      <!-- DataTables -->
-      <link rel="stylesheet" href="{{asset('admin-panel/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
-      <!-- Theme style -->
-      <link rel="stylesheet" href="{{asset('admin-panel/dist/css/AdminLTE.css')}}">
-      <!-- AdminLTE Skins. Choose a skin from the css/skins
-           folder instead of downloading all of them to reduce the load. -->
-      <link rel="stylesheet" href="{{asset('admin-panel/dist/css/skins/_all-skins.min.css')}}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>جدول ها | کنترل پنل</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="{{asset('admin-panel/dist/css/bootstrap-theme.css')}}">
+  <!-- Bootstrap rtl -->
+  <link rel="stylesheet" href="{{asset('admin-panel/dist/css/rtl.css')}}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{asset('admin-panel/bower_components/font-awesome/css/font-awesome.min.css')}}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="{{asset('admin-panel/bower_components/Ionicons/css/ionicons.min.css')}}">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{asset('admin-panel/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{asset('admin-panel/dist/css/AdminLTE.css')}}">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="{{asset('admin-panel/dist/css/skins/_all-skins.min.css')}}">
 
-      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-      <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 
-      <!-- Google Font -->
-    
-    </head>
+  <!-- Google Font -->
+ 
+</head>
 @endsection
 
 @section('main_content')
@@ -41,7 +41,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        بررسی پروفایل ها
+          تاریخچه پرداخت ها
       </h1>
     </section>
 
@@ -52,12 +52,11 @@
             <div class="box-header">
               <h3 class="box-title">جدول داده ها</h3>
             </div>
-
-            <form method="GET" action="{{Request::is('admin/profile') ? route('admin_panel_profile') : route('admin_panel_profile_list')}}">
+            <form method="GET" action="{{route('admin_panel_payment_list') }}">
               <div class="row">
                 <div class="col-xs-4 col-xs-offset-4">
                   <label>جستوجو‌ :‌ </label>
-                  <input type="text" name="search" placeholder="نام یا محصول">
+                  <input type="text" name="search" placeholder="نام کاربر">
                   <input type="submit" class="btn btn-primary" value="برو">
                 </div>
               </div>
@@ -70,43 +69,77 @@
                 <tr>
                   <th>#</th>
                   <th>نام و نام خانوادگی</th>
-                  <th>زمان ثبت پروفایل</th>
-                  <th> نوع کاربری</th>
-                  <th>مشاهده</th>
+                  <th>مبلغ</th>
+                  <th>زمان ورود به درگاه</th>
+                  <th>پرداخت برای</th>
+                  <th>شماره تماس</th>
+                  <th>دستگاه</th>
+                  <th>وضعیت</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($profiles as $profile)
-                <tr>
-                    <td>{{$loop->iteration}}</td>
-                    <td>{{$profile->first_name . ' ' . $profile->last_name}}</td>
-                    <td>{{$profile->register_date}}</td>
-                    <td>{{$profile->is_buyer ? 'خریدار' : 'فروشنده'}}</td>                    
-                    <td><a href="{{"/admin/profile-detail/".$profile->id}}">مشاهده جزییات</a></td>
-                </tr>
+                @foreach($payments as $payment)
+                    @if($payment->status == "SUCCEED")
+                        <tr class="success">
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$payment->first_name . ' ' . $payment->last_name}}</td>
+                            <td>{{$payment->price}}</td>
+                            <td dir="ltr">{{$payment->created_at}}</td>                    
+                            <td>{{$payment->pay_for}}</td> 
+                            <td>{{$payment->phone}}</td>                    
+                            <td>{{$payment->client}}</td>                                       
+                            <td>{{$payment->status}}</td>                    
+                        </tr>
+                    @elseif($payment->status == "FAILED" )
+                        <tr class="danger">
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$payment->first_name . ' ' . $payment->last_name}}</td>
+                            <td>{{$payment->price}}</td>
+                            <td dir="ltr">{{$payment->created_at}}</td>                    
+                            <td>{{$payment->pay_for}}</td> 
+                            <td>{{$payment->phone}}</td> 
+                            <td>{{$payment->client}}</td>                                       
+                            <td>{{$payment->status}}</td>                    
+                        </tr>
+
+                    @else
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$payment->first_name . ' ' . $payment->last_name}}</td>
+                            <td>{{$payment->price}}</td>
+                            <td dir="ltr">{{$payment->created_at}}</td>                    
+                            <td>{{$payment->pay_for}}</td>  
+                            <td>{{$payment->phone}}</td>  
+                            <td>{{$payment->client}}</td>                                     
+                            <td>{{$payment->status}}</td>                    
+                        </tr>
+                    @endif
                 @endforeach
               </table>
 
               <div align="center">
-                    {{ $profiles->appends($_GET)->render("pagination::default")}}
+                {{$payments->appends($_GET)->render("pagination::default")}}
               </div>
+              
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
         </div>
         <!-- /.col -->
+<!--      </div>-->
       <!-- /.row -->
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-@endsection
+
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
-
+@endsection
 <!-- ./wrapper -->
+
 @section('script_tags')
 <script src="{{asset('admin-panel/bower_components/jquery/dist/jquery.min.js')}}"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -180,8 +213,5 @@
       setTimeout(notif, 5000);
     });
     
-    
-    
 </script>
 @endsection
-

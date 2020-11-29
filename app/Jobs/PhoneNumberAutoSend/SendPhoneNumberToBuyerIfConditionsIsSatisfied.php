@@ -36,7 +36,6 @@ class SendPhoneNumberToBuyerIfConditionsIsSatisfied implements ShouldQueue
      */
     public function handle()
     {
-        // var_dump($this->get_user_last_activity_date(13974));
         $array_of_arrays_for_phone_number_sending_from_sellers_to_buyers = $this->get_array_of_arrays_for_phone_number_sending_from_sellers_to_buyers();
 
         $filtered_items = array_filter($array_of_arrays_for_phone_number_sending_from_sellers_to_buyers,function($item){
@@ -48,7 +47,7 @@ class SendPhoneNumberToBuyerIfConditionsIsSatisfied implements ShouldQueue
 
     protected function get_array_of_arrays_for_phone_number_sending_from_sellers_to_buyers()
     {
-        $from_time = Carbon::now()->subMinutes(240); //last 2 hours
+        $from_time = Carbon::now()->subMinutes(60); //last 2 hours
         $to_time = Carbon::now();
 
         $data = DB::table('messages')
@@ -136,7 +135,7 @@ class SendPhoneNumberToBuyerIfConditionsIsSatisfied implements ShouldQueue
 
             $away_days = Carbon::now()->diffInDays($last_activity_date);
 
-            if($away_days > 7){
+            if($away_days >= 7){
                 $phone_number_sending_count_since_last_activity = DB::table('auto_sent_phone_numbers_meta_datas')
                                                                         ->where('sender_id',$seller_id)
                                                                         ->whereBetween('created_at',[$last_activity_date,Carbon::now()])
@@ -226,54 +225,6 @@ class SendPhoneNumberToBuyerIfConditionsIsSatisfied implements ShouldQueue
             }
             
         }
-    }
-
-    protected function get_user_response_info($user_id,$product_last_uptade_date = null,$viewer_response_time = 0)
-    {
-        $contacts = DB::table('messages')
-                                    ->where('receiver_id',$user_id)
-                                    ->select(DB::raw("DISTINCT(sender_id) as sender_id,sum(TIMESTAMPDIFF(SECOND,created_at,updated_at)) as delay"))
-                                    ->whereBetween('created_at',[Carbon::now()->subMonths(3),Carbon::now()])
-                                    ->groupBy('sender_id')
-                                    ->get();
-        
-        $total_contacts_count = $contacts->count();
-        if ($total_contacts_count == 0) {
-            if(is_null($product_last_uptade_date)){
-                return [
-                    'response_rate' => 100,
-                    'response_time' => 0,
-                    'ums' => 0
-                ];
-            }
-            else{
-                return [
-                    'response_rate' => 100,
-                    'response_time' => pow(Carbon::now()->diffInDays($product_last_uptade_date),2),
-                    'ums' => 0
-                ];
-            }
-            
-        }
-
-        $seen_by_user_contacts_count = $contacts->filter(function($msg){
-            return $msg->delay != 0;
-        })->count();
-
-        $response_rate = round(($seen_by_user_contacts_count / $total_contacts_count) * 100, 2);
-
-        $total_delay = (integer) ($contacts->sum('delay')/3600); //converting to hours
-
-        if($total_delay == 0){ // it means user have messages but did not read any of them
-            $response_time = -1;
-        }
-        else{
-            $response_time =  round($total_delay/$total_contacts_count);
-        }
-
-        $ums = $total_contacts_count;
-
-        return compact('response_rate','response_time','ums'); // UMS stands for unique message senders to this user
     }
 
     protected function get_user_phone_number($user_id)

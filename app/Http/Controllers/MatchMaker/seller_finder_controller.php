@@ -80,6 +80,7 @@ class seller_finder_controller extends Controller
 
                                                 return $q;
                                             })
+                                            ->where('stock','>=',$buyAd->requirement_amount)
                                             ->select('myuser_id as user_id')
                                             ->distinct('myuser_id')
                                             ->orderBy('created_at')
@@ -108,6 +109,7 @@ class seller_finder_controller extends Controller
 
                                     return $q;
                                 })
+                                ->where('stock','>=',$buyAd->requirement_amount)
                                 ->select('myuser_id as user_id')
                                 ->distinct('myuser_id')
                                 ->orderBy('created_at')

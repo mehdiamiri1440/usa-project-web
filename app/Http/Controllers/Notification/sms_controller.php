@@ -289,17 +289,26 @@ class sms_controller extends Controller
         }
     }
     
-    public function send_sms_to_given_phone_number($phone_number,$pattern_code)
+    public function send_sms_to_given_phone_number($phone_number,$pattern_code,$data = [])
     {
-        $user_first_name = DB::table('myusers')
+        $user_record = DB::table('myusers')
                             ->where('phone',$phone_number)
                             ->select('first_name')
-                            ->get()->first()
+                            ->get()
+                            ->first()
                             ->first_name;
+
+        $sending_data = [
+            'name' => $user_first_name
+        ];
+
+        if(! is_null($data)){
+            $sending_data = array_merge($sending_data,$data);
+        }
 
         
         try{
-            Smsir::ultraFastSend(['name' => $user_first_name],$pattern_code,$phone_number);
+            Smsir::ultraFastSend($sending_data,$pattern_code,$phone_number);
         }
         catch(\Exception $e){
             echo $e->getMessage();
