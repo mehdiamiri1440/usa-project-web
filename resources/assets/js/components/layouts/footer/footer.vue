@@ -282,7 +282,7 @@ img.image-blur:hover {
     <footer id="footer">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-4 pull-left">
+          <!-- <div class="col-xs-12 col-sm-6 col-md-4 pull-left">
             <ul class="list-unstyled footer-list">
               <li>
                 <div class="enamad">
@@ -290,18 +290,18 @@ img.image-blur:hover {
                     target="_blank"
                     href="https://trustseal.enamad.ir/?id=129504&amp;Code=I3flHhEiFZPLWVe9vTFK"
                   >
-                    <img src="../../../../img/enamad.jpg" alt />
+                    <img src="../../../../img/enamad.jpg" alt /> -->
                     <!--                                        <img-->
                     <!--                                                src="https://Trustseal.eNamad.ir/logo.aspx?id=129504&amp;Code=I3flHhEiFZPLWVe9vTFK"-->
                     <!--                                                alt-->
                     <!--                                                style="cursor:pointer"-->
                     <!--                                                id="I3flHhEiFZPLWVe9vTFK"-->
                     <!--                                        />-->
-                  </a>
+                  <!-- </a>
                 </div>
               </li>
             </ul>
-          </div>
+          </div> -->
 
           <div class="col-xs-12 col-sm-6 col-md-4">
             <ul class="list-unstyled footer-list">

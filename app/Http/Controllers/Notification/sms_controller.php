@@ -291,7 +291,7 @@ class sms_controller extends Controller
     
     public function send_sms_to_given_phone_number($phone_number,$pattern_code,$data = [])
     {
-        $user_record = DB::table('myusers')
+        $user_first_name = DB::table('myusers')
                             ->where('phone',$phone_number)
                             ->select('first_name')
                             ->get()

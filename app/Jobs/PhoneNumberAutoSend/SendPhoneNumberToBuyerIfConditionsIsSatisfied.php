@@ -132,7 +132,7 @@ class SendPhoneNumberToBuyerIfConditionsIsSatisfied implements ShouldQueue
     {
         if($this->does_user_have_unread_messages($seller_id)){
             $last_activity_date = $this->get_user_last_activity_date($seller_id);
-
+            
             $away_days = Carbon::now()->diffInDays($last_activity_date);
 
             if($away_days >= 7){

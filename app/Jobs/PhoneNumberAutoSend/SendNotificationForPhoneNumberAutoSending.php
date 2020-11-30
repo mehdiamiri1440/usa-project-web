@@ -10,6 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use DB;
 use Carbon\Carbon;
 use App\Jobs\sendSMS;
+use App\Models\myuser;
 
 class SendNotificationForPhoneNumberAutoSending implements ShouldQueue
 {
@@ -38,9 +39,9 @@ class SendNotificationForPhoneNumberAutoSending implements ShouldQueue
         $last_activity_date = $this->get_user_last_activity_date($this->seller_id);
 
         $sent_phone_numbers_count_since_last_activity = DB::table('auto_sent_phone_numbers_meta_datas')
-                                                                ->join('myusers','myusers.id','=','auto_send_phone_numbers_meta_datas.sender_id')
+                                                                ->join('myusers','myusers.id','=','auto_sent_phone_numbers_meta_datas.sender_id')
                                                                 ->where('sender_id',$this->seller_id)
-                                                                ->whereBetween('created_at',[$last_activity_date,Carbon::now()])
+                                                                ->whereBetween('auto_sent_phone_numbers_meta_datas.created_at',[$last_activity_date,Carbon::now()])
                                                                 ->get()
                                                                 ->count();
 
