@@ -29,6 +29,8 @@ class seller_finder_controller extends Controller
 
         $related_buyAd_repliers_only = $this->get_related_buyAd_repliers($buyAd,$buyAd_name_array);
 
+        var_dump($related_buyAd_repliers_only);
+
         if($related_buyAd_repliers_only){
             $related_subcategory_products = array_merge($related_subcategory_products,$related_buyAd_repliers_only);
         }
@@ -80,6 +82,7 @@ class seller_finder_controller extends Controller
 
                                                 return $q;
                                             })
+                                            ->where('stock','>=',$buyAd->requirement_amount)
                                             ->select('myuser_id as user_id')
                                             ->distinct('myuser_id')
                                             ->orderBy('created_at')
@@ -108,6 +111,7 @@ class seller_finder_controller extends Controller
 
                                     return $q;
                                 })
+                                ->where('stock','>=',$buyAd->requirement_amount)
                                 ->select('myuser_id as user_id')
                                 ->distinct('myuser_id')
                                 ->orderBy('created_at')

@@ -17,6 +17,7 @@ use App\Jobs\Notifiers\ProductRegisterReminder;
 use App\Jobs\Notifiers\ExpiryReminder;
 use App\Jobs\AnomalyDetectors\MessagingAnomalyDetection;
 use DB;
+use App\Jobs\PhoneNumberAutoSend\ProductAutoDeleteForUnresponsiveSellers;
 
 class Kernel extends ConsoleKernel
 {
@@ -97,6 +98,10 @@ class Kernel extends ConsoleKernel
         $schedule->job($phone_number_auto_sending_job)
                 ->hourlyAt(22)
                 ->between('6:00', '22:00');
+
+        $product_auto_delete_job = new ProductAutoDeleteForUnresponsiveSellers();
+        $schedule->job($product_auto_delete_job)
+                ->everyMinute();
 
 
         // $schedule->command('backup:clean')->daily()->at('12:27');

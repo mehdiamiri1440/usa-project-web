@@ -1010,7 +1010,7 @@ li > ul > li.active > ul > li {
                     <p class="needs col-sm-4 col-xs-12">
                       <span class="static-content">میزان نیازمندی :</span>
 
-                      <span v-text="buyAd.requirement_amount"></span>
+                      <span v-text="getNumberWithCommas(buyAd.requirement_amount)"></span>
 
                       <span class="static-content">کیلوگرم</span>
                     </p>
@@ -1102,7 +1102,7 @@ li > ul > li.active > ul > li {
                 :key="index"
                 :name="buyAd.name"
                 :title="buyAd.category_name + ' | ' + buyAd.subcategory_name"
-                :need="buyAd.requirement_amount"
+                :need="getNumberWithCommas(buyAd.requirement_amount)"
                 :date="buyAd.register_date"
               />
             </div>
@@ -1198,7 +1198,7 @@ li > ul > li.active > ul > li {
                     :key="index"
                     :img="str + '/thumbnails/' + product.photo"
                     :title="product.product_name"
-                    :stock="product.stock"
+                    :stock="getNumberWithCommas(product.stock)"
                     :link="getProductUrl(product)"
                     column="3"
                   />
@@ -1680,7 +1680,12 @@ export default {
         "/" +
         product.id
       );
-    }
+    },
+    getNumberWithCommas: function (number) {
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
+    },
   },
   mounted: function() {
     this.init();

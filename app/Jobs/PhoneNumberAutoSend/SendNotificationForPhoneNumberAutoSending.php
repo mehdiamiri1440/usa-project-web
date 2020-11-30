@@ -9,6 +9,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use DB;
 use Carbon\Carbon;
+use App\Jobs\sendSMS;
+use App\Models\myuser;
 
 class SendNotificationForPhoneNumberAutoSending implements ShouldQueue
 {
@@ -37,16 +39,24 @@ class SendNotificationForPhoneNumberAutoSending implements ShouldQueue
         $last_activity_date = $this->get_user_last_activity_date($this->seller_id);
 
         $sent_phone_numbers_count_since_last_activity = DB::table('auto_sent_phone_numbers_meta_datas')
+                                                                ->join('myusers','myusers.id','=','auto_sent_phone_numbers_meta_datas.sender_id')
                                                                 ->where('sender_id',$this->seller_id)
-                                                                ->whereBetween('created_at',[$last_activity_date,Carbon::now()])
+                                                                ->whereBetween('auto_sent_phone_numbers_meta_datas.created_at',[$last_activity_date,Carbon::now()])
                                                                 ->get()
                                                                 ->count();
 
+        $buyer_record = myuser::find($this->buyer_id);
+        $seller_phone_number = myuser::find($this->seller_id)->phone;
+
+        $data = [
+            'buyername' => $buyer_record->first_name . ' ' . $buyer_record->last_name
+        ];
+
         if($sent_phone_numbers_count_since_last_activity  <  4){
-            //send new message notification
+            sendSMS::dispatch($seller_phone_number, 37553,$data);
         }
         else{
-            //send product delete alarm
+            sendSMS::dispatch($seller_phone_number, 37551,$data);
         }
     }
 

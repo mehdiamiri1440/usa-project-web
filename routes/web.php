@@ -905,6 +905,11 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
         'uses' => 'admin_panel\admin_verification_controller@verify_user_account',
         'as' => 'verify_user_account_by_id',
     ]);
+
+    Route::get('/payment-list',[
+        'uses' => 'admin_panel\admin_payment_controller@get_payment_logs',
+        'as' => 'admin_panel_payment_list'
+    ]);
 });
 
 //Route::any('/payment_callback',[

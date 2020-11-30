@@ -699,7 +699,7 @@ class buyAd_controller extends Controller
                     ->join('myusers', 'buy_ads.myuser_id', '=', 'myusers.id')
                     ->where('buy_ads.confirmed', true)
                     ->where('buy_ads.reply_capacity','>',0)
-                    ->whereBetween('buy_ads.updated_at',[Carbon::now()->subMonths(1),Carbon::now()])
+                    ->whereBetween('buy_ads.updated_at',[Carbon::now()->subWeeks(2),Carbon::now()])
                     ->where('buy_ads.myuser_id','<>',$user->id);
         
         // if($user->active_pakage_type == 0){
@@ -1149,16 +1149,33 @@ class buyAd_controller extends Controller
 
     protected function get_golden_buyAds_for_this_user($user_id)
     {
-        $last_product = DB::table('products')
+        $user_products = DB::table('products')
                                 ->where('confirmed',true)
+                                ->whereNull('deleted_at')
                                 ->where('myuser_id',$user_id)
                                 ->orderBy('updated_at')
-                                ->get()
-                                ->last();
-        if($last_product){
-            $product_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $last_product->product_name))));
+                                ->get();
 
-            $category_info = $this->get_category_and_subcategory_name($last_product->category_id);
+        // var_dump($user_products);
+
+        $golden_buyAds = $this->get_related_golden_buyAds_to_given_products($user_products,$user_id);
+        
+        if(count($golden_buyAds) > 0){
+            return $golden_buyAds;
+        }
+
+        return null;
+        
+    }
+
+    protected function get_related_golden_buyAds_to_given_products(&$products,$user_id)
+    {
+        $result_golden_buyAds = [];
+
+        foreach($products as $product){
+            $product_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $product->product_name))));
+
+            $category_info = $this->get_category_and_subcategory_name($product->category_id);
 
             if (count($product_name_array) > 1) {
                 if ($product_name_array[0] == $category_info['subcategory_name']) {
@@ -1171,7 +1188,7 @@ class buyAd_controller extends Controller
             $golden_buyAds = DB::table('buy_ads')
                                 ->join('categories','categories.id','=','buy_ads.category_id')
                                 ->join('myusers','myusers.id','=','buy_ads.myuser_id')
-                                ->where('buy_ads.category_id',$last_product->category_id)
+                                ->where('buy_ads.category_id',$product->category_id)
                                 ->where(function($q) use($product_name_array){
                                     foreach($product_name_array as $name){
                                         $q = $q->orWhere('name','like',"%$name%");
@@ -1182,16 +1199,19 @@ class buyAd_controller extends Controller
                                 ->whereBetween('buy_ads.updated_at',[Carbon::now()->subHours(4),Carbon::now()])
                                 ->where('myuser_id','<>',$user_id)
                                 ->where('confirmed',true)
+                                ->where('buy_ads.category_id',$product->category_id)
                                 ->select('buy_ads.id','myusers.first_name', 'myusers.last_name' ,'buy_ads.name', 'buy_ads.requirement_amount' ,'categories.category_name as subcategory_name' ,'buy_ads.myuser_id as buyer_id' )
                                 ->get()
                                 ->values()
                                 ->toArray();
+            // var_dump($golden_buyAds);
 
-
-            return $golden_buyAds;
+            $result_golden_buyAds = array_merge($result_golden_buyAds,$golden_buyAds);
         }
+        
 
-        return null;
+
+        return array_unique($result_golden_buyAds,SORT_REGULAR);
         
     }
 }
