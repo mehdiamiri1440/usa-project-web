@@ -413,6 +413,22 @@ class product_list_controller extends Controller
                 }
             }
         }
+        else if($user_info->is_seller == true){
+            if($user_info->active_pakage_type == 0){
+                $eleveted_products = product::where('myuser_id',$user_id)
+                                            ->where('confirmed',true)
+                                            ->where('is_elevated',true)
+                                            ->get()
+                                            ->count();
+
+                if($eleveted_products == 0 && $user_info->created_at->diffInDays(Carbon::now()) <= 7){
+                    $products =  $this->sort_products_by_response_rate($products);
+                    $products = $this->remove_duplicated_paying_sellers($products);
+
+                    return $products;
+                }
+            }
+        }
 
         $user_response_info = $this->get_user_response_info($user_id);
         $user_response_info['created_at'] = $user_info->created_at;
@@ -799,6 +815,30 @@ class product_list_controller extends Controller
         //     $this->apply_search_text_filter($products,$buyAd_record->name);
         // }
         
+        return $products;
+    }
+
+    protected function remove_duplicated_paying_sellers(&$products)
+    {
+        $first_products = array_slice($products,0,100);
+
+        $tmp_user_ids = [];
+        $duplicated_keys = [];
+        foreach($first_products as $key => $value)
+        {
+            if(! in_array($value['user_info']->id,$tmp_user_ids)){
+                $tmp_user_ids[] = $value['user_info']->id;
+            }
+            else{
+                $duplicated_keys[] = $key;
+            }
+        }
+
+        foreach($duplicated_keys as $key)
+        {
+            unset($products[$key]);
+        }
+
         return $products;
     }
 

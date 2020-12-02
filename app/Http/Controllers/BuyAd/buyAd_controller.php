@@ -1156,15 +1156,13 @@ class buyAd_controller extends Controller
                                 ->orderBy('updated_at')
                                 ->get();
 
-        // var_dump($user_products);
-
         $golden_buyAds = $this->get_related_golden_buyAds_to_given_products($user_products,$user_id);
         
         if(count($golden_buyAds) > 0){
             return $golden_buyAds;
         }
 
-        return null;
+        return [];
         
     }
 
@@ -1203,8 +1201,7 @@ class buyAd_controller extends Controller
                                 ->select('buy_ads.id','myusers.first_name', 'myusers.last_name' ,'buy_ads.name', 'buy_ads.requirement_amount' ,'categories.category_name as subcategory_name' ,'buy_ads.myuser_id as buyer_id' )
                                 ->get()
                                 ->values()
-                                ->toArray();
-            // var_dump($golden_buyAds);
+                                ->all();
 
             $result_golden_buyAds = array_merge($result_golden_buyAds,$golden_buyAds);
         }

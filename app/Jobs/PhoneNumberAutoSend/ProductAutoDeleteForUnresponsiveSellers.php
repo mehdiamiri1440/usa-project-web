@@ -69,14 +69,14 @@ class ProductAutoDeleteForUnresponsiveSellers implements ShouldQueue
     {
         $last_activity_date = $this->get_user_last_activity_date($user_id);
 
-        $seller_auto_sent_phone_numbers_count = DB::table('auto_sent_phone_numbers_meta_datas')
+        $seller_auto_sent_phone_numbers_records = DB::table('auto_sent_phone_numbers_meta_datas')
                                                     ->where('sender_id',$user_id)
                                                     ->whereBetween('created_at',[$last_activity_date,Carbon::today()])
-                                                    ->get()
-                                                    ->count();
+                                                    ->orderyBy('created_at','desc')
+                                                    ->get();
 
-        if($seller_auto_sent_phone_numbers_count >= 5){
-            if(Carbon::now()->diffInWeeks($last_activity_date) >= 2){
+        if($seller_auto_sent_phone_numbers_records->count() >= 5){
+            if(Carbon::now()->diffInDays($seller_auto_sent_phone_numbers_records->last()->created_at) >= 3){
                 return true;
             }
         }
