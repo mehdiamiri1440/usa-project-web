@@ -1139,6 +1139,10 @@ class buyAd_controller extends Controller
             });
         }
 
+        if($final_golden_buyAds instanceof Illuminate\Database\Eloquent\Collection){
+            $final_golden_buyAds = $final_golden_buyAds->toArray();
+        }
+
         return response()->json([
             'status' => true,
             'buyAds' => $my_buyAd_suggestions,
@@ -1157,10 +1161,6 @@ class buyAd_controller extends Controller
                                 ->get();
 
         $golden_buyAds = $this->get_related_golden_buyAds_to_given_products($user_products,$user_id);
-
-        if($golden_buyAds instanceof Illuminate\Database\Eloquent\Collection){
-            $golden_buyAds = $golden_buyAds->toArray();
-        }
         
         if(count($golden_buyAds) > 0){
             return $golden_buyAds;
