@@ -223,7 +223,7 @@ class seller_finder_controller extends Controller
                 else{
                     $response_rate_to_previous_buyAd_suggestions = $this->get_seller_response_rate_to_previous_buyAd_suggestions($seller['user_id'],$suggested_buyAds);
                     
-                    if($response_rate_to_previous_buyAd_suggestions >= 50){
+                    if($response_rate_to_previous_buyAd_suggestions >= 25){
                         $filtered_sellers[] = $seller['user_id'];
                         $filtered_sellers_helper['responsers'][] = $seller['user_id'];
                     }
