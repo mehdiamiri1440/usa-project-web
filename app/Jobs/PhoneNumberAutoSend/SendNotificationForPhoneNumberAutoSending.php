@@ -82,12 +82,16 @@ class SendNotificationForPhoneNumberAutoSending implements ShouldQueue
         $product_records = DB::table('products')->where('products.myuser_id',$user_id)
                                             ->select(DB::raw("distinct(updated_at) as date"));
 
+        $user_record = DB::table('myusers')->where('id',$user_id)
+                                            ->select(DB::raw("updated_at as date"));
+
         $last_activity_date = DB::table('buy_ads')->where('buy_ads.myuser_id',$user_id)
                                             ->select(DB::raw("distinct(updated_at) as date"))
                                             ->union($sending_message_records)
                                             ->union($profile_records)
                                             ->union($product_records)
                                             ->union($sending_message_records)
+                                            ->union($user_record)
                                             ->orderBy('date','desc')
                                             ->get()
                                             ->first()

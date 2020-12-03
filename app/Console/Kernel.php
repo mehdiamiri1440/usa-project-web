@@ -101,7 +101,7 @@ class Kernel extends ConsoleKernel
 
         $product_auto_delete_job = new ProductAutoDeleteForUnresponsiveSellers();
         $schedule->job($product_auto_delete_job)
-                ->dailyAt('2:30');
+                ->dailyAt('02:33');
 
 
         // $schedule->command('backup:clean')->daily()->at('12:27');

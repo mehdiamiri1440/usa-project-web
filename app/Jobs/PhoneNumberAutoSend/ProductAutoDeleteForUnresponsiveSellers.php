@@ -39,7 +39,7 @@ class ProductAutoDeleteForUnresponsiveSellers implements ShouldQueue
                                         ->get();
 
         $deleting_products->each(function($product){
-            $product->delete();
+            $product->delete(['timestamps' => false]);
         });
     }
 
@@ -72,13 +72,11 @@ class ProductAutoDeleteForUnresponsiveSellers implements ShouldQueue
         $seller_auto_sent_phone_numbers_records = DB::table('auto_sent_phone_numbers_meta_datas')
                                                     ->where('sender_id',$user_id)
                                                     ->whereBetween('created_at',[$last_activity_date,Carbon::today()])
-                                                    ->orderyBy('created_at','desc')
+                                                    ->orderBy('created_at','desc')
                                                     ->get();
 
         if($seller_auto_sent_phone_numbers_records->count() >= 5){
-            if(Carbon::now()->diffInDays($seller_auto_sent_phone_numbers_records->last()->created_at) >= 3){
                 return true;
-            }
         }
 
         return false;
@@ -105,7 +103,10 @@ class ProductAutoDeleteForUnresponsiveSellers implements ShouldQueue
                                             ->select(DB::raw("distinct(created_at) as date"));
 
         $product_records = DB::table('products')->where('products.myuser_id',$user_id)
-                                            ->select(DB::raw("distinct(updated_at) as date"));
+                                            ->select(DB::raw("distinct(created_at) as date"));
+
+        $user_record = DB::table('myusers')->where('id',$user_id)
+                                            ->select(DB::raw("updated_at as date"));
 
         $last_activity_date = DB::table('buy_ads')->where('buy_ads.myuser_id',$user_id)
                                             ->select(DB::raw("distinct(updated_at) as date"))
@@ -113,6 +114,7 @@ class ProductAutoDeleteForUnresponsiveSellers implements ShouldQueue
                                             ->union($profile_records)
                                             ->union($product_records)
                                             ->union($sending_message_records)
+                                            ->union($user_record)
                                             ->orderBy('date','desc')
                                             ->get()
                                             ->first()
