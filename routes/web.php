@@ -17,6 +17,8 @@ use App\Models\profile;
 use Illuminate\Http\Request;
 
 use App\Jobs\sendSMS;
+use JWTAuth;
+use Carbon\Carbon;
 
 // Route::group(['prefix' => 'master'], function () {
 //     Route::get('/', function () {
@@ -911,6 +913,10 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
         'as' => 'admin_panel_payment_list'
     ]);
 });
+
+Route::post('/refresh-token',[
+    'uses' => 'Accounting\user_controller@refresh_token'
+]);
 
 //Route::any('/payment_callback',[
 //    'uses' => 'Payment\payment_controller@my_payment_callback',

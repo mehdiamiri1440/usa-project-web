@@ -56,7 +56,7 @@ class user_controller extends Controller
 
             $this->set_user_session($user);
             $this->set_last_login_info($user->id,$request);
-            $jwt_token = JWTAuth::fromUser($user);
+            $jwt_token = JWTAuth::fromUser($user,['exp' => Carbon::now()->addMinutes(2)->timestamp]);
 
             return response()->json([
                 'status' => true,
@@ -485,5 +485,34 @@ class user_controller extends Controller
             'show' => false,
             'show_off' => false
         ],200);
+    }
+
+    protected function refresh_token(Request $request)
+    {
+        try{
+            $token = JWTAuth::getToken();
+            $refreshed_token = JWTAuth::refresh($token);
+
+            return response()->json([
+                'status' => true,
+                'token' => $refreshed_token
+            ],200);
+        }
+        catch(\Exception $e){
+            if($e instanceof \Tymon\JWTAuth\Exceptions\TokenBlacklistedException){
+                return response()->json([
+                    'status' => false,
+                    'redirect_to_login' => true,
+                    'msg' => $e->getMessage()
+                ],401);
+            }
+
+            return response()->json([
+                'status' => false,
+                'redirect_to_login' => true,
+                'msg' => 'unable to refresh the token'
+            ],401);
+            
+        }
     }
 }

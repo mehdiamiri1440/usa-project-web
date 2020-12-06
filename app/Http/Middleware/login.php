@@ -43,12 +43,35 @@ class login
 
                     else return redirect('/login');
                 }
-                else return redirect('/login');
+                else {
+                    if($request->hasHeader('Authorization')){
+                        return response()->json([
+                            'status' => false,
+                            'refresh' => true
+                        ],401);
+                    }
+
+                    return redirect('/login');
+                }
+                
 
             }
             else return $next($request);
         }
         catch(\Exception $e){
+            if($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
+                return response()->json([
+                    'status' => false,
+                    'refresh' => true
+                ],401);
+            }
+            else if($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
+                return response()->json([
+                    'status' => false,
+                    'refresh' => false,
+                    'msg' => 'token is not valid'
+                ],401);
+            }
 
             return redirect('/login');
 
