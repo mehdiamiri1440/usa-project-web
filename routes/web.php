@@ -17,8 +17,6 @@ use App\Models\profile;
 use Illuminate\Http\Request;
 
 use App\Jobs\sendSMS;
-use JWTAuth;
-use Carbon\Carbon;
 
 // Route::group(['prefix' => 'master'], function () {
 //     Route::get('/', function () {
