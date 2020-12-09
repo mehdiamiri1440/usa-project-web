@@ -31,6 +31,7 @@ class Kernel extends ConsoleKernel
         Commands\backupUserFiles::class,
         Commands\downloadMediaFromCloud::class,
         Commands\takeBlogBackup::class,
+        Commands\syncMedia::class,
     ];
 
     /**

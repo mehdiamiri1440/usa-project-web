@@ -13,7 +13,7 @@ class downloadMediaFromCloud extends Command
      *
      * @var string
      */
-    protected $signature = 'fetch:media {--from=} {--until=}';
+    protected $signature = 'media:fetch {--from=} {--until=}';
 
     /**
      * The console command description.
