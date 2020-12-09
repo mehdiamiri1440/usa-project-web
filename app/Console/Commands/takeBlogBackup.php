@@ -58,7 +58,7 @@ class takeBlogBackup extends Command
         // Initialize archive object
         $zip = new \ZipArchive();
 
-        $backup_file_name = "blog-{$date_time}.zip";
+        $backup_file_name = "../blog-{$date_time}.zip";
         $zip->open($backup_file_name, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
 
         // Create recursive directory iterator

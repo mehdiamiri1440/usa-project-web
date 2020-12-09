@@ -123,8 +123,6 @@ class syncMedia extends Command
         $this->info("\n \n syncing $bucket_name files ...");
         $bar = $this->output->createProgressBar(count($files));
 
-        var_dump($cloud_existing_files);
-
         foreach($files as $file_path)
         {
             $tmp = explode('/',$file_path);
