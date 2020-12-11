@@ -91,7 +91,7 @@ class takeBlogBackup extends Command
 
     protected function save_backup_on_cloud($file_name)
     {
-        $path = base_path($file_name);
+        $path = base_path('../blog-backups/' . $file_name);
 
         try{
             $client = \AWS::createClient('s3');
