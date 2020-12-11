@@ -85,7 +85,8 @@ class takeBlogBackup extends Command
         // Zip archive will be created only after closing object
         $zip->close();
 
-        return $backup_file_name;
+        $tmp = explode('/',$backup_file_name);
+        return end($tmp);
     }
 
     protected function save_backup_on_cloud($file_name)
