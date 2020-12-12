@@ -40,6 +40,7 @@ class admin_payment_controller extends Controller
                         'gateway_transactions.price',
                         'gateway_transactions.created_at'
                     ])
+                    ->orderBy('gateway_transactions.created_at','desc')
                     ->paginate(10);
         }
         else{
@@ -57,6 +58,7 @@ class admin_payment_controller extends Controller
                         'gateway_transactions.price',
                         'gateway_transactions.created_at'
                     ])
+                    ->orderBy('gateway_transactions.created_at','desc')
                     ->paginate(10);
         }
         

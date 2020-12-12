@@ -109,12 +109,12 @@ class Kernel extends ConsoleKernel
         // $schedule->command('backup:clean')->daily()->at('12:27');
         $schedule->command('backup:run --only-db')->cron('15 */6 * * *'); // every 6 hours 15 mins after hour
         $schedule->command('media:sync --days=1')->cron('30 */4 * * *'); // every 4 hours 30 mins after hour
-        $schedule->command('create:backup --bucket=product-photos --days=1')->daily()->at('01:05');
-        $schedule->command('create:backup --bucket=product-thumbnails --days=1')->daily()->at('01:15');
-        $schedule->command('create:backup --bucket=profile-photos --days=1')->daily()->at('01:25');
-        $schedule->command('create:backup --bucket=verification-photos --days=1')->daily()->at('01:30');
-        $schedule->command('create:backup --bucket=related-photos --days=1')->daily()->at('01:35');
-        $schedule->command('create:backup --bucket=certificate-photos --days=1')->daily()->at('01:45');
+        // $schedule->command('create:backup --bucket=product-photos --days=1')->daily()->at('01:05');
+        // $schedule->command('create:backup --bucket=product-thumbnails --days=1')->daily()->at('01:15');
+        // $schedule->command('create:backup --bucket=profile-photos --days=1')->daily()->at('01:25');
+        // $schedule->command('create:backup --bucket=verification-photos --days=1')->daily()->at('01:30');
+        // $schedule->command('create:backup --bucket=related-photos --days=1')->daily()->at('01:35');
+        // $schedule->command('create:backup --bucket=certificate-photos --days=1')->daily()->at('01:45');
          
     }
 
