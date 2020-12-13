@@ -58,7 +58,7 @@ class takeBlogBackup extends Command
         // Initialize archive object
         $zip = new \ZipArchive();
 
-        $backup_file_name = "../blog-backups/blog-{$date_time}.zip";
+        $backup_file_name = "/blog-backups/blog-{$date_time}.zip";
         $zip->open($backup_file_name, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
 
         // Create recursive directory iterator
@@ -91,7 +91,7 @@ class takeBlogBackup extends Command
 
     protected function save_backup_on_cloud($file_name)
     {
-        $path = base_path('../blog-backups/' . $file_name);
+        $path = "/blog-backups/$file_name" ;
 
         try{
             $client = \AWS::createClient('s3');
