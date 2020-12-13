@@ -24,7 +24,8 @@ class admin_user_comment_controller extends Controller
                                 'user_comments.created_at',
                                 'user_comments.id as id',
                             ])
-                            ->get();
+                            ->orderBy('user_comments.created_at','desc')
+                            ->paginate(10);
 
         return view('admin_panel.userComment',[
             'comments' => $comments

@@ -33,7 +33,7 @@ class admin_verification_controller extends Controller
                             'myusers.active_pakage_type'
                         ])->distinct('myusers.id')
                         ->orderBy('verification_photos.created_at','desc')
-                        ->get();
+                        ->paginate(10);
         
         $date_convertor_object = new date_convertor();
 

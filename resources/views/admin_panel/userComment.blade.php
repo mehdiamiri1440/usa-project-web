@@ -74,6 +74,9 @@
                 </tr>
                 @endforeach
               </table>
+              <div align="center">
+                {{$comments->appends($_GET)->render("pagination::default")}}
+              </div>
             </div>
             <!-- /.box-body -->
           </div>

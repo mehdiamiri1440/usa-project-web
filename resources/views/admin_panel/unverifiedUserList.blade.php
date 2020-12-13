@@ -54,7 +54,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+              <table  class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>#</th>
@@ -77,6 +77,10 @@
                     </tr>
                     @endforeach
               </table>
+
+              <div align="center">
+                {{$users->appends($_GET)->render("pagination::default")}}
+              </div>
             </div>
             <!-- /.box-body -->
           </div>

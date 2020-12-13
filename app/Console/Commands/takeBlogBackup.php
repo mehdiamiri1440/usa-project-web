@@ -97,7 +97,7 @@ class takeBlogBackup extends Command
             $client = \AWS::createClient('s3');
             $client->putObject(array(
                 'Bucket'     => 'daily-backup',
-                'Key'        => $file_name,
+                'Key'        => env('APP_NAME'). '-' . $file_name,
                 'SourceFile' => $path,
             ));
         }
