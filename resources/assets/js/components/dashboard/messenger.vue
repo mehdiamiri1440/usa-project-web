@@ -1,6 +1,6 @@
 <style scoped>
 .message-wrapper {
-  border-right: 2px solid #f2f2f2;
+  border-right: 1px solid #e4e4e4;
   position: relative;
   height: 100%;
 }
@@ -9,7 +9,7 @@
 
   direction: rtl;
 
-  border-bottom: 2px solid #f2f2f2;
+  /* border-bottom: 2px solid #f2f2f2; */
   height: 100%;
   position: fixed;
 
@@ -389,7 +389,7 @@ import myContactList from "./messages-components/my-contact-list";
 import MainChatWrapper from "./messages-components/main-chat-wrapper";
 
 export default {
-  props: ["isRequiredFixAlert", "userType", "currentUser","str"],
+  props: ["isRequiredFixAlert", "userType", "currentUser", "str"],
   components: {
     myContactList,
     MainChatWrapper,
@@ -419,7 +419,6 @@ export default {
       isContactListLoaded: false,
       isCurrentStep: 0,
       assets: this.$parent.assets,
-      str: this.$parent.str,
       fromContact: 0,
       toContact: 15,
       contactsCountInEachLoad: 20,
@@ -489,7 +488,18 @@ export default {
         })
         .then(function (response) {
           self.isNoticeActive = true;
-          self.chatMessages = response.data.messages;
+          let data = response.data.messages;
+          let itemDate = "";
+          data = data.map((item) => {
+            let date = item.created_at.substr(0, 10);
+            item.isDateShow = true;
+            if (itemDate == date) {
+              item.isDateShow = false;
+            }
+            itemDate = date;
+            return item;
+          });
+          self.chatMessages = data;
           if (!self.chatMessages.length) {
             self.isNoticeActive = false;
           }

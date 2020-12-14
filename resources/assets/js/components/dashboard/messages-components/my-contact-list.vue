@@ -1,15 +1,25 @@
 <style scoped>
 .contact-body .contact-search {
-  padding: 9px 0 0;
-  background: #eef3f3;
+  background: #f0f0f0;
   position: absolute;
   left: 0;
   right: 0;
   z-index: 2;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.contact-wrapper .contact-body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.contact-wrapper .contact-body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 .contact-items {
-  padding-top: 95px;
+  padding-top: 80px;
 }
 
 .contact-items.is-buyer-list {
@@ -18,23 +28,33 @@
 
 .contact-body .contact-search .contact-search-input-wrapper {
   position: relative;
-  padding: 0 7px;
-  margin-bottom: 5px;
+  padding: 10px 7px;
 }
 
-.contact-body .contact-search .contact-search-input-wrapper i {
+.contact-body .contact-search .contact-search-input-wrapper > i {
   position: absolute;
-  left: 15px;
-  font-size: 20px;
-  color: #c1c1c1;
-  top: 11px;
+  right: 20px;
+  font-size: 16px;
+  color: #919191;
+  top: 17px;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper input {
-  padding: 9px 15px;
+  padding: 3px 40px 3px 15px;
   border-radius: 50px;
   background: #fff;
   border: none;
+}
+
+.contact-body .contact-search .contact-search-input-wrapper > button {
+  position: absolute;
+  left: 7px;
+  font-size: 16px;
+  color: #919191;
+  top: 8px;
+  background: none;
+  border: none;
+  padding: 7px 15px 1px;
 }
 
 .contact-body .contact-image {
@@ -58,18 +78,20 @@
 
 .contact-body .contact-item a {
   font-size: 13px;
-  color: #595959;
+  color: #666;
   overflow: hidden;
   padding: 10px 7px;
-  border-bottom: 1px solid #b6b6b6;
+  border-bottom: 1px solid #ededed;
   display: block;
   transition: 200ms;
+  border-left: 2px solid #fff;
 }
 
 .contact-body .contact-item a:hover,
 .contact-body .contact-item a.active {
-  background: #f6f6f6;
+  background: #fafafa;
   transition: 200ms;
+  border-left: 2px solid #00c569;
 }
 
 .contact-body .contact-item:last-of-type a {
@@ -78,7 +100,7 @@
 
 .contact-body .contact-item span.contact-name {
   float: right;
-  font-weight: bold;
+  position: relative;
 }
 
 .contact-body .contact-item span.contact-last-message {
@@ -161,16 +183,24 @@
   width: 100%;
 }
 
+.verified-user {
+  line-height: 1;
+  font-size: 15px;
+  position: absolute;
+  left: -18px;
+  top: -2px;
+}
+
 .verified-user::before {
-  top: 3px;
+  top: 4px;
   left: 3px;
+  font-size: 9px;
 }
 
 .contacts-switch-buttons-wrapper {
   float: right;
   width: 100%;
   background: #eef3f3;
-  border-bottom: 3px solid #e3e3e3;
 }
 
 .contacts-switch-buttons-wrapper .switch-button-item {
@@ -182,9 +212,9 @@
   border: none;
   width: 100%;
   font-size: 13px;
-  font-weight: bold;
-  padding: 8px 0;
+  padding: 3px 0;
   position: relative;
+  color: #666;
 }
 
 .contacts-switch-buttons-wrapper .contact-button .fa-plus {
@@ -198,23 +228,22 @@
 .contacts-switch-buttons-wrapper .contact-button.active,
 .contacts-switch-buttons-wrapper .contact-button:hover {
   background-color: #fff;
-  border-bottom: 2px solid #00c569;
-  margin-bottom: -2px;
+  border-bottom: 1px solid #00c569;
   z-index: 1;
 }
 
 .total-unread-messages-badge {
   position: absolute;
-  top: -3px;
-  background: red;
-  height: 20px;
-  width: 29px;
+  top: -6px;
+  background: #e41c38;
+  height: 16px;
+  width: 30px;
   color: #fff;
-  border-radius: 10px;
+  border-radius: 4px;
   left: 5px;
   font-size: 11px;
   line-height: 1;
-  padding-top: 4px;
+  padding-top: 2px;
 }
 .contact-button.active {
   border-radius: 4px 4px 0 0;
@@ -260,6 +289,9 @@
   width: calc(100% - 45px);
   padding-right: 8px;
 }
+.contact-body .contact-item .my-contact-info-wrapper:last-of-type {
+  padding-top: 6px;
+}
 
 .buyad-button p {
   background: #00c569;
@@ -280,11 +312,14 @@
   background: #dddddd;
   transition: 300ms;
 }
-.user-not-fount i {
-  margin-top: 50px;
-  font-size: 50px;
-  margin-bottom: 10px;
+.user-not-fount img {
+  width: 200px;
   display: block;
+  margin: 60px auto 20px;
+}
+
+.user-not-fount p {
+  font-weight: 500;
 }
 @media screen and (max-width: 991px) {
   .main-content {
@@ -361,10 +396,16 @@
       <div class="contact-search-input-wrapper">
         <input
           type="text"
-          placeholder="جستجو"
+          placeholder="جستجو مخاطب"
           v-model="$parent.contactNameSearchText"
         />
         <i class="fa fa-search"></i>
+        <button
+          v-if="$parent.contactNameSearchText"
+          @click.prevent="$parent.contactNameSearchText = ''"
+        >
+          <i class="fa fa-times"></i>
+        </button>
       </div>
       <div v-if="$parent.userType" class="contacts-switch-buttons-wrapper">
         <div class="switch-button-item">
@@ -409,7 +450,7 @@
         v-else-if="$parent.contactNameSearchText && !$parent.isSearchingContact"
       >
         <p class="user-not-fount">
-          <i class="fa fa-user"></i>
+          <img src="../../../../img/empty-message.svg" alt="" />
           <span>مخاطب یافت نشد</span>
         </p>
       </div>
@@ -423,9 +464,9 @@
         </div>
       </div>
       <div v-else-if="$parent.isContactListLoaded">
-        <p>
-          <i class="fa fa-user"></i>
-          <span>مخاطب یافت نشد</span>
+        <p class="user-not-fount">
+          <img src="../../../../img/empty-message.svg" alt="" />
+          <span>هیچ مکالمه ای وجود ندارد</span>
         </p>
       </div>
     </div>
@@ -441,7 +482,13 @@
           v-for="(contact, index) in $parent.contactList"
           :key="index"
         >
-          <a href="#" @click.prevent="$parent.loadChatHistory(contact, index)">
+          <a
+            href="#"
+            @click.prevent="$parent.loadChatHistory(contact, index)"
+            :class="{
+              active: $parent.selectedContact.contact_id == contact.contact_id,
+            }"
+          >
             <div class="contact-image">
               <img
                 v-if="contact.profile_photo"
@@ -469,7 +516,7 @@
               </span>
 
               <p class="last-message-date">
-                {{ contact.last_msg_time_date | moment("jYY/jMM/jDD") }}
+                {{ contact.last_msg_time_date | moment("jYYYY/jMM/jDD") }}
               </p>
             </div>
 

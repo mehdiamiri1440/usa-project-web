@@ -339,14 +339,15 @@ select {
 .bg-red:hover:hover {
   background-color: #d71a34 !important;
 }
-
+/* 
 .message-wrapper .chat-page ul,
 .main-modal-chat ul,
 .send-message-form,
 .footer-modal-chat,
 .group-message-wrapper {
-  background: url("../../img/whatsappbg.jpg") repeat;
-}
+  background-image: url("../../img/whatsappbg.png") repeat;
+  background-color: #E5DDD6;
+} */
 
 .loading_images img {
   display: block;

@@ -1,15 +1,25 @@
 <style scoped>
 .contact-body .contact-search {
-  padding: 9px 0 0;
-  background: #eef3f3;
+  background: #f0f0f0;
   position: absolute;
   left: 0;
   right: 0;
   z-index: 2;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.contact-wrapper .contact-body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.contact-wrapper .contact-body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 .contact-items {
-  padding-top: 99px;
+  padding-top: 80px;
 }
 
 li.contact-item {
@@ -22,23 +32,33 @@ li.contact-item {
 
 .contact-body .contact-search .contact-search-input-wrapper {
   position: relative;
-  padding: 0 7px;
-  margin-bottom: 5px;
+  padding: 10px 7px;
 }
 
-.contact-body .contact-search .contact-search-input-wrapper i {
+.contact-body .contact-search .contact-search-input-wrapper > i {
   position: absolute;
-  left: 15px;
-  font-size: 20px;
-  color: #c1c1c1;
-  top: 11px;
+  right: 20px;
+  font-size: 16px;
+  color: #919191;
+  top: 17px;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper input {
-  padding: 9px 15px;
+  padding: 3px 40px 3px 15px;
   border-radius: 50px;
   background: #fff;
   border: none;
+}
+
+.contact-body .contact-search .contact-search-input-wrapper > button {
+  position: absolute;
+  left: 7px;
+  font-size: 16px;
+  color: #919191;
+  top: 8px;
+  background: none;
+  border: none;
+  padding: 7px 15px 1px;
 }
 
 .contact-body .contact-image {
@@ -164,7 +184,6 @@ li.contact-item {
   float: right;
   width: 100%;
   background: #eef3f3;
-  border-bottom: 3px solid #e3e3e3;
 }
 
 .contacts-switch-buttons-wrapper .switch-button-item {
@@ -176,9 +195,9 @@ li.contact-item {
   border: none;
   width: 100%;
   font-size: 13px;
-  font-weight: bold;
-  padding: 8px 0;
+  padding: 3px 0;
   position: relative;
+  color: #666;
 }
 
 .contacts-switch-buttons-wrapper .contact-button .fa-plus {
@@ -192,23 +211,22 @@ li.contact-item {
 .contacts-switch-buttons-wrapper .contact-button.active,
 .contacts-switch-buttons-wrapper .contact-button:hover {
   background-color: #fff;
-  border-bottom: 2px solid #00c569;
-  margin-bottom: -2px;
+  border-bottom: 1px solid #00c569;
   z-index: 1;
 }
 
 .total-unread-messages-badge {
   position: absolute;
-  top: -3px;
-  background: red;
-  height: 20px;
-  width: 29px;
+  top: -6px;
+  background: #e41c38;
+  height: 16px;
+  width: 30px;
   color: #fff;
-  border-radius: 10px;
+  border-radius: 4px;
   left: 5px;
   font-size: 11px;
   line-height: 1;
-  padding-top: 4px;
+  padding-top: 2px;
 }
 .contact-button.active {
   border-radius: 4px 4px 0 0;
@@ -452,8 +470,11 @@ li.contact-item {
   <div class="contact-body my-contacts">
     <div class="contact-search">
       <div class="contact-search-input-wrapper">
-        <input type="text" placeholder="جستجو" v-model="filterBuyAd" />
+        <input type="text" placeholder=" جستجو پیشنهاد" v-model="filterBuyAd" />
         <i class="fa fa-search"></i>
+        <button v-if="filterBuyAd" @click.prevent="filterBuyAd = ''">
+          <i class="fa fa-times"></i>
+        </button>
       </div>
       <div v-if="$parent.userType" class="contacts-switch-buttons-wrapper">
         <div class="switch-button-item">

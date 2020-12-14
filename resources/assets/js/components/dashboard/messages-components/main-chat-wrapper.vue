@@ -2,10 +2,8 @@
 .loading-container {
   display: flex;
   width: 100%;
-  min-height: 86vh;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  background: #fff;
   justify-content: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -14,16 +12,38 @@
   z-index: 1;
 }
 
+.loading-container .lds-ring {
+  background: #fff;
+  border-radius: 50px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  width: 50px;
+  height: 50px;
+  padding: 4px;
+}
+
+.loading-container .lds-ring > div {
+  width: 30px;
+  height: 30px;
+  border-width: 3px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.chat-loaded::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.chat-loaded {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 .whatsapp-loading-gif {
   justify-content: center;
   align-items: center;
   width: 20%;
   height: 0%;
   display: flex;
-}
-
-.chat-not-loaded {
-  opacity: 0;
 }
 
 .chat-loaded {
@@ -42,23 +62,24 @@
 
 .check-items {
   padding-left: 10px;
-  color: #00a65a;
+  color: #b2b2b2;
+}
+
+.text-blue {
+  color: #60caf1;
+}
+
+.check-items.dual :last-of-type {
+  margin-left: -8px;
 }
 
 .message-wrapper .message-contact-title {
   font-size: 16px;
   padding: 7px 15px 8px;
-  background: -webkit-gradient(
-    linear,
-    left top,
-    right top,
-    from(#00c569),
-    to(#21ad93)
-  );
-  background: linear-gradient(-90deg, #00c569 0%, #21ad93 100%);
   float: right;
   width: 100%;
   color: #fff;
+  background: #f0f0f0;
 }
 
 .message-contact-title a {
@@ -69,6 +90,27 @@
 .message-contact-title a:hover {
   color: #fff;
   transition: 300ms;
+}
+
+.chat-page .bg-wrapper {
+  background: url("../../../../img/whatsappbg.png") repeat;
+  opacity: 0.06;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 50px;
+  bottom: 60px;
+  background-size: 50%;
+}
+
+.chat-page ul {
+  background-color: #e5ddd6;
+}
+
+.chat-page ul li {
+  position: relative;
+  z-index: 1;
 }
 
 .message-wrapper .message-contact-title-img {
@@ -94,12 +136,14 @@
 .message-wrapper .message-contact-title span {
   float: right;
   display: block;
-  margin-top: 9px;
+  margin-top: 7px;
   white-space: nowrap;
   text-overflow: ellipsis;
-  height: 30px;
+  height: 25px;
   overflow: hidden;
   max-width: 135px;
+  font-size: 15px;
+  color: #919191;
 }
 
 .back-state {
@@ -125,7 +169,7 @@
 }
 
 .message-wrapper .chat-page ul {
-  padding: 20px;
+  padding: 20px 70px;
 
   overflow-x: hidden;
 
@@ -135,7 +179,7 @@
 
   right: 0;
 
-  bottom: 57px;
+  bottom: 60px;
 
   top: 50px;
 
@@ -143,10 +187,30 @@
 }
 
 .message-wrapper .chat-page ul li {
-  overflow: hidden;
+  width: 100%;
+  float: right;
 }
 
-.message-wrapper .chat-page li > div {
+.message-wrapper .chat-page ul li:last-of-type {
+  margin-bottom: 20px;
+}
+
+.message-date {
+  text-align: center;
+  margin: 10px auto;
+  color: #313a43;
+  font-size: 14px;
+}
+
+.message-date span {
+  background: #e1f5fe;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 7px;
+  padding: 3px 10px 0;
+  line-height: 1;
+}
+
+.message-wrapper .chat-page li > div.message-item-wrapper {
   font-size: 14px;
   line-height: 1.612;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
@@ -155,37 +219,73 @@
   display: inline-block;
   position: relative;
   max-width: 100%;
+  min-width: 100px;
 }
 .message-content-wrapper {
   max-width: 455px;
   padding: 5px 10px;
   display: block;
 }
-.message-wrapper .chat-page .message-receive {
+.message-wrapper .chat-page .message-item-wrapper.message-receive {
   float: left;
-  background: #f7f7f7;
+  background: #fff;
+  border-radius: 0 8px 8px 8px;
+}
+.message-wrapper .chat-page .message-receive::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -6px;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 6px 9px 0;
+  border-color: transparent #fff transparent transparent;
+  line-height: 0px;
+  _border-color: #000000 #fff #000000 #000000;
+  _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
 }
 
-.message-wrapper .chat-page .message-send {
+.message-wrapper .chat-page .message-item-wrapper.message-send {
   float: right;
   background: #dcf8c6;
+  border-radius: 8px 0 8px 8px;
+}
+
+.message-wrapper .chat-page .message-send::after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: -6px;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 9px 6px 0 0;
+  border-color: #dcf8c6 transparent transparent transparent;
+  line-height: 0px;
+  _border-color: #dcf8c6 #000000 #000000 #000000;
+  _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
 }
 
 .message-wrapper .chat-page span.message-chat-date {
-  text-align: left;
-  font-size: 10px;
+  text-align: right;
+  font-size: 11px;
   padding-top: 3px;
   width: 100%;
   direction: ltr;
   display: block;
+  color: #b2b2b2;
 }
 
 .send-message-form {
   overflow: hidden;
-  padding: 4px 15px;
+  padding: 10px 15px;
   position: absolute;
   bottom: 0;
   width: 100%;
+  background: #f0f0f0;
 }
 
 .message-input {
@@ -197,6 +297,7 @@
   border-radius: 50px;
   background: #fff;
   border: none;
+  padding: 8px 15px;
 }
 
 .button-wrapper {
@@ -207,16 +308,16 @@
 .button-wrapper svg {
   height: 21px;
   position: relative;
-  right: -3px;
-  top: 3px;
+  right: -2px;
+  top: 4px;
 }
 
 .send-message-form .button-wrapper button {
   float: right;
 
-  width: 50px;
+  width: 40px;
 
-  height: 50px;
+  height: 40px;
 
   color: #fff;
 
@@ -472,6 +573,7 @@
     </div>
 
     <div class="chat-page" v-if="$parent.selectedContact">
+      <div class="bg-wrapper"></div>
       <ul
         :class="[
           $parent.isChatMessagesLoaded && $parent.isFirstMessageLoading
@@ -484,7 +586,13 @@
           v-for="(msg, index) in $parent.chatMessages"
           :class="{ 'margin-top-10': checkMessageName(index, index - 1) }"
         >
+          <div class="message-date" v-if="msg.isDateShow">
+            <span>
+              {{ msg.created_at | moment("jYYYY/jMM/jDD") }}
+            </span>
+          </div>
           <div
+            class="message-item-wrapper"
             :class="[
               checkMessageListClass(msg.sender_id)
                 ? 'message-send'
@@ -495,6 +603,7 @@
               v-if="msg.is_phone && !checkMessageListClass(msg.sender_id)"
               class="message-content-wrapper is-phone-active-wrapper"
             >
+              <!--msg.created_at | moment("jYY/jMM/jDD, HH:mm") -->
               <a
                 :href="'tel:' + msg.text"
                 class="hidden-sm hidden-md hidden-lg"
@@ -504,19 +613,9 @@
                 </span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">{{
-                    msg.created_at | moment("jYY/jMM/jDD, h:mm A")
+                    msg.created_at | moment("HH:mm")
                   }}</span>
-                  <span v-else>{{
-                    Date() | moment("jYY/jMM/jDD, h:mm A")
-                  }}</span>
-                  <span
-                    class="check-items"
-                    v-if="msg.sender_id === $parent.currentUserId"
-                  >
-                    <i class="fa fa-check" v-if="msg.created_at"></i>
-                    <i class="far fa-clock" v-else></i>
-                    <i class="fa fa-check" v-if="msg.is_read"></i>
-                  </span>
+                  <span v-else>{{ Date() | moment("HH:mm") }}</span>
                   <div class="message-button-wrapper">
                     <button>
                       <i class="fa fa-phone-alt"></i>
@@ -529,19 +628,9 @@
                 <span v-text="msg.text"></span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">{{
-                    msg.created_at | moment("jYY/jMM/jDD, h:mm A")
+                    msg.created_at | moment("HH:mm")
                   }}</span>
-                  <span v-else>{{
-                    Date() | moment("jYY/jMM/jDD, h:mm A")
-                  }}</span>
-                  <span
-                    class="check-items"
-                    v-if="msg.sender_id === $parent.currentUserId"
-                  >
-                    <i class="fa fa-check" v-if="msg.created_at"></i>
-                    <i class="far fa-clock" v-else></i>
-                    <i class="fa fa-check" v-if="msg.is_read"></i>
-                  </span>
+                  <span v-else>{{ Date() | moment("HH:mm") }}</span>
                 </span>
               </div>
             </div>
@@ -550,22 +639,38 @@
               <span v-text="msg.text"></span>
               <span class="message-chat-date">
                 <span v-if="msg.created_at">{{
-                  msg.created_at | moment("jYY/jMM/jDD, h:mm A")
+                  msg.created_at | moment("HH:mm")
                 }}</span>
-                <span v-else>{{ Date() | moment("jYY/jMM/jDD, h:mm A") }}</span>
+                <span v-else>{{ Date() | moment("HH:mm") }}</span>
                 <span
                   class="check-items"
-                  v-if="msg.sender_id === $parent.currentUserId"
+                  v-if="
+                    msg.sender_id === $parent.currentUserId && !msg.created_at
+                  "
                 >
-                  <i class="fa fa-check" v-if="msg.created_at"></i>
-                  <i class="far fa-clock" v-else></i>
-                  <i class="fa fa-check" v-if="msg.is_read"></i>
+                  <i class="far fa-clock"></i>
+                </span>
+                <span
+                  class="check-items dual"
+                  v-else-if="
+                    msg.sender_id === $parent.currentUserId && msg.created_at
+                  "
+                >
+                  <i
+                    class="fa fa-check"
+                    v-if="msg.is_read"
+                    :class="{ 'text-blue': msg.is_read }"
+                  ></i>
+                  <i class="fa fa-check text-blue"></i>
                 </span>
               </span>
             </div>
           </div>
         </li>
-        <li v-if="$parent.isNoticeActive" class="messenger-notice">
+        <li
+          v-if="$parent.isNoticeActive && !$parent.isChatMessagesLoaded"
+          class="messenger-notice"
+        >
           <p class="notice-title">
             اطلاعات هویتی این کاربر
             <span class="red-text" v-if="!$parent.isCurrentUserVerified"
@@ -587,10 +692,7 @@
         v-if="$parent.isChatMessagesLoaded && $parent.isFirstMessageLoading"
       >
         <div class="image-wrapper">
-          <div
-            v-show="!$parent.isImageLoad || $parent.isImageLoad"
-            class="lds-ring"
-          >
+          <div class="lds-ring">
             <div></div>
             <div></div>
             <div></div>
