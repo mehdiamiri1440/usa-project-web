@@ -60,8 +60,8 @@ class payment_controller extends Controller
                 ]);
                 
                 return $gateway->redirect(); 
-            }catch (Exception $e){ 
-                echo $e->getMessage();
+            }catch (\Exception $e){ 
+                return redirect('/contact-us');
             }   
         }
     } 
@@ -98,8 +98,8 @@ class payment_controller extends Controller
                 ]);
                 
                 return $gateway->redirect(); 
-            }catch (Exception $e){ 
-                echo $e->getMessage();
+            }catch (\Exception $e){ 
+                return redirect('/contact-us');
             }   
         }
     } 
@@ -316,8 +316,8 @@ class payment_controller extends Controller
             ]);
 
             return $gateway->redirect(); 
-        }catch (Exception $e){ 
-            echo $e->getMessage();
+        }catch (\Exception $e){ 
+            return redirect('/contact-us');
         }   
     }  
 
@@ -345,8 +345,8 @@ class payment_controller extends Controller
             ]);
  
             return $gateway->redirect(); 
-        }catch (Exception $e){ 
-            echo $e->getMessage();
+        }catch (\Exception $e){ 
+            return redirect('/contact-us');
         }   
     }  
     
@@ -456,7 +456,7 @@ class payment_controller extends Controller
                 
                 return $gateway->redirect(); 
             }catch (Exception $e){ 
-                echo $e->getMessage();
+                return redirect('/contact-us');
             }  
         }
         else{
@@ -495,8 +495,8 @@ class payment_controller extends Controller
 
                 
                 return $gateway->redirect(); 
-            }catch (Exception $e){ 
-                echo $e->getMessage();
+            }catch (\Exception $e){ 
+                return redirect('/contact-us');
             }  
         }
         else{
@@ -601,8 +601,8 @@ class payment_controller extends Controller
 
                 
                 return $gateway->redirect(); 
-            }catch (Exception $e){ 
-                echo $e->getMessage();
+            }catch (\Exception $e){ 
+                return redirect('/contact-us');
             } 
         }
         else{
@@ -641,8 +641,8 @@ class payment_controller extends Controller
 
                 
                 return $gateway->redirect(); 
-            }catch (Exception $e){ 
-                echo $e->getMessage();
+            }catch (\Exception $e){ 
+                return redirect('/contact-us');
             } 
         }
         else{
