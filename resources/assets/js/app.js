@@ -28,6 +28,7 @@ require('../css/cropper.css')
 require('../css/master/style.css')
 require('../css/popup.css')
 require('../css/sweetalert.css')
+require('../css/custom-animation.css')
 
 
 window.Vue = require('vue');

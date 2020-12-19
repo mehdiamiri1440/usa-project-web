@@ -297,22 +297,31 @@
   border-radius: 50px;
   background: #fff;
   border: none;
-  padding: 8px 15px;
+  padding: 7px 50px 8px 15px;
+  transition: 150ms;
+}
+
+.send-message-form .message-input input.padding-default {
+  transition: 150ms;
+  padding: 7px 15px 8px 15px;
+}
+
+.capture-image {
+  position: absolute;
+  font-size: 21px;
+  background: none;
+  border: none;
+  color: #919191;
+  padding: 7px 15px 7px 10px;
 }
 
 .button-wrapper {
   float: right;
   line-height: 1.1;
-}
-
-.button-wrapper svg {
-  height: 21px;
   position: relative;
-  right: -2px;
-  top: 4px;
 }
 
-.send-message-form .button-wrapper button {
+.send-message-form .button-wrapper .item-wrapper {
   float: right;
 
   width: 40px;
@@ -328,6 +337,34 @@
   border-radius: 35px;
 
   padding: 0 10px;
+}
+
+.send-message-form .button-wrapper .item-wrapper .send-message-button {
+  background: none;
+  border: none;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 0;
+  padding-top: 7px;
+  padding-left: 9px;
+}
+
+.send-message-form .button-wrapper .voice-message-button {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0px;
+  background: none;
+  border: none;
+  font-size: 19px;
+  bottom: 0;
+  padding: 4px 13px 0;
+}
+
+.button-wrapper .send-message-button svg {
+  width: 19px;
+  height: 19px;
 }
 
 #chat-menu-items {
@@ -425,6 +462,7 @@
   top: 3px;
   left: 3px;
 }
+
 @media screen and (max-width: 767px) {
   #chat-menu-items {
     left: 54px;
@@ -704,7 +742,19 @@
       <div class="send-message-form">
         <form>
           <div class="message-input">
+            <button
+              class="capture-image"
+              :class="{
+                'slide-out-right': isChat,
+                'scale-up-center-full ': !isChat,
+              }"
+            >
+              <i class="fa fa-camera"></i>
+            </button>
             <input
+              :class="{
+                'padding-default': isChat,
+              }"
               type="text"
               placeholder="پیغامی بگذارید "
               v-model="$parent.msgToSend"
@@ -712,26 +762,47 @@
           </div>
 
           <div class="button-wrapper">
-            <button type="submit" @click.prevent="$parent.sendMessage()">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="13.347"
-                height="12.766"
-                viewBox="0 0 13.347 12.766"
+            <div class="item-wrapper">
+              <button
+                class="voice-message-button"
+                :class="{
+                  'scale-down-center-fade': isChat,
+                  'scale-up-center-full ': !isChat,
+                }"
+                @click.prevent="isChat = false"
               >
-                <path
-                  id="send-message-icon"
-                  data-name="send-message-icon"
-                  d="M2511.158-3909.893l12.347-5.929-12.347-5.837.235,4.51,10.029,1.327-10.029,1.477Z"
-                  transform="translate(-2510.658 3922.159)"
-                  fill="#fff"
-                  stroke="#fff"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1"
-                />
-              </svg>
-            </button>
+                <i class="fa fa-microphone"></i>
+              </button>
+              <button
+                type="submit"
+                class="send-message-button"
+                :class="{
+                  'scale-down-center-fade': !isChat,
+                  'scale-up-center-full ': isChat,
+                }"
+                @click.prevent="isChat = true"
+              >
+                <!-- @click.prevent="$parent.sendMessage()" -->
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="13.347"
+                  height="12.766"
+                  viewBox="0 0 13.347 12.766"
+                >
+                  <path
+                    id="send-message-icon"
+                    data-name="send-message-icon"
+                    d="M2511.158-3909.893l12.347-5.929-12.347-5.837.235,4.51,10.029,1.327-10.029,1.477Z"
+                    transform="translate(-2510.658 3922.159)"
+                    fill="#fff"
+                    stroke="#fff"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         </form>
       </div>
@@ -741,6 +812,12 @@
 
 <script>
 export default {
+  data() {
+    return {
+      isVoiceRecord: false,
+      isChat: false,
+    };
+  },
   methods: {
     init: function () {
       this.hideCollapses();
@@ -792,9 +869,21 @@ export default {
       }
       return myMessage;
     },
+    recordVoice() {
+      console.log("voice");
+    },
   },
   mounted: function () {
     this.init();
+  },
+  watch: {
+    "$parent.msgToSend"(value) {
+      if (value) {
+        this.isChat = true;
+      } else {
+        this.isChat = false;
+      }
+    },
   },
 };
 </script>
