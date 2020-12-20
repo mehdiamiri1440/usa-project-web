@@ -425,6 +425,14 @@
   top: 3px;
   left: 3px;
 }
+
+.img-wrapper {
+  margin: auto -5px;
+  border-radius: 4px;
+  overflow: hidden;
+  max-height: 330px;
+}
+
 @media screen and (max-width: 767px) {
   #chat-menu-items {
     left: 54px;
@@ -667,6 +675,19 @@
             </div>
           </div>
         </li>
+        <li class="margin-top-10">
+          <div class="message-item-wrapper message-receive">
+            <div class="message-content-wrapper is-phone-active-wrapper">
+              <!--msg.created_at | moment("jYY/jMM/jDD, HH:mm") -->
+
+              <ChatImage />
+              <span> عکس </span>
+              <span class="message-chat-date">
+                <span> 13:04 </span>
+              </span>
+            </div>
+          </div>
+        </li>
         <li
           v-if="$parent.isNoticeActive && !$parent.isChatMessagesLoaded"
           class="messenger-notice"
@@ -740,7 +761,14 @@
 </template>
 
 <script>
+
+
+import ChatImage from './chat-image';
+
 export default {
+  components:{
+    ChatImage
+  },
   methods: {
     init: function () {
       this.hideCollapses();
