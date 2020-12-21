@@ -159,7 +159,10 @@
             <h2>ثبت محصول جدید</h2>
           </div>
 
-          <div v-else-if="currentStep > 0 && currentStep < 7" class="wrapper-progressbar">
+          <div
+            v-else-if="currentStep > 0 && currentStep < 7"
+            class="wrapper-progressbar"
+          >
             <div class="custom-progressbar">
               <div
                 class="progress-bar"
@@ -188,27 +191,42 @@
                 <p>نوع محصول</p>
               </a>
 
-              <a class="progrees-item" :class="{'active-item' : currentStep >= 2}">
+              <a
+                class="progrees-item"
+                :class="{ 'active-item': currentStep >= 2 }"
+              >
                 <span>2</span>
                 <p>موجودی و قیمت</p>
               </a>
 
-              <a class="progrees-item" :class="{'active-item' : currentStep >= 3}">
+              <a
+                class="progrees-item"
+                :class="{ 'active-item': currentStep >= 3 }"
+              >
                 <span>3</span>
                 <p>انتخاب مبدا</p>
               </a>
 
-              <a class="progrees-item" :class="{'active-item' : currentStep >= 4}">
+              <a
+                class="progrees-item"
+                :class="{ 'active-item': currentStep >= 4 }"
+              >
                 <span>4</span>
                 <p>تصاویر محصول</p>
               </a>
 
-              <a class="progrees-item" :class="{'active-item' : currentStep >= 5}">
+              <a
+                class="progrees-item"
+                :class="{ 'active-item': currentStep >= 5 }"
+              >
                 <span>5</span>
                 <p>توضیحات</p>
               </a>
 
-              <a class="progrees-item" :class="{'active-item' : currentStep >= 6}">
+              <a
+                class="progrees-item"
+                :class="{ 'active-item': currentStep >= 6 }"
+              >
                 <span>6</span>
                 <p>ثبت نهایی</p>
               </a>
@@ -222,7 +240,10 @@
 
         <main
           class="main-section-wrapper"
-          :class="{'main-section-wrapper-full-width' : currentStep == 4 || currentStep == 7}"
+          :class="{
+            'main-section-wrapper-full-width':
+              currentStep == 4 || currentStep == 7,
+          }"
         >
           <StartRegisterProduct v-show="currentStep == 0" />
           <ProductCategory v-show="currentStep == 1" />
@@ -258,14 +279,14 @@ export default {
     ProductImage,
     Terms,
     MoreDetails,
-    FinishStage
+    FinishStage,
   },
-  data: function() {
+  data: function () {
     return {
       currentStep: 0,
       currentUser: {
         profile: "",
-        user_info: ""
+        user_info: "",
       },
       product: {
         product_name: "",
@@ -277,7 +298,7 @@ export default {
         address: "",
         category_id: "",
         city_id: "",
-        rules: true
+        rules: true,
       },
       productFields: [
         "product_name",
@@ -288,7 +309,7 @@ export default {
         "description",
         "address",
         "category_id",
-        "city_id"
+        "city_id",
       ],
       categoryList: "",
       SubCategoryList: "",
@@ -311,14 +332,14 @@ export default {
         city_id: "",
         images_count: [],
         images_type: "",
-        images_size: ""
+        images_size: "",
       },
       disableSubmit: false,
       items: [
         {
           message: " ثبت محصول",
-          url: "registerProduct"
-        }
+          url: "registerProduct",
+        },
       ],
       uploadPercentage: 0,
       relatedBuyAd: null,
@@ -326,22 +347,24 @@ export default {
       productSubCategoryName: "",
       limited: {
         isLimited: true,
-        msg: ""
+        msg: "",
       },
-      isStartLoading: false
+      isStartLoading: false,
+      stock_text: "",
+      min_sale_amount_text: "",
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       axios
         .post("/user/profile_info")
-        .then(response => (this.currentUser = response.data));
+        .then((response) => (this.currentUser = response.data));
       axios
         .post("/get_category_list")
-        .then(response => (this.categoryList = response.data.categories));
+        .then((response) => (this.categoryList = response.data.categories));
       axios
         .post("/location/get_location_info")
-        .then(response => (this.provinces = response.data.provinces));
+        .then((response) => (this.provinces = response.data.provinces));
     },
 
     startRegisterProductSubmited() {
@@ -350,7 +373,7 @@ export default {
       var self = this;
       axios
         .post("/is_user_allowed_to_register_product")
-        .then(function(response) {
+        .then(function (response) {
           self.limited.isLimited = response.data.is_limited;
           self.limited.msg = response.data.msg;
           self.isStartLoading = false;
@@ -421,29 +444,29 @@ export default {
         this.goToStep(6);
       }
     },
-    loadSubCategoryList: function(e) {
+    loadSubCategoryList: function (e) {
       e.preventDefault();
       var categoryId = $(e.target).val();
       this.errors.category_selected = "";
       this.categorySelected = categoryId;
       axios
         .post("/get_category_list", {
-          parent_id: categoryId
+          parent_id: categoryId,
         })
-        .then(response => (this.SubCategoryList = response.data.categories));
+        .then((response) => (this.SubCategoryList = response.data.categories));
     },
-    loadCityList: function(e) {
+    loadCityList: function (e) {
       this.errors.provinceSelected = "";
       e.preventDefault();
       var provinceId = $(e.target).val();
       this.provinceSelected = provinceId;
       axios
         .post("/location/get_location_info", {
-          province_id: provinceId
+          province_id: provinceId,
         })
-        .then(response => (this.cities = response.data.cities));
+        .then((response) => (this.cities = response.data.cities));
     },
-    submitProduct: function() {
+    submitProduct: function () {
       eventBus.$emit("submiting", true);
       var self = this;
 
@@ -460,15 +483,15 @@ export default {
           .post("/user/add_product", formData, {
             headers: {
               "X-Requested-With": "XMLHttpRequest",
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
             },
-            onUploadProgress: function(progressEvent) {
+            onUploadProgress: function (progressEvent) {
               this.uploadPercentage = parseInt(
                 Math.round((progressEvent.loaded * 100) / progressEvent.total)
               );
-            }.bind(this)
+            }.bind(this),
           })
-          .then(function(response) {
+          .then(function (response) {
             if (response.status === 201) {
               self.disableSubmit = true;
               self.popUpMsg = self.getProductRegisterSuccessMessage();
@@ -488,14 +511,13 @@ export default {
 
               self.goToStep(7);
 
-              if(response.data.product){
-                if(response.data.product.active_package_type == 0){
-                  setTimeout(function(){
+              if (response.data.product) {
+                if (response.data.product.active_package_type == 0) {
+                  setTimeout(function () {
                     self.$parent.is_pricing_active = true;
-                  },1000);
+                  }, 1000);
                 }
               }
-              
             } else if (response.status === 200) {
               self.popUpMsg = response.data.msg;
               eventBus.$emit("submitSuccess", self.popUpMsg);
@@ -503,23 +525,23 @@ export default {
               // $('#modal-buttons').modal('show');
               self.goToStep(7);
 
-              if(response.data.product){
-                if(response.data.product.active_package_type == 0){
-                  setTimeout(function(){
+              if (response.data.product) {
+                if (response.data.product.active_package_type == 0) {
+                  setTimeout(function () {
                     self.$parent.is_pricing_active = true;
-                  },1000);
+                  }, 1000);
                 }
               }
             }
           })
-          .catch(function(err) {
+          .catch(function (err) {
             self.errors = [];
             self.errors = err.response.data.errors;
             eventBus.$emit("submiting", false);
           });
       }
     },
-    getProductFormFields: function() {
+    getProductFormFields: function () {
       let formData = new FormData();
       let cnt = this.productFields.length;
 
@@ -537,19 +559,19 @@ export default {
 
       return formData;
     },
-    setCategoryId: function(e) {
+    setCategoryId: function (e) {
       e.preventDefault();
       var categoryId = $(e.target).val();
       this.errors.category_id = "";
       this.product.category_id = categoryId;
     },
-    setCityId: function(e) {
+    setCityId: function (e) {
       this.errors.city_id = "";
       e.preventDefault();
       var cityId = $(e.target).val();
       this.product.city_id = cityId;
     },
-    handleProductFilesUpload: function() {
+    handleProductFilesUpload: function () {
       let uploadedFiles = this.$refs.productFiles.files;
       /*
                   Adds the uploaded file to the files array
@@ -558,7 +580,7 @@ export default {
         this.productFiles.push(uploadedFiles[i]);
       }
     },
-    toLatinNumbers: function(num) {
+    toLatinNumbers: function (num) {
       if (num == null) {
         return null;
       }
@@ -569,14 +591,14 @@ export default {
 
       return num
         .toString()
-        .replace(/[\u0660-\u0669]/g, function(c) {
+        .replace(/[\u0660-\u0669]/g, function (c) {
           return c.charCodeAt(0) - 0x0660;
         })
-        .replace(/[\u06f0-\u06f9]/g, function(c) {
+        .replace(/[\u06f0-\u06f9]/g, function (c) {
           return c.charCodeAt(0) - 0x06f0;
         });
     },
-    getProductRegisterSuccessMessage: function() {
+    getProductRegisterSuccessMessage: function () {
       let msg = "";
 
       if (this.currentUser.user_info.active_pakage_type == 0) {
@@ -588,23 +610,27 @@ export default {
 
       return msg;
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
     },
-    registerComponentExceptions: function(description, fatal = false) {
+    registerComponentExceptions: function (description, fatal = false) {
       gtag("event", "exception", {
         description: description,
-        fatal: fatal
+        fatal: fatal,
       });
     },
-    goToStep: function(step) {
+    goToStep: function (step) {
       this.currentStep = step;
       this.scrollToTop();
     },
-    categorySelectedValidator: function(id) {
+    categorySelectedValidator: function (id) {
       this.errors.category_selected = "";
 
       if (id == "") {
@@ -619,7 +645,7 @@ export default {
         );
       }
     },
-    categoryIdValidator: function(id) {
+    categoryIdValidator: function (id) {
       this.errors.category_id = "";
 
       if (id == "") {
@@ -634,7 +660,7 @@ export default {
         );
       }
     },
-    productNameValidator: function(name) {
+    productNameValidator: function (name) {
       this.errors.product_name = "";
 
       if (name == "") {
@@ -651,7 +677,7 @@ export default {
         );
       }
     },
-    stockValidator: function(number) {
+    stockValidator: function (number) {
       this.errors.stock = "";
       var standardNumber = this.toLatinNumbers(number);
       if (standardNumber == "") {
@@ -668,7 +694,7 @@ export default {
         );
       }
     },
-    minSaleAmountValidator: function(number) {
+    minSaleAmountValidator: function (number) {
       this.errors.min_sale_amount = "";
       var standardNumber = this.toLatinNumbers(number);
       if (standardNumber == "") {
@@ -685,7 +711,7 @@ export default {
         );
       }
     },
-    maxSalePriceValidator: function(number) {
+    maxSalePriceValidator: function (number) {
       this.errors.max_sale_price = "";
       var standardNumber = this.toLatinNumbers(number);
       if (standardNumber == "") {
@@ -702,7 +728,7 @@ export default {
         );
       }
     },
-    minSalePriceValidator: function(number) {
+    minSalePriceValidator: function (number) {
       this.errors.min_sale_price = "";
       var standardNumber = this.toLatinNumbers(number);
       if (standardNumber == "") {
@@ -719,7 +745,7 @@ export default {
         );
       }
     },
-    provincesValidator: function(id) {
+    provincesValidator: function (id) {
       this.errors.provinceSelected = "";
 
       if (id == "") {
@@ -734,7 +760,7 @@ export default {
         );
       }
     },
-    cityIdValidator: function(id) {
+    cityIdValidator: function (id) {
       this.errors.city_id = "";
 
       if (id == "") {
@@ -749,7 +775,7 @@ export default {
         );
       }
     },
-    descriptionValidator: function(description) {
+    descriptionValidator: function (description) {
       this.errors.description = "";
 
       if (description != "") {
@@ -771,7 +797,7 @@ export default {
         );
       }
     },
-    validateRegx: function(input, regx) {
+    validateRegx: function (input, regx) {
       return regx.test(input);
     },
     reLoadPage() {
@@ -780,14 +806,14 @@ export default {
     scrollToTop() {
       window.scrollTo(0, 0);
     },
-    isOsIOS: function() {
+    isOsIOS: function () {
       var userAgent = window.navigator.userAgent.toLowerCase(),
         safari = /safari/.test(userAgent),
         ios = /iphone|ipod|ipad/.test(userAgent);
 
       return ios;
     },
-    openChat: function(buyAd) {
+    openChat: function (buyAd) {
       this.registerComponentStatistics(
         "buyAdReplyAfterProductRegister",
         "openChat",
@@ -797,9 +823,9 @@ export default {
 
       axios
         .post("/get_user_last_confirmed_profile_photo", {
-          user_id: buyAd.myuser_id
+          user_id: buyAd.myuser_id,
         })
-        .then(function(response) {
+        .then(function (response) {
           var profile_photo = response.data.profile_photo;
 
           var contact = {
@@ -807,15 +833,36 @@ export default {
             first_name: buyAd.first_name,
             last_name: buyAd.last_name,
             profile_photo: profile_photo,
-            user_name: buyAd.user_name
+            user_name: buyAd.user_name,
           };
 
           eventBus.$emit("ChatInfo", contact);
         })
-        .catch(function(err) {
+        .catch(function (err) {
           //
         });
-    }
+    },
+    convertUnits: function (number) {
+      let data = number / 1000;
+      let text = "";
+      if (number < 1000) {
+        return number + " " + "کیلوگرم";
+      } else {
+        let ton = data.toString().split(".")[0];
+        let kg = number.toString().substr(ton.length);
+        kg = kg.replace(/^0+/, "");
+        ton = ton + " " + "تن";
+
+        if (kg) {
+          kg = " و " + kg + " کیلوگرم";
+          text = ton + kg;
+        } else {
+          text = ton;
+        }
+
+        return text;
+      }
+    },
   },
   mounted() {
     this.init();
@@ -826,13 +873,13 @@ export default {
     gtag("config", "UA-129398000-1", { page_path: "/register-product" });
   },
   watch: {
-    uploadPercentage: function() {
+    uploadPercentage: function () {
       eventBus.$emit("uploadPercentage", this.uploadPercentage);
     },
-    "product.product_name": function(name) {
+    "product.product_name": function (name) {
       this.errors.product_name = "";
     },
-    productFiles: function(files) {
+    productFiles: function (files) {
       var errorsStatus = false;
       if (files.length) {
         this.errors.images_count = [];
@@ -871,7 +918,7 @@ export default {
         this.errors.images_size = "";
       }
     },
-    currentStep: function(step) {
+    currentStep: function (step) {
       switch (step) {
         case 2:
           $(".custom-progressbar.active-item").css("width", "21%");
@@ -897,7 +944,35 @@ export default {
           $(".custom-progressbar.active-item").css("width", "0%");
           break;
       }
-    }
-  }
+    },
+    "product.stock": function (value) {
+      this.errors.stock = "";
+      if (value) {
+        let number = this.toLatinNumbers(value);
+        if (!this.validateRegx(number, /^\d*$/)) {
+          this.errors.stock = "لطفا  فقط عدد وارد کنید";
+        }
+        if (!this.errors.stock) {
+          this.stock_text = this.convertUnits(number);
+        }
+      } else {
+        this.stock_text = "";
+      }
+    },
+    "product.min_sale_amount": function (value) {
+      this.errors.min_sale_amount = "";
+      if (value) {
+        let number = this.toLatinNumbers(value);
+        if (!this.validateRegx(number, /^\d*$/)) {
+          this.errors.min_sale_amount = "لطفا  فقط عدد وارد کنید";
+        }
+        if (!this.errors.min_sale_amount) {
+          this.min_sale_amount_text = this.convertUnits(number);
+        }
+      } else {
+        this.min_sale_amount_text = "";
+      }
+    },
+  },
 };
 </script>

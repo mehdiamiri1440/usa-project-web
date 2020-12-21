@@ -64,7 +64,7 @@ label {
 
   top: 6px;
 
-  font-family: "Font Awesome 5 Free",sans-serif;
+  font-family: "Font Awesome 5 Free", sans-serif;
 
   font-weight: 900;
 
@@ -216,13 +216,13 @@ select.error:focus {
 }
 
 .error-message {
-  text-align: center;
+  text-align: right;
 
   color: #e41c38;
 
   font-weight: bold;
 
-  height: 15px;
+  height: 25px;
 
   direction: rtl;
 
@@ -238,6 +238,20 @@ select.error:focus {
 
   line-height: 1.618;
 }
+
+.small-description-text {
+  text-align: right;
+
+  font-weight: bold;
+  color: #777777;
+
+  height: 25px;
+
+  direction: rtl;
+
+  font-size: 12px;
+}
+
 label .small-label {
   font-size: 12px;
 }
@@ -270,13 +284,19 @@ label .small-label {
               v-model="$parent.product.stock"
               id="stock"
               type="tel"
-              :class="{'active' :  $parent.product.stock , 'error': $parent.errors.stock}"
+              :class="{
+                active: $parent.product.stock,
+                error: $parent.errors.stock,
+              }"
               placeholder="مثلا : 1000 "
               pattern="[0-9]*"
             />
           </div>
-          <p class="error-message col-xs-12">
-            <span v-if="$parent.errors.stock" v-text="$parent.errors.stock"></span>
+          <p class="small-description-text" v-if="!$parent.errors.stock">
+            <span v-if="$parent.stock_text" v-text="$parent.stock_text"></span>
+          </p>
+          <p class="error-message col-xs-12" v-if="$parent.errors.stock">
+            <span v-text="$parent.errors.stock"></span>
           </p>
         </div>
 
@@ -291,13 +311,26 @@ label .small-label {
               v-model="$parent.product.min_sale_amount"
               id="min-sale-amount"
               type="tel"
-              :class="{'active' :  $parent.product.min_sale_amount , 'error':$parent.errors.min_sale_amount}"
+              :class="{
+                active: $parent.product.min_sale_amount,
+                error: $parent.errors.min_sale_amount,
+              }"
               placeholder="مثلا : 20 "
               pattern="[0-9]*"
             />
           </div>
-          <p class="error-message">
-            <span v-if="$parent.errors.min_sale_amount" v-text="$parent.errors.min_sale_amount"></span>
+
+          <p
+            class="small-description-text"
+            v-if="!$parent.errors.min_sale_amount"
+          >
+            <span
+              v-if="$parent.min_sale_amount_text"
+              v-text="$parent.min_sale_amount_text"
+            ></span>
+          </p>
+          <p class="error-message" v-if="$parent.errors.min_sale_amount">
+            <span v-text="$parent.errors.min_sale_amount"></span>
           </p>
         </div>
 
@@ -312,13 +345,19 @@ label .small-label {
               v-model="$parent.product.min_sale_price"
               id="min-sale-price"
               type="tel"
-              :class="{'active' :  $parent.product.min_sale_price , 'error':$parent.errors.min_sale_price}"
+              :class="{
+                active: $parent.product.min_sale_price,
+                error: $parent.errors.min_sale_price,
+              }"
               placeholder="مثلا : 260000 "
               pattern="[0-9]*"
             />
           </div>
           <p class="error-message">
-            <span v-if="$parent.errors.min_sale_price" v-text="$parent.errors.min_sale_price"></span>
+            <span
+              v-if="$parent.errors.min_sale_price"
+              v-text="$parent.errors.min_sale_price"
+            ></span>
           </p>
         </div>
 
@@ -333,14 +372,20 @@ label .small-label {
               v-model="$parent.product.max_sale_price"
               id="max-sale-price"
               type="tel"
-              :class="{'active' :  $parent.product.max_sale_price , 'error':$parent.errors.max_sale_price}"
+              :class="{
+                active: $parent.product.max_sale_price,
+                error: $parent.errors.max_sale_price,
+              }"
               placeholder="مثلا : 500000 "
               pattern="[0-9]*"
             />
           </div>
 
           <p class="error-message">
-            <span v-if="$parent.errors.max_sale_price" v-text="$parent.errors.max_sale_price"></span>
+            <span
+              v-if="$parent.errors.max_sale_price"
+              v-text="$parent.errors.max_sale_price"
+            ></span>
           </p>
         </div>
       </div>
@@ -356,7 +401,13 @@ label .small-label {
         <div class="row">
           <button
             class="submit-button disabled pull-left"
-            :class="{'active' : $parent.product.stock && $parent.product.min_sale_price && $parent.product.max_sale_price && $parent.product.min_sale_amount}"
+            :class="{
+              active:
+                $parent.product.stock &&
+                $parent.product.min_sale_price &&
+                $parent.product.max_sale_price &&
+                $parent.product.min_sale_amount,
+            }"
             @click.prevent="$parent.stockAndPriceSubmited()"
           >
             مرحله بعد
@@ -384,18 +435,12 @@ export default {
     }
   },
   watch: {
-    "$parent.product.stock": function() {
-      this.$parent.errors.stock = "";
-    },
-    "$parent.product.min_sale_amount": function() {
-      this.$parent.errors.min_sale_amount = "";
-    },
-    "$parent.product.min_sale_price": function() {
+    "$parent.product.min_sale_price": function () {
       this.$parent.errors.min_sale_price = "";
     },
-    "$parent.product.max_sale_price": function() {
+    "$parent.product.max_sale_price": function () {
       this.$parent.errors.max_sale_price = "";
-    }
-  }
+    },
+  },
 };
 </script>

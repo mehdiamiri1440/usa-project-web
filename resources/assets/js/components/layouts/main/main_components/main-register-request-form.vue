@@ -250,13 +250,13 @@ select.error:focus {
 }
 
 .error-message {
-  text-align: center;
+  text-align: right;
 
   color: #e41c38;
 
   font-weight: bold;
 
-  height: 15px;
+  height: 25px;
 
   direction: rtl;
 
@@ -271,6 +271,19 @@ select.error:focus {
   color: #777777;
 
   line-height: 1.618;
+}
+
+.small-description-text {
+  text-align: right;
+
+  font-weight: bold;
+  color: #777777;
+
+  height: 25px;
+
+  direction: rtl;
+
+  font-size: 12px;
 }
 
 .submit-button-wrapper {
@@ -300,9 +313,7 @@ label .small-label {
   <div class="section-wrapper col-xs-12">
     <div class="row">
       <div class="title-section col-xs-12">
-        <h3>
-          ثبت درخواست خرید
-        </h3>
+        <h3>ثبت درخواست خرید</h3>
         <hr />
       </div>
     </div>
@@ -312,16 +323,12 @@ label .small-label {
         class="text-right col-xs-12 form-contents-wrapper"
         :class="{ 'wrapper-bg': wrapperBg }"
       >
-        <div class="title-contents">
-          چی و چه مقدار؟
-        </div>
+        <div class="title-contents">چی و چه مقدار؟</div>
 
         <div class="form-contents col-xs-12">
           <div class="row">
             <div class="col-xs-12 col-sm-6 pull-right">
-              <label for="stock">
-                دسته بندی محصول
-              </label>
+              <label for="stock"> دسته بندی محصول </label>
 
               <div class="input-wrapper">
                 <select
@@ -349,9 +356,7 @@ label .small-label {
             </div>
 
             <div class="col-xs-12 col-sm-6">
-              <label for="min-sale-amount">
-                نام محصول
-              </label>
+              <label for="min-sale-amount"> نام محصول </label>
 
               <div class="input-wrapper">
                 <select
@@ -379,9 +384,7 @@ label .small-label {
             </div>
 
             <div class="col-xs-12 col-sm-6 pull-right">
-              <label for="min-sale-price">
-                نوع محصول
-              </label>
+              <label for="min-sale-price"> نوع محصول </label>
 
               <div class="text-input-wrapper">
                 <input
@@ -417,11 +420,17 @@ label .small-label {
                 />
               </div>
 
-              <p class="error-message">
+              <p
+                class="small-description-text"
+                v-if="!errors.requirement_amount"
+              >
                 <span
-                  v-if="errors.requirement_amount"
-                  v-text="errors.requirement_amount"
+                  v-if="requirement_amount_text"
+                  v-text="requirement_amount_text"
                 ></span>
+              </p>
+              <p class="error-message" v-if="errors.requirement_amount">
+                <span v-text="errors.requirement_amount"></span>
               </p>
             </div>
           </div>
@@ -482,6 +491,7 @@ export default {
       disableSubmit: false,
       submiting: false,
       relatedProducts: null,
+      requirement_amount_text: "",
       items: [
         {
           message: " ثبت درخواست جدید",
@@ -628,6 +638,27 @@ export default {
     validateRegx: function (input, regx) {
       return regx.test(input);
     },
+    convertUnits: function (number) {
+      let data = number / 1000;
+      let text = "";
+      if (number < 1000) {
+        return number + " " + "کیلوگرم";
+      } else {
+        let ton = data.toString().split(".")[0];
+        let kg = number.toString().substr(ton.length);
+        kg = kg.replace(/^0+/, "");
+        ton = ton + " " + "تن";
+
+        if (kg) {
+          kg = " و " + kg + " کیلوگرم";
+          text = ton + kg;
+        } else {
+          text = ton;
+        }
+
+        return text;
+      }
+    },
   },
   mounted() {
     if (this.isOsIOS()) {
@@ -645,9 +676,21 @@ export default {
     "buyAd.category_id": function () {
       this.errors.category_id = "";
     },
-    "buyAd.requirement_amount": function () {
+    "buyAd.requirement_amount": function (value) {
       this.errors.requirement_amount = "";
+      if (value) {
+        let number = this.toLatinNumbers(value);
+        if (!this.validateRegx(number, /^\d*$/)) {
+          this.errors.requirement_amount = "لطفا  فقط عدد وارد کنید";
+        }
+        if (!this.errors.requirement_amount) {
+          this.requirement_amount_text = this.convertUnits(number);
+        }
+      } else {
+        this.requirement_amount_text = "";
+      }
     },
+
     "buyAd.name": function () {
       this.errors.name = "";
     },

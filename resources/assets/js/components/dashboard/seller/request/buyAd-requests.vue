@@ -425,10 +425,8 @@
                 ></span>
                 <span
                   v-else
-                  v-text="getNumberWithCommas(buyAd.requirement_amount)"
+                  v-text="getConvertedNumbers(buyAd.requirement_amount)"
                 ></span>
-
-                <span class="static-content">کیلوگرم</span>
               </p>
 
               <p
@@ -710,6 +708,16 @@ export default {
       if (number || typeof number === "number")
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       else return "";
+    },
+    getConvertedNumbers: function (number) {
+      if (number || typeof number === "number") {
+        let data = number / 1000;
+        if (number < 1000) {
+          return number + " " + "کیلوگرم";
+        } else {
+          return data + " " + "تن";
+        }
+      } else return "";
     },
     registerComponentStatistics: function (
       categoryName,

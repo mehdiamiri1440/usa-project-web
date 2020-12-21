@@ -445,6 +445,7 @@ export default {
       relatedProducts: null,
       inquirySent: false,
       relatedProductsToInquiry: null,
+      requirement_amount_text: "",
       items: [
         {
           message: " ثبت درخواست جدید",
@@ -717,6 +718,27 @@ export default {
       window.localStorage.removeItem("contact");
       window.localStorage.removeItem("msgToSend");
     },
+    convertUnits: function (number) {
+      let data = number / 1000;
+      let text = "";
+      if (number < 1000) {
+        return number + " " + "کیلوگرم";
+      } else {
+        let ton = data.toString().split(".")[0];
+        let kg = number.toString().substr(ton.length);
+        kg = kg.replace(/^0+/, "");
+        ton = ton + " " + "تن";
+
+        if (kg) {
+          kg = " و " + kg + " کیلوگرم";
+          text = ton + kg;
+        } else {
+          text = ton;
+        }
+
+        return text;
+      }
+    },
   },
   mounted() {
     this.init();
@@ -725,6 +747,22 @@ export default {
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/register-request" });
+  },
+  watch: {
+    "buyAd.requirement_amount": function (value) {
+      this.errors.requirement_amount = "";
+      if (value) {
+        let number = this.toLatinNumbers(value);
+        if (!this.validateRegx(number, /^\d*$/)) {
+          this.errors.requirement_amount = "لطفا  فقط عدد وارد کنید";
+        }
+        if (!this.errors.min_sale_amount) {
+          this.requirement_amount_text = this.convertUnits(number);
+        }
+      } else {
+        this.requirement_amount_text = "";
+      }
+    },
   },
 };
 </script>

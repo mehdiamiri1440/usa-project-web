@@ -209,13 +209,13 @@ select.error:focus {
 }
 
 .error-message {
-  text-align: center;
+  text-align: right;
 
   color: #e41c38;
 
   font-weight: bold;
 
-  height: 15px;
+  height: 25px;
 
   direction: rtl;
 
@@ -230,6 +230,19 @@ select.error:focus {
   color: #777777;
 
   line-height: 1.618;
+}
+
+.small-description-text {
+  text-align: right;
+
+  font-weight: bold;
+  color: #777777;
+
+  height: 25px;
+
+  direction: rtl;
+
+  font-size: 12px;
 }
 
 .submit-button-wrapper {
@@ -256,9 +269,7 @@ label .small-label {
     <div class="form-contents col-xs-12">
       <div class="row">
         <div class="col-xs-12 col-sm-6 pull-right">
-          <label for="stock">
-            دسته بندی محصول
-          </label>
+          <label for="stock"> دسته بندی محصول </label>
 
           <div class="input-wrapper">
             <select
@@ -272,12 +283,13 @@ label .small-label {
             >
               <option selected disabled value="">انتخاب دسته بندی</option>
               <option
-                v-for="category in $parent.categoryList"
+                v-for="(category, index) in $parent.categoryList"
                 :selected="
                   category.id == $parent.buyAd.categorySelected
                     ? 'selected'
                     : ''
                 "
+                :key="index"
                 :value="category.id"
                 v-text="category.category_name"
               ></option>
@@ -292,9 +304,7 @@ label .small-label {
         </div>
 
         <div class="col-xs-12 col-sm-6">
-          <label for="min-sale-amount">
-            نام محصول
-          </label>
+          <label for="min-sale-amount"> نام محصول </label>
 
           <div class="input-wrapper">
             <select
@@ -309,8 +319,9 @@ label .small-label {
               <option disabled selected value="">لطفا انتخاب کنید</option>
               <option
                 :selected="$parent.buyAd.category_id == category.id"
-                v-for="category in $parent.subCategoryList"
+                v-for="(category, index) in $parent.subCategoryList"
                 v-bind:value="category.id"
+                :key="index"
                 v-text="category.category_name"
               ></option>
             </select>
@@ -324,9 +335,7 @@ label .small-label {
         </div>
 
         <div class="col-xs-12 col-sm-6 pull-right">
-          <label for="min-sale-price">
-            نوع محصول
-          </label>
+          <label for="min-sale-price"> نوع محصول </label>
 
           <div class="text-input-wrapper">
             <input
@@ -368,11 +377,23 @@ label .small-label {
             />
           </div>
 
-          <p class="error-message">
+          <!-- <p class="error-message">
             <span
               v-if="$parent.errors.requirement_amount"
               v-text="$parent.errors.requirement_amount"
             ></span>
+          </p> -->
+          <p
+            class="small-description-text"
+            v-if="!$parent.errors.requirement_amount"
+          >
+            <span
+              v-if="$parent.requirement_amount_text"
+              v-text="$parent.requirement_amount_text"
+            ></span>
+          </p>
+          <p class="error-message" v-if="$parent.errors.requirement_amount">
+            <span v-text="$parent.errors.requirement_amount"></span>
           </p>
         </div>
       </div>
@@ -450,9 +471,7 @@ export default {
     "$parent.buyAd.category_id": function () {
       this.$parent.errors.category_id = "";
     },
-    "$parent.buyAd.requirement_amount": function () {
-      this.$parent.errors.requirement_amount = "";
-    },
+
     "$parent.buyAd.name": function () {
       this.$parent.errors.name = "";
     },
