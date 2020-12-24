@@ -150,7 +150,6 @@
     <router-link :to="link" class="stock-wrapper">
       <span>موجودی</span>
       <span v-text="stock"></span>
-      <span>کیلوگرم</span>
     </router-link>
     <div class="inquiry-button-wrapper">
       <button class="inquiry-button green-button" v-if="inquiryButtonActive">

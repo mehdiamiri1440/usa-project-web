@@ -179,7 +179,7 @@ span {
                       :key="index"
                       :img="str + '/thumbnails/' + product.photo"
                       :title="product.product_name"
-                      :stock="product.stock"
+                      :stock="getConvertedNumbers(product.stock)"
                       :link="getRelatedProductUrl(product)"
                       column="4"
                     />
@@ -599,6 +599,16 @@ export default {
     inquiry: function () {
       //eventBus.$emit("productUserInfo", this.product);
       this.$router.push({ name: "registerinquiry" });
+    },
+    getConvertedNumbers: function (number) {
+      if (number || typeof number === "number") {
+        let data = number / 1000;
+        if (number < 1000) {
+          return number + " " + "کیلوگرم";
+        } else {
+          return data + " " + "تن";
+        }
+      } else return "";
     },
   },
   created() {
