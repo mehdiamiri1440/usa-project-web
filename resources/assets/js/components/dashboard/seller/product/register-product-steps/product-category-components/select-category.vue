@@ -5,6 +5,7 @@
   font-weight: 500;
   font-size: 19px;
   margin-bottom: 30px;
+  margin-top: 40px;
   padding: 0 15px;
 }
 
@@ -56,7 +57,9 @@ ul li.item  button i{
 
 
 @media screen and (max-width: 767px) {
- 
+ .title-contents {
+    margin-top: 40px;
+}
 }
 </style>
 

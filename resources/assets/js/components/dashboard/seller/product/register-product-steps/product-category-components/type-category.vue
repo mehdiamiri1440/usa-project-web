@@ -138,13 +138,11 @@ label {
 }
 
 
+
 @media screen and (max-width: 767px) {
-  select {
-    font-size: 12px;
-  }
-  .input-wrapper::after {
-    left: 14px;
-  }
+ .title-contents {
+    margin-top: 40px;
+}
 }
 </style>
 
@@ -160,7 +158,7 @@ label {
      *</span>
      </h2>
 
-    <div class="form-contents col-xs-12">
+    <form class="form-contents col-xs-12"  v-on:submit.prevent="$parent.submitCategory()">
       <div class="row">
         <div class="col-xs-12">
 
@@ -208,7 +206,7 @@ label {
 
         </div>
       </div>
-      <form class="col-xs-12 action-control-wrapper" v-on:submit.prevent="$parent.submitCategory()">
+      <div class="col-xs-12 action-control-wrapper">
         <div class="row">
           <button
             class="submit-button disabled pull-left"
@@ -217,7 +215,7 @@ label {
               active:
                 $parent.productName && !$parent.errors.productName
             }"
-            @click="$parent.submitCategory()"
+            @click.prevent="$parent.submitCategory()"
             type="submit"
           >
             مرحله بعد
@@ -235,8 +233,8 @@ label {
             </button>
 
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
 </template>
 

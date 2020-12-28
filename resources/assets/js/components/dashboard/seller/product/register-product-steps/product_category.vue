@@ -54,21 +54,15 @@ export default {
         );
 
       }else{
-        this.$parent.product.product_name = this.productName;
-        this.$parent.goToStep(2);
+        if(!this.errors.productName){
+          this.$parent.product.product_name = this.productName;
+          this.$parent.goToStep(2);
+        }
       }
     },
     productNameValidator: function (name) {
      if (!this.validateRegx(name, /^[\u0600-\u06FF\s_,.:/;()+-\d]+$/)) {
         this.errors.productName = "لطفا نوع محصول را فارسی وارد کنید.";
-      }
-
-      if (this.errors.productName) {
-        this.$parent.registerComponentStatistics(
-          "product-register-error",
-          "product-name",
-          "input:" + name + " error:" + this.errors.productName
-        );
       }
     },
     validateRegx: function (input, regx) {
@@ -81,6 +75,15 @@ export default {
        this.errors.productName = "";
       if(name){
         this.productNameValidator(name);
+      }
+    },
+    'errors.productName'(error){
+      if (error) {
+        this.$parent.registerComponentStatistics(
+          "product-register-error",
+          "product-name",
+          "input:" + name + " error:" + error
+        );
       }
     }
   }

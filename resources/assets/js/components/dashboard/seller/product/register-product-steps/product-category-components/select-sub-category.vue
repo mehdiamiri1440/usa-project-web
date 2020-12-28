@@ -118,14 +118,11 @@ ul li.item  button i{
 }
 
 
+
 @media screen and (max-width: 767px) {
- .title-contents{
-   font-weight: bold;
-  font-size: 19px;
-  margin-bottom: 20px;
-  padding: 0 15px;
-  margin-top: -53px;
- }
+ .title-contents {
+    margin-top: 0;
+  }
 }
 </style>
 

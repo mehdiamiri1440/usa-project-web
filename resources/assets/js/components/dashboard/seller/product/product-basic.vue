@@ -134,6 +134,7 @@
 @media screen and (max-width: 767px) {
   .main-section-wrapper {
     max-width: 600px;
+    margin: 0px auto;
   }
 
   .main-content .section-title {
@@ -599,7 +600,7 @@ export default {
       if (num == null) {
         return null;
       }
-
+      num = num.toString().replace(/,/g, '')
       num = num.toString().replace(/^0+/, "");
       num = num.toString().replace(/^\u0660+/, "");
       num = num.toString().replace(/^\u06f0+/, "");
@@ -681,7 +682,7 @@ export default {
       if (standardNumber == "") {
         this.errors.stock = "لطفا فیلد را وارد کنید";
       } else if (!this.validateRegx(standardNumber, /^\d*$/)) {
-        this.errors.stock = "یک فرمت معتبر وارد کنید";
+        this.errors.stock = "لطفا فقط عدد وارد کنید";
       }
 
       if (this.errors.stock) {
@@ -698,7 +699,7 @@ export default {
       if (standardNumber == "") {
         this.errors.min_sale_amount = "لطفا فیلد را وارد کنید";
       } else if (!this.validateRegx(standardNumber, /^\d*$/)) {
-        this.errors.min_sale_amount = "یک فرمت معتبر وارد کنید";
+        this.errors.min_sale_amount = "لطفا فقط عدد وارد کنید ";
       }
 
       if (this.errors.min_sale_amount) {
@@ -861,6 +862,11 @@ export default {
         return text;
       }
     },
+    getNumberWithCommas: function (number) {
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
+    },
   },
   mounted() {
     this.init();
@@ -954,6 +960,7 @@ export default {
           this.errors.stock = "لطفا  فقط عدد وارد کنید";
         }
         if (!this.errors.stock) {
+          this.product.stock = this.getNumberWithCommas(number)
           this.stock_text = this.convertUnits(number);
         }
       } else {
@@ -968,10 +975,35 @@ export default {
           this.errors.min_sale_amount = "لطفا  فقط عدد وارد کنید";
         }
         if (!this.errors.min_sale_amount) {
+          this.product.min_sale_amount = this.getNumberWithCommas(number)
           this.min_sale_amount_text = this.convertUnits(number);
         }
       } else {
         this.min_sale_amount_text = "";
+      }
+    },
+    "product.min_sale_price": function (value) {
+      this.errors.min_sale_price = "";
+      if (value) {
+        let number = this.toLatinNumbers(value);
+        if (!this.validateRegx(number, /^\d*$/)) {
+          this.errors.min_sale_price = "لطفا  فقط عدد وارد کنید";
+        }
+        if (!this.errors.min_sale_price) {
+          this.product.min_sale_price = this.getNumberWithCommas(number)
+        }
+      }
+    },
+    "product.max_sale_price": function (value) {
+      this.errors.max_sale_price = "";
+      if (value) {
+        let number = this.toLatinNumbers(value);
+        if (!this.validateRegx(number, /^\d*$/)) {
+          this.errors.max_sale_price = "لطفا  فقط عدد وارد کنید";
+        }
+        if (!this.errors.max_sale_price) {
+          this.product.max_sale_price = this.getNumberWithCommas(number)
+        }
       }
     },
   },
