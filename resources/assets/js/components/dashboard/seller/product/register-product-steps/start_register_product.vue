@@ -1,5 +1,73 @@
 
 <style scoped>
+.arrow-icon i {
+  -webkit-animation: shake-vertical 4s cubic-bezier(0.215, 0.61, 0.355, 1)
+    infinite both;
+  animation: shake-vertical 4s cubic-bezier(0.215, 0.61, 0.355, 1) infinite both;
+}
+
+@-webkit-keyframes shake-vertical {
+  0%,
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translateY(-6px);
+    transform: translateY(-6px);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: translateY(6px);
+    transform: translateY(6px);
+  }
+  80% {
+    -webkit-transform: translateY(4.4px);
+    transform: translateY(4.4px);
+  }
+  90% {
+    -webkit-transform: translateY(-4.4px);
+    transform: translateY(-4.4px);
+  }
+}
+@keyframes shake-vertical {
+  0%,
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translateY(-6px);
+    transform: translateY(-6px);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: translateY(6px);
+    transform: translateY(6px);
+  }
+  80% {
+    -webkit-transform: translateY(4.4px);
+    transform: translateY(4.4px);
+  }
+  90% {
+    -webkit-transform: translateY(-6.4px);
+    transform: translateY(-4.4px);
+  }
+}
+
+.arrow-icon {
+  font-size: 23px;
+  color: #20ae91;
+  margin-bottom: 3px;
+}
 p {
   line-height: 1.618;
   text-align: center;
@@ -11,7 +79,7 @@ p {
 
 .event-text {
   font-size: 18px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 label {
@@ -31,9 +99,24 @@ label {
   margin: 8px 0;
 }
 
+.submit-button i {
+  position: relative;
+  top: 2px;
+  margin-left: 6px;
+}
+
 .submit-button.active {
-  background: #00c569;
   cursor: pointer;
+  transition: 150ms;
+  box-shadow: 0 1px 3px rgb(0, 0, 0, 0);
+  background-image: linear-gradient(to left, #00c569, #21ad93);
+}
+
+.submit-button:hover {
+  cursor: pointer;
+  transition: 150ms;
+  box-shadow: 0 1px 3px rgb(0, 0, 0, 0.3);
+  transform: translateY(-3px);
 }
 
 .title-contents {
@@ -51,7 +134,7 @@ label {
 }
 
 .text-input-wrapper {
-  margin: 40px auto 20px;
+  margin: 40px auto 30px;
   position: relative;
 }
 
@@ -104,14 +187,19 @@ label {
           <div class="event-text blue-text">
             <strong>همین حالا محصول خود را ثبت کنید</strong>
           </div>
-
+          <div class="arrow-icon">
+            <i class="fa fa-arrow-down"></i>
+          </div>
           <button
             v-if="!$parent.isStartLoading"
             class="submit-button active"
             @click.prevent="$parent.startRegisterProductSubmited()"
           >
-            ثبت محصول جدید
-          </button>
+            <i class="fa fa-plus-square"></i> 
+           <span> 
+             ثبت محصول جدید
+            </span>
+         </button>
           <div v-else class="loading-submit">
             <img src="../../../../../../img/gif/loading.gif" />
           </div>

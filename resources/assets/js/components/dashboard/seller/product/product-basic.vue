@@ -1,39 +1,64 @@
+
 <style scoped>
 /*main style*/
 
 .main-content {
   max-width: 685px;
-  background: #fff;
-  border-radius: 9px;
-  box-shadow: 0 0 10px #c5c5c5;
   position: absolute;
   left: calc(50% - 342px);
   top: 65px;
   margin-bottom: 50px;
-  min-height: 500px;
+  height: 100%;
   direction: rtl;
+}
+
+.main-content > div.wrapper-section {
+  border: 1px solid #0000001f;
+  border-radius: 4px;
+  min-height: 400px;
+}
+
+.main-content .section-title {
+  font-size: 25px;
+  margin-bottom: 30px;
+}
+
+.section-background {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  content: "";
+  z-index: -1;
 }
 
 .wrapper-progressbar.title h2 {
   font-size: 23px;
   font-weight: bold;
-  text-align: center;
+  text-align: right;
 }
 
 .main-section-wrapper {
   max-width: 420px;
-  margin: 50px auto 0;
+  margin: 42px auto;
 }
 .main-section-wrapper-full-width {
   max-width: 100%;
   margin: 25px auto 0;
 }
+
+.header-section > h2 {
+  font-weight: 600;
+}
 /*progressbar styles*/
 
 .wrapper-progressbar {
   position: relative;
-  padding: 15px;
-  border-bottom: 2px solid #00c569;
+  padding: 0 15px;
+  top: -12px;
+  overflow: hidden;
 }
 
 .progressbar-items {
@@ -77,17 +102,17 @@
 
 .custom-progressbar {
   display: block;
-  height: 3px;
+  height: 1px;
   background: #bebebe;
   right: 40px;
   left: 34px;
   position: absolute;
-  top: 23px;
+  top: 11px;
   z-index: 0;
 }
 .custom-progressbar.active-item {
   background: #00c569;
-  width: 0;
+  width: 8.7%;
   left: initial;
 }
 
@@ -103,9 +128,7 @@
   left: 41px;
 }
 .active-progress-wrapper .custom-progressbar {
-  right: 0px;
-  left: 0px;
-  top: 8px !important;
+  right: -34px;
 }
 
 @media screen and (max-width: 767px) {
@@ -113,16 +136,25 @@
     max-width: 600px;
   }
 
+  .main-content .section-title {
+    padding: 0 10px;
+  }
+
+  .main-content > div.wrapper-section {
+    border: none;
+    border-top: 1px solid #0000001f;
+    border-radius: 0;
+  }
+
   .main-content {
     max-width: initial;
     background: #fff;
     border-radius: 0;
     box-shadow: none;
-    min-height: 500px;
     direction: rtl;
     transform: translate(0, 0);
-
     top: 0;
+    padding-top: 20px;
     width: 100%;
     left: 0;
   }
@@ -140,27 +172,20 @@
     right: 20px;
     left: 26px;
   }
-
-  .active-progress-wrapper .custom-progressbar {
-    right: 0;
-    left: 0;
-    top: 8px;
-  }
 }
 </style>
 
 
 <template>
-  <div>
-    <section class="main-content col-xs-12">
-      <div class="row">
+  <section class="main-content col-xs-12">
+    <div class="row">
+      <h2 class="section-title">ثبت محصول جدید</h2>
+    </div>
+    <div class="row wrapper-section">
+      <div class="main-section">
         <header class="header-section">
-          <div v-if="currentStep == 0" class="wrapper-progressbar title">
-            <h2>ثبت محصول جدید</h2>
-          </div>
-
           <div
-            v-else-if="currentStep > 0 && currentStep < 7"
+            v-if="currentStep > 0 && currentStep < 7"
             class="wrapper-progressbar"
           >
             <div class="custom-progressbar">
@@ -233,20 +258,20 @@
             </div>
           </div>
 
-          <div v-else class="wrapper-progressbar title">
+          <div v-else-if="currentStep == 7" class="wrapper-progressbar title">
             <h2>ثبت محصول با موفقیت انجام شد</h2>
           </div>
         </header>
 
         <main
-          class="main-section-wrapper"
+          class="main-section-wrapper row"
           :class="{
             'main-section-wrapper-full-width':
               currentStep == 4 || currentStep == 7,
           }"
         >
           <StartRegisterProduct v-show="currentStep == 0" />
-          <ProductCategory v-show="currentStep == 1" />
+          <ProductCategory :category-list="categoryList" v-show="currentStep == 1" />
           <StockAndPrice v-show="currentStep == 2" />
           <Location v-show="currentStep == 3" />
           <ProductImage v-show="currentStep == 4" />
@@ -255,8 +280,10 @@
           <FinishStage v-show="currentStep == 7" />
         </main>
       </div>
-    </section>
-  </div>
+
+      <div class="section-background"></div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -283,7 +310,7 @@ export default {
   },
   data: function () {
     return {
-      currentStep: 0,
+      currentStep: 2,
       currentUser: {
         profile: "",
         user_info: "",
@@ -360,7 +387,7 @@ export default {
         .post("/user/profile_info")
         .then((response) => (this.currentUser = response.data));
       axios
-        .post("/get_category_list")
+        .post("/get_category_list",{cascade_list : true})
         .then((response) => (this.categoryList = response.data.categories));
       axios
         .post("/location/get_location_info")
@@ -387,18 +414,6 @@ export default {
         });
     },
 
-    productCategorySubmited() {
-      this.categorySelectedValidator(this.categorySelected);
-      this.categoryIdValidator(this.product.category_id);
-      this.productNameValidator(this.product.product_name);
-      if (
-        !this.errors.category_selected &&
-        !this.errors.category_id &&
-        !this.errors.product_name
-      ) {
-        this.goToStep(2);
-      }
-    },
     stockAndPriceSubmited() {
       this.stockValidator(this.product.stock);
       this.minSaleAmountValidator(this.product.min_sale_amount);
@@ -660,23 +675,6 @@ export default {
         );
       }
     },
-    productNameValidator: function (name) {
-      this.errors.product_name = "";
-
-      if (name == "") {
-        this.errors.product_name = "لطفا نوع محصول را وارد کنید";
-      } else if (!this.validateRegx(name, /^[\u0600-\u06FF\s]+$/)) {
-        this.errors.product_name = "نوع محصول فرمت مناسبی نیست";
-      }
-
-      if (this.errors.product_name) {
-        this.registerComponentStatistics(
-          "product-register-error",
-          "product-name",
-          "input:" + name + " error:" + this.errors.product_name
-        );
-      }
-    },
     stockValidator: function (number) {
       this.errors.stock = "";
       var standardNumber = this.toLatinNumbers(number);
@@ -920,24 +918,27 @@ export default {
     },
     currentStep: function (step) {
       switch (step) {
+        case 1:
+          $(".custom-progressbar.active-item").css("width", "8.7%");
+          break;
         case 2:
-          $(".custom-progressbar.active-item").css("width", "21%");
+          $(".custom-progressbar.active-item").css("width", "29%");
           break;
 
         case 3:
-          $(".custom-progressbar.active-item").css("width", "43%");
+          $(".custom-progressbar.active-item").css("width", "49%");
           break;
 
         case 4:
-          $(".custom-progressbar.active-item").css("width", "64%");
+          $(".custom-progressbar.active-item").css("width", "69%");
           break;
 
         case 5:
-          $(".custom-progressbar.active-item").css("width", "82%");
+          $(".custom-progressbar.active-item").css("width", "88%");
           break;
 
         case 6:
-          $(".custom-progressbar.active-item").css("width", "100%");
+          $(".custom-progressbar.active-item").css("width", "107%");
           break;
 
         default:
