@@ -142,7 +142,7 @@ label {
 @media screen and (max-width: 767px) {
  .title-contents {
     margin-top: 40px;
-}
+  }
 }
 </style>
 

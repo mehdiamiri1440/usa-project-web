@@ -402,7 +402,9 @@
                     <div class=" row wrapper-articles">
 
                         <article v-if="files.length > 0" v-for="(file, index) in files" :key="file.id"
-                                 class=" col-md-4 col-xs-6 col-lg-3 pull-right article-images">
+                                 class="pull-right article-images"
+                                 :class="[imageWrapperSize  ? imageWrapperSize : 'col-md-4 col-xs-6 col-lg-3']"
+                                 >
                             <div class="image">
                                 <img v-if="file.thumb" :src="file.thumb" width="40" height="auto"/>
                                 <span v-else>No Image</span>
@@ -418,9 +420,11 @@
                             </div>
 
                         </article>
-                             <file-upload
+                
+                <!-- <file-upload
                         v-show="!isOption"
-                        class="upload col-md-4 col-xs-6 col-lg-3 pull-right"
+                        class="upload pull-right"
+                        :class="[imageWrapperSize  ? imageWrapperSize : 'col-md-4 col-xs-6 col-lg-3']"
                         :accept="accept"
                         :name="name"
                         :multiple="multiple"
@@ -430,13 +434,56 @@
                         :drop="drop"
                         :drop-directory="dropDirectory"
                         :add-index="addIndex"
-                        v-model="files"
+                        v-model="$parent.files"
                         @input-filter="inputFilter"
                         @input-file="inputFile"
                         ref="upload">
 
-                </file-upload>
+                </file-upload> -->
 
+
+                    <file-upload
+                        v-show="!isOption"
+                         class="upload pull-right"
+                        :class="[imageWrapperSize  ? imageWrapperSize : 'col-md-4 col-xs-6 col-lg-3']"
+                        :accept="accept"
+                        :multiple="uploadMultiple"
+                        :directory="directory"
+                        :size="size || 0"
+                        :thread="thread < 1 ? 1 : (thread > 5 ? 5 : thread)"
+                        :drop="drop"
+                        :drop-directory="dropDirectory"
+                        :add-index="addIndex"
+                        :name='uploadName'
+                        v-model="$parent.files"
+                        @input-filter="inputFilter"
+                        @input-file="inputFile"
+                        ref="upload">
+                        </file-upload>
+
+
+
+                        <!-- <file-upload
+                        class="btn btn-primary dropdown-toggle"
+                        :extensions="extensions"
+                        :accept="accept"
+                        :multiple="multiple"
+                        :directory="directory"
+                        :create-directory="createDirectory"
+                        :size="size || 0"
+                        :thread="thread < 1 ? 1 : (thread > 5 ? 5 : thread)"
+                        :headers="headers"
+                        :data="data"
+                        :drop="drop"
+                        :drop-directory="dropDirectory"
+                        :add-index="addIndex"
+                        v-model="$parent.files"
+                        @input-filter="inputFilter"
+                        @input-file="inputFile"
+                        ref="upload">
+                        <i class="fa fa-plus"></i>
+                        Select
+                        </file-upload> -->
                     </div>
 
 
@@ -498,29 +545,26 @@
             'uploadThread',
             'uploadUploadAuto',
             'uploadRef',
-            'size'
+            'files',
+            'imageWrapperSize'
         ],
         components: {
             FileUpload,
         },
         data() {
             return {
-                files: [],
-                accept: this.uploadAccept,
-                minSize: this.uploadMinSize,
-                // size:this.uploadSize,
-                multiple: this.uploadMultiple,
+                // files: [],
+                accept: 'image/png,image/gif,image/jpeg,image/webp',
+                extensions: 'gif,jpg,jpeg,png,webp',
+                minSize: 1024,
+                size: 1024 * 1024 * 10,
+                multiple: true,
                 directory: false,
                 drop: true,
-                dropDirectory: this.uploadDropDirectory,
-                addIndex: this.uploadAddIndex,
-                thread: this.uploadThread,
-                name: this.uploadName,
-                // postAction: '/upload/post',
-                // putAction: '/upload/put',
-                oCompress: this.uploadOCompress,
-                uploadAuto: this.uploadUploadAuto,
-
+                dropDirectory: true,
+                createDirectory: false,
+                addIndex: false,
+                thread: 3,
                 isOption: false,
                 addData: {
                     show: false,
@@ -608,10 +652,12 @@
                             maxWidth: 512,
                             maxHeight: 512,
                         })
+                        this.$parent.isCompressor = true;
                         imageCompressor.compress(newFile.file)
                             .then((file) => {
                                 this.$refs.upload.update(newFile, {error: '', file, size: file.size, type: file.type});
-                                this.uploadRef.pop();
+                                // this.uploadRef.pop();
+                                this.$parent.isCompressor = false;
                             })
                             .catch((err) => {
                                 this.$refs.upload.update(newFile, {error: err.message || 'compress'})
@@ -633,7 +679,7 @@
                     if (newFile.blob && newFile.type.substr(0, 6) === 'image/') {
                         newFile.thumb = newFile.blob
                     }
-                    this.uploadRef.push(newFile.file);
+                    // this.uploadRef.push(newFile.file);
                 }
             },
             // add, update, remove File Event
@@ -642,7 +688,7 @@
 
                     // update
                     if (newFile.active && !oldFile.active) {
-                        this.uploadRef.push(this.$refs.upload.files[this.uploadRef.length].file);
+                        // this.uploadRef.push(this.$refs.upload.files[this.uploadRef.length].file);
 
                         // beforeSend
                         // min size
@@ -662,11 +708,11 @@
                 }
                 if (!newFile && oldFile) {
                     // remove
-                    for (var i = 0; i < this.uploadRef.length; i++) {
-                        if (this.uploadRef[i].name === oldFile.file.name) {
-                            this.uploadRef.splice(i, 1);
-                        }
-                    }
+                    // for (var i = 0; i < this.uploadRef.length; i++) {
+                    //     if (this.uploadRef[i].name === oldFile.file.name) {
+                    //         this.uploadRef.splice(i, 1);
+                    //     }
+                    // }
                     if (oldFile.success && oldFile.response.id) {
 
                         // $.ajax({
@@ -708,11 +754,11 @@
                     data.file = new File([arr], data.name, {type: this.editFile.type})
                     data.size = data.file.size
                 }
-                for (var i = 0; i < this.uploadRef.length ; i++) {
-                    if (this.uploadRef[i].name == data.file.name && this.uploadRef[i].size == this.uploadRef[i].size ) {
-                        this.uploadRef.splice(i, 1);
-                    }
-                }
+                // for (var i = 0; i < this.uploadRef.length ; i++) {
+                //     if (this.uploadRef[i].name == data.file.name && this.uploadRef[i].size == this.uploadRef[i].size ) {
+                //         this.uploadRef.splice(i, 1);
+                //     }
+                // }
                 this.$refs.upload.update(this.editFile.id, data);
                 this.editFile.error = '';
                 this.editFile.show = false

@@ -268,13 +268,13 @@
           class="main-section-wrapper row"
           :class="{
             'main-section-wrapper-full-width':
-              currentStep == 4 || currentStep == 7,
+              currentStep == 7,
           }"
         >
           <StartRegisterProduct v-show="currentStep == 0" />
           <ProductCategory :category-list="categoryList" v-show="currentStep == 1" />
           <StockAndPrice v-show="currentStep == 2" />
-          <Location v-show="currentStep == 3" />
+          <Location :category-list="categoryList" v-show="currentStep == 3" />
           <ProductImage v-show="currentStep == 4" />
           <Terms v-show="currentStep == 5" />
           <MoreDetails v-show="currentStep == 6" />
@@ -311,7 +311,7 @@ export default {
   },
   data: function () {
     return {
-      currentStep: 2,
+      currentStep: 4,
       currentUser: {
         profile: "",
         user_info: "",
@@ -346,6 +346,7 @@ export default {
       provinces: "",
       cities: "",
       productFiles: [],
+      testProductFiles:[],
       popUpMsg: "",
       errors: {
         category_selected: "",
@@ -439,11 +440,6 @@ export default {
       }
     },
     productImageSubmited() {
-      if (!this.productFiles[0]) {
-        this.errors.images_count.push("لطفا تصویر محصول را وارد کنید");
-      } else {
-        this.errors.images_count = [];
-      }
       if (
         !this.errors.images_count[0] &&
         this.productFiles[0] &&
@@ -569,7 +565,7 @@ export default {
       }
       for (var i = 0; i < this.productFiles.length; i++) {
         let file = this.productFiles[i];
-        formData.append("image_" + i, file);
+        formData.append("image_" + i, file.file);
       }
       formData.append("images_count", this.productFiles.length);
 
@@ -883,45 +879,47 @@ export default {
     "product.product_name": function (name) {
       this.errors.product_name = "";
     },
-    productFiles: function (files) {
-      var errorsStatus = false;
-      if (files.length) {
-        this.errors.images_count = [];
-        for (var i = 0; i <= files.length; i++) {
-          if (files[i]) {
-            if (
-              !files[i].type ||
-              files[i].type == "" ||
-              files[i].type == "image/gif" ||
-              files[i].type == "image/svg+xml" ||
-              files[i].type == "application/postscript" ||
-              files[i].type == "text/xml" ||
-              files[i].type == "application/x-gzip"
-            ) {
-              errorsStatus = true;
-              this.errors.images_type = "تصاویر باید فرمت معتبری باشند.";
-            }
 
-            if (files[i].size > 5242880) {
-              errorsStatus = true;
-              this.errors.images_size =
-                "حجم تصویر بالا است، باید کمتر از 5 مگابایت باشد.";
-            } else if (files[i].size < 20480) {
-              errorsStatus = true;
-              this.errors.images_size =
-                "حجم تصویر پایین است، باید بیشتر از 20 کیلوبایت باشد.";
-            }
-          }
-        }
-        if (!errorsStatus) {
-          this.errors.images_type = "";
-          this.errors.images_size = "";
-        }
-      } else {
-        this.errors.images_type = "";
-        this.errors.images_size = "";
-      }
-    },
+    // productFiles: function (files) {
+    //   var errorsStatus = false;
+    //   console.log(files);
+    //   // if (files.length) {
+    //   //   this.errors.images_count = [];
+    //   //   for (var i = 0; i <= files.length; i++) {
+    //   //     if (files[i]) {
+    //   //       if (
+    //   //         !files[i].type ||
+    //   //         files[i].type == "" ||
+    //   //         files[i].type == "image/gif" ||
+    //   //         files[i].type == "image/svg+xml" ||
+    //   //         files[i].type == "application/postscript" ||
+    //   //         files[i].type == "text/xml" ||
+    //   //         files[i].type == "application/x-gzip"
+    //   //       ) {
+    //   //         errorsStatus = true;
+    //   //         this.errors.images_type = "تصاویر باید فرمت معتبری باشند.";
+    //   //       }
+
+    //   //       if (files[i].size > 5242880) {
+    //   //         errorsStatus = true;
+    //   //         this.errors.images_size =
+    //   //           "حجم تصویر بالا است، باید کمتر از 5 مگابایت باشد.";
+    //   //       } else if (files[i].size < 20480) {
+    //   //         errorsStatus = true;
+    //   //         this.errors.images_size =
+    //   //           "حجم تصویر پایین است، باید بیشتر از 20 کیلوبایت باشد.";
+    //   //       }
+    //   //     }
+    //   //   }
+    //   //   if (!errorsStatus) {
+    //   //     this.errors.images_type = "";
+    //   //     this.errors.images_size = "";
+    //   //   }
+    //   // } else {
+    //   //   this.errors.images_type = "";
+    //   //   this.errors.images_size = "";
+    //   // }
+    // },
     currentStep: function (step) {
       switch (step) {
         case 1:
