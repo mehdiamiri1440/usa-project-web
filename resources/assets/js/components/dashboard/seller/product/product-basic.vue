@@ -439,16 +439,6 @@ export default {
         this.goToStep(4);
       }
     },
-    productImageSubmited() {
-      if (
-        !this.errors.images_count[0] &&
-        this.productFiles[0] &&
-        !this.errors.images_type &&
-        !this.errors.images_size
-      ) {
-        this.goToStep(5);
-      }
-    },
     descriptionSubmited() {
       this.descriptionValidator(this.product.description);
 

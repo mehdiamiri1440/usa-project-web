@@ -20,7 +20,17 @@
   transition: 200ms;
   cursor: default;
   margin:0;
- 
+  position: relative;
+}
+
+.button-icon-wrapper{
+  display: inline;
+}
+
+.spinner-border{
+  position: absolute;
+  left: 19px;
+  top: 9px;
 }
 
 .submit-button i{
@@ -152,21 +162,28 @@ label {
 
       
 
-      <div class="submit-button-wrapper" v-if="!isCompressor">
+      <div class="submit-button-wrapper" >
         <button 
           class="submit-button disabled pull-left"
           :class="{'active' : !this.errors.images_count[0] &&
-        this.$parent.productFiles[0] &&
-        !this.errors.images_type &&
-        !isCompressor&&
-        !this.errors.images_size}"
+          this.$parent.productFiles[0] &&
+          !this.errors.images_type &&
+          !isCompressor&&
+          !this.errors.images_size}"
           @click.prevent="submitImages()"
         >
           مرحله بعد
-          <i v-if="!isCompressor" class="fa fa-arrow-left"></i>
-          <div v-else class="spinner-border" role="status">
-  <span class="sr-only">Loading...</span>
-</div>
+          <div class="button-icon-wrapper">
+            <!-- v-if="isCompressor" -->
+            <i  class="fa fa-arrow-left"
+            :class="{'empty' : isCompressor}"
+            ></i>
+          <div  class="spinner-border" 
+          :class="{'empty' : !isCompressor}"
+          >
+            <span class="sr-only">Loading...</span>
+          </div>
+          </div>
         </button>
 
         <button
@@ -219,7 +236,6 @@ export default {
       var errorsStatus = false;
       
       if (files.length) {
-        console.log('click',files[0].size)
         this.errors.images_count = [];
         for (var i = 0; i <= files.length; i++) {
           if (files[i]) {
