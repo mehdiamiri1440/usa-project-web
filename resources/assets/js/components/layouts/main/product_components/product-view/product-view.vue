@@ -241,7 +241,7 @@ span {
         >
       </div>
 
-      <register-inquer-form
+      <!-- <register-inquer-form
         v-if="showRegisterRequestBox"
         wrapper-bg="true"
         :str="str"
@@ -251,7 +251,7 @@ span {
             ? str + '/' + product.profile_info.profile_photo
             : assets + 'assets/img/user-defult.png'
         "
-      />
+      /> -->
 
       <div
         v-if="product.main.product_name && !isMyProfile"
@@ -281,14 +281,14 @@ import { eventBus } from "../../../../../router/router";
 import ProductCarousel from "../../main_components/product-list-carousel";
 import ProductContents from "./product";
 import UserInfo from "./user_info";
-import registerInquerForm from "../../main_components/register-inquiry-form.vue";
+// import registerInquerForm from "../../main_components/register-inquiry-form.vue";
 
 export default {
   components: {
     ProductContents,
     UserInfo,
     ProductCarousel,
-    registerInquerForm,
+    // registerInquerForm,
   },
   props: ["str", "assets", "userType"],
   data: function () {

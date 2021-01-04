@@ -170,6 +170,15 @@ body,
 .inline-block {
   display: inline-block;
 }
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
 .text-rtl {
   direction: rtl;
 }
@@ -304,8 +313,8 @@ body,
   border-right-color: currentcolor;
   border-right-color: transparent;
   border-radius: 50%;
-  -webkit-animation: spinner-border 0.75s linear infinite;
-  animation: spinner-border 0.75s linear infinite;
+  -webkit-animation: spinner-border 1s linear infinite;
+  animation: spinner-border 1s linear infinite;
 }
 .bd-example::after {
   display: block;

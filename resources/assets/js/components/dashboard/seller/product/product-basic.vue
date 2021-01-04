@@ -13,7 +13,7 @@
 }
 
 .main-content > div.wrapper-section {
-  border: 1px solid #0000001f;
+  border: 1px solid #dadce0;
   border-radius: 4px;
   min-height: 400px;
 }
@@ -22,6 +22,16 @@
   font-size: 25px;
   margin-bottom: 30px;
 }
+
+.main-content div.section-title h2{
+	font-size: 25px;
+	margin-bottom: 10px;
+}
+
+.main-content div.section-title p{
+font-size: 18px;
+}
+
 
 .section-background {
   position: fixed;
@@ -46,7 +56,7 @@
 }
 .main-section-wrapper-full-width {
   max-width: 100%;
-  margin: 25px auto 0;
+  margin:0;
 }
 
 .header-section > h2 {
@@ -131,9 +141,38 @@
   right: -34px;
 }
 
+.success-register{
+  background: #EDF8E6;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 10px 15px 20px;
+  color: #21AD93;
+  text-align: center;
+}
+
+.success-register h2{
+  font-size: 19px;
+  margin-bottom: 10px;
+}
+
+.success-register h2 i{
+  font-size: 26px;
+  width: 38px;
+  height: 38px;
+  background: #fff;
+  border-radius: 50px;
+  padding-top: 6px;
+}
+
+.success-register h2 span{
+  position: relative;
+  top: -4px;
+  margin-right: 5px;
+}
+
 @media screen and (max-width: 767px) {
   .main-section-wrapper {
-    max-width: 600px;
+    max-width: initial;
     margin: 0px auto;
   }
 
@@ -143,7 +182,7 @@
 
   .main-content > div.wrapper-section {
     border: none;
-    border-top: 1px solid #0000001f;
+    border-top: 1px solid #dadce0;
     border-radius: 0;
   }
 
@@ -173,14 +212,56 @@
     right: 20px;
     left: 26px;
   }
+
+  .success-register{
+    margin-top: -18px;
+  }
+
+  .success-register h2 i{
+    display: block;
+    margin: 0 auto 20px;
+    width: 80px;
+    height: 80px;
+    font-size: 45px;
+    padding-top: 17px;
+  }
+
+
 }
 </style>
 
 
 <template>
   <section class="main-content col-xs-12">
-    <div class="row">
-      <h2 class="section-title">ثبت محصول جدید</h2>
+    <div class="row"   v-if="currentStep == 7">
+      <div class="success-register" >
+        <div class="title-success">
+          <h2>
+            <i class="fa fa-check"></i>
+            <span>
+              ثبت محصول با موفقیت انجام شد
+            </span>
+          </h2>
+        
+        </div>
+        <p>
+          پس از تایید محصول در لیست محصولات قرار خواهد گرفت.
+        </p>
+      </div>
+      <div  class="section-title">
+        <h2>
+          درخواست های مرتبط
+        </h2>
+      <p>
+        یه متن خوب برای درخواست های خرید مرتبط
+      </p>
+      </div>
+      
+    </div>
+    <div v-else class="row">
+      
+      <h2  class="section-title">ثبت محصول جدید</h2>
+      
     </div>
     <div class="row wrapper-section">
       <div class="main-section">
@@ -259,9 +340,7 @@
             </div>
           </div>
 
-          <div v-else-if="currentStep == 7" class="wrapper-progressbar title">
-            <h2>ثبت محصول با موفقیت انجام شد</h2>
-          </div>
+         
         </header>
 
         <main
@@ -311,7 +390,7 @@ export default {
   },
   data: function () {
     return {
-      currentStep: 4,
+      currentStep: 7,
       currentUser: {
         profile: "",
         user_info: "",
@@ -381,6 +460,9 @@ export default {
       isStartLoading: false,
       stock_text: "",
       min_sale_amount_text: "",
+      allBuyAds : '',
+      buyAds : [],
+      load:true
     };
   },
   methods: {
@@ -394,6 +476,14 @@ export default {
       axios
         .post("/location/get_location_info")
         .then((response) => (this.provinces = response.data.provinces));
+     axios
+        .post("/get_related_buyAds_list_to_the_seller")
+        .then( (response) => {
+          this.allBuyAds = response.data.buyAds;
+          this.buyAds = this.allBuyAds;
+          this.load = false;
+         
+        });
     },
 
     startRegisterProductSubmited() {
@@ -437,13 +527,6 @@ export default {
 
       if (!this.errors.provinceSelected && !this.errors.city_id) {
         this.goToStep(4);
-      }
-    },
-    descriptionSubmited() {
-      this.descriptionValidator(this.product.description);
-
-      if (!this.errors.description) {
-        this.goToStep(6);
       }
     },
     loadSubCategoryList: function (e) {
@@ -599,6 +682,16 @@ export default {
         .replace(/[\u06f0-\u06f9]/g, function (c) {
           return c.charCodeAt(0) - 0x06f0;
         });
+    },
+     getConvertedNumbers: function (number) {
+      if (number || typeof number === "number") {
+        let data = number / 1000;
+        if (number < 1000) {
+          return number + " " + "کیلوگرم";
+        } else {
+          return data + " " + "تن";
+        }
+      } else return "";
     },
     getProductRegisterSuccessMessage: function () {
       let msg = "";
@@ -760,28 +853,7 @@ export default {
         );
       }
     },
-    descriptionValidator: function (description) {
-      this.errors.description = "";
-
-      if (description != "") {
-        if (
-          !this.validateRegx(
-            description,
-            /^(?!.*[(@#!%$&*)])[s\u{0600}-\u{06FF}\u{060C}\u{061B}\u{061F}\u{0640}\u{066A}\u{066B}\u{066C}\u{0E}\u{0A}\u{05BE}_.-،:()A-Za-z0-9 ]+$/u
-          )
-        ) {
-          this.errors.description = "توضیحات شامل کاراکتر های غیرمجاز است";
-        }
-      }
-
-      if (this.errors.description) {
-        this.registerComponentStatistics(
-          "product-register-error",
-          "description",
-          "input:" + description + " error:" + this.errors.description
-        );
-      }
-    },
+    
     validateRegx: function (input, regx) {
       return regx.test(input);
     },
@@ -853,6 +925,7 @@ export default {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       else return "";
     },
+     
   },
   mounted() {
     this.init();

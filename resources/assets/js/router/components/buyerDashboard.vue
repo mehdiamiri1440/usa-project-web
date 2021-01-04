@@ -1,7 +1,7 @@
 <style scoped>
 #main {
   margin-right: 250px;
-  margin-top: 65px;
+  margin-top: 59px;
   position: relative;
 }
 

@@ -419,7 +419,6 @@ export default {
       isContactListLoaded: false,
       isCurrentStep: 0,
       assets: this.$parent.assets,
-      str: this.$parent.str,
       fromContact: 0,
       toContact: 15,
       contactsCountInEachLoad: 20,

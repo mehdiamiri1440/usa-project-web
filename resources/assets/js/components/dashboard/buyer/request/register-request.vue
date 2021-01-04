@@ -1,6 +1,6 @@
 <style scoped>
 /*main style*/
-
+/* 
 .main-content-wrapper {
   padding: 30px;
 }
@@ -68,7 +68,7 @@
   margin: 25px auto 0;
 }
 
-/*progressbar styles*/
+/*progressbar styles
 
 .wrapper-progressbar {
   position: relative;
@@ -257,11 +257,130 @@
   .success-message-wrapper {
     margin-bottom: 15px;
   }
+} */
+
+
+
+/*main style*/
+
+
+.main-content {
+  max-width: 685px;
+  position: absolute;
+  left: calc(50% - 342px);
+  top: 65px;
+  margin-bottom: 50px;
+  height: 100%;
+  direction: rtl;
+}
+
+.main-content > div.wrapper-section {
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  min-height: 400px;
+
+}
+.main-content .section-title {
+  font-size: 25px;
+  margin-bottom: 30px;
+}
+
+.section-background {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  content: "";
+  z-index: -1;
+}
+
+.wrapper-progressbar.title h2 {
+  font-size: 23px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.main-section-wrapper {
+  max-width: 420px;
+  margin: 42px auto;
+}
+.main-section-wrapper-full-width {
+  max-width: 100%;
+  margin: 25px auto 0;
+}
+
+.header-section > h2 {
+  font-weight: 600;
+}
+
+.success-inquiry-wrapper{
+  background: #edf8e6;
+  color:'#a5dc86';
+  border-radius: 4px;
+  padding: 15px;  
+}
+
+.info-inquiry-wrapper{
+  background: #e6f4f8;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.info-inquiry-wrapper p{
+  line-height: 1.618;
+}
+
+@media screen and (max-width: 767px) {
+  .main-section-wrapper {
+    max-width: 600px;
+    margin: 0px auto;
+  }
+
+  .main-content .section-title {
+    padding: 0 10px;
+  }
+
+  .main-content > div.wrapper-section {
+    border: none;
+    border-top: 1px solid #dadce0;
+    border-radius: 0;
+  }
+
+  .main-content {
+    max-width: initial;
+    background: #fff;
+    border-radius: 0;
+    box-shadow: none;
+    direction: rtl;
+    transform: translate(0, 0);
+    top: 0;
+    padding-top: 20px;
+    width: 100%;
+    left: 0;
+  }
+
+  .progrees-item p {
+    display: none;
+  }
+
+  .custom-progressbar {
+    right: 30px;
+    left: 34px;
+  }
+
+  .active-progress-wrapper {
+    right: 20px;
+    left: 26px;
+  }
 }
 </style>
 
 <template>
-  <div
+
+  <!-- <div
     class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2 main-content-wrapper"
   >
     <div class="row">
@@ -335,60 +454,72 @@
         </main>
       </section>
 
-      <!-- <section v-if="currentStep == 1 && inquirySent && relatedProductsToInquiry" class="recent-products-wrapper">
-        <div class="title-section col-xs-12">
-          <div class="row">
-            <h3>
-              محصولاتی که شاید بخواهید بخرید
-            </h3>
-            <hr />
-          </div>
-        </div>
-        <div class="col-xs-12 products-contents latest-product">
-          <div class="row">
-            <div class="owl-carousel">
-              <product-carousel
-                v-for="(product, index) in 6"
-                :key="index"
-                img="http://localhost:8000/storage/products/YQny6p20xGGkx65yIPvONtKolPSEpqYve50v9PAv.jpeg"
-                title="خرما مضافتی"
-                stock="2000"
-                link=""
-                column="3"
-                auto-play="false"
-                inquiry-button="true"
-              />
-            </div>
-      </div>-->
-
-      <!-- <div v-else class="row">
-            <div
-              v-for="(item, index) in 3"
-              :key="index"
-              :class="{ 'hidden-xs': index >= 2 }"
-              class="col-md-4 col-sm-4 col-xs-6"
-            >
-              <article class="carousel-item box-content col-xs-12">
-                <span
-                  class="default-index-product-image placeholder-content col-xs-12"
-                ></span>
-
-                <span
-                  class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"
-                ></span>
-
-                <span
-                  class="content-default-width placeholder-content col-xs-8 col-xs-offset-2"
-                ></span>
-
-                <span class="margin-10 content-default-width"></span>
-              </article>
-            </div>
-      </div>-->
-      <!-- </div>
-      </section>-->
+      
     </div>
-  </div>
+  </div> -->
+  <section class="main-content col-xs-12">
+    
+    <div class="row">
+      <section
+        v-if="currentStep == 1 && inquirySent"
+        class="success-inquiry-wrapper wrapper-bg col-xs-12"
+      >
+        <p class="success-message-wrapper text-rtl pull-right">
+          <span class="fa fa-check-circle"></span>
+          <span class="success-message"
+            >استعلام شرایط فروش با موفقیت ارسال شد</span
+          >
+        </p>
+
+        <div class="success-actions pull-left">
+          <router-link
+            class="text-rtl"
+            :to="{ path: 'messenger/contacts' }"
+            tag="button"
+          >
+            <i class="fa fa-comment-alt"></i>
+            مشاهده پیام ها
+          </router-link>
+        </div>
+      </section>
+
+      <section
+        v-if="currentStep == 1"
+        class="info-inquiry-wrapper  col-xs-12"
+      >
+        <p class=" success-message-wrapper text-rtl pull-right">
+          <i class="fa fa-info-circle"></i>
+          <span class="red-text"> آیا قصد خرید عمده محصولی را دارید؟ </span>
+          همین حالا درخواست خرید ثبت کنید.
+        </p>
+      </section>
+    </div>
+
+    <div class="row">
+      <h2 class="section-title"  v-if="currentStep <= 1" >ثبت درخواست خرید</h2>
+      <h2 class="section-title" v-else>درخواست شما با موفقیت ثبت شد</h2>
+    </div>
+    <div class="row wrapper-section">
+      <div class="main-section">
+
+        <main
+          class="main-section-wrapper row"
+        >
+           <start-register-request v-if="currentStep == 0" />
+            <register-request :categoryList="categoryList" v-else-if="currentStep == 1" />
+            <finish-register-request-related
+            v-else-if="currentStep == 2 && relatedProducts"
+            :products="relatedProducts"
+            :str="str"
+           />
+            <finish-register-request v-else-if="currentStep == 2" />
+            
+        </main>
+      </div>
+
+      <div class="section-background"></div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -430,7 +561,7 @@ export default {
         pack_type: "",
         category_id: "",
         rules: false,
-        categorySelected: "",
+        category_id: "",
       },
       buyAdFields: ["name", "requirement_amount", "category_id"],
       categorySelected: "",
@@ -467,42 +598,8 @@ export default {
       });
 
       axios
-        .post("/get_category_list")
+        .post("/get_category_list",{cascade_list : true})
         .then((response) => (this.categoryList = response.data.categories));
-    },
-    loadSubCategoryList: function (e) {
-      e.preventDefault();
-      var categoryId = $(e.target).val();
-      this.categorySelected = categoryId;
-
-      this.buyAd.categorySelected = categoryId;
-
-      axios
-        .post("/get_category_list", {
-          parent_id: categoryId,
-        })
-        .then((response) => (this.subCategoryList = response.data.categories));
-    },
-    formValidator: function () {
-      if (!this.categorySelected) {
-        this.errors.categorySelected = "دسته بندی الزامی است";
-      }
-      if (!this.buyAd.category_id) {
-        this.errors.category_id = "نام محصول الزامی است";
-      }
-
-      // this.nameValidator(this.buyAd.name);
-      //console.log(this.nameValidator(this.buyAd.name));
-      this.requirementAmountValidator(this.buyAd.requirement_amount);
-
-      if (
-        !this.errors.categorySelected &&
-        !this.errors.category_id &&
-        !this.errors.name &&
-        !this.errors.requirement_amount
-      ) {
-        this.submitBuyAd();
-      }
     },
     submitBuyAd: function () {
       this.errors = "";
@@ -517,14 +614,8 @@ export default {
         .then(function (response) {
           if (response.status === 201) {
             self.disableSubmit = true;
-            // self.popUpMsg = "درخواست شما با موفقیت ثبت شد";
 
             window.localStorage.removeItem("buyAd");
-
-            // eventBus.$emit("submitSuccess", self.popUpMsg);
-
-            // $('#custom-main-modal').modal('show');
-
             eventBus.$emit("submitingEvent", false);
 
             self.registerComponentStatistics(
@@ -573,7 +664,8 @@ export default {
       if (num == null) {
         return null;
       }
-
+      
+      num = num.toString().replace(/,/g, '');
       num = num.toString().replace(/^0+/, "");
       num = num.toString().replace(/^\u0660+/, "");
       num = num.toString().replace(/^\u06f0+/, "");
@@ -617,22 +709,31 @@ export default {
     scrollToTop() {
       window.scrollTo(0, 0);
     },
-    nameValidator: function (name) {
-      this.toLatinNumbers(name);
-      if (!name) {
-        this.errors.name = "";
-      } else if (!this.validateRegx(name, /^[\u0600-\u06FF\s\d]+$/)) {
-        this.errors.name = "نوع محصول فرمت مناسبی نیست";
+    convertUnits: function (number) {
+      let data = number / 1000;
+      let text = "";
+      if (number < 1000) {
+        return number + " " + "کیلوگرم";
+      } else {
+        let ton = data.toString().split(".")[0];
+        let kg = number.toString().substr(ton.length);
+        kg = kg.replace(/^0+/, "");
+        ton = ton + " " + "تن";
+
+        if (kg) {
+          kg = " و " + kg + " کیلوگرم";
+          text = ton + kg;
+        } else {
+          text = ton;
+        }
+
+        return text;
       }
     },
-    requirementAmountValidator: function (number) {
-      this.errors.requirement_amount = "";
-      var standardNumber = this.toLatinNumbers(number);
-      if (standardNumber == "") {
-        this.errors.requirement_amount = "فیلد میزان نیاز الزامی است";
-      } else if (!this.validateRegx(standardNumber, /^\d*$/)) {
-        this.errors.requirement_amount = "فقط عدد وارد کنید";
-      }
+    getNumberWithCommas: function (number) {
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
     },
     validateRegx: function (input, regx) {
       return regx.test(input);
@@ -747,22 +848,6 @@ export default {
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/register-request" });
-  },
-  watch: {
-    "buyAd.requirement_amount": function (value) {
-      this.errors.requirement_amount = "";
-      if (value) {
-        let number = this.toLatinNumbers(value);
-        if (!this.validateRegx(number, /^\d*$/)) {
-          this.errors.requirement_amount = "لطفا  فقط عدد وارد کنید";
-        }
-        if (!this.errors.min_sale_amount) {
-          this.requirement_amount_text = this.convertUnits(number);
-        }
-      } else {
-        this.requirement_amount_text = "";
-      }
-    },
   },
 };
 </script>
