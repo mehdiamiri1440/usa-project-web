@@ -547,8 +547,8 @@ Route::group(['middleware' => [login::class]], function () {
         'as'   => 'get_my_buyAd_suggestions'
     ]);
 
-    Route::get('/get_related_buyAds_to_my_product',[
-        'uses' => 'Product\product_controller@get_related_buyAds_to_last_registered_product'
+    Route::post('/get_related_buyAds_to_my_product',[
+        'uses' => 'Product\product_controller@get_related_buyAds_to_the_last_registered_product'
     ]);
     
 });
