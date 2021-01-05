@@ -26,6 +26,10 @@ use App\Http\Controllers\Accounting\comment_controller;
 
 class product_controller extends Controller
 {
+    protected $words_blacklist = [
+        'در', 'به', 'را', 'از', 'و', 'برای', 'تا', 'که', 'بر', 'بی', 'مگر','درجه'
+    ];
+
     protected $current_user;
     protected $user_info_sent_by_product_array = [
         'myusers.id as user_id',
@@ -78,6 +82,20 @@ class product_controller extends Controller
 
     protected $max_factorial_input_number = 10;
 
+    protected $related_buyAds_required_fields = [
+        'buy_ads.id',
+        'buy_ads.name',
+        'buy_ads.created_at',
+        'buy_ads.updated_at',
+        'buy_ads.category_id',
+        'buy_ads.requirement_amount',
+        'buy_ads.myuser_id',
+        'subcategory.category_name as subcategory_name',
+        'categories.category_name as category_name',
+        'myusers.first_name',
+        'myusers.last_name',
+    ];
+
     // public method
     public function add_product(Request $request)
     {
@@ -94,12 +112,12 @@ class product_controller extends Controller
         $product_object_or_failuire_message = $this->add_product_to_DB($request);
 
         if (is_object($product_object_or_failuire_message)) {
-            $most_related_buyAd = null; //$this->get_the_most_related_buyAd_to_the_given_product_if_there_is_any($product_object_or_failuire_message);
+            $most_related_buyAds = $this->get_new_most_related_buyAds($product_object_or_failuire_message); //$this->get_the_most_related_buyAd_to_the_given_product_if_there_is_any($product_object_or_failuire_message);
 
-            if ($most_related_buyAd) {
+            if ($most_related_buyAds) {
                 return response()->json([
                     'status' => true,
-                    'buyAd' => $most_related_buyAd,
+                    'buyAds' => $most_related_buyAds,
                 ], 201);
             } else {
                 return response()->json([
@@ -1113,5 +1131,263 @@ class product_controller extends Controller
                             ])->get();
 
         return $tags_info;
+    }
+
+    protected function get_new_most_related_buyAds($product)
+    {
+        $until = Carbon::now();
+        $from = Carbon::now()->subMonths(4);
+
+        $product_name_array = $this->get_product_name_array($product);
+
+        $buyAds = DB::table('buy_ads')
+                                ->join('myusers','myusers.id','=','buy_ads.myuser_id')
+                                ->join('categories as subcategory','subcategory.id','=','buy_ads.category_id')
+                                ->join('categories','subcategory.parent_id','=','categories.id')
+                                ->where('buy_ads.category_id',$product->category_id)
+                                ->where('myusers.is_buyer',true)
+                                ->whereBetween('buy_ads.updated_at',[$from,$until])
+                                ->where('confirmed',true)
+                                ->where(function($q) use($product_name_array){
+                                    foreach($product_name_array as $name){
+                                        $q = $q->orWhere('name','like',"%$name%");
+                                    }
+
+                                    return $q;
+
+                                })
+                                ->select($this->related_buyAds_required_fields)
+                                ->get();
+
+        $buyAds = $this->get_most_valuable_buyAds($buyAds);
+
+        return $buyAds;
+    }
+
+    protected function get_product_name_array($product)
+    {
+        $product_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $product->product_name)))); //PHP is for professionals,not for kids
+        
+        $category_info = $this->get_category_and_subcategory_name($product->category_id);
+
+        if (count($product_name_array)) {
+            if ($product_name_array[0] == $category_info['subcategory_name']) {
+                array_splice($product_name_array, 0, 1);
+            }
+        }
+
+        $product_name_array = $this->remove_black_list_words($product_name_array);
+
+        return $product_name_array;
+    }
+
+    protected function remove_black_list_words(&$words)
+    {
+        $result = [];
+
+        foreach ($words as $word) {
+            $index = array_search($word, $this->words_blacklist);
+            if ($index === false) {
+                $result[] = $word;
+            }
+        }
+
+        return $result;
+    }
+
+    protected function get_most_valuable_buyAds($buyAds)
+    {
+        $buyer_ids = $buyAds->map(function($buyAd){
+            return collect($buyAd)->only('myuser_id');
+        });
+
+        $out_degrees = DB::table('messages')
+                            ->whereIn('sender_id',$buyer_ids)
+                            ->select(DB::raw("sender_id as buyer_id,count(distinct(receiver_id)) as out_degree"))
+                            ->groupBy('buyer_id')
+                            ->orderBy('out_degree','desc')
+                            ->get();
+
+        $buyer_ids = $out_degrees->map(function($item){
+            return collect($item)->only('buyer_id');
+        });
+
+        $in_degrees = DB::table('messages')
+                        ->whereIn('receiver_id',$buyer_ids)
+                        ->where('is_read',true)
+                        ->select(DB::raw("receiver_id as buyer_id,count(distinct(sender_id)) as in_degree"))
+                        ->groupBy('buyer_id')
+                        ->orderBy('in_degree','desc')
+                        ->get();
+
+        $out_degrees = $out_degrees->filter(function($item){
+            return $item->out_degree >= 20;
+        });
+
+        $in_degrees = $in_degrees->filter(function($item){
+            return $item->in_degree >= 20;
+        });
+
+        $buyer_ids_based_on_out_degree = [];
+
+        $out_degrees->each(function($item) use(&$buyer_ids_based_on_out_degree){
+            $buyer_ids_based_on_out_degree[] = $item->buyer_id;
+        });
+
+        $buyer_ids_based_on_in_degree = [];
+
+        $in_degrees->each(function($item) use(&$buyer_ids_based_on_in_degree){
+            $buyer_ids_based_on_in_degree[] = $item->buyer_id;
+        });
+
+        $result = array_intersect($buyer_ids_based_on_in_degree,$buyer_ids_based_on_out_degree);
+
+        $important_buyAds = $buyAds->filter(function($buyAd) use($result){
+            return in_array($buyAd->myuser_id,$result) == true;
+        });
+
+        $prioritized_buyAds_according_to_buyers_last_activity_date = $this->prioritize_buyAds_according_to_buyers_last_activity_date($important_buyAds);
+
+        $golden_buyAds_ids = array_map(function($buyAd){
+            return $buyAd->id;
+        },$prioritized_buyAds_according_to_buyers_last_activity_date);
+
+
+        $buyAds = $buyAds->all();
+
+        $buyAds = array_filter($buyAds,function($buyAd) use($golden_buyAds_ids){
+            return in_array($buyAd->id,$golden_buyAds_ids) == false;
+        });
+
+        usort($buyAds,function($item1,$item2){
+            return $item1->updated_at < $item2->updated_at ? 1 : -1;
+        });
+
+        $simple_buyAds = array_slice($buyAds,0,6 - count($prioritized_buyAds_according_to_buyers_last_activity_date));
+
+        foreach($simple_buyAds as $buyAd)
+        {
+            $buyAd->is_golden = false;
+        }
+
+        return array_merge($prioritized_buyAds_according_to_buyers_last_activity_date,$simple_buyAds);
+
+    }
+
+    protected function prioritize_buyAds_according_to_buyers_last_activity_date(&$buyAds)
+    {
+        $buyAds->each(function($buyAd){
+            $activity_info = $this->get_user_activity_ratio($buyAd->id,$buyAd->created_at);
+            $buyAd->activity_ratio = $activity_info['activity_ratio'];
+            $buyAd->score = $activity_info['score'];
+        });
+
+        $buyAds = $buyAds->all();
+
+        usort($buyAds,function($item1,$item2){
+            if($item1->score == $item2->score){
+                return $item1->activity_ratio < $item2->activity_ratio ? 1 : -1;
+            }
+
+            return $item1->score < $item2->score ? 1 : -1;
+        });
+
+        $golden_buyAds = array_slice($buyAds,0,3);
+
+        foreach($golden_buyAds as $buyAd)
+        {
+            $buyAd->is_golden = true;
+        }
+
+        return $golden_buyAds;
+    }
+
+    protected function get_user_activity_ratio($user_id,$buyAd_register_date)
+    {
+        $sending_message_records = DB::table('messages')->where('sender_id',$user_id)
+                                ->select(DB::raw("distinct(date(created_at)) as date"));
+
+        $seen_message_records = DB::table('messages')->where('receiver_id',$user_id)
+                                        ->where('is_read',true)
+                                        ->select(DB::raw("distinct(date(updated_at)) as date"));
+
+        $product_register_records = DB::table('products')->where('myuser_id',$user_id)
+                                        ->select(DB::raw("distinct(date(created_at)) as date"));
+
+        $buyAd_register_records = DB::table('buy_ads')->where('myuser_id',$user_id)
+                                        ->select(DB::raw("distinct(date(created_at)) as date"));
+
+        $user_record = DB::table('myusers')->where('id',$user_id)
+                                        ->select(DB::raw("updated_at as date"));
+
+        $login_record = DB::table('myusers')->where('id',$user_id)
+                                        ->select(DB::raw("date(last_login_date) as date"))
+                                        ->whereNotNull('last_login_date');
+
+        $result = DB::table('profiles')->where('myuser_id',$user_id)
+                                    ->select(DB::raw("distinct(date(updated_at)) as date"))
+                                    ->union($sending_message_records)
+                                    ->union($seen_message_records)
+                                    ->union($product_register_records)
+                                    ->union($buyAd_register_records)
+                                    ->union($user_record)
+                                    ->union($login_record)
+                                    ->orderBy('date','desc')
+                                    ->get();
+
+
+        $result = array_unique($result->all(),SORT_REGULAR);
+
+        $total_number_of_active_days  = count($result); 
+
+        $days_since_buyAd_register = Carbon::now()->diffInDays($buyAd_register_date);
+
+        $user_register_date = DB::table('myusers')->where('id',$user_id)->get()->first()->created_at;
+
+        $days_between_last_activity_and_user_signup = Carbon::parse($user_register_date)->diffInDays(Carbon::parse($result[0]->date));
+
+        $activity_ratio = round($total_number_of_active_days / $days_since_buyAd_register , 2) * 100;
+
+        $score = round($days_between_last_activity_and_user_signup / $days_since_buyAd_register, 2);
+
+        return compact('activity_ratio','score');
+    }
+
+    public function get_related_buyAds_to_the_last_registered_product()
+    {
+        $user_id = session('user_id');
+
+        $user_record = myuser::find($user_id);
+
+        if($user_record){
+            if($user_record->active_pakage_type == 0){
+                return response()->json([
+                    'status' => false,
+                    'msg' => 'شما به این قسمت دسترسی ندارید.'
+                ]);
+            }
+        }
+
+        $product = product::where('myuser_id',$user_id)
+                                ->whereBetween('created_at',[Carbon::now()->subMinutes(30),Carbon::now()])
+                                ->orderBy('created_at','desc')
+                                ->get()
+                                ->first();
+
+        if(is_null($product)){
+            return response()->json([
+                'status' => false,
+                'msg' => 'شما به این قسمت دسترسی ندارید.'
+            ]);
+        }
+
+        $buyAds = $this->get_new_most_related_buyAds($product);
+
+        return response()->json([
+            'status' => true,
+            'buyAds' => $buyAds
+        ]);
+
+        
     }
 }

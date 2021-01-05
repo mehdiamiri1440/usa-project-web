@@ -20,6 +20,23 @@ class location_controller extends Controller
                 return DB::table('provinces')->get();
             });
 
+            if($request->has('cascade_list') && $request->cascade_list == true){
+                $all_cities = DB::table('cities')->get();
+
+                $cascade_provinces = $provinces->each(function($province) use($all_cities){
+                    $province_id = $province->id;
+
+                    $province->cities = $all_cities->filter(function($city) use($province_id){
+                        return $city->province_id == $province_id;
+                    });
+                });
+
+                return response()->json([
+                    'status' => true,
+                    'provinces' => $cascade_provinces
+                ],200);
+            }
+
             return response()->json([
                 'status' => true,
                 'provinces' => array_values($provinces->toArray()),
