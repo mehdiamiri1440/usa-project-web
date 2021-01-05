@@ -187,7 +187,7 @@ class SendPhoneNumberToBuyerIfConditionsIsSatisfied implements ShouldQueue
                                             ->union($sending_message_records)
                                             ->union($profile_records)
                                             ->union($product_records)
-                                            ->union($sending_message_records)
+                                            ->union($seen_message_records)
                                             ->union($user_record)
                                             ->orderBy('date','desc')
                                             ->get()
