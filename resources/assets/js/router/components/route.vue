@@ -442,7 +442,7 @@ export default {
       // code here
       this.createCookie("downloadAppModal", true, 60 * 24);
       window.location.href =
-        "https://app-download.s3.ir-thr-at1.arvanstorage.com/buskool.apk";
+        "https://play.google.com/store/apps/details?id=com.buskool";
     },
     isOsIOS: function () {
       var userAgent = window.navigator.userAgent.toLowerCase(),
