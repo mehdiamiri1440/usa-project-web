@@ -1221,11 +1221,11 @@ class product_controller extends Controller
                         ->get();
 
         $out_degrees = $out_degrees->filter(function($item){
-            return $item->out_degree >= 20;
+            return $item->out_degree >= 3;
         });
 
         $in_degrees = $in_degrees->filter(function($item){
-            return $item->in_degree >= 20;
+            return $item->in_degree >= 3;
         });
 
         $buyer_ids_based_on_out_degree = [];
@@ -1346,9 +1346,9 @@ class product_controller extends Controller
 
         $days_between_last_activity_and_user_signup = Carbon::parse($user_register_date)->diffInDays(Carbon::parse($result[0]->date));
 
-        $activity_ratio = round($total_number_of_active_days / $days_since_buyAd_register , 2) * 100;
+        $activity_ratio = round($total_number_of_active_days / ($days_since_buyAd_register + 1) , 2) * 100;
 
-        $score = round($days_between_last_activity_and_user_signup / $days_since_buyAd_register, 2);
+        $score = round($days_between_last_activity_and_user_signup / ($days_since_buyAd_register + 1), 2);
 
         return compact('activity_ratio','score');
     }

@@ -159,8 +159,6 @@ textarea.error:focus + i {
     </div>
 
     <form class="form-contents col-xs-12" v-on:submit.prevent="descriptionSubmited()">
-      <label >در مورد کیفیت و نوع بسته بندی محصول خود توضیح دهید</label>
-
       <div class="text-input-wrapper">
         <!-- input type tel because we have some limmitation for processes -->
 
@@ -168,7 +166,7 @@ textarea.error:focus + i {
           rows="4"
           :class="{'active' : $parent.product.description , 'error' : errors.description}"
           v-model="$parent.product.description"
-          placeholder="توضیحات  محصول خود را بنویسید"
+          placeholder="در مورد کیفیت و نوع بسته بندی محصول خود اینجا توضیح دهید"
         ></textarea>
 
 
@@ -186,20 +184,6 @@ textarea.error:focus + i {
               ></span>
             </p>
           </div>
-      <!-- <p>
-        
-        با کلیک روی دکمه ثبت نهایی موافقت خود را 
-
-
-        <a
-          href="/privacy-and-policy"
-          target="_balnk"
-          class="green-text"
-        > 
-        قوانین و شرایط باسکول
-      </a>
-        اعلام می کنید
-      </p> -->
     </form>
     <div class="col-xs-12">
       <button

@@ -18,6 +18,12 @@
   min-height: 400px;
 }
 
+.main-content > div.wrapper-section.empty-section {
+  border: none;
+  border-radius: 4px;
+  min-height: initial;
+}
+
 .main-content .section-title {
   font-size: 25px;
   margin-bottom: 30px;
@@ -29,7 +35,7 @@
 }
 
 .main-content div.section-title p{
-font-size: 18px;
+font-size: 15px;
 }
 
 
@@ -232,9 +238,11 @@ font-size: 18px;
 
 
 <template>
-  <section class="main-content col-xs-12">
-    <div class="row"   v-if="currentStep == 7">
-      <div class="success-register" >
+
+  <div>
+    <section v-show="$route.name == 'successRegisterProduct'" class="main-content col-xs-12" >
+    <div class="row" >
+      <div class="success-register" v-if="successRegisterProduct">
         <div class="title-success">
           <h2>
             <i class="fa fa-check"></i>
@@ -245,25 +253,58 @@ font-size: 18px;
         
         </div>
         <p>
-          پس از تایید محصول در لیست محصولات قرار خواهد گرفت.
+          پس از تایید کارشناسان محصول شما در لیست قرار خواهد گرفت.
         </p>
       </div>
-      <div  class="section-title">
+      <div v-if="buyAds.length !=  0 "  class="section-title">
         <h2>
-          درخواست های مرتبط
+         خریداران
         </h2>
       <p>
-        یه متن خوب برای درخواست های خرید مرتبط
+        خریداران پیشنهادی از طرف باسکول برای محصول شما.
       </p>
       </div>
-      
     </div>
-    <div v-else class="row">
+    <div  
+    v-show="buyAds.length > 0"
+      class="row wrapper-section" :class="{'empty-section' :  buyAds.length == 0}">
+
+      <div class="main-section">
+        <main
+          class="main-section-wrapper main-section-wrapper-full-width row"
+        >
+          <FinishStage />
+        </main>
+      </div>
+
+      <div class="section-background"></div>
+    </div>
+    <div  
+    v-show="buyAds.length == 0"
+      class="row wrapper-section" :class="{'empty-section' :  buyAds.length == 0}">
+
+      <div class="main-section">
+        <main
+          class="main-section-wrapper main-section-wrapper-full-width row"
+        >
+          <FinishStage />
+         
+        </main>
+      </div>
+
+      <div class="section-background"></div>
+    </div>
+  </section>
+  <section v-show="$route.name != 'successRegisterProduct'" class="main-content col-xs-12" >
+    
+    <div class="row">
       
       <h2  class="section-title">ثبت محصول جدید</h2>
       
     </div>
-    <div class="row wrapper-section">
+    <div  
+      class="row wrapper-section" :class="{'empty-section' : currentStep == 7 && buyAds.length == 0}">
+
       <div class="main-section">
         <header class="header-section">
           <div
@@ -350,20 +391,20 @@ font-size: 18px;
               currentStep == 7,
           }"
         >
-          <StartRegisterProduct v-show="currentStep == 0" />
-          <ProductCategory :category-list="categoryList" v-show="currentStep == 1" />
-          <StockAndPrice v-show="currentStep == 2" />
-          <Location :category-list="categoryList" v-show="currentStep == 3" />
+          <StartRegisterProduct v-if="currentStep == 0" />
+          <ProductCategory :category-list="categoryList" v-else-if="currentStep == 1" />
+          <StockAndPrice v-else-if="currentStep == 2" />
+          <Location :provinces="provinces" v-else-if="currentStep == 3" />
           <ProductImage v-show="currentStep == 4" />
-          <Terms v-show="currentStep == 5" />
-          <MoreDetails v-show="currentStep == 6" />
-          <FinishStage v-show="currentStep == 7" />
+          <Terms v-if="currentStep == 5" />
+          <MoreDetails v-else-if="currentStep == 6" />
         </main>
       </div>
 
       <div class="section-background"></div>
     </div>
   </section>
+  </div>
 </template>
 
 <script>
@@ -390,7 +431,7 @@ export default {
   },
   data: function () {
     return {
-      currentStep: 7,
+      currentStep: 0,
       currentUser: {
         profile: "",
         user_info: "",
@@ -460,13 +501,23 @@ export default {
       isStartLoading: false,
       stock_text: "",
       min_sale_amount_text: "",
-      allBuyAds : '',
       buyAds : [],
-      load:true
+      load:true,
+      successRegisterProduct : false
     };
   },
   methods: {
     init: function () {
+      if(this.$route.name == "successRegisterProduct" && this.successRegisterProduct == false){
+         axios
+        .post("/get_related_buyAds_to_my_product")
+        .then((response) => {
+              if(response.data.status){
+                this.buyAds = response.data.buyAds;
+                this.load = false
+              }
+        });
+      }
       axios
         .post("/user/profile_info")
         .then((response) => (this.currentUser = response.data));
@@ -474,16 +525,8 @@ export default {
         .post("/get_category_list",{cascade_list : true})
         .then((response) => (this.categoryList = response.data.categories));
       axios
-        .post("/location/get_location_info")
+        .post("/location/get_location_info",{cascade_list : true})
         .then((response) => (this.provinces = response.data.provinces));
-     axios
-        .post("/get_related_buyAds_list_to_the_seller")
-        .then( (response) => {
-          this.allBuyAds = response.data.buyAds;
-          this.buyAds = this.allBuyAds;
-          this.load = false;
-         
-        });
     },
 
     startRegisterProductSubmited() {
@@ -529,28 +572,6 @@ export default {
         this.goToStep(4);
       }
     },
-    loadSubCategoryList: function (e) {
-      e.preventDefault();
-      var categoryId = $(e.target).val();
-      this.errors.category_selected = "";
-      this.categorySelected = categoryId;
-      axios
-        .post("/get_category_list", {
-          parent_id: categoryId,
-        })
-        .then((response) => (this.SubCategoryList = response.data.categories));
-    },
-    loadCityList: function (e) {
-      this.errors.provinceSelected = "";
-      e.preventDefault();
-      var provinceId = $(e.target).val();
-      this.provinceSelected = provinceId;
-      axios
-        .post("/location/get_location_info", {
-          province_id: provinceId,
-        })
-        .then((response) => (this.cities = response.data.cities));
-    },
     submitProduct: function () {
       eventBus.$emit("submiting", true);
       var self = this;
@@ -582,7 +603,6 @@ export default {
               self.popUpMsg = self.getProductRegisterSuccessMessage();
               eventBus.$emit("submitSuccess", self.popUpMsg);
               eventBus.$emit("submiting", false);
-              // $('#custom-main-modal').modal('show');
 
               self.registerComponentStatistics(
                 "product-register",
@@ -590,25 +610,29 @@ export default {
                 "product-registered-successfully"
               );
 
-              // if (response.data.buyAd) {
-              //   self.relatedBuyAd = response.data.buyAd;
-              // }
-
-              self.goToStep(7);
+            
+              self.load = false;
+              self.successRegisterProduct = true;
+              self.$router.push({name:'successRegisterProduct'});
 
               if (response.data.product) {
                 if (response.data.product.active_package_type == 0) {
+                  
                   setTimeout(function () {
                     self.$parent.is_pricing_active = true;
                   }, 1000);
                 }
+              }else if(response.data.buyAds){
+                  self.buyAds = response.data.buyAds;
               }
             } else if (response.status === 200) {
               self.popUpMsg = response.data.msg;
               eventBus.$emit("submitSuccess", self.popUpMsg);
               eventBus.$emit("submiting", false);
-              // $('#modal-buttons').modal('show');
-              self.goToStep(7);
+              self.load = false;
+              self.successRegisterProduct = true;
+              self.$router.push({name:'successRegisterProduct'});
+
 
               if (response.data.product) {
                 if (response.data.product.active_package_type == 0) {
@@ -925,6 +949,21 @@ export default {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       else return "";
     },
+    resetComponent(){
+        this.product = {
+        product_name: "",
+        stock: "",
+        min_sale_price: "",
+        max_sale_price: "",
+        min_sale_amount: "",
+        description: "",
+        address: "",
+        category_id: "",
+        city_id: "",
+        rules: true,
+      }
+      this.currentStep = 0
+    }
      
   },
   mounted() {
@@ -942,47 +981,6 @@ export default {
     "product.product_name": function (name) {
       this.errors.product_name = "";
     },
-
-    // productFiles: function (files) {
-    //   var errorsStatus = false;
-    //   console.log(files);
-    //   // if (files.length) {
-    //   //   this.errors.images_count = [];
-    //   //   for (var i = 0; i <= files.length; i++) {
-    //   //     if (files[i]) {
-    //   //       if (
-    //   //         !files[i].type ||
-    //   //         files[i].type == "" ||
-    //   //         files[i].type == "image/gif" ||
-    //   //         files[i].type == "image/svg+xml" ||
-    //   //         files[i].type == "application/postscript" ||
-    //   //         files[i].type == "text/xml" ||
-    //   //         files[i].type == "application/x-gzip"
-    //   //       ) {
-    //   //         errorsStatus = true;
-    //   //         this.errors.images_type = "تصاویر باید فرمت معتبری باشند.";
-    //   //       }
-
-    //   //       if (files[i].size > 5242880) {
-    //   //         errorsStatus = true;
-    //   //         this.errors.images_size =
-    //   //           "حجم تصویر بالا است، باید کمتر از 5 مگابایت باشد.";
-    //   //       } else if (files[i].size < 20480) {
-    //   //         errorsStatus = true;
-    //   //         this.errors.images_size =
-    //   //           "حجم تصویر پایین است، باید بیشتر از 20 کیلوبایت باشد.";
-    //   //       }
-    //   //     }
-    //   //   }
-    //   //   if (!errorsStatus) {
-    //   //     this.errors.images_type = "";
-    //   //     this.errors.images_size = "";
-    //   //   }
-    //   // } else {
-    //   //   this.errors.images_type = "";
-    //   //   this.errors.images_size = "";
-    //   // }
-    // },
     currentStep: function (step) {
       switch (step) {
         case 1:

@@ -251,6 +251,32 @@ text-align: right !important;
   font-weight: bold;
   top: 14px;
 }
+.text-input-wrapper > p{
+	font-size: 20px ;
+}
+
+.green-button{
+	margin-top:30px;
+}
+
+.form-contents{
+	float: right;
+	width: 100%;
+	padding: 40px 0;
+	text-align: center;
+	line-height: 1.618;
+}
+
+.spinner-wrapper{
+	margin-top: 120px;
+}
+
+.spinner-border{
+	width: 6.5rem;
+	height: 6.5rem;
+	border-width: 0.5rem;
+	color: #00c569;
+}
 
 @media screen and (max-width: 991px) {
   .fix-request-header-box,
@@ -325,218 +351,177 @@ text-align: right !important;
 }
 </style>
 <template>
-	<div>
 
-		  <ul class="list-unstyled wrapper-items" v-if="$parent.buyAds.lenght != 0 && !$parent.load">
-            <li
-              v-for="(buyAd, index) in $parent.buyAds"
-              :key="index"
-              class="list-group-item col-xs-12"
-              :class="{
-                golden: buyAd.is_golden,
-                lock:
-                  buyAd.is_golden &&
-                  $parent.currentUser.user_info.active_pakage_type == 0,
-              }"
-            >
-              <span
-                v-if="
-                  buyAd.is_golden &&
-                  $parent.currentUser.user_info.active_pakage_type == 0
-                "
-                class="lock-text"
-                v-text="buyAd.subcategory_name"
-              ></span>
-              <p class="list-title right-side col-sm-6 col-xs-12  ">
-                <span>
-                  خریدار
-                </span>
-                 <span
-                 class="red-text"
-                  v-if="
-                    buyAd.is_golden &&
-                    $parent.currentUser.user_info.active_pakage_type == 0
-                  "
-                ></span>
-                <span
-                class="red-text"
-                  v-else
-                  v-text="$parent.getConvertedNumbers(buyAd.requirement_amount)"
-                ></span>
-				
+		<ul class="list-unstyled wrapper-items" v-if="$parent.buyAds.length != 0 && !$parent.load">
+				<li
+				v-for="(buyAd, index) in $parent.buyAds"
+				:key="index"
+				class="list-group-item col-xs-12"
+				:class="{
+					golden: buyAd.is_golden,
+					lock:
+					buyAd.is_golden &&
+					$parent.currentUser.user_info.active_pakage_type == 0,
+				}"
+				>
 				<span
-                 class="red-text"
-                  v-if="
-                    buyAd.is_golden &&
-                    $parent.currentUser.user_info.active_pakage_type == 0
-                  "
-                  v-text="'.از پکیج ویژه استفاده کنید'"
-                ></span>
-                <span
-				v-else
-				 class="red-text"
-                 v-text="buyAd.subcategory_name"></span>
-                <span>
-                   از نوع 
-                </span>
-				<span
-                 class="red-text"
-                  v-if="
-                    buyAd.is_golden &&
-                    $parent.currentUser.user_info.active_pakage_type == 0
-                  "
-                 
-                ></span>
-                <span v-else>
+					v-if="
+					buyAd.is_golden &&
+					$parent.currentUser.user_info.active_pakage_type == 0
+					"
+					class="lock-text"
+					v-text="buyAd.subcategory_name"
+				></span>
+				<p class="list-title right-side col-sm-6 col-xs-12  ">
+					<span>
+					خریدار
+					</span>
 					<span
-				class="brand-text"
-                 v-if="buyAd.name" v-text="buyAd.name"></span>
-				</span>
+					class="red-text"
+					v-if="
+						buyAd.is_golden &&
+						$parent.currentUser.user_info.active_pakage_type == 0
+					"
+					></span>
+					<span
+					class="red-text"
+					v-else
+					v-text="$parent.getConvertedNumbers(buyAd.requirement_amount)"
+					></span>
+					
+					<span
+					class="red-text"
+					v-if="
+						buyAd.is_golden &&
+						$parent.currentUser.user_info.active_pakage_type == 0
+					"
+					v-text="'.از پکیج ویژه استفاده کنید'"
+					></span>
+					<span
+					v-else
+					class="red-text"
+					v-text="buyAd.subcategory_name"></span>
+					<span>
+					از نوع 
+					</span>
+					<span
+					class="red-text"
+					v-if="
+						buyAd.is_golden &&
+						$parent.currentUser.user_info.active_pakage_type == 0
+					"
+					
+					></span>
+					<span v-else>
+						<span
+					class="brand-text"
+					v-if="buyAd.name" v-text="buyAd.name"></span>
+					</span>
 
-                <span>
-                  هستم
-                </span>
-              </p>
+					<span>
+					هستم
+					</span>
+				</p>
 
 
 
 
-              <a
-                v-if="
-                  buyAd.is_golden &&
-                  $parent.currentUser.user_info.active_pakage_type == 0
-                "
-                class="col-sm-3 col-xs-12 pull-left"
-                href
-                @click.prevent="openGoldenChatRestrictionModal()"
-              >
-                <p class="detail-success hover-effect">
-                  <span class="fas fa-comment-alt"></span> پیام به خریدار
-                </p>
-                <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
-                  کمی صبر کنید...
-                </p>
-              </a>
-              <a
-                v-else
-                class="col-sm-3 col-xs-12 pull-left"
-                href
-                @click.prevent="openChat(buyAd, $event)"
-              >
-                <p class="detail-success hover-effect">
-                  <span class="fas fa-comment-alt"></span> پیام به خریدار
-                </p>
-                <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
-                  کمی صبر کنید...
-                </p>
-              </a>
-            </li>
-          </ul>
-          <ul v-else class="list-unstyled">
-            <li
-              v-for="(item, index) in 6"
-              :key="index"
-              class="list-group-item col-xs-12"
+				<a
+					v-if="
+					buyAd.is_golden &&
+					$parent.currentUser.user_info.active_pakage_type == 0
+					"
+					class="col-sm-3 col-xs-12 pull-left"
+					href
+					@click.prevent="openGoldenChatRestrictionModal()"
+				>
+					<p class="detail-success hover-effect">
+					<span class="fas fa-comment-alt"></span> پیام به خریدار
+					</p>
+					<p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
+					کمی صبر کنید...
+					</p>
+				</a>
+				<a
+					v-else
+					class="col-sm-3 col-xs-12 pull-left"
+					href
+					@click.prevent="openChat(buyAd, $event)"
+				>
+					<p class="detail-success hover-effect">
+					<span class="fas fa-comment-alt"></span> پیام به خریدار
+					</p>
+					<p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
+					کمی صبر کنید...
+					</p>
+				</a>
+				</li>
+		</ul>
+		
+	
+
+		<div v-else-if="$parent.buyAds.length == 0 && !$parent.load" class="form-contents">
+			<div class=" col-xs-12 ">
+				<div class="text-input-wrapper">
+					<p class="red-text large-text">چه خریدارنی به دنبال محصول شما هستند؟</p>
+					<router-link class="green-button" :to="{ name : 'buyAdRequestsSeller'}">
+						<span class="bold-text">مشاهده درخواست های خرید</span>
+					</router-link>
+				</div>
+			</div>
+		</div>
+
+		<div v-else class="text-center spinner-wrapper">
+			  <div  class="spinner-border" 
             >
-              <p
-                class="default-list-title pull-right col-sm-9 hidden-xs margin-10-0"
-              >
-                <span
-                  class="placeholder-content content-full-width h-20"
-                ></span>
-              </p>
+              <span class="sr-only">Loading...</span>
+            </div>
+		</div>
 
-              <p
-                class="list-title col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm"
-              >
-                <span
-                  class="placeholder-content content-half-width h-20 margin-auto"
-                ></span>
-              </p>
+		<!-- <ul v-else class="list-unstyled">
+				<li
+				v-for="(item, index) in 6"
+				:key="index"
+				class="list-group-item col-xs-12"
+				>
+				<p
+					class="default-list-title pull-right col-sm-9 hidden-xs margin-10-0"
+				>
+					<span
+					class="placeholder-content content-full-width h-20"
+					></span>
+				</p>
 
-              <p class="needs col-sm-4 col-xs-12 hidden-md hidden-lg hidden-sm">
-                <span
-                  class="placeholder-content content-default-width h-20 margin-auto"
-                ></span>
-              </p>
+				<p
+					class="list-title col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm"
+				>
+					<span
+					class="placeholder-content content-half-width h-20 margin-auto"
+					></span>
+				</p>
 
-              <p
-                class="list-time col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm"
-              >
-                <span
-                  class="placeholder-content content-min-width h-20 margin-auto"
-                ></span>
-              </p>
+				<p class="needs col-sm-4 col-xs-12 hidden-md hidden-lg hidden-sm">
+					<span
+					class="placeholder-content content-default-width h-20 margin-auto"
+					></span>
+				</p>
 
-              <p class="col-sm-3 col-xs-12">
-                <span
-                  class="placeholder-content default-button-full-with margin-10-auto"
-                ></span>
-              </p>
-            </li>
-          </ul>
-		 <!-- <div class="form-contents ">
+				<p
+					class="list-time col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm"
+				>
+					<span
+					class="placeholder-content content-min-width h-20 margin-auto"
+					></span>
+				</p>
 
-			    	<div class=" col-xs-12 ">
+				<p class="col-sm-3 col-xs-12">
+					<span
+					class="placeholder-content default-button-full-with margin-10-auto"
+					></span>
+				</p>
+				</li>
+			</ul> -->
 
-
-
-				     	<div class="text-input-wrapper">
-
-
-				     		<p class="main-description">
-				     			در صورت استفاده از طرح عضویت رایگان محصول شما پس از تایید کارشناسان در لیست محصولات قرار می گیرد 
-				     		</p>
-
-                           <div >
-	                           	 <p class="main-description"  ><strong>یکی از مرتبط ترین درخواست های خرید برای محصول شما در زیر نمایش داده شده است.
-	                            	<br/>
-	                            	<span class="red-text">در صورت عدم ارسال پیام به خریدار دیگر به این درخواست خرید دسترسی نخواهید داشت.</span></strong>
-	                            </p>
-
-								<div class="list-group-item list-item-wrapper  col-xs-12" >
-									<p class="list-title col-xs-12">
-										<span>میوه</span> <span> | </span> <span>خیار</span> <span> | سبز</span>
-									</p>
-									<p class="needs col-xs-12">
-										<span class="static-content">
-	                            			میزان نیازمندی :
-	                        			</span>
-	                        			<span>۵۰ تن</span>
-	                        			<span class="static-content">
-	                            				کیلوگرم
-	                       	            </span>
-	                       			</p>
-	                       			<p class="list-time col-xs-12">
-	                                    ۱ دی ۱۳۹۹
-	                       		    </p>
-
-	                       		    <div class="send-message col-xs-12">
-
-	                       		    	<button class="submit-button active" @click.prevent="$parent.openChat($parent.relatedBuyAd)">
-	                       		    		 پیام به خریدار
-	                     				</button>
-
-	                   				</div>
-	                			</div>
-                           </div>
-
-                           <div class="text-center margin-15-0">
-							   	<p class="red-text large-text">چه خریدارنی به دنبال محصول شما هستند؟</p>
-                           		<router-link class="green-button" :to="{ name : 'buyAdRequestsSeller'}">
-                           			<span class="bold-text">مشاهده درخواست های خرید</span>
-                           		</router-link>
-
-                           </div>
-
-				     	</div>
-
-				    </div>
-
-			 
-		</div> -->
-
-    </div>
 </template>
 
 <script>

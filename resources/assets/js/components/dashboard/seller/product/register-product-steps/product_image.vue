@@ -121,10 +121,7 @@ label {
             </span>
           </label>
       <div class="text-input-wrapper">
-          <!-- uploadAccept="image/*" 
-:uploadMinSize="1024"
-          :uploadSize="1024 * 1024 * 10"
-          -->
+    
         <UploadFile
           uploadName="product_files"
           uploadAccept="*"
@@ -178,11 +175,11 @@ label {
             <i  class="fa fa-arrow-left"
             :class="{'empty' : isCompressor}"
             ></i>
-          <div  class="spinner-border" 
-          :class="{'empty' : !isCompressor}"
-          >
-            <span class="sr-only">Loading...</span>
-          </div>
+            <div  class="spinner-border" 
+            :class="{'empty' : !isCompressor}"
+            >
+              <span class="sr-only">Loading...</span>
+            </div>
           </div>
         </button>
 
@@ -268,11 +265,9 @@ export default {
         if (!errorsStatus) {
           this.errors.images_type = "";
           this.errors.images_size = "";
-          console.log('no error',errorsStatus);
           this.$parent.productFiles = this.files;
         }
       } else {
-        console.log('empty');
         this.errors.images_type = "";
         this.errors.images_size = "";
         this.$parent.productFiles = [];

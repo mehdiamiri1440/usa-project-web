@@ -17,7 +17,7 @@ export default {
     SelectProvinces,
     SelectCities,
   },
-  props:['categoryList'],
+  props:['provinces'],
   data(){
     return{
       step : 0,
@@ -26,7 +26,7 @@ export default {
   },
   methods:{
     selectedProvince(index){
-      this.citiesList = this.categoryList[index].subcategories
+      this.citiesList = this.provinces[index].cities
       this.step = 1;
     },
     selectedCity(item){

@@ -137,7 +137,7 @@ ul li.item  button i{
           <li v-for="(item,index) in cities" :key="index" class="item col-xs-12
           ">
             <button @click.prevent="$parent.selectedCity(item)">
-              <span v-text="item.category_name">
+              <span v-text="item.city_name">
               </span>
               <i class="fa fa-angle-left"></i>
             </button>

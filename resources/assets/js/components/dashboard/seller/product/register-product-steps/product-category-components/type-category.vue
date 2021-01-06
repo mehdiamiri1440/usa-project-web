@@ -169,11 +169,11 @@ label {
             </span>
             <span v-else-if="$parent.selectedCategoryIndex == 1">
             مثلا: 
-            صادراتی
+            بذر متین صادراتی
             </span>
-            <span v-else-if="$parent.selectedCategoryIndex == 3">
+            <span v-else-if="$parent.selectedCategoryIndex == 2">
             مثلا: 
-            صادراتی
+            هندی ۱۱۲۱
             </span>
           </label>
         

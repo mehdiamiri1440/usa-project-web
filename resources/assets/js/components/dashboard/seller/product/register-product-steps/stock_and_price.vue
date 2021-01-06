@@ -186,7 +186,7 @@ input.error:focus + i {
                 active: $parent.product.stock,
                 error: $parent.errors.stock,
               }"
-              placeholder="میزان موجودی را وارد کنید"
+              placeholder="میزان موجودی محصول را وارد کنید"
               pattern="[0-9]*"
             />
 
@@ -215,7 +215,7 @@ input.error:focus + i {
         <div class="col-xs-12">
 
           <h2 class="title-contents col-xs-12">
-            حداقل سفارش
+            حداقل میزان فروش
 
                 <span class="small-label">(کیلوگرم)</span>
 
@@ -236,7 +236,7 @@ input.error:focus + i {
                 active: $parent.product.min_sale_amount,
                 error: $parent.errors.min_sale_amount,
               }"
-              placeholder="حداقل سفارش را وارد کنید"
+              placeholder="حداقل میزان فروش را وارد کنید"
               pattern="[0-9]*"
             />
 
@@ -332,7 +332,7 @@ input.error:focus + i {
                 active: $parent.product.max_sale_price,
                 error: $parent.errors.max_sale_price,
               }"
-              placeholder="حداقل قیمت را وارد کنید"
+              placeholder="حداکثر قیمت را وارد کنید"
               pattern="[0-9]*"
             />
 

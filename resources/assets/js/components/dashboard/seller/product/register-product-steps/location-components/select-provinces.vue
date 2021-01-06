@@ -134,10 +134,10 @@ ul li.item  button i{
     <div class="form-contents col-xs-12">
       <div class="row">
         <ul class="list-wrapper">
-           <li v-for="(item,index) in $parent.categoryList" :key="index" class="item col-xs-12
+           <li v-for="(item,index) in $parent.provinces" :key="index" class="item col-xs-12
           ">
             <button @click.prevent="$parent.selectedProvince(index)">
-              <span v-text="item.category_name">
+              <span v-text="item.province_name">
               </span>
               <i class="fa fa-angle-left"></i>
             </button>
