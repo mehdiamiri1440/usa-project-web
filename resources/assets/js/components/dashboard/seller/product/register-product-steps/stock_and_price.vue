@@ -1,6 +1,5 @@
 
 <style scoped>
-
 .title-contents {
   font-weight: 500;
   font-size: 18px;
@@ -8,6 +7,13 @@
   padding: 0;
 }
 
+.light-green-text {
+  color: #21ad93;
+}
+
+.bg-white {
+  background: #fff;
+}
 
 .submit-button {
   background: #dddddd;
@@ -19,57 +25,54 @@
   padding: 8px 25px 7px;
   transition: 200ms;
   cursor: default;
-  margin:0;
- 
+  margin: 0;
 }
 
-.submit-button i{
-  transition:300ms;
+.submit-button i {
+  transition: 300ms;
   position: relative;
   top: 2px;
   left: -3px;
 }
 
-.input-text-wrapper{
-  height:25px;
+.input-text-wrapper {
+  height: 25px;
   padding-top: 5px;
 }
 
-.small-description-text{
+.small-description-text {
   text-align: left;
 }
 
-.submit-button.default-back-button i{
+.submit-button.default-back-button i {
   left: 3px;
 }
 
 .submit-button.default-back-button {
   background: #fff;
   color: #777;
-  border: 1px solid #BDC4CC;
+  border: 1px solid #bdc4cc;
   border-radius: 4px;
   cursor: pointer;
-  font-weight:400;
+  font-weight: 400;
   font-size: 14px;
 }
 
 .submit-button.default-back-button:hover i {
-  transform : translateX(5px);
-
+  transform: translateX(5px);
 }
 .submit-button.active {
   background: #00c569;
   cursor: pointer;
-  transform : translateX(0);
-
+  transform: translateX(0);
 }
 .submit-button.active:hover i {
   background: #00c569;
   cursor: pointer;
-  transform : translateX(-5px);
+  transform: translateX(-5px);
 }
-.action-control-wrapper{
-  padding:20px 15px 50px;
+.action-control-wrapper {
+  padding: 20px 15px 50px;
   background: #fff;
 }
 
@@ -79,37 +82,35 @@ label {
   font-weight: 400;
   color: #777;
 }
-.small-label{
+.small-label {
   font-size: 15px;
 }
 
-.text-input-wrapper{
+.text-input-wrapper {
   margin: 0 auto;
   position: relative;
-  background: #FBFBFB;
+  background: #fbfbfb;
 }
 
-input{
+input {
   background: none;
   z-index: 1;
   position: relative;
-  width:100%;
+  width: 100%;
   padding: 8px 15px;
-  border: 1px solid #BDC4CC;
+  border: 1px solid #bdc4cc;
   border-radius: 4px;
   box-shadow: none;
 }
 
-
-.text-input-wrapper i{
-  position:absolute;
-  left:15px;
-  top:11px;
-  font-size:18px;
-  color:#BDC4CC;
-  transition:300ms;
+.text-input-wrapper i {
+  position: absolute;
+  left: 15px;
+  top: 11px;
+  font-size: 18px;
+  color: #bdc4cc;
+  transition: 300ms;
 }
-
 
 input:focus,
 input:focus + i {
@@ -146,7 +147,6 @@ input.error:focus + i {
   border-color: #e41c38;
 }
 
-
 @media screen and (max-width: 767px) {
   select {
     font-size: 12px;
@@ -159,24 +159,21 @@ input.error:focus + i {
 
 <template>
   <div>
-  
-    <form class="form-contents col-xs-12" v-on:submit.prevent="$parent.stockAndPriceSubmited()">
+    <form
+      class="form-contents col-xs-12"
+      v-on:submit.prevent="$parent.stockAndPriceSubmited()"
+    >
       <div class="row">
-        <div class="col-xs-12">
-
+        <div class="col-xs-12 bg-white">
           <h2 class="title-contents col-xs-12">
             میزان موجودی
 
-                <span class="small-label">(کیلوگرم)</span>
+            <span class="small-label">(کیلوگرم)</span>
 
-                <span class="red-text">
-                *
-                </span>
+            <span class="red-text"> * </span>
           </h2>
-          <label for="stock" class="description">
-            مثلا: 50,000
-          </label>
-        
+          <label for="stock" class="description"> مثلا: 50,000 </label>
+
           <div class="text-input-wrapper">
             <input
               v-model="$parent.product.stock"
@@ -190,43 +187,42 @@ input.error:focus + i {
               pattern="[0-9]*"
             />
 
-            <i v-if="$parent.product.stock && !$parent.errors.stock" class="fa fa-check-circle"></i>
+            <i
+              v-if="$parent.product.stock && !$parent.errors.stock"
+              class="fa fa-check-circle"
+            ></i>
             <i v-else-if="$parent.errors.stock" class="fa fa-times-circle"></i>
             <i v-else class="fa fa-edit"></i>
           </div>
-          
 
-            <div class="input-text-wrapper">
-              <p class="small-description-text" v-if="!$parent.errors.stock">
-                <span v-if="$parent.stock_text" v-text="$parent.stock_text"></span>
-              </p>
-              <p class="error-message ">
-                <span
+          <div class="input-text-wrapper">
+            <p class="small-description-text" v-if="!$parent.errors.stock">
+              <span
+                class="light-green-text"
+                v-if="$parent.stock_text"
+                v-text="$parent.stock_text"
+              ></span>
+            </p>
+            <p class="error-message">
+              <span
                 class="red-text"
-                  v-if="$parent.errors.stock"
-                  v-text="$parent.errors.stock"
-                ></span>
-              </p>
-            </div>
-
-
+                v-if="$parent.errors.stock"
+                v-text="$parent.errors.stock"
+              ></span>
+            </p>
+          </div>
         </div>
-  
-        <div class="col-xs-12">
 
+        <div class="col-xs-12 bg-white">
           <h2 class="title-contents col-xs-12">
             حداقل میزان فروش
 
-                <span class="small-label">(کیلوگرم)</span>
+            <span class="small-label">(کیلوگرم)</span>
 
-                <span class="red-text">
-                *
-                </span>
+            <span class="red-text"> * </span>
           </h2>
-          <label for="stock" class="description">
-            مثلا: 25,000
-          </label>
-        
+          <label for="stock" class="description"> مثلا: 25,000 </label>
+
           <div class="text-input-wrapper">
             <input
               v-model="$parent.product.min_sale_amount"
@@ -240,42 +236,51 @@ input.error:focus + i {
               pattern="[0-9]*"
             />
 
-            <i v-if="$parent.product.min_sale_amount && !$parent.errors.min_sale_amount" class="fa fa-check-circle"></i>
-            <i v-else-if="$parent.errors.min_sale_amount" class="fa fa-times-circle"></i>
+            <i
+              v-if="
+                $parent.product.min_sale_amount &&
+                !$parent.errors.min_sale_amount
+              "
+              class="fa fa-check-circle"
+            ></i>
+            <i
+              v-else-if="$parent.errors.min_sale_amount"
+              class="fa fa-times-circle"
+            ></i>
             <i v-else class="fa fa-edit"></i>
           </div>
-          
 
-            <div class="input-text-wrapper">
-              <p class="small-description-text" v-if="!$parent.errors.min_sale_amount">
-                <span v-if="$parent.min_sale_amount_text" v-text="$parent.min_sale_amount_text"></span>
-              </p>
-              <p class="error-message ">
-                <span
+          <div class="input-text-wrapper">
+            <p
+              class="small-description-text"
+              v-if="!$parent.errors.min_sale_amount"
+            >
+              <span
+                class="light-green-text"
+                v-if="$parent.min_sale_amount_text"
+                v-text="$parent.min_sale_amount_text"
+              ></span>
+            </p>
+            <p class="error-message">
+              <span
                 class="red-text"
-                  v-if="$parent.errors.min_sale_amount"
-                  v-text="$parent.errors.min_sale_amount"
-                ></span>
-              </p>
-            </div>
-
+                v-if="$parent.errors.min_sale_amount"
+                v-text="$parent.errors.min_sale_amount"
+              ></span>
+            </p>
+          </div>
         </div>
-        
-        <div class="col-xs-12">
 
+        <div class="col-xs-12 bg-white">
           <h2 class="title-contents col-xs-12">
             حداقل قیمت
 
-                <span class="small-label">(هر کیلو به تومان)</span>
+            <span class="small-label">(هر کیلو به تومان)</span>
 
-                <span class="red-text">
-                *
-                </span>
+            <span class="red-text"> * </span>
           </h2>
-          <label for="stock" class="description">
-            مثلا: 15,000
-          </label>
-        
+          <label for="stock" class="description"> مثلا: 15,000 </label>
+
           <div class="text-input-wrapper">
             <input
               v-model="$parent.product.min_sale_price"
@@ -289,40 +294,40 @@ input.error:focus + i {
               pattern="[0-9]*"
             />
 
-            <i v-if="$parent.product.min_sale_price && !$parent.errors.min_sale_price" class="fa fa-check-circle"></i>
-            <i v-else-if="$parent.errors.min_sale_price" class="fa fa-times-circle"></i>
+            <i
+              v-if="
+                $parent.product.min_sale_price && !$parent.errors.min_sale_price
+              "
+              class="fa fa-check-circle"
+            ></i>
+            <i
+              v-else-if="$parent.errors.min_sale_price"
+              class="fa fa-times-circle"
+            ></i>
             <i v-else class="fa fa-edit"></i>
           </div>
-          
 
-            <div class="input-text-wrapper">
-              <p class="error-message ">
-                <span
+          <div class="input-text-wrapper">
+            <p class="error-message">
+              <span
                 class="red-text"
-                  v-if="$parent.errors.min_sale_price"
-                  v-text="$parent.errors.min_sale_price"
-                ></span>
-              </p>
-            </div>
-
+                v-if="$parent.errors.min_sale_price"
+                v-text="$parent.errors.min_sale_price"
+              ></span>
+            </p>
+          </div>
         </div>
-        
-        
-        <div class="col-xs-12">
 
+        <div class="col-xs-12 bg-white">
           <h2 class="title-contents col-xs-12">
             حداکثر قیمت
 
-                <span class="small-label">(هر کیلو به تومان)</span>
+            <span class="small-label">(هر کیلو به تومان)</span>
 
-                <span class="red-text">
-                *
-                </span>
+            <span class="red-text"> * </span>
           </h2>
-          <label for="stock" class="description">
-            مثلا: 30,000
-          </label>
-        
+          <label for="stock" class="description"> مثلا: 30,000 </label>
+
           <div class="text-input-wrapper">
             <input
               v-model="$parent.product.max_sale_price"
@@ -336,56 +341,59 @@ input.error:focus + i {
               pattern="[0-9]*"
             />
 
-            <i v-if="$parent.product.max_sale_price && !$parent.errors.max_sale_price" class="fa fa-check-circle"></i>
-            <i v-else-if="$parent.errors.max_sale_price" class="fa fa-times-circle"></i>
+            <i
+              v-if="
+                $parent.product.max_sale_price && !$parent.errors.max_sale_price
+              "
+              class="fa fa-check-circle"
+            ></i>
+            <i
+              v-else-if="$parent.errors.max_sale_price"
+              class="fa fa-times-circle"
+            ></i>
             <i v-else class="fa fa-edit"></i>
           </div>
-          
 
-            <div class="input-text-wrapper">
-              <p class="error-message ">
-                <span
+          <div class="input-text-wrapper">
+            <p class="error-message">
+              <span
                 class="red-text"
-                  v-if="$parent.errors.max_sale_price"
-                  v-text="$parent.errors.max_sale_price"
-                ></span>
-              </p>
-            </div>
-
+                v-if="$parent.errors.max_sale_price"
+                v-text="$parent.errors.max_sale_price"
+              ></span>
+            </p>
+          </div>
         </div>
-        
       </div>
       <div class="row action-control-wrapper">
-        
-          <button
-            class="submit-button disabled pull-left"
-            :class="{
-              active:
-                $parent.product.stock &&
-                $parent.product.min_sale_price &&
-                $parent.product.max_sale_price &&
-                $parent.product.min_sale_amount &&
-                !$parent.errors.stock &&
-                !$parent.errors.min_sale_price &&
-                !$parent.errors.max_sale_price &&
-                !$parent.errors.min_sale_amount,
-            }"
-            @click.prevent="$parent.stockAndPriceSubmited()"
-            type="submit"
-          >
-            مرحله بعد
-            <i class="fa fa-arrow-left"></i>
-          </button>
+        <button
+          class="submit-button disabled pull-left"
+          :class="{
+            active:
+              $parent.product.stock &&
+              $parent.product.min_sale_price &&
+              $parent.product.max_sale_price &&
+              $parent.product.min_sale_amount &&
+              !$parent.errors.stock &&
+              !$parent.errors.min_sale_price &&
+              !$parent.errors.max_sale_price &&
+              !$parent.errors.min_sale_amount,
+          }"
+          @click.prevent="$parent.stockAndPriceSubmited()"
+          type="submit"
+        >
+          مرحله بعد
+          <i class="fa fa-arrow-left"></i>
+        </button>
 
-           <button
-                    class="submit-button default-back-button pull-right"
-                    @click.prevent="$parent.currentStep--"
-                    
-            >
-                <i class="fa fa-arrow-right"></i>
+        <button
+          class="submit-button default-back-button pull-right"
+          @click.prevent="$parent.currentStep--"
+        >
+          <i class="fa fa-arrow-right"></i>
 
-                مرحله قبل
-            </button>
+          مرحله قبل
+        </button>
       </div>
     </form>
   </div>

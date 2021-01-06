@@ -29,15 +29,14 @@
   margin-bottom: 30px;
 }
 
-.main-content div.section-title h2{
-	font-size: 25px;
-	margin-bottom: 10px;
+.main-content div.section-title h2 {
+  font-size: 25px;
+  margin-bottom: 10px;
 }
 
-.main-content div.section-title p{
-font-size: 15px;
+.main-content div.section-title p {
+  font-size: 15px;
 }
-
 
 .section-background {
   position: fixed;
@@ -62,7 +61,7 @@ font-size: 15px;
 }
 .main-section-wrapper-full-width {
   max-width: 100%;
-  margin:0;
+  margin: 0;
 }
 
 .header-section > h2 {
@@ -147,21 +146,21 @@ font-size: 15px;
   right: -34px;
 }
 
-.success-register{
-  background: #EDF8E6;
+.success-register {
+  background: #edf8e6;
   border-radius: 4px;
   margin-bottom: 20px;
   padding: 10px 15px 20px;
-  color: #21AD93;
+  color: #21ad93;
   text-align: center;
 }
 
-.success-register h2{
+.success-register h2 {
   font-size: 19px;
   margin-bottom: 10px;
 }
 
-.success-register h2 i{
+.success-register h2 i {
   font-size: 26px;
   width: 38px;
   height: 38px;
@@ -170,7 +169,7 @@ font-size: 15px;
   padding-top: 6px;
 }
 
-.success-register h2 span{
+.success-register h2 span {
   position: relative;
   top: -4px;
   margin-right: 5px;
@@ -184,6 +183,10 @@ font-size: 15px;
 
   .main-content .section-title {
     padding: 0 10px;
+  }
+
+  .main-content .section-title p {
+    line-height: 1.618;
   }
 
   .main-content > div.wrapper-section {
@@ -219,11 +222,15 @@ font-size: 15px;
     left: 26px;
   }
 
-  .success-register{
-    margin-top: -18px;
+  .success-register {
+    margin-top: -20px;
   }
 
-  .success-register h2 i{
+  .success-register p {
+    line-height: 1.618;
+  }
+
+  .success-register h2 i {
     display: block;
     margin: 0 auto 20px;
     width: 80px;
@@ -231,98 +238,80 @@ font-size: 15px;
     font-size: 45px;
     padding-top: 17px;
   }
-
-
 }
 </style>
 
 
 <template>
-
   <div>
-    <section v-show="$route.name == 'successRegisterProduct'" class="main-content col-xs-12" >
-    <div class="row" >
-      <div class="success-register" v-if="successRegisterProduct">
-        <div class="title-success">
-          <h2>
-            <i class="fa fa-check"></i>
-            <span>
-              ثبت محصول با موفقیت انجام شد
-            </span>
-          </h2>
-        
+    <section
+      v-show="$route.name == 'successRegisterProduct'"
+      class="main-content col-xs-12"
+    >
+      <div class="row">
+        <div class="success-register" v-if="successRegisterProduct">
+          <div class="title-success">
+            <h2>
+              <i class="fa fa-check"></i>
+              <span> ثبت محصول با موفقیت انجام شد </span>
+            </h2>
+          </div>
+          <p>پس از تایید کارشناسان محصول شما در لیست قرار خواهد گرفت.</p>
         </div>
-        <p>
-          پس از تایید کارشناسان محصول شما در لیست قرار خواهد گرفت.
-        </p>
+        <div v-if="buyAds.length != 0" class="section-title">
+          <h2>خریداران</h2>
+          <p>خریداران پیشنهادی از طرف باسکول برای محصول شما.</p>
+        </div>
       </div>
-      <div v-if="buyAds.length !=  0 "  class="section-title">
-        <h2>
-         خریداران
-        </h2>
-      <p>
-        خریداران پیشنهادی از طرف باسکول برای محصول شما.
-      </p>
-      </div>
-    </div>
-    <div  
-    v-show="buyAds.length > 0"
-      class="row wrapper-section" :class="{'empty-section' :  buyAds.length == 0}">
-
-      <div class="main-section">
-        <main
-          class="main-section-wrapper main-section-wrapper-full-width row"
-        >
-          <FinishStage />
-        </main>
-      </div>
-
-      <div class="section-background"></div>
-    </div>
-    <div  
-    v-show="buyAds.length == 0"
-      class="row wrapper-section" :class="{'empty-section' :  buyAds.length == 0}">
-
-      <div class="main-section">
-        <main
-          class="main-section-wrapper main-section-wrapper-full-width row"
-        >
-          <FinishStage />
-         
-        </main>
-      </div>
-
-      <div class="section-background"></div>
-    </div>
-  </section>
-  <section v-show="$route.name != 'successRegisterProduct'" class="main-content col-xs-12" >
-    
-    <div class="row">
-      
-      <h2  class="section-title">ثبت محصول جدید</h2>
-      
-    </div>
-    <div  
-      class="row wrapper-section" :class="{'empty-section' : currentStep == 7 && buyAds.length == 0}">
-
-      <div class="main-section">
-        <header class="header-section">
-          <div
-            v-if="currentStep > 0 && currentStep < 7"
-            class="wrapper-progressbar"
+      <div
+        v-show="buyAds.length > 0"
+        class="row wrapper-section"
+        :class="{ 'empty-section': buyAds.length == 0 }"
+      >
+        <div class="main-section">
+          <main
+            class="main-section-wrapper main-section-wrapper-full-width row"
           >
-            <div class="custom-progressbar">
-              <div
-                class="progress-bar"
-                role="progressbar"
-                aria-valuenow="21"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              ></div>
-            </div>
+            <FinishStage />
+          </main>
+        </div>
 
-            <div class="active-progress-wrapper">
-              <div class="custom-progressbar active-item">
+        <div class="section-background"></div>
+      </div>
+      <div
+        v-show="buyAds.length == 0"
+        class="row wrapper-section"
+        :class="{ 'empty-section': buyAds.length == 0 }"
+      >
+        <div class="main-section">
+          <main
+            class="main-section-wrapper main-section-wrapper-full-width row"
+          >
+            <FinishStage />
+          </main>
+        </div>
+
+        <div class="section-background"></div>
+      </div>
+    </section>
+    <section
+      v-show="$route.name != 'successRegisterProduct'"
+      class="main-content col-xs-12"
+    >
+      <div class="row">
+        <h2 class="section-title">ثبت محصول جدید</h2>
+      </div>
+      <div
+        class="row wrapper-section"
+        :class="{ 'empty-section': currentStep == 7 && buyAds.length == 0 }"
+      >
+        <div class="main-section">
+          <header class="header-section">
+            <div
+              v-if="currentStep > 0 && currentStep < 7"
+              class="wrapper-progressbar"
+            >
+              <div class="custom-progressbar">
                 <div
                   class="progress-bar"
                   role="progressbar"
@@ -331,79 +320,90 @@ font-size: 15px;
                   aria-valuemax="100"
                 ></div>
               </div>
+
+              <div class="active-progress-wrapper">
+                <div class="custom-progressbar active-item">
+                  <div
+                    class="progress-bar"
+                    role="progressbar"
+                    aria-valuenow="21"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="progressbar-items">
+                <a class="progrees-item active-item">
+                  <span>1</span>
+                  <p>نوع محصول</p>
+                </a>
+
+                <a
+                  class="progrees-item"
+                  :class="{ 'active-item': currentStep >= 2 }"
+                >
+                  <span>2</span>
+                  <p>موجودی و قیمت</p>
+                </a>
+
+                <a
+                  class="progrees-item"
+                  :class="{ 'active-item': currentStep >= 3 }"
+                >
+                  <span>3</span>
+                  <p>انتخاب مبدا</p>
+                </a>
+
+                <a
+                  class="progrees-item"
+                  :class="{ 'active-item': currentStep >= 4 }"
+                >
+                  <span>4</span>
+                  <p>تصاویر محصول</p>
+                </a>
+
+                <a
+                  class="progrees-item"
+                  :class="{ 'active-item': currentStep >= 5 }"
+                >
+                  <span>5</span>
+                  <p>توضیحات</p>
+                </a>
+
+                <a
+                  class="progrees-item"
+                  :class="{ 'active-item': currentStep >= 6 }"
+                >
+                  <span>6</span>
+                  <p>ثبت نهایی</p>
+                </a>
+              </div>
             </div>
+          </header>
 
-            <div class="progressbar-items">
-              <a class="progrees-item active-item">
-                <span>1</span>
-                <p>نوع محصول</p>
-              </a>
+          <main
+            class="main-section-wrapper row"
+            :class="{
+              'main-section-wrapper-full-width': currentStep == 7,
+            }"
+          >
+            <StartRegisterProduct v-if="currentStep == 0" />
+            <ProductCategory
+              :category-list="categoryList"
+              v-else-if="currentStep == 1"
+            />
+            <StockAndPrice v-else-if="currentStep == 2" />
+            <Location :provinces="provinces" v-else-if="currentStep == 3" />
+            <ProductImage v-show="currentStep == 4" />
+            <Terms v-if="currentStep == 5" />
+            <MoreDetails v-else-if="currentStep == 6" />
+          </main>
+        </div>
 
-              <a
-                class="progrees-item"
-                :class="{ 'active-item': currentStep >= 2 }"
-              >
-                <span>2</span>
-                <p>موجودی و قیمت</p>
-              </a>
-
-              <a
-                class="progrees-item"
-                :class="{ 'active-item': currentStep >= 3 }"
-              >
-                <span>3</span>
-                <p>انتخاب مبدا</p>
-              </a>
-
-              <a
-                class="progrees-item"
-                :class="{ 'active-item': currentStep >= 4 }"
-              >
-                <span>4</span>
-                <p>تصاویر محصول</p>
-              </a>
-
-              <a
-                class="progrees-item"
-                :class="{ 'active-item': currentStep >= 5 }"
-              >
-                <span>5</span>
-                <p>توضیحات</p>
-              </a>
-
-              <a
-                class="progrees-item"
-                :class="{ 'active-item': currentStep >= 6 }"
-              >
-                <span>6</span>
-                <p>ثبت نهایی</p>
-              </a>
-            </div>
-          </div>
-
-         
-        </header>
-
-        <main
-          class="main-section-wrapper row"
-          :class="{
-            'main-section-wrapper-full-width':
-              currentStep == 7,
-          }"
-        >
-          <StartRegisterProduct v-if="currentStep == 0" />
-          <ProductCategory :category-list="categoryList" v-else-if="currentStep == 1" />
-          <StockAndPrice v-else-if="currentStep == 2" />
-          <Location :provinces="provinces" v-else-if="currentStep == 3" />
-          <ProductImage v-show="currentStep == 4" />
-          <Terms v-if="currentStep == 5" />
-          <MoreDetails v-else-if="currentStep == 6" />
-        </main>
+        <div class="section-background"></div>
       </div>
-
-      <div class="section-background"></div>
-    </div>
-  </section>
+    </section>
   </div>
 </template>
 
@@ -466,7 +466,7 @@ export default {
       provinces: "",
       cities: "",
       productFiles: [],
-      testProductFiles:[],
+      testProductFiles: [],
       popUpMsg: "",
       errors: {
         category_selected: "",
@@ -501,31 +501,34 @@ export default {
       isStartLoading: false,
       stock_text: "",
       min_sale_amount_text: "",
-      buyAds : [],
-      load:true,
-      successRegisterProduct : false
+      buyAds: [],
+      load: true,
+      successRegisterProduct: false,
     };
   },
   methods: {
     init: function () {
-      if(this.$route.name == "successRegisterProduct" && this.successRegisterProduct == false){
-         axios
-        .post("/get_related_buyAds_to_my_product")
-        .then((response) => {
-              if(response.data.status){
-                this.buyAds = response.data.buyAds;
-                this.load = false
-              }
+      if (
+        this.$route.name == "successRegisterProduct" &&
+        this.successRegisterProduct == false
+      ) {
+        axios.post("/get_related_buyAds_to_my_product").then((response) => {
+          if (response.data.status) {
+            this.buyAds = response.data.buyAds;
+            this.load = false;
+          } else {
+            this.load = false;
+          }
         });
       }
       axios
         .post("/user/profile_info")
         .then((response) => (this.currentUser = response.data));
       axios
-        .post("/get_category_list",{cascade_list : true})
+        .post("/get_category_list", { cascade_list: true })
         .then((response) => (this.categoryList = response.data.categories));
       axios
-        .post("/location/get_location_info",{cascade_list : true})
+        .post("/location/get_location_info", { cascade_list: true })
         .then((response) => (this.provinces = response.data.provinces));
     },
 
@@ -610,20 +613,19 @@ export default {
                 "product-registered-successfully"
               );
 
-            
               self.load = false;
               self.successRegisterProduct = true;
-              self.$router.push({name:'successRegisterProduct'});
+              self.resetComponent();
+              self.$router.push({ name: "successRegisterProduct" });
 
               if (response.data.product) {
                 if (response.data.product.active_package_type == 0) {
-                  
                   setTimeout(function () {
                     self.$parent.is_pricing_active = true;
                   }, 1000);
                 }
-              }else if(response.data.buyAds){
-                  self.buyAds = response.data.buyAds;
+              } else if (response.data.buyAds) {
+                self.buyAds = response.data.buyAds;
               }
             } else if (response.status === 200) {
               self.popUpMsg = response.data.msg;
@@ -631,8 +633,8 @@ export default {
               eventBus.$emit("submiting", false);
               self.load = false;
               self.successRegisterProduct = true;
-              self.$router.push({name:'successRegisterProduct'});
-
+              self.resetComponent();
+              self.$router.push({ name: "successRegisterProduct" });
 
               if (response.data.product) {
                 if (response.data.product.active_package_type == 0) {
@@ -693,7 +695,7 @@ export default {
       if (num == null) {
         return null;
       }
-      num = num.toString().replace(/,/g, '')
+      num = num.toString().replace(/,/g, "");
       num = num.toString().replace(/^0+/, "");
       num = num.toString().replace(/^\u0660+/, "");
       num = num.toString().replace(/^\u06f0+/, "");
@@ -707,7 +709,7 @@ export default {
           return c.charCodeAt(0) - 0x06f0;
         });
     },
-     getConvertedNumbers: function (number) {
+    getConvertedNumbers: function (number) {
       if (number || typeof number === "number") {
         let data = number / 1000;
         if (number < 1000) {
@@ -746,6 +748,10 @@ export default {
       });
     },
     goToStep: function (step) {
+      if (step != 6) {
+        this.buyAds = "";
+        this.successRegisterProduct = false;
+      }
       this.currentStep = step;
       this.scrollToTop();
     },
@@ -877,7 +883,7 @@ export default {
         );
       }
     },
-    
+
     validateRegx: function (input, regx) {
       return regx.test(input);
     },
@@ -930,6 +936,7 @@ export default {
         return number + " " + "کیلوگرم";
       } else {
         let ton = data.toString().split(".")[0];
+        ton = this.getNumberWithCommas(ton);
         let kg = number.toString().substr(ton.length);
         kg = kg.replace(/^0+/, "");
         ton = ton + " " + "تن";
@@ -949,8 +956,8 @@ export default {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       else return "";
     },
-    resetComponent(){
-        this.product = {
+    resetComponent() {
+      this.product = {
         product_name: "",
         stock: "",
         min_sale_price: "",
@@ -961,10 +968,9 @@ export default {
         category_id: "",
         city_id: "",
         rules: true,
-      }
-      this.currentStep = 0
-    }
-     
+      };
+      this.currentStep = 0;
+    },
   },
   mounted() {
     this.init();
@@ -1019,7 +1025,7 @@ export default {
           this.errors.stock = "لطفا  فقط عدد وارد کنید";
         }
         if (!this.errors.stock) {
-          this.product.stock = this.getNumberWithCommas(number)
+          this.product.stock = this.getNumberWithCommas(number);
           this.stock_text = this.convertUnits(number);
         }
       } else {
@@ -1034,7 +1040,7 @@ export default {
           this.errors.min_sale_amount = "لطفا  فقط عدد وارد کنید";
         }
         if (!this.errors.min_sale_amount) {
-          this.product.min_sale_amount = this.getNumberWithCommas(number)
+          this.product.min_sale_amount = this.getNumberWithCommas(number);
           this.min_sale_amount_text = this.convertUnits(number);
         }
       } else {
@@ -1049,7 +1055,7 @@ export default {
           this.errors.min_sale_price = "لطفا  فقط عدد وارد کنید";
         }
         if (!this.errors.min_sale_price) {
-          this.product.min_sale_price = this.getNumberWithCommas(number)
+          this.product.min_sale_price = this.getNumberWithCommas(number);
         }
       }
     },
@@ -1061,7 +1067,7 @@ export default {
           this.errors.max_sale_price = "لطفا  فقط عدد وارد کنید";
         }
         if (!this.errors.max_sale_price) {
-          this.product.max_sale_price = this.getNumberWithCommas(number)
+          this.product.max_sale_price = this.getNumberWithCommas(number);
         }
       }
     },
