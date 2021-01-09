@@ -666,8 +666,8 @@ export default {
       } else {
         window.localStorage.setItem("contact", JSON.stringify(contact));
 
-        this.$router.push({ name: "registerInquiry" });
-        // eventBus.$emit('modal','sendMsg');
+        // this.$router.push({ name: "registerInquiry" });
+        eventBus.$emit('modal','sendMsg');
       }
     },
     updatePopUpStatus: function (popUpOpenStatus) {

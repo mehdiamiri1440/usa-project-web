@@ -1242,8 +1242,12 @@ class product_controller extends Controller
 
         $result = array_intersect($buyer_ids_based_on_in_degree,$buyer_ids_based_on_out_degree);
 
-        $important_buyAds = $buyAds->filter(function($buyAd) use($result){
+        $important_buyAds = $buyAds->filter(function($buyAd) use($result){ //extract selected buyers from all related buyAds
             return in_array($buyAd->myuser_id,$result) == true;
+        });
+
+        $important_buyAds = $important_buyAds->filter(function($buyAd){ //filter according to buyer response rate
+            return $this->get_user_response_info($buyAd->myuser_id)['response_rate'] >= 90 ;
         });
 
         $prioritized_buyAds_according_to_buyers_last_activity_date = $this->prioritize_buyAds_according_to_buyers_last_activity_date($important_buyAds);
@@ -1346,9 +1350,15 @@ class product_controller extends Controller
 
         $days_between_last_activity_and_user_signup = Carbon::parse($user_register_date)->diffInDays(Carbon::parse($result[0]->date));
 
-        $activity_ratio = round($total_number_of_active_days / $days_since_buyAd_register , 2) * 100;
+        if($days_since_buyAd_register != 0){
+            $activity_ratio = round($total_number_of_active_days / $days_since_buyAd_register , 2) * 100;
 
-        $score = round($days_between_last_activity_and_user_signup / $days_since_buyAd_register, 2);
+            $score = round($days_between_last_activity_and_user_signup / $days_since_buyAd_register, 2);
+        }
+        else{
+            $activity_ratio = $score = 0;
+        }
+        
 
         return compact('activity_ratio','score');
     }

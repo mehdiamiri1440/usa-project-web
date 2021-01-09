@@ -323,7 +323,8 @@ export default {
         }
       } else {
         window.localStorage.setItem("contact", JSON.stringify(contact));
-        this.$router.push({ name: "registerInquiry" });
+        // this.$router.push({ name: "registerInquiry" });
+        eventBus.$emit('modal','sendMsg');
       }
     },
     scrollToTheRequestRegisterBox: function(element) {
