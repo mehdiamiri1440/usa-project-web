@@ -1,268 +1,5 @@
 <style scoped>
 /*main style*/
-/* 
-.main-content-wrapper {
-  padding: 30px;
-}
-
-.success-inquiry-wrapper,
-.main-content,
-.recent-products-wrapper {
-  margin-bottom: 30px;
-}
-.main-content {
-  padding: 0 15px;
-}
-.success-message-wrapper > span.fa {
-  color: #00c569;
-
-  font-weight: 400;
-
-  font-size: 19px;
-
-  position: relative;
-
-  top: 3px;
-
-  margin-left: 5px;
-}
-
-.success-actions button {
-  color: #00c569;
-
-  background: none;
-
-  border: 1px solid;
-
-  border-radius: 3px;
-
-  font-size: 14px;
-
-  padding: 1px 15px;
-}
-
-.success-actions button i {
-  position: relative;
-
-  top: 2px;
-}
-
-.wrapper-progressbar.title h2 {
-  font-size: 22px;
-
-  font-weight: bold;
-
-  text-align: center;
-
-  color: #555;
-}
-
-.main-section-wrapper {
-  margin: 15px auto;
-
-  overflow: hidden;
-}
-
-.main-section-wrapper-full-width {
-  max-width: 100%;
-  margin: 25px auto 0;
-}
-
-/*progressbar styles
-
-.wrapper-progressbar {
-  position: relative;
-  padding: 15px;
-  border-bottom: 2px solid #00c569;
-}
-
-.progressbar-items {
-  display: flex;
-  justify-content: space-between;
-  direction: rtl;
-  position: relative;
-}
-
-.progrees-item {
-  text-align: center;
-  color: #bebebe;
-}
-
-.progrees-item p {
-  font-size: 12px;
-}
-
-.progrees-item span {
-  width: 20px;
-  height: 20px;
-  font-size: 13px;
-  background: #bebebe;
-  border-radius: 50px;
-  color: #fff;
-  display: inline-block;
-  margin-bottom: 6px;
-  padding-top: 4px;
-}
-
-.progrees-item.active-item {
-  color: #333;
-}
-
-.progrees-item.active-item p {
-  font-weight: bold;
-}
-
-.progrees-item.active-item span {
-  background: #00c569;
-}
-
-.custom-progressbar {
-  display: block;
-  height: 3px;
-  background: #bebebe;
-  right: 40px;
-  left: 34px;
-  position: absolute;
-  top: 23px;
-  z-index: 0;
-}
-
-.custom-progressbar.active-item {
-  background: #00c569;
-  width: 0;
-  left: initial;
-}
-
-.custom-progressbar .progress-bar {
-  background: #00c569;
-  float: right;
-}
-
-.active-progress-wrapper {
-  position: absolute;
-
-  right: 37px;
-
-  left: 41px;
-}
-
-.active-progress-wrapper .custom-progressbar {
-  right: 0px;
-  left: 0px;
-  top: 8px !important;
-}
-
-.title-section {
-  direction: rtl;
-  margin-bottom: 8px;
-}
-
-.title-section h3 {
-  font-size: 16px;
-  color: #00c569;
-  float: right;
-}
-
-.title-section hr {
-  margin: 15px 15px 10px auto;
-  position: relative;
-}
-
-.title-section hr::after {
-  content: " ";
-  height: 3px;
-  width: 50px;
-  background: #00c569;
-  position: absolute;
-  top: -4px;
-  right: 0;
-}
-
-.box-content {
-  overflow: hidden;
-  background: #fff;
-  padding: 15px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  border-radius: 4px;
-}
-.carousel-item {
-  padding: 0;
-  text-align: center;
-}
-.title-box {
-  text-align: center;
-}
-
-.title-box h3 {
-  font-size: 17px;
-  font-weight: bold;
-  color: #4b4b4b;
-  margin-bottom: 12px;
-}
-
-.title-box a {
-  margin: 20px auto 10px;
-
-  width: inherit;
-
-  font-size: 14px;
-
-  font-weight: bold;
-
-  padding: 9px 22px 6px;
-}
-
-.inquiry-button {
-  padding: 4px 15px;
-  margin: 10px auto 15px;
-  transition: 200ms;
-}
-
-@media screen and (max-width: 991px) {
-  .finish-state-main-content {
-    padding: 0;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .progrees-item p {
-    display: none;
-  }
-
-  .custom-progressbar {
-    right: 30px;
-    left: 34px;
-  }
-
-  .active-progress-wrapper {
-    right: 20px;
-    left: 26px;
-  }
-
-  .active-progress-wrapper .custom-progressbar {
-    right: 0px;
-    left: 0px;
-    top: 8px;
-  }
-}
-
-@media screen and (max-width: 555px) {
-  .success-message-wrapper,
-  .success-actions {
-    text-align: center;
-
-    width: 100%;
-  }
-
-  .success-message-wrapper {
-    margin-bottom: 15px;
-  }
-} */
-
-
-
-/*main style*/
-
 
 .main-content {
   max-width: 685px;
@@ -278,11 +15,23 @@
   border: 1px solid #dadce0;
   border-radius: 4px;
   min-height: 400px;
-
 }
+.main-content > div.wrapper-section.empty-section {
+  border: none;
+}
+
 .main-content .section-title {
   font-size: 25px;
   margin-bottom: 30px;
+}
+
+.main-content .section-title.related-product {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.main-content .section-title.related-product p{
+ font-size: 15px;
 }
 
 .section-background {
@@ -315,27 +64,59 @@
   font-weight: 600;
 }
 
-.success-inquiry-wrapper{
+.success-inquiry-wrapper {
   background: #edf8e6;
-  color:'#a5dc86';
+  color: "#a5dc86";
   border-radius: 4px;
-  padding: 15px;  
+  padding: 15px;
 }
 
-.info-inquiry-wrapper{
+.info-inquiry-wrapper {
   background: #e6f4f8;
   border-radius: 4px;
   padding: 15px;
   margin-bottom: 20px;
 }
 
-.info-inquiry-wrapper p{
+.info-inquiry-wrapper p {
   line-height: 1.618;
+}
+
+.success-register {
+  background: #edf8e6;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 10px 15px 20px;
+  color: #21ad93;
+  text-align: center;
+}
+
+.success-register.mini {
+  padding: 10px 15px 6px;
+}
+
+.success-register h2 {
+  font-size: 19px;
+  margin-bottom: 10px;
+}
+
+.success-register h2 i {
+  font-size: 26px;
+  width: 38px;
+  height: 38px;
+  background: #fff;
+  border-radius: 50px;
+  padding-top: 6px;
+}
+
+.success-register h2 span {
+  position: relative;
+  top: -4px;
+  margin-right: 5px;
 }
 
 @media screen and (max-width: 767px) {
   .main-section-wrapper {
-    max-width: 600px;
     margin: 0px auto;
   }
 
@@ -375,90 +156,28 @@
     right: 20px;
     left: 26px;
   }
+
+  .success-register {
+    margin-top: -20px;
+  }
+
+  .success-register p {
+    line-height: 1.618;
+  }
+
+  .success-register h2 i {
+    display: block;
+    margin: 0 auto 20px;
+    width: 80px;
+    height: 80px;
+    font-size: 45px;
+    padding-top: 17px;
+  }
 }
 </style>
 
 <template>
-
-  <!-- <div
-    class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2 main-content-wrapper"
-  >
-    <div class="row">
-      <section
-        v-if="currentStep == 1 && inquirySent"
-        class="success-inquiry-wrapper wrapper-bg col-xs-12"
-      >
-        <p class="success-message-wrapper text-rtl pull-right">
-          <span class="fa fa-check-circle"></span>
-          <span class="success-message"
-            >استعلام شرایط فروش با موفقیت ارسال شد</span
-          >
-        </p>
-
-        <div class="success-actions pull-left">
-          <router-link
-            class="text-rtl"
-            :to="{ path: 'messenger/contacts' }"
-            tag="button"
-          >
-            <i class="fa fa-comment-alt"></i>
-            مشاهده پیام ها
-          </router-link>
-        </div>
-      </section>
-
-      <section
-        v-if="currentStep == 1"
-        class="success-inquiry-wrapper wrapper-bg col-xs-12"
-      >
-        <p class="red-text success-message-wrapper text-rtl pull-right">
-          &nbsp&nbsp&nbspآیا قصد خرید عمده محصولی را دارید؟
-        </p>
-        <p class="success-message-wrapper text-rtl">
-          همین حالا درخواست خرید ثبت کنید&nbsp .
-        </p>
-      </section>
-
-      <section
-        v-if="!relatedProducts && currentStep <= 2"
-        class="main-content wrapper-bg col-xs-12"
-      >
-        <div class="row">
-          <header class="header-section">
-            <div v-if="currentStep <= 1" class="wrapper-progressbar title">
-              <h2>ثبت درخواست خرید</h2>
-            </div>
-
-            <div v-else class="wrapper-progressbar title">
-              <h2>درخواست شما با موفقیت ثبت شد</h2>
-            </div>
-          </header>
-
-          <main class="main-section-wrapper text-rtl">
-            <start-register-request v-if="currentStep == 0" />
-            <register-request v-else-if="currentStep == 1" />
-            <finish-register-request v-else-if="currentStep == 2" />
-          </main>
-        </div>
-      </section>
-
-      <section
-        v-else-if="currentStep == 2 && relatedProducts"
-        class="finish-state-main-content col-xs-12"
-      >
-        <main class="finish-state-wrapper">
-          <finish-register-request-related
-            :products="relatedProducts"
-            :str="str"
-          />
-        </main>
-      </section>
-
-      
-    </div>
-  </div> -->
   <section class="main-content col-xs-12">
-    
     <div class="row">
       <section
         v-if="currentStep == 1 && inquirySent"
@@ -483,11 +202,8 @@
         </div>
       </section>
 
-      <section
-        v-if="currentStep == 1"
-        class="info-inquiry-wrapper  col-xs-12"
-      >
-        <p class=" success-message-wrapper text-rtl pull-right">
+      <section v-if="currentStep == 1" class="info-inquiry-wrapper col-xs-12">
+        <p class="success-message-wrapper text-rtl pull-right">
           <i class="fa fa-info-circle"></i>
           <span class="red-text"> آیا قصد خرید عمده محصولی را دارید؟ </span>
           همین حالا درخواست خرید ثبت کنید.
@@ -496,24 +212,55 @@
     </div>
 
     <div class="row">
-      <h2 class="section-title"  v-if="currentStep <= 1" >ثبت درخواست خرید</h2>
-      <h2 class="section-title" v-else>درخواست شما با موفقیت ثبت شد</h2>
+      <h2 class="section-title" v-if="currentStep <= 1">ثبت درخواست خرید</h2>
+      <div v-else-if="currentStep == 2 && relatedProducts">
+        <div class="success-register">
+          <div class="title-success">
+            <h2>
+              <i class="fa fa-check"></i>
+              <span>درخواست شما با موفقیت ثبت شد</span>
+            </h2>
+            <p>
+              درخواست خرید شما پس از تایید کارشناسان باسکول، برای کشاورزان و
+              تامین کنندگان مرتبط ارسال می شود.
+            </p>
+          </div>
+        </div>
+        <div class="section-title related-product">
+          <h2 >فروشندگان پیشنهادی</h2>
+          <p>فروشندگان پیشنهادی از طرف باسکول برای محصول شما.</p>
+        </div>
+      </div>
+      <div class="success-register mini" v-else>
+        <div class="title-success">
+          <h2>
+            <i class="fa fa-check"></i>
+            <span>درخواست شما با موفقیت ثبت شد</span>
+          </h2>
+        </div>
+      </div>
     </div>
-    <div class="row wrapper-section">
+    <div
+      class="row wrapper-section"
+      :class="{ 'empty-section': relatedProducts && currentStep == 2 }"
+    >
       <div class="main-section">
-
         <main
           class="main-section-wrapper row"
+          :class="{ 'main-section-wrapper-full-width': currentStep == 2 }"
         >
-           <start-register-request v-if="currentStep == 0" />
-            <register-request :categoryList="categoryList" v-else-if="currentStep == 1" />
-            <finish-register-request-related
+          <start-register-request v-if="currentStep == 0" />
+          <register-request
+            :categoryList="categoryList"
+            v-else-if="currentStep == 1"
+          />
+          <finish-register-request-related
             v-else-if="currentStep == 2 && relatedProducts"
             :products="relatedProducts"
+            :currentUser="currentUser"
             :str="str"
-           />
-            <finish-register-request v-else-if="currentStep == 2" />
-            
+          />
+          <finish-register-request v-else-if="currentStep == 2" />
         </main>
       </div>
 
@@ -573,7 +320,7 @@ export default {
       profileConfirmed: false,
       disableSubmit: false,
       submiting: false,
-      relatedProducts: null,
+      relatedProducts: "",
       inquirySent: false,
       relatedProductsToInquiry: null,
       requirement_amount_text: "",
@@ -598,7 +345,7 @@ export default {
       });
 
       axios
-        .post("/get_category_list",{cascade_list : true})
+        .post("/get_category_list", { cascade_list: true })
         .then((response) => (this.categoryList = response.data.categories));
     },
     submitBuyAd: function () {
@@ -664,8 +411,8 @@ export default {
       if (num == null) {
         return null;
       }
-      
-      num = num.toString().replace(/,/g, '');
+
+      num = num.toString().replace(/,/g, "");
       num = num.toString().replace(/^0+/, "");
       num = num.toString().replace(/^\u0660+/, "");
       num = num.toString().replace(/^\u06f0+/, "");

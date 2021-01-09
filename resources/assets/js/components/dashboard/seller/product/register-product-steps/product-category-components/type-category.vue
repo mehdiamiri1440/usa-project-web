@@ -148,7 +148,7 @@ label {
         v-text="' ' + $parent.subCategoryName + ' '"
       >
       </span>
-      خود را وارد کنید
+      خود را وارد کنید.
       <span class="red-text"> *</span>
     </h2>
 
@@ -159,13 +159,11 @@ label {
       <div class="row">
         <div class="col-xs-12">
           <label for="product-type" class="description">
-            <span v-if="$parent.selectedCategoryIndex == 0">
-              مثلا: مضافتی
-            </span>
-            <span v-else-if="$parent.selectedCategoryIndex == 1">
+            <span v-if="$parent.categoryName == 'میوه'"> مثلا: مضافتی </span>
+            <span v-else-if="$parent.categoryName == 'صیفی'">
               مثلا: بذر متین صادراتی
             </span>
-            <span v-else-if="$parent.selectedCategoryIndex == 2">
+            <span v-else-if="$parent.categoryName == 'غلات'">
               مثلا: هندی ۱۱۲۱
             </span>
           </label>

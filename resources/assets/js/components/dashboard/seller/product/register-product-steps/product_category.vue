@@ -27,6 +27,7 @@ export default {
       step: 0,
       selectedCategoryIndex: "",
       subCategoryList: "",
+      categoryName: "",
       subCategoryName: "",
       productName: "",
       errors: {
@@ -37,6 +38,7 @@ export default {
   methods: {
     selectedCategory(index) {
       this.selectedCategoryIndex = index;
+      this.categoryName = this.categoryList[index].category_name;
       this.subCategoryList = this.categoryList[index].subcategories;
       this.step = 1;
     },
@@ -48,7 +50,6 @@ export default {
     submitCategory() {
       if (this.productName == "") {
         this.errors.productName = "لطفا نوع محصول را وارد کنید";
-
         this.$parent.registerComponentStatistics(
           "product-register-error",
           "product-name",
@@ -74,6 +75,7 @@ export default {
       this.selectedCategoryIndex = "";
       this.subCategoryList = "";
       this.subCategoryName = "";
+      this.categoryName = "";
       this.productName = "";
       this.errors = {
         productName: "",

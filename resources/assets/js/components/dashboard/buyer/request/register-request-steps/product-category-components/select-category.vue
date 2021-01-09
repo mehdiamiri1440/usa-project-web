@@ -1,6 +1,5 @@
 
 <style scoped>
-
 .title-contents {
   font-weight: 500;
   font-size: 19px;
@@ -9,7 +8,7 @@
   padding: 0 15px;
 }
 
-.spinner-border{
+.spinner-border {
   width: 6rem;
   height: 6rem;
   border-width: 0.3em;
@@ -17,7 +16,7 @@
   margin-top: 30px;
 }
 
-ul{
+ul {
   max-height: 400px;
   overflow: auto;
   border-radius: 4px;
@@ -25,49 +24,46 @@ ul{
   margin-bottom: 50px;
 }
 
-ul li.item img{
+ul li.item img {
   max-width: 35px;
   float: right;
   margin-left: 18px;
 }
 
-ul li.item  button{
+ul li.item button {
   background: #fff;
   width: 100%;
   border: none;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #e0e0e0;
   padding: 20px 15px;
   text-align: right;
-  transition:300ms;
+  transition: 300ms;
 }
 
-ul li.item  button:hover{
-  transition:300ms;
-  color:#00c569;
-  transform:translateX(-8px);
-    border-bottom-color:#777;
-
+ul li.item button:hover {
+  transition: 300ms;
+  color: #00c569;
+  transform: translateX(-8px);
+  border-bottom-color: #777;
 }
 
-ul li.item  button span{
+ul li.item button span {
   font-size: 18px;
   font-weight: 500;
   padding-top: 5px;
   display: inline-block;
 }
 
-
-ul li.item  button i{
+ul li.item button i {
   float: left;
   margin-top: 10px;
   font-size: 20px;
 }
 
-
 @media screen and (max-width: 767px) {
- .title-contents {
+  .title-contents {
     margin-top: 40px;
-}
+  }
 }
 </style>
 
@@ -78,21 +74,22 @@ ul li.item  button i{
     <div class="form-contents col-xs-12">
       <div class="row">
         <ul class="list-wrapper" v-if="$parent.categoryList.length > 0">
-          <li v-for="(item,index) in $parent.categoryList" :key="index" class="item col-xs-12
-          ">
+          <li
+            v-for="(item, index) in $parent.categoryList"
+            :key="index"
+            class="item col-xs-12"
+          >
             <button @click.prevent="$parent.selectedCategory(index)">
-              <img v-if="index == 0" src="../../../../../../../img/orange.svg" />
+              <!-- <img v-if="index == 0" src="../../../../../../../img/orange.svg" />
               <img v-else-if="index == 1" src="../../../../../../../img/watermelon.svg" />
-              <img v-else-if="index == 2" src="../../../../../../../img/barley.svg" />
-              <span v-text="item.category_name">
-              </span>
+              <img v-else-if="index == 2" src="../../../../../../../img/barley.svg" /> -->
+              <span v-text="item.category_name"> </span>
               <i class="fa fa-angle-left"></i>
             </button>
           </li>
         </ul>
         <div v-else class="text-center">
-           <div   class="spinner-border" 
-          >
+          <div class="spinner-border">
             <span class="sr-only">Loading...</span>
           </div>
         </div>

@@ -2,8 +2,12 @@
 
 <template>
   <div>
-    <SelectCategory v-if="step == 0"/>
-    <SelectSubCategory v-else-if="step == 1" :index="selectedCategoryIndex" :sub-categories="subCategoryList" />
+    <SelectCategory v-if="step == 0" />
+    <SelectSubCategory
+      v-else-if="step == 1"
+      :index="selectedCategoryIndex"
+      :sub-categories="subCategoryList"
+    />
     <TypeCategory v-else :sub-categories="subCategoryList" />
   </div>
 </template>
@@ -11,31 +15,31 @@
 
 
 <script>
-
-import SelectCategory from './product-category-components/select-category.vue'
-import SelectSubCategory from './product-category-components/select-sub-category.vue'
-import TypeCategory from './product-category-components/type-category.vue'
+import SelectCategory from "./product-category-components/select-category.vue";
+import SelectSubCategory from "./product-category-components/select-sub-category.vue";
+import TypeCategory from "./product-category-components/type-category.vue";
 
 export default {
-  components:{
+  components: {
     SelectCategory,
     SelectSubCategory,
-    TypeCategory
+    TypeCategory,
   },
-  props:['categoryList'],
+  props: ["categoryList"],
   data: function () {
     return {
-      step : 0,
-      selectedCategoryIndex:'',
-      subCategoryList : '',
-      subCategoryName:'',
-      productName:'',
-      errors : {
-        productName:'',
-        requirement_amount:''
+      step: 0,
+      selectedCategoryIndex: "",
+      subCategoryList: "",
+      categoryName: "",
+      subCategoryName: "",
+      productName: "",
+      errors: {
+        productName: "",
+        requirement_amount: "",
       },
-      requirement_amount:'',
-      requirement_amount_text: '',
+      requirement_amount: "",
+      requirement_amount_text: "",
     };
   },
   mounted() {
@@ -62,19 +66,20 @@ export default {
     }
   },
   methods: {
-    selectedCategory(index){
+    selectedCategory(index) {
       window.localStorage.removeItem("buyAd");
       this.selectedCategoryIndex = index;
-      this.subCategoryList = this.categoryList[index].subcategories
+      this.categoryName = this.categoryList[index].category_name;
+      this.subCategoryList = this.categoryList[index].subcategories;
       this.step = 1;
     },
-    selectedSubCategory(item){
-      this.subCategoryName = item.category_name
-      this.$parent.buyAd.category_id = item.id
-      this.step = 2
+    selectedSubCategory(item) {
+      this.subCategoryName = item.category_name;
+      this.$parent.buyAd.category_id = item.id;
+      this.step = 2;
     },
     productNameValidator: function (name) {
-     if (!this.validateRegx(name, /^[\u0600-\u06FF\s_,.:/;()+-\d]+$/)) {
+      if (!this.validateRegx(name, /^[\u0600-\u06FF\s_,.:/;()+-\d]+$/)) {
         this.errors.productName = "لطفا نوع محصول را فارسی وارد کنید.";
       }
     },
@@ -82,8 +87,7 @@ export default {
       return regx.test(input);
     },
     formValidator: function () {
-      
-      if(!this.requirement_amount){
+      if (!this.requirement_amount) {
         this.errors.requirement_amount = "لطفا میزان موجودی را وارد کنید.";
       }
 
@@ -97,14 +101,14 @@ export default {
     },
   },
   watch: {
-    "productName": function (value) {
+    productName: function (value) {
       this.$parent.buyAd.name = value;
       this.errors.productName = "";
-      if(value){
+      if (value) {
         this.productNameValidator(value);
       }
     },
-    "requirement_amount": function (value) {
+    requirement_amount: function (value) {
       this.$parent.buyAd.requirement_amount = value;
       this.errors.requirement_amount = "";
       if (value) {
@@ -113,7 +117,7 @@ export default {
           this.errors.requirement_amount = "لطفا  فقط عدد وارد کنید";
         }
         if (!this.errors.requirement_amount) {
-          this.requirement_amount = this.$parent.getNumberWithCommas(number)
+          this.requirement_amount = this.$parent.getNumberWithCommas(number);
           this.requirement_amount_text = this.$parent.convertUnits(number);
         }
       } else {

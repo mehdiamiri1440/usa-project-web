@@ -1,42 +1,45 @@
 <style  scoped>
-	
-
+.static-item a {
+  color: #1da1f2;
+}
+.static-item a:hover {
+  color: #337ab7;
+}
 .list-title,
 .needs,
 .list-time,
 .list-notice {
-float: right;
-text-align: center;
-line-height: 1.618;
-font-weight: bold;
-padding: 5px;
-color: #7E7E7E;
+  float: right;
+  text-align: center;
+  line-height: 1.618;
+  font-weight: bold;
+  padding: 5px;
+  color: #7e7e7e;
 }
 
 .list-title span.brand-text {
-	color: #556080;
+  color: #556080;
 }
 
-
-.right-side{
-text-align: right !important;
+.right-side {
+  text-align: right !important;
 }
-
-
 
 .list-group-item {
-	padding: 15px 30px;
-	border-radius: 0;
-	border: none;
-	margin: 0;
-	border-bottom: 1px solid #ddd;	
+  padding: 15px 30px;
+  border-radius: 0;
+  border: none;
+  margin: 0;
+  border-bottom: 1px solid #ddd;
 }
-
 
 .list-group-item:nth-last-of-type(2n + 1) {
   background: #fdfdfd !important;
 }
 
+.list-group-item:last-of-type {
+  border: none;
+}
 .detail-success {
   padding: 8px 0;
   width: 100%;
@@ -251,31 +254,36 @@ text-align: right !important;
   font-weight: bold;
   top: 14px;
 }
-.text-input-wrapper > p{
-	font-size: 20px ;
+.text-input-wrapper > p {
+  font-size: 20px;
 }
 
-.green-button{
-	margin-top:30px;
+.green-button {
+  margin-top: 30px;
 }
 
-.form-contents{
-	float: right;
-	width: 100%;
-	padding: 40px 0;
-	text-align: center;
-	line-height: 1.618;
+.form-contents {
+  float: right;
+  width: 100%;
+  padding: 40px 0;
+  text-align: center;
+  line-height: 1.618;
 }
 
-.spinner-wrapper{
-	margin-top: 120px;
+.spinner-wrapper {
+  margin-top: 120px;
 }
 
-.spinner-border{
-	width: 6.5rem;
-	height: 6.5rem;
-	border-width: 0.5rem;
-	color: #00c569;
+.spinner-border {
+  width: 6.5rem;
+  height: 6.5rem;
+  border-width: 0.5rem;
+  color: #00c569;
+}
+
+.static-item {
+  text-align: center;
+  padding: 25px 5px;
 }
 
 @media screen and (max-width: 991px) {
@@ -338,147 +346,161 @@ text-align: right !important;
   .list-notice button > span.request-count {
     font-size: 15px;
   }
-  .right-side{
-  text-align: center !important;
+  .right-side {
+    text-align: center !important;
   }
-    .main-content .list-group-item p{
+  .main-content .list-group-item p {
     margin-bottom: 15px;
   }
-  
-  .list-group-item{
+
+  .list-group-item {
     padding: 25px 10px;
   }
 }
 </style>
 <template>
+  <ul
+    class="list-unstyled wrapper-items"
+    v-if="$parent.buyAds.length != 0 && !$parent.load"
+  >
+    <li
+      v-for="(buyAd, index) in $parent.buyAds"
+      :key="index"
+      class="list-group-item col-xs-12"
+      :class="{
+        golden: buyAd.is_golden,
+        lock:
+          buyAd.is_golden &&
+          $parent.currentUser.user_info.active_pakage_type == 0,
+      }"
+    >
+      <span
+        v-if="
+          buyAd.is_golden &&
+          $parent.currentUser.user_info.active_pakage_type == 0
+        "
+        class="lock-text"
+        v-text="buyAd.subcategory_name"
+      ></span>
+      <div class="right-side col-sm-6 col-xs-12 pull-right">
+        <div class="row">
+          <div class="user-information-wrapper row">
+            <router-link :to="{}" tag="button" class="user-information-content">
+              <div class="user-image">
+                <img src="../../../../../../img/user-defult.png" />
+              </div>
+              <div class="user-content">
+                <span class="user-name-link"> عادل انتظاری ملکی </span>
+              </div>
+            </router-link>
+          </div>
+          <p class="list-title">
+            <span> خریدار </span>
+            <span
+              class="red-text"
+              v-if="
+                buyAd.is_golden &&
+                $parent.currentUser.user_info.active_pakage_type == 0
+              "
+            ></span>
+            <span
+              class="red-text"
+              v-else
+              v-text="$parent.getConvertedNumbers(buyAd.requirement_amount)"
+            ></span>
 
-		<ul class="list-unstyled wrapper-items" v-if="$parent.buyAds.length != 0 && !$parent.load">
-				<li
-				v-for="(buyAd, index) in $parent.buyAds"
-				:key="index"
-				class="list-group-item col-xs-12"
-				:class="{
-					golden: buyAd.is_golden,
-					lock:
-					buyAd.is_golden &&
-					$parent.currentUser.user_info.active_pakage_type == 0,
-				}"
-				>
-				<span
-					v-if="
-					buyAd.is_golden &&
-					$parent.currentUser.user_info.active_pakage_type == 0
-					"
-					class="lock-text"
-					v-text="buyAd.subcategory_name"
-				></span>
-				<p class="list-title right-side col-sm-6 col-xs-12  ">
-					<span>
-					خریدار
-					</span>
-					<span
-					class="red-text"
-					v-if="
-						buyAd.is_golden &&
-						$parent.currentUser.user_info.active_pakage_type == 0
-					"
-					></span>
-					<span
-					class="red-text"
-					v-else
-					v-text="$parent.getConvertedNumbers(buyAd.requirement_amount)"
-					></span>
-					
-					<span
-					class="red-text"
-					v-if="
-						buyAd.is_golden &&
-						$parent.currentUser.user_info.active_pakage_type == 0
-					"
-					v-text="'.از پکیج ویژه استفاده کنید'"
-					></span>
-					<span
-					v-else
-					class="red-text"
-					v-text="buyAd.subcategory_name"></span>
-					<span>
-					از نوع 
-					</span>
-					<span
-					class="red-text"
-					v-if="
-						buyAd.is_golden &&
-						$parent.currentUser.user_info.active_pakage_type == 0
-					"
-					
-					></span>
-					<span v-else>
-						<span
-					class="brand-text"
-					v-if="buyAd.name" v-text="buyAd.name"></span>
-					</span>
+            <span
+              class="red-text"
+              v-if="
+                buyAd.is_golden &&
+                $parent.currentUser.user_info.active_pakage_type == 0
+              "
+              v-text="'.از پکیج ویژه استفاده کنید'"
+            ></span>
+            <span
+              v-else
+              class="red-text"
+              v-text="buyAd.subcategory_name"
+            ></span>
+            <span> از نوع </span>
+            <span
+              class="red-text"
+              v-if="
+                buyAd.is_golden &&
+                $parent.currentUser.user_info.active_pakage_type == 0
+              "
+            ></span>
+            <span v-else>
+              <span
+                class="brand-text"
+                v-if="buyAd.name"
+                v-text="buyAd.name"
+              ></span>
+            </span>
 
-					<span>
-					هستم
-					</span>
-				</p>
+            <span> هستم </span>
+          </p>
+        </div>
+      </div>
 
+      <a
+        v-if="
+          buyAd.is_golden &&
+          $parent.currentUser.user_info.active_pakage_type == 0
+        "
+        class="col-sm-3 col-xs-12 pull-left"
+        href
+        @click.prevent="openGoldenChatRestrictionModal()"
+      >
+        <p class="detail-success hover-effect">
+          <span class="fas fa-comment-alt"></span> پیام به خریدار
+        </p>
+        <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
+          کمی صبر کنید...
+        </p>
+      </a>
+      <a
+        v-else
+        class="col-sm-3 col-xs-12 pull-left"
+        href
+        @click.prevent="openChat(buyAd, $event)"
+      >
+        <p class="detail-success hover-effect">
+          <span class="fas fa-comment-alt"></span> پیام به خریدار
+        </p>
+        <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
+          کمی صبر کنید...
+        </p>
+      </a>
+    </li>
+    <li class="col-xs-12 static-item">
+      <router-link :to="{ name: 'buyAdRequestsSeller' }">
+        سایر درخواست های خرید (مرتبط و غیر مرتبط)
+      </router-link>
+    </li>
+  </ul>
 
+  <div
+    v-else-if="$parent.buyAds.length == 0 && !$parent.load"
+    class="form-contents"
+  >
+    <div class="col-xs-12">
+      <div class="text-input-wrapper">
+        <p class="red-text large-text">چه خریدارنی به دنبال محصول شما هستند؟</p>
+        <router-link class="green-button" :to="{ name: 'buyAdRequestsSeller' }">
+          <span class="bold-text">مشاهده درخواست های خرید</span>
+        </router-link>
+      </div>
+    </div>
+  </div>
 
+  <div v-else class="text-center spinner-wrapper">
+    <div class="spinner-border">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
 
-				<a
-					v-if="
-					buyAd.is_golden &&
-					$parent.currentUser.user_info.active_pakage_type == 0
-					"
-					class="col-sm-3 col-xs-12 pull-left"
-					href
-					@click.prevent="openGoldenChatRestrictionModal()"
-				>
-					<p class="detail-success hover-effect">
-					<span class="fas fa-comment-alt"></span> پیام به خریدار
-					</p>
-					<p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
-					کمی صبر کنید...
-					</p>
-				</a>
-				<a
-					v-else
-					class="col-sm-3 col-xs-12 pull-left"
-					href
-					@click.prevent="openChat(buyAd, $event)"
-				>
-					<p class="detail-success hover-effect">
-					<span class="fas fa-comment-alt"></span> پیام به خریدار
-					</p>
-					<p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
-					کمی صبر کنید...
-					</p>
-				</a>
-				</li>
-		</ul>
-		
-	
-
-		<div v-else-if="$parent.buyAds.length == 0 && !$parent.load" class="form-contents">
-			<div class=" col-xs-12 ">
-				<div class="text-input-wrapper">
-					<p class="red-text large-text">چه خریدارنی به دنبال محصول شما هستند؟</p>
-					<router-link class="green-button" :to="{ name : 'buyAdRequestsSeller'}">
-						<span class="bold-text">مشاهده درخواست های خرید</span>
-					</router-link>
-				</div>
-			</div>
-		</div>
-
-		<div v-else class="text-center spinner-wrapper">
-			  <div  class="spinner-border" 
-            >
-              <span class="sr-only">Loading...</span>
-            </div>
-		</div>
-
-		<!-- <ul v-else class="list-unstyled">
+  <!-- <ul v-else class="list-unstyled">
 				<li
 				v-for="(item, index) in 6"
 				:key="index"
@@ -521,65 +543,61 @@ text-align: right !important;
 				</p>
 				</li>
 			</ul> -->
-
 </template>
 
 <script>
-
 import { eventBus } from "../../../../../router/router";
 
-
 export default {
-	methods:{
-		openGoldenChatRestrictionModal: function () {
-			eventBus.$emit("modal", "goldenBuyAdReplyLimit");
+  methods: {
+    openGoldenChatRestrictionModal: function () {
+      eventBus.$emit("modal", "goldenBuyAdReplyLimit");
 
-			this.registerComponentStatistics(
-				"buyAdReply",
-				"openChat",
-				"permission denied"
-			);
-		},
-		registerComponentStatistics: function (
-		categoryName,
-		actionName,
-		labelName
-		) {
-			gtag("event", actionName, {
-				event_category: categoryName,
-				event_label: labelName,
-			});
-		},
-		openChat: function (product) {
-		this.registerComponentStatistics(
-			"productReplyAfterBuyAdRegister",
-			"openChat",
-			"click on open chatBox"
-		);
-		var self = this;
+      this.registerComponentStatistics(
+        "buyAdReply",
+        "openChat",
+        "permission denied"
+      );
+    },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
+    },
+    openChat: function (product) {
+      this.registerComponentStatistics(
+        "productReplyAfterBuyAdRegister",
+        "openChat",
+        "click on open chatBox"
+      );
+      var self = this;
 
-		axios
-			.post("/get_user_last_confirmed_profile_photo", {
-			user_id: product.myuser_id,
-			})
-			.then(function (response) {
-			var profile_photo = response.data.profile_photo;
+      axios
+        .post("/get_user_last_confirmed_profile_photo", {
+          user_id: product.myuser_id,
+        })
+        .then(function (response) {
+          var profile_photo = response.data.profile_photo;
 
-			var contact = {
-				contact_id: product.myuser_id,
-				first_name: product.first_name,
-				last_name: product.last_name,
-				profile_photo: profile_photo,
-				user_name: product.user_name,
-			};
+          var contact = {
+            contact_id: product.myuser_id,
+            first_name: product.first_name,
+            last_name: product.last_name,
+            profile_photo: profile_photo,
+            user_name: product.user_name,
+          };
 
-			eventBus.$emit("ChatInfo", contact);
-			})
-			.catch(function (err) {
-			//
-			});
-		},
-	}
-}
-
+          eventBus.$emit("ChatInfo", contact);
+        })
+        .catch(function (err) {
+          //
+        });
+    },
+  },
+};
 </script>

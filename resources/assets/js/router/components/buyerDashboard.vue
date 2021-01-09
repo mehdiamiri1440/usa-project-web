@@ -29,6 +29,7 @@
       <router-view
         :str="storagePath"
         :user-type="currentUser.user_info.is_seller"
+        :currentUser="currentUser"
       ></router-view>
     </div>
   </div>

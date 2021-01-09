@@ -1,13 +1,14 @@
 
 <style scoped>
-
 .title-contents {
   font-weight: 500;
   font-size: 18px;
   margin-bottom: 15px;
   padding: 0;
 }
-
+.light-green-text {
+  color: #21ad93;
+}
 
 .submit-button {
   background: #dddddd;
@@ -19,57 +20,54 @@
   padding: 8px 25px 7px;
   transition: 200ms;
   cursor: default;
-  margin:0;
- 
+  margin: 0;
 }
 
-.submit-button i{
-  transition:300ms;
+.submit-button i {
+  transition: 300ms;
   position: relative;
   top: 2px;
   left: -3px;
 }
 
-.input-text-wrapper{
-  height:25px;
+.input-text-wrapper {
+  height: 25px;
   padding-top: 5px;
 }
 
-.small-description-text{
+.small-description-text {
   text-align: left;
 }
 
-.submit-button.default-back-button i{
+.submit-button.default-back-button i {
   left: 3px;
 }
 
 .submit-button.default-back-button {
   background: #fff;
   color: #777;
-  border: 1px solid #BDC4CC;
+  border: 1px solid #bdc4cc;
   border-radius: 4px;
   cursor: pointer;
-  font-weight:400;
+  font-weight: 400;
   font-size: 14px;
 }
 
 .submit-button.default-back-button:hover i {
-  transform : translateX(5px);
-
+  transform: translateX(5px);
 }
 .submit-button.active {
   background: #00c569;
   cursor: pointer;
-  transform : translateX(0);
-
+  transform: translateX(0);
 }
 .submit-button.active:hover i {
   background: #00c569;
   cursor: pointer;
-  transform : translateX(-5px);
+  transform: translateX(-5px);
 }
-.action-control-wrapper{
-  padding:20px 15px 50px;
+.action-control-wrapper {
+  padding: 20px 15px 50px;
   background: #fff;
 }
 
@@ -79,37 +77,35 @@ label {
   font-weight: 400;
   color: #777;
 }
-.small-label{
+.small-label {
   font-size: 15px;
 }
 
-.text-input-wrapper{
+.text-input-wrapper {
   margin: 0 auto;
   position: relative;
-  background: #FBFBFB;
+  background: #fbfbfb;
 }
 
-input{
+input {
   background: none;
   z-index: 1;
   position: relative;
-  width:100%;
+  width: 100%;
   padding: 8px 15px;
-  border: 1px solid #BDC4CC;
+  border: 1px solid #bdc4cc;
   border-radius: 4px;
   box-shadow: none;
 }
 
-
-.text-input-wrapper i{
-  position:absolute;
-  left:15px;
-  top:11px;
-  font-size:18px;
-  color:#BDC4CC;
-  transition:300ms;
+.text-input-wrapper i {
+  position: absolute;
+  left: 15px;
+  top: 11px;
+  font-size: 18px;
+  color: #bdc4cc;
+  transition: 300ms;
 }
-
 
 input:focus,
 input:focus + i {
@@ -146,7 +142,6 @@ input.error:focus + i {
   border-color: #e41c38;
 }
 
-
 @media screen and (max-width: 767px) {
   select {
     font-size: 12px;
@@ -159,25 +154,32 @@ input.error:focus + i {
 
 <template>
   <div>
-
-   
-
-    <form class="form-contents col-xs-12"  v-on:submit.prevent="$parent.submitCategory()">
+    <form
+      class="form-contents col-xs-12"
+      v-on:submit.prevent="$parent.submitCategory()"
+    >
       <div class="row">
-          <div class="col-xs-12">
-
-           <h2 class="title-contents col-xs-12">نوع 
-            <span v-text="' ' + $parent.subCategoryName +' '"> 
-            
+        <div class="col-xs-12">
+          <h2 class="title-contents col-xs-12">
+            نوع
+            <span
+              class="light-green-text"
+              v-text="' ' + $parent.subCategoryName + ' '"
+            >
             </span>
-            .خود را وارد کنید
-            
+            خود را وارد کنید.
           </h2>
 
           <label for="stock" class="description">
-            مثلا: مضافتی
+            <span v-if="$parent.categoryName == 'میوه'"> مثلا: مضافتی </span>
+            <span v-else-if="$parent.categoryName == 'صیفی'">
+              مثلا: بذر متین صادراتی
+            </span>
+            <span v-else-if="$parent.categoryName == 'غلات'">
+              مثلا: هندی ۱۱۲۱
+            </span>
           </label>
-        
+
           <div class="text-input-wrapper">
             <input
               v-model="$parent.productName"
@@ -191,39 +193,40 @@ input.error:focus + i {
               pattern="[0-9]*"
             />
 
-            <i v-if="$parent.productName && !$parent.errors.productName" class="fa fa-check-circle"></i>
-            <i v-else-if="$parent.errors.productName" class="fa fa-times-circle"></i>
+            <i
+              v-if="$parent.productName && !$parent.errors.productName"
+              class="fa fa-check-circle"
+            ></i>
+            <i
+              v-else-if="$parent.errors.productName"
+              class="fa fa-times-circle"
+            ></i>
             <i v-else class="fa fa-edit"></i>
           </div>
-          
 
-            <div class="input-text-wrapper">
-              <p class="error-message ">
-                <span
+          <div class="input-text-wrapper">
+            <p class="error-message">
+              <span
                 class="red-text"
-                  v-if="$parent.errors.productName"
-                  v-text="$parent.errors.productName"
-                ></span>
-              </p>
-            </div>
-
+                v-if="$parent.errors.productName"
+                v-text="$parent.errors.productName"
+              ></span>
+            </p>
+          </div>
         </div>
-        
-        <div class="col-xs-12">
 
+        <div class="col-xs-12">
           <h2 class="title-contents col-xs-12">
             میزان موجودی
 
-                <span class="small-label">(کیلوگرم)</span>
+            <span class="small-label">(کیلوگرم)</span>
 
-                <span class="red-text">
-                *
-                </span>
+            <span class="red-text"> * </span>
           </h2>
           <label for="requirement_amount" class="description">
             مثلا: 50,000
           </label>
-        
+
           <div class="text-input-wrapper">
             <input
               v-model="$parent.requirement_amount"
@@ -237,40 +240,48 @@ input.error:focus + i {
               pattern="[0-9]*"
             />
 
-            <i v-if="$parent.requirement_amount && !$parent.errors.requirement_amount" class="fa fa-check-circle"></i>
-            <i v-else-if="$parent.errors.requirement_amount" class="fa fa-times-circle"></i>
+            <i
+              v-if="
+                $parent.requirement_amount && !$parent.errors.requirement_amount
+              "
+              class="fa fa-check-circle"
+            ></i>
+            <i
+              v-else-if="$parent.errors.requirement_amount"
+              class="fa fa-times-circle"
+            ></i>
             <i v-else class="fa fa-edit"></i>
           </div>
-          
 
-            <div class="input-text-wrapper">
-              <p class="small-description-text" v-if="!$parent.errors.requirement_amount">
-                <span v-if="$parent.requirement_amount_text" v-text="$parent.requirement_amount_text"></span>
-              </p>
-              <p class="error-message ">
-                <span
+          <div class="input-text-wrapper">
+            <p
+              class="small-description-text"
+              v-if="!$parent.errors.requirement_amount"
+            >
+              <span
+                v-if="$parent.requirement_amount_text"
+                v-text="$parent.requirement_amount_text"
+              ></span>
+            </p>
+            <p class="error-message">
+              <span
                 class="red-text"
-                  v-if="$parent.errors.requirement_amount"
-                  v-text="$parent.errors.requirement_amount"
-                ></span>
-              </p>
-            </div>
-
-
+                v-if="$parent.errors.requirement_amount"
+                v-text="$parent.errors.requirement_amount"
+              ></span>
+            </p>
+          </div>
         </div>
-  
-      
       </div>
       <div class="col-xs-12 action-control-wrapper">
         <div class="row">
           <button
             class="submit-button disabled pull-left"
-            
             :class="{
               active:
-                 !$parent.errors.productName &&
-                 $parent.requirement_amount &&
-                 !$parent.errors.requirement_amount
+                !$parent.errors.productName &&
+                $parent.requirement_amount &&
+                !$parent.errors.requirement_amount,
             }"
             @click.prevent="$parent.formValidator()"
             type="submit"
@@ -279,16 +290,14 @@ input.error:focus + i {
             <i class="fa fa-check"></i>
           </button>
 
-           <button
-                    class="submit-button default-back-button pull-right"
-                    @click.prevent="$parent.step--"
-                    
-            >
-                <i class="fa fa-arrow-right"></i>
+          <button
+            class="submit-button default-back-button pull-right"
+            @click.prevent="$parent.step--"
+          >
+            <i class="fa fa-arrow-right"></i>
 
-                مرحله قبل
-            </button>
-
+            مرحله قبل
+          </button>
         </div>
       </div>
     </form>

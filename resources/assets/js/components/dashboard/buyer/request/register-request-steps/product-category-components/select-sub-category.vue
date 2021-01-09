@@ -1,7 +1,5 @@
 
 <style scoped>
-
-
 .submit-button {
   background: #dddddd;
   color: #fff;
@@ -12,50 +10,45 @@
   padding: 8px 25px 7px;
   transition: 200ms;
   cursor: default;
-  margin:0;
- 
+  margin: 0;
 }
 
-.submit-button i{
-  transition:300ms;
+.submit-button i {
+  transition: 300ms;
   position: relative;
   top: 2px;
   left: -3px;
 }
-.submit-button.default-back-button i{
+.submit-button.default-back-button i {
   left: 3px;
 }
 
 .submit-button.default-back-button {
   background: #fff;
   color: #777;
-  border: 1px solid #BDC4CC;
+  border: 1px solid #bdc4cc;
   border-radius: 4px;
   cursor: pointer;
-  font-weight:400;
+  font-weight: 400;
   font-size: 14px;
 }
 
 .submit-button.default-back-button:hover i {
-  transform : translateX(5px);
-
+  transform: translateX(5px);
 }
 .submit-button.active {
   background: #00c569;
   cursor: pointer;
-  transform : translateX(0);
-
+  transform: translateX(0);
 }
 .submit-button.active:hover i {
   background: #00c569;
   cursor: pointer;
-  transform : translateX(-5px);
+  transform: translateX(-5px);
 }
-.action-control-wrapper{
-  margin:40px auto 20px
+.action-control-wrapper {
+  margin: 40px auto 20px;
 }
-
-
 
 .title-contents {
   font-weight: 500;
@@ -65,62 +58,58 @@
   margin-top: -23px;
 }
 
-.title-contents img{
+.title-contents img {
   width: 45px;
   position: relative;
   top: 9px;
   margin-left: 5px;
 }
 
-ul{
+ul {
   max-height: 340px;
   overflow: auto;
   border-radius: 4px;
   width: 100%;
 }
 
-ul li.item img{
+ul li.item img {
   max-width: 35px;
   float: right;
   margin-left: 18px;
 }
 
-ul li.item  button{
+ul li.item button {
   background: #fff;
   width: 100%;
   border: none;
-  border-bottom: 1px solid #E0E0E0;
-  padding:  15px;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 15px;
   text-align: right;
-  transition:300ms;
+  transition: 300ms;
 }
 
-ul li.item  button:hover{
-  transition:300ms;
-  color:#00c569;
-  transform:translateX(-8px);
-  border-bottom-color:#777;
-
+ul li.item button:hover {
+  transition: 300ms;
+  color: #00c569;
+  transform: translateX(-8px);
+  border-bottom-color: #777;
 }
 
-ul li.item  button span{
+ul li.item button span {
   font-size: 18px;
   font-weight: 500;
   padding-top: 5px;
   display: inline-block;
 }
 
-
-ul li.item  button i{
+ul li.item button i {
   float: left;
   margin-top: 10px;
   font-size: 20px;
 }
 
-
-
 @media screen and (max-width: 767px) {
- .title-contents {
+  .title-contents {
     margin-top: 0;
   }
 }
@@ -129,19 +118,31 @@ ul li.item  button i{
 <template>
   <div>
     <h2 class="title-contents col-xs-12">
-    <img v-if="index == 0" src="../../../../../../../img/orange.svg" />
-              <img v-else-if="index == 1" src="../../../../../../../img/watermelon.svg" />
-              <img v-else-if="index == 2" src="../../../../../../../img/barley.svg" />
-    انتخاب دسته بندی محصول</h2>
+      <img
+        v-if="$parent.categoryName == 'میوه'"
+        src="../../../../../../../img/orange.svg"
+      />
+      <img
+        v-else-if="$parent.categoryName == 'صیفی'"
+        src="../../../../../../../img/watermelon.svg"
+      />
+      <img
+        v-else-if="$parent.categoryName == 'غلات'"
+        src="../../../../../../../img/barley.svg"
+      />
+      انتخاب دسته بندی محصول
+    </h2>
 
     <div class="form-contents col-xs-12">
       <div class="row">
         <ul class="list-wrapper">
-          <li v-for="(item,index) in subCategories" :key="index" class="item col-xs-12
-          ">
+          <li
+            v-for="(item, index) in subCategories"
+            :key="index"
+            class="item col-xs-12"
+          >
             <button @click.prevent="$parent.selectedSubCategory(item)">
-              <span v-text="item.category_name">
-              </span>
+              <span v-text="item.category_name"> </span>
               <i class="fa fa-angle-left"></i>
             </button>
           </li>
@@ -149,28 +150,22 @@ ul li.item  button i{
       </div>
     </div>
     <div class="col-xs-12 action-control-wrapper">
-           <button
-                    class="submit-button default-back-button pull-right"
-                    @click.prevent="$parent.step--"
-            >
-                <i class="fa fa-arrow-right"></i>
+      <button
+        class="submit-button default-back-button pull-right"
+        @click.prevent="$parent.step--"
+      >
+        <i class="fa fa-arrow-right"></i>
 
-                مرحله قبل
-            </button>
-
-        </div>
+        مرحله قبل
+      </button>
+    </div>
   </div>
 </template>
 
 
 
 <script>
-  
-  export default {
-    props:[
-      'index',
-      'subCategories'
-    ]
-  }
-
+export default {
+  props: ["index", "subCategories"],
+};
 </script>
