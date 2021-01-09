@@ -451,9 +451,7 @@ label {
               <span class="gray-text">مقدار موجودی</span>
 
               <span
-                v-text="
-                  getNumberWithCommas($parent.product.main.stock) + ' کیلوگرم '
-                "
+                v-text="getConvertedNumbers($parent.product.main.stock)"
               ></span>
             </li>
             <li>
@@ -461,8 +459,7 @@ label {
 
               <span
                 v-text="
-                  getNumberWithCommas($parent.product.main.min_sale_amount) +
-                  ' کیلوگرم '
+                  getConvertedNumbers($parent.product.main.min_sale_amount)
                 "
               ></span>
             </li>
@@ -574,6 +571,16 @@ export default {
       if (number || typeof number === "number")
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       else return "";
+    },
+    getConvertedNumbers: function (number) {
+      if (number || typeof number === "number") {
+        let data = number / 1000;
+        if (number < 1000) {
+          return number + " " + "کیلوگرم";
+        } else {
+          return data + " " + "تن";
+        }
+      } else return "";
     },
   },
 };

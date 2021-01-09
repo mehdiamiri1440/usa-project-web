@@ -170,6 +170,19 @@ const router = new Router({
               ], resolve);
             },
           },
+          children: [
+            {
+              path: "success",
+              name: "successRegisterProduct",
+              components: {
+                default: (resolve) => {
+                  require([
+                    "../components/dashboard/seller/product/product-basic.vue",
+                  ], resolve);
+                },
+              },
+            },
+          ]
         },
         {
           path: "guide",

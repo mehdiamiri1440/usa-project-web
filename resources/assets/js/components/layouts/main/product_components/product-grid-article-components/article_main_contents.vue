@@ -249,11 +249,7 @@ span {
 
         <p>
           موجودی:
-          <span
-            v-text="
-              getNumberWithCommas($parent.product.main.stock) + ' کیلوگرم'
-            "
-          ></span>
+          <span v-text="getConvertedNumbers($parent.product.main.stock)"></span>
         </p>
       </div>
 
@@ -360,6 +356,16 @@ export default {
       if (number || typeof number === "number")
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       else return "";
+    },
+    getConvertedNumbers: function (number) {
+      if (number || typeof number === "number") {
+        let data = number / 1000;
+        if (number < 1000) {
+          return number + " " + "کیلوگرم";
+        } else {
+          return data + " " + "تن";
+        }
+      } else return "";
     },
   },
 };

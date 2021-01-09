@@ -159,7 +159,12 @@
                 v-text="'عضویت در گروه'"
               ></a>
 
-              <a href="#" class="btn green-button bg-gray" data-dismiss="modal" v-text="'انصراف'"></a>
+              <a
+                href="#"
+                class="btn green-button bg-gray"
+                data-dismiss="modal"
+                v-text="'انصراف'"
+              ></a>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -185,9 +190,15 @@
               <br />
               <p class="main-pop-up" v-text="elevatorText"></p>
 
-              <a href class="btn green-button bg-gray" data-dismiss="modal">متوجه شدم</a>
+              <a href class="btn green-button bg-gray" data-dismiss="modal"
+                >متوجه شدم</a
+              >
 
-              <a :href="'/payment/elevator/' + productId" class="btn green-button">خرید نردبان</a>
+              <a
+                :href="'/payment/elevator/' + productId"
+                class="btn green-button"
+                >خرید نردبان</a
+              >
             </div>
           </div>
           <!-- /.modal-content -->
@@ -221,7 +232,10 @@
                 <img src="../../../img/logo/mobile-logo.svg" alt />
               </div>
               <h3>اپلیکیشن جدید باسکول</h3>
-              <p>برای دسترسی سریعتر و راحت تر به خریداران و فروشندگان عمده برنامه جدید باسکول را نصب کنید.</p>
+              <p>
+                برای دسترسی سریعتر و راحت تر به خریداران و فروشندگان عمده برنامه
+                جدید باسکول را نصب کنید.
+              </p>
               <a href @click.prevent="doDownload()">
                 دانلود اپلیکیشن باسکول
                 <i class="fa fa-download"></i>
@@ -263,6 +277,7 @@
 
     <router-view
       name="seller"
+      class="h-100"
       :user-id="userId"
       :is-seller="isSeller"
       :assets="assets"
@@ -272,7 +287,10 @@
 
     <!-- add android app download  -->
 
-    <div v-if="isConditionSatisfied" class="android-download-alert-wrapper hidden-lg hidden-md">
+    <div
+      v-if="isConditionSatisfied"
+      class="android-download-alert-wrapper hidden-lg hidden-md"
+    >
       <button
         class="close-android-download-alert-wrapper"
         @click.prevent="isConditionSatisfied = false"
@@ -447,7 +465,7 @@ export default {
             window.location.pathname != "/buyer/messenger/contacts" &&
             window.location.pathname != "/seller/messenger/contacts" &&
             window.location.pathname != "/seller/buyAd-requests" &&
-            !window.location.pathname.includes('product-view') &&
+            !window.location.pathname.includes("product-view") &&
             !this.iswebview
           ) {
             this.isConditionSatisfied = true;

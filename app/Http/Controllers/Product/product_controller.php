@@ -1221,11 +1221,11 @@ class product_controller extends Controller
                         ->get();
 
         $out_degrees = $out_degrees->filter(function($item){
-            return $item->out_degree >= 20;
+            return $item->out_degree >= 3;
         });
 
         $in_degrees = $in_degrees->filter(function($item){
-            return $item->in_degree >= 20;
+            return $item->in_degree >= 3;
         });
 
         $buyer_ids_based_on_out_degree = [];

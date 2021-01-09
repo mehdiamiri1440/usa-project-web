@@ -402,40 +402,46 @@
                     <div class=" row wrapper-articles">
 
                         <article v-if="files.length > 0" v-for="(file, index) in files" :key="file.id"
-                                 class=" col-md-4 col-xs-6 col-lg-3 pull-right article-images">
+                                 class="pull-right article-images"
+                                 :class="[imageWrapperSize  ? imageWrapperSize : 'col-md-4 col-xs-6 col-lg-3']"
+                                 >
                             <div class="image">
                                 <img v-if="file.thumb" :src="file.thumb" width="40" height="auto"/>
                                 <span v-else>No Image</span>
                                 <div class="actions-content">
-                                    <a
+                                    <!-- <a
                                        href="#"
                                        class="edit-image"
                                        @click.prevent="file.active || file.success || file.error === 'compressing' ? false :  onEditFileShow(file)"><i
-                                            aria-hidden="true" class="fa fa-pencil-alt"></i></a>
+                                            aria-hidden="true" class="fa fa-pencil-alt"></i></a> -->
                                     <a class="delete" href="#" @click.prevent="$refs.upload.remove(file)"><i
                                             aria-hidden="true" class="fa fa-trash "></i></a>
                                 </div>
                             </div>
 
                         </article>
-                             <file-upload
+             
+
+
+                    <file-upload
                         v-show="!isOption"
-                        class="upload col-md-4 col-xs-6 col-lg-3 pull-right"
+                         class="upload pull-right"
+                        :class="[imageWrapperSize  ? imageWrapperSize : 'col-md-4 col-xs-6 col-lg-3']"
                         :accept="accept"
-                        :name="name"
-                        :multiple="multiple"
+                        :multiple="uploadMultiple"
                         :directory="directory"
                         :size="size || 0"
                         :thread="thread < 1 ? 1 : (thread > 5 ? 5 : thread)"
                         :drop="drop"
                         :drop-directory="dropDirectory"
                         :add-index="addIndex"
-                        v-model="files"
+                        :name='uploadName'
+                        v-model="$parent.files"
                         @input-filter="inputFilter"
                         @input-file="inputFile"
                         ref="upload">
+                        </file-upload>
 
-                </file-upload>
 
                     </div>
 
@@ -483,7 +489,9 @@
 </template>
 
 <script>
-    import Cropper from 'cropperjs'
+    import loadImage from "blueimp-load-image"
+
+    // import Cropper from 'cropperjs'
     import ImageCompressor from '@xkeshi/image-compressor'
     import FileUpload from 'vue-upload-component'
     export default {
@@ -497,30 +505,26 @@
             'uploadAddIndex',
             'uploadThread',
             'uploadUploadAuto',
-            'uploadRef',
-            'size'
+            'files',
+            'imageWrapperSize'
         ],
         components: {
             FileUpload,
         },
         data() {
             return {
-                files: [],
-                accept: this.uploadAccept,
-                minSize: this.uploadMinSize,
-                // size:this.uploadSize,
-                multiple: this.uploadMultiple,
+                // files: [],
+                accept: 'image/png,image/gif,image/jpeg,image/webp',
+                extensions: 'gif,jpg,jpeg,png,webp',
+                minSize: 1024,
+                size: 1024 * 1024 * 10,
+                multiple: true,
                 directory: false,
                 drop: true,
-                dropDirectory: this.uploadDropDirectory,
-                addIndex: this.uploadAddIndex,
-                thread: this.uploadThread,
-                name: this.uploadName,
-                // postAction: '/upload/post',
-                // putAction: '/upload/put',
-                oCompress: this.uploadOCompress,
-                uploadAuto: this.uploadUploadAuto,
-
+                dropDirectory: true,
+                createDirectory: false,
+                addIndex: false,
+                thread: 3,
                 isOption: false,
                 addData: {
                     show: false,
@@ -550,28 +554,28 @@
                         if (!this.$refs.editImage) {
                             return
                         }
-                        let cropper = new Cropper(this.$refs.editImage, {
-                            autoCrop: true,
-                            aspectRatio: 1 / 1,
-                            responsive: true,
-                            center:true,
-                            guides: false,
-                            movable: false,
-                            rotatable: false,
-                            scalabel: false,
-                            zoomable: false,
-                            zoomOnTouch: false,
-                            zoomOnWheel: false,
-                            wheelZoomRatio: false,
-                            toggleDragModeOnDblclick: false,
-                            minCropBoxWidth:400,
-                            minCropBoxHeight:400,
+                        // let cropper = new Cropper(this.$refs.editImage, {
+                        //     autoCrop: true,
+                        //     aspectRatio: 1 / 1,
+                        //     responsive: true,
+                        //     center:true,
+                        //     guides: false,
+                        //     movable: false,
+                        //     rotatable: false,
+                        //     scalabel: false,
+                        //     zoomable: false,
+                        //     zoomOnTouch: false,
+                        //     zoomOnWheel: false,
+                        //     wheelZoomRatio: false,
+                        //     toggleDragModeOnDblclick: false,
+                        //     minCropBoxWidth:400,
+                        //     minCropBoxHeight:400,
 
-                        })
-                        this.editFile = {
-                            ...this.editFile,
-                            cropper
-                        }
+                        // })
+                        // this.editFile = {
+                        //     ...this.editFile,
+                        //     cropper
+                        // }
                     })
                 }
             },
@@ -602,19 +606,47 @@
                     // Automatic compression
                     // 自动压缩
                     if (newFile.file && newFile.type.substr(0, 6) === 'image/' && this.autoCompress > 0 && this.autoCompress < newFile.size) {
-                        newFile.error = 'compressing'
-                        const imageCompressor = new ImageCompressor(null, {
+                        newFile.error = 'compressing';
+                        this.$parent.isCompressor = true;
+
+                    let Options = {
+                            checkOrientation:true,
+                            quality: 0.6,
                             convertSize: 1000000,
-                            maxWidth: 512,
-                            maxHeight: 512,
-                        })
-                        imageCompressor.compress(newFile.file)
+                            minWidth: 512,
+                            minHeight: 512,
+                        }
+
+                        const imageCompressor = new ImageCompressor(null,Options)
+                        const self = this;
+
+                        imageCompressor.compress(newFile.file,Options)
                             .then((file) => {
-                                this.$refs.upload.update(newFile, {error: '', file, size: file.size, type: file.type});
-                                this.uploadRef.pop();
+                                loadImage(file, { meta: true, canvas: true, maxWidth: 800 })
+                                .then(function (data) {
+                                    if (!data.imageHead) throw new Error('Could not parse image metadata')
+                                    return new Promise(function (resolve) {
+                                    data.image.toBlob(function (blob) {
+                                        data.blob = blob
+                                        resolve(data)
+                                    }, 'image/jpeg')
+                                    })
+                                })
+                                .then(function (data) {
+                                    return loadImage.replaceHead(data.blob, data.imageHead)
+                                })
+                                .then(function (blob) {
+                                 self.$refs.upload.update(newFile, {error: '', blob, size: blob.size, type: blob.type});
+                                })
+                                .catch(function (err) {
+                                    console.error(err)
+                                })
+                                this.$parent.isCompressor = false;
                             })
                             .catch((err) => {
                                 this.$refs.upload.update(newFile, {error: err.message || 'compress'})
+                                this.$parent.isCompressor = false;
+                                console.log(err)
                             })
                     }
 
@@ -633,7 +665,6 @@
                     if (newFile.blob && newFile.type.substr(0, 6) === 'image/') {
                         newFile.thumb = newFile.blob
                     }
-                    this.uploadRef.push(newFile.file);
                 }
             },
             // add, update, remove File Event
@@ -642,7 +673,6 @@
 
                     // update
                     if (newFile.active && !oldFile.active) {
-                        this.uploadRef.push(this.$refs.upload.files[this.uploadRef.length].file);
 
                         // beforeSend
                         // min size
@@ -662,11 +692,7 @@
                 }
                 if (!newFile && oldFile) {
                     // remove
-                    for (var i = 0; i < this.uploadRef.length; i++) {
-                        if (this.uploadRef[i].name === oldFile.file.name) {
-                            this.uploadRef.splice(i, 1);
-                        }
-                    }
+
                     if (oldFile.success && oldFile.response.id) {
 
                         // $.ajax({
@@ -708,11 +734,7 @@
                     data.file = new File([arr], data.name, {type: this.editFile.type})
                     data.size = data.file.size
                 }
-                for (var i = 0; i < this.uploadRef.length ; i++) {
-                    if (this.uploadRef[i].name == data.file.name && this.uploadRef[i].size == this.uploadRef[i].size ) {
-                        this.uploadRef.splice(i, 1);
-                    }
-                }
+
                 this.$refs.upload.update(this.editFile.id, data);
                 this.editFile.error = '';
                 this.editFile.show = false

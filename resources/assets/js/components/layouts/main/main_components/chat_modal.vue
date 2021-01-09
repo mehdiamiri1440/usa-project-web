@@ -366,27 +366,29 @@
     </div>
 
     <div class="footer-modal-chat">
-      <button class="send-message-button" @click.prevent="sendMessage">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="13.347"
-          height="12.766"
-          viewBox="0 0 13.347 12.766"
-        >
-          <path
-            id="send-message-icon"
-            data-name="send-message-icon"
-            d="M2511.158-3909.893l12.347-5.929-12.347-5.837.235,4.51,10.029,1.327-10.029,1.477Z"
-            transform="translate(-2510.658 3922.159)"
-            fill="#fff"
-            stroke="#fff"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1"
-          />
-        </svg>
-      </button>
-      <input type="text" v-model="msgToSend" placeholder="پیغامی بگذارید" />
+      <form v-on:submit.prevent="sendMessage()">
+        <button class="send-message-button" @click.prevent="sendMessage">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="13.347"
+            height="12.766"
+            viewBox="0 0 13.347 12.766"
+          >
+            <path
+              id="send-message-icon"
+              data-name="send-message-icon"
+              d="M2511.158-3909.893l12.347-5.929-12.347-5.837.235,4.51,10.029,1.327-10.029,1.477Z"
+              transform="translate(-2510.658 3922.159)"
+              fill="#fff"
+              stroke="#fff"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1"
+            />
+          </svg>
+        </button>
+        <input type="text" v-model="msgToSend" placeholder="پیغامی بگذارید" />
+      </form>
     </div>
   </div>
 
