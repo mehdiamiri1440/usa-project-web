@@ -441,8 +441,6 @@ class product_controller extends Controller
                                         $this->user_info_sent_by_product_array,
                                         $this->profile_info_sent_by_product_array);
 
-        // var_dump($selected_items);
-
         $product_with_related_data = DB::table('products')
                     ->join('categories', 'products.category_id', '=', 'categories.id')
                     ->join('myusers','products.myuser_id','=','myusers.id')
@@ -485,6 +483,7 @@ class product_controller extends Controller
             ->first();
 
         if (is_null($product)) {
+            return redirect('/product-list');
             return response()->json([
                 'status' => false,
                 'msg' => 'product not found.',
@@ -1201,53 +1200,18 @@ class product_controller extends Controller
             return collect($buyAd)->only('myuser_id');
         });
 
-        $out_degrees = DB::table('messages')
-                            ->whereIn('sender_id',$buyer_ids)
-                            ->select(DB::raw("sender_id as buyer_id,count(distinct(receiver_id)) as out_degree"))
-                            ->groupBy('buyer_id')
-                            ->orderBy('out_degree','desc')
-                            ->get();
+        $result = DB::table('messages')->selectRaw("receiver_id as user_id,count(DISTINCT(sender_id)) as in_degree,((SELECT count(DISTINCT(sender_id)) as cnt from messages where receiver_id = user_id and is_read = true)/count(DISTINCT(sender_id))) * 100 as response_rate,(SELECT count(DISTINCT(receiver_id)) as cnt from messages where sender_id = user_id) as out_degree")
+                                            ->whereIn('receiver_id',$buyer_ids)
+                                            ->groupBy('user_id')
+                                            ->havingRaw('in_degree >= 20 and out_degree>= 20 and response_rate >= 95')
+                                            ->orderByRaw('response_rate desc,out_degree,in_degree')
+                                            ->get()
+                                            ->all();
 
-        $buyer_ids = $out_degrees->map(function($item){
-            return collect($item)->only('buyer_id');
-        });
-
-        $in_degrees = DB::table('messages')
-                        ->whereIn('receiver_id',$buyer_ids)
-                        ->where('is_read',true)
-                        ->select(DB::raw("receiver_id as buyer_id,count(distinct(sender_id)) as in_degree"))
-                        ->groupBy('buyer_id')
-                        ->orderBy('in_degree','desc')
-                        ->get();
-
-        $out_degrees = $out_degrees->filter(function($item){
-            return $item->out_degree >= 3;
-        });
-
-        $in_degrees = $in_degrees->filter(function($item){
-            return $item->in_degree >= 3;
-        });
-
-        $buyer_ids_based_on_out_degree = [];
-
-        $out_degrees->each(function($item) use(&$buyer_ids_based_on_out_degree){
-            $buyer_ids_based_on_out_degree[] = $item->buyer_id;
-        });
-
-        $buyer_ids_based_on_in_degree = [];
-
-        $in_degrees->each(function($item) use(&$buyer_ids_based_on_in_degree){
-            $buyer_ids_based_on_in_degree[] = $item->buyer_id;
-        });
-
-        $result = array_intersect($buyer_ids_based_on_in_degree,$buyer_ids_based_on_out_degree);
+        $result = array_column($result,'user_id');
 
         $important_buyAds = $buyAds->filter(function($buyAd) use($result){ //extract selected buyers from all related buyAds
             return in_array($buyAd->myuser_id,$result) == true;
-        });
-
-        $important_buyAds = $important_buyAds->filter(function($buyAd){ //filter according to buyer response rate
-            return $this->get_user_response_info($buyAd->myuser_id)['response_rate'] >= 90 ;
         });
 
         $prioritized_buyAds_according_to_buyers_last_activity_date = $this->prioritize_buyAds_according_to_buyers_last_activity_date($important_buyAds);
@@ -1399,5 +1363,39 @@ class product_controller extends Controller
         ]);
 
         
+    }
+
+
+    public function get_premium_users_buyAd_suggestion_list($user_id)
+    {
+        $user_record = myuser::find($user_id);
+
+        if($user_record){
+            if($user_record->active_pakage_type == 0){
+                return response()->json([
+                    'status' => false,
+                    'msg' => 'شما به این قسمت دسترسی ندارید.'
+                ],404);
+            }
+        }
+
+        $products = product::where('myuser_id',$user_id)
+                                ->where('confirmed',true)
+                                ->orderBy('created_at','desc')
+                                ->get();
+
+        $buyAds = [];
+        foreach($products as $product)
+        {
+            $tmp = $this->get_new_most_related_buyAds($product);
+
+            // $tmp = array_filter($tmp,function($buyAd){
+            //     return $buyAd->is_golden == true;
+            // });
+
+            $buyAds = array_unique(array_merge($buyAds,$tmp),SORT_REGULAR);
+        }
+
+        return $buyAds;
     }
 }

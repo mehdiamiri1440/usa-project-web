@@ -16,6 +16,7 @@ use App\Models\buyAd_media;
 use Carbon\Carbon;
 use App\Models\product_media;
 use App\Models\message;
+use App\Http\Controllers\Product\product_controller;
 
 class buyAd_controller extends Controller
 {
@@ -106,6 +107,20 @@ class buyAd_controller extends Controller
 
     protected $words_blacklist = [
         'در', 'به', 'را', 'از', 'و', 'برای', 'تا', 'که', 'بر', 'بی', 'مگر',
+    ];
+
+    protected $related_buyAds_required_fields = [
+        'buy_ads.id',
+        'buy_ads.name',
+        'buy_ads.created_at',
+        'buy_ads.updated_at',
+        'buy_ads.category_id',
+        'buy_ads.requirement_amount',
+        'buy_ads.myuser_id',
+        'subcategory.category_name as subcategory_name',
+        'categories.category_name as category_name',
+        'myusers.first_name',
+        'myusers.last_name',
     ];
 
     protected $offered_products_count_after_buyAd_register = 6;
@@ -1337,6 +1352,18 @@ class buyAd_controller extends Controller
             $final_golden_buyAds = $final_golden_buyAds->toArray();
         }
 
+        if( count($my_buyAd_suggestions) == 0 )
+        {
+            $products = product::where('myuser_id',$user_id)
+                                    ->where('confirmed',true)
+                                    ->get();
+
+            foreach($products as $product){
+                $final_golden_buyAds = array_merge($final_golden_buyAds,$this->get_new_most_related_buyAds($product));
+            }
+            
+        }
+
         return response()->json([
             'status' => true,
             'buyAds' => $my_buyAd_suggestions,
@@ -1408,5 +1435,87 @@ class buyAd_controller extends Controller
 
         return array_unique($result_golden_buyAds,SORT_REGULAR);
         
+    }
+
+    protected function get_new_most_related_buyAds($product)
+    {
+        $until = Carbon::now();
+        $from = Carbon::now()->subMonths(4);
+
+        $product_name_array = $this->get_product_name_array($product);
+
+        $buyAds = DB::table('buy_ads')
+                                ->join('myusers','myusers.id','=','buy_ads.myuser_id')
+                                ->join('categories as subcategory','subcategory.id','=','buy_ads.category_id')
+                                ->join('categories','subcategory.parent_id','=','categories.id')
+                                ->where('buy_ads.category_id',$product->category_id)
+                                ->where('myusers.is_buyer',true)
+                                ->where('buy_ads.requirement_amount','<=',$product->stock)
+                                ->whereBetween('buy_ads.updated_at',[$from,$until])
+                                ->where('confirmed',true)
+                                ->where(function($q) use($product_name_array){
+                                    foreach($product_name_array as $name){
+                                        $q = $q->orWhere('name','like',"%$name%");
+                                    }
+
+                                    return $q;
+
+                                })
+                                ->select($this->related_buyAds_required_fields)
+                                ->get();
+
+        $buyAds = $this->get_most_valuable_buyAds($buyAds);
+
+        return $buyAds;
+    }
+
+    protected function get_most_valuable_buyAds($buyAds)
+    {
+        $buyer_ids = $buyAds->map(function($buyAd){
+            return collect($buyAd)->only('myuser_id');
+        });
+
+        $result = DB::table('messages')->selectRaw("receiver_id as user_id,count(DISTINCT(sender_id)) as in_degree,((SELECT count(DISTINCT(sender_id)) as cnt from messages where receiver_id = user_id and is_read = true)/count(DISTINCT(sender_id))) * 100 as response_rate,(SELECT count(DISTINCT(receiver_id)) as cnt from messages where sender_id = user_id) as out_degree")
+                                            ->whereIn('receiver_id',$buyer_ids)
+                                            ->groupBy('user_id')
+                                            ->havingRaw('in_degree >= 30 and out_degree>= 30 and response_rate >= 95')
+                                            ->orderByRaw('response_rate desc,out_degree,in_degree')
+                                            ->get()
+                                            ->all();
+
+        $result = array_column($result,'user_id');
+
+        $buyer_ids = [];
+        $important_buyAds = $buyAds->filter(function($buyAd) use($result,&$buyer_ids){ //extract selected buyers from all related buyAds
+            if(in_array($buyAd->myuser_id,$result) === true && in_array($buyAd->myuser_id,$buyer_ids) === false){
+                $buyer_ids[] = $buyAd->myuser_id;
+                $buyAd->is_golden = true;
+                unset($buyAd->created_at);
+                unset($buyAd->updated_at);
+
+                return true;
+            }
+
+            return false;
+        });
+
+        return $important_buyAds->all();
+    }
+
+    protected function get_product_name_array($product)
+    {
+        $product_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $product->product_name)))); //PHP is for professionals,not for kids
+        
+        $category_info = $this->get_category_and_subcategory_name($product->category_id);
+
+        if (count($product_name_array)) {
+            if ($product_name_array[0] == $category_info['subcategory_name']) {
+                array_splice($product_name_array, 0, 1);
+            }
+        }
+
+        $product_name_array = $this->remove_black_list_words($product_name_array);
+
+        return $product_name_array;
     }
 }
