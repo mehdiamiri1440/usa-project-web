@@ -119,14 +119,14 @@ button i {
   <div>
     <article class="main-article-wrapper col-xs-12">
       <div class="user-information-wrapper row">
-        <router-link :to="{}" tag="button" class="user-information-content">
+        <div class="user-information-content">
           <div class="user-image">
             <img src="../../../../../../../img/user-defult.png" />
           </div>
           <div class="user-content">
             <span class="user-name-link"> عادل انتظاری ملکی </span>
           </div>
-        </router-link>
+        </div>
       </div>
       <div class="main-article text-center">
         <router-link
