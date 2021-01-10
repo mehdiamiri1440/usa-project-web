@@ -149,6 +149,9 @@ input.error:focus + i {
   .input-wrapper::after {
     left: 14px;
   }
+  .title-contents {
+    margin-top: 30px;
+  }
 }
 </style>
 

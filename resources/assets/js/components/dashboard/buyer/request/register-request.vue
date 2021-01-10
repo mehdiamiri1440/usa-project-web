@@ -21,17 +21,18 @@
 }
 
 .main-content .section-title {
+  line-height: 1.618;
   font-size: 25px;
   margin-bottom: 30px;
 }
 
-.main-content .section-title.related-product {
+.main-content .section-title.related-product h2 {
   font-size: 25px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
-.main-content .section-title.related-product p{
- font-size: 15px;
+.main-content .section-title.related-product p {
+  font-size: 15px;
 }
 
 .section-background {
@@ -227,7 +228,7 @@
           </div>
         </div>
         <div class="section-title related-product">
-          <h2 >فروشندگان پیشنهادی</h2>
+          <h2>فروشندگان پیشنهادی</h2>
           <p>فروشندگان پیشنهادی از طرف باسکول برای محصول شما.</p>
         </div>
       </div>
@@ -259,6 +260,7 @@
             :products="relatedProducts"
             :currentUser="currentUser"
             :str="str"
+            :verifiedUserContent="verifiedUserContent"
           />
           <finish-register-request v-else-if="currentStep == 2" />
         </main>
@@ -278,7 +280,7 @@ import FinishRegisterRequest from "./register-request-steps/fnish-register-reque
 import ProductCarousel from "../../../layouts/main/main_components/product-list-carousel";
 
 export default {
-  props: ["str"],
+  props: ["str", "verifiedUserContent"],
   components: {
     StartRegisterRequest,
     RegisterRequest,

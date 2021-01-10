@@ -18,18 +18,19 @@
 </style>
 
 <template>
-  <div>
+  <div class="h-100">
     <header-dash-buyer
       :storage="storagePath"
       :logout="'/logout'"
       :search-text="searchText"
     ></header-dash-buyer>
 
-    <div id="main">
+    <div id="main" class="h-100">
       <router-view
         :str="storagePath"
         :user-type="currentUser.user_info.is_seller"
         :currentUser="currentUser"
+        :verifiedUserContent="verifiedUserContent"
       ></router-view>
     </div>
   </div>

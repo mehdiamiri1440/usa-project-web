@@ -1,6 +1,6 @@
 <style scoped>
 .main-article-wrapper {
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   border-radius: 5px;
   margin-bottom: 35px;
 }
@@ -39,7 +39,8 @@
 .main-article {
   background: #fff;
   overflow: hidden;
-  padding: 15px;
+  padding: 15px 30px;
+  position: relative;
 }
 
 .article-image {
@@ -108,27 +109,125 @@ h3.article-title {
 
 button i {
   position: relative;
+  top: 1px;
+  margin: 0 2px;
+}
 
-  top: 3px;
+.is-user-valid {
+  border: 2px solid #00c569;
+}
 
-  margin: 0 5px;
+.valid-user-badge {
+  display: none;
+  width: 36px;
+  height: 38px;
+  background: #00c569;
+  position: absolute;
+  left: 14px;
+  top: 0;
+  padding: 2px;
+  border-top: 3px solid #00b761;
+  text-align: center;
+  color: #fff !important;
+}
+
+.valid-user-badge::after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 18px 14px;
+  border-color: transparent #00c569 transparent #00c569;
+  line-height: 0;
+  _border-color: #000000 #000000 #000000 #6980fe;
+  _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -14px;
+}
+.is-user-valid .valid-user-badge {
+  display: block;
+}
+
+@media screen and (max-width: 767px) {
+  .main-article {
+    padding: 15px;
+  }
+  .article-image {
+    width: 100px;
+  }
 }
 </style>
 
 <template>
   <div>
-    <article class="main-article-wrapper col-xs-12">
+    <article
+      class="main-article-wrapper col-xs-12"
+      :class="{ 'is-user-valid': product.active_pakage_type == 3 }"
+    >
       <div class="user-information-wrapper row">
         <div class="user-information-content">
           <div class="user-image">
             <img src="../../../../../../../img/user-defult.png" />
           </div>
           <div class="user-content">
-            <span class="user-name-link"> عادل انتظاری ملکی </span>
+            <span
+              class="user-name-link"
+              v-text="product.first_name + ' ' + product.last_name"
+            >
+            </span>
+            <button
+              v-if="product.is_verified"
+              @click.prevent
+              class="verified-user"
+              data-container="body"
+              data-toggle="popover"
+              data-placement="bottom"
+              :data-content="$parent.verifiedUserContent"
+              title
+            >
+              <i class="fa fa-certificate"></i>
+            </button>
           </div>
         </div>
       </div>
-      <div class="main-article text-center">
+      <div class="main-article row text-center">
+        <div class="valid-user-badge">
+          <div class="wrapper-icon">
+            <svg width="24.965" height="30.574" viewBox="0 0 24.965 30.574">
+              <g
+                id="buskool-icon"
+                data-name="buskool"
+                transform="translate(-273.1 -715.025)"
+              >
+                <path
+                  id="Subtraction_1"
+                  data-name="Subtraction 1"
+                  d="M-1951.5,35.792a12.419,12.419,0,0,1-8.839-3.661A12.419,12.419,0,0,1-1964,23.292a12.361,12.361,0,0,1,1.378-5.71,12.614,12.614,0,0,1,3.679-4.333l3.175,3.175a7.967,7.967,0,0,0-3.732,6.768,8.009,8.009,0,0,0,8,8,8.036,8.036,0,0,0,7.917-6.85l2.185-2.149,2.34,2.3a12.464,12.464,0,0,1-4.012,8.026A12.467,12.467,0,0,1-1951.5,35.792Zm12.465-13.44,0,0-2.361-2.33-2.169,2.14a8.029,8.029,0,0,0-4.052-5.965l3.2-3.2a12.44,12.44,0,0,1,5.381,9.357Z"
+                  transform="translate(2237.1 709.808)"
+                  fill="#fff"
+                />
+                <g id="Group_24" data-name="Group 24">
+                  <path
+                    id="Rectangle_12"
+                    data-name="Rectangle 12"
+                    d="M3,0H9.5a0,0,0,0,1,0,0V5.5a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V3A3,3,0,0,1,3,0Z"
+                    transform="translate(282.389 717.5) rotate(45)"
+                    fill="#fff"
+                  />
+                  <path
+                    id="Rectangle_13"
+                    data-name="Rectangle 13"
+                    d="M0,0H13.5a0,0,0,0,1,0,0V5a0,0,0,0,1,0,0H4A4,4,0,0,1,0,1V0A0,0,0,0,1,0,0Z"
+                    transform="translate(294.935 718.561) rotate(135)"
+                    fill="#fff"
+                  />
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
         <router-link
           class="article-image"
           :to="getProductUrl()"
@@ -152,15 +251,16 @@ button i {
         </router-link>
         <div class="main-content text-rtl">
           <h3 class="article-title">
-            {{ product.subcategory_name + " | " + product.product_name }}
+            <span v-text="product.subcategory_name" style="color: #777"></span>
+            {{ product.product_name }}
           </h3>
           <!-- <p class="product-description">
             توضیحات :
             <span> {{ product.description }}</span> <span>کیلوگرم</span>
           </p> -->
-          <p class="green-text">
-            مقدار موجودی :
-            <span> {{ product.stock }}</span> <span>کیلوگرم</span>
+          <p>
+            <span style="color: #777">مقدار موجودی :</span>
+            <span> {{ product.stock }} <span>کیلوگرم</span></span>
           </p>
         </div>
         <div class="button-wrapper">
@@ -204,6 +304,28 @@ export default {
         this.product.id
       );
     },
+    activeComponentTooltip() {
+      $(".verified-user")
+        .popover({ trigger: "manual", html: true, animation: false })
+        .on("mouseenter", function () {
+          var _this = this;
+          $(this).popover("show");
+          $(".popover").on("mouseleave", function () {
+            $(_this).popover("hide");
+          });
+        })
+        .on("mouseleave", function () {
+          var _this = this;
+          setTimeout(function () {
+            if (!$(".popover:hover").length) {
+              $(_this).popover("hide");
+            }
+          }, 300);
+        });
+    },
+  },
+  mounted() {
+    this.activeComponentTooltip();
   },
 };
 </script>
