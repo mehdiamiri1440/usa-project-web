@@ -1020,10 +1020,14 @@ export default {
     "product.stock": function (value) {
       this.errors.stock = "";
       if (value) {
-        let number = this.toLatinNumbers(value);
+        if (value.length >= 9) {
+          this.product.stock = this.product.stock.substring(0, 9);
+        }
+        let number = this.toLatinNumbers(this.product.stock);
         if (!this.validateRegx(number, /^\d*$/)) {
           this.errors.stock = "لطفا  فقط عدد وارد کنید";
         }
+
         if (!this.errors.stock) {
           this.product.stock = this.getNumberWithCommas(number);
           this.stock_text = this.convertUnits(number);
@@ -1034,8 +1038,14 @@ export default {
     },
     "product.min_sale_amount": function (value) {
       this.errors.min_sale_amount = "";
+      if (value.length >= 9) {
+        this.product.min_sale_amount = this.product.min_sale_amount.substring(
+          0,
+          9
+        );
+      }
       if (value) {
-        let number = this.toLatinNumbers(value);
+        let number = this.toLatinNumbers(this.product.min_sale_amount);
         if (!this.validateRegx(number, /^\d*$/)) {
           this.errors.min_sale_amount = "لطفا  فقط عدد وارد کنید";
         }
@@ -1049,8 +1059,14 @@ export default {
     },
     "product.min_sale_price": function (value) {
       this.errors.min_sale_price = "";
+      if (value.length >= 9) {
+        this.product.min_sale_price = this.product.min_sale_price.substring(
+          0,
+          9
+        );
+      }
       if (value) {
-        let number = this.toLatinNumbers(value);
+        let number = this.toLatinNumbers(this.product.min_sale_price);
         if (!this.validateRegx(number, /^\d*$/)) {
           this.errors.min_sale_price = "لطفا  فقط عدد وارد کنید";
         }
@@ -1061,8 +1077,14 @@ export default {
     },
     "product.max_sale_price": function (value) {
       this.errors.max_sale_price = "";
+      if (value.length >= 9) {
+        this.product.max_sale_price = this.product.max_sale_price.substring(
+          0,
+          9
+        );
+      }
       if (value) {
-        let number = this.toLatinNumbers(value);
+        let number = this.toLatinNumbers(this.product.max_sale_price);
         if (!this.validateRegx(number, /^\d*$/)) {
           this.errors.max_sale_price = "لطفا  فقط عدد وارد کنید";
         }

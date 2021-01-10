@@ -1,15 +1,13 @@
 
 
 <template>
-  <div>
-    <SelectCategory v-if="step == 0" />
-    <SelectSubCategory
-      v-else-if="step == 1"
-      :index="selectedCategoryIndex"
-      :sub-categories="subCategoryList"
-    />
-    <TypeCategory v-else :sub-categories="subCategoryList" />
-  </div>
+  <SelectCategory v-if="step == 0" />
+  <SelectSubCategory
+    v-else-if="step == 1"
+    :index="selectedCategoryIndex"
+    :sub-categories="subCategoryList"
+  />
+  <TypeCategory v-else :sub-categories="subCategoryList" />
 </template>
 
 
@@ -112,7 +110,15 @@ export default {
       this.$parent.buyAd.requirement_amount = value;
       this.errors.requirement_amount = "";
       if (value) {
-        let number = this.$parent.toLatinNumbers(value);
+        if (value.length >= 9) {
+          this.$parent.buyAd.requirement_amount = this.$parent.buyAd.requirement_amount.substring(
+            0,
+            9
+          );
+        }
+        let number = this.$parent.toLatinNumbers(
+          this.$parent.buyAd.requirement_amount
+        );
         if (!this.validateRegx(number, /^\d*$/)) {
           this.errors.requirement_amount = "لطفا  فقط عدد وارد کنید";
         }

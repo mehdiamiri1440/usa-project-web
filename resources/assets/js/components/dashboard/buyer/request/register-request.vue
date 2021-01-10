@@ -55,6 +55,7 @@
 .main-section-wrapper {
   max-width: 420px;
   margin: 42px auto;
+  background: #fff;
 }
 .main-section-wrapper-full-width {
   max-width: 100%;
@@ -467,6 +468,7 @@ export default {
         let ton = data.toString().split(".")[0];
         let kg = number.toString().substr(ton.length);
         kg = kg.replace(/^0+/, "");
+        ton = this.getNumberWithCommas(ton);
         ton = ton + " " + "تن";
 
         if (kg) {
@@ -567,27 +569,6 @@ export default {
     clearLocalStorage: function () {
       window.localStorage.removeItem("contact");
       window.localStorage.removeItem("msgToSend");
-    },
-    convertUnits: function (number) {
-      let data = number / 1000;
-      let text = "";
-      if (number < 1000) {
-        return number + " " + "کیلوگرم";
-      } else {
-        let ton = data.toString().split(".")[0];
-        let kg = number.toString().substr(ton.length);
-        kg = kg.replace(/^0+/, "");
-        ton = ton + " " + "تن";
-
-        if (kg) {
-          kg = " و " + kg + " کیلوگرم";
-          text = ton + kg;
-        } else {
-          text = ton;
-        }
-
-        return text;
-      }
     },
   },
   mounted() {
