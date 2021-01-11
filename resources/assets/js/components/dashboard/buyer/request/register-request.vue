@@ -21,17 +21,18 @@
 }
 
 .main-content .section-title {
+  line-height: 1.618;
   font-size: 25px;
   margin-bottom: 30px;
 }
 
-.main-content .section-title.related-product {
+.main-content .section-title.related-product h2 {
   font-size: 25px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
-.main-content .section-title.related-product p{
- font-size: 15px;
+.main-content .section-title.related-product p {
+  font-size: 15px;
 }
 
 .section-background {
@@ -54,6 +55,7 @@
 .main-section-wrapper {
   max-width: 420px;
   margin: 42px auto;
+  background: #fff;
 }
 .main-section-wrapper-full-width {
   max-width: 100%;
@@ -227,7 +229,7 @@
           </div>
         </div>
         <div class="section-title related-product">
-          <h2 >فروشندگان پیشنهادی</h2>
+          <h2>فروشندگان پیشنهادی</h2>
           <p>فروشندگان پیشنهادی از طرف باسکول برای محصول شما.</p>
         </div>
       </div>
@@ -259,6 +261,7 @@
             :products="relatedProducts"
             :currentUser="currentUser"
             :str="str"
+            :verifiedUserContent="verifiedUserContent"
           />
           <finish-register-request v-else-if="currentStep == 2" />
         </main>
@@ -278,7 +281,7 @@ import FinishRegisterRequest from "./register-request-steps/fnish-register-reque
 import ProductCarousel from "../../../layouts/main/main_components/product-list-carousel";
 
 export default {
-  props: ["str"],
+  props: ["str", "verifiedUserContent"],
   components: {
     StartRegisterRequest,
     RegisterRequest,
@@ -465,6 +468,7 @@ export default {
         let ton = data.toString().split(".")[0];
         let kg = number.toString().substr(ton.length);
         kg = kg.replace(/^0+/, "");
+        ton = this.getNumberWithCommas(ton);
         ton = ton + " " + "تن";
 
         if (kg) {
@@ -565,27 +569,6 @@ export default {
     clearLocalStorage: function () {
       window.localStorage.removeItem("contact");
       window.localStorage.removeItem("msgToSend");
-    },
-    convertUnits: function (number) {
-      let data = number / 1000;
-      let text = "";
-      if (number < 1000) {
-        return number + " " + "کیلوگرم";
-      } else {
-        let ton = data.toString().split(".")[0];
-        let kg = number.toString().substr(ton.length);
-        kg = kg.replace(/^0+/, "");
-        ton = ton + " " + "تن";
-
-        if (kg) {
-          kg = " و " + kg + " کیلوگرم";
-          text = ton + kg;
-        } else {
-          text = ton;
-        }
-
-        return text;
-      }
     },
   },
   mounted() {

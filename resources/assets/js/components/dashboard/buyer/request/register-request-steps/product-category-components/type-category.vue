@@ -149,6 +149,9 @@ input.error:focus + i {
   .input-wrapper::after {
     left: 14px;
   }
+  .title-contents.margin-top-30 {
+    margin-top: 30px;
+  }
 }
 </style>
 
@@ -160,7 +163,7 @@ input.error:focus + i {
     >
       <div class="row">
         <div class="col-xs-12">
-          <h2 class="title-contents col-xs-12">
+          <h2 class="title-contents margin-top-30 col-xs-12">
             نوع
             <span
               class="light-green-text"
@@ -259,6 +262,7 @@ input.error:focus + i {
               v-if="!$parent.errors.requirement_amount"
             >
               <span
+                class="light-green-text"
                 v-if="$parent.requirement_amount_text"
                 v-text="$parent.requirement_amount_text"
               ></span>

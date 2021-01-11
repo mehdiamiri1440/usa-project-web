@@ -1,7 +1,6 @@
 
 <style scoped>
-
-.form-contents{
+.form-contents {
   padding-bottom: 50px;
 }
 
@@ -10,8 +9,8 @@
   font-size: 18px;
   margin-bottom: 15px;
   padding: 0;
+  margin-top: 30px;
 }
-
 
 .submit-button {
   background: #dddddd;
@@ -23,57 +22,54 @@
   padding: 8px 25px 7px;
   transition: 200ms;
   cursor: default;
-  margin:0;
- 
+  margin: 0;
 }
 
-.submit-button i{
-  transition:300ms;
+.submit-button i {
+  transition: 300ms;
   position: relative;
   top: 2px;
   left: -3px;
 }
 
-.input-text-wrapper{
-  height:25px;
+.input-text-wrapper {
+  height: 25px;
   padding-top: 5px;
 }
 
-.small-description-text{
+.small-description-text {
   text-align: left;
 }
 
-.submit-button.default-back-button i{
+.submit-button.default-back-button i {
   left: 3px;
 }
 
 .submit-button.default-back-button {
   background: #fff;
   color: #777;
-  border: 1px solid #BDC4CC;
+  border: 1px solid #bdc4cc;
   border-radius: 4px;
   cursor: pointer;
-  font-weight:400;
+  font-weight: 400;
   font-size: 14px;
 }
 
 .submit-button.default-back-button:hover i {
-  transform : translateX(5px);
-
+  transform: translateX(5px);
 }
 .submit-button.active {
   background: #00c569;
   cursor: pointer;
-  transform : translateX(0);
-
+  transform: translateX(0);
 }
 .submit-button.active:hover i {
   background: #00c569;
   cursor: pointer;
-  transform : translateX(-5px);
+  transform: translateX(-5px);
 }
-.action-control-wrapper{
-  padding:20px 15px 50px;
+.action-control-wrapper {
+  padding: 20px 15px 50px;
   background: #fff;
 }
 
@@ -83,37 +79,36 @@ label {
   font-weight: 400;
   color: #777;
 }
-.small-label{
+.small-label {
   font-size: 15px;
 }
 
-.text-input-wrapper{
+.text-input-wrapper {
   margin: 0 auto;
   position: relative;
-  background: #FBFBFB;
+  background: #fbfbfb;
+  margin-bottom: 10px;
 }
 
-textarea{
+textarea {
   background: none;
   z-index: 1;
   position: relative;
-  width:100%;
+  width: 100%;
   padding: 8px 15px;
-  border: 1px solid #BDC4CC;
+  border: 1px solid #bdc4cc;
   border-radius: 4px;
   box-shadow: none;
 }
 
-
-.text-input-wrapper i{
-  position:absolute;
-  left:15px;
-  top:11px;
-  font-size:18px;
-  color:#BDC4CC;
-  transition:300ms;
+.text-input-wrapper i {
+  position: absolute;
+  left: 15px;
+  top: 11px;
+  font-size: 18px;
+  color: #bdc4cc;
+  transition: 300ms;
 }
-
 
 textarea:focus,
 textarea:focus + i {
@@ -158,38 +153,47 @@ textarea.error:focus + i {
       <h2 class="title-contents">توضیحات محصول</h2>
     </div>
 
-    <form class="form-contents col-xs-12" v-on:submit.prevent="descriptionSubmited()">
+    <form
+      class="form-contents col-xs-12"
+      v-on:submit.prevent="descriptionSubmited()"
+    >
       <div class="text-input-wrapper">
         <!-- input type tel because we have some limmitation for processes -->
 
         <textarea
           rows="4"
-          :class="{'active' : $parent.product.description , 'error' : errors.description}"
+          :class="{
+            active: $parent.product.description,
+            error: errors.description,
+          }"
           v-model="$parent.product.description"
           placeholder="در مورد کیفیت و نوع بسته بندی محصول خود اینجا توضیح دهید"
         ></textarea>
 
-
-        <i v-if="$parent.product.description && !errors.description" class="fa fa-check-circle"></i>
+        <i
+          v-if="$parent.product.description && !errors.description"
+          class="fa fa-check-circle"
+        ></i>
         <i v-else-if="errors.description" class="fa fa-times-circle"></i>
         <i v-else class="fa fa-edit"></i>
       </div>
-        
-        <div class="row">
-            <p class="error-message col-xs-12">
-              <span
-              class="red-text"
-                v-if="errors.description"
-                v-text="errors.description"
-              ></span>
-            </p>
-          </div>
+
+      <div class="row">
+        <p class="error-message col-xs-12">
+          <span
+            class="red-text"
+            v-if="errors.description"
+            v-text="errors.description"
+          ></span>
+        </p>
+      </div>
     </form>
     <div class="col-xs-12">
       <button
         class="submit-button active pull-left"
         @click.prevent="descriptionSubmited()"
-      >                        مرحله بعد
+      >
+        مرحله بعد
 
         <i class="fa fa-arrow-left"></i>
       </button>
@@ -206,30 +210,30 @@ textarea.error:focus + i {
 </template>
 <script>
 export default {
-  data(){
-    return{
-      errors:{
-        description:''
-      }
-    }
+  data() {
+    return {
+      errors: {
+        description: "",
+      },
+    };
   },
   mounted() {
     if (this.$parent.isOsIOS()) {
       $('input[type="tel"]').attr("type", "text");
     }
   },
-  methods:{
-     descriptionSubmited() {
+  methods: {
+    descriptionSubmited() {
       if (!this.errors.description) {
         this.$parent.goToStep(6);
-      }else{
+      } else {
         if (this.errors.description) {
-        this.registerComponentStatistics(
-          "product-register-error",
-          "description",
-          "input:" + description + " error:" + this.errors.description
-        );
-      }
+          this.registerComponentStatistics(
+            "product-register-error",
+            "description",
+            "input:" + description + " error:" + this.errors.description
+          );
+        }
       }
     },
     descriptionValidator: function (description) {
@@ -247,11 +251,10 @@ export default {
       }
     },
   },
-  watch:{
-    '$parent.product.description'(value){
+  watch: {
+    "$parent.product.description"(value) {
       this.descriptionValidator(value);
-    }
-  }
-  
+    },
+  },
 };
 </script>

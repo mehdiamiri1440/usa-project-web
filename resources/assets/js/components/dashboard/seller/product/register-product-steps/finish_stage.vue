@@ -5,6 +5,41 @@
 .static-item a:hover {
   color: #337ab7;
 }
+
+.user-information-content {
+  display: block;
+  float: right;
+  width: 100%;
+  background: none;
+  border: none;
+  padding-bottom: 3px;
+}
+.user-image {
+  width: 25px;
+  height: 25px;
+  float: right;
+  margin-left: 10px;
+}
+.user-content {
+  display: block;
+  max-width: 170px;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 400;
+  color: #adadad;
+  height: 21px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: right;
+}
+
+.user-content i {
+  margin-left: 1px;
+  position: relative;
+  top: 3px;
+  font-size: 15px;
+}
+
 .list-title,
 .needs,
 .list-time,
@@ -26,15 +61,14 @@
 }
 
 .list-group-item {
-  padding: 15px 30px;
-  border-radius: 0;
+  padding: 10px 30px;
   border: none;
   margin: 0;
   border-bottom: 1px solid #ddd;
 }
 
 .list-group-item:nth-last-of-type(2n + 1) {
-  background: #fdfdfd !important;
+  background: #f9fcff !important;
 }
 
 .list-group-item:last-of-type {
@@ -286,6 +320,20 @@
   padding: 25px 5px;
 }
 
+.send-message-button {
+  position: relative;
+  top: 9px;
+  padding: 0;
+}
+
+.detail-success {
+  padding: 11px 0;
+}
+
+.static-item {
+  border: none;
+  background: #fff;
+}
 @media screen and (max-width: 991px) {
   .fix-request-header-box,
   .title {
@@ -348,13 +396,19 @@
   }
   .right-side {
     text-align: center !important;
+    width: 100%;
   }
   .main-content .list-group-item p {
     margin-bottom: 15px;
+    width: 100%;
+    font-size: 16px;
+  }
+  .main-content .list-group-item p.detail-success {
+    padding: 11px;
   }
 
   .list-group-item {
-    padding: 25px 10px;
+    padding: 20px 10px;
   }
 }
 </style>
@@ -382,65 +436,61 @@
         class="lock-text"
         v-text="buyAd.subcategory_name"
       ></span>
-      <div class="right-side col-sm-6 col-xs-12 pull-right">
-        <div class="row">
-          <div class="user-information-wrapper row">
-            <router-link :to="{}" tag="button" class="user-information-content">
-              <div class="user-image">
-                <img src="../../../../../../img/user-defult.png" />
-              </div>
-              <div class="user-content">
-                <span class="user-name-link"> عادل انتظاری ملکی </span>
-              </div>
-            </router-link>
-          </div>
-          <p class="list-title">
-            <span> خریدار </span>
-            <span
-              class="red-text"
-              v-if="
-                buyAd.is_golden &&
-                $parent.currentUser.user_info.active_pakage_type == 0
-              "
-            ></span>
-            <span
-              class="red-text"
-              v-else
-              v-text="$parent.getConvertedNumbers(buyAd.requirement_amount)"
-            ></span>
-
-            <span
-              class="red-text"
-              v-if="
-                buyAd.is_golden &&
-                $parent.currentUser.user_info.active_pakage_type == 0
-              "
-              v-text="'.از پکیج ویژه استفاده کنید'"
-            ></span>
-            <span
-              v-else
-              class="red-text"
-              v-text="buyAd.subcategory_name"
-            ></span>
-            <span> از نوع </span>
-            <span
-              class="red-text"
-              v-if="
-                buyAd.is_golden &&
-                $parent.currentUser.user_info.active_pakage_type == 0
-              "
-            ></span>
-            <span v-else>
+      <div class="right-side pull-right">
+        <div class="user-information-wrapper">
+          <div class="user-information-content">
+            <div class="user-content">
+              <i class="fa fa-user-circle"></i>
               <span
-                class="brand-text"
-                v-if="buyAd.name"
-                v-text="buyAd.name"
-              ></span>
-            </span>
-
-            <span> هستم </span>
-          </p>
+                class="user-name-link"
+                v-text="buyAd.first_name + ' ' + buyAd.last_name"
+              >
+              </span>
+            </div>
+          </div>
         </div>
+        <p class="list-title">
+          <span> خریدار </span>
+          <span
+            class="red-text"
+            v-if="
+              buyAd.is_golden &&
+              $parent.currentUser.user_info.active_pakage_type == 0
+            "
+          ></span>
+          <span
+            class="red-text"
+            v-else
+            v-text="$parent.getConvertedNumbers(buyAd.requirement_amount)"
+          ></span>
+
+          <span
+            class="red-text"
+            v-if="
+              buyAd.is_golden &&
+              $parent.currentUser.user_info.active_pakage_type == 0
+            "
+            v-text="'.از پکیج ویژه استفاده کنید'"
+          ></span>
+          <span v-else class="red-text" v-text="buyAd.subcategory_name"></span>
+          <span> از نوع </span>
+          <span
+            class="red-text"
+            v-if="
+              buyAd.is_golden &&
+              $parent.currentUser.user_info.active_pakage_type == 0
+            "
+          ></span>
+          <span v-else>
+            <span
+              class="brand-text"
+              v-if="buyAd.name"
+              v-text="buyAd.name"
+            ></span>
+          </span>
+
+          <span> هستم </span>
+        </p>
       </div>
 
       <a
@@ -461,7 +511,7 @@
       </a>
       <a
         v-else
-        class="col-sm-3 col-xs-12 pull-left"
+        class="send-message-button col-sm-3 col-xs-12 pull-left"
         href
         @click.prevent="openChat(buyAd, $event)"
       >

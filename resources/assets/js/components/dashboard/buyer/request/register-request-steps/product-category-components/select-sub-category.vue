@@ -47,7 +47,8 @@
   transform: translateX(-5px);
 }
 .action-control-wrapper {
-  margin: 40px auto 20px;
+  padding: 40px 15px 20px;
+  background: #fff;
 }
 
 .title-contents {
@@ -110,7 +111,7 @@ ul li.item button i {
 
 @media screen and (max-width: 767px) {
   .title-contents {
-    margin-top: 0;
+    margin-top: 30px;
   }
 }
 </style>
